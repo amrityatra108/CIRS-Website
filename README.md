@@ -1,2 +1,2 @@
 # CIRS-Website
-CIRS Websire
+CIRS Website
