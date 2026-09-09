@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chinmaya International Residential School — Siruvani, Coimbatore</title>
+<meta name="description" content="A co-educational residential school on a hundred acres in the Siruvani foothills — CBSE and the International Baccalaureate, Grades V to XII.">
+<meta name="theme-color" content="#150818">
+<link rel="canonical" href="https://www.cirschool.org/">
+<link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
+<link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chinmaya International Residential School">
+<meta property="og:description" content="A co-educational residential school on a hundred acres in the Siruvani foothills — CBSE and the International Baccalaureate, Grades V to XII.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chinmaya International Residential School">
+<meta name="twitter:description" content="A co-educational residential school on a hundred acres in the Siruvani foothills — CBSE and the International Baccalaureate, Grades V to XII.">
+<meta name="twitter:image" content="assets/img/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
+<link rel="stylesheet" href="assets/css/cirs.css?b=3">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Opening sequence. Removed from the DOM once it has played. -->
+<div class="curtain" id="curtain" aria-hidden="true">
+  <img src="assets/img/logo.png" alt="" width="72" height="70">
+  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+  <p class="curtain__en">Knowledge &middot; Service &middot; Skill</p>
+  <span class="curtain__bar"><i></i></span>
+</div>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<button class="totop" id="totop" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+</button>
+
+<!-- ============================== HEADER ===============================
+     Three tokens only — Enquire / wordmark / Menu — the drawer carries
+     the whole sitemap rather than a persistent link list. -->
+<header class="header" id="header">
+  <div class="wrap">
+    <a class="header__enquire" href="#admissions">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.2v4.2M8 4.8h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <span>Enquire</span>
+    </a>
+
+    <a class="brand" href="#top">
+      <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="50" height="49">
+      <span class="brand__txt">
+        <span class="brand__name">Chinmaya International Residential School</span>
+        <span class="brand__sub">Siruvani &middot; Coimbatore &middot; Founded 1996</span>
+      </span>
+    </a>
+
+    <button class="menubtn" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span class="menubtn__label">Menu</span>
+      <span class="menubtn__dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============================== DRAWER =============================== -->
+<div class="drawer" id="drawer" hidden>
+  <nav class="drawer__grid" aria-label="All sections">
+    <div>
+      <p class="sc" id="dnav-about">About CIRS</p>
+      <ul aria-labelledby="dnav-about">
+        <li><a href="#about">Why CIRS</a></li>
+        <li><a href="#">School History</a></li>
+        <li><a href="#">Chinmaya Mission</a></li>
+        <li><a href="#">Our People</a></li>
+        <li><a href="#campus">Our Campus</a></li>
+        <li><a href="#">Location</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-junior">Junior School</p>
+      <ul aria-labelledby="dnav-junior">
+        <li><a href="#junior">Overview</a></li>
+        <li><a href="#academics">Junior Academics</a></li>
+        <li><a href="#">Service Learning</a></li>
+        <li><a href="#">New Student Resources</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-senior">Senior School</p>
+      <ul aria-labelledby="dnav-senior">
+        <li><a href="#senior">Overview</a></li>
+        <li><a href="#academics">CBSE, Grades V&ndash;XII</a></li>
+        <li><a href="#academics">IB Diploma, XI&ndash;XII</a></li>
+        <li><a href="#pathways">University Counselling</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-life">Student Life</p>
+      <ul aria-labelledby="dnav-life">
+        <li><a href="#day">A Day at CIRS</a></li>
+        <li><a href="#life">Residential Life</a></li>
+        <li><a href="#athletics">Athletics</a></li>
+        <li><a href="#arts">Arts, Music &amp; Theatre</a></li>
+        <li><a href="#">Gallery</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-admissions">Admissions</p>
+      <ul aria-labelledby="dnav-admissions">
+        <li><a href="#admissions">Application Information</a></li>
+        <li><a href="#admissions">Entrance Examination</a></li>
+        <li><a href="#">Fee Structure</a></li>
+        <li><a href="#">International Students</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="drawer__utility">
+    <a href="#">Alumni</a>
+    <a href="#">Parents</a>
+    <a href="#">Careers</a>
+    <a href="#">Transportation</a>
+    <a href="#">Support CIRS</a>
+    <a href="#">Employee Directory</a>
+    <a href="#">Parent Portal</a>
+    <a href="#">Calendar</a>
+    <a href="tel:+914222613300">+91 422 261 3300</a>
+    <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+  </div>
+  <div class="drawer__cta">
+    <a class="btn btn--primary btn--lg" href="#admissions">Apply for admission</a>
+    <a class="btn btn--outline btn--lg" href="#admissions">Book a campus visit</a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- =============================== HERO ================================
+     A solid purple panel masked into the school's own wordmark, so the
+     campus photograph shows through only inside the letterforms.
+
+     The background is a <video> with the real campus photo as its poster,
+     so it already renders correctly today. Drop a genuine, compressed loop
+     of the campus in as assets/video/campus-loop.webm / .mp4 (a few hundred
+     KB to ~2MB — not a multi-megabyte render) and it starts playing with no
+     other change needed. Until then the poster image is exactly what shows. -->
+<section class="hero" id="top" data-ground="#150818">
+  <div class="hero__media">
+    <video class="hero__video" autoplay muted loop playsinline
+           poster="assets/img/hero.jpg" aria-hidden="true"
+           width="1280" height="720" fetchpriority="high">
+      <source src="assets/video/campus-loop.webm" type="video/webm">
+      <source src="assets/video/campus-loop.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero__mono" aria-hidden="true"></div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero__inner">
+      <p class="marker"><span class="sc">Siruvani, Coimbatore &middot; Grades V&ndash;XII</span></p>
+      <h1 class="serif h1" data-split>Rooted in <em>Values!</em><br>Ready for the <em>World.</em></h1>
+      <span class="hero__scroll">
+        Scroll
+        <svg width="11" height="11" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 4l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ LEADERSHIP QUOTE =========================
+     The Principal's welcome message and photograph, both supplied by the
+     school. -->
+<section class="quote">
+  <div class="wrap">
+    <div class="quote__inner rv">
+      <img class="quote__portrait" src="assets/img/principal.jpg" alt="Rajeshwari Satish, Principal of CIRS" width="500" height="500">
+      <div>
+        <span class="quote__mark">&ldquo;</span>
+        <p class="quote__text">Watch a storm and you feel its power before you understand it. At
+          the centre sits a still, low-pressure eye, and wrapped around that stillness, a system of
+          massive cloud and wind moving with tremendous force.</p>
+        <p class="quote__text">Study the mechanics and a strange truth emerges: the higher the
+          pressure in the eye, the calmer it stays &mdash; and the calmer that eye, the more violent
+          and far-reaching the winds around it become. Stillness at the centre is what generates
+          power at the edges.</p>
+        <p class="quote__text">The same law governs us. A calm mind is not a passive mind &mdash;
+          it is the source of our force in the world. To keep that calm, we cannot let success
+          inflate us or failure crush us. Both are just weather &mdash; they pass through every life
+          and mean nothing about who we are underneath. Our task is to keep returning inward, to
+          steady the centre, and let that stillness generate the power to act, to build, to move
+          mountains outside us.</p>
+        <p class="quote__text">The eye of the storm is not where nothing happens. It&rsquo;s where
+          everything begins.</p>
+        <p class="quote__text">Storm to perform.</p>
+        <p class="quote__attr"><b>Rajeshwari Satish</b> &middot; PRINCIPAL, CIRS</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== WE ARE CIRS ============================ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">A community of knowledge, service and skill</span></p>
+      <h2 class="serif h2" data-split>We Are <em>CIRS.</em></h2>
+      <p class="lead">Set in the Siruvani foothills outside Coimbatore, on a hundred-acre campus
+        with eighty acres left to forest, CIRS has taught CBSE and the IB Diploma under one
+        faculty since 1996 &mdash; shaping boarders from twenty-four Indian states and twenty
+        countries into disciplined, compassionate learners.</p>
+    </div>
+
+    <div class="about">
+      <div class="rv">
+        <p class="pull serif">&ldquo;The future of our world rests upon the quality of its youth.
+          <em>Quality comes through care and attention.&rdquo;</em></p>
+        <p class="copy dropcap">Chinmaya International Residential School was founded on 6 June 1996
+          by Swami Chinmayananda, opening with ninety-six students. It is an undertaking of the
+          Central Chinmaya Mission Trust, and the motto above is taught as a daily practice rather
+          than displayed as a crest.</p>
+        <p class="copy">Roughly eighty of the campus&rsquo;s hundred acres have been left to native
+          flora and fauna &mdash; a decision that cost the school buildable land and earned it the
+          Green School Award from the Centre for Science and Environment, New Delhi.</p>
+        <p class="copy">Boarding is the part of the education that is not timetabled. Houses carry
+          the names of India&rsquo;s great teachers, and seniors and juniors share corridors by
+          design, so mentoring is structural rather than extracurricular.</p>
+        <p style="margin-top:28px"><a class="btn btn--outline" href="#">Read the school history</a></p>
+      </div>
+
+      <div class="rv">
+        <dl class="factrail">
+          <div><dt>Founded</dt><dd>6 June 1996</dd></div>
+          <div><dt>Founder</dt><dd>Swami Chinmayananda</dd></div>
+          <div><dt>Chairperson</dt><dd>Swami Swaroopananda</dd></div>
+          <div><dt>Grades</dt><dd>V to XII</dd></div>
+          <div><dt>Curricula</dt><dd>CBSE &amp; IB Diploma</dd></div>
+          <div><dt>Medium</dt><dd>English</dd></div>
+          <div><dt>Campus</dt><dd>100 acres</dd></div>
+          <div><dt>Left as forest</dt><dd>c. 80 acres</dd></div>
+          <div><dt>Indian states</dt><dd>24</dd></div>
+          <div><dt>Countries</dt><dd>20</dd></div>
+          <div><dt>Students today</dt><dd>580+</dd></div>
+          <div><dt>Recognition</dt><dd>Green School Award</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TICKER =============================== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track" id="tickerTrack">
+    <div class="ticker__set"><span>Affiliated to CBSE, New Delhi</span><i></i><span>IB World School</span><i></i><span>Co-educational boarding</span><i></i><span>Grades V to XII</span><i></i><span>One hundred acres</span><i></i><span>Green School Award</span><i></i><span>Founded 1996</span><i></i><span>Siruvani, Coimbatore</span><i></i><span>The Western Ghats</span><i></i><span>Central Chinmaya Mission Trust</span><i></i></div>
+    <div class="ticker__set"><span>Affiliated to CBSE, New Delhi</span><i></i><span>IB World School</span><i></i><span>Co-educational boarding</span><i></i><span>Grades V to XII</span><i></i><span>One hundred acres</span><i></i><span>Green School Award</span><i></i><span>Founded 1996</span><i></i><span>Siruvani, Coimbatore</span><i></i><span>The Western Ghats</span><i></i><span>Central Chinmaya Mission Trust</span><i></i></div>
+  </div>
+</div>
+
+<!-- =========================== FEATURE: WHY CIRS ========================= -->
+<section class="feature">
+  <div class="wrap feature__inner">
+    <figure class="feature__media img-reveal">
+      <img src="assets/img/why-cirs.jpg" alt="Three CIRS students smiling together in a school corridor" width="1200" height="1500" loading="lazy">
+    </figure>
+    <div class="feature__text rv">
+      <p class="marker"><span class="sc">Why CIRS</span></p>
+      <p class="feature__tag">Discover the difference</p>
+      <h2 class="serif h2" data-split>A School That <em>Knows Your Child.</em></h2>
+      <p class="copy">Boarders arrive from twenty-four Indian states and twenty countries and share
+        a single dining hall, a single timetable and a single set of house rosters. Difference is
+        not a programme here &mdash; it is the corridor.</p>
+      <p class="feature__cta"><a class="btn btn--outline" href="#about">Why Choose CIRS</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FEATURE: JUNIOR SCHOOL ======================= -->
+<section class="feature feature--reverse" id="junior">
+  <div class="wrap feature__inner">
+    <figure class="feature__media is-placeholder rv">
+      <span class="feature__ph">Photograph &mdash; Junior School<br>to be supplied</span>
+    </figure>
+    <div class="feature__text rv">
+      <p class="marker"><span class="sc">Junior School</span></p>
+      <p class="feature__tag">Build a bright beginning</p>
+      <h2 class="serif h2" data-split>Where Curiosity <em>Gets Its First Push.</em></h2>
+      <p class="copy">The junior years at CIRS begin in Grade V, introducing boarding life, house
+        mentorship, and a broad first exposure to music, sport and the sciences alongside the CBSE
+        curriculum. Value education runs alongside the timetable from Bal Bhagavatam onward.</p>
+      <p class="copy" style="margin-top:10px"><em>[Placeholder &mdash; junior-school-specific
+        programme detail to be supplied by the school.]</em></p>
+      <p class="feature__cta"><a class="btn btn--outline" href="#">Junior School</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FEATURE: SENIOR SCHOOL ======================= -->
+<section class="feature" id="senior">
+  <div class="wrap feature__inner">
+    <figure class="feature__media is-placeholder rv">
+      <span class="feature__ph">Photograph &mdash; Senior School<br>to be supplied</span>
+    </figure>
+    <div class="feature__text rv">
+      <p class="marker"><span class="sc">Senior School</span></p>
+      <p class="feature__tag">Choose your pathway</p>
+      <h2 class="serif h2" data-split>Two Boards, <em>One Ambition.</em></h2>
+      <p class="copy">From Grade XI, CIRS students declare a direction &mdash; CBSE&rsquo;s
+        Engineering, Medicine or Management streams, or the IB Diploma, taught by the same faculty
+        in the same classrooms.</p>
+      <p class="copy" style="margin-top:10px"><em>[Placeholder &mdash; senior-school outcomes and
+        leadership detail to be supplied by the school.]</em></p>
+      <p class="feature__cta"><a class="btn btn--outline" href="#academics">Senior School</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ACADEMICS ============================== -->
+<section class="section on-paper-2" id="academics">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">Academics</span></p>
+      <p class="feature__tag">Student-centred learning</p>
+      <h2 class="serif h2" data-split>Two curricula, <em>one faculty room.</em></h2>
+      <p class="lead">Families choose the pathway, not the school. The same teachers move between
+        both programmes, so an inquiry habit formed in a Theory of Knowledge seminar turns up in a
+        Grade VIII science lesson the next morning.</p>
+    </div>
+
+    <div class="prog">
+      <article class="prog__card rv">
+        <figure class="img-reveal"><img src="assets/img/entrance.jpg" alt="The main academic building at CIRS, the school emblem above its entrance" width="1400" height="325" loading="lazy"></figure>
+        <div class="prog__head">
+          <span class="prog__idx">01</span>
+          <span class="sc">Central Board of Secondary Education</span>
+        </div>
+        <h3 class="serif h3">CBSE, from Grade V to Grade XII</h3>
+        <p class="copy">Affiliated to the CBSE, New Delhi, with board examinations at Grades X and
+          XII and English as the medium throughout. Senior students choose between Engineering,
+          Medicine and Management streams.</p>
+        <div class="prog__meta">
+          <span>Grades <b>V&ndash;XII</b></span>
+          <span>Board years <b>X &amp; XII</b></span>
+          <span>Streams <b>Three</b></span>
+        </div>
+      </article>
+
+      <article class="prog__card rv">
+        <figure class="img-reveal"><img src="assets/img/walkway.jpg" alt="CIRS students walking the lamp-lined garden path between buildings" width="1050" height="575" loading="lazy"></figure>
+        <div class="prog__head">
+          <span class="prog__idx">02</span>
+          <span class="sc">International Baccalaureate, Geneva</span>
+        </div>
+        <h3 class="serif h3">The IB Diploma, Grades XI and XII</h3>
+        <p class="copy">CIRS was the seventh school in India authorised by the International
+          Baccalaureate. The Diploma runs alongside CBSE, with university counselling supported
+          through Naviance from Grade X.</p>
+        <div class="prog__meta">
+          <span>Grades <b>XI&ndash;XII</b></span>
+          <span>In India <b>7th school</b></span>
+          <span>Counselling <b>Naviance</b></span>
+        </div>
+      </article>
+    </div>
+
+    <p class="copy" style="margin-top:30px">Value education runs across every grade alongside the
+      academic timetable, from Bal Bhagavatam in the lower school to selected portions of the
+      Bhagavad Geeta in the senior years.</p>
+  </div>
+</section>
+
+<!-- ============================== MOTTO ================================ -->
+<section class="motto" data-ground="#4C1868">
+  <div class="wrap">
+    <p class="motto__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+    <p class="motto__iast">J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</p>
+    <p class="motto__en">Knowledge &middot; Service &middot; Skill</p>
+    <div class="motto__rule"></div>
+  </div>
+</section>
+
+<!-- ========================= FEATURE: STUDENT LIFE ======================== -->
+<section class="feature feature--reverse" id="life">
+  <div class="wrap feature__inner">
+    <figure class="feature__media is-placeholder rv">
+      <span class="feature__ph">Photograph &mdash; houses and<br>dormitories to be supplied</span>
+    </figure>
+    <div class="feature__text rv">
+      <p class="marker"><span class="sc">Student life</span></p>
+      <p class="feature__tag">Live, learn, belong</p>
+      <h2 class="serif h2" data-split>A Campus That <em>Never Really Closes.</em></h2>
+      <p class="copy">Houses carry the names of India&rsquo;s great teachers. Seniors and juniors
+        share corridors by design, prep ends at nine, and the closing chant carries across the
+        valley for six hundred boarders at once.</p>
+      <p class="feature__cta"><a class="btn btn--outline" href="#day">See a full day at CIRS</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ DAY ================================ -->
+<section class="dayh" id="day">
+  <div class="dayh__pin">
+    <div class="wrap dayh__head">
+      <div class="sec-head">
+        <p class="marker"><span class="sc">School life</span></p>
+        <h2 class="serif h2" data-split>Sixteen hours, <em>lived together.</em></h2>
+        <p class="lead">A boarding school is a schedule. Scroll through the one the whole campus keeps.</p>
+      </div>
+    </div>
+
+    <div class="dayh__viewport">
+      <div class="dayh__track">
+        <article class="dmoment" data-time="05:30">
+          <span class="dmoment__t">05:30</span>
+          <h3>Prayer and chanting</h3>
+          <p>The day begins in the prayer hall while the valley is still dark &mdash; the same fifteen minutes for a Grade V boarder and a Grade XII Diploma candidate.</p>
+          <p class="dmoment__i">Before the mountain wakes.</p>
+        </article>
+        <article class="dmoment" data-time="08:15">
+          <span class="dmoment__t">08:15</span>
+          <h3>Academics</h3>
+          <p>CBSE from Grade V, the IB Diploma from Grade XI, taught by one faculty in English across both programmes.</p>
+          <p class="dmoment__i">Two boards, one faculty room.</p>
+        </article>
+        <article class="dmoment" data-time="16:00">
+          <span class="dmoment__t">16:00</span>
+          <h3>Games</h3>
+          <p>Athletics, football, cricket, basketball, swimming and yoga. Eighty of the hundred acres are left wild, so the boundary of play is the edge of the Ghats.</p>
+          <p class="dmoment__i">The forest is the touchline.</p>
+        </article>
+        <article class="dmoment" data-time="18:00">
+          <span class="dmoment__t">18:00</span>
+          <h3>Music, dance and theatre</h3>
+          <p>A veena class ends as a band sets up; a Bharatanatyam rehearsal shares the wing with a drama read-through.</p>
+          <p class="dmoment__i">Both traditions are native here.</p>
+        </article>
+        <article class="dmoment" data-time="19:30">
+          <span class="dmoment__t">19:30</span>
+          <h3>House meetings</h3>
+          <p>Rosters, service projects and the week&rsquo;s disputes. Seniors are accountable for juniors by name, not by rota.</p>
+          <p class="dmoment__i">The hour that makes leaders.</p>
+        </article>
+        <article class="dmoment" data-time="21:00">
+          <span class="dmoment__t">21:00</span>
+          <h3>Prep ends, dormitories settle</h3>
+          <p>The closing chant carries across the valley. Six hundred students from twenty countries end the day on the same syllable.</p>
+          <p class="dmoment__i">One silence, six hundred people.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="dayh__rail"><span class="dayh__fill"></span></div>
+    <p class="dayh__ticks"><span>05:30</span><b id="dayTick">05:30</b><span>21:00</span></p>
+  </div>
+</section>
+
+<!-- ============================== CAMPUS =============================== -->
+<section class="band" id="campus" data-ground="#150818">
+  <div class="band__media">
+    <img src="assets/img/aerial-duo.jpg" alt="Aerial view of the CIRS campus in the Siruvani valley" width="1400" height="640" loading="lazy">
+  </div>
+  <div class="wrap band__inner on-purple">
+    <div class="sec-head rv" style="margin-bottom:0">
+      <p class="marker"><span class="sc">The campus</span></p>
+      <h2 class="serif h2" style="color:#fff" data-split>A plan drawn <em>around the trees.</em></h2>
+      <p class="lead">Classrooms, houses, playing fields and the dining hall sit inside one walkable
+        boundary. The rest of the site was left alone.</p>
+    </div>
+
+    <div class="facilities rv">
+      <div><h3>Academic Block</h3><p>Laboratories, seminar rooms and both boards&rsquo; classrooms in one building.</p></div>
+      <div><h3>Library</h3><p>Reference, reading and the university-counselling desk together.</p></div>
+      <div><h3>Dormitories</h3><p>Residential houses named for the great sages of India.</p></div>
+      <div><h3>Sports</h3><p>Athletics track, courts, swimming pool and the yoga shala.</p></div>
+      <div><h3>Amphitheatre</h3><p>Built into the slope, with the valley as the back wall of the stage.</p></div>
+      <div><h3>Dining Hall</h3><p>A vegetarian kitchen serving the whole residential community.</p></div>
+    </div>
+
+    <p style="margin-top:34px"><a class="btn btn--ghost" href="#admissions">Book a campus visit</a></p>
+  </div>
+</section>
+
+<!-- =========================== FEATURE: ATHLETICS ========================= -->
+<section class="feature" id="athletics">
+  <div class="wrap feature__inner">
+    <figure class="feature__media is-placeholder rv">
+      <span class="feature__ph">Photograph &mdash; athletics<br>to be supplied</span>
+    </figure>
+    <div class="feature__text rv">
+      <p class="marker"><span class="sc">Athletics</span></p>
+      <p class="feature__tag">Compete, play, grow</p>
+      <h2 class="serif h2" data-split>The Forest Is <em>the Touchline.</em></h2>
+      <p class="copy">Athletics, football, cricket, basketball, swimming and yoga fill the four
+        o&rsquo;clock hour every day. Eighty of the campus&rsquo;s hundred acres are left wild, so
+        the edge of play is the edge of the Western Ghats.</p>
+      <p class="copy" style="margin-top:10px"><em>[Placeholder &mdash; teams, fixtures and results
+        to be supplied by the sports office.]</em></p>
+      <p class="feature__cta"><a class="btn btn--outline" href="#">Sports at CIRS</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FEATURE: ARTS ============================ -->
+<section class="feature feature--reverse" id="arts">
+  <div class="wrap feature__inner">
+    <figure class="feature__media is-placeholder rv">
+      <span class="feature__ph">Photograph &mdash; arts, music<br>&amp; theatre to be supplied</span>
+    </figure>
+    <div class="feature__text rv">
+      <p class="marker"><span class="sc">Arts</span></p>
+      <p class="feature__tag">Express, perform, create</p>
+      <h2 class="serif h2" data-split>Two Traditions, <em>One Stage.</em></h2>
+      <p class="copy">A veena class ends as a band sets up; a Bharatanatyam rehearsal shares the
+        wing with a drama read-through most evenings at six. Both traditions &mdash; Indian
+        classical and contemporary &mdash; are native here, not imported.</p>
+      <p class="copy" style="margin-top:10px"><em>[Placeholder &mdash; ensembles, productions and
+        showcase dates to be supplied.]</em></p>
+      <p class="feature__cta"><a class="btn btn--outline" href="#">Arts at CIRS</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RECORD =============================== -->
+<section class="section on-purple" id="record" data-ground="#260B38">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">The record</span></p>
+      <h2 class="serif h2" style="color:#fff" data-split>Four numbers <em>worth the sentence.</em></h2>
+    </div>
+
+    <div class="record">
+      <div class="rv">
+        <span class="fig-mask"><span class="record__fig">7<sup>th</sup></span></span>
+        <p>school in India authorised by the <b>International Baccalaureate</b>, Geneva &mdash; which
+          is why the Diploma here is older than most of the students taking it.</p>
+      </div>
+      <div class="rv">
+        <span class="fig-mask"><span class="record__fig">100</span></span>
+        <p><b>acres</b> in the Siruvani foothills, of which roughly eighty are left to native forest,
+          recognised by the <b>Green School Award</b>.</p>
+      </div>
+      <div class="rv">
+        <span class="fig-mask"><span class="record__fig">24</span></span>
+        <p>Indian states, and <b>twenty countries</b>, in one dining hall. A Grade IX corridor here
+          holds more of India than most Indian cities.</p>
+      </div>
+      <div class="rv">
+        <span class="fig-mask"><span class="record__fig">580</span></span>
+        <p><b>students</b> today, from an opening roll of ninety-six in 1996. The morning chant has
+          not changed.</p>
+      </div>
+    </div>
+
+    <p class="note">Board-result percentages, university-placement counts and scholarship totals
+      belong in this section and come from the examinations office each August. They are left out of
+      this prototype rather than estimated.</p>
+  </div>
+</section>
+
+<!-- ============================= PATHWAYS ============================== -->
+<section class="section" id="pathways">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">After CIRS</span></p>
+      <h2 class="serif h2" data-split>Where the Diploma <em>takes them.</em></h2>
+      <p class="lead">The IB opens direct application to North America, the UK, Europe and
+        Australia; CBSE keeps the Indian national pathway fully open. Counselling begins in Grade X.</p>
+    </div>
+
+    <div class="chart rv">
+      <svg id="worldChart" viewBox="0 0 1000 460" role="img" aria-label="Chart of university destination cities plotted from Siruvani">
+        <g id="grat"></g><g id="arcs"></g><g id="nodes"></g>
+      </svg>
+    </div>
+
+    <p class="note">Destination cities are sample plotting for this prototype, positioned from real
+      coordinates. The production chart should read from the school&rsquo;s verified alumni
+      placement register.</p>
+  </div>
+</section>
+
+<!-- ============================ ADMISSIONS ============================= -->
+<section class="section on-paper-2" id="admissions">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">Admissions 2027&ndash;28</span></p>
+      <h2 class="serif h2" data-split>Five steps, <em>registration to place.</em></h2>
+      <p class="lead">Registration is open year-round for the academic year beginning in April.
+        Registration alone does not confer a right to admission.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step rv">
+        <span class="step__n"></span>
+        <div>
+          <h3 class="serif h3">Register your child</h3>
+          <p>Complete the online application. Enter the student&rsquo;s name exactly as it appears
+            on the birth certificate, a current address, a working email address, and your chosen
+            entrance-examination centre. Examination details are sent by email.</p>
+        </div>
+        <div class="step__aside">
+          Registration <b>&#8377;5,000</b><br>
+          Online payment only<br>
+          Cash is not accepted
+        </div>
+      </div>
+
+      <div class="step rv">
+        <span class="step__n"></span>
+        <div>
+          <h3 class="serif h3">Sit the entrance examination</h3>
+          <p>Held on the second Sunday of every month. Grades V&ndash;VI write English and
+            Mathematics over two hours; Grades VII&ndash;IX add Science across three. Every paper,
+            at every level, includes a creative-writing section.</p>
+        </div>
+        <div class="step__aside">
+          Grades V&ndash;VI <b>2 hours</b><br>
+          Grades VII&ndash;IX <b>3 hours</b><br>
+          Grade XI <b>3 hours</b>
+        </div>
+      </div>
+
+      <div class="step rv">
+        <span class="step__n"></span>
+        <div>
+          <h3 class="serif h3">Choose the senior pathway</h3>
+          <p>Grade XI applicants declare a direction. CBSE candidates write Physics and Chemistry
+            with Mathematics for Engineering, with Biology for Medicine, or Management Studies with
+            Mathematics. IB candidates write four 45-minute papers: English, Mathematics, Science
+            and General Awareness.</p>
+        </div>
+        <div class="step__aside">
+          Engineering<br>Medicine<br>Management<br>or <b>IB Diploma</b>
+        </div>
+      </div>
+
+      <div class="step rv">
+        <span class="step__n"></span>
+        <div>
+          <h3 class="serif h3">Visit the campus</h3>
+          <p>Visits run on Wednesdays and Saturdays between 10:00 and 11:00 IST, by prior
+            appointment only. A boarding decision made without walking the site is a decision made
+            on photographs.</p>
+        </div>
+        <div class="step__aside">
+          Wednesdays &amp; Saturdays<br>
+          <b>10:00&ndash;11:00 IST</b><br>
+          Appointment required
+        </div>
+      </div>
+
+      <div class="step rv">
+        <span class="step__n"></span>
+        <div>
+          <h3 class="serif h3">Confirm the place</h3>
+          <p>Offers follow the entrance result and the interaction. Caste certificates are submitted
+            at this stage where applicable. The place is confirmed once the fee schedule is settled.</p>
+        </div>
+        <div class="step__aside">
+          Session <b>April&ndash;March</b><br>
+          Grades <b>V&ndash;XII</b><br>
+          Boarding
+        </div>
+      </div>
+    </div>
+
+    <div class="adm-cta">
+      <a class="btn btn--primary btn--lg" href="#">Begin registration</a>
+      <a class="btn btn--outline btn--lg" href="#">Download the prospectus</a>
+      <span class="adm-cta__contact">
+        Admissions office &middot;
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a> &middot;
+        <a href="tel:+914222613303">+91 422 261 3303</a>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CLOSING CTA ============================= -->
+<section class="finalcta" data-ground="#150818">
+  <div class="finalcta__media">
+    <img src="assets/img/aerial-duo.jpg" alt="" loading="lazy">
+  </div>
+  <div class="wrap finalcta__inner rv">
+    <h2 class="serif h2" data-split>Unlock Your Potential <em>at CIRS.</em></h2>
+    <p class="lead">For nearly thirty years, CIRS has provided a nurturing environment where
+      boarders build lasting connections, uncover their passions, cultivate honourable character,
+      and carry Knowledge, Service and Skill beyond the Siruvani foothills.</p>
+    <div class="finalcta__cta">
+      <a class="btn btn--primary btn--lg" href="#admissions" data-magnetic>Enquire</a>
+      <a class="btn btn--ghost btn--lg" href="#admissions" data-magnetic>Visit</a>
+      <a class="btn btn--ghost btn--lg" href="#admissions" data-magnetic>Apply</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================== FOOTER =============================== -->
+<div class="footer-wrap">
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__utility">
+      <a href="#">Alumni</a>
+      <a href="#">Parents</a>
+      <a href="#">Careers</a>
+      <a href="#">Transportation</a>
+      <a href="#">Support CIRS</a>
+      <a href="#">Employee Directory</a>
+      <a href="#">Parent Portal</a>
+      <a href="#">Calendar</a>
+    </div>
+    <div class="footer__main">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="" width="58" height="56">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address>
+          Siruvani Main Road<br>
+          Coimbatore 641 114, Tamil Nadu, India<br>
+          <a href="tel:+914222613300">+91 422 261 3300</a> &middot;
+          <a href="tel:+914222613303">261 3303</a><br>
+          <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+        </address>
+      </div>
+
+      <div>
+        <h4 class="sc">About</h4>
+        <ul>
+          <li><a href="#about">Why CIRS</a></li>
+          <li><a href="#">School History</a></li>
+          <li><a href="#">Our People</a></li>
+          <li><a href="#campus">Our Campus</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="sc" id="fnav-school">School</p>
+        <ul aria-labelledby="fnav-school">
+          <li><a href="#junior">Junior School</a></li>
+          <li><a href="#senior">Senior School</a></li>
+          <li><a href="#athletics">Athletics</a></li>
+          <li><a href="#arts">Arts, Music &amp; Theatre</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="sc" id="fnav-academics">Academics</p>
+        <ul aria-labelledby="fnav-academics">
+          <li><a href="#academics">Curriculum</a></li>
+          <li><a href="#academics">CBSE</a></li>
+          <li><a href="#academics">IB Diploma</a></li>
+          <li><a href="#pathways">University Counselling</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="sc" id="fnav-admissions">Admissions</p>
+        <ul aria-labelledby="fnav-admissions">
+          <li><a href="#admissions">Application Information</a></li>
+          <li><a href="#">Fee Structure</a></li>
+          <li><a href="#">Important Dates</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; 1996&ndash;2026 Chinmaya International Residential School</span>
+      <span>J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</span>
+      <span>An undertaking of the Central Chinmaya Mission Trust</span>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<script src="assets/js/cirs.js?b=3" defer></script>
+</body>
+</html>

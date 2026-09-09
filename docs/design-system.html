@@ -1,0 +1,600 @@
+<title>CIRS Design System</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --purple:#4C1868; --purple-deep:#260B38; --purple-ink:#150818;
+  --gold:#C9A227; --gold-lit:#E3C15A; --maroon:#7A0F1E;
+  --paper:#FAF7F8; --paper-2:#F1EAEF; --white:#fff;
+  --ink:#1A1119; --ink-soft:#4E4350; --ink-mute:#7C7080;
+  --rule:#DCD2D8; --rule-soft:#EAE1E6;
+  --serif:"EB Garamond","Iowan Old Style",Georgia,serif;
+  --sans:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --gut:clamp(20px,4vw,52px);
+  --e:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;font-weight:400;text-wrap:balance}
+p{margin:0} ul,ol{margin:0;padding:0;list-style:none} a{color:inherit}
+::selection{background:var(--gold);color:#fff}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:var(--gut)}
+.serif{font-family:var(--serif)}
+.muted{color:var(--ink-soft)} .dim{color:var(--ink-mute)}
+.tnum{font-variant-numeric:tabular-nums}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--gold)}
+
+/* header */
+.top{background:var(--purple-ink);color:#fff;padding:clamp(40px,6vw,72px) 0 clamp(32px,4vw,52px)}
+.top h1{font-family:var(--serif);font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 18px}
+.top p{max-width:62ch;color:rgba(255,255,255,.8)}
+.top .eyebrow{color:var(--gold-lit)} .top .eyebrow::before{background:var(--gold-lit)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:24px;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.meta b{color:var(--gold-lit);font-weight:600}
+
+/* toc */
+.toc{background:var(--purple);padding:14px 0}
+.toc ol{display:flex;flex-wrap:wrap;gap:4px 20px}
+.toc a{font-size:.76rem;font-weight:500;color:rgba(255,255,255,.72);padding:5px 0;border-bottom:2px solid transparent;transition:.2s var(--e)}
+.toc a:hover{color:#fff;border-bottom-color:var(--gold)}
+
+/* sections */
+section{padding-block:clamp(38px,5vw,66px);border-bottom:1px solid var(--rule-soft)}
+section h2{font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.12;letter-spacing:-.016em;margin:12px 0 12px}
+.intro{max-width:66ch;color:var(--ink-soft);margin-bottom:30px}
+h3.sub{font-size:.74rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--purple);margin:32px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+
+/* tables */
+.scrollx{overflow-x:auto;border:1px solid var(--rule-soft);background:var(--white)}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);font-weight:600;background:var(--paper-2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82em;background:#F1ECF0;color:var(--purple-deep);padding:1px 5px;border-radius:2px}
+
+/* cards */
+.cols{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{border:1px solid var(--rule-soft);background:var(--white);padding:20px}
+.card h4{font-family:var(--serif);font-size:1.15rem;margin-bottom:8px;color:var(--purple)}
+.card p{font-size:.87rem;color:var(--ink-soft)}
+
+/* sitemap */
+.tree{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.branch{border-top:2px solid var(--purple);padding-top:11px}
+.branch>b{display:block;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:9px}
+.branch li{font-size:.85rem;padding:5px 0;color:var(--ink-soft);border-bottom:1px solid var(--rule-soft)}
+.branch li em{font-style:normal;display:block;font-size:.7rem;color:var(--ink-mute)}
+
+/* wireframe */
+.wf{display:grid;gap:8px}
+.wfr{border:1px solid var(--rule);background:var(--white);padding:12px 14px;display:grid;gap:9px;font-size:.74rem}
+.wfr>.t{display:flex;flex-wrap:wrap;gap:5px 14px;align-items:baseline}
+.wfr>.t b{color:var(--purple);font-size:.78rem}
+.wfr>.t span{color:var(--ink-mute)}
+.bx{display:flex;gap:6px;flex-wrap:wrap}
+.bx div{border:1px dashed #C9BEC6;background:#F5F1F4;min-height:30px;display:grid;place-items:center;padding:6px 10px;color:var(--ink-mute);flex:1;min-width:66px;text-align:center}
+.bx div.tall{min-height:64px}
+.bx div.full{flex-basis:100%}
+.bx div.acc{border-color:var(--gold);background:#FBF0D6;color:#8A6A12}
+.wfr.dark{background:var(--purple-deep);border-color:var(--purple-deep);color:rgba(255,255,255,.72)}
+.wfr.dark>.t b{color:var(--gold-lit)} .wfr.dark>.t span{color:rgba(255,255,255,.45)}
+.wfr.dark .bx div{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);color:rgba(255,255,255,.6)}
+
+/* swatches */
+.sw{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(138px,1fr))}
+.sw>div{border:1px solid var(--rule-soft);background:var(--white)}
+.sw i{display:block;height:66px}
+.sw p{padding:9px 11px;font-size:.72rem;line-height:1.7}
+.sw p b{display:block;font-size:.78rem;color:var(--ink)}
+.sw p span{color:var(--ink-mute);font-family:ui-monospace,Menlo,monospace}
+
+/* specimen */
+.spec{border:1px solid var(--rule-soft);background:var(--white);padding:20px;display:grid;gap:8px}
+.spec .l{font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-mute);font-weight:600}
+.spec .a{font-family:var(--serif);font-size:1.9rem;line-height:1.1;letter-spacing:-.02em;color:var(--purple)}
+.spec .b{font-size:.95rem;color:var(--ink-soft)}
+.spec .c{font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
+
+/* phones */
+.phones{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(176px,1fr))}
+.ph{border:1px solid var(--rule);border-radius:18px;padding:8px;background:var(--white)}
+.ph .scr{border-radius:12px;aspect-ratio:9/17;display:grid;grid-template-rows:auto 1fr auto;gap:5px;padding:8px;font-size:.6rem;background:var(--purple-ink);color:rgba(255,255,255,.7)}
+.ph .b{border:1px dashed rgba(255,255,255,.28);display:grid;place-items:center;text-align:center;padding:5px}
+.ph .b.s{background:rgba(255,255,255,.08);border-style:solid}
+.ph .b.a{border-color:var(--gold);color:var(--gold-lit)}
+.ph .cap{font-size:.68rem;color:var(--ink-mute);padding:8px 3px 2px}
+
+/* list */
+.check li{display:grid;grid-template-columns:14px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--rule-soft);font-size:.88rem;color:var(--ink-soft)}
+.check li::before{content:"";width:9px;height:9px;border:1.5px solid var(--gold);margin-top:7px}
+.check li b{color:var(--ink)}
+.note{border-left:3px solid var(--gold);background:#FAF3DE;padding:13px 16px;font-size:.87rem;color:var(--ink-soft);max-width:72ch}
+.note b{color:var(--ink)}
+
+footer{background:var(--purple-ink);color:rgba(255,255,255,.5);padding:26px 0;font-size:.74rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:space-between}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">Chinmaya International Residential School</p>
+    <h1>Website design system and redesign specification</h1>
+    <p>The system behind the CIRS homepage redesign: identity, sitemap, wireframe, UX flows,
+      components, motion, mobile architecture and the build plan. Palette and emblem are the
+      school's own; photography is the school's own, re-cropped.</p>
+    <div class="meta">
+      <span>Version <b>2.0</b></span>
+      <span>Prepared <b>September 2026</b></span>
+      <span>Scope <b>Homepage + system</b></span>
+      <span>Status <b>Prototype for review</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <ol>
+      <li><a href="#identity">01 Identity</a></li>
+      <li><a href="#sitemap">02 Sitemap</a></li>
+      <li><a href="#wireframe">03 Wireframe</a></li>
+      <li><a href="#flows">04 UX flows</a></li>
+      <li><a href="#components">05 Components</a></li>
+      <li><a href="#motion">06 Motion</a></li>
+      <li><a href="#mobile">07 Mobile</a></li>
+      <li><a href="#build">08 Build plan</a></li>
+      <li><a href="#assets">09 Assets needed</a></li>
+    </ol>
+  </div>
+</nav>
+
+<!-- 01 -->
+<section id="identity">
+  <div class="wrap">
+    <p class="eyebrow">Identity</p>
+    <h2>A new identity, deliberately chosen.</h2>
+    <p class="intro">Deep purple, gold, dark red, black and white replace the previous
+      navy-and-saffron scheme, requested to give the school a more distinctive, trend-forward
+      mark. Purple carries the structure, gold is the primary accent on calls to action and
+      labels, and maroon takes the secondary accent role — hover states, the dropcap, the IB tag —
+      exactly where terracotta sat before.</p>
+
+    <div class="sw">
+      <div><i style="background:#4C1868"></i><p><b>Purple</b><span>#4C1868</span>Headings, links, primary structure</p></div>
+      <div><i style="background:#260B38"></i><p><b>Purple deep</b><span>#260B38</span>Inverted sections, utility bar</p></div>
+      <div><i style="background:#150818"></i><p><b>Purple ink / black</b><span>#150818</span>Footer, photographic scrims</p></div>
+      <div><i style="background:#C9A227"></i><p><b>Gold</b><span>#C9A227</span>Primary accent — buttons, rules, eyebrows</p></div>
+      <div><i style="background:#7A0F1E"></i><p><b>Dark red / maroon</b><span>#7A0F1E</span>Secondary accent — hover state, IB tag, dropcap</p></div>
+      <div><i style="background:#FAF7F8;box-shadow:inset 0 0 0 1px #DCD2D8"></i><p><b>White / paper</b><span>#FAF7F8</span>Page ground</p></div>
+    </div>
+
+    <h3 class="sub">Contrast</h3>
+    <ul class="check">
+      <li><b>Ink on paper</b> — <code>#1A1119</code> on <code>#FAF7F8</code>, 17.3:1.</li>
+      <li><b>Secondary text</b> — <code>#4E4350</code> on paper, 8.8:1. Muted <code>#7C7080</code> is reserved for labels and metadata, 4.4:1.</li>
+      <li><b>Gold on white</b> is 2.4:1, so it never carries body text. It appears as a fill behind white/ink text (buttons), as a 2px rule, or as uppercase eyebrow text at 600 weight, where it passes as large text. On the dark purple grounds it climbs to 8:1, which is where it carries labels directly.</li>
+      <li><b>Focus</b> is a 2px gold ring at 2px offset on every interactive element, including the SVG chart nodes.</li>
+    </ul>
+
+    <h3 class="sub">The emblem</h3>
+    <div class="note">
+      <b>The real logo is in the build.</b> It is the school's own emblem, taken from
+      cirschool.org, with the white background knocked out to transparency so it sits cleanly on
+      any ground. The source file is only 103&times;100px, which is enough for the 52px header
+      lockup but not for print or a retina hero. <b>The school should supply the vector master.</b>
+      Because the emblem's wordmark is dark, the header and footer lockups are both placed on light
+      or controlled grounds.
+    </div>
+
+    <h3 class="sub">Typography</h3>
+    <p class="intro" style="margin-bottom:18px">The current site runs on Verdana, Tahoma and Arial,
+      so there was no existing web typeface to preserve. Three families were chosen instead, each
+      doing a job the others cannot.</p>
+    <div class="cols">
+      <div class="spec">
+        <span class="l">Display — EB Garamond 400 / 500, roman and italic</span>
+        <span class="a">A school in the hills, <em style="font-style:italic">and a hundred acres</em></span>
+        <span class="l">A Garamond, not a fashion serif. It carries true italics for emphasis
+          (never bold), genuine small caps, and oldstyle figures. It is the register of a school
+          founded by a Vedanta teacher, and it is the opposite of what a template reaches for.</span>
+      </div>
+      <div class="spec">
+        <span class="l">Text — Schibsted Grotesk 400 / 500 / 600</span>
+        <span class="b">Eighty of those acres are left to the forest. CBSE and the International
+          Baccalaureate are taught under one faculty.</span>
+        <span class="l">A news grotesque with a sturdy, slightly quirky set. Deliberately not Inter.
+          Carries navigation, running text, tables and data.</span>
+      </div>
+      <div class="spec">
+        <span class="l">Devanagari — Tiro Devanagari Hindi</span>
+        <span style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.7rem;line-height:1.5;color:var(--purple)"
+              lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</span>
+        <span class="l">The motto is set in Devanagari at full size as its own band, with the IAST
+          transliteration and English gloss beneath. This is the single most distinctive element on
+          the page, and it is distinctive because it is true to the school.</span>
+      </div>
+    </div>
+
+    <h3 class="sub">Typographic rules</h3>
+    <ul class="check">
+      <li><b>Emphasis is italic, never bold,</b> in any Garamond setting. Bold is reserved for the grotesque.</li>
+      <li><b>Small caps are real,</b> drawn from the font via <code>font-variant-caps: all-small-caps</code> — not uppercase with letter-spacing faked on top.</li>
+      <li><b>Oldstyle figures in editorial settings</b> (the timetable, the record figures, the fact rail), lining and tabular figures wherever numbers must align in a column.</li>
+      <li><b>One drop cap on the page,</b> in maroon, opening the school's history. A second would make it a motif.</li>
+    </ul>
+
+    <h3 class="sub">Scale and layout</h3>
+    <div class="scrollx">
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><code>--fs-hero</code></td><td><code>clamp(2.2rem, 4.9vw, 4.4rem)</code></td><td>Hero H1. Deliberately restrained — a school is not a fashion label.</td></tr>
+          <tr><td><code>--fs-h2</code></td><td><code>clamp(1.7rem, 3.1vw, 2.7rem)</code></td><td>Section headings</td></tr>
+          <tr><td><code>--fs-h3</code></td><td><code>clamp(1.15rem, 1.55vw, 1.42rem)</code></td><td>Card and row headings</td></tr>
+          <tr><td><code>--fs-lead</code></td><td><code>clamp(1.04rem, 1.25vw, 1.22rem)</code></td><td>Standfirst</td></tr>
+          <tr><td><code>--gut</code></td><td><code>clamp(20px, 4vw, 60px)</code></td><td>Page gutter</td></tr>
+          <tr><td><code>--maxw</code></td><td><code>1280px</code></td><td>Content shell — a readable measure, not a full-bleed canvas</td></tr>
+          <tr><td><code>--e</code></td><td><code>cubic-bezier(.22,.61,.36,1)</code></td><td>The house easing, used everywhere</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="sitemap">
+  <div class="wrap">
+    <p class="eyebrow">Sitemap</p>
+    <h2>The same content, re-shelved.</h2>
+    <p class="intro">Twelve flat top-level items become five destinations plus a utility set.
+      Nothing is deleted — Naviance, Downloads, Important Dates, FAQs and the Gallery all survive,
+      re-parented under the task that sends people looking for them. Nothing sits more than two
+      clicks from the homepage.</p>
+
+    <div class="tree">
+      <div class="branch"><b>About CIRS</b><ul>
+        <li>Why Choose CIRS</li><li>School History<em>founded 6 June 1996</em></li>
+        <li>Chinmaya Mission</li><li>Messages</li><li>Management</li><li>Location</li></ul></div>
+      <div class="branch"><b>Academics</b><ul>
+        <li>Curriculum</li><li>CBSE<em>Grades V–XII</em></li><li>IB Diploma<em>Grades XI–XII</em></li>
+        <li>Value Education</li><li>Academic Success</li>
+        <li>University Counselling<em>absorbs Naviance</em></li><li>Faculty</li></ul></div>
+      <div class="branch"><b>School Life</b><ul>
+        <li>A Day at CIRS</li><li>Residential Life &amp; Houses</li><li>Sports</li>
+        <li>Arts, Music &amp; Theatre</li><li>Events<em>absorbs News</em></li>
+        <li>Gallery</li><li>Alumni</li></ul></div>
+      <div class="branch"><b>Admissions</b><ul>
+        <li>Application Information</li><li>Entrance Examination</li><li>Fee Structure</li>
+        <li>Important Dates</li><li>Downloads &amp; Forms</li><li>FAQs</li>
+        <li>Book a Campus Visit<em>new</em></li></ul></div>
+      <div class="branch"><b>The Campus</b><ul>
+        <li>Overview</li><li>Academic Block</li><li>Library</li><li>Dormitories</li>
+        <li>Sports Facilities</li><li>Amphitheatre</li><li>Dining Hall</li>
+        <li>Sustainability<em>Green School Award</em></li></ul></div>
+      <div class="branch"><b>Utility</b><ul>
+        <li>Contact Us</li><li>School Info<em>policies, disclosure</em></li>
+        <li>Parent &amp; Student Portal</li><li>Search<em>new</em></li>
+        <li>Privacy &amp; Terms</li><li>Careers</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="wireframe">
+  <div class="wrap">
+    <p class="eyebrow">Homepage wireframe</p>
+    <h2>Nine blocks, desktop at 1440.</h2>
+    <p class="intro">Dark rows are purple-inverted sections. The page alternates paper and purple so
+      that no two adjacent sections read the same, and photography carries the transitions.</p>
+
+    <div class="wf">
+      <div class="wfr dark"><div class="t"><b>Utility bar</b><span>accreditations left, contact and portal right</span></div>
+        <div class="bx"><div class="full">CBSE · IB World School · Central Chinmaya Mission Trust &nbsp;&nbsp;|&nbsp;&nbsp; phone · email · Parent Portal</div></div></div>
+
+      <div class="wfr"><div class="t"><b>Header</b><span>sticky, white, shadow on scroll</span></div>
+        <div class="bx"><div style="max-width:170px">Emblem + wordmark</div><div>About</div><div>Academics</div><div>School Life</div><div>Campus</div><div>Admissions</div><div class="acc" style="max-width:80px">Apply</div></div></div>
+
+      <div class="wfr dark"><div class="t"><b>01 · Hero</b><span>campus photograph, purple scrim left to right</span></div>
+        <div class="bx"><div class="full">Eyebrow — Co-educational residential school · Grades V–XII</div></div>
+        <div class="bx"><div class="full tall">H1 — “An education shaped by the hills it stands in.” + lead, max 56ch</div></div>
+        <div class="bx"><div class="acc" style="max-width:150px">Admissions 2027–28</div><div style="max-width:150px">Explore the campus</div><div style="flex:2"></div></div>
+        <div class="bx"><div>1996</div><div>100 acres</div><div>580+</div><div>20 nations</div><div>CBSE &amp; IB</div></div></div>
+
+      <div class="wfr"><div class="t"><b>02 · About</b><span>statement left, fact list right</span></div>
+        <div class="bx"><div class="tall" style="flex:1.4">Founder’s quotation, two paragraphs, link to history</div><div class="tall">Ten-row fact list: founded, founder, chairperson, grades, boards, medium, campus, states, countries, recognition</div></div></div>
+
+      <div class="wfr"><div class="t"><b>03 · Academics</b><span>paper-2 ground, two programme cards</span></div>
+        <div class="bx"><div class="tall">CBSE — photograph, tag, description, 3 metadata</div><div class="tall">IB Diploma — photograph, tag, description, 3 metadata</div></div></div>
+
+      <div class="wfr"><div class="t"><b>04 · School Life</b><span>four photographic cards, 4:5</span></div>
+        <div class="bx"><div class="tall">Sport</div><div class="tall">Arts</div><div class="tall">Community</div><div class="tall">Residence</div></div></div>
+
+      <div class="wfr"><div class="t"><b>05 · A Day at CIRS</b><span>six timetable rows</span></div>
+        <div class="bx"><div style="max-width:80px">05:30</div><div style="flex:1.1">Prayer and chanting</div><div style="flex:1.4">Description</div></div>
+        <div class="bx"><div class="full">×6 — 05:30 · 08:15 · 16:00 · 18:00 · 19:30 · 21:00</div></div></div>
+
+      <div class="wfr dark"><div class="t"><b>06 · Campus</b><span>aerial photograph, purple scrim, facilities grid</span></div>
+        <div class="bx"><div class="full">Heading + lead</div></div>
+        <div class="bx"><div>Academic Block</div><div>Library</div><div>Dormitories</div><div>Sports</div><div>Amphitheatre</div><div>Dining Hall</div></div></div>
+
+      <div class="wfr dark"><div class="t"><b>07 · Academic record</b><span>four figures, each inside its sentence</span></div>
+        <div class="bx"><div class="tall">7th — IB authorisation</div><div class="tall">100 — acres</div><div class="tall">24 — states</div><div class="tall">580 — students</div></div></div>
+
+      <div class="wfr"><div class="t"><b>08 · University pathways</b><span>coordinate chart, arcs drawn on entry</span></div>
+        <div class="bx"><div class="full tall">Equirectangular graticule · Siruvani origin · 13 destination cities plotted from real coordinates</div></div></div>
+
+      <div class="wfr"><div class="t"><b>09 · Admissions</b><span>paper-2 ground, five numbered steps</span></div>
+        <div class="bx"><div style="max-width:56px">01</div><div style="flex:2.4">Register your child</div><div style="flex:1">₹5,000 · online only</div></div>
+        <div class="bx"><div class="acc" style="max-width:170px">Begin registration</div><div style="max-width:190px">Download prospectus</div><div style="flex:2">Admissions office contact</div></div></div>
+
+      <div class="wfr dark"><div class="t"><b>Footer</b><span>four columns</span></div>
+        <div class="bx"><div class="tall" style="flex:1.5">Emblem, address, phone, email</div><div class="tall">About</div><div class="tall">Academics</div><div class="tall">Admissions</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="flows">
+  <div class="wrap">
+    <p class="eyebrow">UX flows</p>
+    <h2>Four audiences, four exits.</h2>
+    <div class="scrollx">
+      <table>
+        <thead><tr><th>Visitor</th><th>Path</th><th>Exit and success signal</th></tr></thead>
+        <tbody>
+          <tr><td><b>Prospective parent</b><br><span class="dim">majority of intent</span></td>
+              <td><b>Apply</b> is visible in the header at every scroll position. If not yet convinced: About → Academics → Campus → Admissions.</td>
+              <td>Registration started, or a campus visit booked. Measure visit bookings per 1,000 sessions.</td></tr>
+          <tr><td><b>Prospective student</b></td>
+              <td>Hero → School Life cards → A Day at CIRS. Usually on a phone, usually beside a parent.</td>
+              <td>Opens Gallery or Sports. Measure scroll depth past School Life.</td></tr>
+          <tr><td><b>Current parent</b></td>
+              <td>Skips the narrative entirely. Utility bar → Parent Portal, or header → Admissions → Important Dates / Downloads.</td>
+              <td>Reaches the utility page in two clicks. Measure time-to-task.</td></tr>
+          <tr><td><b>Counsellor, alumnus, press</b></td>
+              <td>University Pathways → Academics → About.</td>
+              <td>Prospectus downloaded, or contact made.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Admissions, step by step</h3>
+    <div class="scrollx">
+      <table>
+        <thead><tr><th>Step</th><th>Visitor does</th><th>Site must supply</th><th>Failure designed out</th></tr></thead>
+        <tbody>
+          <tr><td><b>01</b> Register</td><td>One online form, ₹5,000 online</td><td>Name-as-on-certificate guidance, centre picker, working-email warning</td><td>Name mismatches in school records</td></tr>
+          <tr><td><b>02</b> Entrance exam</td><td>Second Sunday of the month</td><td>Per-grade syllabus and duration up front; the creative-writing section flagged at every level</td><td>Arriving unprepared for the writing paper</td></tr>
+          <tr><td><b>03</b> Pathway</td><td>Grade XI declares a direction</td><td>CBSE streams and IB side by side, neither framed as the fallback</td><td>IB read as the premium tier</td></tr>
+          <tr><td><b>04</b> Visit</td><td>Books Wed or Sat, 10:00–11:00 IST</td><td>A real booking form with slots, not a phone number alone</td><td>Boarding decisions made on photographs</td></tr>
+          <tr><td><b>05</b> Confirm</td><td>Certificates, fee schedule</td><td>Explicit statement that registration confers no right to admission</td><td>Assumed acceptance after payment</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:18px"><b>One form, one place.</b> The current site scatters
+      enquiry forms across pages. Here the entire admissions ask lives in one section; everywhere
+      else, <b>Apply</b> is a link to it.</div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section id="components">
+  <div class="wrap">
+    <p class="eyebrow">Components</p>
+    <h2>Twelve components. No carousel.</h2>
+    <div class="scrollx">
+      <table>
+        <thead><tr><th>Component</th><th>Class</th><th>States</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr><td><b>Utility bar</b></td><td><code>.util</code></td><td>—</td><td>Accreditation left, contact and portal right. Accreditations hide below 720px; contact never does.</td></tr>
+          <tr><td><b>Header</b></td><td><code>.header</code></td><td><code>.is-stuck</code></td><td>Sticky and always visible — a school site should never hide its navigation. Gains a shadow after 8px of scroll.</td></tr>
+          <tr><td><b>Drawer</b></td><td><code>.drawer</code></td><td><code>.is-open</code></td><td>Full sitemap below 1000px. Locks body scroll, closes on Escape, on link click, and on resize past the breakpoint.</td></tr>
+          <tr><td><b>Button</b></td><td><code>.btn--primary / --outline / --ghost</code></td><td>rest, hover, focus</td><td>Primary is gold and darkens to maroon. Ghost is used only over photography.</td></tr>
+          <tr><td><b>Eyebrow</b></td><td><code>.eyebrow</code></td><td>—</td><td>Rule plus uppercase label. The system's only label style.</td></tr>
+          <tr><td><b>Fact list</b></td><td><code>.factlist</code></td><td>—</td><td>Label left, value right, hairline between. Values are right-aligned and set in purple.</td></tr>
+          <tr><td><b>Programme card</b></td><td><code>.prog__card</code></td><td>hover</td><td>Photograph, tag, description, metadata footer pinned to the bottom so both cards align regardless of copy length.</td></tr>
+          <tr><td><b>Life card</b></td><td><code>.lifecard</code></td><td>hover, focus-within</td><td>4:5 photograph with a purple gradient. Image scales 1.06 on hover; text never moves.</td></tr>
+          <tr><td><b>Photographic band</b></td><td><code>.band</code></td><td>—</td><td>Full-bleed photograph behind a 105° purple gradient, so text contrast holds wherever the image is light.</td></tr>
+          <tr><td><b>Record figure</b></td><td><code>.record</code></td><td>—</td><td>A figure may never ship without the sentence it opens.</td></tr>
+          <tr><td><b>Pathways chart</b></td><td><code>.chart</code></td><td>hover, focus</td><td>Nodes plotted from real latitude and longitude. Scrolls inside its own frame below 680px rather than shrinking labels.</td></tr>
+          <tr><td><b>Admissions step</b></td><td><code>.step</code></td><td>—</td><td>CSS counter, so steps renumber automatically if one is added. Aside column carries the hard facts.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section id="motion">
+  <div class="wrap">
+    <p class="eyebrow">Motion</p>
+    <h2>Choreography, not decoration.</h2>
+    <p class="intro">GSAP with ScrollTrigger drives the scroll choreography; Lenis drives the scroll
+      itself. Every effect below has a stated job, and the whole layer is built to fail open.</p>
+
+    <div class="scrollx">
+      <table>
+        <thead><tr><th>Moment</th><th>Technique</th><th>Timing</th><th>Job</th></tr></thead>
+        <tbody>
+          <tr><td><b>Opening curtain</b></td><td>Timeline on a fixed purple panel, removed from the DOM when done</td><td>~2.6s, <code>expo.inOut</code> lift</td><td>The emblem and the Devanagari motto arrive before the school does. Sets the register in the first two seconds and hides font loading.</td></tr>
+          <tr><td><b>Smooth scroll</b></td><td>Lenis on the GSAP ticker</td><td>duration 1.05, touch ×1.5</td><td>The single biggest change to how the page feels. Also what makes the scrubbed sections legible.</td></tr>
+          <tr><td><b>Headline reveal</b></td><td>Custom line splitter — words are measured, grouped into rendered lines, each line wrapped in its own mask</td><td>1.15s <code>expo.out</code>, 90ms stagger</td><td>Headings rise line by line instead of fading. Re-splits on resize because the line breaks move.</td></tr>
+          <tr><td><b>Hero photograph</b></td><td>Scrubbed scale and drift</td><td>1.14 → 1.0, scrub .6</td><td>The valley settles as you descend into the page.</td></tr>
+          <tr><td><b>Photograph reveal</b></td><td><code>clip-path</code> opening upward plus a counter-scaled push-in</td><td>1.1s / 1.4s <code>expo.out</code></td><td>Images open rather than fade — the difference between a slideshow and a film.</td></tr>
+          <tr><td><b>Image drift</b></td><td>Scrubbed <code>yPercent</code> −4 → 4</td><td>scrub .8</td><td>Parallax inside every frame, so photographs are never static plates.</td></tr>
+          <tr><td><b>A Day at CIRS</b></td><td><b>Pinned horizontal scrub</b> via <code>gsap.matchMedia</code></td><td>scrub .8, <code>anticipatePin</code></td><td>The centrepiece. Vertical scroll walks the day left to right, 05:30 to 21:00, with a gold rail filling and a clock reading the current hour. A schedule told as a schedule.</td></tr>
+          <tr><td><b>Record figures</b></td><td>Mask reveal, <code>yPercent</code> 105 → 0</td><td>1.05s <code>expo.out</code></td><td>Numbers rise out of the rule above them. No counting animation.</td></tr>
+          <tr><td><b>Ground shift</b></td><td><code>data-ground</code> + tween on <code>body</code> background</td><td>0.6s</td><td>The page ground moves between paper and purple as inverted sections arrive, so the transitions feel authored rather than abrupt.</td></tr>
+          <tr><td><b>Arc draw</b></td><td><code>stroke-dashoffset</code>, nodes fade behind</td><td>1.2s, 75ms stagger</td><td>Thirteen destinations leaving one origin. Reads as departure.</td></tr>
+          <tr><td><b>Magnetic CTA</b></td><td>Pointer-tracked translate, elastic release</td><td>.5s out, <code>elastic.out</code> back</td><td>Two elements only, hover-capable pointers only.</td></tr>
+          <tr><td><b>Scroll progress</b></td><td>Scrubbed <code>scaleX</code> hairline</td><td>scrub .3</td><td>Position on a long page.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Also in the layer</h3>
+    <div class="scrollx">
+      <table>
+        <thead><tr><th>Moment</th><th>Technique</th><th>Job</th></tr></thead>
+        <tbody>
+          <tr><td><b>Cursor ring</b></td><td><code>gsap.quickTo</code>, difference blend</td><td>Trails the native cursor (which is kept) and swells over anything interactive. Fine pointers only.</td></tr>
+          <tr><td><b>Credentials ticker</b></td><td>Looped translate with a modifier, direction tied to scroll</td><td>Accreditations move under the motto. Reverses when you scroll up, which is what makes it read as reactive rather than decorative.</td></tr>
+          <tr><td><b>Velocity skew</b></td><td><code>getVelocity()</code> clamped to ±3°</td><td>Editorial blocks lean while the page is moving fast. Enough to feel, not enough to notice.</td></tr>
+          <tr><td><b>Motto drift</b></td><td>Scrubbed <code>yPercent</code> on the Devanagari</td><td>The motto rises through its band at a different rate to the page.</td></tr>
+          <tr><td><b>Footer reveal</b></td><td><code>position: sticky</code> footer, content scrolls over it</td><td>The footer is uncovered rather than scrolled to. Needs <code>overflow-x: clip</code> on the body — <code>hidden</code> would kill the sticky.</td></tr>
+          <tr><td><b>Active nav</b></td><td>One ScrollTrigger per section</td><td>The primary nav underlines the section you are in.</td></tr>
+          <tr><td><b>Facilities</b></td><td>Rule draws left to right on hover</td><td>Makes the campus grid feel like a set of doors rather than a list.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Four rules that keep it safe</h3>
+    <ul class="check">
+      <li><b>Nothing is hidden in CSS.</b> GSAP's <code>from()</code> sets the start state itself, so if the libraries are blocked the page simply renders complete.</li>
+      <li><b>A safety sweep runs on scroll,</b> and it uses <code>gsap.set()</code>, not <code>gsap.to()</code>. The case it guards against is precisely the one where the ticker is not running, and a tween would never advance. It covers opacity-hidden elements and transform-hidden ones (masked lines and figures) alike.</li>
+      <li><b>The opening curtain has a hard 4.2-second ceiling</b> on a <code>setTimeout</code>, which still fires in a background tab. A hidden tab suspends <code>requestAnimationFrame</code>, so a GSAP <code>onComplete</code> would never run — without the ceiling, a visitor who opened the page in a background tab could return to a full-screen panel with scroll locked. The intro is skipped outright if the document is hidden at load.</li>
+      <li><b>Sticky states read from three signals.</b> <b>Lenis suppresses the native scroll event</b>, so a plain <code>window.addEventListener("scroll", …)</code> never fires while it is running — this silently broke the header shadow and the back-to-top button. They now listen via ScrollTrigger, an IntersectionObserver sentinel, and the native event, and act on whichever reports first.</li>
+      <li><b><code>prefers-reduced-motion</code></b> skips Lenis, the curtain, the cursor ring, the ticker, the pin and every reveal. The horizontal day becomes a native swipe track, which is also what it becomes below 900px.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="mobile">
+  <div class="wrap">
+    <p class="eyebrow">Mobile</p>
+    <h2>Most enquiries arrive on a phone.</h2>
+    <div class="phones">
+      <div class="ph"><div class="scr">
+        <div class="b" style="border:0;justify-items:start">Emblem &nbsp; ☰</div>
+        <div class="b s" style="align-content:end;text-align:left;font-size:.62rem;line-height:1.25">An education shaped by the hills it stands in.</div>
+        <div class="b a">Admissions 2027–28</div></div>
+        <p class="cap">Hero — photograph held, H1 at 35px</p></div>
+      <div class="ph"><div class="scr" style="background:#fff;color:#4E4350">
+        <div class="b" style="border-color:#DCD2D8">About the school</div>
+        <div class="b s" style="background:#F1EAEF;border-color:#DCD2D8;text-align:left;font-size:.58rem">Quotation, then the fact list stacks beneath rather than beside</div>
+        <div class="b" style="border-color:#DCD2D8">Read the history</div></div>
+        <p class="cap">About — two columns become one</p></div>
+      <div class="ph"><div class="scr" style="background:#260B38">
+        <div class="b">School life</div>
+        <div class="b s">Cards go 2-up, then 1-up below 440px</div>
+        <div class="b">Full-width tap targets</div></div>
+        <p class="cap">Life — grid reflows, images stay 4:5</p></div>
+      <div class="ph"><div class="scr" style="background:#fff;color:#4E4350">
+        <div class="b" style="border-color:#DCD2D8">University pathways</div>
+        <div class="b s" style="background:#F1EAEF;border-color:#DCD2D8">Chart scrolls sideways, min-width 680px, labels stay legible</div>
+        <div class="b a">Sample data note</div></div>
+        <p class="cap">Chart scrolls, it does not shrink</p></div>
+    </div>
+
+    <h3 class="sub">What changes</h3>
+    <ul class="check">
+      <li><b>Navigation becomes a full-sitemap drawer</b> below 1000px, showing every section at once rather than a nested accordion.</li>
+      <li><b>The utility bar keeps contact details</b> and drops the accreditation line below 720px — a parent on a phone wants the phone number.</li>
+      <li><b>Hero type caps at 35px</b> and the photograph shifts its focal point to keep the buildings in frame.</li>
+      <li><b>The chart keeps a 680px minimum drawing width</b> inside its own horizontal scroll frame.</li>
+      <li><b>Tap targets</b> are a minimum of 44×44px; hero buttons go full-width below 440px.</li>
+      <li><b>Images are lazily loaded</b> below the fold and every one declares intrinsic width and height, so there is no layout shift.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 08 -->
+<section id="build">
+  <div class="wrap">
+    <p class="eyebrow">Build plan</p>
+    <h2>From prototype to a site the office can update.</h2>
+    <p class="intro">The constraint that matters is not the design — it is that the school office
+      must be able to publish an event, a date or a result without a developer.</p>
+
+    <div class="scrollx">
+      <table>
+        <thead><tr><th>Layer</th><th>Choice</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Framework</td><td><b>Astro</b></td><td>Ships zero JavaScript for most of the site; only the chart needs hydrating. Content-site ergonomics without a single-page app.</td></tr>
+          <tr><td>Content</td><td><b>Sanity</b> or <b>Payload</b></td><td>Day rows, life cards, facilities, admission steps and dates become structured entries the office edits directly.</td></tr>
+          <tr><td>Media</td><td><b>Cloudinary</b> or <b>imgix</b></td><td>AVIF and WebP with responsive <code>srcset</code>. Essential once real high-resolution photography arrives.</td></tr>
+          <tr><td>Forms</td><td>Existing <b>easycollege.in</b></td><td>Do not rebuild the payment path. The site owns the journey and the visit booking, and hands off at step 01.</td></tr>
+          <tr><td>Hosting</td><td><b>Netlify</b> or <b>Cloudflare Pages</b></td><td>Static output on a global edge with a nearby POP for India-facing traffic.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Phasing</h3>
+    <div class="scrollx">
+      <table>
+        <thead><tr><th>Phase</th><th>Weeks</th><th>Deliverable</th><th>Gate</th></tr></thead>
+        <tbody>
+          <tr><td><b>0</b> Foundations</td><td>1–2</td><td>Tokens, type scale, component skeletons, accessibility baseline</td><td>Contrast audit clean; vector emblem received</td></tr>
+          <tr><td><b>1</b> Homepage</td><td>3–6</td><td>All nine sections against a real photography shoot</td><td>Lighthouse ≥90 on 4G mobile</td></tr>
+          <tr><td><b>2</b> Section landings</td><td>7–10</td><td>About, Academics, School Life, Campus, Admissions</td><td>No components invented outside the library</td></tr>
+          <tr><td><b>3</b> Migration</td><td>9–12</td><td>Every existing page re-shelved, redirects from all current URLs</td><td>Zero 404s from existing inbound links</td></tr>
+          <tr><td><b>4</b> CMS handover</td><td>11–13</td><td>Editor training and a publishing runbook</td><td>Office publishes an event unaided</td></tr>
+          <tr><td><b>5</b> Launch</td><td>14</td><td>Analytics on the four flows, search console, uptime monitoring</td><td>Registration and visit funnels tracked end to end</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Performance budget</h3>
+    <ul class="check">
+      <li><b>LCP under 2.5s on 4G.</b> The hero headline is the LCP element and is server-rendered text, never an image.</li>
+      <li><b>Under 40KB of JavaScript.</b> The current interaction layer is about 6KB unminified, with no framework and no animation library.</li>
+      <li><b>Two font families, five cuts</b>, self-hosted and subset to Latin plus the diacritics used in the motto.</li>
+      <li><b>Zero layout shift</b> — every image declares width and height.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 09 -->
+<section id="assets">
+  <div class="wrap">
+    <p class="eyebrow">Assets</p>
+    <h2>What the school still has to supply.</h2>
+    <p class="intro">The prototype uses only genuine CIRS material. Where something is missing, it
+      is named here rather than faked.</p>
+
+    <ul class="check">
+      <li><b>Verification of the Devanagari motto.</b> The band reads
+        &#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330;
+        &#2325;&#2380;&#2358;&#2354;&#2350;&#2381; — reconstructed from the romanised form on the
+        current site, since no Devanagari original was published. <b>This must be checked by the
+        school before launch;</b> it is the most prominent single element on the page.</li>
+            <li><b>The emblem as vector.</b> The build uses the real logo from cirschool.org with the white knocked out, but the source is 103×100px — enough for a 52px header lockup, not for print or retina.</li>
+      <li><b>A photography shoot.</b> Every photograph is the school's own, re-cropped to remove
+        the caption text baked into the originals and put through one colour grade — an S-curve
+        with shadows pulled toward the purple and highlights toward cream — so that images shot over
+        fifteen years on different cameras read as one commission. The highest-resolution source
+        available publicly is 1400px wide after cropping; a modern site needs 2400px+ originals.
+        The gallery images are all multi-photo collages with captions burnt in, so nothing usable
+        as a standalone portrait could be cut from them.</li>
+      <li><b>Board results and university placements,</b> signed off by the examinations office. The Academic Record section deliberately ships without percentages rather than with estimates.</li>
+      <li><b>The verified alumni destination register.</b> The pathways chart plots thirteen sample cities from real coordinates; production should read from the register.</li>
+      <li><b>Student and alumni interviews,</b> with consent, if a testimonial section is wanted. None is invented in this build.</li>
+      <li><b>Current fee structure and important dates</b> for the open admission year.</li>
+      <li><b>Chinmaya Mission brand confirmation</b> that this treatment of the emblem and motto is acceptable to the Central Chinmaya Mission Trust.</li>
+    </ul>
+
+    <div class="note" style="margin-top:22px">
+      <b>Facts verified and used in the build.</b> Founded 6 June 1996 by Swami Chinmayananda,
+      opening with 96 students · 100-acre campus in the Siruvani foothills, roughly 80 acres left to
+      native flora and fauna · 580+ students from 24 Indian states and 20 countries · affiliated to
+      CBSE, New Delhi, Grades V–XII · the 7th Indian school authorised by the International
+      Baccalaureate, Diploma in Grades XI–XII · English medium throughout · motto
+      Jñānam Sevā ca Kauśalam · Green School Award, Centre for Science and Environment ·
+      registration ₹5,000, online only · entrance examination on the second Sunday of each month ·
+      campus visits Wednesdays and Saturdays, 10:00–11:00 IST, by appointment ·
+      +91 422 261 3300 / 261 3303 · admissions@cirschool.org.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>CIRS design system · v2.0</span>
+    <span>Jñānam Sevā ca Kauśalam</span>
+    <span>Chinmaya International Residential School</span>
+  </div>
+</footer>

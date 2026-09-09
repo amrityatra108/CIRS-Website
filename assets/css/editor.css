@@ -1,0 +1,48 @@
+/* ============================================================
+   CIRS Content Editor — overlay styles.
+   Scoped entirely under html.cirs-editor-active so stripping that
+   one class on export removes every visual trace of the editor.
+   ============================================================ */
+html.cirs-editor-active [data-editable]{ transition:outline-color .15s, background-color .15s; }
+
+html.cirs-editor-active [data-editable="text"]{
+  outline:1.5px dashed transparent; outline-offset:3px; border-radius:3px; cursor:text;
+}
+html.cirs-editor-active [data-editable="text"]:hover{
+  outline-color:#C9A227; background:rgba(201,162,39,.10);
+}
+html.cirs-editor-active [data-editable="text"]:focus{
+  outline:1.5px solid #4C1868; outline-offset:3px; background:rgba(76,24,104,.08);
+}
+
+html.cirs-editor-active [data-editable="image"]{ position:relative; cursor:pointer; }
+html.cirs-editor-active [data-editable="image"]::after{
+  content:"Click to replace"; position:absolute; inset:0; z-index:5;
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:10px;
+  background:rgba(21,8,24,.55); color:#fff; font:600 13px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;
+  letter-spacing:.03em; opacity:0; transition:opacity .2s; pointer-events:none;
+}
+html.cirs-editor-active [data-editable="image"]:hover::after{ opacity:1; }
+
+#cirsEditorBar{
+  position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:99999;
+  background:#150818; color:#fff; border-radius:12px; box-shadow:0 12px 44px rgba(0,0,0,.4);
+  padding:12px 18px; display:flex; align-items:center; gap:14px; max-width:94vw;
+  font:14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;
+}
+#cirsEditorBar strong{ font-weight:700; white-space:nowrap; }
+#cirsEditorBar .cirs-hint{ opacity:.72; font-size:12.5px; max-width:280px; }
+#cirsEditorBar button{
+  font:600 13px system-ui,-apple-system,Segoe UI,sans-serif; padding:9px 16px; border-radius:7px;
+  border:1.5px solid transparent; cursor:pointer; white-space:nowrap;
+}
+#cirsEditorBar .cirs-save{ background:#C9A227; color:#150818; }
+#cirsEditorBar .cirs-save:hover{ background:#E3C15A; }
+#cirsEditorBar .cirs-reset{ background:transparent; color:#fff; border-color:rgba(255,255,255,.4); }
+#cirsEditorBar .cirs-reset:hover{ border-color:#fff; }
+#cirsEditorBar .cirs-dirty{ width:9px; height:9px; border-radius:50%; background:#E3C15A; flex:none; }
+#cirsEditorBar .cirs-dirty.is-clean{ background:#3F8F52; }
+@media (max-width:760px){
+  #cirsEditorBar{ flex-wrap:wrap; justify-content:center; text-align:center; bottom:10px; }
+  #cirsEditorBar .cirs-hint{ max-width:100%; }
+}
