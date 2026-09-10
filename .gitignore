@@ -1,0 +1,18 @@
+# CI installs html-validate here; it is never committed.
+node_modules/
+package-lock.json
+
+# The content editor is parked: built on demand with
+# 'tools/build-bundles.py --editor', never committed. See HOSTING.md.
+cirs-editor.html
+
+# OS and editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+
+# Staged deploy output, built by tools/stage-deploy.py
+_site/
+
+# Netlify CLI local link state
+.netlify/
