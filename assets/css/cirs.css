@@ -144,7 +144,14 @@ strong,b{ font-weight:600; }
   color:var(--maroon);
   line-height:1;
 }
-.on-purple .sc{ color:var(--gold-lit); }
+/* Maroon small caps sit at 1.8:1 on the dark grounds — unreadable. Gold is
+   14:1 there. .on-purple is not the only dark section: the film panel, the
+   footer, the closing band and the motto all set a dark background of their
+   own, so every dark context is listed here rather than relying on one class
+   being remembered. On paper, maroon stays (10.3:1) — it is the accent that
+   ties the editorial type together. */
+:is(.on-purple, .filmsec, .footer, .finalcta, .band, .motto)
+  :is(.sc, .feature__tag, .dmoment__i){ color:var(--gold-lit); }
 
 /* Section marker: hairline + small caps */
 .marker{ display:flex; align-items:center; gap:14px; margin-bottom:20px; }
