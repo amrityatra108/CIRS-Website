@@ -11,15 +11,13 @@ assets/js/cirs.js          interaction layer
 assets/img/                the emblem, photography, favicon, social card
 assets/video/               the hero background loop
 dist/cirs-home.html        the entire site in one file (images inlined)
-cirs-editor.html            a point-and-click tool for editing text and photos yourself
 docs/design-system.html    the design specification
 tools/                     scripts that regenerate the above (see below)
 .github/workflows/ci.yml   the checks that run on every push and pull request
 ```
 
-`index.html` and `assets/` are the source of truth. `dist/cirs-home.html` and `cirs-editor.html`
-are built from them and should never be hand-edited — a `tools/build-bundles.py` run overwrites
-both.
+`index.html` and `assets/` are the source of truth. `dist/cirs-home.html` is built from them and
+should never be hand-edited — a `tools/build-bundles.py` run overwrites it.
 
 ## The checks
 
@@ -28,12 +26,12 @@ Every push and pull request runs three things, all of which you can run yourself
 ```sh
 npx html-validate index.html      # structure and accessibility
 python3 tools/check-links.py      # every anchor and asset reference resolves
-python3 tools/build-bundles.py    # then: git diff --quiet -- dist cirs-editor.html
+python3 tools/build-bundles.py    # then: git diff --quiet -- dist/cirs-home.html
 ```
 
-The last one is the important one. `dist/cirs-home.html` and `cirs-editor.html` are generated, and
-nothing else stops someone editing a bundle directly and having the change silently overwritten by
-the next build — so CI rebuilds them and fails if the committed copies differ.
+The last one is the important one. `dist/cirs-home.html` is generated, and nothing else stops
+someone editing it directly and having the change silently overwritten by the next build — so CI
+rebuilds it and fails if the committed copy differs.
 
 The link check never touches the network. It verifies in-page anchors and `assets/` paths against
 what is actually in the repository, and leaves external URLs alone: a check that goes red because
@@ -52,7 +50,7 @@ rather than committing the 10 MB blob as the site:
 
 ```
 python3 tools/sync-from-artifact.py path/to/artifact.html   # -> index.html, assets/*
-python3 tools/build-bundles.py                              # -> dist/, cirs-editor.html
+python3 tools/build-bundles.py                              # -> dist/cirs-home.html
 ```
 
 The sync keeps the curated `<head>` in `tools/head.html` (title, description, canonical URL, social
@@ -98,54 +96,27 @@ local server matches how it will behave once hosted.
 `dist/cirs-home.html` is the complete site in a single file with every image embedded. Email it,
 put it in Drive, or open it straight from disk — no server or `assets` folder required.
 
-## Editing text and photos yourself — `cirs-editor.html`
+## The content editor — parked
 
-Double-click `cirs-editor.html` to open it in any browser. No install, no login, no internet
-connection required — it is the whole site in one file, in a version built specifically for
-editing:
+There was a `cirs-editor.html`: the whole site in one file, wrapped in a point-and-click editor —
+click any headline or paragraph and type, click any photo to replace it, then download a complete
+updated site. It worked, and it is not gone. It is simply not built or committed at the moment,
+because it was 11 MB of base64 rewritten into the repository on every content change and nobody is
+using it yet.
 
-- **Click any headline, paragraph, or label** (it highlights gold on hover) and type — it behaves
-  like a text box.
-- **Click any photo, or the hero video**, and a file picker opens to replace it. If the same photo
-  appears more than once (the emblem in the header and footer, for instance), every copy of it
-  updates together.
-- When you're done, click **Download Updated Site** at the bottom of the page. It saves a new file
-  named `cirs-website-updated.html` to your Downloads folder — a complete, working copy of the site
-  with your changes baked in, images and all.
-- **Reload (discard changes)** throws away anything you typed since the last download and starts
-  over from the original.
+To bring it back for a session:
 
-What to do with `cirs-website-updated.html` next:
-- **Fastest:** it already works as a website on its own — rename it `index.html` and host it exactly
-  as described above (Netlify drag-and-drop is easiest). The only downside is every photo is
-  embedded in that one file rather than loaded separately, so the page is a little heavier than the
-  optimised `index.html` + `assets/` version.
-- **Best quality:** send `cirs-website-updated.html` back for the changes to be split back out into
-  the faster `index.html` + `assets/` structure.
+```sh
+python3 tools/build-bundles.py --editor    # writes cirs-editor.html
+```
 
-A few things this tool deliberately does not do: it won't let you add or remove whole sections,
-reorder anything, or edit the scroll animation. It only touches the words and pictures already on
-the page. It also runs the page without the scroll animation and motion effects (nothing to trip
-over while you're clicking around) — those come back automatically in the real site and in the
-exported file the moment it's opened as `index.html` in a normal browser.
+Then double-click the file — no install, no login, no internet connection needed. Its sources,
+`assets/css/editor.css` and `assets/js/editor.js`, are still in the repository and still maintained
+alongside the markup, so the rebuild is current rather than a fossil.
 
-## Before pointing the school's real domain at it
-
-Two lines need the live address, because relative paths do not work for search engines or social
-previews:
-
-1. In `index.html`, set `<link rel="canonical" href="…">` to the live URL.
-2. In `index.html`, make `og:image` and `twitter:image` absolute —
-   `https://yourdomain.com/assets/img/og.jpg` rather than `assets/img/og.jpg`.
-
-## Notes
-
-- Three fonts load from Google Fonts, and GSAP and Lenis load from a CDN. All are cached and
-  free. If the school needs everything self-hosted for a policy reason, those five files can be
-  downloaded into `assets/` and the `<script>` and `<link>` tags repointed.
-- The page works with JavaScript disabled — it simply renders without the animation.
-- Links marked `#` are pages that do not exist yet in this prototype. They are deliberately inert
-  rather than jumping to the top of the page.
+Do not commit the result. If the editor comes back for good, add it to the bundle-freshness check
+in `.github/workflows/ci.yml` at the same time — a committed bundle nobody checks drifts out of
+step with the site in silence, which is exactly the failure that check exists to prevent.
 
 ## Still outstanding before a public launch
 
