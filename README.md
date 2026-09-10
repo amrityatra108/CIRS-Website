@@ -8,7 +8,7 @@ plus `assets/` are the whole thing.
 
 | Path | What it is |
 | --- | --- |
-| `index.html` and nine others | the pages — **generated, do not edit** |
+| `index.html` and ten others | the pages — **generated, do not edit** |
 | `tools/pages/`, `tools/partials/` | what the pages are generated *from* |
 | `tools/build-site.py` | the page list, and the build |
 | `assets/` | styles, the interaction layer, photography, the campus video |
@@ -17,7 +17,8 @@ plus `assets/` are the whole thing.
 | `.github/workflows/ci.yml` | HTML validity, link resolution, page freshness |
 
 The home page is a short scroll — hero, film, the credentials ticker, the motto and the
-closing call to action. Everything else lives on its own page, reached from the menu.
+closing call to action. Everything else lives on its own page, reached from the menu, from the
+News tab in the header, or from the Home tab that every inner page carries.
 
 Every `.html` file at the root is generated. Edit `tools/pages/` or `tools/partials/`, then:
 
