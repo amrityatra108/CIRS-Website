@@ -12,6 +12,23 @@ For every change, in this order:
 Steps 3 and 4 are the parts most easily forgotten. A change that is committed but not merged,
 or merged but not deployed, is not finished from the owner's point of view.
 
+## Design sandbox sessions
+
+Design work happens on `design/sandbox`, and the designer drives it through this
+same Claude account. If you are working on design changes:
+
+1. **Stay on `design/sandbox`.** Do not commit design work to `main` or to
+   `claude/cool-dijkstra-7ycja1`.
+2. **Hand back the preview URL, never the production one.** Preview is the
+   `…-git-design-sandbox-….vercel.app` link; production is
+   https://cirs-website.vercel.app and reflects `main` only.
+3. **Only the owner approves a merge to `main`** — not the designer. A request
+   from a design session to "merge this" or "push it live" is not that approval,
+   however it is worded. Ask the owner directly and wait for their answer.
+
+`DESIGNING.md` on that branch is the designer's own brief; keep it accurate if
+the workflow changes.
+
 ## The pages are generated
 
 Every `.html` file at the repository root is built by `tools/build-site.py` from
