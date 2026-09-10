@@ -158,6 +158,29 @@ disallow crawling, because the pages still carry bracketed placeholders and an u
 note that should not be indexed under the school's name. `tools/stage-deploy.py` writes them;
 delete that step for the real launch.
 
+## Deploying to Vercel
+
+`vercel.json` mirrors `netlify.toml`: the same build command, the same `_site` output
+directory, and the same `X-Robots-Tag: noindex` while this is a review preview. Vercel does
+not read `netlify.toml`, and Netlify does not read `vercel.json`, so both files exist and
+have to be changed together — **if you change the build in one, change it in the other**.
+
+`cleanUrls` is on, which gives Vercel the extensionless paths Netlify already serves
+(`/admissions` rather than `/admissions.html`). The pages link to each other by filename,
+which both hosts resolve.
+
+Two things to know before deploying there:
+
+- **The build runs Python.** Netlify's image has `python3` and runs this build today.
+  Vercel's is a different image and this has not yet been run on it. If the build fails on a
+  missing interpreter, either commit `_site/` (drop it from `.gitignore`) and set
+  `"buildCommand": null`, or add a `package.json` so Vercel picks a runtime that includes it.
+- **`_headers` is Netlify's file** and is copied into `_site` by the staging script. On
+  Vercel it is inert — harmless, but it is `vercel.json` doing the work there, not that file.
+
+`.mcp.json` registers Vercel's MCP server at `https://mcp.vercel.com`. It needs an OAuth
+sign-in that cannot be done from a session — run `/mcp` in Claude Code and authenticate.
+
 ## Put it online
 
 **Netlify** (fastest, free)
