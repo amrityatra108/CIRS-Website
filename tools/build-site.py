@@ -226,9 +226,11 @@ def banner_html(page):
 </section>'''
 
 
-HOME_TAB = '''<a class="header__home" href="index.html">
-        <svg width="15" height="14" viewBox="0 0 15 14" fill="none" aria-hidden="true"><path d="M1.6 6.2 7.5 1l5.9 5.2M3.2 7.6V13h8.6V7.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Home</span>
+HOME_TAB = '''<a class="htab" href="index.html">
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="htab__label">Home</span>
       </a>'''
 
 
