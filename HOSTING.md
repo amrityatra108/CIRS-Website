@@ -13,7 +13,28 @@ assets/video/               the hero background loop
 dist/cirs-home.html        the entire site in one file (images inlined)
 cirs-editor.html            a point-and-click tool for editing text and photos yourself
 docs/design-system.html    the design specification
+tools/                     scripts that regenerate the above (see below)
 ```
+
+`index.html` and `assets/` are the source of truth. `dist/cirs-home.html` and `cirs-editor.html`
+are built from them and should never be hand-edited — a `tools/build-bundles.py` run overwrites
+both.
+
+## Regenerating from a Claude artifact
+
+The design lives as a Claude artifact: one self-contained HTML file with every photograph and the
+campus video embedded as base64. When a new version of it comes back, split it into hostable files
+rather than committing the 10 MB blob as the site:
+
+```
+python3 tools/sync-from-artifact.py path/to/artifact.html   # -> index.html, assets/*
+python3 tools/build-bundles.py                              # -> dist/, cirs-editor.html
+```
+
+The sync keeps the curated `<head>` in `tools/head.html` (title, description, canonical URL, social
+card) rather than the artifact's bare `<title>`, and names each embedded photograph from
+`tools/media.tsv`, keyed by the md5 of its bytes. A photograph the table doesn't know about stops
+the sync with the digest to add — so nothing ever lands in `assets/img/` as `image-7.jpg`.
 
 ## Put it online
 
@@ -113,6 +134,12 @@ previews:
   available source is about 1400 px wide.
 - **The Principal's photograph and welcome message are live** — Rajeshwari Satish, cropped from a
   supplied photo to `assets/img/principal.jpg`.
+- **Board of Directors introductions** for the Our People section. All eight roles are named and
+  correct; every biography is a bracketed `[A short introduction to … to be supplied by the
+  school.]` placeholder. Five of the eight also need a photograph — Swami Swaroopananda, Shri. Viju
+  Mahtaney, Shri Jadgish Moorjani, Shri. Siddharth Balachandran and Shri. Ram Buxani currently
+  render as a labelled placeholder tile.
+- **A caption for the staff and faculty photograph** — occasion, date and names.
 - **The Why CIRS photo is live** — `assets/img/why-cirs.jpg`, cropped from a supplied photo of three
   students to a 4:5 portrait, faces centred.
 - **Photography for five sections that currently render as a labelled placeholder tile** instead of
