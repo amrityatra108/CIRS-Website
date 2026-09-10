@@ -13,3 +13,6 @@ Thumbs.db
 
 # Staged deploy output, built by tools/stage-deploy.py
 _site/
+
+# Netlify CLI local link state
+.netlify/
