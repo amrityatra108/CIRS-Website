@@ -257,3 +257,258 @@ body.is-locked .header__news{ border-color:var(--rule); color:var(--ink); font-w
   color:var(--gold-lit);
 }
 .diary__what{ color:var(--on-purple-soft); }
+
+/* ------------------------------------------------------------
+   Page hero — a banner in the home page's register
+   ------------------------------------------------------------
+   Most inner pages open with the flat .pagehead band. A page that
+   has to sell something rather than inform gets this instead: the
+   home hero's ingredients at two-thirds the height — full-bleed
+   media, a scrim, the masked CIRS monogram, the small-caps eyebrow
+   on a hairline, and the headline in EB Garamond with the second
+   clause in gold italic.
+   ------------------------------------------------------------ */
+.pagehero{
+  position:relative;
+  min-height:min(68svh,620px);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  background:var(--purple-ink);
+  overflow:hidden;
+}
+.pagehero__media{ position:absolute; inset:0; z-index:0; }
+.pagehero__media img{ width:100%; height:100%; object-fit:cover; }
+
+/* Where the finished artwork is not in yet, the media slot carries a
+   labelled placeholder rather than a stand-in photograph that someone
+   might mistake for the real thing. */
+.pagehero__ph{
+  position:absolute; inset:0; display:grid;
+  /* Top right, clear of the fixed header — the headline owns the lower
+     left, and a placeholder should not compete with it. */
+  place-items:start end;
+  padding:calc(76px + clamp(18px,3vh,34px)) clamp(20px,4vw,64px) 0;
+  background:
+    radial-gradient(120% 130% at 50% 0%, #2B2037 0%, var(--purple-ink) 70%);
+}
+.pagehero__ph span{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.16em; font-size:1rem; line-height:1.7;
+  color:var(--on-purple-mute); text-align:center;
+  border:1px dashed var(--rule-purple);
+  padding:var(--space-5) var(--space-6);
+  max-width:min(90%,460px);
+}
+
+.pagehero__mono{
+  position:absolute; inset:0; z-index:1;
+  background:rgba(255,255,255,.10);
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 460'%3E%3Ctext x='700' y='372' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='400' text-anchor='middle' textLength='1360' lengthAdjust='spacingAndGlyphs' fill='black'%3ECIRS%3C/text%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 460'%3E%3Ctext x='700' y='372' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='400' text-anchor='middle' textLength='1360' lengthAdjust='spacingAndGlyphs' fill='black'%3ECIRS%3C/text%3E%3C/svg%3E");
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-position:center 38%; mask-position:center 38%;
+  -webkit-mask-size:min(92vw,1300px) auto; mask-size:min(92vw,1300px) auto;
+}
+@supports not ((-webkit-mask-image:none) or (mask-image:none)){ .pagehero__mono{ display:none; } }
+
+.pagehero__scrim{
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:linear-gradient(to top, rgba(14,11,18,.95) 0%, rgba(14,11,18,.34) 46%, rgba(14,11,18,.62) 100%);
+}
+.pagehero__inner{
+  position:relative; z-index:3;
+  padding-block:0 clamp(var(--space-7),6vw,var(--space-9));
+  max-width:min(1000px,92vw);
+}
+.pagehero .marker{ margin-bottom:var(--space-4); }
+.pagehero .marker::after{ background:rgba(255,255,255,.28); max-width:120px; }
+.pagehero h1{
+  font-size:clamp(2.6rem,6.4vw,5.4rem);
+  line-height:1.0; letter-spacing:-.02em; color:#fff;
+}
+.pagehero h1 em{ color:var(--gold-lit); }
+.pagehero .lead{ color:rgba(255,255,255,.82); margin-top:var(--space-4); }
+.pagehero__cta{ display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-6); }
+
+/* ------------------------------------------------------------
+   On this page — a transparent index that opens from the right
+   ------------------------------------------------------------
+   A long page of procedure needs a way to reach the middle of it.
+   This sits against the right edge, out of the way of the reading
+   column, and opens into a translucent panel over whatever is
+   behind it. It is a <button> and a real list, so it works from
+   the keyboard and reads correctly to a screen reader.
+   ------------------------------------------------------------ */
+.jump{
+  position:fixed; z-index:95;
+  right:clamp(12px,2vw,26px);
+  top:50%; transform:translateY(-50%);
+  display:flex; flex-direction:column; align-items:flex-end; gap:10px;
+}
+.jump__toggle{
+  display:inline-flex; align-items:center; gap:9px;
+  padding:11px 17px; border-radius:99px;
+  background:rgba(30,22,38,.62);
+  -webkit-backdrop-filter:blur(14px) saturate(1.3);
+          backdrop-filter:blur(14px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.20);
+  color:#fff; font-size:var(--fs-sm); font-weight:600; white-space:nowrap;
+  box-shadow:0 6px 26px rgba(14,11,18,.30);
+  transition:background .25s var(--e), border-color .25s var(--e), color .25s var(--e);
+}
+.jump__toggle:hover,
+.jump__toggle[aria-expanded="true"]{
+  background:var(--gold); border-color:var(--gold); color:var(--purple-ink);
+}
+.jump__toggle svg{ flex:none; }
+.jump__panel{
+  min-width:230px; max-width:min(78vw,300px);
+  padding:var(--space-4) var(--space-4) var(--space-3);
+  border-radius:14px;
+  background:rgba(30,22,38,.62);
+  -webkit-backdrop-filter:blur(18px) saturate(1.3);
+          backdrop-filter:blur(18px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.20);
+  box-shadow:0 14px 44px rgba(14,11,18,.42);
+  opacity:0; visibility:hidden; transform:translateX(10px) scale(.98);
+  transform-origin:top right;
+  transition:opacity .26s var(--e), transform .26s var(--e), visibility .26s;
+}
+.jump.is-open .jump__panel{ opacity:1; visibility:visible; transform:none; }
+.jump__panel p{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.15em; font-size:.95rem; line-height:1;
+  color:var(--gold-lit);
+  padding-bottom:10px; margin-bottom:6px;
+  border-bottom:1px solid rgba(255,255,255,.18);
+}
+.jump__panel a{
+  display:block; padding:8px 0;
+  font-size:var(--fs-sm); color:rgba(255,255,255,.84);
+  transition:color .2s var(--e), padding-left .2s var(--e);
+}
+.jump__panel a:hover,
+.jump__panel a:focus-visible{ color:var(--gold-lit); padding-left:5px; }
+.jump__panel a[aria-current="true"]{ color:var(--gold); font-weight:600; }
+
+/* Out of the way of the back-to-top button on a phone, and never
+   wider than the screen. */
+@media (max-width:620px){
+  .jump{ top:auto; bottom:calc(clamp(16px,2.4vw,32px) + 60px); transform:none; }
+  .jump__toggle span{ display:none; }
+  .jump__toggle{ padding:11px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .jump__panel{ transition-duration:.001ms; }
+}
+
+/* ------------------------------------------------------------
+   Admissions — the pieces that make a procedure page readable
+   ------------------------------------------------------------ */
+
+/* The standing notice: what is open, and the one action to take. */
+.notice{
+  display:grid; gap:var(--space-4) var(--space-6); align-items:center;
+  padding:clamp(22px,3vw,34px) clamp(22px,3.4vw,40px);
+  background:var(--purple); color:var(--on-purple);
+  background-image:radial-gradient(120% 160% at 12% -30%, rgba(255,195,8,.16) 0%, rgba(255,195,8,0) 62%);
+}
+@media (min-width:880px){ .notice{ grid-template-columns:1fr auto; } }
+.notice__label{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.16em; font-size:1rem; color:var(--gold-lit);
+  margin-bottom:8px; line-height:1;
+}
+.notice h2{ font-size:clamp(1.5rem,2.6vw,2.2rem); color:#fff; line-height:1.14; }
+.notice p{ color:var(--on-purple-soft); font-size:var(--fs-sm); margin-top:10px; max-width:60ch; }
+.notice__cta{ display:flex; flex-wrap:wrap; gap:var(--space-3); }
+
+/* The examination tables. Tables are the honest form for a grid of
+   subjects against a grade, so they stay tables — each in its own
+   scroller so a phone never scrolls the page sideways. */
+.tablewrap{ overflow-x:auto; border:1px solid var(--rule); background:var(--white); max-width:100%; }
+/* A grid item defaults to min-width:auto, so it refuses to shrink below its
+   content and the 520px table pushes the whole page sideways instead of
+   scrolling inside .tablewrap. Letting the item shrink hands the overflow
+   back to the scroller, where it belongs. */
+.prog > *{ min-width:0; }
+.tbl{ width:100%; border-collapse:collapse; min-width:520px; }
+.tbl caption{
+  text-align:left; padding:var(--space-4) var(--space-5) 0;
+  font-family:var(--serif); font-style:italic; color:var(--ink-mute);
+  font-size:var(--fs-sm);
+}
+.tbl th, .tbl td{
+  text-align:left; padding:14px var(--space-5);
+  border-bottom:1px solid var(--rule-soft);
+  font-size:var(--fs-sm); vertical-align:top;
+}
+.tbl thead th{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.12em; font-size:1rem; font-weight:400;
+  color:var(--purple); border-bottom:2px solid var(--purple);
+}
+.tbl tbody th{ color:var(--purple); font-weight:600; white-space:nowrap; }
+.tbl td{ color:var(--ink-soft); }
+.tbl tbody tr:last-child th, .tbl tbody tr:last-child td{ border-bottom:0; }
+
+/* Testimonials. Portraits are placeholders until the school supplies
+   them, and the quotes are marked as placeholders too — a made-up
+   endorsement on a school's admissions page is not a placeholder,
+   it is a lie, so these say plainly that they are waiting. */
+.voices{
+  display:grid; gap:var(--space-6) clamp(24px,3vw,44px);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));
+  margin-top:clamp(34px,4vw,54px);
+}
+.voice{
+  display:flex; flex-direction:column;
+  border-top:2px solid var(--purple); padding-top:var(--space-5);
+}
+.voice__mark{
+  font-family:var(--serif); font-size:3rem; line-height:.7;
+  color:var(--gold); margin-bottom:var(--space-3);
+}
+.voice__text{
+  font-family:var(--serif); font-style:italic;
+  font-size:1.12rem; line-height:1.5; color:var(--ink);
+}
+.voice__who{
+  display:flex; align-items:center; gap:var(--space-3);
+  margin-top:auto; padding-top:var(--space-5);
+}
+.voice__face{
+  flex:none; width:46px; height:46px; border-radius:50%;
+  display:grid; place-items:center;
+  background:var(--paper-3); border:1px dashed var(--rule);
+  font-family:var(--serif); font-size:.72rem; letter-spacing:.06em;
+  color:var(--ink-mute); text-align:center; line-height:1;
+}
+.voice__name{ font-weight:600; color:var(--purple); font-size:var(--fs-sm); }
+.voice__role{ font-size:var(--fs-xs); color:var(--ink-mute); }
+
+/* A strip of photo slots, so the page has somewhere obvious for
+   pictures to land. */
+.strip{
+  display:grid; gap:clamp(12px,1.6vw,20px);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
+  margin-top:clamp(30px,3.6vw,48px);
+}
+.strip figure{
+  margin:0; aspect-ratio:4/3; display:grid; place-items:center;
+  background:var(--purple-deep);
+}
+.strip figure:nth-child(3n+2){ aspect-ratio:1/1; }
+.strip span{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.14em; font-size:.92rem; line-height:1.6;
+  color:var(--on-purple-mute); text-align:center;
+  border:1px dashed var(--rule-purple); padding:var(--space-3) var(--space-4);
+  margin:var(--space-4);
+}
