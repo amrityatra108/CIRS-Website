@@ -14,11 +14,15 @@ the whole thing; open `index.html` in a browser to see it.
 | `docs/design-system.html` | the design specification |
 | `tools/` | scripts that rebuild the two bundles, and that import a new Claude artifact |
 | `HOSTING.md` | how to put it online, how to edit it, and what the school still owes |
+| `.github/workflows/ci.yml` | HTML validity, link and asset resolution, bundle freshness |
 
 Both files in the middle of that table are generated. Edit `index.html` and `assets/`, then run:
 
 ```sh
 python3 tools/build-bundles.py
 ```
+
+CI runs `npx html-validate index.html`, `python3 tools/check-links.py`, and a rebuild of the
+bundles that fails if the committed copies have drifted from their sources.
 
 See [HOSTING.md](HOSTING.md) for deployment and for importing a new design artifact.

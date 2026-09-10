@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Validate the site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install html-validate
+        run: npm install --no-save html-validate@11
+
+      # Structural and accessibility validity: nesting, unclosed elements,
+      # duplicate ids, missing alt text, ARIA correctness. Configured in
+      # .htmlvalidate.json, which turns off exactly one rule — no-autoplay,
+      # because the hero background is a muted, looping, decorative video
+      # marked aria-hidden, and that rule guards against media that starts
+      # making noise at a visitor.
+      - name: Validate HTML
+        run: npx html-validate index.html
+
+      # Every in-page anchor and every assets/ path, checked against what is
+      # actually in the repository. Offline by design — see the script.
+      - name: Check links and asset references
+        run: python3 tools/check-links.py
+
+      # dist/cirs-home.html and cirs-editor.html are generated from index.html
+      # and assets/. Nothing else stops someone editing a bundle directly and
+      # having it silently overwritten by the next build, so rebuild them here
+      # and fail if the result differs from what was committed.
+      - name: Check the generated bundles are current
+        run: |
+          python3 tools/build-bundles.py
+          if ! git diff --quiet -- dist/cirs-home.html cirs-editor.html; then
+            echo "::error::The committed bundles do not match what tools/build-bundles.py produces."
+            echo "Run 'python3 tools/build-bundles.py' and commit the result."
+            git diff --stat -- dist/cirs-home.html cirs-editor.html
+            exit 1
+          fi
+          echo "Bundles match their sources."
