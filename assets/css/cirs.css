@@ -15,12 +15,12 @@
 :root{
   color-scheme: light;
 
-  --purple:        #4C1868;
-  --purple-mid:    #391150;
-  --purple-deep:   #260B38;
-  --purple-ink:    #150818;
-  --gold:     #C9A227;
-  --gold-lit: #E3C15A;
+  --purple:        #392A48;
+  --purple-mid:    #2B2037;
+  --purple-deep:   #1E1626;
+  --purple-ink:    #0E0B12;
+  --gold:     #FFC308;
+  --gold-lit: #FFD75C;
   --maroon:  #7A0F1E;
 
   --paper:    #FAF7F8;
@@ -144,7 +144,14 @@ strong,b{ font-weight:600; }
   color:var(--maroon);
   line-height:1;
 }
-.on-purple .sc{ color:var(--gold-lit); }
+/* Maroon small caps sit at 1.8:1 on the dark grounds — unreadable. Gold is
+   14:1 there. .on-purple is not the only dark section: the film panel, the
+   footer, the closing band and the motto all set a dark background of their
+   own, so every dark context is listed here rather than relying on one class
+   being remembered. On paper, maroon stays (10.3:1) — it is the accent that
+   ties the editorial type together. */
+:is(.on-purple, .filmsec, .footer, .finalcta, .band, .motto)
+  :is(.sc, .feature__tag, .dmoment__i){ color:var(--gold-lit); }
 
 /* Section marker: hairline + small caps */
 .marker{ display:flex; align-items:center; gap:14px; margin-bottom:20px; }
@@ -570,23 +577,91 @@ section[id]{ scroll-margin-top:88px; }
    Leadership quote — a placeholder portrait (initials, not a
    photograph) until the school supplies one.
    ============================================================ */
-.quote{ padding-block:clamp(var(--space-8),7vw,var(--space-10)); background:var(--paper); }
-.quote__inner{
-  display:grid; gap:var(--space-5) var(--space-6); grid-template-columns:auto 1fr;
-  align-items:start; max-width:900px; margin-inline:auto;
+/* ============================================================
+   Official film panel — cinematic full-bleed banner between the
+   hero and the Principal's message; links out to YouTube rather
+   than embedding a player.
+   ============================================================ */
+.filmsec{ position:relative; background:var(--purple-ink); overflow:hidden; }
+.filmsec__media{ position:absolute; inset:0; }
+.filmsec__media img{ width:100%; height:100%; object-fit:cover; opacity:.34; }
+.filmsec__media::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(14,11,18,.74) 0%, rgba(14,11,18,.95) 100%);
 }
-.quote__portrait{
-  width:78px; height:78px; border-radius:50%; flex:none;
-  background:var(--purple); object-fit:cover;
+.filmsec__inner{ position:relative; z-index:2; padding-block:clamp(64px,7.5vw,120px); }
+.filmsec .lead{ color:var(--on-purple-soft); }
+
+.filmwin{
+  display:block; position:relative; margin:clamp(36px,5vw,56px) auto 0; max-width:920px;
+  aspect-ratio:16/9; overflow:hidden; border-radius:6px; border:1px solid var(--rule-purple);
+  background:var(--purple-deep); cursor:pointer;
 }
-.quote__mark{ font-family:var(--serif); font-size:2.4rem; line-height:.6; color:var(--gold); display:block; margin-bottom:var(--space-2); }
+.filmwin__bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.filmwin__scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(14,11,18,.18) 0%, rgba(14,11,18,.72) 100%);
+}
+.filmwin__play{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:76px; height:76px; border-radius:50%; display:grid; place-items:center;
+  background:var(--gold); color:var(--purple-ink);
+  transition:transform .3s var(--e), background .3s var(--e);
+}
+.filmwin:hover .filmwin__play{ transform:translate(-50%,-50%) scale(1.08); background:var(--gold-lit); }
+.filmwin__play svg{ margin-left:3px; }
+.filmwin__label{
+  position:absolute; left:20px; bottom:16px; z-index:2; color:#fff;
+  font-family:var(--sans); font-size:var(--fs-sm); letter-spacing:.01em;
+}
+.filmwin__label b{ font-weight:600; }
+.filmwin__badge{
+  position:absolute; right:18px; top:16px; z-index:2;
+  font-family:var(--serif); font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1; letter-spacing:.09em; font-size:.9rem;
+  color:var(--on-purple-soft); border:1px solid var(--rule-purple);
+  padding:4px 12px; border-radius:99px;
+}
+
+.filmsec__social{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:9px 22px; margin-top:clamp(26px,3.2vw,38px);
+}
+.filmsec__socialtag{ color:var(--gold-lit); margin-right:2px; }
+.filmsec__social a{ color:var(--on-purple-soft); font-family:var(--sans); font-size:var(--fs-sm); }
+.filmsec__social a:hover{ color:var(--gold-lit); }
+
+.quote{ background:var(--paper); }
+.quote__grid{
+  display:grid; grid-template-columns:minmax(280px,38%) 1fr; align-items:stretch;
+}
+.quote__photo{
+  position:relative; overflow:hidden; min-height:460px;
+  background:var(--purple-deep); margin:0;
+}
+.quote__photo img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center 12%;
+}
+.quote__panel{
+  display:flex; align-items:center;
+  padding:clamp(48px,6.4vw,96px) clamp(28px,6vw,84px);
+}
+.quote__inner{ max-width:640px; }
+.quote__rule{ display:block; width:52px; height:2px; background:var(--gold); margin-bottom:var(--space-4); }
+.quote__rule--btm{ margin-top:var(--space-4); margin-bottom:var(--space-3); }
+@media (max-width:799px){
+  .quote__grid{ grid-template-columns:1fr; }
+  .quote__photo{ aspect-ratio:3/4; min-height:0; }
+  .quote__photo img{ object-position:center top; }
+}
 .quote__text{
   font-family:var(--serif); font-style:italic; color:var(--ink);
   font-size:clamp(1.15rem,1.9vw,1.55rem); line-height:1.5;
 }
 .quote__text + .quote__text{ margin-top:.85em; }
 .quote__attr{
-  margin-top:var(--space-4); font-family:var(--serif); font-variant-caps:all-small-caps;
+  font-family:var(--serif); font-variant-caps:all-small-caps;
   font-feature-settings:"c2sc" 1,"smcp" 1; letter-spacing:.1em; font-size:1rem; color:var(--ink-mute);
 }
 .quote__attr b{ color:var(--purple); font-weight:600; }
@@ -612,6 +687,31 @@ section[id]{ scroll-margin-top:88px; }
   color:var(--on-purple-mute); text-align:center; padding:var(--space-4);
   border:1px dashed var(--rule-purple);
 }
+/* ============================================================
+   Our People — board of directors grid, reusing the .feature__media
+   photo/placeholder pattern at 4:5, plus the full staff photo below.
+   ============================================================ */
+.peoplegrid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:40px 28px; margin-top:clamp(36px,4vw,56px);
+}
+.peopletile .feature__media{ aspect-ratio:4/5; }
+.peopletile .feature__media img{ object-position:center top; }
+.peopletile__body{ margin-top:16px; }
+.peopletile__role{ color:var(--purple); margin:4px 0 10px; }
+.peopletile__bio{ font-size:var(--fs-sm); color:var(--ink-mute); }
+
+.teamphoto{
+  margin:clamp(48px,5.6vw,72px) 0 0;
+}
+.teamphoto img{
+  display:block; width:100%; height:auto; border-bottom:3px solid var(--gold);
+}
+.teamphoto figcaption{
+  margin-top:14px; font-family:var(--serif); font-style:italic;
+  font-size:var(--fs-sm); color:var(--ink-mute);
+}
+
 .feature__tag{
   font-family:var(--serif); font-style:italic; color:var(--maroon);
   font-size:1.08rem; margin:var(--space-2) 0 var(--space-3);
@@ -653,7 +753,7 @@ section[id]{ scroll-margin-top:88px; }
 .footer li a{ display:block; padding:5px 0; font-size:var(--fs-sm); transition:color .2s var(--e); }
 .footer li a:hover{ color:#fff; }
 .footer__brand{ display:flex; gap:14px; align-items:flex-start; margin-bottom:18px; }
-.footer__brand img{ width:58px; flex:none; background:var(--paper); padding:5px; }
+.footer__brand img{ width:58px; flex:none; }
 .footer__brand span{ font-family:var(--serif); color:#fff; font-size:1.2rem; line-height:1.24; }
 .footer address{ font-style:normal; font-size:var(--fs-sm); line-height:1.95; }
 .footer address a{ color:var(--on-purple-soft); }
@@ -738,7 +838,7 @@ main{ position:relative; z-index:1; background:var(--paper); }
   display:grid; place-content:center; justify-items:center; gap:22px;
   text-align:center; padding:24px;
 }
-.curtain img{ width:72px; background:var(--paper); padding:7px; }
+.curtain img{ width:72px; }
 .curtain__deva{
   font-family:var(--deva); font-size:clamp(1.3rem,3.4vw,2.3rem);
   line-height:1.5; color:#fff;

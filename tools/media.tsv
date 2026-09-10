@@ -1,0 +1,17 @@
+# Media carried by the artifact, keyed by the md5 of the decoded bytes.
+# One row per file: <md5><TAB><path in this repo>.
+# A digest missing from this table stops the sync rather than inventing a filename.
+
+4308dd8be7d0d8db30e1850214924c29	assets/img/logo.png
+2a81be2846f4237f6b1664849e992334	assets/img/hero.jpg
+dead699cd531ca2c3543b9193e2bad43	assets/img/entrance.jpg
+c08b02af9486ce53687e9312169c0692	assets/img/walkway.jpg
+4fe7f5aefed7024749100735e2ee8bc1	assets/img/aerial-duo.jpg
+3f996fa9308b73fe44b4d499483bcd49	assets/img/why-cirs.jpg
+9e8bdb5f96ad9542ede3dcc64c1c9d7d	assets/img/principal.jpg
+896cc67de90fa4897e7d66d10be8a65d	assets/img/swami-anukoolananda.jpg
+e41a6bf6116e8c3b34554f2414dbae78	assets/img/shanti-krishnamurthy.jpg
+a767275a4dbd5aea977311374cfca46b	assets/img/rajeshwari.jpg
+90bed2cea6a12d6bd6caf9cdd4ec253c	assets/img/staff-and-faculty.jpg
+85fbdb5f5a515df69c540740bdb7f89c	assets/video/campus-loop.webm
+ff229622bc386d6687448276c3dbae41	assets/video/campus-loop.mp4

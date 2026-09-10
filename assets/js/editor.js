@@ -15,7 +15,7 @@
 
   var TEXT_SELECTORS = [
     ".hero .marker .sc", ".hero h1",
-    ".quote__portrait", ".quote__text", ".quote__attr",
+    ".quote__text", ".quote__attr",
     ".sec-head .marker .sc", ".sec-head .feature__tag", ".sec-head h2", ".sec-head p.lead",
     ".about .pull", ".about p.copy",
     ".factrail dd",
@@ -26,6 +26,7 @@
     ".dmoment h3", ".dmoment > p:not(.dmoment__i)", ".dmoment__i",
     ".facilities h3", ".facilities p", ".band .btn",
     ".record p", ".record__fig",
+    ".peopletile h3", ".peopletile__role", ".peopletile__bio", ".teamphoto figcaption",
     ".steps .step h3", ".steps .step p", ".step__aside",
     ".adm-cta a", ".adm-cta__contact",
     ".finalcta h2", ".finalcta p.lead", ".finalcta__cta a",
@@ -36,7 +37,8 @@
   // failOpen()), which this editor build deliberately omits, so it is never
   // a live edit target here.
   var IMAGE_SELECTOR = ".feature__media img, .prog__card img, .band__media img, " +
-                        ".finalcta__media img, .brand img, .footer__brand img";
+                        ".finalcta__media img, .quote__photo img, .teamphoto img, " +
+                        ".brand img, .footer__brand img";
 
   var dirty = false, dirtyDot, bar;
 
