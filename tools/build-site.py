@@ -46,6 +46,16 @@ PAGES = {
                        "foothills — CBSE and the International Baccalaureate, Grades V to XII.",
         "banner": None,
     },
+    "news": {
+        "nav": "News",
+        "group": "News",
+        "title": "News",
+        "description": "News and events from Chinmaya International Residential School — "
+                       "assemblies, weeks, competitions and the term's diary.",
+        "banner": ("News", "From <em>the Campus.</em>",
+                   "Reports from the departments and the houses, and the dates already in the "
+                   "school calendar."),
+    },
     "why-cirs": {
         "nav": "Why CIRS",
         "group": "About CIRS",
@@ -141,6 +151,7 @@ SECTION_PAGE = {
     "athletics": "sports", "fields": "sports", "achievements": "sports",
     "arts": "arts",
     "pathways": "alumni",
+    "latest": "news", "diary": "news",
     "admissions": "admissions",
     "top": "index", "main": None,   # main is on every page; top only on home
 }
@@ -191,15 +202,17 @@ def banner_html(page):
     eyebrow, heading, lead = page["banner"]
     return f'''<section class="pagehead on-purple" id="top" data-ground="#1E1626">
   <div class="wrap pagehead__inner">
-    <a class="pagehead__back" href="index.html">
-      <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M13 5H1m0 0 4-4M1 5l4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      Home
-    </a>
     <p class="marker"><span class="sc">{eyebrow}</span></p>
     <h1 class="serif" data-split>{heading}</h1>
     <p class="lead">{lead}</p>
   </div>
 </section>'''
+
+
+HOME_TAB = '''<a class="header__home" href="index.html">
+        <svg width="15" height="14" viewBox="0 0 15 14" fill="none" aria-hidden="true"><path d="M1.6 6.2 7.5 1l5.9 5.2M3.2 7.6V13h8.6V7.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Home</span>
+      </a>'''
 
 
 UC = '''<section class="uc">
@@ -226,7 +239,11 @@ def build(slug, page):
 
     parts = [head, "<body>", read("tools/partials/chrome.html").rstrip("\n")]
     drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
-    parts += [read("tools/partials/header.html").rstrip("\n"), drawer.rstrip("\n")]
+    # The home page needs no Home tab — the wordmark already leads here, and a
+    # Home link on Home is a link to nowhere.
+    header = read("tools/partials/header.html").replace(
+        "{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
+    parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
     if page["banner"]:
         parts.append(banner_html(page))

@@ -38,20 +38,6 @@
 .pagehead h1 em{ color:var(--gold-lit); }
 .pagehead .lead{ margin-top:var(--space-4); }
 
-/* The trail back to the home page, above the title. */
-.pagehead__back{
-  display:inline-flex; align-items:center; gap:9px;
-  margin-bottom:var(--space-4);
-  font-family:var(--serif);
-  font-variant-caps:all-small-caps;
-  font-feature-settings:"c2sc" 1,"smcp" 1;
-  letter-spacing:.14em; font-size:1rem;
-  color:var(--on-purple-mute);
-  transition:color .25s var(--e);
-}
-.pagehead__back:hover{ color:var(--gold-lit); }
-.pagehead__back svg{ flex:none; }
-
 /* ------------------------------------------------------------
    Under construction — the standing note at the foot of every
    page, so a visitor understands that what they are reading is
@@ -122,3 +108,152 @@ body.is-locked .header__enquire{ color:var(--ink); font-weight:600; }
 body.is-locked .header__enquire svg{ color:var(--gold); }
 body.is-locked .menubtn{ color:var(--ink); font-weight:600; }
 body.is-locked .menubtn__dots i{ background:var(--gold); }
+
+/* ------------------------------------------------------------
+   Header tabs — Home and News
+   ------------------------------------------------------------
+   The header is a three-column grid: something on the left, the
+   wordmark centred, something on the right. Each side now holds
+   two things rather than one, so each side gets its own flex row
+   and the grid keeps the wordmark centred regardless.
+   ------------------------------------------------------------ */
+.header__left,
+.header__right{
+  display:flex; align-items:center;
+  gap:clamp(10px,1.6vw,22px);
+  min-width:0;
+}
+.header__left{ justify-self:start; }
+.header__right{ justify-self:end; }
+
+/* Home. Only rendered on the nine inner pages — on the home page
+   itself the wordmark already leads here, and a Home tab on Home
+   is a link to nowhere. */
+.header__home{
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:var(--fs-sm); font-weight:700; color:#fff; white-space:nowrap;
+  transition:color .35s var(--e);
+}
+.header__home svg{ color:var(--gold-lit); flex:none; transition:color .35s var(--e); }
+.header__home:hover{ color:var(--gold-lit); }
+.header.is-stuck .header__home{ color:var(--ink); font-weight:600; }
+.header.is-stuck .header__home svg{ color:var(--gold); }
+.header.is-stuck .header__home:hover{ color:var(--purple); }
+body.is-locked .header__home{ color:var(--ink); font-weight:600; }
+body.is-locked .header__home svg{ color:var(--gold); }
+
+/* News. Given a standing outline so it reads as a tab rather than
+   another word in a row of words — it is the one thing in the
+   header that changes week to week, so it should be findable
+   without reading. */
+.header__news{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:7px 15px; border-radius:99px;
+  border:1px solid rgba(255,255,255,.34);
+  font-size:var(--fs-sm); font-weight:700; color:#fff; white-space:nowrap;
+  transition:background .25s var(--e), border-color .25s var(--e), color .25s var(--e);
+}
+.header__news__dot{
+  width:6px; height:6px; border-radius:50%; background:var(--gold); flex:none;
+}
+.header__news:hover{
+  background:var(--gold); border-color:var(--gold); color:var(--purple-ink);
+}
+.header__news:hover .header__news__dot{ background:var(--purple-ink); }
+.header.is-stuck .header__news{ border-color:var(--rule); color:var(--ink); font-weight:600; }
+.header.is-stuck .header__news:hover{ background:var(--gold); border-color:var(--gold); color:var(--purple-ink); }
+body.is-locked .header__news{ border-color:var(--rule); color:var(--ink); font-weight:600; }
+
+/* On a phone, four controls and the full school name do not fit across
+   one row — the wordmark runs straight through the News tab. The emblem
+   keeps the identity and still links home, and the name is set large in
+   the hero immediately below, so the wordmark text is what gives way. */
+/* Between a phone and a laptop the full wordmark plus four controls runs
+   over: let the centre column shrink and the name wrap instead of pushing
+   through the tabs either side of it. */
+@media (max-width:960px){
+  .header .wrap{ gap:12px; }
+  .brand{ max-width:min(42vw,300px); }
+  .brand__name{ font-size:.92rem; line-height:1.16; }
+  .brand__sub{ display:none; }
+  .header__home span{ display:none; }
+}
+
+/* cirs.css brings the "Enquire" and "Menu" word-labels back at 640px, which
+   was right when the header held two controls. With four it overruns by a
+   few pixels, so hold the labels back until there is room for them. */
+@media (max-width:760px){
+  .header__enquire span{ display:none; }
+  .menubtn__label{ display:none; }
+}
+
+/* On a phone even that does not fit. The emblem keeps the identity and
+   still links home, and the name is set large in the hero immediately
+   below, so the wordmark text is what gives way. */
+@media (max-width:620px){
+  .header .wrap{ gap:10px; }
+  .brand{ max-width:none; }
+  .brand__txt{ display:none; }
+  .header__news{ padding:6px 12px; gap:6px; font-size:.82rem; }
+}
+
+/* ------------------------------------------------------------
+   News
+   ------------------------------------------------------------
+   A lead story set large, then the rest as a grid of entries, then
+   the term's diary. Built from the same rules the rest of the site
+   uses: a 2px purple rule over each entry, oldstyle figures for
+   dates, small caps for labels.
+   ------------------------------------------------------------ */
+.newslead{
+  border-top:2px solid var(--purple);
+  padding-top:var(--space-5);
+}
+.newslead__date,
+.newsitem__date{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  font-variant-numeric:oldstyle-nums;
+  letter-spacing:.14em; font-size:1rem; line-height:1;
+  color:var(--maroon);
+  margin-bottom:var(--space-3);
+}
+.newslead h2{ margin-bottom:var(--space-4); }
+.newslead .copy{ max-width:64ch; }
+
+.newsgrid{
+  display:grid; gap:var(--space-7) clamp(24px,3vw,48px);
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));
+  margin-top:clamp(48px,6vw,84px);
+}
+.newsitem{
+  display:flex; flex-direction:column;
+  border-top:2px solid var(--purple);
+  padding-top:var(--space-5);
+}
+.newsitem h3{ margin-bottom:var(--space-3); color:var(--purple); }
+.newsitem p{ color:var(--ink-soft); font-size:var(--fs-sm); }
+.newsitem__src{
+  margin-top:auto; padding-top:var(--space-4);
+  font-size:var(--fs-xs); color:var(--ink-mute);
+}
+.newsitem__src a{ color:var(--purple); font-weight:500; border-bottom:1px solid var(--rule); }
+.newsitem__src a:hover{ border-bottom-color:var(--gold); }
+
+/* The diary. Dark ground, so the labels come out gold by the rule
+   already defined for .on-purple. */
+.diary{ border-top:1px solid var(--rule-purple); margin-top:clamp(30px,4vw,52px); }
+.diary__row{
+  display:grid; gap:4px var(--space-6); align-items:baseline;
+  padding-block:var(--space-4);
+  border-bottom:1px solid var(--rule-purple);
+}
+@media (min-width:720px){ .diary__row{ grid-template-columns:minmax(0,.34fr) minmax(0,1fr); } }
+.diary__when{
+  font-family:var(--serif);
+  font-size:1.2rem; line-height:1.2;
+  font-variant-numeric:oldstyle-nums;
+  color:var(--gold-lit);
+}
+.diary__what{ color:var(--on-purple-soft); }

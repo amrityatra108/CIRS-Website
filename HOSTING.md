@@ -6,7 +6,8 @@ Everything in this zip is static. No build step, no server-side code, no databas
 
 ```
 index.html                 the home page
-why-cirs.html              the other nine pages, one file each
+news.html                  the other ten pages, one file each
+why-cirs.html
 our-leaders-speak.html
 our-leadership.html
 academics.html
@@ -16,7 +17,7 @@ arts.html
 admissions.html
 alumni.html
 assets/css/cirs.css        the design system, imported from the artifact
-assets/css/pages.css       the two components only a multi-page site needs
+assets/css/pages.css       the components only a multi-page site needs
 assets/js/cirs.js          interaction layer
 assets/img/                the emblem, photography, favicon, social card
 assets/video/              the hero background loop
@@ -172,6 +173,14 @@ step with the site in silence, which is exactly the failure that check exists to
   available source is about 1400 px wide.
 - **The Principal's photograph and welcome message are live** — Rajeshwari Satish, cropped from a
   supplied photo to `assets/img/principal.jpg`.
+- **News, on an ongoing basis.** `tools/pages/news.html` currently carries the six reports and
+  the diary taken from new.cirschool.org. It is a hand-edited page: add an `<article class="newsitem">`
+  to the grid for each new report, or replace the `.newslead` for a big one, then rebuild. Nothing
+  fetches from that site automatically, so this page goes stale unless someone updates it.
+- **The admissions year needs settling.** new.cirschool.org announces admissions open for
+  **2026–27**; this site's Admissions page is headed **2027–28**. One of them is wrong, and until
+  it is resolved the News page deliberately carries no admissions announcement rather than adding
+  a third version of the claim.
 - **Board of Directors introductions** for the Our People section. All eight roles are named and
   correct; every biography is a bracketed `[A short introduction to … to be supplied by the
   school.]` placeholder. Five of the eight also need a photograph — Swami Swaroopananda, Shri. Viju
