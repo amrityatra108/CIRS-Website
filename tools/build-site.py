@@ -130,11 +130,13 @@ PAGES = {
                        "for 2027–2028, the entrance examination, visiting, and fees.",
         # A hero rather than the flat band: this is the page that has to
         # persuade, not merely inform.
-        "hero": ("Admissions 2027–2028", "How to <em>Apply.</em>",
-                 "Registration is open. The entrance examination, a visit to the school, and the "
+        "hero": ("Admissions 2027–2028", "Admissions <em>Open.</em>",
+                 "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
+                 "registration portal, the entrance examination, a visit to the school and the "
                  "offer — the whole procedure, in order."),
         "hero_placeholder": "Header animation &mdash; admissions<br>photograph or looping video<br>to be supplied",
         "jump": True,
+        "popup": True,
     },
     "alumni": {
         "nav": "Alumni",
@@ -160,6 +162,7 @@ SECTION_PAGE = {
     "admissions": "admissions", "apply": "admissions", "examination": "admissions",
     "visit": "admissions", "before": "admissions", "fees": "admissions",
     "voices": "admissions", "gallery": "admissions", "contact": "admissions",
+    "advert": "admissions",
     "top": "index", "main": None,   # main is on every page; top only on home
 }
 
@@ -235,10 +238,14 @@ HOME_TAB = '''<a class="htab" href="index.html">
 
 
 def hero_html(page):
-    """The home page's opening in miniature, for a page that must persuade.
+    """The page's opening, at full height, merging into the scroll below it.
+
+    It carries the call to action and the dates, because the standing notice
+    box that used to hold them is gone: one opening statement rather than a
+    banner and then a box repeating it.
 
     The media slot deliberately carries a labelled placeholder rather than a
-    stand-in photograph: a temporary picture on an admissions banner is the
+    stand-in photograph — a temporary picture on an admissions banner is the
     kind of thing that quietly ships.
     """
     eyebrow, heading, lead = page["hero"]
@@ -253,9 +260,23 @@ def hero_html(page):
     <h1 class="serif" data-split>{heading}</h1>
     <p class="lead">{lead}</p>
     <p class="pagehero__cta">
-      <a class="btn btn--primary btn--lg" href="https://easycollege.in/cirs/school/application/index.aspx">Register online</a>
-      <a class="btn btn--ghost btn--lg" href="#apply">How to apply</a>
+      <a class="btn btn--primary btn--lg" href="#apply">How to apply</a>
+      <a class="btn btn--ghost btn--lg" href="#visit">Book a visit</a>
     </p>
+    <dl class="pagehero__dates">
+      <div>
+        <dt>Classes</dt>
+        <dd>V&ndash;IX and XI<small>CBSE and the IB Diploma</small></dd>
+      </div>
+      <div>
+        <dt>Portal closes</dt>
+        <dd>15 October 2026<small>Register before this date</small></dd>
+      </div>
+      <div>
+        <dt>Entrance examination</dt>
+        <dd>First week of November 2026<small>India, Dubai and other centres</small></dd>
+      </div>
+    </dl>
   </div>
 </section>'''
 
@@ -285,6 +306,37 @@ def jump_html(body):
     <span>On this page</span>
   </button>
 </nav>'''
+
+
+POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
+     aria-labelledby="popTitle" aria-describedby="popNote">
+  <div class="pop__card">
+    <button type="button" class="pop__close" id="popClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <p class="pop__label" id="popTitle">Contact Admissions Office</p>
+    <h2 class="serif">We are here <em>to help.</em></h2>
+    <p class="pop__note" id="popNote">Registrations are open for the academic year 2027&ndash;2028.
+      Write or message us with any question about registration, the entrance examination or a
+      visit to the school.</p>
+
+    <div class="pop__row">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
+      <span>
+        <a href="https://wa.me/919360461572">+91 93604 61572</a>
+        <small>WhatsApp</small>
+      </span>
+    </div>
+
+    <div class="pop__row">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2.6" y="4.6" width="16.8" height="12.8" rx="1.6" stroke="currentColor" stroke-width="1.4"/><path d="m3.4 5.8 7.6 5.6 7.6-5.6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <span>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+        <small>Email</small>
+      </span>
+    </div>
+  </div>
+</div>'''
 
 
 UC = '''<section class="uc">
@@ -325,6 +377,8 @@ def build(slug, page):
     parts.append(content)
     if page.get("jump"):
         parts.append(jump_html(content))
+    if page.get("popup"):
+        parts.append(POPUP)
     if page.get("uc", True):
         parts.append(UC)
     parts.append("</main>")

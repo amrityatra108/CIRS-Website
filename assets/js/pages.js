@@ -100,3 +100,71 @@
 
   targets.forEach(function (el) { io.observe(el); });
 })();
+
+/* ============================================================
+   Admissions contact panel
+   ------------------------------------------------------------
+   Shown as the page opens, because the one thing a family most
+   often wants from an admissions page is a person to ask. Closed
+   once, it stays closed for the rest of the browsing session:
+   arriving is a good moment to offer it, returning from another
+   page is not.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var pop = document.getElementById("admissionsPop");
+  if (!pop) return;
+
+  var closeBtn = document.getElementById("popClose");
+  var KEY = "cirs.admissionsPop.dismissed";
+  var lastFocus = null;
+
+  function dismissed() {
+    try { return sessionStorage.getItem(KEY) === "1"; } catch (e) { return false; }
+  }
+  function remember() {
+    try { sessionStorage.setItem(KEY, "1"); } catch (e) { /* private mode: just don't remember */ }
+  }
+
+  function close() {
+    pop.classList.remove("is-open");
+    document.body.classList.remove("is-locked");
+    remember();
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function open() {
+    lastFocus = document.activeElement;
+    pop.classList.add("is-open");
+    document.body.classList.add("is-locked");
+    if (closeBtn) closeBtn.focus();
+  }
+
+  if (closeBtn) closeBtn.addEventListener("click", close);
+
+  // Clicking the darkened area outside the card closes it too.
+  pop.addEventListener("click", function (e) {
+    if (e.target === pop) close();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && pop.classList.contains("is-open")) close();
+  });
+
+  // Keep the tab ring inside the card while it is open.
+  pop.addEventListener("keydown", function (e) {
+    if (e.key !== "Tab" || !pop.classList.contains("is-open")) return;
+    var focusable = pop.querySelectorAll("button, a[href]");
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  if (!dismissed()) {
+    // A beat after the page settles, so it reads as an offer rather than
+    // an interruption of something still loading.
+    setTimeout(open, 900);
+  }
+})();
