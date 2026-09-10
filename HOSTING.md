@@ -130,71 +130,94 @@ The sync also reapplies one small correction the artifact does not carry: an exp
 That belongs upstream in the artifact eventually. Keep that step tiny — anything larger
 than an attribute should be fixed in the design, not patched on the way out of it.
 
-## Deploying to Netlify
+## Hosting
 
-The site is on Netlify as **preeminent-alfajores-71115e**, at
-<https://preeminent-alfajores-71115e.netlify.app>.
+The site is moving from Netlify to **Vercel**. Until the Vercel deploy is confirmed live,
+both configurations are kept and **must be changed together** — a build command that drifts
+between two hosts is discovered only when one of them breaks.
 
-`netlify.toml` points Netlify at `_site/`, not at the repository root. The root holds the generated
-pages next to the scripts that build them, so publishing it would ship `tools/`, `.github/` and
-`node_modules` alongside the site. `tools/stage-deploy.py` copies just the publishable files —
-the eleven pages, `assets/` minus the parked editor's sources, and the two files that keep a review
-preview out of search results — into `_site/`, which is generated and git-ignored.
+Neither host publishes the repository root. The root holds the eleven generated pages next to
+the scripts that generate them, so publishing it would ship `tools/`, `.github/`,
+`node_modules` and the 150 MB of camera originals in `assets/source/`. Both hosts run:
 
 ```sh
-python3 tools/build-site.py
-python3 tools/stage-deploy.py
+python3 tools/build-site.py     # the eleven pages
+python3 tools/stage-deploy.py   # only what a page references, into _site/
 ```
 
-Netlify runs both as its build command, so a deploy from a clean checkout stages itself.
+and publish `_site/`, which is generated and git-ignored. Before that rule existed, a
+copy-everything stage produced a **153 MB deploy of a 6 MB site**.
 
-**Visitor access.** The team had `requireSSOTeamLogin` set on *all* projects, which is why the
-first shared link returned 401 and bounced to a Netlify login. It is now off for this project, so
-the URL opens for anyone. Turn it back on in Netlify → Site configuration → Access & security when
-the review is over.
+### Vercel — the new home
 
-**`_headers` and `robots.txt` are review-preview files.** They set `X-Robots-Tag: noindex` and
-disallow crawling, because the pages still carry bracketed placeholders and an under-construction
-note that should not be indexed under the school's name. `tools/stage-deploy.py` writes them;
-delete that step for the real launch.
+`vercel.json` carries the build command, `_site` as the output directory, `cleanUrls` (so
+`/admissions` works, as it does on Netlify today) and `X-Robots-Tag: noindex` for as long as
+this is a review preview.
 
-## Put it online
+To deploy it the first time, either:
 
-**Netlify** (fastest, free)
-1. Unzip the folder.
-2. Go to **app.netlify.com/drop** and drag the unzipped folder onto the page.
-3. It is live in about ten seconds on a `*.netlify.app` address.
+- **Vercel dashboard → Add New → Project → import `amrityatra108/CIRS-Website`.** It reads
+  `vercel.json`, so leave the framework preset alone and do not override the build command or
+  output directory. This needs no CLI and no MCP.
+- **Or `npx vercel --prod`** from a checkout, signed in as the owner.
 
-**Cloudflare Pages or Vercel**
-Connect the repository, then set framework preset **None**, build command **empty**,
-output directory **`.`**
+Two things to watch on the first deploy:
 
-**GitHub Pages**
-Push the contents to a repository, then Settings → Pages → deploy from branch → root.
+- **The build runs Python.** Netlify's image has `python3` and runs this build today; Vercel's
+  is a different image and this has not yet run on it. If it fails on a missing interpreter,
+  either commit `_site/` (drop it from `.gitignore`) and set `"buildCommand": null`, or add a
+  `package.json` so Vercel selects a runtime that includes Python.
+- **`_headers` is Netlify's file** and the staging script still writes it into `_site/`. On
+  Vercel it is inert — harmless, but `vercel.json` is what sets the headers there.
 
-**A normal shared host (cPanel, FTP)**
-Upload all ten `.html` files and the `assets` folder into `public_html`, keeping them in
-the same directory — the pages link to each other by plain filename, so the structure has
-to stay flat. That's it.
+`.mcp.json` registers Vercel's MCP server at `https://mcp.vercel.com`. It authenticates over
+OAuth, which cannot be completed from a non-interactive session — run `/mcp` in an interactive
+Claude Code session and authorise it there. It is not needed to deploy.
+
+### Netlify — being retired
+
+Currently live at <https://preeminent-alfajores-71115e.netlify.app>, site id
+`3c304db1-b4fa-4caa-ae8a-3590edae7934`.
+
+Note for the record: the team had `requireSSOTeamLogin` set on *all* projects, which is why
+the first shared link returned 401 and bounced to a Netlify login. It was turned off for this
+project so the review link would open for anyone.
+
+**Once the Vercel deploy is confirmed working, decommission in this order** — the order
+matters, because doing it the other way round leaves the school with no site at all:
+
+1. Confirm every page loads on the Vercel URL, and that the honeycomb hero plays.
+2. Point any DNS or shared links at Vercel.
+3. Delete `netlify.toml`, and remove the `_headers` write from `tools/stage-deploy.py`
+   (`robots.txt` stays — it is host-agnostic).
+4. Delete the Netlify site, so nobody bookmarks a copy that has stopped being updated.
+
+Leaving a stale Netlify deploy running is the failure mode worth avoiding: two live URLs for
+one school, one of them quietly out of date.
+
+### Anywhere else
+
+The site is plain static files, so any host works. Serve the **contents of `_site/`** from the
+web root, keeping it flat — the pages link to each other by plain filename.
 
 ## Check it locally first
 
-From inside the unzipped folder:
-
 ```bash
-python -m http.server 8000
+python3 tools/build-site.py && python3 tools/stage-deploy.py
+cd _site && python3 -m http.server 8000
 ```
 
 Then open `http://localhost:8000`. Opening `index.html` by double-clicking works too, and the
 links between pages still resolve, but a local server matches how it will behave once hosted.
 
-## Just need to show someone quickly
+## Review previews and search engines
 
-There used to be a `dist/cirs-home.html` here — the whole site inlined into one file to
-email or open from a USB stick. That worked while the site was one page. It cannot
-carry ten, because its menu links would all point at pages that are not in the file, so
-it has been removed rather than left to mislead. Send the Netlify preview link, or a
-zip of `index.html`, the other nine pages and `assets/`.
+`tools/stage-deploy.py` writes `_headers` and `robots.txt` into `_site/`, and `vercel.json`
+sets the same header. They keep the preview out of search results, because the pages still
+carry bracketed placeholders and an under-construction note that should not be indexed under
+the school's name.
+
+**Remove all three at the real launch**, or the finished site will be invisible to Google.
 
 ## The content editor — parked
 
