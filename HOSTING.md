@@ -24,6 +24,8 @@ assets/img/                the emblem, photography, favicon, social card
 assets/video/              the hero background loop
 docs/design-system.html    the design specification
 tools/                     the scripts that generate every page (see below)
+tools/make-header.py       composes the Admissions banner photograph
+tools/check-contrast.py    measures banner text against the pixels behind it
 .github/workflows/ci.yml   the checks that run on every push and pull request
 ```
 
@@ -68,6 +70,36 @@ page that does not exist yet and is allowed.
 `.htmlvalidate.json` turns off exactly one rule, `no-autoplay`. The hero background is
 a muted, looping, decorative video marked `aria-hidden`; that rule guards against media
 that starts making noise at a visitor, which this cannot.
+
+## The Admissions banner photograph
+
+`assets/img/admissions-header.jpg` is composed, not shot. `tools/make-header.py` takes a campus
+photograph, crops it to 2:1, blurs it slightly so detail never competes with the type, maps it to a
+duotone between the site's purple and a warm highlight, and darkens it along the diagonal the
+headline sits on:
+
+```sh
+python3 tools/make-header.py                        # the default campus aerial
+python3 tools/make-header.py assets/img/your.jpg    # or your own photograph
+```
+
+Any photograph wider than it is tall works; the crop is centred. The grade is what makes it read as
+part of this site rather than a stock picture dropped into it — an ungraded photo looks pasted on,
+however well it is darkened.
+
+The CSS scrim over the banner is deliberately light, because most of the darkening is baked into
+the picture. **Change one and re-measure the other:**
+
+```sh
+python3 -m http.server 8990    # in one shell
+python3 tools/check-contrast.py
+```
+
+That samples the rendered page: for every line in the banner it averages the pixels actually behind
+it and reports the contrast ratio against the WCAG floors. It is the only honest way to check text
+on a photograph, because the answer depends on the picture, the scrim and where the words land —
+none of which a stylesheet can tell you. It dismisses the contact panel first; measuring through
+that white card once made a perfectly legible headline appear to fail at 2.3:1.
 
 ## Bringing in a new design from the Claude artifact
 

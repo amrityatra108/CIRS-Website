@@ -272,7 +272,11 @@ body.is-locked .htab:hover{ color:var(--purple); }
 .pagehero::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:clamp(90px,14vh,190px);
   z-index:4; pointer-events:none;
-  background:linear-gradient(to bottom, rgba(250,247,248,0) 0%, rgba(250,247,248,.55) 55%, var(--paper) 100%);
+  background:linear-gradient(to bottom,
+    rgba(250,247,248,0) 0%,
+    rgba(250,247,248,.14) 42%,
+    rgba(250,247,248,.58) 76%,
+    var(--paper) 100%);
 }
 .pagehero__media{ position:absolute; inset:0; z-index:0; }
 .pagehero__media img{ width:100%; height:100%; object-fit:cover; }
@@ -313,7 +317,15 @@ body.is-locked .htab:hover{ color:var(--purple); }
 
 .pagehero__scrim{
   position:absolute; inset:0; z-index:2; pointer-events:none;
-  background:linear-gradient(to top, rgba(14,11,18,.95) 0%, rgba(14,11,18,.34) 46%, rgba(14,11,18,.62) 100%);
+  /* The lower third carries the eyebrow, headline, lead, buttons and dates,
+     so it is held dark; the middle stays open so the campus is still legible
+     as a photograph. Measured, not guessed — tools/check-contrast.py samples
+     the pixels behind each line and the lead was at 2.32:1 before this. */
+  background:linear-gradient(to top,
+    rgba(14,11,18,.94) 0%,
+    rgba(14,11,18,.78) 34%,
+    rgba(14,11,18,.30) 68%,
+    rgba(14,11,18,.58) 100%);
 }
 .pagehero__inner{
   position:relative; z-index:3;
@@ -327,7 +339,7 @@ body.is-locked .htab:hover{ color:var(--purple); }
   line-height:1.0; letter-spacing:-.02em; color:#fff;
 }
 .pagehero h1 em{ color:var(--gold-lit); }
-.pagehero .lead{ color:rgba(255,255,255,.82); margin-top:var(--space-4); }
+.pagehero .lead{ color:rgba(255,255,255,.94); margin-top:var(--space-4); }
 .pagehero__cta{ display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-6); }
 
 /* The dates, carried in the banner because the standing notice box that

@@ -244,14 +244,17 @@ def hero_html(page):
     box that used to hold them is gone: one opening statement rather than a
     banner and then a box repeating it.
 
-    The media slot deliberately carries a labelled placeholder rather than a
-    stand-in photograph — a temporary picture on an admissions banner is the
-    kind of thing that quietly ships.
+    The photograph is assets/img/admissions-header.jpg, composed by
+    tools/make-header.py — graded to the site's purple so it reads as part of
+    the design, and darkened along the diagonal the headline sits on. The
+    scrim above it is deliberately light, because most of the darkening is
+    baked into the picture; change one and re-measure the other with
+    tools/check-contrast.py.
     """
     eyebrow, heading, lead = page["hero"]
     return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
   <div class="pagehero__media">
-    <div class="pagehero__ph"><span>{page["hero_placeholder"]}</span></div>
+    <img src="assets/img/admissions-header.jpg" alt="" width="2400" height="1200" fetchpriority="high">
   </div>
   <div class="pagehero__mono" aria-hidden="true"></div>
   <div class="pagehero__scrim" aria-hidden="true"></div>
