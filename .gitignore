@@ -10,3 +10,6 @@ cirs-editor.html
 .DS_Store
 Thumbs.db
 *.swp
+
+# Staged deploy output, built by tools/stage-deploy.py
+_site/

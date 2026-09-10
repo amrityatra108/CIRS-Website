@@ -1,0 +1,11 @@
+# The repository root holds the generated pages next to the scripts that
+# build them, so publishing the root would ship tools/, .github/ and
+# node_modules alongside the site. tools/stage-deploy.py copies just the
+# publishable files into _site/, and this points Netlify at that.
+#
+# _site/ is generated and git-ignored: run the two commands below before
+# deploying, or let the build command do it.
+
+[build]
+  command = "python3 tools/build-site.py && python3 tools/stage-deploy.py"
+  publish = "_site"

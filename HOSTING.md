@@ -130,6 +130,34 @@ The sync also reapplies one small correction the artifact does not carry: an exp
 That belongs upstream in the artifact eventually. Keep that step tiny — anything larger
 than an attribute should be fixed in the design, not patched on the way out of it.
 
+## Deploying to Netlify
+
+The site is on Netlify as **preeminent-alfajores-71115e**, at
+<https://preeminent-alfajores-71115e.netlify.app>.
+
+`netlify.toml` points Netlify at `_site/`, not at the repository root. The root holds the generated
+pages next to the scripts that build them, so publishing it would ship `tools/`, `.github/` and
+`node_modules` alongside the site. `tools/stage-deploy.py` copies just the publishable files —
+the eleven pages, `assets/` minus the parked editor's sources, and the two files that keep a review
+preview out of search results — into `_site/`, which is generated and git-ignored.
+
+```sh
+python3 tools/build-site.py
+python3 tools/stage-deploy.py
+```
+
+Netlify runs both as its build command, so a deploy from a clean checkout stages itself.
+
+**Visitor access.** The team had `requireSSOTeamLogin` set on *all* projects, which is why the
+first shared link returned 401 and bounced to a Netlify login. It is now off for this project, so
+the URL opens for anyone. Turn it back on in Netlify → Site configuration → Access & security when
+the review is over.
+
+**`_headers` and `robots.txt` are review-preview files.** They set `X-Robots-Tag: noindex` and
+disallow crawling, because the pages still carry bracketed placeholders and an under-construction
+note that should not be indexed under the school's name. `tools/stage-deploy.py` writes them;
+delete that step for the real launch.
+
 ## Put it online
 
 **Netlify** (fastest, free)
