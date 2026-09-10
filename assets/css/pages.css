@@ -665,3 +665,13 @@ body.is-locked .htab:hover{ color:var(--purple); }
    to be added here too.
    ------------------------------------------------------------ */
 :is(.pagehero, .advert) :is(.sc, .feature__tag, .dmoment__i){ color:var(--gold-lit); }
+
+/* The Admissions hero carries a looping video rather than a still. It sizes
+   exactly like the image it replaced; the poster shows until the first frame
+   arrives, and remains if the video is blocked or the connection gives up. */
+.pagehero__video{ width:100%; height:100%; object-fit:cover; display:block; }
+@media (prefers-reduced-motion:reduce){
+  /* Honour the setting: the poster is the same wall, so nothing is lost. */
+  .pagehero__video{ display:none; }
+  .pagehero__media{ background:url("../img/admissions-honeycomb.jpg") center/cover no-repeat; }
+}

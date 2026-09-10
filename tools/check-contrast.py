@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Measure the banner text against the pixels actually behind it.
 
+Where the banner is a looping video, one sample proves nothing: the cells
+cross-fade, so the pixels behind the headline are brightest somewhere in the
+middle of the loop and a single reading can easily catch it at its darkest.
+This seeks through the video and reports the worst moment.
+
 A hero is the one place where text sits on a photograph, so its contrast
 cannot be read off a stylesheet — it depends on the picture, the scrim and
 where the words land. This samples the rendered page: for each piece of text
@@ -24,6 +29,15 @@ const { chromium } = require('playwright-core');
   // legible headline first appeared to fail at 2.3:1. Dismiss it first.
   const closer = await p.$('.pop__close, [data-pop-close]');
   if (closer) { await closer.click(); await p.waitForTimeout(700); }
+
+  // A looping video behind the text: sample across the loop, not once.
+  const times = await p.evaluate(() => {
+    const v = document.querySelector('.pagehero__video');
+    if (!v) return null;
+    v.pause();
+    const d = v.duration && isFinite(v.duration) ? v.duration : 8;
+    return [0, 0.2, 0.4, 0.6, 0.8].map(f => +(d * f).toFixed(2));
+  });
   const boxes = await p.evaluate(() => {
     const out = [];
     document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd').forEach(el => {
@@ -40,8 +54,20 @@ const { chromium } = require('playwright-core');
   // hide the text, photograph what is behind it
   await p.addStyleTag({ content: '.pagehero .wrap{visibility:hidden!important}' });
   await p.waitForTimeout(300);
-  const shot = await p.screenshot({ clip: { x: 0, y: 0, width: 1440, height: 900 } });
-  console.log(JSON.stringify({ boxes, png: shot.toString('base64') }));
+  const shots = [];
+  for (const t of (times || [null])) {
+    if (t !== null) {
+      await p.evaluate(async (tt) => {
+        const v = document.querySelector('.pagehero__video');
+        v.currentTime = tt;
+        await new Promise(r => { v.onseeked = r; setTimeout(r, 900); });
+      }, t);
+      await p.waitForTimeout(250);
+    }
+    const shot = await p.screenshot({ clip: { x: 0, y: 0, width: 1440, height: 900 } });
+    shots.push({ t, png: shot.toString('base64') });
+  }
+  console.log(JSON.stringify({ boxes, shots }));
   await b.close();
 })();
 '''
@@ -70,29 +96,40 @@ def main():
     data = json.loads(out.stdout)
     import base64, io
     from PIL import Image
-    im = Image.open(io.BytesIO(base64.b64decode(data["png"]))).convert("RGB")
 
-    worst = 0.0
+    worst = {}
+    for shot in data["shots"]:
+        im = Image.open(io.BytesIO(base64.b64decode(shot["png"]))).convert("RGB")
+        for box in data["boxes"]:
+            crop = im.crop((box["x"], box["y"], box["x"] + box["w"], box["y"] + box["h"]))
+            px = list(crop.getdata())
+            avg = tuple(sum(c[i] for c in px) // len(px) for i in range(3))
+            fg = tuple(int(v) for v in box["color"].strip("rgba() ").split(",")[:3])
+            r = ratio(fg, avg)
+            key = box["what"] + "|" + box["text"]
+            if key not in worst or r < worst[key][0]:
+                worst[key] = (r, box, shot["t"])
+
+    if len(data["shots"]) > 1:
+        print(f"sampled {len(data['shots'])} points across the loop; "
+              f"showing the worst for each line\n")
     fails = []
-    print(f"{'ratio':>8}  {'floor':>5}  element                text")
-    for box in data["boxes"]:
-        crop = im.crop((box["x"], box["y"], box["x"] + box["w"], box["y"] + box["h"]))
-        px = list(crop.getdata())
-        avg = tuple(sum(c[i] for c in px) // len(px) for i in range(3))
-        fg = tuple(int(v) for v in box["color"].strip("rgba() ").split(",")[:3])
-        r = ratio(fg, avg)
+    print(f"{'ratio':>8}  {'floor':>5}  {'at':>5}  element                text")
+    for key, (r, box, t) in worst.items():
         large = box["size"] >= 24 or (box["size"] >= 18.66 and int(box["weight"]) >= 700)
         floor = 3.0 if large else 4.5
         ok = r >= floor
         if not ok:
-            fails.append((box, r, floor))
-        worst = max(worst, floor - r)
-        print(f"{r:8.2f}  {floor:5.1f}  {'ok  ' if ok else 'FAIL'} {box['what']:<16} \"{box['text']}\"")
+            fails.append(key)
+        at = "still" if t is None else f"{t:>4.1f}s"
+        print(f"{r:8.2f}  {floor:5.1f}  {at:>5}  {'ok  ' if ok else 'FAIL'} "
+              f"{box['what']:<16} \"{box['text']}\"")
 
     if fails:
         print(f"\n{len(fails)} element(s) below the floor")
         sys.exit(1)
-    print("\nall banner text clears WCAG AA against the pixels behind it")
+    print("\nall banner text clears WCAG AA at every point sampled in the loop")
+
 
 if __name__ == "__main__":
     main()

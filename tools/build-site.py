@@ -244,17 +244,24 @@ def hero_html(page):
     box that used to hold them is gone: one opening statement rather than a
     banner and then a box repeating it.
 
-    The photograph is assets/img/admissions-header.jpg, composed by
-    tools/make-header.py — graded to the site's purple so it reads as part of
-    the design, and darkened along the diagonal the headline sits on. The
-    scrim above it is deliberately light, because most of the darkening is
-    baked into the picture; change one and re-measure the other with
-    tools/check-contrast.py.
+    The media is a honeycomb of the school's own photographs, built by
+    tools/make-honeycomb.py: a seamlessly looping video, with the still of the
+    same wall as its poster so the panel is complete before the video arrives
+    and stays complete if it never does.
+
+    Both are graded to the site's purple and darkened along the diagonal the
+    headline sits on, so the scrim above them stays light. Change either and
+    re-measure with tools/check-contrast.py.
     """
     eyebrow, heading, lead = page["hero"]
     return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
   <div class="pagehero__media">
-    <img src="assets/img/admissions-header.jpg" alt="" width="2400" height="1200" fetchpriority="high">
+    <video class="pagehero__video" autoplay muted loop playsinline
+           poster="assets/img/admissions-honeycomb.jpg" aria-hidden="true"
+           width="1920" height="960" fetchpriority="high">
+      <source src="assets/video/admissions-hero.webm" type="video/webm">
+      <source src="assets/video/admissions-hero.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="pagehero__mono" aria-hidden="true"></div>
   <div class="pagehero__scrim" aria-hidden="true"></div>
