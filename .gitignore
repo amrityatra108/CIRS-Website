@@ -1,0 +1,8 @@
+# CI installs html-validate here; it is never committed.
+node_modules/
+package-lock.json
+
+# OS and editor cruft
+.DS_Store
+Thumbs.db
+*.swp

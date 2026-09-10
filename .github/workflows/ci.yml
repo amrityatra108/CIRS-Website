@@ -15,12 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # html-validate 11 requires node ^22.22.0 || >= 24.8.0. npm only warns on
+      # an engine mismatch and installs anyway, which surfaces much later as a
+      # TypeError on a missing built-in — so pin a supported major here and let
+      # --engine-strict fail the install loudly if that ever drifts apart again.
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install html-validate
-        run: npm install --no-save html-validate@11
+        run: npm install --no-save --engine-strict html-validate@11
 
       # Structural and accessibility validity: nesting, unclosed elements,
       # duplicate ids, missing alt text, ARIA correctness. Configured in
