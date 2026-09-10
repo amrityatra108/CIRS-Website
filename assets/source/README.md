@@ -1,7 +1,17 @@
 # Source photographs
 
-Unedited originals from the school — 8192px camera files, around 150 MB in
-total. They are **not** part of the site and no page references them.
+Photographs from the school, held for making derived images. They are **not**
+part of the site and no page references them.
+
+Two batches, and they differ:
+
+- The first batch is unedited camera originals — 8192px files, around 150 MB.
+- The 23 files added in September 2026 came from a shared Drive folder
+  (`cirsstudio@cirschool.in`) and are **resized to 3200px on the long edge**,
+  159 MB down to 24 MB. Drive remains the archive of those true originals; at
+  full size they would have roughly doubled the size of every clone for detail
+  no page can use — the largest thing the site renders is 2400px. One exact
+  duplicate (`school-front-view-2.JPG`) was left out.
 
 They are here because derived images are made from them:
 `tools/make-header.py` crops, blurs and grades one of these into
