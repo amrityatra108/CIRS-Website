@@ -40,17 +40,21 @@ jobs:
       - name: Check links and asset references
         run: python3 tools/check-links.py
 
-      # dist/cirs-home.html and cirs-editor.html are generated from index.html
-      # and assets/. Nothing else stops someone editing a bundle directly and
-      # having it silently overwritten by the next build, so rebuild them here
-      # and fail if the result differs from what was committed.
-      - name: Check the generated bundles are current
+      # dist/cirs-home.html is generated from index.html and assets/. Nothing
+      # else stops someone editing it directly and having the change silently
+      # overwritten by the next build, so rebuild it here and fail if the
+      # result differs from what was committed.
+      #
+      # cirs-editor.html is deliberately not checked: it is parked, not built
+      # by default and not committed. If it comes back, add it here too — an
+      # unchecked committed bundle rots without anyone noticing.
+      - name: Check the generated bundle is current
         run: |
           python3 tools/build-bundles.py
-          if ! git diff --quiet -- dist/cirs-home.html cirs-editor.html; then
-            echo "::error::The committed bundles do not match what tools/build-bundles.py produces."
+          if ! git diff --quiet -- dist/cirs-home.html; then
+            echo "::error::dist/cirs-home.html does not match what tools/build-bundles.py produces."
             echo "Run 'python3 tools/build-bundles.py' and commit the result."
-            git diff --stat -- dist/cirs-home.html cirs-editor.html
+            git diff --stat -- dist/cirs-home.html
             exit 1
           fi
-          echo "Bundles match their sources."
+          echo "Bundle matches its sources."

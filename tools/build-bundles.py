@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Build the two single-file bundles from index.html and assets/.
+"""Build the single-file bundle(s) from index.html and assets/.
 
-index.html is the source of truth; both bundles below are derived from it and
+index.html is the source of truth; the bundles below are derived from it and
 should never be hand-edited.
 
     dist/cirs-home.html   the whole site in one file — every stylesheet,
@@ -13,9 +13,19 @@ should never be hand-edited.
 
     cirs-editor.html      the same page wrapped in the point-and-click
                           content editor. No CDN tags at all, so it works
-                          with no internet whatsoever.
+                          with no internet whatsoever. NOT BUILT BY DEFAULT
+                          and not committed — see --editor below.
 
-    python3 tools/build-bundles.py
+    python3 tools/build-bundles.py             # the site bundle only
+    python3 tools/build-bundles.py --editor    # also write cirs-editor.html
+
+The editor is parked. It was 11 MB of base64 rewritten into the repository on
+every content change, which is a poor trade while nobody is using it, so it is
+out of the committed tree and out of CI. Its sources — assets/css/editor.css
+and assets/js/editor.js, together about 11 KB — are deliberately kept, so
+bringing it back is this flag rather than an excavation of the git history.
+If it comes back for good, restore the CI step that checks it is current;
+without that check a committed copy silently rots.
 """
 
 import mimetypes
@@ -83,4 +93,9 @@ def write(rel, text):
 
 if __name__ == "__main__":
     write("dist/cirs-home.html", build(editor=False))
-    write("cirs-editor.html", build(editor=True))
+    if "--editor" in sys.argv[1:]:
+        write("cirs-editor.html", build(editor=True))
+    elif os.path.exists(os.path.join(ROOT, "cirs-editor.html")):
+        # Built once, then left behind: it will drift from index.html unseen.
+        print("  note: cirs-editor.html exists but is no longer built by "
+              "default; delete it or rebuild with --editor")

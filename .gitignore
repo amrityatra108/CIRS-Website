@@ -2,6 +2,10 @@
 node_modules/
 package-lock.json
 
+# The content editor is parked: built on demand with
+# 'tools/build-bundles.py --editor', never committed. See HOSTING.md.
+cirs-editor.html
+
 # OS and editor cruft
 .DS_Store
 Thumbs.db
