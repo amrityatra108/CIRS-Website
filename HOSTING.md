@@ -14,11 +14,35 @@ dist/cirs-home.html        the entire site in one file (images inlined)
 cirs-editor.html            a point-and-click tool for editing text and photos yourself
 docs/design-system.html    the design specification
 tools/                     scripts that regenerate the above (see below)
+.github/workflows/ci.yml   the checks that run on every push and pull request
 ```
 
 `index.html` and `assets/` are the source of truth. `dist/cirs-home.html` and `cirs-editor.html`
 are built from them and should never be hand-edited — a `tools/build-bundles.py` run overwrites
 both.
+
+## The checks
+
+Every push and pull request runs three things, all of which you can run yourself:
+
+```sh
+npx html-validate index.html      # structure and accessibility
+python3 tools/check-links.py      # every anchor and asset reference resolves
+python3 tools/build-bundles.py    # then: git diff --quiet -- dist cirs-editor.html
+```
+
+The last one is the important one. `dist/cirs-home.html` and `cirs-editor.html` are generated, and
+nothing else stops someone editing a bundle directly and having the change silently overwritten by
+the next build — so CI rebuilds them and fails if the committed copies differ.
+
+The link check never touches the network. It verifies in-page anchors and `assets/` paths against
+what is actually in the repository, and leaves external URLs alone: a check that goes red because
+a CDN had a bad morning is one people learn to ignore. `href="#"` is the site's own placeholder for
+a page that does not exist yet — the drawer and footer are full of them — and is allowed.
+
+`.htmlvalidate.json` turns off exactly one rule, `no-autoplay`. The hero background is a muted,
+looping, decorative video marked `aria-hidden`; that rule guards against media that starts making
+noise at a visitor, which this cannot.
 
 ## Regenerating from a Claude artifact
 
@@ -35,6 +59,11 @@ The sync keeps the curated `<head>` in `tools/head.html` (title, description, ca
 card) rather than the artifact's bare `<title>`, and names each embedded photograph from
 `tools/media.tsv`, keyed by the md5 of its bytes. A photograph the table doesn't know about stops
 the sync with the digest to add — so nothing ever lands in `assets/img/` as `image-7.jpg`.
+
+It also reapplies one small correction the artifact does not carry — an explicit `type="button"` on
+the two `<button>` elements, which the accessibility pass asks for. That belongs upstream in the
+artifact eventually; until then it survives every sync. Keep that step tiny: anything larger than an
+attribute should be fixed in the design, not patched on the way out of it.
 
 ## Put it online
 

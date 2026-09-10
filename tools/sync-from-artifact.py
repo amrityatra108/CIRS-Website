@@ -114,6 +114,7 @@ def main():
     body = re.sub(r"<style[^>]*>.*?</style>", "", body, flags=re.S)
     body = re.sub(r"<script[^>]*>.*?</script>", "", body, flags=re.S)
     body = re.sub(r'<link[^>]*href="https://fonts\.[^"]*"[^>]*>', "", body)
+    body = normalise(body)
     body = body.strip("\n") + "\n"
 
     head = open(os.path.join(ROOT, "tools", "head.html"), encoding="utf-8").read()
@@ -139,6 +140,20 @@ def main():
     orphans = [p for p in stale if p not in written]
     if orphans:
         print("  note: not referenced by this artifact: " + ", ".join(orphans))
+
+
+def normalise(body):
+    """Small corrections the artifact does not carry, reapplied on every sync.
+
+    Keep this function tiny and mechanical. It exists because the artifact is
+    the design tool's output and cannot be edited here; anything larger than an
+    attribute belongs upstream in the artifact, not in a rewrite step.
+
+    A <button> with no type defaults to type="submit". Neither button here has
+    a form ancestor, so nothing actually submits, but the CI accessibility pass
+    asks for the attribute and it costs nothing to be explicit.
+    """
+    return re.sub(r"<button(?![^>]*\btype=)", "<button type=\"button\"", body)
 
 
 def write(path, text):
