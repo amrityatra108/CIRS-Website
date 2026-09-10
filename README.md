@@ -2,29 +2,33 @@
 
 The website for Chinmaya International Residential School, Siruvani, Coimbatore.
 
-A static site — no build step, no server-side code, no database. `index.html` plus `assets/` is
-the whole thing; open `index.html` in a browser to see it.
+A static site — ten pages, no server-side code, no database. The pages are generated from
+partials by a small Python script, so nothing needs installing to serve it: the `.html` files
+plus `assets/` are the whole thing.
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | the site, and the source of truth |
+| `index.html` and nine others | the pages — **generated, do not edit** |
+| `tools/pages/`, `tools/partials/` | what the pages are generated *from* |
+| `tools/build-site.py` | the page list, and the build |
 | `assets/` | styles, the interaction layer, photography, the campus video |
-| `dist/cirs-home.html` | the entire site as one self-contained file, for emailing or a USB stick |
 | `docs/design-system.html` | the design specification |
-| `tools/` | scripts that rebuild the two bundles, and that import a new Claude artifact |
 | `HOSTING.md` | how to put it online, how to edit it, and what the school still owes |
-| `.github/workflows/ci.yml` | HTML validity, link and asset resolution, bundle freshness |
+| `.github/workflows/ci.yml` | HTML validity, link resolution, page freshness |
 
-`dist/cirs-home.html` is generated. Edit `index.html` and `assets/`, then run:
+The home page is a short scroll — hero, film, the credentials ticker, the motto and the
+closing call to action. Everything else lives on its own page, reached from the menu.
+
+Every `.html` file at the root is generated. Edit `tools/pages/` or `tools/partials/`, then:
 
 ```sh
-python3 tools/build-bundles.py
+python3 tools/build-site.py
 ```
 
 There is also a point-and-click content editor, currently parked — `tools/build-bundles.py
 --editor` rebuilds it on demand. See [HOSTING.md](HOSTING.md).
 
-CI runs `npx html-validate index.html`, `python3 tools/check-links.py`, and a rebuild of the
-bundle that fails if the committed copy has drifted from its sources.
+CI runs `npx html-validate *.html`, `python3 tools/check-links.py`, and a rebuild that fails
+if the committed pages have drifted from their sources.
 
 See [HOSTING.md](HOSTING.md) for deployment and for importing a new design artifact.

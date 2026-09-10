@@ -1,31 +1,30 @@
 #!/usr/bin/env python3
-"""Build the single-file bundle(s) from index.html and assets/.
+"""Build the parked content editor as one self-contained file.
 
-index.html is the source of truth; the bundles below are derived from it and
-should never be hand-edited.
+There used to be a dist/cirs-home.html here as well: the whole site inlined
+into a single file to email or open from a USB stick. That made sense while
+the site was one page. It is now ten, and a single file cannot carry them —
+its menu links would all point at pages that are not in the bundle — so it is
+gone. To hand someone the site, send them the Netlify preview or the zip of
+index.html + assets/, both of which are the real thing.
 
-    dist/cirs-home.html   the whole site in one file — every stylesheet,
-                          script, photograph and the campus video inlined.
-                          Email it, open it from a USB stick, hand it to a
-                          web host. Keeps the CDN <script> tags, so the
-                          scroll choreography needs a connection; without
-                          one the page still reads correctly.
+What remains is the editor:
 
-    cirs-editor.html      the same page wrapped in the point-and-click
-                          content editor. No CDN tags at all, so it works
-                          with no internet whatsoever. NOT BUILT BY DEFAULT
-                          and not committed — see --editor below.
+    cirs-editor.html      the page wrapped in the point-and-click content
+                          editor — click any headline and type, click any
+                          photo to replace it, download the result. No CDN
+                          tags, so it works with no internet at all.
 
-    python3 tools/build-bundles.py             # the site bundle only
-    python3 tools/build-bundles.py --editor    # also write cirs-editor.html
+    python3 tools/build-bundles.py --editor
 
-The editor is parked. It was 11 MB of base64 rewritten into the repository on
-every content change, which is a poor trade while nobody is using it, so it is
-out of the committed tree and out of CI. Its sources — assets/css/editor.css
-and assets/js/editor.js, together about 11 KB — are deliberately kept, so
-bringing it back is this flag rather than an excavation of the git history.
-If it comes back for good, restore the CI step that checks it is current;
-without that check a committed copy silently rots.
+The editor is parked: not built by default, not committed, and its 11 MB is
+why. Its sources, assets/css/editor.css and assets/js/editor.js, stay in the
+repository and stay maintained, so this rebuilds a current editor rather than
+a fossil.
+
+Note it wraps index.html only, so today it edits the home page alone. Bringing
+the editor back properly means teaching it the other nine pages, and restoring
+a CI check that the committed copy is current — an unchecked bundle rots.
 """
 
 import mimetypes
@@ -65,9 +64,10 @@ def inline_media(html):
 def build(editor):
     html = read("index.html")
 
-    css = read("assets/css/cirs.css")
-    html = re.sub(r'<link rel="stylesheet" href="assets/css/cirs\.css[^"]*">',
-                  lambda _: "<style>\n" + css + "</style>", html)
+    for name in ("cirs", "pages"):
+        css = read(f"assets/css/{name}.css")
+        html = re.sub(rf'<link rel="stylesheet" href="assets/css/{name}\.css[^"]*">',
+                      lambda _, c=css: "<style>\n" + c + "</style>", html)
 
     js = read("assets/js/cirs.js")
     html = re.sub(r'<script src="assets/js/cirs\.js[^"]*" defer></script>',
@@ -92,10 +92,8 @@ def write(rel, text):
 
 
 if __name__ == "__main__":
-    write("dist/cirs-home.html", build(editor=False))
-    if "--editor" in sys.argv[1:]:
-        write("cirs-editor.html", build(editor=True))
-    elif os.path.exists(os.path.join(ROOT, "cirs-editor.html")):
-        # Built once, then left behind: it will drift from index.html unseen.
-        print("  note: cirs-editor.html exists but is no longer built by "
-              "default; delete it or rebuild with --editor")
+    if "--editor" not in sys.argv[1:]:
+        sys.exit("build-bundles: nothing to do without --editor (see the "
+                 "module docstring; the site bundle was retired when the site "
+                 "became ten pages)")
+    write("cirs-editor.html", build(editor=True))

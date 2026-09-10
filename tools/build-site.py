@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+"""Assemble every page of the site from shared partials and per-page content.
+
+The site used to be one long page. It is now ten, which means the header, the
+menu and the footer appear ten times — and a menu that has to be edited in ten
+files is a menu that goes stale in nine of them. So no page is authored as a
+whole file. Each page is:
+
+    tools/partials/       the chrome every page shares
+    tools/pages/<slug>.html   only the sections unique to that page
+    PAGES below           title, menu label, banner copy, grouping
+
+and this script writes <slug>.html at the repository root. Edit those inputs,
+never the generated pages — a rebuild overwrites them, and CI fails if what is
+committed does not match what a rebuild produces.
+
+The menu is generated from PAGES, so adding a page here puts it in the menu of
+all ten pages at once. Cross-page links are rewritten from the section anchors
+the original single page used: SECTION_PAGE says which page each section now
+lives on, and a link to a section on the current page stays a plain #anchor
+rather than reloading the page you are already reading.
+
+    python3 tools/build-site.py
+"""
+
+import os
+import re
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CACHE_BUST = "b=5"
+
+# slug -> page definition. Order here is the order in the menu.
+#   nav    the label in the menu and the <title>
+#   group  the menu column it sits under
+#   eyebrow/heading/lead  the banner at the top of the page
+#   uc     False to leave off the under-construction note. Nothing sets
+#          it: the note belongs at the foot of every page, the home page
+#          included, because every page is still being filled in
+PAGES = {
+    "index": {
+        "nav": "Home",
+        "group": None,
+        "title": "Chinmaya International Residential School — Siruvani, Coimbatore",
+        "description": "A co-educational residential school on a hundred acres in the Siruvani "
+                       "foothills — CBSE and the International Baccalaureate, Grades V to XII.",
+        "banner": None,
+    },
+    "why-cirs": {
+        "nav": "Why CIRS",
+        "group": "About CIRS",
+        "title": "Why CIRS",
+        "description": "Who we are, what the school is recognised for, and the Junior and Senior "
+                       "Schools that carry it.",
+        "banner": ("About CIRS", "Why <em>CIRS.</em>",
+                   "A community of knowledge, service and skill in the Siruvani foothills — and "
+                   "the two schools, Junior and Senior, that carry it."),
+    },
+    "our-leaders-speak": {
+        "nav": "Our Leaders Speak",
+        "group": "About CIRS",
+        "title": "Our Leaders Speak",
+        "description": "A message from the Principal of Chinmaya International Residential School.",
+        "banner": ("Our leaders speak", "In Their <em>Own Words.</em>",
+                   "A message from the Principal."),
+    },
+    "our-leadership": {
+        "nav": "Our Leadership",
+        "group": "About CIRS",
+        "title": "Our Leadership",
+        "description": "The Board of Directors of Chinmaya International Residential School, and "
+                       "the staff and faculty.",
+        "banner": ("Governance", "Our <em>Leadership.</em>",
+                   "CIRS is an undertaking of the Central Chinmaya Mission Trust, Mumbai, and is "
+                   "managed by its Board of Directors."),
+    },
+    "academics": {
+        "nav": "Academics",
+        "group": "Academics",
+        "title": "Academics",
+        "description": "Two curricula under one roof — CBSE from Grade V, and the International "
+                       "Baccalaureate Diploma in Grades XI and XII.",
+        "banner": ("Academics", "Two Curricula, <em>One Campus.</em>",
+                   "CBSE from Grade V, and the International Baccalaureate Diploma in the final "
+                   "two years."),
+    },
+    "student-life": {
+        "nav": "Student Life",
+        "group": "Student Life",
+        "title": "Student Life",
+        "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
+                       "hundred-acre campus it happens on.",
+        "banner": ("Student life", "Live, Learn, <em>Belong.</em>",
+                   "The boarding houses, the shape of an ordinary day, and the campus the whole "
+                   "of it happens on."),
+    },
+    "sports": {
+        "nav": "Sports",
+        "group": "Student Life",
+        "title": "Sports",
+        "description": "Athletics, the playing fields and the sporting record at CIRS.",
+        "banner": ("Sports", "Sport, Every Day <em>at Four.</em>",
+                   "The four o'clock hour, the fields it happens on, and what the teams have won."),
+    },
+    "arts": {
+        "nav": "Arts, Music & Theatre",
+        "group": "Student Life",
+        "title": "Arts, Music & Theatre",
+        "description": "Music, theatre and the visual arts at Chinmaya International Residential "
+                       "School.",
+        "banner": ("Arts", "Express, Perform, <em>Create.</em>",
+                   "Music, theatre and the visual arts, and the amphitheatre built into the "
+                   "slope."),
+    },
+    "admissions": {
+        "nav": "Admissions",
+        "group": "Admissions",
+        "title": "Admissions",
+        "description": "How to apply to Chinmaya International Residential School — registration, "
+                       "the entrance assessment, and the interview.",
+        "banner": ("Admissions 2027–28", "How to <em>Apply.</em>",
+                   "Registration, the entrance assessment, the interview, and the offer."),
+    },
+    "alumni": {
+        "nav": "Alumni",
+        "group": "Admissions",
+        "title": "Alumni",
+        "description": "Where CIRS students go after school — universities in India and abroad.",
+        "banner": ("After CIRS", "Where They <em>Go Next.</em>",
+                   "The universities our students read at, in India and abroad."),
+    },
+}
+
+# Which page each of the old single-page section anchors now lives on.
+SECTION_PAGE = {
+    "about": "why-cirs", "junior": "why-cirs", "senior": "why-cirs",
+    "quote": "our-leaders-speak",
+    "people": "our-leadership",
+    "academics": "academics",
+    "life": "student-life", "day": "student-life", "campus": "student-life",
+    "athletics": "sports", "fields": "sports", "achievements": "sports",
+    "arts": "arts",
+    "pathways": "alumni",
+    "admissions": "admissions",
+    "top": "index", "main": None,   # main is on every page; top only on home
+}
+
+
+def read(rel):
+    path = os.path.join(ROOT, rel)
+    if not os.path.exists(path):
+        sys.exit(f"build-site: missing {rel}")
+    return open(path, encoding="utf-8").read()
+
+
+def rewrite_links(html, slug):
+    """Turn the old single-page #anchors into links that work across pages."""
+    def swap(m):
+        anchor = m.group(1)
+        if anchor not in SECTION_PAGE:
+            return m.group(0)          # href="#" placeholders, and #main
+        target = SECTION_PAGE[anchor]
+        if target is None or target == slug:
+            return m.group(0)          # already on this page — keep the anchor
+        page = "index.html" if target == "index" else f"{target}.html"
+        return f'href="{page}#{anchor}"' if target != "index" else f'href="{page}"'
+    return re.sub(r'href="#([A-Za-z0-9_-]+)"', swap, html)
+
+
+def nav_html(slug):
+    groups = {}
+    for s, p in PAGES.items():
+        if p["group"]:
+            groups.setdefault(p["group"], []).append((s, p))
+    out = ['<nav class="drawer__grid" aria-label="All pages">']
+    for group, items in groups.items():
+        gid = "dnav-" + re.sub(r"[^a-z]+", "-", group.lower()).strip("-")
+        out.append("    <div>")
+        out.append(f'      <p class="sc" id="{gid}">{group}</p>')
+        out.append(f'      <ul aria-labelledby="{gid}">')
+        for s, p in items:
+            here = ' aria-current="page"' if s == slug else ""
+            out.append(f'        <li><a href="{s}.html"{here}>{p["nav"]}</a></li>')
+        out.append("      </ul>")
+        out.append("    </div>")
+    out.append("  </nav>")
+    return "\n".join(out)
+
+
+def banner_html(page):
+    eyebrow, heading, lead = page["banner"]
+    return f'''<section class="pagehead on-purple" id="top" data-ground="#1E1626">
+  <div class="wrap pagehead__inner">
+    <a class="pagehead__back" href="index.html">
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M13 5H1m0 0 4-4M1 5l4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Home
+    </a>
+    <p class="marker"><span class="sc">{eyebrow}</span></p>
+    <h1 class="serif" data-split>{heading}</h1>
+    <p class="lead">{lead}</p>
+  </div>
+</section>'''
+
+
+UC = '''<section class="uc">
+  <div class="wrap uc__inner">
+    <span class="uc__mark" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
+    </span>
+    <div>
+      <p class="uc__label">Under construction</p>
+      <p class="uc__text">This page is still being written. Photographs, names and figures marked
+        in brackets are placeholders awaiting the school, and more will be added here in the weeks
+        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
+    </div>
+  </div>
+</section>'''
+
+
+def build(slug, page):
+    head = read("tools/partials/head.html")
+    head = (head.replace("{{TITLE}}", page["title"])
+                .replace("{{DESCRIPTION}}", page["description"])
+                .replace("{{CANONICAL}}", "" if slug == "index" else f"{slug}.html")
+                .replace("{{CACHE_BUST}}", CACHE_BUST))
+
+    parts = [head, "<body>", read("tools/partials/chrome.html").rstrip("\n")]
+    drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
+    parts += [read("tools/partials/header.html").rstrip("\n"), drawer.rstrip("\n")]
+    parts.append('<main id="main">')
+    if page["banner"]:
+        parts.append(banner_html(page))
+    parts.append(read(f"tools/pages/{slug}.html").rstrip("\n"))
+    if page.get("uc", True):
+        parts.append(UC)
+    parts.append("</main>")
+    parts.append(read("tools/partials/footer.html").rstrip("\n"))
+    parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
+    parts += ["</body>", "</html>", ""]
+
+    return rewrite_links("\n".join(parts), slug)
+
+
+if __name__ == "__main__":
+    for slug, page in PAGES.items():
+        out = os.path.join(ROOT, f"{slug}.html")
+        html = build(slug, page)
+        open(out, "w", encoding="utf-8").write(html)
+        print(f"  write  {slug}.html ({len(html):,} chars)")
