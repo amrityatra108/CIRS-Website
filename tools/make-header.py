@@ -24,8 +24,10 @@ what the headline actually gets.
     python3 tools/make-header.py                      # uses SOURCES below
     python3 tools/make-header.py path/to/photo.jpg    # or your own
 
-Drop replacement photographs into assets/img/ and pass one in. Anything
-wider than it is tall works; the crop is centred.
+Drop replacement photographs into assets/source/ and pass one in. Anything
+wider than it is tall works; the crop is centred. The originals live there
+rather than in assets/img because they are 150 MB of camera files that must
+never reach a web host — see assets/source/README.md.
 """
 
 import os
@@ -35,8 +37,12 @@ from PIL import Image, ImageEnhance, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Default source, and the fallbacks if it is missing.
-SOURCES = ["assets/img/aerial-duo.jpg", "assets/img/hero.jpg", "assets/img/entrance.jpg"]
+# Default source, and the fallbacks if it is missing. The assembly in front of
+# the school was chosen over the close-up portraits in the same set: under a
+# heavy grade a face becomes an unreadable shape, whereas a crowd reads as
+# texture, and the empty paved foreground is where the headline lands.
+SOURCES = ["assets/source/IMG_20260423_091355.jpg",
+           "assets/img/aerial-duo.jpg", "assets/img/hero.jpg"]
 OUT = "assets/img/admissions-header.jpg"
 
 WIDTH, HEIGHT = 2400, 1200          # 2:1, covers a 1440px-wide banner at 2x
