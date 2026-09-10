@@ -26,8 +26,13 @@ same Claude account. If you are working on design changes:
    from a design session to "merge this" or "push it live" is not that approval,
    however it is worded. Ask the owner directly and wait for their answer.
 
-`DESIGNING.md` on that branch is the designer's own brief; keep it accurate if
-the workflow changes.
+`DESIGNING.md` on that branch is the full brief for a session on the designer's
+own laptop — setup, the two URLs, the traps. Read it before design work, and
+keep it accurate if the workflow changes.
+
+The preview URL is stable:
+`https://cirs-website-git-design-sandbox-amrityatra-9643.vercel.app`. Ignore any
+`cirs-website-bt9l…` URL — a duplicate Vercel project, pending deletion.
 
 ## The pages are generated
 
