@@ -1,0 +1,124 @@
+/* ============================================================
+   Page-level components
+   ------------------------------------------------------------
+   assets/css/cirs.css is the design system, and it comes out of
+   the Claude artifact — a single-page design. It has no notion of
+   a site with ten pages in it, so the two components that only a
+   multi-page site needs live here instead, in the repository,
+   maintained by hand.
+
+   Everything below is built from the tokens cirs.css already
+   defines. Nothing here redefines a colour, a font or a spacing
+   step of its own.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Page header — the banner that replaces the hero on every page
+   except the home page. It carries .on-purple as well, so it
+   inherits the dark-ground treatment already defined there:
+   the gold small caps, the softened body copy, the hairline
+   rules. It should not need a single colour of its own.
+   ------------------------------------------------------------ */
+.pagehead{
+  position:relative;
+  /* Clears the fixed header, which is about 76px tall, then adds
+     the section's own breathing room underneath it. */
+  padding-block:calc(76px + clamp(40px,5.5vw,84px)) clamp(40px,5.5vw,84px);
+  overflow:hidden;
+  background-image:
+    radial-gradient(120% 140% at 50% -20%, rgba(255,195,8,.10) 0%, rgba(255,195,8,0) 60%);
+}
+.pagehead__inner{ max-width:820px; }
+.pagehead h1{
+  font-size:clamp(2.3rem,5vw,4.2rem);
+  line-height:1.02;
+  letter-spacing:-.018em;
+  color:#fff;
+}
+.pagehead h1 em{ color:var(--gold-lit); }
+.pagehead .lead{ margin-top:var(--space-4); }
+
+/* The trail back to the home page, above the title. */
+.pagehead__back{
+  display:inline-flex; align-items:center; gap:9px;
+  margin-bottom:var(--space-4);
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.14em; font-size:1rem;
+  color:var(--on-purple-mute);
+  transition:color .25s var(--e);
+}
+.pagehead__back:hover{ color:var(--gold-lit); }
+.pagehead__back svg{ flex:none; }
+
+/* ------------------------------------------------------------
+   Under construction — the standing note at the foot of every
+   page, so a visitor understands that what they are reading is
+   not yet the finished thing.
+
+   Deliberately quiet: a hairline, small caps and one line of
+   italic serif. It has to be honest without looking like an
+   error message on a school's front door.
+   ------------------------------------------------------------ */
+.uc{
+  border-top:1px solid var(--rule);
+  background:var(--paper);
+}
+.uc__inner{
+  display:flex; align-items:flex-start; gap:var(--space-4);
+  padding-block:clamp(30px,4vw,52px);
+  max-width:var(--measure);
+  margin-inline:auto;
+  text-align:left;
+}
+.uc__mark{
+  flex:none; width:38px; height:38px; border-radius:50%;
+  display:grid; place-items:center;
+  border:1px solid var(--gold);
+  color:var(--gold);
+}
+.uc__label{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.16em; font-size:1rem;
+  color:var(--maroon);
+  line-height:1;
+  margin-bottom:7px;
+}
+.uc__text{
+  font-family:var(--serif); font-style:italic;
+  font-size:1.06rem; line-height:1.5; color:var(--ink-soft);
+}
+.uc__text a{ color:var(--purple); font-style:normal; font-weight:500; border-bottom:1px solid var(--rule); }
+.uc__text a:hover{ border-bottom-color:var(--gold); }
+
+@media (max-width:560px){
+  .uc__inner{ gap:var(--space-3); }
+  .uc__mark{ width:32px; height:32px; }
+}
+
+/* ------------------------------------------------------------
+   Header over the open drawer
+   ------------------------------------------------------------
+   At the top of a page the header is transparent with white text,
+   because it floats over the hero. The drawer is paper-coloured
+   and opens underneath it, so in that state the wordmark and both
+   controls turn invisible — which matters more now that the menu
+   is the site's whole navigation rather than a convenience.
+
+   cirs.js already puts .is-locked on <body> while the drawer is
+   open, so borrow the scrolled treatment for exactly that long.
+   These mirror the .header.is-stuck rules in cirs.css.
+   ------------------------------------------------------------ */
+body.is-locked .header{
+  background:var(--paper);
+  border-bottom-color:var(--rule-soft);
+}
+body.is-locked .brand__name{ color:var(--purple); font-weight:400; }
+body.is-locked .brand__sub{ color:var(--ink-mute); }
+body.is-locked .header__enquire{ color:var(--ink); font-weight:600; }
+body.is-locked .header__enquire svg{ color:var(--gold); }
+body.is-locked .menubtn{ color:var(--ink); font-weight:600; }
+body.is-locked .menubtn__dots i{ background:var(--gold); }

@@ -5,63 +5,96 @@ Everything in this zip is static. No build step, no server-side code, no databas
 ## What's in here
 
 ```
-index.html                 the site
-assets/css/cirs.css        styles
+index.html                 the home page
+why-cirs.html              the other nine pages, one file each
+our-leaders-speak.html
+our-leadership.html
+academics.html
+student-life.html
+sports.html
+arts.html
+admissions.html
+alumni.html
+assets/css/cirs.css        the design system, imported from the artifact
+assets/css/pages.css       the two components only a multi-page site needs
 assets/js/cirs.js          interaction layer
 assets/img/                the emblem, photography, favicon, social card
-assets/video/               the hero background loop
-dist/cirs-home.html        the entire site in one file (images inlined)
+assets/video/              the hero background loop
 docs/design-system.html    the design specification
-tools/                     scripts that regenerate the above (see below)
+tools/                     the scripts that generate every page (see below)
 .github/workflows/ci.yml   the checks that run on every push and pull request
 ```
 
-`index.html` and `assets/` are the source of truth. `dist/cirs-home.html` is built from them and
-should never be hand-edited — a `tools/build-bundles.py` run overwrites it.
+**Every `.html` file at the root is generated. Do not edit them.** A rebuild
+overwrites them and CI fails if what is committed does not match a rebuild. Edit these
+instead, then run `python3 tools/build-site.py`:
+
+```
+tools/pages/<slug>.html     the sections unique to that page
+tools/partials/             the header, menu, footer and chrome every page shares
+tools/build-site.py         the page list: titles, menu labels, banner copy
+```
+
+The site was one long page until the menu became redundant. It is now ten, which means
+the header, menu and footer appear ten times — and a menu that has to be edited in ten
+files is a menu that goes stale in nine of them. Hence the partials, and hence the
+menu being generated from the page list in `tools/build-site.py`: add a page there and
+it appears in the menu of all ten at once.
 
 ## The checks
 
 Every push and pull request runs three things, all of which you can run yourself:
 
 ```sh
-npx html-validate index.html      # structure and accessibility
-python3 tools/check-links.py      # every anchor and asset reference resolves
-python3 tools/build-bundles.py    # then: git diff --quiet -- dist/cirs-home.html
+npx html-validate *.html          # structure and accessibility, every page
+python3 tools/check-links.py      # every link and asset reference resolves
+python3 tools/build-site.py       # then: git diff --quiet -- '*.html'
 ```
 
-The last one is the important one. `dist/cirs-home.html` is generated, and nothing else stops
-someone editing it directly and having the change silently overwritten by the next build — so CI
-rebuilds it and fails if the committed copy differs.
+The last one is the important one. Editing a generated page by hand looks like it
+works and is silently undone by the next build — and the menu, which is on all ten
+pages, is exactly what someone would be tempted to fix in one file. So CI rebuilds and
+fails if the committed pages differ.
 
-The link check never touches the network. It verifies in-page anchors and `assets/` paths against
-what is actually in the repository, and leaves external URLs alone: a check that goes red because
-a CDN had a bad morning is one people learn to ignore. `href="#"` is the site's own placeholder for
-a page that does not exist yet — the drawer and footer are full of them — and is allowed.
+The link check never touches the network. Since the site became ten pages the menu *is*
+the navigation, so it verifies that `page.html#anchor` links point at a page that
+exists **and** an anchor that exists on it — the failure a single-page checker cannot
+see. External URLs are left alone: a check that goes red because a CDN had a bad
+morning is one people learn to ignore. `href="#"` is the site's own placeholder for a
+page that does not exist yet and is allowed.
 
-`.htmlvalidate.json` turns off exactly one rule, `no-autoplay`. The hero background is a muted,
-looping, decorative video marked `aria-hidden`; that rule guards against media that starts making
-noise at a visitor, which this cannot.
+`.htmlvalidate.json` turns off exactly one rule, `no-autoplay`. The hero background is
+a muted, looping, decorative video marked `aria-hidden`; that rule guards against media
+that starts making noise at a visitor, which this cannot.
 
-## Regenerating from a Claude artifact
+## Bringing in a new design from the Claude artifact
 
-The design lives as a Claude artifact: one self-contained HTML file with every photograph and the
-campus video embedded as base64. When a new version of it comes back, split it into hostable files
-rather than committing the 10 MB blob as the site:
+The design lives as a Claude artifact: one self-contained HTML file with every
+photograph and the campus video embedded as base64. It is still a **one page** design,
+so the sync deliberately no longer writes `index.html` — if it did, it would flatten
+the site back into a single scroll every time it ran.
 
+```sh
+python3 tools/sync-from-artifact.py path/to/artifact.html
+python3 tools/build-site.py
 ```
-python3 tools/sync-from-artifact.py path/to/artifact.html   # -> index.html, assets/*
-python3 tools/build-bundles.py                              # -> dist/cirs-home.html
-```
 
-The sync keeps the curated `<head>` in `tools/head.html` (title, description, canonical URL, social
-card) rather than the artifact's bare `<title>`, and names each embedded photograph from
-`tools/media.tsv`, keyed by the md5 of its bytes. A photograph the table doesn't know about stops
-the sync with the digest to add — so nothing ever lands in `assets/img/` as `image-7.jpg`.
+The sync takes the design system and the media — `assets/css/cirs.css`,
+`assets/js/cirs.js`, `assets/img/`, `assets/video/` — and writes the artifact's markup
+to `tools/artifact-reference.html`, which is neither served nor built. When the
+artifact gains a section, diff it against that reference file, move the new markup into
+the right `tools/pages/*.html`, and rebuild. That hand step is deliberate: only a
+person can say which of ten pages a new section belongs on.
 
-It also reapplies one small correction the artifact does not carry — an explicit `type="button"` on
-the two `<button>` elements, which the accessibility pass asks for. That belongs upstream in the
-artifact eventually; until then it survives every sync. Keep that step tiny: anything larger than an
-attribute should be fixed in the design, not patched on the way out of it.
+Each embedded photograph is named from `tools/media.tsv`, keyed by the md5 of its
+bytes, so a photograph keeps its filename across artifact versions. A digest the table
+does not know about stops the sync with the digest to add — so nothing ever lands in
+`assets/img/` as `image-7.jpg`.
+
+The sync also reapplies one small correction the artifact does not carry: an explicit
+`type="button"` on the two `<button>` elements, which the accessibility pass asks for.
+That belongs upstream in the artifact eventually. Keep that step tiny — anything larger
+than an attribute should be fixed in the design, not patched on the way out of it.
 
 ## Put it online
 
@@ -78,7 +111,9 @@ output directory **`.`**
 Push the contents to a repository, then Settings → Pages → deploy from branch → root.
 
 **A normal shared host (cPanel, FTP)**
-Upload `index.html` and the `assets` folder into `public_html`. That's it.
+Upload all ten `.html` files and the `assets` folder into `public_html`, keeping them in
+the same directory — the pages link to each other by plain filename, so the structure has
+to stay flat. That's it.
 
 ## Check it locally first
 
@@ -88,13 +123,16 @@ From inside the unzipped folder:
 python -m http.server 8000
 ```
 
-Then open `http://localhost:8000`. Opening `index.html` by double-clicking also works, but a
-local server matches how it will behave once hosted.
+Then open `http://localhost:8000`. Opening `index.html` by double-clicking works too, and the
+links between pages still resolve, but a local server matches how it will behave once hosted.
 
 ## Just need to show someone quickly
 
-`dist/cirs-home.html` is the complete site in a single file with every image embedded. Email it,
-put it in Drive, or open it straight from disk — no server or `assets` folder required.
+There used to be a `dist/cirs-home.html` here — the whole site inlined into one file to
+email or open from a USB stick. That worked while the site was one page. It cannot
+carry ten, because its menu links would all point at pages that are not in the file, so
+it has been removed rather than left to mislead. Send the Netlify preview link, or a
+zip of `index.html`, the other nine pages and `assets/`.
 
 ## The content editor — parked
 

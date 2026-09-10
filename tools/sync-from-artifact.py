@@ -1,23 +1,35 @@
 #!/usr/bin/env python3
-"""Rebuild the deployable site from a Claude artifact export.
+"""Import the design system from a Claude artifact export.
 
 The artifact is a single self-contained HTML file: styles inline, scripts
 inline, every photograph and the campus video embedded as base64 data URIs.
-That is fine to preview and impossible to host, so this script splits it back
-into the shape the web server wants:
+It is also, still, a ONE PAGE design — and this site is now ten pages built by
+tools/build-site.py. So this script no longer writes index.html. If it did, it
+would flatten the whole site back into a single scroll on the next run.
+
+What it takes from the artifact is the design system and the media:
 
     assets/css/cirs.css     the artifact's <style> blocks
     assets/js/cirs.js       the artifact's inline <script> blocks
     assets/img/*, video/*   every data URI, written out as a real file
-    index.html              the markup, with the curated <head> from
-                            tools/head.html and external asset references
+
+and it writes the artifact's markup to
+
+    tools/artifact-reference.html
+
+which is NOT served and NOT built. It is the reference copy: when the artifact
+gains a section, diff it against this file to see what changed, then move the
+new markup into the right tools/pages/*.html by hand and rebuild. That hand
+step is deliberate — only a person can say which of ten pages a new section
+belongs on.
 
 Media files are identified by the md5 of their decoded bytes, so re-running
 this on an unchanged artifact is a no-op and a changed photograph keeps its
-filename. A digest the table below does not know about is an error: name it
-here first, so nothing lands in the repo as `image-7.jpg`.
+filename. A digest the table below does not know about is an error: name it in
+tools/media.tsv first, so nothing lands in the repo as `image-7.jpg`.
 
     python3 tools/sync-from-artifact.py <artifact.html>
+    python3 tools/build-site.py          # then rebuild the pages
 """
 
 import hashlib
@@ -117,29 +129,23 @@ def main():
     body = normalise(body)
     body = body.strip("\n") + "\n"
 
-    head = open(os.path.join(ROOT, "tools", "head.html"), encoding="utf-8").read()
-    head = head.replace("{{CACHE_BUST}}", CACHE_BUST)
-
-    ext_js = re.findall(r'<script[^>]*\bsrc="(https://[^"]+)"', authored)
-    tags = "".join(f'<script src="{u}" defer></script>\n' for u in ext_js)
-    tags += f'<script src="assets/js/cirs.js?{CACHE_BUST}" defer></script>\n'
-
     write(os.path.join(ROOT, "assets/css/cirs.css"), "\n".join(s.strip() for s in styles) + "\n")
     write(os.path.join(ROOT, "assets/js/cirs.js"), "\n".join(s.strip() for s in inline_js) + "\n")
-    write(os.path.join(ROOT, "index.html"), head + "<body>\n" + body + tags + "</body>\n</html>\n")
+    write(os.path.join(ROOT, "tools/artifact-reference.html"), body)
 
     stale = sorted(
         os.path.relpath(os.path.join(r, f), ROOT)
-        for r, _, fs in os.walk(os.path.join(ROOT, "assets/img"))
-        for f in fs
-    ) + sorted(
-        os.path.relpath(os.path.join(r, f), ROOT)
-        for r, _, fs in os.walk(os.path.join(ROOT, "assets/video"))
+        for folder in ("assets/img", "assets/video")
+        for r, _, fs in os.walk(os.path.join(ROOT, folder))
         for f in fs
     )
     orphans = [p for p in stale if p not in written]
     if orphans:
         print("  note: not referenced by this artifact: " + ", ".join(orphans))
+
+    print("\n  The pages were NOT rebuilt. tools/artifact-reference.html now holds the")
+    print("  artifact's markup: diff it to see what the design changed, move any new")
+    print("  section into the right tools/pages/*.html, then run tools/build-site.py.")
 
 
 def normalise(body):
