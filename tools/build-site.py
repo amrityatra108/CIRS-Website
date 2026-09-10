@@ -28,7 +28,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=5"
+CACHE_BUST = "b=6"
 
 # slug -> page definition. Order here is the order in the menu.
 #   nav    the label in the menu and the <title>
@@ -126,10 +126,15 @@ PAGES = {
         "nav": "Admissions",
         "group": "Admissions",
         "title": "Admissions",
-        "description": "How to apply to Chinmaya International Residential School — registration, "
-                       "the entrance assessment, and the interview.",
-        "banner": ("Admissions 2027–28", "How to <em>Apply.</em>",
-                   "Registration, the entrance assessment, the interview, and the offer."),
+        "description": "How to apply to Chinmaya International Residential School — registration "
+                       "for 2027–2028, the entrance examination, visiting, and fees.",
+        # A hero rather than the flat band: this is the page that has to
+        # persuade, not merely inform.
+        "hero": ("Admissions 2027–2028", "How to <em>Apply.</em>",
+                 "Registration is open. The entrance examination, a visit to the school, and the "
+                 "offer — the whole procedure, in order."),
+        "hero_placeholder": "Header animation &mdash; admissions<br>photograph or looping video<br>to be supplied",
+        "jump": True,
     },
     "alumni": {
         "nav": "Alumni",
@@ -152,7 +157,9 @@ SECTION_PAGE = {
     "arts": "arts",
     "pathways": "alumni",
     "latest": "news", "diary": "news",
-    "admissions": "admissions",
+    "admissions": "admissions", "apply": "admissions", "examination": "admissions",
+    "visit": "admissions", "before": "admissions", "fees": "admissions",
+    "voices": "admissions", "gallery": "admissions", "contact": "admissions",
     "top": "index", "main": None,   # main is on every page; top only on home
 }
 
@@ -171,10 +178,20 @@ def rewrite_links(html, slug):
         if anchor not in SECTION_PAGE:
             return m.group(0)          # href="#" placeholders, and #main
         target = SECTION_PAGE[anchor]
-        if target is None or target == slug:
-            return m.group(0)          # already on this page — keep the anchor
+        if target is None:
+            return m.group(0)
+        if target == slug:
+            # Already on this page. An anchor equal to the slug is the old
+            # single page's name for the whole section, which is now the page
+            # itself — so it means the top, not a section that no longer exists.
+            return 'href="#top"' if anchor == slug else m.group(0)
         page = "index.html" if target == "index" else f"{target}.html"
-        return f'href="{page}#{anchor}"' if target != "index" else f'href="{page}"'
+        # A link to #admissions means the Admissions page, not a section on it.
+        # The old single page had a section per page; now the page IS the
+        # section, so an anchor equal to the slug becomes a plain page link.
+        if target == "index" or anchor == target:
+            return f'href="{page}"'
+        return f'href="{page}#{anchor}"'
     return re.sub(r'href="#([A-Za-z0-9_-]+)"', swap, html)
 
 
@@ -215,6 +232,59 @@ HOME_TAB = '''<a class="header__home" href="index.html">
       </a>'''
 
 
+def hero_html(page):
+    """The home page's opening in miniature, for a page that must persuade.
+
+    The media slot deliberately carries a labelled placeholder rather than a
+    stand-in photograph: a temporary picture on an admissions banner is the
+    kind of thing that quietly ships.
+    """
+    eyebrow, heading, lead = page["hero"]
+    return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
+  <div class="pagehero__media">
+    <div class="pagehero__ph"><span>{page["hero_placeholder"]}</span></div>
+  </div>
+  <div class="pagehero__mono" aria-hidden="true"></div>
+  <div class="pagehero__scrim" aria-hidden="true"></div>
+  <div class="wrap pagehero__inner">
+    <p class="marker"><span class="sc">{eyebrow}</span></p>
+    <h1 class="serif" data-split>{heading}</h1>
+    <p class="lead">{lead}</p>
+    <p class="pagehero__cta">
+      <a class="btn btn--primary btn--lg" href="https://easycollege.in/cirs/school/application/index.aspx">Register online</a>
+      <a class="btn btn--ghost btn--lg" href="#apply">How to apply</a>
+    </p>
+  </div>
+</section>'''
+
+
+def jump_html(body):
+    """Build the right-hand index from the page's own sections.
+
+    Labels come from each section's small-caps marker, so the index cannot
+    drift out of step with the headings — there is nothing to keep in sync.
+    """
+    items = []
+    for m in re.finditer(r'<section[^>]*\bid="([^"]+)"[^>]*>(.*?)</section>', body, re.S):
+        sid, inner = m.group(1), m.group(2)
+        label = re.search(r'<span class="sc">(.*?)</span>', inner, re.S)
+        if label:
+            items.append((sid, re.sub(r"\s+", " ", label.group(1)).strip()))
+    if not items:
+        return ""
+    links = "\n".join(f'      <a href="#{i}">{t}</a>' for i, t in items)
+    return f'''<nav class="jump" aria-label="On this page">
+  <div class="jump__panel" id="jumpPanel">
+      <p>On this page</p>
+{links}
+  </div>
+  <button type="button" class="jump__toggle" aria-expanded="false" aria-controls="jumpPanel">
+    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>On this page</span>
+  </button>
+</nav>'''
+
+
 UC = '''<section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -245,9 +315,14 @@ def build(slug, page):
         "{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
-    if page["banner"]:
+    if page.get("hero"):
+        parts.append(hero_html(page))
+    elif page.get("banner"):
         parts.append(banner_html(page))
-    parts.append(read(f"tools/pages/{slug}.html").rstrip("\n"))
+    content = read(f"tools/pages/{slug}.html").rstrip("\n")
+    parts.append(content)
+    if page.get("jump"):
+        parts.append(jump_html(content))
     if page.get("uc", True):
         parts.append(UC)
     parts.append("</main>")

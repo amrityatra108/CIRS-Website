@@ -16,6 +16,7 @@ sports.html
 arts.html
 admissions.html
 alumni.html
+assets/js/pages.js         behaviour only a multi-page site needs
 assets/css/cirs.css        the design system, imported from the artifact
 assets/css/pages.css       the components only a multi-page site needs
 assets/js/cirs.js          interaction layer
@@ -177,10 +178,13 @@ step with the site in silence, which is exactly the failure that check exists to
   the diary taken from new.cirschool.org. It is a hand-edited page: add an `<article class="newsitem">`
   to the grid for each new report, or replace the `.newslead` for a big one, then rebuild. Nothing
   fetches from that site automatically, so this page goes stale unless someone updates it.
-- **The admissions year needs settling.** new.cirschool.org announces admissions open for
-  **2026–27**; this site's Admissions page is headed **2027–28**. One of them is wrong, and until
-  it is resolved the News page deliberately carries no admissions announcement rather than adding
-  a third version of the claim.
+- **Admissions material still to come**: the fee structure PDF for 2027–2029 (the old site linked
+  one; it has not been re-published here), the application timeline, the interview format and how
+  offers are communicated, and photographs for the six slots on the Admissions page plus three
+  testimonials. Every one of those is a bracketed placeholder on the page today.
+- **The header animation for the Admissions banner** — a photograph or a short looping video. The
+  banner currently renders a labelled placeholder rather than a stand-in picture, deliberately: a
+  temporary photograph on an admissions banner is the kind of thing that quietly ships.
 - **Board of Directors introductions** for the Our People section. All eight roles are named and
   correct; every biography is a bracketed `[A short introduction to … to be supplied by the
   school.]` placeholder. Five of the eight also need a photograph — Swami Swaroopananda, Shri. Viju
