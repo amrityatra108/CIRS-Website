@@ -28,7 +28,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=15"
+CACHE_BUST = "b=16"
 
 # slug -> page definition. Order here is the order in the menu.
 #   nav    the label in the menu and the <title>
@@ -137,6 +137,22 @@ PAGES = {
         "hero_placeholder": "Header animation &mdash; admissions<br>photograph or looping video<br>to be supplied",
         "jump": True,
         "popup": True,
+    },
+    "parent-portal": {
+        # group None keeps it out of the generated menu: it is reached from the
+        # drawer's utility links, not from the page index, and listing it
+        # alongside Academics and Student Life would overstate it.
+        "nav": "Parent Portal",
+        "group": None,
+        "title": "Parent Portal",
+        "description": "The CIRS Parent Portal is not open yet. How to reach the school in the "
+                       "meantime.",
+        "banner": ("Parents", "Parent <em>Portal.</em>",
+                   "A secure area for parents. It is not open yet &mdash; this page says so plainly, "
+                   "and gives you the people to contact until it is."),
+        # the page is itself an under-construction notice; the standard footer
+        # one underneath it would only say the same thing twice.
+        "uc": False,
     },
     "alumni": {
         "nav": "Alumni",
