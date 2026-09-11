@@ -246,8 +246,15 @@
   function heroParallax() {
     var hero = $(".hero"), img = $(".hero__media img, .hero__media video");
     if (!hero || !img || !hasST || !animate) return;
-    gsap.fromTo(img, { scale: 1.14, yPercent: -3 }, {
-      scale: 1, yPercent: 6, ease: "none",
+
+    // The media is sized exactly to the hero, so scaling from the centre is
+    // the only thing that covers the drift: it gains (scale-1)/2 of its
+    // height as overhang on each edge, and the drift may not exceed that.
+    // This ended at scale 1 while still pushed 6% down, which left 6% of the
+    // hero's own ground showing above the video as a black band on the way
+    // back up. Both ends now keep more overhang than the drift spends.
+    gsap.fromTo(img, { scale: 1.20, yPercent: -4 }, {
+      scale: 1.12, yPercent: 4, ease: "none",
       scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: .6 }
     });
   }
@@ -276,7 +283,9 @@
       var tl = gsap.timeline({ scrollTrigger: { trigger: frame, start: "top 86%", once: true } });
       tl.fromTo(frame, { clipPath: "inset(0% 0% 100% 0%)" },
                        { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "expo.out" });
-      if (img) tl.fromTo(img, { scale: 1.18 }, { scale: 1, duration: 1.4, ease: "expo.out" }, 0);
+      // Settles to 1.12, not 1: the drift below spends 4% and needs the
+      // overhang to cover it, exactly as the hero does.
+      if (img) tl.fromTo(img, { scale: 1.18 }, { scale: 1.12, duration: 1.4, ease: "expo.out" }, 0);
 
       // and keep drifting gently while they are on screen
       if (img) {
@@ -709,11 +718,136 @@
     if (c) c.remove();
   }
 
+
+  /* ==========================================================
+     Enquire panel
+     Hover for a mouse, click for a touch screen, focus for a
+     keyboard — all three drive the same open state.
+     ========================================================== */
+  function enquirePanel() {
+    var wrap = $("#enq"), btn = $("#enqBtn");
+    if (!wrap || !btn) return;
+
+    var open = false, hoverTimer;
+    var fine = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+
+    function set(next) {
+      if (next === open) return;
+      open = next;
+      wrap.classList.toggle("is-open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    if (fine) {
+      wrap.addEventListener("mouseenter", function () {
+        window.clearTimeout(hoverTimer);
+        set(true);
+      });
+      // A short grace period: the pointer may clip a corner on its way in.
+      wrap.addEventListener("mouseleave", function () {
+        hoverTimer = window.setTimeout(function () { set(false); }, 180);
+      });
+    }
+
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      // With a mouse, moving onto the tab has already opened the panel, so a
+      // plain toggle here would shut it the instant it was clicked. A mouse
+      // click therefore only ever opens; hovering away is what closes it.
+      // Touch has no hover, so there the click is the toggle.
+      set(fine ? true : !open);
+    });
+
+    // Only a *keyboard* focus opens it. Reacting to every focusin meant a
+    // mouse click opened the panel on focus and then the click handler below
+    // toggled it straight shut again, so it never appeared.
+    wrap.addEventListener("focusin", function (e) {
+      var t = e.target;
+      if (!t || !t.matches) return;
+      try { if (t.matches(":focus-visible")) set(true); } catch (err) { /* older browser */ }
+    });
+    wrap.addEventListener("focusout", function (e) {
+      if (!wrap.contains(e.relatedTarget)) set(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && open) { set(false); btn.focus(); }
+    });
+    document.addEventListener("click", function (e) {
+      if (open && !wrap.contains(e.target)) set(false);
+    });
+  }
+
+  /* ==========================================================
+     Film lightbox
+     The iframe is built on open and removed on close: YouTube is
+     not contacted until someone asks for the film, and removing
+     the element is the only thing that reliably stops the audio.
+     ========================================================== */
+  function filmLightbox() {
+    var box = $("#lightbox"), frame = $("#lightboxFrame");
+    var triggers = $$("[data-video]");
+    if (!box || !frame || !triggers.length) return;
+
+    var opener = null;
+
+    function open(id, from) {
+      opener = from || null;
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) +
+              "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+      f.title = "The official CIRS film";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; " +
+                "gyroscope; picture-in-picture; web-share";
+      f.setAttribute("allowfullscreen", "");
+      f.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+      frame.appendChild(f);
+
+      box.hidden = false;
+      document.body.classList.add("has-lightbox");
+      if (lenis) lenis.stop();
+      var close = $(".lightbox__close", box);
+      if (close) close.focus();
+    }
+
+    function close() {
+      if (box.hidden) return;
+      box.hidden = true;
+      frame.innerHTML = "";
+      document.body.classList.remove("has-lightbox");
+      if (lenis) lenis.start();
+      if (opener) { opener.focus(); opener = null; }
+    }
+
+    triggers.forEach(function (t) {
+      t.addEventListener("click", function (e) {
+        var id = t.getAttribute("data-video");
+        if (!id) return;              // no id: leave the href alone
+        e.preventDefault();
+        open(id, t);
+      });
+    });
+
+    box.addEventListener("click", function (e) {
+      if (e.target.closest("[data-close]")) close();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !box.hidden) close();
+      // Nothing behind the dialog should be reachable while it is open.
+      if (e.key === "Tab" && !box.hidden) {
+        var c = $(".lightbox__close", box);
+        if (c) { e.preventDefault(); c.focus(); }
+      }
+    });
+  }
+
   /* ==========================================================
      Boot
      ========================================================== */
   function start() {
     backToTop();
+    enquirePanel();
+    filmLightbox();
     if (!animate) { failOpen(); dayTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");

@@ -672,3 +672,266 @@ body.is-locked .htab:hover{ color:var(--purple); }
   .pagehero__video{ display:none; }
   .pagehero__media{ background:url("../img/admissions-honeycomb.jpg") center/cover no-repeat; }
 }
+
+/* ============================================================
+   Enquire — a contact panel, not a destination
+   ------------------------------------------------------------
+   Enquire used to jump to the Admissions page, which answered a
+   question nobody had asked: the people who press it want to
+   reach somebody, not read a page. It now opens a panel in place.
+
+   It is deliberately a glass surface rather than a solid card —
+   the site behind it stays visible, and each row lights up as it
+   is pointed at, so the panel reads as part of the page rather
+   than a dialog dropped on top of it.
+
+   Hover opens it for a mouse; cirs.js also wires focus, click and
+   Escape, so a keyboard or a phone reaches the same thing.
+   ============================================================ */
+.enq{ position:relative; }
+.enq__btn{
+  background:none; border:0; padding:2px 6px; cursor:pointer;
+  font:inherit;
+}
+
+.enq__panel{
+  position:absolute; top:calc(100% + 12px); left:-10px;
+  width:min(322px, calc(100vw - 28px));
+  padding:var(--space-4) var(--space-4) var(--space-5);
+  z-index:40;
+  /* Opaque enough that the panel stays dark over the light header too:
+     at .70 the paper behind it lifted the ground to rgb(89,84,93) and
+     the captions fell to 3.12:1. Still glass, just less of it. */
+  background:rgba(18,12,25,.88);
+  border:1px solid rgba(245,238,242,.17);
+  border-radius:8px;
+  box-shadow:0 22px 60px rgba(8,5,12,.46);
+  -webkit-backdrop-filter:blur(16px) saturate(130%);
+          backdrop-filter:blur(16px) saturate(130%);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transform:translateY(-6px);
+  transition:opacity .26s var(--e), transform .26s var(--e), visibility .26s var(--e);
+}
+/* An invisible bridge across the gap, so travelling from the tab to
+   the panel with a mouse does not pass through dead space and close it. */
+.enq__panel::before{
+  content:""; position:absolute; left:0; right:0; top:-14px; height:14px;
+}
+.enq.is-open .enq__panel{
+  opacity:1; visibility:visible; pointer-events:auto; transform:none;
+}
+/* Where the glass is unavailable the panel simply becomes solid, rather
+   than leaving pale text floating over whatever is behind it. */
+@supports not ((-webkit-backdrop-filter:blur(2px)) or (backdrop-filter:blur(2px))){
+  .enq__panel{ background:rgba(16,11,22,.96); }
+}
+
+.enq__title{
+  color:var(--gold-lit);
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.13em; font-size:.8rem; line-height:1;
+  margin:0 0 var(--space-3);
+}
+.enq__title--social{
+  margin-top:var(--space-4);
+  padding-top:var(--space-4);
+  border-top:1px solid rgba(245,238,242,.14);
+}
+
+.enq__row{
+  display:flex; align-items:center; gap:var(--space-3);
+  padding:9px 10px; margin:0 -10px;
+  border-radius:6px;
+  color:var(--on-purple);
+  transition:background .22s var(--e), color .22s var(--e);
+}
+.enq__row + .enq__row{ margin-top:2px; }
+.enq__ico{ display:grid; place-items:center; color:var(--gold-lit); flex:none; }
+.enq__txt{ display:block; min-width:0; }
+.enq__txt b{
+  display:block; font-weight:500; font-size:.95rem; letter-spacing:.01em;
+  overflow-wrap:anywhere;
+}
+.enq__txt small{
+  display:block; margin-top:2px;
+  font-size:.74rem; letter-spacing:.04em;
+  color:var(--on-purple-soft);
+}
+.enq__row:hover,
+.enq__row:focus-visible{ background:rgba(255,195,8,.13); color:#fff; }
+.enq__row:hover .enq__ico{ color:var(--gold); }
+
+.enq__social{ display:flex; flex-wrap:wrap; gap:6px 8px; }
+.enq__social a{
+  padding:5px 10px; border-radius:99px;
+  border:1px solid rgba(245,238,242,.18);
+  color:var(--on-purple-soft);
+  font-size:.78rem; letter-spacing:.03em;
+  transition:background .22s var(--e), color .22s var(--e), border-color .22s var(--e);
+}
+.enq__social a:hover,
+.enq__social a:focus-visible{
+  background:rgba(255,195,8,.15); border-color:rgba(255,195,8,.4); color:#fff;
+}
+
+/* The header goes light once it is a solid bar, but the panel stays a dark
+   glass surface — so only the tab beneath it needs the light treatment. */
+@media (max-width:700px){
+  .enq__panel{ left:-6px; }
+}
+
+/* ============================================================
+   Film lightbox
+   ------------------------------------------------------------
+   Above the admissions popup (300) and below the opening curtain
+   (400), so the film can never appear over the intro.
+   ============================================================ */
+.lightbox{ position:fixed; inset:0; z-index:350; display:grid; place-items:center; }
+.lightbox[hidden]{ display:none; }
+.lightbox__back{
+  position:absolute; inset:0;
+  background:rgba(8,5,12,.88);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+}
+.lightbox__panel{
+  position:relative;
+  width:min(1120px, 92vw);
+  aspect-ratio:16/9; max-height:82vh;
+  background:#000;
+  border:1px solid var(--rule-purple);
+  border-radius:8px; overflow:hidden;
+  box-shadow:0 40px 120px rgba(0,0,0,.6);
+}
+.lightbox__frame{ position:absolute; inset:0; }
+.lightbox__frame iframe{ width:100%; height:100%; border:0; display:block; }
+.lightbox__close{
+  position:absolute; top:10px; right:10px; z-index:2;
+  width:38px; height:38px; display:grid; place-items:center;
+  border-radius:50%; cursor:pointer;
+  background:rgba(14,11,18,.68);
+  border:1px solid rgba(245,238,242,.24);
+  color:var(--on-purple);
+  transition:background .22s var(--e), color .22s var(--e);
+}
+.lightbox__close:hover{ background:var(--gold); color:var(--purple-ink); border-color:var(--gold); }
+body.has-lightbox{ overflow:hidden; }
+
+/* The window is a link, and a link that opens a player should say so. */
+.filmwin{ cursor:pointer; }
+
+/* ============================================================
+   The day ribbon
+   ------------------------------------------------------------
+   Two timetables on one clock. Both schools keep the same shape
+   of day an hour apart, and two tables made you hold sixteen
+   rows in your head to notice it; drawn to scale on a shared
+   axis, the offset is simply visible.
+
+   Every block is sized by its real duration (--span, in minutes)
+   via flex-grow, so the row is proportional at any width without
+   a single hard-coded pixel. Each carries its times as real text
+   for a screen reader, and shows them on hover for everyone else.
+   ============================================================ */
+.ribbon{ margin-top:clamp(28px,3.6vw,48px); }
+/* overflow-y:visible is ignored once overflow-x is auto — the browser
+   promotes it to auto — so the readout above each block was being clipped
+   by this very element. The room it needs is made *inside* the scroller
+   instead, and pulled back up so the layout is unchanged. */
+.ribbon__scroll{
+  overflow-x:auto;
+  padding-top:74px; margin-top:-74px;
+  padding-bottom:var(--space-2);
+}
+.ribbon__inner{ min-width:660px; }
+
+.ribbon__row{ display:grid; gap:var(--space-2); margin-bottom:var(--space-5); }
+.ribbon__who{ display:flex; align-items:baseline; gap:var(--space-3); margin:0; flex-wrap:wrap; }
+.ribbon__who b{
+  font-family:var(--serif); font-size:1.16rem; font-weight:500; color:var(--purple);
+}
+.ribbon__who span{ font-size:.82rem; color:var(--ink-mute); letter-spacing:.03em; }
+
+.ribbon__track{
+  display:flex; list-style:none; margin:0; padding:0;
+  height:54px; border-radius:5px;
+  background:var(--paper-3);
+  border:1px solid var(--rule);
+}
+/* No overflow:hidden here — it would clip the readout that rises out of
+   each block. The ends are rounded on the blocks themselves instead. */
+.ribbon__track > li:first-child{ border-radius:4px 0 0 4px; }
+.ribbon__track > li:last-child{ border-radius:0 4px 4px 0; }
+.ribbon__gap{ flex:var(--span) 0 0; background:repeating-linear-gradient(
+    135deg, transparent 0 6px, rgba(124,112,128,.14) 6px 12px); }
+
+.ribbon__seg{
+  position:relative;
+  flex:var(--span) 0 0;
+  min-width:0;
+  border-right:1px solid rgba(250,247,248,.5);
+  transition:filter .2s var(--e);
+}
+.ribbon__seg:last-child{ border-right:0; }
+.ribbon__seg:hover{ filter:brightness(1.16); z-index:3; }
+
+/* The six kinds of hour. Chosen so the rhythm of the day reads at a
+   glance: study is the deep purple mass, meals the gold punctuation. */
+.ribbon__seg--wake{   background:#8C7E97; }
+.ribbon__seg--active{ background:#5B4A6E; }
+.ribbon__seg--spirit{ background:#7A0F1E; }
+.ribbon__seg--meal{   background:var(--gold); }
+.ribbon__seg--study{  background:var(--purple); }
+.ribbon__seg--rest{   background:#2B2037; }
+
+/* The readout. Positioned above the block and centred on it; the row
+   scrolls horizontally, so it is clamped inside rather than floating. */
+.ribbon__tip{
+  position:absolute; left:50%; bottom:calc(100% + 9px);
+  transform:translate(-50%,4px);
+  display:block; width:max-content; max-width:230px;
+  padding:8px 11px; border-radius:5px;
+  background:var(--purple-ink); color:var(--on-purple);
+  font-size:.82rem; line-height:1.35;
+  box-shadow:0 12px 30px rgba(21,8,24,.3);
+  opacity:0; pointer-events:none; z-index:4;
+  transition:opacity .18s var(--e), transform .18s var(--e);
+}
+.ribbon__tip b{ display:block; color:var(--gold-lit); font-weight:500; margin-bottom:1px; }
+.ribbon__seg:hover .ribbon__tip,
+.ribbon__seg:focus-within .ribbon__tip{ opacity:1; transform:translate(-50%,0); }
+
+/* Read by assistive technology and never shown: the whole day in order,
+   so none of this depends on being able to hover. */
+.ribbon__sr{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+.ribbon__axis{
+  position:relative; height:1.2em; margin:0;
+  font-size:.74rem; color:var(--ink-mute); letter-spacing:.04em;
+}
+.ribbon__axis span{ position:absolute; left:var(--at); transform:translateX(-50%); white-space:nowrap; }
+.ribbon__axis span:last-child{ transform:translateX(-88%); }
+
+.ribbon__legend{
+  display:flex; flex-wrap:wrap; gap:8px 16px;
+  margin:var(--space-5) 0 0; font-size:.8rem; color:var(--ink-soft);
+}
+.ribbon__key{ display:inline-flex; align-items:center; gap:7px; }
+.ribbon__key::before{
+  content:""; width:11px; height:11px; border-radius:2px; flex:none;
+}
+.ribbon__key--wake::before{   background:#8C7E97; }
+.ribbon__key--active::before{ background:#5B4A6E; }
+.ribbon__key--spirit::before{ background:#7A0F1E; }
+.ribbon__key--meal::before{   background:var(--gold); }
+.ribbon__key--study::before{  background:var(--purple); }
+.ribbon__key--rest::before{   background:#2B2037; }
+
+@media (max-width:700px){
+  .ribbon__track{ height:46px; }
+  .ribbon__tip{ max-width:190px; }
+}
