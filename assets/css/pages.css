@@ -999,6 +999,8 @@ body.has-lightbox{ overflow:hidden; }
   position:relative; margin:0; flex:none; height:100%;
   overflow:hidden; border-radius:3px;
   background:var(--purple-deep);
+  /* mix-blend-mode below must not reach past the tile. */
+  isolation:isolate;
 }
 .gt--w1{ aspect-ratio:1/1; }
 .gt--w2{ aspect-ratio:4/3; }
@@ -1006,12 +1008,49 @@ body.has-lightbox{ overflow:hidden; }
 .gt img{
   position:absolute; inset:0; width:100%; height:100%;
   object-fit:cover; display:block;
+  /* Drained here and tinted by the overlay: a real duotone rather than a
+     purple sheet laid over a colour photograph. */
+  filter:grayscale(1) contrast(1.14) brightness(.97);
+  transition:filter .55s var(--e);
 }
-/* The incoming frame of a cross-fade. */
-.gt img.gt__in{ opacity:0; transition:opacity 1.15s var(--e); }
-.gt img.gt__in.is-on{ opacity:1; }
+
+/* Every tile holds two frames and swings A -> B -> A for ever, the way
+   make-honeycomb.py pairs each cell with a second photograph and crosses
+   between them across the loop. Each tile's delay is set in the markup,
+   staggered seven ways, so no two neighbours turn together and the wall is
+   never all mid-fade at once. Nothing is swapped in or out while visible,
+   so there is no moment where a frame appears rather than arrives. */
+.gt__b{ animation:gt-cross 16s ease-in-out infinite; }
+@keyframes gt-cross{
+  0%   { opacity:0; }
+  42%  { opacity:1; }
+  58%  { opacity:1; }
+  100% { opacity:0; }
+}
+
+/* The duotone, and the colour underneath it.
+   The wall reads as one purple surface until you point at it; the tile you
+   are looking at returns to the photograph it actually is. Hovering also
+   pauses the band, so the two gestures are the same gesture. */
+.gt::after{
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:linear-gradient(155deg, #5B3A84 0%, #34264A 58%, #170F21 100%);
+  mix-blend-mode:color;
+  opacity:.95;
+  transition:opacity .55s var(--e);
+}
+.gt::before{
+  content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+  background:linear-gradient(155deg, rgba(232,206,158,.42) 0%, rgba(232,206,158,.10) 48%, transparent 78%);
+  mix-blend-mode:soft-light;
+  transition:opacity .55s var(--e);
+}
+.gt:hover::after,
+.gt:hover::before{ opacity:0; }
+.gt:hover img{ filter:none; }
+.gt:hover{ z-index:4; }
 
 @media (prefers-reduced-motion:reduce){
   .glimpse__track{ animation:none; }
-  .gt img.gt__in{ transition:none; }
+  .gt__b{ animation:none; opacity:0; }
 }
