@@ -37,6 +37,9 @@ PHOTOS = [
     ("junior-school.jpg",       "IMG_1898.JPG", (1200, 1500), (0.50, 0.45)),
     ("senior-school.jpg",       "IMG_1894.JPG", (1200, 1500), (0.50, 0.45)),
 
+    # The School History film window, matching the home page's 16:9 still.
+    ("history-still.jpg",       "IMG_20210514_182259.jpg", (1600, 900), (0.50, 0.52)),
+
     # The Admissions grid — six tiles, all 4:3, two rows of three.
     ("adm-arrival.jpg",         "IMG_0195.JPG", (1000,  750), (0.50, 0.45)),
     ("adm-examination.jpg",     "IMG_9069.JPG", (1000,  750), (0.45, 0.52)),

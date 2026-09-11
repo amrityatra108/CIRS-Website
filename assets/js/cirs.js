@@ -902,6 +902,57 @@
     }
   }
 
+
+  /* ==========================================================
+     School History timeline
+     Activation is an IntersectionObserver, not a ScrollTrigger,
+     so the milestones light up even when GSAP never arrives from
+     its CDN. The spine's fill rides the site's own onScroll
+     helper, which uses ScrollTrigger when it is there and the
+     native event when it is not.
+     ========================================================== */
+  function historyTimeline() {
+    var sec = $("#timeline");
+    if (!sec) return;
+    var items = $$(".tl__item", sec), fill = $("#tlFill");
+
+    // No script, reduced motion, or nothing to observe: show it all at once.
+    if (!items.length || reduced || typeof window.IntersectionObserver === "undefined") {
+      sec.classList.add("is-static");
+      if (fill) fill.style.height = "100%";
+      return;
+    }
+
+    // A milestone activates once it is properly on screen and stays active —
+    // a history that un-tells itself as you scroll back would be worse than
+    // one that does not animate at all.
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("is-on"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -18% 0px", threshold: 0.28 });
+    items.forEach(function (el) { io.observe(el); });
+
+    if (!fill) return;
+
+    // The line fills from where the first milestone sits to where the last one
+    // does, so it is full exactly as the last year is reached rather than when
+    // the section's padding ends.
+    function draw() {
+      var first = items[0].getBoundingClientRect();
+      var last = items[items.length - 1].getBoundingClientRect();
+      var mid = window.innerHeight * 0.62;
+      var span = (last.top + last.height / 2) - (first.top + first.height / 2);
+      if (span <= 0) { fill.style.height = "100%"; return; }
+      var p = (mid - (first.top + first.height / 2)) / span;
+      p = p < 0 ? 0 : (p > 1 ? 1 : p);
+      fill.style.height = (p * 100).toFixed(2) + "%";
+    }
+    draw();
+    onScroll(draw);
+    window.addEventListener("resize", draw, { passive: true });
+  }
+
   /* ==========================================================
      Boot
      ========================================================== */
@@ -910,6 +961,7 @@
     enquirePanel();
     filmLightbox();
     glimpses();
+    historyTimeline();
     if (!animate) { failOpen(); dayTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");
