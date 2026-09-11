@@ -61,37 +61,48 @@ GROUND = (14, 11, 18)
 # The order matters too. Cells are filled in sequence, so the list alternates
 # between architecture, a person, a pattern and an activity — neighbouring
 # hexagons then differ in character rather than repeating a mood.
+#
+# It draws mainly on the newest uploads, which are the first in the library
+# to show sport, music, theatre, parade and laboratory rather than buildings.
+# Six architectural frames are kept as anchors: a wall of activity alone has
+# nowhere for the eye to rest. Two of the new photographs are unusable here
+# whatever their merit — SPIC MACAY.jpg is itself a grid of photographs, and
+# 4.JPG is a TEDx backdrop, which at 460px reads as a logo.
 CELLS = [
     "school-front-view.JPG",        # the building against the Ghats
-    "IMG_1790.JPG",                 # a girl at a microscope
-    "CRS09514.JPG",                 # assembly from above, reads as pattern
-    "IMG_8075.JPG",                 # two students, uniform
-    "IMG_2051.JPG",                 # the campus under mist
-    "IMG_1686.JPG",                 # seated, one face in focus
-    "IMG_2474.JPG",                 # the amphitheatre full
-    "0C9A4095.JPG",                 # eyes closed, close
+    "HARI5531.JPG",                 # over the bar, clean sky
+    "DSC_0059.JPG",                 # the NCC parade, rank on rank
+    "IMG_3479.JPG",                 # a teacher and one student
+    "IMG_9314.JPG",                 # swimming
+    "DSC_8037.JPG",                 # tabla
     "CRS01413.JPG",                 # the block along the hills
-    "IMG_1806.JPG",                 # the laboratory
-    "IMG_8229.JPG",                 # rows, garlands
-    "IMG_2327.JPG",                 # walking, movement
-    "0C9A4128.JPG",                 # namaste, sashes
-    "IMG_20210514_182259.jpg",      # the building in the water
-    "IMG_1689.JPG",                 # a classroom
-    "IMG_2449.JPG",                 # the amphitheatre, nearer
-    "0C9A4097.JPG",                 # the second close portrait
+    "IMG_1438.JPG",                 # colour running in the laboratory
+    "IMG_2260.JPG",                 # the auditorium, full
+    "IMG_0550.JPG",                 # the dance line
+    "8A5A3313.JPG",                 # a boy above the field
+    "CRS00635.JPG",                 # the prayer hall
     "academic-block.JPG",           # the academic block
-    "IMG_8830.JPG",                 # a boy writing
-    "IMG_1625.JPG",                 # assembly on the lawn
-    "IMG_1663.JPG",                 # seated by the water
+    "IMG_1900.JPG",                 # heads together over a laptop
+    "1.JPG",                        # assembly, in formation
+    "IMG_0778.JPG",                 # the theatre masks
+    "IMG_3051.JPG",                 # football on wet grass
+    "DSC_0858.JPG",                 # guitars
+    "IMG_20210514_182259.jpg",      # the building in the water
+    "IMG_0822.JPG",                 # the debate, four microphones
+    "2.JPG",                        # the parade flag
+    "IMG_9312.JPG",                 # the stage under lanterns
+    "IMG_0612.JPG",                 # the court, mid-rally
+    "IMG_4759.JPG",                 # the puja
     "DJI_0856.JPG",                 # the campus from the air
-    "CRS09536.JPG",                 # rows of students
-    "0C9A4133.JPG",                 # a teacher blessing a student
-    "IMG_2480.JPG",                 # the amphitheatre, wide
-    "0C9A2196.JPG",                 # a student at the lectern
+    "IMG_1939.JPG",                 # measuring, out on the ground
+    "IMG_1256.JPG",                 # bugles
+    "IMG_1737.JPG",                 # the youngest, arms up on stage
+    "IMG_6061.JPG",                 # the climb, in a helmet
+    "HARI7498.JPG",                 # the Swami at the long table
     "CIRS.jpg",                     # the hundred acres, from above
-    "IMG_1691.JPG",                 # the hall
-    "IMG_1630.JPG",                 # the lawn again, further off
-    "0C9A4081.JPG",                 # a family — this is the Admissions page
+    "IMG_0862.JPG",                 # the snooker table
+    "IMG_9050.JPG",                 # masks, held up
+    "IMG_9879.JPG",                 # archery, after dark
 ]
 
 

@@ -72,11 +72,15 @@ def main():
             elif re.match(r"^[\w./-]+$", ref) and "." in ref:
                 problems.append(f"{name}: {ref} — relative reference outside assets/")
 
+    # Walk, rather than list: assets/img has subdirectories now (the collage
+    # keeps its hundred-odd tiles in assets/img/glimpses), and a flat listing
+    # reported the directory itself as an unreferenced file.
     for folder in ("assets/img", "assets/video"):
-        for filename in sorted(os.listdir(os.path.join(ROOT, folder))):
-            rel = f"{folder}/{filename}"
-            if rel not in referenced:
-                problems.append(f"{rel} — in the repository but no page references it")
+        for dirpath, _, filenames in os.walk(os.path.join(ROOT, folder)):
+            for filename in sorted(filenames):
+                rel = os.path.relpath(os.path.join(dirpath, filename), ROOT).replace(os.sep, "/")
+                if rel not in referenced:
+                    problems.append(f"{rel} — in the repository but no page references it")
 
     if problems:
         print(f"check-links: {len(problems)} problem(s)\n")
