@@ -632,16 +632,23 @@ body.is-locked .htab:hover{ color:var(--purple); }
 
 /* A strip of photo slots, so the page has somewhere obvious for
    pictures to land. */
+/* Three columns, so six tiles are two whole rows. auto-fit gave five
+   columns at 1440px and four at 1280px, which left the last row part-empty
+   and the grid looking broken rather than composed. */
 .strip{
   display:grid; gap:clamp(12px,1.6vw,20px);
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
+  grid-template-columns:repeat(3,1fr);
   margin-top:clamp(30px,3.6vw,48px);
 }
+@media (max-width:860px){ .strip{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:520px){ .strip{ grid-template-columns:1fr; } }
 .strip figure{
   margin:0; aspect-ratio:4/3; display:grid; place-items:center;
-  background:var(--purple-deep);
+  background:var(--purple-deep); overflow:hidden;
 }
-.strip figure:nth-child(3n+2){ aspect-ratio:1/1; }
+/* Filled tiles: the photograph covers the tile whatever its own shape, so a
+   4:3 and a square sit in the same grid without letterboxing either. */
+.strip figure img{ width:100%; height:100%; object-fit:cover; display:block; }
 .strip span{
   font-family:var(--serif);
   font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
