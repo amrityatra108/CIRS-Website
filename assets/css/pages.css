@@ -266,17 +266,25 @@ body.is-locked .htab:hover{ color:var(--purple); }
   background:var(--purple-ink);
   overflow:hidden;
 }
-/* Merge into the scroll rather than stopping at a hard edge — the banner's
-   ground fades into the paper the first section sits on, so the two read as
-   one continuous page. */
+/* Merge into the scroll rather than stopping at a hard edge. The section
+   below is .advert, whose ground is --purple-deep, so that is what the
+   banner has to arrive at: an earlier version faded to --paper and left a
+   pale band stranded between two dark surfaces, which read as haze rather
+   than a join.
+
+   It also sits below .pagehero__inner (z-index 3) rather than above it. At
+   z-index 4 the ramp veiled the dates it was passing over. */
 .pagehero::after{
-  content:""; position:absolute; left:0; right:0; bottom:0; height:clamp(90px,14vh,190px);
-  z-index:4; pointer-events:none;
+  content:""; position:absolute; left:0; right:0; bottom:0;
+  height:clamp(160px,24vh,320px);
+  z-index:2; pointer-events:none;
   background:linear-gradient(to bottom,
-    rgba(250,247,248,0) 0%,
-    rgba(250,247,248,.14) 42%,
-    rgba(250,247,248,.58) 76%,
-    var(--paper) 100%);
+    rgba(30,22,38,0)    0%,
+    rgba(30,22,38,.20) 30%,
+    rgba(30,22,38,.48) 52%,
+    rgba(30,22,38,.74) 70%,
+    rgba(30,22,38,.92) 85%,
+    var(--purple-deep) 100%);
 }
 .pagehero__media{ position:absolute; inset:0; z-index:0; }
 .pagehero__media img{ width:100%; height:100%; object-fit:cover; }
