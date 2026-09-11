@@ -16,3 +16,4 @@ _site/
 
 # Netlify CLI local link state
 .netlify/
+__pycache__/
