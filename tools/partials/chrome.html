@@ -4,8 +4,21 @@
 <div class="curtain" id="curtain" aria-hidden="true">
   <img src="assets/img/logo.png" alt="" width="72" height="70">
   <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Skill</p>
+  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
   <span class="curtain__bar"><i></i></span>
+</div>
+
+<!-- Film lightbox, shared by every page. The iframe is built on open and
+     destroyed on close: nothing is requested from YouTube until someone asks
+     for the film, and removing the element is what actually stops the audio. -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox__back" data-close></div>
+  <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="The official CIRS film">
+    <div class="lightbox__frame" id="lightboxFrame"></div>
+    <button type="button" class="lightbox__close" data-close aria-label="Close the film">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
 </div>
 
 <div class="progress" id="progress" aria-hidden="true"></div>

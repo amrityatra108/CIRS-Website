@@ -3,15 +3,22 @@
 Photographs from the school, held for making derived images. They are **not**
 part of the site and no page references them.
 
-Two batches, and they differ:
+Three batches, and they differ:
 
 - The first batch is unedited camera originals — 8192px files, around 150 MB.
-- The 23 files added in September 2026 came from a shared Drive folder
-  (`cirsstudio@cirschool.in`) and are **resized to 3200px on the long edge**,
-  159 MB down to 24 MB. Drive remains the archive of those true originals; at
-  full size they would have roughly doubled the size of every clone for detail
-  no page can use — the largest thing the site renders is 2400px. One exact
-  duplicate (`school-front-view-2.JPG`) was left out.
+- 23 files added in September 2026 from a shared Drive folder, resized to
+  3200px on the long edge (159 MB down to 24 MB).
+- 70 files added in September 2026 from two further Drive folders — *CIRS -
+  Academic Activities* and *CIRS* — also resized to 3200px (429 MB down to
+  73 MB). Classrooms and laboratories, robotics, assemblies, NCC parades,
+  athletics and swimming, dance and theatre, TEDx Youth@CIRS, SPIC MACAY,
+  the prayer hall, music and art.
+
+Everything after the first batch is resized on the way in. Drive remains the
+archive of those true originals; at full size they would have added roughly
+570 MB to every clone for detail no page can use — the largest thing the site
+renders is 2400px, and a honeycomb cell is 460px. Nothing was dropped as a
+duplicate: all 93 are distinct from each other and from what was already here.
 
 They are here because derived images are made from them:
 `tools/make-header.py` crops, blurs and grades one of these into
