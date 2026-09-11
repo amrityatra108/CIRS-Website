@@ -304,17 +304,6 @@ body.is-locked .htab:hover{ color:var(--purple); }
   max-width:min(90%,460px);
 }
 
-.pagehero__mono{
-  position:absolute; inset:0; z-index:1;
-  background:rgba(255,255,255,.10);
-  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 460'%3E%3Ctext x='700' y='372' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='400' text-anchor='middle' textLength='1360' lengthAdjust='spacingAndGlyphs' fill='black'%3ECIRS%3C/text%3E%3C/svg%3E");
-          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 460'%3E%3Ctext x='700' y='372' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='400' text-anchor='middle' textLength='1360' lengthAdjust='spacingAndGlyphs' fill='black'%3ECIRS%3C/text%3E%3C/svg%3E");
-  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
-  -webkit-mask-position:center 38%; mask-position:center 38%;
-  -webkit-mask-size:min(92vw,1300px) auto; mask-size:min(92vw,1300px) auto;
-}
-@supports not ((-webkit-mask-image:none) or (mask-image:none)){ .pagehero__mono{ display:none; } }
-
 .pagehero__scrim{
   position:absolute; inset:0; z-index:2; pointer-events:none;
   /* The lower third carries the eyebrow, headline, lead, buttons and dates,
