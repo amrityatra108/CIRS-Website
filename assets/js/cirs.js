@@ -841,6 +841,86 @@
     });
   }
 
+
+  /* ==========================================================
+     Glimpses collage
+     The drift is CSS. This is only the cross-fade: every so
+     often one tile dissolves into another photograph from the
+     same pool, so the wall is never twice the same.
+     ========================================================== */
+  function glimpses() {
+    var sec = $("#glimpses");
+    if (!sec || reduced) return;
+    var tiles = $$(".gt", sec);
+    if (tiles.length < 2) return;
+
+    // The pool is whatever the markup already references, so it cannot
+    // drift out of step with what is actually on disk.
+    var pool = [];
+    tiles.forEach(function (t) {
+      var im = $("img", t);
+      if (im && pool.indexOf(im.getAttribute("src")) === -1) pool.push(im.getAttribute("src"));
+    });
+    if (pool.length < 2) return;
+
+    var timer = null;
+
+    function swap() {
+      var t = tiles[(Math.random() * tiles.length) | 0];
+      if (!t || t.getAttribute("data-busy")) return;
+      var cur = $("img", t);
+      if (!cur) return;
+      var next = pool[(Math.random() * pool.length) | 0];
+      if (next === cur.getAttribute("src")) return;
+
+      t.setAttribute("data-busy", "1");
+      var img = document.createElement("img");
+      img.className = "gt__in";
+      img.alt = "";
+      img.width = 440; img.height = 440;
+      img.decoding = "async";
+      img.src = next;
+
+      function reveal() {
+        t.appendChild(img);
+        // One frame with opacity 0 in the DOM, or the transition never runs.
+        requestAnimationFrame(function () { img.classList.add("is-on"); });
+        window.setTimeout(function () {
+          if (cur.parentNode === t) t.removeChild(cur);
+          img.classList.remove("gt__in");
+          img.classList.remove("is-on");
+          t.removeAttribute("data-busy");
+        }, 1250);
+      }
+
+      // Never fade in a blank: wait for the bytes, and give up if they
+      // never come rather than leaving the tile stuck as busy.
+      if (img.complete) reveal();
+      else {
+        img.onload = reveal;
+        img.onerror = function () { t.removeAttribute("data-busy"); };
+      }
+    }
+
+    function run(on) {
+      if (on && !timer) timer = window.setInterval(swap, 850);
+      if (!on && timer) { window.clearInterval(timer); timer = null; }
+    }
+
+    // Only while it is on screen — off screen it is invisible work, and a
+    // background tab would still be fetching photographs.
+    if (typeof window.IntersectionObserver !== "undefined") {
+      new IntersectionObserver(function (entries) {
+        run(entries[0].isIntersecting && document.visibilityState !== "hidden");
+      }, { rootMargin: "200px" }).observe(sec);
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "hidden") run(false);
+      });
+    } else {
+      run(true);
+    }
+  }
+
   /* ==========================================================
      Boot
      ========================================================== */
@@ -848,6 +928,7 @@
     backToTop();
     enquirePanel();
     filmLightbox();
+    glimpses();
     if (!animate) { failOpen(); dayTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");
