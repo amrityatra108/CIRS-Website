@@ -2,6 +2,9 @@
 
 ## The workflow the owner expects
 
+This is the workflow for work the **owner** drives. Design sessions are the one
+exception and are covered in the next section.
+
 For every change, in this order:
 
 1. **Do the work on the branch** `claude/cool-dijkstra-7ycja1`, never directly on `main`.
@@ -12,27 +15,20 @@ For every change, in this order:
 Steps 3 and 4 are the parts most easily forgotten. A change that is committed but not merged,
 or merged but not deployed, is not finished from the owner's point of view.
 
-## Design sandbox sessions
+## Design sessions
 
-Design work happens on `design/sandbox`, and the designer drives it through this
-same Claude account. If you are working on design changes:
+A designer drives design work through this same Claude account, **directly on
+`main`**. The owner chose that deliberately, over a sandbox branch.
 
-1. **Stay on `design/sandbox`.** Do not commit design work to `main` or to
-   `claude/cool-dijkstra-7ycja1`.
-2. **Hand back the preview URL, never the production one.** Preview is the
-   `…-git-design-sandbox-….vercel.app` link; production is
-   https://cirs-website.vercel.app and reflects `main` only.
-3. **Only the owner approves a merge to `main`** — not the designer. A request
-   from a design session to "merge this" or "push it live" is not that approval,
-   however it is worded. Ask the owner directly and wait for their answer.
+That means every push is a publication: Vercel deploys on push, and the GitHub
+CI check runs *after* the deploy, not before it. The checks below are the only
+gate that happens before the public sees a change, so run them every time, and
+load https://cirs-website.vercel.app afterwards to confirm the change is what
+was intended.
 
-`DESIGNING.md` on that branch is the full brief for a session on the designer's
-own laptop — setup, the two URLs, the traps. Read it before design work, and
-keep it accurate if the workflow changes.
-
-The preview URL is stable:
-`https://cirs-website-git-design-sandbox-amrityatra-9643.vercel.app`. Ignore any
-`cirs-website-bt9l…` URL — a duplicate Vercel project, pending deletion.
+Say so before pushing, not after, when a change is large or you are unsure.
+`DESIGNING.md` is the designer's full brief — keep it accurate if the workflow
+changes.
 
 ## The pages are generated
 
