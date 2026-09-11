@@ -28,7 +28,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=6"
+CACHE_BUST = "b=7"
 
 # slug -> page definition. Order here is the order in the menu.
 #   nav    the label in the menu and the <title>
@@ -257,10 +257,10 @@ def hero_html(page):
     return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
   <div class="pagehero__media">
     <video class="pagehero__video" autoplay muted loop playsinline
-           poster="assets/img/admissions-honeycomb.jpg" aria-hidden="true"
+           poster="assets/img/admissions-honeycomb.jpg?{CACHE_BUST}" aria-hidden="true"
            width="1920" height="960" fetchpriority="high">
-      <source src="assets/video/admissions-hero.webm" type="video/webm">
-      <source src="assets/video/admissions-hero.mp4" type="video/mp4">
+      <source src="assets/video/admissions-hero.webm?{CACHE_BUST}" type="video/webm">
+      <source src="assets/video/admissions-hero.mp4?{CACHE_BUST}" type="video/mp4">
     </video>
   </div>
   <div class="pagehero__mono" aria-hidden="true"></div>

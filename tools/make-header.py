@@ -33,7 +33,7 @@ never reach a web host — see assets/source/README.md.
 import os
 import sys
 
-from PIL import Image, ImageEnhance, ImageFilter
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -109,7 +109,7 @@ def main():
     if not os.path.exists(path):
         sys.exit(f"make-header: {src} not found")
 
-    im = Image.open(path).convert("RGB")
+    im = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
     im = cover(im, WIDTH, HEIGHT)
     im = im.filter(ImageFilter.GaussianBlur(radius=2.2))
     im = duotone(im)
