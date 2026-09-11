@@ -28,7 +28,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=9"
+CACHE_BUST = "b=11"
 
 # slug -> page definition. Order here is the order in the menu.
 #   nav    the label in the menu and the <title>
