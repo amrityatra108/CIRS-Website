@@ -28,7 +28,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=16"
+CACHE_BUST = "b=17"
 
 # slug -> page definition. Order here is the order in the menu.
 #   nav    the label in the menu and the <title>
@@ -65,6 +65,17 @@ PAGES = {
         "banner": ("About CIRS", "Why <em>CIRS.</em>",
                    "A community of knowledge, service and skill in the Siruvani foothills — and "
                    "the two schools, Junior and Senior, that carry it."),
+    },
+    "school-history": {
+        "nav": "School History",
+        "group": "About CIRS",
+        "title": "School History",
+        "description": "How Chinmaya International Residential School came to be — Pujya Gurudev's "
+                       "vision, the rupee-by-rupee purchase of the land, and the inauguration on "
+                       "6 June 1996.",
+        "banner": ("Since 1996", "School <em>History.</em>",
+                   "A vision carried from the 1970s to a hundred acres in the Siruvani foothills, "
+                   "and the ninety-six students who began it."),
     },
     "our-leaders-speak": {
         "nav": "Our Leaders Speak",
@@ -139,11 +150,12 @@ PAGES = {
         "popup": True,
     },
     "parent-portal": {
-        # group None keeps it out of the generated menu: it is reached from the
-        # drawer's utility links, not from the page index, and listing it
-        # alongside Academics and Student Life would overstate it.
         "nav": "Parent Portal",
-        "group": None,
+        # In the menu proper now, beside Alumni — both are doors for people
+        # already attached to the school rather than pages about it. It is
+        # removed from the drawer's utility strip at the same time, so the
+        # drawer does not offer the same link twice.
+        "group": "Admissions",
         "title": "Parent Portal",
         "description": "The CIRS Parent Portal is not open yet. How to reach the school in the "
                        "meantime.",

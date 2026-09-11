@@ -1134,3 +1134,145 @@ body.has-lightbox{ overflow:hidden; }
 }
 .ucpage__foot a{ color:var(--gold-lit); text-decoration:underline; text-underline-offset:3px; }
 .ucpage__foot a:hover{ color:#fff; }
+
+/* ============================================================
+   School History — the timeline
+   ------------------------------------------------------------
+   A vertical spine, because a history reads downwards and a
+   phone has height to spare where it has no width. Nothing is
+   hidden at any width: every milestone's year, heading and text
+   are in the page from the start, and scrolling only *activates*
+   them. That is the difference between an archive and a slide
+   show — a reader who cannot hover, cannot scroll, or has
+   JavaScript off still gets the whole history.
+
+   Hovering or focusing a milestone brings its frame forward.
+   On a touch screen there is no hover, so the same emphasis is
+   applied by the script as each milestone reaches the middle of
+   the screen.
+   ============================================================ */
+.tl{ background:var(--purple-deep); }
+.tl .lead{ color:var(--on-purple-soft); }
+.tl__body{ position:relative; margin-top:clamp(32px,4vw,56px); }
+
+/* The spine and the line that fills as you go. */
+.tl__spine{
+  position:absolute; left:7px; top:6px; bottom:6px; width:2px;
+  background:var(--rule-purple); border-radius:2px;
+}
+.tl__fill{
+  display:block; width:100%; height:0;
+  background:linear-gradient(180deg, var(--gold) 0%, var(--gold-lit) 60%, rgba(255,195,8,.35) 100%);
+  border-radius:2px;
+  box-shadow:0 0 14px rgba(255,195,8,.35);
+}
+@media (min-width:900px){ .tl__spine{ left:120px; } }
+
+.tl__list{ list-style:none; margin:0; padding:0; display:grid; gap:clamp(28px,3.4vw,52px); }
+.tl__item{ position:relative; padding-left:40px; }
+@media (min-width:900px){
+  .tl__item{ padding-left:0; display:grid; grid-template-columns:120px 1fr; align-items:start; gap:clamp(28px,3vw,48px); }
+}
+
+.tl__node{
+  position:absolute; left:0; top:7px;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--purple-deep);
+  border:2px solid var(--rule-purple);
+  transition:border-color .45s var(--e), box-shadow .45s var(--e), background .45s var(--e);
+}
+@media (min-width:900px){ .tl__node{ left:113px; } }
+.tl__item.is-on .tl__node{
+  border-color:var(--gold);
+  background:var(--gold);
+  box-shadow:0 0 0 5px rgba(255,195,8,.16);
+}
+
+.tl__when{
+  margin:0 0 var(--space-3);
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.1em; font-size:1.06rem; line-height:1.2;
+  color:var(--on-purple-mute);
+  transition:color .45s var(--e);
+}
+@media (min-width:900px){ .tl__when{ text-align:right; padding-right:var(--space-6); margin:0; } }
+.tl__item.is-on .tl__when{ color:var(--gold-lit); }
+
+.tl__card{
+  display:grid; gap:var(--space-4);
+  padding:var(--space-4);
+  border:1px solid var(--rule-purple);
+  border-radius:8px;
+  background:rgba(255,255,255,.022);
+  opacity:.55;
+  transform:translateY(10px);
+  transition:opacity .6s var(--e), transform .6s var(--e),
+             border-color .45s var(--e), background .45s var(--e);
+}
+@media (min-width:620px){ .tl__card{ grid-template-columns:190px 1fr; align-items:center; } }
+.tl__item.is-on .tl__card{ opacity:1; transform:none; }
+.tl__item:hover .tl__card,
+.tl__item:focus-within .tl__card{
+  border-color:rgba(255,195,8,.34);
+  background:rgba(255,195,8,.05);
+}
+
+/* The archival slot. Swap the <span> for an <img> and it needs no other
+   change — the frame already holds a 4:3 box and crops with object-fit. */
+.tl__shot{
+  margin:0; aspect-ratio:4/3; overflow:hidden; border-radius:5px;
+  display:grid; place-items:center;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 7px, rgba(245,238,242,.045) 7px 14px),
+    var(--purple-ink);
+  border:1px solid var(--rule-purple);
+}
+.tl__shot img{ width:100%; height:100%; object-fit:cover; display:block; }
+.tl__shot span{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.11em; font-size:.8rem; line-height:1.6; text-align:center;
+  color:var(--on-purple-mute); padding:var(--space-3);
+}
+.tl__text h3{ color:#fff; margin:0 0 var(--space-2); }
+.tl__text .copy{ color:var(--on-purple-soft); margin:0; }
+
+/* Nothing moves, and nothing waits to be activated. */
+@media (prefers-reduced-motion:reduce){
+  .tl__card{ opacity:1; transform:none; transition:none; }
+  .tl__node, .tl__when{ transition:none; }
+}
+/* Same, when the script never runs at all. */
+.tl.is-static .tl__card{ opacity:1; transform:none; }
+.tl.is-static .tl__node{ border-color:var(--gold); background:var(--gold); }
+.tl.is-static .tl__when{ color:var(--gold-lit); }
+
+/* ============================================================
+   School History — the closing panel
+   ============================================================ */
+.more{ background:var(--purple-ink); }
+.more__inner{ max-width:720px; }
+.more__badge{
+  display:inline-flex; align-items:center; gap:10px;
+  margin:0 0 var(--space-5); padding:8px 16px 8px 13px;
+  border:1px solid rgba(255,195,8,.38); border-radius:99px;
+  background:rgba(255,195,8,.09); color:var(--gold-lit);
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.15em; font-size:.94rem; line-height:1;
+}
+.more__dot{ width:8px; height:8px; border-radius:50%; background:var(--gold); flex:none;
+  animation:ucpulse 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion:reduce){ .more__dot{ animation:none; } }
+.more__head{ color:#fff; font-size:clamp(1.9rem,4vw,3rem); line-height:1.12; margin:0 0 var(--space-4); }
+.more__head em{ color:var(--gold-lit); }
+.more .lead{ color:var(--on-purple-soft); margin:0 0 var(--space-4); }
+.more__ph{
+  color:var(--on-purple-mute); font-size:.95rem; margin:0;
+  border-left:2px solid var(--rule-purple); padding-left:var(--space-4);
+}
+.more__cta{ margin:clamp(26px,3.4vw,40px) 0 0; color:var(--on-purple-soft); font-size:.98rem; }
+.more__cta a{ color:var(--gold-lit); text-decoration:underline; text-underline-offset:3px; }
+.more__cta a:hover{ color:#fff; }
