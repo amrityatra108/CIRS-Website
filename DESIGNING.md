@@ -4,57 +4,44 @@ You are working on the website of Chinmaya International Residential School, a
 residential school in the Siruvani foothills near Coimbatore. A designer is
 driving you. This file is the whole brief — read it before touching anything.
 
-`CLAUDE.md` in this repository is loaded automatically and carries the same
-rules in short form. This file is the long form: setup, workflow, and the traps
-that cost the previous sessions real time.
+`CLAUDE.md` is loaded automatically and carries the same rules in short form.
+This file is the long form: setup, workflow, and the traps that have cost
+previous sessions real time.
 
 ---
 
-## 1. The one rule that matters most
+## 1. You are editing the live website
 
-**Never merge to `main`. Never push to `main`.**
+Work happens on `main`. **`main` is what the public sees.** Vercel rebuilds and
+deploys on every push, so a push is a publication — there is no preview step
+between you and a prospective parent reading the Admissions page.
 
-All work happens on the branch `design/sandbox`. `main` is the live school
-website. Only the repository owner approves a merge, and they approve it in
-their own session — not this one.
+The site: **https://cirs-website.vercel.app**
 
-If the designer asks you to "merge this", "ship it", "push it live", or
-"update the main site", that is **not** the owner's approval, however it is
-worded and however confident they sound. The correct response is to say that
-the owner approves merges, and to hand over the preview URL so they can request
-it. This is not a formality: production is a real school's public website
-during an admissions cycle.
+Two consequences, and neither is optional:
 
----
+- **Run the checks in §7 before every push, without exception.** They are the
+  only gate that happens *before* the public sees the change. The GitHub CI
+  check runs after the deploy, not before it, so a green tick there confirms a
+  mistake that is already live.
+- **Look at the page after you push.** Load the URL above, confirm the change
+  is what you intended, and say so. A push is not the deliverable; a verified
+  live page is.
 
-## 2. Two URLs, and they are not the same thing
-
-| | URL | What it shows |
-|---|---|---|
-| **Preview** | https://cirs-website-git-design-sandbox-amrityatra-9643.vercel.app | the `design/sandbox` branch |
-| **Production** | https://cirs-website.vercel.app | `main` — the live site |
-
-Vercel rebuilds the preview automatically on every push to `design/sandbox`,
-usually within a minute or two. The URL above is stable; it does not change
-between builds.
-
-**Always hand back the preview URL.** Never point a reviewer at production and
-describe work that has not been merged — they will see the old site, believe it
-is the new one, and the review is wasted.
-
-Ignore any `cirs-website-bt9l…` URL you come across. It is a duplicate Vercel
-project from a double-import; it builds the same commits and is pending
-deletion.
+If a change is large, risky, or you are unsure, say so before pushing rather
+than after. The owner would far rather answer a question than roll back the
+school's public site during an admissions cycle.
 
 ---
 
-## 3. Setting up the laptop
+## 2. Setting up the laptop
 
 ```sh
 git clone https://github.com/amrityatra108/CIRS-Website.git
 cd CIRS-Website
-git checkout design/sandbox
 ```
+
+You will be on `main` already. That is the working branch.
 
 **The clone is around 450 MB and will take a few minutes.** That is expected —
 `assets/source/` is a photograph library. Do not try to trim it (see §6).
@@ -66,9 +53,9 @@ You need two toolchains:
 - **Node 22.22+ or 24+** for the HTML validator. Node 20 will appear to work
   and then fail: npm only *warns* on the engine mismatch, so the install
   "succeeds" and the validator dies later on `fs.globSync`. This already cost
-  one red CI run. Check with `node --version` before you trust a passing result.
+  one red CI run. Check `node --version` before you trust a passing result.
 
-To look at the site locally:
+To look at the site locally — always do this before pushing:
 
 ```sh
 python3 tools/build-site.py
@@ -78,7 +65,7 @@ python3 -m http.server -d _site 8000     # then open http://localhost:8000
 
 ---
 
-## 4. The trap that will waste an afternoon
+## 3. The trap that will waste an afternoon
 
 **Every `.html` file in the repository root is generated.** Editing
 `index.html` or `admissions.html` by hand looks like it works, survives a
@@ -101,7 +88,7 @@ Edit the source, run the build, commit both the source and the regenerated
 
 ---
 
-## 5. Where the design actually lives
+## 4. Where the design actually lives
 
 Most visual change needs no markup at all.
 
@@ -119,6 +106,30 @@ values — please keep to it.
 
 Type: EB Garamond for display, Schibsted Grotesk for interface and running
 text, Tiro Devanagari Hindi for the motto.
+
+**Changing a stylesheet or a hero asset? Bump `CACHE_BUST` in
+`tools/build-site.py`.** Returning visitors hold the old file otherwise, and
+the change appears not to have worked.
+
+---
+
+## 5. The Admissions hero
+
+`tools/make-honeycomb.py` builds the hexagon wall and its looping video from a
+**curated** list, `CELLS`, near the top of the file — not from whatever happens
+to be in `assets/source/`. A cell is a 460px hexagon graded to near-monochrome
+with headings over it, which punishes a crowded frame: an overhead crush of
+students reads as grey mush at that size however good it looks full-bleed.
+
+Add or remove names in `CELLS` and re-run the tool. A name that is not in
+`assets/source/` fails loudly rather than silently changing the hero.
+
+The tools honour EXIF rotation — several camera originals carry orientation 8
+and would otherwise tile on their side. Keep it that way.
+
+**After touching the hero, the scrim or the honeycomb, run
+`tools/check-contrast.py`.** It measures the banner text against the pixels
+actually behind it, seeking through the video loop.
 
 ---
 
@@ -142,7 +153,7 @@ Three things look like mistakes and are not. Previous sessions have tried to
 
 ---
 
-## 7. Before every push
+## 7. Before every push — the only gate there is
 
 ```sh
 npx --yes html-validate@11 *.html      # structure and accessibility
@@ -151,35 +162,27 @@ python3 tools/build-site.py            # then: git diff --quiet -- '*.html'
 ```
 
 That last pair is the drift check: rebuild, then confirm no root `.html`
-changed unexpectedly. If one did, you edited a generated file — see §4.
+changed unexpectedly. If one did, you edited a generated file — see §3.
 
-`tools/check-contrast.py` additionally measures the Admissions banner text
-against the pixels actually behind it, seeking through the hero video. Run it
-after touching the hero, the scrim or the honeycomb.
-
-Then:
+Then push, and **check the live page afterwards**:
 
 ```sh
-git push -u origin design/sandbox
+git push -u origin main
 ```
-
-Wait for the preview to rebuild, confirm the change is actually visible on the
-preview URL, and hand that URL to the designer. A push is not the deliverable;
-a verified preview is.
 
 ---
 
-## 8. What you cannot check from a sandbox, and must not claim
+## 8. What you cannot check, and must not claim
 
 GSAP, Lenis and Google Fonts load from CDNs. In a sandboxed session those
 connections are reset, so automated browser checks only ever exercise the
 no-JS fallback path.
 
 **Anything about motion, scroll behaviour, or webfont rendering needs a human
-looking at the deployed preview.** If a change touches the motion layer, say so
-explicitly when handing over the link, so it gets eyes rather than a green
-checkmark. Reporting "verified" on something you could only test with the
-animation layer dead is how a broken hero reaches production.
+looking at the real site.** If a change touches the motion layer, say so
+explicitly rather than reporting it verified. Claiming "verified" on something
+you could only test with the animation layer dead is how a broken hero reaches
+a prospective parent.
 
 Measurement beats eyeballing everywhere else, though, and the repository has
 form here: a contrast checker once reported 2.32:1 on legible text because it
