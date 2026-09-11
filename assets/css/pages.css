@@ -942,3 +942,76 @@ body.has-lightbox{ overflow:hidden; }
   .ribbon__track{ height:46px; }
   .ribbon__tip{ max-width:190px; }
 }
+
+/* ============================================================
+   Glimpses of CIRS — the collage
+   ------------------------------------------------------------
+   Three bands of the school's own photographs, drifting in
+   alternating directions, with individual frames cross-fading
+   to others from the same pool. Two motions rather than one:
+   the drift gives it the feel of film running through a gate,
+   the fades stop any single frame from being the picture you
+   remember.
+
+   The drift is a CSS keyframe, not a script. GSAP arrives from
+   a CDN and may not arrive at all; this section is the loudest
+   thing on the page and must never sit still because a script
+   failed. The fades are scripted, and their absence just leaves
+   a moving wall — which is still the point.
+
+   Every tile is 100% of the row's height and takes its width
+   from an aspect ratio, so one square source serves a dozen
+   shapes and the mosaic never letterboxes.
+   ============================================================ */
+.glimpse{
+  position:relative;
+  background:var(--purple-ink);
+  padding-block:clamp(56px,7vw,104px);
+  overflow:hidden;
+}
+.glimpse__head{ margin-bottom:clamp(28px,3.4vw,46px); max-width:760px; }
+.glimpse__head .lead{ color:var(--on-purple-soft); }
+.glimpse__head h2{ color:#fff; }
+
+.glimpse__rows{
+  display:grid; gap:clamp(8px,1vw,14px);
+  /* The bands run off both edges rather than stopping at a border. */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);
+}
+.glimpse__row{ height:clamp(104px,13vw,178px); overflow:hidden; }
+.glimpse__track{
+  display:flex; width:max-content; height:100%;
+  will-change:transform;
+  animation:glimpse-drift 220s linear infinite;
+}
+/* The gap lives inside each set, so the track is exactly two sets wide and
+   -50% lands on the seam. With the gap on the track it would not. */
+.glimpse__set{ display:flex; gap:clamp(8px,1vw,14px); padding-right:clamp(8px,1vw,14px); flex:none; height:100%; }
+.glimpse__row--b .glimpse__track{ animation-duration:265s; animation-direction:reverse; }
+.glimpse__row--c .glimpse__track{ animation-duration:240s; }
+@keyframes glimpse-drift{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* Stop under the pointer, so anything worth a second look can have one. */
+.glimpse__row:hover .glimpse__track{ animation-play-state:paused; }
+
+.gt{
+  position:relative; margin:0; flex:none; height:100%;
+  overflow:hidden; border-radius:3px;
+  background:var(--purple-deep);
+}
+.gt--w1{ aspect-ratio:1/1; }
+.gt--w2{ aspect-ratio:4/3; }
+.gt--w3{ aspect-ratio:3/4; }
+.gt img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block;
+}
+/* The incoming frame of a cross-fade. */
+.gt img.gt__in{ opacity:0; transition:opacity 1.15s var(--e); }
+.gt img.gt__in.is-on{ opacity:1; }
+
+@media (prefers-reduced-motion:reduce){
+  .glimpse__track{ animation:none; }
+  .gt img.gt__in{ transition:none; }
+}
