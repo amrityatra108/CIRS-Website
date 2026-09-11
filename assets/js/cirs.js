@@ -844,9 +844,10 @@
 
   /* ==========================================================
      Glimpses collage
-     The drift is CSS. This is only the cross-fade: every so
-     often one tile dissolves into another photograph from the
-     same pool, so the wall is never twice the same.
+     The cross-fade itself is CSS: every tile holds two frames
+     and swings between them for ever. This only changes what
+     the frames ARE — and only ever the layer that is currently
+     invisible, so a photograph is never seen to be replaced.
      ========================================================== */
   function glimpses() {
     var sec = $("#glimpses");
@@ -854,61 +855,41 @@
     var tiles = $$(".gt", sec);
     if (tiles.length < 2) return;
 
-    // The pool is whatever the markup already references, so it cannot
-    // drift out of step with what is actually on disk.
+    // The pool is whatever the markup already references, so it cannot drift
+    // out of step with what is on disk.
     var pool = [];
-    tiles.forEach(function (t) {
-      var im = $("img", t);
-      if (im && pool.indexOf(im.getAttribute("src")) === -1) pool.push(im.getAttribute("src"));
+    $$("img", sec).forEach(function (im) {
+      var src = im.getAttribute("src");
+      if (src && pool.indexOf(src) === -1) pool.push(src);
     });
-    if (pool.length < 2) return;
+    if (pool.length < 3) return;
 
     var timer = null;
 
-    function swap() {
+    function retire() {
       var t = tiles[(Math.random() * tiles.length) | 0];
-      if (!t || t.getAttribute("data-busy")) return;
-      var cur = $("img", t);
-      if (!cur) return;
+      if (!t) return;
+      var a = $(".gt__a", t), b = $(".gt__b", t);
+      if (!a || !b) return;
+
+      // Whichever layer is fully out of sight can be changed for nothing.
+      var o = parseFloat(window.getComputedStyle(b).opacity);
+      var target = o < 0.04 ? b : (o > 0.96 ? a : null);
+      if (!target) return;
+
+      var other = target === b ? a : b;
       var next = pool[(Math.random() * pool.length) | 0];
-      if (next === cur.getAttribute("src")) return;
-
-      t.setAttribute("data-busy", "1");
-      var img = document.createElement("img");
-      img.className = "gt__in";
-      img.alt = "";
-      img.width = 440; img.height = 440;
-      img.decoding = "async";
-      img.src = next;
-
-      function reveal() {
-        t.appendChild(img);
-        // One frame with opacity 0 in the DOM, or the transition never runs.
-        requestAnimationFrame(function () { img.classList.add("is-on"); });
-        window.setTimeout(function () {
-          if (cur.parentNode === t) t.removeChild(cur);
-          img.classList.remove("gt__in");
-          img.classList.remove("is-on");
-          t.removeAttribute("data-busy");
-        }, 1250);
-      }
-
-      // Never fade in a blank: wait for the bytes, and give up if they
-      // never come rather than leaving the tile stuck as busy.
-      if (img.complete) reveal();
-      else {
-        img.onload = reveal;
-        img.onerror = function () { t.removeAttribute("data-busy"); };
-      }
+      if (next === target.getAttribute("src") || next === other.getAttribute("src")) return;
+      target.setAttribute("src", next);
     }
 
     function run(on) {
-      if (on && !timer) timer = window.setInterval(swap, 850);
+      if (on && !timer) timer = window.setInterval(retire, 1200);
       if (!on && timer) { window.clearInterval(timer); timer = null; }
     }
 
-    // Only while it is on screen — off screen it is invisible work, and a
-    // background tab would still be fetching photographs.
+    // Off screen it is invisible work, and a hidden tab would still be
+    // fetching photographs.
     if (typeof window.IntersectionObserver !== "undefined") {
       new IntersectionObserver(function (entries) {
         run(entries[0].isIntersecting && document.visibilityState !== "hidden");
