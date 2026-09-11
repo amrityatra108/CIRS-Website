@@ -25,13 +25,12 @@ tools/check-contrast.py after changing either.
     python3 tools/make-honeycomb.py --still    # just the still, much faster
 """
 
-import glob
 import math
 import os
 import subprocess
 import sys
 
-from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SOURCE_DIR = os.path.join(ROOT, "assets/source")
@@ -50,13 +49,60 @@ WASH_ALPHA = 0.30
 GROUND = (14, 11, 18)
 
 
+# The wall is curated, not swept up. Every photograph in assets/source/ used
+# to land in a cell, which meant each new upload silently changed the hero —
+# and the weakest frame in the library got the same 460px hexagon as the best.
+#
+# A cell is a 460px hexagon, graded to near-monochrome, with headings over it.
+# That punishes a crowded frame: an overhead crush of students reads as grey
+# mush at this size however good it looks full-bleed. What survives is a
+# simple subject, a clear tonal range, or a repeating pattern.
+#
+# The order matters too. Cells are filled in sequence, so the list alternates
+# between architecture, a person, a pattern and an activity — neighbouring
+# hexagons then differ in character rather than repeating a mood.
+CELLS = [
+    "school-front-view.JPG",        # the building against the Ghats
+    "IMG_1790.JPG",                 # a girl at a microscope
+    "CRS09514.JPG",                 # assembly from above, reads as pattern
+    "IMG_8075.JPG",                 # two students, uniform
+    "IMG_2051.JPG",                 # the campus under mist
+    "IMG_1686.JPG",                 # seated, one face in focus
+    "IMG_2474.JPG",                 # the amphitheatre full
+    "0C9A4095.JPG",                 # eyes closed, close
+    "CRS01413.JPG",                 # the block along the hills
+    "IMG_1806.JPG",                 # the laboratory
+    "IMG_8229.JPG",                 # rows, garlands
+    "IMG_2327.JPG",                 # walking, movement
+    "0C9A4128.JPG",                 # namaste, sashes
+    "IMG_20210514_182259.jpg",      # the building in the water
+    "IMG_1689.JPG",                 # a classroom
+    "IMG_2449.JPG",                 # the amphitheatre, nearer
+    "0C9A4097.JPG",                 # the second close portrait
+    "academic-block.JPG",           # the academic block
+    "IMG_8830.JPG",                 # a boy writing
+    "IMG_1625.JPG",                 # assembly on the lawn
+    "IMG_1663.JPG",                 # seated by the water
+    "DJI_0856.JPG",                 # the campus from the air
+    "CRS09536.JPG",                 # rows of students
+    "0C9A4133.JPG",                 # a teacher blessing a student
+    "IMG_2480.JPG",                 # the amphitheatre, wide
+    "0C9A2196.JPG",                 # a student at the lectern
+    "CIRS.jpg",                     # the hundred acres, from above
+    "IMG_1691.JPG",                 # the hall
+    "IMG_1630.JPG",                 # the lawn again, further off
+    "0C9A4081.JPG",                 # a family — this is the Admissions page
+]
+
+
 def sources():
-    files = sorted(
-        p for p in glob.glob(os.path.join(SOURCE_DIR, "*"))
-        if p.lower().endswith((".jpg", ".jpeg", ".png"))
-    )
-    if not files:
-        sys.exit("make-honeycomb: no photographs in assets/source/")
+    files = []
+    for name in CELLS:
+        path = os.path.join(SOURCE_DIR, name)
+        if not os.path.exists(path):
+            sys.exit(f"make-honeycomb: {name} is listed in CELLS but not in "
+                     f"assets/source/ — fix the list, or restore the file.")
+        files.append(path)
     return files
 
 
@@ -117,7 +163,10 @@ def build_cells(files):
 
     def tile(path):
         if path not in cache:
-            im = Image.open(path).convert("RGB")
+            # Honour EXIF rotation. Four of the camera originals carry
+            # orientation 8, and without this they tile on their side —
+            # which is what made two of them look like unusable mush.
+            im = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
             im = grade(cover(im, hw - GAP, hh - GAP))
             cache[path] = im
         return cache[path]
