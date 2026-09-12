@@ -1412,20 +1412,65 @@ body.has-lightbox{ overflow:hidden; }
   position:relative; overflow:hidden;
   background:var(--purple-ink);
   display:flex; align-items:flex-end;
-  min-height:min(92svh,880px);
+  min-height:100svh; min-height:100vh;
   padding-top:clamp(120px,16vh,190px);
 }
-/* A rule grid rather than a photograph: there is no Crossroads
-   cover art in the repository yet, and a stand-in campus photo
-   would read as this month's cover. */
-.crhero__tex{
-  position:absolute; inset:0; pointer-events:none;
-  background-image:
-    linear-gradient(to right, rgba(255,195,8,.10) 1px, transparent 1px),
-    radial-gradient(120% 90% at 82% 12%, rgba(122,15,30,.42) 0%, rgba(122,15,30,0) 62%);
-  background-size:clamp(78px,9vw,150px) 100%, 100% 100%;
+
+/* The covers themselves are the banner. Five columns drift past at
+   walking pace, neighbours in opposite directions, and they turn
+   round when the reader scrolls the other way — the archive moving
+   under its own masthead rather than a photograph of a magazine.
+   assets/js/cirs.js drives the transform; the keyframe below is what
+   runs before it does, and without it. */
+.crwall{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  display:flex; gap:clamp(8px,1vw,18px);
+  padding:0 clamp(8px,1vw,18px);
 }
-.crhero__inner{ position:relative; z-index:1; padding-bottom:clamp(44px,6vh,84px); }
+.crwall__col{ flex:1 1 0; overflow:hidden; }
+.crwall__run{
+  display:block;
+  /* Promoted to its own layer: transformed every frame, and without
+     this the repaint reads as jitter on the headline beside it. */
+  will-change:transform; backface-visibility:hidden;
+  animation:crwall-drift 56s linear infinite;
+}
+.crwall__run[data-dir="-1"]{ animation-direction:reverse; }
+/* Two copies of the run stacked, so one copy's worth of travel lands
+   exactly where it started and the loop has no seam to hide. */
+@keyframes crwall-drift{
+  from{ transform:translate3d(0,0,0); }
+  to{ transform:translate3d(0,-50%,0); }
+}
+.crwall__cell{
+  display:block; width:100%; height:auto;
+  margin-bottom:clamp(8px,1vw,18px);
+}
+/* Every other column starts part of a cover out of step, or the five
+   read as one grid sliding rather than five columns drifting. */
+.crwall__col:nth-child(2) .crwall__run{ transform:translate3d(0,-18%,0); animation-delay:-9s; }
+.crwall__col:nth-child(3) .crwall__run{ transform:translate3d(0,-34%,0); animation-delay:-21s; }
+.crwall__col:nth-child(4) .crwall__run{ transform:translate3d(0,-11%,0); animation-delay:-34s; }
+.crwall__col:nth-child(5) .crwall__run{ transform:translate3d(0,-27%,0); animation-delay:-44s; }
+/* Below this the columns are too narrow for a cover to be a cover. */
+@media (max-width:719px){ .crwall__col:nth-child(n+4){ display:none; } }
+@media (prefers-reduced-motion:reduce){ .crwall__run{ animation:none; } }
+
+/* Purple over the whole wall, deepest where the words are. The covers
+   are 29 different colour schemes at once, so this has to carry the
+   headline over any of them, not over an average of them — the
+   readings are in tools/check-contrast.py, sampled across the drift. */
+.crhero__scrim{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(to top,
+      rgba(14,11,18,.97) 0%, rgba(14,11,18,.95) 26%,
+      rgba(20,14,28,.88) 46%, rgba(30,22,38,.74) 72%,
+      rgba(30,22,38,.80) 100%),
+    linear-gradient(to right,
+      rgba(43,32,55,.62) 0%, rgba(43,32,55,.30) 58%, rgba(122,15,30,.34) 100%);
+}
+.crhero__inner{ position:relative; z-index:2; padding-bottom:clamp(44px,6vh,84px); }
 .crhero .marker{ margin-bottom:var(--space-4); }
 .crhero .sc{ color:var(--gold-lit); font-size:.92rem; }
 .crhero .marker::after{ background:rgba(255,255,255,.26); max-width:150px; }

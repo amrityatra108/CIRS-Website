@@ -1037,6 +1037,92 @@
 
 
   /* ==========================================================
+     Crossroads hero: the wall of covers behind the masthead
+     ========================================================== */
+  function crossroadsWall() {
+    var wall = $(".crwall");
+    if (!wall || reduced) return;
+    var runs = $$(".crwall__run", wall);
+    if (!runs.length) return;
+
+    // The CSS keyframe is what has been running until now. Taking the
+    // transform over by hand is what buys the turn: animation-direction
+    // flips to the mirror of the current position, which is a jump, and
+    // a jump is the one thing a drift cannot do.
+    var cols = runs.map(function (run, i) {
+      run.style.animation = "none";
+      return { el: run, sign: +(run.getAttribute("data-dir") || 1), pos: 0, span: 0, seed: (i * 0.37) % 1 };
+    });
+
+    function measure() {
+      cols.forEach(function (c) {
+        // Half the run, because the run is written out twice: travel that
+        // far and the second copy is exactly where the first began.
+        var span = c.el.scrollHeight / 2;
+        if (span > 0 && span !== c.span) {
+          c.pos = c.span ? c.pos * (span / c.span) : span * c.seed;
+          c.span = span;
+        }
+      });
+    }
+    measure();
+
+    var SPEED = 15;          // px per second: a drift, not a carousel
+    var dir = 1, want = 1;   // where the scroll last went, and where we are
+    var lastY = window.scrollY || 0;
+    var raf = null, last = 0;
+
+    onScroll(function () {
+      var y = window.scrollY || 0;
+      var d = y - lastY;
+      if (Math.abs(d) > 0.5) want = d > 0 ? 1 : -1;
+      lastY = y;
+    });
+
+    function frame(now) {
+      var dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
+      last = now;
+
+      // Eased rather than switched: the columns slow, stop and come back
+      // the other way, which is the turn the reader actually sees.
+      dir += (want - dir) * Math.min(dt * 1.7, 1);
+
+      cols.forEach(function (c) {
+        if (!c.span) return;
+        c.pos += SPEED * c.sign * dir * dt;
+        c.pos = ((c.pos % c.span) + c.span) % c.span;
+        c.el.style.transform = "translate3d(0," + (-c.pos).toFixed(2) + "px,0)";
+      });
+      raf = window.requestAnimationFrame(frame);
+    }
+
+    function run(on) {
+      if (on && raf === null) { last = 0; raf = window.requestAnimationFrame(frame); }
+      if (!on && raf !== null) { window.cancelAnimationFrame(raf); raf = null; }
+    }
+
+    // Scrolled past, or in a hidden tab, it is work nobody can see.
+    if (typeof window.IntersectionObserver !== "undefined") {
+      new IntersectionObserver(function (entries) {
+        run(entries[0].isIntersecting && document.visibilityState !== "hidden");
+      }, { rootMargin: "100px" }).observe(wall);
+      document.addEventListener("visibilitychange", function () {
+        run(document.visibilityState !== "hidden" &&
+            wall.getBoundingClientRect().bottom > 0);
+      });
+    } else {
+      run(true);
+    }
+
+    // The covers arrive after first paint, so the run keeps growing.
+    window.addEventListener("resize", measure);
+    $$("img", wall).forEach(function (im) {
+      if (!im.complete) im.addEventListener("load", measure, { once: true });
+    });
+  }
+
+
+  /* ==========================================================
      School History timeline
      Activation is an IntersectionObserver, not a ScrollTrigger,
      so the milestones light up even when GSAP never arrives from
@@ -1097,6 +1183,7 @@
     historyTimeline();
     newsFlash();
     crossroadsProgress();
+    crossroadsWall();
     if (!animate) { failOpen(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");
