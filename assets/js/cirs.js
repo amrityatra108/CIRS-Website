@@ -377,6 +377,46 @@
   }
 
   /* ==========================================================
+     News flash — the hero's cycling headline reel
+     Plain class toggling against CSS transitions, with no GSAP in it:
+     the reel is the News page's opening statement, and it should still
+     turn on a connection that never reaches the animation CDN. The
+     first item is already marked in the markup, so doing nothing here
+     leaves one headline standing rather than an empty strip — which is
+     exactly what reduced motion, and a single item, both want.
+     ========================================================== */
+  function newsFlash() {
+    var strip = $("#newsFlash");
+    if (!strip) return;
+    var items = $$(".newsflash__item", strip);
+    if (items.length < 2 || reduced) return;
+
+    var i = 0, paused = false;
+
+    function show(n) {
+      items[i].classList.remove("is-on");
+      i = n;
+      items[i].classList.add("is-on");
+    }
+
+    window.setInterval(function () {
+      // A hidden tab still fires setInterval; cycling through it would land
+      // the reader mid-reel on return for no benefit.
+      if (paused || document.visibilityState !== "visible") return;
+      show((i + 1) % items.length);
+    }, 4200);
+
+    // Hold on hover and while a headline has focus, so the link someone is
+    // reaching for does not change under the cursor.
+    ["mouseenter", "focusin"].forEach(function (e) {
+      strip.addEventListener(e, function () { paused = true; });
+    });
+    ["mouseleave", "focusout"].forEach(function (e) {
+      strip.addEventListener(e, function () { paused = false; });
+    });
+  }
+
+  /* ==========================================================
      News track — pinned horizontal reel of highlighted stories
      Same trick as dayTrack() above: pin the section, scrub an inner
      flex row by scroll progress, and fall back to a native swipe track
@@ -1014,6 +1054,7 @@
     filmLightbox();
     glimpses();
     historyTimeline();
+    newsFlash();
     if (!animate) { failOpen(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");

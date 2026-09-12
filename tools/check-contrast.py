@@ -12,7 +12,11 @@ where the words land. This samples the rendered page: for each piece of text
 in the banner it averages the background under its box and reports the ratio,
 against the WCAG AA floors (4.5:1 for body text, 3:1 for large text).
 
-    python3 tools/check-contrast.py            # needs a server on :8990
+    python3 tools/check-contrast.py                   # Admissions, the default
+    python3 tools/check-contrast.py news.html         # any page with a .pagehero
+
+Both heroes are a .pagehero over a looping video, so both are measured the
+same way. Needs a server on :8990.
 """
 import json, subprocess, sys, os
 
@@ -22,7 +26,7 @@ const { chromium } = require('playwright-core');
 (async () => {
   const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
   const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
-  await p.goto('http://localhost:8990/admissions.html', { waitUntil: 'load' });
+  await p.goto('http://localhost:8990/__PAGE__', { waitUntil: 'load' });
   await p.waitForTimeout(2500);
   // The contact panel opens over the banner on load. Measuring through it
   // reads the white card as "the background", which is how a perfectly
@@ -40,13 +44,14 @@ const { chromium } = require('playwright-core');
   });
   const boxes = await p.evaluate(() => {
     const out = [];
-    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd').forEach(el => {
+    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what').forEach(el => {
       const r = el.getBoundingClientRect();
       if (r.width < 4 || r.height < 4) return;
       const cs = getComputedStyle(el);
       out.push({ what: (el.className || el.tagName).toString().split(' ')[0],
                  text: el.textContent.trim().slice(0, 28),
-                 color: cs.color, size: parseFloat(cs.fontSize), weight: cs.fontWeight,
+                 color: cs.color, bg: cs.backgroundColor,
+                 size: parseFloat(cs.fontSize), weight: cs.fontWeight,
                  x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height) });
     });
     return out;
@@ -79,6 +84,17 @@ def lum(rgb):
     r, g, b = rgb
     return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
 
+def opaque(css):
+    """The element's own background as RGB, or None if it lets what is
+    behind it through."""
+    parts = css.strip("rgba() ").split(",")
+    if len(parts) < 3 or not parts[0].strip():
+        return None
+    if len(parts) > 3 and float(parts[3]) < 1:     # translucent: the photo shows through
+        return None
+    return tuple(int(float(v)) for v in parts[:3])
+
+
 def ratio(a, b):
     x, y = sorted((lum(a), lum(b)), reverse=True)
     return (x + 0.05) / (y + 0.05)
@@ -88,8 +104,10 @@ def main():
     # modules relative to the script, so the script has to live there too.
     work = os.environ.get("CIRS_BROWSER_DIR",
         "/tmp/claude-0/-home-user-CIRS-Website/6d0b201c-2b08-519d-94f9-82eb38a29cd4/scratchpad")
+    page = sys.argv[1] if len(sys.argv) > 1 else "admissions.html"
+    print(f"measuring {page}\n")
     tmp = os.path.join(work, "_contrast.js")
-    open(tmp, "w").write(JS)
+    open(tmp, "w").write(JS.replace("__PAGE__", page))
     out = subprocess.run(["node", tmp], capture_output=True, text=True, cwd=work)
     if out.returncode:
         sys.exit("check-contrast: " + out.stderr[-500:])
@@ -101,9 +119,17 @@ def main():
     for shot in data["shots"]:
         im = Image.open(io.BytesIO(base64.b64decode(shot["png"]))).convert("RGB")
         for box in data["boxes"]:
-            crop = im.crop((box["x"], box["y"], box["x"] + box["w"], box["y"] + box["h"]))
-            px = list(crop.getdata())
-            avg = tuple(sum(c[i] for c in px) // len(px) for i in range(3))
+            own = opaque(box.get("bg", ""))
+            if own:
+                # The element paints its own opaque ground — a pill, a card —
+                # so the photograph behind it is not what the text sits on.
+                # Measuring through it is how a checker once read 2.32:1 on
+                # a headline that was never in front of the thing it sampled.
+                avg = own
+            else:
+                crop = im.crop((box["x"], box["y"], box["x"] + box["w"], box["y"] + box["h"]))
+                px = list(crop.getdata())
+                avg = tuple(sum(c[i] for c in px) // len(px) for i in range(3))
             fg = tuple(int(v) for v in box["color"].strip("rgba() ").split(",")[:3])
             r = ratio(fg, avg)
             key = box["what"] + "|" + box["text"]
