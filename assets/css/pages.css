@@ -213,15 +213,32 @@ body.is-locked .htab:hover{ color:var(--purple); }
 .newslead .copy{ max-width:64ch; }
 
 .newsgrid{
-  display:grid; gap:var(--space-7) clamp(24px,3vw,48px);
+  display:grid; gap:var(--space-6) clamp(24px,3vw,40px);
   grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));
-  margin-top:clamp(48px,6vw,84px);
+  margin-top:clamp(40px,5vw,64px);
 }
+/* A real card — this used to be a bare column under a rule. It is the
+   same card used inside the horizontal .newstrack carousel below, so a
+   story looks the same whether it landed in the grid or the highlights
+   reel; .newstrack__track gives it a fixed width there. */
 .newsitem{
   display:flex; flex-direction:column;
-  border-top:2px solid var(--purple);
-  padding-top:var(--space-5);
+  background:var(--white); border:1px solid var(--rule); border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 16px 36px rgba(24,12,32,.05);
+  transition:transform .4s var(--e), box-shadow .4s var(--e);
 }
+.newsitem:hover{ transform:translateY(-5px); box-shadow:0 26px 52px rgba(24,12,32,.09); }
+.newsitem__media{ aspect-ratio:16/10; }
+.newsitem__body{ display:flex; flex-direction:column; flex:1; padding:var(--space-5) var(--space-5) var(--space-6); }
+.newsitem__tag{
+  align-self:flex-start;
+  font-family:var(--serif); font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1; letter-spacing:.1em; font-size:.98rem;
+  color:var(--purple); background:var(--gold);
+  padding:3px 12px; border-radius:99px; margin-bottom:var(--space-3);
+}
+.newsitem__date{ display:block; margin-bottom:6px; }
 .newsitem h3{ margin-bottom:var(--space-3); color:var(--purple); }
 .newsitem p{ color:var(--ink-soft); font-size:var(--fs-sm); }
 .newsitem__src{
@@ -230,6 +247,18 @@ body.is-locked .htab:hover{ color:var(--purple); }
 }
 .newsitem__src a{ color:var(--purple); font-weight:500; border-bottom:1px solid var(--rule); }
 .newsitem__src a:hover{ border-bottom-color:var(--gold); }
+
+/* The one clearly-marked slot for the next story: dashed rather than
+   solid, and muted, so an editor can tell at a glance it is a template
+   and not a published item. */
+.newsitem--placeholder{
+  background:none; border:1.5px dashed var(--rule); box-shadow:none;
+}
+.newsitem--placeholder:hover{ transform:none; box-shadow:none; }
+.newsitem--placeholder .newsitem__body{ justify-content:center; text-align:center; flex:1; }
+.newsitem--placeholder .newsitem__tag{ align-self:center; background:none; border:1px dashed var(--rule); color:var(--ink-mute); }
+.newsitem--placeholder h3{ color:var(--ink-mute); font-style:italic; }
+.newsitem--placeholder p{ color:var(--ink-mute); }
 
 /* The diary. Dark ground, so the labels come out gold by the rule
    already defined for .on-purple. */

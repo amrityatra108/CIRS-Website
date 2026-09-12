@@ -377,6 +377,58 @@
   }
 
   /* ==========================================================
+     News track — pinned horizontal reel of highlighted stories
+     Same trick as dayTrack() above: pin the section, scrub an inner
+     flex row by scroll progress, and fall back to a native swipe track
+     under 900px or when motion is off. Kept separate rather than made
+     generic because dayTrack's time-of-day fill and tick readout do not
+     mean anything for a set of stories — this one drives a plain
+     progress rail and a "n of m" count instead.
+     ========================================================== */
+  function newsTrack() {
+    var sec = $("#highlights"), pin = $(".newstrack__pin"), track = $(".newstrack__track");
+    var fill = $(".newstrack__fill"), count = $("#newsTrackCount");
+    if (!sec || !track) return;
+
+    function staticMode() { sec.classList.add("is-static"); }
+
+    if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
+
+    var mm = gsap.matchMedia();
+
+    mm.add("(min-width: 900px)", function () {
+      sec.classList.remove("is-static");
+      var cards = $$(".newsitem", track);
+
+      var st = ScrollTrigger.create({
+        trigger: sec,
+        start: "top top",
+        end: function () { return "+=" + Math.max(track.scrollWidth - window.innerWidth + 320, 600); },
+        pin: pin,
+        scrub: .8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          var dist = Math.max(track.scrollWidth - window.innerWidth + 120, 0);
+          gsap.set(track, { x: -dist * self.progress });
+          if (fill) fill.style.width = (self.progress * 100).toFixed(2) + "%";
+          if (count) {
+            var i = Math.min(cards.length - 1, Math.round(self.progress * (cards.length - 1)));
+            var label = (i + 1) + " of " + cards.length;
+            if (count.textContent !== label) count.textContent = label;
+          }
+        }
+      });
+      return function () { st.kill(true); gsap.set(track, { clearProps: "x" }); staticMode(); };
+    });
+
+    mm.add("(max-width: 899px)", function () {
+      staticMode();
+      return function () {};
+    });
+  }
+
+  /* ==========================================================
      Page ground shifts between paper and purple
      ========================================================== */
   function groundShift() {
@@ -962,11 +1014,12 @@
     filmLightbox();
     glimpses();
     historyTimeline();
-    if (!animate) { failOpen(); dayTrack(); chart(); progressBar(); return; }
+    if (!animate) { failOpen(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");
     choreograph();
     dayTrack();
+    newsTrack();
     groundShift();
     progressBar();
     magnets();
