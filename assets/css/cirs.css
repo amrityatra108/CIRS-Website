@@ -43,7 +43,9 @@
   --sans:  "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --deva:  "Tiro Devanagari Hindi", "Nirmala UI", serif;
 
-  --fs-mega:  clamp(3.6rem, 10.5vw, 8.8rem);
+  /* The home hero's headline, and nothing else. Pulled back from 10.5vw so
+     the campus behind it is a photograph rather than a backdrop. */
+  --fs-mega:  clamp(2.6rem, 7.2vw, 6rem);
   --fs-hero:  clamp(2.5rem, 5.6vw, 4.8rem);
   --fs-h2:    clamp(2rem, 3.9vw, 3.4rem);
   --fs-h3:    clamp(1.25rem, 1.7vw, 1.6rem);
@@ -310,23 +312,17 @@ section[id]{ scroll-margin-top:88px; }
   will-change:transform; backface-visibility:hidden;
 }
 
-.hero__mono{
-  position:absolute; inset:0; z-index:1;
-  background:rgba(255,255,255,.32);
-  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 460'%3E%3Ctext x='700' y='372' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='400' text-anchor='middle' textLength='1360' lengthAdjust='spacingAndGlyphs' fill='black'%3ECIRS%3C/text%3E%3C/svg%3E");
-          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 460'%3E%3Ctext x='700' y='372' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='400' text-anchor='middle' textLength='1360' lengthAdjust='spacingAndGlyphs' fill='black'%3ECIRS%3C/text%3E%3C/svg%3E");
-  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
-  -webkit-mask-position:center 40%; mask-position:center 40%;
-  -webkit-mask-size:min(94vw,1500px) auto; mask-size:min(94vw,1500px) auto;
-}
-@supports not ((-webkit-mask-image:none) or (mask-image:none)){
-  .hero__mono{ display:none; }
-}
-
+/* The scrim is deliberately lighter than a legible-at-any-cost wash: the
+   campus is the point of this panel, so it holds the lower third — where
+   the headline, the marker and the scroll cue sit — and lets the middle
+   and the ridge line come through nearly clean. Measured, not guessed;
+   tools/check-contrast.py samples the pixels behind each line across the
+   video loop, and every one of them clears AA with room to spare. */
 .hero__scrim{
   position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
-    linear-gradient(to top, rgba(21,8,24,.96) 0%, rgba(21,8,24,.25) 42%, rgba(21,8,24,.55) 100%);
+    linear-gradient(to top, rgba(21,8,24,.90) 0%, rgba(21,8,24,.60) 24%,
+                    rgba(21,8,24,.06) 60%, rgba(21,8,24,.22) 100%);
 }
 
 .hero__inner{
@@ -335,16 +331,16 @@ section[id]{ scroll-margin-top:88px; }
   max-width:min(1100px,92vw);
 }
 .hero .marker{ margin-bottom:var(--space-4); }
-.hero .sc{ color:var(--gold-lit); }
+.hero .sc{ color:var(--gold-lit); font-size:.92rem; }
 .hero .marker::after{ background:rgba(255,255,255,.28); max-width:120px; }
 .hero h1{ font-size:var(--fs-mega); color:#fff; line-height:.98; letter-spacing:-.02em; }
 .hero h1 em{ color:var(--gold-lit); }
 
 .hero__scroll{
-  display:inline-flex; align-items:center; gap:var(--space-3); margin-top:var(--space-6);
+  display:inline-flex; align-items:center; gap:var(--space-3); margin-top:var(--space-5);
   font-family:var(--serif); font-variant-caps:all-small-caps;
   font-feature-settings:"c2sc" 1,"smcp" 1;
-  font-size:1rem; letter-spacing:.18em; color:rgba(255,255,255,.72);
+  font-size:.92rem; letter-spacing:.18em; color:rgba(255,255,255,.82);
 }
 .hero__scroll svg{ animation:hero-bob 1.8s ease-in-out infinite; }
 @keyframes hero-bob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(5px); } }
