@@ -32,7 +32,7 @@ import documents as docs
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=25"
+CACHE_BUST = "b=26"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -223,6 +223,19 @@ PAGES = {
         "banner": ("Sports", "Sport, Every Day <em>at Four.</em>",
                    "The four o'clock hour, the fields it happens on, and what the teams have won."),
     },
+    "crossroads": {
+        "nav": "Crossroads Magazine",
+        # The old site filed this under a "Creative Corner" this site does not
+        # have; Student Life is where the arts and the clubs live here.
+        "group": "Student Life",
+        "title": "Crossroads | CIRS Monthly Magazine",
+        "description": "The archive of Crossroads, the monthly magazine of Chinmaya "
+                       "International Residential School — a student-run initiative to foster "
+                       "journalistic talent, edition by edition.",
+        # No flat band and no video hero: an archive opens on its own
+        # masthead, built in tools/pages/crossroads.html.
+        "banner": None,
+    },
     "arts": {
         "nav": "Arts, Music & Theatre",
         "group": "Student Life",
@@ -232,21 +245,6 @@ PAGES = {
         "banner": ("Arts", "Express, Perform, <em>Create.</em>",
                    "Music, theatre and the visual arts, and the amphitheatre built into the "
                    "slope."),
-    },
-    "crossroads": {
-        "nav": "The Magazine",
-        # Its own column rather than a line under Student Life: the old site
-        # buried it in a "Creative Corner" this site does not have, and a
-        # thirty-two edition archive is a destination, not a sub-item. One
-        # page under its own heading, exactly as News is.
-        "group": "Crossroads",
-        "title": "Crossroads | CIRS Monthly Magazine",
-        "description": "The archive of Crossroads, the monthly magazine of Chinmaya "
-                       "International Residential School — a student-run initiative to foster "
-                       "journalistic talent, edition by edition.",
-        # No flat band and no video hero: an archive opens on its own
-        # masthead, built in tools/pages/crossroads.html.
-        "banner": None,
     },
     "admissions": {
         "nav": "Admissions",
