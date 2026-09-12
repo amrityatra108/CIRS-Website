@@ -296,11 +296,23 @@
       }
     });
 
-    // Everything else fades up.
-    $$(".rv").forEach(function (el) {
-      gsap.from(el, {
-        opacity: 0, y: 24, duration: .95, ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 90%", once: true }
+    // Everything else fades up. Crossroads covers are held back from this
+    // pass: they get the same reveal with a per-column delay below, and two
+    // tweens on one element's opacity is a fight nobody wins.
+    $$(".rv").filter(function (el) { return !el.classList.contains("crcard"); })
+      .forEach(function (el) {
+        gsap.from(el, {
+          opacity: 0, y: 24, duration: .95, ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 90%", once: true }
+        });
+      });
+
+    // The archive wall comes in a column at a time, so a row of covers
+    // arrives as a wave rather than a slab.
+    $$(".crcard").forEach(function (card, i) {
+      gsap.from(card, {
+        opacity: 0, y: 26, duration: .85, ease: "power3.out", delay: (i % 3) * .09,
+        scrollTrigger: { trigger: card, start: "top 92%", once: true }
       });
     });
 
@@ -414,6 +426,35 @@
     ["mouseleave", "focusout"].forEach(function (e) {
       strip.addEventListener(e, function () { paused = false; });
     });
+  }
+
+  /* ==========================================================
+     Crossroads — where you are in the run
+     Thirty-two covers is a long scroll, so the archive keeps a
+     count of how far through it you are. It is a readout, not an
+     animation: no GSAP, and it stays on under reduced motion,
+     because knowing you are at 18 of 32 is information. The panel
+     is aria-hidden — every number it shows is already on the card
+     beside it — so a screen reader meets the issues, not a ticker.
+     ========================================================== */
+  function crossroadsProgress() {
+    var out = $("#crProgN");
+    var cards = $$(".crcard");
+    if (!out || !cards.length || typeof window.IntersectionObserver === "undefined") return;
+
+    var seen = 0;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var i = cards.indexOf(e.target) + 1;
+        if (i > seen) {
+          seen = i;
+          out.textContent = i < 10 ? "0" + i : String(i);
+        }
+      });
+    }, { rootMargin: "-45% 0px -45% 0px" });
+
+    cards.forEach(function (c) { io.observe(c); });
   }
 
   /* ==========================================================
@@ -1055,6 +1096,7 @@
     glimpses();
     historyTimeline();
     newsFlash();
+    crossroadsProgress();
     if (!animate) { failOpen(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");
