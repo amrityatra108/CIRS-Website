@@ -9,9 +9,19 @@ cover you can open:
     ...
     crossroads-issue-32.pdf
 
-Covers are separate and optional: put a scan of the printed cover at
-`assets/img/crossroads/issue-07.jpg` and Issue 07 shows that instead of its
-typographic placeholder. Either can arrive without the other.
+Covers are separate and optional. Put the school's own scan — at whatever
+size it came in — at `assets/source/crossroads/issue-07.jpg`, then run
+
+    python3 tools/make-covers.py
+
+which crops it to the card's 5:7 and writes the 720x1008 copy the site ships
+to `assets/img/crossroads/issue-07.jpg`. Issue 07 then shows that instead of
+its typographic placeholder. Either the PDF or the cover can arrive without
+the other.
+
+Do not put a full-size scan straight into `assets/img/` — everything there is
+deployed as-is, and the run of covers is 20 MB at print resolution against
+3.6 MB generated.
 
 If one file cannot follow the naming, add it to `OVERRIDES` in
 `tools/crossroads.py` rather than renaming the convention for everyone.

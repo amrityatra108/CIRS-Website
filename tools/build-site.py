@@ -32,7 +32,7 @@ import documents as docs
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=26"
+CACHE_BUST = "b=19"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -492,11 +492,10 @@ POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
 def crossroads_html():
     """The archive wall: every edition of Crossroads, newest first.
 
-    A cover is one of three things, in this order of preference — the
-    school's own scan, the designed typographic placeholder wrapped in a
-    link because the PDF is up, or that placeholder standing on its own.
-    Only the third of those is the state the archive is in today, and it
-    says so on the card rather than leaving a dead link to find out.
+    A cover is one of two things — the school's own scan, or the designed
+    typographic placeholder for an issue not yet digitised. The foot under
+    each cover carries the issue number and, when the PDF is up, both ways
+    of reading it: open it in a tab, or take the file.
     """
     cards = []
     for issue in crossroads.issues():
@@ -514,27 +513,39 @@ def crossroads_html():
           <span class="crcover__num" aria-hidden="true">{n:02d}</span>
           <span class="crcover__sub">CIRS Monthly Magazine</span>''')
 
-        body = f'''<span class="crcover">
+        cover = f'''<span class="crcover">
           {face}
-        </span>
-        <span class="crcard__foot">
-          <span class="crcard__label">{label}</span>
-          <span class="crcard__state">{{STATE}}</span>
         </span>'''
 
         if issue["pdf"]:
-            inner = body.replace("{STATE}", "Read issue &rarr;")
+            # Two links, side by side in the foot rather than one stacked
+            # inside the other: a link within a link is invalid, and a
+            # download hidden behind a hover is no download at all on a
+            # touch screen.
             cards.append(f'''      <article class="crcard{mods} rv">
-        <a class="crcard__link" href="{issue["pdf"]}" target="_blank" rel="noopener">
-        {inner}
-        </a>
         <h3 class="sr-only">Crossroads {label}</h3>
+        <a class="crcard__link" href="{issue["pdf"]}" target="_blank" rel="noopener"
+           aria-label="Read Crossroads {label} in a new tab">
+          {cover}
+        </a>
+        <div class="crcard__foot">
+          <span class="crcard__label">{label}</span>
+          <a class="crcard__state" href="{issue["pdf"]}" target="_blank" rel="noopener">Read issue &rarr;</a>
+          <a class="crcard__dl" href="{issue["pdf"]}" download
+             aria-label="Download Crossroads {label} as a PDF">
+            <svg width="13" height="13" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v8M3.5 6L7 9.5 10.5 6M2 12.5h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download
+          </a>
+        </div>
       </article>''')
         else:
-            inner = body.replace("{STATE}", "PDF will be uploaded soon")
             cards.append(f'''      <article class="crcard{mods} is-pending rv">
         <h3 class="sr-only">Crossroads {label}</h3>
-        {inner}
+        {cover}
+        <div class="crcard__foot">
+          <span class="crcard__label">{label}</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </div>
       </article>''')
 
     return '<div class="crgrid">\n' + "\n".join(cards) + "\n    </div>"
@@ -550,7 +561,12 @@ def doclist_html():
     """
     groups = []
     for category, items in docs.by_category():
-        rows = "\n".join(f'        <li>{d["title"]}</li>' for d in items)
+        rows = "\n".join(
+            (f'        <li>{d["title"]} '
+             f'<a class="doclist__dl" href="{docs.asset_path(d)}" download>Download</a></li>')
+            if docs.is_uploaded(d) else
+            f'        <li>{d["title"]} <span class="doclist__await">Awaiting upload</span></li>'
+            for d in items)
         groups.append(f'''      <div class="docgroup rv">
         <h3 class="serif h3">{category}</h3>
         <ul class="doclist">
@@ -570,7 +586,9 @@ def docportal_html():
         for d in items:
             if docs.is_uploaded(d):
                 aside = (f'<a class="btn btn--outline" href="{docs.asset_path(d)}" target="_blank" '
-                         f'rel="noopener">View &amp; download</a><br><small>Opens in a new tab</small>')
+                         f'rel="noopener">View</a> '
+                         f'<a class="btn btn--primary" href="{docs.asset_path(d)}" download>Download</a>'
+                         f'<br><small>View opens a tab; download saves the PDF</small>')
             else:
                 aside = '<b>Awaiting upload</b><br>To be added by the school'
             steps.append(f'''        <div class="step" id="doc-{d["id"]}">
