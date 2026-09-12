@@ -1574,11 +1574,12 @@ body.has-lightbox{ overflow:hidden; }
 }
 
 .crcard__foot{
-  display:flex; align-items:baseline; justify-content:space-between;
-  gap:var(--space-3); padding-top:var(--space-4);
+  display:flex; align-items:baseline; flex-wrap:wrap;
+  gap:6px var(--space-3); padding-top:var(--space-4);
   border-top:1px solid var(--rule);
   margin-top:var(--space-4);
 }
+.crcard__label{ margin-right:auto; }
 .crcard__label{
   font-family:var(--serif); font-variant-caps:all-small-caps;
   font-feature-settings:"c2sc" 1,"smcp" 1;
@@ -1597,10 +1598,12 @@ body.has-lightbox{ overflow:hidden; }
   transform:translateY(-8px);
   box-shadow:0 30px 60px rgba(20,10,30,.26);
 }
-.crcard__link:hover .crcard__state,
-.crcard__link:focus-visible .crcard__state{ color:var(--maroon); }
-.crcard__link:hover .crcard__label,
-.crcard__link:focus-visible .crcard__label{ color:var(--maroon); }
+.crcard__state{ text-decoration:none; }
+.crcard:hover .crcard__state,
+.crcard__state:focus-visible{ color:var(--maroon); }
+.crcard:hover .crcard__label{ color:var(--maroon); }
+.crcard__state:focus-visible,
+.crcard__dl:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 .crcard__link:focus-visible{ outline:2px solid var(--gold); outline-offset:6px; }
 
 /* --- Where you are in the run -------------------------------- */
@@ -1637,3 +1640,38 @@ body.has-lightbox{ overflow:hidden; }
   color:var(--on-purple-soft); font-size:var(--fs-sm); line-height:1.65;
 }
 .crend__cta{ display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-6); }
+
+/* ============================================================
+   Download controls
+   ------------------------------------------------------------
+   A PDF link opens a browser tab; it does not save the file, and
+   right-clicking is not an interface. Every document on the site
+   therefore carries an explicit download beside whatever opens it.
+   ============================================================ */
+.crcard{ position:relative; }
+.crcard__dl{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:5px 11px 6px; border-radius:99px;
+  border:1px solid var(--rule);
+  color:var(--purple); text-decoration:none;
+  font-size:.74rem; letter-spacing:.04em; line-height:1;
+  transition:background .25s var(--e), border-color .25s var(--e),
+             color .25s var(--e);
+}
+.crcard__dl:hover,
+.crcard__dl:focus-visible{
+  background:var(--purple); border-color:var(--purple); color:var(--on-purple);
+}
+@media (prefers-reduced-motion:reduce){ .crcard__dl{ transition:none; } }
+
+.doclist__dl{
+  margin-left:8px; font-size:.76rem; letter-spacing:.03em;
+  color:var(--purple); text-decoration:underline; text-underline-offset:3px;
+  white-space:nowrap;
+}
+.doclist__dl:hover{ color:var(--maroon); }
+.doclist__await{
+  margin-left:8px; font-size:.74rem; letter-spacing:.04em; color:var(--ink-mute);
+  white-space:nowrap;
+}
+.step__aside .btn + .btn{ margin-left:6px; }
