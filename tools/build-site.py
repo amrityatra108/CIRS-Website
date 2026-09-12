@@ -32,7 +32,7 @@ import documents as docs
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=19"
+CACHE_BUST = "b=20"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -551,6 +551,47 @@ def crossroads_html():
     return '<div class="crgrid">\n' + "\n".join(cards) + "\n    </div>"
 
 
+def crosswall_html():
+    """The drifting wall of covers behind the Crossroads masthead.
+
+    Five columns, each a run of covers written out twice. The duplicate is
+    what makes the drift endless: assets/js/cirs.js translates a column by
+    its own height and the second copy is already in place, so there is no
+    jump to hide. Neighbouring columns start in opposite directions.
+
+    Only issues with a cover appear — an issue still waiting for its scan
+    has nothing to contribute here, and the typographic placeholder that
+    stands in for it on the card would read as a missing image at this size.
+    """
+    covers = [i["cover"] for i in crossroads.issues() if i["cover"]]
+    if not covers:
+        return ""
+
+    cols, n = [], 5
+    for c in range(n):
+        # Dealt round-robin from a list that is already newest-first, so
+        # neighbouring columns never show the same cover side by side.
+        run = [covers[j] for j in range(c, len(covers), n)]
+        while len(run) < 4:                       # a short column would end
+            run = run + run                       # mid-drift on a tall screen
+        tiles = []
+        for copy in (0, 1):
+            for src in run:
+                wall = src.replace("assets/img/crossroads/",
+                                   "assets/img/crossroads/wall/")
+                # The second copy is the same file the first already
+                # fetched, and only exists to close the loop.
+                lazy = ' loading="lazy"' if (copy or c >= 3) else ''
+                tiles.append(f'<img class="crwall__cell" src="{wall}?{CACHE_BUST}"'
+                             f' alt="" width="300" height="420"{lazy} decoding="async">')
+        cols.append(f'      <div class="crwall__col">\n'
+                    f'        <div class="crwall__run" data-dir="{1 if c % 2 == 0 else -1}">'
+                    + "".join(tiles) + '</div>\n      </div>')
+
+    return ('<div class="crwall" aria-hidden="true">\n'
+            + "\n".join(cols) + '\n    </div>')
+
+
 def doclist_html():
     """The compact, category-grouped list for the School Information page.
 
@@ -645,6 +686,7 @@ def build(slug, page):
     content = read(f"tools/pages/{slug}.html").rstrip("\n")
     content = (content.replace("{{DOCLIST}}", doclist_html())
                        .replace("{{DOCPORTAL}}", docportal_html())
+                       .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
                        .replace("{{CROSSROADS_COUNT}}", str(crossroads.COUNT)))
     parts.append(content)
