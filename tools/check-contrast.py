@@ -44,7 +44,7 @@ const { chromium } = require('playwright-core');
   });
   const boxes = await p.evaluate(() => {
     const out = [];
-    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll').forEach(el => {
+    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll').forEach(el => {
       const r = el.getBoundingClientRect();
       if (r.width < 4 || r.height < 4) return;
       const cs = getComputedStyle(el);
@@ -57,7 +57,7 @@ const { chromium } = require('playwright-core');
     return out;
   });
   // hide the text, photograph what is behind it
-  await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap{visibility:hidden!important}' });
+  await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap, .crhero .wrap{visibility:hidden!important}' });
   await p.waitForTimeout(300);
   const shots = [];
   for (const t of (times || [null])) {
