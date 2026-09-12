@@ -31,7 +31,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import documents as docs
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=19"
+CACHE_BUST = "b=20"
 
 # slug -> page definition. Order here is the order in the menu.
 #   nav    the label in the menu and the <title>
