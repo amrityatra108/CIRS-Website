@@ -47,9 +47,10 @@ python3 tools/check-links.py           # every link and asset reference resolves
 python3 tools/build-site.py            # then: git diff --quiet -- '*.html'
 ```
 
-`tools/check-contrast.py` additionally measures the Admissions banner text against the pixels
-actually behind it, seeking through the hero video. Run it after touching the hero, the scrim
-or the honeycomb.
+`tools/check-contrast.py` additionally measures banner text against the pixels actually behind
+it, seeking through the hero video. It takes the page as an argument and defaults to
+Admissions — `python3 tools/check-contrast.py news.html` for the other hero. Run it after
+touching either hero, a scrim or the honeycomb.
 
 ## Things that are deliberate, not oversights
 

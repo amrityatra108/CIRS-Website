@@ -31,7 +31,69 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import documents as docs
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=20"
+CACHE_BUST = "b=21"
+
+# The standing block under the Admissions hero's buttons.
+HERO_DATES = '''    <dl class="pagehero__dates">
+      <div>
+        <dt>Classes</dt>
+        <dd>V&ndash;IX and XI<small>CBSE and the IB Diploma</small></dd>
+      </div>
+      <div>
+        <dt>Portal closes</dt>
+        <dd>15 October 2026<small>Register before this date</small></dd>
+      </div>
+      <div>
+        <dt>Entrance examination</dt>
+        <dd>First week of November 2026<small>India, Dubai and other centres</small></dd>
+      </div>
+    </dl>'''
+
+# The headlines the News hero cycles through. Every one is a story already on
+# the page below — the reel is a way in, not a second copy of the news — so
+# each carries the anchor of the section it came from, and nothing appears
+# here that the page does not already report in full.
+NEWS_FLASH = [
+    ("Final examination, May 2026",
+     "Twenty-four candidates, twenty-four diplomas", "#latest"),
+    ("CBSE, March&ndash;April 2026",
+     "Class XII Management closes the year on a 94% average", "#results"),
+    ("4&ndash;9 August 2025",
+     "English Week fills the portals with storytelling and spell bees", "#highlights"),
+    ("25 July 2025",
+     "Science Expo draws fifty schools to 140 models", "#highlights"),
+    ("7&ndash;11 July 2025",
+     "Mathematics Week ends with a house-wise Maths Run", "#highlights"),
+    ("From 19 April 2025",
+     "Seva Week takes students to homes, centres and temples", "#more"),
+    ("19&ndash;21 January 2026",
+     "Chinmaya Olympiad in Mathematics and Science", "#diary"),
+]
+
+
+def newsflash_html():
+    """The cycling headline reel under the News hero's buttons.
+
+    The first item is marked on in the markup rather than by script, so the
+    reel reads as a single headline before newsFlash() ever runs and stays
+    one if it never does — no script, no motion, no reel, but never an empty
+    strip. The rest are hidden with visibility, which keeps their links out
+    of the tab order and off the accessibility tree while they are not up.
+    """
+    items = []
+    for i, (when, what, anchor) in enumerate(NEWS_FLASH):
+        on = " is-on" if i == 0 else ""
+        items.append(f'''        <p class="newsflash__item{on}">
+          <span class="newsflash__when">{when}</span>
+          <a class="newsflash__what" href="{anchor}">{what}</a>
+        </p>''')
+    return f'''    <div class="newsflash" id="newsFlash">
+      <p class="newsflash__label"><span class="newsflash__dot" aria-hidden="true"></span>Latest</p>
+      <div class="newsflash__items">
+{chr(10).join(items)}
+      </div>
+    </div>'''
+
 
 # slug -> page definition. Order here is the order in the menu.
 #   nav    the label in the menu and the <title>
@@ -55,9 +117,16 @@ PAGES = {
         "title": "News",
         "description": "News and events from Chinmaya International Residential School — "
                        "assemblies, weeks, competitions and the term's diary.",
-        "banner": ("News", "From <em>the Campus.</em>",
-                   "Reports from the departments and the houses, and the dates already in the "
-                   "school calendar."),
+        # A hero rather than the flat band: a news page should open at the
+        # pace of the campus, so the opening is the campus in motion with the
+        # current headlines cycling under it.
+        "hero": ("News from campus", "The Campus, <em>As It Happens.</em>",
+                 "Results, assemblies, weeks and celebrations, reported by the departments and "
+                 "the houses — and the dates already in the school calendar."),
+        "hero_media": ("hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
+        "hero_cta": [("Read the latest", "#latest", "primary"),
+                     ("What is coming up", "#diary", "ghost")],
+        "hero_extra": newsflash_html(),
     },
     "why-cirs": {
         "nav": "Why CIRS",
@@ -175,6 +244,11 @@ PAGES = {
                  "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
                  "registration portal, the entrance examination, a visit to the school and the "
                  "offer — the whole procedure, in order."),
+        "hero_media": ("admissions-honeycomb.jpg", "admissions-hero.webm",
+                       "admissions-hero.mp4", 1920, 960),
+        "hero_cta": [("How to apply", "#apply", "primary"),
+                     ("Book a visit", "#visit", "ghost")],
+        "hero_extra": HERO_DATES,
         "hero_placeholder": "Header animation &mdash; admissions<br>photograph or looping video<br>to be supplied",
         "jump": True,
         "popup": True,
@@ -298,11 +372,16 @@ HOME_TAB = '''<a class="htab" href="index.html">
 def hero_html(page):
     """The page's opening, at full height, merging into the scroll below it.
 
-    It carries the call to action and the dates, because the standing notice
-    box that used to hold them is gone: one opening statement rather than a
-    banner and then a box repeating it.
+    It carries the call to action and whatever standing block the page needs
+    under it — the dates on Admissions, the headline reel on News — because
+    the notice box that used to hold them is gone: one opening statement
+    rather than a banner and then a box repeating it.
 
-    The media is a honeycomb of the school's own photographs, built by
+    The media, the buttons and that trailing block all come from the page's
+    own entry in PAGES, so a second hero is a few lines of data rather than a
+    second copy of this markup.
+
+    Admissions' media is a honeycomb of the school's own photographs, built by
     tools/make-honeycomb.py: a seamlessly looping video, with the still of the
     same wall as its poster so the panel is complete before the video arrives
     and stays complete if it never does.
@@ -312,13 +391,17 @@ def hero_html(page):
     re-measure with tools/check-contrast.py.
     """
     eyebrow, heading, lead = page["hero"]
+    poster, webm, mp4, vw, vh = page["hero_media"]
+    cta = "\n".join(f'      <a class="btn btn--{variant} btn--lg" href="{href}">{label}</a>'
+                    for label, href, variant in page["hero_cta"])
+    extra = page.get("hero_extra", "")
     return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
   <div class="pagehero__media">
     <video class="pagehero__video" autoplay muted loop playsinline
-           poster="assets/img/admissions-honeycomb.jpg?{CACHE_BUST}" aria-hidden="true"
-           width="1920" height="960" fetchpriority="high">
-      <source src="assets/video/admissions-hero.webm?{CACHE_BUST}" type="video/webm">
-      <source src="assets/video/admissions-hero.mp4?{CACHE_BUST}" type="video/mp4">
+           poster="assets/img/{poster}?{CACHE_BUST}" aria-hidden="true"
+           width="{vw}" height="{vh}" fetchpriority="high">
+      <source src="assets/video/{webm}?{CACHE_BUST}" type="video/webm">
+      <source src="assets/video/{mp4}?{CACHE_BUST}" type="video/mp4">
     </video>
   </div>
   <div class="pagehero__scrim" aria-hidden="true"></div>
@@ -327,23 +410,9 @@ def hero_html(page):
     <h1 class="serif" data-split>{heading}</h1>
     <p class="lead">{lead}</p>
     <p class="pagehero__cta">
-      <a class="btn btn--primary btn--lg" href="#apply">How to apply</a>
-      <a class="btn btn--ghost btn--lg" href="#visit">Book a visit</a>
+{cta}
     </p>
-    <dl class="pagehero__dates">
-      <div>
-        <dt>Classes</dt>
-        <dd>V&ndash;IX and XI<small>CBSE and the IB Diploma</small></dd>
-      </div>
-      <div>
-        <dt>Portal closes</dt>
-        <dd>15 October 2026<small>Register before this date</small></dd>
-      </div>
-      <div>
-        <dt>Entrance examination</dt>
-        <dd>First week of November 2026<small>India, Dubai and other centres</small></dd>
-      </div>
-    </dl>
+{extra}
   </div>
 </section>'''
 
