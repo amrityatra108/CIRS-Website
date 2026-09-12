@@ -393,6 +393,68 @@ body.is-locked .htab:hover{ color:var(--purple); }
 .pagehero__inner{ padding-top:96px; }
 
 /* ------------------------------------------------------------
+   The headline reel — News, under the hero's buttons
+   ------------------------------------------------------------
+   One headline at a time, cycled by newsFlash() in cirs.js. The
+   items are stacked in a single grid cell rather than positioned
+   absolutely, so the strip is as tall as its tallest headline and
+   nothing has to guess a min-height for the phone, where these wrap
+   to two lines. Hidden items use visibility, which takes their links
+   out of the tab order and off the accessibility tree — the reel is a
+   way into stories the page already carries in full below, so a
+   screen reader meets the one that is up and none of the rest.
+   ------------------------------------------------------------ */
+.newsflash{
+  display:flex; align-items:center; gap:clamp(14px,2vw,26px);
+  margin-top:var(--space-6); padding-top:var(--space-5);
+  border-top:1px solid rgba(255,255,255,.20);
+}
+.newsflash__label{
+  flex:none; display:inline-flex; align-items:center; gap:9px;
+  padding:5px 14px; border-radius:99px;
+  background:var(--gold); color:var(--purple);
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.14em; font-size:.95rem; line-height:1;
+}
+.newsflash__dot{
+  width:7px; height:7px; border-radius:50%; background:var(--purple);
+  animation:flashpulse 1.8s var(--e) infinite;
+}
+@keyframes flashpulse{
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%    { opacity:.35; transform:scale(.72); }
+}
+.newsflash__items{ display:grid; flex:1; min-width:0; }
+.newsflash__item{
+  grid-area:1/1; min-width:0;
+  opacity:0; visibility:hidden; transform:translateY(9px);
+  transition:opacity .55s var(--e), transform .55s var(--e);
+}
+.newsflash__item.is-on{ opacity:1; visibility:visible; transform:none; }
+.newsflash__when{
+  display:block; margin-bottom:5px;
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.14em; font-size:.86rem; line-height:1; color:var(--gold-lit);
+  font-variant-numeric:oldstyle-nums;
+}
+.newsflash__what{
+  font-family:var(--serif); font-size:clamp(1.06rem,1.7vw,1.5rem);
+  line-height:1.2; color:#fff; text-decoration:none;
+  border-bottom:1px solid transparent; transition:border-color .3s var(--e);
+}
+.newsflash__what:hover, .newsflash__what:focus-visible{ border-bottom-color:var(--gold); }
+
+@media (max-width:640px){
+  .newsflash{ flex-direction:column; align-items:flex-start; gap:var(--space-3); }
+}
+@media (prefers-reduced-motion:reduce){
+  .newsflash__item{ transition:none; transform:none; }
+  .newsflash__dot{ animation:none; }
+}
+
+/* ------------------------------------------------------------
    The campaign panel
    ------------------------------------------------------------
    The school's admissions creative is a square graphic. Rather than
