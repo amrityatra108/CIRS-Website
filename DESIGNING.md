@@ -127,9 +127,21 @@ Add or remove names in `CELLS` and re-run the tool. A name that is not in
 The tools honour EXIF rotation — several camera originals carry orientation 8
 and would otherwise tile on their side. Keep it that way.
 
-**After touching the hero, the scrim or the honeycomb, run
+**After touching a hero, a scrim or the honeycomb, run
 `tools/check-contrast.py`.** It measures the banner text against the pixels
-actually behind it, seeking through the video loop.
+actually behind it, seeking through the video loop. Two pages open on a
+`.pagehero` over video now — Admissions and News — so the tool takes the page
+as an argument and defaults to Admissions:
+
+```sh
+python3 tools/check-contrast.py                # Admissions
+python3 tools/check-contrast.py news.html      # News
+```
+
+Text that paints its own opaque background — the gold "Latest" pill on the
+News reel — is measured against *that*, not against the photograph behind it.
+Measuring through an opaque chip is how the checker first reported 1.30:1 on
+lettering that actually sits at 8.17:1.
 
 ---
 

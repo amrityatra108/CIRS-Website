@@ -21,8 +21,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
-<link rel="stylesheet" href="assets/css/cirs.css?b=20">
-<link rel="stylesheet" href="assets/css/pages.css?b=20">
+<link rel="stylesheet" href="assets/css/cirs.css?b=21">
+<link rel="stylesheet" href="assets/css/pages.css?b=21">
 </head>
 
 <body>
@@ -192,11 +192,57 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">News</span></p>
-    <h1 class="serif" data-split>From <em>the Campus.</em></h1>
-    <p class="lead">Reports from the departments and the houses, and the dates already in the school calendar.</p>
+<section class="pagehero" id="top" data-ground="#0E0B12">
+  <div class="pagehero__media">
+    <video class="pagehero__video" autoplay muted loop playsinline
+           poster="assets/img/hero.jpg?b=21" aria-hidden="true"
+           width="1280" height="720" fetchpriority="high">
+      <source src="assets/video/campus-loop.webm?b=21" type="video/webm">
+      <source src="assets/video/campus-loop.mp4?b=21" type="video/mp4">
+    </video>
+  </div>
+  <div class="pagehero__scrim" aria-hidden="true"></div>
+  <div class="wrap pagehero__inner">
+    <p class="marker"><span class="sc">News from campus</span></p>
+    <h1 class="serif" data-split>The Campus, <em>As It Happens.</em></h1>
+    <p class="lead">Results, assemblies, weeks and celebrations, reported by the departments and the houses — and the dates already in the school calendar.</p>
+    <p class="pagehero__cta">
+      <a class="btn btn--primary btn--lg" href="#latest">Read the latest</a>
+      <a class="btn btn--ghost btn--lg" href="#diary">What is coming up</a>
+    </p>
+    <div class="newsflash" id="newsFlash">
+      <p class="newsflash__label"><span class="newsflash__dot" aria-hidden="true"></span>Latest</p>
+      <div class="newsflash__items">
+        <p class="newsflash__item is-on">
+          <span class="newsflash__when">Final examination, May 2026</span>
+          <a class="newsflash__what" href="#latest">Twenty-four candidates, twenty-four diplomas</a>
+        </p>
+        <p class="newsflash__item">
+          <span class="newsflash__when">CBSE, March&ndash;April 2026</span>
+          <a class="newsflash__what" href="#results">Class XII Management closes the year on a 94% average</a>
+        </p>
+        <p class="newsflash__item">
+          <span class="newsflash__when">4&ndash;9 August 2025</span>
+          <a class="newsflash__what" href="#highlights">English Week fills the portals with storytelling and spell bees</a>
+        </p>
+        <p class="newsflash__item">
+          <span class="newsflash__when">25 July 2025</span>
+          <a class="newsflash__what" href="#highlights">Science Expo draws fifty schools to 140 models</a>
+        </p>
+        <p class="newsflash__item">
+          <span class="newsflash__when">7&ndash;11 July 2025</span>
+          <a class="newsflash__what" href="#highlights">Mathematics Week ends with a house-wise Maths Run</a>
+        </p>
+        <p class="newsflash__item">
+          <span class="newsflash__when">From 19 April 2025</span>
+          <a class="newsflash__what" href="#more">Seva Week takes students to homes, centres and temples</a>
+        </p>
+        <p class="newsflash__item">
+          <span class="newsflash__when">19&ndash;21 January 2026</span>
+          <a class="newsflash__what" href="#diary">Chinmaya Olympiad in Mathematics and Science</a>
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 <section class="section" id="latest">
@@ -629,7 +675,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
-<script src="assets/js/cirs.js?b=20" defer></script>
-<script src="assets/js/pages.js?b=20" defer></script>
+<script src="assets/js/cirs.js?b=21" defer></script>
+<script src="assets/js/pages.js?b=21" defer></script>
 </body>
 </html>
