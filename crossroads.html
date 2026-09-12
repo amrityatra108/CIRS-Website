@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crossroads | CIRS Monthly Magazine</title>
+<meta name="description" content="The archive of Crossroads, the monthly magazine of Chinmaya International Residential School — a student-run initiative to foster journalistic talent, edition by edition.">
+<meta name="theme-color" content="#0E0B12">
+<link rel="canonical" href="https://www.cirschool.org/crossroads.html">
+<link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
+<link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Crossroads | CIRS Monthly Magazine">
+<meta property="og:description" content="The archive of Crossroads, the monthly magazine of Chinmaya International Residential School — a student-run initiative to foster journalistic talent, edition by edition.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Crossroads | CIRS Monthly Magazine">
+<meta name="twitter:description" content="The archive of Crossroads, the monthly magazine of Chinmaya International Residential School — a student-run initiative to foster journalistic talent, edition by edition.">
+<meta name="twitter:image" content="assets/img/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
+<link rel="stylesheet" href="assets/css/cirs.css?b=24">
+<link rel="stylesheet" href="assets/css/pages.css?b=24">
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Opening sequence. Removed from the DOM once it has played. -->
+<div class="curtain" id="curtain" aria-hidden="true">
+  <img src="assets/img/logo.png" alt="" width="72" height="70">
+  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
+  <span class="curtain__bar"><i></i></span>
+</div>
+
+<!-- Film lightbox, shared by every page. The iframe is built on open and
+     destroyed on close: nothing is requested from YouTube until someone asks
+     for the film, and removing the element is what actually stops the audio. -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox__back" data-close></div>
+  <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="The official CIRS film">
+    <div class="lightbox__frame" id="lightboxFrame"></div>
+    <button type="button" class="lightbox__close" data-close aria-label="Close the film">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<button type="button" class="totop" id="totop" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+</button>
+<header class="header" id="header">
+  <div class="wrap">
+    <div class="header__left">
+      <!-- Enquire opens the contact panel below rather than going anywhere.
+           It stays a button so the keyboard and screen readers get a control
+           that announces its expanded state; hover opens it for a mouse. -->
+      <div class="enq" id="enq">
+        <button type="button" class="htab enq__btn" id="enqBtn"
+                aria-expanded="false" aria-controls="enqPanel">
+          <span class="htab__icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="htab__label">Enquire</span>
+        </button>
+
+        <div class="enq__panel" id="enqPanel">
+          <p class="enq__title sc">Talk to CIRS</p>
+
+          <a class="enq__row enq__row--wa" href="https://wa.me/919360461572"
+             target="_blank" rel="noopener">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>+91 93604 61572</b>
+              <small>WhatsApp &middot; Admissions Coordinator</small>
+            </span>
+          </a>
+
+          <a class="enq__row" href="mailto:info@cirschool.org">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><rect x="2.6" y="4.6" width="16.8" height="12.8" rx="1.6" stroke="currentColor" stroke-width="1.4"/><path d="m3.4 5.8 7.6 5.6 7.6-5.6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>info@cirschool.org</b>
+              <small>Email the school</small>
+            </span>
+          </a>
+
+          <p class="enq__title enq__title--social sc">Follow CIRS</p>
+          <div class="enq__social">
+            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <a class="htab" href="index.html">
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="htab__label">Home</span>
+      </a>
+    </div>
+
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
+      <span class="brand__txt">
+        <span class="brand__name">Chinmaya International Residential School</span>
+        <span class="brand__sub">Siruvani &middot; Coimbatore &middot; Founded 1996</span>
+      </span>
+    </a>
+
+    <div class="header__right">
+      <a class="htab htab--news" href="news.html">
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
+        </span>
+        <span class="htab__label">News</span>
+      </a>
+      <button type="button" class="htab htab--menu" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <span class="htab__icon" aria-hidden="true">
+          <span class="menubtn__dots"><i></i><i></i><i></i><i></i></span>
+        </span>
+        <span class="htab__label">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer" hidden>
+  <nav class="drawer__grid" aria-label="All pages">
+    <div>
+      <p class="sc" id="dnav-news">News</p>
+      <ul aria-labelledby="dnav-news">
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-about-cirs">About CIRS</p>
+      <ul aria-labelledby="dnav-about-cirs">
+        <li><a href="why-cirs.html">Why CIRS</a></li>
+        <li><a href="school-history.html">School History</a></li>
+        <li><a href="our-leaders-speak.html">Our Leaders Speak</a></li>
+        <li><a href="our-leadership.html">Our Leadership</a></li>
+        <li><a href="school-info.html">School Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-academics">Academics</p>
+      <ul aria-labelledby="dnav-academics">
+        <li><a href="academics.html">Academics</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-student-life">Student Life</p>
+      <ul aria-labelledby="dnav-student-life">
+        <li><a href="student-life.html">Student Life</a></li>
+        <li><a href="sports.html">Sports</a></li>
+        <li><a href="crossroads.html" aria-current="page">Crossroads Magazine</a></li>
+        <li><a href="arts.html">Arts, Music & Theatre</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-admissions">Admissions</p>
+      <ul aria-labelledby="dnav-admissions">
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="parent-portal.html">Parent Portal</a></li>
+        <li><a href="alumni.html">Alumni</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="drawer__utility">
+    <a href="alumni.html">Alumni</a>
+    <a href="#">Careers</a>
+    <a href="#">Support CIRS</a>
+    <a href="#">Calendar</a>
+    <a href="tel:+914222613300">+91 422 261 3300</a>
+    <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+  </div>
+  <div class="drawer__cta">
+    <a class="btn btn--primary btn--lg" href="admissions.html">Apply for admission</a>
+    <a class="btn btn--outline btn--lg" href="admissions.html">Book a campus visit</a>
+  </div>
+</div>
+<main id="main">
+<section class="crhero" id="top" data-ground="#0E0B12">
+  <div class="crhero__tex" aria-hidden="true"></div>
+  <div class="wrap crhero__inner">
+    <p class="marker"><span class="sc">CIRS monthly magazine</span></p>
+    <h1 class="crhero__word" data-split>Crossroads</h1>
+    <p class="crhero__lead">Stories, ideas and moments from the CIRS community.</p>
+    <p class="crhero__note">The evolving archive of Crossroads, the monthly magazine of Chinmaya
+      International Residential School &mdash; written, edited and published by its students.</p>
+    <p class="crmeter">
+      <span class="crmeter__n">32</span>
+      <span class="crmeter__t">editions<br>one CIRS story</span>
+    </p>
+    <span class="crhero__scroll">
+      The archive
+      <svg width="11" height="11" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 4l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+    </span>
+  </div>
+</section>
+
+<section class="crstate" id="statement">
+  <div class="wrap">
+    <p class="crstate__line rv" data-split><em>32 editions.</em></p>
+    <p class="crstate__line crstate__line--b rv" data-split>Countless stories.</p>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="crabout">
+      <div class="rv">
+        <div class="sec-head" style="margin-bottom:var(--space-5)">
+          <p class="marker"><span class="sc">What it is</span></p>
+          <h2 class="serif h2" data-split>A Magazine the Students <em>Run.</em></h2>
+        </div>
+        <p class="copy dropcap">The Crossroads Monthly is a student-run initiative to foster
+          journalistic talent amongst the students of CIRS.</p>
+        <p class="copy">We, as a student-centric club, want to empower the students of our school.
+          We want not only our students but even our alumni and parents of students to contribute
+          toward this goal. Furthermore, we would accept all contributions from all kinds of
+          sources provided the content is appropriate and student friendly.</p>
+        <p class="copy" style="margin-top:var(--space-5)"><a class="btn btn--outline"
+          href="mailto:info@cirschool.org">Contribute to Crossroads</a></p>
+      </div>
+
+      <figure class="crquote rv">
+        <blockquote>
+          <p class="pull serif">&ldquo;Writing, to me, is simply <em>thinking through my
+            fingers.&rdquo;</em></p>
+        </blockquote>
+        <figcaption class="crquote__by">Isaac Asimov</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section on-paper-2" id="archive">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">The archive</span></p>
+      <h2 class="serif h2" data-split>Every Edition, <em>Newest First.</em></h2>
+      <p class="lead">The covers below are the school&rsquo;s own numbering. Each PDF joins the
+        archive as it is digitised &mdash; the edition keeps its place here in the meantime.</p>
+    </div>
+
+    <aside class="crprog" id="crProg" aria-hidden="true">
+      <span class="crprog__n" id="crProgN">01</span>
+      <span class="crprog__d">of 32</span>
+    </aside>
+
+    <div class="crgrid">
+      <article class="crcard crcard--v4 crcard--latest is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 32</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">32</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 32</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v3 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 31</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">31</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 31</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v2 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 30</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">30</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 30</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v1 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 29</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">29</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 29</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v4 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 28</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">28</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 28</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v3 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 27</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">27</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 27</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v2 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 26</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">26</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 26</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v1 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 25</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">25</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 25</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v4 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 24</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">24</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 24</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v3 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 23</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">23</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 23</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v2 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 22</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">22</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 22</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v1 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 21</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">21</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 21</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v4 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 20</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">20</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 20</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v3 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 19</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">19</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 19</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v2 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 18</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">18</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 18</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v1 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 17</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">17</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 17</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v4 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 16</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">16</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 16</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v3 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 15</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">15</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 15</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v2 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 14</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">14</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 14</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v1 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 13</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">13</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 13</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v4 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 12</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">12</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 12</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v3 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 11</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">11</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 11</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v2 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 10</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">10</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 10</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v1 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 09</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">09</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 09</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v4 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 08</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">08</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 08</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v3 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 07</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">07</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 07</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v2 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 06</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">06</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 06</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v1 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 05</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">05</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 05</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v4 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 04</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">04</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 04</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v3 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 03</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">03</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 03</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v2 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 02</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">02</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 02</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+      <article class="crcard crcard--v1 is-pending rv">
+        <h3 class="sr-only">Crossroads Issue 01</h3>
+        <span class="crcover">
+          <span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">01</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">Issue 01</span>
+          <span class="crcard__state">PDF will be uploaded soon</span>
+        </span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="crend" id="continues" data-ground="#1E1626">
+  <div class="wrap">
+    <p class="marker rv"><span class="sc">Still being written</span></p>
+    <h2 class="crend__head rv" data-split>The Story <em>Continues.</em></h2>
+    <p class="crend__note rv">More editions of Crossroads will be added here as they are
+      published, and the earlier ones as they are digitised.</p>
+    <p class="crend__cta rv">
+      <a class="btn btn--primary btn--lg" href="student-life.html">Student life at CIRS</a>
+      <a class="btn btn--ghost btn--lg" href="arts.html">Arts, music &amp; theatre</a>
+    </p>
+  </div>
+</section>
+<section class="uc">
+  <div class="wrap uc__inner">
+    <span class="uc__mark" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
+    </span>
+    <div>
+      <p class="uc__label">Under construction</p>
+      <p class="uc__text">This page is still being written. Photographs, names and figures marked
+        in brackets are placeholders awaiting the school, and more will be added here in the weeks
+        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
+    </div>
+  </div>
+</section>
+</main>
+<div class="footer-wrap">
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__utility">
+      <a href="alumni.html">Alumni</a>
+      <a href="#">Careers</a>
+      <a href="#">Support CIRS</a>
+      <a href="#">Calendar</a>
+    </div>
+    <div class="footer__main">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="" width="58" height="56">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address>
+          Siruvani Main Road<br>
+          Coimbatore 641 114, Tamil Nadu, India<br>
+          <a href="tel:+914222613300">+91 422 261 3300</a> &middot;
+          <a href="tel:+914222613303">261 3303</a><br>
+          <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+        </address>
+      </div>
+
+      <div>
+        <h4 class="sc">About</h4>
+        <ul>
+          <li><a href="why-cirs.html#about">Why CIRS</a></li>
+          <li><a href="#">School History</a></li>
+          <li><a href="our-leadership.html#people">Our People</a></li>
+          <li><a href="student-life.html#campus">Our Campus</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="sc" id="fnav-school">School</p>
+        <ul aria-labelledby="fnav-school">
+          <li><a href="why-cirs.html#junior">Junior School</a></li>
+          <li><a href="why-cirs.html#senior">Senior School</a></li>
+          <li><a href="sports.html#athletics">Athletics</a></li>
+          <li><a href="arts.html">Arts, Music &amp; Theatre</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="sc" id="fnav-academics">Academics</p>
+        <ul aria-labelledby="fnav-academics">
+          <li><a href="academics.html">Curriculum</a></li>
+          <li><a href="academics.html">CBSE</a></li>
+          <li><a href="academics.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="sc" id="fnav-admissions">Admissions</p>
+        <ul aria-labelledby="fnav-admissions">
+          <li><a href="admissions.html">Application Information</a></li>
+          <li><a href="#">Fee Structure</a></li>
+          <li><a href="#">Important Dates</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; 1996&ndash;2026 Chinmaya International Residential School</span>
+      <span>J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</span>
+      <span>An undertaking of the Central Chinmaya Mission Trust</span>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<script src="assets/js/cirs.js?b=24" defer></script>
+<script src="assets/js/pages.js?b=24" defer></script>
+</body>
+</html>

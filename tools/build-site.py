@@ -29,9 +29,10 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import documents as docs
+import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=23"
+CACHE_BUST = "b=24"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -221,6 +222,19 @@ PAGES = {
         "description": "Athletics, the playing fields and the sporting record at CIRS.",
         "banner": ("Sports", "Sport, Every Day <em>at Four.</em>",
                    "The four o'clock hour, the fields it happens on, and what the teams have won."),
+    },
+    "crossroads": {
+        "nav": "Crossroads Magazine",
+        # The old site filed this under a "Creative Corner" this site does not
+        # have; Student Life is where the arts and the clubs live here.
+        "group": "Student Life",
+        "title": "Crossroads | CIRS Monthly Magazine",
+        "description": "The archive of Crossroads, the monthly magazine of Chinmaya "
+                       "International Residential School — a student-run initiative to foster "
+                       "journalistic talent, edition by edition.",
+        # No flat band and no video hero: an archive opens on its own
+        # masthead, built in tools/pages/crossroads.html.
+        "banner": None,
     },
     "arts": {
         "nav": "Arts, Music & Theatre",
@@ -475,6 +489,57 @@ POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
 </div>'''
 
 
+def crossroads_html():
+    """The archive wall: every edition of Crossroads, newest first.
+
+    A cover is one of three things, in this order of preference — the
+    school's own scan, the designed typographic placeholder wrapped in a
+    link because the PDF is up, or that placeholder standing on its own.
+    Only the third of those is the state the archive is in today, and it
+    says so on the card rather than leaving a dead link to find out.
+    """
+    cards = []
+    for issue in crossroads.issues():
+        n, label = issue["number"], issue["label"]
+        mods = f' crcard--v{issue["variant"]}'
+        if issue["latest"]:
+            mods += " crcard--latest"
+
+        if issue["cover"]:
+            face = (f'<img class="crcover__img" src="{issue["cover"]}?{CACHE_BUST}" '
+                    f'alt="Cover of Crossroads {label}" loading="lazy" '
+                    f'width="720" height="1008">')
+        else:
+            face = (f'''<span class="crcover__mast">Crossroads</span>
+          <span class="crcover__num" aria-hidden="true">{n:02d}</span>
+          <span class="crcover__sub">CIRS Monthly Magazine</span>''')
+
+        body = f'''<span class="crcover">
+          {face}
+        </span>
+        <span class="crcard__foot">
+          <span class="crcard__label">{label}</span>
+          <span class="crcard__state">{{STATE}}</span>
+        </span>'''
+
+        if issue["pdf"]:
+            inner = body.replace("{STATE}", "Read issue &rarr;")
+            cards.append(f'''      <article class="crcard{mods} rv">
+        <a class="crcard__link" href="{issue["pdf"]}" target="_blank" rel="noopener">
+        {inner}
+        </a>
+        <h3 class="sr-only">Crossroads {label}</h3>
+      </article>''')
+        else:
+            inner = body.replace("{STATE}", "PDF will be uploaded soon")
+            cards.append(f'''      <article class="crcard{mods} is-pending rv">
+        <h3 class="sr-only">Crossroads {label}</h3>
+        {inner}
+      </article>''')
+
+    return '<div class="crgrid">\n' + "\n".join(cards) + "\n    </div>"
+
+
 def doclist_html():
     """The compact, category-grouped list for the School Information page.
 
@@ -561,7 +626,9 @@ def build(slug, page):
         parts.append(banner_html(page))
     content = read(f"tools/pages/{slug}.html").rstrip("\n")
     content = (content.replace("{{DOCLIST}}", doclist_html())
-                       .replace("{{DOCPORTAL}}", docportal_html()))
+                       .replace("{{DOCPORTAL}}", docportal_html())
+                       .replace("{{CROSSROADS}}", crossroads_html())
+                       .replace("{{CROSSROADS_COUNT}}", str(crossroads.COUNT)))
     parts.append(content)
     if page.get("jump"):
         parts.append(jump_html(content))
