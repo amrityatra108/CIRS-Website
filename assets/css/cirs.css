@@ -484,6 +484,44 @@ section[id]{ scroll-margin-top:88px; }
 .dayh.is-static .dmoment{ scroll-snap-align:start; }
 
 /* ============================================================
+   News track — pinned horizontal reel of highlighted stories
+   Same pin-and-scrub mechanism as Day above (see tools/build-site.py
+   for none of this, it's all newsTrack() in cirs.js), reused rather
+   than duplicated because the two are the same trick: a fixed-height
+   viewport with an inner flex row scrubbed by scroll progress, and a
+   native swipe track wherever that trick cannot run.
+   ============================================================ */
+.newstrack{ position:relative; background:var(--paper); }
+.newstrack__pin{ min-height:92svh; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }
+.newstrack__head{ padding-top:clamp(70px,9vh,110px); }
+.newstrack__hint{
+  margin-top:10px; font-family:var(--serif); font-style:italic;
+  color:var(--ink-mute); font-size:.98rem;
+}
+.newstrack__viewport{ overflow:hidden; padding-block:clamp(24px,3.5vh,48px); }
+.newstrack__track{
+  display:flex; align-items:stretch; gap:clamp(18px,2.4vw,32px);
+  padding-inline:var(--gut);
+  will-change:transform;
+}
+.newstrack__track .newsitem{ flex:none; width:clamp(280px,32vw,420px); }
+
+.newstrack__rail{ position:relative; margin:0 var(--gut); height:1px; background:var(--rule); }
+.newstrack__fill{ position:absolute; left:0; top:0; height:1px; width:0%; background:var(--gold); }
+.newstrack__count{
+  display:block; margin:12px var(--gut) 0;
+  font-family:var(--serif); font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  font-size:.92rem; letter-spacing:.12em; color:var(--ink-mute);
+}
+.newstrack__count b{ color:var(--gold); font-weight:400; }
+
+/* Fallback when the pin cannot run: a native swipe track, exactly Day's. */
+.newstrack.is-static .newstrack__pin{ min-height:0; }
+.newstrack.is-static .newstrack__viewport{ overflow-x:auto; scroll-snap-type:x proximity; }
+.newstrack.is-static .newstrack__track .newsitem{ scroll-snap-align:start; }
+
+/* ============================================================
    Campus band — duotone
    ============================================================ */
 .band{ position:relative; background:var(--purple-ink); overflow:hidden; }
