@@ -27,8 +27,11 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import documents as docs
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=18"
+CACHE_BUST = "b=19"
 
 # slug -> page definition. Order here is the order in the menu.
 #   nav    the label in the menu and the <title>
@@ -94,6 +97,33 @@ PAGES = {
         "banner": ("Governance", "Our <em>Leadership.</em>",
                    "CIRS is an undertaking of the Central Chinmaya Mission Trust, Mumbai, and is "
                    "managed by its Board of Directors."),
+    },
+    "school-info": {
+        "nav": "School Information",
+        "group": "About CIRS",
+        "title": "School Information",
+        "description": "Affiliation status, governance, infrastructure and grievance-redressal details for "
+                       "Chinmaya International Residential School, with the Important Documents portal.",
+        "banner": ("Affiliation &amp; compliance", "School <em>Information.</em>",
+                   "The affiliation, governance, infrastructure and grievance-redressal details CBSE and "
+                   "the affiliating authorities require every school to publish &mdash; and the Important "
+                   "Documents portal that carries the certificates behind them."),
+        "jump": True,
+    },
+    "important-documents": {
+        "nav": "Important Documents",
+        # Reached only by the one-click portal button on School Information —
+        # a second main-menu entry for the same material would be clutter the
+        # task never asked for.
+        "group": None,
+        "title": "Important Documents",
+        "description": "The Important Documents portal for Chinmaya International Residential School — "
+                       "CBSE affiliation, statutory certificates, results, circulars and other official "
+                       "documents referenced on the School Information page.",
+        "banner": ("Important documents", "The Documents <em>Portal.</em>",
+                   "Every official document referenced on the School Information page, open in one click. "
+                   "Each opens in your browser's own PDF viewer, where it can be read or downloaded with "
+                   "the browser's standard controls."),
     },
     "academics": {
         "nav": "Academics",
@@ -376,6 +406,56 @@ POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
 </div>'''
 
 
+def doclist_html():
+    """The compact, category-grouped list for the School Information page.
+
+    Titles only — the click-through to view or download lives on the portal
+    page itself, so this section stays scannable rather than repeating 22
+    buttons. Generated straight from tools/documents.py, so it can never list
+    a document the portal does not have, or omit one the portal does.
+    """
+    groups = []
+    for category, items in docs.by_category():
+        rows = "\n".join(f'        <li>{d["title"]}</li>' for d in items)
+        groups.append(f'''      <div class="docgroup rv">
+        <h3 class="serif h3">{category}</h3>
+        <ul class="doclist">
+{rows}
+        </ul>
+      </div>''')
+    return '<div class="docgrid">\n' + "\n".join(groups) + '\n    </div>'
+
+
+def docportal_html():
+    """The Important Documents portal itself: every document, grouped, each
+    with a one-click view/download link — or, for one not yet uploaded, a
+    plain notice that it is awaiting the school rather than a dead link."""
+    groups = []
+    for category, items in docs.by_category():
+        steps = []
+        for d in items:
+            if docs.is_uploaded(d):
+                aside = (f'<a class="btn btn--outline" href="{docs.asset_path(d)}" target="_blank" '
+                         f'rel="noopener">View &amp; download</a><br><small>Opens in a new tab</small>')
+            else:
+                aside = '<b>Awaiting upload</b><br>To be added by the school'
+            steps.append(f'''        <div class="step" id="doc-{d["id"]}">
+          <p class="step__n"></p>
+          <div>
+            <h3 class="serif h3">{d["title"]}</h3>
+            <p>{d["note"]}</p>
+          </div>
+          <p class="step__aside">{aside}</p>
+        </div>''')
+        groups.append(f'''      <div class="docportal__group rv">
+        <p class="marker"><span class="sc">{category}</span></p>
+        <div class="steps">
+{chr(10).join(steps)}
+        </div>
+      </div>''')
+    return '<div class="docportal">\n' + "\n".join(groups) + '\n    </div>'
+
+
 UC = '''<section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -411,6 +491,8 @@ def build(slug, page):
     elif page.get("banner"):
         parts.append(banner_html(page))
     content = read(f"tools/pages/{slug}.html").rstrip("\n")
+    content = (content.replace("{{DOCLIST}}", doclist_html())
+                       .replace("{{DOCPORTAL}}", docportal_html()))
     parts.append(content)
     if page.get("jump"):
         parts.append(jump_html(content))
