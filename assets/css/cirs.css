@@ -321,8 +321,9 @@ section[id]{ scroll-margin-top:88px; }
 .hero__scrim{
   position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
-    linear-gradient(to top, rgba(21,8,24,.90) 0%, rgba(21,8,24,.60) 24%,
-                    rgba(21,8,24,.06) 60%, rgba(21,8,24,.22) 100%);
+    linear-gradient(to top, rgba(21,8,24,.95) 0%, rgba(21,8,24,.86) 18%,
+                    rgba(21,8,24,.64) 38%, rgba(21,8,24,.20) 70%,
+                    rgba(21,8,24,.32) 100%);
 }
 
 .hero__inner{
