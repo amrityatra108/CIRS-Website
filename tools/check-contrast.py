@@ -36,7 +36,7 @@ const { chromium } = require('playwright-core');
 
   // A looping video behind the text: sample across the loop, not once.
   const times = await p.evaluate(() => {
-    const v = document.querySelector('.pagehero__video');
+    const v = document.querySelector('.pagehero__video, .hero__video');
     if (!v) return null;
     v.pause();
     const d = v.duration && isFinite(v.duration) ? v.duration : 8;
@@ -44,7 +44,7 @@ const { chromium } = require('playwright-core');
   });
   const boxes = await p.evaluate(() => {
     const out = [];
-    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what').forEach(el => {
+    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll').forEach(el => {
       const r = el.getBoundingClientRect();
       if (r.width < 4 || r.height < 4) return;
       const cs = getComputedStyle(el);
@@ -57,13 +57,13 @@ const { chromium } = require('playwright-core');
     return out;
   });
   // hide the text, photograph what is behind it
-  await p.addStyleTag({ content: '.pagehero .wrap{visibility:hidden!important}' });
+  await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap{visibility:hidden!important}' });
   await p.waitForTimeout(300);
   const shots = [];
   for (const t of (times || [null])) {
     if (t !== null) {
       await p.evaluate(async (tt) => {
-        const v = document.querySelector('.pagehero__video');
+        const v = document.querySelector('.pagehero__video, .hero__video');
         v.currentTime = tt;
         await new Promise(r => { v.onseeked = r; setTimeout(r, 900); });
       }, t);
