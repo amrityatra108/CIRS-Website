@@ -595,6 +595,33 @@ body.is-locked .htab:hover{ color:var(--purple); }
 .tbl td{ color:var(--ink-soft); }
 .tbl tbody tr:last-child th, .tbl tbody tr:last-child td{ border-bottom:0; }
 
+/* The Important Documents list on School Information: titles only, grouped
+   by category — the click-through to view or download lives on the portal
+   page itself (.docportal, below), so this stays a scannable index rather
+   than 22 repeated buttons. */
+.docgrid{
+  display:grid; gap:var(--space-7) clamp(24px,3vw,44px);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
+  margin-top:clamp(30px,3.4vw,52px);
+}
+.docgroup h3{ color:var(--purple); margin-bottom:var(--space-3); }
+.doclist{ display:grid; gap:var(--space-2); }
+.doclist li{
+  position:relative; padding-left:var(--space-4);
+  color:var(--ink-soft); font-size:var(--fs-sm); line-height:1.5;
+}
+.doclist li::before{
+  content:""; position:absolute; left:0; top:.65em;
+  width:5px; height:5px; border-radius:50%; background:var(--gold);
+}
+
+/* The Important Documents portal itself: every document, grouped, each a
+   .step row (title, one line on what it covers, and a view/download button
+   or an "awaiting upload" notice in the aside slot). */
+.docportal__group{ margin-top:clamp(34px,3.6vw,56px); }
+.docportal__group:first-child{ margin-top:0; }
+.docportal__group .steps{ margin-top:var(--space-4); }
+
 /* Testimonials. Portraits are placeholders until the school supplies
    them, and the quotes are marked as placeholders too — a made-up
    endorsement on a school's admissions page is not a placeholder,
