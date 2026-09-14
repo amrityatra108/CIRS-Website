@@ -246,6 +246,18 @@ PAGES = {
                    "Music, theatre and the visual arts, and the amphitheatre built into the "
                    "slope."),
     },
+    "photo-archive": {
+        "nav": "Photo Archive",
+        "group": "Student Life",
+        # The one page on the site this script does not build. The archive is
+        # a full-screen gallery that takes the whole window, disables page
+        # scrolling and hides the cursor, so it cannot wear the sticky header
+        # and the footer: they would sit over a canvas nobody can scroll past.
+        # It ships from its own folder exactly as it is — tools/stage-deploy.py
+        # copies the tree — and the menu simply points at it. Its own way back
+        # is the fourth HUD corner inside the gallery.
+        "static": "cirs-archive-gallery/",
+    },
     "admissions": {
         "nav": "Admissions",
         "group": "Admissions",
@@ -357,7 +369,10 @@ def nav_html(slug):
         out.append(f'      <ul aria-labelledby="{gid}">')
         for s, p in items:
             here = ' aria-current="page"' if s == slug else ""
-            out.append(f'        <li><a href="{s}.html"{here}>{p["nav"]}</a></li>')
+            # A "static" entry is in the menu but not built from a template —
+            # see the photo archive below.
+            href = p.get("static") or f"{s}.html"
+            out.append(f'        <li><a href="{href}"{here}>{p["nav"]}</a></li>')
         out.append("      </ul>")
         out.append("    </div>")
     out.append("  </nav>")
@@ -706,6 +721,15 @@ def build(slug, page):
 
 if __name__ == "__main__":
     for slug, page in PAGES.items():
+        # A static entry owns its own markup; this script only puts it in the
+        # menu. Check it is really there, so a typo in the path fails here
+        # rather than shipping a menu item that 404s.
+        if page.get("static"):
+            if not os.path.exists(os.path.join(ROOT, page["static"])):
+                sys.exit(f"build-site: {slug} points at {page['static']}, "
+                         "which is not in the repository")
+            print(f"  link   {page['static']} (not generated)")
+            continue
         out = os.path.join(ROOT, f"{slug}.html")
         html = build(slug, page)
         open(out, "w", encoding="utf-8").write(html)
