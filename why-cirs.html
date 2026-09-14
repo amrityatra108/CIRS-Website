@@ -21,8 +21,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
-<link rel="stylesheet" href="assets/css/cirs.css?b=30">
-<link rel="stylesheet" href="assets/css/pages.css?b=30">
+<link rel="stylesheet" href="assets/css/cirs.css?b=31">
+<link rel="stylesheet" href="assets/css/pages.css?b=31">
 </head>
 
 <body>
@@ -200,169 +200,242 @@
     <p class="lead">A community of knowledge, service and skill in the Siruvani foothills — and the two schools, Junior and Senior, that carry it.</p>
   </div>
 </section>
-<section class="section" id="about">
+<section class="saga saga--open" id="about" data-ground="#0E0B12">
+  <div class="saga__media">
+    <img src="assets/img/why-cirs.jpg" alt="Three CIRS students together in a school corridor"
+         width="1200" height="1500" fetchpriority="high">
+  </div>
+  <div class="wrap saga__inner">
+    <p class="saga__eyebrow">Chinmaya International Residential School</p>
+    <p class="saga__line">The future of our world rests upon the quality of its youth.
+      <em>Quality comes through care and attention.</em></p>
+    <p class="saga__by">Swami Chinmayananda, who founded the school in 1996</p>
+  </div>
+</section>
+
+<section class="saga" id="founding" data-ground="#0E0B12">
+  <div class="saga__media">
+    <img src="assets/img/history-still.jpg" alt="The CIRS campus in an early photograph"
+         width="1600" height="900" loading="lazy">
+  </div>
+  <div class="wrap saga__inner">
+    <p class="saga__eyebrow">Since 1996</p>
+    <p class="saga__line">It opened with <em>ninety-six students.</em></p>
+    <button type="button" class="saga__more" data-panel="panel-founding">Know more</button>
+  </div>
+</section>
+
+<section class="saga" id="forest" data-ground="#0E0B12">
+  <div class="saga__media">
+    <img src="assets/img/aerial-duo.jpg" alt="The CIRS campus from the air, surrounded by forest"
+         width="1600" height="900" loading="lazy">
+  </div>
+  <div class="wrap saga__inner">
+    <p class="saga__eyebrow">A hundred acres</p>
+    <p class="saga__line">Eighty of them were <em>left to the forest.</em></p>
+    <button type="button" class="saga__more" data-panel="panel-forest">Know more</button>
+  </div>
+</section>
+
+<section class="saga" id="motto" data-ground="#0E0B12">
+  <div class="saga__media">
+    <img src="assets/img/walkway.jpg" alt="The covered walkway through the CIRS campus"
+         width="1600" height="900" loading="lazy">
+  </div>
+  <div class="wrap saga__inner">
+    <p class="saga__eyebrow">The motto</p>
+    <p class="saga__line">Knowledge. Service. <em>Skill.</em></p>
+    <button type="button" class="saga__more" data-panel="panel-motto">Know more</button>
+  </div>
+</section>
+
+<section class="saga" id="boarding" data-ground="#0E0B12">
+  <div class="saga__media">
+    <img src="assets/img/student-life.jpg" alt="CIRS boarders together on campus"
+         width="1200" height="1500" loading="lazy">
+  </div>
+  <div class="wrap saga__inner">
+    <p class="saga__eyebrow">Boarding</p>
+    <p class="saga__line">The part of the education that is <em>not timetabled.</em></p>
+    <button type="button" class="saga__more" data-panel="panel-boarding">Know more</button>
+  </div>
+</section>
+
+<section class="saga" id="vision" data-ground="#0E0B12">
+  <div class="saga__media">
+    <img src="assets/img/entrance.jpg" alt="The entrance to the CIRS campus"
+         width="1600" height="900" loading="lazy">
+  </div>
+  <div class="wrap saga__inner">
+    <p class="saga__eyebrow">The vision</p>
+    <p class="saga__line">Competent, sensitive, <em>ethical.</em></p>
+    <button type="button" class="saga__more" data-panel="panel-vision">Know more</button>
+  </div>
+</section>
+
+<section class="saga" id="junior" data-ground="#0E0B12">
+  <div class="saga__media">
+    <img src="assets/img/junior-school.jpg" alt="Junior School students building a wheeled robot"
+         width="1200" height="1500" loading="lazy">
+  </div>
+  <div class="wrap saga__inner">
+    <p class="saga__eyebrow">Junior School</p>
+    <p class="saga__line">Where curiosity gets <em>its first push.</em></p>
+    <button type="button" class="saga__more" data-panel="panel-junior">Know more</button>
+  </div>
+</section>
+
+<section class="saga" id="senior" data-ground="#0E0B12">
+  <div class="saga__media">
+    <img src="assets/img/senior-school.jpg" alt="Senior students at a laboratory bench"
+         width="1200" height="1500" loading="lazy">
+  </div>
+  <div class="wrap saga__inner">
+    <p class="saga__eyebrow">From Grade XI</p>
+    <p class="saga__line">Two boards. <em>One ambition.</em></p>
+    <button type="button" class="saga__more" data-panel="panel-senior">Know more</button>
+  </div>
+</section>
+
+<section class="section" id="facts">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="marker"><span class="sc">A community of knowledge, service and skill</span></p>
-      <h2 class="serif h2" data-split>We Are <em>CIRS.</em></h2>
-      <p class="lead">Set in the Siruvani foothills outside Coimbatore, on a hundred-acre campus
-        with eighty acres left to forest, CIRS has offered CBSE and the IB Diploma side by side
-        since 1996, each taught by teachers trained in that curriculum &mdash; shaping boarders
-        from twenty-four Indian states and twenty countries into disciplined, compassionate
-        learners.</p>
+      <p class="marker"><span class="sc">In short</span></p>
+      <h2 class="serif h2" data-split>The school, <em>in figures.</em></h2>
     </div>
-
-    <div class="about">
-      <div class="rv">
-        <p class="pull serif">&ldquo;The future of our world rests upon the quality of its youth.
-          <em>Quality comes through care and attention.&rdquo;</em></p>
-        <p class="copy dropcap">Chinmaya International Residential School was founded on 6 June 1996
-          by Swami Chinmayananda, opening with ninety-six students. It is an undertaking of the
-          Central Chinmaya Mission Trust, and the motto above is taught as a daily practice rather
-          than displayed as a crest.</p>
-        <p class="copy">Roughly eighty of the campus&rsquo;s hundred acres have been left to native
-          flora and fauna &mdash; a decision that cost the school buildable land and earned it the
-          Green School Award from the Centre for Science and Environment, New Delhi.</p>
-        <p class="copy">Boarding is the part of the education that is not timetabled. Houses carry
-          the names of India&rsquo;s great teachers, and seniors and juniors share corridors by
-          design, so mentoring is structural rather than extracurricular.</p>
-        <p style="margin-top:28px"><a class="btn btn--outline" href="#">Read the school history</a></p>
-      </div>
-
-      <div class="rv">
-        <dl class="factrail">
-          <div><dt>Founded</dt><dd>6 June 1996</dd></div>
-          <div><dt>Founder</dt><dd>Swami Chinmayananda</dd></div>
-          <div><dt>Chairperson</dt><dd>Swami Swaroopananda</dd></div>
-          <div><dt>Grades</dt><dd>V to XII</dd></div>
-          <div><dt>Curricula</dt><dd>CBSE &amp; IB Diploma</dd></div>
-          <div><dt>Medium</dt><dd>English</dd></div>
-          <div><dt>Campus</dt><dd>100 acres</dd></div>
-          <div><dt>Left as forest</dt><dd>c. 80 acres</dd></div>
-          <div><dt>Indian states</dt><dd>24</dd></div>
-          <div><dt>Countries</dt><dd>20</dd></div>
-          <div><dt>Students today</dt><dd>580+</dd></div>
-          <div><dt>Recognition</dt><dd>Green School Award</dd></div>
-        </dl>
-      </div>
-    </div>
+    <dl class="factrail rv">
+      <div><dt>Founded</dt><dd>6 June 1996</dd></div>
+      <div><dt>Founder</dt><dd>Swami Chinmayananda</dd></div>
+      <div><dt>Chairperson</dt><dd>Swami Swaroopananda</dd></div>
+      <div><dt>Grades</dt><dd>V to XII</dd></div>
+      <div><dt>Curricula</dt><dd>CBSE &amp; IB Diploma</dd></div>
+      <div><dt>Medium</dt><dd>English</dd></div>
+      <div><dt>Campus</dt><dd>100 acres</dd></div>
+      <div><dt>Left as forest</dt><dd>c. 80 acres</dd></div>
+      <div><dt>Indian states</dt><dd>24</dd></div>
+      <div><dt>Countries</dt><dd>20</dd></div>
+      <div><dt>Students today</dt><dd>580+</dd></div>
+      <div><dt>Recognition</dt><dd>Green School Award</dd></div>
+    </dl>
   </div>
 </section>
 
-<section class="section on-purple" id="vision" data-ground="#1E1626">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Who we are</span></p>
-      <h2 class="serif h2" data-split>The Vision, <em>and the Motto.</em></h2>
-      <p class="lead">An individual&rsquo;s unique perspective, shaped by personal values, is key
-        to nurturing morally upright citizens who can serve society effectively. Education aims
-        for holistic growth, blending academic proficiency with character development.</p>
-    </div>
-
-    <div class="record rv">
-      <div>
-        <h3 class="serif h3">The CIRS Vision</h3>
-        <div>
-          <p class="copy">CIRS provides an enriching environment for students to excel &mdash;
-            one in which academic proficiency and the development of character are taught as the
-            same task rather than two.</p>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="serif h3">Our Motto</h3>
-        <div>
-          <p class="pull serif" lang="sa-Latn"><em>kaṭibaddhā vayaṁ sarve lakṣyaṁ sādhayituṁ
-            varam <span aria-hidden="true">|</span> śikṣāyāstrividhaṁ yadvai jñānaṁ sevā ca
-            kauśalam <span aria-hidden="true">||</span></em></p>
-          <p class="copy">The motto holds that knowledge is gained in order to serve the world
-            efficiently. It asks for continual learning towards a positive impact; for service
-            offered with compassion and dedication; and for efficiency, because efficiency is what
-            turns good intent into contribution. Knowledge, service and skill &mdash; the three
-            together, not one of them alone.</p>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="serif h3">Why Choose CIRS</h3>
-        <div>
-          <p class="copy">The school&rsquo;s approach is to develop competent, sensitive and
-            ethical young people, and to unlock the potential of exceptional children with care
-            until they are conscientious global citizens. Safety and holistic well-being come
-            first, and the strategies for both are revised continually rather than settled once.</p>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="serif h3">The Chinmaya Vision</h3>
-        <div>
-          <p class="copy">CIRS teaches through the Chinmaya Vision Programme, which integrates
-            culture, philosophy and academics with the aim of improving humanity. The programme
-            sets out to equip future citizens to meet challenges positively, and it asks children,
-            school management, teachers and parents each to contribute to that.</p>
-        </div>
-      </div>
-    </div>
+<div class="panel" id="panel-founding" role="dialog" aria-modal="true" aria-labelledby="panel-founding-t" hidden>
+  <div class="panel__card">
+    <button type="button" class="panel__close" data-panel-close aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <p class="panel__label">Since 1996</p>
+    <h2 id="panel-founding-t">Ninety-six students, <em>and a hundred acres.</em></h2>
+    <p class="copy">Chinmaya International Residential School was founded on 6 June 1996 by Swami
+      Chinmayananda, opening with ninety-six students. It is an undertaking of the Central Chinmaya
+      Mission Trust.</p>
+    <p class="copy">The motto is taught as a daily practice rather than displayed as a crest. CBSE
+      and the IB Diploma have run side by side since the beginning, each taught by teachers trained
+      in that curriculum.</p>
   </div>
-</section>
+</div>
 
-<section class="feature">
-  <div class="wrap feature__inner">
-    <figure class="feature__media img-reveal">
-      <img src="assets/img/why-cirs.jpg" alt="Three CIRS students smiling together in a school corridor" width="1200" height="1500" loading="lazy">
-    </figure>
-    <div class="feature__text rv">
-      <p class="marker"><span class="sc">Why CIRS</span></p>
-      <p class="feature__tag">Discover the difference</p>
-      <h2 class="serif h2" data-split>A School That <em>Knows Your Child.</em></h2>
-      <p class="copy">Boarders arrive from twenty-four Indian states and twenty countries and share
-        a single dining hall, a single timetable and a single set of house rosters. Difference is
-        not a programme here &mdash; it is the corridor.</p>
-      <p class="feature__cta"><a class="btn btn--outline" href="#about">Why Choose CIRS</a></p>
-    </div>
+<div class="panel" id="panel-forest" role="dialog" aria-modal="true" aria-labelledby="panel-forest-t" hidden>
+  <div class="panel__card">
+    <button type="button" class="panel__close" data-panel-close aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <p class="panel__label">The campus</p>
+    <h2 id="panel-forest-t">A decision that cost <em>buildable land.</em></h2>
+    <p class="copy">Roughly eighty of the campus&rsquo;s hundred acres have been left to native flora
+      and fauna. It cost the school land it could have built on, and earned it the Green School Award
+      from the Centre for Science and Environment, New Delhi.</p>
+    <p class="copy">The school sits in the Siruvani foothills outside Coimbatore, and takes boarders
+      from twenty-four Indian states and twenty countries.</p>
   </div>
-</section>
+</div>
 
-<section class="feature feature--reverse" id="junior">
-  <div class="wrap feature__inner">
-    <figure class="feature__media img-reveal rv">
-      <img src="assets/img/junior-school.jpg" alt="Junior School students building a wheeled robot beside a laptop"
-           width="1200" height="1500" loading="lazy">
-    </figure>
-    <div class="feature__text rv">
-      <p class="marker"><span class="sc">Junior School</span></p>
-      <p class="feature__tag">Build a bright beginning</p>
-      <h2 class="serif h2" data-split>Where Curiosity <em>Gets Its First Push.</em></h2>
-      <p class="copy">The junior years at CIRS begin in Grade V, introducing boarding life, house
-        mentorship, and a broad first exposure to music, sport and the sciences alongside the CBSE
-        curriculum. Value education runs alongside the timetable from Bal Bhagavatam onward.</p>
-      <p class="copy" style="margin-top:10px"><em>[Placeholder &mdash; junior-school-specific
-        programme detail to be supplied by the school.]</em></p>
-      <p class="feature__cta"><a class="btn btn--outline" href="#">Junior School</a></p>
-    </div>
+<div class="panel" id="panel-motto" role="dialog" aria-modal="true" aria-labelledby="panel-motto-t" hidden>
+  <div class="panel__card">
+    <button type="button" class="panel__close" data-panel-close aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <p class="panel__label">Our motto</p>
+    <h2 id="panel-motto-t">Knowledge, service <em>and skill.</em></h2>
+    <p class="pull serif" lang="sa-Latn"><em>kaṭibaddhā vayaṁ sarve lakṣyaṁ sādhayituṁ varam
+      <span aria-hidden="true">|</span> śikṣāyāstrividhaṁ yadvai jñānaṁ sevā ca kauśalam
+      <span aria-hidden="true">||</span></em></p>
+    <p class="copy">The motto holds that knowledge is gained in order to serve the world efficiently.
+      It asks for continual learning towards a positive impact; for service offered with compassion
+      and dedication; and for efficiency, because efficiency is what turns good intent into
+      contribution.</p>
+    <p class="copy">The three together, not one of them alone.</p>
   </div>
-</section>
+</div>
 
-<section class="feature" id="senior">
-  <div class="wrap feature__inner">
-    <figure class="feature__media img-reveal rv">
-      <img src="assets/img/senior-school.jpg" alt="Senior students at a laboratory bench with apparatus and a laptop"
-           width="1200" height="1500" loading="lazy">
-    </figure>
-    <div class="feature__text rv">
-      <p class="marker"><span class="sc">Senior School</span></p>
-      <p class="feature__tag">Choose your pathway</p>
-      <h2 class="serif h2" data-split>Two Boards, <em>One Ambition.</em></h2>
-      <p class="copy">From Grade XI, CIRS students declare a direction &mdash; CBSE&rsquo;s
-        Engineering, Medicine or Management streams, or the IB Diploma, where every teacher is
-        IB-trained and several serve as IB examiners.</p>
-      <p class="copy" style="margin-top:10px">The Diploma runs across six subject groups, three
-        or four of them at Higher Level, anchored by the Extended Essay, Theory of Knowledge and
-        CAS &mdash; recognised by universities in India and worldwide.</p>
-      <p class="feature__cta"><a class="btn btn--outline" href="academics.html">Senior School</a></p>
-    </div>
+<div class="panel" id="panel-boarding" role="dialog" aria-modal="true" aria-labelledby="panel-boarding-t" hidden>
+  <div class="panel__card">
+    <button type="button" class="panel__close" data-panel-close aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <p class="panel__label">Boarding</p>
+    <h2 id="panel-boarding-t">Mentoring is structural, <em>not extracurricular.</em></h2>
+    <p class="copy">Houses carry the names of India&rsquo;s great teachers, and seniors and juniors
+      share corridors by design.</p>
+    <p class="copy">Boarders arrive from twenty-four Indian states and twenty countries and share a
+      single dining hall, a single timetable and a single set of house rosters. Difference is not a
+      programme here &mdash; it is the corridor.</p>
   </div>
-</section>
+</div>
+
+<div class="panel" id="panel-vision" role="dialog" aria-modal="true" aria-labelledby="panel-vision-t" hidden>
+  <div class="panel__card">
+    <button type="button" class="panel__close" data-panel-close aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <p class="panel__label">The vision</p>
+    <h2 id="panel-vision-t">Unlocking potential <em>with care.</em></h2>
+    <p class="copy">An individual&rsquo;s unique perspective, shaped by personal values, is key to
+      nurturing morally upright citizens who can serve society effectively. Education aims for
+      holistic growth, blending academic proficiency with character development, and CIRS provides
+      an enriching environment for students to excel.</p>
+    <p class="copy">The approach is to develop competent, sensitive and ethical young people, and to
+      unlock the potential of exceptional children until they are conscientious global citizens.
+      Safety and holistic well-being come first, and the strategies for both are revised continually
+      rather than settled once.</p>
+    <p class="copy">CIRS teaches through the Chinmaya Vision Programme, which integrates culture,
+      philosophy and academics. The programme sets out to equip future citizens to meet challenges
+      positively, and asks children, school management, teachers and parents each to contribute to
+      that.</p>
+  </div>
+</div>
+
+<div class="panel" id="panel-senior" role="dialog" aria-modal="true" aria-labelledby="panel-senior-t" hidden>
+  <div class="panel__card">
+    <button type="button" class="panel__close" data-panel-close aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <p class="panel__label">Senior School</p>
+    <h2 id="panel-senior-t">Two boards, <em>one ambition.</em></h2>
+    <p class="copy">From Grade XI students declare a direction &mdash; CBSE&rsquo;s Engineering,
+      Medicine or Management streams, or the IB Diploma, where every teacher is IB-trained and
+      several serve as IB examiners.</p>
+    <p class="copy">The Diploma runs across six subject groups, three or four of them at Higher
+      Level, anchored by the Extended Essay, Theory of Knowledge and CAS &mdash; recognised by
+      universities in India and worldwide.</p>
+  </div>
+</div>
+
+<div class="panel" id="panel-junior" role="dialog" aria-modal="true" aria-labelledby="panel-junior-t" hidden>
+  <div class="panel__card">
+    <button type="button" class="panel__close" data-panel-close aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <p class="panel__label">Junior School</p>
+    <h2 id="panel-junior-t">A broad <em>first exposure.</em></h2>
+    <p class="copy">The junior years begin in Grade V, introducing boarding life, house mentorship,
+      and a broad first exposure to music, sport and the sciences alongside the CBSE curriculum.
+      Value education runs alongside the timetable from Bal Bhagavatam onward.</p>
+    <p class="copy"><em>[Placeholder &mdash; junior-school-specific programme detail to be supplied
+      by the school.]</em></p>
+  </div>
+</div>
 <section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -454,10 +527,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=30" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=30" defer></script>
-<script src="assets/vendor/lenis.min.js?b=30" defer></script>
-<script src="assets/js/cirs.js?b=30" defer></script>
-<script src="assets/js/pages.js?b=30" defer></script>
+<script src="assets/vendor/gsap.min.js?b=31" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=31" defer></script>
+<script src="assets/vendor/lenis.min.js?b=31" defer></script>
+<script src="assets/js/cirs.js?b=31" defer></script>
+<script src="assets/js/pages.js?b=31" defer></script>
 </body>
 </html>
