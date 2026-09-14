@@ -192,15 +192,22 @@ git push -u origin main
 
 ## 8. What you cannot check, and must not claim
 
-GSAP, Lenis and Google Fonts load from CDNs. In a sandboxed session those
-connections are reset, so automated browser checks only ever exercise the
-no-JS fallback path.
+GSAP, ScrollTrigger and Lenis are served from `assets/vendor/` now, not from
+a CDN, so a sandboxed session does load them: motion, scroll behaviour and the
+pinned sections can be checked here. Google Fonts still loads from a CDN those
+sessions cannot reach, so an automated check renders the system fallback face
+rather than EB Garamond and Schibsted Grotesk.
 
-**Anything about motion, scroll behaviour, or webfont rendering needs a human
-looking at the real site.** If a change touches the motion layer, say so
+**Anything about webfont rendering needs a human looking at the real site** —
+line lengths, where a headline breaks, how the small caps sit. Say so
 explicitly rather than reporting it verified. Claiming "verified" on something
-you could only test with the animation layer dead is how a broken hero reaches
-a prospective parent.
+you could only test in the fallback face is how a broken hero reaches a
+prospective parent.
+
+The same rule still governs motion, only the line has moved: a sandbox can now
+tell you the libraries loaded, the triggers registered and an element's opacity
+went from 0 to 1. It cannot tell you the timing feels right. Report what you
+measured, not what you inferred from it.
 
 Measurement beats eyeballing everywhere else, though, and the repository has
 form here: a contrast checker once reported 2.32:1 on legible text because it

@@ -1,5 +1,9 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<!-- The motion layer, served from this site rather than from a CDN. See
+     assets/vendor/README.md for the versions and where they came from.
+     defer keeps them in document order, so GSAP is defined before
+     ScrollTrigger looks for it. -->
+<script src="assets/vendor/gsap.min.js?{{CACHE_BUST}}" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?{{CACHE_BUST}}" defer></script>
+<script src="assets/vendor/lenis.min.js?{{CACHE_BUST}}" defer></script>
 <script src="assets/js/cirs.js?{{CACHE_BUST}}" defer></script>
 <script src="assets/js/pages.js?{{CACHE_BUST}}" defer></script>
