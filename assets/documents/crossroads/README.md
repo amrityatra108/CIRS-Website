@@ -1,4 +1,12 @@
-# Crossroads issue PDFs go here
+# Crossroads issue PDFs — generated, do not edit by hand
+
+**A PDF put here directly will be the only copy of itself, and the next
+optimisation pass will not know about it.** The issues here are written by
+
+    python3 tools/make-crossroads-pdfs.py
+
+from the originals in `assets/source/crossroads-pdf/`, which is where a new
+issue goes. See the README there.
 
 Name each file for its issue number and nothing else needs editing — the
 archive page discovers it on the next build and the placeholder becomes a
