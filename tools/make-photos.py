@@ -30,8 +30,8 @@ WASH_ALPHA = 0.07
 
 # name, source, (w, h), focal point across the frame (x, y) in 0..1
 PHOTOS = [
-    # Feature panels — 4:5, one per page
-    ("arts.jpg",                "IMG_1828.JPG", (1200, 1500), (0.50, 0.45)),
+    # Feature panels — 4:5, one per page. Arts no longer has one: that page
+    # is the wall, and tools/make-arts-wall.py cuts its photographs.
     ("sports.jpg",              "HARI5692.JPG", (1200, 1500), (0.42, 0.55)),
     ("student-life.jpg",        "IMG_0081.JPG", (1200, 1500), (0.50, 0.50)),
     ("junior-school.jpg",       "IMG_1898.JPG", (1200, 1500), (0.50, 0.45)),

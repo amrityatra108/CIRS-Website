@@ -28,11 +28,12 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import artswall
 import documents as docs
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=27"
+CACHE_BUST = "b=28"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -241,22 +242,13 @@ PAGES = {
         "group": "Student Life",
         "title": "Arts, Music & Theatre",
         "description": "Music, theatre and the visual arts at Chinmaya International Residential "
-                       "School.",
-        "banner": ("Arts", "Express, Perform, <em>Create.</em>",
-                   "Music, theatre and the visual arts, and the amphitheatre built into the "
-                   "slope."),
-    },
-    "photo-archive": {
-        "nav": "Photo Archive",
-        "group": "Student Life",
-        # The one page on the site this script does not build. The archive is
-        # a full-screen gallery that takes the whole window, disables page
-        # scrolling and hides the cursor, so it cannot wear the sticky header
-        # and the footer: they would sit over a canvas nobody can scroll past.
-        # It ships from its own folder exactly as it is — tools/stage-deploy.py
-        # copies the tree — and the menu simply points at it. Its own way back
-        # is the fourth HUD corner inside the gallery.
-        "static": "cirs-archive-gallery/",
+                       "School, as a wall of the school's photographs.",
+        # The one page on the site that is not a document. It is a field of
+        # photographs filling the window, which takes the scroll and opens a
+        # photograph where another page would follow a link — so it wears the
+        # header but no footer, and no banner above the fold, because it is
+        # all fold. See "wall" in build() below.
+        "wall": True,
     },
     "admissions": {
         "nav": "Admissions",
@@ -369,10 +361,7 @@ def nav_html(slug):
         out.append(f'      <ul aria-labelledby="{gid}">')
         for s, p in items:
             here = ' aria-current="page"' if s == slug else ""
-            # A "static" entry is in the menu but not built from a template —
-            # see the photo archive below.
-            href = p.get("static") or f"{s}.html"
-            out.append(f'        <li><a href="{href}"{here}>{p["nav"]}</a></li>')
+            out.append(f'        <li><a href="{s}.html"{here}>{p["nav"]}</a></li>')
         out.append("      </ul>")
         out.append("    </div>")
     out.append("  </nav>")
@@ -664,6 +653,23 @@ def docportal_html():
     return '<div class="docportal">\n' + "\n".join(groups) + '\n    </div>'
 
 
+def artswall_html():
+    """The wall's photographs, as an inert <template> the page's script reads.
+
+    A link to the photograph around an image of its tile copy. Both paths sit
+    in attributes check-links.py reads, so a photograph that went missing from
+    assets/img/arts/ fails the checks rather than the page. <template> content
+    is inert, so naming twenty-eight photographs here costs no requests — the
+    script clones what it needs.
+    """
+    rows = []
+    for name, cat, caption in artswall.PHOTOGRAPHS:
+        rows.append(f'    <a href="{artswall.full(name)}">'
+                    f'<img src="{artswall.thumb(name)}" alt="{caption}" data-cat="{cat}">'
+                    f'</a>')
+    return ('<template id="wall-plates">\n' + "\n".join(rows) + "\n</template>")
+
+
 UC = '''<section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -686,7 +692,18 @@ def build(slug, page):
                 .replace("{{CANONICAL}}", "" if slug == "index" else f"{slug}.html")
                 .replace("{{CACHE_BUST}}", CACHE_BUST))
 
-    parts = [head, "<body>", read("tools/partials/chrome.html").rstrip("\n")]
+    # A wall fills the window and does not scroll, so it brings its own sheet
+    # and its own script, and goes without the footer and the under-construction
+    # note — both of which live below a fold this page does not have. The body
+    # class is what scopes artswall.css away from every other page.
+    wall = page.get("wall")
+    if wall:
+        head = head.replace(
+            "</head>",
+            f'<link rel="stylesheet" href="assets/css/artswall.css?{CACHE_BUST}">\n</head>')
+
+    parts = [head, '<body class="wall">' if wall else "<body>",
+             read("tools/partials/chrome.html").rstrip("\n")]
     drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
     # The home page needs no Home tab — the wordmark already leads here, and a
     # Home link on Home is a link to nowhere.
@@ -699,7 +716,9 @@ def build(slug, page):
     elif page.get("banner"):
         parts.append(banner_html(page))
     content = read(f"tools/pages/{slug}.html").rstrip("\n")
-    content = (content.replace("{{DOCLIST}}", doclist_html())
+    content = (content.replace("{{ARTSWALL}}", artswall_html())
+                       .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
+                       .replace("{{DOCLIST}}", doclist_html())
                        .replace("{{DOCPORTAL}}", docportal_html())
                        .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
@@ -709,11 +728,14 @@ def build(slug, page):
         parts.append(jump_html(content))
     if page.get("popup"):
         parts.append(POPUP)
-    if page.get("uc", True):
+    if page.get("uc", True) and not wall:
         parts.append(UC)
     parts.append("</main>")
-    parts.append(read("tools/partials/footer.html").rstrip("\n"))
+    if not wall:
+        parts.append(read("tools/partials/footer.html").rstrip("\n"))
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
+    if wall:
+        parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
 
     return rewrite_links("\n".join(parts), slug)
@@ -721,15 +743,6 @@ def build(slug, page):
 
 if __name__ == "__main__":
     for slug, page in PAGES.items():
-        # A static entry owns its own markup; this script only puts it in the
-        # menu. Check it is really there, so a typo in the path fails here
-        # rather than shipping a menu item that 404s.
-        if page.get("static"):
-            if not os.path.exists(os.path.join(ROOT, page["static"])):
-                sys.exit(f"build-site: {slug} points at {page['static']}, "
-                         "which is not in the repository")
-            print(f"  link   {page['static']} (not generated)")
-            continue
         out = os.path.join(ROOT, f"{slug}.html")
         html = build(slug, page)
         open(out, "w", encoding="utf-8").write(html)

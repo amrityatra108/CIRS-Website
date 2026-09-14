@@ -7,7 +7,7 @@ deploy of the repository root would publish all of it. So the publishable
 files are copied into _site/, and netlify.toml points Netlify at that
 directory rather than the root.
 
-What ships: the eleven pages, **only the assets a page actually references**,
+What ships: every page, **only the assets a page actually references**,
 and the two files that keep a review preview out of search results.
 
 That last point stopped being a detail when the source photographs arrived.
@@ -76,18 +76,6 @@ def main():
     if on_disk > kept:
         print(f"  left behind {on_disk - kept} unreferenced asset(s) — "
               f"source photographs and the parked editor stay out of the deploy")
-
-    # The photo archive is the one page not built by build-site.py: its own
-    # HTML, CSS, JavaScript and photographs in one folder, none of it
-    # referenced by the pages above, so the reference list that decides
-    # everything else cannot see it. It ships as a tree copy instead — minus
-    # the README, which is for whoever maintains it rather than for visitors.
-    archive = "cirs-archive-gallery"
-    if os.path.isdir(os.path.join(ROOT, archive)):
-        shutil.copytree(os.path.join(ROOT, archive), os.path.join(OUT, archive),
-                        ignore=shutil.ignore_patterns("*.md"))
-        shots = sum(1 for _, _, fs in os.walk(os.path.join(ROOT, archive)) for _ in fs)
-        print(f"  staged {archive}/ as its own page ({shots} files)")
 
     open(os.path.join(OUT, "_headers"), "w", encoding="utf-8").write(HEADERS)
     open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8").write(ROBOTS)
