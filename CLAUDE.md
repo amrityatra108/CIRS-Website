@@ -72,6 +72,11 @@ or the honeycomb. It needs playwright-core, which is not in the repository: poin
 
 ## What is not verifiable from a sandbox session
 
-GSAP, Lenis and Google Fonts load from CDNs the session proxy resets, so browser checks here
-exercise the no-JS fallback path only. Anything about the motion layer needs a person looking
-at the deployed site.
+**Motion now is.** GSAP, ScrollTrigger and Lenis are served from `assets/vendor/` rather than
+from a CDN, so a sandbox session loads them and the reveals, the pinned sections and the smooth
+scroll can be checked before a change ships. This used to be the largest blind spot here.
+
+**Type still is not.** Google Fonts loads from a CDN the session proxy resets, so a browser
+check renders EB Garamond and Schibsted Grotesk as the system fallback. Anything about the
+lettering — line lengths, where a headline breaks, how small caps sit — still needs a person
+looking at the deployed site.
