@@ -77,6 +77,16 @@ def main():
         print(f"  left behind {on_disk - kept} unreferenced asset(s) — "
               f"source photographs and the parked editor stay out of the deploy")
 
+    # PREVIEW BRANCH ONLY — not intended for main.
+    # docs/design-system.html is the design system, written for whoever works
+    # on the site rather than for visitors. It is not in the menu, nothing
+    # links to it, and it is self-contained apart from Google Fonts. This
+    # copies it to the deploy root so it can be looked at on a branch preview.
+    design = os.path.join(ROOT, "docs/design-system.html")
+    if os.path.exists(design):
+        shutil.copy2(design, os.path.join(OUT, "design-system.html"))
+        print("  staged design-system.html (preview branch only)")
+
     open(os.path.join(OUT, "_headers"), "w", encoding="utf-8").write(HEADERS)
     open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8").write(ROBOTS)
 
