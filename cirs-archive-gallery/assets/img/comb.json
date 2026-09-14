@@ -1,0 +1,140 @@
+[
+ {
+  "src": "assets/img/ridge.jpg",
+  "cat": "Campus",
+  "title": "The academic block, below the ridge",
+  "thumb": "assets/img/thumbs/ridge.jpg"
+ },
+ {
+  "src": "assets/img/aerial.jpg",
+  "cat": "Campus",
+  "title": "A hundred acres, from the air",
+  "thumb": "assets/img/thumbs/aerial.jpg"
+ },
+ {
+  "src": "assets/img/walkway.jpg",
+  "cat": "Campus",
+  "title": "The walkway",
+  "thumb": "assets/img/thumbs/walkway.jpg"
+ },
+ {
+  "src": "assets/img/entrance.jpg",
+  "cat": "Campus",
+  "title": "The entrance",
+  "thumb": "assets/img/thumbs/entrance.jpg"
+ },
+ {
+  "src": "assets/img/ridge-duo.jpg",
+  "cat": "Campus",
+  "title": "Mist across the Western Ghats",
+  "thumb": "assets/img/thumbs/ridge-duo.jpg"
+ },
+ {
+  "src": "assets/img/aerial-duo.jpg",
+  "cat": "Campus",
+  "title": "The campus, looking west",
+  "thumb": "assets/img/thumbs/aerial-duo.jpg"
+ },
+ {
+  "src": "assets/img/arts.jpg",
+  "cat": "Arts",
+  "title": "The arts block",
+  "thumb": "assets/img/thumbs/arts.jpg"
+ },
+ {
+  "src": "assets/img/gallery/assembly.jpg",
+  "cat": "Performances",
+  "title": "The whole school, seated",
+  "thumb": "assets/img/thumbs/gallery_assembly.jpg"
+ },
+ {
+  "src": "assets/img/gallery/courtyard.jpg",
+  "cat": "Exhibitions",
+  "title": "The courtyard",
+  "thumb": "assets/img/thumbs/gallery_courtyard.jpg"
+ },
+ {
+  "src": "assets/img/gallery/dancers.jpg",
+  "cat": "Theatre",
+  "title": "Bharatanatyam, New Year",
+  "thumb": "assets/img/thumbs/gallery_dancers.jpg"
+ },
+ {
+  "src": "assets/img/gallery/havan.jpg",
+  "cat": "Performances",
+  "title": "The havan",
+  "thumb": "assets/img/thumbs/gallery_havan.jpg"
+ },
+ {
+  "src": "assets/img/gallery/lamps.jpg",
+  "cat": "Exhibitions",
+  "title": "Lamps before dawn",
+  "thumb": "assets/img/thumbs/gallery_lamps.jpg"
+ },
+ {
+  "src": "assets/img/gallery/lineup.jpg",
+  "cat": "Performances",
+  "title": "Before the assembly",
+  "thumb": "assets/img/thumbs/gallery_lineup.jpg"
+ },
+ {
+  "src": "assets/img/gallery/offering.jpg",
+  "cat": "Exhibitions",
+  "title": "Offerings at the altar",
+  "thumb": "assets/img/thumbs/gallery_offering.jpg"
+ },
+ {
+  "src": "assets/img/gallery/paint1.jpg",
+  "cat": "Student Work",
+  "title": "Rain, Grade IV",
+  "thumb": "assets/img/thumbs/gallery_paint1.jpg"
+ },
+ {
+  "src": "assets/img/gallery/paint2.jpg",
+  "cat": "Student Work",
+  "title": "Blossom and lamplight",
+  "thumb": "assets/img/thumbs/gallery_paint2.jpg"
+ },
+ {
+  "src": "assets/img/gallery/paint3.jpg",
+  "cat": "Student Work",
+  "title": "Sun and butterfly, Grade IV",
+  "thumb": "assets/img/thumbs/gallery_paint3.jpg"
+ },
+ {
+  "src": "assets/img/gallery/paint4.jpg",
+  "cat": "Student Work",
+  "title": "At the window, Grade VIII",
+  "thumb": "assets/img/thumbs/gallery_paint4.jpg"
+ },
+ {
+  "src": "assets/img/gallery/paint5.jpg",
+  "cat": "Student Work",
+  "title": "Figure with birds, Grade XII",
+  "thumb": "assets/img/thumbs/gallery_paint5.jpg"
+ },
+ {
+  "src": "assets/img/gallery/prayer.jpg",
+  "cat": "Performances",
+  "title": "Morning invocation",
+  "thumb": "assets/img/thumbs/gallery_prayer.jpg"
+ },
+ {
+  "src": "assets/img/gallery/shrine.jpg",
+  "cat": "Exhibitions",
+  "title": "The shrine, dressed",
+  "thumb": "assets/img/thumbs/gallery_shrine.jpg"
+ },
+ {
+  "src": "assets/img/gallery/stage.jpg",
+  "cat": "Theatre",
+  "title": "Annual day, the amphitheatre",
+  "thumb": "assets/img/thumbs/gallery_stage.jpg"
+ },
+ {
+  "src": "assets/img/gallery/utsav.jpg",
+  "cat": "Performances",
+  "title": "Anand Utsav, on stage",
+  "thumb": "assets/img/thumbs/gallery_utsav.jpg"
+ }
+]
