@@ -15,6 +15,7 @@ against the WCAG AA floors (4.5:1 for body text, 3:1 for large text).
     python3 tools/check-contrast.py                   # Admissions, the default
     python3 tools/check-contrast.py news.html         # any page with a .pagehero
     python3 tools/check-contrast.py crossroads.html   # the drifting cover wall
+    python3 tools/check-contrast.py arts.html         # the fold over the photograph wall
 
 Admissions and News are a .pagehero over a looping video and are seeked
 through it. Crossroads is a wall of covers drifting behind the masthead,
@@ -48,23 +49,39 @@ const { chromium } = require('playwright-core');
   // The Crossroads banner has no video but is no more static for it: 29
   // covers drift past the headline, so it needs the same treatment. There
   // is nothing to seek — we simply let it run between shots.
-  const drifting = await p.evaluate(() => !!document.querySelector('.crwall'));
+  // The Arts wall is the same case again: a field of photographs that the
+  // fold sits on top of, with a scrim between them.
+  const drifting = await p.evaluate(() => !!document.querySelector('.crwall, #p1-stage'));
   const boxes = await p.evaluate(() => {
     const out = [];
-    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll').forEach(el => {
+    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll, .p1-hero__eyebrow, .p1-hero-text, .p1-hero__cue, .p1-hud').forEach(el => {
       const r = el.getBoundingClientRect();
       if (r.width < 4 || r.height < 4) return;
       const cs = getComputedStyle(el);
+      if (el.classList.contains('soft')) return;          // the pre-blurred copy of the title
+      // Text painted with background-clip reports colour transparent. The
+      // gradient's darkest stop is the worst the reader actually sees.
+      let colour = cs.color;
+      if (/rgba\(\d+, ?\d+, ?\d+, ?0\)/.test(colour) && cs.backgroundImage !== 'none') {
+        const stops = [...cs.backgroundImage.matchAll(/rgba?\(([^)]+)\)/g)]
+          .map(m => m[1].split(',').slice(0, 3).map(Number))
+          .filter(c => c.length === 3 && c.every(v => !isNaN(v)));
+        if (stops.length) {
+          const lum = c => c[0] * .2126 + c[1] * .7152 + c[2] * .0722;
+          const worst = stops.reduce((a, b) => lum(a) < lum(b) ? a : b);
+          colour = `rgb(${worst.join(', ')})`;
+        }
+      }
       out.push({ what: (el.className || el.tagName).toString().split(' ')[0],
                  text: el.textContent.trim().slice(0, 28),
-                 color: cs.color, bg: cs.backgroundColor,
+                 color: colour, bg: cs.backgroundColor,
                  size: parseFloat(cs.fontSize), weight: cs.fontWeight,
                  x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height) });
     });
     return out;
   });
   // hide the text, photograph what is behind it
-  await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap, .crhero .wrap{visibility:hidden!important}' });
+  await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap, .crhero .wrap, .p1-hero > *, .p1-hud{visibility:hidden!important}' });
   await p.waitForTimeout(300);
   const shots = [];
   const passes = times || (drifting ? [null, null, null, null, null] : [null]);

@@ -129,14 +129,20 @@ and would otherwise tile on their side. Keep it that way.
 
 **After touching a hero, a scrim or the honeycomb, run
 `tools/check-contrast.py`.** It measures the banner text against the pixels
-actually behind it, seeking through the video loop. Two pages open on a
-`.pagehero` over video now — Admissions and News — so the tool takes the page
-as an argument and defaults to Admissions:
+actually behind it, seeking through the video loop. Several pages now sit text
+on moving pictures, so the tool takes the page as an argument and defaults to
+Admissions:
 
 ```sh
 python3 tools/check-contrast.py                # Admissions
 python3 tools/check-contrast.py news.html      # News
+python3 tools/check-contrast.py crossroads.html   # the drifting covers
+python3 tools/check-contrast.py arts.html         # the fold over the wall
 ```
+
+Where the words are painted with a gradient rather than a colour — the Arts
+fold is — the checker measures the gradient's darkest stop, which is the worst
+any part of the lettering actually reaches.
 
 Text that paints its own opaque background — the gold "Latest" pill on the
 News reel — is measured against *that*, not against the photograph behind it.
