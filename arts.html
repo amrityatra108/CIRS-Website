@@ -4,28 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arts, Music & Theatre</title>
-<meta name="description" content="Music, theatre and the visual arts at Chinmaya International Residential School.">
+<meta name="description" content="Music, theatre and the visual arts at Chinmaya International Residential School, as a wall of the school's photographs.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/arts.html">
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Arts, Music & Theatre">
-<meta property="og:description" content="Music, theatre and the visual arts at Chinmaya International Residential School.">
+<meta property="og:description" content="Music, theatre and the visual arts at Chinmaya International Residential School, as a wall of the school's photographs.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Arts, Music & Theatre">
-<meta name="twitter:description" content="Music, theatre and the visual arts at Chinmaya International Residential School.">
+<meta name="twitter:description" content="Music, theatre and the visual arts at Chinmaya International Residential School, as a wall of the school's photographs.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
-<link rel="stylesheet" href="assets/css/cirs.css?b=27">
-<link rel="stylesheet" href="assets/css/pages.css?b=27">
+<link rel="stylesheet" href="assets/css/cirs.css?b=28">
+<link rel="stylesheet" href="assets/css/pages.css?b=28">
+<link rel="stylesheet" href="assets/css/artswall.css?b=28">
 </head>
 
-<body>
+<body class="wall">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -193,123 +194,75 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">Arts</span></p>
-    <h1 class="serif" data-split>Express, Perform, <em>Create.</em></h1>
-    <p class="lead">Music, theatre and the visual arts, and the amphitheatre built into the slope.</p>
+<div id="grain-overlay"></div>
+<canvas id="global-canvas" aria-hidden="true"></canvas>
+
+<div id="cursor-ring" aria-hidden="true"></div>
+<div id="cursor-dot" aria-hidden="true"></div>
+
+<div id="master-modal" class="wallmodal" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-hidden="true" inert>
+  <button class="m-close" id="m-close" type="button">[ ESC // CLOSE ]</button>
+  <div class="m-left" id="m-media-cont"></div>
+  <div class="m-right" id="m-info-pane">
+    <h3 id="m-title">Title</h3>
+    <div class="m-meta" id="m-meta">Arts, Music &amp; Theatre</div>
+    <p id="m-desc">CIRS &middot; Siruvani, Coimbatore</p>
   </div>
-</section>
-<section class="feature feature--reverse" id="arts">
-  <div class="wrap feature__inner">
-    <figure class="feature__media img-reveal rv">
-      <img src="assets/img/arts.jpg" alt="Students performing Bharatanatyam on a lit stage"
-           width="1200" height="1500" loading="lazy">
-    </figure>
-    <div class="feature__text rv">
-      <p class="marker"><span class="sc">Arts</span></p>
-      <p class="feature__tag">Express, perform, create</p>
-      <h2 class="serif h2" data-split>Two Traditions, <em>One Stage.</em></h2>
-      <p class="copy">A veena class ends as a band sets up; a Bharatanatyam rehearsal shares the
-        wing with a drama read-through most evenings at six. Both traditions &mdash; Indian
-        classical and contemporary &mdash; are native here, not imported.</p>
-      <p class="copy" style="margin-top:10px"><em>[Placeholder &mdash; ensembles, productions and
-        showcase dates to be supplied.]</em></p>
-      <p class="feature__cta"><a class="btn btn--outline" href="#">Arts at CIRS</a></p>
-    </div>
-  </div>
-</section>
-<section class="uc">
-  <div class="wrap uc__inner">
-    <span class="uc__mark" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
-    </span>
-    <div>
-      <p class="uc__label">Under construction</p>
-      <p class="uc__text">This page is still being written. Photographs, names and figures marked
-        in brackets are placeholders awaiting the school, and more will be added here in the weeks
-        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
-    </div>
-  </div>
-</section>
-</main>
-<div class="footer-wrap">
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer__utility">
-      <a href="alumni.html">Alumni</a>
-      <a href="#">Careers</a>
-      <a href="#">Support CIRS</a>
-      <a href="#">Calendar</a>
-    </div>
-    <div class="footer__main">
-      <div>
-        <div class="footer__brand">
-          <img src="assets/img/logo.png" alt="" width="58" height="56">
-          <span>Chinmaya International<br>Residential School</span>
-        </div>
-        <address>
-          Siruvani Main Road<br>
-          Coimbatore 641 114, Tamil Nadu, India<br>
-          <a href="tel:+914222613300">+91 422 261 3300</a> &middot;
-          <a href="tel:+914222613303">261 3303</a><br>
-          <a href="mailto:info@cirschool.org">info@cirschool.org</a>
-        </address>
-      </div>
-
-      <div>
-        <h4 class="sc">About</h4>
-        <ul>
-          <li><a href="why-cirs.html#about">Why CIRS</a></li>
-          <li><a href="#">School History</a></li>
-          <li><a href="our-leadership.html#people">Our People</a></li>
-          <li><a href="student-life.html#campus">Our Campus</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="sc" id="fnav-school">School</p>
-        <ul aria-labelledby="fnav-school">
-          <li><a href="why-cirs.html#junior">Junior School</a></li>
-          <li><a href="why-cirs.html#senior">Senior School</a></li>
-          <li><a href="sports.html#athletics">Athletics</a></li>
-          <li><a href="#top">Arts, Music &amp; Theatre</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="sc" id="fnav-academics">Academics</p>
-        <ul aria-labelledby="fnav-academics">
-          <li><a href="academics.html">Curriculum</a></li>
-          <li><a href="academics.html">CBSE</a></li>
-          <li><a href="academics.html">IB Diploma</a></li>
-          <li><a href="alumni.html#pathways">University Counselling</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="sc" id="fnav-admissions">Admissions</p>
-        <ul aria-labelledby="fnav-admissions">
-          <li><a href="admissions.html">Application Information</a></li>
-          <li><a href="#">Fee Structure</a></li>
-          <li><a href="#">Important Dates</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer__bar">
-      <span>&copy; 1996&ndash;2026 Chinmaya International Residential School</span>
-      <span>J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</span>
-      <span>An undertaking of the Central Chinmaya Mission Trust</span>
-    </div>
-  </div>
-</footer>
 </div>
+
+<section id="p1-wrap" tabindex="-1" aria-label="Arts, music and theatre at CIRS, as a wall of photographs. Drag, swipe, scroll or use the arrow keys to explore; select a photograph to open it.">
+  <div class="p1-hud hud-bl">Photograph <span id="p1-id">--</span></div>
+  <div class="p1-hud hud-br" id="p1-hint">Drag // Scroll to explore</div>
+  <div id="p1-viewport"><div id="p1-stage"></div></div>
+  <div class="p1-hero">
+    <p class="p1-hero__eyebrow">Student Life</p>
+    <div class="p1-hero__title">
+      <h1 class="p1-hero-text" id="p1-title">Arts, Music<br>&amp; <em>Theatre</em></h1>
+      <div class="p1-hero-text soft" id="p1-title-soft" aria-hidden="true">Arts, Music<br>&amp; <em>Theatre</em></div>
+    </div>
+    <p class="p1-hero__cue">28 photographs</p>
+  </div>
+</section>
+
+<template id="wall-plates">
+    <a href="assets/img/arts/guitars.jpg"><img src="assets/img/arts/thumbs/guitars.jpg" alt="Guitars, in the music room" data-cat="Music"></a>
+    <a href="assets/img/arts/tabla.jpg"><img src="assets/img/arts/thumbs/tabla.jpg" alt="Tabla and percussion" data-cat="Music"></a>
+    <a href="assets/img/arts/band.jpg"><img src="assets/img/arts/thumbs/band.jpg" alt="The band, outside the block" data-cat="Music"></a>
+    <a href="assets/img/arts/bharatanatyam.jpg"><img src="assets/img/arts/thumbs/bharatanatyam.jpg" alt="Bharatanatyam, under the lights" data-cat="Dance"></a>
+    <a href="assets/img/arts/ensemble.jpg"><img src="assets/img/arts/thumbs/ensemble.jpg" alt="The ensemble, mid-phrase" data-cat="Dance"></a>
+    <a href="assets/img/arts/juniors.jpg"><img src="assets/img/arts/thumbs/juniors.jpg" alt="The junior school on stage" data-cat="Dance"></a>
+    <a href="assets/img/arts/dance.jpg"><img src="assets/img/arts/thumbs/dance.jpg" alt="Bharatanatyam, New Year" data-cat="Dance"></a>
+    <a href="assets/img/arts/stage.jpg"><img src="assets/img/arts/thumbs/stage.jpg" alt="Annual day, on stage" data-cat="Dance"></a>
+    <a href="assets/img/arts/mime.jpg"><img src="assets/img/arts/thumbs/mime.jpg" alt="Mime, in white masks" data-cat="Theatre"></a>
+    <a href="assets/img/arts/tableau.jpg"><img src="assets/img/arts/thumbs/tableau.jpg" alt="In costume, a tableau" data-cat="Theatre"></a>
+    <a href="assets/img/arts/masks.jpg"><img src="assets/img/arts/thumbs/masks.jpg" alt="Masks, made for the stage" data-cat="Theatre"></a>
+    <a href="assets/img/arts/banner.jpg"><img src="assets/img/arts/thumbs/banner.jpg" alt="Painting the banner" data-cat="Visual Art"></a>
+    <a href="assets/img/arts/exhibition.jpg"><img src="assets/img/arts/thumbs/exhibition.jpg" alt="The exhibition, being read" data-cat="Visual Art"></a>
+    <a href="assets/img/arts/handwork.jpg"><img src="assets/img/arts/thumbs/handwork.jpg" alt="Handwork, on display" data-cat="Visual Art"></a>
+    <a href="assets/img/arts/floorwork.jpg"><img src="assets/img/arts/thumbs/floorwork.jpg" alt="Working on the floor" data-cat="Visual Art"></a>
+    <a href="assets/img/arts/paint1.jpg"><img src="assets/img/arts/thumbs/paint1.jpg" alt="Rain, Grade IV" data-cat="Student Work"></a>
+    <a href="assets/img/arts/paint2.jpg"><img src="assets/img/arts/thumbs/paint2.jpg" alt="Blossom and lamplight" data-cat="Student Work"></a>
+    <a href="assets/img/arts/paint3.jpg"><img src="assets/img/arts/thumbs/paint3.jpg" alt="Sun and butterfly, Grade IV" data-cat="Student Work"></a>
+    <a href="assets/img/arts/paint4.jpg"><img src="assets/img/arts/thumbs/paint4.jpg" alt="At the window, Grade VIII" data-cat="Student Work"></a>
+    <a href="assets/img/arts/paint5.jpg"><img src="assets/img/arts/thumbs/paint5.jpg" alt="Figure with birds, Grade XII" data-cat="Student Work"></a>
+    <a href="assets/img/arts/amphitheatre.jpg"><img src="assets/img/arts/thumbs/amphitheatre.jpg" alt="The amphitheatre, after dark" data-cat="The Stage"></a>
+    <a href="assets/img/arts/festival.jpg"><img src="assets/img/arts/thumbs/festival.jpg" alt="The festival stage, set" data-cat="The Stage"></a>
+    <a href="assets/img/arts/spic-sarod.jpg"><img src="assets/img/arts/thumbs/spic-sarod.jpg" alt="A visiting recital, strings and tabla" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-kathakali.jpg"><img src="assets/img/arts/thumbs/spic-kathakali.jpg" alt="Visiting artists, in full costume" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-dancers.jpg"><img src="assets/img/arts/thumbs/spic-dancers.jpg" alt="Visiting dancers, held mid-figure" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-dancer.jpg"><img src="assets/img/arts/thumbs/spic-dancer.jpg" alt="A visiting dancer, alone on stage" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-concert.jpg"><img src="assets/img/arts/thumbs/spic-concert.jpg" alt="A SPIC MACAY concert, on stage" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-tabla.jpg"><img src="assets/img/arts/thumbs/spic-tabla.jpg" alt="A visiting tabla player" data-cat="SPIC MACAY"></a>
+</template>
+
+<noscript><div class="noscript">This page needs JavaScript to move the photographs. The menu above still
+  works.</div></noscript>
+</main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
-<script src="assets/js/cirs.js?b=27" defer></script>
-<script src="assets/js/pages.js?b=27" defer></script>
+<script src="assets/js/cirs.js?b=28" defer></script>
+<script src="assets/js/pages.js?b=28" defer></script>
+<script src="assets/js/artswall.js?b=28" defer></script>
 </body>
 </html>

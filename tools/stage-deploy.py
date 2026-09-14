@@ -7,7 +7,7 @@ deploy of the repository root would publish all of it. So the publishable
 files are copied into _site/, and netlify.toml points Netlify at that
 directory rather than the root.
 
-What ships: the eleven pages, **only the assets a page actually references**,
+What ships: every page, **only the assets a page actually references**,
 and the two files that keep a review preview out of search results.
 
 That last point stopped being a detail when the source photographs arrived.
