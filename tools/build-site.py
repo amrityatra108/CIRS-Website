@@ -33,7 +33,7 @@ import documents as docs
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=28"
+CACHE_BUST = "b=29"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
