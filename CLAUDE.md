@@ -39,6 +39,12 @@ works and is silently undone by the next build**, and CI fails on the drift. Edi
 The menu is generated from the page list in `tools/build-site.py`, so adding a page there puts
 it in the menu of every page at once.
 
+Arts, Music & Theatre is the one page that is not a document. It is a full-window field of
+photographs — `"wall": True` in that page list — so it wears the header but no footer, no
+banner and no scroll. Its photographs are listed in `tools/artswall.py` and cut by
+`tools/make-arts-wall.py`; its sheet and script are `assets/css/artswall.css` and
+`assets/js/artswall.js`, both scoped to `body.wall`.
+
 ## Checks, before every push
 
 ```sh
@@ -49,8 +55,10 @@ python3 tools/build-site.py            # then: git diff --quiet -- '*.html'
 
 `tools/check-contrast.py` additionally measures banner text against the pixels actually behind
 it, seeking through the hero video. It takes the page as an argument and defaults to
-Admissions — `python3 tools/check-contrast.py news.html` for the other hero. Run it after
-touching either hero, a scrim or the honeycomb.
+Admissions — `news.html` for the other hero, `crossroads.html` for the drifting covers,
+`arts.html` for the fold over the photograph wall. Run it after touching any hero, a scrim
+or the honeycomb. It needs playwright-core, which is not in the repository: point
+`CIRS_BROWSER_DIR` at the directory holding it.
 
 ## Things that are deliberate, not oversights
 

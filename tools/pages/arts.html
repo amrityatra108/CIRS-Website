@@ -1,19 +1,34 @@
-<section class="feature feature--reverse" id="arts">
-  <div class="wrap feature__inner">
-    <figure class="feature__media img-reveal rv">
-      <img src="assets/img/arts.jpg" alt="Students performing Bharatanatyam on a lit stage"
-           width="1200" height="1500" loading="lazy">
-    </figure>
-    <div class="feature__text rv">
-      <p class="marker"><span class="sc">Arts</span></p>
-      <p class="feature__tag">Express, perform, create</p>
-      <h2 class="serif h2" data-split>Two Traditions, <em>One Stage.</em></h2>
-      <p class="copy">A veena class ends as a band sets up; a Bharatanatyam rehearsal shares the
-        wing with a drama read-through most evenings at six. Both traditions &mdash; Indian
-        classical and contemporary &mdash; are native here, not imported.</p>
-      <p class="copy" style="margin-top:10px"><em>[Placeholder &mdash; ensembles, productions and
-        showcase dates to be supplied.]</em></p>
-      <p class="feature__cta"><a class="btn btn--outline" href="#">Arts at CIRS</a></p>
+<div id="grain-overlay"></div>
+<canvas id="global-canvas" aria-hidden="true"></canvas>
+
+<div id="cursor-ring" aria-hidden="true"></div>
+<div id="cursor-dot" aria-hidden="true"></div>
+
+<div id="master-modal" class="wallmodal" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-hidden="true" inert>
+  <button class="m-close" id="m-close" type="button">[ ESC // CLOSE ]</button>
+  <div class="m-left" id="m-media-cont"></div>
+  <div class="m-right" id="m-info-pane">
+    <h3 id="m-title">Title</h3>
+    <div class="m-meta" id="m-meta">Arts, Music &amp; Theatre</div>
+    <p id="m-desc">CIRS &middot; Siruvani, Coimbatore</p>
+  </div>
+</div>
+
+<section id="p1-wrap" tabindex="-1" aria-label="Arts, music and theatre at CIRS, as a wall of photographs. Drag, swipe, scroll or use the arrow keys to explore; select a photograph to open it.">
+  <div class="p1-hud hud-bl">Photograph <span id="p1-id">--</span></div>
+  <div class="p1-hud hud-br" id="p1-hint">Drag // Scroll to explore</div>
+  <div id="p1-viewport"><div id="p1-stage"></div></div>
+  <div class="p1-hero">
+    <p class="p1-hero__eyebrow">Student Life</p>
+    <div class="p1-hero__title">
+      <h1 class="p1-hero-text" id="p1-title">Arts, Music<br>&amp; <em>Theatre</em></h1>
+      <div class="p1-hero-text soft" id="p1-title-soft" aria-hidden="true">Arts, Music<br>&amp; <em>Theatre</em></div>
     </div>
+    <p class="p1-hero__cue">{{ARTSWALL_COUNT}} photographs</p>
   </div>
 </section>
+
+{{ARTSWALL}}
+
+<noscript><div class="noscript">This page needs JavaScript to move the photographs. The menu above still
+  works.</div></noscript>
