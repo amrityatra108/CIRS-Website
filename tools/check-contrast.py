@@ -14,9 +14,12 @@ against the WCAG AA floors (4.5:1 for body text, 3:1 for large text).
 
     python3 tools/check-contrast.py                   # Admissions, the default
     python3 tools/check-contrast.py news.html         # any page with a .pagehero
+    python3 tools/check-contrast.py crossroads.html   # the drifting cover wall
 
-Both heroes are a .pagehero over a looping video, so both are measured the
-same way. Needs a server on :8990.
+Admissions and News are a .pagehero over a looping video and are seeked
+through it. Crossroads is a wall of covers drifting behind the masthead,
+which cannot be seeked — that one is simply left to run between shots.
+Needs a server on :8990.
 """
 import json, subprocess, sys, os
 
@@ -42,6 +45,10 @@ const { chromium } = require('playwright-core');
     const d = v.duration && isFinite(v.duration) ? v.duration : 8;
     return [0, 0.2, 0.4, 0.6, 0.8].map(f => +(d * f).toFixed(2));
   });
+  // The Crossroads banner has no video but is no more static for it: 29
+  // covers drift past the headline, so it needs the same treatment. There
+  // is nothing to seek — we simply let it run between shots.
+  const drifting = await p.evaluate(() => !!document.querySelector('.crwall'));
   const boxes = await p.evaluate(() => {
     const out = [];
     document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll').forEach(el => {
@@ -60,7 +67,9 @@ const { chromium } = require('playwright-core');
   await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap, .crhero .wrap{visibility:hidden!important}' });
   await p.waitForTimeout(300);
   const shots = [];
-  for (const t of (times || [null])) {
+  const passes = times || (drifting ? [null, null, null, null, null] : [null]);
+  for (const t of passes) {
+    if (t === null && drifting && shots.length) await p.waitForTimeout(1600);
     if (t !== null) {
       await p.evaluate(async (tt) => {
         const v = document.querySelector('.pagehero__video, .hero__video');
