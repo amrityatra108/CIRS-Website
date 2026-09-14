@@ -72,6 +72,17 @@
 
         .p1-hud { position: fixed; z-index: 100; font-size: 9px; text-transform: uppercase; letter-spacing: 0.4em; opacity: 0.45; color: var(--gold); font-family: 'Plus Jakarta Sans', system-ui, sans-serif; pointer-events: none; }
         .hud-tl { top: 40px; left: 40px; } .hud-bl { bottom: 40px; left: 40px; } .hud-br { bottom: 40px; right: 40px; }
+        /* The way back to the rest of the site. The gallery is full screen and
+           swallows the page scroll, so without this the only exit is the
+           browser's back button. It takes the fourth, unused HUD corner and
+           the same lettering as the other three, but has to re-enable both
+           pointer events and the cursor, which the HUD and the body switch
+           off for everything. */
+        .hud-tr { top: 40px; right: 40px; }
+        a.p1-hud { pointer-events: auto; text-decoration: none; transition: opacity .25s; }
+        a.p1-hud:hover, a.p1-hud:focus-visible { opacity: 0.95; }
+        @media (hover: hover) and (pointer: fine) { a.p1-hud, a.p1-hud * { cursor: pointer !important; } }
+        a.p1-hud:focus-visible { outline: 1px solid var(--gold-soft); outline-offset: 6px; }
 
         /* --- MODAL SYSTEM --- */
         .trilogy-modal { display: none; position: fixed; inset: 0; background: rgba(13,4,24,0.98); -webkit-backdrop-filter: blur(50px); backdrop-filter: blur(50px); z-index: 5000000; opacity: 0; transition: opacity .45s ease; flex-direction: row; touch-action: pan-y; -webkit-user-select: text; user-select: text; }
@@ -96,6 +107,7 @@
             .hud-tl { top: calc(20px + env(safe-area-inset-top)); left: 20px; }
             .hud-bl { bottom: calc(22px + env(safe-area-inset-bottom)); left: 20px; }
             .hud-br { bottom: calc(22px + env(safe-area-inset-bottom)); right: 20px; }
+            .hud-tr { top: calc(20px + env(safe-area-inset-top)); right: 20px; }
 
             .trilogy-modal { flex-direction: column; -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--void); }
             .m-left { flex: 0 0 auto; height: auto; padding: calc(64px + env(safe-area-inset-top)) 16px 12px; }
@@ -128,6 +140,13 @@
             <p id="m-desc">DESCRIPTION</p>
         </div>
     </div>
+
+    <!-- Deliberately outside #p1-wrap. The wall takes a pointer capture on
+         pointerdown so a drag never loses the pointer, and a capture retargets
+         the click that follows — put this link inside the wall and it is
+         swallowed by the drag rather than followed. The HUD is fixed, so it
+         lands in the same corner either way. -->
+    <a class="p1-hud hud-tr" href="../">&larr; Back to CIRS</a>
 
     <section id="p1-wrap" tabindex="-1" aria-label="CIRS photo archive. Drag, swipe, scroll or use the arrow keys to explore; select a photograph to open it.">
         <div class="p1-hud hud-tl">CIRS_Archive v4.0</div>
