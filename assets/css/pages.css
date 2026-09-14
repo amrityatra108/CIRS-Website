@@ -1720,3 +1720,28 @@ body.has-lightbox{ overflow:hidden; }
   white-space:nowrap;
 }
 .step__aside .btn + .btn{ margin-left:6px; }
+
+/* ============================================================
+   Alumni voices — what alumni say about the school, in their
+   own words. Three short quotations, so they sit side by side
+   rather than stacking into a column of pull-quotes.
+   ============================================================ */
+.voices{
+  display:grid; gap:clamp(20px,2.6vw,32px);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  margin-top:clamp(30px,3.4vw,52px);
+}
+.voice{
+  margin:0; padding:clamp(24px,2.8vw,36px);
+  background:var(--purple-deep); color:#fff;
+  border-left:3px solid var(--gold);
+  display:flex; flex-direction:column; justify-content:space-between;
+  gap:var(--space-5);
+}
+.voice .pull{ color:#fff; margin:0; }
+.voice .pull em{ color:var(--gold-lit); font-style:italic; }
+.voice__by{
+  font-family:var(--serif); font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.18em; font-size:.95rem; color:var(--gold);
+}
