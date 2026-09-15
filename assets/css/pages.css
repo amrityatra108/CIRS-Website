@@ -525,12 +525,24 @@ body.is-locked .htab:hover{ color:var(--purple); }
 .pop.is-open{ opacity:1; visibility:visible; }
 .pop__card{
   position:relative; width:min(100%,460px);
-  background:var(--paper); color:var(--ink);
+  /* Translucent rather than solid paper, so the photograph behind it stays
+     part of the page — but only just translucent: at .93 the body text is
+     still effectively black on near-white whatever is underneath. */
+  background:rgba(250,247,248,.93); color:var(--ink);
+  -webkit-backdrop-filter:blur(30px) saturate(1.4);
+  backdrop-filter:blur(30px) saturate(1.4);
   padding:clamp(28px,4vw,44px);
-  border-top:3px solid var(--gold);
+  border-radius:22px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.55);
   box-shadow:0 30px 80px rgba(14,11,18,.5);
   transform:translateY(14px) scale(.98);
   transition:transform .34s var(--e2);
+}
+/* The gold rule that used to be a square border-top, now following the
+   curve rather than cutting across it. */
+.pop__card::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--gold);
 }
 .pop.is-open .pop__card{ transform:none; }
 .pop__close{
@@ -1744,4 +1756,136 @@ body.has-lightbox{ overflow:hidden; }
   font-family:var(--serif); font-variant-caps:all-small-caps;
   font-feature-settings:"c2sc" 1,"smcp" 1;
   letter-spacing:.18em; font-size:.95rem; color:var(--gold);
+}
+
+/* ============================================================
+   About CIRS — the editorial scroll
+   ------------------------------------------------------------
+   The page used to be three walls of prose. It is now a run of
+   photographs, each carrying one line and one way in: "Know
+   more" opens a translucent panel with the detail that used to
+   sit on the page. The photograph and the line are the page;
+   everything else is a click away.
+   ============================================================ */
+.saga{
+  position:relative; isolation:isolate;
+  min-height:min(88vh,760px);
+  display:grid; align-items:end;
+  overflow:hidden;
+}
+.saga--open{ min-height:min(94vh,860px); align-items:center; }
+.saga__media{ position:absolute; inset:0; z-index:0; }
+.saga__media img{ width:100%; height:100%; object-fit:cover; display:block; }
+/* Dark at the foot where the words sit, clearing towards the top so the
+   photograph is still a photograph. */
+.saga__media::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(to top,
+    rgba(14,11,18,.92) 0%, rgba(14,11,18,.78) 26%,
+    rgba(14,11,18,.42) 58%, rgba(14,11,18,.18) 100%);
+}
+.saga--open .saga__media::after{
+  background:linear-gradient(to top,
+    rgba(14,11,18,.88) 0%, rgba(14,11,18,.72) 34%,
+    rgba(14,11,18,.58) 70%, rgba(14,11,18,.48) 100%);
+}
+.saga__inner{
+  position:relative; z-index:1;
+  padding-block:clamp(48px,7vw,104px);
+  max-width:1040px;
+}
+.saga__eyebrow{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.22em; font-size:1rem; color:var(--gold);
+  margin:0 0 var(--space-4);
+}
+.saga__line{
+  margin:0; color:#fff;
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(2rem,5.2vw,4.1rem); line-height:1.06;
+  letter-spacing:-.015em; text-wrap:balance;
+  max-width:19ch;
+}
+.saga__line em{ font-style:italic; color:var(--gold-lit); }
+.saga--open .saga__line{ font-size:clamp(2.2rem,6vw,4.9rem); max-width:22ch; }
+.saga__by{
+  margin:var(--space-5) 0 0; color:rgba(255,255,255,.82);
+  font-family:var(--serif); font-style:italic; font-size:var(--fs-lead);
+}
+.saga__more{
+  display:inline-flex; align-items:center; gap:10px;
+  margin-top:clamp(24px,3vw,38px);
+  font-family:var(--sans); font-size:var(--fs-sm); font-weight:600;
+  letter-spacing:.06em; color:#fff;
+  padding:12px 22px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.42);
+  background:rgba(255,255,255,.08);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  cursor:pointer; transition:background .28s var(--e), border-color .28s var(--e);
+}
+.saga__more::after{ content:"\2192"; transition:transform .28s var(--e); }
+.saga__more:hover{ background:rgba(255,255,255,.18); border-color:#fff; }
+.saga__more:hover::after{ transform:translateX(4px); }
+.saga__more:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+/* ---- the translucent detail panel ---------------------------------- */
+.panel{
+  position:fixed; inset:0; z-index:320;
+  display:grid; place-items:center;
+  padding:clamp(16px,3vw,40px);
+  background:rgba(14,11,18,.58);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  opacity:0;
+  transition:opacity .34s var(--e);
+}
+/* The closed state is the hidden attribute, not visibility. Transitioning
+   visibility means the panel is not focusable at the instant it opens, and
+   the close button silently refuses focus — which leaves a keyboard reader
+   on the button outside, tabbing through the page behind the panel. */
+.panel[hidden]{ display:none; }
+.panel.is-open{ opacity:1; }
+.panel__card{
+  position:relative; width:min(100%,660px);
+  max-height:min(86vh,760px); overflow:auto; overscroll-behavior:contain;
+  border-radius:22px;
+  /* Translucent, but far enough towards paper that the text on it stays
+     black on near-white however busy the photograph behind it is. */
+  background:rgba(250,247,248,.93);
+  -webkit-backdrop-filter:blur(30px) saturate(1.4);
+  backdrop-filter:blur(30px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 40px 90px rgba(14,11,18,.55);
+  padding:clamp(30px,4vw,52px);
+  transform:translateY(16px) scale(.985);
+  transition:transform .38s var(--e2);
+}
+.panel.is-open .panel__card{ transform:none; }
+.panel__label{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.18em; font-size:1rem; color:var(--maroon);
+  margin:0 0 var(--space-3);
+}
+.panel__card h2{
+  font-family:var(--serif); font-weight:500; color:var(--purple);
+  font-size:clamp(1.5rem,2.8vw,2.2rem); line-height:1.12;
+  margin:0 0 var(--space-4);
+}
+.panel__card h2 em{ font-style:italic; }
+.panel__card .copy{ color:var(--ink-soft); }
+.panel__card .copy + .copy{ margin-top:var(--space-4); }
+.panel__card .pull{ color:var(--purple); margin:0 0 var(--space-4); }
+.panel__close{
+  position:absolute; top:12px; right:12px;
+  width:40px; height:40px; display:grid; place-items:center;
+  color:var(--ink-mute); border-radius:50%; border:0; cursor:pointer;
+  background:rgba(255,255,255,.6);
+  transition:background .2s var(--e), color .2s var(--e);
+}
+.panel__close:hover{ background:#fff; color:var(--purple); }
+.panel__close:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+@media (prefers-reduced-motion: reduce){
+  .panel, .panel__card, .saga__more, .saga__more::after{ transition:none; }
 }
