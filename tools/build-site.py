@@ -75,6 +75,23 @@ NEWS_FLASH = [
 ]
 
 
+
+# The menu. PAGES says what a page IS; this says where it sits and in what
+# order, so a page can exist and be linked without being listed — Home, which
+# the wordmark already leads to, Important Documents, which School Information
+# and the footer link to, and Academics, whose two curriculum cards are linked
+# from Our Results and the footer while Our Results waits for the results
+# themselves.
+MENU = [
+    ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
+    ("Student Life",         ["student-life", "curriculum", "our-results", "sports",
+                              "our-laurels", "math-challenge"]),
+    ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
+    ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
+                              "cultural-gallery"]),
+    ("Connect",              ["school-info", "news", "admissions", "parent-portal", "alumni"]),
+]
+
 def newsflash_html():
     """The cycling headline reel under the News hero's buttons.
 
@@ -109,7 +126,6 @@ def newsflash_html():
 PAGES = {
     "index": {
         "nav": "Home",
-        "group": None,
         "title": "Chinmaya International Residential School — Siruvani, Coimbatore",
         "description": "A co-educational residential school on a hundred acres in the Siruvani "
                        "foothills — CBSE and the International Baccalaureate, Grades V to XII.",
@@ -117,7 +133,6 @@ PAGES = {
     },
     "news": {
         "nav": "News",
-        "group": "News",
         "title": "News",
         "description": "News and events from Chinmaya International Residential School — "
                        "assemblies, weeks, competitions and the term's diary.",
@@ -133,8 +148,7 @@ PAGES = {
         "hero_extra": newsflash_html(),
     },
     "founder": {
-        "nav": "Our Founder",
-        "group": "About CIRS",
+        "nav": "Founder",
         "title": "Our Founder — Pujya Gurudev Swami Chinmayananda",
         "description": "Pujya Gurudev Swami Chinmayananda, 1916–1993: the teacher whose "
                        "vision of an education that transforms rather than informs became "
@@ -147,7 +161,6 @@ PAGES = {
     },
     "why-cirs": {
         "nav": "Why CIRS",
-        "group": "About CIRS",
         "title": "Why CIRS",
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
                        "Schools that carry it.",
@@ -157,7 +170,6 @@ PAGES = {
     },
     "school-history": {
         "nav": "School History",
-        "group": "About CIRS",
         "title": "School History",
         "description": "How Chinmaya International Residential School came to be — Pujya Gurudev's "
                        "vision, the rupee-by-rupee purchase of the land, and the inauguration on "
@@ -166,17 +178,8 @@ PAGES = {
                    "A vision carried from the 1970s to a hundred acres in the Siruvani foothills, "
                    "and the ninety-six students who began it."),
     },
-    "our-leaders-speak": {
-        "nav": "Our Leaders Speak",
-        "group": "About CIRS",
-        "title": "Our Leaders Speak",
-        "description": "A message from the Principal of Chinmaya International Residential School.",
-        "banner": ("Our leaders speak", "In Their <em>Own Words.</em>",
-                   "A message from the Principal."),
-    },
-    "our-leadership": {
-        "nav": "Our Leadership",
-        "group": "About CIRS",
+    "leadership": {
+        "nav": "Leadership",
         "title": "Our Leadership",
         "description": "The Board of Directors of Chinmaya International Residential School, and "
                        "the staff and faculty.",
@@ -186,7 +189,6 @@ PAGES = {
     },
     "school-info": {
         "nav": "School Information",
-        "group": "About CIRS",
         "title": "School Information",
         "description": "Affiliation status, governance, infrastructure and grievance-redressal details for "
                        "Chinmaya International Residential School, with the Important Documents portal.",
@@ -201,7 +203,6 @@ PAGES = {
         # Reached only by the one-click portal button on School Information —
         # a second main-menu entry for the same material would be clutter the
         # task never asked for.
-        "group": None,
         "title": "Important Documents",
         "description": "The Important Documents portal for Chinmaya International Residential School — "
                        "CBSE affiliation, statutory certificates, results, circulars and other official "
@@ -211,19 +212,18 @@ PAGES = {
                    "Each opens in your browser's own PDF viewer, where it can be read or downloaded with "
                    "the browser's standard controls."),
     },
-    "academics": {
-        "nav": "Academics",
-        "group": "Academics",
-        "title": "Academics",
+    "curriculum": {
+        "nav": "Curriculum",
+        "title": "Curriculum",
         "description": "Two curricula under one roof — CBSE from Grade V, and the International "
                        "Baccalaureate Diploma in Grades XI and XII.",
-        "banner": ("Academics", "Two Curricula, <em>One Campus.</em>",
+        "banner": ("Curriculum", "Two Curricula, <em>One Campus.</em>",
                    "CBSE from Grade V, and the International Baccalaureate Diploma in the final "
                    "two years."),
+        "jump": True,
     },
     "student-life": {
         "nav": "Student Life",
-        "group": "Student Life",
         "title": "Student Life",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
                        "hundred-acre campus it happens on.",
@@ -232,18 +232,16 @@ PAGES = {
                    "of it happens on."),
     },
     "sports": {
-        "nav": "Sports",
-        "group": "Student Life",
+        "nav": "Our Sports",
         "title": "Sports",
         "description": "Athletics, the playing fields and the sporting record at CIRS.",
         "banner": ("Sports", "Sport, Every Day <em>at Four.</em>",
                    "The four o'clock hour, the fields it happens on, and what the teams have won."),
     },
     "crossroads": {
-        "nav": "Crossroads Magazine",
+        "nav": "Crossroads",
         # The old site filed this under a "Creative Corner" this site does not
         # have; Student Life is where the arts and the clubs live here.
-        "group": "Student Life",
         "title": "Crossroads | CIRS Monthly Magazine",
         "description": "The archive of Crossroads, the monthly magazine of Chinmaya "
                        "International Residential School — a student-run initiative to foster "
@@ -254,7 +252,6 @@ PAGES = {
     },
     "blog": {
         "nav": "CIRS Blog",
-        "group": "Student Life",
         "title": "CIRS Blog",
         "description": "Stories, ideas and perspectives from the CIRS community — student "
                        "writing managed by the Crossroads Editorial Board and the CIRS "
@@ -265,9 +262,8 @@ PAGES = {
         "banner": None,
         "sheet": "blog",
     },
-    "arts": {
-        "nav": "Arts, Music & Theatre",
-        "group": "Student Life",
+    "cultural-gallery": {
+        "nav": "CIRS Cultural Gallery",
         "title": "Arts, Music & Theatre",
         "description": "Music, theatre and the visual arts at Chinmaya International Residential "
                        "School, as a wall of the school's photographs.",
@@ -278,9 +274,128 @@ PAGES = {
         # all fold. See "wall" in build() below.
         "wall": True,
     },
+    # ---- pages in preparation -------------------------------------------
+    # Each is a real page with a real banner and a plain account of what will
+    # live on it, rather than a blank route. "soon" is what the body is built
+    # from; see soon_html below.
+    "our-results": {
+        "nav": "Our Results",
+        "title": "Our Results",
+        "description": "Board results, university placements and the record behind them at "
+                       "Chinmaya International Residential School.",
+        "banner": ("Our results", "What the Years <em>Add Up To.</em>",
+                   "Board results, university placements, and the record behind them."),
+        "soon": ([("Class X, CBSE", "Results by year, with subject averages and distinctions"),
+                  ("Class XII, CBSE", "Results by year, across all three streams"),
+                  ("The IB Diploma", "Points, subject grades and the Diploma pass rate"),
+                  ("University placements", "Where the year group went, and on what")],
+                 "the board results by year, the subject averages and the distinctions, "
+                 "to be supplied by the examinations office",
+                 [("curriculum.html", "The curriculum"), ("alumni.html", "Where the Diploma takes them")]),
+    },
+    "our-laurels": {
+        "nav": "Our Laurels",
+        "title": "Our Laurels",
+        "description": "Competitions won, representative honours and the CIRS students who "
+                       "carried them.",
+        "banner": ("Our laurels", "Honours, <em>Named.</em>",
+                   "Competitions won, representative honours, and the students who carried them."),
+        "soon": ([("Inter-school", "Competition names, years and placings"),
+                  ("District and state", "Selections and results"),
+                  ("National", "Representative honours and participation"),
+                  ("Inter-house", "The house championship and its holders")],
+                 "competition names, years, placings and the students involved, to be supplied "
+                 "by the sports office and the activities office",
+                 [("sports.html", "Our Sports")]),
+    },
+    "math-challenge": {
+        "nav": "Math Challenge",
+        "title": "Math Challenge",
+        "description": "The mathematics challenge at Chinmaya International Residential School.",
+        "banner": ("Math Challenge", "A Problem, <em>and Time to Think.</em>",
+                   "The school\u2019s mathematics challenge \u2014 what it is, who runs it, and how to take part."),
+        "soon": ([("What it is", "The format, and what a round looks like"),
+                  ("Who may enter", "Year groups, and whether entry is by team or alone"),
+                  ("How it runs", "The calendar through the school year"),
+                  ("Past problems", "The archive, and the solutions")],
+                 "the format, the calendar, the people who run it and the past problems, "
+                 "to be supplied by the mathematics department",
+                 []),
+    },
+    "creative-writing": {
+        "nav": "Creative Writing",
+        "title": "Creative Writing",
+        "description": "Poetry, fiction and essays by students of Chinmaya International "
+                       "Residential School.",
+        "banner": ("Creative writing", "Work <em>in Progress.</em>",
+                   "Poetry, fiction and essays, written by CIRS students."),
+        "soon": ([("Poetry", "Published as it is written"),
+                  ("Fiction", "Short stories and longer work in parts"),
+                  ("Essays", "Argument, criticism and the personal essay"),
+                  ("Submissions", "How to send work to the editorial board")],
+                 "the first pieces, and the submission address, to be supplied by the "
+                 "Crossroads Editorial Board",
+                 [("blog.html", "CIRS Blog"), ("crossroads.html", "Crossroads")]),
+    },
+    "captures": {
+        "nav": "CIRS Captures",
+        "title": "CIRS Captures",
+        "description": "Photography from the CIRS community \u2014 the campus and the school year "
+                       "as its students see it.",
+        "banner": ("CIRS Captures", "The Campus, <em>Through Their Lenses.</em>",
+                   "Photography by the students, staff and alumni who are here to see it."),
+        "soon": ([("Student photography", "Work by the photography hobby group and anyone else"),
+                  ("The year, in frames", "The campus through its seasons"),
+                  ("How to submit", "What to send, and to whom")],
+                 "the first set of photographs and their photographers, to be supplied by the "
+                 "CIRS Social Media Team",
+                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
+    },
+    "art-attack": {
+        "nav": "CIRS Art Attack",
+        "title": "CIRS Art Attack",
+        "description": "Studio work and visual art from across Chinmaya International "
+                       "Residential School.",
+        "banner": ("CIRS Art Attack", "Made <em>by Hand.</em>",
+                   "Studio work and visual art from across the school."),
+        "soon": ([("Painting and drawing", "Work from the studio and the classroom"),
+                  ("Print and craft", "The processes, and what comes out of them"),
+                  ("Exhibitions", "What was shown, and when")],
+                 "the work to be shown here and the students who made it, to be supplied by "
+                 "the art department",
+                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
+    },
+    "festivals": {
+        "nav": "CIRS Festivals",
+        "title": "CIRS Festivals",
+        "description": "The festivals kept through the year at Chinmaya International "
+                       "Residential School.",
+        "banner": ("CIRS Festivals", "The Year, <em>Kept Together.</em>",
+                   "The festivals the school keeps, and what they look like on this campus."),
+        "soon": ([("Through the year", "Each festival as the school keeps it"),
+                  ("Photographs", "From the mornings and the evenings of each one"),
+                  ("Accounts", "Written by the students who took part")],
+                 "the list of festivals as the school keeps them, with dates and photographs, "
+                 "to be supplied by the school",
+                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
+    },
+    "theatre": {
+        "nav": "CIRS Theatre",
+        "title": "CIRS Theatre",
+        "description": "Productions, rehearsal and the stage at Chinmaya International "
+                       "Residential School.",
+        "banner": ("CIRS Theatre", "Rehearsal, <em>and the Night Itself.</em>",
+                   "Productions, the work behind them, and the stage they are made for."),
+        "soon": ([("Productions", "What was staged, and who was in it"),
+                  ("Rehearsal", "The weeks nobody sees"),
+                  ("The stage", "The auditorium, and what it can carry")],
+                 "the productions, their casts and their photographs, to be supplied by the "
+                 "drama department",
+                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
+    },
+
     "admissions": {
         "nav": "Admissions",
-        "group": "Admissions",
         "title": "Admissions",
         "description": "How to apply to Chinmaya International Residential School — registration "
                        "for 2027–2028, the entrance examination, visiting, and fees.",
@@ -305,7 +420,6 @@ PAGES = {
         # already attached to the school rather than pages about it. It is
         # removed from the drawer's utility strip at the same time, so the
         # drawer does not offer the same link twice.
-        "group": "Admissions",
         "title": "Parent Portal",
         "description": "The CIRS Parent Portal is not open yet. How to reach the school in the "
                        "meantime.",
@@ -318,7 +432,6 @@ PAGES = {
     },
     "alumni": {
         "nav": "Alumni",
-        "group": "Admissions",
         "title": "Alumni",
         "description": "Where CIRS students go after school — universities in India and abroad.",
         "banner": ("After CIRS", "Where They <em>Go Next.</em>",
@@ -329,12 +442,11 @@ PAGES = {
 # Which page each of the old single-page section anchors now lives on.
 SECTION_PAGE = {
     "about": "why-cirs", "junior": "why-cirs", "senior": "why-cirs",
-    "quote": "our-leaders-speak",
-    "people": "our-leadership",
-    "academics": "academics",
+    "quote": "leadership", "people": "leadership",
+    "academics": "curriculum",
     "life": "student-life", "day": "student-life", "campus": "student-life",
     "athletics": "sports", "fields": "sports", "achievements": "sports",
-    "arts": "arts",
+    "arts": "cultural-gallery",
     "pathways": "alumni",
     "latest": "news", "diary": "news",
     "admissions": "admissions", "apply": "admissions", "examination": "admissions",
@@ -377,24 +489,59 @@ def rewrite_links(html, slug):
 
 
 def nav_html(slug):
-    groups = {}
-    for s, p in PAGES.items():
-        if p["group"]:
-            groups.setdefault(p["group"], []).append((s, p))
+    """The drawer's grid: one column per primary category, every child clickable.
+
+    The categories are headings rather than links — there is no page behind
+    "Art, Culture & Music", only the five pages under it — so they are marked
+    up as headings and the list beneath each is labelled by it. That is what
+    lets a screen reader announce "Art, Culture & Music, list, five items"
+    instead of reading twenty-two links with no structure.
+    """
     out = ['<nav class="drawer__grid" aria-label="All pages">']
-    for group, items in groups.items():
+    for group, slugs in MENU:
         gid = "dnav-" + re.sub(r"[^a-z]+", "-", group.lower()).strip("-")
         out.append("    <div>")
         out.append(f'      <p class="sc" id="{gid}">{group}</p>')
         out.append(f'      <ul aria-labelledby="{gid}">')
-        for s, p in items:
-            here = ' aria-current="page"' if s == slug else ""
-            out.append(f'        <li><a href="{s}.html"{here}>{p["nav"]}</a></li>')
+        for sl in slugs:
+            page = PAGES[sl]
+            here = ' aria-current="page"' if sl == slug else ""
+            out.append(f'        <li><a href="{sl}.html"{here}>{page["nav"]}</a></li>')
         out.append("      </ul>")
         out.append("    </div>")
     out.append("  </nav>")
     return "\n".join(out)
 
+
+def soon_html(page):
+    """The body of a page that exists but is not written yet.
+
+    A blank route tells a visitor nothing and looks broken. This says what the
+    page is for, lists what will be on it, names who it is waiting on, and
+    points at the nearest page that is finished — so the menu can carry the new
+    structure now without any of it dead-ending.
+    """
+    rows, ask, links = page["soon"]
+    rail = "\n".join(f"      <div><dt>{t}</dt><dd>{d}</dd></div>" for t, d in rows)
+    onward = ""
+    if links:
+        buttons = "\n".join(
+            f'      <a class="btn btn--ghost" href="{href}">{label}</a>' for href, label in links)
+        onward = ('\n\n    <div class="soon__onward rv">\n' + buttons + "\n    </div>")
+    return (
+        '<section class="section" id="what">\n'
+        '  <div class="wrap">\n'
+        '    <div class="sec-head rv">\n'
+        '      <p class="marker"><span class="sc">In preparation</span></p>\n'
+        '      <h2 class="serif h2" data-split>What will be <em>on this page.</em></h2>\n'
+        '    </div>\n\n'
+        '    <dl class="factrail rv">\n'
+        f'{rail}\n'
+        '    </dl>\n\n'
+        '    <p class="note rv" style="margin-top:24px"><em>[Placeholder &mdash; '
+        f'{ask}.]</em></p>{onward}\n'
+        '  </div>\n'
+        '</section>')
 
 def banner_html(page):
     eyebrow, heading, lead = page["banner"]
@@ -776,7 +923,8 @@ def build(slug, page):
         parts.append(hero_html(page))
     elif page.get("banner"):
         parts.append(banner_html(page))
-    content = read(f"tools/pages/{slug}.html").rstrip("\n")
+    content = (soon_html(page) if page.get("soon")
+               else read(f"tools/pages/{slug}.html").rstrip("\n"))
     content = expand_figs(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))

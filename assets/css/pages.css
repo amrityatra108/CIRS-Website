@@ -1889,3 +1889,13 @@ body.has-lightbox{ overflow:hidden; }
 @media (prefers-reduced-motion: reduce){
   .panel, .panel__card, .saga__more, .saga__more::after{ transition:none; }
 }
+
+/* A page in preparation ends with the way onward — the finished pages nearest
+   to it — so the new menu structure can be carried before every page under it
+   is written, without any of it dead-ending. */
+.soon__onward{
+  display:flex; flex-wrap:wrap; gap:12px;
+  margin-top:clamp(22px,3vw,32px);
+  padding-top:clamp(20px,2.6vw,28px);
+  border-top:1px solid var(--rule);
+}

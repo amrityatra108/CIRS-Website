@@ -16,7 +16,7 @@ against the WCAG AA floors (4.5:1 for body text, 3:1 for large text).
     python3 tools/check-contrast.py news.html         # any page with a .pagehero
     python3 tools/check-contrast.py crossroads.html   # the drifting cover wall
     python3 tools/check-contrast.py founder.html      # the Founder banner
-    python3 tools/check-contrast.py arts.html         # the fold over the photograph wall
+    python3 tools/check-contrast.py cultural-gallery.html   # the fold over the photograph wall
     python3 tools/check-contrast.py why-cirs.html     # the lines over the About photographs
 
 Admissions and News are a .pagehero over a looping video and are seeked
