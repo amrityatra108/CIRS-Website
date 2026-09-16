@@ -6,26 +6,31 @@ Everything in this zip is static. No build step, no server-side code, no databas
 
 ```
 index.html                 the home page
-news.html                  the other ten pages, one file each
-why-cirs.html
-our-leaders-speak.html
-our-leadership.html
-academics.html
-student-life.html
-sports.html
-arts.html
-admissions.html
-alumni.html
-assets/js/pages.js         behaviour only a multi-page site needs
+                           and twenty-four more, one file each, in the five menu groups:
+  Vision                   founder · why-cirs · school-history · leadership
+  Student Life             student-life · curriculum · our-results · sports ·
+                           our-laurels · math-challenge
+  Literary Excellence      crossroads · blog · creative-writing
+  Art, Culture & Music     captures · art-attack · festivals · theatre · cultural-gallery
+  Connect                  school-info · news · admissions · parent-portal · alumni
+important-documents.html   linked from School Information and the footer, not from the menu
 assets/css/cirs.css        the design system, imported from the artifact
 assets/css/pages.css       the components only a multi-page site needs
+assets/css/founder.css     per-page sheets, each scoped to a body class and loaded
+assets/css/artswall.css    only by the page that declares it
+assets/css/blog.css
 assets/js/cirs.js          interaction layer
+assets/js/pages.js         behaviour only a multi-page site needs
+assets/js/artswall.js      the Cultural Gallery photograph wall
 assets/img/                the emblem, photography, favicon, social card
 assets/video/              the hero background loop
+assets/source/             unedited camera originals; never deployed
 docs/design-system.html    the design specification
 tools/                     the scripts that generate every page (see below)
+tools/make-photos.py       cuts every site photograph from assets/source/
 tools/make-header.py       composes the Admissions banner photograph
 tools/check-contrast.py    measures banner text against the pixels behind it
+tools/stage-deploy.py      copies only the assets a page references, into _site/
 .github/workflows/ci.yml   the checks that run on every push and pull request
 ```
 
@@ -36,14 +41,20 @@ instead, then run `python3 tools/build-site.py`:
 ```
 tools/pages/<slug>.html     the sections unique to that page
 tools/partials/             the header, menu, footer and chrome every page shares
-tools/build-site.py         the page list: titles, menu labels, banner copy
+tools/build-site.py         PAGES: titles, menu labels, banner copy, what each page is
+                            MENU:  which pages are in the menu, in which group, in what order
 ```
 
-The site was one long page until the menu became redundant. It is now ten, which means
-the header, menu and footer appear ten times — and a menu that has to be edited in ten
-files is a menu that goes stale in nine of them. Hence the partials, and hence the
-menu being generated from the page list in `tools/build-site.py`: add a page there and
-it appears in the menu of all ten at once.
+The site was one long page until the menu became redundant. It is now twenty-five, which
+means the header, menu and footer appear twenty-five times — and a menu that has to be
+edited in twenty-five files is a menu that goes stale in twenty-four of them. Hence the
+partials, and hence the menu being generated from `MENU` in `tools/build-site.py`: add a
+slug to a group there and it appears in the menu of all twenty-five at once.
+
+`PAGES` and `MENU` are deliberately separate. `PAGES` says what a page *is* — its title,
+its banner, whether it carries a hero, its own stylesheet or an in-preparation note.
+`MENU` says only where it sits in the navigation. A page can therefore exist and be
+linked to without being in the menu, which is what `important-documents.html` does.
 
 ## The checks
 
@@ -56,11 +67,11 @@ python3 tools/build-site.py       # then: git diff --quiet -- '*.html'
 ```
 
 The last one is the important one. Editing a generated page by hand looks like it
-works and is silently undone by the next build — and the menu, which is on all ten
-pages, is exactly what someone would be tempted to fix in one file. So CI rebuilds and
-fails if the committed pages differ.
+works and is silently undone by the next build — and the menu, which is on every one of
+the twenty-five pages, is exactly what someone would be tempted to fix in one file. So CI
+rebuilds and fails if the committed pages differ.
 
-The link check never touches the network. Since the site became ten pages the menu *is*
+The link check never touches the network. Since the site became many pages the menu *is*
 the navigation, so it verifies that `page.html#anchor` links point at a page that
 exists **and** an anchor that exists on it — the failure a single-page checker cannot
 see. External URLs are left alone: a check that goes red because a CDN had a bad
@@ -118,7 +129,7 @@ The sync takes the design system and the media — `assets/css/cirs.css`,
 to `tools/artifact-reference.html`, which is neither served nor built. When the
 artifact gains a section, diff it against that reference file, move the new markup into
 the right `tools/pages/*.html`, and rebuild. That hand step is deliberate: only a
-person can say which of ten pages a new section belongs on.
+person can say which page a new section belongs on.
 
 Each embedded photograph is named from `tools/media.tsv`, keyed by the md5 of its
 bytes, so a photograph keeps its filename across artifact versions. A digest the table
@@ -132,16 +143,17 @@ than an attribute should be fixed in the design, not patched on the way out of i
 
 ## Hosting
 
-The site is moving from Netlify to **Vercel**. Until the Vercel deploy is confirmed live,
-both configurations are kept and **must be changed together** — a build command that drifts
-between two hosts is discovered only when one of them breaks.
+The site is moving from Netlify to **Vercel**, and is live there at
+<https://cirs-website.vercel.app>, deploying on every push to `main`. Until Netlify is
+retired the two configurations are both kept and **must be changed together** — a build
+command that drifts between two hosts is discovered only when one of them breaks.
 
-Neither host publishes the repository root. The root holds the eleven generated pages next to
-the scripts that generate them, so publishing it would ship `tools/`, `.github/`,
+Neither host publishes the repository root. The root holds the twenty-five generated pages
+next to the scripts that generate them, so publishing it would ship `tools/`, `.github/`,
 `node_modules` and the 150 MB of camera originals in `assets/source/`. Both hosts run:
 
 ```sh
-python3 tools/build-site.py     # the eleven pages
+python3 tools/build-site.py     # the twenty-five pages
 python3 tools/stage-deploy.py   # only what a page references, into _site/
 ```
 
@@ -163,10 +175,10 @@ To deploy it the first time, either:
 
 Two things to watch on the first deploy:
 
-- **The build runs Python.** Netlify's image has `python3` and runs this build today; Vercel's
-  is a different image and this has not yet run on it. If it fails on a missing interpreter,
-  either commit `_site/` (drop it from `.gitignore`) and set `"buildCommand": null`, or add a
-  `package.json` so Vercel selects a runtime that includes Python.
+- **The build runs Python.** Both images have `python3` and both run this build today. If a
+  future image ever fails on a missing interpreter, either commit `_site/` (drop it from
+  `.gitignore`) and set `"buildCommand": null`, or add a `package.json` so Vercel selects a
+  runtime that includes Python.
 - **`_headers` is Netlify's file** and the staging script still writes it into `_site/`. On
   Vercel it is inert — harmless, but `vercel.json` is what sets the headers there.
 
@@ -268,7 +280,7 @@ step with the site in silence, which is exactly the failure that check exists to
 - **The header animation for the Admissions banner** — a photograph or a short looping video. The
   banner currently renders a labelled placeholder rather than a stand-in picture, deliberately: a
   temporary photograph on an admissions banner is the kind of thing that quietly ships.
-- **Board of Directors introductions** for the Our People section. All eight roles are named and
+- **Board of Directors introductions** for the Our People section on `leadership.html`. All eight roles are named and
   correct; every biography is a bracketed `[A short introduction to … to be supplied by the
   school.]` placeholder. Five of the eight also need a photograph — Swami Swaroopananda, Shri. Viju
   Mahtaney, Shri Jadgish Moorjani, Shri. Siddharth Balachandran and Shri. Ram Buxani currently
@@ -276,9 +288,10 @@ step with the site in silence, which is exactly the failure that check exists to
 - **A caption for the staff and faculty photograph** — occasion, date and names.
 - **The Why CIRS photo is live** — `assets/img/why-cirs.jpg`, cropped from a supplied photo of three
   students to a 4:5 portrait, faces centred.
-- **Photography for five sections that currently render as a labelled placeholder tile** instead of
-  a photograph: Junior School, Senior School, Residential Life, Athletics, and Arts/Music/Theatre.
-  Search the page for `feature__ph` to find each one.
+- **Photography for the sections that still render as a labelled placeholder tile** instead of
+  a photograph. Search the built pages for `feature__ph` to find each one. Six sports
+  facilities, the classrooms and the laboratories are waiting on a large enough export of the
+  school's own photographs.
 - **Junior School and Senior School programme detail** — enrolment numbers, leadership names,
   specific outcomes — to replace the two `[Placeholder — …]` paragraphs in those sections.
 - **Athletics and Arts specifics** — team names, fixtures, ensembles, and production dates — to
