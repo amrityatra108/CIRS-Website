@@ -54,7 +54,7 @@ PHOTOS = [
     # is actually about rather than for being another picture of the campus.
     ("academic-block.jpg",      "academic-block.JPG",     (1400,  325), (0.50, 0.58)),
     ("campus-lawn.jpg",         "CRS01413.JPG",           (1600,  900), (0.50, 0.55)),
-    ("amphitheatre.jpg",        "IMG_2449.JPG",           (1600,  900), (0.50, 0.50)),
+    ("film-audience.jpg",       "IMG_3217.JPG",           (1600,  900), (0.50, 0.52)),
     ("vision.jpg",              "IMG_1663.JPG",           (1600,  900), (0.50, 0.50)),
     ("forest-air.jpg",          "CIRS.jpg",               (1600,  900), (0.50, 0.50)),
     ("fields-air.jpg",          "DJI_0856.JPG",           (1400,  640), (0.50, 0.50)),
