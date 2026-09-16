@@ -132,19 +132,6 @@ PAGES = {
                      ("What is coming up", "#diary", "ghost")],
         "hero_extra": newsflash_html(),
     },
-    "blog": {
-        "nav": "CIRS Blog",
-        "group": "News",
-        "title": "CIRS Blog",
-        "description": "Stories, ideas and perspectives from the CIRS community — student "
-                       "writing managed by the Crossroads Editorial Board and the CIRS "
-                       "Social Media Team.",
-        # No banner and no hero from the shared builders. A publication opens on
-        # its own masthead, which the page brings with it, and it brings its own
-        # sheet to set type larger than anything else on this site.
-        "banner": None,
-        "sheet": "blog",
-    },
     "founder": {
         "nav": "Our Founder",
         "group": "About CIRS",
@@ -264,6 +251,19 @@ PAGES = {
         # No flat band and no video hero: an archive opens on its own
         # masthead, built in tools/pages/crossroads.html.
         "banner": None,
+    },
+    "blog": {
+        "nav": "CIRS Blog",
+        "group": "Student Life",
+        "title": "CIRS Blog",
+        "description": "Stories, ideas and perspectives from the CIRS community — student "
+                       "writing managed by the Crossroads Editorial Board and the CIRS "
+                       "Social Media Team.",
+        # No banner and no hero from the shared builders. A publication opens on
+        # its own masthead, which the page brings with it, and it brings its own
+        # sheet to set type larger than anything else on this site.
+        "banner": None,
+        "sheet": "blog",
     },
     "arts": {
         "nav": "Arts, Music & Theatre",
