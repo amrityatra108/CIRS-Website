@@ -40,8 +40,8 @@ SLOTS = {
     "yajna": (None, "", "An early Jnana Yajna — the 1950s or 1960s"),
     "campus": ("../assembly-front.jpg",
                "The school assembled in front of the main building at CIRS", ""),
-    "students": ("../student-life.jpg",
-                 "CIRS students on campus", ""),
+    "students": ("../students.jpg",
+                 "CIRS students standing together at a school gathering", ""),
 }
 
 
