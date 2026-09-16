@@ -71,6 +71,24 @@ PHOTOS = [
     ("boarding.jpg",            "20180518_121042.jpg",    (1600,  900), (0.52, 0.50)),
     ("students.jpg",            "IMG_8075.JPG",           (1400,  640), (0.50, 0.48)),
 
+    # The Blog. Four fragments for the hero collage, cut so each one reads as
+    # a detail rather than a whole photograph, then the featured landscape and
+    # nine cards — one per desk. Nothing here is reused from another page.
+    ("blog/frag-voice.jpg",     "0C9A4095.JPG",   ( 900, 1200), (0.52, 0.42)),
+    ("blog/frag-lab.jpg",       "IMG_1790.JPG",   ( 800,  800), (0.52, 0.45)),
+    ("blog/frag-together.jpg",  "IMG_0633.JPG",   (1200,  800), (0.50, 0.45)),
+    ("blog/frag-desk.jpg",      "IMG_8830.JPG",   (1200,  800), (0.50, 0.52)),
+    ("blog/featured.jpg",       "IMG_3249.JPG",   (1600, 1000), (0.52, 0.50)),
+    ("blog/voices.jpg",         "IMG_9084.JPG",   (1000,  750), (0.42, 0.48)),
+    ("blog/campus.jpg",         "CRS09536.JPG",   (1000,  750), (0.52, 0.50)),
+    ("blog/science.jpg",        "IMG_1806.JPG",   (1000,  750), (0.45, 0.48)),
+    ("blog/arts.jpg",           "IMG_1405.JPG",   (1000,  750), (0.50, 0.55)),
+    ("blog/sport.jpg",          "IMG_0851.JPG",   (1000,  750), (0.55, 0.52)),
+    ("blog/culture.jpg",        "IMG_7712.JPG",   (1000,  750), (0.50, 0.48)),
+    ("blog/honours.jpg",        "IMG_8229.JPG",   (1000,  750), (0.55, 0.45)),
+    ("blog/reflection.jpg",     "IMG_1689.JPG",   (1000,  750), (0.45, 0.45)),
+    ("blog/service.jpg",        "IMG_2864.JPG",   (1000,  750), (0.50, 0.45)),
+
     # Sport — the inter-house basketball fixture, in the same 4:3 tile as the
     # Admissions grid so the two read as one house style. Shot vertically, so
     # the focal point is doing real work here: centred on the ball and the

@@ -29,6 +29,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import artswall
+import blog
 import founder
 import documents as docs
 import crossroads
@@ -250,6 +251,19 @@ PAGES = {
         # No flat band and no video hero: an archive opens on its own
         # masthead, built in tools/pages/crossroads.html.
         "banner": None,
+    },
+    "blog": {
+        "nav": "CIRS Blog",
+        "group": "Student Life",
+        "title": "CIRS Blog",
+        "description": "Stories, ideas and perspectives from the CIRS community — student "
+                       "writing managed by the Crossroads Editorial Board and the CIRS "
+                       "Social Media Team.",
+        # No banner and no hero from the shared builders. A publication opens on
+        # its own masthead, which the page brings with it, and it brings its own
+        # sheet to set type larger than anything else on this site.
+        "banner": None,
+        "sheet": "blog",
     },
     "arts": {
         "nav": "Arts, Music & Theatre",
@@ -770,7 +784,10 @@ def build(slug, page):
                        .replace("{{DOCPORTAL}}", docportal_html())
                        .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
-                       .replace("{{CROSSROADS_COUNT}}", str(crossroads.COUNT)))
+                       .replace("{{CROSSROADS_COUNT}}", str(crossroads.COUNT))
+                       .replace("{{BLOG_FEATURED}}", blog.featured_html())
+                       .replace("{{BLOG_FEED}}", blog.feed_html())
+                       .replace("{{BLOG_DESKS}}", str(blog.desk_count())))
     parts.append(content)
     if page.get("jump"):
         parts.append(jump_html(content))
