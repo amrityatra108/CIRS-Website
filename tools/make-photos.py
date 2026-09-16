@@ -61,6 +61,16 @@ PHOTOS = [
     ("valley.jpg",              "school-front-view.JPG",  (1400,  640), (0.50, 0.58)),
     ("assembly-front.jpg",      "IMG_20260423_091355.jpg", (1400, 640), (0.50, 0.55)),
 
+    # The second pass on repetition. hero.jpg opened both the home page and
+    # News; history-still, student-life and walkway each carried two pages,
+    # and student-life three. Each keeps the page its caption was written for
+    # and hands the others a photograph of their own subject.
+    ("news-hero.jpg",           "IMG_2327.JPG",           (1280,  720), (0.50, 0.55)),
+    ("founding.jpg",            "1.JPG",                  (1600,  900), (0.50, 0.55)),
+    ("motto.jpg",               "IMG_1686.JPG",           (1600,  900), (0.46, 0.50)),
+    ("boarding.jpg",            "20180518_121042.jpg",    (1600,  900), (0.52, 0.50)),
+    ("students.jpg",            "IMG_8075.JPG",           (1400,  640), (0.50, 0.48)),
+
     # Sport — the inter-house basketball fixture, in the same 4:3 tile as the
     # Admissions grid so the two read as one house style. Shot vertically, so
     # the focal point is doing real work here: centred on the ball and the

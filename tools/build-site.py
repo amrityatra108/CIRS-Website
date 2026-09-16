@@ -126,7 +126,7 @@ PAGES = {
         "hero": ("News from campus", "The Campus, <em>As It Happens.</em>",
                  "Results, assemblies, weeks and celebrations, reported by the departments and "
                  "the houses — and the dates already in the school calendar."),
-        "hero_media": ("hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
+        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
         "hero_cta": [("Read the latest", "#latest", "primary"),
                      ("What is coming up", "#diary", "ghost")],
         "hero_extra": newsflash_html(),
