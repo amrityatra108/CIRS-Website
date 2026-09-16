@@ -84,8 +84,8 @@ NEWS_FLASH = [
 # themselves.
 MENU = [
     ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
-    ("Student Life",         ["student-life", "our-results", "sports", "our-laurels",
-                              "math-challenge"]),
+    ("Student Life",         ["student-life", "curriculum", "our-results", "sports",
+                              "our-laurels", "math-challenge"]),
     ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
     ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
                               "cultural-gallery"]),
@@ -212,14 +212,15 @@ PAGES = {
                    "Each opens in your browser's own PDF viewer, where it can be read or downloaded with "
                    "the browser's standard controls."),
     },
-    "academics": {
-        "nav": "Academics",
-        "title": "Academics",
+    "curriculum": {
+        "nav": "Curriculum",
+        "title": "Curriculum",
         "description": "Two curricula under one roof — CBSE from Grade V, and the International "
                        "Baccalaureate Diploma in Grades XI and XII.",
-        "banner": ("Academics", "Two Curricula, <em>One Campus.</em>",
+        "banner": ("Curriculum", "Two Curricula, <em>One Campus.</em>",
                    "CBSE from Grade V, and the International Baccalaureate Diploma in the final "
                    "two years."),
+        "jump": True,
     },
     "student-life": {
         "nav": "Student Life",
@@ -290,7 +291,7 @@ PAGES = {
                   ("University placements", "Where the year group went, and on what")],
                  "the board results by year, the subject averages and the distinctions, "
                  "to be supplied by the examinations office",
-                 [("academics.html", "The two curricula"), ("alumni.html", "Where the Diploma takes them")]),
+                 [("curriculum.html", "The curriculum"), ("alumni.html", "Where the Diploma takes them")]),
     },
     "our-laurels": {
         "nav": "Our Laurels",
@@ -442,7 +443,7 @@ PAGES = {
 SECTION_PAGE = {
     "about": "why-cirs", "junior": "why-cirs", "senior": "why-cirs",
     "quote": "leadership", "people": "leadership",
-    "academics": "academics",
+    "academics": "curriculum",
     "life": "student-life", "day": "student-life", "campus": "student-life",
     "athletics": "sports", "fields": "sports", "achievements": "sports",
     "arts": "cultural-gallery",
