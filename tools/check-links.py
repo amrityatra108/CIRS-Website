@@ -12,6 +12,8 @@ between pages is a dead end with nothing to catch it. This therefore checks:
   * every href="page.html#anchor" — that the page exists AND that the anchor
     exists on that page, which is the failure a single-page checker misses
   * every same-page href="#id" points at an element on that page
+  * every href="#" — there is no longer anywhere on the site such a link is
+    meant to be, so one appearing again is a dead link, not a placeholder
   * every assets/... reference exists on disk, at the exact case used
   * every file in assets/img and assets/video is referenced by some page
   * external references are absolute https:// URLs
@@ -24,11 +26,6 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# href="#" is the site's own placeholder for a page that does not exist yet —
-# the drawer and footer still carry a few. They are intentional, not broken.
-PLACEHOLDER = "#"
-
 
 def pages():
     return sorted(f for f in os.listdir(ROOT) if f.endswith(".html"))
@@ -46,8 +43,15 @@ def main():
         checked += len(refs)
 
         for ref in refs:
-            if ref.startswith("#"):
-                if ref != PLACEHOLDER and ref[1:] not in ids[name]:
+            if ref == "#":
+                # This used to be allowed: the footer and drawer carried a
+                # handful as placeholders for pages nobody had built. They
+                # have all since been pointed at real pages or removed, so
+                # the allowance now only hides the next dead link.
+                problems.append(f'{name}: href="#" — goes nowhere; link it or remove it')
+
+            elif ref.startswith("#"):
+                if ref[1:] not in ids[name]:
                     problems.append(f'{name}: href="{ref}" — no element with that id on this page')
 
             elif ref.startswith("http://"):
