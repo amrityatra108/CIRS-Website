@@ -15,6 +15,7 @@ against the WCAG AA floors (4.5:1 for body text, 3:1 for large text).
     python3 tools/check-contrast.py                   # Admissions, the default
     python3 tools/check-contrast.py news.html         # any page with a .pagehero
     python3 tools/check-contrast.py crossroads.html   # the drifting cover wall
+    python3 tools/check-contrast.py founder.html      # the Founder banner
     python3 tools/check-contrast.py arts.html         # the fold over the photograph wall
     python3 tools/check-contrast.py why-cirs.html     # the lines over the About photographs
 
@@ -55,7 +56,7 @@ const { chromium } = require('playwright-core');
   const drifting = await p.evaluate(() => !!document.querySelector('.crwall, #p1-stage'));
   const boxes = await p.evaluate(() => {
     const out = [];
-    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll, .p1-hero__eyebrow, .p1-hero-text, .p1-hero__cue, .p1-hud, .saga__eyebrow, .saga__line, .saga__by, .saga__more').forEach(el => {
+    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll, .fhero .fmeta, .fhero__name, .fhero__dates, .fhero__say, .fhero__sig, .fhero__cue, .p1-hero__eyebrow, .p1-hero-text, .p1-hero__cue, .p1-hud, .saga__eyebrow, .saga__line, .saga__by, .saga__more').forEach(el => {
       const r = el.getBoundingClientRect();
       if (r.width < 4 || r.height < 4) return;
       const cs = getComputedStyle(el);

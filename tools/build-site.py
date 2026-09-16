@@ -29,6 +29,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import artswall
+import founder
 import documents as docs
 import crossroads
 
@@ -129,6 +130,19 @@ PAGES = {
         "hero_cta": [("Read the latest", "#latest", "primary"),
                      ("What is coming up", "#diary", "ghost")],
         "hero_extra": newsflash_html(),
+    },
+    "founder": {
+        "nav": "Our Founder",
+        "group": "About CIRS",
+        "title": "Our Founder — Pujya Gurudev Swami Chinmayananda",
+        "description": "Pujya Gurudev Swami Chinmayananda, 1916–1993: the teacher whose "
+                       "vision of an education that transforms rather than informs became "
+                       "Chinmaya International Residential School.",
+        # No banner and no hero from the shared builders. This page opens on a
+        # composition of its own — oversized letters with the archival
+        # photograph set into them — and brings its own sheet to do it.
+        "banner": None,
+        "sheet": "founder",
     },
     "why-cirs": {
         "nav": "Why CIRS",
@@ -493,6 +507,34 @@ POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
 </div>'''
 
 
+def founder_fig(slot, cls="", sizes=""):
+    """One photograph on the Founder page, or an honest gap where one is owed.
+
+    The gap is not a grey box: it names the photograph that belongs there, so
+    the page reads as an archive still being gathered rather than as something
+    broken. tools/founder.py decides which of the two this is.
+    """
+    _, alt, label = founder.SLOTS[slot]
+    src = founder.path(slot)
+    klass = f"ffig {cls}".strip()
+    if src is None:
+        return (f'<figure class="{klass} ffig--gap" role="img" aria-label="{label}">'
+                f'<span class="ffig__mark">Photograph wanted</span>'
+                f'<span class="ffig__what">{label}</span></figure>')
+    extra = f' sizes="{sizes}"' if sizes else ""
+    return (f'<figure class="{klass}"><img src="{src}?{CACHE_BUST}" alt="{alt}" '
+            f'loading="lazy" decoding="async"{extra}></figure>')
+
+
+def expand_figs(html):
+    """Turn every {{FIG:slot}} and {{FIG:slot|class}} into a figure."""
+    def swap(m):
+        body = m.group(1)
+        slot, _, cls = body.partition("|")
+        return founder_fig(slot.strip(), cls.strip())
+    return re.sub(r"\{\{FIG:([^}]+)\}\}", swap, html)
+
+
 def crossroads_html():
     """The archive wall: every edition of Crossroads, newest first.
 
@@ -697,12 +739,17 @@ def build(slug, page):
     # note — both of which live below a fold this page does not have. The body
     # class is what scopes artswall.css away from every other page.
     wall = page.get("wall")
-    if wall:
+    # A page may bring one sheet of its own, scoped away from every other page
+    # by a body class of the same name: artswall.css under body.wall, and
+    # founder.css under body.founder.
+    sheet = "artswall" if wall else page.get("sheet")
+    if sheet:
         head = head.replace(
             "</head>",
-            f'<link rel="stylesheet" href="assets/css/artswall.css?{CACHE_BUST}">\n</head>')
+            f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
-    parts = [head, '<body class="wall">' if wall else "<body>",
+    body_class = "wall" if wall else page.get("sheet")
+    parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              read("tools/partials/chrome.html").rstrip("\n")]
     drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
     # The home page needs no Home tab — the wordmark already leads here, and a
@@ -716,6 +763,7 @@ def build(slug, page):
     elif page.get("banner"):
         parts.append(banner_html(page))
     content = read(f"tools/pages/{slug}.html").rstrip("\n")
+    content = expand_figs(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
                        .replace("{{DOCLIST}}", doclist_html())
