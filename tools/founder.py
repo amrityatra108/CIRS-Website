@@ -38,8 +38,8 @@ SLOTS = {
     "young": (None, "", "Balakrishna Menon before sannyasa — 1930s or 1940s"),
     "uttarkashi": (None, "", "The Uttarkashi years, under Swami Tapovan Maharaj"),
     "yajna": (None, "", "An early Jnana Yajna — the 1950s or 1960s"),
-    "campus": ("../aerial-duo.jpg",
-               "The CIRS campus in the Siruvani foothills from the air", ""),
+    "campus": ("../assembly-front.jpg",
+               "The school assembled in front of the main building at CIRS", ""),
     "students": ("../student-life.jpg",
                  "CIRS students on campus", ""),
 }
