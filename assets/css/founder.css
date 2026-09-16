@@ -264,6 +264,19 @@ body.founder main{ position:relative; z-index:1; }
 /* ============================================================
    5. Education as transformation
    ============================================================ */
+/* The section opens as a spread — the photograph carrying the argument, the
+   heading beside it — and only then breaks into the four. */
+.feduc__open{
+  display:grid; grid-template-columns:1fr;
+  gap:clamp(var(--space-6),4vw,var(--space-8));
+  margin-bottom:clamp(var(--space-8),7vw,var(--space-9));
+}
+.feduc__open .fsec__head{ margin-bottom:0; align-self:center; }
+.feduc__plate{ align-self:center; }
+@media (min-width:760px){
+  .feduc__open{ grid-template-columns:.85fr 1.15fr; }
+}
+
 .feduc__four{
   display:grid; grid-template-columns:1fr;
   gap:clamp(var(--space-6),4vw,var(--space-8));
@@ -405,7 +418,20 @@ body.founder main{ position:relative; z-index:1; }
   }
   .flife__shot{ margin-top:0; }
   .fbeyond__grid{ grid-template-columns:1fr 1fr; }
-  .feduc__four{ grid-template-columns:repeat(2,1fr); }
+  /* The section opens as a spread — the photograph carrying the argument, the
+   heading beside it — and only then breaks into the four. */
+.feduc__open{
+  display:grid; grid-template-columns:1fr;
+  gap:clamp(var(--space-6),4vw,var(--space-8));
+  margin-bottom:clamp(var(--space-8),7vw,var(--space-9));
+}
+.feduc__open .fsec__head{ margin-bottom:0; align-self:center; }
+.feduc__plate{ align-self:center; }
+@media (min-width:760px){
+  .feduc__open{ grid-template-columns:.85fr 1.15fr; }
+}
+
+.feduc__four{ grid-template-columns:repeat(2,1fr); }
   .fcampus__grid{ grid-template-columns:.9fr 1.1fr; align-items:center; }
   .fcvp__grid{ grid-template-columns:repeat(2,1fr); }
   .fstudent__grid{ grid-template-columns:1fr 1fr; align-items:center; }
@@ -413,7 +439,20 @@ body.founder main{ position:relative; z-index:1; }
   .fclose__inner{ padding-bottom:clamp(var(--space-8),8vh,var(--space-10)); }
 }
 @media (min-width:1080px){
-  .feduc__four{ grid-template-columns:repeat(4,1fr); }
+  /* The section opens as a spread — the photograph carrying the argument, the
+   heading beside it — and only then breaks into the four. */
+.feduc__open{
+  display:grid; grid-template-columns:1fr;
+  gap:clamp(var(--space-6),4vw,var(--space-8));
+  margin-bottom:clamp(var(--space-8),7vw,var(--space-9));
+}
+.feduc__open .fsec__head{ margin-bottom:0; align-self:center; }
+.feduc__plate{ align-self:center; }
+@media (min-width:760px){
+  .feduc__open{ grid-template-columns:.85fr 1.15fr; }
+}
+
+.feduc__four{ grid-template-columns:repeat(4,1fr); }
   .fcvp__grid{ grid-template-columns:repeat(4,1fr); }
   .fintro__grid{ grid-template-columns:1.2fr .8fr; }
 }
