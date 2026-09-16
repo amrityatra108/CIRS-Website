@@ -479,6 +479,75 @@ section[id]{ scroll-margin-top:88px; }
 .dayh.is-static .dayh__pin{ min-height:0; }
 .dayh.is-static .dayh__viewport{ overflow-x:auto; scroll-snap-type:x proximity; }
 .dayh.is-static .dmoment{ scroll-snap-align:start; }
+/* Snapping aligns a card's leading edge with the scroller's, which puts the
+   first one hard against the edge of the screen and eats the gutter the
+   track is padded with. Tell the scroller where its start really is. */
+.dayh.is-static .dayh__viewport{ scroll-padding-inline-start:var(--gut); }
+/* The rail is a readout of the scrub, and there is no scrub here: swiping
+   the track leaves it sitting at zero, which reads as a progress bar that
+   does not work. The two end labels still say what the track spans. */
+.dayh.is-static .dayh__rail{ display:none; }
+.dayh.is-static .dayh__tick{ visibility:hidden; }
+.dayh.is-static .dayh__ticks{ margin-top:20px; }
+
+/* ------------------------------------------------------------
+   Two schools, two smaller tracks
+   ------------------------------------------------------------
+   There used to be one wide scroll of six moments standing for the
+   whole campus, and a separate proportional ribbon carrying the two
+   real timetables. The ribbon was the one telling the truth, so the
+   timetables moved into these cards and the ribbon went away.
+
+   Two tracks means two pins in a row, so everything here is smaller
+   than the single scroll was: a shorter pin, narrower cards, less to
+   read on each. What each card keeps from the ribbon is its colour —
+   the rule above it is the ribbon's own key for that kind of hour, so
+   the shape of the day is still legible as colour alone.
+   ------------------------------------------------------------ */
+/* The pin keeps the base 100svh. Anything shorter and the next track
+   shows below the one being read, which reads as an unfinished screen
+   rather than a smaller one. Smaller is bought on the cards instead. */
+.dayh--duo .dayh__head{ padding-top:clamp(44px,6vh,72px); }
+.dayh--duo .dayh__head .h2{ font-size:clamp(1.7rem,3.2vw,2.6rem); }
+.dayh--duo .dayh__track{ gap:clamp(11px,1.4vw,22px); }
+.dayh--duo .dmoment{
+  width:clamp(152px,14vw,196px);
+  gap:7px; padding-top:18px;
+}
+.dayh--duo .dmoment h3{ font-size:clamp(1rem,1.5vw,1.16rem); line-height:1.24; }
+
+.dmoment__t i{
+  font-style:normal; font-size:.38em; letter-spacing:.06em;
+  margin-left:.18em; color:var(--ink-mute);
+}
+.dmoment__span{
+  font-family:var(--serif); font-variant-caps:all-small-caps;
+  font-feature-settings:"c2sc" 1,"smcp" 1;
+  font-size:.92rem; letter-spacing:.1em; color:var(--ink-mute);
+}
+
+/* The six kinds of hour, as the ribbon coloured them. */
+.dmoment--wake{   border-top-color:#8C7E97; }
+.dmoment--active{ border-top-color:#5B4A6E; }
+.dmoment--spirit{ border-top-color:#7A0F1E; }
+.dmoment--meal{   border-top-color:var(--gold); }
+.dmoment--study{  border-top-color:var(--purple); }
+.dmoment--rest{   border-top-color:#2B2037; }
+
+/* The key, which sits with the introduction rather than with either
+   track, because it reads both of them. */
+.daylegend{
+  display:flex; flex-wrap:wrap; gap:8px 16px;
+  margin:var(--space-5) 0 0; font-size:.8rem; color:var(--ink-soft);
+}
+.daykey{ display:inline-flex; align-items:center; gap:7px; }
+.daykey::before{ content:""; width:11px; height:11px; border-radius:2px; flex:none; }
+.daykey--wake::before{   background:#8C7E97; }
+.daykey--active::before{ background:#5B4A6E; }
+.daykey--spirit::before{ background:#7A0F1E; }
+.daykey--meal::before{   background:var(--gold); }
+.daykey--study::before{  background:var(--purple); }
+.daykey--rest::before{   background:#2B2037; }
 
 /* ============================================================
    News track — pinned horizontal reel of highlighted stories
