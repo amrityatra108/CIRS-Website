@@ -343,16 +343,32 @@
   }
 
   /* ==========================================================
-     Day — pinned horizontal timetable
+     Day — pinned horizontal timetables
+     There are two of these on Student Life now, one per school,
+     where there used to be one standing for the whole campus. So
+     everything below is scoped to its own section rather than
+     looked up on the document: two tracks sharing a selector would
+     have left the second one unscrubbed and the first one scrubbed
+     twice. Each section gets its own ScrollTrigger; they pin in
+     sequence because each is pinned to its own trigger.
      ========================================================== */
   function dayTrack() {
-    var sec = $("#day"), pin = $(".dayh__pin"), track = $(".dayh__track");
-    var fill = $(".dayh__fill"), tick = $("#dayTick");
-    if (!sec || !track) return;
+    $$(".dayh").forEach(function (sec) { oneDayTrack(sec); });
+  }
+
+  function oneDayTrack(sec) {
+    var pin = $(".dayh__pin", sec), track = $(".dayh__track", sec);
+    var fill = $(".dayh__fill", sec), tick = $(".dayh__tick", sec);
+    if (!track) return;
 
     function staticMode() { sec.classList.add("is-static"); }
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
+
+    // Two pins in a row is twice the scroll to sit through, so a pair of
+    // tracks is scrubbed at a shorter distance than the single one was:
+    // the whole track still passes, in about two thirds of the scrolling.
+    var pace = sec.classList.contains("dayh--duo") ? .6 : 1;
 
     var mm = gsap.matchMedia();
 
@@ -363,7 +379,9 @@
       var st = ScrollTrigger.create({
         trigger: sec,
         start: "top top",
-        end: function () { return "+=" + Math.max(track.scrollWidth - window.innerWidth + 320, 600); },
+        end: function () {
+          return "+=" + Math.max((track.scrollWidth - window.innerWidth + 320) * pace, 600);
+        },
         pin: pin,
         scrub: .8,
         anticipatePin: 1,
