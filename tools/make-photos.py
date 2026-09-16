@@ -48,6 +48,19 @@ PHOTOS = [
     ("adm-assembly.jpg",        "IMG_2258.JPG", (1000,  750), (0.50, 0.60)),
     ("adm-houses.jpg",          "CRS01788.JPG", (1000,  750), (0.50, 0.50)),
 
+    # One photograph, one place. entrance.jpg was carrying five pages and
+    # aerial-duo.jpg four, which made the site feel smaller than it is; these
+    # seven take over the duplicated slots, each chosen for what its section
+    # is actually about rather than for being another picture of the campus.
+    ("academic-block.jpg",      "academic-block.JPG",     (1400,  325), (0.50, 0.58)),
+    ("campus-lawn.jpg",         "CRS01413.JPG",           (1600,  900), (0.50, 0.55)),
+    ("amphitheatre.jpg",        "IMG_2449.JPG",           (1600,  900), (0.50, 0.50)),
+    ("vision.jpg",              "IMG_1663.JPG",           (1600,  900), (0.50, 0.50)),
+    ("forest-air.jpg",          "CIRS.jpg",               (1600,  900), (0.50, 0.50)),
+    ("fields-air.jpg",          "DJI_0856.JPG",           (1400,  640), (0.50, 0.50)),
+    ("valley.jpg",              "school-front-view.JPG",  (1400,  640), (0.50, 0.58)),
+    ("assembly-front.jpg",      "IMG_20260423_091355.jpg", (1400, 640), (0.50, 0.55)),
+
     # Sport — the inter-house basketball fixture, in the same 4:3 tile as the
     # Admissions grid so the two read as one house style. Shot vertically, so
     # the focal point is doing real work here: centred on the ball and the
