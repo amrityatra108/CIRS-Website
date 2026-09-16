@@ -26,6 +26,10 @@ SLOTS = {
                  "Pujya Gurudev Swami Chinmayananda in close view, speaking, "
                  "his raised hand holding a gesture",
                  "Archival portrait of Pujya Gurudev"),
+    "enquiry": ("gurudev-enquiry.jpg",
+                "Pujya Gurudev Swami Chinmayananda holding a laboratory flask up to the "
+                "light, examining it",
+                "Archival photograph of Pujya Gurudev"),
     "himalaya": ("gurudev-himalaya.jpg",
                  "Pujya Gurudev Swami Chinmayananda seated beneath the Himalayan range",
                  "Archival photograph in the Himalaya"),

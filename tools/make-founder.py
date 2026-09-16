@@ -43,6 +43,10 @@ CUTS = {
     "gurudev-portrait.jpg": ("gurudev-sidhbari.jpg", (1180, 2180, 3180, 4680), 1100),
     # The closing: he sits small under the mountain he studied beneath.
     "gurudev-himalaya.jpg": ("gurudev-sidhbari.jpg", (0, 500, 4060, 4560), 1700),
+    # Enquiry: a Vedanta teacher holding a laboratory vessel up to the light.
+    # The scan carries the print's own border down its left edge and along the
+    # bottom, so the crop starts inside it.
+    "gurudev-enquiry.jpg": ("gurudev-enquiry.jpg", (60, 20, 2470, 2980), 1300),
 }
 
 
