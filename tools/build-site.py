@@ -84,9 +84,8 @@ NEWS_FLASH = [
 # themselves.
 MENU = [
     ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
-    ("Academics",            ["curriculum"]),
-    ("Student Life",         ["student-life", "our-results", "sports", "our-laurels",
-                              "math-challenge"]),
+    ("Academics",            ["curriculum", "our-results"]),
+    ("Student Life",         ["student-life", "sports", "our-laurels", "math-challenge"]),
     ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
     ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
                               "cultural-gallery"]),
