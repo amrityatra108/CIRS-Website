@@ -47,6 +47,14 @@ PHOTOS = [
     ("adm-interview.jpg",       "IMG_9893.JPG", (1000,  750), (0.50, 0.50)),
     ("adm-assembly.jpg",        "IMG_2258.JPG", (1000,  750), (0.50, 0.60)),
     ("adm-houses.jpg",          "CRS01788.JPG", (1000,  750), (0.50, 0.50)),
+
+    # Sport — the inter-house basketball fixture, in the same 4:3 tile as the
+    # Admissions grid so the two read as one house style. Shot vertically, so
+    # the focal point is doing real work here: centred on the ball and the
+    # players contesting it, not on the middle of the frame.
+    ("sports/basketball-contest.jpg",  "sports/basketball-contest.jpg",  (1000, 750), (0.50, 0.42)),
+    ("sports/basketball-shot.jpg",     "sports/basketball-shot.jpg",     (1000, 750), (0.50, 0.33)),
+    ("sports/basketball-floodlit.jpg", "sports/basketball-floodlit.jpg", (1000, 750), (0.50, 0.46)),
 ]
 
 
@@ -79,6 +87,7 @@ def main():
     for name, source, (w, h), focal in PHOTOS:
         im = ImageOps.exif_transpose(Image.open(os.path.join(SRC, source))).convert("RGB")
         out = os.path.join(OUT, name)
+        os.makedirs(os.path.dirname(out), exist_ok=True)
         grade(cover(im, w, h, focal)).save(
             out, "JPEG", quality=84, optimize=True, progressive=True)
         kb = os.path.getsize(out) // 1024
