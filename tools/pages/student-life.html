@@ -34,16 +34,16 @@
     </div>
 
     <div class="slhero__deck" aria-hidden="true">
-      <figure class="slcard"><img src="assets/img/slhero/card-01.jpg" alt="" width="900" height="1200" fetchpriority="high" decoding="async"></figure>
-      <figure class="slcard"><img src="assets/img/slhero/card-02.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
-      <figure class="slcard"><img src="assets/img/slhero/card-03.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
-      <figure class="slcard"><img src="assets/img/slhero/card-04.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
-      <figure class="slcard"><img src="assets/img/slhero/card-05.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
-      <figure class="slcard"><img src="assets/img/slhero/card-06.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
-      <figure class="slcard"><img src="assets/img/slhero/card-07.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
-      <figure class="slcard"><img src="assets/img/slhero/card-08.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
-      <figure class="slcard"><img src="assets/img/slhero/card-09.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
-      <figure class="slcard"><img src="assets/img/slhero/card-10.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard" style="--w:26vw;--ar:900/1200;--dx:0%;--dy:0%"><img src="assets/img/slhero/card-01.jpg" alt="" width="900" height="1200" fetchpriority="high" decoding="async"></figure>
+      <figure class="slcard" style="--w:32vw;--ar:1200/800;--dx:-4%;--dy:3%"><img src="assets/img/slhero/card-02.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></figure>
+      <figure class="slcard" style="--w:34vw;--ar:1200/750;--dx:5%;--dy:-2%"><img src="assets/img/slhero/card-03.jpg" alt="" width="1200" height="750" loading="lazy" decoding="async"></figure>
+      <figure class="slcard" style="--w:22vw;--ar:800/1000;--dx:-6%;--dy:-4%"><img src="assets/img/slhero/card-04.jpg" alt="" width="800" height="1000" loading="lazy" decoding="async"></figure>
+      <figure class="slcard" style="--w:21vw;--ar:800/1200;--dx:4%;--dy:5%"><img src="assets/img/slhero/card-05.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard" style="--w:25vw;--ar:1000/1000;--dx:-3%;--dy:-3%"><img src="assets/img/slhero/card-06.jpg" alt="" width="1000" height="1000" loading="lazy" decoding="async"></figure>
+      <figure class="slcard" style="--w:24vw;--ar:900/1200;--dx:6%;--dy:2%"><img src="assets/img/slhero/card-07.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard" style="--w:33vw;--ar:1200/800;--dx:-5%;--dy:4%"><img src="assets/img/slhero/card-08.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async"></figure>
+      <figure class="slcard" style="--w:23vw;--ar:900/900;--dx:3%;--dy:-5%"><img src="assets/img/slhero/card-09.jpg" alt="" width="900" height="900" loading="lazy" decoding="async"></figure>
+      <figure class="slcard" style="--w:35vw;--ar:1200/675;--dx:0%;--dy:3%"><img src="assets/img/slhero/card-10.jpg" alt="" width="1200" height="675" loading="lazy" decoding="async"></figure>
     </div>
 
     <div class="wrap slhero__say">
@@ -56,19 +56,23 @@
   </div>
 </section>
 
-<section class="feature feature--reverse" id="life">
-  <div class="wrap feature__inner">
-    <figure class="feature__media img-reveal rv">
-      <img src="assets/img/student-life.jpg" alt="Students seated in long rows sharing a festival meal"
-           width="1200" height="1500" loading="lazy">
-    </figure>
-    <div class="feature__text rv">
-      <h2 class="serif h2" data-split>A Campus That <em>Never Really Closes.</em></h2>
-      <p class="copy">Houses carry the names of India&rsquo;s great teachers. Seniors and juniors
-        share corridors by design, prep ends at nine, and the closing chant carries across the
-        valley for six hundred boarders at once.</p>
-      <p class="feature__cta"><a class="btn btn--outline" href="#day">See a full day at CIRS</a></p>
-    </div>
+<!-- Where the hero lets go. The deck finishes, the pin releases, and the
+     next thing on the screen is this: one photograph at full height with the
+     headline lying in a gradient along the bottom of it. The gradient is
+     part of the section rather than baked into the picture, so the
+     photograph can be swapped without re-grading anything. -->
+<section class="lifeband" id="life" data-ground="#0E0B12">
+  <img class="lifeband__img" src="assets/img/campus-band.jpg"
+       alt="Students seated in long rows sharing a festival meal"
+       width="1920" height="1080" loading="lazy" decoding="async">
+  <div class="lifeband__veil" aria-hidden="true"></div>
+  <div class="wrap lifeband__say">
+    <p class="marker"><span class="sc">Live, learn, belong</span></p>
+    <h2 class="serif" data-split>A Campus That <em>Never Really Closes.</em></h2>
+    <p class="copy">Houses carry the names of India&rsquo;s great teachers. Seniors and juniors
+      share corridors by design, prep ends at nine, and the closing chant carries across the
+      valley for six hundred boarders at once.</p>
+    <p class="lifeband__cta"><a class="btn btn--ghost" href="#day">See a full day at CIRS</a></p>
   </div>
 </section>
 

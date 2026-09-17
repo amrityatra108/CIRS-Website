@@ -40,7 +40,10 @@ PHOTOS = [
     # Feature panels — 4:5, one per page. Arts no longer has one: that page
     # is the wall, and tools/make-arts-wall.py cuts its photographs.
     ("sports.jpg",              "HARI5692.JPG", (1200, 1500), (0.42, 0.55)),
-    ("student-life.jpg",        "IMG_0081.JPG", (1200, 1500), (0.50, 0.50)),
+    # Not a feature panel any more: the full-bleed band behind "A Campus That
+    # Never Really Closes", so it is cut wide and its people are kept in the
+    # upper half, clear of the gradient the headline sits in.
+    ("campus-band.jpg",         "IMG_0081.JPG", (1920, 1080), (0.50, 0.42)),
     ("junior-school.jpg",       "IMG_1898.JPG", (1200, 1500), (0.50, 0.45)),
     ("senior-school.jpg",       "IMG_1894.JPG", (1200, 1500), (0.50, 0.45)),
 
@@ -78,24 +81,24 @@ PHOTOS = [
     ("boarding.jpg",            "20180518_121042.jpg",    (1600,  900), (0.52, 0.50)),
     ("students.jpg",            "IMG_8075.JPG",           (1400,  640), (0.50, 0.48)),
 
-    # The Student Life hero deck. Ten portrait cards that shuffle up through
-    # the marquee, one per part of the day — class, speaking, yoga, sport,
-    # the vault, the river, the ropes, the houses, the teacher, the hall.
-    # Portrait because a card that is not portrait is not a card; 3:4 at 900
-    # wide covers a 520px slot on a retina screen.
+    # The Student Life hero deck. Ten photographs dealt up through the
+    # marquee — and deliberately ten different shapes. A deck of identical
+    # cards reads as a slideshow in a frame; a pile of a tall one, a wide
+    # one and a square one reads as photographs. The sizes below are the
+    # shapes, and the widths they are shown at are in pages.css.
     #
     # PROTOTYPE: these are stand-ins cut from the existing library so the
-    # motion can be judged. The school is curating ten photographs for it.
-    ("slhero/card-01.jpg", "0C9A4097.JPG",  (900, 1200), (0.52, 0.42)),
-    ("slhero/card-02.jpg", "IMG_2480.JPG",  (900, 1200), (0.50, 0.45)),
-    ("slhero/card-03.jpg", "IMG_1625.JPG",  (900, 1200), (0.50, 0.50)),
-    ("slhero/card-04.jpg", "CRS00876.JPG",  (900, 1200), (0.50, 0.45)),
-    ("slhero/card-05.jpg", "_MG_0139.JPG",  (900, 1200), (0.50, 0.45)),
-    ("slhero/card-06.jpg", "IMG_9313.JPG",  (900, 1200), (0.50, 0.50)),
-    ("slhero/card-07.jpg", "IMG_6106.JPG",  (900, 1200), (0.50, 0.45)),
-    ("slhero/card-08.jpg", "0C9A4128.JPG",  (900, 1200), (0.50, 0.42)),
-    ("slhero/card-09.jpg", "HARI7500.JPG",  (900, 1200), (0.50, 0.45)),
-    ("slhero/card-10.jpg", "IMG_2449.JPG",  (900, 1200), (0.50, 0.45)),
+    # motion can be judged. The school is curating ten.
+    ("slhero/card-01.jpg", "0C9A4097.JPG",  ( 900, 1200), (0.52, 0.42)),   # 3:4
+    ("slhero/card-02.jpg", "IMG_2480.JPG",  (1200,  800), (0.50, 0.45)),   # 3:2
+    ("slhero/card-03.jpg", "IMG_1625.JPG",  (1200,  750), (0.50, 0.52)),   # 8:5
+    ("slhero/card-04.jpg", "CRS00876.JPG",  ( 800, 1000), (0.50, 0.45)),   # 4:5
+    ("slhero/card-05.jpg", "_MG_0139.JPG",  ( 800, 1200), (0.50, 0.45)),   # 2:3
+    ("slhero/card-06.jpg", "IMG_9313.JPG",  (1000, 1000), (0.50, 0.50)),   # 1:1
+    ("slhero/card-07.jpg", "IMG_6106.JPG",  ( 900, 1200), (0.50, 0.45)),   # 3:4
+    ("slhero/card-08.jpg", "0C9A4128.JPG",  (1200,  800), (0.50, 0.42)),   # 3:2
+    ("slhero/card-09.jpg", "HARI7500.JPG",  ( 900,  900), (0.50, 0.45)),   # 1:1
+    ("slhero/card-10.jpg", "IMG_2449.JPG",  (1200,  675), (0.50, 0.45)),   # 16:9
 
     # The Blog. Four fragments for the hero collage, cut so each one reads as
     # a detail rather than a whole photograph, then the featured landscape and
