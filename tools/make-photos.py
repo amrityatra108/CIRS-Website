@@ -40,10 +40,11 @@ PHOTOS = [
     # Feature panels — 4:5, one per page. Arts no longer has one: that page
     # is the wall, and tools/make-arts-wall.py cuts its photographs.
     ("sports.jpg",              "HARI5692.JPG", (1200, 1500), (0.42, 0.55)),
-    # Not a feature panel any more: the full-bleed band behind "A Campus That
-    # Never Really Closes", so it is cut wide and its people are kept in the
-    # upper half, clear of the gradient the headline sits in.
-    ("campus-band.jpg",         "IMG_0081.JPG", (1920, 1080), (0.50, 0.42)),
+    # The full-bleed band behind "A Campus That Never Really Closes". The
+    # campus itself rather than a room in it: the blocks with the cloud coming
+    # over the Ghats behind them. Framed low, so the ridge and the sky have
+    # the top of the picture and the gradient has the ground.
+    ("campus-band.jpg",         "IMG_2051.JPG", (1920, 1080), (0.50, 0.56)),
     ("junior-school.jpg",       "IMG_1898.JPG", (1200, 1500), (0.50, 0.45)),
     ("senior-school.jpg",       "IMG_1894.JPG", (1200, 1500), (0.50, 0.45)),
 

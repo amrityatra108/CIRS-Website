@@ -363,8 +363,23 @@
     var sec = $(".slhero");
     if (!sec) return;
     var pin = $(".slhero__pin", sec), push = $(".slhero__push", sec);
+    var deck = $(".slhero__deck", sec);
     var cards = $$(".slcard", sec);
     if (!cards.length) return;
+
+    // A new order on every load. Ten photographs dealt in the same sequence
+    // every time is a slideshow; dealt in a different one each visit, the
+    // hero is the school rather than a fixed advertisement for ten moments
+    // of it. Fisher-Yates over the elements themselves, so the swipe track
+    // the phone falls back to is shuffled too, and so every later lookup —
+    // z-order, the deal, the clean-up — simply follows the DOM.
+    if (deck) {
+      for (var k = cards.length - 1; k > 0; k--) {
+        var j = Math.floor(Math.random() * (k + 1));
+        var tmp = cards[k]; cards[k] = cards[j]; cards[j] = tmp;
+      }
+      cards.forEach(function (c) { deck.appendChild(c); });
+    }
 
     function staticMode() { sec.classList.add("is-static"); }
 
