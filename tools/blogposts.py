@@ -13,7 +13,8 @@ that should have been a full stop, a duplicated word. Two factual slips in
 "Trust or Bust" were deliberately left alone, because correcting them means
 deciding what the author meant: it announces four outcomes and lists three,
 and the sentence that mutual defection earns is five years in one paragraph
-and three in another.
+and three in another. Its byline is not printed anywhere in the issue and
+was supplied by the school.
 
 To publish another article: add its entry here with its paragraphs, and
 build-site.py gives it a page and the feed gives it a card. Nothing else has
@@ -295,7 +296,7 @@ POSTS = [
         "title": "Trust or Bust: The Never-Ending Problem of the Prisoner's Dilemma",
         "issue": 29,
         "date": "February 2026",
-        "author": None,
+        "author": "Aarav Bhartia | X B",
         "section": "Economics",
         "excerpt": "Imagine yourself in this familiar high school scene where you and your best friend are tasked with a huge project, the kind that demands hours of focused, dedicated work.",
         "paragraphs": [
