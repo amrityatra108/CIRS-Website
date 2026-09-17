@@ -27,7 +27,7 @@ OUT = os.path.join(ROOT, "assets/img")
 # the wash flattens the bright blues it is built on and warms the whole thing,
 # which reads as a faded picture rather than a campaign banner. It is cut at
 # its own colours. Remove a name from here and it is graded like the rest.
-UNGRADED = {"student-life-banner.jpg"}
+UNGRADED = set()
 
 SHADOW = (36, 26, 56)
 HIGHLIGHT = (240, 229, 212)
@@ -78,12 +78,24 @@ PHOTOS = [
     ("boarding.jpg",            "20180518_121042.jpg",    (1600,  900), (0.52, 0.50)),
     ("students.jpg",            "IMG_8075.JPG",           (1400,  640), (0.50, 0.48)),
 
-    # The Student Life banner. Not a photograph but a finished piece of the
-    # school's own campaign design, with its wordmark set into the middle of
-    # it — so the page carries no headline of its own over it, and it is cut
-    # at its own colours rather than graded (see UNGRADED above). The crop is
-    # the whole frame, 2.5:1 as supplied.
-    ("student-life-banner.jpg", "cirs-more-than-a-school.png", (1920, 768), (0.50, 0.50)),
+    # The Student Life hero deck. Ten portrait cards that shuffle up through
+    # the marquee, one per part of the day — class, speaking, yoga, sport,
+    # the vault, the river, the ropes, the houses, the teacher, the hall.
+    # Portrait because a card that is not portrait is not a card; 3:4 at 900
+    # wide covers a 520px slot on a retina screen.
+    #
+    # PROTOTYPE: these are stand-ins cut from the existing library so the
+    # motion can be judged. The school is curating ten photographs for it.
+    ("slhero/card-01.jpg", "0C9A4097.JPG",  (900, 1200), (0.52, 0.42)),
+    ("slhero/card-02.jpg", "IMG_2480.JPG",  (900, 1200), (0.50, 0.45)),
+    ("slhero/card-03.jpg", "IMG_1625.JPG",  (900, 1200), (0.50, 0.50)),
+    ("slhero/card-04.jpg", "CRS00876.JPG",  (900, 1200), (0.50, 0.45)),
+    ("slhero/card-05.jpg", "_MG_0139.JPG",  (900, 1200), (0.50, 0.45)),
+    ("slhero/card-06.jpg", "IMG_9313.JPG",  (900, 1200), (0.50, 0.50)),
+    ("slhero/card-07.jpg", "IMG_6106.JPG",  (900, 1200), (0.50, 0.45)),
+    ("slhero/card-08.jpg", "0C9A4128.JPG",  (900, 1200), (0.50, 0.42)),
+    ("slhero/card-09.jpg", "HARI7500.JPG",  (900, 1200), (0.50, 0.45)),
+    ("slhero/card-10.jpg", "IMG_2449.JPG",  (900, 1200), (0.50, 0.45)),
 
     # The Blog. Four fragments for the hero collage, cut so each one reads as
     # a detail rather than a whole photograph, then the featured landscape and

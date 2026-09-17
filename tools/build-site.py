@@ -35,7 +35,7 @@ import documents as docs
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=35"
+CACHE_BUST = "b=36"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -227,15 +227,10 @@ PAGES = {
         "title": "Student Life",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
                        "hundred-acre campus it happens on.",
-        # This page opens on the school's own campaign banner rather than the
-        # flat purple band. The picture already has "#CIRS — More Than A
-        # School" set across the middle of it, so nothing is laid over it: the
-        # page's own headline opens the first section instead, in
-        # tools/pages/student-life.html. See banner_image_html below.
-        "banner_image": ("student-life-banner.jpg", 1920, 768,
-                         "A collage of photographs of CIRS students — assembly, debate, dance, "
-                         "music and the campus — around the words: hashtag CIRS, More Than A "
-                         "School."),
+        # No banner and no hero key: this page opens on a hero of its own,
+        # built in tools/pages/student-life.html — a drifting line of
+        # oversized lettering with a deck of photographs dealt up through it.
+        # It carries the page's h1 and its own id="top".
     },
     "sports": {
         "nav": "Our Sports",
