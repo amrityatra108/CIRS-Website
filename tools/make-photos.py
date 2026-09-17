@@ -71,6 +71,13 @@ PHOTOS = [
     ("boarding.jpg",            "20180518_121042.jpg",    (1600,  900), (0.52, 0.50)),
     ("students.jpg",            "IMG_8075.JPG",           (1400,  640), (0.50, 0.48)),
 
+    # The Student Life banner. Not a photograph but a finished piece of the
+    # school's own campaign design, with its wordmark set into the middle of
+    # it — so the page carries no headline of its own over it. It is graded
+    # like everything else here so it sits inside the palette rather than on
+    # top of it; the crop is the whole frame, 2.5:1 as supplied.
+    ("student-life-banner.jpg", "cirs-more-than-a-school.png", (1920, 768), (0.50, 0.50)),
+
     # The Blog. Four fragments for the hero collage, cut so each one reads as
     # a detail rather than a whole photograph, then the featured landscape and
     # nine cards — one per desk. Nothing here is reused from another page.

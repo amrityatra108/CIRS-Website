@@ -21,11 +21,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
-<link rel="stylesheet" href="assets/css/cirs.css?b=33">
-<link rel="stylesheet" href="assets/css/pages.css?b=33">
+<link rel="stylesheet" href="assets/css/cirs.css?b=34">
+<link rel="stylesheet" href="assets/css/pages.css?b=34">
 </head>
 
-<body>
+<body class="litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -57,7 +57,7 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header" id="header">
+<header class="header is-stuck" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -200,13 +200,24 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">Student life</span></p>
-    <h1 class="serif" data-split>Live, Learn, <em>Belong.</em></h1>
-    <p class="lead">The boarding houses, the shape of an ordinary day, and the campus the whole of it happens on.</p>
+<section class="pagehead pagehead--image" id="top">
+  <img src="assets/img/student-life-banner.jpg?b=34" alt="A collage of photographs of CIRS students — assembly, debate, dance, music and the campus — around the words: hashtag CIRS, More Than A School."
+       width="1920" height="768" fetchpriority="high">
+</section>
+<!-- The banner is the campaign picture and carries no type, so the page's
+     headline opens here instead. It is the h1: the picture above it has the
+     school's wordmark in it, not this page's name. -->
+<section class="section pagelede" id="lede">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">Student life</span></p>
+      <h1 class="serif" data-split>Live, Learn, <em>Belong.</em></h1>
+      <p class="lead">The boarding houses, the shape of an ordinary day, and the campus the whole
+        of it happens on.</p>
+    </div>
   </div>
 </section>
+
 <section class="feature feature--reverse" id="life">
   <div class="wrap feature__inner">
     <figure class="feature__media img-reveal rv">
@@ -214,8 +225,6 @@
            width="1200" height="1500" loading="lazy">
     </figure>
     <div class="feature__text rv">
-      <p class="marker"><span class="sc">Student life</span></p>
-      <p class="feature__tag">Live, learn, belong</p>
       <h2 class="serif h2" data-split>A Campus That <em>Never Really Closes.</em></h2>
       <p class="copy">Houses carry the names of India&rsquo;s great teachers. Seniors and juniors
         share corridors by design, prep ends at nine, and the closing chant carries across the
@@ -583,10 +592,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=33" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=33" defer></script>
-<script src="assets/vendor/lenis.min.js?b=33" defer></script>
-<script src="assets/js/cirs.js?b=33" defer></script>
-<script src="assets/js/pages.js?b=33" defer></script>
+<script src="assets/vendor/gsap.min.js?b=34" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=34" defer></script>
+<script src="assets/vendor/lenis.min.js?b=34" defer></script>
+<script src="assets/js/cirs.js?b=34" defer></script>
+<script src="assets/js/pages.js?b=34" defer></script>
 </body>
 </html>
