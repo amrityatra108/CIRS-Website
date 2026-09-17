@@ -1,14 +1,58 @@
-<!-- The banner is the campaign picture and carries no type, so the page's
-     headline opens here instead. It is the h1: the picture above it has the
-     school's wordmark in it, not this page's name. -->
-<section class="section pagelede" id="lede">
-  <div class="wrap">
-    <div class="sec-head rv">
+<!-- The Student Life hero.
+     A line of oversized lettering running across the screen, and a deck of
+     photographs shuffling up through it: each card rises from below, tilted,
+     and lands on top of the one before, so scrolling deals the school's day
+     out a card at a time. The lettering runs behind the cards.
+
+     The drift is a CSS keyframe and the deal is cirs.js — the same division
+     the Crossroads wall makes: the hero moves before the animation library
+     arrives, and it still reads if the library never does.
+
+     PROTOTYPE: the ten photographs are stand-ins cut from the existing
+     library so the motion can be judged. The school is curating ten.
+-->
+<section class="slhero" id="top" data-ground="#0E0B12">
+  <div class="slhero__pin">
+
+    <div class="slhero__type" aria-hidden="true">
+      <div class="slhero__push">
+        <div class="slhero__run">
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        </div>
+      </div>
+    </div>
+
+    <div class="slhero__deck" aria-hidden="true">
+      <figure class="slcard"><img src="assets/img/slhero/card-01.jpg" alt="" width="900" height="1200" fetchpriority="high" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-02.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-03.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-04.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-05.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-06.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-07.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-08.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-09.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-10.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+    </div>
+
+    <div class="wrap slhero__say">
       <p class="marker"><span class="sc">Student life</span></p>
       <h1 class="serif" data-split>Live, Learn, <em>Belong.</em></h1>
-      <p class="lead">The boarding houses, the shape of an ordinary day, and the campus the whole
-        of it happens on.</p>
+      <p class="lead">The boarding houses, the shape of an ordinary day, and the campus the
+        whole of it happens on.</p>
     </div>
+
   </div>
 </section>
 

@@ -21,11 +21,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
-<link rel="stylesheet" href="assets/css/cirs.css?b=35">
-<link rel="stylesheet" href="assets/css/pages.css?b=35">
+<link rel="stylesheet" href="assets/css/cirs.css?b=36">
+<link rel="stylesheet" href="assets/css/pages.css?b=36">
 </head>
 
-<body class="litehead">
+<body>
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -57,7 +57,7 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header is-stuck" id="header">
+<header class="header" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -200,21 +200,61 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead pagehead--image" id="top">
-  <img src="assets/img/student-life-banner.jpg?b=35" alt="A collage of photographs of CIRS students — assembly, debate, dance, music and the campus — around the words: hashtag CIRS, More Than A School."
-       width="1920" height="768" fetchpriority="high">
-</section>
-<!-- The banner is the campaign picture and carries no type, so the page's
-     headline opens here instead. It is the h1: the picture above it has the
-     school's wordmark in it, not this page's name. -->
-<section class="section pagelede" id="lede">
-  <div class="wrap">
-    <div class="sec-head rv">
+<!-- The Student Life hero.
+     A line of oversized lettering running across the screen, and a deck of
+     photographs shuffling up through it: each card rises from below, tilted,
+     and lands on top of the one before, so scrolling deals the school's day
+     out a card at a time. The lettering runs behind the cards.
+
+     The drift is a CSS keyframe and the deal is cirs.js — the same division
+     the Crossroads wall makes: the hero moves before the animation library
+     arrives, and it still reads if the library never does.
+
+     PROTOTYPE: the ten photographs are stand-ins cut from the existing
+     library so the motion can be judged. The school is curating ten.
+-->
+<section class="slhero" id="top" data-ground="#0E0B12">
+  <div class="slhero__pin">
+
+    <div class="slhero__type" aria-hidden="true">
+      <div class="slhero__push">
+        <div class="slhero__run">
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        <span>Student Life</span><i aria-hidden="true">&middot;</i>
+        </div>
+      </div>
+    </div>
+
+    <div class="slhero__deck" aria-hidden="true">
+      <figure class="slcard"><img src="assets/img/slhero/card-01.jpg" alt="" width="900" height="1200" fetchpriority="high" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-02.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-03.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-04.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-05.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-06.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-07.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-08.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-09.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+      <figure class="slcard"><img src="assets/img/slhero/card-10.jpg" alt="" width="900" height="1200" loading="lazy" decoding="async"></figure>
+    </div>
+
+    <div class="wrap slhero__say">
       <p class="marker"><span class="sc">Student life</span></p>
       <h1 class="serif" data-split>Live, Learn, <em>Belong.</em></h1>
-      <p class="lead">The boarding houses, the shape of an ordinary day, and the campus the whole
-        of it happens on.</p>
+      <p class="lead">The boarding houses, the shape of an ordinary day, and the campus the
+        whole of it happens on.</p>
     </div>
+
   </div>
 </section>
 
@@ -592,10 +632,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=35" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=35" defer></script>
-<script src="assets/vendor/lenis.min.js?b=35" defer></script>
-<script src="assets/js/cirs.js?b=35" defer></script>
-<script src="assets/js/pages.js?b=35" defer></script>
+<script src="assets/vendor/gsap.min.js?b=36" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=36" defer></script>
+<script src="assets/vendor/lenis.min.js?b=36" defer></script>
+<script src="assets/js/cirs.js?b=36" defer></script>
+<script src="assets/js/pages.js?b=36" defer></script>
 </body>
 </html>
