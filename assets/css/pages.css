@@ -38,31 +38,7 @@
 .pagehead h1 em{ color:var(--gold-lit); }
 .pagehead .lead{ margin-top:var(--space-4); }
 
-/* A banner that is a picture rather than a band of type. It clears the fixed
-   header the same way, but everything else about .pagehead is for type on a
-   dark ground and has to come off: no padding around the image, no gold
-   bloom behind it, and the picture fills the width at its own ratio. */
-.pagehead--image{
-  padding-block:76px 0;
-  background-image:none;
-  background:var(--paper);
-}
-.pagehead--image img{
-  display:block; width:100%; height:auto;
-}
 
-/* The headline the picture does not carry. It opens the page, so it is set
-   at banner weight rather than section weight, on paper rather than purple. */
-.pagelede{ padding-block:clamp(36px,5vw,72px) clamp(24px,3.5vw,48px); }
-.pagelede h1{
-  font-size:clamp(2.2rem,4.6vw,3.8rem);
-  line-height:1.03;
-  letter-spacing:-.018em;
-  color:var(--purple);
-  margin-top:var(--space-3);
-}
-.pagelede h1 em{ color:var(--maroon); font-style:italic; }
-.pagelede .lead{ margin-top:var(--space-4); max-width:62ch; }
 
 /* ------------------------------------------------------------
    Under construction — the standing note at the foot of every
@@ -1809,4 +1785,216 @@ body.has-lightbox{ overflow:hidden; }
   margin-top:clamp(22px,3vw,32px);
   padding-top:clamp(20px,2.6vw,28px);
   border-top:1px solid var(--rule);
+}
+
+/* ============================================================
+   Student Life — the hero
+   ------------------------------------------------------------
+   A line of oversized lettering running across the screen, and a
+   deck of photographs shuffling up through it. Each card rises
+   from below at a tilt and lands square on top of the one before,
+   so scrolling deals the school's day out a card at a time.
+
+   The division of labour is the Crossroads wall's: the drift is a
+   CSS keyframe so the lettering moves before GSAP arrives and
+   without it, and cirs.js takes over the deal and the scrub once
+   it is there. Below 700px there is no pin at all — the deck is a
+   swipe track, which is what a deck wants to be on a phone.
+   ============================================================ */
+.slhero{
+  position:relative;
+  /* Off-white, not the site's purple. The lettering is the subject here and
+     it wants a page to sit on, not a night sky; and the photographs carry
+     all the colour the screen needs. The header cannot float over this in
+     white, so the page sets body.litehead — see build-site.py. */
+  background:#F7F4F2;
+  color:var(--ink);
+}
+.slhero__pin{
+  position:relative;
+  min-height:100svh; min-height:100vh;
+  overflow:hidden;
+  display:flex; flex-direction:column; justify-content:flex-end;
+}
+
+/* ---------------------------------------------------- the lettering */
+.slhero__type{
+  position:absolute; left:0; right:0; top:44%;
+  transform:translateY(-50%);
+  z-index:1;
+  overflow:hidden;
+  pointer-events:none;
+  -webkit-mask-image:linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+          mask-image:linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.slhero__push{ will-change:transform; }
+.slhero__run{
+  display:flex; align-items:center; gap:clamp(20px,3vw,54px);
+  width:max-content;
+  will-change:transform; backface-visibility:hidden;
+  animation:slhero-drift 44s linear infinite;
+}
+/* The run is printed twice, so one copy's travel lands exactly where it
+   started and the loop has no seam to hide. */
+@keyframes slhero-drift{
+  from{ transform:translate3d(0,0,0); }
+  to{ transform:translate3d(-50%,0,0); }
+}
+.slhero__run span{
+  font-family:var(--serif);
+  font-size:clamp(4rem,13vw,12rem);
+  line-height:.86;
+  letter-spacing:-.035em;
+  white-space:nowrap;
+  /* Dark enough to be the thing you notice, pale enough that a photograph
+     landing on it always wins. */
+  color:rgba(57,42,72,.17);
+}
+.slhero__run i{
+  font-style:normal;
+  font-size:clamp(2rem,5vw,4rem);
+  color:var(--maroon);
+  opacity:.34;
+}
+
+/* --------------------------------------------------------- the deck */
+.slhero__deck{
+  /* Lifted off the floor of the section, and pushed off the left column, so
+     a photograph rising into place does not climb through the headline. The
+     pile centres at about three fifths across; the words have the rest. */
+  position:absolute; inset:0 0 17% 20%; z-index:2;
+  display:grid; place-items:center;
+  pointer-events:none;
+}
+/* Ten different shapes, not ten cards. A deck of identical rectangles reads
+   as a slideshow in a frame; a tall one, then a wide one, then a square one
+   reads as photographs. Each frame carries its own width, its own shape and
+   a small offset from centre, set on the element in the page — so the pile
+   is data rather than ten more rules here. */
+.slcard{
+  grid-area:1 / 1;
+  margin:0;
+  width:var(--w, 26vw);
+  max-width:min(88vw, 620px);
+  aspect-ratio:var(--ar, 3 / 4);
+  translate:var(--dx, 0) var(--dy, 0);
+  overflow:hidden;
+  border-radius:2px;
+  background:var(--paper-3);
+  /* The frames land on nearly the same spot, so stacked shadows would
+     compound into a smudge. cirs.js draws only the top two. */
+  box-shadow:0 22px 54px rgba(26,17,25,.28), 0 2px 8px rgba(26,17,25,.14);
+  will-change:transform;
+  transform:translateY(0);
+}
+.slcard img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* ------------------------------------------------------- the words */
+.slhero__say{
+  position:relative; z-index:3;
+  width:100%;
+  padding-bottom:clamp(40px,7vh,86px);
+  padding-top:clamp(200px,42vh,420px);
+}
+.slhero__say h1{
+  font-size:clamp(2.3rem,5vw,4.2rem);
+  line-height:1.02;
+  letter-spacing:-.018em;
+  color:var(--purple);
+  margin-top:var(--space-3);
+}
+.slhero__say h1 em{ color:var(--maroon); font-style:italic; }
+.slhero__say .marker::after{ background:var(--rule); }
+.slhero__say .lead{ margin-top:var(--space-4); max-width:34ch; }
+
+/* ------------------------------- no pin: a deck you swipe instead */
+.slhero.is-static .slhero__pin{ min-height:0; padding-top:clamp(96px,14vh,150px); }
+.slhero.is-static .slhero__type{ position:relative; top:auto; transform:none; }
+.slhero.is-static .slhero__deck{
+  position:relative; inset:auto;
+  display:flex; gap:clamp(10px,2vw,20px);
+  overflow-x:auto;
+  scroll-snap-type:x proximity;
+  scroll-padding-inline-start:var(--gut);
+  padding:clamp(22px,4vh,40px) var(--gut);
+  pointer-events:auto;
+}
+.slhero.is-static .slcard{
+  grid-area:auto;
+  flex:none;
+  scroll-snap-align:start;
+  transform:none !important;
+  opacity:1 !important;
+}
+.slhero.is-static .slhero__say{ padding-top:0; }
+
+@media (prefers-reduced-motion:reduce){
+  .slhero__run{ animation:none; }
+}
+
+/* ============================================================
+   Student Life — the campus band
+   ------------------------------------------------------------
+   Where the hero lets go. The deck finishes, the pin releases,
+   and the next thing on the screen is one photograph at full
+   height with the headline lying along the bottom of it.
+
+   The gradient is a layer of the section rather than something
+   baked into the picture, so the photograph can be swapped for
+   another without re-grading anything — and so the darkness sits
+   exactly where the words are and nowhere else.
+   ============================================================ */
+.lifeband{
+  position:relative;
+  min-height:100svh; min-height:100vh;
+  display:flex; align-items:flex-end;
+  overflow:hidden;
+  background:var(--purple-ink);
+  isolation:isolate;
+}
+.lifeband__img{
+  position:absolute; inset:0; z-index:0;
+  width:100%; height:100%; object-fit:cover;
+  /* Pulled towards the palette the way every photograph here is, and held
+     a little back so the type has somewhere to land. */
+  filter:saturate(.92) brightness(.96);
+}
+.lifeband__veil{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(to top,
+      rgba(8,5,10,.96) 0%,
+      rgba(8,5,10,.90) 18%,
+      rgba(10,7,13,.72) 36%,
+      rgba(12,8,16,.34) 58%,
+      rgba(12,8,16,.10) 78%,
+      rgba(12,8,16,.16) 100%);
+}
+.lifeband__say{
+  position:relative; z-index:2;
+  width:100%;
+  padding-block:clamp(48px,9vh,110px);
+  color:var(--on-purple);
+}
+.lifeband__say .sc{ color:var(--gold-lit); }
+.lifeband__say .marker::after{ background:rgba(255,255,255,.26); max-width:190px; }
+.lifeband__say h2{
+  font-size:clamp(2.2rem,5.4vw,4.6rem);
+  line-height:1.02;
+  letter-spacing:-.02em;
+  color:#fff;
+  margin-top:var(--space-3);
+  max-width:19ch;
+}
+.lifeband__say h2 em{ color:var(--gold-lit); font-style:italic; }
+.lifeband__say .copy{
+  margin-top:var(--space-4);
+  max-width:56ch;
+  color:var(--on-purple-soft);
+}
+.lifeband__cta{ margin-top:var(--space-5); }
+
+@media (max-width:700px){
+  .lifeband{ min-height:86svh; }
+  .lifeband__say h2{ max-width:none; }
 }

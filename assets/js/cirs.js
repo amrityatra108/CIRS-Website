@@ -343,6 +343,111 @@
   }
 
   /* ==========================================================
+     Student Life — the hero deck
+     A line of oversized lettering drifting across the screen, and
+     ten photographs dealt up through it. Card 0 is already down
+     when the page opens; the rest rise from below at a tilt as the
+     section is scrolled, each landing square on top of the last.
+
+     The lettering has two layers on purpose: .slhero__run carries
+     the CSS keyframe, which runs whether or not this file does, and
+     .slhero__push carries the scroll offset set here. One element
+     cannot hold both — the transform this sets would cancel the
+     keyframe's.
+
+     No pin under 700px. A pinned scrub on a phone is a scroll that
+     fights the thumb, so there the deck is a swipe track and the
+     lettering simply drifts.
+     ========================================================== */
+  function slHero() {
+    var sec = $(".slhero");
+    if (!sec) return;
+    var pin = $(".slhero__pin", sec), push = $(".slhero__push", sec);
+    var deck = $(".slhero__deck", sec);
+    var cards = $$(".slcard", sec);
+    if (!cards.length) return;
+
+    // A new order on every load. Ten photographs dealt in the same sequence
+    // every time is a slideshow; dealt in a different one each visit, the
+    // hero is the school rather than a fixed advertisement for ten moments
+    // of it. Fisher-Yates over the elements themselves, so the swipe track
+    // the phone falls back to is shuffled too, and so every later lookup —
+    // z-order, the deal, the clean-up — simply follows the DOM.
+    if (deck) {
+      for (var k = cards.length - 1; k > 0; k--) {
+        var j = Math.floor(Math.random() * (k + 1));
+        var tmp = cards[k]; cards[k] = cards[j]; cards[j] = tmp;
+      }
+      cards.forEach(function (c) { deck.appendChild(c); });
+    }
+
+    function staticMode() { sec.classList.add("is-static"); }
+
+    if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
+
+    var mm = gsap.matchMedia();
+
+    mm.add("(min-width: 700px)", function () {
+      sec.classList.remove("is-static");
+      var n = cards.length;
+
+      function deal(p) {
+        // The highest card that has started to rise: the top of the deck.
+        var top = Math.min(Math.max(Math.ceil(p * n), 0), n - 1);
+        for (var i = 0; i < n; i++) {
+          // Card i rises through the slot that ends at i/n, so card 0 is
+          // already down at the top of the page and the last lands with a
+          // beat of scroll to spare.
+          var t = Math.min(Math.max((p - (i - 1) / n) * n, 0), 1);
+          var e = t * t * (3 - 2 * t);                  // smoothstep
+          // Only the card on top and the one rising behind it are ever
+          // seen. Leaving the settled ones underneath visible stacks ten
+          // identical drop shadows into a halo around the whole deck.
+          var show = t > 0 && i >= top - 1;
+          gsap.set(cards[i], {
+            yPercent: (1 - e) * 88,
+            rotation: (1 - e) * (i % 2 ? 6 : -6),
+            scale: 0.93 + e * 0.07,
+            zIndex: i + 1,
+            opacity: show ? 1 : 0
+          });
+        }
+      }
+
+      deal(0);
+
+      var st = ScrollTrigger.create({
+        trigger: sec,
+        start: "top top",
+        end: function () { return "+=" + Math.round(window.innerHeight * 1.9); },
+        pin: pin,
+        scrub: 0.7,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          deal(self.progress);
+          // The lettering is pushed along by the scroll on top of its own
+          // drift, so the two read as one movement rather than a loop with
+          // something sliding over it.
+          if (push) gsap.set(push, { xPercent: -14 * self.progress });
+        }
+      });
+
+      return function () {
+        st.kill(true);
+        cards.forEach(function (c) { gsap.set(c, { clearProps: "all" }); });
+        if (push) gsap.set(push, { clearProps: "all" });
+        staticMode();
+      };
+    });
+
+    mm.add("(max-width: 699px)", function () {
+      staticMode();
+      return function () {};
+    });
+  }
+
+  /* ==========================================================
      Day — pinned horizontal timetables
      There are two of these on Student Life now, one per school,
      where there used to be one standing for the whole campus. So
@@ -686,10 +791,10 @@
 
   (function chrome() {
     var header = $("#header");
-    // A page that opens on a light picture (body.litehead) has the header
-    // solid from the top, set in the markup so it holds without this script.
+    // A page that opens on a pale ground (body.litehead) has the header solid
+    // from the top, set in the markup so it holds without this script.
     // Toggling it here would strip that on the way back up and leave white
-    // lettering on a pale photograph.
+    // lettering on an off-white hero.
     if (header && !document.body.classList.contains("litehead")) {
       // The header rides transparent over the hero and only turns solid once
       // the hero itself has scrolled mostly out of view.
@@ -1206,10 +1311,11 @@
     newsFlash();
     crossroadsProgress();
     crossroadsWall();
-    if (!animate) { failOpen(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
+    if (!animate) { failOpen(); slHero(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");
     choreograph();
+    slHero();
     dayTrack();
     newsTrack();
     groundShift();
