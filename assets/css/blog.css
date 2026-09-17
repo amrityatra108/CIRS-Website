@@ -316,10 +316,18 @@ body.blog{ background: var(--paper); }
 .post__title{
   margin: 0;
   font-weight: 400;
-  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
-  line-height: 1.26;
+  font-size: clamp(1.14rem, 1.7vw, 1.42rem);
+  line-height: 1.2;
   color: var(--ink);
   text-wrap: pretty;
+}
+.post__link:hover .post__title,
+.post__link:focus-visible .post__title{ color: var(--purple); }
+.post__stand{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-soft);
 }
 .post__meta{
   margin: auto 0 0;
@@ -328,12 +336,18 @@ body.blog{ background: var(--paper); }
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px 14px;
+  flex-wrap: wrap;
   font-size: 12px;
   color: var(--ink-mute);
 }
-.post__await{ font-style: italic; }
-.post__n{ font-variant-numeric: tabular-nums; letter-spacing: .1em; color: var(--rule); font-weight: 700; }
+.post__by{ font-weight: 600; color: var(--ink-soft); }
+.post__issue{ font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+
+/* Cards carry no photograph now: every article came out of the magazine, and
+   a stock picture over someone's essay says less than the essay's own first
+   sentences do. The rule above each card does the work the image did. */
+.post{ border-top: 2px solid var(--purple); padding-top: 14px; }
 
 .post__link:focus-visible{ outline: 3px solid var(--gold); outline-offset: 4px; }
 
@@ -362,3 +376,77 @@ body.blog{ background: var(--paper); }
 @media (prefers-reduced-motion: reduce){
   .post__media img{ transition: none; }
 }
+
+/* ============================================================
+   A published article
+   ------------------------------------------------------------
+   One column, measured for reading rather than for layout: the
+   words are the whole of the page. Everything around them says
+   only where they came from and how to get back.
+   ============================================================ */
+.artwrap{
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: clamp(18px, 5vw, 32px);
+}
+.art{ background: var(--paper); }
+.art__head{
+  padding-block: clamp(96px, 14vh, 150px) clamp(22px, 3.5vw, 38px);
+  border-bottom: 1px solid var(--rule);
+}
+.art__flag{
+  margin: 0 0 clamp(14px, 2vw, 22px);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--maroon);
+}
+.art__flag a{ color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+.art__flag a:hover{ color: var(--purple); }
+.art__flag span{ color: var(--ink-mute); font-weight: 600; }
+.art__title{
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.art__by{
+  margin: clamp(16px, 2.4vw, 24px) 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--purple);
+}
+.art__where{
+  margin: 5px 0 0;
+  font-size: 12.5px;
+  letter-spacing: .04em;
+  color: var(--ink-mute);
+}
+
+.art__body{ padding-block: clamp(26px, 4vw, 44px); }
+.art__body p{
+  margin: 0 0 1.05em;
+  font-size: clamp(16px, 1.15vw, 17.5px);
+  line-height: 1.72;
+  color: var(--ink-soft);
+}
+.art__body p:first-child{ font-size: clamp(17px, 1.3vw, 19px); color: var(--ink); }
+.art__body p:last-child{ margin-bottom: 0; }
+
+.art__foot{
+  border-top: 3px solid var(--purple-ink);
+  padding-block: clamp(22px, 3.5vw, 36px) clamp(44px, 7vw, 84px);
+}
+.art__foot p{ margin: 0; font-size: 14px; color: var(--ink-mute); }
+.art__foot b{ color: var(--purple); }
+.art__onward{
+  display: flex; flex-wrap: wrap; gap: 12px;
+  margin-top: clamp(18px, 2.6vw, 26px) !important;
+}
+/* The ghost button is built for a dark ground; on paper it needs ink. */
+.btn--ghost-ink{ border-color: var(--rule); color: var(--ink-soft); }
+.btn--ghost-ink:hover{ background: var(--purple); color: #fff; border-color: var(--purple); }
