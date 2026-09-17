@@ -32,10 +32,11 @@ import artswall
 import blog
 import founder
 import documents as docs
+import blogposts
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=38"
+CACHE_BUST = "b=39"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -546,6 +547,59 @@ def soon_html(page):
         '  </div>\n'
         '</section>')
 
+def esc(text, attr=False):
+    """The magazine's own punctuation, made safe to put in a page.
+
+    Article text is raw prose lifted from a PDF: it contains ampersands and
+    quotation marks that mean themselves. Escaping is what keeps a headline
+    that opens on a quoted sentence from ending the attribute it sits in.
+    """
+    out = (text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+    return out.replace('"', "&quot;") if attr else out
+
+
+def article_html(page):
+    """A published Crossroads article, set as a page of its own.
+
+    The words are the magazine's and they are all here — see tools/blogposts.py.
+    What this adds is only what a page needs around them: where the article
+    came from, who wrote it, and the way back to the blog and to the issue it
+    was printed in.
+    """
+    post = page["post"]
+    issue = post["issue"]
+    pdf = f"assets/documents/crossroads/crossroads-issue-{issue:02d}.pdf"
+    when = f" &middot; {post['date']}" if post["date"] else ""
+    by = (f'<p class="art__by">{esc(post["author"])}</p>' if post["author"]
+          else '<p class="art__by"><em>[Byline &mdash; to be supplied by the '
+               'Crossroads Editorial Board.]</em></p>')
+    body = "\n".join(f"      <p>{esc(para)}</p>" for para in post["paragraphs"])
+    return f'''<article class="art" id="top">
+  <div class="artwrap">
+    <header class="art__head">
+      <p class="art__flag"><a href="blog.html">CIRS Blog</a> &rarr;
+        <span>{esc(post["section"])}</span></p>
+      <h1 class="art__title serif">{esc(post["title"])}</h1>
+      {by}
+      <p class="art__where">The Crossroads, Issue&nbsp;{issue}{when}</p>
+    </header>
+
+    <div class="art__body">
+{body}
+    </div>
+
+    <footer class="art__foot">
+      <p>Printed in <b>The Crossroads</b>, Issue&nbsp;{issue}{when} &mdash; the monthly
+        magazine of Chinmaya International Residential School.</p>
+      <p class="art__onward">
+        <a class="btn btn--outline" href="{pdf}">Read the whole issue (PDF)</a>
+        <a class="btn btn--ghost-ink" href="blog.html">Back to the Blog</a>
+      </p>
+    </footer>
+  </div>
+</article>'''
+
+
 def banner_html(page):
     eyebrow, heading, lead = page["banner"]
     return f'''<section class="pagehead on-purple" id="top" data-ground="#1E1626">
@@ -934,8 +988,12 @@ def build(slug, page):
         parts.append(hero_html(page))
     elif page.get("banner"):
         parts.append(banner_html(page))
-    content = (soon_html(page) if page.get("soon")
-               else read(f"tools/pages/{slug}.html").rstrip("\n"))
+    if page.get("post"):
+        content = article_html(page)
+    elif page.get("soon"):
+        content = soon_html(page)
+    else:
+        content = read(f"tools/pages/{slug}.html").rstrip("\n")
     content = expand_figs(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
@@ -946,7 +1004,8 @@ def build(slug, page):
                        .replace("{{CROSSROADS_COUNT}}", str(crossroads.COUNT))
                        .replace("{{BLOG_FEATURED}}", blog.featured_html())
                        .replace("{{BLOG_FEED}}", blog.feed_html())
-                       .replace("{{BLOG_DESKS}}", str(blog.desk_count())))
+                       .replace("{{BLOG_COUNT}}", str(blog.count()))
+                       .replace("{{BLOG_ISSUES}}", str(blog.issue_count())))
     parts.append(content)
     if page.get("jump"):
         parts.append(jump_html(content))
@@ -963,6 +1022,24 @@ def build(slug, page):
     parts += ["</body>", "</html>", ""]
 
     return rewrite_links("\n".join(parts), slug)
+
+
+# Every published article is a page. They are added here rather than written
+# out above because they are data: seventeen entries in tools/blogposts.py,
+# each of which becomes a page with the site's own chrome around it. They are
+# not in MENU — the Blog is how a reader reaches them.
+for _post in blogposts.POSTS:
+    PAGES[_post["slug"]] = {
+        "nav": esc(_post["title"]),
+        "title": esc(_post["title"], attr=True) + " | CIRS Blog",
+        "description": esc(_post["excerpt"][:180], attr=True),
+        "sheet": "blog",
+        "uc": False,
+        # An article opens on paper, so the header cannot float over it in
+        # white lettering. The Blog's own masthead is dark and does not.
+        "litehead": True,
+        "post": _post,
+    }
 
 
 if __name__ == "__main__":
