@@ -23,10 +23,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
 <link rel="stylesheet" href="assets/css/cirs.css?b=39">
 <link rel="stylesheet" href="assets/css/pages.css?b=39">
-<link rel="stylesheet" href="assets/css/blog.css?b=39">
+<link rel="stylesheet" href="assets/css/blognews.css?b=39">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Manrope:wght@400;600&display=swap">
 </head>
 
-<body class="blog">
+<body class="blognews litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -58,7 +59,7 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header" id="header">
+<header class="header is-stuck" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -201,262 +202,298 @@
   </div>
 </div>
 <main id="main">
-<section class="masthead" id="top" data-ground="#0E0B12">
-  <div class="blogwrap masthead__grid">
-    <div>
-      <p class="masthead__kicker">A student publication &middot; Siruvani</p>
-      <h1 class="masthead__name">CIRS <em>Blog</em></h1>
-      <p class="masthead__by">Managed by the <b>Crossroads Editorial Board</b> and the
+<section class="nx-top" id="top">
+  <div class="nx-wrap">
+    <div class="nx-mast">
+      <p class="nx-mast__kicker">A student publication &middot; Siruvani</p>
+      <h1 class="nx-mast__name">CIRS <em>Blog</em></h1>
+      <p class="nx-mast__by">Managed by the <b>Crossroads Editorial Board</b> and the
         <b>CIRS Social Media Team</b>. Everything published here is written on campus, by the
-        people it is about.</p>
+        people it is about &mdash; 17 articles drawn from 7 issues of
+        <b>The Crossroads</b>, each one reproduced whole.</p>
+    </div>
 
-      <div class="masthead__stats">
-        <p class="masthead__stat"><b>17</b><span>Articles</span></p>
-        <p class="masthead__stat"><b>7</b><span>Issues drawn from</span></p>
-        <p class="masthead__stat"><b>1996</b><span>Publishing since</span></p>
+    <nav class="nx-rail" aria-label="Sections">
+      <ul class="nx-rail__list">
+        <li><span>Culture</span><b>5</b></li>
+        <li><span>Opinion</span><b>3</b></li>
+        <li><span>Economics</span><b>2</b></li>
+        <li><span>Sport</span><b>2</b></li>
+        <li><span>The Editorial</span><b>2</b></li>
+        <li><span>Campus Life</span><b>1</b></li>
+        <li><span>Reflection</span><b>1</b></li>
+        <li><span>World</span><b>1</b></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<div class="nx-wrap">
+    <section class="nx-hero" aria-label="The latest issue">
+      <div class="nx-hero__grid">
+      <article class="nx-card nx-card--over is-big rv">
+        <a class="nx-card__link" href="death-of-rationalism.html">
+          <div class="nx-shot nx-shot--tall nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Opinion</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__over">
+            <span class="nx-chip">Opinion</span>
+            <h3 class="nx-card__title">The Death of Rationalism</h3>
+            <p class="nx-card__meta">The Crossroads Editorial Team &middot; Issue&nbsp;32 &middot; August 2026</p>
+          </div>
+        </a>
+      </article>
+        <div class="nx-hero__side">
+      <article class="nx-card nx-card--row rv">
+        <a class="nx-card__link" href="beyond-the-lobby.html">
+          <div class="nx-shot nx-shot--sq nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Culture</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Culture</p>
+            <h3 class="nx-card__title">Beyond the Lobby</h3>
+            <p class="nx-card__meta">Muhil T. | IB I Yr &middot; Issue&nbsp;32 &middot; August 2026</p>
+          </div>
+        </a>
+      </article>
+      <article class="nx-card nx-card--row rv">
+        <a class="nx-card__link" href="anakin-skywalker.html">
+          <div class="nx-shot nx-shot--sq nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Culture</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Culture</p>
+            <h3 class="nx-card__title">Anakin Skywalker and the Poetics of Tragedy</h3>
+            <p class="nx-card__meta">Aayush Sreenath B &middot; Issue&nbsp;32 &middot; August 2026</p>
+          </div>
+        </a>
+      </article>
+        </div>
       </div>
-    </div>
-
-    <div class="collage" aria-hidden="true">
-      <figure class="collage__a"><img src="assets/img/blog/frag-voice.jpg" alt="" width="900" height="1200" fetchpriority="high"></figure>
-      <figure class="collage__b"><img src="assets/img/blog/frag-lab.jpg" alt="" width="800" height="800" loading="lazy"></figure>
-      <figure class="collage__c"><img src="assets/img/blog/frag-together.jpg" alt="" width="1200" height="800" loading="lazy"></figure>
-      <figure class="collage__d"><img src="assets/img/blog/frag-desk.jpg" alt="" width="1200" height="800" loading="lazy"></figure>
-      <div class="collage__note">
-        <p>&ldquo;Say the thing you actually think, and then show your working.&rdquo;</p>
-        <span>The brief, to every writer</span>
+    </section>
+    <section class="nx-sec" aria-label="Culture">
+      <div class="nx-bar rv">
+        <h2 class="nx-bar__name">Culture</h2>
+        <hr class="nx-bar__rule">
+        
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="blogwrap statement">
-    <h2>Stories, ideas and perspectives <em>from the CIRS community.</em></h2>
-    <p>Student writing, school experience, argument and reflection &mdash; the things that
-      happen here, set down by the students, staff and alumni they happened to. Every article
-      below was printed first in <b>The Crossroads</b>, the school&rsquo;s monthly magazine, and
-      is reproduced here whole. The issue each one came from is named on its card, and the
-      whole issue is a click away at the foot of every article.</p>
-  </div>
-</section>
-
-<section id="featured">
-  <div class="blogwrap">
-    <div class="feat rv">
-      <div class="feat__text">
-        <p class="feat__flag"><span class="sc">Featured</span></p>
-        <p class="feat__cat">Opinion</p>
-        <h2 class="feat__title serif" data-split>The Death of Rationalism</h2>
-        <p class="feat__stand">Rationalism was meant to be a method, not an identity. It was to be the discipline of honest seeing, not another tribe of the like-minded. You question, you examine, you see clearly.</p>
-        <p class="feat__by"><b>The Crossroads Editorial Team</b> &middot; The Crossroads, Issue&nbsp;32 &middot; August 2026</p>
-        <p class="feat__more"><a class="btn btn--primary" href="death-of-rationalism.html">Read the article &rarr;</a></p>
+      <div class="nx-grid nx-grid--3">
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="notes-of-healing.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Culture</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Culture</p>
+            <h3 class="nx-card__title">Notes of Healing</h3>
+            <p class="nx-card__meta">Ishaan Ravishankar | XII Mgmt &middot; Issue&nbsp;30 &middot; April 2026</p>
+          </div>
+        </a>
+      </article>
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="death-of-detail.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Culture</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Culture</p>
+            <h3 class="nx-card__title">Death of Detail</h3>
+            <p class="nx-card__meta">Malhar Alap Modi &middot; Issue&nbsp;4</p>
+          </div>
+        </a>
+      </article>
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="resurgence.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Culture</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Culture</p>
+            <h3 class="nx-card__title">Resurgence</h3>
+            <p class="nx-card__meta">Adhavan Diwakar Vidya &middot; Issue&nbsp;2</p>
+          </div>
+        </a>
+      </article>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="feed">
-  <div class="blogwrap">
-    <div class="feedhead rv">
-      <h2>The archive</h2>
-      <p>17 articles &middot; 7 issues</p>
-    </div>
-
-    <div class="feed">
-      <article class="post rv">
-        <a class="post__link" href="beyond-the-lobby.html">
-          <p class="post__cat">Culture</p>
-          <h3 class="post__title serif">Beyond the Lobby</h3>
-          <p class="post__stand">A digital world where millions come togethersome for a living, some for leisure, some for addiction, and some for peace.</p>
-          <p class="post__meta">
-            <span class="post__by">Muhil T. | IB I Yr</span>
-            <span class="post__issue">Issue&nbsp;32 &middot; August 2026</span>
-          </p>
+    </section>
+    <section class="nx-sec" aria-label="Top Stories">
+      <div class="nx-bar rv">
+        <h2 class="nx-bar__name">Top Stories</h2>
+        <hr class="nx-bar__rule">
+        
+      </div>
+      <div class="nx-lead">
+      <article class="nx-card nx-card--over is-big rv">
+        <a class="nx-card__link" href="geography-and-geopolitics.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">World</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__over">
+            <span class="nx-chip">World</span>
+            <h3 class="nx-card__title">Geography and Geopolitics</h3>
+            <p class="nx-card__meta">Shaurya Bhartia | XII Mgmt &middot; Issue&nbsp;31 &middot; May 2026</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="anakin-skywalker.html">
-          <p class="post__cat">Culture</p>
-          <h3 class="post__title serif">Anakin Skywalker and the Poetics of Tragedy</h3>
-          <p class="post__stand">The Star Wars prequel is, at its core, a tragedy. Yet within popular discourse it has long been dismissed as pulp science fiction; a spectacle over substance sort of material.</p>
-          <p class="post__meta">
-            <span class="post__by">Aayush Sreenath B</span>
-            <span class="post__issue">Issue&nbsp;32 &middot; August 2026</span>
-          </p>
+        <div class="nx-panel rv">
+          <p class="nx-panel__eyebrow">Never miss an issue</p>
+          <h3 class="nx-panel__title">The Crossroads, in your inbox</h3>
+          <p class="nx-panel__note">Every article here ran first in the school&rsquo;s
+            monthly magazine. New issues are posted as they are printed.</p>
+          <p class="nx-panel__act"><em>[Placeholder &mdash; the list to subscribe to, to be
+            supplied by the Crossroads Editorial Board and the CIRS Social Media Team.]</em></p>
+        </div>
+      </div>
+      <div class="nx-grid nx-grid--2">
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="rumors-at-cirs.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Campus Life</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Campus Life</p>
+            <h3 class="nx-card__title">Rumors at CIRS</h3>
+            <p class="nx-card__meta">Divyam Gupta | IB I Yr &middot; Issue&nbsp;31 &middot; May 2026</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="is-ai-art-really-art.html">
-          <p class="post__cat">Opinion</p>
-          <h3 class="post__title serif">Is AI - Art Really Art?</h3>
-          <p class="post__stand">In today’s world, nearly everything we do has a trace of artificial intelligence in it, from our daily tasks to our school projects.</p>
-          <p class="post__meta">
-            <span class="post__by">T. Muhil | IB I Yr</span>
-            <span class="post__issue">Issue&nbsp;31 &middot; May 2026</span>
-          </p>
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="voyages-in-the-yuva-kendra.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Reflection</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Reflection</p>
+            <h3 class="nx-card__title">Voyages in the Yuva Kendra</h3>
+            <p class="nx-card__meta">Adithyan Diwakar Vidya | IB II &middot; Issue&nbsp;29 &middot; February 2026</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="rumors-at-cirs.html">
-          <p class="post__cat">Campus Life</p>
-          <h3 class="post__title serif">Rumors at CIRS</h3>
-          <p class="post__stand">Do you agree with me that here, in CIRS, news about people and events spreads like wildfire? Whether in late-night talks or Crossroads walks, we cannot keep gossip to ourselves.</p>
-          <p class="post__meta">
-            <span class="post__by">Divyam Gupta | IB I Yr</span>
-            <span class="post__issue">Issue&nbsp;31 &middot; May 2026</span>
-          </p>
+      </div>
+    </section>
+    <section class="nx-sec" aria-label="Opinion">
+      <div class="nx-bar rv">
+        <h2 class="nx-bar__name">Opinion</h2>
+        <hr class="nx-bar__rule">
+        
+      </div>
+      <div class="nx-grid nx-grid--2">
+      <article class="nx-card nx-card--over rv">
+        <a class="nx-card__link" href="is-ai-art-really-art.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Opinion</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__over">
+            <span class="nx-chip">Opinion</span>
+            <h3 class="nx-card__title">Is AI - Art Really Art?</h3>
+            <p class="nx-card__meta">T. Muhil | IB I Yr &middot; Issue&nbsp;31 &middot; May 2026</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="hot-wheels-vs-barbie.html">
-          <p class="post__cat">Opinion</p>
-          <h3 class="post__title serif">Hot Wheels V/S Barbie</h3>
-          <p class="post__stand">I am a proud biology student, and my biology class has a MEGA, WHOPPING, GARGANTUAN class strength of 2! And these supercalifragilisticexpialidocious students are girls.</p>
-          <p class="post__meta">
-            <span class="post__by">Prisha Kantesaria</span>
-            <span class="post__issue">Issue&nbsp;31 &middot; May 2026</span>
-          </p>
+      <article class="nx-card nx-card--over rv">
+        <a class="nx-card__link" href="hot-wheels-vs-barbie.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Opinion</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__over">
+            <span class="nx-chip">Opinion</span>
+            <h3 class="nx-card__title">Hot Wheels V/S Barbie</h3>
+            <p class="nx-card__meta">Prisha Kantesaria &middot; Issue&nbsp;31 &middot; May 2026</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="geography-and-geopolitics.html">
-          <p class="post__cat">World</p>
-          <h3 class="post__title serif">Geography and Geopolitics</h3>
-          <p class="post__stand">Every week, we stare at the "News of the Week" presentation on the screen, clapping loudly at the second anything mildly related to India, any sports team, or Donald Trump that flashes by.</p>
-          <p class="post__meta">
-            <span class="post__by">Shaurya Bhartia | XII Mgmt</span>
-            <span class="post__issue">Issue&nbsp;31 &middot; May 2026</span>
-          </p>
+      </div>
+    </section>
+    <section class="nx-sec" aria-label="Sport">
+      <div class="nx-bar rv">
+        <h2 class="nx-bar__name">Sport</h2>
+        <hr class="nx-bar__rule">
+        
+      </div>
+      <div class="nx-grid nx-grid--2">
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="sportswashing.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Sport</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Sport</p>
+            <h3 class="nx-card__title">Sportswashing: The New Geopolitics</h3>
+            <p class="nx-card__meta">Shaurya Bhartia &middot; Issue&nbsp;30 &middot; April 2026</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="sportswashing.html">
-          <p class="post__cat">Sport</p>
-          <h3 class="post__title serif">Sportswashing: The New Geopolitics</h3>
-          <p class="post__stand">The summer of 2023 changed football forever. It wasn’t just the usual go-to of European transfers; it was something weird. Why?</p>
-          <p class="post__meta">
-            <span class="post__by">Shaurya Bhartia</span>
-            <span class="post__issue">Issue&nbsp;30 &middot; April 2026</span>
-          </p>
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="the-journey-behind-excellence.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Sport</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Sport</p>
+            <h3 class="nx-card__title">The Journey Behind Excellence</h3>
+            <p class="nx-card__meta">Aarav Bhartia | X B &middot; Issue&nbsp;29 &middot; February 2026</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="notes-of-healing.html">
-          <p class="post__cat">Culture</p>
-          <h3 class="post__title serif">Notes of Healing</h3>
-          <p class="post__stand">Music is something most of us cherish, holding a special place in our lives. It speaks volumes about our personality, and offers insights into our very souls.</p>
-          <p class="post__meta">
-            <span class="post__by">Ishaan Ravishankar | XII Mgmt</span>
-            <span class="post__issue">Issue&nbsp;30 &middot; April 2026</span>
-          </p>
+      </div>
+    </section>
+    <section class="nx-cta rv" id="write">
+      <div class="nx-cta__shot">
+        <img src="assets/img/blog/frag-desk.jpg" alt="Students writing at their desks"
+             width="1200" height="800" loading="lazy">
+      </div>
+      <div class="nx-cta__text">
+        <h2 class="nx-cta__title">Write for The Crossroads</h2>
+        <p>Everything here began as a piece in the school&rsquo;s monthly magazine. It takes
+          writing from any student in the school &mdash; argument, reportage, reflection,
+          review &mdash; and what runs in print runs here afterwards.</p>
+        <p class="nx-cta__act"><em>[Placeholder &mdash; the editorial board&rsquo;s submission
+          address and the deadline for each issue, to be supplied by the Crossroads Editorial
+          Board and the CIRS Social Media Team.]</em></p>
+      </div>
+    </section>
+    <section class="nx-sec nx-duo" aria-label="More from the magazine">
+      <div class="nx-duo__col">
+      <div class="nx-bar rv">
+        <h2 class="nx-bar__name">Economics</h2>
+        <hr class="nx-bar__rule">
+        
+      </div>
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="the-race-beyond.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Economics</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Economics</p>
+            <h3 class="nx-card__title">The Race Beyond</h3>
+            <p class="nx-card__meta">Lokk Vishwavedaa &middot; Issue&nbsp;29 &middot; February 2026</p>
+            <p class="nx-card__stand">It's Sunday. Millions are tuning into their digital screens to watch one thing. Fast cars. Actually, 20 of them, racing at speeds that vaporize everything in their path.</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="my-home.html">
-          <p class="post__cat">The Editorial</p>
-          <h3 class="post__title serif">My Home</h3>
-          <p class="post__stand">Like most other kids, I had an enjoyable childhood with my family, so naturally, making the tough decision to join a boarding school 2,359 long kilometres away from home was an emotional one.</p>
-          <p class="post__meta">
-            <span class="post__by">Vishv Prem Nangia</span>
-            <span class="post__issue">Issue&nbsp;29 &middot; February 2026</span>
-          </p>
+      </div>
+      <div class="nx-duo__col">
+      <div class="nx-bar rv">
+        <h2 class="nx-bar__name">The Editorial</h2>
+        <hr class="nx-bar__rule">
+        
+      </div>
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="my-home.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">The Editorial</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">The Editorial</p>
+            <h3 class="nx-card__title">My Home</h3>
+            <p class="nx-card__meta">Vishv Prem Nangia &middot; Issue&nbsp;29 &middot; February 2026</p>
+            <p class="nx-card__stand">Like most other kids, I had an enjoyable childhood with my family, so naturally, making the tough decision to join a boarding school 2,359 long kilometres away from home was an emotional one.</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="voyages-in-the-yuva-kendra.html">
-          <p class="post__cat">Reflection</p>
-          <h3 class="post__title serif">Voyages in the Yuva Kendra</h3>
-          <p class="post__stand">Bag stuffed, folder filled, and brain completely devoid of meaning: that would accurately encapsulate my state in the very first class of CHYK CIRS.</p>
-          <p class="post__meta">
-            <span class="post__by">Adithyan Diwakar Vidya | IB II</span>
-            <span class="post__issue">Issue&nbsp;29 &middot; February 2026</span>
-          </p>
+      </div>
+    </section>
+    <section class="nx-sec" aria-label="From the archive">
+      <div class="nx-bar rv">
+        <h2 class="nx-bar__name">From the archive</h2>
+        <hr class="nx-bar__rule">
+        
+      </div>
+      <div class="nx-grid nx-grid--2">
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="trust-or-bust.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">Economics</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">Economics</p>
+            <h3 class="nx-card__title">Trust or Bust: The Never-Ending Problem of the Prisoner's Dilemma</h3>
+            <p class="nx-card__meta">Aarav Bhartia | X B &middot; Issue&nbsp;29 &middot; February 2026</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="the-race-beyond.html">
-          <p class="post__cat">Economics</p>
-          <h3 class="post__title serif">The Race Beyond</h3>
-          <p class="post__stand">It's Sunday. Millions are tuning into their digital screens to watch one thing. Fast cars. Actually, 20 of them, racing at speeds that vaporize everything in their path.</p>
-          <p class="post__meta">
-            <span class="post__by">Lokk Vishwavedaa</span>
-            <span class="post__issue">Issue&nbsp;29 &middot; February 2026</span>
-          </p>
+      <article class="nx-card nx-card--stack rv">
+        <a class="nx-card__link" href="the-social-glue.html">
+          <div class="nx-shot nx-shot--wide nx-shot--ph" role="img" aria-label="Photograph to come"><span class="nx-ph__cat">The Editorial</span><span class="nx-ph__note">Photograph<br>to come</span></div>
+          <div class="nx-card__text">
+            <p class="nx-cat">The Editorial</p>
+            <h3 class="nx-card__title">The Social Glue</h3>
+            <p class="nx-card__meta">Raahi Tejas Shah &middot; Issue&nbsp;17 &middot; July 2024</p>
+          </div>
         </a>
       </article>
-      <article class="post rv">
-        <a class="post__link" href="trust-or-bust.html">
-          <p class="post__cat">Economics</p>
-          <h3 class="post__title serif">Trust or Bust: The Never-Ending Problem of the Prisoner's Dilemma</h3>
-          <p class="post__stand">Imagine yourself in this familiar high school scene where you and your best friend are tasked with a huge project, the kind that demands hours of focused, dedicated work.</p>
-          <p class="post__meta">
-            <span class="post__by">Aarav Bhartia | X B</span>
-            <span class="post__issue">Issue&nbsp;29 &middot; February 2026</span>
-          </p>
-        </a>
-      </article>
-      <article class="post rv">
-        <a class="post__link" href="the-journey-behind-excellence.html">
-          <p class="post__cat">Sport</p>
-          <h3 class="post__title serif">The Journey Behind Excellence</h3>
-          <p class="post__stand">"No, I cannot do it anymore" - Have you said this to yourself in the middle of a 5,000 metres race? And later, regret the same while reflecting?</p>
-          <p class="post__meta">
-            <span class="post__by">Aarav Bhartia | X B</span>
-            <span class="post__issue">Issue&nbsp;29 &middot; February 2026</span>
-          </p>
-        </a>
-      </article>
-      <article class="post rv">
-        <a class="post__link" href="the-social-glue.html">
-          <p class="post__cat">The Editorial</p>
-          <h3 class="post__title serif">The Social Glue</h3>
-          <p class="post__stand">The human brain evolved to navigate and maintain social structures of life. Primordially, we needed each other to survive.</p>
-          <p class="post__meta">
-            <span class="post__by">Raahi Tejas Shah</span>
-            <span class="post__issue">Issue&nbsp;17 &middot; July 2024</span>
-          </p>
-        </a>
-      </article>
-      <article class="post rv">
-        <a class="post__link" href="death-of-detail.html">
-          <p class="post__cat">Culture</p>
-          <h3 class="post__title serif">Death of Detail</h3>
-          <p class="post__stand">A long day at work, and you’re tired to the bone. You decide to visit the nearby park to finally take a break, and seat yourself on a bench.</p>
-          <p class="post__meta">
-            <span class="post__by">Malhar Alap Modi</span>
-            <span class="post__issue">Issue&nbsp;4</span>
-          </p>
-        </a>
-      </article>
-      <article class="post rv">
-        <a class="post__link" href="resurgence.html">
-          <p class="post__cat">Culture</p>
-          <h3 class="post__title serif">Resurgence</h3>
-          <p class="post__stand">Jana Gana Mana Adhinayaka Jaya He, Bharata Bhagya Vidhata!</p>
-          <p class="post__meta">
-            <span class="post__by">Adhavan Diwakar Vidya</span>
-            <span class="post__issue">Issue&nbsp;2</span>
-          </p>
-        </a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="write">
-  <div class="blogwrap submit">
-    <h2>Writing for the Blog</h2>
-    <div>
-      <p>Everything here began as a piece in <b>The Crossroads</b>. The magazine takes writing
-        from any student in the school &mdash; argument, reportage, reflection, review &mdash;
-        and what runs in print runs here afterwards.</p>
-      <p><em>[Placeholder &mdash; the editorial board&rsquo;s submission address and the deadline
-        for each issue, to be supplied by the Crossroads Editorial Board and the CIRS Social
-        Media Team.]</em></p>
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
+</div>
 <section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
