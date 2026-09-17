@@ -35,7 +35,7 @@ import documents as docs
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=33"
+CACHE_BUST = "b=35"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -227,9 +227,15 @@ PAGES = {
         "title": "Student Life",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
                        "hundred-acre campus it happens on.",
-        "banner": ("Student life", "Live, Learn, <em>Belong.</em>",
-                   "The boarding houses, the shape of an ordinary day, and the campus the whole "
-                   "of it happens on."),
+        # This page opens on the school's own campaign banner rather than the
+        # flat purple band. The picture already has "#CIRS — More Than A
+        # School" set across the middle of it, so nothing is laid over it: the
+        # page's own headline opens the first section instead, in
+        # tools/pages/student-life.html. See banner_image_html below.
+        "banner_image": ("student-life-banner.jpg", 1920, 768,
+                         "A collage of photographs of CIRS students — assembly, debate, dance, "
+                         "music and the campus — around the words: hashtag CIRS, More Than A "
+                         "School."),
     },
     "sports": {
         "nav": "Our Sports",
@@ -552,6 +558,24 @@ def banner_html(page):
     <p class="lead">{lead}</p>
   </div>
 </section>'''
+
+
+def banner_image_html(page):
+    """A page that opens on a picture instead of a band of type.
+
+    For a picture that is already a finished piece of design and carries its
+    own lettering — the campaign banner on Student Life. Nothing is laid over
+    it, because two wordmarks in one space is one too many, and it takes no
+    data-ground: it covers its own area, and the paper the site already sits
+    on is the right ground beside it.
+
+    The page's own headline is not lost; it opens the first section instead.
+    """
+    src, w, h, alt = page["banner_image"]
+    return (f'<section class="pagehead pagehead--image" id="top">\n'
+            f'  <img src="assets/img/{src}?{CACHE_BUST}" alt="{alt}"\n'
+            f'       width="{w}" height="{h}" fetchpriority="high">\n'
+            f'</section>')
 
 
 HOME_TAB = '''<a class="htab" href="index.html">
@@ -909,18 +933,28 @@ def build(slug, page):
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
-    body_class = "wall" if wall else page.get("sheet")
+    # A page whose banner is a light picture cannot have the header floating
+    # over it in white. It starts in the solid treatment .is-stuck already
+    # defines and stays there — set here in the markup so it holds without
+    # JavaScript, and left alone by cirs.js, which reads this class.
+    lite = bool(page.get("banner_image"))
+    classes = [c for c in ["wall" if wall else page.get("sheet"),
+                           "litehead" if lite else None] if c]
+    body_class = " ".join(classes)
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              read("tools/partials/chrome.html").rstrip("\n")]
     drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
     # The home page needs no Home tab — the wordmark already leads here, and a
     # Home link on Home is a link to nowhere.
-    header = read("tools/partials/header.html").replace(
-        "{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
+    header = (read("tools/partials/header.html")
+              .replace("{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
+              .replace("{{HEADER_STATE}}", " is-stuck" if lite else ""))
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
     if page.get("hero"):
         parts.append(hero_html(page))
+    elif page.get("banner_image"):
+        parts.append(banner_image_html(page))
     elif page.get("banner"):
         parts.append(banner_html(page))
     content = (soon_html(page) if page.get("soon")

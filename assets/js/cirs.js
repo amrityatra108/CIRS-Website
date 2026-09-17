@@ -686,7 +686,11 @@
 
   (function chrome() {
     var header = $("#header");
-    if (header) {
+    // A page that opens on a light picture (body.litehead) has the header
+    // solid from the top, set in the markup so it holds without this script.
+    // Toggling it here would strip that on the way back up and leave white
+    // lettering on a pale photograph.
+    if (header && !document.body.classList.contains("litehead")) {
       // The header rides transparent over the hero and only turns solid once
       // the hero itself has scrolled mostly out of view.
       sentinel(function () {

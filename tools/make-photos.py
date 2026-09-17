@@ -22,6 +22,13 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "assets/source")
 OUT = os.path.join(ROOT, "assets/img")
 
+# The grade below is for photographs. One image here is not a photograph but
+# a finished piece of the school's own design, with its wordmark set into it:
+# the wash flattens the bright blues it is built on and warms the whole thing,
+# which reads as a faded picture rather than a campaign banner. It is cut at
+# its own colours. Remove a name from here and it is graded like the rest.
+UNGRADED = {"student-life-banner.jpg"}
+
 SHADOW = (36, 26, 56)
 HIGHLIGHT = (240, 229, 212)
 KEEP_COLOUR = 0.72        # most of the original colour survives
@@ -70,6 +77,13 @@ PHOTOS = [
     ("motto.jpg",               "IMG_1686.JPG",           (1600,  900), (0.46, 0.50)),
     ("boarding.jpg",            "20180518_121042.jpg",    (1600,  900), (0.52, 0.50)),
     ("students.jpg",            "IMG_8075.JPG",           (1400,  640), (0.50, 0.48)),
+
+    # The Student Life banner. Not a photograph but a finished piece of the
+    # school's own campaign design, with its wordmark set into the middle of
+    # it — so the page carries no headline of its own over it, and it is cut
+    # at its own colours rather than graded (see UNGRADED above). The crop is
+    # the whole frame, 2.5:1 as supplied.
+    ("student-life-banner.jpg", "cirs-more-than-a-school.png", (1920, 768), (0.50, 0.50)),
 
     # The Blog. Four fragments for the hero collage, cut so each one reads as
     # a detail rather than a whole photograph, then the featured landscape and
@@ -129,8 +143,10 @@ def main():
         im = ImageOps.exif_transpose(Image.open(os.path.join(SRC, source))).convert("RGB")
         out = os.path.join(OUT, name)
         os.makedirs(os.path.dirname(out), exist_ok=True)
-        grade(cover(im, w, h, focal)).save(
-            out, "JPEG", quality=84, optimize=True, progressive=True)
+        cut = cover(im, w, h, focal)
+        if name not in UNGRADED:
+            cut = grade(cut)
+        cut.save(out, "JPEG", quality=84, optimize=True, progressive=True)
         kb = os.path.getsize(out) // 1024
         total += kb
         print(f"  {name:<22} {w}x{h:<5} {kb:>4} KB   <- {source}")
