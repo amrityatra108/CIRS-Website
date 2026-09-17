@@ -264,7 +264,16 @@ PAGES = {
         # its own masthead, which the page brings with it, and it brings its own
         # sheet to set type larger than anything else on this site.
         "banner": None,
-        "sheet": "blog",
+        # The front page wears its own sheet, not the one the articles wear:
+        # it is a news stand and they are reading pages, and they share no
+        # markup. blognews.css is scoped to body.blognews for that reason.
+        "sheet": "blognews",
+        # It alone is set in Lexend and Manrope: Lexend for anything
+        # structural, Manrope only for prose and dates.
+        "fonts": "family=Lexend:wght@500;600;700&family=Manrope:wght@400;600",
+        # It opens on a warm off-white, so the header cannot float over it in
+        # white lettering.
+        "litehead": True,
     },
     "cultural-gallery": {
         "nav": "CIRS Cultural Gallery",
@@ -966,6 +975,17 @@ def build(slug, page):
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
+    # A page may also bring typefaces of its own. head.html loads the three the
+    # site is set in; a page that is set in something else asks for it here
+    # rather than there, so the other forty-one pages do not fetch a face they
+    # never render. The value is the family part of a Google Fonts css2 query.
+    fonts = page.get("fonts")
+    if fonts:
+        head = head.replace(
+            "</head>",
+            f'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?{fonts}'
+            '&display=swap">\n</head>')
+
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
     # .is-stuck already defines and keeps it there — set here in the markup so
@@ -1002,8 +1022,8 @@ def build(slug, page):
                        .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
                        .replace("{{CROSSROADS_COUNT}}", str(crossroads.COUNT))
-                       .replace("{{BLOG_FEATURED}}", blog.featured_html())
-                       .replace("{{BLOG_FEED}}", blog.feed_html())
+                       .replace("{{BLOG_FRONT}}", blog.front_html())
+                       .replace("{{BLOG_RAIL}}", blog.rail_html())
                        .replace("{{BLOG_COUNT}}", str(blog.count()))
                        .replace("{{BLOG_ISSUES}}", str(blog.issue_count())))
     parts.append(content)

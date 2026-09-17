@@ -1,0 +1,494 @@
+/* The CIRS Blog front page — a news stand, not a page of the school website.
+
+   Scoped to body.blognews, so nothing here reaches any other page, including
+   the seventeen article pages, which wear body.blog and assets/css/blog.css.
+
+   The design is deliberately not the site's. Where the rest of CIRS is warm
+   purple, serif and centred, this is square, red-accented and gridded, after
+   the Nexus News specification. Three rules carry the whole look and none of
+   them can be relaxed without losing it:
+
+     1. Nothing is rounded. Every corner is square, and the one exception is
+        a submit button at 4px. A border-radius anywhere else breaks it.
+     2. Nothing is shadowed. Separation comes from hairline rules and from
+        whitespace, never from a drop shadow.
+     3. Two faces, strictly divided. Lexend sets anything structural — the
+        masthead, section names, card titles, buttons, category labels.
+        Manrope sets prose and dates, and nothing else.
+
+   The red is an accent, not a theme: category labels, links, two panels. The
+   ground is a warm off-white, #fffefa rather than #fff, and the whole page
+   should read very slightly cream.
+
+   No article has a photograph yet. .nx-shot--ph draws the frame the picture
+   will occupy at the exact ratio its slot wants, so the grid already stands
+   at its final proportions — see _ph() in tools/blog.py for how to fill one. */
+
+body.blognews{
+  --nx-red:#cf412b;
+  --nx-red-dark:#b23623;
+  --nx-ink:#1f1f1f;
+  --nx-body:#3d3d3d;
+  --nx-muted:#8c8c8c;
+  --nx-bg:#fffefa;
+  --nx-surface:#f5f5f5;
+  --nx-rule:#e3e0da;
+  --nx-lex:"Lexend", "Schibsted Grotesk", system-ui, sans-serif;
+  --nx-man:"Manrope", "Schibsted Grotesk", system-ui, sans-serif;
+
+  background: var(--nx-bg);
+  color: var(--nx-body);
+}
+
+.nx-wrap{
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(18px, 4vw, 40px);
+}
+
+/* ------------------------------------------------------------- the masthead */
+
+.nx-top{
+  border-bottom: 1px solid var(--nx-rule);
+  padding-block: clamp(96px, 13vh, 150px) 0;
+}
+.nx-mast{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 56px);
+  align-items: end;
+  padding-bottom: clamp(24px, 4vw, 40px);
+}
+.nx-mast__kicker{
+  grid-column: 1 / -1;
+  margin: 0 0 14px;
+  font-family: var(--nx-lex);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--nx-red);
+}
+.nx-mast__name{
+  margin: 0;
+  font-family: var(--nx-lex);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: .95;
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+  color: var(--nx-ink);
+}
+.nx-mast__name em{ font-style: normal; color: var(--nx-red); }
+.nx-mast__by{
+  margin: 0;
+  font-family: var(--nx-man);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--nx-body);
+}
+.nx-mast__by b{ color: var(--nx-ink); font-weight: 600; }
+@media (max-width: 860px){
+  .nx-mast{ grid-template-columns: 1fr; gap: 20px; align-items: start; }
+}
+
+/* The strip of sections: what the blog covers, and how much of each. */
+.nx-rail{ border-top: 1px solid var(--nx-rule); }
+.nx-rail__list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 clamp(18px, 3vw, 32px);
+  margin: 0;
+  padding: 14px 0;
+  list-style: none;
+}
+.nx-rail__list li{
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--nx-lex);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--nx-ink);
+}
+.nx-rail__list b{
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--nx-red);
+}
+
+/* --------------------------------------------------------------- the grids */
+
+.nx-hero{ padding-block: clamp(28px, 4vw, 48px); }
+.nx-hero__grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.nx-hero__side{ display: grid; grid-template-rows: 1fr 1fr; gap: 20px; }
+
+.nx-sec{ padding-block: 0 clamp(28px, 4vw, 48px); }
+
+.nx-grid{ display: grid; gap: 20px 24px; }
+.nx-grid--2{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.nx-grid--3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.nx-grid--4{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* The rule that opens a section: a red tick, the name, then a hairline that
+   runs to the far edge of the container. */
+.nx-bar{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.nx-bar__name{
+  position: relative;
+  margin: 0;
+  padding-left: 13px;
+  font-family: var(--nx-lex);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--nx-ink);
+  white-space: nowrap;
+}
+.nx-bar__name::before{
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 3px; height: 20px;
+  background: var(--nx-red);
+}
+.nx-bar__rule{
+  flex: 1 1 auto;
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--nx-rule);
+}
+.nx-bar__more{
+  flex: 0 0 auto;
+  font-family: var(--nx-lex);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--nx-red);
+  text-decoration: none;
+}
+.nx-bar__more:hover{ color: var(--nx-red-dark); }
+
+/* ---------------------------------------------------------------- the cards */
+
+.nx-card{ position: relative; }
+.nx-card__link{
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The photograph, or the space kept for it. overflow:hidden is what lets the
+   picture grow inside a frame that does not move. */
+.nx-shot{
+  position: relative;
+  overflow: hidden;
+  background: var(--nx-surface);
+}
+.nx-shot img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+.nx-card__link:hover .nx-shot img{ transform: scale(1.04); }
+
+.nx-shot--sq{ aspect-ratio: 1 / 1; }
+.nx-shot--wide{ aspect-ratio: 16 / 9; }
+.nx-shot--tall{ aspect-ratio: 3 / 4; }
+
+/* The photograph that is not here yet. It says so, quietly, and holds the
+   frame at the ratio the picture will have. */
+.nx-shot--ph{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #f2f0eb 0 10px,
+      #ededE7 10px 20px);
+  border: 1px solid var(--nx-rule);
+  text-align: center;
+}
+.nx-ph__cat{
+  font-family: var(--nx-lex);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--nx-red);
+}
+.nx-ph__note{
+  font-family: var(--nx-man);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--nx-muted);
+}
+
+.nx-cat{
+  margin: 0 0 6px;
+  font-family: var(--nx-lex);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--nx-red);
+}
+.nx-card__title{
+  margin: 0;
+  font-family: var(--nx-lex);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--nx-ink);
+  transition: color .2s ease;
+  text-wrap: balance;
+}
+.nx-card__link:hover .nx-card__title{ color: var(--nx-red); }
+.nx-card__meta{
+  margin: 8px 0 0;
+  font-family: var(--nx-man);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--nx-muted);
+}
+.nx-card__stand{
+  margin: 12px 0 0;
+  font-family: var(--nx-man);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--nx-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* B · stacked, the default card. */
+.nx-card--stack .nx-card__text{ padding-top: 12px; }
+.nx-card--stack.is-sm .nx-card__title{ font-size: 16px; font-weight: 600; }
+
+/* C · a square thumb at the left, the words beside it. */
+.nx-card--row .nx-card__link{
+  display: grid;
+  grid-template-columns: minmax(0, 230px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+  height: 100%;
+}
+/* The thumb stays the square its slot asks for and sits centred in a card that
+   may be taller than it — stretching it to the card's height would make its
+   width follow, push it past its column and crowd the words out of the card. */
+.nx-card--row .nx-shot{ align-self: center; }
+@media (max-width: 480px){
+  .nx-card--row .nx-card__link{ grid-template-columns: 1fr; gap: 12px; }
+  .nx-card--row .nx-shot{ aspect-ratio: 16 / 9; }
+}
+
+/* A · the photograph carries it, the words sit over its foot. */
+.nx-card--over .nx-card__link{ position: relative; display: block; height: 100%; }
+/* An overlay card fills whatever height its row settles on — beside the red
+   panel that is the panel's height, not the picture's.
+   The picture is taken out of that calculation altogether. Sizing it from the
+   card while the card is sized from it is circular, and the browser settles
+   the two at different numbers: the card then spills over the row below it.
+   So the card's own ratio sets its height when nothing else does, height:100%
+   lets a taller neighbour stretch it, and the picture is laid absolutely into
+   whatever that comes to. */
+.nx-card--over .nx-card__link{ width: 100%; aspect-ratio: 16 / 9; }
+.nx-card--over .nx-shot{
+  position: absolute;
+  inset: 0;
+  width: auto; height: auto;
+  aspect-ratio: auto;
+}
+.nx-hero .nx-card--over .nx-card__link{ aspect-ratio: 3 / 4; }
+.nx-card--over .nx-card__over{
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 24px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .75));
+}
+.nx-card--over .nx-card__title{ color: #fff; font-size: 24px; }
+.nx-card--over .nx-card__link:hover .nx-card__title{ color: #fff; text-decoration: underline; }
+.nx-card--over .nx-card__meta{ color: rgba(255, 255, 255, .8); }
+/* Over a placeholder rather than a photograph, white type has nothing dark to
+   sit on. The gradient is replaced by ink so the words stay legible. */
+.nx-card--over .nx-shot--ph + .nx-card__over{ background: rgba(31, 31, 31, .92); }
+/* On an overlay card the words cover the foot of the frame, so the note saying
+   a photograph is coming sits above them rather than behind them. */
+.nx-card--over .nx-shot--ph{ justify-content: flex-start; padding-top: 16%; }
+.nx-card--over.is-big .nx-card__title{ font-size: clamp(22px, 2.2vw, 28px); }
+
+.nx-chip{
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  background: var(--nx-red);
+  font-family: var(--nx-lex);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ------------------------------------------------------- the two red panels */
+
+.nx-lead{
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+/* Beside the panel the card does not impose a ratio of its own: the row is as
+   tall as the panel's words need, and a card holding a ratio here would size
+   the row to the picture instead, leaving the panel to overflow it. The floor
+   keeps the picture from collapsing if the panel is ever nearly empty. */
+.nx-lead .nx-card--over .nx-card__link{
+  aspect-ratio: auto;
+  height: 100%;
+  min-height: 320px;
+}
+
+.nx-panel{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: clamp(28px, 4vw, 48px);
+  background: var(--nx-red);
+  color: #fff;
+}
+.nx-panel__eyebrow{
+  margin: 0;
+  font-family: var(--nx-lex);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.nx-panel__title{
+  margin: 0;
+  font-family: var(--nx-lex);
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.nx-panel__note,
+.nx-panel__act{
+  margin: 0;
+  font-family: var(--nx-man);
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, .92);
+}
+.nx-panel__act{ font-size: 13.5px; color: rgba(255, 255, 255, .8); }
+
+/* The band that asks for writing. The picture breaks out of the red block at
+   the top and bottom, which is the one place this page lets anything overlap. */
+.nx-cta{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  margin-block: clamp(28px, 4vw, 48px);
+  padding: 40px;
+  background: var(--nx-red);
+  color: #fff;
+}
+.nx-cta__shot{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: -80px;
+  aspect-ratio: 4 / 3;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, .16) 0 10px,
+      rgba(255, 255, 255, .08) 10px 20px);
+  border: 1px solid rgba(255, 255, 255, .4);
+  font-family: var(--nx-man);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(255, 255, 255, .85);
+}
+/* When the photograph is there it covers the frame entirely; the stripes above
+   are what shows in the gap before it loads, and on any slot still waiting. */
+.nx-cta__shot img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.nx-cta__title{
+  margin: 0 0 14px;
+  font-family: var(--nx-lex);
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.nx-cta__text p{
+  margin: 0 0 12px;
+  font-family: var(--nx-man);
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, .92);
+}
+.nx-cta__act{ font-size: 13.5px !important; color: rgba(255, 255, 255, .8) !important; }
+
+/* Two small sections side by side, each with its own rule. */
+.nx-duo{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 24px;
+}
+
+/* ------------------------------------------------------------- narrower */
+
+@media (max-width: 1024px){
+  .nx-grid--4{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 860px){
+  .nx-hero__grid,
+  .nx-lead,
+  .nx-cta{ grid-template-columns: 1fr; }
+  .nx-hero__side{ grid-template-rows: auto auto; }
+  .nx-cta__shot{ margin-block: 0; order: -1; }
+  .nx-card--over.is-big .nx-card__title{ font-size: 22px; }
+  .nx-shot--tall{ aspect-ratio: 16 / 10; }
+  .nx-hero .nx-card--over .nx-card__link{ aspect-ratio: 16 / 10; }
+  /* The floor belongs to the two-column case only. Kept here, against the
+     ratio, it would set a minimum WIDTH of 320 x 16/9 and push the card wider
+     than the screen. */
+  .nx-lead .nx-card--over .nx-card__link{
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 0;
+  }
+}
+@media (max-width: 768px){
+  .nx-grid--3{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nx-grid--2,
+  .nx-duo{ grid-template-columns: 1fr; }
+}
+@media (max-width: 480px){
+  .nx-grid--2,
+  .nx-grid--3,
+  .nx-grid--4{ grid-template-columns: 1fr; }
+  .nx-bar__name{ white-space: normal; }
+}

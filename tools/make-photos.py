@@ -106,9 +106,12 @@ PHOTOS = [
     # no photograph at all: every article came out of the magazine, and a
     # stock picture over someone's essay says less than the essay's own first
     # sentences do.
-    ("blog/frag-voice.jpg",     "0C9A4095.JPG",   ( 900, 1200), (0.52, 0.42)),
-    ("blog/frag-lab.jpg",       "IMG_1790.JPG",   ( 800,  800), (0.52, 0.45)),
-    ("blog/frag-together.jpg",  "IMG_0633.JPG",   (1200,  800), (0.50, 0.45)),
+    # The three commented lines above cut the old Blog masthead collage, which
+    # the news-stand front page replaced. Their originals are still in
+    # assets/source/ and their crops are intact: uncomment to bring them back.
+    # ("blog/frag-voice.jpg",     "0C9A4095.JPG",   ( 900, 1200), (0.52, 0.42)),
+    # ("blog/frag-lab.jpg",       "IMG_1790.JPG",   ( 800,  800), (0.52, 0.45)),
+    # ("blog/frag-together.jpg",  "IMG_0633.JPG",   (1200,  800), (0.50, 0.45)),
     ("blog/frag-desk.jpg",      "IMG_8830.JPG",   (1200,  800), (0.50, 0.52)),
 
     # Sport — the inter-house basketball fixture, in the same 4:3 tile as the
