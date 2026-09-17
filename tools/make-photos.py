@@ -27,7 +27,7 @@ OUT = os.path.join(ROOT, "assets/img")
 # the wash flattens the bright blues it is built on and warms the whole thing,
 # which reads as a faded picture rather than a campaign banner. It is cut at
 # its own colours. Remove a name from here and it is graded like the rest.
-UNGRADED = {"student-life-banner.jpg"}
+UNGRADED = set()
 
 SHADOW = (36, 26, 56)
 HIGHLIGHT = (240, 229, 212)
@@ -40,7 +40,11 @@ PHOTOS = [
     # Feature panels — 4:5, one per page. Arts no longer has one: that page
     # is the wall, and tools/make-arts-wall.py cuts its photographs.
     ("sports.jpg",              "HARI5692.JPG", (1200, 1500), (0.42, 0.55)),
-    ("student-life.jpg",        "IMG_0081.JPG", (1200, 1500), (0.50, 0.50)),
+    # The full-bleed band behind "A Campus That Never Really Closes". The
+    # campus itself rather than a room in it: the blocks with the cloud coming
+    # over the Ghats behind them. Framed low, so the ridge and the sky have
+    # the top of the picture and the gradient has the ground.
+    ("campus-band.jpg",         "IMG_2051.JPG", (1920, 1080), (0.50, 0.56)),
     ("junior-school.jpg",       "IMG_1898.JPG", (1200, 1500), (0.50, 0.45)),
     ("senior-school.jpg",       "IMG_1894.JPG", (1200, 1500), (0.50, 0.45)),
 
@@ -78,12 +82,24 @@ PHOTOS = [
     ("boarding.jpg",            "20180518_121042.jpg",    (1600,  900), (0.52, 0.50)),
     ("students.jpg",            "IMG_8075.JPG",           (1400,  640), (0.50, 0.48)),
 
-    # The Student Life banner. Not a photograph but a finished piece of the
-    # school's own campaign design, with its wordmark set into the middle of
-    # it — so the page carries no headline of its own over it, and it is cut
-    # at its own colours rather than graded (see UNGRADED above). The crop is
-    # the whole frame, 2.5:1 as supplied.
-    ("student-life-banner.jpg", "cirs-more-than-a-school.png", (1920, 768), (0.50, 0.50)),
+    # The Student Life hero deck. Ten photographs dealt up through the
+    # marquee — and deliberately ten different shapes. A deck of identical
+    # cards reads as a slideshow in a frame; a pile of a tall one, a wide
+    # one and a square one reads as photographs. The sizes below are the
+    # shapes, and the widths they are shown at are in pages.css.
+    #
+    # PROTOTYPE: these are stand-ins cut from the existing library so the
+    # motion can be judged. The school is curating ten.
+    ("slhero/card-01.jpg", "0C9A4097.JPG",  ( 900, 1200), (0.52, 0.42)),   # 3:4
+    ("slhero/card-02.jpg", "IMG_2480.JPG",  (1200,  800), (0.50, 0.45)),   # 3:2
+    ("slhero/card-03.jpg", "IMG_1625.JPG",  (1200,  750), (0.50, 0.52)),   # 8:5
+    ("slhero/card-04.jpg", "CRS00876.JPG",  ( 800, 1000), (0.50, 0.45)),   # 4:5
+    ("slhero/card-05.jpg", "_MG_0139.JPG",  ( 800, 1200), (0.50, 0.45)),   # 2:3
+    ("slhero/card-06.jpg", "IMG_9313.JPG",  (1000, 1000), (0.50, 0.50)),   # 1:1
+    ("slhero/card-07.jpg", "IMG_6106.JPG",  ( 900, 1200), (0.50, 0.45)),   # 3:4
+    ("slhero/card-08.jpg", "0C9A4128.JPG",  (1200,  800), (0.50, 0.42)),   # 3:2
+    ("slhero/card-09.jpg", "HARI7500.JPG",  ( 900,  900), (0.50, 0.45)),   # 1:1
+    ("slhero/card-10.jpg", "IMG_2449.JPG",  (1200,  675), (0.50, 0.45)),   # 16:9
 
     # The Blog. Four fragments for the hero collage, cut so each one reads as
     # a detail rather than a whole photograph, then the featured landscape and
