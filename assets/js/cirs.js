@@ -390,7 +390,7 @@
           // identical drop shadows into a halo around the whole deck.
           var show = t > 0 && i >= top - 1;
           gsap.set(cards[i], {
-            yPercent: (1 - e) * 118,
+            yPercent: (1 - e) * 88,
             rotation: (1 - e) * (i % 2 ? 6 : -6),
             scale: 0.93 + e * 0.07,
             zIndex: i + 1,
@@ -776,10 +776,10 @@
 
   (function chrome() {
     var header = $("#header");
-    // A page that opens on a light picture (body.litehead) has the header
-    // solid from the top, set in the markup so it holds without this script.
+    // A page that opens on a pale ground (body.litehead) has the header solid
+    // from the top, set in the markup so it holds without this script.
     // Toggling it here would strip that on the way back up and leave white
-    // lettering on a pale photograph.
+    // lettering on an off-white hero.
     if (header && !document.body.classList.contains("litehead")) {
       // The header rides transparent over the hero and only turns solid once
       // the hero itself has scrolled mostly out of view.

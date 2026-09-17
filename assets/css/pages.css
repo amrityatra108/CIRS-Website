@@ -38,18 +38,6 @@
 .pagehead h1 em{ color:var(--gold-lit); }
 .pagehead .lead{ margin-top:var(--space-4); }
 
-/* A banner that is a picture rather than a band of type. It clears the fixed
-   header the same way, but everything else about .pagehead is for type on a
-   dark ground and has to come off: no padding around the image, no gold
-   bloom behind it, and the picture fills the width at its own ratio. */
-.pagehead--image{
-  padding-block:76px 0;
-  background-image:none;
-  background:var(--paper);
-}
-.pagehead--image img{
-  display:block; width:100%; height:auto;
-}
 
 
 /* ------------------------------------------------------------
@@ -1815,8 +1803,12 @@ body.has-lightbox{ overflow:hidden; }
    ============================================================ */
 .slhero{
   position:relative;
-  background:var(--purple-ink);
-  color:var(--on-purple);
+  /* Off-white, not the site's purple. The lettering is the subject here and
+     it wants a page to sit on, not a night sky; and the photographs carry
+     all the colour the screen needs. The header cannot float over this in
+     white, so the page sets body.litehead — see build-site.py. */
+  background:#F7F4F2;
+  color:var(--ink);
 }
 .slhero__pin{
   position:relative;
@@ -1832,8 +1824,8 @@ body.has-lightbox{ overflow:hidden; }
   z-index:1;
   overflow:hidden;
   pointer-events:none;
-  -webkit-mask-image:linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
-          mask-image:linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-image:linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+          mask-image:linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
 .slhero__push{ will-change:transform; }
 .slhero__run{
@@ -1850,42 +1842,49 @@ body.has-lightbox{ overflow:hidden; }
 }
 .slhero__run span{
   font-family:var(--serif);
-  font-size:clamp(3.6rem,12vw,10.5rem);
-  line-height:.9;
-  letter-spacing:-.03em;
+  font-size:clamp(4rem,13vw,12rem);
+  line-height:.86;
+  letter-spacing:-.035em;
   white-space:nowrap;
-  color:rgba(250,247,248,.13);
+  /* Dark enough to be the thing you notice, pale enough that a photograph
+     landing on it always wins. */
+  color:rgba(57,42,72,.17);
 }
 .slhero__run i{
   font-style:normal;
   font-size:clamp(2rem,5vw,4rem);
-  color:var(--gold);
-  opacity:.5;
+  color:var(--maroon);
+  opacity:.34;
 }
 
 /* --------------------------------------------------------- the deck */
 .slhero__deck{
-  /* Lifted off the floor of the section so a card rising into place does not
-     climb through the headline underneath it. */
-  position:absolute; inset:0 0 19% 0; z-index:2;
+  /* Lifted off the floor of the section, and pushed off the left column, so
+     a photograph rising into place does not climb through the headline. The
+     pile centres at about three fifths across; the words have the rest. */
+  position:absolute; inset:0 0 17% 20%; z-index:2;
   display:grid; place-items:center;
   pointer-events:none;
 }
+/* Ten different shapes, not ten cards. A deck of identical rectangles reads
+   as a slideshow in a frame; a tall one, then a wide one, then a square one
+   reads as photographs. Each frame carries its own width, its own shape and
+   a small offset from centre, set on the element in the page — so the pile
+   is data rather than ten more rules here. */
 .slcard{
   grid-area:1 / 1;
   margin:0;
-  width:clamp(196px,25vw,340px);
-  aspect-ratio:3 / 4;
+  width:var(--w, 26vw);
+  max-width:min(88vw, 620px);
+  aspect-ratio:var(--ar, 3 / 4);
+  translate:var(--dx, 0) var(--dy, 0);
   overflow:hidden;
-  border-radius:3px;
-  background:var(--purple-deep);
-  /* Ten cards land on the same spot, so ten identical shadows would compound
-     into a dark halo around the stack. cirs.js hides everything but the top
-     two; this is the shadow of one card, which is all that is ever shown. */
-  box-shadow:0 26px 60px rgba(0,0,0,.5);
+  border-radius:2px;
+  background:var(--paper-3);
+  /* The frames land on nearly the same spot, so stacked shadows would
+     compound into a smudge. cirs.js draws only the top two. */
+  box-shadow:0 22px 54px rgba(26,17,25,.28), 0 2px 8px rgba(26,17,25,.14);
   will-change:transform;
-  /* Before the script runs, the top card is the one showing. The rest are
-     dealt in by cirs.js; without it they simply stay stacked underneath. */
   transform:translateY(0);
 }
 .slcard img{ width:100%; height:100%; object-fit:cover; display:block; }
@@ -1901,11 +1900,11 @@ body.has-lightbox{ overflow:hidden; }
   font-size:clamp(2.3rem,5vw,4.2rem);
   line-height:1.02;
   letter-spacing:-.018em;
-  color:#fff;
+  color:var(--purple);
   margin-top:var(--space-3);
-  text-shadow:0 2px 30px rgba(14,11,18,.7);
 }
-.slhero__say h1 em{ color:var(--gold-lit); }
+.slhero__say h1 em{ color:var(--maroon); font-style:italic; }
+.slhero__say .marker::after{ background:var(--rule); }
 .slhero__say .lead{ margin-top:var(--space-4); max-width:34ch; }
 
 /* ------------------------------- no pin: a deck you swipe instead */
@@ -1931,4 +1930,71 @@ body.has-lightbox{ overflow:hidden; }
 
 @media (prefers-reduced-motion:reduce){
   .slhero__run{ animation:none; }
+}
+
+/* ============================================================
+   Student Life — the campus band
+   ------------------------------------------------------------
+   Where the hero lets go. The deck finishes, the pin releases,
+   and the next thing on the screen is one photograph at full
+   height with the headline lying along the bottom of it.
+
+   The gradient is a layer of the section rather than something
+   baked into the picture, so the photograph can be swapped for
+   another without re-grading anything — and so the darkness sits
+   exactly where the words are and nowhere else.
+   ============================================================ */
+.lifeband{
+  position:relative;
+  min-height:100svh; min-height:100vh;
+  display:flex; align-items:flex-end;
+  overflow:hidden;
+  background:var(--purple-ink);
+  isolation:isolate;
+}
+.lifeband__img{
+  position:absolute; inset:0; z-index:0;
+  width:100%; height:100%; object-fit:cover;
+  /* Pulled towards the palette the way every photograph here is, and held
+     a little back so the type has somewhere to land. */
+  filter:saturate(.92) brightness(.96);
+}
+.lifeband__veil{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(to top,
+      rgba(8,5,10,.96) 0%,
+      rgba(8,5,10,.90) 18%,
+      rgba(10,7,13,.72) 36%,
+      rgba(12,8,16,.34) 58%,
+      rgba(12,8,16,.10) 78%,
+      rgba(12,8,16,.16) 100%);
+}
+.lifeband__say{
+  position:relative; z-index:2;
+  width:100%;
+  padding-block:clamp(48px,9vh,110px);
+  color:var(--on-purple);
+}
+.lifeband__say .sc{ color:var(--gold-lit); }
+.lifeband__say .marker::after{ background:rgba(255,255,255,.26); max-width:190px; }
+.lifeband__say h2{
+  font-size:clamp(2.2rem,5.4vw,4.6rem);
+  line-height:1.02;
+  letter-spacing:-.02em;
+  color:#fff;
+  margin-top:var(--space-3);
+  max-width:19ch;
+}
+.lifeband__say h2 em{ color:var(--gold-lit); font-style:italic; }
+.lifeband__say .copy{
+  margin-top:var(--space-4);
+  max-width:56ch;
+  color:var(--on-purple-soft);
+}
+.lifeband__cta{ margin-top:var(--space-5); }
+
+@media (max-width:700px){
+  .lifeband{ min-height:86svh; }
+  .lifeband__say h2{ max-width:none; }
 }

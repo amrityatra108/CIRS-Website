@@ -35,7 +35,7 @@ import documents as docs
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=36"
+CACHE_BUST = "b=37"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -229,8 +229,10 @@ PAGES = {
                        "hundred-acre campus it happens on.",
         # No banner and no hero key: this page opens on a hero of its own,
         # built in tools/pages/student-life.html — a drifting line of
-        # oversized lettering with a deck of photographs dealt up through it.
-        # It carries the page's h1 and its own id="top".
+        # oversized lettering with photographs dealt up through it. It carries
+        # the page's h1 and its own id="top". That hero is off-white, so the
+        # header cannot float over it in white lettering: hence litehead.
+        "litehead": True,
     },
     "sports": {
         "nav": "Our Sports",
@@ -553,24 +555,6 @@ def banner_html(page):
     <p class="lead">{lead}</p>
   </div>
 </section>'''
-
-
-def banner_image_html(page):
-    """A page that opens on a picture instead of a band of type.
-
-    For a picture that is already a finished piece of design and carries its
-    own lettering — the campaign banner on Student Life. Nothing is laid over
-    it, because two wordmarks in one space is one too many, and it takes no
-    data-ground: it covers its own area, and the paper the site already sits
-    on is the right ground beside it.
-
-    The page's own headline is not lost; it opens the first section instead.
-    """
-    src, w, h, alt = page["banner_image"]
-    return (f'<section class="pagehead pagehead--image" id="top">\n'
-            f'  <img src="assets/img/{src}?{CACHE_BUST}" alt="{alt}"\n'
-            f'       width="{w}" height="{h}" fetchpriority="high">\n'
-            f'</section>')
 
 
 HOME_TAB = '''<a class="htab" href="index.html">
@@ -928,11 +912,11 @@ def build(slug, page):
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
-    # A page whose banner is a light picture cannot have the header floating
-    # over it in white. It starts in the solid treatment .is-stuck already
-    # defines and stays there — set here in the markup so it holds without
-    # JavaScript, and left alone by cirs.js, which reads this class.
-    lite = bool(page.get("banner_image"))
+    # A page that opens on a pale ground cannot have the header floating over
+    # it in white lettering. "litehead" starts it in the solid treatment
+    # .is-stuck already defines and keeps it there — set here in the markup so
+    # it holds without JavaScript, and left alone by cirs.js, which reads it.
+    lite = bool(page.get("litehead"))
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
@@ -948,8 +932,6 @@ def build(slug, page):
     parts.append('<main id="main">')
     if page.get("hero"):
         parts.append(hero_html(page))
-    elif page.get("banner_image"):
-        parts.append(banner_image_html(page))
     elif page.get("banner"):
         parts.append(banner_html(page))
     content = (soon_html(page) if page.get("soon")
