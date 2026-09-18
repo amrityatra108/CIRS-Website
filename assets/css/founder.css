@@ -261,6 +261,38 @@ body.founder main{ position:relative; z-index:1; }
 .fwords li:nth-child(even){ color:var(--f-sage); }
 .fwords li:last-child{ border-bottom:1px solid var(--f-rule); padding-bottom:.1em; }
 
+/* ------------------------------------------------------------
+   The sweep
+   ------------------------------------------------------------
+   Each word is set twice. The lower copy is the word on paper; the
+   upper copy is the same word reversed out of a dark plate, and is
+   uncovered left to right as the scroll passes it. So the colour of
+   the lettering does not switch at a threshold — it changes exactly
+   where the leading edge of the plate is, one glyph at a time, and a
+   word can be caught half-turned.
+
+   The plate is --f-ink under --f-paper lettering: 14.6:1, against
+   14.6:1 and 5.2:1 for the two states the words have on paper. There
+   is no point in the sweep where anything drops below AA.
+
+   --lit is set by cirs.js. It stays at 0 without JavaScript, under
+   prefers-reduced-motion, or if ScrollTrigger never arrives, and the
+   words are then simply the words.
+   ------------------------------------------------------------ */
+.fwords__w{ position:relative; display:inline-block; max-width:100%; }
+.fwords__lit{
+  position:absolute; inset:-.02em -.06em; padding:.02em .06em;
+  background:var(--f-ink); color:var(--f-paper);
+  /* Right inset walks from 100% to 0, so the plate opens rightwards. */
+  clip-path:inset(0 calc(100% - var(--lit, 0) * 100%) 0 0);
+  pointer-events:none;
+}
+/* Nothing to reveal when the sweep cannot run: keep the plate off the
+   page entirely rather than parked at zero width over the word. */
+@media (prefers-reduced-motion: reduce){
+  .fwords__lit{ display:none; }
+}
+
 /* ============================================================
    5. Education as transformation
    ============================================================ */

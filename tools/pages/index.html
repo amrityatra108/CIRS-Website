@@ -23,106 +23,138 @@
 <!-- The run — ten photographs carried sideways between the hero and the film.
      Pinned and scrubbed like the timetables on Student Life and the reel on
      News, so the page keeps one scroll: nothing here has its own scrollbar.
-     Four written panels ride in the track with the photographs rather than
-     sitting above them, because the point of the section is that the words
-     and the pictures are the same movement. Under 900px, or with motion off,
-     .is-static turns the whole thing into a native swipe track. -->
+
+     The run is a shallow three-dimensional space rather than a flat row. Every
+     item carries a data-depth; the track is translated once, and each item is
+     then given a second translation of (depth - 1) times the same distance, so
+     the near ones outrun the track and the far ones lag behind it. Depth also
+     sets scale and dim, and the ghost words behind sit furthest back of all.
+     Sizes are mixed on purpose — a row of equal rectangles is a filmstrip.
+
+     Under 900px, or with motion off, .is-static turns the whole thing into a
+     native swipe track with the depth flattened out. -->
 <section class="hrun" id="run" data-ground="#160A1B">
   <div class="hrun__pin">
     <div class="hrun__viewport">
       <div class="hrun__track">
+        <span class="hghost" data-depth="0.34" style="left:6vw; top:8vh">A DAY</span>
+        <span class="hghost" data-depth="0.28" style="left:104vw; top:62vh">ONE HUNDRED</span>
+        <span class="hghost" data-depth="0.4" style="left:212vw; top:12vh">ACRES</span>
+        <span class="hghost" data-depth="0.3" style="left:318vw; top:68vh">FROM FIRST LIGHT</span>
+        <span class="hghost" data-depth="0.36" style="left:430vw; top:16vh">UNTIL DARK</span>
 
-        <div class="hsay hsay--open">
-          <p class="marker"><span class="sc">A day at CIRS</span></p>
-          <h2 class="serif h2">One Hundred Acres, <em>from First Light.</em></h2>
-          <p class="lead">The day starts outdoors and finishes under the amphitheatre lights.
-            Between those two hours are the classrooms and the drums, the table, the water
-            and the trail &mdash; and nowhere on the hundred acres to be a spectator.</p>
-          <p class="hsay__cue" aria-hidden="true">Keep scrolling &mdash; the run moves sideways</p>
+        <div class="hsay hsay--open" data-depth="0.97">
+          <p class="hsay__eyebrow">A day at CIRS</p>
+          <h2 class="hsay__big">ONE HUNDRED<br>ACRES, FROM<br>FIRST LIGHT</h2>
+          <p class="hsay__sub">The day starts outdoors and finishes under the amphitheatre lights. Between those two hours are the classrooms and the drums, the table, the water and the trail &mdash; and nowhere on the hundred acres to be a spectator.</p>
         </div>
 
-        <figure class="hframe hframe--w">
-          <img src="assets/img/hrun/01-lawn.jpg" width="1500" height="1000" loading="lazy" decoding="async"
-               alt="Rows of students on mats in the open, mid-posture, with palms and the tree line behind them.">
-          <figcaption><b>01</b> Morning, on the grass</figcaption>
+        <figure class="hframe hframe--xl" data-depth="1.08" style="--y:-3%">
+          <span class="hframe__n" aria-hidden="true">01</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/01-lawn.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+                 alt="Rows of students on mats in the open, mid-posture, with palms and the tree line behind them.">
+          </span>
+          <figcaption>Morning, on the grass</figcaption>
         </figure>
 
-        <figure class="hframe hframe--t">
-          <img src="assets/img/hrun/02-lesson.jpg" width="1000" height="1250" loading="lazy" decoding="async"
-               alt="A teacher holding a glass apparatus up to the light while two students watch closely.">
-          <figcaption><b>02</b> A demonstration, held to the light</figcaption>
+        <figure class="hframe hframe--m" data-depth="0.93" style="--y:14%">
+          <span class="hframe__n" aria-hidden="true">02</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/02-lesson.jpg" width="1000" height="1250" loading="lazy" decoding="async"
+                 alt="A teacher holding a glass apparatus up to the light while two students watch closely.">
+          </span>
+          <figcaption>A demonstration, held to the light</figcaption>
         </figure>
 
-        <figure class="hframe hframe--t">
-          <img src="assets/img/hrun/03-drums.jpg" width="1000" height="1250" loading="lazy" decoding="async"
-               alt="A row of boys seated on the floor at tabla, a teacher&rsquo;s hands on the drum beside them.">
-          <figcaption><b>03</b> The tabla class</figcaption>
+        <figure class="hframe hframe--l" data-depth="1.03" style="--y:-9%">
+          <span class="hframe__n" aria-hidden="true">03</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/03-drums.jpg" width="1000" height="1250" loading="lazy" decoding="async"
+                 alt="A row of boys seated on the floor at tabla, a teacher&rsquo;s hands on the drum beside them.">
+          </span>
+          <figcaption>The tabla class</figcaption>
         </figure>
 
-        <div class="hsay">
-          <p class="marker"><span class="sc">J&ntilde;&#0257;nam &middot; Knowledge</span></p>
-          <h2 class="serif h2">Held Up <em>to the Light.</em></h2>
-          <p class="lead">A flask raised at the front of a laboratory; a rhythm counted out until
-            the hands have it. Grades V to XII, taught towards CBSE and the IB &mdash; and, just
-            as deliberately, towards the habit of asking.</p>
+        <div class="hsay" data-depth="0.96">
+          <p class="hsay__eyebrow">J&ntilde;&#0257;nam &middot; Knowledge</p>
+          <h2 class="hsay__big">HELD UP<br>TO THE LIGHT</h2>
+          <p class="hsay__sub">A flask raised at the front of a laboratory; a rhythm counted out until the hands have it. Grades V to XII, taught towards CBSE and the IB &mdash; and, just as deliberately, towards the habit of asking.</p>
         </div>
 
-        <figure class="hframe hframe--w">
-          <img src="assets/img/hrun/04-hall.jpg" width="1500" height="1000" loading="lazy" decoding="async"
-               alt="The school seated through the auditorium, facing a lit stage.">
-          <figcaption><b>04</b> The whole school, in one hall</figcaption>
+        <figure class="hframe hframe--xl" data-depth="1.06" style="--y:5%">
+          <span class="hframe__n" aria-hidden="true">04</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/04-hall.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+                 alt="The school seated through the auditorium, facing a lit stage.">
+          </span>
+          <figcaption>The whole school, in one hall</figcaption>
         </figure>
 
-        <figure class="hframe hframe--w">
-          <img src="assets/img/hrun/05-table.jpg" width="1500" height="1000" loading="lazy" decoding="async"
-               alt="A long row of students seated on the floor, eating from plates set out in front of them.">
-          <figcaption><b>05</b> The long table</figcaption>
+        <figure class="hframe hframe--s" data-depth="0.91" style="--y:-13%">
+          <span class="hframe__n" aria-hidden="true">05</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/05-table.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+                 alt="A long row of students seated on the floor, eating from plates set out in front of them.">
+          </span>
+          <figcaption>The long table</figcaption>
         </figure>
 
-        <div class="hsay">
-          <p class="marker"><span class="sc">Sev&#0257; &middot; Service</span></p>
-          <h2 class="serif h2">A Hall, and Then <em>a Table.</em></h2>
-          <p class="lead">Boarding is the part of this school that no timetable shows. What the
-            Chinmaya Vision Programme names as values is not a period in the week here; it is
-            the ordinary business of living on the same hundred acres.</p>
+        <div class="hsay" data-depth="0.96">
+          <p class="hsay__eyebrow">Sev&#0257; &middot; Service</p>
+          <h2 class="hsay__big">A HALL, AND<br>THEN A TABLE</h2>
+          <p class="hsay__sub">Boarding is the part of this school that no timetable shows. What the Chinmaya Vision Programme names as values is not a period in the week here; it is the ordinary business of living on the same hundred acres.</p>
         </div>
 
-        <figure class="hframe hframe--t">
-          <img src="assets/img/hrun/06-field.jpg" width="1000" height="1500" loading="lazy" decoding="async"
-               alt="A player upside down in a bicycle kick, the ball above him and the wooded hillside behind.">
-          <figcaption><b>06</b> Overhead, on the field</figcaption>
+        <figure class="hframe hframe--l" data-depth="1.04" style="--y:9%">
+          <span class="hframe__n" aria-hidden="true">06</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/06-field.jpg" width="1000" height="1500" loading="lazy" decoding="async"
+                 alt="A player upside down in a bicycle kick, the ball above him and the wooded hillside behind.">
+          </span>
+          <figcaption>Overhead, on the field</figcaption>
         </figure>
 
-        <figure class="hframe hframe--w">
-          <img src="assets/img/hrun/07-water.jpg" width="1500" height="1000" loading="lazy" decoding="async"
-               alt="A swimmer mid-stroke with an instructor alongside, water breaking over them both.">
-          <figcaption><b>07</b> The pool</figcaption>
+        <figure class="hframe hframe--m" data-depth="0.94" style="--y:-11%">
+          <span class="hframe__n" aria-hidden="true">07</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/07-water.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+                 alt="A swimmer mid-stroke with an instructor alongside, water breaking over them both.">
+          </span>
+          <figcaption>The pool</figcaption>
         </figure>
 
-        <figure class="hframe hframe--w">
-          <img src="assets/img/hrun/08-trail.jpg" width="1500" height="1000" loading="lazy" decoding="async"
-               alt="A student in helmet and harness on a rocky slope, others climbing the line behind.">
-          <figcaption><b>08</b> On the trail</figcaption>
+        <figure class="hframe hframe--xl" data-depth="1.07" style="--y:2%">
+          <span class="hframe__n" aria-hidden="true">08</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/08-trail.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+                 alt="A student in helmet and harness on a rocky slope, others climbing the line behind.">
+          </span>
+          <figcaption>On the trail</figcaption>
         </figure>
 
-        <div class="hsay">
-          <p class="marker"><span class="sc">Kau&#0347;alam &middot; Efficiency</span></p>
-          <h2 class="serif h2">Done Properly, <em>or Not at All.</em></h2>
-          <p class="lead">The third word of the motto is the one most often mistranslated as
-            speed. It means skill &mdash; the slope walked to the top of it, the piece rehearsed
-            until it holds, the length finished.</p>
+        <div class="hsay" data-depth="0.96">
+          <p class="hsay__eyebrow">Kau&#0347;alam &middot; Efficiency</p>
+          <h2 class="hsay__big">DONE PROPERLY,<br>OR NOT AT ALL</h2>
+          <p class="hsay__sub">The third word of the motto is the one most often mistranslated as speed. It means skill &mdash; the slope walked to the top of it, the piece rehearsed until it holds, the length finished.</p>
         </div>
 
-        <figure class="hframe hframe--t">
-          <img src="assets/img/hrun/09-stage.jpg" width="1000" height="1500" loading="lazy" decoding="async"
-               alt="Three dancers in Bharatanatyam costume, arms raised, against a lit backdrop.">
-          <figcaption><b>09</b> The stage</figcaption>
+        <figure class="hframe hframe--l" data-depth="1.02" style="--y:-7%">
+          <span class="hframe__n" aria-hidden="true">09</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/09-stage.jpg" width="1000" height="1500" loading="lazy" decoding="async"
+                 alt="Three dancers in Bharatanatyam costume, arms raised, against a lit backdrop.">
+          </span>
+          <figcaption>The stage</figcaption>
         </figure>
 
-        <figure class="hframe hframe--w hframe--last">
-          <img src="assets/img/hrun/10-night.jpg" width="1500" height="1000" loading="lazy" decoding="async"
-               alt="The open-air amphitheatre after dark, its curved tiers filled, under floodlights.">
-          <figcaption><b>10</b> The amphitheatre, after dark</figcaption>
+        <figure class="hframe hframe--xl" data-depth="1.05" style="--y:7%">
+          <span class="hframe__n" aria-hidden="true">10</span>
+          <span class="hframe__plate">
+            <img src="assets/img/hrun/10-night.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+                 alt="The open-air amphitheatre after dark, its curved tiers filled, under floodlights.">
+          </span>
+          <figcaption>The amphitheatre, after dark</figcaption>
         </figure>
 
       </div>
