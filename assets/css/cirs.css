@@ -435,6 +435,129 @@ section[id]{ scroll-margin-top:88px; }
 .prog__meta b{ color:var(--purple); font-weight:600; }
 
 /* ============================================================
+   The run — the home page's horizontal passage
+   ------------------------------------------------------------
+   It sits between the hero and the film, and it is dark on
+   purpose: the hero ends on #150818 and the film opens on
+   #0E0B12, so the run is the bridge between them rather than a
+   light band cut into the middle of the two.
+
+   Everything is sized off the pinned height, not off the page
+   width. A frame is a height and its own aspect ratio, so the
+   wide ones and the tall ones line up along one horizon and the
+   track gets its length from what is in it. The written panels
+   are the widest things in the run — the section is as much
+   reading as looking, and a caption-sized column of type beside
+   a 70vh photograph reads as an afterthought.
+   ============================================================ */
+.hrun{ position:relative; background:var(--purple-ink); }
+.hrun__pin{
+  min-height:100svh; display:flex; flex-direction:column; justify-content:center;
+  overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 12% 0%, rgba(76,24,104,.55), transparent 60%),
+    radial-gradient(90% 80% at 92% 100%, rgba(57,42,72,.5), transparent 62%),
+    var(--purple-ink);
+}
+.hrun__viewport{ overflow:hidden; }
+/* Aligned on one ground line rather than centred. Centring frames of three
+   different heights puts every caption on a different baseline, which reads
+   as a row that was not laid out; on a shared horizon the tall ones simply
+   stand taller and the captions make one line across the run. The written
+   panels opt out — a column of type hanging off the bottom of a photograph
+   is not the same thing at all. */
+.hrun__track{
+  display:flex; align-items:flex-end; gap:clamp(28px,3.4vw,64px);
+  padding-inline:var(--gut);
+  will-change:transform;
+}
+
+/* --- the photographs ------------------------------------- */
+.hframe{ flex:none; position:relative; margin:0; }
+.hframe img{
+  display:block; height:var(--hrun-h); width:auto; max-width:none;
+  object-fit:cover; border-radius:2px;
+  box-shadow:0 24px 60px rgba(0,0,0,.45);
+}
+.hrun{ --hrun-h:clamp(300px,58vh,620px); }
+/* A tall frame at the same height as a wide one is a third of the width, so
+   the run would read as wide, wide, sliver. The tall ones are given more of
+   the horizon back instead, and the two shapes end up comparable in area. */
+.hframe--t img{ height:calc(var(--hrun-h) * 1.14); }
+
+.hframe figcaption{
+  margin-top:14px;
+  font-family:var(--serif); font-size:.95rem; letter-spacing:.01em;
+  color:var(--on-purple-soft);
+}
+.hframe figcaption b{
+  font-variant-numeric:oldstyle-nums; font-weight:400;
+  color:var(--gold); margin-right:.6em;
+}
+
+/* --- the written panels ---------------------------------- */
+.hsay{
+  flex:none; align-self:center;
+  width:clamp(300px,34vw,520px);
+  padding-inline:clamp(0px,1.4vw,28px);
+}
+.hsay .marker{ color:var(--gold); margin-bottom:18px; }
+.hsay .h2{ color:var(--on-purple); font-size:clamp(1.9rem,3.2vw,3rem); line-height:1.06; }
+.hsay .h2 em{ font-style:italic; color:var(--gold-lit); }
+.hsay .lead{ color:var(--on-purple-soft); margin-top:20px; max-width:46ch; }
+/* The opening panel is the section's first screen, and it has to survive
+   being read. At panel width it did not: it sat hard against the gutter with
+   nothing before it, so the first turn of the wheel carried it half off and
+   the reader met the run already in progress. It is given most of the first
+   viewport instead — the type stays at its own measure, the width is empty
+   room — and it holds for the first tenth of the scrub. */
+.hsay--open{ width:min(72vw,940px); }
+.hsay--open > *{ max-width:620px; }
+.hsay__cue{
+  margin-top:26px; font-family:var(--sans); font-size:var(--fs-xs);
+  letter-spacing:.14em; text-transform:uppercase; color:var(--on-purple-mute);
+}
+
+/* --- the readout ----------------------------------------- */
+.hrun__rail{
+  position:relative; margin:clamp(24px,3.4vh,44px) var(--gut) 0;
+  height:1px; background:var(--rule-purple);
+}
+.hrun__fill{ position:absolute; left:0; top:0; height:1px; width:0%; background:var(--gold); }
+.hrun__count{
+  display:flex; justify-content:space-between; margin:12px var(--gut) 0;
+  font-family:var(--serif); font-size:.92rem; letter-spacing:.12em;
+  color:var(--on-purple-mute);
+}
+.hrun__count b{ color:var(--gold); font-weight:400; font-variant-numeric:oldstyle-nums; }
+
+/* --- fallback: a native swipe track ----------------------- */
+/* Under 900px, with motion off, or if ScrollTrigger never arrives. The pin
+   and the scrub are the only things lost; the same fourteen items are still
+   in the same order, and the rail goes away rather than sitting at zero
+   pretending to be a progress bar that does not move. */
+.hrun.is-static{ --hrun-h:clamp(260px,44vh,420px); }
+.hrun.is-static .hrun__pin{ min-height:0; padding-block:clamp(56px,9vh,110px); }
+.hrun.is-static .hrun__viewport{
+  overflow-x:auto; scroll-snap-type:x proximity;
+  scroll-padding-inline-start:var(--gut);
+  -webkit-overflow-scrolling:touch;
+}
+.hrun.is-static .hframe,
+.hrun.is-static .hsay{ scroll-snap-align:start; }
+/* The rail is a readout of the scrub, and there is no scrub here; the count
+   is driven by the same onUpdate and would sit at "1 of 10" however far the
+   track had been swiped. Both go, rather than stand there saying nothing.
+   The cue under the opening panel still says which way the run moves. */
+.hrun.is-static .hrun__rail,
+.hrun.is-static .hrun__count{ display:none; }
+
+@media (max-width:700px){
+  .hrun.is-static{ --hrun-h:clamp(240px,42vh,360px); }
+  .hsay, .hsay--open{ width:min(78vw,420px); }
+}
+
+/* ============================================================
    Day — pinned horizontal timetable
    ============================================================ */
 .dayh{ position:relative; background:var(--paper); }

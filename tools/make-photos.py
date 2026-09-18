@@ -118,6 +118,30 @@ PHOTOS = [
     ("sports/basketball-contest.jpg",  "sports/basketball-contest.jpg",  (1000, 750), (0.50, 0.42)),
     ("sports/basketball-shot.jpg",     "sports/basketball-shot.jpg",     (1000, 750), (0.50, 0.33)),
     ("sports/basketball-floodlit.jpg", "sports/basketball-floodlit.jpg", (1000, 750), (0.50, 0.46)),
+
+    # The home page's horizontal run — ten photographs scrubbed sideways
+    # between the hero and the film.
+    #
+    # Six wide and four tall. A row of identical rectangles sliding past
+    # reads as a filmstrip; mixed shapes read as photographs that were laid
+    # out. The order is a day, and it is the order they pass in: the lawn at
+    # first light, a lesson, the drums, the hall, the table, the field, the
+    # water, the trail, the stage, and the amphitheatre after dark.
+    #
+    # None of these ten is used at size anywhere else on the site. That is
+    # deliberate and worth keeping: the run is the first thing under the
+    # hero, and a photograph the reader meets here and again on Admissions
+    # makes the library look smaller than it is.
+    ("hrun/01-lawn.jpg",    "IMG_1630.JPG", (1500, 1000), (0.50, 0.50)),
+    ("hrun/02-lesson.jpg",  "IMG_1806.JPG", (1000, 1250), (0.34, 0.52)),
+    ("hrun/03-drums.jpg",   "DSC_8037.JPG", (1000, 1250), (0.46, 0.66)),
+    ("hrun/04-hall.jpg",    "CRS09514.JPG", (1500, 1000), (0.50, 0.46)),
+    ("hrun/05-table.jpg",   "IMG_0081.JPG", (1500, 1000), (0.50, 0.50)),
+    ("hrun/06-field.jpg",   "8A5A3313.JPG", (1000, 1500), (0.50, 0.46)),
+    ("hrun/07-water.jpg",   "IMG_9314.JPG", (1500, 1000), (0.55, 0.50)),
+    ("hrun/08-trail.jpg",   "IMG_6061.JPG", (1500, 1000), (0.56, 0.50)),
+    ("hrun/09-stage.jpg",   "IMG_1828.JPG", (1000, 1500), (0.50, 0.45)),
+    ("hrun/10-night.jpg",   "IMG_2474.JPG", (1500, 1000), (0.50, 0.52)),
 ]
 
 
