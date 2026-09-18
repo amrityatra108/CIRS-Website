@@ -634,113 +634,81 @@
 
   /* ==========================================================
      The run — the home page's horizontal passage
-     Third pinned horizontal track on the site after the Student
-     Life timetables and the News reel, and pinned the same way.
-     What is different is that it is not flat.
+     The section pins at the full height of the window and a
+     780vw stage is scrubbed across it. Items are placed on that
+     stage absolutely, at three heights, so the run reads as a
+     space rather than a row.
 
-     The track is translated once, by the whole distance. Each item
-     is then translated again by (depth - 1) x that distance, so an
-     item at depth 1.15 outruns the track by fifteen per cent and
-     one at 0.34 falls a long way behind it. Parallax is exactly
-     that difference: nothing here is faked with a second scroll
-     position. Depth also drives scale and a dimming veil, because
-     speed alone does not read as distance.
-
-     Two transforms per item per frame, on a dozen items. They are
-     written in one pass inside a single onUpdate and only as
-     transform and opacity, so the work stays on the compositor.
+     Parallax is measured against the middle of the window, not
+     against how far the stage has travelled. Multiplying the
+     whole distance by a depth difference is the obvious way to
+     do it and it is wrong: the offsets grow without limit, and
+     by the middle of the run the frames had drifted hundreds of
+     pixels into each other. Offsetting by how far an item is
+     from the centre of the screen keeps every offset inside one
+     screen width.
      ========================================================== */
   function homeRun() {
     var sec = $("#run");
     if (!sec) return;
-    var pin = $(".hrun__pin", sec), track = $(".hrun__track", sec);
-    var fill = $("#hrunFill"), count = $("#hrunCount");
-    if (!track) return;
+    var pin = $(".hrun__pin", sec), stage = $(".hrun__stage", sec);
+    if (!stage) return;
 
     function staticMode() { sec.classList.add("is-static"); }
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
     var HOLD = 0.10;
-    // Scrolled one-for-one, the track's own width is what the reader has to
-    // sit through: about ten screens between the hero and the film, which is
-    // a wall rather than a passage. PACE buys that back the way dayh--duo
-    // does for the two timetables. It is the one number to change if the run
-    // should move more slowly.
-    var PACE = 0.66;
+    // The stage is 780vw. Scrolled one for one that is eleven screens
+    // between the hero and the film, which is a wall rather than a
+    // passage; at half, the whole run passes in about six. It is the one
+    // number to change if the run should move more slowly.
+    var PACE = 0.5;
+    var PARALLAX = 0.30;
 
     var mm = gsap.matchMedia();
 
     mm.add("(min-width: 900px)", function () {
       sec.classList.remove("is-static");
-      var frames = $$(".hframe", track);
 
-      // The distance the track travels, measured from layout rather than
-      // from track.scrollWidth. scrollWidth counts the ghost words, which
-      // are absolutely positioned and are pushed to the RIGHT by their own
-      // depth — so reading it each frame made the distance grow, which grew
-      // the lag, which grew the distance again. offsetLeft and offsetWidth
-      // are layout values and no transform can move them.
-      function reach() {
-        var kids = track.children, far = 0;
-        for (var i = 0; i < kids.length; i++) {
-          var k = kids[i];
-          if (k.classList.contains("hghost")) continue;   // not in the flow
-          far = Math.max(far, k.offsetLeft + k.offsetWidth);
-        }
-        return far;
-      }
-
-      // Parallax is measured against the middle of the window, not against
-      // how far the run has travelled. Multiplying the whole distance by a
-      // depth difference is the obvious way to do it and it is wrong: the
-      // offsets grow without limit, so by the middle of the run the frames
-      // had drifted hundreds of pixels into each other. Offsetting by how
-      // far an item is from the centre of the screen instead keeps every
-      // offset inside one screen width, and the depths below then have to
-      // stay near 1 for the same reason — a frame may lead or lag its
-      // neighbours, never swap places with them.
-      var PARALLAX = 0.26;
-
-      var layers = $$("[data-depth]", track).map(function (el) {
+      var layers = $$("[data-depth]", stage).map(function (el) {
         var d = parseFloat(el.getAttribute("data-depth")) || 1;
         var ghost = el.classList.contains("hghost");
         return {
           el: el,
           d: d,
           ghost: ghost,
-          // Nearer is very slightly larger. The range is narrow on purpose:
-          // a photograph scaled to read as "far away" just looks small.
+          // An item asking for the middle band is placed at top:50% and
+          // has to come back up by half its own height. That cannot live
+          // in the stylesheet: the parallax rewrites the whole transform
+          // every frame and would drop it.
+          mid: getComputedStyle(el).getPropertyValue("--mid").trim() === "1",
           scale: ghost ? 1 : Math.min(Math.max(1 + (d - 1) * 0.5, 0.96), 1.04),
-          // The vertical offset is authored in CSS as --y, and gsap.set
-          // writes the whole transform, so it has to be read once and put
-          // back on every frame.
-          y: ghost ? "0px" : (getComputedStyle(el).getPropertyValue("--y").trim() || "0px"),
           base: el.offsetLeft + el.offsetWidth / 2
         };
       });
 
+      // How far the stage has to travel: its own width less one screen,
+      // taken from layout so no transform can feed back into it.
+      function reach() { return stage.offsetWidth; }
+
       function place(q, dist) {
         var mid = window.innerWidth / 2;
-        var trackX = -dist * q;
+        var stageX = -dist * q;
         for (var i = 0; i < layers.length; i++) {
           var L = layers[i];
-          // Where the item would be with no parallax on it. Taken from
-          // layout plus the track's own offset rather than from a bounding
-          // rect, which would already carry last frame's transform and feed
-          // it back in.
-          var from = L.base + trackX - mid;
-          var off = from * (L.d - 1) * PARALLAX;
-          // A few degrees of turn away from the centre line. With the
-          // perspective on the viewport this is what actually reads as
-          // depth — the offsets alone are too small to see, and making
-          // them big enough to see is what put the frames into each
-          // other. Capped at four degrees: past that the photographs
-          // start to look soft rather than turned.
-          var rot = L.ghost ? 0
-                  : Math.min(Math.max(from / mid * -3.4, -4), 4);
+          var from = L.base + stageX - mid;
           gsap.set(L.el, {
-            x: off, y: L.y, scale: L.scale, rotationY: rot, force3D: true
+            x: from * (L.d - 1) * PARALLAX,
+            yPercent: L.mid ? -50 : 0,
+            scale: L.scale,
+            // A few degrees of turn away from the centre line. With the
+            // perspective on the viewport this is what actually reads as
+            // depth; the offsets alone are too small to see, and making
+            // them big enough to see is what put the frames into each
+            // other. Capped, past which a photograph looks soft, not turned.
+            rotationY: L.ghost ? 0 : Math.min(Math.max(from / mid * -3.4, -4), 4),
+            force3D: true
           });
         }
       }
@@ -749,7 +717,7 @@
         trigger: sec,
         start: "top top",
         end: function () {
-          var run = Math.max((reach() - window.innerWidth + 360) * PACE, 600);
+          var run = Math.max((reach() - window.innerWidth + 120) * PACE, 600);
           return "+=" + Math.round(run / (1 - HOLD));
         },
         pin: pin,
@@ -757,30 +725,12 @@
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: function (self) {
-          // The first tenth holds the track still. Without it the opening
-          // statement sits against the gutter with nothing before it, so the
-          // first notch of the wheel carries it half off the screen and the
-          // reader meets the run already under way.
+          // The first tenth holds the stage still, so the opening statement
+          // gets a screen of its own before anything moves.
           var q = self.progress <= HOLD ? 0 : (self.progress - HOLD) / (1 - HOLD);
           var dist = Math.max(reach() - window.innerWidth + 120, 0);
-          gsap.set(track, { x: -dist * q, force3D: true });
+          gsap.set(stage, { x: -dist * q, force3D: true });
           place(q, dist);
-
-          if (fill) fill.style.width = (q * 100).toFixed(2) + "%";
-          if (count && frames.length) {
-            // Which photograph is nearest the middle of the screen, rather
-            // than a slice of the progress bar: the statements make the
-            // track uneven, and depth moves each frame off the track's own
-            // position, so only the measured position is right.
-            var mid = window.innerWidth / 2, best = 0, near = Infinity;
-            for (var j = 0; j < frames.length; j++) {
-              var r = frames[j].getBoundingClientRect();
-              var dd = Math.abs(r.left + r.width / 2 - mid);
-              if (dd < near) { near = dd; best = j; }
-            }
-            var label = (best + 1) + " of " + frames.length;
-            if (count.textContent !== label) count.textContent = label;
-          }
         }
       });
 
@@ -788,7 +738,7 @@
 
       return function () {
         st.kill(true);
-        gsap.set(track, { clearProps: "transform" });
+        gsap.set(stage, { clearProps: "transform" });
         layers.forEach(function (L) { gsap.set(L.el, { clearProps: "transform" }); });
         staticMode();
       };
