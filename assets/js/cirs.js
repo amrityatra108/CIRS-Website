@@ -633,6 +633,91 @@
   }
 
   /* ==========================================================
+     The run — the home page's horizontal passage
+     Third of these on the site, after dayTrack and newsTrack, and
+     built the same way: pin the section, scrub a flex row sideways
+     by scroll progress, fall back to a native swipe track under
+     900px or when motion is off.
+
+     What is different is that the track carries two kinds of child.
+     The count is a count of photographs, so it is measured off the
+     figures alone — counting the written panels as well would have
+     the readout saying 6 of 14 while the reader is looking at the
+     fourth picture.
+     ========================================================== */
+  function homeRun() {
+    var sec = $("#run"), pin = $(".hrun__pin", sec || document);
+    var track = $(".hrun__track", sec || document);
+    var fill = $("#hrunFill"), count = $("#hrunCount");
+    if (!sec || !track) return;
+
+    function staticMode() { sec.classList.add("is-static"); }
+
+    if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
+
+    var HOLD = 0.10;
+    // Scrolled one-for-one, the track's own width is what the reader has to
+    // sit through: about ten screens of scrolling between the hero and the
+    // film, which is a wall rather than a passage. PACE buys that back the
+    // way dayh--duo does for the two timetables — the whole run still
+    // passes, in about two thirds of the scrolling, so roughly two frames
+    // cross per screen. It is the one number to change if the run should
+    // move more slowly.
+    var PACE = 0.66;
+    var mm = gsap.matchMedia();
+
+    mm.add("(min-width: 900px)", function () {
+      sec.classList.remove("is-static");
+      var frames = $$(".hframe", track);
+
+      var st = ScrollTrigger.create({
+        trigger: sec,
+        start: "top top",
+        end: function () {
+          var run = Math.max((track.scrollWidth - window.innerWidth + 360) * PACE, 600);
+          return "+=" + Math.round(run / (1 - HOLD));
+        },
+        pin: pin,
+        scrub: .8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          // The first tenth of the scrub holds the track still. Without it
+          // the opening panel is at the left gutter with nothing before it,
+          // so the first notch of the wheel carries it half off the screen
+          // and the reader meets the run already under way. The hold buys
+          // the opening a stationary screen; everything after it is the
+          // same even scrub, measured over the remaining nine tenths.
+          var q = self.progress <= HOLD ? 0 : (self.progress - HOLD) / (1 - HOLD);
+          var dist = Math.max(track.scrollWidth - window.innerWidth + 120, 0);
+          gsap.set(track, { x: -dist * q });
+          if (fill) fill.style.width = (q * 100).toFixed(2) + "%";
+          if (count && frames.length) {
+            // Which photograph is nearest the middle of the screen, rather
+            // than a slice of the progress bar: the panels make the track
+            // uneven, so an evenly divided progress would run ahead of the
+            // pictures through the reading and lag behind through the run.
+            var mid = window.innerWidth / 2, best = 0, near = Infinity;
+            for (var i = 0; i < frames.length; i++) {
+              var r = frames[i].getBoundingClientRect();
+              var d = Math.abs(r.left + r.width / 2 - mid);
+              if (d < near) { near = d; best = i; }
+            }
+            var label = (best + 1) + " of " + frames.length;
+            if (count.textContent !== label) count.textContent = label;
+          }
+        }
+      });
+      return function () { st.kill(true); gsap.set(track, { clearProps: "x" }); staticMode(); };
+    });
+
+    mm.add("(max-width: 899px)", function () {
+      staticMode();
+      return function () {};
+    });
+  }
+
+  /* ==========================================================
      Page ground shifts between paper and purple
      ========================================================== */
   function groundShift() {
@@ -1311,11 +1396,12 @@
     newsFlash();
     crossroadsProgress();
     crossroadsWall();
-    if (!animate) { failOpen(); slHero(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
+    if (!animate) { failOpen(); slHero(); homeRun(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");
     choreograph();
     slHero();
+    homeRun();
     dayTrack();
     newsTrack();
     groundShift();
