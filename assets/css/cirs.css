@@ -437,92 +437,79 @@ section[id]{ scroll-margin-top:88px; }
 /* ============================================================
    The run — the home page's horizontal passage
    ------------------------------------------------------------
-   It sits between the hero and the film, and it is dark on
-   purpose: the hero ends on #150818 and the film opens on
-   #0E0B12, so the run is the bridge between them rather than a
-   light band cut into the middle of the two.
+   It fills the window. The section pins at 100svh with nothing
+   above or below it inside the frame — no heading band, no
+   progress rail — and the stage under it is a 780vw canvas with
+   every item placed absolutely at one of three heights.
 
-   Depth. Every item declares a data-depth and cirs.js gives it a
-   translation of (depth - 1) x the track distance on top of the
-   track's own. Near items therefore outrun the track, far ones
-   lag, and the section reads as a shallow space rather than a
-   row. Depth is also spent on scale and on a dimming veil, so
-   that what is behind looks behind and not merely slower.
+   That arrangement is the point, and it is the one the Chinmaya
+   Yuva Kendra page uses. A flex row cannot do it: however wide
+   the gaps are set, a row still lines everything up on a single
+   band across the middle of the screen. Placing items on a
+   canvas is what lets a photograph sit high on the left while
+   the next sits low and far to the right, with a screen of
+   nothing between them.
 
-   Sizes are mixed deliberately. Ten frames of one height sliding
-   past is a filmstrip; a large one, a small one and a tall one is
-   a page that somebody laid out.
+   Sizes are given in vh, so the run is composed against the
+   height of the window rather than its width and a frame is
+   always a known fraction of the screen.
+
+   Depth: every item declares one, the stage is translated once,
+   and each item again by its own parallax — measured against the
+   middle of the window, so the offsets stay inside one screen
+   and frames can lead or lag their neighbours without ever
+   swapping places with them.
    ============================================================ */
-.hrun{ position:relative; background:var(--purple-ink); --hrun-h:clamp(300px,54vh,580px); }
+.hrun{ position:relative; background:var(--purple-ink); }
 .hrun__pin{
-  min-height:100svh; display:flex; flex-direction:column; justify-content:center;
-  overflow:hidden;
+  height:100svh; height:100vh; overflow:hidden;
   background:
     radial-gradient(120% 90% at 12% 0%, rgba(76,24,104,.55), transparent 60%),
     radial-gradient(90% 80% at 92% 100%, rgba(57,42,72,.5), transparent 62%),
     var(--purple-ink);
 }
-/* The viewport is the window on the space; perspective here rather than on
-   the track, so every child shares one vanishing point. */
-.hrun__viewport{ overflow:hidden; perspective:1400px; }
-.hrun__track{
-  position:relative;
-  display:flex; align-items:center; gap:clamp(56px,6.5vw,140px);
-  padding-inline:var(--gut);
+.hrun__viewport{ height:100%; overflow:hidden; perspective:1600px; }
+.hrun__stage{
+  position:relative; width:780vw; height:100%;
   will-change:transform;
 }
 
 /* --- the photographs ------------------------------------- */
-/* Number, then plate. The sequence number sits to the left of its
-   photograph and stays subdued: it is an index, not a caption. */
 .hframe{
-  flex:none; margin:0; transform-style:preserve-3d;
-  display:grid; grid-template-columns:auto auto; align-items:start;
-  gap:clamp(12px,1.1vw,22px);
-  transform:translateY(var(--y,0));
-  will-change:transform;
+  position:absolute; z-index:1; margin:0;
+  transform-style:preserve-3d; will-change:transform;
 }
+/* Centred vertically when the item asked for the middle band. The custom
+   property is set in the markup beside top:50%, because a transform here
+   would be overwritten by the one the parallax writes every frame — so
+   cirs.js reads it and folds the -50% into the transform it sets. */
+.hframe img{
+  display:block; width:auto; max-width:none; height:var(--h);
+  object-fit:cover; border-radius:3px;
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+}
+/* Above the frame and left-aligned with it, as in the reference: an index,
+   not a caption, and quiet enough to read as one. */
 .hframe__n{
-  grid-row:1; align-self:start; margin-top:.15em;
+  display:block; margin-bottom:12px;
   font-family:var(--serif); font-variant-numeric:oldstyle-nums;
-  font-size:clamp(.82rem,1vw,1rem); letter-spacing:.16em;
-  /* Subdued, but still text a reader has to be able to read. .34 looked
-     right and measured 2.8:1 against this ground; .52 is the lowest value
-     that clears AA against both the darkest point of the section and the
-     lightest point of its wash, and it is still plainly quieter than the
-     caption beneath the photograph. */
+  font-size:clamp(.78rem,.92vw,.96rem); letter-spacing:.2em;
   color:var(--on-purple); opacity:.52;
 }
-.hframe__plate{ grid-row:1; display:block; }
-.hframe img{
-  display:block; height:var(--h); width:auto; max-width:none;
-  object-fit:cover; border-radius:2px;
-  box-shadow:0 28px 70px rgba(0,0,0,.5);
-}
 .hframe figcaption{
-  grid-column:2; margin-top:16px;
+  margin-top:16px; max-width:34ch;
   font-family:var(--serif); font-size:.95rem; letter-spacing:.01em;
   color:var(--on-purple-soft);
 }
-/* Four sizes, as fractions of the run height. */
-.hframe--xl{ --h:var(--hrun-h); }
-.hframe--l { --h:calc(var(--hrun-h) * .82); }
-.hframe--m { --h:calc(var(--hrun-h) * .62); }
-.hframe--s { --h:calc(var(--hrun-h) * .46); }
-/* A tall frame at a given height is a third of a wide one's width, so the
-   portraits get some of the horizon back and the two shapes end up
-   comparable in area. */
-.hframe--l img[height="1500"],
-.hframe--m img[height="1250"],
-.hframe--s img[height="1250"]{ height:calc(var(--h) * 1.16); }
+.hframe--xl{ --h:56vh; }
+.hframe--l { --h:40vh; }
+.hframe--m { --h:29vh; }
+.hframe--s { --h:21vh; }
 
 /* --- the written statements ------------------------------- */
-/* Set in the grotesque rather than the serif, and large: these are the
-   editorial statements the run is built around, not captions between
-   pictures. The serif carries the running text underneath them. */
 .hsay{
-  flex:none; width:clamp(300px,36vw,560px);
-  transform:translateY(var(--y,0));
+  position:absolute; z-index:2;
+  width:clamp(300px,30vw,520px);
   will-change:transform;
 }
 .hsay__eyebrow{
@@ -533,70 +520,59 @@ section[id]{ scroll-margin-top:88px; }
 }
 .hsay__big{
   font-family:var(--sans); font-weight:700; text-transform:uppercase;
-  font-size:clamp(1.8rem,3.3vw,3.4rem); line-height:.96;
-  letter-spacing:-.025em; color:var(--on-purple);
+  font-size:clamp(1.8rem,3vw,3.2rem); line-height:.95;
+  letter-spacing:-.03em; color:var(--on-purple);
 }
 .hsay__sub{
-  margin-top:clamp(18px,1.8vw,28px); max-width:44ch;
+  margin-top:clamp(18px,1.8vw,28px);
   color:var(--on-purple-soft); font-size:var(--fs-lead);
 }
-.hsay--open{ width:min(64vw,760px); }
-.hsay--open .hsay__big{ font-size:clamp(2.1rem,4.6vw,4.6rem); }
-.hsay--open > *{ max-width:640px; }
+.hsay--open{ width:clamp(320px,38vw,660px); }
+.hsay--open .hsay__big{ font-size:clamp(2.1rem,4.2vw,4.4rem); }
 
 /* --- the ghost words -------------------------------------- */
-/* Furthest back of everything, at a depth the frames never reach, so they
-   drift almost imperceptibly against the pictures crossing in front. They
-   are decoration and carry no meaning a reader would miss. */
 .hghost{
   position:absolute; z-index:0; pointer-events:none; white-space:nowrap;
   font-family:var(--sans); font-weight:700; text-transform:uppercase;
-  font-size:clamp(4rem,11vw,12rem); line-height:.9; letter-spacing:-.04em;
-  /* On this ground anything under about eight per cent simply is not there.
-     Measured against the lightest point of the wash it stays far below the
-     threshold where it would read as text competing with the statements. */
+  font-size:clamp(4rem,12vw,14rem); line-height:.9; letter-spacing:-.045em;
+  /* Below eight per cent on this ground it simply is not there. */
   color:var(--on-purple); opacity:.085;
+  will-change:transform;
 }
-.hframe, .hsay{ position:relative; z-index:1; }
-
-/* --- the readout ----------------------------------------- */
-.hrun__rail{
-  position:relative; margin:clamp(24px,3.4vh,44px) var(--gut) 0;
-  height:1px; background:var(--rule-purple);
-}
-.hrun__fill{ position:absolute; left:0; top:0; height:1px; width:0%; background:var(--gold); }
-.hrun__count{
-  display:flex; justify-content:space-between; margin:12px var(--gut) 0;
-  font-family:var(--serif); font-size:.92rem; letter-spacing:.12em;
-  color:var(--on-purple-mute);
-}
-.hrun__count b{ color:var(--gold); font-weight:400; font-variant-numeric:oldstyle-nums; }
 
 /* --- fallback: a native swipe track ----------------------- */
-/* Under 900px, with motion off, or if ScrollTrigger never arrives. The pin,
-   the scrub and the depth are what is lost; the same items are still in the
-   same order at their own sizes. The vertical offsets go too — they were
-   composed against a wide window and only read as untidiness in a narrow
-   one — and the ghosts go with them, because a word that cannot drift is
-   just a pale smear behind a photograph. */
-.hrun.is-static{ --hrun-h:clamp(250px,42vh,400px); }
-.hrun.is-static .hrun__pin{ min-height:0; padding-block:clamp(56px,9vh,110px); }
+/* Absolute positions on a 780vw canvas mean nothing on a phone, so under
+   900px — and with motion off, and if ScrollTrigger never arrives — the
+   same items are laid out as an ordinary swipe track instead. Everything
+   the canvas was carrying is unset here rather than scaled down. */
+.hrun.is-static .hrun__pin{ height:auto; padding-block:clamp(56px,9vh,110px); }
 .hrun.is-static .hrun__viewport{
-  overflow-x:auto; scroll-snap-type:x proximity;
-  scroll-padding-inline-start:var(--gut);
-  perspective:none; -webkit-overflow-scrolling:touch;
+  height:auto; overflow-x:auto; perspective:none;
+  scroll-snap-type:x proximity; scroll-padding-inline-start:var(--gut);
+  -webkit-overflow-scrolling:touch;
 }
-.hrun.is-static .hrun__track{ align-items:flex-start; gap:clamp(28px,6vw,64px); }
+.hrun.is-static .hrun__stage{
+  width:auto; height:auto;
+  display:flex; align-items:flex-start; gap:clamp(30px,7vw,72px);
+  padding-inline:var(--gut);
+}
 .hrun.is-static .hframe,
-.hrun.is-static .hsay{ scroll-snap-align:start; transform:none; }
+.hrun.is-static .hsay{
+  position:static; flex:none; transform:none; scroll-snap-align:start;
+}
+.hrun.is-static .hsay{ width:min(80vw,430px); }
 .hrun.is-static .hghost{ display:none; }
-.hrun.is-static .hrun__rail,
-.hrun.is-static .hrun__count{ display:none; }
+.hrun.is-static .hframe--xl{ --h:38vh; }
+.hrun.is-static .hframe--l { --h:32vh; }
+.hrun.is-static .hframe--m { --h:28vh; }
+.hrun.is-static .hframe--s { --h:24vh; }
 
 @media (max-width:700px){
-  .hrun.is-static{ --hrun-h:clamp(230px,40vh,340px); }
-  .hsay, .hsay--open{ width:min(80vw,430px); }
-  .hsay--open .hsay__big{ font-size:clamp(1.7rem,7vw,2.4rem); }
+  .hrun.is-static .hsay__big{ font-size:clamp(1.7rem,7vw,2.4rem); }
+  .hrun.is-static .hframe--xl,
+  .hrun.is-static .hframe--l,
+  .hrun.is-static .hframe--m,
+  .hrun.is-static .hframe--s{ --h:30vh; }
 }
 
 /* ============================================================
