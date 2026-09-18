@@ -1,11 +1,25 @@
 /* ============================================================
    Palette preview — Admissions only
    ------------------------------------------------------------
-   Off-white #FAF9F6, gold #FFD700, dark purple #24152D, applied
-   to one page so the scheme can be judged before the other
+   Off-white #FAF9F6, gold #FFD700, dark red #3A0B12, applied to
+   one page so the scheme can be judged before the other
    forty-one are moved onto it. Scoped to body.palette; remove
    the "sheet" line from this page's entry in build-site.py and
    the page returns to the site palette with nothing else to undo.
+
+   The dark red replaces the dark purple this preview first
+   carried, and is pitched at the same depth so nothing else had
+   to move: #3A0B12 is 16.13:1 on the off-white where #24152D was
+   16.35:1, and gold on it is 12.11:1 where it was 12.27:1. A
+   lighter, more obviously red red — the site's own --maroon
+   #7A0F1E, say — measures 10.42:1 and 7.82:1, which is still
+   comfortable, but it reads as a colour rather than as ink, and
+   the purple it replaces was doing the work of ink.
+
+   The token NAMES below still say purple. They are the site's own
+   names, declared in cirs.css and read by every component, so
+   renaming them here would mean editing every page's stylesheet
+   to match. Only the values are red.
 
    One thing the brief could not have known, and it decides the
    shape of everything below:
@@ -28,7 +42,7 @@
 
        --gold on paper   #756300   4.66:1 against the worst of
                                    the three pale grounds
-       --gold on purple  #FFD700   12.27:1
+       --gold on red     #FFD700   12.11:1
 
    Both are hue 51 degrees, the hue of #FFD700 exactly.
 
@@ -42,10 +56,11 @@ body.palette{
   --paper-3:  #E7E4DB;
   --white:    #FFFFFF;
 
-  --purple:        #24152D;
-  --purple-mid:    #1C1023;
-  --purple-deep:   #170D1C;
-  --purple-ink:    #0F0813;
+  /* Red, under the site's purple token names — see the note above. */
+  --purple:        #3A0B12;
+  --purple-mid:    #2E0A10;
+  --purple-deep:   #26080E;
+  --purple-ink:    #1C060A;
 
   /* Gold as an ink, on paper. */
   --gold:      #756300;
@@ -54,16 +69,16 @@ body.palette{
   --gold-fill: #FFD700;
   --gold-fill-lit: #FFE45C;
 
-  --ink:       #24152D;
-  --ink-soft:  #4A3B52;
-  --ink-mute:  #665A6D;
+  --ink:       #3A0B12;   /* the dark red is the text colour */
+  --ink-soft:  #57323A;
+  --ink-mute:  #6F5259;
 
   --on-purple:      #FAF9F6;
   --on-purple-soft: rgba(250,249,246,.80);
   --on-purple-mute: rgba(250,249,246,.58);
 
-  --rule:       #DCD7CE;
-  --rule-soft:  #EAE6DD;
+  --rule:       #DDD4CE;
+  --rule-soft:  #EBE5DF;
   --rule-purple: rgba(250,249,246,.22);
 
   background:var(--paper); color:var(--ink);
@@ -93,8 +108,8 @@ body.palette .footer-wrap{
    ------------------------------------------------------------
    The primary button is the one thing the current palette gets
    wrong site-wide: white lettering on gold, 1.6:1, on five pages.
-   Here it becomes the dark purple on full-strength #FFD700 —
-   12.27:1, and the brightest thing on the page, which is what a
+   Here it becomes the dark red on full-strength #FFD700 —
+   12.11:1, and the brightest thing on the page, which is what a
    primary action should be.
 
    The ghost button is deliberately NOT touched. It already reads

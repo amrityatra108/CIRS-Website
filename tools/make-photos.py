@@ -77,6 +77,19 @@ PHOTOS = [
     # and student-life three. Each keeps the page its caption was written for
     # and hands the others a photograph of their own subject.
     ("news-hero.jpg",           "IMG_2327.JPG",           (1280,  720), (0.50, 0.55)),
+
+    # The Why CIRS opening frame. It replaces a 1200x1500 portrait of three
+    # students that came in with the original redesign and whose own source
+    # is not in this library — so when that page lost its banner and the
+    # photograph became a full-window hero, object-fit:cover took 450px off
+    # the top of a frame that had no room to give and cut their heads. There
+    # was nothing to recrop.
+    #
+    # This one is cut wide, at 1.6, which is about the shape of a laptop
+    # window, so on a desktop cover barely crops it at all. The focal point
+    # is high in the frame on purpose: every head keeps clear air above it,
+    # and what a narrow window crops is the empty court at the bottom.
+    ("why-cirs.jpg",            "IMG_1939.JPG",           (2000, 1250), (0.50, 0.38)),
     ("founding.jpg",            "1.JPG",                  (1600,  900), (0.50, 0.55)),
     ("motto.jpg",               "IMG_1686.JPG",           (1600,  900), (0.46, 0.50)),
     ("boarding.jpg",            "20180518_121042.jpg",    (1600,  900), (0.52, 0.50)),
