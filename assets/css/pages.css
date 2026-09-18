@@ -96,16 +96,22 @@
    controls turn invisible — which matters more now that the menu
    is the site's whole navigation rather than a convenience.
 
-   cirs.js already puts .is-locked on <body> while the drawer is
-   open, so borrow the scrolled treatment for exactly that long.
    These mirror the .header.is-stuck rules in cirs.css.
+
+   Keyed on .menu-open, not .is-locked. They were on .is-locked, which
+   cirs.js also puts on <body> for the intro curtain's scroll lock — so
+   every page with a full-bleed hero opened with a solid paper bar across
+   the top of its photograph, and when the curtain lifted the background
+   transition in cirs.css faded it out over .35s. That fade was the strip
+   of white at the top of the hero on load. is-locked is the scroll lock
+   and nothing else now; only the drawer sets menu-open.
    ------------------------------------------------------------ */
-body.is-locked .header{
+body.menu-open .header{
   background:var(--paper);
   border-bottom-color:var(--rule-soft);
 }
-body.is-locked .brand__name{ color:var(--purple); font-weight:400; }
-body.is-locked .brand__sub{ color:var(--ink-mute); }
+body.menu-open .brand__name{ color:var(--purple); font-weight:400; }
+body.menu-open .brand__sub{ color:var(--ink-mute); }
 
 /* ------------------------------------------------------------
    Header — a larger wordmark, and four small icon tabs
@@ -160,11 +166,11 @@ body.is-locked .brand__sub{ color:var(--ink-mute); }
 
 /* Once the header is a solid bar over paper, the marks go dark. */
 .header.is-stuck .htab,
-body.is-locked .htab{ color:var(--ink); }
+body.menu-open .htab{ color:var(--ink); }
 .header.is-stuck .htab__icon,
-body.is-locked .htab__icon{ color:var(--gold); }
+body.menu-open .htab__icon{ color:var(--gold); }
 .header.is-stuck .htab:hover,
-body.is-locked .htab:hover{ color:var(--purple); }
+body.menu-open .htab:hover{ color:var(--purple); }
 
 /* The wordmark is now larger, so it gives way sooner. Below 1040px it
    shrinks and wraps rather than pushing through the tabs; below 700px
@@ -1660,7 +1666,12 @@ body.has-lightbox{ overflow:hidden; }
   display:grid; align-items:end;
   overflow:hidden;
 }
-.saga--open{ min-height:min(94vh,860px); align-items:center; }
+/* The opening frame is the page's hero now that the purple plate above it
+   is gone, so it takes the whole window rather than most of it, and the
+   photograph runs under the transparent header to the very top. Its scrim
+   already lifts to .48 at the top of the frame, which is what keeps the
+   header's white lettering legible over a bright corridor. */
+.saga--open{ min-height:100svh; min-height:100vh; align-items:center; }
 .saga__media{ position:absolute; inset:0; z-index:0; }
 .saga__media img{ width:100%; height:100%; object-fit:cover; display:block; }
 /* Dark at the foot where the words sit, clearing towards the top so the

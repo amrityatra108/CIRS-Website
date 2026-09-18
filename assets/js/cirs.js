@@ -634,22 +634,28 @@
 
   /* ==========================================================
      The run — the home page's horizontal passage
-     Third of these on the site, after dayTrack and newsTrack, and
-     built the same way: pin the section, scrub a flex row sideways
-     by scroll progress, fall back to a native swipe track under
-     900px or when motion is off.
+     Third pinned horizontal track on the site after the Student
+     Life timetables and the News reel, and pinned the same way.
+     What is different is that it is not flat.
 
-     What is different is that the track carries two kinds of child.
-     The count is a count of photographs, so it is measured off the
-     figures alone — counting the written panels as well would have
-     the readout saying 6 of 14 while the reader is looking at the
-     fourth picture.
+     The track is translated once, by the whole distance. Each item
+     is then translated again by (depth - 1) x that distance, so an
+     item at depth 1.15 outruns the track by fifteen per cent and
+     one at 0.34 falls a long way behind it. Parallax is exactly
+     that difference: nothing here is faked with a second scroll
+     position. Depth also drives scale and a dimming veil, because
+     speed alone does not read as distance.
+
+     Two transforms per item per frame, on a dozen items. They are
+     written in one pass inside a single onUpdate and only as
+     transform and opacity, so the work stays on the compositor.
      ========================================================== */
   function homeRun() {
-    var sec = $("#run"), pin = $(".hrun__pin", sec || document);
-    var track = $(".hrun__track", sec || document);
+    var sec = $("#run");
+    if (!sec) return;
+    var pin = $(".hrun__pin", sec), track = $(".hrun__track", sec);
     var fill = $("#hrunFill"), count = $("#hrunCount");
-    if (!sec || !track) return;
+    if (!track) return;
 
     function staticMode() { sec.classList.add("is-static"); }
 
@@ -657,24 +663,93 @@
 
     var HOLD = 0.10;
     // Scrolled one-for-one, the track's own width is what the reader has to
-    // sit through: about ten screens of scrolling between the hero and the
-    // film, which is a wall rather than a passage. PACE buys that back the
-    // way dayh--duo does for the two timetables — the whole run still
-    // passes, in about two thirds of the scrolling, so roughly two frames
-    // cross per screen. It is the one number to change if the run should
-    // move more slowly.
+    // sit through: about ten screens between the hero and the film, which is
+    // a wall rather than a passage. PACE buys that back the way dayh--duo
+    // does for the two timetables. It is the one number to change if the run
+    // should move more slowly.
     var PACE = 0.66;
+
     var mm = gsap.matchMedia();
 
     mm.add("(min-width: 900px)", function () {
       sec.classList.remove("is-static");
       var frames = $$(".hframe", track);
 
+      // The distance the track travels, measured from layout rather than
+      // from track.scrollWidth. scrollWidth counts the ghost words, which
+      // are absolutely positioned and are pushed to the RIGHT by their own
+      // depth — so reading it each frame made the distance grow, which grew
+      // the lag, which grew the distance again. offsetLeft and offsetWidth
+      // are layout values and no transform can move them.
+      function reach() {
+        var kids = track.children, far = 0;
+        for (var i = 0; i < kids.length; i++) {
+          var k = kids[i];
+          if (k.classList.contains("hghost")) continue;   // not in the flow
+          far = Math.max(far, k.offsetLeft + k.offsetWidth);
+        }
+        return far;
+      }
+
+      // Parallax is measured against the middle of the window, not against
+      // how far the run has travelled. Multiplying the whole distance by a
+      // depth difference is the obvious way to do it and it is wrong: the
+      // offsets grow without limit, so by the middle of the run the frames
+      // had drifted hundreds of pixels into each other. Offsetting by how
+      // far an item is from the centre of the screen instead keeps every
+      // offset inside one screen width, and the depths below then have to
+      // stay near 1 for the same reason — a frame may lead or lag its
+      // neighbours, never swap places with them.
+      var PARALLAX = 0.26;
+
+      var layers = $$("[data-depth]", track).map(function (el) {
+        var d = parseFloat(el.getAttribute("data-depth")) || 1;
+        var ghost = el.classList.contains("hghost");
+        return {
+          el: el,
+          d: d,
+          ghost: ghost,
+          // Nearer is very slightly larger. The range is narrow on purpose:
+          // a photograph scaled to read as "far away" just looks small.
+          scale: ghost ? 1 : Math.min(Math.max(1 + (d - 1) * 0.5, 0.96), 1.04),
+          // The vertical offset is authored in CSS as --y, and gsap.set
+          // writes the whole transform, so it has to be read once and put
+          // back on every frame.
+          y: ghost ? "0px" : (getComputedStyle(el).getPropertyValue("--y").trim() || "0px"),
+          base: el.offsetLeft + el.offsetWidth / 2
+        };
+      });
+
+      function place(q, dist) {
+        var mid = window.innerWidth / 2;
+        var trackX = -dist * q;
+        for (var i = 0; i < layers.length; i++) {
+          var L = layers[i];
+          // Where the item would be with no parallax on it. Taken from
+          // layout plus the track's own offset rather than from a bounding
+          // rect, which would already carry last frame's transform and feed
+          // it back in.
+          var from = L.base + trackX - mid;
+          var off = from * (L.d - 1) * PARALLAX;
+          // A few degrees of turn away from the centre line. With the
+          // perspective on the viewport this is what actually reads as
+          // depth — the offsets alone are too small to see, and making
+          // them big enough to see is what put the frames into each
+          // other. Capped at four degrees: past that the photographs
+          // start to look soft rather than turned.
+          var rot = L.ghost ? 0
+                  : Math.min(Math.max(from / mid * -3.4, -4), 4);
+          gsap.set(L.el, {
+            x: off, y: L.y, scale: L.scale, rotationY: rot, force3D: true
+          });
+        }
+      }
+
       var st = ScrollTrigger.create({
         trigger: sec,
         start: "top top",
         end: function () {
-          var run = Math.max((track.scrollWidth - window.innerWidth + 360) * PACE, 600);
+          var run = Math.max((reach() - window.innerWidth + 360) * PACE, 600);
           return "+=" + Math.round(run / (1 - HOLD));
         },
         pin: pin,
@@ -682,38 +757,87 @@
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: function (self) {
-          // The first tenth of the scrub holds the track still. Without it
-          // the opening panel is at the left gutter with nothing before it,
-          // so the first notch of the wheel carries it half off the screen
-          // and the reader meets the run already under way. The hold buys
-          // the opening a stationary screen; everything after it is the
-          // same even scrub, measured over the remaining nine tenths.
+          // The first tenth holds the track still. Without it the opening
+          // statement sits against the gutter with nothing before it, so the
+          // first notch of the wheel carries it half off the screen and the
+          // reader meets the run already under way.
           var q = self.progress <= HOLD ? 0 : (self.progress - HOLD) / (1 - HOLD);
-          var dist = Math.max(track.scrollWidth - window.innerWidth + 120, 0);
-          gsap.set(track, { x: -dist * q });
+          var dist = Math.max(reach() - window.innerWidth + 120, 0);
+          gsap.set(track, { x: -dist * q, force3D: true });
+          place(q, dist);
+
           if (fill) fill.style.width = (q * 100).toFixed(2) + "%";
           if (count && frames.length) {
             // Which photograph is nearest the middle of the screen, rather
-            // than a slice of the progress bar: the panels make the track
-            // uneven, so an evenly divided progress would run ahead of the
-            // pictures through the reading and lag behind through the run.
+            // than a slice of the progress bar: the statements make the
+            // track uneven, and depth moves each frame off the track's own
+            // position, so only the measured position is right.
             var mid = window.innerWidth / 2, best = 0, near = Infinity;
-            for (var i = 0; i < frames.length; i++) {
-              var r = frames[i].getBoundingClientRect();
-              var d = Math.abs(r.left + r.width / 2 - mid);
-              if (d < near) { near = d; best = i; }
+            for (var j = 0; j < frames.length; j++) {
+              var r = frames[j].getBoundingClientRect();
+              var dd = Math.abs(r.left + r.width / 2 - mid);
+              if (dd < near) { near = dd; best = j; }
             }
             var label = (best + 1) + " of " + frames.length;
             if (count.textContent !== label) count.textContent = label;
           }
         }
       });
-      return function () { st.kill(true); gsap.set(track, { clearProps: "x" }); staticMode(); };
+
+      place(0, 0);
+
+      return function () {
+        st.kill(true);
+        gsap.set(track, { clearProps: "transform" });
+        layers.forEach(function (L) { gsap.set(L.el, { clearProps: "transform" }); });
+        staticMode();
+      };
     });
 
     mm.add("(max-width: 899px)", function () {
       staticMode();
       return function () {};
+    });
+  }
+
+  /* ==========================================================
+     Founder — the five words take their highlight in turn
+     Knowledge, Character, Culture, Service, Responsibility, set
+     large and stacked. A dark plate opens across each one in turn
+     as the list is scrolled, and the lettering reverses out of it.
+
+     The slices overlap by half, which is what keeps it continuous:
+     a word begins to fill while the one above it is still filling,
+     so the sweep never sits still between two words. Scrubbing back
+     up empties them again in the same order.
+     ========================================================== */
+  function founderWords() {
+    var list = $(".fwords");
+    if (!list) return;
+    var rows = $$("li", list);
+    // No ScrollTrigger and no motion: --lit stays unset, the plate is
+    // never drawn, and the words are the words. Nothing to undo.
+    if (!rows.length || !hasST || !animate) return;
+
+    var n = rows.length;
+    var span = 1 / (n + 1);          // each word starts a slice later
+    var window_ = span * 2;          // and takes two slices to fill
+
+    function paint(p) {
+      for (var i = 0; i < n; i++) {
+        var t = (p - i * span) / window_;
+        rows[i].style.setProperty("--lit", (t < 0 ? 0 : t > 1 ? 1 : t).toFixed(3));
+      }
+    }
+
+    paint(0);
+    ScrollTrigger.create({
+      trigger: list,
+      start: "top 80%",
+      end: "bottom 60%",
+      scrub: .6,
+      invalidateOnRefresh: true,
+      onUpdate: function (self) { paint(self.progress); }
     });
   }
 
@@ -867,7 +991,7 @@
     drawer.classList.remove("is-open");
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-label", "Open menu");
-    document.body.classList.remove("is-locked");
+    document.body.classList.remove("is-locked", "menu-open");
     if (lenis) lenis.start();
     window.setTimeout(function () {
       if (!drawer.classList.contains("is-open")) drawer.hidden = true;
@@ -895,7 +1019,10 @@
       requestAnimationFrame(function () { drawer.classList.add("is-open"); });
       burger.setAttribute("aria-expanded", "true");
       burger.setAttribute("aria-label", "Close menu");
-      document.body.classList.add("is-locked");
+      // is-locked is the scroll lock and nothing more — the intro curtain uses
+      // it too. menu-open is what turns the header solid, and only the drawer
+      // sets it. See the note on body.menu-open .header in pages.css.
+      document.body.classList.add("is-locked", "menu-open");
       if (lenis) lenis.stop();
       if (animate) {
         gsap.from(drawer.querySelectorAll(".drawer__grid > div, .drawer__cta"), {
@@ -1402,6 +1529,7 @@
     choreograph();
     slHero();
     homeRun();
+    founderWords();
     dayTrack();
     newsTrack();
     groundShift();

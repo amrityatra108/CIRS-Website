@@ -442,15 +442,18 @@ section[id]{ scroll-margin-top:88px; }
    #0E0B12, so the run is the bridge between them rather than a
    light band cut into the middle of the two.
 
-   Everything is sized off the pinned height, not off the page
-   width. A frame is a height and its own aspect ratio, so the
-   wide ones and the tall ones line up along one horizon and the
-   track gets its length from what is in it. The written panels
-   are the widest things in the run — the section is as much
-   reading as looking, and a caption-sized column of type beside
-   a 70vh photograph reads as an afterthought.
+   Depth. Every item declares a data-depth and cirs.js gives it a
+   translation of (depth - 1) x the track distance on top of the
+   track's own. Near items therefore outrun the track, far ones
+   lag, and the section reads as a shallow space rather than a
+   row. Depth is also spent on scale and on a dimming veil, so
+   that what is behind looks behind and not merely slower.
+
+   Sizes are mixed deliberately. Ten frames of one height sliding
+   past is a filmstrip; a large one, a small one and a tall one is
+   a page that somebody laid out.
    ============================================================ */
-.hrun{ position:relative; background:var(--purple-ink); }
+.hrun{ position:relative; background:var(--purple-ink); --hrun-h:clamp(300px,54vh,580px); }
 .hrun__pin{
   min-height:100svh; display:flex; flex-direction:column; justify-content:center;
   overflow:hidden;
@@ -459,64 +462,102 @@ section[id]{ scroll-margin-top:88px; }
     radial-gradient(90% 80% at 92% 100%, rgba(57,42,72,.5), transparent 62%),
     var(--purple-ink);
 }
-.hrun__viewport{ overflow:hidden; }
-/* Aligned on one ground line rather than centred. Centring frames of three
-   different heights puts every caption on a different baseline, which reads
-   as a row that was not laid out; on a shared horizon the tall ones simply
-   stand taller and the captions make one line across the run. The written
-   panels opt out — a column of type hanging off the bottom of a photograph
-   is not the same thing at all. */
+/* The viewport is the window on the space; perspective here rather than on
+   the track, so every child shares one vanishing point. */
+.hrun__viewport{ overflow:hidden; perspective:1400px; }
 .hrun__track{
-  display:flex; align-items:flex-end; gap:clamp(28px,3.4vw,64px);
+  position:relative;
+  display:flex; align-items:center; gap:clamp(56px,6.5vw,140px);
   padding-inline:var(--gut);
   will-change:transform;
 }
 
 /* --- the photographs ------------------------------------- */
-.hframe{ flex:none; position:relative; margin:0; }
-.hframe img{
-  display:block; height:var(--hrun-h); width:auto; max-width:none;
-  object-fit:cover; border-radius:2px;
-  box-shadow:0 24px 60px rgba(0,0,0,.45);
+/* Number, then plate. The sequence number sits to the left of its
+   photograph and stays subdued: it is an index, not a caption. */
+.hframe{
+  flex:none; margin:0; transform-style:preserve-3d;
+  display:grid; grid-template-columns:auto auto; align-items:start;
+  gap:clamp(12px,1.1vw,22px);
+  transform:translateY(var(--y,0));
+  will-change:transform;
 }
-.hrun{ --hrun-h:clamp(300px,58vh,620px); }
-/* A tall frame at the same height as a wide one is a third of the width, so
-   the run would read as wide, wide, sliver. The tall ones are given more of
-   the horizon back instead, and the two shapes end up comparable in area. */
-.hframe--t img{ height:calc(var(--hrun-h) * 1.14); }
-
+.hframe__n{
+  grid-row:1; align-self:start; margin-top:.15em;
+  font-family:var(--serif); font-variant-numeric:oldstyle-nums;
+  font-size:clamp(.82rem,1vw,1rem); letter-spacing:.16em;
+  /* Subdued, but still text a reader has to be able to read. .34 looked
+     right and measured 2.8:1 against this ground; .52 is the lowest value
+     that clears AA against both the darkest point of the section and the
+     lightest point of its wash, and it is still plainly quieter than the
+     caption beneath the photograph. */
+  color:var(--on-purple); opacity:.52;
+}
+.hframe__plate{ grid-row:1; display:block; }
+.hframe img{
+  display:block; height:var(--h); width:auto; max-width:none;
+  object-fit:cover; border-radius:2px;
+  box-shadow:0 28px 70px rgba(0,0,0,.5);
+}
 .hframe figcaption{
-  margin-top:14px;
+  grid-column:2; margin-top:16px;
   font-family:var(--serif); font-size:.95rem; letter-spacing:.01em;
   color:var(--on-purple-soft);
 }
-.hframe figcaption b{
-  font-variant-numeric:oldstyle-nums; font-weight:400;
-  color:var(--gold); margin-right:.6em;
-}
+/* Four sizes, as fractions of the run height. */
+.hframe--xl{ --h:var(--hrun-h); }
+.hframe--l { --h:calc(var(--hrun-h) * .82); }
+.hframe--m { --h:calc(var(--hrun-h) * .62); }
+.hframe--s { --h:calc(var(--hrun-h) * .46); }
+/* A tall frame at a given height is a third of a wide one's width, so the
+   portraits get some of the horizon back and the two shapes end up
+   comparable in area. */
+.hframe--l img[height="1500"],
+.hframe--m img[height="1250"],
+.hframe--s img[height="1250"]{ height:calc(var(--h) * 1.16); }
 
-/* --- the written panels ---------------------------------- */
+/* --- the written statements ------------------------------- */
+/* Set in the grotesque rather than the serif, and large: these are the
+   editorial statements the run is built around, not captions between
+   pictures. The serif carries the running text underneath them. */
 .hsay{
-  flex:none; align-self:center;
-  width:clamp(300px,34vw,520px);
-  padding-inline:clamp(0px,1.4vw,28px);
+  flex:none; width:clamp(300px,36vw,560px);
+  transform:translateY(var(--y,0));
+  will-change:transform;
 }
-.hsay .marker{ color:var(--gold); margin-bottom:18px; }
-.hsay .h2{ color:var(--on-purple); font-size:clamp(1.9rem,3.2vw,3rem); line-height:1.06; }
-.hsay .h2 em{ font-style:italic; color:var(--gold-lit); }
-.hsay .lead{ color:var(--on-purple-soft); margin-top:20px; max-width:46ch; }
-/* The opening panel is the section's first screen, and it has to survive
-   being read. At panel width it did not: it sat hard against the gutter with
-   nothing before it, so the first turn of the wheel carried it half off and
-   the reader met the run already in progress. It is given most of the first
-   viewport instead — the type stays at its own measure, the width is empty
-   room — and it holds for the first tenth of the scrub. */
-.hsay--open{ width:min(72vw,940px); }
-.hsay--open > *{ max-width:620px; }
-.hsay__cue{
-  margin-top:26px; font-family:var(--sans); font-size:var(--fs-xs);
-  letter-spacing:.14em; text-transform:uppercase; color:var(--on-purple-mute);
+.hsay__eyebrow{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.2em; font-size:.98rem; color:var(--gold);
+  margin-bottom:clamp(16px,1.6vw,26px);
 }
+.hsay__big{
+  font-family:var(--sans); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.8rem,3.3vw,3.4rem); line-height:.96;
+  letter-spacing:-.025em; color:var(--on-purple);
+}
+.hsay__sub{
+  margin-top:clamp(18px,1.8vw,28px); max-width:44ch;
+  color:var(--on-purple-soft); font-size:var(--fs-lead);
+}
+.hsay--open{ width:min(64vw,760px); }
+.hsay--open .hsay__big{ font-size:clamp(2.1rem,4.6vw,4.6rem); }
+.hsay--open > *{ max-width:640px; }
+
+/* --- the ghost words -------------------------------------- */
+/* Furthest back of everything, at a depth the frames never reach, so they
+   drift almost imperceptibly against the pictures crossing in front. They
+   are decoration and carry no meaning a reader would miss. */
+.hghost{
+  position:absolute; z-index:0; pointer-events:none; white-space:nowrap;
+  font-family:var(--sans); font-weight:700; text-transform:uppercase;
+  font-size:clamp(4rem,11vw,12rem); line-height:.9; letter-spacing:-.04em;
+  /* On this ground anything under about eight per cent simply is not there.
+     Measured against the lightest point of the wash it stays far below the
+     threshold where it would read as text competing with the statements. */
+  color:var(--on-purple); opacity:.085;
+}
+.hframe, .hsay{ position:relative; z-index:1; }
 
 /* --- the readout ----------------------------------------- */
 .hrun__rail{
@@ -532,29 +573,30 @@ section[id]{ scroll-margin-top:88px; }
 .hrun__count b{ color:var(--gold); font-weight:400; font-variant-numeric:oldstyle-nums; }
 
 /* --- fallback: a native swipe track ----------------------- */
-/* Under 900px, with motion off, or if ScrollTrigger never arrives. The pin
-   and the scrub are the only things lost; the same fourteen items are still
-   in the same order, and the rail goes away rather than sitting at zero
-   pretending to be a progress bar that does not move. */
-.hrun.is-static{ --hrun-h:clamp(260px,44vh,420px); }
+/* Under 900px, with motion off, or if ScrollTrigger never arrives. The pin,
+   the scrub and the depth are what is lost; the same items are still in the
+   same order at their own sizes. The vertical offsets go too — they were
+   composed against a wide window and only read as untidiness in a narrow
+   one — and the ghosts go with them, because a word that cannot drift is
+   just a pale smear behind a photograph. */
+.hrun.is-static{ --hrun-h:clamp(250px,42vh,400px); }
 .hrun.is-static .hrun__pin{ min-height:0; padding-block:clamp(56px,9vh,110px); }
 .hrun.is-static .hrun__viewport{
   overflow-x:auto; scroll-snap-type:x proximity;
   scroll-padding-inline-start:var(--gut);
-  -webkit-overflow-scrolling:touch;
+  perspective:none; -webkit-overflow-scrolling:touch;
 }
+.hrun.is-static .hrun__track{ align-items:flex-start; gap:clamp(28px,6vw,64px); }
 .hrun.is-static .hframe,
-.hrun.is-static .hsay{ scroll-snap-align:start; }
-/* The rail is a readout of the scrub, and there is no scrub here; the count
-   is driven by the same onUpdate and would sit at "1 of 10" however far the
-   track had been swiped. Both go, rather than stand there saying nothing.
-   The cue under the opening panel still says which way the run moves. */
+.hrun.is-static .hsay{ scroll-snap-align:start; transform:none; }
+.hrun.is-static .hghost{ display:none; }
 .hrun.is-static .hrun__rail,
 .hrun.is-static .hrun__count{ display:none; }
 
 @media (max-width:700px){
-  .hrun.is-static{ --hrun-h:clamp(240px,42vh,360px); }
-  .hsay, .hsay--open{ width:min(78vw,420px); }
+  .hrun.is-static{ --hrun-h:clamp(230px,40vh,340px); }
+  .hsay, .hsay--open{ width:min(80vw,430px); }
+  .hsay--open .hsay__big{ font-size:clamp(1.7rem,7vw,2.4rem); }
 }
 
 /* ============================================================

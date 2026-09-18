@@ -1,0 +1,146 @@
+/* ============================================================
+   Palette preview — Admissions only
+   ------------------------------------------------------------
+   Off-white #FAF9F6, gold #FFD700, dark purple #24152D, applied
+   to one page so the scheme can be judged before the other
+   forty-one are moved onto it. Scoped to body.palette; remove
+   the "sheet" line from this page's entry in build-site.py and
+   the page returns to the site palette with nothing else to undo.
+
+   One thing the brief could not have known, and it decides the
+   shape of everything below:
+
+       #FFD700 on #FAF9F6 is 1.33:1.
+
+   Not a near miss — that is pale yellow on white. Unreadable as
+   lettering at any size, and too weak even for a rule or an icon,
+   which need 3:1. The site spends gold almost entirely on small
+   text: eyebrows, small caps, figures, table labels. Half of
+   those sit on paper and half sit on the dark purple, where
+   #FFD700 is 12.27:1 and is the best thing in the scheme.
+
+   So gold is ONE token that changes value with the ground under
+   it. Paper sections get the same hue carried dark enough to
+   read; the dark sections put the bright one back. Every
+   component already reads var(--gold), so nothing had to be
+   rewritten to follow — and nothing can be missed, which an
+   enumerated list of selectors cannot promise.
+
+       --gold on paper   #756300   4.66:1 against the worst of
+                                   the three pale grounds
+       --gold on purple  #FFD700   12.27:1
+
+   Both are hue 51 degrees, the hue of #FFD700 exactly.
+
+   Gold as a FILL stays at full strength everywhere and is kept
+   in its own token, because a fill has no legibility problem —
+   only the lettering on top of it does.
+   ============================================================ */
+body.palette{
+  --paper:    #FAF9F6;
+  --paper-2:  #F2F0EA;
+  --paper-3:  #E7E4DB;
+  --white:    #FFFFFF;
+
+  --purple:        #24152D;
+  --purple-mid:    #1C1023;
+  --purple-deep:   #170D1C;
+  --purple-ink:    #0F0813;
+
+  /* Gold as an ink, on paper. */
+  --gold:      #756300;
+  --gold-lit:  #8E7900;
+  /* Gold as a fill, anywhere. */
+  --gold-fill: #FFD700;
+  --gold-fill-lit: #FFE45C;
+
+  --ink:       #24152D;
+  --ink-soft:  #4A3B52;
+  --ink-mute:  #665A6D;
+
+  --on-purple:      #FAF9F6;
+  --on-purple-soft: rgba(250,249,246,.80);
+  --on-purple-mute: rgba(250,249,246,.58);
+
+  --rule:       #DCD7CE;
+  --rule-soft:  #EAE6DD;
+  --rule-purple: rgba(250,249,246,.22);
+
+  background:var(--paper); color:var(--ink);
+}
+
+/* The dark grounds put the bright gold back. These are the page's own
+   dark contexts — the hero, anything wearing .on-purple, and the footer.
+   Redeclaring the token on the container is enough: everything inside
+   inherits it, including components this sheet has never heard of. */
+/* This list is this page's dark contexts, and it is the one thing that
+   has to be extended when the scheme goes site-wide: a dark section left
+   off it gets the paper gold, which is then dark-on-dark. The audit that
+   catches it is in the note at the foot of this file. */
+body.palette .pagehero,
+body.palette .hero,
+body.palette .on-purple,
+body.palette .band,
+body.palette .advert,
+body.palette .jump__panel,
+body.palette .footer-wrap{
+  --gold:     #FFD700;
+  --gold-lit: #FFE45C;
+}
+
+/* ------------------------------------------------------------
+   Buttons
+   ------------------------------------------------------------
+   The primary button is the one thing the current palette gets
+   wrong site-wide: white lettering on gold, 1.6:1, on five pages.
+   Here it becomes the dark purple on full-strength #FFD700 —
+   12.27:1, and the brightest thing on the page, which is what a
+   primary action should be.
+
+   The ghost button is deliberately NOT touched. It already reads
+   correctly on both grounds in cirs.css, and an earlier version of
+   this sheet that restyled it broke it on the hero (1.15:1) —
+   which is exactly the trap this file is meant to avoid.
+   ------------------------------------------------------------ */
+body.palette .btn--primary{
+  background:var(--gold-fill); color:var(--purple); border-color:var(--gold-fill);
+  font-weight:600;
+}
+body.palette .btn--primary:hover{
+  background:var(--gold-fill-lit); border-color:var(--gold-fill-lit); color:var(--purple);
+}
+
+/* ------------------------------------------------------------
+   Surfaces
+   ------------------------------------------------------------ */
+body.palette main{ background:var(--paper); }
+body.palette .on-paper-2{ background:var(--paper-2); }
+body.palette .on-purple{ background:var(--purple); color:var(--on-purple); }
+body.palette .footer-wrap{ background:var(--purple-deep); }
+/* The scroll hairline under the header is a fill on a dark ground. */
+body.palette #progress{ background:var(--gold-fill); }
+
+/* ------------------------------------------------------------
+   How this was checked, and how to check it again
+   ------------------------------------------------------------
+   Every text node rendered on this page was measured against the
+   colour actually painted behind it, with the sheet on and with
+   the sheet blocked, and the two runs diffed — so the only things
+   reported were the ones this file changed.
+
+   It caught three rounds of my own mistakes, which is the point:
+
+     1. Restyling .btn--ghost broke it on the hero, 19.5:1 to
+        1.15:1. The base stylesheet already had it right on both
+        grounds. Those rules are gone.
+     2. Substituting the dark gold by listing selectors put dark
+        gold on the dark sections. Flipping one token per ground
+        cannot miss a component the way a list of selectors can.
+     3. section.advert is dark and was missing from that list, so
+        its gold tag went to 3.33:1.
+
+   Three placeholder testimonials on this page measure 1.1:1 and
+   are NOT this sheet's doing — they are pale grey on pale grey in
+   the current palette too, and they are waiting on copy from the
+   school. They want fixing either way.
+   ------------------------------------------------------------ */

@@ -165,9 +165,13 @@ PAGES = {
         "title": "Why CIRS",
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
                        "Schools that carry it.",
-        "banner": ("About CIRS", "Why <em>CIRS.</em>",
-                   "A community of knowledge, service and skill in the Siruvani foothills — and "
-                   "the two schools, Junior and Senior, that carry it."),
+        # No banner. The page used to open on a purple plate carrying "Why
+        # CIRS." and a line about a community of knowledge, with the first
+        # photograph below it. The photograph is the better opening, so it
+        # now runs full-bleed from the very top of the page and the header
+        # floats over it — the same composition the home page and the
+        # Founder page open on.
+        "banner": None,
     },
     "school-history": {
         "nav": "School History",
@@ -405,6 +409,12 @@ PAGES = {
                        "for 2027–2028, the entrance examination, visiting, and fees.",
         # A hero rather than the flat band: this is the page that has to
         # persuade, not merely inform.
+        #
+        # PALETTE PREVIEW — temporary. This page alone wears the proposed
+        # off-white / gold / dark-purple scheme, from assets/css/palette.css,
+        # so it can be judged before the rest of the site is moved onto it.
+        # Remove this one line and the page returns to the site palette.
+        "sheet": "palette",
         "hero": ("Admissions 2027–2028", "Admissions <em>Open.</em>",
                  "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
                  "registration portal, the entrance examination, a visit to the school and the "
@@ -445,7 +455,10 @@ PAGES = {
 
 # Which page each of the old single-page section anchors now lives on.
 SECTION_PAGE = {
-    "about": "why-cirs", "junior": "why-cirs", "senior": "why-cirs",
+    # "about" is gone: the section that carried it is now the page's top,
+    # and carries id="top" instead. A bare #about should fail the link
+    # check loudly rather than resolve to an anchor that no longer exists.
+    "junior": "why-cirs", "senior": "why-cirs",
     "quote": "leadership", "people": "leadership",
     "academics": "curriculum",
     "life": "student-life", "day": "student-life", "campus": "student-life",
