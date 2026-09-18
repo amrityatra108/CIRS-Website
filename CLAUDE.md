@@ -70,6 +70,19 @@ or the honeycomb. It needs playwright-core, which is not in the repository: poin
 - `netlify.toml` and `vercel.json` both exist during the move to Vercel and must be changed
   together until Netlify is retired. See HOSTING.md.
 
+## Skills checked in here
+
+`.claude/skills/scroll-craft/` is Nate Herk's scroll-craft skill, vendored from
+github.com/nateherkai/scroll-craft under MIT so that every session on this repository has it
+without a per-machine install. It is for building scroll-driven pages: grammar, feeling curve,
+device variety, layered heroes, and a verification pass that screenshots the page at every
+scroll position.
+
+**It is a house style, and it is not this house.** `PROVENANCE.md` beside it lists where the
+two disagree — em dashes, sequence numbers, its own workspace, and its verification scripts
+overlapping `tools/check-contrast.py`. Read that before applying its hard rules here. Where
+they conflict, this site's own conventions and the owner's instructions win.
+
 ## What is not verifiable from a sandbox session
 
 **Motion now is.** GSAP, ScrollTrigger and Lenis are served from `assets/vendor/` rather than
