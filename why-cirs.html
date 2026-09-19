@@ -18,11 +18,14 @@
 <meta name="twitter:title" content="Why CIRS">
 <meta name="twitter:description" content="Who we are, what the school is recognised for, and the Junior and Senior Schools that carry it.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
-<link rel="stylesheet" href="assets/css/cirs.css?b=39">
-<link rel="stylesheet" href="assets/css/pages.css?b=39">
+<!-- The three typefaces are served from this repository rather than from
+     fonts.googleapis.com. That was a render-blocking stylesheet on a third
+     party origin: a visitor in Coimbatore paid a DNS lookup and a TLS
+     handshake to Google before the first paint of any page here, and told
+     Google they had visited. tools/make-fonts.py mirrors them. -->
+<link rel="stylesheet" href="assets/css/fonts.css?b=41">
+<link rel="stylesheet" href="assets/css/cirs.css?b=41">
+<link rel="stylesheet" href="assets/css/pages.css?b=41">
 </head>
 
 <body>
@@ -200,17 +203,11 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">About CIRS</span></p>
-    <h1 class="serif" data-split>Why <em>CIRS.</em></h1>
-    <p class="lead">A community of knowledge, service and skill in the Siruvani foothills — and the two schools, Junior and Senior, that carry it.</p>
-  </div>
-</section>
-<section class="saga saga--open" id="about" data-ground="#0E0B12">
+<section class="saga saga--open" id="top" data-ground="#0E0B12">
   <div class="saga__media">
-    <img src="assets/img/why-cirs.jpg" alt="Three CIRS students together in a school corridor"
-         width="1200" height="1500" fetchpriority="high">
+    <img src="assets/img/why-cirs.jpg"
+         alt="A teacher and five students marking out a court, one of them measuring with a rule"
+         width="2000" height="1250" fetchpriority="high">
   </div>
   <div class="wrap saga__inner">
     <p class="saga__eyebrow">Chinmaya International Residential School</p>
@@ -535,10 +532,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=39" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=39" defer></script>
-<script src="assets/vendor/lenis.min.js?b=39" defer></script>
-<script src="assets/js/cirs.js?b=39" defer></script>
-<script src="assets/js/pages.js?b=39" defer></script>
+<script src="assets/vendor/gsap.min.js?b=41" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=41" defer></script>
+<script src="assets/vendor/lenis.min.js?b=41" defer></script>
+<script src="assets/js/cirs.js?b=41" defer></script>
+<script src="assets/js/pages.js?b=41" defer></script>
 </body>
 </html>

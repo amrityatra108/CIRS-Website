@@ -435,6 +435,147 @@ section[id]{ scroll-margin-top:88px; }
 .prog__meta b{ color:var(--purple); font-weight:600; }
 
 /* ============================================================
+   The run — the home page's horizontal passage
+   ------------------------------------------------------------
+   It fills the window. The section pins at 100svh with nothing
+   above or below it inside the frame — no heading band, no
+   progress rail — and the stage under it is a 780vw canvas with
+   every item placed absolutely at one of three heights.
+
+   That arrangement is the point, and it is the one the Chinmaya
+   Yuva Kendra page uses. A flex row cannot do it: however wide
+   the gaps are set, a row still lines everything up on a single
+   band across the middle of the screen. Placing items on a
+   canvas is what lets a photograph sit high on the left while
+   the next sits low and far to the right, with a screen of
+   nothing between them.
+
+   Sizes are given in vh, so the run is composed against the
+   height of the window rather than its width and a frame is
+   always a known fraction of the screen.
+
+   Depth: every item declares one, the stage is translated once,
+   and each item again by its own parallax — measured against the
+   middle of the window, so the offsets stay inside one screen
+   and frames can lead or lag their neighbours without ever
+   swapping places with them.
+   ============================================================ */
+.hrun{ position:relative; background:var(--purple-ink); }
+.hrun__pin{
+  height:100svh; height:100vh; overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 12% 0%, rgba(76,24,104,.55), transparent 60%),
+    radial-gradient(90% 80% at 92% 100%, rgba(57,42,72,.5), transparent 62%),
+    var(--purple-ink);
+}
+.hrun__viewport{ height:100%; overflow:hidden; perspective:1600px; }
+.hrun__stage{
+  position:relative; width:780vw; height:100%;
+  will-change:transform;
+}
+
+/* --- the photographs ------------------------------------- */
+.hframe{
+  position:absolute; z-index:1; margin:0;
+  transform-style:preserve-3d; will-change:transform;
+}
+/* Centred vertically when the item asked for the middle band. The custom
+   property is set in the markup beside top:50%, because a transform here
+   would be overwritten by the one the parallax writes every frame — so
+   cirs.js reads it and folds the -50% into the transform it sets. */
+.hframe img{
+  display:block; width:auto; max-width:none; height:var(--h);
+  object-fit:cover; border-radius:3px;
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+}
+/* Above the frame and left-aligned with it, as in the reference: an index,
+   not a caption, and quiet enough to read as one. */
+.hframe__n{
+  display:block; margin-bottom:12px;
+  font-family:var(--serif); font-variant-numeric:oldstyle-nums;
+  font-size:clamp(.78rem,.92vw,.96rem); letter-spacing:.2em;
+  color:var(--on-purple); opacity:.52;
+}
+.hframe figcaption{
+  margin-top:16px; max-width:34ch;
+  font-family:var(--serif); font-size:.95rem; letter-spacing:.01em;
+  color:var(--on-purple-soft);
+}
+.hframe--xl{ --h:56vh; }
+.hframe--l { --h:40vh; }
+.hframe--m { --h:29vh; }
+.hframe--s { --h:21vh; }
+
+/* --- the written statements ------------------------------- */
+.hsay{
+  position:absolute; z-index:2;
+  width:clamp(300px,30vw,520px);
+  will-change:transform;
+}
+.hsay__eyebrow{
+  font-family:var(--serif);
+  font-variant-caps:all-small-caps; font-feature-settings:"c2sc" 1,"smcp" 1;
+  letter-spacing:.2em; font-size:.98rem; color:var(--gold);
+  margin-bottom:clamp(16px,1.6vw,26px);
+}
+.hsay__big{
+  font-family:var(--sans); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.8rem,3vw,3.2rem); line-height:.95;
+  letter-spacing:-.03em; color:var(--on-purple);
+}
+.hsay__sub{
+  margin-top:clamp(18px,1.8vw,28px);
+  color:var(--on-purple-soft); font-size:var(--fs-lead);
+}
+.hsay--open{ width:clamp(320px,38vw,660px); }
+.hsay--open .hsay__big{ font-size:clamp(2.1rem,4.2vw,4.4rem); }
+
+/* --- the ghost words -------------------------------------- */
+.hghost{
+  position:absolute; z-index:0; pointer-events:none; white-space:nowrap;
+  font-family:var(--sans); font-weight:700; text-transform:uppercase;
+  font-size:clamp(4rem,12vw,14rem); line-height:.9; letter-spacing:-.045em;
+  /* Below eight per cent on this ground it simply is not there. */
+  color:var(--on-purple); opacity:.085;
+  will-change:transform;
+}
+
+/* --- fallback: a native swipe track ----------------------- */
+/* Absolute positions on a 780vw canvas mean nothing on a phone, so under
+   900px — and with motion off, and if ScrollTrigger never arrives — the
+   same items are laid out as an ordinary swipe track instead. Everything
+   the canvas was carrying is unset here rather than scaled down. */
+.hrun.is-static .hrun__pin{ height:auto; padding-block:clamp(56px,9vh,110px); }
+.hrun.is-static .hrun__viewport{
+  height:auto; overflow-x:auto; perspective:none;
+  scroll-snap-type:x proximity; scroll-padding-inline-start:var(--gut);
+  -webkit-overflow-scrolling:touch;
+}
+.hrun.is-static .hrun__stage{
+  width:auto; height:auto;
+  display:flex; align-items:flex-start; gap:clamp(30px,7vw,72px);
+  padding-inline:var(--gut);
+}
+.hrun.is-static .hframe,
+.hrun.is-static .hsay{
+  position:static; flex:none; transform:none; scroll-snap-align:start;
+}
+.hrun.is-static .hsay{ width:min(80vw,430px); }
+.hrun.is-static .hghost{ display:none; }
+.hrun.is-static .hframe--xl{ --h:38vh; }
+.hrun.is-static .hframe--l { --h:32vh; }
+.hrun.is-static .hframe--m { --h:28vh; }
+.hrun.is-static .hframe--s { --h:24vh; }
+
+@media (max-width:700px){
+  .hrun.is-static .hsay__big{ font-size:clamp(1.7rem,7vw,2.4rem); }
+  .hrun.is-static .hframe--xl,
+  .hrun.is-static .hframe--l,
+  .hrun.is-static .hframe--m,
+  .hrun.is-static .hframe--s{ --h:30vh; }
+}
+
+/* ============================================================
    Day — pinned horizontal timetable
    ============================================================ */
 .dayh{ position:relative; background:var(--paper); }

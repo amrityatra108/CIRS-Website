@@ -55,10 +55,25 @@ def main():
     for name in pages:
         html = open(os.path.join(ROOT, name), encoding="utf-8").read()
         wanted |= {r.split("?")[0] for r in re.findall(r'"(assets/[^"]+)"', html)}
+    # A stylesheet's url() is resolved by the browser against the stylesheet,
+    # not against the page — so "../fonts/x.woff2" in assets/css/fonts.css
+    # means assets/fonts/x.woff2. Matching only paths that already begin
+    # with "assets/" missed every relative one, and the fonts would have
+    # deployed as 404s with the whole site falling back to system faces.
     for sheet in [w for w in sorted(wanted) if w.endswith(".css")]:
         css = open(os.path.join(ROOT, sheet), encoding="utf-8").read()
-        for url in re.findall(r'url\(\s*[\'"]?(assets/[^)\'"]+)', css):
-            wanted.add(url.split("?")[0])
+        # An inline SVG data: URI carries its own url(#id) for a filter, and
+        # scanning the raw text picks that up as a path. Take the data URIs
+        # out before looking for references.
+        css = re.sub(r'url\(\s*[\'"]?data:[^)]*\)', 'url(data:)', css)
+        base = os.path.dirname(sheet)
+        for url in re.findall(r'url\(\s*[\'"]?([^)\'"]+)', css):
+            url = url.split("?")[0].strip()
+            if url.startswith(("http:", "https:", "data:", "//", "#")):
+                continue
+            rel = os.path.normpath(os.path.join(base, url)).replace(os.sep, "/")
+            if rel.startswith("assets/"):
+                wanted.add(rel)
 
     missing = [w for w in sorted(wanted) if not os.path.exists(os.path.join(ROOT, w))]
     if missing:

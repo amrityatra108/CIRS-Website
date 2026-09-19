@@ -36,7 +36,7 @@ import blogposts
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=39"
+CACHE_BUST = "b=41"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -165,9 +165,13 @@ PAGES = {
         "title": "Why CIRS",
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
                        "Schools that carry it.",
-        "banner": ("About CIRS", "Why <em>CIRS.</em>",
-                   "A community of knowledge, service and skill in the Siruvani foothills — and "
-                   "the two schools, Junior and Senior, that carry it."),
+        # No banner. The page used to open on a purple plate carrying "Why
+        # CIRS." and a line about a community of knowledge, with the first
+        # photograph below it. The photograph is the better opening, so it
+        # now runs full-bleed from the very top of the page and the header
+        # floats over it — the same composition the home page and the
+        # Founder page open on.
+        "banner": None,
     },
     "school-history": {
         "nav": "School History",
@@ -269,8 +273,9 @@ PAGES = {
         # markup. blognews.css is scoped to body.blognews for that reason.
         "sheet": "blognews",
         # It alone is set in Lexend and Manrope: Lexend for anything
-        # structural, Manrope only for prose and dates.
-        "fonts": "family=Lexend:wght@500;600;700&family=Manrope:wght@400;600",
+        # structural, Manrope only for prose and dates. Both are declared in
+        # assets/css/fonts.css with the rest, and a browser fetches a face
+        # only on a page that renders it.
         # It opens on a warm off-white, so the header cannot float over it in
         # white lettering.
         "litehead": True,
@@ -414,6 +419,12 @@ PAGES = {
                        "for 2027–2028, the entrance examination, visiting, and fees.",
         # A hero rather than the flat band: this is the page that has to
         # persuade, not merely inform.
+        #
+        # PALETTE PREVIEW — temporary. This page alone wears the proposed
+        # off-white / gold / dark-purple scheme, from assets/css/palette.css,
+        # so it can be judged before the rest of the site is moved onto it.
+        # Remove this one line and the page returns to the site palette.
+        "sheet": "palette",
         "hero": ("Admissions 2027–2028", "Admissions <em>Open.</em>",
                  "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
                  "registration portal, the entrance examination, a visit to the school and the "
@@ -454,7 +465,10 @@ PAGES = {
 
 # Which page each of the old single-page section anchors now lives on.
 SECTION_PAGE = {
-    "about": "why-cirs", "junior": "why-cirs", "senior": "why-cirs",
+    # "about" is gone: the section that carried it is now the page's top,
+    # and carries id="top" instead. A bare #about should fail the link
+    # check loudly rather than resolve to an anchor that no longer exists.
+    "junior": "why-cirs", "senior": "why-cirs",
     "quote": "leadership", "people": "leadership",
     "academics": "curriculum",
     "life": "student-life", "day": "student-life", "campus": "student-life",
@@ -974,17 +988,6 @@ def build(slug, page):
         head = head.replace(
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
-
-    # A page may also bring typefaces of its own. head.html loads the three the
-    # site is set in; a page that is set in something else asks for it here
-    # rather than there, so the other forty-one pages do not fetch a face they
-    # never render. The value is the family part of a Google Fonts css2 query.
-    fonts = page.get("fonts")
-    if fonts:
-        head = head.replace(
-            "</head>",
-            f'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?{fonts}'
-            '&display=swap">\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
