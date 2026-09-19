@@ -32,8 +32,14 @@ jobs:
       # because the hero background is a muted, looping, decorative video
       # marked aria-hidden, and that rule guards against media that starts
       # making noise at a visitor.
+      #
+      # A page whose slug names a directory — curriculum/ib-diploma — is a page
+      # of this site too, and "*.html" alone does not reach it. The second
+      # pattern is the pages under a directory; Digital/, docs/ and pdf/ hold
+      # material from the old website and are not built here, so they are named
+      # out rather than swept in by a recursive glob.
       - name: Validate HTML
-        run: npx html-validate *.html
+        run: npx html-validate *.html curriculum/*.html
 
       # Every in-page anchor and every assets/ path, checked against what is
       # actually in the repository. Offline by design — see the script.

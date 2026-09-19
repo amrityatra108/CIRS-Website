@@ -219,13 +219,31 @@ PAGES = {
     },
     "curriculum": {
         "nav": "Curriculum",
-        "title": "Curriculum",
-        "description": "Two curricula under one roof — CBSE from Grade V, and the International "
-                       "Baccalaureate Diploma in Grades XI and XII.",
+        "title": "Curriculum | CBSE & IB Diploma Programme",
+        "description": "Explore the CBSE and IB Diploma curricula at Chinmaya International "
+                       "Residential School, with specialist teaching, holistic learning and a "
+                       "residential environment.",
         "banner": ("Curriculum", "Two Curricula, <em>One Campus.</em>",
                    "CBSE from Grade V, and the International Baccalaureate Diploma in the final "
                    "two years."),
         "jump": True,
+    },
+    # A child page of Curriculum, and the first page on this site whose slug
+    # names a directory: it is written to curriculum/ib-diploma.html and
+    # served at /curriculum/ib-diploma, so the URL says where it belongs. It
+    # is deliberately not in MENU — the Curriculum page is the way to it, and
+    # a second top-level entry would undo the hierarchy the path states.
+    "curriculum/ib-diploma": {
+        "nav": "IB Diploma",
+        "title": "IB Diploma Programme | CIRS",
+        "description": "The IB Diploma Programme at Chinmaya International Residential School "
+                       "for Grades XI and XII — academic depth, independent learning, research "
+                       "and a global perspective.",
+        "banner": ("International Baccalaureate, Geneva",
+                   "IB Diploma Programme, <em>Grades XI and XII.</em>",
+                   "A rigorous and holistic two years that develop independent thinking, "
+                   "research, communication and a global perspective."),
+        "sheet": "ibdp",
     },
     "student-life": {
         "nav": "Student Life",
@@ -513,6 +531,41 @@ def rewrite_links(html, slug):
             return f'href="{page}"'
         return f'href="{page}#{anchor}"'
     return re.sub(r'href="#([A-Za-z0-9_-]+)"', swap, html)
+
+
+def to_depth(html, slug):
+    """Point a nested page's relative references back up to the root.
+
+    Every page on this site is written as though it sits at the root, because
+    until now every page did: "assets/css/cirs.css", "curriculum.html". A page
+    whose slug carries a directory — "curriculum/ib-diploma" — is served from
+    that directory, and the browser resolves those against it, so they have to
+    climb back out first.
+
+    Doing it here, once, on the finished HTML is what keeps the partials, the
+    page sources and the other forty-two pages from having to know about it:
+    a flat page is returned untouched and byte-identical.
+
+    Left alone: anything absolute (a scheme, or a leading /), a same-page
+    #anchor, and the empty href.
+    """
+    depth = slug.count("/")
+    if not depth:
+        return html
+    up = "../" * depth
+
+    def climb(m):
+        attr, ref = m.group(1), m.group(2)
+        if not ref or ref.startswith(("#", "/", "http://", "https://",
+                                      "mailto:", "tel:", "data:")):
+            return m.group(0)
+        return f'{attr}="{up}{ref}"'
+
+    html = re.sub(r'\b(href|src|poster)="([^"]*)"', climb, html)
+    # The og:image and twitter:image carry their path in content=, not in an
+    # href, and a social preview fetching curriculum/assets/img/og.jpg gets a
+    # 404 and shows no card at all. Only a relative assets/ path is touched.
+    return re.sub(r'\b(content)="(assets/[^"]*)"', climb, html)
 
 
 def nav_html(slug):
@@ -1044,7 +1097,7 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
 
-    return rewrite_links("\n".join(parts), slug)
+    return to_depth(rewrite_links("\n".join(parts), slug), slug)
 
 
 # Every published article is a page. They are added here rather than written
@@ -1068,6 +1121,9 @@ for _post in blogposts.POSTS:
 if __name__ == "__main__":
     for slug, page in PAGES.items():
         out = os.path.join(ROOT, f"{slug}.html")
+        # A slug may name a directory: "curriculum/ib-diploma" is a child page
+        # of Curriculum and is written, and served, under it.
+        os.makedirs(os.path.dirname(out), exist_ok=True)
         html = build(slug, page)
         open(out, "w", encoding="utf-8").write(html)
         print(f"  write  {slug}.html ({len(html):,} chars)")

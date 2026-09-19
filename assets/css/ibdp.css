@@ -1,0 +1,176 @@
+/* The IB Diploma page — a child page of Curriculum.
+
+   Scoped to body.ibdp. It adds nothing to the site's design language and
+   changes none of it: the colours, the two typefaces, the section rhythm,
+   the buttons and the .wrap measure all come from cirs.css, and every
+   component here is built from those tokens. What is here is only the few
+   arrangements this page needs and no other page has — a breadcrumb trail,
+   the six subject groups, the core cards, and the strip of habits.
+
+   The page is served from a directory, so build-site.py rewrites its
+   relative references to climb out of it. Nothing in this file is affected
+   by that: it references no asset of its own. */
+
+/* ------------------------------------------------------------- breadcrumbs */
+
+/* The trail sits under the banner rather than over it: the banner is the
+   page's name and carries the only h1, and a crumb above it would read as
+   though it were part of the heading. */
+body.ibdp .crumbs{
+  border-bottom: 1px solid var(--rule);
+  padding-block: 14px;
+}
+body.ibdp .crumbs__list{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  letter-spacing: .02em;
+  color: var(--ink-mute);
+}
+/* The separator is drawn rather than written, so a screen reader announces
+   three links and not "Home slash Curriculum slash IB Diploma". */
+body.ibdp .crumbs__list li + li::before{
+  content: "";
+  display: inline-block;
+  width: 5px; height: 5px;
+  margin-right: 8px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  opacity: .6;
+}
+body.ibdp .crumbs__list a{
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+body.ibdp .crumbs__list a:hover{ color: var(--purple); border-color: currentColor; }
+body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; }
+
+/* ---------------------------------------------------- words beside a picture */
+
+.ib-intro{
+  display: grid;
+  gap: clamp(20px, 3vw, 44px);
+  align-items: center;
+}
+@media (min-width: 880px){
+  .ib-intro{ grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+.ib-intro__text p:last-child{ margin-bottom: 0; }
+.ib-intro__fig{
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--purple-deep);
+}
+.ib-intro__fig img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.ib-cta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: clamp(26px, 3.4vw, 40px) 0 0;
+}
+
+/* ------------------------------------------------------- the six groups */
+
+.ibgrid{
+  display: grid;
+  gap: clamp(18px, 2.4vw, 30px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 720px){ .ibgrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1040px){ .ibgrid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.ibgrid__cell{
+  padding-top: 18px;
+  border-top: 2px solid var(--purple-ink);
+}
+.ibgrid__n{
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  color: var(--gold);
+}
+.ibgrid__cell h3{ margin: 0 0 10px; }
+.ibgrid__cell .copy{ margin: 0; font-size: 15px; }
+
+/* --------------------------------------------------------- the core cards */
+
+.ibcore{
+  display: grid;
+  gap: clamp(18px, 2.4vw, 28px);
+}
+@media (min-width: 820px){ .ibcore{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* The CIRS experience runs to four, and four across is too thin to read; it
+   sits two-by-two until there is room for the row. */
+@media (min-width: 820px){ .ibcore--four{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1140px){ .ibcore--four{ grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.ibcore__card{
+  display: flex;
+  flex-direction: column;
+  padding: clamp(22px, 2.6vw, 32px);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+.ibcore__tag{ margin: 0 0 12px; }
+.ibcore__tag .sc{
+  display: inline-block;
+  padding: 3px 9px;
+  background: var(--purple-ink);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: .14em;
+}
+.ibcore__card h3{ margin: 0 0 12px; }
+.ibcore__card .copy{ margin: 0; font-size: 15px; }
+
+/* ------------------------------------------------------- habits of the work */
+
+.ibskills{
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+@media (min-width: 640px){ .ibskills{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px){ .ibskills{ grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.ibskills__item{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: clamp(18px, 2.2vw, 26px);
+  background: var(--paper);
+}
+.ibskills__item b{
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+.ibskills__item span{ font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+
+/* ------------------------------------------------------------- the last word */
+
+.ib-end{
+  margin-top: clamp(34px, 4.5vw, 56px);
+  padding-top: clamp(26px, 3.4vw, 40px);
+  border-top: 3px solid var(--purple-ink);
+}
+.ib-end h2{ margin: 0 0 12px; }
+.ib-end .copy{ margin: 0; }
