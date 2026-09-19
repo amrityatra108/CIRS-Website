@@ -198,7 +198,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
             const frag = document.createDocumentFragment();
             for (let j = 0; j < this.rows; j++) {
                 for (let i = 0; i < this.cols; i++) {
-                    const el = document.createElement('div'); el.className = 'p1-tile';
+                    const el = document.createElement('button'); el.type = 'button'; el.className = 'p1-tile';
                     const img = document.createElement('img'); img.alt = ''; img.decoding = 'async'; img.draggable = false;
                     el.appendChild(img); frag.appendChild(el);
                     const slot = { el, img, i, j, gx: NaN, gy: NaN, plate: -1, size: 0, wx: 0, wy: 0, baseZ: 0, lift: 0, hovered: false, hidden: false, tx: NaN, ty: NaN, tz: NaN };
@@ -208,6 +208,16 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
                         if (p && p.thumb && img.getAttribute('src') !== p.src) img.src = p.src;
                     };
                     el.__slot = slot;
+                    el.addEventListener('click', e => {
+                        // Pointer taps are handled by endDrag, so dragging never opens a tile.
+                        if (e.detail === 0) openModal(slot.plate, el);
+                    });
+                    el.addEventListener('focus', () => {
+                        if (!el.matches(':focus-visible') || modalActive) return;
+                        this.vx = this.vy = this.wheelX = this.wheelY = 0;
+                        this.panX = W / 2 - slot.wx; this.panY = H / 2 - slot.wy;
+                        this.frame(16.7, performance.now());
+                    });
                     this.slots.push(slot);
                 }
             }
@@ -228,13 +238,15 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
             const C = this.CELL, rowH = C * 0.9, M = this.MARGIN, cols = this.cols, rows = this.rows;
             const sgx = Math.floor(-this.panX / C) - M, sgy = Math.floor(-this.panY / rowH) - M;
             for (const s of this.slots) {
+                // Never change the photograph represented by the focused control.
+                if (s.el === document.activeElement) continue;
                 const gx = sgx + (((s.i - sgx) % cols) + cols) % cols;
                 const gy = sgy + (((s.j - sgy) % rows) + rows) % rows;
                 if (gx === s.gx && gy === s.gy) continue;
                 const c = this.cellFor(gx, gy);
                 s.gx = gx; s.gy = gy; s.wx = c.wx; s.wy = c.wy; s.baseZ = c.z; s.lift = 0;
                 if (c.size !== s.size) { s.size = c.size; s.el.style.width = s.el.style.height = c.size + 'px'; }
-                if (c.plate !== s.plate) { s.plate = c.plate; const p = plates[c.plate]; s.img.src = p.thumb || p.src; }
+                if (c.plate !== s.plate) { s.plate = c.plate; const p = plates[c.plate]; s.img.src = p.thumb || p.src; s.el.setAttribute('aria-label', p.title + ' — ' + p.cat); }
             }
         },
 
@@ -384,7 +396,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         if (!cancelled && drag.moved < slop && e.timeStamp - drag.startT < 450) {
             const hit = document.elementFromPoint(e.clientX, e.clientY);
             const tile = hit && hit.closest ? hit.closest('.p1-tile') : null;
-            if (tile && tile.__slot && tile.__slot.plate >= 0) openModal(tile.__slot.plate);
+            if (tile && tile.__slot && tile.__slot.plate >= 0) openModal(tile.__slot.plate, tile);
             return;
         }
 
@@ -418,10 +430,10 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
 
     // ------------------------------------------------------------------ MODAL
     let modalToken = 0;
-    function openModal(i) {
+    function openModal(i, from) {
         const d = plates[i]; if (!d) return;
         modalActive = true; modalOpenedAt = performance.now();
-        lastFocus = document.activeElement;
+        lastFocus = from || document.activeElement;
         drag.active = false; p1.vx = p1.vy = 0; p1.wheelX = p1.wheelY = 0;
         mTitle.textContent = d.title;
         mMeta.textContent = `${d.cat} \u00b7 Arts, Music & Theatre`;
@@ -466,6 +478,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
             else if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); }
             return;
         }
+        if (document.body.classList.contains('menu-open')) return;
         // Keyboard fallback for exploring: arrows glide, Home returns to the start.
         const step = e.shiftKey ? 520 : 260;
         const keys = { ArrowLeft: [step, 0], ArrowRight: [-step, 0], ArrowUp: [0, step], ArrowDown: [0, -step] };
