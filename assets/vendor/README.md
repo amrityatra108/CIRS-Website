@@ -39,3 +39,5 @@ Download the new version, replace the file, update the table above, and bump
 and confirm the reveals still run — `assets/js/cirs.js` checks for GSAP with
 `typeof window.gsap !== "undefined"` and quietly falls back to the static page when
 it is missing, so a broken file looks like no animation rather than an error.
+
+ScrollTrigger is retained byte-for-byte from the committed upstream copy. Its built-in debug-marker font stack is inactive because the site does not enable markers; it is not part of the four-family website typography configuration. Do not patch the vendor library solely to change debug typography.

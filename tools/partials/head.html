@@ -18,11 +18,8 @@
 <meta name="twitter:title" content="{{TITLE}}">
 <meta name="twitter:description" content="{{DESCRIPTION}}">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<!-- The three typefaces are served from this repository rather than from
-     fonts.googleapis.com. That was a render-blocking stylesheet on a third
-     party origin: a visitor in Coimbatore paid a DNS lookup and a TLS
-     handshake to Google before the first paint of any page here, and told
-     Google they had visited. tools/make-fonts.py mirrors them. -->
+<!-- Four approved families, self-hosted with retained OFL notices. -->
+<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?{{CACHE_BUST}}">
 <link rel="stylesheet" href="assets/css/cirs.css?{{CACHE_BUST}}">
 <link rel="stylesheet" href="assets/css/pages.css?{{CACHE_BUST}}">

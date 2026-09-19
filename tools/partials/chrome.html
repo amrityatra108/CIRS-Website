@@ -11,15 +11,15 @@
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
-<div class="lightbox" id="lightbox" hidden>
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
   <div class="lightbox__back" data-close></div>
-  <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="The official CIRS film">
+  <div class="lightbox__panel">
     <div class="lightbox__frame" id="lightboxFrame"></div>
     <button type="button" class="lightbox__close" data-close aria-label="Close the film">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
   </div>
-</div>
+</dialog>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
 <div class="ring" id="ring" aria-hidden="true"></div>

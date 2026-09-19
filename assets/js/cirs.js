@@ -134,13 +134,19 @@
     var words = $$("span.w", el);
     if (!words.length) { el.innerHTML = original; return null; }
 
-    var lines = [], current = null, lastTop = null;
+    var lines = [], current = null, lineBand = null;
     words.forEach(function (w) {
-      var top = Math.round(w.offsetTop);
-      if (lastTop === null || Math.abs(top - lastTop) > 3) {
+      // Different font ascenders can give words on one baseline different tops.
+      // Use their shared vertical band, not a fixed offsetTop tolerance.
+      var rect = w.getBoundingClientRect();
+      var overlap = lineBand ? Math.min(lineBand.bottom, rect.bottom) - Math.max(lineBand.top, rect.top) : 0;
+      if (!lineBand || overlap < Math.min(lineBand.bottom - lineBand.top, rect.height) * .5) {
         current = [];
         lines.push(current);
-        lastTop = top;
+        lineBand = { top: rect.top, bottom: rect.bottom };
+      } else {
+        lineBand.top = Math.max(lineBand.top, rect.top);
+        lineBand.bottom = Math.min(lineBand.bottom, rect.bottom);
       }
       current.push(w);
     });
@@ -941,6 +947,7 @@
     drawer.classList.remove("is-open");
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-label", "Open menu");
+    burger.focus({ preventScroll: true });
     document.body.classList.remove("is-locked", "menu-open");
     if (lenis) lenis.start();
     window.setTimeout(function () {
@@ -981,7 +988,22 @@
       }
     });
     $$("a", drawer).forEach(function (a) { a.addEventListener("click", closeDrawer); });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeDrawer(); });
+    document.addEventListener("keydown", function (e) {
+      if (!drawer.classList.contains("is-open")) return;
+      if (e.key === "Escape") { e.preventDefault(); closeDrawer(); return; }
+      if (e.key !== "Tab") return;
+      var items = [burger].concat($$("a[href], button", drawer).filter(function (el) {
+        return !el.disabled && el.getClientRects().length;
+      }));
+      var i = items.indexOf(document.activeElement);
+      e.preventDefault();
+      items[(i + (e.shiftKey ? items.length - 1 : 1)) % items.length].focus();
+    });
+    document.addEventListener("focusin", function (e) {
+      if (drawer.classList.contains("is-open") && e.target !== burger && !drawer.contains(e.target)) {
+        burger.focus({ preventScroll: true });
+      }
+    });
     window.addEventListener("resize", function () { if (window.innerWidth > 1040) closeDrawer(); }, { passive: true });
   })();
 
@@ -1212,6 +1234,13 @@
     if (!box || !frame || !triggers.length) return;
 
     var opener = null;
+    var panel = $(".lightbox__panel", box);
+    // Focus guards also catch Tab leaving the cross-origin player's document.
+    var before = document.createElement("span"), after = document.createElement("span");
+    [before, after].forEach(function (guard) { guard.tabIndex = 0; guard.className = "sr-only"; });
+    panel.prepend(before); panel.append(after);
+    before.addEventListener("focus", function () { $(".lightbox__close", box).focus(); });
+    after.addEventListener("focus", function () { var player = $("iframe", frame); if (player) player.focus(); });
 
     function open(id, from) {
       opener = from || null;
@@ -1226,6 +1255,7 @@
       frame.appendChild(f);
 
       box.hidden = false;
+      box.showModal();
       document.body.classList.add("has-lightbox");
       if (lenis) lenis.stop();
       var close = $(".lightbox__close", box);
@@ -1234,6 +1264,7 @@
 
     function close() {
       if (box.hidden) return;
+      box.close();
       box.hidden = true;
       frame.innerHTML = "";
       document.body.classList.remove("has-lightbox");
@@ -1250,16 +1281,15 @@
       });
     });
 
+    // Use native modal cancellation for browser close requests.
+    box.addEventListener("cancel", function (e) { e.preventDefault(); close(); });
     box.addEventListener("click", function (e) {
       if (e.target.closest("[data-close]")) close();
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !box.hidden) close();
-      // Nothing behind the dialog should be reachable while it is open.
-      if (e.key === "Tab" && !box.hidden) {
-        var c = $(".lightbox__close", box);
-        if (c) { e.preventDefault(); c.focus(); }
-      }
+      // Native Tab enters the iframe; the guards wrap at either boundary.
+      // The native modal keeps background content inert until it closes.
     });
   }
 

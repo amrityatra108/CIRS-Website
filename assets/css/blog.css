@@ -4,7 +4,7 @@
    Blog is not here — it is set in different type on a different grid and wears
    its own sheet, assets/css/blognews.css, under body.blognews. This file is
    only the reading page: one column, measured for reading rather than layout.
-   The site's tokens (purple, gold, EB Garamond) are the ones in use here. */
+   The site's tokens (purple, gold, Newsreader) are the ones in use here. */
 
 body.blog{ background: var(--paper); }
 
@@ -28,8 +28,8 @@ body.blog{ background: var(--paper); }
 .art__flag{
   margin: 0 0 clamp(14px, 2vw, 22px);
   font-size: 11px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
+  letter-spacing:.06em;
+  text-transform:none;
   font-weight: 700;
   color: var(--maroon);
 }
@@ -54,7 +54,7 @@ body.blog{ background: var(--paper); }
 .art__where{
   margin: 5px 0 0;
   font-size: 12.5px;
-  letter-spacing: .04em;
+  letter-spacing:.04em;
   color: var(--ink-mute);
 }
 

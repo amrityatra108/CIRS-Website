@@ -66,8 +66,9 @@
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && isOpen()) {
-      close();
+      // Restore focus before closing: the focus handler opens the panel.
       toggle.focus();
+      close();
     }
   });
 
