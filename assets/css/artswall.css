@@ -8,9 +8,8 @@
    The architecture came from the archive built as a standalone
    folder. What changed, so that it belongs to the site: the
    palette is the site's purple and gold rather than its own
-   near-copies, the type is EB Garamond and Schibsted Grotesk
-   rather than Cormorant and Jakarta, the site's header sits over
-   it, and the fold names the page.
+   near-copies, the type follows the approved Newsreader system,
+   the site's header sits over it, and the fold names the page.
 
    Everything is scoped to body.wall — cirs.css styles a page
    that scrolls, and this one does not.
@@ -75,10 +74,12 @@ body.wall #p1-stage{ position:absolute; inset:0; transform-style:preserve-3d; wi
 /* Tiles are plain: no backdrop blur (it re-samples everything behind each
    tile every frame) and no overflow clipping on a 3D layer (that forces a
    mask). The photograph rounds its own corners instead. */
-body.wall .p1-tile{ position:absolute; left:0; top:0; width:100px; height:100px; box-sizing:border-box; background:rgba(57,42,72,.85); border-radius:12px; border:1px solid rgba(var(--gold-rgb),.2); -webkit-backface-visibility:hidden; backface-visibility:hidden; contain:layout style; }
+body.wall .p1-tile{ padding:0; font:inherit; appearance:none; position:absolute; left:0; top:0; width:100px; height:100px; box-sizing:border-box; background:rgba(57,42,72,.85); border-radius:12px; border:1px solid rgba(var(--gold-rgb),.2); -webkit-backface-visibility:hidden; backface-visibility:hidden; contain:layout style; }
 body.wall .p1-tile img{ display:block; width:100%; height:100%; object-fit:cover; border-radius:11px; opacity:.2; transition:opacity .8s; pointer-events:none; -webkit-user-drag:none; }
 body.wall .p1-tile.is-hovered{ border-color:rgba(var(--gold-rgb),.6); }
 body.wall .p1-tile.is-hovered img{ opacity:.85; }
+body.wall .p1-tile:focus-visible{ outline:3px solid #fff; outline-offset:4px; box-shadow:0 0 0 7px #1E1626; }
+body.wall .p1-tile:focus-visible img{ opacity:1; }
 @media (hover: hover) and (pointer: fine){ body.wall .p1-tile{ box-shadow:0 18px 36px rgba(14,11,18,.45); } }
 
 /* --- THE FOLD ---
@@ -93,9 +94,9 @@ body.wall .p1-hero{ position:fixed; inset:0; display:grid; place-items:center; a
    moment you start dragging there is nothing over the wall at all. */
 body.wall .p1-hero::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:calc(var(--fold) * .92); background:radial-gradient(ellipse 46% 38% at 50% 50%, rgba(14,11,18,.82) 0%, rgba(14,11,18,.55) 45%, rgba(14,11,18,0) 78%); }
 body.wall .p1-hero__eyebrow,
-body.wall .p1-hero__cue{ position:relative; grid-column:1; margin:0; opacity:var(--fold); font-family:var(--sans); font-size:var(--fs-xs); letter-spacing:.34em; text-transform:uppercase; color:rgba(var(--gold-rgb),.72); text-align:center; }
+body.wall .p1-hero__cue{ position:relative; grid-column:1; margin:0; opacity:var(--fold); font-family:var(--font-primary); font-size:var(--fs-xs); letter-spacing:.06em; text-transform:none; color:rgba(var(--gold-rgb),.72); text-align:center; }
 body.wall .p1-hero__title{ position:relative; grid-column:1; display:grid; place-items:center; }
-body.wall .p1-hero-text{ grid-area:1 / 1; margin:0; font-family:var(--serif); font-size:clamp(2.4rem, 8vw, 6.4rem); font-weight:500; text-align:center; line-height:.94; letter-spacing:-.015em; opacity:0; will-change:opacity; background:linear-gradient(180deg, var(--gold-lit) 0%, var(--gold) 55%, #A87A05 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+body.wall .p1-hero-text{ grid-area:1 / 1; margin:0; font-family:var(--font-primary); font-size:clamp(2.4rem, 8vw, 6.4rem); font-weight:500; text-align:center; line-height:.94; letter-spacing:-.015em; opacity:0; will-change:opacity; background:linear-gradient(180deg, var(--gold-lit) 0%, var(--gold) 55%, #A87A05 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 body.wall .p1-hero-text em{ font-style:italic; }
 body.wall .p1-hero-text.soft{ filter:blur(40px); }
 
@@ -104,7 +105,7 @@ body.wall .p1-hero-text.soft{ filter:blur(40px); }
    the way back. The site's header now owns the top of the window
    and carries the way back in the menu, so only the readout and
    the hint remain, along the bottom. */
-body.wall .p1-hud{ position:fixed; z-index:80; font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.34em; opacity:.5; color:var(--gold); font-family:var(--sans); pointer-events:none; }
+body.wall .p1-hud{ position:fixed; z-index:80; font-size:var(--fs-xs); text-transform:none; letter-spacing:.06em; opacity:.5; color:var(--gold); font-family:var(--font-primary); pointer-events:none; }
 body.wall .hud-bl{ bottom:34px; left:34px; }
 body.wall .hud-br{ bottom:34px; right:34px; }
 
@@ -112,22 +113,22 @@ body.wall .hud-br{ bottom:34px; right:34px; }
 body.wall .wallmodal{ display:none; position:fixed; inset:0; background:rgba(14,11,18,.98); -webkit-backdrop-filter:blur(50px); backdrop-filter:blur(50px); z-index:5000000; opacity:0; transition:opacity .45s ease; flex-direction:row; touch-action:pan-y; -webkit-user-select:text; user-select:text; }
 body.wall .wallmodal.is-open{ opacity:1; }
 body.wall .m-left{ flex:1.8; min-width:0; min-height:0; height:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:40px; box-sizing:border-box; }
-body.wall .m-right{ flex:1.2; min-width:0; height:100%; background:var(--purple-deep); padding:100px 60px; display:flex; flex-direction:column; font-family:var(--sans); overflow-y:auto; border-left:1px solid rgba(var(--gold-rgb),.2); box-sizing:border-box; }
-body.wall .m-right h3{ font-family:var(--serif); font-size:clamp(1.7rem, 3vw, 2.4rem); font-weight:500; color:var(--gold-lit); margin:0 0 20px; line-height:1.12; overflow-wrap:anywhere; }
+body.wall .m-right{ flex:1.2; min-width:0; height:100%; background:var(--purple-deep); padding:100px 60px; display:flex; flex-direction:column; font-family:var(--font-primary); overflow-y:auto; border-left:1px solid rgba(var(--gold-rgb),.2); box-sizing:border-box; }
+body.wall .m-right h3{ font-family:var(--font-primary); font-size:clamp(1.7rem, 3vw, 2.4rem); font-weight:500; color:var(--gold-lit); margin:0 0 20px; line-height:1.12; overflow-wrap:anywhere; }
 body.wall .m-right p{ color:var(--on-purple-soft); line-height:1.8; font-size:var(--fs-sm); white-space:pre-line; margin:0; }
-body.wall .m-meta{ font-size:var(--fs-xs); color:rgba(var(--gold-rgb),.75); border-top:1px solid rgba(var(--gold-rgb),.25); padding-top:20px; margin-bottom:40px; letter-spacing:.18em; text-transform:uppercase; }
-body.wall .m-close{ position:absolute; top:30px; right:30px; padding:10px; color:var(--gold); font-size:var(--fs-xs); letter-spacing:.3em; cursor:pointer; transition:opacity .3s; z-index:5000001; opacity:.65; font-family:var(--sans); background:none; border:0; border-radius:6px; }
+body.wall .m-meta{ font-size:var(--fs-xs); color:rgba(var(--gold-rgb),.75); border-top:1px solid rgba(var(--gold-rgb),.25); padding-top:20px; margin-bottom:40px; letter-spacing:.06em; text-transform:none; }
+body.wall .m-close{ position:absolute; top:30px; right:30px; padding:10px; color:var(--gold); font-size:var(--fs-xs); letter-spacing:.06em; cursor:pointer; transition:opacity .3s; z-index:5000001; opacity:.65; font-family:var(--font-primary); background:none; border:0; border-radius:6px; }
 body.wall .m-close:hover, body.wall .m-close:focus-visible{ opacity:1; }
 body.wall .m-close:focus-visible{ outline:1px solid var(--gold); outline-offset:2px; }
 body.wall .m-close:focus:not(:focus-visible){ outline:none; }
 body.wall #m-media-cont img{ max-width:95%; max-height:90vh; width:auto; height:auto; object-fit:contain; border-radius:4px; box-shadow:0 20px 80px rgba(14,11,18,.6), 0 0 0 1px rgba(var(--gold-rgb),.25); }
 
-body.wall .noscript{ position:fixed; inset:0; display:grid; place-items:center; padding:24px; text-align:center; font-family:var(--sans); color:var(--gold-lit); z-index:10; }
+body.wall .noscript{ position:fixed; inset:0; display:grid; place-items:center; padding:24px; text-align:center; font-family:var(--font-primary); color:var(--gold-lit); z-index:10; }
 
 /* --- PHONES --- */
 @media (max-width: 760px){
   body.wall #grain-overlay{ display:none; }
-  body.wall .p1-hud{ letter-spacing:.28em; }
+  body.wall .p1-hud{ letter-spacing:.06em; }
   body.wall .hud-bl{ bottom:calc(20px + env(safe-area-inset-bottom)); left:18px; }
   body.wall .hud-br{ bottom:calc(20px + env(safe-area-inset-bottom)); right:18px; }
   /* Two readouts on one line at 360px collide; the node is the one
