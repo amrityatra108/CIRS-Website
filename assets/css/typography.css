@@ -1,0 +1,71 @@
+/* Approved family roles. Loaded after all page-specific sheets. */
+:root{
+  --weight-body:400;
+  --weight-display:600;
+  --weight-section:500;
+  --weight-subheading:500;
+  --weight-control:600;
+  --weight-label:500;
+  --fs-body:1.0625rem;
+  --fs-sm:.9375rem;
+  --fs-xs:.875rem;
+}
+html{ font-synthesis:none; font-optical-sizing:auto; }
+body, input, select, textarea, button, code, pre, kbd, samp, svg text{ font-family:var(--font-primary); }
+input, select, textarea{ font-size:inherit; }
+
+/* Genuine variable weights, independent of legacy page-specific heading rules. */
+body{ font-weight:var(--weight-body); }
+body :is(h1, .h1){ font-weight:var(--weight-display); }
+/* Homepage hero retains the requested regular weight. */
+body .hero__inner > h1{ font-weight:400; }
+body :is(h2, .h2){ font-weight:var(--weight-section); }
+body :is(h3, h4, .h3, .h4){ font-weight:var(--weight-subheading); }
+body.wall .p1-hero-text{ font-weight:var(--weight-display); }
+body :is(.htab, .btn, .drawer a, .jump__toggle){ font-weight:var(--weight-control); }
+body :is(.sc, .art__flag, .art__issue, .art__by, .nx-tag, .nx-meta, .fmeta, .fnav__label){ font-weight:var(--weight-label); }
+
+/* Only these two existing introductions use the editorial family. */
+.crhero__lead, .advert__sub{ font-family:var(--font-editorial); }
+
+/* Quotations and expressive emphasis; attribution stays in the primary face. */
+blockquote, .quote__text, .fhero__say, .motto__iast, .fmotto__roman,
+body :is(h1, h2, h3, h4, .h1) em, .saga__line em{
+  font-family:var(--font-quote);
+  font-style:italic;
+  font-weight:400;
+}
+blockquote p{ font-family:inherit; font-style:inherit; }
+blockquote cite, blockquote footer, figcaption{ font-family:var(--font-primary); }
+
+/* :lang also covers descendants inheriting a Sanskrit/Hindi language tag. */
+body :is(:lang(hi), :lang(sa), .deva){
+  font-family:var(--deva);
+  font-weight:400;
+  font-style:normal;
+  line-height:1.5;
+  letter-spacing:normal;
+  text-transform:none;
+}
+
+/* Keep small labels readable with the new English face. */
+.htab, .brand__sub, .art__flag, .art__issue, .nx-tag, .nx-meta,
+.fmeta, .fhero__sig, .fhero__cue, .fnav__label{ font-size:var(--fs-xs); }
+.sc{ line-height:1.3; }
+.btn{ line-height:1.35; }
+
+/* Retain the gallery's gold palette without painting a gradient through text. */
+body.wall .p1-hero-text{
+  background:none;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  color:var(--gold-lit);
+}
+
+/* Metric-specific composition corrections; keep mobile sizing intact. */
+.founder .fcvp .fsec__head{ max-width:42rem; }
+.dmoment h3{ text-wrap:balance; }
+@media (min-width:701px){
+  .hrun.is-static .hsay--open{ width:min(80vw,470px); }
+  .hrun.is-static .hsay--open .hsay__big{ font-size:clamp(2.1rem,3.3vw,3rem); }
+}

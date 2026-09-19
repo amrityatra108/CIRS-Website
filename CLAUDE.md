@@ -76,7 +76,7 @@ or the honeycomb. It needs playwright-core, which is not in the repository: poin
 from a CDN, so a sandbox session loads them and the reveals, the pinned sections and the smooth
 scroll can be checked before a change ships. This used to be the largest blind spot here.
 
-**Type now is, too.** EB Garamond, Schibsted Grotesk and Tiro Devanagari Hindi are served
+**Type now is, too.** Newsreader, Literata, EB Garamond and Tiro Devanagari Hindi are served
 from `assets/fonts/` rather than from fonts.googleapis.com, so a sandbox session renders the
 real lettering and line lengths, headline breaks and small caps can all be checked before a
 change ships. `tools/make-fonts.py` mirrors them; re-run it after changing a weight or adding

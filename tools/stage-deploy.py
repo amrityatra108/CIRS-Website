@@ -75,6 +75,12 @@ def main():
             if rel.startswith("assets/"):
                 wanted.add(rel)
 
+    # Distribute the font licenses and provenance alongside the self-hosted files.
+    for directory, _, names in os.walk(os.path.join(ROOT, "assets/fonts/licenses")):
+        wanted.update(os.path.relpath(os.path.join(directory, name), ROOT).replace(os.sep, "/")
+                      for name in names)
+    wanted.add("assets/fonts/manifest.json")
+
     missing = [w for w in sorted(wanted) if not os.path.exists(os.path.join(ROOT, w))]
     if missing:
         raise SystemExit("stage-deploy: referenced but not in the repository:\n  "

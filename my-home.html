@@ -18,15 +18,13 @@
 <meta name="twitter:title" content="My Home | CIRS Blog">
 <meta name="twitter:description" content="Like most other kids, I had an enjoyable childhood with my family, so naturally, making the tough decision to join a boarding school 2,359 long kilometres away from home was an emo">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<!-- The three typefaces are served from this repository rather than from
-     fonts.googleapis.com. That was a render-blocking stylesheet on a third
-     party origin: a visitor in Coimbatore paid a DNS lookup and a TLS
-     handshake to Google before the first paint of any page here, and told
-     Google they had visited. tools/make-fonts.py mirrors them. -->
-<link rel="stylesheet" href="assets/css/fonts.css?b=41">
-<link rel="stylesheet" href="assets/css/cirs.css?b=41">
-<link rel="stylesheet" href="assets/css/pages.css?b=41">
-<link rel="stylesheet" href="assets/css/blog.css?b=41">
+<!-- Four approved families, self-hosted with retained OFL notices. -->
+<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?b=46">
+<link rel="stylesheet" href="assets/css/cirs.css?b=46">
+<link rel="stylesheet" href="assets/css/pages.css?b=46">
+<link rel="stylesheet" href="assets/css/blog.css?b=46">
+<link rel="stylesheet" href="assets/css/typography.css?b=46">
 </head>
 
 <body class="blog litehead">
@@ -43,15 +41,15 @@
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
-<div class="lightbox" id="lightbox" hidden>
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
   <div class="lightbox__back" data-close></div>
-  <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="The official CIRS film">
+  <div class="lightbox__panel">
     <div class="lightbox__frame" id="lightboxFrame"></div>
     <button type="button" class="lightbox__close" data-close aria-label="Close the film">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
   </div>
-</div>
+</dialog>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
 <div class="ring" id="ring" aria-hidden="true"></div>
@@ -311,10 +309,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=41" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=41" defer></script>
-<script src="assets/vendor/lenis.min.js?b=41" defer></script>
-<script src="assets/js/cirs.js?b=41" defer></script>
-<script src="assets/js/pages.js?b=41" defer></script>
+<script src="assets/vendor/gsap.min.js?b=46" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=46" defer></script>
+<script src="assets/vendor/lenis.min.js?b=46" defer></script>
+<script src="assets/js/cirs.js?b=46" defer></script>
+<script src="assets/js/pages.js?b=46" defer></script>
 </body>
 </html>
