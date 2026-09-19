@@ -18,15 +18,13 @@
 <meta name="twitter:title" content="Our Founder — Pujya Gurudev Swami Chinmayananda">
 <meta name="twitter:description" content="Pujya Gurudev Swami Chinmayananda, 1916–1993: the teacher whose vision of an education that transforms rather than informs became Chinmaya International Residential School.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<!-- The three typefaces are served from this repository rather than from
-     fonts.googleapis.com. That was a render-blocking stylesheet on a third
-     party origin: a visitor in Coimbatore paid a DNS lookup and a TLS
-     handshake to Google before the first paint of any page here, and told
-     Google they had visited. tools/make-fonts.py mirrors them. -->
-<link rel="stylesheet" href="assets/css/fonts.css?b=41">
-<link rel="stylesheet" href="assets/css/cirs.css?b=41">
-<link rel="stylesheet" href="assets/css/pages.css?b=41">
-<link rel="stylesheet" href="assets/css/founder.css?b=41">
+<!-- Four approved families, self-hosted with retained OFL notices. -->
+<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?b=46">
+<link rel="stylesheet" href="assets/css/cirs.css?b=46">
+<link rel="stylesheet" href="assets/css/pages.css?b=46">
+<link rel="stylesheet" href="assets/css/founder.css?b=46">
+<link rel="stylesheet" href="assets/css/typography.css?b=46">
 </head>
 
 <body class="founder">
@@ -43,15 +41,15 @@
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
-<div class="lightbox" id="lightbox" hidden>
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
   <div class="lightbox__back" data-close></div>
-  <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="The official CIRS film">
+  <div class="lightbox__panel">
     <div class="lightbox__frame" id="lightboxFrame"></div>
     <button type="button" class="lightbox__close" data-close aria-label="Close the film">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
   </div>
-</div>
+</dialog>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
 <div class="ring" id="ring" aria-hidden="true"></div>
@@ -216,7 +214,7 @@
     <span>Chin</span><span>maya</span><span>nanda</span>
   </div>
 
-  <figure class="ffig fhero__plate"><img src="assets/img/founder/gurudev-hero.jpg?b=41" alt="Pujya Gurudev Swami Chinmayananda seated before the Himalaya at Sidhbari, one hand raised mid-sentence" loading="lazy" decoding="async"></figure>
+  <figure class="ffig fhero__plate"><img src="assets/img/founder/gurudev-hero.jpg?b=46" alt="Pujya Gurudev Swami Chinmayananda seated before the Himalaya at Sidhbari, one hand raised mid-sentence" loading="lazy" decoding="async"></figure>
 
   <div class="wrap fhero__inner">
     <p class="fmeta">Founder <i>·</i> Visionary <i>·</i> Teacher</p>
@@ -252,7 +250,7 @@
     </div>
 
     <div class="fintro__plate">
-      <figure class="ffig"><img src="assets/img/founder/gurudev-portrait.jpg?b=41" alt="Pujya Gurudev Swami Chinmayananda in close view, speaking, his raised hand holding a gesture" loading="lazy" decoding="async"></figure>
+      <figure class="ffig"><img src="assets/img/founder/gurudev-portrait.jpg?b=46" alt="Pujya Gurudev Swami Chinmayananda in close view, speaking, his raised hand holding a gesture" loading="lazy" decoding="async"></figure>
       <p class="fcaption">From the school&rsquo;s archive.</p>
     </div>
   </div>
@@ -392,7 +390,7 @@
 <section class="fsec feduc" id="education">
   <div class="wrap feduc__open">
     <div class="feduc__plate">
-      <figure class="ffig"><img src="assets/img/founder/gurudev-enquiry.jpg?b=41" alt="Pujya Gurudev Swami Chinmayananda holding a laboratory flask up to the light, examining it" loading="lazy" decoding="async"></figure>
+      <figure class="ffig"><img src="assets/img/founder/gurudev-enquiry.jpg?b=46" alt="Pujya Gurudev Swami Chinmayananda holding a laboratory flask up to the light, examining it" loading="lazy" decoding="async"></figure>
       <p class="fcaption">A Vedanta teacher, holding a flask up to the light.
         From the school&rsquo;s archive.</p>
     </div>
@@ -459,7 +457,7 @@
         history &rarr;</a></p>
     </div>
     <div class="fcampus__plate">
-      <figure class="ffig"><img src="assets/img/assembly-front.jpg?b=41" alt="The school assembled in front of the main building at CIRS" loading="lazy" decoding="async"></figure>
+      <figure class="ffig"><img src="assets/img/assembly-front.jpg?b=46" alt="The school assembled in front of the main building at CIRS" loading="lazy" decoding="async"></figure>
       <p class="fcaption">A hundred acres in the Siruvani foothills.</p>
     </div>
   </div>
@@ -526,7 +524,7 @@
 <section class="fsec fstudent" id="student">
   <div class="wrap fstudent__grid">
     <div class="fstudent__plate">
-      <figure class="ffig"><img src="assets/img/students.jpg?b=41" alt="CIRS students standing together at a school gathering" loading="lazy" decoding="async"></figure>
+      <figure class="ffig"><img src="assets/img/students.jpg?b=46" alt="CIRS students standing together at a school gathering" loading="lazy" decoding="async"></figure>
     </div>
     <div class="fstudent__text">
       <p class="fmeta rv">The purpose</p>
@@ -546,7 +544,7 @@
 
 <!-- ---------- 10. The vision lives on ------------------------ -->
 <section class="fsec fclose" id="continues">
-  <figure class="ffig fclose__plate"><img src="assets/img/founder/gurudev-himalaya.jpg?b=41" alt="Pujya Gurudev Swami Chinmayananda seated beneath the Himalayan range" loading="lazy" decoding="async"></figure>
+  <figure class="ffig fclose__plate"><img src="assets/img/founder/gurudev-himalaya.jpg?b=46" alt="Pujya Gurudev Swami Chinmayananda seated beneath the Himalayan range" loading="lazy" decoding="async"></figure>
   <div class="wrap fclose__inner">
     <p class="fmeta rv">Still continuing</p>
     <h2 class="fclose__head rv">The Vision<br><em>Lives On.</em></h2>
@@ -651,10 +649,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=41" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=41" defer></script>
-<script src="assets/vendor/lenis.min.js?b=41" defer></script>
-<script src="assets/js/cirs.js?b=41" defer></script>
-<script src="assets/js/pages.js?b=41" defer></script>
+<script src="assets/vendor/gsap.min.js?b=46" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=46" defer></script>
+<script src="assets/vendor/lenis.min.js?b=46" defer></script>
+<script src="assets/js/cirs.js?b=46" defer></script>
+<script src="assets/js/pages.js?b=46" defer></script>
 </body>
 </html>

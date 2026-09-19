@@ -36,7 +36,7 @@ import blogposts
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=41"
+CACHE_BUST = "b=46"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -290,12 +290,7 @@ PAGES = {
         # it is a news stand and they are reading pages, and they share no
         # markup. blognews.css is scoped to body.blognews for that reason.
         "sheet": "blognews",
-        # It alone is set in Lexend and Manrope: Lexend for anything
-        # structural, Manrope only for prose and dates. Both are declared in
-        # assets/css/fonts.css with the rest, and a browser fetches a face
-        # only on a page that renders it.
-        # It opens on a warm off-white, so the header cannot float over it in
-        # white lettering.
+        # Newsreader carries the Blog interface and prose; its grid remains distinct.
         "litehead": True,
     },
     "cultural-gallery": {
@@ -1041,6 +1036,10 @@ def build(slug, page):
         head = head.replace(
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
+
+    # Shared typography follows page sheets so the approved roles stay consistent.
+    head = head.replace("</head>",
+        f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
