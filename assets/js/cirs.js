@@ -633,6 +633,165 @@
   }
 
   /* ==========================================================
+     The run — the home page's horizontal passage
+     The section pins at the full height of the window and a
+     780vw stage is scrubbed across it. Items are placed on that
+     stage absolutely, at three heights, so the run reads as a
+     space rather than a row.
+
+     Parallax is measured against the middle of the window, not
+     against how far the stage has travelled. Multiplying the
+     whole distance by a depth difference is the obvious way to
+     do it and it is wrong: the offsets grow without limit, and
+     by the middle of the run the frames had drifted hundreds of
+     pixels into each other. Offsetting by how far an item is
+     from the centre of the screen keeps every offset inside one
+     screen width.
+     ========================================================== */
+  function homeRun() {
+    var sec = $("#run");
+    if (!sec) return;
+    var pin = $(".hrun__pin", sec), stage = $(".hrun__stage", sec);
+    if (!stage) return;
+
+    function staticMode() { sec.classList.add("is-static"); }
+
+    if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
+
+    var HOLD = 0.10;
+    // The stage is 780vw. Scrolled one for one that is eleven screens
+    // between the hero and the film, which is a wall rather than a
+    // passage; at half, the whole run passes in about six. It is the one
+    // number to change if the run should move more slowly.
+    var PACE = 0.5;
+    var PARALLAX = 0.30;
+
+    var mm = gsap.matchMedia();
+
+    mm.add("(min-width: 900px)", function () {
+      sec.classList.remove("is-static");
+
+      var layers = $$("[data-depth]", stage).map(function (el) {
+        var d = parseFloat(el.getAttribute("data-depth")) || 1;
+        var ghost = el.classList.contains("hghost");
+        return {
+          el: el,
+          d: d,
+          ghost: ghost,
+          // An item asking for the middle band is placed at top:50% and
+          // has to come back up by half its own height. That cannot live
+          // in the stylesheet: the parallax rewrites the whole transform
+          // every frame and would drop it.
+          mid: getComputedStyle(el).getPropertyValue("--mid").trim() === "1",
+          scale: ghost ? 1 : Math.min(Math.max(1 + (d - 1) * 0.5, 0.96), 1.04),
+          base: el.offsetLeft + el.offsetWidth / 2
+        };
+      });
+
+      // How far the stage has to travel: its own width less one screen,
+      // taken from layout so no transform can feed back into it.
+      function reach() { return stage.offsetWidth; }
+
+      function place(q, dist) {
+        var mid = window.innerWidth / 2;
+        var stageX = -dist * q;
+        for (var i = 0; i < layers.length; i++) {
+          var L = layers[i];
+          var from = L.base + stageX - mid;
+          gsap.set(L.el, {
+            x: from * (L.d - 1) * PARALLAX,
+            yPercent: L.mid ? -50 : 0,
+            scale: L.scale,
+            // A few degrees of turn away from the centre line. With the
+            // perspective on the viewport this is what actually reads as
+            // depth; the offsets alone are too small to see, and making
+            // them big enough to see is what put the frames into each
+            // other. Capped, past which a photograph looks soft, not turned.
+            rotationY: L.ghost ? 0 : Math.min(Math.max(from / mid * -3.4, -4), 4),
+            force3D: true
+          });
+        }
+      }
+
+      var st = ScrollTrigger.create({
+        trigger: sec,
+        start: "top top",
+        end: function () {
+          var run = Math.max((reach() - window.innerWidth + 120) * PACE, 600);
+          return "+=" + Math.round(run / (1 - HOLD));
+        },
+        pin: pin,
+        scrub: .8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          // The first tenth holds the stage still, so the opening statement
+          // gets a screen of its own before anything moves.
+          var q = self.progress <= HOLD ? 0 : (self.progress - HOLD) / (1 - HOLD);
+          var dist = Math.max(reach() - window.innerWidth + 120, 0);
+          gsap.set(stage, { x: -dist * q, force3D: true });
+          place(q, dist);
+        }
+      });
+
+      place(0, 0);
+
+      return function () {
+        st.kill(true);
+        gsap.set(stage, { clearProps: "transform" });
+        layers.forEach(function (L) { gsap.set(L.el, { clearProps: "transform" }); });
+        staticMode();
+      };
+    });
+
+    mm.add("(max-width: 899px)", function () {
+      staticMode();
+      return function () {};
+    });
+  }
+
+  /* ==========================================================
+     Founder — the five words take their highlight in turn
+     Knowledge, Character, Culture, Service, Responsibility, set
+     large and stacked. A dark plate opens across each one in turn
+     as the list is scrolled, and the lettering reverses out of it.
+
+     The slices overlap by half, which is what keeps it continuous:
+     a word begins to fill while the one above it is still filling,
+     so the sweep never sits still between two words. Scrubbing back
+     up empties them again in the same order.
+     ========================================================== */
+  function founderWords() {
+    var list = $(".fwords");
+    if (!list) return;
+    var rows = $$("li", list);
+    // No ScrollTrigger and no motion: --lit stays unset, the plate is
+    // never drawn, and the words are the words. Nothing to undo.
+    if (!rows.length || !hasST || !animate) return;
+
+    var n = rows.length;
+    var span = 1 / (n + 1);          // each word starts a slice later
+    var window_ = span * 2;          // and takes two slices to fill
+
+    function paint(p) {
+      for (var i = 0; i < n; i++) {
+        var t = (p - i * span) / window_;
+        rows[i].style.setProperty("--lit", (t < 0 ? 0 : t > 1 ? 1 : t).toFixed(3));
+      }
+    }
+
+    paint(0);
+    ScrollTrigger.create({
+      trigger: list,
+      start: "top 80%",
+      end: "bottom 60%",
+      scrub: .6,
+      invalidateOnRefresh: true,
+      onUpdate: function (self) { paint(self.progress); }
+    });
+  }
+
+  /* ==========================================================
      Page ground shifts between paper and purple
      ========================================================== */
   function groundShift() {
@@ -782,7 +941,7 @@
     drawer.classList.remove("is-open");
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-label", "Open menu");
-    document.body.classList.remove("is-locked");
+    document.body.classList.remove("is-locked", "menu-open");
     if (lenis) lenis.start();
     window.setTimeout(function () {
       if (!drawer.classList.contains("is-open")) drawer.hidden = true;
@@ -810,7 +969,10 @@
       requestAnimationFrame(function () { drawer.classList.add("is-open"); });
       burger.setAttribute("aria-expanded", "true");
       burger.setAttribute("aria-label", "Close menu");
-      document.body.classList.add("is-locked");
+      // is-locked is the scroll lock and nothing more — the intro curtain uses
+      // it too. menu-open is what turns the header solid, and only the drawer
+      // sets it. See the note on body.menu-open .header in pages.css.
+      document.body.classList.add("is-locked", "menu-open");
       if (lenis) lenis.stop();
       if (animate) {
         gsap.from(drawer.querySelectorAll(".drawer__grid > div, .drawer__cta"), {
@@ -1311,11 +1473,13 @@
     newsFlash();
     crossroadsProgress();
     crossroadsWall();
-    if (!animate) { failOpen(); slHero(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
+    if (!animate) { failOpen(); slHero(); homeRun(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
 
     document.documentElement.classList.add("js-motion");
     choreograph();
     slHero();
+    homeRun();
+    founderWords();
     dayTrack();
     newsTrack();
     groundShift();

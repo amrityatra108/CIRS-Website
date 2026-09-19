@@ -76,7 +76,13 @@ or the honeycomb. It needs playwright-core, which is not in the repository: poin
 from a CDN, so a sandbox session loads them and the reveals, the pinned sections and the smooth
 scroll can be checked before a change ships. This used to be the largest blind spot here.
 
-**Type still is not.** Google Fonts loads from a CDN the session proxy resets, so a browser
-check renders EB Garamond and Schibsted Grotesk as the system fallback. Anything about the
-lettering — line lengths, where a headline breaks, how small caps sit — still needs a person
-looking at the deployed site.
+**Type now is, too.** EB Garamond, Schibsted Grotesk and Tiro Devanagari Hindi are served
+from `assets/fonts/` rather than from fonts.googleapis.com, so a sandbox session renders the
+real lettering and line lengths, headline breaks and small caps can all be checked before a
+change ships. `tools/make-fonts.py` mirrors them; re-run it after changing a weight or adding
+a family and commit what changes.
+
+The cause, for anyone who meets it again elsewhere: it was never the certificate. The browser
+a session drives does not use `$HTTPS_PROXY`, which is what `curl` reads — so the request to
+fonts.googleapis.com was never made at all rather than being refused. Anything else loaded
+from a third-party origin in a page under test will behave the same way.
