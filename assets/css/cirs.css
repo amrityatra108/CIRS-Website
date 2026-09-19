@@ -433,6 +433,10 @@ section[id]{ scroll-margin-top:88px; }
   border-top:1px solid var(--rule); font-size:var(--fs-sm); color:var(--ink-mute);
 }
 .prog__meta b{ color:var(--purple); font-weight:600; }
+/* The way through to a card's own page, where it has one. margin-top:auto
+   holds it to the foot of the card so two cards side by side agree. */
+.prog__more{ margin:20px 0 0; }
+@media (min-width:880px){ .prog__more{ margin-top:auto; padding-top:20px; } }
 
 /* ============================================================
    The run — the home page's horizontal passage

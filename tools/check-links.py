@@ -27,8 +27,38 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Directories that hold no page of the site, so the walk below does not
+# descend into them. _site is the staged deploy — a copy of every page — and
+# walking it would check the whole site twice and report each page as its own
+# duplicate.
 def pages():
-    return sorted(f for f in os.listdir(ROOT) if f.endswith(".html"))
+    """Every page of this site — which is exactly what build-site.py writes.
+
+    Asking the builder rather than listing *.html is what keeps the two in
+    step. The repository also holds Digital/, docs/ and pdf/, material from
+    the old website that nothing here links to and that stage-deploy.py has
+    never copied; a walk of the tree checked those as though they were pages
+    of this site and reported their old links as faults. And a slug may name
+    a directory now — "curriculum/ib-diploma" — which a flat listing missed
+    altogether, leaving its links unchecked.
+    """
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "buildsite", os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "build-site.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return sorted(f"{slug}.html" for slug in mod.PAGES)
+
+
+def resolve(name, ref):
+    """A reference as the browser reads it: relative to the page it is on.
+
+    "../assets/img/x.jpg" on curriculum/ib-diploma.html is assets/img/x.jpg;
+    the same string on a page at the root would point outside the site.
+    """
+    joined = os.path.join(os.path.dirname(name), ref)
+    return os.path.normpath(joined).replace(os.sep, "/")
 
 
 def main():
@@ -62,13 +92,14 @@ def main():
 
             elif ref.endswith(".html") or ".html#" in ref:
                 target, _, anchor = ref.partition("#")
+                target = resolve(name, target)
                 if target not in docs:
                     problems.append(f"{name}: {ref} — links to a page that does not exist")
                 elif anchor and anchor not in ids[target]:
                     problems.append(f"{name}: {ref} — {target} has no element with id \"{anchor}\"")
 
-            elif ref.startswith("assets/"):
-                path = ref.split("?", 1)[0]
+            elif "assets/" in ref.split("?", 1)[0]:
+                path = resolve(name, ref.split("?", 1)[0])
                 referenced.add(path)
                 if not os.path.exists(os.path.join(ROOT, path)):
                     problems.append(f"{name}: {path} — referenced but not in the repository")

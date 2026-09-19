@@ -46,15 +46,34 @@ def main():
         shutil.rmtree(OUT)
     os.makedirs(OUT)
 
-    pages = sorted(f for f in os.listdir(ROOT) if f.endswith(".html"))
+    # The pages of the site are the ones build-site.py writes, which is not
+    # the same as every .html in the tree: Digital/, docs/ and pdf/ hold
+    # material from the old website that nothing here links to. Asking the
+    # builder also picks up a page whose slug names a directory —
+    # "curriculum/ib-diploma" — which a flat listing left out of the deploy
+    # entirely, so the page 404'd in production while every check passed.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "buildsite", os.path.join(ROOT, "tools/build-site.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    pages = sorted(f"{slug}.html" for slug in mod.PAGES)
+
     for name in pages:
-        shutil.copy2(os.path.join(ROOT, name), os.path.join(OUT, name))
+        dest = os.path.join(OUT, name)
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        shutil.copy2(os.path.join(ROOT, name), dest)
 
     # Every assets/ path any page mentions, in an attribute or a stylesheet.
+    # A page inside a directory reaches them with "../assets/...", so each
+    # reference is resolved against the page that makes it.
     wanted = set()
     for name in pages:
         html = open(os.path.join(ROOT, name), encoding="utf-8").read()
-        wanted |= {r.split("?")[0] for r in re.findall(r'"(assets/[^"]+)"', html)}
+        here = os.path.dirname(name)
+        for r in re.findall(r'"((?:\.\./)*assets/[^"]+)"', html):
+            rel = os.path.normpath(os.path.join(here, r.split("?")[0]))
+            wanted.add(rel.replace(os.sep, "/"))
     # A stylesheet's url() is resolved by the browser against the stylesheet,
     # not against the page — so "../fonts/x.woff2" in assets/css/fonts.css
     # means assets/fonts/x.woff2. Matching only paths that already begin
