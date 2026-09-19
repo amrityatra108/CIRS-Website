@@ -1,6 +1,5 @@
 <title>CIRS Design System</title>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Schibsted+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap">
+<link rel="stylesheet" href="../assets/css/fonts.css">
 <style>
 :root{
   color-scheme: light;
@@ -9,19 +8,20 @@
   --paper:#FAF7F8; --paper-2:#F1EAEF; --white:#fff;
   --ink:#1A1119; --ink-soft:#4E4350; --ink-mute:#7C7080;
   --rule:#DCD2D8; --rule-soft:#EAE1E6;
-  --serif:"EB Garamond","Iowan Old Style",Georgia,serif;
-  --sans:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-primary:"Newsreader";
   --gut:clamp(20px,4vw,52px);
   --e:cubic-bezier(.22,.61,.36,1);
 }
+html{font-synthesis:none}
+:lang(hi),:lang(sa){font-family:"Tiro Devanagari Hindi";font-weight:400;font-style:normal}
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-primary);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{margin:0;font-weight:400;text-wrap:balance}
 p{margin:0} ul,ol{margin:0;padding:0;list-style:none} a{color:inherit}
 ::selection{background:var(--gold);color:#fff}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .wrap{max-width:1080px;margin-inline:auto;padding-inline:var(--gut)}
-.serif{font-family:var(--serif)}
+.serif{font-family:var(--font-primary)}
 .muted{color:var(--ink-soft)} .dim{color:var(--ink-mute)}
 .tnum{font-variant-numeric:tabular-nums}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
@@ -29,7 +29,7 @@ p{margin:0} ul,ol{margin:0;padding:0;list-style:none} a{color:inherit}
 
 /* header */
 .top{background:var(--purple-ink);color:#fff;padding:clamp(40px,6vw,72px) 0 clamp(32px,4vw,52px)}
-.top h1{font-family:var(--serif);font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 18px}
+.top h1{font-family:var(--font-primary);font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 18px}
 .top p{max-width:62ch;color:rgba(255,255,255,.8)}
 .top .eyebrow{color:var(--gold-lit)} .top .eyebrow::before{background:var(--gold-lit)}
 .meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:24px;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)}
@@ -43,7 +43,7 @@ p{margin:0} ul,ol{margin:0;padding:0;list-style:none} a{color:inherit}
 
 /* sections */
 section{padding-block:clamp(38px,5vw,66px);border-bottom:1px solid var(--rule-soft)}
-section h2{font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.12;letter-spacing:-.016em;margin:12px 0 12px}
+section h2{font-family:var(--font-primary);font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.12;letter-spacing:-.016em;margin:12px 0 12px}
 .intro{max-width:66ch;color:var(--ink-soft);margin-bottom:30px}
 h3.sub{font-size:.74rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--purple);margin:32px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
 
@@ -53,12 +53,12 @@ table{width:100%;border-collapse:collapse;font-size:.86rem}
 th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
 th{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);font-weight:600;background:var(--paper-2);white-space:nowrap}
 tr:last-child td{border-bottom:0}
-code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82em;background:#F1ECF0;color:var(--purple-deep);padding:1px 5px;border-radius:2px}
+code{font-family:"Newsreader";font-size:.82em;background:#F1ECF0;color:var(--purple-deep);padding:1px 5px;border-radius:2px}
 
 /* cards */
 .cols{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 .card{border:1px solid var(--rule-soft);background:var(--white);padding:20px}
-.card h4{font-family:var(--serif);font-size:1.15rem;margin-bottom:8px;color:var(--purple)}
+.card h4{font-family:var(--font-primary);font-size:1.15rem;margin-bottom:8px;color:var(--purple)}
 .card p{font-size:.87rem;color:var(--ink-soft)}
 
 /* sitemap */
@@ -89,12 +89,12 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82em;backgroun
 .sw i{display:block;height:66px}
 .sw p{padding:9px 11px;font-size:.72rem;line-height:1.7}
 .sw p b{display:block;font-size:.78rem;color:var(--ink)}
-.sw p span{color:var(--ink-mute);font-family:ui-monospace,Menlo,monospace}
+.sw p span{color:var(--ink-mute);font-family:"Newsreader"}
 
 /* specimen */
 .spec{border:1px solid var(--rule-soft);background:var(--white);padding:20px;display:grid;gap:8px}
 .spec .l{font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-mute);font-weight:600}
-.spec .a{font-family:var(--serif);font-size:1.9rem;line-height:1.1;letter-spacing:-.02em;color:var(--purple)}
+.spec .a{font-family:var(--font-primary);font-size:1.9rem;line-height:1.1;letter-spacing:-.02em;color:var(--purple)}
 .spec .b{font-size:.95rem;color:var(--ink-soft)}
 .spec .c{font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
 
@@ -190,38 +190,18 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:space-betw
     </div>
 
     <h3 class="sub">Typography</h3>
-    <p class="intro" style="margin-bottom:18px">The current site runs on Verdana, Tahoma and Arial,
-      so there was no existing web typeface to preserve. Three families were chosen instead, each
-      doing a job the others cannot.</p>
+    <p class="intro">Four self-hosted families form the approved typography system. No additional family is declared as a fallback.</p>
     <div class="cols">
-      <div class="spec">
-        <span class="l">Display — EB Garamond 400 / 500, roman and italic</span>
-        <span class="a">A school in the hills, <em style="font-style:italic">and a hundred acres</em></span>
-        <span class="l">A Garamond, not a fashion serif. It carries true italics for emphasis
-          (never bold), genuine small caps, and oldstyle figures. It is the register of a school
-          founded by a Vedanta teacher, and it is the opposite of what a template reaches for.</span>
-      </div>
-      <div class="spec">
-        <span class="l">Text — Schibsted Grotesk 400 / 500 / 600</span>
-        <span class="b">Eighty of those acres are left to the forest. CBSE and the International
-          Baccalaureate are taught under one faculty.</span>
-        <span class="l">A news grotesque with a sturdy, slightly quirky set. Deliberately not Inter.
-          Carries navigation, running text, tables and data.</span>
-      </div>
-      <div class="spec">
-        <span class="l">Devanagari — Tiro Devanagari Hindi</span>
-        <span style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.7rem;line-height:1.5;color:var(--purple)"
-              lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</span>
-        <span class="l">The motto is set in Devanagari at full size as its own band, with the IAST
-          transliteration and English gloss beneath. This is the single most distinctive element on
-          the page, and it is distinctive because it is true to the school.</span>
-      </div>
+      <div class="spec"><span class="l">Newsreader — primary English</span><span class="a">A school in the hills, and a hundred acres</span><span class="l">Headings, running text, navigation, buttons, labels, tables and articles share this family.</span></div>
+      <div class="spec"><span class="l">Literata — selective editorial voice</span><span class="b" style="font-family:'Literata'">The Crossroads introduction and Admissions campaign introduction.</span></div>
+      <div class="spec"><span class="l">EB Garamond — expressive italic</span><span class="b" style="font-family:'EB Garamond';font-style:italic">Quotations, reflective passages and selected heading emphasis.</span></div>
+      <div class="spec"><span class="l">Tiro Devanagari Hindi — Devanagari</span><span lang="sa" style="font-family:'Tiro Devanagari Hindi'">ज्ञानं सेवा च कौशलम्</span></div>
     </div>
 
     <h3 class="sub">Typographic rules</h3>
     <ul class="check">
-      <li><b>Emphasis is italic, never bold,</b> in any Garamond setting. Bold is reserved for the grotesque.</li>
-      <li><b>Small caps are real,</b> drawn from the font via <code>font-variant-caps: all-small-caps</code> — not uppercase with letter-spacing faked on top.</li>
+      <li><b>Use real weights and italics.</b> Synthetic weight and style are disabled.</li>
+      <li><b>Quiet labels.</b> Use restrained tracking and sentence case; do not synthesize small capitals.</li>
       <li><b>Oldstyle figures in editorial settings</b> (the timetable, the record figures, the fact rail), lining and tabular figures wherever numbers must align in a column.</li>
       <li><b>One drop cap on the page,</b> in maroon, opening the school's history. A second would make it a motif.</li>
     </ul>
@@ -558,8 +538,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:space-betw
 
     <ul class="check">
       <li><b>Verification of the Devanagari motto.</b> The band reads
-        &#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330;
-        &#2325;&#2380;&#2358;&#2354;&#2350;&#2381; — reconstructed from the romanised form on the
+        <span lang="sa" style="font-family:'Tiro Devanagari Hindi'">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330;
+        &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</span> — reconstructed from the romanised form on the
         current site, since no Devanagari original was published. <b>This must be checked by the
         school before launch;</b> it is the most prominent single element on the page.</li>
             <li><b>The emblem as vector.</b> The build uses the real logo from cirschool.org with the white knocked out, but the source is 103×100px — enough for a 52px header lockup, not for print or retina.</li>

@@ -1,0 +1,93 @@
+{
+  "revision": "f2bd09badbc763d8757951d52deec29da27e85fb",
+  "fonts": [
+    {
+      "family": "Newsreader",
+      "style": "normal",
+      "weights": "200 800",
+      "file": "newsreader-normal.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/newsreader/Newsreader%5Bopsz%2Cwght%5D.ttf",
+      "license": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/newsreader/OFL.txt",
+      "source_sha256": "8a08d13f8a6c0d51be379a60af84f945f65369a67e509ee3c3bdcc421254d7c1",
+      "woff2_sha256": "52f54c34206c51e23e2907bfda4f04fb11ac6ba7f75f8021b2d0075b091d1308",
+      "bytes": 214960
+    },
+    {
+      "family": "Newsreader",
+      "style": "italic",
+      "weights": "200 800",
+      "file": "newsreader-italic.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/newsreader/Newsreader-Italic%5Bopsz%2Cwght%5D.ttf",
+      "license": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/newsreader/OFL.txt",
+      "source_sha256": "796668611f80b64d5adf182fde3b6f29ed83b4e7cbec7b96937e84ac01364792",
+      "woff2_sha256": "8920f06c4c116e91721a2cbbbb195d1ab6997a657cb3313dab5c99b6b202d899",
+      "bytes": 239360
+    },
+    {
+      "family": "Literata",
+      "style": "normal",
+      "weights": "200 900",
+      "file": "literata-normal.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/literata/Literata%5Bopsz%2Cwght%5D.ttf",
+      "license": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/literata/OFL.txt",
+      "source_sha256": "b41138c9373112f32abb589cc22e8674b06ed4048b0c513be922bdd26f274440",
+      "woff2_sha256": "230e5b1de4f4ace4d49c9fda9c8cf0851acb5425dce9067d89ff88aed93f325d",
+      "bytes": 397212
+    },
+    {
+      "family": "Literata",
+      "style": "italic",
+      "weights": "200 900",
+      "file": "literata-italic.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/literata/Literata-Italic%5Bopsz%2Cwght%5D.ttf",
+      "license": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/literata/OFL.txt",
+      "source_sha256": "d483dfaeba9cbf4ce71d32a52ee65df82f7e35b15fff8d1011cdb242d1fcd465",
+      "woff2_sha256": "38060b182b46a8b6c5f521982e86c59480f8811e77852ed563ce8a66a4adecb6",
+      "bytes": 396676
+    },
+    {
+      "family": "EB Garamond",
+      "style": "normal",
+      "weights": "400 800",
+      "file": "ebgaramond-normal.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/ebgaramond/EBGaramond%5Bwght%5D.ttf",
+      "license": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/ebgaramond/OFL.txt",
+      "source_sha256": "ef9512f92f6d579e5dc75af59a5a4b1b8b47d2eda89e00b954d44520e5369027",
+      "woff2_sha256": "f58f6c6a927aa64e80e6deffce5583cf6c850859fea2dbc870b11f75c44c49a8",
+      "bytes": 296792
+    },
+    {
+      "family": "EB Garamond",
+      "style": "italic",
+      "weights": "400 800",
+      "file": "ebgaramond-italic.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/ebgaramond/EBGaramond-Italic%5Bwght%5D.ttf",
+      "license": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/ebgaramond/OFL.txt",
+      "source_sha256": "bba2c4499c93c9612b90b9825d32b07da52fce2fe57562a1eb6b833553f93c4e",
+      "woff2_sha256": "1b373df84f0c3abc942be4366f01a0c262faeab43a5e0383d097ad44dd47a54c",
+      "bytes": 285864
+    },
+    {
+      "family": "Tiro Devanagari Hindi",
+      "style": "normal",
+      "weights": "400",
+      "file": "tirodevanagarihindi-normal.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/tirodevanagarihindi/TiroDevanagariHindi-Regular.ttf",
+      "license": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/tirodevanagarihindi/OFL.txt",
+      "source_sha256": "d2abcb4d352f0bfab91632df5d9c8173882073c182e662fa731a5a738e6681d7",
+      "woff2_sha256": "077ae14c099fc1d774429f28ec749609bae82f44c9579aa87d45be35e6169083",
+      "bytes": 141504
+    },
+    {
+      "family": "Tiro Devanagari Hindi",
+      "style": "italic",
+      "weights": "400",
+      "file": "tirodevanagarihindi-italic.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/tirodevanagarihindi/TiroDevanagariHindi-Italic.ttf",
+      "license": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/tirodevanagarihindi/OFL.txt",
+      "source_sha256": "eed07aca7291e34fa2c4f3e48be325b261f60516ecf835610fee30dade0f78ec",
+      "woff2_sha256": "b35f92ce20783025a17bb7657277caec0917b2640670bf74210f8249cc9ed480",
+      "bytes": 147172
+    }
+  ]
+}

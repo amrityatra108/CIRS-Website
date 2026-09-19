@@ -104,8 +104,9 @@ illegible; do not reintroduce it. The spacing scale (`--space-1` … `--space-10
 exists so new components are built on the same steps rather than one-off pixel
 values — please keep to it.
 
-Type: EB Garamond for display, Schibsted Grotesk for interface and running
-text, Tiro Devanagari Hindi for the motto.
+Type: Newsreader for display, interface and running
+text; Literata for two selected introductions; EB Garamond for expressive
+italics; Tiro Devanagari Hindi for all Devanagari passages.
 
 **Changing a stylesheet or a hero asset? Bump `CACHE_BUST` in
 `tools/build-site.py`.** Returning visitors hold the old file otherwise, and
@@ -194,15 +195,10 @@ git push -u origin main
 
 GSAP, ScrollTrigger and Lenis are served from `assets/vendor/` now, not from
 a CDN, so a sandboxed session does load them: motion, scroll behaviour and the
-pinned sections can be checked here. Google Fonts still loads from a CDN those
-sessions cannot reach, so an automated check renders the system fallback face
-rather than EB Garamond and Schibsted Grotesk.
-
-**Anything about webfont rendering needs a human looking at the real site** —
-line lengths, where a headline breaks, how the small caps sit. Say so
-explicitly rather than reporting it verified. Claiming "verified" on something
-you could only test in the fallback face is how a broken hero reaches a
-prospective parent.
+pinned sections can be checked here. All four approved font families are now
+self-hosted in assets/fonts/. Browser checks can verify font loading, line
+breaks and layout locally. Use docs/typography.md for font roles, licenses,
+rebuilding, and the limits of glyph and font-loading checks.
 
 The same rule still governs motion, only the line has moved: a sandbox can now
 tell you the libraries loaded, the triggers registered and an element's opacity
