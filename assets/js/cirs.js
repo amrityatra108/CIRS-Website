@@ -63,6 +63,19 @@
     });
   }
 
+  // Page-specific section navigation can ask the shared smooth-scroll engine
+  // to land precisely without coupling the page script to Lenis.
+  window.addEventListener("cirs-section-scroll", function (event) {
+    if (!lenis || !event.detail) return;
+    event.preventDefault();
+    lenis.scrollTo(event.detail.top, {
+      duration:event.detail.duration,
+      force:true,
+      lock:true,
+      onComplete:event.detail.onComplete
+    });
+  });
+
   /* ----------------------------------------------------------
      Scroll subscription
      Lenis suppresses the native scroll event, so anything that
@@ -686,10 +699,38 @@
   function homeRun() {
     var sec = $("#run");
     if (!sec) return;
-    var pin = $(".hrun__pin", sec), stage = $(".hrun__stage", sec);
+    var pin = $(".hrun__pin", sec), viewport = $(".hrun__viewport", sec), stage = $(".hrun__stage", sec);
     if (!stage) return;
 
-    function staticMode() { sec.classList.add("is-static"); }
+    function clamp01(n) { return n < 0 ? 0 : n > 1 ? 1 : n; }
+    function mix(a, b, t) { return Math.round(a + (b - a) * t); }
+    function rgb(a, b, t) {
+      return "rgb(" + mix(a[0], b[0], t) + "," + mix(a[1], b[1], t) + "," + mix(a[2], b[2], t) + ")";
+    }
+    function paintTheme(progress) {
+      // Hold the gold opening, then make the ivory/gold inversion around the
+      // centre of the run. Smoothstep keeps the hand-driven change calm.
+      var t = clamp01((progress - .42) / .08);
+      t = t * t * (3 - 2 * t);
+      pin.style.setProperty("--run-ivory", t.toFixed(3));
+      pin.style.setProperty("--run-ink", rgb([28,23,10], [126,88,0], t));
+      pin.style.setProperty("--run-soft", rgb([68,55,17], [102,75,8], t));
+      pin.style.setProperty("--run-accent", rgb([74,53,0], [152,104,0], t));
+      pin.style.setProperty("--run-ghost", rgb([28,23,10], [190,142,18], t));
+    }
+    function syncStaticTheme() {
+      var max = Math.max(viewport.scrollWidth - viewport.clientWidth, 0);
+      paintTheme(max ? viewport.scrollLeft / max : 0);
+    }
+    function staticMode() {
+      sec.classList.add("is-static");
+      window.requestAnimationFrame(syncStaticTheme);
+    }
+
+    // The reduced-motion and phone layouts are native horizontal scrollers;
+    // they receive the same colour story from their real swipe position.
+    viewport.addEventListener("scroll", syncStaticTheme, { passive:true });
+    paintTheme(0);
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -755,7 +796,11 @@
           var run = Math.max((reach() - window.innerWidth + 120) * PACE, 600);
           return "+=" + Math.round(run / (1 - HOLD));
         },
-        pin: pin,
+        // Pin the same section that defines the trigger boundary. Pinning the
+        // child panel let their cached positions diverge briefly during a
+        // refresh or a fast end-of-run handoff, exposing the page ground above
+        // the gallery. The inner stage remains the only animated surface.
+        pin: sec,
         scrub: .8,
         anticipatePin: 1,
         invalidateOnRefresh: true,
@@ -766,6 +811,7 @@
           var dist = Math.max(reach() - window.innerWidth + 120, 0);
           gsap.set(stage, { x: -dist * q, force3D: true });
           place(q, dist);
+          paintTheme(self.progress);
         }
       });
 
@@ -775,6 +821,7 @@
         st.kill(true);
         gsap.set(stage, { clearProps: "transform" });
         layers.forEach(function (L) { gsap.set(L.el, { clearProps: "transform" }); });
+        paintTheme(0);
         staticMode();
       };
     });
@@ -870,16 +917,26 @@
   function magnets() {
     if (!animate || !window.matchMedia("(hover: hover)").matches) return;
     $$("[data-magnetic]").forEach(function (el) {
+      var homeHeader = document.body.classList.contains("home") && el.closest(".header");
+      function magneticIsOn() {
+        return !homeHeader || homeHeader.classList.contains("is-stuck");
+      }
+      var bounds = null;
+      var xTo = gsap.quickTo(el, "x", { duration: .34, ease: "power3.out" });
+      var yTo = gsap.quickTo(el, "y", { duration: .34, ease: "power3.out" });
+      el.addEventListener("pointerenter", function () {
+        if (!magneticIsOn()) return;
+        bounds = el.getBoundingClientRect();
+      });
       el.addEventListener("pointermove", function (e) {
-        var r = el.getBoundingClientRect();
-        gsap.to(el, {
-          x: (e.clientX - (r.left + r.width / 2)) * .25,
-          y: (e.clientY - (r.top + r.height / 2)) * .35,
-          duration: .5, ease: "power3.out"
-        });
+        if (!magneticIsOn()) { xTo(0); yTo(0); return; }
+        if (!bounds) bounds = el.getBoundingClientRect();
+        xTo((e.clientX - (bounds.left + bounds.width / 2)) * .18);
+        yTo((e.clientY - (bounds.top + bounds.height / 2)) * .18);
       });
       el.addEventListener("pointerleave", function () {
-        gsap.to(el, { x: 0, y: 0, duration: .7, ease: "elastic.out(1,.5)" });
+        bounds = null;
+        gsap.to(el, { x: 0, y: 0, duration: .5, ease: "power3.out", overwrite: "auto" });
       });
     });
   }
@@ -896,15 +953,24 @@
 
     var x = gsap.quickTo(ring, "x", { duration: .45, ease: "power3" });
     var y = gsap.quickTo(ring, "y", { duration: .45, ease: "power3" });
+    var muted = false;
 
     window.addEventListener("pointermove", function (e) {
       x(e.clientX); y(e.clientY);
-      if (ring.style.opacity !== "1") gsap.to(ring, { opacity: 1, duration: .3 });
+      var overHeader = !!(e.target.closest && e.target.closest(".header"));
+      if (overHeader !== muted) {
+        muted = overHeader;
+        if (muted) ring.classList.remove("is-big");
+        gsap.to(ring, { opacity: muted ? 0 : 1, duration: .2 });
+      } else if (!muted && ring.style.opacity !== "1") {
+        gsap.to(ring, { opacity: 1, duration: .3 });
+      }
     }, { passive: true });
     document.addEventListener("pointerleave", function () { gsap.to(ring, { opacity: 0, duration: .3 }); });
 
     var hot = "a, button, .dmoment, .facilities > div, .node, input, [data-magnetic]";
     document.addEventListener("pointerover", function (e) {
+      if (e.target.closest && e.target.closest(".header")) return;
       if (e.target.closest && e.target.closest(hot)) ring.classList.add("is-big");
     });
     document.addEventListener("pointerout", function (e) {
@@ -969,19 +1035,37 @@
   /* ==========================================================
      Header and drawer
      ========================================================== */
-  var drawer = $("#drawer"), burger = $("#burger");
+  var drawer = $("#drawer"), burger = $("#burger"), drawerMotion = null;
+
+  function finishDrawerClose() {
+    if (!drawer || drawer.classList.contains("is-open")) return;
+    drawer.hidden = true;
+    if (animate) {
+      gsap.set([drawer].concat($$(".drawer__grid > div, .drawer__utility, .drawer__cta", drawer)), {
+        clearProps: "opacity,visibility,transform"
+      });
+    }
+  }
 
   function closeDrawer() {
     if (!drawer || !drawer.classList.contains("is-open")) return;
-    drawer.classList.remove("is-open");
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-label", "Open menu");
     burger.focus({ preventScroll: true });
+    if (animate && drawerMotion) {
+      drawerMotion.eventCallback("onReverseComplete", function () {
+        drawer.classList.remove("is-open");
+        document.body.classList.remove("is-locked", "menu-open");
+        if (lenis) lenis.start();
+        finishDrawerClose();
+      });
+      drawerMotion.reverse();
+      return;
+    }
+    drawer.classList.remove("is-open");
     document.body.classList.remove("is-locked", "menu-open");
     if (lenis) lenis.start();
-    window.setTimeout(function () {
-      if (!drawer.classList.contains("is-open")) drawer.hidden = true;
-    }, 320);
+    window.setTimeout(finishDrawerClose, 420);
   }
 
   (function chrome() {
@@ -992,8 +1076,14 @@
     // lettering on an off-white hero.
     if (header && !document.body.classList.contains("litehead")) {
       // The header rides transparent over the hero and only turns solid once
-      // the hero itself has scrolled mostly out of view.
+      // the hero itself has scrolled mostly out of view. On the homepage the
+      // requested handoff is exact: glass begins when the gold run reaches
+      // the top of the viewport, not before it.
       sentinel(function () {
+        if (document.body.classList.contains("home")) {
+          var opening = $(".hero");
+          if (opening) return Math.max(opening.offsetTop + opening.offsetHeight - 1, 80);
+        }
         var hero = $(".hero");
         return hero ? Math.max(hero.getBoundingClientRect().height - 140, 80) : 80;
       }, function (past) { header.classList.toggle("is-stuck", past); });
@@ -1011,9 +1101,17 @@
       document.body.classList.add("is-locked", "menu-open");
       if (lenis) lenis.stop();
       if (animate) {
-        gsap.from(drawer.querySelectorAll(".drawer__grid > div, .drawer__cta"), {
-          opacity: 0, y: 18, duration: .6, ease: "power3.out", stagger: .06, delay: .1
-        });
+        var pieces = $$(".drawer__grid > div, .drawer__utility, .drawer__cta", drawer);
+        if (drawerMotion) drawerMotion.kill();
+        drawerMotion = gsap.timeline({ paused:true, defaults:{ ease:"power3.out" } });
+        drawerMotion
+          .fromTo(drawer,
+            { autoAlpha:0, y:-10 },
+            { autoAlpha:1, y:0, duration:.42, overwrite:"auto" }, 0)
+          .fromTo(pieces,
+            { autoAlpha:0, y:16 },
+            { autoAlpha:1, y:0, duration:.5, stagger:.045, overwrite:"auto" }, .08)
+          .play(0);
       }
     });
     $$("a", drawer).forEach(function (a) { a.addEventListener("click", closeDrawer); });
@@ -1349,6 +1447,8 @@
     if (pool.length < 3) return;
 
     var timer = null;
+    var toneTimer = null;
+    var inView = false;
 
     function retire() {
       var t = tiles[(Math.random() * tiles.length) | 0];
@@ -1369,17 +1469,24 @@
 
     function run(on) {
       if (on && !timer) timer = window.setInterval(retire, 1200);
+      if (on && !toneTimer) {
+        toneTimer = window.setInterval(function () {
+          sec.classList.toggle("is-tone-flipped");
+        }, 4000);
+      }
       if (!on && timer) { window.clearInterval(timer); timer = null; }
+      if (!on && toneTimer) { window.clearInterval(toneTimer); toneTimer = null; }
     }
 
     // Off screen it is invisible work, and a hidden tab would still be
     // fetching photographs.
     if (typeof window.IntersectionObserver !== "undefined") {
       new IntersectionObserver(function (entries) {
-        run(entries[0].isIntersecting && document.visibilityState !== "hidden");
+        inView = entries[0].isIntersecting;
+        run(inView && document.visibilityState !== "hidden");
       }, { rootMargin: "200px" }).observe(sec);
       document.addEventListener("visibilitychange", function () {
-        if (document.visibilityState === "hidden") run(false);
+        run(inView && document.visibilityState !== "hidden");
       });
     } else {
       run(true);

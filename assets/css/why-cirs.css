@@ -1,0 +1,24 @@
+/* Why CIRS — viewport-sized panels for the section-scroll sequence. */
+body.why-cirs .saga,
+body.why-cirs .saga--open{
+  block-size:100vh;
+  block-size:100svh;
+  min-block-size:100vh;
+  min-block-size:100svh;
+}
+
+body.why-cirs .saga,
+body.why-cirs #facts{
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+}
+
+/* The figures panel joins the same full-screen rhythm on desktop while
+   remaining free to grow if a shorter viewport needs more room. */
+@media (min-width:761px){
+  body.why-cirs #facts{
+    min-block-size:100vh;
+    display:grid;
+    align-items:center;
+  }
+}
