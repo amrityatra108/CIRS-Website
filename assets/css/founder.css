@@ -36,6 +36,17 @@ body.founder .header:not(.is-stuck) .brand__sub,
 body.founder .header:not(.is-stuck) .htab{ color:var(--f-soft); }
 body.founder .header:not(.is-stuck) .htab svg{ stroke:var(--f-soft); }
 body.founder .header:not(.is-stuck) .burger i{ background:var(--f-ink); }
+body.founder:not(.menu-open) .header:not(.is-stuck) .wrap{
+  background:#fff;
+  border-color:rgba(57,42,72,.12);
+  box-shadow:0 12px 36px rgba(21,8,24,.08),inset 0 1px 0 rgba(255,255,255,.9);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+}
+body.founder:not(.menu-open) .header:not(.is-stuck) .htab{
+  background:rgba(57,42,72,.025);
+  border-color:rgba(57,42,72,.1);
+}
 
 /* Paper, not a flat fill: a trace of grain so large areas of empty
    ground read as a surface. Cheap — one repeating SVG, no image. */
@@ -130,7 +141,7 @@ body.founder main{ position:relative; z-index:1; }
   font-size:clamp(7rem,20vw,18rem); line-height:.78;
   letter-spacing:-.045em; color:var(--f-ghost);
   text-transform:none; white-space:nowrap;
-  padding-left:clamp(180px,25vw,380px);
+  padding-left:clamp(24px,5vw,84px);
 }
 .fhero__ghost span{ display:block; }
 .fhero__ghost span:nth-child(2){ padding-left:.28em; }
@@ -142,30 +153,30 @@ body.founder main{ position:relative; z-index:1; }
    not in a cut-out. */
 .fhero__plate{
   position:absolute; z-index:1; pointer-events:none;
-  left:clamp(-30px,-2vw,0px); right:auto; bottom:0;
-  width:clamp(320px,42vw,680px);
+  left:auto; right:clamp(-30px,-2vw,0px); bottom:0;
+  width:clamp(360px,48vw,760px);
   /* Two masks intersected, not one. The vertical fade dissolves the sky so
      the letters read through it; the horizontal fade kills the frame's left
      edge, which otherwise draws a hard rule straight down through MAYA and
      announces that a photograph has been pasted on. */
   -webkit-mask-image:
     linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 14%, #000 40%),
-    linear-gradient(to left, transparent 0%, rgba(0,0,0,.6) 16%, #000 34%);
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,.6) 16%, #000 34%);
   -webkit-mask-composite:source-in;
           mask-image:
     linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 14%, #000 40%),
-    linear-gradient(to left, transparent 0%, rgba(0,0,0,.6) 16%, #000 34%);
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,.6) 16%, #000 34%);
           mask-composite:intersect;
 }
 .fhero__inner{
   position:relative; z-index:2;
   padding-bottom:clamp(var(--space-6),5vh,var(--space-8));
-  /* Held clear of the photograph rather than centred in the page: the
-     reading matter and the picture must not overlap at any width. */
-  width:min(44ch,42vw); max-width:none;
-  margin-left:auto; margin-right:clamp(36px,7vw,110px);
+  /* The reading matter sits to the left and just enters the photograph's
+     dissolved edge, restoring the original editorial overlap without
+     allowing the portrait to obscure the words. */
+  width:min(760px,48vw); max-width:none;
+  margin-left:clamp(36px,7vw,110px); margin-right:auto;
 }
-@media (min-width:1500px){ .fhero__inner{ max-width:min(45ch,38vw); } }
 .fhero__name{
   font-family:var(--font-primary); font-weight:400;
   font-size:clamp(2.2rem,4.2vw,3.65rem); line-height:1.02;
@@ -462,7 +473,7 @@ body.founder main{ position:relative; z-index:1; }
     font-size:clamp(4.4rem,21vw,9rem); opacity:.85;
   }
   .fhero__inner{
-    order:1; max-width:none;
+    order:1; width:100%; max-width:none;
     margin-left:0; margin-right:0;
     padding-bottom:clamp(var(--space-6),4vh,var(--space-7));
   }
