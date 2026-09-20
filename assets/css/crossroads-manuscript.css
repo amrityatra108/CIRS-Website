@@ -1,0 +1,70 @@
+/* Scoped manuscript treatment for the Crossroads about section. */
+.crossroads-manuscript { position:relative; isolation:isolate; overflow:hidden; background:#faf9f3; color:#1f1f1b; min-height:680px; padding:110px 40px; }
+.crossroads-manuscript::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 24% 42%,rgba(232,217,181,.28),transparent 48%); }
+.crossroads-manuscript__pattern { position:absolute; inset:0; z-index:1; width:100%; height:100%; overflow:hidden; pointer-events:none; }
+.crossroads-manuscript__pattern-line { fill:none; stroke-width:1.25; vector-effect:non-scaling-stroke; stroke-linecap:round; stroke-linejoin:round; }
+.crossroads-manuscript__pattern-line--gold { stroke:rgba(143,110,47,.13); }
+.crossroads-manuscript__pattern-line--purple { stroke:rgba(91,42,114,.07); }
+.crossroads-manuscript__pattern-line--soft { stroke:rgba(143,110,47,.065); }
+.crossroads-manuscript__pattern-line--mobile-only { display:none; }
+.crossroads-manuscript__inner { position:relative; z-index:2; width:min(100%,1240px); margin-inline:auto; display:grid; grid-template-columns:minmax(0,64fr) minmax(0,28fr); gap:8%; align-items:center; }
+.crossroads-manuscript__eyebrow { display:flex; align-items:center; gap:16px; margin:0 0 26px; font-family:"Newsreader"; font-size:13px; font-weight:600; line-height:1.4; letter-spacing:.12em; text-transform:uppercase; color:#8d6c2d; }
+.crossroads-manuscript__eyebrow span { width:64px; height:1px; background:#c9a961; }
+.crossroads-manuscript__title { font-family:"Newsreader"; font-size:clamp(64px,7vw,108px); font-weight:400; line-height:.96; letter-spacing:-.045em; color:#1f1f1b; margin:0 0 30px; }
+.crossroads-manuscript__line { display:block; font-weight:400; }
+.crossroads-manuscript__line + .crossroads-manuscript__line { margin-top:.08em; }
+.crossroads-manuscript__mask { display:inline-block; vertical-align:bottom; overflow:hidden; padding:.16em .12em; margin:-.16em -.12em; }
+.crossroads-manuscript__mask > span { display:inline-block; }
+.crossroads-manuscript__body { max-width:650px; font-family:"Newsreader"; font-size:20px; line-height:1.55; color:#1f1f1b; }
+.crossroads-manuscript__body p { margin:0; }
+.crossroads-manuscript__body p + p { margin-top:20px; }
+.crossroads-manuscript__highlight { background-image:linear-gradient(#e8d9b5,#e8d9b5); background-size:100% 100%; background-repeat:no-repeat; background-position:left bottom; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
+.crossroads-manuscript__cta { position:relative; display:inline-flex; align-items:center; gap:14px; min-height:48px; margin-top:24px; padding:10px 0; font-family:"Newsreader"; font-size:16px; color:#1f1f1b; text-decoration:none; --crossroads-manuscript-underline:1; }
+.crossroads-manuscript__cta::after { content:""; position:absolute; left:0; right:0; bottom:5px; height:1px; background:#8f6e2f; transform-origin:left; transform:scaleX(calc(.65 * var(--crossroads-manuscript-underline))); transition:transform 200ms ease; }
+.crossroads-manuscript__cta > span { color:#8f6e2f; transition:transform 200ms ease; }
+.crossroads-manuscript__cta:hover::after,.crossroads-manuscript__cta:focus-visible::after { transform:scaleX(1); }
+.crossroads-manuscript__cta:hover > span,.crossroads-manuscript__cta:focus-visible > span { transform:translateX(4px); }
+.crossroads-manuscript__cta:focus-visible { outline:3px solid #1f1f1b; outline-offset:5px; }
+.crossroads-manuscript__margin { position:relative; padding-left:30px; }
+.crossroads-manuscript__margin-rule { position:absolute; left:0; top:0; bottom:0; width:1px; background:#c9a961; transform-origin:top; }
+.crossroads-manuscript__quote { display:block; color:#c9a961; font-family:"EB Garamond"; font-size:48px; line-height:1; height:36px; }
+.crossroads-manuscript__motto { font-family:"EB Garamond"; font-style:italic; font-size:clamp(32px,2.7vw,40px); line-height:1.1; font-weight:400; color:#1f1f1b; margin:0 0 28px; }
+.crossroads-manuscript__notes { list-style:none; padding:0; margin:0; }
+.crossroads-manuscript__notes li { border-top:1px solid #e3dccb; padding:14px 0; font-family:"Newsreader"; font-size:12px; font-weight:600; letter-spacing:.075em; line-height:1.45; text-transform:uppercase; color:#8d6c2d; }
+@media(min-width:700px) and (max-width:1100px) {
+ .crossroads-manuscript { padding:80px 32px; }
+ .crossroads-manuscript__inner { grid-template-columns:minmax(0,60fr) minmax(0,34fr); gap:6%; }
+ .crossroads-manuscript__title { font-size:clamp(48px,6.5vw,72px); }
+ .crossroads-manuscript__body { font-size:18px; }
+ .crossroads-manuscript__margin { padding-left:22px; }
+ .crossroads-manuscript__motto { font-size:32px; }
+}
+@media(max-width:699px) {
+ .crossroads-manuscript { min-height:0; padding:64px 20px; }
+ .crossroads-manuscript__inner { display:block; }
+ .crossroads-manuscript__title { font-size:clamp(50px,13vw,64px); line-height:.96; margin-bottom:26px; }
+ .crossroads-manuscript__body { font-size:18px; }
+ .crossroads-manuscript__eyebrow { margin-bottom:24px; }
+ .crossroads-manuscript__margin { margin-top:44px; padding:28px 0 0; }
+ .crossroads-manuscript__margin-rule { width:100%; height:1px; bottom:auto; transform-origin:left; }
+ .crossroads-manuscript__motto { max-width:26ch; font-size:34px; }
+ .crossroads-manuscript__pattern-line { display:none; }
+ .crossroads-manuscript__pattern-line--mobile-only { display:block; opacity:.8; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .crossroads-manuscript__cta::after,.crossroads-manuscript__cta > span { transition:none; }
+ .crossroads-manuscript__cta:hover > span,.crossroads-manuscript__cta:focus-visible > span { transform:none; }
+}
+
+/* Continue the manuscript paths through the long issue archive. */
+.crossroads-archive-list { position:relative; isolation:isolate; overflow:clip; background:#faf9f3; }
+.crossroads-archive-list::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 24% 8%,rgba(232,217,181,.22),transparent 28%); }
+.crossroads-archive-list__pattern { position:absolute; inset:0; z-index:1; width:100%; height:100%; overflow:hidden; pointer-events:none; }
+.crossroads-archive-list__line { fill:none; stroke:rgba(143,110,47,.13); stroke-width:1.25; vector-effect:non-scaling-stroke; stroke-linecap:round; stroke-linejoin:round; }
+.crossroads-archive-list__line--soft { stroke:rgba(143,110,47,.07); }
+.crossroads-archive-list__line--purple { stroke:rgba(91,42,114,.07); }
+.crossroads-archive-list > .wrap { position:relative; z-index:2; }
+@media(max-width:699px) {
+ .crossroads-archive-list__pattern { opacity:.8; }
+ .crossroads-archive-list__line--minor,.crossroads-archive-list__line--soft { display:none; }
+}

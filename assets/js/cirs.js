@@ -38,7 +38,9 @@
      Smooth scroll
      ========================================================== */
   var lenis = null;
-  if (typeof window.Lenis !== "undefined" && !reduced) {
+  // The photograph wall has its own infinite drag/scroll surface and must not
+  // compete with document-level smooth scrolling.
+  if (typeof window.Lenis !== "undefined" && !reduced && !document.body.classList.contains("wall")) {
     lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.5 });
     if (hasGSAP) {
       lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
@@ -47,6 +49,18 @@
     } else {
       (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
     }
+  }
+
+  // Route Crossroads section steps through the existing scroll controller.
+  if (document.querySelector("[data-crossroads-intro]")) {
+    window.addEventListener("crossroads-intro-scroll", function (event) {
+      if (!lenis || !event.detail || event.detail.immediate) return;
+      event.preventDefault();
+      lenis.scrollTo(event.detail.top, {
+        duration:0.8, force:true, lock:true,
+        onComplete:event.detail.onComplete
+      });
+    });
   }
 
   /* ----------------------------------------------------------
@@ -585,19 +599,20 @@
     var cards = $$(".crcard");
     if (!out || !cards.length || typeof window.IntersectionObserver === "undefined") return;
 
-    var seen = 0;
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var i = cards.indexOf(e.target) + 1;
-        if (i > seen) {
-          seen = i;
-          out.textContent = i < 10 ? "0" + i : String(i);
-        }
+    function updatePosition() {
+      var current = 1, line = window.innerHeight * 0.5;
+      // Follow the current reading position in both scroll directions rather
+      // than retaining only the furthest card the reader has encountered.
+      cards.forEach(function (card, index) {
+        if (card.getBoundingClientRect().top <= line) current = index + 1;
       });
-    }, { rootMargin: "-45% 0px -45% 0px" });
+      out.textContent = current < 10 ? "0" + current : String(current);
+    }
+    var io = new IntersectionObserver(updatePosition, { rootMargin: "-50% 0px -49% 0px" });
 
     cards.forEach(function (c) { io.observe(c); });
+    window.addEventListener("pageshow", updatePosition);
+    window.addEventListener("resize", updatePosition);
   }
 
   /* ==========================================================
