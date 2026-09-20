@@ -63,6 +63,19 @@
     });
   }
 
+  // Page-specific section navigation can ask the shared smooth-scroll engine
+  // to land precisely without coupling the page script to Lenis.
+  window.addEventListener("cirs-section-scroll", function (event) {
+    if (!lenis || !event.detail) return;
+    event.preventDefault();
+    lenis.scrollTo(event.detail.top, {
+      duration:event.detail.duration,
+      force:true,
+      lock:true,
+      onComplete:event.detail.onComplete
+    });
+  });
+
   /* ----------------------------------------------------------
      Scroll subscription
      Lenis suppresses the native scroll event, so anything that

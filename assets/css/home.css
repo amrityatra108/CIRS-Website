@@ -107,6 +107,12 @@ body.home .motto__rule{
 
 /* Photo crossfades keep their own stagger. Tone uses one class on the section,
    so hundreds of tiles do not each run a separate blend-mode animation. */
+body.home .glimpse{
+  background:#18151D;
+}
+body.home .glimpse .marker .sc{
+  color:var(--home-gold-lit);
+}
 body.home .glimpse .gt img{
   filter:none;
 }
