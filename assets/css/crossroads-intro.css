@@ -87,25 +87,19 @@
 .crossroads-intro-title-art { display:block; width:min(62vw,620px); max-width:100%; height:auto; max-height:18vh; object-fit:contain; margin:0 auto; filter:drop-shadow(0 0 2px rgba(255,230,155,.55)) drop-shadow(0 0 7px rgba(255,196,7,.18)); }
 .crossroads-intro .crossroads-intro__sanskrit { margin:clamp(16px,2.4vh,24px) 0 5px; font-family:var(--deva); font-size:clamp(1.18rem,1.75vw,1.85rem); font-weight:400; line-height:1.28; color:var(--cr-gold); text-shadow:0 0 5px rgba(255,196,7,.18); }
 .crossroads-intro .crossroads-intro__tagline { margin:0 0 clamp(20px,3vh,28px); font-family:var(--font-primary); font-size:clamp(1rem,1.1vw,1.12rem); font-weight:400; line-height:1.45; color:rgba(247,240,230,.9); }
-.crossroads-intro__cta { pointer-events:auto; display:inline-flex; align-items:center; justify-content:center; gap:7px; width:180px; min-height:50px; padding:11px 9px; border:1px solid var(--cr-gold); background:rgba(22,3,28,.78); color:var(--cr-warm); font-family:var(--font-primary); font-size:.91rem; font-weight:500; line-height:1.2; text-decoration:none; white-space:nowrap; transition:background-color 180ms ease,border-color 180ms ease,color 180ms ease,transform 180ms ease; }
-.crossroads-intro__cta svg { flex:none; transition:transform 180ms ease; }
-.crossroads-intro__cta:hover { background:var(--cr-gold); color:var(--cr-purple); border-color:var(--cr-gold); transform:translateY(-2px); }
+.crossroads-intro__cta { pointer-events:auto; display:inline-flex; align-items:center; justify-content:center; gap:10px; width:auto; min-height:40px; padding:0 2px 8px; border:0; border-bottom:1px solid rgba(255,196,7,.72); background:transparent; color:var(--cr-warm); font-family:var(--font-primary); font-size:.76rem; font-weight:600; line-height:1.2; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; white-space:nowrap; transition:border-color 180ms ease,color 180ms ease; }
+.crossroads-intro__cta svg { flex:none; width:14px; height:14px; transition:transform 180ms ease; }
+.crossroads-intro__cta:hover { background:transparent; color:var(--cr-gold-pale); border-color:var(--cr-gold-pale); transform:none; }
 .crossroads-intro__cta:hover svg { transform:translateY(2px); }
 .crossroads-intro__cta:focus-visible { outline:3px solid #fff; outline-offset:4px; box-shadow:0 0 0 2px var(--cr-purple); opacity:1!important; }
+.crossroads-intro__skip { position:absolute; right:clamp(18px,3vw,44px); bottom:clamp(18px,3vw,36px); z-index:70; display:inline-flex; align-items:center; gap:10px; min-height:42px; padding:9px 12px 9px 15px; border:1px solid rgba(255,255,255,.38); background:rgba(0,0,0,.56); color:#fff; font:500 .8rem/1 var(--font-primary); letter-spacing:.04em; cursor:pointer; backdrop-filter:blur(8px); }
+.crossroads-intro__skip[hidden] { display:none; }
+.crossroads-intro__skip kbd { padding:5px 7px; border:1px solid rgba(255,255,255,.42); border-radius:3px; background:rgba(255,255,255,.1); color:inherit; font:inherit; font-size:.7rem; letter-spacing:.06em; }
+.crossroads-intro__skip:hover { border-color:var(--cr-gold); color:var(--cr-gold-pale); }
+.crossroads-intro__skip:focus-visible { outline:3px solid #fff; outline-offset:4px; box-shadow:0 0 0 2px #000; }
 .crossroads-intro-target { position:absolute; top:0; left:0; width:0; height:0; scroll-margin-top:88px; }
 .crossroads-intro-target:focus { outline:none; }
 .crossroads-intro-cursor-muted { display:none!important; }
-
-/* Equal side columns keep the crest mathematically centred. */
-.crossroads-intro-header > .wrap { width:min(100%,1440px); grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); padding-inline:clamp(20px,4vw,64px); }
-.crossroads-intro-header .header__left,.crossroads-intro-header .header__right { width:100%; align-items:center; }
-.crossroads-intro-header .header__left { justify-self:start; justify-content:flex-start; }
-.crossroads-intro-header .header__right { justify-self:end; justify-content:flex-end; }
-.crossroads-intro-header .brand { gap:15px; }
-.crossroads-intro-header .brand img { width:72px; }
-.crossroads-intro-header .brand__name { font-size:1.5rem; }
-.crossroads-intro-header .brand__sub { font-size:.88rem; font-weight:500; letter-spacing:.045em; color:rgba(255,255,255,.86); }
-.crossroads-intro-header .htab { min-width:44px; min-height:44px; justify-content:center; gap:6px; }
 
 @keyframes crossroads-intro-sparkle {
   0%,100% { opacity:0; transform:translate(0,0) scale(.4) rotate(0); }
@@ -118,19 +112,6 @@
   .crossroads-intro__content { transform:translateY(-34px); }
   .crossroads-intro-title-art { width:min(68vw,590px); }
   .crossroads-intro__pen { height:clamp(150px,22vh,208px); }
-  .crossroads-intro-header .brand img { width:60px; }
-  .crossroads-intro-header .brand__name { font-size:1.08rem; }
-  .crossroads-intro-header .brand__sub { display:block; font-size:.73rem; }
-}
-@media (max-width:700px) {
-  .crossroads-intro-header > .wrap { padding-inline:16px; gap:8px; }
-  .crossroads-intro-header .header__left > .htab,.crossroads-intro-header .htab--news { display:none; }
-  .crossroads-intro-header .header__left,.crossroads-intro-header .header__right { gap:0; }
-  .crossroads-intro-header .brand { gap:8px; }
-  .crossroads-intro-header .brand img { width:45px; }
-  .crossroads-intro-header .brand__txt { display:none; }
-  .crossroads-intro-header .brand::after { content:"CIRS"; color:#fff; font-family:var(--font-primary); font-size:.92rem; font-weight:600; letter-spacing:.08em; }
-  .crossroads-intro-header .htab { padding:0; }
 }
 @media (max-width:600px) {
   .crossroads-intro { min-height:560px; }
@@ -141,7 +122,8 @@
   .crossroads-intro__mark::before { width:112vw; height:150px; bottom:-12px; }
   .crossroads-intro .crossroads-intro__sanskrit { margin-top:16px; font-size:clamp(1.12rem,5.6vw,1.42rem); }
   .crossroads-intro .crossroads-intro__tagline { margin-bottom:22px; font-size:1rem; }
-  .crossroads-intro__cta { min-height:48px; }
+  .crossroads-intro__cta { min-height:40px; }
+  .crossroads-intro__skip { right:16px; bottom:16px; }
 }
 @media (max-height:760px) and (min-width:601px) {
   .crossroads-intro__content { inset:84px 20px 12px; transform:translateY(-20px); }
@@ -150,7 +132,7 @@
   .crossroads-intro-title-art { max-height:16vh; }
   .crossroads-intro .crossroads-intro__sanskrit { margin-top:12px; font-size:1.35rem; }
   .crossroads-intro .crossroads-intro__tagline { margin-bottom:15px; }
-  .crossroads-intro__cta { min-height:46px; }
+  .crossroads-intro__cta { min-height:40px; }
 }
 @media (max-height:650px) {
   .crossroads-intro__content { inset:76px 16px 8px; transform:translateY(-10px); }
@@ -159,7 +141,7 @@
   .crossroads-intro-title-art { max-height:14vh; }
   .crossroads-intro .crossroads-intro__sanskrit { margin-top:8px; font-size:1.2rem; }
   .crossroads-intro .crossroads-intro__tagline { margin-bottom:10px; font-size:.94rem; }
-  .crossroads-intro__cta { min-height:44px; }
+  .crossroads-intro__cta { min-height:38px; }
 }
 @media (max-height:500px) {
   .crossroads-intro { min-height:0; }
@@ -170,18 +152,13 @@
   .crossroads-intro__mark::before { height:76px; bottom:-10px; filter:blur(.5px); }
   .crossroads-intro .crossroads-intro__sanskrit { margin-top:3px; margin-bottom:1px; font-size:1rem; }
   .crossroads-intro .crossroads-intro__tagline { margin-bottom:6px; font-size:.82rem; line-height:1.2; }
-  .crossroads-intro__cta { min-height:44px; padding-block:8px; }
-  .crossroads-intro-header > .wrap { padding-inline:16px; gap:8px; }
-  .crossroads-intro-header .header__left > .htab,.crossroads-intro-header .htab--news { display:none; }
-  .crossroads-intro-header .brand { gap:7px; }
-  .crossroads-intro-header .brand img { width:40px; }
-  .crossroads-intro-header .brand__txt { display:none; }
-  .crossroads-intro-header .brand::after { content:"CIRS"; color:#fff; font-family:var(--font-primary); font-size:.88rem; font-weight:600; letter-spacing:.08em; }
+  .crossroads-intro__cta { min-height:36px; padding-block:0 7px; }
 }
 @media (prefers-reduced-motion:reduce) {
   .crossroads-intro__video { display:none; }
   .crossroads-intro { --crossroads-intro-exit:0!important; }
   .crossroads-intro__cta,.crossroads-intro__cta svg { transition:none; }
+  .crossroads-intro__skip { display:none!important; }
   .crossroads-intro__cta:hover,.crossroads-intro__cta:hover svg { transform:none; }
   .crossroads-intro__reveal { opacity:.1; }
   .crossroads-intro[data-crossroads-intro-settled] .crossroads-intro__title::after { display:none; }
