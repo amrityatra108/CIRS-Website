@@ -114,18 +114,55 @@ body.menu-open .brand__name{ color:var(--purple); font-weight:400; }
 body.menu-open .brand__sub{ color:var(--ink-mute); }
 
 /* ------------------------------------------------------------
-   Header — a larger wordmark, and four small icon tabs
+   Header — floating magnetic navigation
    ------------------------------------------------------------
-   The wordmark and emblem carry the school's identity, so they are
-   set larger than cirs.css does. The four controls either side are
-   navigation, not headline, so each is reduced to a mark with its
-   name beneath it — smaller than the words alone were, and easier
-   to hit.
+   One quiet capsule keeps the school identity central while each
+   navigation control gets its own soft-edged magnetic target. The
+   dark glass belongs over photography; the paper version takes over
+   once content reaches the bar or the menu opens.
    ------------------------------------------------------------ */
+.header{
+  top:clamp(10px,1.5vw,18px);
+  padding-inline:clamp(12px,2vw,28px);
+  pointer-events:none;
+}
+.header.is-stuck,
+body.menu-open .header{
+  background:transparent;
+  border-bottom-color:transparent;
+  box-shadow:none;
+}
+.header .wrap{
+  width:min(100%,1240px);
+  padding:8px 10px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  background:rgba(14,11,18,.66);
+  box-shadow:0 18px 50px rgba(14,11,18,.18), inset 0 1px 0 rgba(255,255,255,.08);
+  pointer-events:auto;
+  transition:background .48s var(--e2), border-color .48s var(--e2), box-shadow .48s var(--e2);
+}
+@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
+  .header .wrap{
+    background:rgba(14,11,18,.48);
+    -webkit-backdrop-filter:blur(16px) saturate(125%);
+    backdrop-filter:blur(16px) saturate(125%);
+  }
+}
+.header.is-stuck .wrap,
+body.menu-open .header .wrap{
+  background:rgba(250,247,248,.94);
+  border-color:rgba(57,42,72,.14);
+  box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8);
+}
+@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
+  .header.is-stuck .wrap,
+  body.menu-open .header .wrap{ background:rgba(250,247,248,.82); }
+}
 .header__left,
 .header__right{
-  display:flex; align-items:flex-start;
-  gap:clamp(8px,1.4vw,20px);
+  display:flex; align-items:center;
+  gap:8px;
   min-width:0;
 }
 .header__left{ justify-self:start; }
@@ -136,20 +173,28 @@ body.menu-open .brand__sub{ color:var(--ink-mute); }
 .brand__sub{ font-size:.9rem; }
 
 .htab{
-  display:inline-flex; flex-direction:column; align-items:center; gap:4px;
-  padding:2px 6px;
+  position:relative;
+  display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:7px;
+  min-height:44px; padding:0 14px;
+  border:1px solid rgba(255,255,255,.13); border-radius:999px;
+  background:rgba(255,255,255,.055);
   color:#fff; white-space:nowrap;
-  transition:color .3s var(--e);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  transition:color .28s var(--e2), background .28s var(--e2), border-color .28s var(--e2), box-shadow .28s var(--e2);
 }
 .htab__icon{ display:grid; place-items:center; height:18px; color:var(--gold-lit); transition:color .3s var(--e); }
 .htab__label{
   font-family:var(--font-primary);
   font-variant-caps:normal;
   font-feature-settings:normal;
-  letter-spacing:.11em; font-size:.84rem; line-height:1;
+  letter-spacing:.035em; font-size:.9rem; line-height:1;
 }
-.htab:hover{ color:var(--gold-lit); }
+.htab:hover{
+  color:#fff; background:rgba(255,255,255,.13); border-color:rgba(255,215,92,.5);
+  box-shadow:0 8px 24px rgba(14,11,18,.2), inset 0 1px 0 rgba(255,255,255,.12);
+}
 .htab:hover .htab__icon{ color:var(--gold-lit); }
+.htab:focus-visible{ outline-offset:2px; }
 
 /* The News mark carries a small gold dot, so the one header item that
    changes week to week is findable without reading. */
@@ -166,11 +211,21 @@ body.menu-open .brand__sub{ color:var(--ink-mute); }
 
 /* Once the header is a solid bar over paper, the marks go dark. */
 .header.is-stuck .htab,
-body.menu-open .htab{ color:var(--ink); }
+body.menu-open .htab{
+  color:var(--ink);
+  background:rgba(57,42,72,.035);
+  border-color:rgba(57,42,72,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
 .header.is-stuck .htab__icon,
 body.menu-open .htab__icon{ color:var(--gold); }
 .header.is-stuck .htab:hover,
-body.menu-open .htab:hover{ color:var(--purple); }
+body.menu-open .htab:hover{
+  color:var(--purple);
+  background:rgba(57,42,72,.09);
+  border-color:rgba(57,42,72,.24);
+  box-shadow:0 8px 22px rgba(21,8,24,.1), inset 0 1px 0 rgba(255,255,255,.9);
+}
 
 /* The wordmark is now larger, so it gives way sooner. Below 1040px it
    shrinks and wraps rather than pushing through the tabs; below 700px
@@ -178,21 +233,58 @@ body.menu-open .htab:hover{ color:var(--purple); }
    wordmark text goes entirely and the emblem carries the identity,
    which is set large in the page banner immediately below anyway. */
 @media (max-width:1040px){
-  .header .wrap{ gap:12px; }
+  .header .wrap{ gap:10px; }
   .brand{ max-width:min(44vw,330px); }
   .brand img{ width:52px; }
   .brand__name{ font-size:1.02rem; line-height:1.16; }
   .brand__sub{ display:none; }
+  .htab{ padding-inline:11px; }
 }
 @media (max-width:700px){
   .htab__label{ display:none; }
-  .htab{ padding:4px; }
+  .htab{ width:44px; padding:0; }
 }
 @media (max-width:560px){
-  .header .wrap{ gap:8px; }
+  .header{ top:8px; padding-inline:8px; }
+  .header .wrap{ gap:6px; padding:6px 8px; }
+  .header__left,.header__right{ gap:6px; }
   .brand{ max-width:none; }
-  .brand img{ width:42px; }
+  .brand img{ width:40px; }
   .brand__txt{ display:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  .header .wrap,.htab{ transition-duration:0s; }
+}
+
+/* The homepage keeps the original quiet header only while it sits over the
+   opening photograph. Once the hero passes, .is-stuck restores the floating
+   capsule used throughout the rest of the site. */
+body.home:not(.menu-open) .header:not(.is-stuck){ top:0; padding-inline:0; }
+body.home:not(.menu-open) .header:not(.is-stuck) .wrap{
+  width:100%; max-width:var(--maxw);
+  padding:var(--space-3) var(--gut);
+  border:0; border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+}
+body.home:not(.menu-open) .header:not(.is-stuck) .htab{
+  flex-direction:column; gap:4px;
+  min-width:44px; min-height:44px; padding:2px 6px;
+  border:0; border-radius:0;
+  background:transparent; box-shadow:none;
+}
+body.home:not(.menu-open) .header:not(.is-stuck) .htab__label{
+  letter-spacing:.11em; font-size:.84rem;
+}
+body.home:not(.menu-open) .header:not(.is-stuck) .htab,
+body.home:not(.menu-open) .header:not(.is-stuck) .htab:hover{
+  background:transparent; border-color:transparent; box-shadow:none;
+}
+body.home:not(.menu-open) .header:not(.is-stuck) .htab:hover{ color:var(--gold-lit); }
+@media (max-width:700px){
+  body.home:not(.menu-open) .header:not(.is-stuck) .htab{ width:44px; padding:4px; }
 }
 
 /* ------------------------------------------------------------
@@ -854,8 +946,9 @@ body.menu-open .htab:hover{ color:var(--purple); }
   -webkit-backdrop-filter:blur(16px) saturate(130%);
           backdrop-filter:blur(16px) saturate(130%);
   opacity:0; visibility:hidden; pointer-events:none;
-  transform:translateY(-6px);
-  transition:opacity .26s var(--e), transform .26s var(--e), visibility .26s var(--e);
+  transform:translate3d(0,-10px,0) scale(.985); transform-origin:24px 0;
+  will-change:transform,opacity;
+  transition:opacity .28s var(--e2), transform .42s var(--e2), visibility .42s;
 }
 /* An invisible bridge across the gap, so travelling from the tab to
    the panel with a mouse does not pass through dead space and close it. */
@@ -863,7 +956,7 @@ body.menu-open .htab:hover{ color:var(--purple); }
   content:""; position:absolute; left:0; right:0; top:-14px; height:14px;
 }
 .enq.is-open .enq__panel{
-  opacity:1; visibility:visible; pointer-events:auto; transform:none;
+  opacity:1; visibility:visible; pointer-events:auto; transform:translate3d(0,0,0) scale(1);
 }
 /* Where the glass is unavailable the panel simply becomes solid, rather
    than leaving pale text floating over whatever is behind it. */

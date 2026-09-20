@@ -68,19 +68,25 @@ body.wall.is-touch #cursor-ring, body.wall.is-touch #cursor-dot{ display:none; }
 
 /* --- THE FIELD --- */
 body.wall #p1-wrap{ position:fixed; inset:0; z-index:10; touch-action:none; outline:none; }
-body.wall #p1-viewport{ position:absolute; inset:0; perspective:1200px; pointer-events:none; }
-body.wall #p1-stage{ position:absolute; inset:0; transform-style:preserve-3d; will-change:transform; pointer-events:auto; }
+body.wall #p1-viewport{ position:absolute; inset:0; perspective:1120px; perspective-origin:50% 48%; pointer-events:none; }
+body.wall #p1-viewport::after{ content:""; position:absolute; inset:0; z-index:20; pointer-events:none; background:linear-gradient(90deg, rgba(14,11,18,.58), transparent 18%, transparent 82%, rgba(14,11,18,.58)), radial-gradient(ellipse at 50% 48%, transparent 30%, rgba(14,11,18,.16) 68%, rgba(14,11,18,.42) 100%); }
+body.wall #p1-stage{ position:absolute; inset:0; transform-style:preserve-3d; transform-origin:50vw 50vh; will-change:transform; pointer-events:auto; }
 
 /* Tiles are plain: no backdrop blur (it re-samples everything behind each
    tile every frame) and no overflow clipping on a 3D layer (that forces a
    mask). The photograph rounds its own corners instead. */
-body.wall .p1-tile{ padding:0; font:inherit; appearance:none; position:absolute; left:0; top:0; width:100px; height:100px; box-sizing:border-box; background:rgba(57,42,72,.85); border-radius:12px; border:1px solid rgba(var(--gold-rgb),.2); -webkit-backface-visibility:hidden; backface-visibility:hidden; contain:layout style; }
-body.wall .p1-tile img{ display:block; width:100%; height:100%; object-fit:cover; border-radius:11px; opacity:.2; transition:opacity .8s; pointer-events:none; -webkit-user-drag:none; }
-body.wall .p1-tile.is-hovered{ border-color:rgba(var(--gold-rgb),.6); }
-body.wall .p1-tile.is-hovered img{ opacity:.85; }
+body.wall .p1-tile{ padding:0; font:inherit; appearance:none; position:absolute; left:0; top:0; width:100px; height:100px; box-sizing:border-box; background:rgba(57,42,72,.9); border-radius:12px; border:1px solid rgba(var(--gold-rgb),.24); -webkit-backface-visibility:hidden; backface-visibility:hidden; contain:layout style; transition:border-color .24s ease, box-shadow .24s ease; }
+body.wall .p1-tile img{ display:block; width:100%; height:100%; object-fit:cover; border-radius:11px; opacity:.56; filter:saturate(.78) brightness(.82); transition:opacity .32s ease, filter .32s ease, transform .32s ease; pointer-events:none; -webkit-user-drag:none; }
+body.wall .p1-tile.depth-back{ border-color:rgba(var(--gold-rgb),.12); box-shadow:0 8px 22px rgba(8,5,10,.18); }
+body.wall .p1-tile.depth-back img{ opacity:.27; filter:saturate(.55) brightness(.64); }
+body.wall .p1-tile.depth-main{ box-shadow:0 18px 42px rgba(8,5,10,.38); }
+body.wall .p1-tile.depth-front{ border-color:rgba(var(--gold-rgb),.48); box-shadow:0 34px 72px rgba(8,5,10,.58), 0 0 0 1px rgba(var(--gold-rgb),.08); }
+body.wall .p1-tile.depth-front img{ opacity:.82; filter:saturate(.92) brightness(.92); }
+body.wall .p1-tile.is-hovered{ border-color:rgba(var(--gold-rgb),.88); box-shadow:0 38px 84px rgba(8,5,10,.64), 0 0 32px rgba(var(--gold-rgb),.12); }
+body.wall .p1-tile.is-hovered img{ opacity:1; filter:saturate(1.05) brightness(1.04); transform:scale(1.018); }
 body.wall .p1-tile:focus-visible{ outline:3px solid #fff; outline-offset:4px; box-shadow:0 0 0 7px #1E1626; }
 body.wall .p1-tile:focus-visible img{ opacity:1; }
-@media (hover: hover) and (pointer: fine){ body.wall .p1-tile{ box-shadow:0 18px 36px rgba(14,11,18,.45); } }
+@media (hover: hover) and (pointer: fine){ body.wall .p1-tile{ cursor:pointer; } }
 
 /* --- THE FOLD ---
    The title's focus-pull is two stacked copies — one sharp, one
@@ -93,20 +99,14 @@ body.wall .p1-hero{ position:fixed; inset:0; display:grid; place-items:center; a
    the window just enough to hold the type, and leaves with the fold, so the
    moment you start dragging there is nothing over the wall at all. */
 body.wall .p1-hero::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:calc(var(--fold) * .92); background:radial-gradient(ellipse 46% 38% at 50% 50%, rgba(14,11,18,.82) 0%, rgba(14,11,18,.55) 45%, rgba(14,11,18,0) 78%); }
-body.wall .p1-hero__eyebrow,
-body.wall .p1-hero__cue{ position:relative; grid-column:1; margin:0; opacity:var(--fold); font-family:var(--font-primary); font-size:var(--fs-xs); letter-spacing:.06em; text-transform:none; color:rgba(var(--gold-rgb),.72); text-align:center; }
+body.wall .p1-hero__eyebrow{ position:relative; grid-column:1; margin:0; opacity:var(--fold); font-family:var(--font-primary); font-size:var(--fs-xs); letter-spacing:.06em; text-transform:none; color:rgba(var(--gold-rgb),.72); text-align:center; }
 body.wall .p1-hero__title{ position:relative; grid-column:1; display:grid; place-items:center; }
 body.wall .p1-hero-text{ grid-area:1 / 1; margin:0; font-family:var(--font-primary); font-size:clamp(2.4rem, 8vw, 6.4rem); font-weight:500; text-align:center; line-height:.94; letter-spacing:-.015em; opacity:0; will-change:opacity; background:linear-gradient(180deg, var(--gold-lit) 0%, var(--gold) 55%, #A87A05 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 body.wall .p1-hero-text em{ font-style:italic; }
 body.wall .p1-hero-text.soft{ filter:blur(40px); }
 
-/* --- THE CORNERS ---
-   The archive wore four: a wordmark, a node readout, a hint and
-   the way back. The site's header now owns the top of the window
-   and carries the way back in the menu, so only the readout and
-   the hint remain, along the bottom. */
+/* --- THE CORNER HINT --- */
 body.wall .p1-hud{ position:fixed; z-index:80; font-size:var(--fs-xs); text-transform:none; letter-spacing:.06em; opacity:.5; color:var(--gold); font-family:var(--font-primary); pointer-events:none; }
-body.wall .hud-bl{ bottom:34px; left:34px; }
 body.wall .hud-br{ bottom:34px; right:34px; }
 
 /* --- THE OPENED PHOTOGRAPH --- */
@@ -129,11 +129,7 @@ body.wall .noscript{ position:fixed; inset:0; display:grid; place-items:center; 
 @media (max-width: 760px){
   body.wall #grain-overlay{ display:none; }
   body.wall .p1-hud{ letter-spacing:.06em; }
-  body.wall .hud-bl{ bottom:calc(20px + env(safe-area-inset-bottom)); left:18px; }
   body.wall .hud-br{ bottom:calc(20px + env(safe-area-inset-bottom)); right:18px; }
-  /* Two readouts on one line at 360px collide; the node is the one
-     a visitor can do without. */
-  body.wall .hud-bl{ display:none; }
   body.wall .hud-br{ left:0; right:0; text-align:center; }
 
   body.wall .wallmodal{ flex-direction:column; -webkit-backdrop-filter:none; backdrop-filter:none; background:var(--purple-ink); }
@@ -142,8 +138,10 @@ body.wall .noscript{ position:fixed; inset:0; display:grid; place-items:center; 
   body.wall .m-right{ flex:1 1 auto; height:auto; padding:22px 22px calc(32px + env(safe-area-inset-bottom)); border-left:0; border-top:1px solid rgba(var(--gold-rgb),.2); }
   body.wall .m-meta{ margin-bottom:18px; padding-top:14px; }
   body.wall .m-close{ top:calc(6px + env(safe-area-inset-top)); right:4px; min-height:48px; padding:14px; opacity:.85; }   /* >= 44px tap target */
+  body.wall #p1-viewport::after{ background:linear-gradient(90deg, rgba(14,11,18,.42), transparent 22%, transparent 78%, rgba(14,11,18,.42)), radial-gradient(ellipse at 50% 48%, transparent 34%, rgba(14,11,18,.14) 72%, rgba(14,11,18,.34) 100%); }
 }
 
 @media (prefers-reduced-motion: reduce){
   body.wall .wallmodal, body.wall .p1-tile img{ transition:none; }
+  body.wall .p1-tile.is-hovered img{ transform:none; }
 }
