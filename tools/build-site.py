@@ -1090,6 +1090,8 @@ def build(slug, page):
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
             '<noscript><style>.crossroads-intro-curtain{display:none}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}'
+            '.crossroads-intro[data-crossroads-intro-pending]{background:var(--cr-purple-deep)}'
+            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible}'
             '</style></noscript>\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
