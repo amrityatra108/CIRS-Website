@@ -30,7 +30,6 @@
     if (event.type === "keydown" && !["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    if (event.type === "keydown" && event.key === " " && !event.repeat) finishOpening();
   }
   window.addEventListener("wheel", blockOpeningScroll, { passive:false, capture:true });
   window.addEventListener("touchmove", blockOpeningScroll, { passive:false, capture:true });
