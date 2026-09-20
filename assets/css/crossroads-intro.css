@@ -35,7 +35,7 @@
 }
 .crossroads-intro__still,.crossroads-intro__video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(1.12) saturate(1.06); }
 .crossroads-intro__video { opacity:0; }
-.crossroads-intro__opening { display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:var(--cr-edge); z-index:40; pointer-events:none; }
+.crossroads-intro__opening { display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; z-index:40; pointer-events:none; }
 .crossroads-intro[data-crossroads-intro-opening-playing] .crossroads-intro__opening { display:block; }
 .crossroads-intro[data-crossroads-intro-opening-playing] .crossroads-intro__content > :not(.crossroads-intro__cta) { visibility:hidden; }
 .crossroads-intro[data-crossroads-intro-opening-playing] .crossroads-intro__cta { position:absolute; bottom:0; }
@@ -196,6 +196,8 @@
 .crossroads-intro[data-crossroads-intro-film][data-crossroads-intro-opening-playing]::after { opacity:0; }
 .crossroads-intro[data-crossroads-intro-film][data-crossroads-intro-opening-playing] .crossroads-intro__content { opacity:0; visibility:hidden; transform:translateY(12px) scale(.975); transition:none; }
 html.crossroads-intro-scroll-locked,html.crossroads-intro-scroll-locked body { overflow:hidden!important; overscroll-behavior:none; }
+.crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) { background:#000; }
+.crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) .crossroads-intro__base,.crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) .crossroads-intro__reveal { visibility:hidden; }
 .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content { visibility:hidden; opacity:0; }
 @media (prefers-reduced-motion:reduce) {
   .crossroads-intro[data-crossroads-intro-film]::after,.crossroads-intro[data-crossroads-intro-film] .crossroads-intro__content { transition:none; }
