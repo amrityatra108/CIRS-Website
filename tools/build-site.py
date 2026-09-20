@@ -36,7 +36,7 @@ import blogposts
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=62"
+CACHE_BUST = "b=63"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -462,11 +462,11 @@ PAGES = {
         # removed from the drawer's utility strip at the same time, so the
         # drawer does not offer the same link twice.
         "title": "Parent Portal",
-        "description": "The CIRS Parent Portal is not open yet. How to reach the school in the "
-                       "meantime.",
+        "description": "Fee payment and the parent login for CIRS. The Parent Portal on this "
+                       "site is not open yet; both run on the school's existing systems.",
         "banner": ("Parents", "Parent <em>Portal.</em>",
-                   "A secure area for parents. It is not open yet &mdash; this page says so plainly, "
-                   "and gives you the people to contact until it is."),
+                   "A secure area for parents. It is not open yet &mdash; so this page carries the "
+                   "fee payment and the parent login the school runs today, and the people to ask."),
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
