@@ -11,8 +11,8 @@
    photographs are read from the page's own <template> rather than
    fetched as a second JSON copy that had to be kept in step, the
    palette numbers in the canvas are the site's gold, and the fold
-   publishes its presence as --fold so the eyebrow and the cue can
-   follow the title.
+   publishes its presence as --fold so the eyebrow can follow the
+   title.
 
    It runs alone. GSAP, Lenis and ScrollTrigger drive the pages
    that scroll; this one does not scroll.
@@ -37,11 +37,11 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
 
     const $ = id => document.getElementById(id);
     const wrap = $('p1-wrap'), stage = $('p1-stage'), ring = $('cursor-ring'), dot = $('cursor-dot');
-    const titleSharp = $('p1-title'), titleSoft = $('p1-title-soft'), nodeEl = $('p1-id'), hintEl = $('p1-hint');
+    const titleSharp = $('p1-title'), titleSoft = $('p1-title-soft'), hintEl = $('p1-hint');
     const hero = document.querySelector('.p1-hero');
     const modal = $('master-modal'), mediaCont = $('m-media-cont'), mTitle = $('m-title'), mMeta = $('m-meta'), closeBtn = $('m-close');
 
-    const PERSP = 1200;                       // must match #p1-viewport perspective
+    const PERSP = 1120;                       // must match #p1-viewport perspective
     const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const clamp = (lo, hi, v) => v < lo ? lo : v > hi ? hi : v;
     // Frame-rate independent easing: the same feel at 60, 90 or 120 Hz.
@@ -56,7 +56,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
     function setTouchMode(on) {
         touchMode = on;
         document.body.classList.toggle('is-touch', on);
-        hintEl.textContent = on ? 'Swipe // Tap to open' : 'Drag // Scroll // Click to open';
+        hintEl.textContent = on ? 'Swipe around the cylinder // Tap to open' : 'Drag around the cylinder // Scroll // Click to open';
         closeBtn.textContent = on ? '[ CLOSE ]' : '[ ESC // CLOSE ]';
     }
     setTouchMode(touchMode);
@@ -145,7 +145,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         prevPanX: 0, prevPanY: 0, svx: 0, svy: 0,
         rot: { x: 0, y: 0 }, wrx: NaN, wry: NaN,
         titleFade: 1, tSharp: -1, tSoft: -1, tFold: -1,
-        ringS: { x: W / 2, y: H / 2, s: 40 }, ringW: NaN, snapped: false, node: '',
+        ringS: { x: W / 2, y: H / 2, s: 40 }, ringW: NaN, snapped: false,
 
         hash(q, r) {
             let h = (q * 374761393) + (r * 668265263);
@@ -168,12 +168,19 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         // everything scales down together on small screens.
         cellFor(gx, gy) {
             const C = this.CELL, s = this.scale;
+            // Keep only a light amount of per-tile depth variation. The cylinder
+            // supplies the dominant Z-shape, so its centre always reads closer
+            // than either shoulder instead of being contradicted by random tiles.
+            const depth = this.hash(gx - 313, gy + 197) % 3;
+            const depths = [-60, 0, 60];
             return {
                 plate: this.plateFor(gx, gy),
                 size: Math.round((78 + 104 * Math.pow(this.unit(gx, gy, 1), 1.8)) * s),
                 wx: gx * C + ((gy & 1) ? C / 2 : 0) + (this.unit(gx, gy, 2) - 0.5) * C * 0.36,
                 wy: gy * C * 0.9 + (this.unit(gx, gy, 3) - 0.5) * C * 0.30,
-                z: (this.unit(gx, gy, 4) * 400 - 200) * Math.max(0.7, s)
+                z: depths[depth] * Math.max(0.72, s),
+                depth,
+                tilt: (this.unit(gx, gy, 5) - 0.5) * 5
             };
         },
 
@@ -201,7 +208,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
                     const el = document.createElement('button'); el.type = 'button'; el.className = 'p1-tile';
                     const img = document.createElement('img'); img.alt = ''; img.decoding = 'async'; img.draggable = false;
                     el.appendChild(img); frag.appendChild(el);
-                    const slot = { el, img, i, j, gx: NaN, gy: NaN, plate: -1, size: 0, wx: 0, wy: 0, baseZ: 0, lift: 0, hovered: false, hidden: false, tx: NaN, ty: NaN, tz: NaN };
+                    const slot = { el, img, i, j, gx: NaN, gy: NaN, plate: -1, size: 0, wx: 0, wy: 0, baseZ: 0, depth: -1, tilt: 0, lift: 0, hovered: false, hidden: false, tx: NaN, ty: NaN, tz: NaN };
                     // If a thumbnail is missing, fall back to the full photograph once.
                     img.onerror = () => {
                         const p = plates[slot.plate];
@@ -244,7 +251,12 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
                 const gy = sgy + (((s.j - sgy) % rows) + rows) % rows;
                 if (gx === s.gx && gy === s.gy) continue;
                 const c = this.cellFor(gx, gy);
-                s.gx = gx; s.gy = gy; s.wx = c.wx; s.wy = c.wy; s.baseZ = c.z; s.lift = 0;
+                s.gx = gx; s.gy = gy; s.wx = c.wx; s.wy = c.wy; s.baseZ = c.z; s.tilt = c.tilt; s.lift = 0;
+                if (c.depth !== s.depth) {
+                    s.depth = c.depth;
+                    s.el.classList.remove('depth-back', 'depth-main', 'depth-front');
+                    s.el.classList.add(['depth-back', 'depth-main', 'depth-front'][c.depth]);
+                }
                 if (c.size !== s.size) { s.size = c.size; s.el.style.width = s.el.style.height = c.size + 'px'; }
                 if (c.plate !== s.plate) { s.plate = c.plate; const p = plates[c.plate]; s.img.src = p.thumb || p.src; s.el.setAttribute('aria-label', p.title + ' — ' + p.cat); }
             }
@@ -274,14 +286,13 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
 
             this.recycle();
 
-            // Tilt. With a mouse, the plane faces the cursor (as the original did).
-            // With a finger, it leans into the swipe and settles when you stop --
-            // following the finger itself would swing the whole field while dragging.
+            // A restrained whole-camera lean complements the cylindrical surface.
+            // The cylinder supplies the dominant depth cue; the camera never spins.
             const away = document.body.classList.contains('is-away');
             let tRY, tRX;
             if (REDUCED || (!touchMode && away)) { tRY = tRX = 0; }
-            else if (touchMode) { tRY = clamp(-12, 12, this.svx * 0.8); tRX = clamp(-12, 12, -this.svy * 0.8); }
-            else { tRY = clamp(-20, 20, (mouse.x - W / 2) / (W / 2) * 20); tRX = clamp(-20, 20, -(mouse.y - H / 2) / (H / 2) * 20); }
+            else if (touchMode) { tRY = clamp(-6, 6, this.svx * 0.42); tRX = clamp(-6, 6, -this.svy * 0.42); }
+            else { tRY = clamp(-8, 8, (mouse.x - W / 2) / (W / 2) * 8); tRX = clamp(-6, 6, -(mouse.y - H / 2) / (H / 2) * 6); }
             const rk = easeK(0.08, dt);
             this.rot.x += (tRY - this.rot.x) * rk; this.rot.y += (tRX - this.rot.y) * rk;
             if (!(Math.abs(this.rot.x - this.wrx) <= 0.005 && Math.abs(this.rot.y - this.wry) <= 0.005)) {
@@ -295,19 +306,28 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
             const focusX = touchMode || away ? cx : mouse.x, focusY = touchMode || away ? cy : mouse.y;
             const R = touchMode ? 260 * this.scale + 40 : 400;
             const snapR = (drag.active && !touchMode) || away ? 0 : (touchMode ? 150 : 120);
-            const lk = easeK(0.12, dt), liftMax = touchMode ? 144 : 180;
+            const lk = easeK(0.12, dt), liftMax = touchMode ? 72 : 105;
             let closest = null, minD = snapR, cK = 1, cSX = 0, cSY = 0;
 
+            const cylinderRadius = Math.max(380, W * 0.72);
+            const cylinderLimit = cylinderRadius * 1.16;
             for (const s of this.slots) {
-                const x = s.wx + this.panX, y = s.wy + this.panY;
-                let z = s.baseZ + s.lift;
+                const flatX = s.wx + this.panX, y = s.wy + this.panY;
+                const offsetX = flatX - cx;
+                const curve = clamp(-1.16, 1.16, offsetX / cylinderRadius);
+                const x = cx + Math.sin(curve) * cylinderRadius;
+                // Positive CSS Z moves toward the reader. Put the crown well in
+                // front of the screen plane and both shoulders behind it so the
+                // field unmistakably reads as the outside of a convex cylinder.
+                const cylinderZ = (Math.cos(curve) - 0.70) * cylinderRadius;
+                let z = s.baseZ + s.lift + cylinderZ;
                 // CSS: rotateY(ry) rotateX(rx) => p' = RY(RX(p)), then perspective about the centre.
                 const px = x - cx, py = y - cy;
                 const y1 = py * cX - z * sX, z1 = py * sX + z * cX;
                 const x2 = px * cY + z1 * sY, z2 = -px * sY + z1 * cY;
                 const k = PERSP / Math.max(1, PERSP - z2), sx = cx + x2 * k, sy = cy + y1 * k, half = s.size * 0.5 * k;
 
-                const off = sx + half < -60 || sx - half > W + 60 || sy + half < -60 || sy - half > H + 60;
+                const off = Math.abs(offsetX) > cylinderLimit || sx + half < -60 || sx - half > W + 60 || sy + half < -60 || sy - half > H + 60;
                 if (off !== s.hidden) { s.hidden = off; s.el.style.visibility = off ? 'hidden' : ''; }
                 if (off) { if (s.hovered) { s.hovered = false; s.el.classList.remove('is-hovered'); } s.lift = 0; continue; }
 
@@ -317,18 +337,14 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
                 if (near !== s.hovered) { s.hovered = near; s.el.classList.toggle('is-hovered', near); }
                 if (d < minD) { minD = d; closest = s; cK = k; cSX = sx; cSY = sy; }
 
-                z = s.baseZ + s.lift;
+                z = s.baseZ + s.lift + cylinderZ;
                 const tx = x - s.size / 2, ty = y - s.size / 2;
                 // Written as "not within tolerance" so an unset (NaN) position always writes.
                 if (!(Math.abs(tx - s.tx) <= 0.05 && Math.abs(ty - s.ty) <= 0.05 && Math.abs(z - s.tz) <= 0.05)) {
                     s.tx = tx; s.ty = ty; s.tz = z;
-                    s.el.style.transform = `translate3d(${tx.toFixed(2)}px,${ty.toFixed(2)}px,${z.toFixed(2)}px)`;
+                    s.el.style.transform = `translate3d(${tx.toFixed(2)}px,${ty.toFixed(2)}px,${z.toFixed(2)}px) rotateY(${(curve * 180 / Math.PI).toFixed(2)}deg) rotateZ(${s.tilt.toFixed(2)}deg)`;
                 }
             }
-
-            // Node readout.
-            const node = closest ? String(closest.plate + 1).padStart(2, '0') : '--';
-            if (node !== this.node) { this.node = node; nodeEl.textContent = node; }
 
             // Cursor ring (mouse only): snaps around the nearest tile, else trails the cursor.
             if (!touchMode) {

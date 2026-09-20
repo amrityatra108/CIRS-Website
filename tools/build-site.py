@@ -36,7 +36,7 @@ import blogposts
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=46"
+CACHE_BUST = "b=61"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -131,6 +131,7 @@ PAGES = {
         "description": "A co-educational residential school on a hundred acres in the Siruvani "
                        "foothills — CBSE and the International Baccalaureate, Grades V to XII.",
         "banner": None,
+        "sheet": "home",
     },
     "news": {
         "nav": "News",
@@ -682,7 +683,7 @@ def banner_html(page):
 </section>'''
 
 
-HOME_TAB = '''<a class="htab" href="index.html">
+HOME_TAB = '''<a class="htab" href="index.html" data-magnetic>
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -808,7 +809,7 @@ def founder_fig(slot, cls="", sizes=""):
     klass = f"ffig {cls}".strip()
     if src is None:
         return (f'<figure class="{klass} ffig--gap" role="img" aria-label="{label}">'
-                f'<span class="ffig__mark">Photograph wanted</span>'
+                f'<span class="ffig__mark">Archive image pending</span>'
                 f'<span class="ffig__what">{label}</span></figure>')
     extra = f' sizes="{sizes}"' if sizes else ""
     return (f'<figure class="{klass}"><img src="{src}?{CACHE_BUST}" alt="{alt}" '
@@ -822,6 +823,46 @@ def expand_figs(html):
         slot, _, cls = body.partition("|")
         return founder_fig(slot.strip(), cls.strip())
     return re.sub(r"\{\{FIG:([^}]+)\}\}", swap, html)
+
+
+def crossroads_stories_covers():
+    issues = [i for i in crossroads.issues() if i["cover"] and i["pdf"]][:7]
+    if not issues:
+        return ""
+    # User-selected car cover (Issue 30), keeping its own PDF destination.
+    featured = next((i for i in issues if i["number"] == 30), issues[0])
+    featured_index = issues.index(featured)
+    # Clockwise slots around the centre: three on each side. Keeping the DOM in
+    # issue order lets the browser animate one stable carousel step at a time.
+    rear_slot = {1: 2, 2: 4, 3: 6, 4: 5, 5: 3, 6: 1}
+    cards = []
+    for index, issue in enumerate(issues):
+        delta = (index - featured_index) % len(issues)
+        if delta == 0:
+            klass = "crossroads-stories__front"
+        else:
+            slot = rear_slot[delta]
+            klass = f"crossroads-stories__rear crossroads-stories__rear--{slot}"
+        cards.append(f'<a class="{klass}" href="{issue["pdf"]}" '
+                     f'aria-label="Read Crossroads {issue["label"]}">'
+                     f'<img src="{issue["cover"]}" alt="Crossroads {issue["label"]} cover" '
+                     'width="300" height="420" loading="lazy" decoding="async"></a>')
+    return '<div class="crossroads-stories__media"><div class="crossroads-stories__stack">' + ''.join(cards) + '</div></div>'
+
+
+def crossroads_latest(feature=False):
+    issue = next((i for i in crossroads.issues() if i["latest"] and i["pdf"]), None)
+    if not issue:
+        return ""
+    if feature and issue["cover"]:
+        return (f'<a class="crossroads-archive-hero__feature" href="{issue["pdf"]}" '
+                f'aria-label="Read the latest issue: {issue["label"]} (PDF)">'
+                f'<img src="{issue["cover"]}" alt="" width="300" height="420" loading="lazy" decoding="async">'
+                f'<span>Latest issue · {issue["label"]}</span></a>')
+    if feature:
+        return ""
+    return (f'<a class="crossroads-archive-hero__secondary" href="{issue["pdf"]}">'
+            'Read the latest issue <span aria-hidden="true">↗</span></a>')
 
 
 def crossroads_html():
@@ -1041,6 +1082,19 @@ def build(slug, page):
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
+    if slug == "crossroads":
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-3">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
+            '<noscript><style>.crossroads-intro-curtain{display:none}'
+            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}'
+            '</style></noscript>\n</head>')
+    if slug == "founder":
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
+
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
     # .is-stuck already defines and keeps it there — set here in the markup so
@@ -1051,6 +1105,8 @@ def build(slug, page):
     body_class = " ".join(classes)
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              read("tools/partials/chrome.html").rstrip("\n")]
+    if slug == "crossroads":
+        parts[-1] = parts[-1].replace('class="curtain"', 'class="curtain crossroads-intro-curtain"')
     drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
     # The home page needs no Home tab — the wordmark already leads here, and a
     # Home link on Home is a link to nowhere.
@@ -1077,6 +1133,9 @@ def build(slug, page):
                        .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
                        .replace("{{CROSSROADS_COUNT}}", str(crossroads.COUNT))
+                       .replace("{{CROSSROADS_LATEST_LINK}}", crossroads_latest())
+                       .replace("{{CROSSROADS_LATEST_FEATURE}}", crossroads_latest(feature=True))
+                       .replace("{{CROSSROADS_STORIES_COVERS}}", crossroads_stories_covers())
                        .replace("{{BLOG_FRONT}}", blog.front_html())
                        .replace("{{BLOG_RAIL}}", blog.rail_html())
                        .replace("{{BLOG_COUNT}}", str(blog.count()))
@@ -1092,6 +1151,13 @@ def build(slug, page):
     if not wall:
         parts.append(read("tools/partials/footer.html").rstrip("\n"))
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
+    if slug == "crossroads":
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
+    if slug == "founder":
+        parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]

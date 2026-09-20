@@ -192,6 +192,14 @@ section[id]{ scroll-margin-top:88px; }
    ============================================================ */
 .header{
   position:fixed; top:0; left:0; right:0; z-index:100;
+  /* Keep the fixed chrome on its own compositor layer. Without this,
+     Chromium can briefly paint a transformed pinned section over part of the
+     header during a fast pin handoff even though the DOM stacking order is
+     correct. */
+  transform:translateZ(0); backface-visibility:hidden; isolation:isolate;
+  /* Layout containment keeps the chrome independent without clipping the
+     Enquire panel when it opens below the floating bar. */
+  will-change:transform; contain:layout style;
   background:transparent;
   border-bottom:1px solid transparent;
   transition:box-shadow .35s var(--e), background .35s var(--e), border-color .35s var(--e);
@@ -277,11 +285,11 @@ section[id]{ scroll-margin-top:88px; }
 
 .drawer{
   position:fixed; inset:0; z-index:99; background:var(--paper);
-  padding:100px var(--gut) var(--space-8); overflow-y:auto;
-  opacity:0; visibility:hidden; transform:translateY(-6px);
-  transition:opacity .3s var(--e), transform .3s var(--e), visibility .3s;
+  padding:clamp(96px,8.5vw,132px) var(--gut) var(--space-8); overflow-y:auto;
+  opacity:0; visibility:hidden; transform:translate3d(0,-10px,0);
+  transition:opacity .42s var(--e2), transform .42s var(--e2), visibility .42s;
 }
-.drawer.is-open{ opacity:1; visibility:visible; transform:none; }
+.drawer.is-open{ opacity:1; visibility:visible; transform:translate3d(0,0,0); }
 .drawer__grid{ display:grid; gap:var(--space-6) var(--space-5); grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); }
 .drawer h4{ margin-bottom:var(--space-3); padding-bottom:9px; border-bottom:1px solid var(--rule); }
 .drawer li a{ display:block; padding:var(--space-2) 0; font-size:var(--fs-sm); color:var(--ink-soft); }
@@ -304,7 +312,7 @@ section[id]{ scroll-margin-top:88px; }
 .hero{
   position:relative; min-height:100svh; min-height:100vh;
   display:flex; flex-direction:column; justify-content:flex-end;
-  background:var(--purple-ink); overflow:hidden;
+  background:var(--purple-ink); overflow:hidden; isolation:isolate;
 }
 .hero__media{
   position:absolute; inset:0; z-index:0;
@@ -328,9 +336,14 @@ section[id]{ scroll-margin-top:88px; }
                     rgba(21,8,24,.32) 100%);
 }
 
+/* Anchor the opening headline to the viewport, outside the page's capped grid. */
+.hero > .wrap{
+  max-width:none;
+  padding-inline:clamp(20px,3vw,48px);
+}
 .hero__inner{
   position:relative; z-index:3;
-  padding-block:0 clamp(var(--space-8),8vw,var(--space-10));
+  padding-block:0 clamp(24px,4vw,48px);
   max-width:min(1100px,92vw);
 }
 .hero .marker{ margin-bottom:var(--space-4); }
@@ -507,6 +520,7 @@ section[id]{ scroll-margin-top:88px; }
   font-family:var(--font-primary); font-size:.95rem; letter-spacing:.01em;
   color:var(--on-purple-soft);
 }
+.hframe--xxl{ --h:64vh; }
 .hframe--xl{ --h:56vh; }
 .hframe--l { --h:40vh; }
 .hframe--m { --h:29vh; }
@@ -568,6 +582,7 @@ section[id]{ scroll-margin-top:88px; }
 }
 .hrun.is-static .hsay{ width:min(80vw,430px); }
 .hrun.is-static .hghost{ display:none; }
+.hrun.is-static .hframe--xxl{ --h:44vh; }
 .hrun.is-static .hframe--xl{ --h:38vh; }
 .hrun.is-static .hframe--l { --h:32vh; }
 .hrun.is-static .hframe--m { --h:28vh; }
@@ -575,6 +590,7 @@ section[id]{ scroll-margin-top:88px; }
 
 @media (max-width:700px){
   .hrun.is-static .hsay__big{ font-size:clamp(1.7rem,7vw,2.4rem); }
+  .hrun.is-static .hframe--xxl,
   .hrun.is-static .hframe--xl,
   .hrun.is-static .hframe--l,
   .hrun.is-static .hframe--m,
