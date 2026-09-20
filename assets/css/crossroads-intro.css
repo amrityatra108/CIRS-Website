@@ -92,10 +92,6 @@
 .crossroads-intro__cta:hover { background:transparent; color:var(--cr-gold-pale); border-color:var(--cr-gold-pale); transform:none; }
 .crossroads-intro__cta:hover svg { transform:translateY(2px); }
 .crossroads-intro__cta:focus-visible { outline:3px solid #fff; outline-offset:4px; box-shadow:0 0 0 2px var(--cr-purple); opacity:1!important; }
-.crossroads-intro__skip { position:absolute; left:50%; bottom:clamp(22px,4vh,40px); z-index:90; display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:12px 22px; border:1px solid rgba(255,255,255,.56); border-radius:999px; background:rgba(7,2,9,.78); box-shadow:0 12px 32px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.12); color:#fff; font:600 .78rem/1 var(--font-primary); letter-spacing:.13em; text-transform:uppercase; cursor:pointer; transform:translateX(-50%); backdrop-filter:blur(10px); transition:background-color 180ms ease,border-color 180ms ease,color 180ms ease,transform 180ms ease; }
-.crossroads-intro__skip[hidden] { display:none; }
-.crossroads-intro__skip:hover { border-color:var(--cr-gold); background:rgba(22,3,28,.9); color:var(--cr-gold-pale); transform:translateX(-50%) translateY(-2px); }
-.crossroads-intro__skip:focus-visible { outline:3px solid #fff; outline-offset:4px; box-shadow:0 0 0 2px #000; }
 .crossroads-intro-target { position:absolute; top:0; left:0; width:0; height:0; scroll-margin-top:88px; }
 .crossroads-intro-target:focus { outline:none; }
 .crossroads-intro-cursor-muted { display:none!important; }
@@ -122,7 +118,6 @@
   .crossroads-intro .crossroads-intro__sanskrit { margin-top:16px; font-size:clamp(1.12rem,5.6vw,1.42rem); }
   .crossroads-intro .crossroads-intro__tagline { margin-bottom:22px; font-size:1rem; }
   .crossroads-intro__cta { min-height:40px; }
-  .crossroads-intro__skip { bottom:18px; min-height:44px; padding:11px 20px; }
 }
 @media (max-height:760px) and (min-width:601px) {
   .crossroads-intro__content { inset:84px 20px 12px; transform:translateY(-20px); }
@@ -157,7 +152,6 @@
   .crossroads-intro__video { display:none; }
   .crossroads-intro { --crossroads-intro-exit:0!important; }
   .crossroads-intro__cta,.crossroads-intro__cta svg { transition:none; }
-  .crossroads-intro__skip { display:none!important; }
   .crossroads-intro__cta:hover,.crossroads-intro__cta:hover svg { transform:none; }
   .crossroads-intro__reveal { opacity:.1; }
   .crossroads-intro[data-crossroads-intro-settled] .crossroads-intro__title::after { display:none; }
