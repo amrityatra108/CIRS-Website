@@ -1041,10 +1041,6 @@ def build(slug, page):
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
-    if slug == "crossroads":
-        head = head.replace("</head>",
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-3">\n</head>')
-
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
     # .is-stuck already defines and keeps it there — set here in the markup so
@@ -1055,9 +1051,6 @@ def build(slug, page):
     body_class = " ".join(classes)
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              read("tools/partials/chrome.html").rstrip("\n")]
-    if slug == "crossroads":
-        parts[-1] = parts[-1].replace('class="curtain"', 'class="curtain crossroads-intro-curtain"')
-        parts.append('<noscript><style>.crossroads-intro-curtain{display:none}</style></noscript>')
     drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
     # The home page needs no Home tab — the wordmark already leads here, and a
     # Home link on Home is a link to nowhere.
@@ -1099,8 +1092,6 @@ def build(slug, page):
     if not wall:
         parts.append(read("tools/partials/footer.html").rstrip("\n"))
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
-    if slug == "crossroads":
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
