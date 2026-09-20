@@ -1,60 +1,126 @@
-<section class="crhero" id="top" data-ground="#0E0B12">
+<section class="crossroads-intro" id="crossroads-intro" aria-label="The Crossroads" data-crossroads-intro data-crossroads-intro-pending>
+  <video class="crossroads-intro__opening" data-crossroads-intro-opening data-src="assets/video/crossroads-opening.mp4" poster="assets/img/crossroads/opening-final.jpg" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+  <div class="crossroads-intro__base" aria-hidden="true"></div>
+  <div class="crossroads-intro__reveal" aria-hidden="true">
+    <img class="crossroads-intro__still" src="assets/img/crossroads/intro-text-free.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" fetchpriority="low">
+    <video class="crossroads-intro__video" data-crossroads-intro-video data-src="assets/video/crossroads-intro.mp4" muted loop playsinline preload="none" tabindex="-1"></video>
+  </div>
+  <div class="crossroads-intro__content">
+    <p class="crossroads-intro__eyebrow">CIRS · The student magazine</p>
+    <div class="crossroads-intro__mark">
+      <img class="crossroads-intro__pen" src="assets/img/crossroads/pen-logo.svg" alt="" aria-hidden="true" width="210" height="302">
+      <h1 class="crossroads-intro__title">
+        <img class="crossroads-intro-title-art" src="assets/img/crossroads/title-restored.svg" alt="The Crossroads" width="4096" height="1368" decoding="async">
+      </h1>
+    </div>
+    <p class="crossroads-intro__sanskrit" lang="sa">नित्यं सत्ये प्रतिष्ठितम्</p>
+    <p class="crossroads-intro__tagline">Ever rooted in the truth.</p>
+    <a class="crossroads-intro__cta" href="#crossroads-main" data-crossroads-intro-enter>
+      <span>Enter The Crossroads</span>
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 2v10m-4-4 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="crhero crossroads-archive-hero" id="top" data-ground="#0E0B12" aria-labelledby="crossroads-archive-title">
+  <span class="crossroads-intro-target" id="crossroads-main" tabindex="-1" role="group" aria-label="Crossroads magazine"></span>
   {{CROSSROADS_WALL}}
-  <div class="crhero__scrim" aria-hidden="true"></div>
-  <div class="wrap crhero__inner">
-    <p class="marker"><span class="sc">CIRS monthly magazine</span></p>
-    <h1 class="crhero__word" data-split>Crossroads</h1>
-    <p class="crhero__lead">Stories, ideas and moments from the CIRS community.</p>
-    <p class="crhero__note">The evolving archive of Crossroads, the monthly magazine of Chinmaya
-      International Residential School &mdash; written, edited and published by its students.</p>
-    <p class="crmeter">
-      <span class="crmeter__n">{{CROSSROADS_COUNT}}</span>
-      <span class="crmeter__t">editions<br>one CIRS story</span>
-    </p>
-    <span class="crhero__scroll">
-      The archive
-      <svg width="11" height="11" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 4l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-    </span>
-  </div>
-</section>
-
-<section class="crstate" id="statement">
-  <div class="wrap">
-    <p class="crstate__line rv" data-split><em>{{CROSSROADS_COUNT}} editions.</em></p>
-    <p class="crstate__line crstate__line--b rv" data-split>Countless stories.</p>
-  </div>
-</section>
-
-<section class="section" id="about">
-  <div class="wrap">
-    <div class="crabout">
-      <div class="rv">
-        <div class="sec-head" style="margin-bottom:var(--space-5)">
-          <p class="marker"><span class="sc">What it is</span></p>
-          <h2 class="serif h2" data-split>A Magazine the Students <em>Run.</em></h2>
-        </div>
-        <p class="copy dropcap">The Crossroads Monthly is a student-run initiative to foster
-          journalistic talent amongst the students of CIRS.</p>
-        <p class="copy">We, as a student-centric club, want to empower the students of our school.
-          We want not only our students but even our alumni and parents of students to contribute
-          toward this goal. Furthermore, we would accept all contributions from all kinds of
-          sources provided the content is appropriate and student friendly.</p>
-        <p class="copy" style="margin-top:var(--space-5)"><a class="btn btn--outline"
-          href="mailto:info@cirschool.org">Contribute to Crossroads</a></p>
+  <div class="crossroads-archive-hero__treatment" aria-hidden="true"></div>
+  <div class="crossroads-archive-hero__gradient" aria-hidden="true"></div>
+  <div class="crhero__inner crossroads-archive-hero__inner">
+    <div class="crossroads-archive-hero__content">
+      <div class="crossroads-archive-hero__eyebrow">
+        <img class="crossroads-archive-hero__quill" src="assets/img/crossroads/pen-logo.svg" alt="" aria-hidden="true" width="210" height="302">
+        <span>CIRS monthly magazine</span>
+        <span class="crossroads-archive-hero__eyebrow-line" aria-hidden="true"></span>
       </div>
+      <h2 class="crossroads-archive-hero__title" id="crossroads-archive-title">Crossroads</h2>
+      <p class="crossroads-archive-hero__statement">Stories, ideas and moments from the CIRS community.</p>
+      <p class="crossroads-archive-hero__description">The evolving archive of Crossroads, the monthly magazine of Chinmaya
+        International Residential School &mdash; written, edited and published by its students.</p>
+      <div class="crossroads-archive-hero__footer">
+        <div class="crossroads-archive-hero__actions">
+          <a class="crossroads-archive-hero__primary" href="#archive">Browse all editions <span aria-hidden="true">↓</span></a>
+          {{CROSSROADS_LATEST_LINK}}
+        </div>
+      </div>
+    </div>
+    {{CROSSROADS_LATEST_FEATURE}}
+  </div>
+</section>
 
-      <figure class="crquote rv">
-        <blockquote>
-          <p class="pull serif">&ldquo;Writing, to me, is simply <em>thinking through my
-            fingers.&rdquo;</em></p>
-        </blockquote>
-        <figcaption class="crquote__by">Isaac Asimov</figcaption>
-      </figure>
+<section class="crossroads-stories" id="statement" aria-labelledby="crossroads-stories-heading" data-crossroads-stories>
+  <div class="crossroads-stories__inner">
+    <h2 class="crossroads-stories__accessible" id="crossroads-stories-heading">{{CROSSROADS_COUNT}} editions. Countless stories.</h2>
+    <div class="crossroads-stories__spread">
+      <div class="crossroads-stories__left" aria-hidden="true"><span class="crossroads-stories__number" data-crossroads-stories-number>{{CROSSROADS_COUNT}}</span><em>editions.</em></div>
+      {{CROSSROADS_STORIES_COVERS}}
+      <div class="crossroads-stories__right" aria-hidden="true"><span>Countless</span><span>stories.</span></div>
+    </div>
+    <div class="crossroads-stories__footer">
+      <p>Three decades of student voices, questions, discoveries and creative work.</p>
+      <a href="#archive">Explore all editions <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
 
-<section class="section on-paper-2" id="archive">
+<section class="crossroads-manuscript" id="about" aria-labelledby="crossroads-manuscript-title" data-crossroads-manuscript>
+  <svg class="crossroads-manuscript__pattern" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path class="crossroads-manuscript__pattern-line crossroads-manuscript__pattern-line--gold crossroads-manuscript__pattern-line--draw crossroads-manuscript__pattern-line--mobile"
+      d="M-120 172 C42 8 214 -44 362 34 C492 104 492 252 384 304 C282 352 166 286 184 194 C204 92 356 78 456 150" />
+    <path class="crossroads-manuscript__pattern-line crossroads-manuscript__pattern-line--gold crossroads-manuscript__pattern-line--soft crossroads-manuscript__pattern-line--draw"
+      d="M-90 420 C218 256 468 210 694 282 C846 330 948 306 1088 218 C1244 120 1434 104 1690 236" />
+    <path class="crossroads-manuscript__pattern-line crossroads-manuscript__pattern-line--gold crossroads-manuscript__pattern-line--mobile"
+      d="M-134 714 C32 594 188 586 300 674 C390 744 364 850 252 866 C132 884 80 790 160 738 C238 686 384 718 514 866" />
+    <path class="crossroads-manuscript__pattern-line crossroads-manuscript__pattern-line--purple"
+      d="M1018 -102 C1124 62 1138 214 1074 346 C1022 454 1032 548 1148 620" />
+    <path class="crossroads-manuscript__pattern-line crossroads-manuscript__pattern-line--gold crossroads-manuscript__pattern-line--mobile"
+      d="M1502 -94 C1324 60 1278 224 1360 350 C1424 448 1584 430 1634 326 M1512 906 C1328 798 1300 660 1394 578 C1480 502 1582 558 1646 670" />
+    <path class="crossroads-manuscript__pattern-line crossroads-manuscript__pattern-line--purple crossroads-manuscript__pattern-line--small"
+      d="M430 752 C514 704 612 716 658 778 C684 814 674 852 646 882" />
+    <path class="crossroads-manuscript__pattern-line crossroads-manuscript__pattern-line--gold crossroads-manuscript__pattern-line--mobile-only"
+      d="M604 168 C630 42 774 -18 884 44 C982 100 974 212 888 248 C804 284 702 226 716 146 C730 72 832 54 906 112" />
+    <path class="crossroads-manuscript__pattern-line crossroads-manuscript__pattern-line--gold crossroads-manuscript__pattern-line--mobile-only"
+      d="M570 596 C642 516 744 502 804 564 C852 614 830 690 756 710 C682 730 626 680 648 628" />
+    <path class="crossroads-manuscript__pattern-line crossroads-manuscript__pattern-line--gold crossroads-manuscript__pattern-line--mobile-only"
+      d="M734 924 C818 812 904 764 1010 798 C1080 820 1126 882 1154 954" />
+  </svg>
+  <div class="crossroads-manuscript__inner">
+    <div class="crossroads-manuscript__main">
+      <p class="crossroads-manuscript__eyebrow">What it is <span aria-hidden="true"></span></p>
+      <h2 class="crossroads-manuscript__title" id="crossroads-manuscript-title">
+        <span class="crossroads-manuscript__line"><span class="crossroads-manuscript__mask"><span>A</span></span> <span class="crossroads-manuscript__mask"><span>magazine</span></span></span>
+        <em class="crossroads-manuscript__line"><span class="crossroads-manuscript__mask"><span>the</span></span> <span class="crossroads-manuscript__mask"><span>students</span></span> <span class="crossroads-manuscript__mask"><span>run.</span></span></em>
+      </h2>
+      <div class="crossroads-manuscript__body">
+        <p>Crossroads is <span class="crossroads-manuscript__highlight">written, edited and shaped</span> by the students of CIRS. It gives young writers, artists and photographers a place to <span class="crossroads-manuscript__highlight">question, document and create</span>.</p>
+        <p><span class="crossroads-manuscript__highlight">Students lead the magazine</span>, while alumni, parents and members of the wider CIRS community may also contribute work suitable for publication.</p>
+      </div>
+      <a class="crossroads-manuscript__cta" href="mailto:info@cirschool.org">Contribute to Crossroads <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="crossroads-manuscript__margin">
+      <span class="crossroads-manuscript__margin-rule" aria-hidden="true"></span>
+      <span class="crossroads-manuscript__quote" aria-hidden="true">“</span>
+      <p class="crossroads-manuscript__motto">Made by students.<br>Read by the community.</p>
+      <ul class="crossroads-manuscript__notes">
+        <li>Written by students</li>
+        <li>Edited by students</li>
+        <li>Open to the CIRS community</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section on-paper-2 crossroads-archive-list" id="archive">
+  <svg class="crossroads-archive-list__pattern" viewBox="0 0 1600 6500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path class="crossroads-archive-list__line" d="M-180 420 C70 86 384 -46 632 104 C816 216 792 472 606 554 C424 634 204 514 232 332 C260 154 510 116 684 264" />
+    <path class="crossroads-archive-list__line crossroads-archive-list__line--soft" d="M-120 1080 C236 806 612 784 902 972 C1124 1118 1344 1082 1710 816" />
+    <path class="crossroads-archive-list__line" d="M-186 2140 C48 1834 356 1790 564 1988 C742 2158 650 2440 410 2488 C174 2534 42 2318 188 2174 C320 2042 580 2130 772 2400" />
+    <path class="crossroads-archive-list__line crossroads-archive-list__line--purple" d="M1472 1584 C1226 1842 1172 2182 1336 2424 C1456 2602 1628 2618 1742 2506 M1534 2882 C1286 2684 1152 2784 1166 3010 C1180 3230 1390 3334 1662 3210" />
+    <path class="crossroads-archive-list__line" d="M-110 3562 C238 3306 532 3364 690 3616 C816 3818 716 4050 484 4090 C254 4130 100 3934 210 3762 C312 3600 584 3628 850 3926" />
+    <path class="crossroads-archive-list__line crossroads-archive-list__line--purple crossroads-archive-list__line--minor" d="M1074 4300 C1252 4094 1466 4072 1694 4266" />
+    <path class="crossroads-archive-list__line" d="M1680 5064 C1388 4864 1162 4936 1094 5206 C1030 5460 1228 5628 1458 5504 C1648 5402 1582 5178 1416 5164 C1238 5150 1112 5360 1060 5738 C1028 5970 906 6190 660 6508" />
+  </svg>
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">The archive</span></p>
