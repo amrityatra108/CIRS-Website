@@ -38,7 +38,9 @@
      Smooth scroll
      ========================================================== */
   var lenis = null;
-  if (typeof window.Lenis !== "undefined" && !reduced) {
+  // The photograph wall has its own infinite drag/scroll surface and must not
+  // compete with document-level smooth scrolling.
+  if (typeof window.Lenis !== "undefined" && !reduced && !document.body.classList.contains("wall")) {
     lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.5 });
     if (hasGSAP) {
       lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
@@ -599,7 +601,8 @@
 
     function updatePosition() {
       var current = 1, line = window.innerHeight * 0.5;
-      // Current reading position, not the furthest card ever encountered.
+      // Follow the current reading position in both scroll directions rather
+      // than retaining only the furthest card the reader has encountered.
       cards.forEach(function (card, index) {
         if (card.getBoundingClientRect().top <= line) current = index + 1;
       });
