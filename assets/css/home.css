@@ -74,8 +74,7 @@ body.home .hframe img{
 body.home .filmsec,
 body.home .finalcta,
 body.home .ticker,
-body.home .footer,
-body.home .curtain{
+body.home .footer{
   background-color:var(--home-night);
 }
 body.home .filmsec__media::after{
