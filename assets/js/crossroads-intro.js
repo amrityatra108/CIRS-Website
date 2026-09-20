@@ -15,6 +15,7 @@
   var hint = intro.querySelector(".crossroads-intro__hint");
   var video = intro.querySelector("[data-crossroads-intro-video]");
   var opening = intro.querySelector("[data-crossroads-intro-opening]");
+  var skip = intro.querySelector("[data-crossroads-intro-skip]");
   var openingStarted = false, openingDone = false, openingTimer = null, handoffTimer = null;
   var content = intro.querySelector(".crossroads-intro__content");
   var scrollLocked = false;
@@ -29,12 +30,14 @@
     if (event.type === "keydown" && !["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) return;
     event.preventDefault();
     event.stopImmediatePropagation();
+    if (event.type === "keydown" && event.key === " " && !event.repeat) finishOpening();
   }
   window.addEventListener("wheel", blockOpeningScroll, { passive:false, capture:true });
   window.addEventListener("touchmove", blockOpeningScroll, { passive:false, capture:true });
   window.addEventListener("keydown", blockOpeningScroll, { capture:true });
   if (!reduced.matches && (!location.hash || location.hash === "#crossroads-intro")) {
     lockScroll(true);
+    if (skip) skip.hidden = false;
     openingTimer = setTimeout(finishOpening, 20000);
   } else {
     intro.removeAttribute("data-crossroads-intro-pending");
@@ -45,6 +48,7 @@
     if (openingDone) return;
     openingDone = true;
     clearTimeout(openingTimer);
+    if (skip) skip.hidden = true;
     if (opening) opening.pause();
     intro.removeAttribute("data-crossroads-intro-opening-playing");
     intro.removeAttribute("data-crossroads-intro-pending");
@@ -82,7 +86,10 @@
     if (document.getElementById("curtain")) return;
     if (!openingStarted) {
       openingStarted = true;
-      opening.src = opening.getAttribute("data-src");
+      if (!opening.getAttribute("src")) {
+        opening.src = opening.getAttribute("data-src");
+        opening.load();
+      }
     }
     opening.muted = true;
     opening.play().catch(finishOpening);
@@ -107,6 +114,7 @@
       if (event.key === "Escape" && intro.hasAttribute("data-crossroads-intro-opening-playing")) finishOpening();
     });
   }
+  if (skip) skip.addEventListener("click", finishOpening);
   function primeAmbientVideo(playNow) {
     if (!video || reduced.matches) return;
     if (!video.getAttribute("src")) {
