@@ -23,9 +23,9 @@
   var panel = jump.querySelector(".jump__panel");
   if (!toggle || !panel) return;
 
-  // Hover opens it; a click pins it open so it survives the pointer
-  // leaving. Without the pin, hovering opened the panel and the click
-  // that followed immediately toggled it shut again.
+  // The visible button is the only opening target. The panel participates in
+  // the fixed wrapper's layout even while hidden, so opening from wrapper
+  // hover made apparently empty space beside the control feel clickable.
   var pinned = false;
 
   function open() {
@@ -46,13 +46,6 @@
     pinned = true;
     open();
   });
-
-  // Pointer users get it on hover. Ignored where hover is emulated, so a
-  // first tap on a touchscreen does not open and close in one gesture.
-  if (window.matchMedia && window.matchMedia("(hover:hover)").matches) {
-    jump.addEventListener("mouseenter", open);
-    jump.addEventListener("mouseleave", function () { if (!pinned) close(); });
-  }
 
   // Keyboard: reaching the toggle by tab should show what it controls.
   toggle.addEventListener("focus", open);

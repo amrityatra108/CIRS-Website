@@ -50,7 +50,7 @@ HERO_DATES = '''    <dl class="pagehero__dates">
       </div>
       <div>
         <dt>Entrance examination</dt>
-        <dd>First week of November 2026<small>India, Dubai and other centres</small></dd>
+        <dd>1 November 2026<small>India and Dubai; first week in other countries</small></dd>
       </div>
     </dl>'''
 
@@ -436,23 +436,24 @@ PAGES = {
         # A hero rather than the flat band: this is the page that has to
         # persuade, not merely inform.
         #
-        # PALETTE PREVIEW — temporary. This page alone wears the proposed
-        # off-white / gold / dark-purple scheme, from assets/css/palette.css,
-        # so it can be judged before the rest of the site is moved onto it.
-        # Remove this one line and the page returns to the site palette.
-        "sheet": "palette",
-        "hero": ("Admissions 2027–2028", "Admissions <em>Open.</em>",
+        # Admissions carries its own quiet, document-led layout beneath the
+        # shared honeycomb hero. The sheet is scoped by body.admissions.
+        "sheet": "admissions",
+        "cache_suffix": "-admissions-23",
+        "hero_split": False,
+        "hero": ("Admissions", "Admissions <em>Open.</em>",
                  "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
                  "registration portal, the entrance examination, a visit to the school and the "
                  "offer — the whole procedure, in order."),
         "hero_media": ("admissions-honeycomb.jpg", "admissions-hero.webm",
                        "admissions-hero.mp4", 1920, 960),
-        "hero_cta": [("How to apply", "#apply", "primary"),
-                     ("Book a visit", "#visit", "ghost")],
+        "hero_cta": [("Apply on the application portal",
+                      "https://easycollege.in/cirs/school/application/index.aspx", "primary"),
+                     ("Understand the process", "#apply", "ghost")],
         "hero_extra": HERO_DATES,
         "hero_placeholder": "Header animation &mdash; admissions<br>photograph or looping video<br>to be supplied",
         "jump": True,
-        "popup": True,
+        "popup": False,
     },
     "parent-portal": {
         "nav": "Parent Portal",
@@ -719,6 +720,7 @@ def hero_html(page):
     cta = "\n".join(f'      <a class="btn btn--{variant} btn--lg" href="{href}">{label}</a>'
                     for label, href, variant in page["hero_cta"])
     extra = page.get("hero_extra", "")
+    split_attr = ' data-split' if page.get("hero_split", True) else ''
     return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
   <div class="pagehero__media">
     <video class="pagehero__video" autoplay muted loop playsinline
@@ -731,7 +733,7 @@ def hero_html(page):
   <div class="pagehero__scrim" aria-hidden="true"></div>
   <div class="wrap pagehero__inner">
     <p class="marker"><span class="sc">{eyebrow}</span></p>
-    <h1 class="serif" data-split>{heading}</h1>
+    <h1 class="serif"{split_attr}>{heading}</h1>
     <p class="lead">{lead}</p>
     <p class="pagehero__cta">
 {cta}
@@ -1163,6 +1165,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "why-cirs":
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
+    if slug == "admissions":
+        parts.append(f'<script src="assets/js/admissions.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
