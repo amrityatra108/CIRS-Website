@@ -328,9 +328,14 @@ section[id]{ scroll-margin-top:88px; }
                     rgba(21,8,24,.32) 100%);
 }
 
+/* Anchor the opening headline to the viewport, outside the page's capped grid. */
+.hero > .wrap{
+  max-width:none;
+  padding-inline:clamp(20px,3vw,48px);
+}
 .hero__inner{
   position:relative; z-index:3;
-  padding-block:0 clamp(var(--space-8),8vw,var(--space-10));
+  padding-block:0 clamp(24px,4vw,48px);
   max-width:min(1100px,92vw);
 }
 .hero .marker{ margin-bottom:var(--space-4); }
