@@ -141,6 +141,77 @@
     });
   });
 
+  /* ----------------------------------------------------------
+     An anchor arrived at from another page
+     The browser jumps to it while the page is still short: the
+     pinned sections have not taken their spacers yet and the
+     photographs below have not loaded, so the place it lands is
+     not where the section finally sits. ScrollTrigger.refresh()
+     on load settles the real layout; this puts the page back on
+     the anchor once it has, at the same offset a click uses.
+
+     Without it a cross-page anchor lands wherever the unfinished
+     layout happened to put it — which is why the Enquire menu's
+     Student Login, at the foot of a page with a pinned hero,
+     arrived at the top of it instead.
+     ---------------------------------------------------------- */
+  var hashArmed = false;
+
+  function openHash() {
+    var id = window.location.hash;
+    if (!id || id.length < 2) return;
+    // The opening curtain holds the page at the top with the scroll locked,
+    // so moving now would only be undone when it lifts. finish() calls this
+    // again on the way out, which is where the move actually happens.
+    if (document.body.classList.contains("is-locked")) return;
+    if (hashArmed) return;
+    var t;
+    // A hash is not necessarily a valid selector — #2026 is legal in a URL.
+    try { t = document.querySelector(id); } catch (err) { return; }
+    if (!t) return;
+    hashArmed = true;
+
+    var timer;
+
+    function align() {
+      if (lenis) {
+        // Lenis clamps to the page height it measured last. On a page whose
+        // photographs have not all arrived that height is still the short
+        // one, and an anchor near the foot is silently cut back to it — the
+        // symptom being a jump that stops halfway down and stays there.
+        lenis.resize();
+        lenis.scrollTo(t, { offset: -88, immediate: true });
+      } else {
+        t.scrollIntoView();
+      }
+    }
+    // One jump is not enough: the page goes on moving underneath the anchor as
+    // photographs arrive and the pinned sections claim their spacers. But
+    // aligning *during* a refresh fights ScrollTrigger, which restores the
+    // scroll position itself as part of one — that overshoots. So wait for the
+    // refreshes to stop coming, and only then move, once.
+    function schedule() {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(align, 160);
+    }
+    // Chasing an anchor the visitor has already scrolled away from is worse
+    // than never having jumped at all.
+    function stop() {
+      window.clearTimeout(timer);
+      if (hasST) ScrollTrigger.removeEventListener("refresh", schedule);
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop);
+    }
+
+    schedule();
+    if (hasST) ScrollTrigger.addEventListener("refresh", schedule);
+    window.addEventListener("wheel", stop, { passive: true });
+    window.addEventListener("touchstart", stop, { passive: true });
+    window.addEventListener("keydown", stop);
+    window.setTimeout(stop, 6000);
+  }
+
   /* ==========================================================
      Line splitter
      Wraps each rendered line of a heading in its own mask, so
@@ -225,6 +296,9 @@
       document.body.classList.remove("is-locked");
       if (lenis) lenis.start();
       if (hasST) ScrollTrigger.refresh();
+      // The scroll is free and the layout is settled: if this page was opened
+      // at an anchor, this is the first moment it can honour it.
+      openHash();
       done();
     }
 
@@ -1642,7 +1716,14 @@
     newsFlash();
     crossroadsProgress();
     crossroadsWall();
-    if (!animate) { failOpen(); slHero(); homeRun(); dayTrack(); newsTrack(); chart(); progressBar(); return; }
+    if (!animate) {
+      failOpen(); slHero(); homeRun(); dayTrack(); newsTrack(); chart(); progressBar();
+      // No curtain and no pinning here, but the photographs still arrive late
+      // and move everything below them, so an inbound anchor still needs
+      // putting right once they have.
+      window.addEventListener("load", openHash);
+      return;
+    }
 
     document.documentElement.classList.add("js-motion");
     choreograph();
@@ -1668,6 +1749,9 @@
     // Late-loading images change every trigger position below them.
     window.addEventListener("load", function () {
       if (hasST) ScrollTrigger.refresh();
+      // Covers the pages that have no curtain to lift, and the case where the
+      // photographs land after it already has.
+      openHash();
     });
 
     // Returning to a backgrounded tab: positions may be stale after the catch-up.
