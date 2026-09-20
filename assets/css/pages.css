@@ -133,8 +133,8 @@ body.menu-open .header{
   box-shadow:none;
 }
 .header .wrap{
-  width:min(100%,1240px);
-  padding:8px 10px;
+  width:min(100%,1180px);
+  padding:6px 8px;
   border:1px solid rgba(255,255,255,.18);
   border-radius:999px;
   background:rgba(255,255,255,.08);
@@ -168,14 +168,14 @@ body.menu-open .header .wrap{
 .header__left{ justify-self:start; }
 .header__right{ justify-self:end; }
 
-.brand img{ width:64px; }
-.brand__name{ font-size:1.34rem; }
-.brand__sub{ font-size:.9rem; }
+.brand img{ width:56px; }
+.brand__name{ font-size:1.22rem; }
+.brand__sub{ font-size:.82rem; }
 
 .htab{
   position:relative;
   display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:7px;
-  min-height:44px; padding:0 14px;
+  min-height:40px; padding:0 12px;
   border:1px solid rgba(255,255,255,.13); border-radius:999px;
   background:rgba(255,255,255,.055);
   color:#fff; white-space:nowrap;
@@ -233,23 +233,23 @@ body.menu-open .htab:hover{
    wordmark text goes entirely and the emblem carries the identity,
    which is set large in the page banner immediately below anyway. */
 @media (max-width:1040px){
-  .header .wrap{ gap:10px; }
+  .header .wrap{ gap:8px; }
   .brand{ max-width:min(44vw,330px); }
-  .brand img{ width:52px; }
-  .brand__name{ font-size:1.02rem; line-height:1.16; }
+  .brand img{ width:48px; }
+  .brand__name{ font-size:.96rem; line-height:1.16; }
   .brand__sub{ display:none; }
   .htab{ padding-inline:11px; }
 }
 @media (max-width:700px){
   .htab__label{ display:none; }
-  .htab{ width:44px; padding:0; }
+  .htab{ width:44px; min-height:44px; padding:0; }
 }
 @media (max-width:560px){
   .header{ top:8px; padding-inline:8px; }
-  .header .wrap{ gap:6px; padding:6px 8px; }
+  .header .wrap{ gap:5px; padding:5px 7px; }
   .header__left,.header__right{ gap:6px; }
   .brand{ max-width:none; }
-  .brand img{ width:40px; }
+  .brand img{ width:36px; }
   .brand__txt{ display:none; }
 }
 @media (prefers-reduced-motion:reduce){
