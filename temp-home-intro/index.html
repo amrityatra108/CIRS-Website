@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="../">
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chinmaya International Residential School — Siruvani, Coimbatore</title>
+<meta name="description" content="A co-educational residential school on a hundred acres in the Siruvani foothills — CBSE and the International Baccalaureate, Grades V to XII.">
+<meta name="theme-color" content="#0E0B12">
+<link rel="canonical" href="https://www.cirschool.org/">
+<link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
+<link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chinmaya International Residential School — Siruvani, Coimbatore">
+<meta property="og:description" content="A co-educational residential school on a hundred acres in the Siruvani foothills — CBSE and the International Baccalaureate, Grades V to XII.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chinmaya International Residential School — Siruvani, Coimbatore">
+<meta name="twitter:description" content="A co-educational residential school on a hundred acres in the Siruvani foothills — CBSE and the International Baccalaureate, Grades V to XII.">
+<meta name="twitter:image" content="assets/img/og.jpg">
+<!-- Four approved families, self-hosted with retained OFL notices. -->
+<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?b=46">
+<link rel="stylesheet" href="assets/css/cirs.css?b=46">
+<link rel="stylesheet" href="assets/css/pages.css?b=46">
+<link rel="stylesheet" href="assets/css/typography.css?b=46">
+<link rel="stylesheet" href="temp-home-intro/intro.css">
+<script>
+try {
+  var nav = performance.getEntriesByType('navigation')[0];
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !(nav && nav.type === 'back_forward') && !sessionStorage.getItem('cirsHomeIntroSeen')) document.documentElement.classList.add('intro-active');
+} catch (_) {}
+window.setTimeout(function () {
+ if (window.cirsTempFinish) window.cirsTempFinish('watchdog');
+ else document.documentElement.classList.remove('intro-active');
+}, 6500);
+</script>
+</head>
+
+<body>
+<div class="home-intro" data-home-intro data-webm="" data-mp4="" data-mobile-webm="" data-mobile-mp4="">
+  <img class="home-intro__poster" src="assets/img/hero.jpg" alt="" aria-hidden="true">
+  <video class="home-intro__video" muted playsinline preload="none" aria-hidden="true" hidden></video>
+  <div class="home-intro__wash" aria-hidden="true"></div>
+  <p class="home-intro__note">Temporary preview · still-image handoff<br><small>Campus construction film awaiting supplied assets</small></p>
+  <button class="home-intro__skip" type="button">Skip intro</button>
+</div>
+<button class="preview-replay" type="button" onclick="try{sessionStorage.removeItem('cirsHomeIntroSeen')}catch(_){} location.reload()">Replay preview</button>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Opening sequence. Removed from the DOM once it has played. -->
+
+
+<!-- Film lightbox, shared by every page. The iframe is built on open and
+     destroyed on close: nothing is requested from YouTube until someone asks
+     for the film, and removing the element is what actually stops the audio. -->
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
+  <div class="lightbox__back" data-close></div>
+  <div class="lightbox__panel">
+    <div class="lightbox__frame" id="lightboxFrame"></div>
+    <button type="button" class="lightbox__close" data-close aria-label="Close the film">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</dialog>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<button type="button" class="totop" id="totop" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+</button>
+<header class="header" id="header">
+  <div class="wrap">
+    <div class="header__left">
+      <!-- Enquire opens the contact panel below rather than going anywhere.
+           It stays a button so the keyboard and screen readers get a control
+           that announces its expanded state; hover opens it for a mouse. -->
+      <div class="enq" id="enq">
+        <button type="button" class="htab enq__btn" id="enqBtn"
+                aria-expanded="false" aria-controls="enqPanel">
+          <span class="htab__icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="htab__label">Enquire</span>
+        </button>
+
+        <div class="enq__panel" id="enqPanel">
+          <p class="enq__title sc">Talk to CIRS</p>
+
+          <a class="enq__row enq__row--wa" href="https://wa.me/919360461572"
+             target="_blank" rel="noopener">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>+91 93604 61572</b>
+              <small>WhatsApp &middot; Admissions Coordinator</small>
+            </span>
+          </a>
+
+          <a class="enq__row" href="mailto:info@cirschool.org">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><rect x="2.6" y="4.6" width="16.8" height="12.8" rx="1.6" stroke="currentColor" stroke-width="1.4"/><path d="m3.4 5.8 7.6 5.6 7.6-5.6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>info@cirschool.org</b>
+              <small>Email the school</small>
+            </span>
+          </a>
+
+          <p class="enq__title enq__title--social sc">Follow CIRS</p>
+          <div class="enq__social">
+            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <a class="brand" href="#top">
+      <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
+      <span class="brand__txt">
+        <span class="brand__name">Chinmaya International Residential School</span>
+        <span class="brand__sub">Siruvani &middot; Coimbatore &middot; Founded 1996</span>
+      </span>
+    </a>
+
+    <div class="header__right">
+      <a class="htab htab--news" href="news.html">
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
+        </span>
+        <span class="htab__label">News</span>
+      </a>
+      <button type="button" class="htab htab--menu" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <span class="htab__icon" aria-hidden="true">
+          <span class="menubtn__dots"><i></i><i></i><i></i><i></i></span>
+        </span>
+        <span class="htab__label">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer" hidden>
+  <nav class="drawer__grid" aria-label="All pages">
+    <div>
+      <p class="sc" id="dnav-vision">Vision</p>
+      <ul aria-labelledby="dnav-vision">
+        <li><a href="founder.html">Founder</a></li>
+        <li><a href="why-cirs.html">Why CIRS</a></li>
+        <li><a href="school-history.html">School History</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-student-life">Student Life</p>
+      <ul aria-labelledby="dnav-student-life">
+        <li><a href="student-life.html">Student Life</a></li>
+        <li><a href="curriculum.html">Curriculum</a></li>
+        <li><a href="our-results.html">Our Results</a></li>
+        <li><a href="sports.html">Our Sports</a></li>
+        <li><a href="our-laurels.html">Our Laurels</a></li>
+        <li><a href="math-challenge.html">Math Challenge</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
+      <ul aria-labelledby="dnav-literary-excellence">
+        <li><a href="crossroads.html">Crossroads</a></li>
+        <li><a href="blog.html">CIRS Blog</a></li>
+        <li><a href="creative-writing.html">Creative Writing</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
+      <ul aria-labelledby="dnav-art-culture-music">
+        <li><a href="captures.html">CIRS Captures</a></li>
+        <li><a href="art-attack.html">CIRS Art Attack</a></li>
+        <li><a href="festivals.html">CIRS Festivals</a></li>
+        <li><a href="theatre.html">CIRS Theatre</a></li>
+        <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-connect">Connect</p>
+      <ul aria-labelledby="dnav-connect">
+        <li><a href="school-info.html">School Information</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="parent-portal.html">Parent Portal</a></li>
+        <li><a href="alumni.html">Alumni</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="drawer__utility">
+    <a href="alumni.html">Alumni</a>
+    <a href="school-info.html#calendar">Calendar</a>
+    <a href="tel:+914222613300">+91 422 261 3300</a>
+    <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+  </div>
+  <div class="drawer__cta">
+    <a class="btn btn--primary btn--lg" href="admissions.html#apply">Apply for admission</a>
+    <a class="btn btn--outline btn--lg" href="admissions.html#visit">Book a campus visit</a>
+  </div>
+</div>
+<main id="main">
+<section class="hero" id="top" data-ground="#150818">
+  <div class="hero__media">
+    <img class="hero__still" src="assets/img/hero.jpg" alt="" width="1280" height="720" fetchpriority="high">
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero__inner">
+      <p class="marker"><span class="sc">Siruvani, Coimbatore &middot; Grades V&ndash;XII</span></p>
+      <h1 class="serif h1" data-split>Rooted in <em>Values!</em><br>Ready for the <em>World.</em></h1>
+    </div>
+  </div>
+</section>
+
+<!-- The run — ten photographs carried sideways between the hero and the film.
+     It fills the window: the section pins at 100svh and the stage under it is
+     a 780vw canvas with every item placed on it absolutely, at one of three
+     heights, with real emptiness in between. That is the arrangement the
+     Chinmaya Yuva Kendra page uses and it is what makes the section read as
+     a space rather than a row — a flex track, however wide the gaps, still
+     lines everything up on one band across the middle of the screen.
+
+     Every item declares a data-depth. The stage is translated once and each
+     item again by its own parallax, measured against the middle of the
+     window so the offsets stay bounded. Ghost words sit furthest back.
+
+     Under 900px, or with motion off, .is-static lays the same items out as a
+     native swipe track: absolute positioning on a 780vw canvas has no useful
+     meaning on a phone. -->
+<section class="hrun" id="run" data-ground="#160A1B">
+  <div class="hrun__pin">
+    <div class="hrun__viewport">
+      <div class="hrun__stage">
+        <span class="hghost" data-depth="0.3" style="left:24vw; top:16%">A DAY</span>
+        <span class="hghost" data-depth="0.26" style="left:196vw; top:58%">ONE HUNDRED</span>
+        <span class="hghost" data-depth="0.34" style="left:398vw; top:14%">ACRES</span>
+        <span class="hghost" data-depth="0.28" style="left:560vw; top:62%">FROM FIRST LIGHT</span>
+        <span class="hghost" data-depth="0.32" style="left:700vw; top:20%">UNTIL DARK</span>
+
+        <div class="hsay hsay--open" data-depth="0.95"
+             style="left:5vw; top:50%; --mid:1">
+          <p class="hsay__eyebrow">A day at CIRS</p>
+          <h2 class="hsay__big">ONE HUNDRED ACRES,<br>FROM FIRST LIGHT</h2>
+          <p class="hsay__sub">The day starts outdoors and finishes under the amphitheatre lights. Between those two hours are the classrooms and the drums, the table, the water and the trail &mdash; and nowhere on the hundred acres to be a spectator.</p>
+        </div>
+
+        <figure class="hframe hframe--xl" data-depth="1.14"
+                 style="left:54vw; top:11%">
+          <span class="hframe__n">01</span>
+          <img src="assets/img/hrun/01-lawn.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+               alt="Rows of students on mats in the open, mid-posture, with palms and the tree line behind them.">
+          <figcaption>Morning, on the grass</figcaption>
+        </figure>
+
+        <figure class="hframe hframe--m" data-depth="0.88"
+                 style="left:126vw; bottom:13%">
+          <span class="hframe__n">02</span>
+          <img src="assets/img/hrun/02-lesson.jpg" width="1000" height="1250" loading="lazy" decoding="async"
+               alt="A teacher holding a glass apparatus up to the light while two students watch closely.">
+          <figcaption>A demonstration, held to the light</figcaption>
+        </figure>
+
+        <figure class="hframe hframe--l" data-depth="1.07"
+                 style="left:172vw; top:9%">
+          <span class="hframe__n">03</span>
+          <img src="assets/img/hrun/03-drums.jpg" width="1000" height="1250" loading="lazy" decoding="async"
+               alt="A row of boys seated on the floor at tabla, a teacher&rsquo;s hands on the drum beside them.">
+          <figcaption>The tabla class</figcaption>
+        </figure>
+
+        <div class="hsay" data-depth="0.95"
+             style="left:216vw; top:50%; --mid:1">
+          <p class="hsay__eyebrow">J&ntilde;&#0257;nam &middot; Knowledge</p>
+          <h2 class="hsay__big">HELD UP<br>TO THE LIGHT</h2>
+          <p class="hsay__sub">A flask raised at the front of a laboratory; a rhythm counted out until the hands have it. Grades V to XII, taught towards CBSE and the IB &mdash; and, just as deliberately, towards the habit of asking.</p>
+        </div>
+
+        <figure class="hframe hframe--xl" data-depth="1.12"
+                 style="left:268vw; bottom:9%">
+          <span class="hframe__n">04</span>
+          <img src="assets/img/hrun/04-hall.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+               alt="The school seated through the auditorium, facing a lit stage.">
+          <figcaption>The whole school, in one hall</figcaption>
+        </figure>
+
+        <figure class="hframe hframe--s" data-depth="0.86"
+                 style="left:342vw; top:15%">
+          <span class="hframe__n">05</span>
+          <img src="assets/img/hrun/05-table.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+               alt="A long row of students seated on the floor, eating from plates set out in front of them.">
+          <figcaption>The long table</figcaption>
+        </figure>
+
+        <div class="hsay" data-depth="0.95"
+             style="left:384vw; top:50%; --mid:1">
+          <p class="hsay__eyebrow">Sev&#0257; &middot; Service</p>
+          <h2 class="hsay__big">A HALL, AND<br>THEN A TABLE</h2>
+          <p class="hsay__sub">Boarding is the part of this school that no timetable shows. What the Chinmaya Vision Programme names as values is not a period in the week here; it is the ordinary business of living on the same hundred acres.</p>
+        </div>
+
+        <figure class="hframe hframe--l" data-depth="1.06"
+                 style="left:436vw; top:8%">
+          <span class="hframe__n">06</span>
+          <img src="assets/img/hrun/06-field.jpg" width="1000" height="1500" loading="lazy" decoding="async"
+               alt="A player upside down in a bicycle kick, the ball above him and the wooded hillside behind.">
+          <figcaption>Overhead, on the field</figcaption>
+        </figure>
+
+        <figure class="hframe hframe--m" data-depth="0.89"
+                 style="left:476vw; bottom:14%">
+          <span class="hframe__n">07</span>
+          <img src="assets/img/hrun/07-water.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+               alt="A swimmer mid-stroke with an instructor alongside, water breaking over them both.">
+          <figcaption>The pool</figcaption>
+        </figure>
+
+        <figure class="hframe hframe--xl" data-depth="1.13"
+                 style="left:526vw; top:14%">
+          <span class="hframe__n">08</span>
+          <img src="assets/img/hrun/08-trail.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+               alt="A student in helmet and harness on a rocky slope, others climbing the line behind.">
+          <figcaption>On the trail</figcaption>
+        </figure>
+
+        <div class="hsay" data-depth="0.95"
+             style="left:602vw; top:50%; --mid:1">
+          <p class="hsay__eyebrow">Kau&#0347;alam &middot; Efficiency</p>
+          <h2 class="hsay__big">DONE PROPERLY,<br>OR NOT AT ALL</h2>
+          <p class="hsay__sub">The third word of the motto is the one most often mistranslated as speed. It means skill &mdash; the slope walked to the top of it, the piece rehearsed until it holds, the length finished.</p>
+        </div>
+
+        <figure class="hframe hframe--l" data-depth="1.05"
+                 style="left:654vw; bottom:11%">
+          <span class="hframe__n">09</span>
+          <img src="assets/img/hrun/09-stage.jpg" width="1000" height="1500" loading="lazy" decoding="async"
+               alt="Three dancers in Bharatanatyam costume, arms raised, against a lit backdrop.">
+          <figcaption>The stage</figcaption>
+        </figure>
+
+        <figure class="hframe hframe--xl" data-depth="1.1"
+                 style="left:694vw; top:10%">
+          <span class="hframe__n">10</span>
+          <img src="assets/img/hrun/10-night.jpg" width="1500" height="1000" loading="lazy" decoding="async"
+               alt="The open-air amphitheatre after dark, its curved tiers filled, under floodlights.">
+          <figcaption>The amphitheatre, after dark</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="filmsec" data-ground="#0E0B12">
+  <div class="filmsec__media">
+    <img src="assets/img/film-audience.jpg" alt="" loading="lazy">
+  </div>
+  <div class="wrap filmsec__inner">
+    <div class="sec-head rv" style="max-width:640px;margin-inline:auto;text-align:center">
+      <p class="marker"><span class="sc">The official CIRS film</span></p>
+      <h2 class="serif h2" style="color:#fff" data-split>See CIRS, <em>in Motion.</em></h2>
+      <p class="lead">A short film walking the campus, the classrooms and the boarding houses
+        through the eyes of the students who live here &mdash; the clearest look at CIRS before
+        you visit in person.</p>
+    </div>
+
+    <!-- Still a real link: without JavaScript this opens the film on YouTube
+         rather than becoming a button that does nothing. The handler calls
+         preventDefault and plays it in the lightbox instead. -->
+    <a class="filmwin rv" href="https://youtu.be/R1BNNB_UalQ" data-video="R1BNNB_UalQ"
+       target="_blank" rel="noopener"
+       aria-label="Play the official CIRS film">
+      <img class="filmwin__bg" src="assets/img/film-still.jpg" alt=""
+           width="1600" height="900" loading="lazy">
+      <span class="filmwin__scrim" aria-hidden="true"></span>
+      <span class="filmwin__badge">YouTube</span>
+      <span class="filmwin__play" aria-hidden="true">
+        <svg width="20" height="22" viewBox="0 0 20 22"><path d="M1 1v20l18-10z" fill="currentColor"/></svg>
+      </span>
+      <span class="filmwin__label"><b>The Official CIRS Film</b> &middot; plays here</span>
+    </a>
+
+    <div class="filmsec__social rv">
+      <span class="filmsec__socialtag sc">Follow CIRS</span>
+      <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track" id="tickerTrack">
+    <div class="ticker__set"><span>Affiliated to CBSE, New Delhi</span><i></i><span>IB World School</span><i></i><span>Ranked 16th IB school worldwide</span><i></i><span>Co-educational boarding</span><i></i><span>IB average 39.4</span><i></i><span>Grades V to XII</span><i></i><span>CBSE average 90 per cent</span><i></i><span>One hundred acres</span><i></i><span>Teacher&ndash;student ratio 7:1</span><i></i><span>Green School Award</span><i></i><span>IB World Toppers &mdash; 45 out of 45</span><i></i><span>Founded 1996</span><i></i><span>Among the top 50 CBSE schools in India</span><i></i><span>Siruvani, Coimbatore</span><i></i><span>Flagship of the Chinmaya Education Movement</span><i></i><span>The Western Ghats</span><i></i><span>The Chinmaya Vision Programme</span><i></i><span>Central Chinmaya Mission Trust</span><i></i><span>A pedagogy of its own</span><i></i><span>Cultural rootedness</span><i></i></div>
+    <div class="ticker__set"><span>Affiliated to CBSE, New Delhi</span><i></i><span>IB World School</span><i></i><span>Ranked 16th IB school worldwide</span><i></i><span>Co-educational boarding</span><i></i><span>IB average 39.4</span><i></i><span>Grades V to XII</span><i></i><span>CBSE average 90 per cent</span><i></i><span>One hundred acres</span><i></i><span>Teacher&ndash;student ratio 7:1</span><i></i><span>Green School Award</span><i></i><span>IB World Toppers &mdash; 45 out of 45</span><i></i><span>Founded 1996</span><i></i><span>Among the top 50 CBSE schools in India</span><i></i><span>Siruvani, Coimbatore</span><i></i><span>Flagship of the Chinmaya Education Movement</span><i></i><span>The Western Ghats</span><i></i><span>The Chinmaya Vision Programme</span><i></i><span>Central Chinmaya Mission Trust</span><i></i><span>A pedagogy of its own</span><i></i><span>Cultural rootedness</span><i></i></div>
+  </div>
+</div>
+
+<section class="motto" data-ground="#4C1868">
+  <div class="wrap">
+    <p class="motto__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+    <p class="motto__iast">J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</p>
+    <p class="motto__en">Knowledge &middot; Service &middot; Efficiency</p>
+    <div class="motto__rule"></div>
+  </div>
+</section>
+
+<section class="glimpse" id="glimpses" data-ground="#0E0B12">
+  <div class="wrap">
+    <div class="glimpse__head rv">
+    <p class="marker"><span class="sc">Glimpses of CIRS</span></p>
+    <h2 class="serif h2" data-split>A Hundred Acres, <em>in a Hundred Frames.</em></h2>
+    <p class="lead">Every photograph here was taken on this campus &mdash; the classrooms and
+      the laboratories, the amphitheatre, the parades, the stage and the water. The wall keeps
+          moving, and every frame is dissolving into another. Point at one to stop the band
+        and bring its colour back.</p>
+    </div>
+  </div>
+
+  <div class="glimpse__rows" aria-hidden="true">
+    <div class="glimpse__row glimpse__row--a">
+      <div class="glimpse__track">
+        <div class="glimpse__set"><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g01.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g105.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g04.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g11.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g07.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g14.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g10.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g17.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g102.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g20.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g105.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g23.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g11.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g26.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g14.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g29.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g17.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g32.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g20.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g35.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g23.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g38.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g26.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g41.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g29.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g44.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g32.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g47.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g35.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g50.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g38.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g53.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g41.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g56.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g44.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g59.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g47.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g62.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g50.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g65.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g53.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g68.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g56.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g71.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g59.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g74.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g62.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g77.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g65.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g80.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g68.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g83.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g71.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g86.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g74.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g89.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g77.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g92.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g80.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g95.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g83.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g98.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g86.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g01.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g89.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g04.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g92.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g07.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g95.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g10.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g98.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g102.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure></div>
+        <div class="glimpse__set" aria-hidden="true"><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g01.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g105.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g04.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g11.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g07.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g14.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g10.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g17.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g102.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g20.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g105.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g23.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g11.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g26.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g14.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g29.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g17.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g32.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g20.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g35.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g23.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g38.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g26.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g41.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g29.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g44.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g32.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g47.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g35.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g50.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g38.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g53.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g41.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g56.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g44.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g59.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g47.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g62.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g50.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g65.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g53.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g68.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g56.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g71.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g59.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g74.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g62.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g77.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g65.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g80.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g68.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g83.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g71.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g86.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g74.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g89.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g77.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g92.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g80.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g95.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g83.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g98.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g86.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g01.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g89.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g04.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g92.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g07.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g95.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g10.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g98.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g102.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure></div>
+      </div>
+    </div>
+    <div class="glimpse__row glimpse__row--b">
+      <div class="glimpse__track">
+        <div class="glimpse__set"><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g02.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g106.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g05.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g12.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g08.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g15.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g100.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g18.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g103.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g21.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g106.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g24.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g12.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g27.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g15.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g30.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g18.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g33.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g21.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g36.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g24.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g39.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g27.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g42.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g30.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g45.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g33.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g48.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g36.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g51.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g39.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g54.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g42.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g57.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g45.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g60.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g48.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g63.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g51.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g66.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g54.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g69.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g57.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g72.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g60.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g75.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g63.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g78.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g66.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g81.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g69.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g84.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g72.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g87.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g75.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g90.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g78.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g93.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g81.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g96.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g84.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g99.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g87.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g02.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g90.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g05.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g93.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g08.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g96.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g100.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g99.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g103.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure></div>
+        <div class="glimpse__set" aria-hidden="true"><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g02.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g106.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g05.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g12.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g08.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g15.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g100.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g18.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g103.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g21.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g106.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g24.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g12.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g27.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g15.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g30.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g18.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g33.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g21.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g36.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g24.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g39.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g27.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g42.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g30.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g45.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g33.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g48.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g36.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g51.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g39.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g54.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g42.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g57.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g45.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g60.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g48.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g63.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g51.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g66.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g54.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g69.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g57.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g72.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g60.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g75.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g63.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g78.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g66.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g81.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g69.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g84.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g72.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g87.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g75.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g90.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g78.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g93.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g81.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g96.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g84.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g99.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g87.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g02.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g90.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g05.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g93.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g08.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g96.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g100.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g99.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g103.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure></div>
+      </div>
+    </div>
+    <div class="glimpse__row glimpse__row--c">
+      <div class="glimpse__track">
+        <div class="glimpse__set"><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g03.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g107.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g06.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g13.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g09.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g16.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g101.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g19.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g104.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g22.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g107.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g25.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g13.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g28.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g16.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g31.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g19.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g34.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g22.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g37.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g25.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g40.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g28.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g43.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g31.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g46.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g34.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g49.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g37.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g52.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g40.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g55.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g43.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g58.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g46.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g61.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g49.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g64.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g52.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g67.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g55.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g70.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g58.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g73.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g61.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g76.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g64.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g79.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g67.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g82.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g70.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g85.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g73.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g88.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g76.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g91.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g79.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g94.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g82.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g97.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g85.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g03.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g88.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g06.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g91.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g09.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g94.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g101.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g97.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g104.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure></div>
+        <div class="glimpse__set" aria-hidden="true"><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g03.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g107.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g06.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g13.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g09.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g16.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g101.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g19.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g104.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g22.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g107.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g25.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g13.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g28.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g16.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g31.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g19.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g34.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g22.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g37.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g25.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g40.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g28.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g43.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g31.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g46.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g34.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g49.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g37.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g52.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g40.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g55.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g43.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g58.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g46.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g61.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g49.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g64.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g52.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g67.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g55.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g70.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g58.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g73.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g61.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g76.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g64.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g79.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g67.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g82.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g70.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g85.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g73.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g88.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g76.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g91.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g79.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g94.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-13.71s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g82.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g97.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:0.00s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g85.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g03.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-2.29s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g88.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g06.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-4.57s"></figure><figure class="gt gt--w2"><img class="gt__a" src="assets/img/glimpses/g91.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g09.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-6.86s"></figure><figure class="gt gt--w1"><img class="gt__a" src="assets/img/glimpses/g94.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g101.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-9.14s"></figure><figure class="gt gt--w3"><img class="gt__a" src="assets/img/glimpses/g97.jpg" alt="" width="440" height="440" loading="lazy"><img class="gt__b" src="assets/img/glimpses/g104.jpg" alt="" width="440" height="440" loading="lazy" style="animation-delay:-11.43s"></figure></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="finalcta" data-ground="#150818">
+  <div class="finalcta__media">
+    <img src="assets/img/valley.jpg" alt="" loading="lazy">
+  </div>
+  <div class="wrap finalcta__inner rv">
+    <h2 class="serif h2" data-split>Unlock Your Potential <em>at CIRS.</em></h2>
+    <p class="lead">For nearly thirty years, CIRS has provided a nurturing environment where
+      boarders build lasting connections, uncover their passions, cultivate honourable character,
+      and carry Knowledge, Service and Efficiency beyond the Siruvani foothills.</p>
+    <div class="finalcta__cta">
+      <a class="btn btn--primary btn--lg" href="admissions.html" data-magnetic>Enquire</a>
+      <a class="btn btn--ghost btn--lg" href="admissions.html" data-magnetic>Visit</a>
+      <a class="btn btn--ghost btn--lg" href="admissions.html" data-magnetic>Apply</a>
+    </div>
+  </div>
+</section>
+<section class="uc">
+  <div class="wrap uc__inner">
+    <span class="uc__mark" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
+    </span>
+    <div>
+      <p class="uc__label">Under construction</p>
+      <p class="uc__text">This page is still being written. Photographs, names and figures marked
+        in brackets are placeholders awaiting the school, and more will be added here in the weeks
+        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
+    </div>
+  </div>
+</section>
+</main>
+<div class="footer-wrap">
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__utility">
+      <a href="alumni.html">Alumni</a>
+      <a href="news.html">News</a>
+      <a href="school-info.html#calendar">Calendar</a>
+      <a href="important-documents.html">Important Documents</a>
+    </div>
+    <div class="footer__main">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="" width="58" height="56">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address>
+          Siruvani Main Road<br>
+          Coimbatore 641 114, Tamil Nadu, India<br>
+          <a href="tel:+914222613300">+91 422 261 3300</a> &middot;
+          <a href="tel:+914222613303">261 3303</a><br>
+          <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+        </address>
+      </div>
+
+      <div>
+        <h4 class="sc">About</h4>
+        <ul>
+          <li><a href="why-cirs.html">Why CIRS</a></li>
+          <li><a href="school-history.html">School History</a></li>
+          <li><a href="leadership.html#people">Our People</a></li>
+          <li><a href="student-life.html#campus">Our Campus</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="sc" id="fnav-school">School</p>
+        <ul aria-labelledby="fnav-school">
+          <li><a href="why-cirs.html#junior">Junior School</a></li>
+          <li><a href="why-cirs.html#senior">Senior School</a></li>
+          <li><a href="sports.html#athletics">Athletics</a></li>
+          <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="sc" id="fnav-academics">Academics</p>
+        <ul aria-labelledby="fnav-academics">
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum.html#cbse">CBSE</a></li>
+          <li><a href="curriculum.html#ib">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="sc" id="fnav-admissions">Admissions</p>
+        <ul aria-labelledby="fnav-admissions">
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#examination">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; 1996&ndash;2026 Chinmaya International Residential School</span>
+      <span>J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</span>
+      <span>An undertaking of the Central Chinmaya Mission Trust</span>
+    </div>
+  </div>
+</footer>
+</div>
+<!-- The motion layer, served from this site rather than from a CDN. See
+     assets/vendor/README.md for the versions and where they came from.
+     defer keeps them in document order, so GSAP is defined before
+     ScrollTrigger looks for it. -->
+<script src="temp-home-intro/intro.js" defer></script>
+<script src="assets/vendor/gsap.min.js?b=46" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=46" defer></script>
+<script src="assets/vendor/lenis.min.js?b=46" defer></script>
+<script src="temp-home-intro/cirs-preview.js" defer></script>
+<script src="assets/js/pages.js?b=46" defer></script>
+</body>
+</html>
