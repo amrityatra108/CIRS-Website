@@ -63,7 +63,8 @@
     "mahasamadhi-1993":{align:"right",viewportY:.44,maxWidth:820,offsetX:90,offsetY:-315},
     "education-transformation":{align:"center",viewportY:.50,maxWidth:960,offsetX:90,offsetY:-315}
   };
-  const state={active:-1,lastProgress:0,routeLength:0,stopLengths:[],frames:[],wheelRadius:1,safeTop:96,trigger:null};
+  const playhead={progress:0};
+  const state={active:-1,lastProgress:0,routeLength:0,stopLengths:[],frames:[],wheelRadius:1,safeTop:96,trigger:null,scrubTween:null};
 
   function labelFor(stop,index){
     const heading=stop.querySelector("h2,h3");
@@ -300,14 +301,20 @@
     });
     setActive(0);
     render(0);
+    state.scrubTween=gsap.to(playhead,{
+      progress:1,duration:1,ease:"none",paused:true,
+      onUpdate:()=>render(playhead.progress)
+    });
     state.trigger=ScrollTrigger.create({
-      id:"founder-world",trigger:root,start:"top top",end:"bottom bottom",scrub:true,
+      id:"founder-world",trigger:root,start:"top top",end:"bottom bottom",
+      animation:state.scrubTween,scrub:.65,
       invalidateOnRefresh:true,
       onEnter:()=>document.body.classList.add("founder-journey-active"),
       onEnterBack:()=>document.body.classList.add("founder-journey-active"),
       onLeave:()=>{document.body.classList.remove("founder-journey-active");root.classList.remove("is-camera-moving");},
       onLeaveBack:()=>{document.body.classList.remove("founder-journey-active");root.classList.remove("is-camera-moving");},
-      onUpdate:self=>{root.classList.add("is-camera-moving");render(self.progress);},
+      onUpdate:()=>root.classList.add("is-camera-moving"),
+      onScrubComplete:()=>root.classList.remove("is-camera-moving"),
       onRefresh:()=>{
         state.wheelRadius=Math.max(1,wheels[0].getBoundingClientRect().width/2);
         measureCompositions();
@@ -333,5 +340,6 @@
     clearTimeout(resizeTimer);
     removeEventListener("resize",onResize);
     if(state.trigger) state.trigger.kill();
+    if(state.scrubTween) state.scrubTween.kill();
   },{once:true});
 })();

@@ -36,7 +36,7 @@ import blogposts
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=61"
+CACHE_BUST = "b=62"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -166,6 +166,8 @@ PAGES = {
         "title": "Why CIRS",
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
                        "Schools that carry it.",
+        "sheet": "why-cirs",
+        "cache_suffix": "-why-cirs-6",
         # No banner. The page used to open on a purple plate carrying "Why
         # CIRS." and a line about a community of knowledge, with the first
         # photograph below it. The photograph is the better opening, so it
@@ -1159,11 +1161,19 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
     if slug == "founder":
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
+    if slug == "why-cirs":
+        parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
 
-    return to_depth(rewrite_links("\n".join(parts), slug), slug)
+    html = to_depth(rewrite_links("\n".join(parts), slug), slug)
+    # A page with newly page-scoped assets can invalidate its own shared and
+    # local files without rewriting every generated page in the repository.
+    cache_suffix = page.get("cache_suffix", "")
+    if cache_suffix:
+        html = html.replace(f"?{CACHE_BUST}", f"?{CACHE_BUST}{cache_suffix}")
+    return html
 
 
 # Every published article is a page. They are added here rather than written
