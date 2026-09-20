@@ -235,33 +235,47 @@
     // entrance that cannot run.
     if (document.visibilityState === "hidden") { heroParallax(); return; }
 
+    // Prepare the entrance only while the opening curtain covers the hero.
+    // Without a curtain the content is already visible and must stay visible.
+    if (!$("#curtain")) { heroParallax(); return; }
+
     var h1 = $(".hero h1");
     var lines = h1 ? splitLines(h1) : null;
     var rest = [$(".hero .marker"), $(".hero__scroll")].filter(Boolean);
 
-    var tl = gsap.timeline();
+    var tl = gsap.timeline({ paused: true });
     if (lines) {
       gsap.set(lines, { yPercent: 112 });
       tl.to(lines, { yPercent: 0, duration: 1.15, ease: "expo.out", stagger: .09 });
     }
-    tl.from(rest, { opacity: 0, y: 22, duration: .9, ease: "power3.out", stagger: .1 }, lines ? "-=.75" : 0);
+    gsap.set(rest, { opacity: 0, y: 22 });
+    tl.to(rest, { opacity: 1, y: 0, duration: .9, ease: "power3.out", stagger: .1 }, lines ? "-=.75" : 0);
 
     heroParallax();
+    return tl;
   }
 
   function heroParallax() {
-    var hero = $(".hero"), img = $(".hero__media img, .hero__media video");
-    if (!hero || !img || !hasST || !animate) return;
+    var hero = $(".hero"), media = $(".hero__media");
+    if (!hero || !media || !hasST || !animate) return;
 
-    // The media is sized exactly to the hero, so scaling from the centre is
-    // the only thing that covers the drift: it gains (scale-1)/2 of its
-    // height as overhang on each edge, and the drift may not exceed that.
+    // Transform the media wrapper rather than the actively decoding video.
+    // This keeps the same crop and movement without rebuilding the video's
+    // composited layer on each scroll update.
+    //
+    // The wrapper is sized exactly to the hero, so scaling from the centre is
+    // what covers the drift: it gains (scale-1)/2 of its height as overhang,
+    // and the drift may not exceed that.
     // This ended at scale 1 while still pushed 6% down, which left 6% of the
     // hero's own ground showing above the video as a black band on the way
     // back up. Both ends now keep more overhang than the drift spends.
-    gsap.fromTo(img, { scale: 1.20, yPercent: -4 }, {
+    gsap.fromTo(media, { scale: 1.20, yPercent: -4 }, {
       scale: 1.12, yPercent: 4, ease: "none",
-      scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: .6 }
+      // Lenis already smooths the document scroll. A timed scrub here made the
+      // full-screen media continue catching up after input, including after
+      // the hero left the viewport. Direct scrubbing stops that offscreen work
+      // and follows the restored scroll position immediately on Back.
+      scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true }
     });
   }
 
@@ -1107,7 +1121,10 @@
      anything inside the viewport that is still hidden is shown.
      ========================================================== */
   function startSweep() {
-    var targets = $$(".rv, .img-reveal, .facilities > div, .line-mask > span, .fig-mask > span");
+    // The hero belongs to the opening timeline, not a scroll reveal. Its
+    // prepared lines must remain hidden until that timeline plays.
+    var targets = $$(".rv, .img-reveal, .facilities > div, .line-mask > span, .fig-mask > span")
+      .filter(function (el) { return !el.closest(".hero"); });
     if (!targets.length) return;
     var queued = false, unsub = null;
 
@@ -1520,7 +1537,10 @@
     ticker();
     mottoDrift();
 
-    playIntro(heroIn);
+    // Set the hero's initial state before the curtain starts uncovering it,
+    // then play the prepared timeline without hiding visible content again.
+    var heroEntrance = heroIn();
+    playIntro(function () { if (heroEntrance) heroEntrance.play(); });
     startSweep();
 
     // Late-loading images change every trigger position below them.
