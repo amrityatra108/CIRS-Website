@@ -20,11 +20,12 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=46">
-<link rel="stylesheet" href="assets/css/cirs.css?b=46">
-<link rel="stylesheet" href="assets/css/pages.css?b=46">
-<link rel="stylesheet" href="assets/css/founder.css?b=46">
-<link rel="stylesheet" href="assets/css/typography.css?b=46">
+<link rel="stylesheet" href="assets/css/fonts.css?b=62">
+<link rel="stylesheet" href="assets/css/cirs.css?b=62">
+<link rel="stylesheet" href="assets/css/pages.css?b=62">
+<link rel="stylesheet" href="assets/css/founder.css?b=62">
+<link rel="stylesheet" href="assets/css/typography.css?b=62">
+<link rel="stylesheet" href="assets/css/founder-journey.css?b=62">
 </head>
 
 <body class="founder">
@@ -66,7 +67,7 @@
            It stays a button so the keyboard and screen readers get a control
            that announces its expanded state; hover opens it for a mouse. -->
       <div class="enq" id="enq">
-        <button type="button" class="htab enq__btn" id="enqBtn"
+        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic
                 aria-expanded="false" aria-controls="enqPanel">
           <span class="htab__icon" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -107,7 +108,7 @@
           </div>
         </div>
       </div>
-      <a class="htab" href="index.html">
+      <a class="htab" href="index.html" data-magnetic>
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -124,13 +125,13 @@
     </a>
 
     <div class="header__right">
-      <a class="htab htab--news" href="news.html">
+      <a class="htab htab--news" href="news.html" data-magnetic>
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
         </span>
         <span class="htab__label">News</span>
       </a>
-      <button type="button" class="htab htab--menu" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <button type="button" class="htab htab--menu" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu" data-magnetic>
         <span class="htab__icon" aria-hidden="true">
           <span class="menubtn__dots"><i></i><i></i><i></i><i></i></span>
         </span>
@@ -211,10 +212,10 @@
      ============================================================ -->
 <section class="fhero" id="top">
   <div class="fhero__ghost" aria-hidden="true">
-    <span>Chin</span><span>maya</span><span>nanda</span>
+    <span>Gu</span><span>ru</span><span>dev</span>
   </div>
 
-  <figure class="ffig fhero__plate"><img src="assets/img/founder/gurudev-hero.jpg?b=46" alt="Pujya Gurudev Swami Chinmayananda seated before the Himalaya at Sidhbari, one hand raised mid-sentence" loading="lazy" decoding="async"></figure>
+  <figure class="ffig fhero__plate"><img src="assets/img/founder/gurudev-hero.jpg?b=62" alt="Pujya Gurudev Swami Chinmayananda seated before the Himalaya at Sidhbari, one hand raised mid-sentence" loading="lazy" decoding="async"></figure>
 
   <div class="wrap fhero__inner">
     <p class="fmeta">Founder <i>·</i> Visionary <i>·</i> Teacher</p>
@@ -227,7 +228,6 @@
       <span>Siruvani &middot; Coimbatore</span></p>
   </div>
 
-  <span class="fhero__cue" aria-hidden="true">Scroll</span>
 </section>
 
 <!-- ---------- 2. The man behind the vision ------------------- -->
@@ -250,7 +250,7 @@
     </div>
 
     <div class="fintro__plate">
-      <figure class="ffig"><img src="assets/img/founder/gurudev-portrait.jpg?b=46" alt="Pujya Gurudev Swami Chinmayananda in close view, speaking, his raised hand holding a gesture" loading="lazy" decoding="async"></figure>
+      <figure class="ffig"><img src="assets/img/founder/gurudev-portrait.jpg?b=62" alt="Pujya Gurudev Swami Chinmayananda in close view, speaking, his raised hand holding a gesture" loading="lazy" decoding="async"></figure>
       <p class="fcaption">From the school&rsquo;s archive.</p>
     </div>
   </div>
@@ -267,24 +267,45 @@
 </section>
 
 <!-- ---------- 3. The life ------------------------------------ -->
+<section class="founders-journey" data-founder-journey aria-label="A chronological journey through the founder's life">
+  <div class="founders-journey__camera">
+    <div class="founders-journey__backgrounds" aria-hidden="true">
+      <i data-founder-background="ivory"></i>
+      <i data-founder-background="charcoal"></i>
+      <i data-founder-background="sage"></i>
+    </div>
+    <div class="founders-journey__world" data-founder-world>
+      <svg class="founders-journey__route" data-founder-route aria-hidden="true">
+        <path class="route-base" data-founder-route-base></path>
+        <path class="route-progress" data-founder-route-progress></path>
+        <g data-founder-route-points></g>
+      </svg>
+
+      <div class="founders-journey__opening" data-founder-opening aria-hidden="true">
+        <p>CIRS begins</p>
+        <strong>1996</strong>
+        <span class="founders-journey__school">Chinmaya International Residential School</span>
+        <span class="founders-journey__transition">The story behind that beginning starts earlier.</span>
+      </div>
+
 <section class="fsec flife" id="life">
   <div class="wrap">
-    <div class="fsec__head rv">
+    <div class="fsec__head rv founder-stop" data-route-stop data-route-id="life-intro" data-route-x="760" data-route-y="900" data-route-period="The life">
       <p class="fmeta">The life</p>
       <h2 class="fdisplay">A Journey of<br><em>Transformation.</em></h2>
     </div>
   </div>
 
   <ol class="flife__list wrap">
-    <li class="flife__item rv">
+    <li class="flife__item rv founder-stop" data-route-stop data-route-id="ernakulam-1916" data-route-x="760" data-route-y="1200" data-route-period="1916">
       <span class="flife__yr">1916</span>
       <div class="flife__body">
         <h3 class="flife__h">Ernakulam</h3>
         <p class="fcopy">Born Balakrishna Menon, in Kerala.</p>
       </div>
-      <figure class="ffig flife__shot ffig--gap" role="img" aria-label="Balakrishna Menon before sannyasa — 1930s or 1940s"><span class="ffig__mark">Photograph wanted</span><span class="ffig__what">Balakrishna Menon before sannyasa — 1930s or 1940s</span></figure>
+      <figure class="ffig flife__shot ffig--gap" role="img" aria-label="Balakrishna Menon before sannyasa — 1930s or 1940s"><span class="ffig__mark">Archive image pending</span><span class="ffig__what">Balakrishna Menon before sannyasa — 1930s or 1940s</span></figure>
     </li>
-    <li class="flife__item rv">
+    <li class="flife__item rv founder-stop" data-route-stop data-route-id="freedom-movement" data-route-x="2000" data-route-y="1200" data-route-period="1940s">
       <span class="flife__yr">1940s</span>
       <div class="flife__body">
         <h3 class="flife__h">The Freedom Movement</h3>
@@ -294,7 +315,7 @@
           country to be asking what would hold it together once it was free.</p>
       </div>
     </li>
-    <li class="flife__item rv">
+    <li class="flife__item rv founder-stop" data-route-stop data-route-id="rishikesh-1947" data-route-x="3300" data-route-y="1000" data-route-period="1947">
       <span class="flife__yr">1947</span>
       <div class="flife__body">
         <h3 class="flife__h">Rishikesh</h3>
@@ -303,7 +324,7 @@
           student.</p>
       </div>
     </li>
-    <li class="flife__item rv">
+    <li class="flife__item rv founder-stop" data-route-stop data-route-id="sannyasa-1949" data-route-x="4500" data-route-y="1000" data-route-period="1949">
       <span class="flife__yr">1949</span>
       <div class="flife__body">
         <h3 class="flife__h">Sannyasa</h3>
@@ -311,16 +332,16 @@
           Swami Chinmayananda.</p>
       </div>
     </li>
-    <li class="flife__item rv">
+    <li class="flife__item rv founder-stop" data-route-stop data-route-id="uttarkashi-1949" data-route-x="5800" data-route-y="1200" data-route-period="1949">
       <span class="flife__yr">1949</span>
       <div class="flife__body">
         <h3 class="flife__h">Uttarkashi</h3>
         <p class="fcopy">He was sent up to Swami Tapovan Maharaj for deeper scriptural study,
           working through the Upanishads and moving with the seasons to Gangotri.</p>
       </div>
-      <figure class="ffig flife__shot ffig--gap" role="img" aria-label="The Uttarkashi years, under Swami Tapovan Maharaj"><span class="ffig__mark">Photograph wanted</span><span class="ffig__what">The Uttarkashi years, under Swami Tapovan Maharaj</span></figure>
+      <figure class="ffig flife__shot ffig--gap" role="img" aria-label="The Uttarkashi years, under Swami Tapovan Maharaj"><span class="ffig__mark">Archive image pending</span><span class="ffig__what">The Uttarkashi years, under Swami Tapovan Maharaj</span></figure>
     </li>
-    <li class="flife__item rv">
+    <li class="flife__item rv founder-stop" data-route-stop data-route-id="first-yajna-1951" data-route-x="7000" data-route-y="1200" data-route-period="1951">
       <span class="flife__yr">1951</span>
       <div class="flife__body">
         <h3 class="flife__h">The First Jnana Yajna</h3>
@@ -328,9 +349,9 @@
           Pune, he held the first of the lecture series he called yajnas &mdash; Vedanta taught in
           English, in the open, to whoever came.</p>
       </div>
-      <figure class="ffig flife__shot ffig--gap" role="img" aria-label="An early Jnana Yajna — the 1950s or 1960s"><span class="ffig__mark">Photograph wanted</span><span class="ffig__what">An early Jnana Yajna — the 1950s or 1960s</span></figure>
+      <figure class="ffig flife__shot ffig--gap" role="img" aria-label="An early Jnana Yajna — the 1950s or 1960s"><span class="ffig__mark">Archive image pending</span><span class="ffig__what">An early Jnana Yajna — the 1950s or 1960s</span></figure>
     </li>
-    <li class="flife__item rv">
+    <li class="flife__item rv founder-stop" data-route-stop data-route-id="chinmaya-mission-1953" data-route-x="8300" data-route-y="1000" data-route-period="1953">
       <span class="flife__yr">1953</span>
       <div class="flife__body">
         <h3 class="flife__h">Chinmaya Mission</h3>
@@ -339,8 +360,8 @@
           listening, not by him.</p>
       </div>
     </li>
-    <li class="flife__item rv">
-      <span class="flife__yr">Forty years</span>
+    <li class="flife__item rv founder-stop" data-route-stop data-route-id="forty-years" data-route-x="10500" data-route-y="1000" data-route-period="40 years">
+      <span class="flife__yr">40 years</span>
       <div class="flife__body">
         <h3 class="flife__h">More Than Five Hundred Yajnas</h3>
         <p class="fcopy">The teaching did not stop. Across four decades he conducted over five
@@ -348,7 +369,7 @@
           hospitals and the residential Vedanta academies at Sandeepany.</p>
       </div>
     </li>
-    <li class="flife__item rv">
+    <li class="flife__item rv founder-stop" data-route-stop data-route-id="mahasamadhi-1993" data-route-x="10500" data-route-y="1300" data-route-period="1993">
       <span class="flife__yr">1993</span>
       <div class="flife__body">
         <h3 class="flife__h">San Diego, and Sidhbari</h3>
@@ -358,6 +379,57 @@
       </div>
     </li>
   </ol>
+</section>
+
+<!-- ---------- 5. Education as transformation ----------------- -->
+<section class="fsec feduc" id="education">
+  <div class="wrap feduc__open founder-stop" data-route-stop data-route-id="education-transformation" data-route-period="The educational idea" data-route-title="Education as Transformation">
+    <div class="feduc__plate">
+      <figure class="ffig"><img src="assets/img/founder/gurudev-enquiry.jpg?b=62" alt="Pujya Gurudev Swami Chinmayananda holding a laboratory flask up to the light, examining it" loading="lazy" decoding="async"></figure>
+      <p class="fcaption">A Vedanta teacher, holding a flask up to the light.
+        From the school&rsquo;s archive.</p>
+    </div>
+    <div class="fsec__head rv">
+      <p class="fmeta">The educational idea</p>
+      <h2 class="fdisplay">Education as<br><em>Transformation.</em></h2>
+      <p class="fcopy fcopy--lead">Information can be handed over. A person cannot. The claim
+        underneath every Chinmaya school is that education is only finished when the student has
+        changed, and that this asks for the whole of them at once.</p>
+      <p class="fcopy">He saw no quarrel between the laboratory and the Upanishad. Both begin by
+        holding a thing up to the light and asking what it actually is.</p>
+    </div>
+  </div>
+</section>
+
+    </div>
+
+    <div class="founders-vehicle" data-founder-vehicle aria-hidden="true">
+      <span class="founders-vehicle__shadow"></span>
+      <img class="founders-vehicle__fallback" src="assets/img/founder/amrit-vahini/side.png" width="1774" height="887" alt="">
+      <div class="founders-vehicle__view founders-vehicle__view--side" data-vehicle-view="side">
+        <img class="founders-vehicle__wheel founders-vehicle__wheel--rear" data-vehicle-wheel src="assets/img/founder/amrit-vahini/wheel-complete.png" width="1254" height="1254" alt="">
+        <img class="founders-vehicle__wheel founders-vehicle__wheel--front" data-vehicle-wheel src="assets/img/founder/amrit-vahini/wheel-complete.png" width="1254" height="1254" alt="">
+        <img class="founders-vehicle__body" src="assets/img/founder/amrit-vahini/body-no-wheels.png" width="1774" height="887" alt="">
+      </div>
+    </div>
+    <!-- Retained source views from the supplied Vahini set. They are inert: the
+         revised journey uses only the connected side assembly. -->
+    <template aria-hidden="true">
+      <img src="assets/img/founder/amrit-vahini/front-three-quarter.png" alt="">
+      <img src="assets/img/founder/amrit-vahini/overhead-turn.png" alt="">
+      <img src="assets/img/founder/amrit-vahini/rear-three-quarter.png" alt="">
+    </template>
+
+    <nav class="founders-journey__hud" aria-label="Founder journey progress">
+      <div>
+        <p class="founders-journey__label">Founder journey</p>
+        <p class="founders-journey__period"><span data-founder-period>The life</span><span aria-hidden="true"> · </span><span data-founder-title>A Journey of Transformation</span></p>
+      </div>
+      <div class="founders-journey__meter" aria-hidden="true"><i data-founder-meter></i></div>
+      <p class="founders-journey__count" aria-live="polite"><span data-founder-count>01</span> / <span data-founder-total>11</span></p>
+      <ol class="founders-journey__waypoints" data-founder-waypoints></ol>
+    </nav>
+  </div>
 </section>
 
 <!-- ---------- 4. A vision beyond the classroom --------------- -->
@@ -386,24 +458,7 @@
   </ul>
 </section>
 
-<!-- ---------- 5. Education as transformation ----------------- -->
-<section class="fsec feduc" id="education">
-  <div class="wrap feduc__open">
-    <div class="feduc__plate">
-      <figure class="ffig"><img src="assets/img/founder/gurudev-enquiry.jpg?b=46" alt="Pujya Gurudev Swami Chinmayananda holding a laboratory flask up to the light, examining it" loading="lazy" decoding="async"></figure>
-      <p class="fcaption">A Vedanta teacher, holding a flask up to the light.
-        From the school&rsquo;s archive.</p>
-    </div>
-    <div class="fsec__head rv">
-      <p class="fmeta">The educational idea</p>
-      <h2 class="fdisplay">Education as<br><em>Transformation.</em></h2>
-      <p class="fcopy fcopy--lead">Information can be handed over. A person cannot. The claim
-        underneath every Chinmaya school is that education is only finished when the student has
-        changed, and that this asks for the whole of them at once.</p>
-      <p class="fcopy">He saw no quarrel between the laboratory and the Upanishad. Both begin by
-        holding a thing up to the light and asking what it actually is.</p>
-    </div>
-  </div>
+<section class="fsec feduc feduc--continuation" aria-label="The whole student">
   <div class="wrap">
     <div class="feduc__four">
       <article class="feduc__one rv">
@@ -457,7 +512,7 @@
         history &rarr;</a></p>
     </div>
     <div class="fcampus__plate">
-      <figure class="ffig"><img src="assets/img/assembly-front.jpg?b=46" alt="The school assembled in front of the main building at CIRS" loading="lazy" decoding="async"></figure>
+      <figure class="ffig"><img src="assets/img/assembly-front.jpg?b=62" alt="The school assembled in front of the main building at CIRS" loading="lazy" decoding="async"></figure>
       <p class="fcaption">A hundred acres in the Siruvani foothills.</p>
     </div>
   </div>
@@ -524,7 +579,7 @@
 <section class="fsec fstudent" id="student">
   <div class="wrap fstudent__grid">
     <div class="fstudent__plate">
-      <figure class="ffig"><img src="assets/img/students.jpg?b=46" alt="CIRS students standing together at a school gathering" loading="lazy" decoding="async"></figure>
+      <figure class="ffig"><img src="assets/img/students.jpg?b=62" alt="CIRS students standing together at a school gathering" loading="lazy" decoding="async"></figure>
     </div>
     <div class="fstudent__text">
       <p class="fmeta rv">The purpose</p>
@@ -544,7 +599,7 @@
 
 <!-- ---------- 10. The vision lives on ------------------------ -->
 <section class="fsec fclose" id="continues">
-  <figure class="ffig fclose__plate"><img src="assets/img/founder/gurudev-himalaya.jpg?b=46" alt="Pujya Gurudev Swami Chinmayananda seated beneath the Himalayan range" loading="lazy" decoding="async"></figure>
+  <figure class="ffig fclose__plate"><img src="assets/img/founder/gurudev-himalaya.jpg?b=62" alt="Pujya Gurudev Swami Chinmayananda seated beneath the Himalayan range" loading="lazy" decoding="async"></figure>
   <div class="wrap fclose__inner">
     <p class="fmeta rv">Still continuing</p>
     <h2 class="fclose__head rv">The Vision<br><em>Lives On.</em></h2>
@@ -649,10 +704,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=46" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=46" defer></script>
-<script src="assets/vendor/lenis.min.js?b=46" defer></script>
-<script src="assets/js/cirs.js?b=46" defer></script>
-<script src="assets/js/pages.js?b=46" defer></script>
+<script src="assets/vendor/gsap.min.js?b=62" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=62" defer></script>
+<script src="assets/vendor/lenis.min.js?b=62" defer></script>
+<script src="assets/js/cirs.js?b=62" defer></script>
+<script src="assets/js/pages.js?b=62" defer></script>
+<script src="assets/js/founder-journey.js?b=62" defer></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
   --cr-warm:#f7f0e6;
   --crossroads-intro-x:50%;
   --crossroads-intro-y:42%;
-  --crossroads-intro-radius:clamp(260px,40vw,620px);
+  --crossroads-intro-radius:clamp(190px,26vw,390px);
   --crossroads-intro-exit:0;
   position:relative;
   isolation:isolate;
@@ -23,7 +23,7 @@
 .crossroads-intro__base,.crossroads-intro__reveal { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
 .crossroads-intro__base {
   z-index:10;
-  background:radial-gradient(ellipse at 50% 43%,rgba(130,51,151,.22),rgba(51,7,64,.08) 45%,transparent 70%),linear-gradient(90deg,rgba(8,1,11,.48),transparent 22%,transparent 78%,rgba(8,1,11,.48)),linear-gradient(rgba(22,3,28,.66),rgba(9,2,12,.78)),url("../img/crossroads/intro-text-free.webp") center/cover no-repeat,var(--cr-purple-deep);
+  background:radial-gradient(ellipse at 50% 43%,rgba(130,51,151,.22),rgba(51,7,64,.08) 45%,transparent 70%),linear-gradient(90deg,rgba(8,1,11,.48),transparent 22%,transparent 78%,rgba(8,1,11,.48)),var(--cr-purple-deep);
 }
 .crossroads-intro__base::after {
   content:"";
@@ -46,9 +46,9 @@
   -webkit-mask-image:radial-gradient(circle var(--crossroads-intro-radius) at var(--crossroads-intro-x) var(--crossroads-intro-y),#000 0%,#000 30%,transparent 100%);
   mask-image:radial-gradient(circle var(--crossroads-intro-radius) at var(--crossroads-intro-x) var(--crossroads-intro-y),#000 0%,#000 30%,transparent 100%);
 }
-.crossroads-intro[data-crossroads-intro-lit] .crossroads-intro__reveal { opacity:.48; }
+.crossroads-intro[data-crossroads-intro-lit] .crossroads-intro__reveal { opacity:calc(.48 * (1 - var(--crossroads-intro-exit))); }
 .crossroads-intro::before { content:""; position:absolute; inset:0 0 auto; height:138px; z-index:30; background:linear-gradient(rgba(9,2,12,.88),rgba(9,2,12,.5) 52%,transparent); pointer-events:none; }
-.crossroads-intro::after { content:""; position:absolute; inset:58% 0 0; z-index:30; background:linear-gradient(transparent,rgba(14,11,18,.34)); opacity:var(--crossroads-intro-exit); pointer-events:none; }
+.crossroads-intro::after { content:""; position:absolute; inset:52% 0 0; z-index:30; background:linear-gradient(transparent,#0e0b12); opacity:var(--crossroads-intro-exit); pointer-events:none; }
 .crossroads-intro__content {
   position:absolute;
   inset:92px clamp(20px,4vw,64px) 24px;

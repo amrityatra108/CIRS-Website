@@ -36,6 +36,17 @@ body.founder .header:not(.is-stuck) .brand__sub,
 body.founder .header:not(.is-stuck) .htab{ color:var(--f-soft); }
 body.founder .header:not(.is-stuck) .htab svg{ stroke:var(--f-soft); }
 body.founder .header:not(.is-stuck) .burger i{ background:var(--f-ink); }
+body.founder:not(.menu-open) .header:not(.is-stuck) .wrap{
+  background:#fff;
+  border-color:rgba(57,42,72,.12);
+  box-shadow:0 12px 36px rgba(21,8,24,.08),inset 0 1px 0 rgba(255,255,255,.9);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+}
+body.founder:not(.menu-open) .header:not(.is-stuck) .htab{
+  background:rgba(57,42,72,.025);
+  border-color:rgba(57,42,72,.1);
+}
 
 /* Paper, not a flat fill: a trace of grain so large areas of empty
    ground read as a surface. Cheap — one repeating SVG, no image. */
@@ -127,14 +138,13 @@ body.founder main{ position:relative; z-index:1; }
   position:absolute; inset:0; z-index:0; pointer-events:none;
   display:flex; flex-direction:column; justify-content:center;
   font-family:var(--font-primary); font-weight:400;
-  font-size:clamp(5.5rem,23vw,20rem); line-height:.80;
+  font-size:clamp(7rem,20vw,18rem); line-height:.78;
   letter-spacing:-.045em; color:var(--f-ghost);
   text-transform:none; white-space:nowrap;
-  padding-left:clamp(8px,2vw,40px);
+  padding-left:clamp(0px,1vw,16px);
 }
 .fhero__ghost span{ display:block; }
-.fhero__ghost span:nth-child(2){ padding-left:.32em; }
-.fhero__ghost span:nth-child(3){ padding-left:.08em; }
+.fhero__ghost span:nth-child(2){ padding-left:.025em; }
 
 /* The photograph sits over the letters, and its top is dissolved
    into the paper so the letters read through the sky while his
@@ -142,8 +152,8 @@ body.founder main{ position:relative; z-index:1; }
    not in a cut-out. */
 .fhero__plate{
   position:absolute; z-index:1; pointer-events:none;
-  right:clamp(-30px,-2vw,0px); bottom:0;
-  width:clamp(300px,38vw,620px);
+  left:auto; right:clamp(-30px,-2vw,0px); bottom:0;
+  width:clamp(360px,48vw,760px);
   /* Two masks intersected, not one. The vertical fade dissolves the sky so
      the letters read through it; the horizontal fade kills the frame's left
      edge, which otherwise draws a hard rule straight down through MAYA and
@@ -160,14 +170,18 @@ body.founder main{ position:relative; z-index:1; }
 .fhero__inner{
   position:relative; z-index:2;
   padding-bottom:clamp(var(--space-6),5vh,var(--space-8));
-  /* Held clear of the photograph rather than centred in the page: the
-     reading matter and the picture must not overlap at any width. */
-  max-width:min(44ch,46vw); margin-right:auto;
+  /* The reading matter sits to the left and just enters the photograph's
+     dissolved edge, restoring the original editorial overlap without
+     allowing the portrait to obscure the words. */
+  width:min(760px,48vw); max-width:none;
+  margin-left:clamp(56px,9vw,150px); margin-right:auto;
 }
-@media (min-width:1500px){ .fhero__inner{ max-width:min(46ch,42vw); } }
+@media (min-width:1100px){
+  .fhero__inner{ margin-left:clamp(220px,22vw,345px); }
+}
 .fhero__name{
   font-family:var(--font-primary); font-weight:400;
-  font-size:clamp(2.2rem,4.6vw,3.9rem); line-height:1.02;
+  font-size:clamp(2.2rem,4.2vw,3.65rem); line-height:1.02;
   letter-spacing:-.02em; color:var(--f-ink); margin:0;
 }
 .fhero__dates{
@@ -186,13 +200,6 @@ body.founder main{ position:relative; z-index:1; }
   margin:var(--space-7) 0 0; line-height:1.7;
 }
 .fhero__sig span{ color:var(--f-mute); }
-.fhero__cue{
-  position:absolute; z-index:2; left:var(--gut);
-  bottom:clamp(14px,2.4vh,26px);
-  font-family:var(--font-primary); text-transform:none;
-  letter-spacing:.06em; font-size:.62rem; color:var(--f-mute);
-}
-
 /* ============================================================
    2. The man behind the vision
    ============================================================ */
@@ -256,10 +263,10 @@ body.founder main{ position:relative; z-index:1; }
   font-family:var(--font-primary); font-weight:400; text-transform:none;
   font-size:clamp(2.2rem,9.5vw,7.5rem); line-height:1.02;
   letter-spacing:-.03em; color:var(--f-ink);
-  border-top:1px solid var(--f-rule); padding-top:.1em;
+  border:0; padding-top:.1em;
 }
 .fwords li:nth-child(even){ color:var(--f-sage); }
-.fwords li:last-child{ border-bottom:1px solid var(--f-rule); padding-bottom:.1em; }
+.fwords li:last-child{ border:0; padding-bottom:.1em; }
 
 /* ------------------------------------------------------------
    The sweep
@@ -282,7 +289,7 @@ body.founder main{ position:relative; z-index:1; }
 .fwords__w{ position:relative; display:inline-block; max-width:100%; }
 .fwords__lit{
   position:absolute; inset:-.02em -.06em; padding:.02em .06em;
-  background:var(--f-ink); color:var(--f-paper);
+  background:var(--f-gold); color:var(--f-ink);
   /* Right inset walks from 100% to 0, so the plate opens rightwards. */
   clip-path:inset(0 calc(100% - var(--lit, 0) * 100%) 0 0);
   pointer-events:none;
@@ -360,42 +367,6 @@ body.founder main{ position:relative; z-index:1; }
 }
 
 /* ============================================================
-   8. The motto
-   ============================================================ */
-.fmotto{
-  background:var(--f-ink); color:var(--f-paper);
-  text-align:center;
-}
-.founder .fmotto .fmeta{ color:rgba(244,240,232,.62); }
-.fmotto__deva{
-  font-family:var(--deva); font-size:clamp(1.3rem,3vw,2.1rem);
-  line-height:1.7; color:var(--f-gold);
-  margin:var(--space-6) 0 0;
-}
-.fmotto__roman{
-  font-family:var(--font-primary); font-weight:400; text-transform:none;
-  font-size:clamp(2.4rem,9vw,7rem); line-height:.96;
-  letter-spacing:-.03em; color:var(--f-paper);
-  margin:var(--space-5) 0 var(--space-6);
-}
-.fmotto__gloss{
-  font-family:var(--font-primary); text-transform:none; letter-spacing:.06em;
-  font-size:clamp(.74rem,1.1vw,.88rem); color:var(--f-gold); margin:0;
-}
-.fmotto__verse{
-  margin:clamp(var(--space-7),5vw,var(--space-8)) auto 0; max-width:44ch;
-  border:0; padding:0;
-}
-.fmotto__verse p{
-  font-family:var(--deva); font-size:clamp(.94rem,1.5vw,1.14rem);
-  line-height:2; color:rgba(244,240,232,.66); margin:0;
-}
-.founder .fmotto__say{
-  margin:var(--space-7) auto 0; max-width:58ch;
-  color:rgba(244,240,232,.86); text-align:left;
-}
-
-/* ============================================================
    9. The student
    ============================================================ */
 .fstudent__grid{
@@ -411,7 +382,8 @@ body.founder main{ position:relative; z-index:1; }
   position:absolute; inset:0; z-index:0;
 }
 .fclose__plate img{
-  width:100%; height:100%; object-fit:cover; object-position:center 30%;
+  width:100%; height:100%; object-fit:cover; object-position:center 40%;
+  transform:translateY(-12%) scale(1.14); transform-origin:center top;
   opacity:.34;
   -webkit-mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.25) 78%, transparent 100%);
           mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.25) 78%, transparent 100%);
@@ -500,11 +472,12 @@ body.founder main{ position:relative; z-index:1; }
     padding-top:clamp(88px,15vh,130px); padding-bottom:0;
   }
   .fhero__ghost{
-    justify-content:flex-start; padding-top:10vh;
+    justify-content:flex-start; padding-top:10vh; padding-left:12px;
     font-size:clamp(4.4rem,21vw,9rem); opacity:.85;
   }
   .fhero__inner{
-    order:1; max-width:none;
+    order:1; width:100%; max-width:none;
+    margin-left:0; margin-right:0;
     padding-bottom:clamp(var(--space-6),4vh,var(--space-7));
   }
   .fhero__name{ font-size:clamp(2rem,9vw,2.9rem); }
@@ -513,7 +486,7 @@ body.founder main{ position:relative; z-index:1; }
   /* Out of the corner and into the flow, full width, its top edge dissolved
      so the letters above still run down into it. */
   .fhero__plate{
-    order:2; position:relative; inset:auto; right:auto;
+    order:2; position:relative; inset:auto; left:auto; right:auto;
     width:100%; margin-top:var(--space-4);
     /* The full 2:3 frame puts half a screen of sky under the text and his
        face below the fold. Cropped to 4:5 and weighted downward, he is the
@@ -523,6 +496,4 @@ body.founder main{ position:relative; z-index:1; }
             mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.45) 9%, #000 26%);
   }
   .fhero__plate img{ aspect-ratio:4/5; object-fit:cover; object-position:center 58%; }
-  .fhero__cue{ display:none; }
-  .fmotto__say{ text-align:left; }
 }

@@ -36,7 +36,7 @@ import blogposts
 import crossroads
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=46"
+CACHE_BUST = "b=62"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -131,6 +131,7 @@ PAGES = {
         "description": "A co-educational residential school on a hundred acres in the Siruvani "
                        "foothills — CBSE and the International Baccalaureate, Grades V to XII.",
         "banner": None,
+        "sheet": "home",
     },
     "news": {
         "nav": "News",
@@ -165,6 +166,8 @@ PAGES = {
         "title": "Why CIRS",
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
                        "Schools that carry it.",
+        "sheet": "why-cirs",
+        "cache_suffix": "-why-cirs-6",
         # No banner. The page used to open on a purple plate carrying "Why
         # CIRS." and a line about a community of knowledge, with the first
         # photograph below it. The photograph is the better opening, so it
@@ -682,7 +685,7 @@ def banner_html(page):
 </section>'''
 
 
-HOME_TAB = '''<a class="htab" href="index.html">
+HOME_TAB = '''<a class="htab" href="index.html" data-magnetic>
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -808,7 +811,7 @@ def founder_fig(slot, cls="", sizes=""):
     klass = f"ffig {cls}".strip()
     if src is None:
         return (f'<figure class="{klass} ffig--gap" role="img" aria-label="{label}">'
-                f'<span class="ffig__mark">Photograph wanted</span>'
+                f'<span class="ffig__mark">Archive image pending</span>'
                 f'<span class="ffig__what">{label}</span></figure>')
     extra = f' sizes="{sizes}"' if sizes else ""
     return (f'<figure class="{klass}"><img src="{src}?{CACHE_BUST}" alt="{alt}" '
@@ -1091,6 +1094,9 @@ def build(slug, page):
             '<noscript><style>.crossroads-intro-curtain{display:none}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}'
             '</style></noscript>\n</head>')
+    if slug == "founder":
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
@@ -1153,11 +1159,21 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
+    if slug == "founder":
+        parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
+    if slug == "why-cirs":
+        parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
 
-    return to_depth(rewrite_links("\n".join(parts), slug), slug)
+    html = to_depth(rewrite_links("\n".join(parts), slug), slug)
+    # A page with newly page-scoped assets can invalidate its own shared and
+    # local files without rewriting every generated page in the repository.
+    cache_suffix = page.get("cache_suffix", "")
+    if cache_suffix:
+        html = html.replace(f"?{CACHE_BUST}", f"?{CACHE_BUST}{cache_suffix}")
+    return html
 
 
 # Every published article is a page. They are added here rather than written
