@@ -153,6 +153,7 @@ PAGES = {
         "hero_extra": newsflash_html(),
     },
     "founder": {
+        "litehead": True,
         "barehead": True,
         "nav": "Founder",
         "title": "Our Founder — Pujya Gurudev Swami Chinmayananda",
