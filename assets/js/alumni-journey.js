@@ -593,8 +593,19 @@
       var dots = $$(".ajw__dot");
       var section = $(".aj-paths");
       var current = -1;
+      // How far the rail actually has to travel sideways.
       var distance = function () {
         return Math.max(0, rail.scrollWidth - window.innerWidth + 32);
+      };
+      /* And how much scrolling that travel is spread over. At 1 the rail
+         moves a pixel sideways for every pixel scrolled, which runs the
+         five scenes past far too briskly to read any of them. At 2.2 each
+         scene holds the screen for better than twice as long without the
+         rail moving any further than it did. This is the pacing dial for
+         the chapter; nothing else needs to change with it. */
+      var PACE = 2.2;
+      var travel = function () {
+        return Math.round(distance() * PACE + window.innerHeight * .5);
       };
 
       var railTween = gsap.to(rail, {
@@ -602,7 +613,7 @@
         ease: "none",
         scrollTrigger: {
           trigger: track, start: "top top",
-          end: function () { return "+=" + (distance() + window.innerHeight * .4); },
+          end: function () { return "+=" + travel(); },
           pin: true, scrub: .6, invalidateOnRefresh: true, anticipatePin: 1,
           onUpdate: function (self) {
             var i = Math.round(self.progress * (scenes.length - 1));
