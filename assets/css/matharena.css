@@ -109,18 +109,6 @@ body.matharena #main{ background: var(--ma-black); }
   padding-block: clamp(120px, 16vh, 190px) clamp(48px, 7vh, 90px);
 }
 
-.ma-kicker{ margin: 0 0 22px; }
-.ma-kicker .sc{
-  display: inline-block;
-  padding: 8px 16px;
-  border: 1px solid var(--ma-line);
-  border-radius: 999px;
-  font-size: 10.5px;
-  letter-spacing: .22em;
-  font-weight: 700;
-  color: var(--ma-gold-lit);
-}
-
 .ma-title{
   margin: 0;
   font-size: clamp(3rem, 11vw, 7.5rem);
