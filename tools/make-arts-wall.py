@@ -22,6 +22,8 @@ Two sources feed it:
     this page. They arrived small and there is no larger copy of them in this
     repository, so they are carried across as they are rather than upscaled
     into softness.
+  * assets/source/cultural-gallery/ — the small Drive renditions used only by
+    the moving tiles. The opened 1600px copies remain on the school's Drive.
 
 SPIC MACAY.jpg is a contact sheet of six photographs from the society's
 visiting-artist concerts, so it is cut back into the six. They are visiting
@@ -39,6 +41,7 @@ from PIL import Image, ImageEnhance, ImageOps
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "assets/source")
 ARCHIVE = os.path.join(ROOT, "assets/source/archive")
+CULTURAL = os.path.join(ROOT, "assets/source/cultural-gallery")
 OUT = os.path.join(ROOT, "assets/img/arts")
 
 FULL = 1600           # long edge of the copy a tile opens
@@ -91,6 +94,8 @@ CARRIED = [
     ("paint4", "paint4.jpg"),
     ("paint5", "paint5.jpg"),
 ]
+
+CULTURAL_TILES = [f"drive-{index:02d}" for index in range(1, 49)]
 
 
 def grade(im):
@@ -147,6 +152,8 @@ def main():
     if not os.path.exists(os.path.join(SRC, SHEET)):
         missing.append(SHEET)
     missing += [s for _, s in CARRIED if not os.path.exists(os.path.join(ARCHIVE, s))]
+    missing += [f"cultural-gallery/{name}.jpg" for name in CULTURAL_TILES
+                if not os.path.exists(os.path.join(CULTURAL, f"{name}.jpg"))]
     if missing:
         sys.exit("make-arts-wall: not found — " + ", ".join(missing))
 
@@ -171,9 +178,21 @@ def main():
         im = ImageOps.exif_transpose(Image.open(os.path.join(ARCHIVE, source))).convert("RGB")
         write(name, im, False, tally)
 
-    print(f"  {len(tally)} photographs -> assets/img/arts/  "
+    # These are already web-sized tile renditions. Their full copies stay on
+    # Drive and are only requested after a visitor opens one, so do not create
+    # unreferenced local "full" duplicates here.
+    cultural_tile_kb = 0
+    for name in CULTURAL_TILES:
+        source = os.path.join(CULTURAL, f"{name}.jpg")
+        target = os.path.join(OUT, "thumbs", f"{name}.jpg")
+        shutil.copyfile(source, target)
+        tile_kb = os.path.getsize(target) // 1024
+        cultural_tile_kb += tile_kb
+        print(f"  {name:<16} Drive full       tile {tile_kb:>3} KB")
+
+    print(f"  {len(tally) + len(CULTURAL_TILES)} photographs -> assets/img/arts/  "
           f"{sum(k for k, _ in tally)/1024:.1f} MB full, "
-          f"{sum(t for _, t in tally)} KB of tiles")
+          f"{sum(t for _, t in tally) + cultural_tile_kb} KB of tiles")
 
 
 if __name__ == "__main__":
