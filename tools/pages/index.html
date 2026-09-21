@@ -1,17 +1,53 @@
-<section class="hero" id="top" data-ground="#17130A">
-  <div class="hero__media">
-    <video class="hero__video" autoplay muted loop playsinline
-           poster="assets/img/hero.jpg" aria-hidden="true"
-           width="1280" height="720" fetchpriority="high">
-      <source src="assets/video/campus-loop.webm" type="video/webm">
-      <source src="assets/video/campus-loop.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="hero__scrim" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="hero__inner">
-      <p class="marker"><span class="sc">Siruvani, Coimbatore &middot; Grades V&ndash;XII</span></p>
-      <h1 class="serif h1" data-split>Rooted in <em>Values!</em><br>Ready for the <em>World.</em></h1>
+<!-- The opening sequence.
+
+     The shape of it: a 200vh track with a 100svh stage stuck to the top of
+     it. Scrolling the second hundred of viewport height therefore moves the
+     page while the stage stands still, and that travel is what the plate is
+     scrubbed along. Pinning is `position: sticky` on .hseq__stage and
+     nothing else — deliberately not ScrollTrigger.pin(), which rewrites the
+     document with a spacer and fights both Lenis and the header's is-atop
+     probe.
+
+     The plate's three positions are not in the script. They are the three
+     empty .hseq__mark boxes below, laid out by the stylesheet: P0 full
+     bleed, P1 a first inset, P2 the framed plate the sequence settles on.
+     The script reads their boxes and scrubs the plate between them, so
+     every breakpoint is authored in CSS where the rest of the layout is,
+     and the script never carries a number that a media query could
+     contradict. The marks are presentational and carry aria-hidden.
+
+     The type layer is positioned against the same boxes, so the headline
+     stays in register with the plate at any viewport rather than being
+     placed against the window and drifting away from it. -->
+<section class="hseq" id="top" data-ground="#17130A">
+  <div class="hseq__track">
+    <div class="hseq__stage">
+
+      <!-- Geometry only. No paint, no content, no flow. -->
+      <div class="hseq__marks" aria-hidden="true">
+        <div class="hseq__mark hseq__mark--p0"></div>
+        <div class="hseq__mark hseq__mark--p1"></div>
+        <div class="hseq__mark hseq__mark--p2"></div>
+      </div>
+
+      <!-- The proxy box. GSAP animates this element's inset; the video
+           inside covers it. Cropping is object-fit's job, which is the
+           same cover-crop a shader would have to compute by hand. -->
+      <div class="hseq__plate">
+        <video class="hseq__video" autoplay muted loop playsinline
+               poster="assets/img/hero.jpg" aria-hidden="true"
+               width="1280" height="720" fetchpriority="high">
+          <source src="assets/video/campus-loop.webm" type="video/webm">
+          <source src="assets/video/campus-loop.mp4" type="video/mp4">
+        </video>
+        <div class="hseq__scrim" aria-hidden="true"></div>
+      </div>
+
+      <div class="hseq__type">
+        <p class="marker"><span class="sc">Siruvani, Coimbatore &middot; Grades V&ndash;XII</span></p>
+        <h1 class="serif h1" data-split>Rooted in <em>Values!</em><br>Ready for the <em>World.</em></h1>
+      </div>
+
     </div>
   </div>
 </section>
