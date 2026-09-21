@@ -96,7 +96,7 @@
     });
     openingObserver.observe(document.body, { childList:true, subtree:true });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && intro.hasAttribute("data-crossroads-intro-opening-playing")) finishOpening();
+      if (event.key === "Escape" && !openingDone) finishOpening();
     });
   }
   intro.addEventListener("click", function () {
