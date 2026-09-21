@@ -133,31 +133,31 @@ body.menu-open .header{
   box-shadow:none;
 }
 .header .wrap{
-  width:min(100%,1240px);
-  padding:8px 10px;
+  width:min(100%,1180px);
+  padding:6px 8px;
   border:1px solid rgba(255,255,255,.18);
   border-radius:999px;
-  background:rgba(14,11,18,.66);
-  box-shadow:0 18px 50px rgba(14,11,18,.18), inset 0 1px 0 rgba(255,255,255,.08);
+  background:rgba(255,255,255,.08);
+  box-shadow:0 18px 50px rgba(14,11,18,.12), inset 0 1px 0 rgba(255,255,255,.1);
   pointer-events:auto;
   transition:background .48s var(--e2), border-color .48s var(--e2), box-shadow .48s var(--e2);
 }
 @supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
   .header .wrap{
-    background:rgba(14,11,18,.48);
+    background:rgba(255,255,255,.07);
     -webkit-backdrop-filter:blur(16px) saturate(125%);
     backdrop-filter:blur(16px) saturate(125%);
   }
 }
 .header.is-stuck .wrap,
 body.menu-open .header .wrap{
-  background:rgba(250,247,248,.94);
+  background:rgba(250,247,248,.72);
   border-color:rgba(57,42,72,.14);
   box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8);
 }
 @supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
   .header.is-stuck .wrap,
-  body.menu-open .header .wrap{ background:rgba(250,247,248,.82); }
+  body.menu-open .header .wrap{ background:rgba(250,247,248,.64); }
 }
 .header__left,
 .header__right{
@@ -168,14 +168,14 @@ body.menu-open .header .wrap{
 .header__left{ justify-self:start; }
 .header__right{ justify-self:end; }
 
-.brand img{ width:64px; }
-.brand__name{ font-size:1.34rem; }
-.brand__sub{ font-size:.9rem; }
+.brand img{ width:56px; }
+.brand__name{ font-size:1.22rem; }
+.brand__sub{ font-size:.82rem; }
 
 .htab{
   position:relative;
   display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:7px;
-  min-height:44px; padding:0 14px;
+  min-height:40px; padding:0 12px;
   border:1px solid rgba(255,255,255,.13); border-radius:999px;
   background:rgba(255,255,255,.055);
   color:#fff; white-space:nowrap;
@@ -233,58 +233,27 @@ body.menu-open .htab:hover{
    wordmark text goes entirely and the emblem carries the identity,
    which is set large in the page banner immediately below anyway. */
 @media (max-width:1040px){
-  .header .wrap{ gap:10px; }
+  .header .wrap{ gap:8px; }
   .brand{ max-width:min(44vw,330px); }
-  .brand img{ width:52px; }
-  .brand__name{ font-size:1.02rem; line-height:1.16; }
+  .brand img{ width:48px; }
+  .brand__name{ font-size:.96rem; line-height:1.16; }
   .brand__sub{ display:none; }
   .htab{ padding-inline:11px; }
 }
 @media (max-width:700px){
   .htab__label{ display:none; }
-  .htab{ width:44px; padding:0; }
+  .htab{ width:44px; min-height:44px; padding:0; }
 }
 @media (max-width:560px){
   .header{ top:8px; padding-inline:8px; }
-  .header .wrap{ gap:6px; padding:6px 8px; }
+  .header .wrap{ gap:5px; padding:5px 7px; }
   .header__left,.header__right{ gap:6px; }
   .brand{ max-width:none; }
-  .brand img{ width:40px; }
+  .brand img{ width:36px; }
   .brand__txt{ display:none; }
 }
 @media (prefers-reduced-motion:reduce){
   .header .wrap,.htab{ transition-duration:0s; }
-}
-
-/* The homepage keeps the original quiet header only while it sits over the
-   opening photograph. Once the hero passes, .is-stuck restores the floating
-   capsule used throughout the rest of the site. */
-body.home:not(.menu-open) .header:not(.is-stuck){ top:0; padding-inline:0; }
-body.home:not(.menu-open) .header:not(.is-stuck) .wrap{
-  width:100%; max-width:var(--maxw);
-  padding:var(--space-3) var(--gut);
-  border:0; border-radius:0;
-  background:transparent;
-  box-shadow:none;
-  -webkit-backdrop-filter:none;
-  backdrop-filter:none;
-}
-body.home:not(.menu-open) .header:not(.is-stuck) .htab{
-  flex-direction:column; gap:4px;
-  min-width:44px; min-height:44px; padding:2px 6px;
-  border:0; border-radius:0;
-  background:transparent; box-shadow:none;
-}
-body.home:not(.menu-open) .header:not(.is-stuck) .htab__label{
-  letter-spacing:.11em; font-size:.84rem;
-}
-body.home:not(.menu-open) .header:not(.is-stuck) .htab,
-body.home:not(.menu-open) .header:not(.is-stuck) .htab:hover{
-  background:transparent; border-color:transparent; box-shadow:none;
-}
-body.home:not(.menu-open) .header:not(.is-stuck) .htab:hover{ color:var(--gold-lit); }
-@media (max-width:700px){
-  body.home:not(.menu-open) .header:not(.is-stuck) .htab{ width:44px; padding:4px; }
 }
 
 /* ------------------------------------------------------------
