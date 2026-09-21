@@ -1,30 +1,21 @@
 #!/usr/bin/env python3
-"""The Math Challenge archive: the monthly problems, and the grade zones.
+"""The Math Challenge archive: the monthly winners, and the grade zones.
 
-CHALLENGES is empty, and that is not an oversight.
+WHAT THESE PAPERS ARE. They are the school's winners announcements — each
+one names the winners for a grade group in a given month and carries their
+photographs — and they are not problem papers. The page says so in those
+words. Filing them as "the monthly problem" would misdescribe them to every
+parent who opened one, and the mathematics department has not supplied the
+problems themselves.
 
-The Math Challenge page was an under-construction stub: a heading, four
-bullet points and a line saying the format and the past problems were still
-to come from the mathematics department. There were no problem papers on it,
-no archive, no results and no links — the only links the page carried were
-the ones every page carries, in the header and the footer.
+They are laid out month by month, the way the school's own Maths Challenge
+page lays them out, newest month first. Twenty-five papers across seven
+months; two months are short a grade group, which is left as a gap rather
+than filled in.
 
-So there is nothing here to reproduce. The archive below is the shape the
-resources will take rather than the resources themselves, and until the
-department supplies them the page says so in as many words instead of
-showing an archive that does not exist. Inventing a month, a paper or a
-winner would put words in the school's mouth, and the page would read as
-though the challenge had a history the site cannot show.
-
-To publish the archive: add an entry per problem paper, put the file in
-assets/documents/math-challenge/, and the page builds the cards, the grade
-filters and the search from this list. Nothing else has to change.
-
-    {"month": "February 2026",      # as it should read on the card
-     "grade": "9-10",              # one of the GRADE keys below
-     "title": "The Ladder Problem",
-     "file": "feb-2026-grades-9-10.pdf",   # in assets/documents/math-challenge/
-     "note": "Solutions published with the March paper."}   # optional
+To add a month: put the PDFs in assets/documents/math-challenge/<yyyy-mm>/
+as grades-5-6.pdf and so on, and add the month here. The cards, the grade
+filters and the search all build from this list.
 """
 
 # The four zones, in the order they appear on the page. The key is what the
@@ -58,8 +49,32 @@ JOURNEY = [
                        "the part that carries to the next one."),
 ]
 
-# Every problem paper published. See the note at the top of this file.
-CHALLENGES = []
+# Month by month, newest first. Each is (folder, how it should read, the
+# grade groups that month has). A month short of a grade group is short of
+# it here too — October 2025 has no 11-12 paper and February 2026 has
+# neither 9-10 nor 11-12, and inventing one would be inventing a result.
+MONTHS = [
+    ("2026-04", "April 2026",     ["5-6", "7-8", "9-10", "11-12"]),
+    ("2026-02", "February 2026",  ["5-6", "7-8"]),
+    ("2026-01", "January 2026",   ["5-6", "7-8", "9-10", "11-12"]),
+    ("2025-10", "October 2025",   ["5-6", "7-8", "9-10"]),
+    ("2025-09", "September 2025", ["5-6", "7-8", "9-10", "11-12"]),
+    ("2025-08", "August 2025",    ["5-6", "7-8", "9-10", "11-12"]),
+    ("2025-07", "July 2025",      ["5-6", "7-8", "9-10", "11-12"]),
+]
+
+
+def challenges():
+    """Every paper, flattened, newest month first."""
+    out = []
+    for key, label, grades in MONTHS:
+        for g in grades:
+            out.append({"key": key, "month": label, "grade": g,
+                        "file": f"{key}/grades-{g}.pdf"})
+    return out
+
+
+CHALLENGES = challenges()
 
 
 def esc(t):
@@ -92,7 +107,7 @@ def journey_html():
 
 
 def filters_html():
-    """The grade filters. Rendered only when there is something to filter."""
+    """The grade filters and the search. Only when there is something to filter."""
     if not CHALLENGES:
         return ""
     buttons = ['        <button type="button" class="ma-filter is-on" data-grade="all" '
@@ -105,41 +120,49 @@ def filters_html():
 {chr(10).join(buttons)}
         </div>
         <label class="ma-search">
-          <span class="vh">Search the challenges</span>
-          <input type="search" id="maSearch" placeholder="Search by month or title"
+          <span class="vh">Search the winners by month</span>
+          <input type="search" id="maSearch" placeholder="Search by month"
                  autocomplete="off">
         </label>
       </div>'''
 
 
 def archive_html():
-    """The papers — or, until there are any, what the page is waiting for."""
+    """The winners, month by month — or what the page is waiting for."""
     if not CHALLENGES:
         return '''      <p class="ma-empty">
         <span class="ma-empty__mark" aria-hidden="true">&empty;</span>
-        <em>[Placeholder &mdash; the monthly problem papers, the grades each was set for and
-        the solutions, to be supplied by the mathematics department.]</em>
-        Nothing is published here yet. When the papers are added they will appear in this
-        archive, filterable by grade zone and searchable by month.
+        <em>[Placeholder &mdash; the monthly winners, to be supplied by the mathematics
+        department.]</em>
       </p>'''
 
-    cards = []
-    for c in CHALLENGES:
-        note = f'<p class="ma-card__note">{esc(c["note"])}</p>' if c.get("note") else ""
-        label = next((l for k, l, _, _ in GRADES if k == c["grade"]), c["grade"])
-        cards.append(f'''        <article class="ma-card rv" data-grade="{c["grade"]}"
-                 data-find="{esc((c["month"] + " " + c["title"]).lower())}">
-          <p class="ma-card__when">{esc(c["month"])} &middot; <span>{label}</span></p>
-          <h3 class="ma-card__title">{esc(c["title"])}</h3>
-          {note}
-          <a class="ma-card__open" href="assets/documents/math-challenge/{c["file"]}">
-            Open the problem <span aria-hidden="true">&rarr;</span>
-          </a>
-        </article>''')
-    return (f'''      <div class="ma-grid" id="maGrid">
+    months = []
+    for key, label, grades in MONTHS:
+        cards = []
+        for g in grades:
+            gl = next(l for k, l, _, _ in GRADES if k == g)
+            # The month is the heading above these cards, so a card carries
+            # only its grade group; repeating the month on all four of them
+            # made every card in a month read the same.
+            cards.append(f'''          <article class="ma-card rv" data-grade="{g}"
+                   data-find="{esc(label.lower())}">
+            <h4 class="ma-card__title">{gl}</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/{key}/grades-{g}.pdf">
+              <span class="vh">{esc(label)}, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>''')
+        months.append(f'''      <section class="ma-month rv" data-month="{key}">
+        <h3 class="ma-month__name">{esc(label)}</h3>
+        <div class="ma-grid">
 {chr(10).join(cards)}
+        </div>
+      </section>''')
+
+    return (f'''      <div class="ma-months" id="maGrid">
+{chr(10).join(months)}
       </div>
-      <p class="ma-none" id="maNone" hidden>No challenge matches that search.</p>''')
+      <p class="ma-none" id="maNone" hidden>No month matches that search.</p>''')
 
 
 def count():

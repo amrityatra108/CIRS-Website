@@ -16,6 +16,7 @@
   if (!grid) return;                       // nothing published yet
 
   var cards = Array.prototype.slice.call(grid.querySelectorAll(".ma-card"));
+  var months = Array.prototype.slice.call(grid.querySelectorAll(".ma-month"));
   var buttons = Array.prototype.slice.call(document.querySelectorAll(".ma-filter"));
   var search = document.getElementById("maSearch");
   var none = document.getElementById("maNone");
@@ -30,6 +31,11 @@
       var show = byGrade && byTerm;
       card.hidden = !show;
       if (show) shown++;
+    });
+    // A month with nothing left showing goes too, heading and all — a bare
+    // month name over an empty space reads as a month with no winners.
+    months.forEach(function (m) {
+      m.hidden = !m.querySelector(".ma-card:not([hidden])");
     });
     if (none) none.hidden = shown !== 0;
   }

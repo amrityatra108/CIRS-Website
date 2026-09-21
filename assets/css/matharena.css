@@ -363,6 +363,16 @@ body.matharena #main{ background: var(--ma-black); }
 .ma-search input::placeholder{ color: var(--ma-grey); }
 .ma-search input:focus-visible{ border-color: var(--ma-gold); outline: none; }
 
+/* Month by month, as the school's own page lays them out. */
+.ma-months{ display: grid; gap: clamp(30px, 4vw, 52px); }
+.ma-month__name{
+  margin: 0 0 clamp(14px, 1.6vw, 20px);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ma-line);
+  font-size: clamp(17px, 1.7vw, 21px);
+  color: var(--ma-gold);
+}
+
 .ma-grid{ display: grid; gap: clamp(14px, 1.8vw, 20px); }
 @media (min-width: 720px){ .ma-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1080px){ .ma-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
