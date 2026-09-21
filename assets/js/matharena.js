@@ -1,4 +1,4 @@
-/* The Maths Challenge archive: grade filters and search.
+/* The Math Challenge archive: grade filters and search.
 
    No dependency and no framework — the page holds the cards, this only
    decides which of them are shown. It exits immediately when there is no

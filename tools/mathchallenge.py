@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""The Maths Challenge archive: the monthly problems, and the grade zones.
+"""The Math Challenge archive: the monthly problems, and the grade zones.
 
 CHALLENGES is empty, and that is not an oversight.
 
-The Maths Challenge page was an under-construction stub: a heading, four
+The Math Challenge page was an under-construction stub: a heading, four
 bullet points and a line saying the format and the past problems were still
 to come from the mathematics department. There were no problem papers on it,
 no archive, no results and no links — the only links the page carried were
