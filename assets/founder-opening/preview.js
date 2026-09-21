@@ -129,17 +129,24 @@ async function initialise(){
     texture.generateMipmaps=false;
   }
 
+  // Where the pointer rests when there is no pointer. Every tear is scaled
+  // by proximity() to this, so a value on the face means every tear is wide
+  // open before the cursor has arrived and again the moment it leaves --
+  // which is exactly what (.5,.5) was doing. Below the frame, everything is
+  // shut.
+  const PARK=new THREE.Vector2(.5,-.75);
+
   const uniforms={
     uMenon:{value:menon},
     uGurudev:{value:gurudev},
-    uPointer:{value:new THREE.Vector2(.5,.5)},
-    uPrevious:{value:new THREE.Vector2(.5,.5)},
+    uPointer:{value:PARK.clone()},
+    uPrevious:{value:PARK.clone()},
     uResolution:{value:new THREE.Vector2(1,1)},
     uActive:{value:0},
     uTime:{value:0},
     uVelocity:{value:0}
   };
-  uniforms.uTrail={value:Array.from({length:7},()=>new THREE.Vector2(.5,.5))};
+  uniforms.uTrail={value:Array.from({length:7},()=>PARK.clone())};
 
   const material=new THREE.ShaderMaterial({
     transparent:true,
@@ -168,11 +175,54 @@ async function initialise(){
         vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);
         return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),f.x),mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0)),f.x),f.y);
       }
-      // zone(), tornSlice() and fragmentedReveal() used to live here. They
-      // cut the elder portrait through the younger one in patches -- crown,
-      // visor, cheeks, jaw and three torn horizontal slices. Nothing ever
-      // called them; main() has always reveals from the flow field below.
-      // They are gone rather than left dead.
+      // The tears. These were written to be driven by the cursor -- every
+      // one of them is multiplied by proximity() to the pointer -- and then
+      // never called: main() took its reveal from the flow field instead,
+      // and the torn edges the shapes describe only ever appeared as the
+      // field's own hard smoothstep cutting across the face. They are wired
+      // up now, and every edge here is wider than it was, so a tear opens
+      // and closes under the cursor instead of snapping.
+      float zone(vec2 centre,vec2 size,float seed,float phase){
+        vec2 p=(vUv-centre)/size;
+        float distortion=(noise(vUv*vec2(13.0,9.0)+vec2(seed,phase*.12))-.5)*.31;
+        distortion+=sin(p.x*5.0+phase+seed)*.075;
+        // was smoothstep(.88,1.045) -- a sixth of the width of this one.
+        return 1.0-smoothstep(.58,1.16,length(p)+distortion);
+      }
+      float proximity(vec2 pointer,vec2 centre,vec2 reach){
+        return 1.0-smoothstep(.34,1.12,length((pointer-centre)/reach));
+      }
+      float tornSlice(float y,float halfHeight,float left,float right,float seed,float phase){
+        float warpedY=y+sin(vUv.x*23.0+phase+seed)*.008+(noise(vec2(vUv.x*19.0+seed,phase*.11))-.5)*.018;
+        // The feather on a slice was .009 against a half-height of about .01,
+        // which is a torn strip with a razor edge. It is now several times
+        // the strip's own height, so the strip reads as a soft opening.
+        float vertical=1.0-smoothstep(halfHeight*.35,halfHeight+.055,abs(vUv.y-warpedY));
+        float horizontal=smoothstep(left-.09,left+.05,vUv.x)*(1.0-smoothstep(right-.05,right+.09,vUv.x));
+        return vertical*horizontal;
+      }
+      float fragmentedReveal(vec2 pointer,float phase){
+        float crown=zone(vec2(.5,.82),vec2(.235,.05),1.1,phase)*proximity(pointer,vec2(.5,.80),vec2(.30,.095));
+        float visor=zone(vec2(.5,.708),vec2(.225,.035),2.3,phase)*proximity(pointer,vec2(.5,.70),vec2(.30,.09));
+        float leftCheek=zone(vec2(.405,.625),vec2(.075,.072),3.7,phase)*proximity(pointer,vec2(.39,.62),vec2(.17,.085));
+        float rightCheek=zone(vec2(.595,.625),vec2(.075,.072),4.9,phase)*proximity(pointer,vec2(.61,.62),vec2(.17,.085));
+        float chin=zone(vec2(.5,.515),vec2(.205,.067),6.2,phase)*proximity(pointer,vec2(.5,.51),vec2(.27,.09));
+        float jaw=zone(vec2(.5,.425),vec2(.18,.038),7.4,phase)*proximity(pointer,vec2(.5,.43),vec2(.25,.07));
+        float sliceA=tornSlice(.765,.012,.31,.72,8.2,phase)*proximity(pointer,vec2(.5,.75),vec2(.33,.105));
+        float sliceB=tornSlice(.655,.008,.36,.67,9.6,phase)*proximity(pointer,vec2(.5,.64),vec2(.29,.10));
+        float sliceC=tornSlice(.565,.01,.29,.75,10.8,phase)*proximity(pointer,vec2(.5,.55),vec2(.32,.105));
+        // max() stacks these into one another with a visible ridge wherever
+        // two overlap. Adding and rolling off keeps the overlaps smooth.
+        float sum=crown+visor+leftCheek+rightCheek+chin+jaw+sliceA+sliceB+sliceC;
+        float r=clamp(1.0-exp(-sum*1.35),0.0,1.0);
+        // The roll-off is what keeps overlapping tears from ridging against
+        // each other, but it also lifts a nearly-zero sum well off zero, and
+        // the elder beard stayed on the young man with the cursor right out
+        // of the frame. The gate puts the floor back without returning the
+        // ridges: below a twentieth nothing opens at all, and the climb out
+        // of it is still a smoothstep.
+        return r*smoothstep(.05,.26,r);
+      }
 
       void main(){
         vec4 base=texture2D(uMenon,vUv);
@@ -201,32 +251,37 @@ async function initialise(){
         // perfectly; a dissolve this soft carries the difference as a man
         // ageing instead of as a tear.
         //
-        // The reveal is a front that crosses the portrait, not a field that
-        // churns over it. The field alone never resolves: every part of the
-        // picture is perpetually part one man and part the other, which is
-        // why the opening read as a permanently half-dissolved photograph
-        // rather than as either portrait. Here a slow ping-pong carries a
-        // soft band from one end to the other and settles fully at both
-        // ends, so the piece rests on a crisp single photograph and spends
-        // the journey, not the destination, in between. The flow field is
-        // kept, reduced, as the wobble that stops the front being a ruled
-        // line.
-        float sweep=abs(fract(uTime*.028)*2.0-1.0);
-        float front=1.0-(vUv.y*.8+vUv.x*.2);
-        float wobble=(contour-.5)*.26;
-        float edge=sweep*1.5-.25;
-        float reveal=clamp(smoothstep(edge-.19,edge+.19,front+wobble)*uActive,0.0,1.0);
+        // The cursor opens the tears; the flow field only breathes under
+        // them. uPrevious is the smoothed pointer the move handler already
+        // maintains, so the shapes follow the hand with a little lag rather
+        // than snapping to the raw position, and the field's own edge is
+        // wide enough now that it can no longer cut anything by itself.
+        float torn=fragmentedReveal(uPrevious,uTime*.6);
+        float breath=smoothstep(.40,.62,contour)*.18;
+        float reveal=clamp((torn+breath*torn*2.0)*uActive,0.0,1.0);
 
-        // The aura used to be built here: the elder texture's alpha sampled
-        // fifteen pixels out in four directions, and warm brown painted
-        // wherever the neighbourhood was opaque but the pixel was not. Around
-        // a dark jacket that lands on the body rather than outside it, and it
-        // is the smudging over the chest. A clean cutout has no halo, so it
-        // is gone, and with it the warm tint that bled along the same edge.
+        // The smudge. The elder texture's alpha sampled out in four
+        // directions, and warm brown laid wherever the neighbourhood is
+        // opaque but the pixel is not -- around the dark jacket that falls
+        // on the body, which is where it shows. It is scaled by the tear
+        // now, so it belongs to whatever the cursor has opened instead of
+        // sitting on the picture whether or not anything is happening.
+        float nearbyAlpha=0.0;
+        vec2 px=1.0/uResolution;
+        nearbyAlpha=max(nearbyAlpha,texture2D(uGurudev,vUv+vec2(px.x*15.0,0.0)).a);
+        nearbyAlpha=max(nearbyAlpha,texture2D(uGurudev,vUv-vec2(px.x*15.0,0.0)).a);
+        nearbyAlpha=max(nearbyAlpha,texture2D(uGurudev,vUv+vec2(0.0,px.y*15.0)).a);
+        nearbyAlpha=max(nearbyAlpha,texture2D(uGurudev,vUv-vec2(0.0,px.y*15.0)).a);
+        float aura=max(nearbyAlpha-transformed.a,0.0)*.13*reveal;
         vec4 guruState=transformed;
-        guruState.rgb=mix(base.rgb,guruState.rgb,transformed.a);
+        guruState.rgb=mix(vec3(.68,.45,.19),guruState.rgb,transformed.a);
+        guruState.a=max(transformed.a,aura);
 
         vec4 composed=mix(base,guruState,reveal);
+        // The same warm tint along the outer skirt of the flow field, kept
+        // faint and kept inside the tear.
+        float localWarmth=smoothstep(.49,.51,contour)*(1.0-smoothstep(.505,.525,contour))*reveal*.035;
+        composed.rgb=mix(composed.rgb,vec3(.68,.45,.19),localWarmth);
         gl_FragColor=composed;
       }
     `
@@ -264,7 +319,6 @@ async function initialise(){
     const now=performance.now();
     const next=point(event);
     const distance=next.distanceTo(uniforms.uPointer.value);
-    uniforms.uPrevious.value.lerp(uniforms.uPointer.value,.72);
     uniforms.uPointer.value.copy(next);
     state.targetVelocity=Math.min(distance/Math.max(now-state.lastMove,12)*34,1);
     state.lastMove=now;
@@ -283,7 +337,7 @@ async function initialise(){
     state.touch=true;portrait.setPointerCapture?.(event.pointerId);move(event);
   }
   function leave(){
-    uniforms.uPointer.value.set(.5,.5);
+    uniforms.uPointer.value.copy(PARK);
     state.inside=false;state.touch=false;state.targetVelocity=0;state.targetRx=0;state.targetRy=0;state.targetTx=0;state.targetTy=0;state.targetScale=1;
     cursor.classList.remove("is-over-portrait");requestRender();
   }
@@ -322,6 +376,13 @@ async function initialise(){
     state.bgX+=(state.targetBgX-state.bgX)*.035;state.bgY+=(state.targetBgY-state.bgY)*.035;
     state.ringX+=(state.targetCursorX-state.ringX)*.22;state.ringY+=(state.targetCursorY-state.ringY)*.22;
     const trail=uniforms.uTrail.value;
+    // uPrevious is what the tears follow. It used to be stepped 72% of the
+    // way once per pointer event, which makes the shapes jump with the event
+    // rate and leaves them wherever the last event put them. Easing it here
+    // instead, per frame and frame-rate corrected, is what makes a tear open
+    // and close smoothly under the hand -- and it is what lets the pointer
+    // ease back to PARK when the cursor leaves instead of snapping shut.
+    uniforms.uPrevious.value.lerp(uniforms.uPointer.value,1-Math.pow(.90,dt));
     trail[0].lerp(uniforms.uPointer.value,1-Math.pow(.86,dt));
     trail[1].lerp(trail[0],1-Math.pow(.965,dt));
     uniforms.uActive.value=state.active;
@@ -333,7 +394,7 @@ async function initialise(){
     parallaxLayers.front.style.transform=`translate3d(${-state.bgX*12}px,${-state.bgY*7}px,0)`;
     cursorRing.style.transform=`translate3d(${state.ringX}px,${state.ringY}px,0)`;
     renderer.render(scene,camera);
-    if(Math.abs(state.active-state.targetActive)>.002||state.active>.002||state.velocity>.003||Math.abs(state.rx-state.targetRx)>.002||Math.abs(state.ry-state.targetRy)>.002||Math.abs(state.tx-state.targetTx)>.02||Math.abs(state.ty-state.targetTy)>.02||Math.abs(state.scale-state.targetScale)>.0001||Math.abs(state.bgX-state.targetBgX)>.002||Math.abs(state.bgY-state.targetBgY)>.002||Math.abs(state.ringX-state.targetCursorX)>.08||Math.abs(state.ringY-state.targetCursorY)>.08)requestRender();
+    if(uniforms.uPrevious.value.distanceTo(uniforms.uPointer.value)>.0015||Math.abs(state.active-state.targetActive)>.002||state.active>.002||state.velocity>.003||Math.abs(state.rx-state.targetRx)>.002||Math.abs(state.ry-state.targetRy)>.002||Math.abs(state.tx-state.targetTx)>.02||Math.abs(state.ty-state.targetTy)>.02||Math.abs(state.scale-state.targetScale)>.0001||Math.abs(state.bgX-state.targetBgX)>.002||Math.abs(state.bgY-state.targetBgY)>.002||Math.abs(state.ringX-state.targetCursorX)>.08||Math.abs(state.ringY-state.targetCursorY)>.08)requestRender();
   }
 
   prototype.addEventListener("pointermove",sceneMove,{passive:true});
