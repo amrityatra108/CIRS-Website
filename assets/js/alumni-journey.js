@@ -537,22 +537,43 @@
       /* Leaving, the two rows go back out the way they came in — each to
          its own side — while the campus pushes past the frame. The move is
          spent over the first 72% of the hero, so the screen is clear well
-         before the next chapter pins. xPercent, not pixels, so a resize
-         mid-scroll cannot strand a row halfway. */
+         before the next chapter pins.
+
+         EVERY TWEEN HERE IS A fromTo, AND THAT IS THE WHOLE POINT. A plain
+         .to() records its start value the first time it renders, and this
+         timeline is built while the entrance is still parked off-screen
+         waiting for the curtain. It recorded THAT as home — so scrolling
+         back up to the top restored the parked state instead of the hero:
+         no headline, no eyebrow, no line underneath, and the campus left
+         sitting up off its own frame with black below it.
+
+         Writing both ends out means the top of the page is a fixed state
+         rather than whatever happened to be on screen when GSAP first
+         looked. immediateRender:false keeps these from being stamped on at
+         build time, which would undo the entrance before it plays. */
       var leave = gsap.timeline({
         scrollTrigger: {
-          trigger: open, start: "top top", end: "bottom 28%", scrub: .55
+          trigger: open, start: "top top", end: "bottom 28%",
+          scrub: .55, invalidateOnRefresh: true
         }
       });
-      leave.to(cue, { opacity: 0, duration: .12, ease: "none" }, 0)
-           .to(eyebrow, { opacity: 0, y: -22, duration: .5, ease: "none" }, 0)
-           .to(sub, { opacity: 0, y: -22, duration: .5, ease: "none" }, .1);
-      if (lines[0]) leave.to(lines[0], { xPercent: -60, opacity: 0, duration: .8,
-                                         ease: "power1.in" }, .06);
-      if (lines[1]) leave.to(lines[1], { xPercent: 60, opacity: 0, duration: .8,
-                                         ease: "power1.in" }, .06);
-      if (media) leave.to(media, { scale: 1.3, yPercent: -7, ease: "none",
-                                   duration: 1 }, 0);
+      var IR = { immediateRender: false };
+      function part(el, to, at) {
+        if (!el) return;
+        var from = { opacity: 1, x: 0, xPercent: 0, y: 0 };
+        leave.fromTo(el, from, Object.assign({ ease: "none" }, to, IR), at);
+      }
+      part(cue,     { opacity: 0, duration: .12 }, 0);
+      part(eyebrow, { opacity: 0, y: -22, duration: .5 }, 0);
+      part(sub,     { opacity: 0, y: -22, duration: .5 }, .1);
+      part(lines[0], { xPercent: -60, opacity: 0, duration: .8, ease: "power1.in" }, .06);
+      part(lines[1], { xPercent:  60, opacity: 0, duration: .8, ease: "power1.in" }, .06);
+      if (media) {
+        leave.fromTo(media,
+          { scale: 1.04, yPercent: 0 },
+          { scale: 1.3, yPercent: -7, ease: "none", duration: 1,
+            immediateRender: false }, 0);
+      }
     }
 
     /* ---- chapter 2 and chapter 5 ------------------------- */
@@ -797,28 +818,35 @@
     });
   }
 
+  /* Did motion() actually build this page's chapters? That is the only
+     question worth asking before sweeping, and it is answerable: every
+     chapter registers a ScrollTrigger against its own section. */
+  function motionBuilt() {
+    if (!window.ScrollTrigger) return false;
+    return ScrollTrigger.getAll().some(function (t) {
+      var el = t.trigger;
+      return el && el.closest &&
+             el.closest(".aj-open, .ajc__field, .ajw-track, .aj-portal, .aj-return");
+    });
+  }
+
   function start() {
     var parts = interactions();
     var sky = buildSky();
     if (canMove) {
       try { motion(parts, sky); }
       catch (err) { failOpen(); }
-      // Not on a timer from load: the site's curtain can hold the page for
-      // four seconds, and a sweep that fires underneath it would call a
-      // hero that has not been allowed to start yet a hero that failed.
-      var curtain = document.getElementById("curtain");
-      if (curtain) {
-        var obs = new MutationObserver(function () {
-          if (!document.getElementById("curtain")) {
-            obs.disconnect();
-            window.setTimeout(failOpen, 2600);
-          }
-        });
-        obs.observe(document.body, { childList: true });
-        window.setTimeout(function () { obs.disconnect(); failOpen(); }, 7200);
-      } else {
-        window.setTimeout(failOpen, 2600);
-      }
+      /* The sweep fires ONLY if nothing got built. It used to fire on a
+         plain timer, and that made it a saboteur rather than a safety
+         net: by the time it ran the reader could already have scrolled,
+         and it would then shove the scroll cue, the eyebrow and the
+         departure chapter's copy back to full opacity — over the top of
+         the scroll-driven timelines that had quite deliberately just
+         taken them down. The scroll cue stayed on screen the whole way
+         through the hero because of it. */
+      window.setTimeout(function () {
+        if (!motionBuilt()) failOpen();
+      }, 3200);
     } else {
       // No motion at all: reveal everything the sheet held back. js-motion
       // is cirs.js's flag, not this file's, and is left alone — the other
