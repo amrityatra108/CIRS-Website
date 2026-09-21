@@ -919,32 +919,37 @@
      ========================================================== */
   function founderWords() {
     var list = $(".fwords");
-    if (!list) return;
-    var rows = $$("li", list);
-    // No ScrollTrigger and no motion: --lit stays unset, the plate is
-    // never drawn, and the words are the words. Nothing to undo.
-    if (!rows.length || !hasST || !animate) return;
-
-    var n = rows.length;
-    var span = 1 / (n + 1);          // each word starts a slice later
-    var window_ = span * 2;          // and takes two slices to fill
-
-    function paint(p) {
-      for (var i = 0; i < n; i++) {
-        var t = (p - i * span) / window_;
-        rows[i].style.setProperty("--lit", (t < 0 ? 0 : t > 1 ? 1 : t).toFixed(3));
-      }
-    }
-
-    paint(0);
-    ScrollTrigger.create({
-      trigger: list,
-      start: "top 80%",
-      end: "bottom 60%",
-      scrub: .6,
-      invalidateOnRefresh: true,
-      onUpdate: function (self) { paint(self.progress); }
+    if (!list || !hasST || !animate) return;
+    $$("li", list).forEach(function (row) {
+      var wrapper = $(".fwords__w", row);
+      if (!wrapper) return;
+      gsap.fromTo(wrapper, { "--lit": 0 }, {
+        "--lit": 1, ease: "none",
+        scrollTrigger: {
+          trigger: row, start: "top 65%", end: "top 10%",
+          scrub: true, invalidateOnRefresh: true
+        }
+      });
     });
+  }
+
+  /* ==========================================================
+     Founder — one restrained, section-local motto entrance.
+     The two editorial columns enter once in reading order; there
+     is no scrub or decorative motion, and reduced motion remains
+     at the fully visible CSS state.
+     ========================================================== */
+  function founderMottoReveal() {
+    var section = $(".fmotto");
+    if (!section || !hasST || !animate) return;
+    var left = $(".fmotto__left", section);
+    var right = $(".fmotto__right", section);
+    if (!left || !right) return;
+    var tl = gsap.timeline({
+      scrollTrigger: { trigger: section, start: "top 78%", once: true }
+    });
+    tl.from(left, { opacity: 0, y: 22, duration: .82, ease: "power3.out" })
+      .from(right, { opacity: 0, y: 18, duration: .78, ease: "power3.out" }, "-=.56");
   }
 
   /* ==========================================================
@@ -1730,6 +1735,7 @@
     slHero();
     homeRun();
     founderWords();
+    founderMottoReveal();
     dayTrack();
     newsTrack();
     groundShift();

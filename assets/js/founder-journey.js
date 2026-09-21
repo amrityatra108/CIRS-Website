@@ -35,6 +35,9 @@
   const count=root.querySelector("[data-founder-count]");
   const total=root.querySelector("[data-founder-total]");
   const meter=root.querySelector("[data-founder-meter]");
+  const introStop=root.querySelector('[data-route-id="life-intro"]');
+  const introMeta=introStop&&introStop.querySelector(".fmeta");
+  const introLines=introStop?gsap.utils.toArray(".flife-intro__line",introStop):[];
   if(!world||!route||!routeBase||!routeProgress||!routePoints||!opening||!vehicle||stops.length<2) return;
 
   /* One continuous journey: horizontal, down, right, one diagonal, vertical. */
@@ -52,16 +55,19 @@
   const MAIN_END=.97;
   const milestonePresentation={
     "life-intro":{align:"center",viewportY:.40,maxWidth:760,offsetX:-70,offsetY:-315},
-    "ernakulam-1916":{align:"center",viewportY:.44,maxWidth:840,offsetX:90,offsetY:-315},
-    "freedom-movement":{align:"left",viewportY:.44,maxWidth:780,offsetX:-70,offsetY:-315},
-    "rishikesh-1947":{align:"right",viewportY:.44,maxWidth:780,offsetX:90,offsetY:-315},
-    "sannyasa-1949":{align:"left",viewportY:.44,maxWidth:780,offsetX:-70,offsetY:-315},
-    "uttarkashi-1949":{align:"center",viewportY:.46,maxWidth:840,offsetX:420,offsetY:-315},
-    "first-yajna-1951":{align:"right",viewportY:.44,maxWidth:840,offsetX:520,offsetY:-40},
-    "chinmaya-mission-1953":{align:"right",viewportY:.44,maxWidth:780,offsetX:620,offsetY:-40},
-    "forty-years":{align:"left",viewportY:.44,maxWidth:800,offsetX:500,offsetY:-315},
-    "mahasamadhi-1993":{align:"right",viewportY:.44,maxWidth:820,offsetX:90,offsetY:-315},
-    "education-transformation":{align:"center",viewportY:.50,maxWidth:960,offsetX:90,offsetY:-315}
+    "beginning-1916":{align:"center",viewportY:.44,maxWidth:840,offsetX:90,offsetY:-315},
+    "education-1921-1943":{align:"left",viewportY:.44,maxWidth:900,offsetX:-70,offsetY:-315},
+    "freedom-1942":{align:"right",viewportY:.44,maxWidth:800,offsetX:90,offsetY:-315},
+    "national-herald-1945":{align:"left",viewportY:.44,maxWidth:780,offsetX:-70,offsetY:-315},
+    "seeker-1947-1949":{align:"center",viewportY:.46,maxWidth:1320,offsetX:540,offsetY:-315},
+    "vedanta-masses-1951":{align:"right",viewportY:.44,maxWidth:900,offsetX:820,offsetY:-40},
+    "chinmaya-mission-1953":{align:"right",viewportY:.44,maxWidth:1200,offsetX:800,offsetY:-315},
+    "rock-memorial-1963":{align:"center",viewportY:.42,maxWidth:760,offsetX:0,offsetY:-420},
+    "sandeepany-1963":{align:"right",viewportY:.44,maxWidth:800,offsetX:90,offsetY:-315},
+    "vishva-hindu-parishad-1964":{align:"left",viewportY:.44,maxWidth:840,offsetX:-70,offsetY:-315},
+    "foundation-1993":{align:"right",viewportY:.44,maxWidth:860,offsetX:90,offsetY:-315},
+    "mahasamadhi-1993":{align:"left",viewportY:.44,maxWidth:800,offsetX:-70,offsetY:-315},
+    "education-transformation":{align:"center",viewportY:.50,maxWidth:1120,offsetX:600,offsetY:-260}
   };
   const playhead={progress:0};
   const state={active:-1,lastProgress:0,routeLength:0,stopLengths:[],frames:[],wheelRadius:1,safeTop:96,trigger:null,scrubTween:null};
@@ -115,8 +121,9 @@
     routePoints.replaceChildren();
     const ns="http://www.w3.org/2000/svg";
     points.forEach((point,index)=>{
+      const routePoint=routeProgress.getPointAtLength(state.stopLengths[index]);
       const dot=document.createElementNS(ns,"circle");
-      dot.setAttribute("cx",point.x);dot.setAttribute("cy",point.y);dot.setAttribute("r","8");
+      dot.setAttribute("cx",routePoint.x);dot.setAttribute("cy",routePoint.y);dot.setAttribute("r","8");
       dot.setAttribute("class","route-point");dot.dataset.routePoint=String(index);
       routePoints.appendChild(dot);
     });
@@ -134,7 +141,7 @@
       const config=configFor(stop,index);
       stop.style.left=(point.x+config.offsetX)+"px";
       stop.style.top=(point.y+config.offsetY)+"px";
-      stop.style.setProperty("--stop-width",config.maxWidth+"px");
+      stop.style.setProperty("--stop-width",(stop.matches('.flife__item')?1200:config.maxWidth)+"px");
       stop.dataset.founderIndex=String(index);
     });
   }
@@ -229,14 +236,24 @@
   }
   function setStopOpacities(position,progress){
     stops.forEach((stop,index)=>{
-      const distance=Math.abs(position-index);
-      let opacity=distance<=.22?1:distance>=.34?0:1-smoothstep(.22,.34,distance);
+      // Only the current chapter is readable; adjacent dates must not bleed
+      // through the enlarged photographs while the camera moves.
+      let opacity=index===state.active?1:0;
       if(progress<MAIN_START) opacity=0;
       stop.style.setProperty("--stop-opacity",opacity.toFixed(3));
     });
   }
+  function setIntroReveal(progress){
+    if(!introMeta||introLines.length<2) return;
+    const metaReveal=smoothstep(MAIN_START-.004,MAIN_START+.003,progress);
+    const firstReveal=smoothstep(MAIN_START-.001,MAIN_START+.008,progress);
+    const secondReveal=smoothstep(MAIN_START+.003,MAIN_START+.013,progress);
+    gsap.set(introMeta,{opacity:metaReveal,y:0});
+    gsap.set(introLines[0],{opacity:firstReveal,y:0,clipPath:"none"});
+    gsap.set(introLines[1],{opacity:secondReveal,y:0,clipPath:"none"});
+  }
   function setBackground(mainProgress){
-    const charcoal=smoothstep(.34,.39,mainProgress)*(1-smoothstep(.58,.64,mainProgress));
+    const charcoal=smoothstep(.34,.39,mainProgress)*(1-smoothstep(.71,.75,mainProgress));
     const sage=smoothstep(.76,.81,mainProgress)*(1-smoothstep(.89,.94,mainProgress));
     gsap.set(backgrounds.charcoal,{opacity:charcoal});
     gsap.set(backgrounds.sage,{opacity:sage});
@@ -261,7 +278,7 @@
     gsap.set(world,{x:camera.x,y:camera.y,force3D:true});
 
     const introProgress=clamp01(progress/INTRO_END);
-    const eased=1-Math.pow(1-introProgress,3);
+    const eased=introProgress*introProgress*(3-2*introProgress);
     const vehicleStart=-innerWidth*.28;
     const vehicleEnd=innerWidth*1.08;
     const vehicleX=gsap.utils.interpolate(vehicleStart,vehicleEnd,eased);
@@ -274,21 +291,36 @@
     }else{
       vehicle.classList.add("is-gone");
     }
-    gsap.set(opening,{opacity:1-smoothstep(.075,.12,progress)});
+    // Let the opening copy hand off directly into "The Life" instead of
+    // disappearing before the first timeline chapter has arrived.
+    gsap.set(opening,{opacity:1-smoothstep(.10,MAIN_START+.01,progress)});
     root.classList.toggle("is-opening",progress<MAIN_START);
+    root.classList.toggle("is-bus-running",progress<INTRO_END);
+    root.classList.toggle("is-handoff",progress>=INTRO_END&&progress<MAIN_START);
 
-    const drawn=progress<MAIN_START?firstStopLength*clamp01(progress/.11):routeDistance;
+    const routeStartScreen=openingPoint.x+openingCamera.x;
+    const openingRouteIndex=0;
+    const routeEndScreen=points[openingRouteIndex].x+openingCamera.x;
+    const vehicleTrailHead=vehicleX+vehicle.offsetWidth*.14;
+    const openingRouteLength=state.stopLengths[openingRouteIndex];
+    const openingDraw=openingRouteLength*clamp01((vehicleTrailHead-routeStartScreen)/(routeEndScreen-routeStartScreen));
+    const drawn=progress<MAIN_START?openingDraw:Math.max(openingRouteLength,routeDistance);
     routeProgress.style.strokeDashoffset=String(state.routeLength-drawn);
     const active=activeForPosition(position,direction);
     setActive(active);
     setStopOpacities(position,progress);
+    setIntroReveal(progress);
     if(progress<MAIN_START){period.textContent="1996";title.textContent="CIRS begins";count.textContent="00";}
-    state.dots.forEach((dot,index)=>dot.classList.toggle("is-passed",state.stopLengths[index]<=drawn));
+    state.dots.forEach((dot,index)=>{
+      dot.classList.toggle("is-passed",index<=active);
+      dot.classList.toggle("is-current",index===active);
+      dot.setAttribute("r",index===active?"11":"8");
+    });
     meter.style.transform="scaleX("+mainProgress+")";
     setBackground(mainProgress);
   }
   function mount(){
-    root.style.setProperty("--founder-journey-height",innerWidth<1100?"12600px":"13800px");
+    root.style.setProperty("--founder-journey-height",innerWidth<1100?"15400px":"16800px");
     root.classList.add("is-enhanced","is-camera-moving");
     total.textContent=String(stops.length).padStart(2,"0");
     buildRoute();

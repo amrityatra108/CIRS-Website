@@ -162,6 +162,7 @@ PAGES = {
         # photograph set into them — and brings its own sheet to do it.
         "banner": None,
         "sheet": "founder",
+        "cache_suffix": "-founder-15",
     },
     "why-cirs": {
         "nav": "Why CIRS",
@@ -805,7 +806,7 @@ def founder_fig(slot, cls="", sizes=""):
     the page reads as an archive still being gathered rather than as something
     broken. tools/founder.py decides which of the two this is.
     """
-    _, alt, label = founder.SLOTS[slot]
+    _, alt, label, *caption = founder.SLOTS[slot]
     src = founder.path(slot)
     klass = f"ffig {cls}".strip()
     if src is None:
@@ -813,8 +814,9 @@ def founder_fig(slot, cls="", sizes=""):
                 f'<span class="ffig__mark">Archive image pending</span>'
                 f'<span class="ffig__what">{label}</span></figure>')
     extra = f' sizes="{sizes}"' if sizes else ""
+    figcaption = f'<figcaption>{caption[0]}</figcaption>' if caption else ""
     return (f'<figure class="{klass}"><img src="{src}?{CACHE_BUST}" alt="{alt}" '
-            f'loading="lazy" decoding="async"{extra}></figure>')
+            f'loading="lazy" decoding="async"{extra}>{figcaption}</figure>')
 
 
 def expand_figs(html):

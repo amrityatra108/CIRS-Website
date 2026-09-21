@@ -16,17 +16,50 @@ body.founder{
   --f-paper-2: #ECE6DA;
   --f-ghost:   #E3DCCC;
   --f-ink:     #211E19;
-  --f-soft:    #555046;
-  --f-mute:    #6C665C;
+  --f-soft:    #684124;
+  --f-mute:    #805128;
   --f-rule:    #DAD2C2;   /* hairlines only — never a text colour */
-  --f-sage:    #5B6857;
-  --f-earth:   #76634E;
+  --f-sage:    #92581F;
+  --f-earth:   #92581F;
   --f-gold:    #A8823A;   /* rules, marks and text on the dark ground */
   --f-gold-ink:#7E622B;   /* the same gold, dark enough to be read on paper */
 
   background:var(--f-paper); color:var(--f-ink);
 }
 body.founder .footer-wrap{ background:var(--f-paper-2); }
+
+/* Approved autonomous portrait opening, isolated from editorial page styles. */
+.founder .founder-opening{position:relative;box-sizing:border-box;height:100vh;height:100svh;min-height:420px;padding-top:100px;background:#f2efe8;}
+.founder .founder-opening__frame{display:block;width:100%;height:100%;border:0;}
+.founder .founder-opening__continue{position:absolute;bottom:24px;left:24px;z-index:2;display:flex;gap:20px;align-items:center;padding:12px 18px;border:1px solid var(--f-rule);border-radius:30px;background:var(--f-paper);color:var(--f-ink);font-size:12px;text-decoration:none;}
+.founder .founder-opening__continue:focus-visible{outline:2px solid var(--f-gold-ink);outline-offset:4px;}
+@media(max-width:700px){.founder .founder-opening__continue{left:50%;transform:translateX(-50%);white-space:nowrap;}}
+
+.founder .founder-opening{padding-bottom:160px;min-height:0;}
+.founder-opening__label,.founder-opening__headline,.founder-opening__description,.founder-opening__identity{position:absolute;z-index:2;margin:0;color:var(--f-ink);pointer-events:none;}
+.founder-opening__label{top:132px;left:4vw;font-size:12px;line-height:1.8;letter-spacing:.12em;}
+.founder-opening__label span{letter-spacing:.04em;}
+.founder-opening__headline{left:4vw;top:45%;transform:translateY(-35%);font-family:var(--font-primary);font-weight:400;font-size:clamp(30px,3.6vw,66px);line-height:1.02;letter-spacing:-.025em;}
+.founder-opening__description{right:3vw;top:49%;width:23vw;font-size:clamp(12px,1.12vw,18px);line-height:1.7;}
+.founder-opening__description br{display:none;}
+.founder-opening__identity{bottom:96px;left:0;right:0;text-align:center;}
+.founder-opening__identity p{margin:0 0 9px;font-size:clamp(15px,1.3vw,21px);letter-spacing:.07em;}
+.founder-opening__identity span{font-size:10px;letter-spacing:.16em;}
+.founder-opening__closing{position:absolute;bottom:20px;left:0;right:0;padding:0 24px;text-align:center;}
+.founder-opening__closing p{margin:0;color:var(--f-ink);font-size:clamp(16px,1.3vw,22px);line-height:1.4;letter-spacing:.03em;}
+@media(max-width:800px){
+  .founder .founder-opening{height:100svh;min-height:640px;padding:100px 0 16px;display:flex;flex-direction:column;}
+  .founder-opening__label,.founder-opening__headline,.founder-opening__description,.founder-opening__identity{position:static;transform:none;}
+  .founder-opening__label{margin:0 7vw 8px;font-size:9px;line-height:1.4;}
+  .founder-opening__headline{margin:0 7vw 8px;font-size:clamp(25px,5vw,36px);}
+  .founder .founder-opening__frame{height:0;min-height:120px;flex:1;order:2;}
+  .founder-opening__description{order:4;width:auto;max-width:38ch;margin:10px auto 0;padding:0 20px;font-size:12px;line-height:1.4;text-align:center;}
+  .founder-opening__identity{order:3;margin-top:8px;}
+  .founder-opening__identity p{font-size:13px;margin-bottom:4px;}
+  .founder-opening__identity span{font-size:8px;}
+  .founder-opening__closing{position:static;order:5;padding:12px 16px 0;}
+  .founder-opening__closing p{font-size:14px;}
+}
 
 /* The header floats transparent in white over every other page, all of which
    open dark. This one opens on paper, so the header takes the dark-on-light
@@ -37,15 +70,16 @@ body.founder .header:not(.is-stuck) .htab{ color:var(--f-soft); }
 body.founder .header:not(.is-stuck) .htab svg{ stroke:var(--f-soft); }
 body.founder .header:not(.is-stuck) .burger i{ background:var(--f-ink); }
 body.founder:not(.menu-open) .header:not(.is-stuck) .wrap{
-  background:#fff;
-  border-color:rgba(57,42,72,.12);
-  box-shadow:0 12px 36px rgba(21,8,24,.08),inset 0 1px 0 rgba(255,255,255,.9);
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
   -webkit-backdrop-filter:none;
   backdrop-filter:none;
 }
 body.founder:not(.menu-open) .header:not(.is-stuck) .htab{
-  background:rgba(57,42,72,.025);
-  border-color:rgba(57,42,72,.1);
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
 }
 
 /* Paper, not a flat fill: a trace of grain so large areas of empty
@@ -56,6 +90,7 @@ body.founder::before{
   background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
 }
 body.founder main{ position:relative; z-index:1; }
+body.founder #progress{ display:none; }
 
 /* --- shared editorial furniture ----------------------------- */
 .founder .fmeta{
@@ -200,6 +235,12 @@ body.founder main{ position:relative; z-index:1; }
   margin:var(--space-7) 0 0; line-height:1.7;
 }
 .fhero__sig span{ color:var(--f-mute); }
+/* Carry both text columns down to the archival photograph's baseline. */
+@media (min-width:760px){
+  .fhero__ghost{justify-content:space-between;padding-top:24px;padding-bottom:24px;}
+  .fhero__inner{align-self:stretch;display:flex;flex-direction:column;padding-top:clamp(36px,7vh,76px);padding-bottom:24px;}
+  .fhero__sig{margin-top:auto;padding-top:32px;}
+}
 /* ============================================================
    2. The man behind the vision
    ============================================================ */
@@ -234,6 +275,7 @@ body.founder main{ position:relative; z-index:1; }
   padding:clamp(var(--space-6),4vw,var(--space-8)) 0;
   border-top:1px solid var(--f-rule);
 }
+.flife__text{ display:contents; }
 .flife__yr{
   font-family:var(--font-primary); font-size:clamp(1.5rem,3vw,2.4rem);
   line-height:1; color:var(--f-gold-ink); font-variant-numeric:lining-nums;
@@ -263,9 +305,8 @@ body.founder main{ position:relative; z-index:1; }
   font-family:var(--font-primary); font-weight:400; text-transform:none;
   font-size:clamp(2.2rem,9.5vw,7.5rem); line-height:1.02;
   letter-spacing:-.03em; color:var(--f-ink);
-  border:0; padding-top:.1em;
+  border:0; padding-top:.14em; margin-bottom:.08em;
 }
-.fwords li:nth-child(even){ color:var(--f-sage); }
 .fwords li:last-child{ border:0; padding-bottom:.1em; }
 
 /* ------------------------------------------------------------
@@ -287,17 +328,42 @@ body.founder main{ position:relative; z-index:1; }
    words are then simply the words.
    ------------------------------------------------------------ */
 .fwords__w{ position:relative; display:inline-block; max-width:100%; }
+.fwords__base{ position:relative; z-index:1; }
 .fwords__lit{
-  position:absolute; inset:-.02em -.06em; padding:.02em .06em;
-  background:var(--f-gold); color:var(--f-ink);
+  display:block; position:absolute; z-index:2; inset:-.02em -.06em; padding:.02em .06em;
+  background:#392A48; color:#FFFAF0;
   /* Right inset walks from 100% to 0, so the plate opens rightwards. */
   clip-path:inset(0 calc(100% - var(--lit, 0) * 100%) 0 0);
   pointer-events:none;
 }
+.fwords li:nth-child(even) .fwords__lit{ background:#254C40; }
+.fbeyond__archive{
+  display:grid; grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);
+  grid-template-rows:repeat(2,minmax(0,1fr));
+  gap:clamp(12px,2vw,28px); align-items:stretch;
+  margin-top:clamp(var(--space-7),5vw,var(--space-9));
+}
+.founder .fbeyond__archive .ffig{ min-height:0; height:100%; overflow:hidden; }
+.founder .fbeyond__archive img{ width:100%; height:100%; object-fit:cover; filter:sepia(.08) contrast(1.04); }
+.fbeyond__archive-main{ grid-row:1 / 3; min-height:clamp(360px,40vw,620px); }
+.fbeyond__archive-main img{ object-position:center 40%; }
+.fbeyond__archive-side img{ object-position:center; }
+@media (max-width:700px){
+  .fbeyond__archive{ grid-template-columns:1fr; grid-template-rows:auto; }
+  .fbeyond__archive-main{ grid-row:auto; min-height:360px; }
+  .fbeyond__archive .ffig{ min-height:260px; }
+}
+.fwords__vapor{
+  position:absolute; z-index:3; inset:-.18em -.22em;
+  width:calc(100% + .44em); height:calc(100% + .36em);
+  max-width:none; pointer-events:none; overflow:visible;
+}
+.fwords.is-vapor-ready .fwords__base,
+.fwords.is-vapor-ready .fwords__lit{ opacity:var(--formed,0); }
 /* Nothing to reveal when the sweep cannot run: keep the plate off the
    page entirely rather than parked at zero width over the word. */
 @media (prefers-reduced-motion: reduce){
-  .fwords__lit{ display:none; }
+  .fwords__lit,.fwords__vapor{ display:none; }
 }
 
 /* ============================================================
@@ -367,6 +433,84 @@ body.founder main{ position:relative; z-index:1; }
 }
 
 /* ============================================================
+   8. The motto
+   ============================================================ */
+.fmotto{
+  position:relative; isolation:isolate; overflow:hidden;
+  padding-block:clamp(88px,8.3vw,120px)!important;
+  color:#1F1F1B; background:#FAF9F3;
+}
+.fmotto::before{
+  content:""; position:absolute; z-index:-1; inset:0;
+  width:auto; height:auto;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 760' preserveAspectRatio='xMidYMid slice'%3E%3Cg fill='none' stroke='%237E622B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' opacity='.72'%3E%3Cpath d='M-96 78C88-92 370-20 404 178c29 168-147 221-207 358-45 102-15 189 65 280'/%3E%3Cpath d='M-42 113C105-26 313 12 343 171c28 145-122 209-179 329-52 109-33 207 37 298'/%3E%3Cpath d='M29 154C142 55 265 72 286 183c23 124-92 193-143 296-53 108-49 203 3 292'/%3E%3Cpath d='M1023-80c-89 142-69 290 39 370 125 92 291 13 372 141 61 96 11 223-94 340'/%3E%3Cpath d='M1095-73c-70 122-49 241 44 306 106 74 250 16 319 119 58 87 28 199-59 312'/%3E%3Cpath d='M1170-51c-48 93-25 179 51 228 91 58 203 16 258 93 47 66 36 151-18 242'/%3E%3Cpath d='M539 714c123-119 272-151 423-88 126 53 207 43 304-23 68-46 135-62 214-47'/%3E%3Cpath d='M626 762c102-91 218-111 338-58 121 53 222 44 326-28 58-40 119-54 190-40'/%3E%3C/g%3E%3C/svg%3E");
+  background-position:center; background-size:cover; background-repeat:no-repeat;
+  opacity:.1; pointer-events:none;
+}
+.fmotto::after{
+  content:none;
+}
+.fmotto>.wrap{
+  width:min(calc(100% - (2 * var(--gut))),1240px); max-width:1240px; padding:0;
+  display:grid; grid-template-columns:minmax(0,44fr) minmax(0,56fr);
+  column-gap:clamp(64px,7vw,104px); align-items:center;
+}
+.fmotto .fmeta{
+  margin:0 0 24px; color:var(--f-gold-ink); font-size:.74rem; font-weight:650;
+  letter-spacing:.12em; text-transform:uppercase;
+}
+.fmotto__deva{
+  margin:0 0 20px; color:#706F68;
+  font-family:var(--deva); font-size:clamp(1.24rem,1.65vw,1.55rem);
+  line-height:1.5; letter-spacing:0;
+}
+.fmotto__roman{
+  margin:0; color:#1F1F1B;
+  font-family:var(--font-quote); font-size:clamp(3.6rem,5.8vw,6.35rem);
+  font-weight:400; font-style:italic; line-height:.88; letter-spacing:-.045em;
+}
+.fmotto__gloss{
+  margin:30px 0 0; color:#706F68;
+  font-family:var(--font-primary); font-size:clamp(1rem,1.35vw,1.25rem);
+  line-height:1.5; letter-spacing:0;
+}
+.fmotto__right{
+  max-width:520px; justify-self:start;
+}
+.fmotto__verse{
+  margin:0; padding:0 0 0 clamp(24px,2.5vw,34px);
+  border-left:1px solid var(--f-gold-ink); color:#1F1F1B;
+  font-family:var(--deva); font-size:clamp(1.28rem,1.75vw,1.65rem); line-height:1.85;
+}
+.fmotto__quote{
+  display:block; height:.62em; margin:0 0 16px;
+  color:var(--f-gold-ink); font-family:var(--font-quote); font-size:2.35rem; line-height:1;
+}
+.fmotto__verse p{margin:0}
+.founder .fmotto__say{
+  max-width:66ch; margin:30px 0 0; padding-left:clamp(25px,2.5vw,35px);
+  color:#706F68; font-size:1rem; line-height:1.72;
+}
+
+@media (max-width:959px){
+  .fmotto>.wrap{
+    grid-template-columns:1fr; row-gap:clamp(56px,8vw,76px);
+  }
+  .fmotto__right{max-width:620px}
+}
+@media (max-width:520px){
+  .fmotto{padding-block:72px!important}
+  .fmotto>.wrap{row-gap:48px}
+  .fmotto .fmeta{margin-bottom:20px}
+  .fmotto__deva{margin-bottom:16px}
+  .fmotto__roman{font-size:clamp(3.15rem,16vw,4.75rem);line-height:.9}
+  .fmotto__gloss{margin-top:24px}
+  .fmotto__verse{padding-left:22px;font-size:clamp(1.16rem,5.8vw,1.4rem)}
+  .founder .fmotto__say{margin-top:24px;padding-left:23px}
+  .fmotto::before,.fmotto::after{display:none}
+}
+
+/* ============================================================
    9. The student
    ============================================================ */
 .fstudent__grid{
@@ -382,8 +526,8 @@ body.founder main{ position:relative; z-index:1; }
   position:absolute; inset:0; z-index:0;
 }
 .fclose__plate img{
-  width:100%; height:100%; object-fit:cover; object-position:center 40%;
-  transform:translateY(-12%) scale(1.14); transform-origin:center top;
+  width:100%; height:100%; object-fit:cover; object-position:center 46%;
+  transform:scale(1.06); transform-origin:center;
   opacity:.34;
   -webkit-mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.25) 78%, transparent 100%);
           mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.25) 78%, transparent 100%);
@@ -495,5 +639,18 @@ body.founder main{ position:relative; z-index:1; }
     -webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.45) 9%, #000 26%);
             mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.45) 9%, #000 26%);
   }
-  .fhero__plate img{ aspect-ratio:4/5; object-fit:cover; object-position:center 58%; }
+  .fhero__plate img{ aspect-ratio:5/4; object-fit:cover; object-position:72% 48%; }
+}
+
+.fstudent__grid{align-items:stretch}
+.founder .fstudent__plate .ffig{height:100%}
+.founder .fstudent__plate img{height:100%;min-height:420px;object-fit:cover;object-position:55% center}
+@media (min-width:900px){
+  .fstudent__grid{grid-template-columns:1.3fr 1fr;gap:clamp(28px,4vw,64px)}
+  .founder .fstudent__plate img{min-height:620px}
+}
+.founder .fclose__plate img{object-position:center 46%}
+@media(max-width:759px){
+  .founder .fclose__plate img{object-position:52% center}
+  .founder .fstudent__plate img{min-height:360px;height:480px}
 }

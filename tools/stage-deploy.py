@@ -94,6 +94,19 @@ def main():
             if rel.startswith("assets/"):
                 wanted.add(rel)
 
+    # The Founder iframe is a self-contained bundle with relative JS imports
+    # and texture URLs. Ship its runtime files, not the directory as a file.
+    founder_bundle = "assets/founder-opening"
+    if any(w.rstrip("/") == founder_bundle or w.startswith(founder_bundle + "/")
+           for w in wanted):
+        wanted.discard(founder_bundle)
+        wanted.discard(founder_bundle + "/")
+        for directory, _, names in os.walk(os.path.join(ROOT, founder_bundle)):
+            for name in names:
+                if name == "gurudev-color.png":
+                    continue  # Rejected generation, retained locally but not used.
+                wanted.add(os.path.relpath(os.path.join(directory, name), ROOT).replace(os.sep, "/"))
+
     # Distribute the font licenses and provenance alongside the self-hosted files.
     for directory, _, names in os.walk(os.path.join(ROOT, "assets/fonts/licenses")):
         wanted.update(os.path.relpath(os.path.join(directory, name), ROOT).replace(os.sep, "/")
