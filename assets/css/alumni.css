@@ -111,30 +111,12 @@ body.alumni :focus-visible{
                     rgba(14,11,18,.42) 100%),
     radial-gradient(120% 70% at 50% 100%, rgba(14,11,18,.55), transparent 62%);
 }
-/* The route is cropped by "slice", and over the full height that crop drops
-   its lower end straight through the headline. Confining it to the upper
-   part of the frame keeps the line over the campus, where it belongs, and
-   off the lettering, which has to stay the most readable thing here. The
-   headline starts at about 49% of the hero at every width. */
-.aj-open__route{
-  position:absolute; inset:0 0 auto 0; z-index:2; width:100%; height:45%;
-  pointer-events:none;
-}
-.aj-open__routeLine{
-  fill:none; stroke:var(--aj-gold); stroke-width:1.6;
-  stroke-linecap:round; opacity:.92;
-  filter:drop-shadow(0 0 6px rgba(201,146,47,.45));
-}
-.aj-open__routeSeed{ fill:var(--aj-gold-lit); opacity:.95; }
-html.js-motion .aj-open__routeSeed{ opacity:0; }
-
-/* The opening block is given a measure of its own. Left to the wrap it ran
-   the full width of the page, which put the headline hard against both
-   gutters and stranded the supporting line across a very long measure. */
-.aj-open__inner{
-  position:relative; z-index:3;
-  width:100%; max-width:min(100%, 1120px);
-}
+/* No max-width here. Capping this block is what wrapped "WHERE CIRS TAKES
+   YOU" onto four lines on a wide screen and filled the window with it: the
+   headline is sized from the viewport, so a fixed container can always be
+   narrower than the line it has to hold. The lines are kept unbreakable
+   below instead, and the size is chosen so they fit. */
+.aj-open__inner{ position:relative; z-index:3; width:100%; }
 
 /* The eyebrow gets a rule to sit on, so it reads as a standing label
    rather than as a stray line of small caps above the title. */
@@ -154,16 +136,23 @@ html.js-motion .aj-open__routeSeed{ opacity:0; }
 .aj-open__title{
   margin:0; color:var(--aj-on-dark);
   font-family:var(--aj-display); font-weight:400;
-  font-size:clamp(3rem, 11.5vw, 11rem);
-  line-height:.92; letter-spacing:-.03em;
+  /* Sized so both rows clear the widest gutter-to-gutter measure at every
+     width, and so the campus behind them stays a photograph rather than a
+     backdrop. */
+  font-size:clamp(1.9rem, 6.4vw, 5.8rem);
+  line-height:1.0; letter-spacing:-.025em;
   text-transform:uppercase;
   text-shadow:0 2px 26px rgba(5,4,10,.5);
 }
-/* The mask each line rises out of. padding-bottom carries the descender
-   slot so the overflow:hidden does not shave the lettering. */
-.aj-open__line{ display:block; overflow:hidden; padding-bottom:.06em; }
-.aj-open__line > span{ display:block; will-change:transform; }
-html.js-motion .aj-open__line > span{ transform:translateY(108%); }
+/* Two rows, each on one line. nowrap is the guarantee: the size above is
+   chosen to fit, and if a future edit makes a row longer it will overflow
+   into the clip rather than silently reflow into a third row. */
+.aj-open__line{ display:block; }
+.aj-open__line > span{ display:block; white-space:nowrap; will-change:transform; }
+/* They arrive from opposite sides of the window. .aj-open clips, so nothing
+   here can put a horizontal scrollbar on the page. */
+html.js-motion .aj-open__line:nth-child(1) > span{ transform:translateX(-104vw); }
+html.js-motion .aj-open__line:nth-child(2) > span{ transform:translateX(104vw); }
 
 .aj-open__sub{
   margin:clamp(22px,3.2vw,38px) 0 0;
@@ -407,23 +396,33 @@ html.js-motion .ajc__line{ opacity:0; }
   box-shadow:0 0 0 4px rgba(201,146,47,.16), 0 0 14px 3px rgba(255,214,120,.75),
              0 0 38px 10px rgba(201,146,47,.35);
 }
-/* the flare a bright star throws, drawn only when one is asked about */
+/* The flare a bright star throws, drawn only when one is asked about. It is
+   gold and it is long, so it cannot be mistaken for the faint grey spikes
+   the background stars carry — the whole point of it is that it says THIS
+   one, and only while you are on it. Each arm needs its gradient running
+   along its own axis; a 90deg gradient on a 1px-wide bar has nowhere to
+   fade and comes out a flat line. */
 .ajc__pt .ajc__dot::before,
 .ajc__pt .ajc__dot::after{
   content:""; position:absolute; left:50%; top:50%;
-  background:linear-gradient(var(--flare-dir,90deg),
-    transparent, rgba(255,226,160,.85), transparent);
   transform:translate(-50%,-50%) scale(0);
-  transition:transform .4s var(--e);
+  transition:transform .45s var(--e2), opacity .45s var(--e);
+  opacity:0; pointer-events:none;
 }
-.ajc__pt .ajc__dot::before{ width:46px; height:1px; }
-.ajc__pt .ajc__dot::after{ width:1px; height:46px; }
+.ajc__pt .ajc__dot::before{
+  width:58px; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,226,160,.95) 50%, transparent);
+}
+.ajc__pt .ajc__dot::after{
+  width:1px; height:58px;
+  background:linear-gradient(180deg, transparent, rgba(255,226,160,.95) 50%, transparent);
+}
 .ajc__pt:hover .ajc__dot::before,
 .ajc__pt:focus-visible .ajc__dot::before,
 .ajc__pt.is-active .ajc__dot::before,
 .ajc__pt:hover .ajc__dot::after,
 .ajc__pt:focus-visible .ajc__dot::after,
-.ajc__pt.is-active .ajc__dot::after{ transform:translate(-50%,-50%) scale(1); }
+.ajc__pt.is-active .ajc__dot::after{ transform:translate(-50%,-50%) scale(1); opacity:1; }
 /* Every destination is named, all the time. Hiding the names until a point
    was hovered made a sky with nothing to read in it, and left the whole
    chapter mute to anyone who was not pointing at something. The name is
@@ -990,8 +989,7 @@ body.alumni .aj-return__acts .btn--ghost:hover{
    ============================================================ */
 @media (max-width: 899px){
   .aj-open{ padding-bottom:clamp(76px,14vh,120px); }
-  .aj-open__title{ font-size:clamp(2.6rem,13vw,5rem); }
-  .aj-open__route{ height:40%; }
+  .aj-open__title{ font-size:clamp(1.75rem,8.4vw,3.2rem); }
 
   .aj-portal__stage{ min-height:auto; padding-block:clamp(56px,10vh,88px); }
   .aj-portal{ min-height:auto; }

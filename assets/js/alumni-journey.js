@@ -443,13 +443,13 @@
     bright.sort(function (x, y) { return y.m - x.m; });
     var gSpike = el("g", {});
     var twinklers = [];
-    bright.slice(0, 9).forEach(function (st) {
-      var len = 2.2 + st.m * 4.6;
-      [[len, 0.07], [0.07, len]].forEach(function (dd) {
+    bright.slice(0, 7).forEach(function (st) {
+      var len = 0.9 + st.m * 1.7;
+      [[len, 0.045], [0.045, len]].forEach(function (dd) {
         gSpike.appendChild(el("rect", {
           x: (st.x - dd[0]).toFixed(2), y: (st.y - dd[1]).toFixed(2),
           width: (dd[0] * 2).toFixed(2), height: (dd[1] * 2).toFixed(2),
-          fill: st.hue, opacity: "0.5"
+          fill: st.hue, opacity: "0.30"
         }));
       });
       var core = el("circle", {
@@ -498,37 +498,33 @@
     var open = $("[data-open]");
     if (open) {
       var lines = $$(".aj-open__line > span", open);
-      var route = $("[data-open-route]", open);
-      var seed = $(".aj-open__routeSeed", open);
       var media = $("[data-open-media] img", open);
       var eyebrow = $("[data-open-eyebrow]", open);
       var sub = $("[data-open-sub]", open);
       var cue = $("[data-open-cue]", open);
 
-      // The sheet hides these two lines with transform:translateY(105%) so
-      // there is no flash before this file runs. GSAP reads that computed
-      // transform as a PIXEL y, not as yPercent — so tweening yPercent to 0
-      // moves nothing and the lettering stays parked off its own line box.
-      // Handing the property to GSAP first is what makes the tween real.
-      gsap.set(lines, { yPercent: 108, y: 0 });
+      // The sheet parks the two rows off opposite edges with translateX in
+      // vw, so there is no flash before this file runs. GSAP reads that
+      // computed transform as a PIXEL x — so the starting point is set here
+      // explicitly, in pixels, rather than tweening a percentage GSAP never
+      // saw. Same lesson as the vertical version this replaced.
+      var offL = function () { return -(window.innerWidth + lines[0].offsetWidth); };
+      var offR = function () { return  (window.innerWidth + lines[1].offsetWidth); };
+      if (lines[0]) gsap.set(lines[0], { x: offL(), y: 0 });
+      if (lines[1]) gsap.set(lines[1], { x: offR(), y: 0 });
       gsap.set(eyebrow, { opacity: 0, y: 14 });
       if (media) gsap.set(media, { scale: 1.14 });
-
-      var len = route ? route.getTotalLength() : 0;
-      if (route) gsap.set(route, { strokeDasharray: len, strokeDashoffset: len });
 
       var intro = gsap.timeline({ paused: true });
       // The campus settles first and keeps settling under everything else —
       // the frame is already moving when the lettering arrives, which is
       // what makes the arrival feel like a camera rather than a slide.
       if (media) intro.to(media, { scale: 1.04, duration: 2.6, ease: "power2.out" }, 0);
+      // The two rows come in from opposite sides and meet.
       intro.to(eyebrow, { opacity: 1, y: 0, duration: .8, ease: "power2.out" }, .15)
-           .to(lines, { yPercent: 0, duration: 1.25, ease: "expo.out", stagger: .11 }, .3)
-           .to(sub, { opacity: 1, duration: .9, ease: "power2.out" }, 1.05)
-           .to(cue, { opacity: 1, duration: .7, ease: "power2.out" }, 1.35);
-      if (seed) intro.to(seed, { opacity: 1, duration: .5 }, .95);
-      if (route) intro.to(route, { strokeDashoffset: len * .5, duration: 2.1,
-                                   ease: "power2.inOut" }, .75);
+           .to(lines, { x: 0, duration: 1.5, ease: "expo.out", stagger: .14 }, .28)
+           .to(sub, { opacity: 1, duration: .9, ease: "power2.out" }, 1.25)
+           .to(cue, { opacity: 1, duration: .7, ease: "power2.out" }, 1.5);
 
       whenCurtainGone(function () { intro.play(); });
 
@@ -538,11 +534,11 @@
         onToggle: function (self) { root.classList.toggle("aj-quiet", self.isActive); }
       });
 
-      /* Leaving. The two lines used to part sideways, which read as a
-         glitch rather than as a departure. They go the way they came
-         instead — up and out, in order, while the campus pushes past the
-         frame. The whole move is spent over the first 72% of the hero so
-         the screen is clear before the next chapter pins. */
+      /* Leaving, the two rows go back out the way they came in — each to
+         its own side — while the campus pushes past the frame. The move is
+         spent over the first 72% of the hero, so the screen is clear well
+         before the next chapter pins. xPercent, not pixels, so a resize
+         mid-scroll cannot strand a row halfway. */
       var leave = gsap.timeline({
         scrollTrigger: {
           trigger: open, start: "top top", end: "bottom 28%", scrub: .55
@@ -550,13 +546,13 @@
       });
       leave.to(cue, { opacity: 0, duration: .12, ease: "none" }, 0)
            .to(eyebrow, { opacity: 0, y: -22, duration: .5, ease: "none" }, 0)
-           .to(lines, { yPercent: -108, duration: .7, ease: "power1.in",
-                        stagger: .06 }, .08)
-           .to(sub, { opacity: 0, y: -26, duration: .5, ease: "none" }, .1);
+           .to(sub, { opacity: 0, y: -22, duration: .5, ease: "none" }, .1);
+      if (lines[0]) leave.to(lines[0], { xPercent: -60, opacity: 0, duration: .8,
+                                         ease: "power1.in" }, .06);
+      if (lines[1]) leave.to(lines[1], { xPercent: 60, opacity: 0, duration: .8,
+                                         ease: "power1.in" }, .06);
       if (media) leave.to(media, { scale: 1.3, yPercent: -7, ease: "none",
                                    duration: 1 }, 0);
-      if (route) leave.to(route, { strokeDashoffset: 0, ease: "none",
-                                   duration: .85 }, 0);
     }
 
     /* ---- chapter 2 and chapter 5 ------------------------- */
@@ -775,9 +771,10 @@
      what it set. */
   function failOpen() {
     $$(".aj-open__line > span").forEach(function (el) {
-      var parked = Math.abs(gsap.getProperty(el, "yPercent")) > 40 ||
+      var parked = Math.abs(gsap.getProperty(el, "x")) > 40 ||
+                   Math.abs(gsap.getProperty(el, "xPercent")) > 20 ||
                    Math.abs(gsap.getProperty(el, "y")) > 12;
-      if (parked) gsap.set(el, { yPercent: 0, y: 0, opacity: 1 });
+      if (parked) gsap.set(el, { x: 0, xPercent: 0, y: 0, opacity: 1 });
     });
     $$("[data-open-sub], [data-open-cue], [data-open-eyebrow], .ajc__pt, " +
        "[data-portal-plate], [data-portal-copy], [data-portal-depth]").forEach(function (el) {
