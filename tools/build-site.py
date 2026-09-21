@@ -35,6 +35,7 @@ import documents as docs
 import blogposts
 import crossroads
 import mathchallenge
+import creativewriting
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=64"
@@ -358,17 +359,14 @@ PAGES = {
     "creative-writing": {
         "nav": "Creative Writing",
         "title": "Creative Writing",
-        "description": "Poetry, fiction and essays by students of Chinmaya International "
-                       "Residential School.",
-        "banner": ("Creative writing", "Work <em>in Progress.</em>",
-                   "Poetry, fiction and essays, written by CIRS students."),
-        "soon": ([("Poetry", "Published as it is written"),
-                  ("Fiction", "Short stories and longer work in parts"),
-                  ("Essays", "Argument, criticism and the personal essay"),
-                  ("Submissions", "How to send work to the editorial board")],
-                 "the first pieces, and the submission address, to be supplied by the "
-                 "Crossroads Editorial Board",
-                 [("blog.html", "CIRS Blog"), ("crossroads.html", "Crossroads")]),
+        "description": "Essays, opinion and reflection by students of Chinmaya International "
+                       "Residential School, published in The Crossroads.",
+        # No banner from the shared builder. Like the Math Challenge, this page
+        # opens on a field it brings itself — a lit desk, a typewriter and an
+        # ink stroke being drawn — and carries its own h1 inside it. The sheet
+        # is assets/css/cwriting.css, scoped to body.cwriting.
+        "banner": None,
+        "sheet": "cwriting",
     },
     "captures": {
         "nav": "CIRS Captures",
@@ -1146,6 +1144,9 @@ def build(slug, page):
                        .replace("{{MATH_ZONES}}", mathchallenge.zones_html())
                        .replace("{{MATH_FILTERS}}", mathchallenge.filters_html())
                        .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html())
+                       .replace("{{CW_ROWS}}", creativewriting.rows_html())
+                       .replace("{{CW_JOURNEY}}", creativewriting.journey_html())
+                       .replace("{{CW_COUNT}}", str(creativewriting.count()))
                        .replace("{{BLOG_FRONT}}", blog.front_html())
                        .replace("{{BLOG_RAIL}}", blog.rail_html())
                        .replace("{{BLOG_COUNT}}", str(blog.count()))
@@ -1174,6 +1175,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/admissions.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
+    if slug == "creative-writing":
+        parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
