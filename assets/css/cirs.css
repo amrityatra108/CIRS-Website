@@ -504,7 +504,11 @@ section[id]{ scroll-margin-top:88px; }
    cirs.js reads it and folds the -50% into the transform it sets. */
 .hframe img{
   display:block; width:auto; max-width:none; height:var(--h);
-  object-fit:cover; border-radius:3px;
+  object-fit:cover;
+  /* Softened from 3px. The run is the one place on the site where a
+     photograph floats free of any edge, and a hairline radius on a frame
+     that size reads as a rendering artefact rather than as a decision. */
+  border-radius:clamp(10px,1.1vw,18px);
   box-shadow:0 30px 80px rgba(0,0,0,.55);
 }
 /* Above the frame and left-aligned with it, as in the reference: an index,
