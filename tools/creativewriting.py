@@ -1,42 +1,54 @@
 #!/usr/bin/env python3
 """The Creative Writing page: the moving rows of student work, and the stages.
 
-WHERE THE POSTERS COME FROM. Every card on this page is a piece the school
-has already published — the articles in tools/blogposts.py, each lifted whole
-from an issue of The Crossroads and already given a page of its own by
-build-site.py. Nothing here is written for the page: the title, the writer,
-the section and the issue are the magazine's own, and each poster opens the
-piece itself rather than a summary of it.
+THE WALL IS EMPTY ON PURPOSE. The design is four rows of posters, one row per
+class group, sliding past. The school's own creative writing has not been
+supplied yet, so every poster below is a slot that says so in plain words.
 
-That matters because the design this page is built to is a wall of moving
-posters, and a wall of moving posters is exactly the sort of thing that
-invites invented titles and invented names to fill it. There are none. Where
-the school has not published something — poetry and fiction, and the address
-to send work to — the page says so in plain words instead, in the block below
-the rows.
+The design this page is built to arrived with titles already in it — "The
+Little Dreamer", "The Secret Garden", "A Letter to Tomorrow" — and class
+attributions under them. Not one of those is a CIRS pupil's work: they are
+the mock designer's filler. Putting them on a school's live site would
+announce stories that nobody wrote, under classes that never sent them in,
+each with a READ STORY link to nothing. So they are not here.
 
-ROWS. Three, grouped by the sections the magazine itself uses, so a reader
-who wants argument and a reader who wants the campus are not given the same
-row. A row is a marquee: the cards are repeated until the strip is wider than
-any screen, and the track is two identical halves so it can loop by sliding
-exactly half its width. Only the first copy of each card is a real link —
-every repeat after it is aria-hidden and out of the tab order, so a screen
-reader and the tab key meet each piece once.
+TO PUBLISH. Add the pieces to PIECES below, keyed by class group:
 
-To add a piece: publish it in tools/blogposts.py. It joins the row its
-section belongs to, with no edit here.
+    PIECES = {
+        "5-6": [
+            {"title": "…", "author": "…", "href": "assets/documents/…pdf"},
+        ],
+    }
+
+A group with pieces renders them as posters; a group without renders its
+slots. href is optional — a piece with no file yet still reads as a poster,
+it simply does not open. Nothing else has to change: the rows, the repeats
+that fill the strip and the wall's copy all follow from this list.
+
+HOW A ROW MOVES. A row is a marquee: the cards are repeated until the strip
+is wider than any screen, and the track is two identical halves so it can
+loop by sliding exactly half its width. Where a row carries real pieces only
+the first copy is a real link — every repeat after it is aria-hidden and out
+of the tab order, so a screen reader and the tab key meet each piece once.
+A row of slots is one decorative strip: the whole track is aria-hidden and
+the row's heading carries the state in a sentence instead, rather than
+reading "awaiting a piece" eight times over.
 """
 
-import blogposts
-
-# Which sections ride in which row, and what the row is called. A section not
-# named here would be silently dropped, so ROWS is checked against the posts
-# at build time — see rows() below.
-ROWS = [
-    ("Opinion &amp; Editorial", ["Opinion", "The Editorial"]),
-    ("Culture &amp; Campus Life", ["Culture", "Campus Life", "Reflection"]),
-    ("Economics, the World &amp; Sport", ["Economics", "World", "Sport"]),
+# The four class groups, in the order they appear on the wall.
+CLASS_GROUPS = [
+    ("5-6",   "Classes V &ndash; VI"),
+    ("7-8",   "Classes VII &ndash; VIII"),
+    ("9-10",  "Classes IX &ndash; X"),
+    ("11-12", "Classes XI &ndash; XII"),
 ]
+
+# Published work, by class group. Empty until the Crossroads Editorial Board
+# supplies it — see the note at the top before filling anything in here.
+PIECES = {}
+
+# Slots shown on a row with nothing published yet.
+SLOTS = 4
 
 # The five stages, as the reference lays them out. They describe the writing,
 # not any student's writing, so nothing here is a claim about anybody.
@@ -61,78 +73,98 @@ def esc(t):
     return t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def rows():
-    """Each row with the published pieces that belong to it, newest first."""
-    by_section = {}
-    for post in blogposts.POSTS:
-        by_section.setdefault(post["section"], []).append(post)
-
-    placed = set()
-    out = []
-    for label, sections in ROWS:
-        items = []
-        for section in sections:
-            items += by_section.get(section, [])
-            placed.add(section)
-        # The magazine orders by issue; the newest issue leads the row.
-        items.sort(key=lambda p: -p["issue"])
-        if items:
-            out.append((label, items))
-
-    missed = sorted(set(by_section) - placed)
-    if missed:
-        raise ValueError("Creative Writing: no row carries " + ", ".join(missed))
-    return out
+def published():
+    """Every published piece, flattened."""
+    return [p for key, _ in CLASS_GROUPS for p in PIECES.get(key, [])]
 
 
 def count():
-    return len(blogposts.POSTS)
+    return len(published())
 
 
-def _poster(post, n, index, real):
-    """One poster. Only the first copy of a piece is a link anyone can reach."""
+def _slot(label, n, index):
+    """An empty poster: a place on the wall, and what it is waiting for."""
     glyph = GLYPHS[index % len(GLYPHS)]
-    issue = f"Issue {post['issue']:02d}"
-    when = f" &middot; {esc(post['date'])}" if post.get("date") else ""
-    hide = "" if real else ' aria-hidden="true"'
-    tab = "" if real else ' tabindex="-1"'
-    return f'''            <article class="cw-poster"{hide}>
-              <a class="cw-poster__link" href="{post['slug']}.html"{tab}>
+    return f'''            <article class="cw-poster cw-poster--slot">
+              <div class="cw-poster__card">
                 <span class="cw-poster__art" aria-hidden="true">
                   <span class="cw-poster__num">{n:02d}</span>
                   <span class="cw-poster__glyph">{glyph}</span>
                 </span>
-                <span class="cw-poster__type">{esc(post['section'])}</span>
-                <span class="cw-poster__title">{esc(post['title'])}</span>
-                <span class="cw-poster__by">{esc(post['author'])}</span>
-                <span class="cw-poster__meta">{issue}{when}</span>
+                <span class="cw-poster__type">{label}</span>
+                <span class="cw-poster__title">Awaiting a piece</span>
+                <span class="cw-poster__meta">To be supplied by the Crossroads
+                  Editorial Board</span>
+                <span class="cw-poster__read">Not yet published</span>
+              </div>
+            </article>'''
+
+
+def _poster(piece, label, n, index, real):
+    """One published piece. Only the first copy is a link anyone can reach."""
+    glyph = GLYPHS[index % len(GLYPHS)]
+    hide = "" if real else ' aria-hidden="true"'
+    tab = "" if real else ' tabindex="-1"'
+    by = esc(piece["author"])
+    note = esc(piece.get("note", ""))
+    inner = f'''                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">{n:02d}</span>
+                  <span class="cw-poster__glyph">{glyph}</span>
+                </span>
+                <span class="cw-poster__type">{label}</span>
+                <span class="cw-poster__title">{esc(piece["title"])}</span>
+                <span class="cw-poster__by">{by}</span>
+                <span class="cw-poster__meta">{note}</span>'''
+    if piece.get("href"):
+        return f'''            <article class="cw-poster"{hide}>
+              <a class="cw-poster__link" href="{piece["href"]}"{tab}>
+{inner}
                 <span class="cw-poster__read">Read the piece
                   <span aria-hidden="true">&rarr;</span></span>
               </a>
             </article>'''
+    # Published, but the school has not sent the file yet: a poster that reads
+    # as a poster and says plainly that it does not open.
+    return f'''            <article class="cw-poster"{hide}>
+              <div class="cw-poster__card">
+{inner}
+                <span class="cw-poster__read">File to follow</span>
+              </div>
+            </article>'''
 
 
 def rows_html():
-    """The three marquee rows — or nothing at all, if nothing is published."""
-    groups = rows()
-    if not groups:
-        return ""
-
+    """The four class rows — posters where there is work, slots where there is not."""
     out = []
-    for i, (label, items) in enumerate(groups):
-        # Repeat the pieces until one half of the track is wider than any
+    for i, (key, label) in enumerate(CLASS_GROUPS):
+        pieces = PIECES.get(key, [])
+        base = pieces if pieces else list(range(SLOTS))
+        # Repeat the cards until one half of the track is wider than any
         # screen, then lay two identical halves so the loop has no seam.
-        repeat = max(1, -(-MIN_PER_HALF // len(items)))
-        half = items * repeat
+        repeat = max(1, -(-MIN_PER_HALF // len(base)))
+        half = base * repeat
         cards = []
         for copy in range(2):
-            for j, post in enumerate(half):
-                real = copy == 0 and j < len(items)
-                cards.append(_poster(post, j % len(items) + 1, j, real))
+            for j, item in enumerate(half):
+                if pieces:
+                    real = copy == 0 and j < len(base)
+                    cards.append(_poster(item, label, j % len(base) + 1, j, real))
+                else:
+                    cards.append(_slot(label, j % len(base) + 1, j))
+
+        # A row of slots says its state once, in the heading, rather than
+        # eight times over in a strip a screen reader cannot skim.
+        if pieces:
+            said, track_hidden = "", ""
+        else:
+            said = (' <span class="vh">&mdash; no pieces published yet; '
+                    'awaiting the Crossroads Editorial Board.</span>')
+            track_hidden = ' aria-hidden="true"'
+
         out.append(f'''      <div class="cw-row cw-row--{'right' if i % 2 else 'left'} rv">
-        <p class="cw-row__label"><span class="sc">{label}</span></p>
+        <p class="cw-row__label"><span class="sc">{label}</span>{said}</p>
         <div class="cw-row__window">
-          <div class="cw-track">
+          <div class="cw-track"{track_hidden}>
 {chr(10).join(cards)}
           </div>
         </div>
