@@ -1,96 +1,231 @@
-<section class="section" id="pathways">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">After CIRS</span></p>
-      <h2 class="serif h2" data-split>Where the Diploma <em>takes them.</em></h2>
-      <p class="lead">The IB opens direct application to North America, the UK, Europe and
-        Australia; CBSE keeps the Indian national pathway fully open. Counselling begins in
-        Grade X.</p>
+<!-- ==================================================================
+     WHERE CIRS TAKES YOU
+     ------------------------------------------------------------------
+     One journey in seven chapters: the campus, the departure, the field
+     of destinations, the alumni themselves, the pathways out, the index,
+     and the way back. The chapters are written here; everything that is
+     a name, a university, a quotation or a count is built from
+     tools/alumni.py, which is the only place any of it is recorded.
+
+     This page brings its own opening instead of the shared banner —
+     "banner": None in build-site.py — so the <h1> is on chapter one.
+     Its sheet is assets/css/alumni.css and its script is
+     assets/js/alumni-journey.js, both scoped to body.alumni.
+     ================================================================== -->
+
+<!-- ============ CHAPTER 1 — Belonging ============ -->
+<section class="aj-open" id="top" data-ground="#0E0B12" data-open>
+  <div class="aj-open__media" data-open-media>
+    <img src="assets/img/forest-air.jpg"
+         alt="Chinmaya International Residential School from the air: the courtyards, the
+              swimming pool and the playing fields inside a boundary of forest."
+         width="1600" height="900" fetchpriority="high" decoding="async">
+  </div>
+  <div class="aj-open__wash" aria-hidden="true"></div>
+
+  <!-- The route begins here and is picked up again by chapter seven. It is
+       drawn, not plotted: a line leaving a campus, not a flight path. -->
+  <svg class="aj-open__route" viewBox="0 0 1000 600" fill="none" aria-hidden="true"
+       focusable="false" preserveAspectRatio="xMidYMid slice">
+    <path class="aj-open__routeLine" data-open-route
+          d="M492 470 C 492 406, 520 372, 566 352 C 628 326, 700 330, 754 292
+             C 812 250, 826 176, 900 128"/>
+    <circle class="aj-open__routeSeed" cx="492" cy="470" r="5"/>
+  </svg>
+
+  <div class="wrap aj-open__inner">
+    <p class="aj-open__eyebrow" data-open-eyebrow>
+      <span class="sc">The CIRS alumni community</span>
+    </p>
+    <h1 class="aj-open__title" data-open-title>
+      <span class="aj-open__line"><span>Where CIRS</span></span>
+      <span class="aj-open__line"><span>Takes You</span></span>
+    </h1>
+    <p class="aj-open__sub" data-open-sub>Many paths. One beginning.</p>
+  </div>
+
+  <p class="aj-open__cue" data-open-cue aria-hidden="true">
+    <span class="sc">Begin the journey</span>
+    <span class="aj-open__cueRule"></span>
+  </p>
+</section>
+
+<!-- ============ CHAPTER 2 — Leaving ============ -->
+<section class="aj-portal" id="departure" data-ground="#0E0B12" data-portal>
+  <div class="aj-portal__stage" data-portal-stage>
+    <div class="aj-portal__depth" aria-hidden="true" data-portal-depth></div>
+
+    <!-- The campus recedes from a full screen into one archival plate
+         floating in the dark, and the field opens behind it. -->
+    <figure class="aj-portal__plate" data-portal-plate>
+      <img src="assets/img/hrun/10-night.jpg"
+           alt="Students seated in the concentric brick rings of the CIRS amphitheatre after
+                dark, under floodlights, during evening practice."
+           width="1500" height="1000" loading="lazy" decoding="async">
+      <figcaption class="aj-portal__cap">
+        <span class="sc">Siruvani</span> The amphitheatre, after dark
+      </figcaption>
+    </figure>
+
+    <div class="aj-portal__copy" data-portal-copy>
+      <p class="marker"><span class="sc">Leaving</span></p>
+      <h2 class="serif aj-portal__head">Everyone here <em>begins in the same rings.</em></h2>
+      <p class="aj-portal__lead">CIRS has been teaching on the Siruvani campus since 1996.
+        What follows is where its students went after it &mdash; every institution the
+        school has named, and every alumnus it has named, and nothing that it has not.</p>
     </div>
   </div>
 </section>
 
-<section class="section on-purple" id="placements" data-ground="#392A48">
+<!-- ============ CHAPTER 3 — The destinations ============ -->
+<section class="aj-const" id="constellation" data-ground="#0E0B12">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">International placements</span></p>
-      <h2 class="serif h2" data-split>The universities <em>they read at.</em></h2>
-      <p class="lead">Institutions CIRS students have gone on to, in India and abroad.</p>
+    <div class="sec-head aj-const__head rv">
+      <p class="marker"><span class="sc">The field</span></p>
+      <h2 class="serif h2" data-split>Eighteen destinations, <em>one origin.</em></h2>
+      <p class="lead">Every line here starts at the same point on the Siruvani campus.
+        Choose a region to narrow the field, or open any destination to see what the
+        school has recorded about it.</p>
     </div>
+  </div>
 
-    <div class="facilities rv">
-      <div><p class="sc">India</p>
-        <p class="copy">Shri Ram College of Commerce</p>
-        <p class="copy">National Institute of Design</p>
-        <p class="copy">IIT Madras</p>
-        <p class="copy">Chinmaya Vishwa Vidyapeeth</p>
-      </div>
-      <div><p class="sc">United Kingdom</p>
-        <p class="copy">Imperial College London</p>
-        <p class="copy">The London School of Economics and Political Science</p>
-        <p class="copy">The University of Manchester</p>
-        <p class="copy">Durham University</p>
-        <p class="copy">University of Warwick</p>
-      </div>
-      <div><p class="sc">United States</p>
-        <p class="copy">University of Chicago</p>
-        <p class="copy">Northwestern University</p>
-        <p class="copy">New York University</p>
-        <p class="copy">Boston University</p>
-        <p class="copy">University of Virginia</p>
-        <p class="copy">Purdue University</p>
-        <p class="copy">The New School &mdash; Parsons</p>
-      </div>
-      <div><p class="sc">Asia&ndash;Pacific</p>
-        <p class="copy">National University of Singapore</p>
-        <p class="copy">The Hong Kong University of Science and Technology</p>
-      </div>
-    </div>
+  {{ALUMNI_CONSTELLATION}}
+
+  <div class="wrap">
+    <p class="aj-const__foot note rv">The field is a constellation, not a map: the four
+      regions group, and they group west to east, but no point claims a latitude.
+      <a href="#aj-destinations">The same eighteen institutions as a list.</a></p>
   </div>
 </section>
 
-<section class="section" id="voices">
+<!-- ============ CHAPTER 4a — In their own words ============ -->
+<section class="aj-voices" id="aj-voices" data-ground="#141018">
   <div class="wrap">
-    <div class="sec-head rv">
+    <div class="sec-head aj-voices__head rv">
       <p class="marker"><span class="sc">We are CIRS</span></p>
       <h2 class="serif h2" data-split>In their <em>own words.</em></h2>
-      <p class="lead">CIRS has been teaching on the Siruvani campus since 1996. These are alumni
-        writing about what the years there left them with.</p>
+      <p class="lead">Three alumni, writing about what the years here left them with.
+        These are the only alumni words the school has published, so each one is given
+        the room it asks for rather than a card in a row of three.</p>
     </div>
+  </div>
 
-    <div class="voices">
-      <figure class="voice rv">
-        <blockquote><p class="pull serif">&ldquo;CIRS is an <em>emotion.</em>&rdquo;</p></blockquote>
-        <figcaption class="voice__by">Kavya S</figcaption>
-      </figure>
-      <figure class="voice rv">
-        <blockquote><p class="pull serif">&ldquo;I learned the value of <em>balance</em> in my life
-          over those seven years there.&rdquo;</p></blockquote>
-        <figcaption class="voice__by">Roshan B</figcaption>
-      </figure>
-      <figure class="voice rv">
-        <blockquote><p class="pull serif">&ldquo;I would literally trade anything to just go back
-          and <em>re-live</em> each and every moment spent there.&rdquo;</p></blockquote>
-        <figcaption class="voice__by">Mugdha Sultania</figcaption>
-      </figure>
+  {{ALUMNI_VOICES}}
+</section>
+
+<!-- ============ CHAPTER 4b — The alumni the school has named ============ -->
+<section class="aj-people" id="aj-stories">
+  <div class="wrap">
+    <div class="sec-head aj-people__head rv">
+      <p class="marker"><span class="sc">Named alumni</span></p>
+      <h2 class="serif h2" data-split>Four paths, <em>followed in public.</em></h2>
+      <p class="lead">A physics department, a national cricket side, a national football
+        side and a design studio. The school has published one line about each; the rest
+        of every one of these stories is still to come, and is marked below rather than
+        filled in.</p>
     </div>
+  </div>
+
+  {{ALUMNI_PEOPLE}}
+
+  <div class="wrap">
+    <p class="note rv aj-people__foot"><em>[And many more &mdash; further alumni, their
+      batches and their portraits to be supplied by the school. The list this page builds
+      from is <code>tools/alumni.py</code>; adding an entry there publishes a chapter
+      here.]</em></p>
   </div>
 </section>
 
-<section class="section on-paper-2" id="notable">
+<!-- ============ CHAPTER 5 — Paths from CIRS ============ -->
+<!-- id="pathways" is load-bearing: the footer of every page on this site
+     links to alumni.html#pathways as "University Counselling". -->
+<section class="aj-paths" id="pathways" data-ground="#0E0B12">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Notable alumni</span></p>
-      <h2 class="serif h2" data-split>Where CIRS <em>led them.</em></h2>
+    <div class="sec-head aj-paths__head rv">
+      <p class="marker"><span class="sc">Paths from CIRS</span></p>
+      <h2 class="serif h2" data-split>Five ways <em>out of the same gate.</em></h2>
+      <p class="lead">University counselling begins in Grade X and continues through
+        Naviance. The IB opens direct application to North America, the UK, Europe and
+        Australia; CBSE keeps the Indian national pathway fully open. Each pathway below
+        names what it was drawn from.</p>
+    </div>
+  </div>
+
+  {{ALUMNI_PATHWAYS}}
+</section>
+
+<!-- ============ CHAPTER 6 — The index ============ -->
+<section class="aj-index" id="aj-destinations">
+  <div class="wrap">
+    <div class="sec-head aj-index__head rv">
+      <p class="marker"><span class="sc">Destinations</span></p>
+      <h2 class="serif h2" data-split>The institutions, <em>in plain text.</em></h2>
+      <p class="lead">The same eighteen, searchable, with the country each is in. No
+        logos: the school has no licence to reproduce eighteen university wordmarks, and
+        a list is faster to read than a wall of them.</p>
     </div>
 
-    <dl class="factrail rv">
-      <div><dt>Hari Om Jani</dt><dd>Professor of Physics, Oxford University</dd></div>
-      <div><dt>Soham Desai</dt><dd>Strength &amp; Conditioning Coach, Indian Cricket Team</dd></div>
-      <div><dt>Divyaj DT</dt><dd>Goalkeeper, National Under-19 Football Team</dd></div>
-      <div><dt>Shashwat Santosh</dt><dd>Designer, Google Creative Labs</dd></div>
-    </dl>
+    {{ALUMNI_DESTINATIONS}}
 
-    <p class="note rv"><em>[And many more &mdash; further alumni to be supplied by the school.]</em></p>
+    <figure class="aj-index__fig img-reveal rv">
+      <img src="assets/img/assembly-front.jpg"
+           alt="Students and staff assembled on the front steps of the school, holding flags
+                and country placards at a school assembly."
+           width="1400" height="624" loading="lazy" decoding="async">
+      <figcaption>Students and staff on the front steps with the flags and country
+        placards carried at a school assembly.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ CHAPTER 7 — The return ============ -->
+<section class="aj-return" id="aj-return" data-ground="#0E0B12" data-return>
+  <div class="aj-return__media" data-return-media>
+    <img src="assets/img/valley.jpg"
+         alt="The school buildings below the Western Ghats, cloud lying along the ridge
+              behind them."
+         width="1400" height="624" loading="lazy" decoding="async">
+  </div>
+  <div class="aj-return__wash" aria-hidden="true"></div>
+
+  <!-- The scattered points gather back toward one centre. Drawn as a ring of
+       marks rather than as the school's emblem: the emblem is not ours to
+       redraw, and a distorted one would be worse than none. -->
+  <svg class="aj-return__gather" viewBox="0 0 400 400" aria-hidden="true" focusable="false"
+       data-return-gather></svg>
+
+  <div class="wrap aj-return__inner">
+    <p class="marker rv"><span class="sc">The return</span></p>
+    <h2 class="serif aj-return__head" data-split>Wherever the journey leads,
+      <em>CIRS remains part of the story.</em></h2>
+
+    <div class="aj-return__acts rv">
+      <a class="btn btn--primary btn--lg"
+         href="mailto:info@cirschool.org?subject=Reconnecting%20with%20CIRS">Reconnect with CIRS</a>
+      <a class="btn btn--ghost btn--lg"
+         href="mailto:info@cirschool.org?subject=My%20CIRS%20alumni%20story">Share Your Alumni Story</a>
+    </div>
+
+    <div class="aj-return__reach rv">
+      <p class="aj-return__reachNote">Both open a message to the school office, which is
+        the only alumni contact route this site can verify today.</p>
+      <dl class="aj-return__rows">
+        <div>
+          <dt>School office</dt>
+          <dd><a href="tel:+914222613300">+91 422 261 3300</a></dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:info@cirschool.org">info@cirschool.org</a></dd>
+        </div>
+        <div>
+          <dt>Address</dt>
+          <dd>Siruvani Main Road, Coimbatore 641 114, Tamil Nadu</dd>
+        </div>
+      </dl>
+      <p class="note aj-return__await"><em>[An alumni association address, the alumni
+        register, reunion dates and any official alumni social accounts to be supplied by
+        the school. None of them are invented here.]</em></p>
+    </div>
   </div>
 </section>
