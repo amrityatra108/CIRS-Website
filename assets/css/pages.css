@@ -159,6 +159,43 @@ body.menu-open .header .wrap{
   .header.is-stuck .wrap,
   body.menu-open .header .wrap{ background:rgba(250,247,248,.64); }
 }
+/* ------------------------------------------------------------
+   The bare header
+   ------------------------------------------------------------
+   On a page that opens on a full-window composition, the glass bar
+   around the three controls comes off. Nothing is then laid across
+   the picture: only the wordmark and the controls sit on it, and
+   each of those already carries its own pill, so they stay legible
+   over photography without a container behind them.
+
+   It comes back the moment the opening has scrolled past, because
+   from there the controls are over the page's own content: without
+   it, Admissions ran its contact details straight through the News
+   pill and Why CIRS put a dark purple wordmark on an aerial
+   photograph. cirs.js carries is-atop for exactly as long as the
+   opening is on screen — not is-stuck, which a page opening on a
+   pale ground wears from the markup and never takes off.
+
+   Set per page in build-site.py: see "barehead".
+   ------------------------------------------------------------ */
+.header.is-bare.is-atop .wrap{
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+}
+@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
+  .header.is-bare.is-atop .wrap{
+    background:transparent;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+}
+body.menu-open .header.is-bare.is-atop .wrap{
+  background:rgba(250,247,248,.72);
+  border-color:rgba(57,42,72,.14);
+  box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8);
+}
+
 .header__left,
 .header__right{
   display:flex; align-items:center;

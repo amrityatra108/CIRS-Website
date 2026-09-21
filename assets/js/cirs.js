@@ -840,7 +840,28 @@
 
       // How far the stage has to travel: its own width less one screen,
       // taken from layout so no transform can feed back into it.
-      function reach() { return stage.offsetWidth; }
+      // How far the stage must travel: the right edge of the LAST item, not
+      // the width of the canvas. The stage is 780vw but the content ends at
+      // about 746vw, and measuring the canvas spent that surplus as scroll
+      // after the tenth photograph had passed — the frame slid on across an
+      // empty gold field and then reappeared parked at the left, which reads
+      // as the tenth picture arriving twice before the film section.
+      //
+      // Ghosts are excluded deliberately: they are decoration, they lag far
+      // behind their own depth, and counting them would put the surplus back
+      // and then some.
+      //
+      // offsetLeft and offsetWidth are layout values, so no transform this
+      // function's own result drives can feed back into it.
+      function reach() {
+        var kids = stage.children, far = 0;
+        for (var i = 0; i < kids.length; i++) {
+          var k = kids[i];
+          if (k.classList.contains("hghost")) continue;
+          far = Math.max(far, k.offsetLeft + k.offsetWidth);
+        }
+        return far;
+      }
 
       function place(q, dist) {
         var mid = window.innerWidth / 2;
@@ -1166,6 +1187,25 @@
         var hero = $(".hero");
         return hero ? Math.max(hero.getBoundingClientRect().height - 140, 80) : 80;
       }, function (past) { header.classList.toggle("is-stuck", past); });
+    }
+
+    // The bare header — no glass bar around the controls — belongs to the
+    // opening composition and nothing else. Taking the bar off for good
+    // looked right on the hero and was wrong two screens down: on Admissions
+    // the page's own text scrolled straight through the News pill, and on
+    // Why CIRS the wordmark ended up dark purple over an aerial photograph.
+    // The bar is what gives it a ground once content passes under it.
+    //
+    // This runs on bare pages whether or not they are litehead, so a page
+    // that opens pale loses the bar over its own opening too, which is the
+    // point of the flag.
+    if (header && header.classList.contains("is-bare")) {
+      header.classList.add("is-atop");
+      sentinel(function () {
+        var first = $("main > *");
+        if (!first) return 80;
+        return Math.max(first.offsetTop + first.offsetHeight - 120, 80);
+      }, function (past) { header.classList.toggle("is-atop", !past); });
     }
     if (!burger || !drawer) return;
     burger.addEventListener("click", function () {

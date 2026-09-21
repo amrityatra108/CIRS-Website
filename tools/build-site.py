@@ -128,6 +128,7 @@ def newsflash_html():
 #          included, because every page is still being filled in
 PAGES = {
     "index": {
+        "barehead": True,
         "nav": "Home",
         "title": "Chinmaya International Residential School — Siruvani, Coimbatore",
         "description": "A co-educational residential school on a hundred acres in the Siruvani "
@@ -152,6 +153,7 @@ PAGES = {
         "hero_extra": newsflash_html(),
     },
     "founder": {
+        "barehead": True,
         "nav": "Founder",
         "title": "Our Founder — Pujya Gurudev Swami Chinmayananda",
         "description": "Pujya Gurudev Swami Chinmayananda, 1916–1993: the teacher whose "
@@ -165,6 +167,7 @@ PAGES = {
         "cache_suffix": "-founder-15",
     },
     "why-cirs": {
+        "barehead": True,
         "nav": "Why CIRS",
         "title": "Why CIRS",
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
@@ -252,6 +255,8 @@ PAGES = {
         "sheet": "ibdp",
     },
     "student-life": {
+        "logintab": ("Student Login", "https://cirs.in/school/cirsmark/"),
+        "barehead": True,
         "nav": "Student Life",
         "title": "Student Life",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
@@ -271,6 +276,7 @@ PAGES = {
                    "The four o'clock hour, the fields it happens on, and what the teams have won."),
     },
     "crossroads": {
+        "barehead": True,
         "nav": "Crossroads",
         # The old site filed this under a "Creative Corner" this site does not
         # have; Student Life is where the arts and the clubs live here.
@@ -300,6 +306,7 @@ PAGES = {
         "litehead": True,
     },
     "cultural-gallery": {
+        "barehead": True,
         "nav": "CIRS Cultural Gallery",
         "title": "Arts, Music & Theatre",
         "description": "Music, theatre and the visual arts at Chinmaya International Residential "
@@ -346,6 +353,7 @@ PAGES = {
                  [("sports.html", "Our Sports")]),
     },
     "math-challenge": {
+        "barehead": True,
         "nav": "Math Challenge",
         "title": "Math Challenge",
         "description": "The Math Challenge at Chinmaya International Residential School — "
@@ -358,6 +366,7 @@ PAGES = {
         "sheet": "matharena",
     },
     "creative-writing": {
+        "barehead": True,
         "nav": "Creative Writing",
         "title": "Creative Writing",
         "description": "Essays, opinion and reflection by students of Chinmaya International "
@@ -1045,6 +1054,23 @@ def artswall_html():
     return ('<template id="wall-plates">\n' + "\n".join(rows) + "\n</template>")
 
 
+# A tab a single page adds to the header, beside News. Student Life is the
+# only page with one: its Student Login used to be an under-construction
+# section at the foot of a very long page, which is a poor place to put the
+# one thing a student comes for. As a header tab it is reachable from the
+# first screen, and only on the page it belongs to.
+#
+# The mark is a student rather than a generic person: a mortarboard over a
+# head and shoulders, drawn at the same size and stroke weight as the News
+# and Menu marks so the three read as one row.
+EXTRA_TAB = """      <a class="htab htab--login" href="{href}" target="_blank" rel="noopener" data-magnetic>
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.4 16 5.2 9 8 2 5.2 9 2.4Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.6 6.6v2.2c0 1.2 2 2.1 4.4 2.1s4.4-.9 4.4-2.1V6.6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M4.2 15.6a4.8 4.8 0 0 1 9.6 0" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+        </span>
+        <span class="htab__label">{label}</span>
+      </a>
+"""
+
 UC = '''<section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -1106,6 +1132,12 @@ def build(slug, page):
     # .is-stuck already defines and keeps it there — set here in the markup so
     # it holds without JavaScript, and left alone by cirs.js, which reads it.
     lite = bool(page.get("litehead"))
+    # A page that opens on a full-window composition — its own, or one of the
+    # shared heroes — wears the header bare: the glass bar around the three
+    # controls comes off so nothing is laid across the picture. The controls
+    # keep their own pills, so they stay legible over photography. Every other
+    # page keeps the bar, which is what holds them together over paper.
+    bare = bool(page.get("barehead") or page.get("hero"))
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
@@ -1118,7 +1150,11 @@ def build(slug, page):
     # Home link on Home is a link to nowhere.
     header = (read("tools/partials/header.html")
               .replace("{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
-              .replace("{{HEADER_STATE}}", " is-stuck" if lite else ""))
+              .replace("{{HEADER_STATE}}",
+                       (" is-stuck" if lite else "") + (" is-bare" if bare else ""))
+              .replace("{{HEADER_TABS}}",
+                       EXTRA_TAB.format(href=page["logintab"][1], label=page["logintab"][0])
+                       if page.get("logintab") else ""))
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
     if page.get("hero"):
