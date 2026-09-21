@@ -3,30 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Math Challenge</title>
-<meta name="description" content="The mathematics challenge at Chinmaya International Residential School.">
+<title>Maths Challenge</title>
+<meta name="description" content="The Maths Challenge at Chinmaya International Residential School — monthly problems for four grade zones, and the habits of mind they are set to build.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/math-challenge.html">
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Math Challenge">
-<meta property="og:description" content="The mathematics challenge at Chinmaya International Residential School.">
+<meta property="og:title" content="Maths Challenge">
+<meta property="og:description" content="The Maths Challenge at Chinmaya International Residential School — monthly problems for four grade zones, and the habits of mind they are set to build.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Math Challenge">
-<meta name="twitter:description" content="The mathematics challenge at Chinmaya International Residential School.">
+<meta name="twitter:title" content="Maths Challenge">
+<meta name="twitter:description" content="The Maths Challenge at Chinmaya International Residential School — monthly problems for four grade zones, and the habits of mind they are set to build.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?b=63">
 <link rel="stylesheet" href="assets/css/cirs.css?b=63">
 <link rel="stylesheet" href="assets/css/pages.css?b=63">
+<link rel="stylesheet" href="assets/css/matharena.css?b=63">
 <link rel="stylesheet" href="assets/css/typography.css?b=63">
 </head>
 
-<body>
+<body class="matharena">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -240,28 +241,161 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">Math Challenge</span></p>
-    <h1 class="serif" data-split>A Problem, <em>and Time to Think.</em></h1>
-    <p class="lead">The school’s mathematics challenge — what it is, who runs it, and how to take part.</p>
+<section class="ma-hero" id="top" data-ground="#07070A">
+  <!-- The mathematics behind the heading. All of it is decoration and none of
+       it is read aloud: the grid, the orbits, the formulae and the points are
+       one aria-hidden layer, so a screen reader meets the heading first. -->
+  <div class="ma-field" aria-hidden="true">
+    <div class="ma-field__grid"></div>
+    <div class="ma-field__orbit"></div>
+    <div class="ma-field__formulae">
+      <span class="ma-f ma-f--1">x&sup2; + y&sup2; = z&sup2;</span>
+      <span class="ma-f ma-f--2">&pi; &asymp; 3.14159</span>
+      <span class="ma-f ma-f--3">&radic;144 = 12</span>
+      <span class="ma-f ma-f--4">&sum; n = n(n+1)/2</span>
+      <span class="ma-f ma-f--5">f(x) = ax&sup2; + bx + c</span>
+      <span class="ma-f ma-f--6">&infin;</span>
+      <span class="ma-f ma-f--7">&theta; = 90&deg;</span>
+      <span class="ma-f ma-f--8">a&sup2; &minus; b&sup2;</span>
+      <span class="ma-f ma-f--9">&int; f(x) dx</span>
+    </div>
+    <svg class="ma-field__ink" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice"
+         focusable="false">
+      <circle cx="240" cy="170" r="96" />
+      <circle cx="980" cy="520" r="132" />
+      <polygon points="905,150 1010,320 800,320" />
+      <path d="M90 560 L300 430 L470 520 L640 360" />
+      <circle class="ma-field__pt" cx="300" cy="430" r="4" />
+      <circle class="ma-field__pt" cx="470" cy="520" r="4" />
+      <circle class="ma-field__pt" cx="640" cy="360" r="4" />
+    </svg>
+  </div>
+
+  <div class="wrap ma-hero__inner">
+    <p class="ma-kicker"><span class="sc">Chinmaya International Residential School</span></p>
+    <h1 class="ma-title">Maths <em>Challenge</em></h1>
+    <p class="ma-strap">Question. Reason. Discover. Solve.</p>
+    <p class="ma-hero__cta">
+      <a class="btn btn--primary" href="#zones">Find your zone</a>
+      <a class="btn btn--ghost" href="#archive">The archive</a>
+    </p>
   </div>
 </section>
-<section class="section" id="what">
+
+<section class="ma-sec ma-sec--open" id="about">
+  <div class="wrap ma-open">
+    <div class="ma-open__head rv">
+      <p class="ma-eyebrow"><span class="sc">The idea</span></p>
+      <h2 class="ma-h2">Think beyond <em>numbers.</em></h2>
+    </div>
+    <div class="ma-open__body rv">
+      <p class="ma-lead">Mathematics is more than numbers. It is about questioning, discovering
+        patterns, reasoning logically and finding creative solutions.</p>
+      <p class="ma-copy">A challenge problem is not a test of what was taught last week. It is
+        set so that the method is not obvious, so that the first idea usually fails, and so that
+        the student who gets there has had to think rather than remember.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ma-sec" id="journey">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">In preparation</span></p>
-      <h2 class="serif h2" data-split>What will be <em>on this page.</em></h2>
+    <div class="ma-sechead rv">
+      <p class="ma-eyebrow"><span class="sc">The challenge journey</span></p>
+      <h2 class="ma-h2">Five stages, <em>one problem.</em></h2>
+      <p class="ma-copy">Every challenge begins with a question. What follows is the same
+        whether the problem takes ten minutes or a week.</p>
+    </div>
+    <ol class="ma-journey">
+      <li class="ma-step rv">
+        <p class="ma-step__n">01</p>
+        <h3 class="ma-step__name">Question</h3>
+        <p class="ma-step__copy">Read it twice. Decide what is actually being asked, and what is only decoration.</p>
+      </li>
+      <li class="ma-step rv">
+        <p class="ma-step__n">02</p>
+        <h3 class="ma-step__name">Think</h3>
+        <p class="ma-step__copy">Look for the pattern, the symmetry, the thing that stays the same while everything else moves.</p>
+      </li>
+      <li class="ma-step rv">
+        <p class="ma-step__n">03</p>
+        <h3 class="ma-step__name">Explore</h3>
+        <p class="ma-step__copy">Try the small case. Draw it. Guess, then test the guess and find out why it failed.</p>
+      </li>
+      <li class="ma-step rv">
+        <p class="ma-step__n">04</p>
+        <h3 class="ma-step__name">Solve</h3>
+        <p class="ma-step__copy">Build the argument step by step, and check that each step follows from the one before it.</p>
+      </li>
+      <li class="ma-step rv">
+        <p class="ma-step__n">05</p>
+        <h3 class="ma-step__name">Discover</h3>
+        <p class="ma-step__copy">Ask what the problem was really about &mdash; that is the part that carries to the next one.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="ma-sec ma-sec--zones" id="zones">
+  <div class="wrap">
+    <div class="ma-sechead rv">
+      <p class="ma-eyebrow"><span class="sc">Choose your challenge</span></p>
+      <h2 class="ma-h2">Four zones, <em>one love of maths.</em></h2>
+      <p class="ma-copy">Problems are set for four grade groups, so that a student in Grade V
+        and a student in Grade XII are each given something that is genuinely hard for them.</p>
+    </div>
+    <div class="ma-zones">
+      <article class="ma-zone rv" data-grade="5-6">
+        <p class="ma-zone__grade">Grades 5&ndash;6</p>
+        <h3 class="ma-zone__title">Foundation Challenge</h3>
+        <p class="ma-zone__copy">Number sense, pattern and logic &mdash; problems that reward noticing rather than calculating quickly.</p>
+        <span class="ma-zone__mark" aria-hidden="true">01</span>
+      </article>
+      <article class="ma-zone rv" data-grade="7-8">
+        <p class="ma-zone__grade">Grades 7&ndash;8</p>
+        <h3 class="ma-zone__title">Logic Challenge</h3>
+        <p class="ma-zone__copy">Reasoning stretched further: relationships, geometry and the kind of puzzle that needs a plan before a pencil.</p>
+        <span class="ma-zone__mark" aria-hidden="true">02</span>
+      </article>
+      <article class="ma-zone rv" data-grade="9-10">
+        <p class="ma-zone__grade">Grades 9&ndash;10</p>
+        <h3 class="ma-zone__title">Advanced Challenge</h3>
+        <p class="ma-zone__copy">Problems that ask a student to connect ideas from different parts of the syllabus, and to justify the connection.</p>
+        <span class="ma-zone__mark" aria-hidden="true">03</span>
+      </article>
+      <article class="ma-zone rv" data-grade="11-12">
+        <p class="ma-zone__grade">Grades 11&ndash;12</p>
+        <h3 class="ma-zone__title">Master Challenge</h3>
+        <p class="ma-zone__copy">Sustained problems of the sort that reward a whole evening, and the habits of mind that higher study asks for.</p>
+        <span class="ma-zone__mark" aria-hidden="true">04</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="ma-sec" id="archive">
+  <div class="wrap">
+    <div class="ma-sechead rv">
+      <p class="ma-eyebrow"><span class="sc">The archive</span></p>
+      <h2 class="ma-h2">Find your <em>next problem.</em></h2>
+      <p class="ma-copy">Every monthly problem paper, by grade zone.</p>
     </div>
 
-    <dl class="factrail rv">
-      <div><dt>What it is</dt><dd>The format, and what a round looks like</dd></div>
-      <div><dt>Who may enter</dt><dd>Year groups, and whether entry is by team or alone</dd></div>
-      <div><dt>How it runs</dt><dd>The calendar through the school year</dd></div>
-      <div><dt>Past problems</dt><dd>The archive, and the solutions</dd></div>
-    </dl>
+      <p class="ma-empty">
+        <span class="ma-empty__mark" aria-hidden="true">&empty;</span>
+        <em>[Placeholder &mdash; the monthly problem papers, the grades each was set for and
+        the solutions, to be supplied by the mathematics department.]</em>
+        Nothing is published here yet. When the papers are added they will appear in this
+        archive, filterable by grade zone and searchable by month.
+      </p>
+  </div>
+</section>
 
-    <p class="note rv" style="margin-top:24px"><em>[Placeholder &mdash; the format, the calendar, the people who run it and the past problems, to be supplied by the mathematics department.]</em></p>
+<section class="ma-sec ma-sec--last">
+  <div class="wrap ma-last rv">
+    <p class="ma-last__quote">Every problem is an opportunity to discover a new way of
+      thinking.</p>
+    <p class="ma-last__note">Keep questioning. Keep exploring. Keep solving.</p>
   </div>
 </section>
 <section class="uc">
@@ -360,5 +494,6 @@
 <script src="assets/vendor/lenis.min.js?b=63" defer></script>
 <script src="assets/js/cirs.js?b=63" defer></script>
 <script src="assets/js/pages.js?b=63" defer></script>
+<script src="assets/js/matharena.js?b=63" defer></script>
 </body>
 </html>

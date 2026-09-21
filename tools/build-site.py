@@ -34,6 +34,7 @@ import founder
 import documents as docs
 import blogposts
 import crossroads
+import mathchallenge
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=63"
@@ -344,17 +345,15 @@ PAGES = {
     },
     "math-challenge": {
         "nav": "Math Challenge",
-        "title": "Math Challenge",
-        "description": "The mathematics challenge at Chinmaya International Residential School.",
-        "banner": ("Math Challenge", "A Problem, <em>and Time to Think.</em>",
-                   "The school\u2019s mathematics challenge \u2014 what it is, who runs it, and how to take part."),
-        "soon": ([("What it is", "The format, and what a round looks like"),
-                  ("Who may enter", "Year groups, and whether entry is by team or alone"),
-                  ("How it runs", "The calendar through the school year"),
-                  ("Past problems", "The archive, and the solutions")],
-                 "the format, the calendar, the people who run it and the past problems, "
-                 "to be supplied by the mathematics department",
-                 []),
+        "title": "Maths Challenge",
+        "description": "The Maths Challenge at Chinmaya International Residential School — "
+                       "monthly problems for four grade zones, and the habits of mind they "
+                       "are set to build.",
+        # No banner from the shared builder. This page opens on a field of
+        # mathematics it brings itself, and it is the one dark page on the
+        # site — assets/css/matharena.css, scoped to body.matharena.
+        "banner": None,
+        "sheet": "matharena",
     },
     "creative-writing": {
         "nav": "Creative Writing",
@@ -1143,6 +1142,10 @@ def build(slug, page):
                        .replace("{{CROSSROADS_LATEST_LINK}}", crossroads_latest())
                        .replace("{{CROSSROADS_LATEST_FEATURE}}", crossroads_latest(feature=True))
                        .replace("{{CROSSROADS_STORIES_COVERS}}", crossroads_stories_covers())
+                       .replace("{{MATH_JOURNEY}}", mathchallenge.journey_html())
+                       .replace("{{MATH_ZONES}}", mathchallenge.zones_html())
+                       .replace("{{MATH_FILTERS}}", mathchallenge.filters_html())
+                       .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html())
                        .replace("{{BLOG_FRONT}}", blog.front_html())
                        .replace("{{BLOG_RAIL}}", blog.rail_html())
                        .replace("{{BLOG_COUNT}}", str(blog.count()))
@@ -1169,6 +1172,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
         parts.append(f'<script src="assets/js/admissions.js?{CACHE_BUST}" defer></script>')
+    if slug == "math-challenge":
+        parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
