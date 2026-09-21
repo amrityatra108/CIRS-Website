@@ -38,7 +38,7 @@ import mathchallenge
 import creativewriting
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=64"
+CACHE_BUST = "b=65"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -153,6 +153,7 @@ PAGES = {
         "hero_extra": newsflash_html(),
     },
     "founder": {
+        "litehead": True,
         "barehead": True,
         "nav": "Founder",
         "title": "Our Founder — Pujya Gurudev Swami Chinmayananda",
