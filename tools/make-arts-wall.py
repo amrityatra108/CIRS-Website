@@ -14,7 +14,7 @@ finds them, and the thing worth keeping in a photograph of a lit stage is the
 light. So most of the colour survives and the wash is a whisper — just enough
 that twenty-eight photographs from twenty-eight evenings read as one wall.
 
-Two sources feed it:
+Two source families feed it:
 
   * assets/source/ — the camera originals, cropped and graded here.
   * assets/source/archive/ — the photographs the designer had already chosen
@@ -22,8 +22,11 @@ Two sources feed it:
     this page. They arrived small and there is no larger copy of them in this
     repository, so they are carried across as they are rather than upscaled
     into softness.
-  * assets/source/cultural-gallery/ — the small Drive renditions used only by
-    the moving tiles. The opened 1600px copies remain on the school's Drive.
+
+The 48 CIRS Cultural Gallery tiles arrived as already-web-sized Drive
+renditions and live in assets/img/arts/thumbs/. The script preserves those
+bytes while rebuilding the generated directory. Their opened 1600px copies
+remain on the school's Drive.
 
 SPIC MACAY.jpg is a contact sheet of six photographs from the society's
 visiting-artist concerts, so it is cut back into the six. They are visiting
@@ -41,7 +44,6 @@ from PIL import Image, ImageEnhance, ImageOps
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "assets/source")
 ARCHIVE = os.path.join(ROOT, "assets/source/archive")
-CULTURAL = os.path.join(ROOT, "assets/source/cultural-gallery")
 OUT = os.path.join(ROOT, "assets/img/arts")
 
 FULL = 1600           # long edge of the copy a tile opens
@@ -152,10 +154,19 @@ def main():
     if not os.path.exists(os.path.join(SRC, SHEET)):
         missing.append(SHEET)
     missing += [s for _, s in CARRIED if not os.path.exists(os.path.join(ARCHIVE, s))]
-    missing += [f"cultural-gallery/{name}.jpg" for name in CULTURAL_TILES
-                if not os.path.exists(os.path.join(CULTURAL, f"{name}.jpg"))]
+    cultural_paths = {name: os.path.join(OUT, "thumbs", f"{name}.jpg")
+                      for name in CULTURAL_TILES}
+    missing += [f"img/arts/thumbs/{name}.jpg" for name, path in cultural_paths.items()
+                if not os.path.exists(path)]
     if missing:
         sys.exit("make-arts-wall: not found — " + ", ".join(missing))
+
+    # OUT is regenerated below. Keep the externally imported tile renditions
+    # in memory so that a routine rebuild cannot discard them.
+    cultural_tiles = {}
+    for name, path in cultural_paths.items():
+        with open(path, "rb") as source:
+            cultural_tiles[name] = source.read()
 
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
@@ -183,9 +194,9 @@ def main():
     # unreferenced local "full" duplicates here.
     cultural_tile_kb = 0
     for name in CULTURAL_TILES:
-        source = os.path.join(CULTURAL, f"{name}.jpg")
         target = os.path.join(OUT, "thumbs", f"{name}.jpg")
-        shutil.copyfile(source, target)
+        with open(target, "wb") as output:
+            output.write(cultural_tiles[name])
         tile_kb = os.path.getsize(target) // 1024
         cultural_tile_kb += tile_kb
         print(f"  {name:<16} Drive full       tile {tile_kb:>3} KB")
