@@ -165,21 +165,6 @@ html.js-motion .aj-open__line:nth-child(2) > span{ transform:translateX(104vw); 
 html.js-motion .aj-open__sub{ opacity:0; }
 html.js-motion .aj-open__eyebrow{ opacity:0; }
 
-.aj-open__cue{
-  position:absolute; z-index:3; left:50%; transform:translateX(-50%);
-  bottom:clamp(18px,3vh,32px); margin:0;
-  display:flex; flex-direction:column; align-items:center; gap:10px;
-}
-.aj-open__cue .sc{
-  font-size:.62rem; letter-spacing:.26em; text-transform:uppercase;
-  color:var(--aj-on-dark-mute);
-}
-.aj-open__cueRule{
-  display:block; width:1px; height:clamp(26px,4vh,44px);
-  background:linear-gradient(to bottom, var(--aj-gold), transparent);
-}
-html.js-motion .aj-open__cue{ opacity:0; }
-
 /* The navigation goes quiet over the opening and comes back the moment it
    is scrolled past, hovered, or given focus from the keyboard. */
 body.alumni.aj-quiet .header{

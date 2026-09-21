@@ -501,7 +501,6 @@
       var media = $("[data-open-media] img", open);
       var eyebrow = $("[data-open-eyebrow]", open);
       var sub = $("[data-open-sub]", open);
-      var cue = $("[data-open-cue]", open);
 
       // The sheet parks the two rows off opposite edges with translateX in
       // vw, so there is no flash before this file runs. GSAP reads that
@@ -523,10 +522,7 @@
       // The two rows come in from opposite sides and meet.
       intro.to(eyebrow, { opacity: 1, y: 0, duration: .8, ease: "power2.out" }, .15)
            .to(lines, { x: 0, duration: 1.5, ease: "expo.out", stagger: .14 }, .28)
-           .to(sub, { opacity: 1, duration: .9, ease: "power2.out" }, 1.25)
-           .to(cue, { opacity: 1, duration: .7, ease: "power2.out" }, 1.5);
-
-      whenCurtainGone(function () { intro.play(); });
+           .to(sub, { opacity: 1, duration: .9, ease: "power2.out" }, 1.25);
 
       // The header goes quiet while the opening holds the screen.
       ScrollTrigger.create({
@@ -534,46 +530,73 @@
         onToggle: function (self) { root.classList.toggle("aj-quiet", self.isActive); }
       });
 
-      /* Leaving, the two rows go back out the way they came in — each to
-         its own side — while the campus pushes past the frame. The move is
-         spent over the first 72% of the hero, so the screen is clear well
-         before the next chapter pins.
+      /* Leaving: the two rows go back out the way they came in, each to its
+         own side, while the campus pushes past the frame. The move is spent
+         over the first 72% of the hero, so the screen is clear well before
+         the next chapter pins.
 
-         EVERY TWEEN HERE IS A fromTo, AND THAT IS THE WHOLE POINT. A plain
-         .to() records its start value the first time it renders, and this
-         timeline is built while the entrance is still parked off-screen
-         waiting for the curtain. It recorded THAT as home — so scrolling
-         back up to the top restored the parked state instead of the hero:
-         no headline, no eyebrow, no line underneath, and the campus left
-         sitting up off its own frame with black below it.
+         IT IS BUILT AFTER THE ENTRANCE HAS FINISHED, and that is the whole
+         point. Two earlier versions of this got the top of the page wrong
+         in two different ways:
 
-         Writing both ends out means the top of the page is a fixed state
-         rather than whatever happened to be on screen when GSAP first
-         looked. immediateRender:false keeps these from being stamped on at
-         build time, which would undo the entrance before it plays. */
-      var leave = gsap.timeline({
-        scrollTrigger: {
-          trigger: open, start: "top top", end: "bottom 28%",
-          scrub: .55, invalidateOnRefresh: true
+         A plain .to() records its start value the first time it renders,
+         and that happened while the entrance was still parked off-screen
+         waiting for the curtain. GSAP was told off-screen WAS home, so
+         scrolling back to the top put it back there.
+
+         fromTo with immediateRender:false fixed the values but broke the
+         return: at timeline progress 0 the tweens positioned later than 0
+         have not started, so GSAP left them holding their END values. The
+         trigger read progress 0 while the hero sat fully departed — a blank
+         page at the top after any jump back from far down.
+
+         Waiting until the entrance is done means plain fromTo, rendering
+         immediately, against a hero that is already exactly where it
+         belongs. Both ends are written out, so the top of the page is a
+         fixed state rather than whatever happened to be on screen when
+         GSAP first looked. */
+      var leaveBuilt = false;
+      function buildLeave() {
+        if (leaveBuilt) return;
+        leaveBuilt = true;
+
+        var leave = gsap.timeline({
+          scrollTrigger: {
+            trigger: open, start: "top top", end: "bottom 28%",
+            scrub: .55, invalidateOnRefresh: true
+          }
+        });
+        function part(el, to, at) {
+          if (!el) return;
+          var vars = { ease: "none" };
+          for (var k in to) vars[k] = to[k];
+          leave.fromTo(el, { opacity: 1, x: 0, xPercent: 0, y: 0 }, vars, at);
         }
-      });
-      var IR = { immediateRender: false };
-      function part(el, to, at) {
-        if (!el) return;
-        var from = { opacity: 1, x: 0, xPercent: 0, y: 0 };
-        leave.fromTo(el, from, Object.assign({ ease: "none" }, to, IR), at);
+        part(eyebrow, { opacity: 0, y: -22, duration: .5 }, 0);
+        part(sub,     { opacity: 0, y: -22, duration: .5 }, .1);
+        part(lines[0], { xPercent: -60, opacity: 0, duration: .8, ease: "power1.in" }, .06);
+        part(lines[1], { xPercent:  60, opacity: 0, duration: .8, ease: "power1.in" }, .06);
+        if (media) {
+          leave.fromTo(media, { scale: 1.04, yPercent: 0 },
+            { scale: 1.3, yPercent: -7, ease: "none", duration: 1 }, 0);
+        }
       }
-      part(cue,     { opacity: 0, duration: .12 }, 0);
-      part(eyebrow, { opacity: 0, y: -22, duration: .5 }, 0);
-      part(sub,     { opacity: 0, y: -22, duration: .5 }, .1);
-      part(lines[0], { xPercent: -60, opacity: 0, duration: .8, ease: "power1.in" }, .06);
-      part(lines[1], { xPercent:  60, opacity: 0, duration: .8, ease: "power1.in" }, .06);
-      if (media) {
-        leave.fromTo(media,
-          { scale: 1.04, yPercent: 0 },
-          { scale: 1.3, yPercent: -7, ease: "none", duration: 1,
-            immediateRender: false }, 0);
+
+      intro.eventCallback("onComplete", buildLeave);
+      whenCurtainGone(function () { intro.play(); });
+
+      /* If the reader starts moving before the entrance has finished, run
+         it to its end and hand over at once — otherwise the hero would have
+         no exit for as long as the entrance had left to play. */
+      function handover() {
+        if (leaveBuilt) { window.removeEventListener("scroll", handover); return; }
+        if (window.scrollY < 3) return;
+        window.removeEventListener("scroll", handover);
+        intro.progress(1);
+        buildLeave();
+        ScrollTrigger.refresh();
       }
+      window.addEventListener("scroll", handover, { passive: true });
     }
 
     /* ---- chapter 2 and chapter 5 ------------------------- */
@@ -651,11 +674,25 @@
         }
       });
 
+      /* The dots move the page through the shared smooth-scroll engine, not
+         through window.scrollTo. cirs.js runs Lenis, and Lenis owns the
+         scroll position — it re-applies its own every frame, so a
+         window.scrollTo is simply swallowed and clicking a dot did nothing
+         at all. cirs.js publishes a "cirs-section-scroll" event for exactly
+         this, which is what a page script is meant to ask through. The
+         direct call stays as the fallback for when Lenis is not running:
+         reduced motion, or the engine having failed to load. */
       function goto(n) {
         var trig = railTween.scrollTrigger;
         if (!trig) return;
         var p = scenes.length > 1 ? n / (scenes.length - 1) : 0;
-        window.scrollTo({ top: trig.start + (trig.end - trig.start) * p, behavior: "smooth" });
+        var top = Math.round(trig.start + (trig.end - trig.start) * p);
+        var ev = new CustomEvent("cirs-section-scroll", {
+          detail: { top: top, duration: .9 }, cancelable: true
+        });
+        window.dispatchEvent(ev);
+        // defaultPrevented means the engine took it; otherwise do it here.
+        if (!ev.defaultPrevented) window.scrollTo({ top: top, behavior: "smooth" });
       }
       dots.forEach(function (d, n) { d.addEventListener("click", function () { goto(n); }); });
 
@@ -794,13 +831,11 @@
      ========================================================== */
   /* It may only restore OPACITY. An earlier version also wrote
      transform:none, which is a different thing entirely on this page:
-     the scroll cue is centred with translateX(-50%) and every one of the
-     nineteen destinations is placed with translate(-50%,-50%), so
-     clearing their transforms threw the cue half its own width to the
-     right and would have unpinned every star from its arm. The one
-     element whose transform genuinely has to be undone is a masked
-     headline line, and that is done by name, through GSAP, which knows
-     what it set. */
+     every one of the nineteen destinations is placed on its arm with
+     translate(-50%,-50%), so clearing transforms would have unpinned all
+     of them from the galaxy. The only transforms that genuinely have to
+     be undone are the two headline rows', and those are done by name,
+     through GSAP, which knows what it set. */
   function failOpen() {
     $$(".aj-open__line > span").forEach(function (el) {
       var parked = Math.abs(gsap.getProperty(el, "x")) > 40 ||
@@ -808,7 +843,7 @@
                    Math.abs(gsap.getProperty(el, "y")) > 12;
       if (parked) gsap.set(el, { x: 0, xPercent: 0, y: 0, opacity: 1 });
     });
-    $$("[data-open-sub], [data-open-cue], [data-open-eyebrow], .ajc__pt, " +
+    $$("[data-open-sub], [data-open-eyebrow], .ajc__pt, " +
        "[data-portal-plate], [data-portal-copy], [data-portal-depth]").forEach(function (el) {
       if (parseFloat(getComputedStyle(el).opacity) < .05) el.style.opacity = "1";
     });
@@ -839,11 +874,10 @@
       /* The sweep fires ONLY if nothing got built. It used to fire on a
          plain timer, and that made it a saboteur rather than a safety
          net: by the time it ran the reader could already have scrolled,
-         and it would then shove the scroll cue, the eyebrow and the
+         and it would then shove the eyebrow, the headline rows and the
          departure chapter's copy back to full opacity — over the top of
          the scroll-driven timelines that had quite deliberately just
-         taken them down. The scroll cue stayed on screen the whole way
-         through the hero because of it. */
+         taken them down. */
       window.setTimeout(function () {
         if (!motionBuilt()) failOpen();
       }, 3200);
