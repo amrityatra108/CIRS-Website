@@ -4,29 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Creative Writing</title>
-<meta name="description" content="Poetry, fiction and essays by students of Chinmaya International Residential School.">
+<meta name="description" content="Essays, opinion and reflection by students of Chinmaya International Residential School, published in The Crossroads.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/creative-writing.html">
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Creative Writing">
-<meta property="og:description" content="Poetry, fiction and essays by students of Chinmaya International Residential School.">
+<meta property="og:description" content="Essays, opinion and reflection by students of Chinmaya International Residential School, published in The Crossroads.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Creative Writing">
-<meta name="twitter:description" content="Poetry, fiction and essays by students of Chinmaya International Residential School.">
+<meta name="twitter:description" content="Essays, opinion and reflection by students of Chinmaya International Residential School, published in The Crossroads.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?b=64">
 <link rel="stylesheet" href="assets/css/cirs.css?b=64">
 <link rel="stylesheet" href="assets/css/pages.css?b=64">
+<link rel="stylesheet" href="assets/css/cwriting.css?b=64">
 <link rel="stylesheet" href="assets/css/typography.css?b=64">
 </head>
 
-<body>
+<body class="cwriting">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -240,33 +241,1357 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">Creative writing</span></p>
-    <h1 class="serif" data-split>Work <em>in Progress.</em></h1>
-    <p class="lead">Poetry, fiction and essays, written by CIRS students.</p>
+<section class="cw-hero" id="top" aria-labelledby="cw-title">
+  <!-- Everything between here and the heading is decoration: a lit ground,
+       grain, floating manuscript pages, glass, an ink stroke being drawn, a
+       typewriter and a desk. All of it is aria-hidden, so a screen reader
+       meets the heading first and none of it is read aloud. -->
+  <div class="cw-hero-bg" aria-hidden="true"></div>
+  <div class="cw-hero-light" aria-hidden="true"></div>
+  <div class="cw-grain" aria-hidden="true"></div>
+
+  <div class="cw-plane cw-plane--quotes" aria-hidden="true">
+    <span class="cw-quote cw-quote--open">&ldquo;</span>
+    <span class="cw-quote cw-quote--close">&rdquo;</span>
+  </div>
+
+  <div class="cw-plane cw-plane--paper" aria-hidden="true">
+    <div class="cw-floating-paper cw-floating-paper--1">
+      <svg viewBox="0 0 120 156">
+        <defs>
+          <linearGradient id="cwPaperShade1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FFFFFF" stop-opacity=".22"/>
+            <stop offset="1" stop-color="#4A2939" stop-opacity=".24"/>
+          </linearGradient>
+        </defs>
+        <rect width="120" height="156" rx="2" fill="#FBF5EB" opacity=".93"/>
+        <rect width="120" height="156" rx="2" fill="url(#cwPaperShade1)"/>
+        <g fill="#241B25" opacity=".26">
+          <rect x="16" y="26" width="78" height="2.4" rx="1.2"/>
+          <rect x="16" y="42" width="88" height="2.4" rx="1.2"/>
+          <rect x="16" y="58" width="64" height="2.4" rx="1.2"/>
+          <rect x="16" y="74" width="84" height="2.4" rx="1.2"/>
+          <rect x="16" y="90" width="52" height="2.4" rx="1.2"/>
+          <rect x="16" y="106" width="76" height="2.4" rx="1.2"/>
+        </g>
+      </svg>
+    </div>
+    <div class="cw-floating-paper cw-floating-paper--2">
+      <svg viewBox="0 0 100 130">
+        <rect width="100" height="130" rx="2" fill="#FBF5EB" opacity=".9"/>
+        <g fill="#241B25" opacity=".22">
+          <rect x="14" y="24" width="66" height="2.2" rx="1.1"/>
+          <rect x="14" y="40" width="72" height="2.2" rx="1.1"/>
+          <rect x="14" y="56" width="48" height="2.2" rx="1.1"/>
+          <rect x="14" y="72" width="68" height="2.2" rx="1.1"/>
+        </g>
+      </svg>
+    </div>
+    <div class="cw-floating-paper cw-floating-paper--3">
+      <svg viewBox="0 0 110 142">
+        <rect width="110" height="142" rx="2" fill="#FBF5EB" opacity=".92"/>
+        <g fill="#241B25" opacity=".24">
+          <rect x="15" y="28" width="70" height="2.3" rx="1.15"/>
+          <rect x="15" y="44" width="80" height="2.3" rx="1.15"/>
+          <rect x="15" y="60" width="56" height="2.3" rx="1.15"/>
+          <rect x="15" y="76" width="74" height="2.3" rx="1.15"/>
+          <rect x="15" y="92" width="44" height="2.3" rx="1.15"/>
+        </g>
+        <path d="M15 112c10-7 18 5 27-1s13-8 22-3" stroke="#C69A4B" stroke-width="1.4"
+              fill="none" opacity=".55"/>
+      </svg>
+    </div>
+    <div class="cw-floating-paper cw-floating-paper--4">
+      <svg viewBox="0 0 86 110">
+        <rect width="86" height="110" rx="2" fill="#FBF5EB" opacity=".86"/>
+        <g fill="#241B25" opacity=".2">
+          <rect x="12" y="22" width="56" height="2" rx="1"/>
+          <rect x="12" y="36" width="62" height="2" rx="1"/>
+          <rect x="12" y="50" width="40" height="2" rx="1"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="cw-plane cw-plane--glass" aria-hidden="true">
+    <div class="cw-glass-orb cw-glass-orb--1"></div>
+    <div class="cw-glass-orb cw-glass-orb--2"></div>
+    <div class="cw-glass-orb cw-glass-orb--3"></div>
+  </div>
+
+  <div class="cw-plane cw-plane--ink" aria-hidden="true">
+    <svg class="cw-ink-trail" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="cwInkGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#C69A4B" stop-opacity="0"/>
+          <stop offset=".22" stop-color="#C69A4B" stop-opacity=".75"/>
+          <stop offset=".55" stop-color="#EAD39B" stop-opacity=".95"/>
+          <stop offset=".85" stop-color="#B76E79" stop-opacity=".6"/>
+          <stop offset="1" stop-color="#B76E79" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path stroke-width="1.7"
+            d="M180 628c92-46 170 22 258-12s126-92 214-84 132 86 226 64 154-96 246-70"/>
+      <path class="cw-ink-flourish" stroke-width="1.3"
+            d="M1080 600c34-30 8-66-20-52s-20 60 18 66 76-26 92-58"/>
+      <path class="cw-ink-flourish" stroke-width="1.2"
+            d="M300 208c26-22 6-52-16-40s-14 46 16 50 58-22 70-46"/>
+    </svg>
+  </div>
+
+  <div class="cw-plane cw-plane--desk" aria-hidden="true">
+    <div class="cw-typewriter">
+      <svg viewBox="0 0 340 256">
+        <defs>
+          <linearGradient id="cwBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3A2B3E"/><stop offset="1" stop-color="#1B141D"/>
+          </linearGradient>
+          <linearGradient id="cwDeck" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2B2030"/><stop offset="1" stop-color="#171117"/>
+          </linearGradient>
+          <linearGradient id="cwSheet" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFFCF6"/><stop offset="1" stop-color="#E8DCC6"/>
+          </linearGradient>
+          <clipPath id="cwPaperClip"><rect x="60" y="-80" width="240" height="180"/></clipPath>
+        </defs>
+        <ellipse cx="170" cy="238" rx="150" ry="13" fill="#0C080D" opacity=".55"/>
+        <g class="cw-tw-carriage">
+          <g clip-path="url(#cwPaperClip)">
+            <g class="cw-tw-paper">
+              <rect x="122" y="-38" width="110" height="146" rx="1.5" fill="url(#cwSheet)"/>
+              <g fill="#241B25" opacity=".42">
+                <rect class="cw-tw-line" x="136" y="-16" width="80" height="2.2" rx="1.1"/>
+                <rect class="cw-tw-line cw-tw-line--2" x="136" y="2" width="68" height="2.2" rx="1.1"/>
+                <rect class="cw-tw-line cw-tw-line--3" x="136" y="20" width="76" height="2.2" rx="1.1"/>
+              </g>
+            </g>
+          </g>
+          <path d="M112 100 L238 100 L252 74 L126 74 Z" fill="#241B25" opacity=".85"/>
+          <path d="M112 100 L238 100 L252 74 L126 74 Z" fill="none" stroke="#C69A4B"
+                stroke-width=".9" opacity=".5"/>
+          <rect x="102" y="98" width="142" height="20" rx="10" fill="#151016"/>
+          <rect x="102" y="98" width="142" height="20" rx="10" fill="none" stroke="#C69A4B"
+                stroke-width=".9" opacity=".45"/>
+          <rect x="112" y="103" width="122" height="4" rx="2" fill="#EAD39B" opacity=".14"/>
+          <ellipse cx="99" cy="108" rx="11" ry="13" fill="#2E2233" stroke="#C69A4B"
+                   stroke-width=".9" opacity=".95"/>
+          <ellipse cx="247" cy="108" rx="11" ry="13" fill="#2E2233" stroke="#C69A4B"
+                   stroke-width=".9" opacity=".95"/>
+          <path d="M252 96 L274 84" stroke="#C69A4B" stroke-width="2.4" stroke-linecap="round"
+                opacity=".75"/>
+        </g>
+        <g stroke="#C69A4B" stroke-width="1.5" stroke-linecap="round" opacity=".5">
+          <path class="cw-tw-bar" d="M170 142 L166 120"/>
+          <path d="M154 144 L148 124" opacity=".7"/>
+          <path d="M186 144 L192 124" opacity=".7"/>
+          <path d="M140 148 L130 130" opacity=".5"/>
+          <path d="M200 148 L210 130" opacity=".5"/>
+        </g>
+        <g>
+          <circle cx="108" cy="140" r="15" fill="#241B25" stroke="#C69A4B" stroke-width="1.1"
+                  opacity=".9"/>
+          <circle cx="108" cy="140" r="6" fill="#4A2939"/>
+          <circle cx="232" cy="140" r="15" fill="#241B25" stroke="#C69A4B" stroke-width="1.1"
+                  opacity=".9"/>
+          <circle cx="232" cy="140" r="6" fill="#4A2939"/>
+        </g>
+        <path d="M46 228 H294 L272 176 H68 Z" fill="url(#cwBody)"/>
+        <path d="M46 228 H294 L272 176 H68 Z" fill="none" stroke="#C69A4B" stroke-width=".9"
+              opacity=".38"/>
+        <path d="M70 176 H270 L252 150 H88 Z" fill="url(#cwDeck)"/>
+        <path d="M70 176 H270 L252 150 H88 Z" fill="none" stroke="#C69A4B" stroke-width=".8"
+              opacity=".3"/>
+        <rect x="150" y="206" width="40" height="7" rx="3.5" fill="#C69A4B" opacity=".55"/>
+        <g fill="#2A1F2E" stroke="#C69A4B" stroke-width=".7">
+          <g class="cw-tw-key cw-tw-key--1"><ellipse cx="106" cy="170" rx="7" ry="5"/></g>
+          <g class="cw-tw-key cw-tw-key--2"><ellipse cx="126" cy="170" rx="7" ry="5"/></g>
+          <g class="cw-tw-key cw-tw-key--3"><ellipse cx="146" cy="170" rx="7" ry="5"/></g>
+          <g class="cw-tw-key cw-tw-key--4"><ellipse cx="166" cy="170" rx="7" ry="5"/></g>
+          <g class="cw-tw-key cw-tw-key--5"><ellipse cx="186" cy="170" rx="7" ry="5"/></g>
+          <g class="cw-tw-key cw-tw-key--6"><ellipse cx="206" cy="170" rx="7" ry="5"/></g>
+          <g class="cw-tw-key cw-tw-key--7"><ellipse cx="226" cy="170" rx="7" ry="5"/></g>
+          <g class="cw-tw-key cw-tw-key--8"><ellipse cx="116" cy="158" rx="6.6" ry="4.6"/></g>
+          <g class="cw-tw-key cw-tw-key--9"><ellipse cx="136" cy="158" rx="6.6" ry="4.6"/></g>
+          <g class="cw-tw-key cw-tw-key--10"><ellipse cx="156" cy="158" rx="6.6" ry="4.6"/></g>
+          <g class="cw-tw-key cw-tw-key--11"><ellipse cx="176" cy="158" rx="6.6" ry="4.6"/></g>
+          <g class="cw-tw-key cw-tw-key--12"><ellipse cx="196" cy="158" rx="6.6" ry="4.6"/></g>
+          <g class="cw-tw-key cw-tw-key--13"><ellipse cx="216" cy="158" rx="6.6" ry="4.6"/></g>
+        </g>
+        <rect x="128" y="188" width="84" height="8" rx="4" fill="#2A1F2E" stroke="#C69A4B"
+              stroke-width=".7"/>
+      </svg>
+    </div>
+
+    <div class="cw-manuscript">
+      <svg viewBox="0 0 220 278">
+        <defs>
+          <linearGradient id="cwMsShade" x1="0" y1="0" x2=".8" y2="1">
+            <stop offset="0" stop-color="#FFFFFF" stop-opacity=".2"/>
+            <stop offset="1" stop-color="#4A2939" stop-opacity=".26"/>
+          </linearGradient>
+        </defs>
+        <g transform="rotate(-5 110 139)">
+          <rect x="6" y="8" width="208" height="264" rx="2" fill="#0C080D" opacity=".35"/>
+          <rect x="0" y="0" width="208" height="264" rx="2" fill="#FBF5EB"/>
+          <rect x="0" y="0" width="208" height="264" rx="2" fill="url(#cwMsShade)"/>
+          <g stroke="#241B25" stroke-width="1.6" fill="none" opacity=".3" stroke-linecap="round">
+            <path d="M52 44c10-8 16 6 26 0s14-8 24-2 16 4 26-2"/>
+            <path d="M24 78c14-9 22 7 36 0s18-8 32-1 20 4 32-3"/>
+            <path d="M24 106c12-8 20 6 32 0s16-7 28-1 18 4 28-3"/>
+            <path d="M24 134c16-9 24 7 38 0s20-8 34-1"/>
+            <path d="M24 162c12-8 20 6 32 0s16-7 28-1 18 4 28-3"/>
+            <path d="M24 190c14-9 22 7 36 0s18-8 30-1"/>
+          </g>
+          <path d="M60 224c22-16 44 10 66-4" stroke="#B76E79" stroke-width="1.4" fill="none"
+                opacity=".5"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cw-desk-tools">
+      <svg viewBox="0 0 300 150">
+        <defs>
+          <linearGradient id="cwPenBody" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#2B1F2F"/><stop offset=".5" stop-color="#4A2939"/>
+            <stop offset="1" stop-color="#1D161F"/>
+          </linearGradient>
+          <linearGradient id="cwGlass" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#EAD39B" stop-opacity=".3"/>
+            <stop offset="1" stop-color="#4A2939" stop-opacity=".9"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="150" cy="140" rx="120" ry="8" fill="#0C080D" opacity=".45"/>
+        <path d="M208 138 H276 L272 84 H212 Z" fill="url(#cwGlass)" stroke="#C69A4B"
+              stroke-width="1.1"/>
+        <path d="M214 138 H270 L268 104 H216 Z" fill="#3A2033" opacity=".95"/>
+        <rect x="230" y="70" width="28" height="16" rx="3" fill="#241B25" stroke="#C69A4B"
+              stroke-width="1"/>
+        <rect x="234" y="62" width="20" height="10" rx="3" fill="#C69A4B" opacity=".8"/>
+        <rect x="222" y="112" width="44" height="14" rx="2" fill="#FBF5EB" opacity=".14"/>
+        <path class="cw-ink-shine" d="M218 92 L222 132" stroke="#FBF5EB" stroke-width="3"
+              stroke-linecap="round" opacity=".3"/>
+        <g transform="rotate(-14 110 110)">
+          <rect x="34" y="98" width="128" height="15" rx="7.5" fill="url(#cwPenBody)"/>
+          <rect x="34" y="98" width="128" height="15" rx="7.5" fill="none" stroke="#C69A4B"
+                stroke-width=".8" opacity=".6"/>
+          <rect x="112" y="97" width="10" height="17" rx="2" fill="#C69A4B" opacity=".85"/>
+          <rect x="60" y="96" width="4" height="19" rx="2" fill="#EAD39B" opacity=".5"/>
+          <path d="M34 98 L6 105.5 L34 113 Z" fill="#EAD39B"/>
+          <path d="M22 105.5 H6" stroke="#241B25" stroke-width="1" opacity=".7"/>
+          <circle cx="22" cy="105.5" r="2" fill="#241B25" opacity=".75"/>
+          <rect x="150" y="96" width="14" height="19" rx="5" fill="#241B25" stroke="#C69A4B"
+                stroke-width=".8"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="cw-plane cw-plane--dust" aria-hidden="true">
+    <div class="cw-particles" id="cwParticles"></div>
+  </div>
+
+  <div class="cw-vignette" aria-hidden="true"></div>
+
+  <div class="cw-content">
+    <div class="cw-orbit" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <circle cx="200" cy="200" r="182" fill="none" stroke="#C69A4B" stroke-width=".8"
+                opacity=".22"/>
+        <circle cx="200" cy="200" r="156" fill="none" stroke="#EAD39B" stroke-width=".6"
+                opacity=".12" stroke-dasharray="2 12" stroke-linecap="round"/>
+        <g fill="#EAD39B">
+          <circle cx="200" cy="18" r="2.6" opacity=".8"/>
+          <circle cx="382" cy="200" r="2.2" opacity=".6"/>
+          <circle cx="200" cy="382" r="2.6" opacity=".7"/>
+          <circle cx="18" cy="200" r="2.2" opacity=".6"/>
+          <circle cx="329" cy="71" r="1.6" opacity=".45"/>
+          <circle cx="329" cy="329" r="1.6" opacity=".45"/>
+          <circle cx="71" cy="329" r="1.6" opacity=".45"/>
+          <circle cx="71" cy="71" r="1.6" opacity=".45"/>
+        </g>
+        <g font-size="30" fill="#C69A4B" opacity=".4">
+          <text x="278" y="62" text-anchor="middle">&ldquo;</text>
+          <text x="122" y="356" text-anchor="middle">&rdquo;</text>
+        </g>
+        <g stroke="#C69A4B" stroke-width="1" fill="none" opacity=".35" stroke-linecap="round">
+          <path d="M40 130c8-6 14 4 22 0"/>
+          <path d="M338 270c8-6 14 4 22 0"/>
+        </g>
+      </svg>
+    </div>
+
+    <h1 class="cw-heading" id="cw-title" data-text="Creative Writing">Creative Writing</h1>
+    <hr class="cw-rule">
+    <p class="cw-sub">Every thought has a story.</p>
   </div>
 </section>
-<section class="section" id="what">
+
+<section class="cw-sec cw-sec--intro">
+  <div class="wrap cw-intro rv">
+    <p class="cw-eyebrow"><span class="sc">A living collection</span></p>
+    <h2 class="cw-h2">Words become <em>worlds.</em></h2>
+    <p class="cw-lead">The imagination, the ideas and the voices of young writers, in the work
+      they have published. Everything on this page was written by a student of the school and
+      printed in <a href="crossroads.html">The Crossroads</a>, the school magazine.</p>
+  </div>
+</section>
+
+<section class="cw-sec cw-sec--posters" id="stories">
+  <div class="wrap cw-sechead rv">
+    <p class="cw-eyebrow"><span class="sc">Student voices</span></p>
+    <h2 class="cw-h2">Stories on <em>the move.</em></h2>
+    <p class="cw-copy">17 pieces, grouped the way the magazine groups them. Each
+      poster opens the piece itself, in full and unabridged.</p>
+  </div>
+      <div class="cw-row cw-row--left rv">
+        <p class="cw-row__label"><span class="sc">Opinion &amp; Editorial</span></p>
+        <div class="cw-row__window">
+          <div class="cw-track">
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="death-of-rationalism.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">The Death of Rationalism</span>
+                <span class="cw-poster__by">The Crossroads Editorial Team</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="is-ai-art-really-art.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">Is AI - Art Really Art?</span>
+                <span class="cw-poster__by">T. Muhil | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="hot-wheels-vs-barbie.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">Hot Wheels V/S Barbie</span>
+                <span class="cw-poster__by">Prisha Kantesaria</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="my-home.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">The Editorial</span>
+                <span class="cw-poster__title">My Home</span>
+                <span class="cw-poster__by">Vishv Prem Nangia</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="the-social-glue.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">The Editorial</span>
+                <span class="cw-poster__title">The Social Glue</span>
+                <span class="cw-poster__by">Raahi Tejas Shah</span>
+                <span class="cw-poster__meta">Issue 17 &middot; July 2024</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="death-of-rationalism.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">The Death of Rationalism</span>
+                <span class="cw-poster__by">The Crossroads Editorial Team</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="is-ai-art-really-art.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">Is AI - Art Really Art?</span>
+                <span class="cw-poster__by">T. Muhil | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="hot-wheels-vs-barbie.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">Hot Wheels V/S Barbie</span>
+                <span class="cw-poster__by">Prisha Kantesaria</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="my-home.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">The Editorial</span>
+                <span class="cw-poster__title">My Home</span>
+                <span class="cw-poster__by">Vishv Prem Nangia</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="the-social-glue.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">The Editorial</span>
+                <span class="cw-poster__title">The Social Glue</span>
+                <span class="cw-poster__by">Raahi Tejas Shah</span>
+                <span class="cw-poster__meta">Issue 17 &middot; July 2024</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="death-of-rationalism.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">The Death of Rationalism</span>
+                <span class="cw-poster__by">The Crossroads Editorial Team</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="is-ai-art-really-art.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">Is AI - Art Really Art?</span>
+                <span class="cw-poster__by">T. Muhil | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="hot-wheels-vs-barbie.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">Hot Wheels V/S Barbie</span>
+                <span class="cw-poster__by">Prisha Kantesaria</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="my-home.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">The Editorial</span>
+                <span class="cw-poster__title">My Home</span>
+                <span class="cw-poster__by">Vishv Prem Nangia</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="the-social-glue.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">The Editorial</span>
+                <span class="cw-poster__title">The Social Glue</span>
+                <span class="cw-poster__by">Raahi Tejas Shah</span>
+                <span class="cw-poster__meta">Issue 17 &middot; July 2024</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="death-of-rationalism.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">The Death of Rationalism</span>
+                <span class="cw-poster__by">The Crossroads Editorial Team</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="is-ai-art-really-art.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">Is AI - Art Really Art?</span>
+                <span class="cw-poster__by">T. Muhil | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="hot-wheels-vs-barbie.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Opinion</span>
+                <span class="cw-poster__title">Hot Wheels V/S Barbie</span>
+                <span class="cw-poster__by">Prisha Kantesaria</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="my-home.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">The Editorial</span>
+                <span class="cw-poster__title">My Home</span>
+                <span class="cw-poster__by">Vishv Prem Nangia</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="the-social-glue.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">The Editorial</span>
+                <span class="cw-poster__title">The Social Glue</span>
+                <span class="cw-poster__by">Raahi Tejas Shah</span>
+                <span class="cw-poster__meta">Issue 17 &middot; July 2024</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="cw-row cw-row--right rv">
+        <p class="cw-row__label"><span class="sc">Culture &amp; Campus Life</span></p>
+        <div class="cw-row__window">
+          <div class="cw-track">
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="beyond-the-lobby.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Beyond the Lobby</span>
+                <span class="cw-poster__by">Muhil T. | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="anakin-skywalker.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Anakin Skywalker and the Poetics of Tragedy</span>
+                <span class="cw-poster__by">Aayush Sreenath B</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="rumors-at-cirs.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Campus Life</span>
+                <span class="cw-poster__title">Rumors at CIRS</span>
+                <span class="cw-poster__by">Divyam Gupta | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="notes-of-healing.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Notes of Healing</span>
+                <span class="cw-poster__by">Ishaan Ravishankar | XII Mgmt</span>
+                <span class="cw-poster__meta">Issue 30 &middot; April 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="voyages-in-the-yuva-kendra.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Reflection</span>
+                <span class="cw-poster__title">Voyages in the Yuva Kendra</span>
+                <span class="cw-poster__by">Adithyan Diwakar Vidya | IB II</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="death-of-detail.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">06</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Death of Detail</span>
+                <span class="cw-poster__by">Malhar Alap Modi</span>
+                <span class="cw-poster__meta">Issue 04</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="resurgence.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">07</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Resurgence</span>
+                <span class="cw-poster__by">Adhavan Diwakar Vidya</span>
+                <span class="cw-poster__meta">Issue 02</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="beyond-the-lobby.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Beyond the Lobby</span>
+                <span class="cw-poster__by">Muhil T. | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="anakin-skywalker.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Anakin Skywalker and the Poetics of Tragedy</span>
+                <span class="cw-poster__by">Aayush Sreenath B</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="rumors-at-cirs.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Campus Life</span>
+                <span class="cw-poster__title">Rumors at CIRS</span>
+                <span class="cw-poster__by">Divyam Gupta | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="notes-of-healing.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Notes of Healing</span>
+                <span class="cw-poster__by">Ishaan Ravishankar | XII Mgmt</span>
+                <span class="cw-poster__meta">Issue 30 &middot; April 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="voyages-in-the-yuva-kendra.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Reflection</span>
+                <span class="cw-poster__title">Voyages in the Yuva Kendra</span>
+                <span class="cw-poster__by">Adithyan Diwakar Vidya | IB II</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="death-of-detail.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">06</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Death of Detail</span>
+                <span class="cw-poster__by">Malhar Alap Modi</span>
+                <span class="cw-poster__meta">Issue 04</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="resurgence.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">07</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Resurgence</span>
+                <span class="cw-poster__by">Adhavan Diwakar Vidya</span>
+                <span class="cw-poster__meta">Issue 02</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="beyond-the-lobby.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Beyond the Lobby</span>
+                <span class="cw-poster__by">Muhil T. | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="anakin-skywalker.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Anakin Skywalker and the Poetics of Tragedy</span>
+                <span class="cw-poster__by">Aayush Sreenath B</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="rumors-at-cirs.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Campus Life</span>
+                <span class="cw-poster__title">Rumors at CIRS</span>
+                <span class="cw-poster__by">Divyam Gupta | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="notes-of-healing.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Notes of Healing</span>
+                <span class="cw-poster__by">Ishaan Ravishankar | XII Mgmt</span>
+                <span class="cw-poster__meta">Issue 30 &middot; April 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="voyages-in-the-yuva-kendra.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Reflection</span>
+                <span class="cw-poster__title">Voyages in the Yuva Kendra</span>
+                <span class="cw-poster__by">Adithyan Diwakar Vidya | IB II</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="death-of-detail.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">06</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Death of Detail</span>
+                <span class="cw-poster__by">Malhar Alap Modi</span>
+                <span class="cw-poster__meta">Issue 04</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="resurgence.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">07</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Resurgence</span>
+                <span class="cw-poster__by">Adhavan Diwakar Vidya</span>
+                <span class="cw-poster__meta">Issue 02</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="beyond-the-lobby.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Beyond the Lobby</span>
+                <span class="cw-poster__by">Muhil T. | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="anakin-skywalker.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Anakin Skywalker and the Poetics of Tragedy</span>
+                <span class="cw-poster__by">Aayush Sreenath B</span>
+                <span class="cw-poster__meta">Issue 32 &middot; August 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="rumors-at-cirs.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Campus Life</span>
+                <span class="cw-poster__title">Rumors at CIRS</span>
+                <span class="cw-poster__by">Divyam Gupta | IB I Yr</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="notes-of-healing.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Notes of Healing</span>
+                <span class="cw-poster__by">Ishaan Ravishankar | XII Mgmt</span>
+                <span class="cw-poster__meta">Issue 30 &middot; April 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="voyages-in-the-yuva-kendra.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Reflection</span>
+                <span class="cw-poster__title">Voyages in the Yuva Kendra</span>
+                <span class="cw-poster__by">Adithyan Diwakar Vidya | IB II</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="death-of-detail.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">06</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Death of Detail</span>
+                <span class="cw-poster__by">Malhar Alap Modi</span>
+                <span class="cw-poster__meta">Issue 04</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="resurgence.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">07</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Culture</span>
+                <span class="cw-poster__title">Resurgence</span>
+                <span class="cw-poster__by">Adhavan Diwakar Vidya</span>
+                <span class="cw-poster__meta">Issue 02</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="cw-row cw-row--left rv">
+        <p class="cw-row__label"><span class="sc">Economics, the World &amp; Sport</span></p>
+        <div class="cw-row__window">
+          <div class="cw-track">
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="geography-and-geopolitics.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">World</span>
+                <span class="cw-poster__title">Geography and Geopolitics</span>
+                <span class="cw-poster__by">Shaurya Bhartia | XII Mgmt</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="sportswashing.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Sport</span>
+                <span class="cw-poster__title">Sportswashing: The New Geopolitics</span>
+                <span class="cw-poster__by">Shaurya Bhartia</span>
+                <span class="cw-poster__meta">Issue 30 &middot; April 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="the-race-beyond.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Economics</span>
+                <span class="cw-poster__title">The Race Beyond</span>
+                <span class="cw-poster__by">Lokk Vishwavedaa</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="trust-or-bust.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Economics</span>
+                <span class="cw-poster__title">Trust or Bust: The Never-Ending Problem of the Prisoner's Dilemma</span>
+                <span class="cw-poster__by">Aarav Bhartia | X B</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster">
+              <a class="cw-poster__link" href="the-journey-behind-excellence.html">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Sport</span>
+                <span class="cw-poster__title">The Journey Behind Excellence</span>
+                <span class="cw-poster__by">Aarav Bhartia | X B</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="geography-and-geopolitics.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">World</span>
+                <span class="cw-poster__title">Geography and Geopolitics</span>
+                <span class="cw-poster__by">Shaurya Bhartia | XII Mgmt</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="sportswashing.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Sport</span>
+                <span class="cw-poster__title">Sportswashing: The New Geopolitics</span>
+                <span class="cw-poster__by">Shaurya Bhartia</span>
+                <span class="cw-poster__meta">Issue 30 &middot; April 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="the-race-beyond.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Economics</span>
+                <span class="cw-poster__title">The Race Beyond</span>
+                <span class="cw-poster__by">Lokk Vishwavedaa</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="trust-or-bust.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Economics</span>
+                <span class="cw-poster__title">Trust or Bust: The Never-Ending Problem of the Prisoner's Dilemma</span>
+                <span class="cw-poster__by">Aarav Bhartia | X B</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="the-journey-behind-excellence.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Sport</span>
+                <span class="cw-poster__title">The Journey Behind Excellence</span>
+                <span class="cw-poster__by">Aarav Bhartia | X B</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="geography-and-geopolitics.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">World</span>
+                <span class="cw-poster__title">Geography and Geopolitics</span>
+                <span class="cw-poster__by">Shaurya Bhartia | XII Mgmt</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="sportswashing.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Sport</span>
+                <span class="cw-poster__title">Sportswashing: The New Geopolitics</span>
+                <span class="cw-poster__by">Shaurya Bhartia</span>
+                <span class="cw-poster__meta">Issue 30 &middot; April 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="the-race-beyond.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Economics</span>
+                <span class="cw-poster__title">The Race Beyond</span>
+                <span class="cw-poster__by">Lokk Vishwavedaa</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="trust-or-bust.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Economics</span>
+                <span class="cw-poster__title">Trust or Bust: The Never-Ending Problem of the Prisoner's Dilemma</span>
+                <span class="cw-poster__by">Aarav Bhartia | X B</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="the-journey-behind-excellence.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Sport</span>
+                <span class="cw-poster__title">The Journey Behind Excellence</span>
+                <span class="cw-poster__by">Aarav Bhartia | X B</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="geography-and-geopolitics.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">01</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">World</span>
+                <span class="cw-poster__title">Geography and Geopolitics</span>
+                <span class="cw-poster__by">Shaurya Bhartia | XII Mgmt</span>
+                <span class="cw-poster__meta">Issue 31 &middot; May 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="sportswashing.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">02</span>
+                  <span class="cw-poster__glyph">&ldquo;</span>
+                </span>
+                <span class="cw-poster__type">Sport</span>
+                <span class="cw-poster__title">Sportswashing: The New Geopolitics</span>
+                <span class="cw-poster__by">Shaurya Bhartia</span>
+                <span class="cw-poster__meta">Issue 30 &middot; April 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="the-race-beyond.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">03</span>
+                  <span class="cw-poster__glyph">&#9998;</span>
+                </span>
+                <span class="cw-poster__type">Economics</span>
+                <span class="cw-poster__title">The Race Beyond</span>
+                <span class="cw-poster__by">Lokk Vishwavedaa</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="trust-or-bust.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">04</span>
+                  <span class="cw-poster__glyph">Aa</span>
+                </span>
+                <span class="cw-poster__type">Economics</span>
+                <span class="cw-poster__title">Trust or Bust: The Never-Ending Problem of the Prisoner's Dilemma</span>
+                <span class="cw-poster__by">Aarav Bhartia | X B</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+            <article class="cw-poster" aria-hidden="true">
+              <a class="cw-poster__link" href="the-journey-behind-excellence.html" tabindex="-1">
+                <span class="cw-poster__art" aria-hidden="true">
+                  <span class="cw-poster__num">05</span>
+                  <span class="cw-poster__glyph">&#10022;</span>
+                </span>
+                <span class="cw-poster__type">Sport</span>
+                <span class="cw-poster__title">The Journey Behind Excellence</span>
+                <span class="cw-poster__by">Aarav Bhartia | X B</span>
+                <span class="cw-poster__meta">Issue 29 &middot; February 2026</span>
+                <span class="cw-poster__read">Read the piece
+                  <span aria-hidden="true">&rarr;</span></span>
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+  <p class="wrap cw-rows__note rv">A row pauses when you point at it, and every piece is a
+    link. <a class="btn btn--outline" href="blog.html">Read them all on the blog</a></p>
+</section>
+
+<section class="cw-sec cw-sec--await">
+  <div class="wrap cw-await rv">
+    <p class="cw-eyebrow"><span class="sc">Still to come</span></p>
+    <h2 class="cw-h2">Poetry, fiction <em>and how to submit.</em></h2>
+    <p class="cw-copy">The essays above are what the school has published so far. Poetry, short
+      fiction and the address to send new work to are <em>[placeholders awaiting the Crossroads
+      Editorial Board]</em> &mdash; they will appear here as they are supplied, and nothing has
+      been written in their place.</p>
+    <ul class="cw-await__list">
+      <li>
+        <h3>Poetry</h3>
+        <p>Published as it is written.</p>
+      </li>
+      <li>
+        <h3>Fiction</h3>
+        <p>Short stories, and longer work in parts.</p>
+      </li>
+      <li>
+        <h3>Submissions</h3>
+        <p>How to send work to the editorial board.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="cw-sec cw-sec--journey" id="journey">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">In preparation</span></p>
-      <h2 class="serif h2" data-split>What will be <em>on this page.</em></h2>
+    <div class="cw-sechead rv">
+      <p class="cw-eyebrow"><span class="sc">The creative process</span></p>
+      <h2 class="cw-h2">From a thought <em>to a story.</em></h2>
+      <p class="cw-copy">The same five stages whether the piece is a poem or an essay, and
+        whether it takes an evening or a term.</p>
     </div>
+    <ol class="cw-journey">
+        <li class="cw-step rv">
+          <p class="cw-step__n">01</p>
+          <h3 class="cw-step__name">Imagine</h3>
+          <p class="cw-step__copy">Let the first idea arrive, before it is any good.</p>
+        </li>
+        <li class="cw-step rv">
+          <p class="cw-step__n">02</p>
+          <h3 class="cw-step__name">Explore</h3>
+          <p class="cw-step__copy">Follow the curiosity wherever it leads, and read.</p>
+        </li>
+        <li class="cw-step rv">
+          <p class="cw-step__n">03</p>
+          <h3 class="cw-step__name">Write</h3>
+          <p class="cw-step__copy">Give the idea a voice. A first draft is allowed to be one.</p>
+        </li>
+        <li class="cw-step rv">
+          <p class="cw-step__n">04</p>
+          <h3 class="cw-step__name">Refine</h3>
+          <p class="cw-step__copy">Shape the words, and cut the ones doing no work.</p>
+        </li>
+        <li class="cw-step rv">
+          <p class="cw-step__n">05</p>
+          <h3 class="cw-step__name">Share</h3>
+          <p class="cw-step__copy">Let the story find its reader.</p>
+        </li>
+    </ol>
+  </div>
+</section>
 
-    <dl class="factrail rv">
-      <div><dt>Poetry</dt><dd>Published as it is written</dd></div>
-      <div><dt>Fiction</dt><dd>Short stories and longer work in parts</dd></div>
-      <div><dt>Essays</dt><dd>Argument, criticism and the personal essay</dd></div>
-      <div><dt>Submissions</dt><dd>How to send work to the editorial board</dd></div>
-    </dl>
-
-    <p class="note rv" style="margin-top:24px"><em>[Placeholder &mdash; the first pieces, and the submission address, to be supplied by the Crossroads Editorial Board.]</em></p>
-
-    <div class="soon__onward rv">
-      <a class="btn btn--ghost" href="blog.html">CIRS Blog</a>
-      <a class="btn btn--ghost" href="crossroads.html">Crossroads</a>
-    </div>
+<section class="cw-sec cw-sec--last">
+  <div class="wrap cw-last rv">
+    <p class="cw-eyebrow"><span class="sc">Creative writing at CIRS</span></p>
+    <h2 class="cw-h2">The next story <em>is waiting.</em></h2>
+    <p class="cw-last__note">Every page begins with a thought.</p>
+    <p class="cw-last__cta">
+      <a class="btn btn--primary" href="crossroads.html">The Crossroads archive</a>
+      <a class="btn btn--outline" href="blog.html">CIRS Blog</a>
+    </p>
   </div>
 </section>
 <section class="uc">
@@ -365,5 +1690,6 @@
 <script src="assets/vendor/lenis.min.js?b=64" defer></script>
 <script src="assets/js/cirs.js?b=64" defer></script>
 <script src="assets/js/pages.js?b=64" defer></script>
+<script src="assets/js/cwriting.js?b=64" defer></script>
 </body>
 </html>
