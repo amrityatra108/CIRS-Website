@@ -345,8 +345,8 @@ PAGES = {
     },
     "math-challenge": {
         "nav": "Math Challenge",
-        "title": "Maths Challenge",
-        "description": "The Maths Challenge at Chinmaya International Residential School — "
+        "title": "Math Challenge",
+        "description": "The Math Challenge at Chinmaya International Residential School — "
                        "monthly problems for four grade zones, and the habits of mind they "
                        "are set to build.",
         # No banner from the shared builder. This page opens on a field of
