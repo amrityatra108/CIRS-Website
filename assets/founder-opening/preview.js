@@ -168,33 +168,12 @@ async function initialise(){
         vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);
         return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),f.x),mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0)),f.x),f.y);
       }
-      float zone(vec2 centre,vec2 size,float seed,float phase){
-        vec2 p=(vUv-centre)/size;
-        float distortion=(noise(vUv*vec2(13.0,9.0)+vec2(seed,phase*.12))-.5)*.31;
-        distortion+=sin(p.x*5.0+phase+seed)*.075;
-        return 1.0-smoothstep(.88,1.045,length(p)+distortion);
-      }
-      float proximity(vec2 pointer,vec2 centre,vec2 reach){
-        return 1.0-smoothstep(.48,1.08,length((pointer-centre)/reach));
-      }
-      float tornSlice(float y,float halfHeight,float left,float right,float seed,float phase){
-        float warpedY=y+sin(vUv.x*23.0+phase+seed)*.008+(noise(vec2(vUv.x*19.0+seed,phase*.11))-.5)*.018;
-        float vertical=1.0-smoothstep(halfHeight,halfHeight+.009,abs(vUv.y-warpedY));
-        float horizontal=smoothstep(left-.025,left+.012,vUv.x)*(1.0-smoothstep(right-.012,right+.025,vUv.x));
-        return vertical*horizontal;
-      }
-      float fragmentedReveal(vec2 pointer,float phase){
-        float crown=zone(vec2(.5,.82),vec2(.235,.05),1.1,phase)*proximity(pointer,vec2(.5,.80),vec2(.30,.095));
-        float visor=zone(vec2(.5,.708),vec2(.225,.035),2.3,phase)*proximity(pointer,vec2(.5,.70),vec2(.30,.09));
-        float leftCheek=zone(vec2(.405,.625),vec2(.075,.072),3.7,phase)*proximity(pointer,vec2(.39,.62),vec2(.17,.085));
-        float rightCheek=zone(vec2(.595,.625),vec2(.075,.072),4.9,phase)*proximity(pointer,vec2(.61,.62),vec2(.17,.085));
-        float chin=zone(vec2(.5,.515),vec2(.205,.067),6.2,phase)*proximity(pointer,vec2(.5,.51),vec2(.27,.09));
-        float jaw=zone(vec2(.5,.425),vec2(.18,.038),7.4,phase)*proximity(pointer,vec2(.5,.43),vec2(.25,.07));
-        float sliceA=tornSlice(.765,.012,.31,.72,8.2,phase)*proximity(pointer,vec2(.5,.75),vec2(.33,.105));
-        float sliceB=tornSlice(.655,.008,.36,.67,9.6,phase)*proximity(pointer,vec2(.5,.64),vec2(.29,.10));
-        float sliceC=tornSlice(.565,.01,.29,.75,10.8,phase)*proximity(pointer,vec2(.5,.55),vec2(.32,.105));
-        return clamp(max(max(max(crown,visor),max(leftCheek,rightCheek)),max(max(chin,jaw),max(sliceA,max(sliceB,sliceC)))),0.0,1.0);
-      }
+      // zone(), tornSlice() and fragmentedReveal() used to live here. They
+      // cut the elder portrait through the younger one in patches -- crown,
+      // visor, cheeks, jaw and three torn horizontal slices. Nothing ever
+      // called them; main() has always reveals from the flow field below.
+      // They are gone rather than left dead.
+
       void main(){
         vec4 base=texture2D(uMenon,vUv);
         vec4 transformed=texture2D(uGurudev,vUv);
@@ -214,25 +193,40 @@ async function initialise(){
         float field=noise(q+warp*1.85+vec2(t*.3,-t*.22));
         float detail=noise(q*2.1-warp*.65+vec2(-t*.18,t*.25));
         float contour=field*.8+detail*.2;
-        float primary=smoothstep(.505,.525,contour);
-        float outer=smoothstep(.49,.51,contour);
-        float reveal=clamp(primary*uActive,0.0,1.0);
+        // The edge of the reveal is a long gradient, not a cut. It was
+        // smoothstep(.505,.525) -- a band two hundredths wide on a warped
+        // noise field, which is a hard organic edge in everything but name,
+        // and it is what sliced the forehead in half. The two photographs
+        // are different crops of different decades and will never register
+        // perfectly; a dissolve this soft carries the difference as a man
+        // ageing instead of as a tear.
+        //
+        // The reveal is a front that crosses the portrait, not a field that
+        // churns over it. The field alone never resolves: every part of the
+        // picture is perpetually part one man and part the other, which is
+        // why the opening read as a permanently half-dissolved photograph
+        // rather than as either portrait. Here a slow ping-pong carries a
+        // soft band from one end to the other and settles fully at both
+        // ends, so the piece rests on a crisp single photograph and spends
+        // the journey, not the destination, in between. The flow field is
+        // kept, reduced, as the wobble that stops the front being a ruled
+        // line.
+        float sweep=abs(fract(uTime*.028)*2.0-1.0);
+        float front=1.0-(vUv.y*.8+vUv.x*.2);
+        float wobble=(contour-.5)*.26;
+        float edge=sweep*1.5-.25;
+        float reveal=clamp(smoothstep(edge-.19,edge+.19,front+wobble)*uActive,0.0,1.0);
 
-        // The aura is part of the hidden state and is clipped by the same compact mask.
-        float nearbyAlpha=0.0;
-        vec2 px=1.0/uResolution;
-        nearbyAlpha=max(nearbyAlpha,texture2D(uGurudev,vUv+vec2(px.x*15.0,0.0)).a);
-        nearbyAlpha=max(nearbyAlpha,texture2D(uGurudev,vUv-vec2(px.x*15.0,0.0)).a);
-        nearbyAlpha=max(nearbyAlpha,texture2D(uGurudev,vUv+vec2(0.0,px.y*15.0)).a);
-        nearbyAlpha=max(nearbyAlpha,texture2D(uGurudev,vUv-vec2(0.0,px.y*15.0)).a);
-        float aura=max(nearbyAlpha-transformed.a,0.0)*.13;
+        // The aura used to be built here: the elder texture's alpha sampled
+        // fifteen pixels out in four directions, and warm brown painted
+        // wherever the neighbourhood was opaque but the pixel was not. Around
+        // a dark jacket that lands on the body rather than outside it, and it
+        // is the smudging over the chest. A clean cutout has no halo, so it
+        // is gone, and with it the warm tint that bled along the same edge.
         vec4 guruState=transformed;
-        guruState.rgb=mix(vec3(.68,.45,.19),guruState.rgb,transformed.a);
-        guruState.a=max(transformed.a,aura);
+        guruState.rgb=mix(base.rgb,guruState.rgb,transformed.a);
 
         vec4 composed=mix(base,guruState,reveal);
-        float localWarmth=max(outer-primary,0.0)*uActive*.035;
-        composed.rgb=mix(composed.rgb,vec3(.68,.45,.19),localWarmth);
         gl_FragColor=composed;
       }
     `
