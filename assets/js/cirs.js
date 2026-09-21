@@ -330,7 +330,9 @@
      Hero
      ========================================================== */
   function heroIn() {
-    var hero = $(".hero");
+    // Either opening: the video panel other pages still use, or the
+    // home sequence, whose stage plays the same part.
+    var hero = $(".hero") || $(".hseq__stage");
     if (!hero || !animate) return;
     // Loaded out of sight: show the hero as-is rather than hiding it behind an
     // entrance that cannot run.
@@ -340,9 +342,9 @@
     // Without a curtain the content is already visible and must stay visible.
     if (!$("#curtain")) { heroParallax(); return; }
 
-    var h1 = $(".hero h1");
+    var h1 = $("h1", hero);
     var lines = h1 ? splitLines(h1) : null;
-    var rest = [$(".hero .marker"), $(".hero__scroll")].filter(Boolean);
+    var rest = [$(".marker", hero), $(".hero__scroll", hero)].filter(Boolean);
 
     var tl = gsap.timeline({ paused: true });
     if (lines) {
@@ -381,6 +383,119 @@
   }
 
   /* ==========================================================
+     The opening sequence
+     ==========================================================
+     The stage is pinned by CSS sticky, so this function never pins
+     anything and never touches the document's height. All it does is
+     read where the three .hseq__mark boxes are and scrub the plate's
+     own box between them as the track passes.
+
+     The marks are the contract with the stylesheet. Nothing here knows
+     what P2 looks like; it knows only that some element in the sheet
+     says so, which is what keeps the breakpoints in the one file that
+     already holds every other breakpoint on the page.
+     ========================================================== */
+  function heroSeq() {
+    var seq = $(".hseq");
+    if (!seq) return;
+
+    var stage = $(".hseq__stage", seq),
+        plate = $(".hseq__plate", seq),
+        type  = $(".hseq__type", seq),
+        scrim = $(".hseq__scrim", seq),
+        marks = $$(".hseq__mark", seq);
+
+    if (!stage || !plate || marks.length < 3) return;
+
+    // No ScrollTrigger, or motion off: the sheet already lays the
+    // sequence out as one still panel. Leave it alone.
+    if (!hasST || !animate) { seq.classList.add("is-static"); return; }
+
+    // Measured on refresh, never cached across one. A mark's box is
+    // read relative to the stage, which is the plate's containing
+    // block, so these are exactly the values the plate's inset takes.
+    var P = [];
+    function measure() {
+      var base = stage.getBoundingClientRect();
+      P = marks.map(function (m) {
+        var r = m.getBoundingClientRect();
+        return {
+          top:    r.top - base.top,
+          right:  base.right - r.right,
+          bottom: base.bottom - r.bottom,
+          left:   r.left - base.left,
+          w:      r.width
+        };
+      });
+    }
+    measure();
+
+    // Interpolate between two measured boxes. Keeping this in pixels
+    // rather than percentages means the plate lands on the mark's box
+    // exactly, whatever units the sheet used to describe it.
+    function at(a, b, t) {
+      return {
+        top:    a.top    + (b.top    - a.top)    * t,
+        right:  a.right  + (b.right  - a.right)  * t,
+        bottom: a.bottom + (b.bottom - a.bottom) * t,
+        left:   a.left   + (b.left   - a.left)   * t
+      };
+    }
+
+    function paint(p) {
+      plate.style.top    = p.top    + "px";
+      plate.style.right  = p.right  + "px";
+      plate.style.bottom = p.bottom + "px";
+      plate.style.left   = p.left   + "px";
+    }
+
+    // The two halves of the travel: P0 to P1 over the first, P1 to P2
+    // over the second. A single eased run from P0 to P2 passes through
+    // a different middle and loses the first inset entirely.
+    // The plate arrives at P2 at seven tenths of the travel and holds
+    // there for the rest of it, still stuck. Without the hold the frame
+    // lands on the same pixel the stage begins to leave on.
+    var ARRIVE = .70, BEND = .45;
+
+    function frame(t) {
+      var u = Math.min(t / ARRIVE, 1);
+      var box = u < BEND ? at(P[0], P[1], u / BEND)
+                         : at(P[1], P[2], (u - BEND) / (1 - BEND));
+      paint(box);
+      // The corner arrives with the frame rather than being on from the
+      // start, so the full-bleed opening has no rounded edge against
+      // the window.
+      plate.style.borderRadius = (u * 14) + "px";
+      // The scrim exists so the headline can be read over the photograph.
+      // Once the plate has drawn in, the headline is beside it rather than
+      // on it and the wash has nothing left to do but crush the picture,
+      // so it lifts as the plate insets. It does not go entirely: the last
+      // of it keeps the foot of the frame from glaring against the ground.
+      if (scrim) scrim.style.opacity = String(1 - u * .78);
+      if (type) {
+        // The type clears the way as the plate closes in on its column,
+        // then settles. It does not fade out — the headline is the
+        // page's first sentence and stays readable through the whole
+        // sequence.
+        type.style.opacity = String(1 - Math.min(u, .55) * .28);
+      }
+    }
+
+    ScrollTrigger.create({
+      trigger: seq,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: true,
+      // Direct scrub, not timed. Lenis already smooths the document
+      // scroll; a timed scrub here leaves the full-screen plate still
+      // catching up after the sequence has left the window, which is
+      // the same offscreen work heroParallax was changed to stop.
+      onRefresh: function (self) { measure(); frame(self.progress || 0); },
+      onUpdate:  function (self) { frame(self.progress); }
+    });
+  }
+
+  /* ==========================================================
      Generic scroll choreography
      ========================================================== */
   function choreograph() {
@@ -388,7 +503,7 @@
 
     // Headings rise line by line. The hero headline is excluded — it belongs to
     // the opening timeline, not to a scroll trigger.
-    $$("[data-split]").filter(function (el) { return !el.closest(".hero"); }).forEach(function (el) {
+    $$("[data-split]").filter(function (el) { return !el.closest(".hero, .hseq"); }).forEach(function (el) {
       var lines = splitLines(el);
       if (!lines) return;
       gsap.set(lines, { yPercent: 110 });
@@ -1181,10 +1296,13 @@
       // the top of the viewport, not before it.
       sentinel(function () {
         if (document.body.classList.contains("home")) {
-          var opening = $(".hero");
+          // .hseq is the home opening now. Its foot is the end of the
+          // 200vh track, which is the same instant the gold run reaches
+          // the top of the window — the exact handoff that was asked for.
+          var opening = $(".hero") || $(".hseq");
           if (opening) return Math.max(opening.offsetTop + opening.offsetHeight - 1, 80);
         }
-        var hero = $(".hero");
+        var hero = $(".hero") || $(".hseq__stage");
         return hero ? Math.max(hero.getBoundingClientRect().height - 140, 80) : 80;
       }, function (past) { header.classList.toggle("is-stuck", past); });
     }
@@ -1356,7 +1474,7 @@
     // The hero belongs to the opening timeline, not a scroll reveal. Its
     // prepared lines must remain hidden until that timeline plays.
     var targets = $$(".rv, .img-reveal, .facilities > div, .line-mask > span, .fig-mask > span")
-      .filter(function (el) { return !el.closest(".hero"); });
+      .filter(function (el) { return !el.closest(".hero, .hseq"); });
     if (!targets.length) return;
     var queued = false, unsub = null;
 
@@ -1762,7 +1880,13 @@
     crossroadsProgress();
     crossroadsWall();
     if (!animate) {
+      // heroSeq belongs here too. Under reduced motion the stylesheet's own
+      // media query has already flattened the sequence, but when GSAP simply
+      // fails to load that query does not fire, and the sheet would otherwise
+      // leave a full-bleed plate stuck for 160vh with nothing scrubbing it.
+      // Called here, it puts is-static on and the opening is one still panel.
       failOpen(); slHero(); homeRun(); dayTrack(); newsTrack(); chart(); progressBar();
+      heroSeq();
       // No curtain and no pinning here, but the photographs still arrive late
       // and move everything below them, so an inbound anchor still needs
       // putting right once they have.
@@ -1778,6 +1902,7 @@
     founderMottoReveal();
     dayTrack();
     newsTrack();
+    heroSeq();
     groundShift();
     progressBar();
     magnets();
