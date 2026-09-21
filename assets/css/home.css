@@ -10,6 +10,7 @@ body.home{
   --home-ivory:#FFF9E8;
   --home-ink:#1C170A;
   --home-night:#121008;
+  --home-curtain:#FFFFF0;
 }
 
 /* The lower hero wash remains dark enough for the white headline. Gold is a
@@ -77,6 +78,27 @@ body.home .ticker,
 body.home .footer{
   background-color:var(--home-night);
 }
+
+/* The opening curtain, on the home page only. The shared curtain is CIRS
+   purple, which arrives as a full screen of saturated colour before any of
+   the photography does. Here it opens on ivory instead.
+
+   Every mark on it has to be restated, not just the ground: the shared
+   curtain letters itself in white on gold for a dark screen, and on ivory
+   white falls to 1.01:1 — invisible rather than merely faint. The type moves
+   to the two primaries that hold against it, purple at 13:1 and maroon at
+   10.9:1, keeping the original hierarchy of statement then accent. The
+   progress hairline goes with them, because gold on ivory is 1.6:1 and would
+   read as an empty line for the whole of the load. */
+body.home .curtain{
+  background:var(--home-curtain);
+  color:var(--purple);
+}
+body.home .curtain__deva{ color:var(--purple); }
+body.home .curtain__en{ color:var(--maroon); }
+body.home .curtain__bar{ background:rgba(57,42,72,.20); }
+body.home .curtain__bar i{ background:var(--purple); }
+
 body.home .filmsec__media::after{
   background:
     linear-gradient(180deg, rgba(18,16,8,.72) 0%, rgba(18,16,8,.94) 100%),
