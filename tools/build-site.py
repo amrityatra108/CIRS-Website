@@ -1161,7 +1161,9 @@ def build(slug, page):
                        .replace("{{ALUMNI_DESTINATIONS}}", alumni.destinations_html())
                        .replace("{{ALUMNI_PEOPLE}}", alumni.people_html())
                        .replace("{{ALUMNI_VOICES}}", alumni.voices_html())
-                       .replace("{{ALUMNI_PATHWAYS}}", alumni.pathways_html()))
+                       .replace("{{ALUMNI_PATHWAYS}}", alumni.pathways_html())
+                       .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
+                       .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
     parts.append(content)
     if page.get("jump"):
         parts.append(jump_html(content))

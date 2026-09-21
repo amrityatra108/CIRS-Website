@@ -13,7 +13,9 @@ This document is the list of what is missing, in the order it is worth supplying
 ## The rule this page was built under
 
 **Nothing on the page was invented.** Every name, university, role and quotation on it
-was already published on the previous version of the Alumni page. Where something is not
+was either already published on the previous version of the Alumni page, or supplied by
+the school afterwards — Nanyang Technological University came that way, which is the
+route every further destination should take. Where something is not
 known, the page says so in brackets rather than filling the gap:
 
 > *[Portrait to be supplied by the school, with the alumnus's permission.]*
@@ -63,7 +65,7 @@ Set `"batch"` in each entry.
 
 ## 3. Which alumnus went to which institution
 
-The page lists eighteen institutions, and separately lists four alumni. **It never joins
+The page lists nineteen institutions, and separately lists four alumni. **It never joins
 the two**, because the join is not recorded anywhere. The destination panel says so:
 
 > *[Which alumni read here, and in which years, to be supplied by the school.]*
@@ -74,7 +76,15 @@ Note that **Oxford University is deliberately not in the destination list.** It 
 Hari Om Jani *works*, which is not the same as where a CIRS student *read*, and the page
 does not conflate the two.
 
-## 4. More alumni
+## 4. More destinations
+
+Adding one is two values: which of the galaxy's two arms it belongs on, and how far out
+along that arm it sits. Regions run in unbroken stretches along an arm — arm 0 carries
+India and then the United Kingdom, arm 1 carries Asia-Pacific and then the United States
+— so a new destination goes at the end of its own region's stretch and the ones beyond
+it shift out. The header comment in `tools/alumni.py` sets out the arithmetic.
+
+## 5. More alumni
 
 The school's own note on the previous page said "and many more". Four named alumni is a
 thin showing for a school that has been teaching since 1996.
@@ -93,13 +103,13 @@ behind most of them:
 - Women alumni — three of the seven names on the page are women, and none of the four
   featured chapters is
 
-## 5. Current cities or countries
+## 6. Current cities or countries
 
 No alumnus has a location recorded. Set `"place"`. This is what would let the page show
 where the alumni community actually is today, as opposed to where its students went to
 study.
 
-## 6. The alumni association and how to reach it
+## 7. The alumni association and how to reach it
 
 The page currently ends by pointing at the school office
 (`info@cirschool.org`, +91 422 261 3300), because **that is the only alumni contact route
@@ -114,7 +124,7 @@ Needed, if they exist:
 - Reunion dates, if any are fixed
 - Official alumni social accounts — only official ones
 
-## 7. Quotations
+## 8. Quotations
 
 Three quotations exist. They carry a whole chapter of the page between them and they do
 it well, but three is not many.
@@ -126,8 +136,8 @@ and their permission to publish. Add to `VOICES` in `tools/alumni.py`.
 
 ## What the page does *not* need
 
-- **University logos.** The destination index is text on purpose. Eighteen wordmarks
-  would need eighteen licences and would read worse than a list.
+- **University logos.** The destination index is text on purpose. Nineteen wordmarks
+  would need nineteen licences and would read worse than a list.
 - **Numbers of alumni per university, or any total.** None is recorded, and an
   impressive-looking figure nobody can source is exactly what this page avoids.
 - **Stock photography of graduations or students.** Every photograph on the page is the
