@@ -20,11 +20,11 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=64">
-<link rel="stylesheet" href="assets/css/cirs.css?b=64">
-<link rel="stylesheet" href="assets/css/pages.css?b=64">
-<link rel="stylesheet" href="assets/css/artswall.css?b=64">
-<link rel="stylesheet" href="assets/css/typography.css?b=64">
+<link rel="stylesheet" href="assets/css/fonts.css?b=88">
+<link rel="stylesheet" href="assets/css/cirs.css?b=88">
+<link rel="stylesheet" href="assets/css/pages.css?b=88">
+<link rel="stylesheet" href="assets/css/artswall.css?b=88">
+<link rel="stylesheet" href="assets/css/typography.css?b=88">
 </head>
 
 <body class="wall">
@@ -59,14 +59,14 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header" id="header">
+<header class="header is-first-section" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
            It stays a button so the keyboard and screen readers get a control
            that announces its expanded state; hover opens it for a mouse. -->
       <div class="enq" id="enq">
-        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic
+        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic aria-label="Enquire"
                 aria-expanded="false" aria-controls="enqPanel">
           <span class="htab__icon" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -139,14 +139,26 @@
 
           <p class="enq__title enq__title--sep sc">Follow CIRS</p>
           <div class="enq__social">
-            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener">Facebook</a>
-            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener">YouTube</a>
-            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener"
+               aria-label="Instagram (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="enq__social-dot" cx="17.4" cy="6.7" r="1.1"/></svg>
+            </a>
+            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener"
+               aria-label="Facebook (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.8l.45-3.2H13.7V7.75c0-.93.3-1.56 1.64-1.56H17V3.3a22 22 0 0 0-2.43-.13c-2.4 0-4.05 1.47-4.05 4.17V9.8H7.8V13h2.72v8h3.18Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener"
+               aria-label="YouTube (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.15a3 3 0 0 0-2.1-2.12C17.05 5.5 12 5.5 12 5.5s-5.05 0-6.9.53A3 3 0 0 0 3 8.15a31 31 0 0 0 0 7.7 3 3 0 0 0 2.1 2.12c1.85.53 6.9.53 6.9.53s5.05 0 6.9-.53a3 3 0 0 0 2.1-2.12 31 31 0 0 0 0-7.7Z"/><path class="enq__social-play" d="m10 15.25 5-3.25-5-3.25v6.5Z"/></svg>
+            </a>
+            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener"
+               aria-label="LinkedIn (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 8.4H3.3V21h3.3V8.4ZM5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8.2 5.4H10V21h3.2v-6.25c0-1.65.32-3.25 2.37-3.25 2.02 0 2.05 1.9 2.05 3.36V21H21v-6.92c0-3.4-.73-6.01-4.7-6.01-1.9 0-3.18 1.04-3.7 2.02h-.04V8.4h.64Z"/></svg>
+            </a>
           </div>
         </div>
       </div>
-      <a class="htab" href="index.html" data-magnetic>
+      <a class="htab" href="index.html" data-magnetic aria-label="Home">
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -154,7 +166,7 @@
       </a>
     </div>
 
-    <a class="brand" href="index.html">
+    <a class="brand" href="index.html" aria-label="Chinmaya International Residential School home">
       <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
       <span class="brand__txt">
         <span class="brand__name">Chinmaya International Residential School</span>
@@ -163,7 +175,7 @@
     </a>
 
     <div class="header__right">
-      <a class="htab htab--news" href="news.html" data-magnetic>
+      <a class="htab htab--news" href="news.html" data-magnetic aria-label="News">
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
         </span>
@@ -298,6 +310,54 @@
     <a href="assets/img/arts/spic-dancer.jpg"><img src="assets/img/arts/thumbs/spic-dancer.jpg" alt="A visiting dancer, alone on stage" data-cat="SPIC MACAY"></a>
     <a href="assets/img/arts/spic-concert.jpg"><img src="assets/img/arts/thumbs/spic-concert.jpg" alt="A SPIC MACAY concert, on stage" data-cat="SPIC MACAY"></a>
     <a href="assets/img/arts/spic-tabla.jpg"><img src="assets/img/arts/thumbs/spic-tabla.jpg" alt="A visiting tabla player" data-cat="SPIC MACAY"></a>
+    <a href="https://drive.google.com/thumbnail?id=1ovsB76NFcBwwwZaMEAT1YkaZoUiO4w1e&sz=w1600"><img src="assets/img/arts/thumbs/drive-01.jpg" alt="CIRS cultural gallery photograph 01" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1D5yQyB1q4xdDp-Q5iy0u4CfGIY8K-w6w&sz=w1600"><img src="assets/img/arts/thumbs/drive-02.jpg" alt="CIRS cultural gallery photograph 02" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=118WJtsLm84IcTTZni9GJOdH_dvKBztCZ&sz=w1600"><img src="assets/img/arts/thumbs/drive-03.jpg" alt="CIRS cultural gallery photograph 03" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1yTL186-mADqlAYUTir6o-LzqVamXZLdU&sz=w1600"><img src="assets/img/arts/thumbs/drive-04.jpg" alt="CIRS cultural gallery photograph 04" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1AewZ5oFZCiQwKAkWWIo7LeyRbunUmVgs&sz=w1600"><img src="assets/img/arts/thumbs/drive-05.jpg" alt="CIRS cultural gallery photograph 05" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1y_EZLJ4CPVfkbouBxVv5Lg9JAVAE19FQ&sz=w1600"><img src="assets/img/arts/thumbs/drive-06.jpg" alt="CIRS cultural gallery photograph 06" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=10AKDkdvn6KK2MFEmJ_mBr695hEPxNtoB&sz=w1600"><img src="assets/img/arts/thumbs/drive-07.jpg" alt="CIRS cultural gallery photograph 07" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1pvyRi5EivAfIpdNOYSyeUJDw_UFO7wus&sz=w1600"><img src="assets/img/arts/thumbs/drive-08.jpg" alt="CIRS cultural gallery photograph 08" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=19WgS_f8eAm509uJhe4nkzRda-7I5zgvm&sz=w1600"><img src="assets/img/arts/thumbs/drive-09.jpg" alt="CIRS cultural gallery photograph 09" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=19yQdujoNtjZ1Ii1Z9P0Qq1UPTOGAQU_j&sz=w1600"><img src="assets/img/arts/thumbs/drive-10.jpg" alt="CIRS cultural gallery photograph 10" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1spjnMA2o99YYegEqVDQOxxDl_7fX-LyW&sz=w1600"><img src="assets/img/arts/thumbs/drive-11.jpg" alt="CIRS cultural gallery photograph 11" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=113544sqwvhCloNJmHS5KFl-vefABYs1h&sz=w1600"><img src="assets/img/arts/thumbs/drive-12.jpg" alt="CIRS cultural gallery photograph 12" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1y7zb7gQVwpuths0JGEn_mW96QSy8UHL6&sz=w1600"><img src="assets/img/arts/thumbs/drive-13.jpg" alt="CIRS cultural gallery photograph 13" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=17flEEdk_wSrBK2CDrYlTc1q_8DAlQulp&sz=w1600"><img src="assets/img/arts/thumbs/drive-14.jpg" alt="CIRS cultural gallery photograph 14" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1g6In1aiVsjbuec9joinSkUU-aTqz533O&sz=w1600"><img src="assets/img/arts/thumbs/drive-15.jpg" alt="CIRS cultural gallery photograph 15" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1x_8CwzIHFlw1AGfoNC9QWnDJEIXXyaAk&sz=w1600"><img src="assets/img/arts/thumbs/drive-16.jpg" alt="Unfold — The Voice of Transformation" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=143Sr9ktPiQnsmulLmR_qqnMRoIA6xqWs&sz=w1600"><img src="assets/img/arts/thumbs/drive-17.jpg" alt="Unfold 2 — artwork 4" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1L-p_QsE1qqUIBlbE4rT65Wxm62aatqpL&sz=w1600"><img src="assets/img/arts/thumbs/drive-18.jpg" alt="Unfold 2 — artwork 3" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1u1yHQFdpk4L83NJJPvlhTyPj_g3Svz9x&sz=w1600"><img src="assets/img/arts/thumbs/drive-19.jpg" alt="Unfold 2 — artwork 1" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1O0tv8_QfosDCUJcSbr4yTK92L6EUTecO&sz=w1600"><img src="assets/img/arts/thumbs/drive-20.jpg" alt="Gurudev Aradhana" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1Lbrxj6zPQyeMS2gPz1Q4rhiVK-jLdq3r&sz=w1600"><img src="assets/img/arts/thumbs/drive-21.jpg" alt="Story 2 — artwork 2" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1jaSXyFPJJ-Sfe3Tx0yCucWWuk4Q25l-O&sz=w1600"><img src="assets/img/arts/thumbs/drive-22.jpg" alt="Story 2 — artwork 1" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1DCMAATJMNIoWxTyUuYLZ1xLm3Zl9ft3s&sz=w1600"><img src="assets/img/arts/thumbs/drive-23.jpg" alt="Story 2" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1s_pKN_BHj9D50Q8u830jTf7S6V1LzWUL&sz=w1600"><img src="assets/img/arts/thumbs/drive-24.jpg" alt="AU Program — artwork 2" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=10eyNddMkouQFUmE4G4z0Iuw63an0W9o6&sz=w1600"><img src="assets/img/arts/thumbs/drive-25.jpg" alt="AU Program — artwork 1" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1YekJ8Vwi_B6BjVoigDN7jpfcvnz_RW88&sz=w1600"><img src="assets/img/arts/thumbs/drive-26.jpg" alt="AU Program" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1h5-H43f4Bo1ZnRyAj90wDpDtdDc_W-nh&sz=w1600"><img src="assets/img/arts/thumbs/drive-27.jpg" alt="Crossroads 20" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1SjhGvyDNHybNi3OhNeD1vZjo-l0vfm1Q&sz=w1600"><img src="assets/img/arts/thumbs/drive-28.jpg" alt="CIRS cultural gallery photograph 28" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1r4bn0szqYB_i-mSuldxitsI-N-tkau2S&sz=w1600"><img src="assets/img/arts/thumbs/drive-29.jpg" alt="CIRS cultural gallery photograph 29" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=11HA5xoqGAxewgVzeh3TM3PppvYev3ydI&sz=w1600"><img src="assets/img/arts/thumbs/drive-30.jpg" alt="CIRS cultural gallery photograph 30" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1M8zXS7j9atrJHqKq2sA_kydbfHUYbgti&sz=w1600"><img src="assets/img/arts/thumbs/drive-31.jpg" alt="CIRS cultural gallery photograph 31" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1WXXFAVYlxKh2oIDuo8KbtnAaMHyHQlqs&sz=w1600"><img src="assets/img/arts/thumbs/drive-32.jpg" alt="CIRS cultural gallery photograph 32" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=15XLVfpC-ku-xLNxBPm6n8y70CPvQwBlq&sz=w1600"><img src="assets/img/arts/thumbs/drive-33.jpg" alt="CIRS cultural gallery photograph 33" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=17eSe_RrLEvuErwJy0Qu2Ew2SPyLZFi1i&sz=w1600"><img src="assets/img/arts/thumbs/drive-34.jpg" alt="CIRS cultural gallery photograph 34" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1V2qJbbaLi7w7ibC2O4-Y5kMCD49OvILm&sz=w1600"><img src="assets/img/arts/thumbs/drive-35.jpg" alt="CIRS cultural gallery photograph 35" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1U3a6rktdmKDfB4hQk8ORO_PR6Wau6CLG&sz=w1600"><img src="assets/img/arts/thumbs/drive-36.jpg" alt="CIRS cultural gallery photograph 36" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1BYcosqP2CUqrB9BcRp3gVdf1yhKO8dBI&sz=w1600"><img src="assets/img/arts/thumbs/drive-37.jpg" alt="CIRS cultural gallery photograph 37" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1td2J-DBmdQglv7R9ipomguSIF6imqodO&sz=w1600"><img src="assets/img/arts/thumbs/drive-38.jpg" alt="CIRS cultural gallery photograph 38" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1cccSDakP850BhLJtQ65eacHvXG8iNk_S&sz=w1600"><img src="assets/img/arts/thumbs/drive-39.jpg" alt="CIRS cultural gallery photograph 39" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1TWlbjArXKJxBrNd2CJpqqyvsvtlWD_rz&sz=w1600"><img src="assets/img/arts/thumbs/drive-40.jpg" alt="CIRS cultural gallery photograph 40" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1sE29U_XritU9e_1Azx03FHhvK4DtUwxG&sz=w1600"><img src="assets/img/arts/thumbs/drive-41.jpg" alt="CIRS cultural gallery photograph 41" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1sFKdi5AkEcb8KvcU3TU04I3YnO_CfzHi&sz=w1600"><img src="assets/img/arts/thumbs/drive-42.jpg" alt="CIRS cultural gallery photograph 42" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1LCavK2TYVWLcsmVNr8Dh9yn7mh8YWDFi&sz=w1600"><img src="assets/img/arts/thumbs/drive-43.jpg" alt="CIRS cultural gallery photograph 43" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1mtke6DV1TzpBfnahtg8SaaDYTck7u_kw&sz=w1600"><img src="assets/img/arts/thumbs/drive-44.jpg" alt="CIRS cultural gallery photograph 44" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=11ng9M1eVUq1y5ULXu5tLhrHz-LGAz0_g&sz=w1600"><img src="assets/img/arts/thumbs/drive-45.jpg" alt="CIRS cultural gallery photograph 45" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1qh4LqV0spT3lyQpqYUlCtTF0clJAF_pi&sz=w1600"><img src="assets/img/arts/thumbs/drive-46.jpg" alt="CIRS cultural gallery photograph 46" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1SApLBkb9H3EiG-SDo9Os_KVrUPheHfiK&sz=w1600"><img src="assets/img/arts/thumbs/drive-47.jpg" alt="CIRS cultural gallery photograph 47" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1xCuNw9X22rcjeN65qUHBk0UNgL7FvAH9&sz=w1600"><img src="assets/img/arts/thumbs/drive-48.jpg" alt="CIRS cultural gallery photograph 48" data-cat="CIRS Cultural Gallery"></a>
 </template>
 
 <noscript><div class="noscript">This page needs JavaScript to move the photographs. The menu above still
@@ -307,11 +367,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=64" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=64" defer></script>
-<script src="assets/vendor/lenis.min.js?b=64" defer></script>
-<script src="assets/js/cirs.js?b=64" defer></script>
-<script src="assets/js/pages.js?b=64" defer></script>
-<script src="assets/js/artswall.js?b=64" defer></script>
+<script src="assets/vendor/gsap.min.js?b=88" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=88" defer></script>
+<script src="assets/vendor/lenis.min.js?b=88" defer></script>
+<script src="assets/js/cirs.js?b=88" defer></script>
+<script src="assets/js/pages.js?b=88" defer></script>
+<script src="assets/js/artswall.js?b=88" defer></script>
 </body>
 </html>
