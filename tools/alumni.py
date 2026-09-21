@@ -74,10 +74,12 @@ DESTINATIONS = [
      "India", "india", 60.38, 49.56),
     ("nid",         "National Institute of Design", "NID",
      "India", "india", 55.38, 56.89),
+    # cvv carries the longest label on the field and iitm sat straight
+    # across from it; these two are spread so the lettering clears.
     ("cvv",         "Chinmaya Vishwa Vidyapeeth", "Chinmaya Vishwa Vidyapeeth",
-     "India", "india", 56.25, 69.78),
+     "India", "india", 50.20, 69.40),
     ("iitm",        "IIT Madras", "IIT Madras",
-     "India", "india", 64.00, 70.00),
+     "India", "india", 66.60, 70.60),
 
     # United Kingdom
     ("durham",      "Durham University", "Durham",
@@ -88,8 +90,9 @@ DESTINATIONS = [
      "United Kingdom", "uk", 43.13, 30.44),
     ("imperial",    "Imperial College London", "Imperial",
      "United Kingdom", "uk", 44.13, 36.22),
+    # pulled down and out from Imperial, whose label it sat on
     ("lse",         "The London School of Economics and Political Science", "LSE",
-     "United Kingdom", "uk", 47.00, 38.22),
+     "United Kingdom", "uk", 49.60, 41.20),
 
     # United States
     ("northwestern", "Northwestern University", "Northwestern",

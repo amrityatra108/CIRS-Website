@@ -275,22 +275,27 @@
   /* ==========================================================
      The sky
      ----------------------------------------------------------
-     A few hundred stars behind the eighteen destinations. Drawn
-     rather than written into the markup: they carry no
-     information, and three hundred inert <circle> elements in
-     every generated page would be three hundred lines of noise
-     in a file a person has to read.
+     A photograph of a piece of sky, built rather than shot: a
+     few nebulae, some dust lying in front of them, a band of
+     unresolved cloud, and five hundred stars in the colours
+     stars actually come in — blue-white through to amber — with
+     bloom on the bright ones and diffraction spikes on the six
+     brightest, which is what a camera does to a bright star and
+     what makes a picture read as a photograph rather than as a
+     scatter plot.
 
-     The seed is fixed, so it is the same sky on every reload —
-     a constellation that reshuffles itself each time is a
-     screensaver, not a place.
+     All of it is drawn once, from a fixed seed, so it is the
+     same sky on every reload — a constellation that reshuffles
+     itself is a screensaver, not a place. None of it carries
+     information: the eighteen destinations are separate, larger,
+     labelled, and focusable.
      ========================================================== */
-  function buildStars() {
+  function buildSky() {
     var field = $("[data-constellation-field]");
     if (!field) return null;
     var NS = "http://www.w3.org/2000/svg";
 
-    // mulberry32: small, fast, and deterministic from one integer.
+    // mulberry32: small, fast, deterministic from one integer.
     var seed = 0x1996;   // the year the school opened on this campus
     function rnd() {
       seed |= 0; seed = seed + 0x6D2B79F5 | 0;
@@ -298,32 +303,127 @@
       t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
       return ((t ^ t >>> 14) >>> 0) / 4294967296;
     }
-
-    var svg = document.createElementNS(NS, "svg");
-    svg.setAttribute("class", "ajc__stars");
-    svg.setAttribute("viewBox", "0 0 160 90");
-    svg.setAttribute("preserveAspectRatio", "none");
-    svg.setAttribute("aria-hidden", "true");
-    svg.setAttribute("focusable", "false");
-
-    var twinklers = [];
-    for (var i = 0; i < 320; i++) {
-      var x = rnd() * 160, y = rnd() * 90;
-      // Thicken the drift along the diagonal band the sheet paints, so the
-      // stars and the cloud are the same cloud.
-      var band = Math.abs((y / 90) - (0.22 + (x / 160) * 0.62));
-      if (band > 0.30 && rnd() > 0.45) continue;
-
-      var bright = rnd();
-      var c = document.createElementNS(NS, "circle");
-      c.setAttribute("class", "ajc__star");
-      c.setAttribute("cx", x.toFixed(2));
-      c.setAttribute("cy", y.toFixed(2));
-      c.setAttribute("r", (0.07 + bright * bright * 0.24).toFixed(3));
-      c.setAttribute("opacity", (0.16 + bright * 0.62).toFixed(2));
-      svg.appendChild(c);
-      if (bright > 0.86) twinklers.push(c);
+    function el(name, attrs) {
+      var n = document.createElementNS(NS, name);
+      for (var k in attrs) n.setAttribute(k, attrs[k]);
+      return n;
     }
+
+    var svg = el("svg", {
+      "class": "ajc__stars", viewBox: "0 0 160 90",
+      preserveAspectRatio: "xMidYMid slice",
+      "aria-hidden": "true", focusable: "false"
+    });
+
+    // ---- the blurs everything else is built out of ----
+    var defs = el("defs", {});
+    [["ajNebulaBlur", 7], ["ajDustBlur", 5], ["ajBandBlur", 3.2], ["ajBloom", .7]]
+      .forEach(function (f) {
+        var filter = el("filter", {
+          id: f[0], x: "-60%", y: "-60%", width: "220%", height: "220%",
+          "color-interpolation-filters": "sRGB"
+        });
+        filter.appendChild(el("feGaussianBlur", { stdDeviation: f[1] }));
+        defs.appendChild(filter);
+      });
+    svg.appendChild(defs);
+
+    // ---- nebulae: colour first, a long way behind everything ----
+    var clouds = [
+      [22, 20, 30, 20, "#2B4C86", .30], [30, 30, 20, 15, "#2F6E8C", .20],
+      [128, 62, 34, 22, "#7A3A2E", .17], [116, 50, 18, 14, "#8A5A20", .16],
+      [72, 14, 26, 12, "#3B2A6B", .17], [96, 78, 22, 13, "#5C2748", .15],
+      [50, 62, 20, 14, "#1F5F63", .14]
+    ];
+    var gNeb = el("g", { filter: "url(#ajNebulaBlur)" });
+    clouds.forEach(function (c) {
+      gNeb.appendChild(el("ellipse", {
+        cx: c[0], cy: c[1], rx: c[2], ry: c[3], fill: c[4], opacity: c[5]
+      }));
+    });
+    svg.appendChild(gNeb);
+
+    // ---- the band: unresolved cloud lying across the frame ----
+    var gBand = el("g", { filter: "url(#ajBandBlur)", opacity: ".5" });
+    for (var b = 0; b < 16; b++) {
+      var bx = b * 11 + rnd() * 6;
+      gBand.appendChild(el("ellipse", {
+        cx: bx.toFixed(1),
+        cy: (16 + bx * 0.42 + (rnd() - .5) * 7).toFixed(1),
+        rx: (7 + rnd() * 7).toFixed(1), ry: (2.2 + rnd() * 2.6).toFixed(1),
+        fill: rnd() > .55 ? "#C8D6F0" : "#D8C8A8",
+        opacity: (.05 + rnd() * .07).toFixed(3)
+      }));
+    }
+    svg.appendChild(gBand);
+
+    // ---- dust: dark lanes in FRONT of the clouds, as they are ----
+    var gDust = el("g", { filter: "url(#ajDustBlur)" });
+    [[36, 26, 22, 7, .34], [122, 58, 20, 6, .30], [78, 40, 26, 5, .24],
+     [18, 52, 16, 8, .26], [100, 20, 14, 6, .22]].forEach(function (d) {
+      gDust.appendChild(el("ellipse", {
+        cx: d[0], cy: d[1], rx: d[2], ry: d[3], fill: "#05040A", opacity: d[4]
+      }));
+    });
+    svg.appendChild(gDust);
+
+    // ---- the stars ----
+    // Real star colour runs blue-white to amber. Weighted to the cool end,
+    // which is what an unfiltered wide field looks like.
+    var hues = ["#CFE2FF", "#DCE9FF", "#FFFFFF", "#FFF4E2", "#FFE6C2",
+                "#FFD5A0", "#FFC189"];
+    var gBloom = el("g", { filter: "url(#ajBloom)" });
+    var gCore = el("g", {});
+    var twinklers = [], bright = [];
+
+    for (var i = 0; i < 520; i++) {
+      var x = rnd() * 160, y = rnd() * 90;
+      // Crowd the band, the way a galactic plane crowds.
+      var onBand = Math.abs(y - (16 + x * 0.42)) < 12;
+      if (!onBand && rnd() > 0.62) continue;
+
+      var m = rnd();                       // magnitude, 0 faint .. 1 bright
+      m = m * m;                           // most stars are faint
+      var hue = hues[Math.floor(rnd() * hues.length)];
+      var r = 0.075 + m * 0.42;
+      var o = 0.18 + m * 0.78;
+
+      gCore.appendChild(el("circle", {
+        "class": "ajc__star", cx: x.toFixed(2), cy: y.toFixed(2),
+        r: r.toFixed(3), fill: hue, opacity: o.toFixed(2)
+      }));
+      if (m > 0.34) {
+        gBloom.appendChild(el("circle", {
+          cx: x.toFixed(2), cy: y.toFixed(2),
+          r: (r * 2.6).toFixed(3), fill: hue, opacity: (o * 0.42).toFixed(2)
+        }));
+      }
+      if (m > 0.62) bright.push({ x: x, y: y, m: m, hue: hue });
+    }
+    svg.appendChild(gBloom);
+    svg.appendChild(gCore);
+
+    // ---- diffraction spikes on the six brightest ----
+    bright.sort(function (a, b) { return b.m - a.m; });
+    var gSpike = el("g", { opacity: ".85" });
+    bright.slice(0, 6).forEach(function (st) {
+      var len = 1.6 + st.m * 3.4;
+      [[len, 0.055], [0.055, len]].forEach(function (d) {
+        gSpike.appendChild(el("rect", {
+          x: (st.x - d[0]).toFixed(2), y: (st.y - d[1]).toFixed(2),
+          width: (d[0] * 2).toFixed(2), height: (d[1] * 2).toFixed(2),
+          fill: st.hue, opacity: ".55"
+        }));
+      });
+      var core = el("circle", {
+        "class": "ajc__star", cx: st.x.toFixed(2), cy: st.y.toFixed(2),
+        r: "0.34", fill: "#FFFFFF", opacity: ".95"
+      });
+      gSpike.appendChild(core);
+      twinklers.push(core);
+    });
+    svg.appendChild(gSpike);
+
     field.insertBefore(svg, field.firstChild);
     return { svg: svg, twinklers: twinklers };
   }
@@ -594,8 +694,46 @@
       }
     }
 
-    // Images and fonts land late and move everything below them.
+    /* ---- put every other trigger on the page right -------- */
+    /* This page pins two chapters, and a pin inserts a spacer — about
+       3,200px of it. cirs.js has already measured its own reveals by then,
+       so every .rv below the pins is holding a trigger position that is now
+       thousands of pixels off, never fires, and leaves the heading it was
+       meant to reveal sitting at opacity 0. Ten of the eleven on this page
+       did exactly that.
+
+       One refresh once the pins exist re-measures all of them, cirs.js's
+       included. It has to happen after gsap.matchMedia() has run its
+       callback, hence the frame. */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { ScrollTrigger.refresh(); });
+    });
+    // Images and fonts land late and move everything below them again.
     window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+
+    /* And a net under that, because a reader can be scrolling before load.
+       Anything still invisible once it is inside the viewport is shown. */
+    var net = gsap.utils.toArray(".rv, .ajp, .ajv");
+    function sweep() {
+      for (var i = net.length - 1; i >= 0; i--) {
+        var e = net[i];
+        var r = e.getBoundingClientRect();
+        if (r.top > window.innerHeight * 0.95) continue;
+        if (parseFloat(getComputedStyle(e).opacity) < 0.1) {
+          gsap.set(e, { opacity: 1, y: 0, clearProps: "transform" });
+        }
+        net.splice(i, 1);
+      }
+      if (!net.length) window.removeEventListener("scroll", queue);
+    }
+    var queued = false;
+    function queue() {
+      if (queued) return;
+      queued = true;
+      window.setTimeout(function () { queued = false; sweep(); }, 350);
+    }
+    window.addEventListener("scroll", queue, { passive: true });
+    window.setTimeout(sweep, 2000);
   }
 
   /* ==========================================================
@@ -618,7 +756,7 @@
 
   function start() {
     var parts = interactions();
-    var sky = buildStars();
+    var sky = buildSky();
     var gather = buildGather();
     if (canMove) {
       try { motion(parts, gather, sky); }
