@@ -23,4 +23,10 @@
 <link rel="stylesheet" href="assets/css/fonts.css?{{CACHE_BUST}}">
 <link rel="stylesheet" href="assets/css/cirs.css?{{CACHE_BUST}}">
 <link rel="stylesheet" href="assets/css/pages.css?{{CACHE_BUST}}">
+<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
+     removes once it has played. With scripting off nothing removes it, and
+     it covers the page on every page of this site. One rule, applied only
+     when there is no scripting, is the whole fix. Crossroads already does
+     this for its own curtain further down. -->
+<noscript><style>.curtain{display:none}</style></noscript>
 </head>

@@ -28,6 +28,7 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import alumni
 import artswall
 import blog
 import founder
@@ -37,7 +38,7 @@ import crossroads
 import mathchallenge
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=64"
+CACHE_BUST = "b=65"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -472,10 +473,16 @@ PAGES = {
     },
     "alumni": {
         "nav": "Alumni",
-        "title": "Alumni",
-        "description": "Where CIRS students go after school — universities in India and abroad.",
-        "banner": ("After CIRS", "Where They <em>Go Next.</em>",
-                   "The universities our students read at, in India and abroad."),
+        "title": "Where CIRS Takes You | Alumni",
+        "description": "Where CIRS students go after school — the universities they read at "
+                       "in India and abroad, the alumni the school has named, and the "
+                       "pathways out of Siruvani.",
+        # No banner from the shared builder. This page opens on a journey it
+        # brings itself — a full-height aerial of the campus with the route
+        # leaving it — and that opening carries the page's h1 and its id="top".
+        # Its sheet is assets/css/alumni.css, scoped to body.alumni.
+        "banner": None,
+        "sheet": "alumni",
     },
 }
 
@@ -1149,7 +1156,12 @@ def build(slug, page):
                        .replace("{{BLOG_FRONT}}", blog.front_html())
                        .replace("{{BLOG_RAIL}}", blog.rail_html())
                        .replace("{{BLOG_COUNT}}", str(blog.count()))
-                       .replace("{{BLOG_ISSUES}}", str(blog.issue_count())))
+                       .replace("{{BLOG_ISSUES}}", str(blog.issue_count()))
+                       .replace("{{ALUMNI_CONSTELLATION}}", alumni.constellation_html())
+                       .replace("{{ALUMNI_DESTINATIONS}}", alumni.destinations_html())
+                       .replace("{{ALUMNI_PEOPLE}}", alumni.people_html())
+                       .replace("{{ALUMNI_VOICES}}", alumni.voices_html())
+                       .replace("{{ALUMNI_PATHWAYS}}", alumni.pathways_html()))
     parts.append(content)
     if page.get("jump"):
         parts.append(jump_html(content))
@@ -1172,6 +1184,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
         parts.append(f'<script src="assets/js/admissions.js?{CACHE_BUST}" defer></script>')
+    if slug == "alumni":
+        parts.append(f'<script src="assets/js/alumni-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if wall:

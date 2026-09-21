@@ -3,30 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alumni</title>
-<meta name="description" content="Where CIRS students go after school — universities in India and abroad.">
+<title>Where CIRS Takes You | Alumni</title>
+<meta name="description" content="Where CIRS students go after school — the universities they read at in India and abroad, the alumni the school has named, and the pathways out of Siruvani.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/alumni.html">
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Alumni">
-<meta property="og:description" content="Where CIRS students go after school — universities in India and abroad.">
+<meta property="og:title" content="Where CIRS Takes You | Alumni">
+<meta property="og:description" content="Where CIRS students go after school — the universities they read at in India and abroad, the alumni the school has named, and the pathways out of Siruvani.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Alumni">
-<meta name="twitter:description" content="Where CIRS students go after school — universities in India and abroad.">
+<meta name="twitter:title" content="Where CIRS Takes You | Alumni">
+<meta name="twitter:description" content="Where CIRS students go after school — the universities they read at in India and abroad, the alumni the school has named, and the pathways out of Siruvani.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=64">
-<link rel="stylesheet" href="assets/css/cirs.css?b=64">
-<link rel="stylesheet" href="assets/css/pages.css?b=64">
-<link rel="stylesheet" href="assets/css/typography.css?b=64">
+<link rel="stylesheet" href="assets/css/fonts.css?b=65">
+<link rel="stylesheet" href="assets/css/cirs.css?b=65">
+<link rel="stylesheet" href="assets/css/pages.css?b=65">
+<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
+     removes once it has played. With scripting off nothing removes it, and
+     it covers the page on every page of this site. One rule, applied only
+     when there is no scripting, is the whole fix. Crossroads already does
+     this for its own curtain further down. -->
+<noscript><style>.curtain{display:none}</style></noscript>
+<link rel="stylesheet" href="assets/css/alumni.css?b=65">
+<link rel="stylesheet" href="assets/css/typography.css?b=65">
 </head>
 
-<body>
+<body class="alumni">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -240,107 +247,773 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">After CIRS</span></p>
-    <h1 class="serif" data-split>Where They <em>Go Next.</em></h1>
-    <p class="lead">The universities our students read at, in India and abroad.</p>
+<!-- ==================================================================
+     WHERE CIRS TAKES YOU
+     ------------------------------------------------------------------
+     One journey in seven chapters: the campus, the departure, the field
+     of destinations, the alumni themselves, the pathways out, the index,
+     and the way back. The chapters are written here; everything that is
+     a name, a university, a quotation or a count is built from
+     tools/alumni.py, which is the only place any of it is recorded.
+
+     This page brings its own opening instead of the shared banner —
+     "banner": None in build-site.py — so the <h1> is on chapter one.
+     Its sheet is assets/css/alumni.css and its script is
+     assets/js/alumni-journey.js, both scoped to body.alumni.
+     ================================================================== -->
+
+<!-- ============ CHAPTER 1 — Belonging ============ -->
+<section class="aj-open" id="top" data-ground="#0E0B12" data-open>
+  <div class="aj-open__media" data-open-media>
+    <img src="assets/img/forest-air.jpg"
+         alt="Chinmaya International Residential School from the air: the courtyards, the
+              swimming pool and the playing fields inside a boundary of forest."
+         width="1600" height="900" fetchpriority="high" decoding="async">
   </div>
+  <div class="aj-open__wash" aria-hidden="true"></div>
+
+  <!-- The route begins here and is picked up again by chapter seven. It is
+       drawn, not plotted: a line leaving a campus, not a flight path. -->
+  <svg class="aj-open__route" viewBox="0 0 1000 600" fill="none" aria-hidden="true"
+       focusable="false" preserveAspectRatio="xMidYMid slice">
+    <path class="aj-open__routeLine" data-open-route
+          d="M492 470 C 492 406, 520 372, 566 352 C 628 326, 700 330, 754 292
+             C 812 250, 826 176, 900 128"/>
+    <circle class="aj-open__routeSeed" cx="492" cy="470" r="5"/>
+  </svg>
+
+  <div class="wrap aj-open__inner">
+    <p class="aj-open__eyebrow" data-open-eyebrow>
+      <span class="sc">The CIRS alumni community</span>
+    </p>
+    <h1 class="aj-open__title" data-open-title>
+      <span class="aj-open__line"><span>Where CIRS</span></span>
+      <span class="aj-open__line"><span>Takes You</span></span>
+    </h1>
+    <p class="aj-open__sub" data-open-sub>Many paths. One beginning.</p>
+  </div>
+
+  <p class="aj-open__cue" data-open-cue aria-hidden="true">
+    <span class="sc">Begin the journey</span>
+    <span class="aj-open__cueRule"></span>
+  </p>
 </section>
-<section class="section" id="pathways">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">After CIRS</span></p>
-      <h2 class="serif h2" data-split>Where the Diploma <em>takes them.</em></h2>
-      <p class="lead">The IB opens direct application to North America, the UK, Europe and
-        Australia; CBSE keeps the Indian national pathway fully open. Counselling begins in
-        Grade X.</p>
+
+<!-- ============ CHAPTER 2 — Leaving ============ -->
+<section class="aj-portal" id="departure" data-ground="#0E0B12" data-portal>
+  <div class="aj-portal__stage" data-portal-stage>
+    <div class="aj-portal__depth" aria-hidden="true" data-portal-depth></div>
+
+    <!-- The campus recedes from a full screen into one archival plate
+         floating in the dark, and the field opens behind it. -->
+    <figure class="aj-portal__plate" data-portal-plate>
+      <img src="assets/img/hrun/10-night.jpg"
+           alt="Students seated in the concentric brick rings of the CIRS amphitheatre after
+                dark, under floodlights, during evening practice."
+           width="1500" height="1000" loading="lazy" decoding="async">
+      <figcaption class="aj-portal__cap">
+        <span class="sc">Siruvani</span> The amphitheatre, after dark
+      </figcaption>
+    </figure>
+
+    <div class="aj-portal__copy" data-portal-copy>
+      <p class="marker"><span class="sc">Leaving</span></p>
+      <h2 class="serif aj-portal__head">Everyone here <em>begins in the same rings.</em></h2>
+      <p class="aj-portal__lead">CIRS has been teaching on the Siruvani campus since 1996.
+        What follows is where its students went after it &mdash; every institution the
+        school has named, and every alumnus it has named, and nothing that it has not.</p>
     </div>
   </div>
 </section>
 
-<section class="section on-purple" id="placements" data-ground="#392A48">
+<!-- ============ CHAPTER 3 — The destinations ============ -->
+<section class="aj-const" id="constellation" data-ground="#0E0B12">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">International placements</span></p>
-      <h2 class="serif h2" data-split>The universities <em>they read at.</em></h2>
-      <p class="lead">Institutions CIRS students have gone on to, in India and abroad.</p>
+    <div class="sec-head aj-const__head rv">
+      <p class="marker"><span class="sc">The field</span></p>
+      <h2 class="serif h2" data-split>Eighteen destinations, <em>one origin.</em></h2>
+      <p class="lead">Every line here starts at the same point on the Siruvani campus.
+        Choose a region to narrow the field, or open any destination to see what the
+        school has recorded about it.</p>
     </div>
+  </div>
 
-    <div class="facilities rv">
-      <div><p class="sc">India</p>
-        <p class="copy">Shri Ram College of Commerce</p>
-        <p class="copy">National Institute of Design</p>
-        <p class="copy">IIT Madras</p>
-        <p class="copy">Chinmaya Vishwa Vidyapeeth</p>
-      </div>
-      <div><p class="sc">United Kingdom</p>
-        <p class="copy">Imperial College London</p>
-        <p class="copy">The London School of Economics and Political Science</p>
-        <p class="copy">The University of Manchester</p>
-        <p class="copy">Durham University</p>
-        <p class="copy">University of Warwick</p>
-      </div>
-      <div><p class="sc">United States</p>
-        <p class="copy">University of Chicago</p>
-        <p class="copy">Northwestern University</p>
-        <p class="copy">New York University</p>
-        <p class="copy">Boston University</p>
-        <p class="copy">University of Virginia</p>
-        <p class="copy">Purdue University</p>
-        <p class="copy">The New School &mdash; Parsons</p>
-      </div>
-      <div><p class="sc">Asia&ndash;Pacific</p>
-        <p class="copy">National University of Singapore</p>
-        <p class="copy">The Hong Kong University of Science and Technology</p>
-      </div>
+  <div class="ajc" data-constellation>
+  <div class="ajc__bar">
+    <div class="ajc__filters" role="group" aria-label="Filter the destinations by region">
+      <button type="button" class="ajc__filter is-on" data-filter="all" aria-pressed="true">All <span class="ajc__fcount">18</span></button>
+      <button type="button" class="ajc__filter" data-filter="india" aria-pressed="false">India <span class="ajc__fcount">4</span></button>
+      <button type="button" class="ajc__filter" data-filter="uk" aria-pressed="false">United Kingdom <span class="ajc__fcount">5</span></button>
+      <button type="button" class="ajc__filter" data-filter="us" aria-pressed="false">United States <span class="ajc__fcount">7</span></button>
+      <button type="button" class="ajc__filter" data-filter="apac" aria-pressed="false">Asia&ndash;Pacific <span class="ajc__fcount">2</span></button>
     </div>
+    <p class="ajc__status" data-constellation-status role="status">Showing all 18 destinations.</p>
+  </div>
+
+  <div class="ajc__field" data-constellation-field>
+    <svg class="ajc__lines" viewBox="0 0 100 100" preserveAspectRatio="none"
+         aria-hidden="true" focusable="false">
+    <path class="ajc__line" data-region="india" data-line="srcc" d="M59.13 76.00 Q63.46 62.95 60.38 49.56"/>
+    <path class="ajc__line" data-region="india" data-line="nid" d="M59.13 76.00 Q59.93 65.92 55.38 56.89"/>
+    <path class="ajc__line" data-region="india" data-line="cvv" d="M59.13 76.00 Q58.56 72.49 56.25 69.78"/>
+    <path class="ajc__line" data-region="india" data-line="iitm" d="M59.13 76.00 Q62.41 73.68 64.00 70.00"/>
+    <path class="ajc__line" data-region="uk" data-line="durham" d="M59.13 76.00 Q59.44 45.29 43.75 18.89"/>
+    <path class="ajc__line" data-region="uk" data-line="manchester" d="M59.13 76.00 Q57.75 47.94 42.00 24.67"/>
+    <path class="ajc__line" data-region="uk" data-line="warwick" d="M59.13 76.00 Q57.51 50.98 43.13 30.44"/>
+    <path class="ajc__line" data-region="uk" data-line="imperial" d="M59.13 76.00 Q57.20 54.01 44.13 36.22"/>
+    <path class="ajc__line" data-region="uk" data-line="lse" d="M59.13 76.00 Q58.35 55.41 47.00 38.22"/>
+    <path class="ajc__line" data-region="us" data-line="northwestern" d="M59.13 76.00 Q42.15 46.50 12.50 29.78"/>
+    <path class="ajc__line" data-region="us" data-line="chicago" d="M59.13 76.00 Q42.89 50.24 15.63 36.67"/>
+    <path class="ajc__line" data-region="us" data-line="purdue" d="M59.13 76.00 Q43.48 54.13 18.75 43.56"/>
+    <path class="ajc__line" data-region="us" data-line="virginia" d="M59.13 76.00 Q45.77 57.04 24.50 47.78"/>
+    <path class="ajc__line" data-region="us" data-line="nyu" d="M59.13 76.00 Q48.66 50.06 26.25 33.33"/>
+    <path class="ajc__line" data-region="us" data-line="parsons" d="M59.13 76.00 Q48.79 53.81 28.44 40.22"/>
+    <path class="ajc__line" data-region="us" data-line="boston" d="M59.13 76.00 Q50.60 47.01 28.25 26.67"/>
+    <path class="ajc__line" data-region="apac" data-line="hkust" d="M59.13 76.00 Q73.81 72.44 84.50 61.78"/>
+    <path class="ajc__line" data-region="apac" data-line="nus" d="M59.13 76.00 Q69.04 80.09 79.63 78.44"/>
+    </svg>
+
+    <p class="ajc__origin" style="--x:59.13%;--y:76.0%" aria-hidden="true">
+      <span class="ajc__originDot"></span>
+      <span class="ajc__originName">CIRS<small>Siruvani</small></span>
+    </p>
+
+    <ul class="ajc__points">
+      <li class="ajc__item" data-region="india">
+        <button type="button" class="ajc__pt" id="ajc-pt-srcc"
+                style="--x:60.38%;--y:49.56%"
+                data-point="srcc" data-region="india"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Shri Ram</span><span class="ajc__country">India</span></span>
+          <span class="sr-only">Destination 1 of 18. Shri Ram College of Commerce, India. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="india">
+        <button type="button" class="ajc__pt" id="ajc-pt-nid"
+                style="--x:55.38%;--y:56.89%"
+                data-point="nid" data-region="india"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">NID</span><span class="ajc__country">India</span></span>
+          <span class="sr-only">Destination 2 of 18. National Institute of Design, India. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="india">
+        <button type="button" class="ajc__pt" id="ajc-pt-cvv"
+                style="--x:56.25%;--y:69.78%"
+                data-point="cvv" data-region="india"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Chinmaya Vishwa Vidyapeeth</span><span class="ajc__country">India</span></span>
+          <span class="sr-only">Destination 3 of 18. Chinmaya Vishwa Vidyapeeth, India. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="india">
+        <button type="button" class="ajc__pt" id="ajc-pt-iitm"
+                style="--x:64.0%;--y:70.0%"
+                data-point="iitm" data-region="india"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">IIT Madras</span><span class="ajc__country">India</span></span>
+          <span class="sr-only">Destination 4 of 18. IIT Madras, India. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="uk">
+        <button type="button" class="ajc__pt" id="ajc-pt-durham"
+                style="--x:43.75%;--y:18.89%"
+                data-point="durham" data-region="uk"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Durham</span><span class="ajc__country">United Kingdom</span></span>
+          <span class="sr-only">Destination 5 of 18. Durham University, United Kingdom. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="uk">
+        <button type="button" class="ajc__pt" id="ajc-pt-manchester"
+                style="--x:42.0%;--y:24.67%"
+                data-point="manchester" data-region="uk"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Manchester</span><span class="ajc__country">United Kingdom</span></span>
+          <span class="sr-only">Destination 6 of 18. The University of Manchester, United Kingdom. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="uk">
+        <button type="button" class="ajc__pt" id="ajc-pt-warwick"
+                style="--x:43.13%;--y:30.44%"
+                data-point="warwick" data-region="uk"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Warwick</span><span class="ajc__country">United Kingdom</span></span>
+          <span class="sr-only">Destination 7 of 18. University of Warwick, United Kingdom. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="uk">
+        <button type="button" class="ajc__pt" id="ajc-pt-imperial"
+                style="--x:44.13%;--y:36.22%"
+                data-point="imperial" data-region="uk"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Imperial</span><span class="ajc__country">United Kingdom</span></span>
+          <span class="sr-only">Destination 8 of 18. Imperial College London, United Kingdom. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="uk">
+        <button type="button" class="ajc__pt" id="ajc-pt-lse"
+                style="--x:47.0%;--y:38.22%"
+                data-point="lse" data-region="uk"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">LSE</span><span class="ajc__country">United Kingdom</span></span>
+          <span class="sr-only">Destination 9 of 18. The London School of Economics and Political Science, United Kingdom. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="us">
+        <button type="button" class="ajc__pt" id="ajc-pt-northwestern"
+                style="--x:12.5%;--y:29.78%"
+                data-point="northwestern" data-region="us"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Northwestern</span><span class="ajc__country">United States</span></span>
+          <span class="sr-only">Destination 10 of 18. Northwestern University, United States. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="us">
+        <button type="button" class="ajc__pt" id="ajc-pt-chicago"
+                style="--x:15.63%;--y:36.67%"
+                data-point="chicago" data-region="us"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Chicago</span><span class="ajc__country">United States</span></span>
+          <span class="sr-only">Destination 11 of 18. University of Chicago, United States. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="us">
+        <button type="button" class="ajc__pt" id="ajc-pt-purdue"
+                style="--x:18.75%;--y:43.56%"
+                data-point="purdue" data-region="us"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Purdue</span><span class="ajc__country">United States</span></span>
+          <span class="sr-only">Destination 12 of 18. Purdue University, United States. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="us">
+        <button type="button" class="ajc__pt" id="ajc-pt-virginia"
+                style="--x:24.5%;--y:47.78%"
+                data-point="virginia" data-region="us"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Virginia</span><span class="ajc__country">United States</span></span>
+          <span class="sr-only">Destination 13 of 18. University of Virginia, United States. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="us">
+        <button type="button" class="ajc__pt" id="ajc-pt-nyu"
+                style="--x:26.25%;--y:33.33%"
+                data-point="nyu" data-region="us"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">NYU</span><span class="ajc__country">United States</span></span>
+          <span class="sr-only">Destination 14 of 18. New York University, United States. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="us">
+        <button type="button" class="ajc__pt" id="ajc-pt-parsons"
+                style="--x:28.44%;--y:40.22%"
+                data-point="parsons" data-region="us"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Parsons</span><span class="ajc__country">United States</span></span>
+          <span class="sr-only">Destination 15 of 18. The New School &mdash; Parsons, United States. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="us">
+        <button type="button" class="ajc__pt" id="ajc-pt-boston"
+                style="--x:28.25%;--y:26.67%"
+                data-point="boston" data-region="us"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">Boston</span><span class="ajc__country">United States</span></span>
+          <span class="sr-only">Destination 16 of 18. Boston University, United States. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="apac">
+        <button type="button" class="ajc__pt" id="ajc-pt-hkust"
+                style="--x:84.5%;--y:61.78%"
+                data-point="hkust" data-region="apac"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">HKUST</span><span class="ajc__country">Hong Kong</span></span>
+          <span class="sr-only">Destination 17 of 18. The Hong Kong University of Science and Technology, Hong Kong. Open details.</span>
+        </button>
+      </li>
+      <li class="ajc__item" data-region="apac">
+        <button type="button" class="ajc__pt" id="ajc-pt-nus"
+                style="--x:79.63%;--y:78.44%"
+                data-point="nus" data-region="apac"
+                aria-expanded="false" aria-controls="ajc-panel">
+          <span class="ajc__dot" aria-hidden="true"></span>
+          <span class="ajc__label"><span class="ajc__name">NUS</span><span class="ajc__country">Singapore</span></span>
+          <span class="sr-only">Destination 18 of 18. National University of Singapore, Singapore. Open details.</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="ajc__panel" id="ajc-panel" role="dialog" aria-modal="true"
+       aria-labelledby="ajc-panel-name" hidden>
+    <div class="ajc__panelInner">
+      <p class="ajc__panelRegion sc" data-panel-region></p>
+      <!-- Seeded rather than empty: the panel is hidden until a point is
+           opened, but an empty heading is invalid markup either way, and
+           aria-labelledby points at this element. -->
+      <h3 class="serif ajc__panelName" id="ajc-panel-name" data-panel-name>Destination</h3>
+      <p class="ajc__panelCountry" data-panel-country></p>
+      <p class="ajc__panelNote">A destination CIRS students have gone on to.
+        <em>[Which alumni read here, and in which years, to be supplied by the
+        school.]</em></p>
+      <button type="button" class="ajc__panelClose" data-panel-close>
+        Close<span class="sr-only"> this destination</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+  <div class="wrap">
+    <p class="aj-const__foot note rv">The field is a constellation, not a map: the four
+      regions group, and they group west to east, but no point claims a latitude.
+      <a href="#aj-destinations">The same eighteen institutions as a list.</a></p>
   </div>
 </section>
 
-<section class="section" id="voices">
+<!-- ============ CHAPTER 4a — In their own words ============ -->
+<section class="aj-voices" id="aj-voices" data-ground="#141018">
   <div class="wrap">
-    <div class="sec-head rv">
+    <div class="sec-head aj-voices__head rv">
       <p class="marker"><span class="sc">We are CIRS</span></p>
       <h2 class="serif h2" data-split>In their <em>own words.</em></h2>
-      <p class="lead">CIRS has been teaching on the Siruvani campus since 1996. These are alumni
-        writing about what the years there left them with.</p>
+      <p class="lead">Three alumni, writing about what the years here left them with.
+        These are the only alumni words the school has published, so each one is given
+        the room it asks for rather than a card in a row of three.</p>
+    </div>
+  </div>
+
+    <figure class="ajv" data-voice="kavya-s">
+    <p class="ajv__mark" aria-hidden="true">&ldquo;</p>
+    <blockquote class="ajv__quote">
+      <p class="serif" data-split>CIRS is an <em>emotion.</em></p>
+    </blockquote>
+    <figcaption class="ajv__by">
+      <span class="ajv__name">Kavya S</span>
+      <span class="ajv__batch"><em>[Batch to be supplied]</em></span>
+    </figcaption>
+  </figure>
+  <figure class="ajv" data-voice="roshan-b">
+    <p class="ajv__mark" aria-hidden="true">&ldquo;</p>
+    <blockquote class="ajv__quote">
+      <p class="serif" data-split>I learned the value of <em>balance</em> in my life over those seven years there.</p>
+    </blockquote>
+    <figcaption class="ajv__by">
+      <span class="ajv__name">Roshan B</span>
+      <span class="ajv__batch"><em>[Batch to be supplied]</em></span>
+    </figcaption>
+  </figure>
+  <figure class="ajv" data-voice="mugdha-sultania">
+    <p class="ajv__mark" aria-hidden="true">&ldquo;</p>
+    <blockquote class="ajv__quote">
+      <p class="serif" data-split>I would literally trade anything to just go back and <em>re-live</em> each and every moment spent there.</p>
+    </blockquote>
+    <figcaption class="ajv__by">
+      <span class="ajv__name">Mugdha Sultania</span>
+      <span class="ajv__batch"><em>[Batch to be supplied]</em></span>
+    </figcaption>
+  </figure>
+</section>
+
+<!-- ============ CHAPTER 4b — The alumni the school has named ============ -->
+<section class="aj-people" id="aj-stories">
+  <div class="wrap">
+    <div class="sec-head aj-people__head rv">
+      <p class="marker"><span class="sc">Named alumni</span></p>
+      <h2 class="serif h2" data-split>Four paths, <em>followed in public.</em></h2>
+      <p class="lead">A physics department, a national cricket side, a national football
+        side and a design studio. The school has published one line about each; the rest
+        of every one of these stories is still to come, and is marked below rather than
+        filled in.</p>
+    </div>
+  </div>
+
+    <article class="ajp" id="alumnus-hari-om-jani" data-person="hari-om-jani" data-side="left">
+    <div class="ajp__figure">
+      <figure class="ajp__frame">
+        <span class="ajp__plate" data-plate="now">
+          <span class="ajp__initials" aria-hidden="true">HO</span>
+          <span class="ajp__plateLabel sc">Today</span>
+          <span class="ajp__plateNote"><em>[Portrait to be supplied by the school, with
+            the alumnus&rsquo;s permission.]</em></span>
+        </span>
+      </figure>
+      <p class="ajp__index" aria-hidden="true">01</p>
     </div>
 
-    <div class="voices">
-      <figure class="voice rv">
-        <blockquote><p class="pull serif">&ldquo;CIRS is an <em>emotion.</em>&rdquo;</p></blockquote>
-        <figcaption class="voice__by">Kavya S</figcaption>
-      </figure>
-      <figure class="voice rv">
-        <blockquote><p class="pull serif">&ldquo;I learned the value of <em>balance</em> in my life
-          over those seven years there.&rdquo;</p></blockquote>
-        <figcaption class="voice__by">Roshan B</figcaption>
-      </figure>
-      <figure class="voice rv">
-        <blockquote><p class="pull serif">&ldquo;I would literally trade anything to just go back
-          and <em>re-live</em> each and every moment spent there.&rdquo;</p></blockquote>
-        <figcaption class="voice__by">Mugdha Sultania</figcaption>
-      </figure>
+    <div class="ajp__text">
+      <h3 class="serif ajp__name" data-split>Hari Om Jani</h3>
+      <p class="ajp__role">Professor of Physics, Oxford University</p>
+      <p class="ajp__meta"><span class="ajp__metaItem"><b>Path</b>Science and research</span></p>
+      <p class="ajp__await"><em>[The rest of this alumnus&rsquo;s story &mdash; the batch, where
+        they read, and what they would say about the years here &mdash; to be supplied by the
+        school.]</em></p>
     </div>
+  </article>
+  <article class="ajp" id="alumnus-soham-desai" data-person="soham-desai" data-side="right">
+    <div class="ajp__figure">
+      <figure class="ajp__frame">
+        <span class="ajp__plate" data-plate="now">
+          <span class="ajp__initials" aria-hidden="true">SD</span>
+          <span class="ajp__plateLabel sc">Today</span>
+          <span class="ajp__plateNote"><em>[Portrait to be supplied by the school, with
+            the alumnus&rsquo;s permission.]</em></span>
+        </span>
+      </figure>
+      <p class="ajp__index" aria-hidden="true">02</p>
+    </div>
+
+    <div class="ajp__text">
+      <h3 class="serif ajp__name" data-split>Soham Desai</h3>
+      <p class="ajp__role">Strength &amp; Conditioning Coach, Indian Cricket Team</p>
+      <p class="ajp__meta"><span class="ajp__metaItem"><b>Path</b>Sport</span></p>
+      <p class="ajp__await"><em>[The rest of this alumnus&rsquo;s story &mdash; the batch, where
+        they read, and what they would say about the years here &mdash; to be supplied by the
+        school.]</em></p>
+    </div>
+  </article>
+  <article class="ajp" id="alumnus-divyaj-dt" data-person="divyaj-dt" data-side="left">
+    <div class="ajp__figure">
+      <figure class="ajp__frame">
+        <span class="ajp__plate" data-plate="now">
+          <span class="ajp__initials" aria-hidden="true">DD</span>
+          <span class="ajp__plateLabel sc">Today</span>
+          <span class="ajp__plateNote"><em>[Portrait to be supplied by the school, with
+            the alumnus&rsquo;s permission.]</em></span>
+        </span>
+      </figure>
+      <p class="ajp__index" aria-hidden="true">03</p>
+    </div>
+
+    <div class="ajp__text">
+      <h3 class="serif ajp__name" data-split>Divyaj DT</h3>
+      <p class="ajp__role">Goalkeeper, National Under-19 Football Team</p>
+      <p class="ajp__meta"><span class="ajp__metaItem"><b>Path</b>Sport</span></p>
+      <p class="ajp__await"><em>[The rest of this alumnus&rsquo;s story &mdash; the batch, where
+        they read, and what they would say about the years here &mdash; to be supplied by the
+        school.]</em></p>
+    </div>
+  </article>
+  <article class="ajp" id="alumnus-shashwat-santosh" data-person="shashwat-santosh" data-side="right">
+    <div class="ajp__figure">
+      <figure class="ajp__frame">
+        <span class="ajp__plate" data-plate="now">
+          <span class="ajp__initials" aria-hidden="true">SS</span>
+          <span class="ajp__plateLabel sc">Today</span>
+          <span class="ajp__plateNote"><em>[Portrait to be supplied by the school, with
+            the alumnus&rsquo;s permission.]</em></span>
+        </span>
+      </figure>
+      <p class="ajp__index" aria-hidden="true">04</p>
+    </div>
+
+    <div class="ajp__text">
+      <h3 class="serif ajp__name" data-split>Shashwat Santosh</h3>
+      <p class="ajp__role">Designer, Google Creative Labs</p>
+      <p class="ajp__meta"><span class="ajp__metaItem"><b>Path</b>Design</span></p>
+      <p class="ajp__await"><em>[The rest of this alumnus&rsquo;s story &mdash; the batch, where
+        they read, and what they would say about the years here &mdash; to be supplied by the
+        school.]</em></p>
+    </div>
+  </article>
+
+  <div class="wrap">
+    <p class="note rv aj-people__foot"><em>[And many more &mdash; further alumni, their
+      batches and their portraits to be supplied by the school. The list this page builds
+      from is <code>tools/alumni.py</code>; adding an entry there publishes a chapter
+      here.]</em></p>
   </div>
 </section>
 
-<section class="section on-paper-2" id="notable">
+<!-- ============ CHAPTER 5 — Paths from CIRS ============ -->
+<!-- id="pathways" is load-bearing: the footer of every page on this site
+     links to alumni.html#pathways as "University Counselling". -->
+<section class="aj-paths" id="pathways" data-ground="#0E0B12">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Notable alumni</span></p>
-      <h2 class="serif h2" data-split>Where CIRS <em>led them.</em></h2>
+    <div class="sec-head aj-paths__head rv">
+      <p class="marker"><span class="sc">Paths from CIRS</span></p>
+      <h2 class="serif h2" data-split>Five ways <em>out of the same gate.</em></h2>
+      <p class="lead">University counselling begins in Grade X and continues through
+        Naviance. The IB opens direct application to North America, the UK, Europe and
+        Australia; CBSE keeps the Indian national pathway fully open. Each pathway below
+        names what it was drawn from.</p>
+    </div>
+  </div>
+
+  <div class="ajw-track" data-pathways>
+  <div class="ajw-rail" data-pathways-rail>
+    <article class="ajw" data-pathway="abroad" data-scene="ink">
+      <p class="ajw__n" aria-hidden="true">1 <span>/ 5</span></p>
+      <p class="ajw__label sc">Higher education abroad</p>
+      <h3 class="serif ajw__head">The Diploma <em>applies directly.</em></h3>
+      <p class="ajw__copy">The IB opens direct application to North America, the UK, Europe and Australia. Fourteen of the eighteen institutions CIRS students have gone on to are outside India.</p>
+      <p class="ajw__evLabel sc">Drawn from</p>
+      <ul class="ajw__evList">
+        <li class="ajw__ev"><span class="ajw__evName">Imperial College London</span><span class="ajw__evWhere">United Kingdom</span></li>
+        <li class="ajw__ev"><span class="ajw__evName">University of Chicago</span><span class="ajw__evWhere">United States</span></li>
+        <li class="ajw__ev"><span class="ajw__evName">The London School of Economics and Political Science</span><span class="ajw__evWhere">United Kingdom</span></li>
+        <li class="ajw__ev"><span class="ajw__evName">Boston University</span><span class="ajw__evWhere">United States</span></li>
+      </ul>
+    </article>
+    <article class="ajw" data-pathway="national" data-scene="navy">
+      <p class="ajw__n" aria-hidden="true">2 <span>/ 5</span></p>
+      <p class="ajw__label sc">The Indian national pathway</p>
+      <h3 class="serif ajw__head">And the national pathway <em>stays open.</em></h3>
+      <p class="ajw__copy">CBSE keeps the Indian route fully open, with board examinations at Grades X and XII and a choice of Engineering, Medicine and Management streams in the senior years.</p>
+      <p class="ajw__evLabel sc">Drawn from</p>
+      <ul class="ajw__evList">
+        <li class="ajw__ev"><span class="ajw__evName">IIT Madras</span><span class="ajw__evWhere">India</span></li>
+        <li class="ajw__ev"><span class="ajw__evName">Shri Ram College of Commerce</span><span class="ajw__evWhere">India</span></li>
+        <li class="ajw__ev"><span class="ajw__evName">Chinmaya Vishwa Vidyapeeth</span><span class="ajw__evWhere">India</span></li>
+      </ul>
+    </article>
+    <article class="ajw" data-pathway="design" data-scene="gold">
+      <p class="ajw__n" aria-hidden="true">3 <span>/ 5</span></p>
+      <p class="ajw__label sc">Design and the arts</p>
+      <h3 class="serif ajw__head">Some of them <em>make things.</em></h3>
+      <p class="ajw__copy">Two of the eighteen destinations are design schools rather than universities, and one of the four alumni the school has named works as a designer.</p>
+      <p class="ajw__evLabel sc">Drawn from</p>
+      <ul class="ajw__evList">
+        <li class="ajw__ev"><span class="ajw__evName">National Institute of Design</span><span class="ajw__evWhere">India</span></li>
+        <li class="ajw__ev"><span class="ajw__evName">The New School &mdash; Parsons</span><span class="ajw__evWhere">United States</span></li>
+        <li class="ajw__ev"><a class="ajw__evName" href="#alumnus-shashwat-santosh">Shashwat Santosh</a><span class="ajw__evWhere">Designer, Google Creative Labs</span></li>
+      </ul>
+    </article>
+    <article class="ajw" data-pathway="science" data-scene="slate">
+      <p class="ajw__n" aria-hidden="true">4 <span>/ 5</span></p>
+      <p class="ajw__label sc">Science and research</p>
+      <h3 class="serif ajw__head">Some of them <em>stay in the question.</em></h3>
+      <p class="ajw__copy">The furthest a CIRS education has been followed in public is into a university physics department &mdash; and the route into research runs through institutions already on this list.</p>
+      <p class="ajw__evLabel sc">Drawn from</p>
+      <ul class="ajw__evList">
+        <li class="ajw__ev"><span class="ajw__evName">Imperial College London</span><span class="ajw__evWhere">United Kingdom</span></li>
+        <li class="ajw__ev"><span class="ajw__evName">The Hong Kong University of Science and Technology</span><span class="ajw__evWhere">Hong Kong</span></li>
+        <li class="ajw__ev"><span class="ajw__evName">Purdue University</span><span class="ajw__evWhere">United States</span></li>
+        <li class="ajw__ev"><a class="ajw__evName" href="#alumnus-hari-om-jani">Hari Om Jani</a><span class="ajw__evWhere">Professor of Physics, Oxford University</span></li>
+      </ul>
+    </article>
+    <article class="ajw" data-pathway="sport" data-scene="maroon">
+      <p class="ajw__n" aria-hidden="true">5 <span>/ 5</span></p>
+      <p class="ajw__label sc">Sport</p>
+      <h3 class="serif ajw__head">And some of them <em>go professional.</em></h3>
+      <p class="ajw__copy">Sport at CIRS fills the four o&rsquo;clock hour every day of the school year. Two of the four alumni the school has named carried it into a national side.</p>
+      <p class="ajw__evLabel sc">Drawn from</p>
+      <ul class="ajw__evList">
+        <li class="ajw__ev"><a class="ajw__evName" href="#alumnus-soham-desai">Soham Desai</a><span class="ajw__evWhere">Strength &amp; Conditioning Coach, Indian Cricket Team</span></li>
+        <li class="ajw__ev"><a class="ajw__evName" href="#alumnus-divyaj-dt">Divyaj DT</a><span class="ajw__evWhere">Goalkeeper, National Under-19 Football Team</span></li>
+      </ul>
+    </article>
+  </div>
+  <nav class="ajw-nav" aria-label="The pathways">
+    <ul class="ajw__dots">
+      <li><button type="button" class="ajw__dot" data-goto="0" aria-label="Go to Higher education abroad"><span></span></button></li>
+      <li><button type="button" class="ajw__dot" data-goto="1" aria-label="Go to The Indian national pathway"><span></span></button></li>
+      <li><button type="button" class="ajw__dot" data-goto="2" aria-label="Go to Design and the arts"><span></span></button></li>
+      <li><button type="button" class="ajw__dot" data-goto="3" aria-label="Go to Science and research"><span></span></button></li>
+      <li><button type="button" class="ajw__dot" data-goto="4" aria-label="Go to Sport"><span></span></button></li>
+    </ul>
+  </nav>
+</div>
+</section>
+
+<!-- ============ CHAPTER 6 — The index ============ -->
+<section class="aj-index" id="aj-destinations">
+  <div class="wrap">
+    <div class="sec-head aj-index__head rv">
+      <p class="marker"><span class="sc">Destinations</span></p>
+      <h2 class="serif h2" data-split>The institutions, <em>in plain text.</em></h2>
+      <p class="lead">The same eighteen, searchable, with the country each is in. No
+        logos: the school has no licence to reproduce eighteen university wordmarks, and
+        a list is faster to read than a wall of them.</p>
     </div>
 
-    <dl class="factrail rv">
-      <div><dt>Hari Om Jani</dt><dd>Professor of Physics, Oxford University</dd></div>
-      <div><dt>Soham Desai</dt><dd>Strength &amp; Conditioning Coach, Indian Cricket Team</dd></div>
-      <div><dt>Divyaj DT</dt><dd>Goalkeeper, National Under-19 Football Team</dd></div>
-      <div><dt>Shashwat Santosh</dt><dd>Designer, Google Creative Labs</dd></div>
-    </dl>
+    <div class="ajd" data-destinations>
+  <div class="ajd__search">
+    <label class="ajd__label" for="ajd-q">Search the destinations</label>
+    <input class="ajd__input" id="ajd-q" type="search" autocomplete="off"
+           placeholder="University, or country">
+    <p class="ajd__count" data-destinations-count role="status">18 institutions in 5 countries.</p>
+  </div>
 
-    <p class="note rv"><em>[And many more &mdash; further alumni to be supplied by the school.]</em></p>
+  <div class="ajd__groups">
+      <section class="ajd__group" data-region="india">
+        <h3 class="ajd__region"><span class="sc">India</span>
+          <span class="ajd__n">4<span class="sr-only"> destinations</span></span></h3>
+        <ul class="ajd__rows">
+          <li class="ajd__row" data-region="india" data-search="shri ram college of commerce india">
+            <span class="ajd__name">Shri Ram College of Commerce</span>
+            <span class="ajd__country">India</span>
+          </li>
+          <li class="ajd__row" data-region="india" data-search="national institute of design india">
+            <span class="ajd__name">National Institute of Design</span>
+            <span class="ajd__country">India</span>
+          </li>
+          <li class="ajd__row" data-region="india" data-search="chinmaya vishwa vidyapeeth india">
+            <span class="ajd__name">Chinmaya Vishwa Vidyapeeth</span>
+            <span class="ajd__country">India</span>
+          </li>
+          <li class="ajd__row" data-region="india" data-search="iit madras india">
+            <span class="ajd__name">IIT Madras</span>
+            <span class="ajd__country">India</span>
+          </li>
+        </ul>
+      </section>
+      <section class="ajd__group" data-region="uk">
+        <h3 class="ajd__region"><span class="sc">United Kingdom</span>
+          <span class="ajd__n">5<span class="sr-only"> destinations</span></span></h3>
+        <ul class="ajd__rows">
+          <li class="ajd__row" data-region="uk" data-search="durham university united kingdom">
+            <span class="ajd__name">Durham University</span>
+            <span class="ajd__country">United Kingdom</span>
+          </li>
+          <li class="ajd__row" data-region="uk" data-search="the university of manchester united kingdom">
+            <span class="ajd__name">The University of Manchester</span>
+            <span class="ajd__country">United Kingdom</span>
+          </li>
+          <li class="ajd__row" data-region="uk" data-search="university of warwick united kingdom">
+            <span class="ajd__name">University of Warwick</span>
+            <span class="ajd__country">United Kingdom</span>
+          </li>
+          <li class="ajd__row" data-region="uk" data-search="imperial college london united kingdom">
+            <span class="ajd__name">Imperial College London</span>
+            <span class="ajd__country">United Kingdom</span>
+          </li>
+          <li class="ajd__row" data-region="uk" data-search="the london school of economics and political science united kingdom">
+            <span class="ajd__name">The London School of Economics and Political Science</span>
+            <span class="ajd__country">United Kingdom</span>
+          </li>
+        </ul>
+      </section>
+      <section class="ajd__group" data-region="us">
+        <h3 class="ajd__region"><span class="sc">United States</span>
+          <span class="ajd__n">7<span class="sr-only"> destinations</span></span></h3>
+        <ul class="ajd__rows">
+          <li class="ajd__row" data-region="us" data-search="northwestern university united states">
+            <span class="ajd__name">Northwestern University</span>
+            <span class="ajd__country">United States</span>
+          </li>
+          <li class="ajd__row" data-region="us" data-search="university of chicago united states">
+            <span class="ajd__name">University of Chicago</span>
+            <span class="ajd__country">United States</span>
+          </li>
+          <li class="ajd__row" data-region="us" data-search="purdue university united states">
+            <span class="ajd__name">Purdue University</span>
+            <span class="ajd__country">United States</span>
+          </li>
+          <li class="ajd__row" data-region="us" data-search="university of virginia united states">
+            <span class="ajd__name">University of Virginia</span>
+            <span class="ajd__country">United States</span>
+          </li>
+          <li class="ajd__row" data-region="us" data-search="new york university united states">
+            <span class="ajd__name">New York University</span>
+            <span class="ajd__country">United States</span>
+          </li>
+          <li class="ajd__row" data-region="us" data-search="the new school - parsons united states">
+            <span class="ajd__name">The New School &mdash; Parsons</span>
+            <span class="ajd__country">United States</span>
+          </li>
+          <li class="ajd__row" data-region="us" data-search="boston university united states">
+            <span class="ajd__name">Boston University</span>
+            <span class="ajd__country">United States</span>
+          </li>
+        </ul>
+      </section>
+      <section class="ajd__group" data-region="apac">
+        <h3 class="ajd__region"><span class="sc">Asia&ndash;Pacific</span>
+          <span class="ajd__n">2<span class="sr-only"> destinations</span></span></h3>
+        <ul class="ajd__rows">
+          <li class="ajd__row" data-region="apac" data-search="the hong kong university of science and technology hong kong">
+            <span class="ajd__name">The Hong Kong University of Science and Technology</span>
+            <span class="ajd__country">Hong Kong</span>
+          </li>
+          <li class="ajd__row" data-region="apac" data-search="national university of singapore singapore">
+            <span class="ajd__name">National University of Singapore</span>
+            <span class="ajd__country">Singapore</span>
+          </li>
+        </ul>
+      </section>
+  </div>
+
+  <p class="ajd__empty" data-destinations-empty hidden>No destination matches that search.</p>
+</div>
+
+    <figure class="aj-index__fig img-reveal rv">
+      <img src="assets/img/assembly-front.jpg"
+           alt="Students and staff assembled on the front steps of the school, holding flags
+                and country placards at a school assembly."
+           width="1400" height="624" loading="lazy" decoding="async">
+      <figcaption>Students and staff on the front steps with the flags and country
+        placards carried at a school assembly.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ CHAPTER 7 — The return ============ -->
+<section class="aj-return" id="aj-return" data-ground="#0E0B12" data-return>
+  <div class="aj-return__media" data-return-media>
+    <img src="assets/img/valley.jpg"
+         alt="The school buildings below the Western Ghats, cloud lying along the ridge
+              behind them."
+         width="1400" height="624" loading="lazy" decoding="async">
+  </div>
+  <div class="aj-return__wash" aria-hidden="true"></div>
+
+  <!-- The scattered points gather back toward one centre. Drawn as a ring of
+       marks rather than as the school's emblem: the emblem is not ours to
+       redraw, and a distorted one would be worse than none. -->
+  <svg class="aj-return__gather" viewBox="0 0 400 400" aria-hidden="true" focusable="false"
+       data-return-gather></svg>
+
+  <div class="wrap aj-return__inner">
+    <p class="marker rv"><span class="sc">The return</span></p>
+    <h2 class="serif aj-return__head" data-split>Wherever the journey leads,
+      <em>CIRS remains part of the story.</em></h2>
+
+    <div class="aj-return__acts rv">
+      <a class="btn btn--primary btn--lg"
+         href="mailto:info@cirschool.org?subject=Reconnecting%20with%20CIRS">Reconnect with CIRS</a>
+      <a class="btn btn--ghost btn--lg"
+         href="mailto:info@cirschool.org?subject=My%20CIRS%20alumni%20story">Share Your Alumni Story</a>
+    </div>
+
+    <div class="aj-return__reach rv">
+      <p class="aj-return__reachNote">Both open a message to the school office, which is
+        the only alumni contact route this site can verify today.</p>
+      <dl class="aj-return__rows">
+        <div>
+          <dt>School office</dt>
+          <dd><a href="tel:+914222613300">+91 422 261 3300</a></dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:info@cirschool.org">info@cirschool.org</a></dd>
+        </div>
+        <div>
+          <dt>Address</dt>
+          <dd>Siruvani Main Road, Coimbatore 641 114, Tamil Nadu</dd>
+        </div>
+      </dl>
+      <p class="note aj-return__await"><em>[An alumni association address, the alumni
+        register, reunion dates and any official alumni social accounts to be supplied by
+        the school. None of them are invented here.]</em></p>
+    </div>
   </div>
 </section>
 <section class="uc">
@@ -434,10 +1107,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=64" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=64" defer></script>
-<script src="assets/vendor/lenis.min.js?b=64" defer></script>
-<script src="assets/js/cirs.js?b=64" defer></script>
-<script src="assets/js/pages.js?b=64" defer></script>
+<script src="assets/vendor/gsap.min.js?b=65" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=65" defer></script>
+<script src="assets/vendor/lenis.min.js?b=65" defer></script>
+<script src="assets/js/cirs.js?b=65" defer></script>
+<script src="assets/js/pages.js?b=65" defer></script>
+<script src="assets/js/alumni-journey.js?b=65" defer></script>
 </body>
 </html>
