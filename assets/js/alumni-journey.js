@@ -273,27 +273,34 @@
   }
 
   /* ==========================================================
-     The sky
+     The galaxy
      ----------------------------------------------------------
-     A photograph of a piece of sky, built rather than shot: a
-     few nebulae, some dust lying in front of them, a band of
-     unresolved cloud, and five hundred stars in the colours
-     stars actually come in — blue-white through to amber — with
-     bloom on the bright ones and diffraction spikes on the six
-     brightest, which is what a camera does to a bright star and
-     what makes a picture read as a photograph rather than as a
-     scatter plot.
+     A spiral seen at an angle, with CIRS at the core and the
+     nineteen destinations out along its two arms.
 
-     All of it is drawn once, from a fixed seed, so it is the
-     same sky on every reload — a constellation that reshuffles
-     itself is a screensaver, not a place. None of it carries
-     information: the eighteen destinations are separate, larger,
-     labelled, and focusable.
+     The arms here are the SAME arms the destinations sit on:
+     tools/alumni.py writes the spiral's numbers onto the field
+     as data-spiral and this reads them back, so the scattered
+     stars and the named ones cannot drift apart. The spiral is
+     written down once, in Python.
+
+     Fixed seed, so it is the same galaxy on every reload — one
+     that reshuffles itself is a screensaver, not a place. None
+     of what is drawn here carries information: the nineteen
+     destinations are separate, larger, labelled and focusable.
      ========================================================== */
   function buildSky() {
     var field = $("[data-constellation-field]");
     if (!field) return null;
     var NS = "http://www.w3.org/2000/svg";
+
+    var sp = (field.getAttribute("data-spiral") || "").split(",").map(Number);
+    if (sp.length < 8 || sp.some(isNaN)) return null;
+    var CX = sp[0], CY = sp[1], R0 = sp[2], B = sp[3], ROT = sp[4],
+        YK = sp[5], TMIN = sp[6], TMAX = sp[7];
+    // The stars run a little further in and out than the named ones do, so
+    // the arms do not simply stop where the first and last destination sits.
+    var SMIN = Math.max(0.9, TMIN - 1.5), SMAX = TMAX + 0.55;
 
     // mulberry32: small, fast, deterministic from one integer.
     var seed = 0x1996;   // the year the school opened on this campus
@@ -303,121 +310,151 @@
       t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
       return ((t ^ t >>> 14) >>> 0) / 4294967296;
     }
+    function gauss() { return (rnd() + rnd() + rnd() + rnd() - 2) * 0.7; }
     function el(name, attrs) {
       var n = document.createElementNS(NS, name);
       for (var k in attrs) n.setAttribute(k, attrs[k]);
       return n;
     }
+    // A point on an arm, in the SVG's own units. The field is 3:2 and the
+    // viewBox is 150x100, so the scale is uniform and a circle stays round.
+    function arm(a, theta, rScale) {
+      var r = R0 * Math.exp(B * theta) * (rScale === undefined ? 1 : rScale);
+      var ang = theta + a * Math.PI + ROT;
+      return [(CX + r * Math.cos(ang)) * 1.5, CY + r * Math.sin(ang) * YK];
+    }
 
     var svg = el("svg", {
-      "class": "ajc__stars", viewBox: "0 0 160 90",
-      preserveAspectRatio: "xMidYMid slice",
-      "aria-hidden": "true", focusable: "false"
+      "class": "ajc__stars", viewBox: "0 0 150 100",
+      preserveAspectRatio: "none", "aria-hidden": "true", focusable: "false"
     });
 
-    // ---- the blurs everything else is built out of ----
     var defs = el("defs", {});
-    [["ajNebulaBlur", 7], ["ajDustBlur", 5], ["ajBandBlur", 3.2], ["ajBloom", .7]]
-      .forEach(function (f) {
-        var filter = el("filter", {
-          id: f[0], x: "-60%", y: "-60%", width: "220%", height: "220%",
-          "color-interpolation-filters": "sRGB"
-        });
-        filter.appendChild(el("feGaussianBlur", { stdDeviation: f[1] }));
-        defs.appendChild(filter);
+    var grad = el("radialGradient", { id: "ajCoreGlow" });
+    [["0%", "#FFFDF4", ".92"], ["20%", "#FFF0D2", ".42"],
+     ["52%", "#D9BC92", ".11"], ["100%", "#7A6448", "0"]].forEach(function (st) {
+      grad.appendChild(el("stop", {
+        offset: st[0], "stop-color": st[1], "stop-opacity": st[2] }));
+    });
+    defs.appendChild(grad);
+
+    var halo = el("radialGradient", { id: "ajDiscGlow" });
+    [["0%", "#8DA6DC", ".10"], ["44%", "#3E4C7C", ".035"], ["100%", "#181C33", "0"]]
+      .forEach(function (st) {
+        halo.appendChild(el("stop", {
+          offset: st[0], "stop-color": st[1], "stop-opacity": st[2] }));
       });
+    defs.appendChild(halo);
+
+    [["ajArmBlur", 2.6], ["ajBloom", 0.55]].forEach(function (f) {
+      var filter = el("filter", {
+        id: f[0], x: "-70%", y: "-70%", width: "240%", height: "240%",
+        "color-interpolation-filters": "sRGB"
+      });
+      filter.appendChild(el("feGaussianBlur", { stdDeviation: f[1] }));
+      defs.appendChild(filter);
+    });
     svg.appendChild(defs);
 
-    // ---- nebulae: colour first, a long way behind everything ----
-    var clouds = [
-      [22, 20, 30, 20, "#2B4C86", .30], [30, 30, 20, 15, "#2F6E8C", .20],
-      [128, 62, 34, 22, "#7A3A2E", .17], [116, 50, 18, 14, "#8A5A20", .16],
-      [72, 14, 26, 12, "#3B2A6B", .17], [96, 78, 22, 13, "#5C2748", .15],
-      [50, 62, 20, 14, "#1F5F63", .14]
-    ];
-    var gNeb = el("g", { filter: "url(#ajNebulaBlur)" });
-    clouds.forEach(function (c) {
-      gNeb.appendChild(el("ellipse", {
-        cx: c[0], cy: c[1], rx: c[2], ry: c[3], fill: c[4], opacity: c[5]
+    var RMAX = R0 * Math.exp(B * SMAX);
+
+    // ---- the disc it all sits in ----
+    svg.appendChild(el("ellipse", {
+      cx: CX * 1.5, cy: CY,
+      rx: (RMAX * 1.5 * 1.12).toFixed(2), ry: (RMAX * YK * 1.12).toFixed(2),
+      fill: "url(#ajDiscGlow)"
+    }));
+
+    // ---- the arms, as light before they are stars ----
+    var gArms = el("g", { filter: "url(#ajArmBlur)" });
+    [0, 1].forEach(function (a) {
+      var d = "", n = 90;
+      for (var i = 0; i <= n; i++) {
+        var th = SMIN + (SMAX - SMIN) * i / n;
+        var pt = arm(a, th);
+        d += (i ? " L" : "M") + pt[0].toFixed(2) + " " + pt[1].toFixed(2);
+      }
+      gArms.appendChild(el("path", {
+        d: d, fill: "none", stroke: a ? "#8FA8DC" : "#A8B8E0",
+        "stroke-width": "2.6", "stroke-linecap": "round", opacity: "0.17"
       }));
     });
-    svg.appendChild(gNeb);
-
-    // ---- the band: unresolved cloud lying across the frame ----
-    var gBand = el("g", { filter: "url(#ajBandBlur)", opacity: ".5" });
-    for (var b = 0; b < 16; b++) {
-      var bx = b * 11 + rnd() * 6;
-      gBand.appendChild(el("ellipse", {
-        cx: bx.toFixed(1),
-        cy: (16 + bx * 0.42 + (rnd() - .5) * 7).toFixed(1),
-        rx: (7 + rnd() * 7).toFixed(1), ry: (2.2 + rnd() * 2.6).toFixed(1),
-        fill: rnd() > .55 ? "#C8D6F0" : "#D8C8A8",
-        opacity: (.05 + rnd() * .07).toFixed(3)
-      }));
-    }
-    svg.appendChild(gBand);
-
-    // ---- dust: dark lanes in FRONT of the clouds, as they are ----
-    var gDust = el("g", { filter: "url(#ajDustBlur)" });
-    [[36, 26, 22, 7, .34], [122, 58, 20, 6, .30], [78, 40, 26, 5, .24],
-     [18, 52, 16, 8, .26], [100, 20, 14, 6, .22]].forEach(function (d) {
-      gDust.appendChild(el("ellipse", {
-        cx: d[0], cy: d[1], rx: d[2], ry: d[3], fill: "#05040A", opacity: d[4]
-      }));
-    });
-    svg.appendChild(gDust);
+    svg.appendChild(gArms);
 
     // ---- the stars ----
-    // Real star colour runs blue-white to amber. Weighted to the cool end,
-    // which is what an unfiltered wide field looks like.
-    var hues = ["#CFE2FF", "#DCE9FF", "#FFFFFF", "#FFF4E2", "#FFE6C2",
-                "#FFD5A0", "#FFC189"];
+    var hues = ["#CFE2FF", "#DCE9FF", "#FFFFFF", "#FFFFFF", "#FFF4E2",
+                "#FFE0B0", "#FFC98E", "#FFB577"];
     var gBloom = el("g", { filter: "url(#ajBloom)" });
     var gCore = el("g", {});
-    var twinklers = [], bright = [];
+    var bright = [];
 
-    for (var i = 0; i < 520; i++) {
-      var x = rnd() * 160, y = rnd() * 90;
-      // Crowd the band, the way a galactic plane crowds.
-      var onBand = Math.abs(y - (16 + x * 0.42)) < 12;
-      if (!onBand && rnd() > 0.62) continue;
-
-      var m = rnd();                       // magnitude, 0 faint .. 1 bright
-      m = m * m;                           // most stars are faint
+    function star(x, y, m) {
       var hue = hues[Math.floor(rnd() * hues.length)];
-      var r = 0.075 + m * 0.42;
-      var o = 0.18 + m * 0.78;
-
+      var r = 0.10 + m * m * 0.58;
+      var o = 0.20 + m * 0.78;
       gCore.appendChild(el("circle", {
         "class": "ajc__star", cx: x.toFixed(2), cy: y.toFixed(2),
         r: r.toFixed(3), fill: hue, opacity: o.toFixed(2)
       }));
-      if (m > 0.34) {
+      if (m > 0.32) {
         gBloom.appendChild(el("circle", {
-          cx: x.toFixed(2), cy: y.toFixed(2),
-          r: (r * 2.6).toFixed(3), fill: hue, opacity: (o * 0.42).toFixed(2)
+          cx: x.toFixed(2), cy: y.toFixed(2), r: (r * 2.9).toFixed(3),
+          fill: hue, opacity: (o * 0.38).toFixed(2)
         }));
       }
-      if (m > 0.62) bright.push({ x: x, y: y, m: m, hue: hue });
+      if (m > 0.80) bright.push({ x: x, y: y, m: m, hue: hue });
     }
+
+    // Along the arms. The jitter is in theta and in radius, so the scatter
+    // follows the curve rather than sitting in a straight cloud beside it.
+    [0, 1].forEach(function (a) {
+      for (var i = 0; i < 300; i++) {
+        var f = Math.pow(rnd(), 0.62);                 // crowd the inside
+        var th = SMIN + (SMAX - SMIN) * f;
+        var p = arm(a, th + gauss() * 0.13, 1 + gauss() * 0.085);
+        if (p[0] < -4 || p[0] > 154 || p[1] < -4 || p[1] > 104) continue;
+        star(p[0], p[1], Math.pow(rnd(), 1.5) * (0.55 + 0.45 * (1 - f)));
+      }
+    });
+
+    // The core: a dense, mostly warm knot.
+    for (var c = 0; c < 190; c++) {
+      var rr = Math.abs(gauss()) * 2.4;
+      var aa = rnd() * Math.PI * 2;
+      star((CX + Math.cos(aa) * rr) * 1.5, CY + Math.sin(aa) * rr * YK,
+           Math.pow(rnd(), 1.7) * 0.72);
+    }
+
+    // And the sky behind all of it.
+    for (var d2 = 0; d2 < 150; d2++) {
+      star(rnd() * 150, rnd() * 100, Math.pow(rnd(), 3.2) * 0.6);
+    }
+
     svg.appendChild(gBloom);
     svg.appendChild(gCore);
 
-    // ---- diffraction spikes on the six brightest ----
-    bright.sort(function (a, b) { return b.m - a.m; });
-    var gSpike = el("g", { opacity: ".85" });
-    bright.slice(0, 6).forEach(function (st) {
-      var len = 1.6 + st.m * 3.4;
-      [[len, 0.055], [0.055, len]].forEach(function (d) {
+    // the core's own light, over its stars
+    svg.appendChild(el("ellipse", {
+      cx: CX * 1.5, cy: CY, rx: "8.2", ry: (8.2 * YK).toFixed(2),
+      fill: "url(#ajCoreGlow)"
+    }));
+
+    // ---- diffraction spikes on the brightest few ----
+    bright.sort(function (x, y) { return y.m - x.m; });
+    var gSpike = el("g", {});
+    var twinklers = [];
+    bright.slice(0, 9).forEach(function (st) {
+      var len = 2.2 + st.m * 4.6;
+      [[len, 0.07], [0.07, len]].forEach(function (dd) {
         gSpike.appendChild(el("rect", {
-          x: (st.x - d[0]).toFixed(2), y: (st.y - d[1]).toFixed(2),
-          width: (d[0] * 2).toFixed(2), height: (d[1] * 2).toFixed(2),
-          fill: st.hue, opacity: ".55"
+          x: (st.x - dd[0]).toFixed(2), y: (st.y - dd[1]).toFixed(2),
+          width: (dd[0] * 2).toFixed(2), height: (dd[1] * 2).toFixed(2),
+          fill: st.hue, opacity: "0.5"
         }));
       });
       var core = el("circle", {
         "class": "ajc__star", cx: st.x.toFixed(2), cy: st.y.toFixed(2),
-        r: "0.34", fill: "#FFFFFF", opacity: ".95"
+        r: "0.42", fill: "#FFFFFF", opacity: "0.96"
       });
       gSpike.appendChild(core);
       twinklers.push(core);
@@ -429,71 +466,71 @@
   }
 
   /* ==========================================================
-     The return: eighteen marks coming home to one ring
-     Built here rather than in the markup because it is decoration
-     and carries no information the page does not already state.
-     ========================================================== */
-  function buildGather() {
-    var svg = $("[data-return-gather]");
-    if (!svg) return null;
-    var NS = "http://www.w3.org/2000/svg";
-    var total = $$(".ajc__pt").length || 18;
-
-    var ring = document.createElementNS(NS, "circle");
-    ring.setAttribute("class", "aj-return__gatherRing");
-    ring.setAttribute("cx", "200"); ring.setAttribute("cy", "200");
-    ring.setAttribute("r", "120");
-    svg.appendChild(ring);
-
-    var dots = [];
-    for (var i = 0; i < total; i++) {
-      var a = (i / total) * Math.PI * 2 - Math.PI / 2;
-      var d = document.createElementNS(NS, "circle");
-      d.setAttribute("class", "aj-return__gatherDot");
-      d.setAttribute("cx", (200 + Math.cos(a) * 120).toFixed(2));
-      d.setAttribute("cy", (200 + Math.sin(a) * 120).toFixed(2));
-      d.setAttribute("r", "3.2");
-      svg.appendChild(d);
-      dots.push(d);
-    }
-    // The centre: one beginning.
-    var hub = document.createElementNS(NS, "circle");
-    hub.setAttribute("class", "aj-return__gatherDot");
-    hub.setAttribute("cx", "200"); hub.setAttribute("cy", "200");
-    hub.setAttribute("r", "5.5");
-    svg.appendChild(hub);
-
-    return { svg: svg, ring: ring, dots: dots, hub: hub };
-  }
-
-  /* ==========================================================
      Motion
      ========================================================== */
-  function motion(parts, gather, sky) {
+  function motion(parts, sky) {
     /* ---- chapter 1: the opening --------------------------- */
+    /* The site opens every page behind a full-screen curtain that cirs.js
+       holds for up to 4.2 seconds, with the scroll locked under it. An
+       entrance that starts on DOMContentLoaded therefore plays out
+       entirely underneath it and is over before the curtain lifts — which
+       is why this one appeared not to run at all. So the timeline is built
+       paused and released when the curtain is actually gone. */
+    function whenCurtainGone(play) {
+      var curtain = document.getElementById("curtain");
+      if (!curtain) { play(); return; }
+      var fired = false, obs;
+      function go() {
+        if (fired) return;
+        fired = true;
+        if (obs) obs.disconnect();
+        play();
+      }
+      obs = new MutationObserver(function () {
+        if (!document.getElementById("curtain")) go();
+      });
+      obs.observe(document.body, { childList: true });
+      // Past cirs.js's own 4200ms ceiling, so this can never be the thing
+      // that strands the page on a still hero.
+      window.setTimeout(go, 4600);
+    }
+
     var open = $("[data-open]");
     if (open) {
       var lines = $$(".aj-open__line > span", open);
       var route = $("[data-open-route]", open);
       var seed = $(".aj-open__routeSeed", open);
       var media = $("[data-open-media] img", open);
+      var eyebrow = $("[data-open-eyebrow]", open);
+      var sub = $("[data-open-sub]", open);
+      var cue = $("[data-open-cue]", open);
 
       // The sheet hides these two lines with transform:translateY(105%) so
       // there is no flash before this file runs. GSAP reads that computed
       // transform as a PIXEL y, not as yPercent — so tweening yPercent to 0
       // moves nothing and the lettering stays parked off its own line box.
       // Handing the property to GSAP first is what makes the tween real.
-      gsap.set(lines, { yPercent: 105, y: 0 });
+      gsap.set(lines, { yPercent: 108, y: 0 });
+      gsap.set(eyebrow, { opacity: 0, y: 14 });
+      if (media) gsap.set(media, { scale: 1.14 });
 
       var len = route ? route.getTotalLength() : 0;
       if (route) gsap.set(route, { strokeDasharray: len, strokeDashoffset: len });
 
-      var intro = gsap.timeline({ delay: .15 });
-      intro.to(lines, { yPercent: 0, duration: 1.15, ease: "expo.out", stagger: .09 })
-           .to("[data-open-sub]", { opacity: 1, duration: .9, ease: "power2.out" }, "-=.55")
-           .to("[data-open-cue]", { opacity: 1, duration: .7, ease: "power2.out" }, "-=.5");
-      if (seed) intro.to(seed, { opacity: 1, duration: .5 }, "-=.9");
-      if (route) intro.to(route, { strokeDashoffset: len * .55, duration: 1.8, ease: "power2.inOut" }, "-=1.0");
+      var intro = gsap.timeline({ paused: true });
+      // The campus settles first and keeps settling under everything else —
+      // the frame is already moving when the lettering arrives, which is
+      // what makes the arrival feel like a camera rather than a slide.
+      if (media) intro.to(media, { scale: 1.04, duration: 2.6, ease: "power2.out" }, 0);
+      intro.to(eyebrow, { opacity: 1, y: 0, duration: .8, ease: "power2.out" }, .15)
+           .to(lines, { yPercent: 0, duration: 1.25, ease: "expo.out", stagger: .11 }, .3)
+           .to(sub, { opacity: 1, duration: .9, ease: "power2.out" }, 1.05)
+           .to(cue, { opacity: 1, duration: .7, ease: "power2.out" }, 1.35);
+      if (seed) intro.to(seed, { opacity: 1, duration: .5 }, .95);
+      if (route) intro.to(route, { strokeDashoffset: len * .5, duration: 2.1,
+                                   ease: "power2.inOut" }, .75);
+
+      whenCurtainGone(function () { intro.play(); });
 
       // The header goes quiet while the opening holds the screen.
       ScrollTrigger.create({
@@ -501,19 +538,25 @@
         onToggle: function (self) { root.classList.toggle("aj-quiet", self.isActive); }
       });
 
-      // Leaving: the title parts, the campus pulls back, the route runs on.
+      /* Leaving. The two lines used to part sideways, which read as a
+         glitch rather than as a departure. They go the way they came
+         instead — up and out, in order, while the campus pushes past the
+         frame. The whole move is spent over the first 72% of the hero so
+         the screen is clear before the next chapter pins. */
       var leave = gsap.timeline({
         scrollTrigger: {
-          trigger: open, start: "top top", end: "bottom top", scrub: .6
+          trigger: open, start: "top top", end: "bottom 28%", scrub: .55
         }
       });
-      leave.to(lines[0], { xPercent: -14, opacity: .1, ease: "none" }, 0)
-           .to(lines[1], { xPercent: 14, opacity: .1, ease: "none" }, 0)
-           .to("[data-open-sub]", { opacity: 0, y: -20, ease: "none" }, 0)
-           .to("[data-open-eyebrow]", { opacity: 0, ease: "none" }, 0)
-           .to("[data-open-cue]", { opacity: 0, ease: "none" }, 0);
-      if (media) leave.to(media, { scale: 1.24, yPercent: -6, ease: "none" }, 0);
-      if (route) leave.to(route, { strokeDashoffset: 0, ease: "none" }, 0);
+      leave.to(cue, { opacity: 0, duration: .12, ease: "none" }, 0)
+           .to(eyebrow, { opacity: 0, y: -22, duration: .5, ease: "none" }, 0)
+           .to(lines, { yPercent: -108, duration: .7, ease: "power1.in",
+                        stagger: .06 }, .08)
+           .to(sub, { opacity: 0, y: -26, duration: .5, ease: "none" }, .1);
+      if (media) leave.to(media, { scale: 1.3, yPercent: -7, ease: "none",
+                                   duration: 1 }, 0);
+      if (route) leave.to(route, { strokeDashoffset: 0, ease: "none",
+                                   duration: .85 }, 0);
     }
 
     /* ---- chapter 2 and chapter 5 ------------------------- */
@@ -671,27 +714,6 @@
           scrollTrigger: { trigger: ret, start: "top bottom", end: "bottom top", scrub: .8 }
         });
       }
-      if (gather) {
-        // The marks arrive from outside the frame and settle onto the ring:
-        // the scattered come home, and the centre lights last.
-        gsap.set(gather.ring, { opacity: 0 });
-        gsap.set(gather.hub, { opacity: 0, scale: 0, transformOrigin: "200px 200px" });
-        gather.dots.forEach(function (d, i) {
-          var a = (i / gather.dots.length) * Math.PI * 2 - Math.PI / 2;
-          gsap.set(d, {
-            opacity: 0,
-            x: Math.cos(a) * 240, y: Math.sin(a) * 240
-          });
-        });
-        gsap.timeline({
-          scrollTrigger: { trigger: ret, start: "top 62%", once: true }
-        })
-          .to(gather.dots, {
-            opacity: 1, x: 0, y: 0, duration: 1.5, ease: "power3.out", stagger: .035
-          }, 0)
-          .to(gather.ring, { opacity: 1, duration: 1.2, ease: "power2.out" }, .5)
-          .to(gather.hub, { opacity: 1, scale: 1, duration: .8, ease: "back.out(2)" }, 1.1);
-      }
     }
 
     /* ---- put every other trigger on the page right -------- */
@@ -742,26 +764,53 @@
      did not run. Anything still at zero opacity a moment after
      load is simply shown.
      ========================================================== */
+  /* It may only restore OPACITY. An earlier version also wrote
+     transform:none, which is a different thing entirely on this page:
+     the scroll cue is centred with translateX(-50%) and every one of the
+     nineteen destinations is placed with translate(-50%,-50%), so
+     clearing their transforms threw the cue half its own width to the
+     right and would have unpinned every star from its arm. The one
+     element whose transform genuinely has to be undone is a masked
+     headline line, and that is done by name, through GSAP, which knows
+     what it set. */
   function failOpen() {
-    $$(".aj-open__line > span, [data-open-sub], [data-open-cue], .ajc__pt, .ajc__line, " +
+    $$(".aj-open__line > span").forEach(function (el) {
+      var parked = Math.abs(gsap.getProperty(el, "yPercent")) > 40 ||
+                   Math.abs(gsap.getProperty(el, "y")) > 12;
+      if (parked) gsap.set(el, { yPercent: 0, y: 0, opacity: 1 });
+    });
+    $$("[data-open-sub], [data-open-cue], [data-open-eyebrow], .ajc__pt, " +
        "[data-portal-plate], [data-portal-copy], [data-portal-depth]").forEach(function (el) {
-      var o = parseFloat(getComputedStyle(el).opacity);
-      if (o < .05) {
-        el.style.opacity = "1";
-        el.style.transform = "none";
-        el.style.strokeDashoffset = "0";
-      }
+      if (parseFloat(getComputedStyle(el).opacity) < .05) el.style.opacity = "1";
+    });
+    $$(".ajc__line").forEach(function (el) {
+      if (parseFloat(getComputedStyle(el).opacity) < .05) el.style.opacity = "1";
+      if (el.style.strokeDashoffset) el.style.strokeDashoffset = "0";
     });
   }
 
   function start() {
     var parts = interactions();
     var sky = buildSky();
-    var gather = buildGather();
     if (canMove) {
-      try { motion(parts, gather, sky); }
+      try { motion(parts, sky); }
       catch (err) { failOpen(); }
-      window.setTimeout(failOpen, 2600);
+      // Not on a timer from load: the site's curtain can hold the page for
+      // four seconds, and a sweep that fires underneath it would call a
+      // hero that has not been allowed to start yet a hero that failed.
+      var curtain = document.getElementById("curtain");
+      if (curtain) {
+        var obs = new MutationObserver(function () {
+          if (!document.getElementById("curtain")) {
+            obs.disconnect();
+            window.setTimeout(failOpen, 2600);
+          }
+        });
+        obs.observe(document.body, { childList: true });
+        window.setTimeout(function () { obs.disconnect(); failOpen(); }, 7200);
+      } else {
+        window.setTimeout(failOpen, 2600);
+      }
     } else {
       // No motion at all: reveal everything the sheet held back. js-motion
       // is cirs.js's flag, not this file's, and is left alone — the other

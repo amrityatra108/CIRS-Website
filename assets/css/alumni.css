@@ -111,8 +111,13 @@ body.alumni :focus-visible{
                     rgba(14,11,18,.42) 100%),
     radial-gradient(120% 70% at 50% 100%, rgba(14,11,18,.55), transparent 62%);
 }
+/* The route is cropped by "slice", and over the full height that crop drops
+   its lower end straight through the headline. Confining it to the upper
+   part of the frame keeps the line over the campus, where it belongs, and
+   off the lettering, which has to stay the most readable thing here. The
+   headline starts at about 49% of the hero at every width. */
 .aj-open__route{
-  position:absolute; inset:0; z-index:2; width:100%; height:100%;
+  position:absolute; inset:0 0 auto 0; z-index:2; width:100%; height:45%;
   pointer-events:none;
 }
 .aj-open__routeLine{
@@ -123,12 +128,27 @@ body.alumni :focus-visible{
 .aj-open__routeSeed{ fill:var(--aj-gold-lit); opacity:.95; }
 html.js-motion .aj-open__routeSeed{ opacity:0; }
 
-.aj-open__inner{ position:relative; z-index:3; }
+/* The opening block is given a measure of its own. Left to the wrap it ran
+   the full width of the page, which put the headline hard against both
+   gutters and stranded the supporting line across a very long measure. */
+.aj-open__inner{
+  position:relative; z-index:3;
+  width:100%; max-width:min(100%, 1120px);
+}
 
-.aj-open__eyebrow{ margin:0 0 clamp(18px,2.4vw,28px); }
+/* The eyebrow gets a rule to sit on, so it reads as a standing label
+   rather than as a stray line of small caps above the title. */
+.aj-open__eyebrow{
+  margin:0 0 clamp(20px,2.6vw,32px);
+  display:flex; align-items:center; gap:16px;
+}
 .aj-open__eyebrow .sc{
-  font-size:.72rem; letter-spacing:.24em; text-transform:uppercase;
-  color:var(--aj-gold); font-weight:600;
+  font-size:.7rem; letter-spacing:.30em; text-transform:uppercase;
+  color:var(--aj-gold); font-weight:600; white-space:nowrap;
+}
+.aj-open__eyebrow::after{
+  content:""; flex:0 1 clamp(40px,10vw,150px); height:1px;
+  background:linear-gradient(to right, var(--aj-gold), transparent);
 }
 
 .aj-open__title{
@@ -137,18 +157,24 @@ html.js-motion .aj-open__routeSeed{ opacity:0; }
   font-size:clamp(3rem, 11.5vw, 11rem);
   line-height:.92; letter-spacing:-.03em;
   text-transform:uppercase;
+  text-shadow:0 2px 26px rgba(5,4,10,.5);
 }
-.aj-open__line{ display:block; overflow:hidden; padding-bottom:.04em; }
-.aj-open__line > span{ display:block; }
-html.js-motion .aj-open__line > span{ transform:translateY(105%); }
+/* The mask each line rises out of. padding-bottom carries the descender
+   slot so the overflow:hidden does not shave the lettering. */
+.aj-open__line{ display:block; overflow:hidden; padding-bottom:.06em; }
+.aj-open__line > span{ display:block; will-change:transform; }
+html.js-motion .aj-open__line > span{ transform:translateY(108%); }
 
 .aj-open__sub{
-  margin:clamp(20px,3vw,34px) 0 0;
+  margin:clamp(22px,3.2vw,38px) 0 0;
   font-family:var(--aj-voice); font-style:italic;
+  max-width:38ch;
   font-size:clamp(1.15rem,2.1vw,1.8rem);
-  color:var(--aj-on-dark-soft); letter-spacing:.01em;
+  line-height:1.4; color:var(--aj-on-dark-soft); letter-spacing:.01em;
+  text-shadow:0 1px 16px rgba(5,4,10,.7);
 }
 html.js-motion .aj-open__sub{ opacity:0; }
+html.js-motion .aj-open__eyebrow{ opacity:0; }
 
 .aj-open__cue{
   position:absolute; z-index:3; left:50%; transform:translateX(-50%);
@@ -229,8 +255,6 @@ html.js-motion .aj-portal__depth{ opacity:0; }
   margin-top:clamp(36px,6vh,72px);
   text-align:center;
 }
-.aj-portal__copy .marker{ justify-content:center; }
-.aj-portal__copy .marker .sc{ color:var(--aj-gold); }
 .aj-portal__head{
   margin:0 0 18px; color:var(--aj-on-dark);
   font-size:var(--fs-h2); line-height:1.06; letter-spacing:-.012em;
@@ -256,15 +280,9 @@ html.js-motion .aj-portal__depth{ opacity:0; }
   padding-block:clamp(72px,12vh,140px);
 }
 .aj-const__head{ max-width:720px; }
-.aj-const__head .marker .sc{ color:var(--aj-gold); }
 .aj-const__head .h2{ color:var(--aj-on-dark); }
 .aj-const__head .h2 em{ color:var(--aj-gold-lit); }
 .aj-const__head .lead{ color:var(--aj-on-dark-soft); }
-.aj-const__foot{
-  margin-top:clamp(20px,3vw,32px); max-width:62ch;
-  color:var(--aj-on-dark-mute); font-size:var(--fs-sm);
-}
-.aj-const__foot a{ color:var(--aj-gold-lit); text-decoration:underline; text-underline-offset:3px; }
 
 .ajc{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gut); }
 
@@ -307,61 +325,62 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 
 /* ---- the field ---- */
 /* ---- the sky ----
-   No frame. A framed constellation is a diagram; this has to read as the
-   thing itself, so the field bleeds into the chapter around it and the
-   depth is carried by three washes, a drift of cloud and a few hundred
-   stars. The stars are drawn by alumni-journey.js from a fixed seed, so
-   the same sky comes back on every reload; the washes below are what is
-   left of it when there is no JavaScript. */
+   No frame, and almost no colour of its own. What is in here is a spiral
+   galaxy drawn by alumni-journey.js from the same six numbers that place
+   the nineteen destinations, so the stars and the named ones lie on one
+   spiral. The ratio is 3:2 rather than 16:9 because a spiral in a wide
+   letterbox leaves both ends of the frame empty; 3:2 also makes the
+   viewBox scale uniform, which is what keeps a star round. */
 .ajc__field{
-  position:relative; width:100%; aspect-ratio:16/9;
+  position:relative; width:100%; aspect-ratio:3/2;
   min-height:420px; overflow:hidden;
   background:
-    radial-gradient(70% 62% at 59% 78%, rgba(201,146,47,.09), transparent 66%),
-    linear-gradient(162deg, #05040B 0%, #08070F 46%, #040309 100%);
+    radial-gradient(58% 58% at 50% 50%, rgba(28,34,62,.55), transparent 72%),
+    radial-gradient(120% 120% at 50% 50%, #06060D 30%, #030308 100%);
 }
-/* The cloud, the dust and the nebulae are drawn into the SVG by
-   alumni-journey.js. What is left here is the vignette a lens gives. */
+/* the vignette a lens gives, over everything */
 .ajc__field::after{
-  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:radial-gradient(120% 110% at 50% 46%,
-    transparent 46%, rgba(4,3,8,.42) 84%, rgba(4,3,8,.72) 100%);
+  content:""; position:absolute; inset:0; z-index:5; pointer-events:none;
+  background:radial-gradient(118% 108% at 50% 50%,
+    transparent 52%, rgba(2,2,6,.46) 86%, rgba(2,2,6,.78) 100%);
 }
 .ajc__stars{ position:absolute; inset:0; z-index:0; width:100%; height:100%; }
 .ajc__star{ fill:#EAF0FF; }
 .ajc__lines{ position:absolute; inset:0; z-index:2; width:100%; height:100%; }
-/* vector-effect:non-scaling-stroke makes stroke-width a DEVICE unit, not a
-   user unit — so the .14 this started at drew a fourteen-hundredths-of-a-pixel
-   line, which is to say nothing at all. These are pixels. */
 .ajc__line{
-  fill:none; stroke:rgba(186,202,234,.30); stroke-width:.8;
+  fill:none; stroke:rgba(190,208,240,.16); stroke-width:.7;
   vector-effect:non-scaling-stroke;
   transition:stroke .4s var(--e), stroke-width .4s var(--e), opacity .4s var(--e);
 }
-.ajc__line.is-dim{ opacity:.10; }
-.ajc__line.is-lit{ stroke:var(--aj-gold-lit); stroke-width:1.3; opacity:1; }
+.ajc__line.is-dim{ opacity:.06; }
+.ajc__line.is-lit{ stroke:var(--aj-gold-lit); stroke-width:1.5; opacity:1; }
 html.js-motion .ajc__line{ opacity:0; }
 
-/* the origin */
+/* the core — CIRS at the middle of the galaxy */
 .ajc__origin{
   position:absolute; left:var(--x); top:var(--y);
   transform:translate(-50%,-50%); margin:0;
-  display:flex; align-items:center; gap:10px;
-  white-space:nowrap; z-index:3;
+  display:flex; flex-direction:column; align-items:center; gap:7px;
+  white-space:nowrap; z-index:4; pointer-events:none;
 }
 .ajc__originDot{
-  width:11px; height:11px; border-radius:50%;
-  background:var(--aj-gold-lit);
-  box-shadow:0 0 0 5px rgba(201,146,47,.22), 0 0 22px 6px rgba(201,146,47,.35);
+  width:9px; height:9px; border-radius:50%;
+  background:#FFFDF6;
+  box-shadow:
+    0 0 0 3px rgba(255,236,190,.30),
+    0 0 14px 5px rgba(255,220,150,.70),
+    0 0 42px 16px rgba(226,168,86,.40),
+    0 0 90px 40px rgba(150,110,70,.22);
 }
 .ajc__originName{
-  font-size:.74rem; letter-spacing:.20em; text-transform:uppercase;
-  color:var(--aj-on-dark); font-weight:600;
-  display:flex; flex-direction:column; line-height:1.3;
+  font-size:.72rem; letter-spacing:.24em; text-transform:uppercase;
+  color:#FFF3DC; font-weight:600; text-align:center;
+  display:flex; flex-direction:column; line-height:1.35;
+  text-shadow:0 1px 8px rgba(3,3,8,.98), 0 0 18px rgba(3,3,8,.9);
 }
 .ajc__originName small{
-  font-size:.62rem; letter-spacing:.14em; font-weight:400;
-  color:var(--aj-on-dark-mute); text-transform:none;
+  font-size:.60rem; letter-spacing:.16em; font-weight:400;
+  color:rgba(255,243,220,.62); text-transform:none;
 }
 
 /* the points */
@@ -504,42 +523,76 @@ html.js-motion .ajc__pt{ opacity:0; }
   background:var(--aj-ink-2);
   padding-block:clamp(72px,12vh,140px);
 }
-.aj-voices__head .marker .sc{ color:var(--aj-gold); }
 .aj-voices__head .h2{ color:var(--aj-on-dark); }
 .aj-voices__head .h2 em{ color:var(--aj-gold-lit); }
 .aj-voices__head .lead{ color:var(--aj-on-dark-soft); }
 
+/* Each quotation is a pull-quote with a hanging mark, not a centred stack.
+   The mark hangs in its own column, the words run at a proper measure
+   beside it, and the attribution sits under the words where an attribution
+   belongs.
+
+   THE MEASURE. The width has to be set on the element that carries the
+   quotation's own font. It was on the <blockquote>, which inherits the
+   16px body face, so 22ch resolved to 180px while the words inside were
+   set at 49px — about three characters to the line, and "CIRS is an
+   emotion." came out as three ragged lines in a column. ch is only a
+   measure of the font it is declared on. */
 .ajv{
   position:relative; margin:0;
   width:100%; max-width:var(--maxw); margin-inline:auto;
-  padding:clamp(34px,5.5vh,64px) var(--gut);
-  display:grid; justify-items:center; text-align:center;
+  padding:clamp(38px,6vh,74px) var(--gut);
+  display:grid; align-items:start; text-align:left;
+  column-gap:clamp(16px,2.4vw,34px); row-gap:clamp(18px,2.4vw,28px);
+  grid-template-columns:auto minmax(0,1fr);
+  grid-template-areas:
+    "mark quote"
+    ".    by";
   border-top:1px solid var(--aj-hair-soft);
 }
 .ajv:first-of-type{ border-top:0; }
+
 .ajv__mark{
-  margin:0 0 -.36em; font-family:var(--aj-voice);
-  font-size:clamp(2.6rem,5vw,4.5rem); line-height:1;
-  color:var(--aj-gold); opacity:.34;
+  grid-area:mark; margin:0;
+  font-family:var(--aj-voice); font-weight:500;
+  font-size:clamp(3.4rem,6.6vw,5.6rem); line-height:.74;
+  color:var(--aj-gold); opacity:.42;
+  /* optically aligned to the cap-height of the first line beside it */
+  transform:translateY(.06em);
+  user-select:none;
 }
-.ajv__quote{ margin:0; max-width:22ch; }
+
+.ajv__quote{ grid-area:quote; margin:0; }
 .ajv__quote p{
-  margin:0; color:var(--aj-on-dark);
-  font-family:var(--aj-voice);
-  font-size:clamp(1.8rem,5.2vw,4.2rem);
-  line-height:1.12; letter-spacing:-.015em;
+  margin:0; max-width:30ch;          /* on the quotation's own font */
+  color:var(--aj-on-dark);
+  font-family:var(--aj-voice); font-weight:400;
+  font-size:clamp(1.5rem,3.4vw,2.85rem);
+  line-height:1.28; letter-spacing:-.004em;
+  text-wrap:pretty;
 }
 .ajv__quote em{ color:var(--aj-gold-lit); font-style:italic; }
+
 .ajv__by{
-  margin-top:clamp(22px,3vw,34px);
-  display:flex; flex-direction:column; gap:5px; align-items:center;
+  grid-area:by; margin:0;
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px;
 }
 .ajv__name{
-  font-size:.78rem; letter-spacing:.22em; text-transform:uppercase;
+  position:relative; padding-left:38px;
+  font-family:var(--font-primary);
+  font-size:.74rem; letter-spacing:.20em; text-transform:uppercase;
   color:var(--aj-on-dark); font-weight:600;
 }
-.ajv__batch{ font-size:var(--fs-xs); color:var(--aj-on-dark-mute); }
-.ajv__batch em{ color:var(--aj-on-dark-mute); }
+/* the short rule an attribution is usually introduced by */
+.ajv__name::before{
+  content:""; position:absolute; left:0; top:.54em;
+  width:26px; height:1px; background:var(--aj-gold);
+}
+.ajv__batch{
+  font-size:var(--fs-xs); color:var(--aj-on-dark-mute);
+  font-style:normal;
+}
+.ajv__batch em{ color:var(--aj-on-dark-mute); font-style:italic; }
 
 /* ============================================================
    CHAPTER 4b — The named alumni
@@ -563,7 +616,6 @@ html.js-motion .ajc__pt{ opacity:0; }
   background:var(--aj-ivory); color:var(--ink);
   padding-block:clamp(72px,12vh,140px);
 }
-.aj-people__head .marker .sc{ color:var(--aj-gold-ink); }
 .aj-people__foot{ margin-top:clamp(36px,5vw,64px); max-width:70ch; }
 .aj-people__foot code{
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -657,7 +709,6 @@ html.js-motion .ajc__pt{ opacity:0; }
   transition:background-color .9s var(--e);
 }
 .aj-paths__head{ max-width:760px; }
-.aj-paths__head .marker .sc{ color:var(--aj-gold); }
 .aj-paths__head .h2{ color:var(--aj-on-dark); }
 .aj-paths__head .h2 em{ color:var(--aj-gold-lit); }
 .aj-paths__head .lead{ color:var(--aj-on-dark-soft); }
@@ -778,7 +829,6 @@ a.ajw__evName{
   background:var(--aj-ivory); color:var(--ink);
   padding-block:clamp(72px,12vh,140px);
 }
-.aj-index__head .marker .sc{ color:var(--aj-gold-ink); }
 
 .ajd{ margin-top:clamp(12px,2vw,24px); }
 .ajd__search{
@@ -863,19 +913,7 @@ a.ajw__evName{
   background:linear-gradient(to right, rgba(14,11,18,.96) 0%, rgba(14,11,18,.88) 42%,
                              rgba(14,11,18,.58) 72%, rgba(14,11,18,.48) 100%);
 }
-/* The points come home. A ring of marks, not the school's emblem: the
-   emblem is not ours to redraw, and a distorted one is worse than none. */
-.aj-return__gather{
-  position:absolute; z-index:2; right:6%; top:50%;
-  transform:translateY(-50%);
-  width:min(38vw, 420px); height:min(38vw, 420px);
-  pointer-events:none; opacity:.9;
-}
-.aj-return__gatherDot{ fill:var(--aj-gold-lit); }
-.aj-return__gatherRing{ fill:none; stroke:var(--aj-hair); stroke-width:.5; }
-
 .aj-return__inner{ position:relative; z-index:3; }
-.aj-return__inner .marker .sc{ color:var(--aj-gold); }
 .aj-return__head{
   margin:0 0 clamp(30px,4.5vw,50px); max-width:18ch;
   color:var(--aj-on-dark);
@@ -953,11 +991,7 @@ body.alumni .aj-return__acts .btn--ghost:hover{
 @media (max-width: 899px){
   .aj-open{ padding-bottom:clamp(76px,14vh,120px); }
   .aj-open__title{ font-size:clamp(2.6rem,13vw,5rem); }
-  /* The route is cropped by "slice", and at this width the crop drops it
-     straight through the headline. Confining it to the upper part of the
-     frame keeps the line over the campus, where it belongs, and off the
-     lettering, which has to stay the most readable thing on the screen. */
-  .aj-open__route{ height:60%; }
+  .aj-open__route{ height:40%; }
 
   .aj-portal__stage{ min-height:auto; padding-block:clamp(56px,10vh,88px); }
   .aj-portal{ min-height:auto; }
@@ -1020,22 +1054,27 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   /* --- the sky is a list here, so it keeps none of its sky --- */
   .ajc__field::after,
   .ajc__stars{ display:none; }
+  .ajc__origin{ pointer-events:auto; }
 
   .aj-return{ min-height:auto; }
-  .aj-return__gather{
-    position:relative; right:auto; top:auto; transform:none;
-    width:min(62vw,260px); height:min(62vw,260px);
-    margin:0 auto clamp(26px,5vw,40px);
-  }
   .aj-return__wash{
     background:linear-gradient(to top, rgba(14,11,18,.97) 30%, rgba(14,11,18,.72) 100%);
   }
 }
 
+@media (max-width: 700px){
+  .ajv{
+    grid-template-columns:1fr;
+    grid-template-areas:"mark" "quote" "by";
+    row-gap:clamp(6px,1.6vw,14px);
+  }
+  .ajv__mark{ font-size:clamp(2.8rem,11vw,3.6rem); transform:none; }
+  .ajv__quote p{ max-width:none; font-size:clamp(1.35rem,5.6vw,1.9rem); }
+  .ajv__by{ margin-top:clamp(14px,3vw,20px); }
+}
+
 @media (max-width: 560px){
   .aj-open__sub{ font-size:1.05rem; }
-  .ajv__quote{ max-width:100%; }
-  .ajv__quote p{ font-size:clamp(1.55rem,8vw,2.4rem); }
   .ajd__groups{ grid-template-columns:1fr; }
 }
 

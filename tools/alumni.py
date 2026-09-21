@@ -42,6 +42,8 @@ Nothing else has to change. The constellation, the region filters, the
 index, the counts and the editorial chapters all build from these lists.
 """
 
+import math
+
 # ------------------------------------------------------------------
 # The regions, in the order the constellation and the index use. The key
 # is what every point and row carries in data-region, and what the filter
@@ -55,71 +57,108 @@ REGIONS = [
 ]
 
 # ------------------------------------------------------------------
-# The destinations: institutions CIRS students have gone on to, exactly as
-# the previous page listed them.
+# THE GALAXY
+#
+# The field is a spiral galaxy seen at an angle, with CIRS at the core
+# and every destination a star out along one of the two arms. It is not
+# a map and does not pretend to be one: the arms carry the regions in
+# groups, and a star's distance from the core is how far along its arm
+# it sits, not how far from Coimbatore anything is.
+#
+# The arm is a logarithmic spiral, r = R0 * e^(B*theta), projected as a
+# disc tilted away from the viewer — INCL is the cosine of that tilt.
+# ASPECT is the field's own 3:2, which is what turns a swing in percent
+# of the width into the same swing in percent of the height.
+#
+# These same six numbers are handed to alumni-journey.js on the field
+# element, so the stars it scatters lie along the same two arms as the
+# nineteen that are named. One spiral, written down once.
+# ------------------------------------------------------------------
+SPIRAL_CX, SPIRAL_CY = 50.0, 50.0
+SPIRAL_R0, SPIRAL_B  = 6.10, 0.2182
+SPIRAL_ROT           = -0.55
+SPIRAL_INCL          = 0.70
+SPIRAL_ASPECT        = 1.5   # the field is 3:2
+SPIRAL_THETA_MIN     = 2.7
+SPIRAL_THETA_MAX     = 8.5
+_YK = SPIRAL_INCL * SPIRAL_ASPECT
+
+
+def spiral(arm, theta):
+    """Where a point on an arm falls, as (x, y) in percent of the field."""
+    r = SPIRAL_R0 * math.exp(SPIRAL_B * theta)
+    a = theta + arm * math.pi + SPIRAL_ROT
+    return (SPIRAL_CX + r * math.cos(a),
+            SPIRAL_CY + r * math.sin(a) * _YK)
+
+
+# ------------------------------------------------------------------
+# The destinations: institutions CIRS students have gone on to.
+#
+# Eighteen of the nineteen were on the previous version of this page and
+# are reproduced exactly. NTU Singapore was supplied afterwards by the
+# school — which is how every further one should arrive.
 #
 #   key       stable id, used by the panel and the index
 #   name      as it should read in full
-#   short     as it reads on the point in the field, where space is tight
+#   short     as it reads on the star, where space is tight
 #   country   the country, spelled out
 #   region    one of the REGION keys
-#   x, y      position in the field, as a percentage of its width and
-#             height. The field is a constellation, not a map: the four
-#             regions cluster, and cluster west to east, but no point
-#             claims a latitude. See the note in alumni.css.
+#   arm       0 or 1 — which of the galaxy's two arms it lies on
+#   theta     how far along that arm, in radians from the core
+#
+# Regions sit in unbroken runs along an arm, innermost first, so the
+# grouping survives being wound into a spiral: arm 0 carries India and
+# then the United Kingdom, arm 1 carries Asia-Pacific and then the
+# United States.
 # ------------------------------------------------------------------
 DESTINATIONS = [
-    # India
-    ("srcc",        "Shri Ram College of Commerce", "Shri Ram",
-     "India", "india", 60.38, 49.56),
-    ("nid",         "National Institute of Design", "NID",
-     "India", "india", 55.38, 56.89),
-    # cvv carries the longest label on the field and iitm sat straight
-    # across from it; these two are spread so the lettering clears.
-    ("cvv",         "Chinmaya Vishwa Vidyapeeth", "Chinmaya Vishwa Vidyapeeth",
-     "India", "india", 50.20, 69.40),
+    # ---- arm 0: India, then the United Kingdom ----
     ("iitm",        "IIT Madras", "IIT Madras",
-     "India", "india", 66.60, 70.60),
-
-    # United Kingdom
+     "India", "india", 0, 2.700),
+    ("srcc",        "Shri Ram College of Commerce", "Shri Ram",
+     "India", "india", 0, 3.425),
+    ("nid",         "National Institute of Design", "NID",
+     "India", "india", 0, 4.150),
+    ("cvv",         "Chinmaya Vishwa Vidyapeeth", "Chinmaya Vishwa Vidyapeeth",
+     "India", "india", 0, 4.875),
     ("durham",      "Durham University", "Durham",
-     "United Kingdom", "uk", 43.75, 18.89),
+     "United Kingdom", "uk", 0, 5.600),
     ("manchester",  "The University of Manchester", "Manchester",
-     "United Kingdom", "uk", 42.00, 24.67),
+     "United Kingdom", "uk", 0, 6.325),
     ("warwick",     "University of Warwick", "Warwick",
-     "United Kingdom", "uk", 43.13, 30.44),
+     "United Kingdom", "uk", 0, 7.050),
     ("imperial",    "Imperial College London", "Imperial",
-     "United Kingdom", "uk", 44.13, 36.22),
-    # pulled down and out from Imperial, whose label it sat on
+     "United Kingdom", "uk", 0, 7.775),
     ("lse",         "The London School of Economics and Political Science", "LSE",
-     "United Kingdom", "uk", 49.60, 41.20),
+     "United Kingdom", "uk", 0, 8.500),
 
-    # United States
-    ("northwestern", "Northwestern University", "Northwestern",
-     "United States", "us", 12.50, 29.78),
-    ("chicago",     "University of Chicago", "Chicago",
-     "United States", "us", 15.63, 36.67),
-    ("purdue",      "Purdue University", "Purdue",
-     "United States", "us", 18.75, 43.56),
-    ("virginia",    "University of Virginia", "Virginia",
-     "United States", "us", 24.50, 47.78),
-    ("nyu",         "New York University", "NYU",
-     "United States", "us", 26.25, 33.33),
-    ("parsons",     "The New School &mdash; Parsons", "Parsons",
-     "United States", "us", 28.44, 40.22),
-    ("boston",      "Boston University", "Boston",
-     "United States", "us", 28.25, 26.67),
-
-    # Asia-Pacific
-    ("hkust",       "The Hong Kong University of Science and Technology", "HKUST",
-     "Hong Kong", "apac", 84.50, 61.78),
+    # ---- arm 1: Asia-Pacific, then the United States ----
     ("nus",         "National University of Singapore", "NUS",
-     "Singapore", "apac", 79.63, 78.44),
+     "Singapore", "apac", 1, 2.700),
+    ("ntu",         "Nanyang Technological University", "NTU",
+     "Singapore", "apac", 1, 3.344),
+    ("hkust",       "The Hong Kong University of Science and Technology", "HKUST",
+     "Hong Kong", "apac", 1, 3.989),
+    ("northwestern", "Northwestern University", "Northwestern",
+     "United States", "us", 1, 4.633),
+    ("chicago",     "University of Chicago", "Chicago",
+     "United States", "us", 1, 5.278),
+    ("purdue",      "Purdue University", "Purdue",
+     "United States", "us", 1, 5.922),
+    ("virginia",    "University of Virginia", "Virginia",
+     "United States", "us", 1, 6.567),
+    ("nyu",         "New York University", "NYU",
+     "United States", "us", 1, 7.211),
+    ("parsons",     "The New School &mdash; Parsons", "Parsons",
+     "United States", "us", 1, 7.856),
+    ("boston",      "Boston University", "Boston",
+     "United States", "us", 1, 8.500),
 ]
 
-# Where CIRS itself sits in the field. Every line in the constellation is
-# drawn from this point: one beginning, and eighteen paths away from it.
-ORIGIN = (59.13, 76.00)
+# The core. Every arm is measured out from it, and it is where the page
+# puts CIRS: one beginning, and nineteen ways out of it.
+ORIGIN = (SPIRAL_CX, SPIRAL_CY)
 
 # ------------------------------------------------------------------
 # The alumni the school has named, with the single line each was given.
@@ -197,8 +236,8 @@ PATHWAYS = [
     {"key": "abroad", "label": "Higher education abroad",
      "heading": "The Diploma <em>applies directly.</em>",
      "copy": "The IB opens direct application to North America, the UK, Europe and "
-             "Australia. Fourteen of the eighteen institutions CIRS students have "
-             "gone on to are outside India.",
+             "Australia. {ABROAD_CAP} of the {COUNT} institutions CIRS students "
+             "have gone on to are outside India.",
      "anchors": ["imperial", "chicago", "lse", "boston"], "people": [],
      "ground": "ink"},
 
@@ -212,7 +251,7 @@ PATHWAYS = [
 
     {"key": "design", "label": "Design and the arts",
      "heading": "Some of them <em>make things.</em>",
-     "copy": "Two of the eighteen destinations are design schools rather than "
+     "copy": "Two of the {COUNT} destinations are design schools rather than "
              "universities, and one of the four alumni the school has named works as "
              "a designer.",
      "anchors": ["nid", "parsons"], "people": ["shashwat-santosh"],
@@ -254,6 +293,32 @@ def _person(key):
     raise KeyError("alumni.py: no alumnus named %r" % (key,))
 
 
+_WORDS = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven",
+          8: "eight", 9: "nine", 10: "ten", 11: "eleven", 12: "twelve",
+          13: "thirteen", 14: "fourteen", 15: "fifteen", 16: "sixteen",
+          17: "seventeen", 18: "eighteen", 19: "nineteen", 20: "twenty",
+          21: "twenty-one", 22: "twenty-two", 23: "twenty-three",
+          24: "twenty-four", 25: "twenty-five"}
+
+
+def word(n):
+    """A count as a word, because the page is set in sentences.
+
+    Every sentence that counts something takes its number from here rather
+    than having it typed in. Adding a nineteenth destination had already
+    left four sentences saying eighteen.
+    """
+    return _WORDS.get(n, str(n))
+
+
+def count_word():
+    return word(len(DESTINATIONS))
+
+
+def abroad_word():
+    return word(abroad_count())
+
+
 def count():
     return len(DESTINATIONS)
 
@@ -283,53 +348,55 @@ def voice_count():
 # ==================================================================
 
 def lines_svg():
-    """Every path in the field, drawn from CIRS outward.
+    """One path per destination, running out along its own arm from the core.
 
-    One line per destination, bowed rather than straight so eighteen of them
-    read as a spray of routes and not as the spokes of a wheel. The bow is
-    always to the same side of the straight line, which is what makes the
-    whole field lean in one direction instead of looking scattered.
+    A straight line from the middle of a galaxy to a star would cut across
+    the arms; these lie along them, so lighting one traces the arm a
+    reader's eye is already following. They sit at almost nothing until
+    the star they belong to is asked about.
 
-    The viewBox is 0 0 100 100 and the coordinates are the same percentages
-    the points carry, so a line and the point it ends at cannot drift apart
-    when the field is resized.
+    Both SVGs on this field use viewBox "0 0 150 100" with
+    preserveAspectRatio="none". The field is 3:2, so that mapping is
+    uniform in both directions — a circle drawn in it is still a circle —
+    and a position in percent converts by (1.5x, y).
     """
-    ox, oy = ORIGIN
     paths = []
-    for key, _name, _short, _country, region, x, y in DESTINATIONS:
-        mx, my = (ox + x) / 2, (oy + y) / 2
-        # Perpendicular to the run, scaled by its length: short hops bow
-        # a little, long ones bow more.
-        dx, dy = x - ox, y - oy
-        length = (dx * dx + dy * dy) ** .5 or 1
-        bow = min(length * .14, 9)
-        cx, cy = mx - dy / length * bow, my + dx / length * bow
+    for key, _n, _s, _c, region, arm, theta in DESTINATIONS:
+        pts = []
+        steps = 40
+        for i in range(steps + 1):
+            t = SPIRAL_THETA_MIN + (theta - SPIRAL_THETA_MIN) * i / steps
+            x, y = spiral(arm, t)
+            pts.append("%.2f %.2f" % (x * 1.5, y))
+        d = "M" + pts[0] + "".join(" L" + q for q in pts[1:])
         paths.append(
-            '    <path class="ajc__line" data-region="%s" data-line="%s" '
-            'd="M%.2f %.2f Q%.2f %.2f %.2f %.2f"/>'
-            % (region, key, ox, oy, cx, cy, x, y))
+            '    <path class="ajc__line" data-region="%s" data-line="%s" d="%s"/>'
+            % (region, key, d))
     return "\n".join(paths)
 
 
 def constellation_html():
-    """The field: an SVG of routes, and a real button for every destination.
+    """The galaxy: two arms of stars, nineteen of which are named.
 
-    The lines are SVG and inert. The points are HTML buttons positioned over
-    them, because a button is the only thing that is reliably focusable,
-    announceable and clickable — an SVG <circle> with a tabindex is none of
-    those three on every browser that matters.
+    The arms and the loose field are drawn by alumni-journey.js from the
+    spiral this file defines — handed over on the field element as
+    data-spiral — so the stars it scatters lie along the same two arms as
+    the nineteen named ones. The named ones are HTML buttons over the top,
+    because a button is the only thing reliably focusable, announceable
+    and clickable; an SVG <circle> with a tabindex is none of the three on
+    every browser that matters.
 
-    Below a certain width the same buttons become a plain list: see the
-    mobile block in alumni.css. There is one DOM, and no second markup path
-    that can rot.
+    Below 900px the same buttons become a plain list. There is one DOM,
+    and no second markup path that can rot.
     """
     ox, oy = ORIGIN
     total = len(DESTINATIONS)
     points = []
-    for i, (key, name, short, country, region, x, y) in enumerate(DESTINATIONS):
+    for i, (key, name, short, country, region, arm, theta) in enumerate(DESTINATIONS):
+        x, y = spiral(arm, theta)
         points.append('''      <li class="ajc__item" data-region="%s">
         <button type="button" class="ajc__pt" id="ajc-pt-%s"
-                style="--x:%s%%;--y:%s%%"
+                style="--x:%.3f%%;--y:%.3f%%"
                 data-point="%s" data-region="%s"
                 aria-expanded="false" aria-controls="ajc-panel">
           <span class="ajc__dot" aria-hidden="true"></span>
@@ -350,24 +417,25 @@ def constellation_html():
     return '''<div class="ajc" data-constellation>
   <div class="ajc__bar">
     <div class="ajc__filters" role="group" aria-label="Filter the destinations by region">
-%s
+%(filters)s
     </div>
-    <p class="ajc__status" data-constellation-status role="status">Showing all %d destinations.</p>
+    <p class="ajc__status" data-constellation-status role="status">Showing all %(total)d destinations.</p>
   </div>
 
-  <div class="ajc__field" data-constellation-field>
-    <svg class="ajc__lines" viewBox="0 0 100 100" preserveAspectRatio="none"
+  <div class="ajc__field" data-constellation-field
+       data-spiral="%(cx).4f,%(cy).4f,%(r0).4f,%(b).4f,%(rot).4f,%(yk).4f,%(tmin).4f,%(tmax).4f">
+    <svg class="ajc__lines" viewBox="0 0 150 100" preserveAspectRatio="none"
          aria-hidden="true" focusable="false">
-%s
+%(lines)s
     </svg>
 
-    <p class="ajc__origin" style="--x:%s%%;--y:%s%%" aria-hidden="true">
+    <p class="ajc__origin" style="--x:%(ox).3f%%;--y:%(oy).3f%%" aria-hidden="true">
       <span class="ajc__originDot"></span>
       <span class="ajc__originName">CIRS<small>Siruvani</small></span>
     </p>
 
     <ul class="ajc__points">
-%s
+%(points)s
     </ul>
   </div>
 
@@ -388,7 +456,11 @@ def constellation_html():
       </button>
     </div>
   </div>
-</div>''' % ("\n".join(filters), total, lines_svg(), ox, oy, "\n".join(points))
+</div>''' % {"filters": "\n".join(filters), "total": total, "lines": lines_svg(),
+              "ox": ox, "oy": oy, "points": "\n".join(points),
+              "cx": SPIRAL_CX, "cy": SPIRAL_CY, "r0": SPIRAL_R0, "b": SPIRAL_B,
+              "rot": SPIRAL_ROT, "yk": _YK,
+              "tmin": SPIRAL_THETA_MIN, "tmax": SPIRAL_THETA_MAX}
 
 
 # ==================================================================
@@ -405,7 +477,7 @@ def destinations_html():
     groups = []
     for region, label in REGIONS:
         rows = []
-        for key, name, _short, country, r, _x, _y in DESTINATIONS:
+        for key, name, _short, country, r, _arm, _theta in DESTINATIONS:
             if r != region:
                 continue
             search = name.replace("&mdash;", "-").lower() + " " + country.lower()
@@ -560,6 +632,9 @@ def pathways_html():
                             '<span class="ajw__evWhere">%s</span></li>'
                             % (p["key"], p["name"], p["role"]))
 
+        copy = (path["copy"].replace("{COUNT}", count_word())
+                            .replace("{ABROAD_CAP}", abroad_word().capitalize())
+                            .replace("{ABROAD}", abroad_word()))
         scenes.append('''    <article class="ajw" data-pathway="%s" data-scene="%s">
       <p class="ajw__n" aria-hidden="true">%d <span>/ %d</span></p>
       <p class="ajw__label sc">%s</p>
@@ -570,7 +645,7 @@ def pathways_html():
         %s
       </ul>
     </article>''' % (path["key"], path["ground"], i + 1, total, path["label"],
-                     path["heading"], path["copy"],
+                     path["heading"], copy,
                      "\n        ".join(evidence)))
 
     dots = "\n".join(
