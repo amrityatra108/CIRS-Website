@@ -14,7 +14,7 @@ finds them, and the thing worth keeping in a photograph of a lit stage is the
 light. So most of the colour survives and the wash is a whisper — just enough
 that twenty-eight photographs from twenty-eight evenings read as one wall.
 
-Two sources feed it:
+Two source families feed it:
 
   * assets/source/ — the camera originals, cropped and graded here.
   * assets/source/archive/ — the photographs the designer had already chosen
@@ -22,6 +22,11 @@ Two sources feed it:
     this page. They arrived small and there is no larger copy of them in this
     repository, so they are carried across as they are rather than upscaled
     into softness.
+
+The 48 CIRS Cultural Gallery tiles arrived as already-web-sized Drive
+renditions and live in assets/img/arts/thumbs/. The script preserves those
+bytes while rebuilding the generated directory. Their opened 1600px copies
+remain on the school's Drive.
 
 SPIC MACAY.jpg is a contact sheet of six photographs from the society's
 visiting-artist concerts, so it is cut back into the six. They are visiting
@@ -92,6 +97,8 @@ CARRIED = [
     ("paint5", "paint5.jpg"),
 ]
 
+CULTURAL_TILES = [f"drive-{index:02d}" for index in range(1, 49)]
+
 
 def grade(im):
     grey = ImageEnhance.Contrast(im.convert("L")).enhance(1.05)
@@ -147,8 +154,19 @@ def main():
     if not os.path.exists(os.path.join(SRC, SHEET)):
         missing.append(SHEET)
     missing += [s for _, s in CARRIED if not os.path.exists(os.path.join(ARCHIVE, s))]
+    cultural_paths = {name: os.path.join(OUT, "thumbs", f"{name}.jpg")
+                      for name in CULTURAL_TILES}
+    missing += [f"img/arts/thumbs/{name}.jpg" for name, path in cultural_paths.items()
+                if not os.path.exists(path)]
     if missing:
         sys.exit("make-arts-wall: not found — " + ", ".join(missing))
+
+    # OUT is regenerated below. Keep the externally imported tile renditions
+    # in memory so that a routine rebuild cannot discard them.
+    cultural_tiles = {}
+    for name, path in cultural_paths.items():
+        with open(path, "rb") as source:
+            cultural_tiles[name] = source.read()
 
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
@@ -171,9 +189,21 @@ def main():
         im = ImageOps.exif_transpose(Image.open(os.path.join(ARCHIVE, source))).convert("RGB")
         write(name, im, False, tally)
 
-    print(f"  {len(tally)} photographs -> assets/img/arts/  "
+    # These are already web-sized tile renditions. Their full copies stay on
+    # Drive and are only requested after a visitor opens one, so do not create
+    # unreferenced local "full" duplicates here.
+    cultural_tile_kb = 0
+    for name in CULTURAL_TILES:
+        target = os.path.join(OUT, "thumbs", f"{name}.jpg")
+        with open(target, "wb") as output:
+            output.write(cultural_tiles[name])
+        tile_kb = os.path.getsize(target) // 1024
+        cultural_tile_kb += tile_kb
+        print(f"  {name:<16} Drive full       tile {tile_kb:>3} KB")
+
+    print(f"  {len(tally) + len(CULTURAL_TILES)} photographs -> assets/img/arts/  "
           f"{sum(k for k, _ in tally)/1024:.1f} MB full, "
-          f"{sum(t for _, t in tally)} KB of tiles")
+          f"{sum(t for _, t in tally) + cultural_tile_kb} KB of tiles")
 
 
 if __name__ == "__main__":
