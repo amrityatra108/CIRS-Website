@@ -159,6 +159,52 @@ body.menu-open .header .wrap{
   .header.is-stuck .wrap,
   body.menu-open .header .wrap{ background:rgba(250,247,248,.64); }
 }
+/* Every page begins with the navigation floating directly over its first
+   content section. The existing glass surface returns at that section's
+   lower edge; opening the menu keeps its readable glass treatment. */
+body:not(.menu-open) .header.is-first-section .wrap{
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+}
+/* ------------------------------------------------------------
+   The bare header
+   ------------------------------------------------------------
+   On a page that opens on a full-window composition, the glass bar
+   around the three controls comes off. Nothing is then laid across
+   the picture: only the wordmark and the controls sit on it, and
+   each of those already carries its own pill, so they stay legible
+   over photography without a container behind them.
+
+   It comes back the moment the opening has scrolled past, because
+   from there the controls are over the page's own content: without
+   it, Admissions ran its contact details straight through the News
+   pill and Why CIRS put a dark purple wordmark on an aerial
+   photograph. cirs.js carries is-atop for exactly as long as the
+   opening is on screen — not is-stuck, which a page opening on a
+   pale ground wears from the markup and never takes off.
+
+   Set per page in build-site.py: see "barehead".
+   ------------------------------------------------------------ */
+.header.is-bare.is-atop .wrap{
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+}
+@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
+  .header.is-bare.is-atop .wrap{
+    background:transparent;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+}
+body.menu-open .header.is-bare.is-atop .wrap{
+  background:rgba(250,247,248,.72);
+  border-color:rgba(57,42,72,.14);
+  box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8);
+}
 .header__left,
 .header__right{
   display:flex; align-items:center;
@@ -175,7 +221,7 @@ body.menu-open .header .wrap{
 .htab{
   position:relative;
   display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:7px;
-  min-height:40px; padding:0 12px;
+  min-height:44px; padding:0 13px;
   border:1px solid rgba(255,255,255,.13); border-radius:999px;
   background:rgba(255,255,255,.055);
   color:#fff; white-space:nowrap;
@@ -228,8 +274,10 @@ body.menu-open .htab:hover{
 }
 
 /* The wordmark is now larger, so it gives way sooner. Below 1040px it
-   shrinks and wraps rather than pushing through the tabs; below 700px
-   the tab labels go and the marks stand alone; below 560px the
+   shrinks and wraps rather than pushing through the tabs; below 960px
+   the tab labels go and the marks stand alone. This earlier breakpoint is
+   required on Student Life, whose Student Portal gives the right group one
+   additional control. Below 560px the
    wordmark text goes entirely and the emblem carries the identity,
    which is set large in the page banner immediately below anyway. */
 @media (max-width:1040px){
@@ -240,7 +288,7 @@ body.menu-open .htab:hover{
   .brand__sub{ display:none; }
   .htab{ padding-inline:11px; }
 }
-@media (max-width:700px){
+@media (max-width:960px){
   .htab__label{ display:none; }
   .htab{ width:44px; min-height:44px; padding:0; }
 }
@@ -973,18 +1021,27 @@ body.menu-open .htab:hover{
 .enq__row:focus-visible{ background:rgba(255,195,8,.13); color:#fff; }
 .enq__row:hover .enq__ico{ color:var(--gold); }
 
-.enq__social{ display:flex; flex-wrap:wrap; gap:6px 8px; }
+.enq__social{ display:flex; flex-wrap:wrap; gap:10px; }
 .enq__social a{
-  padding:5px 10px; border-radius:99px;
+  display:grid; width:44px; height:44px; padding:0; place-items:center;
+  border-radius:50%;
   border:1px solid rgba(245,238,242,.18);
   color:var(--on-purple-soft);
-  font-size:.78rem; letter-spacing:.03em;
-  transition:background .22s var(--e), color .22s var(--e), border-color .22s var(--e);
+  transition:background .22s var(--e), color .22s var(--e), border-color .22s var(--e), transform .22s var(--e);
 }
+.enq__social svg{ width:21px; height:21px; overflow:visible; }
+.enq__social svg :is(rect,circle){ fill:none; stroke:currentColor; stroke-width:1.65; }
+.enq__social svg path{ fill:currentColor; stroke:none; }
+.enq__social svg .enq__social-dot{ fill:currentColor; stroke:none; }
+.enq__social svg .enq__social-play{ fill:var(--purple-ink); }
 .enq__social a:hover,
 .enq__social a:focus-visible{
-  background:rgba(255,195,8,.15); border-color:rgba(255,195,8,.4); color:#fff;
+  background:var(--gold-lit); border-color:var(--gold-lit); color:var(--purple-ink);
+  transform:translateY(-2px);
 }
+.enq__social a:focus-visible{ outline:2px solid #fff; outline-offset:3px; }
+.enq__social a:hover .enq__social-play,
+.enq__social a:focus-visible .enq__social-play{ fill:var(--gold-lit); }
 
 /* The header goes light once it is a solid bar, but the panel stays a dark
    glass surface — so only the tab beneath it needs the light treatment. */

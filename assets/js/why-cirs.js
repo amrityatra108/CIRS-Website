@@ -12,13 +12,20 @@
   var wheelTotal = 0;
   var wheelTimer = 0;
   var touchY = null;
+  var leaving = null;
+  var arriving = null;
+  var settleTimer = 0;
 
   function topOf(el) {
     return Math.max(0, el.getBoundingClientRect().top + window.scrollY);
   }
 
   function nearestIndex() {
-    var y = window.scrollY + window.innerHeight * 0.42;
+    // Compare section starts with the viewport start. The opening frame is
+    // intentionally shorter on phones, where using a point near the middle
+    // of the viewport made the first wheel gesture mistake chapter two for
+    // the current chapter and skip directly to chapter three.
+    var y = window.scrollY;
     var best = 0;
     var distance = Infinity;
     targets.forEach(function (target, index) {
@@ -44,7 +51,27 @@
   }
 
   function settle() {
+    window.clearTimeout(settleTimer);
+    document.body.classList.remove("is-section-moving");
+    [leaving, arriving].forEach(function (target) {
+      if (!target) return;
+      target.classList.remove("is-section-leaving", "is-section-entering");
+      target.style.removeProperty("--section-shift");
+    });
+    leaving = null;
+    arriving = null;
     moving = false;
+  }
+
+  function prepareTransition(from, to, direction) {
+    if (reduced.matches) return;
+    leaving = targets[from];
+    arriving = targets[to];
+    document.body.classList.add("is-section-moving");
+    leaving.classList.add("is-section-leaving");
+    arriving.classList.add("is-section-entering");
+    leaving.style.setProperty("--section-shift", direction > 0 ? "-8px" : "8px");
+    arriving.style.setProperty("--section-shift", direction > 0 ? "8px" : "-8px");
   }
 
   function move(direction) {
@@ -54,8 +81,9 @@
     if (to === from) return false;
 
     moving = true;
+    prepareTransition(from, to, direction);
     var top = topOf(targets[to]);
-    var duration = reduced.matches ? 0 : 0.82;
+    var duration = reduced.matches ? 0 : 0.72;
     var request = new CustomEvent("cirs-section-scroll", {
       cancelable:true,
       detail:{ top:top, duration:duration, onComplete:settle }
@@ -64,7 +92,11 @@
 
     if (!request.defaultPrevented) {
       window.scrollTo({ top:top, behavior:reduced.matches ? "auto" : "smooth" });
-      window.setTimeout(settle, reduced.matches ? 80 : 900);
+      settleTimer = window.setTimeout(settle, reduced.matches ? 80 : 900);
+    } else {
+      // A hard ceiling keeps the interaction usable if a smooth-scroll
+      // controller is interrupted before it reports completion.
+      settleTimer = window.setTimeout(settle, reduced.matches ? 80 : 1100);
     }
     return true;
   }

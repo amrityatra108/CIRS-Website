@@ -326,11 +326,25 @@
       .to(curtain, { yPercent: -100, duration: .95, ease: "expo.inOut" }, "-=.1");
   }
 
+  function claimIntroVisit() {
+    var key = "cirs-intro-complete";
+    try {
+      if (window.sessionStorage.getItem(key) === "1") return false;
+      window.sessionStorage.setItem(key, "1");
+    } catch (err) {
+      // Storage can be unavailable in hardened/private contexts. In that case
+      // retain the existing one-visit behaviour rather than blocking startup.
+    }
+    return true;
+  }
+
   /* ==========================================================
      Hero
      ========================================================== */
   function heroIn() {
-    var hero = $(".hero");
+    // Either opening: the video panel other pages still use, or the
+    // home sequence, whose stage plays the same part.
+    var hero = $(".hero") || $(".hseq__stage");
     if (!hero || !animate) return;
     // Loaded out of sight: show the hero as-is rather than hiding it behind an
     // entrance that cannot run.
@@ -340,9 +354,9 @@
     // Without a curtain the content is already visible and must stay visible.
     if (!$("#curtain")) { heroParallax(); return; }
 
-    var h1 = $(".hero h1");
+    var h1 = $("h1", hero);
     var lines = h1 ? splitLines(h1) : null;
-    var rest = [$(".hero .marker"), $(".hero__scroll")].filter(Boolean);
+    var rest = [$(".marker", hero), $(".hero__scroll", hero)].filter(Boolean);
 
     var tl = gsap.timeline({ paused: true });
     if (lines) {
@@ -381,6 +395,119 @@
   }
 
   /* ==========================================================
+     The opening sequence
+     ==========================================================
+     The stage is pinned by CSS sticky, so this function never pins
+     anything and never touches the document's height. All it does is
+     read where the three .hseq__mark boxes are and scrub the plate's
+     own box between them as the track passes.
+
+     The marks are the contract with the stylesheet. Nothing here knows
+     what P2 looks like; it knows only that some element in the sheet
+     says so, which is what keeps the breakpoints in the one file that
+     already holds every other breakpoint on the page.
+     ========================================================== */
+  function heroSeq() {
+    var seq = $(".hseq");
+    if (!seq) return;
+
+    var stage = $(".hseq__stage", seq),
+        plate = $(".hseq__plate", seq),
+        type  = $(".hseq__type", seq),
+        scrim = $(".hseq__scrim", seq),
+        marks = $$(".hseq__mark", seq);
+
+    if (!stage || !plate || marks.length < 3) return;
+
+    // No ScrollTrigger, or motion off: the sheet already lays the
+    // sequence out as one still panel. Leave it alone.
+    if (!hasST || !animate) { seq.classList.add("is-static"); return; }
+
+    // Measured on refresh, never cached across one. A mark's box is
+    // read relative to the stage, which is the plate's containing
+    // block, so these are exactly the values the plate's inset takes.
+    var P = [];
+    function measure() {
+      var base = stage.getBoundingClientRect();
+      P = marks.map(function (m) {
+        var r = m.getBoundingClientRect();
+        return {
+          top:    r.top - base.top,
+          right:  base.right - r.right,
+          bottom: base.bottom - r.bottom,
+          left:   r.left - base.left,
+          w:      r.width
+        };
+      });
+    }
+    measure();
+
+    // Interpolate between two measured boxes. Keeping this in pixels
+    // rather than percentages means the plate lands on the mark's box
+    // exactly, whatever units the sheet used to describe it.
+    function at(a, b, t) {
+      return {
+        top:    a.top    + (b.top    - a.top)    * t,
+        right:  a.right  + (b.right  - a.right)  * t,
+        bottom: a.bottom + (b.bottom - a.bottom) * t,
+        left:   a.left   + (b.left   - a.left)   * t
+      };
+    }
+
+    function paint(p) {
+      plate.style.top    = p.top    + "px";
+      plate.style.right  = p.right  + "px";
+      plate.style.bottom = p.bottom + "px";
+      plate.style.left   = p.left   + "px";
+    }
+
+    // The two halves of the travel: P0 to P1 over the first, P1 to P2
+    // over the second. A single eased run from P0 to P2 passes through
+    // a different middle and loses the first inset entirely.
+    // The plate arrives at P2 at seven tenths of the travel and holds
+    // there for the rest of it, still stuck. Without the hold the frame
+    // lands on the same pixel the stage begins to leave on.
+    var ARRIVE = .70, BEND = .45;
+
+    function frame(t) {
+      var u = Math.min(t / ARRIVE, 1);
+      var box = u < BEND ? at(P[0], P[1], u / BEND)
+                         : at(P[1], P[2], (u - BEND) / (1 - BEND));
+      paint(box);
+      // The corner arrives with the frame rather than being on from the
+      // start, so the full-bleed opening has no rounded edge against
+      // the window.
+      plate.style.borderRadius = (u * 14) + "px";
+      // The scrim exists so the headline can be read over the photograph.
+      // Once the plate has drawn in, the headline is beside it rather than
+      // on it and the wash has nothing left to do but crush the picture,
+      // so it lifts as the plate insets. It does not go entirely: the last
+      // of it keeps the foot of the frame from glaring against the ground.
+      if (scrim) scrim.style.opacity = String(1 - u * .78);
+      if (type) {
+        // The type clears the way as the plate closes in on its column,
+        // then settles. It does not fade out — the headline is the
+        // page's first sentence and stays readable through the whole
+        // sequence.
+        type.style.opacity = String(1 - Math.min(u, .55) * .28);
+      }
+    }
+
+    ScrollTrigger.create({
+      trigger: seq,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: true,
+      // Direct scrub, not timed. Lenis already smooths the document
+      // scroll; a timed scrub here leaves the full-screen plate still
+      // catching up after the sequence has left the window, which is
+      // the same offscreen work heroParallax was changed to stop.
+      onRefresh: function (self) { measure(); frame(self.progress || 0); },
+      onUpdate:  function (self) { frame(self.progress); }
+    });
+  }
+
+  /* ==========================================================
      Generic scroll choreography
      ========================================================== */
   function choreograph() {
@@ -388,7 +515,7 @@
 
     // Headings rise line by line. The hero headline is excluded — it belongs to
     // the opening timeline, not to a scroll trigger.
-    $$("[data-split]").filter(function (el) { return !el.closest(".hero"); }).forEach(function (el) {
+    $$("[data-split]").filter(function (el) { return !el.closest(".hero, .hseq"); }).forEach(function (el) {
       var lines = splitLines(el);
       if (!lines) return;
       gsap.set(lines, { yPercent: 110 });
@@ -757,9 +884,9 @@
   /* ==========================================================
      The run — the home page's horizontal passage
      The section pins at the full height of the window and a
-     780vw stage is scrubbed across it. Items are placed on that
-     stage absolutely, at three heights, so the run reads as a
-     space rather than a row.
+     measured gallery stage is scrubbed across it. Every image and
+     text panel owns a separate cell; 3D depth never changes layout
+     or allows neighbouring content to collide.
 
      Parallax is measured against the middle of the window, not
      against how far the stage has travelled. Multiplying the
@@ -809,10 +936,8 @@
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
     var HOLD = 0.10;
-    // The stage is 780vw. Scrolled one for one that is eleven screens
-    // between the hero and the film, which is a wall rather than a
-    // passage; at half, the whole run passes in about six. It is the one
-    // number to change if the run should move more slowly.
+    // Move the measured gallery at half pace so the photographs have
+    // enough time to turn through the cylindrical field.
     var PACE = 0.5;
     var PARALLAX = 0.30;
 
@@ -824,10 +949,12 @@
       var layers = $$("[data-depth]", stage).map(function (el) {
         var d = parseFloat(el.getAttribute("data-depth")) || 1;
         var ghost = el.classList.contains("hghost");
+        var frame = el.classList.contains("hframe");
         return {
           el: el,
           d: d,
           ghost: ghost,
+          frame: frame,
           // An item asking for the middle band is placed at top:50% and
           // has to come back up by half its own height. That cannot live
           // in the stylesheet: the parallax rewrites the whole transform
@@ -840,7 +967,28 @@
 
       // How far the stage has to travel: its own width less one screen,
       // taken from layout so no transform can feed back into it.
-      function reach() { return stage.offsetWidth; }
+      // How far the stage must travel: the right edge of the LAST item, not
+      // the width of the canvas. The stage is 780vw but the content ends at
+      // about 746vw, and measuring the canvas spent that surplus as scroll
+      // after the tenth photograph had passed — the frame slid on across an
+      // empty gold field and then reappeared parked at the left, which reads
+      // as the tenth picture arriving twice before the film section.
+      //
+      // Ghosts are excluded deliberately: they are decoration, they lag far
+      // behind their own depth, and counting them would put the surplus back
+      // and then some.
+      //
+      // offsetLeft and offsetWidth are layout values, so no transform this
+      // function's own result drives can feed back into it.
+      function reach() {
+        var kids = stage.children, far = 0;
+        for (var i = 0; i < kids.length; i++) {
+          var k = kids[i];
+          if (k.classList.contains("hghost")) continue;
+          far = Math.max(far, k.offsetLeft + k.offsetWidth);
+        }
+        return far;
+      }
 
       function place(q, dist) {
         var mid = window.innerWidth / 2;
@@ -848,16 +996,29 @@
         for (var i = 0; i < layers.length; i++) {
           var L = layers[i];
           var from = L.base + stageX - mid;
+          var statement = !L.frame && !L.ghost;
+          // Bend photographs around a shallow horizontal cylinder. The card
+          // nearest the lens faces forward; cards towards either edge turn
+          // inward, recede and follow a small vertical arc. Text and ghost
+          // layers retain the calmer parallax treatment.
+          var arc = Math.min(Math.abs(from) / mid, 1.2);
+          var turn = L.frame ? Math.max(-30, Math.min(30, from / mid * -24)) :
+            (statement ? Math.max(-18, Math.min(18, from / mid * -15)) : 0);
+          var textFocus = statement ? 1 - Math.min(arc, 1) : 0;
+          var depth = L.frame ? -Math.pow(arc, 1.35) * 180 : textFocus * 245;
+          var curveY = L.frame ? Math.pow(arc, 1.7) * 22 :
+            (statement ? textFocus * -24 : 0);
+          var arcScale = L.frame ? 1 - Math.min(arc, 1) * .06 :
+            (statement ? .91 + textFocus * .19 : 1);
           gsap.set(L.el, {
-            x: from * (L.d - 1) * PARALLAX,
-            yPercent: L.mid ? -50 : 0,
-            scale: L.scale,
-            // A few degrees of turn away from the centre line. With the
-            // perspective on the viewport this is what actually reads as
-            // depth; the offsets alone are too small to see, and making
-            // them big enough to see is what put the frames into each
-            // other. Capped, past which a photograph looks soft, not turned.
-            rotationY: L.ghost ? 0 : Math.min(Math.max(from / mid * -3.4, -4), 4),
+            x: L.frame ? from * (L.d - 1) * PARALLAX : 0,
+            y: curveY,
+            yPercent: 0,
+            z: depth,
+            scale: L.scale * arcScale,
+            rotationX: statement ? (1 - textFocus) * 5 : 0,
+            rotationY: turn,
+            opacity: statement ? .62 + textFocus * .38 : 1,
             force3D: true
           });
         }
@@ -919,32 +1080,37 @@
      ========================================================== */
   function founderWords() {
     var list = $(".fwords");
-    if (!list) return;
-    var rows = $$("li", list);
-    // No ScrollTrigger and no motion: --lit stays unset, the plate is
-    // never drawn, and the words are the words. Nothing to undo.
-    if (!rows.length || !hasST || !animate) return;
-
-    var n = rows.length;
-    var span = 1 / (n + 1);          // each word starts a slice later
-    var window_ = span * 2;          // and takes two slices to fill
-
-    function paint(p) {
-      for (var i = 0; i < n; i++) {
-        var t = (p - i * span) / window_;
-        rows[i].style.setProperty("--lit", (t < 0 ? 0 : t > 1 ? 1 : t).toFixed(3));
-      }
-    }
-
-    paint(0);
-    ScrollTrigger.create({
-      trigger: list,
-      start: "top 80%",
-      end: "bottom 60%",
-      scrub: .6,
-      invalidateOnRefresh: true,
-      onUpdate: function (self) { paint(self.progress); }
+    if (!list || !hasST || !animate) return;
+    $$("li", list).forEach(function (row) {
+      var wrapper = $(".fwords__w", row);
+      if (!wrapper) return;
+      gsap.fromTo(wrapper, { "--lit": 0 }, {
+        "--lit": 1, ease: "none",
+        scrollTrigger: {
+          trigger: row, start: "top 65%", end: "top 10%",
+          scrub: true, invalidateOnRefresh: true
+        }
+      });
     });
+  }
+
+  /* ==========================================================
+     Founder — one restrained, section-local motto entrance.
+     The two editorial columns enter once in reading order; there
+     is no scrub or decorative motion, and reduced motion remains
+     at the fully visible CSS state.
+     ========================================================== */
+  function founderMottoReveal() {
+    var section = $(".fmotto");
+    if (!section || !hasST || !animate) return;
+    var left = $(".fmotto__left", section);
+    var right = $(".fmotto__right", section);
+    if (!left || !right) return;
+    var tl = gsap.timeline({
+      scrollTrigger: { trigger: section, start: "top 78%", once: true }
+    });
+    tl.from(left, { opacity: 0, y: 22, duration: .82, ease: "power3.out" })
+      .from(right, { opacity: 0, y: 18, duration: .78, ease: "power3.out" }, "-=.56");
   }
 
   /* ==========================================================
@@ -1144,23 +1310,49 @@
 
   (function chrome() {
     var header = $("#header");
-    // A page that opens on a pale ground (body.litehead) has the header solid
-    // from the top, set in the markup so it holds without this script.
-    // Toggling it here would strip that on the way back up and leave white
-    // lettering on an off-white hero.
-    if (header && !document.body.classList.contains("litehead")) {
-      // The header rides transparent over the hero and only turns solid once
-      // the hero itself has scrolled mostly out of view. On the homepage the
-      // requested handoff is exact: glass begins when the gold run reaches
-      // the top of the viewport, not before it.
+    if (header) {
+      var main = $("#main");
+      // Ignore non-visual utility nodes (the gallery's canvas controls, for
+      // example) and use the first actual section on every page. Blog entries
+      // wrap the full story in one article, so their opening ends with the
+      // lead image rather than at the end of the story.
+      var opening = main && main.querySelector(":scope > section, :scope > article");
+      if (!opening && main) opening = main.firstElementChild;
+      var openingBoundary = opening;
+      if (opening && opening.matches("article.art")) {
+        openingBoundary = $(".art__hero", opening) || $(".art__head", opening) || opening;
+      }
       sentinel(function () {
-        if (document.body.classList.contains("home")) {
-          var opening = $(".hero");
-          if (opening) return Math.max(opening.offsetTop + opening.offsetHeight - 1, 80);
+        if (!openingBoundary) return 80;
+        var box = openingBoundary.getBoundingClientRect();
+        return Math.max(box.top + window.pageYOffset + box.height - 1, 80);
+      }, function (past) {
+        header.classList.toggle("is-first-section", !past);
+        // Pale opening sections retain their existing dark lettering while
+        // the container itself stays transparent.
+        if (!document.body.classList.contains("litehead")) {
+          header.classList.toggle("is-stuck", past);
         }
-        var hero = $(".hero");
-        return hero ? Math.max(hero.getBoundingClientRect().height - 140, 80) : 80;
-      }, function (past) { header.classList.toggle("is-stuck", past); });
+      });
+    }
+
+    // The bare header — no glass bar around the controls — belongs to the
+    // opening composition and nothing else. Taking the bar off for good
+    // looked right on the hero and was wrong two screens down: on Admissions
+    // the page's own text scrolled straight through the News pill, and on
+    // Why CIRS the wordmark ended up dark purple over an aerial photograph.
+    // The bar is what gives it a ground once content passes under it.
+    //
+    // This runs on bare pages whether or not they are litehead, so a page
+    // that opens pale loses the bar over its own opening too, which is the
+    // point of the flag.
+    if (header && header.classList.contains("is-bare")) {
+      header.classList.add("is-atop");
+      sentinel(function () {
+        var first = $("main > *");
+        if (!first) return 80;
+        return Math.max(first.offsetTop + first.offsetHeight - 120, 80);
+      }, function (past) { header.classList.toggle("is-atop", !past); });
     }
     if (!burger || !drawer) return;
     burger.addEventListener("click", function () {
@@ -1311,7 +1503,7 @@
     // The hero belongs to the opening timeline, not a scroll reveal. Its
     // prepared lines must remain hidden until that timeline plays.
     var targets = $$(".rv, .img-reveal, .facilities > div, .line-mask > span, .fig-mask > span")
-      .filter(function (el) { return !el.closest(".hero"); });
+      .filter(function (el) { return !el.closest(".hero, .hseq"); });
     if (!targets.length) return;
     var queued = false, unsub = null;
 
@@ -1717,7 +1909,13 @@
     crossroadsProgress();
     crossroadsWall();
     if (!animate) {
+      // heroSeq belongs here too. Under reduced motion the stylesheet's own
+      // media query has already flattened the sequence, but when GSAP simply
+      // fails to load that query does not fire, and the sheet would otherwise
+      // leave a full-bleed plate stuck for 160vh with nothing scrubbing it.
+      // Called here, it puts is-static on and the opening is one still panel.
       failOpen(); slHero(); homeRun(); dayTrack(); newsTrack(); chart(); progressBar();
+      heroSeq();
       // No curtain and no pinning here, but the photographs still arrive late
       // and move everything below them, so an inbound anchor still needs
       // putting right once they have.
@@ -1730,8 +1928,10 @@
     slHero();
     homeRun();
     founderWords();
+    founderMottoReveal();
     dayTrack();
     newsTrack();
+    heroSeq();
     groundShift();
     progressBar();
     magnets();
@@ -1739,6 +1939,15 @@
     cursorRing();
     ticker();
     mottoDrift();
+
+    // A completed intro belongs to the tab, not to one document instance.
+    // Remove a freshly parsed curtain before heroIn() can prepare hidden lines,
+    // so refresh and non-bfcached Back navigation cannot flash and replay it.
+    if (!claimIntroVisit()) {
+      var repeatedCurtain = $("#curtain");
+      if (repeatedCurtain) repeatedCurtain.remove();
+      document.body.classList.remove("is-locked");
+    }
 
     // Set the hero's initial state before the curtain starts uncovering it,
     // then play the prepared timeline without hiding visible content again.

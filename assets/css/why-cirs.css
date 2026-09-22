@@ -7,6 +7,78 @@ body.why-cirs .saga--open{
   min-block-size:100svh;
 }
 
+/* The opening photograph is wider than a phone. Let the next chapter enter
+   the first frame instead of cropping the teacher and most of the lesson out. */
+@media (max-width:760px){
+  body.why-cirs .saga--open{
+    block-size:82vh;
+    block-size:82svh;
+    min-block-size:82vh;
+    min-block-size:82svh;
+  }
+  body.why-cirs .saga--open .saga__media img{object-position:28% 32%}
+}
+
+body.why-cirs .saga__eyebrow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  max-width:min(100%,44rem);
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.28);
+}
+
+body.why-cirs .saga__count{
+  flex:none;
+  color:rgba(255,255,255,.76);
+  font-variant-numeric:tabular-nums lining-nums;
+  letter-spacing:.08em;
+}
+
+body.why-cirs .saga__summary{
+  max-width:52ch;
+  margin-top:clamp(16px,2vw,24px);
+  color:rgba(255,255,255,.88);
+  font-size:clamp(1rem,1.4vw,1.16rem);
+  line-height:1.55;
+  text-wrap:pretty;
+  text-shadow:0 1px 14px rgba(14,11,18,.35);
+}
+
+body.why-cirs .saga__summary + .saga__more{margin-top:clamp(20px,2.4vw,30px)}
+body.why-cirs .panel__close{width:44px;height:44px}
+
+/* Let adjacent photographic chapters trade focus while the shared scroll
+   controller moves between them. The travel stays small: the photograph is
+   stable and only the editorial layer breathes out and back in. */
+body.why-cirs .saga__inner,
+body.why-cirs #facts>.wrap{
+  transition:opacity .28s var(--e),transform .4s var(--e2);
+}
+body.why-cirs.is-section-moving :is(.saga__inner,#facts>.wrap){will-change:opacity,transform}
+body.why-cirs .saga.is-section-leaving .saga__inner,
+body.why-cirs #facts.is-section-leaving>.wrap{
+  opacity:.35;
+  transform:translateY(var(--section-shift));
+}
+body.why-cirs .saga.is-section-entering .saga__inner,
+body.why-cirs #facts.is-section-entering>.wrap{
+  opacity:1;
+  transform:translateY(var(--section-shift));
+}
+
+@media (max-width:760px){
+  body.why-cirs .saga__eyebrow{gap:16px}
+  body.why-cirs .saga__summary{max-width:38ch}
+  body.why-cirs #facts .factrail>div:last-child{padding-right:64px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  body.why-cirs .saga__inner,
+  body.why-cirs #facts>.wrap{transition:none}
+}
+
 body.why-cirs .saga,
 body.why-cirs #facts{
   scroll-snap-align:start;
