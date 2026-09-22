@@ -28,9 +28,9 @@ plate, not as a stock photograph of somebody else.
 
 TO PUBLISH MORE.
 
-  A destination — add to DESTINATIONS. It appears as a point in the
-  constellation, a row in the index, and a filterable member of its region.
-  Give it a position; the field is art-directed, not laid out by algorithm.
+  A destination — add to DESTINATIONS. It appears as a point on the map,
+  a row in the index, and a filterable member of its region. Give it a
+  latitude and a longitude; the map places it and draws its route.
 
   An alumnus — add to ALUMNI. Name and one verified line is enough to
   publish; batch, institution, place and portrait all appear as soon as they
@@ -38,15 +38,20 @@ TO PUBLISH MORE.
 
   A quotation — add to VOICES, with the name of the person who said it.
 
-Nothing else has to change. The constellation, the region filters, the
-index, the counts and the editorial chapters all build from these lists.
+Nothing else has to change. The map, the region filters, the index, the
+counts and the editorial chapters all build from these lists.
 """
 
-import math
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import robinson          # noqa: E402  the projection, shared with make-worldmap.py
+import worldland         # noqa: E402  the coastline it has already projected
 
 # ------------------------------------------------------------------
-# The regions, in the order the constellation and the index use. The key
-# is what every point and row carries in data-region, and what the filter
+# The regions, in the order the map and the index use. The key is what
+# every point and row carries in data-region, and what the filter
 # buttons switch on.
 # ------------------------------------------------------------------
 REGIONS = [
@@ -57,39 +62,50 @@ REGIONS = [
 ]
 
 # ------------------------------------------------------------------
-# THE GALAXY
+# THE MAP
 #
-# The field is a spiral galaxy seen at an angle, with CIRS at the core
-# and every destination a star out along one of the two arms. It is not
-# a map and does not pretend to be one: the arms carry the regions in
-# groups, and a star's distance from the core is how far along its arm
-# it sits, not how far from Coimbatore anything is.
+# The field is a map of the world, drawn in Robinson (see
+# tools/robinson.py for why that projection and not a web one), with
+# CIRS on it where Coimbatore is and every destination where it is.
+# Distance on it means distance. Nothing is art-directed except which
+# side of a point its name sits on, and that only because five of the
+# nineteen are in Britain.
 #
-# The arm is a logarithmic spiral, r = R0 * e^(B*theta), projected as a
-# disc tilted away from the viewer — INCL is the cosine of that tilt.
-# ASPECT is the field's own 3:2, which is what turns a swing in percent
-# of the width into the same swing in percent of the height.
-#
-# These same six numbers are handed to alumni-journey.js on the field
-# element, so the stars it scatters lie along the same two arms as the
-# nineteen that are named. One spiral, written down once.
+# Positions come out of robinson.project() in viewBox units — the frame
+# is VB_W across and VB_H down — and go into the page as percentages of
+# the field, which is cut to exactly that ratio. One unit of the frame
+# is one unit in either direction: the projection is uniform, so a
+# nudge of 2 sideways and a nudge of 2 downward are the same distance.
 # ------------------------------------------------------------------
-SPIRAL_CX, SPIRAL_CY = 50.0, 50.0
-SPIRAL_R0, SPIRAL_B  = 6.10, 0.2182
-SPIRAL_ROT           = -0.55
-SPIRAL_INCL          = 0.70
-SPIRAL_ASPECT        = 1.5   # the field is 3:2
-SPIRAL_THETA_MIN     = 2.7
-SPIRAL_THETA_MAX     = 8.5
-_YK = SPIRAL_INCL * SPIRAL_ASPECT
+VB_W, VB_H = robinson.VB_W, robinson.VB_H
+
+# Siruvani, Coimbatore: the campus itself, not the city centre.
+ORIGIN_LAT, ORIGIN_LON = 10.95, 76.72
 
 
-def spiral(arm, theta):
-    """Where a point on an arm falls, as (x, y) in percent of the field."""
-    r = SPIRAL_R0 * math.exp(SPIRAL_B * theta)
-    a = theta + arm * math.pi + SPIRAL_ROT
-    return (SPIRAL_CX + r * math.cos(a),
-            SPIRAL_CY + r * math.sin(a) * _YK)
+def route(ax, ay, bx, by):
+    """A flight path from (ax, ay) to (bx, by), as a cubic bezier.
+
+    A straight line between two points on a flat map is not the way
+    anybody travels, and nineteen straight lines out of one point is a
+    starburst. These bow — always toward the top of the frame, because
+    that is the side a great circle leans on for every route on this
+    map — by a share of their own length, capped so that Coimbatore to
+    Chicago does not arc out of the picture.
+    """
+    vx, vy = bx - ax, by - ay
+    length = (vx * vx + vy * vy) ** 0.5
+    if length < 0.001:
+        return "M%.2f %.2f" % (ax, ay)
+    nx, ny = -vy / length, vx / length
+    if ny > 0:                      # keep the bow on the northern side
+        nx, ny = -nx, -ny
+    bow = min(length * 0.17, 13.0)
+    return "M%.2f %.2f C%.2f %.2f %.2f %.2f %.2f %.2f" % (
+        ax, ay,
+        ax + vx * 0.27 + nx * bow, ay + vy * 0.27 + ny * bow,
+        ax + vx * 0.73 + nx * bow, ay + vy * 0.73 + ny * bow,
+        bx, by)
 
 
 # ------------------------------------------------------------------
@@ -101,64 +117,81 @@ def spiral(arm, theta):
 #
 #   key       stable id, used by the panel and the index
 #   name      as it should read in full
-#   short     as it reads on the star, where space is tight
+#   short     as it reads on the map, where space is tight
 #   country   the country, spelled out
 #   region    one of the REGION keys
-#   arm       0 or 1 — which of the galaxy's two arms it lies on
-#   theta     how far along that arm, in radians from the core
-#
-# Regions sit in unbroken runs along an arm, innermost first, so the
-# grouping survives being wound into a spiral: arm 0 carries India and
-# then the United Kingdom, arm 1 carries Asia-Pacific and then the
-# United States.
+#   lat, lon  where the institution actually is
+#   nudge     (dx, dy) in frame units, and the ONLY licence taken with
+#             geography. Imperial and the LSE are two miles apart and
+#             would be one dot; so would NYU and Parsons, Northwestern
+#             and Chicago, NUS and NTU. Each is moved by a couple of
+#             frame units — a few pixels — so that both can be seen and
+#             both can be clicked. Nothing is moved further than that.
+#   label     (dx, dy, side) for the name: where it sits relative to its
+#             point, and which way it runs — "l" ends at that offset,
+#             "r" starts there, "c" is centred on it. A name further
+#             than a whisker from its point is joined to it by a leader,
+#             so no name is ever ambiguous about which point it belongs
+#             to. Five of these are in Britain, which is why the offsets
+#             are written down rather than computed.
 # ------------------------------------------------------------------
 DESTINATIONS = [
-    # ---- arm 0: India, then the United Kingdom ----
+    # ---- India ----
     ("iitm",        "IIT Madras", "IIT Madras",
-     "India", "india", 0, 2.700),
+     "India", "india", 13.01, 80.24, (0.4, 0.4), (4.8, 0.4, "r")),
     ("srcc",        "Shri Ram College of Commerce", "Shri Ram",
-     "India", "india", 0, 3.425),
+     "India", "india", 28.69, 77.21, (0.0, 0.0), (0.0, -5.0, "c")),
     ("nid",         "National Institute of Design", "NID",
-     "India", "india", 0, 4.150),
+     "India", "india", 23.03, 72.55, (0.0, 0.0), (-3.4, -0.6, "l")),
     ("cvv",         "Chinmaya Vishwa Vidyapeeth", "Chinmaya Vishwa Vidyapeeth",
-     "India", "india", 0, 4.875),
-    ("durham",      "Durham University", "Durham",
-     "United Kingdom", "uk", 0, 5.600),
-    ("manchester",  "The University of Manchester", "Manchester",
-     "United Kingdom", "uk", 0, 6.325),
-    ("warwick",     "University of Warwick", "Warwick",
-     "United Kingdom", "uk", 0, 7.050),
-    ("imperial",    "Imperial College London", "Imperial",
-     "United Kingdom", "uk", 0, 7.775),
-    ("lse",         "The London School of Economics and Political Science", "LSE",
-     "United Kingdom", "uk", 0, 8.500),
+     "India", "india", 9.98, 76.55, (-2.4, 2.4), (-4.6, 5.2, "l")),
 
-    # ---- arm 1: Asia-Pacific, then the United States ----
+    # ---- United Kingdom ----
+    ("durham",      "Durham University", "Durham",
+     "United Kingdom", "uk", 54.77, -1.58, (-0.4, -1.4), (-3.0, -3.2, "l")),
+    ("manchester",  "The University of Manchester", "Manchester",
+     "United Kingdom", "uk", 53.47, -2.23, (-1.4, -0.1), (-3.0, 0.0, "l")),
+    ("warwick",     "University of Warwick", "Warwick",
+     "United Kingdom", "uk", 52.38, -1.56, (-0.2, 1.0), (-3.0, 3.4, "l")),
+    ("imperial",    "Imperial College London", "Imperial",
+     "United Kingdom", "uk", 51.50, -0.18, (0.6, 1.6), (3.0, 2.6, "r")),
+    ("lse",         "The London School of Economics and Political Science", "LSE",
+     "United Kingdom", "uk", 51.51, -0.12, (1.4, -0.3), (3.0, -2.0, "r")),
+
+    # ---- Asia–Pacific ----
     ("nus",         "National University of Singapore", "NUS",
-     "Singapore", "apac", 1, 2.700),
+     "Singapore", "apac", 1.30, 103.78, (0.9, 0.7), (3.0, 1.8, "r")),
     ("ntu",         "Nanyang Technological University", "NTU",
-     "Singapore", "apac", 1, 3.344),
+     "Singapore", "apac", 1.35, 103.68, (-0.9, -0.7), (-3.0, 2.6, "l")),
     ("hkust",       "The Hong Kong University of Science and Technology", "HKUST",
-     "Hong Kong", "apac", 1, 3.989),
+     "Hong Kong", "apac", 22.34, 114.26, (0.0, 0.0), (3.2, 0.4, "r")),
+
+    # ---- United States ----
     ("northwestern", "Northwestern University", "Northwestern",
-     "United States", "us", 1, 4.633),
+     "United States", "us", 42.06, -87.69, (-0.9, -0.9), (-3.0, -5.2, "l")),
     ("chicago",     "University of Chicago", "Chicago",
-     "United States", "us", 1, 5.278),
+     "United States", "us", 41.79, -87.60, (0.2, 0.3), (-3.4, 1.0, "l")),
     ("purdue",      "Purdue University", "Purdue",
-     "United States", "us", 1, 5.922),
+     "United States", "us", 40.42, -86.91, (0.9, 1.0), (0.0, 4.4, "c")),
     ("virginia",    "University of Virginia", "Virginia",
-     "United States", "us", 1, 6.567),
+     "United States", "us", 38.03, -78.51, (0.0, 0.0), (2.8, 3.0, "r")),
     ("nyu",         "New York University", "NYU",
-     "United States", "us", 1, 7.211),
+     "United States", "us", 40.73, -73.99, (0.0, 0.2), (3.4, 0.6, "r")),
     ("parsons",     "The New School &mdash; Parsons", "Parsons",
-     "United States", "us", 1, 7.856),
+     "United States", "us", 40.74, -73.99, (-0.9, -0.9), (-3.0, -2.4, "l")),
     ("boston",      "Boston University", "Boston",
-     "United States", "us", 1, 8.500),
+     "United States", "us", 42.35, -71.11, (0.6, -0.8), (3.0, -2.2, "r")),
 ]
 
-# The core. Every arm is measured out from it, and it is where the page
-# puts CIRS: one beginning, and nineteen ways out of it.
-ORIGIN = (SPIRAL_CX, SPIRAL_CY)
+
+def place(lat, lon, nudge=(0.0, 0.0)):
+    """Where a destination's point falls, in frame units."""
+    x, y = robinson.project(lat, lon)
+    return (x + nudge[0], y + nudge[1])
+
+
+# Where every route starts, in frame units.
+ORIGIN = place(ORIGIN_LAT, ORIGIN_LON)
 
 # ------------------------------------------------------------------
 # The alumni the school has named, with the single line each was given.
@@ -344,66 +377,94 @@ def voice_count():
 
 
 # ==================================================================
-# The constellation
+# The map
 # ==================================================================
 
-def lines_svg():
-    """One path per destination, running out along its own arm from the core.
+def routes_svg():
+    """One flight path per destination, out of Siruvani, plus the leaders.
 
-    A straight line from the middle of a galaxy to a star would cut across
-    the arms; these lie along them, so lighting one traces the arm a
-    reader's eye is already following. They sit at almost nothing until
-    the star they belong to is asked about.
+    Both are .ajc__line and both carry data-line, so the script lights a
+    name's leader with its route and the filters dim the pair together —
+    there is one set of lines on this map, not two that could disagree.
 
-    Both SVGs on this field use viewBox "0 0 150 100" with
-    preserveAspectRatio="none". The field is 3:2, so that mapping is
-    uniform in both directions — a circle drawn in it is still a circle —
-    and a position in percent converts by (1.5x, y).
+    The viewBox is the projection's own frame and preserveAspectRatio is
+    left at its default, because the field is cut to exactly that ratio:
+    a route drawn here lands on the coastline drawn beside it.
     """
-    paths = []
-    for key, _n, _s, _c, region, arm, theta in DESTINATIONS:
-        pts = []
-        steps = 40
-        for i in range(steps + 1):
-            t = SPIRAL_THETA_MIN + (theta - SPIRAL_THETA_MIN) * i / steps
-            x, y = spiral(arm, t)
-            pts.append("%.2f %.2f" % (x * 1.5, y))
-        d = "M" + pts[0] + "".join(" L" + q for q in pts[1:])
-        paths.append(
-            '    <path class="ajc__line" data-region="%s" data-line="%s" d="%s"/>'
-            % (region, key, d))
-    return "\n".join(paths)
+    ox, oy = ORIGIN
+    out = []
+    for key, _n, _s, _c, region, lat, lon, nudge, label in DESTINATIONS:
+        x, y = place(lat, lon, nudge)
+        out.append(
+            '      <path class="ajc__line" data-region="%s" data-line="%s" d="%s"/>'
+            % (region, key, route(ox, oy, x, y)))
+
+        # The leader, from just outside the point to just short of the
+        # name. Under about a point and a half of frame there is nothing
+        # to lead: the name is already touching its point.
+        lx, ly, _side = label
+        dist = (lx * lx + ly * ly) ** 0.5
+        if dist > 2.6:
+            ux, uy = lx / dist, ly / dist
+            out.append(
+                '      <path class="ajc__line ajc__leader" data-region="%s" '
+                'data-line="%s" d="M%.2f %.2f L%.2f %.2f"/>'
+                % (region, key,
+                   x + ux * 1.5, y + uy * 1.5,
+                   x + lx - ux * 1.0, y + ly - uy * 1.0))
+    return "\n".join(out)
+
+
+def map_svg():
+    """The world under the routes: coastline only, no borders, no grid.
+
+    Borders would date the map and say nothing about where anybody
+    studied; a graticule would make it an instrument. What is wanted is
+    the shape of the land, far enough down in the dark that the nineteen
+    points are the brightest things in the frame.
+    """
+    return ('    <svg class="ajc__map" viewBox="0 0 %.4f %.4f" '
+            'aria-hidden="true" focusable="false">\n'
+            '      <path class="ajc__land" d="%s"/>\n'
+            '    </svg>' % (VB_W, VB_H, worldland.LAND))
 
 
 def constellation_html():
-    """The galaxy: two arms of stars, nineteen of which are named.
+    """The map: nineteen destinations, and the routes out to them.
 
-    The arms and the loose field are drawn by alumni-journey.js from the
-    spiral this file defines — handed over on the field element as
-    data-spiral — so the stars it scatters lie along the same two arms as
-    the nineteen named ones. The named ones are HTML buttons over the top,
-    because a button is the only thing reliably focusable, announceable
-    and clickable; an SVG <circle> with a tabindex is none of the three on
+    The named points are HTML buttons over the top of the SVG, because a
+    button is the only thing reliably focusable, announceable and
+    clickable; an SVG <circle> with a tabindex is none of the three on
     every browser that matters.
 
-    Below 900px the same buttons become a plain list. There is one DOM,
-    and no second markup path that can rot.
+    Offsets are written as cqw — hundredths of the field's own width —
+    so a name keeps the clearance it was placed with at every width the
+    map is drawn at. The field is the query container; see alumni.css.
+
+    Below 900px the same buttons become a plain list and the map is not
+    drawn: nineteen names over a world 360 pixels wide is a puzzle, not
+    a map. There is one DOM, and no second markup path that can rot.
     """
     ox, oy = ORIGIN
     total = len(DESTINATIONS)
     points = []
-    for i, (key, name, short, country, region, arm, theta) in enumerate(DESTINATIONS):
-        x, y = spiral(arm, theta)
+    for i, (key, name, short, country, region,
+            lat, lon, nudge, label) in enumerate(DESTINATIONS):
+        x, y = place(lat, lon, nudge)
+        lx, ly, side = label
         points.append('''      <li class="ajc__item" data-region="%s">
         <button type="button" class="ajc__pt" id="ajc-pt-%s"
-                style="--x:%.3f%%;--y:%.3f%%"
-                data-point="%s" data-region="%s"
+                style="--x:%.3f%%;--y:%.3f%%;--lx:%.3fcqw;--ly:%.3fcqw"
+                data-point="%s" data-region="%s" data-side="%s"
                 aria-expanded="false" aria-controls="ajc-panel">
           <span class="ajc__dot" aria-hidden="true"></span>
           <span class="ajc__label"><span class="ajc__name">%s</span><span class="ajc__country">%s</span></span>
           <span class="sr-only">Destination %d of %d. %s, %s. Open details.</span>
         </button>
-      </li>''' % (region, key, x, y, key, region, short, country,
+      </li>''' % (region, key,
+                  x / VB_W * 100, y / VB_H * 100,
+                  lx / VB_W * 100, ly / VB_W * 100,
+                  key, region, side, short, country,
                   i + 1, total, name, country))
 
     filters = ['      <button type="button" class="ajc__filter is-on" data-filter="all" '
@@ -422,11 +483,15 @@ def constellation_html():
     <p class="ajc__status" data-constellation-status role="status">Showing all %(total)d destinations.</p>
   </div>
 
-  <div class="ajc__field" data-constellation-field
-       data-spiral="%(cx).4f,%(cy).4f,%(r0).4f,%(b).4f,%(rot).4f,%(yk).4f,%(tmin).4f,%(tmax).4f">
-    <svg class="ajc__lines" viewBox="0 0 150 100" preserveAspectRatio="none"
+  <div class="ajc__field" data-constellation-field>
+%(map)s
+
+    <svg class="ajc__lines" viewBox="0 0 %(vw).4f %(vh).4f"
          aria-hidden="true" focusable="false">
+      <g class="ajc__routes">
 %(lines)s
+      </g>
+      <g class="ajc__flights" data-flights></g>
     </svg>
 
     <p class="ajc__origin" style="--x:%(ox).3f%%;--y:%(oy).3f%%" aria-hidden="true">
@@ -456,11 +521,11 @@ def constellation_html():
       </button>
     </div>
   </div>
-</div>''' % {"filters": "\n".join(filters), "total": total, "lines": lines_svg(),
-              "ox": ox, "oy": oy, "points": "\n".join(points),
-              "cx": SPIRAL_CX, "cy": SPIRAL_CY, "r0": SPIRAL_R0, "b": SPIRAL_B,
-              "rot": SPIRAL_ROT, "yk": _YK,
-              "tmin": SPIRAL_THETA_MIN, "tmax": SPIRAL_THETA_MAX}
+</div>''' % {"filters": "\n".join(filters), "total": total,
+              "map": map_svg(), "lines": routes_svg(),
+              "vw": VB_W, "vh": VB_H,
+              "ox": ox / VB_W * 100, "oy": oy / VB_H * 100,
+              "points": "\n".join(points)}
 
 
 # ==================================================================
@@ -477,7 +542,7 @@ def destinations_html():
     groups = []
     for region, label in REGIONS:
         rows = []
-        for key, name, _short, country, r, _arm, _theta in DESTINATIONS:
+        for key, name, _short, country, r, _lat, _lon, _n, _l in DESTINATIONS:
             if r != region:
                 continue
             search = name.replace("&mdash;", "-").lower() + " " + country.lower()
