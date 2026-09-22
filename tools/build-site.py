@@ -38,7 +38,7 @@ import mathchallenge
 import creativewriting
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=89"
+CACHE_BUST = "b=94"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -165,7 +165,7 @@ PAGES = {
         # photograph set into them — and brings its own sheet to do it.
         "banner": None,
         "sheet": "founder",
-        "cache_suffix": "-founder-15",
+        "cache_suffix": "-founder-16",
     },
     "why-cirs": {
         "barehead": True,
@@ -270,7 +270,8 @@ PAGES = {
         # oversized lettering with photographs dealt up through it. It carries
         # the page's h1 and its own id="top". That hero is off-white, so the
         # header cannot float over it in white lettering: hence litehead.
-        "litehead": True,
+        "sheet": "student-life",
+        "cache_suffix": "-student-life-9",
     },
     "sports": {
         "nav": "Our Sports",
@@ -331,15 +332,10 @@ PAGES = {
         "title": "Our Results",
         "description": "Board results, university placements and the record behind them at "
                        "Chinmaya International Residential School.",
-        "banner": ("Our results", "What the Years <em>Add Up To.</em>",
-                   "Board results, university placements, and the record behind them."),
-        "soon": ([("Class X, CBSE", "Results by year, with subject averages and distinctions"),
-                  ("Class XII, CBSE", "Results by year, across all three streams"),
-                  ("The IB Diploma", "Points, subject grades and the Diploma pass rate"),
-                  ("University placements", "Where the year group went, and on what")],
-                 "the board results by year, the subject averages and the distinctions, "
-                 "to be supplied by the examinations office",
-                 [("curriculum.html", "The curriculum"), ("alumni.html", "Where the Diploma takes them")]),
+        "sheet": "results",
+        "cache_suffix": "-results-12",
+        "uc": False,
+        "banner": None,
     },
     "our-laurels": {
         "nav": "Our Laurels",
@@ -450,7 +446,7 @@ PAGES = {
         # Admissions carries its own quiet, document-led layout beneath the
         # shared honeycomb hero. The sheet is scoped by body.admissions.
         "sheet": "admissions",
-        "cache_suffix": "-admissions-24",
+        "cache_suffix": "-admissions-25",
         "hero_split": False,
         "hero": ("Admissions", "Admissions <em>Open.</em>",
                  "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
@@ -1174,8 +1170,11 @@ def build(slug, page):
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
+    chrome = read("tools/partials/chrome.html")
+    if slug == "founder":
+        chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
-             read("tools/partials/chrome.html").rstrip("\n")]
+             chrome.rstrip("\n")]
     if slug == "crossroads":
         parts[-1] = parts[-1].replace('class="curtain"', 'class="curtain crossroads-intro-curtain"')
     drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
@@ -1243,6 +1242,10 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "why-cirs":
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
+    if slug == "student-life":
+        parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
+    if slug == "our-results":
+        parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
         parts.append(f'<script src="assets/js/admissions.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":

@@ -1154,7 +1154,7 @@ main{ position:relative; z-index:1; background:var(--paper); }
 /* Opening curtain. Removed from the document once it has played. */
 .curtain{
   position:fixed; inset:0; z-index:400;
-  background:var(--purple); color:#fff;
+  background:var(--purple-deep); color:#fff;
   display:grid; place-content:center; justify-items:center; gap:22px;
   text-align:center; padding:24px;
 }
