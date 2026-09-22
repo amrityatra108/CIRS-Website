@@ -38,7 +38,7 @@ import mathchallenge
 import creativewriting
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=67"
+CACHE_BUST = "b=89"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -174,7 +174,7 @@ PAGES = {
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
                        "Schools that carry it.",
         "sheet": "why-cirs",
-        "cache_suffix": "-why-cirs-6",
+        "cache_suffix": "-why-cirs-9",
         # No banner. The page used to open on a purple plate carrying "Why
         # CIRS." and a line about a community of knowledge, with the first
         # photograph below it. The photograph is the better opening, so it
@@ -233,10 +233,13 @@ PAGES = {
         "description": "Explore the CBSE and IB Diploma curricula at Chinmaya International "
                        "Residential School, with specialist teaching, holistic learning and a "
                        "residential environment.",
+        "sheet": "curriculum",
+        "cache_suffix": "-curriculum-2",
         "banner": ("Curriculum", "Two Curricula, <em>One Campus.</em>",
                    "CBSE from Grade V, and the International Baccalaureate Diploma in the final "
                    "two years."),
         "jump": True,
+        "uc": False,
     },
     # A child page of Curriculum, and the first page on this site whose slug
     # names a directory: it is written to curriculum/ib-diploma.html and
@@ -256,7 +259,7 @@ PAGES = {
         "sheet": "ibdp",
     },
     "student-life": {
-        "logintab": ("Student Login", "https://cirs.in/school/cirsmark/"),
+        "logintab": ("Student Portal", "https://cirs.in/school/"),
         "barehead": True,
         "nav": "Student Life",
         "title": "Student Life",
@@ -656,10 +659,22 @@ def article_html(page):
     by = (f'<p class="art__by">{esc(post["author"])}</p>' if post["author"]
           else '<p class="art__by"><em>[Byline &mdash; to be supplied by the '
                'Crossroads Editorial Board.]</em></p>')
+    image = ""
+    if post.get("image"):
+        dimensions = (f' width="{post["image_width"]}" height="{post["image_height"]}"'
+                      if post.get("image_width") and post.get("image_height") else "")
+        image = f'''    <figure class="art__hero">
+      <img src="assets/img/blog/{esc(post["image"], attr=True)}"
+           alt="{esc(post.get("image_alt", ""), attr=True)}"
+          {dimensions} decoding="async">
+    </figure>
+
+'''
     body = "\n".join(f"      <p>{esc(para)}</p>" for para in post["paragraphs"])
     return f'''<article class="art" id="top">
   <div class="artwrap">
     <header class="art__head">
+      <p class="art__back"><a href="blog.html"><span aria-hidden="true">&larr;</span> Back to the Blog</a></p>
       <p class="art__flag"><a href="blog.html">CIRS Blog</a> &rarr;
         <span>{esc(post["section"])}</span></p>
       <h1 class="art__title serif">{esc(post["title"])}</h1>
@@ -667,7 +682,7 @@ def article_html(page):
       <p class="art__where">The Crossroads, Issue&nbsp;{issue}{when}</p>
     </header>
 
-    <div class="art__body">
+{image}    <div class="art__body">
 {body}
     </div>
 
@@ -694,11 +709,28 @@ def banner_html(page):
 </section>'''
 
 
-HOME_TAB = '''<a class="htab" href="index.html" data-magnetic>
+HOME_TAB = '''<a class="htab" href="index.html" data-magnetic aria-label="Home">
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
         <span class="htab__label">Home</span>
+      </a>'''
+
+
+NEWS_TAB = '''<a class="htab htab--news" href="news.html" data-magnetic aria-label="News">
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
+        </span>
+        <span class="htab__label">News</span>
+      </a>'''
+
+
+STUDENT_PORTAL_TAB = '''<a class="htab htab--portal" href="https://cirs.in/school/"
+         target="_blank" rel="noopener" data-magnetic aria-label="Open Student Portal in a new tab">
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.2 6.2 9 2.8l6.8 3.4L9 9.6 2.2 6.2Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.6 7.5v4.1c1.2 1.1 2.7 1.7 4.4 1.7s3.2-.6 4.4-1.7V7.5M15.8 6.3v4.3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="htab__label">Student Portal</span>
       </a>'''
 
 
@@ -771,7 +803,7 @@ def jump_html(body):
       <p>On this page</p>
 {links}
   </div>
-  <button type="button" class="jump__toggle" aria-expanded="false" aria-controls="jumpPanel">
+  <button type="button" class="jump__toggle" aria-label="On this page" aria-expanded="false" aria-controls="jumpPanel">
     <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     <span>On this page</span>
   </button>
@@ -1150,6 +1182,7 @@ def build(slug, page):
     # The home page needs no Home tab — the wordmark already leads here, and a
     # Home link on Home is a link to nowhere.
     header = (read("tools/partials/header.html")
+              .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html")
               .replace("{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
               .replace("{{HEADER_STATE}}",
                        (" is-stuck" if lite else "") + (" is-bare" if bare else ""))
@@ -1239,6 +1272,7 @@ for _post in blogposts.POSTS:
         "title": esc(_post["title"], attr=True) + " | CIRS Blog",
         "description": esc(_post["excerpt"][:180], attr=True),
         "sheet": "blog",
+        "cache_suffix": "-blog-2",
         "uc": False,
         # An article opens on paper, so the header cannot float over it in
         # white lettering. The Blog's own masthead is dark and does not.
