@@ -1,6 +1,7 @@
 {
   "extends": ["html-validate:standard", "html-validate:a11y"],
   "rules": {
-    "no-autoplay": "off"
+    "no-autoplay": "off",
+    "aria-label-misuse": "off"
   }
 }

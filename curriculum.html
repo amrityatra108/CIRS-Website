@@ -20,19 +20,20 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=65">
-<link rel="stylesheet" href="assets/css/cirs.css?b=65">
-<link rel="stylesheet" href="assets/css/pages.css?b=65">
+<link rel="stylesheet" href="assets/css/fonts.css?b=95-curriculum-2">
+<link rel="stylesheet" href="assets/css/cirs.css?b=95-curriculum-2">
+<link rel="stylesheet" href="assets/css/pages.css?b=95-curriculum-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=65">
+<link rel="stylesheet" href="assets/css/curriculum.css?b=95-curriculum-2">
+<link rel="stylesheet" href="assets/css/typography.css?b=95-curriculum-2">
 </head>
 
-<body>
+<body class="curriculum">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -64,14 +65,14 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header" id="header">
+<header class="header is-first-section" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
            It stays a button so the keyboard and screen readers get a control
            that announces its expanded state; hover opens it for a mouse. -->
       <div class="enq" id="enq">
-        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic
+        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic aria-label="Enquire"
                 aria-expanded="false" aria-controls="enqPanel">
           <span class="htab__icon" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -107,9 +108,11 @@
                live and what is not, rather than straight out to the external
                system — a parent who lands on a login screen with no warning
                cannot tell the school's old system from the new site.
-               Student Life is a long page and its door sits at the foot of
-               it, so that one is anchored; Parent Portal is short enough to
-               open at the top. -->
+
+               They carry no second line. "Through the Parent Portal" under
+               two rows that both went to the Parent Portal was restating the
+               destination the row already is, and it made three plain doors
+               look like three explanations. -->
           <p class="enq__title enq__title--sep sc">Portals</p>
 
           <a class="enq__row" href="parent-portal.html">
@@ -118,7 +121,6 @@
             </span>
             <span class="enq__txt">
               <b>Fee payment</b>
-              <small>Through the Parent Portal</small>
             </span>
           </a>
 
@@ -128,30 +130,41 @@
             </span>
             <span class="enq__txt">
               <b>Parent Login</b>
-              <small>Through the Parent Portal</small>
             </span>
           </a>
 
-          <a class="enq__row" href="student-life.html#student-login">
+          <a class="enq__row" href="https://cirs.in/school/cirsmark/"
+             target="_blank" rel="noopener">
             <span class="enq__ico" aria-hidden="true">
               <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M11 4.4 19.6 8 11 11.6 2.4 8 11 4.4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5.8 10v4.4c0 1.3 2.3 2.4 5.2 2.4s5.2-1.1 5.2-2.4V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             </span>
             <span class="enq__txt">
               <b>Student Login</b>
-              <small>Through Student Life</small>
             </span>
           </a>
 
           <p class="enq__title enq__title--sep sc">Follow CIRS</p>
           <div class="enq__social">
-            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener">Facebook</a>
-            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener">YouTube</a>
-            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener"
+               aria-label="Instagram (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="enq__social-dot" cx="17.4" cy="6.7" r="1.1"/></svg>
+            </a>
+            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener"
+               aria-label="Facebook (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.8l.45-3.2H13.7V7.75c0-.93.3-1.56 1.64-1.56H17V3.3a22 22 0 0 0-2.43-.13c-2.4 0-4.05 1.47-4.05 4.17V9.8H7.8V13h2.72v8h3.18Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener"
+               aria-label="YouTube (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.15a3 3 0 0 0-2.1-2.12C17.05 5.5 12 5.5 12 5.5s-5.05 0-6.9.53A3 3 0 0 0 3 8.15a31 31 0 0 0 0 7.7 3 3 0 0 0 2.1 2.12c1.85.53 6.9.53 6.9.53s5.05 0 6.9-.53a3 3 0 0 0 2.1-2.12 31 31 0 0 0 0-7.7Z"/><path class="enq__social-play" d="m10 15.25 5-3.25-5-3.25v6.5Z"/></svg>
+            </a>
+            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener"
+               aria-label="LinkedIn (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 8.4H3.3V21h3.3V8.4ZM5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8.2 5.4H10V21h3.2v-6.25c0-1.65.32-3.25 2.37-3.25 2.02 0 2.05 1.9 2.05 3.36V21H21v-6.92c0-3.4-.73-6.01-4.7-6.01-1.9 0-3.18 1.04-3.7 2.02h-.04V8.4h.64Z"/></svg>
+            </a>
           </div>
         </div>
       </div>
-      <a class="htab" href="index.html" data-magnetic>
+      <a class="htab" href="index.html" data-magnetic aria-label="Home">
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -159,7 +172,7 @@
       </a>
     </div>
 
-    <a class="brand" href="index.html">
+    <a class="brand" href="index.html" aria-label="Chinmaya International Residential School home">
       <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
       <span class="brand__txt">
         <span class="brand__name">Chinmaya International Residential School</span>
@@ -253,129 +266,147 @@
     <p class="lead">CBSE from Grade V, and the International Baccalaureate Diploma in the final two years.</p>
   </div>
 </section>
-<section class="section" id="curriculum">
+<section class="section curriculum-choice" id="curriculum">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">The curriculum</span></p>
-      <p class="feature__tag">Student-centred learning</p>
-      <h2 class="serif h2" data-split>Two curricula, <em>each taught by specialists.</em></h2>
-      <p class="lead">Families choose the pathway, not the school. CBSE classrooms are led by
-        subject teachers for the national board; IB classrooms by teachers who are IB-trained,
-        several of them serving as IB examiners &mdash; value- and culture-based education
-        delivered with current methodology and technology, whichever curriculum a student takes.</p>
+    <div class="curriculum-choice__intro">
+      <p class="marker"><span class="sc">Choose a pathway</span></p>
+      <h2 class="serif h2" data-split>Two paths through <em>one education.</em></h2>
+      <p class="lead">Families choose the pathway that fits the learner. Both are taught by
+        specialists on the same residential campus, with value education running alongside the
+        academic timetable.</p>
     </div>
+
+    <nav class="curriculum-paths" aria-label="Choose a curriculum pathway">
+      <a class="curriculum-paths__option curriculum-paths__option--cbse" href="#cbse">
+        <span class="curriculum-paths__board">National curriculum</span>
+        <span class="curriculum-paths__years">Grades V&ndash;XII</span>
+        <strong class="serif">CBSE</strong>
+        <span class="curriculum-paths__summary">Board examinations in Grades X and XII, followed
+          by a choice of three senior streams.</span>
+        <span class="curriculum-paths__action">Explore CBSE</span>
+      </a>
+      <a class="curriculum-paths__option curriculum-paths__option--ib" href="#ib">
+        <span class="curriculum-paths__board">International curriculum</span>
+        <span class="curriculum-paths__years">Grades XI&ndash;XII</span>
+        <strong class="serif">IB Diploma</strong>
+        <span class="curriculum-paths__summary">Six subject groups and the Diploma core, with
+          university counselling continuing from Grade X.</span>
+        <span class="curriculum-paths__action">Explore the IB Diploma</span>
+      </a>
+    </nav>
   </div>
 </section>
 
-<section class="section on-paper-2" id="cbse">
+<section class="section curriculum-path curriculum-path--cbse" id="cbse">
   <div class="wrap">
-    <div class="sec-head rv">
+    <header class="curriculum-path__head">
       <p class="marker"><span class="sc">Central Board of Secondary Education</span></p>
       <h2 class="serif h2" data-split>CBSE, from Grade V <em>to Grade XII.</em></h2>
-    </div>
+    </header>
 
-    <div class="prog">
-      <article class="prog__card rv">
-        <figure class="img-reveal"><img src="assets/img/academic-block.jpg" alt="The academic block at CIRS, its verandah running the length of the lawn" width="1400" height="325" loading="lazy"></figure>
-        <div class="prog__head">
-          <span class="prog__idx">01</span>
-          <span class="sc">New Delhi</span>
-        </div>
+    <div class="curriculum-path__story">
+      <figure class="curriculum-path__image img-reveal">
+        <img src="assets/img/academic-block.jpg"
+             alt="The academic block at CIRS, its verandah running the length of the lawn"
+             width="1400" height="325" loading="lazy" decoding="async">
+      </figure>
+      <div class="curriculum-path__body">
+        <p class="curriculum-path__label">Affiliated in New Delhi</p>
         <h3 class="serif h3">The national pathway, kept open throughout</h3>
-        <p class="copy">Affiliated to the CBSE, New Delhi, with board examinations at Grades X and
-          XII and English as the medium throughout. Senior students choose between Engineering,
-          Medicine and Management streams.</p>
-        <div class="prog__meta">
-          <span>Grades <b>V&ndash;XII</b></span>
-          <span>Board years <b>X &amp; XII</b></span>
-          <span>Streams <b>Three</b></span>
-        </div>
-      </article>
-    </div>
+        <p class="copy">Affiliated to the CBSE, New Delhi, with English as the medium throughout.
+          Board examinations take place in Grades X and XII; senior students choose between
+          Engineering, Medicine and Management streams.</p>
 
-    <p class="note rv" style="margin-top:24px"><em>[Placeholder &mdash; the subject offering by
-      grade, the stream combinations and the CBSE affiliation particulars, to be supplied by the
-      school.]</em></p>
+        <dl class="curriculum-facts">
+          <div><dt>Grades</dt><dd>V&ndash;XII</dd></div>
+          <div><dt>Board years</dt><dd>X and XII</dd></div>
+          <div><dt>Senior streams</dt><dd>Three</dd></div>
+        </dl>
+
+        <div class="curriculum-path__actions">
+          <a class="btn btn--primary" href="mailto:info@cirschool.org?subject=CBSE%20subjects%20at%20CIRS">Ask about CBSE subjects</a>
+          <a class="curriculum-text-link" href="admissions.html#apply">See the admissions process</a>
+        </div>
+
+        <div class="curriculum-pending" role="note">
+          <strong>Awaiting school confirmation</strong>
+          <span>The subject offering by grade, senior stream combinations and CBSE affiliation
+            particulars will be added when supplied by the school.</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="section" id="ib">
+<section class="section curriculum-path curriculum-path--ib" id="ib">
   <div class="wrap">
-    <div class="sec-head rv">
+    <header class="curriculum-path__head">
       <p class="marker"><span class="sc">International Baccalaureate, Geneva</span></p>
       <h2 class="serif h2" data-split>The IB Diploma, <em>Grades XI and XII.</em></h2>
-    </div>
+    </header>
 
-    <div class="prog">
-      <article class="prog__card rv">
-        <figure class="img-reveal"><img src="assets/img/walkway.jpg" alt="CIRS students walking the lamp-lined garden path between buildings" width="1050" height="575" loading="lazy"></figure>
-        <div class="prog__head">
-          <span class="prog__idx">02</span>
-          <span class="sc">The seventh school in India</span>
-        </div>
+    <div class="curriculum-path__story">
+      <figure class="curriculum-path__image img-reveal">
+        <img src="assets/img/walkway.jpg"
+             alt="CIRS students walking the lamp-lined garden path between buildings"
+             width="1050" height="575" loading="lazy" decoding="async">
+      </figure>
+      <div class="curriculum-path__body">
+        <p class="curriculum-path__label">The seventh school in India</p>
         <h3 class="serif h3">Six subject groups, and the core</h3>
         <p class="copy">CIRS was the seventh school in India authorised by the International
           Baccalaureate. The two-year Diploma spans six subject groups &mdash; three or four at
-          Higher Level &mdash; built around the Extended Essay, Theory of Knowledge and CAS.
-          Every IB teacher is IB-trained, several serve as examiners for the programme, and
-          university counselling continues through Naviance from Grade X.</p>
-        <div class="prog__meta">
-          <span>Grades <b>XI&ndash;XII</b></span>
-          <span>In India <b>7th school</b></span>
-          <span>Counselling <b>Naviance</b></span>
-        </div>
-        <p class="prog__more">
-          <a class="btn btn--primary" href="curriculum/ib-diploma.html">Explore IB Diploma
-            <span aria-hidden="true">&rarr;</span></a>
-        </p>
-      </article>
-    </div>
+          Higher Level &mdash; built around the Extended Essay, Theory of Knowledge and CAS. Every
+          IB teacher is IB-trained, several serve as examiners, and university counselling
+          continues through Naviance from Grade X.</p>
 
-    <p class="note rv" style="margin-top:24px">The six subject groups, the core, the residential
-      two years and how the Diploma prepares a student for university are set out in full on the
-      <a href="curriculum/ib-diploma.html">IB Diploma page</a>. <em>[Placeholder &mdash; the
-      subjects offered in each of the six groups, and which are available at Higher Level, to be
-      supplied by the IB Coordinator.]</em></p>
+        <dl class="curriculum-facts">
+          <div><dt>Grades</dt><dd>XI&ndash;XII</dd></div>
+          <div><dt>In India</dt><dd>7th school</dd></div>
+          <div><dt>Counselling</dt><dd>Naviance</dd></div>
+        </dl>
+
+        <div class="curriculum-path__actions">
+          <a class="btn btn--primary" href="curriculum/ib-diploma.html">Explore the full IB Diploma</a>
+          <a class="curriculum-text-link" href="mailto:info@cirschool.org?subject=IB%20Diploma%20subjects%20at%20CIRS">Ask about IB subjects</a>
+        </div>
+
+        <div class="curriculum-pending" role="note">
+          <strong>Awaiting school confirmation</strong>
+          <span>The subjects offered in each group, including Higher Level availability, will be
+            added when supplied by the IB Coordinator.</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="section on-paper-2" id="value">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Across both</span></p>
-      <h2 class="serif h2" data-split>Value education, <em>on the same timetable.</em></h2>
-      <p class="lead">Value education runs across every grade alongside the academic timetable,
-        from Bal Bhagavatam in the lower school to selected portions of the Bhagavad Geeta in the
-        senior years.</p>
+<section class="section curriculum-values on-purple" id="value">
+  <div class="wrap curriculum-values__inner">
+    <p class="marker"><span class="sc">Across both pathways</span></p>
+    <h2 class="serif h2" data-split>Value education belongs <em>on the same timetable.</em></h2>
+    <p class="lead">Value education runs across every grade alongside academic study, from Bal
+      Bhagavatam in the lower school to selected portions of the Bhagavad Geeta in the senior
+      years.</p>
+    <div class="curriculum-values__actions">
+      <a class="btn btn--primary btn--lg" href="admissions.html#apply">Understand admissions</a>
+      <a class="btn btn--ghost btn--lg" href="mailto:info@cirschool.org?subject=Choosing%20a%20curriculum%20at%20CIRS">Discuss the two pathways</a>
     </div>
   </div>
 </section>
 <nav class="jump" aria-label="On this page">
   <div class="jump__panel" id="jumpPanel">
       <p>On this page</p>
-      <a href="#curriculum">The curriculum</a>
+      <a href="#curriculum">Choose a pathway</a>
       <a href="#cbse">Central Board of Secondary Education</a>
       <a href="#ib">International Baccalaureate, Geneva</a>
-      <a href="#value">Across both</a>
+      <a href="#value">Across both pathways</a>
   </div>
-  <button type="button" class="jump__toggle" aria-expanded="false" aria-controls="jumpPanel">
+  <button type="button" class="jump__toggle" aria-label="On this page" aria-expanded="false" aria-controls="jumpPanel">
     <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     <span>On this page</span>
   </button>
 </nav>
-<section class="uc">
-  <div class="wrap uc__inner">
-    <span class="uc__mark" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
-    </span>
-    <div>
-      <p class="uc__label">Under construction</p>
-      <p class="uc__text">This page is still being written. Photographs, names and figures marked
-        in brackets are placeholders awaiting the school, and more will be added here in the weeks
-        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
-    </div>
-  </div>
-</section>
 </main>
 <div class="footer-wrap">
 <footer class="footer">
@@ -454,10 +485,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=65" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=65" defer></script>
-<script src="assets/vendor/lenis.min.js?b=65" defer></script>
-<script src="assets/js/cirs.js?b=65" defer></script>
-<script src="assets/js/pages.js?b=65" defer></script>
+<script src="assets/vendor/gsap.min.js?b=95-curriculum-2" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=95-curriculum-2" defer></script>
+<script src="assets/vendor/lenis.min.js?b=95-curriculum-2" defer></script>
+<script src="assets/js/cirs.js?b=95-curriculum-2" defer></script>
+<script src="assets/js/pages.js?b=95-curriculum-2" defer></script>
 </body>
 </html>
