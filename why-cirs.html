@@ -20,11 +20,11 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=67-why-cirs-6">
-<link rel="stylesheet" href="assets/css/cirs.css?b=67-why-cirs-6">
-<link rel="stylesheet" href="assets/css/pages.css?b=67-why-cirs-6">
-<link rel="stylesheet" href="assets/css/why-cirs.css?b=67-why-cirs-6">
-<link rel="stylesheet" href="assets/css/typography.css?b=67-why-cirs-6">
+<link rel="stylesheet" href="assets/css/fonts.css?b=89-why-cirs-9">
+<link rel="stylesheet" href="assets/css/cirs.css?b=89-why-cirs-9">
+<link rel="stylesheet" href="assets/css/pages.css?b=89-why-cirs-9">
+<link rel="stylesheet" href="assets/css/why-cirs.css?b=89-why-cirs-9">
+<link rel="stylesheet" href="assets/css/typography.css?b=89-why-cirs-9">
 </head>
 
 <body class="why-cirs">
@@ -59,14 +59,14 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header is-bare" id="header">
+<header class="header is-first-section is-bare" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
            It stays a button so the keyboard and screen readers get a control
            that announces its expanded state; hover opens it for a mouse. -->
       <div class="enq" id="enq">
-        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic
+        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic aria-label="Enquire"
                 aria-expanded="false" aria-controls="enqPanel">
           <span class="htab__icon" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -139,14 +139,26 @@
 
           <p class="enq__title enq__title--sep sc">Follow CIRS</p>
           <div class="enq__social">
-            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener">Facebook</a>
-            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener">YouTube</a>
-            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener"
+               aria-label="Instagram (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="enq__social-dot" cx="17.4" cy="6.7" r="1.1"/></svg>
+            </a>
+            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener"
+               aria-label="Facebook (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.8l.45-3.2H13.7V7.75c0-.93.3-1.56 1.64-1.56H17V3.3a22 22 0 0 0-2.43-.13c-2.4 0-4.05 1.47-4.05 4.17V9.8H7.8V13h2.72v8h3.18Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener"
+               aria-label="YouTube (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.15a3 3 0 0 0-2.1-2.12C17.05 5.5 12 5.5 12 5.5s-5.05 0-6.9.53A3 3 0 0 0 3 8.15a31 31 0 0 0 0 7.7 3 3 0 0 0 2.1 2.12c1.85.53 6.9.53 6.9.53s5.05 0 6.9-.53a3 3 0 0 0 2.1-2.12 31 31 0 0 0 0-7.7Z"/><path class="enq__social-play" d="m10 15.25 5-3.25-5-3.25v6.5Z"/></svg>
+            </a>
+            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener"
+               aria-label="LinkedIn (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 8.4H3.3V21h3.3V8.4ZM5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8.2 5.4H10V21h3.2v-6.25c0-1.65.32-3.25 2.37-3.25 2.02 0 2.05 1.9 2.05 3.36V21H21v-6.92c0-3.4-.73-6.01-4.7-6.01-1.9 0-3.18 1.04-3.7 2.02h-.04V8.4h.64Z"/></svg>
+            </a>
           </div>
         </div>
       </div>
-      <a class="htab" href="index.html" data-magnetic>
+      <a class="htab" href="index.html" data-magnetic aria-label="Home">
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -154,7 +166,7 @@
       </a>
     </div>
 
-    <a class="brand" href="index.html">
+    <a class="brand" href="index.html" aria-label="Chinmaya International Residential School home">
       <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
       <span class="brand__txt">
         <span class="brand__name">Chinmaya International Residential School</span>
@@ -248,7 +260,7 @@
          width="2000" height="1250" fetchpriority="high">
   </div>
   <div class="wrap saga__inner">
-    <p class="saga__eyebrow">Chinmaya International Residential School</p>
+    <p class="saga__eyebrow"><span>Why CIRS</span><span class="saga__count" aria-hidden="true">01 / 08</span></p>
     <h1 class="saga__line">The future of our world rests upon the quality of its youth.
       <em>Quality comes through care and attention.</em></h1>
     <p class="saga__by">Swami Chinmayananda, whose vision the school was built on</p>
@@ -261,9 +273,10 @@
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
-    <p class="saga__eyebrow">Since 1996</p>
-    <p class="saga__line">It opened with <em>ninety-six students.</em></p>
-    <button type="button" class="saga__more" data-panel="panel-founding">Know more</button>
+    <p class="saga__eyebrow"><span>Since 1996</span><span class="saga__count" aria-hidden="true">02 / 08</span></p>
+    <h2 class="saga__line">It opened with <em>ninety-six students.</em></h2>
+    <p class="saga__summary">CIRS was inaugurated on 6 June 1996 as an undertaking of the Central Chinmaya Mission Trust.</p>
+    <button type="button" class="saga__more" data-panel="panel-founding" aria-haspopup="dialog" aria-controls="panel-founding">Discover the beginning</button>
   </div>
 </section>
 
@@ -273,9 +286,10 @@
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
-    <p class="saga__eyebrow">A hundred acres</p>
-    <p class="saga__line">Eighty of them were <em>left to the forest.</em></p>
-    <button type="button" class="saga__more" data-panel="panel-forest">Know more</button>
+    <p class="saga__eyebrow"><span>A hundred acres</span><span class="saga__count" aria-hidden="true">03 / 08</span></p>
+    <h2 class="saga__line">Eighty of them were <em>left to the forest.</em></h2>
+    <p class="saga__summary">The campus sits in the Siruvani foothills, with roughly eighty acres left to native flora and fauna.</p>
+    <button type="button" class="saga__more" data-panel="panel-forest" aria-haspopup="dialog" aria-controls="panel-forest">Explore the campus</button>
   </div>
 </section>
 
@@ -285,9 +299,10 @@
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
-    <p class="saga__eyebrow">The motto</p>
-    <p class="saga__line">Knowledge. Service. <em>Skill.</em></p>
-    <button type="button" class="saga__more" data-panel="panel-motto">Know more</button>
+    <p class="saga__eyebrow"><span>The motto</span><span class="saga__count" aria-hidden="true">04 / 08</span></p>
+    <h2 class="saga__line">Knowledge. Service. <em>Skill.</em></h2>
+    <p class="saga__summary">Knowledge is gained to serve the world efficiently, with compassion and dedication.</p>
+    <button type="button" class="saga__more" data-panel="panel-motto" aria-haspopup="dialog" aria-controls="panel-motto">Read the motto</button>
   </div>
 </section>
 
@@ -297,9 +312,10 @@
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
-    <p class="saga__eyebrow">Boarding</p>
-    <p class="saga__line">The part of the education that is <em>not timetabled.</em></p>
-    <button type="button" class="saga__more" data-panel="panel-boarding">Know more</button>
+    <p class="saga__eyebrow"><span>Boarding</span><span class="saga__count" aria-hidden="true">05 / 08</span></p>
+    <h2 class="saga__line">The part of the education that is <em>not timetabled.</em></h2>
+    <p class="saga__summary">Students from twenty-four Indian states and twenty countries share one residential community.</p>
+    <button type="button" class="saga__more" data-panel="panel-boarding" aria-haspopup="dialog" aria-controls="panel-boarding">See boarding life</button>
   </div>
 </section>
 
@@ -309,9 +325,10 @@
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
-    <p class="saga__eyebrow">The vision</p>
-    <p class="saga__line">Competent, sensitive, <em>ethical.</em></p>
-    <button type="button" class="saga__more" data-panel="panel-vision">Know more</button>
+    <p class="saga__eyebrow"><span>The vision</span><span class="saga__count" aria-hidden="true">06 / 08</span></p>
+    <h2 class="saga__line">Competent, sensitive, <em>ethical.</em></h2>
+    <p class="saga__summary">Academic proficiency and character development are treated as one education.</p>
+    <button type="button" class="saga__more" data-panel="panel-vision" aria-haspopup="dialog" aria-controls="panel-vision">Explore the vision</button>
   </div>
 </section>
 
@@ -321,9 +338,10 @@
          width="1200" height="1500" loading="lazy">
   </div>
   <div class="wrap saga__inner">
-    <p class="saga__eyebrow">Junior School</p>
-    <p class="saga__line">Where curiosity gets <em>its first push.</em></p>
-    <button type="button" class="saga__more" data-panel="panel-junior">Know more</button>
+    <p class="saga__eyebrow"><span>Junior School</span><span class="saga__count" aria-hidden="true">07 / 08</span></p>
+    <h2 class="saga__line">Where curiosity gets <em>its first push.</em></h2>
+    <p class="saga__summary">Grade V begins a broad exposure to music, sport and the sciences alongside the CBSE curriculum.</p>
+    <button type="button" class="saga__more" data-panel="panel-junior" aria-haspopup="dialog" aria-controls="panel-junior">Explore Junior School</button>
   </div>
 </section>
 
@@ -333,9 +351,10 @@
          width="1200" height="1500" loading="lazy">
   </div>
   <div class="wrap saga__inner">
-    <p class="saga__eyebrow">From Grade XI</p>
-    <p class="saga__line">Two boards. <em>One ambition.</em></p>
-    <button type="button" class="saga__more" data-panel="panel-senior">Know more</button>
+    <p class="saga__eyebrow"><span>From Grade XI</span><span class="saga__count" aria-hidden="true">08 / 08</span></p>
+    <h2 class="saga__line">Two boards. <em>One ambition.</em></h2>
+    <p class="saga__summary">Students choose CBSE pathways or the IB Diploma from Grade XI.</p>
+    <button type="button" class="saga__more" data-panel="panel-senior" aria-haspopup="dialog" aria-controls="panel-senior">Explore Senior School</button>
   </div>
 </section>
 
@@ -570,11 +589,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=67-why-cirs-6" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=67-why-cirs-6" defer></script>
-<script src="assets/vendor/lenis.min.js?b=67-why-cirs-6" defer></script>
-<script src="assets/js/cirs.js?b=67-why-cirs-6" defer></script>
-<script src="assets/js/pages.js?b=67-why-cirs-6" defer></script>
-<script src="assets/js/why-cirs.js?b=67-why-cirs-6" defer></script>
+<script src="assets/vendor/gsap.min.js?b=89-why-cirs-9" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=89-why-cirs-9" defer></script>
+<script src="assets/vendor/lenis.min.js?b=89-why-cirs-9" defer></script>
+<script src="assets/js/cirs.js?b=89-why-cirs-9" defer></script>
+<script src="assets/js/pages.js?b=89-why-cirs-9" defer></script>
+<script src="assets/js/why-cirs.js?b=89-why-cirs-9" defer></script>
 </body>
 </html>

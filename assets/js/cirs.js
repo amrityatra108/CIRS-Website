@@ -326,6 +326,18 @@
       .to(curtain, { yPercent: -100, duration: .95, ease: "expo.inOut" }, "-=.1");
   }
 
+  function claimIntroVisit() {
+    var key = "cirs-intro-complete";
+    try {
+      if (window.sessionStorage.getItem(key) === "1") return false;
+      window.sessionStorage.setItem(key, "1");
+    } catch (err) {
+      // Storage can be unavailable in hardened/private contexts. In that case
+      // retain the existing one-visit behaviour rather than blocking startup.
+    }
+    return true;
+  }
+
   /* ==========================================================
      Hero
      ========================================================== */
@@ -872,9 +884,9 @@
   /* ==========================================================
      The run — the home page's horizontal passage
      The section pins at the full height of the window and a
-     780vw stage is scrubbed across it. Items are placed on that
-     stage absolutely, at three heights, so the run reads as a
-     space rather than a row.
+     measured gallery stage is scrubbed across it. Every image and
+     text panel owns a separate cell; 3D depth never changes layout
+     or allows neighbouring content to collide.
 
      Parallax is measured against the middle of the window, not
      against how far the stage has travelled. Multiplying the
@@ -924,10 +936,8 @@
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
     var HOLD = 0.10;
-    // The stage is 780vw. Scrolled one for one that is eleven screens
-    // between the hero and the film, which is a wall rather than a
-    // passage; at half, the whole run passes in about six. It is the one
-    // number to change if the run should move more slowly.
+    // Move the measured gallery at half pace so the photographs have
+    // enough time to turn through the cylindrical field.
     var PACE = 0.5;
     var PARALLAX = 0.30;
 
@@ -939,10 +949,12 @@
       var layers = $$("[data-depth]", stage).map(function (el) {
         var d = parseFloat(el.getAttribute("data-depth")) || 1;
         var ghost = el.classList.contains("hghost");
+        var frame = el.classList.contains("hframe");
         return {
           el: el,
           d: d,
           ghost: ghost,
+          frame: frame,
           // An item asking for the middle band is placed at top:50% and
           // has to come back up by half its own height. That cannot live
           // in the stylesheet: the parallax rewrites the whole transform
@@ -984,16 +996,29 @@
         for (var i = 0; i < layers.length; i++) {
           var L = layers[i];
           var from = L.base + stageX - mid;
+          var statement = !L.frame && !L.ghost;
+          // Bend photographs around a shallow horizontal cylinder. The card
+          // nearest the lens faces forward; cards towards either edge turn
+          // inward, recede and follow a small vertical arc. Text and ghost
+          // layers retain the calmer parallax treatment.
+          var arc = Math.min(Math.abs(from) / mid, 1.2);
+          var turn = L.frame ? Math.max(-30, Math.min(30, from / mid * -24)) :
+            (statement ? Math.max(-18, Math.min(18, from / mid * -15)) : 0);
+          var textFocus = statement ? 1 - Math.min(arc, 1) : 0;
+          var depth = L.frame ? -Math.pow(arc, 1.35) * 180 : textFocus * 245;
+          var curveY = L.frame ? Math.pow(arc, 1.7) * 22 :
+            (statement ? textFocus * -24 : 0);
+          var arcScale = L.frame ? 1 - Math.min(arc, 1) * .06 :
+            (statement ? .91 + textFocus * .19 : 1);
           gsap.set(L.el, {
-            x: from * (L.d - 1) * PARALLAX,
-            yPercent: L.mid ? -50 : 0,
-            scale: L.scale,
-            // A few degrees of turn away from the centre line. With the
-            // perspective on the viewport this is what actually reads as
-            // depth; the offsets alone are too small to see, and making
-            // them big enough to see is what put the frames into each
-            // other. Capped, past which a photograph looks soft, not turned.
-            rotationY: L.ghost ? 0 : Math.min(Math.max(from / mid * -3.4, -4), 4),
+            x: L.frame ? from * (L.d - 1) * PARALLAX : 0,
+            y: curveY,
+            yPercent: 0,
+            z: depth,
+            scale: L.scale * arcScale,
+            rotationX: statement ? (1 - textFocus) * 5 : 0,
+            rotationY: turn,
+            opacity: statement ? .62 + textFocus * .38 : 1,
             force3D: true
           });
         }
@@ -1285,26 +1310,30 @@
 
   (function chrome() {
     var header = $("#header");
-    // A page that opens on a pale ground (body.litehead) has the header solid
-    // from the top, set in the markup so it holds without this script.
-    // Toggling it here would strip that on the way back up and leave white
-    // lettering on an off-white hero.
-    if (header && !document.body.classList.contains("litehead")) {
-      // The header rides transparent over the hero and only turns solid once
-      // the hero itself has scrolled mostly out of view. On the homepage the
-      // requested handoff is exact: glass begins when the gold run reaches
-      // the top of the viewport, not before it.
+    if (header) {
+      var main = $("#main");
+      // Ignore non-visual utility nodes (the gallery's canvas controls, for
+      // example) and use the first actual section on every page. Blog entries
+      // wrap the full story in one article, so their opening ends with the
+      // lead image rather than at the end of the story.
+      var opening = main && main.querySelector(":scope > section, :scope > article");
+      if (!opening && main) opening = main.firstElementChild;
+      var openingBoundary = opening;
+      if (opening && opening.matches("article.art")) {
+        openingBoundary = $(".art__hero", opening) || $(".art__head", opening) || opening;
+      }
       sentinel(function () {
-        if (document.body.classList.contains("home")) {
-          // .hseq is the home opening now. Its foot is the end of the
-          // 200vh track, which is the same instant the gold run reaches
-          // the top of the window — the exact handoff that was asked for.
-          var opening = $(".hero") || $(".hseq");
-          if (opening) return Math.max(opening.offsetTop + opening.offsetHeight - 1, 80);
+        if (!openingBoundary) return 80;
+        var box = openingBoundary.getBoundingClientRect();
+        return Math.max(box.top + window.pageYOffset + box.height - 1, 80);
+      }, function (past) {
+        header.classList.toggle("is-first-section", !past);
+        // Pale opening sections retain their existing dark lettering while
+        // the container itself stays transparent.
+        if (!document.body.classList.contains("litehead")) {
+          header.classList.toggle("is-stuck", past);
         }
-        var hero = $(".hero") || $(".hseq__stage");
-        return hero ? Math.max(hero.getBoundingClientRect().height - 140, 80) : 80;
-      }, function (past) { header.classList.toggle("is-stuck", past); });
+      });
     }
 
     // The bare header — no glass bar around the controls — belongs to the
@@ -1910,6 +1939,15 @@
     cursorRing();
     ticker();
     mottoDrift();
+
+    // A completed intro belongs to the tab, not to one document instance.
+    // Remove a freshly parsed curtain before heroIn() can prepare hidden lines,
+    // so refresh and non-bfcached Back navigation cannot flash and replay it.
+    if (!claimIntroVisit()) {
+      var repeatedCurtain = $("#curtain");
+      if (repeatedCurtain) repeatedCurtain.remove();
+      document.body.classList.remove("is-locked");
+    }
 
     // Set the hero's initial state before the curtain starts uncovering it,
     // then play the prepared timeline without hiding visible content again.
