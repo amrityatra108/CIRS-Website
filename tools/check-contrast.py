@@ -53,7 +53,7 @@ const { chromium } = require('playwright-core');
 
   // A looping video behind the text: sample across the loop, not once.
   const times = await p.evaluate(() => {
-    const v = document.querySelector('.pagehero__video, .hero__video');
+    const v = document.querySelector('.pagehero__video, .hero__video, .hseq__video');
     if (!v) return null;
     v.pause();
     const d = v.duration && isFinite(v.duration) ? v.duration : 8;
@@ -67,7 +67,7 @@ const { chromium } = require('playwright-core');
   const drifting = await p.evaluate(() => !!document.querySelector('.crwall, #p1-stage'));
   const boxes = await p.evaluate(() => {
     const out = [];
-    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll, .fhero .fmeta, .fhero__name, .fhero__dates, .fhero__say, .fhero__sig, .fhero__cue, .p1-hero__eyebrow, .p1-hero-text, .p1-hero__cue, .p1-hud, .saga__eyebrow, .saga__line, .saga__by, .saga__more, .lifeband__say .sc, .lifeband__say h2, .lifeband__say .copy, .lifeband__cta .btn').forEach(el => {
+    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .hseq__type .sc, .hseq__type h1, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll, .fhero .fmeta, .fhero__name, .fhero__dates, .fhero__say, .fhero__sig, .fhero__cue, .p1-hero__eyebrow, .p1-hero-text, .p1-hero__cue, .p1-hud, .saga__eyebrow, .saga__line, .saga__by, .saga__more, .lifeband__say .sc, .lifeband__say h2, .lifeband__say .copy, .lifeband__cta .btn').forEach(el => {
       const r = el.getBoundingClientRect();
       if (r.width < 4 || r.height < 4) return;
       const cs = getComputedStyle(el);
@@ -102,7 +102,7 @@ const { chromium } = require('playwright-core');
     if (t === null && drifting && shots.length) await p.waitForTimeout(1600);
     if (t !== null) {
       await p.evaluate(async (tt) => {
-        const v = document.querySelector('.pagehero__video, .hero__video');
+        const v = document.querySelector('.pagehero__video, .hero__video, .hseq__video');
         v.currentTime = tt;
         await new Promise(r => { v.onseeked = r; setTimeout(r, 900); });
       }, t);

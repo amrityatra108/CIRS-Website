@@ -1213,3 +1213,108 @@ main{ position:relative; z-index:1; background:var(--paper); }
   .dropcap::first-letter{ font-size:3.4em; }
   .chart{ overflow-x:auto; }
 }
+
+/* ============================================================
+   The opening sequence
+   ============================================================
+   A 200vh track with a 100svh stage stuck to the top of it. The
+   stage stands still through the second hundred of viewport
+   height and that travel is the sequence's scrub distance.
+
+   Pinning is `position: sticky` and nothing else. ScrollTrigger's
+   own pin rewrites the document with a spacer, which on this site
+   fights Lenis and moves the boundary the header's is-atop probe
+   watches. Sticky costs neither.
+   ============================================================ */
+.hseq{ position:relative; background:var(--purple-ink); }
+/* The track is the stage plus the travel. A 100svh stage in a 260svh
+   track stands still for 160svh, and that 160 is the whole of the
+   sequence's scrub. The extra 60 over a bare doubling is what lets the
+   settled plate hold for a moment before the stage releases: at 200svh
+   the plate reached its frame on the same pixel the stage started
+   leaving, so the composition the sequence builds was never once seen
+   at rest. */
+.hseq__track{ height:260svh; height:260vh; }
+.hseq__stage{
+  position:sticky; top:0;
+  height:100svh; height:100vh;
+  overflow:hidden; isolation:isolate;
+}
+
+/* The three positions. These boxes are laid out and never painted;
+   the script reads them and scrubs the plate between them, which is
+   why a breakpoint can move the sequence without the script knowing
+   a thing about it. Keep them in the stylesheet. */
+.hseq__marks{ position:absolute; inset:0; z-index:0; pointer-events:none; visibility:hidden; }
+.hseq__mark{ position:absolute; }
+.hseq__mark--p0{ inset:0; }
+.hseq__mark--p1{ inset:4vh 6vw 10vh; }
+.hseq__mark--p2{
+  /* The plate the sequence settles on: an upright frame held right
+     of centre, with the headline occupying the column beside it. */
+  top:9vh; bottom:16vh; right:7vw;
+  width:min(42vw, 46svh * 1.1);
+}
+
+.hseq__plate{
+  position:absolute; z-index:1;
+  overflow:hidden;
+  will-change:transform, clip-path;
+  border-radius:0;
+  /* Set by the script from the marks on the first frame. The inset
+     here is only what the plate wears before the script has measured
+     anything, and is P0 exactly, so an unstyled first paint is the
+     full-bleed opening rather than a collapsed box. */
+  inset:0;
+}
+.hseq__video{
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 42%;
+}
+
+/* Lighter than a legible-at-any-cost wash: the campus is the point of
+   the panel. It holds the lower third, where the marker and headline
+   sit, and lets the ridge line through nearly clean. Measured against
+   the painted pixels by tools/check-contrast.py, not guessed. */
+.hseq__scrim{
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:
+    linear-gradient(to top, rgba(21,8,24,.95) 0%, rgba(21,8,24,.86) 18%,
+                    rgba(21,8,24,.64) 38%, rgba(21,8,24,.20) 70%,
+                    rgba(21,8,24,.32) 100%);
+}
+
+/* The type is positioned against the plate's own box, not the window,
+   so the headline holds its relationship to the photograph at every
+   viewport instead of drifting away from it as the plate insets. */
+.hseq__type{
+  position:absolute; z-index:3;
+  left:clamp(20px,3vw,48px);
+  bottom:clamp(24px,4vw,48px);
+  width:min(1100px,92vw);
+  will-change:transform, opacity;
+}
+.hseq__type .marker{ margin-bottom:var(--space-4); }
+.hseq__type .sc{ color:var(--gold-lit); font-size:.92rem; }
+.hseq__type .marker::after{ background:rgba(255,255,255,.28); max-width:120px; }
+.hseq__type h1{ font-size:var(--fs-mega); color:#fff; line-height:.98; letter-spacing:-.02em; }
+.hseq__type h1 em{ color:var(--gold-lit); }
+
+/* Narrow: the settled plate has no room to sit beside a column of type,
+   so P2 becomes a shallower full-width crop and the headline keeps the
+   foot of the stage. */
+@media (max-width:900px){
+  .hseq__mark--p1{ inset:2vh 4vw 8vh; }
+  .hseq__mark--p2{ top:6vh; bottom:30vh; right:4vw; width:92vw; }
+}
+
+/* Motion off, or no script: the sequence is one still panel at P2's
+   full-bleed equivalent. The track collapses to a single screen so
+   there is no empty scroll to cross, and nothing sticks. */
+@media (prefers-reduced-motion:reduce){
+  .hseq__track{ height:auto; }
+  .hseq__stage{ position:relative; }
+}
+.hseq.is-static .hseq__track{ height:auto; }
+.hseq.is-static .hseq__stage{ position:relative; }
+.hseq.is-static .hseq__plate{ inset:0; border-radius:0; }
