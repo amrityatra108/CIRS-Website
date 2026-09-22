@@ -17,7 +17,7 @@ body{display:grid;place-items:center}
 .ambient-contours path:nth-child(2n){stroke-dasharray:1 4}
 .ambient-grain{position:absolute;inset:0;opacity:.026;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
 .portrait-stage{position:relative;z-index:2;width:min(100vw,98vh);height:min(100vw,98vh);touch-action:none}
-.portrait-composition{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.portrait-composition{position:absolute;inset:0}
 .portrait-canvas,.portrait-fallback{position:absolute;inset:0;width:100%;height:100%;display:block}
 .portrait-canvas{z-index:2;opacity:0}
 .portrait-fallback{z-index:1;object-fit:contain}
@@ -29,10 +29,22 @@ body{display:grid;place-items:center}
 .founder-cursor__dot{width:4px;height:4px;margin:-2px 0 0 -2px;background:rgba(30,29,25,.8)}
 .founder-cursor__ring{width:27px;height:27px;margin:-13.5px 0 0 -13.5px;border:1px solid rgba(30,29,25,.34);transition:width .2s ease,height .2s ease,margin .2s ease,border-color .2s ease}
 .founder-cursor.is-over-portrait .founder-cursor__ring{width:32px;height:32px;margin:-16px 0 0 -16px;border-color:rgba(30,29,25,.58)}
-.status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+/* The canvas is aria-hidden; this paragraph is what carries the meaning of
+   the picture to anyone who cannot see it, naming both men. */
+.status,.portrait-description{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+/* No WebGL, or a portrait that would not load: the elder alone on the paper
+   field, which has to read as a deliberate archival portrait. */
+.is-archival .portrait-canvas{display:none}
+.is-archival .portrait-fallback{opacity:1}
+/* Thirty frames over budget: the ambient depth goes before the dissolve does. */
+.prototype.is-degraded .ambient-layer,.prototype.is-degraded .ambient-grain{display:none}
 @media(max-width:700px){.portrait-stage{width:100vw;height:100vw;transform:none}}
 @media(pointer:coarse){.prototype{cursor:auto}.founder-cursor{display:none}}
-@media(prefers-reduced-motion:reduce){.prototype{cursor:auto}.portrait-canvas{display:none}.portrait-fallback{opacity:1!important}.portrait-composition,.ambient-layer,.ambient-drift{transform:none!important}.founder-cursor{display:none}}
+/* Reduced motion keeps the canvas: it holds one static composite at a reveal
+   of roughly 0.87, the elder essentially resolved with the torn boundary
+   still standing across the robe, so the idea survives without any movement.
+   Nothing drifts and nothing follows the pointer. */
+@media(prefers-reduced-motion:reduce){.prototype{cursor:auto}.ambient-layer,.ambient-drift{transform:none!important}.founder-cursor{display:none}}
 /* Embedded opener keeps touch scrolling available to the containing page. */
 html.is-embedded .portrait-stage{touch-action:pan-y;}
 @media(max-width:800px){html.is-embedded .portrait-stage{width:min(100vw,98vh);height:min(100vw,98vh);}}

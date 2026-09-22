@@ -6,10 +6,15 @@
   <meta name="theme-color" content="#f2efe8">
   <title>CIRS Founder — Seeker to Teacher</title>
   <link rel="stylesheet" href="preview.css">
+  <!-- Both portraits are fetched before the module runs, so the paper field
+       carries the young journalist from the first paint rather than an empty
+       frame or a spinner. -->
+  <link rel="preload" as="image" href="assets/menon-state-2048.png" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/gurudev-state-2048.png">
 </head>
 <body>
   <div id="founder-root"></div>
   <script src="../../assets/vendor/gsap.min.js"></script>
-  <script type="module" src="preview.js?v=29"></script>
+  <script type="module" src="preview.js?v=30"></script>
 </body>
 </html>
