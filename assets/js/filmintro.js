@@ -1,4 +1,11 @@
-/* CIRS Captures — the opening.
+/* The cinematic opening two pages share — CIRS Captures and Our Sports.
+
+   Both open the same way, because they are the same page furniture with a
+   different film in it: the reader scrubs a short piece of footage with the
+   scroll, it ends, it is held, and one thin widely-tracked line arrives over
+   the frame it ended on. What differs between them is the file, the words,
+   and where the line sits — all of which come from the markup that
+   build-site.py generates, not from here.
 
    The film does not play. The scroll position chooses the frame:
 
@@ -11,8 +18,8 @@
    finished composition is held to the end.
 
    Two things make the scrubbing smooth, and neither is in this file.
-   assets/video/captures-camera.mp4 is encoded with every frame a keyframe,
-   so a seek never has to decode forward from a distant one; and its moov
+   Each film is encoded with every frame a keyframe,
+   so a seek never has to decode forward from a distant one; and the moov
    atom is at the front, so the browser knows the duration and can seek
    before the whole file has arrived. Re-encoding it any other way is what
    would make this stutter. The stage is held by CSS position:sticky rather
@@ -21,16 +28,20 @@
 (function () {
   "use strict";
 
-  var section = document.querySelector("[data-captures]");
+  var section = document.querySelector("[data-film]");
   if (!section) return;
-  var film = section.querySelector("[data-captures-film]");
-  var title = section.querySelector("[data-captures-title]");
+  var film = section.querySelector("[data-film-video]");
+  var title = section.querySelector("[data-film-title]");
   if (!film || !title) return;
 
-  // The phase boundaries, as fractions of the section's travel.
-  var FILM_END = 0.70;
-  var HOLD_END = 0.77;
-  var TITLE_END = 0.90;
+  /* The phase boundaries, as fractions of the section's travel, and the
+     length of one frame of the file. Both are stated in the markup so a page
+     can keep its own timing, and both fall back to what CIRS Captures
+     established: the film to 0.70, held to 0.77, the line out by 0.90. */
+  var phases = (section.getAttribute("data-film-phases") || "").split(/\s+/).map(Number);
+  var FILM_END = phases[0] > 0 ? phases[0] : 0.70;
+  var HOLD_END = phases[1] > 0 ? phases[1] : 0.77;
+  var TITLE_END = phases[2] > 0 ? phases[2] : 0.90;
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   var hasST = typeof window.gsap !== "undefined" &&
@@ -38,10 +49,10 @@
 
   var duration = 0;
   var last = 0;        // the timestamp that lands on the final frame
-  // One frame of the film. The file is ours and is encoded at 24fps — see
-  // the note at the top — and HTMLVideoElement will not report a frame rate,
-  // so it is stated here rather than guessed at from playback.
-  var step = 1 / 24;
+  // One frame of the film. The files are ours and are encoded at 24fps, and
+  // HTMLVideoElement will not report a frame rate, so it is stated in the
+  // markup rather than guessed at from playback.
+  var step = 1 / (Number(section.getAttribute("data-film-fps")) || 24);
   var asked = -1;      // the last time the decoder was sent to
   var reveal = -1;     // the last value written to the stylesheet
   var trigger = null;
@@ -70,7 +81,7 @@
   function setReveal(value) {
     if (Math.abs(value - reveal) < 0.001) return;
     reveal = value;
-    title.style.setProperty("--cap-reveal", value.toFixed(4));
+    title.style.setProperty("--film-reveal", value.toFixed(4));
   }
 
   // Slow in and slow out. The line should be noticed; its arrival should not.
@@ -88,7 +99,7 @@
      back to one screen when this is set, so nobody is asked to scroll four
      screens through something that is no longer moving. */
   function still() {
-    section.setAttribute("data-captures-still", "");
+    section.setAttribute("data-film-still", "");
     setReveal(1);
     asked = -1;
     seek(last);
@@ -97,12 +108,12 @@
   function teardown() {
     if (trigger) { trigger.kill(); trigger = null; }
     if (furniture) { furniture.kill(); furniture = null; }
-    document.body.classList.remove("cap-on");
+    document.body.classList.remove("film-on");
   }
 
   function scrub() {
     if (trigger || !hasST || reduced.matches) return;
-    section.removeAttribute("data-captures-still");
+    section.removeAttribute("data-film-still");
     trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
@@ -120,10 +131,10 @@
       start: "top top",
       end: "bottom top",
       onToggle: function (self) {
-        document.body.classList.toggle("cap-on", self.isActive);
+        document.body.classList.toggle("film-on", self.isActive);
       },
       onRefresh: function (self) {
-        document.body.classList.toggle("cap-on", self.isActive);
+        document.body.classList.toggle("film-on", self.isActive);
       }
     });
     paint(trigger.progress);
@@ -142,7 +153,7 @@
   // screen with the line up, rather than four screens of nothing.
   film.addEventListener("error", function () {
     teardown();
-    section.setAttribute("data-captures-still", "");
+    section.setAttribute("data-film-still", "");
     setReveal(1);
   });
 
@@ -168,7 +179,7 @@
 
   reduced.addEventListener("change", function () {
     if (reduced.matches) { teardown(); start(); }
-    else { section.removeAttribute("data-captures-still"); scrub(); start(); }
+    else { section.removeAttribute("data-film-still"); scrub(); start(); }
   });
 
   // A trigger left registered across a back-forward-cache restore is one
