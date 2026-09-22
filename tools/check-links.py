@@ -15,7 +15,8 @@ between pages is a dead end with nothing to catch it. This therefore checks:
   * every href="#" — there is no longer anywhere on the site such a link is
     meant to be, so one appearing again is a dead link, not a placeholder
   * every assets/... reference exists on disk, at the exact case used
-  * every file in assets/img and assets/video is referenced by some page
+  * every file in assets/img and assets/video is referenced by something —
+    a page, or the toolchain in tools/ that generates or consumes it
   * external references are absolute https:// URLs
 
     python3 tools/check-links.py
@@ -107,6 +108,47 @@ def main():
             elif re.match(r"^[\w./-]+$", ref) and "." in ref:
                 problems.append(f"{name}: {ref} — relative reference outside assets/")
 
+    # An asset the toolchain refers to is not dead weight, and this used to
+    # call it dead. The check only ever read the built pages, so anything the
+    # repository keeps for its own machinery came up as an orphan:
+    #
+    #   aerial-duo.jpg        a fallback source in tools/make-header.py, a row
+    #                         in tools/media.tsv, and part of the artifact
+    #                         reference kept beside it
+    #   slhero/card-*.jpg     cut by tools/make-photos.py, which says of the
+    #                         deck that these are prototypes and that the
+    #                         school is curating ten. Six are unused today
+    #                         because the Student Life redesign deals four.
+    #   life-split-beyond.jpg cut by the same script, the other half of the
+    #                         pair whose "academic" side the page does use
+    #
+    # Deleting those to satisfy the check would have deleted a working
+    # fallback and a set of crops that are waiting on the school. So the
+    # question the check asks is now the question it meant to ask all along:
+    # does ANYTHING in this repository refer to this file — a page, a
+    # generator, a manifest — or nothing at all?
+    #
+    # A file referenced by neither still fails, which is the case worth
+    # catching: three were found and deleted the day this was written.
+    for dirpath, dirnames, filenames in os.walk(os.path.join(ROOT, "tools")):
+        dirnames[:] = [d for d in dirnames if d not in ("__pycache__",)]
+        for filename in filenames:
+            if not filename.endswith((".py", ".tsv", ".html", ".md", ".json")):
+                continue
+            path = os.path.join(dirpath, filename)
+            try:
+                text = open(path, encoding="utf-8", errors="ignore").read()
+            except OSError:
+                continue
+            # Both the path as a page writes it and the path as a script
+            # spells it — make-photos.py names its outputs "slhero/card-01.jpg"
+            # relative to assets/img, without the prefix.
+            for m in re.findall(r"assets/(?:img|video)/[\w./-]+", text):
+                referenced.add(m)
+            for m in re.findall(r'"([\w./-]+\.(?:jpg|jpeg|png|webp|svg|avif|mp4|webm))"', text):
+                referenced.add("assets/img/" + m)
+                referenced.add("assets/video/" + m)
+
     # Walk, rather than list: assets/img has subdirectories now (the collage
     # keeps its hundred-odd tiles in assets/img/glimpses), and a flat listing
     # reported the directory itself as an unreferenced file.
@@ -115,7 +157,8 @@ def main():
             for filename in sorted(filenames):
                 rel = os.path.relpath(os.path.join(dirpath, filename), ROOT).replace(os.sep, "/")
                 if rel not in referenced:
-                    problems.append(f"{rel} — in the repository but no page references it")
+                    problems.append(
+                        f"{rel} — in the repository but nothing references it")
 
     if problems:
         print(f"check-links: {len(problems)} problem(s)\n")
