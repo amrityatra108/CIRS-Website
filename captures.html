@@ -37,7 +37,7 @@
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/typography.css?b=97">
 <link rel="stylesheet" href="assets/css/filmintro.css?b=97">
-<noscript><style>.film{height:100svh}</style></noscript>
+<noscript><style>.film{height:100svh}.film__stage{background:#000 url(assets/img/captures-camera-final.jpg) var(--film-still-position, 50% 50%)/cover no-repeat}.film__video{visibility:hidden}.film__shot{display:none}.film[data-film-pending] .film__title{opacity:1}</style></noscript>
 </head>
 
 <body class="film captures">
@@ -266,7 +266,7 @@
   </div>
 </div>
 <main id="main">
-<section class="film" id="captures-opening" data-film>
+<section class="film" id="captures-opening" data-film data-film-phases="0.5143 0.5657 0.6612 0.7347 0.7959 0.9388" data-film-lens="388.4 359.3 65 124.4 6.56" data-film-pending>
   <div class="film__stage">
     <video class="film__video" data-film-video
            width="1280" height="720"
@@ -285,6 +285,15 @@
       <source src="assets/video/captures-camera.webm" type="video/webm">
     </video>
     <h1 class="film__title" data-film-title><span class="film__line">CIRS Captures</span></h1>
+    <div class="film__shot" data-film-shot>
+      <picture>
+        <source media="(max-aspect-ratio: 6/5)"
+                srcset="assets/img/captures-shot-portrait.jpg" width="1620" height="2160">
+        <img class="film__photo" src="assets/img/captures-shot.jpg" width="2400" height="1819"
+             alt="A CIRS student dancing on stage in red, one arm raised"
+             loading="lazy" decoding="async">
+      </picture>
+    </div>
   </div>
 </section>
 <div class="film__seam" aria-hidden="true"></div>
