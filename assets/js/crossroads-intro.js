@@ -183,10 +183,10 @@
   function stop() {
     if (frame !== null) window.cancelAnimationFrame(frame);
     frame = null;
-    // Leave a visible central window into the film when the pointer is absent.
+    // Keep the finished title card still until the pointer reveals the film.
     reveal.style.removeProperty("--crossroads-intro-x");
     reveal.style.removeProperty("--crossroads-intro-y");
-    intro.toggleAttribute("data-crossroads-intro-lit", active && !reduced.matches && !document.hidden);
+    intro.removeAttribute("data-crossroads-intro-lit");
     if (ring) ring.classList.toggle("crossroads-intro-cursor-muted", active);
   }
   function paint() {
