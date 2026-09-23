@@ -274,11 +274,13 @@ PAGES = {
         "cache_suffix": "-student-life-9",
     },
     "sports": {
+        "barehead": True,
         "nav": "Our Sports",
-        "title": "Sports",
-        "description": "Athletics, the playing fields and the sporting record at CIRS.",
-        "banner": ("Sports", "Sport, Every Day <em>at Four.</em>",
-                   "The four o'clock hour, the fields it happens on, and what the teams have won."),
+        "title": "Sports & Laurels — Built in the Arena | CIRS",
+        "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
+        "banner": None,
+        "sheet": "sports",
+        "cache_suffix": "-sports-1",
     },
     "crossroads": {
         "barehead": True,
@@ -482,6 +484,7 @@ PAGES = {
         "nav": "Alumni",
         "title": "Alumni",
         "description": "Where CIRS students go after school — universities in India and abroad.",
+        "cache_suffix": "-alumni-1",
         "banner": ("After CIRS", "Where They <em>Go Next.</em>",
                    "The universities our students read at, in India and abroad."),
     },
@@ -497,6 +500,8 @@ SECTION_PAGE = {
     "academics": "curriculum",
     "life": "student-life", "day": "student-life", "campus": "student-life",
     "athletics": "sports", "fields": "sports", "achievements": "sports",
+    "arena": "sports", "shift": "sports", "gallery": "sports", "houses": "sports",
+    "archive": "sports", "stories": "sports", "discipline": "sports", "laurels": "sports",
     "arts": "cultural-gallery",
     "pathways": "alumni",
     "latest": "news", "diary": "news",
@@ -1252,6 +1257,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
+    if slug == "sports":
+        parts.append(f'<script src="assets/js/sports-journey.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]

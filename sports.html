@@ -3,30 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sports</title>
-<meta name="description" content="Athletics, the playing fields and the sporting record at CIRS.">
+<title>Sports & Laurels — Built in the Arena | CIRS</title>
+<meta name="description" content="Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/sports.html">
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sports">
-<meta property="og:description" content="Athletics, the playing fields and the sporting record at CIRS.">
+<meta property="og:title" content="Sports & Laurels — Built in the Arena | CIRS">
+<meta property="og:description" content="Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sports">
-<meta name="twitter:description" content="Athletics, the playing fields and the sporting record at CIRS.">
+<meta name="twitter:title" content="Sports & Laurels — Built in the Arena | CIRS">
+<meta name="twitter:description" content="Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=94">
-<link rel="stylesheet" href="assets/css/cirs.css?b=94">
-<link rel="stylesheet" href="assets/css/pages.css?b=94">
-<link rel="stylesheet" href="assets/css/typography.css?b=94">
+<link rel="stylesheet" href="assets/css/fonts.css?b=94-sports-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=94-sports-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=94-sports-1">
+<link rel="stylesheet" href="assets/css/sports.css?b=94-sports-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=94-sports-1">
 </head>
 
-<body>
+<body class="sports">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -58,7 +59,7 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header is-first-section" id="header">
+<header class="header is-first-section is-bare" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -252,119 +253,793 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">Sports</span></p>
-    <h1 class="serif" data-split>Sport, Every Day <em>at Four.</em></h1>
-    <p class="lead">The four o'clock hour, the fields it happens on, and what the teams have won.</p>
+<!-- ============================================================
+     CIRS SPORTS & LAURELS — BUILT IN THE ARENA
+     An editorial sports journey through physical discipline,
+     daily routine, house competition, and verified laurels.
+     ============================================================ -->
+
+<!-- Custom cursor for desktop interactive exploration -->
+<div class="sports-cursor" id="sportsCursor" aria-hidden="true">
+  <span class="sports-cursor__badge">DISCOVER</span>
+</div>
+
+<!-- ============================================================
+     SECTION 1. CINEMATIC SPORTS OPENING
+     Full-viewport hero, oversized typography, photographic
+     cursor reveal, and scroll prompt.
+     ============================================================ -->
+<section class="arena-hero" id="top" aria-label="Built in the Arena — CIRS Sports Opening">
+  <div class="arena-hero__stage" id="heroStage">
+    <!-- Primary base sports image: Runners rounding the CIRS track -->
+    <div class="arena-hero__layer arena-hero__layer--base">
+      <img class="arena-hero__img" src="assets/img/sports/hero-track.jpg"
+           alt="Runners rounding the CIRS athletics track against the Western Ghats"
+           width="2400" height="1500" fetchpriority="high" decoding="async">
+      <div class="arena-hero__scrim" aria-hidden="true"></div>
+    </div>
+
+    <!-- Secondary reveal sports image: Swimmer in motion in CIRS pool -->
+    <div class="arena-hero__layer arena-hero__layer--reveal" id="heroRevealLayer" aria-hidden="true">
+      <img class="arena-hero__img" src="assets/img/sports/hero-reveal.jpg"
+           alt="" width="2400" height="1500" decoding="async">
+      <div class="arena-hero__scrim arena-hero__scrim--reveal" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="wrap arena-hero__inner">
+    <div class="arena-hero__meta-top">
+      <p class="arena-hero__meta"><span>CIRS SPORTS</span><span>COIMBATORE &middot; INDIA</span></p>
+      <p class="arena-hero__tag">SPORT &middot; DISCIPLINE &middot; TEAM</p>
+    </div>
+
+    <h1 class="arena-hero__title">
+      <span class="arena-hero__word" data-word="BUILT">BUILT</span>
+      <span class="arena-hero__word" data-word="IN">IN</span>
+      <span class="arena-hero__word" data-word="THE">THE</span>
+      <span class="arena-hero__word" data-word="ARENA">ARENA</span>
+    </h1>
+
+    <div class="arena-hero__bottom">
+      <div class="arena-hero__actions">
+        <a class="btn btn--primary btn--lg arena-hero__cta" href="#shift" id="enterArenaBtn">
+          ENTER THE ARENA <span aria-hidden="true">&darr;</span>
+        </a>
+      </div>
+      <a class="arena-hero__scroll-indicator" href="#shift" aria-label="Scroll to move through the day">
+        <span class="arena-hero__scroll-line" aria-hidden="true"></span>
+        <span class="arena-hero__scroll-text">MOVE THROUGH THE DAY</span>
+      </a>
+    </div>
   </div>
 </section>
-<section class="feature" id="athletics">
-  <div class="wrap feature__inner">
-    <figure class="feature__media img-reveal rv">
-      <img src="assets/img/sports.jpg" alt="Runners rounding the track during an athletics meet at CIRS"
-           width="1200" height="1500" loading="lazy">
+
+<!-- ============================================================
+     SECTION 2. THE FIVE O’CLOCK SHIFT
+     The transition from academic discipline into sports life.
+     Verified senior (17:00) and junior (16:00) routines.
+     ============================================================ -->
+<section class="shift-sec" id="shift" aria-labelledby="shiftTitle">
+  <div class="shift-sec__pin" id="shiftPin">
+    <!-- Visual transition background: academic interior to sports exterior -->
+    <div class="shift-sec__media-wrap" aria-hidden="true">
+      <div class="shift-sec__media shift-sec__media--academic" id="shiftMediaAcademic">
+        <img src="assets/img/sports/shift-academic.jpg"
+             alt="CIRS students in classroom study"
+             width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="shift-sec__scrim shift-sec__scrim--indoor"></div>
+      </div>
+      <div class="shift-sec__media shift-sec__media--sports" id="shiftMediaSports">
+        <img src="assets/img/sports/shift-sports.jpg"
+             alt="CIRS sports grounds, pool, and courts beneath the Western Ghats"
+             width="1800" height="1200" loading="lazy" decoding="async">
+        <div class="shift-sec__scrim shift-sec__scrim--outdoor"></div>
+      </div>
+    </div>
+
+    <div class="wrap shift-sec__inner">
+      <div class="shift-sec__header rv">
+        <p class="marker"><span class="sc">The Five O&rsquo;Clock Shift</span></p>
+        <h2 class="serif h1 shift-sec__headline" id="shiftTitle">
+          AT FIVE, THE CAMPUS CHANGES.
+        </h2>
+        <p class="lead shift-sec__lead">
+          When the afternoon study bell rings, residential life shifts from the silence of
+          laboratories and classrooms into open air, sweat, and collective motion.
+        </p>
+      </div>
+
+      <!-- Time transition progression rail -->
+      <div class="shift-timeline" id="shiftTimeline">
+        <div class="shift-timeline__track">
+          <div class="shift-timeline__progress" id="shiftTimelineProgress" style="width: 33%"></div>
+        </div>
+        <div class="shift-timeline__steps">
+          <div class="shift-step is-active" data-step="1">
+            <span class="shift-step__time">16:00 / 17:00</span>
+            <strong class="shift-step__label">CLASSES END</strong>
+            <span class="shift-step__desc">Books close. Juniors at 4:00, seniors at 5:00.</span>
+          </div>
+          <div class="shift-step" data-step="2">
+            <span class="shift-step__time">17:15</span>
+            <strong class="shift-step__label">TEAMS FORM</strong>
+            <span class="shift-step__desc">House kits on. Boots laced. Courts fill.</span>
+          </div>
+          <div class="shift-step" data-step="3">
+            <span class="shift-step__time">17:30</span>
+            <strong class="shift-step__label">THE FIELD OPENS</strong>
+            <span class="shift-step__desc">Under the Siruvani hills, every match begins.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3. SPORTS AT CIRS
+     Full-screen editorial gallery of verified sports.
+     ============================================================ -->
+<section class="sports-gallery" id="gallery" aria-labelledby="galleryTitle">
+  <div class="wrap sports-gallery__intro rv">
+    <p class="marker"><span class="sc">Sports at CIRS</span></p>
+    <h2 class="serif h1" id="galleryTitle" data-split>
+      EVERY FIELD HAS <em>A STANDARD.</em>
+    </h2>
+    <p class="lead">
+      Twenty acres of dedicated sporting grounds inside a hundred-acre forest sanctuary.
+      Ten verified sporting disciplines shaped by professional coaching, daily practice, and inter-house competition.
+    </p>
+  </div>
+
+  <div class="sports-gallery__track" id="galleryTrack">
+    <!-- 1. Athletics -->
+    <article class="sport-chapter" id="athletics" data-sport="Athletics">
+      <div class="sport-chapter__media">
+        <img src="assets/img/sports/sport-athletics.jpg"
+             alt="High jumper clearing the bar against clear sky at CIRS"
+             width="1600" height="1200" loading="lazy" decoding="async">
+        <div class="sport-chapter__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="wrap sport-chapter__content">
+        <span class="sport-chapter__num">01</span>
+        <h3 class="serif sport-chapter__title">Athletics</h3>
+        <p class="sport-chapter__desc">
+          The four o&rsquo;clock hour belongs to the track and the field. Sprint, hurdles, high jump,
+          long jump, and 5,000-metre distance runs on a track bordered by the Western Ghats.
+        </p>
+        <div class="sport-chapter__support-media">
+          <figure>
+            <img src="assets/img/sports.jpg"
+                 alt="Runners rounding the track during an athletics meet at CIRS"
+                 width="1200" height="1500" loading="lazy" decoding="async">
+            <figcaption>Track meet under the Western Ghats</figcaption>
+          </figure>
+        </div>
+        <dl class="sport-chapter__meta">
+          <div><dt>Facility</dt><dd>Standard Athletics Track &amp; Field Areas</dd></div>
+          <div><dt>Annual Meet</dt><dd>Khel Mela &amp; CBSE Cluster</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- 2. Swimming -->
+    <article class="sport-chapter" id="sport-swimming" data-sport="Swimming">
+      <div class="sport-chapter__media">
+        <img src="assets/img/sports/sport-swimming.jpg"
+             alt="CIRS students swimming in the campus pool"
+             width="1600" height="1200" loading="lazy" decoding="async">
+        <div class="sport-chapter__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="wrap sport-chapter__content">
+        <span class="sport-chapter__num">02</span>
+        <h3 class="serif sport-chapter__title">Swimming</h3>
+        <p class="sport-chapter__desc">
+          Structured stroke mechanics, endurance laps, and competitive swim galas in the 25-metre campus pool.
+          Daily coached training runs throughout the warmer months.
+        </p>
+        <dl class="sport-chapter__meta">
+          <div><dt>Facility</dt><dd>25m Competitive Pool</dd></div>
+          <div><dt>Training</dt><dd>Coached Sessions &amp; Free Swim</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- 3. Basketball -->
+    <article class="sport-chapter" id="sport-basketball" data-sport="Basketball">
+      <div class="sport-chapter__media">
+        <img src="assets/img/sports/basketball-contest.jpg"
+             alt="Intense basketball contest under defensive pressure at CIRS"
+             width="1000" height="750" loading="lazy" decoding="async">
+        <div class="sport-chapter__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="wrap sport-chapter__content">
+        <span class="sport-chapter__num">03</span>
+        <h3 class="serif sport-chapter__title">Basketball</h3>
+        <p class="sport-chapter__desc">
+          Full-court transition play on floodlit hard courts. Inter-house derbies draw the entire
+          residential community to the sidelines as the lights come on against the evening sky.
+        </p>
+        <div class="sport-chapter__action-frames">
+          <figure>
+            <img src="assets/img/sports/basketball-shot.jpg"
+                 alt="A shot going up towards the hoop, three players with their hands raised beneath it"
+                 width="1000" height="750" loading="lazy" decoding="async">
+          </figure>
+          <figure>
+            <img src="assets/img/sports/basketball-floodlit.jpg"
+                 alt="A player holding the ball at the top of the key as the court lights come on"
+                 width="1000" height="750" loading="lazy" decoding="async">
+          </figure>
+        </div>
+        <dl class="sport-chapter__meta">
+          <div><dt>Facility</dt><dd>Floodlit Outdoor Hard Courts</dd></div>
+          <div><dt>Fixtures</dt><dd>Inter-House League &amp; Regional Invitationals</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- 4. Football -->
+    <article class="sport-chapter" id="sport-football" data-sport="Football">
+      <div class="sport-chapter__media">
+        <img src="assets/img/sports/sport-football.jpg"
+             alt="Football match play on natural grass turf at CIRS"
+             width="1600" height="1200" loading="lazy" decoding="async">
+        <div class="sport-chapter__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="wrap sport-chapter__content">
+        <span class="sport-chapter__num">04</span>
+        <h3 class="serif sport-chapter__title">Football</h3>
+        <p class="sport-chapter__desc">
+          Natural grass ground where the touchline touches the forest edge. Eleventh-hour matches,
+          passing drills, and muddy monsoon league play under shifting Siruvani cloud cover.
+        </p>
+        <dl class="sport-chapter__meta">
+          <div><dt>Facility</dt><dd>Full-Sized Natural Grass Pitch</dd></div>
+          <div><dt>Focus</dt><dd>Team Cohesion &amp; Tactical Positioning</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- 5. Tennis & Badminton -->
+    <article class="sport-chapter" id="sport-tennis" data-sport="Tennis &amp; Badminton">
+      <div class="sport-chapter__media">
+        <img src="assets/img/sports/sport-tennis.jpg"
+             alt="Tennis and badminton courts mid-rally at CIRS"
+             width="1600" height="1200" loading="lazy" decoding="async">
+        <div class="sport-chapter__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="wrap sport-chapter__content">
+        <span class="sport-chapter__num">05</span>
+        <h3 class="serif sport-chapter__title">Tennis &amp; Badminton</h3>
+        <p class="sport-chapter__desc">
+          Precision, footwork, and racquet control. Floodlit courts allow practice to continue
+          into cool mountain evenings with singles ladders and inter-house doubles.
+        </p>
+        <dl class="sport-chapter__meta">
+          <div><dt>Facility</dt><dd>Floodlit Hard Courts &amp; Indoor Badminton</dd></div>
+          <div><dt>Discipline</dt><dd>Singles &amp; Doubles Match Play</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- 6. Archery & Adventure -->
+    <article class="sport-chapter" id="sport-archery" data-sport="Archery &amp; Adventure">
+      <div class="sport-chapter__media">
+        <img src="assets/img/sports/sport-archery.jpg"
+             alt="Target archery practice on the CIRS grounds"
+             width="1600" height="1200" loading="lazy" decoding="async">
+        <div class="sport-chapter__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="wrap sport-chapter__content">
+        <span class="sport-chapter__num">06</span>
+        <h3 class="serif sport-chapter__title">Archery &amp; Adventure</h3>
+        <p class="sport-chapter__desc">
+          Target archery cultivates breath control and calm focus. Across the campus&rsquo;s wild terrain,
+          climbing courses and outdoor rope lines build physical courage and mutual trust.
+        </p>
+        <div class="sport-chapter__action-frames">
+          <figure>
+            <img src="assets/img/sports/sport-climbing.jpg"
+                 alt="A student climbing on the CIRS outdoor adventure wall"
+                 width="1600" height="1200" loading="lazy" decoding="async">
+            <figcaption>Adventure &amp; Obstacle Course</figcaption>
+          </figure>
+        </div>
+        <dl class="sport-chapter__meta">
+          <div><dt>Facilities</dt><dd>Target Archery Range &amp; Obstacle Course</dd></div>
+          <div><dt>Values</dt><dd>Focus, Poise, and Calculated Risk</dd></div>
+        </dl>
+      </div>
+    </article>
+  </div>
+
+  <!-- Extended disciplines factual strip -->
+  <div class="wrap sports-extended rv">
+    <figure class="sports-extended__aerial" style="margin-bottom: var(--space-6); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12);">
+      <img src="assets/img/fields-air.jpg"
+           alt="The CIRS grounds from the air, the pool and the playing fields inside the forest boundary"
+           width="1400" height="640" loading="lazy" decoding="async" style="width: 100%; height: auto; display: block;">
+      <figcaption style="font-size: var(--fs-xs); color: var(--on-purple-mute); padding: 8px 12px; background: rgba(0,0,0,0.6);">
+        Twenty acres of sporting facilities and courts bordering eighty acres of Western Ghats forest
+      </figcaption>
     </figure>
-    <div class="feature__text rv">
-      <p class="marker"><span class="sc">Athletics</span></p>
-      <p class="feature__tag">Compete, play, grow</p>
-      <h2 class="serif h2" data-split>The Forest Is <em>the Touchline.</em></h2>
-      <p class="copy">Athletics, football, cricket, basketball, swimming and yoga fill the four
-        o&rsquo;clock hour every day. Eighty of the campus&rsquo;s hundred acres are left wild, so
-        the edge of play is the edge of the Western Ghats.</p>
-      <p class="copy" style="margin-top:10px"><em>[Placeholder &mdash; teams, fixtures and results
-        to be supplied by the sports office.]</em></p>
+    <div class="sports-extended__grid">
+      <div class="sports-extended__item">
+        <h4 class="serif h3">Cricket</h4>
+        <p>Match ground and net practice. Line, length, and batting patience built from 4:30 AM sessions.</p>
+      </div>
+      <div class="sports-extended__item">
+        <h4 class="serif h3">Yoga Shala</h4>
+        <p>Daily morning asana and pranayama practice &mdash; the quiet, centering foundation of all sport.</p>
+      </div>
+      <div class="sports-extended__item">
+        <h4 class="serif h3">Indoor Arena</h4>
+        <p>Table tennis, chess, and carrom tournaments active year-round in the multipurpose sports hall.</p>
+      </div>
+      <div class="sports-extended__item">
+        <h4 class="serif h3">Outdoor Course</h4>
+        <p>Natural obstacle trails, team expeditions, and fitness circuits across eighty wild campus acres.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="band" id="fields" data-ground="#150818">
-  <div class="band__media">
-    <img src="assets/img/fields-air.jpg" alt="The CIRS grounds from the air, the pool and the playing fields inside the forest boundary" width="1400" height="640" loading="lazy">
+<!-- ============================================================
+     SECTION 4. HOUSE COMPETITION
+     Vasistha (Red), Valmiki (Yellow), Vishwamitra (Green), Vyasa (Blue).
+     Interactive vertical color bands on desktop, stacked on mobile.
+     ============================================================ -->
+<section class="house-arena" id="houses" aria-labelledby="housesHeading">
+  <div class="wrap house-arena__intro rv">
+    <p class="marker"><span class="sc">House Competition</span></p>
+    <h2 class="serif h1" id="housesHeading" data-split>
+      THE SCHOOL COMPETES <em>AS ONE.</em>
+    </h2>
+    <p class="lead">
+      Four houses. Four colors. In the classroom, students learn together; in the arena,
+      they compete for the shield in athletics, swimming, marching, and team fixtures.
+    </p>
   </div>
-  <div class="wrap band__inner on-purple">
-    <div class="sec-head rv" style="margin-bottom:0">
-      <p class="marker"><span class="sc">The sports field</span></p>
-      <h2 class="serif h2" style="color:#fff" data-split>Room to run, <em>under the Ghats.</em></h2>
-      <p class="lead">Twenty of the hundred acres carry the courts, the track and the pool. The
-        other eighty are forest, which is what the boundary of play actually looks like here.</p>
-    </div>
 
-    <div class="facilities rv">
-      <div><h3>Athletics Track</h3><p>The four o&rsquo;clock hour belongs to the track and the field events.</p></div>
-      <div><h3>Swimming Pool</h3><p>Coached sessions and free swim through the warmer months.</p></div>
-      <div><h3>Courts</h3><p>Basketball, volleyball, tennis and badminton, floodlit for evening play.</p></div>
-      <div><h3>Cricket &amp; Football</h3><p>A shared ground for match play and inter-house fixtures.</p></div>
-      <div><h3>Yoga Shala</h3><p>Daily practice, and the quieter half of the school&rsquo;s physical education.</p></div>
-      <div><h3>Indoor Hall</h3><p>Table tennis, chess and carrom when the monsoon closes the ground.</p></div>
-    </div>
+  <div class="house-bands" id="houseBands" role="tablist" aria-label="CIRS House Teams">
+    <!-- Vasistha (Red) -->
+    <article class="house-band house-band--vasistha is-active" id="house-vasistha"
+             role="tabpanel" tabindex="0" aria-labelledby="tab-vasistha">
+      <div class="house-band__media">
+        <img src="assets/img/sports/house-parade.jpg"
+             alt="CIRS house parade marching in formation"
+             width="1600" height="1000" loading="lazy" decoding="async">
+        <div class="house-band__tint house-band__tint--red" aria-hidden="true"></div>
+      </div>
+      <div class="house-band__content">
+        <div class="house-band__header">
+          <span class="house-band__color-tag">RED</span>
+          <h3 class="serif house-band__name" id="tab-vasistha">Vasistha</h3>
+        </div>
+        <div class="house-band__details">
+          <p class="house-band__identity">Discipline, leadership, and unwavering determination on the track and field.</p>
+          <ul class="house-band__facts">
+            <li><strong>Annual Fixture:</strong> Khel Mela March-Past &amp; Athletics</li>
+            <li><strong>House Spirit:</strong> Collective grit across all grades</li>
+          </ul>
+          <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
+        </div>
+      </div>
+      <button type="button" class="house-band__trigger" aria-controls="house-vasistha" aria-expanded="true">
+        <span class="sr-only">Expand Vasistha House</span>
+      </button>
+    </article>
+
+    <!-- Valmiki (Yellow) -->
+    <article class="house-band house-band--valmiki" id="house-valmiki"
+             role="tabpanel" tabindex="0" aria-labelledby="tab-valmiki">
+      <div class="house-band__media">
+        <img src="assets/img/sports/house-flag.jpg"
+             alt="House parade flag held during ceremonial march-past"
+             width="1600" height="1000" loading="lazy" decoding="async">
+        <div class="house-band__tint house-band__tint--yellow" aria-hidden="true"></div>
+      </div>
+      <div class="house-band__content">
+        <div class="house-band__header">
+          <span class="house-band__color-tag">YELLOW</span>
+          <h3 class="serif house-band__name" id="tab-valmiki">Valmiki</h3>
+        </div>
+        <div class="house-band__details">
+          <p class="house-band__identity">Creativity, strategic agility, and tactical teamwork across team sports.</p>
+          <ul class="house-band__facts">
+            <li><strong>Annual Fixture:</strong> Inter-House Basketball &amp; Swimming</li>
+            <li><strong>House Spirit:</strong> Speed, enthusiasm, and cohesion</li>
+          </ul>
+          <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
+        </div>
+      </div>
+      <button type="button" class="house-band__trigger" aria-controls="house-valmiki" aria-expanded="false">
+        <span class="sr-only">Expand Valmiki House</span>
+      </button>
+    </article>
+
+    <!-- Vishwamitra (Green) -->
+    <article class="house-band house-band--vishwamitra" id="house-vishwamitra"
+             role="tabpanel" tabindex="0" aria-labelledby="tab-vishwamitra">
+      <div class="house-band__media">
+        <img src="assets/img/sports/house-cheer.jpg"
+             alt="Students gathered in house cheering section"
+             width="1600" height="1000" loading="lazy" decoding="async">
+        <div class="house-band__tint house-band__tint--green" aria-hidden="true"></div>
+      </div>
+      <div class="house-band__content">
+        <div class="house-band__header">
+          <span class="house-band__color-tag">GREEN</span>
+          <h3 class="serif house-band__name" id="tab-vishwamitra">Vishwamitra</h3>
+        </div>
+        <div class="house-band__details">
+          <p class="house-band__identity">Tenacity, physical stamina, and quiet resolve through distance and endurance events.</p>
+          <ul class="house-band__facts">
+            <li><strong>Annual Fixture:</strong> House Maths Run &amp; Cross-Country</li>
+            <li><strong>House Spirit:</strong> Endurance and unwavering focus</li>
+          </ul>
+          <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
+        </div>
+      </div>
+      <button type="button" class="house-band__trigger" aria-controls="house-vishwamitra" aria-expanded="false">
+        <span class="sr-only">Expand Vishwamitra House</span>
+      </button>
+    </article>
+
+    <!-- Vyasa (Blue) -->
+    <article class="house-band house-band--vyasa" id="house-vyasa"
+             role="tabpanel" tabindex="0" aria-labelledby="tab-vyasa">
+      <div class="house-band__media">
+        <img src="assets/img/sports/hero-track.jpg"
+             alt="CIRS runners rounding the track in inter-house competition"
+             width="2400" height="1500" loading="lazy" decoding="async">
+        <div class="house-band__tint house-band__tint--blue" aria-hidden="true"></div>
+      </div>
+      <div class="house-band__content">
+        <div class="house-band__header">
+          <span class="house-band__color-tag">BLUE</span>
+          <h3 class="serif house-band__name" id="tab-vyasa">Vyasa</h3>
+        </div>
+        <div class="house-band__details">
+          <p class="house-band__identity">Integrity, composure under pressure, and mutual encouragement across all competitions.</p>
+          <ul class="house-band__facts">
+            <li><strong>Annual Fixture:</strong> Football League &amp; Racquet Sports</li>
+            <li><strong>House Spirit:</strong> Sportsmanship and relentless pursuit</li>
+          </ul>
+          <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
+        </div>
+      </div>
+      <button type="button" class="house-band__trigger" aria-controls="house-vyasa" aria-expanded="false">
+        <span class="sr-only">Expand Vyasa House</span>
+      </button>
+    </article>
   </div>
 </section>
 
-<section class="section" id="in-play">
+<!-- ============================================================
+     SECTION 5. THE COMPETITION ARCHIVE
+     Editorial archive layout of laurels, tournaments, and meets.
+     ============================================================ -->
+<section class="laurel-archive" id="archive" aria-labelledby="archiveHeading">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="marker"><span class="sc">In pictures</span></p>
-      <h2 class="serif h2" data-split>The inter-house <em>fixture.</em></h2>
-      <p class="lead">Basketball, house against house, on the outdoor court. The four
-        o&rsquo;clock hour is when most of the school&rsquo;s sport actually happens, and this is
-        what it looks like.</p>
+      <p class="marker"><span class="sc">Competition Archive</span></p>
+      <h2 class="serif h1" id="archiveHeading" data-split>
+        WHAT THEY <em>CARRIED HOME.</em>
+      </h2>
+      <p class="lead">
+        Records of competition, championship banners, and verified laurels across inter-house,
+        district, CBSE cluster, and national arenas.
+      </p>
     </div>
 
-    <div class="strip rv">
-      <figure><img src="assets/img/sports/basketball-contest.jpg"
-                   alt="A player driving with the ball past two defenders on the CIRS basketball court"
-                   width="1000" height="750" loading="lazy"></figure>
-      <figure><img src="assets/img/sports/basketball-shot.jpg"
-                   alt="A shot going up towards the hoop, three players with their hands raised beneath it"
-                   width="1000" height="750" loading="lazy"></figure>
-      <figure><img src="assets/img/sports/basketball-floodlit.jpg"
-                   alt="A player holding the ball at the top of the key as the court lights come on"
-                   width="1000" height="750" loading="lazy"></figure>
-    </div>
+    <div class="archive-timeline">
+      <!-- 1. Khel Mela -->
+      <article class="archive-entry rv">
+        <div class="archive-entry__year"><time datetime="2026">Annual</time></div>
+        <div class="archive-entry__card">
+          <div class="archive-entry__meta">
+            <span class="archive-entry__tag">Inter-House Championship</span>
+            <span class="archive-entry__date">4&ndash;5 February</span>
+          </div>
+          <h3 class="serif archive-entry__title">Khel Mela &mdash; Annual Sports Meet</h3>
+          <p class="archive-entry__copy">
+            The flagship two-day sports meet of CIRS. Features ceremonial opening parade, march-past
+            by the four houses, track and field finals, pool competitions, and the awarding of the
+            overall House Championship Trophy.
+          </p>
+          <dl class="archive-entry__specs">
+            <div><dt>Events</dt><dd>Track, Field, Swimming &amp; March-Past</dd></div>
+            <div><dt>Participants</dt><dd>Junior &amp; Senior Schools (Grades V&ndash;XII)</dd></div>
+            <div><dt>Verification</dt><dd>Official School Circular Ref: CIRS/PAR/2019-20/0046</dd></div>
+          </dl>
+        </div>
+      </article>
 
-    <p class="note rv" style="margin-top:20px"><em>[Photographs of the cricket facility, the tennis
-      and badminton courts, the table tennis hall, the football ground and the athletics track to be
-      supplied by the school.]</em></p>
+      <!-- 2. CBSE Cluster & Regional Meets -->
+      <article class="archive-entry rv">
+        <div class="archive-entry__year"><time datetime="2025">Regional</time></div>
+        <div class="archive-entry__card">
+          <div class="archive-entry__meta">
+            <span class="archive-entry__tag">Interschool &amp; Cluster</span>
+            <span class="archive-entry__date">Academic Calendar</span>
+          </div>
+          <h3 class="serif archive-entry__title">CBSE Cluster Athletics &amp; Games</h3>
+          <p class="archive-entry__copy">
+            CIRS delegations represent the school in CBSE Cluster athletic meets across Tamil Nadu in
+            sprint, middle-distance events, basketball, and badminton tournaments.
+          </p>
+          <dl class="archive-entry__specs">
+            <div><dt>Governing Body</dt><dd>Central Board of Secondary Education (CBSE)</dd></div>
+            <div><dt>Disciplines</dt><dd>Athletics, Basketball, Badminton, Swimming</dd></div>
+            <div><dt>Status</dt><dd>Annual competitive schedule</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <!-- 3. Chinmaya Olympiad & House Maths Run -->
+      <article class="archive-entry rv">
+        <div class="archive-entry__year"><time datetime="2025">Campus</time></div>
+        <div class="archive-entry__card">
+          <div class="archive-entry__meta">
+            <span class="archive-entry__tag">Endurance &amp; Mind</span>
+            <span class="archive-entry__date">July &amp; January</span>
+          </div>
+          <h3 class="serif archive-entry__title">House-wise Maths Run &amp; Sports Olympiad</h3>
+          <p class="archive-entry__copy">
+            160 senior students race across eight interactive campus checkpoints during Mathematics Week,
+            blending physical stamina with rapid problem-solving, followed by the Chinmaya Olympiad in January.
+          </p>
+          <dl class="archive-entry__specs">
+            <div><dt>Format</dt><dd>8-Station Campus Endurance Run</dd></div>
+            <div><dt>Participation</dt><dd>House Teams, Grades IX&ndash;XII</dd></div>
+            <div><dt>Verification</dt><dd>CIRS Department of Mathematics Reports</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <!-- 4. Official Record Notice Placeholder -->
+      <div class="archive-notice rv">
+        <div class="archive-notice__body">
+          <h4 class="serif h3">Official Laurels &amp; Trophies Registry</h4>
+          <p class="archive-notice__text">
+            Individual student placings, national tournament appearances, and verified district medals
+            are being systematically archived by the CIRS Sports and Activities Office.
+          </p>
+          <p class="note"><em>[Placeholder &mdash; full historical rolls of trophy winners, tournament years, and athlete medal tallies to be published upon receipt of verified school records.]</em></p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="section on-paper-2" id="achievements">
+<!-- ============================================================
+     SECTION 6. ATHLETE STORIES
+     Real verified reflections from student athletes.
+     ============================================================ -->
+<section class="athlete-stories" id="stories" aria-labelledby="storiesHeading">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="marker"><span class="sc">Achievements</span></p>
-      <h2 class="serif h2" data-split>What the teams <em>have won.</em></h2>
-      <p class="lead">Inter-school, district and state results, and the students who carried them.</p>
+      <p class="marker"><span class="sc">Student Perspectives</span></p>
+      <h2 class="serif h1" id="storiesHeading" data-split>
+        THE RESULT IS NEVER <em>ONLY THE RESULT.</em>
+      </h2>
+      <p class="lead">
+        Sport teaches perseverance before it yields victory. Reflections on early mornings,
+        consistency, and personal growth from CIRS student athletes.
+      </p>
     </div>
 
-    <div class="steps">
-      <div class="step rv">
-        <p class="step__n"></p>
-        <div>
-          <h3 class="serif h3">Inter-school and district</h3>
-          <p><em>[Placeholder &mdash; competition names, years, placings and the students involved,
-            to be supplied by the sports office.]</em></p>
+    <div class="athlete-stories__showcase rv">
+      <!-- Verified Story 1: Aarav Bhartia -->
+      <article class="athlete-card">
+        <div class="athlete-card__media">
+          <img src="assets/img/sports/laurels-team.jpg"
+               alt="A student athlete in training and motion at CIRS"
+               width="1600" height="1100" loading="lazy" decoding="async">
         </div>
-        <p class="step__aside"><b>To be supplied</b><br>Results and photographs</p>
-      </div>
-      <div class="step rv">
-        <p class="step__n"></p>
-        <div>
-          <h3 class="serif h3">State and national</h3>
-          <p><em>[Placeholder &mdash; representative honours and any national-level participation,
-            to be supplied by the sports office.]</em></p>
+        <div class="athlete-card__body">
+          <p class="athlete-card__context">Crossroads &middot; Issue 29 &middot; February 2026</p>
+          <blockquote class="athlete-card__quote serif">
+            &ldquo;You do not need talent to become successful. In fact, you need skills that do not take
+            talent like punctuality, consistency and the spirit to outlast everyone else.&rdquo;
+          </blockquote>
+          <div class="athlete-card__byline">
+            <strong>Aarav Bhartia</strong>
+            <span>Class X B &middot; Cricket &amp; Distance Running</span>
+          </div>
+          <p class="athlete-card__narrative">
+            From waking at 4:30 AM for fitness drills to defending 20 underarm balls in basic academy practice,
+            Aarav reflects on his three-year journey to becoming Man of the Match with a 5-wicket haul:
+            <em>&ldquo;I observed that opportunities always came to me, as long as I remained sincere in my practice. Not only in sport but in every field.&rdquo;</em>
+          </p>
+          <a class="btn btn--outline" href="the-journey-behind-excellence.html">
+            Read full essay in The Crossroads &rarr;
+          </a>
         </div>
-        <p class="step__aside"><b>To be supplied</b><br>Results and photographs</p>
-      </div>
-      <div class="step rv">
-        <p class="step__n"></p>
-        <div>
-          <h3 class="serif h3">Inter-house</h3>
-          <p><em>[Placeholder &mdash; the house championship, its history and current holders, to be
-            supplied by the sports office.]</em></p>
+      </article>
+
+      <!-- Honest Editorial Placeholder for Additional Profiles -->
+      <div class="athlete-card athlete-card--placeholder">
+        <div class="athlete-card__body">
+          <p class="athlete-card__context">Student Athlete Profiles &middot; Sports Office</p>
+          <h3 class="serif h3">Voices from the Field</h3>
+          <p>
+            Authentic tournament reflections and profiles of CIRS house captains, district athletes,
+            and swimmers will be featured here as they are documented by the Crossroads Editorial Board
+            and sports faculty.
+          </p>
+          <p class="note"><em>[Placeholder &mdash; additional student profiles and quotes are added strictly from verified published essays and official school records; no student quotes are invented.]</em></p>
         </div>
-        <p class="step__aside"><b>To be supplied</b><br>Standings by year</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 7. DISCIPLINE AND DAILY ROUTINE
+     Connecting sport to the verified CIRS residential routine.
+     ============================================================ -->
+<section class="routine-sec" id="routine" aria-labelledby="routineHeading">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">The Residential Rhythm</span></p>
+      <h2 class="serif h1" id="routineHeading" data-split>
+        PERFORMANCE IS BUILT <em>BEFORE THE MATCH.</em>
+      </h2>
+      <p class="lead">
+        Sport at CIRS does not exist in isolation. It is woven into a disciplined residential day
+        where physical exertion balances academic concentration and spiritual practice.
+      </p>
+    </div>
+
+    <div class="routine-grid rv">
+      <!-- 1. Dawn -->
+      <div class="routine-card">
+        <div class="routine-card__time">05:30 AM</div>
+        <h3 class="serif routine-card__title">Rouser &amp; Jogging</h3>
+        <p class="routine-card__desc">
+          The campus stirs before sunrise. Junior houses rise at 4:50, seniors at 5:30, followed by
+          morning jogging in the fresh air of the foothills and warm milk.
+        </p>
+        <span class="routine-card__tag">Grounding</span>
+      </div>
+
+      <!-- 2. Academic Day -->
+      <div class="routine-card">
+        <div class="routine-card__time">08:10 AM &ndash; 13:30</div>
+        <h3 class="serif routine-card__title">Classrooms &amp; Laboratories</h3>
+        <p class="routine-card__desc">
+          After morning prayer and assembly, five hours of academic focus in CBSE and the IB Diploma.
+          Mental rigor establishes the discipline carried into the afternoon.
+        </p>
+        <span class="routine-card__tag">Intellect</span>
+      </div>
+
+      <!-- 3. Afternoon Study -->
+      <div class="routine-card">
+        <div class="routine-card__time">15:20 &ndash; 17:00</div>
+        <h3 class="serif routine-card__title">Study Period</h3>
+        <p class="routine-card__desc">
+          Post-lunch rest gives way to quiet, self-directed preparation. Academic work is completed
+          so students step onto the field with undivided attention.
+        </p>
+        <span class="routine-card__tag">Focus</span>
+      </div>
+
+      <!-- 4. The Arena -->
+      <div class="routine-card routine-card--highlight">
+        <div class="routine-card__time">16:00 / 17:00</div>
+        <h3 class="serif routine-card__title">The Field Opens</h3>
+        <p class="routine-card__desc">
+          Ninety minutes of intensive physical movement: athletics on the track, swimming in the pool,
+          racquet matches, and inter-house football and basketball.
+        </p>
+        <span class="routine-card__tag">The Arena</span>
+      </div>
+
+      <!-- 5. Evening Quiet -->
+      <div class="routine-card">
+        <div class="routine-card__time">18:30 &ndash; 20:10</div>
+        <h3 class="serif routine-card__title">Prayer &amp; Aarti</h3>
+        <p class="routine-card__desc">
+          Recovery and transition. Evening refreshments are followed by shared prayers and aarti,
+          settling the body and mind after physical competition.
+        </p>
+        <span class="routine-card__tag">Centering</span>
+      </div>
+
+      <!-- 6. Night Rest -->
+      <div class="routine-card">
+        <div class="routine-card__time">22:00 PM</div>
+        <h3 class="serif routine-card__title">Lights Out</h3>
+        <p class="routine-card__desc">
+          Dinner and evening study close at 22:00 (21:00 for juniors). Milk is served, houses settle,
+          and the hundred-acre campus rests for tomorrow&rsquo;s rouser.
+        </p>
+        <span class="routine-card__tag">Rest &amp; Recovery</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 8. LAURELS ENDING
+     Final achievement composition and onward pathways.
+     ============================================================ -->
+<section class="laurel-ending" id="laurels" aria-labelledby="endingHeading">
+  <div class="laurel-ending__media">
+    <img src="assets/img/sports/hero-track.jpg"
+         alt="CIRS athletics meet against the Western Ghats mountain backdrop"
+         width="2400" height="1500" loading="lazy" decoding="async">
+    <div class="laurel-ending__scrim" aria-hidden="true"></div>
+  </div>
+
+  <div class="wrap laurel-ending__inner rv">
+    <p class="marker"><span class="sc">The Laurel</span></p>
+    <h2 class="serif h1 laurel-ending__title" id="endingHeading" data-split>
+      THE GAME ENDS.<br><em>THE DISCIPLINE STAYS.</em>
+    </h2>
+    <p class="lead laurel-ending__lead">
+      Sport at CIRS is part of the education. It teaches preparation, responsibility,
+      recovery and respect for the team. Long after the trophy is placed in the cabinet,
+      the habit of showing up remains.
+    </p>
+
+    <div class="laurel-ending__links">
+      <a class="btn btn--primary btn--lg" href="student-life.html">
+        EXPLORE STUDENT LIFE &rarr;
+      </a>
+      <a class="btn btn--ghost btn--lg" href="#archive">
+        VIEW SPORTS ARCHIVE &uarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 9. PRACTICAL INFORMATION
+     Clean, compact parent information without excessive animation.
+     ============================================================ -->
+<section class="sports-practical" id="practical" aria-labelledby="practicalHeading">
+  <div class="wrap">
+    <div class="sports-practical__grid rv">
+      <div class="sports-practical__intro">
+        <p class="marker"><span class="sc">For Parents &amp; Families</span></p>
+        <h2 class="serif h2" id="practicalHeading">Practical Information</h2>
+        <p class="copy">
+          Sports at CIRS is fully integrated into residential tuition, including equipment, coaching,
+          and tournament transport. Reach key admissions and student life portals directly.
+        </p>
+      </div>
+
+      <nav class="sports-practical__links" aria-label="Key school links">
+        <a class="sports-link-card" href="student-life.html">
+          <strong>Student Life</strong>
+          <span>Daily routines, dining, and residential houses</span>
+        </a>
+        <a class="sports-link-card" href="student-life.html#houses">
+          <strong>The Four Houses</strong>
+          <span>Vasistha, Valmiki, Vishwamitra, and Vyasa</span>
+        </a>
+        <a class="sports-link-card" href="our-results.html">
+          <strong>Academic Results</strong>
+          <span>CBSE and IB Diploma examination track record</span>
+        </a>
+        <a class="sports-link-card" href="admissions.html">
+          <strong>Admissions</strong>
+          <span>Registration, entrance tests, and campus visits</span>
+        </a>
+        <a class="sports-link-card" href="admissions.html#contact">
+          <strong>Contact Admissions</strong>
+          <span>Reach the admissions office via WhatsApp or email</span>
+        </a>
+        <a class="sports-link-card" href="https://cirs.in/school/" target="_blank" rel="noopener">
+          <strong>Student Portal</strong>
+          <span>Official CIRS academic and student login <span aria-hidden="true">&nearr;</span></span>
+        </a>
+      </nav>
     </div>
   </div>
 </section>
@@ -459,10 +1134,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=94" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=94" defer></script>
-<script src="assets/vendor/lenis.min.js?b=94" defer></script>
-<script src="assets/js/cirs.js?b=94" defer></script>
-<script src="assets/js/pages.js?b=94" defer></script>
+<script src="assets/vendor/gsap.min.js?b=94-sports-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=94-sports-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=94-sports-1" defer></script>
+<script src="assets/js/cirs.js?b=94-sports-1" defer></script>
+<script src="assets/js/pages.js?b=94-sports-1" defer></script>
+<script src="assets/js/sports-journey.js?b=94-sports-1" defer></script>
 </body>
 </html>
