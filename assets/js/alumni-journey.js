@@ -275,17 +275,19 @@
   /* ==========================================================
      The flights
      ----------------------------------------------------------
-     One light per route, running out of Siruvani and fading as
-     it arrives, then away and out again. They are drawn into
+     One aircraft per route, flying out of Siruvani and fading
+     as it arrives, then away and out again. Each is turned to
+     its heading every frame, so it flies along the curve of its
+     route rather than sliding down it. They are drawn into
      the routes' own SVG so they share its frame exactly, and
      they are moved along the routes' own geometry — each path
      is sampled once into a table of points and the light is
-     read out of the table — so a light cannot drift off the
-     line it belongs to, and no route is measured twice.
+     read out of the table — so an aircraft cannot drift off
+     the line it belongs to, and no route is measured twice.
 
      Nothing here carries information. A route that is filtered
-     out or dimmed takes its light down with it; a route that is
-     asked about brightens its own. Decoration that contradicts
+     out or dimmed takes its aircraft down with it; a route that
+     is asked about brightens its own. Decoration that contradicts
      the state underneath it is worse than no decoration.
      ========================================================== */
   function buildFlights() {
@@ -298,6 +300,23 @@
     if (!routes.length) return null;
 
     var SAMPLES = 96;
+
+    // The aircraft, nose along +x, drawn once as one silhouette at the
+    // size it flies: about two frame units nose to tail, a dozen pixels
+    // at full width. Half an outline, mirrored, so it cannot come out
+    // lopsided — nose, fuselage, swept wing, tailplane, tail.
+    var PLANE = (function () {
+      var k = 0.09;
+      var half = [[12, 0], [10.6, -1.6], [3, -1.6], [-2.6, -11], [-5, -11],
+                  [-2.2, -1.6], [-8.4, -1.4], [-10.8, -5], [-12.6, -5],
+                  [-11.2, -0.8], [-12, 0]];
+      var pts = half.concat(half.slice(1, -1).reverse().map(function (p) {
+        return [p[0], -p[1]];
+      }));
+      return "M" + pts.map(function (p) {
+        return (p[0] * k).toFixed(3) + " " + (p[1] * k).toFixed(3);
+      }).join(" L") + "Z";
+    })();
     var flights = [];
 
     routes.forEach(function (path, i) {
@@ -311,13 +330,13 @@
         var pt = path.getPointAtLength(len * k / SAMPLES);
         xs[k] = pt.x; ys[k] = pt.y;
       }
-      var dot = document.createElementNS(NS, "circle");
-      dot.setAttribute("class", "ajc__flight");
-      dot.setAttribute("r", "0.55");
-      dot.setAttribute("opacity", "0");
-      host.appendChild(dot);
+      var plane = document.createElementNS(NS, "path");
+      plane.setAttribute("class", "ajc__flight");
+      plane.setAttribute("d", PLANE);
+      plane.setAttribute("opacity", "0");
+      host.appendChild(plane);
       flights.push({
-        path: path, node: dot, xs: xs, ys: ys,
+        path: path, node: plane, xs: xs, ys: ys,
         // Staggered starts and slightly different speeds, fixed per
         // route, so the nineteen never fall into step and start to
         // read as a machine rather than as traffic.
@@ -346,9 +365,15 @@
         var k = f.t * SAMPLES;
         var i0 = Math.floor(k), u = k - i0;
         var i1 = Math.min(i0 + 1, SAMPLES);
-        f.node.setAttribute("cx", (f.xs[i0] + (f.xs[i1] - f.xs[i0]) * u).toFixed(2));
-        f.node.setAttribute("cy", (f.ys[i0] + (f.ys[i1] - f.ys[i0]) * u).toFixed(2));
-        // In at the start of the run, out at the end of it, so a light
+        var dx = f.xs[i1] - f.xs[i0], dy = f.ys[i1] - f.ys[i0];
+        // Heading is the direction of the sample it is flying through.
+        // The frame's scale is the same both ways, so the angle measured
+        // here is the angle drawn.
+        f.node.setAttribute("transform",
+          "translate(" + (f.xs[i0] + dx * u).toFixed(2) + " " +
+                         (f.ys[i0] + dy * u).toFixed(2) + ") rotate(" +
+          (Math.atan2(dy, dx) * 57.29578).toFixed(1) + ")");
+        // In at the start of the run, out at the end of it, so a plane
         // arrives rather than vanishing mid-ocean.
         var env = Math.min(f.t / 0.14, 1) * Math.min((1 - f.t) / 0.2, 1);
         f.node.setAttribute("opacity", (env * f.fade).toFixed(3));
@@ -798,7 +823,7 @@
   function start() {
     var parts = interactions();
     // The lights only ever run inside motion(); building them when there
-    // is none would put nineteen circles on the map that never move.
+    // is none would put nineteen aircraft on the map that never move.
     var flights = canMove ? buildFlights() : null;
     if (canMove) {
       try { motion(parts, flights); }

@@ -348,9 +348,9 @@ html.js-motion .ajc__line{ opacity:0; }
 html.js-motion .ajc__map,
 html.js-motion .ajc__origin{ opacity:0; }
 
-/* The lights running the routes: one per destination, moving out from
-   Siruvani. alumni-journey.js puts them here and moves them; the sheet
-   only says what they look like. */
+/* The aircraft flying the routes: one per destination, out of Siruvani,
+   turned to their heading. alumni-journey.js draws them and moves them;
+   the sheet only says what colour they are. */
 .ajc__flight{ fill:#FFE9BE; }
 
 /* the origin — CIRS, where every route starts */
