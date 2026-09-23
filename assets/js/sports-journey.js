@@ -1,0 +1,169 @@
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  var move = document.querySelector("[data-sports-move]");
+  var chapters = document.querySelector("[data-sports-chapters]");
+  if (!move || !chapters) return;
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var gsap = window.gsap;
+  var ScrollTrigger = window.ScrollTrigger;
+  if (!gsap || !ScrollTrigger) return;
+
+  var moveTrigger = null;
+  var chapterTrigger = null;
+  var wave = move.querySelector("[data-move-wave]");
+  var markers = {
+    track: document.getElementById("sports-track-point"),
+    court: document.getElementById("sports-court-point"),
+    water: document.getElementById("sports-water-point")
+  };
+  var links = Array.prototype.slice.call(
+    chapters.querySelectorAll("[data-chapter-link]")
+  );
+  var captions = {
+    track: chapters.querySelector('[data-chapter="track"] .sports-chapter__caption'),
+    court: chapters.querySelector('[data-chapter="court"] .sports-chapter__caption'),
+    water: chapters.querySelector('[data-chapter="water"] .sports-chapter__caption')
+  };
+
+  function clamp(value) {
+    return Math.max(0, Math.min(1, value));
+  }
+
+  function smooth(value) {
+    var t = clamp(value);
+    return t * t * (3 - 2 * t);
+  }
+
+  function setMove(progress) {
+    var p = clamp(progress);
+    var reveal = smooth((p - 0.015) / 0.54);
+    var edge = 1 - reveal;
+    var amplitude = (window.innerWidth <= 720 ? 0.065 : 0.045) * Math.sin(Math.PI * reveal);
+
+    if (wave) {
+      wave.setAttribute(
+        "d",
+        "M " + edge.toFixed(4) + " 0 C " +
+          (edge + amplitude).toFixed(4) + " .26 " +
+          (edge - amplitude).toFixed(4) + " .74 " +
+          edge.toFixed(4) + " 1 L 1 1 L 1 0 Z"
+      );
+    }
+
+    var enter = smooth((p - 0.09) / 0.23);
+    var resolve = smooth((p - 0.58) / 0.34);
+    var finalScale = window.innerWidth <= 720 ? 0.20 : 0.12;
+    var scale = (0.54 + enter * 0.46) * (1 - resolve) + finalScale * resolve;
+    var x = -window.innerWidth * (window.innerWidth <= 720 ? 0.31 : 0.35) * resolve;
+    var y = -window.innerHeight * 0.36 * resolve;
+    var actionX = -window.innerWidth * (window.innerWidth <= 720 ? 0.018 : 0.025) * reveal * (1 - resolve);
+    var actionScale = 1.07 - 0.07 * reveal;
+    var solid = smooth((p - 0.84) / 0.12);
+    var shade = 0.38 * smooth((p - 0.15) / 0.20) * (1 - smooth((p - 0.62) / 0.28));
+
+    move.style.setProperty("--move-scale", scale.toFixed(4));
+    move.style.setProperty("--move-x", x.toFixed(1) + "px");
+    move.style.setProperty("--move-y", y.toFixed(1) + "px");
+    move.style.setProperty("--action-x", actionX.toFixed(1) + "px");
+    move.style.setProperty("--action-scale", actionScale.toFixed(4));
+    move.style.setProperty("--move-opacity", smooth((p - 0.08) / 0.12).toFixed(4));
+    move.style.setProperty("--move-solid", solid.toFixed(4));
+    move.style.setProperty("--move-shade", shade.toFixed(4));
+    move.style.setProperty("--carry-opacity", (1 - smooth((p - 0.035) / 0.14)).toFixed(4));
+    move.style.setProperty("--move-circle", (reveal * Math.max(window.innerWidth, window.innerHeight) * 1.8).toFixed(1) + "px");
+  }
+
+  function setCaptionProgress(progress) {
+    var p = clamp(progress);
+    var courtIn = smooth((p - 0.23) / 0.16);
+    var waterIn = smooth((p - 0.62) / 0.20);
+    var trackOut = smooth((p - 0.25) / 0.13);
+    var courtOut = smooth((p - 0.67) / 0.14);
+
+    chapters.style.setProperty("--court-top", ((1 - courtIn) * 100).toFixed(2) + "%");
+    chapters.style.setProperty("--water-right", ((1 - waterIn) * 100).toFixed(2) + "%");
+    if (captions.track) captions.track.style.setProperty("--chapter-caption", (1 - trackOut).toFixed(3));
+    if (captions.court) captions.court.style.setProperty("--chapter-caption", (courtIn * (1 - courtOut)).toFixed(3));
+    if (captions.water) captions.water.style.setProperty("--chapter-caption", waterIn.toFixed(3));
+
+    var current = p < 0.32 ? "track" : p < 0.74 ? "court" : "water";
+    links.forEach(function (link) {
+      if (link.getAttribute("data-chapter-link") === current) {
+        link.setAttribute("aria-current", "step");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  function placeMarkers() {
+    if (!root.classList.contains("sports-journey-ready")) return;
+    var travel = Math.max(0, chapters.offsetHeight - window.innerHeight);
+    var anchorOffset = 88;
+    if (markers.track) markers.track.style.top = anchorOffset + "px";
+    if (markers.court) markers.court.style.top = Math.round(travel * 0.34 + anchorOffset) + "px";
+    if (markers.water) markers.water.style.top = Math.round(travel * 0.76 + anchorOffset) + "px";
+  }
+
+  function clearStyles() {
+    ["--move-scale", "--move-x", "--move-y", "--action-x", "--action-scale", "--move-opacity", "--move-solid",
+      "--move-shade", "--carry-opacity", "--move-circle"].forEach(function (name) {
+      move.style.removeProperty(name);
+    });
+    ["--court-top", "--water-right"].forEach(function (name) {
+      chapters.style.removeProperty(name);
+    });
+    Object.keys(captions).forEach(function (key) {
+      if (captions[key]) captions[key].style.removeProperty("--chapter-caption");
+    });
+    links.forEach(function (link) { link.removeAttribute("aria-current"); });
+  }
+
+  function teardown() {
+    if (moveTrigger) { moveTrigger.kill(); moveTrigger = null; }
+    if (chapterTrigger) { chapterTrigger.kill(); chapterTrigger = null; }
+    root.classList.remove("sports-journey-ready");
+    clearStyles();
+  }
+
+  function setup() {
+    if (reduce.matches || moveTrigger || !window.gsap || !window.ScrollTrigger) return;
+    root.classList.add("sports-journey-ready");
+    placeMarkers();
+
+    moveTrigger = ScrollTrigger.create({
+      trigger: move,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: function (self) { setMove(self.progress); },
+      onRefresh: function (self) { setMove(self.progress); }
+    });
+
+    chapterTrigger = ScrollTrigger.create({
+      trigger: chapters,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: function (self) { setCaptionProgress(self.progress); },
+      onRefresh: function (self) {
+        placeMarkers();
+        setCaptionProgress(self.progress);
+      }
+    });
+    ScrollTrigger.refresh();
+  }
+
+  setup();
+
+  reduce.addEventListener("change", function () {
+    if (reduce.matches) teardown();
+    else setup();
+  });
+  window.addEventListener("resize", placeMarkers, { passive: true });
+  window.addEventListener("pagehide", teardown);
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) setup();
+  });
+}());

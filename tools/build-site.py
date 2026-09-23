@@ -278,7 +278,9 @@ PAGES = {
         "barehead": True,
         "nav": "Our Sports",
         "title": "Sports",
-        "description": "Athletics, the playing fields and the sporting record at CIRS.",
+        "description": "Athletics, basketball, swimming and the playing fields at CIRS.",
+        "sheet": "sports-journey",
+        "cache_suffix": "-sports-journey-1",
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
@@ -1361,6 +1363,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
+    if slug == "sports":
+        parts.append(f'<script src="assets/js/sports-journey.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
