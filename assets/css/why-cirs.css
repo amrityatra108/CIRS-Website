@@ -29,17 +29,10 @@ body.why-cirs .saga__eyebrow{
   border-bottom:1px solid rgba(255,255,255,.28);
 }
 
-/* The eyebrows above each heading carry a little more weight here than the
+/* The eyebrows above each heading are set larger here than the
    site default (1rem–1.02rem), still well below the headline. */
 body.why-cirs :is(.saga__eyebrow, #facts .marker .sc){
-  font-size:clamp(1.2rem,1rem + .6vw,1.45rem);
-}
-
-body.why-cirs .saga__count{
-  flex:none;
-  color:rgba(255,255,255,.76);
-  font-variant-numeric:tabular-nums lining-nums;
-  letter-spacing:.08em;
+  font-size:clamp(1.3rem,1.05rem + .9vw,1.8rem);
 }
 
 body.why-cirs .saga__summary{
