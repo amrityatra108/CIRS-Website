@@ -1,20 +1,21 @@
-# Our Sports — storyboard before implementation
+# Our Sports — revised storyboard
 
-This board was created before page code changed. It uses the final still from PR #46’s existing field film and genuine CIRS action photographs from the supplied Drive folder. The concept stills are art direction; browser captures will be added after implementation and labeled separately.
+This correction storyboard uses the opening video supplied in `cirs sports (1).mp4`. It was prepared before changing the Sports page source. Desktop and mobile are composed independently from the film’s exact final frame and the current CIRS Drive photographs.
 
 ## Visual handoff
 
-- **Entry:** PR #46 frame 120 holds exactly: ball centered on the white field line, Ghats across the upper third, sunrise to the left. This is the source composition at the next scene’s first frame.
-- **Action:** The runner photograph sweeps in from the right on a rising, irregular edge aligned to the Ghats and tree line. Revealing the photo vertically keeps the athletes whole as the action arrives; the exact field frame remains visible on the left. This carries the runners’ direction into the track scene instead of crossfading unrelated backgrounds.
-- **Hold:** A single oversized `MOVE` reveals the same runner photograph only through its letterforms. A CIRS-gold outline and a dark surrounding field keep the word readable. Scroll scrubbing controls the reveal in either direction.
-- **Exit:** The letter-shaped aperture expands across the frame to reveal the full runner image. `MOVE` resolves into a small scene label; the photograph continues into the next scene. There is no second oversized word.
+- **Entry:** The supplied film finishes at frame 120, 5.011667 seconds. The ball, white field line, sunrise and Ghats hold in their final composition.
+- **Action:** Photo `0C9A5528.JPG` enters from the right along a bowed edge that follows the runners. One gold `MOVE` sits over the image; no duplicate photo fills the letters.
+- **Hold:** The action photo continues as one uninterrupted layer while `MOVE` scales and moves toward the upper-left. It does not reappear in another track section or chapter.
+- **Exit:** Photo `0C9A5453.JPG` replaces the close race view along the track’s white lane line. `MOVE` resolves into the short athletics line over the wider finish scene.
+- **Quiet beat:** After basketball and swimming, photo `0C9A5402.JPG` brings a slower group movement before the facilities text.
 
 ## Art direction
 
 - Desktop boards are composed at **1440 × 900**; mobile boards are separately cropped and composed at **390 × 844**.
-- The mobile runner crop favors the foreground athlete; it is not a scaled desktop composition.
-- CIRS’s existing palette and Jost/Newsreader type remain authoritative. This concept board uses a system sans-serif proxy for type proportions.
-- The only photography used here is the PR #46 film final frame and Drive originals `IMG_2317.JPG` (Canon EOS 6D Mark II, 2023-09-26).
+- Mobile uses separately composed portrait crops and keeps the word clear of the foreground runner.
+- CIRS’s purple, gold and existing type remain authoritative. Storyboard type uses a system sans-serif proxy for proportions.
+- The opener comes from the user-supplied MP4. The race and yoga scenes use three distinct CIRS photographs supplied in this conversation.
 
 ## Key-state stills
 

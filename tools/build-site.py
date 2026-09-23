@@ -280,7 +280,7 @@ PAGES = {
         "title": "Sports",
         "description": "Athletics, basketball, swimming and the playing fields at CIRS.",
         "sheet": "sports-journey",
-        "cache_suffix": "-sports-journey-1",
+        "cache_suffix": "-sports-journey-2",
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
