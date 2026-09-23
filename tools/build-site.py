@@ -447,12 +447,21 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "festivals": {
+        "barehead": True,
+        "cache_suffix": "-festivals-film-1",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
         "description": "The festivals kept through the year at Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Festivals", "The Year, <em>Kept Together.</em>",
-                   "The festivals the school keeps, and what they look like on this campus."),
+        "banner": None,
+        "opening": {
+            "video": "festivals-opening",
+            "poster": "festivals-opening-poster.jpg",
+            "still": "festivals-opening-final.jpg",
+            "title": "CIRS Festivals",
+            "title_markup": '<span class="film__festival-prefix">CIRS </span><span class="film__festival-name">Festivals</span>',
+            "pending": True,
+        },
         "soon": ([("Through the year", "Each festival as the school keeps it"),
                   ("Photographs", "From the mornings and the evenings of each one"),
                   ("Accounts", "Written by the students who took part")],
