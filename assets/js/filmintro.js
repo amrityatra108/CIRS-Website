@@ -1,4 +1,4 @@
-/* The cinematic opening shared by CIRS Captures, Our Sports and CIRS Festivals.
+/* The cinematic opening shared by the CIRS film openings.
 
    These pages open the same way, because they share page furniture with a
    different film in it: the reader scrubs a short piece of footage with the
@@ -60,7 +60,7 @@
   var trigger = null;
   var furniture = null;
   var failedSources = 0;
-  var sources = film.querySelectorAll("source");
+  var sources = hasComposedStill ? film.querySelectorAll("source") : [];
   var fallbackTimer = null;
   var unavailable = false;
   var measuredTravel = 0;
@@ -110,8 +110,8 @@
     setScrollCue(p);
   }
 
-  // Composed still openings measure their position directly. A section-bound
-  // ScrollTrigger can retain stale bounds when the viewport changes shape.
+  // Composed still openings measure their position directly. This keeps a
+  // halfway reload stable and avoids stale section bounds after a resize.
   function paintPosition() {
     var travel = Math.max(1, section.offsetHeight - window.innerHeight);
     if (measuredTravel && Math.abs(travel - measuredTravel) > 2 &&
@@ -148,6 +148,8 @@
     if (trigger || !hasST || reduced.matches) return;
     section.removeAttribute("data-film-still");
     if (hasComposedStill) {
+      // A document-wide trigger keeps reporting while the section's travel
+      // is remeasured on resize. Its actual viewport position chooses frame.
       trigger = ScrollTrigger.create({
         onUpdate: paintPosition,
         onRefresh: paintPosition
@@ -209,8 +211,8 @@
     if (scrollCue) scrollCue.style.setProperty("--film-scroll-cue-opacity", "0");
     section.removeAttribute("data-film-pending");
   }
-  // A failed MP4 source may be followed by a working WebM source, so wait for
-  // the active stream or both source errors before using the still.
+  // An unused source can fail while WebM is loading. After metadata a media
+  // error is definitive; before metadata wait for both source errors.
   film.addEventListener("error", function () {
     if (!hasComposedStill || duration) fallback();
   });
@@ -250,6 +252,7 @@
   window.addEventListener("touchstart", unlock, { passive: true, once: true });
 
   reduced.addEventListener("change", function () {
+    if (unavailable) return;
     if (reduced.matches) { teardown(); start(); }
     else { section.removeAttribute("data-film-still"); scrub(); start(); }
   });

@@ -277,10 +277,10 @@ PAGES = {
     "sports": {
         "barehead": True,
         "nav": "Our Sports",
-        "title": "Sports",
-        "description": "Athletics, basketball, swimming and the playing fields at CIRS.",
-        "sheet": "sports-journey",
-        "cache_suffix": "-sports-journey-5",
+        "title": "Sports & Laurels — Built in the Arena | CIRS",
+        "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
+        "sheet": "sports",
+        "cache_suffix": "-sports-1",
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
@@ -424,12 +424,21 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "art-attack": {
+        "barehead": True,
+        "cache_suffix": "-art-attack-film-1",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Studio work and visual art from across Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Art Attack", "Made <em>by Hand.</em>",
-                   "Studio work and visual art from across the school."),
+        "banner": None,
+        "opening": {
+            "video": "art-attack-opening",
+            "poster": "art-attack-opening-poster.jpg",
+            "still": "art-attack-opening-final.jpg",
+            "title": "CIRS Art Attack",
+            "title_markup": '<span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span>',
+            "pending": True,
+        },
         "soon": ([("Painting and drawing", "Work from the studio and the classroom"),
                   ("Print and craft", "The processes, and what comes out of them"),
                   ("Exhibitions", "What was shown, and when")],
@@ -461,12 +470,20 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "theatre": {
+        "barehead": True,
+        "cache_suffix": "-theatre-film-1",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Theatre", "Rehearsal, <em>and the Night Itself.</em>",
-                   "Productions, the work behind them, and the stage they are made for."),
+        "banner": None,
+        "opening": {
+            "video": "theatre-opening",
+            "poster": "theatre-opening-poster.jpg",
+            "still": "theatre-opening-final.jpg",
+            "title": "CIRS Theatre",
+            "phases": (0.70, 0.78, 0.91),
+        },
         "soon": ([("Productions", "What was staged, and who was in it"),
                   ("Rehearsal", "The weeks nobody sees"),
                   ("The stage", "The auditorium, and what it can carry")],
@@ -530,6 +547,7 @@ PAGES = {
         # Its sheet is assets/css/alumni.css, scoped to body.alumni.
         "banner": None,
         "sheet": "alumni",
+        "cache_suffix": "-alumni-1",
     },
 }
 
@@ -678,8 +696,8 @@ def soon_html(page):
 def film_html(slug, page):
     """The opening of a page that starts on a film the reader scrubs.
 
-    These pages share the same furniture with different films. A page supplies
-    the footage, title and any phase boundaries; the mechanics are in
+    CIRS film pages share this furniture. Each page supplies its own footage,
+    title and, where needed, phase boundaries; the scrubbing mechanics live in
     assets/css/filmintro.css and assets/js/filmintro.js.
 
     The film remains the opening's only dominant element. Our Sports adds one
@@ -691,8 +709,8 @@ def film_html(slug, page):
     attrs = f' data-film-phases="{" ".join(f"{v:g}" for v in phases)}"' if phases else ""
     if film.get("fps", 24) != 24:
         attrs += f' data-film-fps="{film["fps"]:g}"'
-    if film.get("pending"):
-        attrs += ' data-film-pending'
+    if film.get("pending") or film.get("still"):
+        attrs += " data-film-pending"
     title = film.get("title_markup", f'<span class="film__line">{film["title"]}</span>')
     still = (f'    <img class="film__still" src="assets/img/{film["still"]}" '
              'alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">\n'
@@ -1252,6 +1270,9 @@ def build(slug, page):
     if slug == "founder":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
+    if slug == "sports":
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
     # A page that opens on a scrubbed film carries the shared sheet, and with
     # it the two tuning blocks that sort out which page is which. Without
     # scripting nothing scrubs, so four screens of scroll would move a still
@@ -1260,10 +1281,11 @@ def build(slug, page):
     if page.get("opening"):
         nudge = page["opening"].get("noscript_title_top")
         nudge = (f"body.{slug} .film__title{{--film-title-top:{nudge}}}" if nudge else "")
-        pending = ('.film[data-film-pending] .film__title{opacity:1}'
-                   if page["opening"].get("pending") else "")
-        still = (f'body.{slug} .film__video{{display:none}}'
+        still = ('.film__video{display:none}'
+                 f'body.{slug} .film__still{{visibility:visible}}'
                  if page["opening"].get("still") else "")
+        pending = ('.film[data-film-pending] .film__title{opacity:1}'
+                   if page["opening"].get("pending") or page["opening"].get("still") else "")
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
             f'<noscript><style>.film{{height:100svh}}{nudge}{pending}{still}'
