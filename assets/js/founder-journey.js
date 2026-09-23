@@ -70,7 +70,18 @@
     "education-transformation":{align:"center",viewportY:.50,maxWidth:1120,offsetX:600,offsetY:-260}
   };
   const playhead={progress:0};
-  const state={active:-1,lastProgress:0,routeLength:0,stopLengths:[],frames:[],wheelRadius:1,safeTop:96,trigger:null,scrubTween:null};
+  const state={active:-1,lastProgress:0,routeLength:0,stopLengths:[],frames:[],wheelRadius:1,safeTop:96,trigger:null,scrubTween:null,
+    /* Measured on mount and on every refresh, never inside render().
+       render() runs on every scrubbed frame and writes to the world's
+       transform first; reading an offsetWidth after that write forces the
+       browser to lay the page out again before it can answer, once per
+       frame, on a document that is twelve thousand pixels wide. That
+       single read was the journey's stutter. */
+    vehicleWidth:0,viewW:0,viewH:0,
+    /* Last value written, per element, so a frame that would rewrite the
+       same number writes nothing at all. Most frames of a fourteen-stop
+       journey change two or three of these, not forty. */
+    lastStopOpacity:[],lastTone:null,lastOpening:-1,lastCharcoal:-1,lastSage:-1,lastPreface:null};
 
   function labelFor(stop,index){
     const heading=stop.querySelector("h2,h3");
@@ -148,6 +159,11 @@
   function measureCompositions(){
     const header=document.querySelector(".header");
     const hud=root.querySelector(".founders-journey__hud");
+    // Everything render() would otherwise have to ask the layout engine for,
+    // asked once here instead.
+    state.viewW=innerWidth;
+    state.viewH=innerHeight;
+    state.vehicleWidth=vehicle.offsetWidth;
     const side=Math.max(24,Math.min(72,innerWidth*.04));
     const safe={
       left:side,right:side,
@@ -189,9 +205,41 @@
       stop.classList.toggle("is-active",i===index);
       if(i===index) stop.classList.add("is-seen");
     });
+    // The dots belong here, not in render(). They change only when the
+    // chapter does — a dozen times across the whole journey — and painting
+    // them on every scrubbed frame meant eighteen circles re-laying out the
+    // SVG for a picture that was already correct. The radius is eased by the
+    // stylesheet now instead of jumping on the frame the threshold falls.
+    if(state.dots){
+      state.dots.forEach((dot,i)=>{
+        dot.classList.toggle("is-passed",i<=index);
+        dot.classList.toggle("is-current",i===index);
+        dot.setAttribute("r",i===index?"11":"8");
+      });
+    }
+    setActiveText(index);
+  }
+  function setActiveText(index){
     period.textContent=periodFor(stops[index]);
     title.textContent=labelFor(stops[index],index);
     count.textContent=String(index+1).padStart(2,"0");
+    // The readout used to substitute three strings between one frame and
+    // the next, which at the foot of a moving world reads as a glitch
+    // rather than as a chapter turning. The new text arrives instead.
+    // Element.animate rather than a class and a timer: scrolling fast
+    // changes the chapter several times a second, and each new run cancels
+    // the one before it without ever leaving the old string on screen.
+    turnIn(period);turnIn(title);turnIn(count);
+  }
+  const hudTurns=new WeakMap();
+  function turnIn(el){
+    if(!el||!el.animate) return;
+    const running=hudTurns.get(el);
+    if(running) running.cancel();
+    hudTurns.set(el,el.animate(
+      [{opacity:.18,transform:"translateY(5px)"},{opacity:1,transform:"none"}],
+      {duration:300,easing:"cubic-bezier(.22,.61,.36,1)"}
+    ));
   }
   function activeForPosition(position,direction){
     if(state.active<0) return 0;
@@ -234,12 +282,30 @@
       y:gsap.utils.interpolate(state.frames[index].y,state.frames[next].y,travel)
     };
   }
+  /* A chapter's opacity is a function of where the camera is, not of which
+     index happens to be active. The active index flips at a threshold, and a
+     threshold is a cut: the dates used to appear and vanish on one pixel of
+     scroll, which is the hardest edge on the page.
+
+     The camera stands still for the first third and the last third of the
+     travel between two stops — travelProgress() below is a smoothstep from
+     .34 to .66 — so the exchange is fitted into exactly the span where the
+     world is moving. The outgoing chapter starts leaving on the frame the
+     camera starts moving and is gone by .47; the incoming one starts at .53
+     and is fully up on the frame the camera stops. Nothing fades while the
+     world is still, and the rule the binary version was written to keep
+     still holds exactly: two chapters are never legible at once, and no
+     date bleeds through a photograph. */
+  function stopOpacity(distance){
+    return 1-smoothstep(.34,.47,distance);
+  }
   function setStopOpacities(position,progress){
     stops.forEach((stop,index)=>{
-      // Only the current chapter is readable; adjacent dates must not bleed
-      // through the enlarged photographs while the camera moves.
-      let opacity=index===state.active?1:0;
-      if(progress<MAIN_START) opacity=0;
+      const opacity=progress<MAIN_START?0:stopOpacity(Math.abs(position-index));
+      // Writing a value the element already carries still costs a style
+      // invalidation, and there are fourteen of these.
+      if(state.lastStopOpacity[index]===opacity) return;
+      state.lastStopOpacity[index]=opacity;
       stop.style.setProperty("--stop-opacity",opacity.toFixed(3));
     });
   }
@@ -255,10 +321,24 @@
   function setBackground(mainProgress){
     const charcoal=smoothstep(.34,.39,mainProgress)*(1-smoothstep(.71,.75,mainProgress));
     const sage=smoothstep(.76,.81,mainProgress)*(1-smoothstep(.89,.94,mainProgress));
-    gsap.set(backgrounds.charcoal,{opacity:charcoal});
-    gsap.set(backgrounds.sage,{opacity:sage});
-    gsap.set(backgrounds.ivory,{opacity:1-Math.max(charcoal,sage)});
-    root.classList.toggle("tone-charcoal",charcoal>.55);
+    // Three opacities that are 0 or 1 for most of the journey. Only write
+    // them on the frames where they are actually between.
+    if(charcoal!==state.lastCharcoal||sage!==state.lastSage){
+      state.lastCharcoal=charcoal;
+      state.lastSage=sage;
+      gsap.set(backgrounds.charcoal,{opacity:charcoal});
+      gsap.set(backgrounds.sage,{opacity:sage});
+      gsap.set(backgrounds.ivory,{opacity:1-Math.max(charcoal,sage)});
+    }
+    // The route's ink changes with the ground under it. The class flips at a
+    // threshold and cannot be eased, so the stylesheet eases the stroke
+    // colours instead — otherwise the whole line changes colour on one frame
+    // in the middle of a ground that is still cross-fading.
+    const tone=charcoal>.55;
+    if(tone!==state.lastTone){
+      state.lastTone=tone;
+      root.classList.toggle("tone-charcoal",tone);
+    }
   }
   function render(progress){
     progress=clamp01(progress);
@@ -269,7 +349,7 @@
     const position=timelinePosition(progress);
     const routeDistance=progress<MAIN_START?firstStopLength:routeDistanceFor(position);
     const milestoneCamera=cameraFor(position);
-    const openingCamera={x:innerWidth/2-1110,y:state.safeTop+16-555};
+    const openingCamera={x:state.viewW/2-1110,y:state.safeTop+16-555};
     const openingHandoff=smoothstep(.12,MAIN_START,progress);
     const camera={
       x:gsap.utils.interpolate(openingCamera.x,milestoneCamera.x,openingHandoff),
@@ -279,8 +359,8 @@
 
     const introProgress=clamp01(progress/INTRO_END);
     const eased=introProgress*introProgress*(3-2*introProgress);
-    const vehicleStart=-innerWidth*.28;
-    const vehicleEnd=innerWidth*1.08;
+    const vehicleStart=-state.viewW*.28;
+    const vehicleEnd=state.viewW*1.08;
     const vehicleX=gsap.utils.interpolate(vehicleStart,vehicleEnd,eased);
     const travelled=Math.max(0,vehicleX-vehicleStart);
     const rotation=travelled/(2*Math.PI*state.wheelRadius)*360;
@@ -293,7 +373,11 @@
     }
     // Let the opening copy hand off directly into "The Life" instead of
     // disappearing before the first timeline chapter has arrived.
-    gsap.set(opening,{opacity:1-smoothstep(.10,MAIN_START+.01,progress)});
+    const openingOpacity=1-smoothstep(.10,MAIN_START+.01,progress);
+    if(openingOpacity!==state.lastOpening){
+      state.lastOpening=openingOpacity;
+      gsap.set(opening,{opacity:openingOpacity});
+    }
     root.classList.toggle("is-opening",progress<MAIN_START);
     root.classList.toggle("is-bus-running",progress<INTRO_END);
     root.classList.toggle("is-handoff",progress>=INTRO_END&&progress<MAIN_START);
@@ -301,21 +385,23 @@
     const routeStartScreen=openingPoint.x+openingCamera.x;
     const openingRouteIndex=0;
     const routeEndScreen=points[openingRouteIndex].x+openingCamera.x;
-    const vehicleTrailHead=vehicleX+vehicle.offsetWidth*.14;
+    const vehicleTrailHead=vehicleX+state.vehicleWidth*.14;
     const openingRouteLength=state.stopLengths[openingRouteIndex];
     const openingDraw=openingRouteLength*clamp01((vehicleTrailHead-routeStartScreen)/(routeEndScreen-routeStartScreen));
     const drawn=progress<MAIN_START?openingDraw:Math.max(openingRouteLength,routeDistance);
     routeProgress.style.strokeDashoffset=String(state.routeLength-drawn);
-    const active=activeForPosition(position,direction);
-    setActive(active);
+    setActive(activeForPosition(position,direction));
     setStopOpacities(position,progress);
     setIntroReveal(progress);
-    if(progress<MAIN_START){period.textContent="1996";title.textContent="CIRS begins";count.textContent="00";}
-    state.dots.forEach((dot,index)=>{
-      dot.classList.toggle("is-passed",index<=active);
-      dot.classList.toggle("is-current",index===active);
-      dot.setAttribute("r",index===active?"11":"8");
-    });
+    // Before the first chapter the readout names the school, not a date.
+    // Written once on the way in and once on the way back out, not on every
+    // frame of the opening.
+    const preface=progress<MAIN_START;
+    if(preface!==state.lastPreface){
+      state.lastPreface=preface;
+      if(preface){period.textContent="1996";title.textContent="CIRS begins";count.textContent="00";}
+      else setActiveText(state.active);
+    }
     meter.style.transform="scaleX("+mainProgress+")";
     setBackground(mainProgress);
   }
@@ -341,12 +427,17 @@
       id:"founder-world",trigger:root,start:"top top",end:"bottom bottom",
       animation:state.scrubTween,scrub:.65,
       invalidateOnRefresh:true,
-      onEnter:()=>document.body.classList.add("founder-journey-active"),
-      onEnterBack:()=>document.body.classList.add("founder-journey-active"),
+      // is-camera-moving is what puts will-change:transform on the world.
+      // It used to come off on every onScrubComplete — that is, every time
+      // the reader paused — so the compositor tore the world's layer down
+      // and built it again at the start of every single scroll gesture, and
+      // the hitch that produced was the worst of the journey's stutter. The
+      // layer now lives exactly as long as the journey is on screen, which
+      // is the span the flag was named for.
+      onEnter:()=>{document.body.classList.add("founder-journey-active");root.classList.add("is-camera-moving");},
+      onEnterBack:()=>{document.body.classList.add("founder-journey-active");root.classList.add("is-camera-moving");},
       onLeave:()=>{document.body.classList.remove("founder-journey-active");root.classList.remove("is-camera-moving");},
       onLeaveBack:()=>{document.body.classList.remove("founder-journey-active");root.classList.remove("is-camera-moving");},
-      onUpdate:()=>root.classList.add("is-camera-moving"),
-      onScrubComplete:()=>root.classList.remove("is-camera-moving"),
       onRefresh:()=>{
         state.wheelRadius=Math.max(1,wheels[0].getBoundingClientRect().width/2);
         measureCompositions();

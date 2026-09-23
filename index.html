@@ -7,8 +7,14 @@
 <meta name="description" content="A co-educational residential school on a hundred acres in the Siruvani foothills — CBSE and the International Baccalaureate, Grades V to XII.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/">
-<link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
-<link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Chinmaya International Residential School — Siruvani, Coimbatore">
 <meta property="og:description" content="A co-educational residential school on a hundred acres in the Siruvani foothills — CBSE and the International Baccalaureate, Grades V to XII.">
@@ -256,21 +262,26 @@
 <main id="main">
 <!-- The opening sequence.
 
-     The shape of it: a 200vh track with a 100svh stage stuck to the top of
-     it. Scrolling the second hundred of viewport height therefore moves the
-     page while the stage stands still, and that travel is what the plate is
+     The shape of it: a 180vh track with a 100svh stage stuck to the top of
+     it. Scrolling the 80vh past the first screen therefore moves the page
+     while the stage stands still, and that travel is what the plate is
      scrubbed along. Pinning is `position: sticky` on .hseq__stage and
      nothing else — deliberately not ScrollTrigger.pin(), which rewrites the
      document with a spacer and fights both Lenis and the header's is-atop
      probe.
 
-     The plate's three positions are not in the script. They are the three
+     The plate's two positions are not in the script. They are the two
      empty .hseq__mark boxes below, laid out by the stylesheet: P0 full
-     bleed, P1 a first inset, P2 the framed plate the sequence settles on.
-     The script reads their boxes and scrubs the plate between them, so
-     every breakpoint is authored in CSS where the rest of the layout is,
-     and the script never carries a number that a media query could
-     contradict. The marks are presentational and carry aria-hidden.
+     bleed, P1 the inset frame the sequence settles on. The script reads
+     their boxes and scrubs the plate between them, so every breakpoint is
+     authored in CSS where the rest of the layout is, and the script never
+     carries a number that a media query could contradict. The marks are
+     presentational and carry aria-hidden.
+
+     There was once a third mark, which carried the plate on past the inset
+     into a tall card held right of centre. It shrank the photograph twice
+     over and turned a corner in the middle of the motion. The opening now
+     zooms out once, arrives, holds, and releases.
 
      The type layer is positioned against the same boxes, so the headline
      stays in register with the plate at any viewport rather than being
@@ -283,7 +294,6 @@
       <div class="hseq__marks" aria-hidden="true">
         <div class="hseq__mark hseq__mark--p0"></div>
         <div class="hseq__mark hseq__mark--p1"></div>
-        <div class="hseq__mark hseq__mark--p2"></div>
       </div>
 
       <!-- The proxy box. GSAP animates this element's inset; the video
@@ -476,7 +486,7 @@
 
     <div class="filmsec__social rv">
       <span class="filmsec__socialtag sc">Follow CIRS</span>
-      <div class="filmsec__sociallinks" aria-label="CIRS social media">
+      <div class="filmsec__sociallinks" role="group" aria-label="CIRS social media">
         <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener"
            aria-label="Instagram (opens in a new tab)">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="social-dot" cx="17.4" cy="6.7" r="1.1"/></svg>
