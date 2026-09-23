@@ -1,4 +1,4 @@
-/* The cinematic opening two pages share — CIRS Captures and Our Sports.
+/* The cinematic opening shared by CIRS Captures, Our Sports and CIRS Festivals.
 
    A short film the visitor scrubs with the scroll rather than watching, and
    one thin widely-tracked line that arrives only once it has ended. Four
@@ -7,7 +7,7 @@
 
        0.00 - 0.70   the film runs, under the scroll, and nothing else exists
        0.70 - 0.77   the last frame freezes and is simply held
-       0.77 - 0.90   CIRS CAPTURES arrives out of it
+       0.77 - 0.90   the page title arrives out of it
        0.90 - 1.00   the finished composition is held, then let go
 
    The stage is a CSS sticky viewport rather than a GSAP pin. It costs
@@ -15,7 +15,7 @@
    without a refresh, and it leaves ScrollTrigger doing the one thing it is
    needed for here: reporting progress.
 
-   Everything above the two tuning blocks at the foot of this file is shared.
+   Everything above the page tuning blocks at the foot of this file is shared.
    What a page sets for itself is only what its own footage decides: how the
    frame is cropped, where the line can sit legibly, and the tone the seam
    below it starts from. */
@@ -151,6 +151,8 @@ body.film.film-on #totop{
   --film-reveal:1;
 }
 
+.film[data-film-pending] .film__title{ opacity:0; }
+
 @media (min-width:1600px){
   .film__title{ --film-track-to:var(--film-track-wide, .54); }
 }
@@ -276,6 +278,89 @@ body.sports .film__scroll-cue span:first-child{
   letter-spacing:0;
 }
 
+/* ---- CIRS Festivals ------------------------------------------------------
+   The film pulls back from a diya into a full floral rangoli. Keep its centre
+   visible, including on a portrait phone, and set the thin gold title above
+   the lamp. The stage grades into the same burnt umber as the seam below. */
+body.festivals{
+  --film-ground:#1B0C08;
+  --film-crop:50% 50%;
+  --film-crop-narrow:50% 50%;
+}
+body.festivals .film__stage{ background:#1B0C08; }
+body.festivals .film__still{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:var(--film-crop);
+}
+body.festivals .film__stage::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:0;
+  background:linear-gradient(to bottom,
+    rgba(21,8,5,.78) 0%, rgba(21,8,5,.68) 24%,
+    rgba(21,8,5,.12) 40%, transparent 49%, transparent 71%,
+    rgba(41,18,9,.38) 86%, #291209 100%);
+  pointer-events:none;
+}
+body.festivals .film__title{
+  z-index:2;
+  top:clamp(118px, 15.5svh, 180px);
+  bottom:auto;
+  padding:0 16px;
+  color:#FFE5AC;
+  text-transform:none;
+  transform:translateY(calc((1 - var(--film-reveal)) * 12px));
+  filter:none;
+  text-shadow:0 2px 10px rgba(22,8,4,.65);
+  will-change:opacity, transform;
+}
+body.festivals .film__festival-prefix{
+  display:block;
+  margin-bottom:clamp(11px, 1.7svh, 18px);
+  padding-left:.4em;
+  font-family:"Jost", var(--font-primary), sans-serif;
+  font-size:clamp(11px, 1vw, 14px);
+  font-weight:400;
+  letter-spacing:.4em;
+  line-height:1;
+  text-transform:uppercase;
+}
+body.festivals .film__festival-name{
+  display:block;
+  padding-left:.12em;
+  font-family:"Jost", var(--font-primary), sans-serif;
+  font-size:clamp(54px, 9vw, 94px);
+  font-weight:100;
+  letter-spacing:.12em;
+  line-height:1;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+body.festivals .film__seam{
+  height:clamp(130px, 18svh, 220px);
+  background:linear-gradient(to bottom,
+    #291209 0%, #432016 25%, #9A705A 65%, var(--paper) 100%);
+}
+body.festivals .film[data-film-still] .film__video{ visibility:hidden; }
+@media (max-aspect-ratio:6/5){
+  body.festivals .film__still{ object-position:var(--film-crop-narrow); }
+}
+@media (max-width:720px){
+  body.festivals .film__title{ top:clamp(116px, 15.5svh, 155px); }
+}
+@media (max-width:360px){
+  body.festivals .film__festival-name{
+    font-size:48px;
+    letter-spacing:.1em;
+  }
+}
+
 @media (prefers-reduced-motion:reduce){
   .film{ --film-run:100svh; }
   .film__title{
@@ -283,4 +368,6 @@ body.sports .film__scroll-cue span:first-child{
     transition:none;
     will-change:auto;
   }
+  body.festivals .film__video{ visibility:hidden; }
+  body.festivals .film[data-film-pending] .film__title{ opacity:1; }
 }
