@@ -199,8 +199,12 @@ body.captures main{ background:var(--paper); }
    The opening now ends on the photograph, so the ramp starts on the tone
    the foot of the photograph measures, for the same reason it once started
    at the foot of the camera's frame: against any other colour it reads as a
-   cut, a hairline across the window where the picture stopped. The still
-   composition below ends on the camera again, so it keeps the camera's. */
+   cut, a hairline across the window where the picture stopped.
+
+   The seam no longer follows the opening directly: the featured photographs
+   (assets/css/captures-featured.css) come between, and they always end on
+   this same tone. Where the opening is the still of the camera instead,
+   the featured section's own top ramps down from the camera's tones. */
 .cap__seam{
   /* The photograph's foot is not one colour: bright dress on one side,
      dark stage on the other, and more dress in the narrow cut than the
@@ -248,11 +252,6 @@ body.captures.cap-on #totop{
 .cap[data-captures-still] .cap__title{
   --cap-reveal:1;
   --cap-exit:0;
-}
-.cap[data-captures-still] + .cap__seam{
-  --cap-seam-top:#2A2726;
-  --cap-seam-fold:#211C1B;
-  --cap-seam-rise:#6B6560;
 }
 
 @media (min-width:1600px){
@@ -314,10 +313,5 @@ body.captures.cap-on #totop{
     --cap-exit:0;
     transition:none;
     will-change:auto;
-  }
-  .cap__seam{
-    --cap-seam-top:#2A2726;
-    --cap-seam-fold:#211C1B;
-    --cap-seam-rise:#6B6560;
   }
 }
