@@ -424,8 +424,8 @@
      ==========================================================
      The stage is pinned by CSS sticky, so this function never pins
      anything and never touches the document's height. All it does is
-     read where the three .hseq__mark boxes are and scrub the plate's
-     own box between them as the track passes.
+     read where the .hseq__mark boxes are and scrub the plate's own box
+     between them as the track passes.
 
      The marks are the contract with the stylesheet. Nothing here knows
      what P2 looks like; it knows only that some element in the sheet
@@ -442,7 +442,7 @@
         scrim = $(".hseq__scrim", seq),
         marks = $$(".hseq__mark", seq);
 
-    if (!stage || !plate || marks.length < 3) return;
+    if (!stage || !plate || marks.length < 2) return;
 
     // No ScrollTrigger, or motion off: the sheet already lays the
     // sequence out as one still panel. Leave it alone.
@@ -486,36 +486,42 @@
       plate.style.left   = p.left   + "px";
     }
 
-    // The two halves of the travel: P0 to P1 over the first, P1 to P2
-    // over the second. A single eased run from P0 to P2 passes through
-    // a different middle and loses the first inset entirely.
-    // The plate arrives at P2 at seven tenths of the travel and holds
-    // there for the rest of it, still stuck. Without the hold the frame
-    // lands on the same pixel the stage begins to leave on.
-    var ARRIVE = .70, BEND = .45;
+    // One travel: P0, the full-bleed opening, to P1, the inset frame the
+    // sequence settles on. It arrives at ARRIVE of the scrub and holds
+    // there for the rest of it, still stuck, so the composition is seen
+    // at rest before the stage releases into the section below.
+    //
+    // There used to be a third mark. The plate carried on past P1 into a
+    // tall card held right of centre, which meant the picture shrank
+    // twice and left two thirds of the window empty on the second pass.
+    // It also put a corner in the motion: P0 to P1 is a straight zoom
+    // out, P1 to P2 is a sideways slide, and the turn between them read
+    // as a snap however smoothly each half was scrubbed. The sequence
+    // now does one thing.
+    var ARRIVE = .62;
+
+    // Scroll-linked motion that ends on a hold has to arrive with its
+    // velocity already near zero, or the hold reads as the animation
+    // being cut off. An ease-out does that: the plate moves at once on
+    // the first pixel of scroll and decelerates into the frame.
+    function ease(u) { return 1 - Math.pow(1 - u, 2.4); }
 
     function frame(t) {
-      var u = Math.min(t / ARRIVE, 1);
-      var box = u < BEND ? at(P[0], P[1], u / BEND)
-                         : at(P[1], P[2], (u - BEND) / (1 - BEND));
-      paint(box);
+      var u = ease(Math.min(t / ARRIVE, 1));
+      paint(at(P[0], P[1], u));
       // The corner arrives with the frame rather than being on from the
       // start, so the full-bleed opening has no rounded edge against
       // the window.
       plate.style.borderRadius = (u * 14) + "px";
-      // The scrim exists so the headline can be read over the photograph.
-      // Once the plate has drawn in, the headline is beside it rather than
-      // on it and the wash has nothing left to do but crush the picture,
-      // so it lifts as the plate insets. It does not go entirely: the last
-      // of it keeps the foot of the frame from glaring against the ground.
-      if (scrim) scrim.style.opacity = String(1 - u * .78);
-      if (type) {
-        // The type clears the way as the plate closes in on its column,
-        // then settles. It does not fade out — the headline is the
-        // page's first sentence and stays readable through the whole
-        // sequence.
-        type.style.opacity = String(1 - Math.min(u, .55) * .28);
-      }
+      // The scrim exists so the headline can be read over the photograph,
+      // and at P1 the headline still sits over the foot of the plate — so
+      // the wash lifts only as far as the opening's own mid-point, where
+      // it was measured, rather than clearing the way for a column of
+      // type that no longer happens.
+      if (scrim) scrim.style.opacity = String(1 - u * .35);
+      // The type does not move and does not fade. It is the page's first
+      // sentence and the plate is no longer closing in on its column.
+      if (type) type.style.opacity = "1";
     }
 
     ScrollTrigger.create({

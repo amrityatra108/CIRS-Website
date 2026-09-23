@@ -1,20 +1,25 @@
 <!-- The opening sequence.
 
-     The shape of it: a 200vh track with a 100svh stage stuck to the top of
-     it. Scrolling the second hundred of viewport height therefore moves the
-     page while the stage stands still, and that travel is what the plate is
+     The shape of it: a 180vh track with a 100svh stage stuck to the top of
+     it. Scrolling the 80vh past the first screen therefore moves the page
+     while the stage stands still, and that travel is what the plate is
      scrubbed along. Pinning is `position: sticky` on .hseq__stage and
      nothing else — deliberately not ScrollTrigger.pin(), which rewrites the
      document with a spacer and fights both Lenis and the header's is-atop
      probe.
 
-     The plate's three positions are not in the script. They are the three
+     The plate's two positions are not in the script. They are the two
      empty .hseq__mark boxes below, laid out by the stylesheet: P0 full
-     bleed, P1 a first inset, P2 the framed plate the sequence settles on.
-     The script reads their boxes and scrubs the plate between them, so
-     every breakpoint is authored in CSS where the rest of the layout is,
-     and the script never carries a number that a media query could
-     contradict. The marks are presentational and carry aria-hidden.
+     bleed, P1 the inset frame the sequence settles on. The script reads
+     their boxes and scrubs the plate between them, so every breakpoint is
+     authored in CSS where the rest of the layout is, and the script never
+     carries a number that a media query could contradict. The marks are
+     presentational and carry aria-hidden.
+
+     There was once a third mark, which carried the plate on past the inset
+     into a tall card held right of centre. It shrank the photograph twice
+     over and turned a corner in the middle of the motion. The opening now
+     zooms out once, arrives, holds, and releases.
 
      The type layer is positioned against the same boxes, so the headline
      stays in register with the plate at any viewport rather than being
@@ -27,7 +32,6 @@
       <div class="hseq__marks" aria-hidden="true">
         <div class="hseq__mark hseq__mark--p0"></div>
         <div class="hseq__mark hseq__mark--p1"></div>
-        <div class="hseq__mark hseq__mark--p2"></div>
       </div>
 
       <!-- The proxy box. GSAP animates this element's inset; the video
