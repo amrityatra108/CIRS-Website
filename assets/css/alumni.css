@@ -241,13 +241,13 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 }
 
 /* ============================================================
-   CHAPTER 3 — The constellation
+   CHAPTER 3 — The map
    ------------------------------------------------------------
-   A field of eighteen real destinations. It is NOT a map and is
-   not labelled as one: the four regions group, and group west to
-   east, but no point claims a latitude, and chapter six gives
-   the same eighteen as plain text for anyone who wants them
-   without the field.
+   Nineteen real destinations on a real map, in Robinson, with a
+   route out to each from Siruvani. Where a point sits is where
+   the institution is; the four regions group because the world
+   does. Chapter six gives the same nineteen as plain text for
+   anyone who wants them without the map.
    ============================================================ */
 .aj-const{
   position:relative; background:var(--aj-ink);
@@ -298,39 +298,62 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 }
 
 /* ---- the field ---- */
-/* ---- the sky ----
-   No frame, and almost no colour of its own. What is in here is a spiral
-   galaxy drawn by alumni-journey.js from the same six numbers that place
-   the nineteen destinations, so the stars and the named ones lie on one
-   spiral. The ratio is 3:2 rather than 16:9 because a spiral in a wide
-   letterbox leaves both ends of the frame empty; 3:2 also makes the
-   viewBox scale uniform, which is what keeps a star round. */
+/* ---- the map ----
+   A world in Robinson, drawn from tools/worldland.py, with CIRS where
+   Coimbatore is and a route out to each of the nineteen. Coastline only:
+   no borders, no graticule, no labels on the land. The ratio is the
+   projection's own, written here from tools/robinson.py, which is what
+   lets a position in percent of this box be a place on the map.
+
+   It is the query container for the points, so a name's offset is given
+   in cqw and keeps its clearance at every width the map is drawn at. It
+   is inline-size rather than size, because below 900px the field stops
+   being a map and takes its height from the list inside it. */
 .ajc__field{
-  position:relative; width:100%; aspect-ratio:3/2;
-  min-height:420px; overflow:hidden;
+  position:relative; width:100%; aspect-ratio:200 / 97.9341;
+  container-type:inline-size;
+  overflow:hidden;
   background:
-    radial-gradient(58% 58% at 50% 50%, rgba(28,34,62,.55), transparent 72%),
-    radial-gradient(120% 120% at 50% 50%, #06060D 30%, #030308 100%);
+    radial-gradient(64% 84% at 50% 46%, rgba(26,32,58,.50), transparent 74%),
+    radial-gradient(120% 120% at 50% 50%, #07070E 30%, #030308 100%);
 }
 /* the vignette a lens gives, over everything */
 .ajc__field::after{
   content:""; position:absolute; inset:0; z-index:5; pointer-events:none;
-  background:radial-gradient(118% 108% at 50% 50%,
-    transparent 52%, rgba(2,2,6,.46) 86%, rgba(2,2,6,.78) 100%);
+  background:radial-gradient(118% 112% at 50% 48%,
+    transparent 48%, rgba(2,2,6,.50) 84%, rgba(2,2,6,.82) 100%);
 }
-.ajc__stars{ position:absolute; inset:0; z-index:0; width:100%; height:100%; }
-.ajc__star{ fill:#EAF0FF; }
+.ajc__map{ position:absolute; inset:0; z-index:0; width:100%; height:100%; }
+/* Land is a shade, not a shape: a fill barely above the water and a
+   coast barely above the fill. Anything brighter and the continents
+   start competing with the nineteen points, which are the subject. */
+.ajc__land{
+  fill:rgba(126,142,186,.085);
+  stroke:rgba(156,176,220,.30); stroke-width:.22;
+  stroke-linejoin:round; vector-effect:non-scaling-stroke;
+}
 .ajc__lines{ position:absolute; inset:0; z-index:2; width:100%; height:100%; }
 .ajc__line{
-  fill:none; stroke:rgba(190,208,240,.16); stroke-width:.7;
+  fill:none; stroke:rgba(190,208,240,.20); stroke-width:.7;
   vector-effect:non-scaling-stroke;
   transition:stroke .4s var(--e), stroke-width .4s var(--e), opacity .4s var(--e);
 }
-.ajc__line.is-dim{ opacity:.06; }
+/* The hairline from a point out to its own name. Fainter than a route,
+   because it carries no distance — it only says which name is whose. */
+.ajc__leader{ stroke:rgba(190,208,240,.16); stroke-width:.5; }
+.ajc__line.is-dim{ opacity:.05; }
 .ajc__line.is-lit{ stroke:var(--aj-gold-lit); stroke-width:1.5; opacity:1; }
+.ajc__leader.is-lit{ stroke-width:.8; }
 html.js-motion .ajc__line{ opacity:0; }
+html.js-motion .ajc__map,
+html.js-motion .ajc__origin{ opacity:0; }
 
-/* the core — CIRS at the middle of the galaxy */
+/* The aircraft flying the routes: one per destination, out of Siruvani,
+   turned to their heading. alumni-journey.js draws them and moves them;
+   the sheet only says what colour they are. */
+.ajc__flight{ fill:#FFE9BE; }
+
+/* the origin — CIRS, where every route starts */
 .ajc__origin{
   position:absolute; left:var(--x); top:var(--y);
   transform:translate(-50%,-50%); margin:0;
@@ -340,20 +363,27 @@ html.js-motion .ajc__line{ opacity:0; }
 .ajc__originDot{
   width:9px; height:9px; border-radius:50%;
   background:#FFFDF6;
+  /* Bright, and tight. The first draft threw ninety pixels of haze over
+     southern India, which is where four of the nineteen destinations and
+     two of their names are: the origin was erasing its own neighbours. */
   box-shadow:
     0 0 0 3px rgba(255,236,190,.30),
-    0 0 14px 5px rgba(255,220,150,.70),
-    0 0 42px 16px rgba(226,168,86,.40),
-    0 0 90px 40px rgba(150,110,70,.22);
+    0 0 12px 4px rgba(255,220,150,.70),
+    0 0 30px 10px rgba(226,168,86,.34),
+    0 0 62px 22px rgba(150,110,70,.16);
 }
 .ajc__originName{
-  font-size:.72rem; letter-spacing:.24em; text-transform:uppercase;
+  /* In cqw like the destinations' names, so the origin does not swell
+     against the map as the field narrows and crowd the four Indian
+     destinations standing closest to it. */
+  font-size:clamp(.58rem, .95cqw, .72rem);
+  letter-spacing:.24em; text-transform:uppercase;
   color:#FFF3DC; font-weight:600; text-align:center;
   display:flex; flex-direction:column; line-height:1.35;
   text-shadow:0 1px 8px rgba(3,3,8,.98), 0 0 18px rgba(3,3,8,.9);
 }
 .ajc__originName small{
-  font-size:.60rem; letter-spacing:.16em; font-weight:400;
+  font-size:.82em; letter-spacing:.16em; font-weight:400;
   color:rgba(255,243,220,.62); text-transform:none;
 }
 
@@ -409,31 +439,47 @@ html.js-motion .ajc__line{ opacity:0; }
 .ajc__pt:focus-visible .ajc__dot::after,
 .ajc__pt.is-active .ajc__dot::after{ transform:translate(-50%,-50%) scale(1); opacity:1; }
 /* Every destination is named, all the time. Hiding the names until a point
-   was hovered made a sky with nothing to read in it, and left the whole
+   was hovered made a map with nothing to read on it, and left the whole
    chapter mute to anyone who was not pointing at something. The name is
    always up; the country comes in when the point is asked about, so each
-   label is one short line at rest and cannot collide with its neighbour. */
+   label is one short line at rest.
+
+   Where the name sits is written into --lx/--ly in tools/alumni.py, in
+   cqw — hundredths of the field's width — because five destinations are
+   in Britain and two in Singapore, and a rule that put every name in the
+   same place relative to its point would pile them on top of each other.
+   data-side says which way the name runs from that offset: "r" starts
+   there, "l" ends there, "c" is centred on it. Anything set far enough
+   out is joined back to its point by a leader in the SVG. */
 .ajc__label{
-  position:absolute; left:50%; bottom:calc(100% + 3px);
-  transform:translate(-50%,0);
+  position:absolute; left:50%; top:50%;
+  transform:translate(calc(-50% + var(--lx,0px)), calc(-50% + var(--ly,0px)));
   display:flex; flex-direction:column; align-items:center; gap:1px;
   width:max-content; max-width:13ch; text-align:center;
   pointer-events:none;
   text-shadow:0 1px 6px rgba(5,4,10,.95), 0 0 14px rgba(5,4,10,.8);
   transition:opacity .28s var(--e);
 }
+.ajc__pt[data-side="r"] .ajc__label{
+  transform:translate(var(--lx,0px), calc(-50% + var(--ly,0px)));
+  align-items:flex-start; text-align:left;
+}
+.ajc__pt[data-side="l"] .ajc__label{
+  transform:translate(calc(-100% + var(--lx,0px)), calc(-50% + var(--ly,0px)));
+  align-items:flex-end; text-align:right;
+}
 .ajc__name{
-  /* Scales with the field, so the eighteen labels keep the clearance they
+  /* Scales with the field, so the nineteen labels keep the clearance they
      were positioned for at every desktop width rather than only the wide
      ones. The positions themselves are in tools/alumni.py. */
-  font-size:clamp(.66rem, .82vw, .78rem);
+  font-size:clamp(.64rem, .98cqw, .78rem);
   line-height:1.2; letter-spacing:.012em; font-weight:600;
   color:rgba(247,243,236,.82);
   transition:color .28s var(--e);
 }
 /* Taken out of flow: collapsed with max-height it still reported its full
    width to the label above it, so "United Kingdom" was setting the width of
-   a label that only reads "Durham" — and the sky filled with collisions
+   a label that only reads "Durham" — and the map filled with collisions
    between things nobody could see. */
 .ajc__country{
   position:absolute; top:calc(100% + 2px); left:50%; transform:translateX(-50%);
@@ -441,6 +487,8 @@ html.js-motion .ajc__line{ opacity:0; }
   white-space:nowrap; color:var(--aj-gold-lit);
   opacity:0; transition:opacity .28s var(--e);
 }
+.ajc__pt[data-side="r"] .ajc__country{ left:0; transform:none; }
+.ajc__pt[data-side="l"] .ajc__country{ left:auto; right:0; transform:none; }
 .ajc__pt:hover .ajc__name,
 .ajc__pt:focus-visible .ajc__name,
 .ajc__pt.is-active .ajc__name{ color:#FFF6E2; }
@@ -968,9 +1016,9 @@ body.alumni .aj-return__acts .btn--ghost:hover{
 /* ============================================================
    Tablet and phone
    ------------------------------------------------------------
-   The constellation stops being a field and becomes a list: the
-   same buttons, the same panel, laid out in normal flow. There
-   is one DOM and no second markup path that can rot.
+   The map stops being a map and becomes a list: the same
+   buttons, the same panel, laid out in normal flow. There is
+   one DOM and no second markup path that can rot.
    ============================================================ */
 @media (max-width: 899px){
   .aj-open{ padding-bottom:clamp(76px,14vh,120px); }
@@ -979,7 +1027,10 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   .aj-portal__stage{ min-height:auto; padding-block:clamp(56px,10vh,88px); }
   .aj-portal{ min-height:auto; }
 
-  /* --- the field becomes a list --- */
+  /* --- the map becomes a list --- */
+  /* Nineteen names over a world 360 pixels wide is a puzzle, not a map,
+     so below 900px the field stops being one: the coastline, the routes
+     and the flights go, and the same nineteen buttons become rows. */
   .ajc__field{
     aspect-ratio:auto; min-height:0; border:0;
     background:none; padding-left:22px;
@@ -989,6 +1040,7 @@ body.alumni .aj-return__acts .btn--ghost:hover{
     content:""; position:absolute; left:4px; top:8px; bottom:8px; width:1px;
     background:linear-gradient(to bottom, var(--aj-gold), var(--aj-hair-soft));
   }
+  .ajc__map,
   .ajc__lines{ display:none; }
   .ajc__origin{
     position:static; transform:none; margin:0 0 6px -22px;
@@ -1000,12 +1052,17 @@ body.alumni .aj-return__acts .btn--ghost:hover{
     display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center;
     border-bottom:1px solid var(--aj-hair-soft); text-align:left;
   }
+  .ajc__pt[data-side] .ajc__label,
   .ajc__label{
     position:static; transform:none; opacity:1;
     align-items:flex-start; gap:3px; text-align:left;
     max-width:none; text-shadow:none;
   }
-  .ajc__country{ position:static; transform:none; opacity:1; white-space:normal; }
+  .ajc__pt[data-side] .ajc__country,
+  .ajc__country{
+    position:static; transform:none; opacity:1; white-space:normal;
+    left:auto; right:auto;
+  }
   .ajc__item.is-out{ display:none; }
   .ajc__status{ margin-left:0; width:100%; }
 
@@ -1034,9 +1091,8 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   .ajw::before{ display:none; }
   .ajw-nav{ display:none; }
 
-  /* --- the sky is a list here, so it keeps none of its sky --- */
-  .ajc__field::after,
-  .ajc__stars{ display:none; }
+  /* --- a list keeps none of the map's own dark --- */
+  .ajc__field::after{ display:none; }
   .ajc__origin{ pointer-events:auto; }
 
   .aj-return{ min-height:auto; }
@@ -1071,6 +1127,7 @@ body.alumni .aj-return__acts .btn--ghost:hover{
 @media (prefers-reduced-motion: reduce){
   .aj-open__media img{ transform:none; }
   .ajc__line,
+  .ajc__land,
   .ajc__item,
   .ajc__dot,
   .ajc__label,
