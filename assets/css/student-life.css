@@ -26,14 +26,15 @@ body.student-life main { overflow:clip; }
 .sj-down { position:absolute; z-index:3; right:4vw; bottom:1.8rem; color:#fff; }
 
 .sj-day { background:#081728; color:#fff; }
-.sj-day__intro { display:grid; grid-template-columns:.6fr 1.3fr 1fr; gap:3rem; align-items:end; padding:8rem 0 6rem; }
+.sj-day__intro { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(18rem,1fr); gap:clamp(3rem,6vw,7rem); align-items:end; padding:8rem var(--gut) 6rem; }
+.sj-day__heading .sj-kicker { margin-bottom:1.5rem; }
 .sj-day h2,
 .sj-heading h2,
 .sj-houses h2,
 .sj-work h2,
 .sj-festivals h2,
 .sj-practical h2 { font-size:clamp(3rem,6.5vw,7rem); }
-.sj-day__intro>div>p { line-height:1.6; }
+.sj-day__details>p { line-height:1.6; }
 .sj-switch { display:flex; margin-top:2rem; border-bottom:1px solid #ffffff44; }
 .sj-switch button { min-height:48px; padding:.7rem 1rem; color:#fff; opacity:.55; border-bottom:2px solid transparent; }
 .sj-switch button.is-active { opacity:1; border-color:#d6b46a; }
@@ -265,7 +266,8 @@ body.student-life main { overflow:clip; }
   .sj-heading,
   .sj-work__grid,
   .sj-practical__grid { grid-template-columns:1fr; gap:2rem; }
-  .sj-day__intro { padding:6rem 0 3rem; }
+  .sj-day__intro { padding:6rem var(--gut) 3rem; }
+  .sj-day__intro h2 { font-size:clamp(2.3rem,11.5vw,3rem); }
   .sj-motion .sj-journey { display:none; }
   .sj-schedules,
   .sj-motion .sj-schedules { display:block; padding-bottom:5rem; }

@@ -39,7 +39,7 @@ import mathchallenge
 import creativewriting
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=96"
+CACHE_BUST = "b=97"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -283,11 +283,31 @@ PAGES = {
         "cache_suffix": "-student-life-9",
     },
     "sports": {
+        "barehead": True,
         "nav": "Our Sports",
-        "title": "Sports",
-        "description": "Athletics, the playing fields and the sporting record at CIRS.",
-        "banner": ("Sports", "Sport, Every Day <em>at Four.</em>",
-                   "The four o'clock hour, the fields it happens on, and what the teams have won."),
+        "title": "Sports & Laurels — Built in the Arena | CIRS",
+        "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
+        "sheet": "sports",
+        "cache_suffix": "-sports-1",
+        # No banner from the shared builder. Like CIRS Captures, this page
+        # opens on a film the reader scrubs — five seconds from a wet ball to
+        # the field at sunrise under the Ghats — and the h1 is the one line
+        # that arrives once it has ended. The body.sports block in
+        # assets/css/filmintro.css is where this frame's own decisions live.
+        "banner": None,
+        "opening": {
+            "video": "sports-field",
+            "poster": "sports-field-poster.jpg",
+            "title": "CIRS Sports",
+            # With no scripting nothing seeks, so what stays up is the first
+            # frame — a macro of a wet ball, not the field. The line's usual
+            # place is the treeline of a frame that is never reached, and on
+            # this one it lands on the lit crest of the leather and washes
+            # out. Low on the frame it has the dark underside behind it, at
+            # 11.9:1. Captures needs no such move: its first frame is dark
+            # wherever the line falls.
+            "noscript_title_top": "88%",
+        },
     },
     "crossroads": {
         "barehead": True,
@@ -396,11 +416,14 @@ PAGES = {
         # No banner from the shared builder. This page opens on six seconds of
         # a camera coming out of the dark, which the reader scrubs with the
         # scroll, and the h1 is the one line that arrives once the film has
-        # ended — see tools/partials/captures-intro.html. The sheet is
-        # assets/css/captures.css, scoped to body.captures.
+        # ended. See film_html above, and the body.captures block in
+        # assets/css/filmintro.css for what this page tunes for its own frame.
         "banner": None,
-        "sheet": "captures",
-        "opening": "captures-intro",
+        "opening": {
+            "video": "captures-camera",
+            "poster": "captures-camera-poster.jpg",
+            "title": "CIRS Captures",
+        },
         "soon": ([("Student photography", "Work by the photography hobby group and anyone else"),
                   ("The year, in frames", "The campus through its seasons"),
                   ("How to submit", "What to send, and to whom")],
@@ -409,12 +432,21 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "art-attack": {
+        "barehead": True,
+        "cache_suffix": "-art-attack-film-1",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Studio work and visual art from across Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Art Attack", "Made <em>by Hand.</em>",
-                   "Studio work and visual art from across the school."),
+        "banner": None,
+        "opening": {
+            "video": "art-attack-opening",
+            "poster": "art-attack-opening-poster.jpg",
+            "still": "art-attack-opening-final.jpg",
+            "title": "CIRS Art Attack",
+            "title_markup": '<span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span>',
+            "pending": True,
+        },
         "soon": ([("Painting and drawing", "Work from the studio and the classroom"),
                   ("Print and craft", "The processes, and what comes out of them"),
                   ("Exhibitions", "What was shown, and when")],
@@ -423,12 +455,21 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "festivals": {
+        "barehead": True,
+        "cache_suffix": "-festivals-film-1",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
         "description": "The festivals kept through the year at Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Festivals", "The Year, <em>Kept Together.</em>",
-                   "The festivals the school keeps, and what they look like on this campus."),
+        "banner": None,
+        "opening": {
+            "video": "festivals-opening",
+            "poster": "festivals-opening-poster.jpg",
+            "still": "festivals-opening-final.jpg",
+            "title": "CIRS Festivals",
+            "title_markup": '<span class="film__festival-prefix">CIRS </span><span class="film__festival-name">Festivals</span>',
+            "pending": True,
+        },
         "soon": ([("Through the year", "Each festival as the school keeps it"),
                   ("Photographs", "From the mornings and the evenings of each one"),
                   ("Accounts", "Written by the students who took part")],
@@ -437,12 +478,20 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "theatre": {
+        "barehead": True,
+        "cache_suffix": "-theatre-film-1",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Theatre", "Rehearsal, <em>and the Night Itself.</em>",
-                   "Productions, the work behind them, and the stage they are made for."),
+        "banner": None,
+        "opening": {
+            "video": "theatre-opening",
+            "poster": "theatre-opening-poster.jpg",
+            "still": "theatre-opening-final.jpg",
+            "title": "CIRS Theatre",
+            "phases": (0.70, 0.78, 0.91),
+        },
         "soon": ([("Productions", "What was staged, and who was in it"),
                   ("Rehearsal", "The weeks nobody sees"),
                   ("The stage", "The auditorium, and what it can carry")],
@@ -508,6 +557,7 @@ PAGES = {
         # Its sheet is assets/css/alumni.css, scoped to body.alumni.
         "banner": None,
         "sheet": "alumni",
+        "cache_suffix": "-alumni-1",
     },
 }
 
@@ -652,6 +702,57 @@ def soon_html(page):
         f'{ask}.]</em></p>{onward}\n'
         '  </div>\n'
         '</section>')
+
+def film_html(slug, page):
+    """The opening of a page that starts on a film the reader scrubs.
+
+    CIRS film pages share this furniture. Each page supplies its own footage,
+    title and, where needed, phase boundaries; the scrubbing mechanics live in
+    assets/css/filmintro.css and assets/js/filmintro.js.
+
+    The film remains the opening's only dominant element. Our Sports adds one
+    discreet scroll cue over its first frames; CIRS Captures keeps the plain
+    film-and-title composition.
+    """
+    film = page["opening"]
+    phases = film.get("phases")
+    attrs = f' data-film-phases="{" ".join(f"{v:g}" for v in phases)}"' if phases else ""
+    if film.get("fps", 24) != 24:
+        attrs += f' data-film-fps="{film["fps"]:g}"'
+    if film.get("pending") or film.get("still"):
+        attrs += " data-film-pending"
+    title = film.get("title_markup", f'<span class="film__line">{film["title"]}</span>')
+    still = (f'    <img class="film__still" src="assets/img/{film["still"]}" '
+             'alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">\n'
+             if film.get("still") else "")
+    cue = (
+        '    <p class="film__scroll-cue" data-film-scroll-cue>'
+        '<span aria-hidden="true">↓</span><span>Scroll to discover</span></p>\n'
+        if slug == "sports" else ""
+    )
+    return f'''<section class="film" id="{slug}-opening" data-film{attrs}>
+  <div class="film__stage">
+{still}    <video class="film__video" data-film-video
+           width="1280" height="720"
+           poster="assets/img/{film["poster"]}"
+           preload="auto" muted playsinline disablepictureinpicture
+           aria-hidden="true" tabindex="-1">
+      <!-- H.264 first, which is the other way round from the rest of this
+           site. These files are not played but seeked, several times a
+           second, and H.264 is the one codec every browser that has it
+           decodes in hardware — so it is the path that scrubs without
+           stuttering wherever it exists. The VP9 is for the browsers built
+           without the proprietary decoder, which would otherwise have no
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
+      <source src="assets/video/{film["video"]}.mp4" type="video/mp4">
+      <source src="assets/video/{film["video"]}.webm" type="video/webm">
+    </video>
+{cue}    <h1 class="film__title" data-film-title>{title}</h1>
+  </div>
+</section>
+<div class="film__seam" aria-hidden="true"></div>'''
+
 
 def esc(text, attr=False):
     """The magazine's own punctuation, made safe to put in a page.
@@ -1167,24 +1268,38 @@ def build(slug, page):
     if slug == "crossroads":
         head = head.replace(
             "</head>",
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-3">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-5">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-4">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
             '<noscript><style>.crossroads-intro-curtain{display:none}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}'
             '.crossroads-intro[data-crossroads-intro-pending]{background:var(--cr-purple-deep)}'
-            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible}'
+            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible!important}'
             '</style></noscript>\n</head>')
     if slug == "founder":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
-    # Without scripting nothing scrubs the film, so four screens of scroll
-    # would move a still photograph. One screen, with the line already up —
-    # which is what the stylesheet's own reduced-motion rule does too.
-    if slug == "captures":
+    if slug == "sports":
         head = head.replace("</head>",
-            '<noscript><style>.cap{height:100svh}</style></noscript>\n</head>')
+            f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
+    # A page that opens on a scrubbed film carries the shared sheet, and with
+    # it the two tuning blocks that sort out which page is which. Without
+    # scripting nothing scrubs, so four screens of scroll would move a still
+    # photograph: one screen, with the line already up — which is what the
+    # stylesheet's own reduced-motion rule does too.
+    if page.get("opening"):
+        nudge = page["opening"].get("noscript_title_top")
+        nudge = (f"body.{slug} .film__title{{--film-title-top:{nudge}}}" if nudge else "")
+        still = ('.film__video{display:none}'
+                 f'body.{slug} .film__still{{visibility:visible}}'
+                 if page["opening"].get("still") else "")
+        pending = ('.film[data-film-pending] .film__title{opacity:1}'
+                   if page["opening"].get("pending") or page["opening"].get("still") else "")
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
+            f'<noscript><style>.film{{height:100svh}}{nudge}{pending}{still}'
+            '</style></noscript>\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
@@ -1197,7 +1312,12 @@ def build(slug, page):
     # keep their own pills, so they stay legible over photography. Every other
     # page keeps the bar, which is what holds them together over paper.
     bare = bool(page.get("barehead") or page.get("hero"))
+    # A page opening on a scrubbed film is marked twice: "film" for the
+    # mechanics every such page shares, and its own slug for the handful of
+    # decisions its footage makes for it.
     classes = [c for c in ["wall" if wall else page.get("sheet"),
+                           "film" if page.get("opening") else None,
+                           slug if page.get("opening") else None,
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
     chrome = read("tools/partials/chrome.html")
@@ -1224,7 +1344,7 @@ def build(slug, page):
     # shared hero or banner. It is a partial rather than a page body because
     # what follows it here is still built by soon_html.
     if page.get("opening"):
-        parts.append(read(f"tools/partials/{page['opening']}.html").rstrip("\n"))
+        parts.append(film_html(slug, page))
     if page.get("hero"):
         parts.append(hero_html(page))
     elif page.get("banner"):
@@ -1276,9 +1396,9 @@ def build(slug, page):
         parts.append(read("tools/partials/footer.html").rstrip("\n"))
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
     if slug == "crossroads":
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-5" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
-        parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}-hover-4" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
     if slug == "founder":
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
@@ -1296,8 +1416,10 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
-    if slug == "captures":
-        parts.append(f'<script src="assets/js/captures.js?{CACHE_BUST}" defer></script>')
+    if page.get("opening"):
+        parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
+    if slug == "sports":
+        parts.append(f'<script src="assets/js/sports-journey.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]

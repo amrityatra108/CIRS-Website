@@ -1,0 +1,1306 @@
+/* ============================================================
+   CIRS SPORTS & LAURELS — BUILT IN THE ARENA
+   assets/css/sports.css
+   Scoped to body.sports.
+   Physical energy, oversized editorial typography, controlled scroll
+   choreography, and house colors.
+   ============================================================ */
+
+body.sports {
+  background: #09070c;
+  color: #f5eef2;
+  overflow-x: clip;
+}
+
+/* Custom interactive cursor for desktop */
+.sports-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 90px;
+  margin-left: -45px;
+  margin-top: -45px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.25s ease, transform 0.25s var(--e);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.sports-cursor.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sports-cursor__badge {
+  font-family: var(--font-primary), sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .sports-cursor {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   SECTION 1. CINEMATIC SPORTS OPENING
+   ============================================================ */
+.arena-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #09070c;
+  overflow: hidden;
+  padding: calc(var(--space-8) + 30px) 0 var(--space-6);
+}
+
+.arena-hero__stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.arena-hero__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.arena-hero__layer--base {
+  z-index: 1;
+}
+
+.arena-hero__layer--reveal {
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  clip-path: circle(0px at 50% 50%);
+  transition: opacity 0.3s ease;
+}
+
+.arena-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  transform: scale(1.04);
+  transition: transform 1.2s var(--e);
+  will-change: transform;
+}
+
+.arena-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(9, 7, 12, 0.35) 0%, rgba(9, 7, 12, 0.85) 85%),
+              linear-gradient(180deg, rgba(9, 7, 12, 0.4) 0%, rgba(9, 7, 12, 0.95) 100%);
+}
+
+.arena-hero__scrim--reveal {
+  background: radial-gradient(circle at 50% 40%, rgba(8, 20, 36, 0.25) 0%, rgba(8, 20, 36, 0.85) 85%),
+              linear-gradient(180deg, rgba(8, 20, 36, 0.4) 0%, rgba(8, 20, 36, 0.95) 100%);
+}
+
+.arena-hero__inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 120px);
+  min-height: calc(100svh - 120px);
+}
+
+.arena-hero__meta-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(245, 238, 242, 0.15);
+  padding-bottom: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.arena-hero__meta {
+  margin: 0;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.18em;
+  color: var(--on-purple-soft);
+  text-transform: uppercase;
+  display: flex;
+  gap: var(--space-4);
+}
+
+.arena-hero__tag {
+  margin: 0;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.22em;
+  color: var(--gold-lit);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.arena-hero__title {
+  margin: auto 0;
+  padding: var(--space-6) 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 0.86;
+  font-family: var(--font-primary), serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+  user-select: none;
+}
+
+.arena-hero__word {
+  font-size: clamp(3.8rem, 14vw, 12.5rem);
+  display: block;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  transition: transform 0.6s var(--e), opacity 0.6s var(--e);
+}
+
+.arena-hero__word:nth-child(2) {
+  padding-left: clamp(20px, 8vw, 120px);
+  color: var(--on-purple-soft);
+}
+
+.arena-hero__word:nth-child(3) {
+  padding-left: clamp(40px, 16vw, 240px);
+  color: #ffffff;
+}
+
+.arena-hero__word:nth-child(4) {
+  padding-left: clamp(10px, 4vw, 60px);
+  color: var(--gold);
+}
+
+.arena-hero__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(245, 238, 242, 0.15);
+}
+
+.arena-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--gold);
+  color: var(--purple-ink);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  padding: 14px 28px;
+  border-radius: 40px;
+  box-shadow: 0 10px 30px rgba(255, 195, 8, 0.35);
+  transition: transform 0.25s var(--e), box-shadow 0.25s var(--e), background 0.25s ease;
+}
+
+.arena-hero__cta:hover,
+.arena-hero__cta:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(255, 195, 8, 0.5);
+  background: var(--gold-lit);
+  color: var(--purple-ink);
+}
+
+.arena-hero__scroll-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--on-purple-soft);
+  text-decoration: none;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.arena-hero__scroll-line {
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.arena-hero__scroll-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  animation: heroLineTravel 2.4s infinite var(--e);
+}
+
+@keyframes heroLineTravel {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@media (max-width: 768px) {
+  .arena-hero__meta-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  .arena-hero__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+  .arena-hero__title {
+    padding: var(--space-4) 0;
+  }
+}
+
+/* ============================================================
+   SECTION 2. THE FIVE O’CLOCK SHIFT
+   ============================================================ */
+.shift-sec {
+  position: relative;
+  background: #100b17;
+  color: #ffffff;
+  padding: var(--space-10) 0;
+  overflow: hidden;
+}
+
+.shift-sec__pin {
+  position: relative;
+}
+
+.shift-sec__media-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.shift-sec__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.8s ease;
+}
+
+.shift-sec__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.shift-sec__media--academic {
+  z-index: 1;
+  opacity: 1;
+}
+
+.shift-sec__media--sports {
+  z-index: 2;
+  opacity: 0.15;
+}
+
+.shift-sec__scrim--indoor {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #09070c 0%, rgba(30, 20, 15, 0.88) 50%, #100b17 100%);
+}
+
+.shift-sec__scrim--outdoor {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16, 11, 23, 0.7) 0%, rgba(10, 15, 30, 0.88) 60%, #0d0a13 100%);
+}
+
+.shift-sec__inner {
+  position: relative;
+  z-index: 3;
+}
+
+.shift-sec__header {
+  max-width: 800px;
+  margin-bottom: var(--space-8);
+}
+
+.shift-sec__headline {
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  line-height: 1.05;
+  margin: var(--space-3) 0 var(--space-4);
+  color: #ffffff;
+}
+
+.shift-sec__lead {
+  font-size: var(--fs-lead);
+  color: var(--on-purple-soft);
+  max-width: 62ch;
+}
+
+/* Shift timeline progression */
+.shift-timeline {
+  background: rgba(14, 11, 18, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 238, 242, 0.14);
+  border-radius: 16px;
+  padding: var(--space-6);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.shift-timeline__track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  margin-bottom: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.shift-timeline__progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold) 0%, #ff8c42 50%, #5ce1e6 100%);
+  transition: width 0.5s var(--e);
+}
+
+.shift-timeline__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.shift-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  opacity: 0.65;
+  transition: opacity 0.3s ease, transform 0.3s var(--e);
+  border-left: 2px solid transparent;
+  padding-left: var(--space-3);
+}
+
+.shift-step.is-active {
+  opacity: 1;
+  border-left-color: var(--gold);
+}
+
+.shift-step__time {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.shift-step__label {
+  font-family: var(--font-primary), serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+.shift-step__desc {
+  font-size: var(--fs-sm);
+  color: var(--on-purple-soft);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .shift-timeline__steps {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+}
+
+/* ============================================================
+   SECTION 3. SPORTS AT CIRS (EDITORIAL GALLERY)
+   ============================================================ */
+.sports-gallery {
+  background: #0d0a13;
+  padding: var(--space-10) 0;
+  position: relative;
+}
+
+.sports-gallery__intro {
+  margin-bottom: var(--space-8);
+}
+
+.sports-gallery__intro h2 {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.05;
+  margin: var(--space-3) 0 var(--space-4);
+  color: #ffffff;
+}
+
+.sports-gallery__track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.sport-chapter {
+  position: relative;
+  min-height: 80vh;
+  min-height: 80svh;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sport-chapter__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sport-chapter__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  transform: scale(1.02);
+  transition: transform 1.2s var(--e);
+}
+
+.sport-chapter:hover .sport-chapter__media img {
+  transform: scale(1.06);
+}
+
+.sport-chapter__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 10, 19, 0.2) 0%, rgba(13, 10, 19, 0.5) 45%, rgba(13, 10, 19, 0.94) 95%);
+}
+
+.sport-chapter__content {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-8) var(--gut);
+  width: 100%;
+  max-width: 900px;
+}
+
+.sport-chapter__num {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.25em;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: var(--space-2);
+}
+
+.sport-chapter__title {
+  font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+  line-height: 0.95;
+  color: #ffffff;
+  margin: 0 0 var(--space-4);
+  text-transform: uppercase;
+}
+
+.sport-chapter__desc {
+  font-size: var(--fs-lead);
+  color: var(--on-purple-soft);
+  max-width: 58ch;
+  line-height: 1.55;
+  margin-bottom: var(--space-5);
+}
+
+.sport-chapter__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: var(--space-4);
+}
+
+.sport-chapter__meta dt {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  color: var(--on-purple-mute);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.sport-chapter__meta dd {
+  font-size: var(--fs-sm);
+  color: #ffffff;
+  margin: 0;
+  font-weight: 500;
+}
+
+.sport-chapter__support-media,
+.sport-chapter__action-frames {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: var(--space-4) 0 var(--space-5);
+}
+
+.sport-chapter__support-media figure,
+.sport-chapter__action-frames figure {
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  max-width: 220px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.sport-chapter__support-media img,
+.sport-chapter__action-frames img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.sport-chapter__support-media figcaption {
+  font-size: var(--fs-xs);
+  color: var(--on-purple-mute);
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Extended sports grid */
+.sports-extended {
+  margin-top: var(--space-10);
+}
+
+.sports-extended__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-5);
+}
+
+.sports-extended__item {
+  background: rgba(25, 18, 32, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: var(--space-6);
+  transition: transform 0.3s var(--e), border-color 0.3s ease;
+}
+
+.sports-extended__item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 195, 8, 0.4);
+}
+
+.sports-extended__item h4 {
+  margin: 0 0 var(--space-2);
+  color: var(--gold-lit);
+  font-size: 1.4rem;
+}
+
+.sports-extended__item p {
+  margin: 0;
+  color: var(--on-purple-soft);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+}
+
+/* ============================================================
+   SECTION 4. HOUSE COMPETITION
+   ============================================================ */
+.house-arena {
+  background: #09070c;
+  padding: var(--space-10) 0;
+  position: relative;
+}
+
+.house-arena__intro {
+  margin-bottom: var(--space-8);
+}
+
+.house-arena__intro h2 {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.05;
+  margin: var(--space-3) 0 var(--space-4);
+  color: #ffffff;
+}
+
+.house-bands {
+  display: flex;
+  width: 100%;
+  min-height: 640px;
+  gap: 12px;
+  padding: 0 var(--gut);
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.house-band {
+  position: relative;
+  flex: 1;
+  min-width: 120px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-6);
+  cursor: pointer;
+  transition: flex 0.65s var(--e), filter 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.house-band.is-active {
+  flex: 3.5;
+  cursor: default;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.house-band__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.house-band__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(1.1);
+  transition: transform 0.8s var(--e), filter 0.6s ease;
+}
+
+.house-band.is-active .house-band__media img {
+  filter: grayscale(0%) contrast(1.05);
+  transform: scale(1.04);
+}
+
+.house-band__tint {
+  position: absolute;
+  inset: 0;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+
+.house-band.is-active .house-band__tint {
+  opacity: 0.65;
+}
+
+.house-band__tint--red {
+  background: linear-gradient(180deg, rgba(192, 43, 43, 0.3) 0%, rgba(90, 15, 15, 0.95) 90%);
+}
+
+.house-band__tint--yellow {
+  background: linear-gradient(180deg, rgba(212, 153, 24, 0.3) 0%, rgba(95, 65, 8, 0.95) 90%);
+}
+
+.house-band__tint--green {
+  background: linear-gradient(180deg, rgba(45, 119, 71, 0.3) 0%, rgba(15, 60, 30, 0.95) 90%);
+}
+
+.house-band__tint--blue {
+  background: linear-gradient(180deg, rgba(35, 92, 156, 0.3) 0%, rgba(12, 38, 75, 0.95) 90%);
+}
+
+.house-band__content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+}
+
+.house-band__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.house-band__color-tag {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.house-band--vasistha .house-band__color-tag { color: #ff7676; }
+.house-band--valmiki .house-band__color-tag { color: #ffd75c; }
+.house-band--vishwamitra .house-band__color-tag { color: #6ee7b7; }
+.house-band--vyasa .house-band__color-tag { color: #93c5fd; }
+
+.house-band__name {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1;
+  margin: 0 0 var(--space-3);
+  color: #ffffff;
+}
+
+.house-band__details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--e), opacity 0.4s ease;
+}
+
+.house-band.is-active .house-band__details {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.house-band__identity {
+  font-size: var(--fs-sm);
+  color: var(--on-purple-soft);
+  margin-bottom: var(--space-3);
+  line-height: 1.5;
+}
+
+.house-band__facts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--fs-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.house-band__facts li strong {
+  color: #ffffff;
+}
+
+.house-band__trigger {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.house-band.is-active .house-band__trigger {
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .house-bands {
+    flex-direction: column;
+    min-height: auto;
+    gap: var(--space-4);
+  }
+  .house-band {
+    flex: none !important;
+    min-height: 240px;
+  }
+  .house-band .house-band__details {
+    max-height: none !important;
+    opacity: 1 !important;
+  }
+  .house-band__trigger {
+    display: none;
+  }
+}
+
+/* ============================================================
+   SECTION 5. THE COMPETITION ARCHIVE
+   ============================================================ */
+.laurel-archive {
+  background: #110d16;
+  padding: var(--space-10) 0;
+  position: relative;
+}
+
+.archive-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  position: relative;
+}
+
+.archive-entry {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--space-6);
+  position: relative;
+  align-items: flex-start;
+}
+
+.archive-entry__year {
+  font-family: var(--font-primary), serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  border-right: 2px solid rgba(255, 195, 8, 0.3);
+  padding-right: var(--space-4);
+  text-align: right;
+}
+
+.archive-entry__card {
+  background: rgba(22, 16, 29, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: var(--space-6);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.archive-entry__meta {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.archive-entry__tag {
+  color: var(--gold-lit);
+  font-weight: 600;
+}
+
+.archive-entry__date {
+  color: var(--on-purple-mute);
+}
+
+.archive-entry__title {
+  margin: 0 0 var(--space-3);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: #ffffff;
+}
+
+.archive-entry__copy {
+  margin: 0 0 var(--space-4);
+  font-size: var(--fs-body);
+  color: var(--on-purple-soft);
+  line-height: 1.6;
+}
+
+.archive-entry__specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--space-4);
+  margin: 0;
+}
+
+.archive-entry__specs dt {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-purple-mute);
+  margin-bottom: 2px;
+}
+
+.archive-entry__specs dd {
+  font-size: var(--fs-sm);
+  color: #ffffff;
+  margin: 0;
+}
+
+.archive-notice {
+  background: rgba(25, 18, 33, 0.5);
+  border: 1px dashed rgba(255, 195, 8, 0.35);
+  border-radius: 14px;
+  padding: var(--space-6);
+  margin-left: 164px;
+}
+
+.archive-notice h4 {
+  margin: 0 0 var(--space-2);
+  color: var(--gold-lit);
+}
+
+.archive-notice__text {
+  color: var(--on-purple-soft);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .archive-entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+  .archive-entry__year {
+    border-right: none;
+    border-bottom: 2px solid rgba(255, 195, 8, 0.3);
+    padding-bottom: var(--space-1);
+    text-align: left;
+  }
+  .archive-notice {
+    margin-left: 0;
+  }
+}
+
+/* ============================================================
+   SECTION 6. ATHLETE STORIES
+   ============================================================ */
+.athlete-stories {
+  background: #09070c;
+  padding: var(--space-10) 0;
+}
+
+.athlete-stories__showcase {
+  margin-top: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.athlete-card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-8);
+  background: rgba(20, 15, 26, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  align-items: center;
+}
+
+.athlete-card__media {
+  position: relative;
+  min-height: 480px;
+  height: 100%;
+}
+
+.athlete-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.athlete-card__body {
+  padding: var(--space-8);
+}
+
+.athlete-card__context {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
+  font-weight: 600;
+}
+
+.athlete-card__quote {
+  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+  line-height: 1.35;
+  color: #ffffff;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  border-left: 3px solid var(--gold);
+  padding-left: var(--space-4);
+  font-style: italic;
+}
+
+.athlete-card__byline {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-4);
+}
+
+.athlete-card__byline strong {
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.athlete-card__byline span {
+  font-size: var(--fs-sm);
+  color: var(--on-purple-mute);
+}
+
+.athlete-card__narrative {
+  font-size: var(--fs-body);
+  color: var(--on-purple-soft);
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.athlete-card--placeholder {
+  grid-template-columns: 1fr;
+  background: rgba(18, 13, 24, 0.4);
+  border-style: dashed;
+}
+
+.athlete-card--placeholder .athlete-card__body {
+  padding: var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .athlete-card {
+    grid-template-columns: 1fr;
+  }
+  .athlete-card__media {
+    min-height: 320px;
+  }
+}
+
+/* ============================================================
+   SECTION 7. DISCIPLINE AND DAILY ROUTINE
+   ============================================================ */
+.routine-sec {
+  background: #110d16;
+  padding: var(--space-10) 0;
+}
+
+.routine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+
+.routine-card {
+  background: rgba(22, 16, 29, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s var(--e), border-color 0.3s ease;
+}
+
+.routine-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 195, 8, 0.4);
+}
+
+.routine-card--highlight {
+  background: linear-gradient(180deg, rgba(45, 25, 60, 0.85) 0%, rgba(22, 16, 29, 0.9) 100%);
+  border-color: rgba(255, 195, 8, 0.45);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.routine-card__time {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.routine-card__title {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 0 0 var(--space-3);
+}
+
+.routine-card__desc {
+  font-size: var(--fs-sm);
+  color: var(--on-purple-soft);
+  line-height: 1.55;
+  margin: 0 0 var(--space-4);
+}
+
+.routine-card__tag {
+  align-self: flex-start;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--on-purple-mute);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.routine-card--highlight .routine-card__tag {
+  background: var(--gold);
+  color: var(--purple-ink);
+  font-weight: 600;
+}
+
+/* ============================================================
+   SECTION 8. LAURELS ENDING
+   ============================================================ */
+.laurel-ending {
+  position: relative;
+  min-height: 80vh;
+  min-height: 80svh;
+  display: flex;
+  align-items: center;
+  background: #09070c;
+  overflow: hidden;
+  padding: var(--space-10) 0;
+}
+
+.laurel-ending__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.laurel-ending__media picture {
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+
+.laurel-ending__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+.laurel-ending__scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(9, 7, 12, 0.5) 0%, rgba(9, 7, 12, 0.95) 90%),
+              linear-gradient(180deg, #110d16 0%, rgba(9, 7, 12, 0.85) 50%, #09070c 100%);
+}
+
+.laurel-ending__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.laurel-ending__title {
+  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  line-height: 1.05;
+  color: #ffffff;
+  margin: var(--space-3) 0 var(--space-4);
+}
+
+.laurel-ending__lead {
+  font-size: var(--fs-lead);
+  color: var(--on-purple-soft);
+  margin: 0 auto var(--space-8);
+  line-height: 1.6;
+}
+
+.laurel-ending__links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* ============================================================
+   SECTION 9. PRACTICAL INFORMATION
+   ============================================================ */
+.sports-practical {
+  background: #0c0910;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-9) 0;
+}
+
+.sports-practical__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: var(--space-8);
+}
+
+.sports-practical__intro h2 {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: #ffffff;
+  margin: var(--space-2) 0 var(--space-3);
+}
+
+.sports-practical__intro p {
+  color: var(--on-purple-soft);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.sports-practical__links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
+.sports-link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(22, 16, 29, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: var(--space-4) var(--space-5);
+  text-decoration: none;
+  transition: transform 0.25s var(--e), border-color 0.25s ease, background 0.25s ease;
+}
+
+.sports-link-card strong {
+  font-size: 1.05rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sports-link-card span {
+  font-size: var(--fs-sm);
+  color: var(--on-purple-mute);
+  line-height: 1.4;
+}
+
+.sports-link-card:hover,
+.sports-link-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  background: rgba(30, 22, 38, 0.85);
+}
+
+@media (max-width: 800px) {
+  .sports-practical__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION OVERRIDES
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .arena-hero__img,
+  .sport-chapter__media img,
+  .house-band__media img,
+  .sports-cursor,
+  .arena-hero__scroll-line::after {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .arena-hero__layer--reveal {
+    display: none !important;
+  }
+}

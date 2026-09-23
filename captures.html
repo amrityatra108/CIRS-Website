@@ -26,21 +26,21 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=96">
-<link rel="stylesheet" href="assets/css/cirs.css?b=96">
-<link rel="stylesheet" href="assets/css/pages.css?b=96">
+<link rel="stylesheet" href="assets/css/fonts.css?b=97">
+<link rel="stylesheet" href="assets/css/cirs.css?b=97">
+<link rel="stylesheet" href="assets/css/pages.css?b=97">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/captures.css?b=96">
-<link rel="stylesheet" href="assets/css/typography.css?b=96">
-<noscript><style>.cap{height:100svh}</style></noscript>
+<link rel="stylesheet" href="assets/css/typography.css?b=97">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=97">
+<noscript><style>.film{height:100svh}</style></noscript>
 </head>
 
-<body class="captures">
+<body class="film captures">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -266,36 +266,28 @@
   </div>
 </div>
 <main id="main">
-<!-- The opening of CIRS Captures: six seconds of a camera coming out of the
-     dark, which the visitor scrubs frame by frame with the scroll. Nothing
-     here plays by itself and nothing here is a hero — the film is the whole
-     introduction, and the one line of type arrives only once it has ended.
-
-     The scroll distance is set in assets/css/captures.css and divided into
-     its four phases in assets/js/captures.js. The markup is deliberately
-     this bare: every element below is either the film or the line. -->
-<section class="cap" id="captures-opening" data-captures>
-  <div class="cap__stage">
-    <video class="cap__film" data-captures-film
+<section class="film" id="captures-opening" data-film>
+  <div class="film__stage">
+    <video class="film__video" data-film-video
            width="1280" height="720"
            poster="assets/img/captures-camera-poster.jpg"
            preload="auto" muted playsinline disablepictureinpicture
            aria-hidden="true" tabindex="-1">
       <!-- H.264 first, which is the other way round from the rest of this
-           site. Here the file is not played but seeked, several times a
+           site. These files are not played but seeked, several times a
            second, and H.264 is the one codec every browser that has it
            decodes in hardware — so it is the path that scrubs without
            stuttering wherever it exists. The VP9 is for the browsers built
            without the proprietary decoder, which would otherwise have no
-           opening at all. Both are six seconds at 24fps, so the mapping in
-           captures.js holds whichever one is picked. -->
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
       <source src="assets/video/captures-camera.mp4" type="video/mp4">
       <source src="assets/video/captures-camera.webm" type="video/webm">
     </video>
-    <h1 class="cap__title" data-captures-title><span class="cap__line">CIRS Captures</span></h1>
+    <h1 class="film__title" data-film-title><span class="film__line">CIRS Captures</span></h1>
   </div>
 </section>
-<div class="cap__seam" aria-hidden="true"></div>
+<div class="film__seam" aria-hidden="true"></div>
 <section class="section" id="what">
   <div class="wrap">
     <div class="sec-head rv">
@@ -407,11 +399,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=96" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=96" defer></script>
-<script src="assets/vendor/lenis.min.js?b=96" defer></script>
-<script src="assets/js/cirs.js?b=96" defer></script>
-<script src="assets/js/pages.js?b=96" defer></script>
-<script src="assets/js/captures.js?b=96" defer></script>
+<script src="assets/vendor/gsap.min.js?b=97" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=97" defer></script>
+<script src="assets/vendor/lenis.min.js?b=97" defer></script>
+<script src="assets/js/cirs.js?b=97" defer></script>
+<script src="assets/js/pages.js?b=97" defer></script>
+<script src="assets/js/filmintro.js?b=97" defer></script>
 </body>
 </html>

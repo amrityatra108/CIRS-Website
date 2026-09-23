@@ -1,4 +1,11 @@
-/* CIRS Captures — the opening.
+/* The cinematic opening shared by the CIRS film openings.
+
+   These pages open the same way, because they share page furniture with a
+   different film in it: the reader scrubs a short piece of footage with the
+   scroll, it ends, it is held, and one thin widely-tracked line arrives over
+   the frame it ended on. What differs between them is the file, the words,
+   and where the line sits — all of which come from the markup that
+   build-site.py generates, not from here.
 
    The film does not play. The scroll position chooses the frame:
 
@@ -11,8 +18,8 @@
    finished composition is held to the end.
 
    Two things make the scrubbing smooth, and neither is in this file.
-   assets/video/captures-camera.mp4 is encoded with every frame a keyframe,
-   so a seek never has to decode forward from a distant one; and its moov
+   Each film is encoded with every frame a keyframe,
+   so a seek never has to decode forward from a distant one; and the moov
    atom is at the front, so the browser knows the duration and can seek
    before the whole file has arrived. Re-encoding it any other way is what
    would make this stutter. The stage is held by CSS position:sticky rather
@@ -21,16 +28,22 @@
 (function () {
   "use strict";
 
-  var section = document.querySelector("[data-captures]");
+  var section = document.querySelector("[data-film]");
   if (!section) return;
-  var film = section.querySelector("[data-captures-film]");
-  var title = section.querySelector("[data-captures-title]");
+  var film = section.querySelector("[data-film-video]");
+  var title = section.querySelector("[data-film-title]");
+  var scrollCue = section.querySelector("[data-film-scroll-cue]");
+  var hasComposedStill = !!section.querySelector(".film__still");
   if (!film || !title) return;
 
-  // The phase boundaries, as fractions of the section's travel.
-  var FILM_END = 0.70;
-  var HOLD_END = 0.77;
-  var TITLE_END = 0.90;
+  /* The phase boundaries, as fractions of the section's travel, and the
+     length of one frame of the file. Both are stated in the markup so a page
+     can keep its own timing, and both fall back to what CIRS Captures
+     established: the film to 0.70, held to 0.77, the line out by 0.90. */
+  var phases = (section.getAttribute("data-film-phases") || "").split(/\s+/).map(Number);
+  var FILM_END = phases[0] > 0 ? phases[0] : 0.70;
+  var HOLD_END = phases[1] > 0 ? phases[1] : 0.77;
+  var TITLE_END = phases[2] > 0 ? phases[2] : 0.90;
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   var hasST = typeof window.gsap !== "undefined" &&
@@ -38,14 +51,21 @@
 
   var duration = 0;
   var last = 0;        // the timestamp that lands on the final frame
-  // One frame of the film. The file is ours and is encoded at 24fps — see
-  // the note at the top — and HTMLVideoElement will not report a frame rate,
-  // so it is stated here rather than guessed at from playback.
-  var step = 1 / 24;
+  // One frame of the film. The files are ours and are encoded at 24fps, and
+  // HTMLVideoElement will not report a frame rate, so it is stated in the
+  // markup rather than guessed at from playback.
+  var step = 1 / (Number(section.getAttribute("data-film-fps")) || 24);
   var asked = -1;      // the last time the decoder was sent to
   var reveal = -1;     // the last value written to the stylesheet
   var trigger = null;
   var furniture = null;
+  var failedSources = 0;
+  var sources = hasComposedStill ? film.querySelectorAll("source") : [];
+  var fallbackTimer = null;
+  var unavailable = false;
+  var measuredTravel = 0;
+  var previousProgress = 0;
+  var wasOnFilm = false;
 
   /* Seeking to exactly duration is the one value that is not a frame: some
      browsers treat it as the end and hand back the first frame, or fire
@@ -70,26 +90,50 @@
   function setReveal(value) {
     if (Math.abs(value - reveal) < 0.001) return;
     reveal = value;
-    title.style.setProperty("--cap-reveal", value.toFixed(4));
+    title.style.setProperty("--film-reveal", value.toFixed(4));
   }
 
   // Slow in and slow out. The line should be noticed; its arrival should not.
   function smooth(t) { return t * t * (3 - 2 * t); }
+
+  function setScrollCue(progress) {
+    if (!scrollCue) return;
+    var cue = 1 - smooth(Math.max(0, Math.min(1, progress / 0.08)));
+    scrollCue.style.setProperty("--film-scroll-cue-opacity", cue.toFixed(3));
+  }
 
   function paint(progress) {
     var p = progress < 0 ? 0 : progress > 1 ? 1 : progress;
     seek(p >= FILM_END ? last : (p / FILM_END) * duration);
     var r = (p - HOLD_END) / (TITLE_END - HOLD_END);
     setReveal(r <= 0 ? 0 : r >= 1 ? 1 : smooth(r));
+    setScrollCue(p);
+  }
+
+  // Composed still openings measure their position directly. This keeps a
+  // halfway reload stable and avoids stale section bounds after a resize.
+  function paintPosition() {
+    var travel = Math.max(1, section.offsetHeight - window.innerHeight);
+    if (measuredTravel && Math.abs(travel - measuredTravel) > 2 &&
+        wasOnFilm && previousProgress > 0 && previousProgress < 1) {
+      window.scrollTo(0, section.offsetTop + previousProgress * travel);
+    }
+    measuredTravel = travel;
+    var box = section.getBoundingClientRect();
+    previousProgress = Math.max(0, Math.min(1, -box.top / travel));
+    wasOnFilm = box.top <= 0 && box.bottom > 0;
+    paint(previousProgress);
+    document.body.classList.toggle("film-on", wasOnFilm);
   }
 
   /* The composition, without the scrubbing: the camera as the film leaves
-     it and the line already up. assets/css/captures.css takes the section
+     it and the line already up. assets/css/filmintro.css takes the section
      back to one screen when this is set, so nobody is asked to scroll four
      screens through something that is no longer moving. */
   function still() {
-    section.setAttribute("data-captures-still", "");
+    section.setAttribute("data-film-still", "");
     setReveal(1);
+    setScrollCue(0);
     asked = -1;
     seek(last);
   }
@@ -97,12 +141,22 @@
   function teardown() {
     if (trigger) { trigger.kill(); trigger = null; }
     if (furniture) { furniture.kill(); furniture = null; }
-    document.body.classList.remove("cap-on");
+    document.body.classList.remove("film-on");
   }
 
   function scrub() {
     if (trigger || !hasST || reduced.matches) return;
-    section.removeAttribute("data-captures-still");
+    section.removeAttribute("data-film-still");
+    if (hasComposedStill) {
+      // A document-wide trigger keeps reporting while the section's travel
+      // is remeasured on resize. Its actual viewport position chooses frame.
+      trigger = ScrollTrigger.create({
+        onUpdate: paintPosition,
+        onRefresh: paintPosition
+      });
+      paintPosition();
+      return;
+    }
     trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
@@ -120,31 +174,60 @@
       start: "top top",
       end: "bottom top",
       onToggle: function (self) {
-        document.body.classList.toggle("cap-on", self.isActive);
+        document.body.classList.toggle("film-on", self.isActive);
       },
       onRefresh: function (self) {
-        document.body.classList.toggle("cap-on", self.isActive);
+        document.body.classList.toggle("film-on", self.isActive);
       }
     });
     paint(trigger.progress);
   }
 
   function start() {
+    if (unavailable) return;
     if (!frames()) return;
-    if (reduced.matches || !hasST) { still(); return; }
-    if (trigger) paint(trigger.progress);
+    if (fallbackTimer) { window.clearTimeout(fallbackTimer); fallbackTimer = null; }
+    if (reduced.matches || !hasST) {
+      still();
+      section.removeAttribute("data-film-pending");
+      return;
+    }
+    if (trigger) {
+      if (hasComposedStill) paintPosition(); else paint(trigger.progress);
+    }
     else scrub();
+    section.removeAttribute("data-film-pending");
   }
 
   if (film.readyState >= 1) start();
   film.addEventListener("loadedmetadata", start);
-  // Without the file there is no opening to scrub. Leave the section at one
-  // screen with the line up, rather than four screens of nothing.
-  film.addEventListener("error", function () {
+  // Without usable media, show the composed still and title at one screen.
+  function fallback() {
+    if (unavailable) return;
+    unavailable = true;
     teardown();
-    section.setAttribute("data-captures-still", "");
+    section.setAttribute("data-film-still", "");
     setReveal(1);
+    if (scrollCue) scrollCue.style.setProperty("--film-scroll-cue-opacity", "0");
+    section.removeAttribute("data-film-pending");
+  }
+  // An unused source can fail while WebM is loading. After metadata a media
+  // error is definitive; before metadata wait for both source errors.
+  film.addEventListener("error", function () {
+    if (!hasComposedStill || duration) fallback();
   });
+  if (hasComposedStill) {
+    sources.forEach(function (source) {
+      source.addEventListener("error", function () {
+        failedSources += 1;
+        if (failedSources === sources.length) fallback();
+      });
+    });
+    if (!duration) fallbackTimer = window.setTimeout(fallback, 5000);
+    window.addEventListener("resize", function () {
+      if (trigger) window.requestAnimationFrame(paintPosition);
+    }, { passive: true });
+  }
 
   /* iOS will not paint a frame of a video that has never been told to play,
      so a seek alone leaves the poster up. One muted play, stopped as soon as
@@ -160,15 +243,18 @@
       playing.then(function () {
         film.pause();
         asked = -1;
-        if (trigger) paint(trigger.progress);
+        if (trigger) {
+          if (hasComposedStill) paintPosition(); else paint(trigger.progress);
+        }
       }).catch(function () { /* No decoder; the poster is the fallback. */ });
     }
   }
   window.addEventListener("touchstart", unlock, { passive: true, once: true });
 
   reduced.addEventListener("change", function () {
+    if (unavailable) return;
     if (reduced.matches) { teardown(); start(); }
-    else { section.removeAttribute("data-captures-still"); scrub(); start(); }
+    else { section.removeAttribute("data-film-still"); scrub(); start(); }
   });
 
   // A trigger left registered across a back-forward-cache restore is one
