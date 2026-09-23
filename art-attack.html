@@ -7,8 +7,14 @@
 <meta name="description" content="Studio work and visual art from across Chinmaya International Residential School.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/art-attack.html">
-<link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
-<link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CIRS Art Attack">
 <meta property="og:description" content="Studio work and visual art from across Chinmaya International Residential School.">
@@ -20,19 +26,21 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=97">
-<link rel="stylesheet" href="assets/css/cirs.css?b=97">
-<link rel="stylesheet" href="assets/css/pages.css?b=97">
+<link rel="stylesheet" href="assets/css/fonts.css?b=97-art-attack-film-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=97-art-attack-film-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=97-art-attack-film-1">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=97">
+<link rel="stylesheet" href="assets/css/typography.css?b=97-art-attack-film-1">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=97-art-attack-film-1">
+<noscript><style>.film{height:100svh}.film[data-film-pending] .film__title{opacity:1}.film__video{display:none}body.art-attack .film__still{visibility:visible}</style></noscript>
 </head>
 
-<body>
+<body class="film art-attack">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -64,7 +72,7 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header is-first-section" id="header">
+<header class="header is-first-section is-bare" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -258,13 +266,29 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">CIRS Art Attack</span></p>
-    <h1 class="serif" data-split>Made <em>by Hand.</em></h1>
-    <p class="lead">Studio work and visual art from across the school.</p>
+<section class="film" id="art-attack-opening" data-film data-film-pending>
+  <div class="film__stage">
+    <img class="film__still" src="assets/img/art-attack-opening-final.jpg" alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">
+    <video class="film__video" data-film-video
+           width="1280" height="720"
+           poster="assets/img/art-attack-opening-poster.jpg"
+           preload="auto" muted playsinline disablepictureinpicture
+           aria-hidden="true" tabindex="-1">
+      <!-- H.264 first, which is the other way round from the rest of this
+           site. These files are not played but seeked, several times a
+           second, and H.264 is the one codec every browser that has it
+           decodes in hardware — so it is the path that scrubs without
+           stuttering wherever it exists. The VP9 is for the browsers built
+           without the proprietary decoder, which would otherwise have no
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
+      <source src="assets/video/art-attack-opening.mp4" type="video/mp4">
+      <source src="assets/video/art-attack-opening.webm" type="video/webm">
+    </video>
+    <h1 class="film__title" data-film-title><span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span></h1>
   </div>
 </section>
+<div class="film__seam" aria-hidden="true"></div>
 <section class="section" id="what">
   <div class="wrap">
     <div class="sec-head rv">
@@ -376,10 +400,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=97" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=97" defer></script>
-<script src="assets/vendor/lenis.min.js?b=97" defer></script>
-<script src="assets/js/cirs.js?b=97" defer></script>
-<script src="assets/js/pages.js?b=97" defer></script>
+<script src="assets/vendor/gsap.min.js?b=97-art-attack-film-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=97-art-attack-film-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=97-art-attack-film-1" defer></script>
+<script src="assets/js/cirs.js?b=97-art-attack-film-1" defer></script>
+<script src="assets/js/pages.js?b=97-art-attack-film-1" defer></script>
+<script src="assets/js/filmintro.js?b=97-art-attack-film-1" defer></script>
 </body>
 </html>

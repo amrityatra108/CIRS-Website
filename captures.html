@@ -7,8 +7,14 @@
 <meta name="description" content="Photography from the CIRS community — the campus and the school year as its students see it.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/captures.html">
-<link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
-<link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CIRS Captures">
 <meta property="og:description" content="Photography from the CIRS community — the campus and the school year as its students see it.">
@@ -29,12 +35,12 @@
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/captures.css?b=97">
 <link rel="stylesheet" href="assets/css/typography.css?b=97">
-<noscript><style>.cap{height:100svh}</style></noscript>
+<link rel="stylesheet" href="assets/css/filmintro.css?b=97">
+<noscript><style>.film{height:100svh}</style></noscript>
 </head>
 
-<body class="captures">
+<body class="film captures">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -260,36 +266,28 @@
   </div>
 </div>
 <main id="main">
-<!-- The opening of CIRS Captures: six seconds of a camera coming out of the
-     dark, which the visitor scrubs frame by frame with the scroll. Nothing
-     here plays by itself and nothing here is a hero — the film is the whole
-     introduction, and the one line of type arrives only once it has ended.
-
-     The scroll distance is set in assets/css/captures.css and divided into
-     its four phases in assets/js/captures.js. The markup is deliberately
-     this bare: every element below is either the film or the line. -->
-<section class="cap" id="captures-opening" data-captures>
-  <div class="cap__stage">
-    <video class="cap__film" data-captures-film
+<section class="film" id="captures-opening" data-film>
+  <div class="film__stage">
+    <video class="film__video" data-film-video
            width="1280" height="720"
            poster="assets/img/captures-camera-poster.jpg"
            preload="auto" muted playsinline disablepictureinpicture
            aria-hidden="true" tabindex="-1">
       <!-- H.264 first, which is the other way round from the rest of this
-           site. Here the file is not played but seeked, several times a
+           site. These files are not played but seeked, several times a
            second, and H.264 is the one codec every browser that has it
            decodes in hardware — so it is the path that scrubs without
            stuttering wherever it exists. The VP9 is for the browsers built
            without the proprietary decoder, which would otherwise have no
-           opening at all. Both are six seconds at 24fps, so the mapping in
-           captures.js holds whichever one is picked. -->
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
       <source src="assets/video/captures-camera.mp4" type="video/mp4">
       <source src="assets/video/captures-camera.webm" type="video/webm">
     </video>
-    <h1 class="cap__title" data-captures-title><span class="cap__line">CIRS Captures</span></h1>
+    <h1 class="film__title" data-film-title><span class="film__line">CIRS Captures</span></h1>
   </div>
 </section>
-<div class="cap__seam" aria-hidden="true"></div>
+<div class="film__seam" aria-hidden="true"></div>
 <section class="section" id="what">
   <div class="wrap">
     <div class="sec-head rv">
@@ -406,6 +404,6 @@
 <script src="assets/vendor/lenis.min.js?b=97" defer></script>
 <script src="assets/js/cirs.js?b=97" defer></script>
 <script src="assets/js/pages.js?b=97" defer></script>
-<script src="assets/js/captures.js?b=97" defer></script>
+<script src="assets/js/filmintro.js?b=97" defer></script>
 </body>
 </html>
