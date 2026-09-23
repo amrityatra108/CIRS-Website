@@ -375,3 +375,106 @@ body.art-attack .film[data-film-still] .film__video{ visibility:hidden; }
   body.art-attack .film__video{ visibility:hidden; }
   body.art-attack .film[data-film-pending] .film__title{ opacity:1; }
 }
+
+/* ---- CIRS Theatre -------------------------------------------------------
+   The supplied film opens red velvet curtains onto an empty amber stage.
+   The title occupies the unlit air, above the reflective floor. On portrait
+   screens the whole proscenium is shown within the viewport, and the title
+   settles below it where neither the curtains nor the stage are covered. */
+body.theatre{
+  --film-ground:#080304;
+  --film-crop:50% 50%;
+  --film-crop-narrow:50% 50%;
+  --film-seam-top:#050203;
+  --film-seam-fold:#1D0A09;
+  --film-seam-rise:#79604E;
+}
+body.theatre .film__stage{
+  background:#080304 url("../img/theatre-opening-poster.jpg") center / cover no-repeat;
+}
+body.theatre .film__still{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:var(--film-crop);
+  visibility:hidden;
+}
+body.theatre .film__stage::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:auto 0 0;
+  height:clamp(70px, 14svh, 150px);
+  background:linear-gradient(to bottom, transparent, #050203);
+  pointer-events:none;
+}
+body.theatre .film__title{
+  --film-track-from:.11;
+  --film-track-to:.26;
+  position:absolute;
+  z-index:2;
+  top:49%;
+  bottom:auto;
+  width:100%;
+  font-family:"Jost", sans-serif;
+  font-size:clamp(52px, 6vw, 92px);
+  font-weight:100;
+  line-height:1;
+  text-transform:uppercase;
+  color:#F3CD83;
+  text-shadow:0 1px 4px rgba(0, 0, 0, .25);
+  transform:translateY(calc(-50% + (1 - var(--film-reveal)) * 12px));
+  filter:none;
+  will-change:opacity, transform;
+}
+body.theatre .film[data-film-pending] .film__title{ opacity:0; }
+body.theatre .film__title::after{
+  content:"";
+  display:block;
+  width:clamp(88px, 12vw, 170px);
+  height:1px;
+  margin:clamp(20px, 3vh, 34px) auto 0;
+  background:#C89A53;
+}
+body.theatre .film[data-film-still] .film__video{ visibility:hidden; }
+body.theatre .film[data-film-still] .film__still{ visibility:visible; }
+
+@media (max-aspect-ratio:6/5){
+  body.theatre .film__stage{
+    background-color:#080304;
+    background-size:contain;
+    background-position:50% 42%;
+  }
+  body.theatre .film__video,
+  body.theatre .film__still{
+    object-fit:contain;
+    object-position:50% 42%;
+    background:transparent;
+  }
+  body.theatre .film__title{
+    --film-track-from:.09;
+    --film-track-to:.20;
+    top:78%;
+    font-size:clamp(34px, 5.2vw, 54px);
+  }
+}
+@media (max-width:720px){
+  body.theatre .film__title{
+    --film-track-from:.08;
+    --film-track-to:.16;
+    top:64%;
+    font-size:clamp(30px, 8.5vw, 42px);
+  }
+}
+@media (max-width:360px){
+  body.theatre .film__title{ font-size:clamp(27px, 8.2vw, 32px); }
+}
+@media (prefers-reduced-motion:reduce){
+  .film[data-film]{ --film-run:100svh; }
+  body.theatre .film__video{ visibility:hidden; }
+  body.theatre .film__still{ visibility:visible; }
+  body.theatre .film[data-film-pending] .film__title{ opacity:1; }
+  .film__title{ --film-reveal:1; will-change:auto; }
+}
