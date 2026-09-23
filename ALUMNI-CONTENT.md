@@ -78,11 +78,15 @@ does not conflate the two.
 
 ## 4. More destinations
 
-Adding one is two values: which of the galaxy's two arms it belongs on, and how far out
-along that arm it sits. Regions run in unbroken stretches along an arm — arm 0 carries
-India and then the United Kingdom, arm 1 carries Asia-Pacific and then the United States
-— so a new destination goes at the end of its own region's stretch and the ones beyond
-it shift out. The header comment in `tools/alumni.py` sets out the arithmetic.
+Adding one is a name, a country, a region and **where it actually is**: its latitude and
+longitude. The field is a map, so a new destination needs no layout — it lands where the
+institution stands, and its route out of Siruvani is drawn for it.
+
+The only thing that may need a hand is its name. Each entry carries an offset saying
+where the name sits relative to its point and which way it runs; the default is a short
+step to the right. It matters only when a new destination lands on top of one already
+there — a sixth in Britain, say. The header comment in `tools/alumni.py` sets out both,
+and the checks in `CLAUDE.md` will not catch two names overlapping: look at the map.
 
 ## 5. More alumni
 
