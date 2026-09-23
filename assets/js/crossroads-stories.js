@@ -5,10 +5,36 @@
   var stack = section.querySelector(".crossroads-stories__stack");
   var covers = stack ? Array.from(stack.querySelectorAll("a")) : [];
   var selected = stack && stack.querySelector(".crossroads-stories__front");
-  var lastX = null, lastY = null, lockedUntil = 0, pointerDownCover = null;
+  var pointerDownCover = null;
+  var hoveredCover = null;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
   var rearSlot = {1:2,2:4,3:6,4:5,5:3,6:1};
+  function clearHover() {
+    hoveredCover = null;
+    stack.removeAttribute("data-crossroads-stories-hovering");
+    covers.forEach(function (item) { item.style.removeProperty("--crossroads-stories-hover-shift"); });
+  }
+  function showHover(cover) {
+    if (!finePointer.matches || hoveredCover === cover) return;
+    clearHover();
+    hoveredCover = cover;
+    var rect = cover.getBoundingClientRect();
+    var center = rect.left + rect.width / 2;
+    var width = cover.offsetWidth;
+    var distanceLimit = width * 3.2;
+    var maxShift = Math.min(44, width * .18);
+    covers.forEach(function (item) {
+      if (item === cover || item === selected) return;
+      var itemRect = item.getBoundingClientRect();
+      var offset = itemRect.left + itemRect.width / 2 - center;
+      var amount = Math.round(maxShift * Math.max(0, 1 - Math.abs(offset) / distanceLimit));
+      if (amount > 1) item.style.setProperty("--crossroads-stories-hover-shift", (offset < 0 ? -amount : amount) + "px");
+    });
+    stack.setAttribute("data-crossroads-stories-hovering", "");
+  }
   function selectCover(cover) {
     if (!cover || cover === selected || !covers.includes(cover)) return;
+    clearHover();
     selected = cover;
     var selectedIndex = covers.indexOf(selected);
     covers.forEach(function (item,index) {
@@ -19,21 +45,15 @@
         item.classList.add("crossroads-stories__rear", "crossroads-stories__rear--" + rearSlot[delta]);
       }
     });
-    lockedUntil=performance.now()+720;
   }
   if (stack) {
-    stack.addEventListener("pointerdown",function(event){pointerDownCover=event.target.closest("a");},{passive:true});
-    stack.addEventListener("pointermove", function (event) {
-      if (event.pointerType === "touch") return;
-      if (performance.now() < lockedUntil) return;
-      var cover = event.target.closest("a");
-      // Require deliberate pointer movement, not an enter event caused by moving cards.
-      if (lastX !== null && Math.hypot(event.clientX-lastX,event.clientY-lastY) < 14) return;
-      if (cover && cover !== selected) {
-        selectCover(cover); lastX=event.clientX; lastY=event.clientY;
-      }
+    covers.forEach(function (cover) {
+      cover.addEventListener("pointerenter", function (event) { if (event.pointerType !== "touch") showHover(cover); });
+      cover.addEventListener("pointerleave", function () { if (hoveredCover === cover) clearHover(); });
     });
-    stack.addEventListener("pointerleave", function () { lastX=null; lastY=null; });
+    stack.addEventListener("pointerleave", clearHover);
+    finePointer.addEventListener("change", function () { if (!finePointer.matches) clearHover(); });
+    stack.addEventListener("pointerdown",function(event){pointerDownCover=event.target.closest("a");},{passive:true});
     stack.addEventListener("focusin", function (event) {
       var cover=event.target.closest("a");
       if (cover !== pointerDownCover) selectCover(cover);
