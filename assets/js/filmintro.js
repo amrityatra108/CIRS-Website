@@ -1,8 +1,11 @@
-/* Scroll-controlled film opening, using the timing proven on CIRS Captures.
+/* The cinematic opening shared by CIRS Captures, Our Sports and CIRS Theatre.
 
-   Each page uses the same scroll mechanics with its own footage and title:
-   the reader scrubs a short film, it ends, it is held, then the title arrives.
-   The footage, words, and placement come from the page builder and CSS.
+   Both open the same way, because they are the same page furniture with a
+   different film in it: the reader scrubs a short piece of footage with the
+   scroll, it ends, it is held, and one thin widely-tracked line arrives over
+   the frame it ended on. What differs between them is the file, the words,
+   and where the line sits — all of which come from the markup that
+   build-site.py generates, not from here.
 
    The film does not play. The scroll position chooses the frame:
 
@@ -29,6 +32,8 @@
   if (!section) return;
   var film = section.querySelector("[data-film-video]");
   var title = section.querySelector("[data-film-title]");
+  var scrollCue = section.querySelector("[data-film-scroll-cue]");
+  var hasComposedStill = !!section.querySelector(".film__still");
   if (!film || !title) return;
 
   /* The phase boundaries, as fractions of the section's travel, and the
@@ -53,8 +58,9 @@
   var asked = -1;      // the last time the decoder was sent to
   var reveal = -1;     // the last value written to the stylesheet
   var trigger = null;
+  var furniture = null;
   var failedSources = 0;
-  var sources = film.querySelectorAll("source");
+  var sources = hasComposedStill ? film.querySelectorAll("source") : [];
   var fallbackTimer = null;
   var unavailable = false;
   var measuredTravel = 0;
@@ -90,17 +96,25 @@
   // Slow in and slow out. The line should be noticed; its arrival should not.
   function smooth(t) { return t * t * (3 - 2 * t); }
 
+  function setScrollCue(progress) {
+    if (!scrollCue) return;
+    var cue = 1 - smooth(Math.max(0, Math.min(1, progress / 0.08)));
+    scrollCue.style.setProperty("--film-scroll-cue-opacity", cue.toFixed(3));
+  }
+
   function paint(progress) {
     var p = progress < 0 ? 0 : progress > 1 ? 1 : progress;
     seek(p >= FILM_END ? last : (p / FILM_END) * duration);
     var r = (p - HOLD_END) / (TITLE_END - HOLD_END);
     setReveal(r <= 0 ? 0 : r >= 1 ? 1 : smooth(r));
+    setScrollCue(p);
   }
 
+  // A composed still can restore the same frame on a halfway reload and
+  // retain the final hold through a viewport resize. The existing openings
+  // continue using ScrollTrigger's own progress, as before.
   function paintPosition() {
     var travel = Math.max(1, section.offsetHeight - window.innerHeight);
-    // A resize changes the sticky section's travel. Keep the same frame and
-    // hold position instead of leaving a previously finished title below it.
     if (measuredTravel && Math.abs(travel - measuredTravel) > 2 &&
         wasOnFilm && previousProgress > 0 && previousProgress < 1) {
       window.scrollTo(0, section.offsetTop + previousProgress * travel);
@@ -114,48 +128,78 @@
   }
 
   /* The composition, without the scrubbing: the camera as the film leaves
-     it and the title already up. assets/css/filmintro.css takes the section
+     it and the line already up. assets/css/filmintro.css takes the section
      back to one screen when this is set, so nobody is asked to scroll four
      screens through something that is no longer moving. */
   function still() {
     section.setAttribute("data-film-still", "");
     setReveal(1);
+    setScrollCue(0);
     asked = -1;
     seek(last);
   }
 
   function teardown() {
     if (trigger) { trigger.kill(); trigger = null; }
+    if (furniture) { furniture.kill(); furniture = null; }
     document.body.classList.remove("film-on");
   }
 
   function scrub() {
     if (trigger || !hasST || reduced.matches) return;
     section.removeAttribute("data-film-still");
-    /* The site refreshes ScrollTrigger after images and fonts settle. A
-       section-relative trigger can be remeasured while the reader is halfway
-       down and report a shifted start. The document-wide trigger supplies
-       updates; the section's actual viewport position supplies progress. */
+    if (hasComposedStill) {
+      // A document-wide trigger keeps reporting while the section's travel
+      // is remeasured on resize. Its actual viewport position chooses frame.
+      trigger = ScrollTrigger.create({
+        onUpdate: paintPosition,
+        onRefresh: paintPosition
+      });
+      paintPosition();
+      return;
+    }
     trigger = ScrollTrigger.create({
-      onUpdate: paintPosition,
-      onRefresh: paintPosition
+      trigger: section,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: function (self) { paint(self.progress); },
+      onRefresh: function (self) { paint(self.progress); },
     });
-    paintPosition();
+    /* A second trigger, only to say whether the opening is on screen, because
+       it ends later than the first one does: the stage is still stuck to the
+       window through the final hold and for a screen after it, and the
+       reading rule and the back-to-top button cannot come back over the
+       finished composition. */
+    furniture = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: "bottom top",
+      onToggle: function (self) {
+        document.body.classList.toggle("film-on", self.isActive);
+      },
+      onRefresh: function (self) {
+        document.body.classList.toggle("film-on", self.isActive);
+      }
+    });
+    paint(trigger.progress);
   }
 
   function start() {
     if (unavailable) return;
     if (!frames()) return;
     if (fallbackTimer) { window.clearTimeout(fallbackTimer); fallbackTimer = null; }
-    if (reduced.matches || !hasST) still();
-    else if (trigger) paintPosition();
+    if (reduced.matches || !hasST) { still(); return; }
+    if (trigger) {
+      if (hasComposedStill) paintPosition(); else paint(trigger.progress);
+    }
     else scrub();
-    section.removeAttribute("data-film-pending");
+    if (hasComposedStill) section.removeAttribute("data-film-pending");
   }
 
   if (film.readyState >= 1) start();
   film.addEventListener("loadedmetadata", start);
-  // An unavailable stream leaves the composed still and title at one screen.
+  // Without the file there is no opening to scrub. Leave the section at one
+  // screen with the line up, rather than four screens of nothing.
   function fallback() {
     if (unavailable) return;
     unavailable = true;
@@ -164,19 +208,23 @@
     setReveal(1);
     section.removeAttribute("data-film-pending");
   }
-  // The first <source> may fail while the browser is still trying WebM. Let
-  // source errors and the deadline decide until a stream has loaded; after
-  // metadata, a video error means the active stream has actually failed.
-  film.addEventListener("error", function () { if (duration) fallback(); });
-  sources.forEach(function (source) {
-    source.addEventListener("error", function () {
-      failedSources += 1;
-      if (failedSources === sources.length) fallback();
-    });
+  film.addEventListener("error", function () {
+    // An unused source can fail while WebM is loading. A media error after
+    // metadata is definitive; before metadata wait for both source errors.
+    if (!hasComposedStill || duration) fallback();
   });
-  // A stalled request may never raise a media error. The composed still is
-  // ready behind the video, so leave the page usable after a short deadline.
-  fallbackTimer = window.setTimeout(fallback, 5000);
+  if (hasComposedStill) {
+    sources.forEach(function (source) {
+      source.addEventListener("error", function () {
+        failedSources += 1;
+        if (failedSources === sources.length) fallback();
+      });
+    });
+    if (!duration) fallbackTimer = window.setTimeout(fallback, 5000);
+    window.addEventListener("resize", function () {
+      if (trigger) window.requestAnimationFrame(paintPosition);
+    }, { passive: true });
+  }
 
   /* iOS will not paint a frame of a video that has never been told to play,
      so a seek alone leaves the poster up. One muted play, stopped as soon as
@@ -192,20 +240,19 @@
       playing.then(function () {
         film.pause();
         asked = -1;
-        if (trigger) paintPosition();
+        if (trigger) {
+          if (hasComposedStill) paintPosition(); else paint(trigger.progress);
+        }
       }).catch(function () { /* No decoder; the poster is the fallback. */ });
     }
   }
   window.addEventListener("touchstart", unlock, { passive: true, once: true });
 
   reduced.addEventListener("change", function () {
+    if (unavailable) return;
     if (reduced.matches) { teardown(); start(); }
     else { section.removeAttribute("data-film-still"); scrub(); start(); }
   });
-
-  window.addEventListener("resize", function () {
-    if (trigger) window.requestAnimationFrame(paintPosition);
-  }, { passive: true });
 
   // A trigger left registered across a back-forward-cache restore is one
   // measuring a page that has since moved, so it goes on the way out and is

@@ -1,21 +1,21 @@
-/* Scroll-controlled film opening. The footage and composition are page-specific.
+/* The cinematic opening two pages share — CIRS Captures and Our Sports.
 
    A short film the visitor scrubs with the scroll rather than watching, and
-   a title that arrives only once it has ended. Four
+   one thin widely-tracked line that arrives only once it has ended. Four
    phases, measured as fractions of the section's travel and divided in
    assets/js/filmintro.js:
 
        0.00 - 0.70   the film runs, under the scroll, and nothing else exists
-       0.70 - 0.78   the last frame freezes and is simply held
-       0.78 - 0.91   the title arrives out of it
-       0.91 - 1.00   the finished composition is held, then let go
+       0.70 - 0.77   the last frame freezes and is simply held
+       0.77 - 0.90   CIRS CAPTURES arrives out of it
+       0.90 - 1.00   the finished composition is held, then let go
 
    The stage is a CSS sticky viewport rather than a GSAP pin. It costs
    nothing to hold, it survives a resize and a reload halfway down the page
    without a refresh, and it leaves ScrollTrigger doing the one thing it is
    needed for here: reporting progress.
 
-   Everything above the page tuning blocks at the foot of this file is shared.
+   Everything above the two tuning blocks at the foot of this file is shared.
    What a page sets for itself is only what its own footage decides: how the
    frame is cropped, where the line can sit legibly, and the tone the seam
    below it starts from. */
@@ -26,7 +26,7 @@
 body.film{ background:var(--film-ground); }
 body.film main{ background:var(--paper); }
 
-.film[data-film]{
+.film{
   --film-run:460vh;
   position:relative;
   height:var(--film-run);
@@ -57,8 +57,8 @@ body.film main{ background:var(--paper); }
   background:#000;
   /* The film is scenery, never a player: it is not clickable, and it carries
      no controls. The element has never been given a controls attribute, but
-     Chromium puts the whole panel up by itself â€” a play button, a scrubber,
-     a timecode and a fullscreen button across the foot of the window â€” on a
+     Chromium puts the whole panel up by itself — a play button, a scrubber,
+     a timecode and a fullscreen button across the foot of the window — on a
      video that no script is driving, which is exactly the state this page is
      in when scripting is off. Suppressing the shadow tree is what keeps that
      out of the opening. */
@@ -75,7 +75,7 @@ body.film main{ background:var(--paper); }
 
 /* --film-reveal is the whole animation: one number, 0 to 1, written by the
    script once a frame. It defaults to 1 so that the line is legible before
-   the script has run and if it never runs at all â€” the curtain is over the
+   the script has run and if it never runs at all — the curtain is over the
    page while it starts, so nothing is seen being switched off. */
 .film__title{
   --film-reveal:1;
@@ -114,12 +114,12 @@ body.film main{ background:var(--paper); }
   margin-right:calc(var(--film-track) * -1em);
 }
 
-/* The way out. No second effect â€” the foot of the frame simply becomes paper
+/* The way out. No second effect — the foot of the frame simply becomes paper
    over a band the depth of a paragraph, and the page continues.
 
    The tone it starts from is what the foot of that page's last frame
    actually measures, which is why it is a token and not black. On Captures,
-   against pure black, the difference read as a cut â€” a hairline across the
+   against pure black, the difference read as a cut — a hairline across the
    window where the film stopped. Beginning the ramp on the frame's own tone
    takes the line away, and the same is true of a field at sunrise, which is
    nowhere near black. */
@@ -151,9 +151,6 @@ body.film.film-on #totop{
   --film-reveal:1;
 }
 
-/* Keep the heading out of sight until the scroll position is painted. */
-.film[data-film-pending] .film__title{ opacity:0; }
-
 @media (min-width:1600px){
   .film__title{ --film-track-to:var(--film-track-wide, .54); }
 }
@@ -164,10 +161,10 @@ body.film.film-on #totop{
   .film__video{ object-position:var(--film-crop-narrow, var(--film-crop, 50% 50%)); }
 }
 
-/* Narrow screens keep the intent â€” very thin, widely tracked, one line â€” by
+/* Narrow screens keep the intent — very thin, widely tracked, one line — by
    giving up size long before they give up the spacing. */
 @media (max-width:720px){
-  .film[data-film]{ --film-run:420vh; }
+  .film{ --film-run:420vh; }
   .film__title{
     font-size:var(--film-size-narrow, clamp(18px, 5.6vw, 30px));
     --film-track-from:.16;
@@ -181,6 +178,110 @@ body.film.film-on #totop{
   .film__title{
     font-size:var(--film-size-tiny, clamp(16px, 5.2vw, 22px));
     --film-track-to:.22;
+  }
+}
+
+/* ---- CIRS Captures -------------------------------------------------------
+   A camera on a dark set. The frame is nearly black throughout, the camera's
+   base sits at about four fifths of it, and the floor below that is where the
+   line goes.
+
+   The crop is taken mostly off the top rather than evenly: centring it drops
+   the camera's base to the very foot of the window on a wide monitor while
+   leaving it at four fifths on a laptop, so the line below it had nowhere to
+   sit that worked on both. Off the top — which is empty smoke — holds the
+   base at four fifths on every shape of screen.
+
+   Narrow windows take their slice from the left, which keeps the whole of
+   the lens: the front element, the barrel, the marked rings. Centred, the
+   lens came off the left edge and the body ran off the right, and what was
+   left read as a dark shape rather than as a camera. */
+body.captures{
+  --film-ground:#04040A;
+  --film-crop:50% 80%;
+  --film-crop-narrow:32% 80%;
+  --film-seam-top:#2A2726;
+  --film-seam-fold:#211C1B;
+  --film-seam-rise:#6B6560;
+}
+body.captures .film__title{
+  --film-title-bottom:clamp(56px, 8.5vh, 110px);
+}
+@media (max-width:720px){
+  body.captures .film__title{ --film-title-bottom:clamp(48px, 9vh, 96px); }
+}
+
+/* ---- Our Sports ----------------------------------------------------------
+   A field at sunrise, and the opposite problem. This frame is bright: the sky
+   and the mountains behind it measure light enough that white lettering over
+   them falls to about 1.4:1, and the sunlit grass in the foreground is not
+   much kinder once its specular highlights are counted.
+
+   The one band that holds is the treeline across the middle of the field, at
+   a little above half the height of the frame, which measures 6.6:1 at its worst
+   against this white. So the line sits there rather than low: above the ball,
+   which is the subject and is not to be covered, and below the mountains.
+   Anchoring it by its middle to a percentage of the window, instead of to the
+   foot of it, is what keeps it on that band when the crop changes.
+
+   The crop stays centred, which this frame can afford: the ball is already in
+   the middle, so a narrow window loses the far touchlines and keeps the
+   subject. The seam starts at #4E4322, which is what the foot of the frame
+   measures — sunlit grass in shadow, warm rather than green, and nothing a
+   guess would have landed on. */
+body.sports{
+  --film-ground:#0B1410;
+  --film-seam-top:#4E4322;
+  --film-seam-fold:#3E351C;
+  --film-seam-rise:#9A9170;
+}
+body.sports{
+  --film-size:clamp(28px, 4vw, 64px);
+  --film-size-narrow:clamp(17px, 5vw, 28px);
+  --film-size-tiny:clamp(15px, 4.6vw, 21px);
+}
+body.sports .film__title{
+  --film-title-top:44%;
+  --film-title-lift:-50%;
+}
+body.sports .film__scroll-cue{
+  --film-scroll-cue-opacity:1;
+  position:absolute;
+  z-index:2;
+  bottom:clamp(34px,7vh,72px);
+  left:var(--gut);
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin:0;
+  color:var(--gold-lit);
+  font-family:var(--font-primary);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  line-height:1;
+  text-transform:uppercase;
+  text-shadow:0 2px 12px rgba(0,0,0,.72);
+  opacity:var(--film-scroll-cue-opacity);
+  pointer-events:none;
+}
+body.sports .film__scroll-cue span:first-child{
+  display:grid;
+  width:26px;
+  height:26px;
+  place-items:center;
+  border:1px solid rgba(255,229,133,.76);
+  border-radius:50%;
+  font-size:1rem;
+  letter-spacing:0;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .film{ --film-run:100svh; }
+  .film__title{
+    --film-reveal:1;
+    transition:none;
+    will-change:auto;
   }
 }
 
@@ -237,6 +338,7 @@ body.theatre .film__title{
   filter:none;
   will-change:opacity, transform;
 }
+body.theatre .film[data-film-pending] .film__title{ opacity:0; }
 body.theatre .film__title::after{
   content:"";
   display:block;
@@ -282,6 +384,6 @@ body.theatre .film[data-film-still] .film__still{ visibility:visible; }
   .film[data-film]{ --film-run:100svh; }
   body.theatre .film__video{ visibility:hidden; }
   body.theatre .film__still{ visibility:visible; }
-  .film[data-film-pending] .film__title{ opacity:1; }
+  body.theatre .film[data-film-pending] .film__title{ opacity:1; }
   .film__title{ --film-reveal:1; will-change:auto; }
 }
