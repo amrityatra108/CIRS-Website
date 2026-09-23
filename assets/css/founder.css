@@ -31,6 +31,10 @@ body.founder .footer-wrap{ background:var(--f-paper-2); }
 /* Approved autonomous portrait opening, isolated from editorial page styles. */
 .founder .founder-opening{position:relative;box-sizing:border-box;height:100vh;height:100svh;min-height:420px;padding-top:100px;background:#f2efe8;}
 .founder .founder-opening__frame{display:block;width:100%;height:100%;border:0;}
+/* The embedded portrait draws its own cursor. Hide the site-wide trailing
+   ring while the pointer is inside the iframe so the ring cannot freeze at
+   the browsing-context boundary and appear as a second cursor. */
+body.founder:has(.founder-opening__frame:hover) > .ring{opacity:0!important;}
 .founder .founder-opening__continue{position:absolute;bottom:24px;left:24px;z-index:2;display:flex;gap:20px;align-items:center;padding:12px 18px;border:1px solid var(--f-rule);border-radius:30px;background:var(--f-paper);color:var(--f-ink);font-size:12px;text-decoration:none;}
 .founder .founder-opening__continue:focus-visible{outline:2px solid var(--f-gold-ink);outline-offset:4px;}
 @media(max-width:700px){.founder .founder-opening__continue{left:50%;transform:translateX(-50%);white-space:nowrap;}}
@@ -319,9 +323,18 @@ body.founder #progress{ display:none; }
    where the leading edge of the plate is, one glyph at a time, and a
    word can be caught half-turned.
 
-   The plate is --f-ink under --f-paper lettering: 14.6:1, against
-   14.6:1 and 5.2:1 for the two states the words have on paper. There
-   is no point in the sweep where anything drops below AA.
+   The plate is the page's gold under --f-ink lettering: 4.7:1, which
+   clears AA for body text and is well clear of the 3:1 the words
+   themselves need at this size. The word on paper is 14.6:1. There is
+   no point in the sweep where anything drops below AA.
+
+   The plate used to alternate between the site purple and a dark
+   green, neither of which this page uses anywhere else — the effect
+   was a pair of colours arriving from outside the palette on the one
+   element that is meant to be its loudest. Gold is the accent the
+   rest of the page spends, so the sweep spends it too, and spends
+   one colour rather than two: the alternation was reading as a
+   pattern in its own right and competing with the words.
 
    --lit is set by cirs.js. It stays at 0 without JavaScript, under
    prefers-reduced-motion, or if ScrollTrigger never arrives, and the
@@ -331,12 +344,11 @@ body.founder #progress{ display:none; }
 .fwords__base{ position:relative; z-index:1; }
 .fwords__lit{
   display:block; position:absolute; z-index:2; inset:-.02em -.06em; padding:.02em .06em;
-  background:#392A48; color:#FFFAF0;
+  background:var(--f-gold); color:var(--f-ink);
   /* Right inset walks from 100% to 0, so the plate opens rightwards. */
   clip-path:inset(0 calc(100% - var(--lit, 0) * 100%) 0 0);
   pointer-events:none;
 }
-.fwords li:nth-child(even) .fwords__lit{ background:#254C40; }
 .fbeyond__archive{
   display:grid; grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);
   grid-template-rows:repeat(2,minmax(0,1fr));
@@ -410,7 +422,61 @@ body.founder #progress{ display:none; }
 
 /* ============================================================
    7. The Chinmaya Vision Programme
+   ============================================================
+   This section had no ground of its own. It sat on the bare page
+   between .fcampus, which is paper-2, and .fmotto, which is nearly
+   white — so the one section that states what the school is for
+   was the one place on the page with nothing behind it, and the
+   half of it the four aspects do not reach read as a gap in the
+   document rather than as space around it.
+
+   What it has now is depth, not decoration, and all of it is drawn
+   from what this page already owns:
+
+     * the ground deepens downwards, paper to paper-2 to ghost, so
+       the four aspects stand on firmer stock than the heading;
+     * one soft gold light sits high and right, where the emptiness
+       was, at sixteen per cent of the page's own gold;
+     * the rings are the same technique as .fmotto's line-work —
+       one inline SVG, no asset, no request — and the same gold ink.
+       Their centre is off the right edge, so what is on the page is
+       an arc of a much larger figure rather than a target.
+
+   Nothing here paints over lettering: the light and the rings are
+   both under the content and both stop well before the column the
+   copy occupies. The text colours are untouched, and the aspects
+   measure what they measured before.
    ============================================================ */
+.fcvp{
+  position:relative; isolation:isolate;
+  overflow:hidden;
+  border-top:1px solid var(--f-rule);
+  background:
+    radial-gradient(58% 52% at 84% 14%,
+      rgba(168,130,58,.16) 0%, rgba(168,130,58,.055) 46%, rgba(168,130,58,0) 74%),
+    linear-gradient(180deg,
+      var(--f-paper) 0%, var(--f-paper-2) 62%, var(--f-ghost) 100%);
+}
+.fcvp::before{
+  content:""; position:absolute; z-index:-1; inset:0;
+  pointer-events:none;
+  opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900'%3E%3Cg fill='none' stroke='%23A8823A' stroke-width='1.1'%3E%3Ccircle cx='450' cy='450' r='138'/%3E%3Ccircle cx='450' cy='450' r='232'/%3E%3Ccircle cx='450' cy='450' r='326'/%3E%3Ccircle cx='450' cy='450' r='420'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  /* High and right: the figure occupies the quadrant beside the heading,
+     which is the part of the section that was empty, and stops above the
+     four columns rather than drawing lines through their copy. Most of it
+     is off the right edge, so what shows is an arc of something larger. */
+  background-position:right -26% top -9%;
+  background-size:clamp(480px,46vw,760px) auto;
+}
+/* The rings are an ornament and the phone has no room to spare for one:
+   at this width the copy runs the full measure and would sit on top of
+   them. The ground keeps its depth; the figure goes. */
+@media (max-width:760px){
+  .fcvp::before{ display:none; }
+}
+
 .fcvp__grid{
   display:grid; grid-template-columns:1fr;
   gap:clamp(var(--space-6),4vw,var(--space-7));

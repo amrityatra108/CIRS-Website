@@ -1789,6 +1789,29 @@ body.has-lightbox{ overflow:hidden; }
   letter-spacing:.06em; font-size:.95rem; color:var(--gold);
 }
 
+/* Notable alumni biographies need more room than the short facts elsewhere. */
+#notable .factrail > div{
+  display:grid;
+  grid-template-columns:minmax(160px, 25%) minmax(0, 1fr);
+  align-items:start;
+  gap:clamp(16px, 3vw, 48px);
+  padding:clamp(22px, 2.5vw, 36px) 0;
+}
+#notable .factrail dd{
+  max-width:75ch;
+  text-align:left;
+  line-height:1.6;
+  font-weight:400;
+}
+#notable .factrail dd a{
+  color:inherit;
+  text-decoration:underline;
+  text-underline-offset:.2em;
+}
+@media (max-width:700px){
+  #notable .factrail > div{ grid-template-columns:1fr; gap:10px; }
+}
+
 /* ============================================================
    About CIRS — the editorial scroll
    ------------------------------------------------------------
