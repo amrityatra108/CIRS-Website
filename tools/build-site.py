@@ -37,6 +37,7 @@ import blogposts
 import crossroads
 import mathchallenge
 import creativewriting
+import captures
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=97"
@@ -411,8 +412,11 @@ PAGES = {
         "barehead": True,
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
-        "description": "Photography from the CIRS community \u2014 the campus and the school year "
-                       "as its students see it.",
+        # Not "as its students see it", which this page said while it was a
+        # placeholder: none of these files records who took it, so the page
+        # makes no claim about who did.
+        "description": "Photographs of the campus and the school year at Chinmaya International "
+                       "Residential School, from the school\u2019s own collection.",
         # No banner from the shared builder. This page opens on six seconds of
         # a camera coming out of the dark, which the reader scrubs with the
         # scroll, and the h1 is the one line that arrives once the film has
@@ -445,13 +449,16 @@ PAGES = {
                 "narrow": "captures-shot-portrait.jpg", "narrow_size": (1620, 2160),
                 "alt": "A CIRS student dancing on stage in red, one arm raised",
             },
+            # The featured photographs (tools/pages/captures.html) take over
+            # from the opening's last frame, and the ramp to paper follows
+            # them rather than the film, so the page writes its own seam.
+            "seam": False,
         },
-        "soon": ([("Student photography", "Work by the photography hobby group and anyone else"),
-                  ("The year, in frames", "The campus through its seasons"),
-                  ("How to submit", "What to send, and to whom")],
-                 "the first set of photographs and their photographers, to be supplied by the "
-                 "CIRS Social Media Team",
-                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
+        # The gallery has replaced the placeholder it was waiting behind, and
+        # with it the under-construction note: what it listed as coming is
+        # here. The page body is tools/pages/captures.html; the photographs,
+        # their captions and their layout are tools/captures.py.
+        "uc": False,
     },
     "art-attack": {
         "barehead": True,
@@ -747,6 +754,9 @@ def film_html(slug, page):
         attrs += f' data-film-fps="{film["fps"]:g}"'
     if film.get("lens"):
         attrs += f' data-film-lens="{film["lens"]}"'
+    # The ramp to paper, unless the page puts it further down itself.
+    seam = ("" if film.get("seam") is False else
+            '\n<div class="film__seam" aria-hidden="true"></div>')
     shot = film.get("shot")
     # After the line in the document, so it is read after it, and over it on
     # screen by z-index. See assets/js/filmintro.js for how it opens.
@@ -793,8 +803,7 @@ def film_html(slug, page):
     </video>
 {cue}    <h1 class="film__title" data-film-title>{title}</h1>
 {shot}  </div>
-</section>
-<div class="film__seam" aria-hidden="true"></div>'''
+</section>{seam}'''
 
 
 def esc(text, attr=False):
@@ -1353,6 +1362,10 @@ def build(slug, page):
             f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
             f'<noscript><style>.film{{height:100svh}}{nudge}{pending}{still}'
             '</style></noscript>\n</head>')
+    if slug == "captures":
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/captures-featured.css?{CACHE_BUST}">\n'
+            f'<link rel="stylesheet" href="assets/css/captures-gallery.css?{CACHE_BUST}">\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
@@ -1409,6 +1422,8 @@ def build(slug, page):
     else:
         content = read(f"tools/pages/{slug}.html").rstrip("\n")
     content = expand_figs(content)
+    if slug == "captures":
+        content = captures.expand_featured(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
                        .replace("{{DOCLIST}}", doclist_html())
@@ -1423,6 +1438,10 @@ def build(slug, page):
                        .replace("{{MATH_ZONES}}", mathchallenge.zones_html())
                        .replace("{{MATH_FILTERS}}", mathchallenge.filters_html())
                        .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html())
+                       .replace("{{CAPTURES_GALLERY}}", captures.gallery_html() if slug == "captures" else "")
+                       .replace("{{CAPTURES_END}}", captures.end_html() if slug == "captures" else "")
+                       .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
+                       .replace("{{CAPTURES_COUNT_CAP}}", captures.count_word().capitalize())
                        .replace("{{CW_ROWS}}", creativewriting.rows_html())
                        .replace("{{CW_JOURNEY}}", creativewriting.journey_html())
                        .replace("{{CW_COUNT}}", str(creativewriting.count()))
@@ -1473,6 +1492,9 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
         parts.append(f'<script src="assets/js/sports-journey.js?{CACHE_BUST}" defer></script>')
+    if slug == "captures":
+        parts.append(f'<script src="assets/js/captures-featured.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]

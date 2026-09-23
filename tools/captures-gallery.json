@@ -1,0 +1,307 @@
+{
+  "images": {
+    "dancers-pink-light": {
+      "tile": [
+        1371,
+        914
+      ],
+      "tile_path": "assets/img/captures/dancers-pink-light.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/dancers-pink-light.jpg"
+    },
+    "hands-folded-him": {
+      "tile": [
+        900,
+        1349
+      ],
+      "tile_path": "assets/img/captures/hands-folded-him.jpg",
+      "full": [
+        1601,
+        2400
+      ],
+      "full_path": "assets/img/captures/full/hands-folded-him.jpg"
+    },
+    "microscope": {
+      "tile": [
+        900,
+        1350
+      ],
+      "tile_path": "assets/img/captures/microscope.jpg",
+      "full": [
+        1600,
+        2400
+      ],
+      "full_path": "assets/img/captures/full/microscope.jpg"
+    },
+    "amphitheatre-night": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/amphitheatre-night.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/amphitheatre-night.jpg"
+    },
+    "three-dancers": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/three-dancers.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/three-dancers.jpg"
+    },
+    "after-rain": {
+      "tile": [
+        1800,
+        810
+      ],
+      "tile_path": "assets/img/captures/after-rain.jpg",
+      "full": [
+        2400,
+        1080
+      ],
+      "full_path": "assets/img/captures/full/after-rain.jpg"
+    },
+    "swimmer": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/swimmer.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/swimmer.jpg"
+    },
+    "guitars": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/guitars.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/guitars.jpg"
+    },
+    "meditation": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/meditation.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/meditation.jpg"
+    },
+    "rappelling": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/rappelling.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/rappelling.jpg"
+    },
+    "seated-together": {
+      "tile": [
+        900,
+        1349
+      ],
+      "tile_path": "assets/img/captures/seated-together.jpg",
+      "full": [
+        1601,
+        2400
+      ],
+      "full_path": "assets/img/captures/full/seated-together.jpg"
+    },
+    "stage-production": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/stage-production.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/stage-production.jpg"
+    },
+    "football": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/football.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/football.jpg"
+    },
+    "robot": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/robot.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/robot.jpg"
+    },
+    "tabla": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/tabla.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/tabla.jpg"
+    },
+    "lectern": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/lectern.jpg",
+      "full": [
+        2400,
+        1601
+      ],
+      "full_path": "assets/img/captures/full/lectern.jpg"
+    },
+    "human-pyramid": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/human-pyramid.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/human-pyramid.jpg"
+    },
+    "runners": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/runners.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/runners.jpg"
+    },
+    "yoga": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/yoga.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/yoga.jpg"
+    },
+    "ncc-march": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/ncc-march.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/ncc-march.jpg"
+    },
+    "dancing-lawn": {
+      "tile": [
+        1800,
+        1013
+      ],
+      "tile_path": "assets/img/captures/dancing-lawn.jpg",
+      "full": [
+        2400,
+        1350
+      ],
+      "full_path": "assets/img/captures/full/dancing-lawn.jpg"
+    },
+    "featured/overhead-kick": {
+      "tile": [
+        1800,
+        1200
+      ],
+      "tile_path": "assets/img/captures/featured/overhead-kick.jpg",
+      "full": [
+        1800,
+        1200
+      ],
+      "full_path": "assets/img/captures/featured/overhead-kick.jpg",
+      "lqip": "assets/img/captures/featured/overhead-kick-lqip.jpg"
+    },
+    "featured/greeting": {
+      "tile": [
+        1200,
+        1799
+      ],
+      "tile_path": "assets/img/captures/featured/greeting.jpg",
+      "full": [
+        1200,
+        1799
+      ],
+      "full_path": "assets/img/captures/featured/greeting.jpg",
+      "lqip": "assets/img/captures/featured/greeting-lqip.jpg"
+    },
+    "featured/campus-air": {
+      "tile": [
+        2400,
+        1350
+      ],
+      "tile_path": "assets/img/captures/featured/campus-air.jpg",
+      "full": [
+        2400,
+        1350
+      ],
+      "full_path": "assets/img/captures/featured/campus-air.jpg",
+      "lqip": "assets/img/captures/featured/campus-air-lqip.jpg"
+    },
+    "end": {
+      "tile": [
+        1200,
+        800
+      ],
+      "tile_path": "assets/img/captures/end-1200.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/end.jpg"
+    }
+  }
+}
