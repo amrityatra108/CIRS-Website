@@ -1,4 +1,5 @@
-/* The cinematic opening two pages share — CIRS Captures and Our Sports.
+/* The cinematic opening the scrubbed-film pages share — CIRS Captures, Our
+   Sports and CIRS Art Attack.
 
    Both open the same way, because they are the same page furniture with a
    different film in it: the reader scrubs a short piece of footage with the
@@ -79,7 +80,10 @@
   }
 
   function setReveal(value) {
-    if (Math.abs(value - reveal) < 0.001) return;
+    // The ends are always written exactly: a line left at 0.0005 is not
+    // quite nothing over a film that is meant to have nothing over it.
+    var end = value === 0 || value === 1;
+    if (value === reveal || (!end && Math.abs(value - reveal) < 0.001)) return;
     reveal = value;
     title.style.setProperty("--film-reveal", value.toFixed(4));
   }
@@ -111,13 +115,23 @@
     document.body.classList.remove("film-on");
   }
 
+  /* Where the section starts and ends, as absolute scroll positions read
+     from the live layout. Handing ScrollTrigger "top top" and "bottom
+     bottom" instead left it to measure the section itself, and with Lenis
+     running it did so on a resize as if the page were at the top: a window
+     resized halfway down the opening came back with the whole sequence
+     shifted by however far the reader had scrolled, the line fully up over
+     a film that should still have been running. */
+  function top() { return section.getBoundingClientRect().top + window.pageYOffset; }
+  function bottom() { return top() + section.offsetHeight; }
+
   function scrub() {
     if (trigger || !hasST || reduced.matches) return;
     section.removeAttribute("data-film-still");
     trigger = ScrollTrigger.create({
       trigger: section,
-      start: "top top",
-      end: "bottom bottom",
+      start: top,
+      end: function () { return bottom() - window.innerHeight; },
       onUpdate: function (self) { paint(self.progress); },
       onRefresh: function (self) { paint(self.progress); },
     });
@@ -128,8 +142,8 @@
        finished composition. */
     furniture = ScrollTrigger.create({
       trigger: section,
-      start: "top top",
-      end: "bottom top",
+      start: top,
+      end: bottom,
       onToggle: function (self) {
         document.body.classList.toggle("film-on", self.isActive);
       },

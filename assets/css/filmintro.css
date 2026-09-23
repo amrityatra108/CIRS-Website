@@ -92,7 +92,7 @@ body.film main{ background:var(--paper); }
   padding:0 16px;
   text-align:center;
   font-family:"Jost", var(--font-primary), sans-serif;
-  font-weight:100;
+  font-weight:var(--film-weight, 100);
   font-size:var(--film-size, clamp(26px, 3.8vw, 62px));
   line-height:1;
   text-transform:uppercase;
@@ -243,6 +243,59 @@ body.sports{
 body.sports .film__title{
   --film-title-top:44%;
   --film-title-lift:-50%;
+}
+
+/* ---- CIRS Art Attack -----------------------------------------------------
+   Colour thrown up from both wings of a dark stage: warm on the left, cool
+   on the right, a spotlight between them and a wet floor catching all of it.
+   Almost none of this frame is empty. The band across the top is dark, but
+   the header lives there. The gap between the two clouds is dark too, but it
+   is a third of the width and the line is two thirds of it.
+
+   What is left is the floor, below the bright line where the powder meets
+   it: 6:1 or better for white in the band at 90-97% of the frame, against
+   under 3:1 anywhere in the powder. So the line stands on the stage, and it
+   is anchored to the foot of the window rather than the middle.
+
+   The crop is taken entirely off the top on a wide window, so the floor is
+   never what goes: the top is the spotlight, and the header covers it. A
+   narrow window keeps the centred slice, which is the dark gap between the
+   two clouds, with the edge of each at either side.
+
+   The one decision here that is not the footage's own: the line is a step
+   heavier than on the other openings — Jost 200, not 100 — and tracked a
+   little closer to match, so it holds its own against a frame this loud
+   without becoming a heading. The seam starts at #44251C, which is what the
+   foot of the frame measures: the floor's own warm brown, lit by the powder. */
+body.art-attack{
+  --film-ground:#07050A;
+  --film-crop:50% 100%;
+  --film-crop-narrow:50% 100%;
+  --film-seam-top:#44251C;
+  --film-seam-fold:#351D17;
+  --film-seam-rise:#8E7F78;
+  --film-size:clamp(27px, 3.8vw, 62px);
+  --film-size-narrow:clamp(15px, 5vw, 26px);
+  --film-size-tiny:clamp(14px, 4.8vw, 20px);
+}
+body.art-attack .film__title{
+  --film-weight:200;
+  --film-track-from:.25;
+  --film-track-to:.42;
+  --film-title-bottom:clamp(28px, 5.5vh, 76px);
+}
+@media (min-width:1600px){
+  body.art-attack .film__title{ --film-track-to:.46; }
+}
+@media (max-width:720px){
+  body.art-attack .film__title{
+    --film-track-from:.16;
+    --film-track-to:.30;
+    --film-title-bottom:clamp(30px, 6vh, 64px);
+  }
+}
+@media (max-width:360px){
+  body.art-attack .film__title{ --film-track-to:.24; }
 }
 
 @media (prefers-reduced-motion:reduce){

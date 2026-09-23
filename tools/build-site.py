@@ -422,12 +422,23 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "art-attack": {
+        "barehead": True,
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Studio work and visual art from across Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Art Attack", "Made <em>by Hand.</em>",
-                   "Studio work and visual art from across the school."),
+        # No banner from the shared builder. The third page to open on a film
+        # the reader scrubs — six seconds of colour thrown up across a dark
+        # stage — and the h1 is the one line that arrives once it has ended.
+        # The body.art-attack block in assets/css/filmintro.css is where this
+        # frame's own decisions live, including the one this page is allowed
+        # that the others are not: a slightly heavier line.
+        "banner": None,
+        "opening": {
+            "video": "art-attack-colour",
+            "poster": "art-attack-colour-poster.jpg",
+            "title": "CIRS Art Attack",
+        },
         "soon": ([("Painting and drawing", "Work from the studio and the classroom"),
                   ("Print and craft", "The processes, and what comes out of them"),
                   ("Exhibitions", "What was shown, and when")],

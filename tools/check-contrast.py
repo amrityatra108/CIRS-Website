@@ -20,6 +20,7 @@ against the WCAG AA floors (4.5:1 for body text, 3:1 for large text).
     python3 tools/check-contrast.py why-cirs.html     # the lines over the About photographs
     python3 tools/check-contrast.py captures.html    # the line over the last frame of the camera
     python3 tools/check-contrast.py sports.html      # the line over the last frame of the field
+    python3 tools/check-contrast.py art-attack.html  # the line on the floor under the colour
     python3 tools/check-contrast.py student-life.html # the headline in the campus band's gradient
 
 Admissions and News are a .pagehero over a looping video and are seeked
@@ -58,11 +59,20 @@ const { chromium } = require('playwright-core');
   // finished. At the top of the page there is nothing to measure; the
   // composition worth measuring is the one the opening ends on, so scroll
   // to it first.
+  // Lenis owns the scroll, so a bare window.scrollTo is animated away from
+  // before it lands; wheel down the way a reader would until the opening's
+  // last screen is reached.
   if (await p.$('[data-film]')) {
-    await p.evaluate(() => {
-      const opening = document.querySelector('[data-film]');
-      window.scrollTo(0, opening.offsetHeight - window.innerHeight);
-    });
+    await p.mouse.move(700, 450);
+    for (let i = 0; i < 60; i++) {
+      const left = await p.evaluate(() => {
+        const opening = document.querySelector('[data-film]');
+        return opening.offsetHeight - window.innerHeight - window.scrollY;
+      });
+      if (left <= 0) break;
+      await p.mouse.wheel(0, Math.min(left, 300));
+      await p.waitForTimeout(120);
+    }
     await p.waitForTimeout(1500);
   }
 
