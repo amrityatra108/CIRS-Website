@@ -4,35 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sports</title>
-<meta name="description" content="Athletics, the playing fields and the sporting record at CIRS.">
+<meta name="description" content="Athletics, basketball, swimming and the playing fields at CIRS.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/sports.html">
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Sports">
-<meta property="og:description" content="Athletics, the playing fields and the sporting record at CIRS.">
+<meta property="og:description" content="Athletics, basketball, swimming and the playing fields at CIRS.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Sports">
-<meta name="twitter:description" content="Athletics, the playing fields and the sporting record at CIRS.">
+<meta name="twitter:description" content="Athletics, basketball, swimming and the playing fields at CIRS.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=96">
-<link rel="stylesheet" href="assets/css/cirs.css?b=96">
-<link rel="stylesheet" href="assets/css/pages.css?b=96">
+<link rel="stylesheet" href="assets/css/fonts.css?b=96-sports-journey-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=96-sports-journey-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=96-sports-journey-1">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=96">
+<link rel="stylesheet" href="assets/css/sports-journey.css?b=96-sports-journey-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=96-sports-journey-1">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=96-sports-journey-1">
+<noscript><style>.film{height:100svh}body.sports .film__title{--film-title-top:88%}</style></noscript>
 </head>
 
-<body>
+<body class="sports-journey film sports">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -64,7 +67,7 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header is-first-section" id="header">
+<header class="header is-first-section is-bare" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -258,120 +261,167 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">Sports</span></p>
-    <h1 class="serif" data-split>Sport, Every Day <em>at Four.</em></h1>
-    <p class="lead">The four o'clock hour, the fields it happens on, and what the teams have won.</p>
+<section class="film" id="sports-opening" data-film>
+  <div class="film__stage">
+    <video class="film__video" data-film-video
+           width="1280" height="720"
+           poster="assets/img/sports-field-poster.jpg"
+           preload="auto" muted playsinline disablepictureinpicture
+           aria-hidden="true" tabindex="-1">
+      <!-- H.264 first, which is the other way round from the rest of this
+           site. These files are not played but seeked, several times a
+           second, and H.264 is the one codec every browser that has it
+           decodes in hardware — so it is the path that scrubs without
+           stuttering wherever it exists. The VP9 is for the browsers built
+           without the proprietary decoder, which would otherwise have no
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
+      <source src="assets/video/sports-field.mp4" type="video/mp4">
+      <source src="assets/video/sports-field.webm" type="video/webm">
+    </video>
+    <h1 class="film__title" data-film-title><span class="film__line">CIRS Sports</span></h1>
   </div>
 </section>
-<section class="feature" id="athletics">
-  <div class="wrap feature__inner">
-    <figure class="feature__media img-reveal rv">
-      <img src="assets/img/sports.jpg" alt="Runners rounding the track during an athletics meet at CIRS"
-           width="1200" height="1500" loading="lazy">
+<div class="film__seam" aria-hidden="true"></div>
+<section class="sports-move" id="athletics" data-sports-move aria-labelledby="sports-move-title">
+  <div class="sports-move__stage">
+    <img class="sports-move__field" src="assets/img/sports-experience/field-final-frame.webp"
+         width="1280" height="720" alt="" aria-hidden="true" fetchpriority="high">
+    <picture class="sports-move__action" aria-hidden="true">
+      <source media="(max-width: 720px)" srcset="assets/img/sports-experience/track-runners-mobile.webp" type="image/webp">
+      <img src="assets/img/sports-experience/track-runners-wide.webp" width="1920" height="1200"
+           alt="" loading="eager" decoding="async" fetchpriority="high">
+    </picture>
+    <div class="sports-move__shade" aria-hidden="true"></div>
+    <p class="sports-move__carry" data-carry-title aria-hidden="true">CIRS Sports</p>
+    <h2 class="sr-only" id="sports-move-title">Move</h2>
+    <div class="sports-move__word" aria-hidden="true">
+      <span data-word-photo>MOVE</span>
+      <span data-word-solid>MOVE</span>
+    </div>
+    <svg class="sports-move__defs" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="sportsMoveWave" clipPathUnits="objectBoundingBox">
+          <path data-move-wave d="M 1 0 C 1 .26 1 .74 1 1 L 1 1 L 1 0 Z"></path>
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
+</section>
+
+<section class="sports-track" id="track-hold" aria-labelledby="sports-track-title">
+  <picture class="sports-track__image">
+  <source media="(max-width: 720px)" srcset="assets/img/sports-experience/track-runners-mobile.webp" type="image/webp">
+    <img src="assets/img/sports-experience/track-runners-wide.webp" width="1920" height="1200"
+         alt="CIRS students running together on the track below the Western Ghats" loading="eager" decoding="async">
+  </picture>
+  <div class="sports-track__shade" aria-hidden="true"></div>
+  <div class="sports-track__caption">
+    <p class="sports-eyebrow">Athletics</p>
+    <h2 id="sports-track-title">The four-o’clock hour moves.</h2>
+  </div>
+</section>
+
+<section class="sports-chapters" id="in-play" data-sports-chapters aria-label="CIRS sport in motion">
+  <div class="sports-chapters__stage">
+    <figure class="sports-chapter" data-chapter="track">
+      <picture class="sports-chapter__image">
+        <source media="(max-width: 720px)" srcset="assets/img/sports-experience/track-runners-mobile.webp" type="image/webp">
+        <img src="assets/img/sports-experience/track-runners-wide.webp" width="1920" height="1200"
+             alt="Students set out together on the CIRS athletics track" loading="eager" decoding="async">
+      </picture>
+      <figcaption class="sports-chapter__caption">
+        <span>01 / Athletics</span>
+        <h2>Every stride finds its own pace.</h2>
+      </figcaption>
     </figure>
-    <div class="feature__text rv">
-      <p class="marker"><span class="sc">Athletics</span></p>
-      <p class="feature__tag">Compete, play, grow</p>
-      <h2 class="serif h2" data-split>The Forest Is <em>the Touchline.</em></h2>
-      <p class="copy">Athletics, football, cricket, basketball, swimming and yoga fill the four
-        o&rsquo;clock hour every day. Eighty of the campus&rsquo;s hundred acres are left wild, so
-        the edge of play is the edge of the Western Ghats.</p>
-      <p class="copy" style="margin-top:10px"><em>[Placeholder &mdash; teams, fixtures and results
-        to be supplied by the sports office.]</em></p>
-    </div>
+    <figure class="sports-chapter" data-chapter="court">
+      <picture class="sports-chapter__image">
+        <source media="(max-width: 720px)" srcset="assets/img/sports-experience/basketball-mobile.webp" type="image/webp">
+        <img src="assets/img/sports-experience/basketball-wide.webp" width="1920" height="1200"
+             alt="Students turn toward the play on the CIRS outdoor court" loading="lazy" decoding="async">
+      </picture>
+      <figcaption class="sports-chapter__caption">
+        <span>02 / Basketball</span>
+        <h2>The whole court moves as one.</h2>
+      </figcaption>
+    </figure>
+    <figure class="sports-chapter" data-chapter="water">
+      <picture class="sports-chapter__image">
+        <source media="(max-width: 720px)" srcset="assets/img/sports-experience/swimming-mobile.webp" type="image/webp">
+        <img src="assets/img/sports-experience/swimming-wide.webp" width="1920" height="1200"
+             alt="Swimmers prepare at the edge of the CIRS pool beside the marked lanes" loading="lazy" decoding="async">
+      </picture>
+      <figcaption class="sports-chapter__caption">
+        <span>03 / Swimming</span>
+        <h2>Find your rhythm, lane by lane.</h2>
+      </figcaption>
+    </figure>
+    <nav class="sports-chapters__nav" aria-label="Jump to a sports scene">
+      <a href="#sports-track-point" data-chapter-link="track"><span>01</span> Track</a>
+      <a href="#sports-court-point" data-chapter-link="court"><span>02</span> Court</a>
+      <a href="#sports-water-point" data-chapter-link="water"><span>03</span> Water</a>
+    </nav>
+  </div>
+  <div class="sports-chapters__markers" aria-hidden="true">
+    <span id="sports-track-point"></span>
+    <span id="sports-court-point"></span>
+    <span id="sports-water-point"></span>
   </div>
 </section>
 
-<section class="band" id="fields" data-ground="#150818">
-  <div class="band__media">
-    <img src="assets/img/fields-air.jpg" alt="The CIRS grounds from the air, the pool and the playing fields inside the forest boundary" width="1400" height="640" loading="lazy">
+<section class="sports-ground" id="fields" aria-labelledby="sports-ground-title">
+  <div class="sports-ground__intro">
+    <p class="sports-eyebrow">Room to play</p>
+    <h2 class="serif h2" id="sports-ground-title">The grounds sit at the edge of the Ghats.</h2>
+    <p class="lead">Twenty of the campus’s hundred acres carry the courts, track and pool. The other eighty remain forest, so the edge of play is the edge of the Western Ghats.</p>
   </div>
-  <div class="wrap band__inner on-purple">
-    <div class="sec-head rv" style="margin-bottom:0">
-      <p class="marker"><span class="sc">The sports field</span></p>
-      <h2 class="serif h2" style="color:#fff" data-split>Room to run, <em>under the Ghats.</em></h2>
-      <p class="lead">Twenty of the hundred acres carry the courts, the track and the pool. The
-        other eighty are forest, which is what the boundary of play actually looks like here.</p>
-    </div>
-
-    <div class="facilities rv">
-      <div><h3>Athletics Track</h3><p>The four o&rsquo;clock hour belongs to the track and the field events.</p></div>
-      <div><h3>Swimming Pool</h3><p>Coached sessions and free swim through the warmer months.</p></div>
-      <div><h3>Courts</h3><p>Basketball, volleyball, tennis and badminton, floodlit for evening play.</p></div>
-      <div><h3>Cricket &amp; Football</h3><p>A shared ground for match play and inter-house fixtures.</p></div>
-      <div><h3>Yoga Shala</h3><p>Daily practice, and the quieter half of the school&rsquo;s physical education.</p></div>
-      <div><h3>Indoor Hall</h3><p>Table tennis, chess and carrom when the monsoon closes the ground.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="in-play">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">In pictures</span></p>
-      <h2 class="serif h2" data-split>The inter-house <em>fixture.</em></h2>
-      <p class="lead">Basketball, house against house, on the outdoor court. The four
-        o&rsquo;clock hour is when most of the school&rsquo;s sport actually happens, and this is
-        what it looks like.</p>
-    </div>
-
-    <div class="strip rv">
-      <figure><img src="assets/img/sports/basketball-contest.jpg"
-                   alt="A player driving with the ball past two defenders on the CIRS basketball court"
-                   width="1000" height="750" loading="lazy"></figure>
-      <figure><img src="assets/img/sports/basketball-shot.jpg"
-                   alt="A shot going up towards the hoop, three players with their hands raised beneath it"
-                   width="1000" height="750" loading="lazy"></figure>
-      <figure><img src="assets/img/sports/basketball-floodlit.jpg"
-                   alt="A player holding the ball at the top of the key as the court lights come on"
-                   width="1000" height="750" loading="lazy"></figure>
-    </div>
-
-    <p class="note rv" style="margin-top:20px"><em>[Photographs of the cricket facility, the tennis
-      and badminton courts, the table tennis hall, the football ground and the athletics track to be
-      supplied by the school.]</em></p>
+  <div class="sports-facilities">
+    <article>
+      <p class="sports-facilities__n">01</p>
+      <h3>Track &amp; field</h3>
+      <p>The four-o’clock hour belongs to the track and field events.</p>
+    </article>
+    <article>
+      <p class="sports-facilities__n">02</p>
+      <h3>Swimming pool</h3>
+      <p>Coached sessions and free swim through the warmer months.</p>
+    </article>
+    <article>
+      <p class="sports-facilities__n">03</p>
+      <h3>Courts</h3>
+      <p>Basketball, volleyball, tennis and badminton, floodlit for evening play.</p>
+    </article>
+    <article>
+      <p class="sports-facilities__n">04</p>
+      <h3>Cricket &amp; football</h3>
+      <p>A shared ground for match play and inter-house fixtures.</p>
+    </article>
+    <article>
+      <p class="sports-facilities__n">05</p>
+      <h3>Yoga shala</h3>
+      <p>Daily practice, the quieter half of physical education.</p>
+    </article>
+    <article>
+      <p class="sports-facilities__n">06</p>
+      <h3>Indoor hall</h3>
+      <p>Table tennis, chess and carrom when the monsoon closes the ground.</p>
+    </article>
   </div>
 </section>
 
-<section class="section on-paper-2" id="achievements">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Achievements</span></p>
-      <h2 class="serif h2" data-split>What the teams <em>have won.</em></h2>
-      <p class="lead">Inter-school, district and state results, and the students who carried them.</p>
-    </div>
-
-    <div class="steps">
-      <div class="step rv">
-        <p class="step__n"></p>
-        <div>
-          <h3 class="serif h3">Inter-school and district</h3>
-          <p><em>[Placeholder &mdash; competition names, years, placings and the students involved,
-            to be supplied by the sports office.]</em></p>
-        </div>
-        <p class="step__aside"><b>To be supplied</b><br>Results and photographs</p>
-      </div>
-      <div class="step rv">
-        <p class="step__n"></p>
-        <div>
-          <h3 class="serif h3">State and national</h3>
-          <p><em>[Placeholder &mdash; representative honours and any national-level participation,
-            to be supplied by the sports office.]</em></p>
-        </div>
-        <p class="step__aside"><b>To be supplied</b><br>Results and photographs</p>
-      </div>
-      <div class="step rv">
-        <p class="step__n"></p>
-        <div>
-          <h3 class="serif h3">Inter-house</h3>
-          <p><em>[Placeholder &mdash; the house championship, its history and current holders, to be
-            supplied by the sports office.]</em></p>
-        </div>
-        <p class="step__aside"><b>To be supplied</b><br>Standings by year</p>
-      </div>
-    </div>
+<section class="sports-close" id="achievements" aria-labelledby="sports-close-title">
+  <picture class="sports-close__image">
+    <source media="(max-width: 720px)" srcset="assets/img/sports-experience/high-jump-mobile.webp" type="image/webp">
+    <img src="assets/img/sports-experience/high-jump-wide.webp" width="1920" height="1200"
+         alt="A CIRS student clears a hurdle while a teacher watches from the field" loading="lazy" decoding="async">
+  </picture>
+  <div class="sports-close__shade" aria-hidden="true"></div>
+  <div class="sports-close__caption">
+    <p class="sports-eyebrow">CIRS / Our Sports</p>
+    <h2 id="sports-close-title">A place to find your sport.</h2>
+    <p>Inter-school fixtures and results will be added here when confirmed by the CIRS Sports Office.</p>
+    <a class="sports-close__link" href="student-life.html">Explore student life <span aria-hidden="true">→</span></a>
   </div>
 </section>
 <section class="uc">
@@ -465,10 +515,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=96" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=96" defer></script>
-<script src="assets/vendor/lenis.min.js?b=96" defer></script>
-<script src="assets/js/cirs.js?b=96" defer></script>
-<script src="assets/js/pages.js?b=96" defer></script>
+<script src="assets/vendor/gsap.min.js?b=96-sports-journey-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=96-sports-journey-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=96-sports-journey-1" defer></script>
+<script src="assets/js/cirs.js?b=96-sports-journey-1" defer></script>
+<script src="assets/js/pages.js?b=96-sports-journey-1" defer></script>
+<script src="assets/js/filmintro.js?b=96-sports-journey-1" defer></script>
+<script src="assets/js/sports-journey.js?b=96-sports-journey-1" defer></script>
 </body>
 </html>
