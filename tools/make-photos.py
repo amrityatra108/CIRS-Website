@@ -51,6 +51,10 @@ PHOTOS = [
     ("life-split-beyond.jpg",    "drive-student-life-beyond.JPG",   (1800, 1200), (0.50, 0.50)),
     ("junior-school.jpg",       "IMG_1898.JPG", (1200, 1500), (0.50, 0.45)),
     ("senior-school.jpg",       "IMG_1894.JPG", (1200, 1500), (0.50, 0.45)),
+    # Why CIRS, "Two boards. One ambition.": senior students cutting a cake
+    # together. Landscape like the other chapters; framed high so the faces
+    # and the joined hands keep the frame and the table skirt gives way.
+    ("why-senior.jpg",          "senior-celebration.jpg", (1600, 900), (0.50, 0.40)),
 
     # The School History film window, matching the home page's 16:9 still.
     ("history-still.jpg",       "IMG_20210514_182259.jpg", (1600, 900), (0.50, 0.52)),
@@ -138,6 +142,23 @@ PHOTOS = [
     ("sports/basketball-contest.jpg",  "sports/basketball-contest.jpg",  (1000, 750), (0.50, 0.42)),
     ("sports/basketball-shot.jpg",     "sports/basketball-shot.jpg",     (1000, 750), (0.50, 0.33)),
     ("sports/basketball-floodlit.jpg", "sports/basketball-floodlit.jpg", (1000, 750), (0.50, 0.46)),
+
+    # Sports and Laurels editorial page ("Built in the Arena").
+    # High-resolution cuts from verified CIRS original photography.
+    ("sports/hero-track.jpg",          "HARI5692.JPG",                   (2400, 1500), (0.45, 0.55)),
+    ("sports/hero-reveal.jpg",         "IMG_9314.JPG",                   (2400, 1500), (0.55, 0.50)),
+    ("sports/shift-academic.jpg",      "IMG_1806.JPG",                   (1800, 1200), (0.34, 0.52)),
+    ("sports/shift-sports.jpg",        "DJI_0856.JPG",                   (1800, 1200), (0.50, 0.50)),
+    ("sports/sport-athletics.jpg",     "HARI5531.JPG",                   (1600, 1200), (0.50, 0.50)),
+    ("sports/sport-swimming.jpg",      "IMG_9314.JPG",                   (1600, 1200), (0.55, 0.50)),
+    ("sports/sport-football.jpg",      "IMG_3051.JPG",                   (1600, 1200), (0.50, 0.50)),
+    ("sports/sport-tennis.jpg",        "IMG_0612.JPG",                   (1600, 1200), (0.50, 0.50)),
+    ("sports/sport-archery.jpg",       "IMG_9879.JPG",                   (1600, 1200), (0.50, 0.50)),
+    ("sports/sport-climbing.jpg",      "IMG_6061.JPG",                   (1600, 1200), (0.50, 0.50)),
+    ("sports/house-parade.jpg",        "DSC_0059.JPG",                   (1600, 1000), (0.50, 0.50)),
+    ("sports/house-flag.jpg",          "2.JPG",                          (1600, 1000), (0.50, 0.50)),
+    ("sports/house-cheer.jpg",         "1.JPG",                          (1600, 1000), (0.50, 0.55)),
+    ("sports/laurels-team.jpg",        "8A5A3313.JPG",                   (1600, 1100), (0.50, 0.46)),
 
     # The home page's horizontal run — ten photographs scrubbed sideways
     # between the hero and the film.

@@ -29,21 +29,50 @@ body.why-cirs .saga__eyebrow{
   border-bottom:1px solid rgba(255,255,255,.28);
 }
 
-body.why-cirs .saga__count{
-  flex:none;
-  color:rgba(255,255,255,.76);
-  font-variant-numeric:tabular-nums lining-nums;
-  letter-spacing:.08em;
+/* The eyebrows above each heading are set larger here than the
+   site default (1rem–1.02rem), still well below the headline. */
+body.why-cirs :is(.saga__eyebrow, #facts .marker .sc){
+  font-size:clamp(1.3rem,1.05rem + .9vw,1.8rem);
 }
 
-body.why-cirs .saga__summary{
-  max-width:52ch;
-  margin-top:clamp(16px,2vw,24px);
-  color:rgba(255,255,255,.88);
+/* The opening chapter takes the same sizes as the chapters after it: its
+   quote matches their headlines, and the attribution under it matches their
+   summary line. */
+body.why-cirs .saga--open .saga__line{
+  font-size:clamp(2rem,5.2vw,4.1rem);
+}
+body.why-cirs .saga__by{
   font-size:clamp(1rem,1.4vw,1.16rem);
-  line-height:1.55;
+}
+
+/* Each chapter's opening sentence. It carried the same size as body copy
+   under a headline of seventy-eight pixels — a jump of four to one, with
+   nothing in between — so the one line that says what the chapter is about
+   read as a caption to the photograph rather than as the chapter's lead.
+
+   It is a lead now: a quarter again the size, on a shorter measure, at
+   close to full strength against the picture. The family, the clamp and
+   the shadow are the ones it already had, so the phone gains the same
+   proportion the desktop does and nothing new is loaded to do it. */
+body.why-cirs .saga__summary{
+  max-width:42ch;
+  margin-top:clamp(18px,2.2vw,28px);
+  color:rgba(255,255,255,.95);
+  font-size:clamp(1.2rem,1.85vw,1.62rem);
+  line-height:1.44;
+  letter-spacing:-.005em;
   text-wrap:pretty;
-  text-shadow:0 1px 14px rgba(14,11,18,.35);
+  text-shadow:0 1px 16px rgba(14,11,18,.42);
+}
+
+/* The same rank inside the panels: the paragraph that opens one is the
+   chapter's lead there too, and was set identically to the two or three
+   that follow it. */
+body.why-cirs .panel__card .copy:first-of-type{
+  color:var(--ink);
+  font-size:clamp(1.08rem,1.45vw,1.22rem);
+  line-height:1.5;
+  letter-spacing:-.004em;
 }
 
 body.why-cirs .saga__summary + .saga__more{margin-top:clamp(20px,2.4vw,30px)}

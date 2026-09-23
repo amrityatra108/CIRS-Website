@@ -39,7 +39,7 @@ import mathchallenge
 import creativewriting
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=96"
+CACHE_BUST = "b=97"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -152,6 +152,11 @@ PAGES = {
         "hero_cta": [("Read the latest", "#latest", "primary"),
                      ("What is coming up", "#diary", "ghost")],
         "hero_extra": newsflash_html(),
+        # The hero was already the page's own. Below it the results table and
+        # the section heads were the shared components, unstyled, exactly as
+        # School Information had them — so it takes the same group sheet. See
+        # assets/css/connect.css.
+        "sheet": "connect",
     },
     "founder": {
         "litehead": True,
@@ -175,7 +180,7 @@ PAGES = {
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
                        "Schools that carry it.",
         "sheet": "why-cirs",
-        "cache_suffix": "-why-cirs-9",
+        "cache_suffix": "-why-cirs-10",
         # No banner. The page used to open on a purple plate carrying "Why
         # CIRS." and a line about a community of knowledge, with the first
         # photograph below it. The photograph is the better opening, so it
@@ -212,6 +217,9 @@ PAGES = {
                    "The affiliation, governance, infrastructure and grievance-redressal details CBSE and "
                    "the affiliating authorities require every school to publish &mdash; and the Important "
                    "Documents portal that carries the certificates behind them."),
+        # The two pages in the Connect column that had no sheet of their own
+        # share one, so the group reads as a group. See assets/css/connect.css.
+        "sheet": "connect",
         "jump": True,
     },
     "important-documents": {
@@ -277,10 +285,10 @@ PAGES = {
     "sports": {
         "barehead": True,
         "nav": "Our Sports",
-        "title": "Sports",
-        "description": "Athletics, basketball, swimming and the playing fields at CIRS.",
-        "sheet": "sports-journey",
-        "cache_suffix": "-sports-journey-5",
+        "title": "Sports & Laurels — Built in the Arena | CIRS",
+        "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
+        "sheet": "sports",
+        "cache_suffix": "-sports-1",
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
@@ -446,12 +454,22 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "art-attack": {
+        "barehead": True,
+        "cache_suffix": "-art-attack-film-1",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Studio work and visual art from across Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Art Attack", "Made <em>by Hand.</em>",
-                   "Studio work and visual art from across the school."),
+        "banner": None,
+        "opening": {
+            "video": "art-attack-opening",
+            "poster": "art-attack-opening-poster.jpg",
+            "still": "art-attack-opening-final.jpg",
+            "still_element": True,
+            "title": "CIRS Art Attack",
+            "title_markup": '<span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span>',
+            "pending": True,
+        },
         "soon": ([("Painting and drawing", "Work from the studio and the classroom"),
                   ("Print and craft", "The processes, and what comes out of them"),
                   ("Exhibitions", "What was shown, and when")],
@@ -460,12 +478,22 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "festivals": {
+        "barehead": True,
+        "cache_suffix": "-festivals-film-1",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
         "description": "The festivals kept through the year at Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Festivals", "The Year, <em>Kept Together.</em>",
-                   "The festivals the school keeps, and what they look like on this campus."),
+        "banner": None,
+        "opening": {
+            "video": "festivals-opening",
+            "poster": "festivals-opening-poster.jpg",
+            "still": "festivals-opening-final.jpg",
+            "still_element": True,
+            "title": "CIRS Festivals",
+            "title_markup": '<span class="film__festival-prefix">CIRS </span><span class="film__festival-name">Festivals</span>',
+            "pending": True,
+        },
         "soon": ([("Through the year", "Each festival as the school keeps it"),
                   ("Photographs", "From the mornings and the evenings of each one"),
                   ("Accounts", "Written by the students who took part")],
@@ -474,12 +502,21 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "theatre": {
+        "barehead": True,
+        "cache_suffix": "-theatre-film-1",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Theatre", "Rehearsal, <em>and the Night Itself.</em>",
-                   "Productions, the work behind them, and the stage they are made for."),
+        "banner": None,
+        "opening": {
+            "video": "theatre-opening",
+            "poster": "theatre-opening-poster.jpg",
+            "still": "theatre-opening-final.jpg",
+            "still_element": True,
+            "title": "CIRS Theatre",
+            "phases": (0.70, 0.78, 0.91),
+        },
         "soon": ([("Productions", "What was staged, and who was in it"),
                   ("Rehearsal", "The weeks nobody sees"),
                   ("The stage", "The auditorium, and what it can carry")],
@@ -527,6 +564,8 @@ PAGES = {
         "banner": ("Parents", "Parent <em>Portal.</em>",
                    "A secure area for parents. It is not open yet &mdash; so this page carries the "
                    "fee payment and the parent login the school runs today, and the people to ask."),
+        # Shared with School Information — see assets/css/connect.css.
+        "sheet": "connect",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
@@ -543,6 +582,7 @@ PAGES = {
         # Its sheet is assets/css/alumni.css, scoped to body.alumni.
         "banner": None,
         "sheet": "alumni",
+        "cache_suffix": "-alumni-1",
     },
 }
 
@@ -691,11 +731,9 @@ def soon_html(page):
 def film_html(slug, page):
     """The opening of a page that starts on a film the reader scrubs.
 
-    Two pages open this way — CIRS Captures and Our Sports — and they are the
-    same furniture with a different film in it. What a page supplies is the
-    footage, the line of type and, where its own footage asks for it, its own
-    phase boundaries; the mechanics are in assets/css/filmintro.css and
-    assets/js/filmintro.js, once, for both.
+    CIRS film pages share this furniture. Each page supplies its own footage,
+    title and, where needed, phase boundaries; the scrubbing mechanics live in
+    assets/css/filmintro.css and assets/js/filmintro.js.
 
     The film remains the opening's only dominant element. Our Sports adds one
     discreet scroll cue over its first frames; CIRS Captures ends on a
@@ -723,6 +761,13 @@ def film_html(slug, page):
         '      </picture>\n'
         '    </div>\n'
         if shot else "")
+    if film.get("pending") or film.get("still"):
+        attrs += " data-film-pending"
+    title = film.get("title_markup", f'<span class="film__line">{film["title"]}</span>')
+    still_element = bool(film.get("still_element"))
+    still = (f'    <img class="film__still" src="assets/img/{film["still"]}" '
+             'alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">\n'
+             if film.get("still") and still_element else "")
     cue = (
         '    <p class="film__scroll-cue" data-film-scroll-cue>'
         '<span aria-hidden="true">↓</span><span>Scroll to discover</span></p>\n'
@@ -730,7 +775,7 @@ def film_html(slug, page):
     )
     return f'''<section class="film" id="{slug}-opening" data-film{attrs}>
   <div class="film__stage">
-    <video class="film__video" data-film-video
+{still}    <video class="film__video" data-film-video
            width="1280" height="720"
            poster="assets/img/{film["poster"]}"
            preload="auto" muted playsinline disablepictureinpicture
@@ -746,7 +791,7 @@ def film_html(slug, page):
       <source src="assets/video/{film["video"]}.mp4" type="video/mp4">
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
-{cue}    <h1 class="film__title" data-film-title><span class="film__line">{film["title"]}</span></h1>
+{cue}    <h1 class="film__title" data-film-title>{title}</h1>
 {shot}  </div>
 </section>
 <div class="film__seam" aria-hidden="true"></div>'''
@@ -1278,6 +1323,9 @@ def build(slug, page):
     if slug == "founder":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
+    if slug == "sports":
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
     # A page that opens on a scrubbed film carries the shared sheet, and with
     # it the two tuning blocks that sort out which page is which. Without
     # scripting nothing scrubs, so four screens of scroll would move a still
@@ -1292,13 +1340,19 @@ def build(slug, page):
         opening = page["opening"]
         nudge = opening.get("noscript_title_top")
         nudge = (f"body.{slug} .film__title{{--film-title-top:{nudge}}}" if nudge else "")
-        if opening.get("still"):
+        if opening.get("still") and not opening.get("still_element"):
             nudge += ('.film__stage{background:#000 url(assets/img/' + opening["still"] + ') '
                       'var(--film-still-position, 50% 50%)/cover no-repeat}'
                       '.film__video{visibility:hidden}.film__shot{display:none}')
+        still = ('.film__video{display:none}'
+                 f'body.{slug} .film__still{{visibility:visible}}'
+                 if opening.get("still") and opening.get("still_element") else "")
+        pending = ('.film[data-film-pending] .film__title{opacity:1}'
+                   if opening.get("pending") or opening.get("still") else "")
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
-            f'<noscript><style>.film{{height:100svh}}{nudge}</style></noscript>\n</head>')
+            f'<noscript><style>.film{{height:100svh}}{nudge}{pending}{still}'
+            '</style></noscript>\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment

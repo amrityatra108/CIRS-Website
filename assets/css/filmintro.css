@@ -1,4 +1,4 @@
-/* The cinematic opening two pages share — CIRS Captures and Our Sports.
+/* The cinematic opening shared by CIRS Captures, Our Sports and CIRS Festivals.
 
    A short film the visitor scrubs with the scroll rather than watching, and
    one thin widely-tracked line that arrives only once it has ended. Four
@@ -7,7 +7,7 @@
 
        0.00 - 0.70   the film runs, under the scroll, and nothing else exists
        0.70 - 0.77   the last frame freezes and is simply held
-       0.77 - 0.90   CIRS CAPTURES arrives out of it
+       0.77 - 0.90   the page title arrives out of it
        0.90 - 1.00   the finished composition is held, then let go
 
    The stage is a CSS sticky viewport rather than a GSAP pin. It costs
@@ -15,7 +15,7 @@
    without a refresh, and it leaves ScrollTrigger doing the one thing it is
    needed for here: reporting progress.
 
-   Everything above the two tuning blocks at the foot of this file is shared.
+   Everything above the page tuning blocks at the foot of this file is shared.
    What a page sets for itself is only what its own footage decides: how the
    frame is cropped, where the line can sit legibly, and the tone the seam
    below it starts from. */
@@ -228,6 +228,8 @@ body.film.film-on #totop{
   background:#000 var(--film-still-image, none) var(--film-still-position, 50% 50%) / cover no-repeat;
 }
 
+.film[data-film-pending] .film__title{ opacity:0; }
+
 @media (min-width:1600px){
   .film__title{ --film-track-to:var(--film-track-wide, .54); }
 }
@@ -386,6 +388,168 @@ body.sports .film__scroll-cue span:first-child{
   letter-spacing:0;
 }
 
+/* ---- CIRS Art Attack -----------------------------------------------------
+   The supplied film ends with warm pigment at left and blue/violet at right.
+   Their dark central gap is the place for the heading, well clear of the
+   coloured forms. Its first frame is very dark; the initial video poster is
+   that frame, while the stage carries the final still for static fallbacks. */
+body.art-attack{
+  --film-ground:#0B080D;
+  --film-crop:50% 50%;
+  --film-crop-narrow:50% 50%;
+}
+body.art-attack .film__stage{
+  background:#0B080D;
+}
+/* ---- CIRS Festivals ------------------------------------------------------
+   The film pulls back from a diya into a full floral rangoli. Keep its centre
+   visible, including on a portrait phone, and set the thin gold title above
+   the lamp. The stage grades into the same burnt umber as the seam below. */
+body.festivals{
+  --film-ground:#1B0C08;
+  --film-crop:50% 50%;
+  --film-crop-narrow:50% 50%;
+}
+body.festivals .film__stage{ background:#1B0C08; }
+body.art-attack .film__still,
+body.festivals .film__still{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:var(--film-crop);
+}
+body.art-attack .film__stage::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  left:0;
+  right:0;
+  bottom:0;
+  height:clamp(70px, 13svh, 150px);
+  background:linear-gradient(to bottom, transparent, #170F18);
+  pointer-events:none;
+}
+body.art-attack .film__title{
+  z-index:2;
+  left:50%;
+  right:auto;
+  top:49%;
+  bottom:auto;
+  width:min(86vw, 720px);
+  padding:0;
+  color:#FFF9F0;
+  text-transform:none;
+  transform:translate(-50%, calc(-50% + (1 - var(--film-reveal)) * 12px));
+  filter:none;
+  will-change:opacity, transform;
+}
+body.art-attack .film__art-prefix{
+  display:block;
+  margin-bottom:clamp(12px, 2vh, 22px);
+  padding-left:.42em;
+  font-family:"Jost", var(--font-primary), sans-serif;
+  font-size:clamp(12px, 1.2vw, 17px);
+  font-weight:400;
+  letter-spacing:.42em;
+  line-height:1;
+  text-transform:uppercase;
+  color:#EADBCD;
+}
+body.art-attack .film__art-name{
+  display:block;
+  font-family:var(--font-primary);
+  font-size:clamp(56px, 6.3vw, 100px);
+  font-weight:500;
+  letter-spacing:-.055em;
+  line-height:.92;
+  white-space:nowrap;
+}
+body.art-attack .film__seam{
+  height:clamp(130px, 18svh, 220px);
+  background:linear-gradient(to bottom,
+              #170F18 0%, #211722 24%, #76686C 64%, var(--paper) 100%);
+}
+body.art-attack .film[data-film-still] .film__video{ visibility:hidden; }
+@media (max-aspect-ratio:6/5){
+  body.art-attack .film__still{ object-position:var(--film-crop-narrow); }
+  body.art-attack .film__title{ top:52%; }
+}
+@media (max-width:720px){
+  body.art-attack .film__title{ width:calc(100vw - 32px); }
+  body.art-attack .film__art-prefix{ font-size:12px; }
+  body.art-attack .film__art-name{ font-size:clamp(48px, 12vw, 76px); }
+}
+@media (max-width:360px){
+  body.art-attack .film__art-name{ font-size:clamp(42px, 11.5vw, 52px); }
+}
+
+body.festivals .film__stage::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:0;
+  background:linear-gradient(to bottom,
+    rgba(21,8,5,.78) 0%, rgba(21,8,5,.68) 24%,
+    rgba(21,8,5,.12) 40%, transparent 49%, transparent 71%,
+    rgba(41,18,9,.38) 86%, #291209 100%);
+  pointer-events:none;
+}
+body.festivals .film__title{
+  z-index:2;
+  top:clamp(118px, 15.5svh, 180px);
+  bottom:auto;
+  padding:0 16px;
+  color:#FFE5AC;
+  text-transform:none;
+  transform:translateY(calc((1 - var(--film-reveal)) * 12px));
+  filter:none;
+  text-shadow:0 2px 10px rgba(22,8,4,.65);
+  will-change:opacity, transform;
+}
+body.festivals .film__festival-prefix{
+  display:block;
+  margin-bottom:clamp(11px, 1.7svh, 18px);
+  padding-left:.4em;
+  font-family:"Jost", var(--font-primary), sans-serif;
+  font-size:clamp(11px, 1vw, 14px);
+  font-weight:400;
+  letter-spacing:.4em;
+  line-height:1;
+  text-transform:uppercase;
+}
+body.festivals .film__festival-name{
+  display:block;
+  padding-left:.12em;
+  font-family:"Jost", var(--font-primary), sans-serif;
+  font-size:clamp(54px, 9vw, 94px);
+  font-weight:100;
+  letter-spacing:.12em;
+  line-height:1;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+body.festivals .film__seam{
+  height:clamp(130px, 18svh, 220px);
+  background:linear-gradient(to bottom,
+    #291209 0%, #432016 25%, #9A705A 65%, var(--paper) 100%);
+}
+body.festivals .film[data-film-still] .film__video{ visibility:hidden; }
+@media (max-aspect-ratio:6/5){
+  body.festivals .film__still{ object-position:var(--film-crop-narrow); }
+}
+@media (max-width:720px){
+  body.festivals .film__title{ top:clamp(116px, 15.5svh, 155px); }
+}
+@media (max-width:360px){
+  body.festivals .film__festival-name{
+    font-size:48px;
+    letter-spacing:.1em;
+  }
+}
+
 @media (prefers-reduced-motion:reduce){
   .film{ --film-run:100svh; }
   .film__title{
@@ -404,4 +568,111 @@ body.sports .film__scroll-cue span:first-child{
     --film-seam-fold:#211C1B;
     --film-seam-rise:#6B6560;
   }
+  body.festivals .film__video{ visibility:hidden; }
+  body.festivals .film[data-film-pending] .film__title{ opacity:1; }
+  body.art-attack .film__video{ visibility:hidden; }
+  body.art-attack .film[data-film-pending] .film__title{ opacity:1; }
+}
+
+/* ---- CIRS Theatre -------------------------------------------------------
+   The supplied film opens red velvet curtains onto an empty amber stage.
+   The title occupies the unlit air, above the reflective floor. On portrait
+   screens the whole proscenium is shown within the viewport, and the title
+   settles below it where neither the curtains nor the stage are covered. */
+body.theatre{
+  --film-ground:#080304;
+  --film-crop:50% 50%;
+  --film-crop-narrow:50% 50%;
+  --film-seam-top:#050203;
+  --film-seam-fold:#1D0A09;
+  --film-seam-rise:#79604E;
+}
+body.theatre .film__stage{
+  background:#080304 url("../img/theatre-opening-poster.jpg") center / cover no-repeat;
+}
+body.theatre .film__still{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:var(--film-crop);
+  visibility:hidden;
+}
+body.theatre .film__stage::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:auto 0 0;
+  height:clamp(70px, 14svh, 150px);
+  background:linear-gradient(to bottom, transparent, #050203);
+  pointer-events:none;
+}
+body.theatre .film__title{
+  --film-track-from:.11;
+  --film-track-to:.26;
+  position:absolute;
+  z-index:2;
+  top:49%;
+  bottom:auto;
+  width:100%;
+  font-family:"Jost", sans-serif;
+  font-size:clamp(52px, 6vw, 92px);
+  font-weight:100;
+  line-height:1;
+  text-transform:uppercase;
+  color:#F3CD83;
+  text-shadow:0 1px 4px rgba(0, 0, 0, .25);
+  transform:translateY(calc(-50% + (1 - var(--film-reveal)) * 12px));
+  filter:none;
+  will-change:opacity, transform;
+}
+body.theatre .film[data-film-pending] .film__title{ opacity:0; }
+body.theatre .film__title::after{
+  content:"";
+  display:block;
+  width:clamp(88px, 12vw, 170px);
+  height:1px;
+  margin:clamp(20px, 3vh, 34px) auto 0;
+  background:#C89A53;
+}
+body.theatre .film[data-film-still] .film__video{ visibility:hidden; }
+body.theatre .film[data-film-still] .film__still{ visibility:visible; }
+
+@media (max-aspect-ratio:6/5){
+  body.theatre .film__stage{
+    background-color:#080304;
+    background-size:contain;
+    background-position:50% 42%;
+  }
+  body.theatre .film__video,
+  body.theatre .film__still{
+    object-fit:contain;
+    object-position:50% 42%;
+    background:transparent;
+  }
+  body.theatre .film__title{
+    --film-track-from:.09;
+    --film-track-to:.20;
+    top:78%;
+    font-size:clamp(34px, 5.2vw, 54px);
+  }
+}
+@media (max-width:720px){
+  body.theatre .film__title{
+    --film-track-from:.08;
+    --film-track-to:.16;
+    top:64%;
+    font-size:clamp(30px, 8.5vw, 42px);
+  }
+}
+@media (max-width:360px){
+  body.theatre .film__title{ font-size:clamp(27px, 8.2vw, 32px); }
+}
+@media (prefers-reduced-motion:reduce){
+  .film[data-film]{ --film-run:100svh; }
+  body.theatre .film__video{ visibility:hidden; }
+  body.theatre .film__still{ visibility:visible; }
+  body.theatre .film[data-film-pending] .film__title{ opacity:1; }
+  .film__title{ --film-reveal:1; will-change:auto; }
 }

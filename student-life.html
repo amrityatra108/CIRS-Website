@@ -7,8 +7,14 @@
 <meta name="description" content="Residential life at CIRS, the shape of an ordinary school day, and the hundred-acre campus it happens on.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/student-life.html">
-<link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
-<link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Student Life">
 <meta property="og:description" content="Residential life at CIRS, the shape of an ordinary school day, and the hundred-acre campus it happens on.">
@@ -20,17 +26,17 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=96-student-life-9">
-<link rel="stylesheet" href="assets/css/cirs.css?b=96-student-life-9">
-<link rel="stylesheet" href="assets/css/pages.css?b=96-student-life-9">
+<link rel="stylesheet" href="assets/css/fonts.css?b=97-student-life-9">
+<link rel="stylesheet" href="assets/css/cirs.css?b=97-student-life-9">
+<link rel="stylesheet" href="assets/css/pages.css?b=97-student-life-9">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/student-life.css?b=96-student-life-9">
-<link rel="stylesheet" href="assets/css/typography.css?b=96-student-life-9">
+<link rel="stylesheet" href="assets/css/student-life.css?b=97-student-life-9">
+<link rel="stylesheet" href="assets/css/typography.css?b=97-student-life-9">
 </head>
 
 <body class="student-life">
@@ -279,9 +285,11 @@
 
 <section class="sj-day" id="day" aria-labelledby="sj-day-title">
   <div class="wrap sj-day__intro">
-    <p class="sj-kicker">A day at CIRS</p>
-    <h2 id="sj-day-title">From rouser<br>to lights out.</h2>
-    <div>
+    <div class="sj-day__heading">
+      <p class="sj-kicker">A day at CIRS</p>
+      <h2 id="sj-day-title">From rouser<br>to lights out.</h2>
+    </div>
+    <div class="sj-day__details">
       <p>Junior and senior school share the same rhythm at different times. Choose a schedule, then move through one complete day.</p>
       <div class="sj-switch" role="group" aria-label="Choose daily schedule">
         <button type="button" class="is-active" data-schedule="senior" aria-pressed="true">Grades IX–XII</button>
@@ -363,7 +371,11 @@
   <div class="wrap sj-heading"><p class="sj-kicker">Residential life</p><h2 id="sj-home-title">A campus<br>that becomes<br>home.</h2><p>Houses, dining, study and play belong to one walkable residential campus. Living together makes room for friendship, responsibility and the ordinary routines that turn a school into a community.</p></div>
   <div class="wrap sj-photo-wall">
     <figure class="sj-photo-wall__main"><img src="assets/img/boarding.jpg" alt="Students together in residential life at CIRS" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Residential houses</figcaption></figure>
-    <figure><img src="assets/img/life-split-student.webp" alt="A CIRS student during the school day" width="1100" height="899" loading="lazy" decoding="async"><figcaption>Friendship and shared responsibility</figcaption></figure>
+    <!-- Not a photograph in a frame: a hand-traced cut-out on transparency,
+         made by tools/make-life-split-cutout.py. Cropped like the others it
+         showed the page ground through its own mask and read as a broken
+         image, so it gets its own plate and its own rule below. -->
+    <figure class="sj-photo-wall__cut"><img src="assets/img/life-split-student.webp" alt="A CIRS student during the school day" width="1100" height="899" loading="lazy" decoding="async"><figcaption>Friendship and shared responsibility</figcaption></figure>
     <figure><img src="assets/img/assembly-front.jpg" alt="Students gathered at CIRS" width="1400" height="640" loading="lazy" decoding="async"><figcaption>One campus community</figcaption></figure>
   </div>
 </section>
@@ -509,11 +521,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=96-student-life-9" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=96-student-life-9" defer></script>
-<script src="assets/vendor/lenis.min.js?b=96-student-life-9" defer></script>
-<script src="assets/js/cirs.js?b=96-student-life-9" defer></script>
-<script src="assets/js/pages.js?b=96-student-life-9" defer></script>
-<script src="assets/js/student-life-journey.js?b=96-student-life-9" defer></script>
+<script src="assets/vendor/gsap.min.js?b=97-student-life-9" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=97-student-life-9" defer></script>
+<script src="assets/vendor/lenis.min.js?b=97-student-life-9" defer></script>
+<script src="assets/js/cirs.js?b=97-student-life-9" defer></script>
+<script src="assets/js/pages.js?b=97-student-life-9" defer></script>
+<script src="assets/js/student-life-journey.js?b=97-student-life-9" defer></script>
 </body>
 </html>

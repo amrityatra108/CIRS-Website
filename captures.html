@@ -7,8 +7,14 @@
 <meta name="description" content="Photography from the CIRS community — the campus and the school year as its students see it.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/captures.html">
-<link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
-<link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CIRS Captures">
 <meta property="og:description" content="Photography from the CIRS community — the campus and the school year as its students see it.">
@@ -20,18 +26,18 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=96">
-<link rel="stylesheet" href="assets/css/cirs.css?b=96">
-<link rel="stylesheet" href="assets/css/pages.css?b=96">
+<link rel="stylesheet" href="assets/css/fonts.css?b=97">
+<link rel="stylesheet" href="assets/css/cirs.css?b=97">
+<link rel="stylesheet" href="assets/css/pages.css?b=97">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=96">
-<link rel="stylesheet" href="assets/css/filmintro.css?b=96">
-<noscript><style>.film{height:100svh}.film__stage{background:#000 url(assets/img/captures-camera-final.jpg) var(--film-still-position, 50% 50%)/cover no-repeat}.film__video{visibility:hidden}.film__shot{display:none}</style></noscript>
+<link rel="stylesheet" href="assets/css/typography.css?b=97">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=97">
+<noscript><style>.film{height:100svh}.film__stage{background:#000 url(assets/img/captures-camera-final.jpg) var(--film-still-position, 50% 50%)/cover no-repeat}.film__video{visibility:hidden}.film__shot{display:none}.film[data-film-pending] .film__title{opacity:1}</style></noscript>
 </head>
 
 <body class="film captures">
@@ -260,7 +266,7 @@
   </div>
 </div>
 <main id="main">
-<section class="film" id="captures-opening" data-film data-film-phases="0.5143 0.5657 0.6612 0.7347 0.7959 0.9388" data-film-lens="388.4 359.3 65 124.4 6.56">
+<section class="film" id="captures-opening" data-film data-film-phases="0.5143 0.5657 0.6612 0.7347 0.7959 0.9388" data-film-lens="388.4 359.3 65 124.4 6.56" data-film-pending>
   <div class="film__stage">
     <video class="film__video" data-film-video
            width="1280" height="720"
@@ -402,11 +408,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=96" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=96" defer></script>
-<script src="assets/vendor/lenis.min.js?b=96" defer></script>
-<script src="assets/js/cirs.js?b=96" defer></script>
-<script src="assets/js/pages.js?b=96" defer></script>
-<script src="assets/js/filmintro.js?b=96" defer></script>
+<script src="assets/vendor/gsap.min.js?b=97" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=97" defer></script>
+<script src="assets/vendor/lenis.min.js?b=97" defer></script>
+<script src="assets/js/cirs.js?b=97" defer></script>
+<script src="assets/js/pages.js?b=97" defer></script>
+<script src="assets/js/filmintro.js?b=97" defer></script>
 </body>
 </html>
