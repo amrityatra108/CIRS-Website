@@ -31,7 +31,7 @@
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/typography.css?b=96-theatre-film-1">
 <link rel="stylesheet" href="assets/css/filmintro.css?b=96-theatre-film-1">
-<noscript><style>.film[data-film]{height:100svh}.film__video{display:none}body.theatre .film__still{visibility:visible}.film[data-film-pending] .film__title{opacity:1}</style></noscript>
+<noscript><style>.film{height:100svh}.film__video{display:none}body.theatre .film__still{visibility:visible}body.theatre .film[data-film-pending] .film__title{opacity:1}</style></noscript>
 </head>
 
 <body class="film theatre">
@@ -260,16 +260,22 @@
   </div>
 </div>
 <main id="main">
-<section class="film" id="theatre-opening" data-film
-         data-film-phases="0.7 0.78 0.91" data-film-pending>
+<section class="film" id="theatre-opening" data-film data-film-phases="0.7 0.78 0.91" data-film-pending>
   <div class="film__stage">
-    <img class="film__still" src="assets/img/theatre-opening-final.jpg"
-         alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">
+    <img class="film__still" src="assets/img/theatre-opening-final.jpg" alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">
     <video class="film__video" data-film-video
            width="1280" height="720"
            poster="assets/img/theatre-opening-poster.jpg"
            preload="auto" muted playsinline disablepictureinpicture
            aria-hidden="true" tabindex="-1">
+      <!-- H.264 first, which is the other way round from the rest of this
+           site. These files are not played but seeked, several times a
+           second, and H.264 is the one codec every browser that has it
+           decodes in hardware — so it is the path that scrubs without
+           stuttering wherever it exists. The VP9 is for the browsers built
+           without the proprietary decoder, which would otherwise have no
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
       <source src="assets/video/theatre-opening.mp4" type="video/mp4">
       <source src="assets/video/theatre-opening.webm" type="video/webm">
     </video>
