@@ -424,12 +424,21 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "art-attack": {
+        "barehead": True,
+        "cache_suffix": "-art-attack-film-1",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Studio work and visual art from across Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Art Attack", "Made <em>by Hand.</em>",
-                   "Studio work and visual art from across the school."),
+        "banner": None,
+        "opening": {
+            "video": "art-attack-opening",
+            "poster": "art-attack-opening-poster.jpg",
+            "still": "art-attack-opening-final.jpg",
+            "title": "CIRS Art Attack",
+            "title_markup": '<span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span>',
+            "pending": True,
+        },
         "soon": ([("Painting and drawing", "Work from the studio and the classroom"),
                   ("Print and craft", "The processes, and what comes out of them"),
                   ("Exhibitions", "What was shown, and when")],
@@ -670,11 +679,10 @@ def soon_html(page):
 def film_html(slug, page):
     """The opening of a page that starts on a film the reader scrubs.
 
-    Two pages open this way — CIRS Captures and Our Sports — and they are the
-    same furniture with a different film in it. What a page supplies is the
-    footage, the line of type and, where its own footage asks for it, its own
-    phase boundaries; the mechanics are in assets/css/filmintro.css and
-    assets/js/filmintro.js, once, for both.
+    These pages open this way because they share the same furniture with
+    different films. What a page supplies is the footage, the line of type
+    and, where its own footage asks for it, its phase boundaries; the mechanics
+    are in assets/css/filmintro.css and assets/js/filmintro.js, once for all.
 
     The film remains the opening's only dominant element. Our Sports adds one
     discreet scroll cue over its first frames; CIRS Captures keeps the plain
@@ -685,6 +693,12 @@ def film_html(slug, page):
     attrs = f' data-film-phases="{" ".join(f"{v:g}" for v in phases)}"' if phases else ""
     if film.get("fps", 24) != 24:
         attrs += f' data-film-fps="{film["fps"]:g}"'
+    if film.get("pending"):
+        attrs += ' data-film-pending'
+    title = film.get("title_markup", f'<span class="film__line">{film["title"]}</span>')
+    still = (f'    <img class="film__still" src="assets/img/{film["still"]}" '
+             'alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">\n'
+             if film.get("still") else "")
     cue = (
         '    <p class="film__scroll-cue" data-film-scroll-cue>'
         '<span aria-hidden="true">↓</span><span>Scroll to discover</span></p>\n'
@@ -692,7 +706,7 @@ def film_html(slug, page):
     )
     return f'''<section class="film" id="{slug}-opening" data-film{attrs}>
   <div class="film__stage">
-    <video class="film__video" data-film-video
+{still}    <video class="film__video" data-film-video
            width="1280" height="720"
            poster="assets/img/{film["poster"]}"
            preload="auto" muted playsinline disablepictureinpicture
@@ -708,7 +722,7 @@ def film_html(slug, page):
       <source src="assets/video/{film["video"]}.mp4" type="video/mp4">
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
-{cue}    <h1 class="film__title" data-film-title><span class="film__line">{film["title"]}</span></h1>
+{cue}    <h1 class="film__title" data-film-title>{title}</h1>
   </div>
 </section>
 <div class="film__seam" aria-hidden="true"></div>'''
@@ -1251,9 +1265,14 @@ def build(slug, page):
     if page.get("opening"):
         nudge = page["opening"].get("noscript_title_top")
         nudge = (f"body.{slug} .film__title{{--film-title-top:{nudge}}}" if nudge else "")
+        pending = ('.film[data-film-pending] .film__title{opacity:1}'
+                   if page["opening"].get("pending") else "")
+        still = (f'body.{slug} .film__video{{display:none}}'
+                 if page["opening"].get("still") else "")
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
-            f'<noscript><style>.film{{height:100svh}}{nudge}</style></noscript>\n</head>')
+            f'<noscript><style>.film{{height:100svh}}{nudge}{pending}{still}'
+            '</style></noscript>\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
