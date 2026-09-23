@@ -32,6 +32,7 @@
   if (!section) return;
   var film = section.querySelector("[data-film-video]");
   var title = section.querySelector("[data-film-title]");
+  var scrollCue = section.querySelector("[data-film-scroll-cue]");
   if (!film || !title) return;
 
   /* The phase boundaries, as fractions of the section's travel, and the
@@ -87,11 +88,18 @@
   // Slow in and slow out. The line should be noticed; its arrival should not.
   function smooth(t) { return t * t * (3 - 2 * t); }
 
+  function setScrollCue(progress) {
+    if (!scrollCue) return;
+    var cue = 1 - smooth(Math.max(0, Math.min(1, progress / 0.08)));
+    scrollCue.style.setProperty("--film-scroll-cue-opacity", cue.toFixed(3));
+  }
+
   function paint(progress) {
     var p = progress < 0 ? 0 : progress > 1 ? 1 : progress;
     seek(p >= FILM_END ? last : (p / FILM_END) * duration);
     var r = (p - HOLD_END) / (TITLE_END - HOLD_END);
     setReveal(r <= 0 ? 0 : r >= 1 ? 1 : smooth(r));
+    setScrollCue(p);
   }
 
   /* The composition, without the scrubbing: the camera as the film leaves
@@ -101,6 +109,7 @@
   function still() {
     section.setAttribute("data-film-still", "");
     setReveal(1);
+    setScrollCue(0);
     asked = -1;
     seek(last);
   }

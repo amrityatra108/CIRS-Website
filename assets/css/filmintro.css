@@ -244,6 +244,37 @@ body.sports .film__title{
   --film-title-top:44%;
   --film-title-lift:-50%;
 }
+body.sports .film__scroll-cue{
+  --film-scroll-cue-opacity:1;
+  position:absolute;
+  z-index:2;
+  bottom:clamp(34px,7vh,72px);
+  left:var(--gut);
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin:0;
+  color:var(--gold-lit);
+  font-family:var(--font-primary);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  line-height:1;
+  text-transform:uppercase;
+  text-shadow:0 2px 12px rgba(0,0,0,.72);
+  opacity:var(--film-scroll-cue-opacity);
+  pointer-events:none;
+}
+body.sports .film__scroll-cue span:first-child{
+  display:grid;
+  width:26px;
+  height:26px;
+  place-items:center;
+  border:1px solid rgba(255,229,133,.76);
+  border-radius:50%;
+  font-size:1rem;
+  letter-spacing:0;
+}
 
 @media (prefers-reduced-motion:reduce){
   .film{ --film-run:100svh; }
