@@ -5,7 +5,7 @@
   var stack = section.querySelector(".crossroads-stories__stack");
   var covers = stack ? Array.from(stack.querySelectorAll("a")) : [];
   var selected = stack && stack.querySelector(".crossroads-stories__front");
-  var lastX = null, lastY = null, lockedUntil = 0, pointerDownCover = null;
+  var pointerDownCover = null;
   var rearSlot = {1:2,2:4,3:6,4:5,5:3,6:1};
   function selectCover(cover) {
     if (!cover || cover === selected || !covers.includes(cover)) return;
@@ -19,21 +19,9 @@
         item.classList.add("crossroads-stories__rear", "crossroads-stories__rear--" + rearSlot[delta]);
       }
     });
-    lockedUntil=performance.now()+720;
   }
   if (stack) {
     stack.addEventListener("pointerdown",function(event){pointerDownCover=event.target.closest("a");},{passive:true});
-    stack.addEventListener("pointermove", function (event) {
-      if (event.pointerType === "touch") return;
-      if (performance.now() < lockedUntil) return;
-      var cover = event.target.closest("a");
-      // Require deliberate pointer movement, not an enter event caused by moving cards.
-      if (lastX !== null && Math.hypot(event.clientX-lastX,event.clientY-lastY) < 14) return;
-      if (cover && cover !== selected) {
-        selectCover(cover); lastX=event.clientX; lastY=event.clientY;
-      }
-    });
-    stack.addEventListener("pointerleave", function () { lastX=null; lastY=null; });
     stack.addEventListener("focusin", function (event) {
       var cover=event.target.closest("a");
       if (cover !== pointerDownCover) selectCover(cover);

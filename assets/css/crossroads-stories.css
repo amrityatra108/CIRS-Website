@@ -21,10 +21,9 @@
 .crossroads-stories__rear--6 { --crossroads-stories-rest:150%; --crossroads-stories-fan:162%; --crossroads-stories-drop:32%; --crossroads-stories-angle:27deg; --crossroads-stories-depth:1; }
 .crossroads-stories__front { z-index:10; transform:translateY(-3%); }
 .crossroads-stories__stack a:focus-visible { outline:3px solid #1f1f1b; outline-offset:5px; }
-.crossroads-stories__stack:focus-within .crossroads-stories__rear { transform:translate(var(--crossroads-stories-fan),var(--crossroads-stories-drop)) rotate(var(--crossroads-stories-angle)); }
 @media(hover:hover) and (pointer:fine) {
- .crossroads-stories__stack:hover .crossroads-stories__rear { transform:translate(var(--crossroads-stories-fan),var(--crossroads-stories-drop)) rotate(var(--crossroads-stories-angle)); }
- .crossroads-stories__stack:hover .crossroads-stories__front { transform:translateY(-5%); }
+ .crossroads-stories__rear:hover { z-index:11; transform:translate(var(--crossroads-stories-rest),calc(var(--crossroads-stories-drop) - 5%)) rotate(var(--crossroads-stories-angle)) scale(1.1); box-shadow:0 26px 42px #1f1f1b55; transition-duration:280ms; }
+ .crossroads-stories__front:hover { z-index:12; transform:translateY(-6%) scale(1.06); box-shadow:0 26px 42px #1f1f1b55; transition-duration:280ms; }
 }
 .crossroads-stories__year { width:min(100%,320px); margin:10px auto 0; display:flex; align-items:center; justify-content:center; gap:14px; color:#8f6e2f; font-family:"Newsreader"; font-size:clamp(18px,1.7vw,24px); font-weight:500; letter-spacing:.16em; line-height:1; font-variant-numeric:lining-nums tabular-nums; }
 .crossroads-stories__year::before,.crossroads-stories__year::after { content:""; flex:1; height:1px; background:#d9c99f; }
