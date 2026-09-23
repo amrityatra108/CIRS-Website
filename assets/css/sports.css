@@ -1165,6 +1165,12 @@ body.sports {
   height: 100%;
 }
 
+.laurel-ending__media picture {
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+
 .laurel-ending__media img {
   width: 100%;
   height: 100%;
