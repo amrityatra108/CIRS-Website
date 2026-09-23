@@ -423,6 +423,28 @@ PAGES = {
             "video": "captures-camera",
             "poster": "captures-camera-poster.jpg",
             "title": "CIRS Captures",
+            # Then a photograph from the school appears in the camera's lens
+            # and opens out of it to fill the window. The phases keep the
+            # film and the line on the timing they always had, in absolute
+            # scroll distance — the film to 252vh, held to 277vh, the line up
+            # by 324vh — and add the photograph after them: read to 360vh, in
+            # the lens to 390vh, opened by 460vh, held to 490vh. Hence the
+            # longer run for this page in assets/css/filmintro.css.
+            "phases": [0.5143, 0.5657, 0.6612, 0.7347, 0.7959, 0.9388],
+            # The lens's front rim in the film's own pixels (1280x720): its
+            # centre, its two radii and its tilt in degrees, measured on the
+            # last frame. The radii are 4px inside the rim.
+            "lens": "388.4 359.3 65 124.4 6.56",
+            # The film's last frame as a still, for reduced motion, a film
+            # that fails and no scripting (tools/make-captures-shot.py).
+            "still": "captures-camera-final.jpg",
+            # Two cuts of one photograph: the portrait one wherever the window
+            # is no wider than 6:5, the boundary the film's crop changes at.
+            "shot": {
+                "src": "captures-shot.jpg", "size": (2400, 1819),
+                "narrow": "captures-shot-portrait.jpg", "narrow_size": (1620, 2160),
+                "alt": "A CIRS student dancing on stage in red, one arm raised",
+            },
         },
         "soon": ([("Student photography", "Work by the photography hobby group and anyone else"),
                   ("The year, in frames", "The campus through its seasons"),
@@ -443,6 +465,7 @@ PAGES = {
             "video": "art-attack-opening",
             "poster": "art-attack-opening-poster.jpg",
             "still": "art-attack-opening-final.jpg",
+            "still_element": True,
             "title": "CIRS Art Attack",
             "title_markup": '<span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span>',
             "pending": True,
@@ -466,6 +489,7 @@ PAGES = {
             "video": "festivals-opening",
             "poster": "festivals-opening-poster.jpg",
             "still": "festivals-opening-final.jpg",
+            "still_element": True,
             "title": "CIRS Festivals",
             "title_markup": '<span class="film__festival-prefix">CIRS </span><span class="film__festival-name">Festivals</span>',
             "pending": True,
@@ -489,6 +513,7 @@ PAGES = {
             "video": "theatre-opening",
             "poster": "theatre-opening-poster.jpg",
             "still": "theatre-opening-final.jpg",
+            "still_element": True,
             "title": "CIRS Theatre",
             "phases": (0.70, 0.78, 0.91),
         },
@@ -711,20 +736,38 @@ def film_html(slug, page):
     assets/css/filmintro.css and assets/js/filmintro.js.
 
     The film remains the opening's only dominant element. Our Sports adds one
-    discreet scroll cue over its first frames; CIRS Captures keeps the plain
-    film-and-title composition.
+    discreet scroll cue over its first frames; CIRS Captures ends on a
+    photograph from the school that opens out of the camera's lens ("lens"
+    and "shot" in its entry, and the lens section of filmintro.js).
     """
     film = page["opening"]
     phases = film.get("phases")
     attrs = f' data-film-phases="{" ".join(f"{v:g}" for v in phases)}"' if phases else ""
     if film.get("fps", 24) != 24:
         attrs += f' data-film-fps="{film["fps"]:g}"'
+    if film.get("lens"):
+        attrs += f' data-film-lens="{film["lens"]}"'
+    shot = film.get("shot")
+    # After the line in the document, so it is read after it, and over it on
+    # screen by z-index. See assets/js/filmintro.js for how it opens.
+    shot = (
+        '    <div class="film__shot" data-film-shot>\n'
+        '      <picture>\n'
+        f'        <source media="(max-aspect-ratio: 6/5)"\n'
+        f'                srcset="assets/img/{shot["narrow"]}" width="{shot["narrow_size"][0]}" height="{shot["narrow_size"][1]}">\n'
+        f'        <img class="film__photo" src="assets/img/{shot["src"]}" width="{shot["size"][0]}" height="{shot["size"][1]}"\n'
+        f'             alt="{shot["alt"]}"\n'
+        '             loading="lazy" decoding="async">\n'
+        '      </picture>\n'
+        '    </div>\n'
+        if shot else "")
     if film.get("pending") or film.get("still"):
         attrs += " data-film-pending"
     title = film.get("title_markup", f'<span class="film__line">{film["title"]}</span>')
+    still_element = bool(film.get("still_element"))
     still = (f'    <img class="film__still" src="assets/img/{film["still"]}" '
              'alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">\n'
-             if film.get("still") else "")
+             if film.get("still") and still_element else "")
     cue = (
         '    <p class="film__scroll-cue" data-film-scroll-cue>'
         '<span aria-hidden="true">↓</span><span>Scroll to discover</span></p>\n'
@@ -749,7 +792,7 @@ def film_html(slug, page):
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
 {cue}    <h1 class="film__title" data-film-title>{title}</h1>
-  </div>
+{shot}  </div>
 </section>
 <div class="film__seam" aria-hidden="true"></div>'''
 
@@ -1287,15 +1330,25 @@ def build(slug, page):
     # it the two tuning blocks that sort out which page is which. Without
     # scripting nothing scrubs, so four screens of scroll would move a still
     # photograph: one screen, with the line already up — which is what the
-    # stylesheet's own reduced-motion rule does too.
+    # stylesheet's own reduced-motion rule does too. A page with a still of
+    # its film's last frame shows that rather than the film's first, and a
+    # page whose opening ends on a photograph leaves the photograph out: its
+    # moment is the movement out of the lens, and without the movement there
+    # is nothing for it to arrive from. The path is relative to the page,
+    # where the stylesheet's is to itself.
     if page.get("opening"):
-        nudge = page["opening"].get("noscript_title_top")
+        opening = page["opening"]
+        nudge = opening.get("noscript_title_top")
         nudge = (f"body.{slug} .film__title{{--film-title-top:{nudge}}}" if nudge else "")
+        if opening.get("still") and not opening.get("still_element"):
+            nudge += ('.film__stage{background:#000 url(assets/img/' + opening["still"] + ') '
+                      'var(--film-still-position, 50% 50%)/cover no-repeat}'
+                      '.film__video{visibility:hidden}.film__shot{display:none}')
         still = ('.film__video{display:none}'
                  f'body.{slug} .film__still{{visibility:visible}}'
-                 if page["opening"].get("still") else "")
+                 if opening.get("still") and opening.get("still_element") else "")
         pending = ('.film[data-film-pending] .film__title{opacity:1}'
-                   if page["opening"].get("pending") or page["opening"].get("still") else "")
+                   if opening.get("pending") or opening.get("still") else "")
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
             f'<noscript><style>.film{{height:100svh}}{nudge}{pending}{still}'
