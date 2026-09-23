@@ -22,11 +22,8 @@ body .hero__inner > h1{ font-weight:400; }
 body :is(h2, .h2){ font-weight:var(--weight-section); }
 body :is(h3, h4, .h3, .h4){ font-weight:var(--weight-subheading); }
 body.wall .p1-hero-text{ font-weight:var(--weight-display); }
-/* The one line on CIRS Captures is the exception to the display weight:
-   the opening is built on genuinely thin lettering, so it asks for Jost's
-   own Thin rather than a serif at 600. Stated here because this file is
-   loaded after every page sheet and would otherwise overrule it. */
-body .cap__title{ font-weight:100; }
+/* Film headings provide their own lettering; individual pages can adjust it. */
+body .film__title{ font-weight:100; }
 body :is(.htab, .btn, .drawer a, .jump__toggle){ font-weight:var(--weight-control); }
 body :is(.sc, .art__flag, .art__issue, .art__by, .nx-tag, .nx-meta, .fmeta, .fnav__label){ font-weight:var(--weight-label); }
 
