@@ -1240,6 +1240,9 @@ def build(slug, page):
     if slug == "founder":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
+    if slug == "sports":
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
     # A page that opens on a scrubbed film carries the shared sheet, and with
     # it the two tuning blocks that sort out which page is which. Without
     # scripting nothing scrubs, so four screens of scroll would move a still
