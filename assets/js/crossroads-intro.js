@@ -11,7 +11,7 @@
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)");
   var active = false, frame = null, x = 0, y = 0;
   var transitionFrame = null;
-  var exitItems = [".crossroads-intro__eyebrow", ".crossroads-intro__mark", ".crossroads-intro__sanskrit", ".crossroads-intro__tagline", ".crossroads-intro__cta"].map(function (selector) { return intro.querySelector(selector); }).filter(Boolean);
+  var exitItems = [".crossroads-intro__mark", ".crossroads-intro__motto", ".crossroads-intro__cta"].map(function (selector) { return intro.querySelector(selector); }).filter(Boolean);
   var hint = intro.querySelector(".crossroads-intro__hint");
   var video = intro.querySelector("[data-crossroads-intro-video]");
   var opening = intro.querySelector("[data-crossroads-intro-opening]");
@@ -50,6 +50,10 @@
     intro.removeAttribute("data-crossroads-intro-pending");
     intro.removeAttribute("data-crossroads-intro-film");
     intro.setAttribute("data-crossroads-intro-settled", "");
+    if (!reduced.matches && intro.getBoundingClientRect().bottom > 88) {
+      intro.setAttribute("data-crossroads-intro-arriving", "");
+      setTimeout(function () { intro.removeAttribute("data-crossroads-intro-arriving"); }, 1200);
+    }
     lockScroll(false);
     stop();
     requestAnimationFrame(syncVideo);
@@ -103,7 +107,7 @@
     if (!openingDone && intro.hasAttribute("data-crossroads-intro-pending")) finishOpening();
   });
   function primeAmbientVideo(playNow) {
-    if (!video || reduced.matches) return;
+    if (!video || reduced.matches || getComputedStyle(reveal).display === "none") return;
     if (!video.getAttribute("src")) {
       video.src = video.getAttribute("data-src");
       video.load();
@@ -117,7 +121,7 @@
   function syncVideo() {
     syncOpening();
     if (!video) return;
-    if (!active || document.hidden || reduced.matches || (opening && !openingDone) || intro.hasAttribute("data-crossroads-intro-film")) { video.pause(); return; }
+    if (!active || document.hidden || reduced.matches || getComputedStyle(reveal).display === "none" || (opening && !openingDone) || intro.hasAttribute("data-crossroads-intro-film")) { video.pause(); return; }
     primeAmbientVideo(false);
     var playing = video.play();
     if (playing) playing.catch(function () { /* Keep the still visible when autoplay is unavailable. */ });
