@@ -1157,14 +1157,14 @@ def build(slug, page):
     if slug == "crossroads":
         head = head.replace(
             "</head>",
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-3">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-5">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-4">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
             '<noscript><style>.crossroads-intro-curtain{display:none}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}'
             '.crossroads-intro[data-crossroads-intro-pending]{background:var(--cr-purple-deep)}'
-            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible}'
+            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible!important}'
             '</style></noscript>\n</head>')
     if slug == "founder":
         head = head.replace("</head>",
@@ -1266,9 +1266,9 @@ def build(slug, page):
         parts.append(read("tools/partials/footer.html").rstrip("\n"))
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
     if slug == "crossroads":
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-5" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
-        parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}-hover-4" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
     if slug == "founder":
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
