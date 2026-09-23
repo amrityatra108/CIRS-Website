@@ -1,6 +1,6 @@
-/* The cinematic opening two pages share — CIRS Captures and Our Sports.
+/* The cinematic opening shared by CIRS Captures, Our Sports and Art Attack.
 
-   Both open the same way, because they are the same page furniture with a
+   These pages open the same way, because they share page furniture with a
    different film in it: the reader scrubs a short piece of footage with the
    scroll, it ends, it is held, and one thin widely-tracked line arrives over
    the frame it ended on. What differs between them is the file, the words,
@@ -33,6 +33,7 @@
   var film = section.querySelector("[data-film-video]");
   var title = section.querySelector("[data-film-title]");
   var scrollCue = section.querySelector("[data-film-scroll-cue]");
+  var hasComposedStill = !!section.querySelector(".film__still");
   if (!film || !title) return;
 
   /* The phase boundaries, as fractions of the section's travel, and the
@@ -58,6 +59,13 @@
   var reveal = -1;     // the last value written to the stylesheet
   var trigger = null;
   var furniture = null;
+  var failedSources = 0;
+  var sources = film.querySelectorAll("source");
+  var fallbackTimer = null;
+  var unavailable = false;
+  var measuredTravel = 0;
+  var previousProgress = 0;
+  var wasOnFilm = false;
 
   /* Seeking to exactly duration is the one value that is not a frame: some
      browsers treat it as the end and hand back the first frame, or fire
@@ -102,6 +110,22 @@
     setScrollCue(p);
   }
 
+  // Composed still openings measure their position directly. A section-bound
+  // ScrollTrigger can retain stale bounds when the viewport changes shape.
+  function paintPosition() {
+    var travel = Math.max(1, section.offsetHeight - window.innerHeight);
+    if (measuredTravel && Math.abs(travel - measuredTravel) > 2 &&
+        wasOnFilm && previousProgress > 0 && previousProgress < 1) {
+      window.scrollTo(0, section.offsetTop + previousProgress * travel);
+    }
+    measuredTravel = travel;
+    var box = section.getBoundingClientRect();
+    previousProgress = Math.max(0, Math.min(1, -box.top / travel));
+    wasOnFilm = box.top <= 0 && box.bottom > 0;
+    paint(previousProgress);
+    document.body.classList.toggle("film-on", wasOnFilm);
+  }
+
   /* The composition, without the scrubbing: the camera as the film leaves
      it and the line already up. assets/css/captures.css takes the section
      back to one screen when this is set, so nobody is asked to scroll four
@@ -123,6 +147,14 @@
   function scrub() {
     if (trigger || !hasST || reduced.matches) return;
     section.removeAttribute("data-film-still");
+    if (hasComposedStill) {
+      trigger = ScrollTrigger.create({
+        onUpdate: paintPosition,
+        onRefresh: paintPosition
+      });
+      paintPosition();
+      return;
+    }
     trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
@@ -150,21 +182,50 @@
   }
 
   function start() {
+    if (unavailable) return;
     if (!frames()) return;
-    if (reduced.matches || !hasST) { still(); return; }
-    if (trigger) paint(trigger.progress);
+    if (fallbackTimer) { window.clearTimeout(fallbackTimer); fallbackTimer = null; }
+    if (reduced.matches || !hasST) {
+      still();
+      section.removeAttribute("data-film-pending");
+      return;
+    }
+    if (trigger) {
+      if (hasComposedStill) paintPosition(); else paint(trigger.progress);
+    }
     else scrub();
+    section.removeAttribute("data-film-pending");
   }
 
   if (film.readyState >= 1) start();
   film.addEventListener("loadedmetadata", start);
-  // Without the file there is no opening to scrub. Leave the section at one
-  // screen with the line up, rather than four screens of nothing.
-  film.addEventListener("error", function () {
+  // Without usable media, show the composed still and title at one screen.
+  function fallback() {
+    if (unavailable) return;
+    unavailable = true;
     teardown();
     section.setAttribute("data-film-still", "");
     setReveal(1);
+    if (scrollCue) scrollCue.style.setProperty("--film-scroll-cue-opacity", "0");
+    section.removeAttribute("data-film-pending");
+  }
+  // A failed MP4 source may be followed by a working WebM source, so wait for
+  // the active stream or both source errors before using the still.
+  film.addEventListener("error", function () {
+    if (!hasComposedStill || duration) fallback();
   });
+  if (hasComposedStill) {
+    sources.forEach(function (source) {
+      source.addEventListener("error", function () {
+        failedSources += 1;
+        if (failedSources === sources.length) fallback();
+      });
+    });
+    if (!duration) fallbackTimer = window.setTimeout(fallback, 5000);
+    window.addEventListener("resize", function () {
+      if (trigger) window.requestAnimationFrame(paintPosition);
+    }, { passive: true });
+  }
 
   /* iOS will not paint a frame of a video that has never been told to play,
      so a seek alone leaves the poster up. One muted play, stopped as soon as
@@ -180,7 +241,9 @@
       playing.then(function () {
         film.pause();
         asked = -1;
-        if (trigger) paint(trigger.progress);
+        if (trigger) {
+          if (hasComposedStill) paintPosition(); else paint(trigger.progress);
+        }
       }).catch(function () { /* No decoder; the poster is the fallback. */ });
     }
   }
