@@ -20,18 +20,18 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=96-sports-journey-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=96-sports-journey-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=96-sports-journey-1">
+<link rel="stylesheet" href="assets/css/fonts.css?b=96-sports-journey-2">
+<link rel="stylesheet" href="assets/css/cirs.css?b=96-sports-journey-2">
+<link rel="stylesheet" href="assets/css/pages.css?b=96-sports-journey-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/sports-journey.css?b=96-sports-journey-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=96-sports-journey-1">
-<link rel="stylesheet" href="assets/css/filmintro.css?b=96-sports-journey-1">
+<link rel="stylesheet" href="assets/css/sports-journey.css?b=96-sports-journey-2">
+<link rel="stylesheet" href="assets/css/typography.css?b=96-sports-journey-2">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=96-sports-journey-2">
 <noscript><style>.film{height:100svh}body.sports .film__title{--film-title-top:88%}</style></noscript>
 </head>
 
@@ -288,16 +288,22 @@
     <img class="sports-move__field" src="assets/img/sports-experience/field-final-frame.webp"
          width="1280" height="720" alt="" aria-hidden="true" fetchpriority="high">
     <picture class="sports-move__action" aria-hidden="true">
-      <source media="(max-width: 720px)" srcset="assets/img/sports-experience/track-runners-mobile.webp" type="image/webp">
-      <img src="assets/img/sports-experience/track-runners-wide.webp" width="1920" height="1200"
+      <source media="(max-width: 720px)" srcset="assets/img/sports-experience/track-sprint-action-mobile.webp" type="image/webp">
+      <img src="assets/img/sports-experience/track-sprint-action-wide.webp" width="1920" height="1200"
            alt="" loading="eager" decoding="async" fetchpriority="high">
     </picture>
-    <div class="sports-move__shade" aria-hidden="true"></div>
-    <p class="sports-move__carry" data-carry-title aria-hidden="true">CIRS Sports</p>
+    <picture class="sports-move__finish" aria-hidden="true">
+      <source media="(max-width: 720px)" srcset="assets/img/sports-experience/track-finish-mobile.webp" type="image/webp">
+      <img src="assets/img/sports-experience/track-finish-wide.webp" width="1920" height="1200"
+           alt="" loading="eager" decoding="async" fetchpriority="high">
+    </picture>
     <h2 class="sr-only" id="sports-move-title">Move</h2>
     <div class="sports-move__word" aria-hidden="true">
-      <span data-word-photo>MOVE</span>
       <span data-word-solid>MOVE</span>
+    </div>
+    <div class="sports-move__resolution" data-move-resolution aria-hidden="true">
+      <p class="sports-eyebrow">Athletics</p>
+      <p class="sports-move__line">The four-o’clock hour moves.</p>
     </div>
     <svg class="sports-move__defs" aria-hidden="true" focusable="false">
       <defs>
@@ -309,32 +315,8 @@
   </div>
 </section>
 
-<section class="sports-track" id="track-hold" aria-labelledby="sports-track-title">
-  <picture class="sports-track__image">
-  <source media="(max-width: 720px)" srcset="assets/img/sports-experience/track-runners-mobile.webp" type="image/webp">
-    <img src="assets/img/sports-experience/track-runners-wide.webp" width="1920" height="1200"
-         alt="CIRS students running together on the track below the Western Ghats" loading="eager" decoding="async">
-  </picture>
-  <div class="sports-track__shade" aria-hidden="true"></div>
-  <div class="sports-track__caption">
-    <p class="sports-eyebrow">Athletics</p>
-    <h2 id="sports-track-title">The four-o’clock hour moves.</h2>
-  </div>
-</section>
-
 <section class="sports-chapters" id="in-play" data-sports-chapters aria-label="CIRS sport in motion">
   <div class="sports-chapters__stage">
-    <figure class="sports-chapter" data-chapter="track">
-      <picture class="sports-chapter__image">
-        <source media="(max-width: 720px)" srcset="assets/img/sports-experience/track-runners-mobile.webp" type="image/webp">
-        <img src="assets/img/sports-experience/track-runners-wide.webp" width="1920" height="1200"
-             alt="Students set out together on the CIRS athletics track" loading="eager" decoding="async">
-      </picture>
-      <figcaption class="sports-chapter__caption">
-        <span>01 / Athletics</span>
-        <h2>Every stride finds its own pace.</h2>
-      </figcaption>
-    </figure>
     <figure class="sports-chapter" data-chapter="court">
       <picture class="sports-chapter__image">
         <source media="(max-width: 720px)" srcset="assets/img/sports-experience/basketball-mobile.webp" type="image/webp">
@@ -342,7 +324,7 @@
              alt="Students turn toward the play on the CIRS outdoor court" loading="lazy" decoding="async">
       </picture>
       <figcaption class="sports-chapter__caption">
-        <span>02 / Basketball</span>
+        <span>01 / Basketball</span>
         <h2>The whole court moves as one.</h2>
       </figcaption>
     </figure>
@@ -353,20 +335,31 @@
              alt="Swimmers prepare at the edge of the CIRS pool beside the marked lanes" loading="lazy" decoding="async">
       </picture>
       <figcaption class="sports-chapter__caption">
-        <span>03 / Swimming</span>
+        <span>02 / Swimming</span>
         <h2>Find your rhythm, lane by lane.</h2>
       </figcaption>
     </figure>
     <nav class="sports-chapters__nav" aria-label="Jump to a sports scene">
-      <a href="#sports-track-point" data-chapter-link="track"><span>01</span> Track</a>
-      <a href="#sports-court-point" data-chapter-link="court"><span>02</span> Court</a>
-      <a href="#sports-water-point" data-chapter-link="water"><span>03</span> Water</a>
+      <a href="#sports-court-point" data-chapter-link="court"><span>01</span> Court</a>
+      <a href="#sports-water-point" data-chapter-link="water"><span>02</span> Water</a>
     </nav>
   </div>
   <div class="sports-chapters__markers" aria-hidden="true">
-    <span id="sports-track-point"></span>
     <span id="sports-court-point"></span>
     <span id="sports-water-point"></span>
+  </div>
+</section>
+
+<section class="sports-yoga" id="balance" aria-labelledby="sports-yoga-title">
+  <picture class="sports-yoga__image">
+    <source media="(max-width: 720px)" srcset="assets/img/sports-experience/yoga-group-mobile.webp" type="image/webp">
+    <img src="assets/img/sports-experience/yoga-group-wide.webp" width="1920" height="1200"
+         alt="CIRS students practising a balance pose together on the field" loading="lazy" decoding="async">
+  </picture>
+  <div class="sports-yoga__shade" aria-hidden="true"></div>
+  <div class="sports-yoga__caption">
+    <p class="sports-eyebrow">A quieter kind of strength</p>
+    <h2 id="sports-yoga-title">Find your balance.</h2>
   </div>
 </section>
 
@@ -515,12 +508,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=96-sports-journey-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=96-sports-journey-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=96-sports-journey-1" defer></script>
-<script src="assets/js/cirs.js?b=96-sports-journey-1" defer></script>
-<script src="assets/js/pages.js?b=96-sports-journey-1" defer></script>
-<script src="assets/js/filmintro.js?b=96-sports-journey-1" defer></script>
-<script src="assets/js/sports-journey.js?b=96-sports-journey-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=96-sports-journey-2" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=96-sports-journey-2" defer></script>
+<script src="assets/vendor/lenis.min.js?b=96-sports-journey-2" defer></script>
+<script src="assets/js/cirs.js?b=96-sports-journey-2" defer></script>
+<script src="assets/js/pages.js?b=96-sports-journey-2" defer></script>
+<script src="assets/js/filmintro.js?b=96-sports-journey-2" defer></script>
+<script src="assets/js/sports-journey.js?b=96-sports-journey-2" defer></script>
 </body>
 </html>
