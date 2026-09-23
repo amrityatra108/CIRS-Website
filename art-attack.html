@@ -268,6 +268,14 @@
            poster="assets/img/art-attack-opening-poster.jpg"
            preload="auto" muted playsinline disablepictureinpicture
            aria-hidden="true" tabindex="-1">
+      <!-- H.264 first, which is the other way round from the rest of this
+           site. These files are not played but seeked, several times a
+           second, and H.264 is the one codec every browser that has it
+           decodes in hardware — so it is the path that scrubs without
+           stuttering wherever it exists. The VP9 is for the browsers built
+           without the proprietary decoder, which would otherwise have no
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
       <source src="assets/video/art-attack-opening.mp4" type="video/mp4">
       <source src="assets/video/art-attack-opening.webm" type="video/webm">
     </video>

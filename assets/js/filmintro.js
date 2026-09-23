@@ -1,8 +1,11 @@
 /* The cinematic opening shared by CIRS Captures, Our Sports and Art Attack.
 
-   Each page uses the same scroll mechanics with its own footage and title:
-   the reader scrubs a short film, it ends, it is held, then the title arrives.
-   The footage, words, and placement come from the page builder and CSS.
+   These pages open the same way, because they share page furniture with a
+   different film in it: the reader scrubs a short piece of footage with the
+   scroll, it ends, it is held, and one thin widely-tracked line arrives over
+   the frame it ended on. What differs between them is the file, the words,
+   and where the line sits — all of which come from the markup that
+   build-site.py generates, not from here.
 
    The film does not play. The scroll position chooses the frame:
 
@@ -29,6 +32,7 @@
   if (!section) return;
   var film = section.querySelector("[data-film-video]");
   var title = section.querySelector("[data-film-title]");
+  var scrollCue = section.querySelector("[data-film-scroll-cue]");
   if (!film || !title) return;
 
   /* The phase boundaries, as fractions of the section's travel, and the
@@ -88,20 +92,28 @@
   // Slow in and slow out. The line should be noticed; its arrival should not.
   function smooth(t) { return t * t * (3 - 2 * t); }
 
+  function setScrollCue(progress) {
+    if (!scrollCue) return;
+    var cue = 1 - smooth(Math.max(0, Math.min(1, progress / 0.08)));
+    scrollCue.style.setProperty("--film-scroll-cue-opacity", cue.toFixed(3));
+  }
+
   function paint(progress) {
     var p = progress < 0 ? 0 : progress > 1 ? 1 : progress;
     seek(p >= FILM_END ? last : (p / FILM_END) * duration);
     var r = (p - HOLD_END) / (TITLE_END - HOLD_END);
     setReveal(r <= 0 ? 0 : r >= 1 ? 1 : smooth(r));
+    setScrollCue(p);
   }
 
   /* The composition, without the scrubbing: the camera as the film leaves
-     it and the title already up. assets/css/filmintro.css takes the section
+     it and the line already up. assets/css/captures.css takes the section
      back to one screen when this is set, so nobody is asked to scroll four
      screens through something that is no longer moving. */
   function still() {
     section.setAttribute("data-film-still", "");
     setReveal(1);
+    setScrollCue(0);
     asked = -1;
     seek(last);
   }
@@ -145,34 +157,36 @@
     if (unavailable) return;
     if (!frames()) return;
     if (fallbackTimer) { window.clearTimeout(fallbackTimer); fallbackTimer = null; }
-    if (reduced.matches || !hasST) still();
-    else if (trigger) paint(trigger.progress);
-    else scrub();
     section.removeAttribute("data-film-pending");
+    if (reduced.matches || !hasST) { still(); return; }
+    if (trigger) paint(trigger.progress);
+    else scrub();
   }
 
   if (film.readyState >= 1) start();
   film.addEventListener("loadedmetadata", start);
-  // Without the file there is no opening to scrub. Leave the section at one
-  // screen with the line up, rather than four screens of nothing.
+  // Without usable media, show the composed still and title at one screen.
   function fallback() {
-    if (duration || unavailable) return;
+    if (unavailable) return;
     unavailable = true;
     teardown();
     section.setAttribute("data-film-still", "");
     setReveal(1);
+    if (scrollCue) scrollCue.style.setProperty("--film-scroll-cue-opacity", "0");
     section.removeAttribute("data-film-pending");
   }
-  film.addEventListener("error", fallback);
+  // A failed MP4 source may be followed by a working WebM source, so wait for
+  // the active stream or both source errors before using the still.
+  film.addEventListener("error", function () { if (duration) fallback(); });
   sources.forEach(function (source) {
     source.addEventListener("error", function () {
       failedSources += 1;
       if (failedSources === sources.length) fallback();
     });
   });
-  // A stalled request may never raise a media error. The composed still is
-  // ready behind the video, so leave the page usable after a short deadline.
-  fallbackTimer = window.setTimeout(fallback, 5000);
+  if (!duration && section.hasAttribute("data-film-pending")) {
+    fallbackTimer = window.setTimeout(fallback, 5000);
+  }
 
   /* iOS will not paint a frame of a video that has never been told to play,
      so a seek alone leaves the poster up. One muted play, stopped as soon as

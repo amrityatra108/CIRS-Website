@@ -20,17 +20,17 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=96-filmintro-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=96-filmintro-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=96-filmintro-1">
+<link rel="stylesheet" href="assets/css/fonts.css?b=96">
+<link rel="stylesheet" href="assets/css/cirs.css?b=96">
+<link rel="stylesheet" href="assets/css/pages.css?b=96">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=96-filmintro-1">
-<link rel="stylesheet" href="assets/css/filmintro.css?b=96-filmintro-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=96">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=96">
 <noscript><style>.film{height:100svh}</style></noscript>
 </head>
 
@@ -267,6 +267,14 @@
            poster="assets/img/captures-camera-poster.jpg"
            preload="auto" muted playsinline disablepictureinpicture
            aria-hidden="true" tabindex="-1">
+      <!-- H.264 first, which is the other way round from the rest of this
+           site. These files are not played but seeked, several times a
+           second, and H.264 is the one codec every browser that has it
+           decodes in hardware — so it is the path that scrubs without
+           stuttering wherever it exists. The VP9 is for the browsers built
+           without the proprietary decoder, which would otherwise have no
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
       <source src="assets/video/captures-camera.mp4" type="video/mp4">
       <source src="assets/video/captures-camera.webm" type="video/webm">
     </video>
@@ -385,11 +393,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=96-filmintro-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=96-filmintro-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=96-filmintro-1" defer></script>
-<script src="assets/js/cirs.js?b=96-filmintro-1" defer></script>
-<script src="assets/js/pages.js?b=96-filmintro-1" defer></script>
-<script src="assets/js/filmintro.js?b=96-filmintro-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=96" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=96" defer></script>
+<script src="assets/vendor/lenis.min.js?b=96" defer></script>
+<script src="assets/js/cirs.js?b=96" defer></script>
+<script src="assets/js/pages.js?b=96" defer></script>
+<script src="assets/js/filmintro.js?b=96" defer></script>
 </body>
 </html>
