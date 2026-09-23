@@ -1,13 +1,24 @@
 /* CIRS Captures — the opening, scoped to body.captures.
 
    A six-second film of a camera coming out of the dark, which the visitor
-   scrubs with the scroll rather than watching. Four phases, measured as
-   fractions of the section's travel and divided in assets/js/captures.js:
+   scrubs with the scroll rather than watching; then a photograph from the
+   school, which appears inside the camera's lens and opens out of it to
+   fill the window. Seven phases, in lengths of scroll:
 
-       0.00 - 0.70   the film runs, under the scroll, and nothing else exists
-       0.70 - 0.77   the last frame freezes and is simply held
-       0.77 - 0.90   CIRS CAPTURES arrives out of it
-       0.90 - 1.00   the finished composition is held, then let go
+       252vh   the film runs, under the scroll, and nothing else exists
+        25vh   the last frame freezes and is simply held
+        47vh   CIRS CAPTURES arrives out of it
+        36vh   the line is held long enough to read
+        30vh   the photograph appears inside the lens; the camera stays still
+        70vh   the photograph opens from the lens to the whole window, and the
+               camera and the line leave as part of the same movement
+        30vh   the photograph is held, then let go
+
+   490vh of travel, so a run of 590vh. The first four are exactly the lengths
+   the opening had before the photograph was added, so the film and the line
+   keep their timing. data-captures-phases in the markup is these lengths as
+   fractions of 490; change the two together. On narrow screens every
+   length is scaled by the same 320/360 the film already used there.
 
    The stage is a CSS sticky viewport rather than a GSAP pin. It costs
    nothing to hold, it survives a resize and a reload halfway down the page
@@ -21,7 +32,15 @@ body.captures{ background:#04040A; }
 body.captures main{ background:var(--paper); }
 
 .cap{
-  --cap-run:460vh;
+  --cap-run:590vh;
+  /* How the film is cropped (its object-position), and the point in the
+     photograph the opening treats as its subject (the photograph's
+     object-position). Both change at the narrow-window boundary below. The
+     script reads the computed values of both, so these are the only place
+     either is stated. */
+  --cap-crop:50% 80%;
+  --cap-focus:37% 40%;
+  --cap-shot-lqip:url(../img/captures-shot-lqip.jpg);
   position:relative;
   height:var(--cap-run);
   background:#000;
@@ -48,9 +67,14 @@ body.captures main{ background:var(--paper); }
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:50% 80%;
+  object-position:var(--cap-crop);
   display:block;
   background:#000;
+  /* A slight push toward the lens while the photograph opens out of it,
+     written by the script as --cap-push about the lens's own centre, so the
+     lens stays exactly where the photograph is growing from. */
+  transform-origin:var(--cap-lens-x, 50%) var(--cap-lens-y, 50%);
+  transform:scale(var(--cap-push, 1));
   /* The film is scenery, never a player: it is not clickable, and it carries
      no controls. The element has never been given a controls attribute, but
      Chromium puts the whole panel up by itself — a play button, a scrubber,
@@ -92,7 +116,11 @@ body.captures main{ background:var(--paper); }
   line-height:1;
   text-transform:uppercase;
   color:#FBFAF7;
-  opacity:var(--cap-reveal);
+  z-index:3;
+  /* --cap-exit is the line leaving while the photograph opens. It is a plain
+     fade on top of the reveal rather than the reveal run backwards, so the
+     letters do not close up again on their way out. */
+  opacity:calc(var(--cap-reveal) * (1 - var(--cap-exit, 0)));
   transform:translateY(calc((1 - var(--cap-reveal)) * 8px));
   filter:blur(calc((1 - var(--cap-reveal)) * 5px));
   will-change:opacity, transform, filter;
@@ -109,17 +137,84 @@ body.captures main{ background:var(--paper); }
   margin-right:calc(var(--cap-track) * -1em);
 }
 
+/* The photograph. It fills the stage like the film does, and the script
+   moves it with three things only: a transform that shrinks it into the lens
+   and lets it grow back out, a clip that is the lens's own ellipse, and its
+   opacity. The clip is drawn in the photograph's own coordinates, before the
+   transform, so it can never be larger than the picture it clips: while the
+   photograph is still growing, the opening in it is always inside its edges,
+   and a straight edge of the picture is never seen against the camera.
+
+   Until the file arrives, a blurred copy a few hundred bytes long stands in
+   for it, so a reader who scrolls straight to the end on a slow connection
+   sees the picture coming into focus rather than a blank or black window. */
+.cap__shot{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  opacity:0;
+  transform-origin:0 0;
+  pointer-events:none;
+  background:#170C0A var(--cap-shot-lqip) var(--cap-focus) / cover no-repeat;
+  will-change:transform, opacity;
+}
+.cap__shot picture,
+.cap__photo{
+  display:block;
+  width:100%;
+  height:100%;
+}
+.cap__photo{
+  object-fit:cover;
+  object-position:var(--cap-focus);
+}
+/* The foot of the photograph goes down to the seam's first tone, so that
+   when the opening lets go and the page takes over, there is no edge
+   between the picture and the ramp to paper below it. */
+.cap__shot::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to bottom, rgba(24,7,5,0) 70%, #180705 100%);
+}
+.cap__shot::after{ z-index:1; }
+
+/* Seen inside the lens, the photograph is darker at its rim, as anything is
+   through a barrel of glass. This lifts as it opens out. */
+.cap__shot::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--cap-glass, 0);
+  background:radial-gradient(ellipse var(--cap-glass-x, 50%) var(--cap-glass-y, 50%)
+             at var(--cap-glass-cx, 50%) var(--cap-glass-cy, 50%),
+             rgba(8,4,3,0) 38%, rgba(8,4,3,.72) 100%);
+}
+
 /* The way out. No second effect — the foot of the frame simply becomes paper
    over a band the depth of a paragraph, and the page continues.
 
-   It starts at #2A2726 rather than at black because that is what the foot of
-   the last frame actually measures: floor and smoke, not shadow. Against
-   pure black it read as a cut, a hairline across the window where the film
-   stopped. Beginning the ramp on the frame's own tone takes the line away. */
+   The opening now ends on the photograph, so the ramp starts on the tone
+   the foot of the photograph measures, for the same reason it once started
+   at the foot of the camera's frame: against any other colour it reads as a
+   cut, a hairline across the window where the picture stopped. The still
+   composition below ends on the camera again, so it keeps the camera's. */
 .cap__seam{
+  /* The photograph's foot is not one colour: bright dress on one side,
+     dark stage on the other, and more dress in the narrow cut than the
+     wide one. No single tone matches all of that, so the photograph's own
+     foot is taken down to this one (.cap__shot::before) and the ramp
+     continues from it. The rise is a warm grey rather than a red, so the
+     way to paper does not pass through pink. */
+  --cap-seam-top:#180705;
+  --cap-seam-fold:#140604;
+  --cap-seam-rise:#6A5B57;
   height:clamp(110px, 15vh, 200px);
   background:linear-gradient(to bottom,
-              #2A2726 0%, #211C1B 18%, #6B6560 58%, var(--paper) 100%);
+              var(--cap-seam-top) 0%, var(--cap-seam-fold) 18%,
+              var(--cap-seam-rise) 58%, var(--paper) 100%);
 }
 
 /* The film is the introduction, so nothing of the site's own furniture is
@@ -133,14 +228,31 @@ body.captures.cap-on #totop{
   pointer-events:none;
 }
 
-/* Reduced motion, and the case where the motion layer never arrives: show
-   the finished composition and take the scrubbing distance away, rather than
-   asking for four screens of scrolling that no longer do anything. */
+/* Reduced motion, a film that fails to load, and the case where the motion
+   layer never arrives: one screen, the camera as the film leaves it and the
+   line up — rather than asking for six screens of scrolling that no longer
+   move anything. It is a still image, not the film parked on its last
+   frame, so it needs nothing from the video at all: not the file, not a
+   decoder, not a seek. The photograph is not shown; its moment is the
+   movement out of the lens, and without the movement there is nothing for
+   it to arrive from. Without JavaScript the same rules come from a
+   <noscript> block that tools/build-site.py writes into the head. */
 .cap[data-captures-still]{
   --cap-run:100svh;
 }
+.cap[data-captures-still] .cap__stage{
+  background:#000 url(../img/captures-camera-final.jpg) var(--cap-crop) / cover no-repeat;
+}
+.cap[data-captures-still] .cap__film{ visibility:hidden; }
+.cap[data-captures-still] .cap__shot{ display:none; }
 .cap[data-captures-still] .cap__title{
   --cap-reveal:1;
+  --cap-exit:0;
+}
+.cap[data-captures-still] + .cap__seam{
+  --cap-seam-top:#2A2726;
+  --cap-seam-fold:#211C1B;
+  --cap-seam-rise:#6B6560;
 }
 
 @media (min-width:1600px){
@@ -154,15 +266,23 @@ body.captures.cap-on #totop{
    slice from the left instead keeps the whole of the lens — the front
    element, the barrel, the marked rings — which is the part of this film
    worth seeing on a small screen, and it stays full-bleed rather than
-   becoming a letterboxed strip. */
+   becoming a letterboxed strip.
+
+   The photograph changes at the same boundary, to a portrait cut of the same
+   picture: the landscape one, cropped to a phone, is a strip of dark stage
+   with the dancer half out of it. */
 @media (max-aspect-ratio:6/5){
-  .cap__film{ object-position:32% 80%; }
+  .cap{
+    --cap-crop:32% 80%;
+    --cap-focus:52% 40%;
+    --cap-shot-lqip:url(../img/captures-shot-portrait-lqip.jpg);
+  }
 }
 
 /* Narrow screens keep the intent — very thin, widely tracked, one line — by
    giving up size long before they give up the spacing. */
 @media (max-width:720px){
-  .cap{ --cap-run:420vh; }
+  .cap{ --cap-run:535.56vh; }
   .cap__title{
     bottom:clamp(48px, 9vh, 96px);
     font-size:clamp(18px, 5.6vw, 30px);
@@ -180,11 +300,24 @@ body.captures.cap-on #totop{
   }
 }
 
+/* Stated here as well as by the script so the still composition is what is
+   on screen from the first paint, not after the script has run. */
 @media (prefers-reduced-motion:reduce){
   .cap{ --cap-run:100svh; }
+  .cap__stage{
+    background:#000 url(../img/captures-camera-final.jpg) var(--cap-crop) / cover no-repeat;
+  }
+  .cap__film{ visibility:hidden; }
+  .cap__shot{ display:none; }
   .cap__title{
     --cap-reveal:1;
+    --cap-exit:0;
     transition:none;
     will-change:auto;
+  }
+  .cap__seam{
+    --cap-seam-top:#2A2726;
+    --cap-seam-fold:#211C1B;
+    --cap-seam-rise:#6B6560;
   }
 }
