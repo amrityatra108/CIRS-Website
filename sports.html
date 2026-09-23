@@ -20,14 +20,22 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=94-sports-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=94-sports-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=94-sports-1">
-<link rel="stylesheet" href="assets/css/sports.css?b=94-sports-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=94-sports-1">
+<link rel="stylesheet" href="assets/css/fonts.css?b=97-sports-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=97-sports-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=97-sports-1">
+<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
+     removes once it has played. With scripting off nothing removes it, and
+     it covers the page on every page of this site. One rule, applied only
+     when there is no scripting, is the whole fix. Crossroads already does
+     this for its own curtain further down. -->
+<noscript><style>.curtain{display:none}</style></noscript>
+<link rel="stylesheet" href="assets/css/sports.css?b=97-sports-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=97-sports-1">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=97-sports-1">
+<noscript><style>.film{height:100svh}body.sports .film__title{--film-title-top:88%}</style></noscript>
 </head>
 
-<body class="sports">
+<body class="sports film sports">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -253,6 +261,29 @@
   </div>
 </div>
 <main id="main">
+<section class="film" id="sports-opening" data-film>
+  <div class="film__stage">
+    <video class="film__video" data-film-video
+           width="1280" height="720"
+           poster="assets/img/sports-field-poster.jpg"
+           preload="auto" muted playsinline disablepictureinpicture
+           aria-hidden="true" tabindex="-1">
+      <!-- H.264 first, which is the other way round from the rest of this
+           site. These files are not played but seeked, several times a
+           second, and H.264 is the one codec every browser that has it
+           decodes in hardware — so it is the path that scrubs without
+           stuttering wherever it exists. The VP9 is for the browsers built
+           without the proprietary decoder, which would otherwise have no
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
+      <source src="assets/video/sports-field.mp4" type="video/mp4">
+      <source src="assets/video/sports-field.webm" type="video/webm">
+    </video>
+    <p class="film__scroll-cue" data-film-scroll-cue><span aria-hidden="true">↓</span><span>Scroll to discover</span></p>
+    <h1 class="film__title" data-film-title><span class="film__line">CIRS Sports</span></h1>
+  </div>
+</section>
+<div class="film__seam" aria-hidden="true"></div>
 <!-- ============================================================
      CIRS SPORTS & LAURELS — BUILT IN THE ARENA
      An editorial sports journey through physical discipline,
@@ -269,7 +300,7 @@
      Full-viewport hero, oversized typography, photographic
      cursor reveal, and scroll prompt.
      ============================================================ -->
-<section class="arena-hero" id="top" aria-label="Built in the Arena — CIRS Sports Opening">
+<section class="arena-hero" id="arena" aria-label="Built in the Arena — CIRS Sports Opening">
   <div class="arena-hero__stage" id="heroStage">
     <!-- Primary base sports image: Runners rounding the CIRS track -->
     <div class="arena-hero__layer arena-hero__layer--base">
@@ -293,12 +324,12 @@
       <p class="arena-hero__tag">SPORT &middot; DISCIPLINE &middot; TEAM</p>
     </div>
 
-    <h1 class="arena-hero__title">
+    <h2 class="arena-hero__title">
       <span class="arena-hero__word" data-word="BUILT">BUILT</span>
       <span class="arena-hero__word" data-word="IN">IN</span>
       <span class="arena-hero__word" data-word="THE">THE</span>
       <span class="arena-hero__word" data-word="ARENA">ARENA</span>
-    </h1>
+    </h2>
 
     <div class="arena-hero__bottom">
       <div class="arena-hero__actions">
@@ -1134,11 +1165,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=94-sports-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=94-sports-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=94-sports-1" defer></script>
-<script src="assets/js/cirs.js?b=94-sports-1" defer></script>
-<script src="assets/js/pages.js?b=94-sports-1" defer></script>
-<script src="assets/js/sports-journey.js?b=94-sports-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=97-sports-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=97-sports-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=97-sports-1" defer></script>
+<script src="assets/js/cirs.js?b=97-sports-1" defer></script>
+<script src="assets/js/pages.js?b=97-sports-1" defer></script>
+<script src="assets/js/filmintro.js?b=97-sports-1" defer></script>
+<script src="assets/js/sports-journey.js?b=97-sports-1" defer></script>
 </body>
 </html>
