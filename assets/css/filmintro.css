@@ -1,0 +1,287 @@
+/* Scroll-controlled film opening. The footage and composition are page-specific.
+
+   A short film the visitor scrubs with the scroll rather than watching, and
+   a title that arrives only once it has ended. Four
+   phases, measured as fractions of the section's travel and divided in
+   assets/js/filmintro.js:
+
+       0.00 - 0.70   the film runs, under the scroll, and nothing else exists
+       0.70 - 0.78   the last frame freezes and is simply held
+       0.78 - 0.91   the title arrives out of it
+       0.91 - 1.00   the finished composition is held, then let go
+
+   The stage is a CSS sticky viewport rather than a GSAP pin. It costs
+   nothing to hold, it survives a resize and a reload halfway down the page
+   without a refresh, and it leaves ScrollTrigger doing the one thing it is
+   needed for here: reporting progress.
+
+   Everything above the page tuning blocks at the foot of this file is shared.
+   What a page sets for itself is only what its own footage decides: how the
+   frame is cropped, where the line can sit legibly, and the tone the seam
+   below it starts from. */
+
+/* The near-black is what the page overscrolls into at the top, so the film
+   never opens against paper. Everything below the seam is the ordinary
+   page, on the ordinary ground. */
+body.film{ background:var(--film-ground); }
+body.film main{ background:var(--paper); }
+
+.film[data-film]{
+  --film-run:460vh;
+  position:relative;
+  height:var(--film-run);
+  background:#000;
+}
+
+.film__stage{
+  position:sticky;
+  top:0;
+  height:100vh;
+  height:100svh;
+  overflow:hidden;
+  background:#000;
+}
+
+/* --film-crop is object-position, and it is a per-page decision: a viewport
+   wider than the film's 16:9 crops the top and bottom away, and where that
+   leaves the subject depends on where the subject is. See the tuning blocks
+   at the foot of this file. */
+.film__video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:var(--film-crop, 50% 50%);
+  display:block;
+  background:#000;
+  /* The film is scenery, never a player: it is not clickable, and it carries
+     no controls. The element has never been given a controls attribute, but
+     Chromium puts the whole panel up by itself â€” a play button, a scrubber,
+     a timecode and a fullscreen button across the foot of the window â€” on a
+     video that no script is driving, which is exactly the state this page is
+     in when scripting is off. Suppressing the shadow tree is what keeps that
+     out of the opening. */
+  pointer-events:none;
+}
+.film__video::-webkit-media-controls,
+.film__video::-webkit-media-controls-enclosure,
+.film__video::-webkit-media-controls-panel,
+.film__video::-webkit-media-controls-start-playback-button{
+  display:none !important;
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+/* --film-reveal is the whole animation: one number, 0 to 1, written by the
+   script once a frame. It defaults to 1 so that the line is legible before
+   the script has run and if it never runs at all â€” the curtain is over the
+   page while it starts, so nothing is seen being switched off. */
+.film__title{
+  --film-reveal:1;
+  --film-track-from:.28;
+  --film-track-to:.48;
+  --film-track:calc(var(--film-track-from) +
+                   (var(--film-track-to) - var(--film-track-from)) * var(--film-reveal));
+  position:absolute;
+  left:0;
+  right:0;
+  top:var(--film-title-top, auto);
+  bottom:var(--film-title-bottom, auto);
+  margin:0;
+  padding:0 16px;
+  text-align:center;
+  font-family:"Jost", var(--font-primary), sans-serif;
+  font-weight:100;
+  font-size:var(--film-size, clamp(26px, 3.8vw, 62px));
+  line-height:1;
+  text-transform:uppercase;
+  color:#FBFAF7;
+  opacity:var(--film-reveal);
+  transform:translateY(calc(var(--film-title-lift, 0px) + (1 - var(--film-reveal)) * 8px));
+  filter:blur(calc((1 - var(--film-reveal)) * 5px));
+  will-change:opacity, transform, filter;
+}
+
+/* Letter-spacing lays a gap after the last letter too, so a centred line of
+   it sits half a gap to the left of where it looks centred. The negative
+   margin takes that trailing gap back off the inline box, which is what
+   actually centres the lettering rather than the box around it. */
+.film__line{
+  display:inline-block;
+  white-space:nowrap;
+  letter-spacing:calc(var(--film-track) * 1em);
+  margin-right:calc(var(--film-track) * -1em);
+}
+
+/* The way out. No second effect â€” the foot of the frame simply becomes paper
+   over a band the depth of a paragraph, and the page continues.
+
+   The tone it starts from is what the foot of that page's last frame
+   actually measures, which is why it is a token and not black. On Captures,
+   against pure black, the difference read as a cut â€” a hairline across the
+   window where the film stopped. Beginning the ramp on the frame's own tone
+   takes the line away, and the same is true of a field at sunrise, which is
+   nowhere near black. */
+.film__seam{
+  height:clamp(110px, 15vh, 200px);
+  background:linear-gradient(to bottom,
+              var(--film-seam-top) 0%, var(--film-seam-fold) 18%,
+              var(--film-seam-rise) 58%, var(--paper) 100%);
+}
+
+/* The film is the introduction, so nothing of the site's own furniture is
+   laid over it: not the reading-progress rule, not the back-to-top button.
+   Both return the moment the opening is behind the reader. */
+body.film #progress,
+body.film #totop{ transition:opacity .4s var(--e); }
+body.film.film-on #progress,
+body.film.film-on #totop{
+  opacity:0;
+  pointer-events:none;
+}
+
+/* Reduced motion, and the case where the motion layer never arrives: show
+   the finished composition and take the scrubbing distance away, rather than
+   asking for four screens of scrolling that no longer do anything. */
+.film[data-film-still]{
+  --film-run:100svh;
+}
+.film[data-film-still] .film__title{
+  --film-reveal:1;
+}
+
+/* Keep the heading out of sight until the scroll position is painted. */
+.film[data-film-pending] .film__title{ opacity:0; }
+
+@media (min-width:1600px){
+  .film__title{ --film-track-to:var(--film-track-wide, .54); }
+}
+
+/* A window taller than it is wide shows about a 43%-wide slice of a 16:9
+   frame, so which slice that is has to be chosen per page too. */
+@media (max-aspect-ratio:6/5){
+  .film__video{ object-position:var(--film-crop-narrow, var(--film-crop, 50% 50%)); }
+}
+
+/* Narrow screens keep the intent â€” very thin, widely tracked, one line â€” by
+   giving up size long before they give up the spacing. */
+@media (max-width:720px){
+  .film[data-film]{ --film-run:420vh; }
+  .film__title{
+    font-size:var(--film-size-narrow, clamp(18px, 5.6vw, 30px));
+    --film-track-from:.16;
+    --film-track-to:.28;
+  }
+}
+
+/* Only where one line genuinely cannot be had: the spacing narrows, and the
+   two words still do not break apart. */
+@media (max-width:360px){
+  .film__title{
+    font-size:var(--film-size-tiny, clamp(16px, 5.2vw, 22px));
+    --film-track-to:.22;
+  }
+}
+
+/* ---- CIRS Theatre -------------------------------------------------------
+   The supplied film opens red velvet curtains onto an empty amber stage.
+   The title occupies the unlit air, above the reflective floor. On portrait
+   screens the whole proscenium is shown within the viewport, and the title
+   settles below it where neither the curtains nor the stage are covered. */
+body.theatre{
+  --film-ground:#080304;
+  --film-crop:50% 50%;
+  --film-crop-narrow:50% 50%;
+  --film-seam-top:#050203;
+  --film-seam-fold:#1D0A09;
+  --film-seam-rise:#79604E;
+}
+body.theatre .film__stage{
+  background:#080304 url("../img/theatre-opening-poster.jpg") center / cover no-repeat;
+}
+body.theatre .film__still{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:var(--film-crop);
+  visibility:hidden;
+}
+body.theatre .film__stage::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:auto 0 0;
+  height:clamp(70px, 14svh, 150px);
+  background:linear-gradient(to bottom, transparent, #050203);
+  pointer-events:none;
+}
+body.theatre .film__title{
+  --film-track-from:.11;
+  --film-track-to:.26;
+  position:absolute;
+  z-index:2;
+  top:49%;
+  bottom:auto;
+  width:100%;
+  font-family:"Jost", sans-serif;
+  font-size:clamp(52px, 6vw, 92px);
+  font-weight:100;
+  line-height:1;
+  text-transform:uppercase;
+  color:#F3CD83;
+  text-shadow:0 1px 4px rgba(0, 0, 0, .25);
+  transform:translateY(calc(-50% + (1 - var(--film-reveal)) * 12px));
+  filter:none;
+  will-change:opacity, transform;
+}
+body.theatre .film__title::after{
+  content:"";
+  display:block;
+  width:clamp(88px, 12vw, 170px);
+  height:1px;
+  margin:clamp(20px, 3vh, 34px) auto 0;
+  background:#C89A53;
+}
+body.theatre .film[data-film-still] .film__video{ visibility:hidden; }
+body.theatre .film[data-film-still] .film__still{ visibility:visible; }
+
+@media (max-aspect-ratio:6/5){
+  body.theatre .film__stage{
+    background-color:#080304;
+    background-size:contain;
+    background-position:50% 42%;
+  }
+  body.theatre .film__video,
+  body.theatre .film__still{
+    object-fit:contain;
+    object-position:50% 42%;
+    background:transparent;
+  }
+  body.theatre .film__title{
+    --film-track-from:.09;
+    --film-track-to:.20;
+    top:78%;
+    font-size:clamp(34px, 5.2vw, 54px);
+  }
+}
+@media (max-width:720px){
+  body.theatre .film__title{
+    --film-track-from:.08;
+    --film-track-to:.16;
+    top:64%;
+    font-size:clamp(30px, 8.5vw, 42px);
+  }
+}
+@media (max-width:360px){
+  body.theatre .film__title{ font-size:clamp(27px, 8.2vw, 32px); }
+}
+@media (prefers-reduced-motion:reduce){
+  .film[data-film]{ --film-run:100svh; }
+  body.theatre .film__video{ visibility:hidden; }
+  body.theatre .film__still{ visibility:visible; }
+  .film[data-film-pending] .film__title{ opacity:1; }
+  .film__title{ --film-reveal:1; will-change:auto; }
+}

@@ -429,12 +429,20 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "theatre": {
+        "barehead": True,
+        "cache_suffix": "-theatre-film-1",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
                        "Residential School.",
-        "banner": ("CIRS Theatre", "Rehearsal, <em>and the Night Itself.</em>",
-                   "Productions, the work behind them, and the stage they are made for."),
+        "banner": None,
+        "opening": {
+            "video": "theatre-opening",
+            "poster": "theatre-opening-poster.jpg",
+            "still": "theatre-opening-final.jpg",
+            "title": "CIRS Theatre",
+            "phases": (0.70, 0.78, 0.91),
+        },
         "soon": ([("Productions", "What was staged, and who was in it"),
                   ("Rehearsal", "The weeks nobody sees"),
                   ("The stage", "The auditorium, and what it can carry")],
@@ -642,6 +650,28 @@ def soon_html(page):
         f'{ask}.]</em></p>{onward}\n'
         '  </div>\n'
         '</section>')
+
+
+def film_html(slug, film):
+    """A decorative scroll-scrubbed film with one readable page heading."""
+    phases = " ".join(f"{value:g}" for value in film["phases"])
+    return f'''<section class="film" id="{slug}-opening" data-film
+         data-film-phases="{phases}" data-film-pending>
+  <div class="film__stage">
+    <img class="film__still" src="assets/img/{film["still"]}"
+         alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">
+    <video class="film__video" data-film-video
+           width="1280" height="720"
+           poster="assets/img/{film["poster"]}"
+           preload="auto" muted playsinline disablepictureinpicture
+           aria-hidden="true" tabindex="-1">
+      <source src="assets/video/{film["video"]}.mp4" type="video/mp4">
+      <source src="assets/video/{film["video"]}.webm" type="video/webm">
+    </video>
+    <h1 class="film__title" data-film-title><span class="film__line">{film["title"]}</span></h1>
+  </div>
+</section>
+<div class="film__seam" aria-hidden="true"></div>'''
 
 def esc(text, attr=False):
     """The magazine's own punctuation, made safe to put in a page.
@@ -1175,6 +1205,15 @@ def build(slug, page):
     if slug == "captures":
         head = head.replace("</head>",
             '<noscript><style>.cap{height:100svh}</style></noscript>\n</head>')
+    film = page.get("opening") if isinstance(page.get("opening"), dict) else None
+    if film:
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
+            '<noscript><style>.film[data-film]{height:100svh}'
+            '.film__video{display:none}'
+            f'body.{slug} .film__still{{visibility:visible}}'
+            '.film[data-film-pending] .film__title{opacity:1}'
+            '</style></noscript>\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
@@ -1188,6 +1227,8 @@ def build(slug, page):
     # page keeps the bar, which is what holds them together over paper.
     bare = bool(page.get("barehead") or page.get("hero"))
     classes = [c for c in ["wall" if wall else page.get("sheet"),
+                           "film" if film else None,
+                           slug if film else None,
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
     chrome = read("tools/partials/chrome.html")
@@ -1214,7 +1255,8 @@ def build(slug, page):
     # shared hero or banner. It is a partial rather than a page body because
     # what follows it here is still built by soon_html.
     if page.get("opening"):
-        parts.append(read(f"tools/partials/{page['opening']}.html").rstrip("\n"))
+        parts.append(film_html(slug, film) if film else
+                     read(f"tools/partials/{page['opening']}.html").rstrip("\n"))
     if page.get("hero"):
         parts.append(hero_html(page))
     elif page.get("banner"):
@@ -1288,6 +1330,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
     if slug == "captures":
         parts.append(f'<script src="assets/js/captures.js?{CACHE_BUST}" defer></script>')
+    if film:
+        parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
