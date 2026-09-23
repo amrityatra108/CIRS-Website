@@ -1,0 +1,381 @@
+/* ============================================================
+   The Connect column
+   ------------------------------------------------------------
+   Five pages sit under Connect in the menu. Admissions and Alumni
+   each carry a composition of their own and a stylesheet to hold
+   it — a honeycomb, a journey — and neither needs anything here.
+   The other three did.
+
+   School Information, News below its hero, and the Parent Portal
+   were built out of the shared components and nothing else: a
+   .sec-head, a .tbl in a bordered white box, a .factrail running
+   the full width of the page. School Information in particular is
+   the page a visitor is most likely to arrive at from outside the
+   site — it is what CBSE requires every school to publish — and
+   it was eight thousand pixels of tables with no photograph, no
+   composition and no way to act on the contact details printed
+   inside them. The information was complete and correct. It
+   simply did not look like the rest of this school's site.
+
+   This sheet is scoped to body.connect, which build-site.py puts
+   on those three pages and no others. Nothing here restyles a
+   component for the rest of the site: .tbl, .factrail and .prog
+   are shared, and every rule that touches them is keyed to
+   body.connect so the pages that already use them correctly are
+   left exactly as they are. Within these pages the same rules are
+   keyed off .on-purple, because News closes on a dark band and
+   ink-on-paper colours do not belong on it.
+
+   What it does, in order:
+
+     1. gives each page a ground with depth instead of flat paper
+     2. turns the section heads into a two-column composition
+     3. gives the fact rails columns, so a term and its value are
+        near each other rather than a screen apart
+     4. takes the white box off the tables and sets them as data
+     5. makes every telephone number and address on the page a
+        thing you can act on
+     6. puts the school's own photography on a page that had none
+     7. gives the Parent Portal's doors and contact rows a
+        composition rather than a column down the left
+
+   Type, palette and spacing are the site's own tokens throughout.
+   ============================================================ */
+
+body.connect{
+  /* Drawn from the site palette; named locally so the rules below
+     read as one system rather than as scattered var() calls. */
+  --c-rule:      var(--rule);
+  --c-rule-soft: var(--rule-soft);
+  --c-key:       var(--purple);
+  /* Gold carried dark enough to be read as ink. The site's own #FFC308 is
+     1.51:1 on paper — pale yellow on white, unreadable as lettering — and
+     assets/css/palette.css has already worked out what it becomes on a pale
+     ground, at the same hue, so this is that value rather than a new one:
+     5.57:1 on --paper and 5.01:1 on --paper-2, which is the darker of the
+     two grounds these sections alternate between. */
+  --c-accent:    #756300;
+}
+
+/* ------------------------------------------------------------
+   1. Ground
+   ------------------------------------------------------------
+   The page alternated .section and .section.on-paper-2, which is
+   the site's own rhythm and stays. What it lacked was any depth
+   within a section: eleven hundred pixels of one flat tone. Each
+   band now carries a single very soft light, warm on the paper
+   sections and cooler on the paper-2 ones, so the eye has
+   somewhere to rest between two tables.
+   ------------------------------------------------------------ */
+body.connect main{ background:var(--paper); }
+body.connect .section:not(.on-purple){
+  position:relative;
+  background-image:
+    radial-gradient(74% 46% at 86% 0%,
+      rgba(117,99,0,.055) 0%, rgba(117,99,0,.018) 42%, rgba(117,99,0,0) 72%);
+}
+body.connect .section.on-paper-2{
+  background-image:
+    radial-gradient(70% 44% at 12% 0%,
+      rgba(57,42,72,.055) 0%, rgba(57,42,72,.018) 44%, rgba(57,42,72,0) 74%);
+}
+/* News closes on a dark band. It takes the same light, pitched for a ground
+   it has to be seen against rather than felt on. */
+body.connect .section.on-purple{
+  position:relative;
+  background-image:
+    radial-gradient(76% 52% at 84% 0%,
+      rgba(255,195,8,.11) 0%, rgba(255,195,8,.035) 44%, rgba(255,195,8,0) 74%);
+}
+/* A hairline between bands. Two adjacent sections of nearly the same
+   tone met with nothing to mark the join — which a dark band does not
+   need, and would be a pale scar across. */
+body.connect .section + .section:not(.on-purple){ border-top:1px solid var(--c-rule-soft); }
+body.connect .section.on-purple + .section{ border-top:0; }
+
+/* ------------------------------------------------------------
+   2. Section heads
+   ------------------------------------------------------------
+   Head on the left, standfirst on the right, the way every other
+   composed page on this site opens a section. It was a single
+   left column running to 60ch under a display heading, which put
+   the heading and its own explanation a long way apart and left
+   the right half of the band empty.
+   ------------------------------------------------------------ */
+@media (min-width:900px){
+  body.connect .sec-head{
+    display:grid;
+    grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+    column-gap:clamp(40px,5vw,88px);
+    align-items:end;
+    max-width:none;
+  }
+  body.connect .sec-head .marker,
+  body.connect .sec-head h2{ grid-column:1; }
+  body.connect .sec-head .lead{
+    grid-column:2; grid-row:1 / span 2;
+    align-self:end; margin:0; max-width:46ch;
+  }
+  /* A head with no standfirst keeps the single column it always had,
+     rather than leaving an empty track beside it. */
+  body.connect .sec-head:not(:has(.lead)){ display:block; max-width:60ch; }
+}
+body.connect .sec-head h2{ text-wrap:balance; }
+
+/* ------------------------------------------------------------
+   3. The fact rails
+   ------------------------------------------------------------
+   .factrail is a term on the left and its value on the right,
+   which is right when the rail is a column. On this page it ran
+   the full twelve hundred pixels, so "Cricket" and "A
+   state-of-the-art cricket facility" sat nine hundred pixels
+   apart with a rule between them and nothing else — the reader
+   had to track across an empty line to pair them up.
+
+   It is a grid of columns now. The same rows, the same order,
+   three or four to a screen instead of one, and a term is a
+   thumb's width from its value at every size.
+   ------------------------------------------------------------ */
+body.connect .section:not(.on-purple) .factrail{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));
+  column-gap:clamp(24px,3vw,56px);
+  border-top:2px solid var(--c-key);
+}
+body.connect .section:not(.on-purple) .factrail > div{
+  gap:clamp(12px,1.6vw,26px);
+  padding:15px 0;
+}
+body.connect .section:not(.on-purple) .factrail dt{
+  font-size:.9rem; letter-spacing:.09em; color:var(--ink-mute);
+}
+body.connect .section:not(.on-purple) .factrail dd{
+  color:var(--ink); font-weight:500; font-size:.97rem;
+  text-align:right;
+}
+/* Inside .prog the rail is already in a half-width column — the committee
+   list and the Resident Director's address — so it keeps its single file.
+   Splitting a 580px column again would set "Director — Academics &
+   Administration" over three lines to save nothing. */
+body.connect .section:not(.on-purple) .prog .factrail{ grid-template-columns:1fr; }
+body.connect .ci-rail{ margin-top:var(--space-4); }
+
+/* ------------------------------------------------------------
+   4. The tables
+   ------------------------------------------------------------
+   These are the compliance particulars, and a table is the honest
+   form for them, so they stay tables. What comes off is the white
+   card around them: a bordered box on a tinted ground reads as a
+   widget pasted onto the page, and there are four of them.
+
+   Instead the table sits on the page, the head carries the gold
+   rule the rest of the site uses for a section rule, and the rows
+   are given the line rhythm the body copy has. The value column
+   is capped at a measure so a long particular sets as a paragraph
+   rather than as one line across the full width.
+   ------------------------------------------------------------ */
+body.connect .section:not(.on-purple) .tablewrap{
+  border:0; background:none;
+  margin-top:clamp(26px,3vw,44px);
+}
+/* max-width on a table cell is ignored under the automatic table layout, so
+   the measure has to be held by the table itself. Capped here, the details
+   column sets to about sixty characters — the address and the NOC line read
+   as paragraphs instead of as one line across twelve hundred pixels. */
+body.connect .tbl--particulars{ max-width:1020px; }
+/* The caption is there for anyone reading the table out of its page, and it
+   was setting as a stray grey sentence above it. It is a label now. */
+body.connect .section:not(.on-purple) .tbl caption{
+  padding:0 0 var(--space-3);
+  font-style:normal;
+  font-size:.72rem; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--ink-mute);
+}
+body.connect .section:not(.on-purple) .tbl th,
+body.connect .section:not(.on-purple) .tbl td{
+  padding:18px clamp(16px,2vw,32px) 18px 0;
+  border-bottom:1px solid var(--c-rule-soft);
+  font-size:.97rem; line-height:1.6;
+}
+body.connect .section:not(.on-purple) .tbl thead th{
+  padding-bottom:12px;
+  border-bottom:1px solid var(--c-accent);
+  color:var(--c-accent);
+  font-size:.78rem; letter-spacing:.13em; text-transform:uppercase;
+}
+body.connect .section:not(.on-purple) .tbl--particulars tbody th{
+  width:clamp(220px,26vw,340px);
+}
+body.connect .section:not(.on-purple) .tbl tbody th{
+  color:var(--ink); font-weight:600;
+  /* The particulars are sentences, not labels — "NOC from State/UT or
+     recommendation of Embassy of India" cannot be nowrap without
+     pushing the table into its scroller on every screen. */
+  white-space:normal;
+}
+body.connect .section:not(.on-purple) .tbl td{ color:var(--ink-soft); max-width:62ch; }
+body.connect .section:not(.on-purple) .tbl tbody tr:hover th,
+body.connect .section:not(.on-purple) .tbl tbody tr:hover td{ background:rgba(117,99,0,.035); }
+
+/* ------------------------------------------------------------
+   5. Contact details
+   ------------------------------------------------------------
+   Every telephone number, address and mailbox on this page was
+   already a link. None of them looked like one: they were set in
+   the body colour inside a table cell, so the page held the
+   school's own contact details and gave no sign that tapping one
+   would do anything.
+
+   They are marked now — in the paper gold, underlined clear of
+   the baseline, and lifting on hover — and grouped so a row of
+   three numbers reads as three numbers rather than as a sentence
+   with middots in it.
+   ------------------------------------------------------------ */
+body.connect .tbl a[href^="tel:"],
+body.connect .tbl a[href^="mailto:"],
+body.connect .ucpage .tbl a{
+  color:var(--c-accent);
+  font-weight:500;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  text-decoration-color:rgba(117,99,0,.4);
+  transition:color .2s var(--e), text-decoration-color .2s var(--e);
+  overflow-wrap:anywhere;
+}
+body.connect .tbl a[href^="tel:"]:hover,
+body.connect .tbl a[href^="mailto:"]:hover{
+  color:var(--purple);
+  text-decoration-color:var(--purple);
+}
+/* The general link treatment inside a table — to the documents portal,
+   mostly — stays distinct from a contact action. */
+body.connect .tbl td > a:not([href^="tel:"]):not([href^="mailto:"]){
+  color:var(--purple);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:rgba(57,42,72,.32);
+}
+
+/* ------------------------------------------------------------
+   6. The photography
+   ------------------------------------------------------------
+   The page carried none at all. Two of the school's own wide
+   frames are set into it as bands — the campus from the air where
+   the campus is measured, the entrance where the page hands over
+   to the documents portal. Both are cropped to one cinematic
+   ratio and both are set edge to edge within the measure, so they
+   read as a pause in the document rather than as illustrations
+   dropped beside a table.
+   ------------------------------------------------------------ */
+body.connect .ciband{
+  position:relative;
+  margin:clamp(30px,3.6vw,54px) 0 clamp(34px,4vw,60px);
+  overflow:hidden;
+  background:var(--purple-ink);
+  aspect-ratio:64/17;
+}
+body.connect .ciband img{
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 48%;
+  transform:scale(1.03);
+  transition:transform 1.2s cubic-bezier(.16,1,.3,1);
+}
+body.connect .ciband:hover img{ transform:scale(1); }
+/* A hairline of gold along the foot, the same mark the section rules
+   carry, so the band belongs to the page rather than floating in it. */
+body.connect .ciband::after{
+  content:""; position:absolute; inset:auto 0 0 0; height:2px;
+  background:linear-gradient(90deg, var(--gold) 0%, rgba(255,195,8,0) 62%);
+}
+@media (max-width:700px){
+  body.connect .ciband{ aspect-ratio:16/9; }
+}
+@media (prefers-reduced-motion:reduce){
+  body.connect .ciband img{ transition:none; transform:none; }
+}
+
+/* ------------------------------------------------------------
+   7. Spacing that used to be in the markup
+   ------------------------------------------------------------
+   Nine style="" attributes carried the rhythm of this page —
+   margin-top:36px, margin-bottom:10px and so on, written inline
+   where no stylesheet could see them and no breakpoint could
+   change them. They are here now, on the site's spacing scale.
+   ------------------------------------------------------------ */
+body.connect .ci-sub{
+  margin-bottom:var(--space-3);
+  color:var(--ink);
+}
+body.connect .ci-sub + .factrail{ margin-top:0; }
+body.connect .ci-sub--spaced{ margin-top:clamp(30px,3.4vw,44px); }
+body.connect .ci-note{ margin-top:var(--space-4); }
+body.connect .ci-group{ margin-top:clamp(30px,3.4vw,44px); }
+body.connect .ci-group .copy + .copy{ margin-top:var(--space-3); }
+
+/* The notice that hands over to the documents portal. It is the one
+   dark object on a long pale page, so it gets the room to be one. */
+body.connect .notice{ margin-top:clamp(8px,1.4vw,20px); }
+
+/* ------------------------------------------------------------
+   8. The Parent Portal
+   ------------------------------------------------------------
+   The page itself is right: it says within a second that the
+   portal is not open, and it puts the two systems that are
+   running where a visitor can reach them. Its problem was shape.
+   Everything sat in a 760px column down the left of a dark band,
+   so two thirds of the screen was empty purple, and the three
+   ways to reach the school — the part of the page with the most
+   practical value — arrived last, smallest, and in a single file.
+
+   The column becomes two: the notice and its doors on the left,
+   the ways to reach the school held beside them as a panel. The
+   markup does not change; this is the same elements in a grid.
+   ------------------------------------------------------------ */
+body.connect .ucpage{
+  background-image:
+    radial-gradient(58% 48% at 82% 6%,
+      rgba(255,195,8,.10) 0%, rgba(255,195,8,.03) 46%, rgba(255,195,8,0) 74%);
+}
+@media (min-width:960px){
+  body.connect .ucpage__inner{
+    display:grid;
+    grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);
+    column-gap:clamp(48px,6vw,104px);
+    align-items:start;
+    max-width:1180px;
+  }
+  /* A grid item stretches; the badge is a pill and must stay its own width. */
+  body.connect .ucpage__badge{ justify-self:start; }
+  body.connect .ucpage__badge,
+  body.connect .ucpage__head,
+  body.connect .ucpage .lead,
+  body.connect .ucpage__doors,
+  body.connect .ucpage__doornote,
+  body.connect .ucpage__ph{ grid-column:1; }
+  /* The rule ran the full width to separate a stack. With the reach
+     panel beside the notice there is nothing left for it to divide. */
+  body.connect .ucpage__rule{ display:none; }
+  body.connect .ucpage__reach{
+    grid-column:2; grid-row:1 / span 7;
+    align-self:start;
+    padding:clamp(26px,2.6vw,38px) clamp(22px,2.4vw,34px);
+    border:1px solid rgba(255,195,8,.22);
+    background:
+      radial-gradient(120% 120% at 0% 0%, rgba(255,195,8,.09), rgba(255,195,8,0) 62%),
+      rgba(14,11,18,.34);
+  }
+  body.connect .ucpage__foot{ grid-column:1 / -1; }
+}
+/* The rows are the page's most useful object either way: given a panel
+   to sit in, they can afford a rule between them and a little more air. */
+body.connect .ucpage__rows{ gap:0; }
+body.connect .ucpage__row{
+  margin:0; border-radius:0;
+  padding:var(--space-4) var(--space-3);
+}
+body.connect .ucpage__row + .ucpage__row{ border-top:1px solid var(--rule-purple); }
+body.connect .ucpage__reachlabel{
+  padding-bottom:var(--space-3);
+  border-bottom:1px solid rgba(255,195,8,.28);
+}

@@ -152,6 +152,11 @@ PAGES = {
         "hero_cta": [("Read the latest", "#latest", "primary"),
                      ("What is coming up", "#diary", "ghost")],
         "hero_extra": newsflash_html(),
+        # The hero was already the page's own. Below it the results table and
+        # the section heads were the shared components, unstyled, exactly as
+        # School Information had them — so it takes the same group sheet. See
+        # assets/css/connect.css.
+        "sheet": "connect",
     },
     "founder": {
         "litehead": True,
@@ -212,6 +217,9 @@ PAGES = {
                    "The affiliation, governance, infrastructure and grievance-redressal details CBSE and "
                    "the affiliating authorities require every school to publish &mdash; and the Important "
                    "Documents portal that carries the certificates behind them."),
+        # The two pages in the Connect column that had no sheet of their own
+        # share one, so the group reads as a group. See assets/css/connect.css.
+        "sheet": "connect",
         "jump": True,
     },
     "important-documents": {
@@ -531,6 +539,8 @@ PAGES = {
         "banner": ("Parents", "Parent <em>Portal.</em>",
                    "A secure area for parents. It is not open yet &mdash; so this page carries the "
                    "fee payment and the parent login the school runs today, and the people to ask."),
+        # Shared with School Information — see assets/css/connect.css.
+        "sheet": "connect",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
