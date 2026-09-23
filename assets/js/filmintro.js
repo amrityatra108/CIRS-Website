@@ -1,52 +1,66 @@
-/* CIRS Captures — the opening.
+/* The cinematic opening two pages share — CIRS Captures and Our Sports.
+
+   Both open the same way, because they are the same page furniture with a
+   different film in it: the reader scrubs a short piece of footage with the
+   scroll, it ends, it is held, and one thin widely-tracked line arrives over
+   the frame it ended on. What differs between them is the file, the words,
+   where the line sits and the timing — all of which come from the markup
+   that build-site.py generates, not from here.
 
    The film does not play. The scroll position chooses the frame:
 
        video.currentTime = progress * video.duration
 
    and nothing else advances it, so scrolling back runs the camera backwards
-   and stopping leaves it on the frame it was on. Once the film has ended and
-   CIRS CAPTURES has been read, a photograph from the school appears inside
-   the camera's lens and opens out of it to fill the window. Every part of
-   that is a function of the scroll position too — nothing here is a tween
-   with a duration of its own — so any scroll position, reached slowly or in
-   one jump, backwards or forwards, has exactly one picture, and a reload or
-   a resize halfway through lands on it.
+   and stopping leaves it on the frame it was on.
 
-   The section's travel is divided by data-captures-phases in the markup:
+   CIRS Captures goes one step further. Once its line has been read, a
+   photograph from the school appears inside the camera's lens and opens out
+   of it to fill the window; the page declares that with data-film-lens and
+   a [data-film-shot], and without them none of it runs. Every part of it is
+   a function of the scroll position too — nothing here is a tween with a
+   duration of its own — so any scroll position, reached slowly or in one
+   jump, backwards or forwards, has exactly one picture, and a reload or a
+   resize halfway through lands on it.
+
+   The section's travel is divided by data-film-phases in the markup:
 
        [0, FILM_END]            the film, under the scroll
        [FILM_END, HOLD_END]     the last frame, held
        [HOLD_END, TITLE_END]    the line arrives
-       [TITLE_END, READ_END]    the line is read
-       [READ_END, LENS_END]     the photograph appears inside the lens
-       [LENS_END, OPEN_END]     the photograph opens to the whole window
-       [OPEN_END, 1]            the photograph is held
+       [TITLE_END, READ_END]    the line is read        } CIRS Captures only;
+       [READ_END, LENS_END]     the photograph, in lens } without a lens these
+       [LENS_END, OPEN_END]     it opens to the window  } are all at 1, and the
+       [OPEN_END, 1]            the photograph is held  } composition is held
+
+   Without phases in the markup, the timing CIRS Captures first established:
+   the film to 0.70, held to 0.77, the line in by 0.90.
 
    Two things make the scrubbing smooth, and neither is in this file.
-   assets/video/captures-camera.mp4 is encoded with every frame a keyframe,
-   so a seek never has to decode forward from a distant one; and its moov
-   atom is at the front, so the browser knows the duration and can seek
-   before the whole file has arrived. Re-encoding it any other way is what
-   would make this stutter. The stage is held by CSS position:sticky rather
-   than by a GSAP pin, which is why a resize or a reload halfway down the
-   page needs nothing from this script. */
+   Each film is encoded with every frame a keyframe, so a seek never has to
+   decode forward from a distant one; and the moov atom is at the front, so
+   the browser knows the duration and can seek before the whole file has
+   arrived. Re-encoding one any other way is what would make it stutter. The
+   stage is held by CSS position:sticky rather than by a GSAP pin, which is
+   why a resize or a reload halfway down the page needs nothing from this
+   script. */
 (function () {
   "use strict";
 
-  var section = document.querySelector("[data-captures]");
+  var section = document.querySelector("[data-film]");
   if (!section) return;
-  var stage = section.querySelector(".cap__stage");
-  var film = section.querySelector("[data-captures-film]");
-  var title = section.querySelector("[data-captures-title]");
-  var shot = section.querySelector("[data-captures-shot]");
+  var stage = section.querySelector(".film__stage");
+  var film = section.querySelector("[data-film-video]");
+  var title = section.querySelector("[data-film-title]");
+  var shot = section.querySelector("[data-film-shot]");
+  var scrollCue = section.querySelector("[data-film-scroll-cue]");
   var photo = shot && shot.querySelector("img");
   if (!stage || !film || !title) return;
 
   function numbers(name) {
     return (section.getAttribute(name) || "").trim().split(/\s+/).map(Number);
   }
-  var ph = numbers("data-captures-phases");
+  var ph = numbers("data-film-phases");
   var FILM_END = ph[0] || 0.70;
   var HOLD_END = ph[1] || 0.77;
   var TITLE_END = ph[2] || 0.90;
@@ -55,7 +69,7 @@
   var OPEN_END = ph[5] || 1;
   // No lens in the markup, or no photograph: the opening is the film and the
   // line, exactly as it was before the photograph was added.
-  var LENS = numbers("data-captures-lens");
+  var LENS = numbers("data-film-lens");
   var payoff = !!(photo && LENS.length === 5 && READ_END < 1);
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -64,10 +78,10 @@
 
   var duration = 0;
   var last = 0;        // the timestamp that lands on the final frame
-  // One frame of the film. The file is ours and is encoded at 24fps — see
-  // the note at the top — and HTMLVideoElement will not report a frame rate,
-  // so it is stated here rather than guessed at from playback.
-  var step = 1 / 24;
+  // One frame of the film. The files are ours and are encoded at 24fps, and
+  // HTMLVideoElement will not report a frame rate, so it is stated in the
+  // markup rather than guessed at from playback.
+  var step = 1 / (Number(section.getAttribute("data-film-fps")) || 24);
   var asked = -1;      // the last time the decoder was sent to
   var trigger = null;
   var furnished = null; // whether the site's furniture is currently put away
@@ -238,17 +252,24 @@
     }
     // The glass: darker at the rim inside the lens, gone by halfway out.
     var glass = 1 - smooth(clamp(e / 0.45));
-    put(shot, "glass", "--cap-glass", (0.85 * glass).toFixed(3));
-    put(shot, "glass-x", "--cap-glass-x", (o.a * 1.05).toFixed(1) + "px");
-    put(shot, "glass-y", "--cap-glass-y", (o.b * 1.05).toFixed(1) + "px");
-    put(shot, "glass-cx", "--cap-glass-cx", g.fx.toFixed(1) + "px");
-    put(shot, "glass-cy", "--cap-glass-cy", g.fy.toFixed(1) + "px");
+    put(shot, "glass", "--film-glass", (0.85 * glass).toFixed(3));
+    put(shot, "glass-x", "--film-glass-x", (o.a * 1.05).toFixed(1) + "px");
+    put(shot, "glass-y", "--film-glass-y", (o.b * 1.05).toFixed(1) + "px");
+    put(shot, "glass-cx", "--film-glass-cx", g.fx.toFixed(1) + "px");
+    put(shot, "glass-cy", "--film-glass-cy", g.fy.toFixed(1) + "px");
     // The camera and the line leave inside the same movement: the line fades
     // before the opening can reach it, and the camera leans toward the lens.
-    put(title, "exit", "--cap-exit", smooth(clamp(e / 0.3)).toFixed(3));
-    put(film, "lens-x", "--cap-lens-x", g.lx.toFixed(1) + "px");
-    put(film, "lens-y", "--cap-lens-y", g.ly.toFixed(1) + "px");
-    put(film, "push", "--cap-push", (1 + 0.06 * smooth(e)).toFixed(4));
+    put(title, "exit", "--film-exit", smooth(clamp(e / 0.3)).toFixed(3));
+    put(film, "lens-x", "--film-lens-x", g.lx.toFixed(1) + "px");
+    put(film, "lens-y", "--film-lens-y", g.ly.toFixed(1) + "px");
+    put(film, "push", "--film-push", (1 + 0.06 * smooth(e)).toFixed(4));
+  }
+
+  // Our Sports carries one discreet cue over its first frames; it goes as
+  // soon as the reader has started.
+  function setScrollCue(p) {
+    if (!scrollCue) return;
+    put(scrollCue, "cue", "--film-scroll-cue-opacity", (1 - smooth(clamp(p / 0.08))).toFixed(3));
   }
 
   function paint(value) {
@@ -256,24 +277,31 @@
     progress = p;
     seek(p >= FILM_END ? last : (p / FILM_END) * duration);
     var r = span(p, HOLD_END, TITLE_END);
-    put(title, "reveal", "--cap-reveal", smooth(r).toFixed(4));
+    put(title, "reveal", "--film-reveal", smooth(r).toFixed(4));
+    setScrollCue(p);
     paintShot(p);
   }
 
-  /* The composition, without the scrubbing: the camera as the film leaves
-     it and the line up. assets/css/captures.css takes the section back to
-     one screen when this is set, shows a still of the last frame in place of
-     the film, and leaves the photograph out. */
+  /* The composition, without the scrubbing: the film's last frame and the
+     line up. assets/css/filmintro.css takes the section back to one screen
+     when this is set and leaves any photograph out. A page with a still of
+     its last frame (--film-still-image) shows that in place of the film, so
+     it needs nothing from the video at all; one without has the film sent to
+     its last frame, as soon as the film can be sent anywhere. */
   function still() {
-    section.setAttribute("data-captures-still", "");
-    put(title, "reveal", "--cap-reveal", "1");
-    put(title, "exit", "--cap-exit", "0");
+    section.setAttribute("data-film-still", "");
+    put(title, "reveal", "--film-reveal", "1");
+    put(title, "exit", "--film-exit", "0");
+    // The page still goes on below the one screen, so a cue stays up.
+    setScrollCue(0);
+    asked = -1;
+    seek(last);
   }
 
   function teardown() {
     if (trigger) { trigger.kill(); trigger = null; }
     furnished = null;
-    document.body.classList.remove("cap-on");
+    document.body.classList.remove("film-on");
   }
 
   /* Where the reader is, read from the section itself every time rather
@@ -295,7 +323,7 @@
       // The reading rule and the back-to-top button stay away while any of
       // the opening is on screen: through the final hold, and for the screen
       // after it as the stage scrolls off.
-      on: box.top <= 0 && box.bottom > 0
+      on: box.top < 0 && box.bottom > 0
     };
   }
 
@@ -304,13 +332,13 @@
     paint(w.p);
     if (w.on !== furnished) {
       furnished = w.on;
-      document.body.classList.toggle("cap-on", w.on);
+      document.body.classList.toggle("film-on", w.on);
     }
   }
 
   function scrub() {
     if (trigger || !hasST || reduced.matches) return;
-    section.removeAttribute("data-captures-still");
+    section.removeAttribute("data-film-still");
     /* ScrollTrigger is kept only as the signal that the page has moved: it is
        what Lenis, the site's smooth scrolling, reports to. With no trigger
        element it spans the whole page, so it has no measured range to go
@@ -342,6 +370,7 @@
     if (!frames()) return;
     asked = -1;
     if (trigger) paint(progress);
+    else if (section.hasAttribute("data-film-still")) seek(last);
   });
   if (film.readyState >= 1) frames();
 
@@ -391,7 +420,7 @@
 
   reduced.addEventListener("change", function () {
     if (reduced.matches) { teardown(); still(); }
-    else { section.removeAttribute("data-captures-still"); written = {}; scrub(); }
+    else { section.removeAttribute("data-film-still"); written = {}; scrub(); }
   });
 
   // A trigger left registered across a back-forward-cache restore is one

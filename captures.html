@@ -29,14 +29,14 @@
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/captures.css?b=96">
 <link rel="stylesheet" href="assets/css/typography.css?b=96">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=96">
+<noscript><style>.film{height:100svh}.film__stage{background:#000 url(assets/img/captures-camera-final.jpg) var(--film-still-position, 50% 50%)/cover no-repeat}.film__video{visibility:hidden}.film__shot{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/captures-featured.css?b=96">
 <link rel="stylesheet" href="assets/css/captures-gallery.css?b=96">
-<noscript><style>.cap{height:100svh}.cap__stage{background:#000 url(assets/img/captures-camera-final.jpg) var(--cap-crop)/cover no-repeat}.cap__film{visibility:hidden}.cap__shot{display:none}</style></noscript>
 </head>
 
-<body class="captures">
+<body class="film captures">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -262,56 +262,30 @@
   </div>
 </div>
 <main id="main">
-<!-- The opening of CIRS Captures: six seconds of a camera coming out of the
-     dark, which the visitor scrubs frame by frame with the scroll. Nothing
-     here plays by itself and nothing here is a hero — the film is the whole
-     introduction, and the one line of type arrives only once it has ended.
-     After it has been read, a photograph from the school appears inside the
-     camera's lens and opens out of it to fill the window.
-
-     The scroll distance is set in assets/css/captures.css and divided into
-     its phases by data-captures-phases, which assets/js/captures.js reads:
-     the film ends, it is held, the line arrives, the line is read, the
-     photograph appears in the lens, and it has opened to the full window.
-     The fractions come from lengths in the stylesheet, so change them
-     together.
-
-     data-captures-lens is the lens's front rim in the film's final frame,
-     in the film's own pixels (1280 by 720): centre, the two radii, and the
-     tilt of the ellipse in degrees. The script turns it into window
-     coordinates for whatever crop the window gives the film, which is how
-     the photograph lands exactly in the lens on every shape of screen.
-     tools/make-captures-shot.py says how it was measured. -->
-<section class="cap" id="captures-opening" data-captures
-         data-captures-phases="0.5143 0.5657 0.6612 0.7347 0.7959 0.9388"
-         data-captures-lens="388.4 359.3 65 124.4 6.56">
-  <div class="cap__stage">
-    <video class="cap__film" data-captures-film
+<section class="film" id="captures-opening" data-film data-film-phases="0.5143 0.5657 0.6612 0.7347 0.7959 0.9388" data-film-lens="388.4 359.3 65 124.4 6.56">
+  <div class="film__stage">
+    <video class="film__video" data-film-video
            width="1280" height="720"
            poster="assets/img/captures-camera-poster.jpg"
            preload="auto" muted playsinline disablepictureinpicture
            aria-hidden="true" tabindex="-1">
       <!-- H.264 first, which is the other way round from the rest of this
-           site. Here the file is not played but seeked, several times a
+           site. These files are not played but seeked, several times a
            second, and H.264 is the one codec every browser that has it
            decodes in hardware — so it is the path that scrubs without
            stuttering wherever it exists. The VP9 is for the browsers built
            without the proprietary decoder, which would otherwise have no
-           opening at all. Both are six seconds at 24fps, so the mapping in
-           captures.js holds whichever one is picked. -->
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
       <source src="assets/video/captures-camera.mp4" type="video/mp4">
       <source src="assets/video/captures-camera.webm" type="video/webm">
     </video>
-    <h1 class="cap__title" data-captures-title><span class="cap__line">CIRS Captures</span></h1>
-    <!-- After the line in the document so it is read after it, and over it
-         on screen by z-index. Two cuts of one photograph: the portrait one
-         wherever the window is no wider than 6:5, which is the same boundary
-         the film's own crop changes at. -->
-    <div class="cap__shot" data-captures-shot>
+    <h1 class="film__title" data-film-title><span class="film__line">CIRS Captures</span></h1>
+    <div class="film__shot" data-film-shot>
       <picture>
         <source media="(max-aspect-ratio: 6/5)"
                 srcset="assets/img/captures-shot-portrait.jpg" width="1620" height="2160">
-        <img class="cap__photo" src="assets/img/captures-shot.jpg" width="2400" height="1819"
+        <img class="film__photo" src="assets/img/captures-shot.jpg" width="2400" height="1819"
              alt="A CIRS student dancing on stage in red, one arm raised"
              loading="lazy" decoding="async">
       </picture>
@@ -375,7 +349,7 @@
     </div>
   </div>
 </section>
-<div class="cap__seam" aria-hidden="true"></div>
+<div class="film__seam" aria-hidden="true"></div>
 
 <!-- The photographs. Each tile is a link to its full-size image, so without
      scripting a tile simply opens the photograph; assets/js/captures-gallery.js
@@ -623,7 +597,7 @@
 <script src="assets/vendor/lenis.min.js?b=96" defer></script>
 <script src="assets/js/cirs.js?b=96" defer></script>
 <script src="assets/js/pages.js?b=96" defer></script>
-<script src="assets/js/captures.js?b=96" defer></script>
+<script src="assets/js/filmintro.js?b=96" defer></script>
 <script src="assets/js/captures-featured.js?b=96" defer></script>
 <script src="assets/js/captures-gallery.js?b=96" defer></script>
 </body>

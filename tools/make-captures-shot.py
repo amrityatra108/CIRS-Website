@@ -21,10 +21,10 @@ landscape cut stops short of the pale wall panel along the right edge of the
 frame, and the portrait cut is centred on her.
 
 FOCUS is the point in each cut that the opening treats as its subject. It is
-written into assets/css/captures.css as that cut's object-position, which
-does two jobs at once: it keeps her in place however the window crops the
-picture, and it tells assets/js/captures.js where to centre the photograph
-inside the lens. Change a crop here and update the matching focus there.
+written into assets/css/filmintro.css as that cut's --film-focus (the
+body.captures block), which does two jobs at once: it keeps her in place
+however the window crops the picture, and it tells assets/js/filmintro.js
+where to centre the photograph inside the lens. Change a crop here and update the matching focus there.
 
 The camera still is the film's final frame. Without JavaScript, under
 reduced motion, and when the film fails to load, the opening is one screen

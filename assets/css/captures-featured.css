@@ -23,9 +23,10 @@
 
 .cf{
   --cf-ground:#180705;
-  /* The dancer's subject point, as the opening states it (--cap-focus in
-     assets/css/captures.css); the two must agree, because this section
-     takes over from the opening on a frame the two draw identically. */
+  /* The dancer's subject point, as the opening states it (--film-focus in
+     the body.captures block of assets/css/filmintro.css); the two must
+     agree, because this section takes over from the opening on a frame the
+     two draw identically. */
   --cf-focus:37% 40%;
   --cf-top:clamp(92px, 12vh, 116px);
   --cf-bottom:clamp(28px, 6vh, 64px);
@@ -295,6 +296,18 @@
 
 @media (max-width:720px){
   .cf{ --cf-travel:382.5vh; }
+}
+
+/* The ramp to paper follows this section, not the film, so it always starts
+   from this ground — including under reduced motion, where the shared sheet
+   would otherwise give it the camera's tones (it follows the camera there
+   on a page without these photographs). */
+@media (prefers-reduced-motion:reduce){
+  body.captures .film__seam{
+    --film-seam-top:#180705;
+    --film-seam-fold:#140604;
+    --film-seam-rise:#6A5B57;
+  }
 }
 
 /* The site's reading rule and back-to-top button stay away while the

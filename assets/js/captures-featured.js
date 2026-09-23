@@ -32,7 +32,7 @@
   "use strict";
 
   var section = document.querySelector("[data-cf]");
-  var cap = document.querySelector("[data-captures]");
+  var cap = document.querySelector("[data-film]");
   if (!section || !cap) return;
 
   var stage = section.querySelector("[data-cf-stage]");
@@ -160,7 +160,7 @@
   }
 
   function mode() {
-    var want = !reduced.matches && !cap.hasAttribute("data-captures-still") &&
+    var want = !reduced.matches && !cap.hasAttribute("data-film-still") &&
                typeof window.ScrollTrigger !== "undefined" &&
                !!(window.CSS && CSS.supports && CSS.supports("container-type", "size"));
     if (want === pinned) return;
@@ -179,7 +179,7 @@
   }
 
   // The opening decides, as it goes, whether it is a still; follow it.
-  new MutationObserver(mode).observe(cap, { attributes: true, attributeFilter: ["data-captures-still"] });
+  new MutationObserver(mode).observe(cap, { attributes: true, attributeFilter: ["data-film-still"] });
   reduced.addEventListener("change", mode);
   window.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", function () { geo = null; update(); });
