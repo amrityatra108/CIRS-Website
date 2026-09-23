@@ -29,6 +29,12 @@ body.why-cirs .saga__eyebrow{
   border-bottom:1px solid rgba(255,255,255,.28);
 }
 
+/* The eyebrows above each heading carry a little more weight here than the
+   site default (1rem–1.02rem), still well below the headline. */
+body.why-cirs :is(.saga__eyebrow, #facts .marker .sc){
+  font-size:clamp(1.06rem,.98rem + .3vw,1.14rem);
+}
+
 body.why-cirs .saga__count{
   flex:none;
   color:rgba(255,255,255,.76);
