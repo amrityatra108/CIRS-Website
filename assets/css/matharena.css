@@ -384,9 +384,24 @@ body.matharena #main{ background: var(--ma-black); }
   padding: clamp(20px, 2.2vw, 26px);
   background: var(--ma-char);
   border: 1px solid var(--ma-line-soft);
-  transition: border-color .3s var(--e), transform .3s var(--e2);
+  transition: border-color .3s var(--e), transform .3s var(--e2),
+              opacity .2s var(--e2);
 }
-.ma-card:hover{ border-color: var(--ma-gold); transform: translateY(-4px); }
+/* Touch reports a hover on tap and then keeps it until the next tap, which
+   leaves a card lifted and gold with nothing hovering it. */
+@media (hover: hover) and (pointer: fine){
+  .ma-card:hover{ border-color: var(--ma-gold); transform: translateY(-4px); }
+}
+
+/* Filtering. A card on its way out fades before it takes the hidden
+   attribute, and fades up again when it comes back -- the attribute still
+   does the accessibility work, it just stops being the whole of the
+   transition. Opacity only, deliberately: the card carries a transform for
+   its hover lift, and these are winners' names, which should not slide
+   around because a filter changed. The out is quicker than the in, because
+   the search fires this on every keystroke and the space has to clear
+   before the eye can read what is left. */
+.ma-card.is-out{ opacity: 0; }
 .ma-card__when{
   margin: 0;
   font-size: 11.5px;
@@ -495,6 +510,14 @@ body.matharena :focus-visible{
 @media (prefers-reduced-motion: reduce){
   body.matharena .ma-field__orbit,
   body.matharena .ma-f{ animation: none; }
+  /* No fade on the filter here. The site's reduced-motion policy is a
+     blanket transition-duration:.001ms and .rv{opacity:1!important} in
+     cirs.css, and a rule in this file cannot and should not out-shout it.
+     The filter still says what it did -- the pressed button carries
+     aria-pressed and the list visibly changes -- it just says it at once.
+     matharena.js drops its hand-off delay to match, so the card takes the
+     hidden attribute on the same frame rather than sitting there for a
+     fifth of a second first. */
   body.matharena .ma-zone,
   body.matharena .ma-card,
   body.matharena .ma-step{ transition: none; }
