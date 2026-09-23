@@ -1180,13 +1180,13 @@ def build(slug, page):
     # path is relative to the page, where the stylesheet's is to itself.
     if slug == "captures":
         head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/captures-featured.css?{CACHE_BUST}">\n'
             f'<link rel="stylesheet" href="assets/css/captures-gallery.css?{CACHE_BUST}">\n</head>')
         head = head.replace("</head>",
             '<noscript><style>.cap{height:100svh}'
             '.cap__stage{background:#000 url(assets/img/captures-camera-final.jpg) '
             'var(--cap-crop)/cover no-repeat}'
             '.cap__film{visibility:hidden}.cap__shot{display:none}'
-            '.cap__seam{--cap-seam-top:#2A2726;--cap-seam-fold:#211C1B;--cap-seam-rise:#6B6560}'
             '</style></noscript>\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
@@ -1239,6 +1239,8 @@ def build(slug, page):
     else:
         content = read(f"tools/pages/{slug}.html").rstrip("\n")
     content = expand_figs(content)
+    if slug == "captures":
+        content = captures.expand_featured(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
                        .replace("{{DOCLIST}}", doclist_html())
@@ -1305,6 +1307,7 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
     if slug == "captures":
         parts.append(f'<script src="assets/js/captures.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/captures-featured.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')

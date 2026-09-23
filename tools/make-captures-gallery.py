@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """Cut the CIRS Captures gallery from the school's camera originals.
 
-    assets/img/captures/<name>.jpg        the tile on the page
-    assets/img/captures/full/<name>.jpg   the photograph in the viewer
-    tools/captures-gallery.json           the sizes written, for build-site.py
+    assets/img/captures/<name>.jpg              the tile on the page
+    assets/img/captures/full/<name>.jpg         the photograph in the viewer
+    assets/img/captures/featured/<name>.jpg     a featured photograph, and a
+    assets/img/captures/featured/<name>-lqip.jpg  blurred stand-in for it
+    tools/captures-gallery.json                 the sizes written, for build-site.py
+
+Anything else in assets/img/captures is removed: a photograph taken out of
+the lists would otherwise stay behind, and tools/check-links.py would rightly
+report it as an orphan.
 
 The list of photographs, their captions and their layout live in
 tools/captures.py. Nothing here repaints a photograph: every output is the
@@ -24,7 +30,7 @@ import json
 import os
 import sys
 
-from PIL import Image, ImageOps
+from PIL import Image, ImageFilter, ImageOps
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -51,6 +57,13 @@ def save(im, rel, quality):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     im.save(path, "JPEG", quality=quality, optimize=True, progressive=True)
     return os.path.getsize(path)
+
+
+def lqip(im, rel):
+    """A stand-in a few hundred bytes long, drawn blurred until the file
+    arrives, as the opening's photograph does (tools/make-captures-shot.py)."""
+    small = fit(im, 32).filter(ImageFilter.GaussianBlur(1.2))
+    return save(small, rel, 60)
 
 
 def open_source(name):
@@ -82,6 +95,16 @@ def main():
                             "full": [full.width, full.height], "full_path": full_path}
             print(f"  write  {name:22s} tile {tile.width}x{tile.height}  full {full.width}x{full.height}")
 
+    for source, name, _, width in captures.FEATURED:
+        im = open_source(source)
+        cut = fit(im, width)
+        path, small = f"{OUT}/featured/{name}.jpg", f"{OUT}/featured/{name}-lqip.jpg"
+        total += save(cut, path, 82) + lqip(im, small)
+        images["featured/" + name] = {"tile": [cut.width, cut.height], "tile_path": path,
+                                      "full": [cut.width, cut.height], "full_path": path,
+                                      "lqip": small}
+        print(f"  write  featured/{name:13s} {cut.width}x{cut.height}")
+
     source, name, _ = captures.END
     im = open_source(source)
     small, end = (fit(im, w) for w in END_WIDTHS)
@@ -90,6 +113,15 @@ def main():
     images[name] = {"tile": [small.width, small.height], "tile_path": small_path,
                     "full": [end.width, end.height], "full_path": path}
     print(f"  write  {name:22s} {small.width}x{small.height} and {end.width}x{end.height}")
+
+    written = {os.path.normpath(v[k]) for v in images.values()
+               for k in ("tile_path", "full_path", "lqip") if k in v}
+    for folder, _, files in os.walk(os.path.join(ROOT, OUT)):
+        for f in files:
+            rel = os.path.relpath(os.path.join(folder, f), ROOT)
+            if rel not in written:
+                os.remove(os.path.join(ROOT, rel))
+                print(f"  remove {rel}")
 
     with open(captures.MANIFEST, "w", encoding="utf-8") as f:
         json.dump({"images": images}, f, indent=2)

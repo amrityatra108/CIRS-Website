@@ -1,21 +1,33 @@
 """CIRS Captures — the photographs below the opening, and the page's ending.
 
 Everything shown here is one of the school's own camera originals from
-assets/source. tools/make-captures-gallery.py cuts each one twice — a tile
-for the page and a full-size image for the viewer — and records the sizes
+assets/source. tools/make-captures-gallery.py cuts each one — a tile for the
+page and a full-size image for the viewer, and for the four featured
+photographs a cut at the size their frame draws them — and records the sizes
 it wrote in tools/captures-gallery.json, which is what this module reads, so
 the site build itself never needs an image library.
 
-CAPTIONS say what the photograph shows and nothing more. None of these files
-carries a photographer, a date anyone has confirmed, or the name of an event,
-and no caption supplies one: a caption that named the occasion or the
-student would be a guess presented as a fact. Where the school can supply
-those, they go in CREDITS and in the caption, and the viewer shows a credit
-line for any photograph that has one. Until then it shows none.
+CAPTIONS say what the photograph shows. Where one also names the occasion,
+that was verified, not inferred: the file in assets/source is byte for byte
+the file in a named event folder in the school's Drive (CIRS Studio), and the
+date the camera recorded agrees with it. Only the unresized camera originals
+can be matched that way; the rest were resized on the way in, so for them no
+occasion is given. No file anywhere records a photographer, so no caption
+names one: where the school can supply a name, it goes in CREDITS, and the
+viewer shows a credit line for any photograph that has one.
 
-ROWS is the layout. Each row is laid out at one height across the full
-width, so a portrait sits beside a landscape at its own shape rather than
-being cropped to match it; a row of one is a full-width photograph. The
+    0C9A4095, 0C9A4097, 0C9A4128  "46. Anand Utsav"; taken 8 October 2025
+    0C9A2196                      "9. Khel Mela (Sports DAY)", Day 2;
+                                  taken 4 February 2026
+
+FEATURED is the short sequence that follows the opening: the photograph that
+opened out of the camera's lens, then three more, each given a composition of
+its own — see tools/pages/captures.html and assets/css/captures-featured.css.
+They are not repeated in the gallery.
+
+ROWS is the gallery's layout. Each row is laid out at one height across the
+full width, so a portrait sits beside a landscape at its own shape rather
+than being cropped to match it; a row of one is a full-width photograph. The
 order is the reading order, and the viewer's next and previous follow it.
 """
 
@@ -25,27 +37,37 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 MANIFEST = os.path.join(HERE, "captures-gallery.json")
 
+ANAND_UTSAV = "at Anand Utsav, October 2025"
+KHEL_MELA = "at Khel Mela, the sports day, February 2026"
+
+# (source file in assets/source, output name, caption, width of the cut)
+# The lead — the photograph the camera's lens opens onto — is cut by
+# tools/make-captures-shot.py, because the opening uses it first.
+FEATURED = [
+    ("8A5A3313.JPG", "overhead-kick", "An overhead kick on the field, with the hills behind", 1800),
+    ("0C9A4095.JPG", "greeting", "A student with her hands folded in greeting, " + ANAND_UTSAV, 1200),
+    ("DJI_0856.JPG", "campus-air", "The campus from the air, its courtyards among the trees", 2400),
+]
+LEAD_CAPTION = "A student dancing on stage in red, one arm raised"
+
 # (source file in assets/source, output name, caption)
 ROWS = [
     [("IMG_0550.JPG", "dancers-pink-light", "Dancers in performance under pink stage light"),
-     ("0C9A4095.JPG", "hands-folded-her", "A student with her hands folded in greeting")],
-    [("8A5A3313.JPG", "overhead-kick", "An overhead kick on the field, with the hills behind"),
-     ("IMG_1790.JPG", "microscope", "A student at the microscope in the laboratory"),
-     ("IMG_2474.JPG", "amphitheatre-night", "Students seated in the amphitheatre under floodlights")],
+     ("0C9A4097.JPG", "hands-folded-him", "A student with his hands folded in greeting, " + ANAND_UTSAV)],
+    [("IMG_1790.JPG", "microscope", "A student at the microscope in the laboratory"),
+     ("IMG_2474.JPG", "amphitheatre-night", "Students seated in the amphitheatre under floodlights"),
+     ("IMG_1828.JPG", "three-dancers", "Three dancers on a stage lit pink")],
     [("IMG_20210514_182259.jpg", "after-rain", "The school after rain, its lights reflected in the paving")],
-    [("IMG_1828.JPG", "three-dancers", "Three dancers on a stage lit pink"),
-     ("IMG_9314.JPG", "swimmer", "A swimmer mid-stroke in the pool"),
-     ("0C9A4097.JPG", "hands-folded-him", "A student with his hands folded in greeting")],
-    [("DSC_0858.JPG", "guitars", "Students playing guitars together"),
+    [("IMG_9314.JPG", "swimmer", "A swimmer mid-stroke in the pool"),
+     ("DSC_0858.JPG", "guitars", "Students playing guitars together"),
      ("IMG_1686.JPG", "meditation", "Students seated in meditation")],
     [("IMG_6061.JPG", "rappelling", "Rappelling down a rock face in helmet and harness"),
-     ("0C9A4128.JPG", "seated-together", "Students seated together on the floor"),
+     ("0C9A4128.JPG", "seated-together", "Students seated together on the floor, " + ANAND_UTSAV),
      ("IMG_8811.JPG", "stage-production", "A stage production in costume")],
     [("IMG_3051.JPG", "football", "Football on the field"),
      ("IMG_1898.JPG", "robot", "Students at work on a small wheeled robot"),
      ("DSC_8037.JPG", "tabla", "A tabla lesson")],
-    [("DJI_0856.JPG", "from-the-air", "The campus from the air")],
-    [("0C9A2196.JPG", "lectern", "A student speaking at a lectern outdoors"),
+    [("0C9A2196.JPG", "lectern", "A student speaking at a lectern outdoors, " + KHEL_MELA),
      ("IMG_9879.JPG", "human-pyramid", "A human pyramid reaching for a hanging pot, after dark")],
     [("IMG_2327.JPG", "runners", "Runners in team colours on the track"),
      ("IMG_1630.JPG", "yoga", "Yoga on the lawn"),
@@ -129,3 +151,25 @@ def end_html():
             f'      <img src="{s["full_path"]}" width="{s["full"][0]}" height="{s["full"][1]}"\n'
             f'           alt="{_esc(END[2])}" loading="lazy" decoding="async">\n'
             f'    </picture>')
+
+
+def featured_img(name, extra=""):
+    """One featured photograph, at the size its frame draws it."""
+    s = _sizes()["featured/" + name]
+    caption = next(c for _, n, c, _ in FEATURED if n == name)
+    return (f'<img src="{s["tile_path"]}" width="{s["tile"][0]}" height="{s["tile"][1]}"'
+            f' alt="{_esc(caption)}" loading="lazy" decoding="async"{extra}>')
+
+
+def featured_caption(name):
+    return _esc(next(c for _, n, c, _ in FEATURED if n == name))
+
+
+def expand_featured(html):
+    """{{CAPTURES_FEATURED:name}} and {{CAPTURES_FEATURED_CAPTION:name}} in
+    the page, and {{CAPTURES_LEAD_CAPTION}}."""
+    import re
+    html = re.sub(r"\{\{CAPTURES_FEATURED:([a-z-]+)\}\}", lambda m: featured_img(m.group(1)), html)
+    html = re.sub(r"\{\{CAPTURES_FEATURED_CAPTION:([a-z-]+)\}\}",
+                  lambda m: featured_caption(m.group(1)), html)
+    return html.replace("{{CAPTURES_LEAD_CAPTION}}", _esc(LEAD_CAPTION))

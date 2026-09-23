@@ -12,29 +12,17 @@
       ],
       "full_path": "assets/img/captures/full/dancers-pink-light.jpg"
     },
-    "hands-folded-her": {
+    "hands-folded-him": {
       "tile": [
         900,
         1349
       ],
-      "tile_path": "assets/img/captures/hands-folded-her.jpg",
+      "tile_path": "assets/img/captures/hands-folded-him.jpg",
       "full": [
         1601,
         2400
       ],
-      "full_path": "assets/img/captures/full/hands-folded-her.jpg"
-    },
-    "overhead-kick": {
-      "tile": [
-        900,
-        600
-      ],
-      "tile_path": "assets/img/captures/overhead-kick.jpg",
-      "full": [
-        2400,
-        1600
-      ],
-      "full_path": "assets/img/captures/full/overhead-kick.jpg"
+      "full_path": "assets/img/captures/full/hands-folded-him.jpg"
     },
     "microscope": {
       "tile": [
@@ -60,18 +48,6 @@
       ],
       "full_path": "assets/img/captures/full/amphitheatre-night.jpg"
     },
-    "after-rain": {
-      "tile": [
-        1800,
-        810
-      ],
-      "tile_path": "assets/img/captures/after-rain.jpg",
-      "full": [
-        2400,
-        1080
-      ],
-      "full_path": "assets/img/captures/full/after-rain.jpg"
-    },
     "three-dancers": {
       "tile": [
         900,
@@ -83,6 +59,18 @@
         1600
       ],
       "full_path": "assets/img/captures/full/three-dancers.jpg"
+    },
+    "after-rain": {
+      "tile": [
+        1800,
+        810
+      ],
+      "tile_path": "assets/img/captures/after-rain.jpg",
+      "full": [
+        2400,
+        1080
+      ],
+      "full_path": "assets/img/captures/full/after-rain.jpg"
     },
     "swimmer": {
       "tile": [
@@ -96,22 +84,10 @@
       ],
       "full_path": "assets/img/captures/full/swimmer.jpg"
     },
-    "hands-folded-him": {
-      "tile": [
-        900,
-        1349
-      ],
-      "tile_path": "assets/img/captures/hands-folded-him.jpg",
-      "full": [
-        1601,
-        2400
-      ],
-      "full_path": "assets/img/captures/full/hands-folded-him.jpg"
-    },
     "guitars": {
       "tile": [
-        990,
-        660
+        900,
+        600
       ],
       "tile_path": "assets/img/captures/guitars.jpg",
       "full": [
@@ -122,8 +98,8 @@
     },
     "meditation": {
       "tile": [
-        990,
-        660
+        900,
+        600
       ],
       "tile_path": "assets/img/captures/meditation.jpg",
       "full": [
@@ -204,18 +180,6 @@
       ],
       "full_path": "assets/img/captures/full/tabla.jpg"
     },
-    "from-the-air": {
-      "tile": [
-        1800,
-        1012
-      ],
-      "tile_path": "assets/img/captures/from-the-air.jpg",
-      "full": [
-        2400,
-        1350
-      ],
-      "full_path": "assets/img/captures/full/from-the-air.jpg"
-    },
     "lectern": {
       "tile": [
         990,
@@ -287,6 +251,45 @@
         1350
       ],
       "full_path": "assets/img/captures/full/dancing-lawn.jpg"
+    },
+    "featured/overhead-kick": {
+      "tile": [
+        1800,
+        1200
+      ],
+      "tile_path": "assets/img/captures/featured/overhead-kick.jpg",
+      "full": [
+        1800,
+        1200
+      ],
+      "full_path": "assets/img/captures/featured/overhead-kick.jpg",
+      "lqip": "assets/img/captures/featured/overhead-kick-lqip.jpg"
+    },
+    "featured/greeting": {
+      "tile": [
+        1200,
+        1799
+      ],
+      "tile_path": "assets/img/captures/featured/greeting.jpg",
+      "full": [
+        1200,
+        1799
+      ],
+      "full_path": "assets/img/captures/featured/greeting.jpg",
+      "lqip": "assets/img/captures/featured/greeting-lqip.jpg"
+    },
+    "featured/campus-air": {
+      "tile": [
+        2400,
+        1350
+      ],
+      "tile_path": "assets/img/captures/featured/campus-air.jpg",
+      "full": [
+        2400,
+        1350
+      ],
+      "full_path": "assets/img/captures/featured/campus-air.jpg",
+      "lqip": "assets/img/captures/featured/campus-air-lqip.jpg"
     },
     "end": {
       "tile": [
