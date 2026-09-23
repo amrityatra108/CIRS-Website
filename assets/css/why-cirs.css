@@ -35,10 +35,14 @@ body.why-cirs :is(.saga__eyebrow, #facts .marker .sc){
   font-size:clamp(1.3rem,1.05rem + .9vw,1.8rem);
 }
 
-/* The opening quote is a full sentence, not a chapter title: set it smaller
-   than the chapter headlines that follow so it reads rather than shouts. */
+/* The opening chapter takes the same sizes as the chapters after it: its
+   quote matches their headlines, and the attribution under it matches their
+   summary line. */
 body.why-cirs .saga--open .saga__line{
-  font-size:clamp(1.8rem,4.2vw,3.5rem);
+  font-size:clamp(2rem,5.2vw,4.1rem);
+}
+body.why-cirs .saga__by{
+  font-size:clamp(1rem,1.4vw,1.16rem);
 }
 
 body.why-cirs .saga__summary{

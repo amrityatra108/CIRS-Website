@@ -70,6 +70,7 @@
     event.preventDefault();
     lenis.scrollTo(event.detail.top, {
       duration:event.detail.duration,
+      easing:event.detail.easing,
       force:true,
       lock:true,
       onComplete:event.detail.onComplete
