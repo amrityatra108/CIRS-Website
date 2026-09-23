@@ -1,0 +1,407 @@
+/* The cinematic opening two pages share — CIRS Captures and Our Sports.
+
+   A short film the visitor scrubs with the scroll rather than watching, and
+   one thin widely-tracked line that arrives only once it has ended. Four
+   phases, measured as fractions of the section's travel and divided in
+   assets/js/filmintro.js:
+
+       0.00 - 0.70   the film runs, under the scroll, and nothing else exists
+       0.70 - 0.77   the last frame freezes and is simply held
+       0.77 - 0.90   CIRS CAPTURES arrives out of it
+       0.90 - 1.00   the finished composition is held, then let go
+
+   The stage is a CSS sticky viewport rather than a GSAP pin. It costs
+   nothing to hold, it survives a resize and a reload halfway down the page
+   without a refresh, and it leaves ScrollTrigger doing the one thing it is
+   needed for here: reporting progress.
+
+   Everything above the two tuning blocks at the foot of this file is shared.
+   What a page sets for itself is only what its own footage decides: how the
+   frame is cropped, where the line can sit legibly, and the tone the seam
+   below it starts from. */
+
+/* The near-black is what the page overscrolls into at the top, so the film
+   never opens against paper. Everything below the seam is the ordinary
+   page, on the ordinary ground. */
+body.film{ background:var(--film-ground); }
+body.film main{ background:var(--paper); }
+
+.film{
+  /* A page whose opening runs longer states its own (--film-run-page). */
+  --film-run:var(--film-run-page, 460vh);
+  position:relative;
+  height:var(--film-run);
+  background:#000;
+}
+
+.film__stage{
+  position:sticky;
+  top:0;
+  height:100vh;
+  height:100svh;
+  overflow:hidden;
+  background:#000;
+}
+
+/* --film-crop is object-position, and it is a per-page decision: a viewport
+   wider than the film's 16:9 crops the top and bottom away, and where that
+   leaves the subject depends on where the subject is. See the tuning blocks
+   at the foot of this file. */
+.film__video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:var(--film-crop, 50% 50%);
+  display:block;
+  background:#000;
+  /* A slight push toward the lens while a photograph opens out of it
+     (Captures), written by the script as --film-push about the lens's own
+     centre, so the lens stays exactly where the photograph grows from.
+     Nothing writes it on a page without one, and it stays 1. */
+  transform-origin:var(--film-lens-x, 50%) var(--film-lens-y, 50%);
+  transform:scale(var(--film-push, 1));
+  /* The film is scenery, never a player: it is not clickable, and it carries
+     no controls. The element has never been given a controls attribute, but
+     Chromium puts the whole panel up by itself — a play button, a scrubber,
+     a timecode and a fullscreen button across the foot of the window — on a
+     video that no script is driving, which is exactly the state this page is
+     in when scripting is off. Suppressing the shadow tree is what keeps that
+     out of the opening. */
+  pointer-events:none;
+}
+.film__video::-webkit-media-controls,
+.film__video::-webkit-media-controls-enclosure,
+.film__video::-webkit-media-controls-panel,
+.film__video::-webkit-media-controls-start-playback-button{
+  display:none !important;
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+/* --film-reveal is the whole animation: one number, 0 to 1, written by the
+   script once a frame. It defaults to 1 so that the line is legible before
+   the script has run and if it never runs at all — the curtain is over the
+   page while it starts, so nothing is seen being switched off. */
+.film__title{
+  --film-reveal:1;
+  --film-track-from:.28;
+  --film-track-to:.48;
+  --film-track:calc(var(--film-track-from) +
+                   (var(--film-track-to) - var(--film-track-from)) * var(--film-reveal));
+  position:absolute;
+  left:0;
+  right:0;
+  top:var(--film-title-top, auto);
+  bottom:var(--film-title-bottom, auto);
+  margin:0;
+  padding:0 16px;
+  text-align:center;
+  font-family:"Jost", var(--font-primary), sans-serif;
+  font-weight:100;
+  font-size:var(--film-size, clamp(26px, 3.8vw, 62px));
+  line-height:1;
+  text-transform:uppercase;
+  color:#FBFAF7;
+  z-index:3;
+  /* --film-exit is the line leaving while a photograph opens (Captures). It
+     is a plain fade on top of the reveal rather than the reveal run
+     backwards, so the letters do not close up again on their way out. */
+  opacity:calc(var(--film-reveal) * (1 - var(--film-exit, 0)));
+  transform:translateY(calc(var(--film-title-lift, 0px) + (1 - var(--film-reveal)) * 8px));
+  filter:blur(calc((1 - var(--film-reveal)) * 5px));
+  will-change:opacity, transform, filter;
+}
+
+/* Letter-spacing lays a gap after the last letter too, so a centred line of
+   it sits half a gap to the left of where it looks centred. The negative
+   margin takes that trailing gap back off the inline box, which is what
+   actually centres the lettering rather than the box around it. */
+.film__line{
+  display:inline-block;
+  white-space:nowrap;
+  letter-spacing:calc(var(--film-track) * 1em);
+  margin-right:calc(var(--film-track) * -1em);
+}
+
+/* The photograph a page's opening can end on (CIRS Captures). It fills the
+   stage like the film does, and the script moves it with three things only:
+   a transform that shrinks it into the lens and lets it grow back out, a clip
+   that is the lens's own ellipse, and its opacity. The clip is drawn in the
+   photograph's own coordinates, before the transform, so it can never be
+   larger than the picture it clips: while the photograph is still growing,
+   the opening in it is always inside its edges, and a straight edge of the
+   picture is never seen against the camera.
+
+   Until the file arrives, a blurred copy a few hundred bytes long stands in
+   for it (--film-shot-lqip), so a reader who scrolls straight to the end on
+   a slow connection sees the picture coming into focus rather than a blank
+   or black window. --film-focus is the point in it the opening treats as its
+   subject; the script reads it from here. */
+.film__shot{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  opacity:0;
+  transform-origin:0 0;
+  pointer-events:none;
+  background:#170C0A var(--film-shot-lqip, none) var(--film-focus, 50% 50%) / cover no-repeat;
+  will-change:transform, opacity;
+}
+.film__shot picture,
+.film__photo{
+  display:block;
+  width:100%;
+  height:100%;
+}
+.film__photo{
+  object-fit:cover;
+  object-position:var(--film-focus, 50% 50%);
+}
+/* The foot of the photograph goes down to the seam's first tone, so that
+   when the opening lets go there is no edge between the picture and the
+   ramp to paper below it. */
+.film__shot::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to bottom, rgba(24,7,5,0) 70%, var(--film-seam-top) 100%);
+}
+/* Seen inside the lens, the photograph is darker at its rim, as anything is
+   through a barrel of glass. This lifts as it opens out. */
+.film__shot::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  opacity:var(--film-glass, 0);
+  background:radial-gradient(ellipse var(--film-glass-x, 50%) var(--film-glass-y, 50%)
+             at var(--film-glass-cx, 50%) var(--film-glass-cy, 50%),
+             rgba(8,4,3,0) 38%, rgba(8,4,3,.72) 100%);
+}
+
+/* The way out. No second effect — the foot of the frame simply becomes paper
+   over a band the depth of a paragraph, and the page continues.
+
+   The tone it starts from is what the foot of that page's last frame
+   actually measures, which is why it is a token and not black. On Captures,
+   against pure black, the difference read as a cut — a hairline across the
+   window where the film stopped. Beginning the ramp on the frame's own tone
+   takes the line away, and the same is true of a field at sunrise, which is
+   nowhere near black. */
+.film__seam{
+  height:clamp(110px, 15vh, 200px);
+  background:linear-gradient(to bottom,
+              var(--film-seam-top) 0%, var(--film-seam-fold) 18%,
+              var(--film-seam-rise) 58%, var(--paper) 100%);
+}
+
+/* The film is the introduction, so nothing of the site's own furniture is
+   laid over it: not the reading-progress rule, not the back-to-top button.
+   Both return the moment the opening is behind the reader. */
+body.film #progress,
+body.film #totop{ transition:opacity .4s var(--e); }
+body.film.film-on #progress,
+body.film.film-on #totop{
+  opacity:0;
+  pointer-events:none;
+}
+
+/* Reduced motion, and the case where the motion layer never arrives: show
+   the finished composition and take the scrubbing distance away, rather than
+   asking for four screens of scrolling that no longer do anything. */
+.film[data-film-still]{
+  --film-run:100svh;
+}
+.film[data-film-still] .film__title{
+  --film-reveal:1;
+  --film-exit:0;
+}
+.film[data-film-still] .film__shot{ display:none; }
+/* A page with a still of its film's last frame shows that instead of the
+   film, so the still needs nothing from the video: not the file, not a
+   decoder, not a seek. */
+.film[data-film-still] .film__stage{
+  background:#000 var(--film-still-image, none) var(--film-still-position, 50% 50%) / cover no-repeat;
+}
+
+@media (min-width:1600px){
+  .film__title{ --film-track-to:var(--film-track-wide, .54); }
+}
+
+/* A window taller than it is wide shows about a 43%-wide slice of a 16:9
+   frame, so which slice that is has to be chosen per page too. */
+@media (max-aspect-ratio:6/5){
+  .film__video{ object-position:var(--film-crop-narrow, var(--film-crop, 50% 50%)); }
+}
+
+/* Narrow screens keep the intent — very thin, widely tracked, one line — by
+   giving up size long before they give up the spacing. */
+@media (max-width:720px){
+  .film{ --film-run:var(--film-run-page-narrow, 420vh); }
+  .film__title{
+    font-size:var(--film-size-narrow, clamp(18px, 5.6vw, 30px));
+    --film-track-from:.16;
+    --film-track-to:.28;
+  }
+}
+
+/* Only where one line genuinely cannot be had: the spacing narrows, and the
+   two words still do not break apart. */
+@media (max-width:360px){
+  .film__title{
+    font-size:var(--film-size-tiny, clamp(16px, 5.2vw, 22px));
+    --film-track-to:.22;
+  }
+}
+
+/* ---- CIRS Captures -------------------------------------------------------
+   A camera on a dark set. The frame is nearly black throughout, the camera's
+   base sits at about four fifths of it, and the floor below that is where the
+   line goes.
+
+   The crop is taken mostly off the top rather than evenly: centring it drops
+   the camera's base to the very foot of the window on a wide monitor while
+   leaving it at four fifths on a laptop, so the line below it had nowhere to
+   sit that worked on both. Off the top — which is empty smoke — holds the
+   base at four fifths on every shape of screen.
+
+   Narrow windows take their slice from the left, which keeps the whole of
+   the lens: the front element, the barrel, the marked rings. Centred, the
+   lens came off the left edge and the body ran off the right, and what was
+   left read as a dark shape rather than as a camera. */
+body.captures{
+  --film-ground:#04040A;
+  --film-crop:50% 80%;
+  --film-crop-narrow:32% 80%;
+  /* The film and the line keep the lengths they always had, and the
+     photograph out of the lens adds 130vh after them (see the page's entry
+     in tools/build-site.py); on narrow screens every length is scaled by the
+     same 320/360 as the rest of the opening. */
+  --film-run-page:590vh;
+  --film-run-page-narrow:535.56vh;
+  --film-focus:37% 40%;
+  --film-shot-lqip:url(../img/captures-shot-lqip.jpg);
+  --film-still-image:url(../img/captures-camera-final.jpg);
+  --film-still-position:50% 80%;
+  /* The opening now ends on the photograph, so the ramp to paper starts on
+     the tone its foot is taken down to. The photograph's foot is not one
+     colour — bright dress on one side, dark stage on the other — so the
+     picture's own foot is faded to this (.film__shot::before) and the ramp
+     continues from it. The rise is a warm grey rather than a red, so the
+     way to paper does not pass through pink. */
+  --film-seam-top:#180705;
+  --film-seam-fold:#140604;
+  --film-seam-rise:#6A5B57;
+}
+/* The still ends on the camera, so its seam keeps the camera's tones. */
+body.captures .film[data-film-still] .film__video{ visibility:hidden; }
+body.captures .film[data-film-still] + .film__seam{
+  --film-seam-top:#2A2726;
+  --film-seam-fold:#211C1B;
+  --film-seam-rise:#6B6560;
+}
+/* The photograph changes at the same boundary as the film's crop, to a
+   portrait cut of the same picture: the landscape one, cropped to a phone,
+   is a strip of dark stage with the dancer half out of it. */
+@media (max-aspect-ratio:6/5){
+  body.captures{
+    --film-focus:52% 40%;
+    --film-shot-lqip:url(../img/captures-shot-portrait-lqip.jpg);
+    --film-still-position:32% 80%;
+  }
+}
+body.captures .film__title{
+  --film-title-bottom:clamp(56px, 8.5vh, 110px);
+}
+@media (max-width:720px){
+  body.captures .film__title{ --film-title-bottom:clamp(48px, 9vh, 96px); }
+}
+
+/* ---- Our Sports ----------------------------------------------------------
+   A field at sunrise, and the opposite problem. This frame is bright: the sky
+   and the mountains behind it measure light enough that white lettering over
+   them falls to about 1.4:1, and the sunlit grass in the foreground is not
+   much kinder once its specular highlights are counted.
+
+   The one band that holds is the treeline across the middle of the field, at
+   a little above half the height of the frame, which measures 6.6:1 at its worst
+   against this white. So the line sits there rather than low: above the ball,
+   which is the subject and is not to be covered, and below the mountains.
+   Anchoring it by its middle to a percentage of the window, instead of to the
+   foot of it, is what keeps it on that band when the crop changes.
+
+   The crop stays centred, which this frame can afford: the ball is already in
+   the middle, so a narrow window loses the far touchlines and keeps the
+   subject. The seam starts at #4E4322, which is what the foot of the frame
+   measures — sunlit grass in shadow, warm rather than green, and nothing a
+   guess would have landed on. */
+body.sports{
+  --film-ground:#0B1410;
+  --film-seam-top:#4E4322;
+  --film-seam-fold:#3E351C;
+  --film-seam-rise:#9A9170;
+}
+body.sports{
+  --film-size:clamp(28px, 4vw, 64px);
+  --film-size-narrow:clamp(17px, 5vw, 28px);
+  --film-size-tiny:clamp(15px, 4.6vw, 21px);
+}
+body.sports .film__title{
+  --film-title-top:44%;
+  --film-title-lift:-50%;
+}
+body.sports .film__scroll-cue{
+  --film-scroll-cue-opacity:1;
+  position:absolute;
+  z-index:2;
+  bottom:clamp(34px,7vh,72px);
+  left:var(--gut);
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin:0;
+  color:var(--gold-lit);
+  font-family:var(--font-primary);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  line-height:1;
+  text-transform:uppercase;
+  text-shadow:0 2px 12px rgba(0,0,0,.72);
+  opacity:var(--film-scroll-cue-opacity);
+  pointer-events:none;
+}
+body.sports .film__scroll-cue span:first-child{
+  display:grid;
+  width:26px;
+  height:26px;
+  place-items:center;
+  border:1px solid rgba(255,229,133,.76);
+  border-radius:50%;
+  font-size:1rem;
+  letter-spacing:0;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .film{ --film-run:100svh; }
+  .film__title{
+    --film-reveal:1;
+    --film-exit:0;
+    transition:none;
+    will-change:auto;
+  }
+  .film__shot{ display:none; }
+  .film__stage{
+    background:#000 var(--film-still-image, none) var(--film-still-position, 50% 50%) / cover no-repeat;
+  }
+  body.captures .film__video{ visibility:hidden; }
+  body.captures .film__seam{
+    --film-seam-top:#2A2726;
+    --film-seam-fold:#211C1B;
+    --film-seam-rise:#6B6560;
+  }
+}
