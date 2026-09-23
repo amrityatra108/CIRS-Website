@@ -1217,9 +1217,9 @@ main{ position:relative; z-index:1; background:var(--paper); }
 /* ============================================================
    The opening sequence
    ============================================================
-   A 200vh track with a 100svh stage stuck to the top of it. The
-   stage stands still through the second hundred of viewport
-   height and that travel is the sequence's scrub distance.
+   A 180vh track with a 100svh stage stuck to the top of it. The
+   stage stands still through the 80vh past the first screen and
+   that travel is the sequence's scrub distance.
 
    Pinning is `position: sticky` and nothing else. ScrollTrigger's
    own pin rewrites the document with a spacer, which on this site
@@ -1227,34 +1227,36 @@ main{ position:relative; z-index:1; background:var(--paper); }
    watches. Sticky costs neither.
    ============================================================ */
 .hseq{ position:relative; background:var(--purple-ink); }
-/* The track is the stage plus the travel. A 100svh stage in a 260svh
-   track stands still for 160svh, and that 160 is the whole of the
-   sequence's scrub. The extra 60 over a bare doubling is what lets the
-   settled plate hold for a moment before the stage releases: at 200svh
-   the plate reached its frame on the same pixel the stage started
-   leaving, so the composition the sequence builds was never once seen
-   at rest. */
-.hseq__track{ height:260svh; height:260vh; }
+/* The track is the stage plus the travel. A 100svh stage in a 180svh
+   track stands still for 80svh, and that 80 is the whole of the
+   sequence's scrub. The plate reaches its frame at .62 of that — about
+   half a screen of scrolling, which is the pace the opening always had
+   — and the remaining 30svh is the hold: at a bare doubling the plate
+   arrived on the same pixel the stage started leaving on, so the
+   composition the sequence builds was never once seen at rest.
+
+   It was 260svh when the plate had a second leg to travel. It has one
+   destination now, so a shorter track carries it; leaving the old
+   length in place would have spread the same movement over three times
+   the scrolling and read as drag. */
+.hseq__track{ height:180svh; height:180vh; }
 .hseq__stage{
   position:sticky; top:0;
   height:100svh; height:100vh;
   overflow:hidden; isolation:isolate;
 }
 
-/* The three positions. These boxes are laid out and never painted;
+/* The two positions. These boxes are laid out and never painted;
    the script reads them and scrubs the plate between them, which is
    why a breakpoint can move the sequence without the script knowing
    a thing about it. Keep them in the stylesheet. */
 .hseq__marks{ position:absolute; inset:0; z-index:0; pointer-events:none; visibility:hidden; }
 .hseq__mark{ position:absolute; }
 .hseq__mark--p0{ inset:0; }
+/* The frame the sequence settles on: the photograph drawn in off all
+   four edges, still wide, with the headline across the foot of it. The
+   opening zooms out to here and stops. */
 .hseq__mark--p1{ inset:4vh 6vw 10vh; }
-.hseq__mark--p2{
-  /* The plate the sequence settles on: an upright frame held right
-     of centre, with the headline occupying the column beside it. */
-  top:9vh; bottom:16vh; right:7vw;
-  width:min(42vw, 46svh * 1.1);
-}
 
 .hseq__plate{
   position:absolute; z-index:1;
@@ -1300,17 +1302,16 @@ main{ position:relative; z-index:1; background:var(--paper); }
 .hseq__type h1{ font-size:var(--fs-mega); color:#fff; line-height:.98; letter-spacing:-.02em; }
 .hseq__type h1 em{ color:var(--gold-lit); }
 
-/* Narrow: the settled plate has no room to sit beside a column of type,
-   so P2 becomes a shallower full-width crop and the headline keeps the
-   foot of the stage. */
+/* Narrow: a phone has less height to spend on a margin than a desktop
+   window has, and the headline below the frame needs the foot of the
+   stage, so the inset pulls in on every edge. */
 @media (max-width:900px){
   .hseq__mark--p1{ inset:2vh 4vw 8vh; }
-  .hseq__mark--p2{ top:6vh; bottom:30vh; right:4vw; width:92vw; }
 }
 
-/* Motion off, or no script: the sequence is one still panel at P2's
-   full-bleed equivalent. The track collapses to a single screen so
-   there is no empty scroll to cross, and nothing sticks. */
+/* Motion off, or no script: the sequence is one still full-bleed panel.
+   The track collapses to a single screen so there is no empty scroll to
+   cross, and nothing sticks. */
 @media (prefers-reduced-motion:reduce){
   .hseq__track{ height:auto; }
   .hseq__stage{ position:relative; }

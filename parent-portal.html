@@ -7,8 +7,14 @@
 <meta name="description" content="Fee payment and the parent login for CIRS. The Parent Portal on this site is not open yet; both run on the school's existing systems.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/parent-portal.html">
-<link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
-<link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Parent Portal">
 <meta property="og:description" content="Fee payment and the parent login for CIRS. The Parent Portal on this site is not open yet; both run on the school's existing systems.">
@@ -29,10 +35,11 @@
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
+<link rel="stylesheet" href="assets/css/connect.css?b=95">
 <link rel="stylesheet" href="assets/css/typography.css?b=95">
 </head>
 
-<body>
+<body class="connect">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
