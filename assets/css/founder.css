@@ -31,6 +31,10 @@ body.founder .footer-wrap{ background:var(--f-paper-2); }
 /* Approved autonomous portrait opening, isolated from editorial page styles. */
 .founder .founder-opening{position:relative;box-sizing:border-box;height:100vh;height:100svh;min-height:420px;padding-top:100px;background:#f2efe8;}
 .founder .founder-opening__frame{display:block;width:100%;height:100%;border:0;}
+/* The embedded portrait draws its own cursor. Hide the site-wide trailing
+   ring while the pointer is inside the iframe so the ring cannot freeze at
+   the browsing-context boundary and appear as a second cursor. */
+body.founder:has(.founder-opening__frame:hover) > .ring{opacity:0!important;}
 .founder .founder-opening__continue{position:absolute;bottom:24px;left:24px;z-index:2;display:flex;gap:20px;align-items:center;padding:12px 18px;border:1px solid var(--f-rule);border-radius:30px;background:var(--f-paper);color:var(--f-ink);font-size:12px;text-decoration:none;}
 .founder .founder-opening__continue:focus-visible{outline:2px solid var(--f-gold-ink);outline-offset:4px;}
 @media(max-width:700px){.founder .founder-opening__continue{left:50%;transform:translateX(-50%);white-space:nowrap;}}

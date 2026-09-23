@@ -1,6 +1,6 @@
-/* The cinematic opening shared by CIRS Captures, Our Sports and CIRS Theatre.
+/* The cinematic opening shared by the CIRS film openings.
 
-   Both open the same way, because they are the same page furniture with a
+   These pages open the same way, because they share page furniture with a
    different film in it: the reader scrubs a short piece of footage with the
    scroll, it ends, it is held, and one thin widely-tracked line arrives over
    the frame it ended on. What differs between them is the file, the words,
@@ -110,9 +110,8 @@
     setScrollCue(p);
   }
 
-  // A composed still can restore the same frame on a halfway reload and
-  // retain the final hold through a viewport resize. The existing openings
-  // continue using ScrollTrigger's own progress, as before.
+  // Composed still openings measure their position directly. This keeps a
+  // halfway reload stable and avoids stale section bounds after a resize.
   function paintPosition() {
     var travel = Math.max(1, section.offsetHeight - window.innerHeight);
     if (measuredTravel && Math.abs(travel - measuredTravel) > 2 &&
@@ -188,29 +187,33 @@
     if (unavailable) return;
     if (!frames()) return;
     if (fallbackTimer) { window.clearTimeout(fallbackTimer); fallbackTimer = null; }
-    if (reduced.matches || !hasST) { still(); return; }
+    if (reduced.matches || !hasST) {
+      still();
+      section.removeAttribute("data-film-pending");
+      return;
+    }
     if (trigger) {
       if (hasComposedStill) paintPosition(); else paint(trigger.progress);
     }
     else scrub();
-    if (hasComposedStill) section.removeAttribute("data-film-pending");
+    section.removeAttribute("data-film-pending");
   }
 
   if (film.readyState >= 1) start();
   film.addEventListener("loadedmetadata", start);
-  // Without the file there is no opening to scrub. Leave the section at one
-  // screen with the line up, rather than four screens of nothing.
+  // Without usable media, show the composed still and title at one screen.
   function fallback() {
     if (unavailable) return;
     unavailable = true;
     teardown();
     section.setAttribute("data-film-still", "");
     setReveal(1);
+    if (scrollCue) scrollCue.style.setProperty("--film-scroll-cue-opacity", "0");
     section.removeAttribute("data-film-pending");
   }
+  // An unused source can fail while WebM is loading. After metadata a media
+  // error is definitive; before metadata wait for both source errors.
   film.addEventListener("error", function () {
-    // An unused source can fail while WebM is loading. A media error after
-    // metadata is definitive; before metadata wait for both source errors.
     if (!hasComposedStill || duration) fallback();
   });
   if (hasComposedStill) {
