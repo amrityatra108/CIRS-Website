@@ -18,6 +18,7 @@ against the WCAG AA floors (4.5:1 for body text, 3:1 for large text).
     python3 tools/check-contrast.py founder.html      # the Founder banner
     python3 tools/check-contrast.py cultural-gallery.html   # the fold over the photograph wall
     python3 tools/check-contrast.py why-cirs.html     # the lines over the About photographs
+    python3 tools/check-contrast.py captures.html    # the line over the last frame of the camera
     python3 tools/check-contrast.py student-life.html # the headline in the campus band's gradient
 
 Admissions and News are a .pagehero over a looping video and are seeked
@@ -51,6 +52,18 @@ const { chromium } = require('playwright-core');
     await p.waitForTimeout(600);
   }
 
+  // CIRS Captures opens on a film the reader scrubs with the scroll, and its
+  // one line of type is not drawn at all until that film has finished. At the
+  // top of the page there is nothing to measure; the composition worth
+  // measuring is the one the opening ends on, so scroll to it first.
+  if (await p.$('[data-captures]')) {
+    await p.evaluate(() => {
+      const opening = document.querySelector('[data-captures]');
+      window.scrollTo(0, opening.offsetHeight - window.innerHeight);
+    });
+    await p.waitForTimeout(1500);
+  }
+
   // A looping video behind the text: sample across the loop, not once.
   const times = await p.evaluate(() => {
     const v = document.querySelector('.pagehero__video, .hero__video, .hseq__video');
@@ -67,7 +80,7 @@ const { chromium } = require('playwright-core');
   const drifting = await p.evaluate(() => !!document.querySelector('.crwall, #p1-stage'));
   const boxes = await p.evaluate(() => {
     const out = [];
-    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .hseq__type .sc, .hseq__type h1, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll, .fhero .fmeta, .fhero__name, .fhero__dates, .fhero__say, .fhero__sig, .fhero__cue, .p1-hero__eyebrow, .p1-hero-text, .p1-hero__cue, .p1-hud, .saga__eyebrow, .saga__line, .saga__by, .saga__more, .lifeband__say .sc, .lifeband__say h2, .lifeband__say .copy, .lifeband__cta .btn').forEach(el => {
+    document.querySelectorAll('.pagehero .sc, .pagehero h1, .pagehero .lead, .pagehero__dates dt, .pagehero__dates dd, .newsflash__label, .newsflash__item.is-on .newsflash__when, .newsflash__item.is-on .newsflash__what, .hero .sc, .hero h1, .hero__scroll, .hseq__type .sc, .hseq__type h1, .crhero .sc, .crhero__word, .crhero__lead, .crhero__note, .crmeter__n, .crmeter__t, .crhero__scroll, .fhero .fmeta, .fhero__name, .fhero__dates, .fhero__say, .fhero__sig, .fhero__cue, .p1-hero__eyebrow, .p1-hero-text, .p1-hero__cue, .p1-hud, .saga__eyebrow, .saga__line, .saga__by, .saga__more, .lifeband__say .sc, .lifeband__say h2, .lifeband__say .copy, .lifeband__cta .btn, .cap__line').forEach(el => {
       const r = el.getBoundingClientRect();
       if (r.width < 4 || r.height < 4) return;
       const cs = getComputedStyle(el);
@@ -94,7 +107,7 @@ const { chromium } = require('playwright-core');
     return out;
   });
   // hide the text, photograph what is behind it
-  await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap, .crhero .wrap, .p1-hero > *, .p1-hud, .saga__inner, .lifeband__say{visibility:hidden!important}' });
+  await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap, .crhero .wrap, .p1-hero > *, .p1-hud, .saga__inner, .lifeband__say, .cap__title{visibility:hidden!important}' });
   await p.waitForTimeout(300);
   const shots = [];
   const passes = times || (drifting ? [null, null, null, null, null] : [null]);

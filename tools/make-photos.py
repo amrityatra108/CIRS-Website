@@ -45,6 +45,10 @@ PHOTOS = [
     # over the Ghats behind them. Framed low, so the ridge and the sky have
     # the top of the picture and the gradient has the ground.
     ("campus-band.jpg",         "IMG_2051.JPG", (1920, 1080), (0.50, 0.56)),
+    # The Student Life opening worlds. The transparent foreground student is
+    # derived separately by tools/make-life-split-cutout.py.
+    ("life-split-academic.jpg",  "drive-student-life-academic.JPG", (1800, 1200), (0.50, 0.50)),
+    ("life-split-beyond.jpg",    "drive-student-life-beyond.JPG",   (1800, 1200), (0.50, 0.50)),
     ("junior-school.jpg",       "IMG_1898.JPG", (1200, 1500), (0.50, 0.45)),
     ("senior-school.jpg",       "IMG_1894.JPG", (1200, 1500), (0.50, 0.45)),
 

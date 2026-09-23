@@ -31,10 +31,13 @@
 
   --ink:       #1A1119;
   --ink-soft:  #4E4350;
-  --ink-mute:  #7C7080;
+  /* Secondary copy uses a solid colour rather than reduced opacity. This keeps
+     the hierarchy visible without making small text fragile on textured or
+     tinted sections. */
+  --ink-mute:  #685D6B;
   --on-purple:      #F5EEF2;
-  --on-purple-soft: rgba(245,238,242,.78);
-  --on-purple-mute: rgba(245,238,242,.54);
+  --on-purple-soft: #D8CDD4;
+  --on-purple-mute: #B9ABB4;
 
   --rule:       #DCD2D8;
   --rule-soft:  #EAE1E6;
@@ -75,6 +78,11 @@
 
   --e:  cubic-bezier(.22,.61,.36,1);
   --e2: cubic-bezier(.16,1,.3,1);
+
+  /* A shared depth language: quiet enough to support the photography rather
+     than becoming a second visual subject. */
+  --shadow-image: 0 22px 52px rgba(30,22,38,.14);
+  --shadow-control: 0 8px 22px rgba(30,22,38,.12);
 }
 
 /* ============================================================
@@ -98,7 +106,7 @@ img{ display:block; max-width:100%; height:auto; }
 svg{ display:block; }
 a{ color:inherit; text-decoration:none; }
 button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
-h1,h2,h3,h4{ margin:0; font-weight:400; }
+h1,h2,h3,h4{ margin:0; font-weight:400; text-wrap:balance; }
 p{ margin:0; }
 ul,ol{ margin:0; padding:0; list-style:none; }
 strong,b{ font-weight:600; }
@@ -133,9 +141,9 @@ strong,b{ font-weight:600; }
 
 .lead{
   font-size:var(--fs-lead); line-height:1.58; color:var(--ink-soft);
-  max-width:var(--measure);
+  max-width:var(--measure); text-wrap:pretty;
 }
-.copy{ color:var(--ink-soft); max-width:var(--measure); }
+.copy{ color:var(--ink-soft); max-width:var(--measure); text-wrap:pretty; }
 .copy + .copy{ margin-top:1.05em; }
 
 /* Labels retain their hierarchy; the typography sheet controls caps and spacing. */
@@ -157,9 +165,16 @@ strong,b{ font-weight:600; }
 :is(.on-purple, .filmsec, .footer, .finalcta, .band, .motto)
   :is(.sc, .feature__tag, .dmoment__i){ color:var(--gold-lit); }
 
-/* Section marker: hairline + small caps */
+/* Section marker: the small diamond and hairline repeat one recognisable CIRS
+   signature across otherwise very different editorial pages. */
 .marker{ display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+.marker::before{
+  content:""; width:7px; height:7px; flex:0 0 7px;
+  border:1px solid var(--maroon); transform:rotate(45deg);
+}
 .marker::after{ content:""; height:1px; flex:1; background:var(--rule); }
+.on-purple .marker::before,
+:is(.filmsec,.footer,.finalcta,.band,.motto) .marker::before{ border-color:var(--gold-lit); }
 .on-purple .marker::after{ background:var(--rule-purple); }
 
 /* Figures: oldstyle in editorial settings, lining+tabular in data */
@@ -253,9 +268,19 @@ section[id]{ scroll-margin-top:88px; }
   display:inline-flex; align-items:center; justify-content:center; gap:9px;
   padding:12px 24px; font-size:var(--fs-sm); font-weight:600;
   border:1.5px solid transparent;
-  transition:background .25s var(--e), color .25s var(--e), border-color .25s var(--e);
+  box-shadow:var(--shadow-control);
+  transition:background .25s var(--e), color .25s var(--e), border-color .25s var(--e),
+             box-shadow .25s var(--e), transform .25s var(--e);
   white-space:nowrap;
 }
+.btn[href]::after{
+  content:""; width:6px; height:6px; flex:none;
+  border-top:1.5px solid currentColor; border-right:1.5px solid currentColor;
+  transform:rotate(45deg); transition:transform .25s var(--e);
+}
+.btn[href]:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(30,22,38,.17); }
+.btn[href]:hover::after{ transform:translateX(2px) rotate(45deg); }
+.btn[href]:active{ transform:translateY(0); box-shadow:var(--shadow-control); }
 .btn--primary{ background:var(--gold); color:#1E1626; transition:border-color .25s var(--e); }
 .btn--primary:hover{ background:var(--maroon); color:#fff; }
 .btn--outline{ border-color:var(--purple); color:var(--purple); }
@@ -434,7 +459,10 @@ section[id]{ scroll-margin-top:88px; }
 .prog{ display:grid; gap:clamp(20px,2.6vw,38px); }
 @media (min-width:880px){ .prog{ grid-template-columns:1fr 1fr; } }
 .prog__card{ display:flex; flex-direction:column; }
-.prog__card figure{ margin:0 0 22px; overflow:hidden; aspect-ratio:16/9; background:var(--purple-deep); }
+.prog__card figure{
+  margin:0 0 22px; overflow:hidden; aspect-ratio:16/9;
+  background:var(--purple-deep); box-shadow:var(--shadow-image);
+}
 .prog__card img{ width:100%; height:100%; object-fit:cover; transition:transform .9s var(--e2); }
 .prog__card:hover img{ transform:scale(1.045); }
 .prog__head{ display:flex; align-items:baseline; gap:14px; margin-bottom:12px; }
@@ -457,17 +485,9 @@ section[id]{ scroll-margin-top:88px; }
    The run — the home page's horizontal passage
    ------------------------------------------------------------
    It fills the window. The section pins at 100svh with nothing
-   above or below it inside the frame — no heading band, no
-   progress rail — and the stage under it is a 780vw canvas with
-   every item placed absolutely at one of three heights.
-
-   That arrangement is the point, and it is the one the Chinmaya
-   Yuva Kendra page uses. A flex row cannot do it: however wide
-   the gaps are set, a row still lines everything up on a single
-   band across the middle of the screen. Placing items on a
-   canvas is what lets a photograph sit high on the left while
-   the next sits low and far to the right, with a screen of
-   nothing between them.
+   above or below it inside the frame. The stage is a measured
+   horizontal gallery: every text panel and photograph owns a
+   distinct cell, so depth can never turn into overlap.
 
    Sizes are given in vh, so the run is composed against the
    height of the window rather than its width and a frame is
@@ -487,29 +507,33 @@ section[id]{ scroll-margin-top:88px; }
     radial-gradient(90% 80% at 92% 100%, rgba(57,42,72,.5), transparent 62%),
     var(--purple-ink);
 }
-.hrun__viewport{ height:100%; overflow:hidden; perspective:1600px; }
+.hrun__viewport{
+  height:100%; overflow:hidden;
+  /* A close, centred camera makes the photographs read as one curved
+     gallery rather than as individually tilted cards. */
+  perspective:1100px; perspective-origin:50% 48%;
+}
 .hrun__stage{
-  position:relative; width:780vw; height:100%;
+  position:relative; width:max-content; min-width:100%; height:100%;
+  display:flex; align-items:center;
+  gap:clamp(96px,10vw,180px);
+  padding-inline:clamp(7vw,10vw,150px);
   will-change:transform;
 }
 
 /* --- the photographs ------------------------------------- */
 .hframe{
-  position:absolute; z-index:1; margin:0;
-  transform-style:preserve-3d; will-change:transform;
+  position:relative; inset:auto !important; z-index:1; margin:0;
+  flex:0 0 auto;
+  transform-style:preserve-3d; transform-origin:50% 50%;
+  backface-visibility:hidden; will-change:transform;
 }
-/* Centred vertically when the item asked for the middle band. The custom
-   property is set in the markup beside top:50%, because a transform here
-   would be overwritten by the one the parallax writes every frame — so
-   cirs.js reads it and folds the -50% into the transform it sets. */
 .hframe img{
-  display:block; width:auto; max-width:none; height:var(--h);
-  object-fit:cover;
-  /* Softened from 3px. The run is the one place on the site where a
-     photograph floats free of any edge, and a hairline radius on a frame
-     that size reads as a rendering artefact rather than as a decision. */
-  border-radius:clamp(10px,1.1vw,18px);
-  box-shadow:0 30px 80px rgba(0,0,0,.55);
+  display:block; width:100%; max-width:none; height:auto;
+  object-fit:cover; border-radius:12px;
+  border:1px solid rgba(255,195,8,.32);
+  box-shadow:0 24px 64px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.08);
+  backface-visibility:hidden;
 }
 /* Above the frame and left-aligned with it, as in the reference: an index,
    not a caption, and quiet enough to read as one. */
@@ -524,38 +548,49 @@ section[id]{ scroll-margin-top:88px; }
   font-family:var(--font-primary); font-size:.95rem; letter-spacing:.01em;
   color:var(--on-purple-soft);
 }
-.hframe--xxl{ --h:64vh; }
-.hframe--xl{ --h:56vh; }
-.hframe--l { --h:40vh; }
-.hframe--m { --h:29vh; }
-.hframe--s { --h:21vh; }
+/* Preserve the source orientation instead of forcing every photograph into
+   one card size. Landscape frames use the requested 16:9 crop; the two
+   portrait families retain their own 4:5 and 2:3 silhouettes. */
+.hframe:has(img[width="1500"][height="1000"]){ width:clamp(460px,46vw,690px); }
+.hframe:has(img[width="1500"][height="1000"]) img{ aspect-ratio:16 / 9; }
+.hframe:has(img[width="1000"][height="1250"]){ width:clamp(300px,29vw,430px); }
+.hframe:has(img[width="1000"][height="1250"]) img{ aspect-ratio:4 / 5; }
+.hframe:has(img[width="1000"][height="1500"]){ width:clamp(280px,26vw,390px); }
+.hframe:has(img[width="1000"][height="1500"]) img{ aspect-ratio:2 / 3; }
 
 /* --- the written statements ------------------------------- */
 .hsay{
-  position:absolute; z-index:2;
-  width:clamp(300px,30vw,520px);
-  will-change:transform;
+  position:relative; inset:auto !important; z-index:2;
+  flex:0 0 clamp(330px,34vw,540px);
+  width:clamp(330px,34vw,540px);
+  transform-style:preserve-3d; transform-origin:50% 50%;
+  backface-visibility:hidden; will-change:transform;
 }
 .hsay__eyebrow{
   font-family:var(--font-primary);
   font-variant-caps:normal; font-feature-settings:normal;
   letter-spacing:.06em; font-size:.98rem; color:var(--gold);
   margin-bottom:clamp(16px,1.6vw,26px);
+  transform:translateZ(68px);
 }
 .hsay__big{
   font-family:var(--font-primary); font-weight:700; text-transform:none;
   font-size:clamp(1.8rem,3vw,3.2rem); line-height:.95;
   letter-spacing:-.03em; color:var(--on-purple);
+  text-shadow:0 22px 42px rgba(55,39,4,.18);
+  transform:translateZ(92px);
 }
 .hsay__sub{
   margin-top:clamp(18px,1.8vw,28px);
   color:var(--on-purple-soft); font-size:var(--fs-lead);
+  transform:translateZ(38px);
 }
 .hsay--open{ width:clamp(320px,38vw,660px); }
 .hsay--open .hsay__big{ font-size:clamp(2.1rem,4.2vw,4.4rem); }
 
 /* --- the ghost words -------------------------------------- */
 .hghost{
+  display:none;
   position:absolute; z-index:0; pointer-events:none; white-space:nowrap;
   font-family:var(--font-primary); font-weight:700; text-transform:none;
   font-size:clamp(4rem,12vw,14rem); line-height:.9; letter-spacing:-.045em;
@@ -582,15 +617,20 @@ section[id]{ scroll-margin-top:88px; }
 }
 .hrun.is-static .hframe,
 .hrun.is-static .hsay{
-  position:static; flex:none; transform:none; scroll-snap-align:start;
+  position:static; inset:auto !important; flex:none; transform:none; scroll-snap-align:start;
 }
 .hrun.is-static .hsay{ width:min(80vw,430px); }
+.hrun.is-static .hsay > *{ transform:none; }
 .hrun.is-static .hghost{ display:none; }
 .hrun.is-static .hframe--xxl{ --h:44vh; }
 .hrun.is-static .hframe--xl{ --h:38vh; }
 .hrun.is-static .hframe--l { --h:32vh; }
 .hrun.is-static .hframe--m { --h:28vh; }
 .hrun.is-static .hframe--s { --h:24vh; }
+
+.hrun.is-static .hframe:has(img[width="1500"][height="1000"]){ width:min(82vw,620px); }
+.hrun.is-static .hframe:has(img[width="1000"][height="1250"]){ width:min(68vw,400px); }
+.hrun.is-static .hframe:has(img[width="1000"][height="1500"]){ width:min(62vw,360px); }
 
 @media (max-width:700px){
   .hrun.is-static .hsay__big{ font-size:clamp(1.7rem,7vw,2.4rem); }
@@ -599,6 +639,10 @@ section[id]{ scroll-margin-top:88px; }
   .hrun.is-static .hframe--l,
   .hrun.is-static .hframe--m,
   .hrun.is-static .hframe--s{ --h:30vh; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hsay > *{ transform:none; }
 }
 
 /* ============================================================
@@ -1110,7 +1154,7 @@ main{ position:relative; z-index:1; background:var(--paper); }
 /* Opening curtain. Removed from the document once it has played. */
 .curtain{
   position:fixed; inset:0; z-index:400;
-  background:var(--purple); color:#fff;
+  background:var(--purple-deep); color:#fff;
   display:grid; place-content:center; justify-items:center; gap:22px;
   text-align:center; padding:24px;
 }
