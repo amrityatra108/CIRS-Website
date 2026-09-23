@@ -280,7 +280,7 @@ PAGES = {
         "title": "Sports",
         "description": "Athletics, basketball, swimming and the playing fields at CIRS.",
         "sheet": "sports-journey",
-        "cache_suffix": "-sports-journey-2",
+        "cache_suffix": "-sports-journey-5",
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
@@ -675,15 +675,20 @@ def film_html(slug, page):
     phase boundaries; the mechanics are in assets/css/filmintro.css and
     assets/js/filmintro.js, once, for both.
 
-    The markup is deliberately this bare. Everything in it is either the film
-    or the line: no heading above it, no cue, no scroll hint, nothing the
-    brief for either page would call furniture.
+    The film remains the opening's only dominant element. Our Sports adds one
+    discreet scroll cue over its first frames; CIRS Captures keeps the plain
+    film-and-title composition.
     """
     film = page["opening"]
     phases = film.get("phases")
     attrs = f' data-film-phases="{" ".join(f"{v:g}" for v in phases)}"' if phases else ""
     if film.get("fps", 24) != 24:
         attrs += f' data-film-fps="{film["fps"]:g}"'
+    cue = (
+        '    <p class="film__scroll-cue" data-film-scroll-cue>'
+        '<span aria-hidden="true">↓</span><span>Scroll to discover</span></p>\n'
+        if slug == "sports" else ""
+    )
     return f'''<section class="film" id="{slug}-opening" data-film{attrs}>
   <div class="film__stage">
     <video class="film__video" data-film-video
@@ -702,7 +707,7 @@ def film_html(slug, page):
       <source src="assets/video/{film["video"]}.mp4" type="video/mp4">
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
-    <h1 class="film__title" data-film-title><span class="film__line">{film["title"]}</span></h1>
+{cue}    <h1 class="film__title" data-film-title><span class="film__line">{film["title"]}</span></h1>
   </div>
 </section>
 <div class="film__seam" aria-hidden="true"></div>'''
