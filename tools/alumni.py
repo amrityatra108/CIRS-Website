@@ -9,22 +9,20 @@ tools/pages/alumni.html except the chapters' own copy.
 
 WHAT IS HERE IS WHAT THE SCHOOL HAS ALREADY SAID.
 
-The page it replaces carried four things and nothing else: eighteen
-institutions grouped into four regions, three alumni quotations with the
-names of the alumni who gave them, four named alumni with their present
-roles, and a note that further alumni were to be supplied. All four are
-reproduced below exactly as they stood. Not one name, year, university,
-role, city or quotation has been added to them, because there is nowhere in
-this repository that a fifth alumnus could have been read from.
+The previous page carried eighteen institutions grouped into four regions,
+three alumni quotations, four named alumni with their present roles, and a
+note that further alumni were to be supplied. Those records remain. The
+current page also includes extended biographies for the four named alumni;
+batch years, current cities, portraits and personal reflections remain
+omitted until supplied.
 
 WHAT IS DELIBERATELY MISSING.
 
-Batch years. Portraits. Cities. Which alumnus went to which institution.
-Anything an alumnus is doing now beyond the one line each of the four
-carries. The page asks for all of it in as many words rather than filling
-the shape with invention, and ALUMNI-CONTENT.md is the list the school works
-through to supply it. A portrait that has not arrived renders as a marked
-plate, not as a stock photograph of somebody else.
+Batch years. Portraits. Cities. Which alumnus went to which institution,
+except for Hari Om Jani, whose biography records the National University of
+Singapore. Extended biographies are included for all four named alumni.
+ALUMNI-CONTENT.md tracks what is still missing. A portrait that has not
+arrived renders as a marked plate, not as a stock photograph of somebody else.
 
 TO PUBLISH MORE.
 
@@ -33,8 +31,9 @@ TO PUBLISH MORE.
   latitude and a longitude; the map places it and draws its route.
 
   An alumnus — add to ALUMNI. Name and one verified line is enough to
-  publish; batch, institution, place and portrait all appear as soon as they
-  are filled in, and are silently left out until they are.
+  publish. Add an extended account in "biography" when one is supplied;
+  batch, institution, place and portrait appear as soon as they are filled
+  in, and are silently left out until they are.
 
   A quotation — add to VOICES, with the name of the person who said it.
 
@@ -44,6 +43,7 @@ counts and the editorial chapters all build from these lists.
 
 import os
 import sys
+from html import escape
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import robinson          # noqa: E402  the projection, shared with make-worldmap.py
@@ -194,14 +194,15 @@ def place(lat, lon, nudge=(0.0, 0.0)):
 ORIGIN = place(ORIGIN_LAT, ORIGIN_LON)
 
 # ------------------------------------------------------------------
-# The alumni the school has named, with the single line each was given.
+# The alumni the school has named, with their verified roles and available
+# biographies.
 #
 #   key, name, role   all verified, all reproduced as they stood
 #   batch             "" until the school supplies it
 #   place             "" until the school supplies it
 #   institution       "" — which institution each attended is NOT recorded
-#                     anywhere in this repository, and guessing it from the
-#                     destination list above would be an invention
+#                     for three of the four; Hari Om Jani's is recorded below
+#   biography         an extended biography supplied for this alumnus
 #   portrait          "" until a photograph arrives AND its use is cleared.
 #                     Until then the page draws a marked plate.
 #   then_portrait     "" — the school-era photograph for the Then/Now
@@ -211,26 +212,30 @@ ALUMNI = [
     {"key": "hari-om-jani", "name": "Hari Om Jani",
      "role": "Professor of Physics, Oxford University",
      "field": "Science and research",
-     "batch": "", "place": "", "institution": "",
-     "portrait": "", "then_portrait": ""},
+     "batch": "", "place": "", "institution": "National University of Singapore",
+     "portrait": "", "then_portrait": "",
+     "biography": "He moved to Singapore to pursue his bachelor’s degree in Physics and PhD at the National University of Singapore. He continued there as a Research Fellow and later as a Senior Research Fellow, before moving to Oxford in 2022 as a Marie Skłodowska-Curie Fellow. In 2024, Hari was selected as a Young Scientist for the Lindau Nobel Laureate Meeting and was awarded the Royal Society University Research Fellowship, through which he established his research group, Designer Quantum Materials for Devices. He took up his current position at Queen’s College and the Department of Materials in 2026."},
 
     {"key": "soham-desai", "name": "Soham Desai",
-     "role": "Strength &amp; Conditioning Coach, Indian Cricket Team",
+     "role": "Strength &amp; Conditioning Coach, Lucknow Super Giants",
      "field": "Sport",
      "batch": "", "place": "", "institution": "",
-     "portrait": "", "then_portrait": ""},
+     "portrait": "", "then_portrait": "",
+     "biography": "Soham Desai has been the backbone of one of the most celebrated cricket teams in the world. He served for five years as the lead Strength and Conditioning Coach of the Indian Cricket Team, and is currently with the IPL team Lucknow Super Giants."},
 
     {"key": "divyaj-dt", "name": "Divyaj DT",
-     "role": "Goalkeeper, National Under-19 Football Team",
+     "role": "Goalkeeper, NorthEast United FC",
      "field": "Sport",
      "batch": "", "place": "", "institution": "",
-     "portrait": "", "then_portrait": ""},
+     "portrait": "", "then_portrait": "",
+     "biography": "Divyaj is an alumnus of Alchemy International Football Academy & Baroda Football Academy, progressing to the NorthEast United FC, where he currently plays as Goalkeeper, and has represented India internationally at the youth levels, including the India U19 and India U20 national teams. He was a part of the squad that became champions at the SAFF U19 Championship."},
 
-    {"key": "shashwat-santosh", "name": "Shashwat Santosh",
-     "role": "Designer, Google Creative Labs",
+    {"key": "shashwat-santosh", "name": "Shashwath Santosh",
+     "role": "Designer, Google Creative Lab",
      "field": "Design",
      "batch": "", "place": "", "institution": "",
-     "portrait": "", "then_portrait": ""},
+     "portrait": "", "then_portrait": "",
+     "biography": "Shashwath Santosh is an industrial and product designer based in New York, currently working at Google Creative Lab on AI-driven experiences like Gemini, Project Astra, and Genie. His website can be found at shashwathsantosh.com."},
 ]
 
 # ------------------------------------------------------------------
@@ -622,10 +627,27 @@ def people_html():
                         % person["institution"])
         if person["place"]:
             meta.append('<span class="ajp__metaItem"><b>Now in</b>%s</span>' % person["place"])
-        # Nothing but the field is known for any of the four today. The row
-        # still renders, so the chapter does not collapse into a name and a
-        # gap, and it says which of the five pathways the alumnus belongs to.
+        # Every chapter carries the field of work, with batch, institution,
+        # location and biography details filled only where they are supplied.
         meta.append('<span class="ajp__metaItem"><b>Path</b>%s</span>' % person["field"])
+
+        biography = person.get("biography", "")
+        biography_html = ('<p class="ajp__bio">%s</p>' % escape(biography)
+                          if biography else "")
+        missing = []
+        if not person["batch"]:
+            missing.append("batch year")
+        if not person["institution"]:
+            missing.append("institution attended")
+        if not person["place"]:
+            missing.append("current city")
+        missing.append("a personal reflection")
+        if len(missing) == 1:
+            missing_text = missing[0]
+        else:
+            missing_text = ", ".join(missing[:-1]) + " and " + missing[-1]
+        awaiting_html = ('<p class="ajp__await"><em>[Still to be supplied: %s.]'
+                         '</em></p>' % escape(missing_text))
 
         chapters.append('''  <article class="ajp" id="alumnus-%s" data-person="%s" data-side="%s">
     <div class="ajp__figure">
@@ -638,13 +660,13 @@ def people_html():
     <div class="ajp__text">
       <h3 class="serif ajp__name" data-split>%s</h3>
       <p class="ajp__role">%s</p>
+      %s
       <p class="ajp__meta">%s</p>
-      <p class="ajp__await"><em>[The rest of this alumnus&rsquo;s story &mdash; the batch, where
-        they read, and what they would say about the years here &mdash; to be supplied by the
-        school.]</em></p>
+      %s
     </div>
   </article>''' % (person["key"], person["key"], side, _plate(person), i + 1,
-                   person["name"], person["role"], "".join(meta)))
+                   person["name"], person["role"], biography_html,
+                   "".join(meta), awaiting_html))
     return "\n".join(chapters)
 
 
