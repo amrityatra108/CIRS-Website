@@ -370,6 +370,31 @@
     return tl;
   }
 
+  /* The Math Challenge opening. Every other hero on this site brings its
+     headline in; this one appeared flat, which read as the page having
+     loaded wrong rather than as a choice. The field behind it -- the orbit,
+     the drifting formulae -- is already moving and is left alone.
+
+     This page has a curtain like the rest, so the entrance is handed back
+     paused and played when the curtain lifts, exactly as heroIn does. Run on
+     load instead it plays out behind the curtain and is over before anyone
+     sees it -- which is what it did until this was measured. */
+  function mathHero() {
+    var hero = $(".ma-hero");
+    if (!hero || !animate) return;
+    var bits = [$(".ma-title", hero), $(".ma-strap", hero), $(".ma-hero__cta", hero)]
+      .filter(Boolean);
+    if (!bits.length) return;
+
+    // Without a curtain there is nothing to hide the start state, so the
+    // content is already visible and must stay visible.
+    if (!$("#curtain")) return;
+
+    gsap.set(bits, { opacity: 0, y: 20 });
+    return gsap.timeline({ paused: true })
+      .to(bits, { opacity: 1, y: 0, duration: .9, ease: "power3.out", stagger: .08 });
+  }
+
   function heroParallax() {
     var hero = $(".hero"), media = $(".hero__media");
     if (!hero || !media || !hasST || !animate) return;
@@ -547,7 +572,15 @@
     // Everything else fades up. Crossroads covers are held back from this
     // pass: they get the same reveal with a per-column delay below, and two
     // tweens on one element's opacity is a fight nobody wins.
-    $$(".rv").filter(function (el) { return !el.classList.contains("crcard"); })
+    $$(".rv").filter(function (el) {
+      // ma-step and ma-zone are excluded for the same reason crcard is: they
+      // sit in a row, so they all cross the trigger line together and arrive
+      // as a slab. They get the same reveal with a per-position delay below.
+      return !el.classList.contains("crcard")
+          && !el.classList.contains("ma-step")
+          && !el.classList.contains("ma-zone")
+          && !el.classList.contains("ma-card");
+    })
       .forEach(function (el) {
         gsap.from(el, {
           opacity: 0, y: 24, duration: .95, ease: "power3.out",
@@ -561,6 +594,27 @@
       gsap.from(card, {
         opacity: 0, y: 26, duration: .85, ease: "power3.out", delay: (i % 3) * .09,
         scrollTrigger: { trigger: card, start: "top 92%", once: true }
+      });
+    });
+
+    // The five stages and the four zones arrive one after another rather
+    // than together. The delay is on position in the row, not on index, so
+    // the wave restarts on each row once the grid wraps at a narrow width
+    // and the last card of a row is never waiting on the whole set.
+    [[".ma-step", 5], [".ma-zone", 4], [".ma-card", 3]].forEach(function (pair) {
+      var perRow = pair[1];
+      $$(pair[0]).forEach(function (el, i) {
+        gsap.from(el, {
+          opacity: 0, y: 22, duration: .8, ease: "power3.out",
+          delay: (i % perRow) * .06,
+          // gsap.from leaves the end value inline, and an inline opacity:1
+          // beats .ma-card.is-out for good -- which is why the archive
+          // filter's fade did nothing at all until this was here. Clearing
+          // it hands opacity back to the stylesheet once the card has
+          // arrived. The reveal has run once by then and never runs again.
+          clearProps: "opacity",
+          scrollTrigger: { trigger: el, start: "top 90%", once: true }
+        });
       });
     });
 
@@ -1553,6 +1607,12 @@
     });
     $$(".rv, .img-reveal, .facilities > div").forEach(function (e) {
       e.style.opacity = "1"; e.style.transform = "none"; e.style.clipPath = "none";
+      // An inline opacity outranks any class, and the Math Challenge archive
+      // filter fades its cards with one. Nothing here is hidden in CSS in the
+      // first place -- see the note on .rv in cirs.css -- so clearing it back
+      // off the cards costs this path nothing and leaves the filter able to
+      // do its own work when GSAP never arrives.
+      if (e.classList.contains("ma-card")) e.style.removeProperty("opacity");
     });
     var c = $("#curtain");
     if (c) c.remove();
@@ -1951,7 +2011,9 @@
 
     // Set the hero's initial state before the curtain starts uncovering it,
     // then play the prepared timeline without hiding visible content again.
-    var heroEntrance = heroIn();
+    // One or the other: a page has the shared hero or the Math Challenge
+    // field, never both.
+    var heroEntrance = heroIn() || mathHero();
     playIntro(function () { if (heroEntrance) heroEntrance.play(); });
     startSweep();
 
