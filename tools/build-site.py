@@ -37,6 +37,7 @@ import blogposts
 import crossroads
 import mathchallenge
 import creativewriting
+import captures
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=96"
@@ -383,8 +384,11 @@ PAGES = {
         "barehead": True,
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
-        "description": "Photography from the CIRS community \u2014 the campus and the school year "
-                       "as its students see it.",
+        # Not "as its students see it", which this page said while it was a
+        # placeholder: none of these files records who took it, so the page
+        # makes no claim about who did.
+        "description": "Photographs of the campus and the school year at Chinmaya International "
+                       "Residential School, from the school\u2019s own collection.",
         # No banner from the shared builder. This page opens on six seconds of
         # a camera coming out of the dark, which the reader scrubs with the
         # scroll, and the h1 is the one line that arrives once the film has
@@ -393,12 +397,11 @@ PAGES = {
         "banner": None,
         "sheet": "captures",
         "opening": "captures-intro",
-        "soon": ([("Student photography", "Work by the photography hobby group and anyone else"),
-                  ("The year, in frames", "The campus through its seasons"),
-                  ("How to submit", "What to send, and to whom")],
-                 "the first set of photographs and their photographers, to be supplied by the "
-                 "CIRS Social Media Team",
-                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
+        # The gallery has replaced the placeholder it was waiting behind, and
+        # with it the under-construction note: what it listed as coming is
+        # here. The page body is tools/pages/captures.html; the photographs,
+        # their captions and their layout are tools/captures.py.
+        "uc": False,
     },
     "art-attack": {
         "nav": "CIRS Art Attack",
@@ -1177,6 +1180,8 @@ def build(slug, page):
     # path is relative to the page, where the stylesheet's is to itself.
     if slug == "captures":
         head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/captures-gallery.css?{CACHE_BUST}">\n</head>')
+        head = head.replace("</head>",
             '<noscript><style>.cap{height:100svh}'
             '.cap__stage{background:#000 url(assets/img/captures-camera-final.jpg) '
             'var(--cap-crop)/cover no-repeat}'
@@ -1248,6 +1253,10 @@ def build(slug, page):
                        .replace("{{MATH_ZONES}}", mathchallenge.zones_html())
                        .replace("{{MATH_FILTERS}}", mathchallenge.filters_html())
                        .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html())
+                       .replace("{{CAPTURES_GALLERY}}", captures.gallery_html() if slug == "captures" else "")
+                       .replace("{{CAPTURES_END}}", captures.end_html() if slug == "captures" else "")
+                       .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
+                       .replace("{{CAPTURES_COUNT_CAP}}", captures.count_word().capitalize())
                        .replace("{{CW_ROWS}}", creativewriting.rows_html())
                        .replace("{{CW_JOURNEY}}", creativewriting.journey_html())
                        .replace("{{CW_COUNT}}", str(creativewriting.count()))
@@ -1296,6 +1305,7 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
     if slug == "captures":
         parts.append(f'<script src="assets/js/captures.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]

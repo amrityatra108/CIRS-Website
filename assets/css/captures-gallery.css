@@ -1,0 +1,261 @@
+/* CIRS Captures — the gallery below the opening, its viewer, and the ending.
+   Scoped by its own classes; loaded only on captures.html.
+
+   The gallery is laid out in rows, and every photograph in a row is drawn
+   at the row's one height at its own shape: each tile's flex-grow is its
+   aspect ratio, so the widths divide the row in proportion and the heights
+   come out equal. Nothing is cropped to fit a cell — a portrait stays a
+   portrait beside a landscape. The rows themselves are tools/captures.py.
+
+   Deliberately still. The page's one long movement is the camera at the
+   top; below it the photographs are simply there, and the only motion is
+   the site's ordinary heading reveal. */
+
+.cg{
+  --cg-gap:clamp(8px, 1.1vw, 16px);
+  scroll-margin-top:88px;
+}
+
+.cg__grid{
+  display:flex;
+  flex-direction:column;
+  gap:var(--cg-gap);
+}
+
+.cg__row{
+  display:flex;
+  gap:var(--cg-gap);
+}
+
+.cg__item{
+  flex:var(--ar) 1 0%;
+  min-width:0;
+  aspect-ratio:var(--ar);
+  position:relative;
+  display:block;
+  overflow:hidden;
+  background:var(--paper-3);
+  cursor:zoom-in;
+}
+
+.cg__item img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transition:transform .7s var(--e2), opacity .3s var(--e);
+}
+
+@media (hover:hover){
+  .cg__item:hover img{ transform:scale(1.025); }
+}
+
+.cg__item:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:3px;
+}
+
+.cg__note{
+  margin-top:clamp(20px, 2.4vw, 32px);
+  color:var(--ink-mute);
+  font-size:var(--fs-sm);
+}
+
+/* A phone is too narrow for a row of three to be anything but thumbnails,
+   so every photograph gets the width to itself, still at its own shape. */
+@media (max-width:640px){
+  .cg__row{ flex-direction:column; }
+  .cg__item{ flex:none; width:100%; }
+}
+
+
+/* ------------------------------------------------------------
+   The ending
+   ------------------------------------------------------------ */
+
+.cg-end__figure{ margin:0; }
+
+.cg-end__figure picture{ display:block; }
+.cg-end__figure img{
+  display:block;
+  width:100%;
+  height:min(88svh, 66.667vw);
+  object-fit:cover;
+  object-position:50% 50%;
+  background:var(--paper-3);
+}
+
+.cg-end__caption{
+  padding-top:14px;
+  color:var(--ink-mute);
+  font-size:var(--fs-sm);
+}
+
+.cg-end__onward{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  padding-top:clamp(28px, 3vw, 40px);
+  padding-bottom:clamp(60px, 7.5vw, 120px);
+}
+
+
+/* ------------------------------------------------------------
+   The viewer
+   ------------------------------------------------------------
+   A native modal dialog: it takes the top layer, makes the page behind it
+   inert, and closes on Escape by itself. The frame is sized from the
+   photograph's shape (--cv-ar, set by the script) so that the tile shown
+   first and the full-size image that replaces it occupy exactly the same
+   box, and the swap never moves anything. --cv-reserve is the height kept
+   for the caption and the controls. */
+
+.cv{
+  --cv-ar:1.5;
+  --cv-pad-x:clamp(64px, 7vw, 104px);
+  --cv-pad-top:64px;
+  --cv-reserve:196px;
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  max-width:none;
+  max-height:none;
+  margin:0;
+  padding:env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+          env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  border:0;
+  background:rgba(10,7,9,.97);
+  color:var(--on-purple);
+  overflow:hidden;
+}
+.cv[open]{
+  display:grid;
+  grid-template-rows:1fr auto;
+}
+.cv::backdrop{ background:rgba(10,7,9,.6); }
+
+.cv__stage{
+  display:grid;
+  place-items:center;
+  min-height:0;
+  padding:var(--cv-pad-top) var(--cv-pad-x) 0;
+  /* The browser keeps vertical panning and pinch-zoom; a sideways swipe is
+     left to the script, which turns it into next and previous. */
+  touch-action:pan-y pinch-zoom;
+}
+
+.cv__figure{
+  margin:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.cv__frame{
+  position:relative;
+  width:min(100%, calc((100svh - var(--cv-reserve)) * var(--cv-ar)));
+  aspect-ratio:var(--cv-ar);
+  background:#171214;
+}
+
+.cv__frame img{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.cv__frame img.is-entering{ animation:cv-in .28s var(--e) both; }
+@keyframes cv-in{ from{ opacity:0; } to{ opacity:1; } }
+
+.cv__caption{
+  max-width:62ch;
+  min-height:3.2em;
+  padding-top:14px;
+  text-align:center;
+  font-size:var(--fs-sm);
+  line-height:1.5;
+  color:var(--on-purple-soft);
+}
+.cv__credit{
+  display:block;
+  color:var(--on-purple-mute);
+  font-size:var(--fs-xs);
+  letter-spacing:.02em;
+}
+.cv__credit[hidden]{ display:none; }
+
+.cv__bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  padding:6px 16px 20px;
+}
+
+.cv__count{
+  margin:0;
+  min-width:6ch;
+  text-align:center;
+  font-size:var(--fs-xs);
+  letter-spacing:.14em;
+  font-variant-numeric:tabular-nums;
+  color:var(--on-purple-mute);
+}
+
+.cv__btn{
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  cursor:pointer;
+  background:rgba(245,238,242,.08);
+  border:1px solid rgba(245,238,242,.22);
+  color:var(--on-purple);
+  transition:background .22s var(--e), color .22s var(--e), border-color .22s var(--e);
+}
+.cv__btn:hover{ background:var(--gold); color:var(--purple-ink); border-color:var(--gold); }
+.cv__btn:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+.cv__close{
+  position:absolute;
+  top:calc(env(safe-area-inset-top, 0px) + 10px);
+  right:calc(env(safe-area-inset-right, 0px) + 10px);
+  z-index:2;
+}
+
+/* On a wide window next and previous sit either side of the photograph,
+   where the eye already is; the count stays below it. */
+@media (min-width:641px){
+  .cv__prev, .cv__next{
+    position:absolute;
+    top:calc(50% - 30px);
+  }
+  .cv__prev{ left:calc(env(safe-area-inset-left, 0px) + clamp(8px, 1.6vw, 28px)); }
+  .cv__next{ right:calc(env(safe-area-inset-right, 0px) + clamp(8px, 1.6vw, 28px)); }
+}
+
+/* On a phone the photograph takes the whole width, and the controls go
+   below it, under the thumb. */
+@media (max-width:640px){
+  .cv{
+    --cv-pad-x:0px;
+    --cv-pad-top:60px;
+    --cv-reserve:210px;
+  }
+  .cv__caption{ padding-inline:16px; }
+  .cv__bar{ justify-content:space-between; padding:6px 16px 18px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cg__item img{ transition:none; }
+  .cg__item:hover img{ transform:none; }
+  .cv__frame img.is-entering{ animation:none; }
+}
