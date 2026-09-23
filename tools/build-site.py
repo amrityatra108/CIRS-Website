@@ -39,7 +39,7 @@ import mathchallenge
 import creativewriting
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=95"
+CACHE_BUST = "b=96"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -388,12 +388,19 @@ PAGES = {
         "sheet": "cwriting",
     },
     "captures": {
+        "barehead": True,
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
         "description": "Photography from the CIRS community \u2014 the campus and the school year "
                        "as its students see it.",
-        "banner": ("CIRS Captures", "The Campus, <em>Through Their Lenses.</em>",
-                   "Photography by the students, staff and alumni who are here to see it."),
+        # No banner from the shared builder. This page opens on six seconds of
+        # a camera coming out of the dark, which the reader scrubs with the
+        # scroll, and the h1 is the one line that arrives once the film has
+        # ended — see tools/partials/captures-intro.html. The sheet is
+        # assets/css/captures.css, scoped to body.captures.
+        "banner": None,
+        "sheet": "captures",
+        "opening": "captures-intro",
         "soon": ([("Student photography", "Work by the photography hobby group and anyone else"),
                   ("The year, in frames", "The campus through its seasons"),
                   ("How to submit", "What to send, and to whom")],
@@ -1172,6 +1179,12 @@ def build(slug, page):
     if slug == "founder":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
+    # Without scripting nothing scrubs the film, so four screens of scroll
+    # would move a still photograph. One screen, with the line already up —
+    # which is what the stylesheet's own reduced-motion rule does too.
+    if slug == "captures":
+        head = head.replace("</head>",
+            '<noscript><style>.cap{height:100svh}</style></noscript>\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
@@ -1207,6 +1220,11 @@ def build(slug, page):
                        if page.get("logintab") else ""))
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
+    # A page may open on a composition of its own, above and instead of the
+    # shared hero or banner. It is a partial rather than a page body because
+    # what follows it here is still built by soon_html.
+    if page.get("opening"):
+        parts.append(read(f"tools/partials/{page['opening']}.html").rstrip("\n"))
     if page.get("hero"):
         parts.append(hero_html(page))
     elif page.get("banner"):
@@ -1278,6 +1296,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
+    if slug == "captures":
+        parts.append(f'<script src="assets/js/captures.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]

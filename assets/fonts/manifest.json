@@ -88,6 +88,17 @@
       "source_sha256": "eed07aca7291e34fa2c4f3e48be325b261f60516ecf835610fee30dade0f78ec",
       "woff2_sha256": "b35f92ce20783025a17bb7657277caec0917b2640670bf74210f8249cc9ed480",
       "bytes": 147172
+    },
+    {
+      "family": "Jost",
+      "style": "normal",
+      "weights": "100 900",
+      "file": "jost-normal.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/jost/Jost%5Bwght%5D.ttf",
+      "license": "https://raw.githubusercontent.com/google/fonts/f2bd09badbc763d8757951d52deec29da27e85fb/ofl/jost/OFL.txt",
+      "source_sha256": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076",
+      "woff2_sha256": "34be248120246c294adfba1b7c119c03bb4aea6e743d7348a3275fa5809e9959",
+      "bytes": 50544
     }
   ]
 }

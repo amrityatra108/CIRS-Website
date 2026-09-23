@@ -1,0 +1,190 @@
+/* CIRS Captures — the opening, scoped to body.captures.
+
+   A six-second film of a camera coming out of the dark, which the visitor
+   scrubs with the scroll rather than watching. Four phases, measured as
+   fractions of the section's travel and divided in assets/js/captures.js:
+
+       0.00 - 0.70   the film runs, under the scroll, and nothing else exists
+       0.70 - 0.77   the last frame freezes and is simply held
+       0.77 - 0.90   CIRS CAPTURES arrives out of it
+       0.90 - 1.00   the finished composition is held, then let go
+
+   The stage is a CSS sticky viewport rather than a GSAP pin. It costs
+   nothing to hold, it survives a resize and a reload halfway down the page
+   without a refresh, and it leaves ScrollTrigger doing the one thing it is
+   needed for here: reporting progress. */
+
+/* The near-black is what the page overscrolls into at the top, so the film
+   never opens against paper. Everything below the seam is the ordinary
+   page, on the ordinary ground. */
+body.captures{ background:#04040A; }
+body.captures main{ background:var(--paper); }
+
+.cap{
+  --cap-run:460vh;
+  position:relative;
+  height:var(--cap-run);
+  background:#000;
+}
+
+.cap__stage{
+  position:sticky;
+  top:0;
+  height:100vh;
+  height:100svh;
+  overflow:hidden;
+  background:#000;
+}
+
+/* object-position, not 50%: a viewport wider than the film's 16:9 crops the
+   top and bottom away, and centring that crop drops the camera's base to the
+   very foot of the window on a wide monitor while leaving it at four fifths
+   on a laptop — so the line below it had nowhere to sit that worked on both.
+   Taking the crop mostly off the top, which is empty smoke, holds the base
+   at about four fifths of the window on every shape of screen. */
+.cap__film{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 80%;
+  display:block;
+  background:#000;
+  /* The film is scenery, never a player: it is not clickable, and it carries
+     no controls. The element has never been given a controls attribute, but
+     Chromium puts the whole panel up by itself — a play button, a scrubber,
+     a timecode and a fullscreen button across the foot of the window — on a
+     video that no script is driving, which is exactly the state this page is
+     in when scripting is off. Suppressing the shadow tree is what keeps that
+     out of the opening. */
+  pointer-events:none;
+}
+.cap__film::-webkit-media-controls,
+.cap__film::-webkit-media-controls-enclosure,
+.cap__film::-webkit-media-controls-panel,
+.cap__film::-webkit-media-controls-start-playback-button{
+  display:none !important;
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+/* --cap-reveal is the whole animation: one number, 0 to 1, written by the
+   script once a frame. It defaults to 1 so that the line is legible before
+   the script has run and if it never runs at all — the curtain is over the
+   page while it starts, so nothing is seen being switched off. */
+.cap__title{
+  --cap-reveal:1;
+  --cap-track-from:.28;
+  --cap-track-to:.48;
+  --cap-track:calc(var(--cap-track-from) +
+                   (var(--cap-track-to) - var(--cap-track-from)) * var(--cap-reveal));
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:clamp(56px, 8.5vh, 110px);
+  margin:0;
+  padding:0 16px;
+  text-align:center;
+  font-family:"Jost", var(--font-primary), sans-serif;
+  font-weight:100;
+  font-size:clamp(26px, 3.8vw, 62px);
+  line-height:1;
+  text-transform:uppercase;
+  color:#FBFAF7;
+  opacity:var(--cap-reveal);
+  transform:translateY(calc((1 - var(--cap-reveal)) * 8px));
+  filter:blur(calc((1 - var(--cap-reveal)) * 5px));
+  will-change:opacity, transform, filter;
+}
+
+/* Letter-spacing lays a gap after the last letter too, so a centred line of
+   it sits half a gap to the left of where it looks centred. The negative
+   margin takes that trailing gap back off the inline box, which is what
+   actually centres the lettering rather than the box around it. */
+.cap__line{
+  display:inline-block;
+  white-space:nowrap;
+  letter-spacing:calc(var(--cap-track) * 1em);
+  margin-right:calc(var(--cap-track) * -1em);
+}
+
+/* The way out. No second effect — the foot of the frame simply becomes paper
+   over a band the depth of a paragraph, and the page continues.
+
+   It starts at #2A2726 rather than at black because that is what the foot of
+   the last frame actually measures: floor and smoke, not shadow. Against
+   pure black it read as a cut, a hairline across the window where the film
+   stopped. Beginning the ramp on the frame's own tone takes the line away. */
+.cap__seam{
+  height:clamp(110px, 15vh, 200px);
+  background:linear-gradient(to bottom,
+              #2A2726 0%, #211C1B 18%, #6B6560 58%, var(--paper) 100%);
+}
+
+/* The film is the introduction, so nothing of the site's own furniture is
+   laid over it: not the reading-progress rule, not the back-to-top button.
+   Both return the moment the opening is behind the reader. */
+body.captures #progress,
+body.captures #totop{ transition:opacity .4s var(--e); }
+body.captures.cap-on #progress,
+body.captures.cap-on #totop{
+  opacity:0;
+  pointer-events:none;
+}
+
+/* Reduced motion, and the case where the motion layer never arrives: show
+   the finished composition and take the scrubbing distance away, rather than
+   asking for four screens of scrolling that no longer do anything. */
+.cap[data-captures-still]{
+  --cap-run:100svh;
+}
+.cap[data-captures-still] .cap__title{
+  --cap-reveal:1;
+}
+
+@media (min-width:1600px){
+  .cap__title{ --cap-track-to:.54; }
+}
+
+/* A window taller than it is wide is the hard case, and it is the shape of
+   every phone. Filling it with a 16:9 frame centred means seeing a 43%-wide
+   slice of it: the lens comes off the left edge, the body runs off the right,
+   and what is left reads as a dark shape rather than as a camera. Taking the
+   slice from the left instead keeps the whole of the lens — the front
+   element, the barrel, the marked rings — which is the part of this film
+   worth seeing on a small screen, and it stays full-bleed rather than
+   becoming a letterboxed strip. */
+@media (max-aspect-ratio:6/5){
+  .cap__film{ object-position:32% 80%; }
+}
+
+/* Narrow screens keep the intent — very thin, widely tracked, one line — by
+   giving up size long before they give up the spacing. */
+@media (max-width:720px){
+  .cap{ --cap-run:420vh; }
+  .cap__title{
+    bottom:clamp(48px, 9vh, 96px);
+    font-size:clamp(18px, 5.6vw, 30px);
+    --cap-track-from:.16;
+    --cap-track-to:.28;
+  }
+}
+
+/* Only where one line genuinely cannot be had: the spacing narrows, and the
+   two words still do not break apart. */
+@media (max-width:360px){
+  .cap__title{
+    font-size:clamp(16px, 5.2vw, 22px);
+    --cap-track-to:.22;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cap{ --cap-run:100svh; }
+  .cap__title{
+    --cap-reveal:1;
+    transition:none;
+    will-change:auto;
+  }
+}
