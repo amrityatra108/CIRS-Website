@@ -275,11 +275,31 @@ PAGES = {
         "cache_suffix": "-student-life-9",
     },
     "sports": {
+        "barehead": True,
         "nav": "Our Sports",
         "title": "Sports",
-        "description": "Athletics, the playing fields and the sporting record at CIRS.",
-        "banner": ("Sports", "Sport, Every Day <em>at Four.</em>",
-                   "The four o'clock hour, the fields it happens on, and what the teams have won."),
+        "description": "Athletics, basketball, swimming and the playing fields at CIRS.",
+        "sheet": "sports-journey",
+        "cache_suffix": "-sports-journey-5",
+        # No banner from the shared builder. Like CIRS Captures, this page
+        # opens on a film the reader scrubs — five seconds from a wet ball to
+        # the field at sunrise under the Ghats — and the h1 is the one line
+        # that arrives once it has ended. The body.sports block in
+        # assets/css/filmintro.css is where this frame's own decisions live.
+        "banner": None,
+        "opening": {
+            "video": "sports-field",
+            "poster": "sports-field-poster.jpg",
+            "title": "CIRS Sports",
+            # With no scripting nothing seeks, so what stays up is the first
+            # frame — a macro of a wet ball, not the field. The line's usual
+            # place is the treeline of a frame that is never reached, and on
+            # this one it lands on the lit crest of the leather and washes
+            # out. Low on the frame it has the dark underside behind it, at
+            # 11.9:1. Captures needs no such move: its first frame is dark
+            # wherever the line falls.
+            "noscript_title_top": "88%",
+        },
     },
     "crossroads": {
         "barehead": True,
@@ -381,7 +401,6 @@ PAGES = {
     },
     "captures": {
         "barehead": True,
-        "cache_suffix": "-filmintro-1",
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
         "description": "Photography from the CIRS community \u2014 the campus and the school year "
@@ -389,8 +408,8 @@ PAGES = {
         # No banner from the shared builder. This page opens on six seconds of
         # a camera coming out of the dark, which the reader scrubs with the
         # scroll, and the h1 is the one line that arrives once the film has
-        # ended. The shared filmintro files handle the scrub; body.captures
-        # keeps this footage's crop, seam and title treatment.
+        # ended. See film_html above, and the body.captures block in
+        # assets/css/filmintro.css for what this page tunes for its own frame.
         "banner": None,
         "opening": {
             "video": "captures-camera",
@@ -656,9 +675,18 @@ def soon_html(page):
         '  </div>\n'
         '</section>')
 
-
 def film_html(slug, page):
-    """A decorative scroll-scrubbed film with its readable page heading."""
+    """The opening of a page that starts on a film the reader scrubs.
+
+    These pages open this way because they share the same furniture with
+    different films. What a page supplies is the footage, the line of type
+    and, where its own footage asks for it, its phase boundaries; the mechanics
+    are in assets/css/filmintro.css and assets/js/filmintro.js, once for all.
+
+    The film remains the opening's only dominant element. Our Sports adds one
+    discreet scroll cue over its first frames; CIRS Captures keeps the plain
+    film-and-title composition.
+    """
     film = page["opening"]
     phases = film.get("phases")
     attrs = f' data-film-phases="{" ".join(f"{v:g}" for v in phases)}"' if phases else ""
@@ -670,6 +698,11 @@ def film_html(slug, page):
     still = (f'    <img class="film__still" src="assets/img/{film["still"]}" '
              'alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">\n'
              if film.get("still") else "")
+    cue = (
+        '    <p class="film__scroll-cue" data-film-scroll-cue>'
+        '<span aria-hidden="true">↓</span><span>Scroll to discover</span></p>\n'
+        if slug == "sports" else ""
+    )
     return f'''<section class="film" id="{slug}-opening" data-film{attrs}>
   <div class="film__stage">
 {still}    <video class="film__video" data-film-video
@@ -677,10 +710,18 @@ def film_html(slug, page):
            poster="assets/img/{film["poster"]}"
            preload="auto" muted playsinline disablepictureinpicture
            aria-hidden="true" tabindex="-1">
+      <!-- H.264 first, which is the other way round from the rest of this
+           site. These files are not played but seeked, several times a
+           second, and H.264 is the one codec every browser that has it
+           decodes in hardware — so it is the path that scrubs without
+           stuttering wherever it exists. The VP9 is for the browsers built
+           without the proprietary decoder, which would otherwise have no
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
       <source src="assets/video/{film["video"]}.mp4" type="video/mp4">
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
-    <h1 class="film__title" data-film-title>{title}</h1>
+{cue}    <h1 class="film__title" data-film-title>{title}</h1>
   </div>
 </section>
 <div class="film__seam" aria-hidden="true"></div>'''
@@ -1200,27 +1241,34 @@ def build(slug, page):
     if slug == "crossroads":
         head = head.replace(
             "</head>",
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-3">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-5">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-4">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
             '<noscript><style>.crossroads-intro-curtain{display:none}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}'
             '.crossroads-intro[data-crossroads-intro-pending]{background:var(--cr-purple-deep)}'
-            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible}'
+            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible!important}'
             '</style></noscript>\n</head>')
     if slug == "founder":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
-    # The shared film sheet retains one-screen poster and title fallbacks.
+    # A page that opens on a scrubbed film carries the shared sheet, and with
+    # it the two tuning blocks that sort out which page is which. Without
+    # scripting nothing scrubs, so four screens of scroll would move a still
+    # photograph: one screen, with the line already up — which is what the
+    # stylesheet's own reduced-motion rule does too.
     if page.get("opening"):
+        nudge = page["opening"].get("noscript_title_top")
+        nudge = (f"body.{slug} .film__title{{--film-title-top:{nudge}}}" if nudge else "")
         pending = ('.film[data-film-pending] .film__title{opacity:1}'
                    if page["opening"].get("pending") else "")
         still = (f'body.{slug} .film__video{{display:none}}'
                  if page["opening"].get("still") else "")
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
-            f'<noscript><style>.film{{height:100svh}}{pending}{still}</style></noscript>\n</head>')
+            f'<noscript><style>.film{{height:100svh}}{nudge}{pending}{still}'
+            '</style></noscript>\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
@@ -1233,6 +1281,9 @@ def build(slug, page):
     # keep their own pills, so they stay legible over photography. Every other
     # page keeps the bar, which is what holds them together over paper.
     bare = bool(page.get("barehead") or page.get("hero"))
+    # A page opening on a scrubbed film is marked twice: "film" for the
+    # mechanics every such page shares, and its own slug for the handful of
+    # decisions its footage makes for it.
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "film" if page.get("opening") else None,
                            slug if page.get("opening") else None,
@@ -1314,9 +1365,9 @@ def build(slug, page):
         parts.append(read("tools/partials/footer.html").rstrip("\n"))
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
     if slug == "crossroads":
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-5" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
-        parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}-hover-4" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
     if slug == "founder":
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
@@ -1336,6 +1387,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
+    if slug == "sports":
+        parts.append(f'<script src="assets/js/sports-journey.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]

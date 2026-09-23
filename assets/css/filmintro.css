@@ -1,13 +1,13 @@
-/* The cinematic opening shared by CIRS Captures, Our Sports and Art Attack.
+/* The cinematic opening two pages share — CIRS Captures and Our Sports.
 
    A short film the visitor scrubs with the scroll rather than watching, and
-   a title that arrives only once it has ended. Four
+   one thin widely-tracked line that arrives only once it has ended. Four
    phases, measured as fractions of the section's travel and divided in
    assets/js/filmintro.js:
 
        0.00 - 0.70   the film runs, under the scroll, and nothing else exists
        0.70 - 0.77   the last frame freezes and is simply held
-       0.77 - 0.90   the title arrives out of it
+       0.77 - 0.90   CIRS CAPTURES arrives out of it
        0.90 - 1.00   the finished composition is held, then let go
 
    The stage is a CSS sticky viewport rather than a GSAP pin. It costs
@@ -15,7 +15,7 @@
    without a refresh, and it leaves ScrollTrigger doing the one thing it is
    needed for here: reporting progress.
 
-   Everything above the page tuning blocks at the foot of this file is shared.
+   Everything above the two tuning blocks at the foot of this file is shared.
    What a page sets for itself is only what its own footage decides: how the
    frame is cropped, where the line can sit legibly, and the tone the seam
    below it starts from. */
@@ -151,9 +151,6 @@ body.film.film-on #totop{
   --film-reveal:1;
 }
 
-/* Art Attack starts on a near-black frame. Keep its heading out of sight
-   until the scroll position has been painted; its final still is always
-   available behind the video for reduced motion and failed media. */
 .film[data-film-pending] .film__title{ opacity:0; }
 
 @media (min-width:1600px){
@@ -211,7 +208,6 @@ body.captures{
 }
 body.captures .film__title{
   --film-title-bottom:clamp(56px, 8.5vh, 110px);
-  font-weight:600;
 }
 @media (max-width:720px){
   body.captures .film__title{ --film-title-bottom:clamp(48px, 9vh, 96px); }
@@ -249,6 +245,37 @@ body.sports{
 body.sports .film__title{
   --film-title-top:44%;
   --film-title-lift:-50%;
+}
+body.sports .film__scroll-cue{
+  --film-scroll-cue-opacity:1;
+  position:absolute;
+  z-index:2;
+  bottom:clamp(34px,7vh,72px);
+  left:var(--gut);
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin:0;
+  color:var(--gold-lit);
+  font-family:var(--font-primary);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  line-height:1;
+  text-transform:uppercase;
+  text-shadow:0 2px 12px rgba(0,0,0,.72);
+  opacity:var(--film-scroll-cue-opacity);
+  pointer-events:none;
+}
+body.sports .film__scroll-cue span:first-child{
+  display:grid;
+  width:26px;
+  height:26px;
+  place-items:center;
+  border:1px solid rgba(255,229,133,.76);
+  border-radius:50%;
+  font-size:1rem;
+  letter-spacing:0;
 }
 
 /* ---- CIRS Art Attack -----------------------------------------------------
@@ -346,4 +373,5 @@ body.art-attack .film[data-film-still] .film__video{ visibility:hidden; }
     will-change:auto;
   }
   body.art-attack .film__video{ visibility:hidden; }
+  body.art-attack .film[data-film-pending] .film__title{ opacity:1; }
 }
