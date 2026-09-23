@@ -54,14 +54,23 @@ const { chromium } = require('playwright-core');
 
   // CIRS Captures opens on a film the reader scrubs with the scroll, and its
   // one line of type is not drawn at all until that film has finished. At the
-  // top of the page there is nothing to measure; the composition worth
-  // measuring is the one the opening ends on, so scroll to it first.
+  // top of the page there is nothing to measure, and at the foot of the
+  // opening the line has already left under the photograph, so scroll to the
+  // moment it is being read.
   if (await p.$('[data-captures]')) {
     await p.evaluate(() => {
       const opening = document.querySelector('[data-captures]');
-      window.scrollTo(0, opening.offsetHeight - window.innerHeight);
+      // The line is fully up between TITLE_END and READ_END; after that the
+      // photograph opens over it and it leaves. Measure it while it is read.
+      const ph = (opening.getAttribute('data-captures-phases') || '')
+        .trim().split(/\s+/).map(Number);
+      const at = ph.length >= 4 ? (ph[2] + ph[3]) / 2 : 1;
+      // Instant, not the site's smooth scroll: a smooth scroll of three
+      // screens is still under way when the photograph is taken, and it
+      // measured the line mid-film, where it is not yet drawn.
+      window.scrollTo({ top: (opening.offsetHeight - window.innerHeight) * at, behavior: 'instant' });
     });
-    await p.waitForTimeout(1500);
+    await p.waitForTimeout(2500);
   }
 
   // A looping video behind the text: sample across the loop, not once.
@@ -107,7 +116,7 @@ const { chromium } = require('playwright-core');
     return out;
   });
   // hide the text, photograph what is behind it
-  await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap, .crhero .wrap, .p1-hero > *, .p1-hud, .saga__inner, .lifeband__say, .cap__title{visibility:hidden!important}' });
+  await p.addStyleTag({ content: '.pagehero .wrap, .hero .wrap, .crhero .wrap, .p1-hero > *, .p1-hud, .saga__inner, .lifeband__say, .cap__title, .cap__shot{visibility:hidden!important}' });
   await p.waitForTimeout(300);
   const shots = [];
   const passes = times || (drifting ? [null, null, null, null, null] : [null]);

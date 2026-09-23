@@ -31,7 +31,7 @@
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/captures.css?b=96">
 <link rel="stylesheet" href="assets/css/typography.css?b=96">
-<noscript><style>.cap{height:100svh}</style></noscript>
+<noscript><style>.cap{height:100svh}.cap__stage{background:#000 url(assets/img/captures-camera-final.jpg) var(--cap-crop)/cover no-repeat}.cap__film{visibility:hidden}.cap__shot{display:none}.cap__seam{--cap-seam-top:#2A2726;--cap-seam-fold:#211C1B;--cap-seam-rise:#6B6560}</style></noscript>
 </head>
 
 <body class="captures">
@@ -264,11 +264,25 @@
      dark, which the visitor scrubs frame by frame with the scroll. Nothing
      here plays by itself and nothing here is a hero — the film is the whole
      introduction, and the one line of type arrives only once it has ended.
+     After it has been read, a photograph from the school appears inside the
+     camera's lens and opens out of it to fill the window.
 
      The scroll distance is set in assets/css/captures.css and divided into
-     its four phases in assets/js/captures.js. The markup is deliberately
-     this bare: every element below is either the film or the line. -->
-<section class="cap" id="captures-opening" data-captures>
+     its phases by data-captures-phases, which assets/js/captures.js reads:
+     the film ends, it is held, the line arrives, the line is read, the
+     photograph appears in the lens, and it has opened to the full window.
+     The fractions come from lengths in the stylesheet, so change them
+     together.
+
+     data-captures-lens is the lens's front rim in the film's final frame,
+     in the film's own pixels (1280 by 720): centre, the two radii, and the
+     tilt of the ellipse in degrees. The script turns it into window
+     coordinates for whatever crop the window gives the film, which is how
+     the photograph lands exactly in the lens on every shape of screen.
+     tools/make-captures-shot.py says how it was measured. -->
+<section class="cap" id="captures-opening" data-captures
+         data-captures-phases="0.5143 0.5657 0.6612 0.7347 0.7959 0.9388"
+         data-captures-lens="388.4 359.3 65 124.4 6.56">
   <div class="cap__stage">
     <video class="cap__film" data-captures-film
            width="1280" height="720"
@@ -287,6 +301,19 @@
       <source src="assets/video/captures-camera.webm" type="video/webm">
     </video>
     <h1 class="cap__title" data-captures-title><span class="cap__line">CIRS Captures</span></h1>
+    <!-- After the line in the document so it is read after it, and over it
+         on screen by z-index. Two cuts of one photograph: the portrait one
+         wherever the window is no wider than 6:5, which is the same boundary
+         the film's own crop changes at. -->
+    <div class="cap__shot" data-captures-shot>
+      <picture>
+        <source media="(max-aspect-ratio: 6/5)"
+                srcset="assets/img/captures-shot-portrait.jpg" width="1620" height="2160">
+        <img class="cap__photo" src="assets/img/captures-shot.jpg" width="2400" height="1819"
+             alt="A CIRS student dancing on stage in red, one arm raised"
+             loading="lazy" decoding="async">
+      </picture>
+    </div>
   </div>
 </section>
 <div class="cap__seam" aria-hidden="true"></div>

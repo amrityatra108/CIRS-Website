@@ -1169,12 +1169,20 @@ def build(slug, page):
     if slug == "founder":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
-    # Without scripting nothing scrubs the film, so four screens of scroll
-    # would move a still photograph. One screen, with the line already up —
-    # which is what the stylesheet's own reduced-motion rule does too.
+    # Without scripting nothing scrubs the film, so six screens of scroll
+    # would move nothing. One screen instead: a still of the film's last frame
+    # with the line up, and no photograph — the same composition the
+    # stylesheet gives reduced motion and a film that fails to load. Stated
+    # here because a stylesheet cannot tell whether scripting is on. The
+    # path is relative to the page, where the stylesheet's is to itself.
     if slug == "captures":
         head = head.replace("</head>",
-            '<noscript><style>.cap{height:100svh}</style></noscript>\n</head>')
+            '<noscript><style>.cap{height:100svh}'
+            '.cap__stage{background:#000 url(assets/img/captures-camera-final.jpg) '
+            'var(--cap-crop)/cover no-repeat}'
+            '.cap__film{visibility:hidden}.cap__shot{display:none}'
+            '.cap__seam{--cap-seam-top:#2A2726;--cap-seam-fold:#211C1B;--cap-seam-rise:#6B6560}'
+            '</style></noscript>\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
