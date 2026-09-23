@@ -39,7 +39,7 @@ import mathchallenge
 import creativewriting
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=96"
+CACHE_BUST = "b=97"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -175,7 +175,7 @@ PAGES = {
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
                        "Schools that carry it.",
         "sheet": "why-cirs",
-        "cache_suffix": "-why-cirs-9",
+        "cache_suffix": "-why-cirs-10",
         # No banner. The page used to open on a purple plate carrying "Why
         # CIRS." and a line about a community of knowledge, with the first
         # photograph below it. The photograph is the better opening, so it
