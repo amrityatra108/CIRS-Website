@@ -94,21 +94,115 @@ body.student-life main { overflow:clip; }
 .sj-practical { padding:clamp(6rem,11vw,11rem) 0; }
 .sj-heading { display:grid; grid-template-columns:.6fr 1.3fr 1fr; gap:3rem; align-items:end; margin-bottom:5rem; }
 .sj-heading>p:last-child { line-height:1.7; }
-.sj-photo-wall { display:grid; grid-template-columns:1.5fr .7fr; grid-template-rows:1fr 1fr; gap:1rem; }
-.sj-photo-wall figure { position:relative; min-height:280px; overflow:hidden; }
-.sj-photo-wall__main { grid-row:1/3; }
+/* ------------------------------------------------------------
+   The photography
+   ------------------------------------------------------------
+   Three galleries on this page — the residential wall, the sports
+   rail and the festival strip — were each sized in their own unit
+   and captioned in their own way, so the same school photographs
+   arrived at a different shape on every screen and sat under a
+   small beige tab that belonged to none of them.
+
+   They are one presentation now, and the rules below are shared by
+   all three:
+
+     * every frame is an aspect-ratio, not a viewport height, so a
+       photograph is cropped identically on a laptop, a monitor and
+       a phone, and the crop is a decision rather than a side effect
+       of how tall the window happens to be;
+     * the crops are a family — 3:2 through the wall and the rail,
+       4:3 through the strip, which is what those three photographs
+       already are, so they are shown very nearly uncut;
+     * the caption sits on the photograph under a gradient foot,
+       the way a frame is captioned in print, instead of on a chip
+       laid over it;
+     * the image rests slightly wider than its frame and settles
+       back on hover — one property, transform, and nothing that
+       moves unless the reader asks for it.
+
+   No photograph was replaced and no crop is decided in the markup:
+   object-position is set once, high enough to keep faces in the
+   frame when a portrait source is shown in a landscape one.
+   ------------------------------------------------------------ */
+.sj-photo-wall,
+.sj-rail,
+.sj-festival-strip { --sj-gap:clamp(12px,1.35vw,22px); }
+/* The browser's own margin on <figure> is 1em 40px, and it was still on:
+   every frame on this page sat eighty pixels narrower than the track it
+   was given, which is why the gaps between the festival photographs
+   measured a hundred pixels where the grid asked for twenty. */
+.sj-photo-wall figure,
+.sj-rail figure,
+.sj-festival-strip figure { margin:0; }
+
+.sj-photo-wall { display:grid; grid-template-columns:1.52fr .78fr; grid-template-rows:auto auto; gap:var(--sj-gap); }
+.sj-photo-wall figure { position:relative; overflow:hidden; background:#0f1c28; aspect-ratio:3/2; }
+/* The main frame is told to fill the two rows beside it rather than
+   carrying a ratio of its own, so the wall closes exactly and the
+   three photographs share one baseline at every width. */
+.sj-photo-wall__main { grid-row:1/3; aspect-ratio:auto; height:100%; }
+
 .sj-photo-wall img,
 .sj-rail img,
-.sj-festival-strip img { width:100%; height:100%; object-fit:cover; }
+.sj-festival-strip img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 32%;
+  transform:scale(1.035); transform-origin:center 40%;
+  transition:transform 1.15s cubic-bezier(.16,1,.3,1);
+}
+.sj-photo-wall figure:hover img,
+.sj-rail figure:hover img,
+.sj-festival-strip figure:hover img { transform:scale(1); }
+
+/* The cut-out. object-fit:cover on a masked subject crops the mask and
+   fills the rest with whatever is behind it; contain shows the trace
+   whole, on a ground deep enough for it to read as a plate rather than
+   as a photograph that failed to load. */
+.sj-photo-wall__cut {
+  background:
+    radial-gradient(82% 68% at 50% 18%, #1d3346 0%, #14222f 58%, #0d1821 100%);
+}
+.sj-photo-wall__cut img {
+  object-fit:contain; object-position:center bottom;
+  padding:clamp(14px,1.6vw,26px) clamp(14px,1.6vw,26px) 0;
+  transform:none;
+}
+.sj-photo-wall__cut:hover img { transform:none; }
+
+/* The caption, shared by all three galleries. */
+.sj-photo-wall figure::after,
+.sj-rail figure::after,
+.sj-festival-strip figure::after {
+  content:""; position:absolute; inset:auto 0 0 0; height:46%;
+  pointer-events:none;
+  background:linear-gradient(to top,
+    rgba(4,13,26,.88) 0%, rgba(4,13,26,.62) 34%, rgba(4,13,26,.18) 68%, transparent 100%);
+}
 .sj-photo-wall figcaption,
 .sj-rail figcaption,
-.sj-festival-strip figcaption { position:absolute; left:1rem; bottom:1rem; padding:.45rem .65rem; background:#f3ebdd; color:#13202a; font-size:.78rem; }
+.sj-festival-strip figcaption {
+  position:absolute; z-index:1;
+  left:clamp(14px,1.6vw,26px); right:clamp(14px,1.6vw,26px);
+  bottom:clamp(12px,1.4vw,22px);
+  color:#f3ebdd; font-size:.74rem;
+  letter-spacing:.11em; text-transform:uppercase; line-height:1.45;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .sj-photo-wall img,
+  .sj-rail img,
+  .sj-festival-strip img { transition:none; transform:none; }
+}
 
 .sj-sports { padding:8rem 0; background:#17283a; color:#fff; }
 .sj-section-head { display:flex; justify-content:space-between; align-items:end; margin-bottom:4rem; }
 .sj-section-head h2 { font-size:clamp(3rem,5.8vw,6.5rem); }
-.sj-rail { display:flex; gap:1.25rem; overflow-x:auto; padding:0 4vw 2rem; scroll-snap-type:x mandatory; scrollbar-width:thin; }
-.sj-rail figure { position:relative; flex:0 0 min(64vw,820px); height:min(62vh,640px); scroll-snap-align:center; }
+.sj-rail { display:flex; gap:var(--sj-gap); overflow-x:auto; padding:0 4vw 2rem; scroll-snap-type:x mandatory; scrollbar-width:thin; }
+/* Every frame on the rail is the same 3:2. It used to be a fixed height in
+   vh against a free width, so the same four photographs were a different
+   shape on every window, and the two portrait sources were cropped to a
+   band across the middle of the subject. */
+.sj-rail figure { position:relative; overflow:hidden; background:#0f1c28; flex:0 0 min(64vw,820px); aspect-ratio:3/2; scroll-snap-align:center; }
 .sj-rail-nav { display:flex; align-items:center; justify-content:flex-end; gap:1rem; margin-top:1rem; }
 .sj-rail-nav p { min-width:3rem; text-align:center; font-variant-numeric:tabular-nums; }
 .sj-links { display:flex; flex-wrap:wrap; gap:2rem; margin-top:2rem; }
@@ -135,9 +229,14 @@ body.student-life main { overflow:clip; }
 .sj-board strong { margin:auto 0 .5rem; font:2rem var(--font-editorial); }
 
 .sj-festivals { padding:8rem 0; background:#281b23; color:#fff; }
-.sj-festival-strip { display:grid; grid-template-columns:1.3fr .8fr 1fr; gap:1rem; margin:4rem 4vw 0; }
-.sj-festival-strip figure { position:relative; height:60vh; }
-.sj-festival-strip figure:nth-child(2) { height:50vh; margin-top:6rem; }
+/* Three photographs that are all 1600x1194 — very close to 4:3 — so the
+   strip carries 4:3 and shows them essentially uncut. The middle frame
+   keeps its drop, which is the strip's own rhythm and the reason it is a
+   strip rather than a row; it is stated in the shared gap now rather than
+   in six rems, so it holds its proportion as the column narrows. */
+.sj-festival-strip { display:grid; grid-template-columns:1.22fr .92fr 1.06fr; gap:var(--sj-gap); align-items:start; margin:4rem 4vw 0; }
+.sj-festival-strip figure { position:relative; overflow:hidden; background:#0f1c28; aspect-ratio:4/3; }
+.sj-festival-strip figure:nth-child(2) { margin-top:clamp(36px,6vw,96px); }
 .sj-practical__grid>div>p:not(.sj-kicker) { max-width:30rem; margin:2rem 0; line-height:1.65; }
 .sj-accordions details { border-top:1px solid #958b7d; }
 .sj-accordions details:last-child { border-bottom:1px solid #958b7d; }
@@ -176,11 +275,15 @@ body.student-life main { overflow:clip; }
   .sj-schedule article::before { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(0deg,#050d1966,#050d1900); }
   .sj-schedule article>* { position:relative; z-index:1; }
   .sj-schedule h4 { font-size:2.7rem; }
+  /* One column, and the same crops the wide layout uses — the main frame
+     takes the ratio it inherited from the grid on desktop, so a phone
+     sees the photographs the way the design intends rather than in
+     whatever shape a percentage of its own height produces. */
   .sj-photo-wall { grid-template-columns:1fr; grid-template-rows:auto; }
-  .sj-photo-wall__main { grid-row:auto; }
-  .sj-photo-wall figure { min-height:55vw; }
+  .sj-photo-wall__main { grid-row:auto; aspect-ratio:3/2; height:auto; }
+  .sj-photo-wall__cut { aspect-ratio:4/5; }
   .sj-section-head { display:block; }
-  .sj-rail figure { flex-basis:82vw; height:58vh; }
+  .sj-rail figure { flex-basis:82vw; }
   .sj-houses__stage { display:grid; min-height:0; background:none; }
   .sj-house { min-height:58svh; }
   .sj-board { grid-template-columns:1fr; transform:none; }
@@ -189,7 +292,7 @@ body.student-life main { overflow:clip; }
   .sj-board a:nth-child(3) { grid-column:auto; transform:none; }
   .sj-festival-strip { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin; }
   .sj-festival-strip figure,
-  .sj-festival-strip figure:nth-child(2) { flex:0 0 82vw; height:58vh; margin:0; scroll-snap-align:center; }
+  .sj-festival-strip figure:nth-child(2) { flex:0 0 82vw; margin:0; scroll-snap-align:center; }
   .sj-tables { grid-template-columns:1fr; }
   .sj-night nav { display:grid; }
 }
