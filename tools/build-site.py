@@ -277,10 +277,10 @@ PAGES = {
     "sports": {
         "barehead": True,
         "nav": "Our Sports",
-        "title": "Sports",
-        "description": "Athletics, basketball, swimming and the playing fields at CIRS.",
-        "sheet": "sports-journey",
-        "cache_suffix": "-sports-journey-5",
+        "title": "Sports & Laurels — Built in the Arena | CIRS",
+        "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
+        "sheet": "sports",
+        "cache_suffix": "-sports-1",
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
@@ -521,6 +521,7 @@ PAGES = {
         # Its sheet is assets/css/alumni.css, scoped to body.alumni.
         "banner": None,
         "sheet": "alumni",
+        "cache_suffix": "-alumni-1",
     },
 }
 
@@ -1239,6 +1240,9 @@ def build(slug, page):
     if slug == "founder":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
+    if slug == "sports":
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
     # A page that opens on a scrubbed film carries the shared sheet, and with
     # it the two tuning blocks that sort out which page is which. Without
     # scripting nothing scrubs, so four screens of scroll would move a still
