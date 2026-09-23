@@ -39,8 +39,8 @@
     if(played) return;
     played=true;observer.disconnect();
     timeline=gsap.timeline();
-    timeline.to(drawPaths,{strokeDashoffset:0,duration:1.65,stagger:.15,ease:"power4.out"},0)
-      .to(eyebrow,{opacity:1,duration:.25},0)
+    if(drawPaths.length) timeline.to(drawPaths,{strokeDashoffset:0,duration:1.65,stagger:.15,ease:"power4.out"},0);
+    timeline.to(eyebrow,{opacity:1,duration:.25},0)
       .to(words,{yPercent:0,duration:.85,stagger:.055,ease:"power3.out"},.1)
       .to(body,{opacity:1,y:0,duration:.45,ease:"power2.out"},.45)
       .to(rule,{[ruleScale]:1,duration:.45,ease:"power2.out"},.7)

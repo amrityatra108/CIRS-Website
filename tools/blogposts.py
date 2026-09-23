@@ -76,6 +76,10 @@ POSTS = [
         "date": "August 2026",
         "author": "Aayush Sreenath B",
         "section": "Culture",
+        "image": "anakin-skywalker.webp",
+        "image_alt": "William Shakespeare holding a blue lightsaber and a copy of Hamlet against a galactic backdrop",
+        "image_width": 1024,
+        "image_height": 559,
         "excerpt": "The Star Wars prequel is, at its core, a tragedy. Yet within popular discourse it has long been dismissed as pulp science fiction; a spectacle over substance sort of material.",
         "paragraphs": [
             "The Star Wars prequel is, at its core, a tragedy. Yet within popular discourse it has long been dismissed as pulp science fiction; a spectacle over substance sort of material. This article resists that dismissal. It reads Star Wars Episode III: Revenge of the Sith (2005), contrary to popular claim, not as blockbuster cinema, but as a literary text, and subjects its dialogue to the same scrutiny one might apply to Sophocles or Shakespeare.",
@@ -157,6 +161,10 @@ POSTS = [
         "date": "May 2026",
         "author": "Shaurya Bhartia | XII Mgmt",
         "section": "World",
+        "image": "geography-and-geopolitics.webp",
+        "image_alt": "Hands moving chess pieces across a map of the world, illustrating geopolitical strategy",
+        "image_width": 1024,
+        "image_height": 572,
         "excerpt": "Every week, we stare at the \"News of the Week\" presentation on the screen, clapping loudly at the second anything mildly related to India, any sports team, or Donald Trump that flashes by.",
         "paragraphs": [
             "Every week, we stare at the \"News of the Week\" presentation on the screen, clapping loudly at the second anything mildly related to India, any sports team, or Donald Trump that flashes by. But have you ever tried to understand what’s actually going on behind those headlines? Or are you content with just having the worldview of a goldfish, only noticing whatever gets dropped into your bowl?",
@@ -276,6 +284,10 @@ POSTS = [
         "date": "February 2026",
         "author": "Lokk Vishwavedaa",
         "section": "Economics",
+        "image": "the-race-beyond.webp",
+        "image_alt": "Rear view of a Formula 1 car silhouetted against a fiery sunset sky",
+        "image_width": 2236,
+        "image_height": 703,
         "excerpt": "It's Sunday. Millions are tuning into their digital screens to watch one thing. Fast cars. Actually, 20 of them, racing at speeds that vaporize everything in their path.",
         "paragraphs": [
             "It's Sunday. Millions are tuning into their digital screens to watch one thing. Fast cars. Actually, 20 of them, racing at speeds that vaporize everything in their path. Behind their wheels lies the brave racer, experiencing the rush. All for one cause. Pass the checkered flag first. For 2 hours, engines scream, tires burn, and the world witnesses pure acceleration. For most, F1 ends there. The Pinnacle of Speed, Motorsport.",
