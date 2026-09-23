@@ -8,6 +8,11 @@ the repository **is** the admin panel, and the site rebuilds the page from it.
 
 This document is the list of what is missing, in the order it is worth supplying.
 
+The four named alumni now have extended biographies in `tools/alumni.py`. Hari Om Jani's
+biography records the National University of Singapore as his bachelor's and PhD
+institution. Batch years, current cities, portraits and personal reflections remain
+unrecorded; the other three alumni are not linked to an institution.
+
 ---
 
 ## The rule this page was built under
@@ -58,19 +63,21 @@ Not one batch or graduating year is recorded for any alumnus, including the thre
 gave the quotations. Every alumnus and every quotation currently shows
 *[Batch to be supplied]*.
 
-Needed: the year or batch for **Hari Om Jani, Soham Desai, Divyaj DT, Shashwat Santosh,
+Needed: the year or batch for **Hari Om Jani, Soham Desai, Divyaj DT, Shashwath Santosh,
 Kavya S, Roshan B** and **Mugdha Sultania**.
 
 Set `"batch"` in each entry.
 
 ## 3. Which alumnus went to which institution
 
-The page lists nineteen institutions, and separately lists four alumni. **It never joins
-the two**, because the join is not recorded anywhere. The destination panel says so:
+The page lists nineteen institutions. Hari Om Jani's biography records the National
+University of Singapore as his bachelor's and PhD institution. The other three alumni
+are not linked to an institution because that relationship is not recorded here. The
+destination panel says so:
 
 > *[Which alumni read here, and in which years, to be supplied by the school.]*
 
-Needed: for each alumnus, the institution they read at. Set `"institution"`.
+Needed: the institution each of the other three alumni attended. Set `"institution"`.
 
 Note that **Oxford University is deliberately not in the destination list.** It is where
 Hari Om Jani *works*, which is not the same as where a CIRS student *read*, and the page
@@ -78,11 +85,15 @@ does not conflate the two.
 
 ## 4. More destinations
 
-Adding one is two values: which of the galaxy's two arms it belongs on, and how far out
-along that arm it sits. Regions run in unbroken stretches along an arm — arm 0 carries
-India and then the United Kingdom, arm 1 carries Asia-Pacific and then the United States
-— so a new destination goes at the end of its own region's stretch and the ones beyond
-it shift out. The header comment in `tools/alumni.py` sets out the arithmetic.
+Adding one is a name, a country, a region and **where it actually is**: its latitude and
+longitude. The field is a map, so a new destination needs no layout — it lands where the
+institution stands, and its route out of Siruvani is drawn for it.
+
+The only thing that may need a hand is its name. Each entry carries an offset saying
+where the name sits relative to its point and which way it runs; the default is a short
+step to the right. It matters only when a new destination lands on top of one already
+there — a sixth in Britain, say. The header comment in `tools/alumni.py` sets out both,
+and the checks in `CLAUDE.md` will not catch two names overlapping: look at the map.
 
 ## 5. More alumni
 

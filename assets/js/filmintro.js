@@ -55,6 +55,11 @@
   var shot = section.querySelector("[data-film-shot]");
   var scrollCue = section.querySelector("[data-film-scroll-cue]");
   var photo = shot && shot.querySelector("img");
+  var hasStill = section.hasAttribute("data-film-pending");
+  var sources = film ? film.querySelectorAll("source") : [];
+  var failedSources = 0;
+  var fallbackTimer = null;
+  var unavailable = false;
   if (!stage || !film || !title) return;
 
   function numbers(name) {
@@ -289,7 +294,9 @@
      it needs nothing from the video at all; one without has the film sent to
      its last frame, as soon as the film can be sent anywhere. */
   function still() {
+    if (fallbackTimer) { window.clearTimeout(fallbackTimer); fallbackTimer = null; }
     section.setAttribute("data-film-still", "");
+    section.removeAttribute("data-film-pending");
     put(title, "reveal", "--film-reveal", "1");
     put(title, "exit", "--film-exit", "0");
     // The page still goes on below the one screen, so a cue stays up.
@@ -354,7 +361,9 @@
      the photograph are drawn from the scroll position alone, and the film
      joins in when its metadata arrives. */
   function start() {
-    if (reduced.matches || !hasST || film.error) { still(); return; }
+    if (unavailable) return;
+    if (reduced.matches || !hasST) { still(); return; }
+    if (film.error) { fallback(); return; }
     /* The film begins loading while the page is still being parsed, before
        this deferred script runs, so if every source has already failed, the
        errors fired with nobody listening. networkState then reads
@@ -364,13 +373,20 @@
        the listener above attached; one that was merely starting just starts. */
     if (film.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) film.load();
     scrub();
+    if (!frames()) {
+      if (hasStill && !fallbackTimer) {
+        fallbackTimer = window.setTimeout(fallback, 5000);
+      }
+      return;
+    }
+    if (fallbackTimer) { window.clearTimeout(fallbackTimer); fallbackTimer = null; }
+    section.removeAttribute("data-film-pending");
+    update();
   }
 
   film.addEventListener("loadedmetadata", function () {
-    if (!frames()) return;
     asked = -1;
-    if (trigger) paint(progress);
-    else if (section.hasAttribute("data-film-still")) seek(last);
+    start();
   });
   if (film.readyState >= 1) frames();
 
@@ -382,12 +398,31 @@
   function failed() {
     return !!film.error || film.networkState === HTMLMediaElement.NETWORK_NO_SOURCE;
   }
+  function fallback() {
+    if (unavailable) return;
+    unavailable = true;
+    teardown();
+    section.setAttribute("data-film-still", "");
+    section.removeAttribute("data-film-pending");
+    put(title, "reveal", "--film-reveal", "1");
+    put(title, "exit", "--film-exit", "0");
+    if (scrollCue) put(scrollCue, "cue", "--film-scroll-cue-opacity", "0");
+    asked = -1;
+    seek(last);
+    if (fallbackTimer) { window.clearTimeout(fallbackTimer); fallbackTimer = null; }
+  }
+
+  sources.forEach(function (source) {
+    source.addEventListener("error", function () {
+      failedSources += 1;
+      if (hasStill && failedSources === sources.length) fallback();
+    });
+  });
   film.addEventListener("error", function () {
     setTimeout(function () {
-      if (failed()) { teardown(); still(); }
+      if (failed()) fallback();
     }, 0);
   }, true);
-
 
   /* A change of window shape can move the lens (the film's crop changes at
      6:5) and swap the photograph's cut, so the geometry is taken again and
@@ -412,15 +447,16 @@
       playing.then(function () {
         film.pause();
         asked = -1;
-        if (trigger) paint(progress);
+        if (trigger) update();
       }).catch(function () { /* No decoder; the poster is the fallback. */ });
     }
   }
   window.addEventListener("touchstart", unlock, { passive: true, once: true });
 
   reduced.addEventListener("change", function () {
+    if (unavailable) return;
     if (reduced.matches) { teardown(); still(); }
-    else { section.removeAttribute("data-film-still"); written = {}; scrub(); }
+    else { section.removeAttribute("data-film-still"); written = {}; start(); }
   });
 
   // A trigger left registered across a back-forward-cache restore is one
