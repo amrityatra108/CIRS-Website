@@ -40,7 +40,7 @@ import creativewriting
 import captures
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=97"
+CACHE_BUST = "b=98"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -130,7 +130,6 @@ def newsflash_html():
 #          included, because every page is still being filled in
 PAGES = {
     "index": {
-        "barehead": True,
         "nav": "Home",
         "title": "Chinmaya International Residential School — Siruvani, Coimbatore",
         "description": "A co-educational residential school on a hundred acres in the Siruvani "
@@ -161,7 +160,6 @@ PAGES = {
     },
     "founder": {
         "litehead": True,
-        "barehead": True,
         "nav": "Founder",
         "title": "Our Founder — Pujya Gurudev Swami Chinmayananda",
         "description": "Pujya Gurudev Swami Chinmayananda, 1916–1993: the teacher whose "
@@ -175,7 +173,6 @@ PAGES = {
         "cache_suffix": "-founder-16",
     },
     "why-cirs": {
-        "barehead": True,
         "nav": "Why CIRS",
         "title": "Why CIRS",
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
@@ -270,7 +267,6 @@ PAGES = {
     },
     "student-life": {
         "logintab": ("Student Portal", "https://cirs.in/school/"),
-        "barehead": True,
         "nav": "Student Life",
         "title": "Student Life",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
@@ -284,7 +280,6 @@ PAGES = {
         "cache_suffix": "-student-life-9",
     },
     "sports": {
-        "barehead": True,
         "nav": "Our Sports",
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
@@ -311,7 +306,6 @@ PAGES = {
         },
     },
     "crossroads": {
-        "barehead": True,
         "nav": "Crossroads",
         # The old site filed this under a "Creative Corner" this site does not
         # have; Student Life is where the arts and the clubs live here.
@@ -341,7 +335,6 @@ PAGES = {
         "litehead": True,
     },
     "cultural-gallery": {
-        "barehead": True,
         "nav": "CIRS Cultural Gallery",
         "title": "Arts, Music & Theatre",
         "description": "Music, theatre and the visual arts at Chinmaya International Residential "
@@ -383,7 +376,6 @@ PAGES = {
                  [("sports.html", "Our Sports")]),
     },
     "math-challenge": {
-        "barehead": True,
         "nav": "Math Challenge",
         "title": "Math Challenge",
         "description": "The Math Challenge at Chinmaya International Residential School — "
@@ -396,7 +388,6 @@ PAGES = {
         "sheet": "matharena",
     },
     "creative-writing": {
-        "barehead": True,
         "nav": "Creative Writing",
         "title": "Creative Writing",
         "description": "Essays, opinion and reflection by students of Chinmaya International "
@@ -409,7 +400,6 @@ PAGES = {
         "sheet": "cwriting",
     },
     "captures": {
-        "barehead": True,
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
         # Not "as its students see it", which this page said while it was a
@@ -461,7 +451,6 @@ PAGES = {
         "uc": False,
     },
     "art-attack": {
-        "barehead": True,
         "cache_suffix": "-art-attack-film-1",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
@@ -485,7 +474,6 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "festivals": {
-        "barehead": True,
         "cache_suffix": "-festivals-film-1",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
@@ -509,7 +497,6 @@ PAGES = {
                  [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "theatre": {
-        "barehead": True,
         "cache_suffix": "-theatre-film-1",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
@@ -1368,16 +1355,11 @@ def build(slug, page):
             f'<link rel="stylesheet" href="assets/css/captures-gallery.css?{CACHE_BUST}">\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
-    # it in white lettering. "litehead" starts it in the solid treatment
-    # .is-stuck already defines and keeps it there — set here in the markup so
-    # it holds without JavaScript, and left alone by cirs.js, which reads it.
+    # it in white lettering. "litehead" puts the class on <body>, and pages.css
+    # gives the header dark lettering there from the first paint, with or
+    # without JavaScript. The header's own state — clear or glass — is the
+    # same on every page and belongs to cirs.js alone.
     lite = bool(page.get("litehead"))
-    # A page that opens on a full-window composition — its own, or one of the
-    # shared heroes — wears the header bare: the glass bar around the three
-    # controls comes off so nothing is laid across the picture. The controls
-    # keep their own pills, so they stay legible over photography. Every other
-    # page keeps the bar, which is what holds them together over paper.
-    bare = bool(page.get("barehead") or page.get("hero"))
     # A page opening on a scrubbed film is marked twice: "film" for the
     # mechanics every such page shares, and its own slug for the handful of
     # decisions its footage makes for it.
@@ -1399,8 +1381,6 @@ def build(slug, page):
     header = (read("tools/partials/header.html")
               .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html")
               .replace("{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
-              .replace("{{HEADER_STATE}}",
-                       (" is-stuck" if lite else "") + (" is-bare" if bare else ""))
               .replace("{{HEADER_TABS}}",
                        EXTRA_TAB.format(href=page["logintab"][1], label=page["logintab"][0])
                        if page.get("logintab") else ""))

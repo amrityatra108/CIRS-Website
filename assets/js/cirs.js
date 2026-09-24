@@ -79,14 +79,13 @@
 
   /* ----------------------------------------------------------
      Scroll subscription
-     Lenis suppresses the native scroll event, so anything that
-     reacts to scrolling must subscribe through Lenis when it is
-     running. Subscribing to window.scroll directly would simply
-     never fire.
+     Lenis moves the window itself, so the native scroll event
+     fires under it as well as without it. ScrollTrigger is used
+     where it is loaded because it also reports refreshes, when
+     pinned sections change the length of the page.
      ---------------------------------------------------------- */
-  /* A sentinel is a zero-height marker placed at a scroll depth. Watching it
-     with IntersectionObserver reports crossing that depth without depending on
-     scroll events, Lenis, GSAP or requestAnimationFrame. */
+  /* A sentinel reports crossing a scroll depth, reading the depth afresh at
+     every check so it follows the page as it grows. */
   function sentinel(px, onCross) {
     var state = null;
     function report(past) {
@@ -97,20 +96,14 @@
     function depth() { return typeof px === "function" ? px() : px; }
     function check() { report((window.scrollY || window.pageYOffset || 0) > depth()); }
 
-    // Three independent signals, because each can be unavailable: ScrollTrigger
-    // (fed by Lenis), IntersectionObserver on a marker, and the native event.
-    if (hasST) ScrollTrigger.create({ onUpdate: check, onRefresh: check });
-    if ("IntersectionObserver" in window) {
-      var el = document.createElement("div");
-      el.setAttribute("aria-hidden", "true");
-      el.style.cssText = "position:absolute;left:0;width:1px;height:1px;pointer-events:none;top:" + depth() + "px";
-      document.body.appendChild(el);
-      new IntersectionObserver(function (entries) {
-        report(entries[0].boundingClientRect.top < 0);
-      }, { threshold: 0 }).observe(el);
-    }
+    // The native event, which fires under Lenis too, and ScrollTrigger's
+    // refresh, when the depth itself may have moved. There used to be four
+    // readers: these, Lenis's own event and an IntersectionObserver on a
+    // marker placed at the depth as it stood on load. The marker was never
+    // moved, so once the depth changed it disagreed with the rest and the
+    // state flipped back and forth across the gap between them.
+    if (hasST) ScrollTrigger.create({ onRefresh: check });
     window.addEventListener("scroll", check, { passive: true });
-    if (lenis) lenis.on("scroll", check);
     check();
   }
 
@@ -1220,7 +1213,7 @@
     $$("[data-magnetic]").forEach(function (el) {
       var homeHeader = document.body.classList.contains("home") && el.closest(".header");
       function magneticIsOn() {
-        return !homeHeader || homeHeader.classList.contains("is-stuck");
+        return !homeHeader || homeHeader.classList.contains("is-scrolled");
       }
       var bounds = null;
       var xTo = gsap.quickTo(el, "x", { duration: .34, ease: "power3.out" });
@@ -1334,6 +1327,113 @@
   }
 
   /* ==========================================================
+     Header state
+     ----------------------------------------------------------
+     The one place the header's state is decided. It has two:
+     clear over the page's opening, and glass once the opening
+     has passed up under the bar. That is one class, .is-scrolled,
+     on #header — the materials, the ink and everything else a
+     page might want to vary hang off it in pages.css.
+
+     This replaced two sentinels that toggled three classes
+     (is-first-section, is-stuck and is-atop) at two different
+     depths, each fed by three signals. One of those signals was
+     an IntersectionObserver marker placed at the boundary as it
+     stood on load and never moved; the others read the boundary
+     live. Once the page grew under it — photographs arriving,
+     pinned sections taking their spacers — the marker and the
+     scroll position disagreed about which side of the line the
+     page was on, and the header flipped back and forth between
+     the two. Here there is one reading of the scroll position,
+     taken once a frame, against one boundary.
+
+     The boundary is where the opening's lower edge meets the
+     bottom of the bar: the moment the page's own content starts
+     passing under it. There is a band either side of it rather
+     than a line — the header turns to glass a little below the
+     boundary and only clears again a little above it — so a
+     scroll that comes to rest on the line, or a trackpad that
+     jitters across it, cannot make it flicker.
+     ========================================================== */
+  function headerState() {
+    var header = $("#header");
+    if (!header) return;
+    var BAND = 24;
+
+    var main = $("#main");
+    // Ignore non-visual utility nodes (the gallery's canvas controls, for
+    // example) and use the first actual section on every page. Blog entries
+    // wrap the full story in one article, so their opening ends with the
+    // lead image rather than at the end of the story.
+    var opening = main && main.querySelector(":scope > section, :scope > article");
+    if (!opening && main) opening = main.firstElementChild;
+    if (opening && opening.matches("article.art")) {
+      opening = $(".art__hero", opening) || $(".art__head", opening) || opening;
+    }
+
+    var edge = 0, scrolled = null, queued = false;
+
+    // Measured, not read every frame: it moves only when the layout does.
+    function measure() {
+      var bar = header.querySelector(".wrap") || header;
+      var barBottom = bar.getBoundingClientRect().bottom;
+      if (!opening) { edge = 80; return; }
+      // A pinned opening is measured by its spacer, which holds its place
+      // in the document while the section itself is fixed to the screen.
+      var box = opening.parentElement && opening.parentElement.classList.contains("pin-spacer")
+        ? opening.parentElement : opening;
+      var bottom = box.getBoundingClientRect().bottom + (window.scrollY || window.pageYOffset || 0);
+      edge = Math.max(bottom - barBottom, 80);
+    }
+
+    function apply() {
+      queued = false;
+      var y = window.scrollY || window.pageYOffset || 0;
+      var next = scrolled ? y > edge - BAND : y > edge + BAND;
+      if (next === scrolled) return;
+      scrolled = next;
+      header.classList.toggle("is-scrolled", next);
+    }
+    function queue() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(apply);
+    }
+    function remeasure() { measure(); queue(); }
+
+    // The state the page opens in is set without a transition, so a page
+    // refreshed halfway down (or restored there by the browser) shows the
+    // glass header at once rather than watching the clear one become it.
+    // is-settling holds until the load event has let the browser restore
+    // the scroll position, then two frames more so the settled state has
+    // painted before transitions come back.
+    header.classList.add("is-settling");
+    measure();
+    apply();
+    function settle() {
+      remeasure();
+      requestAnimationFrame(function () {
+        apply();
+        requestAnimationFrame(function () { header.classList.remove("is-settling"); });
+      });
+    }
+    if (document.readyState === "complete") settle();
+    else window.addEventListener("load", settle, { once: true });
+
+    // One reader of the scroll position. Lenis moves the window itself, so
+    // the native event fires whether or not smooth scrolling is on.
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", remeasure, { passive: true });
+    // A trigger rather than ScrollTrigger.addEventListener("refresh"). With
+    // only the listener, a page reloaded halfway down came back near the top:
+    // on pages that create no trigger of their own at boot, the browser's
+    // scroll restoration does not survive ScrollTrigger's first refresh. The
+    // header's old sentinels created one by accident; this does it on purpose.
+    if (hasST) ScrollTrigger.create({ onRefresh: remeasure });
+    if ("ResizeObserver" in window) new ResizeObserver(remeasure).observe(document.body);
+  }
+
+  /* ==========================================================
      Header and drawer
      ========================================================== */
   var drawer = $("#drawer"), burger = $("#burger"), drawerMotion = null;
@@ -1370,51 +1470,7 @@
   }
 
   (function chrome() {
-    var header = $("#header");
-    if (header) {
-      var main = $("#main");
-      // Ignore non-visual utility nodes (the gallery's canvas controls, for
-      // example) and use the first actual section on every page. Blog entries
-      // wrap the full story in one article, so their opening ends with the
-      // lead image rather than at the end of the story.
-      var opening = main && main.querySelector(":scope > section, :scope > article");
-      if (!opening && main) opening = main.firstElementChild;
-      var openingBoundary = opening;
-      if (opening && opening.matches("article.art")) {
-        openingBoundary = $(".art__hero", opening) || $(".art__head", opening) || opening;
-      }
-      sentinel(function () {
-        if (!openingBoundary) return 80;
-        var box = openingBoundary.getBoundingClientRect();
-        return Math.max(box.top + window.pageYOffset + box.height - 1, 80);
-      }, function (past) {
-        header.classList.toggle("is-first-section", !past);
-        // Pale opening sections retain their existing dark lettering while
-        // the container itself stays transparent.
-        if (!document.body.classList.contains("litehead")) {
-          header.classList.toggle("is-stuck", past);
-        }
-      });
-    }
-
-    // The bare header — no glass bar around the controls — belongs to the
-    // opening composition and nothing else. Taking the bar off for good
-    // looked right on the hero and was wrong two screens down: on Admissions
-    // the page's own text scrolled straight through the News pill, and on
-    // Why CIRS the wordmark ended up dark purple over an aerial photograph.
-    // The bar is what gives it a ground once content passes under it.
-    //
-    // This runs on bare pages whether or not they are litehead, so a page
-    // that opens pale loses the bar over its own opening too, which is the
-    // point of the flag.
-    if (header && header.classList.contains("is-bare")) {
-      header.classList.add("is-atop");
-      sentinel(function () {
-        var first = $("main > *");
-        if (!first) return 80;
-        return Math.max(first.offsetTop + first.offsetHeight - 120, 80);
-      }, function (past) { header.classList.toggle("is-atop", !past); });
-    }
+    headerState();
     if (!burger || !drawer) return;
     burger.addEventListener("click", function () {
       if (drawer.classList.contains("is-open")) { closeDrawer(); return; }

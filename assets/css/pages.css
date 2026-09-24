@@ -88,123 +88,118 @@
 }
 
 /* ------------------------------------------------------------
-   Header over the open drawer
-   ------------------------------------------------------------
-   At the top of a page the header is transparent with white text,
-   because it floats over the hero. The drawer is paper-coloured
-   and opens underneath it, so in that state the wordmark and both
-   controls turn invisible — which matters more now that the menu
-   is the site's whole navigation rather than a convenience.
-
-   These mirror the .header.is-stuck rules in cirs.css.
-
-   Keyed on .menu-open, not .is-locked. They were on .is-locked, which
-   cirs.js also puts on <body> for the intro curtain's scroll lock — so
-   every page with a full-bleed hero opened with a solid paper bar across
-   the top of its photograph, and when the curtain lifted the background
-   transition in cirs.css faded it out over .35s. That fade was the strip
-   of white at the top of the hero on load. is-locked is the scroll lock
-   and nothing else now; only the drawer sets menu-open.
-   ------------------------------------------------------------ */
-body.menu-open .header{
-  background:var(--paper);
-  border-bottom-color:var(--rule-soft);
-}
-body.menu-open .brand__name{ color:var(--purple); font-weight:400; }
-body.menu-open .brand__sub{ color:var(--ink-mute); }
-
-/* ------------------------------------------------------------
-   Header — floating magnetic navigation
+   Header — one component, two materials
    ------------------------------------------------------------
    One quiet capsule keeps the school identity central while each
-   navigation control gets its own soft-edged magnetic target. The
-   dark glass belongs over photography; the paper version takes over
-   once content reaches the bar or the menu opens.
+   navigation control gets its own soft-edged magnetic target.
+
+   The header has two states and exactly one switch between them:
+   .is-scrolled, which cirs.js sets once the page's opening has passed
+   up under the bar (see "Header state" there). Nothing else toggles it
+   and no page sets it for itself.
+
+     at the top     the capsule is clear: no fill, no border, no
+                    shadow, no blur, so nothing is laid across the
+                    opening picture. The lettering is light.
+     .is-scrolled   the capsule is cream glass with a hairline border,
+                    a soft shadow and the backdrop blur. The lettering
+                    is dark.
+
+   Two other things darken the lettering without touching the
+   material: body.litehead, a page that opens on paper and so can
+   never have white lettering (build-site.py), and body.menu-open,
+   the drawer, which is paper-coloured and also takes the glass. The
+   drawer is keyed on .menu-open, not .is-locked: cirs.js puts
+   is-locked on <body> for the intro curtain's scroll lock too, and
+   keying on it once laid a paper bar across every hero on load.
+
+   Only colour, border colour, shadow, opacity and the blur change
+   between the states. Size, padding, gap, position and font weight
+   are the same in both, so the bar never moves or resizes: the eye
+   reads one header changing its surface, not two headers swapping.
    ------------------------------------------------------------ */
 .header{
   top:clamp(10px,1.5vw,18px);
   padding-inline:clamp(12px,2vw,28px);
   pointer-events:none;
+
+  /* The lettering, as tokens: light over the opening... */
+  --hd-name:#fff;
+  --hd-sub:rgba(255,255,255,.8);
+  --hd-mark:var(--gold-lit);
+  --hd-mark-hover:var(--gold-lit);
+  --hd-tab:#fff;
+  --hd-tab-bg:rgba(255,255,255,.055);
+  --hd-tab-line:rgba(255,255,255,.13);
+  --hd-tab-shadow:0 8px 24px rgba(14,11,18,0), inset 0 1px 0 rgba(255,255,255,.06);
+  --hd-tab-hover:#fff;
+  --hd-tab-hover-bg:rgba(255,255,255,.13);
+  --hd-tab-hover-line:rgba(255,215,92,.5);
+  --hd-tab-hover-shadow:0 8px 24px rgba(14,11,18,.2), inset 0 1px 0 rgba(255,255,255,.12);
+  --hd-enq-bg:rgba(57,42,72,0);
+
+  --hd-fade:350ms;
+  --hd-ink-fade:300ms;
+  transition:opacity var(--hd-fade) var(--e), visibility var(--hd-fade);
 }
-.header.is-stuck,
+/* ...and dark over paper. */
+.header.is-scrolled,
+body.litehead .header,
 body.menu-open .header{
-  background:transparent;
-  border-bottom-color:transparent;
-  box-shadow:none;
+  --hd-name:var(--purple);
+  --hd-sub:var(--ink-mute);
+  --hd-mark:var(--gold);
+  --hd-mark-hover:var(--gold);
+  --hd-tab:var(--ink);
+  --hd-tab-bg:rgba(57,42,72,.035);
+  --hd-tab-line:rgba(57,42,72,.12);
+  --hd-tab-shadow:0 8px 22px rgba(21,8,24,0), inset 0 1px 0 rgba(255,255,255,.8);
+  --hd-tab-hover:var(--purple);
+  --hd-tab-hover-bg:rgba(57,42,72,.09);
+  --hd-tab-hover-line:rgba(57,42,72,.24);
+  --hd-tab-hover-shadow:0 8px 22px rgba(21,8,24,.1), inset 0 1px 0 rgba(255,255,255,.9);
+  --hd-enq-bg:rgba(57,42,72,.035);
 }
+
+/* The capsule. Its clear state keeps the same shadow list as the glass
+   one with the colours at zero, so the two interpolate instead of
+   switching; the blur goes from none to its full value the same way. */
 .header .wrap{
   width:min(100%,1180px);
   padding:6px 8px;
-  border:1px solid rgba(255,255,255,.18);
+  border:1px solid rgba(57,42,72,0);
   border-radius:999px;
-  background:rgba(255,255,255,.08);
-  box-shadow:0 18px 50px rgba(14,11,18,.12), inset 0 1px 0 rgba(255,255,255,.1);
+  background-color:rgba(250,247,248,0);
+  box-shadow:0 12px 36px rgba(21,8,24,0), inset 0 1px 0 rgba(255,255,255,0);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
   pointer-events:auto;
-  transition:background .48s var(--e2), border-color .48s var(--e2), box-shadow .48s var(--e2);
+  transition:background-color var(--hd-fade) var(--e),
+             border-color var(--hd-fade) var(--e),
+             box-shadow var(--hd-fade) var(--e),
+             -webkit-backdrop-filter var(--hd-fade) var(--e),
+             backdrop-filter var(--hd-fade) var(--e);
+}
+.header.is-scrolled .wrap,
+body.menu-open .header .wrap{
+  background-color:rgba(250,247,248,.72);
+  border-color:rgba(57,42,72,.14);
+  box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8);
 }
 @supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
-  .header .wrap{
-    background:rgba(255,255,255,.07);
+  .header.is-scrolled .wrap,
+  body.menu-open .header .wrap{
+    background-color:rgba(250,247,248,.64);
     -webkit-backdrop-filter:blur(16px) saturate(125%);
     backdrop-filter:blur(16px) saturate(125%);
   }
 }
-.header.is-stuck .wrap,
-body.menu-open .header .wrap{
-  background:rgba(250,247,248,.72);
-  border-color:rgba(57,42,72,.14);
-  box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8);
-}
-@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
-  .header.is-stuck .wrap,
-  body.menu-open .header .wrap{ background:rgba(250,247,248,.64); }
-}
-/* Every page begins with the navigation floating directly over its first
-   content section. The existing glass surface returns at that section's
-   lower edge; opening the menu keeps its readable glass treatment. */
-body:not(.menu-open) .header.is-first-section .wrap{
-  background:transparent;
-  border-color:transparent;
-  box-shadow:none;
-  -webkit-backdrop-filter:none;
-  backdrop-filter:none;
-}
-/* ------------------------------------------------------------
-   The bare header
-   ------------------------------------------------------------
-   On a page that opens on a full-window composition, the glass bar
-   around the three controls comes off. Nothing is then laid across
-   the picture: only the wordmark and the controls sit on it, and
-   each of those already carries its own pill, so they stay legible
-   over photography without a container behind them.
+/* Set by cirs.js while it puts the header into the state a page was
+   loaded or restored in: a refresh halfway down a page should show the
+   glass header, not watch the clear one turn into it. */
+.header.is-settling,
+.header.is-settling *{ transition:none !important; }
 
-   It comes back the moment the opening has scrolled past, because
-   from there the controls are over the page's own content: without
-   it, Admissions ran its contact details straight through the News
-   pill and Why CIRS put a dark purple wordmark on an aerial
-   photograph. cirs.js carries is-atop for exactly as long as the
-   opening is on screen — not is-stuck, which a page opening on a
-   pale ground wears from the markup and never takes off.
-
-   Set per page in build-site.py: see "barehead".
-   ------------------------------------------------------------ */
-.header.is-bare.is-atop .wrap{
-  background:transparent;
-  border-color:transparent;
-  box-shadow:none;
-}
-@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
-  .header.is-bare.is-atop .wrap{
-    background:transparent;
-    -webkit-backdrop-filter:none;
-    backdrop-filter:none;
-  }
-}
-body.menu-open .header.is-bare.is-atop .wrap{
-  background:rgba(250,247,248,.72);
-  border-color:rgba(57,42,72,.14);
-  box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8);
-}
 .header__left,
 .header__right{
   display:flex; align-items:center;
@@ -215,20 +210,23 @@ body.menu-open .header.is-bare.is-atop .wrap{
 .header__right{ justify-self:end; }
 
 .brand img{ width:56px; }
-.brand__name{ font-size:1.22rem; }
-.brand__sub{ font-size:.82rem; }
+.brand__name{ font-size:1.22rem; color:var(--hd-name); transition:color var(--hd-ink-fade) var(--e); }
+.brand__sub{ font-size:.82rem; color:var(--hd-sub); transition:color var(--hd-ink-fade) var(--e); }
 
 .htab{
   position:relative;
   display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:7px;
   min-height:44px; padding:0 13px;
-  border:1px solid rgba(255,255,255,.13); border-radius:999px;
-  background:rgba(255,255,255,.055);
-  color:#fff; white-space:nowrap;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
-  transition:color .28s var(--e2), background .28s var(--e2), border-color .28s var(--e2), box-shadow .28s var(--e2);
+  border:1px solid var(--hd-tab-line); border-radius:999px;
+  background-color:var(--hd-tab-bg);
+  color:var(--hd-tab); white-space:nowrap;
+  box-shadow:var(--hd-tab-shadow);
+  transition:color var(--hd-ink-fade) var(--e),
+             background-color var(--hd-ink-fade) var(--e),
+             border-color var(--hd-ink-fade) var(--e),
+             box-shadow var(--hd-ink-fade) var(--e);
 }
-.htab__icon{ display:grid; place-items:center; height:18px; color:var(--gold-lit); transition:color .3s var(--e); }
+.htab__icon{ display:grid; place-items:center; height:18px; color:var(--hd-mark); transition:color var(--hd-ink-fade) var(--e); }
 .htab__label{
   font-family:var(--font-primary);
   font-variant-caps:normal;
@@ -236,10 +234,12 @@ body.menu-open .header.is-bare.is-atop .wrap{
   letter-spacing:.035em; font-size:.9rem; line-height:1;
 }
 .htab:hover{
-  color:#fff; background:rgba(255,255,255,.13); border-color:rgba(255,215,92,.5);
-  box-shadow:0 8px 24px rgba(14,11,18,.2), inset 0 1px 0 rgba(255,255,255,.12);
+  color:var(--hd-tab-hover);
+  background-color:var(--hd-tab-hover-bg);
+  border-color:var(--hd-tab-hover-line);
+  box-shadow:var(--hd-tab-hover-shadow);
 }
-.htab:hover .htab__icon{ color:var(--gold-lit); }
+.htab:hover .htab__icon{ color:var(--hd-mark-hover); }
 .htab:focus-visible{ outline-offset:2px; }
 
 /* The News mark carries a small gold dot, so the one header item that
@@ -254,24 +254,6 @@ body.menu-open .header.is-bare.is-atop .wrap{
   gap:3px; width:15px; height:15px;
 }
 .htab--menu .menubtn__dots i{ width:4px; height:4px; border-radius:50%; background:currentColor; }
-
-/* Once the header is a solid bar over paper, the marks go dark. */
-.header.is-stuck .htab,
-body.menu-open .htab{
-  color:var(--ink);
-  background:rgba(57,42,72,.035);
-  border-color:rgba(57,42,72,.12);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
-}
-.header.is-stuck .htab__icon,
-body.menu-open .htab__icon{ color:var(--gold); }
-.header.is-stuck .htab:hover,
-body.menu-open .htab:hover{
-  color:var(--purple);
-  background:rgba(57,42,72,.09);
-  border-color:rgba(57,42,72,.24);
-  box-shadow:0 8px 22px rgba(21,8,24,.1), inset 0 1px 0 rgba(255,255,255,.9);
-}
 
 /* The wordmark is now larger, so it gives way sooner. Below 1040px it
    shrinks and wraps rather than pushing through the tabs; below 960px
@@ -301,7 +283,7 @@ body.menu-open .htab:hover{
   .brand__txt{ display:none; }
 }
 @media (prefers-reduced-motion:reduce){
-  .header .wrap,.htab{ transition-duration:0s; }
+  .header,.header .wrap,.htab,.htab__icon,.brand__name,.brand__sub{ transition-duration:0s; }
 }
 
 /* ------------------------------------------------------------
@@ -943,8 +925,13 @@ body.menu-open .htab:hover{
    Escape, so a keyboard or a phone reaches the same thing.
    ============================================================ */
 .enq{ position:relative; }
+/* Enquire has no border and, over the opening, no resting fill: it takes
+   the faint pill only with the dark lettering. A token, so the fill fades
+   with the rest of the header rather than switching; .htab:hover still
+   outranks it. */
 .enq__btn{
-  background:none; border:0; padding:2px 6px; cursor:pointer;
+  background:none; background-color:var(--hd-enq-bg);
+  border:0; padding:2px 6px; cursor:pointer;
   font:inherit;
 }
 
