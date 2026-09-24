@@ -267,8 +267,9 @@ step with the site in silence, which is exactly the failure that check exists to
 - **Board results and university placement figures** from the examinations office.
 - **A photography shoot.** Every image is the school's own, re-cropped and graded, but the best
   available source is about 1400 px wide.
-- **The Principal's photograph and welcome message are live** — Rajeshwari Satish, cropped from a
-  supplied photo to `assets/img/principal.jpg`.
+- **The Principal's photograph and welcome message are live** — Smt. G. Rajeshwari, the name the
+  owner confirmed in September 2026. Her portrait is cut from the supplied `assets/img/principal.jpg`
+  by `tools/make-leadership.py`.
 - **News, on an ongoing basis.** `tools/pages/news.html` currently carries the six reports and
   the diary taken from new.cirschool.org. It is a hand-edited page: add an `<article class="newsitem">`
   to the grid for each new report, or replace the `.newslead` for a big one, then rebuild. Nothing
@@ -286,14 +287,18 @@ step with the site in silence, which is exactly the failure that check exists to
   - *Introductions still needed:* Swami Anukoolananda and Smt. G. Rajeshwari (their rows carry
     only a link to their message). Swami Swaroopananda's row uses the line School Information
     already publishes — "Head of Chinmaya Mission worldwide, and head of the committee that
-    manages the School" — until a fuller introduction arrives.
-  - *Portraits still needed:* Swami Swaroopananda, Shri. Vijay Mahtaney, Shri. Jagdish Moorjani
-    and Shri. Siddharth Balachandran. A new portrait goes in `tools/make-leadership.py` with a
-    crop box, and then a `<figure class="roster__face">` in that person's row.
-  - *To confirm:* the Principal's name — the page says Smt. G. Rajeshwari, School Information's
-    committee table says Mrs. Rajeshwari G, and this file earlier recorded Rajeshwari Satish;
-    Shri. Vijay Mahtaney (the design artifact spelled it Viju); and whether the Mahtaney and
-    Balachandran introductions (Park Hyatt Chennai, the BSE shareholding) are still current.
+    manages the School."
+  - *Portrait still needed:* Shri. Vijay Mahtaney. No official page carrying his photograph was
+    found. A new portrait goes in `tools/make-leadership.py` with a crop box, and then a
+    `<figure class="roster__face">` in his row.
+  - *Portraits from official pages, not from the school* (downloaded with the owner's approval,
+    September 2026; originals in `assets/source/leadership/`): Swami Swaroopananda and Pujya
+    Guruji Swami Tejomayananda from chinmayamission.com, Shri. Jagdish Moorjani from
+    citiustech.com (published in black and white), Shri. Siddharth Balachandran from
+    buimerccorp.com. The school may prefer photographs of its own, and should be content to use
+    these; either way, replace the file in `assets/source/leadership/` and re-run the script.
+  - *To confirm:* whether the Mahtaney and Balachandran introductions (Park Hyatt Chennai, the
+    BSE shareholding) are still current.
 - **A caption for the staff and faculty photograph** — occasion, date and names. The page says
   only "The CIRS staff and faculty." until the school supplies it.
 - **The Why CIRS photo is live** — `assets/img/why-cirs.jpg`, cropped from a supplied photo of three
