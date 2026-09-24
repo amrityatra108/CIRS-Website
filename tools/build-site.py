@@ -240,14 +240,15 @@ PAGES = {
     "curriculum": {
         "nav": "Curriculum",
         "title": "Curriculum | CBSE & IB Diploma Programme",
-        "description": "Explore the CBSE and IB Diploma curricula at Chinmaya International "
-                       "Residential School, with specialist teaching, holistic learning and a "
-                       "residential environment.",
+        "description": "Follow the academic journey at Chinmaya International Residential School: "
+                       "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
+                       "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-2",
-        "banner": ("Curriculum", "Two Curricula, <em>One Campus.</em>",
-                   "CBSE from Grade V, and the International Baccalaureate Diploma in the final "
-                   "two years."),
+        "cache_suffix": "-curriculum-3",
+        "banner": ("Curriculum", "The shape of <em>learning at CIRS.</em>",
+                   "CBSE begins in Grade V. From Grade XI, students can choose the IB Diploma "
+                   "Programme. The Chinmaya Vision Programme connects academic study with "
+                   "daily school life."),
         "jump": True,
         "uc": False,
     },
@@ -543,7 +544,7 @@ PAGES = {
         # Admissions carries its own quiet, document-led layout beneath the
         # shared honeycomb hero. The sheet is scoped by body.admissions.
         "sheet": "admissions",
-        "cache_suffix": "-admissions-25",
+        "cache_suffix": "-admissions-26",
         "hero_split": False,
         "hero": ("Admissions", "Admissions <em>Open.</em>",
                  "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
@@ -558,6 +559,7 @@ PAGES = {
         "hero_placeholder": "Header animation &mdash; admissions<br>photograph or looping video<br>to be supplied",
         "jump": True,
         "popup": False,
+        "uc": False,
     },
     "parent-portal": {
         "nav": "Parent Portal",
@@ -573,6 +575,7 @@ PAGES = {
                    "fee payment and the parent login the school runs today, and the people to ask."),
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
+        "cache_suffix": "-portal-intro-1",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
@@ -1366,6 +1369,27 @@ def build(slug, page):
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/captures-featured.css?{CACHE_BUST}">\n'
             f'<link rel="stylesheet" href="assets/css/captures-gallery.css?{CACHE_BUST}">\n</head>')
+    if slug == "parent-portal":
+        # This page has no shared curtain, including its no-script override.
+        curtain_note = head.index("<!-- The opening curtain")
+        curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
+        head = head[:curtain_note] + head[curtain_note_end:]
+        head = head.replace("</head>",
+            '<script>window.__portalOriginalRestoration=history.scrollRestoration;history.scrollRestoration="manual";</script>\n'
+            f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n'
+            '<noscript><style>html:has(body.parent-portal.portal-intro-active),'
+            'body.parent-portal.portal-intro-active{overflow:auto}'
+            'body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){visibility:visible}'
+            '.portal-intro__video{display:none}'
+            '#portalIntroEntry{display:none}'
+            'body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}'
+            '</style></noscript>\n</head>')
+    if slug == "admissions":
+        # Its video hero opens immediately, so there is no curtain to hide
+        # when scripting is unavailable.
+        curtain_note = head.index("<!-- The opening curtain")
+        curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
+        head = head[:curtain_note] + head[curtain_note_end:]
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" starts it in the solid treatment
@@ -1384,11 +1408,25 @@ def build(slug, page):
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "film" if page.get("opening") else None,
                            slug if page.get("opening") else None,
+                           "parent-portal portal-intro-active" if slug == "parent-portal" else None,
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
     chrome = read("tools/partials/chrome.html")
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
+    if slug == "parent-portal":
+        # The vault video is this page's opening; the shared opaque curtain
+        # would cover its first seconds and run its own scroll lock.
+        start = chrome.index("<!-- Opening sequence.")
+        end = chrome.index("<!-- Film lightbox", start)
+        chrome = chrome[:start] + chrome[end:]
+    if slug == "admissions":
+        # The video and poster already supply this page's opening. The shared
+        # curtain can hold its application action behind a blank screen for
+        # several seconds while fonts and the intro timeline settle.
+        intro_start = chrome.index("<!-- Opening sequence.")
+        intro_end = chrome.index("<!-- Film lightbox", intro_start)
+        chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
     if slug == "crossroads":
@@ -1406,6 +1444,8 @@ def build(slug, page):
                        if page.get("logintab") else ""))
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
+    if slug == "parent-portal":
+        parts.append(read("tools/partials/parent-portal-intro.html").rstrip("\n"))
     # A page may open on a composition of its own, above and instead of the
     # shared hero or banner. It is a partial rather than a page body because
     # what follows it here is still built by soon_html.
@@ -1495,6 +1535,8 @@ def build(slug, page):
     if slug == "captures":
         parts.append(f'<script src="assets/js/captures-featured.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
+    if slug == "parent-portal":
+        parts.append(f'<script src="assets/js/parent-portal-intro.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]

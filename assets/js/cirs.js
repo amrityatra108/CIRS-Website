@@ -71,10 +71,19 @@
     lenis.scrollTo(event.detail.top, {
       duration:event.detail.duration,
       easing:event.detail.easing,
+      offset:event.detail.offset || 0,
       force:true,
       lock:true,
       onComplete:event.detail.onComplete
     });
+  });
+
+  // A page-specific opening can hold the existing Lenis controller until its
+  // entry control is used, without replacing the site's scroll engine.
+  window.addEventListener("cirs-portal-scroll-lock", function (event) {
+    if (!lenis || !event.detail) return;
+    if (event.detail.locked) lenis.stop();
+    else if (!document.body.classList.contains("menu-open")) lenis.start();
   });
 
   /* ----------------------------------------------------------
@@ -164,7 +173,8 @@
     // The opening curtain holds the page at the top with the scroll locked,
     // so moving now would only be undone when it lifts. finish() calls this
     // again on the way out, which is where the move actually happens.
-    if (document.body.classList.contains("is-locked")) return;
+    if (document.body.classList.contains("is-locked") ||
+        document.body.classList.contains("portal-intro-active")) return;
     if (hashArmed) return;
     var t;
     // A hash is not necessarily a valid selector — #2026 is legal in a URL.
