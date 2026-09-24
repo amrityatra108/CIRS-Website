@@ -2293,3 +2293,127 @@ body.has-lightbox{ overflow:hidden; }
 .msgs__tab:focus-visible{ outline:2px solid var(--purple); outline-offset:-2px; }
 @keyframes msgs-in{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
 @media (prefers-reduced-motion:reduce){ .msgs__reader.is-tabbed .msgs__panel{ animation:none; } }
+
+/* The face beside each message: the person's own photograph where the
+   site has one, and otherwise their initial on the same purple disc, so
+   the six read as one set whichever of them have been photographed. */
+.msgs__head{ display:flex; align-items:center; gap:var(--space-4); margin-bottom:var(--space-5); }
+.msgs__head .msgs__label{ margin:0 0 4px; }
+.msgs__head .msgs__label::after{ display:none; }
+.msgs__face{
+  flex:none; margin:0; width:64px; height:64px; border-radius:50%; overflow:hidden;
+  display:grid; place-items:center;
+  background:var(--purple-deep); color:var(--gold-lit);
+  font-family:var(--font-primary); font-size:1.6rem;
+  box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--gold);
+}
+.msgs__face img{ width:100%; height:100%; object-fit:cover; object-position:center 20%; }
+.msgs__who{ margin:0; font-family:var(--font-primary); font-size:var(--fs-sm); color:var(--ink-mute); letter-spacing:.03em; }
+.msgs__who b{ color:var(--purple); font-weight:600; }
+
+/* ============================================================
+   Leadership — Our People, as cards
+   ------------------------------------------------------------
+   Each person is a card: photograph, name, role, and a cue that
+   the introduction opens in a panel (.panel, below; opened by
+   pages.js). The name is the button, and its ::after covers the
+   card, so the whole card is one target with one accessible name.
+
+   The depth is small on purpose. At rest the card is a paper card
+   with a soft shadow. Under a fine pointer it leans towards the
+   cursor by at most six degrees (--rx/--ry, set by pages.js), the
+   photograph sits a little forward of the card, and a sheen follows
+   the pointer — a card you could pick up, not a gimmick. On touch,
+   and with reduced motion, it only lifts.
+   ============================================================ */
+.pgrid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:clamp(20px,2.4vw,32px); margin-top:clamp(36px,4vw,56px);
+  perspective:1100px;
+}
+.pcard{
+  --rx:0deg; --ry:0deg; --gx:50%; --gy:30%; --glare:0;
+  position:relative; display:flex; flex-direction:column;
+  background:var(--paper); border:1px solid var(--rule); border-radius:18px;
+  padding:12px 12px 0;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 12px 28px -14px rgba(30,22,38,.28);
+  transform:rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style:preserve-3d;
+  transition:transform .5s var(--e), box-shadow .4s var(--e), border-color .4s var(--e);
+  will-change:transform; cursor:pointer;
+}
+/* The sheen: a soft light that sits where the pointer is. */
+.pcard::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:2;
+  background:radial-gradient(420px circle at var(--gx) var(--gy), rgba(255,255,255,.55), rgba(255,255,255,0) 45%);
+  opacity:var(--glare); transition:opacity .4s var(--e); mix-blend-mode:soft-light;
+}
+.pcard.is-tilting{ transition:box-shadow .4s var(--e), border-color .4s var(--e); }
+.pcard:hover,
+.pcard:focus-within{
+  border-color:rgba(255,195,8,.55);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 30px 50px -22px rgba(30,22,38,.42);
+}
+.pcard__media{
+  margin:0; aspect-ratio:4/5; overflow:hidden; border-radius:11px;
+  background:var(--purple-deep);
+  transform:translateZ(28px);
+}
+.pcard__media img{ width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+.pcard__media.is-placeholder,
+.pmodal__media.is-placeholder{
+  display:grid; place-items:center;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 7px, rgba(245,238,242,.05) 7px 14px),
+    var(--purple-deep);
+}
+.pcard__ph{
+  font-family:var(--font-primary); letter-spacing:.08em; font-size:.82rem;
+  color:var(--on-purple-mute); text-align:center; padding:var(--space-3);
+  border:1px dashed var(--rule-purple);
+}
+.pcard__body{ padding:var(--space-4) 6px var(--space-4); transform:translateZ(16px); }
+.pcard__name{ font-size:1.25rem; line-height:1.2; margin:0 0 4px; }
+.pcard__open{
+  all:unset; cursor:pointer; color:var(--ink);
+}
+.pcard__open::after{ content:""; position:absolute; inset:0; border-radius:18px; z-index:3; }
+.pcard__open:focus-visible::after{ outline:2px solid var(--purple); outline-offset:3px; }
+.pcard__role{
+  margin:0; font-family:var(--font-primary); font-size:.92rem; letter-spacing:.04em;
+  color:var(--maroon);
+}
+.pcard__cue{
+  display:inline-flex; align-items:center; gap:8px;
+  margin:var(--space-3) 0 0; padding-top:var(--space-3); border-top:1px solid var(--rule-soft);
+  font-family:var(--font-primary); font-size:.82rem; letter-spacing:.06em; color:var(--ink-mute);
+  width:100%;
+}
+.pcard__cue::after{ content:"\2192"; color:var(--gold); transition:transform .3s var(--e); }
+.pcard:hover .pcard__cue{ color:var(--purple); }
+.pcard:hover .pcard__cue::after{ transform:translateX(4px); }
+@media (hover:none), (prefers-reduced-motion:reduce){
+  .pcard{ transform:none; }
+  .pcard:hover{ transform:translateY(-3px); }
+  .pcard__media, .pcard__body{ transform:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  .pcard, .pcard:hover{ transform:none; transition:none; }
+  .pcard::before{ display:none; }
+}
+
+/* The introduction panel: photograph beside the words from 720px. */
+.panel__card.pmodal{ width:min(100%,860px); padding:0; overflow:auto; }
+.pmodal{ display:grid; }
+@media (min-width:720px){ .pmodal{ grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); } }
+.pmodal__media{ margin:0; min-height:260px; background:var(--purple-deep); }
+.pmodal__media img{ width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block; }
+@media (max-width:719px){ .pmodal__media{ aspect-ratio:16/11; min-height:0; } }
+.pmodal__text{ padding:clamp(28px,4vw,52px); align-self:center; }
+.pmodal__text .copy{ font-size:1.02rem; line-height:1.7; }
+.pmodal__more{ margin:var(--space-5) 0 0; padding-top:var(--space-4); border-top:1px solid var(--rule); }
+.pmodal__more a{
+  font-family:var(--font-primary); font-weight:600; color:var(--purple);
+  text-decoration:underline; text-underline-offset:4px; text-decoration-color:var(--gold);
+}
+.panel--person .panel__close{ z-index:2; background:rgba(255,255,255,.85); }

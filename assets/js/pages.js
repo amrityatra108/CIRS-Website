@@ -294,4 +294,82 @@
   reader.classList.add("is-tabbed");
   list.hidden = false;
   select(0, false);
+
+  // "Read the message from …" in a person's introduction panel. The panel
+  // closes itself (the link carries data-panel-close); once it has, the
+  // matching tab is chosen and the page travels to the messages — through
+  // the shared smooth scroll when it is running, natively when it is not.
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("[data-msg-link]");
+    if (!a) return;
+    var i = -1;
+    tabs.forEach(function (t, j) { if (t.id === "msg-tab-" + a.getAttribute("data-msg-link")) i = j; });
+    if (i < 0) return;
+    e.preventDefault();
+    setTimeout(function () {
+      select(i, false);
+      var top = reader.getBoundingClientRect().top + window.pageYOffset - 120;
+      var ev = new CustomEvent("cirs-section-scroll", { cancelable: true, detail: { top: top, duration: 1.1 } });
+      if (window.dispatchEvent(ev)) window.scrollTo({ top: top, behavior: "smooth" });
+      tabs[i].focus({ preventScroll: true });
+    }, 380);
+  });
+})();
+
+/* ------------------------------------------------------------
+   Leadership — the people cards lean towards the pointer
+   ------------------------------------------------------------
+   Only with a fine pointer that can hover and with motion welcome;
+   on touch the card simply lifts (pages.css). The lean is capped at
+   six degrees, eased by the card's own transition as the pointer
+   leaves, and written once per frame.
+   ------------------------------------------------------------ */
+(function () {
+  "use strict";
+  var cards = document.querySelectorAll("[data-tilt]");
+  if (!cards.length) return;
+
+  // The name's button stretches over the card, but the photograph and the
+  // words sit forward of the card in 3D, and depth, not z-index, decides
+  // what a click lands on there. So a click anywhere on the card is the
+  // button's click.
+  Array.prototype.forEach.call(cards, function (card) {
+    var btn = card.querySelector("button");
+    if (!btn) return;
+    card.addEventListener("click", function (e) {
+      if (e.target !== btn && !btn.contains(e.target)) btn.click();
+    });
+  });
+
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var MAX = 6;
+
+  Array.prototype.forEach.call(cards, function (card) {
+    var raf = 0, px = 0, py = 0;
+    function paint() {
+      raf = 0;
+      var r = card.getBoundingClientRect();
+      var x = (px - r.left) / r.width, y = (py - r.top) / r.height;
+      card.style.setProperty("--ry", ((x - 0.5) * 2 * MAX).toFixed(2) + "deg");
+      card.style.setProperty("--rx", ((0.5 - y) * 2 * MAX).toFixed(2) + "deg");
+      card.style.setProperty("--gx", (x * 100).toFixed(1) + "%");
+      card.style.setProperty("--gy", (y * 100).toFixed(1) + "%");
+    }
+    card.addEventListener("pointerenter", function () {
+      card.classList.add("is-tilting");
+      card.style.setProperty("--glare", "1");
+    });
+    card.addEventListener("pointermove", function (e) {
+      px = e.clientX; py = e.clientY;
+      if (!raf) raf = requestAnimationFrame(paint);
+    });
+    card.addEventListener("pointerleave", function () {
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      card.classList.remove("is-tilting");
+      card.style.setProperty("--rx", "0deg");
+      card.style.setProperty("--ry", "0deg");
+      card.style.setProperty("--glare", "0");
+    });
+  });
 })();

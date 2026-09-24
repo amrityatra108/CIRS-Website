@@ -40,7 +40,7 @@ import creativewriting
 import captures
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=98"
+CACHE_BUST = "b=99"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
