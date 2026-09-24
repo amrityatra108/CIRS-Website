@@ -161,7 +161,10 @@ PHOTOS = [
     ("sports/sport-athletics.jpg",     "HARI5531.JPG",                   (1600, 1200), (0.50, 0.50)),
     ("sports/sport-swimming.jpg",      "IMG_9314.JPG",                   (1600, 1200), (0.55, 0.50)),
     ("sports/sport-football.jpg",      "IMG_3051.JPG",                   (1600, 1200), (0.50, 0.50)),
-    ("sports/sport-tennis.jpg",        "IMG_0612.JPG",                   (1600, 1200), (0.50, 0.50)),
+    # A forehand drill on the green court, not the basketball game this slot
+    # used to show. Nudged right so the students' racquets keep the frame
+    # and the coach still stands at its left edge.
+    ("sports/sport-tennis.jpg",        "IMG_0851.JPG",                   (1600, 1200), (0.55, 0.50)),
     ("sports/sport-archery.jpg",       "IMG_9879.JPG",                   (1600, 1200), (0.50, 0.50)),
     ("sports/sport-climbing.jpg",      "IMG_6061.JPG",                   (1600, 1200), (0.50, 0.50)),
     ("sports/house-parade.jpg",        "DSC_0059.JPG",                   (1600, 1000), (0.50, 0.50)),
