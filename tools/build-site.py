@@ -590,13 +590,13 @@ PAGES = {
     },
     "alumni": {
         "nav": "Alumni",
-        "title": "CIRS Alumni | Life after Siruvani",
+        "title": "Where CIRS Takes You | Alumni",
         "description": "Reconnect with CIRS, browse published alumni cohort records, and explore university destinations and alumni stories.",
         # The Alumni page supplies its own opening image and carries the h1.
         # Page styles and search behavior live in alumni.css and alumni-journey.js.
         "banner": None,
         "sheet": "alumni",
-        "cache_suffix": "-alumni-4",
+        "cache_suffix": "-alumni-5",
         "uc": False,
     },
 }

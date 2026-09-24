@@ -1,246 +1,1165 @@
-/* CIRS alumni page: quiet typography, practical links and no motion dependency. */
-body.alumni {
-  --al-ink: #211923;
-  --al-plum: #2c1d30;
-  --al-plum-deep: #17121b;
-  --al-paper: #f7f3ec;
-  --al-paper-2: #eee8de;
-  --al-text-soft: #615763;
-  --al-gold: #d5b06a;
-  --al-gold-ink: #765819;
-  --al-rule: rgba(33, 25, 35, .17);
-  background: var(--al-paper);
-  color: var(--al-ink);
+/* ============================================================
+   WHERE CIRS TAKES YOU — the alumni journey
+   ------------------------------------------------------------
+   Scoped to body.alumni. Seven chapters on one scroll: the
+   campus, the departure, the field of destinations, the alumni,
+   the pathways, the index, the return.
+
+   THE PALETTE. Warm ivory on deep charcoal, with CIRS navy and
+   an antique gold. The site's own purple is not used here: this
+   page is a night sky for most of its length, and the purple
+   reads as a colour against photographs rather than as ink.
+
+   Gold has the problem palette.css documents at length — it is
+   unreadable on pale grounds. So there are two tokens, not one:
+   --aj-gold for dark grounds (7.1:1 on the charcoal) and
+   --aj-gold-ink for the two pale chapters (6.5:1 on the ivory).
+   Nothing on this page sets gold on a light ground by hand.
+
+   THE TYPE. The site has no sans serif — Newsreader carries
+   display, body and interface across all forty-odd pages — so
+   the display/readable pairing here is Newsreader against
+   EB Garamond, which is the site's quotation face and does the
+   work the brief asked a sans to do: a second voice.
+
+   MOTION. Every "start hidden" state below is gated on
+   html.js-motion, which cirs.js adds only when it is actually
+   going to animate. No JavaScript, or prefers-reduced-motion,
+   and every one of these elements is simply visible.
+   ============================================================ */
+
+body.alumni{
+  --aj-ink:        #0E0B12;
+  --aj-ink-2:      #141018;
+  --aj-ink-3:      #1C1722;
+  --aj-ivory:      #F7F3EC;
+  --aj-ivory-2:    #EFE9DF;
+  --aj-navy:       #16243A;
+  --aj-navy-lit:   #9FC0E8;
+  --aj-gold:       #C9922F;   /* on dark only  — 7.11:1 on --aj-ink   */
+  --aj-gold-lit:   #E8B24A;
+  --aj-gold-ink:   #6E5310;   /* on pale only  — 6.53:1 on --aj-ivory */
+  --aj-maroon:     #2A0A11;
+  --aj-slate:      #171C1E;
+  --aj-sage:       #A8C2BC;
+  --aj-rose:       #E0A2A8;
+
+  --aj-on-dark:      #F7F3EC;
+  --aj-on-dark-soft: rgba(247,243,236,.76);
+  --aj-on-dark-mute: rgba(247,243,236,.52);
+  --aj-hair:         rgba(247,243,236,.18);
+  --aj-hair-soft:    rgba(247,243,236,.10);
+
+  --aj-display: var(--font-primary);
+  --aj-voice:   var(--font-quote);
+
+  background:var(--aj-ink);
 }
 
-body.alumni main { background: var(--al-paper); }
-/* Alumni is a reading page: keep wheel, touch and anchor movement native. */
-html:has(body.alumni) { scroll-behavior: auto; }
-body.alumni #curtain { display: none; }
-/* Keep the complete footer in document flow, including full-page captures. */
-body.alumni .footer-wrap { position: relative; bottom: auto; }
-body.alumni .uc { display: none; }
-body.alumni :focus-visible { outline: 3px solid #ad7d2c; outline-offset: 4px; }
-body.alumni a { text-underline-offset: .18em; }
-body.alumni section[id] { scroll-margin-top: 5rem; }
+body.alumni main{ background:var(--aj-ink); }
+html:has(body.alumni){ scroll-behavior:auto; }
+body.alumni #curtain{ display:none; }
+body.alumni .footer-wrap{ position:relative; bottom:auto; }
+body.alumni section[id]{ scroll-margin-top:6rem; }
 
-.alumni-hero {
-  min-height: min(780px, 84vh);
-  min-height: min(780px, 84svh);
-  position: relative;
-  isolation: isolate;
-  overflow: clip;
-  display: flex;
-  align-items: end;
-  color: #fffaf1;
-  background: var(--al-plum-deep);
-  padding: clamp(132px, 17vh, 190px) 0 clamp(66px, 9vh, 110px);
-}
-.alumni-hero__media { position: absolute; inset: 0; z-index: 0; }
-.alumni-hero__wash { position: absolute; inset: 0; z-index: 1; }
-.alumni-hero__media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 46%; }
-.alumni-hero__wash {
-  background: linear-gradient(90deg, rgba(18, 13, 20, .76), rgba(18, 13, 20, .35) 62%, rgba(18, 13, 20, .08)),
-              linear-gradient(0deg, rgba(18, 13, 20, .72), transparent 62%);
-}
-.alumni-hero__inner { position: relative; z-index: 2; }
-.alumni-hero__caption { z-index: 2; }
-.alumni-kicker {
-  margin: 0 0 1rem;
-  color: var(--al-gold);
-  font-size: .72rem;
-  font-weight: 650;
-  letter-spacing: .19em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-.alumni-kicker--ink { color: var(--al-gold-ink); }
-.alumni-hero h1,
-.alumni-intro h2,
-.alumni-section-head h2,
-.alumni-next h2,
-.alumni-contact h2 {
-  margin: 0;
-  font-family: var(--font-primary, Georgia, serif);
-  font-size: clamp(3.2rem, 7.1vw, 6.5rem);
-  font-weight: 400;
-  letter-spacing: -.045em;
-  line-height: .96;
-  text-wrap: balance;
-}
-.alumni-hero h1 { max-width: 9ch; text-shadow: 0 2px 24px rgba(0, 0, 0, .2); }
-.alumni-hero h1 em,
-.alumni-intro h2 em,
-.alumni-section-head h2 em,
-.alumni-next h2 em,
-.alumni-contact h2 em { font-family: var(--font-quote, Georgia, serif); font-weight: 400; }
-.alumni-hero__lead { max-width: 47ch; margin: 1.4rem 0 1.8rem; font-size: clamp(1.05rem, 1.35vw, 1.25rem); line-height: 1.55; color: rgba(255, 250, 241, .9); }
-.alumni-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.6rem; }
-.alumni-button {
-  min-height: 50px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  padding: .9rem 1.2rem;
-  border: 1px solid var(--al-gold);
-  background: var(--al-gold);
-  color: #211923;
-  font-size: .96rem;
-  font-weight: 650;
-  line-height: 1.25;
-  text-decoration: none;
-  transition: background-color .16s ease, color .16s ease, border-color .16s ease;
-}
-.alumni-button:hover { background: #f0d28e; border-color: #f0d28e; }
-.alumni-button span { font-size: 1.15em; }
-.alumni-text-link { min-height: 44px; display: inline-flex; align-items: center; gap: .7rem; color: #fffaf1; font-weight: 550; }
-.alumni-hero__caption { position: absolute; right: max(24px, calc((100% - 1180px) / 2)); bottom: 1rem; margin: 0; color: rgba(255,250,241,.72); font-size: .75rem; letter-spacing: .04em; }
+/* The shared under-construction note is built for a page made of paper, and
+   this one is made of night. Darkening its ground without re-pitching its
+   ink left the label at 1.71:1 — the same trap matharena.css documents, and
+   the same four lines fix it. */
+body.alumni .uc{ background:var(--aj-ink-2); border-top:1px solid var(--aj-hair-soft); }
+body.alumni .uc__label{ color:var(--aj-gold); }
+body.alumni .uc__text{ color:var(--aj-on-dark-soft); }
+body.alumni .uc__text a{ color:var(--aj-gold-lit); border-bottom-color:var(--aj-hair); }
+body.alumni .uc__text a:hover{ border-bottom-color:var(--aj-gold); }
+body.alumni .uc__mark{ color:var(--aj-gold); border-color:var(--aj-hair); }
 
-.alumni-intro,
-.alumni-records,
-.alumni-stories,
-.alumni-voices,
-.alumni-pathways,
-.alumni-next,
-.alumni-contact { padding-block: clamp(70px, 9vw, 124px); }
-.alumni-intro { background: var(--al-paper); }
-.alumni-intro__grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(280px, .8fr); align-items: end; gap: clamp(36px, 8vw, 120px); }
-.alumni-intro h2,
-.alumni-section-head h2,
-.alumni-next h2,
-.alumni-contact h2 { font-size: clamp(2.7rem, 5.2vw, 4.7rem); }
-.alumni-intro__copy { max-width: 56ch; color: var(--al-text-soft); font-size: 1.08rem; line-height: 1.7; }
-.alumni-intro__copy p { margin: 0 0 1rem; }
-.alumni-intro__copy p:last-child { margin-bottom: 0; }
+body.alumni ::selection{ background:var(--aj-gold); color:var(--aj-ink); }
 
-.alumni-records { background: var(--al-paper-2); }
-.alumni-records .alumni-kicker,
-.alumni-pathways .alumni-kicker { color: var(--al-gold-ink); }
-.alumni-section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, .62fr); align-items: end; gap: clamp(30px, 7vw, 100px); margin-bottom: clamp(30px, 4vw, 56px); }
-.alumni-section-head > p { max-width: 50ch; margin: 0 0 .2rem; color: var(--al-text-soft); font-size: 1.02rem; line-height: 1.65; }
-.alumni-section-head h2 { max-width: 13ch; }
-.alumni-records__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--al-rule); border-bottom: 1px solid var(--al-rule); }
-.alumni-record { min-height: 168px; position: relative; display: flex; flex-direction: column; justify-content: center; gap: .55rem; padding: 1.6rem 2.8rem 1.6rem 1.5rem; border-right: 1px solid var(--al-rule); color: var(--al-ink); text-decoration: none; transition: background-color .16s ease; }
-.alumni-record:first-child { padding-left: 0; }
-.alumni-record:last-child { border-right: 0; }
-.alumni-record:hover { background: rgba(255,255,255,.48); }
-.alumni-record__year { font-family: var(--font-primary, Georgia, serif); font-size: clamp(2rem, 3.4vw, 3.3rem); letter-spacing: -.04em; line-height: 1; }
-.alumni-record__label { color: var(--al-text-soft); font-size: .94rem; line-height: 1.4; }
-.alumni-record__arrow { position: absolute; right: 1.4rem; top: 1.5rem; color: var(--al-gold-ink); font-size: 1.3rem; }
-.alumni-records__note { margin: 1rem 0 0; color: var(--al-text-soft); font-size: .86rem; line-height: 1.5; }
-
-.alumni-stories { background: #fffdf8; }
-.alumni-section-head--light > p { color: var(--al-text-soft); }
-.alumni-stories__list { border-top: 1px solid var(--al-rule); }
-.alumni-story { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); align-items: center; gap: clamp(30px, 6vw, 90px); padding: clamp(30px, 4vw, 52px) 0; border-bottom: 1px solid var(--al-rule); }
-.alumni-story__photo { aspect-ratio: 4 / 5; overflow: hidden; background: var(--al-paper-2); }
-.alumni-story__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.alumni-story__photo--hari-om-jani img { object-position: center 22%; }
-.alumni-story__photo--divyaj-dt img { object-position: 62% center; }
-.alumni-story__photo--shashwat-santosh img { object-position: 60% center; }
-.alumni-story__content { max-width: 710px; }
-.alumni-story__heading { margin-bottom: 1.35rem; }
-.alumni-story__heading h3 { margin: 0; font-family: var(--font-primary, Georgia, serif); font-size: clamp(1.7rem, 2.6vw, 2.3rem); font-weight: 400; letter-spacing: -.025em; line-height: 1.1; }
-.alumni-story__heading > p { margin: .65rem 0 0; color: var(--al-gold-ink); font-size: .9rem; line-height: 1.5; }
-.alumni-story__body > p { max-width: 70ch; margin: 0; color: var(--al-text-soft); font-size: 1rem; line-height: 1.7; }
-.alumni-story__sources { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; margin-top: 1rem !important; font-size: .84rem !important; }
-.alumni-story__sources a { color: var(--al-ink); font-weight: 600; text-decoration-thickness: 1px; text-underline-offset: .2em; }
-.alumni-story__sources a:hover { color: var(--al-gold-ink); }
-
-.alumni-voices { color: #fbf6ee; background: var(--al-plum); }
-.alumni-voices .alumni-section-head > p { color: rgba(251,246,238,.74); }
-.alumni-voices h2 em { color: var(--al-gold); }
-.alumni-voices__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(251,246,238,.28); border-bottom: 1px solid rgba(251,246,238,.28); }
-.alumni-voice { min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; margin: 0; padding: clamp(22px, 3vw, 40px) clamp(18px, 3vw, 38px); border-right: 1px solid rgba(251,246,238,.22); }
-.alumni-voice:first-child { padding-left: 0; }
-.alumni-voice:last-child { padding-right: 0; border-right: 0; }
-.alumni-voice blockquote { margin: 0; }
-.alumni-voice blockquote p { margin: 0; font-family: var(--font-quote, Georgia, serif); font-size: clamp(1.4rem, 2.3vw, 2rem); line-height: 1.3; }
-.alumni-voice figcaption { color: var(--al-gold); font-size: .84rem; font-weight: 600; letter-spacing: .04em; }
-
-.alumni-pathways { background: var(--al-paper); }
-.alumni-pathways .alumni-section-head { margin-bottom: 2.6rem; }
-.ajd { margin: 0; }
-.ajd__search { display: grid; grid-template-columns: minmax(190px, .75fr) minmax(220px, 1.25fr); align-items: center; gap: .65rem 2rem; max-width: 760px; margin: 0 0 2.2rem; }
-.ajd__label { grid-column: 1 / -1; color: var(--al-ink); font-size: .88rem; font-weight: 650; }
-.ajd__input { width: 100%; min-height: 50px; padding: .75rem 0; border: 0; border-bottom: 1px solid rgba(33,25,35,.42); border-radius: 0; background: transparent; color: var(--al-ink); font: inherit; font-size: 1rem; }
-.ajd__input::placeholder { color: #756d76; opacity: 1; }
-.ajd__input:focus { outline: none; border-color: var(--al-gold-ink); }
-.ajd__input:focus-visible { outline: 3px solid #ad7d2c; outline-offset: 4px; }
-.ajd__count { margin: 0; color: var(--al-text-soft); font-size: .88rem; line-height: 1.45; }
-.ajd__groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.2rem clamp(32px, 7vw, 100px); }
-.ajd__search[hidden], .ajd__group[hidden], .ajd__row[hidden], .ajd__empty[hidden] { display: none !important; }
-.ajd__region { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin: 0 0 .75rem; padding-bottom: .55rem; border-bottom: 1px solid var(--al-rule); color: var(--al-ink); font-size: 1rem; font-weight: 650; }
-.ajd__region .sc { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; }
-.ajd__n { color: var(--al-gold-ink); font-size: .8rem; }
-.ajd__rows { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem 1.4rem; list-style: none; margin: 0; padding: 0; }
-.ajd__row { min-width: 0; display: flex; flex-direction: column; gap: .15rem; padding: .25rem 0; }
-.ajd__name { color: var(--al-ink); font-size: .97rem; line-height: 1.35; }
-.ajd__country { color: var(--al-text-soft); font-size: .8rem; line-height: 1.4; }
-.ajd__empty { margin: 1rem 0; color: var(--al-text-soft); }
-
-.alumni-next { background: #e9e1d7; }
-.alumni-next__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .65fr); align-items: center; gap: 40px; }
-.alumni-next__links { display: grid; border-top: 1px solid var(--al-rule); }
-.alumni-next__links a { min-height: 60px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-bottom: 1px solid var(--al-rule); color: var(--al-ink); font-size: 1rem; font-weight: 600; text-decoration: none; }
-.alumni-next__links a:hover { color: var(--al-gold-ink); }
-
-.alumni-contact { color: #fbf6ee; background: var(--al-plum-deep); }
-.alumni-contact__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .65fr); align-items: start; gap: clamp(40px, 8vw, 120px); }
-.alumni-contact__grid > div > p:not(.alumni-kicker) { max-width: 53ch; margin: 1.25rem 0 1.6rem; color: rgba(251,246,238,.76); font-size: 1.02rem; line-height: 1.65; }
-.alumni-contact h2 em { color: var(--al-gold); }
-.alumni-button--light { margin-top: .2rem; color: var(--al-ink); }
-.alumni-contact__details { padding-top: .2rem; font-style: normal; }
-.alumni-contact__details p { margin: 0; padding: 0 0 1rem; line-height: 1.65; }
-.alumni-contact__details p + p { padding-top: 1rem; border-top: 1px solid rgba(251,246,238,.2); }
-.alumni-contact__details span { display: block; margin-bottom: .25rem; color: var(--al-gold); font-size: .72rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; }
-.alumni-contact__details a { color: #fbf6ee; text-decoration-thickness: 1px; text-underline-offset: .2em; }
-.alumni-contact__details a:hover { color: var(--al-gold); }
-
-@media (max-width: 760px) {
-  .alumni-hero { min-height: min(700px, 78vh); min-height: min(700px, 78svh); padding-bottom: 82px; }
-  .alumni-hero__media img { object-position: 57% center; }
-  .alumni-hero__wash { background: linear-gradient(90deg, rgba(18,13,20,.68), rgba(18,13,20,.16)), linear-gradient(0deg, rgba(18,13,20,.76), transparent 72%); }
-  .alumni-hero h1 { font-size: clamp(3rem, 11vw, 5rem); }
-  .alumni-hero__caption { right: 20px; bottom: .8rem; left: 20px; font-size: .69rem; }
-  .alumni-intro__grid, .alumni-section-head, .alumni-next__grid, .alumni-contact__grid { grid-template-columns: 1fr; gap: 24px; }
-  .alumni-section-head { margin-bottom: 2rem; }
-  .alumni-section-head h2 { max-width: 16ch; }
-  .alumni-records__grid { grid-template-columns: 1fr; }
-  .alumni-record, .alumni-record:first-child { min-height: 120px; padding: 1.2rem 2.8rem 1.2rem 0; border-right: 0; border-bottom: 1px solid var(--al-rule); }
-  .alumni-record:last-child { border-bottom: 0; }
-  .alumni-record__arrow { right: .3rem; top: 1.3rem; }
-  .alumni-story { grid-template-columns: 1fr; gap: 22px; }
-  .alumni-story__photo { width: min(100%, 260px); }
-  .alumni-voices__grid { grid-template-columns: 1fr; }
-  .alumni-voice, .alumni-voice:first-child, .alumni-voice:last-child { min-height: 0; gap: 1rem; padding: 1.3rem 0; border-right: 0; border-bottom: 1px solid rgba(251,246,238,.22); }
-  .alumni-voice:last-child { border-bottom: 0; }
-  .alumni-voice blockquote p { max-width: 34ch; font-size: clamp(1.4rem, 5vw, 1.85rem); }
-  .ajd__groups { grid-template-columns: 1fr; gap: 1.8rem; }
+body.alumni :focus-visible{
+  outline:2px solid var(--aj-gold-lit);
+  outline-offset:3px;
+  border-radius:2px;
 }
 
-@media (max-width: 480px) {
-  .alumni-hero { min-height: min(720px, 80vh); min-height: min(720px, 80svh); }
-  .alumni-hero__lead { max-width: 36ch; font-size: 1rem; }
-  .alumni-actions { align-items: flex-start; flex-direction: column; gap: .7rem; }
-  .alumni-button { width: 100%; justify-content: space-between; }
-  .alumni-text-link { padding-inline: .1rem; }
-  .alumni-intro,
-  .alumni-records,
-  .alumni-stories,
-  .alumni-voices,
-  .alumni-pathways,
-  .alumni-next,
-  .alumni-contact { padding-block: 64px; }
-  .alumni-intro h2,
-  .alumni-section-head h2,
-  .alumni-next h2,
-  .alumni-contact h2 { font-size: clamp(2.55rem, 11vw, 3.45rem); }
-  .ajd__search { grid-template-columns: 1fr; gap: .45rem; }
-  .ajd__rows { grid-template-columns: 1fr; gap: .25rem; }
+/* A shared small-caps label, since this page sets a great many of them. */
+.aj-label{
+  font-size:.7rem; letter-spacing:.20em; text-transform:uppercase;
+  font-weight:600; color:var(--aj-gold);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+/* ============================================================
+   CHAPTER 1 — The opening
+   ============================================================ */
+.aj-open{
+  position:relative; isolation:isolate;
+  min-height:100svh;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding-block:0 clamp(64px,10vh,120px);
+  overflow:clip;
+  background:var(--aj-ink);
+}
+.aj-open__media{ position:absolute; inset:0; z-index:0; }
+.aj-open__media img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  /* Natural grading: the aerial is a green campus and stays one. The
+     darkening below is a gradient, not a filter on the photograph. */
+  transform:scale(1.06); transform-origin:50% 42%;
+}
+/* Readability without flattening the picture: dark at the feet where the
+   lettering sits, clear across the top where the campus is. */
+.aj-open__wash{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(to top, rgba(14,11,18,.94) 0%, rgba(14,11,18,.78) 26%,
+                    rgba(14,11,18,.34) 52%, rgba(14,11,18,.18) 74%,
+                    rgba(14,11,18,.42) 100%),
+    radial-gradient(120% 70% at 50% 100%, rgba(14,11,18,.55), transparent 62%);
+}
+/* No max-width here. Capping this block is what wrapped "WHERE CIRS TAKES
+   YOU" onto four lines on a wide screen and filled the window with it: the
+   headline is sized from the viewport, so a fixed container can always be
+   narrower than the line it has to hold. The lines are kept unbreakable
+   below instead, and the size is chosen so they fit. */
+.aj-open__inner{ position:relative; z-index:3; width:100%; }
+
+/* The eyebrow gets a rule to sit on, so it reads as a standing label
+   rather than as a stray line of small caps above the title. */
+.aj-open__eyebrow{
+  margin:0 0 clamp(20px,2.6vw,32px);
+  display:flex; align-items:center; gap:16px;
+}
+.aj-open__eyebrow .sc{
+  font-size:.7rem; letter-spacing:.30em; text-transform:uppercase;
+  color:var(--aj-gold); font-weight:600; white-space:nowrap;
+}
+.aj-open__eyebrow::after{
+  content:""; flex:0 1 clamp(40px,10vw,150px); height:1px;
+  background:linear-gradient(to right, var(--aj-gold), transparent);
+}
+
+.aj-open__title{
+  margin:0; color:var(--aj-on-dark);
+  font-family:var(--aj-display); font-weight:400;
+  /* Sized so both rows clear the widest gutter-to-gutter measure at every
+     width, and so the campus behind them stays a photograph rather than a
+     backdrop. */
+  font-size:clamp(1.9rem, 6.4vw, 5.8rem);
+  line-height:1.0; letter-spacing:-.025em;
+  text-transform:uppercase;
+  text-shadow:0 2px 26px rgba(5,4,10,.5);
+}
+/* Two rows, each on one line. nowrap is the guarantee: the size above is
+   chosen to fit, and if a future edit makes a row longer it will overflow
+   into the clip rather than silently reflow into a third row. */
+.aj-open__line{ display:block; }
+.aj-open__line > span{ display:block; white-space:nowrap; will-change:transform; }
+/* They arrive from opposite sides of the window. .aj-open clips, so nothing
+   here can put a horizontal scrollbar on the page. */
+html.js-motion .aj-open__line:nth-child(1) > span{ transform:translateX(-104vw); }
+html.js-motion .aj-open__line:nth-child(2) > span{ transform:translateX(104vw); }
+
+.aj-open__sub{
+  margin:clamp(22px,3.2vw,38px) 0 0;
+  font-family:var(--aj-voice); font-style:italic;
+  max-width:38ch;
+  font-size:clamp(1.15rem,2.1vw,1.8rem);
+  line-height:1.4; color:var(--aj-on-dark-soft); letter-spacing:.01em;
+  text-shadow:0 1px 16px rgba(5,4,10,.7);
+}
+html.js-motion .aj-open__sub{ opacity:0; }
+html.js-motion .aj-open__eyebrow{ opacity:0; }
+
+/* The navigation goes quiet over the opening and comes back the moment it
+   is scrolled past, hovered, or given focus from the keyboard. */
+body.alumni.aj-quiet .header{
+  opacity:.45; transition:opacity .5s var(--e);
+}
+body.alumni.aj-quiet .header:hover,
+body.alumni.aj-quiet .header:focus-within{ opacity:1; }
+
+/* ============================================================
+   CHAPTER 2 — The departure portal
+   ------------------------------------------------------------
+   The campus recedes from full screen into one lit plate hanging
+   in a dark field. No WebGL: the depth here is four layers, a
+   scale and a blur, which is enough for the move and costs a
+   fraction of a canvas on a mid-range phone.
+   ============================================================ */
+.aj-portal{
+  position:relative; background:var(--aj-ink);
+  min-height:100svh;
+}
+.aj-portal__stage{
+  position:relative; min-height:100svh;
+  display:grid; place-items:center;
+  padding:clamp(48px,8vh,96px) var(--gut);
+  overflow:clip;
+}
+/* The field the plate falls into: a slow radial, and a grain of distant
+   marks that the script seeds so the dark is not empty. */
+.aj-portal__depth{
+  position:absolute; inset:-10%;
+  background:
+    radial-gradient(60% 50% at 50% 46%, rgba(201,146,47,.10), transparent 70%),
+    radial-gradient(90% 70% at 50% 120%, rgba(22,36,58,.55), transparent 70%);
+  /* Visible by default so the dark is never flat without JavaScript; the
+     rule below hands it to the timeline, which fades it up as the plate
+     falls back into it. */
+  opacity:1;
+}
+html.js-motion .aj-portal__depth{ opacity:0; }
+
+.aj-portal__plate{
+  position:relative; z-index:2; margin:0;
+  width:min(100%, 1180px);
+  box-shadow:0 40px 120px -40px rgba(0,0,0,.9);
+}
+.aj-portal__plate img{
+  display:block; width:100%; height:auto;
+  aspect-ratio:3/2; object-fit:cover;
+}
+.aj-portal__cap{
+  margin-top:12px; font-size:var(--fs-xs);
+  color:var(--aj-on-dark-mute);
+}
+.aj-portal__cap .sc{
+  color:var(--aj-gold); letter-spacing:.18em; text-transform:uppercase;
+  margin-right:10px; font-weight:600;
+}
+
+.aj-portal__copy{
+  position:relative; z-index:3;
+  width:min(100%, 720px);
+  margin-top:clamp(36px,6vh,72px);
+  text-align:center;
+}
+.aj-portal__head{
+  margin:0 0 18px; color:var(--aj-on-dark);
+  font-size:var(--fs-h2); line-height:1.06; letter-spacing:-.012em;
+}
+.aj-portal__head em{ color:var(--aj-gold-lit); font-style:italic; }
+.aj-portal__lead{
+  margin:0; color:var(--aj-on-dark-soft);
+  font-size:var(--fs-lead); line-height:1.6;
+  max-width:62ch; margin-inline:auto;
+}
+
+/* ============================================================
+   CHAPTER 3 — The map
+   ------------------------------------------------------------
+   Nineteen real destinations on a real map, in Robinson, with a
+   route out to each from Siruvani. Where a point sits is where
+   the institution is; the four regions group because the world
+   does. Chapter six gives the same nineteen as plain text for
+   anyone who wants them without the map.
+   ============================================================ */
+.aj-const{
+  position:relative; background:var(--aj-ink);
+  padding-block:clamp(72px,12vh,140px);
+}
+.aj-const__head{ max-width:720px; }
+.aj-const__head .h2{ color:var(--aj-on-dark); }
+.aj-const__head .h2 em{ color:var(--aj-gold-lit); }
+.aj-const__head .lead{ color:var(--aj-on-dark-soft); }
+
+.ajc{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gut); }
+
+/* ---- the filter bar ---- */
+.ajc__bar{
+  display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;
+  padding-bottom:clamp(20px,3vw,30px);
+  border-bottom:1px solid var(--aj-hair-soft);
+  margin-bottom:clamp(20px,3vw,34px);
+}
+.ajc__filters{ display:flex; flex-wrap:wrap; gap:4px clamp(18px,2.4vw,30px); }
+/* No pills. A row of words with a rule that draws itself under the live one:
+   a boxed button over a night sky reads as a dialog, not as a sky. */
+.ajc__filter{
+  appearance:none; cursor:pointer; position:relative;
+  background:transparent; border:0; padding:7px 1px 9px;
+  color:var(--aj-on-dark-mute); font:inherit; font-size:var(--fs-xs);
+  letter-spacing:.16em; text-transform:uppercase;
+  transition:color .3s var(--e);
+}
+.ajc__filter::after{
+  content:""; position:absolute; left:0; right:0; bottom:2px; height:1px;
+  background:var(--aj-gold);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .4s var(--e);
+}
+.ajc__filter:hover{ color:var(--aj-on-dark); }
+.ajc__filter:hover::after{ transform:scaleX(1); }
+.ajc__filter.is-on{ color:var(--aj-on-dark); }
+.ajc__filter.is-on::after{ transform:scaleX(1); }
+.ajc__fcount{
+  margin-left:7px; font-variant-numeric:tabular-nums;
+  color:var(--aj-gold); font-size:.92em;
+}
+.ajc__status{
+  margin:0; margin-left:auto;
+  font-size:var(--fs-xs); color:var(--aj-on-dark-mute);
+  letter-spacing:.04em;
+}
+
+/* ---- the field ---- */
+/* ---- the map ----
+   A world in Robinson, drawn from tools/worldland.py, with CIRS where
+   Coimbatore is and a route out to each of the nineteen. Coastline only:
+   no borders, no graticule, no labels on the land. The ratio is the
+   projection's own, written here from tools/robinson.py, which is what
+   lets a position in percent of this box be a place on the map.
+
+   It is the query container for the points, so a name's offset is given
+   in cqw and keeps its clearance at every width the map is drawn at. It
+   is inline-size rather than size, because below 900px the field stops
+   being a map and takes its height from the list inside it. */
+.ajc__field{
+  position:relative; width:100%; aspect-ratio:200 / 97.9341;
+  container-type:inline-size;
+  overflow:hidden;
+  background:
+    radial-gradient(64% 84% at 50% 46%, rgba(26,32,58,.50), transparent 74%),
+    radial-gradient(120% 120% at 50% 50%, #07070E 30%, #030308 100%);
+}
+/* the vignette a lens gives, over everything */
+.ajc__field::after{
+  content:""; position:absolute; inset:0; z-index:5; pointer-events:none;
+  background:radial-gradient(118% 112% at 50% 48%,
+    transparent 48%, rgba(2,2,6,.50) 84%, rgba(2,2,6,.82) 100%);
+}
+.ajc__map{ position:absolute; inset:0; z-index:0; width:100%; height:100%; }
+/* Land is a shade, not a shape: a fill barely above the water and a
+   coast barely above the fill. Anything brighter and the continents
+   start competing with the nineteen points, which are the subject. */
+.ajc__land{
+  fill:rgba(126,142,186,.085);
+  stroke:rgba(156,176,220,.30); stroke-width:.22;
+  stroke-linejoin:round; vector-effect:non-scaling-stroke;
+}
+.ajc__lines{ position:absolute; inset:0; z-index:2; width:100%; height:100%; }
+.ajc__line{
+  fill:none; stroke:rgba(190,208,240,.20); stroke-width:.7;
+  vector-effect:non-scaling-stroke;
+  transition:stroke .4s var(--e), stroke-width .4s var(--e), opacity .4s var(--e);
+}
+/* The hairline from a point out to its own name. Fainter than a route,
+   because it carries no distance — it only says which name is whose. */
+.ajc__leader{ stroke:rgba(190,208,240,.16); stroke-width:.5; }
+.ajc__line.is-dim{ opacity:.05; }
+.ajc__line.is-lit{ stroke:var(--aj-gold-lit); stroke-width:1.5; opacity:1; }
+.ajc__leader.is-lit{ stroke-width:.8; }
+html.js-motion .ajc__line{ opacity:0; }
+html.js-motion .ajc__map,
+html.js-motion .ajc__origin{ opacity:0; }
+
+/* The aircraft flying the routes: one per destination, out of Siruvani,
+   turned to their heading. alumni-journey.js draws them and moves them;
+   the sheet only says what colour they are. */
+.ajc__flight{ fill:#FFE9BE; }
+
+/* the origin — CIRS, where every route starts */
+.ajc__origin{
+  position:absolute; left:var(--x); top:var(--y);
+  transform:translate(-50%,-50%); margin:0;
+  display:flex; flex-direction:column; align-items:center; gap:7px;
+  white-space:nowrap; z-index:4; pointer-events:none;
+}
+.ajc__originDot{
+  width:9px; height:9px; border-radius:50%;
+  background:#FFFDF6;
+  /* Bright, and tight. The first draft threw ninety pixels of haze over
+     southern India, which is where four of the nineteen destinations and
+     two of their names are: the origin was erasing its own neighbours. */
+  box-shadow:
+    0 0 0 3px rgba(255,236,190,.30),
+    0 0 12px 4px rgba(255,220,150,.70),
+    0 0 30px 10px rgba(226,168,86,.34),
+    0 0 62px 22px rgba(150,110,70,.16);
+}
+.ajc__originName{
+  /* In cqw like the destinations' names, so the origin does not swell
+     against the map as the field narrows and crowd the four Indian
+     destinations standing closest to it. */
+  font-size:clamp(.58rem, .95cqw, .72rem);
+  letter-spacing:.24em; text-transform:uppercase;
+  color:#FFF3DC; font-weight:600; text-align:center;
+  display:flex; flex-direction:column; line-height:1.35;
+  text-shadow:0 1px 8px rgba(3,3,8,.98), 0 0 18px rgba(3,3,8,.9);
+}
+.ajc__originName small{
+  font-size:.82em; letter-spacing:.16em; font-weight:400;
+  color:rgba(255,243,220,.62); text-transform:none;
+}
+
+/* the points */
+.ajc__points{ list-style:none; margin:0; padding:0; }
+.ajc__item{ margin:0; }
+.ajc__pt{
+  position:absolute; left:var(--x); top:var(--y);
+  transform:translate(-50%,-50%);
+  appearance:none; background:transparent; border:0; padding:10px;
+  cursor:pointer; color:inherit; font:inherit; z-index:4;
+  display:grid; place-items:center;
+}
+.ajc__dot{
+  position:relative;
+  width:7px; height:7px; border-radius:50%;
+  background:#FFF6E2;
+  box-shadow:0 0 7px 1px rgba(234,240,255,.55), 0 0 18px 4px rgba(159,192,232,.18);
+  transition:background-color .3s var(--e), box-shadow .35s var(--e), transform .35s var(--e);
+}
+.ajc__pt:hover .ajc__dot,
+.ajc__pt:focus-visible .ajc__dot,
+.ajc__pt.is-active .ajc__dot{
+  background:#FFF3D4; transform:scale(1.5);
+  box-shadow:0 0 0 4px rgba(201,146,47,.16), 0 0 14px 3px rgba(255,214,120,.75),
+             0 0 38px 10px rgba(201,146,47,.35);
+}
+/* The flare a bright star throws, drawn only when one is asked about. It is
+   gold and it is long, so it cannot be mistaken for the faint grey spikes
+   the background stars carry — the whole point of it is that it says THIS
+   one, and only while you are on it. Each arm needs its gradient running
+   along its own axis; a 90deg gradient on a 1px-wide bar has nowhere to
+   fade and comes out a flat line. */
+.ajc__pt .ajc__dot::before,
+.ajc__pt .ajc__dot::after{
+  content:""; position:absolute; left:50%; top:50%;
+  transform:translate(-50%,-50%) scale(0);
+  transition:transform .45s var(--e2), opacity .45s var(--e);
+  opacity:0; pointer-events:none;
+}
+.ajc__pt .ajc__dot::before{
+  width:58px; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,226,160,.95) 50%, transparent);
+}
+.ajc__pt .ajc__dot::after{
+  width:1px; height:58px;
+  background:linear-gradient(180deg, transparent, rgba(255,226,160,.95) 50%, transparent);
+}
+.ajc__pt:hover .ajc__dot::before,
+.ajc__pt:focus-visible .ajc__dot::before,
+.ajc__pt.is-active .ajc__dot::before,
+.ajc__pt:hover .ajc__dot::after,
+.ajc__pt:focus-visible .ajc__dot::after,
+.ajc__pt.is-active .ajc__dot::after{ transform:translate(-50%,-50%) scale(1); opacity:1; }
+/* Every destination is named, all the time. Hiding the names until a point
+   was hovered made a map with nothing to read on it, and left the whole
+   chapter mute to anyone who was not pointing at something. The name is
+   always up; the country comes in when the point is asked about, so each
+   label is one short line at rest.
+
+   Where the name sits is written into --lx/--ly in tools/alumni.py, in
+   cqw — hundredths of the field's width — because five destinations are
+   in Britain and two in Singapore, and a rule that put every name in the
+   same place relative to its point would pile them on top of each other.
+   data-side says which way the name runs from that offset: "r" starts
+   there, "l" ends there, "c" is centred on it. Anything set far enough
+   out is joined back to its point by a leader in the SVG. */
+.ajc__label{
+  position:absolute; left:50%; top:50%;
+  transform:translate(calc(-50% + var(--lx,0px)), calc(-50% + var(--ly,0px)));
+  display:flex; flex-direction:column; align-items:center; gap:1px;
+  width:max-content; max-width:13ch; text-align:center;
+  pointer-events:none;
+  text-shadow:0 1px 6px rgba(5,4,10,.95), 0 0 14px rgba(5,4,10,.8);
+  transition:opacity .28s var(--e);
+}
+.ajc__pt[data-side="r"] .ajc__label{
+  transform:translate(var(--lx,0px), calc(-50% + var(--ly,0px)));
+  align-items:flex-start; text-align:left;
+}
+.ajc__pt[data-side="l"] .ajc__label{
+  transform:translate(calc(-100% + var(--lx,0px)), calc(-50% + var(--ly,0px)));
+  align-items:flex-end; text-align:right;
+}
+.ajc__name{
+  /* Scales with the field, so the nineteen labels keep the clearance they
+     were positioned for at every desktop width rather than only the wide
+     ones. The positions themselves are in tools/alumni.py. */
+  font-size:clamp(.64rem, .98cqw, .78rem);
+  line-height:1.2; letter-spacing:.012em; font-weight:600;
+  color:rgba(247,243,236,.82);
+  transition:color .28s var(--e);
+}
+/* Taken out of flow: collapsed with max-height it still reported its full
+   width to the label above it, so "United Kingdom" was setting the width of
+   a label that only reads "Durham" — and the map filled with collisions
+   between things nobody could see. */
+.ajc__country{
+  position:absolute; top:calc(100% + 2px); left:50%; transform:translateX(-50%);
+  font-size:.6rem; letter-spacing:.16em; text-transform:uppercase;
+  white-space:nowrap; color:var(--aj-gold-lit);
+  opacity:0; transition:opacity .28s var(--e);
+}
+.ajc__pt[data-side="r"] .ajc__country{ left:0; transform:none; }
+.ajc__pt[data-side="l"] .ajc__country{ left:auto; right:0; transform:none; }
+.ajc__pt:hover .ajc__name,
+.ajc__pt:focus-visible .ajc__name,
+.ajc__pt.is-active .ajc__name{ color:#FFF6E2; }
+.ajc__pt:hover .ajc__country,
+.ajc__pt:focus-visible .ajc__country,
+.ajc__pt.is-active .ajc__country{ opacity:1; }
+/* A point filtered out fades its name with it. */
+.ajc__item.is-out .ajc__label{ opacity:0; }
+.ajc__item.is-out{ opacity:.14; }
+.ajc__item.is-out .ajc__pt{ pointer-events:none; }
+.ajc__item{ transition:opacity .4s var(--e); }
+html.js-motion .ajc__pt{ opacity:0; }
+
+/* ---- the panel ---- */
+.ajc__panel{
+  position:fixed; z-index:420; inset:auto 0 0 0;
+  background:var(--aj-ink-3);
+  border-top:1px solid var(--aj-gold);
+  box-shadow:0 -30px 80px -30px rgba(0,0,0,.9);
+}
+.ajc__panel[hidden]{ display:none; }
+.ajc__panelInner{
+  width:100%; max-width:var(--maxw); margin-inline:auto;
+  padding:clamp(22px,3vw,34px) var(--gut);
+  display:grid; gap:6px;
+  grid-template-areas:"region close" "name close" "country close" "note note";
+  grid-template-columns:1fr auto;
+  align-items:start;
+}
+.ajc__panelRegion{
+  grid-area:region; margin:0;
+  font-size:.66rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--aj-gold); font-weight:600;
+}
+.ajc__panelName{
+  grid-area:name; margin:0;
+  font-size:clamp(1.4rem,3vw,2.2rem); line-height:1.1;
+  color:var(--aj-on-dark); letter-spacing:-.01em;
+}
+.ajc__panelCountry{
+  grid-area:country; margin:0;
+  color:var(--aj-on-dark-soft); font-size:var(--fs-sm);
+}
+.ajc__panelNote{
+  grid-area:note; margin:14px 0 0;
+  padding-top:14px; border-top:1px solid var(--aj-hair-soft);
+  color:var(--aj-on-dark-mute); font-size:var(--fs-xs); max-width:62ch;
+}
+.ajc__panelNote em{ color:var(--aj-on-dark-soft); }
+.ajc__panelClose{
+  grid-area:close; appearance:none; cursor:pointer;
+  background:transparent; border:1px solid var(--aj-hair);
+  color:var(--aj-on-dark); font:inherit; font-size:var(--fs-xs);
+  letter-spacing:.1em; text-transform:uppercase;
+  padding:9px 16px;
+  transition:border-color .3s var(--e), color .3s var(--e);
+}
+.ajc__panelClose:hover{ border-color:var(--aj-gold); color:var(--aj-gold-lit); }
+
+/* ============================================================
+   CHAPTER 4a — The voices
+   ============================================================ */
+.aj-voices{
+  background:var(--aj-ink-2);
+  padding-block:clamp(72px,12vh,140px);
+}
+.aj-voices__head .h2{ color:var(--aj-on-dark); }
+.aj-voices__head .h2 em{ color:var(--aj-gold-lit); }
+.aj-voices__head .lead{ color:var(--aj-on-dark-soft); }
+
+/* Each quotation is a pull-quote with a hanging mark, not a centred stack.
+   The mark hangs in its own column, the words run at a proper measure
+   beside it, and the attribution sits under the words where an attribution
+   belongs.
+
+   THE MEASURE. The width has to be set on the element that carries the
+   quotation's own font. It was on the <blockquote>, which inherits the
+   16px body face, so 22ch resolved to 180px while the words inside were
+   set at 49px — about three characters to the line, and "CIRS is an
+   emotion." came out as three ragged lines in a column. ch is only a
+   measure of the font it is declared on. */
+.ajv{
+  position:relative; margin:0;
+  width:100%; max-width:var(--maxw); margin-inline:auto;
+  padding:clamp(38px,6vh,74px) var(--gut);
+  display:grid; align-items:start; text-align:left;
+  column-gap:clamp(16px,2.4vw,34px); row-gap:clamp(18px,2.4vw,28px);
+  grid-template-columns:auto minmax(0,1fr);
+  grid-template-areas:
+    "mark quote"
+    ".    by";
+  border-top:1px solid var(--aj-hair-soft);
+}
+.ajv:first-of-type{ border-top:0; }
+
+.ajv__mark{
+  grid-area:mark; margin:0;
+  font-family:var(--aj-voice); font-weight:500;
+  font-size:clamp(3.4rem,6.6vw,5.6rem); line-height:.74;
+  color:var(--aj-gold); opacity:.42;
+  /* optically aligned to the cap-height of the first line beside it */
+  transform:translateY(.06em);
+  user-select:none;
+}
+
+.ajv__quote{ grid-area:quote; margin:0; }
+.ajv__quote p{
+  margin:0; max-width:30ch;          /* on the quotation's own font */
+  color:var(--aj-on-dark);
+  font-family:var(--aj-voice); font-weight:400;
+  font-size:clamp(1.5rem,3.4vw,2.85rem);
+  line-height:1.28; letter-spacing:-.004em;
+  text-wrap:pretty;
+}
+.ajv__quote em{ color:var(--aj-gold-lit); font-style:italic; }
+
+.ajv__by{
+  grid-area:by; margin:0;
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px;
+}
+.ajv__name{
+  position:relative; padding-left:38px;
+  font-family:var(--font-primary);
+  font-size:.74rem; letter-spacing:.20em; text-transform:uppercase;
+  color:var(--aj-on-dark); font-weight:600;
+}
+/* the short rule an attribution is usually introduced by */
+.ajv__name::before{
+  content:""; position:absolute; left:0; top:.54em;
+  width:26px; height:1px; background:var(--aj-gold);
+}
+.ajv__batch{
+  font-size:var(--fs-xs); color:var(--aj-on-dark-mute);
+  font-style:normal;
+}
+.ajv__batch em{ color:var(--aj-on-dark-mute); font-style:italic; }
+
+/* ============================================================
+   CHAPTER 4b — The named alumni
+   ------------------------------------------------------------
+   Alternating chapters. While there is no portrait the name does
+   the work a portrait would: it is set at display size and the
+   frame beside it says, in as many words, what is missing.
+   ============================================================ */
+/* The site's --ink-mute (#7C7080) is pitched against the site's paper
+   (#FAF7F8). This page's ivory is warmer and a shade lighter, and the same
+   grey lands at 4.23:1 there — under AA for the small text the index and the
+   placeholder notes are full of. Redeclaring the token on the two pale
+   chapters fixes every component inside them at once, including ones this
+   sheet has never heard of, which a list of selectors could not promise.
+
+       #6A5F6C on #F7F3EC   5.35:1 */
+.aj-people,
+.aj-index{ --ink-mute:#6A5F6C; }
+
+.aj-people{
+  background:var(--aj-ivory); color:var(--ink);
+  padding-block:clamp(72px,12vh,140px);
+}
+.aj-people__foot{ margin-top:clamp(36px,5vw,64px); max-width:70ch; }
+.aj-people__foot code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.88em; background:var(--aj-ivory-2); padding:1px 5px;
+}
+
+.ajp{
+  width:100%; max-width:var(--maxw); margin-inline:auto;
+  padding:clamp(40px,7vh,88px) var(--gut);
+  display:grid; gap:clamp(24px,4vw,56px);
+  grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  align-items:center;
+  border-top:1px solid var(--rule);
+}
+.ajp[data-side="right"]{ grid-template-columns:minmax(0,7fr) minmax(0,5fr); }
+.ajp[data-side="right"] .ajp__figure{ order:2; }
+
+.ajp__figure{ position:relative; }
+.ajp__frame{
+  position:relative; margin:0; overflow:hidden;
+  aspect-ratio:3/4; background:var(--aj-ivory-2);
+}
+.ajp__img{ width:100%; height:100%; object-fit:cover; display:block; }
+.ajp[data-person="hari-om-jani"] .ajp__img{ object-position:center 22%; }
+.ajp[data-person="divyaj-dt"] .ajp__img{ object-position:62% center; }
+.ajp[data-person="shashwat-santosh"] .ajp__img{ object-position:60% center; }
+.ajp__sources{ display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; margin:0; font-size:var(--fs-sm); }
+.ajp__sources a{ color:var(--aj-gold-ink); text-decoration:underline; text-underline-offset:.2em; }
+
+/* The plate. A portrait that has not arrived, drawn rather than faked. */
+.ajp__plate{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:14px; padding:clamp(18px,3vw,30px); text-align:center;
+  background:
+    repeating-linear-gradient(-45deg, rgba(110,83,16,.045) 0 10px, transparent 10px 20px),
+    var(--aj-ivory-2);
+  border:1px dashed rgba(110,83,16,.38);
+}
+.ajp__initials{
+  font-family:var(--aj-display); font-weight:400;
+  font-size:clamp(3rem,7vw,5.6rem); line-height:1;
+  color:rgba(110,83,16,.52); letter-spacing:.02em;
+}
+.ajp__plateLabel{
+  font-size:.66rem; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--aj-gold-ink); font-weight:600;
+}
+.ajp__plateNote{
+  margin:0; max-width:30ch;
+  font-size:var(--fs-xs); line-height:1.55; color:var(--ink-soft);
+}
+.ajp__index{
+  position:absolute; top:-.42em; left:-.06em; margin:0; z-index:2;
+  font-family:var(--aj-display);
+  font-size:clamp(3.4rem,7vw,6rem); line-height:1;
+  color:var(--aj-gold-ink); opacity:.22; font-variant-numeric:tabular-nums;
+}
+.ajp[data-side="right"] .ajp__index{ left:auto; right:-.06em; }
+
+.ajp__name{
+  margin:0 0 10px;
+  font-size:clamp(2.1rem,5.4vw,4.2rem); line-height:1.0;
+  letter-spacing:-.025em; color:var(--ink);
+}
+.ajp__role{
+  margin:0 0 clamp(20px,3vw,30px);
+  font-family:var(--aj-voice); font-style:italic;
+  font-size:clamp(1.05rem,1.9vw,1.45rem); color:var(--ink-soft);
+}
+.ajp__bio{
+  max-width:58ch; margin:0 0 clamp(22px,3vw,34px);
+  font-size:clamp(1rem,1.18vw,1.12rem); line-height:1.7;
+  color:var(--ink-soft);
+}
+.ajp__meta{
+  margin:0 0 clamp(18px,2.6vw,26px);
+  display:flex; flex-wrap:wrap; gap:10px 28px;
+  padding-top:18px; border-top:1px solid var(--rule);
+}
+.ajp__metaItem{ display:flex; flex-direction:column; gap:3px; font-size:var(--fs-sm); }
+.ajp__metaItem b{
+  font-size:.64rem; letter-spacing:.20em; text-transform:uppercase;
+  color:var(--aj-gold-ink); font-weight:600;
+}
+.ajp__await{ margin:0; max-width:56ch; font-size:var(--fs-xs);
+  line-height:1.6; color:var(--ink-mute); }
+.ajp__await em{ color:var(--ink-soft); }
+
+/* ============================================================
+   CHAPTER 5 — Paths from CIRS
+   ------------------------------------------------------------
+   Five scenes on one horizontal track. Pinned and dragged
+   sideways on a wide screen; a plain vertical stack below that,
+   because a pinned horizontal rail on a phone is a scroll trap.
+   ============================================================ */
+.aj-paths{
+  position:relative; background:var(--aj-ink);
+  padding-block:clamp(72px,12vh,140px) 0;
+  overflow:clip;
+  transition:background-color .9s var(--e);
+}
+.aj-paths__head{ max-width:760px; }
+.aj-paths__head .h2{ color:var(--aj-on-dark); }
+.aj-paths__head .h2 em{ color:var(--aj-gold-lit); }
+.aj-paths__head .lead{ color:var(--aj-on-dark-soft); }
+
+.ajw-track{ position:relative; margin-top:clamp(28px,4vw,48px); }
+.ajw-rail{ display:flex; }
+/* Keep the original type led scenes without trapping vertical scrolling. */
+body.alumni .ajw-rail{
+  display:grid; max-width:var(--maxw); margin-inline:auto;
+  padding-inline:var(--gut);
+}
+body.alumni .ajw{
+  width:100%; max-width:740px; margin-right:0;
+  border-top:1px solid var(--aj-hair-soft);
+}
+body.alumni .ajw:first-child{ border-top:0; }
+body.alumni .ajw::before, body.alumni .ajw-nav{ display:none; }
+
+/* ---- no cards ----
+   Five boxes in a row is the row of identical cards this page exists to
+   avoid, and a bordered panel over a coloured ground reads as a dialog.
+   So the scene has no box at all: the GROUND belongs to the section and
+   changes colour as each pathway takes the screen, and the scenes are
+   columns of type separated by one hairline, dimmed until they are the
+   one being read. alumni-journey.js does the ground; --aj-scene below is
+   where it reads each colour from, so the colours stay in this file. */
+.ajw{
+  position:relative; flex:0 0 auto;
+  width:min(84vw, 540px);
+  padding:clamp(30px,4vw,48px) 0;
+  margin-right:clamp(34px,5vw,76px);
+  background:transparent; border:0;
+  display:flex; flex-direction:column;
+  transition:opacity .6s var(--e);
+}
+/* The scene that has the screen is marked in ACCENT, not by dimming the
+   other four. Fading them to a third looked right and measured wrong —
+   every line in an inactive scene fell to between 1.5:1 and 2.5:1, which
+   is unreadable, and they are on screen, not off it. The ground changing
+   colour under each pathway is the dominant-scene cue; this is the rest
+   of it, and it costs no legibility at all. */
+.ajw-track.is-live .ajw.is-on .ajw__n,
+.ajw-track.is-live .ajw.is-on .ajw__label{ color:var(--aj-accent); }
+.ajw-track.is-live .ajw.is-on .ajw__label::before{
+  content:""; display:block; width:26px; height:2px;
+  background:var(--aj-accent); margin-bottom:12px;
+}
+.ajw::before{
+  content:""; position:absolute; top:6%; bottom:6%;
+  left:calc(-1 * clamp(17px,2.5vw,38px)); width:1px;
+  background:linear-gradient(to bottom, transparent, var(--aj-hair), transparent);
+}
+.ajw:first-child::before{ display:none; }
+.ajw[data-scene="ink"]{    --aj-scene:#0E0B12; --aj-accent:var(--aj-gold-lit); }
+.ajw[data-scene="navy"]{   --aj-scene:#16243A; --aj-accent:var(--aj-navy-lit); }
+.ajw[data-scene="gold"]{   --aj-scene:#2A2110; --aj-accent:#E8B24A; }
+.ajw[data-scene="slate"]{  --aj-scene:#171C1E; --aj-accent:var(--aj-sage); }
+.ajw[data-scene="maroon"]{ --aj-scene:#2A0A11; --aj-accent:var(--aj-rose); }
+
+.ajw__n{
+  margin:0 0 clamp(20px,3vw,30px);
+  font-family:var(--aj-display); font-size:2.4rem; line-height:1;
+  color:var(--aj-on-dark-mute); font-variant-numeric:tabular-nums;
+  transition:color .6s var(--e);
+}
+.ajw__n span{ font-size:.9rem; opacity:.55; letter-spacing:.08em; }
+.ajw__label{
+  margin:0 0 12px;
+  font-size:.68rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--aj-on-dark-mute); font-weight:600;
+  transition:color .6s var(--e);
+}
+.ajw__head{
+  margin:0 0 16px; color:var(--aj-on-dark);
+  font-size:clamp(1.7rem,3.2vw,2.6rem); line-height:1.08; letter-spacing:-.018em;
+}
+.ajw__head em{ color:var(--aj-accent); font-style:italic; }
+.ajw__copy{
+  margin:0 0 auto; color:var(--aj-on-dark-soft);
+  font-size:var(--fs-body); line-height:1.65; max-width:46ch;
+}
+.ajw__evLabel{
+  margin:clamp(26px,4vw,40px) 0 12px;
+  font-size:.62rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--aj-on-dark-mute); font-weight:600;
+  padding-top:16px; border-top:1px solid var(--aj-hair-soft);
+}
+.ajw__evList{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.ajw__ev{ display:flex; flex-direction:column; gap:2px; }
+.ajw__evName{ font-size:var(--fs-sm); color:var(--aj-on-dark); font-weight:600; }
+a.ajw__evName{
+  color:var(--aj-accent); text-decoration:underline;
+  text-underline-offset:3px; text-decoration-thickness:1px;
+}
+.ajw__evWhere{ font-size:var(--fs-xs); color:var(--aj-on-dark-mute); }
+
+.ajw-nav{
+  padding:clamp(22px,3vw,34px) var(--gut) clamp(48px,7vh,80px);
+  display:flex; justify-content:center;
+}
+.ajw__dots{ list-style:none; display:flex; gap:10px; margin:0; padding:0; }
+.ajw__dot{
+  appearance:none; background:transparent; border:0; cursor:pointer;
+  padding:8px; display:grid; place-items:center;
+}
+.ajw__dot span{
+  display:block; width:28px; height:2px; background:var(--aj-hair);
+  transition:background-color .35s var(--e);
+}
+.ajw__dot.is-on span{ background:var(--aj-gold); }
+.ajw__dot:hover span{ background:var(--aj-gold-lit); }
+
+/* On a wide screen the track is pinned and dragged sideways, so it wants a
+   screen of its own and scenes of one height. Below 900px none of this
+   applies and the rail is a plain stack — see the phone block at the foot. */
+@media (min-width: 900px){
+  .ajw-track{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .ajw-rail{ padding-inline:var(--gut); }
+  .ajw{ height:min(70svh, 600px); }
+}
+
+/* ============================================================
+   CHAPTER 6 — The index
+   ============================================================ */
+.aj-index{
+  background:var(--aj-ivory); color:var(--ink);
+  padding-block:clamp(72px,12vh,140px);
+}
+
+.ajd{ margin-top:clamp(12px,2vw,24px); }
+.ajd__search{
+  display:flex; flex-wrap:wrap; align-items:flex-end; gap:12px 24px;
+  padding-bottom:18px; border-bottom:1px solid var(--rule);
+}
+.ajd__label{
+  font-size:.66rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--aj-gold-ink); font-weight:600;
+  display:block; width:100%;
+}
+.ajd__input{
+  flex:1 1 280px; min-width:0;
+  appearance:none; background:transparent;
+  border:0; border-bottom:1px solid var(--ink-mute);
+  padding:10px 2px; font:inherit; font-size:var(--fs-lead); color:var(--ink);
+  transition:border-color .3s var(--e);
+}
+.ajd__input:focus{ outline:none; border-bottom-color:var(--aj-gold-ink); }
+.ajd__input:focus-visible{ outline:2px solid var(--aj-gold-ink); outline-offset:4px; }
+.ajd__count{
+  margin:0; font-size:var(--fs-xs); color:var(--ink-mute);
+  letter-spacing:.04em; font-variant-numeric:tabular-nums;
+}
+
+.ajd__groups{
+  margin-top:clamp(26px,4vw,44px);
+  display:grid; gap:clamp(28px,4vw,52px);
+  grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+  align-items:start;
+}
+.ajd__group[hidden]{ display:none; }
+.ajd__region{
+  margin:0 0 14px; padding-bottom:10px;
+  border-bottom:1px solid var(--rule);
+  display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+  font-size:var(--fs-sm);
+}
+.ajd__region .sc{
+  font-size:.68rem; letter-spacing:.20em; text-transform:uppercase;
+  color:var(--ink); font-weight:600;
+}
+.ajd__n{
+  font-size:var(--fs-xs); color:var(--aj-gold-ink);
+  font-variant-numeric:tabular-nums; font-weight:600;
+}
+.ajd__rows{ list-style:none; margin:0; padding:0; display:grid; gap:2px; }
+.ajd__row{
+  display:flex; flex-direction:column; gap:2px;
+  padding:9px 0; border-bottom:1px solid var(--rule-soft);
+}
+.ajd__row[hidden]{ display:none; }
+.ajd__name{ font-size:var(--fs-body); line-height:1.35; color:var(--ink); }
+.ajd__country{
+  font-size:.62rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.ajd__empty{
+  margin:clamp(20px,3vw,30px) 0 0; font-size:var(--fs-sm); color:var(--ink-soft);
+}
+.ajd__empty[hidden]{ display:none; }
+
+.aj-index__fig{ margin:clamp(40px,6vw,72px) 0 0; }
+.aj-index__fig img{ display:block; width:100%; height:auto; }
+.aj-index__fig figcaption{
+  margin-top:12px; font-size:var(--fs-xs); color:var(--ink-mute); max-width:72ch;
+}
+
+/* ============================================================
+   CHAPTER 7 — The return
+   ============================================================ */
+.aj-return{
+  position:relative; isolation:isolate;
+  min-height:100svh; display:grid; align-items:center;
+  padding-block:clamp(72px,12vh,140px);
+  overflow:clip; background:var(--aj-ink);
+}
+.aj-return__media{ position:absolute; inset:0; z-index:0; }
+.aj-return__media img{ width:100%; height:100%; object-fit:cover; display:block; }
+.aj-return__wash{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(to right, rgba(14,11,18,.96) 0%, rgba(14,11,18,.88) 42%,
+                             rgba(14,11,18,.58) 72%, rgba(14,11,18,.48) 100%);
+}
+.aj-return__inner{ position:relative; z-index:3; }
+.aj-return__head{
+  margin:0 0 clamp(30px,4.5vw,50px); max-width:18ch;
+  color:var(--aj-on-dark);
+  font-size:clamp(2rem,4.6vw,3.9rem); line-height:1.06; letter-spacing:-.02em;
+}
+.aj-return__head em{ color:var(--aj-gold-lit); font-style:italic; }
+
+.aj-return__acts{ display:flex; flex-wrap:wrap; gap:14px; }
+body.alumni .aj-return__acts .btn--primary{
+  background:var(--aj-gold); border-color:var(--aj-gold); color:var(--aj-ink);
+  font-weight:600;
+}
+body.alumni .aj-return__acts .btn--primary:hover{
+  background:var(--aj-gold-lit); border-color:var(--aj-gold-lit); color:var(--aj-ink);
+}
+body.alumni .aj-return__acts .btn--ghost{
+  border-color:var(--aj-hair); color:var(--aj-on-dark);
+}
+body.alumni .aj-return__acts .btn--ghost:hover{
+  border-color:var(--aj-gold); color:var(--aj-gold-lit); background:transparent;
+}
+
+.aj-return__reach{
+  margin-top:clamp(40px,6vw,68px); padding-top:clamp(24px,3.4vw,36px);
+  border-top:1px solid var(--aj-hair-soft); max-width:760px;
+}
+.aj-return__reachNote{
+  margin:0 0 20px; font-size:var(--fs-sm); color:var(--aj-on-dark-soft);
+}
+.aj-return__rows{
+  margin:0; display:grid; gap:16px 32px;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+}
+.aj-return__rows > div{ display:flex; flex-direction:column; gap:4px; }
+.aj-return__rows dt{
+  font-size:.62rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--aj-gold); font-weight:600;
+}
+.aj-return__rows dd{ margin:0; font-size:var(--fs-sm); color:var(--aj-on-dark); }
+.aj-return__rows a{ color:var(--aj-on-dark); text-decoration:underline; text-underline-offset:3px; }
+.aj-return__rows a:hover{ color:var(--aj-gold-lit); }
+.aj-return__await{
+  margin:clamp(22px,3vw,30px) 0 0; max-width:64ch;
+  font-size:var(--fs-xs); color:var(--aj-on-dark-mute);
+}
+.aj-return__await em{ color:var(--aj-on-dark-soft); }
+
+/* ============================================================
+   The cursor label
+   ------------------------------------------------------------
+   Inside the alumni interactions only, and never a replacement
+   for the system cursor. cirs.js already runs a difference-blend
+   ring site-wide; this rides with it and adds the word.
+   ============================================================ */
+.aj-cursor{
+  position:fixed; top:0; left:0; z-index:480;
+  pointer-events:none; opacity:0;
+  transform:translate(-50%,-50%);
+  padding:6px 11px;
+  background:var(--aj-gold); color:var(--aj-ink);
+  font-size:.58rem; letter-spacing:.20em; text-transform:uppercase; font-weight:600;
+  transition:opacity .25s var(--e);
+  will-change:transform;
+}
+.aj-cursor.is-on{ opacity:1; }
+@media (hover:none),(pointer:coarse){ .aj-cursor{ display:none; } }
+
+/* ============================================================
+   Tablet and phone
+   ------------------------------------------------------------
+   The map stops being a map and becomes a list: the same
+   buttons, the same panel, laid out in normal flow. There is
+   one DOM and no second markup path that can rot.
+   ============================================================ */
+@media (max-width: 899px){
+  .aj-open{ padding-bottom:clamp(76px,14vh,120px); }
+  .aj-open__title{ font-size:clamp(1.75rem,8.4vw,3.2rem); }
+
+  .aj-portal__stage{ min-height:auto; padding-block:clamp(56px,10vh,88px); }
+  .aj-portal{ min-height:auto; }
+
+  /* --- the map becomes a list --- */
+  /* Nineteen names over a world 360 pixels wide is a puzzle, not a map,
+     so below 900px the field stops being one: the coastline, the routes
+     and the flights go, and the same nineteen buttons become rows. */
+  .ajc__field{
+    aspect-ratio:auto; min-height:0; border:0;
+    background:none; padding-left:22px;
+  }
+  /* The route line concept survives as one rule down the left of the list. */
+  .ajc__field::before{
+    content:""; position:absolute; left:4px; top:8px; bottom:8px; width:1px;
+    background:linear-gradient(to bottom, var(--aj-gold), var(--aj-hair-soft));
+  }
+  .ajc__map,
+  .ajc__lines{ display:none; }
+  .ajc__origin{
+    position:static; transform:none; margin:0 0 6px -22px;
+  }
+  .ajc__points{ display:grid; }
+  .ajc__pt{
+    position:static; transform:none;
+    width:100%; padding:14px 2px; justify-items:start;
+    display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center;
+    border-bottom:1px solid var(--aj-hair-soft); text-align:left;
+  }
+  .ajc__pt[data-side] .ajc__label,
+  .ajc__label{
+    position:static; transform:none; opacity:1;
+    align-items:flex-start; gap:3px; text-align:left;
+    max-width:none; text-shadow:none;
+  }
+  .ajc__pt[data-side] .ajc__country,
+  .ajc__country{
+    position:static; transform:none; opacity:1; white-space:normal;
+    left:auto; right:auto;
+  }
+  .ajc__item.is-out{ display:none; }
+  .ajc__status{ margin-left:0; width:100%; }
+
+  .ajc__panel{ max-height:72svh; overflow-y:auto; }
+  .ajc__panelInner{
+    grid-template-areas:"region" "name" "country" "note" "close";
+    grid-template-columns:1fr; justify-items:start;
+  }
+  .ajc__panelClose{ margin-top:16px; }
+
+  /* --- alumni chapters stack --- */
+  .ajp,
+  .ajp[data-side="right"]{ grid-template-columns:1fr; }
+  .ajp[data-side="right"] .ajp__figure{ order:0; }
+  .ajp__frame{ aspect-ratio:3/4; }
+  .ajp[data-person="shashwat-santosh"] .ajp__frame{ aspect-ratio:4/3; }
+  .ajp__index{ top:-.30em; }
+
+  /* --- the pathways stack, and never pin --- */
+  .ajw-rail{ display:grid; gap:0; }
+  .ajw{
+    width:100%; margin-right:0;
+    padding:clamp(30px,6vw,44px) 0;
+    border-top:1px solid var(--aj-hair-soft);
+  }
+  .ajw:first-child{ border-top:0; }
+  .ajw::before{ display:none; }
+  .ajw-nav{ display:none; }
+
+  /* --- a list keeps none of the map's own dark --- */
+  .ajc__field::after{ display:none; }
+  .ajc__origin{ pointer-events:auto; }
+
+  .aj-return{ min-height:auto; }
+  .aj-return__wash{
+    background:linear-gradient(to top, rgba(14,11,18,.97) 30%, rgba(14,11,18,.72) 100%);
+  }
+}
+
+@media (max-width: 700px){
+  .ajv{
+    grid-template-columns:1fr;
+    grid-template-areas:"mark" "quote" "by";
+    row-gap:clamp(6px,1.6vw,14px);
+  }
+  .ajv__mark{ font-size:clamp(2.8rem,11vw,3.6rem); transform:none; }
+  .ajv__quote p{ max-width:none; font-size:clamp(1.35rem,5.6vw,1.9rem); }
+  .ajv__by{ margin-top:clamp(14px,3vw,20px); }
+}
+
+@media (max-width: 560px){
+  .aj-open__sub{ font-size:1.05rem; }
+  .ajd__groups{ grid-template-columns:1fr; }
+}
+
+/* ============================================================
+   Reduced motion
+   ------------------------------------------------------------
+   cirs.js never adds js-motion in this mode, so every "start
+   hidden" rule above is already inert. What is left is the
+   things CSS animates on its own.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  .aj-open__media img{ transform:none; }
+  .ajc__line,
+  .ajc__land,
+  .ajc__item,
+  .ajc__dot,
+  .ajc__label,
+  .ajw__dot span,
+  .aj-cursor{ transition:none !important; }
+  .aj-cursor{ display:none; }
+  .ajw__n, .ajw__label{ transition:none; }
+  body.alumni.aj-quiet .header{ opacity:1; }
 }
