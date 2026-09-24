@@ -29,7 +29,8 @@ body.admissions .pagehero__scrim{
     linear-gradient(to top,rgba(14,11,18,.94),rgba(14,11,18,.78) 34%,rgba(14,11,18,.30) 68%,rgba(14,11,18,.58));
 }
 body.admissions .pagehero__inner{
-  width:100%; max-width:1240px;
+  /* Keep the hero edge aligned with the sections below it. */
+  width:100%; max-width:var(--maxw);
   padding-inline:var(--gut);
   padding-bottom:clamp(18px,2.5vh,28px);
 }

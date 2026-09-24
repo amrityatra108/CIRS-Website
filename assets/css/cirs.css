@@ -920,6 +920,26 @@ section[id]{ scroll-margin-top:88px; }
 .filmsec__socialtag{ color:var(--gold-lit); margin-right:2px; }
 .filmsec__social a{ color:var(--on-purple-soft); font-family:var(--font-primary); font-size:var(--fs-sm); }
 .filmsec__social a:hover{ color:var(--gold-lit); }
+/* The icon row, drawn as the Enquire panel's social row is. Without a size
+   the four links collapsed to nothing: invisible, yet still keyboard stops. */
+.filmsec__sociallinks{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+.filmsec__sociallinks a{
+  display:grid; width:44px; height:44px; place-items:center; border-radius:50%;
+  border:1px solid var(--rule-purple);
+  transition:background .22s var(--e), color .22s var(--e), border-color .22s var(--e), transform .22s var(--e);
+}
+.filmsec__sociallinks svg{ width:21px; height:21px; overflow:visible; }
+.filmsec__sociallinks svg :is(rect,circle){ fill:none; stroke:currentColor; stroke-width:1.65; }
+.filmsec__sociallinks svg path,
+.filmsec__sociallinks svg .social-dot{ fill:currentColor; stroke:none; }
+.filmsec__sociallinks svg .social-play{ fill:var(--purple-ink); }
+.filmsec__sociallinks a:hover,
+.filmsec__sociallinks a:focus-visible{
+  background:var(--gold-lit); border-color:var(--gold-lit); color:var(--purple-ink);
+  transform:translateY(-2px);
+}
+.filmsec__sociallinks a:hover .social-play,
+.filmsec__sociallinks a:focus-visible .social-play{ fill:var(--gold-lit); }
 
 .quote{ background:var(--paper); }
 .quote__grid{
@@ -1128,6 +1148,11 @@ section[id]{ scroll-margin-top:88px; }
    Footer reveal — content scrolls away over a fixed footer
    ============================================================ */
 .footer-wrap{ position:sticky; bottom:0; z-index:0; }
+/* A footer taller than the window cannot be revealed from underneath: pinned
+   by its bottom edge, its top never comes into view. On a phone that was the
+   address, the telephone and the first columns of links. cirs.js sets is-tall
+   whenever the footer outgrows the window, and it then simply scrolls. */
+.footer-wrap.is-tall{ position:relative; }
 main{ position:relative; z-index:1; background:var(--paper); }
 
 /* ============================================================
