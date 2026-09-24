@@ -26,29 +26,16 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=98-admissions-25">
-<link rel="stylesheet" href="assets/css/cirs.css?b=98-admissions-25">
-<link rel="stylesheet" href="assets/css/pages.css?b=98-admissions-25">
-<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
-     removes once it has played. With scripting off nothing removes it, and
-     it covers the page on every page of this site. One rule, applied only
-     when there is no scripting, is the whole fix. Crossroads already does
-     this for its own curtain further down. -->
-<noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/admissions.css?b=98-admissions-25">
-<link rel="stylesheet" href="assets/css/typography.css?b=98-admissions-25">
+<link rel="stylesheet" href="assets/css/fonts.css?b=100-admissions-26">
+<link rel="stylesheet" href="assets/css/cirs.css?b=100-admissions-26">
+<link rel="stylesheet" href="assets/css/pages.css?b=100-admissions-26">
+
+<link rel="stylesheet" href="assets/css/admissions.css?b=100-admissions-26">
+<link rel="stylesheet" href="assets/css/typography.css?b=100-admissions-26">
 </head>
 
 <body class="admissions">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -266,12 +253,12 @@
 </div>
 <main id="main">
 <section class="pagehero" id="top" data-ground="#0E0B12">
-  <div class="pagehero__media">
+  <div class="pagehero__media" style="background-image:url('assets/img/admissions-honeycomb.jpg?b=100-admissions-26')">
     <video class="pagehero__video" autoplay muted loop playsinline
-           poster="assets/img/admissions-honeycomb.jpg?b=98-admissions-25" aria-hidden="true"
+           poster="assets/img/admissions-honeycomb.jpg?b=100-admissions-26" aria-hidden="true"
            width="1920" height="960" fetchpriority="high">
-      <source src="assets/video/admissions-hero.webm?b=98-admissions-25" type="video/webm">
-      <source src="assets/video/admissions-hero.mp4?b=98-admissions-25" type="video/mp4">
+      <source src="assets/video/admissions-hero.webm?b=100-admissions-26" type="video/webm">
+      <source src="assets/video/admissions-hero.mp4?b=100-admissions-26" type="video/mp4">
     </video>
   </div>
   <div class="pagehero__scrim" aria-hidden="true"></div>
@@ -301,11 +288,11 @@
 </section>
 <section class="ad-section ad-overview" id="overview">
   <div class="wrap ad-overview__grid">
-    <div class="ad-heading rv">
+    <div class="ad-heading">
       <p class="ad-kicker"><span class="sc">Why families choose CIRS</span></p>
-      <h2 class="serif h2" data-split>Rooted in Values,<br>Ready for the World.</h2>
+      <h2 class="serif h2">Rooted in Values,<br>Ready for the World.</h2>
     </div>
-    <div class="ad-overview__copy rv">
+    <div class="ad-overview__copy">
       <p class="ad-editorial">This page is for parents who want their child to grow into a
         capable citizen of a widening world without being cut loose from the civilisation they
         come from.</p>
@@ -328,15 +315,15 @@
 
 <section class="ad-section ad-section--soft" id="apply">
   <div class="wrap">
-    <div class="ad-heading ad-heading--wide rv">
+    <div class="ad-heading ad-heading--wide">
       <p class="ad-kicker"><span class="sc">Admissions process</span></p>
-      <h2 class="serif h2" data-split>From enquiry to enrolment.</h2>
+      <h2 class="serif h2">From enquiry to enrolment.</h2>
       <p class="lead">Six verified stages, with the important detail kept beside the step where
         a family needs it.</p>
     </div>
 
     <ol class="ad-process">
-      <li class="ad-process__item rv">
+      <li class="ad-process__item">
         <div class="ad-process__number" aria-hidden="true">01</div>
         <div class="ad-process__body"><h3 class="serif h3">Enquire</h3>
           <p>Write, call or message the Admissions Office with questions about the year applied
@@ -347,7 +334,7 @@
           <a href="https://wa.me/919360461572">WhatsApp +91 93604 61572</a>
         </div>
       </li>
-      <li class="ad-process__item rv">
+      <li class="ad-process__item">
         <div class="ad-process__number" aria-hidden="true">02</div>
         <div class="ad-process__body"><h3 class="serif h3">Register online</h3>
           <p>Complete every mandatory field. The student&rsquo;s name must match the transfer certificate from the previous school,
@@ -357,7 +344,7 @@
           <span>Online payment only; cash is not accepted</span>
           <a href="https://easycollege.in/cirs/school/application/index.aspx">Open the application portal</a></div>
       </li>
-      <li class="ad-process__item rv">
+      <li class="ad-process__item">
         <div class="ad-process__number" aria-hidden="true">03</div>
         <div class="ad-process__body"><h3 class="serif h3">Application review</h3>
           <p>The school reviews each submitted application before the entrance examination.
@@ -365,24 +352,24 @@
         <div class="ad-process__fact"><img class="ad-process__image" src="assets/img/adm-assembly.jpg" alt="Students gathered for a school assembly" width="1000" height="750" loading="lazy"><strong>Reviewed by the school</strong>
           <span>Before the entrance examination</span></div>
       </li>
-      <li class="ad-process__item rv">
+      <li class="ad-process__item">
         <div class="ad-process__number" aria-hidden="true">04</div>
         <div class="ad-process__body"><h3 class="serif h3">Entrance examination</h3>
           <p>The examination is general rather than based on one board or syllabus. It assesses
             what a candidate has learned and how readily they may learn next. Every paper includes
             a creative-writing section.</p></div>
-        <div class="ad-process__fact"><img class="ad-process__image" src="assets/img/adm-houses.jpg" alt="CIRS students taking part in a house activity" width="1000" height="750" loading="lazy"><strong>1 November 2026</strong>
+        <div class="ad-process__fact"><img class="ad-process__image" src="assets/img/adm-examination.jpg" alt="CIRS students writing an examination" width="1000" height="750" loading="lazy"><strong>1 November 2026</strong>
           <span>India and Dubai; first week of November in other countries</span>
           <a href="#examination">Review the examination structure</a></div>
       </li>
-      <li class="ad-process__item rv">
+      <li class="ad-process__item">
         <div class="ad-process__number" aria-hidden="true">05</div>
         <div class="ad-process__body"><h3 class="serif h3">Admissions interview</h3>
           <p>Every candidate who writes the entrance examination is called for an interview with the school.</p></div>
         <div class="ad-process__fact"><img class="ad-process__image" src="assets/img/adm-interview.jpg" alt="A student speaking with members of the school team" width="1000" height="750" loading="lazy"><strong>For every candidate</strong>
           <span>After the entrance examination</span></div>
       </li>
-      <li class="ad-process__item rv">
+      <li class="ad-process__item">
         <div class="ad-process__number" aria-hidden="true">06</div>
         <div class="ad-process__body"><h3 class="serif h3">Confirm the place</h3>
           <p>Successful candidates are notified and the place is confirmed on payment of fees.</p></div>
@@ -395,14 +382,14 @@
 
 <section class="ad-section" id="examination">
   <div class="wrap">
-    <div class="ad-heading ad-heading--split rv">
+    <div class="ad-heading ad-heading--split">
       <div><p class="ad-kicker"><span class="sc">Entry points and assessment</span></p>
-        <h2 class="serif h2" data-split>What candidates are asked to take.</h2></div>
+        <h2 class="serif h2">What candidates are asked to take.</h2></div>
       <p class="lead">Applications are currently described for Classes V&ndash;IX and XI. Age
         criteria and other class-specific eligibility requirements must be confirmed with the
         Admissions Office.</p>
     </div>
-    <div class="ad-tablewrap rv">
+    <div class="ad-tablewrap">
       <table class="ad-table">
         <caption>Entrance examination by class applied for</caption>
         <thead><tr><th scope="col">Class applied for</th><th scope="col">Papers</th><th scope="col">Duration</th></tr></thead>
@@ -414,15 +401,15 @@
       </table>
     </div>
     <div class="ad-exam-grid">
-      <div class="ad-exam rv"><h3 class="serif h3">Class XI &mdash; CBSE</h3>
+      <div class="ad-exam"><h3 class="serif h3">Class XI &mdash; CBSE</h3>
         <dl><div><dt>Engineering</dt><dd>English; Physics and Chemistry; Mathematics</dd></div>
           <div><dt>Medicine</dt><dd>English; Physics and Chemistry; Biology</dd></div>
           <div><dt>Management</dt><dd>English; Management Studies; Mathematics</dd></div></dl></div>
-      <div class="ad-exam rv"><h3 class="serif h3">Class XI &mdash; IB Diploma</h3>
+      <div class="ad-exam"><h3 class="serif h3">Class XI &mdash; IB Diploma</h3>
         <p>Four papers of 45 minutes each:</p>
         <ul class="ad-inline-list"><li>English</li><li>Mathematics</li><li>Science</li><li>General Awareness</li></ul></div>
     </div>
-    <p class="ad-note rv"><strong>Academic year:</strong> April to March, with vacations in May
+    <p class="ad-note"><strong>Academic year:</strong> April to March, with vacations in May
       and June and again in December. Registration for 2026&ndash;2027 is closed; this page refers
       to 2027&ndash;2028 admissions.</p>
   </div>
@@ -430,12 +417,12 @@
 
 <section class="ad-section ad-section--dates" id="dates" data-ground="#FFFFFF">
   <div class="wrap ad-dates">
-    <div class="ad-heading rv"><p class="ad-kicker"><span class="sc">Admissions dates</span></p>
-      <h2 class="serif h2" data-split>Dates currently published.</h2>
+    <div class="ad-heading"><p class="ad-kicker"><span class="sc">Admissions dates</span></p>
+      <h2 class="serif h2">Dates currently published.</h2>
       <p class="lead">The application and examination dates below are present in the current
         admissions information. Interview, decision, acceptance and reporting dates should be
         confirmed directly with the Admissions Office.</p></div>
-    <ol class="ad-timeline rv">
+    <ol class="ad-timeline">
       <li><span class="ad-timeline__date">Now</span><span>Applications for 2027&ndash;2028 are open</span></li>
       <li><span class="ad-timeline__date">15 October 2026</span><span>Registration portal closes</span></li>
       <li><span class="ad-timeline__date">1 November 2026</span><span>Entrance examination in India and Dubai</span></li>
@@ -447,12 +434,12 @@
 
 <section class="ad-section ad-section--soft" id="fees">
   <div class="wrap ad-fees">
-    <div class="ad-heading rv"><p class="ad-kicker"><span class="sc">Fees and financial information</span></p>
-      <h2 class="serif h2" data-split>The published fee schedule.</h2>
+    <div class="ad-heading"><p class="ad-kicker"><span class="sc">Fees and financial information</span></p>
+      <h2 class="serif h2">The published fee schedule.</h2>
       <p class="lead">The repository contains the school&rsquo;s Schedule of Fee and Charges for
         2027&ndash;2029. Read the document for class-specific annual fees, deposits, payment terms
         and boarding charges.</p></div>
-    <div class="ad-download rv">
+    <div class="ad-download">
       <div><p class="ad-download__type">PDF document &middot; approximately 199 KB</p>
         <h3 class="serif h3">Schedule of Fee and Charges, 2027&ndash;2029</h3>
         <p>The registration fee shown in the current process is &#8377;5,000 and is paid online.
@@ -465,17 +452,17 @@
 
 <section class="ad-section" id="documents">
   <div class="wrap ad-documents">
-    <div class="ad-heading rv"><p class="ad-kicker"><span class="sc">Application information</span></p>
-      <h2 class="serif h2" data-split>What to have ready.</h2>
+    <div class="ad-heading"><p class="ad-kicker"><span class="sc">Application information</span></p>
+      <h2 class="serif h2">What to have ready.</h2>
       <p class="lead">Only the items explicitly named in the current admissions information are
         listed as requirements here.</p></div>
     <div class="ad-checklists">
-      <div class="ad-checklist rv"><h3 class="serif h3">For registration</h3>
+      <div class="ad-checklist"><h3 class="serif h3">For registration</h3>
         <ul><li>Student&rsquo;s full name exactly as it appears on the transfer certificate from the previous school</li>
           <li>Date of birth exactly as shown on the birth certificate</li><li>Category: OC, BC, MBC, SC or ST</li>
           <li>Telephone number with country and area codes</li><li>A valid email address for examination details</li>
           <li>Preferred examination centre selected from the portal list</li></ul></div>
-      <div class="ad-checklist rv"><h3 class="serif h3">At admission, where applicable</h3>
+      <div class="ad-checklist"><h3 class="serif h3">At admission, where applicable</h3>
         <ul><li>OBC, SC or ST caste certificate</li><li>Any additional records requested in the offer communication</li></ul>
         <p class="ad-checklist__note">Photographs, academic reports, transfer documents,
           medical records and passport or visa requirements are not verified in the current
@@ -485,10 +472,10 @@
 </section>
 
 <section class="ad-campus" id="visit" data-ground="#FAF7EC">
-  <div class="ad-campus__media rv"><img src="assets/img/campus-lawn.jpg"
+  <div class="ad-campus__media"><img src="assets/img/campus-lawn.jpg"
     alt="CIRS academic buildings and lawn beneath the Siruvani hills" width="1600" height="900" loading="lazy"></div>
-  <div class="ad-campus__content rv"><p class="ad-kicker"><span class="sc">Campus and residential life</span></p>
-    <h2 class="serif h2" data-split>See where school life happens.</h2>
+  <div class="ad-campus__content"><p class="ad-kicker"><span class="sc">Campus and residential life</span></p>
+    <h2 class="serif h2">See where school life happens.</h2>
     <p>CIRS is a residential school in the Siruvani foothills. Campus visits are available by
       appointment on Wednesdays and Saturdays. Visitors should reach the campus by 10.00 am sharp.</p>
     <ul class="ad-visit-list"><li>Arrange the visit with the Admissions Office</li>
@@ -500,11 +487,11 @@
 
 <section class="ad-section ad-section--soft" id="faq">
   <div class="wrap ad-faq-layout">
-    <div class="ad-heading rv"><p class="ad-kicker"><span class="sc">Parent questions</span></p>
-      <h2 class="serif h2" data-split>Useful answers before you apply.</h2>
+    <div class="ad-heading"><p class="ad-kicker"><span class="sc">Parent questions</span></p>
+      <h2 class="serif h2">Useful answers before you apply.</h2>
       <p class="lead">These answers use only the process and contact information currently
         published by the school.</p></div>
-    <div class="ad-faq rv">
+    <div class="ad-faq">
       <details><summary>Which classes can families currently apply for?</summary><div><p>The current admissions information lists Classes V&ndash;IX and XI, with CBSE and the IB Diploma Programme identified for Class XI.</p></div></details>
       <details><summary>Is CIRS a residential school?</summary><div><p>Yes. CIRS is a residential school in the Siruvani foothills near Coimbatore. Specific boarding arrangements for a candidate should be confirmed with Admissions.</p></div></details>
       <details><summary>How do we apply?</summary><div><p>Registration is completed through the external application portal. Every mandatory field must be completed and the &#8377;5,000 registration fee is paid online.</p><p><a href="https://easycollege.in/cirs/school/application/index.aspx">Open the application portal</a></p></div></details>
@@ -518,13 +505,13 @@
 
 <section class="ad-final" id="contact" data-ground="#EDE7D8">
   <div class="wrap ad-final__grid">
-    <div class="ad-heading rv"><p class="ad-kicker"><span class="sc">Your next step</span></p>
-      <h2 class="serif h2" data-split>Apply, or speak with Admissions first.</h2>
+    <div class="ad-heading"><p class="ad-kicker"><span class="sc">Your next step</span></p>
+      <h2 class="serif h2">Apply, or speak with Admissions first.</h2>
       <p class="lead">Use the external portal when you are ready. For entry requirements,
         examination centres, visits or information that still needs confirmation, contact the Admissions Office.</p></div>
-    <div class="ad-final__actions rv"><a class="btn btn--primary" href="https://easycollege.in/cirs/school/application/index.aspx">Apply on the application portal</a>
-      <div class="ad-contact-lines"><a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
-        <a href="https://wa.me/919360461572">WhatsApp +91 93604 61572</a><a href="tel:+914222613300">+91 422 261 3300</a>
+    <div class="ad-final__actions"><a class="btn btn--primary" href="https://easycollege.in/cirs/school/application/index.aspx">Apply on the application portal</a>
+      <a class="ad-final__enquire" href="mailto:admissions@cirschool.org">Ask Admissions a question<span>admissions@cirschool.org</span></a>
+      <div class="ad-contact-lines"><a href="https://wa.me/919360461572">WhatsApp +91 93604 61572</a><a href="tel:+914222613300">+91 422 261 3300</a>
         <a href="tel:+914222613303">+91 422 261 3303</a></div></div>
   </div>
 </section>
@@ -546,19 +533,6 @@
     <span>On this page</span>
   </button>
 </nav>
-<section class="uc">
-  <div class="wrap uc__inner">
-    <span class="uc__mark" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
-    </span>
-    <div>
-      <p class="uc__label">Under construction</p>
-      <p class="uc__text">This page is still being written. Photographs, names and figures marked
-        in brackets are placeholders awaiting the school, and more will be added here in the weeks
-        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
-    </div>
-  </div>
-</section>
 </main>
 <div class="footer-wrap">
 <footer class="footer">
@@ -608,8 +582,8 @@
         <p class="sc" id="fnav-academics">Academics</p>
         <ul aria-labelledby="fnav-academics">
           <li><a href="curriculum.html">Curriculum</a></li>
-          <li><a href="curriculum.html#cbse">CBSE</a></li>
-          <li><a href="curriculum.html#ib">IB Diploma</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
           <li><a href="alumni.html#pathways">University Counselling</a></li>
         </ul>
       </div>
@@ -637,11 +611,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=98-admissions-25" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=98-admissions-25" defer></script>
-<script src="assets/vendor/lenis.min.js?b=98-admissions-25" defer></script>
-<script src="assets/js/cirs.js?b=98-admissions-25" defer></script>
-<script src="assets/js/pages.js?b=98-admissions-25" defer></script>
-<script src="assets/js/admissions.js?b=98-admissions-25" defer></script>
+<script src="assets/vendor/gsap.min.js?b=100-admissions-26" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=100-admissions-26" defer></script>
+<script src="assets/vendor/lenis.min.js?b=100-admissions-26" defer></script>
+<script src="assets/js/cirs.js?b=100-admissions-26" defer></script>
+<script src="assets/js/pages.js?b=100-admissions-26" defer></script>
+<script src="assets/js/admissions.js?b=100-admissions-26" defer></script>
 </body>
 </html>

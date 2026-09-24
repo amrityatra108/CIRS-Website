@@ -3,6 +3,9 @@
   "buildCommand": "python3 tools/build-site.py && python3 tools/stage-deploy.py",
   "outputDirectory": "_site",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/admissions/", "destination": "/admissions", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

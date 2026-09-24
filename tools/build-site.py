@@ -40,7 +40,7 @@ import creativewriting
 import captures
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=98"
+CACHE_BUST = "b=100"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -150,7 +150,7 @@ PAGES = {
                  "the houses — and the dates already in the school calendar."),
         "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
         "hero_cta": [("Read the latest", "#latest", "primary"),
-                     ("What is coming up", "#diary", "ghost")],
+                     ("From the school diary", "#diary", "ghost")],
         "hero_extra": newsflash_html(),
         # The hero was already the page's own. Below it the results table and
         # the section heads were the shared components, unstyled, exactly as
@@ -193,18 +193,29 @@ PAGES = {
         "description": "How Chinmaya International Residential School came to be — Pujya Gurudev's "
                        "vision, the rupee-by-rupee purchase of the land, and the inauguration on "
                        "6 June 1996.",
-        "banner": ("Since 1996", "School <em>History.</em>",
-                   "A vision carried from the 1970s to a hundred acres in the Siruvani foothills, "
-                   "and the ninety-six students who began it."),
+        # The same opening as News: the campus under the Ghats, in motion. A
+        # history page earns the photograph more than the flat band did — the
+        # buildings are the thing the story below ends in.
+        "hero": ("Since 1996", "School <em>History.</em>",
+                 "A vision carried from the 1970s to a hundred acres in the Siruvani foothills, "
+                 "and the ninety-six students who began it."),
+        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
+        "hero_cta": [("Follow the timeline", "#timeline", "primary"),
+                     ("Watch the film", "#film", "ghost")],
     },
     "leadership": {
         "nav": "Leadership",
         "title": "Our Leadership",
         "description": "The Board of Directors of Chinmaya International Residential School, and "
                        "the staff and faculty.",
-        "banner": ("Governance", "Our <em>Leadership.</em>",
-                   "CIRS is an undertaking of the Central Chinmaya Mission Trust, Mumbai, and is "
-                   "managed by its Board of Directors."),
+        # The campus hero News and School History open on, so the Vision
+        # pages that are documents rather than compositions share one opening.
+        "hero": ("Governance", "Our <em>Leadership.</em>",
+                 "CIRS is an undertaking of the Central Chinmaya Mission Trust, Mumbai, and is "
+                 "managed by its Board of Directors."),
+        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
+        "hero_cta": [("Meet the Board", "#people", "primary"),
+                     ("Read their messages", "#messages", "ghost")],
     },
     "school-info": {
         "nav": "School Information",
@@ -237,14 +248,15 @@ PAGES = {
     "curriculum": {
         "nav": "Curriculum",
         "title": "Curriculum | CBSE & IB Diploma Programme",
-        "description": "Explore the CBSE and IB Diploma curricula at Chinmaya International "
-                       "Residential School, with specialist teaching, holistic learning and a "
-                       "residential environment.",
+        "description": "Follow the academic journey at Chinmaya International Residential School: "
+                       "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
+                       "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-2",
-        "banner": ("Curriculum", "Two Curricula, <em>One Campus.</em>",
-                   "CBSE from Grade V, and the International Baccalaureate Diploma in the final "
-                   "two years."),
+        "cache_suffix": "-curriculum-3",
+        "banner": ("Curriculum", "The shape of <em>learning at CIRS.</em>",
+                   "CBSE begins in Grade V. From Grade XI, students can choose the IB Diploma "
+                   "Programme. The Chinmaya Vision Programme connects academic study with "
+                   "daily school life."),
         "jump": True,
         "uc": False,
     },
@@ -263,6 +275,22 @@ PAGES = {
                    "IB Diploma Programme, <em>Grades XI and XII.</em>",
                    "A rigorous and holistic two years that develop independent thinking, "
                    "research, communication and a global perspective."),
+        "sheet": "ibdp",
+    },
+    # The CBSE pathway's own page, the IB Diploma's twin: served at
+    # /curriculum/cbse, reached from the Curriculum page, and not in MENU for
+    # the same reason. It wears the IB page's sheet, which is the curriculum
+    # family's furniture — the breadcrumb, the cards and the habits strip.
+    "curriculum/cbse": {
+        "nav": "CBSE",
+        "title": "CBSE Curriculum, Grades V to XII | CIRS",
+        "description": "The CBSE curriculum at Chinmaya International Residential School from "
+                       "Grade V to Grade XII — a broad foundation, the Board examinations in "
+                       "Grades X and XII, and three senior streams.",
+        "banner": ("Central Board of Secondary Education, New Delhi",
+                   "CBSE, <em>Grades V to XII.</em>",
+                   "A broad foundation, the Board examinations in Grades X and XII, and a choice "
+                   "of Engineering, Medicine or Management in the senior years."),
         "sheet": "ibdp",
     },
     "student-life": {
@@ -284,7 +312,7 @@ PAGES = {
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
         "sheet": "sports",
-        "cache_suffix": "-sports-1",
+        "cache_suffix": "-sports-2",
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
@@ -356,7 +384,7 @@ PAGES = {
         "description": "Board results, university placements and the record behind them at "
                        "Chinmaya International Residential School.",
         "sheet": "results",
-        "cache_suffix": "-results-12",
+        "cache_suffix": "-results-13",
         "uc": False,
         "banner": None,
     },
@@ -451,7 +479,11 @@ PAGES = {
         "uc": False,
     },
     "art-attack": {
-        "cache_suffix": "-art-attack-film-1",
+        # The page body is tools/pages/art-attack.html; its sheet is
+        # assets/css/culture.css, shared by the three Art, Culture & Music
+        # pages that open on a film.
+        "sheet": "culture",
+        "cache_suffix": "-art-attack-film-2",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Studio work and visual art from across Chinmaya International "
@@ -466,15 +498,13 @@ PAGES = {
             "title_markup": '<span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span>',
             "pending": True,
         },
-        "soon": ([("Painting and drawing", "Work from the studio and the classroom"),
-                  ("Print and craft", "The processes, and what comes out of them"),
-                  ("Exhibitions", "What was shown, and when")],
-                 "the work to be shown here and the students who made it, to be supplied by "
-                 "the art department",
-                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "festivals": {
-        "cache_suffix": "-festivals-film-1",
+        # The page body is tools/pages/festivals.html; its sheet is
+        # assets/css/culture.css, shared by the three Art, Culture & Music
+        # pages that open on a film.
+        "sheet": "culture",
+        "cache_suffix": "-festivals-film-2",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
         "description": "The festivals kept through the year at Chinmaya International "
@@ -489,15 +519,13 @@ PAGES = {
             "title_markup": '<span class="film__festival-prefix">CIRS </span><span class="film__festival-name">Festivals</span>',
             "pending": True,
         },
-        "soon": ([("Through the year", "Each festival as the school keeps it"),
-                  ("Photographs", "From the mornings and the evenings of each one"),
-                  ("Accounts", "Written by the students who took part")],
-                 "the list of festivals as the school keeps them, with dates and photographs, "
-                 "to be supplied by the school",
-                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
     "theatre": {
-        "cache_suffix": "-theatre-film-1",
+        # The page body is tools/pages/theatre.html; its sheet is
+        # assets/css/culture.css, shared by the three Art, Culture & Music
+        # pages that open on a film.
+        "sheet": "culture",
+        "cache_suffix": "-theatre-film-2",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
@@ -511,12 +539,6 @@ PAGES = {
             "title": "CIRS Theatre",
             "phases": (0.70, 0.78, 0.91),
         },
-        "soon": ([("Productions", "What was staged, and who was in it"),
-                  ("Rehearsal", "The weeks nobody sees"),
-                  ("The stage", "The auditorium, and what it can carry")],
-                 "the productions, their casts and their photographs, to be supplied by the "
-                 "drama department",
-                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
     },
 
     "admissions": {
@@ -530,7 +552,7 @@ PAGES = {
         # Admissions carries its own quiet, document-led layout beneath the
         # shared honeycomb hero. The sheet is scoped by body.admissions.
         "sheet": "admissions",
-        "cache_suffix": "-admissions-25",
+        "cache_suffix": "-admissions-26",
         "hero_split": False,
         "hero": ("Admissions", "Admissions <em>Open.</em>",
                  "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
@@ -545,6 +567,7 @@ PAGES = {
         "hero_placeholder": "Header animation &mdash; admissions<br>photograph or looping video<br>to be supplied",
         "jump": True,
         "popup": False,
+        "uc": False,
     },
     "parent-portal": {
         "nav": "Parent Portal",
@@ -560,6 +583,7 @@ PAGES = {
                    "fee payment and the parent login the school runs today, and the people to ask."),
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
+        "cache_suffix": "-portal-intro-1",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
@@ -918,11 +942,12 @@ def hero_html(page):
     eyebrow, heading, lead = page["hero"]
     poster, webm, mp4, vw, vh = page["hero_media"]
     cta = "\n".join(f'      <a class="btn btn--{variant} btn--lg" href="{href}">{label}</a>'
-                    for label, href, variant in page["hero_cta"])
+                    for label, href, variant in page.get("hero_cta", []))
+    cta = f'    <p class="pagehero__cta">\n{cta}\n    </p>\n' if cta else ""
     extra = page.get("hero_extra", "")
     split_attr = ' data-split' if page.get("hero_split", True) else ''
     return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
-  <div class="pagehero__media">
+  <div class="pagehero__media" style="background-image:url('assets/img/{poster}?{CACHE_BUST}')">
     <video class="pagehero__video" autoplay muted loop playsinline
            poster="assets/img/{poster}?{CACHE_BUST}" aria-hidden="true"
            width="{vw}" height="{vh}" fetchpriority="high">
@@ -935,10 +960,7 @@ def hero_html(page):
     <p class="marker"><span class="sc">{eyebrow}</span></p>
     <h1 class="serif"{split_attr}>{heading}</h1>
     <p class="lead">{lead}</p>
-    <p class="pagehero__cta">
-{cta}
-    </p>
-{extra}
+{cta}{extra}
   </div>
 </section>'''
 
@@ -1184,10 +1206,12 @@ def doclist_html():
     groups = []
     for category, items in docs.by_category():
         rows = "\n".join(
-            (f'        <li>{d["title"]} '
-             f'<a class="doclist__dl" href="{docs.asset_path(d)}" download>Download</a></li>')
+            (f'        <li><span class="doclist__title">{d["title"]}</span> '
+             f'<a class="doclist__dl" href="{docs.asset_path(d)}" download '
+             f'aria-label="Download {d["title"]} (PDF)">Download</a></li>')
             if docs.is_uploaded(d) else
-            f'        <li>{d["title"]} <span class="doclist__await">Awaiting upload</span></li>'
+            f'        <li><span class="doclist__title">{d["title"]}</span> '
+            f'<span class="doclist__await">Awaiting upload</span></li>'
             for d in items)
         groups.append(f'''      <div class="docgroup rv">
         <h3 class="serif h3">{category}</h3>
@@ -1353,6 +1377,27 @@ def build(slug, page):
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/captures-featured.css?{CACHE_BUST}">\n'
             f'<link rel="stylesheet" href="assets/css/captures-gallery.css?{CACHE_BUST}">\n</head>')
+    if slug == "parent-portal":
+        # This page has no shared curtain, including its no-script override.
+        curtain_note = head.index("<!-- The opening curtain")
+        curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
+        head = head[:curtain_note] + head[curtain_note_end:]
+        head = head.replace("</head>",
+            '<script>window.__portalOriginalRestoration=history.scrollRestoration;history.scrollRestoration="manual";</script>\n'
+            f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n'
+            '<noscript><style>html:has(body.parent-portal.portal-intro-active),'
+            'body.parent-portal.portal-intro-active{overflow:auto}'
+            'body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){visibility:visible}'
+            '.portal-intro__video{display:none}'
+            '#portalIntroEntry{display:none}'
+            'body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}'
+            '</style></noscript>\n</head>')
+    if slug == "admissions":
+        # Its video hero opens immediately, so there is no curtain to hide
+        # when scripting is unavailable.
+        curtain_note = head.index("<!-- The opening curtain")
+        curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
+        head = head[:curtain_note] + head[curtain_note_end:]
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" puts the class on <body>, and pages.css
@@ -1366,11 +1411,25 @@ def build(slug, page):
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "film" if page.get("opening") else None,
                            slug if page.get("opening") else None,
+                           "parent-portal portal-intro-active" if slug == "parent-portal" else None,
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
     chrome = read("tools/partials/chrome.html")
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
+    if slug == "parent-portal":
+        # The vault video is this page's opening; the shared opaque curtain
+        # would cover its first seconds and run its own scroll lock.
+        start = chrome.index("<!-- Opening sequence.")
+        end = chrome.index("<!-- Film lightbox", start)
+        chrome = chrome[:start] + chrome[end:]
+    if slug == "admissions":
+        # The video and poster already supply this page's opening. The shared
+        # curtain can hold its application action behind a blank screen for
+        # several seconds while fonts and the intro timeline settle.
+        intro_start = chrome.index("<!-- Opening sequence.")
+        intro_end = chrome.index("<!-- Film lightbox", intro_start)
+        chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
     if slug == "crossroads":
@@ -1386,6 +1445,8 @@ def build(slug, page):
                        if page.get("logintab") else ""))
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
+    if slug == "parent-portal":
+        parts.append(read("tools/partials/parent-portal-intro.html").rstrip("\n"))
     # A page may open on a composition of its own, above and instead of the
     # shared hero or banner. It is a partial rather than a page body because
     # what follows it here is still built by soon_html.
@@ -1475,6 +1536,8 @@ def build(slug, page):
     if slug == "captures":
         parts.append(f'<script src="assets/js/captures-featured.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
+    if slug == "parent-portal":
+        parts.append(f'<script src="assets/js/parent-portal-intro.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]

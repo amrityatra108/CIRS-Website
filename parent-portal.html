@@ -26,29 +26,19 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=98">
-<link rel="stylesheet" href="assets/css/cirs.css?b=98">
-<link rel="stylesheet" href="assets/css/pages.css?b=98">
-<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
-     removes once it has played. With scripting off nothing removes it, and
-     it covers the page on every page of this site. One rule, applied only
-     when there is no scripting, is the whole fix. Crossroads already does
-     this for its own curtain further down. -->
-<noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/connect.css?b=98">
-<link rel="stylesheet" href="assets/css/typography.css?b=98">
+<link rel="stylesheet" href="assets/css/fonts.css?b=100-portal-intro-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=100-portal-intro-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=100-portal-intro-1">
+
+<link rel="stylesheet" href="assets/css/connect.css?b=100-portal-intro-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=100-portal-intro-1">
+<script>window.__portalOriginalRestoration=history.scrollRestoration;history.scrollRestoration="manual";</script>
+<link rel="stylesheet" href="assets/css/parent-portal-intro.css?b=100-portal-intro-1">
+<noscript><style>html:has(body.parent-portal.portal-intro-active),body.parent-portal.portal-intro-active{overflow:auto}body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){visibility:visible}.portal-intro__video{display:none}#portalIntroEntry{display:none}body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}</style></noscript>
 </head>
 
-<body class="connect">
+<body class="connect parent-portal portal-intro-active">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -265,6 +255,17 @@
   </div>
 </div>
 <main id="main">
+<section class="portal-intro" id="portal-intro" aria-label="Parent Portal opening" data-ground="#FFFFFF">
+  <video class="portal-intro__video" id="portalIntroVideo" autoplay muted playsinline preload="auto"
+         disablepictureinpicture disableremoteplayback aria-hidden="true">
+    <source src="assets/video/parent-portal-vault.mp4" type="video/mp4">
+  </video>
+  <div class="portal-intro__content">
+    <p class="portal-intro__title">PARENT PORTAL</p>
+    <button class="portal-intro__entry" id="portalIntroEntry" type="button">Click to enter</button>
+    <noscript><a class="portal-intro__entry" href="#portal">Click to enter</a></noscript>
+  </div>
+</section>
 <section class="pagehead on-purple" id="top" data-ground="#1E1626">
   <div class="wrap pagehead__inner">
     <p class="marker"><span class="sc">Parents</span></p>
@@ -378,8 +379,8 @@
         <p class="sc" id="fnav-academics">Academics</p>
         <ul aria-labelledby="fnav-academics">
           <li><a href="curriculum.html">Curriculum</a></li>
-          <li><a href="curriculum.html#cbse">CBSE</a></li>
-          <li><a href="curriculum.html#ib">IB Diploma</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
           <li><a href="alumni.html#pathways">University Counselling</a></li>
         </ul>
       </div>
@@ -407,10 +408,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=98" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=98" defer></script>
-<script src="assets/vendor/lenis.min.js?b=98" defer></script>
-<script src="assets/js/cirs.js?b=98" defer></script>
-<script src="assets/js/pages.js?b=98" defer></script>
+<script src="assets/vendor/gsap.min.js?b=100-portal-intro-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=100-portal-intro-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=100-portal-intro-1" defer></script>
+<script src="assets/js/cirs.js?b=100-portal-intro-1" defer></script>
+<script src="assets/js/pages.js?b=100-portal-intro-1" defer></script>
+<script src="assets/js/parent-portal-intro.js?b=100-portal-intro-1" defer></script>
 </body>
 </html>

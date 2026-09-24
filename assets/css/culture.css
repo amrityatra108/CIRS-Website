@@ -1,0 +1,186 @@
+/* ============================================================
+   Art, Culture & Music — the pages after the film
+   ------------------------------------------------------------
+   CIRS Art Attack, CIRS Festivals and CIRS Theatre each open on a
+   film the reader scrubs (filmintro.css), and then become ordinary
+   documents. This sheet is that document half, shared by all
+   three and scoped to body.culture.
+
+   It adds no new identity. Every colour, face and step comes from
+   the tokens in cirs.css; the components are the site's own
+   rhythm — marker, headline with a gold italic clause, lead —
+   arranged five ways:
+
+     .cx-intro     words beside a photograph
+     .cx-rows      alternating chapters, one per programme or festival
+     .cx-band      a dark band of four short facts
+     .cx-gallery   a mosaic of captioned photographs
+     .cx-onward    the other pages in the group
+   ============================================================ */
+
+/* ------------------------------------------------------ the introduction */
+
+body.culture .cx-intro__grid{
+  display:grid;
+  gap:clamp(var(--space-5),4vw,var(--space-8));
+  align-items:center;
+  margin-top:clamp(var(--space-6),4vw,var(--space-7));
+}
+@media (min-width:900px){
+  body.culture .cx-intro__grid{ grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); }
+}
+body.culture .cx-intro__text .copy + .copy{ margin-top:1em; }
+body.culture .cx-intro__fig{ margin:0; }
+body.culture .cx-intro__fig img{
+  display:block; width:100%; aspect-ratio:4/3; object-fit:cover;
+  border-bottom:3px solid var(--gold);
+}
+body.culture .cx-intro__fig figcaption,
+body.culture .cx-gallery figcaption{
+  margin-top:10px;
+  font-family:var(--font-primary); font-style:italic;
+  font-size:var(--fs-sm); color:var(--ink-mute);
+}
+
+/* ------------------------------------------------------------ the rows */
+
+body.culture .cx-rows{
+  display:grid;
+  gap:clamp(var(--space-7),7vw,var(--space-9));
+  margin-top:clamp(var(--space-6),4vw,var(--space-8));
+}
+body.culture .cx-row{
+  display:grid;
+  gap:clamp(var(--space-5),3.6vw,var(--space-7));
+  align-items:center;
+}
+@media (min-width:900px){
+  body.culture .cx-row{ grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); }
+  body.culture .cx-row--reverse .cx-row__media{ order:2; }
+}
+body.culture .cx-row__media{
+  margin:0; position:relative; overflow:hidden;
+  aspect-ratio:4/3; background:var(--purple-deep);
+}
+body.culture .cx-row__media img{ width:100%; height:100%; object-fit:cover; display:block; }
+body.culture .cx-row__kicker{
+  display:flex; align-items:baseline; gap:12px;
+  margin:0 0 var(--space-3);
+  font-family:var(--font-primary); font-style:italic;
+  font-size:1.08rem; color:var(--maroon);
+}
+body.culture .cx-row__n{
+  font-style:normal; font-size:.8rem; font-weight:700; letter-spacing:.16em;
+  color:var(--ink-mute); font-variant-numeric:lining-nums tabular-nums;
+}
+body.culture .cx-row__title{
+  font-size:var(--fs-h3); font-size:clamp(1.6rem,2.6vw,2.3rem);
+  line-height:1.1; margin:0 0 var(--space-4); color:var(--ink);
+}
+body.culture .cx-row__text .copy + .copy{ margin-top:.9em; }
+body.culture .cx-row__facts{
+  display:flex; flex-wrap:wrap; gap:var(--space-3) var(--space-6);
+  margin:var(--space-5) 0 0; padding-top:var(--space-4);
+  border-top:1px solid var(--rule);
+}
+body.culture .cx-row__facts dt{
+  font-family:var(--font-primary); font-size:var(--fs-xs);
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mute);
+}
+body.culture .cx-row__facts dd{ margin:2px 0 0; color:var(--purple); font-weight:600; }
+
+/* ------------------------------------------------------------ the band */
+
+body.culture .cx-band{
+  background:
+    radial-gradient(70% 120% at 90% 0%, rgba(255,195,8,.10), transparent 60%),
+    var(--purple-deep);
+}
+body.culture .cx-band__head{ max-width:760px; }
+body.culture .cx-band h2{ color:#fff; }
+body.culture .cx-band h2 em{ color:var(--gold-lit); }
+body.culture .cx-band .lead em{ color:var(--on-purple-mute); }
+body.culture .cx-band__stats{
+  display:grid; gap:1px;
+  margin:clamp(var(--space-6),4vw,var(--space-8)) 0 0;
+  background:var(--rule-purple);
+  border:1px solid var(--rule-purple);
+}
+@media (min-width:640px){ body.culture .cx-band__stats{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (min-width:1040px){ body.culture .cx-band__stats{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
+body.culture .cx-band__stats > div{
+  padding:clamp(var(--space-5),2.6vw,var(--space-6));
+  background:var(--purple-deep);
+}
+body.culture .cx-band__stats dt{
+  font-family:var(--font-primary);
+  font-size:clamp(1.5rem,2.4vw,2.1rem); line-height:1.1;
+  color:var(--gold-lit);
+}
+body.culture .cx-band__stats dd{
+  margin:8px 0 0; color:var(--on-purple-soft); font-size:var(--fs-sm); line-height:1.5;
+}
+
+/* ---------------------------------------------------------- the gallery */
+
+body.culture .cx-gallery{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-auto-flow:dense;
+  gap:clamp(12px,1.6vw,22px);
+  margin-top:clamp(var(--space-6),4vw,var(--space-7));
+}
+@media (min-width:900px){ body.culture .cx-gallery{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+body.culture .cx-gallery__cell{ margin:0; min-width:0; }
+body.culture .cx-gallery__cell img{
+  display:block; width:100%; aspect-ratio:4/3; object-fit:cover;
+  background:var(--paper-3);
+  transition:transform .8s var(--e), filter .5s var(--e);
+}
+body.culture .cx-gallery__cell{ overflow:hidden; }
+body.culture .cx-gallery__cell:hover img{ transform:scale(1.03); }
+@media (min-width:900px){
+  body.culture .cx-gallery__cell--wide{ grid-column:span 2; }
+  body.culture .cx-gallery__cell--wide img{ aspect-ratio:8/3.05; }
+}
+body.culture .cx-note{ margin-top:var(--space-5); }
+
+/* Student paintings are shown whole, never cropped: each sits on a pale
+   mount at its own proportions, as it would on a wall. */
+body.culture .cx-gallery--works .cx-gallery__cell img{
+  object-fit:contain; padding:clamp(12px,1.6vw,22px);
+  background:var(--paper-2); border:1px solid var(--rule);
+}
+body.culture .cx-gallery--works .cx-gallery__cell:hover img{ transform:none; }
+
+/* ----------------------------------------------------------- the onward */
+
+body.culture .cx-onward__grid{
+  display:grid; gap:1px;
+  margin-top:clamp(var(--space-5),3vw,var(--space-6));
+  background:var(--rule); border:1px solid var(--rule);
+}
+@media (min-width:760px){ body.culture .cx-onward__grid{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+body.culture .cx-onward__link{
+  display:flex; flex-direction:column; gap:6px;
+  padding:clamp(var(--space-5),2.6vw,var(--space-6));
+  background:var(--paper); color:inherit; text-decoration:none;
+  transition:background .3s var(--e);
+}
+body.culture .cx-onward__link:hover{ background:var(--paper-2); }
+body.culture .cx-onward__name{
+  font-size:1.35rem; color:var(--ink);
+  display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+}
+body.culture .cx-onward__name::after{
+  content:"\2192"; color:var(--gold); font-size:1.1rem;
+  transition:transform .3s var(--e);
+}
+body.culture .cx-onward__link:hover .cx-onward__name::after{ transform:translateX(4px); }
+body.culture .cx-onward__desc{ font-size:var(--fs-sm); color:var(--ink-mute); }
+
+@media (prefers-reduced-motion:reduce){
+  body.culture .cx-gallery__cell img,
+  body.culture .cx-onward__name::after{ transition:none; }
+  body.culture .cx-gallery__cell:hover img{ transform:none; }
+}

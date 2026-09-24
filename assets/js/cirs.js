@@ -71,10 +71,19 @@
     lenis.scrollTo(event.detail.top, {
       duration:event.detail.duration,
       easing:event.detail.easing,
+      offset:event.detail.offset || 0,
       force:true,
       lock:true,
       onComplete:event.detail.onComplete
     });
+  });
+
+  // A page-specific opening can hold the existing Lenis controller until its
+  // entry control is used, without replacing the site's scroll engine.
+  window.addEventListener("cirs-portal-scroll-lock", function (event) {
+    if (!lenis || !event.detail) return;
+    if (event.detail.locked) lenis.stop();
+    else if (!document.body.classList.contains("menu-open")) lenis.start();
   });
 
   /* ----------------------------------------------------------
@@ -157,7 +166,8 @@
     // The opening curtain holds the page at the top with the scroll locked,
     // so moving now would only be undone when it lifts. finish() calls this
     // again on the way out, which is where the move actually happens.
-    if (document.body.classList.contains("is-locked")) return;
+    if (document.body.classList.contains("is-locked") ||
+        document.body.classList.contains("portal-intro-active")) return;
     if (hashArmed) return;
     var t;
     // A hash is not necessarily a valid selector — #2026 is legal in a URL.
@@ -683,7 +693,11 @@
       cards.forEach(function (c) { deck.appendChild(c); });
     }
 
-    function staticMode() { sec.classList.add("is-static"); }
+    function staticMode() {
+      sec.classList.add("is-static");
+      // A row that fits needs no swipe hint, rail or count either.
+      sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
+    }
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -768,7 +782,11 @@
     var fill = $(".dayh__fill", sec), tick = $(".dayh__tick", sec);
     if (!track) return;
 
-    function staticMode() { sec.classList.add("is-static"); }
+    function staticMode() {
+      sec.classList.add("is-static");
+      // A row that fits needs no swipe hint, rail or count either.
+      sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
+    }
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -897,7 +915,11 @@
     var fill = $(".newstrack__fill"), count = $("#newsTrackCount");
     if (!sec || !track) return;
 
-    function staticMode() { sec.classList.add("is-static"); }
+    function staticMode() {
+      sec.classList.add("is-static");
+      // A row that fits needs no swipe hint, rail or count either.
+      sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
+    }
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -906,6 +928,14 @@
     mm.add("(min-width: 900px)", function () {
       sec.classList.remove("is-static");
       var cards = $$(".newsitem", track);
+
+      // Where every story already fits across the window there is nothing to
+      // scrub: pinning the section for a reel that barely moves read as the
+      // page sticking. Lay the stories out as a row and drop the rail.
+      if (track.scrollWidth <= track.clientWidth + 2) {
+        staticMode();
+        return function () { sec.classList.remove("is-fit"); };
+      }
 
       var st = ScrollTrigger.create({
         trigger: sec,

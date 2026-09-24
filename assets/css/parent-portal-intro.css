@@ -1,0 +1,82 @@
+/* Parent Portal's opening only. The video remains in place at its final frame. */
+body.parent-portal.portal-intro-active{overflow:hidden}
+html:has(body.parent-portal.portal-intro-active){overflow:hidden}
+body.parent-portal #top{scroll-margin-top:0}
+body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.portal-intro{
+  position:relative;
+  width:100vw;
+  height:100vh;
+  height:100dvh;
+  overflow:hidden;
+  background:#fff;
+  isolation:isolate;
+}
+.portal-intro__video{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100vw;
+  height:100vh;
+  height:100dvh;
+  object-fit:cover;
+}
+.portal-intro__video::-webkit-media-controls,
+.portal-intro__video::-webkit-media-controls-panel{display:none!important}
+.portal-intro.is-fallback .portal-intro__video{visibility:hidden}
+.portal-intro__content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(14px,2.6vh,24px);
+  padding:24px;
+  text-align:center;
+}
+.portal-intro__title{
+  max-width:100%;
+  color:#98712B;
+  font-family:var(--font-primary);
+  font-size:clamp(2.7rem,7vw,7.2rem);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-.052em;
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity .85s ease,transform .85s var(--e2);
+}
+.portal-intro__entry{
+  display:inline-block;
+  padding:4px 2px 6px;
+  border-bottom:1px solid transparent;
+  color:#4E4350;
+  font-family:var(--font-primary);
+  font-size:clamp(1rem,1.4vw,1.2rem);
+  font-weight:500;
+  line-height:1.2;
+  letter-spacing:.015em;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(8px);
+  transition:opacity .6s ease .3s,transform .6s var(--e2) .3s,border-color .2s ease;
+}
+.portal-intro.is-revealed .portal-intro__title,
+.portal-intro.is-revealed .portal-intro__entry{
+  opacity:1;
+  transform:none;
+}
+.portal-intro.is-revealed .portal-intro__entry{visibility:visible}
+.portal-intro__entry:hover,
+.portal-intro__entry:focus-visible{border-bottom-color:currentColor}
+.portal-intro__entry:focus-visible{outline-color:#98712B;outline-offset:6px}
+
+@media (prefers-reduced-motion:reduce){
+  .portal-intro:not(.is-revealed) .portal-intro__video{visibility:hidden}
+  .portal-intro__title,.portal-intro__entry{transition:none;transform:none}
+}

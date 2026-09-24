@@ -379,3 +379,142 @@ body.connect .ucpage__reachlabel{
   padding-bottom:var(--space-3);
   border-bottom:1px solid rgba(255,195,8,.28);
 }
+
+/* ------------------------------------------------------------
+   9. Second pass — what still read wrong
+   ------------------------------------------------------------
+   Measured on the built pages rather than guessed at.
+   ------------------------------------------------------------ */
+
+/* The committee list had the names as small grey tracked labels and
+   the roles in bold, so the eye found "Director" four times and had to
+   hunt for who. The person is the entry; the role describes them. */
+body.connect .section:not(.on-purple) .ci-rail--people dt{
+  font-size:1rem; letter-spacing:0; color:var(--ink); font-weight:500;
+}
+body.connect .section:not(.on-purple) .ci-rail--people dd{
+  color:var(--ink-mute); font-weight:400; font-size:.92rem;
+}
+/* A long value — the Resident Director's address — set flush right read
+   as a ragged left edge. Values here start where their column starts. */
+body.connect .section:not(.on-purple) .ci-rail--contact > div{
+  grid-template-columns:110px 1fr; display:grid; align-items:baseline;
+}
+body.connect .section:not(.on-purple) .ci-rail--contact dd{ text-align:left; }
+body.connect .ci-rail--contact a{
+  color:var(--c-accent); text-decoration:underline; text-underline-offset:3px;
+  text-decoration-color:rgba(117,99,0,.4);
+}
+
+/* Links inside running copy looked like the copy around them. */
+body.connect .section:not(.on-purple) .copy a,
+body.connect .section:not(.on-purple) .sec-head .lead a{
+  color:var(--purple); text-decoration:underline; text-underline-offset:3px;
+  text-decoration-color:rgba(57,42,72,.35);
+  transition:text-decoration-color .2s var(--e);
+}
+body.connect .section:not(.on-purple) .copy a:hover,
+body.connect .section:not(.on-purple) .sec-head .lead a:hover{ text-decoration-color:var(--purple); }
+
+/* The document list. Each "Download" wrapped to its own line under a
+   long title and sat directly under a short one, so the column had no
+   edge to scan. A document is a row now: its title, and the download
+   held to the right on the same line, with a hairline between rows. */
+body.connect .docgrid{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));
+  gap:var(--space-7) clamp(28px,3.4vw,56px);
+}
+body.connect .docgroup h3{
+  padding-bottom:var(--space-3); margin-bottom:0;
+  border-bottom:2px solid var(--c-key);
+}
+body.connect .doclist{ gap:0; }
+body.connect .doclist li{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-4);
+  padding:12px 0; border-bottom:1px solid var(--c-rule-soft);
+  color:var(--ink); font-size:.95rem;
+}
+body.connect .doclist li::before{ display:none; }
+body.connect .doclist__title{ min-width:0; }
+body.connect .doclist__dl{
+  flex:none; margin:0;
+  display:inline-flex; align-items:center; gap:6px;
+  padding:3px 10px; border:1px solid var(--c-rule); border-radius:99px;
+  font-size:.74rem; letter-spacing:.05em; text-decoration:none;
+  color:var(--purple); background:var(--paper);
+  transition:background .2s var(--e), color .2s var(--e), border-color .2s var(--e);
+}
+body.connect .doclist__dl::before{
+  content:""; width:8px; height:8px; flex:none;
+  border-right:1.4px solid currentColor; border-bottom:1.4px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);
+}
+body.connect .doclist__dl:hover,
+body.connect .doclist__dl:focus-visible{
+  background:var(--purple); border-color:var(--purple); color:var(--on-purple);
+}
+
+/* The handover to the portal: the notice sat under the photograph with a
+   gap between, two objects where there is one idea. It now rides up over
+   the photograph's foot, so the picture introduces the notice. */
+@media (min-width:900px){
+  body.connect #portal .ciband{ margin-bottom:0; }
+  body.connect #portal .notice{
+    position:relative; z-index:2;
+    margin:calc(-1 * clamp(56px,6vw,96px)) clamp(24px,4vw,64px) 0;
+    box-shadow:0 24px 60px rgba(14,11,18,.22);
+  }
+}
+
+/* Photograph placeholders on paper. They were near-black slabs, the
+   heaviest thing on a pale page and the least informative. They are
+   now the archive's pale hatched frame — the same one the School
+   History timeline uses — so a gap reads as a gap, not as content. */
+body.connect .section:not(.on-purple) .feature__media.is-placeholder,
+body.connect .newstrack .feature__media.is-placeholder{
+  background:
+    repeating-linear-gradient(135deg, transparent 0 7px, rgba(57,42,72,.045) 7px 14px),
+    var(--paper-2);
+  border:1px solid var(--c-rule);
+}
+body.connect .section:not(.on-purple) .feature__media.is-placeholder .feature__ph,
+body.connect .newstrack .feature__media.is-placeholder .feature__ph{
+  color:var(--ink-mute); border-color:var(--c-rule);
+}
+body.connect #latest .feature__media.is-placeholder{ aspect-ratio:4/3; }
+
+/* The lead story's headline is a second h2 beside the section's own; at
+   the section size it broke "Twenty-four" across lines. One step down. */
+body.connect .newslead__title{
+  font-size:clamp(1.9rem,3vw,2.7rem); line-height:1.08; text-wrap:balance;
+  margin-bottom:var(--space-4);
+}
+
+/* "1 of 3" was the site's #FFC308 on paper, 1.5:1. */
+body.connect .newstrack__count b{ color:var(--c-accent); font-weight:600; }
+
+/* The highlighted stories. The reel started at the window's gutter while
+   every heading above it started at the column's, so the cards hung
+   sixty pixels left of the page. And on a wide screen the three stories
+   fit side by side anyway — so there they are sized to the column and
+   stand as a row, and newsTrack() in cirs.js leaves them unpinned
+   (.is-fit) rather than pinning a reel that has nowhere to go. */
+body.connect .newstrack__track{
+  padding-inline:max(var(--gut), calc((100% - var(--maxw)) / 2 + var(--gut)));
+}
+@media (min-width:1100px){
+  body.connect .newstrack__track .newsitem{
+    /* A flex item's percentage is of the track's content box, which the
+       padding above has already narrowed to the column. */
+    width:calc((100% - 2 * clamp(18px,2.4vw,32px)) / 3);
+  }
+}
+body.connect .newstrack.is-fit .newstrack__hint,
+body.connect .newstrack.is-fit .newstrack__rail,
+body.connect .newstrack.is-fit .newstrack__count{ display:none; }
+body.connect .newstrack.is-fit .newstrack__viewport{ overflow:visible; padding-bottom:clamp(56px,7vw,96px); }
+/* In the swipe fallback the snap pulled the first card flush to the
+   window's edge, past the padding meant to hold it in the column. */
+body.connect .newstrack.is-static .newstrack__viewport{
+  scroll-padding-inline:max(var(--gut), calc((100% - var(--maxw)) / 2 + var(--gut)));
+}
