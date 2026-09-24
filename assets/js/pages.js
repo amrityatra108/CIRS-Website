@@ -243,3 +243,55 @@
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 })();
+
+/* ------------------------------------------------------------
+   Leadership — the messages reader
+   ------------------------------------------------------------
+   The markup is every message in order, with the tab list hidden,
+   so with this file blocked every message is still read. Here it
+   becomes a tab list and one message at a time: a column of names
+   from 900px, a strip of names that scrolls sideways below it.
+   Arrow keys, Home and End move between tabs, as the ARIA tabs
+   pattern expects.
+   ------------------------------------------------------------ */
+(function () {
+  "use strict";
+  var reader = document.querySelector("[data-msgs]");
+  if (!reader) return;
+  var list = reader.querySelector('[role="tablist"]');
+  var tabs = Array.prototype.slice.call(reader.querySelectorAll('[role="tab"]'));
+  var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+  if (!list || !tabs.length) return;
+
+  function select(i, focus) {
+    tabs.forEach(function (t, j) {
+      var on = j === i;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      if (panels[j]) panels[j].hidden = !on;
+    });
+    if (focus) tabs[i].focus();
+    // On the narrow strip, keep the chosen name in view.
+    if (list.scrollWidth > list.clientWidth) {
+      list.scrollTo({ left: tabs[i].offsetLeft - 20, behavior: "smooth" });
+    }
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { select(i, false); });
+    t.addEventListener("keydown", function (e) {
+      var n = tabs.length, to = null;
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") to = (i + 1) % n;
+      else if (e.key === "ArrowUp" || e.key === "ArrowLeft") to = (i - 1 + n) % n;
+      else if (e.key === "Home") to = 0;
+      else if (e.key === "End") to = n - 1;
+      if (to === null) return;
+      e.preventDefault();
+      select(to, true);
+    });
+  });
+
+  reader.classList.add("is-tabbed");
+  list.hidden = false;
+  select(0, false);
+})();

@@ -690,7 +690,11 @@
       cards.forEach(function (c) { deck.appendChild(c); });
     }
 
-    function staticMode() { sec.classList.add("is-static"); }
+    function staticMode() {
+      sec.classList.add("is-static");
+      // A row that fits needs no swipe hint, rail or count either.
+      sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
+    }
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -775,7 +779,11 @@
     var fill = $(".dayh__fill", sec), tick = $(".dayh__tick", sec);
     if (!track) return;
 
-    function staticMode() { sec.classList.add("is-static"); }
+    function staticMode() {
+      sec.classList.add("is-static");
+      // A row that fits needs no swipe hint, rail or count either.
+      sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
+    }
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -904,7 +912,11 @@
     var fill = $(".newstrack__fill"), count = $("#newsTrackCount");
     if (!sec || !track) return;
 
-    function staticMode() { sec.classList.add("is-static"); }
+    function staticMode() {
+      sec.classList.add("is-static");
+      // A row that fits needs no swipe hint, rail or count either.
+      sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
+    }
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -913,6 +925,14 @@
     mm.add("(min-width: 900px)", function () {
       sec.classList.remove("is-static");
       var cards = $$(".newsitem", track);
+
+      // Where every story already fits across the window there is nothing to
+      // scrub: pinning the section for a reel that barely moves read as the
+      // page sticking. Lay the stories out as a row and drop the rail.
+      if (track.scrollWidth <= track.clientWidth + 2) {
+        staticMode();
+        return function () { sec.classList.remove("is-fit"); };
+      }
 
       var st = ScrollTrigger.create({
         trigger: sec,

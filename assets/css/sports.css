@@ -593,6 +593,52 @@ body.sports {
   background: rgba(0, 0, 0, 0.7);
 }
 
+/* ------------------------------------------------------------
+   The stack. On a desktop-sized window each discipline is the
+   whole window, and pins as it arrives; the next one slides up
+   over it like a photograph laid on a photograph. The one being
+   covered sinks back a little and darkens (--cover, driven from
+   0 to 1 by sports-journey.js), so the stack has depth. Sticky
+   positioning does the pinning, so with no script the cards still
+   stack; only the sinking needs the script.
+
+   Below 900px wide or 640px tall a card can be taller than the
+   window, and a pinned card taller than the window would hide
+   its own foot under the next one — so there they stay a plain
+   column, as they were.
+   ------------------------------------------------------------ */
+@media (min-width: 900px) and (min-height: 640px) {
+  .sports-gallery { padding-bottom: 0; }
+  .sports-gallery__track { gap: 0; }
+  .sport-chapter {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    min-height: 0;
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.55);
+    transform: scale(calc(1 - var(--cover, 0) * 0.07));
+    transform-origin: 50% 0;
+    will-change: transform;
+  }
+  .sport-chapter::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: #0d0a13;
+    opacity: calc(var(--cover, 0) * 0.7);
+    pointer-events: none;
+  }
+  .sport-chapter:first-child { box-shadow: none; }
+  .sport-chapter__content { padding-block: var(--space-8) clamp(48px, 8vh, 96px); }
+  /* The counter reads as a page count once the cards stack. */
+  .sport-chapter__num::after { content: " / 06"; opacity: .55; }
+  .sports-extended { margin-top: 0; padding-top: var(--space-10); padding-bottom: var(--space-10); position: relative; z-index: 1; background: #0d0a13; }
+}
+
 /* Extended sports grid */
 .sports-extended {
   margin-top: var(--space-10);
@@ -1288,10 +1334,33 @@ body.sports {
 }
 
 /* ============================================================
+   GOLD, NOT RED
+   ------------------------------------------------------------
+   Every accent that was maroon on this page is gold. On the dark
+   grounds — everything from the arena down — that is the site's
+   own --gold-lit (12:1 and up). On the two pale grounds, the
+   facilities list and the under-construction note, gold at full
+   strength would vanish (1.5:1), so they take a deep gold that
+   still reads as gold at 5:1 on paper. The house colour tags are
+   left alone: "Red" there names Vasistha's colour, not an accent.
+   ============================================================ */
+body.sports { --sports-gold-ink: #8A6400; }
+body.sports :is(.shift-sec, .sports-gallery, .house-arena, .laurel-archive,
+  .athlete-stories, .routine-sec, .laurel-ending, .sports-practical) .sc{ color: var(--gold-lit); }
+body.sports :is(.shift-sec, .sports-gallery, .house-arena, .laurel-archive,
+  .athlete-stories, .routine-sec, .laurel-ending, .sports-practical) .marker::before{ border-color: var(--gold-lit); }
+body.sports .sports-ground__intro .sports-eyebrow,
+body.sports .sports-facilities__n,
+body.sports .uc__label{ color: var(--sports-gold-ink); }
+body.sports .uc .marker::before,
+body.sports .sports-ground .marker::before{ border-color: var(--sports-gold-ink); }
+
+/* ============================================================
    REDUCED MOTION OVERRIDES
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .arena-hero__img,
+  .sport-chapter,
   .sport-chapter__media img,
   .house-band__media img,
   .sports-cursor,
