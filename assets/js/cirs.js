@@ -27,8 +27,9 @@
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hasGSAP = typeof window.gsap !== "undefined";
   var hasST = hasGSAP && typeof window.ScrollTrigger !== "undefined";
-  var animate = hasGSAP && !reduced;
   var isAlumni = document.body.classList.contains("alumni");
+  // Alumni keeps its original scenes in document flow without scroll pinning.
+  var animate = hasGSAP && !reduced && !isAlumni;
 
   if (hasST) gsap.registerPlugin(ScrollTrigger);
 
