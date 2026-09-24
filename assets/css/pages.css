@@ -736,11 +736,16 @@ body.menu-open .header .wrap{
 .jump__panel a[aria-current="true"]{ color:var(--gold); font-weight:600; }
 
 /* Out of the way of the back-to-top button on a phone, and never
-   wider than the screen. */
+   wider than the screen. The label gives way to the icon alone, in a
+   circle the size of the back-to-top button and in line above it, so
+   it is a full-sized touch target rather than a 36px sliver. */
 @media (max-width:620px){
-  .jump{ top:auto; bottom:calc(clamp(16px,2.4vw,32px) + 60px); transform:none; }
+  .jump{
+    top:auto; bottom:calc(clamp(16px,2.4vw,32px) + 60px); transform:none;
+    right:clamp(16px,2.4vw,32px);
+  }
   .jump__toggle span{ display:none; }
-  .jump__toggle{ padding:11px; }
+  .jump__toggle{ width:48px; height:48px; padding:0; justify-content:center; }
 }
 @media (prefers-reduced-motion:reduce){
   .jump__panel{ transition-duration:.001ms; }
