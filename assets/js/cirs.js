@@ -28,8 +28,7 @@
   var hasGSAP = typeof window.gsap !== "undefined";
   var hasST = hasGSAP && typeof window.ScrollTrigger !== "undefined";
   var isAlumni = document.body.classList.contains("alumni");
-  // Alumni keeps its original scenes in document flow without scroll pinning.
-  var animate = hasGSAP && !reduced && !isAlumni;
+  var animate = hasGSAP && !reduced;
 
   if (hasST) gsap.registerPlugin(ScrollTrigger);
 
@@ -250,9 +249,6 @@
   var hashArmed = false;
 
   function openHash() {
-    // Its images reserve their dimensions, so the browser's native anchor
-    // position is stable and should not be realigned after the visitor moves.
-    if (isAlumni) return;
     var id = window.location.hash;
     if (!id || id.length < 2) return;
     // The opening curtain holds the page at the top with the scroll locked,
