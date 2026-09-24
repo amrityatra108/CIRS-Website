@@ -401,18 +401,7 @@ body.art-attack{
 body.art-attack .film__stage{
   background:#0B080D;
 }
-/* ---- CIRS Festivals ------------------------------------------------------
-   The film pulls back from a diya into a full floral rangoli. Keep its centre
-   visible, including on a portrait phone, and set the thin gold title above
-   the lamp. The stage grades into the same burnt umber as the seam below. */
-body.festivals{
-  --film-ground:#1B0C08;
-  --film-crop:50% 50%;
-  --film-crop-narrow:50% 50%;
-}
-body.festivals .film__stage{ background:#1B0C08; }
-body.art-attack .film__still,
-body.festivals .film__still{
+body.art-attack .film__still{
   position:absolute;
   inset:0;
   width:100%;
@@ -486,70 +475,6 @@ body.art-attack .film[data-film-still] .film__video{ visibility:hidden; }
   body.art-attack .film__art-name{ font-size:clamp(42px, 11.5vw, 52px); }
 }
 
-body.festivals .film__stage::after{
-  content:"";
-  position:absolute;
-  z-index:1;
-  inset:0;
-  background:linear-gradient(to bottom,
-    rgba(21,8,5,.78) 0%, rgba(21,8,5,.68) 24%,
-    rgba(21,8,5,.12) 40%, transparent 49%, transparent 71%,
-    rgba(41,18,9,.38) 86%, #291209 100%);
-  pointer-events:none;
-}
-body.festivals .film__title{
-  z-index:2;
-  top:clamp(118px, 15.5svh, 180px);
-  bottom:auto;
-  padding:0 16px;
-  color:#FFE5AC;
-  text-transform:none;
-  transform:translateY(calc((1 - var(--film-reveal)) * 12px));
-  filter:none;
-  text-shadow:0 2px 10px rgba(22,8,4,.65);
-  will-change:opacity, transform;
-}
-body.festivals .film__festival-prefix{
-  display:block;
-  margin-bottom:clamp(11px, 1.7svh, 18px);
-  padding-left:.4em;
-  font-family:"Jost", var(--font-primary), sans-serif;
-  font-size:clamp(11px, 1vw, 14px);
-  font-weight:400;
-  letter-spacing:.4em;
-  line-height:1;
-  text-transform:uppercase;
-}
-body.festivals .film__festival-name{
-  display:block;
-  padding-left:.12em;
-  font-family:"Jost", var(--font-primary), sans-serif;
-  font-size:clamp(54px, 9vw, 94px);
-  font-weight:100;
-  letter-spacing:.12em;
-  line-height:1;
-  text-transform:uppercase;
-  white-space:nowrap;
-}
-body.festivals .film__seam{
-  height:clamp(130px, 18svh, 220px);
-  background:linear-gradient(to bottom,
-    #291209 0%, #432016 25%, #9A705A 65%, var(--paper) 100%);
-}
-body.festivals .film[data-film-still] .film__video{ visibility:hidden; }
-@media (max-aspect-ratio:6/5){
-  body.festivals .film__still{ object-position:var(--film-crop-narrow); }
-}
-@media (max-width:720px){
-  body.festivals .film__title{ top:clamp(116px, 15.5svh, 155px); }
-}
-@media (max-width:360px){
-  body.festivals .film__festival-name{
-    font-size:48px;
-    letter-spacing:.1em;
-  }
-}
-
 @media (prefers-reduced-motion:reduce){
   .film{ --film-run:100svh; }
   .film__title{
@@ -568,8 +493,6 @@ body.festivals .film[data-film-still] .film__video{ visibility:hidden; }
     --film-seam-fold:#211C1B;
     --film-seam-rise:#6B6560;
   }
-  body.festivals .film__video{ visibility:hidden; }
-  body.festivals .film[data-film-pending] .film__title{ opacity:1; }
   body.art-attack .film__video{ visibility:hidden; }
   body.art-attack .film[data-film-pending] .film__title{ opacity:1; }
 }

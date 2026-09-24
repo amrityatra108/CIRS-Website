@@ -39,9 +39,10 @@ import crossroads
 import mathchallenge
 import creativewriting
 import captures
+import festivals
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=101"
+CACHE_BUST = "b=102"
 
 # Questions to settle before an application is submitted.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -501,25 +502,20 @@ PAGES = {
         },
     },
     "festivals": {
-        # The page body is tools/pages/festivals.html; its sheet is
-        # assets/css/culture.css, shared by the three Art, Culture & Music
-        # pages that open on a film.
-        "sheet": "culture",
-        "cache_suffix": "-festivals-film-2",
+        # The page body is tools/pages/festivals.html and its sheet
+        # assets/css/festivals.css. It opens on its own composition of seven
+        # of the school's photographs rather than on a film, so there is no
+        # "opening" here; the photographs, their provenance and the India
+        # calendar are in tools/festivals.py.
+        "sheet": "festivals",
+        "cache_suffix": "-festivals-year-1",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
-        "description": "The festivals kept through the year at Chinmaya International "
-                       "Residential School.",
+        "description": "Seven festivals kept through the school year at Chinmaya International "
+                       "Residential School, from Raksha Bandhan to Holi, in the school's own "
+                       "photographs.",
         "banner": None,
-        "opening": {
-            "video": "festivals-opening",
-            "poster": "festivals-opening-poster.jpg",
-            "still": "festivals-opening-final.jpg",
-            "still_element": True,
-            "title": "CIRS Festivals",
-            "title_markup": '<span class="film__festival-prefix">CIRS </span><span class="film__festival-name">Festivals</span>',
-            "pending": True,
-        },
+        "uc": False,
     },
     "theatre": {
         # The page body is tools/pages/theatre.html; its sheet is
@@ -1526,6 +1522,8 @@ def build(slug, page):
     content = expand_figs(content)
     if slug == "captures":
         content = captures.expand_featured(content)
+    if slug == "festivals":
+        content = festivals.expand(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
                        .replace("{{DOCLIST}}", doclist_html())
@@ -1600,6 +1598,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
+    if slug == "festivals":
+        parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
