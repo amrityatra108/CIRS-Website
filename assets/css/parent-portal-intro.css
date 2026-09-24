@@ -1,4 +1,4 @@
-/* Parent Portal's opening only. The video remains in place at its final frame. */
+/* Parent Portal's opening only: a full-window photograph under the page title. */
 body.parent-portal.portal-intro-active{overflow:hidden}
 html:has(body.parent-portal.portal-intro-active){overflow:hidden}
 body.parent-portal #top{scroll-margin-top:0}
@@ -13,21 +13,30 @@ body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.t
   height:100vh;
   height:100dvh;
   overflow:hidden;
-  background:#fff;
+  background:#1B1520;
   isolation:isolate;
 }
-.portal-intro__video{
+/* The aisle of students between the two rows of parents runs down the middle
+   of the frame, so cover crops the sides first and keeps it on a phone. */
+.portal-intro__image{
   position:absolute;
   inset:0;
   display:block;
-  width:100vw;
-  height:100vh;
-  height:100dvh;
+  width:100%;
+  height:100%;
   object-fit:cover;
+  object-position:46% 50%;
 }
-.portal-intro__video::-webkit-media-controls,
-.portal-intro__video::-webkit-media-controls-panel{display:none!important}
-.portal-intro.is-fallback .portal-intro__video{visibility:hidden}
+/* Held dark only around the centred title and entry; the edges of the
+   photograph come through nearly clean. */
+.portal-intro__scrim{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 62% 48% at 50% 50%,rgba(14,11,18,.62) 0%,rgba(14,11,18,.40) 55%,rgba(14,11,18,0) 100%),
+    linear-gradient(rgba(14,11,18,.18),rgba(14,11,18,.18));
+}
 .portal-intro__content{
   position:absolute;
   inset:0;
@@ -41,12 +50,13 @@ body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.t
 }
 .portal-intro__title{
   max-width:100%;
-  color:#98712B;
+  color:var(--gold-lit);
   font-family:var(--font-primary);
   font-size:clamp(2.7rem,7vw,7.2rem);
   font-weight:700;
   line-height:1;
   letter-spacing:-.052em;
+  text-shadow:0 2px 24px rgba(8,6,12,.45);
   opacity:0;
   transform:translateY(14px);
   transition:opacity .85s ease,transform .85s var(--e2);
@@ -55,12 +65,13 @@ body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.t
   display:inline-block;
   padding:4px 2px 6px;
   border-bottom:1px solid transparent;
-  color:#4E4350;
+  color:#fff;
   font-family:var(--font-primary);
   font-size:clamp(1rem,1.4vw,1.2rem);
   font-weight:500;
   line-height:1.2;
   letter-spacing:.015em;
+  text-shadow:0 1px 12px rgba(8,6,12,.55);
   opacity:0;
   visibility:hidden;
   transform:translateY(8px);
@@ -74,9 +85,8 @@ body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.t
 .portal-intro.is-revealed .portal-intro__entry{visibility:visible}
 .portal-intro__entry:hover,
 .portal-intro__entry:focus-visible{border-bottom-color:currentColor}
-.portal-intro__entry:focus-visible{outline-color:#98712B;outline-offset:6px}
+.portal-intro__entry:focus-visible{outline-color:var(--gold-lit);outline-offset:6px}
 
 @media (prefers-reduced-motion:reduce){
-  .portal-intro:not(.is-revealed) .portal-intro__video{visibility:hidden}
   .portal-intro__title,.portal-intro__entry{transition:none;transform:none}
 }
