@@ -965,19 +965,29 @@ def hero_html(page):
 </section>'''
 
 
+JUMP_MARK = "<!-- on-this-page -->"
+
+
 def jump_html(body):
     """Build the right-hand index from the page's own sections.
 
-    Labels come from each section's small-caps marker, so the index cannot
-    drift out of step with the headings — there is nothing to keep in sync.
+    Labels come from each section's small-caps marker, or from its heading
+    where it has none, so the index cannot drift out of step with the
+    headings — there is nothing to keep in sync. A page with fewer than two
+    places to go gets no index at all.
     """
     items = []
     for m in re.finditer(r'<section[^>]*\bid="([^"]+)"[^>]*>(.*?)</section>', body, re.S):
         sid, inner = m.group(1), m.group(2)
-        label = re.search(r'<span class="sc">(.*?)</span>', inner, re.S)
-        if label:
-            items.append((sid, re.sub(r"\s+", " ", label.group(1)).strip()))
-    if not items:
+        label = (re.search(r'<span class="sc">(.*?)</span>', inner, re.S)
+                 or re.search(r'<h[23][^>]*>(.*?)</h[23]>', inner, re.S))
+        if not label:
+            continue
+        text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", label.group(1))).strip()
+        text = re.sub(r"\s+([.,;:!?])", r"\1", text)
+        if text and all(text != t for _, t in items):
+            items.append((sid, text))
+    if len(items) < 2:
         return ""
     links = "\n".join(f'      <a href="#{i}">{t}</a>' for i, t in items)
     return f'''<nav class="jump" aria-label="On this page">
@@ -1497,8 +1507,11 @@ def build(slug, page):
                        .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
                        .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
     parts.append(content)
-    if page.get("jump"):
-        parts.append(jump_html(content))
+    # Every page carries the index; jump_html leaves it out where there is
+    # nothing to jump to. "jump": False opts a page out.
+    jump = jump_html(content) if page.get("jump", True) and not wall else ""
+    if jump:
+        parts.append(JUMP_MARK)
     if page.get("popup"):
         parts.append(POPUP)
     if page.get("uc", True) and not wall:
@@ -1541,7 +1554,9 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
 
-    html = to_depth(rewrite_links("\n".join(parts), slug), slug)
+    # The index goes in after rewrite_links: its anchors name sections on this
+    # page, and must not be sent to the page an old single-page anchor meant.
+    html = to_depth(rewrite_links("\n".join(parts), slug).replace(JUMP_MARK, jump), slug)
     # A page with newly page-scoped assets can invalidate its own shared and
     # local files without rewriting every generated page in the repository.
     cache_suffix = page.get("cache_suffix", "")
