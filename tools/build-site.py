@@ -252,7 +252,7 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-4",
+        "cache_suffix": "-curriculum-5",
         "banner": ("Curriculum", "The shape of <em>learning at CIRS.</em>",
                    "CBSE begins in Grade V. From Grade XI, students can choose the IB Diploma "
                    "Programme. The Chinmaya Vision Programme connects academic study with "

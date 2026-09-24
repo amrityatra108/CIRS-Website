@@ -214,6 +214,18 @@ body.curriculum{ background:var(--paper); }
   text-decoration-color:rgba(255,215,92,.45);
   text-underline-offset:4px;
 }
+/* The north-east arrow on links that leave for another page. Drawn, not
+   typed: none of the site's faces has U+2197, so the character fell back to
+   the system's emoji font and showed as a blue tile on phones. */
+.curriculum-arrow{
+  flex:none;
+  display:inline-block;
+  width:.72em;
+  height:.72em;
+  background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 12.5 12.5 3.5M5.5 3.5h7v7'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 12.5 12.5 3.5M5.5 3.5h7v7'/%3E%3C/svg%3E") center / contain no-repeat;
+}
 .ibgroups__arrow{ color:var(--gold-lit); transition:transform .2s ease; }
 .ibgroups__list a:hover .ibgroups__subject,
 .ibgroups__list a:focus-visible .ibgroups__subject{ color:var(--gold-lit); text-decoration-color:var(--gold-lit); }
@@ -277,7 +289,7 @@ body.curriculum{ background:var(--paper); }
   color:var(--on-purple);
   font-size:1.14rem;
 }
-.curriculum-next__links a span:last-child{ color:var(--gold-lit); font-size:1.35rem; }
+.curriculum-next__links a .curriculum-arrow{ color:var(--gold-lit); font-size:1.35rem; }
 .curriculum-next__links a:hover{ color:var(--gold-lit); }
 
 @media (max-width:900px){
