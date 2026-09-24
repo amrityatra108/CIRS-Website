@@ -147,6 +147,47 @@ body.curriculum{ background:var(--paper); }
 .curriculum-next .h2 em{ color:var(--gold-lit); }
 .curriculum-ib .lead{ margin-top:clamp(24px,3vw,38px); max-width:46ch; }
 .curriculum-ib__more{ max-width:52ch; margin-top:18px; color:var(--on-purple-soft); }
+
+/* The Diploma in four figures, on the dark band. A family reading this page is
+   choosing between two pathways, and these are the numbers that make the IB
+   one legible at a glance: how many subjects, how many at Higher Level, the
+   ceiling and the floor of the score, and the three core elements. The page
+   behind the button explains each; this is only enough to decide to read it.
+
+   Rules rather than boxes — a card grid here would repeat the CBSE section's
+   shape and make the two pathways look like the same component twice. */
+/* Two by two, at every width. These sit in the left column of a two-column
+   band, which is around 590px on a desktop however wide the window gets — so
+   a four-across row would be set by a viewport media query that cannot see
+   the column it is in, and "Core elements: TOK, EE and CAS" would break over
+   three lines on the widest screens. Two columns fit the measure the band
+   actually gives them. */
+.curriculum-ib__figures{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 clamp(20px,3vw,44px);
+  margin:clamp(28px,3.4vw,42px) 0 0;
+  max-width:52ch;
+  border-top:1px solid var(--rule-purple);
+}
+.curriculum-ib__figures > div{
+  padding:clamp(14px,1.7vw,20px) 0;
+  border-bottom:1px solid var(--rule-purple);
+}
+.curriculum-ib__figures dt{
+  font-family:var(--font-primary);
+  font-size:clamp(1.9rem,3.1vw,2.5rem);
+  line-height:1;
+  color:var(--gold-lit);
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.curriculum-ib__figures dd{
+  margin:8px 0 0;
+  font-size:var(--fs-sm);
+  line-height:1.45;
+  color:var(--on-purple-soft);
+}
+
 .curriculum-ib .btn{ margin-top:clamp(26px,3vw,40px); }
 .curriculum-ib__image{ height:min(65vw,710px); min-height:500px; margin:0; overflow:hidden; }
 .curriculum-ib__image img{ width:100%; height:100%; object-fit:cover; object-position:65% center; }

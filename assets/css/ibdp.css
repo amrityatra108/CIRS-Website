@@ -63,6 +63,9 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
   .ib-intro{ grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 .ib-intro__text p:last-child{ margin-bottom: 0; }
+/* Two columns of prose under a grid: they align at the top, not the middle,
+   and they need the grid's own space above them. Was set inline. */
+.ib-intro--top{ margin-top: clamp(28px, 3.6vw, 48px); align-items: start; }
 .ib-intro__fig{
   margin: 0;
   overflow: hidden;
@@ -101,7 +104,9 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
   letter-spacing: .16em;
   color: var(--gold);
 }
-.ibgrid__cell h3{ margin: 0 0 10px; }
+/* The group cells sit under a sub-heading now, so their titles are h4;
+   they are styled by rank-free selectors rather than by tag. */
+.ibgrid__cell :is(h3, h4){ margin: 0 0 10px; }
 .ibgrid__cell .copy{ margin: 0; font-size: 15px; }
 
 /* --------------------------------------------------------- the core cards */
@@ -115,6 +120,30 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
    sits two-by-two until there is room for the row. */
 @media (min-width: 820px){ .ibcore--four{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1140px){ .ibcore--four{ grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* Higher and Standard Level are a pair, and a pair is the one shape the
+   three-card grid could not make. The tag the core cards already carry does
+   the labelling, so HL and SL are told apart at a glance rather than by
+   reading to the end of a paragraph. */
+@media (min-width: 820px){ .ibcore--two{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* The teaching-hours figure is the thing being compared, so it is set at the
+   size of a figure rather than folded into the sentence. */
+.ibcore__hours{
+  margin: 0 0 12px;
+  font-family: var(--font-primary);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  line-height: 1;
+  color: var(--purple);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.ibcore__hours span{
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
 
 .ibcore__card{
   display: flex;
@@ -132,7 +161,7 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
   font-size: 11px;
   letter-spacing: .14em;
 }
-.ibcore__card h3{ margin: 0 0 12px; }
+.ibcore__card :is(h3, h4){ margin: 0 0 12px; }
 .ibcore__card .copy{ margin: 0; font-size: 15px; }
 
 /* ------------------------------------------------------- habits of the work */
@@ -149,6 +178,19 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
 @media (min-width: 640px){ .ibskills{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1000px){ .ibskills{ grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
+/* Three rules decide a student's six subjects, and they were previously a
+   sentence inside a paragraph. The strip is the same object as the habits
+   below it — one grid, one hairline, one pair of type roles — set three
+   across because there are three rules and a fourth column would leave a
+   hole. */
+@media (min-width: 760px){ .ibskills--rules{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1000px){ .ibskills--rules{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ibskills--rules .ibskills__item b{ color: var(--maroon); }
+
+/* The learner profile has ten attributes. Four across leaves a row of two
+   hanging; five across is two clean rows. */
+@media (min-width: 1040px){ .ibskills--profile{ grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+
 .ibskills__item{
   display: flex;
   flex-direction: column;
@@ -164,6 +206,70 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
   color: var(--purple);
 }
 .ibskills__item span{ font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+
+/* ----------------------------------------------------- the learner profile */
+
+/* The habits strip above this on the page is a grid of boxes, and the ten
+   attributes would have been a second one — the same object twice, which is
+   how a page starts to read as a template. These are set instead the way the
+   IB words them: the attribute as a word, the gloss under it, a hairline
+   between. No box, no fill, nothing to hover.
+
+   Two columns, then five: ten items divide cleanly into both, so no row is
+   ever left hanging. */
+.ibprofile{
+  display: grid;
+  gap: 0 clamp(24px, 3vw, 52px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--purple-ink);
+}
+@media (min-width: 560px){ .ibprofile{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1040px){ .ibprofile{ grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+
+.ibprofile__item{
+  padding: clamp(16px, 1.9vw, 22px) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.ibprofile__item b{
+  display: block;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: clamp(1.12rem, 1.5vw, 1.34rem);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: var(--purple);
+}
+.ibprofile__item span{
+  display: block;
+  margin-top: 6px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+/* At five across the last row's hairline is the section's own foot; keeping
+   it on every cell is what makes the ten read as one list rather than as two
+   rows of five. */
+
+/* A note set after a grid needs the grid's own top margin, and it was being
+   given one inline. */
+.ib-note{ margin-top: clamp(22px, 2.8vw, 32px); }
+
+/* Sub-headings inside a section that already has a .sec-head. They divide a
+   long section into parts a reader can aim at, so they need air above them
+   and none of the section heading's weight. */
+.ibdp .section h3.serif + .copy{ margin-top: 0; }
+.ibdp .ibskills + h3.serif,
+.ibdp .ibcore + h3.serif,
+.ibdp .ibgrid + h3.serif,
+.ibdp .ibscore + h3.serif{ margin-top: clamp(38px, 4.6vw, 62px); }
+.ibdp .sec-head + h3.serif{ margin-top: clamp(4px, 1vw, 12px); }
+.ibdp h3.serif + .ibskills,
+.ibdp h3.serif + .ibcore,
+.ibdp h3.serif + .ibgrid,
+.ibdp h3.serif + .copy{ margin-top: clamp(14px, 1.8vw, 22px); }
+.ibdp h3.serif + .copy + .ibcore{ margin-top: clamp(18px, 2.2vw, 28px); }
 
 /* ------------------------------------------------------------- the last word */
 
@@ -273,6 +379,11 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
   border: 1px solid var(--rule);
 }
 @media (min-width: 760px){ .ibscore{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Four figures tell the whole of the points system — what a subject is worth,
+   what the core adds, the ceiling and the floor — and the floor is the one a
+   family most wants to find. Two by two, then four across. */
+@media (min-width: 760px){ .ibscore--four{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px){ .ibscore--four{ grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .ibscore > div{ padding: clamp(22px, 2.6vw, 32px); background: var(--paper); }
 .ibscore dt{
   font-family: var(--font-primary);
@@ -281,5 +392,9 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
   color: var(--purple);
   font-variant-numeric: lining-nums;
 }
+/* The pass mark is a different kind of number from the other three: not a
+   part of the total but the line a candidate has to clear. Same specificity
+   as the rule above, so it has to come after it. */
+.ibscore__floor dt{ color: var(--maroon); }
 .ibscore dd{ margin: 12px 0 0; font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
 .ibscore dd b{ display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
