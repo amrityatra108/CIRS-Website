@@ -565,7 +565,7 @@ PAGES = {
         # Admissions carries its own quiet, document-led layout beneath the
         # shared honeycomb hero. The sheet is scoped by body.admissions.
         "sheet": "admissions",
-        "cache_suffix": "-admissions-26",
+        "cache_suffix": "-admissions-27",
         "hero_split": False,
         "hero": ("Admissions", "Admissions <em>Open.</em>",
                  "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "

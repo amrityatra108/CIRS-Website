@@ -4,7 +4,7 @@
   var body = document.body;
   if (!body.classList.contains("admissions")) return;
 
-  var sections = Array.prototype.slice.call(document.querySelectorAll(".ad-section"));
+  var sections = Array.prototype.slice.call(document.querySelectorAll(".cirs-entry-section"));
   var canObserve = typeof window.IntersectionObserver === "function";
   body.classList.add("ad-enhanced");
 
