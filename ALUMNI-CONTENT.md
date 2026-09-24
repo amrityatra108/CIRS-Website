@@ -1,169 +1,48 @@
-# What the Alumni page still needs from the school
+# Alumni page: details still needed from CIRS
 
-The Alumni page (`alumni.html`, *Where CIRS Takes You*) is built from one file:
-**`tools/alumni.py`**. That file is the whole of the page's content — the destinations,
-the alumni, the quotations and the pathways. There is no database and no upload form,
-exactly as with the Important Documents portal (see `ADMIN-DOCUMENTS.md`): the list in
-the repository **is** the admin panel, and the site rebuilds the page from it.
+The Alumni page uses the public CIRS contact route, cohort records, published quotations, destination list and four alumni already named by the school. It no longer presents missing information as visible placeholders or implies that its short list is a complete register.
 
-This document is the list of what is missing, in the order it is worth supplying.
+## Already linked on the page
 
-The four named alumni now have extended biographies in `tools/alumni.py`. Hari Om Jani's
-biography records the National University of Singapore as his bachelor's and PhD
-institution. Batch years, current cities, portraits and personal reflections remain
-unrecorded; the other three alumni are not linked to an institution.
+- The CIRS Alumni Database Form, linked from the official alumni page and currently open to responses: `https://docs.google.com/forms/d/e/1FAIpQLScCwvnfz0S4heDT0KatjNYdMUkN9ZuGoGXxTZdgJ81wpGq5-A/viewform?usp=pp_url`
+- Public cohort records for 2020–21, 2021–22 and 2022–23, linked from the official CIRS alumni page.
+- Current school-office contact details from the official CIRS contact page: `info@cirschool.org`, `+91 422 261 3303`, and the Siruvani Road address.
+- Four school-published alumni names and three published alumni quotations.
+- A text list of the university destinations already included in the CIRS website.
 
----
+## Details that would improve the page
 
-## The rule this page was built under
+### Confirm names and batches
 
-**Nothing on the page was invented.** Every name, university, role and quotation on it
-was either already published on the previous version of the Alumni page, or supplied by
-the school afterwards — Nanyang Technological University came that way, which is the
-route every further destination should take. Where something is not
-known, the page says so in brackets rather than filling the gap:
+Please confirm the preferred public spelling and display name for:
 
-> *[Portrait to be supplied by the school, with the alumnus's permission.]*
+- **Hari Om Jani** — The Queen’s College profile styles his name “Hariom Jani”.
+- **Divyaj DT** — AIFF squad lists use “Divyaj Dhaval Thakkar”. Please confirm how CIRS wants him identified.
+- The three quotation attributions, as currently published: **Kavya S**, **Roshan B** and **Mugdha Sultania**.
 
-Those bracketed notes are deliberate and are the site's established convention. They are
-not placeholders left by accident — each one marks a specific thing the school has not
-yet said, and each one disappears on its own the moment the corresponding field in
-`tools/alumni.py` is filled in. **Please do not ask for them to be replaced with
-approximate or "representative" content.** A plausible-sounding batch year attached to a
-real person's name is worse than a visible gap.
+Please supply the graduating year or batch for **Hari Om Jani, Soham Desai, Divyaj, Shashwath Santosh, Kavya S, Roshan B and Mugdha Sultania**. None is recorded in the supplied page material, so none is shown.
 
----
+### Alumni photos and consent
 
-## 1. Portraits — the largest gap
+Four photos supplied in this task are now used for **Hari Om Jani, Soham Desai, Divyaj DT and Shashwath Santosh**. They are stored in `assets/img/alumni/` and mapped in `tools/alumni.py`. The Divyaj photo contains two people; Divyaj is the person on the right in the red kit. On 24 September 2026, CIRS confirmed in the project conversation that it has publication consent and image rights, including any required credits, for all four supplied photos. The image identities follow the names supplied with them.
 
-There is **not one photograph of an alumnus anywhere in this repository.** Every portrait
-frame on the page currently renders as a marked plate with the person's initials and a
-line saying a photograph is awaited.
+Keep CIRS's underlying consent and rights records with the school's own files. If a credit is required, the school should send its exact wording for the page.
 
-For each of the four named alumni we need:
+### Association and contact information
 
-| | Needed | Notes |
-|---|---|---|
-| Photograph | One portrait, at least 900 × 1200px | Portrait orientation; head and shoulders is fine |
-| Permission | Written consent from the alumnus to publish it | Required before it goes on the site |
-| Credit | Photographer, if the school does not own the image | |
+The working database form and general school-office route are available. The page has no verified current details for:
 
-A school-era photograph as well as a current one unlocks the **Then / Now** reveal the
-page is already built for — the two images cross-fade to show the same person years
-apart. Both halves must be genuine photographs of that person. Nothing is reconstructed
-or generated.
+- Whether the CIRS Alumni Association and committee mentioned on the older alumni page are active today.
+- The current alumni coordinator or association contact name, role and email/phone.
+- A current member directory/register link and its access or privacy conditions.
+- Confirmed reunion dates, official alumni social accounts or an alumni website.
 
-**Where it goes:** put the file in `assets/img/alumni/` and set `"portrait"` (and
-`"then_portrait"`) in that alumnus's entry in `tools/alumni.py`. The plate becomes an
-image automatically; nothing else on the page changes.
+Please send official links and current details before any of these are added. Do not reuse contact details from old reunion notices or internal 2013–15 rosters without confirmation.
 
-## 2. Batch years
+### Story updates
 
-Not one batch or graduating year is recorded for any alumnus, including the three who
-gave the quotations. Every alumnus and every quotation currently shows
-*[Batch to be supplied]*.
+The four short biographies link to public primary or attributable sources. If the school wants revised copy, please provide the approved text and the alumnus’s preferred public profile link. In particular, confirm the preferred CIRS name for Hari Om Jani and Divyaj before expanding either profile.
 
-Needed: the year or batch for **Hari Om Jani, Soham Desai, Divyaj DT, Shashwath Santosh,
-Kavya S, Roshan B** and **Mugdha Sultania**.
+The page currently links a selected 19-institution destination list already present in the repository. Please confirm whether the school considers that list current and whether more institutions should be added. The page labels it as a published selection, not a complete graduate directory.
 
-Set `"batch"` in each entry.
-
-## 3. Which alumnus went to which institution
-
-The page lists nineteen institutions. Hari Om Jani's biography records the National
-University of Singapore as his bachelor's and PhD institution. The other three alumni
-are not linked to an institution because that relationship is not recorded here. The
-destination panel says so:
-
-> *[Which alumni read here, and in which years, to be supplied by the school.]*
-
-Needed: the institution each of the other three alumni attended. Set `"institution"`.
-
-Note that **Oxford University is deliberately not in the destination list.** It is where
-Hari Om Jani *works*, which is not the same as where a CIRS student *read*, and the page
-does not conflate the two.
-
-## 4. More destinations
-
-Adding one is a name, a country, a region and **where it actually is**: its latitude and
-longitude. The field is a map, so a new destination needs no layout — it lands where the
-institution stands, and its route out of Siruvani is drawn for it.
-
-The only thing that may need a hand is its name. Each entry carries an offset saying
-where the name sits relative to its point and which way it runs; the default is a short
-step to the right. It matters only when a new destination lands on top of one already
-there — a sixth in Britain, say. The header comment in `tools/alumni.py` sets out both,
-and the checks in `CLAUDE.md` will not catch two names overlapping: look at the map.
-
-## 5. More alumni
-
-The school's own note on the previous page said "and many more". Four named alumni is a
-thin showing for a school that has been teaching since 1996.
-
-For each additional alumnus, the minimum that can be published is **a name and one
-verified line** about what they do. Batch, institution, city, quotation and portrait all
-appear as soon as they are added and are left out silently until then.
-
-Worth prioritising, since the page has a pathway for each and only one or two names
-behind most of them:
-
-- Public service, medicine, law
-- Business and finance
-- Social impact and service
-- Entrepreneurship
-- Women alumni — three of the seven names on the page are women, and none of the four
-  featured chapters is
-
-## 6. Current cities or countries
-
-No alumnus has a location recorded. Set `"place"`. This is what would let the page show
-where the alumni community actually is today, as opposed to where its students went to
-study.
-
-## 7. The alumni association and how to reach it
-
-The page currently ends by pointing at the school office
-(`info@cirschool.org`, +91 422 261 3300), because **that is the only alumni contact route
-this site can verify.** It says so in as many words.
-
-Needed, if they exist:
-
-- An alumni association email address or officer
-- The alumni register or directory, if one is kept
-- **Univariety** — the brief mentioned this. There is no Univariety link anywhere in this
-  repository, so none was added. If the school uses it and the link is current, supply it.
-- Reunion dates, if any are fixed
-- Official alumni social accounts — only official ones
-
-## 8. Quotations
-
-Three quotations exist. They carry a whole chapter of the page between them and they do
-it well, but three is not many.
-
-For each new one, we need the **exact words**, the **name of the person who said them**,
-and their permission to publish. Add to `VOICES` in `tools/alumni.py`.
-
----
-
-## What the page does *not* need
-
-- **University logos.** The destination index is text on purpose. Nineteen wordmarks
-  would need nineteen licences and would read worse than a list.
-- **Numbers of alumni per university, or any total.** None is recorded, and an
-  impressive-looking figure nobody can source is exactly what this page avoids.
-- **Stock photography of graduations or students.** Every photograph on the page is the
-  school's own.
-
----
-
-## After supplying anything
-
-Edit `tools/alumni.py`, then from the repository root:
-
-```sh
-python3 tools/build-site.py
-```
-
-and run the checks in `CLAUDE.md` before pushing. The constellation, the region filters,
-the searchable index, the counts, the pathway evidence lists and the editorial chapters
-all rebuild from that one file.
+The three quotations remain as previously published by CIRS. If names are to be expanded or quotes changed, please provide the exact attribution and approved wording.

@@ -590,17 +590,14 @@ PAGES = {
     },
     "alumni": {
         "nav": "Alumni",
-        "title": "Where CIRS Takes You | Alumni",
-        "description": "Where CIRS students go after school — the universities they read at "
-                       "in India and abroad, the alumni the school has named, and the "
-                       "pathways out of Siruvani.",
-        # No banner from the shared builder. This page opens on a journey it
-        # brings itself — a full-height aerial of the campus with the route
-        # leaving it — and that opening carries the page's h1 and its id="top".
-        # Its sheet is assets/css/alumni.css, scoped to body.alumni.
+        "title": "CIRS Alumni | Life after Siruvani",
+        "description": "Reconnect with CIRS, browse published alumni cohort records, and explore university destinations and alumni stories.",
+        # The Alumni page supplies its own opening image and carries the h1.
+        # Page styles and search behavior live in alumni.css and alumni-journey.js.
         "banner": None,
         "sheet": "alumni",
-        "cache_suffix": "-alumni-1",
+        "cache_suffix": "-alumni-4",
+        "uc": False,
     },
 }
 

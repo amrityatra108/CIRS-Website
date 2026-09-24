@@ -1,195 +1,133 @@
-<!-- ==================================================================
-     WHERE CIRS TAKES YOU
-     ------------------------------------------------------------------
-     One journey in seven chapters: the campus, the departure, the field
-     of destinations, the alumni themselves, the pathways out, the index,
-     and the way back. The chapters are written here; everything that is
-     a name, a university, a quotation or a count is built from
-     tools/alumni.py, which is the only place any of it is recorded.
-
-     This page brings its own opening instead of the shared banner —
-     "banner": None in build-site.py — so the <h1> is on chapter one.
-     Its sheet is assets/css/alumni.css and its script is
-     assets/js/alumni-journey.js, both scoped to body.alumni.
-     ================================================================== -->
-
-<!-- ============ CHAPTER 1 — Belonging ============ -->
-<section class="aj-open" id="top" data-ground="#0E0B12" data-open>
-  <div class="aj-open__media" data-open-media>
-    <img src="assets/img/forest-air.jpg"
-         alt="Chinmaya International Residential School from the air: the courtyards, the
-              swimming pool and the playing fields inside a boundary of forest."
-         width="1600" height="900" fetchpriority="high" decoding="async">
+<!-- Alumni page. Names and quotations come from tools/alumni.py. -->
+<section class="alumni-hero" id="top" aria-labelledby="alumni-title">
+  <div class="alumni-hero__media">
+    <img src="assets/img/forest-air.jpg" alt="Aerial view of CIRS’s forest-surrounded Siruvani campus." width="1600" height="900" fetchpriority="high" decoding="async">
   </div>
-  <div class="aj-open__wash" aria-hidden="true"></div>
-
-  <div class="wrap aj-open__inner">
-    <p class="aj-open__eyebrow" data-open-eyebrow>
-      <span class="sc">The CIRS alumni community</span>
-    </p>
-    <h1 class="aj-open__title" data-open-title>
-      <span class="aj-open__line"><span>Where CIRS</span></span>
-      <span class="aj-open__line"><span>Takes You</span></span>
-    </h1>
-    <p class="aj-open__sub" data-open-sub>Many paths. One beginning.</p>
+  <div class="alumni-hero__wash" aria-hidden="true"></div>
+  <div class="wrap alumni-hero__inner">
+    <p class="alumni-kicker">CIRS alumni</p>
+    <h1 id="alumni-title">Life after<br><em>Siruvani.</em></h1>
+    <p class="alumni-hero__lead">Keep in touch with the school, explore published cohort records and follow a few CIRS journeys.</p>
+    <div class="alumni-actions">
+      <a class="alumni-button" href="https://docs.google.com/forms/d/e/1FAIpQLScCwvnfz0S4heDT0KatjNYdMUkN9ZuGoGXxTZdgJ81wpGq5-A/viewform?usp=pp_url">Update your alumni details <span aria-hidden="true">↗</span></a>
+      <a class="alumni-text-link" href="#records">Browse cohort records <span aria-hidden="true">↓</span></a>
+    </div>
   </div>
+  <p class="alumni-hero__caption">Chinmaya International Residential School · Siruvani, Coimbatore</p>
 </section>
 
-<!-- ============ CHAPTER 2 — Leaving ============ -->
-<section class="aj-portal" id="departure" data-ground="#0E0B12" data-portal>
-  <div class="aj-portal__stage" data-portal-stage>
-    <div class="aj-portal__depth" aria-hidden="true" data-portal-depth></div>
-
-    <!-- The campus recedes from a full screen into one archival plate
-         floating in the dark, and the field opens behind it. -->
-    <figure class="aj-portal__plate" data-portal-plate>
-      <img src="assets/img/hrun/10-night.jpg"
-           alt="Students seated in the concentric brick rings of the CIRS amphitheatre after
-                dark, under floodlights, during evening practice."
-           width="1500" height="1000" loading="lazy" decoding="async">
-      <figcaption class="aj-portal__cap">
-        <span class="sc">Siruvani</span> The amphitheatre, after dark
-      </figcaption>
-    </figure>
-
-    <div class="aj-portal__copy" data-portal-copy>
-      <h2 class="serif aj-portal__head">Everyone here <em>begins in the same rings.</em></h2>
-      <p class="aj-portal__lead">CIRS has been teaching on the Siruvani campus since 1996.
-        What follows is where its students went after it &mdash; every institution the
-        school has named, and every alumnus it has named, and nothing that it has not.</p>
+<section class="alumni-intro" aria-labelledby="alumni-intro-title">
+  <div class="wrap alumni-intro__grid">
+    <div>
+      <p class="alumni-kicker alumni-kicker--ink">A place to reconnect</p>
+      <h2 id="alumni-intro-title">One school.<br><em>Many directions.</em></h2>
+    </div>
+    <div class="alumni-intro__copy">
+      <p>CIRS invites former students to stay connected through its alumni database. This page gathers the contact form, cohort records and stories the school has published so far.</p>
+      <p>The records below are selected publications, not a complete alumni directory. Alumni can add or update their details through the school’s form.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ CHAPTER 3 — The destinations ============ -->
-<section class="aj-const" id="constellation" data-ground="#0E0B12">
+<section class="alumni-records" id="records" aria-labelledby="records-title">
   <div class="wrap">
-    <div class="sec-head aj-const__head rv">
-      <h2 class="serif h2" data-split>{{ALUMNI_COUNT_CAP}} destinations, <em>one origin.</em></h2>
+    <div class="alumni-section-head">
+      <div>
+        <p class="alumni-kicker">For CIRS graduates</p>
+        <h2 id="records-title">Find your <em>people.</em></h2>
+      </div>
+      <p>Browse the cohort records currently linked from the CIRS alumni page, or send the school your updated details.</p>
     </div>
-  </div>
-
-  {{ALUMNI_CONSTELLATION}}
-
-</section>
-
-<!-- ============ CHAPTER 4a — In their own words ============ -->
-<section class="aj-voices" id="aj-voices" data-ground="#141018">
-  <div class="wrap">
-    <div class="sec-head aj-voices__head rv">
-      <h2 class="serif h2" data-split>In their <em>own words.</em></h2>
-      <p class="lead">Three alumni, writing about what the years here left them with.
-        These are the only alumni words the school has published, so each one is given
-        the room it asks for rather than a card in a row of three.</p>
+    <div class="alumni-records__grid">
+      <a class="alumni-record" href="https://www.cirschool.org/alumnimeet2016.html" target="_blank" rel="noopener">
+        <span class="alumni-record__year">2020–21</span>
+        <span class="alumni-record__label">Names, courses and universities</span>
+        <span class="alumni-record__arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="alumni-record" href="pdf/alumni%2021-22.jpg" target="_blank" rel="noopener">
+        <span class="alumni-record__year">2021–22</span>
+        <span class="alumni-record__label">Published cohort list · JPG</span>
+        <span class="alumni-record__arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="alumni-record" href="pdf/alumni%2022-23.jpg" target="_blank" rel="noopener">
+        <span class="alumni-record__year">2022–23</span>
+        <span class="alumni-record__label">Published cohort list · JPG</span>
+        <span class="alumni-record__arrow" aria-hidden="true">↗</span>
+      </a>
     </div>
-  </div>
-
-  {{ALUMNI_VOICES}}
-</section>
-
-<!-- ============ CHAPTER 4b — The alumni the school has named ============ -->
-<section class="aj-people" id="aj-stories">
-  <div class="wrap">
-    <div class="sec-head aj-people__head rv">
-      <h2 class="serif h2" data-split>Four paths, <em>followed in public.</em></h2>
-      <p class="lead">A physics department, a national cricket side, a national football
-        side and a design studio. The school has published one line about each; the rest
-        of every one of these stories is still to come, and is marked below rather than
-        filled in.</p>
-    </div>
-  </div>
-
-  {{ALUMNI_PEOPLE}}
-
-  <div class="wrap">
-    <p class="note rv aj-people__foot"><em>[And many more &mdash; further alumni, their
-      batches and their portraits to be supplied by the school. The list this page builds
-      from is <code>tools/alumni.py</code>; adding an entry there publishes a chapter
-      here.]</em></p>
+    <p class="alumni-records__note">These links open records already published by CIRS. For your own contact details, use the alumni database form.</p>
   </div>
 </section>
 
-<!-- ============ CHAPTER 5 — Paths from CIRS ============ -->
-<!-- id="pathways" is load-bearing: the footer of every page on this site
-     links to alumni.html#pathways as "University Counselling". -->
-<section class="aj-paths" id="pathways" data-ground="#0E0B12">
+<section class="alumni-stories" id="stories" aria-labelledby="stories-title">
   <div class="wrap">
-    <div class="sec-head aj-paths__head rv">
-      <h2 class="serif h2" data-split>Five ways <em>out of the same gate.</em></h2>
-      <p class="lead">University counselling begins in Grade X and continues through
-        Naviance. The IB opens direct application to North America, the UK, Europe and
-        Australia; CBSE keeps the Indian national pathway fully open. Each pathway below
-        names what it was drawn from.</p>
+    <div class="alumni-section-head alumni-section-head--light">
+      <div>
+        <p class="alumni-kicker alumni-kicker--ink">A few journeys</p>
+        <h2 id="stories-title">CIRS, carried <em>forward.</em></h2>
+      </div>
+      <p>Meet CIRS alumni working in research, sport and design. Follow their stories through the profiles and updates below.</p>
+    </div>
+    <div class="alumni-stories__list">
+      {{ALUMNI_PEOPLE}}
     </div>
   </div>
-
-  {{ALUMNI_PATHWAYS}}
 </section>
 
-<!-- ============ CHAPTER 6 — The index ============ -->
-<section class="aj-index" id="aj-destinations">
+<section class="alumni-voices" id="voices" aria-labelledby="voices-title">
   <div class="wrap">
-    <div class="sec-head aj-index__head rv">
-      <h2 class="serif h2" data-split>The institutions, <em>in plain text.</em></h2>
-      <p class="lead">The same {{ALUMNI_COUNT}}, searchable, with the country each is in.
-        No logos: the school has no licence to reproduce {{ALUMNI_COUNT}} university
-        wordmarks, and a list is faster to read than a wall of them.</p>
+    <div class="alumni-section-head">
+      <div>
+        <p class="alumni-kicker">From the CIRS community</p>
+        <h2 id="voices-title">In their <em>own words.</em></h2>
+      </div>
+      <p>Reflections on school life from members of the CIRS alumni community.</p>
     </div>
+    <div class="alumni-voices__grid">
+      {{ALUMNI_VOICES}}
+    </div>
+  </div>
+</section>
 
+<!-- The shared site footer links to this anchor as "University Counselling". -->
+<section class="alumni-pathways" id="pathways" aria-labelledby="pathways-title">
+  <div class="wrap">
+    <div class="alumni-section-head alumni-section-head--light">
+      <div>
+        <p class="alumni-kicker">University pathways</p>
+        <h2 id="pathways-title">Where CIRS students <em>have gone.</em></h2>
+      </div>
+      <p>These are the institutions in the destination list currently featured by CIRS. Search by name or country. The list is not a complete graduate register.</p>
+    </div>
     {{ALUMNI_DESTINATIONS}}
-
-    <figure class="aj-index__fig img-reveal rv">
-      <img src="assets/img/assembly-front.jpg"
-           alt="Students and staff assembled on the front steps of the school, holding flags
-                and country placards at a school assembly."
-           width="1400" height="624" loading="lazy" decoding="async">
-      <figcaption>Students and staff on the front steps with the flags and country
-        placards carried at a school assembly.</figcaption>
-    </figure>
   </div>
 </section>
 
-<!-- ============ CHAPTER 7 — The return ============ -->
-<section class="aj-return" id="aj-return" data-ground="#0E0B12" data-return>
-  <div class="aj-return__media" data-return-media>
-    <img src="assets/img/valley.jpg"
-         alt="The school buildings below the Western Ghats, cloud lying along the ridge
-              behind them."
-         width="1400" height="624" loading="lazy" decoding="async">
+<section class="alumni-next" aria-labelledby="alumni-next-title">
+  <div class="wrap alumni-next__grid">
+    <div>
+      <p class="alumni-kicker alumni-kicker--ink">Exploring CIRS?</p>
+      <h2 id="alumni-next-title">Start with the <em>school.</em></h2>
+    </div>
+    <div class="alumni-next__links">
+      <a href="admissions.html#apply">Admissions information <span aria-hidden="true">↗</span></a>
+      <a href="curriculum.html">Explore the curriculum <span aria-hidden="true">↗</span></a>
+    </div>
   </div>
-  <div class="aj-return__wash" aria-hidden="true"></div>
+</section>
 
-  <div class="wrap aj-return__inner">
-    <h2 class="serif aj-return__head" data-split>Wherever the journey leads,
-      <em>CIRS remains part of the story.</em></h2>
-
-    <div class="aj-return__acts rv">
-      <a class="btn btn--primary btn--lg"
-         href="mailto:info@cirschool.org?subject=Reconnecting%20with%20CIRS">Reconnect with CIRS</a>
-      <a class="btn btn--ghost btn--lg"
-         href="mailto:info@cirschool.org?subject=My%20CIRS%20alumni%20story">Share Your Alumni Story</a>
+<section class="alumni-contact" id="contact" aria-labelledby="alumni-contact-title">
+  <div class="wrap alumni-contact__grid">
+    <div>
+      <p class="alumni-kicker">The next step</p>
+      <h2 id="alumni-contact-title">Stay part of <em>the story.</em></h2>
+      <p>Use the official form to register or update your information. For questions, contact the CIRS school office.</p>
+      <a class="alumni-button alumni-button--light" href="https://docs.google.com/forms/d/e/1FAIpQLScCwvnfz0S4heDT0KatjNYdMUkN9ZuGoGXxTZdgJ81wpGq5-A/viewform?usp=pp_url">Open the alumni database form <span aria-hidden="true">↗</span></a>
     </div>
-
-    <div class="aj-return__reach rv">
-      <p class="aj-return__reachNote">Both open a message to the school office, which is
-        the only alumni contact route this site can verify today.</p>
-      <dl class="aj-return__rows">
-        <div>
-          <dt>School office</dt>
-          <dd><a href="tel:+914222613300">+91 422 261 3300</a></dd>
-        </div>
-        <div>
-          <dt>Email</dt>
-          <dd><a href="mailto:info@cirschool.org">info@cirschool.org</a></dd>
-        </div>
-        <div>
-          <dt>Address</dt>
-          <dd>Siruvani Main Road, Coimbatore 641 114, Tamil Nadu</dd>
-        </div>
-      </dl>
-      <p class="note aj-return__await"><em>[An alumni association address, the alumni
-        register, reunion dates and any official alumni social accounts to be supplied by
-        the school. None of them are invented here.]</em></p>
-    </div>
+    <address class="alumni-contact__details">
+      <p><span>School office</span><a href="mailto:info@cirschool.org?subject=Alumni%20enquiry">info@cirschool.org</a></p>
+      <p><span>Telephone</span><a href="tel:+914222613303">+91 422 261 3303</a></p>
+      <p><span>Address</span>CIRS, Swami Chinmayananda Lane,<br>Nallurvayal Post, Siruvani Main Road,<br>Coimbatore 641 114, Tamil Nadu, India</p>
+    </address>
   </div>
 </section>

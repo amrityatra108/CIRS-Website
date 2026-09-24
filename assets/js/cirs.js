@@ -28,6 +28,7 @@
   var hasGSAP = typeof window.gsap !== "undefined";
   var hasST = hasGSAP && typeof window.ScrollTrigger !== "undefined";
   var animate = hasGSAP && !reduced;
+  var isAlumni = document.body.classList.contains("alumni");
 
   if (hasST) gsap.registerPlugin(ScrollTrigger);
 
@@ -40,7 +41,7 @@
   var lenis = null;
   // The photograph wall has its own infinite drag/scroll surface and must not
   // compete with document-level smooth scrolling.
-  if (typeof window.Lenis !== "undefined" && !reduced && !document.body.classList.contains("wall")) {
+  if (typeof window.Lenis !== "undefined" && !reduced && !isAlumni && !document.body.classList.contains("wall")) {
     lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.5 });
     if (hasGSAP) {
       lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
@@ -137,6 +138,8 @@
       if (id.length < 2) return;
       var t = document.querySelector(id);
       if (!t) return;
+      // Alumni uses native document scrolling and real URL fragments.
+      if (isAlumni) { closeDrawer(); return; }
       e.preventDefault();
       closeDrawer();
       scrollToSection(t);
@@ -197,6 +200,9 @@
   var hashArmed = false;
 
   function openHash() {
+    // Its images reserve their dimensions, so the browser's native anchor
+    // position is stable and should not be realigned after the visitor moves.
+    if (isAlumni) return;
     var id = window.location.hash;
     if (!id || id.length < 2) return;
     // The opening curtain holds the page at the top with the scroll locked,
@@ -1308,6 +1314,7 @@
      ========================================================== */
   function cursorRing() {
     var ring = $("#ring");
+    if (isAlumni && ring) { ring.remove(); return; }
     if (!ring || !animate) return;
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) { ring.remove(); return; }
 
@@ -2135,7 +2142,11 @@
     // A completed intro belongs to the tab, not to one document instance.
     // Remove a freshly parsed curtain before heroIn() can prepare hidden lines,
     // so refresh and non-bfcached Back navigation cannot flash and replay it.
-    if (!claimIntroVisit()) {
+    if (isAlumni) {
+      var alumniCurtain = $("#curtain");
+      if (alumniCurtain) alumniCurtain.remove();
+      document.body.classList.remove("is-locked");
+    } else if (!claimIntroVisit()) {
       var repeatedCurtain = $("#curtain");
       if (repeatedCurtain) repeatedCurtain.remove();
       document.body.classList.remove("is-locked");
