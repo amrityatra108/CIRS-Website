@@ -596,7 +596,7 @@ PAGES = {
         # Page styles and search behavior live in alumni.css and alumni-journey.js.
         "banner": None,
         "sheet": "alumni",
-        "cache_suffix": "-alumni-5",
+        "cache_suffix": "-alumni-6",
         "uc": False,
     },
 }

@@ -761,17 +761,15 @@ html.js-motion .ajc__pt{ opacity:0; }
 
 .ajw-track{ position:relative; margin-top:clamp(28px,4vw,48px); }
 .ajw-rail{ display:flex; }
-/* Keep the original type led scenes without trapping vertical scrolling. */
-body.alumni .ajw-rail{
-  display:grid; max-width:var(--maxw); margin-inline:auto;
-  padding-inline:var(--gut);
-}
-body.alumni .ajw{
-  width:100%; max-width:740px; margin-right:0;
+/* Without scroll choreography, every pathway must stay in reading order. */
+html:not(.js-motion) body.alumni .ajw-rail{ display:grid; gap:0; padding-inline:var(--gut); }
+html:not(.js-motion) body.alumni .ajw{
+  width:100%; max-width:740px; height:auto; margin-right:0;
   border-top:1px solid var(--aj-hair-soft);
 }
-body.alumni .ajw:first-child{ border-top:0; }
-body.alumni .ajw::before, body.alumni .ajw-nav{ display:none; }
+html:not(.js-motion) body.alumni .ajw:first-child{ border-top:0; }
+html:not(.js-motion) body.alumni .ajw::before,
+html:not(.js-motion) body.alumni .ajw-nav{ display:none; }
 
 /* ---- no cards ----
    Five boxes in a row is the row of identical cards this page exists to

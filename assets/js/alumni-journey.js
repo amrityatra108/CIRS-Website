@@ -35,9 +35,7 @@
 
   var gsap = window.gsap;
   var ScrollTrigger = window.ScrollTrigger;
-  // The map and controls remain interactive; the page no longer pins or
-  // scrubs sections while someone scrolls through the story.
-  var canMove = false;
+  var canMove = !!(gsap && ScrollTrigger && !reduced);
   if (canMove) gsap.registerPlugin(ScrollTrigger);
 
   /* ==========================================================
@@ -272,6 +270,7 @@
     }, { passive: true });
 
     document.addEventListener("pointerleave", function () { tag.classList.remove("is-on"); });
+    window.addEventListener("scroll", function () { tag.classList.remove("is-on"); }, { passive: true });
   }
 
   /* ==========================================================
