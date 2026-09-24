@@ -685,7 +685,7 @@ def voices_html():
 # ==================================================================
 
 def pathways_html():
-    """Five scenes on one horizontal track, each naming what it is built on.
+    """Five pathways in one scrolling frame, each naming its evidence.
 
     A pathway that cannot name its evidence is an advertisement. Every scene
     below carries the destinations and the alumni it was drawn from, as
@@ -724,7 +724,7 @@ def pathways_html():
 
     dots = "\n".join(
         '      <li><button type="button" class="ajw__dot" data-goto="%d" '
-        'aria-label="Go to %s"><span></span></button></li>' % (i, p["label"])
+        'aria-label="Go to %s"><span aria-hidden="true">%02d</span></button></li>' % (i, p["label"], i + 1)
         for i, p in enumerate(PATHWAYS))
 
     return '''<div class="ajw-track" data-pathways>

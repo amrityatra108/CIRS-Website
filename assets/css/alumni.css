@@ -190,9 +190,9 @@ body.alumni.aj-quiet .header:focus-within{ opacity:1; }
   min-height:100svh;
 }
 .aj-portal__stage{
-  position:relative; min-height:100svh;
-  display:grid; place-items:center;
-  padding:clamp(48px,8vh,96px) var(--gut);
+  position:relative; height:100svh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:clamp(18px,3vh,34px) var(--gut) clamp(28px,4vh,48px);
   overflow:clip;
 }
 /* The field the plate falls into: a slow radial, and a grain of distant
@@ -211,7 +211,7 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 
 .aj-portal__plate{
   position:relative; z-index:2; margin:0;
-  width:min(100%, 1180px);
+  width:min(100%, 900px, calc(150svh - 510px));
   box-shadow:0 40px 120px -40px rgba(0,0,0,.9);
 }
 .aj-portal__plate img{
@@ -230,7 +230,7 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 .aj-portal__copy{
   position:relative; z-index:3;
   width:min(100%, 720px);
-  margin-top:clamp(36px,6vh,72px);
+  margin-top:clamp(18px,3vh,30px);
   text-align:center;
 }
 .aj-portal__head{
@@ -744,15 +744,13 @@ html.js-motion .ajc__pt{ opacity:0; }
 /* ============================================================
    CHAPTER 5 — Paths from CIRS
    ------------------------------------------------------------
-   Five scenes on one horizontal track. Pinned and dragged
-   sideways on a wide screen; a plain vertical stack below that,
-   because a pinned horizontal rail on a phone is a scroll trap.
+   Five pathways share one stable frame on wide screens. Native
+   scrolling advances the frame; narrow screens show the full list.
    ============================================================ */
 .aj-paths{
   position:relative; background:var(--aj-ink);
   padding-block:clamp(72px,12vh,140px) 0;
   overflow:clip;
-  transition:background-color .9s var(--e);
 }
 .aj-paths__head{ max-width:760px; }
 .aj-paths__head .h2{ color:var(--aj-on-dark); }
@@ -760,7 +758,7 @@ html.js-motion .ajc__pt{ opacity:0; }
 .aj-paths__head .lead{ color:var(--aj-on-dark-soft); }
 
 .ajw-track{ position:relative; margin-top:clamp(28px,4vw,48px); }
-.ajw-rail{ display:flex; }
+.ajw-rail{ display:block; }
 /* Without scroll choreography, every pathway must stay in reading order. */
 html:not(.js-motion) body.alumni .ajw-rail{ display:grid; gap:0; padding-inline:var(--gut); }
 html:not(.js-motion) body.alumni .ajw{
@@ -771,41 +769,20 @@ html:not(.js-motion) body.alumni .ajw:first-child{ border-top:0; }
 html:not(.js-motion) body.alumni .ajw::before,
 html:not(.js-motion) body.alumni .ajw-nav{ display:none; }
 
-/* ---- no cards ----
-   Five boxes in a row is the row of identical cards this page exists to
-   avoid, and a bordered panel over a coloured ground reads as a dialog.
-   So the scene has no box at all: the GROUND belongs to the section and
-   changes colour as each pathway takes the screen, and the scenes are
-   columns of type separated by one hairline, dimmed until they are the
-   one being read. alumni-journey.js does the ground; --aj-scene below is
-   where it reads each colour from, so the colours stay in this file. */
 .ajw{
-  position:relative; flex:0 0 auto;
-  width:min(84vw, 540px);
+  position:relative;
+  width:100%;
   padding:clamp(30px,4vw,48px) 0;
-  margin-right:clamp(34px,5vw,76px);
   background:transparent; border:0;
   display:flex; flex-direction:column;
-  transition:opacity .6s var(--e);
 }
-/* The scene that has the screen is marked in ACCENT, not by dimming the
-   other four. Fading them to a third looked right and measured wrong —
-   every line in an inactive scene fell to between 1.5:1 and 2.5:1, which
-   is unreadable, and they are on screen, not off it. The ground changing
-   colour under each pathway is the dominant-scene cue; this is the rest
-   of it, and it costs no legibility at all. */
+/* Accent marks the active pathway without changing the ground underneath it. */
 .ajw-track.is-live .ajw.is-on .ajw__n,
 .ajw-track.is-live .ajw.is-on .ajw__label{ color:var(--aj-accent); }
 .ajw-track.is-live .ajw.is-on .ajw__label::before{
   content:""; display:block; width:26px; height:2px;
   background:var(--aj-accent); margin-bottom:12px;
 }
-.ajw::before{
-  content:""; position:absolute; top:6%; bottom:6%;
-  left:calc(-1 * clamp(17px,2.5vw,38px)); width:1px;
-  background:linear-gradient(to bottom, transparent, var(--aj-hair), transparent);
-}
-.ajw:first-child::before{ display:none; }
 .ajw[data-scene="ink"]{    --aj-scene:#0E0B12; --aj-accent:var(--aj-gold-lit); }
 .ajw[data-scene="navy"]{   --aj-scene:#16243A; --aj-accent:var(--aj-navy-lit); }
 .ajw[data-scene="gold"]{   --aj-scene:#2A2110; --aj-accent:#E8B24A; }
@@ -850,31 +827,60 @@ a.ajw__evName{
 .ajw__evWhere{ font-size:var(--fs-xs); color:var(--aj-on-dark-mute); }
 
 .ajw-nav{
-  padding:clamp(22px,3vw,34px) var(--gut) clamp(48px,7vh,80px);
+  padding:18px var(--gut) 26px;
   display:flex; justify-content:center;
 }
-.ajw__dots{ list-style:none; display:flex; gap:10px; margin:0; padding:0; }
+.ajw__dots{ list-style:none; display:flex; gap:18px; margin:0; padding:0; }
 .ajw__dot{
   appearance:none; background:transparent; border:0; cursor:pointer;
-  padding:8px; display:grid; place-items:center;
+  padding:8px 2px; display:grid; place-items:center;
 }
 .ajw__dot span{
-  display:block; width:28px; height:2px; background:var(--aj-hair);
-  transition:background-color .35s var(--e);
+  display:block; min-width:30px; padding-bottom:4px;
+  color:var(--aj-on-dark-mute); border-bottom:2px solid var(--aj-hair);
+  font:600 .75rem/1 var(--aj-display); font-variant-numeric:tabular-nums;
+  transition:color .25s var(--e), border-color .25s var(--e);
 }
-.ajw__dot.is-on span{ background:var(--aj-gold); }
-.ajw__dot:hover span{ background:var(--aj-gold-lit); }
+.ajw__dot.is-on span{ color:var(--aj-gold-lit); border-color:var(--aj-gold-lit); }
+.ajw__dot:hover span{ color:var(--aj-on-dark); border-color:var(--aj-on-dark); }
 
-/* On a wide screen the track is pinned and dragged sideways, so it wants a
-   screen of its own and scenes of one height. Below 900px none of this
-   applies and the rail is a plain stack — see the phone block at the foot. */
+/* The pinned frame keeps one complete pathway in view at a time. */
 @media (min-width: 900px){
   .ajw-track{
     min-height:100svh;
     display:flex; flex-direction:column; justify-content:center;
+    padding-top:80px;
   }
-  .ajw-rail{ padding-inline:var(--gut); }
-  .ajw{ height:min(70svh, 600px); }
+  .ajw-rail{
+    position:relative;
+    width:calc(100% - var(--gut) - var(--gut));
+    max-width:860px;
+    height:min(620px, calc(100svh - 200px));
+    margin-inline:auto;
+    background:var(--aj-ink-3);
+    border:1px solid var(--aj-hair);
+  }
+  .ajw-track.is-live .ajw{
+    position:absolute; inset:0;
+    width:100%; height:100%; margin:0;
+    padding:clamp(26px,3vw,42px) clamp(30px,4vw,56px);
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .42s ease, visibility .42s;
+  }
+  .ajw-track.is-live .ajw.is-on{
+    opacity:1; visibility:visible; pointer-events:auto;
+  }
+  .ajw-track.is-live .ajw__n{ margin-bottom:18px; }
+  .ajw-track.is-live .ajw__head{ margin-bottom:12px; }
+  .ajw-track.is-live .ajw__evLabel{ margin-top:20px; }
+  .ajw-track.is-live .ajw__evList{ gap:7px; }
+  .ajw-track.is-live .ajw__ev{ gap:0; }
+  html:not(.js-motion) body.alumni .ajw-rail{
+    height:auto; max-width:860px; background:transparent; border:0;
+  }
+  html:not(.js-motion) body.alumni .ajw-track{
+    min-height:auto; padding-top:0;
+  }
 }
 
 /* ============================================================
@@ -1047,7 +1053,7 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   .aj-open{ padding-bottom:clamp(76px,14vh,120px); }
   .aj-open__title{ font-size:clamp(1.75rem,8.4vw,3.2rem); }
 
-  .aj-portal__stage{ min-height:auto; padding-block:clamp(56px,10vh,88px); }
+  .aj-portal__stage{ height:auto; min-height:auto; padding-block:clamp(56px,10vh,88px); }
   .aj-portal{ min-height:auto; }
 
   /* --- the map becomes a list --- */
@@ -1105,7 +1111,7 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   .ajp__index{ top:-.30em; }
 
   /* --- the pathways stack, and never pin --- */
-  .ajw-rail{ display:grid; gap:0; }
+  .ajw-rail{ display:grid; gap:0; padding-inline:var(--gut); }
   .ajw{
     width:100%; margin-right:0;
     padding:clamp(30px,6vw,44px) 0;

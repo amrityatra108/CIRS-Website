@@ -244,8 +244,7 @@
     var zones = [
       [".ajc__pt", "Open"],
       [".ajc__panelClose", "Close"],
-      [".ajw__evName[href]", "Read"],
-      [".ajw-track.is-live", "Scroll"]
+      [".ajw__evName[href]", "Read"]
     ];
 
     var x = null, y = null;
@@ -562,62 +561,51 @@
           .to(copy, { opacity: 1, y: 0, ease: "power2.out", duration: .7 }, .45);
       }
 
-      /* chapter 5: the pathway rail, pinned and dragged sideways */
+      /* chapter 5: one stable pathway frame, advanced by normal scrolling */
       var track = $("[data-pathways]");
       var rail = $("[data-pathways-rail]");
       if (!track || !rail) return;
 
       var scenes = $$(".ajw", rail);
       var dots = $$(".ajw__dot");
-      var section = $(".aj-paths");
       var current = -1;
-      // How far the rail actually has to travel sideways.
-      var distance = function () {
-        return Math.max(0, rail.scrollWidth - window.innerWidth + 32);
-      };
-      /* And how much scrolling that travel is spread over. At 1 the rail
-         moves a pixel sideways for every pixel scrolled, which runs the
-         five scenes past far too briskly to read any of them. At 2.2 each
-         scene holds the screen for better than twice as long without the
-         rail moving any further than it did. This is the pacing dial for
-         the chapter; nothing else needs to change with it. */
-      var PACE = 2.2;
       var travel = function () {
-        return Math.round(distance() * PACE + window.innerHeight * .5);
+        return Math.round(window.innerHeight * scenes.length * .85);
       };
-
-      var railTween = gsap.to(rail, {
-        x: function () { return -distance(); },
-        ease: "none",
-        scrollTrigger: {
-          trigger: track, start: "top top",
-          end: function () { return "+=" + travel(); },
-          pin: true, scrub: .6, invalidateOnRefresh: true, anticipatePin: 1,
-          onUpdate: function (self) {
-            var i = Math.round(self.progress * (scenes.length - 1));
-            if (i === current) return;
-            current = i;
-            scenes.forEach(function (s, n) { s.classList.toggle("is-on", n === i); });
-            dots.forEach(function (d, n) { d.classList.toggle("is-on", n === i); });
-            // The ground belongs to the section, and the colour comes from
-            // the scene's own --aj-scene, so alumni.css stays the one place
-            // any of these five colours is written down.
-            var ground = getComputedStyle(scenes[i]).getPropertyValue("--aj-scene").trim();
-            if (ground) gsap.to(section, { backgroundColor: ground, duration: .9, ease: "power2.out" });
+      function show(i) {
+        if (i === current) return;
+        current = i;
+        scenes.forEach(function (scene, n) {
+          var active = n === i;
+          if (!active && scene.contains(document.activeElement)) {
+            dots[i].focus({ preventScroll: true });
           }
+          scene.classList.toggle("is-on", active);
+          scene.inert = !active;
+          scene.setAttribute("aria-hidden", active ? "false" : "true");
+        });
+        dots.forEach(function (dot, n) {
+          dot.classList.toggle("is-on", n === i);
+          if (n === i) dot.setAttribute("aria-current", "step");
+          else dot.removeAttribute("aria-current");
+        });
+      }
+      track.classList.add("is-live");
+      show(0);
+
+      var pathwayTrigger = ScrollTrigger.create({
+        trigger: track, start: "top top",
+        end: function () { return "+=" + travel(); },
+        pin: true, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          show(Math.min(scenes.length - 1, Math.round(self.progress * (scenes.length - 1))));
         }
       });
 
-      /* The dots move the page through the shared smooth-scroll engine, not
-         through window.scrollTo. cirs.js runs Lenis, and Lenis owns the
-         scroll position — it re-applies its own every frame, so a
-         window.scrollTo is simply swallowed and clicking a dot did nothing
-         at all. cirs.js publishes a "cirs-section-scroll" event for exactly
-         this, which is what a page script is meant to ask through. The
-         direct call stays as the fallback for when Lenis is not running:
-         reduced motion, or the engine having failed to load. */
+      /* Dots use the page's scroll controller when present, with native
+         smooth scrolling as the fallback. */
       function goto(n) {
-        var trig = railTween.scrollTrigger;
+        var trig = pathwayTrigger;
         if (!trig) return;
         var p = scenes.length > 1 ? n / (scenes.length - 1) : 0;
         var top = Math.round(trig.start + (trig.end - trig.start) * p);
@@ -628,19 +616,25 @@
         // defaultPrevented means the engine took it; otherwise do it here.
         if (!ev.defaultPrevented) window.scrollTo({ top: top, behavior: "smooth" });
       }
-      dots.forEach(function (d, n) { d.addEventListener("click", function () { goto(n); }); });
-
-      track.classList.add("is-live");
-      if (scenes[0]) scenes[0].classList.add("is-on");
-      if (dots[0]) dots[0].classList.add("is-on");
+      var handlers = dots.map(function (dot, n) {
+        var handler = function () { goto(n); };
+        dot.addEventListener("click", handler);
+        return handler;
+      });
 
       return function () {
-        // Leaving the desktop query: hand the scenes back to the stack and
-        // give the section its own ground again.
+        // Leaving the desktop query: return every scene to reading order.
         track.classList.remove("is-live");
-        scenes.forEach(function (s) { s.classList.add("is-on"); });
-        dots.forEach(function (d) { d.classList.remove("is-on"); });
-        if (section) gsap.set(section, { clearProps: "backgroundColor" });
+        scenes.forEach(function (s) {
+          s.classList.add("is-on");
+          s.inert = false;
+          s.removeAttribute("aria-hidden");
+        });
+        dots.forEach(function (d, n) {
+          d.classList.remove("is-on");
+          d.removeAttribute("aria-current");
+          d.removeEventListener("click", handlers[n]);
+        });
         current = -1;
       };
     });
