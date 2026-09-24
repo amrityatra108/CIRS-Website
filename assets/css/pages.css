@@ -673,23 +673,29 @@ body.menu-open .header .wrap{
 }
 
 /* ------------------------------------------------------------
-   On this page — a transparent index that opens from the right
+   On this page — an index that opens above the back-to-top button
    ------------------------------------------------------------
-   A long page of procedure needs a way to reach the middle of it.
-   This sits against the right edge, out of the way of the reading
-   column, and opens into a translucent panel over whatever is
-   behind it. It is a <button> and a real list, so it works from
-   the keyboard and reads correctly to a screen reader.
+   A long page needs a way to reach the middle of it. The index is a
+   native <details>: its summary is the button and comes before the
+   list, so Tab goes from the button into the first link, and it opens
+   with no script at all. It sits in the bottom-right corner, directly
+   above back-to-top, at every width. It used to be centred on the
+   right edge with its hidden panel counted in its height, which on a
+   short screen (200% zoom, a phone on its side) dropped the button
+   onto back-to-top and pushed the open list under the header. The
+   list now opens upwards from the button and scrolls within itself
+   when the screen is short.
    ------------------------------------------------------------ */
 .jump{
   position:fixed; z-index:95;
-  right:clamp(12px,2vw,26px);
-  top:50%; transform:translateY(-50%);
-  display:flex; flex-direction:column; align-items:flex-end; gap:10px;
+  /* Centred over the 48px back-to-top button, 12px above it. */
+  right:calc(var(--float-edge) + 5px);
+  bottom:calc(var(--float-edge) + 60px);
 }
 .jump__toggle{
   display:inline-flex; align-items:center; gap:9px;
-  padding:11px 17px; border-radius:99px;
+  padding:11px; border-radius:99px; cursor:pointer;
+  list-style:none;
   background:rgba(30,22,38,.62);
   -webkit-backdrop-filter:blur(14px) saturate(1.3);
           backdrop-filter:blur(14px) saturate(1.3);
@@ -698,13 +704,31 @@ body.menu-open .header .wrap{
   box-shadow:0 6px 26px rgba(14,11,18,.30);
   transition:background .25s var(--e), border-color .25s var(--e), color .25s var(--e);
 }
+.jump__toggle::-webkit-details-marker{ display:none; }
+.jump__toggle::marker{ content:""; }
 .jump__toggle:hover,
-.jump__toggle[aria-expanded="true"]{
+.jump__details[open] > .jump__toggle{
   background:var(--gold); border-color:var(--gold); color:var(--purple-ink);
 }
 .jump__toggle svg{ flex:none; }
+/* The label needs more room than the margin beside the reading column
+   has below 1600px, so there the button is its icon alone and the
+   words stay with screen readers — never over the text it indexes. */
+.jump__label{
+  position:absolute; width:1px; height:1px; overflow:hidden;
+  clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
+}
+@media (min-width:1600px){
+  .jump__toggle{ padding:11px 17px; }
+  .jump__label{ position:static; width:auto; height:auto; overflow:visible; clip:auto; clip-path:none; }
+}
 .jump__panel{
+  position:absolute; right:0; bottom:calc(100% + 10px);
   min-width:230px; max-width:min(78vw,300px);
+  /* Never taller than the room between the header and the button. */
+  max-height:calc(100vh - var(--float-edge) - 60px - 48px - 10px - 96px);
+  max-height:calc(100dvh - var(--float-edge) - 60px - 48px - 10px - 96px);
+  overflow-y:auto; overscroll-behavior:contain;
   padding:var(--space-4) var(--space-4) var(--space-3);
   border-radius:14px;
   background:rgba(30,22,38,.62);
@@ -712,11 +736,10 @@ body.menu-open .header .wrap{
           backdrop-filter:blur(18px) saturate(1.3);
   border:1px solid rgba(255,255,255,.20);
   box-shadow:0 14px 44px rgba(14,11,18,.42);
-  opacity:0; visibility:hidden; transform:translateX(10px) scale(.98);
-  transform-origin:top right;
-  transition:opacity .26s var(--e), transform .26s var(--e), visibility .26s;
+  transform-origin:bottom right;
+  animation:jump-in .26s var(--e);
 }
-.jump.is-open .jump__panel{ opacity:1; visibility:visible; transform:none; }
+@keyframes jump-in{ from{ opacity:0; transform:translateY(8px) scale(.98); } }
 .jump__panel p{
   font-family:var(--font-primary);
   font-variant-caps:normal;
@@ -735,15 +758,8 @@ body.menu-open .header .wrap{
 .jump__panel a:focus-visible{ color:var(--gold-lit); padding-left:5px; }
 .jump__panel a[aria-current="true"]{ color:var(--gold); font-weight:600; }
 
-/* Out of the way of the back-to-top button on a phone, and never
-   wider than the screen. */
-@media (max-width:620px){
-  .jump{ top:auto; bottom:calc(clamp(16px,2.4vw,32px) + 60px); transform:none; }
-  .jump__toggle span{ display:none; }
-  .jump__toggle{ padding:11px; }
-}
 @media (prefers-reduced-motion:reduce){
-  .jump__panel{ transition-duration:.001ms; }
+  .jump__panel{ animation:none; }
 }
 
 /* ------------------------------------------------------------
@@ -1772,6 +1788,16 @@ body.has-lightbox{ overflow:hidden; }
   white-space:nowrap;
 }
 .step__aside .btn + .btn{ margin-left:6px; }
+
+/* When a document is from, or until when it holds — both document pages.
+   An expired certificate, or an edition the school has not replaced, is
+   set in maroon so it cannot be read as current at a glance. */
+.docmeta{
+  display:block; margin-top:4px;
+  font-size:.8rem; letter-spacing:.01em; line-height:1.45; color:var(--ink-soft);
+}
+.docmeta--expired, .docmeta--stale{ color:var(--maroon); }
+.doclist__actions{ display:inline-flex; flex:none; align-items:baseline; gap:6px; }
 
 /* ============================================================
    Alumni voices — what alumni say about the school, in their

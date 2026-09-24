@@ -23,6 +23,7 @@ rather than reloading the page you are already reading.
     python3 tools/build-site.py
 """
 
+import datetime
 import os
 import re
 import sys
@@ -40,7 +41,7 @@ import creativewriting
 import captures
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=100"
+CACHE_BUST = "b=101"
 
 # The standing block under the Admissions hero's buttons.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -980,15 +981,22 @@ def jump_html(body):
     if not items:
         return ""
     links = "\n".join(f'      <a href="#{i}">{t}</a>' for i, t in items)
+    # A native <details>: the summary comes first, so Tab from it enters the
+    # first link, and the list opens and closes with no script at all.
+    # pages.js only adds the conveniences (Escape, outside click, the
+    # current section). It is emitted straight after the page's banner, so
+    # the keyboard meets it before the content, not after.
     return f'''<nav class="jump" aria-label="On this page">
-  <div class="jump__panel" id="jumpPanel">
-      <p>On this page</p>
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
 {links}
-  </div>
-  <button type="button" class="jump__toggle" aria-label="On this page" aria-expanded="false" aria-controls="jumpPanel">
-    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <span>On this page</span>
-  </button>
+    </div>
+  </details>
 </nav>'''
 
 
@@ -1195,28 +1203,48 @@ def crosswall_html():
             + "\n".join(cols) + '\n    </div>')
 
 
+ON_REQUEST = ('Available from the school office on request &middot; '
+              '<a href="mailto:info@cirschool.org">info@cirschool.org</a>')
+
+
+def doc_meta(d):
+    """The date line under a document's title: when it is from or until when
+    it holds, and plainly if it has expired. One source for both pages."""
+    status = docs.effective_status(d)
+    return f'<span class="docmeta docmeta--{status}">{docs.status_text(d)}</span>'
+
+
 def doclist_html():
     """The compact, category-grouped list for the School Information page.
 
-    Titles only — the click-through to view or download lives on the portal
-    page itself, so this section stays scannable rather than repeating 22
-    buttons. Generated straight from tools/documents.py, so it can never list
-    a document the portal does not have, or omit one the portal does.
+    Every document with its date, and View beside Download: the notice above
+    this list promises the browser's own PDF viewer, so the list offers it.
+    Generated straight from tools/documents.py, so it can never list a
+    document the portal does not have, or omit one the portal does.
     """
     groups = []
     for category, items in docs.by_category():
-        rows = "\n".join(
-            (f'        <li><span class="doclist__title">{d["title"]}</span> '
-             f'<a class="doclist__dl" href="{docs.asset_path(d)}" download '
-             f'aria-label="Download {d["title"]} (PDF)">Download</a></li>')
-            if docs.is_uploaded(d) else
-            f'        <li><span class="doclist__title">{d["title"]}</span> '
-            f'<span class="doclist__await">Awaiting upload</span></li>'
-            for d in items)
+        rows = []
+        for d in items:
+            if docs.is_on_request(d):
+                actions = ""
+            elif docs.is_uploaded(d):
+                actions = (f'<a class="doclist__dl doclist__dl--view" href="{docs.asset_path(d)}" '
+                           f'target="_blank" rel="noopener" '
+                           f'aria-label="View {d["title"]} (PDF, opens in a new tab)">View</a>'
+                           f'<a class="doclist__dl" href="{docs.asset_path(d)}" download '
+                           f'aria-label="Download {d["title"]} (PDF)">Download</a>')
+            else:
+                actions = '<span class="doclist__await">Awaiting upload</span>'
+            meta = doc_meta(d) + (f'<span class="docmeta docmeta--request">{ON_REQUEST}</span>'
+                                  if docs.is_on_request(d) else "")
+            rows.append(f'        <li><span class="doclist__title">{d["title"]}{meta}</span>'
+                        + (f' <span class="doclist__actions">{actions}</span>' if actions else "")
+                        + '</li>')
         groups.append(f'''      <div class="docgroup rv">
         <h3 class="serif h3">{category}</h3>
         <ul class="doclist">
-{rows}
+{chr(10).join(rows)}
         </ul>
       </div>''')
     return '<div class="docgrid">\n' + "\n".join(groups) + '\n    </div>'
@@ -1224,24 +1252,28 @@ def doclist_html():
 
 def docportal_html():
     """The Important Documents portal itself: every document, grouped, each
-    with a one-click view/download link — or, for one not yet uploaded, a
-    plain notice that it is awaiting the school rather than a dead link."""
+    with its date and a one-click view/download link — or, for one not yet
+    uploaded, a plain notice that it is awaiting the school rather than a dead
+    link, and for one the school keeps off the site, where to ask for it."""
     groups = []
     for category, items in docs.by_category():
         steps = []
         for d in items:
-            if docs.is_uploaded(d):
+            if docs.is_on_request(d):
+                aside = f'<b>On request</b><br>{ON_REQUEST}'
+            elif docs.is_uploaded(d):
                 aside = (f'<a class="btn btn--outline" href="{docs.asset_path(d)}" target="_blank" '
                          f'rel="noopener">View</a> '
                          f'<a class="btn btn--primary" href="{docs.asset_path(d)}" download>Download</a>'
                          f'<br><small>View opens a tab; download saves the PDF</small>')
             else:
                 aside = '<b>Awaiting upload</b><br>To be added by the school'
+            meta = f'<br>{doc_meta(d)}'
             steps.append(f'''        <div class="step" id="doc-{d["id"]}">
           <p class="step__n"></p>
           <div>
             <h3 class="serif h3">{d["title"]}</h3>
-            <p>{d["note"]}</p>
+            <p>{d["note"]}{meta}</p>
           </div>
           <p class="step__aside">{aside}</p>
         </div>''')
@@ -1456,6 +1488,8 @@ def build(slug, page):
         parts.append(hero_html(page))
     elif page.get("banner"):
         parts.append(banner_html(page))
+    # The "On this page" index goes here, before the content it indexes.
+    jump_at = len(parts)
     if page.get("post"):
         content = article_html(page)
     elif page.get("soon"):
@@ -1499,7 +1533,7 @@ def build(slug, page):
                        .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
     parts.append(content)
     if page.get("jump"):
-        parts.append(jump_html(content))
+        parts.insert(jump_at, jump_html(content))
     if page.get("popup"):
         parts.append(POPUP)
     if page.get("uc", True) and not wall:
@@ -1579,3 +1613,8 @@ if __name__ == "__main__":
         html = build(slug, page)
         open(out, "w", encoding="utf-8").write(html)
         print(f"  write  {slug}.html ({len(html):,} chars)")
+    # A certificate marked current whose date has gone by. The pages already
+    # show it as expired; this names it so tools/documents.py is updated.
+    for title in docs.check_dates(datetime.date.today()):
+        print(f"  NOTE   {title}: validity date has passed, so it is published as "
+              f"expired — upload the renewal or set its status in tools/documents.py")

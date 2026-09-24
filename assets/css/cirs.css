@@ -1039,7 +1039,8 @@ section[id]{ scroll-margin-top:88px; }
 }
 .footer__utility a{ color:var(--on-purple-mute); }
 .footer__utility a:hover{ color:#fff; }
-.footer h4{ margin-bottom:14px; }
+/* Each column's label, one pattern for all four. */
+.footer__main .sc{ margin-bottom:14px; }
 .footer li a{ display:block; padding:5px 0; font-size:var(--fs-sm); transition:color .2s var(--e); }
 .footer li a:hover{ color:#fff; }
 .footer__brand{ display:flex; gap:14px; align-items:flex-start; margin-bottom:18px; }
@@ -1052,6 +1053,14 @@ section[id]{ scroll-margin-top:88px; }
   display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
   padding-block:18px; border-top:1px solid var(--rule-purple);
   font-size:var(--fs-xs); color:var(--on-purple-mute);
+}
+/* Below 1366px the floating controls sit over the page, not beside it, and
+   at the very end of a page that is over the footer's last lines. The bar
+   keeps them clear: room for back-to-top, and on a page with an "On this
+   page" index, for that button above it too. */
+@media (max-width:1365px){
+  .footer__bar{ padding-bottom:calc(18px + 48px + var(--float-edge)); }
+  body:has(.jump) .footer__bar{ padding-bottom:calc(18px + 48px + 12px + 38px + var(--float-edge)); }
 }
 
 /* ============================================================
@@ -1099,8 +1108,12 @@ section[id]{ scroll-margin-top:88px; }
 /* ============================================================
    Back to top
    ============================================================ */
+/* The corner the floating controls sit in. 24px at most, so back-to-top and
+   the "On this page" button above it fit the margin beside the reading
+   column from 1366px up instead of sitting over the text. */
+:root{ --float-edge:clamp(16px,1.7vw,24px); }
 .totop{
-  position:fixed; right:clamp(16px,2.4vw,32px); bottom:clamp(16px,2.4vw,32px);
+  position:fixed; right:var(--float-edge); bottom:var(--float-edge);
   z-index:110; width:48px; height:48px; border-radius:50%;
   background:var(--purple); color:#fff;
   display:grid; place-items:center;

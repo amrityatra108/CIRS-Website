@@ -159,6 +159,13 @@ body.connect .section:not(.on-purple) .factrail dd{
    Administration" over three lines to save nothing. */
 body.connect .section:not(.on-purple) .prog .factrail{ grid-template-columns:1fr; }
 body.connect .ci-rail{ margin-top:var(--space-4); }
+/* At a glance: each value is the way to the page that says more, so it is
+   marked as a link the way running copy is. */
+body.connect .ci-glance dd a{
+  color:var(--purple); text-decoration:underline; text-underline-offset:3px;
+  text-decoration-color:rgba(57,42,72,.35);
+}
+body.connect .ci-glance dd a:hover{ text-decoration-color:var(--purple); }
 
 /* ------------------------------------------------------------
    4. The tables
@@ -216,6 +223,35 @@ body.connect .section:not(.on-purple) .tbl tbody th{
 body.connect .section:not(.on-purple) .tbl td{ color:var(--ink-soft); max-width:62ch; }
 body.connect .section:not(.on-purple) .tbl tbody tr:hover th,
 body.connect .section:not(.on-purple) .tbl tbody tr:hover td{ background:rgba(117,99,0,.035); }
+
+/* On a phone the two-column particulars do not fit: the shared .tbl holds
+   a 520px minimum so it scrolls in its box, and at 390px that cut every
+   answer off mid-word behind a sideways scroll nobody would guess was
+   there. A particular and its answer are a pair, not a grid, so below
+   700px each row stacks — the particular as a label, the answer under
+   it — and nothing scrolls. The column heads say nothing a stacked pair
+   does not, so they are kept for screen readers only. */
+@media (max-width:700px){
+  body.connect .tbl--particulars{ min-width:0; }
+  body.connect .tbl--particulars,
+  body.connect .tbl--particulars tbody,
+  body.connect .tbl--particulars tr,
+  body.connect .tbl--particulars th,
+  body.connect .tbl--particulars td{ display:block; width:auto; }
+  body.connect .tbl--particulars caption{ display:block; }
+  body.connect .tbl--particulars thead{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    clip:rect(0 0 0 0); clip-path:inset(50%);
+  }
+  body.connect .section:not(.on-purple) .tbl--particulars tbody th{
+    width:auto; padding:18px 0 4px; border-bottom:0;
+  }
+  body.connect .section:not(.on-purple) .tbl--particulars td{
+    max-width:none; padding:0 0 18px;
+  }
+  body.connect .section:not(.on-purple) .tbl--particulars tbody tr:hover th,
+  body.connect .section:not(.on-purple) .tbl--particulars tbody tr:hover td{ background:none; }
+}
 
 /* ------------------------------------------------------------
    5. Contact details
@@ -312,6 +348,8 @@ body.connect .ci-sub--spaced{ margin-top:clamp(30px,3.4vw,44px); }
 body.connect .ci-note{ margin-top:var(--space-4); }
 body.connect .ci-group{ margin-top:clamp(30px,3.4vw,44px); }
 body.connect .ci-group .copy + .copy{ margin-top:var(--space-3); }
+/* The one-click way into the portal, under the document list's standfirst. */
+body.connect .ci-portal{ display:block; margin-top:var(--space-4); }
 
 /* The notice that hands over to the documents portal. It is the one
    dark object on a long pale page, so it gets the room to be one. */
@@ -453,18 +491,9 @@ body.connect .doclist__dl:hover,
 body.connect .doclist__dl:focus-visible{
   background:var(--purple); border-color:var(--purple); color:var(--on-purple);
 }
-
-/* The handover to the portal: the notice sat under the photograph with a
-   gap between, two objects where there is one idea. It now rides up over
-   the photograph's foot, so the picture introduces the notice. */
-@media (min-width:900px){
-  body.connect #portal .ciband{ margin-bottom:0; }
-  body.connect #portal .notice{
-    position:relative; z-index:2;
-    margin:calc(-1 * clamp(56px,6vw,96px)) clamp(24px,4vw,64px) 0;
-    box-shadow:0 24px 60px rgba(14,11,18,.22);
-  }
-}
+/* View opens the browser's viewer rather than saving, so it carries no
+   download chevron. */
+body.connect .doclist__dl--view::before{ display:none; }
 
 /* Photograph placeholders on paper. They were near-black slabs, the
    heaviest thing on a pale page and the least informative. They are
