@@ -40,21 +40,21 @@ import creativewriting
 import captures
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=99"
+CACHE_BUST = "b=100"
 
-# The standing block under the Admissions hero's buttons.
+# Questions to settle before an application is submitted.
 HERO_DATES = '''    <dl class="pagehero__dates">
       <div>
-        <dt>Classes</dt>
-        <dd>V&ndash;IX and XI<small>CBSE and the IB Diploma</small></dd>
+        <dt>Entry class</dt>
+        <dd>Ask Admissions<small>Confirm availability for your child</small></dd>
       </div>
       <div>
-        <dt>Portal closes</dt>
-        <dd>15 October 2026<small>Register before this date</small></dd>
+        <dt>Application</dt>
+        <dd>Portal available<small>Confirm the intake before submitting</small></dd>
       </div>
       <div>
-        <dt>Entrance examination</dt>
-        <dd>1 November 2026<small>India and Dubai; first week in other countries</small></dd>
+        <dt>Dates and assessment</dt>
+        <dd>Confirm directly<small>Ask about the schedule, format and location</small></dd>
       </div>
     </dl>'''
 
@@ -130,7 +130,6 @@ def newsflash_html():
 #          included, because every page is still being filled in
 PAGES = {
     "index": {
-        "barehead": True,
         "nav": "Home",
         "title": "Chinmaya International Residential School — Siruvani, Coimbatore",
         "description": "A co-educational residential school on a hundred acres in the Siruvani "
@@ -161,7 +160,6 @@ PAGES = {
     },
     "founder": {
         "litehead": True,
-        "barehead": True,
         "nav": "Founder",
         "title": "Our Founder — Pujya Gurudev Swami Chinmayananda",
         "description": "Pujya Gurudev Swami Chinmayananda, 1916–1993: the teacher whose "
@@ -175,7 +173,6 @@ PAGES = {
         "cache_suffix": "-founder-16",
     },
     "why-cirs": {
-        "barehead": True,
         "nav": "Why CIRS",
         "title": "Why CIRS",
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
@@ -298,7 +295,6 @@ PAGES = {
     },
     "student-life": {
         "logintab": ("Student Portal", "https://cirs.in/school/"),
-        "barehead": True,
         "nav": "Student Life",
         "title": "Student Life",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
@@ -312,7 +308,6 @@ PAGES = {
         "cache_suffix": "-student-life-9",
     },
     "sports": {
-        "barehead": True,
         "nav": "Our Sports",
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
@@ -339,7 +334,6 @@ PAGES = {
         },
     },
     "crossroads": {
-        "barehead": True,
         "nav": "Crossroads",
         # The old site filed this under a "Creative Corner" this site does not
         # have; Student Life is where the arts and the clubs live here.
@@ -369,7 +363,6 @@ PAGES = {
         "litehead": True,
     },
     "cultural-gallery": {
-        "barehead": True,
         "nav": "CIRS Cultural Gallery",
         "title": "Arts, Music & Theatre",
         "description": "Music, theatre and the visual arts at Chinmaya International Residential "
@@ -411,7 +404,6 @@ PAGES = {
                  [("sports.html", "Our Sports")]),
     },
     "math-challenge": {
-        "barehead": True,
         "nav": "Math Challenge",
         "title": "Math Challenge",
         "description": "The Math Challenge at Chinmaya International Residential School — "
@@ -424,7 +416,6 @@ PAGES = {
         "sheet": "matharena",
     },
     "creative-writing": {
-        "barehead": True,
         "nav": "Creative Writing",
         "title": "Creative Writing",
         "description": "Essays, opinion and reflection by students of Chinmaya International "
@@ -437,7 +428,6 @@ PAGES = {
         "sheet": "cwriting",
     },
     "captures": {
-        "barehead": True,
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
         # Not "as its students see it", which this page said while it was a
@@ -489,7 +479,6 @@ PAGES = {
         "uc": False,
     },
     "art-attack": {
-        "barehead": True,
         # The page body is tools/pages/art-attack.html; its sheet is
         # assets/css/culture.css, shared by the three Art, Culture & Music
         # pages that open on a film.
@@ -511,7 +500,6 @@ PAGES = {
         },
     },
     "festivals": {
-        "barehead": True,
         # The page body is tools/pages/festivals.html; its sheet is
         # assets/css/culture.css, shared by the three Art, Culture & Music
         # pages that open on a film.
@@ -533,7 +521,6 @@ PAGES = {
         },
     },
     "theatre": {
-        "barehead": True,
         # The page body is tools/pages/theatre.html; its sheet is
         # assets/css/culture.css, shared by the three Art, Culture & Music
         # pages that open on a film.
@@ -557,8 +544,8 @@ PAGES = {
     "admissions": {
         "nav": "Admissions",
         "title": "Admissions",
-        "description": "How to apply to Chinmaya International Residential School — registration "
-                       "for 2027–2028, the entrance examination, visiting, and fees.",
+        "description": "Admissions information for Chinmaya International Residential School: "
+                       "the application portal, published fee schedule and questions to confirm with the school.",
         # A hero rather than the flat band: this is the page that has to
         # persuade, not merely inform.
         #
@@ -567,13 +554,12 @@ PAGES = {
         "sheet": "admissions",
         "cache_suffix": "-admissions-27",
         "hero_split": False,
-        "hero": ("Admissions", "Admissions <em>Open.</em>",
-                 "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
-                 "registration portal, the entrance examination, a visit to the school and the "
-                 "offer — the whole procedure, in order."),
+        "hero": ("Admissions", "Admissions <em>Guide.</em>",
+                 "Explore the application portal and published fee schedule. Confirm current "
+                 "class availability, assessment arrangements and key dates with the Admissions Office."),
         "hero_media": ("admissions-honeycomb.jpg", "admissions-hero.webm",
                        "admissions-hero.mp4", 1920, 960),
-        "hero_cta": [("Apply on the application portal",
+        "hero_cta": [("Open the application portal",
                       "https://easycollege.in/cirs/school/application/index.aspx", "primary"),
                      ("Understand the process", "#apply", "ghost")],
         "hero_extra": HERO_DATES,
@@ -596,7 +582,7 @@ PAGES = {
                    "fee payment and the parent login the school runs today, and the people to ask."),
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
-        "cache_suffix": "-portal-intro-1",
+        "cache_suffix": "-portal-intro-3",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
@@ -959,9 +945,10 @@ def hero_html(page):
     cta = f'    <p class="pagehero__cta">\n{cta}\n    </p>\n' if cta else ""
     extra = page.get("hero_extra", "")
     split_attr = ' data-split' if page.get("hero_split", True) else ''
+    video_load = ' preload="none"' if page.get("sheet") == "admissions" else ' autoplay'
     return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
   <div class="pagehero__media" style="background-image:url('assets/img/{poster}?{CACHE_BUST}')">
-    <video class="pagehero__video" autoplay muted loop playsinline
+    <video class="pagehero__video"{video_load} muted loop playsinline
            poster="assets/img/{poster}?{CACHE_BUST}" aria-hidden="true"
            width="{vw}" height="{vh}" fetchpriority="high">
       <source src="assets/video/{webm}?{CACHE_BUST}" type="video/webm">
@@ -1013,9 +1000,8 @@ POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
     </button>
     <p class="pop__label" id="popTitle">Contact Admissions Office</p>
     <h2 class="serif">We are here <em>to help.</em></h2>
-    <p class="pop__note" id="popNote">Registrations are open for the academic year 2027&ndash;2028.
-      Write or message us with any question about registration, the entrance examination or a
-      visit to the school.</p>
+    <p class="pop__note" id="popNote">Ask the Admissions Office to confirm the current
+      application window, assessment arrangements or availability of a school visit.</p>
 
     <div class="pop__row">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
@@ -1401,7 +1387,6 @@ def build(slug, page):
             '<noscript><style>html:has(body.parent-portal.portal-intro-active),'
             'body.parent-portal.portal-intro-active{overflow:auto}'
             'body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){visibility:visible}'
-            '.portal-intro__video{display:none}'
             '#portalIntroEntry{display:none}'
             'body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}'
             '</style></noscript>\n</head>')
@@ -1413,16 +1398,11 @@ def build(slug, page):
         head = head[:curtain_note] + head[curtain_note_end:]
 
     # A page that opens on a pale ground cannot have the header floating over
-    # it in white lettering. "litehead" starts it in the solid treatment
-    # .is-stuck already defines and keeps it there — set here in the markup so
-    # it holds without JavaScript, and left alone by cirs.js, which reads it.
+    # it in white lettering. "litehead" puts the class on <body>, and pages.css
+    # gives the header dark lettering there from the first paint, with or
+    # without JavaScript. The header's own state — clear or glass — is the
+    # same on every page and belongs to cirs.js alone.
     lite = bool(page.get("litehead"))
-    # A page that opens on a full-window composition — its own, or one of the
-    # shared heroes — wears the header bare: the glass bar around the three
-    # controls comes off so nothing is laid across the picture. The controls
-    # keep their own pills, so they stay legible over photography. Every other
-    # page keeps the bar, which is what holds them together over paper.
-    bare = bool(page.get("barehead") or page.get("hero"))
     # A page opening on a scrubbed film is marked twice: "film" for the
     # mechanics every such page shares, and its own slug for the handful of
     # decisions its footage makes for it.
@@ -1436,8 +1416,8 @@ def build(slug, page):
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
     if slug == "parent-portal":
-        # The vault video is this page's opening; the shared opaque curtain
-        # would cover its first seconds and run its own scroll lock.
+        # The full-window photograph is this page's opening; the shared opaque
+        # curtain would cover it and run its own scroll lock.
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
@@ -1458,8 +1438,6 @@ def build(slug, page):
     header = (read("tools/partials/header.html")
               .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html")
               .replace("{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
-              .replace("{{HEADER_STATE}}",
-                       (" is-stuck" if lite else "") + (" is-bare" if bare else ""))
               .replace("{{HEADER_TABS}}",
                        EXTRA_TAB.format(href=page["logintab"][1], label=page["logintab"][0])
                        if page.get("logintab") else ""))
@@ -1526,7 +1504,11 @@ def build(slug, page):
         parts.append(UC)
     parts.append("</main>")
     if not wall:
-        parts.append(read("tools/partials/footer.html").rstrip("\n"))
+        footer = read("tools/partials/footer.html").rstrip("\n")
+        if slug == "admissions":
+            footer = footer.replace('href="admissions.html#examination">Important Dates',
+                                    'href="admissions.html#dates">Important Dates')
+        parts.append(footer)
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
     if slug == "crossroads":
         parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-5" defer></script>')

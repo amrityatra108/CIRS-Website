@@ -8,6 +8,22 @@
   var canObserve = typeof window.IntersectionObserver === "function";
   body.classList.add("ad-enhanced");
 
+  function initHeroVideo() {
+    var video = document.querySelector(".pagehero__video");
+    if (!video) return;
+    var reduced = typeof window.matchMedia === "function"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+    function syncPlayback() {
+      if (reduced && reduced.matches) { video.pause(); return; }
+      var playback = video.play();
+      if (playback && typeof playback.catch === "function") playback.catch(function () {});
+    }
+    syncPlayback();
+    if (!reduced) return;
+    if (typeof reduced.addEventListener === "function") reduced.addEventListener("change", syncPlayback);
+    else if (typeof reduced.addListener === "function") reduced.addListener(syncPlayback);
+  }
+
   // Section rules are decorative. Keep the page readable if observation fails.
   function showSectionRules() {
     sections.forEach(function (section) { section.classList.add("is-seen"); });
@@ -80,6 +96,7 @@
   }
 
   // An error in one enhancement must not prevent the others from starting.
+  try { initHeroVideo(); } catch (error) { /* The poster still fills the hero. */ }
   try { initSectionRules(); } catch (error) { showSectionRules(); }
   try { initProcess(); } catch (error) { /* The numbered list stays fully visible. */ }
 })();

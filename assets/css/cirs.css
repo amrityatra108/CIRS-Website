@@ -202,8 +202,10 @@ section[id]{ scroll-margin-top:88px; }
 /* ============================================================
    Header — three tokens across a row: Enquire / wordmark / Menu.
    No persistent nav list; the drawer is the only wayfinding, same
-   as the reference site. Floats transparent over the hero in white;
-   once scrolled past it, .is-stuck swaps it to a solid, dark-on-paper bar.
+   as the reference site. This is the geometry and nothing else:
+   the header's two states — clear over the opening, glass once the
+   page is scrolled — are drawn in pages.css, and neither of them
+   changes a size, a weight or a position here.
    ============================================================ */
 .header{
   position:fixed; top:0; left:0; right:0; z-index:100;
@@ -215,14 +217,6 @@ section[id]{ scroll-margin-top:88px; }
   /* Layout containment keeps the chrome independent without clipping the
      Enquire panel when it opens below the floating bar. */
   will-change:transform; contain:layout style;
-  background:transparent;
-  border-bottom:1px solid transparent;
-  transition:box-shadow .35s var(--e), background .35s var(--e), border-color .35s var(--e);
-}
-.header.is-stuck{
-  background:var(--paper);
-  border-bottom-color:var(--rule-soft);
-  box-shadow:0 1px 20px rgba(21,8,24,.10);
 }
 .header .wrap{
   display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
@@ -231,38 +225,25 @@ section[id]{ scroll-margin-top:88px; }
 .brand{ display:flex; align-items:center; gap:13px; min-width:0; justify-self:center; }
 .brand img{ width:50px; height:auto; flex:none; }
 .brand__txt{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+/* One weight in both states. The wordmark used to drop from 600 to 400
+   as the header turned to glass, and a lighter name is a narrower one:
+   the centred emblem slid sideways and, below 1040px where the name
+   wraps, the bar could change height mid-scroll. */
 .brand__name{
   font-family:var(--font-primary); font-size:1.16rem; line-height:1.06;
-  color:#fff; letter-spacing:-.005em; font-weight:600;
-  transition:color .35s var(--e);
+  letter-spacing:-.005em; font-weight:400;
 }
-.header.is-stuck .brand__name{ color:var(--purple); font-weight:400; }
 .brand__sub{
   font-family:var(--font-primary); font-variant-caps:normal;
   font-feature-settings:normal;
-  font-size:.86rem; letter-spacing:.11em; color:rgba(255,255,255,.8); line-height:1;
-  transition:color .35s var(--e);
+  font-size:.86rem; letter-spacing:.11em; line-height:1;
 }
-.header.is-stuck .brand__sub{ color:var(--ink-mute); }
 @media (max-width:560px){
   .brand{ gap:10px; }
   .brand img{ width:36px; }
   .brand__name{ font-size:.86rem; line-height:1.14; }
   .brand__sub{ display:none; }
 }
-
-.header__enquire{
-  justify-self:start; display:inline-flex; align-items:center; gap:8px;
-  font-size:var(--fs-sm); font-weight:700; color:#fff; white-space:nowrap;
-  transition:color .35s var(--e);
-}
-.header__enquire svg{ color:var(--gold-lit); flex:none; }
-.header__enquire:hover{ color:var(--gold-lit); }
-.header.is-stuck .header__enquire{ color:var(--ink); font-weight:600; }
-.header.is-stuck .header__enquire svg{ color:var(--gold); }
-.header.is-stuck .header__enquire:hover{ color:var(--purple); }
-.header__enquire span{ display:none; }
-@media (min-width:640px){ .header__enquire span{ display:inline; } }
 
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:9px;
@@ -289,24 +270,13 @@ section[id]{ scroll-margin-top:88px; }
 .btn--ghost:hover{ background:#fff; color:var(--purple-deep); border-color:#fff; }
 .btn--lg{ padding:15px 30px; }
 
-.menubtn{
-  justify-self:end; display:inline-flex; align-items:center; gap:var(--space-2);
-  font-size:var(--fs-sm); font-weight:700; color:#fff; white-space:nowrap;
-  transition:color .35s var(--e);
-}
-.header.is-stuck .menubtn{ color:var(--ink); font-weight:600; }
-.menubtn__label{ display:none; }
-@media (min-width:640px){ .menubtn__label{ display:inline; } }
+/* The Menu control's four dots. The control itself is an .htab in
+   pages.css; the dots take its colour. */
 .menubtn__dots{
   display:grid; grid-template-columns:repeat(2,4px); grid-template-rows:repeat(2,4px);
   gap:3px; width:15px; height:15px; align-content:center; justify-content:center;
 }
-.menubtn__dots i{ width:4px; height:4px; border-radius:50%; background:var(--gold-lit); transition:transform .25s var(--e), background .35s var(--e); }
-.header.is-stuck .menubtn__dots i{ background:var(--gold); }
-.menubtn[aria-expanded="true"] .menubtn__dots i:nth-child(1){ transform:translate(2px,2px); }
-.menubtn[aria-expanded="true"] .menubtn__dots i:nth-child(4){ transform:translate(-2px,-2px); }
-.menubtn:hover{ color:var(--gold-lit); }
-.header.is-stuck .menubtn:hover{ color:var(--purple); }
+.menubtn__dots i{ width:4px; height:4px; border-radius:50%; background:currentColor; }
 
 .drawer{
   position:fixed; inset:0; z-index:99; background:var(--paper);
@@ -1223,7 +1193,7 @@ main{ position:relative; z-index:1; background:var(--paper); }
 
    Pinning is `position: sticky` and nothing else. ScrollTrigger's
    own pin rewrites the document with a spacer, which on this site
-   fights Lenis and moves the boundary the header's is-atop probe
+   fights Lenis and moves the boundary the header's scroll state
    watches. Sticky costs neither.
    ============================================================ */
 .hseq{ position:relative; background:var(--purple-ink); }
