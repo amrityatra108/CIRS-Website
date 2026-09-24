@@ -280,13 +280,22 @@ step with the site in silence, which is exactly the failure that check exists to
 - **The header animation for the Admissions banner** — a photograph or a short looping video. The
   banner currently renders a labelled placeholder rather than a stand-in picture, deliberately: a
   temporary photograph on an admissions banner is the kind of thing that quietly ships.
-- **Board of Directors introductions** for the Our People section on `leadership.html`. Seven roles
-  are named. Four introductions are in, from the school's content document; Swami Swaroopananda,
-  Swami Anukoolananda and Smt. G. Rajeshwari still carry a bracketed `[A short introduction to …
-  to be supplied by the school.]` placeholder. Four of the seven also need a photograph — Swami
-  Swaroopananda, Shri. Vijay Mahtaney, Shri. Jagdish Moorjani and Shri. Siddharth Balachandran
-  currently render as a labelled placeholder tile.
-- **A caption for the staff and faculty photograph** — occasion, date and names.
+- **Board of Directors introductions and portraits** for the roster on `leadership.html`. The
+  roster shows only what has been supplied — no stand-in tiles, no bracketed placeholders — so
+  what is missing is listed here rather than on the page. Seven people are named.
+  - *Introductions still needed:* Swami Anukoolananda and Smt. G. Rajeshwari (their rows carry
+    only a link to their message). Swami Swaroopananda's row uses the line School Information
+    already publishes — "Head of Chinmaya Mission worldwide, and head of the committee that
+    manages the School" — until a fuller introduction arrives.
+  - *Portraits still needed:* Swami Swaroopananda, Shri. Vijay Mahtaney, Shri. Jagdish Moorjani
+    and Shri. Siddharth Balachandran. A new portrait goes in `tools/make-leadership.py` with a
+    crop box, and then a `<figure class="roster__face">` in that person's row.
+  - *To confirm:* the Principal's name — the page says Smt. G. Rajeshwari, School Information's
+    committee table says Mrs. Rajeshwari G, and this file earlier recorded Rajeshwari Satish;
+    Shri. Vijay Mahtaney (the design artifact spelled it Viju); and whether the Mahtaney and
+    Balachandran introductions (Park Hyatt Chennai, the BSE shareholding) are still current.
+- **A caption for the staff and faculty photograph** — occasion, date and names. The page says
+  only "The CIRS staff and faculty." until the school supplies it.
 - **The Why CIRS photo is live** — `assets/img/why-cirs.jpg`, cropped from a supplied photo of three
   students to a 4:5 portrait, faces centred.
 - **Photography for the sections that still render as a labelled placeholder tile** instead of
