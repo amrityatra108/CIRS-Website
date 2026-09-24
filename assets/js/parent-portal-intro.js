@@ -13,6 +13,7 @@
   var revealed = false;
   var entered = false;
   var revealTimer;
+  var slowTimer;
 
   function scrollLock(locked) {
     document.body.classList.toggle("portal-intro-active", locked);
@@ -32,11 +33,13 @@
   function reveal() {
     if (revealed || entered) return;
     revealed = true;
+    clearTimeout(slowTimer);
     intro.classList.add("is-revealed");
   }
 
   // The title rises once the photograph is ready behind it — or at once if
-  // it fails, since the text does not depend on it.
+  // it fails, and after a short wait on a slow connection, since the text
+  // does not depend on it: the section's dark ground carries it alone.
   function imageReady() {
     if (revealed || entered || revealTimer) return;
     revealTimer = setTimeout(reveal, reduced ? 0 : 220);
@@ -78,6 +81,7 @@
   });
 
   if (reduced) reveal();
+  else if (!revealed) slowTimer = setTimeout(reveal, 1500);
 
   window.addEventListener("pagehide", function () {
     scrollLock(false);

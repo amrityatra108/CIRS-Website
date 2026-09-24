@@ -583,7 +583,7 @@ PAGES = {
                    "fee payment and the parent login the school runs today, and the people to ask."),
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
-        "cache_suffix": "-portal-intro-2",
+        "cache_suffix": "-portal-intro-3",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
