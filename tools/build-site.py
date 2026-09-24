@@ -431,12 +431,12 @@ PAGES = {
     "captures": {
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
-        "cache_suffix": "-captures-dissolve-1",
+        "cache_suffix": "-captures-journal-2",
         # Not "as its students see it", which this page said while it was a
         # placeholder: none of these files records who took it, so the page
         # makes no claim about who did.
-        "description": "Birds, wildlife, flowers and landscape photographs in the "
-                       "CIRS Captures collection.",
+        "description": "Photographs of wildlife, the grounds, performances and gatherings "
+                       "in the CIRS Captures collection.",
         # No banner from the shared builder. This page opens on six seconds of
         # a camera coming out of the dark, which the reader scrubs with the
         # scroll, and the h1 is the one line that arrives once the film has
@@ -455,11 +455,11 @@ PAGES = {
             # The film's last frame as a still, for reduced motion, a film
             # that fails and no scripting (tools/make-captures-shot.py).
             "still": "captures-camera-final.jpg",
-            # Two centred cuts of the supplied bee-and-flower photograph: the
-            # portrait one wherever the window is no wider than 6:5.
+            # Two cuts of the supplied butterfly photograph: the portrait
+            # one keeps the subject in view on narrow screens.
             "shot": {
-                "src": "captures-shot.jpg", "size": (2400, 1819),
-                "narrow": "captures-shot-portrait.jpg", "narrow_size": (1620, 2160),
+                "src": "captures-shot.jpg", "size": (1425, 1080),
+                "narrow": "captures-shot-portrait.jpg", "narrow_size": (810, 1080),
                 "alt": captures.LEAD_CAPTION,
             },
             # The featured photographs (tools/pages/captures.html) take over
@@ -1538,6 +1538,7 @@ def build(slug, page):
                        .replace("{{CAPTURES_END}}", captures.end_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
                        .replace("{{CAPTURES_COUNT_CAP}}", captures.count_word().capitalize())
+                       .replace("{{CAPTURES_CHAPTER_NAV}}", captures.chapter_nav_html() if slug == "captures" else "")
                        .replace("{{CW_ROWS}}", creativewriting.rows_html())
                        .replace("{{CW_JOURNEY}}", creativewriting.journey_html())
                        .replace("{{CW_COUNT}}", str(creativewriting.count()))

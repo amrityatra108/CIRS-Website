@@ -2,7 +2,7 @@
      with the motion running, this section lies over the last screen
      of the opening and takes over from it on the frame the opening ends on,
      so the photograph simply stays — then moves once, into the first of
-     three compositions for the supplied nature photographs.
+     three compositions drawn from the supplied photographs.
      assets/js/captures-featured.js drives it and
      assets/css/captures-featured.css lays it out. With reduced motion, a
      film that fails or no JavaScript, the same three compositions are
@@ -15,8 +15,8 @@
     <div class="cf__lead" data-cf-lead aria-hidden="true">
       <picture>
         <source media="(max-aspect-ratio: 6/5)"
-                srcset="assets/img/captures-shot-portrait.jpg" width="1620" height="2160">
-        <img src="assets/img/captures-shot.jpg" width="2400" height="1819" alt=""
+                srcset="assets/img/captures-shot-portrait.jpg" width="810" height="1080">
+        <img src="assets/img/captures-shot.jpg" width="1425" height="1080" alt=""
              loading="lazy" decoding="async">
       </picture>
     </div>
@@ -27,8 +27,8 @@
         <div class="cf__pic" data-cf-slot>
           <picture>
             <source media="(max-aspect-ratio: 6/5)"
-                    srcset="assets/img/captures-shot-portrait.jpg" width="1620" height="2160">
-            <img src="assets/img/captures-shot.jpg" width="2400" height="1819"
+                    srcset="assets/img/captures-shot-portrait.jpg" width="810" height="1080">
+            <img src="assets/img/captures-shot.jpg" width="1425" height="1080"
                  alt="{{CAPTURES_LEAD_CAPTION}}" loading="lazy" decoding="async">
           </picture>
         </div>
@@ -57,19 +57,20 @@
 </section>
 <div class="film__seam" aria-hidden="true"></div>
 
-<!-- The photographs. Each tile is a link to its full-size image, so without
-     scripting a tile simply opens the photograph; assets/js/captures-gallery.js
-     takes the click instead and shows it in the viewer below. The rows, the
-     captions and the order are tools/captures.py. -->
+<!-- The journal. Each photograph is visible once in a chapter. Every tile
+     links to its full-size image; assets/js/captures-gallery.js opens that
+     link in the viewer when scripting is available. The order, captions and
+     chapter index come from tools/captures.py. -->
 <section class="section cg" id="photographs" aria-labelledby="cg-title">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">The photographs</span></p>
-      <h2 class="serif h2" id="cg-title" data-split>Nature, <em>in frames.</em></h2>
-      <p class="lead">{{CAPTURES_COUNT_CAP}} more views of birds, wildlife and the landscape.
-        Select one to see it larger.</p>
+      <h2 class="serif h2" id="cg-title" data-split>Look a little closer.</h2>
+      <p class="lead">{{CAPTURES_COUNT_CAP}} more photographs move from small creatures
+        and open views to moments together. Choose a chapter, or open any frame.</p>
     </div>
-    <div class="cg__grid" data-cg>
+    {{CAPTURES_CHAPTER_NAV}}
+    <div class="cg__journal" data-cg>
 {{CAPTURES_GALLERY}}
     </div>
     <p class="note cg__note">Photographer credits will be added when confirmed.</p>

@@ -1,25 +1,88 @@
-/* CIRS Captures — the gallery below the opening, its viewer, and the ending.
-   Scoped by its own classes; loaded only on captures.html.
-
-   The gallery is laid out in rows, and every photograph in a row is drawn
-   at the row's one height at its own shape: each tile's flex-grow is its
-   aspect ratio, so the widths divide the row in proportion and the heights
-   come out equal. Nothing is cropped to fit a cell — a portrait stays a
-   portrait beside a landscape. The rows themselves are tools/captures.py.
-
-   Deliberately still. The page's one long movement is the camera at the
-   top; below it the photographs are simply there, and the only motion is
-   the site's ordinary heading reveal. */
+/* CIRS Captures — a four-chapter photo journal, its viewer, and the ending.
+   The opening carries the page's movement. Here the images hold still, with
+   a chapter index and sticky chapter headings helping readers through fifty
+   photographs. Each justified row preserves the photos' own proportions. */
 
 .cg{
   --cg-gap:clamp(8px, 1.1vw, 16px);
   scroll-margin-top:88px;
 }
 
+.cg__contents{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin:clamp(30px,4vw,60px) 0 clamp(44px,6vw,88px);
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+
+.cg__contents a{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+  min-width:0;
+  padding:18px clamp(10px,1.7vw,28px);
+  color:var(--ink);
+  font-family:var(--font-primary);
+  font-size:clamp(.93rem,1.15vw,1.1rem);
+  line-height:1.25;
+  text-decoration:none;
+  transition:background .2s var(--e), color .2s var(--e);
+}
+.cg__contents a + a{ border-left:1px solid var(--rule); }
+.cg__contents a:hover{ background:var(--paper-2); }
+.cg__contents a:focus-visible{ outline:2px solid var(--gold); outline-offset:-2px; }
+.cg__contents span{
+  color:var(--ink-mute);
+  font-size:.76rem;
+  font-variant-numeric:tabular-nums;
+}
+
+.cg__journal{ display:flex; flex-direction:column; gap:clamp(72px,10vw,144px); }
+.cg__chapter{
+  display:grid;
+  grid-template-columns:minmax(185px,22%) minmax(0,1fr);
+  align-items:start;
+  column-gap:clamp(24px,4vw,72px);
+  padding-top:clamp(24px,3vw,44px);
+  border-top:1px solid var(--rule);
+  scroll-margin-top:88px;
+}
+.cg__chapter-head{
+  position:sticky;
+  top:clamp(92px,11vh,126px);
+  padding-right:clamp(0px,1vw,12px);
+}
+.cg__chapter-count{
+  margin:0 0 12px;
+  color:var(--ink-mute);
+  font-size:.82rem;
+  font-variant-numeric:tabular-nums;
+}
+.cg__chapter-head h3{
+  margin:0 0 12px;
+  max-width:9ch;
+  font-family:var(--font-primary);
+  font-size:clamp(2.1rem,3.3vw,3.9rem);
+  font-weight:400;
+  line-height:.98;
+  letter-spacing:-.035em;
+  text-wrap:balance;
+}
+.cg__chapter-head > p:last-child{
+  max-width:27ch;
+  margin:0;
+  color:var(--ink-soft);
+  font-size:clamp(.9rem,1.05vw,1rem);
+  line-height:1.55;
+}
+
 .cg__grid{
   display:flex;
   flex-direction:column;
   gap:var(--cg-gap);
+  min-width:0;
 }
 
 .cg__row{
@@ -46,6 +109,23 @@
   transition:transform .7s var(--e2), opacity .3s var(--e);
 }
 
+.cg__item-caption{
+  position:absolute;
+  z-index:1;
+  inset:auto 0 0;
+  padding:42px clamp(13px,1.6vw,24px) clamp(12px,1.6vw,22px);
+  background:linear-gradient(to top,rgba(12,17,13,.75),transparent);
+  color:#fff;
+  font-size:clamp(.78rem,.95vw,.94rem);
+  line-height:1.35;
+  opacity:0;
+  transition:opacity .22s var(--e);
+  pointer-events:none;
+}
+.cg__row--solo .cg__item-caption,
+.cg__item:hover .cg__item-caption,
+.cg__item:focus-visible .cg__item-caption{ opacity:1; }
+
 @media (hover:hover){
   .cg__item:hover img{ transform:scale(1.025); }
 }
@@ -61,11 +141,24 @@
   font-size:var(--fs-sm);
 }
 
-/* A phone is too narrow for a row of three to be anything but thumbnails,
-   so every photograph gets the width to itself, still at its own shape. */
+@media (max-width:920px){
+  .cg__chapter{ grid-template-columns:1fr; row-gap:24px; }
+  .cg__chapter-head{ position:static; display:grid; grid-template-columns:1fr 1fr; column-gap:24px; align-items:end; }
+  .cg__chapter-count{ grid-column:1 / -1; }
+  .cg__chapter-head h3{ max-width:none; margin:0; }
+  .cg__chapter-head > p:last-child{ max-width:30ch; }
+}
+
+/* A phone gives every image the width it needs to be more than a thumbnail. */
 @media (max-width:640px){
+  .cg__contents{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cg__contents a:nth-child(3){ border-left:0; }
+  .cg__contents a:nth-child(n+3){ border-top:1px solid var(--rule); }
+  .cg__chapter-head{ display:block; }
+  .cg__chapter-head h3{ margin-bottom:12px; }
   .cg__row{ flex-direction:column; }
   .cg__item{ flex:none; width:100%; }
+  .cg__item-caption{ opacity:1; padding:40px 14px 12px; }
 }
 
 

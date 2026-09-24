@@ -7,10 +7,10 @@
     assets/img/captures-shot-portrait-lqip.jpg   standing in until the real one arrives
     assets/img/captures-camera-final.jpg       the camera film's last frame, as a still
 
-The supplied photograph is a bee on a yellow flower. Both cuts are centred
-on the bee; the opening's --film-focus in assets/css/filmintro.css and the
+The opening photograph is a butterfly in grass. Both cuts keep the butterfly
+in the frame; the opening's --film-focus in assets/css/filmintro.css and the
 featured section's --cf-focus in assets/css/captures-featured.css must agree
-with those cuts so the photo holds its position across the handoff.
+so the photo holds its position across the handoff.
 
 Nothing here repaints the photograph. The two cuts only crop and resize it.
 
@@ -37,10 +37,10 @@ SOURCE = os.path.join(ROOT, "assets/source", captures.LEAD_SOURCE)
 FILM = os.path.join(ROOT, "assets/video/captures-camera.mp4")
 IMG = os.path.join(ROOT, "assets/img")
 
-# (name, output size). Both crops are centred on the bee.
+# (name, output size). The butterfly sits left of centre in the source.
 CUTS = [
-    ("captures-shot", (2400, 1819)),
-    ("captures-shot-portrait", (1620, 2160)),
+    ("captures-shot", (1425, 1080)),
+    ("captures-shot-portrait", (810, 1080)),
 ]
 LQIP_WIDTH = 32
 FILM_LAST_FRAME = 143          # six seconds at 24fps: frames 0 to 143
@@ -58,8 +58,8 @@ def cut_photographs():
     src = ImageOps.exif_transpose(Image.open(SOURCE)).convert("RGB")
     for name, size in CUTS:
         full = ImageOps.fit(src, size, method=Image.Resampling.LANCZOS,
-                            centering=(0.5, 0.5))
-        path = write(full, f"{name}.jpg", 80)
+                            centering=(0.12, 0.5))
+        path = write(full, f"{name}.jpg", 86)
         print(f"  write  assets/img/{name}.jpg  {os.path.getsize(path)//1024} KB  "
               f"{size[0]}x{size[1]}")
         tiny = full.resize((LQIP_WIDTH, round(LQIP_WIDTH * full.height / full.width)),

@@ -1,15 +1,14 @@
-"""CIRS Captures — the featured photographs, gallery, and ending.
+"""CIRS Captures — a fifty-photograph journal from the supplied collections.
 
-The sixteen supplied photographs are in assets/source/captures-2026-09-24.
-Captions describe only what is visible; photographer, date, and location are
-not inferred. tools/make-captures-gallery.py writes the gallery and featured
-images and their dimensions to tools/captures-gallery.json, so the site build
-does not need an image library. The opening lead is cut separately by
-tools/make-captures-shot.py.
+The first sixteen photographs are in assets/source/captures-2026-09-24. The
+new ZIP has 43 photographs and one blank frame; nine repeat photographs in
+the first collection. Its 34 new photographs are in
+assets/source/captures-2026-09-24-zip. Every unique photograph appears once:
+four in the opening, 45 in the journal, and one at the end.
 
-ROWS defines the gallery order and its equal-height rows. The viewer follows
-the same reading order. The lead, three featured images, and ending appear
-once each outside the gallery.
+Captions describe what is visible; photographer, date, and exact location are
+not inferred. tools/make-captures-gallery.py writes the image sizes used by
+the site build. tools/make-captures-shot.py cuts the opening photograph.
 """
 
 import json
@@ -18,31 +17,105 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 MANIFEST = os.path.join(HERE, "captures-gallery.json")
 
+OLD = "captures-2026-09-24"
+ZIP = "captures-2026-09-24-zip"
+
+
+def old(name):
+    return f"{OLD}/{name}.jpg"
+
+
+def new(number):
+    return f"{ZIP}/{number:02d}.jpg"
+
+
 # (source file in assets/source, output name, caption, width of the cut)
-# The lead — the photograph dissolved over the camera's final frame — is cut
-# by tools/make-captures-shot.py, because the opening uses it first.
-LEAD_SOURCE = "captures-2026-09-24/img-9821.jpg"
-LEAD_CAPTION = "A bee on a vivid yellow flower"
+# The lead is the first frame after the camera's full-screen dissolve.
+LEAD_SOURCE = new(1)
+LEAD_CAPTION = "A black and white butterfly resting in sunlit grass"
 FEATURED = [
-    ("captures-2026-09-24/dsc02269.jpg", "companion", "A black and yellow butterfly on pale purple flowers", 1800),
-    ("captures-2026-09-24/img-9515.jpg", "portrait", "A hoopoe perched among branches", 1200),
-    ("captures-2026-09-24/img-1007.jpg", "wide", "A small dark bird amid pink blossoms", 2400),
+    (new(13), "companion", "Silhouetted stems against a vivid orange sunset", 1800),
+    (new(14), "portrait", "A quiet path beneath tall trees", 1200),
+    (new(6), "wide", "An overhead view of buildings surrounded by trees", 2400),
 ]
 
-# (source file in assets/source, output name, caption)
-ROWS = [
-    [("captures-2026-09-24/dsc00453.jpg", "bird-among-leaves", "A red-crested bird among broad green leaves"),
-     ("captures-2026-09-24/img-1396.jpg", "bird-white-blossoms", "A small bird reaching into white blossoms")],
-    [("captures-2026-09-24/img-1887.jpg", "squirrel-branch", "A squirrel perched on a branch against blue sky"),
-     ("captures-2026-09-24/img-2031.jpg", "green-lizard", "A green lizard partly hidden beneath leaves"),
-     ("captures-2026-09-24/img-4426.jpg", "grey-bird", "A small grey bird seen through soft green foliage")],
-    [("captures-2026-09-24/kingfisher.jpg", "kingfisher-water", "A kingfisher by the water, framed by tree trunks")],
-    [("captures-2026-09-24/img-4491.jpg", "kingfisher-post", "A kingfisher perched on a post with trees behind"),
-     ("captures-2026-09-24/img-4562.jpg", "dove-branches", "A dove perched among yellow flowers and branches")],
-    [("captures-2026-09-24/img-2030.jpg", "bird-dark", "A small pale-headed bird against a dark background"),
-     ("captures-2026-09-24/img-5244.jpg", "bird-in-shade", "A dark green bird on a branch in deep shade"),
-     ("captures-2026-09-24/img-5569.jpg", "bird-bare-branches", "A small red-crowned bird among bare branches")],
+# Each chapter is a set of justified rows. The large first row of every
+# chapter sets its pace; the following pairs and trios keep every photograph
+# at its own aspect ratio. The viewer uses this same reading order.
+CHAPTERS = [
+    {
+        "slug": "small-worlds", "title": "Small worlds",
+        "intro": "Flowers, insects and the creatures that appear when the camera moves closer.",
+        "rows": [
+            [(old("img-9821"), "bee-yellow-flower", "A bee on a vivid yellow flower")],
+            [(old("dsc02269"), "butterfly-flowers", "A black and yellow butterfly on pale purple flowers"),
+             (new(4), "green-insect", "An iridescent green insect on a leafy branch")],
+            [(new(5), "grasshopper-stem", "A grasshopper resting along a slender stem"),
+             (new(15), "insect-on-stem", "A small insect clinging to a stem against green"),
+             (new(26), "grasshopper-leaf", "A grasshopper on a broad green leaf")],
+            [(old("img-2031"), "green-lizard", "A green lizard partly hidden beneath leaves"),
+             (new(43), "red-dragonfly", "A red dragonfly resting on a thin stem")],
+            [(new(7), "squirrel-hollow", "A squirrel peeking out from a tree hollow"),
+             (new(35), "bird-in-nest", "A dark bird in a nest among bright leaves")],
+            [(new(30), "blue-bird-flowers", "A blue bird beside pale flowers"),
+             (new(42), "yellow-eyed-bird", "A yellow-eyed bird among branches")],
+        ],
+    },
+    {
+        "slug": "among-the-trees", "title": "Among the trees",
+        "intro": "Perches, branches and the birds glimpsed between leaves.",
+        "rows": [
+            [(old("img-1007"), "bird-pink-blossoms", "A small dark bird amid pink blossoms")],
+            [(old("img-9515"), "hoopoe-branches", "A hoopoe perched among branches"),
+             (new(2), "brown-bird-branch", "A brown bird on a bare branch against the sky")],
+            [(new(3), "bird-in-large-tree", "A bird perched in the limbs of a broad tree"),
+             (new(8), "bird-dense-leaves", "A small bird partly hidden in dense foliage")],
+            [(old("dsc00453"), "bird-among-leaves", "A red-crested bird among broad green leaves"),
+             (old("img-1396"), "bird-white-blossoms", "A small bird reaching into white blossoms")],
+            [(old("img-1887"), "squirrel-branch", "A squirrel perched on a branch against blue sky"),
+             (old("kingfisher"), "kingfisher-water", "A kingfisher by the water, framed by tree trunks")],
+            [(old("img-4491"), "kingfisher-post", "A kingfisher perched on a post with trees behind"),
+             (new(10), "kingfisher-trunk", "A kingfisher against the dark bark of a tree")],
+            [(old("img-4562"), "dove-branches", "A dove perched among yellow flowers and branches"),
+             (old("img-2030"), "bird-dark", "A small pale-headed bird against a dark background")],
+            [(old("img-5244"), "bird-in-shade", "A bird on a branch in deep shade"),
+             (old("img-5569"), "bird-bare-branches", "A small red-crowned bird among bare branches")],
+        ],
+    },
+    {
+        "slug": "sky-and-shade", "title": "Sky and shade",
+        "intro": "Open perches, distant light and moments just outside the canopy.",
+        "rows": [
+            [(new(9), "raptor-stump", "A bird of prey perched on a weathered stump")],
+            [(new(12), "pale-bird-perch", "A pale bird on a thin bare branch"),
+             (new(11), "colorful-bird", "A colorful bird perched among sunlit leaves")],
+            [(old("img-4426"), "grey-bird", "A small grey bird seen through soft green foliage"),
+             (new(28), "bird-on-roof", "A small bird perched on roof tiles")],
+            [(new(16), "trees-at-dusk", "Trees framing an open field in evening light"),
+             (new(29), "peacock-shade", "A peacock among dark leaves")],
+            [(new(31), "brown-bird-branches", "A brown bird perched among crossing branches"),
+             (new(32), "black-white-bird", "A black and white bird with a long tail in green foliage")],
+            [(new(36), "grey-blue-bird", "A grey-blue bird perched on a branch"),
+             (new(38), "yellow-bird-sky", "A small yellow bird against blue sky"),
+             (new(39), "bird-silhouette", "A bird silhouetted against a pale sky")],
+        ],
+    },
+    {
+        "slug": "together", "title": "Together",
+        "intro": "Performances and gatherings from the school collection.",
+        "rows": [
+            [(new(20), "people-seated-together", "People seated together on the floor")],
+            [(new(17), "decorated-stage", "Flowers and artwork on a decorated stage"),
+             (new(18), "performer-blue-light", "A performer under blue stage lights")],
+            [(new(19), "seated-performer", "A performer seated on stage"),
+             (new(21), "singer-spotlight", "A singer holding a microphone on a dark stage"),
+             (new(22), "group-outdoors", "A group gathered outdoors with flower garlands")],
+        ],
+    },
 ]
+
+# The image builder works over the same flattened rows as the page.
+ROWS = [row for chapter in CHAPTERS for row in chapter["rows"]]
 
 # The ending: one photograph, kept out of the gallery above so that it is
 # seen once, at the end.
@@ -63,7 +136,7 @@ def count():
 
 WORDS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen "
          "fourteen fifteen sixteen seventeen eighteen nineteen").split()
-TENS = {2: "twenty", 3: "thirty", 4: "forty"}
+TENS = {2: "twenty", 3: "thirty", 4: "forty", 5: "fifty"}
 
 
 def count_word():
@@ -84,30 +157,56 @@ def _esc(text):
                 .replace(">", "&gt;").replace('"', "&quot;"))
 
 
+def chapter_nav_html():
+    """A short index keeps a fifty-photo page easy to browse."""
+    links = [
+        f'    <a href="#cg-{chapter["slug"]}">{_esc(chapter["title"])}'
+        f'<span>{sum(map(len, chapter["rows"]))}</span></a>'
+        for chapter in CHAPTERS
+    ]
+    return '<nav class="cg__contents" aria-label="Photo chapters">\n' + "\n".join(links) + '\n</nav>'
+
+
 def gallery_html():
-    """The rows of tiles. Each tile is a link to the full-size image, so
-    without JavaScript it simply opens the photograph; with it, the viewer
-    in assets/js/captures-gallery.js takes the click instead."""
+    """Every photograph is visible in a chapter and opens at full size.
+
+    The rows preserve image shape; without JavaScript each link opens its
+    photograph directly. With it, the viewer follows the same chapter order.
+    """
     sizes = _sizes()
-    out, index = [], 0
-    for row in ROWS:
-        tiles = []
-        for _, name, caption in row:
-            s = sizes[name]
-            ratio = s["tile"][0] / s["tile"][1]
-            credit = CREDITS.get(name, "")
-            tiles.append(
-                f'        <a class="cg__item" href="{s["full_path"]}" data-cg-item '
-                f'data-cg-index="{index}" data-cg-w="{s["full"][0]}" data-cg-h="{s["full"][1]}"'
-                + (f' data-cg-credit="{_esc(credit)}"' if credit else "") +
-                f' style="--ar:{ratio:.4f}">\n'
-                f'          <img src="{s["tile_path"]}" width="{s["tile"][0]}" height="{s["tile"][1]}"\n'
-                f'               alt="{_esc(caption)}" loading="lazy" decoding="async">\n'
-                f'        </a>')
-            index += 1
-        solo = " cg__row--solo" if len(row) == 1 else ""
-        out.append(f'      <div class="cg__row{solo}">\n' + "\n".join(tiles) + "\n      </div>")
-    return "\n".join(out)
+    sections, index = [], 0
+    for chapter in CHAPTERS:
+        rows = []
+        for row in chapter["rows"]:
+            tiles = []
+            for _, name, caption in row:
+                s = sizes[name]
+                ratio = s["tile"][0] / s["tile"][1]
+                credit = CREDITS.get(name, "")
+                tiles.append(
+                    f'          <a class="cg__item" href="{s["full_path"]}" data-cg-item '
+                    f'data-cg-index="{index}" data-cg-w="{s["full"][0]}" data-cg-h="{s["full"][1]}"'
+                    + (f' data-cg-credit="{_esc(credit)}"' if credit else "") +
+                    f' style="--ar:{ratio:.4f}">\n'
+                    f'            <img src="{s["tile_path"]}" width="{s["tile"][0]}" height="{s["tile"][1]}"\n'
+                    f'                 alt="{_esc(caption)}" loading="lazy" decoding="async">\n'
+                    f'            <span class="cg__item-caption" aria-hidden="true">{_esc(caption)}</span>\n'
+                    f'          </a>')
+                index += 1
+            solo = " cg__row--solo" if len(row) == 1 else ""
+            rows.append(f'        <div class="cg__row{solo}">\n' + "\n".join(tiles) + '\n        </div>')
+        count = sum(map(len, chapter["rows"]))
+        slug = chapter["slug"]
+        sections.append(
+            f'      <section class="cg__chapter" id="cg-{slug}" aria-labelledby="cg-{slug}-title">\n'
+            f'        <header class="cg__chapter-head">\n'
+            f'          <p class="cg__chapter-count">{count} photographs</p>\n'
+            f'          <h3 id="cg-{slug}-title">{_esc(chapter["title"])}</h3>\n'
+            f'          <p>{_esc(chapter["intro"])}</p>\n'
+            f'        </header>\n'
+            f'        <div class="cg__grid">\n' + "\n".join(rows) +
+            '\n        </div>\n      </section>')
+    return "\n".join(sections)
 
 
 def end_html():

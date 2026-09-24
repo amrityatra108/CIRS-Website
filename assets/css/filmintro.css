@@ -256,12 +256,12 @@ body.captures{
      the travel by the same 320/360 as the camera sequence. */
   --film-run-page:530vh;
   --film-run-page-narrow:482.22vh;
-  --film-focus:50% 55%;
+  --film-focus:15% 55%;
   --film-shot-lqip:url(../img/captures-shot-lqip.jpg);
   --film-still-image:url(../img/captures-camera-final.jpg);
   --film-still-position:50% 80%;
-  /* The photograph's yellow petals and dark background meet on a neutral
-     green at its foot (.film__shot::before); the ramp carries that tone on
+  /* The butterfly's grass meets a neutral green at the photograph's foot
+     (.film__shot::before); the ramp carries that tone on
      toward the paper gallery. */
   --film-seam-top:#141A15;
   --film-seam-fold:#101610;
@@ -275,10 +275,10 @@ body.captures .film[data-film-still] + .film__seam{
   --film-seam-rise:#6B6560;
 }
 /* The photograph changes at the same boundary as the film's crop, to a
-   portrait cut of the same flower that keeps the bee in view. */
+   portrait cut of the same grass that keeps the butterfly in view. */
 @media (max-aspect-ratio:6/5){
   body.captures{
-    --film-focus:50% 55%;
+    --film-focus:45% 55%;
     --film-shot-lqip:url(../img/captures-shot-portrait-lqip.jpg);
     --film-still-position:32% 80%;
   }

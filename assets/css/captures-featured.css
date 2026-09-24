@@ -1,8 +1,8 @@
 /* CIRS Captures — the featured photographs, between the opening and the
    gallery. Scoped by its own classes; loaded only on captures.html.
 
-   Four photographs in three compositions: the bee and flower beside a
-   butterfly, a hoopoe in the portrait frame, then a bird among blossoms
+   Four photographs in three compositions: a butterfly in grass beside a
+   sunset, a path in the portrait frame, then an overhead view of the grounds
    across the full width.
 
    Every size below is taken from the frame itself (container query units:
@@ -18,11 +18,11 @@
 
 .cf{
   --cf-ground:#141A15;
-  /* The bee's subject point, as the opening states it (--film-focus in
+  /* The butterfly's subject point, as the opening states it (--film-focus in
      the body.captures block of assets/css/filmintro.css); the two must
      agree, because this section takes over from the opening on a frame the
      two draw identically. */
-  --cf-focus:50% 55%;
+  --cf-focus:15% 55%;
   --cf-top:clamp(92px, 12vh, 116px);
   --cf-bottom:clamp(28px, 6vh, 64px);
   --cf-cap:3.6rem;               /* kept below a photograph for its caption */
@@ -91,7 +91,7 @@
 /* ------------------------------------------------------------
    The pair
    ------------------------------------------------------------
-   The flower as a tall panel, with the butterfly's wider photograph beside
+   The butterfly as a tall panel, with the sunset's wider photograph beside
    it on a lower baseline. */
 
 .cf__frame--pair{
@@ -104,9 +104,9 @@
 .cf__fig--lead img{ object-position:var(--cf-focus); }
 .cf__fig--companion{
   --h:min(calc((100cqh - var(--cf-cap)) * .76),
-          calc((100cqw - (100cqh - var(--cf-cap)) * .8 - var(--cf-gap)) / 1.5));
+          calc((100cqw - (100cqh - var(--cf-cap)) * .8 - var(--cf-gap)) / 1.9));
 }
-.cf__fig--companion .cf__pic{ height:var(--h); width:calc(var(--h) * 1.5); }
+.cf__fig--companion .cf__pic{ height:var(--h); width:calc(var(--h) * 1.9); }
 .cf__fig--companion img{ object-position:50% 50%; }
 
 
@@ -135,7 +135,7 @@
 /* ------------------------------------------------------------
    The band
    ------------------------------------------------------------
-   The bird amid blossoms fills the width of the window. */
+   The overhead view fills the width of the window. */
 
 .cf__frame--band{ align-items:center; }
 .cf__fig--wide{
@@ -154,13 +154,13 @@
    Windows taller than they are wide
    ------------------------------------------------------------
    The same boundary the opening changes its crop at. The pair stacks —
-   the flower to the left, the butterfly to the right below it — sized so the
+   the butterfly to the left, the sunset to the right below it — sized so the
    two always fit the frame together; the portrait and the band keep their
    ideas at a phone's proportions. */
 
 @media (max-aspect-ratio:6/5){
   .cf{
-    --cf-focus:50% 55%;
+    --cf-focus:45% 55%;
     --cf-top:clamp(84px, 11vh, 108px);
     --cf-bottom:clamp(20px, 4vh, 40px);
     --cf-gap:clamp(14px, 2.4vh, 28px);
@@ -179,7 +179,7 @@
     align-self:flex-start;
   }
   .cf__fig--companion{
-    --h:min(calc(100cqw * .86 / 1.5),
+    --h:min(calc(100cqw * .86 / 1.9),
             calc((100cqh - 2 * var(--cf-cap) - var(--cf-gap)) * .42));
     align-self:flex-end;
   }
@@ -231,7 +231,7 @@
   will-change:opacity, transform;
 }
 
-/* The bee and flower, as the opening leaves them: the same picture and crop,
+/* The butterfly, as the opening leaves it: the same picture and crop,
    the same foot going down to the ground's tone. The script moves this box
    from the whole window to the lead panel in the pair; that panel's picture
    stays transparent, because this is drawing it. */
