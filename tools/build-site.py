@@ -583,7 +583,7 @@ PAGES = {
                    "fee payment and the parent login the school runs today, and the people to ask."),
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
-        "cache_suffix": "-portal-intro-1",
+        "cache_suffix": "-portal-intro-2",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
@@ -1388,7 +1388,6 @@ def build(slug, page):
             '<noscript><style>html:has(body.parent-portal.portal-intro-active),'
             'body.parent-portal.portal-intro-active{overflow:auto}'
             'body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){visibility:visible}'
-            '.portal-intro__video{display:none}'
             '#portalIntroEntry{display:none}'
             'body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}'
             '</style></noscript>\n</head>')
@@ -1418,8 +1417,8 @@ def build(slug, page):
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
     if slug == "parent-portal":
-        # The vault video is this page's opening; the shared opaque curtain
-        # would cover its first seconds and run its own scroll lock.
+        # The full-window photograph is this page's opening; the shared opaque
+        # curtain would cover it and run its own scroll lock.
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
