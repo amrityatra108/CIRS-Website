@@ -187,6 +187,37 @@
     });
   }
 
+  /* ------------------------------------------------------------
+     5. THE STACKED DISCIPLINES
+     The cards pin themselves (position: sticky, sports.css). This
+     only sinks the card being covered: as the next card rises from
+     the foot of the window to the top, --cover on the one beneath
+     runs from 0 to 1, and the sheet turns that into a slight
+     shrink and a darkening. Read in one pass per frame, written in
+     the next, so the scroll never forces a layout mid-write.
+     ------------------------------------------------------------ */
+  const stackCards = Array.prototype.slice.call(document.querySelectorAll('.sports-gallery__track .sport-chapter'));
+  const stackQuery = window.matchMedia('(min-width: 900px) and (min-height: 640px)');
+  if (stackCards.length > 1 && !prefersReducedMotion) {
+    let queued = false;
+    const paint = () => {
+      queued = false;
+      const on = stackQuery.matches;
+      const h = window.innerHeight;
+      const covers = stackCards.map((card, i) => {
+        const next = stackCards[i + 1];
+        if (!on || !next) return 0;
+        const top = next.getBoundingClientRect().top;
+        return Math.min(1, Math.max(0, 1 - top / h));
+      });
+      stackCards.forEach((card, i) => card.style.setProperty('--cover', covers[i].toFixed(3)));
+    };
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(paint); } };
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue, { passive: true });
+    paint();
+  }
+
 })();
 
 (function () {

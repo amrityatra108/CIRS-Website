@@ -26,17 +26,17 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=97">
-<link rel="stylesheet" href="assets/css/cirs.css?b=97">
-<link rel="stylesheet" href="assets/css/pages.css?b=97">
+<link rel="stylesheet" href="assets/css/fonts.css?b=99">
+<link rel="stylesheet" href="assets/css/cirs.css?b=99">
+<link rel="stylesheet" href="assets/css/pages.css?b=99">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/connect.css?b=97">
-<link rel="stylesheet" href="assets/css/typography.css?b=97">
+<link rel="stylesheet" href="assets/css/connect.css?b=99">
+<link rel="stylesheet" href="assets/css/typography.css?b=99">
 </head>
 
 <body class="connect">
@@ -266,12 +266,12 @@
 </div>
 <main id="main">
 <section class="pagehero" id="top" data-ground="#0E0B12">
-  <div class="pagehero__media">
+  <div class="pagehero__media" style="background-image:url('assets/img/news-hero.jpg?b=99')">
     <video class="pagehero__video" autoplay muted loop playsinline
-           poster="assets/img/news-hero.jpg?b=97" aria-hidden="true"
+           poster="assets/img/news-hero.jpg?b=99" aria-hidden="true"
            width="1280" height="720" fetchpriority="high">
-      <source src="assets/video/campus-loop.webm?b=97" type="video/webm">
-      <source src="assets/video/campus-loop.mp4?b=97" type="video/mp4">
+      <source src="assets/video/campus-loop.webm?b=99" type="video/webm">
+      <source src="assets/video/campus-loop.mp4?b=99" type="video/mp4">
     </video>
   </div>
   <div class="pagehero__scrim" aria-hidden="true"></div>
@@ -281,7 +281,7 @@
     <p class="lead">Results, assemblies, weeks and celebrations, reported by the departments and the houses — and the dates already in the school calendar.</p>
     <p class="pagehero__cta">
       <a class="btn btn--primary btn--lg" href="#latest">Read the latest</a>
-      <a class="btn btn--ghost btn--lg" href="#diary">What is coming up</a>
+      <a class="btn btn--ghost btn--lg" href="#diary">From the school diary</a>
     </p>
     <div class="newsflash" id="newsFlash">
       <p class="newsflash__label"><span class="newsflash__dot" aria-hidden="true"></span>Latest</p>
@@ -331,7 +331,7 @@
       </figure>
       <div class="feature__text rv">
         <p class="newslead__date">Final examination, May 2026</p>
-        <h2 class="serif h2" data-split>Twenty-four Candidates, <em>Twenty-four Diplomas.</em></h2>
+        <h2 class="serif h2 newslead__title" data-split>Twenty-&#8288;four Candidates, <em>Twenty-&#8288;four Diplomas.</em></h2>
         <p class="copy">All twenty-four candidates registered for the International Baccalaureate
           Diploma in the May 2026 examination were awarded the diploma. The average total was
           <b>39.4 points</b>, and the highest score was a perfect <b>45 out of 45</b>.</p>
@@ -409,7 +409,7 @@
       <div class="sec-head">
         <p class="marker"><span class="sc">Highlighted stories</span></p>
         <h2 class="serif h2" data-split>The Weeks <em>Worth Slowing Down For.</em></h2>
-        <p class="lead">Three reports with the most to tell. Scroll to move through them.</p>
+        <p class="lead">Three reports with the most to tell, from the English, Science and Mathematics weeks.</p>
         <p class="newstrack__hint">Scroll to explore &rarr;</p>
       </div>
     </div>
@@ -626,8 +626,10 @@
   <div class="wrap">
     <div class="sec-head rv" style="margin-bottom:0">
       <p class="marker"><span class="sc">The diary</span></p>
-      <h2 class="serif h2" style="color:#fff" data-split>What Is <em>Coming Up.</em></h2>
-      <p class="lead">Dates already in the school calendar.</p>
+      <h2 class="serif h2" style="color:#fff" data-split>From the <em>School Diary.</em></h2>
+      <p class="lead">The most recent dates the school has published, newest first.
+        <em>[Placeholder &mdash; the dates for the 2026&ndash;27 calendar to be supplied by the
+        school.]</em></p>
     </div>
 
     <div class="diary rv">
@@ -720,8 +722,8 @@
         <p class="sc" id="fnav-academics">Academics</p>
         <ul aria-labelledby="fnav-academics">
           <li><a href="curriculum.html">Curriculum</a></li>
-          <li><a href="curriculum.html#cbse">CBSE</a></li>
-          <li><a href="curriculum.html#ib">IB Diploma</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
           <li><a href="alumni.html#pathways">University Counselling</a></li>
         </ul>
       </div>
@@ -749,10 +751,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=97" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=97" defer></script>
-<script src="assets/vendor/lenis.min.js?b=97" defer></script>
-<script src="assets/js/cirs.js?b=97" defer></script>
-<script src="assets/js/pages.js?b=97" defer></script>
+<script src="assets/vendor/gsap.min.js?b=99" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=99" defer></script>
+<script src="assets/vendor/lenis.min.js?b=99" defer></script>
+<script src="assets/js/cirs.js?b=99" defer></script>
+<script src="assets/js/pages.js?b=99" defer></script>
 </body>
 </html>

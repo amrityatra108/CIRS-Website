@@ -167,6 +167,18 @@ body.curriculum{ background:var(--paper); }
 }
 .curriculum-pending strong{ color:var(--maroon); font-weight:600; }
 
+/* The confirmed particulars, where the "awaiting confirmation" note sat. */
+.curriculum-subjects{
+  display:grid; gap:10px;
+  margin:34px 0 0; padding:17px 0 0 20px; list-style:none;
+  border-top:1px solid var(--rule);
+  border-left:3px solid var(--gold);
+  font-size:var(--fs-sm); line-height:1.55; color:var(--ink-soft);
+}
+.curriculum-subjects b{
+  display:block; color:var(--maroon); font-weight:600; letter-spacing:.02em; margin-bottom:2px;
+}
+
 .curriculum-values{
   position:relative;
   overflow:hidden;

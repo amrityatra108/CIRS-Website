@@ -26,16 +26,16 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=97">
-<link rel="stylesheet" href="assets/css/cirs.css?b=97">
-<link rel="stylesheet" href="assets/css/pages.css?b=97">
+<link rel="stylesheet" href="assets/css/fonts.css?b=99">
+<link rel="stylesheet" href="assets/css/cirs.css?b=99">
+<link rel="stylesheet" href="assets/css/pages.css?b=99">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=97">
+<link rel="stylesheet" href="assets/css/typography.css?b=99">
 </head>
 
 <body>
@@ -70,7 +70,7 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<header class="header is-first-section" id="header">
+<header class="header is-first-section is-bare" id="header">
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -264,11 +264,25 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-purple" id="top" data-ground="#1E1626">
-  <div class="wrap pagehead__inner">
+<section class="pagehero" id="top" data-ground="#0E0B12">
+  <div class="pagehero__media" style="background-image:url('assets/img/news-hero.jpg?b=99')">
+    <video class="pagehero__video" autoplay muted loop playsinline
+           poster="assets/img/news-hero.jpg?b=99" aria-hidden="true"
+           width="1280" height="720" fetchpriority="high">
+      <source src="assets/video/campus-loop.webm?b=99" type="video/webm">
+      <source src="assets/video/campus-loop.mp4?b=99" type="video/mp4">
+    </video>
+  </div>
+  <div class="pagehero__scrim" aria-hidden="true"></div>
+  <div class="wrap pagehero__inner">
     <p class="marker"><span class="sc">Since 1996</span></p>
     <h1 class="serif" data-split>School <em>History.</em></h1>
     <p class="lead">A vision carried from the 1970s to a hundred acres in the Siruvani foothills, and the ninety-six students who began it.</p>
+    <p class="pagehero__cta">
+      <a class="btn btn--primary btn--lg" href="#timeline">Follow the timeline</a>
+      <a class="btn btn--ghost btn--lg" href="#film">Watch the film</a>
+    </p>
+
   </div>
 </section>
 <section class="section on-paper-2" id="origin">
@@ -284,10 +298,11 @@
 
     <div class="prog" style="margin-top:clamp(30px,3.6vw,48px)">
       <div class="rv">
-        <p class="copy">In 1984 Swami Sahayanandaji traversed the length and breadth of India on
-          foot, making the initial collection of one rupee from each individual towards the purchase
-          of the land. Ten years later Pujya Guruji Swami Tejomayananda took up the vision and
-          concretised it with, as the school&rsquo;s own account has it, unfailing vigour and energy.</p>
+        <p class="copy">In 1979 the Coimbatore Chinmaya Mission Committee found the land, and Pujya
+          Gurudev called it &lsquo;the Sidhbari of the South&rsquo;. From 1984 the money to buy it was
+          collected on foot, one rupee from every household. After Gurudev&rsquo;s Mahasamadhi in 1993,
+          Pujya Guruji Swami Tejomayananda took the project upon his own shoulders and carried it, as
+          the school&rsquo;s own account has it, with unfailing vigour and energy.</p>
         <p class="copy">On 6 June 1996 the Chinmaya International Residential School was inaugurated
           by Pujya Swami Chidanandaji, President of The Divine Life Society. It opened with
           ninety-six students in Grades V to VIII and eleven academic staff.</p>
@@ -333,85 +348,197 @@
   </div>
 </section>
 
-<section class="tl" id="timeline" data-ground="#1E1626">
+<section class="tl on-purple" id="timeline" data-ground="#1E1626">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">The milestones</span></p>
       <h2 class="serif h2" style="color:#fff" data-split>From a Vision <em>to a Campus.</em></h2>
-      <p class="lead">Five moments, in order. Scroll to follow the line; rest on a year to bring
-        its frame forward.</p>
+      <p class="lead">Nearly fifty years, from the day the land was found to this year&rsquo;s results.
+        Scroll to follow the line; rest on a year to bring it forward.</p>
     </div>
 
     <div class="tl__body">
       <span class="tl__spine" aria-hidden="true"><i class="tl__fill" id="tlFill"></i></span>
 
       <ol class="tl__list">
+        <li class="tl__era"><span class="sc">The founding</span></li>
         <li class="tl__item">
           <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">1970s</p>
+          <p class="tl__when">1979</p>
           <div class="tl__card">
             <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
-            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the vision</span></figure>
+            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the land</span></figure>
             <div class="tl__text">
-              <h3 class="serif h3">The vision</h3>
-              <p class="copy">Pujya Gurudev Swami Chinmayananda conceives an international school in
-                India. Bangalore, Lucknow, the Andamans and Himachal Pradesh are each considered;
-                Coimbatore is chosen.</p>
+              <h3 class="serif h3">The land is found</h3>
+              <p class="copy">The Coimbatore Chinmaya Mission Committee, guided by A.&nbsp;Somasundaram, identifies the hundred acres that will become the campus. Pujya Gurudev proclaims the site &lsquo;the Sidhbari of the South&rsquo; &mdash; and that the school would be built there and nowhere else.</p>
             </div>
           </div>
         </li>
-
         <li class="tl__item">
           <span class="tl__node" aria-hidden="true"></span>
           <p class="tl__when">1984</p>
           <div class="tl__card">
+            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
             <figure class="tl__shot"><span>Archival photograph<br>&mdash; the walk for the land</span></figure>
             <div class="tl__text">
               <h3 class="serif h3">One rupee at a time</h3>
-              <p class="copy">Swami Sahayanandaji traverses the length and breadth of India on foot,
-                making the initial collection of one rupee from each individual towards the purchase
-                of the land.</p>
+              <p class="copy">Pujya Gurudev and Br. Sahaja Chaitanyaji begin a grassroots programme to collect one rupee from every household, on foot. It takes another ten years to procure all of the land the school needs.</p>
             </div>
           </div>
         </li>
-
         <li class="tl__item">
           <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">1994</p>
+          <p class="tl__when">1993</p>
           <div class="tl__card">
-            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the vision concretised</span></figure>
+            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
+            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the vision carried</span></figure>
             <div class="tl__text">
-              <h3 class="serif h3">The vision takes form</h3>
-              <p class="copy">Pujya Guruji Swami Tejomayananda proceeds to concretise Pujya
-                Gurudev&rsquo;s vision, and the school begins to become a place rather than an
-                intention.</p>
+              <h3 class="serif h3">The project is carried on</h3>
+              <p class="copy">Pujya Gurudev attains Mahasamadhi. The indefatigable Swami Tejomayanandaji takes the project upon his own shoulders.</p>
             </div>
           </div>
         </li>
-
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">6 June 1996</p>
-          <div class="tl__card">
-            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the inauguration</span></figure>
-            <div class="tl__text">
-              <h3 class="serif h3">The school is inaugurated</h3>
-              <p class="copy">The Chinmaya International Residential School is inaugurated by Pujya
-                Swami Chidanandaji, President of The Divine Life Society.</p>
-            </div>
-          </div>
-        </li>
-
         <li class="tl__item">
           <span class="tl__node" aria-hidden="true"></span>
           <p class="tl__when">1996</p>
           <div class="tl__card">
-            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the first roll</span></figure>
+            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
+            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the inauguration</span></figure>
             <div class="tl__text">
-              <h3 class="serif h3">Ninety-six students</h3>
-              <p class="copy">The school opens with ninety-six students in Grades V to VIII and
-                eleven academic staff, led by Dr. Jaya Venugopal, with Brahmacharini Sumati Chaitanya
-                and Brahmachari Samahita Chaitanya as its spiritual guides.</p>
+              <h3 class="serif h3">The school is inaugurated</h3>
+              <p class="copy">CIRS is inaugurated by Swami Chidanandaji Maharaj, head of The Divine Life Society and Gurudev&rsquo;s dearest friend, in the presence of Pujya Guruji Swami Tejomayanandaji. Swamini Vimalanandaji becomes Director of CIRS. Gurudev&rsquo;s <i>sankalpa</i> has been fulfilled.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__era"><span class="sc">The school grows</span></li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2005</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">A resident director</h3>
+              <p class="copy">Pujya Guruji appoints Swami Swaroopanandaji as Resident Director of CIRS.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2009</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">A new Principal</h3>
+              <p class="copy">Smt. Shanti Krishnamurthy takes over as Principal of CIRS.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2011</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">The International School Award</h3>
+              <p class="copy">CIRS receives the British Council International School Award, recognising its international education initiatives.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2013</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">The Chinmaya Vision Award</h3>
+              <p class="copy">CIRS receives the Chinmaya Vision Award.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2016</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">Among the top four</h3>
+              <p class="copy">Education World ranks CIRS among the top four institutions in the country.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2018</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">Second in the country, first in CBSE</h3>
+              <p class="copy">CIRS rises through the ranks to second place, and ranks first in the CBSE Board results.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2018</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">Director &mdash; Academics &amp; Administration</h3>
+              <p class="copy">Smt. Shanti Krishnamurthy becomes Director &mdash; Academics and Administration.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__era"><span class="sc">Recent years</span></li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2019</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">Among the IB World Toppers</h3>
+              <p class="copy">A CIRS student is among the IB World Toppers, with a score of 45 out of 45.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2019</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">The first CIRSMUN</h3>
+              <p class="copy">The first CIRS Model United Nations is conducted.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2022</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">A 92% average in Science</h3>
+              <p class="copy">CIRS reports a 92% average in the Science stream in the Class XII Board Examinations, with 19 of 24 students scoring 90% or above.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2024</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">IB World Toppers, once more</h3>
+              <p class="copy">A CIRS student is once more among the IB World Toppers, setting the standard for generations to come.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2025</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">First prize for <i>Vayu Nigrah</i></h3>
+              <p class="copy">Three CIRS students win first prize in the Studentrepreneur competition at the SSVM Transforming India Conclave for <i>Vayu Nigrah</i>, a project that generates electricity from air-conditioning systems.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2026</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">99% and two perfect scores</h3>
+              <p class="copy">The highest score in the CBSE Management stream is 99%, and two students achieve the highest possible IB score of 45 out of 45.</p>
             </div>
           </div>
         </li>
@@ -424,10 +551,10 @@
   <div class="wrap more__inner">
     <p class="more__badge rv"><span class="more__dot" aria-hidden="true"></span> Still being written</p>
     <h2 class="serif more__head rv" data-split>More of the Story <em>is Coming.</em></h2>
-    <p class="lead rv">Twenty-five years leave more behind than five milestones. Further archival
-      photographs, the accounts of the people who taught and boarded here, and the years between
-      1996 and now will be added to this page as the school opens its archive.</p>
-    <p class="more__ph rv"><em>[Placeholder &mdash; further milestones, photographs and first-hand
+    <p class="lead rv">Thirty years leave more behind than any list of milestones. Further archival
+      photographs and the accounts of the people who taught and boarded here will be added to this
+      page as the school opens its archive.</p>
+    <p class="more__ph rv"><em>[Placeholder &mdash; archival photographs and first-hand
       accounts to be supplied by the school.]</em></p>
     <p class="more__cta rv">Have a photograph, a document or a memory from the early years?
       <a href="mailto:info@cirschool.org">Send it to the school</a> and it can be added here.</p>
@@ -495,8 +622,8 @@
         <p class="sc" id="fnav-academics">Academics</p>
         <ul aria-labelledby="fnav-academics">
           <li><a href="curriculum.html">Curriculum</a></li>
-          <li><a href="curriculum.html#cbse">CBSE</a></li>
-          <li><a href="curriculum.html#ib">IB Diploma</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
           <li><a href="alumni.html#pathways">University Counselling</a></li>
         </ul>
       </div>
@@ -524,10 +651,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=97" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=97" defer></script>
-<script src="assets/vendor/lenis.min.js?b=97" defer></script>
-<script src="assets/js/cirs.js?b=97" defer></script>
-<script src="assets/js/pages.js?b=97" defer></script>
+<script src="assets/vendor/gsap.min.js?b=99" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=99" defer></script>
+<script src="assets/vendor/lenis.min.js?b=99" defer></script>
+<script src="assets/js/cirs.js?b=99" defer></script>
+<script src="assets/js/pages.js?b=99" defer></script>
 </body>
 </html>
