@@ -295,7 +295,7 @@ PAGES = {
     },
     "student-life": {
         "logintab": ("Student Portal", "https://cirs.in/school/"),
-        "nav": "Student Life",
+        "nav": "The CIRS Experience",
         "title": "Student Life",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
                        "hundred-acre campus it happens on.",
