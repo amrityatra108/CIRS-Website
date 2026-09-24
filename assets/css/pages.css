@@ -270,9 +270,25 @@ body.menu-open .header .wrap{
   .brand__sub{ display:none; }
   .htab{ padding-inline:11px; }
 }
+/* Icon-only tabs keep their words for a screen reader. display:none took the
+   label out of the accessible name too, and News and Student Portal have no
+   aria-label, so on every phone they were announced as a bare "link". */
 @media (max-width:960px){
-  .htab__label{ display:none; }
+  .htab__label{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    clip-path:inset(50%); white-space:nowrap;
+  }
   .htab{ width:44px; min-height:44px; padding:0; }
+}
+/* A page with a fourth tab (Student Life's Student Portal) runs out of room
+   sooner: between 960px and 1200px the tab sat over the school's name. That
+   one tab goes to its icon first. */
+@media (max-width:1200px){
+  .htab--login .htab__label{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    clip-path:inset(50%); white-space:nowrap;
+  }
+  .htab--login{ width:44px; min-height:44px; padding:0; }
 }
 @media (max-width:560px){
   .header{ top:8px; padding-inline:8px; }

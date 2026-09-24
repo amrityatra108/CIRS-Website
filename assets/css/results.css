@@ -5,6 +5,8 @@ body.results::-webkit-scrollbar-thumb{background:rgba(244,236,223,.42);border:3p
 body.results main{overflow:clip;background:var(--rj-paper)}
 body.results .footer-wrap{position:relative;z-index:5}
 body.results .header{z-index:80}
+/* The drawer is z-index 99: an open menu has to sit under its own close button. */
+body.results.menu-open .header{z-index:100}
 .results .skip-link:focus{top:-60px}
 .results.results-keyboard-nav .skip-link:focus{top:10px}
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}

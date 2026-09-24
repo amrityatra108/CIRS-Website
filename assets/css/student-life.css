@@ -48,7 +48,10 @@ body.student-life main { overflow:clip; }
 .sj-journey__sticky>.sj-shade { position:absolute; inset:0; }
 .sj-scenes img { visibility:hidden; opacity:0; will-change:transform,opacity; }
 .sj-scenes img.is-active { visibility:visible; opacity:.68; }
-.sj-journey__content { position:relative; z-index:2; height:100%; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto 1fr auto; padding:8rem 0 6rem; }
+.sj-journey__content { position:relative; z-index:2; height:100%; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto 1fr auto; padding-block:8rem 6rem; }
+/* Clear the column of times pinned at the right edge (.sj-index: 1.5rem in,
+   44px wide), which the copy otherwise ran underneath below 1320px. */
+.sj-journey__content { padding-right:max(var(--gut), 5.5rem); }
 .sj-school { grid-column:1/-1; text-transform:uppercase; font-size:.78rem; letter-spacing:.1em; }
 .sj-clock,
 .sj-chapter { align-self:center; }

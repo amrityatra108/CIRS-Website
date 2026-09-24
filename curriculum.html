@@ -33,8 +33,10 @@
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
-     this for its own curtain further down. -->
-<noscript><style>.curtain{display:none}</style></noscript>
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
 <link rel="stylesheet" href="assets/css/curriculum.css?b=101-curriculum-5">
 <link rel="stylesheet" href="assets/css/typography.css?b=101-curriculum-5">
 </head>

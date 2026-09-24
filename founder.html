@@ -33,8 +33,10 @@
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
-     this for its own curtain further down. -->
-<noscript><style>.curtain{display:none}</style></noscript>
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
 <link rel="stylesheet" href="assets/css/founder.css?b=101-founder-16">
 <link rel="stylesheet" href="assets/css/typography.css?b=101-founder-16">
 <link rel="stylesheet" href="assets/css/founder-journey.css?b=101-founder-16">
@@ -295,7 +297,9 @@
 <section class="founder-opening" id="top" aria-label="From seeker to teacher">
   <div class="founder-opening__label">THE FOUNDER<br><span>1916–1993</span></div>
   <h1 class="founder-opening__headline">FROM<br>SEEKER<br>TO GURUDEV</h1>
-  <iframe class="founder-opening__frame" src="assets/founder-opening/?v=29&amp;embed=1" title="Balakrishnan Menon to Swami Chinmayananda — flowing portrait" loading="eager"></iframe>
+  <!-- The portrait is an animation with nothing inside it to operate, so it
+       is not a Tab stop: it took focus with no ring and nothing to do there. -->
+  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening/?v=29&amp;embed=1" title="Balakrishnan Menon to Swami Chinmayananda — flowing portrait" loading="eager"></iframe>
   <p class="founder-opening__description">Balakrishna Menon’s search for truth <br>became Swami Chinmayananda’s mission <br>to share it with the world.</p>
   <div class="founder-opening__identity"><p>SWAMI CHINMAYANANDA</p><span>VISIONARY • TEACHER • FOUNDER</span></div>
   <div class="founder-opening__closing"><p>A LIFE TRANSFORMED.<br>A VISION THAT CONTINUES.</p></div>

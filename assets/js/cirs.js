@@ -129,6 +129,55 @@
     return function () { window.removeEventListener("scroll", fn); };
   }
 
+  /* ----------------------------------------------------------
+     Keyboard focus is kept on screen
+     Tabbing lets the browser scroll the focused element into view
+     natively, underneath Lenis and the pin spacers, and it could
+     come to rest just past the edge of the window — the Under
+     construction link on a phone, a link below a pinned passage.
+     Only a Tab, only once the browser has had its turn, and only
+     if the element is still off screen: then Lenis brings it in.
+     Nothing that is fixed to the window is ever chased: the header,
+     the drawer, the lightbox and every panel or pop-up dialog stay
+     put, and scrolling the page behind them would only lose the reader.
+     ---------------------------------------------------------- */
+  if (lenis) {
+    var tabbing = false, later = 0, frame = 0;
+    // Anything that is not the Tab key is the reader taking over: both
+    // pending looks are dropped, so a wheel or swipe away is never pulled back.
+    function handOver() { tabbing = false; window.clearTimeout(later); window.cancelAnimationFrame(frame); }
+    // Inside a dialog, or anything fixed to the window, focus is on screen by
+    // construction; there is no document position worth scrolling to.
+    function pinnedToWindow(el) {
+      if (el.closest("dialog, [role=dialog], [aria-modal=true]")) return true;
+      for (var n = el; n && n !== document.body; n = n.parentElement) {
+        if (getComputedStyle(n).position === "fixed") return true;
+      }
+      return false;
+    }
+    document.addEventListener("keydown", function (e) { if (e.key === "Tab") tabbing = true; else handOver(); }, true);
+    document.addEventListener("pointerdown", handOver, true);
+    window.addEventListener("wheel", handOver, { passive: true, capture: true });
+    window.addEventListener("touchstart", handOver, { passive: true, capture: true });
+    document.addEventListener("focusin", function (e) {
+      var el = e.target;
+      if (!tabbing || !el.getBoundingClientRect || pinnedToWindow(el)) return;
+      function keep() {
+        if (!tabbing || document.activeElement !== el) return;
+        var r = el.getBoundingClientRect(), top = 88, bottom = window.innerHeight - 16;
+        if (!r.width && !r.height) return;
+        if (r.top >= top && r.bottom <= bottom) return;
+        lenis.scrollTo(el, { offset: -Math.max(top, (window.innerHeight - r.height) / 2), duration: .6 });
+      }
+      // Once after the browser's own scroll, and once more after a long jump
+      // has let lazy photographs and pin spacers settle and move the target.
+      window.cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(keep);
+      window.clearTimeout(later);
+      later = window.setTimeout(keep, 700);
+    });
+  }
+
   $$('a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var id = a.getAttribute("href");
@@ -981,7 +1030,12 @@
 
       var st = ScrollTrigger.create({
         trigger: sec,
-        start: "top top",
+        // The reel is taller than most laptop windows (about 1150px against
+        // 800). Pinned by its top, the lower half of every card — the story
+        // and "Read the original" — sat below the fold for the whole scrub.
+        // Taller than the window, it pins by its bottom instead: the heading
+        // has scrolled away and the cards are whole while they move.
+        start: function () { return pin.offsetHeight > window.innerHeight ? "bottom bottom" : "top top"; },
         end: function () { return "+=" + Math.max(track.scrollWidth - window.innerWidth + 320, 600); },
         pin: pin,
         scrub: .8,
@@ -1256,6 +1310,23 @@
         }
       });
     });
+  }
+
+  /* ==========================================================
+     Footer reveal, only where the footer fits the window
+     The footer is sticky to the bottom edge so the page lifts off it.
+     Taller than the window — every phone, where its columns stack —
+     the top of it could never be scrolled into view, so it goes back
+     into the flow. Switching position leaves its height alone, so
+     measuring it again cannot flip the answer.
+     ========================================================== */
+  function footerFit() {
+    var wrap = $(".footer-wrap");
+    if (!wrap) return;
+    function fit() { wrap.classList.toggle("is-tall", wrap.offsetHeight > window.innerHeight); }
+    fit();
+    window.addEventListener("resize", fit, { passive: true });
+    if ("ResizeObserver" in window) new ResizeObserver(fit).observe(wrap);
   }
 
   /* ==========================================================
@@ -2099,6 +2170,7 @@
      Boot
      ========================================================== */
   function start() {
+    footerFit();
     backToTop();
     enquirePanel();
     filmLightbox();

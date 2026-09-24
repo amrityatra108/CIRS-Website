@@ -726,7 +726,9 @@ def soon_html(page):
     onward = ""
     if links:
         buttons = "\n".join(
-            f'      <a class="btn btn--ghost" href="{href}">{label}</a>' for href, label in links)
+            # btn--ghost is white, for photographs and dark grounds; this
+            # section is paper, where it measured 1.1:1. The outline is ink.
+            f'      <a class="btn btn--outline" href="{href}">{label}</a>' for href, label in links)
         onward = ('\n\n    <div class="soon__onward rv">\n' + buttons + "\n    </div>")
     return (
         '<section class="section" id="what">\n'
