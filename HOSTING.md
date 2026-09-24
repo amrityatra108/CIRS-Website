@@ -280,11 +280,12 @@ step with the site in silence, which is exactly the failure that check exists to
 - **The header animation for the Admissions banner** — a photograph or a short looping video. The
   banner currently renders a labelled placeholder rather than a stand-in picture, deliberately: a
   temporary photograph on an admissions banner is the kind of thing that quietly ships.
-- **Board of Directors introductions** for the Our People section on `leadership.html`. All eight roles are named and
-  correct; every biography is a bracketed `[A short introduction to … to be supplied by the
-  school.]` placeholder. Five of the eight also need a photograph — Swami Swaroopananda, Shri. Viju
-  Mahtaney, Shri Jadgish Moorjani, Shri. Siddharth Balachandran and Shri. Ram Buxani currently
-  render as a labelled placeholder tile.
+- **Board of Directors introductions** for the Our People section on `leadership.html`. Seven roles
+  are named. Four introductions are in, from the school's content document; Swami Swaroopananda,
+  Swami Anukoolananda and Smt. G. Rajeshwari still carry a bracketed `[A short introduction to …
+  to be supplied by the school.]` placeholder. Four of the seven also need a photograph — Swami
+  Swaroopananda, Shri. Vijay Mahtaney, Shri. Jagdish Moorjani and Shri. Siddharth Balachandran
+  currently render as a labelled placeholder tile.
 - **A caption for the staff and faculty photograph** — occasion, date and names.
 - **The Why CIRS photo is live** — `assets/img/why-cirs.jpg`, cropped from a supplied photo of three
   students to a 4:5 portrait, faces centred.

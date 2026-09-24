@@ -174,3 +174,112 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
 }
 .ib-end h2{ margin: 0 0 12px; }
 .ib-end .copy{ margin: 0; }
+
+/* ============================================================
+   Shared by both curriculum child pages. The CBSE page wears
+   this sheet too (body.ibdp), since everything above is the
+   curriculum family's furniture rather than the IB's alone.
+   What follows is the handful of arrangements added with it:
+   the three CBSE stages, a results table, and the IB's scoring.
+   ============================================================ */
+
+/* ---------------------------------------------------- the three stages */
+
+.cbstages{
+  display: grid;
+  gap: clamp(18px, 2.4vw, 30px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: stage;
+}
+@media (min-width: 900px){ .cbstages{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.cbstages__stage{
+  position: relative;
+  padding: clamp(22px, 2.6vw, 32px);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--purple-ink);
+}
+.cbstages__years{
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--maroon);
+}
+.cbstages__stage h3{ margin: 0 0 12px; }
+.cbstages__stage .copy{ margin: 0 0 18px; font-size: 15px; }
+.cbstages__list{
+  margin: 0;
+  padding: 16px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: 8px;
+}
+.cbstages__list li{
+  position: relative;
+  padding-left: 18px;
+  font-size: 15px;
+  color: var(--ink);
+}
+.cbstages__list li::before{
+  content: "";
+  position: absolute; left: 0; top: .6em;
+  width: 6px; height: 6px;
+  border: 1px solid var(--maroon);
+  transform: rotate(45deg);
+}
+
+/* ---------------------------------------------------------- the results */
+
+.cbresults{ margin: 0; border-top: 2px solid var(--purple-ink); }
+.cbresults__row{
+  display: grid;
+  gap: 6px 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+@media (min-width: 720px){
+  .cbresults__row{ grid-template-columns: minmax(200px, 1fr) 2fr; align-items: baseline; }
+}
+.cbresults__row dt{
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+.cbresults__row dd{ margin: 0; color: var(--ink-soft); font-size: 15px; }
+.cbresults__row dd b{
+  font-family: var(--font-primary);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 500;
+  color: var(--ink);
+  margin-right: 6px;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.cbresults__row dd span{ display: block; margin-top: 4px; color: var(--ink-mute); font-size: 14px; }
+
+/* ----------------------------------------------------- how the IB is scored */
+
+.ibscore{
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+@media (min-width: 760px){ .ibscore{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ibscore > div{ padding: clamp(22px, 2.6vw, 32px); background: var(--paper); }
+.ibscore dt{
+  font-family: var(--font-primary);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1;
+  color: var(--purple);
+  font-variant-numeric: lining-nums;
+}
+.ibscore dd{ margin: 12px 0 0; font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+.ibscore dd b{ display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }

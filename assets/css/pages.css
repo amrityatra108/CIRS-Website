@@ -432,7 +432,7 @@ body.menu-open .htab:hover{
     rgba(30,22,38,.92) 85%,
     var(--purple-deep) 100%);
 }
-.pagehero__media{ position:absolute; inset:0; z-index:0; }
+.pagehero__media{ position:absolute; inset:0; z-index:0; background:center/cover no-repeat; }
 .pagehero__media img{ width:100%; height:100%; object-fit:cover; }
 
 /* Where the finished artwork is not in yet, the media slot carries a
@@ -476,6 +476,7 @@ body.menu-open .htab:hover{
   max-width:min(1000px,92vw);
 }
 .pagehero .marker{ margin-bottom:var(--space-4); }
+.pagehero .marker::before{ border-color:var(--gold-lit); }
 .pagehero .marker::after{ background:rgba(255,255,255,.28); max-width:120px; }
 .pagehero h1{
   font-size:clamp(2.6rem,6.4vw,5.4rem);
@@ -922,9 +923,10 @@ body.menu-open .htab:hover{
    arrives, and remains if the video is blocked or the connection gives up. */
 .pagehero__video{ width:100%; height:100%; object-fit:cover; display:block; }
 @media (prefers-reduced-motion:reduce){
-  /* Honour the setting: the poster is the same wall, so nothing is lost. */
+  /* Honour the setting: the still behind the video is its own poster, set
+     on .pagehero__media by hero_html(), so each hero keeps its picture. */
   .pagehero__video{ display:none; }
-  .pagehero__media{ background:url("../img/admissions-honeycomb.jpg") center/cover no-repeat; }
+  .pagehero__media{ background-position:center; background-size:cover; background-repeat:no-repeat; }
 }
 
 /* ============================================================
@@ -1399,6 +1401,26 @@ body.has-lightbox{ overflow:hidden; }
 }
 .tl__text h3{ color:#fff; margin:0 0 var(--space-2); }
 .tl__text .copy{ color:var(--on-purple-soft); margin:0; }
+
+/* A milestone with no archival frame owed to it is text alone, and sits
+   tighter than the founding years that carry one. */
+.tl__card--text{ padding-block:var(--space-3) var(--space-4); }
+@media (min-width:620px){ .tl__card--text{ grid-template-columns:1fr; } }
+
+/* The eras: a label on the spine, not a milestone. It keeps the long run
+   from 1979 to now readable as three chapters rather than one list. */
+.tl__era{ position:relative; padding-left:40px; margin-top:var(--space-4); }
+.tl__era:first-child{ margin-top:0; }
+.tl__era .sc{ font-size:.98rem; letter-spacing:.12em; }
+.tl__era::before{
+  content:""; position:absolute; left:3px; top:50%;
+  width:10px; height:10px; transform:translateY(-50%) rotate(45deg);
+  border:1px solid var(--gold-lit); background:var(--purple-deep);
+}
+@media (min-width:900px){
+  .tl__era{ padding-left:calc(120px + clamp(28px,3vw,48px)); }
+  .tl__era::before{ left:116px; }
+}
 
 /* Nothing moves, and nothing waits to be activated. */
 @media (prefers-reduced-motion:reduce){
@@ -2183,3 +2205,215 @@ body.has-lightbox{ overflow:hidden; }
   .lifeband{ min-height:86svh; }
   .lifeband__say h2{ max-width:none; }
 }
+
+/* ============================================================
+   Leadership — the messages reader
+   ------------------------------------------------------------
+   Stacked by default: every message in the page, each under its
+   own label, on paper. From 900px, once pages.js has added
+   .is-tabbed, a column of names on the left chooses the one
+   message shown on the right. The column is the only new piece;
+   the letter itself is set like the Principal's message below
+   it — the same italic, the same gold rules — so the two read
+   as one family.
+   ============================================================ */
+.msgs{ background:var(--paper); }
+.msgs__reader{ margin-top:clamp(var(--space-6),4vw,var(--space-8)); }
+.msgs__panel + .msgs__panel{
+  margin-top:var(--space-7); padding-top:var(--space-7); border-top:1px solid var(--rule);
+}
+.msgs__label{ margin:0 0 var(--space-4); }
+.msgs__label::after{
+  content:""; display:block; width:52px; height:2px; background:var(--gold);
+  margin-top:var(--space-3);
+}
+.msgs__body{ max-width:68ch; }
+.msgs__body p{
+  font-family:var(--font-primary); color:var(--ink);
+  font-size:clamp(1.06rem,1.35vw,1.22rem); line-height:1.66;
+  text-wrap:pretty; margin:0;
+}
+.msgs__body p + p{ margin-top:.9em; }
+/* The first paragraph is the letter's opening — set larger and in
+   italic, the way the Principal's message is set throughout. */
+.msgs__body p:first-child{
+  font-style:italic; font-size:clamp(1.18rem,1.7vw,1.44rem); line-height:1.5;
+}
+.msgs__sign{ font-style:italic; color:var(--ink-soft) !important; }
+.msgs__attr{
+  margin:var(--space-5) 0 0; padding-top:var(--space-4);
+  border-top:1px solid var(--rule); max-width:68ch;
+  font-family:var(--font-primary); letter-spacing:.06em; font-size:var(--fs-sm);
+  color:var(--ink-mute);
+}
+.msgs__attr b{ color:var(--purple); font-weight:600; letter-spacing:.02em; }
+
+.msgs__tabs[hidden]{ display:none; }
+.msgs__reader.is-tabbed .msgs__panel + .msgs__panel{ margin-top:0; padding-top:0; border-top:0; }
+.msgs__reader.is-tabbed .msgs__panel[hidden]{ display:none; }
+.msgs__reader.is-tabbed .msgs__panel{ animation:msgs-in .5s var(--e) both; }
+/* Narrow: the names are a strip that scrolls sideways above the letter. */
+.msgs__tabs{
+  display:flex; gap:0; overflow-x:auto; scrollbar-width:none;
+  margin:0 calc(-1 * var(--gut)) var(--space-6);
+  padding:0 var(--gut);
+  border-bottom:1px solid var(--rule);
+}
+.msgs__tabs::-webkit-scrollbar{ display:none; }
+@media (min-width:900px){
+  .msgs__reader.is-tabbed{
+    display:grid; grid-template-columns:minmax(240px,300px) 1fr;
+    gap:clamp(var(--space-6),5vw,var(--space-9)); align-items:start;
+  }
+  .msgs__reader.is-tabbed .msgs__panel{ grid-column:2; grid-row:1; }
+  .msgs__tabs{
+    grid-column:1; grid-row:1; position:sticky; top:110px;
+    flex-direction:column; overflow:visible; margin:0; padding:0;
+    border-bottom:0; border-left:1px solid var(--rule);
+  }
+}
+.msgs__tab{
+  appearance:none; background:none; border:0; cursor:pointer; text-align:left;
+  padding:var(--space-3) var(--space-4); margin-bottom:-1px; flex:none; max-width:210px;
+  border-bottom:2px solid transparent;
+  display:flex; flex-direction:column; gap:4px;
+  transition:border-color .3s var(--e), background .3s var(--e);
+}
+@media (min-width:900px){
+  .msgs__tab{
+    padding:var(--space-4) var(--space-5); margin:0 0 0 -1px; max-width:none;
+    border-bottom:0; border-left:2px solid transparent;
+  }
+}
+.msgs__tabname{ font-family:var(--font-primary); font-size:1.06rem; color:var(--ink-soft); line-height:1.25; transition:color .3s var(--e); }
+.msgs__tabrole{ font-family:var(--font-primary); font-size:var(--fs-xs); letter-spacing:.08em; color:var(--ink-mute); }
+.msgs__tab:hover .msgs__tabname{ color:var(--purple); }
+.msgs__tab[aria-selected="true"]{ border-color:var(--gold); background:var(--paper-2); }
+.msgs__tab[aria-selected="true"] .msgs__tabname{ color:var(--purple); font-weight:600; }
+.msgs__tab:focus-visible{ outline:2px solid var(--purple); outline-offset:-2px; }
+@keyframes msgs-in{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce){ .msgs__reader.is-tabbed .msgs__panel{ animation:none; } }
+
+/* The face beside each message: the person's own photograph where the
+   site has one, and otherwise their initial on the same purple disc, so
+   the six read as one set whichever of them have been photographed. */
+.msgs__head{ display:flex; align-items:center; gap:var(--space-4); margin-bottom:var(--space-5); }
+.msgs__head .msgs__label{ margin:0 0 4px; }
+.msgs__head .msgs__label::after{ display:none; }
+.msgs__face{
+  flex:none; margin:0; width:64px; height:64px; border-radius:50%; overflow:hidden;
+  display:grid; place-items:center;
+  background:var(--purple-deep); color:var(--gold-lit);
+  font-family:var(--font-primary); font-size:1.6rem;
+  box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--gold);
+}
+.msgs__face img{ width:100%; height:100%; object-fit:cover; object-position:center 20%; }
+.msgs__who{ margin:0; font-family:var(--font-primary); font-size:var(--fs-sm); color:var(--ink-mute); letter-spacing:.03em; }
+.msgs__who b{ color:var(--purple); font-weight:600; }
+
+/* ============================================================
+   Leadership — Our People, as cards
+   ------------------------------------------------------------
+   Each person is a card: photograph, name, role, and a cue that
+   the introduction opens in a panel (.panel, below; opened by
+   pages.js). The name is the button, and its ::after covers the
+   card, so the whole card is one target with one accessible name.
+
+   The depth is small on purpose. At rest the card is a paper card
+   with a soft shadow. Under a fine pointer it leans towards the
+   cursor by at most six degrees (--rx/--ry, set by pages.js), the
+   photograph sits a little forward of the card, and a sheen follows
+   the pointer — a card you could pick up, not a gimmick. On touch,
+   and with reduced motion, it only lifts.
+   ============================================================ */
+.pgrid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:clamp(20px,2.4vw,32px); margin-top:clamp(36px,4vw,56px);
+  perspective:1100px;
+}
+.pcard{
+  --rx:0deg; --ry:0deg; --gx:50%; --gy:30%; --glare:0;
+  position:relative; display:flex; flex-direction:column;
+  background:var(--paper); border:1px solid var(--rule); border-radius:18px;
+  padding:12px 12px 0;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 12px 28px -14px rgba(30,22,38,.28);
+  transform:rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style:preserve-3d;
+  transition:transform .5s var(--e), box-shadow .4s var(--e), border-color .4s var(--e);
+  will-change:transform; cursor:pointer;
+}
+/* The sheen: a soft light that sits where the pointer is. */
+.pcard::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:2;
+  background:radial-gradient(420px circle at var(--gx) var(--gy), rgba(255,255,255,.55), rgba(255,255,255,0) 45%);
+  opacity:var(--glare); transition:opacity .4s var(--e); mix-blend-mode:soft-light;
+}
+.pcard.is-tilting{ transition:box-shadow .4s var(--e), border-color .4s var(--e); }
+.pcard:hover,
+.pcard:focus-within{
+  border-color:rgba(255,195,8,.55);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 30px 50px -22px rgba(30,22,38,.42);
+}
+.pcard__media{
+  margin:0; aspect-ratio:4/5; overflow:hidden; border-radius:11px;
+  background:var(--purple-deep);
+  transform:translateZ(28px);
+}
+.pcard__media img{ width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+.pcard__media.is-placeholder,
+.pmodal__media.is-placeholder{
+  display:grid; place-items:center;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 7px, rgba(245,238,242,.05) 7px 14px),
+    var(--purple-deep);
+}
+.pcard__ph{
+  font-family:var(--font-primary); letter-spacing:.08em; font-size:.82rem;
+  color:var(--on-purple-mute); text-align:center; padding:var(--space-3);
+  border:1px dashed var(--rule-purple);
+}
+.pcard__body{ padding:var(--space-4) 6px var(--space-4); transform:translateZ(16px); }
+.pcard__name{ font-size:1.25rem; line-height:1.2; margin:0 0 4px; }
+.pcard__open{
+  all:unset; cursor:pointer; color:var(--ink);
+}
+.pcard__open::after{ content:""; position:absolute; inset:0; border-radius:18px; z-index:3; }
+.pcard__open:focus-visible::after{ outline:2px solid var(--purple); outline-offset:3px; }
+.pcard__role{
+  margin:0; font-family:var(--font-primary); font-size:.92rem; letter-spacing:.04em;
+  color:var(--maroon);
+}
+.pcard__cue{
+  display:inline-flex; align-items:center; gap:8px;
+  margin:var(--space-3) 0 0; padding-top:var(--space-3); border-top:1px solid var(--rule-soft);
+  font-family:var(--font-primary); font-size:.82rem; letter-spacing:.06em; color:var(--ink-mute);
+  width:100%;
+}
+.pcard__cue::after{ content:"\2192"; color:var(--gold); transition:transform .3s var(--e); }
+.pcard:hover .pcard__cue{ color:var(--purple); }
+.pcard:hover .pcard__cue::after{ transform:translateX(4px); }
+@media (hover:none), (prefers-reduced-motion:reduce){
+  .pcard{ transform:none; }
+  .pcard:hover{ transform:translateY(-3px); }
+  .pcard__media, .pcard__body{ transform:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  .pcard, .pcard:hover{ transform:none; transition:none; }
+  .pcard::before{ display:none; }
+}
+
+/* The introduction panel: photograph beside the words from 720px. */
+.panel__card.pmodal{ width:min(100%,860px); padding:0; overflow:auto; }
+.pmodal{ display:grid; }
+@media (min-width:720px){ .pmodal{ grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); } }
+.pmodal__media{ margin:0; min-height:260px; background:var(--purple-deep); }
+.pmodal__media img{ width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block; }
+@media (max-width:719px){ .pmodal__media{ aspect-ratio:16/11; min-height:0; } }
+.pmodal__text{ padding:clamp(28px,4vw,52px); align-self:center; }
+.pmodal__text .copy{ font-size:1.02rem; line-height:1.7; }
+.pmodal__more{ margin:var(--space-5) 0 0; padding-top:var(--space-4); border-top:1px solid var(--rule); }
+.pmodal__more a{
+  font-family:var(--font-primary); font-weight:600; color:var(--purple);
+  text-decoration:underline; text-underline-offset:4px; text-decoration-color:var(--gold);
+}
+.panel--person .panel__close{ z-index:2; background:rgba(255,255,255,.85); }
