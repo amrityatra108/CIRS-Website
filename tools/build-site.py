@@ -682,6 +682,18 @@ def to_depth(html, slug):
         return f'{attr}="{up}{ref}"'
 
     html = re.sub(r'\b(href|src|poster)="([^"]*)"', climb, html)
+    def climb_srcset(m):
+        candidates = []
+        for candidate in m.group(2).split(","):
+            fields = candidate.strip().split()
+            if not fields:
+                continue
+            ref = fields[0]
+            if not ref.startswith(("#", "/", "http://", "https://", "data:", "blob:")):
+                fields[0] = up + ref
+            candidates.append(" ".join(fields))
+        return f'{m.group(1)}="{", ".join(candidates)}"'
+    html = re.sub(r'\b(srcset)="([^"]*)"', climb_srcset, html)
     # The og:image and twitter:image carry their path in content=, not in an
     # href, and a social preview fetching curriculum/assets/img/og.jpg gets a
     # 404 and shows no card at all. Only a relative assets/ path is touched.
@@ -1440,6 +1452,12 @@ def build(slug, page):
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
 
+    # The cinematic closing scene and practical footer are shared by all
+    # scrolling public pages. Load this sheet after page-specific styles.
+    if not wall:
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/footer.css?{CACHE_BUST}-footer-1">\n</head>')
+
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" puts the class on <body>, and pages.css
     # gives the header dark lettering there from the first paint, with or
@@ -1559,6 +1577,8 @@ def build(slug, page):
                                     'href="admissions.html#dates">Important Dates')
         parts.append(footer)
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
+    if not wall:
+        parts.append(f'<script src="assets/js/footer.js?{CACHE_BUST}-footer-1" defer></script>')
     if slug == "crossroads":
         parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-5" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
