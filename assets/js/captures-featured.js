@@ -12,7 +12,7 @@
        hold     the pair
        change   the pair gives way to the portrait
        hold     the portrait
-       change   the portrait gives way to the campus from the air
+        change   the portrait gives way to a bird amid pink blossoms
        hold     and the stage is let go, into the gallery
 
    The lengths are in the markup (data-cf-phases, in vh of scroll) and in
@@ -65,7 +65,7 @@
     el.style.setProperty(prop, value);
   }
 
-  // Where the dancer's panel is in the stage. Offsets rather than
+  // Where the lead photo's panel is in the stage. Offsets rather than
   // rectangles, so that the frame's own drift never moves the target.
   var geo = null;
   function measure() {
@@ -100,12 +100,12 @@
     put(lead, "lw", "width", lerp(geo.w, s.w, u).toFixed(2) + "px");
     put(lead, "lh", "height", lerp(H, s.h, u).toFixed(2) + "px");
     put(lead, "lf", "--cf-foot", (1 - smooth(clamp(move / 0.5))).toFixed(3));
-    var kick = smooth(span(move, 0.35, 1));
-    layer(enter, "k", kick, (1 - kick) * rise);
+    var companion = smooth(span(move, 0.35, 1));
+    layer(enter, "k", companion, (1 - companion) * rise);
     var caps = smooth(span(move, 0.7, 1)).toFixed(3);
     for (var i = 0; i < pairCaps.length; i++) put(pairCaps[i], "pc" + i, "opacity", caps);
 
-    // The pair gives way to the portrait, and the portrait to the campus:
+    // The pair gives way to the portrait, and the portrait to the wide photo:
     // the frame going is carried up and out of the stage as the next is
     // carried up into it, both whole, on one eased movement. Wherever the
     // reader stops there are photographs on the stage — never an empty
@@ -141,8 +141,8 @@
 
   // Fetch every picture here as soon as the section is anywhere near, so
   // that nothing is still arriving when its frame comes up; and decode the
-  // dancer ahead of time, because on the first frame she must already be
-  // there, exactly as the opening leaves her.
+  // lead photograph ahead of time, because it must already be there on the
+  // first frame, exactly as the opening leaves it.
   function prefetch() {
     Array.prototype.forEach.call(section.querySelectorAll("img"), function (img) {
       img.loading = "eager";

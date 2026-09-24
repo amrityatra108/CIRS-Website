@@ -14,24 +14,22 @@
    and nothing else advances it, so scrolling back runs the camera backwards
    and stopping leaves it on the frame it was on.
 
-   CIRS Captures goes one step further. Once its line has been read, a
-   photograph from the school appears inside the camera's lens and opens out
-   of it to fill the window; the page declares that with data-film-lens and
-   a [data-film-shot], and without them none of it runs. Every part of it is
-   a function of the scroll position too — nothing here is a tween with a
-   duration of its own — so any scroll position, reached slowly or in one
-   jump, backwards or forwards, has exactly one picture, and a reload or a
-   resize halfway through lands on it.
+   CIRS Captures goes one step further. Once its line has been read, its
+   photograph dissolves across the whole frame over the camera's final image.
+   The page declares that with data-film-photo and a [data-film-shot]. The
+   dissolve follows the scroll position too, so it reverses cleanly and a
+   reload halfway through lands on the same composition.
 
    The section's travel is divided by data-film-phases in the markup:
 
        [0, FILM_END]            the film, under the scroll
        [FILM_END, HOLD_END]     the last frame, held
        [HOLD_END, TITLE_END]    the line arrives
-       [TITLE_END, READ_END]    the line is read        } CIRS Captures only;
-       [READ_END, LENS_END]     the photograph, in lens } without a lens these
-       [LENS_END, OPEN_END]     it opens to the window  } are all at 1, and the
-       [OPEN_END, 1]            the photograph is held  } composition is held
+       [TITLE_END, READ_END]    the line is read
+       [READ_END, PHOTO_END]    the photograph dissolves
+       [PHOTO_END, 1]          the photograph is held
+
+   For openings without a photograph, READ_END and PHOTO_END are both 1.
 
    Without phases in the markup, the timing CIRS Captures first established:
    the film to 0.70, held to 0.77, the line in by 0.90.
@@ -70,12 +68,9 @@
   var HOLD_END = ph[1] || 0.77;
   var TITLE_END = ph[2] || 0.90;
   var READ_END = ph[3] || 1;
-  var LENS_END = ph[4] || 1;
-  var OPEN_END = ph[5] || 1;
-  // No lens in the markup, or no photograph: the opening is the film and the
-  // line, exactly as it was before the photograph was added.
-  var LENS = numbers("data-film-lens");
-  var payoff = !!(photo && LENS.length === 5 && READ_END < 1);
+  var PHOTO_END = ph[4] || 1;
+  // The other film openings keep only their video and title.
+  var payoff = !!(photo && section.hasAttribute("data-film-photo") && READ_END < PHOTO_END);
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   var hasST = typeof window.gsap !== "undefined" &&
@@ -90,14 +85,12 @@
   var asked = -1;      // the last time the decoder was sent to
   var trigger = null;
   var furnished = null; // whether the site's furniture is currently put away
-  var progress = 0;    // the last position painted, for repainting on resize
   var written = {};    // the last value of every style this file writes
 
   function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function span(p, a, b) { return b > a ? clamp((p - a) / (b - a)) : (p >= b ? 1 : 0); }
   // Slow in and slow out. The line should be noticed; its arrival should not.
   function smooth(t) { return t * t * (3 - 2 * t); }
-  function lerp(a, b, t) { return a + (b - a) * t; }
 
   // Every style goes through here, so a frame that changes nothing writes
   // nothing, and the photograph's layer is not repainted for no reason.
@@ -127,147 +120,15 @@
     try { film.currentTime = t; } catch (error) { asked = -1; }
   }
 
-  /* ---- The lens ---------------------------------------------------------
-
-     The lens's front rim is an ellipse in the film's own pixels. On screen it
-     is wherever object-fit:cover puts it, which depends on the shape of the
-     window and on the film's object-position — so both are read from the
-     page rather than assumed, and the geometry is worked out again whenever
-     the window changes size.
-
-     The photograph fills the stage the same way, and its object-position is
-     the point in it that the opening treats as its subject: with cover, the
-     point at x%/y% of the picture always lands at x%/y% of the window, so
-     that point on screen is known without knowing how large the file is.
-
-     While the photograph is small, it is drawn scaled down about that point
-     and moved so the point sits on the lens, and clipped to the lens's own
-     ellipse. The clip is in the photograph's own coordinates, so it is
-     always inside the picture's edges; what grows first is the picture, and
-     the opening in it only grows past the picture's edges once the picture
-     itself is the size of the window, when those edges are the window's. */
-  var geo = null;
-
-  function percentages(value) {
-    var parts = String(value).split(/\s+/);
-    var x = parseFloat(parts[0]), y = parseFloat(parts[1]);
-    return [isNaN(x) ? 0.5 : x / 100, isNaN(y) ? 0.5 : y / 100];
-  }
-
-  function halfBox(a, b, t) {
-    var c = Math.cos(t), s = Math.sin(t);
-    return [Math.sqrt(a * a * c * c + b * b * s * s),
-            Math.sqrt(a * a * s * s + b * b * c * c)];
-  }
-
-  function measure() {
-    var box = stage.getBoundingClientRect();
-    var W = box.width, H = box.height;
-    if (!W || !H) return null;
-    var fw = Number(film.getAttribute("width")) || 1280;
-    var fh = Number(film.getAttribute("height")) || 720;
-    var crop = percentages(getComputedStyle(film).objectPosition);
-    var focus = percentages(getComputedStyle(photo).objectPosition);
-    var s = Math.max(W / fw, H / fh);
-    var g = {
-      W: W, H: H,
-      lx: (W - fw * s) * crop[0] + LENS[0] * s,
-      ly: (H - fh * s) * crop[1] + LENS[1] * s,
-      a0: LENS[2] * s, b0: LENS[3] * s, t0: LENS[4] * Math.PI / 180,
-      fx: focus[0] * W, fy: focus[1] * H
-    };
-    // How far the subject is from the nearest edge of the picture, each way.
-    var dx = Math.min(g.fx, W - g.fx), dy = Math.min(g.fy, H - g.fy);
-    var half = halfBox(g.a0, g.b0, g.t0);
-    /* k0 is how small the photograph is while it sits in the lens: small
-       enough that the lens shows most of the picture around its subject, and
-       no smaller than keeps a margin of the picture outside the lens on every
-       side (MARGIN), so the rim never shows the picture's own edge. */
-    var MARGIN = 1.12;
-    g.k0 = Math.min(0.95, MARGIN * Math.max(half[0] / dx, half[1] / dy));
-    // The circle, centred on the subject, that covers every corner.
-    g.cover = 1.02 * Math.sqrt(Math.pow(Math.max(g.fx, W - g.fx), 2) +
-                               Math.pow(Math.max(g.fy, H - g.fy), 2));
-    g.grow = g.cover / Math.min(g.a0, g.b0);
-    /* The picture grows first and the opening in it follows; handing the
-       growth from one to the other is eased over a short span (soft) so the
-       picture settles at full size rather than stopping dead. The span is as
-       long as it can be while the opening stays inside the picture's edges. */
-    var room = Math.log(0.99 * MARGIN);
-    g.soft = Math.max(0.02, Math.min(0.25, 0.9 * room / -Math.log(g.k0)));
-    g.key = W + "x" + H;
-    return g;
-  }
-
-  function ellipsePath(cx, cy, a, b, t) {
-    var c = Math.cos(t), s = Math.sin(t), d = (t * 180 / Math.PI).toFixed(3);
-    var x1 = (cx + a * c).toFixed(2), y1 = (cy + a * s).toFixed(2);
-    var x2 = (cx - a * c).toFixed(2), y2 = (cy - a * s).toFixed(2);
-    var r = a.toFixed(2) + " " + b.toFixed(2) + " " + d;
-    return 'path("M ' + x1 + " " + y1 + " A " + r + " 1 0 " + x2 + " " + y2 +
-           " A " + r + " 1 0 " + x1 + " " + y1 + ' Z")';
-  }
-
-  /* e is how far the photograph has opened, 0 in the lens to 1 at the whole
-     window. The opening's size on screen is one smooth curve over all of it;
-     how that growth is divided between the picture and the opening in it is
-     what keeps the picture's edges out of sight. */
-  function openTo(g, e) {
-    var ease = e * e * e * (e * (e * 6 - 15) + 10);        // smootherstep
-    var lnG = Math.log(g.grow) * ease;                       // screen growth
-    var x = lnG / -Math.log(g.k0);                           // 1 = picture full size
-    var d = g.soft, kp;
-    if (x <= 1 - d) kp = x;
-    else if (x >= 1 + d) kp = 1;
-    else kp = x - (x - (1 - d)) * (x - (1 - d)) / (4 * d);
-    var k = Math.pow(g.k0, 1 - kp);
-    var px = lerp(g.lx, g.fx, kp), py = lerp(g.ly, g.fy, kp);
-    /* The opening on screen. Once the picture is full size it rounds out and
-       straightens as it grows, so what finally covers the window is a
-       circle; before that it keeps the lens's own shape and tilt. */
-    // Measured from the moment the picture reached full size, so the shape
-    // starts changing from exactly the lens's shape rather than jumping.
-    var lnFull = (1 + d) * -Math.log(g.k0);
-    var round = kp >= 1 ? clamp((lnG - lnFull) / (Math.log(g.grow) - lnFull)) : 0;
-    var aspect = Math.pow(g.a0 / g.b0, round);
-    var growth = Math.exp(lnG);
-    var sa = g.a0 * growth, sb = g.b0 * growth;
-    if (g.a0 < g.b0) sb *= aspect; else sa /= aspect;
-    var tilt = g.t0 * (1 - round);
-    return { k: k, x: px - k * g.fx, y: py - k * g.fy,
-             a: sa / k, b: sb / k, t: tilt, full: e >= 1 };
-  }
-
+  /* The photograph is already the size and crop of the following section.
+     A full-frame dissolve leaves the camera's actual final frame visible
+     underneath until the photo has completely replaced it. */
   function paintShot(p) {
     if (!payoff) return;
-    if (!geo) geo = measure();
-    var g = geo;
-    if (!g) return;
-    var inLens = span(p, READ_END, LENS_END);
-    var e = span(p, LENS_END, OPEN_END);
-    var o = openTo(g, e);
-    put(shot, "shot-o", "opacity", smooth(inLens).toFixed(3));
-    if (o.full) {
-      put(shot, "shot-t", "transform", "none");
-      put(shot, "shot-c", "clip-path", "none");
-    } else {
-      put(shot, "shot-t", "transform", "translate(" + o.x.toFixed(2) + "px, " +
-          o.y.toFixed(2) + "px) scale(" + o.k.toFixed(5) + ")");
-      put(shot, "shot-c", "clip-path", ellipsePath(g.fx, g.fy, o.a, o.b, o.t));
-    }
-    // The glass: darker at the rim inside the lens, gone by halfway out.
-    var glass = 1 - smooth(clamp(e / 0.45));
-    put(shot, "glass", "--film-glass", (0.85 * glass).toFixed(3));
-    put(shot, "glass-x", "--film-glass-x", (o.a * 1.05).toFixed(1) + "px");
-    put(shot, "glass-y", "--film-glass-y", (o.b * 1.05).toFixed(1) + "px");
-    put(shot, "glass-cx", "--film-glass-cx", g.fx.toFixed(1) + "px");
-    put(shot, "glass-cy", "--film-glass-cy", g.fy.toFixed(1) + "px");
-    // The camera and the line leave inside the same movement: the line fades
-    // before the opening can reach it, and the camera leans toward the lens.
-    put(title, "exit", "--film-exit", smooth(clamp(e / 0.3)).toFixed(3));
-    put(film, "lens-x", "--film-lens-x", g.lx.toFixed(1) + "px");
-    put(film, "lens-y", "--film-lens-y", g.ly.toFixed(1) + "px");
-    put(film, "push", "--film-push", (1 + 0.06 * smooth(e)).toFixed(4));
+    var dissolve = smooth(span(p, READ_END, PHOTO_END));
+    var titleEnd = READ_END + (PHOTO_END - READ_END) * 0.38;
+    put(title, "exit", "--film-exit", smooth(span(p, READ_END, titleEnd)).toFixed(3));
+    put(shot, "shot-o", "opacity", dissolve.toFixed(3));
   }
 
   // Our Sports carries one discreet cue over its first frames; it goes as
@@ -279,7 +140,6 @@
 
   function paint(value) {
     var p = clamp(value);
-    progress = p;
     seek(p >= FILM_END ? last : (p / FILM_END) * duration);
     var r = span(p, HOLD_END, TITLE_END);
     put(title, "reveal", "--film-reveal", smooth(r).toFixed(4));
@@ -352,7 +212,7 @@
        stale. */
     trigger = ScrollTrigger.create({
       onUpdate: update,
-      onRefresh: function () { geo = null; update(); }
+      onRefresh: update
     });
     update();
   }
@@ -424,12 +284,9 @@
     }, 0);
   }, true);
 
-  /* A change of window shape can move the lens (the film's crop changes at
-     6:5) and swap the photograph's cut, so the geometry is taken again and
-     the current position repainted straight away, rather than waiting for
-     ScrollTrigger's own refresh a moment later. */
+  /* A resize can change the scroll position and swap the photograph's cut,
+     so repaint straight away rather than waiting for ScrollTrigger. */
   window.addEventListener("resize", function () {
-    geo = null;
     if (trigger) update();
   }, { passive: true });
 
@@ -466,7 +323,6 @@
   window.addEventListener("pageshow", function (event) {
     if (!event.persisted) return;
     asked = -1;
-    geo = null;
     start();
   });
 

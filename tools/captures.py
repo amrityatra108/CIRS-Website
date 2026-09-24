@@ -1,34 +1,15 @@
-"""CIRS Captures — the photographs below the opening, and the page's ending.
+"""CIRS Captures — the featured photographs, gallery, and ending.
 
-Everything shown here is one of the school's own camera originals from
-assets/source. tools/make-captures-gallery.py cuts each one — a tile for the
-page and a full-size image for the viewer, and for the four featured
-photographs a cut at the size their frame draws them — and records the sizes
-it wrote in tools/captures-gallery.json, which is what this module reads, so
-the site build itself never needs an image library.
+The sixteen supplied photographs are in assets/source/captures-2026-09-24.
+Captions describe only what is visible; photographer, date, and location are
+not inferred. tools/make-captures-gallery.py writes the gallery and featured
+images and their dimensions to tools/captures-gallery.json, so the site build
+does not need an image library. The opening lead is cut separately by
+tools/make-captures-shot.py.
 
-CAPTIONS say what the photograph shows. Where one also names the occasion,
-that was verified, not inferred: the file in assets/source is byte for byte
-the file in a named event folder in the school's Drive (CIRS Studio), and the
-date the camera recorded agrees with it. Only the unresized camera originals
-can be matched that way; the rest were resized on the way in, so for them no
-occasion is given. No file anywhere records a photographer, so no caption
-names one: where the school can supply a name, it goes in CREDITS, and the
-viewer shows a credit line for any photograph that has one.
-
-    0C9A4095, 0C9A4097, 0C9A4128  "46. Anand Utsav"; taken 8 October 2025
-    0C9A2196                      "9. Khel Mela (Sports DAY)", Day 2;
-                                  taken 4 February 2026
-
-FEATURED is the short sequence that follows the opening: the photograph that
-opened out of the camera's lens, then three more, each given a composition of
-its own — see tools/pages/captures.html and assets/css/captures-featured.css.
-They are not repeated in the gallery.
-
-ROWS is the gallery's layout. Each row is laid out at one height across the
-full width, so a portrait sits beside a landscape at its own shape rather
-than being cropped to match it; a row of one is a full-width photograph. The
-order is the reading order, and the viewer's next and previous follow it.
+ROWS defines the gallery order and its equal-height rows. The viewer follows
+the same reading order. The lead, three featured images, and ending appear
+once each outside the gallery.
 """
 
 import json
@@ -37,47 +18,35 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 MANIFEST = os.path.join(HERE, "captures-gallery.json")
 
-ANAND_UTSAV = "at Anand Utsav, October 2025"
-KHEL_MELA = "at Khel Mela, the sports day, February 2026"
-
 # (source file in assets/source, output name, caption, width of the cut)
-# The lead — the photograph the camera's lens opens onto — is cut by
-# tools/make-captures-shot.py, because the opening uses it first.
+# The lead — the photograph dissolved over the camera's final frame — is cut
+# by tools/make-captures-shot.py, because the opening uses it first.
+LEAD_SOURCE = "captures-2026-09-24/img-9821.jpg"
+LEAD_CAPTION = "A bee on a vivid yellow flower"
 FEATURED = [
-    ("8A5A3313.JPG", "overhead-kick", "An overhead kick on the field, with the hills behind", 1800),
-    ("0C9A4095.JPG", "greeting", "A student with her hands folded in greeting, " + ANAND_UTSAV, 1200),
-    ("DJI_0856.JPG", "campus-air", "The campus from the air, its courtyards among the trees", 2400),
+    ("captures-2026-09-24/dsc02269.jpg", "companion", "A black and yellow butterfly on pale purple flowers", 1800),
+    ("captures-2026-09-24/img-9515.jpg", "portrait", "A hoopoe perched among branches", 1200),
+    ("captures-2026-09-24/img-1007.jpg", "wide", "A small dark bird amid pink blossoms", 2400),
 ]
-LEAD_CAPTION = "A student dancing on stage in red, one arm raised"
 
 # (source file in assets/source, output name, caption)
 ROWS = [
-    [("IMG_0550.JPG", "dancers-pink-light", "Dancers in performance under pink stage light"),
-     ("0C9A4097.JPG", "hands-folded-him", "A student with his hands folded in greeting, " + ANAND_UTSAV)],
-    [("IMG_1790.JPG", "microscope", "A student at the microscope in the laboratory"),
-     ("IMG_2474.JPG", "amphitheatre-night", "Students seated in the amphitheatre under floodlights"),
-     ("IMG_1828.JPG", "three-dancers", "Three dancers on a stage lit pink")],
-    [("IMG_20210514_182259.jpg", "after-rain", "The school after rain, its lights reflected in the paving")],
-    [("IMG_9314.JPG", "swimmer", "A swimmer mid-stroke in the pool"),
-     ("DSC_0858.JPG", "guitars", "Students playing guitars together"),
-     ("IMG_1686.JPG", "meditation", "Students seated in meditation")],
-    [("IMG_6061.JPG", "rappelling", "Rappelling down a rock face in helmet and harness"),
-     ("0C9A4128.JPG", "seated-together", "Students seated together on the floor, " + ANAND_UTSAV),
-     ("IMG_8811.JPG", "stage-production", "A stage production in costume")],
-    [("IMG_3051.JPG", "football", "Football on the field"),
-     ("IMG_1898.JPG", "robot", "Students at work on a small wheeled robot"),
-     ("DSC_8037.JPG", "tabla", "A tabla lesson")],
-    [("0C9A2196.JPG", "lectern", "A student speaking at a lectern outdoors, " + KHEL_MELA),
-     ("IMG_9879.JPG", "human-pyramid", "A human pyramid reaching for a hanging pot, after dark")],
-    [("IMG_2327.JPG", "runners", "Runners in team colours on the track"),
-     ("IMG_1630.JPG", "yoga", "Yoga on the lawn"),
-     ("2.JPG", "ncc-march", "The NCC contingent marching with its flag")],
-    [("drive-student-life-beyond.JPG", "dancing-lawn", "Students dancing on the lawn")],
+    [("captures-2026-09-24/dsc00453.jpg", "bird-among-leaves", "A red-crested bird among broad green leaves"),
+     ("captures-2026-09-24/img-1396.jpg", "bird-white-blossoms", "A small bird reaching into white blossoms")],
+    [("captures-2026-09-24/img-1887.jpg", "squirrel-branch", "A squirrel perched on a branch against blue sky"),
+     ("captures-2026-09-24/img-2031.jpg", "green-lizard", "A green lizard partly hidden beneath leaves"),
+     ("captures-2026-09-24/img-4426.jpg", "grey-bird", "A small grey bird seen through soft green foliage")],
+    [("captures-2026-09-24/kingfisher.jpg", "kingfisher-water", "A kingfisher by the water, framed by tree trunks")],
+    [("captures-2026-09-24/img-4491.jpg", "kingfisher-post", "A kingfisher perched on a post with trees behind"),
+     ("captures-2026-09-24/img-4562.jpg", "dove-branches", "A dove perched among yellow flowers and branches")],
+    [("captures-2026-09-24/img-2030.jpg", "bird-dark", "A small pale-headed bird against a dark background"),
+     ("captures-2026-09-24/img-5244.jpg", "bird-in-shade", "A dark green bird on a branch in deep shade"),
+     ("captures-2026-09-24/img-5569.jpg", "bird-bare-branches", "A small red-crowned bird among bare branches")],
 ]
 
 # The ending: one photograph, kept out of the gallery above so that it is
 # seen once, at the end.
-END = ("IMG_2051.JPG", "end", "The school, with cloud on the hills behind it")
+END = ("captures-2026-09-24/img-1990.jpg", "end", "A long-necked bird on a branch against misty hills")
 
 # Photographer credits, by output name, once the school can confirm them.
 CREDITS = {}
