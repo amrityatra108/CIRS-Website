@@ -1279,22 +1279,27 @@
     var y = gsap.quickTo(ring, "y", { duration: .45, ease: "power3" });
     var muted = false;
 
+    // The ring gives way over the header and over the "On this page" index:
+    // both are small labelled controls, and a 62px difference-blended circle
+    // sitting on their text made the icon and label unreadable.
+    var quiet = ".header, .jump";
+
     window.addEventListener("pointermove", function (e) {
       x(e.clientX); y(e.clientY);
-      var overHeader = !!(e.target.closest && e.target.closest(".header"));
-      if (overHeader !== muted) {
-        muted = overHeader;
+      var overQuiet = !!(e.target.closest && e.target.closest(quiet));
+      if (overQuiet !== muted) {
+        muted = overQuiet;
         if (muted) ring.classList.remove("is-big");
-        gsap.to(ring, { opacity: muted ? 0 : 1, duration: .2 });
+        gsap.to(ring, { opacity: muted ? 0 : 1, duration: .2, overwrite: "auto" });
       } else if (!muted && ring.style.opacity !== "1") {
-        gsap.to(ring, { opacity: 1, duration: .3 });
+        gsap.to(ring, { opacity: 1, duration: .3, overwrite: "auto" });
       }
     }, { passive: true });
-    document.addEventListener("pointerleave", function () { gsap.to(ring, { opacity: 0, duration: .3 }); });
+    document.addEventListener("pointerleave", function () { gsap.to(ring, { opacity: 0, duration: .3, overwrite: "auto" }); });
 
     var hot = "a, button, .dmoment, .facilities > div, .node, input, [data-magnetic]";
     document.addEventListener("pointerover", function (e) {
-      if (e.target.closest && e.target.closest(".header")) return;
+      if (e.target.closest && e.target.closest(quiet)) return;
       if (e.target.closest && e.target.closest(hot)) ring.classList.add("is-big");
     });
     document.addEventListener("pointerout", function (e) {
