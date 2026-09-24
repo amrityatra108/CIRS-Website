@@ -26,17 +26,17 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=100-results-13">
-<link rel="stylesheet" href="assets/css/cirs.css?b=100-results-13">
-<link rel="stylesheet" href="assets/css/pages.css?b=100-results-13">
+<link rel="stylesheet" href="assets/css/fonts.css?b=101-results-13">
+<link rel="stylesheet" href="assets/css/cirs.css?b=101-results-13">
+<link rel="stylesheet" href="assets/css/pages.css?b=101-results-13">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/results.css?b=100-results-13">
-<link rel="stylesheet" href="assets/css/typography.css?b=100-results-13">
+<link rel="stylesheet" href="assets/css/results.css?b=101-results-13">
+<link rel="stylesheet" href="assets/css/typography.css?b=101-results-13">
 </head>
 
 <body class="results">
@@ -265,6 +265,20 @@
   </div>
 </div>
 <main id="main">
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#top">CBSE Results</a>
+      <a href="#destinations">The next chapter.</a>
+      <a href="#directory">University directory</a>
+    </div>
+  </details>
+</nav>
 <section class="rj-story" id="top" aria-labelledby="results-title">
   <div class="rj-stage">
     <div class="rj-split" aria-hidden="true">
@@ -433,18 +447,6 @@
     <nav aria-label="Continue from Results"><a href="curriculum.html">Explore the Curriculum</a><a href="alumni.html">Meet Our Alumni</a><a href="assets/documents/school-info/cbse-results-past-three-years.pdf" download>Download Results</a><a href="admissions.html#apply">Begin Your CIRS Journey</a></nav>
   </div>
 </section>
-<nav class="jump" aria-label="On this page">
-  <div class="jump__panel" id="jumpPanel">
-      <p>On this page</p>
-      <a href="#top">CBSE Results</a>
-      <a href="#destinations">The next chapter.</a>
-      <a href="#directory">University directory</a>
-  </div>
-  <button type="button" class="jump__toggle" aria-label="On this page" aria-expanded="false" aria-controls="jumpPanel">
-    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <span>On this page</span>
-  </button>
-</nav>
 </main>
 <div class="footer-wrap">
 <footer class="footer">
@@ -471,8 +473,8 @@
       </div>
 
       <div>
-        <h4 class="sc">About</h4>
-        <ul>
+        <p class="sc" id="fnav-about">About</p>
+        <ul aria-labelledby="fnav-about">
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
@@ -523,11 +525,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=100-results-13" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=100-results-13" defer></script>
-<script src="assets/vendor/lenis.min.js?b=100-results-13" defer></script>
-<script src="assets/js/cirs.js?b=100-results-13" defer></script>
-<script src="assets/js/pages.js?b=100-results-13" defer></script>
-<script src="assets/js/results-journey.js?b=100-results-13" defer></script>
+<script src="assets/vendor/gsap.min.js?b=101-results-13" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=101-results-13" defer></script>
+<script src="assets/vendor/lenis.min.js?b=101-results-13" defer></script>
+<script src="assets/js/cirs.js?b=101-results-13" defer></script>
+<script src="assets/js/pages.js?b=101-results-13" defer></script>
+<script src="assets/js/results-journey.js?b=101-results-13" defer></script>
 </body>
 </html>

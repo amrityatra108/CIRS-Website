@@ -26,17 +26,17 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=100">
-<link rel="stylesheet" href="assets/css/cirs.css?b=100">
-<link rel="stylesheet" href="assets/css/pages.css?b=100">
+<link rel="stylesheet" href="assets/css/fonts.css?b=101">
+<link rel="stylesheet" href="assets/css/cirs.css?b=101">
+<link rel="stylesheet" href="assets/css/pages.css?b=101">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/connect.css?b=100">
-<link rel="stylesheet" href="assets/css/typography.css?b=100">
+<link rel="stylesheet" href="assets/css/connect.css?b=101">
+<link rel="stylesheet" href="assets/css/typography.css?b=101">
 </head>
 
 <body class="connect">
@@ -266,12 +266,12 @@
 </div>
 <main id="main">
 <section class="pagehero" id="top" data-ground="#0E0B12">
-  <div class="pagehero__media" style="background-image:url('assets/img/news-hero.jpg?b=100')">
+  <div class="pagehero__media" style="background-image:url('assets/img/news-hero.jpg?b=101')">
     <video class="pagehero__video" autoplay muted loop playsinline
-           poster="assets/img/news-hero.jpg?b=100" aria-hidden="true"
+           poster="assets/img/news-hero.jpg?b=101" aria-hidden="true"
            width="1280" height="720" fetchpriority="high">
-      <source src="assets/video/campus-loop.webm?b=100" type="video/webm">
-      <source src="assets/video/campus-loop.mp4?b=100" type="video/mp4">
+      <source src="assets/video/campus-loop.webm?b=101" type="video/webm">
+      <source src="assets/video/campus-loop.mp4?b=101" type="video/mp4">
     </video>
   </div>
   <div class="pagehero__scrim" aria-hidden="true"></div>
@@ -318,6 +318,22 @@
     </div>
   </div>
 </section>
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#latest">Latest</a>
+      <a href="#results">CBSE, March&ndash;April 2026</a>
+      <a href="#highlights">Highlighted stories</a>
+      <a href="#more">More from campus</a>
+      <a href="#diary">The diary</a>
+    </div>
+  </details>
+</nav>
 <section class="section" id="latest">
   <div class="wrap">
     <div class="sec-head rv">
@@ -660,20 +676,6 @@
     </div>
   </div>
 </section>
-<nav class="jump" aria-label="On this page">
-  <div class="jump__panel" id="jumpPanel">
-      <p>On this page</p>
-      <a href="#latest">Latest</a>
-      <a href="#results">CBSE, March&ndash;April 2026</a>
-      <a href="#highlights">Highlighted stories</a>
-      <a href="#more">More from campus</a>
-      <a href="#diary">The diary</a>
-  </div>
-  <button type="button" class="jump__toggle" aria-label="On this page" aria-expanded="false" aria-controls="jumpPanel">
-    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <span>On this page</span>
-  </button>
-</nav>
 <section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -713,8 +715,8 @@
       </div>
 
       <div>
-        <h4 class="sc">About</h4>
-        <ul>
+        <p class="sc" id="fnav-about">About</p>
+        <ul aria-labelledby="fnav-about">
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
@@ -765,10 +767,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=100" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=100" defer></script>
-<script src="assets/vendor/lenis.min.js?b=100" defer></script>
-<script src="assets/js/cirs.js?b=100" defer></script>
-<script src="assets/js/pages.js?b=100" defer></script>
+<script src="assets/vendor/gsap.min.js?b=101" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=101" defer></script>
+<script src="assets/vendor/lenis.min.js?b=101" defer></script>
+<script src="assets/js/cirs.js?b=101" defer></script>
+<script src="assets/js/pages.js?b=101" defer></script>
 </body>
 </html>

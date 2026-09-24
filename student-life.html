@@ -26,17 +26,17 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=100-student-life-9">
-<link rel="stylesheet" href="assets/css/cirs.css?b=100-student-life-9">
-<link rel="stylesheet" href="assets/css/pages.css?b=100-student-life-9">
+<link rel="stylesheet" href="assets/css/fonts.css?b=101-student-life-9">
+<link rel="stylesheet" href="assets/css/cirs.css?b=101-student-life-9">
+<link rel="stylesheet" href="assets/css/pages.css?b=101-student-life-9">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/student-life.css?b=100-student-life-9">
-<link rel="stylesheet" href="assets/css/typography.css?b=100-student-life-9">
+<link rel="stylesheet" href="assets/css/student-life.css?b=101-student-life-9">
+<link rel="stylesheet" href="assets/css/typography.css?b=101-student-life-9">
 </head>
 
 <body class="student-life">
@@ -271,6 +271,24 @@
   </div>
 </div>
 <main id="main">
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#day">From rouser to lights out.</a>
+      <a href="#residential-life">A campus that becomes home.</a>
+      <a href="#sports-after-five">When classes end, the competition begins.</a>
+      <a href="#houses">Four houses. One campus.</a>
+      <a href="#student-work">What students create for themselves.</a>
+      <a href="#campus">Life on campus at a glance.</a>
+      <a href="#student-login">One day ends. Another story begins tomorrow.</a>
+    </div>
+  </details>
+</nav>
 <section class="sj-hero" id="top" aria-labelledby="sj-hero-title">
   <img class="sj-cover" src="assets/img/campus-band.jpg" alt="The CIRS campus below the Western Ghats" width="1920" height="1080" fetchpriority="high" decoding="async">
   <div class="sj-shade"></div>
@@ -430,22 +448,6 @@
   <img class="sj-cover" src="assets/img/hrun/10-night.jpg" alt="Students gathered in the CIRS amphitheatre at night" width="1500" height="1000" loading="lazy" decoding="async">
   <div class="sj-shade"></div><div class="wrap sj-night__content"><p class="sj-kicker">10:30 PM · Lights out</p><h2 id="sj-night-title">One day ends.<br><span>Another story<br>begins tomorrow.</span></h2><nav aria-label="Continue exploring"><a href="#houses">Explore the houses</a><a href="sports.html">Discover sports</a><a href="crossroads.html">Read student work</a><a href="admissions.html#visit">Plan a campus visit</a></nav></div>
 </section>
-<nav class="jump" aria-label="On this page">
-  <div class="jump__panel" id="jumpPanel">
-      <p>On this page</p>
-      <a href="#day">From rouser to lights out.</a>
-      <a href="#residential-life">A campus that becomes home.</a>
-      <a href="#sports-after-five">When classes end, the competition begins.</a>
-      <a href="#houses">Four houses. One campus.</a>
-      <a href="#student-work">What students create for themselves.</a>
-      <a href="#campus">Life on campus at a glance.</a>
-      <a href="#student-login">One day ends. Another story begins tomorrow.</a>
-  </div>
-  <button type="button" class="jump__toggle" aria-label="On this page" aria-expanded="false" aria-controls="jumpPanel">
-    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <span>On this page</span>
-  </button>
-</nav>
 <section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -485,8 +487,8 @@
       </div>
 
       <div>
-        <h4 class="sc">About</h4>
-        <ul>
+        <p class="sc" id="fnav-about">About</p>
+        <ul aria-labelledby="fnav-about">
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
@@ -537,11 +539,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=100-student-life-9" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=100-student-life-9" defer></script>
-<script src="assets/vendor/lenis.min.js?b=100-student-life-9" defer></script>
-<script src="assets/js/cirs.js?b=100-student-life-9" defer></script>
-<script src="assets/js/pages.js?b=100-student-life-9" defer></script>
-<script src="assets/js/student-life-journey.js?b=100-student-life-9" defer></script>
+<script src="assets/vendor/gsap.min.js?b=101-student-life-9" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=101-student-life-9" defer></script>
+<script src="assets/vendor/lenis.min.js?b=101-student-life-9" defer></script>
+<script src="assets/js/cirs.js?b=101-student-life-9" defer></script>
+<script src="assets/js/pages.js?b=101-student-life-9" defer></script>
+<script src="assets/js/student-life-journey.js?b=101-student-life-9" defer></script>
 </body>
 </html>

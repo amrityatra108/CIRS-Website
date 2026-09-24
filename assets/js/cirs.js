@@ -1331,7 +1331,7 @@
     }, { passive: true });
     document.addEventListener("pointerleave", function () { gsap.to(ring, { opacity: 0, duration: .3, overwrite: "auto" }); });
 
-    var hot = "a, button, .dmoment, .facilities > div, .node, input, [data-magnetic]";
+    var hot = "a, button, summary, .dmoment, .facilities > div, .node, input, [data-magnetic]";
     document.addEventListener("pointerover", function (e) {
       if (e.target.closest && e.target.closest(quiet)) return;
       if (e.target.closest && e.target.closest(hot)) ring.classList.add("is-big");

@@ -11,62 +11,33 @@
   "use strict";
 
   /* ----------------------------------------------------------
-     "On this page" — the index that opens from the right edge.
-     Progressive enhancement: the markup is a button and a list,
-     so with this file blocked the links are still reachable, and
-     the panel is simply always closed.
+     "On this page" — the index above the back-to-top button.
+     It is a native <details>, so it opens, closes and takes the
+     keyboard with this file blocked. What this adds is the rest:
+     Escape and a click elsewhere close it, choosing a link closes
+     it, and the section on screen is marked in the list.
      ---------------------------------------------------------- */
   var jump = document.querySelector(".jump");
   if (!jump) return;
 
+  var details = jump.querySelector(".jump__details");
   var toggle = jump.querySelector(".jump__toggle");
   var panel = jump.querySelector(".jump__panel");
-  if (!toggle || !panel) return;
-
-  // The visible button is the only opening target. The panel participates in
-  // the fixed wrapper's layout even while hidden, so opening from wrapper
-  // hover made apparently empty space beside the control feel clickable.
-  var pinned = false;
-
-  function open() {
-    jump.classList.add("is-open");
-    toggle.setAttribute("aria-expanded", "true");
-  }
-  function close() {
-    pinned = false;
-    jump.classList.remove("is-open");
-    toggle.setAttribute("aria-expanded", "false");
-  }
-  function isOpen() {
-    return jump.classList.contains("is-open");
-  }
-
-  toggle.addEventListener("click", function () {
-    if (pinned) { close(); return; }
-    pinned = true;
-    open();
-  });
-
-  // Keyboard: reaching the toggle by tab should show what it controls.
-  toggle.addEventListener("focus", open);
-  jump.addEventListener("focusout", function (e) {
-    if (!pinned && !jump.contains(e.relatedTarget)) close();
-  });
+  if (!details || !toggle || !panel) return;
 
   panel.addEventListener("click", function (e) {
-    if (e.target.closest("a")) close();
+    if (e.target.closest("a")) details.open = false;
   });
 
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && isOpen()) {
-      // Restore focus before closing: the focus handler opens the panel.
+    if (e.key === "Escape" && details.open) {
+      details.open = false;
       toggle.focus();
-      close();
     }
   });
 
   document.addEventListener("click", function (e) {
-    if (isOpen() && !jump.contains(e.target)) close();
+    if (details.open && !jump.contains(e.target)) details.open = false;
   });
 
   /* Mark the section currently on screen. Uses IntersectionObserver

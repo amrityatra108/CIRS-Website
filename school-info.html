@@ -26,17 +26,17 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=100">
-<link rel="stylesheet" href="assets/css/cirs.css?b=100">
-<link rel="stylesheet" href="assets/css/pages.css?b=100">
+<link rel="stylesheet" href="assets/css/fonts.css?b=101">
+<link rel="stylesheet" href="assets/css/cirs.css?b=101">
+<link rel="stylesheet" href="assets/css/pages.css?b=101">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/connect.css?b=100">
-<link rel="stylesheet" href="assets/css/typography.css?b=100">
+<link rel="stylesheet" href="assets/css/connect.css?b=101">
+<link rel="stylesheet" href="assets/css/typography.css?b=101">
 </head>
 
 <body class="connect">
@@ -272,14 +272,55 @@
     <p class="lead">The affiliation, governance, infrastructure and grievance-redressal details CBSE and the affiliating authorities require every school to publish &mdash; and the Important Documents portal that carries the certificates behind them.</p>
   </div>
 </section>
-<section class="section" id="details">
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#glance">At a glance</a>
+      <a href="#details">Affiliation &amp; registration</a>
+      <a href="#governance">Governance</a>
+      <a href="#facilities">Infrastructure &amp; facilities</a>
+      <a href="#faculty">Faculty, enrolment &amp; records</a>
+      <a href="#grievance">Grievance redressal</a>
+      <a href="#calendar">Academic calendar &amp; circulars</a>
+      <a href="#doclist">Documents</a>
+    </div>
+  </details>
+</nav>
+<section class="section" id="glance">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">At a glance</span></p>
+      <h2 class="serif h2" data-split>For Families, <em>in Brief.</em></h2>
+      <p class="lead">What a family usually asks first, each linked to the page that says more.
+        The particulars CBSE requires every school to publish follow below.</p>
+    </div>
+
+    <dl class="factrail rv ci-glance">
+      <div><dt>School</dt><dd>Co-educational and residential, founded in 1996</dd></div>
+      <div><dt>Affiliation</dt><dd>CBSE, no. 1930154, since 1997</dd></div>
+      <div><dt>Curriculum</dt><dd><a href="curriculum.html">CBSE from Grade V; CBSE or the IB
+        Diploma from Grade XI</a></dd></div>
+      <div><dt>Fees</dt><dd><a href="admissions.html#fees">Fee structure</a></dd></div>
+      <div><dt>Results</dt><dd><a href="our-results.html">Board examination results</a></dd></div>
+      <div><dt>Admissions</dt><dd><a href="admissions.html">How to apply</a> &middot;
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section on-paper-2" id="details">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">Affiliation &amp; registration</span></p>
       <h2 class="serif h2" data-split>School <em>Details.</em></h2>
       <p class="lead">The particulars CBSE and the affiliating authorities require every school to
-        publish, exactly as filed by CIRS. Supporting certificates for each are in the
-        <a href="important-documents.html">Important Documents portal</a> below.</p>
+        publish, exactly as filed by CIRS. Supporting certificates for each, with their dates,
+        are in the <a href="#doclist">document list</a> below.</p>
     </div>
 
     <div class="tablewrap rv">
@@ -320,14 +361,18 @@
             <td>1930154</td>
           </tr>
           <tr>
+            <th scope="row">School code</th>
+            <td>55103</td>
+          </tr>
+          <tr>
             <th scope="row">Affiliated with the Board since</th>
             <td>01.04.1997</td>
           </tr>
           <tr>
             <th scope="row">Extension of affiliation upto</th>
-            <td>31.03.2025 &mdash; see the CBSE Affiliation Letter in the
-              <a href="important-documents.html#doc-cbse-affiliation-letter">Important Documents
-              portal</a> for the current status.</td>
+            <td>31.03.2025, on the most recent CBSE affiliation letter on file.<br>
+              <em>[Awaiting the school &mdash; the current extension of affiliation letter and its
+              validity date.]</em></td>
           </tr>
           <tr>
             <th scope="row">Trust/Society registered under Section 25, Companies Act 1956</th>
@@ -345,16 +390,16 @@
   </div>
 </section>
 
-<section class="section on-paper-2" id="governance">
+<section class="section" id="governance">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">Governance</span></p>
-      <h2 class="serif h2" data-split>Managing Committee &amp; <em>Resident Director.</em></h2>
+      <h2 class="serif h2" data-split>Management &amp; <em>Resident Director.</em></h2>
     </div>
 
     <div class="prog">
       <div class="rv">
-        <h3 class="serif h3 ci-sub">Managing Committee</h3>
+        <h3 class="serif h3 ci-sub">Board of Directors</h3>
         <p class="copy">The School is managed by a committee headed by Swami Swaroopananda, the Head
           of Chinmaya Mission worldwide. It comprises educationists and eminent persons. Portraits
           and introductions are on <a href="leadership.html">Leadership</a>.</p>
@@ -367,6 +412,14 @@
           <div><dt>Smt. Shanti Krishnamurthy</dt><dd>Director &mdash; Academics &amp; Administration</dd></div>
           <div><dt>Smt. G. Rajeshwari</dt><dd>Principal</dd></div>
         </dl>
+
+        <h3 class="serif h3 ci-sub ci-sub--spaced">School Management Committee</h3>
+        <p class="copy">CBSE&rsquo;s mandatory disclosure asks every school to publish its School
+          Management Committee, which is a separate body from the Board above.</p>
+        <p class="copy"><em>[Awaiting the school &mdash; the current School Management Committee
+          list, to be published in the
+          <a href="important-documents.html#doc-school-management-committee">Important Documents
+          portal</a>.]</em></p>
       </div>
 
       <div class="rv">
@@ -385,7 +438,7 @@
   </div>
 </section>
 
-<section class="section" id="facilities">
+<section class="section on-paper-2" id="facilities">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">Infrastructure &amp; facilities</span></p>
@@ -411,15 +464,17 @@
     <dl class="factrail rv">
       <div><dt>Cricket</dt><dd>A state-of-the-art cricket facility</dd></div>
       <div><dt>Tennis</dt><dd>Synthetic tennis court</dd></div>
-      <div><dt>Badminton</dt><dd>Four massive courts</dd></div>
+      <div><dt>Badminton</dt><dd>Four courts</dd></div>
       <div><dt>Table tennis</dt><dd>A dedicated hall with six tables</dd></div>
       <div><dt>Football</dt><dd>A full-size grass football court</dd></div>
       <div><dt>Basketball</dt><dd>Four courts</dd></div>
       <div><dt>Athletics</dt><dd>An Olympic-size athletic track</dd></div>
+      <div><dt>Swimming</dt><dd>A swimming pool</dd></div>
+      <div><dt>Billiards</dt><dd>A billiards table</dd></div>
     </dl>
 
-    <p class="copy rv ci-note">The campus also has a swimming pool and a billiards
-      table.</p>
+    <p class="copy rv ci-note">Photographs of the grounds, the pool and the courts in use are on
+      <a href="sports.html">Sports</a>.</p>
 
     <div class="prog ci-group">
       <div class="rv">
@@ -432,14 +487,15 @@
         <h3 class="serif h3 ci-sub">Medical facilities</h3>
         <p class="copy">The school has a Resident Medical Officer and nurses. The dispensary has
           boys' and girls' wards and a full-fledged dental clinic.</p>
-        <p class="copy"><em>[Placeholder &mdash; a link to photographs of
-          the medical facilities, to be supplied by the school.]</em></p>
+        <p class="copy"><em>[Awaiting the school &mdash; photographs of the dispensary, the wards
+          and the dental clinic; the hours of the medical officer and the nursing cover; and the
+          nearest hospital the school works with.]</em></p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section on-paper-2" id="faculty">
+<section class="section" id="faculty">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">Faculty, enrolment &amp; records</span></p>
@@ -450,31 +506,35 @@
       <div class="rv">
         <h3 class="serif h3 ci-sub">Faculty members</h3>
         <p class="copy">The school has a dedicated and competent team of faculty members from across
-          the country, specialised in various subjects. Full faculty details are in the
-          <a href="important-documents.html#doc-faculty-details">Important Documents portal</a>.</p>
+          the country, specialised in various subjects. Full faculty details are available from
+          the school office on request, at
+          <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
       </div>
       <div class="rv">
         <h3 class="serif h3 ci-sub">Student enrolment</h3>
         <p class="copy">Class-wise and section-wise student enrolment figures are published each
           academic year.</p>
-        <p class="copy"><em>[Placeholder &mdash; the current academic year's
-          class-wise and section-wise enrolment table, to be supplied by the school.]</em></p>
+        <p class="copy"><em>[Awaiting the school &mdash; the 2026&ndash;27 class-wise and
+          section-wise enrolment table.]</em></p>
       </div>
       <div class="rv">
         <h3 class="serif h3 ci-sub">Transfer certificates</h3>
-        <p class="copy">The register of transfer certificates issued by the school is available in
-          the <a href="important-documents.html#doc-transfer-certificates">Important Documents
-          portal</a>.</p>
+        <p class="copy">The register of transfer certificates issued by the school is available
+          from the school office on request, at
+          <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="grievance">
+<section class="section on-paper-2" id="grievance">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">Grievance redressal</span></p>
       <h2 class="serif h2" data-split>Redressal &amp; <em>Prevention of Sexual Harassment.</em></h2>
+      <p class="lead">A concern can be raised with the Grievance / Redressal Officer by email or
+        telephone. The school&rsquo;s safety policy is in the
+        <a href="#doclist">document list</a> below.</p>
     </div>
 
     <div class="tablewrap rv">
@@ -505,7 +565,7 @@
   </div>
 </section>
 
-<section class="section on-paper-2" id="calendar">
+<section class="section" id="calendar">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">Academic calendar &amp; circulars</span></p>
@@ -514,128 +574,89 @@
 
     <dl class="factrail rv">
       <div><dt>Academic session period</dt><dd>April to March</dd></div>
-      <div><dt>Vacation period</dt><dd>June and December</dd></div>
+      <div><dt>Vacation period</dt><dd>May&ndash;June and December</dd></div>
       <div><dt>Admission period</dt><dd>November to March</dd></div>
     </dl>
 
-    <p class="copy rv ci-note">School circulars:
-      <a href="important-documents.html#doc-circular-anand-utsav">Anand Utsav</a> &middot;
-      <a href="important-documents.html#doc-circular-khel-mela">Khel Mela</a>.
-      The full annual academic calendar is in the
+    <p class="copy rv ci-note">The most recent annual academic calendar on file is for
+      2024&ndash;25, and the most recent circulars &mdash;
+      <a href="important-documents.html#doc-circular-anand-utsav">Anand Utsav</a> and
+      <a href="important-documents.html#doc-circular-khel-mela">Khel Mela</a> &mdash; are from
+      2019; current editions are awaited from the school. All of them are in the
       <a href="important-documents.html#doc-academic-calendar">Important Documents portal</a>.</p>
-  </div>
-</section>
-
-<section class="section" id="portal">
-  <div class="wrap">
-    <!-- The page hands over to the documents portal here. The school's own
-         front elevation marks the handover. -->
-    <figure class="ciband rv">
-      <img src="assets/img/entrance.jpg"
-           alt="The front elevation of the school, its portico carrying the CIRS crest, with the Siruvani hills behind"
-           width="1400" height="325" loading="lazy" decoding="async">
-    </figure>
-
-    <div class="notice rv">
-      <div>
-        <p class="notice__label">Important documents</p>
-        <h2 class="serif">Certificates, results and circulars &mdash; <em>in one place.</em></h2>
-        <p>For detailed information and supporting documentation relating to the topics covered on
-          this page, please access the Important Documents portal below. Every document opens in
-          your browser's own PDF viewer, where it can be read or downloaded with the browser's
-          standard controls.</p>
-      </div>
-      <div class="notice__cta">
-        <a class="btn btn--primary btn--lg" href="important-documents.html">Open Important
-          Documents</a>
-      </div>
-    </div>
   </div>
 </section>
 
 <section class="section on-paper-2" id="doclist">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="marker"><span class="sc">Document list</span></p>
-      <h2 class="serif h2" data-split>Documents Available in the <em>Important Documents
-        Portal.</em></h2>
-      <p class="lead">Every document currently in the portal, by category. <a
-        href="important-documents.html">Open the portal</a> to view or download any of them.</p>
+      <p class="marker"><span class="sc">Documents</span></p>
+      <h2 class="serif h2" data-split>Certificates, Results <em>&amp; Circulars.</em></h2>
+      <p class="lead">Every document the school publishes, by category, with its date &mdash; and
+        plainly marked where a certificate has expired or a newer edition is awaited. View opens a
+        document in your browser&rsquo;s own PDF viewer; Download saves it. The portal carries a
+        note on each.
+        <span class="ci-portal"><a class="btn btn--primary" href="important-documents.html">Open
+          Important Documents</a></span></p>
     </div>
     <div class="docgrid">
       <div class="docgroup rv">
         <h3 class="serif h3">Affiliation &amp; recognition</h3>
         <ul class="doclist">
-        <li><span class="doclist__title">CBSE Affiliation Letter</span> <a class="doclist__dl" href="assets/documents/school-info/cbse-affiliation-letter.pdf" download aria-label="Download CBSE Affiliation Letter (PDF)">Download</a></li>
-        <li><span class="doclist__title">Recognition from State Government</span> <a class="doclist__dl" href="assets/documents/school-info/state-government-recognition.pdf" download aria-label="Download Recognition from State Government (PDF)">Download</a></li>
-        <li><span class="doclist__title">No Objection Certificate from State Government</span> <a class="doclist__dl" href="assets/documents/school-info/state-noc.pdf" download aria-label="Download No Objection Certificate from State Government (PDF)">Download</a></li>
-        <li><span class="doclist__title">CCMT Trust Registration Certificate</span> <a class="doclist__dl" href="assets/documents/school-info/ccmt-trust-registration-certificate.pdf" download aria-label="Download CCMT Trust Registration Certificate (PDF)">Download</a></li>
-        <li><span class="doclist__title">Self-Certification for Extension of Affiliation</span> <a class="doclist__dl" href="assets/documents/school-info/self-certification-extension-of-affiliation.pdf" download aria-label="Download Self-Certification for Extension of Affiliation (PDF)">Download</a></li>
-        <li><span class="doclist__title">Mandatory Public Disclosure</span> <a class="doclist__dl" href="assets/documents/school-info/mandatory-public-disclosure.pdf" download aria-label="Download Mandatory Public Disclosure (PDF)">Download</a></li>
+        <li><span class="doclist__title">CBSE Affiliation Letter<span class="docmeta docmeta--expired">Expired 31 Mar 2025 &middot; renewal awaited</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/cbse-affiliation-letter.pdf" target="_blank" rel="noopener" aria-label="View CBSE Affiliation Letter (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/cbse-affiliation-letter.pdf" download aria-label="Download CBSE Affiliation Letter (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Recognition from State Government<span class="docmeta docmeta--current">Valid until 8 Sep 2027</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/state-government-recognition.pdf" target="_blank" rel="noopener" aria-label="View Recognition from State Government (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/state-government-recognition.pdf" download aria-label="Download Recognition from State Government (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">No Objection Certificate from State Government<span class="docmeta docmeta--permanent">Issued 15 Jul 1996 &middot; no expiry</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/state-noc.pdf" target="_blank" rel="noopener" aria-label="View No Objection Certificate from State Government (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/state-noc.pdf" download aria-label="Download No Objection Certificate from State Government (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">CCMT Trust Registration Certificate<span class="docmeta docmeta--permanent">Issued 10 Jul 1964 &middot; no expiry</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/ccmt-trust-registration-certificate.pdf" target="_blank" rel="noopener" aria-label="View CCMT Trust Registration Certificate (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/ccmt-trust-registration-certificate.pdf" download aria-label="Download CCMT Trust Registration Certificate (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Self-Certification for Extension of Affiliation<span class="docmeta docmeta--dated">Issued 28 Mar 2024</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/self-certification-extension-of-affiliation.pdf" target="_blank" rel="noopener" aria-label="View Self-Certification for Extension of Affiliation (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/self-certification-extension-of-affiliation.pdf" download aria-label="Download Self-Certification for Extension of Affiliation (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Mandatory Public Disclosure<span class="docmeta docmeta--stale">Issued 4 Apr 2024 &middot; newer edition awaited</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/mandatory-public-disclosure.pdf" target="_blank" rel="noopener" aria-label="View Mandatory Public Disclosure (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/mandatory-public-disclosure.pdf" download aria-label="Download Mandatory Public Disclosure (PDF)">Download</a></span></li>
         </ul>
       </div>
       <div class="docgroup rv">
         <h3 class="serif h3">Safety &amp; compliance</h3>
         <ul class="doclist">
-        <li><span class="doclist__title">CIRS School Safety Policy</span> <a class="doclist__dl" href="assets/documents/school-info/school-safety-policy.pdf" download aria-label="Download CIRS School Safety Policy (PDF)">Download</a></li>
-        <li><span class="doclist__title">Fire Safety Certificate</span> <a class="doclist__dl" href="assets/documents/school-info/fire-safety-certificate.pdf" download aria-label="Download Fire Safety Certificate (PDF)">Download</a></li>
-        <li><span class="doclist__title">Building Safety Certificate</span> <a class="doclist__dl" href="assets/documents/school-info/building-safety-certificate.pdf" download aria-label="Download Building Safety Certificate (PDF)">Download</a></li>
-        <li><span class="doclist__title">Land Certificate</span> <a class="doclist__dl" href="assets/documents/school-info/land-certificate.pdf" download aria-label="Download Land Certificate (PDF)">Download</a></li>
-        <li><span class="doclist__title">Water, Health and Sanitation Certificate</span> <a class="doclist__dl" href="assets/documents/school-info/water-health-sanitation-certificate.pdf" download aria-label="Download Water, Health and Sanitation Certificate (PDF)">Download</a></li>
-        <li><span class="doclist__title">Water Quality Test Report</span> <a class="doclist__dl" href="assets/documents/school-info/water-quality-test-report.pdf" download aria-label="Download Water Quality Test Report (PDF)">Download</a></li>
-        <li><span class="doclist__title">Self Affidavit</span> <a class="doclist__dl" href="assets/documents/school-info/self-affidavit.pdf" download aria-label="Download Self Affidavit (PDF)">Download</a></li>
+        <li><span class="doclist__title">CIRS School Safety Policy<span class="docmeta docmeta--dated">Issued July 2018 (second edition)</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/school-safety-policy.pdf" target="_blank" rel="noopener" aria-label="View CIRS School Safety Policy (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/school-safety-policy.pdf" download aria-label="Download CIRS School Safety Policy (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Fire Safety Certificate<span class="docmeta docmeta--expired">Expired 17 Aug 2026 &middot; renewal awaited</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/fire-safety-certificate.pdf" target="_blank" rel="noopener" aria-label="View Fire Safety Certificate (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/fire-safety-certificate.pdf" download aria-label="Download Fire Safety Certificate (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Building Safety Certificate<span class="docmeta docmeta--current">Valid until 8 Sep 2027</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/building-safety-certificate.pdf" target="_blank" rel="noopener" aria-label="View Building Safety Certificate (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/building-safety-certificate.pdf" download aria-label="Download Building Safety Certificate (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Land Certificate<span class="docmeta docmeta--dated">Issued 24 Jan 2020</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/land-certificate.pdf" target="_blank" rel="noopener" aria-label="View Land Certificate (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/land-certificate.pdf" download aria-label="Download Land Certificate (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Water, Health and Sanitation Certificate<span class="docmeta docmeta--current">Valid until 23 Feb 2027</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/water-health-sanitation-certificate.pdf" target="_blank" rel="noopener" aria-label="View Water, Health and Sanitation Certificate (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/water-health-sanitation-certificate.pdf" download aria-label="Download Water, Health and Sanitation Certificate (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Water Quality Test Report<span class="docmeta docmeta--dated">Issued 11 Aug 2026</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/water-quality-test-report.pdf" target="_blank" rel="noopener" aria-label="View Water Quality Test Report (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/water-quality-test-report.pdf" download aria-label="Download Water Quality Test Report (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Self Affidavit<span class="docmeta docmeta--stale">Issued 19 Jan 2019 &middot; newer edition awaited</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/self-affidavit.pdf" target="_blank" rel="noopener" aria-label="View Self Affidavit (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/self-affidavit.pdf" download aria-label="Download Self Affidavit (PDF)">Download</a></span></li>
         </ul>
       </div>
       <div class="docgroup rv">
         <h3 class="serif h3">Academics &amp; results</h3>
         <ul class="doclist">
-        <li><span class="doclist__title">CBSE Results &mdash; Past Three Years</span> <a class="doclist__dl" href="assets/documents/school-info/cbse-results-past-three-years.pdf" download aria-label="Download CBSE Results &mdash; Past Three Years (PDF)">Download</a></li>
-        <li><span class="doclist__title">Transfer Certificates</span> <a class="doclist__dl" href="assets/documents/school-info/transfer-certificates.pdf" download aria-label="Download Transfer Certificates (PDF)">Download</a></li>
-        <li><span class="doclist__title">Declaration on Use of Textbooks Published by Private Publishers</span> <a class="doclist__dl" href="assets/documents/school-info/textbooks-declaration.pdf" download aria-label="Download Declaration on Use of Textbooks Published by Private Publishers (PDF)">Download</a></li>
-        <li><span class="doclist__title">Annual Academic Calendar</span> <a class="doclist__dl" href="assets/documents/school-info/annual-academic-calendar.pdf" download aria-label="Download Annual Academic Calendar (PDF)">Download</a></li>
+        <li><span class="doclist__title">CBSE Results &mdash; Past Three Years<span class="docmeta docmeta--current">Covers 2023–24 to 2025–26</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/cbse-results-past-three-years.pdf" target="_blank" rel="noopener" aria-label="View CBSE Results &mdash; Past Three Years (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/cbse-results-past-three-years.pdf" download aria-label="Download CBSE Results &mdash; Past Three Years (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Transfer Certificates<span class="docmeta docmeta--dated">Covers 2022–23</span><span class="docmeta docmeta--request">Available from the school office on request &middot; <a href="mailto:info@cirschool.org">info@cirschool.org</a></span></span></li>
+        <li><span class="doclist__title">Declaration on Use of Textbooks Published by Private Publishers<span class="docmeta docmeta--stale">Covers 2019–20 &middot; newer edition awaited</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/textbooks-declaration.pdf" target="_blank" rel="noopener" aria-label="View Declaration on Use of Textbooks Published by Private Publishers (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/textbooks-declaration.pdf" download aria-label="Download Declaration on Use of Textbooks Published by Private Publishers (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Annual Academic Calendar<span class="docmeta docmeta--stale">Covers 2024–25 &middot; newer edition awaited</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/annual-academic-calendar.pdf" target="_blank" rel="noopener" aria-label="View Annual Academic Calendar (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/annual-academic-calendar.pdf" download aria-label="Download Annual Academic Calendar (PDF)">Download</a></span></li>
         </ul>
       </div>
       <div class="docgroup rv">
         <h3 class="serif h3">Administration &amp; governance</h3>
         <ul class="doclist">
-        <li><span class="doclist__title">Annual Report</span> <a class="doclist__dl" href="assets/documents/school-info/annual-report.pdf" download aria-label="Download Annual Report (PDF)">Download</a></li>
-        <li><span class="doclist__title">Parent Teacher Association</span> <a class="doclist__dl" href="assets/documents/school-info/pta-list.pdf" download aria-label="Download Parent Teacher Association (PDF)">Download</a></li>
-        <li><span class="doclist__title">Fee Structure</span> <a class="doclist__dl" href="assets/documents/school-info/fee-structure.pdf" download aria-label="Download Fee Structure (PDF)">Download</a></li>
+        <li><span class="doclist__title">School Management Committee<span class="docmeta docmeta--undated">Date not supplied</span></span> <span class="doclist__actions"><span class="doclist__await">Awaiting upload</span></span></li>
+        <li><span class="doclist__title">Annual Report<span class="docmeta docmeta--stale">Issued 15 Oct 2019 &middot; newer edition awaited</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/annual-report.pdf" target="_blank" rel="noopener" aria-label="View Annual Report (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/annual-report.pdf" download aria-label="Download Annual Report (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Parent Teacher Association<span class="docmeta docmeta--undated">Date not supplied</span><span class="docmeta docmeta--request">Available from the school office on request &middot; <a href="mailto:info@cirschool.org">info@cirschool.org</a></span></span></li>
+        <li><span class="doclist__title">Fee Structure<span class="docmeta docmeta--current">Covers 2027–29</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/fee-structure.pdf" target="_blank" rel="noopener" aria-label="View Fee Structure (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/fee-structure.pdf" download aria-label="Download Fee Structure (PDF)">Download</a></span></li>
         </ul>
       </div>
       <div class="docgroup rv">
         <h3 class="serif h3">Faculty</h3>
         <ul class="doclist">
-        <li><span class="doclist__title">Faculty &amp; Teacher Details</span> <a class="doclist__dl" href="assets/documents/school-info/faculty-details.pdf" download aria-label="Download Faculty &amp; Teacher Details (PDF)">Download</a></li>
+        <li><span class="doclist__title">Faculty &amp; Teacher Details<span class="docmeta docmeta--undated">Date not supplied</span><span class="docmeta docmeta--request">Available from the school office on request &middot; <a href="mailto:info@cirschool.org">info@cirschool.org</a></span></span></li>
         </ul>
       </div>
       <div class="docgroup rv">
         <h3 class="serif h3">School circulars</h3>
         <ul class="doclist">
-        <li><span class="doclist__title">Circular &mdash; Anand Utsav</span> <a class="doclist__dl" href="assets/documents/school-info/circular-anand-utsav.pdf" download aria-label="Download Circular &mdash; Anand Utsav (PDF)">Download</a></li>
-        <li><span class="doclist__title">Circular &mdash; Khel Mela</span> <a class="doclist__dl" href="assets/documents/school-info/circular-khel-mela.pdf" download aria-label="Download Circular &mdash; Khel Mela (PDF)">Download</a></li>
+        <li><span class="doclist__title">Circular &mdash; Anand Utsav<span class="docmeta docmeta--stale">Issued 22 Aug 2019 &middot; newer edition awaited</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/circular-anand-utsav.pdf" target="_blank" rel="noopener" aria-label="View Circular &mdash; Anand Utsav (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/circular-anand-utsav.pdf" download aria-label="Download Circular &mdash; Anand Utsav (PDF)">Download</a></span></li>
+        <li><span class="doclist__title">Circular &mdash; Khel Mela<span class="docmeta docmeta--stale">Issued 21 Oct 2019 &middot; newer edition awaited</span></span> <span class="doclist__actions"><a class="doclist__dl doclist__dl--view" href="assets/documents/school-info/circular-khel-mela.pdf" target="_blank" rel="noopener" aria-label="View Circular &mdash; Khel Mela (PDF, opens in a new tab)">View</a><a class="doclist__dl" href="assets/documents/school-info/circular-khel-mela.pdf" download aria-label="Download Circular &mdash; Khel Mela (PDF)">Download</a></span></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
-<nav class="jump" aria-label="On this page">
-  <div class="jump__panel" id="jumpPanel">
-      <p>On this page</p>
-      <a href="#details">Affiliation &amp; registration</a>
-      <a href="#governance">Governance</a>
-      <a href="#facilities">Infrastructure &amp; facilities</a>
-      <a href="#faculty">Faculty, enrolment &amp; records</a>
-      <a href="#grievance">Grievance redressal</a>
-      <a href="#calendar">Academic calendar &amp; circulars</a>
-      <a href="#portal">Certificates, results and circulars &mdash; in one place.</a>
-      <a href="#doclist">Document list</a>
-  </div>
-  <button type="button" class="jump__toggle" aria-label="On this page" aria-expanded="false" aria-controls="jumpPanel">
-    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <span>On this page</span>
-  </button>
-</nav>
 <section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -675,8 +696,8 @@
       </div>
 
       <div>
-        <h4 class="sc">About</h4>
-        <ul>
+        <p class="sc" id="fnav-about">About</p>
+        <ul aria-labelledby="fnav-about">
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
@@ -727,10 +748,10 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=100" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=100" defer></script>
-<script src="assets/vendor/lenis.min.js?b=100" defer></script>
-<script src="assets/js/cirs.js?b=100" defer></script>
-<script src="assets/js/pages.js?b=100" defer></script>
+<script src="assets/vendor/gsap.min.js?b=101" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=101" defer></script>
+<script src="assets/vendor/lenis.min.js?b=101" defer></script>
+<script src="assets/js/cirs.js?b=101" defer></script>
+<script src="assets/js/pages.js?b=101" defer></script>
 </body>
 </html>
