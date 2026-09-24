@@ -14,6 +14,13 @@ Three batches, and they differ:
   athletics and swimming, dance and theatre, TEDx Youth@CIRS, SPIC MACAY,
   the prayer hall, music and art.
 
+- `leadership/` — four portraits for the Leadership page that did not come from
+  the school: Swami Swaroopananda and Pujya Guruji from chinmayamission.com,
+  Shri. Jagdish Moorjani from citiustech.com, Shri. Siddharth Balachandran from
+  buimerccorp.com — each the photograph that organisation publishes under the
+  person's own name, saved as published, with the owner's approval in
+  September 2026. `tools/make-leadership.py` cuts them and records the pages.
+
 Everything after the first batch is resized on the way in. Drive remains the
 archive of those true originals; at full size they would have added roughly
 570 MB to every clone for detail no page can use — the largest thing the site

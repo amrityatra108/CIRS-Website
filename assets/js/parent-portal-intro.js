@@ -2,10 +2,10 @@
   "use strict";
 
   var intro = document.getElementById("portal-intro");
-  var video = document.getElementById("portalIntroVideo");
+  var image = document.getElementById("portalIntroImage");
   var entry = document.getElementById("portalIntroEntry");
   var target = document.getElementById("top");
-  if (!intro || !video || !entry || !target) return;
+  if (!intro || !image || !entry || !target) return;
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var originalRestoration = window.__portalOriginalRestoration || history.scrollRestoration;
@@ -13,7 +13,7 @@
   var revealed = false;
   var entered = false;
   var revealTimer;
-  var failTimer;
+  var slowTimer;
 
   function scrollLock(locked) {
     document.body.classList.toggle("portal-intro-active", locked);
@@ -22,7 +22,7 @@
     window.dispatchEvent(new CustomEvent("cirs-portal-scroll-lock", { detail: { locked: locked } }));
   }
 
-  // Scroll restoration can run after load/pageshow. Keep the video at the
+  // Scroll restoration can run after load/pageshow. Keep the opening at the
   // viewport top until the visitor explicitly uses the entry control.
   function keepIntroAtTop() {
     if (!entered && document.body.classList.contains("portal-intro-active") && window.scrollY !== 0) {
@@ -33,21 +33,16 @@
   function reveal() {
     if (revealed || entered) return;
     revealed = true;
-    clearTimeout(failTimer);
+    clearTimeout(slowTimer);
     intro.classList.add("is-revealed");
   }
 
-  function finishVideo() {
+  // The title rises once the photograph is ready behind it — or at once if
+  // it fails, and after a short wait on a slow connection, since the text
+  // does not depend on it: the section's dark ground carries it alone.
+  function imageReady() {
     if (revealed || entered || revealTimer) return;
-    clearTimeout(failTimer);
     revealTimer = setTimeout(reveal, reduced ? 0 : 220);
-  }
-
-  function fallback() {
-    if (revealed || entered) return;
-    intro.classList.add("is-fallback");
-    video.pause();
-    finishVideo();
   }
 
   function enter(event) {
@@ -71,10 +66,11 @@
   }
 
   entry.addEventListener("click", enter);
-  video.addEventListener("ended", finishVideo);
-  video.addEventListener("error", fallback);
-  var source = video.querySelector("source");
-  if (source) source.addEventListener("error", fallback);
+  if (image.complete) imageReady();
+  else {
+    image.addEventListener("load", imageReady);
+    image.addEventListener("error", imageReady);
+  }
 
   scrollLock(true);
   window.scrollTo(0, 0);
@@ -84,19 +80,8 @@
     setTimeout(keepIntroAtTop, 250);
   });
 
-  if (reduced) {
-    // Keep the moving vault out of view and make the entry available at once.
-    video.pause();
-    intro.classList.add("is-fallback");
-    reveal();
-  } else {
-    failTimer = setTimeout(fallback, 15000);
-    if (video.ended) finishVideo();
-    else {
-      var playback = video.play();
-      if (playback && playback.catch) playback.catch(fallback);
-    }
-  }
+  if (reduced) reveal();
+  else if (!revealed) slowTimer = setTimeout(reveal, 1500);
 
   window.addEventListener("pagehide", function () {
     scrollLock(false);
@@ -108,10 +93,5 @@
     keepIntroAtTop();
     requestAnimationFrame(keepIntroAtTop);
     setTimeout(keepIntroAtTop, 150);
-    if (video.ended) finishVideo();
-    else if (!reduced) {
-      var playback = video.play();
-      if (playback && playback.catch) playback.catch(fallback);
-    }
   });
 })();

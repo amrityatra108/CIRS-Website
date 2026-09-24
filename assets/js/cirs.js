@@ -139,10 +139,46 @@
       if (!t) return;
       e.preventDefault();
       closeDrawer();
-      if (lenis) lenis.scrollTo(t, { offset: -88 });
-      else t.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+      scrollToSection(t);
     });
   });
+
+  /* A long page goes on growing while it is scrolled through: photographs
+     arrive and pinned sections take their spacers, so the section a link
+     aimed at has moved by the time the scroll ends — on the Founder page,
+     by thousands of pixels on a phone. Once the scroll settles, look again
+     and re-aim, a few times at most, and never after the reader has taken
+     the scroll back themselves. */
+  function scrollToSection(t) {
+    var tries = 0, done = false;
+    function stop() {
+      done = true;
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop);
+    }
+    function settled() {
+      if (done) return;
+      var want = lenis ? 88 : (parseFloat(getComputedStyle(t).scrollMarginTop) || 0);
+      var off = t.getBoundingClientRect().top - want;
+      var atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (Math.abs(off) <= 4 || (off > 0 && atEnd) || ++tries > 4) { stop(); return; }
+      go();
+    }
+    function go() {
+      if (lenis) {
+        lenis.resize();
+        lenis.scrollTo(t, { offset: -88, onComplete: function () { window.setTimeout(settled, 200); } });
+      } else {
+        t.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+        window.setTimeout(settled, reduced ? 200 : 1000);
+      }
+    }
+    window.addEventListener("wheel", stop, { passive: true });
+    window.addEventListener("touchstart", stop, { passive: true });
+    window.addEventListener("keydown", stop);
+    go();
+  }
 
   /* ----------------------------------------------------------
      An anchor arrived at from another page
@@ -1279,22 +1315,25 @@
     var y = gsap.quickTo(ring, "y", { duration: .45, ease: "power3" });
     var muted = false;
 
+    // The ring gives way over the header only.
+    var quiet = ".header";
+
     window.addEventListener("pointermove", function (e) {
       x(e.clientX); y(e.clientY);
-      var overHeader = !!(e.target.closest && e.target.closest(".header"));
-      if (overHeader !== muted) {
-        muted = overHeader;
+      var overQuiet = !!(e.target.closest && e.target.closest(quiet));
+      if (overQuiet !== muted) {
+        muted = overQuiet;
         if (muted) ring.classList.remove("is-big");
-        gsap.to(ring, { opacity: muted ? 0 : 1, duration: .2 });
+        gsap.to(ring, { opacity: muted ? 0 : 1, duration: .2, overwrite: "auto" });
       } else if (!muted && ring.style.opacity !== "1") {
-        gsap.to(ring, { opacity: 1, duration: .3 });
+        gsap.to(ring, { opacity: 1, duration: .3, overwrite: "auto" });
       }
     }, { passive: true });
-    document.addEventListener("pointerleave", function () { gsap.to(ring, { opacity: 0, duration: .3 }); });
+    document.addEventListener("pointerleave", function () { gsap.to(ring, { opacity: 0, duration: .3, overwrite: "auto" }); });
 
-    var hot = "a, button, .dmoment, .facilities > div, .node, input, [data-magnetic]";
+    var hot = "a, button, summary, .dmoment, .facilities > div, .node, input, [data-magnetic]";
     document.addEventListener("pointerover", function (e) {
-      if (e.target.closest && e.target.closest(".header")) return;
+      if (e.target.closest && e.target.closest(quiet)) return;
       if (e.target.closest && e.target.closest(hot)) ring.classList.add("is-big");
     });
     document.addEventListener("pointerout", function (e) {

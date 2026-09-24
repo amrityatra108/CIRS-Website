@@ -43,19 +43,19 @@ import captures
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=101"
 
-# The standing block under the Admissions hero's buttons.
+# Questions to settle before an application is submitted.
 HERO_DATES = '''    <dl class="pagehero__dates">
       <div>
-        <dt>Classes</dt>
-        <dd>V&ndash;IX and XI<small>CBSE and the IB Diploma</small></dd>
+        <dt>Entry class</dt>
+        <dd>Ask Admissions<small>Confirm availability for your child</small></dd>
       </div>
       <div>
-        <dt>Portal closes</dt>
-        <dd>15 October 2026<small>Register before this date</small></dd>
+        <dt>Application</dt>
+        <dd>Portal available<small>Confirm the intake before submitting</small></dd>
       </div>
       <div>
-        <dt>Entrance examination</dt>
-        <dd>1 November 2026<small>India and Dubai; first week in other countries</small></dd>
+        <dt>Dates and assessment</dt>
+        <dd>Confirm directly<small>Ask about the schedule, format and location</small></dd>
       </div>
     </dl>'''
 
@@ -253,7 +253,7 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-3",
+        "cache_suffix": "-curriculum-5",
         "banner": ("Curriculum", "The shape of <em>learning at CIRS.</em>",
                    "CBSE begins in Grade V. From Grade XI, students can choose the IB Diploma "
                    "Programme. The Chinmaya Vision Programme connects academic study with "
@@ -545,23 +545,22 @@ PAGES = {
     "admissions": {
         "nav": "Admissions",
         "title": "Admissions",
-        "description": "How to apply to Chinmaya International Residential School — registration "
-                       "for 2027–2028, the entrance examination, visiting, and fees.",
+        "description": "Admissions information for Chinmaya International Residential School: "
+                       "the application portal, published fee schedule and questions to confirm with the school.",
         # A hero rather than the flat band: this is the page that has to
         # persuade, not merely inform.
         #
         # Admissions carries its own quiet, document-led layout beneath the
         # shared honeycomb hero. The sheet is scoped by body.admissions.
         "sheet": "admissions",
-        "cache_suffix": "-admissions-26",
+        "cache_suffix": "-admissions-27",
         "hero_split": False,
-        "hero": ("Admissions", "Admissions <em>Open.</em>",
-                 "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
-                 "registration portal, the entrance examination, a visit to the school and the "
-                 "offer — the whole procedure, in order."),
+        "hero": ("Admissions", "Admissions <em>Guide.</em>",
+                 "Explore the application portal and published fee schedule. Confirm current "
+                 "class availability, assessment arrangements and key dates with the Admissions Office."),
         "hero_media": ("admissions-honeycomb.jpg", "admissions-hero.webm",
                        "admissions-hero.mp4", 1920, 960),
-        "hero_cta": [("Apply on the application portal",
+        "hero_cta": [("Open the application portal",
                       "https://easycollege.in/cirs/school/application/index.aspx", "primary"),
                      ("Understand the process", "#apply", "ghost")],
         "hero_extra": HERO_DATES,
@@ -584,7 +583,7 @@ PAGES = {
                    "fee payment and the parent login the school runs today, and the people to ask."),
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
-        "cache_suffix": "-portal-intro-1",
+        "cache_suffix": "-portal-intro-3",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
@@ -947,9 +946,10 @@ def hero_html(page):
     cta = f'    <p class="pagehero__cta">\n{cta}\n    </p>\n' if cta else ""
     extra = page.get("hero_extra", "")
     split_attr = ' data-split' if page.get("hero_split", True) else ''
+    video_load = ' preload="none"' if page.get("sheet") == "admissions" else ' autoplay'
     return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
   <div class="pagehero__media" style="background-image:url('assets/img/{poster}?{CACHE_BUST}')">
-    <video class="pagehero__video" autoplay muted loop playsinline
+    <video class="pagehero__video"{video_load} muted loop playsinline
            poster="assets/img/{poster}?{CACHE_BUST}" aria-hidden="true"
            width="{vw}" height="{vh}" fetchpriority="high">
       <source src="assets/video/{webm}?{CACHE_BUST}" type="video/webm">
@@ -966,19 +966,31 @@ def hero_html(page):
 </section>'''
 
 
+JUMP_MARK = "<!-- on-this-page -->"
+
+
 def jump_html(body):
     """Build the right-hand index from the page's own sections.
 
-    Labels come from each section's small-caps marker, so the index cannot
-    drift out of step with the headings — there is nothing to keep in sync.
+    Labels come from each section's small-caps marker, or from its heading
+    where it has none, so the index cannot drift out of step with the
+    headings — there is nothing to keep in sync. A section whose headline is
+    a sentence names itself for the index instead, with data-jump-label.
+    A page with fewer than two places to go gets no index at all.
     """
     items = []
-    for m in re.finditer(r'<section[^>]*\bid="([^"]+)"[^>]*>(.*?)</section>', body, re.S):
-        sid, inner = m.group(1), m.group(2)
-        label = re.search(r'<span class="sc">(.*?)</span>', inner, re.S)
-        if label:
-            items.append((sid, re.sub(r"\s+", " ", label.group(1)).strip()))
-    if not items:
+    for m in re.finditer(r'<section([^>]*\bid="([^"]+)"[^>]*)>(.*?)</section>', body, re.S):
+        attrs, sid, inner = m.group(1), m.group(2), m.group(3)
+        label = (re.search(r'\bdata-jump-label="([^"]*)"', attrs)
+                 or re.search(r'<span class="sc">(.*?)</span>', inner, re.S)
+                 or re.search(r'<h[23][^>]*>(.*?)</h[23]>', inner, re.S))
+        if not label:
+            continue
+        text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", label.group(1))).strip()
+        text = re.sub(r"\s+([.,;:!?])", r"\1", text)
+        if text and all(text != t for _, t in items):
+            items.append((sid, text))
+    if len(items) < 2:
         return ""
     links = "\n".join(f'      <a href="#{i}">{t}</a>' for i, t in items)
     # A native <details>: the summary comes first, so Tab from it enters the
@@ -1008,9 +1020,8 @@ POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
     </button>
     <p class="pop__label" id="popTitle">Contact Admissions Office</p>
     <h2 class="serif">We are here <em>to help.</em></h2>
-    <p class="pop__note" id="popNote">Registrations are open for the academic year 2027&ndash;2028.
-      Write or message us with any question about registration, the entrance examination or a
-      visit to the school.</p>
+    <p class="pop__note" id="popNote">Ask the Admissions Office to confirm the current
+      application window, assessment arrangements or availability of a school visit.</p>
 
     <div class="pop__row">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
@@ -1420,7 +1431,6 @@ def build(slug, page):
             '<noscript><style>html:has(body.parent-portal.portal-intro-active),'
             'body.parent-portal.portal-intro-active{overflow:auto}'
             'body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){visibility:visible}'
-            '.portal-intro__video{display:none}'
             '#portalIntroEntry{display:none}'
             'body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}'
             '</style></noscript>\n</head>')
@@ -1450,8 +1460,8 @@ def build(slug, page):
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
     if slug == "parent-portal":
-        # The vault video is this page's opening; the shared opaque curtain
-        # would cover its first seconds and run its own scroll lock.
+        # The full-window photograph is this page's opening; the shared opaque
+        # curtain would cover it and run its own scroll lock.
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
@@ -1532,15 +1542,23 @@ def build(slug, page):
                        .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
                        .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
     parts.append(content)
-    if page.get("jump"):
-        parts.insert(jump_at, jump_html(content))
+    # Every page carries the index; jump_html leaves it out where there is
+    # nothing to jump to. "jump": False opts a page out. It is placed after
+    # the banner, before the content, so the keyboard meets it first.
+    jump = jump_html(content) if page.get("jump", True) and not wall else ""
+    if jump:
+        parts.insert(jump_at, JUMP_MARK)
     if page.get("popup"):
         parts.append(POPUP)
     if page.get("uc", True) and not wall:
         parts.append(UC)
     parts.append("</main>")
     if not wall:
-        parts.append(read("tools/partials/footer.html").rstrip("\n"))
+        footer = read("tools/partials/footer.html").rstrip("\n")
+        if slug == "admissions":
+            footer = footer.replace('href="admissions.html#examination">Important Dates',
+                                    'href="admissions.html#dates">Important Dates')
+        parts.append(footer)
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
     if slug == "crossroads":
         parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-5" defer></script>')
@@ -1576,7 +1594,9 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
 
-    html = to_depth(rewrite_links("\n".join(parts), slug), slug)
+    # The index goes in after rewrite_links: its anchors name sections on this
+    # page, and must not be sent to the page an old single-page anchor meant.
+    html = to_depth(rewrite_links("\n".join(parts), slug).replace(JUMP_MARK, jump), slug)
     # A page with newly page-scoped assets can invalidate its own shared and
     # local files without rewriting every generated page in the repository.
     cache_suffix = page.get("cache_suffix", "")

@@ -27,7 +27,11 @@ OUT = os.path.join(ROOT, "assets/img")
 # the wash flattens the bright blues it is built on and warms the whole thing,
 # which reads as a faded picture rather than a campaign banner. It is cut at
 # its own colours. Remove a name from here and it is graded like the rest.
-UNGRADED = set()
+UNGRADED = {
+    # The Parent Portal opening shows its photograph as it was taken: parents
+    # and students in the hall, full strength under a scrim of its own.
+    "parent-portal-hero.jpg",
+}
 
 SHADOW = (36, 26, 56)
 HIGHLIGHT = (240, 229, 212)
@@ -85,6 +89,11 @@ PHOTOS = [
     # and student-life three. Each keeps the page its caption was written for
     # and hands the others a photograph of their own subject.
     ("news-hero.jpg",           "IMG_2327.JPG",           (1280,  720), (0.50, 0.55)),
+
+    # The Parent Portal opening, full-window behind "PARENT PORTAL". Cut at
+    # the source's own 3:2; the page's object-position keeps the aisle of
+    # students between the two rows of parents in frame on a narrow screen.
+    ("parent-portal-hero.jpg",  "0C9A3824.JPG",           (2000, 1334), (0.50, 0.50)),
 
     # The Why CIRS opening frame. It replaces a 1200x1500 portrait of three
     # students that came in with the original redesign and whose own source
@@ -152,7 +161,10 @@ PHOTOS = [
     ("sports/sport-athletics.jpg",     "HARI5531.JPG",                   (1600, 1200), (0.50, 0.50)),
     ("sports/sport-swimming.jpg",      "IMG_9314.JPG",                   (1600, 1200), (0.55, 0.50)),
     ("sports/sport-football.jpg",      "IMG_3051.JPG",                   (1600, 1200), (0.50, 0.50)),
-    ("sports/sport-tennis.jpg",        "IMG_0612.JPG",                   (1600, 1200), (0.50, 0.50)),
+    # A forehand drill on the green court, not the basketball game this slot
+    # used to show. Nudged right so the students' racquets keep the frame
+    # and the coach still stands at its left edge.
+    ("sports/sport-tennis.jpg",        "IMG_0851.JPG",                   (1600, 1200), (0.55, 0.50)),
     ("sports/sport-archery.jpg",       "IMG_9879.JPG",                   (1600, 1200), (0.50, 0.50)),
     ("sports/sport-climbing.jpg",      "IMG_6061.JPG",                   (1600, 1200), (0.50, 0.50)),
     ("sports/house-parade.jpg",        "DSC_0059.JPG",                   (1600, 1000), (0.50, 0.50)),

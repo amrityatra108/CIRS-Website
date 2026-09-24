@@ -265,6 +265,25 @@
   </div>
 </div>
 <main id="main">
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#founding">Since 1996</a>
+      <a href="#forest">The campus</a>
+      <a href="#motto">The motto</a>
+      <a href="#boarding">Boarding</a>
+      <a href="#vision">The vision</a>
+      <a href="#junior">Junior School</a>
+      <a href="#senior">Senior School</a>
+      <a href="#facts">In figures</a>
+    </div>
+  </details>
+</nav>
 <section class="saga saga--open" id="top" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/why-cirs.jpg"
@@ -279,7 +298,7 @@
   </div>
 </section>
 
-<section class="saga" id="founding" data-ground="#0E0B12">
+<section class="saga" id="founding" data-jump-label="Since 1996" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/founding.jpg" alt="The school assembled in long rows on the paved ground"
          width="1600" height="900" loading="lazy">
@@ -292,7 +311,7 @@
   </div>
 </section>
 
-<section class="saga" id="forest" data-ground="#0E0B12">
+<section class="saga" id="forest" data-jump-label="The campus" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/forest-air.jpg" alt="The CIRS campus from the air, the forest closing around it on every side"
          width="1600" height="900" loading="lazy">
@@ -305,7 +324,7 @@
   </div>
 </section>
 
-<section class="saga" id="motto" data-ground="#0E0B12">
+<section class="saga" id="motto" data-jump-label="The motto" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/motto.jpg" alt="Students seated cross-legged with their palms joined at morning prayer"
          width="1600" height="900" loading="lazy">
@@ -318,7 +337,7 @@
   </div>
 </section>
 
-<section class="saga" id="boarding" data-ground="#0E0B12">
+<section class="saga" id="boarding" data-jump-label="Boarding" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/boarding.jpg" alt="Boarders sitting together on a wooden frame under the trees"
          width="1600" height="900" loading="lazy">
@@ -331,7 +350,7 @@
   </div>
 </section>
 
-<section class="saga" id="vision" data-ground="#0E0B12">
+<section class="saga" id="vision" data-jump-label="The vision" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/vision.jpg" alt="Students at morning practice on mats laid out on the grass"
          width="1600" height="900" loading="lazy">
@@ -344,7 +363,7 @@
   </div>
 </section>
 
-<section class="saga" id="junior" data-ground="#0E0B12">
+<section class="saga" id="junior" data-jump-label="Junior School" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/junior-school.jpg" alt="Junior School students building a wheeled robot"
          width="1200" height="1500" loading="lazy">
@@ -357,7 +376,7 @@
   </div>
 </section>
 
-<section class="saga" id="senior" data-ground="#0E0B12">
+<section class="saga" id="senior" data-jump-label="Senior School" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/why-senior.jpg" alt="Six senior students in formal dress cutting a cake together, their hands joined on the knife"
          width="1600" height="900" loading="lazy">
@@ -370,7 +389,7 @@
   </div>
 </section>
 
-<section class="section" id="facts">
+<section class="section" id="facts" data-jump-label="In figures">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">In short</span></p>
