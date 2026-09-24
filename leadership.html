@@ -294,80 +294,93 @@
         Trust (CCMT), Mumbai &mdash; and the staff and faculty who carry the school day to day.</p>
     </div>
 
-    <!-- Each person is a card; the introduction opens in a panel — the same
-         .panel dialog Why CIRS uses, opened by assets/js/pages.js. The card
-         leans towards the pointer (data-tilt, also pages.js) where there is a
-         fine pointer and motion is welcome; everywhere else it is a card. -->
-    <div class="pgrid">
-      <article class="pcard rv" data-tilt>
-        <figure class="pcard__media is-placeholder"><span class="pcard__ph">Photograph to be supplied</span></figure>
-        <div class="pcard__body">
-          <h3 class="serif pcard__name"><button type="button" class="pcard__open" data-panel="person-swaroopananda"
-              aria-haspopup="dialog" aria-controls="person-swaroopananda">Swami Swaroopananda</button></h3>
-          <p class="pcard__role">Chairman</p>
-          <p class="pcard__cue" aria-hidden="true">Read the introduction</p>
+    <!-- The Board as a roster: one ruled row per person, in the order School
+         Information lists them. Every row is the same three columns — role
+         and name, what the school has supplied about them, and a portrait —
+         and a row simply goes without whatever has not been supplied. There
+         are no stand-in tiles and no bracketed placeholders on the page: what
+         is still missing is listed in HOSTING.md, where the school can see
+         it. Portraits are cut by tools/make-leadership.py, and only from
+         photographs published under that person's own name: supplied by the
+         school, or from the official page of an organisation they belong
+         to. The script records where each came from. -->
+    <ul class="roster">
+      <li class="roster__row rv">
+        <div class="roster__id">
+          <p class="roster__role">Chairman</p>
+          <h3 class="serif roster__name">Swami Swaroopananda</h3>
         </div>
-      </article>
-      <article class="pcard rv" data-tilt>
-        <figure class="pcard__media"><img src="assets/img/swami-anukoolananda.jpg" alt="Swami Anukoolananda" loading="lazy" decoding="async"></figure>
-        <div class="pcard__body">
-          <h3 class="serif pcard__name"><button type="button" class="pcard__open" data-panel="person-anukoolananda"
-              aria-haspopup="dialog" aria-controls="person-anukoolananda">Swami Anukoolananda</button></h3>
-          <p class="pcard__role">Resident Director</p>
-          <p class="pcard__cue" aria-hidden="true">Read the introduction</p>
+        <div class="roster__text">
+          <p class="copy">Head of Chinmaya Mission worldwide, and head of the committee that manages the School.</p>
+          <p class="roster__more"><a href="#msg-chairman" data-msg-link="chairman">Message from the Chairman</a></p>
         </div>
-      </article>
-      <article class="pcard rv" data-tilt>
-        <figure class="pcard__media is-placeholder"><span class="pcard__ph">Photograph to be supplied</span></figure>
-        <div class="pcard__body">
-          <h3 class="serif pcard__name"><button type="button" class="pcard__open" data-panel="person-mahtaney"
-              aria-haspopup="dialog" aria-controls="person-mahtaney">Shri. Vijay Mahtaney</button></h3>
-          <p class="pcard__role">Director</p>
-          <p class="pcard__cue" aria-hidden="true">Read the introduction</p>
+        <figure class="roster__face"><img src="assets/img/leadership/swaroopananda.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></figure>
+      </li>
+      <li class="roster__row rv">
+        <div class="roster__id">
+          <p class="roster__role">Resident Director</p>
+          <h3 class="serif roster__name">Swami Anukoolananda</h3>
         </div>
-      </article>
-      <article class="pcard rv" data-tilt>
-        <figure class="pcard__media is-placeholder"><span class="pcard__ph">Photograph to be supplied</span></figure>
-        <div class="pcard__body">
-          <h3 class="serif pcard__name"><button type="button" class="pcard__open" data-panel="person-moorjani"
-              aria-haspopup="dialog" aria-controls="person-moorjani">Shri. Jagdish Moorjani</button></h3>
-          <p class="pcard__role">Director</p>
-          <p class="pcard__cue" aria-hidden="true">Read the introduction</p>
+        <div class="roster__text">
+          <p class="roster__more"><a href="#msg-director" data-msg-link="director">Message from the Resident Director</a></p>
         </div>
-      </article>
-      <article class="pcard rv" data-tilt>
-        <figure class="pcard__media is-placeholder"><span class="pcard__ph">Photograph to be supplied</span></figure>
-        <div class="pcard__body">
-          <h3 class="serif pcard__name"><button type="button" class="pcard__open" data-panel="person-balachandran"
-              aria-haspopup="dialog" aria-controls="person-balachandran">Shri. Siddharth Balachandran</button></h3>
-          <p class="pcard__role">Director</p>
-          <p class="pcard__cue" aria-hidden="true">Read the introduction</p>
+        <figure class="roster__face"><img src="assets/img/leadership/anukoolananda.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></figure>
+      </li>
+      <li class="roster__row rv">
+        <div class="roster__id">
+          <p class="roster__role">Director</p>
+          <h3 class="serif roster__name">Shri. Vijay Mahtaney</h3>
         </div>
-      </article>
-      <article class="pcard rv" data-tilt>
-        <figure class="pcard__media"><img src="assets/img/shanti-krishnamurthy.jpg" alt="Smt. Shanti Krishnamurthy" loading="lazy" decoding="async"></figure>
-        <div class="pcard__body">
-          <h3 class="serif pcard__name"><button type="button" class="pcard__open" data-panel="person-krishnamurthy"
-              aria-haspopup="dialog" aria-controls="person-krishnamurthy">Smt. Shanti Krishnamurthy</button></h3>
-          <p class="pcard__role">Director &mdash; Academics &amp; Administration</p>
-          <p class="pcard__cue" aria-hidden="true">Read the introduction</p>
+        <div class="roster__text">
+          <p class="copy">Shri. Vijay Mohandas Mahtaney is closely associated with the Chinmaya Mission, and serves as a designated director on the boards of twenty-eight enterprises. He is the owner of Chennai&rsquo;s Park Hyatt Hotel, and has diversified into the development of hotels, IT parks and residential areas.</p>
         </div>
-      </article>
-      <article class="pcard rv" data-tilt>
-        <figure class="pcard__media"><img src="assets/img/rajeshwari.jpg" alt="Smt. G. Rajeshwari, Principal of CIRS" loading="lazy" decoding="async"></figure>
-        <div class="pcard__body">
-          <h3 class="serif pcard__name"><button type="button" class="pcard__open" data-panel="person-rajeshwari"
-              aria-haspopup="dialog" aria-controls="person-rajeshwari">Smt. G. Rajeshwari</button></h3>
-          <p class="pcard__role">Principal</p>
-          <p class="pcard__cue" aria-hidden="true">Read the introduction</p>
+      </li>
+      <li class="roster__row rv">
+        <div class="roster__id">
+          <p class="roster__role">Director</p>
+          <h3 class="serif roster__name">Shri. Jagdish Moorjani</h3>
         </div>
-      </article>
-    </div>
+        <div class="roster__text">
+          <p class="copy">A trustee of the Chinmaya Vishwa Vidyapeeth Trust, Shri. Jagdish Moorjani is the co-founder of CitiusTech and TransWorks. He now works in a personal capacity with several non-profits that are changing how India educates its children.</p>
+        </div>
+        <figure class="roster__face"><img src="assets/img/leadership/moorjani.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></figure>
+      </li>
+      <li class="roster__row rv">
+        <div class="roster__id">
+          <p class="roster__role">Director</p>
+          <h3 class="serif roster__name">Shri. Siddharth Balachandran</h3>
+        </div>
+        <div class="roster__text">
+          <p class="copy">Shri. Siddharth Balachandran is CEO and Executive Chairman of Dubai-based Buimerc Corp. Ltd., and a recipient of the Government of India&rsquo;s Pravasi Bharatiya Samman and of the MRAMM Award, one of Dubai&rsquo;s highest civilian honours. He has worked with the Indian Consulate in Dubai for the welfare of expatriate Indians, and is the largest individual shareholder of the Bombay Stock Exchange.</p>
+        </div>
+        <figure class="roster__face"><img src="assets/img/leadership/balachandran.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></figure>
+      </li>
+      <li class="roster__row rv">
+        <div class="roster__id">
+          <p class="roster__role">Director &mdash; Academics &amp; Administration</p>
+          <h3 class="serif roster__name">Smt. Shanti Krishnamurthy</h3>
+        </div>
+        <div class="roster__text">
+          <p class="copy">A Director of the CCMT Education Cell. Smt. Shanti Krishnamurthy became Principal of CIRS in 2009, and Director &mdash; Academics and Administration in 2018.</p>
+          <p class="roster__more"><a href="#msg-academics" data-msg-link="academics">Message from the Director &mdash; Academics</a></p>
+        </div>
+        <figure class="roster__face"><img src="assets/img/leadership/krishnamurthy.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></figure>
+      </li>
+      <li class="roster__row rv">
+        <div class="roster__id">
+          <p class="roster__role">Principal</p>
+          <h3 class="serif roster__name">Smt. G. Rajeshwari</h3>
+        </div>
+        <div class="roster__text">
+          <p class="roster__more"><a href="#msg-principal" data-msg-link="principal">Message from the Principal</a></p>
+        </div>
+        <figure class="roster__face"><img src="assets/img/leadership/rajeshwari.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></figure>
+      </li>
+    </ul>
 
     <figure class="teamphoto rv">
-      <img src="assets/img/staff-and-faculty.jpg" alt="CIRS staff and faculty gathered together on campus" loading="lazy">
-      <figcaption>The CIRS staff and faculty. <em>[Caption &mdash; occasion, date and names to be
-        supplied by the school.]</em></figcaption>
+      <img src="assets/img/staff-and-faculty.jpg" alt="CIRS staff and faculty gathered together on campus" width="2000" height="1333" loading="lazy" decoding="async">
+      <figcaption>The CIRS staff and faculty.</figcaption>
     </figure>
   </div>
 </section>
@@ -420,7 +433,7 @@
 
       <article class="msgs__panel" id="msg-founder" role="tabpanel" aria-labelledby="msg-tab-founder">
         <header class="msgs__head">
-          <figure class="msgs__face"><img src="assets/img/founder/archive/p607-portrait.webp" alt="Pujya Gurudev Swami Chinmayananda" width="96" height="96" loading="lazy" decoding="async"></figure>
+          <figure class="msgs__face"><img src="assets/img/leadership/founder-face.jpg" alt="" width="160" height="160" loading="lazy" decoding="async"></figure>
           <div>
             <p class="msgs__label sc">Founder&rsquo;s message</p>
             <p class="msgs__who"><b>Pujya Gurudev Swami Chinmayananda</b> &middot; Founder</p>
@@ -431,12 +444,11 @@
           <p>Those who have gone abroad with their families try to contribute their Indian way of life with the lifestyle of their adopted countries. At times such attempts create pressures and conflicts over moral values and cultural patterns. The children see one thing at home and meet contradictory situations outside. Because of this bi-cultural experience they run the risk of picking up attitudes potentially dangerous and sometimes suicidal to their future happiness and success.</p>
           <p>I am glad my suggestions are now fully accepted both in India and abroad. CIRS will provide an environment that will help integrate the best of each culture. It will be a cultural home away from home for our growing children.</p>
           <p>Send us your children. Let them have one to six years of cultural adventure during their 11&ndash;18 years of age. Let us give them a chance to understand and absorb Indian culture and heritage and return to the countries from where they came, to continue their studies. Let us build up sufficient knowledge and taste in them to feel a sense of identity with and a pride in their Indian heritage.</p>
-        
         </div>
       </article>
       <article class="msgs__panel" id="msg-guruji" role="tabpanel" aria-labelledby="msg-tab-guruji">
         <header class="msgs__head">
-          <figure class="msgs__face"><span aria-hidden="true">T</span></figure>
+          <figure class="msgs__face"><img src="assets/img/leadership/tejomayananda-face.jpg" alt="" width="160" height="160" loading="lazy" decoding="async"></figure>
           <div>
             <p class="msgs__label sc">Message from Pujya Guruji</p>
             <p class="msgs__who"><b>Pujya Guruji Swami Tejomayananda</b> &middot; Chinmaya Mission</p>
@@ -447,12 +459,11 @@
           <p>At yet another level, the purpose of education is to groom students in noble cultural values. In the absence of this culture, knowledge itself and material prosperity can become a weapon of destruction instead of a means of blessing to humanity. Still higher than this aim is to create a thirst for greater knowledge in students, so that they discover the mysteries of Nature and the world around them.</p>
           <p>The Chinmaya International Residential School at Coimbatore imparts education to students from India and abroad. Keeping all the aforesaid in view, children get modern education in an atmosphere of rich Indian culture.</p>
           <p>Pujya Gurudev Swami Chinmayananda had laid the foundation of this school in Coimbatore, a few years ago. He attained Mahasamadhi in August 1993. To realise His cherished dream is now the sacred duty of us all &mdash; His disciples, devotees, followers and admirers. Let us come together and pay our respectful homage to Him in making the Chinmaya International Residential School a reality. May He shower His grace and blessings on us to make this project a great success.</p>
-        
         </div>
       </article>
       <article class="msgs__panel" id="msg-chairman" role="tabpanel" aria-labelledby="msg-tab-chairman">
         <header class="msgs__head">
-          <figure class="msgs__face"><span aria-hidden="true">S</span></figure>
+          <figure class="msgs__face"><img src="assets/img/leadership/swaroopananda-face.jpg" alt="" width="160" height="160" loading="lazy" decoding="async"></figure>
           <div>
             <p class="msgs__label sc">Message from the Chairman</p>
             <p class="msgs__who"><b>Swami Swaroopananda</b> &middot; Chairman</p>
@@ -465,12 +476,11 @@
           <p>Across history, people have been inspired by their difficulties to generate new and creative responses, that not only serve as a beacon to others but also become larger than themselves and benefit others even after they, as individuals, are gone.</p>
           <p>I wish you all a wonderful year of transcending limitations.</p>
           <p class="msgs__sign">Hari Om! Love, at His feet</p>
-        
         </div>
       </article>
       <article class="msgs__panel" id="msg-director" role="tabpanel" aria-labelledby="msg-tab-director">
         <header class="msgs__head">
-          <figure class="msgs__face"><img src="assets/img/swami-anukoolananda.jpg" alt="Swami Anukoolananda" width="96" height="96" loading="lazy" decoding="async"></figure>
+          <figure class="msgs__face"><img src="assets/img/leadership/anukoolananda-face.jpg" alt="" width="160" height="160" loading="lazy" decoding="async"></figure>
           <div>
             <p class="msgs__label sc">Message from the Resident Director</p>
             <p class="msgs__who"><b>Swami Anukoolananda</b> &middot; Resident Director</p>
@@ -480,12 +490,11 @@
           <p>Gurudev said, &ldquo;Win the mind; win the world.&rdquo; Mind alone is the cause of our successes and our failures. To train the mind to reap a heap of successes in our life is real education. A prominent business tycoon once said, &ldquo;The greatest opportunities lie in the greatest challenges.&rdquo;</p>
           <p>Limitations and obstacles look staggering only for those who are incapable of handling them. For the capable and the empowered, there are no obstacles or limitations to their progress. The greatest inventions, the brightest innovations and the deepest discoveries have happened in the face of seemingly insurmountable obstacles.</p>
           <p>With steely determination and exuberant creativity, let us all march forth zealously towards our castle of true success, fulfilling us and benefitting the world around us.</p>
-        
         </div>
       </article>
       <article class="msgs__panel" id="msg-academics" role="tabpanel" aria-labelledby="msg-tab-academics">
         <header class="msgs__head">
-          <figure class="msgs__face"><img src="assets/img/shanti-krishnamurthy.jpg" alt="Smt. Shanti Krishnamurthy" width="96" height="96" loading="lazy" decoding="async"></figure>
+          <figure class="msgs__face"><img src="assets/img/leadership/krishnamurthy-face.jpg" alt="" width="160" height="160" loading="lazy" decoding="async"></figure>
           <div>
             <p class="msgs__label sc">Message from the Director &mdash; Academics</p>
             <p class="msgs__who"><b>Smt. Shanti Krishnamurthy</b> &middot; Director &mdash; Academics &amp; Administration</p>
@@ -496,12 +505,11 @@
           <p>One would wonder how these disorders crept into the glorious system of education we had in the past. This erosion is not the result of recent trends. We are responsible for slowly injecting the poison of competition among children over the years. Right after independence, though the British left India physically, they left behind the industrial mindset. As in an industry, where raw materials go through grinding, cutting and welding, children became the raw material and had to go through the pain of memorising, reproducing and taking periodical examinations. At the end, when the student emerges from the system, he is tested through a year-end examination for uniformity, and if any deviation is found in the end product, he is rejected and becomes like scrap in society. Children get branded with marks when they emerge from school.</p>
           <p>Too much uniformity has killed creativity among children. One common examination and one expected answer: all these successfully took away the joy in learning. Fine skills like art, music and dance were neglected and given no importance. The system focused only on scores and encouraged only cut-throat competition among children. What else can be the outcome of such an unhealthy system? No wonder we have ended up creating mental disorders in children.</p>
           <p>We are fortunate in CIRS that we have our Gurudev&rsquo;s vision, which focuses on the holistic development of children. When children study in a stress-free environment like ours, blossoming happens naturally. No wonder every child here gets the opportunity to unleash their own hidden potential.</p>
-        
         </div>
       </article>
       <article class="msgs__panel" id="msg-principal" role="tabpanel" aria-labelledby="msg-tab-principal">
         <header class="msgs__head">
-          <figure class="msgs__face"><img src="assets/img/principal.jpg" alt="Smt. G. Rajeshwari, Principal of CIRS, on the campus lawn" width="96" height="96" loading="lazy" decoding="async"></figure>
+          <figure class="msgs__face"><img src="assets/img/leadership/rajeshwari-face.jpg" alt="" width="160" height="160" loading="lazy" decoding="async"></figure>
           <div>
             <p class="msgs__label sc">Message from the Principal</p>
             <p class="msgs__who"><b>Smt. G. Rajeshwari</b> &middot; Principal</p>
@@ -518,108 +526,6 @@
     </div>
   </div>
 </section>
-
-<div class="panel panel--person" id="person-swaroopananda" role="dialog" aria-modal="true" aria-labelledby="person-swaroopananda-t" hidden>
-  <div class="panel__card pmodal">
-    <button type="button" class="panel__close" data-panel-close aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-    <figure class="pmodal__media is-placeholder"><span class="pcard__ph">Photograph to be supplied</span></figure>
-    <div class="pmodal__text">
-      <p class="panel__label">Chairman</p>
-      <h2 id="person-swaroopananda-t">Swami Swaroopananda</h2>
-      <p class="copy"><em>[A short introduction to Swami Swaroopananda to be supplied by the school.]</em></p>
-        <p class="pmodal__more"><a href="#msg-chairman" data-msg-link="chairman" data-panel-close>Read the message from Swami Swaroopananda</a></p>
-    </div>
-  </div>
-</div>
-
-<div class="panel panel--person" id="person-anukoolananda" role="dialog" aria-modal="true" aria-labelledby="person-anukoolananda-t" hidden>
-  <div class="panel__card pmodal">
-    <button type="button" class="panel__close" data-panel-close aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-    <figure class="pmodal__media"><img src="assets/img/swami-anukoolananda.jpg" alt="" loading="lazy" decoding="async"></figure>
-    <div class="pmodal__text">
-      <p class="panel__label">Resident Director</p>
-      <h2 id="person-anukoolananda-t">Swami Anukoolananda</h2>
-      <p class="copy"><em>[A short introduction to Swami Anukoolananda to be supplied by the school.]</em></p>
-        <p class="pmodal__more"><a href="#msg-director" data-msg-link="director" data-panel-close>Read the message from Swami Anukoolananda</a></p>
-    </div>
-  </div>
-</div>
-
-<div class="panel panel--person" id="person-mahtaney" role="dialog" aria-modal="true" aria-labelledby="person-mahtaney-t" hidden>
-  <div class="panel__card pmodal">
-    <button type="button" class="panel__close" data-panel-close aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-    <figure class="pmodal__media is-placeholder"><span class="pcard__ph">Photograph to be supplied</span></figure>
-    <div class="pmodal__text">
-      <p class="panel__label">Director</p>
-      <h2 id="person-mahtaney-t">Shri. Vijay Mahtaney</h2>
-      <p class="copy">Shri. Vijay Mohandas Mahtaney is closely associated with the Chinmaya Mission, and serves as a designated director on the boards of twenty-eight enterprises. He is the owner of Chennai&rsquo;s Park Hyatt Hotel, and has diversified into the development of hotels, IT parks and residential areas.</p>
-    </div>
-  </div>
-</div>
-
-<div class="panel panel--person" id="person-moorjani" role="dialog" aria-modal="true" aria-labelledby="person-moorjani-t" hidden>
-  <div class="panel__card pmodal">
-    <button type="button" class="panel__close" data-panel-close aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-    <figure class="pmodal__media is-placeholder"><span class="pcard__ph">Photograph to be supplied</span></figure>
-    <div class="pmodal__text">
-      <p class="panel__label">Director</p>
-      <h2 id="person-moorjani-t">Shri. Jagdish Moorjani</h2>
-      <p class="copy">A trustee of the Chinmaya Vishwa Vidyapeeth Trust, Shri. Jagdish Moorjani is the co-founder of CitiusTech and TransWorks. He now works in a personal capacity with several non-profits that are changing how India educates its children.</p>
-    </div>
-  </div>
-</div>
-
-<div class="panel panel--person" id="person-balachandran" role="dialog" aria-modal="true" aria-labelledby="person-balachandran-t" hidden>
-  <div class="panel__card pmodal">
-    <button type="button" class="panel__close" data-panel-close aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-    <figure class="pmodal__media is-placeholder"><span class="pcard__ph">Photograph to be supplied</span></figure>
-    <div class="pmodal__text">
-      <p class="panel__label">Director</p>
-      <h2 id="person-balachandran-t">Shri. Siddharth Balachandran</h2>
-      <p class="copy">Shri. Siddharth Balachandran is CEO and Executive Chairman of Dubai-based Buimerc Corp. Ltd., and a recipient of the Government of India&rsquo;s Pravasi Bharatiya Samman and of the MRAMM Award, one of Dubai&rsquo;s highest civilian honours. He has worked with the Indian Consulate in Dubai for the welfare of expatriate Indians, and is the largest individual shareholder of the Bombay Stock Exchange.</p>
-    </div>
-  </div>
-</div>
-
-<div class="panel panel--person" id="person-krishnamurthy" role="dialog" aria-modal="true" aria-labelledby="person-krishnamurthy-t" hidden>
-  <div class="panel__card pmodal">
-    <button type="button" class="panel__close" data-panel-close aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-    <figure class="pmodal__media"><img src="assets/img/shanti-krishnamurthy.jpg" alt="" loading="lazy" decoding="async"></figure>
-    <div class="pmodal__text">
-      <p class="panel__label">Director &mdash; Academics &amp; Administration</p>
-      <h2 id="person-krishnamurthy-t">Smt. Shanti Krishnamurthy</h2>
-      <p class="copy">A Director of the CCMT Education Cell. Smt. Shanti Krishnamurthy became Principal of CIRS in 2009, and Director &mdash; Academics and Administration in 2018.</p>
-        <p class="pmodal__more"><a href="#msg-academics" data-msg-link="academics" data-panel-close>Read the message from Smt. Shanti Krishnamurthy</a></p>
-    </div>
-  </div>
-</div>
-
-<div class="panel panel--person" id="person-rajeshwari" role="dialog" aria-modal="true" aria-labelledby="person-rajeshwari-t" hidden>
-  <div class="panel__card pmodal">
-    <button type="button" class="panel__close" data-panel-close aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-    <figure class="pmodal__media"><img src="assets/img/rajeshwari.jpg" alt="" loading="lazy" decoding="async"></figure>
-    <div class="pmodal__text">
-      <p class="panel__label">Principal</p>
-      <h2 id="person-rajeshwari-t">Smt. G. Rajeshwari</h2>
-      <p class="copy"><em>[A short introduction to Smt. G. Rajeshwari to be supplied by the school.]</em></p>
-        <p class="pmodal__more"><a href="#msg-principal" data-msg-link="principal" data-panel-close>Read the message from Smt. G. Rajeshwari</a></p>
-    </div>
-  </div>
-</div>
 <nav class="jump" aria-label="On this page">
   <div class="jump__panel" id="jumpPanel">
       <p>On this page</p>
