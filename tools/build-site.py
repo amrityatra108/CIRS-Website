@@ -973,13 +973,15 @@ def jump_html(body):
 
     Labels come from each section's small-caps marker, or from its heading
     where it has none, so the index cannot drift out of step with the
-    headings — there is nothing to keep in sync. A page with fewer than two
-    places to go gets no index at all.
+    headings — there is nothing to keep in sync. A section whose headline is
+    a sentence names itself for the index instead, with data-jump-label.
+    A page with fewer than two places to go gets no index at all.
     """
     items = []
-    for m in re.finditer(r'<section[^>]*\bid="([^"]+)"[^>]*>(.*?)</section>', body, re.S):
-        sid, inner = m.group(1), m.group(2)
-        label = (re.search(r'<span class="sc">(.*?)</span>', inner, re.S)
+    for m in re.finditer(r'<section([^>]*\bid="([^"]+)"[^>]*)>(.*?)</section>', body, re.S):
+        attrs, sid, inner = m.group(1), m.group(2), m.group(3)
+        label = (re.search(r'\bdata-jump-label="([^"]*)"', attrs)
+                 or re.search(r'<span class="sc">(.*?)</span>', inner, re.S)
                  or re.search(r'<h[23][^>]*>(.*?)</h[23]>', inner, re.S))
         if not label:
             continue
