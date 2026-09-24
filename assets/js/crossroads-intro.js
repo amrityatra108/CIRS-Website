@@ -6,7 +6,6 @@
   var target = document.getElementById("crossroads-main");
   var reveal = intro.querySelector(".crossroads-intro__reveal");
   var ring = document.getElementById("ring");
-  var header = document.getElementById("header");
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)");
   var active = false, frame = null, x = 0, y = 0;
@@ -219,7 +218,6 @@
     new IntersectionObserver(function (entries) {
       active = entries[0].isIntersecting;
       syncVideo();
-      if (header) header.classList.toggle("crossroads-intro-header", active);
       if (ring) ring.classList.toggle("crossroads-intro-cursor-muted", active);
       intro.toggleAttribute("data-crossroads-intro-active", active && !document.hidden);
       if (!active) { stop(); stopTransition(); paintTransition(); }
