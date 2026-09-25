@@ -1,0 +1,607 @@
+/* ============================================================
+   LEADERSHIP — an editorial portrait gallery
+   ------------------------------------------------------------
+   Scoped to body.leadership, which build-site.py puts on this
+   page and no other. Markup: tools/pages/leadership.html and
+   tools/leadership.py. Script: assets/js/leadership.js.
+
+   Four movements, top to bottom:
+
+     .ld-open     warm ivory. The h1 at display size, a short
+                  account of how the school is governed, two
+                  plain links — and directly under it, in the
+                  first screen, the four portraits that begin
+                  the directory (.ld-four).
+     .ld-board    the three further Directors, compact. One has
+                  no approved photograph and is set as text.
+     .ld-words    dark ink, holding an ivory reading sheet: an
+                  index of authors at the left, then portrait,
+                  name and role beside the full message.
+     .ld-staff    the staff and faculty photograph at its own
+                  proportions, then a compact pair of links.
+
+   Type: Newsreader (the site's serif) for names, headings and
+   the messages themselves; Jost for the supporting text, roles
+   and links, so what is said about a person reads differently
+   from what they say.
+
+   Photographs are shown as they are: no overlay, no tint, no
+   rounded crop, no card. Colour comes from the robes, the
+   saris and the gardens behind them.
+
+   Motion, once: the heading rises 16px as it fades in, and each
+   portrait is uncovered inside its own frame — the frame's
+   clip-path moves, never the face — 70ms apart, the whole
+   sequence done by about 800ms. On hover or keyboard focus a
+   portrait scales to 1.02 inside its frame. Under
+   prefers-reduced-motion none of it runs.
+
+   Contrast, measured:
+     --ld-ink-2   #4A4239 on --ld-ivory  8.6:1
+     --ld-ink-3   #6A6155 on --ld-ivory  5.5:1
+     --ld-gold-ink #7A5B0E on --ld-ivory 5.6:1
+     --ld-on-dark-2 #C9BFB3 on --ld-dark 10.9:1
+   ============================================================ */
+
+body.leadership{
+  --ld-ivory:    #F7F2E8;
+  --ld-ivory-2:  #EFE8DA;
+  --ld-sheet:    #FBF8F2;
+  --ld-ink:      #1C1714;
+  --ld-ink-2:    #4A4239;
+  --ld-ink-3:    #6A6155;
+  --ld-rule:     #DDD3C2;
+  --ld-gold:     #C99A1E;
+  --ld-gold-ink: #7A5B0E;
+  --ld-dark:     #17121B;
+  --ld-dark-2:   #221B27;
+  --ld-on-dark:  #F4EEE4;
+  --ld-on-dark-2:#C9BFB3;
+  --ld-sans: "Jost", var(--font-primary);
+  /* The fixed header's foot is at about 76px, 64px on a phone. */
+  --ld-head: 112px;
+
+  background:var(--ld-ivory);
+  color:var(--ld-ink);
+}
+@media (max-width:560px){ body.leadership{ --ld-head:80px; } }
+body.leadership main{ background:var(--ld-ivory); }
+body.leadership ::selection{ background:#F3D98A; color:var(--ld-ink); }
+body.leadership :focus-visible{ outline:2px solid var(--ld-gold-ink); outline-offset:3px; }
+body.leadership section[id],
+body.leadership [id="directors"]{ scroll-margin-top:var(--ld-head); }
+
+/* ---------------------------------------------------------------
+   The opening
+   --------------------------------------------------------------- */
+.ld-open{
+  padding-top:clamp(112px, 12vw, 148px);
+  padding-bottom:clamp(28px, 3.4vw, 48px);
+}
+.ld-open__inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:var(--space-5);
+  align-items:end;
+}
+@media (min-width:980px){
+  .ld-open__inner{
+    grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+    grid-template-areas:"kicker kicker" "title aside";
+    column-gap:clamp(40px, 5vw, 88px);
+    row-gap:var(--space-4);
+  }
+  .ld-kicker{ grid-area:kicker; }
+  .ld-title{ grid-area:title; }
+  .ld-open__aside{ grid-area:aside; padding-bottom:.9em; }
+}
+.ld-kicker{
+  margin:0;
+  font-family:var(--ld-sans);
+  font-size:.8rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ld-gold-ink);
+}
+.ld-title{
+  margin:0;
+  font-family:var(--font-primary);
+  font-weight:500;
+  font-style:normal;
+  font-size:clamp(2.8rem, 9.2vw, 8.5rem);
+  line-height:.9;
+  letter-spacing:-.025em;
+  color:var(--ld-ink);
+  text-wrap:balance;
+}
+.ld-open__lead{
+  margin:0;
+  max-width:42ch;
+  font-family:var(--ld-sans);
+  font-size:clamp(1rem, .96rem + .2vw, 1.125rem);
+  line-height:1.6;
+  color:var(--ld-ink-2);
+}
+.ld-open__links{
+  display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-6);
+  margin:var(--space-5) 0 0;
+}
+.ld-open__links a,
+.ld-person__link,
+.ld-board__source a{
+  font-family:var(--ld-sans);
+  font-weight:500;
+  color:var(--ld-ink);
+  text-decoration:underline;
+  text-decoration-color:var(--ld-gold);
+  text-decoration-thickness:1px;
+  text-underline-offset:.32em;
+  transition:text-decoration-color .2s var(--e), text-decoration-thickness .2s var(--e), color .2s var(--e);
+}
+.ld-open__links a{ font-size:1rem; }
+.ld-open__links a::after,
+.ld-person__link::after{
+  content:"\2192"; display:inline-block; margin-left:.4em;
+  color:var(--ld-gold-ink); text-decoration:none;
+  transition:transform .2s var(--e);
+}
+.ld-open__links a[href="#people"]::after{ content:"\2193"; }
+.ld-open__links a:hover,
+.ld-open__links a:focus-visible,
+.ld-board__source a:hover{
+  color:var(--purple); text-decoration-thickness:2px; text-decoration-color:var(--ld-gold-ink);
+}
+.ld-open__links a:hover::after{ transform:translateY(2px); }
+.ld-open__links a[href="#messages"]:hover::after{ transform:translateX(3px); }
+
+/* ---------------------------------------------------------------
+   The directory: four portraits, then the Directors
+   --------------------------------------------------------------- */
+.ld-people{ padding-bottom:clamp(64px, 8vw, 128px); }
+.ld-four{
+  list-style:none; margin:0; padding:0;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:clamp(20px, 2.4vw, 36px);
+}
+@media (max-width:1099px){ .ld-four{ grid-template-columns:repeat(2, minmax(0,1fr)); row-gap:var(--space-7); } }
+@media (max-width:519px){ .ld-four{ grid-template-columns:minmax(0,1fr); } }
+
+.ld-person{ position:relative; min-width:0; display:flex; flex-direction:column; }
+.ld-person__frame{
+  margin:0;
+  aspect-ratio:4 / 5;
+  overflow:hidden;
+  background:var(--ld-ivory-2);
+}
+.ld-person__frame img{
+  display:block; width:100%; height:100%;
+  object-fit:cover;
+  transition:transform .45s var(--e2);
+}
+@media (max-width:519px){
+  /* One to a row, a portrait never grows past the size its file can hold. */
+  .ld-person__frame{ max-width:360px; }
+}
+.ld-person__text{ padding-top:var(--space-4); display:flex; flex-direction:column; flex:1; }
+/* In a row, every role keeps room for two lines and sits on the lower one,
+   so a role that wraps (Director — Academics & Administration) does not
+   drop that one name below its neighbours. */
+@media (min-width:520px){
+  .ld-four .ld-person__role{ min-height:calc(2 * 1.45em); display:flex; align-items:flex-end; }
+}
+.ld-person__role{
+  margin:0 0 6px;
+  font-family:var(--ld-sans);
+  font-size:.74rem; font-weight:500; line-height:1.45;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ld-gold-ink);
+}
+.ld-person__name{
+  margin:0;
+  font-family:var(--font-primary);
+  font-weight:500;
+  font-size:clamp(1.3rem, 1.05rem + .7vw, 1.6rem);
+  line-height:1.15;
+  letter-spacing:-.005em;
+  color:var(--ld-ink);
+  text-wrap:balance;
+}
+.ld-person__note{
+  margin:var(--space-3) 0 0;
+  max-width:34ch;
+  font-family:var(--ld-sans);
+  font-size:.95rem; line-height:1.55;
+  color:var(--ld-ink-2);
+}
+.ld-person__link{
+  align-self:flex-start;
+  margin-top:auto;
+  padding-top:var(--space-4);
+  font-size:.95rem;
+}
+/* The whole entry is the link's target, so the portrait takes the click too;
+   the link itself stays the one stop for the keyboard. */
+.ld-person__link::before{ content:""; position:absolute; inset:0; z-index:1; }
+.ld-person:hover .ld-person__frame img,
+.ld-person:focus-within .ld-person__frame img{ transform:scale(1.02); }
+.ld-person:hover .ld-person__link,
+.ld-person__link:focus-visible{
+  color:var(--purple); text-decoration-thickness:2px; text-decoration-color:var(--ld-gold-ink);
+}
+.ld-person:hover .ld-person__link::after,
+.ld-person__link:focus-visible::after{ transform:translateX(3px); }
+.ld-person__link:focus-visible{ outline-offset:4px; }
+
+/* The Directors */
+.ld-board{
+  margin-top:clamp(64px, 8vw, 112px);
+  padding-top:var(--space-6);
+  border-top:1px solid var(--ld-rule);
+  display:grid;
+  gap:var(--space-6);
+}
+@media (min-width:980px){
+  .ld-board{ grid-template-columns:minmax(0,1fr) minmax(0,3fr); column-gap:clamp(32px,4vw,64px); }
+  .ld-board__source{ grid-column:2; }
+}
+.ld-h3{
+  margin:0;
+  font-family:var(--font-primary);
+  font-weight:500;
+  font-size:clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+  line-height:1.1;
+  color:var(--ld-ink);
+}
+.ld-board__lead{
+  margin:var(--space-3) 0 0;
+  max-width:30ch;
+  font-family:var(--ld-sans);
+  font-size:.95rem; line-height:1.55;
+  color:var(--ld-ink-3);
+}
+/* One ruled row per Director: name and role, then what they do, then the
+   portrait at the row's end. A row without a photograph ends after its
+   text, so nothing reads as a missing picture. */
+.ld-dirs{ list-style:none; margin:0; padding:0; border-bottom:1px solid var(--ld-rule); }
+.ld-dir{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr) 96px;
+  grid-template-areas:"id note face";
+  column-gap:clamp(20px, 3vw, 48px);
+  align-items:start;
+  padding-block:var(--space-5);
+  border-top:1px solid var(--ld-rule);
+}
+.ld-dir__id{ grid-area:id; min-width:0; }
+.ld-dir__note{ grid-area:note; }
+.ld-dir__face{ grid-area:face; margin:0; aspect-ratio:4 / 5; overflow:hidden; background:var(--ld-ivory-2); }
+.ld-dir__face img{ display:block; width:100%; height:100%; object-fit:cover; }
+@media (max-width:719px){
+  .ld-dir{
+    grid-template-columns:72px minmax(0,1fr);
+    grid-template-areas:"face id" "note note";
+    column-gap:var(--space-4);
+    align-items:end;
+  }
+  .ld-dir--text{ grid-template-areas:"id id" "note note"; }
+  .ld-dir__note{ margin-top:var(--space-3) !important; }
+}
+.ld-dir__name{
+  margin:0;
+  font-family:var(--font-primary); font-weight:500;
+  font-size:1.3rem; line-height:1.2;
+  color:var(--ld-ink);
+}
+.ld-dir__note{
+  margin:0;
+  max-width:52ch;
+  font-family:var(--ld-sans);
+  font-size:.92rem; line-height:1.55;
+  color:var(--ld-ink-2);
+}
+.ld-board__source{
+  margin:0;
+  font-family:var(--ld-sans);
+  font-size:.85rem;
+  color:var(--ld-ink-3);
+}
+
+/* ---------------------------------------------------------------
+   In their own words
+   --------------------------------------------------------------- */
+.ld-words{
+  background:var(--ld-dark);
+  color:var(--ld-on-dark);
+  padding-block:clamp(72px, 9vw, 136px);
+}
+.ld-words__head{ max-width:860px; margin-bottom:clamp(32px, 4vw, 56px); }
+.ld-h2{
+  margin:0;
+  font-family:var(--font-primary);
+  font-weight:500;
+  font-size:clamp(2.4rem, 1.6rem + 3.4vw, 4.75rem);
+  line-height:.98;
+  letter-spacing:-.02em;
+  text-wrap:balance;
+}
+.ld-words .ld-h2{ color:var(--ld-on-dark); }
+.ld-words__lead{
+  margin:var(--space-5) 0 0;
+  max-width:60ch;
+  font-family:var(--ld-sans);
+  font-size:1.02rem; line-height:1.6;
+  color:var(--ld-on-dark-2);
+}
+
+.ld-reader{ display:grid; gap:var(--space-5); align-items:start; }
+@media (min-width:900px){
+  .ld-reader{ grid-template-columns:minmax(200px, 250px) minmax(0,1fr); column-gap:clamp(28px, 3.4vw, 56px); }
+}
+/* The index appears only once scripting has marked the page (the head
+   script in tools/leadership.py). Without it, every message is shown. */
+html:not(.ld-js) .ld-idx{ display:none; }
+html:not(.ld-js) .ld-reader{ grid-template-columns:minmax(0,1fr); }
+
+/* From 900px: a vertical tab list that stays beside a long letter. */
+.ld-idx__tabs{ display:none; }
+@media (min-width:900px){
+  .ld-idx{ position:sticky; top:var(--ld-head); }
+  .ld-idx__tabs{ display:flex; flex-direction:column; }
+  .ld-idx__pick{ display:none; }
+}
+.ld-idx__group{
+  display:block;
+  padding:0 0 var(--space-2);
+  font-family:var(--ld-sans);
+  font-size:.72rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ld-on-dark-2);
+}
+.ld-idx__group ~ .ld-idx__group{ margin-top:var(--space-5); }
+.ld-idx__tab{
+  display:flex; flex-direction:column; gap:3px;
+  width:100%;
+  margin:0; padding:12px 14px 12px 16px;
+  text-align:left;
+  font:inherit;
+  color:inherit;
+  background:transparent;
+  border:0;
+  border-left:2px solid rgba(244,238,228,.16);
+  cursor:pointer;
+  transition:background-color .2s var(--e), border-color .2s var(--e);
+}
+.ld-idx__name{
+  font-family:var(--font-primary); font-size:1.06rem; line-height:1.25;
+  color:var(--ld-on-dark);
+}
+.ld-idx__role{
+  font-family:var(--ld-sans); font-size:.8rem; line-height:1.4;
+  color:var(--ld-on-dark-2);
+}
+.ld-idx__tab:hover{ background:rgba(244,238,228,.05); border-left-color:rgba(244,238,228,.4); }
+.ld-idx__tab[aria-selected="true"]{ background:rgba(244,238,228,.08); border-left-color:var(--gold); }
+.ld-idx__tab[aria-selected="true"] .ld-idx__name{ font-weight:600; }
+/* On the dark ground the ivory pages' dark-gold ring would all but vanish. */
+body.leadership .ld-idx :focus-visible{ outline:2px solid var(--gold); }
+body.leadership .ld-idx__tab:focus-visible{ outline-offset:-2px; }
+
+/* Below 900px: a labelled select. The index and its wrapper step out of
+   the layout (display:contents), so the bar holding the select and the
+   chosen role is a direct child of the reader and can stay under the
+   header for the whole length of a letter: the name and role in sight. */
+@media (max-width:899px){
+  .ld-reader{ row-gap:0; }
+  html.ld-js .ld-idx,
+  .ld-idx__pick{ display:contents; }
+  .ld-idx__label{ margin-bottom:8px; }
+  .ld-idx__bar{
+    position:sticky; top:calc(var(--ld-head) - 14px); z-index:5;
+    margin-inline:calc(var(--gut) * -1);
+    padding:8px var(--gut) 12px;
+    background:var(--ld-dark);
+  }
+  .ld-sheet{ margin-top:var(--space-2); }
+}
+.ld-idx__now{
+  margin:6px 0 0;
+  font-family:var(--ld-sans);
+  font-size:.82rem; line-height:1.35;
+  color:var(--ld-on-dark-2);
+}
+.ld-idx__label{
+  font-family:var(--ld-sans);
+  font-size:.74rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ld-on-dark-2);
+}
+.ld-idx__select{
+  width:100%;
+  min-height:48px;
+  padding:10px 44px 10px 14px;
+  font-family:var(--ld-sans); font-size:1rem; line-height:1.3;
+  color:var(--ld-on-dark);
+  background:var(--ld-dark-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3 5l4 4 4-4' fill='none' stroke='%23FFC308' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 16px center;
+  border:1px solid rgba(244,238,228,.28);
+  border-radius:0;
+  appearance:none;
+  text-overflow:ellipsis;
+}
+body.leadership .ld-idx__select:focus-visible{ outline-offset:2px; }
+.ld-idx__select option,
+.ld-idx__select optgroup{ color:#1C1714; background:#fff; }
+
+/* The reading sheet */
+.ld-sheet{
+  background:var(--ld-sheet);
+  color:var(--ld-ink);
+  padding:clamp(28px, 4.4vw, 72px) clamp(20px, 4.4vw, 72px);
+  min-width:0;
+}
+.ld-msg{
+  display:grid;
+  gap:var(--space-6);
+  scroll-margin-top:var(--ld-head);
+}
+@media (max-width:899px){
+  /* The sticky picker sits above the letter; clear it as well. */
+  html.ld-js .ld-msg{ scroll-margin-top:calc(var(--ld-head) + 92px); }
+}
+.ld-msg + .ld-msg{ margin-top:var(--space-8); padding-top:var(--space-8); border-top:1px solid var(--ld-rule); }
+html.ld-js .ld-msg + .ld-msg{ margin-top:0; padding-top:0; border-top:0; }
+/* Focusable only by script (tabindex="-1"), so that "Read message" can take
+   a screen reader to the letter; it is not a stop for the Tab key and has
+   nothing to show for being focused. */
+body.leadership .ld-msg:focus,
+body.leadership .ld-msg:focus-visible{ outline:none; }
+@media (min-width:1100px){
+  .ld-msg{ grid-template-columns:minmax(180px, 220px) minmax(0, 1fr); column-gap:clamp(36px, 4vw, 64px); }
+  .ld-msg__head{ position:sticky; top:calc(var(--ld-head) + 8px); }
+}
+.ld-msg__head{ display:grid; gap:var(--space-4); align-content:start; }
+@media (max-width:1099px){
+  .ld-msg__head{ grid-template-columns:112px minmax(0,1fr); align-items:end; column-gap:var(--space-5); }
+}
+@media (max-width:419px){ .ld-msg__head{ grid-template-columns:88px minmax(0,1fr); column-gap:var(--space-4); } }
+.ld-msg__face{ margin:0; aspect-ratio:4 / 5; overflow:hidden; background:var(--ld-ivory-2); }
+.ld-msg__face img{ display:block; width:100%; height:100%; object-fit:cover; }
+.ld-msg__kind{
+  margin:0 0 6px;
+  font-family:var(--ld-sans);
+  font-size:.72rem; font-weight:500; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--ld-gold-ink);
+}
+.ld-msg__name{
+  margin:0;
+  font-family:var(--font-primary); font-weight:500;
+  font-size:1.35rem; line-height:1.2;
+  color:var(--ld-ink);
+  text-wrap:balance;
+}
+.ld-msg__role{
+  margin:6px 0 0;
+  font-family:var(--ld-sans);
+  font-size:.9rem; line-height:1.45;
+  color:var(--ld-ink-3);
+}
+.ld-msg__text{
+  max-width:66ch;
+  font-family:var(--font-primary);
+  font-size:1.125rem;
+  line-height:1.65;
+  color:var(--ld-ink);
+}
+.ld-msg__text p{ margin:0; text-wrap:pretty; hyphens:manual; }
+.ld-msg__text p + p{ margin-top:1.05em; }
+.ld-msg__title{
+  font-family:var(--ld-sans);
+  font-size:.8rem !important;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ld-gold-ink);
+}
+.ld-msg__title + p{ margin-top:1.3em !important; }
+.ld-msg__greet{ color:var(--ld-ink-2); }
+.ld-msg__sign{ color:var(--ld-ink-2); font-style:italic; }
+.ld-msg__sign + .ld-msg__sign{ margin-top:0 !important; }
+p:not(.ld-msg__sign) + .ld-msg__sign{ margin-top:1.6em !important; }
+.ld-msg__greet + .ld-msg__greet{ margin-top:0 !important; }
+
+.ld-msg.is-entering{ animation:ld-swap .22s var(--e) both; }
+@keyframes ld-swap{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:none; } }
+
+/* ---------------------------------------------------------------
+   Staff and faculty
+   --------------------------------------------------------------- */
+.ld-staff{ padding-block:clamp(72px, 9vw, 136px) clamp(40px, 5vw, 72px); }
+.ld-staff__head{
+  display:grid; gap:var(--space-5);
+  margin-bottom:clamp(28px, 3.4vw, 48px);
+}
+@media (min-width:980px){
+  .ld-staff__head{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:end; column-gap:clamp(40px,5vw,88px); }
+}
+.ld-staff .ld-h2{ color:var(--ld-ink); }
+.ld-staff__lead{
+  margin:0;
+  max-width:56ch;
+  font-family:var(--ld-sans);
+  font-size:1.02rem; line-height:1.6;
+  color:var(--ld-ink-2);
+}
+.ld-staff__photo{ margin:0; }
+.ld-staff__photo img{ display:block; width:100%; height:auto; aspect-ratio:2000 / 1333; background:var(--ld-ivory-2); }
+.ld-staff__photo figcaption{
+  margin-top:var(--space-3);
+  font-family:var(--ld-sans);
+  font-size:.85rem; line-height:1.5;
+  color:var(--ld-ink-3);
+}
+
+/* ---------------------------------------------------------------
+   The close: two links, no second hero
+   --------------------------------------------------------------- */
+.ld-end{ padding-block:clamp(24px, 3vw, 40px) clamp(64px, 7vw, 104px); }
+.ld-end__inner{
+  display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:var(--space-5);
+}
+@media (max-width:599px){ .ld-end__inner{ grid-template-columns:minmax(0,1fr); gap:0; } }
+.ld-end__link{
+  display:flex; flex-direction:column; gap:4px;
+  padding:var(--space-5) 0;
+  border-top:1px solid var(--ld-rule);
+  color:var(--ld-ink);
+  text-decoration:none;
+}
+.ld-end__k{
+  font-family:var(--ld-sans);
+  font-size:.74rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ld-gold-ink);
+}
+.ld-end__t{
+  font-family:var(--font-primary); font-weight:500;
+  font-size:clamp(1.35rem, 1.1rem + .8vw, 1.8rem); line-height:1.2;
+}
+.ld-end__t::after{
+  content:"\2192"; display:inline-block; margin-left:.4em; color:var(--ld-gold-ink);
+  transition:transform .2s var(--e);
+}
+.ld-end__link:hover .ld-end__t,
+.ld-end__link:focus-visible .ld-end__t{ color:var(--purple); }
+.ld-end__link:hover .ld-end__t::after,
+.ld-end__link:focus-visible .ld-end__t::after{ transform:translateX(4px); }
+
+/* ---------------------------------------------------------------
+   The one entrance
+   --------------------------------------------------------------- */
+@media (prefers-reduced-motion:no-preference){
+  .ld-kicker,
+  .ld-title,
+  .ld-open__aside{ animation:ld-rise .42s var(--e2) both; }
+  .ld-title{ animation-delay:.04s; }
+  .ld-open__aside{ animation-delay:.1s; }
+  .ld-person__frame{
+    animation:ld-unveil .44s cubic-bezier(.3,.7,.2,1) both;
+    animation-delay:calc(.14s + var(--i, 0) * .07s);
+  }
+  .ld-person__text > *{
+    animation:ld-fade .44s var(--e) both;
+    animation-delay:calc(.14s + var(--i, 0) * .07s);
+  }
+}
+@keyframes ld-rise{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
+@keyframes ld-unveil{ from{ clip-path:inset(0 0 100% 0); } to{ clip-path:inset(0 0 0 0); } }
+@keyframes ld-fade{ from{ opacity:0; } to{ opacity:1; } }
+
+@media (prefers-reduced-motion:reduce){
+  .ld-person__frame img,
+  .ld-open__links a, .ld-open__links a::after,
+  .ld-person__link, .ld-person__link::after,
+  .ld-end__t::after,
+  .ld-idx__tab{ transition:none; }
+  .ld-person:hover .ld-person__frame img,
+  .ld-person:focus-within .ld-person__frame img{ transform:none; }
+  .ld-msg.is-entering{ animation:none; }
+}

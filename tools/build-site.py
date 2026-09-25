@@ -43,6 +43,7 @@ import creativewriting
 import captures
 import theatre
 import festivals
+import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -216,17 +217,23 @@ PAGES = {
     "leadership": {
         "nav": "Leadership",
         "title": "Our Leadership",
-        "description": "The Board of Directors of Chinmaya International Residential School, and "
-                       "the staff and faculty.",
-        # The campus hero News opens on, so the Vision pages that are
-        # documents rather than compositions share one opening. (School
-        # History used to wear it too; it now opens on its own archive.)
-        "hero": ("Governance", "Our <em>Leadership.</em>",
-                 "CIRS is an undertaking of the Central Chinmaya Mission Trust, Mumbai, and is "
-                 "managed by its Board of Directors."),
-        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
-        "hero_cta": [("Meet the Board", "#people", "primary"),
-                     ("Read their messages", "#messages", "ghost")],
+        "description": "The people who lead Chinmaya International Residential School, their "
+                       "messages in full, and the school's staff and faculty.",
+        # No hero and no banner. The page opens on ivory, with the h1 and the
+        # first four portraits of the directory together in the first screen:
+        # the people are the opening, not a campus photograph above them. It
+        # brings its own sheet and script (leadership.css, leadership.js) and
+        # the people and messages are data in tools/leadership.py. It keeps
+        # the browser's own scroll, so its message links are real history
+        # entries (cirs.js). There is no curtain, no "On this page" index —
+        # the opening's two links do that — and no under-construction note:
+        # nothing on the page is a placeholder.
+        "banner": None,
+        "sheet": "leadership",
+        "cache_suffix": "-leadership-1",
+        "litehead": True,
+        "jump": False,
+        "uc": False,
     },
     "school-info": {
         "nav": "School Information",
@@ -1970,6 +1977,9 @@ def build(slug, page):
     if slug == "theatre":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/theatre.css?{CACHE_BUST}">\n</head>')
+    if slug == "leadership":
+        # The message a #msg-... URL asks for is chosen before first paint.
+        head = head.replace("</head>", leadership.head_script() + leadership.head_css() + "</head>")
     if slug == "captures":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/captures-featured.css?{CACHE_BUST}">\n'
@@ -2000,7 +2010,7 @@ def build(slug, page):
         head = head.replace("</head>",
             portal_motion_gate +
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
-    if slug in ("admissions", "school-info", "news", "curriculum", "school-history"):
+    if slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership"):
         # These pages open immediately with their own video, document sheets,
         # journal masthead or, on Curriculum, the photograph of learning the
         # page leads with — and School History on its archive's title — so
@@ -2048,9 +2058,9 @@ def build(slug, page):
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if slug in ("admissions", "school-info", "news", "curriculum", "school-history"):
-        # Admissions, School Information, News, Curriculum and School History
-        # each have their own visible opening. The shared curtain would delay it behind a
+    if slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership"):
+        # Admissions, School Information, News, Curriculum, School History and
+        # Leadership each have their own visible opening. The shared curtain would delay it behind a
         # blank screen.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
@@ -2104,6 +2114,8 @@ def build(slug, page):
         content = festivals.expand(content)
     if slug == "school-history":
         content = history.expand(content)
+    if slug == "leadership":
+        content = leadership.expand(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{HOUSES_HERO}}", houses_hero_html())
                        .replace("{{HOUSES_CHAPTERS}}", houses_chapters_html())
@@ -2174,8 +2186,10 @@ def build(slug, page):
     parts.append("</main>")
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
-        if slug == "captures":
-            # Captures already ends with its own full-width photograph.
+        if slug in ("captures", "leadership"):
+            # Captures already ends with its own full-width photograph, and
+            # Leadership with its staff photograph and a compact pair of
+            # links: a second full-screen scene would compete with both.
             # Keep that as the page's final image before the site footer.
             footer = footer[footer.index('<div class="footer-wrap">'):]
         if slug == "admissions":
@@ -2220,6 +2234,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if slug == "art-attack":
         parts.append(f'<script src="assets/js/artattack.js?{CACHE_BUST}" defer></script>')
+    if slug == "leadership":
+        parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}" defer></script>')
     if slug == "school-history":

@@ -26,18 +26,28 @@
 
   if ("IntersectionObserver" in window) {
     var zoneState = { scene: false, footer: false };
+    var main = document.querySelector("main");
+    var update = function () {
+      // The sticky footer sits behind the page even at scroll position zero.
+      // Its intersection alone does not mean the visitor has reached it: the
+      // closing scene, or on a page without one (Captures, Leadership) the
+      // end of <main>, has to have come up past the foot of the window.
+      var edge = scene || main;
+      var footerReached = zoneState.footer &&
+        (!edge || edge.getBoundingClientRect().bottom <= window.innerHeight);
+      root.classList.toggle("footer-zone-active", zoneState.scene || footerReached);
+    };
     var zone = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         zoneState[entry.target === scene ? "scene" : "footer"] = entry.isIntersecting;
       });
-      // The sticky footer sits behind the page even at scroll position zero.
-      // Its intersection alone does not mean the visitor has reached it.
-      var footerReached = zoneState.footer &&
-        (!scene || scene.getBoundingClientRect().bottom <= window.innerHeight);
-      root.classList.toggle("footer-zone-active", zoneState.scene || footerReached);
+      update();
     }, { threshold: 0.01 });
     if (scene) zone.observe(scene);
     if (footerWrap) zone.observe(footerWrap);
+    // Without a scene there is no second observer to report the page's end
+    // arriving, so the scroll itself asks.
+    if (!scene) window.addEventListener("scroll", update, { passive: true });
   }
 
   if (!scene || reducedMotion || !window.matchMedia ||

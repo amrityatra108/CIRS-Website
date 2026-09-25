@@ -28,6 +28,10 @@
   var hasGSAP = typeof window.gsap !== "undefined";
   var hasST = hasGSAP && typeof window.ScrollTrigger !== "undefined";
   var isAlumni = document.body.classList.contains("alumni");
+  // Alumni and Leadership keep the browser's own scroll and real URL
+  // fragments: Leadership's message links are history entries that Back
+  // and Forward must be able to walk (assets/js/leadership.js).
+  var nativeScroll = isAlumni || document.body.classList.contains("leadership");
   var animate = hasGSAP && !reduced;
 
   if (hasST) gsap.registerPlugin(ScrollTrigger);
@@ -41,7 +45,7 @@
   var lenis = null;
   // The photograph wall has its own infinite drag/scroll surface and must not
   // compete with document-level smooth scrolling.
-  if (typeof window.Lenis !== "undefined" && !reduced && !isAlumni && !document.body.classList.contains("wall")) {
+  if (typeof window.Lenis !== "undefined" && !reduced && !nativeScroll && !document.body.classList.contains("wall")) {
     lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.5 });
     if (hasGSAP) {
       lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
@@ -187,8 +191,8 @@
       if (id.length < 2) return;
       var t = document.querySelector(id);
       if (!t) return;
-      // Alumni uses native document scrolling and real URL fragments.
-      if (isAlumni) { closeDrawer(); return; }
+      // Alumni and Leadership use native document scrolling and real URL fragments.
+      if (nativeScroll) { closeDrawer(); return; }
       e.preventDefault();
       closeDrawer();
       scrollToSection(t);
