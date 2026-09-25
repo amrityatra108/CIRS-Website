@@ -39,6 +39,7 @@
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
 <link rel="stylesheet" href="assets/css/typography.css?b=102">
 <link rel="stylesheet" href="assets/css/footer.css?b=102-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-drawer-5">
 </head>
 
 <body>
@@ -204,20 +205,41 @@
     </div>
   </div>
 </header>
-<div class="drawer" id="drawer" hidden>
-  <nav class="drawer__grid" aria-label="All pages">
-    <div>
-      <p class="sc" id="dnav-vision">Vision</p>
-      <ul aria-labelledby="dnav-vision">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="0" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="true" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button">
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-student-life">Student Life</p>
-      <ul aria-labelledby="dnav-student-life">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
         <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
@@ -225,45 +247,60 @@
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
-      <ul aria-labelledby="dnav-literary-excellence">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
-      <ul aria-labelledby="dnav-art-culture-music">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-connect">Connect</p>
-      <ul aria-labelledby="dnav-connect">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
-    </div>
-  </nav>
-  <div class="drawer__utility">
-    <a href="alumni.html">Alumni</a>
-    <a href="school-info.html#calendar">Calendar</a>
-    <a href="tel:+914222613300">+91 422 261 3300</a>
-    <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+    </section>
   </div>
-  <div class="drawer__cta">
-    <a class="btn btn--primary btn--lg" href="admissions.html#apply">Apply for admission</a>
-    <a class="btn btn--outline btn--lg" href="admissions.html#visit">Book a campus visit</a>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
   </div>
 </div>
 <main id="main">

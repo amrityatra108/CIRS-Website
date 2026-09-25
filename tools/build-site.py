@@ -704,28 +704,39 @@ def to_depth(html, slug):
     return re.sub(r'\b(content)="(assets/[^"]*)"', climb, html)
 
 
-def nav_html(slug):
-    """The drawer's grid: one column per primary category, every child clickable.
+def menu_group_index(slug):
+    return next((i for i, (_, slugs) in enumerate(MENU) if slug in slugs), 0)
 
-    The categories are headings rather than links — there is no page behind
-    "Art, Culture & Music", only the five pages under it — so they are marked
-    up as headings and the list beneath each is labelled by it. That is what
-    lets a screen reader announce "Art, Culture & Music, list, five items"
-    instead of reading twenty-two links with no structure.
-    """
-    out = ['<nav class="drawer__grid" aria-label="All pages">']
-    for group, slugs in MENU:
+
+def nav_html(slug):
+    """Five typographic groups with accessible, directly linked panels."""
+    active = menu_group_index(slug)
+    out = ['<nav class="drawer__menu" aria-label="CIRS sections">']
+    arrival_y = (14, -10, 12, -12, 12)
+    arrival_z = (-200, -120, -260, -160, -220)
+    for i, (group, slugs) in enumerate(MENU):
         gid = "dnav-" + re.sub(r"[^a-z]+", "-", group.lower()).strip("-")
-        out.append("    <div>")
-        out.append(f'      <p class="sc" id="{gid}">{group}</p>')
-        out.append(f'      <ul aria-labelledby="{gid}">')
+        selected = "true" if i == active else "false"
+        current_class = " is-active" if i == active else ""
+        state = "" if i == active else " hidden"
+        out.append('  <div class="drawer__item">')
+        out.append(f'    <button type="button" class="drawer__group{current_class}" '
+                   f'id="{gid}-button" data-menu-index="{i}" '
+                   f'aria-controls="{gid}-panel" aria-expanded="{selected}" '
+                   f'style="--enter-delay:{i * 40}ms;--enter-y:{arrival_y[i]}px;'
+                   f'--enter-z:{arrival_z[i]}px">'
+                   f'<span class="drawer__group-number" aria-hidden="true">{i + 1:02d}</span>'
+                   f'<span class="drawer__group-word">{esc(group)}</span></button>')
+        out.append(f'    <section class="drawer__panel" id="{gid}-panel" '
+                   f'aria-labelledby="{gid}-button"{state}>')
+        out.append(f'      <p class="drawer__panel-kicker">{esc(group)} / {i + 1:02d}</p>')
+        out.append("      <ul>")
         for sl in slugs:
             page = PAGES[sl]
             here = ' aria-current="page"' if sl == slug else ""
-            out.append(f'        <li><a href="{sl}.html"{here}>{page["nav"]}</a></li>')
-        out.append("      </ul>")
-        out.append("    </div>")
-    out.append("  </nav>")
+            out.append(f'        <li><a href="{sl}.html"{here}>{esc(page["nav"])}</a></li>')
+        out += ['      </ul>', '    </section>', '  </div>']
+    out.append('</nav>')
     return "\n".join(out)
 
 
@@ -1618,6 +1629,9 @@ def build(slug, page):
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/footer.css?{CACHE_BUST}-footer-1">\n</head>')
 
+    head = head.replace("</head>",
+        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-drawer-5">\n</head>')
+
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" puts the class on <body>, and pages.css
     # gives the header dark lettering there from the first paint, with or
@@ -1660,7 +1674,10 @@ def build(slug, page):
              chrome.rstrip("\n")]
     if slug == "crossroads":
         parts[-1] = parts[-1].replace('class="curtain"', 'class="curtain crossroads-intro-curtain"')
-    drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
+    drawer = (read("tools/partials/drawer.html")
+              .replace("{{NAV}}", nav_html(slug))
+              .replace("{{ACTIVE_GROUP}}", str(menu_group_index(slug)))
+              .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html"))
     # The home page needs no Home tab — the wordmark already leads here, and a
     # Home link on Home is a link to nowhere.
     header = (read("tools/partials/header.html")
