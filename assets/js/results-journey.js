@@ -130,11 +130,6 @@
       gsap.set(".rj-spread--cbse,.rj-spread--ib,.rj-turn", { autoAlpha: 0 });
       gsap.set(".rj-spread--cbse,.rj-spread--ib", { clipPath: "inset(0 0 0 50%)" });
       gsap.set(".rj-book__pages,.rj-book__shadow", { clipPath: "inset(0 0 0 50%)" });
-<<<<<<< HEAD
-      gsap.set(".rj-next", { autoAlpha: 0, visibility: "hidden" });
-      gsap.set(".rj-next__line", { scaleX: 0 });
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       gsap.fromTo(words, { autoAlpha: 0, yPercent: 26 }, {
         autoAlpha: 1, yPercent: 0, duration: .8, stagger: .09, ease: "power3.out", delay: .12
       });
@@ -198,21 +193,10 @@
         .to(".rj-spread--ib", { clipPath: "inset(0 0 0 50%)", duration: 1.05, ease: "power2.inOut" }, "closing")
         .to(".rj-spread--ib", { autoAlpha: 0, duration: .16 }, "<.72")
         .addLabel("close")
-<<<<<<< HEAD
-        .to(".rj-book", { scale: .2, yPercent: -18, autoAlpha: 0, duration: .75, ease: "power3.in" })
-        .set(".rj-next", { visibility: "visible" })
-        .to(".rj-next", { autoAlpha: 1, duration: .45 })
-        .to(".rj-next__line", { scaleX: 1, duration: .6 }, "<.08")
-        .fromTo(".rj-next p,.rj-next h2,.rj-next>span:last-child", { autoAlpha: 0, y: 22 }, {
-          autoAlpha: 1, y: 0, duration: .58, stagger: .1, ease: "power2.out"
-        }, "<.18")
-        .to({}, { duration: .55 });
-=======
         // The book ends closed, on its cover, and the pin releases onto the
         // destinations — which open on "The next chapter" themselves. A
         // full-screen card saying the same thing used to sit between the two.
         .to({}, { duration: .5 });
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
       var routeNodes = gsap.utils.toArray(".rj-route__node");
       gsap.set(routeNodes, { autoAlpha: 0, scale: 0 });

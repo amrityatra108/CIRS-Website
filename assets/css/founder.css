@@ -31,13 +31,10 @@ body.founder .footer-wrap{ background:var(--f-paper-2); }
 /* Approved autonomous portrait opening, isolated from editorial page styles. */
 .founder .founder-opening{position:relative;box-sizing:border-box;height:100vh;height:100svh;min-height:420px;padding-top:100px;background:#f2efe8;}
 .founder .founder-opening__frame{display:block;width:100%;height:100%;border:0;}
-<<<<<<< HEAD
-=======
 /* The embedded portrait draws its own cursor. Hide the site-wide trailing
    ring while the pointer is inside the iframe so the ring cannot freeze at
    the browsing-context boundary and appear as a second cursor. */
 body.founder:has(.founder-opening__frame:hover) > .ring{opacity:0!important;}
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .founder .founder-opening__continue{position:absolute;bottom:24px;left:24px;z-index:2;display:flex;gap:20px;align-items:center;padding:12px 18px;border:1px solid var(--f-rule);border-radius:30px;background:var(--f-paper);color:var(--f-ink);font-size:12px;text-decoration:none;}
 .founder .founder-opening__continue:focus-visible{outline:2px solid var(--f-gold-ink);outline-offset:4px;}
 @media(max-width:700px){.founder .founder-opening__continue{left:50%;transform:translateX(-50%);white-space:nowrap;}}
@@ -68,28 +65,6 @@ body.founder:has(.founder-opening__frame:hover) > .ring{opacity:0!important;}
   .founder-opening__closing p{font-size:14px;}
 }
 
-<<<<<<< HEAD
-/* The header. This page is now in the pale-ground group ("litehead" in
-   build-site.py), which is what it always was in fact — it opens on
-   parchment — so the shared sheet already gives it dark-on-light lettering
-   and the dark-on-light pill. All that is left here is the hue: the site's
-   purple against parchment is a little cold, so the wordmark and the marks
-   take the page's own ink and soft instead.
-
-   What used to live here was a copy of the bare header, written before
-   is-bare existed: it stripped the bar AND the individual pills. Stripping
-   the bar is is-bare's job now and it does it on ten pages. Stripping the
-   pills was the bug — it left four controls as floating brown words with no
-   ground at all, which is what "fix the founder page header" was about. */
-/* .header is in each selector on purpose. Without it these lose to
-   .header.is-stuck .brand__name in the shared sheet, which is three classes
-   to this file's two, and the page silently kept the site purple. */
-body.founder .header .brand__name{ color:var(--f-ink); }
-body.founder .header .brand__sub{ color:var(--f-soft); }
-body.founder .header .htab{ color:var(--f-soft); }
-body.founder .header .htab__icon{ color:var(--f-gold-ink); }
-body.founder .header .htab:hover{ color:var(--f-ink); }
-=======
 /* The header. This page is in the pale-ground group ("litehead" in
    build-site.py), which is what it always was in fact — it opens on
    parchment — so the shared sheet already gives it dark-on-light lettering
@@ -109,7 +84,6 @@ body.founder .header{
   --hd-mark-hover:var(--f-gold-ink);
   --hd-tab-hover:var(--f-ink);
 }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 /* Paper, not a flat fill: a trace of grain so large areas of empty
    ground read as a surface. Cheap — one repeating SVG, no image. */
@@ -348,11 +322,6 @@ body.founder #progress{ display:none; }
    where the leading edge of the plate is, one glyph at a time, and a
    word can be caught half-turned.
 
-<<<<<<< HEAD
-   The plate is --f-ink under --f-paper lettering: 14.6:1, against
-   14.6:1 and 5.2:1 for the two states the words have on paper. There
-   is no point in the sweep where anything drops below AA.
-=======
    The plate is the page's gold under --f-ink lettering: 4.7:1, which
    clears AA for body text and is well clear of the 3:1 the words
    themselves need at this size. The word on paper is 14.6:1. There is
@@ -365,7 +334,6 @@ body.founder #progress{ display:none; }
    rest of the page spends, so the sweep spends it too, and spends
    one colour rather than two: the alternation was reading as a
    pattern in its own right and competing with the words.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
    --lit is set by cirs.js. It stays at 0 without JavaScript, under
    prefers-reduced-motion, or if ScrollTrigger never arrives, and the
@@ -375,19 +343,11 @@ body.founder #progress{ display:none; }
 .fwords__base{ position:relative; z-index:1; }
 .fwords__lit{
   display:block; position:absolute; z-index:2; inset:-.02em -.06em; padding:.02em .06em;
-<<<<<<< HEAD
-  background:#392A48; color:#FFFAF0;
-=======
   background:var(--f-gold); color:var(--f-ink);
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   /* Right inset walks from 100% to 0, so the plate opens rightwards. */
   clip-path:inset(0 calc(100% - var(--lit, 0) * 100%) 0 0);
   pointer-events:none;
 }
-<<<<<<< HEAD
-.fwords li:nth-child(even) .fwords__lit{ background:#254C40; }
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .fbeyond__archive{
   display:grid; grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);
   grid-template-rows:repeat(2,minmax(0,1fr));
@@ -461,9 +421,6 @@ body.founder #progress{ display:none; }
 
 /* ============================================================
    7. The Chinmaya Vision Programme
-<<<<<<< HEAD
-   ============================================================ */
-=======
    ============================================================
    This section had no ground of its own. It sat on the bare page
    between .fcampus, which is paper-2, and .fmotto, which is nearly
@@ -519,7 +476,6 @@ body.founder #progress{ display:none; }
   .fcvp::before{ display:none; }
 }
 
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .fcvp__grid{
   display:grid; grid-template-columns:1fr;
   gap:clamp(var(--space-6),4vw,var(--space-7));

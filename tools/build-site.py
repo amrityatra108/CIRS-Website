@@ -23,20 +23,14 @@ rather than reloading the page you are already reading.
     python3 tools/build-site.py
 """
 
-<<<<<<< HEAD
-=======
 import datetime
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 import os
 import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import alumni
-<<<<<<< HEAD
-=======
 import artattack
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 import artswall
 import blog
 import founder
@@ -45,25 +39,6 @@ import blogposts
 import crossroads
 import mathchallenge
 import creativewriting
-<<<<<<< HEAD
-
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=95"
-
-# The standing block under the Admissions hero's buttons.
-HERO_DATES = '''    <dl class="pagehero__dates">
-      <div>
-        <dt>Classes</dt>
-        <dd>V&ndash;IX and XI<small>CBSE and the IB Diploma</small></dd>
-      </div>
-      <div>
-        <dt>Portal closes</dt>
-        <dd>15 October 2026<small>Register before this date</small></dd>
-      </div>
-      <div>
-        <dt>Entrance examination</dt>
-        <dd>1 November 2026<small>India and Dubai; first week in other countries</small></dd>
-=======
 import captures
 import theatre
 import festivals
@@ -84,7 +59,6 @@ HERO_DATES = '''    <dl class="pagehero__dates">
       <div>
         <dt>Dates and assessment</dt>
         <dd>Confirm directly<small>Ask about the schedule, format and location</small></dd>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       </div>
     </dl>'''
 
@@ -119,11 +93,7 @@ NEWS_FLASH = [
 # themselves.
 MENU = [
     ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
-<<<<<<< HEAD
-    ("Student Life",         ["student-life", "curriculum", "our-results", "sports",
-=======
     ("Student Life",         ["the-cirs-experience", "curriculum", "our-results", "sports",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
                               "our-laurels", "math-challenge"]),
     ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
     ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
@@ -164,10 +134,6 @@ def newsflash_html():
 #          included, because every page is still being filled in
 PAGES = {
     "index": {
-<<<<<<< HEAD
-        "barehead": True,
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "nav": "Home",
         "title": "Chinmaya International Residential School — Siruvani, Coimbatore",
         "description": "A co-educational residential school on a hundred acres in the Siruvani "
@@ -177,25 +143,6 @@ PAGES = {
     },
     "news": {
         "nav": "News",
-<<<<<<< HEAD
-        "title": "News",
-        "description": "News and events from Chinmaya International Residential School — "
-                       "assemblies, weeks, competitions and the term's diary.",
-        # A hero rather than the flat band: a news page should open at the
-        # pace of the campus, so the opening is the campus in motion with the
-        # current headlines cycling under it.
-        "hero": ("News from campus", "The Campus, <em>As It Happens.</em>",
-                 "Results, assemblies, weeks and celebrations, reported by the departments and "
-                 "the houses — and the dates already in the school calendar."),
-        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
-        "hero_cta": [("Read the latest", "#latest", "primary"),
-                     ("What is coming up", "#diary", "ghost")],
-        "hero_extra": newsflash_html(),
-    },
-    "founder": {
-        "litehead": True,
-        "barehead": True,
-=======
         "title": "News | The CIRS Journal",
         "description": "The CIRS Journal: school news, results and stories from Chinmaya "
                        "International Residential School in Siruvani, Coimbatore.",
@@ -208,7 +155,6 @@ PAGES = {
     },
     "founder": {
         "litehead": True,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "nav": "Founder",
         "title": "Our Founder — Pujya Gurudev Swami Chinmayananda",
         "description": "Pujya Gurudev Swami Chinmayananda, 1916–1993: the teacher whose "
@@ -222,20 +168,12 @@ PAGES = {
         "cache_suffix": "-founder-16",
     },
     "why-cirs": {
-<<<<<<< HEAD
-        "barehead": True,
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "nav": "Why CIRS",
         "title": "Why CIRS",
         "description": "Who we are, what the school is recognised for, and the Junior and Senior "
                        "Schools that carry it.",
         "sheet": "why-cirs",
-<<<<<<< HEAD
-        "cache_suffix": "-why-cirs-9",
-=======
         "cache_suffix": "-why-cirs-10",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         # No banner. The page used to open on a purple plate carrying "Why
         # CIRS." and a line about a community of knowledge, with the first
         # photograph below it. The photograph is the better opening, so it
@@ -250,11 +188,6 @@ PAGES = {
         "description": "How Chinmaya International Residential School came to be — Pujya Gurudev's "
                        "vision, the rupee-by-rupee purchase of the land, and the inauguration on "
                        "6 June 1996.",
-<<<<<<< HEAD
-        "banner": ("Since 1996", "School <em>History.</em>",
-                   "A vision carried from the 1970s to a hundred acres in the Siruvani foothills, "
-                   "and the ninety-six students who began it."),
-=======
         # The same opening as News: the campus under the Ghats, in motion. A
         # history page earns the photograph more than the flat band did — the
         # buildings are the thing the story below ends in.
@@ -264,18 +197,12 @@ PAGES = {
         "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
         "hero_cta": [("Follow the timeline", "#timeline", "primary"),
                      ("Watch the film", "#film", "ghost")],
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     },
     "leadership": {
         "nav": "Leadership",
         "title": "Our Leadership",
         "description": "The Board of Directors of Chinmaya International Residential School, and "
                        "the staff and faculty.",
-<<<<<<< HEAD
-        "banner": ("Governance", "Our <em>Leadership.</em>",
-                   "CIRS is an undertaking of the Central Chinmaya Mission Trust, Mumbai, and is "
-                   "managed by its Board of Directors."),
-=======
         # The campus hero News and School History open on, so the Vision
         # pages that are documents rather than compositions share one opening.
         "hero": ("Governance", "Our <em>Leadership.</em>",
@@ -284,20 +211,12 @@ PAGES = {
         "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
         "hero_cta": [("Meet the Board", "#people", "primary"),
                      ("Read their messages", "#messages", "ghost")],
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     },
     "school-info": {
         "nav": "School Information",
         "title": "School Information",
         "description": "Affiliation status, governance, infrastructure and grievance-redressal details for "
                        "Chinmaya International Residential School, with the Important Documents portal.",
-<<<<<<< HEAD
-        "banner": ("Affiliation &amp; compliance", "School <em>Information.</em>",
-                   "The affiliation, governance, infrastructure and grievance-redressal details CBSE and "
-                   "the affiliating authorities require every school to publish &mdash; and the Important "
-                   "Documents portal that carries the certificates behind them."),
-        "jump": True,
-=======
         # No banner and no hero. The page opens on "The CIRS Record": four of
         # the school's own certificates laid out as sheets of paper, cut from
         # the PDFs by tools/make-record-previews.py, with the h1 beside them.
@@ -311,7 +230,6 @@ PAGES = {
         "litehead": True,
         "jump": False,
         "uc": False,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     },
     "important-documents": {
         "nav": "Important Documents",
@@ -330,16 +248,6 @@ PAGES = {
     "curriculum": {
         "nav": "Curriculum",
         "title": "Curriculum | CBSE & IB Diploma Programme",
-<<<<<<< HEAD
-        "description": "Explore the CBSE and IB Diploma curricula at Chinmaya International "
-                       "Residential School, with specialist teaching, holistic learning and a "
-                       "residential environment.",
-        "sheet": "curriculum",
-        "cache_suffix": "-curriculum-2",
-        "banner": ("Curriculum", "Two Curricula, <em>One Campus.</em>",
-                   "CBSE from Grade V, and the International Baccalaureate Diploma in the final "
-                   "two years."),
-=======
         "description": "Follow the academic journey at Chinmaya International Residential School: "
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
@@ -351,7 +259,6 @@ PAGES = {
                    "daily school life."),
         "banner_cta": [("Compare pathways", "#pathways", "primary"),
                        ("Admissions guide", "admissions.html#apply", "ghost")],
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "jump": True,
         "uc": False,
     },
@@ -366,23 +273,6 @@ PAGES = {
         "description": "The IB Diploma Programme at Chinmaya International Residential School "
                        "for Grades XI and XII — academic depth, independent learning, research "
                        "and a global perspective.",
-<<<<<<< HEAD
-        "banner": ("International Baccalaureate, Geneva",
-                   "IB Diploma Programme, <em>Grades XI and XII.</em>",
-                   "A rigorous and holistic two years that develop independent thinking, "
-                   "research, communication and a global perspective."),
-        "sheet": "ibdp",
-    },
-    "student-life": {
-        "logintab": ("Student Portal", "https://cirs.in/school/"),
-        "barehead": True,
-        "nav": "Student Life",
-        "title": "Student Life",
-        "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
-                       "hundred-acre campus it happens on.",
-        # No banner and no hero key: this page opens on a hero of its own,
-        # built in tools/pages/student-life.html — a drifting line of
-=======
         "banner": ("IB Diploma at CIRS",
                    "IB Diploma Programme, <em>Grades XI and XII.</em>",
                    "Study six subject groups alongside the Diploma core. Ask the school "
@@ -418,7 +308,6 @@ PAGES = {
                        "hundred-acre campus it happens on.",
         # No banner and no hero key: this page opens on a hero of its own,
         # built in tools/pages/the-cirs-experience.html — a drifting line of
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         # oversized lettering with photographs dealt up through it. It carries
         # the page's h1 and its own id="top". That hero is off-white, so the
         # header cannot float over it in white lettering: hence litehead.
@@ -427,15 +316,6 @@ PAGES = {
     },
     "sports": {
         "nav": "Our Sports",
-<<<<<<< HEAD
-        "title": "Sports",
-        "description": "Athletics, the playing fields and the sporting record at CIRS.",
-        "banner": ("Sports", "Sport, Every Day <em>at Four.</em>",
-                   "The four o'clock hour, the fields it happens on, and what the teams have won."),
-    },
-    "crossroads": {
-        "barehead": True,
-=======
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
         "sheet": "sports",
@@ -461,34 +341,22 @@ PAGES = {
         },
     },
     "crossroads": {
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "nav": "Crossroads",
         # The old site filed this under a "Creative Corner" this site does not
         # have; Student Life is where the arts and the clubs live here.
         "title": "Crossroads | CIRS Monthly Magazine",
         "description": "The archive of Crossroads, the monthly magazine of Chinmaya "
                        "International Residential School — a student-run initiative to foster "
-<<<<<<< HEAD
-                       "journalistic talent, edition by edition.",
-=======
                        "literary talent, edition by edition.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         # No flat band and no video hero: an archive opens on its own
         # masthead, built in tools/pages/crossroads.html.
         "banner": None,
     },
     "blog": {
         "nav": "CIRS Blog",
-<<<<<<< HEAD
-        "title": "CIRS Blog",
-        "description": "Stories, ideas and perspectives from the CIRS community — student "
-                       "writing managed by the Crossroads Editorial Board and the CIRS "
-                       "Social Media Team.",
-=======
         "title": "Ideas from CIRS | CIRS Blog",
         "description": "Student articles first published in The Crossroads, collected "
                        "as a journal of ideas from CIRS.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         # No banner and no hero from the shared builders. A publication opens on
         # its own masthead, which the page brings with it, and it brings its own
         # sheet to set type larger than anything else on this site.
@@ -497,20 +365,13 @@ PAGES = {
         # it is a news stand and they are reading pages, and they share no
         # markup. blognews.css is scoped to body.blognews for that reason.
         "sheet": "blognews",
-<<<<<<< HEAD
-=======
         "cache_suffix": "-blog-editorial-1",
         "jump": False,
         "uc": False,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         # Newsreader carries the Blog interface and prose; its grid remains distinct.
         "litehead": True,
     },
     "cultural-gallery": {
-<<<<<<< HEAD
-        "barehead": True,
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "nav": "CIRS Cultural Gallery",
         "title": "Arts, Music & Theatre",
         "description": "Music, theatre and the visual arts at Chinmaya International Residential "
@@ -532,11 +393,7 @@ PAGES = {
         "description": "Board results, university placements and the record behind them at "
                        "Chinmaya International Residential School.",
         "sheet": "results",
-<<<<<<< HEAD
-        "cache_suffix": "-results-12",
-=======
         "cache_suffix": "-results-13",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "uc": False,
         "banner": None,
     },
@@ -556,10 +413,6 @@ PAGES = {
                  [("sports.html", "Our Sports")]),
     },
     "math-challenge": {
-<<<<<<< HEAD
-        "barehead": True,
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "nav": "Math Challenge",
         "title": "Math Challenge",
         "description": "The Math Challenge at Chinmaya International Residential School — "
@@ -572,19 +425,6 @@ PAGES = {
         "sheet": "matharena",
     },
     "creative-writing": {
-<<<<<<< HEAD
-        "barehead": True,
-        "nav": "Creative Writing",
-        "title": "Creative Writing",
-        "description": "Essays, opinion and reflection by students of Chinmaya International "
-                       "Residential School, published in The Crossroads.",
-        # No banner from the shared builder. Like the Math Challenge, this page
-        # opens on a field it brings itself — a lit desk, a typewriter and an
-        # ink stroke being drawn — and carries its own h1 inside it. The sheet
-        # is assets/css/cwriting.css, scoped to body.cwriting.
-        "banner": None,
-        "sheet": "cwriting",
-=======
         "nav": "Creative Writing",
         "title": "Creative Writing | Words become worlds. | CIRS",
         "description": "A curated anthology of poetry by students of Chinmaya "
@@ -595,53 +435,10 @@ PAGES = {
         "cache_suffix": "-anthology-2",
         "jump": False,
         "uc": False,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     },
     "captures": {
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
-<<<<<<< HEAD
-        "description": "Photography from the CIRS community \u2014 the campus and the school year "
-                       "as its students see it.",
-        "banner": ("CIRS Captures", "The Campus, <em>Through Their Lenses.</em>",
-                   "Photography by the students, staff and alumni who are here to see it."),
-        "soon": ([("Student photography", "Work by the photography hobby group and anyone else"),
-                  ("The year, in frames", "The campus through its seasons"),
-                  ("How to submit", "What to send, and to whom")],
-                 "the first set of photographs and their photographers, to be supplied by the "
-                 "CIRS Social Media Team",
-                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
-    },
-    "art-attack": {
-        "nav": "CIRS Art Attack",
-        "title": "CIRS Art Attack",
-        "description": "Studio work and visual art from across Chinmaya International "
-                       "Residential School.",
-        "banner": ("CIRS Art Attack", "Made <em>by Hand.</em>",
-                   "Studio work and visual art from across the school."),
-        "soon": ([("Painting and drawing", "Work from the studio and the classroom"),
-                  ("Print and craft", "The processes, and what comes out of them"),
-                  ("Exhibitions", "What was shown, and when")],
-                 "the work to be shown here and the students who made it, to be supplied by "
-                 "the art department",
-                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
-    },
-    "festivals": {
-        "nav": "CIRS Festivals",
-        "title": "CIRS Festivals",
-        "description": "The festivals kept through the year at Chinmaya International "
-                       "Residential School.",
-        "banner": ("CIRS Festivals", "The Year, <em>Kept Together.</em>",
-                   "The festivals the school keeps, and what they look like on this campus."),
-        "soon": ([("Through the year", "Each festival as the school keeps it"),
-                  ("Photographs", "From the mornings and the evenings of each one"),
-                  ("Accounts", "Written by the students who took part")],
-                 "the list of festivals as the school keeps them, with dates and photographs, "
-                 "to be supplied by the school",
-                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
-    },
-    "theatre": {
-=======
         "cache_suffix": "-captures-journal-2",
         # Not "as its students see it", which this page said while it was a
         # placeholder: none of these files records who took it, so the page
@@ -725,21 +522,10 @@ PAGES = {
         # pages that open on a film.
         "sheet": "culture",
         "cache_suffix": "-theatre-acts-1",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
                        "Residential School.",
-<<<<<<< HEAD
-        "banner": ("CIRS Theatre", "Rehearsal, <em>and the Night Itself.</em>",
-                   "Productions, the work behind them, and the stage they are made for."),
-        "soon": ([("Productions", "What was staged, and who was in it"),
-                  ("Rehearsal", "The weeks nobody sees"),
-                  ("The stage", "The auditorium, and what it can carry")],
-                 "the productions, their casts and their photographs, to be supplied by the "
-                 "drama department",
-                 [("cultural-gallery.html", "CIRS Cultural Gallery")]),
-=======
         "banner": None,
         "opening": {
             "video": "theatre-opening",
@@ -756,36 +542,19 @@ PAGES = {
         # recordings, which says precisely what the shared under-construction
         # note says in general, so the note is left off.
         "uc": False,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     },
 
     "admissions": {
         "nav": "Admissions",
         "title": "Admissions",
-<<<<<<< HEAD
-        "description": "How to apply to Chinmaya International Residential School — registration "
-                       "for 2027–2028, the entrance examination, visiting, and fees.",
-=======
         "description": "Admissions information for Chinmaya International Residential School: "
                        "the application portal, published fee schedule and questions to confirm with the school.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         # A hero rather than the flat band: this is the page that has to
         # persuade, not merely inform.
         #
         # Admissions carries its own quiet, document-led layout beneath the
         # shared honeycomb hero. The sheet is scoped by body.admissions.
         "sheet": "admissions",
-<<<<<<< HEAD
-        "cache_suffix": "-admissions-25",
-        "hero_split": False,
-        "hero": ("Admissions", "Admissions <em>Open.</em>",
-                 "For Classes V to IX and XI, in CBSE and the IB Diploma Programme. The "
-                 "registration portal, the entrance examination, a visit to the school and the "
-                 "offer — the whole procedure, in order."),
-        "hero_media": ("admissions-honeycomb.jpg", "admissions-hero.webm",
-                       "admissions-hero.mp4", 1920, 960),
-        "hero_cta": [("Apply on the application portal",
-=======
         "cache_suffix": "-admissions-27",
         "hero_split": False,
         "hero": ("Admissions", "Admissions <em>Guide.</em>",
@@ -794,17 +563,13 @@ PAGES = {
         "hero_media": ("admissions-honeycomb.jpg", "admissions-hero.webm",
                        "admissions-hero.mp4", 1920, 960),
         "hero_cta": [("Open the application portal",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
                       "https://easycollege.in/cirs/school/application/index.aspx", "primary"),
                      ("Understand the process", "#apply", "ghost")],
         "hero_extra": HERO_DATES,
         "hero_placeholder": "Header animation &mdash; admissions<br>photograph or looping video<br>to be supplied",
         "jump": True,
         "popup": False,
-<<<<<<< HEAD
-=======
         "uc": False,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     },
     "parent-portal": {
         "nav": "Parent Portal",
@@ -818,12 +583,9 @@ PAGES = {
         "banner": ("Parents", "Parent <em>Portal.</em>",
                    "A secure area for parents. It is not open yet &mdash; so this page carries the "
                    "fee payment and the parent login the school runs today, and the people to ask."),
-<<<<<<< HEAD
-=======
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
         "cache_suffix": "-portal-photo-1",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
@@ -831,17 +593,6 @@ PAGES = {
     "alumni": {
         "nav": "Alumni",
         "title": "Where CIRS Takes You | Alumni",
-<<<<<<< HEAD
-        "description": "Where CIRS students go after school — the universities they read at "
-                       "in India and abroad, the alumni the school has named, and the "
-                       "pathways out of Siruvani.",
-        # No banner from the shared builder. This page opens on a journey it
-        # brings itself — a full-height aerial of the campus with the route
-        # leaving it — and that opening carries the page's h1 and its id="top".
-        # Its sheet is assets/css/alumni.css, scoped to body.alumni.
-        "banner": None,
-        "sheet": "alumni",
-=======
         "description": "Reconnect with CIRS, browse published alumni cohort records, and explore university destinations and alumni stories.",
         # The Alumni page supplies its own opening image and carries the h1.
         # Page styles and search behavior live in alumni.css and alumni-journey.js.
@@ -849,7 +600,6 @@ PAGES = {
         "sheet": "alumni",
         "cache_suffix": "-alumni-7",
         "uc": False,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     },
 }
 
@@ -861,11 +611,7 @@ SECTION_PAGE = {
     "junior": "why-cirs", "senior": "why-cirs",
     "quote": "leadership", "people": "leadership",
     "academics": "curriculum",
-<<<<<<< HEAD
-    "life": "student-life", "day": "student-life", "campus": "student-life",
-=======
     "life": "the-cirs-experience", "day": "the-cirs-experience", "campus": "the-cirs-experience",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     "athletics": "sports", "fields": "sports", "achievements": "sports",
     "arts": "cultural-gallery",
     "pathways": "alumni",
@@ -889,13 +635,10 @@ def rewrite_links(html, slug):
     """Turn the old single-page #anchors into links that work across pages."""
     def swap(m):
         anchor = m.group(1)
-<<<<<<< HEAD
-=======
         # Curriculum now has its own #pathways; the legacy alias points to
         # Alumni, so keep this page's banner action on its own section.
         if slug == "curriculum" and anchor == "pathways":
             return m.group(0)
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         if anchor not in SECTION_PAGE:
             return m.group(0)          # href="#" placeholders, and #main
         target = SECTION_PAGE[anchor]
@@ -945,8 +688,6 @@ def to_depth(html, slug):
         return f'{attr}="{up}{ref}"'
 
     html = re.sub(r'\b(href|src|poster)="([^"]*)"', climb, html)
-<<<<<<< HEAD
-=======
     def climb_srcset(m):
         candidates = []
         for candidate in m.group(2).split(","):
@@ -959,37 +700,12 @@ def to_depth(html, slug):
             candidates.append(" ".join(fields))
         return f'{m.group(1)}="{", ".join(candidates)}"'
     html = re.sub(r'\b(srcset)="([^"]*)"', climb_srcset, html)
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     # The og:image and twitter:image carry their path in content=, not in an
     # href, and a social preview fetching curriculum/assets/img/og.jpg gets a
     # 404 and shows no card at all. Only a relative assets/ path is touched.
     return re.sub(r'\b(content)="(assets/[^"]*)"', climb, html)
 
 
-<<<<<<< HEAD
-def nav_html(slug):
-    """The drawer's grid: one column per primary category, every child clickable.
-
-    The categories are headings rather than links — there is no page behind
-    "Art, Culture & Music", only the five pages under it — so they are marked
-    up as headings and the list beneath each is labelled by it. That is what
-    lets a screen reader announce "Art, Culture & Music, list, five items"
-    instead of reading twenty-two links with no structure.
-    """
-    out = ['<nav class="drawer__grid" aria-label="All pages">']
-    for group, slugs in MENU:
-        gid = "dnav-" + re.sub(r"[^a-z]+", "-", group.lower()).strip("-")
-        out.append("    <div>")
-        out.append(f'      <p class="sc" id="{gid}">{group}</p>')
-        out.append(f'      <ul aria-labelledby="{gid}">')
-        for sl in slugs:
-            page = PAGES[sl]
-            here = ' aria-current="page"' if sl == slug else ""
-            out.append(f'        <li><a href="{sl}.html"{here}>{page["nav"]}</a></li>')
-        out.append("      </ul>")
-        out.append("    </div>")
-    out.append("  </nav>")
-=======
 def menu_group_index(slug):
     return next((i for i, (_, slugs) in enumerate(MENU) if slug in slugs), 0)
 
@@ -1023,7 +739,6 @@ def nav_html(slug):
             out.append(f'        <li><a href="{sl}.html"{here}>{esc(page["nav"])}</a></li>')
         out += ['      </ul>', '    </section>', '  </div>']
     out.append('</nav>')
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     return "\n".join(out)
 
 
@@ -1040,13 +755,9 @@ def soon_html(page):
     onward = ""
     if links:
         buttons = "\n".join(
-<<<<<<< HEAD
-            f'      <a class="btn btn--ghost" href="{href}">{label}</a>' for href, label in links)
-=======
             # btn--ghost is white, for photographs and dark grounds; this
             # section is paper, where it measured 1.1:1. The outline is ink.
             f'      <a class="btn btn--outline" href="{href}">{label}</a>' for href, label in links)
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         onward = ('\n\n    <div class="soon__onward rv">\n' + buttons + "\n    </div>")
     return (
         '<section class="section" id="what">\n'
@@ -1063,8 +774,6 @@ def soon_html(page):
         '  </div>\n'
         '</section>')
 
-<<<<<<< HEAD
-=======
 def film_html(slug, page):
     """The opening of a page that starts on a film the reader scrubs.
 
@@ -1136,7 +845,6 @@ def film_html(slug, page):
 </section>{seam}'''
 
 
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 def esc(text, attr=False):
     """The magazine's own punctuation, made safe to put in a page.
 
@@ -1149,22 +857,6 @@ def esc(text, attr=False):
 
 
 def article_html(page):
-<<<<<<< HEAD
-    """A published Crossroads article, set as a page of its own.
-
-    The words are the magazine's and they are all here — see tools/blogposts.py.
-    What this adds is only what a page needs around them: where the article
-    came from, who wrote it, and the way back to the blog and to the issue it
-    was printed in.
-    """
-    post = page["post"]
-    issue = post["issue"]
-    pdf = f"assets/documents/crossroads/crossroads-issue-{issue:02d}.pdf"
-    when = f" &middot; {post['date']}" if post["date"] else ""
-    by = (f'<p class="art__by">{esc(post["author"])}</p>' if post["author"]
-          else '<p class="art__by"><em>[Byline &mdash; to be supplied by the '
-               'Crossroads Editorial Board.]</em></p>')
-=======
     """A reading page for a complete student article from The Crossroads."""
     post = page["post"]
     issue = post["issue"]
@@ -1173,7 +865,6 @@ def article_html(page):
     by = esc(blog.byline(post))
     subtitle = (f'      <p class="art__subtitle">{esc(post["subtitle"])}</p>\n'
                 if post.get("subtitle") else "")
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     image = ""
     if post.get("image"):
         dimensions = (f' width="{post["image_width"]}" height="{post["image_height"]}"'
@@ -1182,35 +873,6 @@ def article_html(page):
       <img src="assets/img/blog/{esc(post["image"], attr=True)}"
            alt="{esc(post.get("image_alt", ""), attr=True)}"
           {dimensions} decoding="async">
-<<<<<<< HEAD
-    </figure>
-
-'''
-    body = "\n".join(f"      <p>{esc(para)}</p>" for para in post["paragraphs"])
-    return f'''<article class="art" id="top">
-  <div class="artwrap">
-    <header class="art__head">
-      <p class="art__back"><a href="blog.html"><span aria-hidden="true">&larr;</span> Back to the Blog</a></p>
-      <p class="art__flag"><a href="blog.html">CIRS Blog</a> &rarr;
-        <span>{esc(post["section"])}</span></p>
-      <h1 class="art__title serif">{esc(post["title"])}</h1>
-      {by}
-      <p class="art__where">The Crossroads, Issue&nbsp;{issue}{when}</p>
-    </header>
-
-{image}    <div class="art__body">
-{body}
-    </div>
-
-    <footer class="art__foot">
-      <p>Printed in <b>The Crossroads</b>, Issue&nbsp;{issue}{when} &mdash; the monthly
-        magazine of Chinmaya International Residential School.</p>
-      <p class="art__onward">
-        <a class="btn btn--outline" href="{pdf}">Read the whole issue (PDF)</a>
-        <a class="btn btn--ghost-ink" href="blog.html">Back to the Blog</a>
-      </p>
-    </footer>
-=======
       <figcaption>{esc(post.get("image_caption", "Image supplied for the web edition."))}</figcaption>
     </figure>
 
@@ -1250,29 +912,21 @@ def article_html(page):
         <a href="blog.html">Back to all stories</a></div>
     </footer>
     {blog.related_html(post)}
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   </div>
 </article>'''
 
 
 def banner_html(page):
     eyebrow, heading, lead = page["banner"]
-<<<<<<< HEAD
-=======
     cta = "\n".join(f'      <a class="btn btn--{variant} btn--lg" href="{href}">{label}</a>'
                     for label, href, variant in page.get("banner_cta", []))
     cta = f'    <p class="pagehead__cta">\n{cta}\n    </p>\n' if cta else ""
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     return f'''<section class="pagehead on-purple" id="top" data-ground="#1E1626">
   <div class="wrap pagehead__inner">
     <p class="marker"><span class="sc">{eyebrow}</span></p>
     <h1 class="serif" data-split>{heading}</h1>
     <p class="lead">{lead}</p>
-<<<<<<< HEAD
-  </div>
-=======
 {cta}  </div>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </section>'''
 
 
@@ -1325,14 +979,6 @@ def hero_html(page):
     eyebrow, heading, lead = page["hero"]
     poster, webm, mp4, vw, vh = page["hero_media"]
     cta = "\n".join(f'      <a class="btn btn--{variant} btn--lg" href="{href}">{label}</a>'
-<<<<<<< HEAD
-                    for label, href, variant in page["hero_cta"])
-    extra = page.get("hero_extra", "")
-    split_attr = ' data-split' if page.get("hero_split", True) else ''
-    return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
-  <div class="pagehero__media">
-    <video class="pagehero__video" autoplay muted loop playsinline
-=======
                     for label, href, variant in page.get("hero_cta", []))
     cta = f'    <p class="pagehero__cta">\n{cta}\n    </p>\n' if cta else ""
     extra = page.get("hero_extra", "")
@@ -1341,7 +987,6 @@ def hero_html(page):
     return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
   <div class="pagehero__media" style="background-image:url('assets/img/{poster}?{CACHE_BUST}')">
     <video class="pagehero__video"{video_load} muted loop playsinline
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
            poster="assets/img/{poster}?{CACHE_BUST}" aria-hidden="true"
            width="{vw}" height="{vh}" fetchpriority="high">
       <source src="assets/video/{webm}?{CACHE_BUST}" type="video/webm">
@@ -1353,44 +998,11 @@ def hero_html(page):
     <p class="marker"><span class="sc">{eyebrow}</span></p>
     <h1 class="serif"{split_attr}>{heading}</h1>
     <p class="lead">{lead}</p>
-<<<<<<< HEAD
-    <p class="pagehero__cta">
-{cta}
-    </p>
-{extra}
-=======
 {cta}{extra}
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   </div>
 </section>'''
 
 
-<<<<<<< HEAD
-def jump_html(body):
-    """Build the right-hand index from the page's own sections.
-
-    Labels come from each section's small-caps marker, so the index cannot
-    drift out of step with the headings — there is nothing to keep in sync.
-    """
-    items = []
-    for m in re.finditer(r'<section[^>]*\bid="([^"]+)"[^>]*>(.*?)</section>', body, re.S):
-        sid, inner = m.group(1), m.group(2)
-        label = re.search(r'<span class="sc">(.*?)</span>', inner, re.S)
-        if label:
-            items.append((sid, re.sub(r"\s+", " ", label.group(1)).strip()))
-    if not items:
-        return ""
-    links = "\n".join(f'      <a href="#{i}">{t}</a>' for i, t in items)
-    return f'''<nav class="jump" aria-label="On this page">
-  <div class="jump__panel" id="jumpPanel">
-      <p>On this page</p>
-{links}
-  </div>
-  <button type="button" class="jump__toggle" aria-label="On this page" aria-expanded="false" aria-controls="jumpPanel">
-    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <span>On this page</span>
-  </button>
-=======
 JUMP_MARK = "<!-- on-this-page -->"
 
 
@@ -1434,7 +1046,6 @@ def jump_html(body):
 {links}
     </div>
   </details>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </nav>'''
 
 
@@ -1446,14 +1057,8 @@ POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
     </button>
     <p class="pop__label" id="popTitle">Contact Admissions Office</p>
     <h2 class="serif">We are here <em>to help.</em></h2>
-<<<<<<< HEAD
-    <p class="pop__note" id="popNote">Registrations are open for the academic year 2027&ndash;2028.
-      Write or message us with any question about registration, the entrance examination or a
-      visit to the school.</p>
-=======
     <p class="pop__note" id="popNote">Ask the Admissions Office to confirm the current
       application window, assessment arrangements or availability of a school visit.</p>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     <div class="pop__row">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
@@ -1646,31 +1251,6 @@ def crosswall_html():
             + "\n".join(cols) + '\n    </div>')
 
 
-<<<<<<< HEAD
-def doclist_html():
-    """The compact, category-grouped list for the School Information page.
-
-    Titles only — the click-through to view or download lives on the portal
-    page itself, so this section stays scannable rather than repeating 22
-    buttons. Generated straight from tools/documents.py, so it can never list
-    a document the portal does not have, or omit one the portal does.
-    """
-    groups = []
-    for category, items in docs.by_category():
-        rows = "\n".join(
-            (f'        <li>{d["title"]} '
-             f'<a class="doclist__dl" href="{docs.asset_path(d)}" download>Download</a></li>')
-            if docs.is_uploaded(d) else
-            f'        <li>{d["title"]} <span class="doclist__await">Awaiting upload</span></li>'
-            for d in items)
-        groups.append(f'''      <div class="docgroup rv">
-        <h3 class="serif h3">{category}</h3>
-        <ul class="doclist">
-{rows}
-        </ul>
-      </div>''')
-    return '<div class="docgrid">\n' + "\n".join(groups) + '\n    </div>'
-=======
 ON_REQUEST = ('Available from the school office on request &middot; '
               '<a href="mailto:info@cirschool.org">info@cirschool.org</a>')
 
@@ -1862,49 +1442,32 @@ def records_notice_html():
             <dd>{links}</dd>
           </div>''')
     return '<dl class="rec-notice__list">\n' + "\n".join(rows) + '\n        </dl>'
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 
 def docportal_html():
     """The Important Documents portal itself: every document, grouped, each
-<<<<<<< HEAD
-    with a one-click view/download link — or, for one not yet uploaded, a
-    plain notice that it is awaiting the school rather than a dead link."""
-=======
     with its date and a one-click view/download link — or, for one not yet
     uploaded, a plain notice that it is awaiting the school rather than a dead
     link, and for one the school keeps off the site, where to ask for it."""
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     groups = []
     for category, items in docs.by_category():
         steps = []
         for d in items:
-<<<<<<< HEAD
-            if docs.is_uploaded(d):
-=======
             if docs.is_on_request(d):
                 aside = f'<b>On request</b><br>{ON_REQUEST}'
             elif docs.is_uploaded(d):
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
                 aside = (f'<a class="btn btn--outline" href="{docs.asset_path(d)}" target="_blank" '
                          f'rel="noopener">View</a> '
                          f'<a class="btn btn--primary" href="{docs.asset_path(d)}" download>Download</a>'
                          f'<br><small>View opens a tab; download saves the PDF</small>')
             else:
                 aside = '<b>Awaiting upload</b><br>To be added by the school'
-<<<<<<< HEAD
-=======
             meta = f'<br>{doc_meta(d)}'
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             steps.append(f'''        <div class="step" id="doc-{d["id"]}">
           <p class="step__n"></p>
           <div>
             <h3 class="serif h3">{d["title"]}</h3>
-<<<<<<< HEAD
-            <p>{d["note"]}</p>
-=======
             <p>{d["note"]}{meta}</p>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
           </div>
           <p class="step__aside">{aside}</p>
         </div>''')
@@ -1994,43 +1557,18 @@ def build(slug, page):
     if slug == "crossroads":
         head = head.replace(
             "</head>",
-<<<<<<< HEAD
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-3">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}">\n'
-=======
             f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-5">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-4">\n'
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
             '<noscript><style>.crossroads-intro-curtain{display:none}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}'
             '.crossroads-intro[data-crossroads-intro-pending]{background:var(--cr-purple-deep)}'
-<<<<<<< HEAD
-            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible}'
-=======
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible!important}'
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             '</style></noscript>\n</head>')
     if slug == "founder":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
-<<<<<<< HEAD
-
-    # A page that opens on a pale ground cannot have the header floating over
-    # it in white lettering. "litehead" starts it in the solid treatment
-    # .is-stuck already defines and keeps it there — set here in the markup so
-    # it holds without JavaScript, and left alone by cirs.js, which reads it.
-    lite = bool(page.get("litehead"))
-    # A page that opens on a full-window composition — its own, or one of the
-    # shared heroes — wears the header bare: the glass bar around the three
-    # controls comes off so nothing is laid across the picture. The controls
-    # keep their own pills, so they stay legible over photography. Every other
-    # page keeps the bar, which is what holds them together over paper.
-    bare = bool(page.get("barehead") or page.get("hero"))
-    classes = [c for c in ["wall" if wall else page.get("sheet"),
-=======
     if slug == "sports":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
@@ -2123,14 +1661,11 @@ def build(slug, page):
                            "film" if page.get("opening") else None,
                            slug if page.get("opening") else None,
                            "parent-portal" if slug == "parent-portal" else None,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
     chrome = read("tools/partials/chrome.html")
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
-<<<<<<< HEAD
-=======
     if slug == "blog" or page.get("post"):
         # Journal pages open directly on readable type. The shared full-screen
         # curtain would hide their masthead and force an unrelated wait.
@@ -2149,33 +1684,19 @@ def build(slug, page):
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
         chrome = chrome[:intro_start] + chrome[intro_end:]
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
     if slug == "crossroads":
         parts[-1] = parts[-1].replace('class="curtain"', 'class="curtain crossroads-intro-curtain"')
-<<<<<<< HEAD
-    drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
-=======
     drawer = (read("tools/partials/drawer.html")
               .replace("{{NAV}}", nav_html(slug))
               .replace("{{ACTIVE_GROUP}}", str(menu_group_index(slug)))
               .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html"))
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     # The home page needs no Home tab — the wordmark already leads here, and a
     # Home link on Home is a link to nowhere.
     header = (read("tools/partials/header.html")
               .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html")
               .replace("{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
-<<<<<<< HEAD
-              .replace("{{HEADER_STATE}}",
-                       (" is-stuck" if lite else "") + (" is-bare" if bare else ""))
-              .replace("{{HEADER_TABS}}",
-                       EXTRA_TAB.format(href=page["logintab"][1], label=page["logintab"][0])
-                       if page.get("logintab") else ""))
-    parts += [header.rstrip("\n"), drawer.rstrip("\n")]
-    parts.append('<main id="main">')
-=======
               .replace("{{HEADER_TABS}}",
                        EXTRA_TAB.format(href=page["logintab"][1], label=page["logintab"][0])
                        if page.get("logintab") else ""))
@@ -2191,16 +1712,12 @@ def build(slug, page):
     # what follows it here is still built by soon_html.
     if page.get("opening"):
         parts.append(film_html(slug, page))
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if page.get("hero"):
         parts.append(hero_html(page))
     elif page.get("banner"):
         parts.append(banner_html(page))
-<<<<<<< HEAD
-=======
     # The "On this page" index goes here, before the content it indexes.
     jump_at = len(parts)
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if page.get("post"):
         content = article_html(page)
     elif page.get("soon"):
@@ -2208,11 +1725,6 @@ def build(slug, page):
     else:
         content = read(f"tools/pages/{slug}.html").rstrip("\n")
     content = expand_figs(content)
-<<<<<<< HEAD
-    content = (content.replace("{{ARTSWALL}}", artswall_html())
-                       .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
-                       .replace("{{DOCLIST}}", doclist_html())
-=======
     if slug == "art-attack":
         content = artattack.expand(content)
     if slug == "captures":
@@ -2223,7 +1735,6 @@ def build(slug, page):
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
                        .replace("{{REGISTER}}", register_html() if slug == "school-info" else "")
                        .replace("{{RECORDS_NOTICE}}", records_notice_html() if slug == "school-info" else "")
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
                        .replace("{{DOCPORTAL}}", docportal_html())
                        .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
@@ -2235,11 +1746,6 @@ def build(slug, page):
                        .replace("{{MATH_ZONES}}", mathchallenge.zones_html())
                        .replace("{{MATH_FILTERS}}", mathchallenge.filters_html())
                        .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html())
-<<<<<<< HEAD
-                       .replace("{{CW_ROWS}}", creativewriting.rows_html())
-                       .replace("{{CW_JOURNEY}}", creativewriting.journey_html())
-                       .replace("{{CW_COUNT}}", str(creativewriting.count()))
-=======
                        .replace("{{CAPTURES_GALLERY}}", captures.gallery_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END}}", captures.end_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
@@ -2250,7 +1756,6 @@ def build(slug, page):
                        .replace("{{CW_HERO_EXCERPT}}", creativewriting.hero_excerpt_html())
                        .replace("{{CW_COUNT}}", str(creativewriting.count()))
                        .replace("{{CW_WRITERS}}", str(creativewriting.writer_count()))
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
                        .replace("{{BLOG_FRONT}}", blog.front_html())
                        .replace("{{BLOG_RAIL}}", blog.rail_html())
                        .replace("{{BLOG_COUNT}}", str(blog.count()))
@@ -2262,11 +1767,6 @@ def build(slug, page):
                        .replace("{{ALUMNI_PATHWAYS}}", alumni.pathways_html())
                        .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
                        .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
-<<<<<<< HEAD
-    parts.append(content)
-    if page.get("jump"):
-        parts.append(jump_html(content))
-=======
     if slug == "theatre":
         content = (content.replace("{{THEATRE_PROGRAMME}}", theatre.programme_html())
                           .replace("{{THEATRE_ANAND_UTSAV}}", theatre.anand_utsav_html())
@@ -2282,21 +1782,12 @@ def build(slug, page):
     jump = jump_html(content) if page.get("jump", True) and not wall else ""
     if jump:
         parts.insert(jump_at, JUMP_MARK)
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if page.get("popup"):
         parts.append(POPUP)
     if page.get("uc", True) and not wall:
         parts.append(UC)
     parts.append("</main>")
     if not wall:
-<<<<<<< HEAD
-        parts.append(read("tools/partials/footer.html").rstrip("\n"))
-    parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
-    if slug == "crossroads":
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}" defer></script>')
-        parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
-        parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}" defer></script>')
-=======
         footer = read("tools/partials/footer.html").rstrip("\n")
         if slug == "captures":
             # Captures already ends with its own full-width photograph.
@@ -2313,39 +1804,27 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-5" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}-hover-4" defer></script>')
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
     if slug == "founder":
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "why-cirs":
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
-<<<<<<< HEAD
-    if slug == "student-life":
-=======
     if slug == "the-cirs-experience":
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "our-results":
         parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
         parts.append(f'<script src="assets/js/admissions.js?{CACHE_BUST}" defer></script>')
-<<<<<<< HEAD
-    if slug == "alumni":
-        parts.append(f'<script src="assets/js/alumni-journey.js?{CACHE_BUST}" defer></script>')
-=======
     if slug == "school-info":
         parts.append(f'<script src="assets/js/records.js?{CACHE_BUST}" defer></script>')
     if slug == "alumni":
         parts.append(f'<script src="assets/js/alumni-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "news":
         parts.append(f'<script src="assets/js/news-journal.js?{CACHE_BUST}" defer></script>')
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if slug == "math-challenge":
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
-<<<<<<< HEAD
-=======
     if slug == "blog":
         parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-editorial-1" defer></script>')
     if slug == "festivals":
@@ -2363,18 +1842,13 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
     if slug == "parent-portal":
         parts.append(f'<script src="assets/js/parent-portal-motion.js?{CACHE_BUST}" defer></script>')
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
 
-<<<<<<< HEAD
-    html = to_depth(rewrite_links("\n".join(parts), slug), slug)
-=======
     # The index goes in after rewrite_links: its anchors name sections on this
     # page, and must not be sent to the page an old single-page anchor meant.
     html = to_depth(rewrite_links("\n".join(parts), slug).replace(JUMP_MARK, jump), slug)
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     # A page with newly page-scoped assets can invalidate its own shared and
     # local files without rewriting every generated page in the repository.
     cache_suffix = page.get("cache_suffix", "")
@@ -2393,14 +1867,9 @@ for _post in blogposts.POSTS:
         "title": esc(_post["title"], attr=True) + " | CIRS Blog",
         "description": esc(_post["excerpt"][:180], attr=True),
         "sheet": "blog",
-<<<<<<< HEAD
-        "cache_suffix": "-blog-2",
-        "uc": False,
-=======
         "cache_suffix": "-blog-editorial-1",
         "uc": False,
         "jump": False,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         # An article opens on paper, so the header cannot float over it in
         # white lettering. The Blog's own masthead is dark and does not.
         "litehead": True,
@@ -2417,11 +1886,8 @@ if __name__ == "__main__":
         html = build(slug, page)
         open(out, "w", encoding="utf-8").write(html)
         print(f"  write  {slug}.html ({len(html):,} chars)")
-<<<<<<< HEAD
-=======
     # A certificate marked current whose date has gone by. The pages already
     # show it as expired; this names it so tools/documents.py is updated.
     for title in docs.check_dates(datetime.date.today()):
         print(f"  NOTE   {title}: validity date has passed, so it is published as "
               f"expired — upload the renewal or set its status in tools/documents.py")
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168

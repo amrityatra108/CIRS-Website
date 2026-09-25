@@ -221,11 +221,7 @@
     }
 
     /* ---- the cursor label --------------------------------- */
-<<<<<<< HEAD
-    if (fine.matches && !reduced) cursorLabel();
-=======
     if (canMove && fine.matches && !reduced) cursorLabel();
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     return { field: field, points: points, lines: lines };
   }
@@ -248,12 +244,7 @@
     var zones = [
       [".ajc__pt", "Open"],
       [".ajc__panelClose", "Close"],
-<<<<<<< HEAD
-      [".ajw__evName[href]", "Read"],
-      [".ajw-track.is-live", "Scroll"]
-=======
       [".ajw__evName[href]", "Read"]
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     ];
 
     var x = null, y = null;
@@ -278,201 +269,6 @@
     }, { passive: true });
 
     document.addEventListener("pointerleave", function () { tag.classList.remove("is-on"); });
-<<<<<<< HEAD
-  }
-
-  /* ==========================================================
-     The galaxy
-     ----------------------------------------------------------
-     A spiral seen at an angle, with CIRS at the core and the
-     nineteen destinations out along its two arms.
-
-     The arms here are the SAME arms the destinations sit on:
-     tools/alumni.py writes the spiral's numbers onto the field
-     as data-spiral and this reads them back, so the scattered
-     stars and the named ones cannot drift apart. The spiral is
-     written down once, in Python.
-
-     Fixed seed, so it is the same galaxy on every reload — one
-     that reshuffles itself is a screensaver, not a place. None
-     of what is drawn here carries information: the nineteen
-     destinations are separate, larger, labelled and focusable.
-     ========================================================== */
-  function buildSky() {
-    var field = $("[data-constellation-field]");
-    if (!field) return null;
-    var NS = "http://www.w3.org/2000/svg";
-
-    var sp = (field.getAttribute("data-spiral") || "").split(",").map(Number);
-    if (sp.length < 8 || sp.some(isNaN)) return null;
-    var CX = sp[0], CY = sp[1], R0 = sp[2], B = sp[3], ROT = sp[4],
-        YK = sp[5], TMIN = sp[6], TMAX = sp[7];
-    // The stars run a little further in and out than the named ones do, so
-    // the arms do not simply stop where the first and last destination sits.
-    var SMIN = Math.max(0.9, TMIN - 1.5), SMAX = TMAX + 0.55;
-
-    // mulberry32: small, fast, deterministic from one integer.
-    var seed = 0x1996;   // the year the school opened on this campus
-    function rnd() {
-      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
-      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
-      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-      return ((t ^ t >>> 14) >>> 0) / 4294967296;
-    }
-    function gauss() { return (rnd() + rnd() + rnd() + rnd() - 2) * 0.7; }
-    function el(name, attrs) {
-      var n = document.createElementNS(NS, name);
-      for (var k in attrs) n.setAttribute(k, attrs[k]);
-      return n;
-    }
-    // A point on an arm, in the SVG's own units. The field is 3:2 and the
-    // viewBox is 150x100, so the scale is uniform and a circle stays round.
-    function arm(a, theta, rScale) {
-      var r = R0 * Math.exp(B * theta) * (rScale === undefined ? 1 : rScale);
-      var ang = theta + a * Math.PI + ROT;
-      return [(CX + r * Math.cos(ang)) * 1.5, CY + r * Math.sin(ang) * YK];
-    }
-
-    var svg = el("svg", {
-      "class": "ajc__stars", viewBox: "0 0 150 100",
-      preserveAspectRatio: "none", "aria-hidden": "true", focusable: "false"
-    });
-
-    var defs = el("defs", {});
-    var grad = el("radialGradient", { id: "ajCoreGlow" });
-    [["0%", "#FFFDF4", ".92"], ["20%", "#FFF0D2", ".42"],
-     ["52%", "#D9BC92", ".11"], ["100%", "#7A6448", "0"]].forEach(function (st) {
-      grad.appendChild(el("stop", {
-        offset: st[0], "stop-color": st[1], "stop-opacity": st[2] }));
-    });
-    defs.appendChild(grad);
-
-    var halo = el("radialGradient", { id: "ajDiscGlow" });
-    [["0%", "#8DA6DC", ".10"], ["44%", "#3E4C7C", ".035"], ["100%", "#181C33", "0"]]
-      .forEach(function (st) {
-        halo.appendChild(el("stop", {
-          offset: st[0], "stop-color": st[1], "stop-opacity": st[2] }));
-      });
-    defs.appendChild(halo);
-
-    [["ajArmBlur", 2.6], ["ajBloom", 0.55]].forEach(function (f) {
-      var filter = el("filter", {
-        id: f[0], x: "-70%", y: "-70%", width: "240%", height: "240%",
-        "color-interpolation-filters": "sRGB"
-      });
-      filter.appendChild(el("feGaussianBlur", { stdDeviation: f[1] }));
-      defs.appendChild(filter);
-    });
-    svg.appendChild(defs);
-
-    var RMAX = R0 * Math.exp(B * SMAX);
-
-    // ---- the disc it all sits in ----
-    svg.appendChild(el("ellipse", {
-      cx: CX * 1.5, cy: CY,
-      rx: (RMAX * 1.5 * 1.12).toFixed(2), ry: (RMAX * YK * 1.12).toFixed(2),
-      fill: "url(#ajDiscGlow)"
-    }));
-
-    // ---- the arms, as light before they are stars ----
-    var gArms = el("g", { filter: "url(#ajArmBlur)" });
-    [0, 1].forEach(function (a) {
-      var d = "", n = 90;
-      for (var i = 0; i <= n; i++) {
-        var th = SMIN + (SMAX - SMIN) * i / n;
-        var pt = arm(a, th);
-        d += (i ? " L" : "M") + pt[0].toFixed(2) + " " + pt[1].toFixed(2);
-      }
-      gArms.appendChild(el("path", {
-        d: d, fill: "none", stroke: a ? "#8FA8DC" : "#A8B8E0",
-        "stroke-width": "2.6", "stroke-linecap": "round", opacity: "0.17"
-      }));
-    });
-    svg.appendChild(gArms);
-
-    // ---- the stars ----
-    var hues = ["#CFE2FF", "#DCE9FF", "#FFFFFF", "#FFFFFF", "#FFF4E2",
-                "#FFE0B0", "#FFC98E", "#FFB577"];
-    var gBloom = el("g", { filter: "url(#ajBloom)" });
-    var gCore = el("g", {});
-    var bright = [];
-
-    function star(x, y, m) {
-      var hue = hues[Math.floor(rnd() * hues.length)];
-      var r = 0.10 + m * m * 0.58;
-      var o = 0.20 + m * 0.78;
-      gCore.appendChild(el("circle", {
-        "class": "ajc__star", cx: x.toFixed(2), cy: y.toFixed(2),
-        r: r.toFixed(3), fill: hue, opacity: o.toFixed(2)
-      }));
-      if (m > 0.32) {
-        gBloom.appendChild(el("circle", {
-          cx: x.toFixed(2), cy: y.toFixed(2), r: (r * 2.9).toFixed(3),
-          fill: hue, opacity: (o * 0.38).toFixed(2)
-        }));
-      }
-      if (m > 0.80) bright.push({ x: x, y: y, m: m, hue: hue });
-    }
-
-    // Along the arms. The jitter is in theta and in radius, so the scatter
-    // follows the curve rather than sitting in a straight cloud beside it.
-    [0, 1].forEach(function (a) {
-      for (var i = 0; i < 300; i++) {
-        var f = Math.pow(rnd(), 0.62);                 // crowd the inside
-        var th = SMIN + (SMAX - SMIN) * f;
-        var p = arm(a, th + gauss() * 0.13, 1 + gauss() * 0.085);
-        if (p[0] < -4 || p[0] > 154 || p[1] < -4 || p[1] > 104) continue;
-        star(p[0], p[1], Math.pow(rnd(), 1.5) * (0.55 + 0.45 * (1 - f)));
-      }
-    });
-
-    // The core: a dense, mostly warm knot.
-    for (var c = 0; c < 190; c++) {
-      var rr = Math.abs(gauss()) * 2.4;
-      var aa = rnd() * Math.PI * 2;
-      star((CX + Math.cos(aa) * rr) * 1.5, CY + Math.sin(aa) * rr * YK,
-           Math.pow(rnd(), 1.7) * 0.72);
-    }
-
-    // And the sky behind all of it.
-    for (var d2 = 0; d2 < 150; d2++) {
-      star(rnd() * 150, rnd() * 100, Math.pow(rnd(), 3.2) * 0.6);
-    }
-
-    svg.appendChild(gBloom);
-    svg.appendChild(gCore);
-
-    // the core's own light, over its stars
-    svg.appendChild(el("ellipse", {
-      cx: CX * 1.5, cy: CY, rx: "8.2", ry: (8.2 * YK).toFixed(2),
-      fill: "url(#ajCoreGlow)"
-    }));
-
-    // ---- diffraction spikes on the brightest few ----
-    bright.sort(function (x, y) { return y.m - x.m; });
-    var gSpike = el("g", {});
-    var twinklers = [];
-    bright.slice(0, 7).forEach(function (st) {
-      var len = 0.9 + st.m * 1.7;
-      [[len, 0.045], [0.045, len]].forEach(function (dd) {
-        gSpike.appendChild(el("rect", {
-          x: (st.x - dd[0]).toFixed(2), y: (st.y - dd[1]).toFixed(2),
-          width: (dd[0] * 2).toFixed(2), height: (dd[1] * 2).toFixed(2),
-          fill: st.hue, opacity: "0.30"
-        }));
-      });
-      var core = el("circle", {
-        "class": "ajc__star", cx: st.x.toFixed(2), cy: st.y.toFixed(2),
-        r: "0.42", fill: "#FFFFFF", opacity: "0.96"
-      });
-      gSpike.appendChild(core);
-      twinklers.push(core);
-    });
-    svg.appendChild(gSpike);
-
-    field.insertBefore(svg, field.firstChild);
-    return { svg: svg, twinklers: twinklers };
-=======
     window.addEventListener("scroll", function () { tag.classList.remove("is-on"); }, { passive: true });
   }
 
@@ -600,17 +396,12 @@
         flights.forEach(function (f) { f.node.setAttribute("opacity", "0"); });
       }
     };
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   }
 
   /* ==========================================================
      Motion
      ========================================================== */
-<<<<<<< HEAD
-  function motion(parts, sky) {
-=======
   function motion(parts, flights) {
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     /* ---- chapter 1: the opening --------------------------- */
     /* The site opens every page behind a full-screen curtain that cirs.js
        holds for up to 4.2 seconds, with the scroll locked under it. An
@@ -770,68 +561,13 @@
           .to(copy, { opacity: 1, y: 0, ease: "power2.out", duration: .7 }, .45);
       }
 
-<<<<<<< HEAD
-      /* chapter 5: the pathway rail, pinned and dragged sideways */
-=======
       /* chapter 5: one stable pathway frame, advanced by normal scrolling */
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       var track = $("[data-pathways]");
       var rail = $("[data-pathways-rail]");
       if (!track || !rail) return;
 
       var scenes = $$(".ajw", rail);
       var dots = $$(".ajw__dot");
-<<<<<<< HEAD
-      var section = $(".aj-paths");
-      var current = -1;
-      // How far the rail actually has to travel sideways.
-      var distance = function () {
-        return Math.max(0, rail.scrollWidth - window.innerWidth + 32);
-      };
-      /* And how much scrolling that travel is spread over. At 1 the rail
-         moves a pixel sideways for every pixel scrolled, which runs the
-         five scenes past far too briskly to read any of them. At 2.2 each
-         scene holds the screen for better than twice as long without the
-         rail moving any further than it did. This is the pacing dial for
-         the chapter; nothing else needs to change with it. */
-      var PACE = 2.2;
-      var travel = function () {
-        return Math.round(distance() * PACE + window.innerHeight * .5);
-      };
-
-      var railTween = gsap.to(rail, {
-        x: function () { return -distance(); },
-        ease: "none",
-        scrollTrigger: {
-          trigger: track, start: "top top",
-          end: function () { return "+=" + travel(); },
-          pin: true, scrub: .6, invalidateOnRefresh: true, anticipatePin: 1,
-          onUpdate: function (self) {
-            var i = Math.round(self.progress * (scenes.length - 1));
-            if (i === current) return;
-            current = i;
-            scenes.forEach(function (s, n) { s.classList.toggle("is-on", n === i); });
-            dots.forEach(function (d, n) { d.classList.toggle("is-on", n === i); });
-            // The ground belongs to the section, and the colour comes from
-            // the scene's own --aj-scene, so alumni.css stays the one place
-            // any of these five colours is written down.
-            var ground = getComputedStyle(scenes[i]).getPropertyValue("--aj-scene").trim();
-            if (ground) gsap.to(section, { backgroundColor: ground, duration: .9, ease: "power2.out" });
-          }
-        }
-      });
-
-      /* The dots move the page through the shared smooth-scroll engine, not
-         through window.scrollTo. cirs.js runs Lenis, and Lenis owns the
-         scroll position — it re-applies its own every frame, so a
-         window.scrollTo is simply swallowed and clicking a dot did nothing
-         at all. cirs.js publishes a "cirs-section-scroll" event for exactly
-         this, which is what a page script is meant to ask through. The
-         direct call stays as the fallback for when Lenis is not running:
-         reduced motion, or the engine having failed to load. */
-      function goto(n) {
-        var trig = railTween.scrollTrigger;
-=======
       var current = -1;
       var travel = function () {
         return Math.round(window.innerHeight * scenes.length * .85);
@@ -870,7 +606,6 @@
          smooth scrolling as the fallback. */
       function goto(n) {
         var trig = pathwayTrigger;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         if (!trig) return;
         var p = scenes.length > 1 ? n / (scenes.length - 1) : 0;
         var top = Math.round(trig.start + (trig.end - trig.start) * p);
@@ -881,21 +616,6 @@
         // defaultPrevented means the engine took it; otherwise do it here.
         if (!ev.defaultPrevented) window.scrollTo({ top: top, behavior: "smooth" });
       }
-<<<<<<< HEAD
-      dots.forEach(function (d, n) { d.addEventListener("click", function () { goto(n); }); });
-
-      track.classList.add("is-live");
-      if (scenes[0]) scenes[0].classList.add("is-on");
-      if (dots[0]) dots[0].classList.add("is-on");
-
-      return function () {
-        // Leaving the desktop query: hand the scenes back to the stack and
-        // give the section its own ground again.
-        track.classList.remove("is-live");
-        scenes.forEach(function (s) { s.classList.add("is-on"); });
-        dots.forEach(function (d) { d.classList.remove("is-on"); });
-        if (section) gsap.set(section, { clearProps: "backgroundColor" });
-=======
       var handlers = dots.map(function (dot, n) {
         var handler = function () { goto(n); };
         dot.addEventListener("click", handler);
@@ -915,7 +635,6 @@
           d.removeAttribute("aria-current");
           d.removeEventListener("click", handlers[n]);
         });
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         current = -1;
       };
     });
@@ -935,15 +654,6 @@
       $$(".ajw").forEach(function (s) { s.classList.add("is-on"); });
     });
 
-<<<<<<< HEAD
-    /* ---- chapter 3: the field comes up -------------------- */
-    var cField = $("[data-constellation-field]");
-    if (cField) {
-      var cLines = $$(".ajc__line", cField);
-      var cPoints = $$(".ajc__pt", cField);
-
-      cLines.forEach(function (l) {
-=======
     /* ---- chapter 3: the map comes up ---------------------- */
     /* In the order a reader can follow: the world arrives first, then
        Siruvani lights on it, and only then do the routes run out of
@@ -967,42 +677,10 @@
         return a.getTotalLength() - b.getTotalLength();
       });
       byReach.forEach(function (l) {
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         var d = l.getTotalLength();
         gsap.set(l, { strokeDasharray: d, strokeDashoffset: d, opacity: 1 });
       });
 
-<<<<<<< HEAD
-      gsap.timeline({
-        scrollTrigger: { trigger: cField, start: "top 78%", once: true }
-      })
-        .to(cLines, {
-          strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut", stagger: .045
-        }, 0)
-        .to(cPoints, {
-          opacity: 1, duration: .5, ease: "power2.out", stagger: .04
-        }, .35);
-    }
-
-    /* ---- the brightest stars breathe ---------------------- */
-    if (sky && sky.twinklers.length) {
-      sky.twinklers.forEach(function (star, i) {
-        gsap.to(star, {
-          opacity: 0.30, duration: 1.6 + (i % 7) * 0.42,
-          repeat: -1, yoyo: true, ease: "sine.inOut", delay: (i % 11) * 0.31
-        });
-      });
-      // Nothing off-screen should be animating.
-      ScrollTrigger.create({
-        trigger: "[data-constellation-field]",
-        start: "top bottom", end: "bottom top",
-        onToggle: function (self) {
-          sky.twinklers.forEach(function (star) {
-            var tws = gsap.getTweensOf(star);
-            tws.forEach(function (t) { self.isActive ? t.play() : t.pause(); });
-          });
-        }
-=======
       var tl = gsap.timeline({
         scrollTrigger: { trigger: cField, start: "top 78%", once: true }
       });
@@ -1035,7 +713,6 @@
         start: "top bottom", end: "bottom top",
         onToggle: function (self) { self.isActive ? flights.play() : flights.pause(); },
         onRefresh: function (self) { if (self.isActive) flights.play(); }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       });
     }
 
@@ -1103,11 +780,7 @@
      transform:none, which is a different thing entirely on this page:
      every one of the nineteen destinations is placed on its arm with
      translate(-50%,-50%), so clearing transforms would have unpinned all
-<<<<<<< HEAD
-     of them from the galaxy. The only transforms that genuinely have to
-=======
      of them from the map. The only transforms that genuinely have to
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
      be undone are the two headline rows', and those are done by name,
      through GSAP, which knows what it set. */
   function failOpen() {
@@ -1121,12 +794,9 @@
        "[data-portal-plate], [data-portal-copy], [data-portal-depth]").forEach(function (el) {
       if (parseFloat(getComputedStyle(el).opacity) < .05) el.style.opacity = "1";
     });
-<<<<<<< HEAD
-=======
     $$(".ajc__map, .ajc__origin").forEach(function (el) {
       if (parseFloat(getComputedStyle(el).opacity) < .05) el.style.opacity = "1";
     });
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     $$(".ajc__line").forEach(function (el) {
       if (parseFloat(getComputedStyle(el).opacity) < .05) el.style.opacity = "1";
       if (el.style.strokeDashoffset) el.style.strokeDashoffset = "0";
@@ -1147,17 +817,11 @@
 
   function start() {
     var parts = interactions();
-<<<<<<< HEAD
-    var sky = buildSky();
-    if (canMove) {
-      try { motion(parts, sky); }
-=======
     // The lights only ever run inside motion(); building them when there
     // is none would put nineteen aircraft on the map that never move.
     var flights = canMove ? buildFlights() : null;
     if (canMove) {
       try { motion(parts, flights); }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       catch (err) { failOpen(); }
       /* The sweep fires ONLY if nothing got built. It used to fire on a
          plain timer, and that made it a saboteur rather than a safety

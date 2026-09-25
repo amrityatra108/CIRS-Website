@@ -27,10 +27,6 @@ POSTS = [
         "title": "The Death of Rationalism",
         "issue": 32,
         "date": "August 2026",
-<<<<<<< HEAD
-        "author": "The Crossroads Editorial Team",
-        "section": "Opinion",
-=======
         "author": None,
         "section": "Opinion",
         "image": "death-of-rationalism.webp",
@@ -38,7 +34,6 @@ POSTS = [
         "image_width": 941,
         "image_height": 1672,
         "image_caption": "Illustration supplied for the web edition.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "excerpt": "Rationalism was meant to be a method, not an identity. It was to be the discipline of honest seeing, not another tribe of the like-minded. You question, you examine, you see clearly.",
         "paragraphs": [
             "Rationalism was meant to be a method, not an identity. It was to be the discipline of honest seeing, not another tribe of the like-minded. You question, you examine, you see clearly. You hold no belief sacred, no authority exempt — including your own. Every conclusion must justify itself and if it cannot, you let it go. That is the original promise. From the Greek sceptics to the Enlightenment philosophers to the modern scientific temper, this is what rationalism has always claimed as its essence: the courage to ask, the willingness to discard, the refusal to bow before any idea simply because it is old or revered or comfortable.",
@@ -70,14 +65,11 @@ POSTS = [
         "date": "August 2026",
         "author": "Muhil T. | IB I Yr",
         "section": "Culture",
-<<<<<<< HEAD
-=======
         "image": "beyond-the-lobby.webp",
         "image_alt": "Armoured video game soldier holding a rifle",
         "image_width": 1920,
         "image_height": 1080,
         "image_caption": "Illustration supplied for the web edition.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "excerpt": "A digital world where millions come togethersome for a living, some for leisure, some for addiction, and some for peace.",
         "paragraphs": [
             "A digital world where millions come togethersome for a living, some for leisure, some for addiction, and some for peace. Deafening gunshots and unpredictable maps: the battleground isn't only found in massive PlayStation consoles or an expensive PC rig—it’s compressed into the palm of your hand, radiating heat, chaos, and adrenaline. Welcome to Call of Duty: Mobile. In a game where victory is decided in milliseconds, strategy isn't the only thing that backs you: it's the agile human reflexes that do their magic.",
@@ -92,11 +84,7 @@ POSTS = [
         "title": "Anakin Skywalker and the Poetics of Tragedy",
         "issue": 32,
         "date": "August 2026",
-<<<<<<< HEAD
-        "author": "Aayush Sreenath B",
-=======
         "author": "Aayush S. B. | IB II Yr",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "section": "Culture",
         "image": "anakin-skywalker.webp",
         "image_alt": "William Shakespeare holding a blue lightsaber and a copy of Hamlet against a galactic backdrop",
@@ -123,11 +111,7 @@ POSTS = [
         "title": "Is AI - Art Really Art?",
         "issue": 31,
         "date": "May 2026",
-<<<<<<< HEAD
-        "author": "T. Muhil | IB I Yr",
-=======
         "author": "T.Muhil | IB 1 Year",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "section": "Opinion",
         "excerpt": "In today’s world, nearly everything we do has a trace of artificial intelligence in it, from our daily tasks to our school projects.",
         "paragraphs": [
@@ -143,14 +127,6 @@ POSTS = [
         "title": "Rumors at CIRS",
         "issue": 31,
         "date": "May 2026",
-<<<<<<< HEAD
-        "author": "Divyam Gupta | IB I Yr",
-        "section": "Campus Life",
-        "excerpt": "Do you agree with me that here, in CIRS, news about people and events spreads like wildfire? Whether in late-night talks or Crossroads walks, we cannot keep gossip to ourselves.",
-        "paragraphs": [
-            "Do you agree with me that here, in CIRS, news about people and events spreads like wildfire? Whether in late-night talks or Crossroads walks, we cannot keep gossip to ourselves. We all have the desire to tell someone about that one person or that one ‘kaand’ which we found out about from somewhere. Everyone wants to be the one who knows stuff and the one who reveals it. But imagine this: you tell something about yourself to some of your close friends, and the next day, every single person knows about it. Have you ever experienced this in CIRS?",
-            "Aarav Bhartia | IB 1 Year It is very important to understand the impact these rumors can create on victims of these whispers. Rumors must be handled very carefully because they can either make a failure look like a hero or destroy a person’s hardearned reputation. Can you imagine if something completely fake about you has become a hot topic for the school to gossip about? Can you imagine how that person would be struggling every single day to change everyone’s wrong perception about him?",
-=======
         "author": "Aarav Bhartia | IB 1 Year",
         "section": "Campus Life",
         "image": "rumors-at-cirs.webp",
@@ -162,7 +138,6 @@ POSTS = [
         "paragraphs": [
             "Do you agree with me that here, in CIRS, news about people and events spreads like wildfire? Whether in late-night talks or Crossroads walks, we cannot keep gossip to ourselves. We all have the desire to tell someone about that one person or that one ‘kaand’ which we found out about from somewhere. Everyone wants to be the one who knows stuff and the one who reveals it. But imagine this: you tell something about yourself to some of your close friends, and the next day, every single person knows about it. Have you ever experienced this in CIRS?",
             "It is very important to understand the impact these rumors can create on victims of these whispers. Rumors must be handled very carefully because they can either make a failure look like a hero or destroy a person’s hardearned reputation. Can you imagine if something completely fake about you has become a hot topic for the school to gossip about? Can you imagine how that person would be struggling every single day to change everyone’s wrong perception about him?",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             "During the process of spreading news, or what we can call “gossip,” something very interesting happens. This passing of gossip becomes like the game of Chinese Whisper. The first person, who gets the information from the primary source, tells it to the second person. Now, the second person hears something, comprehends it differently, and then passes it on to the third person as something entirely new! When this cycle continues through a long chain of people, the news gets altered and modified so much that it becomes completely different from what it originally was. This is when the ‘news’ becomes a ‘rumor’.",
             "- The Epic Choice Now the question arises: why do people even spread rumors in the first place? Usually, they make assumptions about a person or an event from the news they hear. Or, they are simply jealous of the other person’s success or achievements and try to pull them down by spreading a rumor. If we are among these people, then we must reflect and ask ourselves some questions- Is spreading rumors or gossiping about people in any way conducive to me? Is it ethical to create a fake black mark on someone’s hard-earned reputation? Am I letting my anger and hatred control my actions? Is it going to benefit the collective society?",
             "When you answer these questions, you will realize whether you should be encouraging gossip or not. If we get some information about someone or some event, then before telling others, we must confirm it with the original source. In fact, why should we entertain gossip? It is a mere waste of time. There are better things to do in life. Remember, today when you gossip and spread rumors about someone; tomorrow it might be your turn.",
@@ -177,10 +152,6 @@ POSTS = [
         "title": "Hot Wheels V/S Barbie",
         "issue": 31,
         "date": "May 2026",
-<<<<<<< HEAD
-        "author": "Prisha Kantesaria",
-        "section": "Opinion",
-=======
         "author": "Prisha Kantesaria | IB II Year",
         "section": "Opinion",
         "image": "hot-wheels-vs-barbie.webp",
@@ -188,7 +159,6 @@ POSTS = [
         "image_width": 1536,
         "image_height": 1024,
         "image_caption": "Illustration supplied for the web edition.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "excerpt": "I am a proud biology student, and my biology class has a MEGA, WHOPPING, GARGANTUAN class strength of 2! And these supercalifragilisticexpialidocious students are girls.",
         "paragraphs": [
             "I am a proud biology student, and my biology class has a MEGA, WHOPPING, GARGANTUAN class strength of 2! And these supercalifragilisticexpialidocious students are girls. ‘Bio students, then they’re definitely going to be girls.’ That would have certainly been your first thought too! But if I talk about a big-shot neurosurgeon - most of us are instinctively going to presume that he is a man, a tall, hefty male who can cure your brain tumor by simply looking at you.",
@@ -209,11 +179,7 @@ POSTS = [
         "title": "Geography and Geopolitics",
         "issue": 31,
         "date": "May 2026",
-<<<<<<< HEAD
-        "author": "Shaurya Bhartia | XII Mgmt",
-=======
         "author": "Shaurya Bhartia | 12 Mgmt",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "section": "World",
         "image": "geography-and-geopolitics.webp",
         "image_alt": "Hands moving chess pieces across a map of the world, illustrating geopolitical strategy",
@@ -245,11 +211,7 @@ POSTS = [
         "title": "Sportswashing: The New Geopolitics",
         "issue": 30,
         "date": "April 2026",
-<<<<<<< HEAD
-        "author": "Shaurya Bhartia",
-=======
         "author": "Shaurya Bhartia | XII MGMT",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "section": "Sport",
         "excerpt": "The summer of 2023 changed football forever. It wasn’t just the usual go-to of European transfers; it was something weird. Why?",
         "paragraphs": [
@@ -278,10 +240,6 @@ POSTS = [
         "title": "Notes of Healing",
         "issue": 30,
         "date": "April 2026",
-<<<<<<< HEAD
-        "author": "Ishaan Ravishankar | XII Mgmt",
-        "section": "Culture",
-=======
         "author": "Ishaan Ravishankar | XII MGMT",
         "section": "Culture",
         "image": "notes-of-healing.webp",
@@ -289,7 +247,6 @@ POSTS = [
         "image_width": 1536,
         "image_height": 1024,
         "image_caption": "Illustration supplied for the web edition.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "excerpt": "Music is something most of us cherish, holding a special place in our lives. It speaks volumes about our personality, and offers insights into our very souls.",
         "paragraphs": [
             "Music is something most of us cherish, holding a special place in our lives. It speaks volumes about our personality, and offers insights into our very souls. So why is listening to music so gratifying? Why does it hold so much power over our minds, influencing even our emotions? What is it about random combinations of sounds put together that leave such a striking impression?",
@@ -307,17 +264,11 @@ POSTS = [
     {
         "slug": "my-home",
         "title": "My Home",
-<<<<<<< HEAD
-        "issue": 29,
-        "date": "February 2026",
-        "author": "Vishv Prem Nangia",
-=======
         "subtitle": "A place where you are always welcome and surrounded by those who love you",
         "issue": 29,
         "date": "February 2026",
         "author": "Vishv Prem Nangia",
         "credit_source": "site",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "section": "The Editorial",
         "excerpt": "Like most other kids, I had an enjoyable childhood with my family, so naturally, making the tough decision to join a boarding school 2,359 long kilometres away from home was an emotional one.",
         "paragraphs": [
@@ -332,12 +283,6 @@ POSTS = [
     {
         "slug": "voyages-in-the-yuva-kendra",
         "title": "Voyages in the Yuva Kendra",
-<<<<<<< HEAD
-        "issue": 29,
-        "date": "February 2026",
-        "author": "Adithyan Diwakar Vidya | IB II",
-        "section": "Reflection",
-=======
         "subtitle": "A memoir of my brief experiences in the shadow of Gurudev’s light for the youth.",
         "issue": 29,
         "date": "February 2026",
@@ -348,7 +293,6 @@ POSTS = [
         "image_width": 681,
         "image_height": 453,
         "image_caption": "Group photograph supplied for the web edition.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "excerpt": "Bag stuffed, folder filled, and brain completely devoid of meaning: that would accurately encapsulate my state in the very first class of CHYK CIRS.",
         "paragraphs": [
             "Bag stuffed, folder filled, and brain completely devoid of meaning: that would accurately encapsulate my state in the very first class of CHYK CIRS. Seated in a circle with faces familiar and unfamiliar, I felt more apprehension than inspiration. And yet, here I find myself three years on, molded by the hands of giants, in the service of the God called Man, with my eyes blissfully opened to the infinite potential in all things living.",
@@ -372,10 +316,7 @@ POSTS = [
         "issue": 29,
         "date": "February 2026",
         "author": "Lokk Vishwavedaa",
-<<<<<<< HEAD
-=======
         "credit_source": "site",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "section": "Economics",
         "image": "the-race-beyond.webp",
         "image_alt": "Rear view of a Formula 1 car silhouetted against a fiery sunset sky",
@@ -402,9 +343,6 @@ POSTS = [
         "issue": 29,
         "date": "February 2026",
         "author": "Aarav Bhartia | X B",
-<<<<<<< HEAD
-        "section": "Economics",
-=======
         "credit_source": "school",
         "section": "Economics",
         "image": "trust-or-bust.webp",
@@ -412,7 +350,6 @@ POSTS = [
         "image_width": 2172,
         "image_height": 724,
         "image_caption": "Illustration supplied for the web edition.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "excerpt": "Imagine yourself in this familiar high school scene where you and your best friend are tasked with a huge project, the kind that demands hours of focused, dedicated work.",
         "paragraphs": [
             "Imagine yourself in this familiar high school scene where you and your best friend are tasked with a huge project, the kind that demands hours of focused, dedicated work. Both of you want an A, but a tempting choice arises. Your friend is a highly motivated, driven student, capable of doing excellent work alone. This knowledge creates a loophole in your mind, a calculated bias that whispers: \"Why should I put in the full effort if I know my friend will carry the load anyway?\". This internal conflict between helping your teammate and prioritizing your own leisure is a situation quite common in classrooms, and is best understood through the concept of Game Theory.",
@@ -437,14 +374,11 @@ POSTS = [
         "date": "February 2026",
         "author": "Aarav Bhartia | X B",
         "section": "Sport",
-<<<<<<< HEAD
-=======
         "image": "the-journey-behind-excellence.webp",
         "image_alt": "Person climbing rocky steps toward a trophy",
         "image_width": 1374,
         "image_height": 1145,
         "image_caption": "Illustration supplied for the web edition.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "excerpt": "\"No, I cannot do it anymore\" - Have you said this to yourself in the middle of a 5,000 metres race? And later, regret the same while reflecting?",
         "paragraphs": [
             "\"No, I cannot do it anymore\" - Have you said this to yourself in the middle of a 5,000 metres race? And later, regret the same while reflecting? If you have, then you must read my journey in sports and how it shaped me.",
@@ -467,22 +401,6 @@ POSTS = [
         "title": "The Social Glue",
         "issue": 17,
         "date": "July 2024",
-<<<<<<< HEAD
-        "author": "Raahi Tejas Shah",
-        "section": "The Editorial",
-        "excerpt": "The human brain evolved to navigate and maintain social structures of life. Primordially, we needed each other to survive.",
-        "paragraphs": [
-            "The human brain evolved to navigate and maintain social structures of life. Primordially, we needed each other to survive. A tribe working together would survive, while a divided one would die. That's why our brains had to make sure we cooperated. This propagates even today. Sure, you may dislike your neighbor, but since you live in the same area, you support the same cricket team and meet each other at the temple. The human brain evolved to navigate and maintain social structures of life.",
-            "Primordially, we needed each other to survive. A tribe working together would survive, while a divided one died. THE SOCIAL GLUE THE EDITORIAL RAAHI TEJAS SHAH CROSSROADS EDITORIAL TEAM ‘24 Of the many reasons we humans have brought up to account for our behavior, one is often blamed: social media. We blame it for making us more extremist and less empathetic, and emphasize the need to \"touch grass\" to escape into the real world. Sure, social media does have an effect on our brains, but maybe not the one you'd expect.",
-            "Introducing you to the myth of the ‘filter bubble.’ Many of us have heard about online filter bubbles, where algorithms only show us content that we want to see. Of course, what we want are opinions that agree with ours, thereby omitting opposing views. In this poisonous hole, our view of the world narrows and becomes radicalized. But is that true? An extreme filter bubble is very rare, and studies have found very little evidence for its existence.",
-            "The internet is a dump of information, and we are constantly confronted with contrasting views. The truth is that one is most ideologically isolated in one’s own life. We choose the people we closely interact with, and not too surprisingly, the interactions with people around you are much less diverse than the so-called online bubbles. As societies grew, we started meeting at shopping malls and town squares. Being physically close made us familiar to each other, and bridged the gap between different worldviews.",
-            "Ancestrally, the people around us were similar to us. We liked what was similar to us, and this kept us together despite our differences. Everything was going smoothly until years ago, when we created something that hit our brains like a train: the brand-new digital town square - social media. Another journey at the Crossroads begins, and one draws to a close. As we flip through every article, every article and every design and every photograph over the past year, we can’t help but admire the sheer effort and enthusiasm radiating from your work.",
-            "Thank you for kindling the flame of literary brilliance this past year. It’s a responsibility we now shoulder, and we hope to live up to the legacy of excellence you’ve left us. In deep gratitude, The Crossroads Editorial Team ‘25 Our flawed brain is sorting people into teams, and so, the worst opinion is labeled, assigned, and generalized to everyone on that team (social community). Something that is striking is that everything that makes us individuals – the ice cream flavor we prefer, the shows we watch, our religions, our fashion sense, and so on – are constantly belittled, as if they are part of mutually exclusive rival teams.",
-            "It seems as though the opposite team is almost willfully making the world a worse place, as though they are almost evil, beyond rationality and civil discussion. While we are on the correct team (obviously it's our team), it may be hard for us to realize that we may seem that way to the people on the other team. This contrast in belief suddenly becomes a central part of our identity. So, negative things about the \"other team\" are anchored upon and believed uncritically, whereas those who share your views are praised for their beliefs.",
-            "People who think like you are added to your team. They are probably good people in your eyes, because any social group you belong to is good! Therefore, when you face negative information about your group, you dismiss it uncritically. Social media, driven by engagement, makes it worse, as it wants to keep you online for as long as possible. Well, the most engaging emotion is, unfortunately, anger. The angrier you get, the more likely you are to comment, share, and engage.",
-            "This leads social media to amplify the most extreme and controversial opinions. It doesn't just show disagreements; it shows the worst of them. After this, our brains weren't able to handle the amount of disagreement they faced on social media, and we were not prepared for it. Our brains, in their attempt to simplify, sort everything into categories, whether you like it or not. People, things, and opinions all go into teams. Researchers call this ‘social sorting.’ On the digital town square, we encounter many people with clashing opinions, but unlike your neighbor, they don't root for your cricket team.",
-            "You miss the local social glue your brain needs to connect with them. Essentially, we are dissolving the social glue that acts as a foundation for democracy. If we think our own neighbors are evil, how can we live together? Is there something we can do? Something more positive? In the end, it is important to be aware of what social media does to your brain and know that It's easier to change yourself than to change the world.",
-=======
         "author": "Raahi Tejas Shah | Crossroads Editorial Team ’24",
         "section": "The Editorial",
         "image": "the-social-glue.webp",
@@ -517,7 +435,6 @@ POSTS = [
             "Researchers call this ‘social sorting.’ On the digital town square, we encounter many people with clashing opinions, but unlike your neighbor, they don't root for your cricket team. You miss the local social glue your brain needs to connect with them.",
             "Essentially, we are dissolving the social glue that acts as a foundation for democracy.",
             "If we think our own neighbors are evil, how can we live together? Is there something we can do? Something more positive? In the end, it is important to be aware of what social media does to your brain and know that It's easier to change yourself than to change the world.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         ],
     },
     {
@@ -525,11 +442,7 @@ POSTS = [
         "title": "Death of Detail",
         "issue": 4,
         "date": None,
-<<<<<<< HEAD
-        "author": "Malhar Alap Modi",
-=======
         "author": "Malhar Modi",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "section": "Culture",
         "excerpt": "A long day at work, and you’re tired to the bone. You decide to visit the nearby park to finally take a break, and seat yourself on a bench.",
         "paragraphs": [
@@ -537,11 +450,7 @@ POSTS = [
             "A few years ago, you’d be sitting on an elegantly carved bench, with ornate designs of animals, birds, or other urbane icons, but in the modern day, you’d be sitting on... this.",
             "This is just a small example of the wave of minimalism which is now taking over the world. This style has become the social default for seemingly every design choice, whether architectural, corporate or home décor. This is a troubling trend, because minimalism represents a very scary phenomenon – a distinct lack of detail.",
             "But why does detail matter? Think of it as an identity. What gave older phone boxes their distinct character? It was the details: a bright red color, moldings around the doors, ornamentation at the top. Now, the intricate detailing on phone boxes has vanished, and with it, their character.",
-<<<<<<< HEAD
-            "It is indeed true that beauty is in the eyes of the beholder, but this is not just about the beauty. Rather, it is about things having discernible qualities & characteristics which give them Take bollards, for example. Hardly anyone pays attention to them, but the older bollards had some character, even if they were hardly “beautiful”. Bollards nowadays? They just exist meaningless and mute.",
-=======
             "It is indeed true that beauty is in the eyes of the beholder, but this is not just about the beauty. Rather, it is about things having discernible qualities & characteristics which give them a unique identity. Take bollards, for example. Hardly anyone pays attention to them, but the older bollards had some character, even if they were hardly “beautiful”. Bollards nowadays? They just exist meaningless and mute.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             "Gone are the elaborate throne-like lions, tigers and dragons which once adorned our furniture. Even park benches today have taken a turn towards minimalism.",
             "You’d need an expert to explain the significance behind our detailed temple architecture, and the symbolic meaning they convey. But modern skyscrapers? They don’t really say anything. They are just there. Huge boxes – plain, simple and above all, completely “mute”.",
             "As we move ahead, it’s time for us to look to the past. Recently, futuristis Indic art and Indic-themed art have flourished, with people taking to it like fishes to water.",
@@ -561,10 +470,6 @@ POSTS = [
         "title": "Resurgence",
         "issue": 2,
         "date": None,
-<<<<<<< HEAD
-        "author": "Adhavan Diwakar Vidya",
-        "section": "Culture",
-=======
         "author": "Adhavan Diwakar",
         "section": "Culture",
         "image": "resurgence.webp",
@@ -572,7 +477,6 @@ POSTS = [
         "image_width": 1536,
         "image_height": 1024,
         "image_caption": "Photograph supplied for the web edition.",
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         "excerpt": "Jana Gana Mana Adhinayaka Jaya He, Bharata Bhagya Vidhata!",
         "paragraphs": [
             "Jana Gana Mana Adhinayaka Jaya He, Bharata Bhagya Vidhata!",

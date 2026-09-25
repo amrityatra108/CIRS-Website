@@ -1,9 +1,5 @@
 body.student-life { background:#f3ebdd; color:#13202a; }
 body.student-life main { overflow:clip; }
-<<<<<<< HEAD
-.student-life .header:not(.is-stuck) { color:#fff; }
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .sj-cover,
 .sj-scenes img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .sj-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(4,13,26,.88),rgba(4,13,26,.14)),linear-gradient(0deg,rgba(4,13,26,.72),transparent 55%); }
@@ -29,23 +25,15 @@ body.student-life main { overflow:clip; }
 .sj-down { position:absolute; z-index:3; right:4vw; bottom:1.8rem; color:#fff; }
 
 .sj-day { background:#081728; color:#fff; }
-<<<<<<< HEAD
-.sj-day__intro { display:grid; grid-template-columns:.6fr 1.3fr 1fr; gap:3rem; align-items:end; padding:8rem 0 6rem; }
-=======
 .sj-day__intro { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(18rem,1fr); gap:clamp(3rem,6vw,7rem); align-items:end; padding:8rem var(--gut) 6rem; }
 .sj-day__heading .sj-kicker { margin-bottom:1.5rem; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .sj-day h2,
 .sj-heading h2,
 .sj-houses h2,
 .sj-work h2,
 .sj-festivals h2,
 .sj-practical h2 { font-size:clamp(3rem,6.5vw,7rem); }
-<<<<<<< HEAD
-.sj-day__intro>div>p { line-height:1.6; }
-=======
 .sj-day__details>p { line-height:1.6; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .sj-switch { display:flex; margin-top:2rem; border-bottom:1px solid #ffffff44; }
 .sj-switch button { min-height:48px; padding:.7rem 1rem; color:#fff; opacity:.55; border-bottom:2px solid transparent; }
 .sj-switch button.is-active { opacity:1; border-color:#d6b46a; }
@@ -60,14 +48,10 @@ body.student-life main { overflow:clip; }
 .sj-journey__sticky>.sj-shade { position:absolute; inset:0; }
 .sj-scenes img { visibility:hidden; opacity:0; will-change:transform,opacity; }
 .sj-scenes img.is-active { visibility:visible; opacity:.68; }
-<<<<<<< HEAD
-.sj-journey__content { position:relative; z-index:2; height:100%; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto 1fr auto; padding:8rem 0 6rem; }
-=======
 .sj-journey__content { position:relative; z-index:2; height:100%; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto 1fr auto; padding-block:8rem 6rem; }
 /* Clear the column of times pinned at the right edge (.sj-index: 1.5rem in,
    44px wide), which the copy otherwise ran underneath below 1320px. */
 .sj-journey__content { padding-right:max(var(--gut), 5.5rem); }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .sj-school { grid-column:1/-1; text-transform:uppercase; font-size:.78rem; letter-spacing:.1em; }
 .sj-clock,
 .sj-chapter { align-self:center; }
@@ -113,17 +97,6 @@ body.student-life main { overflow:clip; }
 .sj-practical { padding:clamp(6rem,11vw,11rem) 0; }
 .sj-heading { display:grid; grid-template-columns:.6fr 1.3fr 1fr; gap:3rem; align-items:end; margin-bottom:5rem; }
 .sj-heading>p:last-child { line-height:1.7; }
-<<<<<<< HEAD
-.sj-photo-wall { display:grid; grid-template-columns:1.5fr .7fr; grid-template-rows:1fr 1fr; gap:1rem; }
-.sj-photo-wall figure { position:relative; min-height:280px; overflow:hidden; }
-.sj-photo-wall__main { grid-row:1/3; }
-.sj-photo-wall img,
-.sj-rail img,
-.sj-festival-strip img { width:100%; height:100%; object-fit:cover; }
-.sj-photo-wall figcaption,
-.sj-rail figcaption,
-.sj-festival-strip figcaption { position:absolute; left:1rem; bottom:1rem; padding:.45rem .65rem; background:#f3ebdd; color:#13202a; font-size:.78rem; }
-=======
 /* ------------------------------------------------------------
    The photography
    ------------------------------------------------------------
@@ -223,22 +196,16 @@ body.student-life main { overflow:clip; }
   .sj-rail img,
   .sj-festival-strip img { transition:none; transform:none; }
 }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 .sj-sports { padding:8rem 0; background:#17283a; color:#fff; }
 .sj-section-head { display:flex; justify-content:space-between; align-items:end; margin-bottom:4rem; }
 .sj-section-head h2 { font-size:clamp(3rem,5.8vw,6.5rem); }
-<<<<<<< HEAD
-.sj-rail { display:flex; gap:1.25rem; overflow-x:auto; padding:0 4vw 2rem; scroll-snap-type:x mandatory; scrollbar-width:thin; }
-.sj-rail figure { position:relative; flex:0 0 min(64vw,820px); height:min(62vh,640px); scroll-snap-align:center; }
-=======
 .sj-rail { display:flex; gap:var(--sj-gap); overflow-x:auto; padding:0 4vw 2rem; scroll-snap-type:x mandatory; scrollbar-width:thin; }
 /* Every frame on the rail is the same 3:2. It used to be a fixed height in
    vh against a free width, so the same four photographs were a different
    shape on every window, and the two portrait sources were cropped to a
    band across the middle of the subject. */
 .sj-rail figure { position:relative; overflow:hidden; background:#0f1c28; flex:0 0 min(64vw,820px); aspect-ratio:3/2; scroll-snap-align:center; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .sj-rail-nav { display:flex; align-items:center; justify-content:flex-end; gap:1rem; margin-top:1rem; }
 .sj-rail-nav p { min-width:3rem; text-align:center; font-variant-numeric:tabular-nums; }
 .sj-links { display:flex; flex-wrap:wrap; gap:2rem; margin-top:2rem; }
@@ -265,11 +232,6 @@ body.student-life main { overflow:clip; }
 .sj-board strong { margin:auto 0 .5rem; font:2rem var(--font-editorial); }
 
 .sj-festivals { padding:8rem 0; background:#281b23; color:#fff; }
-<<<<<<< HEAD
-.sj-festival-strip { display:grid; grid-template-columns:1.3fr .8fr 1fr; gap:1rem; margin:4rem 4vw 0; }
-.sj-festival-strip figure { position:relative; height:60vh; }
-.sj-festival-strip figure:nth-child(2) { height:50vh; margin-top:6rem; }
-=======
 /* Three photographs that are all 1600x1194 — very close to 4:3 — so the
    strip carries 4:3 and shows them essentially uncut. The middle frame
    keeps its drop, which is the strip's own rhythm and the reason it is a
@@ -278,7 +240,6 @@ body.student-life main { overflow:clip; }
 .sj-festival-strip { display:grid; grid-template-columns:1.22fr .92fr 1.06fr; gap:var(--sj-gap); align-items:start; margin:4rem 4vw 0; }
 .sj-festival-strip figure { position:relative; overflow:hidden; background:#0f1c28; aspect-ratio:4/3; }
 .sj-festival-strip figure:nth-child(2) { margin-top:clamp(36px,6vw,96px); }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .sj-practical__grid>div>p:not(.sj-kicker) { max-width:30rem; margin:2rem 0; line-height:1.65; }
 .sj-accordions details { border-top:1px solid #958b7d; }
 .sj-accordions details:last-child { border-bottom:1px solid #958b7d; }
@@ -307,12 +268,8 @@ body.student-life main { overflow:clip; }
   .sj-heading,
   .sj-work__grid,
   .sj-practical__grid { grid-template-columns:1fr; gap:2rem; }
-<<<<<<< HEAD
-  .sj-day__intro { padding:6rem 0 3rem; }
-=======
   .sj-day__intro { padding:6rem var(--gut) 3rem; }
   .sj-day__intro h2 { font-size:clamp(2.3rem,11.5vw,3rem); }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .sj-motion .sj-journey { display:none; }
   .sj-schedules,
   .sj-motion .sj-schedules { display:block; padding-bottom:5rem; }
@@ -322,13 +279,6 @@ body.student-life main { overflow:clip; }
   .sj-schedule article::before { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(0deg,#050d1966,#050d1900); }
   .sj-schedule article>* { position:relative; z-index:1; }
   .sj-schedule h4 { font-size:2.7rem; }
-<<<<<<< HEAD
-  .sj-photo-wall { grid-template-columns:1fr; grid-template-rows:auto; }
-  .sj-photo-wall__main { grid-row:auto; }
-  .sj-photo-wall figure { min-height:55vw; }
-  .sj-section-head { display:block; }
-  .sj-rail figure { flex-basis:82vw; height:58vh; }
-=======
   /* One column, and the same crops the wide layout uses — the main frame
      takes the ratio it inherited from the grid on desktop, so a phone
      sees the photographs the way the design intends rather than in
@@ -338,7 +288,6 @@ body.student-life main { overflow:clip; }
   .sj-photo-wall__cut { aspect-ratio:4/5; }
   .sj-section-head { display:block; }
   .sj-rail figure { flex-basis:82vw; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .sj-houses__stage { display:grid; min-height:0; background:none; }
   .sj-house { min-height:58svh; }
   .sj-board { grid-template-columns:1fr; transform:none; }
@@ -347,11 +296,7 @@ body.student-life main { overflow:clip; }
   .sj-board a:nth-child(3) { grid-column:auto; transform:none; }
   .sj-festival-strip { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin; }
   .sj-festival-strip figure,
-<<<<<<< HEAD
-  .sj-festival-strip figure:nth-child(2) { flex:0 0 82vw; height:58vh; margin:0; scroll-snap-align:center; }
-=======
   .sj-festival-strip figure:nth-child(2) { flex:0 0 82vw; margin:0; scroll-snap-align:center; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .sj-tables { grid-template-columns:1fr; }
   .sj-night nav { display:grid; }
 }

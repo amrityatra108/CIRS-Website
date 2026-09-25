@@ -10,11 +10,6 @@ drift apart. See ADMIN-DOCUMENTS.md for the full walkthrough.
 A document whose file is not yet on disk renders as "Awaiting upload" rather
 than a dead link — check-links.py never sees an href to a file that does not
 exist. Add the PDF later and rebuild; nothing else about the entry changes.
-<<<<<<< HEAD
-"""
-
-import os
-=======
 
 Each entry also says how current it is, read off the document itself:
 "issued", "valid_until" or "period" (as the document states them) and a
@@ -27,7 +22,6 @@ is linked. See ADMIN-DOCUMENTS.md.
 
 import os
 from datetime import date, datetime
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOC_DIR = "assets/documents/school-info"
@@ -38,30 +32,6 @@ DOCUMENTS = [
     # ---- Affiliation &amp; recognition -----------------------------------
     {"id": "cbse-affiliation-letter", "category": "Affiliation &amp; recognition",
      "title": "CBSE Affiliation Letter",
-<<<<<<< HEAD
-     "note": "The school's current affiliation letter from the Central Board of Secondary Education.",
-     "file": "cbse-affiliation-letter.pdf"},
-    {"id": "state-recognition", "category": "Affiliation &amp; recognition",
-     "title": "Recognition from State Government",
-     "note": "The Government of Tamil Nadu's recognition of the school.",
-     "file": "state-government-recognition.pdf"},
-    {"id": "state-noc", "category": "Affiliation &amp; recognition",
-     "title": "No Objection Certificate from State Government",
-     "note": "The State Government's NOC for the school's establishment.",
-     "file": "state-noc.pdf"},
-    {"id": "ccmt-trust-registration", "category": "Affiliation &amp; recognition",
-     "title": "CCMT Trust Registration Certificate",
-     "note": "Registration certificate of the Central Chinmaya Mission Trust, the school's managing trust.",
-     "file": "ccmt-trust-registration-certificate.pdf"},
-    {"id": "affiliation-self-certification", "category": "Affiliation &amp; recognition",
-     "title": "Self-Certification for Extension of Affiliation",
-     "note": "The school's self-certification submitted for extension of CBSE affiliation.",
-     "file": "self-certification-extension-of-affiliation.pdf"},
-    {"id": "mandatory-public-disclosure", "category": "Affiliation &amp; recognition",
-     "title": "Mandatory Public Disclosure",
-     "note": "The CBSE-mandated public disclosure statement.",
-     "file": "mandatory-public-disclosure.pdf"},
-=======
      "note": "The most recent affiliation letter from the Central Board of Secondary Education on file.",
      "file": "cbse-affiliation-letter.pdf",
      # The letter is dated 3 Oct 2020 and grants extension "01.04.2020 to
@@ -93,39 +63,11 @@ DOCUMENTS = [
      "note": "The CBSE-mandated public disclosure statement.",
      "file": "mandatory-public-disclosure.pdf",
      "issued": "4 Apr 2024", "status": "stale"},
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     # ---- Safety &amp; compliance certificates -----------------------------
     {"id": "school-safety-policy", "category": "Safety &amp; compliance",
      "title": "CIRS School Safety Policy",
      "note": "The school's own safety policy document.",
-<<<<<<< HEAD
-     "file": "school-safety-policy.pdf"},
-    {"id": "fire-safety-certificate", "category": "Safety &amp; compliance",
-     "title": "Fire Safety Certificate",
-     "note": "Certificate confirming the campus's fire safety compliance.",
-     "file": "fire-safety-certificate.pdf"},
-    {"id": "building-safety-certificate", "category": "Safety &amp; compliance",
-     "title": "Building Safety Certificate",
-     "note": "Certificate confirming the structural safety of school buildings.",
-     "file": "building-safety-certificate.pdf"},
-    {"id": "land-certificate", "category": "Safety &amp; compliance",
-     "title": "Land Certificate",
-     "note": "Certificate confirming the school's title to its campus land.",
-     "file": "land-certificate.pdf"},
-    {"id": "sanitation-certificate", "category": "Safety &amp; compliance",
-     "title": "Water, Health and Sanitation Certificate",
-     "note": "Certificate covering the campus's water supply, health and sanitation.",
-     "file": "water-health-sanitation-certificate.pdf"},
-    {"id": "water-quality-test", "category": "Safety &amp; compliance",
-     "title": "Water Quality Test Report",
-     "note": "Independent laboratory analysis of the campus drinking water.",
-     "file": "water-quality-test-report.pdf"},
-    {"id": "self-affidavit", "category": "Safety &amp; compliance",
-     "title": "Self Affidavit",
-     "note": "The school's self-affidavit submitted to the affiliating authority.",
-     "file": "self-affidavit.pdf"},
-=======
      "file": "school-safety-policy.pdf",
      "issued": "July 2018 (second edition)", "status": "dated"},
     {"id": "fire-safety-certificate", "category": "Safety &amp; compliance",
@@ -158,41 +100,11 @@ DOCUMENTS = [
      "note": "The school's self-affidavit submitted to the affiliating authority.",
      "file": "self-affidavit.pdf",
      "issued": "19 Jan 2019", "status": "stale"},
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     # ---- Academics &amp; results ------------------------------------------
     {"id": "cbse-results-three-year", "category": "Academics &amp; results",
      "title": "CBSE Results &mdash; Past Three Years",
      "note": "CBSE board examination results for the last three academic years.",
-<<<<<<< HEAD
-     "file": "cbse-results-past-three-years.pdf"},
-    {"id": "transfer-certificates", "category": "Academics &amp; results",
-     "title": "Transfer Certificates",
-     "note": "The register of transfer certificates issued by the school.",
-     "file": "transfer-certificates.pdf"},
-    {"id": "textbooks-declaration", "category": "Academics &amp; results",
-     "title": "Declaration on Use of Textbooks Published by Private Publishers",
-     "note": "The school's declaration on its use of privately published textbooks.",
-     "file": "textbooks-declaration.pdf"},
-    {"id": "academic-calendar", "category": "Academics &amp; results",
-     "title": "Annual Academic Calendar",
-     "note": "The school's calendar of academic dates and events for the year.",
-     "file": "annual-academic-calendar.pdf"},
-
-    # ---- Administration &amp; governance -----------------------------------
-    {"id": "annual-report", "category": "Administration &amp; governance",
-     "title": "Annual Report",
-     "note": "The school's published annual report.",
-     "file": "annual-report.pdf"},
-    {"id": "pta-list", "category": "Administration &amp; governance",
-     "title": "Parent Teacher Association",
-     "note": "The current Parent Teacher Association member list.",
-     "file": "pta-list.pdf"},
-    {"id": "fee-structure", "category": "Administration &amp; governance",
-     "title": "Fee Structure",
-     "note": "The school's current fee structure.",
-     "file": "fee-structure.pdf"},
-=======
      "file": "cbse-results-past-three-years.pdf",
      "period": "2023–24 to 2025–26", "status": "current"},
     {"id": "transfer-certificates", "category": "Academics &amp; results",
@@ -232,30 +144,18 @@ DOCUMENTS = [
      "note": "The school's current fee structure.",
      "file": "fee-structure.pdf",
      "period": "2027–29", "status": "current"},
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     # ---- Faculty --------------------------------------------------------
     {"id": "faculty-details", "category": "Faculty",
      "title": "Faculty &amp; Teacher Details",
      "note": "Details of the school's teaching faculty.",
-<<<<<<< HEAD
-     "file": "faculty-details.pdf"},
-=======
      "file": "faculty-details.pdf",
      "status": "undated", "availability": "on-request"},
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     # ---- School circulars ------------------------------------------------
     {"id": "circular-anand-utsav", "category": "School circulars",
      "title": "Circular &mdash; Anand Utsav",
      "note": "Circular issued for the Anand Utsav celebration.",
-<<<<<<< HEAD
-     "file": "circular-anand-utsav.pdf"},
-    {"id": "circular-khel-mela", "category": "School circulars",
-     "title": "Circular &mdash; Khel Mela",
-     "note": "Circular issued for the Khel Mela sports event.",
-     "file": "circular-khel-mela.pdf"},
-=======
      "file": "circular-anand-utsav.pdf",
      "issued": "22 Aug 2019", "status": "stale"},
     {"id": "circular-khel-mela", "category": "School circulars",
@@ -263,7 +163,6 @@ DOCUMENTS = [
      "note": "Circular issued for the Khel Mela sports event.",
      "file": "circular-khel-mela.pdf",
      "issued": "21 Oct 2019", "status": "stale"},
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 ]
 
 # The order categories are grouped in, on both pages.
@@ -281,10 +180,6 @@ def asset_path(doc):
     return f"{DOC_DIR}/{doc['file']}"
 
 
-<<<<<<< HEAD
-def is_uploaded(doc):
-    return os.path.exists(os.path.join(ROOT, asset_path(doc)))
-=======
 def is_on_request(doc):
     """A document the school keeps off the public site. Neither page links to
     a file for it, so tools/stage-deploy.py — which copies only what a page
@@ -363,7 +258,6 @@ def validate():
 
 
 validate()
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 
 def by_category():

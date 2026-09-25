@@ -12,10 +12,7 @@
   var wheelTotal = 0;
   var wheelTimer = 0;
   var touchY = null;
-<<<<<<< HEAD
-=======
   var gestureHeld = false;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   var leaving = null;
   var arriving = null;
   var settleTimer = 0;
@@ -68,11 +65,7 @@
   }
 
   function prepareTransition(from, to, direction) {
-<<<<<<< HEAD
-    if (reduced.matches) return;
-=======
     if (reduced.matches || from === to) return;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     leaving = targets[from];
     arriving = targets[to];
     document.body.classList.add("is-section-moving");
@@ -82,21 +75,6 @@
     arriving.style.setProperty("--section-shift", direction > 0 ? "8px" : "-8px");
   }
 
-<<<<<<< HEAD
-  function move(direction) {
-    if (moving || !inPhotoSequence()) return false;
-    var from = nearestIndex();
-    var to = Math.max(0, Math.min(targets.length - 1, from + direction));
-    if (to === from) return false;
-
-    moving = true;
-    prepareTransition(from, to, direction);
-    var top = topOf(targets[to]);
-    var duration = reduced.matches ? 0 : 0.72;
-    var request = new CustomEvent("cirs-section-scroll", {
-      cancelable:true,
-      detail:{ top:top, duration:duration, onComplete:settle }
-=======
   // Ease in and out so a chapter change gathers speed and then settles,
   // rather than leaping off at full speed the moment the wheel turns.
   function easeInOut(t) {
@@ -119,34 +97,20 @@
     var request = new CustomEvent("cirs-section-scroll", {
       cancelable:true,
       detail:{ top:top, duration:duration, easing:easeInOut, onComplete:settle }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     });
     window.dispatchEvent(request);
 
     if (!request.defaultPrevented) {
       window.scrollTo({ top:top, behavior:reduced.matches ? "auto" : "smooth" });
-<<<<<<< HEAD
-      settleTimer = window.setTimeout(settle, reduced.matches ? 80 : 900);
-    } else {
-      // A hard ceiling keeps the interaction usable if a smooth-scroll
-      // controller is interrupted before it reports completion.
-      settleTimer = window.setTimeout(settle, reduced.matches ? 80 : 1100);
-=======
       settleTimer = window.setTimeout(settle, reduced.matches ? 80 : 1200);
     } else {
       // A hard ceiling keeps the interaction usable if a smooth-scroll
       // controller is interrupted before it reports completion.
       settleTimer = window.setTimeout(settle, reduced.matches ? 80 : 1500);
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     }
     return true;
   }
 
-<<<<<<< HEAD
-  window.addEventListener("wheel", function (event) {
-    if (blocked(event.target) || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-    if (!inPhotoSequence()) { wheelTotal = 0; return; }
-=======
   // The figures panel is the last stop. Standing at its top, the wheel
   // still steps back up into the photographs, but a downward turn is the
   // reader leaving the sequence, so it goes to ordinary scrolling.
@@ -180,19 +144,10 @@
       }
       return;
     }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     // Own the complete wheel gesture while the photo sequence is active.
     // Otherwise the follow-up events emitted by a trackpad or wheel leak into
     // Lenis during the transition and can carry the page across many panels.
-<<<<<<< HEAD
-    event.preventDefault();
-    if (moving) return;
-
-    wheelTotal += event.deltaY;
-    window.clearTimeout(wheelTimer);
-    wheelTimer = window.setTimeout(function () { wheelTotal = 0; }, 140);
-=======
     // Lenis does not look at defaultPrevented; this is the flag it honours.
     event.preventDefault();
     event.lenisStopPropagation = true;
@@ -204,20 +159,14 @@
     if (moving || gestureHeld) return;
 
     wheelTotal += event.deltaY;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if (Math.abs(wheelTotal) < 24) return;
 
     var direction = wheelTotal > 0 ? 1 : -1;
     wheelTotal = 0;
-<<<<<<< HEAD
-    move(direction);
-  }, { passive:false });
-=======
     if (move(direction)) gestureHeld = true;
   // Capture, so this runs before Lenis's own listener, which cirs.js
   // registers first; otherwise the flag above arrives too late to matter.
   }, { passive:false, capture:true });
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
   window.addEventListener("touchstart", function (event) {
     if (blocked(event.target) || event.touches.length !== 1) return;
@@ -232,16 +181,6 @@
   }, { passive:true });
 
   window.addEventListener("touchmove", function (event) {
-<<<<<<< HEAD
-    if (touchY !== null && !blocked(event.target) && inPhotoSequence()) event.preventDefault();
-  }, { passive:false });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.defaultPrevented || blocked(event.target) || !inPhotoSequence()) return;
-    var direction = 0;
-    if (event.key === "PageDown" || event.key === "ArrowDown" || (event.key === " " && !event.shiftKey)) direction = 1;
-    if (event.key === "PageUp" || event.key === "ArrowUp" || (event.key === " " && event.shiftKey)) direction = -1;
-=======
     if (touchY !== null && !blocked(event.target) && inPhotoSequence()) {
       event.preventDefault();
       event.lenisStopPropagation = true;
@@ -254,7 +193,6 @@
     if (event.key === "PageDown" || event.key === "ArrowDown" || (event.key === " " && !event.shiftKey)) direction = 1;
     if (event.key === "PageUp" || event.key === "ArrowUp" || (event.key === " " && event.shiftKey)) direction = -1;
     if (!(inPhotoSequence() || (direction < 0 && atFactsTop()))) return;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if (direction) {
       event.preventDefault();
       if (!moving) move(direction);

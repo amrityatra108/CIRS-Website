@@ -57,13 +57,10 @@ body.alumni{
 }
 
 body.alumni main{ background:var(--aj-ink); }
-<<<<<<< HEAD
-=======
 html:has(body.alumni){ scroll-behavior:auto; }
 body.alumni #curtain{ display:none; }
 body.alumni .footer-wrap{ position:relative; bottom:auto; }
 body.alumni section[id]{ scroll-margin-top:6rem; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 /* The shared under-construction note is built for a page made of paper, and
    this one is made of night. Darkening its ground without re-pitching its
@@ -193,15 +190,9 @@ body.alumni.aj-quiet .header:focus-within{ opacity:1; }
   min-height:100svh;
 }
 .aj-portal__stage{
-<<<<<<< HEAD
-  position:relative; min-height:100svh;
-  display:grid; place-items:center;
-  padding:clamp(48px,8vh,96px) var(--gut);
-=======
   position:relative; height:100svh;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   padding:clamp(18px,3vh,34px) var(--gut) clamp(28px,4vh,48px);
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   overflow:clip;
 }
 /* The field the plate falls into: a slow radial, and a grain of distant
@@ -220,11 +211,7 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 
 .aj-portal__plate{
   position:relative; z-index:2; margin:0;
-<<<<<<< HEAD
-  width:min(100%, 1180px);
-=======
   width:min(100%, 900px, calc(150svh - 510px));
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   box-shadow:0 40px 120px -40px rgba(0,0,0,.9);
 }
 .aj-portal__plate img{
@@ -243,11 +230,7 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 .aj-portal__copy{
   position:relative; z-index:3;
   width:min(100%, 720px);
-<<<<<<< HEAD
-  margin-top:clamp(36px,6vh,72px);
-=======
   margin-top:clamp(18px,3vh,30px);
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   text-align:center;
 }
 .aj-portal__head{
@@ -262,15 +245,6 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 }
 
 /* ============================================================
-<<<<<<< HEAD
-   CHAPTER 3 — The constellation
-   ------------------------------------------------------------
-   A field of eighteen real destinations. It is NOT a map and is
-   not labelled as one: the four regions group, and group west to
-   east, but no point claims a latitude, and chapter six gives
-   the same eighteen as plain text for anyone who wants them
-   without the field.
-=======
    CHAPTER 3 — The map
    ------------------------------------------------------------
    Nineteen real destinations on a real map, in Robinson, with a
@@ -278,7 +252,6 @@ html.js-motion .aj-portal__depth{ opacity:0; }
    the institution is; the four regions group because the world
    does. Chapter six gives the same nineteen as plain text for
    anyone who wants them without the map.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
    ============================================================ */
 .aj-const{
   position:relative; background:var(--aj-ink);
@@ -329,21 +302,6 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 }
 
 /* ---- the field ---- */
-<<<<<<< HEAD
-/* ---- the sky ----
-   No frame, and almost no colour of its own. What is in here is a spiral
-   galaxy drawn by alumni-journey.js from the same six numbers that place
-   the nineteen destinations, so the stars and the named ones lie on one
-   spiral. The ratio is 3:2 rather than 16:9 because a spiral in a wide
-   letterbox leaves both ends of the frame empty; 3:2 also makes the
-   viewBox scale uniform, which is what keeps a star round. */
-.ajc__field{
-  position:relative; width:100%; aspect-ratio:3/2;
-  min-height:420px; overflow:hidden;
-  background:
-    radial-gradient(58% 58% at 50% 50%, rgba(28,34,62,.55), transparent 72%),
-    radial-gradient(120% 120% at 50% 50%, #06060D 30%, #030308 100%);
-=======
 /* ---- the map ----
    A world in Robinson, drawn from tools/worldland.py, with CIRS where
    Coimbatore is and a route out to each of the nineteen. Coastline only:
@@ -362,29 +320,10 @@ html.js-motion .aj-portal__depth{ opacity:0; }
   background:
     radial-gradient(64% 84% at 50% 46%, rgba(26,32,58,.50), transparent 74%),
     radial-gradient(120% 120% at 50% 50%, #07070E 30%, #030308 100%);
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 }
 /* the vignette a lens gives, over everything */
 .ajc__field::after{
   content:""; position:absolute; inset:0; z-index:5; pointer-events:none;
-<<<<<<< HEAD
-  background:radial-gradient(118% 108% at 50% 50%,
-    transparent 52%, rgba(2,2,6,.46) 86%, rgba(2,2,6,.78) 100%);
-}
-.ajc__stars{ position:absolute; inset:0; z-index:0; width:100%; height:100%; }
-.ajc__star{ fill:#EAF0FF; }
-.ajc__lines{ position:absolute; inset:0; z-index:2; width:100%; height:100%; }
-.ajc__line{
-  fill:none; stroke:rgba(190,208,240,.16); stroke-width:.7;
-  vector-effect:non-scaling-stroke;
-  transition:stroke .4s var(--e), stroke-width .4s var(--e), opacity .4s var(--e);
-}
-.ajc__line.is-dim{ opacity:.06; }
-.ajc__line.is-lit{ stroke:var(--aj-gold-lit); stroke-width:1.5; opacity:1; }
-html.js-motion .ajc__line{ opacity:0; }
-
-/* the core — CIRS at the middle of the galaxy */
-=======
   background:radial-gradient(118% 112% at 50% 48%,
     transparent 48%, rgba(2,2,6,.50) 84%, rgba(2,2,6,.82) 100%);
 }
@@ -419,7 +358,6 @@ html.js-motion .ajc__origin{ opacity:0; }
 .ajc__flight{ fill:#FFE9BE; }
 
 /* the origin — CIRS, where every route starts */
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .ajc__origin{
   position:absolute; left:var(--x); top:var(--y);
   transform:translate(-50%,-50%); margin:0;
@@ -429,16 +367,6 @@ html.js-motion .ajc__origin{ opacity:0; }
 .ajc__originDot{
   width:9px; height:9px; border-radius:50%;
   background:#FFFDF6;
-<<<<<<< HEAD
-  box-shadow:
-    0 0 0 3px rgba(255,236,190,.30),
-    0 0 14px 5px rgba(255,220,150,.70),
-    0 0 42px 16px rgba(226,168,86,.40),
-    0 0 90px 40px rgba(150,110,70,.22);
-}
-.ajc__originName{
-  font-size:.72rem; letter-spacing:.24em; text-transform:uppercase;
-=======
   /* Bright, and tight. The first draft threw ninety pixels of haze over
      southern India, which is where four of the nineteen destinations and
      two of their names are: the origin was erasing its own neighbours. */
@@ -454,17 +382,12 @@ html.js-motion .ajc__origin{ opacity:0; }
      destinations standing closest to it. */
   font-size:clamp(.58rem, .95cqw, .72rem);
   letter-spacing:.24em; text-transform:uppercase;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   color:#FFF3DC; font-weight:600; text-align:center;
   display:flex; flex-direction:column; line-height:1.35;
   text-shadow:0 1px 8px rgba(3,3,8,.98), 0 0 18px rgba(3,3,8,.9);
 }
 .ajc__originName small{
-<<<<<<< HEAD
-  font-size:.60rem; letter-spacing:.16em; font-weight:400;
-=======
   font-size:.82em; letter-spacing:.16em; font-weight:400;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   color:rgba(255,243,220,.62); text-transform:none;
 }
 
@@ -520,15 +443,6 @@ html.js-motion .ajc__origin{ opacity:0; }
 .ajc__pt:focus-visible .ajc__dot::after,
 .ajc__pt.is-active .ajc__dot::after{ transform:translate(-50%,-50%) scale(1); opacity:1; }
 /* Every destination is named, all the time. Hiding the names until a point
-<<<<<<< HEAD
-   was hovered made a sky with nothing to read in it, and left the whole
-   chapter mute to anyone who was not pointing at something. The name is
-   always up; the country comes in when the point is asked about, so each
-   label is one short line at rest and cannot collide with its neighbour. */
-.ajc__label{
-  position:absolute; left:50%; bottom:calc(100% + 3px);
-  transform:translate(-50%,0);
-=======
    was hovered made a map with nothing to read on it, and left the whole
    chapter mute to anyone who was not pointing at something. The name is
    always up; the country comes in when the point is asked about, so each
@@ -544,20 +458,12 @@ html.js-motion .ajc__origin{ opacity:0; }
 .ajc__label{
   position:absolute; left:50%; top:50%;
   transform:translate(calc(-50% + var(--lx,0px)), calc(-50% + var(--ly,0px)));
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   display:flex; flex-direction:column; align-items:center; gap:1px;
   width:max-content; max-width:13ch; text-align:center;
   pointer-events:none;
   text-shadow:0 1px 6px rgba(5,4,10,.95), 0 0 14px rgba(5,4,10,.8);
   transition:opacity .28s var(--e);
 }
-<<<<<<< HEAD
-.ajc__name{
-  /* Scales with the field, so the eighteen labels keep the clearance they
-     were positioned for at every desktop width rather than only the wide
-     ones. The positions themselves are in tools/alumni.py. */
-  font-size:clamp(.66rem, .82vw, .78rem);
-=======
 .ajc__pt[data-side="r"] .ajc__label{
   transform:translate(var(--lx,0px), calc(-50% + var(--ly,0px)));
   align-items:flex-start; text-align:left;
@@ -571,18 +477,13 @@ html.js-motion .ajc__origin{ opacity:0; }
      were positioned for at every desktop width rather than only the wide
      ones. The positions themselves are in tools/alumni.py. */
   font-size:clamp(.64rem, .98cqw, .78rem);
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   line-height:1.2; letter-spacing:.012em; font-weight:600;
   color:rgba(247,243,236,.82);
   transition:color .28s var(--e);
 }
 /* Taken out of flow: collapsed with max-height it still reported its full
    width to the label above it, so "United Kingdom" was setting the width of
-<<<<<<< HEAD
-   a label that only reads "Durham" — and the sky filled with collisions
-=======
    a label that only reads "Durham" — and the map filled with collisions
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
    between things nobody could see. */
 .ajc__country{
   position:absolute; top:calc(100% + 2px); left:50%; transform:translateX(-50%);
@@ -590,11 +491,8 @@ html.js-motion .ajc__origin{ opacity:0; }
   white-space:nowrap; color:var(--aj-gold-lit);
   opacity:0; transition:opacity .28s var(--e);
 }
-<<<<<<< HEAD
-=======
 .ajc__pt[data-side="r"] .ajc__country{ left:0; transform:none; }
 .ajc__pt[data-side="l"] .ajc__country{ left:auto; right:0; transform:none; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .ajc__pt:hover .ajc__name,
 .ajc__pt:focus-visible .ajc__name,
 .ajc__pt.is-active .ajc__name{ color:#FFF6E2; }
@@ -777,14 +675,11 @@ html.js-motion .ajc__pt{ opacity:0; }
   aspect-ratio:3/4; background:var(--aj-ivory-2);
 }
 .ajp__img{ width:100%; height:100%; object-fit:cover; display:block; }
-<<<<<<< HEAD
-=======
 .ajp[data-person="hari-om-jani"] .ajp__img{ object-position:center 22%; }
 .ajp[data-person="divyaj-dt"] .ajp__img{ object-position:62% center; }
 .ajp[data-person="shashwat-santosh"] .ajp__img{ object-position:60% center; }
 .ajp__sources{ display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; margin:0; font-size:var(--fs-sm); }
 .ajp__sources a{ color:var(--aj-gold-ink); text-decoration:underline; text-underline-offset:.2em; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 /* The plate. A portrait that has not arrived, drawn rather than faked. */
 .ajp__plate{
@@ -827,14 +722,11 @@ html.js-motion .ajc__pt{ opacity:0; }
   font-family:var(--aj-voice); font-style:italic;
   font-size:clamp(1.05rem,1.9vw,1.45rem); color:var(--ink-soft);
 }
-<<<<<<< HEAD
-=======
 .ajp__bio{
   max-width:58ch; margin:0 0 clamp(22px,3vw,34px);
   font-size:clamp(1rem,1.18vw,1.12rem); line-height:1.7;
   color:var(--ink-soft);
 }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .ajp__meta{
   margin:0 0 clamp(18px,2.6vw,26px);
   display:flex; flex-wrap:wrap; gap:10px 28px;
@@ -852,23 +744,13 @@ html.js-motion .ajc__pt{ opacity:0; }
 /* ============================================================
    CHAPTER 5 — Paths from CIRS
    ------------------------------------------------------------
-<<<<<<< HEAD
-   Five scenes on one horizontal track. Pinned and dragged
-   sideways on a wide screen; a plain vertical stack below that,
-   because a pinned horizontal rail on a phone is a scroll trap.
-=======
    Five pathways share one stable frame on wide screens. Native
    scrolling advances the frame; narrow screens show the full list.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
    ============================================================ */
 .aj-paths{
   position:relative; background:var(--aj-ink);
   padding-block:clamp(72px,12vh,140px) 0;
   overflow:clip;
-<<<<<<< HEAD
-  transition:background-color .9s var(--e);
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 }
 .aj-paths__head{ max-width:760px; }
 .aj-paths__head .h2{ color:var(--aj-on-dark); }
@@ -876,33 +758,6 @@ html.js-motion .ajc__pt{ opacity:0; }
 .aj-paths__head .lead{ color:var(--aj-on-dark-soft); }
 
 .ajw-track{ position:relative; margin-top:clamp(28px,4vw,48px); }
-<<<<<<< HEAD
-.ajw-rail{ display:flex; }
-
-/* ---- no cards ----
-   Five boxes in a row is the row of identical cards this page exists to
-   avoid, and a bordered panel over a coloured ground reads as a dialog.
-   So the scene has no box at all: the GROUND belongs to the section and
-   changes colour as each pathway takes the screen, and the scenes are
-   columns of type separated by one hairline, dimmed until they are the
-   one being read. alumni-journey.js does the ground; --aj-scene below is
-   where it reads each colour from, so the colours stay in this file. */
-.ajw{
-  position:relative; flex:0 0 auto;
-  width:min(84vw, 540px);
-  padding:clamp(30px,4vw,48px) 0;
-  margin-right:clamp(34px,5vw,76px);
-  background:transparent; border:0;
-  display:flex; flex-direction:column;
-  transition:opacity .6s var(--e);
-}
-/* The scene that has the screen is marked in ACCENT, not by dimming the
-   other four. Fading them to a third looked right and measured wrong —
-   every line in an inactive scene fell to between 1.5:1 and 2.5:1, which
-   is unreadable, and they are on screen, not off it. The ground changing
-   colour under each pathway is the dominant-scene cue; this is the rest
-   of it, and it costs no legibility at all. */
-=======
 .ajw-rail{ display:block; }
 /* Without scroll choreography, every pathway must stay in reading order. */
 html:not(.js-motion) body.alumni .ajw-rail{ display:grid; gap:0; padding-inline:var(--gut); }
@@ -922,22 +777,12 @@ html:not(.js-motion) body.alumni .ajw-nav{ display:none; }
   display:flex; flex-direction:column;
 }
 /* Accent marks the active pathway without changing the ground underneath it. */
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .ajw-track.is-live .ajw.is-on .ajw__n,
 .ajw-track.is-live .ajw.is-on .ajw__label{ color:var(--aj-accent); }
 .ajw-track.is-live .ajw.is-on .ajw__label::before{
   content:""; display:block; width:26px; height:2px;
   background:var(--aj-accent); margin-bottom:12px;
 }
-<<<<<<< HEAD
-.ajw::before{
-  content:""; position:absolute; top:6%; bottom:6%;
-  left:calc(-1 * clamp(17px,2.5vw,38px)); width:1px;
-  background:linear-gradient(to bottom, transparent, var(--aj-hair), transparent);
-}
-.ajw:first-child::before{ display:none; }
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .ajw[data-scene="ink"]{    --aj-scene:#0E0B12; --aj-accent:var(--aj-gold-lit); }
 .ajw[data-scene="navy"]{   --aj-scene:#16243A; --aj-accent:var(--aj-navy-lit); }
 .ajw[data-scene="gold"]{   --aj-scene:#2A2110; --aj-accent:#E8B24A; }
@@ -982,26 +827,6 @@ a.ajw__evName{
 .ajw__evWhere{ font-size:var(--fs-xs); color:var(--aj-on-dark-mute); }
 
 .ajw-nav{
-<<<<<<< HEAD
-  padding:clamp(22px,3vw,34px) var(--gut) clamp(48px,7vh,80px);
-  display:flex; justify-content:center;
-}
-.ajw__dots{ list-style:none; display:flex; gap:10px; margin:0; padding:0; }
-.ajw__dot{
-  appearance:none; background:transparent; border:0; cursor:pointer;
-  padding:8px; display:grid; place-items:center;
-}
-.ajw__dot span{
-  display:block; width:28px; height:2px; background:var(--aj-hair);
-  transition:background-color .35s var(--e);
-}
-.ajw__dot.is-on span{ background:var(--aj-gold); }
-.ajw__dot:hover span{ background:var(--aj-gold-lit); }
-
-/* On a wide screen the track is pinned and dragged sideways, so it wants a
-   screen of its own and scenes of one height. Below 900px none of this
-   applies and the rail is a plain stack — see the phone block at the foot. */
-=======
   padding:18px var(--gut) 26px;
   display:flex; justify-content:center;
 }
@@ -1020,16 +845,10 @@ a.ajw__evName{
 .ajw__dot:hover span{ color:var(--aj-on-dark); border-color:var(--aj-on-dark); }
 
 /* The pinned frame keeps one complete pathway in view at a time. */
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 @media (min-width: 900px){
   .ajw-track{
     min-height:100svh;
     display:flex; flex-direction:column; justify-content:center;
-<<<<<<< HEAD
-  }
-  .ajw-rail{ padding-inline:var(--gut); }
-  .ajw{ height:min(70svh, 600px); }
-=======
     padding-top:80px;
   }
   .ajw-rail{
@@ -1062,7 +881,6 @@ a.ajw__evName{
   html:not(.js-motion) body.alumni .ajw-track{
     min-height:auto; padding-top:0;
   }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 }
 
 /* ============================================================
@@ -1227,26 +1045,14 @@ body.alumni .aj-return__acts .btn--ghost:hover{
 /* ============================================================
    Tablet and phone
    ------------------------------------------------------------
-<<<<<<< HEAD
-   The constellation stops being a field and becomes a list: the
-   same buttons, the same panel, laid out in normal flow. There
-   is one DOM and no second markup path that can rot.
-=======
    The map stops being a map and becomes a list: the same
    buttons, the same panel, laid out in normal flow. There is
    one DOM and no second markup path that can rot.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
    ============================================================ */
 @media (max-width: 899px){
   .aj-open{ padding-bottom:clamp(76px,14vh,120px); }
   .aj-open__title{ font-size:clamp(1.75rem,8.4vw,3.2rem); }
 
-<<<<<<< HEAD
-  .aj-portal__stage{ min-height:auto; padding-block:clamp(56px,10vh,88px); }
-  .aj-portal{ min-height:auto; }
-
-  /* --- the field becomes a list --- */
-=======
   .aj-portal__stage{ height:auto; min-height:auto; padding-block:clamp(56px,10vh,88px); }
   .aj-portal{ min-height:auto; }
 
@@ -1254,7 +1060,6 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   /* Nineteen names over a world 360 pixels wide is a puzzle, not a map,
      so below 900px the field stops being one: the coastline, the routes
      and the flights go, and the same nineteen buttons become rows. */
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .ajc__field{
     aspect-ratio:auto; min-height:0; border:0;
     background:none; padding-left:22px;
@@ -1264,10 +1069,7 @@ body.alumni .aj-return__acts .btn--ghost:hover{
     content:""; position:absolute; left:4px; top:8px; bottom:8px; width:1px;
     background:linear-gradient(to bottom, var(--aj-gold), var(--aj-hair-soft));
   }
-<<<<<<< HEAD
-=======
   .ajc__map,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .ajc__lines{ display:none; }
   .ajc__origin{
     position:static; transform:none; margin:0 0 6px -22px;
@@ -1279,24 +1081,17 @@ body.alumni .aj-return__acts .btn--ghost:hover{
     display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:center;
     border-bottom:1px solid var(--aj-hair-soft); text-align:left;
   }
-<<<<<<< HEAD
-=======
   .ajc__pt[data-side] .ajc__label,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .ajc__label{
     position:static; transform:none; opacity:1;
     align-items:flex-start; gap:3px; text-align:left;
     max-width:none; text-shadow:none;
   }
-<<<<<<< HEAD
-  .ajc__country{ position:static; transform:none; opacity:1; white-space:normal; }
-=======
   .ajc__pt[data-side] .ajc__country,
   .ajc__country{
     position:static; transform:none; opacity:1; white-space:normal;
     left:auto; right:auto;
   }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .ajc__item.is-out{ display:none; }
   .ajc__status{ margin-left:0; width:100%; }
 
@@ -1311,20 +1106,12 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   .ajp,
   .ajp[data-side="right"]{ grid-template-columns:1fr; }
   .ajp[data-side="right"] .ajp__figure{ order:0; }
-<<<<<<< HEAD
-  .ajp__frame{ aspect-ratio:4/3; }
-  .ajp__index{ top:-.30em; }
-
-  /* --- the pathways stack, and never pin --- */
-  .ajw-rail{ display:grid; gap:0; }
-=======
   .ajp__frame{ aspect-ratio:3/4; }
   .ajp[data-person="shashwat-santosh"] .ajp__frame{ aspect-ratio:4/3; }
   .ajp__index{ top:-.30em; }
 
   /* --- the pathways stack, and never pin --- */
   .ajw-rail{ display:grid; gap:0; padding-inline:var(--gut); }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .ajw{
     width:100%; margin-right:0;
     padding:clamp(30px,6vw,44px) 0;
@@ -1334,14 +1121,8 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   .ajw::before{ display:none; }
   .ajw-nav{ display:none; }
 
-<<<<<<< HEAD
-  /* --- the sky is a list here, so it keeps none of its sky --- */
-  .ajc__field::after,
-  .ajc__stars{ display:none; }
-=======
   /* --- a list keeps none of the map's own dark --- */
   .ajc__field::after{ display:none; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .ajc__origin{ pointer-events:auto; }
 
   .aj-return{ min-height:auto; }
@@ -1376,10 +1157,7 @@ body.alumni .aj-return__acts .btn--ghost:hover{
 @media (prefers-reduced-motion: reduce){
   .aj-open__media img{ transform:none; }
   .ajc__line,
-<<<<<<< HEAD
-=======
   .ajc__land,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   .ajc__item,
   .ajc__dot,
   .ajc__label,

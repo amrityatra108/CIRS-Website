@@ -16,8 +16,6 @@
 /* The trail sits under the banner rather than over it: the banner is the
    page's name and carries the only h1, and a crumb above it would read as
    though it were part of the heading. */
-<<<<<<< HEAD
-=======
 body.ibdp .section:not(.on-purple) :focus-visible,
 body.ibdp .crumbs :focus-visible{ outline-color:var(--purple-ink); }
 body.ibdp .pagehead__cta{
@@ -30,7 +28,6 @@ body.ibdp .pagehead__cta{
 @media (max-width:640px){
   body.ibdp .pagehead__cta .btn{ width:100%; white-space:normal; text-align:center; }
 }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 body.ibdp .crumbs{
   border-bottom: 1px solid var(--rule);
   padding-block: 14px;
@@ -189,8 +186,6 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
 }
 .ib-end h2{ margin: 0 0 12px; }
 .ib-end .copy{ margin: 0; }
-<<<<<<< HEAD
-=======
 
 /* ============================================================
    Shared by both curriculum child pages. The CBSE page wears
@@ -396,4 +391,3 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
   .ibdp-next .ib-cta .btn{ width: 100%; white-space: normal; text-align: center; }
   .ibdp-availability__links{ align-items: stretch; }
 }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168

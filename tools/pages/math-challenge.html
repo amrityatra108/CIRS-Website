@@ -1,32 +1,4 @@
 <section class="ma-hero" id="top" data-ground="#07070A">
-<<<<<<< HEAD
-  <!-- Interactive mathematical canvas: "The moment a pattern appears".
-       Traces geometric loci and reveals spatial depth on pointer/touch interaction. -->
-  <div class="ma-field" aria-hidden="true">
-    <canvas id="heroCanvas" class="ma-field__canvas"></canvas>
-    <div class="ma-field__vignette"></div>
-  </div>
-
-  <div class="wrap ma-hero__inner">
-    <div class="ma-hero__badge rv">
-      <span class="ma-hero__badge-dot"></span>
-      <span>Mathematical Discovery at CIRS</span>
-    </div>
-
-    <h1 class="ma-title rv">Math <em>Challenge</em></h1>
-    <p class="ma-strap rv">Question. Reason. Discover. Solve.</p>
-
-    <div class="ma-discovery-bar rv" id="heroDiscoveryStatus" role="status" aria-live="polite">
-      <span class="ma-discovery-pulse" aria-hidden="true"></span>
-      <span class="ma-discovery-text" id="heroDiscoveryText">Move pointer or drag touch control to trace the geometric pattern</span>
-      <button type="button" class="ma-discovery-skip" id="heroSkipBtn" aria-label="Skip interactive trace and reveal full pattern">Reveal pattern</button>
-    </div>
-
-    <div class="ma-hero__cta rv">
-      <a class="btn btn--primary" href="#puzzle">Try the visual puzzle</a>
-      <a class="btn btn--outline" href="#zones">Choose your zone</a>
-      <a class="btn btn--ghost" href="#archive">Browse archive</a>
-=======
   <!-- The mathematics behind the heading. All of it is decoration and none of
        it is read aloud: the grid, the orbits, the formulae and the points are
        one aria-hidden layer, so a screen reader meets the heading first. -->
@@ -78,124 +50,10 @@
       <p class="ma-copy">A challenge problem is not a test of what was taught last week. It is
         set so that the method is not obvious, so that the first idea usually fails, and so that
         the student who gets there has had to think rather than remember.</p>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
   </div>
 </section>
 
-<<<<<<< HEAD
-<!-- Section 1: The Interactive Demonstration Puzzle -->
-<section class="ma-sec ma-sec--puzzle" id="puzzle">
-  <div class="wrap">
-    <div class="ma-sechead rv">
-      <p class="ma-eyebrow"><span class="sc">Visual Geometry Challenge</span></p>
-      <h2 class="ma-h2">The shortest path: <em>Heron&rsquo;s reflection.</em></h2>
-      <p class="ma-copy">Before exploring the school&rsquo;s monthly archive, try this classic geometric puzzle. Move the point along the baseline to discover the principle light itself obeys.</p>
-    </div>
-
-    <div class="ma-puzzle-card rv">
-      <div class="ma-puzzle-card__header">
-        <div>
-          <span class="ma-puzzle-badge">Sample Interactive Puzzle</span>
-          <h3 class="ma-puzzle-title">Heron of Alexandria&rsquo;s Shortest Path</h3>
-        </div>
-        <p class="ma-puzzle-context">Editorial demonstration &bull; Not an official monthly paper</p>
-      </div>
-
-      <div class="ma-puzzle-instructions">
-        <p><strong>Instruction:</strong> Two points, <strong>A</strong> and <strong>B</strong>, sit above a reflective line <strong>L</strong>. Move point <strong>P</strong> along line <strong>L</strong> so that the total walking journey <strong>AP + PB</strong> is as short as mathematically possible.</p>
-      </div>
-
-      <div class="ma-puzzle-stage">
-        <div class="ma-puzzle-canvas-wrap">
-          <canvas id="puzzleCanvas" width="800" height="420" role="img" aria-label="Interactive geometric diagram of Heron's reflection puzzle. Drag point P along the horizontal baseline."></canvas>
-          <div class="ma-puzzle-sr-status vh" id="puzzleSrStatus" aria-live="polite"></div>
-        </div>
-
-        <div class="ma-puzzle-dashboard">
-          <div class="ma-puzzle-readouts" role="region" aria-label="Geometric measurements">
-            <div class="ma-readout">
-              <span class="ma-readout__label">Segment AP</span>
-              <span class="ma-readout__val" id="readoutAP">--</span>
-            </div>
-            <div class="ma-readout">
-              <span class="ma-readout__label">Segment PB</span>
-              <span class="ma-readout__val" id="readoutPB">--</span>
-            </div>
-            <div class="ma-readout ma-readout--highlight">
-              <span class="ma-readout__label">Total Length (AP + PB)</span>
-              <span class="ma-readout__val" id="readoutTotal">--</span>
-            </div>
-            <div class="ma-readout">
-              <span class="ma-readout__label">Incident Angle &alpha;</span>
-              <span class="ma-readout__val" id="readoutAlpha">--&deg;</span>
-            </div>
-            <div class="ma-readout">
-              <span class="ma-readout__label">Reflection Angle &beta;</span>
-              <span class="ma-readout__val" id="readoutBeta">--&deg;</span>
-            </div>
-          </div>
-
-          <div class="ma-puzzle-controls">
-            <label for="puzzleSlider" class="ma-puzzle-slider-label">
-              <span>Position of Point P on Line L</span>
-              <span id="puzzlePosPercent">50%</span>
-            </label>
-            <div class="ma-puzzle-slider-row">
-              <button type="button" class="ma-nudge-btn" id="puzzleNudgeLeft" aria-label="Move point P left by one step">&larr;</button>
-              <input type="range" id="puzzleSlider" min="0" max="100" value="25" step="0.5" aria-label="Move point P horizontally across line L">
-              <button type="button" class="ma-nudge-btn" id="puzzleNudgeRight" aria-label="Move point P right by one step">&rarr;</button>
-            </div>
-            <p class="ma-puzzle-keyhint"><small>Tip: Use Left &amp; Right arrow keys on your keyboard, drag Point P directly on screen, or slide above.</small></p>
-
-            <div class="ma-puzzle-actions">
-              <button type="button" class="btn btn--primary" id="puzzleCheckBtn">Check Solution</button>
-              <button type="button" class="btn btn--outline" id="puzzleHintBtn" aria-expanded="false" aria-controls="puzzleHintBox">Hint</button>
-              <button type="button" class="btn btn--ghost" id="puzzleProofBtn">Show Proof</button>
-              <button type="button" class="btn btn--ghost" id="puzzleResetBtn">Reset</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hint Box (Expandable) -->
-      <div class="ma-puzzle-hint" id="puzzleHintBox" hidden>
-        <div class="ma-puzzle-hint__inner">
-          <p class="ma-puzzle-hint__title">Geometric Hint</p>
-          <ol class="ma-puzzle-hint__list">
-            <li>What happens if you reflect point <strong>B</strong> straight down across line L to create a virtual mirror point <strong>B&prime;</strong>?</li>
-            <li>For any position of P, length <strong>PB</strong> is identical to length <strong>PB&prime;</strong> by symmetry. Therefore, minimizing <strong>AP + PB</strong> is the exact same as minimizing <strong>AP + PB&prime;</strong>!</li>
-            <li>What is the shortest geometric path connecting point <strong>A</strong> to point <strong>B&prime;</strong>?</li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- Reveal & Mathematical Explanation -->
-      <div class="ma-puzzle-reveal" id="puzzleRevealBox" hidden>
-        <div class="ma-puzzle-reveal__inner">
-          <div class="ma-puzzle-reveal__head">
-            <span class="ma-reveal-tag">Mathematical Insight</span>
-            <h4 class="ma-reveal-title">Why the Shortest Path Creates Equal Angles</h4>
-          </div>
-          <div class="ma-reveal-body">
-            <p>In Euclidean geometry, the shortest distance between any two points is a straight line segment. By reflecting point <strong>B</strong> across line L to virtual point <strong>B&prime;</strong>, we notice that <strong>PB = PB&prime;</strong> for any point P on line L.</p>
-            <p>Therefore, the total path length <strong>AP + PB = AP + PB&prime;</strong>. The path is minimized when <strong>A, P, and B&prime;</strong> lie on one straight, unbroken line!</p>
-            <p>Because vertical opposite angles are equal, this collinear line guarantees that the incident angle <strong>&alpha;</strong> equals the reflection angle <strong>&beta;</strong>. Heron of Alexandria discovered this geometric minimum in 60 CE &mdash; this is the exact principle of least time by which light reflects from mirrors.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 2: Four Challenge Zones -->
-<section class="ma-sec ma-sec--zones" id="zones">
-  <div class="wrap">
-    <div class="ma-sechead rv">
-      <p class="ma-eyebrow"><span class="sc">Four Grade Divisions</span></p>
-      <h2 class="ma-h2">Four zones, <em>one love of math.</em></h2>
-      <p class="ma-copy">Problems are designed for four distinct grade divisions, calibrated so that a Grade 5 student and a Grade 12 senior each encounter authentic mathematical challenge. Select a zone to jump directly into its published archive.</p>
-=======
 <section class="ma-sec" id="journey">
   <div class="wrap">
     <div class="ma-sechead rv">
@@ -217,7 +75,6 @@
       <h2 class="ma-h2">Four zones, <em>one love of math.</em></h2>
       <p class="ma-copy">Problems are set for four grade groups, so that a student in Grade V
         and a student in Grade XII are each given something that is genuinely hard for them.</p>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
     <div class="ma-zones">
 {{MATH_ZONES}}
@@ -225,66 +82,6 @@
   </div>
 </section>
 
-<<<<<<< HEAD
-<!-- Section 3: How a Mind Solves -->
-<section class="ma-sec ma-sec--journey" id="journey">
-  <div class="wrap">
-    <div class="ma-sechead rv">
-      <p class="ma-eyebrow"><span class="sc">The Challenge Journey</span></p>
-      <h2 class="ma-h2">How a mind solves: <em>Five stages, one problem.</em></h2>
-      <p class="ma-copy">Every challenge begins with a question. Here is how mathematical habits of mind &mdash; questioning, finding invariants, testing small cases, and rigorous deduction &mdash; turn an impossible brute-force search into an instant proof.</p>
-    </div>
-
-    <!-- Step Navigator -->
-    <div class="ma-journey-nav rv" role="tablist" aria-label="Five stages of mathematical thinking">
-      <button type="button" class="ma-journey-tab is-active" role="tab" id="tab-01" aria-selected="true" aria-controls="step-01" data-step="01">
-        <span class="ma-journey-tab__num">01</span>
-        <span class="ma-journey-tab__name">Question</span>
-      </button>
-      <button type="button" class="ma-journey-tab" role="tab" id="tab-02" aria-selected="false" aria-controls="step-02" data-step="02">
-        <span class="ma-journey-tab__num">02</span>
-        <span class="ma-journey-tab__name">Think</span>
-      </button>
-      <button type="button" class="ma-journey-tab" role="tab" id="tab-03" aria-selected="false" aria-controls="step-03" data-step="03">
-        <span class="ma-journey-tab__num">03</span>
-        <span class="ma-journey-tab__name">Explore</span>
-      </button>
-      <button type="button" class="ma-journey-tab" role="tab" id="tab-04" aria-selected="false" aria-controls="step-04" data-step="04">
-        <span class="ma-journey-tab__num">04</span>
-        <span class="ma-journey-tab__name">Solve</span>
-      </button>
-      <button type="button" class="ma-journey-tab" role="tab" id="tab-05" aria-selected="false" aria-controls="step-05" data-step="05">
-        <span class="ma-journey-tab__num">05</span>
-        <span class="ma-journey-tab__name">Discover</span>
-      </button>
-    </div>
-
-    <!-- Interactive Demonstration of the Mutilated Chessboard Proof -->
-    <div class="ma-journey-showcase rv">
-      <div class="ma-journey-diagram-wrap">
-        <canvas id="journeyCanvas" width="460" height="460" role="img" aria-label="Visual proof of the Mutilated Chessboard problem demonstrating invariant parity"></canvas>
-        <div class="ma-journey-diagram-badge" id="journeyStageBadge">Stage 1: The Question</div>
-      </div>
-
-      <div class="ma-journey-steps-wrap">
-        <ol class="ma-journey">
-{{MATH_JOURNEY}}
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Section 4: The Archive -->
-<section class="ma-sec ma-sec--archive" id="archive">
-  <div class="wrap">
-    <div class="ma-sechead rv">
-      <p class="ma-eyebrow"><span class="sc">The Verified Archive</span></p>
-      <h2 class="ma-h2">Month by month, <em>the winners.</em></h2>
-      <p class="ma-copy">Each month the CIRS Mathematics Department publishes the official winners for every grade division. Twenty-five bulletins across seven verified months are catalogued below. Where a division did not publish in a given month, it is honestly labeled as &ldquo;No document published&rdquo;.</p>
-    </div>
-
-=======
 <section class="ma-sec" id="archive">
   <div class="wrap">
     <div class="ma-sechead rv">
@@ -294,43 +91,15 @@
         grade zone, with the number who entered. Seven months are here; two are short a grade
         group, and those gaps are the school&rsquo;s own.</p>
     </div>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 {{MATH_FILTERS}}
 {{MATH_ARCHIVE}}
   </div>
 </section>
 
-<<<<<<< HEAD
-<!-- Section 5: Closing Invitation -->
-<section class="ma-sec ma-sec--last">
-  <div class="wrap ma-last rv">
-    <p class="ma-last__quote">Every problem is an invitation to discover a new way of thinking.</p>
-    <p class="ma-last__note">Keep questioning. Keep exploring. Keep solving.</p>
-
-    <div class="ma-last__links">
-      <a class="ma-last__link" href="curriculum.html">
-        <span class="ma-last__link-title">Mathematics Curriculum</span>
-        <span class="ma-last__link-sub">CBSE &amp; IB Diploma Programme</span>
-      </a>
-      <a class="ma-last__link" href="crossroads.html">
-        <span class="ma-last__link-title">Crossroads Magazine</span>
-        <span class="ma-last__link-sub">Student journalism &amp; thought</span>
-      </a>
-      <a class="ma-last__link" href="school-info.html#calendar">
-        <span class="ma-last__link-title">School Calendar</span>
-        <span class="ma-last__link-sub">Term dates &amp; events</span>
-      </a>
-      <a class="ma-last__link" href="admissions.html">
-        <span class="ma-last__link-title">Admissions at CIRS</span>
-        <span class="ma-last__link-sub">Entrance examination &amp; inquiry</span>
-      </a>
-    </div>
-=======
 <section class="ma-sec ma-sec--last">
   <div class="wrap ma-last rv">
     <p class="ma-last__quote">Every problem is an opportunity to discover a new way of
       thinking.</p>
     <p class="ma-last__note">Keep questioning. Keep exploring. Keep solving.</p>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   </div>
 </section>

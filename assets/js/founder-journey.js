@@ -70,9 +70,6 @@
     "education-transformation":{align:"center",viewportY:.50,maxWidth:1120,offsetX:600,offsetY:-260}
   };
   const playhead={progress:0};
-<<<<<<< HEAD
-  const state={active:-1,lastProgress:0,routeLength:0,stopLengths:[],frames:[],wheelRadius:1,safeTop:96,trigger:null,scrubTween:null};
-=======
   const state={active:-1,lastProgress:0,routeLength:0,stopLengths:[],frames:[],wheelRadius:1,safeTop:96,trigger:null,scrubTween:null,
     /* Measured on mount and on every refresh, never inside render().
        render() runs on every scrubbed frame and writes to the world's
@@ -85,7 +82,6 @@
        same number writes nothing at all. Most frames of a fourteen-stop
        journey change two or three of these, not forty. */
     lastStopOpacity:[],lastTone:null,lastOpening:-1,lastCharcoal:-1,lastSage:-1,lastPreface:null};
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
   function labelFor(stop,index){
     const heading=stop.querySelector("h2,h3");
@@ -163,14 +159,11 @@
   function measureCompositions(){
     const header=document.querySelector(".header");
     const hud=root.querySelector(".founders-journey__hud");
-<<<<<<< HEAD
-=======
     // Everything render() would otherwise have to ask the layout engine for,
     // asked once here instead.
     state.viewW=innerWidth;
     state.viewH=innerHeight;
     state.vehicleWidth=vehicle.offsetWidth;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     const side=Math.max(24,Math.min(72,innerWidth*.04));
     const safe={
       left:side,right:side,
@@ -212,11 +205,6 @@
       stop.classList.toggle("is-active",i===index);
       if(i===index) stop.classList.add("is-seen");
     });
-<<<<<<< HEAD
-    period.textContent=periodFor(stops[index]);
-    title.textContent=labelFor(stops[index],index);
-    count.textContent=String(index+1).padStart(2,"0");
-=======
     // The dots belong here, not in render(). They change only when the
     // chapter does — a dozen times across the whole journey — and painting
     // them on every scrubbed frame meant eighteen circles re-laying out the
@@ -252,7 +240,6 @@
       [{opacity:.18,transform:"translateY(5px)"},{opacity:1,transform:"none"}],
       {duration:300,easing:"cubic-bezier(.22,.61,.36,1)"}
     ));
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   }
   function activeForPosition(position,direction){
     if(state.active<0) return 0;
@@ -295,14 +282,6 @@
       y:gsap.utils.interpolate(state.frames[index].y,state.frames[next].y,travel)
     };
   }
-<<<<<<< HEAD
-  function setStopOpacities(position,progress){
-    stops.forEach((stop,index)=>{
-      // Only the current chapter is readable; adjacent dates must not bleed
-      // through the enlarged photographs while the camera moves.
-      let opacity=index===state.active?1:0;
-      if(progress<MAIN_START) opacity=0;
-=======
   /* A chapter's opacity is a function of where the camera is, not of which
      index happens to be active. The active index flips at a threshold, and a
      threshold is a cut: the dates used to appear and vanish on one pixel of
@@ -327,7 +306,6 @@
       // invalidation, and there are fourteen of these.
       if(state.lastStopOpacity[index]===opacity) return;
       state.lastStopOpacity[index]=opacity;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       stop.style.setProperty("--stop-opacity",opacity.toFixed(3));
     });
   }
@@ -343,12 +321,6 @@
   function setBackground(mainProgress){
     const charcoal=smoothstep(.34,.39,mainProgress)*(1-smoothstep(.71,.75,mainProgress));
     const sage=smoothstep(.76,.81,mainProgress)*(1-smoothstep(.89,.94,mainProgress));
-<<<<<<< HEAD
-    gsap.set(backgrounds.charcoal,{opacity:charcoal});
-    gsap.set(backgrounds.sage,{opacity:sage});
-    gsap.set(backgrounds.ivory,{opacity:1-Math.max(charcoal,sage)});
-    root.classList.toggle("tone-charcoal",charcoal>.55);
-=======
     // Three opacities that are 0 or 1 for most of the journey. Only write
     // them on the frames where they are actually between.
     if(charcoal!==state.lastCharcoal||sage!==state.lastSage){
@@ -367,7 +339,6 @@
       state.lastTone=tone;
       root.classList.toggle("tone-charcoal",tone);
     }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   }
   function render(progress){
     progress=clamp01(progress);
@@ -378,11 +349,7 @@
     const position=timelinePosition(progress);
     const routeDistance=progress<MAIN_START?firstStopLength:routeDistanceFor(position);
     const milestoneCamera=cameraFor(position);
-<<<<<<< HEAD
-    const openingCamera={x:innerWidth/2-1110,y:state.safeTop+16-555};
-=======
     const openingCamera={x:state.viewW/2-1110,y:state.safeTop+16-555};
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     const openingHandoff=smoothstep(.12,MAIN_START,progress);
     const camera={
       x:gsap.utils.interpolate(openingCamera.x,milestoneCamera.x,openingHandoff),
@@ -392,13 +359,8 @@
 
     const introProgress=clamp01(progress/INTRO_END);
     const eased=introProgress*introProgress*(3-2*introProgress);
-<<<<<<< HEAD
-    const vehicleStart=-innerWidth*.28;
-    const vehicleEnd=innerWidth*1.08;
-=======
     const vehicleStart=-state.viewW*.28;
     const vehicleEnd=state.viewW*1.08;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     const vehicleX=gsap.utils.interpolate(vehicleStart,vehicleEnd,eased);
     const travelled=Math.max(0,vehicleX-vehicleStart);
     const rotation=travelled/(2*Math.PI*state.wheelRadius)*360;
@@ -411,15 +373,11 @@
     }
     // Let the opening copy hand off directly into "The Life" instead of
     // disappearing before the first timeline chapter has arrived.
-<<<<<<< HEAD
-    gsap.set(opening,{opacity:1-smoothstep(.10,MAIN_START+.01,progress)});
-=======
     const openingOpacity=1-smoothstep(.10,MAIN_START+.01,progress);
     if(openingOpacity!==state.lastOpening){
       state.lastOpening=openingOpacity;
       gsap.set(opening,{opacity:openingOpacity});
     }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     root.classList.toggle("is-opening",progress<MAIN_START);
     root.classList.toggle("is-bus-running",progress<INTRO_END);
     root.classList.toggle("is-handoff",progress>=INTRO_END&&progress<MAIN_START);
@@ -427,27 +385,11 @@
     const routeStartScreen=openingPoint.x+openingCamera.x;
     const openingRouteIndex=0;
     const routeEndScreen=points[openingRouteIndex].x+openingCamera.x;
-<<<<<<< HEAD
-    const vehicleTrailHead=vehicleX+vehicle.offsetWidth*.14;
-=======
     const vehicleTrailHead=vehicleX+state.vehicleWidth*.14;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     const openingRouteLength=state.stopLengths[openingRouteIndex];
     const openingDraw=openingRouteLength*clamp01((vehicleTrailHead-routeStartScreen)/(routeEndScreen-routeStartScreen));
     const drawn=progress<MAIN_START?openingDraw:Math.max(openingRouteLength,routeDistance);
     routeProgress.style.strokeDashoffset=String(state.routeLength-drawn);
-<<<<<<< HEAD
-    const active=activeForPosition(position,direction);
-    setActive(active);
-    setStopOpacities(position,progress);
-    setIntroReveal(progress);
-    if(progress<MAIN_START){period.textContent="1996";title.textContent="CIRS begins";count.textContent="00";}
-    state.dots.forEach((dot,index)=>{
-      dot.classList.toggle("is-passed",index<=active);
-      dot.classList.toggle("is-current",index===active);
-      dot.setAttribute("r",index===active?"11":"8");
-    });
-=======
     setActive(activeForPosition(position,direction));
     setStopOpacities(position,progress);
     setIntroReveal(progress);
@@ -460,7 +402,6 @@
       if(preface){period.textContent="1996";title.textContent="CIRS begins";count.textContent="00";}
       else setActiveText(state.active);
     }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     meter.style.transform="scaleX("+mainProgress+")";
     setBackground(mainProgress);
   }
@@ -486,14 +427,6 @@
       id:"founder-world",trigger:root,start:"top top",end:"bottom bottom",
       animation:state.scrubTween,scrub:.65,
       invalidateOnRefresh:true,
-<<<<<<< HEAD
-      onEnter:()=>document.body.classList.add("founder-journey-active"),
-      onEnterBack:()=>document.body.classList.add("founder-journey-active"),
-      onLeave:()=>{document.body.classList.remove("founder-journey-active");root.classList.remove("is-camera-moving");},
-      onLeaveBack:()=>{document.body.classList.remove("founder-journey-active");root.classList.remove("is-camera-moving");},
-      onUpdate:()=>root.classList.add("is-camera-moving"),
-      onScrubComplete:()=>root.classList.remove("is-camera-moving"),
-=======
       // is-camera-moving is what puts will-change:transform on the world.
       // It used to come off on every onScrubComplete — that is, every time
       // the reader paused — so the compositor tore the world's layer down
@@ -505,7 +438,6 @@
       onEnterBack:()=>{document.body.classList.add("founder-journey-active");root.classList.add("is-camera-moving");},
       onLeave:()=>{document.body.classList.remove("founder-journey-active");root.classList.remove("is-camera-moving");},
       onLeaveBack:()=>{document.body.classList.remove("founder-journey-active");root.classList.remove("is-camera-moving");},
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       onRefresh:()=>{
         state.wheelRadius=Math.max(1,wheels[0].getBoundingClientRect().width/2);
         measureCompositions();

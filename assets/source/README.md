@@ -14,8 +14,6 @@ Three batches, and they differ:
   athletics and swimming, dance and theatre, TEDx Youth@CIRS, SPIC MACAY,
   the prayer hall, music and art.
 
-<<<<<<< HEAD
-=======
 - `leadership/` — four portraits for the Leadership page that did not come from
   the school: Swami Swaroopananda and Pujya Guruji from chinmayamission.com,
   Shri. Jagdish Moorjani from citiustech.com, Shri. Siddharth Balachandran from
@@ -26,7 +24,6 @@ Three batches, and they differ:
   from a named event folder in the school's Drive, resized to 2000px. Their
   own README says where each came from and how its date is known.
 
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 Everything after the first batch is resized on the way in. Drive remains the
 archive of those true originals; at full size they would have added roughly
 570 MB to every clone for detail no page can use — the largest thing the site

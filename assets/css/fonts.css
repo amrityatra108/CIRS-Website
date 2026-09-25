@@ -63,8 +63,6 @@
   font-display: swap;
   src: url('../fonts/tirodevanagarihindi-italic.woff2') format('woff2');
 }
-<<<<<<< HEAD
-=======
 
 @font-face {
   font-family: 'Jost';
@@ -73,4 +71,3 @@
   font-display: swap;
   src: url('../fonts/jost-normal.woff2') format('woff2');
 }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168

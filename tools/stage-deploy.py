@@ -72,10 +72,6 @@ def main():
         html = open(os.path.join(ROOT, name), encoding="utf-8").read()
         here = os.path.dirname(name)
         for r in re.findall(r'"((?:\.\./)*assets/[^"]+)"', html):
-<<<<<<< HEAD
-            rel = os.path.normpath(os.path.join(here, r.split("?")[0]))
-            wanted.add(rel.replace(os.sep, "/"))
-=======
             # A srcset holds several candidates, separated by commas, each
             # with a width or density descriptor after its path. Taking only
             # the first field of the whole value shipped the smallest cut
@@ -86,7 +82,6 @@ def main():
                     continue
                 rel = os.path.normpath(os.path.join(here, path))
                 wanted.add(rel.replace(os.sep, "/"))
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     # A stylesheet's url() is resolved by the browser against the stylesheet,
     # not against the page — so "../fonts/x.woff2" in assets/css/fonts.css
     # means assets/fonts/x.woff2. Matching only paths that already begin

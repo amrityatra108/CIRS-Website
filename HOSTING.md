@@ -8,11 +8,7 @@ Everything in this zip is static. No build step, no server-side code, no databas
 index.html                 the home page
                            and twenty-four more, one file each, in the five menu groups:
   Vision                   founder · why-cirs · school-history · leadership
-<<<<<<< HEAD
-  Student Life             student-life · curriculum · our-results · sports ·
-=======
   Student Life             the-cirs-experience · curriculum · our-results · sports ·
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
                            our-laurels · math-challenge
   Literary Excellence      crossroads · blog · creative-writing
   Art, Culture & Music     captures · art-attack · festivals · theatre · cultural-gallery
@@ -271,14 +267,9 @@ step with the site in silence, which is exactly the failure that check exists to
 - **Board results and university placement figures** from the examinations office.
 - **A photography shoot.** Every image is the school's own, re-cropped and graded, but the best
   available source is about 1400 px wide.
-<<<<<<< HEAD
-- **The Principal's photograph and welcome message are live** — Rajeshwari Satish, cropped from a
-  supplied photo to `assets/img/principal.jpg`.
-=======
 - **The Principal's photograph and welcome message are live** — Smt. G. Rajeshwari, the name the
   owner confirmed in September 2026. Her portrait is cut from the supplied `assets/img/principal.jpg`
   by `tools/make-leadership.py`.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 - **News, on an ongoing basis.** `tools/pages/news.html` currently carries the six reports and
   the diary taken from new.cirschool.org. It is a hand-edited page: add an `<article class="newsitem">`
   to the grid for each new report, or replace the `.newslead` for a big one, then rebuild. Nothing
@@ -290,14 +281,6 @@ step with the site in silence, which is exactly the failure that check exists to
 - **The header animation for the Admissions banner** — a photograph or a short looping video. The
   banner currently renders a labelled placeholder rather than a stand-in picture, deliberately: a
   temporary photograph on an admissions banner is the kind of thing that quietly ships.
-<<<<<<< HEAD
-- **Board of Directors introductions** for the Our People section on `leadership.html`. All eight roles are named and
-  correct; every biography is a bracketed `[A short introduction to … to be supplied by the
-  school.]` placeholder. Five of the eight also need a photograph — Swami Swaroopananda, Shri. Viju
-  Mahtaney, Shri Jadgish Moorjani, Shri. Siddharth Balachandran and Shri. Ram Buxani currently
-  render as a labelled placeholder tile.
-- **A caption for the staff and faculty photograph** — occasion, date and names.
-=======
 - **Board of Directors introductions and portraits** for the roster on `leadership.html`. The
   roster shows only what has been supplied — no stand-in tiles, no bracketed placeholders — so
   what is missing is listed here rather than on the page. Seven people are named.
@@ -318,7 +301,6 @@ step with the site in silence, which is exactly the failure that check exists to
     BSE shareholding) are still current.
 - **A caption for the staff and faculty photograph** — occasion, date and names. The page says
   only "The CIRS staff and faculty." until the school supplies it.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 - **The Why CIRS photo is live** — `assets/img/why-cirs.jpg`, cropped from a supplied photo of three
   students to a 4:5 portrait, faces centred.
 - **Photography for the sections that still render as a labelled placeholder tile** instead of

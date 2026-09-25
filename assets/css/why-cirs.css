@@ -29,23 +29,6 @@ body.why-cirs .saga__eyebrow{
   border-bottom:1px solid rgba(255,255,255,.28);
 }
 
-<<<<<<< HEAD
-body.why-cirs .saga__count{
-  flex:none;
-  color:rgba(255,255,255,.76);
-  font-variant-numeric:tabular-nums lining-nums;
-  letter-spacing:.08em;
-}
-
-body.why-cirs .saga__summary{
-  max-width:52ch;
-  margin-top:clamp(16px,2vw,24px);
-  color:rgba(255,255,255,.88);
-  font-size:clamp(1rem,1.4vw,1.16rem);
-  line-height:1.55;
-  text-wrap:pretty;
-  text-shadow:0 1px 14px rgba(14,11,18,.35);
-=======
 /* The eyebrows above each heading are set larger here than the
    site default (1rem–1.02rem), still well below the headline. */
 body.why-cirs :is(.saga__eyebrow, #facts .marker .sc){
@@ -90,7 +73,6 @@ body.why-cirs .panel__card .copy:first-of-type{
   font-size:clamp(1.08rem,1.45vw,1.22rem);
   line-height:1.5;
   letter-spacing:-.004em;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 }
 
 body.why-cirs .saga__summary + .saga__more{margin-top:clamp(20px,2.4vw,30px)}

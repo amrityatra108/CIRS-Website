@@ -6,19 +6,11 @@
   var target = document.getElementById("crossroads-main");
   var reveal = intro.querySelector(".crossroads-intro__reveal");
   var ring = document.getElementById("ring");
-<<<<<<< HEAD
-  var header = document.getElementById("header");
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)");
   var active = false, frame = null, x = 0, y = 0;
   var transitionFrame = null;
-<<<<<<< HEAD
-  var exitItems = [".crossroads-intro__eyebrow", ".crossroads-intro__mark", ".crossroads-intro__sanskrit", ".crossroads-intro__tagline", ".crossroads-intro__cta"].map(function (selector) { return intro.querySelector(selector); }).filter(Boolean);
-=======
   var exitItems = [".crossroads-intro__mark", ".crossroads-intro__motto", ".crossroads-intro__cta"].map(function (selector) { return intro.querySelector(selector); }).filter(Boolean);
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   var hint = intro.querySelector(".crossroads-intro__hint");
   var video = intro.querySelector("[data-crossroads-intro-video]");
   var opening = intro.querySelector("[data-crossroads-intro-opening]");
@@ -57,13 +49,10 @@
     intro.removeAttribute("data-crossroads-intro-pending");
     intro.removeAttribute("data-crossroads-intro-film");
     intro.setAttribute("data-crossroads-intro-settled", "");
-<<<<<<< HEAD
-=======
     if (!reduced.matches && intro.getBoundingClientRect().bottom > 88) {
       intro.setAttribute("data-crossroads-intro-arriving", "");
       setTimeout(function () { intro.removeAttribute("data-crossroads-intro-arriving"); }, 1200);
     }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     lockScroll(false);
     stop();
     requestAnimationFrame(syncVideo);
@@ -117,11 +106,7 @@
     if (!openingDone && intro.hasAttribute("data-crossroads-intro-pending")) finishOpening();
   });
   function primeAmbientVideo(playNow) {
-<<<<<<< HEAD
-    if (!video || reduced.matches) return;
-=======
     if (!video || reduced.matches || getComputedStyle(reveal).display === "none") return;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if (!video.getAttribute("src")) {
       video.src = video.getAttribute("data-src");
       video.load();
@@ -135,11 +120,7 @@
   function syncVideo() {
     syncOpening();
     if (!video) return;
-<<<<<<< HEAD
-    if (!active || document.hidden || reduced.matches || (opening && !openingDone) || intro.hasAttribute("data-crossroads-intro-film")) { video.pause(); return; }
-=======
     if (!active || document.hidden || reduced.matches || getComputedStyle(reveal).display === "none" || (opening && !openingDone) || intro.hasAttribute("data-crossroads-intro-film")) { video.pause(); return; }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     primeAmbientVideo(false);
     var playing = video.play();
     if (playing) playing.catch(function () { /* Keep the still visible when autoplay is unavailable. */ });
@@ -201,17 +182,10 @@
   function stop() {
     if (frame !== null) window.cancelAnimationFrame(frame);
     frame = null;
-<<<<<<< HEAD
-    // Leave a visible central window into the film when the pointer is absent.
-    reveal.style.removeProperty("--crossroads-intro-x");
-    reveal.style.removeProperty("--crossroads-intro-y");
-    intro.toggleAttribute("data-crossroads-intro-lit", active && !reduced.matches && !document.hidden);
-=======
     // Keep the finished title card still until the pointer reveals the film.
     reveal.style.removeProperty("--crossroads-intro-x");
     reveal.style.removeProperty("--crossroads-intro-y");
     intro.removeAttribute("data-crossroads-intro-lit");
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if (ring) ring.classList.toggle("crossroads-intro-cursor-muted", active);
   }
   function paint() {
@@ -244,10 +218,6 @@
     new IntersectionObserver(function (entries) {
       active = entries[0].isIntersecting;
       syncVideo();
-<<<<<<< HEAD
-      if (header) header.classList.toggle("crossroads-intro-header", active);
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       if (ring) ring.classList.toggle("crossroads-intro-cursor-muted", active);
       intro.toggleAttribute("data-crossroads-intro-active", active && !document.hidden);
       if (!active) { stop(); stopTransition(); paintTransition(); }

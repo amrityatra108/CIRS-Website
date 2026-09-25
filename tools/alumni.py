@@ -7,48 +7,6 @@ the way back — and every one of those chapters is built from the lists below.
 This file is the whole of the page's content. Nothing on it is written into
 tools/pages/alumni.html except the chapters' own copy.
 
-<<<<<<< HEAD
-WHAT IS HERE IS WHAT THE SCHOOL HAS ALREADY SAID.
-
-The page it replaces carried four things and nothing else: eighteen
-institutions grouped into four regions, three alumni quotations with the
-names of the alumni who gave them, four named alumni with their present
-roles, and a note that further alumni were to be supplied. All four are
-reproduced below exactly as they stood. Not one name, year, university,
-role, city or quotation has been added to them, because there is nowhere in
-this repository that a fifth alumnus could have been read from.
-
-WHAT IS DELIBERATELY MISSING.
-
-Batch years. Portraits. Cities. Which alumnus went to which institution.
-Anything an alumnus is doing now beyond the one line each of the four
-carries. The page asks for all of it in as many words rather than filling
-the shape with invention, and ALUMNI-CONTENT.md is the list the school works
-through to supply it. A portrait that has not arrived renders as a marked
-plate, not as a stock photograph of somebody else.
-
-TO PUBLISH MORE.
-
-  A destination — add to DESTINATIONS. It appears as a point in the
-  constellation, a row in the index, and a filterable member of its region.
-  Give it a position; the field is art-directed, not laid out by algorithm.
-
-  An alumnus — add to ALUMNI. Name and one verified line is enough to
-  publish; batch, institution, place and portrait all appear as soon as they
-  are filled in, and are silently left out until they are.
-
-  A quotation — add to VOICES, with the name of the person who said it.
-
-Nothing else has to change. The constellation, the region filters, the
-index, the counts and the editorial chapters all build from these lists.
-"""
-
-import math
-
-# ------------------------------------------------------------------
-# The regions, in the order the constellation and the index use. The key
-# is what every point and row carries in data-region, and what the filter
-=======
 CONTENT IS EITHER SCHOOL-PUBLISHED OR LINKED TO AN ATTRIBUTABLE SOURCE.
 
 The previous page carried eighteen institutions grouped into four regions,
@@ -92,7 +50,6 @@ import worldland         # noqa: E402  the coastline it has already projected
 # ------------------------------------------------------------------
 # The regions, in the order the map and the index use. The key is what
 # every point and row carries in data-region, and what the filter
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 # buttons switch on.
 # ------------------------------------------------------------------
 REGIONS = [
@@ -103,41 +60,6 @@ REGIONS = [
 ]
 
 # ------------------------------------------------------------------
-<<<<<<< HEAD
-# THE GALAXY
-#
-# The field is a spiral galaxy seen at an angle, with CIRS at the core
-# and every destination a star out along one of the two arms. It is not
-# a map and does not pretend to be one: the arms carry the regions in
-# groups, and a star's distance from the core is how far along its arm
-# it sits, not how far from Coimbatore anything is.
-#
-# The arm is a logarithmic spiral, r = R0 * e^(B*theta), projected as a
-# disc tilted away from the viewer — INCL is the cosine of that tilt.
-# ASPECT is the field's own 3:2, which is what turns a swing in percent
-# of the width into the same swing in percent of the height.
-#
-# These same six numbers are handed to alumni-journey.js on the field
-# element, so the stars it scatters lie along the same two arms as the
-# nineteen that are named. One spiral, written down once.
-# ------------------------------------------------------------------
-SPIRAL_CX, SPIRAL_CY = 50.0, 50.0
-SPIRAL_R0, SPIRAL_B  = 6.10, 0.2182
-SPIRAL_ROT           = -0.55
-SPIRAL_INCL          = 0.70
-SPIRAL_ASPECT        = 1.5   # the field is 3:2
-SPIRAL_THETA_MIN     = 2.7
-SPIRAL_THETA_MAX     = 8.5
-_YK = SPIRAL_INCL * SPIRAL_ASPECT
-
-
-def spiral(arm, theta):
-    """Where a point on an arm falls, as (x, y) in percent of the field."""
-    r = SPIRAL_R0 * math.exp(SPIRAL_B * theta)
-    a = theta + arm * math.pi + SPIRAL_ROT
-    return (SPIRAL_CX + r * math.cos(a),
-            SPIRAL_CY + r * math.sin(a) * _YK)
-=======
 # THE MAP
 #
 # The field is a map of the world, drawn in Robinson (see
@@ -182,7 +104,6 @@ def route(ax, ay, bx, by):
         ax + vx * 0.27 + nx * bow, ay + vy * 0.27 + ny * bow,
         ax + vx * 0.73 + nx * bow, ay + vy * 0.73 + ny * bow,
         bx, by)
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 
 # ------------------------------------------------------------------
@@ -194,69 +115,6 @@ def route(ax, ay, bx, by):
 #
 #   key       stable id, used by the panel and the index
 #   name      as it should read in full
-<<<<<<< HEAD
-#   short     as it reads on the star, where space is tight
-#   country   the country, spelled out
-#   region    one of the REGION keys
-#   arm       0 or 1 — which of the galaxy's two arms it lies on
-#   theta     how far along that arm, in radians from the core
-#
-# Regions sit in unbroken runs along an arm, innermost first, so the
-# grouping survives being wound into a spiral: arm 0 carries India and
-# then the United Kingdom, arm 1 carries Asia-Pacific and then the
-# United States.
-# ------------------------------------------------------------------
-DESTINATIONS = [
-    # ---- arm 0: India, then the United Kingdom ----
-    ("iitm",        "IIT Madras", "IIT Madras",
-     "India", "india", 0, 2.700),
-    ("srcc",        "Shri Ram College of Commerce", "Shri Ram",
-     "India", "india", 0, 3.425),
-    ("nid",         "National Institute of Design", "NID",
-     "India", "india", 0, 4.150),
-    ("cvv",         "Chinmaya Vishwa Vidyapeeth", "Chinmaya Vishwa Vidyapeeth",
-     "India", "india", 0, 4.875),
-    ("durham",      "Durham University", "Durham",
-     "United Kingdom", "uk", 0, 5.600),
-    ("manchester",  "The University of Manchester", "Manchester",
-     "United Kingdom", "uk", 0, 6.325),
-    ("warwick",     "University of Warwick", "Warwick",
-     "United Kingdom", "uk", 0, 7.050),
-    ("imperial",    "Imperial College London", "Imperial",
-     "United Kingdom", "uk", 0, 7.775),
-    ("lse",         "The London School of Economics and Political Science", "LSE",
-     "United Kingdom", "uk", 0, 8.500),
-
-    # ---- arm 1: Asia-Pacific, then the United States ----
-    ("nus",         "National University of Singapore", "NUS",
-     "Singapore", "apac", 1, 2.700),
-    ("ntu",         "Nanyang Technological University", "NTU",
-     "Singapore", "apac", 1, 3.344),
-    ("hkust",       "The Hong Kong University of Science and Technology", "HKUST",
-     "Hong Kong", "apac", 1, 3.989),
-    ("northwestern", "Northwestern University", "Northwestern",
-     "United States", "us", 1, 4.633),
-    ("chicago",     "University of Chicago", "Chicago",
-     "United States", "us", 1, 5.278),
-    ("purdue",      "Purdue University", "Purdue",
-     "United States", "us", 1, 5.922),
-    ("virginia",    "University of Virginia", "Virginia",
-     "United States", "us", 1, 6.567),
-    ("nyu",         "New York University", "NYU",
-     "United States", "us", 1, 7.211),
-    ("parsons",     "The New School &mdash; Parsons", "Parsons",
-     "United States", "us", 1, 7.856),
-    ("boston",      "Boston University", "Boston",
-     "United States", "us", 1, 8.500),
-]
-
-# The core. Every arm is measured out from it, and it is where the page
-# puts CIRS: one beginning, and nineteen ways out of it.
-ORIGIN = (SPIRAL_CX, SPIRAL_CY)
-
-# ------------------------------------------------------------------
-# The alumni the school has named, with the single line each was given.
-=======
 #   short     as it reads on the map, where space is tight
 #   country   the country, spelled out
 #   region    one of the REGION keys
@@ -336,51 +194,19 @@ ORIGIN = place(ORIGIN_LAT, ORIGIN_LON)
 # ------------------------------------------------------------------
 # The alumni the school has named, with their verified roles and available
 # biographies.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 #
 #   key, name, role   all verified, all reproduced as they stood
 #   batch             "" until the school supplies it
 #   place             "" until the school supplies it
 #   institution       "" — which institution each attended is NOT recorded
-<<<<<<< HEAD
-#                     anywhere in this repository, and guessing it from the
-#                     destination list above would be an invention
-#   portrait          "" until a photograph arrives AND its use is cleared.
-#                     Until then the page draws a marked plate.
-=======
 #                     for three of the four; Hari Om Jani's is recorded below
 #   biography         an extended biography supplied for this alumnus
 #   portrait          the identified photograph supplied by CIRS
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 #   then_portrait     "" — the school-era photograph for the Then/Now
 #                     reveal. Both halves must be real for it to run.
 # ------------------------------------------------------------------
 ALUMNI = [
     {"key": "hari-om-jani", "name": "Hari Om Jani",
-<<<<<<< HEAD
-     "role": "Professor of Physics, Oxford University",
-     "field": "Science and research",
-     "batch": "", "place": "", "institution": "",
-     "portrait": "", "then_portrait": ""},
-
-    {"key": "soham-desai", "name": "Soham Desai",
-     "role": "Strength &amp; Conditioning Coach, Indian Cricket Team",
-     "field": "Sport",
-     "batch": "", "place": "", "institution": "",
-     "portrait": "", "then_portrait": ""},
-
-    {"key": "divyaj-dt", "name": "Divyaj DT",
-     "role": "Goalkeeper, National Under-19 Football Team",
-     "field": "Sport",
-     "batch": "", "place": "", "institution": "",
-     "portrait": "", "then_portrait": ""},
-
-    {"key": "shashwat-santosh", "name": "Shashwat Santosh",
-     "role": "Designer, Google Creative Labs",
-     "field": "Design",
-     "batch": "", "place": "", "institution": "",
-     "portrait": "", "then_portrait": ""},
-=======
      "role": "Materials research, University of Oxford",
      "field": "Science and research",
      "batch": "", "place": "", "institution": "National University of Singapore",
@@ -444,7 +270,6 @@ ALUMNI = [
          "shashwathsantosh.com."
      ),
      "sources": [("Shashwath Santosh’s portfolio", "https://shashwathsantosh.com/")]},
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 ]
 
 # ------------------------------------------------------------------
@@ -591,52 +416,6 @@ def voice_count():
 
 
 # ==================================================================
-<<<<<<< HEAD
-# The constellation
-# ==================================================================
-
-def lines_svg():
-    """One path per destination, running out along its own arm from the core.
-
-    A straight line from the middle of a galaxy to a star would cut across
-    the arms; these lie along them, so lighting one traces the arm a
-    reader's eye is already following. They sit at almost nothing until
-    the star they belong to is asked about.
-
-    Both SVGs on this field use viewBox "0 0 150 100" with
-    preserveAspectRatio="none". The field is 3:2, so that mapping is
-    uniform in both directions — a circle drawn in it is still a circle —
-    and a position in percent converts by (1.5x, y).
-    """
-    paths = []
-    for key, _n, _s, _c, region, arm, theta in DESTINATIONS:
-        pts = []
-        steps = 40
-        for i in range(steps + 1):
-            t = SPIRAL_THETA_MIN + (theta - SPIRAL_THETA_MIN) * i / steps
-            x, y = spiral(arm, t)
-            pts.append("%.2f %.2f" % (x * 1.5, y))
-        d = "M" + pts[0] + "".join(" L" + q for q in pts[1:])
-        paths.append(
-            '    <path class="ajc__line" data-region="%s" data-line="%s" d="%s"/>'
-            % (region, key, d))
-    return "\n".join(paths)
-
-
-def constellation_html():
-    """The galaxy: two arms of stars, nineteen of which are named.
-
-    The arms and the loose field are drawn by alumni-journey.js from the
-    spiral this file defines — handed over on the field element as
-    data-spiral — so the stars it scatters lie along the same two arms as
-    the nineteen named ones. The named ones are HTML buttons over the top,
-    because a button is the only thing reliably focusable, announceable
-    and clickable; an SVG <circle> with a tabindex is none of the three on
-    every browser that matters.
-
-    Below 900px the same buttons become a plain list. There is one DOM,
-    and no second markup path that can rot.
-=======
 # The map
 # ==================================================================
 
@@ -704,19 +483,10 @@ def constellation_html():
     Below 900px the same buttons become a plain list and the map is not
     drawn: nineteen names over a world 360 pixels wide is a puzzle, not
     a map. There is one DOM, and no second markup path that can rot.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     """
     ox, oy = ORIGIN
     total = len(DESTINATIONS)
     points = []
-<<<<<<< HEAD
-    for i, (key, name, short, country, region, arm, theta) in enumerate(DESTINATIONS):
-        x, y = spiral(arm, theta)
-        points.append('''      <li class="ajc__item" data-region="%s">
-        <button type="button" class="ajc__pt" id="ajc-pt-%s"
-                style="--x:%.3f%%;--y:%.3f%%"
-                data-point="%s" data-region="%s"
-=======
     for i, (key, name, short, country, region,
             lat, lon, nudge, label) in enumerate(DESTINATIONS):
         x, y = place(lat, lon, nudge)
@@ -725,20 +495,15 @@ def constellation_html():
         <button type="button" class="ajc__pt" id="ajc-pt-%s"
                 style="--x:%.3f%%;--y:%.3f%%;--lx:%.3fcqw;--ly:%.3fcqw"
                 data-point="%s" data-region="%s" data-side="%s"
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
                 aria-expanded="false" aria-controls="ajc-panel">
           <span class="ajc__dot" aria-hidden="true"></span>
           <span class="ajc__label"><span class="ajc__name">%s</span><span class="ajc__country">%s</span></span>
           <span class="sr-only">Destination %d of %d. %s, %s. Open details.</span>
         </button>
-<<<<<<< HEAD
-      </li>''' % (region, key, x, y, key, region, short, country,
-=======
       </li>''' % (region, key,
                   x / VB_W * 100, y / VB_H * 100,
                   lx / VB_W * 100, ly / VB_W * 100,
                   key, region, side, short, country,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
                   i + 1, total, name, country))
 
     filters = ['      <button type="button" class="ajc__filter is-on" data-filter="all" '
@@ -757,13 +522,6 @@ def constellation_html():
     <p class="ajc__status" data-constellation-status role="status">Showing all %(total)d destinations.</p>
   </div>
 
-<<<<<<< HEAD
-  <div class="ajc__field" data-constellation-field
-       data-spiral="%(cx).4f,%(cy).4f,%(r0).4f,%(b).4f,%(rot).4f,%(yk).4f,%(tmin).4f,%(tmax).4f">
-    <svg class="ajc__lines" viewBox="0 0 150 100" preserveAspectRatio="none"
-         aria-hidden="true" focusable="false">
-%(lines)s
-=======
   <div class="ajc__field" data-constellation-field>
 %(map)s
 
@@ -773,7 +531,6 @@ def constellation_html():
 %(lines)s
       </g>
       <g class="ajc__flights" data-flights></g>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </svg>
 
     <p class="ajc__origin" style="--x:%(ox).3f%%;--y:%(oy).3f%%" aria-hidden="true">
@@ -795,31 +552,17 @@ def constellation_html():
            aria-labelledby points at this element. -->
       <h3 class="serif ajc__panelName" id="ajc-panel-name" data-panel-name>Destination</h3>
       <p class="ajc__panelCountry" data-panel-country></p>
-<<<<<<< HEAD
-      <p class="ajc__panelNote">A destination CIRS students have gone on to.
-        <em>[Which alumni read here, and in which years, to be supplied by the
-        school.]</em></p>
-=======
       <p class="ajc__panelNote">An institution in CIRS’s published destination list.</p>
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       <button type="button" class="ajc__panelClose" data-panel-close>
         Close<span class="sr-only"> this destination</span>
       </button>
     </div>
   </div>
-<<<<<<< HEAD
-</div>''' % {"filters": "\n".join(filters), "total": total, "lines": lines_svg(),
-              "ox": ox, "oy": oy, "points": "\n".join(points),
-              "cx": SPIRAL_CX, "cy": SPIRAL_CY, "r0": SPIRAL_R0, "b": SPIRAL_B,
-              "rot": SPIRAL_ROT, "yk": _YK,
-              "tmin": SPIRAL_THETA_MIN, "tmax": SPIRAL_THETA_MAX}
-=======
 </div>''' % {"filters": "\n".join(filters), "total": total,
               "map": map_svg(), "lines": routes_svg(),
               "vw": VB_W, "vh": VB_H,
               "ox": ox / VB_W * 100, "oy": oy / VB_H * 100,
               "points": "\n".join(points)}
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 
 # ==================================================================
@@ -836,11 +579,7 @@ def destinations_html():
     groups = []
     for region, label in REGIONS:
         rows = []
-<<<<<<< HEAD
-        for key, name, _short, country, r, _arm, _theta in DESTINATIONS:
-=======
         for key, name, _short, country, r, _lat, _lon, _n, _l in DESTINATIONS:
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             if r != region:
                 continue
             search = name.replace("&mdash;", "-").lower() + " " + country.lower()
@@ -877,35 +616,16 @@ def destinations_html():
 # ==================================================================
 
 def _plate(person, kind="now"):
-<<<<<<< HEAD
-    """A portrait frame for a portrait that has not arrived.
-
-    The school has published no photograph of any alumnus, and there is no
-    honest way to show one: a stock face is a lie about a real person, and
-    another student's photograph is a worse one. So the frame is drawn
-    rather than filled — the initials, the name of what is missing, and the
-    permission it is waiting on — and it is built to be replaced. Fill
-    "portrait" in the entry above and the plate becomes an <img> with
-    nothing else on the page to change.
-    """
-=======
     """Show the alumnus's identified portrait or a fallback plate."""
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     initials = "".join(part[0] for part in person["name"].split()[:2]).upper()
     src = person["then_portrait"] if kind == "then" else person["portrait"]
     label = "School years" if kind == "then" else "Today"
     if src:
-<<<<<<< HEAD
-        return ('<img class="ajp__img" src="%s" alt="%s, %s." '
-                'width="900" height="1200" loading="lazy" decoding="async">'
-                % (src, person["name"], person["role"]))
-=======
         width, height = person.get("portrait_size", (900, 1200))
         alt = person.get("portrait_alt", person["name"] + ".")
         return ('<img class="ajp__img" src="%s" alt="%s" '
                 'width="%d" height="%d" loading="lazy" decoding="async">'
                 % (escape(src, quote=True), escape(alt, quote=True), width, height))
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     return '''<span class="ajp__plate" data-plate="%s">
           <span class="ajp__initials" aria-hidden="true">%s</span>
           <span class="ajp__plateLabel sc">%s</span>
@@ -915,16 +635,7 @@ def _plate(person, kind="now"):
 
 
 def people_html():
-<<<<<<< HEAD
-    """The four named alumni, one editorial chapter each.
-
-    Alternating sides, and the name set large enough to be the picture while
-    there is no picture. Everything the school has said about each of them
-    is on the chapter; everything it has not said is asked for by name.
-    """
-=======
     """The four named alumni in the original alternating editorial layout."""
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     chapters = []
     for i, person in enumerate(ALUMNI):
         side = "right" if i % 2 else "left"
@@ -936,13 +647,6 @@ def people_html():
                         % person["institution"])
         if person["place"]:
             meta.append('<span class="ajp__metaItem"><b>Now in</b>%s</span>' % person["place"])
-<<<<<<< HEAD
-        # Nothing but the field is known for any of the four today. The row
-        # still renders, so the chapter does not collapse into a name and a
-        # gap, and it says which of the five pathways the alumnus belongs to.
-        meta.append('<span class="ajp__metaItem"><b>Path</b>%s</span>' % person["field"])
-
-=======
         # Every chapter carries the field of work, with batch, institution,
         # location and biography details filled only where they are supplied.
         meta.append('<span class="ajp__metaItem"><b>Path</b>%s</span>' % person["field"])
@@ -956,7 +660,6 @@ def people_html():
             for label, url in person.get("sources", []))
         sources_html = '<p class="ajp__sources">%s</p>' % source_links if source_links else ""
 
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         chapters.append('''  <article class="ajp" id="alumnus-%s" data-person="%s" data-side="%s">
     <div class="ajp__figure">
       <figure class="ajp__frame">
@@ -968,15 +671,6 @@ def people_html():
     <div class="ajp__text">
       <h3 class="serif ajp__name" data-split>%s</h3>
       <p class="ajp__role">%s</p>
-<<<<<<< HEAD
-      <p class="ajp__meta">%s</p>
-      <p class="ajp__await"><em>[The rest of this alumnus&rsquo;s story &mdash; the batch, where
-        they read, and what they would say about the years here &mdash; to be supplied by the
-        school.]</em></p>
-    </div>
-  </article>''' % (person["key"], person["key"], side, _plate(person), i + 1,
-                   person["name"], person["role"], "".join(meta)))
-=======
       %s
       <p class="ajp__meta">%s</p>
       %s
@@ -984,7 +678,6 @@ def people_html():
   </article>''' % (person["key"], person["key"], side, _plate(person), i + 1,
                    person["name"], person["role"], biography_html,
                    "".join(meta), sources_html))
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     return "\n".join(chapters)
 
 
@@ -997,11 +690,7 @@ def voices_html():
     """
     scenes = []
     for voice in VOICES:
-<<<<<<< HEAD
-        batch = voice["batch"] or "<em>[Batch to be supplied]</em>"
-=======
         batch = voice["batch"]
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         scenes.append('''  <figure class="ajv" data-voice="%s">
     <p class="ajv__mark" aria-hidden="true">&ldquo;</p>
     <blockquote class="ajv__quote">
@@ -1009,16 +698,10 @@ def voices_html():
     </blockquote>
     <figcaption class="ajv__by">
       <span class="ajv__name">%s</span>
-<<<<<<< HEAD
-      <span class="ajv__batch">%s</span>
-    </figcaption>
-  </figure>''' % (voice["key"], voice["quote"], voice["name"], batch))
-=======
 %s
     </figcaption>
   </figure>''' % (voice["key"], voice["quote"], voice["name"],
                  '<span class="ajv__batch">%s</span>' % escape(batch) if batch else ""))
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     return "\n".join(scenes)
 
 
@@ -1027,11 +710,7 @@ def voices_html():
 # ==================================================================
 
 def pathways_html():
-<<<<<<< HEAD
-    """Five scenes on one horizontal track, each naming what it is built on.
-=======
     """Five pathways in one scrolling frame, each naming its evidence.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     A pathway that cannot name its evidence is an advertisement. Every scene
     below carries the destinations and the alumni it was drawn from, as
@@ -1070,11 +749,7 @@ def pathways_html():
 
     dots = "\n".join(
         '      <li><button type="button" class="ajw__dot" data-goto="%d" '
-<<<<<<< HEAD
-        'aria-label="Go to %s"><span></span></button></li>' % (i, p["label"])
-=======
         'aria-label="Go to %s"><span aria-hidden="true">%02d</span></button></li>' % (i, p["label"], i + 1)
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         for i, p in enumerate(PATHWAYS))
 
     return '''<div class="ajw-track" data-pathways>

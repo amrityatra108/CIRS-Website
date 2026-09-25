@@ -45,15 +45,12 @@ banner and no scroll. Its photographs are listed in `tools/artswall.py` and cut 
 `tools/make-arts-wall.py`; its sheet and script are `assets/css/artswall.css` and
 `assets/js/artswall.js`, both scoped to `body.wall`.
 
-<<<<<<< HEAD
-=======
 CIRS Theatre's three acts (Anand Utsav, Masquerades, Class Presentations) are written from
 `tools/theatre.py`, which records every photograph's Drive source, house, year and caption and
 every YouTube link. `tools/make-theatre.py` cuts the images into `assets/img/theatre/` from the
 school's Drive (the originals are not in the repository). A photograph is attributed to a house
 only by its Drive folder and the school's own YouTube titles, never by costume colour.
 
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 ## Checks, before every push
 
 ```sh

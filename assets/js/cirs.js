@@ -41,11 +41,7 @@
   var lenis = null;
   // The photograph wall has its own infinite drag/scroll surface and must not
   // compete with document-level smooth scrolling.
-<<<<<<< HEAD
-  if (typeof window.Lenis !== "undefined" && !reduced && !document.body.classList.contains("wall")) {
-=======
   if (typeof window.Lenis !== "undefined" && !reduced && !isAlumni && !document.body.classList.contains("wall")) {
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.5 });
     if (hasGSAP) {
       lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
@@ -75,19 +71,14 @@
     event.preventDefault();
     lenis.scrollTo(event.detail.top, {
       duration:event.detail.duration,
-<<<<<<< HEAD
-=======
       easing:event.detail.easing,
       offset:event.detail.offset || 0,
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       force:true,
       lock:true,
       onComplete:event.detail.onComplete
     });
   });
 
-<<<<<<< HEAD
-=======
   // A page-specific opening can hold the existing Lenis controller until its
   // entry control is used, without replacing the site's scroll engine.
   window.addEventListener("cirs-portal-scroll-lock", function (event) {
@@ -96,7 +87,6 @@
     else if (!document.body.classList.contains("menu-open")) lenis.start();
   });
 
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   /* ----------------------------------------------------------
      Scroll subscription
      Lenis moves the window itself, so the native scroll event
@@ -205,8 +195,6 @@
     });
   });
 
-<<<<<<< HEAD
-=======
   /* A long page goes on growing while it is scrolled through: photographs
      arrive and pinned sections take their spacers, so the section a link
      aimed at has moved by the time the scroll ends — on the Founder page,
@@ -244,7 +232,6 @@
     go();
   }
 
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   /* ----------------------------------------------------------
      An anchor arrived at from another page
      The browser jumps to it while the page is still short: the
@@ -267,12 +254,8 @@
     // The opening curtain holds the page at the top with the scroll locked,
     // so moving now would only be undone when it lifts. finish() calls this
     // again on the way out, which is where the move actually happens.
-<<<<<<< HEAD
-    if (document.body.classList.contains("is-locked")) return;
-=======
     if (document.body.classList.contains("is-locked") ||
         document.body.classList.contains("portal-intro-active")) return;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if (hashArmed) return;
     var t;
     // A hash is not necessarily a valid selector — #2026 is legal in a URL.
@@ -477,8 +460,6 @@
 
     heroParallax();
     return tl;
-<<<<<<< HEAD
-=======
   }
 
   /* The Math Challenge opening. Every other hero on this site brings its
@@ -504,7 +485,6 @@
     gsap.set(bits, { opacity: 0, y: 20 });
     return gsap.timeline({ paused: true })
       .to(bits, { opacity: 1, y: 0, duration: .9, ease: "power3.out", stagger: .08 });
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   }
 
   function heroParallax() {
@@ -536,13 +516,8 @@
      ==========================================================
      The stage is pinned by CSS sticky, so this function never pins
      anything and never touches the document's height. All it does is
-<<<<<<< HEAD
-     read where the three .hseq__mark boxes are and scrub the plate's
-     own box between them as the track passes.
-=======
      read where the .hseq__mark boxes are and scrub the plate's own box
      between them as the track passes.
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
      The marks are the contract with the stylesheet. Nothing here knows
      what P2 looks like; it knows only that some element in the sheet
@@ -559,11 +534,7 @@
         scrim = $(".hseq__scrim", seq),
         marks = $$(".hseq__mark", seq);
 
-<<<<<<< HEAD
-    if (!stage || !plate || marks.length < 3) return;
-=======
     if (!stage || !plate || marks.length < 2) return;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     // No ScrollTrigger, or motion off: the sheet already lays the
     // sequence out as one still panel. Leave it alone.
@@ -607,21 +578,6 @@
       plate.style.left   = p.left   + "px";
     }
 
-<<<<<<< HEAD
-    // The two halves of the travel: P0 to P1 over the first, P1 to P2
-    // over the second. A single eased run from P0 to P2 passes through
-    // a different middle and loses the first inset entirely.
-    // The plate arrives at P2 at seven tenths of the travel and holds
-    // there for the rest of it, still stuck. Without the hold the frame
-    // lands on the same pixel the stage begins to leave on.
-    var ARRIVE = .70, BEND = .45;
-
-    function frame(t) {
-      var u = Math.min(t / ARRIVE, 1);
-      var box = u < BEND ? at(P[0], P[1], u / BEND)
-                         : at(P[1], P[2], (u - BEND) / (1 - BEND));
-      paint(box);
-=======
     // One travel: P0, the full-bleed opening, to P1, the inset frame the
     // sequence settles on. It arrives at ARRIVE of the scrub and holds
     // there for the rest of it, still stuck, so the composition is seen
@@ -645,26 +601,10 @@
     function frame(t) {
       var u = ease(Math.min(t / ARRIVE, 1));
       paint(at(P[0], P[1], u));
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       // The corner arrives with the frame rather than being on from the
       // start, so the full-bleed opening has no rounded edge against
       // the window.
       plate.style.borderRadius = (u * 14) + "px";
-<<<<<<< HEAD
-      // The scrim exists so the headline can be read over the photograph.
-      // Once the plate has drawn in, the headline is beside it rather than
-      // on it and the wash has nothing left to do but crush the picture,
-      // so it lifts as the plate insets. It does not go entirely: the last
-      // of it keeps the foot of the frame from glaring against the ground.
-      if (scrim) scrim.style.opacity = String(1 - u * .78);
-      if (type) {
-        // The type clears the way as the plate closes in on its column,
-        // then settles. It does not fade out — the headline is the
-        // page's first sentence and stays readable through the whole
-        // sequence.
-        type.style.opacity = String(1 - Math.min(u, .55) * .28);
-      }
-=======
       // The scrim exists so the headline can be read over the photograph,
       // and at P1 the headline still sits over the foot of the plate — so
       // the wash lifts only as far as the opening's own mid-point, where
@@ -674,7 +614,6 @@
       // The type does not move and does not fade. It is the page's first
       // sentence and the plate is no longer closing in on its column.
       if (type) type.style.opacity = "1";
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     }
 
     ScrollTrigger.create({
@@ -731,9 +670,6 @@
     // Everything else fades up. Crossroads covers are held back from this
     // pass: they get the same reveal with a per-column delay below, and two
     // tweens on one element's opacity is a fight nobody wins.
-<<<<<<< HEAD
-    $$(".rv").filter(function (el) { return !el.classList.contains("crcard"); })
-=======
     $$(".rv").filter(function (el) {
       // ma-step and ma-zone are excluded for the same reason crcard is: they
       // sit in a row, so they all cross the trigger line together and arrive
@@ -743,7 +679,6 @@
           && !el.classList.contains("ma-zone")
           && !el.classList.contains("ma-card");
     })
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       .forEach(function (el) {
         gsap.from(el, {
           opacity: 0, y: 24, duration: .95, ease: "power3.out",
@@ -757,8 +692,6 @@
       gsap.from(card, {
         opacity: 0, y: 26, duration: .85, ease: "power3.out", delay: (i % 3) * .09,
         scrollTrigger: { trigger: card, start: "top 92%", once: true }
-<<<<<<< HEAD
-=======
       });
     });
 
@@ -780,7 +713,6 @@
           clearProps: "opacity",
           scrollTrigger: { trigger: el, start: "top 90%", once: true }
         });
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       });
     });
 
@@ -816,41 +748,6 @@
      ten photographs dealt up through it. Card 0 is already down
      when the page opens; the rest rise from below at a tilt as the
      section is scrolled, each landing square on top of the last.
-<<<<<<< HEAD
-
-     The lettering has two layers on purpose: .slhero__run carries
-     the CSS keyframe, which runs whether or not this file does, and
-     .slhero__push carries the scroll offset set here. One element
-     cannot hold both — the transform this sets would cancel the
-     keyframe's.
-
-     No pin under 700px. A pinned scrub on a phone is a scroll that
-     fights the thumb, so there the deck is a swipe track and the
-     lettering simply drifts.
-     ========================================================== */
-  function slHero() {
-    var sec = $(".slhero");
-    if (!sec) return;
-    var pin = $(".slhero__pin", sec), push = $(".slhero__push", sec);
-    var deck = $(".slhero__deck", sec);
-    var cards = $$(".slcard", sec);
-    if (!cards.length) return;
-
-    // A new order on every load. Ten photographs dealt in the same sequence
-    // every time is a slideshow; dealt in a different one each visit, the
-    // hero is the school rather than a fixed advertisement for ten moments
-    // of it. Fisher-Yates over the elements themselves, so the swipe track
-    // the phone falls back to is shuffled too, and so every later lookup —
-    // z-order, the deal, the clean-up — simply follows the DOM.
-    if (deck) {
-      for (var k = cards.length - 1; k > 0; k--) {
-        var j = Math.floor(Math.random() * (k + 1));
-        var tmp = cards[k]; cards[k] = cards[j]; cards[j] = tmp;
-      }
-      cards.forEach(function (c) { deck.appendChild(c); });
-    }
-=======
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
      The lettering has two layers on purpose: .slhero__run carries
      the CSS keyframe, which runs whether or not this file does, and
@@ -973,15 +870,11 @@
     var fill = $(".dayh__fill", sec), tick = $(".dayh__tick", sec);
     if (!track) return;
 
-<<<<<<< HEAD
-    function staticMode() { sec.classList.add("is-static"); }
-=======
     function staticMode() {
       sec.classList.add("is-static");
       // A row that fits needs no swipe hint, rail or count either.
       sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
     }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -1110,15 +1003,11 @@
     var fill = $(".newstrack__fill"), count = $("#newsTrackCount");
     if (!sec || !track) return;
 
-<<<<<<< HEAD
-    function staticMode() { sec.classList.add("is-static"); }
-=======
     function staticMode() {
       sec.classList.add("is-static");
       // A row that fits needs no swipe hint, rail or count either.
       sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
     }
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -1128,11 +1017,6 @@
       sec.classList.remove("is-static");
       var cards = $$(".newsitem", track);
 
-<<<<<<< HEAD
-      var st = ScrollTrigger.create({
-        trigger: sec,
-        start: "top top",
-=======
       // Where every story already fits across the window there is nothing to
       // scrub: pinning the section for a reel that barely moves read as the
       // page sticking. Lay the stories out as a row and drop the rail.
@@ -1149,7 +1033,6 @@
         // Taller than the window, it pins by its bottom instead: the heading
         // has scrolled away and the cards are whole while they move.
         start: function () { return pin.offsetHeight > window.innerHeight ? "bottom bottom" : "top top"; },
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         end: function () { return "+=" + Math.max(track.scrollWidth - window.innerWidth + 320, 600); },
         pin: pin,
         scrub: .8,
@@ -1470,11 +1353,7 @@
     $$("[data-magnetic]").forEach(function (el) {
       var homeHeader = document.body.classList.contains("home") && el.closest(".header");
       function magneticIsOn() {
-<<<<<<< HEAD
-        return !homeHeader || homeHeader.classList.contains("is-stuck");
-=======
         return !homeHeader || homeHeader.classList.contains("is-scrolled");
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       }
       var bounds = null;
       var xTo = gsap.quickTo(el, "x", { duration: .34, ease: "power3.out" });
@@ -1510,18 +1389,6 @@
     var x = gsap.quickTo(ring, "x", { duration: .45, ease: "power3" });
     var y = gsap.quickTo(ring, "y", { duration: .45, ease: "power3" });
     var muted = false;
-<<<<<<< HEAD
-
-    window.addEventListener("pointermove", function (e) {
-      x(e.clientX); y(e.clientY);
-      var overHeader = !!(e.target.closest && e.target.closest(".header"));
-      if (overHeader !== muted) {
-        muted = overHeader;
-        if (muted) ring.classList.remove("is-big");
-        gsap.to(ring, { opacity: muted ? 0 : 1, duration: .2 });
-      } else if (!muted && ring.style.opacity !== "1") {
-        gsap.to(ring, { opacity: 1, duration: .3 });
-=======
 
     // The ring gives way over the header only.
     var quiet = ".header";
@@ -1535,18 +1402,13 @@
         gsap.to(ring, { opacity: muted ? 0 : 1, duration: .2, overwrite: "auto" });
       } else if (!muted && ring.style.opacity !== "1") {
         gsap.to(ring, { opacity: 1, duration: .3, overwrite: "auto" });
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       }
     }, { passive: true });
     document.addEventListener("pointerleave", function () { gsap.to(ring, { opacity: 0, duration: .3, overwrite: "auto" }); });
 
     var hot = "a, button, summary, .dmoment, .facilities > div, .node, input, [data-magnetic]";
     document.addEventListener("pointerover", function (e) {
-<<<<<<< HEAD
-      if (e.target.closest && e.target.closest(".header")) return;
-=======
       if (e.target.closest && e.target.closest(quiet)) return;
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       if (e.target.closest && e.target.closest(hot)) ring.classList.add("is-big");
     });
     document.addEventListener("pointerout", function (e) {
@@ -1718,17 +1580,6 @@
   /* ==========================================================
      Header and drawer
      ========================================================== */
-<<<<<<< HEAD
-  var drawer = $("#drawer"), burger = $("#burger"), drawerMotion = null;
-
-  function finishDrawerClose() {
-    if (!drawer || drawer.classList.contains("is-open")) return;
-    drawer.hidden = true;
-    if (animate) {
-      gsap.set([drawer].concat($$(".drawer__grid > div, .drawer__utility, .drawer__cta", drawer)), {
-        clearProps: "opacity,visibility,transform"
-      });
-=======
   var drawer = $("#drawer"), burger = $("#burger"), drawerClose = $("#drawerClose");
   var drawerCloseTimer = null, drawerInerted = [];
 
@@ -1741,78 +1592,11 @@
     } else {
       drawerInerted.forEach(function (el) { el.inert = false; });
       drawerInerted = [];
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     }
   }
 
   function closeDrawer() {
     if (!drawer || !drawer.classList.contains("is-open")) return;
-<<<<<<< HEAD
-    burger.setAttribute("aria-expanded", "false");
-    burger.setAttribute("aria-label", "Open menu");
-    burger.focus({ preventScroll: true });
-    if (animate && drawerMotion) {
-      drawerMotion.eventCallback("onReverseComplete", function () {
-        drawer.classList.remove("is-open");
-        document.body.classList.remove("is-locked", "menu-open");
-        if (lenis) lenis.start();
-        finishDrawerClose();
-      });
-      drawerMotion.reverse();
-      return;
-    }
-    drawer.classList.remove("is-open");
-    document.body.classList.remove("is-locked", "menu-open");
-    if (lenis) lenis.start();
-    window.setTimeout(finishDrawerClose, 420);
-  }
-
-  (function chrome() {
-    var header = $("#header");
-    if (header) {
-      var main = $("#main");
-      // Ignore non-visual utility nodes (the gallery's canvas controls, for
-      // example) and use the first actual section on every page. Blog entries
-      // wrap the full story in one article, so their opening ends with the
-      // lead image rather than at the end of the story.
-      var opening = main && main.querySelector(":scope > section, :scope > article");
-      if (!opening && main) opening = main.firstElementChild;
-      var openingBoundary = opening;
-      if (opening && opening.matches("article.art")) {
-        openingBoundary = $(".art__hero", opening) || $(".art__head", opening) || opening;
-      }
-      sentinel(function () {
-        if (!openingBoundary) return 80;
-        var box = openingBoundary.getBoundingClientRect();
-        return Math.max(box.top + window.pageYOffset + box.height - 1, 80);
-      }, function (past) {
-        header.classList.toggle("is-first-section", !past);
-        // Pale opening sections retain their existing dark lettering while
-        // the container itself stays transparent.
-        if (!document.body.classList.contains("litehead")) {
-          header.classList.toggle("is-stuck", past);
-        }
-      });
-    }
-
-    // The bare header — no glass bar around the controls — belongs to the
-    // opening composition and nothing else. Taking the bar off for good
-    // looked right on the hero and was wrong two screens down: on Admissions
-    // the page's own text scrolled straight through the News pill, and on
-    // Why CIRS the wordmark ended up dark purple over an aerial photograph.
-    // The bar is what gives it a ground once content passes under it.
-    //
-    // This runs on bare pages whether or not they are litehead, so a page
-    // that opens pale loses the bar over its own opening too, which is the
-    // point of the flag.
-    if (header && header.classList.contains("is-bare")) {
-      header.classList.add("is-atop");
-      sentinel(function () {
-        var first = $("main > *");
-        if (!first) return 80;
-        return Math.max(first.offsetTop + first.offsetHeight - 120, 80);
-      }, function (past) { header.classList.toggle("is-atop", !past); });
-=======
     drawer.classList.remove("is-open");
     document.body.classList.add("menu-closing");
     document.body.classList.remove("menu-open");
@@ -1852,7 +1636,6 @@
         tab.setAttribute("aria-expanded", String(selected));
         groupPanels[i].hidden = !selected;
       });
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     }
     selectGroup(initialGroup);
     groupTabs.forEach(function (tab, index) {
@@ -1900,45 +1683,6 @@
       drawer.classList.add("is-open");
       burger.setAttribute("aria-expanded", "true");
       burger.setAttribute("aria-label", "Close menu");
-<<<<<<< HEAD
-      // is-locked is the scroll lock and nothing more — the intro curtain uses
-      // it too. menu-open is what turns the header solid, and only the drawer
-      // sets it. See the note on body.menu-open .header in pages.css.
-      document.body.classList.add("is-locked", "menu-open");
-      if (lenis) lenis.stop();
-      if (animate) {
-        var pieces = $$(".drawer__grid > div, .drawer__utility, .drawer__cta", drawer);
-        if (drawerMotion) drawerMotion.kill();
-        drawerMotion = gsap.timeline({ paused:true, defaults:{ ease:"power3.out" } });
-        drawerMotion
-          .fromTo(drawer,
-            { autoAlpha:0, y:-10 },
-            { autoAlpha:1, y:0, duration:.42, overwrite:"auto" }, 0)
-          .fromTo(pieces,
-            { autoAlpha:0, y:16 },
-            { autoAlpha:1, y:0, duration:.5, stagger:.045, overwrite:"auto" }, .08)
-          .play(0);
-      }
-    });
-    $$("a", drawer).forEach(function (a) { a.addEventListener("click", closeDrawer); });
-    document.addEventListener("keydown", function (e) {
-      if (!drawer.classList.contains("is-open")) return;
-      if (e.key === "Escape") { e.preventDefault(); closeDrawer(); return; }
-      if (e.key !== "Tab") return;
-      var items = [burger].concat($$("a[href], button", drawer).filter(function (el) {
-        return !el.disabled && el.getClientRects().length;
-      }));
-      var i = items.indexOf(document.activeElement);
-      e.preventDefault();
-      items[(i + (e.shiftKey ? items.length - 1 : 1)) % items.length].focus();
-    });
-    document.addEventListener("focusin", function (e) {
-      if (drawer.classList.contains("is-open") && e.target !== burger && !drawer.contains(e.target)) {
-        burger.focus({ preventScroll: true });
-      }
-    });
-    window.addEventListener("resize", function () { if (window.innerWidth > 1040) closeDrawer(); }, { passive: true });
-=======
       document.body.classList.add("is-locked", "menu-open");
       if (lenis) lenis.stop();
       isolateDrawer(true);
@@ -1967,7 +1711,6 @@
         drawerClose.focus({ preventScroll: true });
       }
     });
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   })();
 
   /* ==========================================================
@@ -2520,15 +2263,11 @@
     // A completed intro belongs to the tab, not to one document instance.
     // Remove a freshly parsed curtain before heroIn() can prepare hidden lines,
     // so refresh and non-bfcached Back navigation cannot flash and replay it.
-<<<<<<< HEAD
-    if (!claimIntroVisit()) {
-=======
     if (isAlumni) {
       var alumniCurtain = $("#curtain");
       if (alumniCurtain) alumniCurtain.remove();
       document.body.classList.remove("is-locked");
     } else if (!claimIntroVisit()) {
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       var repeatedCurtain = $("#curtain");
       if (repeatedCurtain) repeatedCurtain.remove();
       document.body.classList.remove("is-locked");
@@ -2536,13 +2275,9 @@
 
     // Set the hero's initial state before the curtain starts uncovering it,
     // then play the prepared timeline without hiding visible content again.
-<<<<<<< HEAD
-    var heroEntrance = heroIn();
-=======
     // One or the other: a page has the shared hero or the Math Challenge
     // field, never both.
     var heroEntrance = heroIn() || mathHero();
->>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     playIntro(function () { if (heroEntrance) heroEntrance.play(); });
     startSweep();
 
