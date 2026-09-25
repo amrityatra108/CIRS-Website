@@ -279,7 +279,7 @@ step with the site in silence, which is exactly the failure that check exists to
   banner currently renders a labelled placeholder rather than a stand-in picture, deliberately: a
   temporary photograph on an admissions banner is the kind of thing that quietly ships.
 - **Leadership (`leadership.html`) — what the school still has to confirm.** The page was
-  redesigned in September 2026 as a portrait gallery. Its people, portraits and all six messages
+  redesigned in September 2026 as a portrait gallery. Its people, portraits and all five messages
   are data in `tools/leadership.py`; `tools/make-leadership.py` cuts the photographs. Nothing on
   the page is a placeholder, so everything outstanding is listed here instead.
   - *Roster discrepancy.* The school's own management page (cirschool.org/management.html) lists

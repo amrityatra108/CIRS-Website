@@ -33,9 +33,9 @@
 <link rel="stylesheet" href="assets/css/leadership.css?b=102-leadership-1">
 <link rel="stylesheet" href="assets/css/typography.css?b=102-leadership-1">
 <script>
-(function(){var ids=["founder","guruji","chairman","director","academics","principal"],h=location.hash.replace(/^#msg-/,""),d=document.documentElement;d.classList.add("ld-js");d.setAttribute("data-ld-msg",ids.indexOf(h)>-1?h:ids[0]);document.addEventListener("DOMContentLoaded",function(){if(!window.__ldBooted)d.classList.remove("ld-js");});})();
+(function(){var ids=["guruji","chairman","director","academics","principal"],h=location.hash.replace(/^#msg-/,""),d=document.documentElement;d.classList.add("ld-js");d.setAttribute("data-ld-msg",ids.indexOf(h)>-1?h:ids[0]);document.addEventListener("DOMContentLoaded",function(){if(!window.__ldBooted)d.classList.remove("ld-js");});})();
 </script>
-<style>html.ld-js[data-ld-msg="founder"] .ld-msg:not(#msg-founder),html.ld-js[data-ld-msg="guruji"] .ld-msg:not(#msg-guruji),html.ld-js[data-ld-msg="chairman"] .ld-msg:not(#msg-chairman),html.ld-js[data-ld-msg="director"] .ld-msg:not(#msg-director),html.ld-js[data-ld-msg="academics"] .ld-msg:not(#msg-academics),html.ld-js[data-ld-msg="principal"] .ld-msg:not(#msg-principal){display:none}</style>
+<style>html.ld-js[data-ld-msg="guruji"] .ld-msg:not(#msg-guruji),html.ld-js[data-ld-msg="chairman"] .ld-msg:not(#msg-chairman),html.ld-js[data-ld-msg="director"] .ld-msg:not(#msg-director),html.ld-js[data-ld-msg="academics"] .ld-msg:not(#msg-academics),html.ld-js[data-ld-msg="principal"] .ld-msg:not(#msg-principal){display:none}</style>
 <link rel="stylesheet" href="assets/css/footer.css?b=102-leadership-1-footer-1">
 <link rel="stylesheet" href="assets/css/drawer.css?b=102-leadership-1-drawer-5">
 </head>
@@ -298,7 +298,7 @@
 <!-- Leadership, set as an editorial portrait gallery. Styles are
      assets/css/leadership.css (scoped to body.leadership); the message
      reader is assets/js/leadership.js. The people, their portraits and every
-     word of the six messages are data in tools/leadership.py, which writes
+     word of the five messages are data in tools/leadership.py, which writes
      the {{LEAD_*}} parts below; tools/make-leadership.py cuts the photographs.
      What the school still has to confirm is listed in HOSTING.md. -->
 <section class="ld-open" aria-labelledby="ld-title">
@@ -410,22 +410,16 @@
   <div class="wrap">
     <div class="ld-words__head">
       <h2 class="ld-h2" id="messages-title">In their own words.</h2>
-      <p class="ld-words__lead">Two messages come from the school&rsquo;s beginning: from its
-        Founder, Pujya Gurudev Swami Chinmayananda, and from Pujya Guruji Swami Tejomayananda.
-        The other four are from those who lead CIRS today. Each is given in full, as the school
-        publishes it.</p>
+      <p class="ld-words__lead">The first is from Pujya Guruji Swami Tejomayananda of Chinmaya
+        Mission; the other four are from those who lead CIRS today. Each is given in full, as the
+        school publishes it.</p>
     </div>
   <div class="ld-reader" data-ld-reader>
     <div class="ld-idx">
       <div class="ld-idx__tabs" role="tablist" aria-label="Messages" aria-orientation="vertical">
-        <span class="ld-idx__group" aria-hidden="true">Founder &amp; Guruji</span>
-        <button type="button" class="ld-idx__tab" role="tab" id="msg-tab-founder"
-                aria-controls="msg-founder" aria-selected="true">
-          <span class="ld-idx__name">Swami Chinmayananda</span>
-          <span class="ld-idx__role">Founder of CIRS</span>
-        </button>
+        <span class="ld-idx__group" aria-hidden="true">Chinmaya Mission</span>
         <button type="button" class="ld-idx__tab" role="tab" id="msg-tab-guruji"
-                aria-controls="msg-guruji" aria-selected="false" tabindex="-1">
+                aria-controls="msg-guruji" aria-selected="true">
           <span class="ld-idx__name">Swami Tejomayananda</span>
           <span class="ld-idx__role">Pujya Guruji, Chinmaya Mission</span>
         </button>
@@ -455,8 +449,7 @@
         <label class="ld-idx__label" for="ld-pick">Choose a message</label>
         <div class="ld-idx__bar">
           <select class="ld-idx__select" id="ld-pick" aria-describedby="ld-pick-role">
-          <optgroup label="Founder &amp; Guruji">
-            <option value="founder" data-role="Founder of CIRS">Swami Chinmayananda</option>
+          <optgroup label="Chinmaya Mission">
             <option value="guruji" data-role="Pujya Guruji, Chinmaya Mission">Swami Tejomayananda</option>
           </optgroup>
           <optgroup label="The school today">
@@ -466,27 +459,11 @@
             <option value="principal" data-role="Principal">Smt. G. Rajeshwari</option>
           </optgroup>
           </select>
-          <p class="ld-idx__now" id="ld-pick-role">Founder of CIRS</p>
+          <p class="ld-idx__now" id="ld-pick-role">Pujya Guruji, Chinmaya Mission</p>
         </div>
       </div>
     </div>
     <div class="ld-sheet">
-      <article class="ld-msg" id="msg-founder" role="tabpanel" aria-labelledby="msg-name-founder" tabindex="-1">
-        <header class="ld-msg__head">
-          <figure class="ld-msg__face"><img src="assets/img/leadership/chinmayananda-900.jpg" srcset="assets/img/leadership/chinmayananda-320.jpg 320w, assets/img/leadership/chinmayananda-480.jpg 480w, assets/img/leadership/chinmayananda-640.jpg 640w, assets/img/leadership/chinmayananda-900.jpg 900w" sizes="(min-width: 1100px) 220px, 112px" width="900" height="1125" alt="" loading="lazy" decoding="async"></figure>
-          <div class="ld-msg__who">
-            <p class="ld-msg__kind">The Founder&rsquo;s message</p>
-            <h3 class="ld-msg__name" id="msg-name-founder">Pujya Gurudev Swami Chinmayananda</h3>
-            <p class="ld-msg__role">Founder of CIRS</p>
-          </div>
-        </header>
-        <div class="ld-msg__text">
-            <p>Never before in our national history did the best minds of India move out in such spectacular numbers to serve communities in distant foreign lands, living amidst unusual climates, strange food habits, peculiar social customs and confusing cultural environments. Everywhere young Indians are scoring success with their performances in science and technology, commerce and art. We salute them for all their excellence and wish them even greater success in their professions.</p>
-            <p>Those who have gone abroad with their families try to contribute their Indian way of life with the lifestyle of their adopted countries. At times such attempts create pressures and conflicts over moral values and cultural patterns. The children see one thing at home and meet contradictory situations outside. Because of this bi-cultural experience they run the risk of picking up attitudes potentially dangerous and sometimes suicidal to their future happiness and success.</p>
-            <p>I am glad my suggestions are now fully accepted both in India and abroad. CIRS will provide an environment that will help integrate the best of each culture. It will be a cultural home away from home for our growing children.</p>
-            <p>Send us your children. Let them have one to six years of cultural adventure during their 11&ndash;18 years of age. Let us give them a chance to understand and absorb Indian culture and heritage and return to the countries from where they came, to continue their studies. Let us build up sufficient knowledge and taste in them to feel a sense of identity with and a pride in their Indian heritage.</p>
-        </div>
-      </article>
       <article class="ld-msg" id="msg-guruji" role="tabpanel" aria-labelledby="msg-name-guruji" tabindex="-1">
         <header class="ld-msg__head">
           <figure class="ld-msg__face"><img src="assets/img/leadership/tejomayananda-800.jpg" srcset="assets/img/leadership/tejomayananda-320.jpg 320w, assets/img/leadership/tejomayananda-480.jpg 480w, assets/img/leadership/tejomayananda-640.jpg 640w, assets/img/leadership/tejomayananda-800.jpg 800w" sizes="(min-width: 1100px) 220px, 112px" width="800" height="1000" alt="" loading="lazy" decoding="async"></figure>
