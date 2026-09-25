@@ -388,19 +388,6 @@ body.sports .film__scroll-cue span:first-child{
   letter-spacing:0;
 }
 
-/* ---- CIRS Art Attack -----------------------------------------------------
-   The supplied film ends with warm pigment at left and blue/violet at right.
-   Their dark central gap is the place for the heading, well clear of the
-   coloured forms. Its first frame is very dark; the initial video poster is
-   that frame, while the stage carries the final still for static fallbacks. */
-body.art-attack{
-  --film-ground:#0B080D;
-  --film-crop:50% 50%;
-  --film-crop-narrow:50% 50%;
-}
-body.art-attack .film__stage{
-  background:#0B080D;
-}
 /* ---- CIRS Festivals ------------------------------------------------------
    The film pulls back from a diya into a full floral rangoli. Keep its centre
    visible, including on a portrait phone, and set the thin gold title above
@@ -411,7 +398,6 @@ body.festivals{
   --film-crop-narrow:50% 50%;
 }
 body.festivals .film__stage{ background:#1B0C08; }
-body.art-attack .film__still,
 body.festivals .film__still{
   position:absolute;
   inset:0;
@@ -421,71 +407,6 @@ body.festivals .film__still{
   object-fit:cover;
   object-position:var(--film-crop);
 }
-body.art-attack .film__stage::after{
-  content:"";
-  position:absolute;
-  z-index:1;
-  left:0;
-  right:0;
-  bottom:0;
-  height:clamp(70px, 13svh, 150px);
-  background:linear-gradient(to bottom, transparent, #170F18);
-  pointer-events:none;
-}
-body.art-attack .film__title{
-  z-index:2;
-  left:50%;
-  right:auto;
-  top:49%;
-  bottom:auto;
-  width:min(86vw, 720px);
-  padding:0;
-  color:#FFF9F0;
-  text-transform:none;
-  transform:translate(-50%, calc(-50% + (1 - var(--film-reveal)) * 12px));
-  filter:none;
-  will-change:opacity, transform;
-}
-body.art-attack .film__art-prefix{
-  display:block;
-  margin-bottom:clamp(12px, 2vh, 22px);
-  padding-left:.42em;
-  font-family:"Jost", var(--font-primary), sans-serif;
-  font-size:clamp(12px, 1.2vw, 17px);
-  font-weight:400;
-  letter-spacing:.42em;
-  line-height:1;
-  text-transform:uppercase;
-  color:#EADBCD;
-}
-body.art-attack .film__art-name{
-  display:block;
-  font-family:var(--font-primary);
-  font-size:clamp(56px, 6.3vw, 100px);
-  font-weight:500;
-  letter-spacing:-.055em;
-  line-height:.92;
-  white-space:nowrap;
-}
-body.art-attack .film__seam{
-  height:clamp(130px, 18svh, 220px);
-  background:linear-gradient(to bottom,
-              #170F18 0%, #211722 24%, #76686C 64%, var(--paper) 100%);
-}
-body.art-attack .film[data-film-still] .film__video{ visibility:hidden; }
-@media (max-aspect-ratio:6/5){
-  body.art-attack .film__still{ object-position:var(--film-crop-narrow); }
-  body.art-attack .film__title{ top:52%; }
-}
-@media (max-width:720px){
-  body.art-attack .film__title{ width:calc(100vw - 32px); }
-  body.art-attack .film__art-prefix{ font-size:12px; }
-  body.art-attack .film__art-name{ font-size:clamp(48px, 12vw, 76px); }
-}
-@media (max-width:360px){
-  body.art-attack .film__art-name{ font-size:clamp(42px, 11.5vw, 52px); }
-}
-
 body.festivals .film__stage::after{
   content:"";
   position:absolute;
@@ -570,8 +491,6 @@ body.festivals .film[data-film-still] .film__video{ visibility:hidden; }
   }
   body.festivals .film__video{ visibility:hidden; }
   body.festivals .film[data-film-pending] .film__title{ opacity:1; }
-  body.art-attack .film__video{ visibility:hidden; }
-  body.art-attack .film[data-film-pending] .film__title{ opacity:1; }
 }
 
 /* ---- CIRS Theatre -------------------------------------------------------
