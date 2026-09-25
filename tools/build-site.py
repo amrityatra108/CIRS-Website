@@ -143,24 +143,15 @@ PAGES = {
     },
     "news": {
         "nav": "News",
-        "title": "News",
-        "description": "News and events from Chinmaya International Residential School — "
-                       "assemblies, weeks, competitions and the term's diary.",
-        # A hero rather than the flat band: a news page should open at the
-        # pace of the campus, so the opening is the campus in motion with the
-        # current headlines cycling under it.
-        "hero": ("News from campus", "The Campus, <em>As It Happens.</em>",
-                 "Results, assemblies, weeks and celebrations, reported by the departments and "
-                 "the houses — and the dates already in the school calendar."),
-        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
-        "hero_cta": [("Read the latest", "#latest", "primary"),
-                     ("From the school diary", "#diary", "ghost")],
-        "hero_extra": newsflash_html(),
-        # The hero was already the page's own. Below it the results table and
-        # the section heads were the shared components, unstyled, exactly as
-        # School Information had them — so it takes the same group sheet. See
-        # assets/css/connect.css.
-        "sheet": "connect",
+        "title": "News | The CIRS Journal",
+        "description": "The CIRS Journal: school news, results and stories from Chinmaya "
+                       "International Residential School in Siruvani, Coimbatore.",
+        # The journal supplies its own masthead, feature and archive. Its
+        # opening is readable immediately, without the shared video hero.
+        "sheet": "news-journal",
+        "cache_suffix": "-journal-11",
+        "litehead": True,
+        "uc": False,
     },
     "founder": {
         "litehead": True,
@@ -1686,6 +1677,9 @@ def build(slug, page):
               .replace("{{HEADER_TABS}}",
                        EXTRA_TAB.format(href=page["logintab"][1], label=page["logintab"][0])
                        if page.get("logintab") else ""))
+    if slug == "news":
+        header = header.replace('class="htab htab--news" href="news.html"',
+                                'class="htab htab--news" href="news.html" aria-current="page"')
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
     if slug == "parent-portal":
@@ -1802,6 +1796,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/records.js?{CACHE_BUST}" defer></script>')
     if slug == "alumni":
         parts.append(f'<script src="assets/js/alumni-journey.js?{CACHE_BUST}" defer></script>')
+    if slug == "news":
+        parts.append(f'<script src="assets/js/news-journal.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
