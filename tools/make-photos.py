@@ -185,15 +185,37 @@ PHOTOS = [
     # deliberate and worth keeping: the run is the first thing under the
     # hero, and a photograph the reader meets here and again on Admissions
     # makes the library look smaller than it is.
+    # The ten the school supplied, in the order they sent them. The run's
+    # shape is unchanged: four landscape, two 4:5 and two 2:3 as before, so
+    # the stage and its transitions do not move. Every source is landscape,
+    # so the four upright slots are the ones that needed a real decision —
+    # the focal point is set on the figure rather than the frame's middle,
+    # which is what keeps a singer or a speaker inside a 2:3 cut of a 3:2
+    # photograph instead of losing them out of the side.
+    ("hrun/01-sprint.jpg",   "drive-hrun-01.jpg", (1500, 1000), (0.40, 0.55)),
+    ("hrun/02-tyre.jpg",     "drive-hrun-02.jpg", (1000, 1250), (0.46, 0.52)),
+    ("hrun/03-swim.jpg",     "drive-hrun-03.jpg", (1000, 1250), (0.50, 0.45)),
+    ("hrun/04-run.jpg",      "drive-hrun-04.jpg", (1500, 1000), (0.50, 0.50)),
+    ("hrun/05-assembly.jpg", "drive-hrun-05.jpg", (1500, 1000), (0.50, 0.50)),
+    ("hrun/06-song.jpg",     "drive-hrun-06.jpg", (1000, 1500), (0.33, 0.55)),
+    ("hrun/07-sparkler.jpg", "drive-hrun-07.jpg", (1500, 1000), (0.52, 0.48)),
+    ("hrun/08-firework.jpg", "drive-hrun-08.jpg", (1500, 1000), (0.52, 0.45)),
+    ("hrun/09-speech.jpg",   "drive-hrun-09.jpg", (1000, 1500), (0.56, 0.45)),
+    ("hrun/10-stage.jpg",    "drive-hrun-10.jpg", (1500, 1000), (0.58, 0.40)),
+
+    # The run's previous ten are not all retired with it. The CIRS Experience
+    # and Alumni borrow seven of them for their own galleries and covers, and
+    # those pages are not changing, so those seven are still cut here under
+    # their old names. The three the run alone used — 03-drums, 08-trail and
+    # 09-stage — have gone with it. Anything listed here and referenced by no
+    # page fails the orphan check in tools/check-links.py, which is what keeps
+    # this list honest.
     ("hrun/01-lawn.jpg",    "IMG_1630.JPG", (1500, 1000), (0.50, 0.50)),
     ("hrun/02-lesson.jpg",  "IMG_1806.JPG", (1000, 1250), (0.34, 0.52)),
-    ("hrun/03-drums.jpg",   "DSC_8037.JPG", (1000, 1250), (0.46, 0.66)),
     ("hrun/04-hall.jpg",    "CRS09514.JPG", (1500, 1000), (0.50, 0.46)),
     ("hrun/05-table.jpg",   "IMG_0081.JPG", (1500, 1000), (0.50, 0.50)),
     ("hrun/06-field.jpg",   "8A5A3313.JPG", (1000, 1500), (0.50, 0.46)),
     ("hrun/07-water.jpg",   "IMG_9314.JPG", (1500, 1000), (0.55, 0.50)),
-    ("hrun/08-trail.jpg",   "IMG_6061.JPG", (1500, 1000), (0.56, 0.50)),
-    ("hrun/09-stage.jpg",   "IMG_1828.JPG", (1000, 1500), (0.50, 0.45)),
     ("hrun/10-night.jpg",   "IMG_2474.JPG", (1500, 1000), (0.50, 0.52)),
 ]
 
