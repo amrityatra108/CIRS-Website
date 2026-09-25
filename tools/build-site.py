@@ -428,15 +428,14 @@ PAGES = {
     },
     "creative-writing": {
         "nav": "Creative Writing",
-        "title": "Creative Writing",
-        "description": "Essays, opinion and reflection by students of Chinmaya International "
-                       "Residential School, published in The Crossroads.",
-        # No banner from the shared builder. Like the Math Challenge, this page
-        # opens on a field it brings itself — a lit desk, a typewriter and an
-        # ink stroke being drawn — and carries its own h1 inside it. The sheet
-        # is assets/css/cwriting.css, scoped to body.cwriting.
+        "title": "Creative Writing | Words become worlds. | CIRS",
+        "description": "A curated anthology of poetry by students of Chinmaya "
+                       "International Residential School.",
+        # This anthology supplies its own typographic opening and h1.
         "banner": None,
         "sheet": "cwriting",
+        "cache_suffix": "-anthology-2",
+        "uc": False,
     },
     "captures": {
         "nav": "CIRS Captures",
@@ -1718,8 +1717,10 @@ def build(slug, page):
                        .replace("{{CAPTURES_COUNT_CAP}}", captures.count_word().capitalize())
                        .replace("{{CAPTURES_CHAPTER_NAV}}", captures.chapter_nav_html() if slug == "captures" else "")
                        .replace("{{CW_ROWS}}", creativewriting.rows_html())
-                       .replace("{{CW_JOURNEY}}", creativewriting.journey_html())
+                       .replace("{{CW_CHAPTERS}}", creativewriting.chapters_html())
+                       .replace("{{CW_HERO_EXCERPT}}", creativewriting.hero_excerpt_html())
                        .replace("{{CW_COUNT}}", str(creativewriting.count()))
+                       .replace("{{CW_WRITERS}}", str(creativewriting.writer_count()))
                        .replace("{{BLOG_FRONT}}", blog.front_html())
                        .replace("{{BLOG_RAIL}}", blog.rail_html())
                        .replace("{{BLOG_COUNT}}", str(blog.count()))
