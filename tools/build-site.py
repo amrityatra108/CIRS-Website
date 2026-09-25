@@ -435,6 +435,7 @@ PAGES = {
         "banner": None,
         "sheet": "cwriting",
         "cache_suffix": "-anthology-2",
+        "jump": False,
         "uc": False,
     },
     "captures": {
