@@ -30,6 +30,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import alumni
+import artattack
 import artswall
 import blog
 import founder
@@ -483,25 +484,23 @@ PAGES = {
         "uc": False,
     },
     "art-attack": {
-        # The page body is tools/pages/art-attack.html; its sheet is
-        # assets/css/culture.css, shared by the three Art, Culture & Music
-        # pages that open on a film.
-        "sheet": "culture",
-        "cache_suffix": "-art-attack-film-2",
+        # The page body is tools/pages/art-attack.html; its works, credits and
+        # photographs are tools/art-attack.json, read by tools/artattack.py and
+        # cut by tools/make-art-attack.py. It opens on paper, not on a film:
+        # a photograph of students at work that gives way, on scroll, to the
+        # first finished work (assets/js/artattack.js), so the header takes
+        # its dark lettering from the first paint.
+        "sheet": "artattack",
+        "cache_suffix": "-art-attack-3",
+        "litehead": True,
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
-        "description": "Studio work and visual art from across Chinmaya International "
-                       "Residential School.",
+        "description": "Painting, drawing, craft and the things made for the stage by the students "
+                       "of Chinmaya International Residential School.",
         "banner": None,
-        "opening": {
-            "video": "art-attack-opening",
-            "poster": "art-attack-opening-poster.jpg",
-            "still": "art-attack-opening-final.jpg",
-            "still_element": True,
-            "title": "CIRS Art Attack",
-            "title_markup": '<span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span>',
-            "pending": True,
-        },
+        # The note that replaced the under-construction banner is specific:
+        # what is missing, and where to send it. It is the page's own.
+        "uc": False,
     },
     "festivals": {
         # The page body is tools/pages/festivals.html and its sheet
@@ -1692,6 +1691,8 @@ def build(slug, page):
     else:
         content = read(f"tools/pages/{slug}.html").rstrip("\n")
     content = expand_figs(content)
+    if slug == "art-attack":
+        content = artattack.expand(content)
     if slug == "captures":
         content = captures.expand_featured(content)
     if slug == "festivals":
@@ -1790,6 +1791,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-editorial-1" defer></script>')
     if slug == "festivals":
         parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
+    if slug == "art-attack":
+        parts.append(f'<script src="assets/js/artattack.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
