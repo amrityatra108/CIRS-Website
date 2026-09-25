@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>School History</title>
-<meta name="description" content="How Chinmaya International Residential School came to be — Pujya Gurudev's vision, the rupee-by-rupee purchase of the land, and the inauguration on 6 June 1996.">
+<title>School History | The CIRS Archive</title>
+<meta name="description" content="The CIRS archive: Pujya Gurudev's idea, the land bought one rupee at a time, the inauguration on 6 June 1996 and the milestones since, each with its source.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/school-history.html">
 <!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
@@ -16,42 +16,28 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="School History">
-<meta property="og:description" content="How Chinmaya International Residential School came to be — Pujya Gurudev's vision, the rupee-by-rupee purchase of the land, and the inauguration on 6 June 1996.">
+<meta property="og:title" content="School History | The CIRS Archive">
+<meta property="og:description" content="The CIRS archive: Pujya Gurudev's idea, the land bought one rupee at a time, the inauguration on 6 June 1996 and the milestones since, each with its source.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="School History">
-<meta name="twitter:description" content="How Chinmaya International Residential School came to be — Pujya Gurudev's vision, the rupee-by-rupee purchase of the land, and the inauguration on 6 June 1996.">
+<meta name="twitter:title" content="School History | The CIRS Archive">
+<meta name="twitter:description" content="The CIRS archive: Pujya Gurudev's idea, the land bought one rupee at a time, the inauguration on 6 June 1996 and the milestones since, each with its source.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102">
-<link rel="stylesheet" href="assets/css/pages.css?b=102">
-<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
-     removes once it has played. With scripting off nothing removes it, and
-     it covers the page on every page of this site. One rule, applied only
-     when there is no scripting, is the whole fix. Crossroads already does
-     this for its own curtain further down. The footer rule is the same
-     kind of fallback: cirs.js unpins a footer taller than the window, and
-     without it a phone could never scroll up to the top of the footer. -->
-<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=102">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=102-drawer-5">
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-history-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-history-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-history-1">
+
+<link rel="stylesheet" href="assets/css/history.css?b=102-history-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-history-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-history-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-history-1-drawer-5">
 </head>
 
-<body>
+<body class="history">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -305,95 +291,117 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehero" id="top" data-ground="#0E0B12">
-  <div class="pagehero__media" style="background-image:url('assets/img/news-hero.jpg?b=102')">
-    <video class="pagehero__video" autoplay muted loop playsinline
-           poster="assets/img/news-hero.jpg?b=102" aria-hidden="true"
-           width="1280" height="720" fetchpriority="high">
-      <source src="assets/video/campus-loop.webm?b=102" type="video/webm">
-      <source src="assets/video/campus-loop.mp4?b=102" type="video/mp4">
-    </video>
-  </div>
-  <div class="pagehero__scrim" aria-hidden="true"></div>
-  <div class="wrap pagehero__inner">
-    <p class="marker"><span class="sc">Since 1996</span></p>
-    <h1 class="serif" data-split>School <em>History.</em></h1>
-    <p class="lead">A vision carried from the 1970s to a hundred acres in the Siruvani foothills, and the ninety-six students who began it.</p>
-    <p class="pagehero__cta">
-      <a class="btn btn--primary btn--lg" href="#timeline">Follow the timeline</a>
-      <a class="btn btn--ghost btn--lg" href="#film">Watch the film</a>
+<!-- School History: the CIRS archive.
+     Everything dated on this page is written from tools/history.py, which
+     records where each event comes from. Edit the history there, not here.
+     The sheet is assets/css/history.css and the motion assets/js/history.js;
+     without either, every chapter and every record is still here, in order. -->
+
+<section class="hx-opening" id="top" aria-labelledby="hx-title">
+  <div class="hx-opening__field" aria-hidden="true"><span class="hx-float hx-float--1" style="--z:1;--ar:0.7264"><img src="assets/img/history/gurudev-sm.jpg" srcset="assets/img/history/gurudev-sm.jpg 640w, assets/img/history/gurudev-lg.jpg 1400w" sizes="220px" width="640" height="881" alt="" fetchpriority="high" decoding="async"></span><span class="hx-float hx-float--2" style="--z:2;--ar:0.7064"><img src="assets/img/history/noc-1996-sm.jpg" srcset="assets/img/history/noc-1996-sm.jpg 640w, assets/img/history/noc-1996-lg.jpg 1400w" sizes="220px" width="640" height="906" alt="" fetchpriority="high" decoding="async"></span><span class="hx-float hx-float--3" style="--z:3;--ar:0.6949"><img src="assets/img/history/kalam-2007-sm.jpg" srcset="assets/img/history/kalam-2007-sm.jpg 640w, assets/img/history/kalam-2007-lg.jpg 1170w" sizes="220px" width="640" height="921" alt="" fetchpriority="high" decoding="async"></span><span class="hx-float hx-float--4" style="--z:2;--ar:0.7348"><img src="assets/img/history/sakshi-2008-sm.jpg" srcset="assets/img/history/sakshi-2008-sm.jpg 640w, assets/img/history/sakshi-2008-lg.jpg 1332w" sizes="220px" width="640" height="871" alt="" loading="lazy" decoding="async"></span><span class="hx-float hx-float--5" style="--z:3;--ar:0.6809"><img src="assets/img/history/report-2019-sm.jpg" srcset="assets/img/history/report-2019-sm.jpg 640w, assets/img/history/report-2019-lg.jpg 1087w" sizes="220px" width="640" height="940" alt="" loading="lazy" decoding="async"></span><span class="hx-float hx-float--6" style="--z:1;--ar:0.8020"><img src="assets/img/history/brainfeed-2017-sm.jpg" srcset="assets/img/history/brainfeed-2017-sm.jpg 640w, assets/img/history/brainfeed-2017-lg.jpg 1400w" sizes="220px" width="640" height="798" alt="" loading="lazy" decoding="async"></span><span class="hx-float hx-float--type" style="--z:2;--ar:.8"><span class="hx-float__when">1984</span><span class="hx-float__t">One rupee at a time</span></span><span class="hx-float hx-float--type hx-float--type2" style="--z:3;--ar:.8"><span class="hx-float__when">6.6.1996</span><span class="hx-float__t">96 students</span></span></div>
+  <div class="wrap hx-opening__inner">
+    <p class="hx-label">The CIRS Archive</p>
+    <h1 class="hx-opening__title" id="hx-title">Before the school opened.</h1>
+    <p class="hx-opening__lead">Explore the people, decisions and milestones behind CIRS.</p>
+    <p class="hx-opening__actions">
+      <a class="hx-btn hx-btn--primary" href="#chapters">Explore the archive</a>
+      <a class="hx-btn" href="#timeline">View all milestones</a>
     </p>
-
   </div>
 </section>
-<nav class="jump" aria-label="On this page">
-  <details class="jump__details">
-    <summary class="jump__toggle" title="On this page">
-      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span class="jump__label">On this page</span>
-    </summary>
-    <div class="jump__panel" id="jumpPanel">
-      <p aria-hidden="true">On this page</p>
-      <a href="#origin">The origin</a>
-      <a href="#film">In the school&rsquo;s own words</a>
-      <a href="#timeline">The milestones</a>
-      <a href="#more">More of the Story is Coming.</a>
+
+<section class="hx-seq" id="chapters" aria-labelledby="hx-seq-title">
+  <div class="hx-stage">
+    <div class="wrap hx-stage__head">
+      <h2 class="hx-stage__title" id="hx-seq-title">The story in six chapters</h2>
+      <nav class="hx-nav" aria-label="Chapters of the history"><ol class="hx-nav__list"><li><a href="#chapter-idea" data-hx-jump="0"><span class="hx-nav__n">01</span><span class="hx-nav__t">The idea</span></a></li><li><a href="#chapter-rupee" data-hx-jump="1"><span class="hx-nav__n">02</span><span class="hx-nav__t">The land</span></a></li><li><a href="#chapter-shape" data-hx-jump="2"><span class="hx-nav__n">03</span><span class="hx-nav__t">Taking shape</span></a></li><li><a href="#chapter-opening" data-hx-jump="3"><span class="hx-nav__n">04</span><span class="hx-nav__t">The opening</span></a></li><li><a href="#chapter-early" data-hx-jump="4"><span class="hx-nav__n">05</span><span class="hx-nav__t">Early years</span></a></li><li><a href="#chapter-later" data-hx-jump="5"><span class="hx-nav__n">06</span><span class="hx-nav__t">Later years</span></a></li></ol><a class="hx-nav__all" href="#timeline">View all milestones</a></nav>
     </div>
-  </details>
-</nav>
-<section class="section on-paper-2" id="origin">
+    <ol class="wrap hx-chapters">
+<li class="hx-ch" id="chapter-idea" data-hx-chapter="0"><div class="hx-ch__visual"><figure class="hx-ex hx-ex--img" style="--ar:0.7264" data-exhibit="gurudev"><img src="assets/img/history/gurudev-sm.jpg" srcset="assets/img/history/gurudev-sm.jpg 640w, assets/img/history/gurudev-lg.jpg 1400w" sizes="(max-width: 900px) 86vw, 34vw" width="640" height="881" alt="A close colour portrait of Pujya Gurudev Swami Chinmayananda, smiling, in saffron robes and spectacles" fetchpriority="high" decoding="async"></figure></div><div class="hx-ch__text"><p class="hx-ch__when"><span class="hx-ch__n">01</span>1970s</p><h3 class="hx-ch__head">The idea came first.</h3><p class="hx-ch__copy">Pujya Gurudev Swami Chinmayananda conceived an international school in India, and the idea met with an overwhelming response from around the world. Bangalore, Lucknow, the Andamans and Himachal Pradesh were weighed before Coimbatore was chosen.</p><p class="hx-ch__actions"><a class="hx-ch__more" href="#record-idea-1970s" data-hx-record="idea-1970s">Read more<span class="sr-only"> about An international school is imagined</span></a></p></div></li>
+<li class="hx-ch" id="chapter-rupee" data-hx-chapter="1"><div class="hx-ch__visual"><div class="hx-ex hx-ex--type hx-ex--rupee" style="--ar:.8" data-exhibit="rupee"><div class="hx-rupee__field" aria-hidden="true"><i style="--x0:15.0;--y0:15.0;--x1:14.0;--y1:22.0;--d:0.000"></i><i style="--x0:52.3;--y0:38.7;--x1:23.0;--y1:22.0;--d:0.020"></i><i style="--x0:89.6;--y0:62.4;--x1:32.0;--y1:22.0;--d:0.040"></i><i style="--x0:34.9;--y0:86.1;--x1:41.0;--y1:22.0;--d:0.060"></i><i style="--x0:72.2;--y0:25.8;--x1:50.0;--y1:22.0;--d:0.080"></i><i style="--x0:17.5;--y0:49.5;--x1:59.0;--y1:22.0;--d:0.100"></i><i style="--x0:54.8;--y0:73.2;--x1:68.0;--y1:22.0;--d:0.120"></i><i style="--x0:92.1;--y0:12.9;--x1:77.0;--y1:22.0;--d:0.140"></i><i style="--x0:37.4;--y0:36.6;--x1:86.0;--y1:22.0;--d:0.160"></i><i style="--x0:74.7;--y0:60.3;--x1:14.0;--y1:32.0;--d:0.035"></i><i style="--x0:20.0;--y0:84.0;--x1:23.0;--y1:32.0;--d:0.055"></i><i style="--x0:57.3;--y0:23.7;--x1:32.0;--y1:32.0;--d:0.075"></i><i style="--x0:94.6;--y0:47.4;--x1:41.0;--y1:32.0;--d:0.095"></i><i style="--x0:39.9;--y0:71.1;--x1:50.0;--y1:32.0;--d:0.115"></i><i style="--x0:77.2;--y0:10.8;--x1:59.0;--y1:32.0;--d:0.135"></i><i style="--x0:22.5;--y0:34.5;--x1:68.0;--y1:32.0;--d:0.155"></i><i style="--x0:59.8;--y0:58.2;--x1:77.0;--y1:32.0;--d:0.175"></i><i style="--x0:5.1;--y0:81.9;--x1:86.0;--y1:32.0;--d:0.195"></i><i style="--x0:42.4;--y0:21.6;--x1:14.0;--y1:42.0;--d:0.070"></i><i style="--x0:79.7;--y0:45.3;--x1:23.0;--y1:42.0;--d:0.090"></i><i style="--x0:25.0;--y0:69.0;--x1:32.0;--y1:42.0;--d:0.110"></i><i style="--x0:62.3;--y0:8.7;--x1:41.0;--y1:42.0;--d:0.130"></i><i style="--x0:7.6;--y0:32.4;--x1:50.0;--y1:42.0;--d:0.150"></i><i style="--x0:44.9;--y0:56.1;--x1:59.0;--y1:42.0;--d:0.170"></i><i style="--x0:82.2;--y0:79.8;--x1:68.0;--y1:42.0;--d:0.190"></i><i style="--x0:27.5;--y0:19.5;--x1:77.0;--y1:42.0;--d:0.210"></i><i style="--x0:64.8;--y0:43.2;--x1:86.0;--y1:42.0;--d:0.230"></i><i style="--x0:10.1;--y0:66.9;--x1:14.0;--y1:52.0;--d:0.105"></i><i style="--x0:47.4;--y0:90.6;--x1:23.0;--y1:52.0;--d:0.125"></i><i style="--x0:84.7;--y0:30.3;--x1:32.0;--y1:52.0;--d:0.145"></i><i style="--x0:30.0;--y0:54.0;--x1:41.0;--y1:52.0;--d:0.165"></i><i style="--x0:67.3;--y0:77.7;--x1:50.0;--y1:52.0;--d:0.185"></i><i style="--x0:12.6;--y0:17.4;--x1:59.0;--y1:52.0;--d:0.205"></i><i style="--x0:49.9;--y0:41.1;--x1:68.0;--y1:52.0;--d:0.225"></i><i style="--x0:87.2;--y0:64.8;--x1:77.0;--y1:52.0;--d:0.245"></i><i style="--x0:32.5;--y0:88.5;--x1:86.0;--y1:52.0;--d:0.265"></i><i style="--x0:69.8;--y0:28.2;--x1:14.0;--y1:62.0;--d:0.140"></i><i style="--x0:15.1;--y0:51.9;--x1:23.0;--y1:62.0;--d:0.160"></i><i style="--x0:52.4;--y0:75.6;--x1:32.0;--y1:62.0;--d:0.180"></i><i style="--x0:89.7;--y0:15.3;--x1:41.0;--y1:62.0;--d:0.200"></i><i style="--x0:35.0;--y0:39.0;--x1:50.0;--y1:62.0;--d:0.220"></i><i style="--x0:72.3;--y0:62.7;--x1:59.0;--y1:62.0;--d:0.240"></i><i style="--x0:17.6;--y0:86.4;--x1:68.0;--y1:62.0;--d:0.260"></i><i style="--x0:54.9;--y0:26.1;--x1:77.0;--y1:62.0;--d:0.280"></i><i style="--x0:92.2;--y0:49.8;--x1:86.0;--y1:62.0;--d:0.300"></i><i style="--x0:37.5;--y0:73.5;--x1:14.0;--y1:72.0;--d:0.175"></i><i style="--x0:74.8;--y0:13.2;--x1:23.0;--y1:72.0;--d:0.195"></i><i style="--x0:20.1;--y0:36.9;--x1:32.0;--y1:72.0;--d:0.215"></i><i style="--x0:57.4;--y0:60.6;--x1:41.0;--y1:72.0;--d:0.235"></i><i style="--x0:94.7;--y0:84.3;--x1:50.0;--y1:72.0;--d:0.255"></i><i style="--x0:40.0;--y0:24.0;--x1:59.0;--y1:72.0;--d:0.275"></i><i style="--x0:77.3;--y0:47.7;--x1:68.0;--y1:72.0;--d:0.295"></i><i style="--x0:22.6;--y0:71.4;--x1:77.0;--y1:72.0;--d:0.315"></i><i style="--x0:59.9;--y0:11.1;--x1:86.0;--y1:72.0;--d:0.335"></i></div><p class="hx-type__when">1984</p><p class="hx-type__title">One rupee,<br>from each person.</p></div></div><div class="hx-ch__text"><p class="hx-ch__when"><span class="hx-ch__n">02</span>From 1984</p><h3 class="hx-ch__head">One rupee at a time.</h3><p class="hx-ch__copy">To buy the land, Swami Sahayanandaji travelled the length and breadth of India on foot, making the first collection: one rupee from each person.</p><p class="hx-ch__aside">The marks stand for many people taking part. They are not a count of those who gave.</p><p class="hx-ch__actions"><a class="hx-ch__more" href="#record-rupee-1984" data-hx-record="rupee-1984">Read more<span class="sr-only"> about One rupee at a time</span></a></p></div></li>
+<li class="hx-ch" id="chapter-shape" data-hx-chapter="2"><div class="hx-ch__visual"><div class="hx-ex hx-ex--type hx-ex--diptych" style="--ar:1.18" data-exhibit="diptych"><div class="hx-dip hx-dip--a"><p class="hx-type__when">3 August 1993</p><p class="hx-type__title">Gurudev attains Mahasamadhi.</p><p class="hx-type__src">Founder chronology</p></div><div class="hx-dip hx-dip--b"><p class="hx-type__when">1994</p><p class="hx-type__title">Pujya Guruji makes the vision concrete.</p><p class="hx-type__src">The school&rsquo;s published history</p></div></div></div><div class="hx-ch__text"><p class="hx-ch__when"><span class="hx-ch__n">03</span>1993 &ndash; 1994</p><h3 class="hx-ch__head">The project takes shape.</h3><p class="hx-ch__copy">Gurudev attained Mahasamadhi on 3 August 1993 and did not see the school open. In 1994, as the school&rsquo;s own account records, Pujya Guruji Swami Tejomayananda set about making the vision concrete, and the work progressed by leaps and bounds.</p><p class="hx-ch__actions"><a class="hx-ch__more" href="#record-guruji-1994" data-hx-record="guruji-1994">Read more<span class="sr-only"> about The vision is made concrete</span></a></p></div></li>
+<li class="hx-ch" id="chapter-opening" data-hx-chapter="3"><div class="hx-ch__visual"><div class="hx-ex hx-ex--type hx-ex--opening" style="--ar:1.02" data-exhibit="opening"><p class="hx-type__when">6 June 1996</p><div class="hx-open__groups" aria-hidden="true"><div class="hx-open__set hx-open__set--students"><div class="hx-open__marks"><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:0"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:1"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:2"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i><i style="--g:3"></i></div><p class="hx-open__label"><b>96</b> students</p></div><div class="hx-open__set hx-open__set--staff"><div class="hx-open__marks"><i style="--g:4"></i><i style="--g:4"></i><i style="--g:4"></i><i style="--g:4"></i><i style="--g:4"></i><i style="--g:4"></i><i style="--g:5"></i><i style="--g:5"></i><i style="--g:5"></i><i style="--g:5"></i><i style="--g:5"></i></div><p class="hx-open__label"><b>11</b> academic staff</p></div></div><p class="hx-type__title hx-open__grades">Grades V&ndash;VIII</p></div></div><div class="hx-ch__text"><p class="hx-ch__when"><span class="hx-ch__n">04</span>6 June 1996</p><h3 class="hx-ch__head">The school opens.</h3><p class="hx-ch__copy">Inaugurated by Pujya Swami Chidanandaji, President of The Divine Life Society. The first staff were headed by Dr. Jaya Venugopal, with Brahmacharini Sumati Chaitanya and Brahmachari Samahita Chaitanya as spiritual guides.</p><dl class="hx-ch__facts"><div><dt>Students</dt><dd>96</dd></div><div><dt>Academic staff</dt><dd>11</dd></div><div><dt>Grades</dt><dd>V&ndash;VIII</dd></div></dl><p class="hx-ch__actions"><a class="hx-ch__more" href="#record-inauguration-1996" data-hx-record="inauguration-1996">Read more<span class="sr-only"> about The school is inaugurated</span></a></p></div></li>
+<li class="hx-ch" id="chapter-early" data-hx-chapter="4"><div class="hx-ch__visual"><figure class="hx-ex hx-ex--img" style="--ar:0.7348" data-exhibit="sakshi-2008"><img src="assets/img/history/sakshi-2008-sm.jpg" srcset="assets/img/history/sakshi-2008-sm.jpg 640w, assets/img/history/sakshi-2008-lg.jpg 1332w" sizes="(max-width: 900px) 86vw, 34vw" width="640" height="871" alt="The cover of the Chinmaya Sakshi e-newsletter, May 2008 summer special, with a photograph of the campus and a portrait of Gurudev" loading="lazy" decoding="async"></figure></div><div class="hx-ch__text"><p class="hx-ch__when"><span class="hx-ch__n">05</span>1996 &ndash; 2010</p><h3 class="hx-ch__head">A school finds its voice.</h3><p class="hx-ch__copy">Within weeks of opening the State cleared the way to CBSE affiliation. In 2007 thirty-two students met President Kalam at Rashtrapati Bhavan, and by 2010 the students were writing and laying out newsletters of their own.</p><p class="hx-ch__actions"><a class="hx-ch__more" href="#record-sakshi-2008" data-hx-record="sakshi-2008">Read more<span class="sr-only"> about A newsletter the students made</span></a></p></div></li>
+<li class="hx-ch" id="chapter-later" data-hx-chapter="5"><div class="hx-ch__visual"><figure class="hx-ex hx-ex--img" style="--ar:1.4988" data-exhibit="vision-2012"><img src="assets/img/history/vision-2012-sm.jpg" srcset="assets/img/history/vision-2012-sm.jpg 640w, assets/img/history/vision-2012-lg.jpg 1400w" sizes="(max-width: 900px) 86vw, 34vw" width="640" height="427" alt="A trophy inscribed 'Central Chinmaya Mission Trust Education Cell Vision Award 2012, awarded to CIRS, Coimbatore', held up with its certificate by a woman in a sari and a swami in saffron" loading="lazy" decoding="async"></figure></div><div class="hx-ch__text"><p class="hx-ch__when"><span class="hx-ch__n">06</span>2011 &ndash; 2026</p><h3 class="hx-ch__head">A wider world, and a longer record.</h3><p class="hx-ch__copy">The International School Award, the CCMT Education Cell&rsquo;s Vision Award for 2012, and by 2019 a school of 580 students from 22 states and 18 other countries. Examination results and honours are kept in full on their own pages.</p><p class="hx-ch__actions"><a class="hx-ch__more" href="#record-vision-award-2012" data-hx-record="vision-award-2012">Read more<span class="sr-only"> about The CCMT Education Cell Vision Award</span></a><a class="hx-ch__link" href="our-results.html">Our Results</a><a class="hx-ch__link" href="our-laurels.html">Our Laurels</a></p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="hx-archive" id="timeline" aria-labelledby="hx-archive-title">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">The origin</span></p>
-      <h2 class="serif h2" data-split>A School Imagined <em>Before It Had a Place.</em></h2>
-      <p class="lead">The idea of an international school in India was conceived by Pujya Gurudev
-        Swami Chinmayananda. Sites were weighed in Bangalore, Lucknow, the Andamans and Himachal
-        Pradesh before Coimbatore was chosen &mdash; and the hundred acres in the Siruvani foothills
-        were bought one rupee at a time.</p>
+    <div class="hx-archive__head">
+      <p class="hx-label">The complete archive</p>
+      <h2 class="hx-archive__title" id="hx-archive-title">All milestones.</h2>
+      <p class="hx-archive__lead">24 records in date order, each with its source.
+        Choose one to read it in full.</p>
     </div>
-
-    <div class="prog" style="margin-top:clamp(30px,3.6vw,48px)">
-      <div class="rv">
-        <p class="copy">In 1979 the Coimbatore Chinmaya Mission Committee found the land, and Pujya
-          Gurudev called it &lsquo;the Sidhbari of the South&rsquo;. From 1984 the money to buy it was
-          collected on foot, one rupee from every household. After Gurudev&rsquo;s Mahasamadhi in 1993,
-          Pujya Guruji Swami Tejomayananda took the project upon his own shoulders and carried it, as
-          the school&rsquo;s own account has it, with unfailing vigour and energy.</p>
-        <p class="copy">On 6 June 1996 the Chinmaya International Residential School was inaugurated
-          by Pujya Swami Chidanandaji, President of The Divine Life Society. It opened with
-          ninety-six students in Grades V to VIII and eleven academic staff.</p>
-      </div>
-      <div class="rv">
-        <p class="copy">The first school was led by Dr. Jaya Venugopal, with Brahmacharini Sumati
-          Chaitanya and Brahmachari Samahita Chaitanya as its spiritual guides, and with Swamini
-          Vimalanandaji and Dr. G. S. Keshawamurthy among those who carried it into being.</p>
-        <p class="copy">The school&rsquo;s own history records its growth to 577 students, 69 faculty
-          and 78 staff, drawn from 23 Indian states and 19 other countries.
-          <em>[Current figures to be confirmed by the school.]</em></p>
-      </div>
+    <div class="hx-filters" role="group" aria-label="Show records from">
+      <button type="button" class="hx-filter" data-hx-filter="all" aria-pressed="true">All <span class="hx-filter__n">24</span></button><button type="button" class="hx-filter" data-hx-filter="before" aria-pressed="false">Before opening <span class="hx-filter__n">5</span></button><button type="button" class="hx-filter" data-hx-filter="early" aria-pressed="false">Early years <span class="hx-filter__n">9</span></button><button type="button" class="hx-filter" data-hx-filter="later" aria-pressed="false">Later milestones <span class="hx-filter__n">10</span></button>
     </div>
+    <p class="hx-archive__status sr-only" id="hx-archive-status" aria-live="polite"></p>
+    <ol class="hx-grid" id="hx-grid">
+<li class="hx-item" data-hx-period="before"><article class="hx-rec" id="record-idea-1970s" aria-labelledby="record-idea-1970s-t"><button type="button" class="hx-card" data-hx-open="idea-1970s" aria-haspopup="dialog"><span class="hx-card__thumb" style="--ar:0.7264"><img src="assets/img/history/gurudev-sm.jpg" srcset="assets/img/history/gurudev-sm.jpg 640w, assets/img/history/gurudev-lg.jpg 1400w" sizes="(max-width: 700px) 44vw, 220px" width="640" height="881" alt="" loading="lazy" decoding="async"></span><span class="hx-card__when">1970s</span><span class="hx-card__title" id="record-idea-1970s-t">An international school is imagined</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>1970s</span> &middot; Before opening</p><h3 class="hx-rec__title">An international school is imagined</h3><figure class="hx-rec__figure"><a class="hx-rec__full" href="assets/img/history/gurudev-lg.jpg" target="_blank" rel="noopener"><img class="hx-rec__img" src="assets/img/history/gurudev-sm.jpg" srcset="assets/img/history/gurudev-sm.jpg 640w, assets/img/history/gurudev-lg.jpg 1400w" sizes="(max-width: 900px) 92vw, 560px" width="640" height="881" alt="A close colour portrait of Pujya Gurudev Swami Chinmayananda, smiling, in saffron robes and spectacles" loading="lazy" decoding="async"><span class="sr-only"> (open the full image)</span></a><figcaption>Pujya Gurudev Swami Chinmayananda. A portrait from the school&rsquo;s archive; the date of the photograph is not recorded.</figcaption></figure><p class="hx-rec__body">The idea of starting an international school in India was conceived by Pujya Gurudev Swami Chinmayananda, and it met with an overwhelming response from all over the world. Bangalore, Lucknow, the Andamans and Himachal Pradesh were each evaluated before Coimbatore was chosen.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s published history, <a href="https://cirschool.org/history.html" target="_blank" rel="noopener">cirschool.org</a></p></div></article></li>
+<li class="hx-item" data-hx-period="before"><article class="hx-rec" id="record-rupee-1984" aria-labelledby="record-rupee-1984-t"><button type="button" class="hx-card" data-hx-open="rupee-1984" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>1984</span></span><span class="hx-card__when">1984</span><span class="hx-card__title" id="record-rupee-1984-t">One rupee at a time</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>1984</span> &middot; Before opening</p><h3 class="hx-rec__title">One rupee at a time</h3><p class="hx-rec__body">Swami Sahayanandaji travelled the length and breadth of India on foot, making the initial collection towards the purchase of the land: one rupee from each individual.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s published history, <a href="https://cirschool.org/history.html" target="_blank" rel="noopener">cirschool.org</a></p></div></article></li>
+<li class="hx-item" data-hx-period="before"><article class="hx-rec" id="record-mahasamadhi-1993" aria-labelledby="record-mahasamadhi-1993-t"><button type="button" class="hx-card" data-hx-open="mahasamadhi-1993" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>3 August 1993</span></span><span class="hx-card__when">3 August 1993</span><span class="hx-card__title" id="record-mahasamadhi-1993-t">Gurudev attains Mahasamadhi</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>3 August 1993</span> &middot; Before opening</p><h3 class="hx-rec__title">Gurudev attains Mahasamadhi</h3><p class="hx-rec__body">Pujya Gurudev Swami Chinmayananda attained Mahasamadhi on 3 August 1993. He did not see the school he had conceived open its doors.</p><p class="hx-rec__source"><span>Source</span> The chronology of Gurudev&rsquo;s life on this site&rsquo;s <a href="founder.html#life">Founder</a> page</p></div></article></li>
+<li class="hx-item" data-hx-period="before"><article class="hx-rec" id="record-guruji-1994" aria-labelledby="record-guruji-1994-t"><button type="button" class="hx-card" data-hx-open="guruji-1994" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>1994</span></span><span class="hx-card__when">1994</span><span class="hx-card__title" id="record-guruji-1994-t">The vision is made concrete</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>1994</span> &middot; Before opening</p><h3 class="hx-rec__title">The vision is made concrete</h3><p class="hx-rec__body">Pujya Guruji Swami Tejomayananda proceeded to concretise the vision of Pujya Gurudev with unfailing vigour and energy, and the work progressed by leaps and bounds.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s published history, <a href="https://cirschool.org/history.html" target="_blank" rel="noopener">cirschool.org</a></p></div></article></li>
+<li class="hx-item" data-hx-period="before"><article class="hx-rec" id="record-project-1996" aria-labelledby="record-project-1996-t"><button type="button" class="hx-card" data-hx-open="project-1996" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>Until 1996</span></span><span class="hx-card__when">Until 1996</span><span class="hx-card__title" id="record-project-1996-t">Guided to completion</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>Until 1996</span> &middot; Before opening</p><h3 class="hx-rec__title">Guided to completion</h3><p class="hx-rec__body">Many devotees around the world contributed generously. Swamini Vimalanandaji and Dr. G.&nbsp;S. Keshawamurthy played a significant role in guiding and executing the project to its completion.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s published history, <a href="https://cirschool.org/history.html" target="_blank" rel="noopener">cirschool.org</a></p></div></article></li>
+<li class="hx-item" data-hx-period="early"><article class="hx-rec" id="record-inauguration-1996" aria-labelledby="record-inauguration-1996-t"><button type="button" class="hx-card" data-hx-open="inauguration-1996" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>6 June 1996</span></span><span class="hx-card__when">6 June 1996</span><span class="hx-card__title" id="record-inauguration-1996-t">The school is inaugurated</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>6 June 1996</span> &middot; Early years</p><h3 class="hx-rec__title">The school is inaugurated</h3><p class="hx-rec__body">The Chinmaya International Residential School was inaugurated by Pujya Swami Chidanandaji, President of The Divine Life Society. The plaque at the main building records that he did so in the presence of Swami Tejomayananda, Head of Chinmaya Mission, on Thursday, 6 June 1996.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s published history, <a href="https://cirschool.org/history.html" target="_blank" rel="noopener">cirschool.org</a>; the inauguration plaque at the main building</p></div></article></li>
+<li class="hx-item" data-hx-period="early"><article class="hx-rec" id="record-first-school-1996" aria-labelledby="record-first-school-1996-t"><button type="button" class="hx-card" data-hx-open="first-school-1996" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>June 1996</span></span><span class="hx-card__when">June 1996</span><span class="hx-card__title" id="record-first-school-1996-t">Ninety-six students, eleven teachers</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>June 1996</span> &middot; Early years</p><h3 class="hx-rec__title">Ninety-six students, eleven teachers</h3><p class="hx-rec__body">CIRS started with 96 students from Grade V to Grade VIII and 11 academic staff, headed by Dr. Jaya Venugopal, with Brahmacharini Sumati Chaitanya and Brahmachari Samahita Chaitanya as spiritual guides.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s published history, <a href="https://cirschool.org/history.html" target="_blank" rel="noopener">cirschool.org</a></p></div></article></li>
+<li class="hx-item" data-hx-period="early"><article class="hx-rec" id="record-noc-1996" aria-labelledby="record-noc-1996-t"><button type="button" class="hx-card" data-hx-open="noc-1996" aria-haspopup="dialog"><span class="hx-card__thumb" style="--ar:0.7064"><img src="assets/img/history/noc-1996-sm.jpg" srcset="assets/img/history/noc-1996-sm.jpg 640w, assets/img/history/noc-1996-lg.jpg 1400w" sizes="(max-width: 700px) 44vw, 220px" width="640" height="906" alt="" loading="lazy" decoding="async"></span><span class="hx-card__when">15 July 1996</span><span class="hx-card__title" id="record-noc-1996-t">The State&rsquo;s no-objection</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>15 July 1996</span> &middot; Early years</p><h3 class="hx-rec__title">The State&rsquo;s no-objection</h3><figure class="hx-rec__figure"><a class="hx-rec__full" href="assets/img/history/noc-1996-lg.jpg" target="_blank" rel="noopener"><img class="hx-rec__img" src="assets/img/history/noc-1996-sm.jpg" srcset="assets/img/history/noc-1996-sm.jpg 640w, assets/img/history/noc-1996-lg.jpg 1400w" sizes="(max-width: 900px) 92vw, 560px" width="640" height="906" alt="A typed letter from the Government of Tamil Nadu Education Department to the Secretary of the Central Board of Secondary Education, dated 15-7-96" loading="lazy" decoding="async"><span class="sr-only"> (open the full image)</span></a><figcaption>L.Dis.No.22864/E3/96, dated 15 July 1996. The letter as the school holds it.</figcaption></figure><p class="hx-rec__body">The Director of School Education, Government of Tamil Nadu, wrote to the Central Board of Secondary Education that the department had no objection to the syllabus of the middle classes at CIRS being affiliated to the Board, subject to one condition: Tamil should be taught as a second language.</p><p class="hx-rec__source"><span>Source</span> No Objection Certificate, published on <a href="school-info.html">School Information</a> &middot; <a href="assets/documents/school-info/state-noc.pdf" target="_blank" rel="noopener">Open the PDF</a></p></div></article></li>
+<li class="hx-item" data-hx-period="early"><article class="hx-rec" id="record-director-2005" aria-labelledby="record-director-2005-t"><button type="button" class="hx-card" data-hx-open="director-2005" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>2005</span></span><span class="hx-card__when">2005</span><span class="hx-card__title" id="record-director-2005-t">A Resident Director</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>2005</span> &middot; Early years</p><h3 class="hx-rec__title">A Resident Director</h3><p class="hx-rec__body">Pujya Guruji appointed Swami Swaroopanandaji as Resident Director of CIRS.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s own account, supplied for this website</p></div></article></li>
+<li class="hx-item" data-hx-period="early"><article class="hx-rec" id="record-kalam-2007" aria-labelledby="record-kalam-2007-t"><button type="button" class="hx-card" data-hx-open="kalam-2007" aria-haspopup="dialog"><span class="hx-card__thumb" style="--ar:0.6949"><img src="assets/img/history/kalam-2007-sm.jpg" srcset="assets/img/history/kalam-2007-sm.jpg 640w, assets/img/history/kalam-2007-lg.jpg 1170w" sizes="(max-width: 700px) 44vw, 220px" width="640" height="921" alt="" loading="lazy" decoding="async"></span><span class="hx-card__when">7 May 2007</span><span class="hx-card__title" id="record-kalam-2007-t">At Rashtrapati Bhavan</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>7 May 2007</span> &middot; Early years</p><h3 class="hx-rec__title">At Rashtrapati Bhavan</h3><figure class="hx-rec__figure"><a class="hx-rec__full" href="assets/img/history/kalam-2007-lg.jpg" target="_blank" rel="noopener"><img class="hx-rec__img" src="assets/img/history/kalam-2007-sm.jpg" srcset="assets/img/history/kalam-2007-sm.jpg 640w, assets/img/history/kalam-2007-lg.jpg 1170w" sizes="(max-width: 900px) 92vw, 560px" width="640" height="921" alt="The first typed page of the school's account, headed 'Interaction of CIRS students with His Excellency, Dr APJ Abdul Kalam, President of India'" loading="lazy" decoding="async"><span class="sr-only"> (open the full image)</span></a><figcaption>The first page of the school&rsquo;s account of the meeting, with its transcript.</figcaption></figure><p class="hx-rec__body">Thirty-two students from Classes VI to XII, with one alumnus, four teachers and Principal Anurag Sangal, met President A.&nbsp;P.&nbsp;J. Abdul Kalam in the Committee Room of Rashtrapati Bhavan. The invitation grew out of a vacation assignment set in November 2006 on the President&rsquo;s &lsquo;Vision for India 2020&rsquo;, which the school had recast for its students as &lsquo;My Vision for Myself, my Family, my School and my Country &ndash; in 2020&rsquo;. Selected projects were sent to the President, and led to his interest in meeting them.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s account of the interaction, kept from its former website</p></div></article></li>
+<li class="hx-item" data-hx-period="early"><article class="hx-rec" id="record-sakshi-2008" aria-labelledby="record-sakshi-2008-t"><button type="button" class="hx-card" data-hx-open="sakshi-2008" aria-haspopup="dialog"><span class="hx-card__thumb" style="--ar:0.7348"><img src="assets/img/history/sakshi-2008-sm.jpg" srcset="assets/img/history/sakshi-2008-sm.jpg 640w, assets/img/history/sakshi-2008-lg.jpg 1332w" sizes="(max-width: 700px) 44vw, 220px" width="640" height="871" alt="" loading="lazy" decoding="async"></span><span class="hx-card__when">May 2008</span><span class="hx-card__title" id="record-sakshi-2008-t">A newsletter the students made</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>May 2008</span> &middot; Early years</p><h3 class="hx-rec__title">A newsletter the students made</h3><figure class="hx-rec__figure"><a class="hx-rec__full" href="assets/img/history/sakshi-2008-lg.jpg" target="_blank" rel="noopener"><img class="hx-rec__img" src="assets/img/history/sakshi-2008-sm.jpg" srcset="assets/img/history/sakshi-2008-sm.jpg 640w, assets/img/history/sakshi-2008-lg.jpg 1332w" sizes="(max-width: 900px) 92vw, 560px" width="640" height="871" alt="The cover of the Chinmaya Sakshi e-newsletter, May 2008 summer special, with a photograph of the campus and a portrait of Gurudev" loading="lazy" decoding="async"><span class="sr-only"> (open the full image)</span></a><figcaption><i>Chinmaya Sakshi</i>, E-Newsletter, summer special, May 2008.</figcaption></figure><p class="hx-rec__body"><i>Chinmaya Sakshi</i>, the school&rsquo;s e-newsletter, was put together by the students&rsquo; editorial team: they gathered the news, edited it and designed the layout, &lsquo;with a minimal assistance and guidance from the teachers&rsquo;, as the Principal&rsquo;s note in the October&ndash;November 2007 edition puts it. The summer special of May 2008 opens on the campus beneath the hills and a portrait of Gurudev.</p><p class="hx-rec__source"><span>Source</span> <i>Chinmaya Sakshi</i>, October&ndash;November 2007 and May 2008 editions, kept from the school&rsquo;s former website</p></div></article></li>
+<li class="hx-item" data-hx-period="early"><article class="hx-rec" id="record-principal-2009" aria-labelledby="record-principal-2009-t"><button type="button" class="hx-card" data-hx-open="principal-2009" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>2009</span></span><span class="hx-card__when">2009</span><span class="hx-card__title" id="record-principal-2009-t">A new Principal</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>2009</span> &middot; Early years</p><h3 class="hx-rec__title">A new Principal</h3><p class="hx-rec__body">Smt. Shanti Krishnamurthy became Principal of CIRS.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s introduction on <a href="leadership.html">Leadership</a></p></div></article></li>
+<li class="hx-item" data-hx-period="early"><article class="hx-rec" id="record-reflections-2010" aria-labelledby="record-reflections-2010-t"><button type="button" class="hx-card" data-hx-open="reflections-2010" aria-haspopup="dialog"><span class="hx-card__thumb" style="--ar:0.7683"><img src="assets/img/history/reflections-2010-sm.jpg" srcset="assets/img/history/reflections-2010-sm.jpg 640w, assets/img/history/reflections-2010-lg.jpg 1334w" sizes="(max-width: 700px) 44vw, 220px" width="640" height="833" alt="" loading="lazy" decoding="async"></span><span class="hx-card__when">August 2010</span><span class="hx-card__title" id="record-reflections-2010-t">Reflections, the IB newsletter</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>August 2010</span> &middot; Early years</p><h3 class="hx-rec__title">Reflections, the IB newsletter</h3><figure class="hx-rec__figure"><a class="hx-rec__full" href="assets/img/history/reflections-2010-lg.jpg" target="_blank" rel="noopener"><img class="hx-rec__img" src="assets/img/history/reflections-2010-sm.jpg" srcset="assets/img/history/reflections-2010-sm.jpg 640w, assets/img/history/reflections-2010-lg.jpg 1334w" sizes="(max-width: 900px) 92vw, 560px" width="640" height="833" alt="The cover of Reflections, an IB newsletter of the Chinmaya International Residential School, August 2010, with students arriving with their luggage" loading="lazy" decoding="async"><span class="sr-only"> (open the full image)</span></a><figcaption><i>Reflections</i>, Volume 1, Issue 4, August 2010.</figcaption></figure><p class="hx-rec__body"><i>Reflections</i>, the newsletter of the school&rsquo;s IB Diploma students, reached its fourth issue with a special on the first-year students&rsquo; tour of Sri Lanka in August 2010 &mdash; &lsquo;a blend of the experience of a new culture and service to humanity&rsquo;, in the words of the IB Diploma Coordinator.</p><p class="hx-rec__source"><span>Source</span> <i>Reflections</i>, Volume 1, Issue 4, kept from the school&rsquo;s former website</p></div></article></li>
+<li class="hx-item" data-hx-period="early"><article class="hx-rec" id="record-isa-2010" aria-labelledby="record-isa-2010-t"><button type="button" class="hx-card" data-hx-open="isa-2010" aria-haspopup="dialog"><span class="hx-card__thumb" style="--ar:0.6787"><img src="assets/img/history/isa-2010-sm.jpg" srcset="assets/img/history/isa-2010-sm.jpg 640w, assets/img/history/isa-2010-lg.jpg 1087w" sizes="(max-width: 700px) 44vw, 220px" width="640" height="943" alt="" loading="lazy" decoding="async"></span><span class="hx-card__when">December 2010</span><span class="hx-card__title" id="record-isa-2010-t">The world in the curriculum</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>December 2010</span> &middot; Early years</p><h3 class="hx-rec__title">The world in the curriculum</h3><figure class="hx-rec__figure"><a class="hx-rec__full" href="assets/img/history/isa-2010-lg.jpg" target="_blank" rel="noopener"><img class="hx-rec__img" src="assets/img/history/isa-2010-sm.jpg" srcset="assets/img/history/isa-2010-sm.jpg 640w, assets/img/history/isa-2010-lg.jpg 1087w" sizes="(max-width: 900px) 92vw, 560px" width="640" height="943" alt="The first page of the CIRS Junior School Holiday Assignment, December 2010, explaining the International School Awards" loading="lazy" decoding="async"><span class="sr-only"> (open the full image)</span></a><figcaption>Junior School Holiday Assignment, December 2010, first page.</figcaption></figure><p class="hx-rec__body">The Junior School&rsquo;s December 2010 holiday assignment was set as part of the British Council&rsquo;s International School Award programme, which CIRS had taken up to bring an international dimension into its curriculum. Class V studied tourist attractions across the world, Class VI music across the globe, Class VII national games, and Class VIII agricultural practices.</p><p class="hx-rec__source"><span>Source</span> The assignment sheet, kept from the school&rsquo;s former website</p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-isa-award-2011" aria-labelledby="record-isa-award-2011-t"><button type="button" class="hx-card" data-hx-open="isa-award-2011" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>2011</span></span><span class="hx-card__when">2011</span><span class="hx-card__title" id="record-isa-award-2011-t">The International School Award</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>2011</span> &middot; Later milestones</p><h3 class="hx-rec__title">The International School Award</h3><p class="hx-rec__body">CIRS received the British Council&rsquo;s International School Award, which recognises good practice in bringing an international dimension into the curriculum.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s own account, supplied for this website; its former website carried a gallery titled &lsquo;CIRS Receives ISA Award&rsquo;</p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-vision-award-2012" aria-labelledby="record-vision-award-2012-t"><button type="button" class="hx-card" data-hx-open="vision-award-2012" aria-haspopup="dialog"><span class="hx-card__thumb" style="--ar:1.4988"><img src="assets/img/history/vision-2012-sm.jpg" srcset="assets/img/history/vision-2012-sm.jpg 640w, assets/img/history/vision-2012-lg.jpg 1400w" sizes="(max-width: 700px) 44vw, 220px" width="640" height="427" alt="" loading="lazy" decoding="async"></span><span class="hx-card__when">2012</span><span class="hx-card__title" id="record-vision-award-2012-t">The CCMT Education Cell Vision Award</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>2012</span> &middot; Later milestones</p><h3 class="hx-rec__title">The CCMT Education Cell Vision Award</h3><figure class="hx-rec__figure"><a class="hx-rec__full" href="assets/img/history/vision-2012-lg.jpg" target="_blank" rel="noopener"><img class="hx-rec__img" src="assets/img/history/vision-2012-sm.jpg" srcset="assets/img/history/vision-2012-sm.jpg 640w, assets/img/history/vision-2012-lg.jpg 1400w" sizes="(max-width: 900px) 92vw, 560px" width="640" height="427" alt="A trophy inscribed 'Central Chinmaya Mission Trust Education Cell Vision Award 2012, awarded to CIRS, Coimbatore', held up with its certificate by a woman in a sari and a swami in saffron" loading="lazy" decoding="async"><span class="sr-only"> (open the full image)</span></a><figcaption>The trophy and its certificate at the presentation. From the school&rsquo;s photograph archive; the people pictured are not named in the record.</figcaption></figure><p class="hx-rec__body">The Education Cell of the Central Chinmaya Mission Trust presented its Vision Award for 2012 to CIRS, Coimbatore.</p><p class="hx-rec__source"><span>Source</span> The inscription on the award</p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-poland-2014" aria-labelledby="record-poland-2014-t"><button type="button" class="hx-card" data-hx-open="poland-2014" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>2014</span></span><span class="hx-card__when">2014</span><span class="hx-card__title" id="record-poland-2014-t">A partnership with a school in Poland</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>2014</span> &middot; Later milestones</p><h3 class="hx-rec__title">A partnership with a school in Poland</h3><p class="hx-rec__body">From February 2014 a CIRS class worked with an upper-secondary and technical college in Poland on a shared project, &lsquo;Trends in advertising: the impact of language and culture on advertising&rsquo;, exchanging videos, worksheets and advertisements of their own.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s newsletter page on the partnership, May 2014, kept from its former website</p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-brainfeed-2017" aria-labelledby="record-brainfeed-2017-t"><button type="button" class="hx-card" data-hx-open="brainfeed-2017" aria-haspopup="dialog"><span class="hx-card__thumb" style="--ar:0.8020"><img src="assets/img/history/brainfeed-2017-sm.jpg" srcset="assets/img/history/brainfeed-2017-sm.jpg 640w, assets/img/history/brainfeed-2017-lg.jpg 1400w" sizes="(max-width: 700px) 44vw, 220px" width="640" height="798" alt="" loading="lazy" decoding="async"></span><span class="hx-card__when">12 November 2017</span><span class="hx-card__title" id="record-brainfeed-2017-t">Brainfeed Top 500 Schools of India</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>12 November 2017</span> &middot; Later milestones</p><h3 class="hx-rec__title">Brainfeed Top 500 Schools of India</h3><figure class="hx-rec__figure"><a class="hx-rec__full" href="assets/img/history/brainfeed-2017-lg.jpg" target="_blank" rel="noopener"><img class="hx-rec__img" src="assets/img/history/brainfeed-2017-sm.jpg" srcset="assets/img/history/brainfeed-2017-sm.jpg 640w, assets/img/history/brainfeed-2017-lg.jpg 1400w" sizes="(max-width: 900px) 92vw, 560px" width="640" height="798" alt="A wooden plaque with a gold panel reading 'brainfeed school excellence awards, Top 500 Schools of India 2017-18, is awarded to Chinmaya International Residential School, Coimbatore'" loading="lazy" decoding="async"><span class="sr-only"> (open the full image)</span></a><figcaption>The plaque, dated 12 November 2017, Bengaluru.</figcaption></figure><p class="hx-rec__body">Brainfeed&rsquo;s School Excellence Awards named CIRS among the Top 500 Schools of India 2017&ndash;18, in the category Best International Boarding / Happiness Quotient Index / Influential School Brand School, and among the best international schools of Tamil Nadu. The award was presented in Bengaluru.</p><p class="hx-rec__source"><span>Source</span> The plaque itself, photographed for the school</p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-director-2018" aria-labelledby="record-director-2018-t"><button type="button" class="hx-card" data-hx-open="director-2018" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>2018</span></span><span class="hx-card__when">2018</span><span class="hx-card__title" id="record-director-2018-t">Director &mdash; Academics and Administration</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>2018</span> &middot; Later milestones</p><h3 class="hx-rec__title">Director &mdash; Academics and Administration</h3><p class="hx-rec__body">Smt. Shanti Krishnamurthy became Director &mdash; Academics and Administration.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s introduction on <a href="leadership.html">Leadership</a></p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-report-2019" aria-labelledby="record-report-2019-t"><button type="button" class="hx-card" data-hx-open="report-2019" aria-haspopup="dialog"><span class="hx-card__thumb" style="--ar:0.6809"><img src="assets/img/history/report-2019-sm.jpg" srcset="assets/img/history/report-2019-sm.jpg 640w, assets/img/history/report-2019-lg.jpg 1087w" sizes="(max-width: 700px) 44vw, 220px" width="640" height="940" alt="" loading="lazy" decoding="async"></span><span class="hx-card__when">15 October 2019</span><span class="hx-card__title" id="record-report-2019-t">The school in its twenty-fourth year</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>15 October 2019</span> &middot; Later milestones</p><h3 class="hx-rec__title">The school in its twenty-fourth year</h3><figure class="hx-rec__figure"><a class="hx-rec__full" href="assets/img/history/report-2019-lg.jpg" target="_blank" rel="noopener"><img class="hx-rec__img" src="assets/img/history/report-2019-sm.jpg" srcset="assets/img/history/report-2019-sm.jpg 640w, assets/img/history/report-2019-lg.jpg 1087w" sizes="(max-width: 900px) 92vw, 560px" width="640" height="940" alt="The first page of the CIRS Annual Report dated 15th Oct 2019" loading="lazy" decoding="async"><span class="sr-only"> (open the full image)</span></a><figcaption>Annual Report, 15 October 2019, first page.</figcaption></figure><p class="hx-rec__body">In its 24th year the school reported 580 students &mdash; 345 boys and 235 girls &mdash; from 22 Indian states and 18 other countries, with 67 faculty members and 68 members of the administrative team. That year the CBSE selected CIRS as one of its Lead Schools, to guide five other CBSE schools, and Sanskrit became a compulsory subject, beginning in Class V.</p><p class="hx-rec__source"><span>Source</span> Annual Report, 15 October 2019, published on <a href="school-info.html">School Information</a> &middot; <a href="assets/documents/school-info/annual-report.pdf" target="_blank" rel="noopener">Open the PDF</a></p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-ranking-2019" aria-labelledby="record-ranking-2019-t"><button type="button" class="hx-card" data-hx-open="ranking-2019" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>2019</span></span><span class="hx-card__when">2019</span><span class="hx-card__title" id="record-ranking-2019-t">Education World survey</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>2019</span> &middot; Later milestones</p><h3 class="hx-rec__title">Education World survey</h3><p class="hx-rec__body">In Education World&rsquo;s 2019 survey, conducted by the Delhi-based C fore, CIRS moved from fourth to second place in the country among co-educational boarding schools, and kept first place in Tamil Nadu for the eighth consecutive year.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s Annual Report, 15 October 2019 &middot; <a href="assets/documents/school-info/annual-report.pdf" target="_blank" rel="noopener">Open the PDF</a></p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-cbse-2019" aria-labelledby="record-cbse-2019-t"><button type="button" class="hx-card" data-hx-open="cbse-2019" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>2019</span></span><span class="hx-card__when">2019</span><span class="hx-card__title" id="record-cbse-2019-t">Class XII results, 2019</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>2019</span> &middot; Later milestones</p><h3 class="hx-rec__title">Class XII results, 2019</h3><p class="hx-rec__body">All 45 students who sat the Class XII examination secured above 80% in the aggregate, and 41 of them above 90%. The Science stream averaged 92.06% and the Management stream 94.23%.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s Annual Report, 15 October 2019 &middot; <a href="our-results.html">Our Results</a></p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-cbse-2026" aria-labelledby="record-cbse-2026-t"><button type="button" class="hx-card" data-hx-open="cbse-2026" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>March&ndash;April 2026</span></span><span class="hx-card__when">March&ndash;April 2026</span><span class="hx-card__title" id="record-cbse-2026-t">CBSE Class XII, 2026</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>March&ndash;April 2026</span> &middot; Later milestones</p><h3 class="hx-rec__title">CBSE Class XII, 2026</h3><p class="hx-rec__body">In the 2026 CBSE Class XII examinations the highest score in the Management stream was 99.0%, and the stream averaged 94%.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s results brief on <a href="news.html#cbse-results-2026">News</a></p></div></article></li>
+<li class="hx-item" data-hx-period="later"><article class="hx-rec" id="record-ib-2026" aria-labelledby="record-ib-2026-t"><button type="button" class="hx-card" data-hx-open="ib-2026" aria-haspopup="dialog"><span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true"><span>May 2026</span></span><span class="hx-card__when">May 2026</span><span class="hx-card__title" id="record-ib-2026-t">Twenty-four candidates, twenty-four diplomas</span></button><div class="hx-rec__detail"><p class="hx-rec__meta"><span>May 2026</span> &middot; Later milestones</p><h3 class="hx-rec__title">Twenty-four candidates, twenty-four diplomas</h3><p class="hx-rec__body">All 24 candidates in the May 2026 IB Diploma examination earned the diploma, with an average of 39.4 points. Two students scored the maximum, 45 out of 45.</p><p class="hx-rec__source"><span>Source</span> The school&rsquo;s results brief on <a href="news.html#ib-results-2026">News</a></p></div></article></li>
+    </ol>
+    <p class="hx-archive__more">The complete record of examination results and honours is kept on
+      <a href="our-results.html">Our Results</a> and <a href="our-laurels.html">Our Laurels</a>.</p>
   </div>
 </section>
 
-<section class="filmsec" id="film" data-ground="#0E0B12">
-  <div class="filmsec__media">
-    <img src="assets/img/campus-lawn.jpg" alt="" loading="lazy">
-  </div>
-  <div class="wrap filmsec__inner">
-    <div class="sec-head rv" style="max-width:640px;margin-inline:auto;text-align:center">
-      <p class="marker"><span class="sc">In the school&rsquo;s own words</span></p>
-      <h2 class="serif h2" style="color:#fff" data-split>Through <em>the Years.</em></h2>
-      <p class="lead">The school&rsquo;s silver jubilee film, made from its own archive &mdash;
-        the campus, the classrooms and the faces that carried CIRS from 1996 onwards.</p>
+<!-- One record at a time. history.js fills it from the record's own detail
+     in the archive above, so there is a single copy of every description. -->
+<dialog class="hx-dialog" id="hx-dialog" aria-labelledby="hx-dialog-title">
+  <div class="hx-dialog__panel">
+    <button type="button" class="hx-dialog__close" data-hx-close aria-label="Close this record">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+    <div class="hx-dialog__body" id="hx-dialog-body"></div>
+    <div class="hx-dialog__step">
+      <button type="button" class="hx-dialog__prev" data-hx-step="-1">Earlier record</button>
+      <button type="button" class="hx-dialog__next" data-hx-step="1">Later record</button>
     </div>
+  </div>
+</dialog>
 
-    <!-- Same component as the home page: a real link to YouTube, which cirs.js
-         intercepts and plays in the shared lightbox instead. -->
-    <a class="filmwin rv" href="https://youtu.be/e8-VDs6P1Xk" data-video="e8-VDs6P1Xk"
+<section class="hx-film" id="film" aria-labelledby="hx-film-title">
+  <div class="wrap hx-film__inner">
+    <div class="hx-film__text">
+      <p class="hx-label">In the school&rsquo;s own words</p>
+      <h2 class="hx-film__title" id="hx-film-title">Through the Years.</h2>
+      <p class="hx-film__lead">The school&rsquo;s silver jubilee film, made from its own archive:
+        the campus, the classrooms and the faces that carried CIRS from 1996 onwards. It plays
+        only when you ask for it.</p>
+    </div>
+    <!-- The same component as the home page: a real link to YouTube, which
+         cirs.js intercepts and plays in the shared lightbox. Closing the
+         lightbox removes the player, which is what stops the sound. -->
+    <a class="filmwin" href="https://youtu.be/e8-VDs6P1Xk" data-video="e8-VDs6P1Xk"
        target="_blank" rel="noopener"
        aria-label="Play the CIRS history film, Through the Years">
       <img class="filmwin__bg" src="assets/img/history-still.jpg" alt=""
-           width="1600" height="900" loading="lazy">
+           width="1600" height="900" loading="lazy" decoding="async">
       <span class="filmwin__scrim" aria-hidden="true"></span>
       <span class="filmwin__badge">YouTube</span>
       <span class="filmwin__play" aria-hidden="true">
@@ -401,232 +409,6 @@
       </span>
       <span class="filmwin__label"><b>C.I.R.S &mdash; Through the Years</b> &middot; plays here</span>
     </a>
-  </div>
-</section>
-
-<section class="tl on-purple" id="timeline" data-ground="#1E1626">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">The milestones</span></p>
-      <h2 class="serif h2" style="color:#fff" data-split>From a Vision <em>to a Campus.</em></h2>
-      <p class="lead">Nearly fifty years, from the day the land was found to this year&rsquo;s results.
-        Scroll to follow the line; rest on a year to bring it forward.</p>
-    </div>
-
-    <div class="tl__body">
-      <span class="tl__spine" aria-hidden="true"><i class="tl__fill" id="tlFill"></i></span>
-
-      <ol class="tl__list">
-        <li class="tl__era"><span class="sc">The founding</span></li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">1979</p>
-          <div class="tl__card">
-            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
-            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the land</span></figure>
-            <div class="tl__text">
-              <h3 class="serif h3">The land is found</h3>
-              <p class="copy">The Coimbatore Chinmaya Mission Committee, guided by A.&nbsp;Somasundaram, identifies the hundred acres that will become the campus. Pujya Gurudev proclaims the site &lsquo;the Sidhbari of the South&rsquo; &mdash; and that the school would be built there and nowhere else.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">1984</p>
-          <div class="tl__card">
-            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
-            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the walk for the land</span></figure>
-            <div class="tl__text">
-              <h3 class="serif h3">One rupee at a time</h3>
-              <p class="copy">Pujya Gurudev and Br. Sahaja Chaitanyaji begin a grassroots programme to collect one rupee from every household, on foot. It takes another ten years to procure all of the land the school needs.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">1993</p>
-          <div class="tl__card">
-            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
-            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the vision carried</span></figure>
-            <div class="tl__text">
-              <h3 class="serif h3">The project is carried on</h3>
-              <p class="copy">Pujya Gurudev attains Mahasamadhi. The indefatigable Swami Tejomayanandaji takes the project upon his own shoulders.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">1996</p>
-          <div class="tl__card">
-            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
-            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the inauguration</span></figure>
-            <div class="tl__text">
-              <h3 class="serif h3">The school is inaugurated</h3>
-              <p class="copy">CIRS is inaugurated by Swami Chidanandaji Maharaj, head of The Divine Life Society and Gurudev&rsquo;s dearest friend, in the presence of Pujya Guruji Swami Tejomayanandaji. Swamini Vimalanandaji becomes Director of CIRS. Gurudev&rsquo;s <i>sankalpa</i> has been fulfilled.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__era"><span class="sc">The school grows</span></li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2005</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">A resident director</h3>
-              <p class="copy">Pujya Guruji appoints Swami Swaroopanandaji as Resident Director of CIRS.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2009</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">A new Principal</h3>
-              <p class="copy">Smt. Shanti Krishnamurthy takes over as Principal of CIRS.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2011</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">The International School Award</h3>
-              <p class="copy">CIRS receives the British Council International School Award, recognising its international education initiatives.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2013</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">The Chinmaya Vision Award</h3>
-              <p class="copy">CIRS receives the Chinmaya Vision Award.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2016</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">Among the top four</h3>
-              <p class="copy">Education World ranks CIRS among the top four institutions in the country.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2018</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">Second in the country, first in CBSE</h3>
-              <p class="copy">CIRS rises through the ranks to second place, and ranks first in the CBSE Board results.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2018</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">Director &mdash; Academics &amp; Administration</h3>
-              <p class="copy">Smt. Shanti Krishnamurthy becomes Director &mdash; Academics and Administration.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__era"><span class="sc">Recent years</span></li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2019</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">Among the IB World Toppers</h3>
-              <p class="copy">A CIRS student is among the IB World Toppers, with a score of 45 out of 45.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2019</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">The first CIRSMUN</h3>
-              <p class="copy">The first CIRS Model United Nations is conducted.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2022</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">A 92% average in Science</h3>
-              <p class="copy">CIRS reports a 92% average in the Science stream in the Class XII Board Examinations, with 19 of 24 students scoring 90% or above.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2024</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">IB World Toppers, once more</h3>
-              <p class="copy">A CIRS student is once more among the IB World Toppers, setting the standard for generations to come.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2025</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">First prize for <i>Vayu Nigrah</i></h3>
-              <p class="copy">Three CIRS students win first prize in the Studentrepreneur competition at the SSVM Transforming India Conclave for <i>Vayu Nigrah</i>, a project that generates electricity from air-conditioning systems.</p>
-            </div>
-          </div>
-        </li>
-        <li class="tl__item">
-          <span class="tl__node" aria-hidden="true"></span>
-          <p class="tl__when">2026</p>
-          <div class="tl__card tl__card--text">
-            <div class="tl__text">
-              <h3 class="serif h3">99% and two perfect scores</h3>
-              <p class="copy">The highest score in the CBSE Management stream is 99%, and two students achieve the highest possible IB score of 45 out of 45.</p>
-            </div>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<section class="section more" id="more">
-  <div class="wrap more__inner">
-    <p class="more__badge rv"><span class="more__dot" aria-hidden="true"></span> Still being written</p>
-    <h2 class="serif more__head rv" data-split>More of the Story <em>is Coming.</em></h2>
-    <p class="lead rv">Thirty years leave more behind than any list of milestones. Further archival
-      photographs and the accounts of the people who taught and boarded here will be added to this
-      page as the school opens its archive.</p>
-    <p class="more__ph rv"><em>[Placeholder &mdash; archival photographs and first-hand
-      accounts to be supplied by the school.]</em></p>
-    <p class="more__cta rv">Have a photograph, a document or a memory from the early years?
-      <a href="mailto:info@cirschool.org">Send it to the school</a> and it can be added here.</p>
-  </div>
-</section>
-<section class="uc">
-  <div class="wrap uc__inner">
-    <span class="uc__mark" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
-    </span>
-    <div>
-      <p class="uc__label">Under construction</p>
-      <p class="uc__text">This page is still being written. Photographs, names and figures marked
-        in brackets are placeholders awaiting the school, and more will be added here in the weeks
-        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
-    </div>
   </div>
 </section>
 </main>
@@ -640,12 +422,13 @@
   <div class="wrap closing-scene__inner">
     <div class="closing-scene__content">
       <h2 class="closing-scene__title" id="closing-scene-title">
-        <span>The journey continues</span>
-        <span>at CIRS</span>
+        <span>Have something to add</span>
+        <span>to the archive?</span>
       </h2>
+      <p class="closing-scene__note">Photographs, documents and recollections from any year are welcome at info@cirschool.org. The school reads everything it is sent and decides what is added; nothing is published automatically.</p>
       <div class="closing-scene__links">
-        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
-        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+        <a class="closing-scene__admissions" href="mailto:info@cirschool.org?subject=For%20the%20CIRS%20archive">Write to the school</a>
+        <a class="closing-scene__contact" href="#timeline">View all milestones</a>
       </div>
     </div>
   </div>
@@ -733,11 +516,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102" defer></script>
-<script src="assets/js/cirs.js?b=102-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=102" defer></script>
-<script src="assets/js/footer.js?b=102-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=102-history-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-history-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-history-1" defer></script>
+<script src="assets/js/cirs.js?b=102-history-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-history-1" defer></script>
+<script src="assets/js/footer.js?b=102-history-1-footer-1" defer></script>
+<script src="assets/js/history.js?b=102-history-1" defer></script>
 </body>
 </html>

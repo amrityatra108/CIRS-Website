@@ -62,6 +62,14 @@ Leadership's people, portrait crops and six messages are data in `tools/leadersh
 for word — do not copy-edit them. The page keeps native scroll (no Lenis) so its `#msg-…` links
 are real history entries.
 
+School History is the CIRS archive, and every date on it is written from `tools/history.py`:
+each event carries its source, and anything unconfirmed is a `note` there (never published) or
+held back in `UNRESOLVED`. `python3 tools/history.py` prints the report. `tools/make-history.py`
+cuts its exhibits into `assets/img/history/` from the school's own PDFs and Drive photographs;
+its sheet and script are `assets/css/history.css` and `assets/js/history.js`. Do not add a dated
+claim to that page without a source for it, and do not attribute a photograph to an event its
+own record does not support.
+
 ## Checks, before every push
 
 ```sh
