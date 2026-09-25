@@ -252,15 +252,25 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-6",
-        "banner": ("Curriculum", "The shape of <em>learning at CIRS.</em>",
-                   "CBSE begins in Grade V. From Grade XI, students can choose the IB Diploma "
-                   "Programme. The Chinmaya Vision Programme connects academic study with "
-                   "daily school life."),
-        "banner_cta": [("Compare pathways", "#pathways", "primary"),
-                       ("Admissions guide", "admissions.html#apply", "ghost")],
-        "jump": True,
+        "cache_suffix": "-curriculum-7",
+        # No banner. The page opens on its own paper composition, built in
+        # tools/pages/curriculum.html: the heading beside the Junior School
+        # photograph, with the page's own section index under it. That index
+        # is visible and labelled, so the floating "On this page" control
+        # would be a second copy of it; hence jump False. The opening is on
+        # paper, so the header wears dark lettering: hence litehead.
+        "banner": None,
+        "litehead": True,
+        "jump": False,
         "uc": False,
+        # One close rather than two: the shared closing scene carries this
+        # page's own invitation instead of a separate "next steps" band above it.
+        "closing": ("Discuss", "the next stage",
+                    [("Ask about subjects",
+                      "mailto:info@cirschool.org?subject=Grade%20XI%20and%20XII%20subject%20choices",
+                      "closing-scene__admissions"),
+                     ("Admissions guide", "admissions.html#apply", "closing-scene__contact"),
+                     ("Published results", "our-results.html", "closing-scene__contact")]),
     },
     # A child page of Curriculum, and the first page on this site whose slug
     # names a directory: it is written to curriculum/ib-diploma.html and
@@ -1089,6 +1099,25 @@ POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
 </div>'''
 
 
+def closing_html(footer, closing):
+    """Give the shared closing scene a page's own heading and links.
+
+    The scene stays the site's one closing treatment; a page whose close says
+    something more specific than "Explore Admissions" says it here, rather
+    than adding a second invitation band just above the scene.
+    """
+    first, second, links = closing
+    start = footer.index('<h2 class="closing-scene__title"')
+    end = footer.index("</div>", footer.index('<div class="closing-scene__links">')) + len("</div>")
+    anchors = "\n".join(f'        <a class="{cls}" href="{href}">{label}</a>'
+                         for label, href, cls in links)
+    return (footer[:start]
+            + f'<h2 class="closing-scene__title" id="closing-scene-title">\n'
+              f'        <span>{first}</span>\n        <span>{second}</span>\n      </h2>\n'
+              f'      <div class="closing-scene__links">\n{anchors}\n      </div>'
+            + footer[end:])
+
+
 def founder_fig(slot, cls="", sizes=""):
     """One photograph on the Founder page, or an honest gap where one is owed.
 
@@ -1680,9 +1709,10 @@ def build(slug, page):
         head = head.replace("</head>",
             portal_motion_gate +
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
-    if slug in ("admissions", "school-info", "news"):
+    if slug in ("admissions", "school-info", "news", "curriculum"):
         # These pages open immediately with their own video, document sheets,
-        # or journal masthead, so the shared curtain is unnecessary.
+        # journal masthead or, on Curriculum, the photograph of learning the
+        # page leads with, so the shared curtain is unnecessary.
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
@@ -1726,9 +1756,10 @@ def build(slug, page):
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if slug in ("admissions", "school-info", "news"):
-        # Admissions, School Information, and News each have their own visible
-        # opening. The shared curtain would delay it behind a blank screen.
+    if slug in ("admissions", "school-info", "news", "curriculum"):
+        # Admissions, School Information, News and Curriculum each have their
+        # own visible opening. The shared curtain would delay it behind a
+        # blank screen.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
         chrome = chrome[:intro_start] + chrome[intro_end:]
@@ -1850,6 +1881,8 @@ def build(slug, page):
         if slug == "admissions":
             footer = footer.replace('href="admissions.html#examination">Important Dates',
                                     'href="admissions.html#dates">Important Dates')
+        if page.get("closing"):
+            footer = closing_html(footer, page["closing"])
         parts.append(footer)
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
     if not wall:
@@ -1885,6 +1918,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if slug == "art-attack":
         parts.append(f'<script src="assets/js/artattack.js?{CACHE_BUST}" defer></script>')
+    if slug == "curriculum":
+        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
