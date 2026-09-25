@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/pages.css?b=102-blog-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-blog-editorial-1">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,21 +37,13 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/blog.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/typography.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-blog-2-footer-1">
+<link rel="stylesheet" href="assets/css/blog.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-blog-editorial-1-footer-1">
 </head>
 
 <body class="blog litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -269,22 +261,33 @@
 </div>
 <main id="main">
 <article class="art" id="top">
-  <div class="artwrap">
-    <header class="art__head">
-      <p class="art__back"><a href="blog.html"><span aria-hidden="true">&larr;</span> Back to the Blog</a></p>
-      <p class="art__flag"><a href="blog.html">CIRS Blog</a> &rarr;
-        <span>Culture</span></p>
-      <h1 class="art__title serif">Death of Detail</h1>
-      <p class="art__by">Malhar Alap Modi</p>
-      <p class="art__where">The Crossroads, Issue&nbsp;4</p>
-    </header>
-
-    <div class="art__body">
+  <header class="art__head">
+    <div class="art__shell">
+      <nav class="art__breadcrumb" aria-label="Breadcrumb">
+        <a href="blog.html">Ideas from CIRS</a><span aria-hidden="true">/</span><span>Culture</span>
+      </nav>
+      <p class="art__edition">The Crossroads <span aria-hidden="true">/</span> Issue 4</p>
+      <h1 class="art__title">Death of Detail</h1>
+      <div class="art__credits">
+        <span>Malhar Modi</span>
+        <span>4 min read</span>
+      </div>
+    </div>
+  </header>
+  <div class="art__layout">
+    <aside class="art__rail" aria-label="Original publication">
+      <p>First published in</p>
+      <strong>The Crossroads<br>Issue 4</strong>
+      <a href="assets/documents/crossroads/crossroads-issue-04.pdf">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
+      <a href="crossroads.html">All Crossroads issues</a>
+    </aside>
+    <div class="art__content">
+      <div class="art__body">
       <p>A long day at work, and you’re tired to the bone. You decide to visit the nearby park to finally take a break, and seat yourself on a bench.</p>
       <p>A few years ago, you’d be sitting on an elegantly carved bench, with ornate designs of animals, birds, or other urbane icons, but in the modern day, you’d be sitting on... this.</p>
       <p>This is just a small example of the wave of minimalism which is now taking over the world. This style has become the social default for seemingly every design choice, whether architectural, corporate or home décor. This is a troubling trend, because minimalism represents a very scary phenomenon – a distinct lack of detail.</p>
       <p>But why does detail matter? Think of it as an identity. What gave older phone boxes their distinct character? It was the details: a bright red color, moldings around the doors, ornamentation at the top. Now, the intricate detailing on phone boxes has vanished, and with it, their character.</p>
-      <p>It is indeed true that beauty is in the eyes of the beholder, but this is not just about the beauty. Rather, it is about things having discernible qualities &amp; characteristics which give them Take bollards, for example. Hardly anyone pays attention to them, but the older bollards had some character, even if they were hardly “beautiful”. Bollards nowadays? They just exist meaningless and mute.</p>
+      <p>It is indeed true that beauty is in the eyes of the beholder, but this is not just about the beauty. Rather, it is about things having discernible qualities &amp; characteristics which give them a unique identity. Take bollards, for example. Hardly anyone pays attention to them, but the older bollards had some character, even if they were hardly “beautiful”. Bollards nowadays? They just exist meaningless and mute.</p>
       <p>Gone are the elaborate throne-like lions, tigers and dragons which once adorned our furniture. Even park benches today have taken a turn towards minimalism.</p>
       <p>You’d need an expert to explain the significance behind our detailed temple architecture, and the symbolic meaning they convey. But modern skyscrapers? They don’t really say anything. They are just there. Huge boxes – plain, simple and above all, completely “mute”.</p>
       <p>As we move ahead, it’s time for us to look to the past. Recently, futuristis Indic art and Indic-themed art have flourished, with people taking to it like fishes to water.</p>
@@ -297,16 +300,34 @@
       <p>This might also give us an insight into why Indian society as a whole always favored detailed art over highly individualistic, abstract and minimalist art forms.</p>
       <p>One of the fundamental values of the Indic society is a sense of collectivism, where collective dharma is valued more than individualism. It is not far reaching to actually believe that the strong collective knowledge-based identity of Indians made them lean more towards detailed art, which takes one away from individualism.</p>
       <p>Well, at least for the students of our school, minimalism is a reality very far away. From our various Masquerade art pieces to our incredibly expressive and detailed Wall Magazines, our students still seem to possess things to tell the world through their art.</p>
+      </div>
     </div>
-
+  </div>
+  <div class="art__shell">
     <footer class="art__foot">
-      <p>Printed in <b>The Crossroads</b>, Issue&nbsp;4 &mdash; the monthly
-        magazine of Chinmaya International Residential School.</p>
-      <p class="art__onward">
-        <a class="btn btn--outline" href="assets/documents/crossroads/crossroads-issue-04.pdf">Read the whole issue (PDF)</a>
-        <a class="btn btn--ghost-ink" href="blog.html">Back to the Blog</a>
-      </p>
+      <p>Originally published in <em>The Crossroads</em>, Issue 4.</p>
+      <div><a href="assets/documents/crossroads/crossroads-issue-04.pdf">Read the complete issue (PDF)</a>
+        <a href="blog.html">Back to all stories</a></div>
     </footer>
+    <section class="art__related" aria-labelledby="art-related-title">
+      <h2 id="art-related-title">Keep reading</h2>
+      <ul><li>
+          <a href="beyond-the-lobby.html">
+            <span>Culture / Issue 32</span>
+            <strong>Beyond the Lobby</strong>
+          </a>
+        </li><li>
+          <a href="anakin-skywalker.html">
+            <span>Culture / Issue 32</span>
+            <strong>Anakin Skywalker and the Poetics of Tragedy</strong>
+          </a>
+        </li><li>
+          <a href="notes-of-healing.html">
+            <span>Culture / Issue 30</span>
+            <strong>Notes of Healing</strong>
+          </a>
+        </li></ul>
+    </section>
   </div>
 </article>
 </main>
@@ -413,11 +434,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102-blog-2" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102-blog-2" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102-blog-2" defer></script>
-<script src="assets/js/cirs.js?b=102-blog-2" defer></script>
-<script src="assets/js/pages.js?b=102-blog-2" defer></script>
-<script src="assets/js/footer.js?b=102-blog-2-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/cirs.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/pages.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/footer.js?b=102-blog-editorial-1-footer-1" defer></script>
 </body>
 </html>

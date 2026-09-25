@@ -1,491 +1,276 @@
-/* The CIRS Blog front page — a news stand, not a page of the school website.
-
-   Scoped to body.blognews, so nothing here reaches any other page, including
-   the seventeen article pages, which wear body.blog and assets/css/blog.css.
-
-   The design is deliberately not the site's. Where the rest of CIRS is warm
-   purple, serif and centred, this is square, red-accented and gridded, after
-   the Nexus News specification. Three rules carry the whole look and none of
-   them can be relaxed without losing it:
-
-     1. Nothing is rounded. Every corner is square, and the one exception is
-        a submit button at 4px. A border-radius anywhere else breaks it.
-     2. Nothing is shadowed. Separation comes from hairline rules and from
-        whitespace, never from a drop shadow.
-     3. Newsreader carries structure and prose. Size, weight and spacing
-        distinguish the masthead, cards, labels, dates and body text.
-
-   The red is an accent, not a theme: category labels, links, two panels. The
-   ground is a warm off-white, #fffefa rather than #fff, and the whole page
-   should read very slightly cream.
-
-   No article has a photograph yet. .nx-shot--ph draws the frame the picture
-   will occupy at the exact ratio its slot wants, so the grid already stands
-   at its final proportions — see _ph() in tools/blog.py for how to fill one. */
-
+/* Ideas from CIRS: an editorial index for the student articles. */
 body.blognews{
-  --nx-red:#cf412b;
-  --nx-red-dark:#b23623;
-  --nx-ink:#1f1f1f;
-  --nx-body:#3d3d3d;
-  --nx-muted:#8c8c8c;
-  --nx-bg:#fffefa;
-  --nx-surface:#f5f5f5;
-  --nx-rule:#e3e0da;
+  --ij-paper:#FAF7F8;
+  --ij-paper-deep:#F0EAED;
+  --ij-ink:#211B22;
+  --ij-muted:#675B66;
+  --ij-rule:#D6CCD2;
+  --ij-gold:#FFC308;
+  background:var(--ij-paper);
+  color:var(--ij-ink);
+}
+body.blognews .ij-shell{
+  width:min(100%, 1360px);
+  margin-inline:auto;
+  padding-inline:clamp(20px, 5vw, 72px);
+}
+body.blognews :is(.ij-discovery,.ij-topics,.ij-story,.ij-empty)[hidden]{display:none!important}
 
-  background: var(--nx-bg);
-  color: var(--nx-body);
+/* Cover: the issue is announced by its title, with no stock-photo hero. */
+.ij-cover{padding-top:clamp(112px, 15vh, 174px)}
+.ij-cover__topline{
+  display:flex;justify-content:space-between;gap:20px;
+  border-top:1px solid var(--ij-ink);
+  padding-top:14px;
+  font-size:13px;line-height:1.4;color:var(--ij-muted);
 }
-
-.nx-wrap{
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: clamp(18px, 4vw, 40px);
+.ij-mast{padding:clamp(50px, 7vw, 104px) 0 clamp(36px, 5vw, 74px)}
+.ij-mast__mark{display:block;width:38px;height:6px;background:var(--ij-gold);margin-bottom:22px}
+.ij-mast h1{
+  max-width:1200px;margin:0;
+  font-family:var(--font-primary);
+  font-size:clamp(4.1rem, 10.1vw, 9.5rem);
+  font-weight:500;line-height:.88;letter-spacing:-.066em;
+  color:var(--ij-ink);text-wrap:balance;
 }
-
-/* ------------------------------------------------------------- the masthead */
-
-.nx-top{
-  border-bottom: 1px solid var(--nx-rule);
-  padding-block: clamp(96px, 13vh, 150px) 0;
+.ij-mast__intro{
+  display:grid;grid-template-columns:minmax(0, 1.25fr) minmax(210px, .55fr);
+  align-items:end;gap:clamp(22px, 5vw, 80px);
+  margin-top:clamp(42px, 5.5vw, 78px);
 }
-.nx-mast{
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(20px, 4vw, 56px);
-  align-items: end;
-  padding-bottom: clamp(24px, 4vw, 40px);
+.ij-mast__intro p{margin:0}
+.ij-mast__intro p:first-child{
+  max-width:610px;font-size:clamp(1.5rem, 2.8vw, 2.65rem);
+  line-height:1.12;letter-spacing:-.025em;
 }
-.nx-mast__kicker{
-  grid-column: 1 / -1;
-  margin: 0 0 14px;
-  font-family: var(--font-primary);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing:.12em;
-  text-transform:none;
-  color: var(--nx-red);
+.ij-mast__intro em{font-style:italic}
+.ij-mast__intro p:last-child{
+  max-width:290px;justify-self:end;
+  font-size:clamp(1rem, 1.3vw, 1.15rem);line-height:1.45;color:var(--ij-muted);
 }
-.nx-mast__name{
-  margin: 0;
-  font-family: var(--font-primary);
-  font-weight: 700;
-  font-size: clamp(2.6rem, 7vw, 4.6rem);
-  line-height: .95;
-  letter-spacing: -.03em;
-  text-transform:none;
-  color: var(--nx-ink);
+.ij-nav{border-top:1px solid var(--ij-ink);border-bottom:1px solid var(--ij-rule)}
+.ij-nav__list{
+  display:flex;flex-wrap:wrap;gap:8px clamp(24px, 4vw, 64px);
+  padding:15px 0;margin:0;list-style:none;
 }
-.nx-mast__name em{ font-style: normal; color: var(--nx-red); }
-.nx-mast__by{
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--nx-body);
+.ij-nav a{
+  color:var(--ij-ink);font-size:15px;text-decoration:none;
+  text-underline-offset:5px;
+  transition:color .2s ease;
 }
-.nx-mast__by b{ color: var(--nx-ink); font-weight: 600; }
-@media (max-width: 860px){
-  .nx-mast{ grid-template-columns: 1fr; gap: 20px; align-items: start; }
+.ij-nav a:hover{text-decoration:underline}
+.ij-nav a:focus-visible,.ij-cover a:focus-visible{
+  outline:3px solid var(--ij-gold);outline-offset:5px;
 }
 
-/* The strip of sections: what the blog covers, and how much of each. */
-.nx-rail{ border-top: 1px solid var(--nx-rule); }
-.nx-rail__list{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 clamp(18px, 3vw, 32px);
-  margin: 0;
-  padding: 14px 0;
-  list-style: none;
+/* Section headings and the Issue 32 spread. */
+.ij-section{padding-block:clamp(66px, 8vw, 112px) 0;scroll-margin-top:105px}
+.ij-connection,.ij-contact{scroll-margin-top:105px}
+.ij-section__head{
+  display:flex;align-items:end;justify-content:space-between;gap:20px;
+  border-bottom:1px solid var(--ij-ink);padding-bottom:18px;margin-bottom:30px;
 }
-.nx-rail__list li{
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  font-family: var(--font-primary);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--nx-ink);
+.ij-section__number{
+  margin:0 0 12px;font-size:13px;letter-spacing:.02em;color:var(--ij-muted);
 }
-.nx-rail__list b{
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--nx-red);
+.ij-section__head h2{
+  margin:0;font-size:clamp(2.7rem, 5.4vw, 5rem);
+  font-weight:500;line-height:.9;letter-spacing:-.045em;
 }
+.ij-section__aside{font-size:15px;color:var(--ij-muted);text-align:right}
+.ij-issue-link{
+  flex:none;color:var(--ij-ink);font-size:15px;text-decoration:none;
+  border-bottom:1px solid currentColor;padding-bottom:3px;
+}
+.ij-issue-link:hover{color:#806000}
+.ij-latest__spread{
+  display:grid;grid-template-columns:minmax(0, 1.5fr) minmax(290px, .7fr);
+  gap:clamp(30px, 5vw, 74px);
+}
+.ij-lead{display:flex;flex-direction:column;min-width:0}
+.ij-lead__label,.ij-category,.ij-latest__aside-label{
+  margin:0;color:var(--ij-muted);font-size:14px;line-height:1.4;
+}
+.ij-lead__label{color:#765A00}
+.ij-lead__label span{padding-inline:8px;color:var(--ij-rule)}
+.ij-lead h3{
+  max-width:800px;margin:clamp(16px, 2vw, 30px) 0 26px;
+  font-size:clamp(3.6rem, 6.8vw, 7.6rem);font-weight:500;
+  line-height:.91;letter-spacing:-.055em;text-wrap:balance;
+}
+.ij-lead h3 a,.ij-latest__side-story h3 a,.ij-story h3 a,
+.ij-archive__story h3 a{color:inherit;text-decoration:none}
+.ij-lead h3 a:hover,.ij-latest__side-story h3 a:hover,
+.ij-story h3 a:hover,.ij-archive__story h3 a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.08em}
+.ij-lead__excerpt{
+  max-width:56ch;margin:0;
+  color:var(--ij-muted);font-size:clamp(1.2rem, 1.7vw, 1.45rem);line-height:1.42;
+}
+.ij-lead__bottom{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;
+  border-top:1px solid var(--ij-rule);margin-top:auto;padding-top:24px;
+  font-size:14px;color:var(--ij-muted);
+}
+.ij-lead__bottom a{margin-left:auto;color:var(--ij-ink);text-decoration:none;border-bottom:1px solid currentColor}
+.ij-latest__aside{border-left:1px solid var(--ij-rule);padding-left:clamp(24px, 3vw, 42px)}
+.ij-latest__aside-label{padding-bottom:17px}
+.ij-latest__side-story{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(88px,34%);
+  align-items:start;gap:16px;
+  border-top:1px solid var(--ij-rule);padding:22px 0;
+}
+.ij-latest__side-story:last-child{border-bottom:1px solid var(--ij-rule)}
+.ij-latest__side-story h3{
+  margin:8px 0 10px;font-size:clamp(1.55rem, 2vw, 2.25rem);
+  font-weight:500;line-height:1.06;letter-spacing:-.025em;
+}
+.ij-latest__side-meta{margin:0;color:var(--ij-muted);font-size:14px;line-height:1.35}
+.ij-latest__image{
+  display:block;background:var(--ij-paper-deep);aspect-ratio:4/3;overflow:hidden;
+}
+.ij-latest__image img{display:block;width:100%;height:100%;object-fit:contain}
 
-/* --------------------------------------------------------------- the grids */
+/* Search, topics and the one complete article list. */
+.ij-discovery{
+  display:grid;grid-template-columns:minmax(0,1fr) 205px;
+  gap:18px;align-items:end;margin-bottom:24px;
+}
+.ij-discovery label{
+  display:block;margin-bottom:8px;font-size:14px;color:var(--ij-muted);
+}
+.ij-discovery input,.ij-discovery select{
+  display:block;width:100%;height:52px;padding:0 14px;
+  border:1px solid var(--ij-rule);border-radius:0;
+  background:transparent;color:var(--ij-ink);
+  font:inherit;font-size:17px;
+}
+.ij-discovery input::placeholder{color:#857983;opacity:1}
+.ij-discovery :is(input,select):focus-visible{
+  outline:3px solid var(--ij-gold);outline-offset:2px;border-color:var(--ij-ink);
+}
+.ij-topics{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.ij-topics button{
+  min-height:40px;padding:6px 13px;border:1px solid var(--ij-rule);
+  background:transparent;color:var(--ij-ink);font:inherit;font-size:14px;
+  cursor:pointer;transition:background .2s ease,border-color .2s ease;
+}
+.ij-topics button span{color:var(--ij-muted);padding-left:4px;font-size:12px}
+.ij-topics button:hover{border-color:var(--ij-ink)}
+.ij-topics button[aria-pressed="true"]{background:var(--ij-ink);border-color:var(--ij-ink);color:var(--ij-paper)}
+.ij-topics button[aria-pressed="true"] span{color:var(--ij-gold)}
+.ij-topics button:focus-visible,.ij-empty button:focus-visible{
+  outline:3px solid var(--ij-gold);outline-offset:3px;
+}
+.ij-results{margin:0;padding:0 0 12px;color:var(--ij-muted);font-size:14px}
+.ij-story-list{border-top:1px solid var(--ij-ink)}
+.ij-story{
+  display:grid;grid-template-columns:34px minmax(0,1fr) minmax(140px,190px) minmax(125px,185px);
+  gap:clamp(16px, 2.5vw, 38px);align-items:start;
+  border-bottom:1px solid var(--ij-rule);padding:26px 0;
+}
+.ij-story--type{grid-template-columns:34px minmax(0,1fr) minmax(140px,190px)}
+.ij-story__number{padding-top:4px;font-size:13px;color:var(--ij-muted)}
+.ij-story__category{margin:0 0 8px;color:#765A00;font-size:13px}
+.ij-story h3{
+  max-width:24ch;margin:0 0 10px;
+  font-size:clamp(1.8rem, 2.45vw, 2.65rem);
+  line-height:1.05;font-weight:500;letter-spacing:-.03em;
+}
+.ij-story__excerpt{
+  max-width:70ch;margin:0;color:var(--ij-muted);
+  font-size:clamp(1rem, 1.15vw, 1.12rem);line-height:1.45;
+}
+.ij-story__details{
+  display:flex;flex-direction:column;gap:10px;
+  padding-top:4px;color:var(--ij-muted);font-size:14px;line-height:1.3;
+}
+.ij-story__details a{width:max-content;color:var(--ij-ink);text-underline-offset:3px}
+.ij-story__image{
+  display:block;width:100%;aspect-ratio:4/3;
+  overflow:hidden;background:var(--ij-paper-deep);
+}
+.ij-story__image img{display:block;width:100%;height:100%;object-fit:cover}
+.ij-empty{padding:46px 0;border-bottom:1px solid var(--ij-rule)}
+.ij-empty h3{margin:0 0 8px;font-size:2rem;font-weight:500}
+.ij-empty p{margin:0 0 16px;color:var(--ij-muted);font-size:17px}
+.ij-empty button{padding:9px 14px;background:var(--ij-ink);border:0;color:var(--ij-paper);font:inherit;cursor:pointer}
 
-.nx-hero{ padding-block: clamp(28px, 4vw, 48px); }
-.nx-hero__grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+/* Archive, magazine path and a precise submissions note. */
+.ij-archive__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(30px, 6vw, 90px)}
+.ij-archive__story{padding-bottom:12px}
+.ij-archive__story p:first-child{margin:0 0 20px;font-size:14px;color:#765A00}
+.ij-archive__story p:first-child span{padding-inline:7px;color:var(--ij-rule)}
+.ij-archive__story h3{
+  margin:0 0 16px;font-size:clamp(2.3rem, 3.6vw, 4rem);
+  line-height:1.02;letter-spacing:-.035em;font-weight:500;
 }
-.nx-hero__side{ display: grid; grid-template-rows: 1fr 1fr; gap: 20px; }
+.ij-archive__story p:last-child{max-width:50ch;margin:0;color:var(--ij-muted);font-size:18px;line-height:1.45}
+.ij-connection{
+  display:flex;align-items:end;justify-content:space-between;gap:40px;
+  margin-top:clamp(80px, 10vw, 140px);
+  padding:clamp(34px, 5vw, 66px);
+  background:#241723;color:var(--ij-paper);
+}
+.ij-connection__kicker{margin:0 0 25px;color:var(--ij-gold);font-size:14px}
+.ij-connection h2{
+  margin:0 0 18px;font-size:clamp(3rem, 5vw, 5.5rem);
+  line-height:.92;letter-spacing:-.045em;font-weight:500;
+}
+.ij-connection p:not(.ij-connection__kicker){
+  max-width:55ch;margin:0;color:#E0D4DB;font-size:18px;line-height:1.4;
+}
+.ij-connection>a{
+  flex:none;max-width:260px;color:var(--ij-gold);
+  font-size:18px;line-height:1.3;text-decoration:none;
+  border-bottom:1px solid currentColor;padding-bottom:6px;
+}
+.ij-contact{
+  display:grid;grid-template-columns:minmax(180px,.7fr) minmax(0,1fr);
+  gap:30px;border-bottom:1px solid var(--ij-rule);padding:clamp(45px, 6vw, 82px) 0;
+}
+.ij-contact h2{margin:0;font-size:clamp(2rem, 3vw, 3rem);font-weight:500;line-height:1.08}
+.ij-contact p{max-width:60ch;margin:0;color:var(--ij-muted);font-size:18px;line-height:1.45}
+.ij-colophon{margin:0;padding:20px 0 48px;color:var(--ij-muted);font-size:14px;line-height:1.4}
 
-.nx-sec{ padding-block: 0 clamp(28px, 4vw, 48px); }
-
-.nx-grid{ display: grid; gap: 20px 24px; }
-.nx-grid--2{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.nx-grid--3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.nx-grid--4{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-/* The rule that opens a section: a red tick, the name, then a hairline that
-   runs to the far edge of the container. */
-.nx-bar{
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
+@media(max-width:1000px){
+  .ij-latest__spread{grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);gap:30px}
+  .ij-story{grid-template-columns:27px minmax(0,1fr) minmax(115px,160px) 145px;gap:18px}
+  .ij-story--type{grid-template-columns:27px minmax(0,1fr) minmax(115px,160px)}
 }
-.nx-bar__name{
-  position: relative;
-  margin: 0;
-  padding-left: 13px;
-  font-family: var(--font-primary);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.1;
-  color: var(--nx-ink);
-  white-space: nowrap;
+@media(max-width:760px){
+  .ij-cover__topline span:last-child{display:none}
+  .ij-mast{padding-block:55px 42px}
+  .ij-mast__intro{grid-template-columns:1fr;gap:18px;margin-top:38px}
+  .ij-mast__intro p:last-child{justify-self:start;max-width:420px}
+  .ij-nav__list{gap:10px 22px}
+  .ij-latest__spread{grid-template-columns:1fr}
+  .ij-lead__bottom{margin-top:26px}
+  .ij-latest__aside{border-left:0;border-top:1px solid var(--ij-rule);padding:20px 0 0}
+  .ij-latest__side-story{grid-template-columns:minmax(0,1fr) 120px}
+  .ij-discovery{grid-template-columns:minmax(0,1fr) 170px}
+  .ij-story,.ij-story--type{grid-template-columns:26px minmax(0,1fr) 120px;gap:12px 18px}
+  .ij-story__number{grid-column:1;grid-row:1}
+  .ij-story__copy{grid-column:2;grid-row:1}
+  .ij-story__image{grid-column:3;grid-row:1;aspect-ratio:1}
+  .ij-story__details{grid-column:2/-1;grid-row:2;flex-direction:row;flex-wrap:wrap;gap:4px 14px}
+  .ij-connection{align-items:start;flex-direction:column}
 }
-.nx-bar__name::before{
-  content: "";
-  position: absolute;
-  left: 0; top: 50%;
-  transform: translateY(-50%);
-  width: 3px; height: 20px;
-  background: var(--nx-red);
+@media(max-width:540px){
+  .ij-mast h1{font-size:clamp(3.6rem, 16vw, 5.8rem)}
+  .ij-section__head{align-items:start}
+  .ij-section__aside{display:none}
+  .ij-latest__side-story{grid-template-columns:minmax(0,1fr) 96px}
+  .ij-discovery{grid-template-columns:1fr}
+  .ij-story,.ij-story--type{grid-template-columns:26px minmax(0,1fr);gap:12px}
+  .ij-story__copy{grid-column:2;grid-row:1}
+  .ij-story__image{grid-column:2;grid-row:2;max-width:340px;aspect-ratio:16/9}
+  .ij-story__details{grid-column:2;grid-row:3}
+  .ij-story--type .ij-story__details{grid-row:2}
+  .ij-story h3{font-size:clamp(1.8rem, 8vw, 2.3rem)}
+  .ij-archive__grid,.ij-contact{grid-template-columns:1fr}
+  .ij-archive__grid{gap:42px}
+  .ij-connection{margin-inline:-20px}
 }
-.nx-bar__rule{
-  flex: 1 1 auto;
-  height: 0;
-  margin: 0;
-  border: 0;
-  border-top: 1px solid var(--nx-rule);
-}
-.nx-bar__more{
-  flex: 0 0 auto;
-  font-family: var(--font-primary);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--nx-red);
-  text-decoration: none;
-}
-.nx-bar__more:hover{ color: var(--nx-red-dark); }
-
-/* ---------------------------------------------------------------- the cards */
-
-.nx-card{ position: relative; }
-.nx-card__link{
-  display: block;
-  height: 100%;
-  color: inherit;
-  text-decoration: none;
-}
-
-/* The photograph, or the space kept for it. overflow:hidden is what lets the
-   picture grow inside a frame that does not move. */
-.nx-shot{
-  position: relative;
-  overflow: hidden;
-  background: var(--nx-surface);
-}
-.nx-shot img{
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform .4s ease;
-}
-.nx-card__link:hover .nx-shot img{ transform: scale(1.04); }
-
-.nx-shot--sq{ aspect-ratio: 1 / 1; }
-.nx-shot--wide{ aspect-ratio: 16 / 9; }
-.nx-shot--tall{ aspect-ratio: 3 / 4; }
-
-/* The photograph that is not here yet. It says so, quietly, and holds the
-   frame at the ratio the picture will have. */
-.nx-shot--ph{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      #f2f0eb 0 10px,
-      #ededE7 10px 20px);
-  border: 1px solid var(--nx-rule);
-  text-align: center;
-}
-.nx-ph__cat{
-  font-family: var(--font-primary);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing:.06em;
-  text-transform:none;
-  color: var(--nx-red);
-}
-.nx-ph__note{
-  font-family: var(--font-primary);
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--nx-muted);
-}
-
-.nx-cat{
-  margin: 0 0 6px;
-  font-family: var(--font-primary);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing:.05em;
-  text-transform:none;
-  color: var(--nx-red);
-}
-.nx-card__title{
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.25;
-  color: var(--nx-ink);
-  transition: color .2s ease;
-  text-wrap: balance;
-}
-.nx-card__link:hover .nx-card__title{ color: var(--nx-red); }
-.nx-card__meta{
-  margin: 8px 0 0;
-  font-family: var(--font-primary);
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--nx-muted);
-}
-.nx-card__stand{
-  margin: 12px 0 0;
-  font-family: var(--font-primary);
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--nx-body);
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* B · stacked, the default card. */
-.nx-card--stack .nx-card__text{ padding-top: 12px; }
-.nx-card--stack.is-sm .nx-card__title{ font-size: 16px; font-weight: 600; }
-
-/* C · a square thumb at the left, the words beside it. */
-.nx-card--row .nx-card__link{
-  display: grid;
-  grid-template-columns: minmax(0, 230px) minmax(0, 1fr);
-  gap: 20px;
-  align-items: center;
-  height: 100%;
-}
-/* The thumb stays the square its slot asks for and sits centred in a card that
-   may be taller than it — stretching it to the card's height would make its
-   width follow, push it past its column and crowd the words out of the card. */
-.nx-card--row .nx-shot{ align-self: center; }
-@media (max-width: 480px){
-  .nx-card--row .nx-card__link{ grid-template-columns: 1fr; gap: 12px; }
-  .nx-card--row .nx-shot{ aspect-ratio: 16 / 9; }
-}
-
-/* A · the photograph carries it, the words sit over its foot. */
-.nx-card--over .nx-card__link{ position: relative; display: block; height: 100%; }
-/* An overlay card fills whatever height its row settles on — beside the red
-   panel that is the panel's height, not the picture's.
-   The picture is taken out of that calculation altogether. Sizing it from the
-   card while the card is sized from it is circular, and the browser settles
-   the two at different numbers: the card then spills over the row below it.
-   So the card's own ratio sets its height when nothing else does, height:100%
-   lets a taller neighbour stretch it, and the picture is laid absolutely into
-   whatever that comes to. */
-.nx-card--over .nx-card__link{ width: 100%; aspect-ratio: 16 / 9; }
-.nx-card--over .nx-shot{
-  position: absolute;
-  inset: 0;
-  width: auto; height: auto;
-  aspect-ratio: auto;
-}
-.nx-hero .nx-card--over .nx-card__link{ aspect-ratio: 3 / 4; }
-.nx-card--over .nx-card__over{
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 24px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, .75));
-}
-.nx-card--over .nx-card__title{ color: #fff; font-size: 24px; }
-.nx-card--over .nx-card__link:hover .nx-card__title{ color: #fff; text-decoration: underline; }
-.nx-card--over .nx-card__meta{ color: rgba(255, 255, 255, .8); }
-/* Over a placeholder rather than a photograph, white type has nothing dark to
-   sit on. The gradient is replaced by ink so the words stay legible. */
-.nx-card--over .nx-shot--ph + .nx-card__over{ background: rgba(31, 31, 31, .92); }
-/* On an overlay card the words cover the foot of the frame, so the note saying
-   a photograph is coming sits above them rather than behind them. */
-.nx-card--over .nx-shot--ph{ justify-content: flex-start; padding-top: 16%; }
-.nx-card--over.is-big .nx-card__title{ font-size: clamp(22px, 2.2vw, 28px); }
-
-.nx-chip{
-  display: inline-block;
-  margin-bottom: 10px;
-  padding: 4px 10px;
-  background: var(--nx-red);
-  font-family: var(--font-primary);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing:.05em;
-  text-transform:none;
-  color: #fff;
-}
-
-/* ------------------------------------------------------- the two red panels */
-
-.nx-lead{
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 24px;
-  margin-bottom: 20px;
-}
-/* Beside the panel the card does not impose a ratio of its own: the row is as
-   tall as the panel's words need, and a card holding a ratio here would size
-   the row to the picture instead, leaving the panel to overflow it. The floor
-   keeps the picture from collapsing if the panel is ever nearly empty. */
-.nx-lead .nx-card--over .nx-card__link{
-  aspect-ratio: auto;
-  height: 100%;
-  min-height: 320px;
-}
-
-.nx-panel{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 14px;
-  padding: clamp(28px, 4vw, 48px);
-  background: var(--nx-red);
-  color: #fff;
-}
-.nx-panel__eyebrow{
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing:.08em;
-  text-transform:none;
-}
-.nx-panel__title{
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: clamp(24px, 2.6vw, 34px);
-  font-weight: 600;
-  line-height: 1.2;
-}
-.nx-panel__note,
-.nx-panel__act{
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 15px;
-  line-height: 1.75;
-  color: rgba(255, 255, 255, .92);
-}
-.nx-panel__act{ font-size: 13.5px; color: rgba(255, 255, 255, .8); }
-
-/* The band that asks for writing. The picture breaks out of the red block at
-   the top and bottom, which is the one place this page lets anything overlap. */
-.nx-cta{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(24px, 4vw, 48px);
-  align-items: center;
-  margin-block: clamp(28px, 4vw, 48px);
-  padding: 40px;
-  background: var(--nx-red);
-  color: #fff;
-}
-.nx-cta__shot{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-block: -80px;
-  aspect-ratio: 4 / 3;
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      rgba(255, 255, 255, .16) 0 10px,
-      rgba(255, 255, 255, .08) 10px 20px);
-  border: 1px solid rgba(255, 255, 255, .4);
-  font-family: var(--font-primary);
-  font-size: 13px;
-  line-height: 1.5;
-  text-align: center;
-  color: rgba(255, 255, 255, .85);
-}
-/* When the photograph is there it covers the frame entirely; the stripes above
-   are what shows in the gap before it loads, and on any slot still waiting. */
-.nx-cta__shot img{
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.nx-cta__title{
-  margin: 0 0 14px;
-  font-family: var(--font-primary);
-  font-size: clamp(24px, 2.6vw, 34px);
-  font-weight: 600;
-  line-height: 1.2;
-}
-.nx-cta__text p{
-  margin: 0 0 12px;
-  font-family: var(--font-primary);
-  font-size: 16px;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, .92);
-}
-.nx-cta__act{ font-size: 13.5px !important; color: rgba(255, 255, 255, .8) !important; }
-
-/* Two small sections side by side, each with its own rule. */
-.nx-duo{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px 24px;
-}
-
-/* ------------------------------------------------------------- narrower */
-
-@media (max-width: 1024px){
-  .nx-grid--4{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 860px){
-  .nx-hero__grid,
-  .nx-lead,
-  .nx-cta{ grid-template-columns: 1fr; }
-  .nx-hero__side{ grid-template-rows: auto auto; }
-  .nx-cta__shot{ margin-block: 0; order: -1; }
-  .nx-card--over.is-big .nx-card__title{ font-size: 22px; }
-  .nx-shot--tall{ aspect-ratio: 16 / 10; }
-  .nx-hero .nx-card--over .nx-card__link{ aspect-ratio: 16 / 10; }
-  /* The floor belongs to the two-column case only. Kept here, against the
-     ratio, it would set a minimum WIDTH of 320 x 16/9 and push the card wider
-     than the screen. */
-  .nx-lead .nx-card--over .nx-card__link{
-    aspect-ratio: 16 / 9;
-    height: auto;
-    min-height: 0;
-  }
-}
-@media (max-width: 768px){
-  .nx-grid--3{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .nx-grid--2,
-  .nx-duo{ grid-template-columns: 1fr; }
-}
-@media (max-width: 480px){
-  .nx-grid--2,
-  .nx-grid--3,
-  .nx-grid--4{ grid-template-columns: 1fr; }
-  .nx-bar__name{ white-space: normal; }
+@media(prefers-reduced-motion:reduce){
+  .ij-nav a,.ij-topics button{transition:none}
 }

@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/pages.css?b=102-blog-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-blog-editorial-1">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,21 +37,13 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/blog.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/typography.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-blog-2-footer-1">
+<link rel="stylesheet" href="assets/css/blog.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-blog-editorial-1-footer-1">
 </head>
 
 <body class="blog litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -269,26 +261,46 @@
 </div>
 <main id="main">
 <article class="art" id="top">
-  <div class="artwrap">
-    <header class="art__head">
-      <p class="art__back"><a href="blog.html"><span aria-hidden="true">&larr;</span> Back to the Blog</a></p>
-      <p class="art__flag"><a href="blog.html">CIRS Blog</a> &rarr;
-        <span>Opinion</span></p>
-      <h1 class="art__title serif">The Death of Rationalism</h1>
-      <p class="art__by">The Crossroads Editorial Team</p>
-      <p class="art__where">The Crossroads, Issue&nbsp;32 &middot; August 2026</p>
-    </header>
+  <header class="art__head">
+    <div class="art__shell">
+      <nav class="art__breadcrumb" aria-label="Breadcrumb">
+        <a href="blog.html">Ideas from CIRS</a><span aria-hidden="true">/</span><span>Opinion</span>
+      </nav>
+      <p class="art__edition">The Crossroads <span aria-hidden="true">/</span> Issue 32</p>
+      <h1 class="art__title">The Death of Rationalism</h1>
+      <div class="art__credits">
+        <span>No byline in print</span>
+        <span>August 2026</span>
+        <span>6 min read</span>
+      </div>
+    </div>
+  </header>
+  <div class="art__layout">
+    <aside class="art__rail" aria-label="Original publication">
+      <p>First published in</p>
+      <strong>The Crossroads<br>Issue 32</strong>
+      <a href="assets/documents/crossroads/crossroads-issue-32.pdf">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
+      <a href="crossroads.html">All Crossroads issues</a>
+    </aside>
+    <div class="art__content">
+    <figure class="art__hero">
+      <img src="assets/img/blog/death-of-rationalism.webp"
+           alt="Illustrated stone hall breaking apart between geometric lines and dark smoke"
+           width="941" height="1672" decoding="async">
+      <figcaption>Illustration supplied for the web edition.</figcaption>
+    </figure>
 
-    <div class="art__body">
+      <div class="art__body">
       <p>Rationalism was meant to be a method, not an identity. It was to be the discipline of honest seeing, not another tribe of the like-minded. You question, you examine, you see clearly. You hold no belief sacred, no authority exempt — including your own. Every conclusion must justify itself and if it cannot, you let it go. That is the original promise. From the Greek sceptics to the Enlightenment philosophers to the modern scientific temper, this is what rationalism has always claimed as its essence: the courage to ask, the willingness to discard, the refusal to bow before any idea simply because it is old or revered or comfortable.</p>
       <p>The courage to question rather than blindly obey, to examine rather than merely accept: this is what allows the mind to mature and society to remain free.</p>
       <p>None of this is an argument against rationalism as a method. The method works. Peer review catches errors, replication weeds out fraud, falsification disciplines speculation. The institution of science corrects what the individual scientist cannot. But the method’s virtue does not automatically transfer to the practitioner. A system can be self-correcting while the people within it remain thoroughly self-deceived. It is this gap, between what rationalism promises and what the rationalist practices, that concerns us here.</p>
-      <p>The Outward Gaze Watch the rationalist in action. He will tell you precisely why the pilgrim is wasting his time at the temple, but he cannot tell you why he himself spent three hours last night arguing with strangers on the internet. He will explain the cognitive biases that make people believe in astrology, yet he has never once examined the compulsion that makes him need to correct them. He writes essays on why people cling to tradition.</p>
+      <h2>The Outward Gaze</h2>
+      <p>Watch the rationalist in action. He will tell you precisely why the pilgrim is wasting his time at the temple, but he cannot tell you why he himself spent three hours last night arguing with strangers on the internet. He will explain the cognitive biases that make people believe in astrology, yet he has never once examined the compulsion that makes him need to correct them. He writes essays on why people cling to tradition.</p>
       <p>Still, he cannot see that his own identity as “the one who sees through tradition” is just as clung to, just as defended, just as psychologically necessary to him as any ritual is to a devotee.</p>
       <p>This is the fatal flaw. Reason directed only outward is not complete reason; it is half-reason, and half-reason is often more dangerous than no reason at all because it comes with the illusion of completeness.</p>
       <p>The religious believer at least knows he believes. The rationalist who has made reason into identity does not know he believes; he thinks he merely sees. And so his beliefs operate unchecked, unexamined, all the more powerful for being invisible. Belief in reason is something else entirely. It is reason frozen into dogma, producing certainty rather than clarity, positions rather than understanding, debates rather than insight. The believer in reason has made rationality into a flag, and he will defend that flag as fiercely as any religious zealot defends his scripture.</p>
       <p>His positions are not held because they are true but because they are his; his arguments are not aimed at understanding but at victory. His rationalism has become, in everything but name, a faith.</p>
-      <p>The Of Death Rationalism Rationalism Rationalism Rationalism This is the questioning the ego cannot survive. It can survive any external argument; it can change positions, update beliefs, switch tribes, and remain fundamentally intact. What it cannot survive is being seen.</p>
+      <p>This is the questioning the ego cannot survive. It can survive any external argument; it can change positions, update beliefs, switch tribes, and remain fundamentally intact. What it cannot survive is being seen.</p>
       <p>This is why self-enquiry is so rare, and why it is so essential. The rationalist who has never asked, “What am I really doing when I argue?”, who has never noticed the pleasure in being right, the fear of being wrong, the satisfaction of superiority, has never used reason fully. He has used reason the way a child uses a stick: to hit things, defend territory, feel powerful. He has not yet used reason the way a surgeon uses a scalpel: to cut through illusion, beginning with his own.</p>
       <p>The bars are elegant, the locks are logical, and the prisoner is convinced he is free because he can critique the cages of others. But he remains inside, for he has never questioned the one who built the cage, who maintains the cage, who is terrified of life outside the cage. His cage has a sign on it that says “No Cage,” and he believes the sign.</p>
       <p>Liberation is not a change of content; it is freedom from the need to cling to any content. The liberated mind can hold positions without being held by them, can use reason without being used by the ego’s need for reason, can think without needing thought to tell it who it is.</p>
@@ -300,16 +312,29 @@
       <p>This liberation is not achieved by abandoning rationalism; it is achieved by completing it, by turning the light that has illuminated so much of the external world, finally, uncompromisingly, on the one who holds the light.</p>
       <p>The question is not whether you can question religion, tradition, politics, or superstition; you have already demonstrated that capacity. The question is whether you can question the questioner. Can you ask, with genuine notknowing: What am I defending? What am I afraid of? Who would I be if I could no longer call myself rational?</p>
       <p>Begin there. That is the only beginning worth the name. Refuse, and you remain what you have always been: an ego armed with arguments, a prisoner who has memorised every book on liberation but never bothered to look at his own chains.</p>
+      </div>
     </div>
-
+  </div>
+  <div class="art__shell">
     <footer class="art__foot">
-      <p>Printed in <b>The Crossroads</b>, Issue&nbsp;32 &middot; August 2026 &mdash; the monthly
-        magazine of Chinmaya International Residential School.</p>
-      <p class="art__onward">
-        <a class="btn btn--outline" href="assets/documents/crossroads/crossroads-issue-32.pdf">Read the whole issue (PDF)</a>
-        <a class="btn btn--ghost-ink" href="blog.html">Back to the Blog</a>
-      </p>
+      <p>Originally published in <em>The Crossroads</em>, Issue 32.</p>
+      <div><a href="assets/documents/crossroads/crossroads-issue-32.pdf">Read the complete issue (PDF)</a>
+        <a href="blog.html">Back to all stories</a></div>
     </footer>
+    <section class="art__related" aria-labelledby="art-related-title">
+      <h2 id="art-related-title">Keep reading</h2>
+      <ul><li>
+          <a href="is-ai-art-really-art.html">
+            <span>Opinion / Issue 31</span>
+            <strong>Is AI - Art Really Art?</strong>
+          </a>
+        </li><li>
+          <a href="hot-wheels-vs-barbie.html">
+            <span>Opinion / Issue 31</span>
+            <strong>Hot Wheels V/S Barbie</strong>
+          </a>
+        </li></ul>
+    </section>
   </div>
 </article>
 </main>
@@ -416,11 +441,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102-blog-2" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102-blog-2" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102-blog-2" defer></script>
-<script src="assets/js/cirs.js?b=102-blog-2" defer></script>
-<script src="assets/js/pages.js?b=102-blog-2" defer></script>
-<script src="assets/js/footer.js?b=102-blog-2-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/cirs.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/pages.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/footer.js?b=102-blog-editorial-1-footer-1" defer></script>
 </body>
 </html>
