@@ -39,6 +39,7 @@ import crossroads
 import mathchallenge
 import creativewriting
 import captures
+import theatre
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=101"
@@ -526,7 +527,7 @@ PAGES = {
         # assets/css/culture.css, shared by the three Art, Culture & Music
         # pages that open on a film.
         "sheet": "culture",
-        "cache_suffix": "-theatre-film-2",
+        "cache_suffix": "-theatre-acts-1",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
@@ -540,6 +541,13 @@ PAGES = {
             "title": "CIRS Theatre",
             "phases": (0.70, 0.78, 0.91),
         },
+        # After the opening, three acts — Anand Utsav, Masquerades and Class
+        # Presentations — written from tools/theatre.py, with a sheet and a
+        # script of their own (assets/css/theatre.css, assets/js/theatre.js).
+        # The page closes on its own request for missing photographs and
+        # recordings, which says precisely what the shared under-construction
+        # note says in general, so the note is left off.
+        "uc": False,
     },
 
     "admissions": {
@@ -1427,6 +1435,9 @@ def build(slug, page):
             f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
             f'<noscript><style>.film{{height:100svh}}{nudge}{pending}{still}'
             '</style></noscript>\n</head>')
+    if slug == "theatre":
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/theatre.css?{CACHE_BUST}">\n</head>')
     if slug == "captures":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/captures-featured.css?{CACHE_BUST}">\n'
@@ -1558,6 +1569,12 @@ def build(slug, page):
                        .replace("{{ALUMNI_PATHWAYS}}", alumni.pathways_html())
                        .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
                        .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
+    if slug == "theatre":
+        content = (content.replace("{{THEATRE_PROGRAMME}}", theatre.programme_html())
+                          .replace("{{THEATRE_ANAND_UTSAV}}", theatre.anand_utsav_html())
+                          .replace("{{THEATRE_MASQUERADES}}", theatre.masquerades_html())
+                          .replace("{{THEATRE_CLASSES}}", theatre.classes_html())
+                          .replace("{{THEATRE_VIEWER_DATA}}", theatre.viewer_data()))
     parts.append(content)
     # Every page carries the index; jump_html leaves it out where there is
     # nothing to jump to. "jump": False opts a page out. It is placed after
@@ -1604,6 +1621,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
         parts.append(f'<script src="assets/js/sports-journey.js?{CACHE_BUST}" defer></script>')
+    if slug == "theatre":
+        parts.append(f'<script src="assets/js/theatre.js?{CACHE_BUST}" defer></script>')
     if slug == "captures":
         parts.append(f'<script src="assets/js/captures-featured.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')

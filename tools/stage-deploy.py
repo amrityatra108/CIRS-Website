@@ -72,10 +72,15 @@ def main():
         html = open(os.path.join(ROOT, name), encoding="utf-8").read()
         here = os.path.dirname(name)
         for r in re.findall(r'"((?:\.\./)*assets/[^"]+)"', html):
-            # srcset candidates may include a width or density descriptor;
-            # only the first whitespace-delimited field is the asset path.
-            rel = os.path.normpath(os.path.join(here, r.split()[0].split("?")[0]))
-            wanted.add(rel.replace(os.sep, "/"))
+            # A srcset holds several candidates, "a.webp 800w, b.webp 1600w":
+            # every one is a file to ship, not only the first. Each candidate
+            # is a path followed by an optional width or density descriptor.
+            for candidate in r.split(","):
+                fields = candidate.split()
+                if not fields or "assets/" not in fields[0]:
+                    continue
+                rel = os.path.normpath(os.path.join(here, fields[0].split("?")[0]))
+                wanted.add(rel.replace(os.sep, "/"))
     # A stylesheet's url() is resolved by the browser against the stylesheet,
     # not against the page — so "../fonts/x.woff2" in assets/css/fonts.css
     # means assets/fonts/x.woff2. Matching only paths that already begin
