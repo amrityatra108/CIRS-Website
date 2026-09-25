@@ -8,7 +8,7 @@ Everything in this zip is static. No build step, no server-side code, no databas
 index.html                 the home page
                            and twenty-four more, one file each, in the five menu groups:
   Vision                   founder · why-cirs · school-history · leadership
-  Student Life             student-life · curriculum · our-results · sports ·
+  Student Life             the-cirs-experience · curriculum · our-results · sports ·
                            our-laurels · math-challenge
   Literary Excellence      crossroads · blog · creative-writing
   Art, Culture & Music     captures · art-attack · festivals · theatre · cultural-gallery
