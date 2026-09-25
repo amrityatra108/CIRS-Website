@@ -32,7 +32,6 @@
     if (!document.body.classList.contains("theatre")) return;
     if (!reduced) document.body.classList.add("th-motion");
     stage();
-    reveal();
     houses();
     viewer();
   }
@@ -70,22 +69,6 @@
     window.addEventListener("scroll", queue, { passive: true });
     window.addEventListener("resize", function () { last = -1; queue(); });
     draw();
-  }
-
-  /* The amphitheatre opens from a clip as it arrives. */
-  function reveal() {
-    var figs = document.querySelectorAll(".th-reveal");
-    if (!figs.length) return;
-    if (reduced || !("IntersectionObserver" in window)) {
-      figs.forEach(function (f) { f.classList.add("is-in"); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
-      });
-    }, { rootMargin: "0px 0px -12% 0px" });
-    figs.forEach(function (f) { io.observe(f); });
   }
 
   /* 2 and 3. ------------------------------------------------------ houses */

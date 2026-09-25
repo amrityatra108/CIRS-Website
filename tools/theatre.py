@@ -7,24 +7,42 @@ production. tools/make-theatre.py cuts the files from this list, and
 tools/build-site.py writes the page's three acts from it, so there is one
 record of what each picture is and nothing on the page can drift from it.
 
+The season shown is 2025: Anand Utsav 2025 and Masquerade 2025.
+
 What is known and what is not
 -----------------------------
-  * House and production are taken from the Drive folder a photograph sits in
-    ("Masquerade 2024/Vyasa") and from the school's own YouTube titles for the
-    same evening ("Iridescente | CIRS - Vyasa House Masquerade - 2024"). Never
-    from the colour of a costume.
-  * The Anand Utsav photographs are all from the evening cultural programme of
-    Anand Utsav 2024, 15 October — the second day. The Drive folder is
-    "Anand utsav 2024 phtoos/day 1 and 2"; only frames the camera dated
-    15 October are used, which is the evening the school's Anand Utsav
-    Bulletin (October 2024) schedules the Annual Day programme. The title is
-    the one the school gave its recording on YouTube.
+  * Anand Utsav 2025. The school's 2025-26 social media timeline gives the
+    event's first day as 6 October 2025. Every photograph here is from the
+    Drive folder "46. Anand Utsav", taken on the evening of 7 October 2025
+    (the camera's own timestamps, 18:23 to 20:50) — the second day, and the
+    evening of its cultural programme. The next morning's photographs, and the
+    speeches and awards earlier that evening, are left out. The production's
+    title is the one the school gave its recording on YouTube.
+  * Masquerade 2025. The Drive folder "54. Masquerade" holds one folder per
+    house from one photographer (Smaran/Valmiki, /Vasistha, /Vishwamitra) and
+    three photographers' folders not sorted by house (Abarna, Adhivika,
+    Radha). Each house played on its own evening, and the photographs are
+    assigned to a house by the evening they were taken:
+
+        23 November  Valmiki      Smaran/Valmiki is dated 23 Nov
+        24 November  Vasistha     Smaran/Vasistha is dated 24 Nov; the
+                                  Vantara trailer says "November 24"
+        25 November  Vishwamitra  Smaran/Vishwamitra is dated 25 Nov
+        26 November  Vyasa        the Ivysherin trailer says "November 26"
+
+    Every set was also checked against the house's own trailer and folder:
+    the same sets and costumes appear in both. Never by costume colour.
+  * Abarna's camera clock reads a year behind (2024 for November 2025). Its
+    photographs sit in the 2025 folder and show the same stage, sets and cast,
+    evening by evening, as the correctly dated cameras beside them; the year
+    below is the evening's, not the camera's.
+  * The production titles are the school's own, from the trailers on its
+    channel: Melora (titled "Valmiki 2025 | Masquerade 2025"), Vantara,
+    El Diablo and Ivysherin. Melora and Vantara are also written on stage, in
+    photographs below. No full recording of a 2025 Masquerade is on the
+    channel, so each house links to its trailer, not to a production.
   * Captions describe what is in the frame. No character is named and no
-    scene is explained: the school has not published cast lists or synopses,
-    and a plausible guess would read as fact.
-  * The exact evening of each 2024 house play is not stated anywhere the
-    school has published. Two of the cameras disagree by a day, so the page
-    says November 2024 and no more.
+    scene is explained: the school has not published cast lists or synopses.
 
 Everything with a URL here was checked against the school's channel,
 youtube.com/@CIRS-YouTube (channel UCqtdZclBQYN_BfJCyZY7WVg): the video exists,
@@ -44,210 +62,144 @@ DRIVE_FILE = "https://drive.google.com/file/d/{}/view"
 #      0..1, used where a frame is cropped to fill a space
 # alt: what the picture shows;  caption: a short line for the lightbox and grid
 # size: "xl" for a full-bleed image, which is cut larger
+# fit: "contain" for a photograph shown whole rather than cropped to fill
 
 
-def photo(name, drive, file, folder, src, alt, caption, focus=(0.5, 0.5), size="l"):
+def photo(name, drive, file, folder, src, alt, caption, focus=(0.5, 0.5), size="l", fit="cover"):
     return {"name": name, "drive": drive, "file": file, "folder": folder, "src": src,
-            "alt": alt, "caption": caption, "focus": focus, "size": size}
+            "alt": alt, "caption": caption, "focus": focus, "size": size, "fit": fit}
 
 
-AU_FOLDER = "Anand Utsav 2024 / Anand utsav 2024 phtoos / day 1 and 2"
+AU_FOLDER = "46. Anand Utsav"
+L = (6000, 4000)       # the Sony cameras
+C = (6000, 3368)       # the Canon R100
+R5 = (8192, 5464)      # the Canon R5 at Anand Utsav
 
 ANAND_UTSAV = {
-    "event": "Anand Utsav 2024",
-    "year": 2024,
-    "date": "15 October 2024",
-    "title": "Transforming Lives! Transforming Vision!",
+    "event": "Anand Utsav 2025",
+    "year": 2025,
+    "date": "7 October 2025",
+    "title": "Maryada Purushottham",
     # The school's own recording of this evening's theatre programme.
-    "recording": {"id": "hWddJ6T9H2c", "title": "Transforming Lives ! Transforming Vision! | Anand Utsav 2024 | Theater Show",
-                  "length": "68:21"},
+    "recording": {"id": "-QrRDoSJ9Ww", "title": "Maryada Purushottham | Anand Utsav 2025 | Theater Show",
+                  "length": "67:36"},
     # The frame the act opens on, in near darkness, before the lights come up.
-    "dark": photo("au-telephone", "1paWhgIFxCQO7dt7HGFTPbgEdFHReNWLl", "0C9A3627.JPG", AU_FOLDER, (8192, 4608),
-                  "A student in a red kurta alone on a darkened stage, holding a telephone receiver",
-                  "A single light, a single voice", (0.46, 0.4), "xl"),
+    # Shown whole: the dark around the figure is the photograph's own.
+    "dark": photo("au25-alone", "1hiQjsvBRUJL3j6B807V9db9ASlMvangb", "0C9A3355.JPG", AU_FOLDER, (5464, 8192),
+                  "A student in a yellow dhoti alone in a pool of light on a dark stage, both arms raised",
+                  "One figure, one light", (0.5, 0.4), "xl", "contain"),
     # The image that carries the act: the whole stage, the whole cast.
-    "wide": photo("au-forest", "1CowC58S9mzt-UaFBrU7IYTrCQhTwFxg3", "0C9A3714.JPG", AU_FOLDER, (8192, 4608),
-                  "A forest scene filling the stage: a large cast in costume under red light before a backdrop of trees",
-                  "The full stage, under red light", (0.5, 0.62), "xl"),
+    "wide": photo("au25-palace", "1hXLl5G9a4JXSrHTKM_GBk0C53aOaOTGo", "0C9A3507.JPG", AU_FOLDER, R5,
+                  "A palace hall filling the stage: a king on a carved throne, courtiers in bright costume and guards in black around him",
+                  "The palace, across the whole stage", (0.5, 0.62), "xl"),
     # The sequence after it, in the order the page shows them.
     "sequence": [
-        photo("au-court", "1IDBUyO00Bn784kNGhg__GXySNFsb6EGQ", "0C9A3579.JPG", AU_FOLDER, (8192, 5464),
-              "A royal court scene: seated figures in rich costume, guards with spears and a painted palace behind them",
-              "A court, in full costume", (0.5, 0.55)),
-        photo("au-soldiers", "1rX0o82KLX4bRbq-473YFz8mYBGIELFtZ", "0C9A3659.JPG", AU_FOLDER, (8192, 4608),
-              "A long line of students in army fatigues before a mountain backdrop",
-              "An ensemble in uniform, across the whole stage", (0.5, 0.6), "xl"),
-        photo("au-dance", "1lPmlRFvvNymSQK2736973e9BqUA3os-x", "0C9A3762.JPG", AU_FOLDER, (8192, 4608),
-              "Dancers in violet, white and lilac before a painted palace",
-              "Dancers before the palace", (0.5, 0.55)),
-        photo("au-sage", "1I9hmEP_ZOCe9rzvOXwuiFjstju9qPvzT", "0C9A3753.JPG", AU_FOLDER, (4608, 8192),
-              "A student made up as a white-haired sage in saffron, one arm raised, under violet light",
-              "One figure, one light", (0.5, 0.4)),
-        photo("au-finale", "1rgsEdQeCCHpCIy3eGfCQgxYFCekd9tZo", "0C9A3819.JPG", AU_FOLDER, (8192, 4608),
-              "Hundreds of students crowded together on the stage, under a backdrop reading Transforming Lives",
-              "Hundreds on the stage together", (0.5, 0.55), "xl"),
+        photo("au25-court", "1EEsW3XQTAiRV27qfAX1HqIs2RtxG-seN", "0C9A3377.JPG", AU_FOLDER, R5,
+              "Two crowned figures on gilded thrones before a painted palace wall, a young actor before them",
+              "A court, on gilded thrones", (0.55, 0.55)),
+        photo("au25-sunset", "1vOIDfCdt88wlPc30CaIkwRDtq-UdetyQ", "0C9A3556.JPG", AU_FOLDER, R5,
+              "An ensemble in bright dhotis dancing before a sunset backdrop",
+              "An ensemble at sunset", (0.4, 0.6), "xl"),
+        photo("au25-mountain", "1PA5HB15r7P2cKN5HdkdjuwyMRZcyPvcb", "0C9A3461.JPG", AU_FOLDER, R5,
+              "Two students in green dhotis grappling before a painted blue mountain",
+              "A struggle before the mountain", (0.62, 0.65)),
+        photo("au25-tableau", "1XlJjkbgWYBorYFkqVXI2yk5EvwNHPhnq", "0C9A3199.JPG", AU_FOLDER, R5,
+              "A dancer in red and gold at the centre of a many-armed tableau",
+              "A many-armed tableau", (0.5, 0.5)),
+        photo("au25-curtain-call", "1JSouOer072ufxlw6yiX3Ov2QHygzAdlL", "0C9A3703.JPG", AU_FOLDER, R5,
+              "The cast crowded together on the stage at the close, petals on the floor",
+              "Everyone on the stage at the close", (0.5, 0.5), "xl"),
     ],
     # Other years of the same programme on the school's channel.
     "more": [
-        {"id": "-QrRDoSJ9Ww", "title": "Maryada Purushottham", "note": "Anand Utsav 2025 · Theater show", "length": "67:36"},
+        {"id": "93Pnob1zi90", "title": "Anand Utsav 2025", "note": "CIRS Annual Day · highlights", "length": "3:58"},
+        {"id": "hWddJ6T9H2c", "title": "Transforming Lives! Transforming Vision!", "note": "Anand Utsav 2024 · Theater show", "length": "68:21"},
         {"id": "XZg-NTpB1zo", "title": "Dharmo Rakshati Rakshitah", "note": "Anand Utsav 2023 · Cultural programme", "length": "66:22"},
         {"id": "g_uTAO3wsO0", "title": "CIRS Anand Utsav – 2019", "note": "Recorded live", "length": "79:17"},
     ],
 }
 
 
-def mq(house):
-    return f"Masquerade 2024 / {house}"
+def mq(folder):
+    return f"54. Masquerade / {folder}"
 
 
-# The act's opening frame. Its folder is Vasistha's; it is not repeated in
+# The act's opening frame. From Vishwamitra's evening; it is not repeated in
 # that house's gallery.
 MASQUERADE_OPENER = photo(
-    "mq-painted-face", "1dE3fugHbeWllfbO2thN5xg-9YcOtGFtD", "DSC00142.JPG", mq("Vasishtha"), (4000, 6000),
-    "A student in dark body paint, half lit, looking out from the shadows",
-    "Vasistha House, Incursion, 2024", (0.5, 0.3))
+    "mq25-skull-paint", "1tuapc3jdq6YHsqHX6UVvlywPCvi59qco", "DSC05729.JPG", mq("Abarna"), L,
+    "An actor in white skull face paint under orange light, hands open",
+    "Vishwamitra House, El Diablo, 2025", (0.5, 0.3))
 
-# The four houses, in the order the site lists them elsewhere (Student Life,
-# Sports). The spelling is the site's; the school's own titles also write
-# Vasishta, Vasishtha and Vashistha, which are the same house.
+# The four houses, in the order they played. The spelling of the house names
+# is the site's; the school's own titles also write Vasishta and Vasishtha.
 HOUSES = [
     {
-        "id": "vasistha", "name": "Vasistha", "numeral": "I",
-        "title": "Incursion", "year": 2024,
-        "drive_folder": "Masquerade 2024 / Vasishtha",
-        "recording": {"id": "T0EEKg1t92g", "length": "63:50",
-                      "title": "Incursion | CIRS - Vasishta House Masquerade - 2024"},
-        "trailer": {"id": "mcS44liPzw8", "length": "2:06"},
-        # The photograph on this house's card in the programme index. It is one
-        # of the house's own and is not shown again in the gallery.
-        "card": "vasistha-skull-staff",
-        # The gallery as rows: feature (one large, two beside it), full (one
-        # across the width), trio (three even) and duo (two, offset).
+        "id": "valmiki", "name": "Valmiki", "numeral": "I",
+        "title": "Melora", "year": 2025, "date": "23 November",
+        "drive_folder": "54. Masquerade / Smaran/Valmiki, Adhivika, Abarna (23 November)",
+        "recording": None,
+        "trailers": [{"id": "EfzbNboA4TE", "length": "1:17", "label": "Trailer",
+                      "title": "Melora | Valmiki 2025 | Masquerade 2025"}],
+        "card": "valmiki25-red-coat",
         "layout": [
-            ("feature", ["vasistha-elder-violet", "vasistha-forest-dance", "vasistha-green-light"]),
-            ("full", ["vasistha-full-stage"]),
-            ("trio", ["vasistha-lights", "vasistha-body-paint", "vasistha-blue-light"]),
-            ("duo", ["vasistha-foliage", "vasistha-red-cloth"]),
-            ("full", ["vasistha-green-costumes"]),
-            ("duo", ["vasistha-round-window", "vasistha-off-stage"]),
+            ("feature", ["valmiki25-candy", "valmiki25-sofa", "valmiki25-bed"]),
+            ("full", ["valmiki25-storm"]),
+            ("trio", ["valmiki25-neon", "valmiki25-painted", "valmiki25-silhouette"]),
+            ("duo", ["valmiki25-factory", "valmiki25-tunnel"]),
+            ("full", ["valmiki25-amazing-violet"]),
+            ("trio", ["valmiki25-chocolate", "valmiki25-after", "valmiki25-poster"]),
         ],
-        "lead": photo("vasistha-hut", "1mmnwb2b9goe7c-9_ZH5pxfSSmbhTxgIY", "CRS06384.JPG", mq("Vasishtha"), (6000, 3376),
-                      "Inside a thatched hut set: an elder in white holding a carved staff, and a younger actor leaning in",
-                      "Inside the hut", (0.45, 0.45), "xl"),
+        "lead": photo("valmiki25-dance", "1eaSNX8Wa3GvlO7968jqH5fT-tniNWPuz", "DSC01333.JPG", mq("Adhivika"), L,
+                      "The company dancing across the stage before a candy-land backdrop, a lead in a red coat and top hat among them",
+                      "The company, dancing across the candy land", (0.5, 0.5), "xl"),
         "gallery": [
-            photo("vasistha-elder-violet", "1OYpeUmMHTZUMJ7FugALJ5RZZUhE744tm", "CRS06347.JPG", mq("Vasishtha"), (6000, 3376),
-                  "Under violet light, an elder in white with a staff, and a figure in purple holding up a shell",
-                  "Under violet light", (0.65, 0.4)),
-            photo("vasistha-forest-dance", "1aSdHMTK1phcvbsm0vS9AbJCJyS3apPuA", "CRS06422.JPG", mq("Vasishtha"), (6000, 3376),
-                  "A dance in the forest set: an actor in braces among dancers in floral dresses",
-                  "A dance in the forest", (0.45, 0.45)),
-            photo("vasistha-skull-staff", "1yihrCJb8yOmhM_CPYf6Y5SWveb2Q3zfe", "CRS06683.JPG", mq("Vasishtha"), (3376, 6000),
-                  "A figure in black holding a staff topped with a skull",
-                  "The skull-topped staff", (0.5, 0.35)),
-            photo("vasistha-full-stage", "1U2X9Zz3glEuVvnx1d2jW-J7Qx5njkj94", "IMG_9065.JPG", mq("Vasishtha"), (2400, 1344),
-                  "The whole stage: a forest set lit violet, dancers in pink and white, and one actor in braces",
-                  "The whole stage", (0.5, 0.6)),
-            photo("vasistha-green-light", "1zWZl4oqSGWKDRttJDtnLj9XodLYkxMQo", "CRS06603.JPG", mq("Vasishtha"), (6000, 3376),
-                  "The cast in green light, several in white face paint",
-                  "In green light", (0.5, 0.5)),
-            photo("vasistha-lights", "1pvXOKu5Z28uxZGTKNlbuEG6lhay83mxp", "CRS06782.JPG", mq("Vasishtha"), (6000, 3376),
-                  "A figure in a pointed hat and cloak in a set strung with fairy lights, a young actor beside",
-                  "Among the strings of light", (0.45, 0.5)),
-            photo("vasistha-body-paint", "1zy2irwMSEhF2Uh7bQ2t6_ldsdfK51vDC", "CRS06840.JPG", mq("Vasishtha"), (6000, 3376),
-                  "An actor with a painted back raises a staff overhead above another",
-                  "Body paint and a raised staff", (0.5, 0.4)),
-            photo("vasistha-blue-light", "1W9jTumzH-WI2MIofezWXkMk19QC2ZSio", "CRS06954.JPG", mq("Vasishtha"), (6000, 3376),
-                  "An actor, arms flung wide, in a single blue light",
-                  "Arms wide, in blue light", (0.5, 0.45)),
-            photo("vasistha-foliage", "19IUGJi0mNsdEcMPNQrHuy58rdEF6pFAr", "DSC00004.JPG", mq("Vasishtha"), (6000, 4000),
-                  "An actor in dark body paint crouches forward in front of green-lit foliage",
-                  "In the foliage", (0.55, 0.45)),
-            photo("vasistha-red-cloth", "1ZIhhWezewwvkktMZM_Lh-QMSmgSh0y9P", "DSC00009.JPG", mq("Vasishtha"), (6000, 4000),
-                  "Two actors in the forest set, one wrapped in red cloth",
-                  "Two actors in the forest", (0.55, 0.45)),
-            photo("vasistha-round-window", "1sXbmCtJYZ3FciyF_SU_BAwtIRwbegumP", "DSC00129.JPG", mq("Vasishtha"), (6000, 4000),
-                  "Three actors in casual clothes in a room set with a round window",
-                  "A room with a round window", (0.5, 0.45)),
-            photo("vasistha-green-costumes", "1moelEla23JS7pH_CdkAYLt2sFZ4r4V02", "IMG_9107.JPG", mq("Vasishtha"), (2400, 1344),
-                  "The cast in green costumes surging across the stage with staffs, the audience close in front",
-                  "The cast in green, across the stage", (0.5, 0.55)),
-            photo("vasistha-off-stage", "1TR8Lq9GNGa5ngSrnXzaE3O8RvmDVPKqv", "IMG_9274.JPG", mq("Vasishtha"), (2400, 1344),
-                  "Off stage: cast members in face paint grinning at the camera",
-                  "Off stage, still in paint", (0.5, 0.5)),
+            photo("valmiki25-red-coat", "1ovr9E4cRkDnGX-A8t3aFLlgesEStTaxR", "DSC04895.JPG", mq("Abarna"), L,
+                  "An actor in a red coat and top hat before shelves of jars",
+                  "Red coat and top hat", (0.45, 0.4)),
+            photo("valmiki25-candy", "1VAqElRZ30HqtRgzSIiFSqv4EC-QPa_DV", "DSC04866.JPG", mq("Abarna"), L,
+                  "An actor in a red coat and top hat, arm out, before a pink candy-land backdrop",
+                  "In the candy land", (0.5, 0.45)),
+            photo("valmiki25-neon", "1BrUCc_mt28WYh-eaeA4ZleX8LD1x03Za", "DSC04923.JPG", mq("Abarna"), L,
+                  "An actor in a grey suit speaking into a microphone beside a neon sign",
+                  "Beside the neon sign", (0.4, 0.4)),
+            photo("valmiki25-painted", "1ft0W0SYS_qce9tPePnP9Zf9nKLa9EZSx", "DSC05034.JPG", mq("Abarna"), L,
+                  "An actor in red swirling body paint, arms spread, against a dark backdrop",
+                  "Red body paint", (0.5, 0.4)),
+            photo("valmiki25-storm", "13847kisw6B3I4FjrWciiMWKQUn3MOf5C", "DSC01290.JPG", mq("Adhivika"), L,
+                  "An actor in body paint standing before a projected lightning storm and a broken hut",
+                  "Before the storm", (0.5, 0.5)),
+            photo("valmiki25-silhouette", "1WHyTLvfkOMI2-L-i54_sgRiLU3H9z-8T", "DSC01292.JPG", mq("Adhivika"), L,
+                  "A figure crawling in silhouette before a projected desert and a ruined hut",
+                  "In silhouette", (0.6, 0.6)),
+            photo("valmiki25-sofa", "1UGCC4U37WV5H2z2LFmAFmD66c7yrMPZP", "DSC05069.JPG", mq("Abarna"), L,
+                  "Two actors on a sofa before a white-and-peach backdrop, one in a red coat holding a cane",
+                  "On the sofa", (0.5, 0.5)),
+            photo("valmiki25-bed", "1bH9x9x0prDg6yEMCpCst2piqlU45SstJ", "DSC01270.JPG", mq("Adhivika"), L,
+                  "Two actors on a bed in a room set with yellow shelves and soft toys",
+                  "A room with yellow shelves", (0.5, 0.55)),
+            photo("valmiki25-factory", "1HQwTGDIytXJa-wmCxcknm9fQepHe_OOk", "DSC01343.JPG", mq("Adhivika"), L,
+                  "Actors in a factory set, one in a red coat seated with a cane",
+                  "In the factory", (0.45, 0.5)),
+            photo("valmiki25-tunnel", "1rww1p4CT6j5P2lSlcwChi1PH3wDgmEYg", "DSC01406.JPG", mq("Adhivika"), L,
+                  "Actors before a swirling pink tunnel projected behind them",
+                  "The pink tunnel", (0.6, 0.55)),
+            photo("valmiki25-amazing-violet", "1A7VbBIMFqdljJJr7gVgp9_2cFGBVnt5D", "IMG_7479.JPG", mq("Smaran/Valmiki"), C,
+                  "Dancers before a neon sign reading The Amazing Violet",
+                  "The Amazing Violet", (0.4, 0.5)),
+            photo("valmiki25-chocolate", "1G5aG11O8VPoa4Ju2NBNM2QpR9qYCIe5s", "IMG_7485.JPG", mq("Smaran/Valmiki"), C,
+                  "A lone actor in a striped shirt beside a projected landscape of chocolate and candy canes",
+                  "The chocolate landscape", (0.6, 0.5)),
+            photo("valmiki25-after", "1tlSodgx7w5SMWiya6Tj2zP8THJCnn1Gu", "IMG_7520.JPG", mq("Smaran/Valmiki"), C,
+                  "Two actors after the show, one in swirling body paint, one in a red coat and top hat",
+                  "After the show", (0.5, 0.4)),
+            photo("valmiki25-poster", "1b4ESJmvQK3rk1P2kUCKeyDJV0fYyTvIP", "IMG_7547.JPG", mq("Smaran/Valmiki"), C,
+                  "A figure in a red coat and top hat before a painted poster reading Melora",
+                  "The Melora poster", (0.5, 0.5)),
         ],
         "more": [
-            {"id": "xXx1UMMRg6k", "title": "Vantara — Trailer 1", "note": "Vasishta Productions · uploaded January 2026", "length": "1:58"},
-            {"id": "ahsfpRphrww", "title": "Vantara — Trailer 2", "note": "Vasishta Productions · uploaded January 2026", "length": "1:05"},
-            {"id": "irgJPObYt6Q", "title": "The Anarchist — Trailer", "note": "Masquerade 2022 · with Vishwamitra House", "length": "1:38"},
-            {"id": "hdKRmW4mnIk", "title": "Masquerade Trailer", "note": "2018", "length": "1:19"},
-            {"id": "y1Lr7ViWMcE", "title": "Masquerade Trailer", "note": "2017", "length": "1:39"},
-            {"id": "fVA42gm00PY", "title": "Masquerade Trailer", "note": "2016", "length": "1:30"},
-            {"id": "7Boq4RjnQ30", "title": "Zangoora — Trailer", "note": "2015", "length": "2:17"},
-            {"id": "SsI4Tm5PP8Q", "title": "Masquerade Trailer", "note": "2013", "length": "2:47"},
-        ],
-    },
-    {
-        "id": "valmiki", "name": "Valmiki", "numeral": "II",
-        "title": "Maledictus", "year": 2024,
-        "drive_folder": "Masquerade 2024 / Valmiki",
-        "recording": {"id": "fIMCetOlzCQ", "length": "67:23",
-                      "title": "Maledictus | CIRS - Valmiki House Masquerade - 2024"},
-        "trailer": {"id": "LDQe07FKQ3c", "length": "1:43"},
-        "card": "valmiki-spotlight",
-        "layout": [
-            ("feature", ["valmiki-hat-jacket", "valmiki-grey-paint", "valmiki-staff"]),
-            ("full", ["valmiki-ribbons"]),
-            ("trio", ["valmiki-grip", "valmiki-reach", "valmiki-star"]),
-            ("duo", ["valmiki-rope", "valmiki-struggle"]),
-            ("full", ["valmiki-smoke"]),
-            ("duo", ["valmiki-sound-desk", "valmiki-company"]),
-        ],
-        "lead": photo("valmiki-song", "1Z9oqKIWqGXNRtYJ3co8SfvYi2X7Asetz", "CRS05946.JPG", mq("Valmiki"), (6000, 3376),
-                      "An actor in a wide-brimmed hat and braces sings with arms open, dancers with blue silks behind",
-                      "A song, with the whole company behind", (0.5, 0.4), "xl"),
-        "gallery": [
-            photo("valmiki-hat-jacket", "1dJtxJoTOocerjfrZCWWRyCi7lXGN4Zj4", "CRS06062.JPG", mq("Valmiki"), (6000, 3376),
-                  "An actor in a wide-brimmed hat faces another in a leather jacket",
-                  "Face to face", (0.45, 0.45)),
-            photo("valmiki-spotlight", "1oRNYhmcI3Yh_3DwUP3laTZz1qNAMPXEb", "CRS06091.JPG", mq("Valmiki"), (6000, 3376),
-                  "An actor alone under a spotlight, a figure in the dark behind",
-                  "Alone in the spotlight", (0.6, 0.45)),
-            photo("valmiki-grey-paint", "1qUXv__P7xvFctHDVb2ixNxVNtVOVXiEo", "CRS06078.JPG", mq("Valmiki"), (6000, 3376),
-                  "An actor painted grey leans on another in a hat",
-                  "Grey paint and a battered hat", (0.55, 0.45)),
-            photo("valmiki-ribbons", "1XPRMqNTmfzZsE6z66bKP0UdbjNb_cR2S", "IMG_8845.JPG", mq("Valmiki"), (2400, 1344),
-                  "The whole stage: dancers with blue silks above, and the company in front of the audience",
-                  "Blue silks across the stage", (0.5, 0.5)),
-            photo("valmiki-staff", "1rccisPLB3VfV0SKOf67EIOeHyCnvzg_j", "CRS06028.JPG", mq("Valmiki"), (6000, 3376),
-                  "Two actors in dark body paint, one holding a tall staff, with two actors in costume between them",
-                  "The staff-bearers", (0.5, 0.45)),
-            photo("valmiki-grip", "17nngyE4TmbAU9J8FBh0InN0Xk6ymyZCc", "CRS06102.JPG", mq("Valmiki"), (6000, 3376),
-                  "In blue light, a cloaked figure grips another actor from behind while a third, in a green waistcoat, watches",
-                  "In blue light", (0.45, 0.5)),
-            photo("valmiki-reach", "1ZJwGQH5HSVLxNJyOQDkru5b3Cwe-b_0w", "CRS06168.JPG", mq("Valmiki"), (6000, 3376),
-                  "An actor holding a tall staff reaches out an arm, the forest set dark behind",
-                  "A staff, and an outstretched arm", (0.65, 0.5)),
-            photo("valmiki-star", "17YPhwIHOIGJs5igfcIdC9PLgu6Fd6SLO", "CRS06265.JPG", mq("Valmiki"), (6000, 3376),
-                  "Three actors around a glowing star-shaped prop",
-                  "The star", (0.4, 0.5)),
-            photo("valmiki-rope", "1uihCmaQXF3s5WXEhrhjjomp8SpbZjRxG", "CRS06306.JPG", mq("Valmiki"), (6000, 3376),
-                  "An actor swings a coil of rope in blue light, the audience seated close around the stage floor",
-                  "Among the audience", (0.5, 0.45)),
-            photo("valmiki-struggle", "1MGH0Vk_teMBLujyW_xtK8VgIRVx_Hdng", "CRS06315.JPG", mq("Valmiki"), (6000, 3376),
-                  "Two actors locked together in a struggle in blue light",
-                  "A struggle in the dark", (0.5, 0.55)),
-            photo("valmiki-smoke", "18zEXzvrS0qxoPRYuLmIy9mnYtDDQcehN", "IMG_8878.JPG", mq("Valmiki"), (2400, 1344),
-                  "Actors in body paint, and one in white holding a staff that trails smoke",
-                  "Smoke from the staff", (0.6, 0.45)),
-            photo("valmiki-sound-desk", "10UiLMp2OaneNv6V5U-AZDqqjNJjifF-w", "CRS05942.JPG", mq("Valmiki"), (6000, 3376),
-                  "A mixing desk, a laptop and a monitor speaker in the sound booth",
-                  "The sound booth", (0.5, 0.5)),
-            photo("valmiki-company", "1-GJuGuwU4L-VFMVbGvVMv2ZaI0GRYlSY", "IMG_9028.JPG", mq("Valmiki"), (2400, 1344),
-                  "The company gathered together on the hall floor in front of the stage",
-                  "The company", (0.5, 0.55)),
-        ],
-        "more": [
-            {"id": "EfzbNboA4TE", "title": "Melora", "note": "Masquerade 2025", "length": "1:17"},
+            {"id": "fIMCetOlzCQ", "title": "Maledictus", "note": "Masquerade 2024 · the production", "length": "67:23"},
+            {"id": "LDQe07FKQ3c", "title": "Maledictus — Trailer", "note": "Masquerade 2024", "length": "1:43"},
             {"id": "P4GGqjywNhQ", "title": "Inscenare — Trailer", "note": "Masquerade 2022 · with Vyasa House", "length": "1:38"},
             {"id": "YMccsEUTFmo", "title": "Masquerade Trailer", "note": "2018", "length": "2:01"},
             {"id": "Gfq8MvXjejk", "title": "Masquerade Trailer", "note": "2017", "length": "2:03"},
@@ -257,71 +209,147 @@ HOUSES = [
         ],
     },
     {
-        "id": "vishwamitra", "name": "Vishwamitra", "numeral": "III",
-        "title": "The Imperium", "year": 2024,
-        "drive_folder": "Masquerade 2024 / Vishwamitra",
-        "recording": {"id": "ZlWd-PLTHaI", "length": "73:59",
-                      "title": "The Imperium | CIRS - Vishwamitra House Masquerade - 2024"},
-        "trailer": {"id": "2MzXLwLoszE", "length": "2:03"},
-        "card": "vishwamitra-gold",
+        "id": "vasistha", "name": "Vasistha", "numeral": "II",
+        "title": "Vantara", "year": 2025, "date": "24 November",
+        "drive_folder": "54. Masquerade / Smaran/Vasistha, Abarna (24 November)",
+        "recording": None,
+        "trailers": [{"id": "xXx1UMMRg6k", "length": "1:58", "label": "Trailer",
+                      "title": "Vantara | Vasishta Productions | Trailer 1"},
+                     {"id": "ahsfpRphrww", "length": "1:05", "label": "Second trailer",
+                      "title": "Vantara | Vasishta Productions | Trailer 2"}],
+        "card": "vasistha25-tiger",
         "layout": [
-            ("feature", ["vishwamitra-make-up", "vishwamitra-face-paint", "vishwamitra-backdrop"]),
-            ("full", ["vishwamitra-curtain"]),
-            ("duo", ["vishwamitra-seated", "vishwamitra-portrait"]),
-            ("trio", ["vishwamitra-bed", "vishwamitra-armour", "vishwamitra-aisle"]),
-            ("full", ["vishwamitra-beam"]),
-            ("duo", ["vishwamitra-close", "vishwamitra-steps"]),
-            ("full", ["vishwamitra-banner"]),
+            ("feature", ["vasistha25-cradle", "vasistha25-wolves", "vasistha25-roar"]),
+            ("full", ["vasistha25-clearing"]),
+            ("trio", ["vasistha25-violet", "vasistha25-sunbeams", "vasistha25-torch"]),
+            ("duo", ["vasistha25-gathered", "vasistha25-silhouettes"]),
+            ("full", ["vasistha25-fire"]),
+            ("trio", ["vasistha25-tree", "vasistha25-banner", "vasistha25-company"]),
         ],
-        "lead": photo("vishwamitra-swords", "1Hgo4HDwwkgTzsgsfDlRQRgYscZ5p1csp", "CRS05851.JPG", mq("Vishwamitra"), (6000, 3376),
-                      "Two actors with swords among the cast, before a painted backdrop of houses and mountains",
-                      "Swords drawn, the village behind", (0.5, 0.4), "xl"),
+        "lead": photo("vasistha25-bear", "1Pjpm8K-Fr9EXp_aZfsel388txHYRu8yT", "DSC05258.JPG", mq("Abarna"), L,
+                      "An actor in a bear costume, arms raised, among painted jungle children before a ruined temple set",
+                      "The bear, and the jungle around him", (0.45, 0.4), "xl"),
         "gallery": [
-            photo("vishwamitra-make-up", "1akbrCz-DdM2jioCvYKWRTVtep62kFLog", "CRS05380.JPG", mq("Vishwamitra"), (6000, 3376),
-                  "Backstage: several students painting one actor's face and chest",
-                  "Backstage, in make-up", (0.5, 0.45)),
-            photo("vishwamitra-backdrop", "1D2HGcVJGPBPn060OjAcPHeQ-Xx7jmi7h", "IMG_1194.JPG", mq("Vishwamitra") + " / Behind The Scenes", (6000, 4000),
-                  "Students kneeling on a large cloth outdoors, painting it in sweeps of turquoise",
-                  "Painting a backdrop", (0.45, 0.55)),
-            photo("vishwamitra-face-paint", "1LqJLsQpie_EQxjkMxhpU8T0_yYkPnfDB", "CRS05384.JPG", mq("Vishwamitra"), (6000, 3376),
-                  "A smiling actor in white and gold face paint",
-                  "Face paint, close up", (0.5, 0.4)),
-            photo("vishwamitra-portrait", "11Ocy_OMSYExoU1v_DQ4meatBEs9UThXM", "CRS05930.JPG", mq("Vishwamitra") + " / Behind The Scenes", (3376, 6000),
-                  "A cast member with white face paint and dark eyeliner, looking to one side",
-                  "Before going on", (0.5, 0.35)),
-            photo("vishwamitra-curtain", "1LGzNY4sBp5QCdPr5PZmwq438zCb-hBUi", "IMG_8768.JPG", mq("Vishwamitra"), (2400, 1344),
-                  "The whole cast in a line, hands raised, before the painted backdrop of houses and mountains",
-                  "The whole company, hands raised", (0.5, 0.6)),
-            photo("vishwamitra-seated", "1Bw0pJa8vegEPHMLDBsyxAP_C1Lrv2xjM", "CRS05395.JPG", mq("Vishwamitra"), (6000, 3376),
-                  "An actor seated on a draped block, arms spread wide in the dark",
-                  "Arms spread, in the dark", (0.5, 0.45)),
-            photo("vishwamitra-gold", "1BeFS6DBIRQVXQSPgmBDQnVnWkOSIoCRH", "CRS05406.JPG", mq("Vishwamitra"), (6000, 3376),
-                  "An actor in gold body paint raises a sword, a figure in black standing behind",
-                  "Gold paint, sword raised", (0.6, 0.45)),
-            photo("vishwamitra-bed", "124AsQewVSKToFzys39Uiow9VO8ICNAjI", "CRS05482.JPG", mq("Vishwamitra"), (6000, 3376),
-                  "Two actors sitting on the edge of a bed in a room set",
-                  "A quieter scene", (0.6, 0.5)),
-            photo("vishwamitra-armour", "1hZRdwUhMVf2eIoqEPBuqoxAfTip2w_sc", "CRS05541.JPG", mq("Vishwamitra"), (6000, 3376),
-                  "A figure in black armour in a doorway lit blue and white, another actor watching",
-                  "The armoured figure", (0.6, 0.45)),
-            photo("vishwamitra-aisle", "1VJL_tD1oMmDTghj9VX8iRMpxiq430HbF", "CRS05613.JPG", mq("Vishwamitra"), (6000, 3376),
-                  "An actor with a sword walks the aisle between rows of seated students",
-                  "Down the aisle", (0.45, 0.5)),
-            photo("vishwamitra-close", "1EDyRcbcsox--86d4hoOIbODxZAt20ymd", "CRS05682.JPG", mq("Vishwamitra"), (6000, 3376),
-                  "An actor in a white shirt, arms held wide, close to the camera",
-                  "Close enough to touch", (0.55, 0.4)),
-            photo("vishwamitra-steps", "1Kw7H92NgOlShWcmvCdAagoRfldI2WFG8", "CRS05761.JPG", mq("Vishwamitra"), (6000, 3376),
-                  "A figure in dark costume crouches on draped steps",
-                  "On the steps", (0.55, 0.5)),
-            photo("vishwamitra-beam", "1S2_z-gbhHjqAineYBD1mZFCPmMlp6BF0", "IMG_8771.JPG", mq("Vishwamitra"), (2400, 1344),
-                  "An actor lit by a single beam of light, students seated in the dark around",
-                  "One beam of light", (0.55, 0.5)),
-            photo("vishwamitra-banner", "1aSLrr16aAYzm97171AFgpop2JEkcFHjz", "IMG_8834.JPG", mq("Vishwamitra"), (2400, 1344),
-                  "The company cheering under a banner reading The Imperium",
-                  "Under the banner", (0.5, 0.55)),
+            photo("vasistha25-tiger", "1lUh8nIbO2ALZg9FpM89I-SYgFXwQAb2m", "DSC05330.JPG", mq("Abarna"), L,
+                  "An actor in tiger body paint under blue light",
+                  "The tiger", (0.45, 0.4)),
+            photo("vasistha25-cradle", "16a3fYTcSJVigANZHFCLY_MhkXyGx0Xst", "DSC05101.JPG", mq("Abarna"), L,
+                  "A figure in dark body paint cradling a bundle in red cloth before a blue forest",
+                  "In the blue forest", (0.4, 0.5)),
+            photo("vasistha25-wolves", "1ClAn-X1SLn7s19CoQKB-p7VAeWmylYT_", "DSC05136.JPG", mq("Abarna"), L,
+                  "Three actors made up as wolves, crouching in green light",
+                  "The wolves", (0.5, 0.4)),
+            photo("vasistha25-roar", "1PFsd4aGCsifDbjUAIWsG9k5Z7B-lm07g", "DSC05152.JPG", mq("Abarna"), L,
+                  "An actor in tiger body paint roaring, head thrown back",
+                  "The roar", (0.55, 0.35)),
+            photo("vasistha25-violet", "1TpF5ACdBq2jxfWvZ1t9f-zrrr4OhV8R0", "DSC05189.JPG", mq("Abarna"), L,
+                  "A performer in purple with glowing patterns, arms held out under violet light",
+                  "Under violet light", (0.5, 0.4)),
+            photo("vasistha25-sunbeams", "1BvcRJ8gxgu059eSfbRcS-UKeu--ugk5v", "DSC05239.JPG", mq("Abarna"), L,
+                  "A boy and the actor in the bear costume talking in shafts of light through a forest",
+                  "In the sunbeams", (0.5, 0.45)),
+            photo("vasistha25-torch", "1_sllSau0k-GEEOUemXCB4Eq8f0BYPN3r", "DSC05293.JPG", mq("Abarna"), L,
+                  "A performer in black holding up a flaming torch prop before the temple set",
+                  "The torch", (0.5, 0.45)),
+            photo("vasistha25-gathered", "16BREGbEch8hM16APbBDftClOmc2pKi0T", "DSC05374.JPG", mq("Abarna"), L,
+                  "The cast gathered around a boy lying on the stage",
+                  "Gathered around him", (0.5, 0.55)),
+            photo("vasistha25-silhouettes", "1CL4xXBcyqnHeNrzOa1rZGclU9IdiKw2H", "DSC05394.JPG", mq("Abarna"), L,
+                  "Three figures in silhouette holding hands before bare trees",
+                  "In silhouette", (0.5, 0.5)),
+            photo("vasistha25-banner", "1BSt1MXccnJARH7aZRrlrvirrsAmhTfIL", "IMG_7550.JPG", mq("Smaran/Vasistha"), C,
+                  "A painted banner of jungle leaves reading Vantara along the front of the stage",
+                  "The banner", (0.5, 0.5)),
+            photo("vasistha25-clearing", "1R67ZnnGg5xodiGRdmBvK7j-1DglY-sQF", "IMG_7586.JPG", mq("Smaran/Vasistha"), C,
+                  "The actor in the bear costume and a boy in a forest clearing lit by shafts of light",
+                  "The clearing", (0.5, 0.55)),
+            photo("vasistha25-tree", "1RzaMCEg9h_AlNxMTDg11_u036cGSxE2D", "IMG_7612.JPG", mq("Smaran/Vasistha"), C,
+                  "Actors in costume and body paint beside a glowing green tree",
+                  "The glowing tree", (0.5, 0.45)),
+            photo("vasistha25-fire", "1aU8BJGMeFQQzSztkhe3G3t5mWG9nZN5y", "IMG_7619.JPG", mq("Smaran/Vasistha"), C,
+                  "Dancers in red before a projected forest fire",
+                  "The forest on fire", (0.5, 0.55)),
+            photo("vasistha25-company", "1GnkQqeefjTuGMT6SMA4lFitzxu-rGYb5", "IMG_7645.JPG", mq("Smaran/Vasistha"), C,
+                  "The company after the show, still in face paint and costume",
+                  "The company", (0.5, 0.5)),
         ],
         "more": [
-            {"id": "G5C-ZwOjFfc", "title": "El Diablo — Trailer", "note": "Vishwamitra Productions · uploaded January 2026", "length": "1:31"},
+            {"id": "T0EEKg1t92g", "title": "Incursion", "note": "Masquerade 2024 · the production", "length": "63:50"},
+            {"id": "mcS44liPzw8", "title": "Incursion — Trailer", "note": "Masquerade 2024", "length": "2:06"},
+            {"id": "irgJPObYt6Q", "title": "The Anarchist — Trailer", "note": "Masquerade 2022 · with Vishwamitra House", "length": "1:38"},
+            {"id": "hdKRmW4mnIk", "title": "Masquerade Trailer", "note": "2018", "length": "1:19"},
+            {"id": "y1Lr7ViWMcE", "title": "Masquerade Trailer", "note": "2017", "length": "1:39"},
+            {"id": "fVA42gm00PY", "title": "Masquerade Trailer", "note": "2016", "length": "1:30"},
+            {"id": "7Boq4RjnQ30", "title": "Zangoora — Trailer", "note": "2015", "length": "2:17"},
+            {"id": "SsI4Tm5PP8Q", "title": "Masquerade Trailer", "note": "2013", "length": "2:47"},
+        ],
+    },
+    {
+        "id": "vishwamitra", "name": "Vishwamitra", "numeral": "III",
+        "title": "El Diablo", "year": 2025, "date": "25 November",
+        "drive_folder": "54. Masquerade / Smaran/Vishwamitra, Abarna (25 November)",
+        "recording": None,
+        "trailers": [{"id": "G5C-ZwOjFfc", "length": "1:31", "label": "Trailer",
+                      "title": "El Diablo | Vishwamitra Productions | Trailer"}],
+        "card": "vishwamitra25-green",
+        "layout": [
+            ("feature", ["vishwamitra25-cobwebs", "vishwamitra25-flowers", "vishwamitra25-stick"]),
+            ("full", ["vishwamitra25-courtyard"]),
+            ("trio", ["vishwamitra25-leaves", "vishwamitra25-guitar", "vishwamitra25-plates"]),
+            ("duo", ["vishwamitra25-held", "vishwamitra25-rope"]),
+            ("duo", ["vishwamitra25-dance", "vishwamitra25-orange"]),
+            ("duo", ["vishwamitra25-waistcoat", "vishwamitra25-face-to-face"]),
+        ],
+        "lead": photo("vishwamitra25-skull", "1EMjWvKzB0VwwOQrbFzp-s9WtiqN0vIzt", "DSC05629.JPG", mq("Abarna"), L,
+                      "An actor in skull face paint with red-painted hands, arms spread, before a wooden wall hung with shields",
+                      "Skull paint, arms spread", (0.45, 0.4), "xl"),
+        "gallery": [
+            photo("vishwamitra25-green", "1zapIaZ5yqGXGQI3I48WQcgK25VFZrtug", "DSC05454.JPG", mq("Abarna"), L,
+                  "A performer lit green beside a painted skeleton figure",
+                  "Green light and a painted figure", (0.35, 0.4)),
+            photo("vishwamitra25-flowers", "1gFIT20gdQYmBY3kl4XIPpavwj68S8Syp", "DSC05434.JPG", mq("Abarna"), L,
+                  "Two performers side by side, one with flowers in her hair",
+                  "Flowers in her hair", (0.5, 0.4)),
+            photo("vishwamitra25-stick", "15uN4dzQ96znJaBNEZawH2Eks_Mb-9BFQ", "DSC05463.JPG", mq("Abarna"), L,
+                  "An actor made up with grey hair, leaning on a stick in the dark",
+                  "Grey hair and a walking stick", (0.4, 0.4)),
+            photo("vishwamitra25-dance", "1lhP1BwKgswfj6A2fMTSkai9Lt9UV3CqO", "DSC05486.JPG", mq("Abarna"), L,
+                  "A performer in a satin dress dancing, one arm raised",
+                  "Mid-dance", (0.55, 0.4)),
+            photo("vishwamitra25-cobwebs", "1RacD-rV9WRMQGBxR-IyjKTGrPnlQMBb4", "DSC05514.JPG", mq("Abarna"), L,
+                  "An actor in skull face paint in a green set strung with cobwebs",
+                  "The cobweb set", (0.4, 0.45)),
+            photo("vishwamitra25-courtyard", "1_OhtHaL_JlnmusFxmU9gPViUkwlyRrVg", "IMG_7665.JPG", mq("Smaran/Vishwamitra"), C,
+                  "The company across a blue courtyard set",
+                  "The company in the courtyard", (0.5, 0.6)),
+            photo("vishwamitra25-leaves", "1dPr_zn27J5kzkV6Y9qr8ws7k4INpZgYe", "DSC05560.JPG", mq("Abarna"), L,
+                  "Two performers among giant painted leaves, one with flowers in her hair",
+                  "Among the leaves", (0.4, 0.4)),
+            photo("vishwamitra25-guitar", "1irWL1c8Fj36XdOTScQeWj6W-MAqTx_Am", "DSC05568.JPG", mq("Abarna"), L,
+                  "A boy playing a guitar at a stall beneath a hand-painted sign",
+                  "A guitar at the stall", (0.45, 0.5)),
+            photo("vishwamitra25-plates", "1BNZMowkYes3iDDRpqYiwzGYhNCKpeiPK", "DSC05571.JPG", mq("Abarna"), L,
+                  "One actor climbing onto another's back beside a wall of hanging plates",
+                  "The wall of plates", (0.45, 0.45)),
+            photo("vishwamitra25-held", "1EbyatY_X1iLbRP1kaBmQlfIgoxCCDts3", "DSC05636.JPG", mq("Abarna"), L,
+                  "An actor holding another, in skull face paint, from behind",
+                  "Held from behind", (0.5, 0.45)),
+            photo("vishwamitra25-rope", "1loGNUqAQ59fDmPVlpwkCySQGRoBy0mPo", "DSC05667.JPG", mq("Abarna"), L,
+                  "An actor tied with pink rope before a blue cavern backdrop",
+                  "Tied in the cavern", (0.5, 0.55)),
+            photo("vishwamitra25-orange", "1T32puOYYkx0mCkMCIcJlKRL26xuVf5Lh", "DSC05682.JPG", mq("Abarna"), L,
+                  "A performer in an orange satin dress, one hand on her hip",
+                  "In orange", (0.55, 0.4)),
+            photo("vishwamitra25-waistcoat", "1oa1-zBxUsGZuFq9jW3mgLR1SB8kwyKKs", "DSC05693.JPG", mq("Abarna"), L,
+                  "An actor in a purple waistcoat with arms spread",
+                  "The purple waistcoat", (0.5, 0.4)),
+            photo("vishwamitra25-face-to-face", "1YM-RsTDy3KvAnmpuNWvVjtnRA17refnJ", "DSC05707.JPG", mq("Abarna"), L,
+                  "Two performers facing each other in warm light",
+                  "Face to face", (0.5, 0.45)),
+        ],
+        "more": [
+            {"id": "ZlWd-PLTHaI", "title": "The Imperium", "note": "Masquerade 2024 · the production", "length": "73:59"},
+            {"id": "2MzXLwLoszE", "title": "The Imperium — Trailer", "note": "Masquerade 2024", "length": "2:03"},
             {"id": "irgJPObYt6Q", "title": "The Anarchist — Trailer", "note": "Masquerade 2022 · with Vasistha House", "length": "1:38"},
             {"id": "TBc2QiQpxgE", "title": "Masquerade Trailer", "note": "2018", "length": "2:14"},
             {"id": "YtkRYZAH6mY", "title": "Masquerade Trailer", "note": "2017", "length": "2:26"},
@@ -333,70 +361,70 @@ HOUSES = [
     },
     {
         "id": "vyasa", "name": "Vyasa", "numeral": "IV",
-        "title": "Iridescente", "year": 2024,
-        "drive_folder": "Masquerade 2024 / Vyasa",
-        "recording": {"id": "QB5y9Y4h-k0", "length": "68:00",
-                      "title": "Iridescente | CIRS - Vyasa House Masquerade - 2024"},
-        "trailer": {"id": "XgO-X6jokU0", "length": "2:01"},
-        "card": "vyasa-turn",
+        "title": "Ivysherin", "year": 2025, "date": "26 November",
+        "drive_folder": "54. Masquerade / Radha, Abarna (26 November)",
+        "recording": None,
+        "trailers": [{"id": "khzY2dwtnrE", "length": "2:10", "label": "Trailer",
+                      "title": "Ivysherin | Vyasa Productions | Trailer"}],
+        "card": "vyasa25-staff",
         "layout": [
-            ("feature", ["vyasa-court", "vyasa-green-mask", "vyasa-gold-gown"]),
-            ("full", ["vyasa-tea-table"]),
-            ("trio", ["vyasa-lunge", "vyasa-crouch", "vyasa-staff"]),
-            ("duo", ["vyasa-kick", "vyasa-sashes"]),
-            ("full", ["vyasa-banner"]),
-            ("duo", ["vyasa-top-hat", "vyasa-kneel"]),
-            ("full", ["vyasa-company"]),
+            ("feature", ["vyasa25-wanted", "vyasa25-make-up", "vyasa25-violin"]),
+            ("full", ["vyasa25-ensemble"]),
+            ("trio", ["vyasa25-bunting", "vyasa25-leather", "vyasa25-bass"]),
+            ("duo", ["vyasa25-porch", "vyasa25-fence"]),
+            ("duo", ["vyasa25-blue", "vyasa25-fallen"]),
+            ("duo", ["vyasa25-lifted", "vyasa25-red-coat"]),
         ],
-        "lead": photo("vyasa-throne", "1VbaEz4GPC8CncpssJsko-US2DpwkLZaW", "CRS07138.JPG", mq("Vyasa"), (6000, 3376),
-                      "A crowned figure on a throne beneath a lit heart, holding a white orb",
-                      "The heart throne", (0.5, 0.45), "xl"),
+        "lead": photo("vyasa25-circus", "1xBKyqOODP5oJG0UfHDrmIXBAHxKdKKBO", "DSC07298.JPG", mq("Radha"), L,
+                      "The company in a line before red-and-white striped curtains, beneath a sign reading Circus",
+                      "Under the circus sign", (0.5, 0.55), "xl"),
         "gallery": [
-            photo("vyasa-banner", "1Lody4uNEEeaGiqmDagNwPlTOrJvKEac_", "CRS07019.JPG", mq("Vyasa"), (6000, 3376),
-                  "A hand-painted banner reading Iridescente above the stage",
-                  "The banner", (0.5, 0.35)),
-            photo("vyasa-green-mask", "14INMUv2FoN-V2-PsIDnFjJ7NmW2pQD9d", "CRS07014.JPG", mq("Vyasa"), (6000, 3376),
-                  "A cast member in green spotted face paint and yellow spectacles",
-                  "Green paint, yellow spectacles", (0.4, 0.45)),
-            photo("vyasa-gold-gown", "1jN2_yoBQZSjzz6dS98A2wvcQebobXYB0", "CRS07027.JPG", mq("Vyasa"), (6000, 3376),
-                  "A figure in a gold gown walks through the seated audience in blue light",
-                  "Through the audience", (0.45, 0.45)),
-            photo("vyasa-court", "1vBL9eiAttvIYPGfIEBUFjVF09bTixjyK", "CRS07060.JPG", mq("Vyasa"), (6000, 3376),
-                  "A figure in a green jacket and a crowned figure with a staff before the heart set",
-                  "At the heart set", (0.45, 0.45)),
-            photo("vyasa-tea-table", "1-RaX4g915bL7Tz6yFyKnr6Sh5NTImWbL", "CRS07344.JPG", mq("Vyasa"), (6000, 3376),
-                  "Actors crowded around a tea table beneath balloons and hanging lights",
-                  "Around the tea table", (0.5, 0.5)),
-            photo("vyasa-lunge", "1Pvr_6kHU-l-KMm95qSwoUQr_axKuLoJl", "CRS07193.JPG", mq("Vyasa"), (6000, 3376),
-                  "A figure in patterned body paint lunges low before the crowned figure holding an orb",
-                  "The lunge", (0.4, 0.55)),
-            photo("vyasa-kick", "17YdBHLao-FXBxUSRC_0IlEOwR6ARwRyb", "CRS07359.JPG", mq("Vyasa"), (6000, 3376),
-                  "A dancer in white kicks forward in front of the ensemble",
-                  "The ensemble dances", (0.5, 0.5)),
-            photo("vyasa-turn", "1DZNAszxdfrZkncsgeXfHIG-Nqu1KRav9", "DSC00159.JPG", mq("Vyasa"), (6000, 4000),
-                  "A performer in a white and gold dress, mid-turn, arms out",
-                  "Mid-turn", (0.5, 0.4)),
-            photo("vyasa-sashes", "1tHUf2_UjUMzQTDsVreYF5J8DdNfSpPR9", "DSC00172.JPG", mq("Vyasa"), (6000, 4000),
-                  "Dancers in black with red sashes, hands raised",
-                  "Black and red", (0.45, 0.45)),
-            photo("vyasa-top-hat", "18yENMxRARfKyHg3I00s8LEny-6yKYKW5", "DSC00197.JPG", mq("Vyasa"), (6000, 4000),
-                  "A figure in a tall hat and polka-dot sleeves beside a figure in an orange fur coat",
-                  "A tall hat and an orange coat", (0.5, 0.4)),
-            photo("vyasa-crouch", "1qt6R9cl5n9TTxKmqbtBMZ-Wjlr337Xm6", "DSC00293.JPG", mq("Vyasa"), (6000, 4000),
-                  "A figure in patterned body paint crouches low against red drapes",
-                  "Against the red drapes", (0.5, 0.5)),
-            photo("vyasa-kneel", "1w2M197oXvugnowk0_8bqVZDeTDlcOOvx", "DSC00350.JPG", mq("Vyasa"), (6000, 4000),
-                  "Three actors kneel close together in pink light",
-                  "Three together", (0.5, 0.55)),
-            photo("vyasa-staff", "1syL-_ws1PpY5iN6XbnQENpwrzuikHfBV", "DSC00381.JPG", mq("Vyasa"), (6000, 4000),
-                  "A figure in dark face paint raises both arms, holding a gilded staff",
-                  "Both arms raised", (0.55, 0.4)),
-            photo("vyasa-company", "1QtliRjQrRnWIECy89SxbecwsaaUW0l4S", "IMG_9423.JPG", mq("Vyasa"), (2400, 1344),
-                  "The company crowded together in front of the heart set",
-                  "The company", (0.5, 0.55)),
+            photo("vyasa25-staff", "1BGDQuWHukC5Jt6DaVvcWTMhLs3mC1rIk", "DSC05764.JPG", mq("Abarna"), L,
+                  "A figure in a shaggy cloak holding a skull-topped staff, lit green and gold",
+                  "The skull-topped staff", (0.55, 0.4)),
+            photo("vyasa25-make-up", "191l46oVN9KQAeBKdIEs-YgfzbYb7mSQ3", "DSC05751.JPG", mq("Abarna"), L,
+                  "Backstage: a student painting cracks onto a cast member's face",
+                  "Backstage, in make-up", (0.5, 0.4)),
+            photo("vyasa25-violin", "10TsjuKjPlrbC8dLQK58qHtY2u7Dnw0_B", "DSC05784.JPG", mq("Abarna"), L,
+                  "An actor playing a violin before a giant playing card",
+                  "A violin and a playing card", (0.55, 0.45)),
+            photo("vyasa25-bunting", "1ZYrjqNPpNGhJbXYFQWzqKfJp7Rfg1R50", "DSC05815.JPG", mq("Abarna"), L,
+                  "An actor in a waistcoat with a fist raised beside a younger actor in a bow tie, bunting above",
+                  "Beneath the bunting", (0.4, 0.45)),
+            photo("vyasa25-fence", "1gAWZaQTzZxZwgUzCW86fzIHTDJnxZ_dB", "DSC05840.JPG", mq("Abarna"), L,
+                  "Two boys talking on a lawn before a wooden fence",
+                  "By the fence", (0.5, 0.5)),
+            photo("vyasa25-wanted", "1pMBnUAWYGCp81xvGNusl1wChOTTpqIJ-", "DSC05855.JPG", mq("Abarna"), L,
+                  "An actor in a fringed waistcoat seated before a board reading Wanted",
+                  "The Wanted board", (0.4, 0.5)),
+            photo("vyasa25-bass", "1qsuROEtXV2bXP2M-56H1MEMvvj6FnUSQ", "DSC05971.JPG", mq("Abarna"), L,
+                  "An actor with a bass guitar between two others before striped curtains",
+                  "The bass guitar", (0.5, 0.45)),
+            photo("vyasa25-porch", "1_kBytpkHdLtk5fcvNpydmJEeizoymkIL", "DSC05993.JPG", mq("Abarna"), L,
+                  "An actor holding a violin and a boy on a porch set at night",
+                  "On the porch", (0.5, 0.45)),
+            photo("vyasa25-lifted", "10N-ICxMdN14MYSjGkrijY-cdLEuGN8mA", "DSC06047.JPG", mq("Abarna"), L,
+                  "A performer in clown face paint lifted high by others",
+                  "Lifted high", (0.5, 0.4)),
+            photo("vyasa25-blue", "1wRqAcmtgn0mMtiT5N6mGhsWeHlufBCWY", "DSC07303.JPG", mq("Radha"), L,
+                  "Two actors clasped together under blue light before striped curtains",
+                  "Under blue light", (0.45, 0.45)),
+            photo("vyasa25-fallen", "19H6OW-i7byaQdkmvylSBaL96oLwRocRx", "DSC07318.JPG", mq("Radha"), L,
+                  "An actor kneeling over another who lies on the floor, before striped curtains",
+                  "Kneeling over him", (0.5, 0.55)),
+            photo("vyasa25-red-coat", "1ZxyZ7eOxI5gMetqeA7lYr3MTc10DKFxX", "DSC07324.JPG", mq("Radha"), L,
+                  "An actor in a red coat, arm raised, among dancers under purple light",
+                  "The red coat", (0.4, 0.45)),
+            photo("vyasa25-ensemble", "1gYYDz1l0cezYfZWEhuIF5chx1Eiu5bes", "DSC07325.JPG", mq("Radha"), L,
+                  "The ensemble dancing under blue light around an actor raising a staff",
+                  "The ensemble", (0.5, 0.5)),
+            photo("vyasa25-leather", "1w9p-14OX0gfCPRRG_UJ_l9aLgWullOjL", "DSC05933.JPG", mq("Abarna"), L,
+                  "A performer in a leather jacket, arms spread, before striped curtains",
+                  "Arms spread before the curtains", (0.5, 0.4)),
         ],
         "more": [
-            {"id": "khzY2dwtnrE", "title": "Ivysherin — Trailer", "note": "Vyasa Productions · uploaded January 2026", "length": "2:10"},
+            {"id": "QB5y9Y4h-k0", "title": "Iridescente", "note": "Masquerade 2024 · the production", "length": "68:00"},
+            {"id": "XgO-X6jokU0", "title": "Iridescente — Trailer", "note": "Masquerade 2024", "length": "2:01"},
             {"id": "P4GGqjywNhQ", "title": "Inscenare — Trailer", "note": "Masquerade 2022 · with Valmiki House", "length": "1:38"},
             {"id": "rfNsT_1eSAk", "title": "Masquerade Trailer", "note": "2018", "length": "2:13"},
             {"id": "4V3SA84lv8U", "title": "Imperium — Trailer", "note": "2017", "length": "2:15"},
@@ -500,6 +528,8 @@ def img(p, sizes, eager=False, cls=""):
     srcset = ", ".join(f"{file(p, x)} {x}w" for x in ws)
     fx, fy = p["focus"]
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+    if p.get("fit") == "contain":
+        cls = (cls + " is-whole").strip()
     klass = f' class="{cls}"' if cls else ""
     return (f'<img{klass} src="{file(p, ws[0])}" srcset="{srcset}" sizes="{sizes}" '
             f'width="{w}" height="{h}" alt="{esc(p["alt"])}" {load} decoding="async" '
@@ -614,7 +644,7 @@ def anand_utsav_html():
     <p class="th-au__lede">Anand Utsav is the school&rsquo;s annual celebration, when parents come to campus &mdash; and its evening programme is the theatrical highlight of the year, for guests and students alike. The entire student body joins forces to put up a show to be remembered, with the concepts, the scripts and the acting done almost completely by the students, on the stage and off it.</p>
     <dl class="th-facts">
       <div><dt>Evening</dt><dd>{au["date"]}, the second day</dd></div>
-      <div><dt>Stage</dt><dd>The main pandal, Arjuna Athletic Ground</dd></div>
+      <div><dt>Production</dt><dd><em>{esc(au["title"])}</em></dd></div>
       <div><dt>On stage</dt><dd>The whole school</dd></div>
     </dl>
     <p class="th-watch"><a class="th-watch__link" href="{watch(rec["id"])}"{EXTERNAL}><span class="th-watch__play" aria-hidden="true"></span>Watch the production <span class="th-watch__len">{rec["length"]}</span>{NEW_TAB}</a></p>
@@ -676,10 +706,30 @@ def _more_list(h):
         </details>'''
 
 
+def _watch_bar(h):
+    """The production when the school has published it; otherwise its
+    trailers, and a plain note that the full recording is not online."""
+    rec, trailers = h.get("recording"), h.get("trailers", [])
+    parts = []
+    if rec:
+        parts.append(f'<a class="th-watch__link" href="{watch(rec["id"])}"{EXTERNAL}><span class="th-watch__play" aria-hidden="true"></span>'
+                     f'Watch the production <span class="th-watch__len">{rec["length"]}</span>{NEW_TAB}</a>')
+    for j, t in enumerate(trailers):
+        if not rec and j == 0:
+            parts.append(f'<a class="th-watch__link" href="{watch(t["id"])}"{EXTERNAL}><span class="th-watch__play" aria-hidden="true"></span>'
+                         f'Watch the trailer <span class="th-watch__len">{t["length"]}</span>{NEW_TAB}</a>')
+        else:
+            parts.append(f'<a class="th-watch__alt" href="{watch(t["id"])}"{EXTERNAL}>{t["label"]} <span class="th-watch__len">{t["length"]}</span>{NEW_TAB}</a>')
+    parts.append(f'<button type="button" class="th-watch__alt th-house__view" data-th-view="{h["id"]}" hidden>Open the photographs</button>')
+    note = ("" if rec else
+            '\n        <p class="th-house__note">The full recording of this production is not on the school&rsquo;s channel.</p>')
+    return '<p class="th-watch th-watch--dark">' + "\n          ".join(parts) + "</p>" + note
+
+
 def house_html(h, i):
     photos = house_photos(h)
     lead = photos[0]
-    rec, trailer = h["recording"], h["trailer"]
+    watch_bar = _watch_bar(h)
     nxt = HOUSES[i + 1] if i + 1 < len(HOUSES) else None
     rows, index = [], 2   # 0 is the lead, 1 is the programme card
     by = {p["name"]: p for p in h["gallery"]}
@@ -700,16 +750,14 @@ def house_html(h, i):
         <figcaption class="th-house__label">
           <span class="th-house__numeral" aria-hidden="true">{h["numeral"]}</span>
           <div class="th-house__labeltext">
-            <span class="th-house__kicker">{h["name"]} House &middot; Masquerade {h["year"]}</span>
+            <span class="th-house__kicker">{h["name"]} House &middot; Masquerade {h["year"]} &middot; {h["date"]}</span>
             <h3 class="th-house__play serif" id="{h["id"]}-title" tabindex="-1"><span class="sr-only">{h["name"]} House: </span><em>{esc(h["title"])}</em></h3>
             <span class="th-house__count">{house_count(h)} photographs &middot; {esc(lead["caption"])}</span>
           </div>
         </figcaption>
       </figure>
       <div class="wrap th-house__bar">
-        <p class="th-watch th-watch--dark"><a class="th-watch__link" href="{watch(rec["id"])}"{EXTERNAL}><span class="th-watch__play" aria-hidden="true"></span>Watch the production <span class="th-watch__len">{rec["length"]}</span>{NEW_TAB}</a>
-          <a class="th-watch__alt" href="{watch(trailer["id"])}"{EXTERNAL}>Trailer <span class="th-watch__len">{trailer["length"]}</span>{NEW_TAB}</a>
-          <button type="button" class="th-watch__alt th-house__view" data-th-view="{h["id"]}" hidden>Open the photographs</button></p>
+        {watch_bar}
       </div>
       <div class="wrap th-grid">
 {chr(10).join(rows)}
@@ -733,7 +781,7 @@ def masquerades_html():
             <span class="th-bill__n">{h["numeral"]}</span>
             <span class="th-bill__house serif">{h["name"]}</span>
             <span class="th-bill__play"><em>{esc(h["title"])}</em></span>
-            <span class="th-bill__meta">{h["year"]} &middot; {house_count(h)} photographs</span>
+            <span class="th-bill__meta">{h["date"]} &middot; {house_count(h)} photographs</span>
           </span>
         </a>
       </li>''')
@@ -759,7 +807,7 @@ def masquerades_html():
 
   <div class="wrap th-bill">
     <div class="th-bill__head">
-      <p class="th-bill__season">The programme &middot; Masquerade 2024, November</p>
+      <p class="th-bill__season">The programme &middot; Masquerade {HOUSES[0]["year"]}, {HOUSES[0]["date"].split()[0]}&ndash;{HOUSES[-1]["date"]}</p>
       <p class="th-bill__note">Four productions and {total_masquerade()} photographs from the school&rsquo;s archive. Choose a house, or step through every photograph in order.</p>
       <button type="button" class="th-bill__all" data-th-view="all" hidden>View all {total_masquerade()} photographs</button>
     </div>
@@ -769,7 +817,7 @@ def masquerades_html():
   </div>
 
   <div class="th-houses">
-    <nav class="th-rail" aria-label="Masquerade 2024 houses">
+    <nav class="th-rail" aria-label="Masquerade {HOUSES[0]["year"]} houses">
       <div class="th-rail__inner">
 {rail}
       </div>
