@@ -26,20 +26,32 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102-portal-intro-3">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102-portal-intro-3">
-<link rel="stylesheet" href="assets/css/pages.css?b=102-portal-intro-3">
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-portal-photo-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-portal-photo-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-portal-photo-1">
 
-<link rel="stylesheet" href="assets/css/connect.css?b=102-portal-intro-3">
-<link rel="stylesheet" href="assets/css/typography.css?b=102-portal-intro-3">
-<script>window.__portalOriginalRestoration=history.scrollRestoration;history.scrollRestoration="manual";</script>
-<link rel="stylesheet" href="assets/css/parent-portal-intro.css?b=102-portal-intro-3">
-<noscript><style>html:has(body.parent-portal.portal-intro-active),body.parent-portal.portal-intro-active{overflow:auto}body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){visibility:visible}#portalIntroEntry{display:none}body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}</style></noscript>
-<link rel="stylesheet" href="assets/css/footer.css?b=102-portal-intro-3-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=102-portal-intro-3-drawer-5">
+<link rel="stylesheet" href="assets/css/connect.css?b=102-portal-photo-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-portal-photo-1">
+<script>
+(function(){
+  if (location.hash || window.scrollY > 8 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.documentElement.classList.add("portal-motion-pending");
+  window.__cirsPortalMotionFallback = window.setTimeout(function(){
+    document.documentElement.classList.remove("portal-motion-pending");
+  }, 8500);
+  document.addEventListener("DOMContentLoaded", function(){
+    window.setTimeout(function(){
+      if (!window.__cirsPortalMotionBooted) document.documentElement.classList.remove("portal-motion-pending");
+    }, 700);
+  }, {once:true});
+})();
+</script>
+<link rel="stylesheet" href="assets/css/parent-portal-intro.css?b=102-portal-photo-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-portal-photo-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-portal-photo-1-drawer-5">
 </head>
 
-<body class="connect parent-portal portal-intro-active">
+<body class="connect parent-portal">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
@@ -293,15 +305,40 @@
   </div>
 </div>
 <main id="main">
-<section class="portal-intro" id="portal-intro" aria-label="Parent Portal opening" data-ground="#FFFFFF">
-  <img class="portal-intro__image" id="portalIntroImage" src="assets/img/parent-portal-hero.jpg"
-       width="2000" height="1334" alt="Parents and CIRS students gathered together in the school hall"
-       fetchpriority="high" decoding="async">
-  <div class="portal-intro__scrim" aria-hidden="true"></div>
-  <div class="portal-intro__content">
-    <p class="portal-intro__title">PARENT PORTAL</p>
-    <button class="portal-intro__entry" id="portalIntroEntry" type="button">Click to enter</button>
-    <noscript><a class="portal-intro__entry" href="#portal">Click to enter</a></noscript>
+<section class="portal-intro" id="portal-intro" aria-label="Parent Portal opening" data-ground="#0E0B12">
+  <div class="portal-intro__inner">
+    <p class="portal-intro__label">CIRS / Parents</p>
+    <div class="portal-intro__stage">
+      <div class="portal-intro__photo">
+        <picture class="portal-intro__picture">
+          <source media="(max-width:700px)" type="image/webp"
+                  srcset="assets/img/parent-portal/reading-mobile-560.webp 560w, assets/img/parent-portal/reading-mobile-960.webp 960w"
+                  sizes="calc(100vw - 40px)">
+          <source media="(max-width:700px)" type="image/jpeg"
+                  srcset="assets/img/parent-portal/reading-mobile-960.jpg 960w"
+                  sizes="calc(100vw - 40px)">
+          <source media="(max-width:900px) and (max-aspect-ratio:1/1)" type="image/webp"
+                  srcset="assets/img/parent-portal/reading-tablet-960.webp 960w, assets/img/parent-portal/reading-tablet-1600.webp 1600w"
+                  sizes="84vw">
+          <source type="image/webp"
+                  srcset="assets/img/parent-portal/reading-wide-1200.webp 1200w, assets/img/parent-portal/reading-wide-2000.webp 2000w, assets/img/parent-portal/reading-wide-2600.webp 2600w"
+                  sizes="(max-width:1500px) 84vw, 1320px">
+          <img class="portal-intro__image" src="assets/img/parent-portal/reading-wide-2000.jpg"
+               width="2000" height="930"
+               alt="An adult helps a child read a booklet during CIRS new student and parent orientation"
+               fetchpriority="high" decoding="async">
+        </picture>
+      </div>
+      <span class="portal-intro__line" aria-hidden="true"></span>
+      <p class="portal-intro__title"><span class="portal-intro__title-word"><span>Parent</span></span><span class="portal-intro__title-word"><span>Portal</span></span></p>
+    </div>
+    <div class="portal-intro__after">
+      <p class="portal-intro__note">Fee payment, parent login, and direct school contacts.</p>
+      <a class="portal-intro__entry" href="#portal">
+        <svg class="portal-intro__entry-border" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect x="0.5" y="0.5" width="99" height="99" pathLength="1"/></svg>
+        <span>Enter the portal</span><span class="portal-intro__entry-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+    </div>
   </div>
 </section>
 <section class="pagehead on-purple" id="top" data-ground="#1E1626">
@@ -472,12 +509,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102-portal-intro-3" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102-portal-intro-3" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102-portal-intro-3" defer></script>
-<script src="assets/js/cirs.js?b=102-portal-intro-3" defer></script>
-<script src="assets/js/pages.js?b=102-portal-intro-3" defer></script>
-<script src="assets/js/footer.js?b=102-portal-intro-3-footer-1" defer></script>
-<script src="assets/js/parent-portal-intro.js?b=102-portal-intro-3" defer></script>
+<script src="assets/vendor/gsap.min.js?b=102-portal-photo-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-portal-photo-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-portal-photo-1" defer></script>
+<script src="assets/js/cirs.js?b=102-portal-photo-1" defer></script>
+<script src="assets/js/pages.js?b=102-portal-photo-1" defer></script>
+<script src="assets/js/footer.js?b=102-portal-photo-1-footer-1" defer></script>
+<script src="assets/js/parent-portal-motion.js?b=102-portal-photo-1" defer></script>
 </body>
 </html>

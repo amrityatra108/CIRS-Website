@@ -585,7 +585,7 @@ PAGES = {
                    "fee payment and the parent login the school runs today, and the people to ask."),
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
-        "cache_suffix": "-portal-intro-3",
+        "cache_suffix": "-portal-photo-1",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
@@ -1611,15 +1611,27 @@ def build(slug, page):
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
+        # Hide the photograph and copy only when this one-time entrance can
+        # run. Without scripting or with reduced motion, the page is ready.
+        portal_motion_gate = (
+            '<script>\n(function(){\n'
+            '  if (location.hash || window.scrollY > 8 || '
+            'window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;\n'
+            '  document.documentElement.classList.add("portal-motion-pending");\n'
+            '  window.__cirsPortalMotionFallback = window.setTimeout(function(){\n'
+            '    document.documentElement.classList.remove("portal-motion-pending");\n'
+            '  }, 8500);\n'
+            '  document.addEventListener("DOMContentLoaded", function(){\n'
+            '    window.setTimeout(function(){\n'
+            '      if (!window.__cirsPortalMotionBooted) '
+            'document.documentElement.classList.remove("portal-motion-pending");\n'
+            '    }, 700);\n'
+            '  }, {once:true});\n'
+            '})();\n</script>\n'
+        )
         head = head.replace("</head>",
-            '<script>window.__portalOriginalRestoration=history.scrollRestoration;history.scrollRestoration="manual";</script>\n'
-            f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n'
-            '<noscript><style>html:has(body.parent-portal.portal-intro-active),'
-            'body.parent-portal.portal-intro-active{overflow:auto}'
-            'body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){visibility:visible}'
-            '#portalIntroEntry{display:none}'
-            'body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}'
-            '</style></noscript>\n</head>')
+            portal_motion_gate +
+            f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
     if slug in ("admissions", "school-info"):
         # Its opening is visible immediately — Admissions' video hero, School
         # Information's document sheets — so there is no curtain to hide
@@ -1649,7 +1661,7 @@ def build(slug, page):
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "film" if page.get("opening") else None,
                            slug if page.get("opening") else None,
-                           "parent-portal portal-intro-active" if slug == "parent-portal" else None,
+                           "parent-portal" if slug == "parent-portal" else None,
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
     chrome = read("tools/partials/chrome.html")
@@ -1832,7 +1844,7 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/captures-featured.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
     if slug == "parent-portal":
-        parts.append(f'<script src="assets/js/parent-portal-intro.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/parent-portal-motion.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
