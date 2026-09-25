@@ -23,6 +23,14 @@ body.artattack{
   --aa-rule:    #D9CFBF;
   --aa-rule-2:  #E6DED1;
   --aa-shadow:  0 1px 2px rgba(29,27,26,.10), 0 16px 34px -20px rgba(29,27,26,.34);
+  /* The students' own colours, sampled from the walls of work below: used
+     only as soft washes behind sections and as the chips of a marker. */
+  --aa-coral:   232, 96, 76;
+  --aa-saffron: 242, 169, 0;
+  --aa-leaf:    93, 170, 75;
+  --aa-teal:    31, 162, 166;
+  --aa-violet:  123, 91, 214;
+  --aa-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .27 0 0 0 0 .22 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background:var(--aa-ivory);
   color:var(--aa-ink);
 }
@@ -34,7 +42,12 @@ body.artattack :focus-visible{ outline:2px solid var(--gold); outline-offset:3px
 
 /* ---- Type --------------------------------------------------------------- */
 .aa-marker{ display:flex; align-items:center; gap:12px; margin:0 0 18px; }
-.aa-marker::before{ content:""; width:28px; height:1px; background:var(--gold); }
+.aa-marker::before{
+  content:""; width:40px; height:4px; border-radius:2px; flex:none;
+  background:linear-gradient(90deg,
+    rgb(var(--aa-coral)) 0 20%, rgb(var(--aa-saffron)) 0 40%, rgb(var(--aa-leaf)) 0 60%,
+    rgb(var(--aa-teal)) 0 80%, rgb(var(--aa-violet)) 0);
+}
 .aa-marker .sc{ color:var(--aa-mute); }
 .aa-h2{
   font-size:var(--fs-h2);
@@ -186,27 +199,42 @@ body.artattack .aa-sec figcaption,
 /* ============================================================
    Section 1: the artwork wall
    ============================================================ */
-.aa-wallsec{ background:var(--aa-ivory); padding-top:clamp(72px, 8vw, 128px); }
-
-/* The hang: one large work, a pair, a run of small works, another large one. */
-.aa-hang{ display:grid; gap:clamp(72px, 9vw, 150px); margin-bottom:clamp(96px, 12vw, 190px); }
-.aa-hang__row{ display:flex; flex-wrap:wrap; }
-.aa-hang__work img{ display:block; width:100%; height:auto; aspect-ratio:var(--ar); box-shadow:var(--aa-shadow); background:var(--aa-ivory-2); }
-.aa-hang__work figcaption{ margin-top:14px; }
-.aa-hang__work a{ display:block; }
-
-.aa-hang__row--lead{ justify-content:flex-start; padding-left:clamp(0px, 7vw, 110px); }
-.aa-hang__work--large{ width:min(100%, calc(var(--ar) * min(82svh, 780px))); }
-.aa-hang__row--pair{ justify-content:flex-end; align-items:flex-end; gap:clamp(28px, 5vw, 80px); }
-.aa-hang__row--pair .aa-hang__work{ width:calc(var(--ar) * clamp(300px, 36vw, 540px)); }
-.aa-hang__row--pair .aa-hang__work + .aa-hang__work{ width:calc(var(--ar) * clamp(220px, 26vw, 400px)); }
-.aa-hang__row--run{
-  align-items:flex-end; gap:28px clamp(18px, 2.2vw, 34px);
-  padding-top:28px; border-top:1px solid var(--aa-rule);
+.aa-wallsec{
+  padding-top:clamp(72px, 8vw, 128px);
+  background:
+    radial-gradient(56vw 40vw at 104% 2%, rgba(var(--aa-coral), .26), transparent 70%),
+    radial-gradient(48vw 38vw at -6% 30%, rgba(var(--aa-teal), .19), transparent 70%),
+    radial-gradient(50vw 36vw at 102% 62%, rgba(var(--aa-saffron), .22), transparent 70%),
+    radial-gradient(46vw 34vw at -4% 92%, rgba(var(--aa-violet), .16), transparent 70%),
+    var(--aa-grain), var(--aa-ivory);
 }
-.aa-hang__runhead{ flex-basis:100%; font-size:var(--fs-xs); color:var(--aa-mute); letter-spacing:.02em; }
-.aa-hang__work--small{ width:calc(var(--ar) * clamp(90px, 8.8vw, 132px)); }
-.aa-hang__row--close{ justify-content:flex-end; padding-right:clamp(0px, 9vw, 150px); }
+
+/* The hang: a salon wall. Each row fills the width, and within a row every
+   work has one height, so each is as wide as its own proportions make it:
+   nothing is cropped and nothing is left empty. A cluster beside a large
+   work is two such rows, as wide as tools/artattack.py solves for (--cp,
+   --cm, --cq) so that it stands exactly as tall as the large work. That
+   needs every caption in the hang to be one height, --cap. The grids'
+   columns are minmax(0, 1fr) so that a caption's unbroken line cannot
+   widen them past the page. */
+.aa-hang{
+  --g:clamp(12px, 1.4vw, 22px);
+  --cap:50px;
+  display:grid; grid-template-columns:minmax(0, 1fr); gap:clamp(36px, 4.4vw, 64px);
+  margin-bottom:clamp(88px, 10vw, 160px);
+}
+.aa-hang__row, .aa-hang__sub{ display:flex; gap:var(--g); align-items:flex-start; }
+.aa-hang__row > .aa-hang__work, .aa-hang__sub > .aa-hang__work{ flex:var(--ar) 1 0; min-width:0; }
+.aa-hang__row--lead > .aa-hang__work, .aa-hang__row--close > .aa-hang__work{ flex:1 1 0; }
+.aa-hang__cluster{
+  flex:0 0 calc((100% - var(--g)) * var(--cp) + var(--g) * var(--cm) - (var(--cap) + var(--g)) * var(--cq));
+  display:grid; grid-template-columns:minmax(0, 1fr); gap:var(--g); min-width:0;
+}
+.aa-hang__work{ margin:0; }
+.aa-hang__work a{ display:block; }
+.aa-hang__work img{ display:block; width:100%; height:auto; aspect-ratio:var(--ar); box-shadow:var(--aa-shadow); background:var(--aa-ivory-2); }
+.aa-hang__work figcaption{ height:calc(var(--cap) - 10px); margin-top:10px; overflow:hidden; }
+.aa-hang .aa-label > span{ display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
 /* The collection. */
 .aa-collection__bar{
@@ -260,10 +288,57 @@ body.artattack .aa-sec figcaption,
 .aa-more__btn[hidden]{ display:none; }
 
 /* ============================================================
+   The ribbons: a line of works at one height, wider than the window,
+   drifting sideways as the page passes (assets/js/artattack.js writes
+   --x). Without the script, or with reduced motion, the line scrolls
+   sideways by hand instead.
+   ============================================================ */
+.aa-ribbon{
+  --rh:clamp(150px, 16vw, 240px);
+  position:relative;
+  padding-block:clamp(44px, 5vw, 76px);
+  overflow-x:auto; overflow-y:hidden;
+  scrollbar-width:thin;
+}
+.aa-ribbon--warm{
+  background:
+    var(--aa-grain),
+    linear-gradient(100deg, #FBE1C4 0%, #F8D3CB 42%, #EFD9EE 78%, #E4DDF6 100%);
+}
+.aa-ribbon--cool{
+  background:
+    var(--aa-grain),
+    linear-gradient(100deg, #D6EEE6 0%, #DDE5F7 45%, #F3E0F0 75%, #FBE6C8 100%);
+}
+.aa-ribbon.is-drifting{ overflow:hidden; }
+.aa-ribbon__track{
+  display:flex; align-items:flex-start; gap:clamp(16px, 2vw, 30px);
+  width:max-content; padding-inline:var(--gut);
+}
+.aa-ribbon.is-drifting .aa-ribbon__track{ transform:translate3d(var(--x, 0px), 0, 0); will-change:transform; }
+.aa-ribbon__work{ margin:0; width:calc(var(--ar) * var(--rh)); flex:none; }
+.aa-ribbon__work:nth-child(even){ margin-top:clamp(18px, 2.4vw, 36px); }
+.aa-ribbon__work a{ display:block; }
+.aa-ribbon__work img{
+  display:block; width:100%; height:auto; aspect-ratio:var(--ar);
+  box-shadow:0 1px 2px rgba(29,27,26,.12), 0 18px 30px -18px rgba(29,27,26,.45);
+  background:rgba(255,255,255,.4);
+}
+.aa-ribbon__work figcaption{ margin-top:10px; }
+.aa-ribbon .aa-label > span{ display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.aa-ribbon .aa-label__meta{ color:var(--aa-soft); }
+
+/* ============================================================
    Section 2: inside the art room — a different rhythm from the wall:
    a large photograph with a short paragraph, then details.
    ============================================================ */
-.aa-studio{ background:var(--aa-paper); }
+.aa-studio{
+  background:
+    radial-gradient(50vw 36vw at -4% 4%, rgba(var(--aa-saffron), .22), transparent 70%),
+    radial-gradient(46vw 40vw at 104% 46%, rgba(var(--aa-violet), .16), transparent 70%),
+    radial-gradient(44vw 34vw at 0% 96%, rgba(var(--aa-leaf), .19), transparent 70%),
+    var(--aa-grain), var(--aa-paper);
+}
 .aa-chapter{
   display:grid; grid-template-columns:repeat(12, minmax(0, 1fr));
   gap:28px clamp(20px, 3vw, 44px); align-items:end;
@@ -301,7 +376,12 @@ body.artattack .aa-sec figcaption,
    Wall Magazines — the houses' own work, in words only until the
    school supplies photographs of the magazines themselves.
    ============================================================ */
-.aa-houses{ background:var(--aa-ivory); }
+.aa-houses{
+  background:
+    radial-gradient(44vw 30vw at 100% 100%, rgba(var(--aa-teal), .22), transparent 70%),
+    radial-gradient(36vw 26vw at 0% 0%, rgba(var(--aa-coral), .19), transparent 70%),
+    var(--aa-grain), var(--aa-ivory);
+}
 .aa-houses__grid{
   display:grid; grid-template-columns:minmax(0, 5fr) minmax(0, 6fr);
   gap:40px clamp(32px, 6vw, 96px); align-items:end;
@@ -321,7 +401,11 @@ body.artattack .aa-sec figcaption,
 /* ============================================================
    Section 3: made for the stage — a short bridge to Theatre.
    ============================================================ */
-.aa-stage{ background:var(--aa-ivory-2); }
+.aa-stage{
+  background:
+    radial-gradient(46vw 34vw at 100% 0%, rgba(var(--aa-coral), .22), transparent 70%),
+    var(--aa-grain), var(--aa-ivory-2);
+}
 .aa-stage__grid{
   display:grid; grid-template-columns:minmax(0, 7fr) minmax(0, 5fr);
   gap:32px clamp(32px, 5vw, 80px); align-items:center;
@@ -338,7 +422,12 @@ body.artattack .aa-sec figcaption,
 /* ============================================================
    Section 4: work on display — an editorial exhibition layout.
    ============================================================ */
-.aa-display{ background:var(--aa-ivory); }
+.aa-display{
+  background:
+    radial-gradient(48vw 34vw at 104% 8%, rgba(var(--aa-leaf), .21), transparent 70%),
+    radial-gradient(50vw 38vw at -6% 88%, rgba(var(--aa-saffron), .22), transparent 70%),
+    var(--aa-grain), var(--aa-ivory);
+}
 .aa-display__grid{
   display:grid; grid-template-columns:repeat(12, minmax(0, 1fr));
   gap:clamp(32px, 4vw, 56px) clamp(16px, 2.2vw, 32px); align-items:end;
@@ -352,7 +441,13 @@ body.artattack .aa-sec figcaption,
 /* ============================================================
    Closing
    ============================================================ */
-.aa-close{ background:var(--aa-paper); padding-bottom:clamp(96px, 12vw, 180px); }
+.aa-close{
+  padding-bottom:clamp(96px, 12vw, 180px);
+  background:
+    radial-gradient(40vw 30vw at 0% 0%, rgba(var(--aa-violet), .16), transparent 70%),
+    radial-gradient(40vw 30vw at 100% 100%, rgba(var(--aa-coral), .19), transparent 70%),
+    var(--aa-grain), var(--aa-paper);
+}
 .aa-onward{
   display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:0 clamp(20px, 3vw, 40px);
   margin-top:clamp(36px, 5vw, 64px);
@@ -441,14 +536,15 @@ body.artattack.has-lightbox{ overflow:hidden; }
   .aa-grid{ --row:128px; gap:26px 14px; }
   .aa-label{ font-size:.8rem; }
   .aa-label__meta{ font-size:.74rem; }
-  .aa-hang{ gap:64px; }
-  .aa-hang__row--lead, .aa-hang__row--close{ padding:0; justify-content:center; }
-  .aa-hang__work--large{ width:min(100%, calc(var(--ar) * 72svh)); }
-  .aa-hang__row--pair{ justify-content:center; gap:14px; flex-wrap:nowrap; align-items:flex-end; }
-  .aa-hang__row--pair .aa-hang__work,
-  .aa-hang__row--pair .aa-hang__work + .aa-hang__work{ width:auto; flex:var(--ar) 1 0; }
-  .aa-hang__row--run{ gap:24px 14px; }
-  .aa-hang__work--small{ width:calc(var(--ar) * 96px); max-width:100%; }
+  .aa-hang{ --g:10px; --cap:44px; gap:36px; }
+  .aa-hang__row{ flex-wrap:wrap; row-gap:18px; }
+  .aa-hang__row--lead > .aa-hang__work, .aa-hang__row--close > .aa-hang__work{ flex:1 1 100%; }
+  .aa-hang__row--lead > .aa-hang__work img, .aa-hang__row--close > .aa-hang__work img{
+    width:min(100%, calc(var(--ar) * 72svh)); margin-inline:auto;
+  }
+  .aa-hang__cluster{ flex:1 1 100%; }
+  .aa-hang__row--run > .aa-hang__work{ flex:calc(var(--ar) * 100) 1 calc(var(--ar) * 104px); }
+  .aa-hang .aa-label{ font-size:.74rem; }
   .aa-chapter{ grid-template-columns:1fr; gap:18px; }
   .aa-chapter > *,
   .aa-chapter--craft > *,
@@ -482,5 +578,6 @@ body.artattack.has-lightbox{ overflow:hidden; }
 
 @media (prefers-reduced-motion:reduce){
   .aa-work img, .aa-open__cue, .aa-link span{ transition:none; }
+  .aa-ribbon__track{ transform:none !important; }
   .aa-viewer__frame img.is-entering{ animation:none; }
 }
