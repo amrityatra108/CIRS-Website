@@ -1,5 +1,15 @@
 /* Curriculum: a continuous editorial route from shared study to a choice of pathways. */
 body.curriculum{ background:var(--paper); }
+body.curriculum .section:not(.on-purple) :focus-visible{ outline-color:var(--purple-ink); }
+body.curriculum .pagehead__cta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:clamp(24px,3vw,38px);
+}
+@media (max-width:640px){
+  body.curriculum .pagehead__cta .btn{ width:100%; white-space:normal; text-align:center; }
+}
 
 .curriculum .pagehead{
   min-height:100svh;
@@ -29,6 +39,55 @@ body.curriculum{ background:var(--paper); }
 .curriculum .pagehead__inner{ position:relative; z-index:1; max-width:var(--maxw); }
 .curriculum .pagehead h1{ max-width:12ch; font-size:clamp(3.2rem,6.8vw,6.4rem); line-height:.97; }
 .curriculum .pagehead .lead{ max-width:42ch; margin-top:clamp(28px,3vw,44px); font-size:clamp(1.1rem,1.55vw,1.34rem); }
+
+.curriculum-pathways{ padding-block:clamp(76px,8vw,120px); }
+.curriculum-pathways__head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);
+  column-gap:clamp(36px,6vw,92px);
+  align-items:end;
+  margin-bottom:clamp(38px,5vw,68px);
+}
+.curriculum-pathways__head .marker,
+.curriculum-pathways__head .h2{ grid-column:1; }
+.curriculum-pathways__head .h2{ max-width:16ch; }
+.curriculum-pathways__head .lead{ grid-column:2; grid-row:1 / span 2; max-width:48ch; }
+.curriculum-pathways__grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(24px,4vw,58px);
+}
+.curriculum-pathway{ min-width:0; padding-top:24px; border-top:3px solid var(--purple-deep); }
+.curriculum-pathway:last-child{ border-top-color:var(--maroon); }
+.curriculum-pathway__name{ color:var(--maroon); font-size:var(--fs-sm); font-weight:600; }
+.curriculum-pathway .h3{ margin-top:10px; min-height:2.4em; font-size:clamp(1.65rem,2.25vw,2.25rem); }
+.curriculum-pathway dl{ margin:clamp(24px,3vw,38px) 0 0; border-top:1px solid var(--rule); }
+.curriculum-pathway dl > div{
+  display:grid;
+  grid-template-columns:minmax(115px,.33fr) minmax(0,1fr);
+  gap:12px 24px;
+  padding:17px 0;
+  border-bottom:1px solid var(--rule);
+}
+.curriculum-pathway dt{ color:var(--purple); font-weight:600; }
+.curriculum-pathway dd{ margin:0; color:var(--ink-soft); max-width:42ch; }
+.curriculum-pathway__link{
+  min-height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  margin-top:20px;
+  padding:13px 18px;
+  background:var(--purple-deep);
+  color:var(--on-purple);
+  font-size:1.08rem;
+  font-weight:600;
+}
+.curriculum-pathway__link span:last-child{ color:var(--gold-lit); font-size:1.35rem; }
+.curriculum-pathway__link:hover{ background:var(--purple); }
+.curriculum-pathways__note{ max-width:75ch; margin-top:28px; color:var(--ink-soft); }
+.curriculum-pathways__note a{ color:var(--maroon); font-weight:600; text-decoration:underline; text-underline-offset:4px; }
 
 .curriculum-journey{ padding-block:clamp(88px,10vw,150px) clamp(96px,11vw,164px); }
 .curriculum-journey__head{
@@ -214,6 +273,7 @@ body.curriculum{ background:var(--paper); }
   text-decoration-color:rgba(255,215,92,.45);
   text-underline-offset:4px;
 }
+.ibgroups__levels{ display:inline-flex; align-items:center; gap:6px; flex:none; }
 /* The north-east arrow on links that leave for another page. Drawn, not
    typed: none of the site's faces has U+2197, so the character fell back to
    the system's emoji font and showed as a blue tile on phones. */
@@ -230,7 +290,7 @@ body.curriculum{ background:var(--paper); }
 .ibgroups__list a:hover .ibgroups__subject,
 .ibgroups__list a:focus-visible .ibgroups__subject{ color:var(--gold-lit); text-decoration-color:var(--gold-lit); }
 .ibgroups__list a:hover .ibgroups__arrow{ transform:translate(2px,-2px); }
-/* SL outlined, HL filled: the level reads at a glance down each column. */
+/* SL outlined and HL filled; paired levels stay together on one subject row. */
 .ibgroups__lv{
   flex:none;
   min-width:3.1em;
@@ -294,12 +354,16 @@ body.curriculum{ background:var(--paper); }
 
 @media (max-width:900px){
   .curriculum-journey__head,
+  .curriculum-pathways__head,
   .curriculum-cbse__head,
   .curriculum-ib__layout,
   .curriculum-beyond__layout,
   .curriculum-next__inner{ grid-template-columns:1fr; }
   .curriculum-journey__head .lead,
   .curriculum-cbse__head .lead{ grid-column:1; grid-row:auto; margin-top:20px; }
+  .curriculum-pathways__head .lead{ grid-column:1; grid-row:auto; margin-top:20px; }
+  .curriculum-pathways__grid{ grid-template-columns:1fr; gap:42px; }
+  .curriculum-pathway .h3{ min-height:0; }
   .curriculum-journey__head{ margin-bottom:70px; }
   .curriculum-journey__rail{ display:block; margin-left:7px; border-top:0; border-left:1px solid var(--purple); }
   .curriculum-journey__rail li{ padding:0 0 54px 38px; }
@@ -332,6 +396,8 @@ body.curriculum{ background:var(--paper); }
   .curriculum .pagehead h1{ max-width:11ch; font-size:clamp(2.7rem,12vw,4.2rem); }
   .curriculum .pagehead .lead{ max-width:34ch; }
   .curriculum-journey__head{ margin-bottom:58px; }
+  .curriculum-pathway dl > div{ grid-template-columns:1fr; gap:2px; }
+  .curriculum-pathway__link{ min-height:58px; font-size:1rem; }
   .curriculum-journey__rail li{ padding-left:27px; }
   .curriculum-journey__years{ font-size:2.6rem; }
   .curriculum-cbse__image{ aspect-ratio:16 / 9; margin-block:42px; }

@@ -252,11 +252,13 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-5",
+        "cache_suffix": "-curriculum-6",
         "banner": ("Curriculum", "The shape of <em>learning at CIRS.</em>",
                    "CBSE begins in Grade V. From Grade XI, students can choose the IB Diploma "
                    "Programme. The Chinmaya Vision Programme connects academic study with "
                    "daily school life."),
+        "banner_cta": [("Compare pathways", "#pathways", "primary"),
+                       ("Admissions guide", "admissions.html#apply", "ghost")],
         "jump": True,
         "uc": False,
     },
@@ -271,11 +273,16 @@ PAGES = {
         "description": "The IB Diploma Programme at Chinmaya International Residential School "
                        "for Grades XI and XII — academic depth, independent learning, research "
                        "and a global perspective.",
-        "banner": ("International Baccalaureate, Geneva",
+        "banner": ("IB Diploma at CIRS",
                    "IB Diploma Programme, <em>Grades XI and XII.</em>",
-                   "A rigorous and holistic two years that develop independent thinking, "
-                   "research, communication and a global perspective."),
+                   "Study six subject groups alongside the Diploma core. Ask the school "
+                   "which subjects and levels are available for your entry year."),
+        "banner_cta": [("See the subject groups", "#groups", "primary"),
+                       ("Compare pathways", "curriculum.html#pathways", "ghost")],
         "sheet": "ibdp",
+        "cache_suffix": "-ibdp-1",
+        "jump": True,
+        "uc": False,
     },
     # The CBSE pathway's own page, the IB Diploma's twin: served at
     # /curriculum/cbse, reached from the Curriculum page, and not in MENU for
@@ -628,6 +635,10 @@ def rewrite_links(html, slug):
     """Turn the old single-page #anchors into links that work across pages."""
     def swap(m):
         anchor = m.group(1)
+        # Curriculum now has its own #pathways; the legacy alias points to
+        # Alumni, so keep this page's banner action on its own section.
+        if slug == "curriculum" and anchor == "pathways":
+            return m.group(0)
         if anchor not in SECTION_PAGE:
             return m.group(0)          # href="#" placeholders, and #main
         target = SECTION_PAGE[anchor]
@@ -907,12 +918,15 @@ def article_html(page):
 
 def banner_html(page):
     eyebrow, heading, lead = page["banner"]
+    cta = "\n".join(f'      <a class="btn btn--{variant} btn--lg" href="{href}">{label}</a>'
+                    for label, href, variant in page.get("banner_cta", []))
+    cta = f'    <p class="pagehead__cta">\n{cta}\n    </p>\n' if cta else ""
     return f'''<section class="pagehead on-purple" id="top" data-ground="#1E1626">
   <div class="wrap pagehead__inner">
     <p class="marker"><span class="sc">{eyebrow}</span></p>
     <h1 class="serif" data-split>{heading}</h1>
     <p class="lead">{lead}</p>
-  </div>
+{cta}  </div>
 </section>'''
 
 
