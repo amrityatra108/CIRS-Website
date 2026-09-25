@@ -213,7 +213,16 @@ ALUMNI = [
      "portrait": "assets/img/alumni/hari-om-jani.png", "portrait_size": (732, 732),
      "portrait_alt": "Hari Om Jani wearing glasses and a navy jacket against a plain background.",
      "then_portrait": "",
-     "biography": "He studied Physics at the National University of Singapore for his bachelor’s degree and PhD, then moved to Oxford in 2022. In 2024, he established a research group through a Royal Society University Research Fellowship. He took up a position at The Queen’s College and Oxford’s Department of Materials in 2026.",
+     "biography": (
+         "He moved to Singapore to pursue his bachelor’s degree in Physics and PhD "
+         "at the National University of Singapore. He continued there as a Research "
+         "Fellow and later as a Senior Research Fellow, before moving to Oxford in "
+         "2022 as a Marie Skłodowska-Curie Fellow. In 2024, Hari was selected as a "
+         "Young Scientist for the Lindau Nobel Laureate Meeting and was awarded the "
+         "Royal Society University Research Fellowship, through which he established "
+         "his research group, Designer Quantum Materials for Devices. He took up his "
+         "current position at Queen’s College and the Department of Materials in 2026."
+     ),
      "sources": [("The Queen’s College profile", "https://www.queens.ox.ac.uk/people/prof-hariom-jani/")]},
 
     {"key": "soham-desai", "name": "Soham Desai",
@@ -223,7 +232,12 @@ ALUMNI = [
      "portrait": "assets/img/alumni/soham-desai.png", "portrait_size": (497, 618),
      "portrait_alt": "Soham Desai standing with his arms folded in a navy sports shirt.",
      "then_portrait": "",
-     "biography": "He spent five years as strength and conditioning coach for India’s men’s cricket team. In 2026, he shared that he had joined Lucknow Super Giants ahead of the IPL season.",
+     "biography": (
+         "Soham Desai has been the backbone of one of the most celebrated cricket "
+         "teams in the world. He served for five years as the lead Strength and "
+         "Conditioning Coach of the Indian Cricket Team, and is currently with the "
+         "IPL team Lucknow Super Giants."
+     ),
      "sources": [("Indian Express profile", "https://indianexpress.com/article/sports/cricket/strength-and-conditioning-coach-soham-desai-jasprit-bumrah-ind-vs-eng-10134895/"), ("Soham Desai’s 2026 update", "https://www.linkedin.com/posts/soham-desai-91799698_ipl2026-strengthandconditioning-activity-7444994473845219328-afGw")]},
 
     {"key": "divyaj-dt", "name": "Divyaj DT",
@@ -233,8 +247,14 @@ ALUMNI = [
      "portrait": "assets/img/alumni/divyaj-dt.png", "portrait_size": (387, 516),
      "portrait_alt": "Divyaj DT, on the right in a red football kit, standing with another person.",
      "then_portrait": "",
-     "biography": "The All India Football Federation named him among the goalkeepers selected for India’s 2023 SAFF U19 Championship squad and 2025 AFC U20 Asian Cup qualifying squad.",
-     "sources": [("AIFF: 2023 SAFF U19 squad", "https://www.the-aiff.com/index.php/article/india-squad-for-saff-u-19-championship-announced"), ("AIFF: 2025 AFC U20 qualifying squad", "https://www.the-aiff.com/article/india-squad-for-2025-afc-u20-asian-cup-qualifiers-in-laos-announced")]},
+     "biography": (
+         "Divyaj is an alumnus of Alchemy International Football Academy & Baroda "
+         "Football Academy, progressing to the NorthEast United FC, where he "
+         "currently plays as Goalkeeper, and has represented India internationally "
+         "at the youth levels, including the India U19 and India U20 national teams. "
+         "He was a part of the squad that became champions at the SAFF U19 Championship."
+     ),
+     "sources": [("AIFF: 2023 SAFF U19 squad", "https://www.the-aiff.com/index.php/article/india-squad-for-saff-u-19-championship-announced"), ("AIFF: 2023 SAFF U19 champions", "https://www.the-aiff.com/article/champs-triple-strike-blue-colts-send-crippled-pakistan-packing"), ("AIFF: 2025 AFC U20 qualifying squad", "https://www.the-aiff.com/article/india-squad-for-2025-afc-u20-asian-cup-qualifiers-in-laos-announced")]},
 
     {"key": "shashwat-santosh", "name": "Shashwath Santosh",
      "role": "Designer, Google Creative Lab",
@@ -243,7 +263,12 @@ ALUMNI = [
      "portrait": "assets/img/alumni/shashwath-santosh.png", "portrait_size": (1194, 796),
      "portrait_alt": "Shashwath Santosh seated outdoors and speaking into a microphone.",
      "then_portrait": "",
-     "biography": "A designer based in New York, he currently works at Google Creative Lab. His portfolio documents work with Google teams on projects including Gemini, Project Astra and Project Genie.",
+     "biography": (
+         "Shashwath Santosh is an industrial and product designer based in New York, "
+         "currently working at Google Creative Lab on AI-driven experiences like "
+         "Gemini, Project Astra, and Genie. His website can be found at "
+         "shashwathsantosh.com."
+     ),
      "sources": [("Shashwath Santosh’s portfolio", "https://shashwathsantosh.com/")]},
 ]
 

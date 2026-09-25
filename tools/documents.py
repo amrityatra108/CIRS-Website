@@ -34,7 +34,10 @@ DOCUMENTS = [
      "title": "CBSE Affiliation Letter",
      "note": "The most recent affiliation letter from the Central Board of Secondary Education on file.",
      "file": "cbse-affiliation-letter.pdf",
-     "period": "2021–2025", "valid_until": "31 Mar 2025", "status": "expired"},
+     # The letter is dated 3 Oct 2020 and grants extension "01.04.2020 to
+     # 31.03.2025".
+     "issued": "3 Oct 2020", "period": "2020–2025", "valid_until": "31 Mar 2025",
+     "status": "expired"},
     {"id": "state-recognition", "category": "Affiliation &amp; recognition",
      "title": "Recognition from State Government",
      "note": "The Government of Tamil Nadu's recognition of the school.",

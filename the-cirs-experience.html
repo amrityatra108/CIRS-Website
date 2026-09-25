@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE CIRS EXPERIENCE</title>
+<meta name="description" content="Residential life at CIRS, the shape of an ordinary school day, and the hundred-acre campus it happens on.">
+<meta name="theme-color" content="#0E0B12">
+<link rel="canonical" href="https://www.cirschool.org/the-cirs-experience.html">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="THE CIRS EXPERIENCE">
+<meta property="og:description" content="Residential life at CIRS, the shape of an ordinary school day, and the hundred-acre campus it happens on.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="THE CIRS EXPERIENCE">
+<meta name="twitter:description" content="Residential life at CIRS, the shape of an ordinary school day, and the hundred-acre campus it happens on.">
+<meta name="twitter:image" content="assets/img/og.jpg">
+<!-- Four approved families, self-hosted with retained OFL notices. -->
+<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-student-life-9">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-student-life-9">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-student-life-9">
+<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
+     removes once it has played. With scripting off nothing removes it, and
+     it covers the page on every page of this site. One rule, applied only
+     when there is no scripting, is the whole fix. Crossroads already does
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/student-life.css?b=102-student-life-9">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-student-life-9">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-student-life-9-footer-1">
+</head>
+
+<body class="student-life">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Opening sequence. Removed from the DOM once it has played. -->
+<div class="curtain" id="curtain" aria-hidden="true">
+  <img src="assets/img/logo.png" alt="" width="72" height="70">
+  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
+  <span class="curtain__bar"><i></i></span>
+</div>
+
+<!-- Film lightbox, shared by every page. The iframe is built on open and
+     destroyed on close: nothing is requested from YouTube until someone asks
+     for the film, and removing the element is what actually stops the audio. -->
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
+  <div class="lightbox__back" data-close></div>
+  <div class="lightbox__panel">
+    <div class="lightbox__frame" id="lightboxFrame"></div>
+    <button type="button" class="lightbox__close" data-close aria-label="Close the film">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</dialog>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<button type="button" class="totop" id="totop" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+</button>
+<header class="header" id="header">
+  <div class="wrap">
+    <div class="header__left">
+      <!-- Enquire opens the contact panel below rather than going anywhere.
+           It stays a button so the keyboard and screen readers get a control
+           that announces its expanded state; hover opens it for a mouse. -->
+      <div class="enq" id="enq">
+        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic aria-label="Enquire"
+                aria-expanded="false" aria-controls="enqPanel">
+          <span class="htab__icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="htab__label">Enquire</span>
+        </button>
+
+        <div class="enq__panel" id="enqPanel">
+          <p class="enq__title sc">Talk to CIRS</p>
+
+          <a class="enq__row enq__row--wa" href="https://wa.me/919360461572"
+             target="_blank" rel="noopener">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>+91 93604 61572</b>
+              <small>WhatsApp &middot; Admissions Coordinator</small>
+            </span>
+          </a>
+
+          <a class="enq__row" href="mailto:info@cirschool.org">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><rect x="2.6" y="4.6" width="16.8" height="12.8" rx="1.6" stroke="currentColor" stroke-width="1.4"/><path d="m3.4 5.8 7.6 5.6 7.6-5.6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>info@cirschool.org</b>
+              <small>Email the school</small>
+            </span>
+          </a>
+
+          <!-- The three doors. Each goes to the page that explains what is
+               live and what is not, rather than straight out to the external
+               system — a parent who lands on a login screen with no warning
+               cannot tell the school's old system from the new site.
+
+               They carry no second line. "Through the Parent Portal" under
+               two rows that both went to the Parent Portal was restating the
+               destination the row already is, and it made three plain doors
+               look like three explanations. -->
+          <p class="enq__title enq__title--sep sc">Portals</p>
+
+          <a class="enq__row" href="parent-portal.html">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><rect x="2.6" y="5.2" width="16.8" height="11.6" rx="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M2.6 9.4h16.8" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 13.4h3.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>Fee payment</b>
+            </span>
+          </a>
+
+          <a class="enq__row" href="parent-portal.html">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7.8" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M4.8 18.4a6.2 6.2 0 0 1 12.4 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>Parent Login</b>
+            </span>
+          </a>
+
+          <a class="enq__row" href="https://cirs.in/school/cirsmark/"
+             target="_blank" rel="noopener">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M11 4.4 19.6 8 11 11.6 2.4 8 11 4.4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5.8 10v4.4c0 1.3 2.3 2.4 5.2 2.4s5.2-1.1 5.2-2.4V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>Student Login</b>
+            </span>
+          </a>
+
+          <p class="enq__title enq__title--sep sc">Follow CIRS</p>
+          <div class="enq__social">
+            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener"
+               aria-label="Instagram (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="enq__social-dot" cx="17.4" cy="6.7" r="1.1"/></svg>
+            </a>
+            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener"
+               aria-label="Facebook (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.8l.45-3.2H13.7V7.75c0-.93.3-1.56 1.64-1.56H17V3.3a22 22 0 0 0-2.43-.13c-2.4 0-4.05 1.47-4.05 4.17V9.8H7.8V13h2.72v8h3.18Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener"
+               aria-label="YouTube (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.15a3 3 0 0 0-2.1-2.12C17.05 5.5 12 5.5 12 5.5s-5.05 0-6.9.53A3 3 0 0 0 3 8.15a31 31 0 0 0 0 7.7 3 3 0 0 0 2.1 2.12c1.85.53 6.9.53 6.9.53s5.05 0 6.9-.53a3 3 0 0 0 2.1-2.12 31 31 0 0 0 0-7.7Z"/><path class="enq__social-play" d="m10 15.25 5-3.25-5-3.25v6.5Z"/></svg>
+            </a>
+            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener"
+               aria-label="LinkedIn (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 8.4H3.3V21h3.3V8.4ZM5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8.2 5.4H10V21h3.2v-6.25c0-1.65.32-3.25 2.37-3.25 2.02 0 2.05 1.9 2.05 3.36V21H21v-6.92c0-3.4-.73-6.01-4.7-6.01-1.9 0-3.18 1.04-3.7 2.02h-.04V8.4h.64Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a class="htab" href="index.html" data-magnetic aria-label="Home">
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="htab__label">Home</span>
+      </a>
+    </div>
+
+    <a class="brand" href="index.html" aria-label="Chinmaya International Residential School home">
+      <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
+      <span class="brand__txt">
+        <span class="brand__name">Chinmaya International Residential School</span>
+        <span class="brand__sub">Siruvani &middot; Coimbatore &middot; Founded 1996</span>
+      </span>
+    </a>
+
+    <div class="header__right">
+      <a class="htab htab--login" href="https://cirs.in/school/" target="_blank" rel="noopener" data-magnetic>
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.4 16 5.2 9 8 2 5.2 9 2.4Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.6 6.6v2.2c0 1.2 2 2.1 4.4 2.1s4.4-.9 4.4-2.1V6.6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M4.2 15.6a4.8 4.8 0 0 1 9.6 0" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+        </span>
+        <span class="htab__label">Student Portal</span>
+      </a>
+      <a class="htab htab--news" href="news.html" data-magnetic>
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
+        </span>
+        <span class="htab__label">News</span>
+      </a>
+      <button type="button" class="htab htab--menu" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu" data-magnetic>
+        <span class="htab__icon" aria-hidden="true">
+          <span class="menubtn__dots"><i></i><i></i><i></i><i></i></span>
+        </span>
+        <span class="htab__label">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer" hidden>
+  <nav class="drawer__grid" aria-label="All pages">
+    <div>
+      <p class="sc" id="dnav-vision">Vision</p>
+      <ul aria-labelledby="dnav-vision">
+        <li><a href="founder.html">Founder</a></li>
+        <li><a href="why-cirs.html">Why CIRS</a></li>
+        <li><a href="school-history.html">School History</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-student-life">Student Life</p>
+      <ul aria-labelledby="dnav-student-life">
+        <li><a href="the-cirs-experience.html" aria-current="page">THE CIRS EXPERIENCE</a></li>
+        <li><a href="curriculum.html">Curriculum</a></li>
+        <li><a href="our-results.html">Our Results</a></li>
+        <li><a href="sports.html">Our Sports</a></li>
+        <li><a href="our-laurels.html">Our Laurels</a></li>
+        <li><a href="math-challenge.html">Math Challenge</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
+      <ul aria-labelledby="dnav-literary-excellence">
+        <li><a href="crossroads.html">Crossroads</a></li>
+        <li><a href="blog.html">CIRS Blog</a></li>
+        <li><a href="creative-writing.html">Creative Writing</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
+      <ul aria-labelledby="dnav-art-culture-music">
+        <li><a href="captures.html">CIRS Captures</a></li>
+        <li><a href="art-attack.html">CIRS Art Attack</a></li>
+        <li><a href="festivals.html">CIRS Festivals</a></li>
+        <li><a href="theatre.html">CIRS Theatre</a></li>
+        <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sc" id="dnav-connect">Connect</p>
+      <ul aria-labelledby="dnav-connect">
+        <li><a href="school-info.html">School Information</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="parent-portal.html">Parent Portal</a></li>
+        <li><a href="alumni.html">Alumni</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="drawer__utility">
+    <a href="alumni.html">Alumni</a>
+    <a href="school-info.html#calendar">Calendar</a>
+    <a href="tel:+914222613300">+91 422 261 3300</a>
+    <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+  </div>
+  <div class="drawer__cta">
+    <a class="btn btn--primary btn--lg" href="admissions.html#apply">Apply for admission</a>
+    <a class="btn btn--outline btn--lg" href="admissions.html#visit">Book a campus visit</a>
+  </div>
+</div>
+<main id="main">
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#day">From rouser to lights out.</a>
+      <a href="#residential-life">A campus that never really stops.</a>
+      <a href="#sports-after-five">When classes end, the competition begins.</a>
+      <a href="#houses">Four houses. One campus.</a>
+      <a href="#student-work">What students create for themselves.</a>
+      <a href="#campus">Life on campus at a glance.</a>
+      <a href="#student-login">One day ends. Another story begins tomorrow.</a>
+    </div>
+  </details>
+</nav>
+<section class="sj-hero" id="top" aria-labelledby="sj-hero-title">
+  <img class="sj-cover" src="assets/img/campus-band.jpg" alt="The CIRS campus below the Western Ghats" width="1920" height="1080" fetchpriority="high" decoding="async">
+  <div class="sj-shade"></div>
+  <div class="wrap sj-hero__content">
+    <p class="sj-kicker"><span>THE CIRS EXPERIENCE</span><span>Siruvani · 05:30</span></p>
+    <h1 id="sj-hero-title">Culture, community,<br>canvasses waiting<br>to be filled.</h1>
+    <p>Every moment of every day is filled with dynamism, activity and silence. Even a single day brings change that lasts a lifetime.</p>
+  </div>
+  <div class="sj-horizon" aria-hidden="true"><i></i></div>
+  <a class="sj-down" href="#day">Follow the day <span aria-hidden="true">↓</span></a>
+</section>
+
+<section class="sj-day" id="day" aria-labelledby="sj-day-title">
+  <div class="wrap sj-day__intro">
+    <div class="sj-day__heading">
+      <p class="sj-kicker">A day at CIRS</p>
+      <h2 id="sj-day-title">From rouser<br>to lights out.</h2>
+    </div>
+    <div class="sj-day__details">
+      <p>Junior and senior school share the same rhythm at different times. Choose a schedule, then move through one complete day.</p>
+      <div class="sj-switch" role="group" aria-label="Choose daily schedule">
+        <button type="button" class="is-active" data-schedule="senior" aria-pressed="true">Grades IX–XII</button>
+        <button type="button" data-schedule="junior" aria-pressed="false">Grades V–VIII</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sj-journey">
+    <div class="sj-journey__sticky">
+      <div class="sj-sky" aria-hidden="true">
+        <div class="sj-stars"></div>
+        <div class="sj-skyline"></div>
+      </div>
+      <div class="sj-scenes">
+        <img class="is-active" src="assets/img/hrun/01-lawn.jpg" alt="" width="1500" height="1000">
+        <img src="assets/img/slhero/card-10.jpg" alt="" width="1200" height="675">
+        <img src="assets/img/hrun/05-table.jpg" alt="" width="1500" height="1000">
+        <img src="assets/img/hrun/02-lesson.jpg" alt="" width="1500" height="1000">
+        <img src="assets/img/life-split-academic.jpg" alt="" width="1800" height="1200">
+        <img src="assets/img/hrun/06-field.jpg" alt="" width="1500" height="1000">
+        <img src="assets/img/hrun/07-water.jpg" alt="" width="1500" height="1000">
+        <img src="assets/img/slhero/card-08.jpg" alt="" width="900" height="900">
+        <img src="assets/img/hrun/04-hall.jpg" alt="" width="1500" height="1000">
+        <img src="assets/img/hrun/10-night.jpg" alt="" width="1500" height="1000">
+      </div>
+      <div class="sj-shade"></div>
+      <div class="wrap sj-journey__content">
+        <p class="sj-school">Senior School · Grades IX–XII</p>
+        <div class="sj-clock"><span>05:30</span><small>AM</small></div>
+        <div class="sj-chapter"><small>05:30–06:00</small><h3>Rouser</h3><p>Before the first light, students get ready and head to the Arjuna athletic field for a morning jog.</p></div>
+        <div class="sj-controls">
+          <button type="button" data-prev aria-label="Previous time">←</button>
+          <span><b>1</b> / <i>10</i></span>
+          <button type="button" data-next aria-label="Next time">→</button>
+        </div>
+      </div>
+      <div class="sj-track"><span></span><i></i></div>
+      <ol class="sj-index" aria-label="Times in the selected school day"></ol>
+    </div>
+  </div>
+
+  <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-day-status></p>
+  <div class="sj-schedules">
+    <section class="sj-schedule is-active" data-schedule-panel="senior" aria-labelledby="senior-schedule-title">
+      <h3 id="senior-schedule-title">Senior School · Grades IX–XII</h3>
+      <div class="sj-schedule__list">
+        <article data-time="05:30" data-period="AM" data-range="05:30–06:00" data-photo="0" data-color="#081728"><time>05:30 AM</time><h4>Rouser</h4><p>Before the first light, students get ready and head to the Arjuna athletic field for a morning jog.</p></article>
+        <article data-time="06:00" data-period="AM" data-range="06:00–07:30" data-photo="1" data-color="#23374a"><time>06:00 AM</time><h4>Jogging and getting ready</h4><p>After jogging, students return to the dorms to freshen up, with hot milk and biscuits before spiritual class.</p></article>
+        <article data-time="08:10" data-period="AM" data-range="07:30–09:10" data-photo="2" data-color="#806749"><time>08:10 AM</time><h4>Spiritual class, breakfast and assembly</h4><p>Bhagavad Gita shlokas, stotram and japa precede breakfast at the Annakshetra and the morning assembly.</p></article>
+        <article data-time="09:10" data-period="AM" data-range="09:10–13:30" data-photo="3" data-color="#65735d"><time>09:10 AM</time><h4>Academic classes</h4><p>Classrooms open at 9:10. A fifteen-minute juice break gives everyone time to recharge before lessons resume.</p></article>
+        <article data-time="01:30" data-period="PM" data-range="13:30–15:20" data-photo="4" data-color="#b88b55"><time>01:30 PM</time><h4>Lunch and rest</h4><p>Students return to the Annakshetra for lunch, then rest and reset for the afternoon.</p></article>
+        <article data-time="03:20" data-period="PM" data-range="15:20–17:00" data-photo="5" data-color="#9b6f3c"><time>03:20 PM</time><h4>Study time</h4><p>A focused study period bridges classroom learning and the playing fields.</p></article>
+        <article data-time="05:00" data-period="PM" data-range="17:00–18:30" data-photo="6" data-color="#86513e"><time>05:00 PM</time><h4>Sports</h4><p>The senior school day moves outdoors for organised sport and movement.</p></article>
+        <article data-time="06:30" data-period="PM" data-range="18:30–20:10" data-photo="7" data-color="#42354d"><time>06:30 PM</time><h4>Evening routine</h4><p>Snacks and time to get ready lead into prayer and aarti.</p></article>
+        <article data-time="08:10" data-period="PM" data-range="20:10–22:00" data-photo="8" data-color="#17283a"><time>08:10 PM</time><h4>Dinner and evening study</h4><p>Dinner is followed by self study and co-curricular work.</p></article>
+        <article data-time="10:00" data-period="PM" data-range="22:00–22:30" data-photo="9" data-color="#070d18"><time>10:00 PM</time><h4>Milk and lights off</h4><p>The shared day settles. At 10:30, the senior houses rest.</p></article>
+      </div>
+    </section>
+    <section class="sj-schedule" data-schedule-panel="junior" aria-labelledby="junior-schedule-title">
+      <h3 id="junior-schedule-title">Junior School · Grades V–VIII</h3>
+      <div class="sj-schedule__list">
+        <article data-time="04:50" data-period="AM" data-range="04:50–05:30" data-photo="0" data-color="#071322"><time>04:50 AM</time><h4>Rouser</h4><p>The junior houses wake before first light and get ready for the morning jog on Arjuna field.</p></article>
+        <article data-time="05:30" data-period="AM" data-range="05:30–06:50" data-photo="1" data-color="#26384b"><time>05:30 AM</time><h4>Jogging and getting ready</h4><p>After jogging, students return to the dorms to freshen up, with hot milk and biscuits before spiritual class.</p></article>
+        <article data-time="06:50" data-period="AM" data-range="06:50–08:10" data-photo="2" data-color="#806749"><time>06:50 AM</time><h4>Spiritual class, breakfast and assembly</h4><p>Bhagavad Gita shlokas, stotram and japa precede breakfast at the Annakshetra and the morning assembly.</p></article>
+        <article data-time="08:10" data-period="AM" data-range="08:10–12:20" data-photo="3" data-color="#65735d"><time>08:10 AM</time><h4>Academic classes</h4><p>Classrooms invite students to grow together. A fifteen-minute juice break divides the morning lessons.</p></article>
+        <article data-time="12:20" data-period="PM" data-range="12:20–14:00" data-photo="4" data-color="#b88b55"><time>12:20 PM</time><h4>Lunch and rest</h4><p>Students return to the Annakshetra for lunch, then rest and reset for the afternoon.</p></article>
+        <article data-time="02:00" data-period="PM" data-range="14:00–16:00" data-photo="5" data-color="#9b6f3c"><time>02:00 PM</time><h4>Study time</h4><p>Two hours of study connect the academic day to the afternoon programme.</p></article>
+        <article data-time="04:00" data-period="PM" data-range="16:00–17:15" data-photo="6" data-color="#86513e"><time>04:00 PM</time><h4>Sports</h4><p>Junior school reaches the courts, fields and pool an hour before senior school.</p></article>
+        <article data-time="05:15" data-period="PM" data-range="17:15–19:10" data-photo="7" data-color="#42354d"><time>05:15 PM</time><h4>Evening routine</h4><p>Snacks and getting ready lead into prayer and aarti.</p></article>
+        <article data-time="07:10" data-period="PM" data-range="19:10–21:00" data-photo="8" data-color="#17283a"><time>07:10 PM</time><h4>Dinner and self study</h4><p>Dinner is followed by self study and the final milk break.</p></article>
+        <article data-time="09:00" data-period="PM" data-range="21:00–21:30" data-photo="9" data-color="#070d18"><time>09:00 PM</time><h4>Lights off</h4><p>The junior day closes first, after more than sixteen hours together.</p></article>
+      </div>
+    </section>
+  </div>
+</section>
+
+<section class="sj-home" id="residential-life" aria-labelledby="sj-home-title">
+  <div class="wrap sj-heading"><p class="sj-kicker">Culture, community, canvasses</p><h2 id="sj-home-title">A campus<br>that never<br>really stops.</h2><p>Houses carry the names of Bharat&rsquo;s visionary saints. Six hundred students walk the path of knowledge, shaped by teachers and continued by students.</p></div>
+  <div class="wrap sj-photo-wall">
+    <figure class="sj-photo-wall__main"><img src="assets/img/boarding.jpg" alt="Students together in residential life at CIRS" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Residential houses</figcaption></figure>
+    <!-- Not a photograph in a frame: a hand-traced cut-out on transparency,
+         made by tools/make-life-split-cutout.py. Cropped like the others it
+         showed the page ground through its own mask and read as a broken
+         image, so it gets its own plate and its own rule below. -->
+    <figure class="sj-photo-wall__cut"><img src="assets/img/life-split-student.webp" alt="A CIRS student during the school day" width="1100" height="899" loading="lazy" decoding="async"><figcaption>Friendship and shared responsibility</figcaption></figure>
+    <figure><img src="assets/img/assembly-front.jpg" alt="Students gathered at CIRS" width="1400" height="640" loading="lazy" decoding="async"><figcaption>One campus community</figcaption></figure>
+  </div>
+</section>
+
+<section class="sj-sports" id="sports-after-five" aria-labelledby="sj-sports-title">
+  <div class="wrap sj-section-head"><p class="sj-kicker">05:00 PM · Senior School</p><h2 id="sj-sports-title">When classes end,<br>the competition begins.</h2></div>
+  <div class="sj-rail" id="sports-rail" tabindex="0" aria-label="Sports photographs">
+    <figure><img src="assets/img/sports/outdoor-team.webp" alt="CIRS students together on an outdoor activity course" width="1800" height="1200" loading="lazy" decoding="async"><figcaption>Outdoor activity at CIRS</figcaption></figure>
+    <figure><img src="assets/img/slhero/card-05.jpg" alt="A student taking part in athletics at CIRS" width="800" height="1200" loading="lazy" decoding="async"><figcaption>Athletics at CIRS</figcaption></figure>
+    <figure><img src="assets/img/hrun/07-water.jpg" alt="Students swimming in the CIRS pool" width="1500" height="1000" loading="lazy" decoding="async"><figcaption>Swimming at CIRS</figcaption></figure>
+    <figure><img src="assets/img/slhero/card-07.jpg" alt="A student taking part in an outdoor activity at CIRS" width="900" height="1200" loading="lazy" decoding="async"><figcaption>Outdoor activity at CIRS</figcaption></figure>
+  </div>
+  <div class="wrap sj-rail-nav" data-rail-controls="sports-rail"><button type="button" data-rail-prev aria-label="Previous sports photograph">←</button><p><span>1</span> / 4</p><button type="button" data-rail-next aria-label="Next sports photograph">→</button></div>
+  <div class="wrap sj-links"><a href="sports.html">Explore sports <span aria-hidden="true">→</span></a></div>
+</section>
+
+<section class="sj-houses" id="houses" aria-labelledby="sj-houses-title">
+  <div class="wrap"><p class="sj-kicker">The house community</p><h2 id="sj-houses-title">Four houses.<br>One campus.</h2></div>
+  <div class="sj-houses__stage">
+    <article class="sj-house red"><span>Red</span><h3>Vasistha</h3><p>One of four houses that shape shared life and inter-house participation.</p></article>
+    <article class="sj-house yellow"><span>Yellow</span><h3>Valmiki</h3><p>House identity is carried through daily life, sport and cultural activity.</p></article>
+    <article class="sj-house green"><span>Green</span><h3>Vishwamitra</h3><p>Students meet beyond their classrooms through a common house community.</p></article>
+    <article class="sj-house blue"><span>Blue</span><h3>Vyasa</h3><p>Four distinct colours, held together by one residential school.</p></article>
+  </div>
+</section>
+
+<section class="sj-work" id="student-work" aria-labelledby="sj-work-title">
+  <div class="wrap sj-work__grid"><div><p class="sj-kicker">Student initiatives</p><h2 id="sj-work-title">What students<br>create for<br>themselves.</h2></div><nav class="sj-board" aria-label="Student publications and activities"><a href="crossroads.html"><small>Publication</small><strong>Crossroads</strong><span>Three decades of student writing</span></a><a href="blog.html"><small>Ideas</small><strong>Student writing</strong><span>Essays, arguments and reflection</span></a><a href="cultural-gallery.html"><small>Arts</small><strong>Culture in motion</strong><span>Performance, music and visual work</span></a></nav></div>
+</section>
+
+<section class="sj-festivals" aria-labelledby="sj-festivals-title">
+  <div class="wrap"><p class="sj-kicker">Shared moments</p><h2 id="sj-festivals-title">The moments<br>between the<br>timetable.</h2></div>
+  <div class="sj-festival-strip" id="festival-rail" tabindex="0" aria-label="Shared moments photographs">
+    <figure><img src="assets/img/arts/festival.jpg" alt="Students performing together in a school production" width="1500" height="1000" loading="lazy" decoding="async"><figcaption>School performance</figcaption></figure>
+    <figure><img src="assets/img/arts/exhibition.jpg" alt="Students viewing work at a CIRS exhibition" width="1500" height="1000" loading="lazy" decoding="async"><figcaption>Student exhibition</figcaption></figure>
+    <figure><img src="assets/img/arts/band.jpg" alt="The CIRS student band performing outdoors" width="1500" height="1000" loading="lazy" decoding="async"><figcaption>Music on campus</figcaption></figure>
+  </div>
+  <div class="wrap sj-rail-nav" data-rail-controls="festival-rail"><button type="button" data-rail-prev aria-label="Previous shared moment">←</button><p><span>1</span> / 3</p><button type="button" data-rail-next aria-label="Next shared moment">→</button></div>
+  <div class="wrap sj-links"><a href="festivals.html">Explore festivals <span aria-hidden="true">→</span></a><a href="cultural-gallery.html">Visit the cultural gallery <span aria-hidden="true">→</span></a></div>
+</section>
+
+<section class="sj-practical" id="campus" aria-labelledby="sj-practical-title">
+  <div class="wrap sj-practical__grid"><div><p class="sj-kicker">Practical information</p><h2 id="sj-practical-title">Life on campus<br>at a glance.</h2><p>These essentials remain available without animation. Exact daily timings are listed for both age groups.</p><a class="sj-login" href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener">Student login <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></div><div class="sj-accordions">
+    <details open><summary>Daily schedules</summary><div class="sj-tables"><table><caption>Grades V–VIII</caption><tbody><tr><th>04:50</th><td>Rouser</td></tr><tr><th>05:30</th><td>Jogging</td></tr><tr><th>06:50</th><td>Spiritual class</td></tr><tr><th>07:25</th><td>Breakfast</td></tr><tr><th>07:50</th><td>Assembly</td></tr><tr><th>08:10</th><td>Classes</td></tr><tr><th>12:20</th><td>Lunch and rest</td></tr><tr><th>14:00</th><td>Study</td></tr><tr><th>16:00</th><td>Sports</td></tr><tr><th>18:30</th><td>Prayer and aarti</td></tr><tr><th>19:10</th><td>Dinner</td></tr><tr><th>21:00</th><td>Lights off</td></tr></tbody></table><table><caption>Grades IX–XII</caption><tbody><tr><th>05:30</th><td>Rouser</td></tr><tr><th>06:00</th><td>Jogging</td></tr><tr><th>07:30</th><td>Spiritual class</td></tr><tr><th>08:10</th><td>Breakfast</td></tr><tr><th>08:45</th><td>Assembly</td></tr><tr><th>09:10</th><td>Classes</td></tr><tr><th>13:30</th><td>Lunch and rest</td></tr><tr><th>15:20</th><td>Study</td></tr><tr><th>17:00</th><td>Sports</td></tr><tr><th>19:30</th><td>Prayer and aarti</td></tr><tr><th>20:10</th><td>Dinner</td></tr><tr><th>22:00</th><td>Milk, lights off</td></tr></tbody></table></div></details>
+    <details><summary>Spiritual class and assembly</summary><p>After hot milk and biscuits, spiritual class brings Bhagavad Gita shlokas, stotram and japa into the day. Breakfast at the Annakshetra leads to assembly, where the Principal addresses the school and students regularly offer talks, speeches, book reviews and quizzes.</p></details>
+    <details><summary>Dormitories and campus</summary><p>Residential houses are named for great figures of Bharat&rsquo;s history. Dormitories, classrooms, the Annakshetra dining hall and playing fields form one walkable campus.</p></details>
+    <details><summary>Amphitheatre and facilities</summary><p>The amphitheatre is built into the slope, with the hills behind the stage and music rising from the audience. The campus also includes laboratories, a library and sports facilities.</p></details>
+    <details><summary>Related information</summary><p><a href="sports.html">Sports</a> · <a href="crossroads.html">Crossroads</a> · <a href="cultural-gallery.html">Arts and culture</a> · <a href="admissions.html#visit">Admissions and campus visit</a></p></details>
+  </div></div>
+</section>
+
+<section class="sj-night" id="student-login" aria-labelledby="sj-night-title">
+  <img class="sj-cover" src="assets/img/hrun/10-night.jpg" alt="Students gathered in the CIRS amphitheatre at night" width="1500" height="1000" loading="lazy" decoding="async">
+  <div class="sj-shade"></div><div class="wrap sj-night__content"><p class="sj-kicker">10:30 PM · Lights out</p><h2 id="sj-night-title">One day ends.<br><span>Another story<br>begins tomorrow.</span></h2><nav aria-label="Continue exploring"><a href="#houses">Explore the houses</a><a href="sports.html">Discover sports</a><a href="crossroads.html">Read student work</a><a href="admissions.html#visit">Plan a campus visit</a></nav></div>
+</section>
+<section class="uc">
+  <div class="wrap uc__inner">
+    <span class="uc__mark" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
+    </span>
+    <div>
+      <p class="uc__label">Under construction</p>
+      <p class="uc__text">This page is still being written. Photographs, names and figures marked
+        in brackets are placeholders awaiting the school, and more will be added here in the weeks
+        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
+    </div>
+  </div>
+</section>
+</main>
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+        <ul>
+          <li><a href="why-cirs.html">Why CIRS</a></li>
+          <li><a href="school-history.html">School History</a></li>
+          <li><a href="leadership.html#people">Our People</a></li>
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+          <li><a href="why-cirs.html#junior">Junior School</a></li>
+          <li><a href="why-cirs.html#senior">Senior School</a></li>
+          <li><a href="sports.html#athletics">Athletics</a></li>
+          <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; 1996&ndash;2026 Chinmaya International Residential School</span>
+      <span>J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</span>
+      <span>An undertaking of the Central Chinmaya Mission Trust</span>
+    </div>
+  </div>
+</footer>
+</div>
+<!-- The motion layer, served from this site rather than from a CDN. See
+     assets/vendor/README.md for the versions and where they came from.
+     defer keeps them in document order, so GSAP is defined before
+     ScrollTrigger looks for it. -->
+<script src="assets/vendor/gsap.min.js?b=102-student-life-9" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-student-life-9" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-student-life-9" defer></script>
+<script src="assets/js/cirs.js?b=102-student-life-9" defer></script>
+<script src="assets/js/pages.js?b=102-student-life-9" defer></script>
+<script src="assets/js/footer.js?b=102-student-life-9-footer-1" defer></script>
+<script src="assets/js/student-life-journey.js?b=102-student-life-9" defer></script>
+</body>
+</html>

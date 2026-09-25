@@ -1,20 +1,24 @@
-<section class="nx-top" id="top">
-  <div class="nx-wrap">
-    <div class="nx-mast">
-      <p class="nx-mast__kicker">A student publication &middot; Siruvani</p>
-      <h1 class="nx-mast__name">CIRS <em>Blog</em></h1>
-      <p class="nx-mast__by">Managed by the <b>Crossroads Editorial Board</b> and the
-        <b>CIRS Social Media Team</b>. Everything published here is written on campus, by the
-        people it is about &mdash; {{BLOG_COUNT}} articles drawn from {{BLOG_ISSUES}} issues of
-        <b>The Crossroads</b>, each one reproduced whole.</p>
+<section class="ij-cover" id="top" aria-labelledby="ij-title">
+  <div class="ij-shell">
+    <div class="ij-cover__topline">
+      <span>A student publication &middot; Siruvani</span>
+      <span>CIRS Blog / The Crossroads</span>
     </div>
-
-    <nav class="nx-rail" aria-label="Sections">
-{{BLOG_RAIL}}
+    <header class="ij-mast">
+      <span class="ij-mast__mark" aria-hidden="true"></span>
+      <h1 id="ij-title">Ideas from CIRS</h1>
+      <div class="ij-mast__intro">
+        <p>Writing by students, first published in <em>The Crossroads.</em></p>
+        <p>{{BLOG_COUNT}} complete articles from {{BLOG_ISSUES}} issues, gathered here for discovery and reading.</p>
+      </div>
+    </header>
+    <nav class="ij-nav" aria-label="Blog sections">
+      {{BLOG_RAIL}}
     </nav>
   </div>
 </section>
 
-<div class="nx-wrap">
-{{BLOG_FRONT}}
+<div class="ij-shell">
+  {{BLOG_FRONT}}
+  <p class="ij-colophon">This online collection is managed by the Crossroads Editorial Board and the CIRS Social Media Team.</p>
 </div>

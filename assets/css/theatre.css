@@ -1,0 +1,716 @@
+/* ============================================================
+   CIRS Theatre — the three acts after the opening
+   ------------------------------------------------------------
+   The film and the "Every Student, On the Stage" introduction are
+   culture.css and filmintro.css, unchanged. This sheet is what comes
+   after them, scoped to body.theatre:
+
+     .th-programme   the year in three acts, the hinge out of the intro
+     .th-au          Act I   Anand Utsav: the house lights go down, and
+                             come up on the whole stage
+     .th-mq          Act II  Masquerades: a programme of four houses,
+                             then a gallery for each
+     .th-cp          Act III Class Presentations: back on paper, a
+                             plain index of the school's own videos
+     .th-invite      what is still missing, and where to send it
+     .th-viewer      the photograph viewer
+
+   Identity comes from cirs.css: Newsreader, ivory, gold, the diamond
+   marker. The dark ground is the theatre's, not a new brand colour —
+   the colour on these pages is the stage lighting in the photographs.
+   Motion is gated on .th-motion, which assets/js/theatre.js sets only
+   when motion is allowed, so without it every state below is final.
+   ============================================================ */
+
+body.theatre{
+  --th-night:   #0C0910;
+  --th-night-2: #141019;
+  --th-line:    rgba(245,238,242,.14);
+  --th-text:    #F5EEF2;
+  --th-soft:    #D3C8CF;
+  --th-mute:    #A99DA6;   /* 7.3:1 on the night ground */
+  --th-gold:    var(--gold-lit);
+  --th-gap:     clamp(12px, 1.6vw, 24px);
+}
+
+/* ------------------------------------------------------------ shared */
+
+body.theatre .th-label{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px;
+  margin:0 0 var(--space-4);
+  font-family:var(--font-primary); font-size:var(--fs-xs); font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--th-soft);
+}
+body.theatre .th-label__act{
+  display:inline-flex; align-items:center; gap:10px; color:var(--th-gold);
+}
+body.theatre .th-label__act::before{
+  content:""; width:7px; height:7px; border:1px solid currentColor; transform:rotate(45deg);
+}
+body.theatre .th-label--ink{ color:var(--ink-mute); }
+body.theatre .th-label--ink .th-label__act{ color:var(--maroon); }
+
+body.theatre .th-fig{ margin:0; min-width:0; }
+body.theatre .th-photo{
+  display:block; position:relative; overflow:hidden;
+  background:var(--th-night-2); color:inherit;
+}
+body.theatre .th-photo img{
+  display:block; width:100%; height:100%; object-fit:cover;
+  object-position:var(--fx, 50%) var(--fy, 50%);
+  transition:filter .5s var(--e), transform .9s var(--e);
+}
+body.theatre .th-photo:hover img{ filter:brightness(1.08); }
+body.theatre .th-photo:focus-visible{ outline:2px solid var(--th-gold); outline-offset:3px; }
+body.theatre .th-cap{
+  display:block; margin-top:10px;
+  font-family:var(--font-primary); font-style:italic;
+  font-size:var(--fs-sm); line-height:1.45; color:var(--th-mute);
+}
+body.theatre .th-ext{ display:inline-block; margin-left:4px; font-style:normal; }
+
+/* The facts line: three short definitions, dark or light. */
+body.theatre .th-facts{
+  display:grid; grid-template-columns:repeat(3, minmax(0, auto)); justify-content:start;
+  gap:var(--space-4) var(--space-7); margin:0;
+}
+body.theatre .th-facts dt{
+  font-size:var(--fs-xs); letter-spacing:.16em; text-transform:uppercase; color:var(--th-mute);
+}
+body.theatre .th-facts dd{ margin:4px 0 0; font-size:1.02rem; color:var(--th-text); }
+@media (max-width:640px){
+  body.theatre .th-facts{ grid-template-columns:1fr 1fr; }
+}
+
+/* "Watch the production": the one call to action in each act. */
+body.theatre .th-watch{ display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-3) var(--space-5); margin:0; }
+body.theatre .th-watch__link{
+  display:inline-flex; align-items:center; gap:12px;
+  padding:11px 20px 11px 12px;
+  border:1px solid rgba(255,215,92,.55); border-radius:999px;
+  color:var(--th-text); font-weight:600; font-size:var(--fs-sm);
+  transition:background .25s var(--e), border-color .25s var(--e), color .25s var(--e);
+}
+body.theatre .th-watch__link:hover{ background:var(--th-gold); border-color:var(--th-gold); color:var(--purple-ink); }
+body.theatre .th-watch__play{
+  width:26px; height:26px; border-radius:50%; background:var(--th-gold); flex:none; position:relative;
+}
+body.theatre .th-watch__play::after{
+  content:""; position:absolute; left:10px; top:8px;
+  border-left:8px solid var(--purple-ink); border-top:5px solid transparent; border-bottom:5px solid transparent;
+}
+body.theatre .th-watch__len{ font-weight:400; color:var(--th-mute); font-variant-numeric:tabular-nums; }
+body.theatre .th-watch__link:hover .th-watch__len{ color:inherit; }
+body.theatre .th-watch__alt{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:4px 0; color:var(--th-soft); font-size:var(--fs-sm);
+  border-bottom:1px solid var(--th-line);
+  transition:color .25s var(--e), border-color .25s var(--e);
+}
+body.theatre .th-watch__alt:hover{ color:var(--th-gold); border-color:var(--th-gold); }
+
+/* A plain list of other recordings. */
+body.theatre .th-list__head{
+  margin:0 0 var(--space-3);
+  font-size:var(--fs-xs); letter-spacing:.16em; text-transform:uppercase; color:var(--th-mute);
+}
+body.theatre .th-list{ border-top:1px solid var(--th-line); }
+body.theatre .th-list a{
+  display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto auto;
+  align-items:baseline; gap:var(--space-4);
+  padding:14px 2px; border-bottom:1px solid var(--th-line);
+  color:var(--th-text); transition:color .2s var(--e), padding .3s var(--e);
+}
+body.theatre .th-list a:hover{ color:var(--th-gold); padding-left:8px; }
+body.theatre .th-list__title{ font-size:1.08rem; }
+body.theatre .th-list__note{ font-size:var(--fs-sm); color:var(--th-mute); }
+body.theatre .th-list__len{ font-size:var(--fs-sm); color:var(--th-mute); font-variant-numeric:tabular-nums; }
+@media (max-width:640px){
+  body.theatre .th-list a{ grid-template-columns:minmax(0,1fr) auto; gap:2px var(--space-3); }
+  body.theatre .th-list__note{ grid-column:1; grid-row:2; }
+  body.theatre .th-list__len{ grid-column:2; grid-row:1; }
+  body.theatre .th-list .th-ext{ display:none; }
+}
+
+/* ---------------------------------------------- the opening, polished */
+
+/* The amphitheatre opens from a clip, without the push-in: the photograph
+   now arrives at its own size and stays sharp. */
+body.theatre.th-motion .th-reveal img{
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path 1.2s var(--e2);
+}
+body.theatre.th-motion .th-reveal.is-in img{ clip-path:inset(0 0 0 0); }
+
+body.theatre .th-intro{ padding-bottom:0; }
+
+/* The year, in three acts: a programme's contents page. */
+body.theatre .th-programme{
+  display:grid; gap:var(--space-5) var(--space-8);
+  margin-top:clamp(var(--space-8), 8vw, var(--space-9));
+  padding-top:var(--space-6);
+  border-top:1px solid var(--rule);
+}
+@media (min-width:900px){
+  body.theatre .th-programme{ grid-template-columns:minmax(0,4fr) minmax(0,8fr); align-items:start; }
+  body.theatre .th-programme__list{ grid-column:2; grid-row:1 / span 2; }
+}
+body.theatre .th-programme__label{
+  font-size:var(--fs-xs); font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--maroon);
+}
+body.theatre .th-programme__lead{ color:var(--ink-soft); max-width:36ch; }
+body.theatre .th-programme__list{ display:grid; gap:1px; background:var(--rule); border:1px solid var(--rule); }
+@media (min-width:640px){ body.theatre .th-programme__list{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+body.theatre .th-programme__act{
+  display:grid; gap:6px; height:100%;
+  padding:clamp(var(--space-4),2vw,var(--space-6));
+  background:var(--paper); color:inherit;
+  transition:background .3s var(--e);
+}
+body.theatre .th-programme__act:hover{ background:var(--paper-2); }
+body.theatre .th-programme__n{
+  font-size:var(--fs-sm); font-weight:600; letter-spacing:.12em; color:var(--maroon);
+}
+body.theatre .th-programme__name{ font-size:clamp(1.3rem, 1.9vw, 1.7rem); line-height:1.1; color:var(--ink); }
+body.theatre .th-programme__name::after{
+  content:" \2193"; color:var(--gold); font-size:.8em;
+}
+body.theatre .th-programme__who{ font-size:var(--fs-sm); color:var(--ink-mute); }
+
+/* ------------------------------------------------------- Act I: Anand Utsav */
+
+body.theatre .th-au{
+  position:relative; overflow-x:clip;
+  background:var(--th-night); color:var(--th-text);
+}
+/* The house lights go down: paper to night, before the first frame. */
+body.theatre .th-au::before{
+  content:""; display:block; height:clamp(120px, 24vh, 260px);
+  background:linear-gradient(to bottom, var(--paper) 0%, #D9D0D6 22%, #3A2F3E 62%, var(--th-night) 100%);
+}
+
+body.theatre .th-au__stage{
+  position:relative; overflow:hidden;
+  height:clamp(460px, 92svh, 1000px);
+  background:#000;
+}
+body.theatre .th-au__dark,
+body.theatre .th-au__wideimg{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:var(--fx) var(--fy);
+}
+body.theatre .th-au__dark{ display:none; }
+body.theatre .th-au__wide{ position:absolute; inset:0; }
+body.theatre .th-au__scrim{
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(to top, rgba(12,9,16,.94) 0%, rgba(12,9,16,.78) 30%, rgba(12,9,16,.42) 52%, rgba(12,9,16,0) 72%),
+    linear-gradient(to bottom, rgba(12,9,16,.55) 0%, rgba(12,9,16,0) 22%);
+}
+body.theatre .th-au__head .th-label{ color:var(--th-text); }
+body.theatre .th-au__head{
+  position:absolute; left:0; right:0; bottom:0;
+  text-shadow:0 1px 16px rgba(12,9,16,.7);
+  padding:0 var(--gut) clamp(var(--space-6), 6vh, var(--space-8));
+  max-width:calc(var(--maxw) + 2 * var(--gut)); margin-inline:auto;
+}
+body.theatre .th-au__title{
+  font-family:var(--font-primary); font-weight:300;
+  font-size:clamp(2.4rem, 11vw, 12rem); line-height:.86; letter-spacing:-.012em;
+  text-transform:uppercase; color:#fff;
+  text-shadow:0 2px 40px rgba(0,0,0,.35);
+}
+body.theatre .th-au__sub{
+  margin-top:var(--space-4);
+  font-size:clamp(1rem, 1.5vw, 1.3rem); color:var(--th-soft);
+}
+body.theatre .th-au__sub em{ color:var(--th-gold); }
+/* The credit sits in the dark at the foot of the frame, beside the date
+   line, where the scrim guarantees it can be read whatever the light. */
+body.theatre .th-au__credit{
+  position:absolute; right:var(--gut); bottom:clamp(20px, 3.4vh, 36px);
+  max-width:24ch; text-align:right;
+  font-style:italic; font-size:var(--fs-sm); color:var(--th-soft);
+  text-shadow:0 1px 12px rgba(12,9,16,.8);
+}
+
+/* With motion, the stage holds while the scroll runs it: a darkened frame
+   first, then the whole stage opening out of a slit of light and coming up
+   to full colour. Every value is a variable theatre.js sets from the scroll,
+   so the reveal is the reader's to run forwards and back. */
+body.theatre .th-au.is-live .th-au__track{ height:300vh; }
+body.theatre .th-au.is-live .th-au__stage{ position:sticky; top:0; height:100vh; height:100svh; }
+body.theatre .th-au.is-live .th-au__dark{
+  display:block; opacity:var(--dark, 1);
+  filter:brightness(.9) saturate(.9);
+}
+body.theatre .th-au.is-live .th-au__wide{
+  clip-path:inset(calc((1 - var(--open, 0)) * 7%) calc((1 - var(--open, 0)) * 49.6%));
+}
+body.theatre .th-au.is-live .th-au__wideimg{
+  transform:scale(calc(1.14 - .14 * var(--open, 0)));
+  filter:brightness(calc(.3 + .7 * var(--lit, 0))) saturate(calc(.35 + .65 * var(--lit, 0)));
+}
+body.theatre .th-au.is-live .th-au__scrim{ opacity:calc(.35 + .65 * var(--lit, 0)); }
+body.theatre .th-au.is-live .th-au__head{
+  opacity:var(--type, 0);
+  transform:translateY(calc((1 - var(--type, 0)) * 28px));
+}
+body.theatre .th-au.is-live .th-au__credit{ opacity:var(--credit, 0); }
+@media (max-width:760px){
+  body.theatre .th-au.is-live .th-au__track{ height:240vh; }
+  /* Left, clear of the page's floating buttons in the right-hand corner. */
+  body.theatre .th-au__credit{ left:var(--gut); right:auto; bottom:var(--space-4); text-align:left; font-size:var(--fs-xs); }
+  body.theatre .th-au__head{ padding-bottom:var(--space-8); }
+}
+
+body.theatre .th-au__intro{
+  display:grid; gap:var(--space-6) var(--space-8);
+  padding-block:clamp(var(--space-8), 8vw, var(--space-9));
+}
+@media (min-width:900px){ body.theatre .th-au__intro{ grid-template-columns:minmax(0,7fr) minmax(0,5fr); align-items:start; } }
+body.theatre .th-au__lede{
+  font-family:var(--font-primary); font-size:clamp(1.2rem, 1.8vw, 1.55rem); line-height:1.5;
+  color:var(--th-text); max-width:44ch; text-wrap:pretty;
+}
+body.theatre .th-au__intro .th-facts{ grid-template-columns:1fr; gap:var(--space-4); }
+body.theatre .th-au__intro .th-watch{ margin-top:var(--space-5); }
+@media (min-width:900px){
+  body.theatre .th-au__intro .th-watch{ grid-column:2; margin-top:0; }
+}
+
+/* The sequence: four more moments at four different scales. */
+body.theatre .th-au__seq{ display:grid; gap:clamp(var(--space-8), 9vw, var(--space-10)); }
+body.theatre .th-au__row--court .th-fig{ display:grid; gap:var(--space-4) var(--space-6); align-items:end; }
+@media (min-width:900px){
+  body.theatre .th-au__row--court .th-fig{ grid-template-columns:minmax(0,8fr) minmax(0,4fr); }
+}
+body.theatre .th-au__row--court .th-photo img{ aspect-ratio:3 / 2; }
+
+body.theatre .th-bleed{ position:relative; }
+body.theatre .th-bleed .th-photo img{ aspect-ratio:21 / 9; }
+body.theatre .th-bleed > .th-cap{ padding-inline:var(--gut); max-width:calc(var(--maxw) + 2 * var(--gut)); margin-inline:auto; }
+@media (max-width:760px){ body.theatre .th-bleed .th-photo img{ aspect-ratio:3 / 2; } }
+
+body.theatre .th-au__row--pair{ display:grid; gap:var(--th-gap); align-items:start; }
+@media (min-width:900px){
+  body.theatre .th-au__row--pair{ grid-template-columns:repeat(12, minmax(0,1fr)); }
+  body.theatre .th-au__dance{ grid-column:1 / 8; }
+  body.theatre .th-au__sage{ grid-column:9 / 12; margin-top:clamp(var(--space-8), 10vw, var(--space-10)); }
+}
+body.theatre .th-au__dance .th-photo img{ aspect-ratio:3 / 2; }
+body.theatre .th-au__sage .th-photo img{ aspect-ratio:3 / 4; }
+@media (max-width:899px){ body.theatre .th-au__sage{ width:72%; margin-left:auto; } }
+
+body.theatre .th-au__finale .th-photo img{ aspect-ratio:16 / 9; max-height:92svh; }
+body.theatre .th-au__finalecap{
+  display:grid; gap:var(--space-2);
+  padding:var(--space-5) var(--gut) 0;
+  max-width:calc(var(--maxw) + 2 * var(--gut)); margin-inline:auto;
+}
+body.theatre .th-au__finaleline{ font-size:clamp(1.7rem, 3.4vw, 3rem); line-height:1.05; color:#fff; }
+body.theatre .th-au__finaleline em{ color:var(--th-gold); }
+body.theatre .th-au__finalecap .th-cap{ margin-top:0; }
+
+body.theatre .th-au__more{ padding-block:clamp(var(--space-8), 8vw, var(--space-9)) clamp(var(--space-7), 6vw, var(--space-8)); max-width:980px; margin-left:0; }
+@media (min-width:1320px){ body.theatre .th-au__more{ margin-left:calc((100vw - var(--maxw)) / 2); } }
+
+/* ------------------------------------------------------ Act II: Masquerades */
+
+body.theatre .th-mq{
+  overflow-x:clip;
+  background:var(--th-night); color:var(--th-text);
+  padding-top:clamp(var(--space-9), 12vw, 180px);
+  border-top:1px solid var(--th-line);
+}
+body.theatre .th-mq__open{ display:grid; gap:var(--space-7) var(--space-8); align-items:center; }
+@media (min-width:900px){ body.theatre .th-mq__open{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); } }
+body.theatre .th-mq__face{ margin:0; }
+body.theatre .th-mq__face img{
+  display:block; width:100%; aspect-ratio:4 / 5; max-height:82svh; object-fit:cover;
+  object-position:var(--fx) var(--fy);
+  -webkit-mask-image:radial-gradient(120% 90% at 50% 40%, #000 55%, transparent 100%);
+          mask-image:radial-gradient(120% 90% at 50% 40%, #000 55%, transparent 100%);
+}
+@media (max-width:899px){ body.theatre .th-mq__face{ width:min(78%, 420px); } }
+body.theatre .th-mq__title{
+  font-family:var(--font-primary); font-weight:300;
+  font-size:clamp(2.4rem, 5.4vw, 6.2rem); line-height:.9; letter-spacing:-.012em;
+  text-transform:uppercase; color:#fff;
+}
+@media (max-width:899px){ body.theatre .th-mq__title{ font-size:clamp(2.4rem, 10.5vw, 5.5rem); } }
+body.theatre .th-mq__lede{
+  margin:var(--space-5) 0 var(--space-6);
+  font-size:clamp(1.12rem, 1.55vw, 1.4rem); line-height:1.55; color:var(--th-soft);
+  max-width:46ch; text-wrap:pretty;
+}
+
+/* The programme: four houses, one card each, as a playbill lists acts. */
+body.theatre .th-bill{ padding-block:clamp(var(--space-8), 9vw, var(--space-10)) clamp(var(--space-8), 7vw, var(--space-9)); }
+body.theatre .th-bill__head{
+  display:grid; gap:var(--space-3) var(--space-7); align-items:end;
+  padding-bottom:var(--space-5); margin-bottom:var(--space-6);
+  border-bottom:1px solid var(--th-line);
+}
+@media (min-width:900px){ body.theatre .th-bill__head{ grid-template-columns:auto minmax(0,1fr) auto; } }
+body.theatre .th-bill__season{
+  font-size:var(--fs-xs); font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--th-gold);
+}
+body.theatre .th-bill__note{ color:var(--th-soft); font-size:var(--fs-sm); max-width:60ch; }
+body.theatre .th-bill__all,
+body.theatre .th-house__view{
+  justify-self:start;
+  display:inline-flex; align-items:center; gap:10px;
+  padding:10px 18px; border:1px solid var(--th-line); border-radius:999px;
+  color:var(--th-text); font-size:var(--fs-sm); font-weight:600;
+  transition:border-color .25s var(--e), color .25s var(--e);
+}
+body.theatre .th-bill__all::before{
+  content:""; width:14px; height:10px; flex:none;
+  border:1.5px solid currentColor; border-radius:2px;
+  box-shadow:3px -3px 0 -1.5px var(--th-night), 3px -3px 0 0 currentColor;
+}
+body.theatre .th-bill__all:hover,
+body.theatre .th-house__view:hover{ border-color:var(--th-gold); color:var(--th-gold); }
+body.theatre .th-bill__list{ display:grid; gap:var(--th-gap); grid-template-columns:repeat(2, minmax(0,1fr)); }
+@media (min-width:900px){ body.theatre .th-bill__list{ grid-template-columns:repeat(4, minmax(0,1fr)); } }
+body.theatre .th-bill__link{
+  position:relative; display:block; overflow:hidden; color:#fff;
+  background:var(--th-night-2);
+}
+body.theatre .th-bill__img img{
+  display:block; width:100%; aspect-ratio:3 / 4; object-fit:cover;
+  object-position:var(--fx) var(--fy);
+  filter:brightness(.78);
+  transition:filter .5s var(--e), transform 1s var(--e);
+}
+body.theatre .th-bill__link:hover .th-bill__img img,
+body.theatre .th-bill__link:focus-visible .th-bill__img img{ filter:brightness(1); transform:scale(1.025); }
+body.theatre .th-bill__link:focus-visible{ outline:2px solid var(--th-gold); outline-offset:3px; }
+body.theatre .th-bill__text{
+  position:absolute; inset:auto 0 0 0;
+  display:grid; gap:2px;
+  padding:var(--space-7) clamp(var(--space-3), 1.6vw, var(--space-5)) clamp(var(--space-3), 1.6vw, var(--space-5));
+  background:linear-gradient(to top, rgba(12,9,16,.94) 10%, rgba(12,9,16,.6) 60%, rgba(12,9,16,0));
+}
+body.theatre .th-bill__n{ font-size:var(--fs-sm); font-weight:600; letter-spacing:.14em; color:var(--th-gold); }
+body.theatre .th-bill__house{ font-size:clamp(1.35rem, 2.4vw, 2.2rem); line-height:1.05; }
+body.theatre .th-bill__play{ font-size:clamp(.98rem, 1.3vw, 1.15rem); color:var(--th-soft); }
+body.theatre .th-bill__meta{ margin-top:6px; font-size:var(--fs-xs); letter-spacing:.06em; color:var(--th-mute); }
+
+/* The rail keeps the programme in reach through four long galleries. It
+   is sticky inside the houses, so it appears with the first and leaves
+   with the last. */
+body.theatre .th-houses{ position:relative; }
+body.theatre .th-rail{
+  position:sticky; top:96px; z-index:6;
+  display:flex; justify-content:center; align-items:flex-start; pointer-events:none;
+  height:0; overflow:visible;
+}
+body.theatre .th-rail__inner{
+  pointer-events:auto;
+  display:flex; gap:2px; padding:4px;
+  background:rgba(12,9,16,.82);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  border:1px solid var(--th-line); border-radius:999px;
+  max-width:calc(100vw - 24px); overflow-x:auto; scrollbar-width:none;
+}
+body.theatre .th-rail__inner::-webkit-scrollbar{ display:none; }
+body.theatre .th-rail a{
+  display:inline-flex; align-items:baseline; gap:8px; white-space:nowrap;
+  padding:8px 14px; border-radius:999px;
+  font-size:var(--fs-sm); color:var(--th-soft);
+  transition:background .25s var(--e), color .25s var(--e);
+}
+body.theatre .th-rail__n{ font-size:var(--fs-xs); letter-spacing:.1em; color:var(--th-mute); }
+body.theatre .th-rail a:hover{ color:#fff; }
+body.theatre .th-rail a[aria-current="true"]{ background:var(--th-gold); color:var(--purple-ink); }
+body.theatre .th-rail a[aria-current="true"] .th-rail__n{ color:var(--purple-ink); }
+@media (max-width:760px){
+  body.theatre .th-rail{ top:72px; }
+  body.theatre .th-rail a{ padding:7px 11px; }
+}
+@media (max-width:560px){
+  body.theatre .th-rail__n{ display:none; }
+  body.theatre .th-rail a{ padding:7px 10px; font-size:.84rem; }
+}
+
+/* One house. */
+body.theatre .th-house{
+  position:relative;
+  padding-bottom:clamp(var(--space-8), 8vw, var(--space-10));
+  scroll-margin-top:0;
+}
+body.theatre .th-house + .th-house{ border-top:1px solid var(--th-line); padding-top:clamp(var(--space-8), 8vw, var(--space-10)); }
+body.theatre .th-house__lead{ position:relative; margin:0; background:#000; }
+body.theatre .th-house__lead .th-photo img{ aspect-ratio:16 / 9; max-height:90svh; }
+body.theatre .th-house__label{
+  position:absolute; left:0; right:0; bottom:0;
+  display:flex; align-items:flex-end; gap:clamp(var(--space-4), 2.4vw, var(--space-7));
+  padding:var(--space-9) var(--gut) clamp(var(--space-5), 4vw, var(--space-7));
+  background:linear-gradient(to top, rgba(8,6,11,.95) 0%, rgba(8,6,11,.82) 38%, rgba(8,6,11,.4) 72%, rgba(8,6,11,0) 100%);
+  pointer-events:none;
+  text-shadow:0 1px 14px rgba(8,6,11,.75);
+}
+body.theatre .th-house__numeral{
+  font-family:var(--font-primary); font-weight:300; font-size:clamp(3.4rem, 9vw, 9rem); line-height:.78;
+  color:var(--th-gold);
+}
+body.theatre .th-house__labeltext{ display:grid; gap:6px; justify-items:start; }
+body.theatre .th-house__kicker{
+  font-size:var(--fs-xs); font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--th-text);
+}
+body.theatre .th-house__play{ font-size:clamp(2.2rem, 5.6vw, 5.4rem); line-height:.95; color:#fff; }
+body.theatre .th-house__play:focus{ outline:none; }
+body.theatre .th-house__play:focus-visible{ outline:2px solid var(--th-gold); outline-offset:6px; }
+body.theatre .th-house__count{ font-size:var(--fs-sm); color:var(--th-mute); }
+@media (max-width:760px){
+  body.theatre .th-house__lead .th-photo img{ aspect-ratio:3 / 2; }
+  body.theatre .th-house__label{ position:static; padding:var(--space-5) var(--gut) 0; background:none; }
+}
+
+body.theatre .th-house__bar{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--space-4);
+  padding-block:var(--space-6);
+}
+body.theatre .th-watch--dark{ width:100%; }
+
+/* The gallery: an editorial sequence rather than a wall. Rows of four
+   kinds — one large beside two, one across, three even, two offset —
+   decided per house in tools/theatre.py. */
+body.theatre .th-grid{ display:grid; gap:clamp(var(--space-6), 5vw, var(--space-9)); }
+body.theatre .th-grid__row{
+  display:grid; grid-template-columns:repeat(12, minmax(0,1fr));
+  gap:var(--th-gap) var(--th-gap);
+}
+body.theatre .th-g .th-photo img{ aspect-ratio:4 / 3; }
+body.theatre .th-g--feature-0{ grid-column:1 / 9; grid-row:1 / 3; display:flex; flex-direction:column; }
+body.theatre .th-g--feature-0 .th-photo{ flex:1; min-height:0; }
+body.theatre .th-g--feature-0 .th-photo img{ aspect-ratio:auto; height:100%; }
+body.theatre .th-g--feature-1{ grid-column:9 / 13; grid-row:1; }
+body.theatre .th-g--feature-2{ grid-column:9 / 13; grid-row:2; }
+body.theatre .th-g--full-0{ grid-column:1 / -1; }
+body.theatre .th-g--full-0 .th-photo img{ aspect-ratio:2 / 1; }
+body.theatre .th-g--trio-0{ grid-column:1 / 5; }
+body.theatre .th-g--trio-1{ grid-column:5 / 9; }
+body.theatre .th-g--trio-2{ grid-column:9 / 13; }
+body.theatre .th-g--duo-0{ grid-column:1 / 8; }
+body.theatre .th-g--duo-0 .th-photo img{ aspect-ratio:3 / 2; }
+body.theatre .th-g--duo-1{ grid-column:8 / 13; margin-top:clamp(var(--space-7), 8vw, var(--space-10)); }
+/* Beside a portrait, the landscape matches its height. */
+body.theatre .has-portrait .th-g--duo-0{ grid-column:1 / 9; display:flex; flex-direction:column; }
+body.theatre .has-portrait .th-g--duo-0 .th-photo{ flex:1; min-height:0; }
+body.theatre .has-portrait .th-g--duo-0 .th-photo img{ aspect-ratio:auto; height:100%; }
+body.theatre .has-portrait .th-g--duo-1{ grid-column:9 / 13; margin-top:0; }
+body.theatre .th-g.is-portrait .th-photo img{ aspect-ratio:3 / 4; }
+
+@media (max-width:760px){
+  body.theatre .th-grid{ gap:var(--space-6); }
+  body.theatre .th-grid__row{ grid-template-columns:1fr; gap:var(--space-6); }
+  body.theatre .th-grid__row .th-g{ grid-column:1 / -1 !important; grid-row:auto !important; margin-top:0 !important; display:block; }
+  /* The photograph's own proportions (--ar, written beside it from the
+     manifest), so nothing is cropped on a phone and the page does not
+     grow under the reader as photographs arrive. */
+  body.theatre .th-grid__row .th-g .th-photo img{ aspect-ratio:var(--ar); height:auto; }
+  body.theatre .th-grid__row .th-g.is-portrait .th-photo img{ aspect-ratio:3 / 4; }
+}
+
+body.theatre .th-house__foot{
+  display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:var(--space-6);
+  margin-top:clamp(var(--space-7), 6vw, var(--space-8));
+}
+body.theatre .th-more{ flex:1 1 420px; max-width:720px; }
+body.theatre .th-more__toggle{
+  display:inline-flex; align-items:center; gap:10px; cursor:pointer; list-style:none;
+  padding:6px 0; color:var(--th-soft); font-size:var(--fs-sm);
+  border-bottom:1px solid var(--th-line);
+}
+body.theatre .th-more__toggle::-webkit-details-marker{ display:none; }
+body.theatre .th-more__toggle::after{ content:"+"; color:var(--th-gold); font-size:1.1rem; line-height:1; }
+body.theatre .th-more[open] .th-more__toggle::after{ content:"\2212"; }
+body.theatre .th-more__toggle:hover{ color:#fff; }
+body.theatre .th-more__n{
+  font-size:var(--fs-xs); padding:1px 8px; border-radius:999px; background:var(--th-night-2); color:var(--th-mute);
+}
+body.theatre .th-more .th-list{ margin-top:var(--space-4); }
+body.theatre .th-house__next{
+  display:inline-grid; gap:4px; text-align:right; margin-left:auto; color:#fff;
+}
+body.theatre .th-house__nextlabel{ font-size:var(--fs-xs); letter-spacing:.18em; text-transform:uppercase; color:var(--th-mute); }
+body.theatre .th-house__nextname{ font-family:var(--font-primary); font-size:clamp(1.2rem, 1.8vw, 1.6rem); }
+body.theatre .th-house__nextname::after{ content:" \2193"; color:var(--th-gold); }
+body.theatre .th-house__next:hover .th-house__nextname{ color:var(--th-gold); }
+
+/* Arriving at a house from the programme: a brief blackout, and the lead
+   photograph comes up out of it. It plays once, takes under a second, and
+   never holds the scroll. */
+@keyframes th-lights-up{
+  0%   { filter:brightness(0) blur(6px); }
+  35%  { filter:brightness(.15) blur(3px); }
+  100% { filter:brightness(1) blur(0); }
+}
+@keyframes th-rise{
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:none; }
+}
+body.theatre.th-motion .th-house.is-arriving .th-house__leadimg{ animation:th-lights-up 1s var(--e) both; }
+body.theatre.th-motion .th-house.is-arriving .th-house__labeltext{ animation:th-rise .8s .3s var(--e2) both; }
+
+/* ---------------------------------------------- Act III: Class Presentations */
+
+body.theatre .th-cp{
+  position:relative; background:var(--paper); color:var(--ink);
+  padding-top:0;
+}
+/* The house lights come back up. */
+body.theatre .th-cp::before{
+  content:""; display:block; height:clamp(100px, 18vh, 200px);
+  margin-bottom:clamp(var(--space-6), 5vw, var(--space-8));
+  background:linear-gradient(to bottom, var(--th-night) 0%, #3A2F3E 36%, #D9D0D6 78%, var(--paper) 100%);
+}
+body.theatre .th-cp__head{ max-width:760px; margin-bottom:clamp(var(--space-6), 4vw, var(--space-8)); }
+body.theatre .th-cp__head .h2{ margin-bottom:18px; }
+body.theatre .th-cp__note{ margin-top:var(--space-4); font-size:var(--fs-sm); color:var(--ink-mute); max-width:var(--measure); }
+
+body.theatre .th-videos{ display:grid; gap:var(--space-7) var(--th-gap); }
+@media (min-width:640px){ body.theatre .th-videos{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (min-width:1040px){ body.theatre .th-videos{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+body.theatre .th-video__link{ display:grid; gap:6px; color:inherit; }
+body.theatre .th-video__thumb{
+  position:relative; display:block; overflow:hidden; margin-bottom:var(--space-3);
+  background:var(--paper-3); aspect-ratio:16 / 9;
+}
+body.theatre .th-video__thumb img{
+  display:block; width:100%; height:100%; object-fit:cover;
+  transition:transform .6s var(--e);
+}
+body.theatre .th-video__link:hover .th-video__thumb img{ transform:scale(1.025); }
+body.theatre .th-video__len{
+  position:absolute; right:8px; bottom:8px;
+  padding:2px 7px; border-radius:4px;
+  background:rgba(14,11,18,.84); color:#fff;
+  font-size:var(--fs-xs); font-weight:600; font-variant-numeric:tabular-nums;
+}
+body.theatre .th-video__class{
+  font-size:var(--fs-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--maroon);
+}
+body.theatre .th-video__title{ font-size:clamp(1.25rem, 1.6vw, 1.45rem); line-height:1.2; color:var(--ink); }
+body.theatre .th-video__meta{ font-size:var(--fs-sm); color:var(--ink-mute); }
+body.theatre .th-video__cta{
+  margin-top:4px; font-size:var(--fs-sm); font-weight:600; color:var(--purple);
+  text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:4px; text-decoration-thickness:1.5px;
+}
+body.theatre .th-video__link:hover .th-video__cta{ color:var(--maroon); }
+body.theatre .th-video__link:focus-visible{ outline:2px solid var(--gold); outline-offset:6px; }
+
+body.theatre .th-archive{
+  margin-top:clamp(var(--space-8), 6vw, var(--space-9));
+  border-top:1px solid var(--rule);
+}
+body.theatre .th-archive__toggle{
+  display:flex; align-items:center; gap:12px; cursor:pointer; list-style:none;
+  padding:var(--space-5) 0;
+  font-family:var(--font-primary); font-size:clamp(1.15rem, 1.6vw, 1.4rem); color:var(--ink);
+}
+body.theatre .th-archive__toggle::-webkit-details-marker{ display:none; }
+body.theatre .th-archive__toggle::after{ content:"+"; margin-left:auto; color:var(--gold); font-size:1.5rem; line-height:1; }
+body.theatre .th-archive[open] .th-archive__toggle::after{ content:"\2212"; }
+body.theatre .th-archive__n{
+  font-family:var(--font-primary); font-size:var(--fs-xs); padding:2px 9px; border-radius:999px;
+  background:var(--paper-2); color:var(--ink-mute);
+}
+body.theatre .th-vrows{ display:grid; gap:1px; background:var(--rule); border-block:1px solid var(--rule); }
+@media (min-width:900px){ body.theatre .th-vrows{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+body.theatre .th-vrow__link{
+  display:grid; grid-template-columns:128px minmax(0,1fr); grid-template-rows:auto auto auto;
+  column-gap:var(--space-4); row-gap:2px; align-items:start;
+  padding:var(--space-4) var(--space-3) var(--space-4) 0;
+  background:var(--paper); color:inherit; height:100%;
+  transition:background .25s var(--e);
+}
+body.theatre .th-vrow__link:hover{ background:var(--paper-2); }
+body.theatre .th-vrow__link img{ grid-row:1 / 4; width:128px; height:72px; object-fit:cover; background:var(--paper-3); }
+body.theatre .th-vrow__title{ font-size:.98rem; line-height:1.35; color:var(--ink); }
+body.theatre .th-vrow__meta{ font-size:var(--fs-xs); color:var(--ink-mute); }
+body.theatre .th-vrow__cta{ font-size:var(--fs-xs); font-weight:600; color:var(--purple); }
+
+body.theatre .th-cp__links{
+  display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-4) var(--space-6);
+  margin-top:clamp(var(--space-7), 5vw, var(--space-8));
+}
+body.theatre .th-cp__channel{
+  font-size:var(--fs-sm); font-weight:600; color:var(--purple);
+  border-bottom:1px solid var(--gold); padding-bottom:2px;
+}
+body.theatre .th-cp__channel:hover{ color:var(--maroon); }
+
+/* ------------------------------------------------------------ the closing */
+
+body.theatre .th-invite{ background:var(--paper-2); }
+body.theatre .th-invite__inner{ display:grid; gap:var(--space-6) var(--space-8); align-items:end; }
+@media (min-width:900px){ body.theatre .th-invite__inner{ grid-template-columns:minmax(0,8fr) minmax(0,4fr); } }
+body.theatre .th-invite__text .h2{ margin-bottom:var(--space-5); }
+body.theatre .th-invite__action{ margin:0; }
+body.theatre .th-invite__action .btn{ white-space:normal; }
+
+/* ------------------------------------------------------------- the viewer */
+
+body.theatre dialog.th-viewer{
+  width:100vw; height:100vh; height:100dvh; max-width:none; max-height:none;
+  margin:0; padding:0; border:0; inset:0;
+  background:rgba(8,6,11,.97); color:var(--th-text);
+  overflow:hidden;
+}
+body.theatre dialog.th-viewer[open]{
+  display:grid; grid-template-rows:auto minmax(0,1fr) auto;
+}
+body.theatre dialog.th-viewer::backdrop{ background:rgba(8,6,11,.9); }
+body.theatre .th-viewer__top{
+  display:flex; align-items:center; gap:var(--space-4);
+  padding:var(--space-4) var(--space-4) var(--space-3) var(--gut);
+}
+body.theatre .th-viewer__where{ flex:1; min-width:0; font-size:var(--fs-sm); }
+body.theatre .th-viewer__title{ font-weight:600; color:#fff; }
+body.theatre .th-viewer__sub{ font-style:italic; color:var(--th-soft); }
+body.theatre .th-viewer__count{ font-size:var(--fs-sm); color:var(--th-mute); font-variant-numeric:tabular-nums; white-space:nowrap; }
+body.theatre .th-viewer__close,
+body.theatre .th-viewer__step{
+  display:inline-grid; place-items:center;
+  width:46px; height:46px; border-radius:50%;
+  border:1px solid var(--th-line); background:rgba(20,16,25,.7); color:#fff;
+  transition:border-color .2s var(--e), background .2s var(--e);
+}
+body.theatre .th-viewer__close:hover,
+body.theatre .th-viewer__step:hover{ border-color:var(--th-gold); background:rgba(20,16,25,.95); }
+body.theatre .th-viewer__stage{
+  display:flex; align-items:center; justify-content:center;
+  min-height:0; padding:0 clamp(12px, 7vw, 96px);
+  touch-action:pan-y pinch-zoom;
+}
+body.theatre .th-viewer__stage img{
+  display:block; max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain;
+}
+body.theatre .th-viewer__caption{
+  min-height:3.2em; padding:var(--space-3) var(--gut) var(--space-5);
+  text-align:center; font-style:italic; font-size:var(--fs-sm); color:var(--th-soft);
+}
+body.theatre .th-viewer__step{ position:absolute; top:50%; transform:translateY(-50%); }
+body.theatre .th-viewer__step--prev{ left:clamp(8px, 2vw, 28px); }
+body.theatre .th-viewer__step--next{ right:clamp(8px, 2vw, 28px); }
+@media (max-width:760px){
+  body.theatre .th-viewer__stage{ padding:0; }
+  body.theatre .th-viewer__step{ top:auto; bottom:14px; transform:none; }
+  body.theatre .th-viewer__caption{ padding-inline:72px; }
+}
+html.th-locked, html.th-locked body{ overflow:hidden; }
+
+/* ---------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion:reduce){
+  body.theatre .th-photo img,
+  body.theatre .th-bill__img img,
+  body.theatre .th-video__thumb img,
+  body.theatre .th-list a{ transition:none; }
+  body.theatre .th-bill__link:hover .th-bill__img img,
+  body.theatre .th-video__link:hover .th-video__thumb img{ transform:none; }
+}

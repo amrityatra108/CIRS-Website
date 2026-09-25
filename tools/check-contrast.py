@@ -20,7 +20,7 @@ against the WCAG AA floors (4.5:1 for body text, 3:1 for large text).
     python3 tools/check-contrast.py why-cirs.html     # the lines over the About photographs
     python3 tools/check-contrast.py captures.html    # the line over the last frame of the camera
     python3 tools/check-contrast.py sports.html      # the line over the last frame of the field
-    python3 tools/check-contrast.py student-life.html # the headline in the campus band's gradient
+    python3 tools/check-contrast.py the-cirs-experience.html # the headline in the campus band's gradient
 
 Admissions and News are a .pagehero over a looping video and are seeked
 through it. Crossroads is a wall of covers drifting behind the masthead,

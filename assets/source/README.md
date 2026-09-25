@@ -20,6 +20,9 @@ Three batches, and they differ:
   buimerccorp.com — each the photograph that organisation publishes under the
   person's own name, saved as published, with the owner's approval in
   September 2026. `tools/make-leadership.py` cuts them and records the pages.
+- `festivals/` — 56 photographs of the seven festivals on CIRS Festivals, each
+  from a named event folder in the school's Drive, resized to 2000px. Their
+  own README says where each came from and how its date is known.
 
 Everything after the first batch is resized on the way in. Drive remains the
 archive of those true originals; at full size they would have added roughly

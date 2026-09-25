@@ -1,190 +1,442 @@
-<section class="section cx-intro" id="about">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">CIRS Festivals</span></p>
-      <h2 class="serif h2" data-split>A Year Kept <em>Festival by Festival.</em></h2>
-      <p class="lead">CIRS is a bustling place, with vibrant festivals adorning its pathways through the year &mdash; and the school comes to life with melodious paeans and energetic dances for every one of them.</p>
-    </div>
-    <div class="cx-intro__grid">
-      <div class="cx-intro__text rv">
-        <p class="copy">The enthusiasm resonates in each heart long after the event is over, because of the surge of participation from the fifth grade to the twelfth. The essence lies in the diversity of festivals across the country: one may be a huge festival in one state and unknown in another, yet everyone unites to celebrate it together.</p>
-        <p class="copy">These festivities are not limited to the student body. The faculty are the backbone of every festival, lending unwavering support to every last-minute arrangement.</p>
-      </div>
-      <figure class="cx-intro__fig img-reveal rv">
-        <img src="assets/img/captures/dancers-pink-light.jpg" alt="Students in festival costume dancing on stage under pink light" width="1371" height="914" loading="lazy" decoding="async">
-        <figcaption>A festival evening on the stage.</figcaption>
-      </figure>
-    </div>
+<!-- CIRS Festivals: a year kept festival by festival.
+
+     The light moves through the page the way it moves through the school
+     year: the opening sits in the dark before dawn, each chapter carries the
+     light of its own season, and the page ends in the colour of spring.
+
+     Every photograph is the school's own and was taken at the festival its
+     caption names — see tools/festivals.py for each one's Drive folder and
+     how its occasion is known. The seven chapters are the celebrations the
+     school documents; "Festivals across India" below them is cultural
+     context and makes no claim that CIRS held those celebrations.
+
+     The double-braced tokens below are filled by festivals.expand() in
+     tools/festivals.py, which documents each of them. -->
+
+<section class="fx-open" id="year-begins" data-jump-label="The year begins" data-fx-open>
+  <div class="fx-open__sky" aria-hidden="true"></div>
+  <div class="wrap fx-open__head">
+    <p class="fx-open__eyebrow"><span class="sc">CIRS Festivals</span><span class="fx-open__range">From the monsoon to the spring</span></p>
+    <h1 class="fx-open__title">A Year Kept <em>Festival by Festival</em></h1>
+    <p class="fx-open__intro">Seven festivals mark the CIRS year, and each one draws the whole
+      school in, from the fifth grade to the twelfth.</p>
+    <p class="fx-open__actions">
+      <a class="btn btn--primary btn--lg" href="#year">Explore the year</a>
+      <a class="fx-open__aside" href="#india">Festivals across India</a>
+    </p>
+  </div>
+  <div class="fx-open__strip">
+    {{FX_STRIP}}
   </div>
 </section>
 
-<section class="section on-paper-2" id="year">
-  <div class="wrap">
-    <div class="sec-head rv">
+<section class="section fx-meaning" id="meaning" data-jump-label="The school comes to life">
+  <div class="wrap fx-meaning__grid">
+    <div class="rv">
       <p class="marker"><span class="sc">Through the year</span></p>
-      <h2 class="serif h2" data-split>Seven Festivals, <em>One School.</em></h2>
-      <p class="lead">In the order the school year meets them, from the monsoon to the spring.</p>
+      <h2 class="serif h2" data-split>The School <em>Comes to Life.</em></h2>
     </div>
-    <!-- Stand-in photographs from the school's own collection, placed until the
-     department supplies the pictures that belong here. Every alt text and
-     caption describes only what is in the frame. -->
-    <div class="cx-rows">
-    <article class="cx-row">
-      <figure class="cx-row__media img-reveal rv">
-        <img src="assets/img/captures/three-dancers.jpg" alt="Three students in traditional costume dancing on stage" width="900" height="600" loading="lazy" decoding="async">
-      </figure>
-      <div class="cx-row__text rv">
-        <p class="cx-row__kicker"><span class="cx-row__n">01</span> July&ndash;August</p>
-        <h3 class="serif cx-row__title">Raksha Bandhan</h3>
-        <p class="copy">Unfamiliar at first, students develop an unbreakable bond as brothers vow to protect their sisters. The programme begins with Krishnaji being tied the first rakhi. Siblings share their moments of love and mischief with the entire school during the morning pooja.</p>
-        <p class="copy">Then, while rakhis are being knotted, the school resonates with wishes and chocolate requests. As dusk falls, the brothers surprise their sisters with an emotional, relatable and heartfelt programme.</p>
-      </div>
-    </article>
-    <article class="cx-row cx-row--reverse">
-      <figure class="cx-row__media img-reveal rv">
-        <img src="assets/img/captures/human-pyramid.jpg" alt="Students forming a human pyramid at night to reach a pot hung high overhead" width="990" height="660" loading="lazy" decoding="async">
-      </figure>
-      <div class="cx-row__text rv">
-        <p class="cx-row__kicker"><span class="cx-row__n">02</span> August</p>
-        <h3 class="serif cx-row__title">Janmashtami</h3>
-        <p class="copy">The day begins with everyone seated in devotion for the pooja. A culmination of pure devotion and Kanha&rsquo;s naughtiness radiates from every heart through the day, and students fast to express their bhakti towards the Supreme.</p>
-        <p class="copy">The midnight aarti and performance is packed with energy. Then comes the time to relive Krishna&rsquo;s childhood, as each grade competes to be the first to break the <i>matki</i>.</p>
-      </div>
-    </article>
-    <article class="cx-row">
-      <figure class="cx-row__media img-reveal rv">
-        <img src="assets/img/arts/bharatanatyam.jpg" alt="Three dancers in classical costume performing under pink stage light" width="1600" height="1194" loading="lazy" decoding="async">
-      </figure>
-      <div class="cx-row__text rv">
-        <p class="cx-row__kicker"><span class="cx-row__n">03</span> August&ndash;September</p>
-        <h3 class="serif cx-row__title">Onam</h3>
-        <p class="copy">Rooted in Kerala, Onam extends its roots all the way to CIRS, and is especially loved by every student &mdash; for its powerful symbol of sacrifice, and for the special feast, the <i>sadhya</i>.</p>
-        <p class="copy">After contenting hearts and stomachs, the spirited story of Mahabali, told through a skit, brings goosebumps to every spectator.</p>
-      </div>
-    </article>
-    <article class="cx-row cx-row--reverse">
-      <figure class="cx-row__media img-reveal rv">
-        <img src="assets/img/arts/festival.jpg" alt="The festival stage set with a brightly painted backdrop, the school seated before it" width="1600" height="1194" loading="lazy" decoding="async">
-      </figure>
-      <div class="cx-row__text rv">
-        <p class="cx-row__kicker"><span class="cx-row__n">04</span> August&ndash;September</p>
-        <h3 class="serif cx-row__title">Ganesh Chaturthi</h3>
-        <p class="copy">Mornings begin with the sacred worship of Vinayaka, and the joy of the prasad that follows. Evenings are filled with enthusiasm as every grade shows its devotion with renditions, dances and anecdotes for our dear Bappa.</p>
-        <p class="copy">At the core of the festival, the students handcraft their own murtis. As the season ends, everyone is on their toes, movements and voices in unison, as the procession carries the idol to be immersed in the school&rsquo;s own lake.</p>
-      </div>
-    </article>
-    <article class="cx-row">
-      <figure class="cx-row__media img-reveal rv">
-        <img src="assets/img/arts/stage.jpg" alt="A dancer in red and gold under orange stage light, arms raised" width="900" height="662" loading="lazy" decoding="async">
-      </figure>
-      <div class="cx-row__text rv">
-        <p class="cx-row__kicker"><span class="cx-row__n">05</span> September&ndash;October</p>
-        <h3 class="serif cx-row__title">Dussehra</h3>
-        <p class="copy">The day begins with the morning pooja, which brings a wave of calm. What truly brings the celebration to life are the mesmerising rangolis crafted by the students.</p>
-        <p class="copy">The school gathers to chant and witness the ultimate triumph of dharma &mdash; Ravan Dahan &mdash; and the evening sky is spellbound as the fireworks go up.</p>
-      </div>
-    </article>
-    <article class="cx-row cx-row--reverse">
-      <figure class="cx-row__media img-reveal rv">
-        <img src="assets/img/captures/dancing-lawn.jpg" alt="Students in uniform dancing together on the lawn" width="1800" height="1013" loading="lazy" decoding="async">
-      </figure>
-      <div class="cx-row__text rv">
-        <p class="cx-row__kicker"><span class="cx-row__n">06</span> January</p>
-        <h3 class="serif cx-row__title">Pongal</h3>
-        <p class="copy">One of the biggest harvest festivals, and the school is decorated in a majestic way. But the campus feels incomplete without the aroma of pongal swirling in the air, as six hundred students come together to prepare the delicacy in small groups.</p>
-        <p class="copy">Everyone goes around relishing the pongals prepared by the other teams &mdash; and then the winner of the most scrumptious pongal is declared.</p>
-      </div>
-    </article>
-    <article class="cx-row">
-      <figure class="cx-row__media img-reveal rv">
-        <img src="assets/img/arts/ensemble.jpg" alt="A dance ensemble in bright costumes on a stage washed with pink and violet light" width="1600" height="1194" loading="lazy" decoding="async">
-      </figure>
-      <div class="cx-row__text rv">
-        <p class="cx-row__kicker"><span class="cx-row__n">07</span> March</p>
-        <h3 class="serif cx-row__title">Holi</h3>
-        <p class="copy">The essence of the bonfire is brought to us through a skit in which Holika&rsquo;s devious plans burn, and the countdown begins.</p>
-        <p class="copy">To CIRS, Holi brings a festive zeal of colours that soon find their owners. The Dronacharya field buzzes with excitement as colour paints every face.</p>
-      </div>
-    </article>
+    <div class="fx-meaning__text rv">
+      <p class="lead">CIRS is a bustling place, with vibrant festivals adorning its pathways through
+        the year &mdash; and the school comes to life with melodious paeans and energetic dances for
+        every one of them.</p>
+      <p class="copy">The enthusiasm resonates in each heart long after the event is over, because of
+        the surge of participation from the fifth grade to the twelfth.</p>
+      <p class="copy">These festivities are not limited to the student body. The faculty are the
+        backbone of every festival, lending unwavering support to every last-minute arrangement.</p>
     </div>
   </div>
 </section>
 
-<section class="section on-purple cx-band" id="together">
+<section class="fx-year" id="year" data-jump-label="Celebrated at CIRS">
+  <header class="wrap fx-year__head">
+    <p class="marker rv"><span class="sc">Celebrated at CIRS</span></p>
+    <h2 class="serif h2 rv" data-split>Seven Festivals, <em>One School.</em></h2>
+    <p class="lead rv">In the order the school year meets them, from the monsoon to the spring.
+      Every photograph here was taken at the festival it names, and is dated as closely as its
+      camera allows.</p>
+  </header>
+
+  {{FX_INDEX}}
+
+  <!-- 01 Raksha Bandhan: a monsoon morning, close enough to see the knot. -->
+  <article class="fx-ch fx-ch--rakhi" id="raksha-bandhan" data-fx-chapter aria-labelledby="raksha-bandhan-h">
+    <div class="wrap fx-rakhi">
+      <header class="fx-ch__head fx-rakhi__head rv">
+        <p class="fx-ch__kicker"><span class="fx-ch__n">01</span><span>July&ndash;August</span><span class="fx-ch__light">A monsoon morning</span></p>
+        <h3 class="fx-ch__title" id="raksha-bandhan-h">Raksha Bandhan</h3>
+      </header>
+      <div class="fx-rakhi__copy rv">
+        <p class="copy">Unfamiliar at first, students develop an unbreakable bond as brothers vow to
+          protect their sisters. The programme begins with Krishnaji being tied the first rakhi.
+          Siblings share their moments of love and mischief with the entire school during the
+          morning pooja.</p>
+        <p class="copy">Then, while rakhis are being knotted, the school resonates with wishes and
+          chocolate requests. As dusk falls, the brothers surprise their sisters with an emotional,
+          relatable and heartfelt programme.</p>
+      </div>
+      <figure class="fx-fig fx-rakhi__knot">
+        <div class="fx-fig__frame img-reveal">{{FX_IMG rakhi-knot | (max-width: 820px) 100vw, 56vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP rakhi-knot}}</figcaption>
+      </figure>
+      <figure class="fx-fig fx-rakhi__thali rv">
+        <div class="fx-fig__frame">{{FX_IMG rakhi-thali | (max-width: 820px) 66vw, 30vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP rakhi-thali}}</figcaption>
+      </figure>
+      <figure class="fx-fig fx-rakhi__sweets rv">
+        <div class="fx-fig__frame">{{FX_IMG rakhi-sweets | (max-width: 820px) 66vw, 30vw | fx-fig__img | | 55% 50%}}</div>
+        <figcaption class="fx-cap">{{FX_CAP rakhi-sweets}}</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- 02 Janmashtami, and the page's centrepiece: one night, in the order the
+       cameras recorded it. The times are the cameras' own, in IST. -->
+  <article class="fx-ch fx-ch--jan" id="janmashtami" data-fx-chapter aria-labelledby="janmashtami-h">
+    <div class="wrap fx-jan">
+      <header class="fx-ch__head rv">
+        <p class="fx-ch__kicker"><span class="fx-ch__n">02</span><span>August&ndash;September</span><span class="fx-ch__light">From morning into midnight</span></p>
+        <h3 class="fx-ch__title" id="janmashtami-h">Janmashtami</h3>
+      </header>
+      <div class="fx-jan__copy rv">
+        <p class="copy">The day begins with everyone seated in devotion for the pooja. A culmination of
+          pure devotion and Kanha&rsquo;s naughtiness radiates from every heart through the day, and
+          students fast to express their bhakti towards the Supreme.</p>
+        <p class="copy">The midnight aarti and performance is packed with energy. Then comes the time
+          to relive Krishna&rsquo;s childhood, as each grade competes to be the first to break the
+          <i>matki</i>.</p>
+      </div>
+    </div>
+
+    <div class="fx-night" data-fx-night>
+      <div class="wrap fx-night__intro">
+        <p class="fx-night__eyebrow">One night, in eight photographs</p>
+        <h4 class="fx-night__title">From the pooja <em>to the matki</em></h4>
+        <p class="fx-night__lead">The school&rsquo;s cameras followed Janmashtami on 4 September
+          2026, from the morning pooja to the breaking of the matki after midnight. Each time below
+          is the camera&rsquo;s own.</p>
+        <p class="fx-night__skip"><a href="#onam">Skip the night and go on to Onam</a></p>
+      </div>
+
+      <div class="fx-night__body">
+        <p class="fx-night__clock" aria-hidden="true"><span class="fx-night__time" data-fx-clock>08:30</span><span class="fx-night__date" data-fx-date>4 September</span></p>
+        <ol class="fx-night__seq">
+          <li class="fx-frame fx-frame--1" data-fx-frame data-time="08:30" data-date="4 September" data-phase="morning">
+            <figure class="fx-frame__fig">
+              {{FX_IMG jan-pooja | (max-width: 820px) 100vw, 44vw | fx-frame__img}}
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T08:30+05:30">08:30</time><span>The morning pooja before the Krishna murti.</span></figcaption>
+            </figure>
+          </li>
+          <li class="fx-frame fx-frame--2" data-fx-frame data-time="23:10" data-date="4 September" data-phase="night">
+            <figure class="fx-frame__fig">
+              {{FX_IMG jan-singer | (max-width: 820px) 100vw, 50vw | fx-frame__img}}
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T23:10+05:30">23:10</time><span>A bhajan at the microphone.</span></figcaption>
+            </figure>
+          </li>
+          <li class="fx-frame fx-frame--3" data-fx-frame data-time="23:24" data-date="4 September" data-phase="night">
+            <figure class="fx-frame__fig">
+              {{FX_IMG jan-dance | (max-width: 820px) 100vw, 58vw | fx-frame__img}}
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T23:24+05:30">23:24</time><span>A dance in red and gold, close to the front row.</span></figcaption>
+            </figure>
+          </li>
+          <li class="fx-frame fx-frame--4" data-fx-frame data-time="23:57" data-date="4 September" data-phase="night">
+            <figure class="fx-frame__fig">
+              {{FX_IMG jan-lamps | (max-width: 820px) 100vw, 74vw | fx-frame__img}}
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T23:57+05:30">23:57</time><span>Just before midnight, the hall dark but for the lamps.</span></figcaption>
+            </figure>
+          </li>
+          <li class="fx-frame fx-frame--5" data-fx-frame data-time="00:54" data-date="5 September" data-phase="night">
+            <figure class="fx-frame__fig">
+              {{FX_IMG jan-reach | (max-width: 820px) 80vw, 34vw | fx-frame__img}}
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-05T00:54+05:30">00:54</time><span>Outside, under the tree, a hand reaches for the matki.</span></figcaption>
+            </figure>
+          </li>
+          <li class="fx-frame fx-frame--6" data-fx-frame data-time="00:57" data-date="5 September" data-phase="night">
+            <figure class="fx-frame__fig">
+              {{FX_IMG jan-pyramid | (max-width: 820px) 100vw, 70vw | fx-frame__img}}
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-05T00:57+05:30">00:57</time><span>The pyramid rises, the pot still out of reach.</span></figcaption>
+            </figure>
+          </li>
+          <li class="fx-frame fx-frame--7" data-fx-frame data-time="01:01" data-date="5 September" data-phase="break">
+            <figure class="fx-frame__fig">
+              {{FX_IMG jan-break | (max-width: 820px) 100vw, 60vh | fx-frame__img}}
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-05T01:01+05:30">01:01</time><span>The matki breaks.</span></figcaption>
+            </figure>
+          </li>
+        </ol>
+      </div>
+      <figure class="fx-night__coda" data-fx-frame data-time="01:04" data-date="5 September" data-phase="night">
+        <div class="fx-night__coda-frame">{{FX_IMG jan-lawn | 100vw | fx-frame__img}}</div>
+        <figcaption class="wrap fx-frame__cap"><time datetime="2026-09-05T01:04+05:30">01:04</time><span>Afterwards, the lawn full of students under the trees.</span></figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- 03 Onam: flowers underfoot, then the long rows of the sadhya. -->
+  <article class="fx-ch fx-ch--onam" id="onam" data-fx-chapter aria-labelledby="onam-h">
+    <div class="wrap fx-onam">
+      <header class="fx-ch__head rv">
+        <p class="fx-ch__kicker"><span class="fx-ch__n">03</span><span>August&ndash;September</span><span class="fx-ch__light">Flowers, then the feast</span></p>
+        <h3 class="fx-ch__title" id="onam-h">Onam</h3>
+      </header>
+      <figure class="fx-fig fx-onam__petals rv">
+        <div class="fx-fig__frame">{{FX_IMG onam-petals | (max-width: 820px) 84vw, 30vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP onam-petals}}</figcaption>
+      </figure>
+      <figure class="fx-fig fx-onam__lamps">
+        <div class="fx-fig__frame img-reveal">{{FX_IMG onam-lamps | (max-width: 820px) 100vw, 62vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP onam-lamps}}</figcaption>
+      </figure>
+      <div class="fx-onam__copy rv">
+        <p class="copy">Rooted in Kerala, Onam extends its roots all the way to CIRS, and is especially
+          loved by every student &mdash; for its powerful symbol of sacrifice, and for the special
+          feast, the <i>sadhya</i>.</p>
+        <p class="copy">After contenting hearts and stomachs, the spirited story of Mahabali, told
+          through a skit, brings goosebumps to every spectator.</p>
+      </div>
+    </div>
+    <figure class="fx-band fx-onam__sadhya">
+      <div class="fx-band__frame img-reveal">{{FX_IMG onam-sadhya | 100vw | fx-band__img | | 50% 62%}}</div>
+      <figcaption class="wrap fx-cap">{{FX_CAP onam-sadhya}}</figcaption>
+    </figure>
+  </article>
+
+  <!-- 04 Ganesh Chaturthi: the monsoon lake, the widest picture on the page,
+       then the immersion in the order it was photographed. -->
+  <article class="fx-ch fx-ch--ganesh" id="ganesh-chaturthi" data-fx-chapter aria-labelledby="ganesh-chaturthi-h">
+    <div class="wrap fx-ganesh">
+      <header class="fx-ch__head rv">
+        <p class="fx-ch__kicker"><span class="fx-ch__n">04</span><span>August&ndash;September</span><span class="fx-ch__light">Cloud on the hills</span></p>
+        <h3 class="fx-ch__title" id="ganesh-chaturthi-h">Ganesh Chaturthi</h3>
+      </header>
+      <div class="fx-ganesh__copy rv">
+        <p class="copy">Mornings begin with the sacred worship of Vinayaka, and the joy of the prasad
+          that follows. Evenings are filled with enthusiasm as every grade shows its devotion with
+          renditions, dances and anecdotes for our dear Bappa.</p>
+        <p class="copy">At the core of the festival, the students handcraft their own murtis. As the
+          season ends, everyone is on their toes, movements and voices in unison, as the procession
+          carries the idol to be immersed in the school&rsquo;s own lake.</p>
+      </div>
+    </div>
+    <figure class="fx-band fx-ganesh__lake">
+      <div class="fx-band__frame fx-band__frame--tall img-reveal">{{FX_IMG ganesh-lake | 100vw | fx-band__img | | 50% 46%}}</div>
+      <figcaption class="wrap fx-cap">{{FX_CAP ganesh-lake}}</figcaption>
+    </figure>
+    <div class="wrap">
+      <ol class="fx-seq fx-ganesh__seq">
+        <li class="rv">
+          <figure class="fx-fig">
+            <div class="fx-fig__frame">{{FX_IMG ganesh-bank | (max-width: 820px) 100vw, 30vw | fx-fig__img}}</div>
+            <figcaption class="fx-cap"><span class="fx-seq__t">17:20</span>{{FX_CAP ganesh-bank}}</figcaption>
+          </figure>
+        </li>
+        <li class="rv">
+          <figure class="fx-fig">
+            <div class="fx-fig__frame">{{FX_IMG ganesh-raft | (max-width: 820px) 100vw, 30vw | fx-fig__img}}</div>
+            <figcaption class="fx-cap"><span class="fx-seq__t">17:21</span>{{FX_CAP ganesh-raft}}</figcaption>
+          </figure>
+        </li>
+        <li class="rv">
+          <figure class="fx-fig">
+            <div class="fx-fig__frame">{{FX_IMG ganesh-immersion | (max-width: 820px) 100vw, 30vw | fx-fig__img}}</div>
+            <figcaption class="fx-cap"><span class="fx-seq__t">17:30</span>{{FX_CAP ganesh-immersion}}</figcaption>
+          </figure>
+        </li>
+      </ol>
+    </div>
+  </article>
+
+  <!-- 05 Dussehra: dusk, torchlight, and the fire. -->
+  <article class="fx-ch fx-ch--dussehra fx-dark" id="dussehra" data-fx-chapter aria-labelledby="dussehra-h">
+    <div class="wrap fx-dussehra">
+      <header class="fx-ch__head rv">
+        <p class="fx-ch__kicker"><span class="fx-ch__n">05</span><span>September&ndash;October</span><span class="fx-ch__light">Torchlight after dusk</span></p>
+        <h3 class="fx-ch__title" id="dussehra-h">Dussehra</h3>
+      </header>
+      <div class="fx-dussehra__copy rv">
+        <p class="copy">The day begins with the morning pooja, which brings a wave of calm. What truly
+          brings the celebration to life are the mesmerising rangolis crafted by the students.</p>
+        <p class="copy">The school gathers to chant and witness the ultimate triumph of dharma
+          &mdash; Ravan Dahan &mdash; and the evening sky is spellbound as the fireworks go up.</p>
+      </div>
+      <figure class="fx-fig fx-dussehra__torches">
+        <div class="fx-fig__frame img-reveal">{{FX_IMG dussehra-torches | (max-width: 820px) 100vw, 92vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP dussehra-torches}}</figcaption>
+      </figure>
+      <figure class="fx-fig fx-dussehra__effigy rv">
+        <div class="fx-fig__frame">{{FX_IMG dussehra-effigy | (max-width: 820px) 100vw, 54vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP dussehra-effigy}}</figcaption>
+      </figure>
+      <figure class="fx-fig fx-dussehra__fire rv">
+        <div class="fx-fig__frame">{{FX_IMG dussehra-fire | (max-width: 820px) 84vw, 30vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP dussehra-fire}}</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- 06 Pongal: the harvest sun. A quieter chapter led by its words: the
+       moment it is known for, the cooking, has no photograph here yet. -->
+  <article class="fx-ch fx-ch--pongal" id="pongal" data-fx-chapter aria-labelledby="pongal-h">
+    <div class="wrap fx-pongal">
+      <header class="fx-ch__head rv">
+        <p class="fx-ch__kicker"><span class="fx-ch__n">06</span><span>January</span><span class="fx-ch__light">The harvest sun</span></p>
+        <h3 class="fx-ch__title" id="pongal-h">Pongal</h3>
+      </header>
+      <div class="fx-pongal__copy rv">
+        <p class="fx-pongal__pull">Six hundred students, cooking in small groups.</p>
+        <p class="copy">One of the biggest harvest festivals, and the school is decorated in a
+          majestic way. But the campus feels incomplete without the aroma of pongal swirling in the
+          air, as six hundred students come together to prepare the delicacy in small groups.</p>
+        <p class="copy">Everyone goes around relishing the pongals prepared by the other teams
+          &mdash; and then the winner of the most scrumptious pongal is declared.</p>
+        <p class="fx-pongal__gap">Photographs of the cooking itself are still to be added.</p>
+      </div>
+      <figure class="fx-fig fx-pongal__altar">
+        <div class="fx-fig__frame img-reveal">{{FX_IMG pongal-altar | (max-width: 820px) 66vw, 24vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP pongal-altar}}</figcaption>
+      </figure>
+      <figure class="fx-fig fx-pongal__pooja rv">
+        <div class="fx-fig__frame">{{FX_IMG pongal-pooja | (max-width: 820px) 66vw, 24vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP pongal-pooja}}</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- 07 Holi: the year closes in colour. -->
+  <article class="fx-ch fx-ch--holi" id="holi" data-fx-chapter aria-labelledby="holi-h">
+    <div class="wrap fx-holi">
+      <header class="fx-ch__head rv">
+        <p class="fx-ch__kicker"><span class="fx-ch__n">07</span><span>March</span><span class="fx-ch__light">Colour on the field</span></p>
+        <h3 class="fx-ch__title" id="holi-h">Holi</h3>
+      </header>
+      <div class="fx-holi__copy rv">
+        <p class="copy">The essence of the bonfire is brought to us through a skit in which
+          Holika&rsquo;s devious plans burn, and the countdown begins.</p>
+        <p class="copy">To CIRS, Holi brings a festive zeal of colours that soon find their owners.
+          The Dronacharya field buzzes with excitement as colour paints every face.</p>
+      </div>
+    </div>
+    <figure class="fx-band fx-holi__field">
+      <div class="fx-band__frame img-reveal">{{FX_IMG holi-field | 100vw | fx-band__img | | 50% 40%}}</div>
+      <figcaption class="wrap fx-cap">{{FX_CAP holi-field}}</figcaption>
+    </figure>
+    <div class="wrap fx-holi__burst">
+      <figure class="fx-fig fx-holi__colour rv">
+        <div class="fx-fig__frame">{{FX_IMG holi-colour | (max-width: 820px) 100vw, 46vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP holi-colour}}</figcaption>
+      </figure>
+      <figure class="fx-fig fx-holi__portrait rv">
+        <div class="fx-fig__frame">{{FX_IMG holi-portrait | (max-width: 820px) 50vw, 24vw | fx-fig__img | | 45% 40%}}</div>
+        <figcaption class="fx-cap">{{FX_CAP holi-portrait}}</figcaption>
+      </figure>
+      <figure class="fx-fig fx-holi__boy rv">
+        <div class="fx-fig__frame">{{FX_IMG holi-boy | (max-width: 820px) 50vw, 24vw | fx-fig__img}}</div>
+        <figcaption class="fx-cap">{{FX_CAP holi-boy}}</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<section class="section fx-india" id="india" data-jump-label="Festivals across India" aria-labelledby="india-h">
   <div class="wrap">
-    <div class="cx-band__head rv">
-      <p class="marker"><span class="sc">Everyone takes part</span></p>
-      <h2 class="serif h2" data-split>From Grade V <em>to Grade XII.</em></h2>
-      <p class="lead">A festival here is not watched from the side. Every grade performs, every house cooks, and the faculty stand behind all of it.</p>
-    </div>
-    <dl class="cx-band__stats">
-      <div class="rv"><dt>Seven</dt><dd>festivals kept through the year</dd></div>
-      <div class="rv"><dt>600</dt><dd>students cooking pongal in small teams</dd></div>
-      <div class="rv"><dt>Every grade</dt><dd>on stage for Ganesh Chaturthi</dd></div>
-      <div class="rv"><dt>Our own lake</dt><dd>for the Ganesha immersion</dd></div>
-    </dl>
+    <header class="fx-india__head">
+      <p class="marker rv"><span class="sc">Beyond the school calendar</span></p>
+      <h2 class="serif h2 rv" id="india-h">Festivals across India</h2>
+      <p class="lead rv">A wider calendar of traditions. Inclusion here does not imply a documented CIRS event.</p>
+      <p class="fx-india__note rv">Most of these follow lunar or regional calendars, so their dates
+        move from year to year; the months given are the usual range.</p>
+    </header>
+    {{FX_INDIA}}
+    <p class="fx-india__sources">Summarised from <a href="https://www.britannica.com/">Encyclopaedia
+      Britannica</a>, <a href="https://www.incredibleindia.gov.in/en/festivals-and-events">Incredible
+      India</a> (Ministry of Tourism) and the <a href="https://ich.unesco.org/en/RL/durga-puja-in-kolkata-01503">UNESCO
+      intangible heritage list</a>.</p>
   </div>
 </section>
 
-<section class="section cx-gallery-sec on-paper-2" id="gallery">
+<section class="section fx-archive" id="archive" data-jump-label="Photo archive">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Gallery</span></p>
-      <h2 class="serif h2" data-split>Colour, Light <em>and Lamps.</em></h2>
-      <p class="lead">The mornings and the evenings of the festival year.</p>
-    </div>
-    <div class="cx-gallery">
-      <figure class="cx-gallery__cell cx-gallery__cell--wide rv">
-        <img src="assets/img/arts/festival.jpg" alt="The festival stage set, the school seated before it" width="1600" height="1194" loading="lazy" decoding="async">
-        <figcaption>The festival stage, set</figcaption>
-      </figure>
-      <figure class="cx-gallery__cell rv">
-        <img src="assets/img/captures/human-pyramid.jpg" alt="A human pyramid at night reaching for a pot hung overhead" width="990" height="660" loading="lazy" decoding="async">
-        <figcaption>Reaching for the matki</figcaption>
-      </figure>
-      <figure class="cx-gallery__cell rv">
-        <img src="assets/img/captures/three-dancers.jpg" alt="Three dancers in traditional costume on stage" width="900" height="600" loading="lazy" decoding="async">
-        <figcaption>Three dancers, on stage</figcaption>
-      </figure>
-      <figure class="cx-gallery__cell rv">
-        <img src="assets/img/arts/juniors.jpg" alt="Junior school students performing on a lit stage" width="1600" height="1194" loading="lazy" decoding="async">
-        <figcaption>The junior school on stage</figcaption>
-      </figure>
-      <figure class="cx-gallery__cell rv">
-        <img src="assets/img/arts/bharatanatyam.jpg" alt="Dancers in classical costume under pink light" width="1600" height="1194" loading="lazy" decoding="async">
-        <figcaption>Bharatanatyam, under the lights</figcaption>
-      </figure>
-      <figure class="cx-gallery__cell rv">
-        <img src="assets/img/arts/dance.jpg" alt="Two dancers in costume performing" width="440" height="316" loading="lazy" decoding="async">
-        <figcaption>Bharatanatyam, New Year</figcaption>
-      </figure>
-      <figure class="cx-gallery__cell cx-gallery__cell--wide rv">
-        <img src="assets/img/captures/dancing-lawn.jpg" alt="Students dancing together on the lawn" width="1800" height="1013" loading="lazy" decoding="async">
-        <figcaption>On the lawn</figcaption>
-      </figure>
-    </div>
-    <p class="note rv cx-note"><em>[Placeholder &mdash; photographs from each festival, with dates, to be supplied by the school.]</em></p>
+    <header class="sec-head fx-archive__head">
+      <p class="marker rv"><span class="sc">Photo archive</span></p>
+      <h2 class="serif h2 rv" data-split>More from <em>the Festival Year.</em></h2>
+      <p class="lead rv">Photographs from the school&rsquo;s own collection that do not appear
+        above, each labelled with its festival and the date it was taken.</p>
+    </header>
+    {{FX_ARCHIVE}}
+    <p class="fx-archive__gaps">Not yet in the archive: {{FX_GAPS}}. Where a caption gives only a
+      year, the camera&rsquo;s clock was wrong and the year comes from the event&rsquo;s folder.</p>
   </div>
 </section>
 
-<section class="section cx-onward" id="more">
+<dialog class="fx-viewer" data-fx-viewer data-lenis-prevent aria-label="Photograph viewer">
+  <div class="fx-viewer__inner">
+    <figure class="fx-viewer__fig">
+      <img class="fx-viewer__img" data-fx-viewer-img src="data:," alt="">
+      <figcaption class="fx-viewer__cap"><span data-fx-viewer-cap></span><span class="fx-when" data-fx-viewer-when></span><span class="fx-viewer__pos" data-fx-viewer-pos></span></figcaption>
+    </figure>
+    <button type="button" class="fx-viewer__btn fx-viewer__prev" data-fx-prev aria-label="Previous photograph">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3L5 9l6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+    <button type="button" class="fx-viewer__btn fx-viewer__next" data-fx-next aria-label="Next photograph">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M7 3l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+    <button type="button" class="fx-viewer__btn fx-viewer__close" data-fx-close aria-label="Close the viewer">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</dialog>
+
+<section class="section on-purple fx-together" id="together" data-jump-label="Everyone takes part">
+  <div class="wrap">
+    <div class="fx-together__grid">
+      <div class="fx-together__head rv">
+        <p class="marker"><span class="sc">Everyone takes part</span></p>
+        <h2 class="serif h2" data-split>From Grade V <em>to Grade XII.</em></h2>
+        <p class="lead">Students from Grade V to Grade XII take part in the celebrations. They
+          perform, cook together for Pongal and are supported by faculty through every last-minute
+          arrangement.</p>
+      </div>
+      <dl class="fx-together__stats">
+        <div class="rv"><dt>Seven</dt><dd>festivals kept through the year</dd></div>
+        <div class="rv"><dt>600</dt><dd>students cooking pongal in small teams</dd></div>
+        <div class="rv"><dt>Every grade</dt><dd>on stage for Ganesh Chaturthi</dd></div>
+        <div class="rv"><dt>Our own lake</dt><dd>for the Ganesha immersion</dd></div>
+      </dl>
+    </div>
+    <div class="fx-together__close rv">
+      <p class="fx-together__line">The essence lies in the diversity of festivals across the
+        country: one may be a huge festival in one state and unknown in another, yet everyone
+        unites to celebrate it together.</p>
+    </div>
+    <aside class="fx-ask rv" aria-labelledby="fx-ask-h">
+      <h2 class="fx-ask__label" id="fx-ask-h">Help complete this page</h2>
+      <p class="fx-ask__text">We are still looking for photographs of {{FX_GAPS}}; and for the
+        exact dates of the 2023 Onam, 2025 Dussehra, 2025 Holi and 2026 Pongal photographs whose
+        cameras&rsquo; clocks were wrong. If you have them, please write to
+        <a href="mailto:info@cirschool.org?subject=CIRS%20Festivals%20page%3A%20photographs%20and%20dates">info@cirschool.org</a>
+        and name the festival and the year.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="section fx-more" id="more-culture" data-jump-label="More from the arts">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">Art, Culture &amp; Music</span></p>
       <h2 class="serif h2" data-split>More from <em>the stage and the studio.</em></h2>
     </div>
-    <nav class="cx-onward__grid rv" aria-label="More from Art, Culture and Music">
-      <a class="cx-onward__link" href="art-attack.html">
-        <span class="cx-onward__name serif">CIRS Art Attack</span>
-        <span class="cx-onward__desc">Painting, craft and the things made for the stage</span>
+    <nav class="fx-more__grid rv" aria-label="More from Art, Culture and Music">
+      <a class="fx-more__link" href="theatre.html">
+        <span class="fx-more__name serif">CIRS Theatre</span>
+        <span class="fx-more__desc">Plays, programmes and the stage</span>
       </a>
-      <a class="cx-onward__link" href="theatre.html">
-        <span class="cx-onward__name serif">CIRS Theatre</span>
-        <span class="cx-onward__desc">Plays, programmes and the stage</span>
+      <a class="fx-more__link" href="art-attack.html">
+        <span class="fx-more__name serif">CIRS Art Attack</span>
+        <span class="fx-more__desc">Painting, craft and the things made for the stage</span>
       </a>
-      <a class="cx-onward__link" href="cultural-gallery.html">
-        <span class="cx-onward__name serif">CIRS Cultural Gallery</span>
-        <span class="cx-onward__desc">Music, dance, theatre and art, on one wall</span>
+      <a class="fx-more__link" href="cultural-gallery.html">
+        <span class="fx-more__name serif">CIRS Cultural Gallery</span>
+        <span class="fx-more__desc">Music, dance, theatre and art, on one wall</span>
       </a>
     </nav>
   </div>

@@ -298,6 +298,27 @@ body.artattack .aa-sec figcaption,
 .aa-case__pair{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(12px, 1.6vw, 24px); }
 
 /* ============================================================
+   Wall Magazines — the houses' own work, in words only until the
+   school supplies photographs of the magazines themselves.
+   ============================================================ */
+.aa-houses{ background:var(--aa-ivory); }
+.aa-houses__grid{
+  display:grid; grid-template-columns:minmax(0, 5fr) minmax(0, 6fr);
+  gap:40px clamp(32px, 6vw, 96px); align-items:end;
+}
+.aa-houses__head .aa-lead{ margin-top:22px; }
+.aa-houses__stats{
+  display:grid; grid-template-columns:1fr 1fr; gap:0 clamp(20px, 3vw, 40px); margin:0;
+}
+.aa-houses__stats div{ padding:22px 0 24px; border-top:1px solid var(--aa-rule); }
+.aa-houses__stats div:nth-child(-n+2){ border-top-color:var(--gold); }
+.aa-houses__stats dt{
+  font-family:var(--font-primary); font-size:clamp(1.5rem, 2.2vw, 2rem);
+  line-height:1.1; letter-spacing:-.01em; color:var(--aa-ink);
+}
+.aa-houses__stats dd{ margin:8px 0 0; color:var(--aa-soft); max-width:24ch; }
+
+/* ============================================================
    Section 3: made for the stage — a short bridge to Theatre.
    ============================================================ */
 .aa-stage{ background:var(--aa-ivory-2); }
@@ -436,6 +457,7 @@ body.artattack.has-lightbox{ overflow:hidden; }
   .aa-chapter__text{ order:-1; }
   .aa-case__pair{ grid-template-columns:1fr; }
   .aa-stage__grid{ grid-template-columns:1fr; }
+  .aa-houses__grid{ grid-template-columns:1fr; }
   .aa-display__grid{ grid-template-columns:1fr 1fr; }
   .aa-display__lead, .aa-display__side, .aa-display__wide{ grid-column:1 / -1; }
   .aa-display__detail{ grid-column:1; }

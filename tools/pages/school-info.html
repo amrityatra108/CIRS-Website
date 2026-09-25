@@ -1,311 +1,500 @@
-<section class="section" id="glance">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">At a glance</span></p>
-      <h2 class="serif h2" data-split>For Families, <em>in Brief.</em></h2>
-      <p class="lead">What a family usually asks first, each linked to the page that says more.
-        The particulars CBSE requires every school to publish follow below.</p>
+<!-- ============================================================
+     THE CIRS RECORD
+     The opening is four of the school's own certificates, laid out as
+     sheets of paper: rendered from the PDFs below by
+     tools/make-record-previews.py, never redrawn. Each sheet leads to its
+     row in the register and carries its real status, read from
+     tools/documents.py by a DOC_STATUS placeholder — the CBSE letter says
+     Expired, because it has. Below 700px only the front sheet is shown;
+     the other three are lazy, so a phone never fetches them.
+     ============================================================ -->
+<section class="rec-open" id="top" aria-labelledby="rec-title">
+  <div class="rec-open__light" aria-hidden="true"></div>
+  <div class="wrap rec-open__grid">
+    <div class="rec-open__text">
+      <p class="rec-kicker">CIRS <span aria-hidden="true">/</span> Public Records</p>
+      <h1 class="rec-title" id="rec-title"><span class="rec-line"><span>School</span></span>
+        <span class="rec-line"><span><em>Information.</em></span></span></h1>
+      <p class="rec-standfirst">Affiliation, governance, campus, safety and official documents.
+        Clearly presented in one place.</p>
+      <p class="rec-cta">
+        <a class="rec-explore" href="#overview">Explore the records
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5v11M2.5 8 7 12.5 11.5 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="rec-quiet" href="#documents">Go to the document register</a>
+      </p>
     </div>
 
-    <dl class="factrail rv ci-glance">
-      <div><dt>School</dt><dd>Co-educational and residential, founded in 1996</dd></div>
-      <div><dt>Affiliation</dt><dd>CBSE, no. 1930154, since 1997</dd></div>
-      <div><dt>Curriculum</dt><dd><a href="curriculum.html">CBSE from Grade V; CBSE or the IB
-        Diploma from Grade XI</a></dd></div>
-      <div><dt>Fees</dt><dd><a href="admissions.html#fees">Fee structure</a></dd></div>
-      <div><dt>Results</dt><dd><a href="our-results.html">Board examination results</a></dd></div>
-      <div><dt>Admissions</dt><dd><a href="admissions.html">How to apply</a> &middot;
-        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a></dd></div>
-    </dl>
+    <div class="rec-stage">
+      <ul class="rec-sheets" aria-label="Four of the school's documents">
+        <li class="rec-plane rec-plane--noc">
+          <a class="rec-sheet" href="#doc-state-noc">
+            <span class="rec-paper"><img src="assets/img/records/noc-1996.jpg" width="560" height="810"
+              alt="The State Government's No Objection Certificate for CIRS, a typewritten letter from the Director of School Education, Madras, dated 15 July 1996"
+              loading="lazy" decoding="async"></span>
+            <span class="rec-tag"><span class="rec-tag__title">State NOC, 1996</span>
+              <span class="rec-tag__status">{{DOC_STATUS:state-noc}}</span></span>
+          </a>
+        </li>
+        <li class="rec-plane rec-plane--cbse">
+          <a class="rec-sheet" href="#doc-cbse-affiliation-letter">
+            <span class="rec-paper"><img src="assets/img/records/cbse-2020.jpg" width="560" height="814"
+              alt="The CBSE letter of 3 October 2020 extending the school's affiliation, number 1930154, for the period 1 April 2020 to 31 March 2025"
+              loading="lazy" decoding="async"></span>
+            <span class="rec-tag"><span class="rec-tag__title">CBSE Affiliation Letter, 2020</span>
+              <span class="rec-tag__status">{{DOC_STATUS:cbse-affiliation-letter}}</span></span>
+          </a>
+        </li>
+        <li class="rec-plane rec-plane--land">
+          <a class="rec-sheet" href="#doc-land-certificate">
+            <span class="rec-paper"><img src="assets/img/records/land-2020.jpg" width="560" height="828"
+              alt="The land certificate from the Taluk Office, Perur, dated 24 January 2020, certifying the 81.97-acre campus, with the Tahsildar's seal"
+              loading="lazy" decoding="async"></span>
+            <span class="rec-tag"><span class="rec-tag__title">Land Certificate, 2020</span>
+              <span class="rec-tag__status">{{DOC_STATUS:land-certificate}}</span></span>
+          </a>
+        </li>
+        <li class="rec-plane rec-plane--front">
+          <a class="rec-sheet" href="#doc-state-recognition">
+            <span class="rec-paper"><img src="assets/img/records/recognition.jpg" width="700" height="974"
+              alt="The Certificate of Recognition from the Office of the Directorate of Private Schools, Chennai, granting recognition for LKG to XII valid up to 8 September 2027"
+              fetchpriority="high" decoding="async"></span>
+            <span class="rec-tag"><span class="rec-tag__title">Certificate of Recognition, 2026</span>
+              <span class="rec-tag__status">{{DOC_STATUS:state-recognition}}</span></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <ul class="rec-ids">
+      <li><span class="rec-ids__k">Founded</span> <span class="rec-ids__v">1996</span></li>
+      <li><span class="rec-ids__k">CBSE Affiliation</span> <span class="rec-ids__v">1930154</span></li>
+      <li><span class="rec-ids__v">Coimbatore, Tamil Nadu</span></li>
+    </ul>
   </div>
 </section>
 
-<section class="section on-paper-2" id="details">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Affiliation &amp; registration</span></p>
-      <h2 class="serif h2" data-split>School <em>Details.</em></h2>
-      <p class="lead">The particulars CBSE and the affiliating authorities require every school to
-        publish, exactly as filed by CIRS. Supporting certificates for each, with their dates,
-        are in the <a href="#doclist">document list</a> below.</p>
-    </div>
+<div class="rec-body">
+  <!-- The section index. A rail beside the record on a wide screen, a strip
+       under the header on anything narrower; records.js marks the section
+       on screen. Its ids avoid the old single-page anchors build-site.py
+       rewrites to other pages ("campus", "contact"). -->
+  <nav class="rec-index" aria-label="Sections of School Information">
+    <p class="rec-index__head" aria-hidden="true">The Record</p>
+    <ol class="rec-index__list">
+      <li><a href="#overview"><span class="rec-index__n" aria-hidden="true">01</span> Overview</a></li>
+      <li><a href="#affiliation"><span class="rec-index__n" aria-hidden="true">02</span> Affiliation</a></li>
+      <li><a href="#governance"><span class="rec-index__n" aria-hidden="true">03</span> Governance</a></li>
+      <li><a href="#campus-care"><span class="rec-index__n" aria-hidden="true">04</span> Campus &amp; Care</a></li>
+      <li><a href="#people-safety"><span class="rec-index__n" aria-hidden="true">05</span> People &amp; Safety</a></li>
+      <li><a href="#calendar"><span class="rec-index__n" aria-hidden="true">06</span> Academic Year</a></li>
+      <li><a href="#documents"><span class="rec-index__n" aria-hidden="true">07</span> Documents</a></li>
+    </ol>
+  </nav>
 
-    <div class="tablewrap rv">
-      <table class="tbl tbl--particulars">
-        <caption>Affiliation status &mdash; school details.</caption>
-        <thead>
-          <tr><th scope="col">Particular</th><th scope="col">Details</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Name of the school, with address</th>
-            <td>Chinmaya International Residential School, Swami Chinmayananda Lane, Nallur Vayal
-              Post, Siruvani Road, Coimbatore &ndash; 641 114</td>
-          </tr>
-          <tr>
-            <th scope="row">Contact</th>
-            <td>Email: <a href="mailto:principal@cirschool.org">principal@cirschool.org</a> &middot;
-              <a href="mailto:info@cirschool.org">info@cirschool.org</a><br>
-              Phone: <a href="tel:+914222613303">0422 2613303</a> &middot;
-              <a href="tel:+914222613300">0422 2613300</a><br>
-              Fax: 0422 2615725</td>
-          </tr>
-          <tr>
-            <th scope="row">Year of establishment</th>
-            <td>1996</td>
-          </tr>
-          <tr>
-            <th scope="row">NOC from State/UT or recommendation of Embassy of India</th>
-            <td>Obtained &mdash; from the Education Department, Government of Tamil Nadu<br>
-              NOC No. 22864/E3/96, issued 15.07.1996</td>
-          </tr>
-          <tr>
-            <th scope="row">Recognition</th>
-            <td>Yes &mdash; the Central Board of Secondary Education, New Delhi</td>
-          </tr>
-          <tr>
-            <th scope="row">Affiliation number</th>
-            <td>1930154</td>
-          </tr>
-          <tr>
-            <th scope="row">School code</th>
-            <td>55103</td>
-          </tr>
-          <tr>
-            <th scope="row">Affiliated with the Board since</th>
-            <td>01.04.1997</td>
-          </tr>
-          <tr>
-            <th scope="row">Extension of affiliation upto</th>
-            <td>31.03.2025, on the most recent CBSE affiliation letter on file.<br>
-              <em>[Awaiting the school &mdash; the current extension of affiliation letter and its
-              validity date.]</em></td>
-          </tr>
-          <tr>
-            <th scope="row">Trust/Society registered under Section 25, Companies Act 1956</th>
-            <td>Central Chinmaya Mission Trust, Mumbai<br>Registration valid: Permanent</td>
-          </tr>
-          <tr>
-            <th scope="row">Manager / Chairman, with official address</th>
-            <td>Swami Swaroopananda, Chairman, Chinmaya International Residential School, Swami
-              Chinmayananda Lane, Nallur Vayal Post, Siruvani Road, Coimbatore &ndash; 641 114<br>
-              Phone: +91 422 2613303 &middot; Fax: +91 422 2615725</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+  <div class="rec-main">
 
-<section class="section" id="governance">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Governance</span></p>
-      <h2 class="serif h2" data-split>Management &amp; <em>Resident Director.</em></h2>
-    </div>
+    <!-- 01 ─ Overview. The old "At a glance" rail, as one spread. -->
+    <section class="rec-sec rec-sec--overview" id="overview" aria-labelledby="overview-title">
+      <header class="rec-head rv">
+        <p class="rec-num"><span>01</span> Overview</p>
+        <h2 class="rec-h2" id="overview-title" tabindex="-1">For families, <em>in brief.</em></h2>
+        <p class="rec-lede">What a family usually asks first, each linked to the page that says more.
+          The particulars CBSE requires every school to publish follow below.</p>
+      </header>
 
-    <div class="prog">
-      <div class="rv">
-        <h3 class="serif h3 ci-sub">Board of Directors</h3>
-        <p class="copy">The School is managed by a committee headed by Swami Swaroopananda, the Head
-          of Chinmaya Mission worldwide. It comprises educationists and eminent persons. Portraits
-          and introductions are on <a href="leadership.html">Leadership</a>.</p>
-        <dl class="factrail ci-rail ci-rail--people">
-          <div><dt>Swami Swaroopananda</dt><dd>Chairman</dd></div>
-          <div><dt>Swami Anukoolananda</dt><dd>Resident Director</dd></div>
-          <div><dt>Shri. Vijay Mahtaney</dt><dd>Director</dd></div>
-          <div><dt>Shri. Jagdish Moorjani</dt><dd>Director</dd></div>
-          <div><dt>Shri. Siddharth Balachandran</dt><dd>Director</dd></div>
-          <div><dt>Smt. Shanti Krishnamurthy</dt><dd>Director &mdash; Academics &amp; Administration</dd></div>
-          <div><dt>Smt. G. Rajeshwari</dt><dd>Principal</dd></div>
-        </dl>
+      <dl class="rec-facts rv" id="glance">
+        <div class="rec-fact">
+          <dt>School</dt>
+          <dd>Co-educational and residential</dd>
+        </div>
+        <div class="rec-fact rec-fact--figure">
+          <dt>Established</dt>
+          <dd><span class="rec-figure">1996</span></dd>
+        </div>
+        <div class="rec-fact">
+          <dt>Affiliation</dt>
+          <dd>CBSE, no. <span class="rec-num-inline">1930154</span>, since 1997</dd>
+        </div>
+        <div class="rec-fact rec-fact--wide">
+          <dt>Curriculum</dt>
+          <dd><a class="rec-go" href="curriculum.html">CBSE from Grade V; CBSE or the IB Diploma from
+            Grade XI</a></dd>
+        </div>
+        <div class="rec-fact rec-fact--link">
+          <dt>Fees</dt>
+          <dd><a class="rec-go" href="admissions.html#fees">Fee structure</a></dd>
+        </div>
+        <div class="rec-fact rec-fact--link">
+          <dt>Results</dt>
+          <dd><a class="rec-go" href="our-results.html">Board examination results</a></dd>
+        </div>
+        <div class="rec-fact rec-fact--link">
+          <dt>Admissions</dt>
+          <dd><a class="rec-go" href="admissions.html">How to apply</a>
+            <a class="rec-mail" href="mailto:admissions@cirschool.org">admissions@cirschool.org</a></dd>
+        </div>
+      </dl>
+    </section>
 
-        <h3 class="serif h3 ci-sub ci-sub--spaced">School Management Committee</h3>
-        <p class="copy">CBSE&rsquo;s mandatory disclosure asks every school to publish its School
-          Management Committee, which is a separate body from the Board above.</p>
-        <p class="copy"><em>[Awaiting the school &mdash; the current School Management Committee
-          list, to be published in the
-          <a href="important-documents.html#doc-school-management-committee">Important Documents
-          portal</a>.]</em></p>
+    <!-- 02 ─ Affiliation. Every row of the old School Details table, grouped
+         into three row groups. The affiliation letter on file lapsed on
+         31.03.2025; that stays at the head of the section until a newer
+         letter is in tools/documents.py. -->
+    <section class="rec-sec rec-sec--affiliation" id="affiliation" aria-labelledby="affiliation-title">
+      <header class="rec-head rv">
+        <p class="rec-num"><span>02</span> Affiliation &amp; registration</p>
+        <h2 class="rec-h2" id="affiliation-title" tabindex="-1">School <em>details.</em></h2>
+        <p class="rec-lede">The particulars CBSE and the affiliating authorities require every school
+          to publish, exactly as filed by CIRS. The certificate behind each, with its date, is in the
+          <a href="#documents">document register</a>.</p>
+      </header>
+
+      <div class="rec-alert rv" role="note" aria-labelledby="affiliation-status">
+        <p class="rec-alert__head" id="affiliation-status">{{DOC_STATUS:cbse-affiliation-letter}}
+          <span class="rec-alert__what">Extension of affiliation</span></p>
+        <p class="rec-alert__body">The most recent CBSE affiliation letter on file extended the
+          school&rsquo;s affiliation to <strong>31 March 2025</strong>. The current extension of
+          affiliation letter, and its validity date, are awaited from the school.</p>
+        <p class="rec-alert__link"><a href="#doc-cbse-affiliation-letter">The letter on file, in the
+          register</a></p>
       </div>
 
-      <div class="rv">
-        <h3 class="serif h3 ci-sub">Resident Director</h3>
-        <dl class="factrail ci-rail--contact">
+      <div class="rec-tablewrap rv" id="details">
+        <table class="rec-table">
+          <caption>Affiliation status &mdash; school details.</caption>
+          <thead>
+            <tr><th scope="col">Particular</th><th scope="col">Details</th></tr>
+          </thead>
+          <tbody>
+            <tr class="rec-table__group"><th scope="rowgroup" colspan="2">The school</th></tr>
+            <tr>
+              <th scope="row">Name of the school, with address</th>
+              <td>Chinmaya International Residential School, Swami Chinmayananda Lane, Nallur Vayal
+                Post, Siruvani Road, Coimbatore &ndash; 641 114</td>
+            </tr>
+            <tr>
+              <th scope="row">Contact</th>
+              <td><span class="rec-line-item">Email: <a href="mailto:principal@cirschool.org">principal@cirschool.org</a>
+                &middot; <a href="mailto:info@cirschool.org">info@cirschool.org</a></span>
+                <span class="rec-line-item">Phone: <a href="tel:+914222613303">0422 2613303</a> &middot;
+                <a href="tel:+914222613300">0422 2613300</a></span>
+                <span class="rec-line-item">Fax: 0422 2615725</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Year of establishment</th>
+              <td>1996</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr class="rec-table__group"><th scope="rowgroup" colspan="2">Recognition &amp; affiliation</th></tr>
+            <tr>
+              <th scope="row">NOC from State/UT or recommendation of Embassy of India</th>
+              <td>Obtained &mdash; from the Education Department, Government of Tamil Nadu<br>
+                NOC No. 22864/E3/96, issued 15.07.1996</td>
+            </tr>
+            <tr>
+              <th scope="row">Recognition</th>
+              <td>Yes &mdash; the Central Board of Secondary Education, New Delhi</td>
+            </tr>
+            <tr>
+              <th scope="row">Affiliation number</th>
+              <td class="rec-table__num">1930154</td>
+            </tr>
+            <tr>
+              <th scope="row">School code</th>
+              <td class="rec-table__num">55103</td>
+            </tr>
+            <tr>
+              <th scope="row">Affiliated with the Board since</th>
+              <td class="rec-table__num">01.04.1997</td>
+            </tr>
+            <tr class="rec-table__flag">
+              <th scope="row">Extension of affiliation upto</th>
+              <td><span class="rec-table__num">31.03.2025</span>, on the most recent CBSE affiliation
+                letter on file.
+                <span class="rec-await"><span class="rec-await__k">Awaiting the school</span> The
+                current extension of affiliation letter and its validity date.</span></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr class="rec-table__group"><th scope="rowgroup" colspan="2">Management</th></tr>
+            <tr>
+              <th scope="row">Trust/Society registered under Section 25, Companies Act 1956</th>
+              <td>Central Chinmaya Mission Trust, Mumbai<br>Registration valid: Permanent</td>
+            </tr>
+            <tr>
+              <th scope="row">Manager / Chairman, with official address</th>
+              <td>Swami Swaroopananda, Chairman, Chinmaya International Residential School, Swami
+                Chinmayananda Lane, Nallur Vayal Post, Siruvani Road, Coimbatore &ndash; 641 114<br>
+                Phone: <a href="tel:+914222613303">+91 422 2613303</a> &middot; Fax: +91 422 2615725</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 03 ─ Governance. Two bodies, set side by side so they cannot be
+         mistaken for one: the Board, which manages the school, and the
+         School Management Committee CBSE asks for, whose list is awaited. -->
+    <section class="rec-sec rec-sec--governance" id="governance" aria-labelledby="governance-title">
+      <header class="rec-head rv">
+        <p class="rec-num"><span>03</span> Governance</p>
+        <h2 class="rec-h2" id="governance-title" tabindex="-1">Management &amp; <em>Resident Director.</em></h2>
+      </header>
+
+      <div class="rec-bodies">
+        <div class="rec-body-card rv">
+          <p class="rec-body-card__k">Manages the school</p>
+          <h3 class="rec-h3" id="board-title">Board of Directors</h3>
+          <p class="rec-copy">The School is managed by a committee headed by Swami Swaroopananda, the
+            Head of Chinmaya Mission worldwide. It comprises educationists and eminent persons.
+            Portraits and introductions are on <a href="leadership.html">Leadership</a>.</p>
+          <dl class="rec-people">
+            <div><dt>Swami Swaroopananda</dt><dd>Chairman</dd></div>
+            <div><dt>Swami Anukoolananda</dt><dd>Resident Director</dd></div>
+            <div><dt>Shri. Vijay Mahtaney</dt><dd>Director</dd></div>
+            <div><dt>Shri. Jagdish Moorjani</dt><dd>Director</dd></div>
+            <div><dt>Shri. Siddharth Balachandran</dt><dd>Director</dd></div>
+            <div><dt>Smt. Shanti Krishnamurthy</dt><dd>Director &mdash; Academics &amp; Administration</dd></div>
+            <div><dt>Smt. G. Rajeshwari</dt><dd>Principal</dd></div>
+          </dl>
+        </div>
+
+        <div class="rec-body-card rec-body-card--pending rv">
+          <p class="rec-body-card__k">Required by CBSE &middot; a separate body</p>
+          <h3 class="rec-h3" id="smc-title">School Management Committee</h3>
+          <p class="rec-copy">CBSE&rsquo;s mandatory disclosure asks every school to publish its School
+            Management Committee, which is a separate body from the Board of Directors.</p>
+          <p class="rec-await rec-await--block"><span class="rec-await__k">Awaiting the school</span>
+            The current School Management Committee list, to be published in the
+            <a href="#doc-school-management-committee">document register</a>.</p>
+        </div>
+      </div>
+
+      <div class="rec-address rv">
+        <h3 class="rec-h3" id="rd-title">Resident Director</h3>
+        <dl class="rec-address__list">
           <div><dt>Name</dt><dd>Swami Anukoolananda</dd></div>
-          <div><dt>Official address</dt><dd>Resident Director, Chinmaya International Residential
-            School, Swami Chinmayananda Lane, Nallur Vayal Post, Siruvani Road, Coimbatore &ndash;
-            641 114</dd></div>
+          <div class="rec-address__wide"><dt>Official address</dt><dd>Resident Director, Chinmaya
+            International Residential School, Swami Chinmayananda Lane, Nallur Vayal Post, Siruvani
+            Road, Coimbatore &ndash; 641 114</dd></div>
           <div><dt>Email</dt><dd><a href="mailto:residentdirector@cirschool.org">residentdirector@cirschool.org</a></dd></div>
           <div><dt>Phone</dt><dd><a href="tel:+914222613303">+91 422 2613303</a></dd></div>
           <div><dt>Fax</dt><dd>+91 422 2615725</dd></div>
         </dl>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="section on-paper-2" id="facilities">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Infrastructure &amp; facilities</span></p>
-      <h2 class="serif h2" data-split>Campus, Library <em>&amp; Medical Care.</em></h2>
-    </div>
+    <!-- 04 ─ Campus & care. The page's own aerial frame, the three figures
+         the school measures its campus by, then what is on it. -->
+    <section class="rec-sec rec-sec--campus" id="campus-care" aria-labelledby="campus-title">
+      <header class="rec-head rv">
+        <p class="rec-num"><span>04</span> Infrastructure &amp; facilities</p>
+        <h2 class="rec-h2" id="campus-title" tabindex="-1">Campus, library <em>&amp; medical care.</em></h2>
+      </header>
 
-    <!-- The page measures the campus in three numbers and then never shows
-         it. This is the school's own frame, already on the site. -->
-    <figure class="ciband rv">
-      <img src="assets/img/aerial-duo.jpg"
-           alt="The CIRS campus seen from above, its buildings and playing fields set among the trees of the Siruvani foothills"
-           width="1400" height="640" loading="lazy" decoding="async">
-    </figure>
+      <dl class="rec-measures rv" id="facilities">
+        <div>
+          <dt>Land area</dt>
+          <dd><span class="rec-measure">81.97</span> <span class="rec-unit">acres</span></dd>
+        </div>
+        <div>
+          <dt>Built-up area</dt>
+          <dd><span class="rec-measure">32,642</span> <span class="rec-unit">m<sup>2</sup><span class="sr-only"> (square metres)</span></span></dd>
+        </div>
+        <div>
+          <dt>Playground area</dt>
+          <dd><span class="rec-measure">158,110</span> <span class="rec-unit">m<sup>2</sup><span class="sr-only"> (square metres)</span></span></dd>
+        </div>
+      </dl>
 
-    <h3 class="serif h3 rv ci-sub">Campus</h3>
-    <dl class="factrail rv">
-      <div><dt>Land area</dt><dd>81.97 acres</dd></div>
-      <div><dt>Built-up area</dt><dd>32,642 sq.m</dd></div>
-      <div><dt>Playground area</dt><dd>158,110 sq.m</dd></div>
-    </dl>
+      <figure class="rec-plate rv">
+        <img src="assets/img/aerial-duo.jpg"
+             alt="The CIRS campus seen from above, its buildings and playing fields set among the trees of the Siruvani foothills"
+             width="1400" height="640" loading="lazy" decoding="async">
+        <figcaption>The campus from above, in the Siruvani foothills.</figcaption>
+      </figure>
 
-    <h3 class="serif h3 rv ci-sub ci-sub--spaced">Sports facilities</h3>
-    <dl class="factrail rv">
-      <div><dt>Cricket</dt><dd>A state-of-the-art cricket facility</dd></div>
-      <div><dt>Tennis</dt><dd>Synthetic tennis court</dd></div>
-      <div><dt>Badminton</dt><dd>Four courts</dd></div>
-      <div><dt>Table tennis</dt><dd>A dedicated hall with six tables</dd></div>
-      <div><dt>Football</dt><dd>A full-size grass football court</dd></div>
-      <div><dt>Basketball</dt><dd>Four courts</dd></div>
-      <div><dt>Athletics</dt><dd>An Olympic-size athletic track</dd></div>
-      <div><dt>Swimming</dt><dd>A swimming pool</dd></div>
-      <div><dt>Billiards</dt><dd>A billiards table</dd></div>
-    </dl>
+      <div class="rec-care">
+        <div class="rec-care__sports rv">
+          <h3 class="rec-h3">Sports facilities</h3>
+          <dl class="rec-list">
+            <div><dt>Cricket</dt><dd>A state-of-the-art cricket facility</dd></div>
+            <div><dt>Tennis</dt><dd>Synthetic tennis court</dd></div>
+            <div><dt>Badminton</dt><dd>Four courts</dd></div>
+            <div><dt>Table tennis</dt><dd>A dedicated hall with six tables</dd></div>
+            <div><dt>Football</dt><dd>A full-size grass football court</dd></div>
+            <div><dt>Basketball</dt><dd>Four courts</dd></div>
+            <div><dt>Athletics</dt><dd>An Olympic-size athletic track</dd></div>
+            <div><dt>Swimming</dt><dd>A swimming pool</dd></div>
+            <div><dt>Billiards</dt><dd>A billiards table</dd></div>
+          </dl>
+          <p class="rec-copy rec-copy--note">Photographs of the grounds, the pool and the courts in use
+            are on <a href="sports.html">Sports</a>.</p>
+        </div>
 
-    <p class="copy rv ci-note">Photographs of the grounds, the pool and the courts in use are on
-      <a href="sports.html">Sports</a>.</p>
-
-    <div class="prog ci-group">
-      <div class="rv">
-        <h3 class="serif h3 ci-sub">Library resources</h3>
-        <p class="copy">The school library holds a collection of 19,600 books, 40 periodicals and 2
-          dailies, with a large collection of CDs and DVDs. It has an air-conditioned reading room,
-          and every class up to Class X is digitised and provided with course content.</p>
+        <div class="rec-care__side">
+          <div class="rec-care__block rv">
+            <h3 class="rec-h3">Library resources</h3>
+            <ul class="rec-counts" aria-label="The library's collection">
+              <li><span class="rec-counts__n">19,600</span> books</li>
+              <li><span class="rec-counts__n">40</span> periodicals</li>
+              <li><span class="rec-counts__n">2</span> dailies</li>
+            </ul>
+            <p class="rec-copy">The school library holds a collection of 19,600 books, 40 periodicals and
+              2 dailies, with a large collection of CDs and DVDs. It has an air-conditioned reading
+              room, and every class up to Class X is digitised and provided with course content.</p>
+          </div>
+          <div class="rec-care__block rv">
+            <h3 class="rec-h3">Medical facilities</h3>
+            <p class="rec-copy">The school has a Resident Medical Officer and nurses. The dispensary has
+              boys&rsquo; and girls&rsquo; wards and a full-fledged dental clinic.</p>
+            <p class="rec-await rec-await--block"><span class="rec-await__k">Awaiting the school</span>
+              Photographs of the dispensary, the wards and the dental clinic; the hours of the medical
+              officer and the nursing cover; and the nearest hospital the school works with.</p>
+          </div>
+        </div>
       </div>
-      <div class="rv">
-        <h3 class="serif h3 ci-sub">Medical facilities</h3>
-        <p class="copy">The school has a Resident Medical Officer and nurses. The dispensary has
-          boys' and girls' wards and a full-fledged dental clinic.</p>
-        <p class="copy"><em>[Awaiting the school &mdash; photographs of the dispensary, the wards
-          and the dental clinic; the hours of the medical officer and the nursing cover; and the
-          nearest hospital the school works with.]</em></p>
+    </section>
+
+    <!-- 05 ─ People & safety. The Grievance / Redressal Officer is the one
+         dark plate on the page, so the number to ring is the easiest thing
+         in it to find. -->
+    <section class="rec-sec rec-sec--people" id="people-safety" aria-labelledby="people-title">
+      <header class="rec-head rv">
+        <p class="rec-num"><span>05</span> Faculty, enrolment, records &amp; safety</p>
+        <h2 class="rec-h2" id="people-title" tabindex="-1">People &amp; <em>safety.</em></h2>
+      </header>
+
+      <div class="rec-trio" id="faculty">
+        <div class="rv">
+          <h3 class="rec-h3">Faculty members</h3>
+          <p class="rec-copy">The school has a dedicated and competent team of faculty members from
+            across the country, specialised in various subjects. Full faculty details are available
+            from the school office on request, at
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
+        </div>
+        <div class="rv">
+          <h3 class="rec-h3">Student enrolment</h3>
+          <p class="rec-copy">Class-wise and section-wise student enrolment figures are published each
+            academic year.</p>
+          <p class="rec-await rec-await--block"><span class="rec-await__k">Awaiting the school</span>
+            The 2026&ndash;27 class-wise and section-wise enrolment table.</p>
+        </div>
+        <div class="rv">
+          <h3 class="rec-h3">Transfer certificates</h3>
+          <p class="rec-copy">The register of transfer certificates issued by the school is available
+            from the school office on request, at
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<section class="section" id="faculty">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Faculty, enrolment &amp; records</span></p>
-      <h2 class="serif h2" data-split>Who Teaches, <em>Who Studies.</em></h2>
-    </div>
-
-    <div class="prog">
-      <div class="rv">
-        <h3 class="serif h3 ci-sub">Faculty members</h3>
-        <p class="copy">The school has a dedicated and competent team of faculty members from across
-          the country, specialised in various subjects. Full faculty details are available from
-          the school office on request, at
-          <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
+      <div class="rec-safe rv" id="grievance">
+        <div class="rec-safe__main">
+          <p class="rec-safe__k">Grievance redressal</p>
+          <h3 class="rec-safe__title" id="grievance-title">Raise a concern</h3>
+          <p class="rec-safe__lede">A concern can be raised with the Grievance / Redressal Officer by
+            email or telephone.</p>
+          <p class="rec-safe__who"><span class="rec-safe__role">Grievance / Redressal Officer</span>
+            <span class="rec-safe__name">Smt. Shanti Krishnamurthy</span></p>
+          <ul class="rec-safe__lines">
+            <li><span class="rec-safe__via">Phone</span>
+              <span class="rec-safe__vals"><a href="tel:+914222613303">0422 2613303</a>
+              <a href="tel:+914222613300">0422 2613300</a></span></li>
+            <li><span class="rec-safe__via">Email</span>
+              <span class="rec-safe__vals"><a href="mailto:directoraa@cirschool.org">directoraa@cirschool.org</a>
+              <a href="mailto:info@cirschool.org">info@cirschool.org</a></span></li>
+            <li><span class="rec-safe__via">Fax</span> <span class="rec-safe__plain">0422 2615725</span></li>
+          </ul>
+        </div>
+        <div class="rec-safe__side">
+          <h3 class="rec-safe__subtitle">Members of Prevention of Sexual Harassment Committee</h3>
+          <ul class="rec-safe__members">
+            <li>Smt. Shanti Krishnamurthy, Director &mdash; Academics &amp; Administration</li>
+            <li>Smt. G. Rajeshwari, Principal</li>
+            <li>Shri. E. Ganesh, Head of School &mdash; IB</li>
+          </ul>
+          <p class="rec-safe__policy">The school&rsquo;s safety policy is in the register:
+            <a href="#doc-school-safety-policy">CIRS School Safety Policy</a>.</p>
+        </div>
       </div>
-      <div class="rv">
-        <h3 class="serif h3 ci-sub">Student enrolment</h3>
-        <p class="copy">Class-wise and section-wise student enrolment figures are published each
-          academic year.</p>
-        <p class="copy"><em>[Awaiting the school &mdash; the 2026&ndash;27 class-wise and
-          section-wise enrolment table.]</em></p>
+    </section>
+
+    <!-- 06 ─ Academic year. The months are drawn as a strip from April to
+         March, but the facts are the three lines beside it: the strip is
+         hidden from screen readers because it says nothing they do not. -->
+    <section class="rec-sec rec-sec--year" id="calendar" aria-labelledby="year-title">
+      <header class="rec-head rv">
+        <p class="rec-num"><span>06</span> Academic calendar &amp; circulars</p>
+        <h2 class="rec-h2" id="year-title" tabindex="-1">The year, <em>in brief.</em></h2>
+      </header>
+
+      <div class="rec-year rv">
+        <dl class="rec-year__facts">
+          <div><dt>Academic session period</dt><dd>April to March</dd></div>
+          <div><dt><span class="rec-key rec-key--break" aria-hidden="true"></span>Vacation period</dt><dd>May&ndash;June and December</dd></div>
+          <div><dt><span class="rec-key rec-key--admit" aria-hidden="true"></span>Admission period</dt><dd>November to March</dd></div>
+        </dl>
+        <ol class="rec-months" aria-hidden="true">
+          <li>Apr</li><li class="is-break">May</li><li class="is-break">Jun</li><li>Jul</li>
+          <li>Aug</li><li>Sep</li><li>Oct</li><li class="is-admit">Nov</li>
+          <li class="is-break is-admit">Dec</li><li class="is-admit">Jan</li><li class="is-admit">Feb</li><li class="is-admit">Mar</li>
+        </ol>
       </div>
-      <div class="rv">
-        <h3 class="serif h3 ci-sub">Transfer certificates</h3>
-        <p class="copy">The register of transfer certificates issued by the school is available
-          from the school office on request, at
-          <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
-      </div>
-    </div>
+
+      <p class="rec-copy rec-year__note rv">The most recent annual academic calendar on file is for
+        2024&ndash;25, and the most recent circulars &mdash;
+        <a href="assets/documents/school-info/circular-anand-utsav.pdf" target="_blank" rel="noopener">Anand Utsav<span class="sr-only"> (PDF, opens in a new tab)</span></a> and
+        <a href="assets/documents/school-info/circular-khel-mela.pdf" target="_blank" rel="noopener">Khel Mela<span class="sr-only"> (PDF, opens in a new tab)</span></a> &mdash; are from
+        2019; current editions are awaited from the school. The
+        <a href="assets/documents/school-info/annual-academic-calendar.pdf" target="_blank" rel="noopener">2024&ndash;25 calendar<span class="sr-only"> (PDF, opens in a new tab)</span></a>
+        and both circulars are in the <a href="#doc-academic-calendar">document register</a>.</p>
+    </section>
+
+    <!-- 07 ─ Documents. Generated from tools/documents.py by register_html()
+         in build-site.py; records.js adds the search and the filters. -->
+    <section class="rec-sec rec-sec--documents" id="documents" aria-labelledby="documents-title">
+      <header class="rec-head rv">
+        <p class="rec-num"><span>07</span> Document register</p>
+        <h2 class="rec-h2" id="documents-title" tabindex="-1">Certificates, results <em>&amp; circulars.</em></h2>
+        <p class="rec-lede">Every document the school publishes, by category, with its date and its
+          status &mdash; plainly marked where a certificate has expired or a newer edition is awaited.
+          View opens a document in your browser&rsquo;s own PDF viewer; Download saves it.</p>
+      </header>
+      <p class="rec-portal rv"><a class="rec-go" href="important-documents.html">Open the Important
+        Documents portal</a> <span>the same documents, with a note on each</span></p>
+      {{REGISTER}}
+    </section>
+
   </div>
-</section>
+</div>
 
-<section class="section on-paper-2" id="grievance">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Grievance redressal</span></p>
-      <h2 class="serif h2" data-split>Redressal &amp; <em>Prevention of Sexual Harassment.</em></h2>
-      <p class="lead">A concern can be raised with the Grievance / Redressal Officer by email or
-        telephone. The school&rsquo;s safety policy is in the
-        <a href="#doclist">document list</a> below.</p>
+<!-- The close. The under-construction note every other page ends on is
+     replaced here by what it would only have gestured at: which records
+     are out of date or missing, named, counted from tools/documents.py. -->
+<section class="rec-close" id="records-contact" aria-labelledby="close-title">
+  <div class="wrap rec-close__grid">
+    <div class="rec-close__ask">
+      <p class="rec-kicker">CIRS <span aria-hidden="true">/</span> Contact</p>
+      <h2 class="rec-close__title" id="close-title">Need a record or spot an <em>outdated detail?</em></h2>
+      <p class="rec-copy">Write to the school office or call it. Say which record you need, or which
+        line on this page is out of date.</p>
+      <ul class="rec-close__lines">
+        <li><span>Email</span> <a href="mailto:info@cirschool.org">info@cirschool.org</a></li>
+        <li><span>Phone</span> <a href="tel:+914222613303">0422 2613303</a> &middot;
+          <a href="tel:+914222613300">0422 2613300</a></li>
+      </ul>
     </div>
-
-    <div class="tablewrap rv">
-      <table class="tbl tbl--particulars">
-        <caption>Grievance redressal and the Prevention of Sexual Harassment Committee.</caption>
-        <thead>
-          <tr><th scope="col">Committee</th><th scope="col">Members &amp; contact</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Grievance / Redressal Officer</th>
-            <td>Smt. Shanti Krishnamurthy<br>
-              Email: <a href="mailto:directoraa@cirschool.org">directoraa@cirschool.org</a> &middot;
-              <a href="mailto:info@cirschool.org">info@cirschool.org</a><br>
-              Phone: <a href="tel:+914222613303">0422 2613303</a> &middot;
-              <a href="tel:+914222613300">0422 2613300</a><br>
-              Fax: 0422 2615725</td>
-          </tr>
-          <tr>
-            <th scope="row">Members of Prevention of Sexual Harassment Committee</th>
-            <td>Smt. Shanti Krishnamurthy, Director &mdash; Academics &amp; Administration<br>
-              Smt. G. Rajeshwari, Principal<br>
-              Shri. E. Ganesh, Head of School &mdash; IB</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="rec-notice">
+      <p class="rec-notice__label" id="notice-title">Records update notice</p>
+      <p class="rec-copy">Each record&rsquo;s status is read from the document itself. These are the
+        ones still owed by the school or held by its office, each marked where it belongs above:</p>
+      {{RECORDS_NOTICE}}
+      <p class="rec-copy rec-notice__also">Also awaited from the school: the current School Management
+        Committee list, the 2026&ndash;27 enrolment table, and the medical facilities&rsquo; details and
+        photographs.</p>
     </div>
-  </div>
-</section>
-
-<section class="section" id="calendar">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Academic calendar &amp; circulars</span></p>
-      <h2 class="serif h2" data-split>The Year, <em>in Brief.</em></h2>
-    </div>
-
-    <dl class="factrail rv">
-      <div><dt>Academic session period</dt><dd>April to March</dd></div>
-      <div><dt>Vacation period</dt><dd>May&ndash;June and December</dd></div>
-      <div><dt>Admission period</dt><dd>November to March</dd></div>
-    </dl>
-
-    <p class="copy rv ci-note">The most recent annual academic calendar on file is for
-      2024&ndash;25, and the most recent circulars &mdash;
-      <a href="important-documents.html#doc-circular-anand-utsav">Anand Utsav</a> and
-      <a href="important-documents.html#doc-circular-khel-mela">Khel Mela</a> &mdash; are from
-      2019; current editions are awaited from the school. All of them are in the
-      <a href="important-documents.html#doc-academic-calendar">Important Documents portal</a>.</p>
-  </div>
-</section>
-
-<section class="section on-paper-2" id="doclist">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Documents</span></p>
-      <h2 class="serif h2" data-split>Certificates, Results <em>&amp; Circulars.</em></h2>
-      <p class="lead">Every document the school publishes, by category, with its date &mdash; and
-        plainly marked where a certificate has expired or a newer edition is awaited. View opens a
-        document in your browser&rsquo;s own PDF viewer; Download saves it. The portal carries a
-        note on each.
-        <span class="ci-portal"><a class="btn btn--primary" href="important-documents.html">Open
-          Important Documents</a></span></p>
-    </div>
-    {{DOCLIST}}
   </div>
 </section>
