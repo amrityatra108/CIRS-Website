@@ -163,3 +163,33 @@ body.blog{
 @media(prefers-reduced-motion:reduce){
   .art :is(a,img){scroll-behavior:auto;transition:none}
 }
+
+/* ============================================================
+   The archive galleries
+   ------------------------------------------------------------
+   Two of the school's own news pages were galleries rather than
+   articles, so those two reports are photographs and no prose.
+   The grid is auto-fit rather than a fixed column count: the
+   sets are thirteen and seventeen, neither of which divides
+   tidily, and auto-fit lets the last row fill the measure
+   instead of stranding one picture on its own.
+   ============================================================ */
+.newsgal{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  gap:clamp(10px,1.4vw,18px);
+  margin:clamp(20px,3vw,34px) 0 0;
+}
+.newsgal__shot{ margin:0; }
+.newsgal__shot img{
+  display:block; width:100%; height:auto;
+  border-radius:6px;
+  background:var(--paper-2);
+}
+.art__back{
+  margin:clamp(30px,4vw,48px) 0 0;
+  padding-top:var(--space-5);
+  border-top:1px solid var(--rule);
+}
+.art__back a{ color:var(--purple); font-weight:500; }
+.art__back a:hover{ color:var(--maroon); }

@@ -37,6 +37,7 @@ import founder
 import houses
 import documents as docs
 import blogposts
+import newsarticles
 import crossroads
 import mathchallenge
 import creativewriting
@@ -47,7 +48,7 @@ import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=105"
+CACHE_BUST = "b=106"
 
 # Questions to settle before an application is submitted.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -908,6 +909,75 @@ def esc(text, attr=False):
     """
     out = (text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
     return out.replace('"', "&quot;") if attr else out
+
+
+def news_article_html(page):
+    """A report the school published on one of its own earlier sites.
+
+    It wears the same furniture as a Crossroads article, so an archived
+    report reads like part of this site rather than a page rescued from
+    another one, and inherits that sheet's measure and its behaviour on a
+    phone. The rail carries provenance instead of an issue number: what this
+    is, where it first appeared, and a way back to the News page.
+    """
+    art = page["news"]
+
+    image = ""
+    if art.get("image"):
+        image = (f'    <figure class="art__hero">\n'
+                 f'      <img src="{esc(art["image"], attr=True)}"\n'
+                 f'           alt="{esc(art.get("image_alt", ""), attr=True)}"\n'
+                 f'           width="1200" height="620" decoding="async">\n'
+                 f'    </figure>\n\n')
+
+    body = "\n".join(f"        <p>{esc(p)}</p>" for p in art["paragraphs"])
+
+    gallery = ""
+    if art.get("gallery"):
+        folder = os.path.join(ROOT, "assets/img/news-archive", art["gallery"])
+        shots = []
+        for name in sorted(os.listdir(folder)):
+            shots.append(
+                f'          <figure class="newsgal__shot">\n'
+                f'            <img src="assets/img/news-archive/{art["gallery"]}/{name}"\n'
+                f'                 alt="" width="1200" height="675" loading="lazy" decoding="async">\n'
+                f'          </figure>')
+        gallery = ('        <div class="newsgal">\n'
+                   + "\n".join(shots) + "\n        </div>\n")
+
+    dek = f'      <p class="art__subtitle">{esc(art["dek"])}</p>\n' if art.get("dek") else ""
+
+    return (f'<article class="art" id="top">\n'
+            f'  <header class="art__head">\n'
+            f'    <div class="art__shell">\n'
+            f'      <nav class="art__breadcrumb" aria-label="Breadcrumb">\n'
+            f'        <a href="news.html">News</a><span aria-hidden="true">/</span>'
+            f'<span>{esc(art["section"])}</span>\n'
+            f'      </nav>\n'
+            f'      <p class="art__edition">From the CIRS news archive</p>\n'
+            f'      <h1 class="art__title">{esc(art["title"])}</h1>\n'
+            f'{dek}      <div class="art__credits">\n'
+            f'        <span>{esc(art["section"])}</span>\n'
+            f'        <span>{esc(art["date"])}</span>\n'
+            f'      </div>\n'
+            f'    </div>\n'
+            f'  </header>\n'
+            f'  <div class="art__layout">\n'
+            f'    <aside class="art__rail" aria-label="Where this was published">\n'
+            f'      <p>First published on</p>\n'
+            f'      <strong>The school&rsquo;s own<br>news pages</strong>\n'
+            f'      <a href="{esc(art["source"], attr=True)}" target="_blank" rel="noopener">'
+            f'The original page <span aria-hidden="true">&#8599;</span></a>\n'
+            f'      <a href="news.html">All CIRS news</a>\n'
+            f'    </aside>\n'
+            f'    <div class="art__content">\n'
+            f'{image}      <div class="art__body">\n'
+            f'{body}\n'
+            f'{gallery}      </div>\n'
+            f'      <p class="art__back"><a href="news.html">&#8592; Back to News</a></p>\n'
+            f'    </div>\n'
+            f'  </div>\n'
+            f'</article>')
 
 
 def article_html(page):
@@ -2101,6 +2171,8 @@ def build(slug, page):
     jump_at = len(parts)
     if page.get("post"):
         content = article_html(page)
+    elif page.get("news"):
+        content = news_article_html(page)
     elif page.get("soon"):
         content = soon_html(page)
     else:
@@ -2270,6 +2342,24 @@ def build(slug, page):
 # out above because they are data: seventeen entries in tools/blogposts.py,
 # each of which becomes a page with the site's own chrome around it. They are
 # not in MENU — the Blog is how a reader reaches them.
+# The school's own news reports, one page each. They are not in MENU — the
+# News page is how a reader reaches them, exactly as the Blog is for articles.
+for _art in newsarticles.ARTICLES:
+    PAGES[_art["slug"]] = {
+        "nav": esc(_art["title"]),
+        "title": esc(_art["title"], attr=True) + " | CIRS News",
+        "description": esc((_art["dek"] or _art["title"])[:180], attr=True),
+        "sheet": "blog",
+        "cache_suffix": "-news-archive-1",
+        "uc": False,
+        "jump": False,
+        # An archived report opens on paper like a Blog article does, so the
+        # header cannot float over it in white lettering.
+        "litehead": True,
+        "news": _art,
+    }
+
+
 for _post in blogposts.POSTS:
     PAGES[_post["slug"]] = {
         "nav": esc(_post["title"]),
