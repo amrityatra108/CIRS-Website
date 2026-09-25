@@ -163,6 +163,9 @@
     });
 
     show(0);
+    // Until the event handlers exist, the full archive is readable below and
+    // the controls stay out of both the visual and keyboard flow.
+    track.hidden = false;
   })();
 
   /* ==========================================================
@@ -216,6 +219,7 @@
     });
 
     var tabs = all("[data-houses-house]");
+    var tabGroup = one("[data-houses-tabs]");
     function filter(slug) {
       tabs.forEach(function (tab) {
         var on = tab.getAttribute("data-houses-house") === slug;
@@ -242,15 +246,15 @@
       });
     });
 
-    // A chapter links to "#gallery-vasishtha", which is the control itself.
-    // Landing on it should show that house rather than leave the reader to
-    // press the thing they have just jumped to.
+    // A chapter links to the portrait itself so the destination also works
+    // without script. With script, that link filters the strip to its house.
     function applyTab(id) {
       if (!id || id.indexOf("gallery-") !== 0) return;
-      var tab = document.getElementById(id);
-      if (tab && tab.hasAttribute("data-houses-house")) {
-        filter(tab.getAttribute("data-houses-house"));
-      }
+      var slug = id.slice("gallery-".length);
+      var tab = tabs.find(function (candidate) {
+        return candidate.getAttribute("data-houses-house") === slug;
+      });
+      if (tab) filter(slug);
     }
 
     // Two ways in, and both are needed.
@@ -270,6 +274,7 @@
       applyTab((location.hash || "").replace("#", ""));
     });
     applyTab((location.hash || "").replace("#", ""));
+    if (tabGroup) tabGroup.hidden = false;
   })();
 
   /* Everything below this point is motion, and everything below this point

@@ -1739,7 +1739,7 @@ def houses_track_html():
             data-houses-filter="{c}" aria-pressed="{"true" if c == "All" else "false"}">{c}</button>'''
         for c in houses.CATEGORIES)
 
-    return f'''    <div class="hcomp__track" data-houses-track>
+    return f'''    <div class="hcomp__track" data-houses-track hidden>
       <h3 class="sr-only" id="comp-filter-h">Filter the archive by category</h3>
       <div class="hcomp__filters" role="group" data-houses-filters aria-labelledby="comp-filter-h">
 {filters}
@@ -1821,27 +1821,27 @@ def houses_gallery_html():
     Every frame is a figure with a real caption outside the image, which is
     what keeps it readable on a phone and in the accessibility tree. The
     filter buttons carry the per-house ids the chapters link to, so
-    "#gallery-vasishtha" lands on the control that shows Vasishtha's frames
+    "#gallery-vasishtha" lands on Vasishtha's portrait with or without script
     and the script presses it.
     """
     frames = []
     for h in houses.HOUSES:
         for name, alt, caption in ((h["hero"], h["hero_alt"], h["hero_cap"]),):
-            frames.append(f'''        <li data-house="{h["slug"]}">
+            frames.append(f'''        <li id="gallery-{h["slug"]}" data-house="{h["slug"]}">
           <figure>
             <img src="{houses.img(name)}" width="900" height="1125" loading="lazy"
                  decoding="async" alt="{esc(alt, attr=True)}">
             <figcaption><b>{h["name"]}</b><span>{caption}</span></figcaption>
           </figure>
         </li>''')
-    tabs = ['        <button type="button" class="hgal__tab is-on" id="gallery-all"'
+    tabs = ['        <button type="button" class="hgal__tab is-on" id="gallery-tab-all"'
             ' data-houses-house="all" aria-pressed="true">All four</button>']
     for h in houses.HOUSES:
-        tabs.append(f'''        <button type="button" class="hgal__tab" id="gallery-{h["slug"]}"
+        tabs.append(f'''        <button type="button" class="hgal__tab" id="gallery-tab-{h["slug"]}"
             data-houses-house="{h["slug"]}" aria-pressed="false">
           <span class="hgal__sw" aria-hidden="true"></span>{h["name"]}</button>''')
-    return f'''    <h3 class="sr-only" id="gal-h">Choose a house</h3>
-    <div class="hgal__tabs" role="group" data-houses-tabs aria-labelledby="gal-h">
+    return f'''    <div class="hgal__tabs" role="group" data-houses-tabs aria-labelledby="gal-h" hidden>
+      <h3 class="sr-only" id="gal-h">Choose a house</h3>
 {chr(10).join(tabs)}
     </div>
     <ul class="hgal__strip" data-houses-strip>

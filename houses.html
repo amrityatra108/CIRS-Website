@@ -626,7 +626,7 @@
       <figcaption>A quiz in progress at CIRS.</figcaption>
     </figure>
 
-    <div class="hcomp__track" data-houses-track>
+    <div class="hcomp__track" data-houses-track hidden>
       <h3 class="sr-only" id="comp-filter-h">Filter the archive by category</h3>
       <div class="hcomp__filters" role="group" data-houses-filters aria-labelledby="comp-filter-h">
         <button type="button" class="hcomp__filter is-on"
@@ -1077,45 +1077,45 @@
         portrait.</p>
     </div>
 
-    <h3 class="sr-only" id="gal-h">Choose a house</h3>
-    <div class="hgal__tabs" role="group" data-houses-tabs aria-labelledby="gal-h">
-        <button type="button" class="hgal__tab is-on" id="gallery-all" data-houses-house="all" aria-pressed="true">All four</button>
-        <button type="button" class="hgal__tab" id="gallery-vasishtha"
+    <div class="hgal__tabs" role="group" data-houses-tabs aria-labelledby="gal-h" hidden>
+      <h3 class="sr-only" id="gal-h">Choose a house</h3>
+        <button type="button" class="hgal__tab is-on" id="gallery-tab-all" data-houses-house="all" aria-pressed="true">All four</button>
+        <button type="button" class="hgal__tab" id="gallery-tab-vasishtha"
             data-houses-house="vasishtha" aria-pressed="false">
           <span class="hgal__sw" aria-hidden="true"></span>Vasishtha</button>
-        <button type="button" class="hgal__tab" id="gallery-valmiki"
+        <button type="button" class="hgal__tab" id="gallery-tab-valmiki"
             data-houses-house="valmiki" aria-pressed="false">
           <span class="hgal__sw" aria-hidden="true"></span>Valmiki</button>
-        <button type="button" class="hgal__tab" id="gallery-vishwamitra"
+        <button type="button" class="hgal__tab" id="gallery-tab-vishwamitra"
             data-houses-house="vishwamitra" aria-pressed="false">
           <span class="hgal__sw" aria-hidden="true"></span>Vishwamitra</button>
-        <button type="button" class="hgal__tab" id="gallery-vyasa"
+        <button type="button" class="hgal__tab" id="gallery-tab-vyasa"
             data-houses-house="vyasa" aria-pressed="false">
           <span class="hgal__sw" aria-hidden="true"></span>Vyasa</button>
     </div>
     <ul class="hgal__strip" data-houses-strip>
-        <li data-house="vasishtha">
+        <li id="gallery-vasishtha" data-house="vasishtha">
           <figure>
             <img src="assets/img/houses/hero-vasishtha.jpg" width="900" height="1125" loading="lazy"
                  decoding="async" alt="A CIRS student in a deep red house jersey printed Vasishtha, playing on the outdoor basketball court">
             <figcaption><b>Vasishtha</b><span>The house jersey, on the outdoor court</span></figcaption>
           </figure>
         </li>
-        <li data-house="valmiki">
+        <li id="gallery-valmiki" data-house="valmiki">
           <figure>
             <img src="assets/img/houses/hero-valmiki.jpg" width="900" height="1125" loading="lazy"
                  decoding="async" alt="Students at a CIRS investiture ceremony wearing yellow Valmiki house sashes, right hands raised in the pledge">
             <figcaption><b>Valmiki</b><span>The house sash, at an investiture</span></figcaption>
           </figure>
         </li>
-        <li data-house="vishwamitra">
+        <li id="gallery-vishwamitra" data-house="vishwamitra">
           <figure>
             <img src="assets/img/houses/hero-vishwamitra.jpg" width="900" height="1125" loading="lazy"
                  decoding="async" alt="A CIRS student in a green shirt working at a desk during a classroom activity">
             <figcaption><b>Vishwamitra</b><span>The house tee, at a classroom contest</span></figcaption>
           </figure>
         </li>
-        <li data-house="vyasa">
+        <li id="gallery-vyasa" data-house="vyasa">
           <figure>
             <img src="assets/img/houses/hero-vyasa.jpg" width="900" height="1125" loading="lazy"
                  decoding="async" alt="A CIRS student in a blue house shirt printed Vyasa, waiting to return at a tennis session">

@@ -532,6 +532,7 @@ body.houses main{ background:var(--paper); }
 }
 .hcomp__filter:hover{ border-color:var(--purple); color:var(--purple) }
 .hcomp__filter.is-on{ background:var(--purple); border-color:var(--purple); color:#fff }
+.hcomp__track[hidden]{ display:none }
 
 .hcomp__line{ position:relative; height:1px; background:var(--rule); margin-bottom:-1px; }
 /* The width animates; the colour does not.
@@ -780,6 +781,7 @@ body.houses main{ background:var(--paper); }
    8. The gallery
    ============================================================ */
 .hgal__tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:var(--space-5); }
+.hgal__tabs[hidden]{ display:none }
 .hgal__tab{
   appearance:none; background:transparent; cursor:pointer;
   border:1px solid var(--rule); padding:9px 18px; min-height:44px;
