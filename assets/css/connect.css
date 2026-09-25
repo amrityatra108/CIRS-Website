@@ -6,19 +6,15 @@
    it — a honeycomb, a journey — and neither needs anything here.
    The other three did.
 
-   School Information, News below its hero, and the Parent Portal
-   were built out of the shared components and nothing else: a
-   .sec-head, a .tbl in a bordered white box, a .factrail running
-   the full width of the page. School Information in particular is
-   the page a visitor is most likely to arrive at from outside the
-   site — it is what CBSE requires every school to publish — and
-   it was eight thousand pixels of tables with no photograph, no
-   composition and no way to act on the contact details printed
-   inside them. The information was complete and correct. It
-   simply did not look like the rest of this school's site.
+   News below its hero and the Parent Portal were built out of the
+   shared components and nothing else: a .sec-head, a .tbl in a
+   bordered white box, a .factrail running the full width of the
+   page. School Information was the third, until it took a sheet of
+   its own — assets/css/records.css — and the rules that were only
+   ever its own went with it.
 
    This sheet is scoped to body.connect, which build-site.py puts
-   on those three pages and no others. Nothing here restyles a
+   on those two pages and no others. Nothing here restyles a
    component for the rest of the site: .tbl, .factrail and .prog
    are shared, and every rule that touches them is keyed to
    body.connect so the pages that already use them correctly are
@@ -35,9 +31,10 @@
      4. takes the white box off the tables and sets them as data
      5. makes every telephone number and address on the page a
         thing you can act on
-     6. puts the school's own photography on a page that had none
      7. gives the Parent Portal's doors and contact rows a
         composition rather than a column down the left
+
+   (6, the photography, belonged to School Information alone.)
 
    Type, palette and spacing are the site's own tokens throughout.
    ============================================================ */
@@ -158,14 +155,6 @@ body.connect .section:not(.on-purple) .factrail dd{
    Splitting a 580px column again would set "Director — Academics &
    Administration" over three lines to save nothing. */
 body.connect .section:not(.on-purple) .prog .factrail{ grid-template-columns:1fr; }
-body.connect .ci-rail{ margin-top:var(--space-4); }
-/* At a glance: each value is the way to the page that says more, so it is
-   marked as a link the way running copy is. */
-body.connect .ci-glance dd a{
-  color:var(--purple); text-decoration:underline; text-underline-offset:3px;
-  text-decoration-color:rgba(57,42,72,.35);
-}
-body.connect .ci-glance dd a:hover{ text-decoration-color:var(--purple); }
 
 /* ------------------------------------------------------------
    4. The tables
@@ -185,11 +174,6 @@ body.connect .section:not(.on-purple) .tablewrap{
   border:0; background:none;
   margin-top:clamp(26px,3vw,44px);
 }
-/* max-width on a table cell is ignored under the automatic table layout, so
-   the measure has to be held by the table itself. Capped here, the details
-   column sets to about sixty characters — the address and the NOC line read
-   as paragraphs instead of as one line across twelve hundred pixels. */
-body.connect .tbl--particulars{ max-width:1020px; }
 /* The caption is there for anyone reading the table out of its page, and it
    was setting as a stray grey sentence above it. It is a label now. */
 body.connect .section:not(.on-purple) .tbl caption{
@@ -210,9 +194,6 @@ body.connect .section:not(.on-purple) .tbl thead th{
   color:var(--c-accent);
   font-size:.78rem; letter-spacing:.13em; text-transform:uppercase;
 }
-body.connect .section:not(.on-purple) .tbl--particulars tbody th{
-  width:clamp(220px,26vw,340px);
-}
 body.connect .section:not(.on-purple) .tbl tbody th{
   color:var(--ink); font-weight:600;
   /* The particulars are sentences, not labels — "NOC from State/UT or
@@ -223,35 +204,6 @@ body.connect .section:not(.on-purple) .tbl tbody th{
 body.connect .section:not(.on-purple) .tbl td{ color:var(--ink-soft); max-width:62ch; }
 body.connect .section:not(.on-purple) .tbl tbody tr:hover th,
 body.connect .section:not(.on-purple) .tbl tbody tr:hover td{ background:rgba(117,99,0,.035); }
-
-/* On a phone the two-column particulars do not fit: the shared .tbl holds
-   a 520px minimum so it scrolls in its box, and at 390px that cut every
-   answer off mid-word behind a sideways scroll nobody would guess was
-   there. A particular and its answer are a pair, not a grid, so below
-   700px each row stacks — the particular as a label, the answer under
-   it — and nothing scrolls. The column heads say nothing a stacked pair
-   does not, so they are kept for screen readers only. */
-@media (max-width:700px){
-  body.connect .tbl--particulars{ min-width:0; }
-  body.connect .tbl--particulars,
-  body.connect .tbl--particulars tbody,
-  body.connect .tbl--particulars tr,
-  body.connect .tbl--particulars th,
-  body.connect .tbl--particulars td{ display:block; width:auto; }
-  body.connect .tbl--particulars caption{ display:block; }
-  body.connect .tbl--particulars thead{
-    position:absolute; width:1px; height:1px; overflow:hidden;
-    clip:rect(0 0 0 0); clip-path:inset(50%);
-  }
-  body.connect .section:not(.on-purple) .tbl--particulars tbody th{
-    width:auto; padding:18px 0 4px; border-bottom:0;
-  }
-  body.connect .section:not(.on-purple) .tbl--particulars td{
-    max-width:none; padding:0 0 18px;
-  }
-  body.connect .section:not(.on-purple) .tbl--particulars tbody tr:hover th,
-  body.connect .section:not(.on-purple) .tbl--particulars tbody tr:hover td{ background:none; }
-}
 
 /* ------------------------------------------------------------
    5. Contact details
@@ -294,44 +246,6 @@ body.connect .tbl td > a:not([href^="tel:"]):not([href^="mailto:"]){
 }
 
 /* ------------------------------------------------------------
-   6. The photography
-   ------------------------------------------------------------
-   The page carried none at all. Two of the school's own wide
-   frames are set into it as bands — the campus from the air where
-   the campus is measured, the entrance where the page hands over
-   to the documents portal. Both are cropped to one cinematic
-   ratio and both are set edge to edge within the measure, so they
-   read as a pause in the document rather than as illustrations
-   dropped beside a table.
-   ------------------------------------------------------------ */
-body.connect .ciband{
-  position:relative;
-  margin:clamp(30px,3.6vw,54px) 0 clamp(34px,4vw,60px);
-  overflow:hidden;
-  background:var(--purple-ink);
-  aspect-ratio:64/17;
-}
-body.connect .ciband img{
-  width:100%; height:100%;
-  object-fit:cover; object-position:center 48%;
-  transform:scale(1.03);
-  transition:transform 1.2s cubic-bezier(.16,1,.3,1);
-}
-body.connect .ciband:hover img{ transform:scale(1); }
-/* A hairline of gold along the foot, the same mark the section rules
-   carry, so the band belongs to the page rather than floating in it. */
-body.connect .ciband::after{
-  content:""; position:absolute; inset:auto 0 0 0; height:2px;
-  background:linear-gradient(90deg, var(--gold) 0%, rgba(255,195,8,0) 62%);
-}
-@media (max-width:700px){
-  body.connect .ciband{ aspect-ratio:16/9; }
-}
-@media (prefers-reduced-motion:reduce){
-  body.connect .ciband img{ transition:none; transform:none; }
-}
-
-/* ------------------------------------------------------------
    7. Spacing that used to be in the markup
    ------------------------------------------------------------
    Nine style="" attributes carried the rhythm of this page —
@@ -339,18 +253,6 @@ body.connect .ciband::after{
    where no stylesheet could see them and no breakpoint could
    change them. They are here now, on the site's spacing scale.
    ------------------------------------------------------------ */
-body.connect .ci-sub{
-  margin-bottom:var(--space-3);
-  color:var(--ink);
-}
-body.connect .ci-sub + .factrail{ margin-top:0; }
-body.connect .ci-sub--spaced{ margin-top:clamp(30px,3.4vw,44px); }
-body.connect .ci-note{ margin-top:var(--space-4); }
-body.connect .ci-group{ margin-top:clamp(30px,3.4vw,44px); }
-body.connect .ci-group .copy + .copy{ margin-top:var(--space-3); }
-/* The one-click way into the portal, under the document list's standfirst. */
-body.connect .ci-portal{ display:block; margin-top:var(--space-4); }
-
 /* The notice that hands over to the documents portal. It is the one
    dark object on a long pale page, so it gets the room to be one. */
 body.connect .notice{ margin-top:clamp(8px,1.4vw,20px); }
@@ -424,26 +326,6 @@ body.connect .ucpage__reachlabel{
    Measured on the built pages rather than guessed at.
    ------------------------------------------------------------ */
 
-/* The committee list had the names as small grey tracked labels and
-   the roles in bold, so the eye found "Director" four times and had to
-   hunt for who. The person is the entry; the role describes them. */
-body.connect .section:not(.on-purple) .ci-rail--people dt{
-  font-size:1rem; letter-spacing:0; color:var(--ink); font-weight:500;
-}
-body.connect .section:not(.on-purple) .ci-rail--people dd{
-  color:var(--ink-mute); font-weight:400; font-size:.92rem;
-}
-/* A long value — the Resident Director's address — set flush right read
-   as a ragged left edge. Values here start where their column starts. */
-body.connect .section:not(.on-purple) .ci-rail--contact > div{
-  grid-template-columns:110px 1fr; display:grid; align-items:baseline;
-}
-body.connect .section:not(.on-purple) .ci-rail--contact dd{ text-align:left; }
-body.connect .ci-rail--contact a{
-  color:var(--c-accent); text-decoration:underline; text-underline-offset:3px;
-  text-decoration-color:rgba(117,99,0,.4);
-}
-
 /* Links inside running copy looked like the copy around them. */
 body.connect .section:not(.on-purple) .copy a,
 body.connect .section:not(.on-purple) .sec-head .lead a{
@@ -453,47 +335,6 @@ body.connect .section:not(.on-purple) .sec-head .lead a{
 }
 body.connect .section:not(.on-purple) .copy a:hover,
 body.connect .section:not(.on-purple) .sec-head .lead a:hover{ text-decoration-color:var(--purple); }
-
-/* The document list. Each "Download" wrapped to its own line under a
-   long title and sat directly under a short one, so the column had no
-   edge to scan. A document is a row now: its title, and the download
-   held to the right on the same line, with a hairline between rows. */
-body.connect .docgrid{
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));
-  gap:var(--space-7) clamp(28px,3.4vw,56px);
-}
-body.connect .docgroup h3{
-  padding-bottom:var(--space-3); margin-bottom:0;
-  border-bottom:2px solid var(--c-key);
-}
-body.connect .doclist{ gap:0; }
-body.connect .doclist li{
-  display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-4);
-  padding:12px 0; border-bottom:1px solid var(--c-rule-soft);
-  color:var(--ink); font-size:.95rem;
-}
-body.connect .doclist li::before{ display:none; }
-body.connect .doclist__title{ min-width:0; }
-body.connect .doclist__dl{
-  flex:none; margin:0;
-  display:inline-flex; align-items:center; gap:6px;
-  padding:3px 10px; border:1px solid var(--c-rule); border-radius:99px;
-  font-size:.74rem; letter-spacing:.05em; text-decoration:none;
-  color:var(--purple); background:var(--paper);
-  transition:background .2s var(--e), color .2s var(--e), border-color .2s var(--e);
-}
-body.connect .doclist__dl::before{
-  content:""; width:8px; height:8px; flex:none;
-  border-right:1.4px solid currentColor; border-bottom:1.4px solid currentColor;
-  transform:translateY(-2px) rotate(45deg);
-}
-body.connect .doclist__dl:hover,
-body.connect .doclist__dl:focus-visible{
-  background:var(--purple); border-color:var(--purple); color:var(--on-purple);
-}
-/* View opens the browser's viewer rather than saving, so it carries no
-   download chevron. */
-body.connect .doclist__dl--view::before{ display:none; }
 
 /* Photograph placeholders on paper. They were near-black slabs, the
    heaviest thing on a pale page and the least informative. They are

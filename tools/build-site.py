@@ -223,14 +223,19 @@ PAGES = {
         "title": "School Information",
         "description": "Affiliation status, governance, infrastructure and grievance-redressal details for "
                        "Chinmaya International Residential School, with the Important Documents portal.",
-        "banner": ("Affiliation &amp; compliance", "School <em>Information.</em>",
-                   "The affiliation, governance, infrastructure and grievance-redressal details CBSE and "
-                   "the affiliating authorities require every school to publish &mdash; and the Important "
-                   "Documents portal that carries the certificates behind them."),
-        # The two pages in the Connect column that had no sheet of their own
-        # share one, so the group reads as a group. See assets/css/connect.css.
-        "sheet": "connect",
-        "jump": True,
+        # No banner and no hero. The page opens on "The CIRS Record": four of
+        # the school's own certificates laid out as sheets of paper, cut from
+        # the PDFs by tools/make-record-previews.py, with the h1 beside them.
+        # The opening is ivory, so the header takes dark lettering. The page
+        # carries its own section index, so the shared "On this page" button
+        # stays off; and the under-construction note gives way to a records
+        # notice built from tools/documents.py, at the foot of the page.
+        "banner": None,
+        "sheet": "records",
+        "cache_suffix": "-records-1",
+        "litehead": True,
+        "jump": False,
+        "uc": False,
     },
     "important-documents": {
         "nav": "Important Documents",
@@ -1236,40 +1241,186 @@ def doc_meta(d):
     return f'<span class="docmeta docmeta--{status}">{docs.status_text(d)}</span>'
 
 
-def doclist_html():
-    """The compact, category-grouped list for the School Information page.
+# ---------------------------------------------------------------------------
+# The CIRS Record — School Information's document register and the status
+# lines around it. All of it is read from tools/documents.py, so the opening's
+# sheets, the register and the records notice at the foot of the page can
+# never disagree with each other or with the Important Documents portal.
+# ---------------------------------------------------------------------------
 
-    Every document with its date, and View beside Download: the notice above
-    this list promises the browser's own PDF viewer, so the list offers it.
-    Generated straight from tools/documents.py, so it can never list a
-    document the portal does not have, or omit one the portal does.
-    """
-    groups = []
+# What a visitor is told a document IS, in a word or two. The manifest's own
+# status says how current it is; availability and upload come first, because a
+# document nobody can open should say so before it says anything else.
+REGISTER_LABELS = {
+    "request":   "Available from the school on request",
+    "await":     "Awaiting upload",
+    "expired":   "Expired",
+    "stale":     "Newer edition awaited",
+    "valid":     "Valid",
+    "current":   "Current",
+    "permanent": "Permanent",
+    "dated":     "On file",
+    "undated":   "Date not supplied",
+}
+
+
+def register_status(d):
+    """The key of the one label a document wears in the register."""
+    if docs.is_on_request(d):
+        return "request"
+    if not docs.is_uploaded(d):
+        return "await"
+    status = docs.effective_status(d)
+    if status == "current":
+        return "valid" if d.get("valid_until") else "current"
+    return status
+
+
+def register_date(d):
+    """Every date the manifest holds for a document, in the order a reader
+    wants them: when it is from, and until when it held."""
+    parts = []
+    if d.get("issued"):
+        parts.append(f"Issued {d['issued']}")
+    if d.get("period"):
+        parts.append(f"Covers {d['period']}")
+    if d.get("valid_until"):
+        verb = "ran to" if docs.effective_status(d) == "expired" else "valid to"
+        parts.append(f"{verb} {d['valid_until']}" if parts
+                     else f"{verb.capitalize()} {d['valid_until']}")
+    return " &middot; ".join(parts) or "Date not supplied"
+
+
+def _plain(html):
+    """A title as text, for the search index and for sentences."""
+    text = re.sub(r"<[^>]+>", "", html)
+    return (text.replace("&amp;", "&").replace("&mdash;", "—")
+                .replace("&ndash;", "–").replace("&middot;", "·"))
+
+
+def _slug(text):
+    return re.sub(r"[^a-z0-9]+", "-", _plain(text).lower()).strip("-")
+
+
+def _size(d):
+    kb = os.path.getsize(os.path.join(ROOT, docs.asset_path(d))) / 1024
+    return f"{kb / 1024:.1f} MB" if kb >= 1000 else f"{kb:.0f} KB"
+
+
+def register_html():
+    """The searchable register on School Information: every document in the
+    manifest, grouped by its category, with its dates, one status label, and
+    View beside Download where there is a file to open. A document the school
+    keeps off the site offers a request by email instead, and one not yet
+    uploaded offers nothing — never a button that leads nowhere.
+
+    The search box and the filters are written with the hidden attribute and
+    shown by assets/js/records.js, so without scripting the register is simply
+    the complete list, which is all the controls would ever narrow it to."""
+    total = len(docs.DOCUMENTS)
+    groups, filters = [], []
     for category, items in docs.by_category():
+        slug = _slug(category)
+        filters.append(f'          <button type="button" class="reg__filter" data-reg-filter="{slug}" '
+                       f'aria-pressed="false">{category} <span class="reg__n">{len(items)}</span></button>')
         rows = []
         for d in items:
-            if docs.is_on_request(d):
-                actions = ""
-            elif docs.is_uploaded(d):
-                actions = (f'<a class="doclist__dl doclist__dl--view" href="{docs.asset_path(d)}" '
-                           f'target="_blank" rel="noopener" '
-                           f'aria-label="View {d["title"]} (PDF, opens in a new tab)">View</a>'
-                           f'<a class="doclist__dl" href="{docs.asset_path(d)}" download '
-                           f'aria-label="Download {d["title"]} (PDF)">Download</a>')
+            key = register_status(d)
+            title_text = _plain(d["title"])
+            if key == "request":
+                subject = f"Request: {title_text}".replace("&", "and").replace(" ", "%20")
+                actions = (f'<a class="reg__act reg__act--ask" href="mailto:info@cirschool.org?subject={subject}">'
+                           f'Request by email<span class="sr-only">: {d["title"]}</span></a>')
+                fmt = "Held by the school office"
+            elif key == "await":
+                actions = '<span class="reg__none">Not yet published</span>'
+                fmt = "No file yet"
             else:
-                actions = '<span class="doclist__await">Awaiting upload</span>'
-            meta = doc_meta(d) + (f'<span class="docmeta docmeta--request">{ON_REQUEST}</span>'
-                                  if docs.is_on_request(d) else "")
-            rows.append(f'        <li><span class="doclist__title">{d["title"]}{meta}</span>'
-                        + (f' <span class="doclist__actions">{actions}</span>' if actions else "")
-                        + '</li>')
-        groups.append(f'''      <div class="docgroup rv">
-        <h3 class="serif h3">{category}</h3>
-        <ul class="doclist">
+                path = docs.asset_path(d)
+                actions = (f'<a class="reg__act" href="{path}" target="_blank" rel="noopener">'
+                           f'View<span class="sr-only"> {d["title"]} (PDF, opens in a new tab)</span></a>'
+                           f'<a class="reg__act reg__act--dl" href="{path}" download>'
+                           f'Download<span class="sr-only"> {d["title"]} (PDF)</span></a>')
+                fmt = f"PDF &middot; {_size(d)}"
+            search = f"{title_text} {_plain(d['note'])}".lower().replace('"', "")
+            rows.append(f'''          <li class="reg__row reg__row--{key}" id="doc-{d["id"]}" data-reg-text="{search}">
+            <div class="reg__doc">
+              <p class="reg__title">{d["title"]}</p>
+              <p class="reg__note">{d["note"]}</p>
+            </div>
+            <p class="reg__when">{register_date(d)}<span class="reg__fmt">{fmt}</span></p>
+            <p class="reg__state"><span class="rst rst--{key}">{REGISTER_LABELS[key]}</span></p>
+            <p class="reg__acts">{actions}</p>
+          </li>''')
+        noun = "record" if len(items) == 1 else "records"
+        groups.append(f'''        <div class="reg__group" data-reg-group="{slug}">
+          <h3 class="reg__cat">{category} <span class="reg__n">{len(items)} {noun}</span></h3>
+          <ul class="reg__list">
 {chr(10).join(rows)}
-        </ul>
-      </div>''')
-    return '<div class="docgrid">\n' + "\n".join(groups) + '\n    </div>'
+          </ul>
+        </div>''')
+    return f'''<div class="reg" data-reg>
+      <div class="reg__tools" data-reg-tools hidden>
+        <div class="reg__search">
+          <label class="reg__label" for="regSearch">Search the register</label>
+          <input class="reg__input" id="regSearch" type="search" autocomplete="off" spellcheck="false"
+                 placeholder="e.g. fire safety, calendar" aria-describedby="regCount">
+        </div>
+        <div class="reg__filters" role="group" aria-label="Show one category">
+          <button type="button" class="reg__filter" data-reg-filter="all" aria-pressed="true">All <span class="reg__n">{total}</span></button>
+{chr(10).join(filters)}
+        </div>
+        <p class="reg__count" id="regCount" data-reg-count aria-live="polite">Showing all {total} records</p>
+      </div>
+      <div class="reg__groups" id="doclist">
+{chr(10).join(groups)}
+      </div>
+      <div class="reg__empty" data-reg-empty hidden>
+        <p class="reg__emptyhead">No record matches that search.</p>
+        <p>Try one word of the title &mdash; &ldquo;fire&rdquo;, &ldquo;calendar&rdquo;,
+          &ldquo;affiliation&rdquo; &mdash; or ask the school office at
+          <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
+        <button type="button" class="reg__reset" data-reg-reset>Clear the search and filters</button>
+      </div>
+    </div>'''
+
+
+def doc_sheet_status(doc_id):
+    """The status line on one of the opening's sheets: its label and its date,
+    so an expired letter can never be laid out there as if it were current."""
+    d = next(x for x in docs.DOCUMENTS if x["id"] == doc_id)
+    key = register_status(d)
+    detail = {
+        "valid": f"to {d.get('valid_until', '')}",
+        "expired": f"{d.get('valid_until', '')}, renewal awaited",
+        "permanent": f"issued {d.get('issued', '')}",
+        "dated": f"issued {d.get('issued', '')}",
+        "stale": f"issued {d.get('issued', '')}",
+    }.get(key, "")
+    return (f'<span class="rst rst--{key}">{REGISTER_LABELS[key]}</span>'
+            + (f' <span class="rec-tag__when">{detail}</span>' if detail else ""))
+
+
+def records_notice_html():
+    """The notice at the foot of School Information: which records have lapsed,
+    which are awaiting a newer edition or an upload, and which are held by the
+    school — each named and linked to its row in the register, and counted
+    from the manifest so the notice is never out of step with the page."""
+    buckets = [("expired", "Expired, renewal awaited"),
+               ("stale", "Newer edition awaited"),
+               ("await", "Awaiting upload"),
+               ("request", "Available from the school on request")]
+    rows = []
+    for key, label in buckets:
+        items = [d for d in docs.DOCUMENTS if register_status(d) == key]
+        if not items:
+            continue
+        links = ", ".join(f'<a href="#doc-{d["id"]}">{d["title"]}</a>' for d in items)
+        rows.append(f'''          <div class="rec-notice__row">
+            <dt><span class="rst rst--{key}">{label}</span> <span class="rec-notice__n">{len(items)}</span></dt>
+            <dd>{links}</dd>
+          </div>''')
+    return '<dl class="rec-notice__list">\n' + "\n".join(rows) + '\n        </dl>'
 
 
 def docportal_html():
@@ -1445,8 +1596,9 @@ def build(slug, page):
             '#portalIntroEntry{display:none}'
             'body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}'
             '</style></noscript>\n</head>')
-    if slug == "admissions":
-        # Its video hero opens immediately, so there is no curtain to hide
+    if slug in ("admissions", "school-info"):
+        # Its opening is visible immediately — Admissions' video hero, School
+        # Information's document sheets — so there is no curtain to hide
         # when scripting is unavailable.
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
@@ -1482,10 +1634,11 @@ def build(slug, page):
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if slug == "admissions":
-        # The video and poster already supply this page's opening. The shared
-        # curtain can hold its application action behind a blank screen for
-        # several seconds while fonts and the intro timeline settle.
+    if slug in ("admissions", "school-info"):
+        # The video and poster already supply Admissions' opening, and the
+        # document sheets School Information's: each plays its own entrance
+        # at first paint. The shared curtain would hold either behind a blank
+        # screen for several seconds while fonts and its timeline settle.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
         chrome = chrome[:intro_start] + chrome[intro_end:]
@@ -1528,7 +1681,8 @@ def build(slug, page):
         content = captures.expand_featured(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
-                       .replace("{{DOCLIST}}", doclist_html())
+                       .replace("{{REGISTER}}", register_html() if slug == "school-info" else "")
+                       .replace("{{RECORDS_NOTICE}}", records_notice_html() if slug == "school-info" else "")
                        .replace("{{DOCPORTAL}}", docportal_html())
                        .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
@@ -1558,6 +1712,8 @@ def build(slug, page):
                        .replace("{{ALUMNI_PATHWAYS}}", alumni.pathways_html())
                        .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
                        .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
+    content = re.sub(r"\{\{DOC_STATUS:([a-z0-9-]+)\}\}",
+                     lambda m: doc_sheet_status(m.group(1)), content)
     parts.append(content)
     # Every page carries the index; jump_html leaves it out where there is
     # nothing to jump to. "jump": False opts a page out. It is placed after
@@ -1594,6 +1750,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
         parts.append(f'<script src="assets/js/admissions.js?{CACHE_BUST}" defer></script>')
+    if slug == "school-info":
+        parts.append(f'<script src="assets/js/records.js?{CACHE_BUST}" defer></script>')
     if slug == "alumni":
         parts.append(f'<script src="assets/js/alumni-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":
