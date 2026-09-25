@@ -1,0 +1,285 @@
+<!-- The Houses page.
+     Four identities inside one visual system: the opening frame gives all four
+     equal width and lets one take the screen, and every section after it keeps
+     the four visible as named participants rather than as colours.
+
+     The facts are in tools/houses.py, which also records where each one comes
+     from and what is still missing. Nothing on this page is written twice: the
+     chapters, the competition archive, the record table and the gallery are all
+     built from that one list. The photographs are cut by tools/make-houses.py.
+
+     Structure, and why it is this way round:
+
+       #top          the four-house opening, pinned, releasing into Vasishtha
+       #houses       four chapters, one per house
+       #march        the march past, a horizontal sequence
+       #competition  the inter-house archive, on a season line
+       #sport        the colour you compete for
+       #culture      the house productions, on a dark stage
+       #record       eight dated events from available sources, as a table
+       #gallery      one strip, filtered by house
+       #together     the four houses back in one frame
+
+     The opening interaction is CSS: :has() expands the hovered or focused zone
+     and compresses the other three, so it works before houses-journey.js
+     arrives and still works if it never does. The script adds the pointer
+     depth, the scroll release out of the hero, the chapter wipes, the
+     competition track and the gallery — all of it on top of markup that
+     already reads without it.
+-->
+
+<section class="hsx" id="top" data-ground="#0E0B12" data-houses-hero>
+  <div class="hsx__track">
+  <div class="hsx__stage">
+
+    <div class="hsx__grid" data-houses-grid>
+{{HOUSES_HERO}}
+    </div>
+
+    <div class="hsx__rules" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- The live house's colour, filling the window as the hero releases into
+         its chapter. Opacity only: the release touches nothing that lays out. -->
+    <div class="hsx__fill" aria-hidden="true" data-houses-fill></div>
+
+    <div class="wrap hsx__say">
+      <p class="marker"><span class="sc">The houses of CIRS</span></p>
+      <h1 class="hsx__title" data-houses-title>Four Houses.<br><em>One CIRS.</em></h1>
+      <p class="hsx__sub">Different colours. Shared purpose.</p>
+      <p class="hsx__cue"><span class="hsx__cuek" aria-hidden="true"></span>Choose a house &mdash; or keep scrolling</p>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<div class="hchs" id="houses">
+{{HOUSES_CHAPTERS}}
+</div>
+
+<!-- The march.
+     A wide photographic sequence that moves right to left as the page is
+     scrolled, with the four house names passing behind it and marching-grid
+     lines running away in perspective. Without the script it is a normal
+     horizontal strip that a reader can swipe, which is what it becomes on a
+     phone in any case. -->
+<section class="hmarch on-purple" id="march" data-ground="#1E1626">
+  <div class="wrap">
+    <div class="sec-head hmarch__head rv">
+      <p class="marker"><span class="sc">The march past</span></p>
+      <h2 class="serif h2 hmarch__h" data-split>Colour.<br>Discipline.<br><em>Pride.</em></h2>
+      <p class="lead">The march past is judged, and it is won. Vasishtha called itself the
+        unbeaten champion of it in 2008; Valmiki took it that February. It is the one event
+        where a house is only as good as its quietest rank.</p>
+    </div>
+  </div>
+
+  <div class="hmarch__field" data-houses-march>
+    <div class="hmarch__names" aria-hidden="true" data-march-names>
+      <span>Vasishtha</span><span>Valmiki</span><span>Vishwamitra</span><span>Vyasa</span>
+      <span>Vasishtha</span><span>Valmiki</span><span>Vishwamitra</span><span>Vyasa</span>
+    </div>
+    <div class="hmarch__grid" aria-hidden="true"></div>
+    <ul class="hmarch__run" data-march-run>
+      <li>
+        <figure>
+          <img src="assets/img/houses/march-01.jpg" width="1200" height="800" loading="lazy"
+               decoding="async" alt="The colour party leading the march past down the track at CIRS, two flags carried at the front">
+          <figcaption>The colour party, at the head of the march</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="assets/img/houses/march-02.jpg" width="1200" height="800" loading="lazy"
+               decoding="async" alt="CIRS cadets drawn up in ranks on the parade ground, sashes over their shoulders">
+          <figcaption>Rank on rank, before the salute</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="assets/img/houses/march-03.jpg" width="1200" height="800" loading="lazy"
+               decoding="async" alt="A CIRS student speaking from the podium beside the athletics track, the covered dais behind">
+          <figcaption>From the podium, beside the track</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="assets/img/houses/march-04.jpg" width="1200" height="800" loading="lazy"
+               decoding="async" alt="Two people standing in an open jeep on the CIRS field, one wearing a ceremonial sash, acknowledging the crowd">
+          <figcaption>The lap afterwards</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+
+  <div class="wrap">
+    <p class="note rv"><em>[The march past photographed house by house &mdash; each house
+      behind its own flag, in its own colour &mdash; to be supplied by the school. The four
+      frames above are the parade and the ceremony around it, and are not attributed to any
+      one house.]</em></p>
+  </div>
+</section>
+
+<!-- Inter-house competition.
+     Authored as an ordinary ordered list of events, oldest first, each one a
+     dated source entry. houses-journey.js folds it into a season line with
+     the events as stops; with no script it stays a readable archive. -->
+<section class="section hcomp" id="competition">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">Inter-house</span></p>
+      <h2 class="serif h2" data-split>Competition<br><em>with purpose.</em></h2>
+      <p class="lead">The school's published house record includes sport, quizzes and
+        productions. Each result below is dated and names its source. A category missing from
+        this archive simply has no four-house result in the material available here.</p>
+    </div>
+
+    <figure class="hcomp__lead rv">
+      <img src="assets/img/houses/comp-quiz.jpg" width="1400" height="788" loading="lazy"
+           decoding="async" alt="CIRS students at a quiz table as a microphone is passed to a participant">
+      <figcaption>A quiz in progress at CIRS.</figcaption>
+    </figure>
+
+{{HOUSES_TRACK}}
+  </div>
+</section>
+
+<!-- Sport.
+     Human first: faces, effort and the colour being competed for. One sport
+     dominates at a time, and the section hands off to the Sports page rather
+     than repeating it. -->
+<section class="section on-paper-2 hsport" id="sport">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">Sport</span></p>
+      <h2 class="serif h2" data-split>The colour<br><em>you compete for.</em></h2>
+      <p class="lead">The school's published house results include athletics and aquatic
+        events. A February 2008 issue records Khel Mela, while medal ribbons photographed
+        for 2025&ndash;2026 identify a 29th Annual Aquatic Meet. Current house standings
+        still need confirmation from the school.</p>
+    </div>
+
+    <div class="hsport__set">
+      <figure class="hsport__one rv">
+        <img src="assets/img/houses/sport-tennis.jpg" width="1600" height="900" loading="lazy"
+             decoding="async" alt="A line of CIRS students waiting to return at a tennis session, in Vyasa blue, Vishwamitra green and Vasishtha red house shirts">
+        <figcaption><span class="hsport__lab">Tennis</span>Three houses in one line, each in
+          its own colour, waiting to return.</figcaption>
+      </figure>
+      <figure class="hsport__two rv">
+        <img src="assets/img/houses/sport-athletics.jpg" width="1000" height="1250" loading="lazy"
+             decoding="async" alt="A CIRS athlete clearing the bar in the high jump against an open sky">
+        <figcaption><span class="hsport__lab">Athletics</span>Over the bar, at the annual
+          meet.</figcaption>
+      </figure>
+      <figure class="hsport__three rv">
+        <img src="assets/img/houses/sport-medals.jpg" width="1000" height="750" loading="lazy"
+             decoding="async" alt="A rack of medals on red ribbons printed Khel Mela, held ready at the CIRS swimming pool">
+        <figcaption><span class="hsport__lab">Swimming</span>The Khel Mela medals, waiting at
+          the pool.</figcaption>
+      </figure>
+    </div>
+
+    <p class="hsport__cta rv"><a class="btn btn--outline" href="sports.html#athletics">Explore CIRS sports</a></p>
+  </div>
+</section>
+
+<!-- Masquerade and culture.
+     Deliberately not folded into sport. The four house productions of May 2008
+     are the only house-by-house cultural record in this repository, and they
+     are quoted with their titles as the school printed them. Nothing is
+     invented to fill the section out — what is missing is named instead. -->
+<section class="hcult" id="culture" data-ground="#0E0B12">
+  <figure class="hcult__stage">
+    <img src="assets/img/houses/culture-night.jpg" width="1600" height="900" loading="lazy"
+         decoding="async" alt="A pyramid of CIRS students at night reaching for a pot strung high above them, the school gathered in a ring around it">
+  </figure>
+  <div class="wrap hcult__inner">
+    <div class="sec-head hcult__head rv">
+      <p class="marker"><span class="sc">On stage</span></p>
+      <h2 class="serif h2 hcult__h" data-split>Where each house<br><em>tells a story.</em></h2>
+      <p class="lead">In May 2008, each house staged a symposium of its own. The school's
+        <em>Sakshi</em> issue recorded four titles and accounts of those productions.
+        Details of later house productions need school confirmation.</p>
+    </div>
+
+{{HOUSES_SYMPOSIUMS}}
+
+    <p class="note hcult__note rv"><em>[Photographs of the house productions, and of
+      Masquerade house by house, to be supplied by the school &mdash; with the titles and
+      years of the productions staged since 2008. The four titles above are the only ones
+      recorded in this repository.]</em></p>
+
+    <p class="hcult__cta rv">
+      <a class="btn btn--ghost" href="cultural-gallery.html">The CIRS Cultural Gallery</a>
+      <a class="btn btn--ghost" href="theatre.html">CIRS Theatre</a>
+    </p>
+  </div>
+</section>
+
+<!-- The record.
+     Not a scoreboard. The available sources provide dated event results,
+     but no complete points total or current championship table. The eight
+     entries below are selected from those sources; other individual results
+     appear in the March 2008 issue. -->
+<section class="section hrec" id="record">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">The record</span></p>
+      <h2 class="serif h2" data-split>House achievements,<br><em>as published.</em></h2>
+      <p class="lead">Eight dated events from the school material available in this
+        repository. These sources do not provide a complete points total or current
+        championship standing, so this page does not assemble one from partial results.</p>
+    </div>
+
+{{HOUSES_RECORD}}
+  </div>
+</section>
+
+<!-- The galleries.
+     One strip, filtered by house, rather than four strips: the school has not
+     supplied a curated set per house, and four thin strips padded out with
+     unattributed photographs would mean attributing photographs to houses on
+     no evidence. Each filter has its own id, so a chapter can link straight
+     to its own house's frames. -->
+<section class="section on-paper-2 hgal" id="gallery">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">In frames</span></p>
+      <h2 class="serif h2" data-split>The houses,<br><em>photographed.</em></h2>
+      <p class="lead">The school's photograph library includes house kit for all four
+        houses. These portraits come from those source frames; choose a house to see its
+        portrait.</p>
+    </div>
+
+{{HOUSES_GALLERY}}
+
+    <p class="note rv"><em>[A curated gallery for each house &mdash; marching, sport, culture,
+      house groups, prize-giving and candid frames &mdash; to be supplied by the school. What
+      is above is what this repository can attribute to a named house with confidence.]</em></p>
+  </div>
+</section>
+
+<!-- The reunion. -->
+<section class="hend" id="together" data-ground="#1E1626">
+  <figure class="hend__media">
+    <img src="assets/img/houses/reunion.jpg" width="2000" height="900" loading="lazy"
+         decoding="async" alt="The whole of CIRS drawn up in ranks on the field in front of the school buildings">
+  </figure>
+  <div class="wrap hend__inner">
+    <div class="hend__bars" aria-hidden="true">
+      <span data-house="vasishtha"></span><span data-house="valmiki"></span><span data-house="vishwamitra"></span><span data-house="vyasa"></span>
+    </div>
+    <h2 class="serif hend__h" data-split>Four Houses.<br><em>One Home.</em></h2>
+    <p class="lead hend__lead">Competition gives each house its character. Community keeps
+      every colour together.</p>
+    <ul class="hend__links">
+      <li><a href="the-cirs-experience.html#houses">Explore the CIRS Experience</a></li>
+      <li><a href="sports.html#athletics">Discover Sports</a></li>
+      <li><a href="our-laurels.html#what">View School Laurels</a></li>
+      <li><a href="admissions.html">Begin your CIRS journey</a></li>
+    </ul>
+  </div>
+</section>
