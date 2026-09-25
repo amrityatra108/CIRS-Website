@@ -1,11 +1,13 @@
-"""CIRS Captures — a fifty-two-photograph journal from the supplied collections.
+"""CIRS Captures — a sixty-two-photograph journal from the supplied collections.
 
 The first sixteen photographs are in assets/source/captures-2026-09-24. The
 new ZIP has 43 photographs and one blank frame; nine repeat photographs in
 the first collection. Its 34 new photographs are in
-assets/source/captures-2026-09-24-zip. Two more supplied photographs are in
-assets/source/captures-2026-09-25. Every unique photograph appears once:
-four in the opening, 47 in the journal, and one at the end.
+assets/source/captures-2026-09-24-zip. The later Drive file and folder add
+twelve more photographs in assets/source/captures-2026-09-25 and
+assets/source/captures-2026-09-25-folder. The attachment's berry bird and a
+folder copy of the lizard are shown once. Every unique photograph appears
+once: four in the opening, 57 in the journal, and one at the end.
 
 Captions describe what is visible; photographer, date, and exact location are
 not inferred. tools/make-captures-gallery.py writes the image sizes used by
@@ -21,6 +23,7 @@ MANIFEST = os.path.join(HERE, "captures-gallery.json")
 OLD = "captures-2026-09-24"
 ZIP = "captures-2026-09-24-zip"
 ADDITIONS = "captures-2026-09-25"
+FOLDER = "captures-2026-09-25-folder"
 
 
 def old(name):
@@ -33,6 +36,10 @@ def new(number):
 
 def added(name):
     return f"{ADDITIONS}/{name}"
+
+
+def folder(name):
+    return f"{FOLDER}/{name}"
 
 
 # (source file in assets/source, output name, caption, width of the cut)
@@ -57,15 +64,23 @@ CHAPTERS = [
             [(old("img-9821"), "bee-yellow-flower", "A bee on a vivid yellow flower"),
              (old("dsc02269"), "butterfly-flowers", "A black and yellow butterfly on pale purple flowers"),
              (new(4), "green-insect", "An iridescent green insect on a leafy branch")],
+            [(folder("05-crs05364-2-.jpg"), "red-flower-sky", "A red flower silhouetted against the sky"),
+             (folder("06-dsc08037.jpg"), "butterfly-white-flowers", "A butterfly on slender white flowers")],
             [(new(5), "grasshopper-stem", "A grasshopper resting along a slender stem"),
              (new(15), "insect-on-stem", "A small insect clinging to a stem against green"),
              (new(26), "grasshopper-leaf", "A grasshopper on a broad green leaf")],
             [(old("img-2031"), "green-lizard", "A green lizard partly hidden beneath leaves"),
              (new(43), "red-dragonfly", "A red dragonfly resting on a thin stem")],
+            [(folder("07-img-1447.jpg"), "green-lizard-grass", "A green lizard in the grass"),
+             (folder("08-img-1307.jpg"), "insects-in-flight", "Two insects hovering together in warm light")],
             [(new(7), "squirrel-hollow", "A squirrel peeking out from a tree hollow"),
              (new(35), "bird-in-nest", "A dark bird in a nest among bright leaves")],
+            [(folder("09--dsc0735.jpg"), "butterflies-leaves", "Several butterflies gathering on a leafy stem"),
+             (folder("10--dsc0733.jpg"), "blue-butterfly-flowers", "A blue and black butterfly on small flowers")],
             [(new(30), "blue-bird-flowers", "A blue bird beside pale flowers"),
              (new(42), "yellow-eyed-bird", "A yellow-eyed bird among branches")],
+            [(folder("03-dsc-0086.jpg"), "kitten-shelter", "A kitten looking out from a sheltered ledge"),
+             (folder("04-dsc-0085.jpg"), "kittens-shelter", "Two kittens together on a sheltered ledge")],
         ],
     },
     {
@@ -73,7 +88,7 @@ CHAPTERS = [
         "intro": "Perches, branches and the birds glimpsed between leaves.",
         "rows": [
             [(old("img-1007"), "bird-pink-blossoms", "A small dark bird amid pink blossoms")],
-            [(added("bird-orange-berries.png"), "bird-orange-berries", "A small bird perched among orange berries"),
+            [(folder("11-dsc09803.jpg"), "bird-orange-berries", "A small bird perched among orange berries"),
              (old("img-9515"), "hoopoe-branches", "A hoopoe perched among branches"),
              (new(2), "brown-bird-branch", "A brown bird on a bare branch against the sky")],
             [(new(3), "bird-in-large-tree", "A bird perched in the limbs of a broad tree"),
@@ -95,8 +110,10 @@ CHAPTERS = [
         "intro": "Open perches, distant light and moments just outside the canopy.",
         "rows": [
             [(new(9), "raptor-stump", "A bird of prey perched on a weathered stump")],
-            [(new(12), "pale-bird-perch", "A pale bird on a thin bare branch"),
-             (new(11), "colorful-bird", "A colorful bird perched among sunlit leaves")],
+            [(folder("01-img-0111.jpg"), "peacock-fan", "A peacock displaying its tail in a grassy clearing"),
+             (new(12), "pale-bird-perch", "A pale bird on a thin bare branch")],
+            [(new(11), "colorful-bird", "A colorful bird perched among sunlit leaves"),
+             (folder("02-a-03-2.jpg"), "full-moon", "A bright full moon against a black sky")],
             [(old("img-4426"), "grey-bird", "A small grey bird seen through soft green foliage"),
              (new(28), "bird-on-roof", "A small bird perched on roof tiles")],
             [(new(16), "trees-at-dusk", "Trees framing an open field in evening light"),

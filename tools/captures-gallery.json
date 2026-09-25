@@ -48,6 +48,30 @@
       ],
       "full_path": "assets/img/captures/full/green-insect.jpg"
     },
+    "red-flower-sky": {
+      "tile": [
+        1012,
+        569
+      ],
+      "tile_path": "assets/img/captures/red-flower-sky.jpg",
+      "full": [
+        2400,
+        1350
+      ],
+      "full_path": "assets/img/captures/full/red-flower-sky.jpg"
+    },
+    "butterfly-white-flowers": {
+      "tile": [
+        968,
+        569
+      ],
+      "tile_path": "assets/img/captures/butterfly-white-flowers.jpg",
+      "full": [
+        2400,
+        1410
+      ],
+      "full_path": "assets/img/captures/full/butterfly-white-flowers.jpg"
+    },
     "grasshopper-stem": {
       "tile": [
         1012,
@@ -108,6 +132,30 @@
       ],
       "full_path": "assets/img/captures/full/red-dragonfly.jpg"
     },
+    "green-lizard-grass": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/green-lizard-grass.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/green-lizard-grass.jpg"
+    },
+    "insects-in-flight": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/insects-in-flight.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/insects-in-flight.jpg"
+    },
     "squirrel-hollow": {
       "tile": [
         1017,
@@ -131,6 +179,30 @@
         1080
       ],
       "full_path": "assets/img/captures/full/bird-in-nest.jpg"
+    },
+    "butterflies-leaves": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/butterflies-leaves.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/butterflies-leaves.jpg"
+    },
+    "blue-butterfly-flowers": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/blue-butterfly-flowers.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/blue-butterfly-flowers.jpg"
     },
     "blue-bird-flowers": {
       "tile": [
@@ -156,6 +228,30 @@
       ],
       "full_path": "assets/img/captures/full/yellow-eyed-bird.jpg"
     },
+    "kitten-shelter": {
+      "tile": [
+        990,
+        656
+      ],
+      "tile_path": "assets/img/captures/kitten-shelter.jpg",
+      "full": [
+        2400,
+        1590
+      ],
+      "full_path": "assets/img/captures/full/kitten-shelter.jpg"
+    },
+    "kittens-shelter": {
+      "tile": [
+        990,
+        656
+      ],
+      "tile_path": "assets/img/captures/kittens-shelter.jpg",
+      "full": [
+        2400,
+        1590
+      ],
+      "full_path": "assets/img/captures/full/kittens-shelter.jpg"
+    },
     "bird-pink-blossoms": {
       "tile": [
         1800,
@@ -170,13 +266,13 @@
     },
     "bird-orange-berries": {
       "tile": [
-        967,
-        642
+        966,
+        644
       ],
       "tile_path": "assets/img/captures/bird-orange-berries.jpg",
       "full": [
-        971,
-        645
+        2400,
+        1600
       ],
       "full_path": "assets/img/captures/full/bird-orange-berries.jpg"
     },
@@ -360,6 +456,18 @@
       ],
       "full_path": "assets/img/captures/full/raptor-stump.jpg"
     },
+    "peacock-fan": {
+      "tile": [
+        924,
+        1386
+      ],
+      "tile_path": "assets/img/captures/peacock-fan.jpg",
+      "full": [
+        1600,
+        2400
+      ],
+      "full_path": "assets/img/captures/full/peacock-fan.jpg"
+    },
     "pale-bird-perch": {
       "tile": [
         823,
@@ -374,8 +482,8 @@
     },
     "colorful-bird": {
       "tile": [
-        1327,
-        857
+        1161,
+        749
       ],
       "tile_path": "assets/img/captures/colorful-bird.jpg",
       "full": [
@@ -383,6 +491,18 @@
         1080
       ],
       "full_path": "assets/img/captures/full/colorful-bird.jpg"
+    },
+    "full-moon": {
+      "tile": [
+        900,
+        824
+      ],
+      "tile_path": "assets/img/captures/full-moon.jpg",
+      "full": [
+        1394,
+        1276
+      ],
+      "full_path": "assets/img/captures/full/full-moon.jpg"
     },
     "grey-bird": {
       "tile": [
