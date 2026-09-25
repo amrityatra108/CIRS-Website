@@ -4,7 +4,9 @@
   "outputDirectory": "_site",
   "cleanUrls": true,
   "redirects": [
-    { "source": "/admissions/", "destination": "/admissions", "permanent": true }
+    { "source": "/admissions/", "destination": "/admissions", "permanent": true },
+    { "source": "/student-life", "destination": "/the-cirs-experience", "permanent": true },
+    { "source": "/student-life.html", "destination": "/the-cirs-experience", "permanent": true }
   ],
   "headers": [
     {

@@ -91,7 +91,7 @@ NEWS_FLASH = [
 # themselves.
 MENU = [
     ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
-    ("Student Life",         ["student-life", "curriculum", "our-results", "sports",
+    ("Student Life",         ["the-cirs-experience", "curriculum", "our-results", "sports",
                               "our-laurels", "math-challenge"]),
     ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
     ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
@@ -295,14 +295,14 @@ PAGES = {
                    "of Engineering, Medicine or Management in the senior years."),
         "sheet": "ibdp",
     },
-    "student-life": {
+    "the-cirs-experience": {
         "logintab": ("Student Portal", "https://cirs.in/school/"),
-        "nav": "Student Life",
-        "title": "Student Life",
+        "nav": "THE CIRS EXPERIENCE",
+        "title": "THE CIRS EXPERIENCE",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
                        "hundred-acre campus it happens on.",
         # No banner and no hero key: this page opens on a hero of its own,
-        # built in tools/pages/student-life.html — a drifting line of
+        # built in tools/pages/the-cirs-experience.html — a drifting line of
         # oversized lettering with photographs dealt up through it. It carries
         # the page's h1 and its own id="top". That hero is off-white, so the
         # header cannot float over it in white lettering: hence litehead.
@@ -342,7 +342,7 @@ PAGES = {
         "title": "Crossroads | CIRS Monthly Magazine",
         "description": "The archive of Crossroads, the monthly magazine of Chinmaya "
                        "International Residential School — a student-run initiative to foster "
-                       "journalistic talent, edition by edition.",
+                       "literary talent, edition by edition.",
         # No flat band and no video hero: an archive opens on its own
         # masthead, built in tools/pages/crossroads.html.
         "banner": None,
@@ -434,11 +434,12 @@ PAGES = {
     "captures": {
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
+        "cache_suffix": "-captures-journal-2",
         # Not "as its students see it", which this page said while it was a
         # placeholder: none of these files records who took it, so the page
         # makes no claim about who did.
-        "description": "Photographs of the campus and the school year at Chinmaya International "
-                       "Residential School, from the school\u2019s own collection.",
+        "description": "Photographs of wildlife, the grounds, performances and gatherings "
+                       "in the CIRS Captures collection.",
         # No banner from the shared builder. This page opens on six seconds of
         # a camera coming out of the dark, which the reader scrubs with the
         # scroll, and the h1 is the one line that arrives once the film has
@@ -449,27 +450,20 @@ PAGES = {
             "video": "captures-camera",
             "poster": "captures-camera-poster.jpg",
             "title": "CIRS Captures",
-            # Then a photograph from the school appears in the camera's lens
-            # and opens out of it to fill the window. The phases keep the
-            # film and the line on the timing they always had, in absolute
-            # scroll distance — the film to 252vh, held to 277vh, the line up
-            # by 324vh — and add the photograph after them: read to 360vh, in
-            # the lens to 390vh, opened by 460vh, held to 490vh. Hence the
-            # longer run for this page in assets/css/filmintro.css.
-            "phases": [0.5143, 0.5657, 0.6612, 0.7347, 0.7959, 0.9388],
-            # The lens's front rim in the film's own pixels (1280x720): its
-            # centre, its two radii and its tilt in degrees, measured on the
-            # last frame. The radii are 4px inside the rim.
-            "lens": "388.4 359.3 65 124.4 6.56",
+            # Keep the camera and title at their original scroll distances:
+            # film to 252vh, final frame held to 277vh, title up by 324vh and
+            # read to 360vh. The photograph then dissolves across the whole
+            # frame by 400vh and rests for 30vh before the featured handoff.
+            "phases": [0.5860, 0.6442, 0.7535, 0.8372, 0.9302],
             # The film's last frame as a still, for reduced motion, a film
             # that fails and no scripting (tools/make-captures-shot.py).
             "still": "captures-camera-final.jpg",
-            # Two cuts of one photograph: the portrait one wherever the window
-            # is no wider than 6:5, the boundary the film's crop changes at.
+            # Two cuts of the supplied butterfly photograph: the portrait
+            # one keeps the subject in view on narrow screens.
             "shot": {
-                "src": "captures-shot.jpg", "size": (2400, 1819),
-                "narrow": "captures-shot-portrait.jpg", "narrow_size": (1620, 2160),
-                "alt": "A CIRS student dancing on stage in red, one arm raised",
+                "src": "captures-shot.jpg", "size": (1425, 1080),
+                "narrow": "captures-shot-portrait.jpg", "narrow_size": (810, 1080),
+                "alt": captures.LEAD_CAPTION,
             },
             # The featured photographs (tools/pages/captures.html) take over
             # from the opening's last frame, and the ramp to paper follows
@@ -607,7 +601,7 @@ SECTION_PAGE = {
     "junior": "why-cirs", "senior": "why-cirs",
     "quote": "leadership", "people": "leadership",
     "academics": "curriculum",
-    "life": "student-life", "day": "student-life", "campus": "student-life",
+    "life": "the-cirs-experience", "day": "the-cirs-experience", "campus": "the-cirs-experience",
     "athletics": "sports", "fields": "sports", "achievements": "sports",
     "arts": "cultural-gallery",
     "pathways": "alumni",
@@ -763,23 +757,23 @@ def film_html(slug, page):
     assets/css/filmintro.css and assets/js/filmintro.js.
 
     The film remains the opening's only dominant element. Our Sports adds one
-    discreet scroll cue over its first frames; CIRS Captures ends on a
-    photograph from the school that opens out of the camera's lens ("lens"
-    and "shot" in its entry, and the lens section of filmintro.js).
+    discreet scroll cue over its first frames; CIRS Captures dissolves from
+    the camera's final frame to the photograph declared by "shot" in its
+    entry (see the photo dissolve in filmintro.js).
     """
     film = page["opening"]
     phases = film.get("phases")
     attrs = f' data-film-phases="{" ".join(f"{v:g}" for v in phases)}"' if phases else ""
     if film.get("fps", 24) != 24:
         attrs += f' data-film-fps="{film["fps"]:g}"'
-    if film.get("lens"):
-        attrs += f' data-film-lens="{film["lens"]}"'
+    if film.get("shot"):
+        attrs += " data-film-photo"
     # The ramp to paper, unless the page puts it further down itself.
     seam = ("" if film.get("seam") is False else
             '\n<div class="film__seam" aria-hidden="true"></div>')
     shot = film.get("shot")
     # After the line in the document, so it is read after it, and over it on
-    # screen by z-index. See assets/js/filmintro.js for how it opens.
+    # screen by z-index. See assets/js/filmintro.js for the full-frame dissolve.
     shot = (
         '    <div class="film__shot" data-film-shot>\n'
         '      <picture>\n'
@@ -1556,6 +1550,7 @@ def build(slug, page):
                        .replace("{{CAPTURES_END}}", captures.end_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
                        .replace("{{CAPTURES_COUNT_CAP}}", captures.count_word().capitalize())
+                       .replace("{{CAPTURES_CHAPTER_NAV}}", captures.chapter_nav_html() if slug == "captures" else "")
                        .replace("{{CW_ROWS}}", creativewriting.rows_html())
                        .replace("{{CW_JOURNEY}}", creativewriting.journey_html())
                        .replace("{{CW_COUNT}}", str(creativewriting.count()))
@@ -1584,6 +1579,10 @@ def build(slug, page):
     parts.append("</main>")
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
+        if slug == "captures":
+            # Captures already ends with its own full-width photograph.
+            # Keep that as the page's final image before the site footer.
+            footer = footer[footer.index('<div class="footer-wrap">'):]
         if slug == "admissions":
             footer = footer.replace('href="admissions.html#examination">Important Dates',
                                     'href="admissions.html#dates">Important Dates')
@@ -1600,7 +1599,7 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "why-cirs":
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
-    if slug == "student-life":
+    if slug == "the-cirs-experience":
         parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "our-results":
         parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
