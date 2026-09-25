@@ -7,13 +7,19 @@ exception and are covered in the next section.
 
 For every change, in this order:
 
-1. **Do the work on the branch** `claude/cool-dijkstra-7ycja1`, never directly on `main`.
+1. **Do the work on a branch of its own**, named for the change, never directly on `main`.
 2. **Run the checks** — see below. Do not offer work that has not passed them.
 3. **Ask before merging to `main`.** The owner confirms each merge; do not merge unprompted.
 4. **After merging, deploy and hand back a Vercel link** they can share for review.
 
 Steps 3 and 4 are the parts most easily forgotten. A change that is committed but not merged,
 or merged but not deployed, is not finished from the owner's point of view.
+
+There is no standing branch to work on, and there should not be one. There was, and it went
+stale: it sat hundreds of commits behind `main` while the work carried on around it, and it
+still held personal data that `main` had deliberately withdrawn. A branch that outlives the
+change it was made for stops being a workspace and becomes a second, older copy of the site —
+one that looks mergeable and is not. Branch for the change, merge it, let it go.
 
 ## Design sessions
 
