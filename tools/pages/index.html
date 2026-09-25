@@ -1,5 +1,6 @@
 <!-- The opening sequence.
 
+<<<<<<< HEAD
      The shape of it: a 200vh track with a 100svh stage stuck to the top of
      it. Scrolling the second hundred of viewport height therefore moves the
      page while the stage stands still, and that travel is what the plate is
@@ -15,6 +16,28 @@
      every breakpoint is authored in CSS where the rest of the layout is,
      and the script never carries a number that a media query could
      contradict. The marks are presentational and carry aria-hidden.
+=======
+     The shape of it: a 180vh track with a 100svh stage stuck to the top of
+     it. Scrolling the 80vh past the first screen therefore moves the page
+     while the stage stands still, and that travel is what the plate is
+     scrubbed along. Pinning is `position: sticky` on .hseq__stage and
+     nothing else — deliberately not ScrollTrigger.pin(), which rewrites the
+     document with a spacer and fights both Lenis and the boundary the
+     header's scroll state watches.
+
+     The plate's two positions are not in the script. They are the two
+     empty .hseq__mark boxes below, laid out by the stylesheet: P0 full
+     bleed, P1 the inset frame the sequence settles on. The script reads
+     their boxes and scrubs the plate between them, so every breakpoint is
+     authored in CSS where the rest of the layout is, and the script never
+     carries a number that a media query could contradict. The marks are
+     presentational and carry aria-hidden.
+
+     There was once a third mark, which carried the plate on past the inset
+     into a tall card held right of centre. It shrank the photograph twice
+     over and turned a corner in the middle of the motion. The opening now
+     zooms out once, arrives, holds, and releases.
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
      The type layer is positioned against the same boxes, so the headline
      stays in register with the plate at any viewport rather than being
@@ -27,7 +50,10 @@
       <div class="hseq__marks" aria-hidden="true">
         <div class="hseq__mark hseq__mark--p0"></div>
         <div class="hseq__mark hseq__mark--p1"></div>
+<<<<<<< HEAD
         <div class="hseq__mark hseq__mark--p2"></div>
+=======
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       </div>
 
       <!-- The proxy box. GSAP animates this element's inset; the video
@@ -81,7 +107,11 @@
              style="left:5vw; top:50%; --mid:1">
           <p class="hsay__eyebrow">A day at CIRS</p>
           <h2 class="hsay__big">ONE HUNDRED ACRES,<br>FROM FIRST LIGHT</h2>
+<<<<<<< HEAD
           <p class="hsay__sub">The day starts outdoors and finishes under the amphitheatre lights. Between those two hours are the classrooms and the drums, the table, the water and the trail &mdash; and nowhere on the hundred acres to be a spectator.</p>
+=======
+          <p class="hsay__sub">The day starts on the field and finishes under the amphitheatre lights. Every student walks the knife&rsquo;s edge of balance, endlessly engaged in activity or immersed in silence.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         </div>
 
         <figure class="hframe hframe--xl" data-depth="1.14"
@@ -112,7 +142,11 @@
              style="left:216vw; top:50%; --mid:1">
           <p class="hsay__eyebrow">J&ntilde;&#0257;nam &middot; Knowledge</p>
           <h2 class="hsay__big">HELD UP<br>TO THE LIGHT</h2>
+<<<<<<< HEAD
           <p class="hsay__sub">A flask raised at the front of a laboratory; a rhythm counted out until the hands have it. Grades V to XII, taught towards CBSE and the IB &mdash; and, just as deliberately, towards the habit of asking.</p>
+=======
+          <p class="hsay__sub">A flask raised at the front of a laboratory; a rhythm flowing through the artist. Grades V to XII, taught towards CBSE and the IB &mdash; and, just as deliberately, towards the inquisitive nature of the human mind.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         </div>
 
         <figure class="hframe hframe--xl" data-depth="1.12"
@@ -134,8 +168,13 @@
         <div class="hsay" data-depth="0.95"
              style="left:384vw; top:50%; --mid:1">
           <p class="hsay__eyebrow">Sev&#0257; &middot; Service</p>
+<<<<<<< HEAD
           <h2 class="hsay__big">A HALL, AND<br>THEN A TABLE</h2>
           <p class="hsay__sub">Boarding is the part of this school that no timetable shows. What the Chinmaya Vision Programme names as values is not a period in the week here; it is the ordinary business of living on the same hundred acres.</p>
+=======
+          <h2 class="hsay__big">AT HIS FEET,<br>THROUGH THEM</h2>
+          <p class="hsay__sub">Every action is oriented not toward personal reward, but toward gratitude and service. An offer of help, a hand around a shoulder, a word of advice: one act goes a long way in bringing about change.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         </div>
 
         <figure class="hframe hframe--xxl" data-depth="1.06"
@@ -166,7 +205,11 @@
              style="left:602vw; top:50%; --mid:1">
           <p class="hsay__eyebrow">Kau&#0347;alam &middot; Efficiency</p>
           <h2 class="hsay__big">DONE PROPERLY,<br>OR NOT AT ALL</h2>
+<<<<<<< HEAD
           <p class="hsay__sub">The third word of the motto is the one most often mistranslated as speed. It means skill &mdash; the slope walked to the top of it, the piece rehearsed until it holds, the length finished.</p>
+=======
+          <p class="hsay__sub">Kaushalam means skill &mdash; the slope walked to the top of it, the piece rehearsed to perfection, the length finished.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         </div>
 
         <figure class="hframe hframe--xxl" data-depth="1.05"
@@ -220,7 +263,11 @@
 
     <div class="filmsec__social rv">
       <span class="filmsec__socialtag sc">Follow CIRS</span>
+<<<<<<< HEAD
       <div class="filmsec__sociallinks" aria-label="CIRS social media">
+=======
+      <div class="filmsec__sociallinks" role="group" aria-label="CIRS social media">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener"
            aria-label="Instagram (opens in a new tab)">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="social-dot" cx="17.4" cy="6.7" r="1.1"/></svg>

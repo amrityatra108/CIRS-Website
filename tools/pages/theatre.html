@@ -1,0 +1,93 @@
+<section class="section cx-intro th-intro" id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">CIRS Theatre</span></p>
+      <h2 class="serif h2" data-split>Every Student, <em>On the Stage.</em></h2>
+      <p class="lead">For over three decades CIRS has been a whirlpool of theatrical activity &mdash; and the stage is not kept for a drama club. Every class, every house and the whole school take their turn on it.</p>
+    </div>
+    <div class="cx-intro__grid">
+      <div class="cx-intro__text rv">
+        <p class="copy">Every year the school churns out actors whose qualities are learnt on the stage and blossom into daily life. Confidence, expression and creativity find no limits here. Every novice aspires to the honourable title of &lsquo;actor&rsquo;, and theatre is always treated as sacred.</p>
+        <p class="copy">Programmes are put up to bring messages from our texts, stories from our students, and to celebrate the art of expression itself &mdash; with the concepts, the scripts and the acting done almost entirely by the students, on the stage and off it.</p>
+      </div>
+      <!-- The amphitheatre is cut from its camera original at twice the size
+           it used to be (tools/make-theatre.py), and it opens from a clip
+           without the push-in the shared reveal gives photographs, which
+           was softening it. -->
+      <figure class="cx-intro__fig th-reveal">
+        <img src="assets/img/theatre/amphitheatre-1000.webp"
+             srcset="assets/img/theatre/amphitheatre-1000.webp 1000w, assets/img/theatre/amphitheatre-2000.webp 2000w"
+             sizes="(min-width: 1320px) 640px, (min-width: 900px) 50vw, 100vw"
+             alt="The tiers of the open-air amphitheatre, seen from the stage" width="2000" height="1500" loading="lazy" decoding="async">
+        <figcaption>The amphitheatre, built into the slope.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="wrap">
+  {{THEATRE_PROGRAMME}}
+  </div>
+</section>
+
+<!-- The three acts are written from tools/theatre.py, which holds every
+     photograph's source, house, year and caption, and every video link. -->
+{{THEATRE_ANAND_UTSAV}}
+
+{{THEATRE_MASQUERADES}}
+
+{{THEATRE_CLASSES}}
+
+<section class="section th-invite" id="missing" data-jump-label="Help complete the archive">
+  <div class="wrap th-invite__inner">
+    <div class="th-invite__text">
+      <p class="marker"><span class="sc">The programme is not finished</span></p>
+      <h2 class="serif h2">Photographs, titles <em>and recordings.</em></h2>
+      <p class="copy">This page shows what the school&rsquo;s photograph archive and its YouTube channel could confirm: one Anand Utsav evening, the four Masquerades of 2024 and the class presentations published since 2015. Photographs from other Masquerade seasons, the titles and casts of earlier productions, and recordings that never reached the channel are all still missing.</p>
+      <p class="copy">If you have them, send them to the school with the year, the house or class, and the name of the production, so that they can be added here.</p>
+    </div>
+    <p class="th-invite__action"><a class="btn btn--primary" href="mailto:info@cirschool.org?subject=CIRS%20Theatre%3A%20photographs%20and%20recordings">Write to info@cirschool.org</a></p>
+  </div>
+</section>
+
+<section class="section cx-onward" id="more">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">Art, Culture &amp; Music</span></p>
+      <h2 class="serif h2" data-split>More from <em>the stage and the studio.</em></h2>
+    </div>
+    <nav class="cx-onward__grid rv" aria-label="More from Art, Culture and Music">
+      <a class="cx-onward__link" href="cultural-gallery.html">
+        <span class="cx-onward__name serif">CIRS Cultural Gallery</span>
+        <span class="cx-onward__desc">Music, dance, theatre and art, on one wall</span>
+      </a>
+      <a class="cx-onward__link" href="art-attack.html">
+        <span class="cx-onward__name serif">CIRS Art Attack</span>
+        <span class="cx-onward__desc">Painting, craft and the things made for the stage</span>
+      </a>
+      <a class="cx-onward__link" href="festivals.html">
+        <span class="cx-onward__name serif">CIRS Festivals</span>
+        <span class="cx-onward__desc">The year, kept festival by festival</span>
+      </a>
+    </nav>
+  </div>
+</section>
+
+<!-- The photograph viewer. A native modal dialog: the page behind is inert
+     and Escape closes it. assets/js/theatre.js fills it from the JSON below. -->
+<dialog class="th-viewer" id="thViewer" aria-labelledby="thViewerTitle">
+  <div class="th-viewer__top">
+    <p class="th-viewer__where"><span class="th-viewer__title" id="thViewerTitle"></span> <span class="th-viewer__sub"></span></p>
+    <p class="th-viewer__count" aria-live="polite"></p>
+    <button type="button" class="th-viewer__close" data-th-close aria-label="Close the viewer" autofocus>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="th-viewer__stage" data-th-stage></div>
+  <p class="th-viewer__caption"></p>
+  <button type="button" class="th-viewer__step th-viewer__step--prev" data-th-step="-1" aria-label="Previous photograph">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M11 3.5L5.5 9l5.5 5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="th-viewer__step th-viewer__step--next" data-th-step="1" aria-label="Next photograph">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M7 3.5L12.5 9 7 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</dialog>
+{{THEATRE_VIEWER_DATA}}

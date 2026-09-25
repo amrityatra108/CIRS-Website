@@ -7,8 +7,19 @@
 <meta name="description" content="Who we are, what the school is recognised for, and the Junior and Senior Schools that carry it.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/why-cirs.html">
+<<<<<<< HEAD
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+=======
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <meta property="og:type" content="website">
 <meta property="og:title" content="Why CIRS">
 <meta property="og:description" content="Who we are, what the school is recognised for, and the Junior and Senior Schools that carry it.">
@@ -20,17 +31,34 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<<<<<<< HEAD
 <link rel="stylesheet" href="assets/css/fonts.css?b=95-why-cirs-9">
 <link rel="stylesheet" href="assets/css/cirs.css?b=95-why-cirs-9">
 <link rel="stylesheet" href="assets/css/pages.css?b=95-why-cirs-9">
+=======
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-why-cirs-10">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-why-cirs-10">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-why-cirs-10">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
+<<<<<<< HEAD
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/why-cirs.css?b=95-why-cirs-9">
 <link rel="stylesheet" href="assets/css/typography.css?b=95-why-cirs-9">
+=======
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/why-cirs.css?b=102-why-cirs-10">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-why-cirs-10">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-why-cirs-10-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-why-cirs-10-drawer-5">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </head>
 
 <body class="why-cirs">
@@ -65,7 +93,11 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
+<<<<<<< HEAD
 <header class="header is-first-section is-bare" id="header">
+=======
+<header class="header" id="header">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -196,55 +228,123 @@
     </div>
   </div>
 </header>
+<<<<<<< HEAD
 <div class="drawer" id="drawer" hidden>
   <nav class="drawer__grid" aria-label="All pages">
     <div>
       <p class="sc" id="dnav-vision">Vision</p>
       <ul aria-labelledby="dnav-vision">
+=======
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="0" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="true" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button">
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html" aria-current="page">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-student-life">Student Life</p>
       <ul aria-labelledby="dnav-student-life">
         <li><a href="student-life.html">Student Life</a></li>
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
       <ul aria-labelledby="dnav-literary-excellence">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
       <ul aria-labelledby="dnav-art-culture-music">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-connect">Connect</p>
       <ul aria-labelledby="dnav-connect">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
   </nav>
   <div class="drawer__utility">
@@ -259,6 +359,47 @@
   </div>
 </div>
 <main id="main">
+=======
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main id="main">
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#founding">Since 1996</a>
+      <a href="#forest">The campus</a>
+      <a href="#motto">The motto</a>
+      <a href="#boarding">Boarding</a>
+      <a href="#vision">The vision</a>
+      <a href="#junior">Junior School</a>
+      <a href="#senior">Senior School</a>
+      <a href="#facts">In figures</a>
+    </div>
+  </details>
+</nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <section class="saga saga--open" id="top" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/why-cirs.jpg"
@@ -266,91 +407,144 @@
          width="2000" height="1250" fetchpriority="high">
   </div>
   <div class="wrap saga__inner">
+<<<<<<< HEAD
     <p class="saga__eyebrow"><span>Why CIRS</span><span class="saga__count" aria-hidden="true">01 / 08</span></p>
+=======
+    <p class="saga__eyebrow">Why CIRS</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     <h1 class="saga__line">The future of our world rests upon the quality of its youth.
       <em>Quality comes through care and attention.</em></h1>
     <p class="saga__by">Swami Chinmayananda, whose vision the school was built on</p>
   </div>
 </section>
 
+<<<<<<< HEAD
 <section class="saga" id="founding" data-ground="#0E0B12">
+=======
+<section class="saga" id="founding" data-jump-label="Since 1996" data-ground="#0E0B12">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="saga__media">
     <img src="assets/img/founding.jpg" alt="The school assembled in long rows on the paved ground"
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
+<<<<<<< HEAD
     <p class="saga__eyebrow"><span>Since 1996</span><span class="saga__count" aria-hidden="true">02 / 08</span></p>
+=======
+    <p class="saga__eyebrow">Since 1996</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     <h2 class="saga__line">It opened with <em>ninety-six students.</em></h2>
     <p class="saga__summary">CIRS was inaugurated on 6 June 1996 as an undertaking of the Central Chinmaya Mission Trust.</p>
     <button type="button" class="saga__more" data-panel="panel-founding" aria-haspopup="dialog" aria-controls="panel-founding">Discover the beginning</button>
   </div>
 </section>
 
+<<<<<<< HEAD
 <section class="saga" id="forest" data-ground="#0E0B12">
+=======
+<section class="saga" id="forest" data-jump-label="The campus" data-ground="#0E0B12">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="saga__media">
     <img src="assets/img/forest-air.jpg" alt="The CIRS campus from the air, the forest closing around it on every side"
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
+<<<<<<< HEAD
     <p class="saga__eyebrow"><span>A hundred acres</span><span class="saga__count" aria-hidden="true">03 / 08</span></p>
+=======
+    <p class="saga__eyebrow">A hundred acres</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     <h2 class="saga__line">Eighty of them were <em>left to the forest.</em></h2>
     <p class="saga__summary">The campus sits in the Siruvani foothills, with roughly eighty acres left to native flora and fauna.</p>
     <button type="button" class="saga__more" data-panel="panel-forest" aria-haspopup="dialog" aria-controls="panel-forest">Explore the campus</button>
   </div>
 </section>
 
+<<<<<<< HEAD
 <section class="saga" id="motto" data-ground="#0E0B12">
+=======
+<section class="saga" id="motto" data-jump-label="The motto" data-ground="#0E0B12">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="saga__media">
     <img src="assets/img/motto.jpg" alt="Students seated cross-legged with their palms joined at morning prayer"
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
+<<<<<<< HEAD
     <p class="saga__eyebrow"><span>The motto</span><span class="saga__count" aria-hidden="true">04 / 08</span></p>
+=======
+    <p class="saga__eyebrow">The motto</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     <h2 class="saga__line">Knowledge. Service. <em>Skill.</em></h2>
     <p class="saga__summary">Knowledge is gained to serve the world efficiently, with compassion and dedication.</p>
     <button type="button" class="saga__more" data-panel="panel-motto" aria-haspopup="dialog" aria-controls="panel-motto">Read the motto</button>
   </div>
 </section>
 
+<<<<<<< HEAD
 <section class="saga" id="boarding" data-ground="#0E0B12">
+=======
+<section class="saga" id="boarding" data-jump-label="Boarding" data-ground="#0E0B12">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="saga__media">
     <img src="assets/img/boarding.jpg" alt="Boarders sitting together on a wooden frame under the trees"
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
+<<<<<<< HEAD
     <p class="saga__eyebrow"><span>Boarding</span><span class="saga__count" aria-hidden="true">05 / 08</span></p>
+=======
+    <p class="saga__eyebrow">Boarding</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     <h2 class="saga__line">The part of the education that is <em>not timetabled.</em></h2>
     <p class="saga__summary">Students from twenty-four Indian states and twenty countries share one residential community.</p>
     <button type="button" class="saga__more" data-panel="panel-boarding" aria-haspopup="dialog" aria-controls="panel-boarding">See boarding life</button>
   </div>
 </section>
 
+<<<<<<< HEAD
 <section class="saga" id="vision" data-ground="#0E0B12">
+=======
+<section class="saga" id="vision" data-jump-label="The vision" data-ground="#0E0B12">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="saga__media">
     <img src="assets/img/vision.jpg" alt="Students at morning practice on mats laid out on the grass"
          width="1600" height="900" loading="lazy">
   </div>
   <div class="wrap saga__inner">
+<<<<<<< HEAD
     <p class="saga__eyebrow"><span>The vision</span><span class="saga__count" aria-hidden="true">06 / 08</span></p>
+=======
+    <p class="saga__eyebrow">The vision</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     <h2 class="saga__line">Competent, sensitive, <em>ethical.</em></h2>
     <p class="saga__summary">Academic proficiency and character development are treated as one education.</p>
     <button type="button" class="saga__more" data-panel="panel-vision" aria-haspopup="dialog" aria-controls="panel-vision">Explore the vision</button>
   </div>
 </section>
 
+<<<<<<< HEAD
 <section class="saga" id="junior" data-ground="#0E0B12">
+=======
+<section class="saga" id="junior" data-jump-label="Junior School" data-ground="#0E0B12">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="saga__media">
     <img src="assets/img/junior-school.jpg" alt="Junior School students building a wheeled robot"
          width="1200" height="1500" loading="lazy">
   </div>
   <div class="wrap saga__inner">
+<<<<<<< HEAD
     <p class="saga__eyebrow"><span>Junior School</span><span class="saga__count" aria-hidden="true">07 / 08</span></p>
+=======
+    <p class="saga__eyebrow">Junior School</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     <h2 class="saga__line">Where curiosity gets <em>its first push.</em></h2>
     <p class="saga__summary">Grade V begins a broad exposure to music, sport and the sciences alongside the CBSE curriculum.</p>
     <button type="button" class="saga__more" data-panel="panel-junior" aria-haspopup="dialog" aria-controls="panel-junior">Explore Junior School</button>
   </div>
 </section>
 
+<<<<<<< HEAD
 <section class="saga" id="senior" data-ground="#0E0B12">
   <div class="saga__media">
     <img src="assets/img/senior-school.jpg" alt="Senior students at a laboratory bench"
@@ -358,13 +552,26 @@
   </div>
   <div class="wrap saga__inner">
     <p class="saga__eyebrow"><span>From Grade XI</span><span class="saga__count" aria-hidden="true">08 / 08</span></p>
+=======
+<section class="saga" id="senior" data-jump-label="Senior School" data-ground="#0E0B12">
+  <div class="saga__media">
+    <img src="assets/img/why-senior.jpg" alt="Six senior students in formal dress cutting a cake together, their hands joined on the knife"
+         width="1600" height="900" loading="lazy">
+  </div>
+  <div class="wrap saga__inner">
+    <p class="saga__eyebrow">From Grade XI</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     <h2 class="saga__line">Two boards. <em>One ambition.</em></h2>
     <p class="saga__summary">Students choose CBSE pathways or the IB Diploma from Grade XI.</p>
     <button type="button" class="saga__more" data-panel="panel-senior" aria-haspopup="dialog" aria-controls="panel-senior">Explore Senior School</button>
   </div>
 </section>
 
+<<<<<<< HEAD
 <section class="section" id="facts">
+=======
+<section class="section" id="facts" data-jump-label="In figures">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">In short</span></p>
@@ -373,7 +580,11 @@
     <dl class="factrail rv">
       <div><dt>Inaugurated</dt><dd>6 June 1996</dd></div>
       <div><dt>Founder</dt><dd>Swami Chinmayananda</dd></div>
+<<<<<<< HEAD
       <div><dt>Chairperson</dt><dd>Swami Swaroopananda</dd></div>
+=======
+      <div><dt>Chairperson</dt><dd>Swami Swaroopanandaji</dd></div>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       <div><dt>Grades</dt><dd>V to XII</dd></div>
       <div><dt>Curricula</dt><dd>CBSE &amp; IB Diploma</dd></div>
       <div><dt>Medium</dt><dd>English</dd></div>
@@ -518,6 +729,7 @@
   </div>
 </section>
 </main>
+<<<<<<< HEAD
 <div class="footer-wrap">
 <footer class="footer">
   <div class="wrap">
@@ -544,10 +756,55 @@
 
       <div>
         <h4 class="sc">About</h4>
+=======
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <ul>
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
+<<<<<<< HEAD
           <li><a href="student-life.html#campus">Our Campus</a></li>
         </ul>
       </div>
@@ -555,11 +812,21 @@
       <div>
         <p class="sc" id="fnav-school">School</p>
         <ul aria-labelledby="fnav-school">
+=======
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
           <li><a href="why-cirs.html#junior">Junior School</a></li>
           <li><a href="why-cirs.html#senior">Senior School</a></li>
           <li><a href="sports.html#athletics">Athletics</a></li>
           <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
         </ul>
+<<<<<<< HEAD
       </div>
 
       <div>
@@ -581,6 +848,39 @@
           <li><a href="admissions.html#contact">Contact Us</a></li>
         </ul>
       </div>
+=======
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
 
     <div class="footer__bar">
@@ -595,11 +895,21 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
+<<<<<<< HEAD
 <script src="assets/vendor/gsap.min.js?b=95-why-cirs-9" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=95-why-cirs-9" defer></script>
 <script src="assets/vendor/lenis.min.js?b=95-why-cirs-9" defer></script>
 <script src="assets/js/cirs.js?b=95-why-cirs-9" defer></script>
 <script src="assets/js/pages.js?b=95-why-cirs-9" defer></script>
 <script src="assets/js/why-cirs.js?b=95-why-cirs-9" defer></script>
+=======
+<script src="assets/vendor/gsap.min.js?b=102-why-cirs-10" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-why-cirs-10" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-why-cirs-10" defer></script>
+<script src="assets/js/cirs.js?b=102-why-cirs-10-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-why-cirs-10" defer></script>
+<script src="assets/js/footer.js?b=102-why-cirs-10-footer-1" defer></script>
+<script src="assets/js/why-cirs.js?b=102-why-cirs-10" defer></script>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </body>
 </html>

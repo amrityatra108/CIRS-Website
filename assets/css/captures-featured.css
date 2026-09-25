@@ -1,0 +1,311 @@
+/* CIRS Captures — the featured photographs, between the opening and the
+   gallery. Scoped by its own classes; loaded only on captures.html.
+
+   Four photographs in three compositions: a butterfly in grass beside a
+   sunset, a path in the portrait frame, then an overhead view of the grounds
+   across the full width.
+
+   Every size below is taken from the frame itself (container query units:
+   100cqw and 100cqh are the frame's width and height inside its margins),
+   so a composition is the same composition at every window size rather
+   than a layout that happens to fit one of them.
+
+   Two ways to be shown. As they are written here, the frames are simply
+   three screens, one after another — which is what reduced motion, a film
+   that fails and no JavaScript all see. With .cf--pinned (set by
+   assets/js/captures-featured.js) they are layers in one held stage, and
+   the page's scroll moves between them. */
+
+.cf{
+  --cf-ground:#141A15;
+  /* The butterfly's subject point, as the opening states it (--film-focus in
+     the body.captures block of assets/css/filmintro.css); the two must
+     agree, because this section takes over from the opening on a frame the
+     two draw identically. */
+  --cf-focus:15% 55%;
+  --cf-top:clamp(92px, 12vh, 116px);
+  --cf-bottom:clamp(28px, 6vh, 64px);
+  --cf-cap:3.6rem;               /* kept below a photograph for its caption */
+  --cf-gap:clamp(20px, 4vw, 72px);
+  --cf-travel:450vh;
+  position:relative;
+  z-index:1;
+  color:var(--on-purple);
+  /* Shown as still screens, this follows the still of the camera, whose
+     foot is a warm grey: the ground comes down from it rather than
+     starting as an edge. */
+  background:linear-gradient(to bottom, #2A2726 0, #20241F 40px,
+             var(--cf-ground) clamp(110px, 15vh, 200px)) var(--cf-ground);
+}
+
+.cf__lead,
+.cf__restcap{ display:none; }
+
+.cf__frame{
+  box-sizing:border-box;
+  height:100vh;
+  height:100svh;
+  padding:var(--cf-top) var(--gut) var(--cf-bottom);
+  container-type:size;
+  display:flex;
+}
+
+.cf__fig{
+  position:relative;
+  flex:none;
+  width:min-content;             /* the caption wraps to its photograph */
+  margin:0;
+}
+
+.cf__pic{
+  position:relative;
+  overflow:hidden;
+  background:#142019 center / cover no-repeat;
+}
+.cf__pic picture,
+.cf__pic img{
+  display:block;
+  width:100%;
+  height:100%;
+}
+.cf__pic img{ object-fit:cover; }
+
+.cf figcaption,
+.cf__restcap{
+  margin:12px 0 0;
+  max-width:44ch;
+  font-size:.84rem;
+  line-height:1.5;
+  letter-spacing:.01em;
+  color:rgba(245,238,242,.74);
+}
+
+/* Blurred stand-ins, a few hundred bytes each, drawn until the file comes. */
+.cf__fig--lead .cf__pic,
+.cf__lead{ background-image:url(../img/captures-shot-lqip.jpg); }
+.cf__fig--companion .cf__pic{ background-image:url(../img/captures/featured/companion-lqip.jpg); }
+.cf__fig--portrait .cf__pic{ background-image:url(../img/captures/featured/portrait-lqip.jpg); }
+.cf__fig--wide .cf__pic{ background-image:url(../img/captures/featured/wide-lqip.jpg); }
+
+
+/* ------------------------------------------------------------
+   The pair
+   ------------------------------------------------------------
+   The butterfly as a tall panel, with the sunset's wider photograph beside
+   it on a lower baseline. */
+
+.cf__frame--pair{
+  align-items:flex-end;
+  justify-content:center;
+  gap:var(--cf-gap);
+}
+.cf__fig--lead{ --h:calc(100cqh - var(--cf-cap)); }
+.cf__fig--lead .cf__pic{ height:var(--h); width:calc(var(--h) * .8); }
+.cf__fig--lead img{ object-position:var(--cf-focus); }
+.cf__fig--companion{
+  --h:min(calc((100cqh - var(--cf-cap)) * .76),
+          calc((100cqw - (100cqh - var(--cf-cap)) * .8 - var(--cf-gap)) / 1.9));
+}
+.cf__fig--companion .cf__pic{ height:var(--h); width:calc(var(--h) * 1.9); }
+.cf__fig--companion img{ object-position:50% 50%; }
+
+
+/* ------------------------------------------------------------
+   The portrait
+   ------------------------------------------------------------
+   Upright, alone and at full height, a little right of the middle; the
+   caption sits on its baseline in the space to its left. */
+
+.cf__frame--portrait{
+  align-items:flex-end;
+  justify-content:center;
+}
+.cf__fig--portrait{
+  --h:100cqh;
+  display:flex;
+  flex-direction:row-reverse;
+  align-items:flex-end;
+  gap:var(--cf-gap);
+  width:auto;
+}
+.cf__fig--portrait .cf__pic{ height:var(--h); width:calc(var(--h) * 2 / 3); flex:none; }
+.cf__fig--portrait figcaption{ max-width:22ch; margin:0; }
+
+
+/* ------------------------------------------------------------
+   The band
+   ------------------------------------------------------------
+   The overhead view fills the width of the window. */
+
+.cf__frame--band{ align-items:center; }
+.cf__fig--wide{
+  width:calc(100cqw + 2 * var(--gut));
+  margin-left:calc(-1 * var(--gut));
+}
+.cf__fig--wide .cf__pic{
+  width:100%;
+  height:min(64cqh, calc((100cqw + 2 * var(--gut)) / 1.7778));
+}
+.cf__fig--wide img{ object-position:50% 48%; }
+.cf__fig--wide figcaption{ padding-inline:var(--gut); }
+
+
+/* ------------------------------------------------------------
+   Windows taller than they are wide
+   ------------------------------------------------------------
+   The same boundary the opening changes its crop at. The pair stacks —
+   the butterfly to the left, the sunset to the right below it — sized so the
+   two always fit the frame together; the portrait and the band keep their
+   ideas at a phone's proportions. */
+
+@media (max-aspect-ratio:6/5){
+  .cf{
+    --cf-focus:45% 55%;
+    --cf-top:clamp(84px, 11vh, 108px);
+    --cf-bottom:clamp(20px, 4vh, 40px);
+    --cf-gap:clamp(14px, 2.4vh, 28px);
+  }
+  .cf__fig--lead .cf__pic,
+  .cf__lead{ background-image:url(../img/captures-shot-portrait-lqip.jpg); }
+
+  .cf__frame--pair{
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:center;
+  }
+  .cf__fig--lead{
+    --h:min(calc(100cqw * .64 * 1.25),
+            calc((100cqh - 2 * var(--cf-cap) - var(--cf-gap)) * .58));
+    align-self:flex-start;
+  }
+  .cf__fig--companion{
+    --h:min(calc(100cqw * .86 / 1.9),
+            calc((100cqh - 2 * var(--cf-cap) - var(--cf-gap)) * .42));
+    align-self:flex-end;
+  }
+
+  .cf__frame--portrait{ align-items:center; }
+  .cf__fig--portrait{
+    --h:min(calc(100cqh - var(--cf-cap)), calc(100cqw * .82 * 1.5));
+    flex-direction:column;
+    align-items:flex-start;
+    gap:0;
+  }
+  .cf__fig--portrait figcaption{ max-width:none; width:calc(var(--h) * 2 / 3); margin-top:12px; }
+
+  .cf__fig--wide .cf__pic{ height:min(48cqh, calc((100cqw + 2 * var(--gut)) * .84)); }
+}
+
+
+/* ------------------------------------------------------------
+   Pinned: one held stage, and the scroll moves between frames
+   ------------------------------------------------------------
+   The section is drawn over the last screen of the opening (the negative
+   margin is the opening's stage height) and is invisible until its own
+   stage reaches the top of the window — the moment the opening's stage
+   would start to leave. There its first frame is the opening's last one,
+   so nothing is seen to change. */
+
+.cf--pinned{
+  height:calc(var(--cf-travel) + 100vh);
+  height:calc(var(--cf-travel) + 100svh);
+  margin-top:-100vh;
+  margin-top:-100svh;
+  background:none;
+}
+.cf--pinned .cf__stage{
+  position:sticky;
+  top:0;
+  height:100vh;
+  height:100svh;
+  overflow:hidden;
+  background:var(--cf-ground);
+  visibility:hidden;
+}
+.cf--pinned.is-live .cf__stage{ visibility:visible; }
+
+.cf--pinned .cf__frame{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  will-change:opacity, transform;
+}
+
+/* The butterfly, as the opening leaves it: the same picture and crop,
+   the same foot going down to the ground's tone. The script moves this box
+   from the whole window to the lead panel in the pair; that panel's picture
+   stays transparent, because this is drawing it. */
+.cf--pinned .cf__lead{
+  display:block;
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  z-index:2;
+  overflow:hidden;
+  background-color:#141A15;
+  background-position:var(--cf-focus);
+  background-size:cover;
+  background-repeat:no-repeat;
+  will-change:transform, opacity;
+}
+.cf--pinned .cf__lead::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:var(--cf-foot, 1);
+  background:linear-gradient(to bottom, rgba(20,26,21,0) 70%, #141A15 100%);
+}
+.cf__lead picture,
+.cf__lead img{
+  display:block;
+  width:100%;
+  height:100%;
+}
+.cf__lead img{
+  object-fit:cover;
+  object-position:var(--cf-focus);
+}
+.cf--pinned .cf__fig--lead .cf__pic{ background:none; }
+.cf--pinned .cf__fig--lead .cf__pic picture{ opacity:0; }
+
+.cf--pinned .cf__restcap{
+  display:block;
+  position:absolute;
+  z-index:3;
+  left:var(--gut);
+  bottom:clamp(18px, 4.5vh, 44px);
+  margin:0;
+  opacity:0;
+  color:rgba(245,238,242,.8);
+}
+
+.cf--pinned .cf__fig--companion,
+.cf--pinned .cf__frame--pair figcaption{ opacity:0; }
+
+@media (max-width:720px){
+  .cf{ --cf-travel:382.5vh; }
+}
+
+/* The ramp to paper follows this section, not the film, so it always starts
+   from this ground — including under reduced motion, where the shared sheet
+   would otherwise give it the camera's tones (it follows the camera there
+   on a page without these photographs). */
+@media (prefers-reduced-motion:reduce){
+  body.captures .film__seam{
+    --film-seam-top:#141A15;
+    --film-seam-fold:#101610;
+    --film-seam-rise:#687066;
+  }
+}
+
+/* The site's reading rule and back-to-top button stay away while the
+   stage is held, as they do through the opening. */
+body.captures.cf-on #progress,
+body.captures.cf-on #totop{
+  opacity:0;
+  pointer-events:none;
+}

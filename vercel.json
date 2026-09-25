@@ -3,6 +3,14 @@
   "buildCommand": "python3 tools/build-site.py && python3 tools/stage-deploy.py",
   "outputDirectory": "_site",
   "cleanUrls": true,
+<<<<<<< HEAD
+=======
+  "redirects": [
+    { "source": "/admissions/", "destination": "/admissions", "permanent": true },
+    { "source": "/student-life", "destination": "/the-cirs-experience", "permanent": true },
+    { "source": "/student-life.html", "destination": "/the-cirs-experience", "permanent": true }
+  ],
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   "headers": [
     {
       "source": "/(.*)",

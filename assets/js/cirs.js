@@ -27,6 +27,7 @@
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hasGSAP = typeof window.gsap !== "undefined";
   var hasST = hasGSAP && typeof window.ScrollTrigger !== "undefined";
+  var isAlumni = document.body.classList.contains("alumni");
   var animate = hasGSAP && !reduced;
 
   if (hasST) gsap.registerPlugin(ScrollTrigger);
@@ -40,7 +41,11 @@
   var lenis = null;
   // The photograph wall has its own infinite drag/scroll surface and must not
   // compete with document-level smooth scrolling.
+<<<<<<< HEAD
   if (typeof window.Lenis !== "undefined" && !reduced && !document.body.classList.contains("wall")) {
+=======
+  if (typeof window.Lenis !== "undefined" && !reduced && !isAlumni && !document.body.classList.contains("wall")) {
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.5 });
     if (hasGSAP) {
       lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
@@ -70,22 +75,37 @@
     event.preventDefault();
     lenis.scrollTo(event.detail.top, {
       duration:event.detail.duration,
+<<<<<<< HEAD
+=======
+      easing:event.detail.easing,
+      offset:event.detail.offset || 0,
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       force:true,
       lock:true,
       onComplete:event.detail.onComplete
     });
   });
 
+<<<<<<< HEAD
+=======
+  // A page-specific opening can hold the existing Lenis controller until its
+  // entry control is used, without replacing the site's scroll engine.
+  window.addEventListener("cirs-portal-scroll-lock", function (event) {
+    if (!lenis || !event.detail) return;
+    if (event.detail.locked) lenis.stop();
+    else if (!document.body.classList.contains("menu-open")) lenis.start();
+  });
+
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   /* ----------------------------------------------------------
      Scroll subscription
-     Lenis suppresses the native scroll event, so anything that
-     reacts to scrolling must subscribe through Lenis when it is
-     running. Subscribing to window.scroll directly would simply
-     never fire.
+     Lenis moves the window itself, so the native scroll event
+     fires under it as well as without it. ScrollTrigger is used
+     where it is loaded because it also reports refreshes, when
+     pinned sections change the length of the page.
      ---------------------------------------------------------- */
-  /* A sentinel is a zero-height marker placed at a scroll depth. Watching it
-     with IntersectionObserver reports crossing that depth without depending on
-     scroll events, Lenis, GSAP or requestAnimationFrame. */
+  /* A sentinel reports crossing a scroll depth, reading the depth afresh at
+     every check so it follows the page as it grows. */
   function sentinel(px, onCross) {
     var state = null;
     function report(past) {
@@ -96,20 +116,14 @@
     function depth() { return typeof px === "function" ? px() : px; }
     function check() { report((window.scrollY || window.pageYOffset || 0) > depth()); }
 
-    // Three independent signals, because each can be unavailable: ScrollTrigger
-    // (fed by Lenis), IntersectionObserver on a marker, and the native event.
-    if (hasST) ScrollTrigger.create({ onUpdate: check, onRefresh: check });
-    if ("IntersectionObserver" in window) {
-      var el = document.createElement("div");
-      el.setAttribute("aria-hidden", "true");
-      el.style.cssText = "position:absolute;left:0;width:1px;height:1px;pointer-events:none;top:" + depth() + "px";
-      document.body.appendChild(el);
-      new IntersectionObserver(function (entries) {
-        report(entries[0].boundingClientRect.top < 0);
-      }, { threshold: 0 }).observe(el);
-    }
+    // The native event, which fires under Lenis too, and ScrollTrigger's
+    // refresh, when the depth itself may have moved. There used to be four
+    // readers: these, Lenis's own event and an IntersectionObserver on a
+    // marker placed at the depth as it stood on load. The marker was never
+    // moved, so once the depth changed it disagreed with the rest and the
+    // state flipped back and forth across the gap between them.
+    if (hasST) ScrollTrigger.create({ onRefresh: check });
     window.addEventListener("scroll", check, { passive: true });
-    if (lenis) lenis.on("scroll", check);
     check();
   }
 
@@ -125,6 +139,55 @@
     return function () { window.removeEventListener("scroll", fn); };
   }
 
+  /* ----------------------------------------------------------
+     Keyboard focus is kept on screen
+     Tabbing lets the browser scroll the focused element into view
+     natively, underneath Lenis and the pin spacers, and it could
+     come to rest just past the edge of the window — the Under
+     construction link on a phone, a link below a pinned passage.
+     Only a Tab, only once the browser has had its turn, and only
+     if the element is still off screen: then Lenis brings it in.
+     Nothing that is fixed to the window is ever chased: the header,
+     the drawer, the lightbox and every panel or pop-up dialog stay
+     put, and scrolling the page behind them would only lose the reader.
+     ---------------------------------------------------------- */
+  if (lenis) {
+    var tabbing = false, later = 0, frame = 0;
+    // Anything that is not the Tab key is the reader taking over: both
+    // pending looks are dropped, so a wheel or swipe away is never pulled back.
+    function handOver() { tabbing = false; window.clearTimeout(later); window.cancelAnimationFrame(frame); }
+    // Inside a dialog, or anything fixed to the window, focus is on screen by
+    // construction; there is no document position worth scrolling to.
+    function pinnedToWindow(el) {
+      if (el.closest("dialog, [role=dialog], [aria-modal=true]")) return true;
+      for (var n = el; n && n !== document.body; n = n.parentElement) {
+        if (getComputedStyle(n).position === "fixed") return true;
+      }
+      return false;
+    }
+    document.addEventListener("keydown", function (e) { if (e.key === "Tab") tabbing = true; else handOver(); }, true);
+    document.addEventListener("pointerdown", handOver, true);
+    window.addEventListener("wheel", handOver, { passive: true, capture: true });
+    window.addEventListener("touchstart", handOver, { passive: true, capture: true });
+    document.addEventListener("focusin", function (e) {
+      var el = e.target;
+      if (!tabbing || !el.getBoundingClientRect || pinnedToWindow(el)) return;
+      function keep() {
+        if (!tabbing || document.activeElement !== el) return;
+        var r = el.getBoundingClientRect(), top = 88, bottom = window.innerHeight - 16;
+        if (!r.width && !r.height) return;
+        if (r.top >= top && r.bottom <= bottom) return;
+        lenis.scrollTo(el, { offset: -Math.max(top, (window.innerHeight - r.height) / 2), duration: .6 });
+      }
+      // Once after the browser's own scroll, and once more after a long jump
+      // has let lazy photographs and pin spacers settle and move the target.
+      window.cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(keep);
+      window.clearTimeout(later);
+      later = window.setTimeout(keep, 700);
+    });
+  }
+
   $$('a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var id = a.getAttribute("href");
@@ -134,13 +197,54 @@
       if (id.length < 2) return;
       var t = document.querySelector(id);
       if (!t) return;
+      // Alumni uses native document scrolling and real URL fragments.
+      if (isAlumni) { closeDrawer(); return; }
       e.preventDefault();
       closeDrawer();
-      if (lenis) lenis.scrollTo(t, { offset: -88 });
-      else t.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+      scrollToSection(t);
     });
   });
 
+<<<<<<< HEAD
+=======
+  /* A long page goes on growing while it is scrolled through: photographs
+     arrive and pinned sections take their spacers, so the section a link
+     aimed at has moved by the time the scroll ends — on the Founder page,
+     by thousands of pixels on a phone. Once the scroll settles, look again
+     and re-aim, a few times at most, and never after the reader has taken
+     the scroll back themselves. */
+  function scrollToSection(t) {
+    var tries = 0, done = false;
+    function stop() {
+      done = true;
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop);
+    }
+    function settled() {
+      if (done) return;
+      var want = lenis ? 88 : (parseFloat(getComputedStyle(t).scrollMarginTop) || 0);
+      var off = t.getBoundingClientRect().top - want;
+      var atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (Math.abs(off) <= 4 || (off > 0 && atEnd) || ++tries > 4) { stop(); return; }
+      go();
+    }
+    function go() {
+      if (lenis) {
+        lenis.resize();
+        lenis.scrollTo(t, { offset: -88, onComplete: function () { window.setTimeout(settled, 200); } });
+      } else {
+        t.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+        window.setTimeout(settled, reduced ? 200 : 1000);
+      }
+    }
+    window.addEventListener("wheel", stop, { passive: true });
+    window.addEventListener("touchstart", stop, { passive: true });
+    window.addEventListener("keydown", stop);
+    go();
+  }
+
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   /* ----------------------------------------------------------
      An anchor arrived at from another page
      The browser jumps to it while the page is still short: the
@@ -163,7 +267,12 @@
     // The opening curtain holds the page at the top with the scroll locked,
     // so moving now would only be undone when it lifts. finish() calls this
     // again on the way out, which is where the move actually happens.
+<<<<<<< HEAD
     if (document.body.classList.contains("is-locked")) return;
+=======
+    if (document.body.classList.contains("is-locked") ||
+        document.body.classList.contains("portal-intro-active")) return;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     if (hashArmed) return;
     var t;
     // A hash is not necessarily a valid selector — #2026 is legal in a URL.
@@ -368,6 +477,34 @@
 
     heroParallax();
     return tl;
+<<<<<<< HEAD
+=======
+  }
+
+  /* The Math Challenge opening. Every other hero on this site brings its
+     headline in; this one appeared flat, which read as the page having
+     loaded wrong rather than as a choice. The field behind it -- the orbit,
+     the drifting formulae -- is already moving and is left alone.
+
+     This page has a curtain like the rest, so the entrance is handed back
+     paused and played when the curtain lifts, exactly as heroIn does. Run on
+     load instead it plays out behind the curtain and is over before anyone
+     sees it -- which is what it did until this was measured. */
+  function mathHero() {
+    var hero = $(".ma-hero");
+    if (!hero || !animate) return;
+    var bits = [$(".ma-title", hero), $(".ma-strap", hero), $(".ma-hero__cta", hero)]
+      .filter(Boolean);
+    if (!bits.length) return;
+
+    // Without a curtain there is nothing to hide the start state, so the
+    // content is already visible and must stay visible.
+    if (!$("#curtain")) return;
+
+    gsap.set(bits, { opacity: 0, y: 20 });
+    return gsap.timeline({ paused: true })
+      .to(bits, { opacity: 1, y: 0, duration: .9, ease: "power3.out", stagger: .08 });
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   }
 
   function heroParallax() {
@@ -399,8 +536,13 @@
      ==========================================================
      The stage is pinned by CSS sticky, so this function never pins
      anything and never touches the document's height. All it does is
+<<<<<<< HEAD
      read where the three .hseq__mark boxes are and scrub the plate's
      own box between them as the track passes.
+=======
+     read where the .hseq__mark boxes are and scrub the plate's own box
+     between them as the track passes.
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
      The marks are the contract with the stylesheet. Nothing here knows
      what P2 looks like; it knows only that some element in the sheet
@@ -417,7 +559,11 @@
         scrim = $(".hseq__scrim", seq),
         marks = $$(".hseq__mark", seq);
 
+<<<<<<< HEAD
     if (!stage || !plate || marks.length < 3) return;
+=======
+    if (!stage || !plate || marks.length < 2) return;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     // No ScrollTrigger, or motion off: the sheet already lays the
     // sequence out as one still panel. Leave it alone.
@@ -461,6 +607,7 @@
       plate.style.left   = p.left   + "px";
     }
 
+<<<<<<< HEAD
     // The two halves of the travel: P0 to P1 over the first, P1 to P2
     // over the second. A single eased run from P0 to P2 passes through
     // a different middle and loses the first inset entirely.
@@ -474,10 +621,36 @@
       var box = u < BEND ? at(P[0], P[1], u / BEND)
                          : at(P[1], P[2], (u - BEND) / (1 - BEND));
       paint(box);
+=======
+    // One travel: P0, the full-bleed opening, to P1, the inset frame the
+    // sequence settles on. It arrives at ARRIVE of the scrub and holds
+    // there for the rest of it, still stuck, so the composition is seen
+    // at rest before the stage releases into the section below.
+    //
+    // There used to be a third mark. The plate carried on past P1 into a
+    // tall card held right of centre, which meant the picture shrank
+    // twice and left two thirds of the window empty on the second pass.
+    // It also put a corner in the motion: P0 to P1 is a straight zoom
+    // out, P1 to P2 is a sideways slide, and the turn between them read
+    // as a snap however smoothly each half was scrubbed. The sequence
+    // now does one thing.
+    var ARRIVE = .62;
+
+    // Scroll-linked motion that ends on a hold has to arrive with its
+    // velocity already near zero, or the hold reads as the animation
+    // being cut off. An ease-out does that: the plate moves at once on
+    // the first pixel of scroll and decelerates into the frame.
+    function ease(u) { return 1 - Math.pow(1 - u, 2.4); }
+
+    function frame(t) {
+      var u = ease(Math.min(t / ARRIVE, 1));
+      paint(at(P[0], P[1], u));
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       // The corner arrives with the frame rather than being on from the
       // start, so the full-bleed opening has no rounded edge against
       // the window.
       plate.style.borderRadius = (u * 14) + "px";
+<<<<<<< HEAD
       // The scrim exists so the headline can be read over the photograph.
       // Once the plate has drawn in, the headline is beside it rather than
       // on it and the wash has nothing left to do but crush the picture,
@@ -491,6 +664,17 @@
         // sequence.
         type.style.opacity = String(1 - Math.min(u, .55) * .28);
       }
+=======
+      // The scrim exists so the headline can be read over the photograph,
+      // and at P1 the headline still sits over the foot of the plate — so
+      // the wash lifts only as far as the opening's own mid-point, where
+      // it was measured, rather than clearing the way for a column of
+      // type that no longer happens.
+      if (scrim) scrim.style.opacity = String(1 - u * .35);
+      // The type does not move and does not fade. It is the page's first
+      // sentence and the plate is no longer closing in on its column.
+      if (type) type.style.opacity = "1";
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     }
 
     ScrollTrigger.create({
@@ -547,7 +731,19 @@
     // Everything else fades up. Crossroads covers are held back from this
     // pass: they get the same reveal with a per-column delay below, and two
     // tweens on one element's opacity is a fight nobody wins.
+<<<<<<< HEAD
     $$(".rv").filter(function (el) { return !el.classList.contains("crcard"); })
+=======
+    $$(".rv").filter(function (el) {
+      // ma-step and ma-zone are excluded for the same reason crcard is: they
+      // sit in a row, so they all cross the trigger line together and arrive
+      // as a slab. They get the same reveal with a per-position delay below.
+      return !el.classList.contains("crcard")
+          && !el.classList.contains("ma-step")
+          && !el.classList.contains("ma-zone")
+          && !el.classList.contains("ma-card");
+    })
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       .forEach(function (el) {
         gsap.from(el, {
           opacity: 0, y: 24, duration: .95, ease: "power3.out",
@@ -561,6 +757,30 @@
       gsap.from(card, {
         opacity: 0, y: 26, duration: .85, ease: "power3.out", delay: (i % 3) * .09,
         scrollTrigger: { trigger: card, start: "top 92%", once: true }
+<<<<<<< HEAD
+=======
+      });
+    });
+
+    // The five stages and the four zones arrive one after another rather
+    // than together. The delay is on position in the row, not on index, so
+    // the wave restarts on each row once the grid wraps at a narrow width
+    // and the last card of a row is never waiting on the whole set.
+    [[".ma-step", 5], [".ma-zone", 4], [".ma-card", 3]].forEach(function (pair) {
+      var perRow = pair[1];
+      $$(pair[0]).forEach(function (el, i) {
+        gsap.from(el, {
+          opacity: 0, y: 22, duration: .8, ease: "power3.out",
+          delay: (i % perRow) * .06,
+          // gsap.from leaves the end value inline, and an inline opacity:1
+          // beats .ma-card.is-out for good -- which is why the archive
+          // filter's fade did nothing at all until this was here. Clearing
+          // it hands opacity back to the stylesheet once the card has
+          // arrived. The reveal has run once by then and never runs again.
+          clearProps: "opacity",
+          scrollTrigger: { trigger: el, start: "top 90%", once: true }
+        });
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       });
     });
 
@@ -596,6 +816,41 @@
      ten photographs dealt up through it. Card 0 is already down
      when the page opens; the rest rise from below at a tilt as the
      section is scrolled, each landing square on top of the last.
+<<<<<<< HEAD
+
+     The lettering has two layers on purpose: .slhero__run carries
+     the CSS keyframe, which runs whether or not this file does, and
+     .slhero__push carries the scroll offset set here. One element
+     cannot hold both — the transform this sets would cancel the
+     keyframe's.
+
+     No pin under 700px. A pinned scrub on a phone is a scroll that
+     fights the thumb, so there the deck is a swipe track and the
+     lettering simply drifts.
+     ========================================================== */
+  function slHero() {
+    var sec = $(".slhero");
+    if (!sec) return;
+    var pin = $(".slhero__pin", sec), push = $(".slhero__push", sec);
+    var deck = $(".slhero__deck", sec);
+    var cards = $$(".slcard", sec);
+    if (!cards.length) return;
+
+    // A new order on every load. Ten photographs dealt in the same sequence
+    // every time is a slideshow; dealt in a different one each visit, the
+    // hero is the school rather than a fixed advertisement for ten moments
+    // of it. Fisher-Yates over the elements themselves, so the swipe track
+    // the phone falls back to is shuffled too, and so every later lookup —
+    // z-order, the deal, the clean-up — simply follows the DOM.
+    if (deck) {
+      for (var k = cards.length - 1; k > 0; k--) {
+        var j = Math.floor(Math.random() * (k + 1));
+        var tmp = cards[k]; cards[k] = cards[j]; cards[j] = tmp;
+      }
+      cards.forEach(function (c) { deck.appendChild(c); });
+    }
+=======
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
      The lettering has two layers on purpose: .slhero__run carries
      the CSS keyframe, which runs whether or not this file does, and
@@ -629,7 +884,11 @@
       cards.forEach(function (c) { deck.appendChild(c); });
     }
 
-    function staticMode() { sec.classList.add("is-static"); }
+    function staticMode() {
+      sec.classList.add("is-static");
+      // A row that fits needs no swipe hint, rail or count either.
+      sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
+    }
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -714,7 +973,15 @@
     var fill = $(".dayh__fill", sec), tick = $(".dayh__tick", sec);
     if (!track) return;
 
+<<<<<<< HEAD
     function staticMode() { sec.classList.add("is-static"); }
+=======
+    function staticMode() {
+      sec.classList.add("is-static");
+      // A row that fits needs no swipe hint, rail or count either.
+      sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
+    }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -843,7 +1110,15 @@
     var fill = $(".newstrack__fill"), count = $("#newsTrackCount");
     if (!sec || !track) return;
 
+<<<<<<< HEAD
     function staticMode() { sec.classList.add("is-static"); }
+=======
+    function staticMode() {
+      sec.classList.add("is-static");
+      // A row that fits needs no swipe hint, rail or count either.
+      sec.classList.toggle("is-fit", track.scrollWidth <= track.clientWidth + 2);
+    }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
@@ -853,9 +1128,28 @@
       sec.classList.remove("is-static");
       var cards = $$(".newsitem", track);
 
+<<<<<<< HEAD
       var st = ScrollTrigger.create({
         trigger: sec,
         start: "top top",
+=======
+      // Where every story already fits across the window there is nothing to
+      // scrub: pinning the section for a reel that barely moves read as the
+      // page sticking. Lay the stories out as a row and drop the rail.
+      if (track.scrollWidth <= track.clientWidth + 2) {
+        staticMode();
+        return function () { sec.classList.remove("is-fit"); };
+      }
+
+      var st = ScrollTrigger.create({
+        trigger: sec,
+        // The reel is taller than most laptop windows (about 1150px against
+        // 800). Pinned by its top, the lower half of every card — the story
+        // and "Read the original" — sat below the fold for the whole scrub.
+        // Taller than the window, it pins by its bottom instead: the heading
+        // has scrolled away and the cards are whole while they move.
+        start: function () { return pin.offsetHeight > window.innerHeight ? "bottom bottom" : "top top"; },
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         end: function () { return "+=" + Math.max(track.scrollWidth - window.innerWidth + 320, 600); },
         pin: pin,
         scrub: .8,
@@ -1133,6 +1427,23 @@
   }
 
   /* ==========================================================
+     Footer reveal, only where the footer fits the window
+     The footer is sticky to the bottom edge so the page lifts off it.
+     Taller than the window — every phone, where its columns stack —
+     the top of it could never be scrolled into view, so it goes back
+     into the flow. Switching position leaves its height alone, so
+     measuring it again cannot flip the answer.
+     ========================================================== */
+  function footerFit() {
+    var wrap = $(".footer-wrap");
+    if (!wrap) return;
+    function fit() { wrap.classList.toggle("is-tall", wrap.offsetHeight > window.innerHeight); }
+    fit();
+    window.addEventListener("resize", fit, { passive: true });
+    if ("ResizeObserver" in window) new ResizeObserver(fit).observe(wrap);
+  }
+
+  /* ==========================================================
      Scroll progress
      ========================================================== */
   function progressBar() {
@@ -1159,7 +1470,11 @@
     $$("[data-magnetic]").forEach(function (el) {
       var homeHeader = document.body.classList.contains("home") && el.closest(".header");
       function magneticIsOn() {
+<<<<<<< HEAD
         return !homeHeader || homeHeader.classList.contains("is-stuck");
+=======
+        return !homeHeader || homeHeader.classList.contains("is-scrolled");
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       }
       var bounds = null;
       var xTo = gsap.quickTo(el, "x", { duration: .34, ease: "power3.out" });
@@ -1188,12 +1503,14 @@
      ========================================================== */
   function cursorRing() {
     var ring = $("#ring");
+    if (isAlumni && ring) { ring.remove(); return; }
     if (!ring || !animate) return;
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) { ring.remove(); return; }
 
     var x = gsap.quickTo(ring, "x", { duration: .45, ease: "power3" });
     var y = gsap.quickTo(ring, "y", { duration: .45, ease: "power3" });
     var muted = false;
+<<<<<<< HEAD
 
     window.addEventListener("pointermove", function (e) {
       x(e.clientX); y(e.clientY);
@@ -1204,13 +1521,32 @@
         gsap.to(ring, { opacity: muted ? 0 : 1, duration: .2 });
       } else if (!muted && ring.style.opacity !== "1") {
         gsap.to(ring, { opacity: 1, duration: .3 });
+=======
+
+    // The ring gives way over the header only.
+    var quiet = ".header";
+
+    window.addEventListener("pointermove", function (e) {
+      x(e.clientX); y(e.clientY);
+      var overQuiet = !!(e.target.closest && e.target.closest(quiet));
+      if (overQuiet !== muted) {
+        muted = overQuiet;
+        if (muted) ring.classList.remove("is-big");
+        gsap.to(ring, { opacity: muted ? 0 : 1, duration: .2, overwrite: "auto" });
+      } else if (!muted && ring.style.opacity !== "1") {
+        gsap.to(ring, { opacity: 1, duration: .3, overwrite: "auto" });
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       }
     }, { passive: true });
-    document.addEventListener("pointerleave", function () { gsap.to(ring, { opacity: 0, duration: .3 }); });
+    document.addEventListener("pointerleave", function () { gsap.to(ring, { opacity: 0, duration: .3, overwrite: "auto" }); });
 
-    var hot = "a, button, .dmoment, .facilities > div, .node, input, [data-magnetic]";
+    var hot = "a, button, summary, .dmoment, .facilities > div, .node, input, [data-magnetic]";
     document.addEventListener("pointerover", function (e) {
+<<<<<<< HEAD
       if (e.target.closest && e.target.closest(".header")) return;
+=======
+      if (e.target.closest && e.target.closest(quiet)) return;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       if (e.target.closest && e.target.closest(hot)) ring.classList.add("is-big");
     });
     document.addEventListener("pointerout", function (e) {
@@ -1273,8 +1609,116 @@
   }
 
   /* ==========================================================
+     Header state
+     ----------------------------------------------------------
+     The one place the header's state is decided. It has two:
+     clear over the page's opening, and glass once the opening
+     has passed up under the bar. That is one class, .is-scrolled,
+     on #header — the materials, the ink and everything else a
+     page might want to vary hang off it in pages.css.
+
+     This replaced two sentinels that toggled three classes
+     (is-first-section, is-stuck and is-atop) at two different
+     depths, each fed by three signals. One of those signals was
+     an IntersectionObserver marker placed at the boundary as it
+     stood on load and never moved; the others read the boundary
+     live. Once the page grew under it — photographs arriving,
+     pinned sections taking their spacers — the marker and the
+     scroll position disagreed about which side of the line the
+     page was on, and the header flipped back and forth between
+     the two. Here there is one reading of the scroll position,
+     taken once a frame, against one boundary.
+
+     The boundary is where the opening's lower edge meets the
+     bottom of the bar: the moment the page's own content starts
+     passing under it. There is a band either side of it rather
+     than a line — the header turns to glass a little below the
+     boundary and only clears again a little above it — so a
+     scroll that comes to rest on the line, or a trackpad that
+     jitters across it, cannot make it flicker.
+     ========================================================== */
+  function headerState() {
+    var header = $("#header");
+    if (!header) return;
+    var BAND = 24;
+
+    var main = $("#main");
+    // Ignore non-visual utility nodes (the gallery's canvas controls, for
+    // example) and use the first actual section on every page. Blog entries
+    // wrap the full story in one article, so their opening ends with the
+    // lead image rather than at the end of the story.
+    var opening = main && main.querySelector(":scope > section, :scope > article");
+    if (!opening && main) opening = main.firstElementChild;
+    if (opening && opening.matches("article.art")) {
+      opening = $(".art__hero", opening) || $(".art__head", opening) || opening;
+    }
+
+    var edge = 0, scrolled = null, queued = false;
+
+    // Measured, not read every frame: it moves only when the layout does.
+    function measure() {
+      var bar = header.querySelector(".wrap") || header;
+      var barBottom = bar.getBoundingClientRect().bottom;
+      if (!opening) { edge = 80; return; }
+      // A pinned opening is measured by its spacer, which holds its place
+      // in the document while the section itself is fixed to the screen.
+      var box = opening.parentElement && opening.parentElement.classList.contains("pin-spacer")
+        ? opening.parentElement : opening;
+      var bottom = box.getBoundingClientRect().bottom + (window.scrollY || window.pageYOffset || 0);
+      edge = Math.max(bottom - barBottom, 80);
+    }
+
+    function apply() {
+      queued = false;
+      var y = window.scrollY || window.pageYOffset || 0;
+      var next = scrolled ? y > edge - BAND : y > edge + BAND;
+      if (next === scrolled) return;
+      scrolled = next;
+      header.classList.toggle("is-scrolled", next);
+    }
+    function queue() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(apply);
+    }
+    function remeasure() { measure(); queue(); }
+
+    // The state the page opens in is set without a transition, so a page
+    // refreshed halfway down (or restored there by the browser) shows the
+    // glass header at once rather than watching the clear one become it.
+    // is-settling holds until the load event has let the browser restore
+    // the scroll position, then two frames more so the settled state has
+    // painted before transitions come back.
+    header.classList.add("is-settling");
+    measure();
+    apply();
+    function settle() {
+      remeasure();
+      requestAnimationFrame(function () {
+        apply();
+        requestAnimationFrame(function () { header.classList.remove("is-settling"); });
+      });
+    }
+    if (document.readyState === "complete") settle();
+    else window.addEventListener("load", settle, { once: true });
+
+    // One reader of the scroll position. Lenis moves the window itself, so
+    // the native event fires whether or not smooth scrolling is on.
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", remeasure, { passive: true });
+    // A trigger rather than ScrollTrigger.addEventListener("refresh"). With
+    // only the listener, a page reloaded halfway down came back near the top:
+    // on pages that create no trigger of their own at boot, the browser's
+    // scroll restoration does not survive ScrollTrigger's first refresh. The
+    // header's old sentinels created one by accident; this does it on purpose.
+    if (hasST) ScrollTrigger.create({ onRefresh: remeasure });
+    if ("ResizeObserver" in window) new ResizeObserver(remeasure).observe(document.body);
+  }
+
+  /* ==========================================================
      Header and drawer
      ========================================================== */
+<<<<<<< HEAD
   var drawer = $("#drawer"), burger = $("#burger"), drawerMotion = null;
 
   function finishDrawerClose() {
@@ -1284,11 +1728,26 @@
       gsap.set([drawer].concat($$(".drawer__grid > div, .drawer__utility, .drawer__cta", drawer)), {
         clearProps: "opacity,visibility,transform"
       });
+=======
+  var drawer = $("#drawer"), burger = $("#burger"), drawerClose = $("#drawerClose");
+  var drawerCloseTimer = null, drawerInerted = [];
+
+  function isolateDrawer(open) {
+    if (open) {
+      drawerInerted = Array.prototype.slice.call(document.body.children).filter(function (el) {
+        return el !== drawer && !el.inert && el.tagName !== "SCRIPT";
+      });
+      drawerInerted.forEach(function (el) { el.inert = true; });
+    } else {
+      drawerInerted.forEach(function (el) { el.inert = false; });
+      drawerInerted = [];
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     }
   }
 
   function closeDrawer() {
     if (!drawer || !drawer.classList.contains("is-open")) return;
+<<<<<<< HEAD
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-label", "Open menu");
     burger.focus({ preventScroll: true });
@@ -1353,14 +1812,95 @@
         if (!first) return 80;
         return Math.max(first.offsetTop + first.offsetHeight - 120, 80);
       }, function (past) { header.classList.toggle("is-atop", !past); });
+=======
+    drawer.classList.remove("is-open");
+    document.body.classList.add("menu-closing");
+    document.body.classList.remove("menu-open");
+    // The page intro may still own the scroll lock underneath the menu.
+    if (!$("#curtain")) {
+      document.body.classList.remove("is-locked");
+      if (lenis) lenis.start();
+      openHash();
     }
-    if (!burger || !drawer) return;
+    isolateDrawer(false);
+    burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-label", "Open menu");
+    burger.focus({ preventScroll: true });
+    window.clearTimeout(drawerCloseTimer);
+    drawerCloseTimer = window.setTimeout(function () {
+      if (!drawer.classList.contains("is-open")) drawer.hidden = true;
+      document.body.classList.remove("menu-closing");
+    }, reduced ? 0 : 300);
+  }
+
+  (function chrome() {
+    headerState();
+    if (!burger || !drawer || !drawerClose) return;
+    var groupTabs = $$(".drawer__group", drawer);
+    var groupPanels = $$(".drawer__panel", drawer);
+    var initialGroup = Math.max(0, Math.min(groupTabs.length - 1, Number(drawer.dataset.initialGroup) || 0));
+    var activeGroup = -1;
+    var hoverTimer = null;
+    var mobileMenu = window.matchMedia("(max-width:900px)");
+
+    function selectGroup(index) {
+      if ((index !== -1 && !groupTabs[index]) || index === activeGroup) return;
+      activeGroup = index;
+      groupTabs.forEach(function (tab, i) {
+        var selected = i === index;
+        tab.classList.toggle("is-active", selected);
+        tab.setAttribute("aria-expanded", String(selected));
+        groupPanels[i].hidden = !selected;
+      });
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
+    }
+    selectGroup(initialGroup);
+    groupTabs.forEach(function (tab, index) {
+      var expandedAtPointerDown = false;
+      tab.addEventListener("pointerdown", function () {
+        expandedAtPointerDown = index === activeGroup;
+      });
+      tab.addEventListener("focus", function () { selectGroup(index); });
+      tab.addEventListener("click", function (e) {
+        // A touch or pointer press focuses first. Remember the state before
+        // focus so a tap on a closed group opens it instead of closing it.
+        var collapse = mobileMenu.matches &&
+          (e.detail === 0 ? index === activeGroup : expandedAtPointerDown);
+        selectGroup(collapse ? -1 : index);
+        expandedAtPointerDown = false;
+      });
+      tab.addEventListener("mouseenter", function () {
+        if (mobileMenu.matches || !window.matchMedia("(hover: hover)").matches) return;
+        if (groupPanels[activeGroup] && groupPanels[activeGroup].contains(document.activeElement)) return;
+        window.clearTimeout(hoverTimer);
+        hoverTimer = window.setTimeout(function () {
+          if (drawer.classList.contains("is-open") && tab.matches(":hover")) selectGroup(index);
+        }, 65);
+      });
+      tab.addEventListener("mouseleave", function () { window.clearTimeout(hoverTimer); });
+      tab.addEventListener("keydown", function (e) {
+        var next = index;
+        if (e.key === "ArrowDown" || e.key === "ArrowRight") next = (index + 1) % groupTabs.length;
+        else if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = (index + groupTabs.length - 1) % groupTabs.length;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = groupTabs.length - 1;
+        else return;
+        e.preventDefault();
+        groupTabs[next].focus({ preventScroll:true });
+      });
+    });
     burger.addEventListener("click", function () {
       if (drawer.classList.contains("is-open")) { closeDrawer(); return; }
+      window.clearTimeout(drawerCloseTimer);
+      document.body.classList.remove("menu-closing");
+      selectGroup(initialGroup);
       drawer.hidden = false;
-      requestAnimationFrame(function () { drawer.classList.add("is-open"); });
+      // Flush the hidden state so the opacity transition starts on this open.
+      drawer.offsetWidth;
+      drawer.classList.add("is-open");
       burger.setAttribute("aria-expanded", "true");
       burger.setAttribute("aria-label", "Close menu");
+<<<<<<< HEAD
       // is-locked is the scroll lock and nothing more — the intro curtain uses
       // it too. menu-open is what turns the header solid, and only the drawer
       // sets it. See the note on body.menu-open .header in pages.css.
@@ -1398,6 +1938,36 @@
       }
     });
     window.addEventListener("resize", function () { if (window.innerWidth > 1040) closeDrawer(); }, { passive: true });
+=======
+      document.body.classList.add("is-locked", "menu-open");
+      if (lenis) lenis.stop();
+      isolateDrawer(true);
+      requestAnimationFrame(function () {
+        if (drawer.classList.contains("is-open")) drawerClose.focus({ preventScroll: true });
+      });
+    });
+    drawerClose.addEventListener("click", closeDrawer);
+    $$("a", drawer).forEach(function (a) { a.addEventListener("click", closeDrawer); });
+    document.addEventListener("keydown", function (e) {
+      if (!drawer.classList.contains("is-open")) return;
+      if (e.key === "Escape") { e.preventDefault(); closeDrawer(); return; }
+      if (e.key !== "Tab") return;
+      var items = $$("a[href], button", drawer).filter(function (el) {
+        return !el.disabled && el.tabIndex >= 0 && el.getClientRects().length;
+      });
+      var i = items.indexOf(document.activeElement);
+      if (!items.length) return;
+      if (i === -1 || (e.shiftKey && i === 0) || (!e.shiftKey && i === items.length - 1)) {
+        e.preventDefault();
+        items[e.shiftKey ? items.length - 1 : 0].focus();
+      }
+    });
+    document.addEventListener("focusin", function (e) {
+      if (drawer.classList.contains("is-open") && !drawer.contains(e.target)) {
+        drawerClose.focus({ preventScroll: true });
+      }
+    });
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   })();
 
   /* ==========================================================
@@ -1553,6 +2123,12 @@
     });
     $$(".rv, .img-reveal, .facilities > div").forEach(function (e) {
       e.style.opacity = "1"; e.style.transform = "none"; e.style.clipPath = "none";
+      // An inline opacity outranks any class, and the Math Challenge archive
+      // filter fades its cards with one. Nothing here is hidden in CSS in the
+      // first place -- see the note on .rv in cirs.css -- so clearing it back
+      // off the cards costs this path nothing and leaves the filter able to
+      // do its own work when GSAP never arrives.
+      if (e.classList.contains("ma-card")) e.style.removeProperty("opacity");
     });
     var c = $("#curtain");
     if (c) c.remove();
@@ -1900,6 +2476,7 @@
      Boot
      ========================================================== */
   function start() {
+    footerFit();
     backToTop();
     enquirePanel();
     filmLightbox();
@@ -1943,7 +2520,15 @@
     // A completed intro belongs to the tab, not to one document instance.
     // Remove a freshly parsed curtain before heroIn() can prepare hidden lines,
     // so refresh and non-bfcached Back navigation cannot flash and replay it.
+<<<<<<< HEAD
     if (!claimIntroVisit()) {
+=======
+    if (isAlumni) {
+      var alumniCurtain = $("#curtain");
+      if (alumniCurtain) alumniCurtain.remove();
+      document.body.classList.remove("is-locked");
+    } else if (!claimIntroVisit()) {
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       var repeatedCurtain = $("#curtain");
       if (repeatedCurtain) repeatedCurtain.remove();
       document.body.classList.remove("is-locked");
@@ -1951,7 +2536,13 @@
 
     // Set the hero's initial state before the curtain starts uncovering it,
     // then play the prepared timeline without hiding visible content again.
+<<<<<<< HEAD
     var heroEntrance = heroIn();
+=======
+    // One or the other: a page has the shared hero or the Math Challenge
+    // field, never both.
+    var heroEntrance = heroIn() || mathHero();
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     playIntro(function () { if (heroEntrance) heroEntrance.play(); });
     startSweep();
 

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
 <title>CIRS Blog</title>
 <meta name="description" content="Stories, ideas and perspectives from the CIRS community — student writing managed by the Crossroads Editorial Board and the CIRS Social Media Team.">
 <meta name="theme-color" content="#0E0B12">
@@ -23,19 +24,59 @@
 <link rel="stylesheet" href="assets/css/fonts.css?b=95">
 <link rel="stylesheet" href="assets/css/cirs.css?b=95">
 <link rel="stylesheet" href="assets/css/pages.css?b=95">
+=======
+<title>Ideas from CIRS | CIRS Blog</title>
+<meta name="description" content="Student articles first published in The Crossroads, collected as a journal of ideas from CIRS.">
+<meta name="theme-color" content="#0E0B12">
+<link rel="canonical" href="https://www.cirschool.org/blog.html">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ideas from CIRS | CIRS Blog">
+<meta property="og:description" content="Student articles first published in The Crossroads, collected as a journal of ideas from CIRS.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ideas from CIRS | CIRS Blog">
+<meta name="twitter:description" content="Student articles first published in The Crossroads, collected as a journal of ideas from CIRS.">
+<meta name="twitter:image" content="assets/img/og.jpg">
+<!-- Four approved families, self-hosted with retained OFL notices. -->
+<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-blog-editorial-1">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
+<<<<<<< HEAD
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/blognews.css?b=95">
 <link rel="stylesheet" href="assets/css/typography.css?b=95">
+=======
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/blognews.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-blog-editorial-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-blog-editorial-1-drawer-5">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </head>
 
 <body class="blognews litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
 
+<<<<<<< HEAD
 <!-- Opening sequence. Removed from the DOM once it has played. -->
 <div class="curtain" id="curtain" aria-hidden="true">
   <img src="assets/img/logo.png" alt="" width="72" height="70">
@@ -44,6 +85,8 @@
   <span class="curtain__bar"><i></i></span>
 </div>
 
+=======
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
@@ -65,7 +108,11 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
+<<<<<<< HEAD
 <header class="header is-first-section is-stuck" id="header">
+=======
+<header class="header" id="header">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -196,55 +243,123 @@
     </div>
   </div>
 </header>
+<<<<<<< HEAD
 <div class="drawer" id="drawer" hidden>
   <nav class="drawer__grid" aria-label="All pages">
     <div>
       <p class="sc" id="dnav-vision">Vision</p>
       <ul aria-labelledby="dnav-vision">
+=======
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="2" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="false" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button" hidden>
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-student-life">Student Life</p>
       <ul aria-labelledby="dnav-student-life">
         <li><a href="student-life.html">Student Life</a></li>
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
       <ul aria-labelledby="dnav-literary-excellence">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="true" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button">
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html" aria-current="page">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
       <ul aria-labelledby="dnav-art-culture-music">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-connect">Connect</p>
       <ul aria-labelledby="dnav-connect">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
   </nav>
   <div class="drawer__utility">
@@ -281,10 +396,54 @@
         <li><span>Reflection</span><b>1</b></li>
         <li><span>World</span><b>1</b></li>
       </ul>
+=======
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section class="ij-cover" id="top" aria-labelledby="ij-title">
+  <div class="ij-shell">
+    <div class="ij-cover__topline">
+      <span>A student publication &middot; Siruvani</span>
+      <span>CIRS Blog / The Crossroads</span>
+    </div>
+    <header class="ij-mast">
+      <span class="ij-mast__mark" aria-hidden="true"></span>
+      <h1 id="ij-title">Ideas from CIRS</h1>
+      <div class="ij-mast__intro">
+        <p>Writing by students, first published in <em>The Crossroads.</em></p>
+        <p>17 complete articles from 7 issues, gathered here for discovery and reading.</p>
+      </div>
+    </header>
+    <nav class="ij-nav" aria-label="Blog sections">
+      <ul class="ij-nav__list">
+      <li><a href="news.html#latest">Latest issue</a></li>
+      <li><a href="#stories">All stories</a></li>
+      <li><a href="#archive">From the archive</a></li>
+      <li><a href="#crossroads-link">Crossroads</a></li>
+    </ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </nav>
   </div>
 </section>
 
+<<<<<<< HEAD
 <div class="nx-wrap">
     <section class="nx-hero" aria-label="The latest issue">
       <div class="nx-hero__grid">
@@ -591,10 +750,434 @@
 
       <div>
         <h4 class="sc">About</h4>
+=======
+<div class="ij-shell">
+  <section class="ij-section ij-latest" id="latest" aria-labelledby="ij-latest-title">
+      <div class="ij-section__head">
+        <div><p class="ij-section__number">01 / The current edition</p>
+          <h2 id="ij-latest-title">Latest issue</h2></div>
+        <a class="ij-issue-link" href="assets/documents/crossroads/crossroads-issue-32.pdf">Crossroads 32 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="ij-latest__spread">
+        <article class="ij-lead">
+          <p class="ij-lead__label">Lead essay <span aria-hidden="true">/</span> Opinion</p>
+          <h3><a href="death-of-rationalism.html">The Death of Rationalism</a></h3>
+          <p class="ij-lead__excerpt">Rationalism was meant to be a method, not an identity. It was to be the discipline of honest seeing, not another tribe of the like-minded. You question, you examine, you see clearly.</p>
+          <div class="ij-lead__bottom">
+            <span>No byline in print</span>
+            <span>6 min read</span>
+            <a href="death-of-rationalism.html">Read the essay <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+        <div class="ij-latest__aside">
+          <p class="ij-latest__aside-label">Also in Issue 32</p>
+          <article class="ij-latest__side-story">
+          <div class="ij-latest__side-copy">
+            <p class="ij-category">Culture</p>
+            <h3><a href="beyond-the-lobby.html">Beyond the Lobby</a></h3>
+            <p class="ij-latest__side-meta">Muhil T. | IB I Yr</p>
+          </div>
+          <a class="ij-latest__image" href="beyond-the-lobby.html"><img src="assets/img/blog/beyond-the-lobby.webp" alt="Armoured video game soldier holding a rifle" width="1920" height="1080" loading="lazy" decoding="async"></a>
+        </article><article class="ij-latest__side-story">
+          <div class="ij-latest__side-copy">
+            <p class="ij-category">Culture</p>
+            <h3><a href="anakin-skywalker.html">Anakin Skywalker and the Poetics of Tragedy</a></h3>
+            <p class="ij-latest__side-meta">Aayush S. B. | IB II Yr</p>
+          </div>
+          <a class="ij-latest__image" href="anakin-skywalker.html"><img src="assets/img/blog/anakin-skywalker.webp" alt="William Shakespeare holding a blue lightsaber and a copy of Hamlet against a galactic backdrop" width="1024" height="559" loading="lazy" decoding="async"></a>
+        </article>
+        </div>
+      </div>
+    </section><section class="ij-section ij-stories" id="stories" aria-labelledby="ij-stories-title" data-journal>
+      <div class="ij-section__head">
+        <div><p class="ij-section__number">02 / The complete collection</p>
+          <h2 id="ij-stories-title">All stories</h2></div>
+        <span class="ij-section__aside">17 articles across 7 issues</span>
+      </div>
+      <div class="ij-discovery" data-discovery hidden>
+        <div class="ij-discovery__search">
+          <label for="ij-search">Search stories</label>
+          <input id="ij-search" type="search" placeholder="Title, author, subject…" autocomplete="off" data-search-input>
+        </div>
+        <div class="ij-discovery__sort">
+          <label for="ij-sort">Sort by</label>
+          <select id="ij-sort" data-sort>
+            <option value="newest">Newest issue</option>
+            <option value="oldest">Oldest issue</option>
+            <option value="title">Title A–Z</option>
+          </select>
+        </div>
+      </div>
+      <div class="ij-topics" role="group" aria-label="Filter stories by topic" data-topic-controls hidden>
+        <button type="button" data-topic="all" aria-pressed="true">All <span data-topic-count>17</span></button>
+<button type="button" data-topic="Culture" aria-pressed="false">Culture <span data-topic-count>5</span></button>
+<button type="button" data-topic="Opinion" aria-pressed="false">Opinion <span data-topic-count>3</span></button>
+<button type="button" data-topic="Economics" aria-pressed="false">Economics <span data-topic-count>2</span></button>
+<button type="button" data-topic="Sport" aria-pressed="false">Sport <span data-topic-count>2</span></button>
+<button type="button" data-topic="The Editorial" aria-pressed="false">The Editorial <span data-topic-count>2</span></button>
+<button type="button" data-topic="Campus Life" aria-pressed="false">Campus Life <span data-topic-count>1</span></button>
+<button type="button" data-topic="Reflection" aria-pressed="false">Reflection <span data-topic-count>1</span></button>
+<button type="button" data-topic="World" aria-pressed="false">World <span data-topic-count>1</span></button>
+      </div>
+      <p class="ij-results" role="status" aria-live="polite" data-results>17 stories</p>
+      <div class="ij-story-list" data-story-list>
+        <article class="ij-story" data-story data-category="Opinion"
+      data-issue="32" data-title="The Death of Rationalism"
+      data-order="0" data-search="The Death of Rationalism Opinion No byline in print Issue 32 Rationalism was meant to be a method, not an identity. It was to be the discipline of honest seeing, not another tribe of the like-minded. You question, you examine, you see clearly.">
+      <span class="ij-story__number" aria-hidden="true">01</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Opinion</p>
+        <h3><a href="death-of-rationalism.html">The Death of Rationalism</a></h3>
+        <p class="ij-story__excerpt">Rationalism was meant to be a method, not an identity. It was to be the discipline of honest seeing, not another tribe of the like-minded. You question, you examine, you see clearly.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>No byline in print</span>
+        <a href="assets/documents/crossroads/crossroads-issue-32.pdf">Issue 32</a>
+        <span>6 min read</span>
+      </div>
+      <a class="ij-story__image" href="death-of-rationalism.html" aria-label="Read The Death of Rationalism"><img src="assets/img/blog/death-of-rationalism.webp" alt="Illustrated stone hall breaking apart between geometric lines and dark smoke" width="941" height="1672" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story" data-story data-category="Culture"
+      data-issue="32" data-title="Beyond the Lobby"
+      data-order="1" data-search="Beyond the Lobby Culture Muhil T. | IB I Yr Issue 32 A digital world where millions come togethersome for a living, some for leisure, some for addiction, and some for peace.">
+      <span class="ij-story__number" aria-hidden="true">02</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Culture</p>
+        <h3><a href="beyond-the-lobby.html">Beyond the Lobby</a></h3>
+        <p class="ij-story__excerpt">A digital world where millions come togethersome for a living, some for leisure, some for addiction, and some for peace.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Muhil T. | IB I Yr</span>
+        <a href="assets/documents/crossroads/crossroads-issue-32.pdf">Issue 32</a>
+        <span>2 min read</span>
+      </div>
+      <a class="ij-story__image" href="beyond-the-lobby.html" aria-label="Read Beyond the Lobby"><img src="assets/img/blog/beyond-the-lobby.webp" alt="Armoured video game soldier holding a rifle" width="1920" height="1080" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story" data-story data-category="Culture"
+      data-issue="32" data-title="Anakin Skywalker and the Poetics of Tragedy"
+      data-order="2" data-search="Anakin Skywalker and the Poetics of Tragedy Culture Aayush S. B. | IB II Yr Issue 32 The Star Wars prequel is, at its core, a tragedy. Yet within popular discourse it has long been dismissed as pulp science fiction; a spectacle over substance sort of material.">
+      <span class="ij-story__number" aria-hidden="true">03</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Culture</p>
+        <h3><a href="anakin-skywalker.html">Anakin Skywalker and the Poetics of Tragedy</a></h3>
+        <p class="ij-story__excerpt">The Star Wars prequel is, at its core, a tragedy. Yet within popular discourse it has long been dismissed as pulp science fiction; a spectacle over substance sort of material.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Aayush S. B. | IB II Yr</span>
+        <a href="assets/documents/crossroads/crossroads-issue-32.pdf">Issue 32</a>
+        <span>5 min read</span>
+      </div>
+      <a class="ij-story__image" href="anakin-skywalker.html" aria-label="Read Anakin Skywalker and the Poetics of Tragedy"><img src="assets/img/blog/anakin-skywalker.webp" alt="William Shakespeare holding a blue lightsaber and a copy of Hamlet against a galactic backdrop" width="1024" height="559" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story ij-story--type" data-story data-category="Opinion"
+      data-issue="31" data-title="Is AI - Art Really Art?"
+      data-order="3" data-search="Is AI - Art Really Art? Opinion T.Muhil | IB 1 Year Issue 31 In today’s world, nearly everything we do has a trace of artificial intelligence in it, from our daily tasks to our school projects.">
+      <span class="ij-story__number" aria-hidden="true">04</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Opinion</p>
+        <h3><a href="is-ai-art-really-art.html">Is AI - Art Really Art?</a></h3>
+        <p class="ij-story__excerpt">In today’s world, nearly everything we do has a trace of artificial intelligence in it, from our daily tasks to our school projects.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>T.Muhil | IB 1 Year</span>
+        <a href="assets/documents/crossroads/crossroads-issue-31.pdf">Issue 31</a>
+        <span>3 min read</span>
+      </div>
+
+    </article>
+<article class="ij-story" data-story data-category="Campus Life"
+      data-issue="31" data-title="Rumors at CIRS"
+      data-order="4" data-search="Rumors at CIRS Campus Life Aarav Bhartia | IB 1 Year Issue 31 Do you agree with me that here, in CIRS, news about people and events spreads like wildfire? Whether in late-night talks or Crossroads walks, we cannot keep gossip to ourselves.">
+      <span class="ij-story__number" aria-hidden="true">05</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Campus Life</p>
+        <h3><a href="rumors-at-cirs.html">Rumors at CIRS</a></h3>
+        <p class="ij-story__excerpt">Do you agree with me that here, in CIRS, news about people and events spreads like wildfire? Whether in late-night talks or Crossroads walks, we cannot keep gossip to ourselves.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Aarav Bhartia | IB 1 Year</span>
+        <a href="assets/documents/crossroads/crossroads-issue-31.pdf">Issue 31</a>
+        <span>3 min read</span>
+      </div>
+      <a class="ij-story__image" href="rumors-at-cirs.html" aria-label="Read Rumors at CIRS"><img src="assets/img/blog/rumors-at-cirs.webp" alt="Illustration of one person whispering to another" width="1983" height="793" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story" data-story data-category="Opinion"
+      data-issue="31" data-title="Hot Wheels V/S Barbie"
+      data-order="5" data-search="Hot Wheels V/S Barbie Opinion Prisha Kantesaria | IB II Year Issue 31 I am a proud biology student, and my biology class has a MEGA, WHOPPING, GARGANTUAN class strength of 2! And these supercalifragilisticexpialidocious students are girls.">
+      <span class="ij-story__number" aria-hidden="true">06</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Opinion</p>
+        <h3><a href="hot-wheels-vs-barbie.html">Hot Wheels V/S Barbie</a></h3>
+        <p class="ij-story__excerpt">I am a proud biology student, and my biology class has a MEGA, WHOPPING, GARGANTUAN class strength of 2! And these supercalifragilisticexpialidocious students are girls.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Prisha Kantesaria | IB II Year</span>
+        <a href="assets/documents/crossroads/crossroads-issue-31.pdf">Issue 31</a>
+        <span>4 min read</span>
+      </div>
+      <a class="ij-story__image" href="hot-wheels-vs-barbie.html" aria-label="Read Hot Wheels V/S Barbie"><img src="assets/img/blog/hot-wheels-vs-barbie.webp" alt="Hot Wheels cars and track beside a Barbie doll" width="1536" height="1024" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story" data-story data-category="World"
+      data-issue="31" data-title="Geography and Geopolitics"
+      data-order="6" data-search="Geography and Geopolitics World Shaurya Bhartia | 12 Mgmt Issue 31 Every week, we stare at the &quot;News of the Week&quot; presentation on the screen, clapping loudly at the second anything mildly related to India, any sports team, or Donald Trump that flashes by.">
+      <span class="ij-story__number" aria-hidden="true">07</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">World</p>
+        <h3><a href="geography-and-geopolitics.html">Geography and Geopolitics</a></h3>
+        <p class="ij-story__excerpt">Every week, we stare at the &quot;News of the Week&quot; presentation on the screen, clapping loudly at the second anything mildly related to India, any sports team, or Donald Trump that flashes by.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Shaurya Bhartia | 12 Mgmt</span>
+        <a href="assets/documents/crossroads/crossroads-issue-31.pdf">Issue 31</a>
+        <span>5 min read</span>
+      </div>
+      <a class="ij-story__image" href="geography-and-geopolitics.html" aria-label="Read Geography and Geopolitics"><img src="assets/img/blog/geography-and-geopolitics.webp" alt="Hands moving chess pieces across a map of the world, illustrating geopolitical strategy" width="1024" height="572" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story ij-story--type" data-story data-category="Sport"
+      data-issue="30" data-title="Sportswashing: The New Geopolitics"
+      data-order="7" data-search="Sportswashing: The New Geopolitics Sport Shaurya Bhartia | XII MGMT Issue 30 The summer of 2023 changed football forever. It wasn’t just the usual go-to of European transfers; it was something weird. Why?">
+      <span class="ij-story__number" aria-hidden="true">08</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Sport</p>
+        <h3><a href="sportswashing.html">Sportswashing: The New Geopolitics</a></h3>
+        <p class="ij-story__excerpt">The summer of 2023 changed football forever. It wasn’t just the usual go-to of European transfers; it was something weird. Why?</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Shaurya Bhartia | XII MGMT</span>
+        <a href="assets/documents/crossroads/crossroads-issue-30.pdf">Issue 30</a>
+        <span>5 min read</span>
+      </div>
+
+    </article>
+<article class="ij-story" data-story data-category="Culture"
+      data-issue="30" data-title="Notes of Healing"
+      data-order="8" data-search="Notes of Healing Culture Ishaan Ravishankar | XII MGMT Issue 30 Music is something most of us cherish, holding a special place in our lives. It speaks volumes about our personality, and offers insights into our very souls.">
+      <span class="ij-story__number" aria-hidden="true">09</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Culture</p>
+        <h3><a href="notes-of-healing.html">Notes of Healing</a></h3>
+        <p class="ij-story__excerpt">Music is something most of us cherish, holding a special place in our lives. It speaks volumes about our personality, and offers insights into our very souls.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Ishaan Ravishankar | XII MGMT</span>
+        <a href="assets/documents/crossroads/crossroads-issue-30.pdf">Issue 30</a>
+        <span>4 min read</span>
+      </div>
+      <a class="ij-story__image" href="notes-of-healing.html" aria-label="Read Notes of Healing"><img src="assets/img/blog/notes-of-healing.webp" alt="Guitar, headphones and records beside an open notebook" width="1536" height="1024" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story ij-story--type" data-story data-category="The Editorial"
+      data-issue="29" data-title="My Home"
+      data-order="9" data-search="My Home The Editorial Vishv Prem Nangia · existing blog credit, no byline in print Issue 29 Like most other kids, I had an enjoyable childhood with my family, so naturally, making the tough decision to join a boarding school 2,359 long kilometres away from home was an emotional one.">
+      <span class="ij-story__number" aria-hidden="true">10</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">The Editorial</p>
+        <h3><a href="my-home.html">My Home</a></h3>
+        <p class="ij-story__excerpt">Like most other kids, I had an enjoyable childhood with my family, so naturally, making the tough decision to join a boarding school 2,359 long kilometres away from home was an emotional one.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Vishv Prem Nangia · existing blog credit, no byline in print</span>
+        <a href="assets/documents/crossroads/crossroads-issue-29.pdf">Issue 29</a>
+        <span>3 min read</span>
+      </div>
+
+    </article>
+<article class="ij-story" data-story data-category="Reflection"
+      data-issue="29" data-title="Voyages in the Yuva Kendra"
+      data-order="10" data-search="Voyages in the Yuva Kendra Reflection Adithyan Diwakar Vidya | Class IB II | CIRS Issue 29 Bag stuffed, folder filled, and brain completely devoid of meaning: that would accurately encapsulate my state in the very first class of CHYK CIRS.">
+      <span class="ij-story__number" aria-hidden="true">11</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Reflection</p>
+        <h3><a href="voyages-in-the-yuva-kendra.html">Voyages in the Yuva Kendra</a></h3>
+        <p class="ij-story__excerpt">Bag stuffed, folder filled, and brain completely devoid of meaning: that would accurately encapsulate my state in the very first class of CHYK CIRS.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Adithyan Diwakar Vidya | Class IB II | CIRS</span>
+        <a href="assets/documents/crossroads/crossroads-issue-29.pdf">Issue 29</a>
+        <span>5 min read</span>
+      </div>
+      <a class="ij-story__image" href="voyages-in-the-yuva-kendra.html" aria-label="Read Voyages in the Yuva Kendra"><img src="assets/img/blog/voyages-in-the-yuva-kendra.webp" alt="Large group posed together outside a building" width="681" height="453" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story" data-story data-category="Economics"
+      data-issue="29" data-title="The Race Beyond"
+      data-order="11" data-search="The Race Beyond Economics Lokk Vishwavedaa · existing blog credit, no byline in print Issue 29 It&#x27;s Sunday. Millions are tuning into their digital screens to watch one thing. Fast cars. Actually, 20 of them, racing at speeds that vaporize everything in their path.">
+      <span class="ij-story__number" aria-hidden="true">12</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Economics</p>
+        <h3><a href="the-race-beyond.html">The Race Beyond</a></h3>
+        <p class="ij-story__excerpt">It&#x27;s Sunday. Millions are tuning into their digital screens to watch one thing. Fast cars. Actually, 20 of them, racing at speeds that vaporize everything in their path.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Lokk Vishwavedaa · existing blog credit, no byline in print</span>
+        <a href="assets/documents/crossroads/crossroads-issue-29.pdf">Issue 29</a>
+        <span>4 min read</span>
+      </div>
+      <a class="ij-story__image" href="the-race-beyond.html" aria-label="Read The Race Beyond"><img src="assets/img/blog/the-race-beyond.webp" alt="Rear view of a Formula 1 car silhouetted against a fiery sunset sky" width="2236" height="703" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story" data-story data-category="Economics"
+      data-issue="29" data-title="Trust or Bust: The Never-Ending Problem of the Prisoner&#x27;s Dilemma"
+      data-order="12" data-search="Trust or Bust: The Never-Ending Problem of the Prisoner&#x27;s Dilemma Economics Aarav Bhartia | X B · school-supplied credit, no byline in print Issue 29 Imagine yourself in this familiar high school scene where you and your best friend are tasked with a huge project, the kind that demands hours of focused, dedicated work.">
+      <span class="ij-story__number" aria-hidden="true">13</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Economics</p>
+        <h3><a href="trust-or-bust.html">Trust or Bust: The Never-Ending Problem of the Prisoner&#x27;s Dilemma</a></h3>
+        <p class="ij-story__excerpt">Imagine yourself in this familiar high school scene where you and your best friend are tasked with a huge project, the kind that demands hours of focused, dedicated work.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Aarav Bhartia | X B · school-supplied credit, no byline in print</span>
+        <a href="assets/documents/crossroads/crossroads-issue-29.pdf">Issue 29</a>
+        <span>4 min read</span>
+      </div>
+      <a class="ij-story__image" href="trust-or-bust.html" aria-label="Read Trust or Bust: The Never-Ending Problem of the Prisoner&#x27;s Dilemma"><img src="assets/img/blog/trust-or-bust.webp" alt="Coca-Cola and Pepsi cans colliding" width="2172" height="724" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story" data-story data-category="Sport"
+      data-issue="29" data-title="The Journey Behind Excellence"
+      data-order="13" data-search="The Journey Behind Excellence Sport Aarav Bhartia | X B Issue 29 &quot;No, I cannot do it anymore&quot; - Have you said this to yourself in the middle of a 5,000 metres race? And later, regret the same while reflecting?">
+      <span class="ij-story__number" aria-hidden="true">14</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Sport</p>
+        <h3><a href="the-journey-behind-excellence.html">The Journey Behind Excellence</a></h3>
+        <p class="ij-story__excerpt">&quot;No, I cannot do it anymore&quot; - Have you said this to yourself in the middle of a 5,000 metres race? And later, regret the same while reflecting?</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Aarav Bhartia | X B</span>
+        <a href="assets/documents/crossroads/crossroads-issue-29.pdf">Issue 29</a>
+        <span>5 min read</span>
+      </div>
+      <a class="ij-story__image" href="the-journey-behind-excellence.html" aria-label="Read The Journey Behind Excellence"><img src="assets/img/blog/the-journey-behind-excellence.webp" alt="Person climbing rocky steps toward a trophy" width="1374" height="1145" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story" data-story data-category="The Editorial"
+      data-issue="17" data-title="The Social Glue"
+      data-order="14" data-search="The Social Glue The Editorial Raahi Tejas Shah | Crossroads Editorial Team ’24 Issue 17 The human brain evolved to navigate and maintain social structures of life. Primordially, we needed each other to survive.">
+      <span class="ij-story__number" aria-hidden="true">15</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">The Editorial</p>
+        <h3><a href="the-social-glue.html">The Social Glue</a></h3>
+        <p class="ij-story__excerpt">The human brain evolved to navigate and maintain social structures of life. Primordially, we needed each other to survive.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Raahi Tejas Shah | Crossroads Editorial Team ’24</span>
+        <a href="assets/documents/crossroads/crossroads-issue-17.pdf">Issue 17</a>
+        <span>4 min read</span>
+      </div>
+      <a class="ij-story__image" href="the-social-glue.html" aria-label="Read The Social Glue"><img src="assets/img/blog/the-social-glue.webp" alt="Illustrated sphere labelled with trust, empathy, dialogue and community" width="1672" height="941" loading="lazy" decoding="async"></a>
+    </article>
+<article class="ij-story ij-story--type" data-story data-category="Culture"
+      data-issue="4" data-title="Death of Detail"
+      data-order="15" data-search="Death of Detail Culture Malhar Modi Issue 4 A long day at work, and you’re tired to the bone. You decide to visit the nearby park to finally take a break, and seat yourself on a bench.">
+      <span class="ij-story__number" aria-hidden="true">16</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Culture</p>
+        <h3><a href="death-of-detail.html">Death of Detail</a></h3>
+        <p class="ij-story__excerpt">A long day at work, and you’re tired to the bone. You decide to visit the nearby park to finally take a break, and seat yourself on a bench.</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Malhar Modi</span>
+        <a href="assets/documents/crossroads/crossroads-issue-04.pdf">Issue 4</a>
+        <span>4 min read</span>
+      </div>
+
+    </article>
+<article class="ij-story" data-story data-category="Culture"
+      data-issue="2" data-title="Resurgence"
+      data-order="16" data-search="Resurgence Culture Adhavan Diwakar Issue 2 Jana Gana Mana Adhinayaka Jaya He, Bharata Bhagya Vidhata!">
+      <span class="ij-story__number" aria-hidden="true">17</span>
+      <div class="ij-story__copy">
+        <p class="ij-story__category">Culture</p>
+        <h3><a href="resurgence.html">Resurgence</a></h3>
+        <p class="ij-story__excerpt">Jana Gana Mana Adhinayaka Jaya He, Bharata Bhagya Vidhata!</p>
+      </div>
+      <div class="ij-story__details">
+        <span>Adhavan Diwakar</span>
+        <a href="assets/documents/crossroads/crossroads-issue-02.pdf">Issue 2</a>
+        <span>5 min read</span>
+      </div>
+      <a class="ij-story__image" href="resurgence.html" aria-label="Read Resurgence"><img src="assets/img/blog/resurgence.webp" alt="Indian flag flying against a blue sky" width="1536" height="1024" loading="lazy" decoding="async"></a>
+    </article>
+      </div>
+      <div class="ij-empty" data-empty hidden>
+        <h3>No stories found</h3>
+        <p>Try another search or topic to see the full collection.</p>
+        <button type="button" data-reset>Show all stories</button>
+      </div>
+    </section><section class="ij-section ij-archive" id="archive" aria-labelledby="ij-archive-title">
+      <div class="ij-section__head">
+        <div><p class="ij-section__number">03 / Earlier voices</p>
+          <h2 id="ij-archive-title">From the archive</h2></div>
+        <span class="ij-section__aside">Also listed above in All stories</span>
+      </div>
+      <div class="ij-archive__grid"><article class="ij-archive__story">
+          <p>July 2024 <span aria-hidden="true">/</span> Issue 17</p>
+          <h3><a href="the-social-glue.html">The Social Glue</a></h3>
+          <p>The human brain evolved to navigate and maintain social structures of life. Primordially, we needed each other to survive.</p>
+        </article><article class="ij-archive__story">
+          <p>April 2026 <span aria-hidden="true">/</span> Issue 30</p>
+          <h3><a href="notes-of-healing.html">Notes of Healing</a></h3>
+          <p>Music is something most of us cherish, holding a special place in our lives. It speaks volumes about our personality, and offers insights into our very souls.</p>
+        </article></div>
+    </section><section class="ij-connection" id="crossroads-link" aria-labelledby="ij-crossroads-title">
+      <div>
+        <p class="ij-connection__kicker">Every article began in print</p>
+        <h2 id="ij-crossroads-title">The Crossroads</h2>
+        <p>Read the complete magazine issues and explore the student publication behind these stories.</p>
+      </div>
+      <a href="crossroads.html">Explore the magazine archive <span aria-hidden="true">↗</span></a>
+    </section>
+    <aside class="ij-contact" id="write" aria-labelledby="ij-contact-title">
+      <h2 id="ij-contact-title">Write for The Crossroads</h2>
+      <p>Students can contact the Crossroads Editorial Board through the school.
+        A public submission address, deadline and subscription list are not available here yet.</p>
+    </aside>
+  <p class="ij-colophon">This online collection is managed by the Crossroads Editorial Board and the CIRS Social Media Team.</p>
+</div>
+</main>
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <ul>
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
+<<<<<<< HEAD
           <li><a href="student-life.html#campus">Our Campus</a></li>
         </ul>
       </div>
@@ -602,11 +1185,21 @@
       <div>
         <p class="sc" id="fnav-school">School</p>
         <ul aria-labelledby="fnav-school">
+=======
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
           <li><a href="why-cirs.html#junior">Junior School</a></li>
           <li><a href="why-cirs.html#senior">Senior School</a></li>
           <li><a href="sports.html#athletics">Athletics</a></li>
           <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
         </ul>
+<<<<<<< HEAD
       </div>
 
       <div>
@@ -628,6 +1221,39 @@
           <li><a href="admissions.html#contact">Contact Us</a></li>
         </ul>
       </div>
+=======
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
 
     <div class="footer__bar">
@@ -642,10 +1268,20 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
+<<<<<<< HEAD
 <script src="assets/vendor/gsap.min.js?b=95" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=95" defer></script>
 <script src="assets/vendor/lenis.min.js?b=95" defer></script>
 <script src="assets/js/cirs.js?b=95" defer></script>
 <script src="assets/js/pages.js?b=95" defer></script>
+=======
+<script src="assets/vendor/gsap.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/cirs.js?b=102-blog-editorial-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/footer.js?b=102-blog-editorial-1-footer-1" defer></script>
+<script src="assets/js/blog-index.js?b=102-blog-editorial-1-editorial-1" defer></script>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </body>
 </html>

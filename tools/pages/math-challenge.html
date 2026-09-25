@@ -1,4 +1,5 @@
 <section class="ma-hero" id="top" data-ground="#07070A">
+<<<<<<< HEAD
   <!-- Interactive mathematical canvas: "The moment a pattern appears".
        Traces geometric loci and reveals spatial depth on pointer/touch interaction. -->
   <div class="ma-field" aria-hidden="true">
@@ -25,10 +26,64 @@
       <a class="btn btn--primary" href="#puzzle">Try the visual puzzle</a>
       <a class="btn btn--outline" href="#zones">Choose your zone</a>
       <a class="btn btn--ghost" href="#archive">Browse archive</a>
+=======
+  <!-- The mathematics behind the heading. All of it is decoration and none of
+       it is read aloud: the grid, the orbits, the formulae and the points are
+       one aria-hidden layer, so a screen reader meets the heading first. -->
+  <div class="ma-field" aria-hidden="true">
+    <div class="ma-field__grid"></div>
+    <div class="ma-field__orbit"></div>
+    <div class="ma-field__formulae">
+      <span class="ma-f ma-f--1">x&sup2; + y&sup2; = z&sup2;</span>
+      <span class="ma-f ma-f--2">&pi; &asymp; 3.14159</span>
+      <span class="ma-f ma-f--3">&radic;144 = 12</span>
+      <span class="ma-f ma-f--4">&sum; n = n(n+1)/2</span>
+      <span class="ma-f ma-f--5">f(x) = ax&sup2; + bx + c</span>
+      <span class="ma-f ma-f--6">&infin;</span>
+      <span class="ma-f ma-f--7">&theta; = 90&deg;</span>
+      <span class="ma-f ma-f--8">a&sup2; &minus; b&sup2;</span>
+      <span class="ma-f ma-f--9">&int; f(x) dx</span>
+    </div>
+    <svg class="ma-field__ink" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice"
+         focusable="false">
+      <circle cx="240" cy="170" r="96" />
+      <circle cx="980" cy="520" r="132" />
+      <polygon points="905,150 1010,320 800,320" />
+      <path d="M90 560 L300 430 L470 520 L640 360" />
+      <circle class="ma-field__pt" cx="300" cy="430" r="4" />
+      <circle class="ma-field__pt" cx="470" cy="520" r="4" />
+      <circle class="ma-field__pt" cx="640" cy="360" r="4" />
+    </svg>
+  </div>
+
+  <div class="wrap ma-hero__inner">
+    <h1 class="ma-title">Math <em>Challenge</em></h1>
+    <p class="ma-strap">Question. Reason. Discover. Solve.</p>
+    <p class="ma-hero__cta">
+      <a class="btn btn--primary" href="#zones">Find your zone</a>
+      <a class="btn btn--ghost" href="#archive">The archive</a>
+    </p>
+  </div>
+</section>
+
+<section class="ma-sec ma-sec--open" id="about">
+  <div class="wrap ma-open">
+    <div class="ma-open__head rv">
+      <p class="ma-eyebrow"><span class="sc">The idea</span></p>
+      <h2 class="ma-h2">Think beyond <em>numbers.</em></h2>
+    </div>
+    <div class="ma-open__body rv">
+      <p class="ma-lead">Mathematics is more than numbers. It is about questioning, discovering
+        patterns, reasoning logically and finding creative solutions.</p>
+      <p class="ma-copy">A challenge problem is not a test of what was taught last week. It is
+        set so that the method is not obvious, so that the first idea usually fails, and so that
+        the student who gets there has had to think rather than remember.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
   </div>
 </section>
 
+<<<<<<< HEAD
 <!-- Section 1: The Interactive Demonstration Puzzle -->
 <section class="ma-sec ma-sec--puzzle" id="puzzle">
   <div class="wrap">
@@ -140,6 +195,29 @@
       <p class="ma-eyebrow"><span class="sc">Four Grade Divisions</span></p>
       <h2 class="ma-h2">Four zones, <em>one love of math.</em></h2>
       <p class="ma-copy">Problems are designed for four distinct grade divisions, calibrated so that a Grade 5 student and a Grade 12 senior each encounter authentic mathematical challenge. Select a zone to jump directly into its published archive.</p>
+=======
+<section class="ma-sec" id="journey">
+  <div class="wrap">
+    <div class="ma-sechead rv">
+      <p class="ma-eyebrow"><span class="sc">The challenge journey</span></p>
+      <h2 class="ma-h2">Five stages, <em>one problem.</em></h2>
+      <p class="ma-copy">Every challenge begins with a question. What follows is the same
+        whether the problem takes ten minutes or a week.</p>
+    </div>
+    <ol class="ma-journey">
+{{MATH_JOURNEY}}
+    </ol>
+  </div>
+</section>
+
+<section class="ma-sec ma-sec--zones" id="zones">
+  <div class="wrap">
+    <div class="ma-sechead rv">
+      <p class="ma-eyebrow"><span class="sc">Choose your challenge</span></p>
+      <h2 class="ma-h2">Four zones, <em>one love of math.</em></h2>
+      <p class="ma-copy">Problems are set for four grade groups, so that a student in Grade V
+        and a student in Grade XII are each given something that is genuinely hard for them.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
     <div class="ma-zones">
 {{MATH_ZONES}}
@@ -147,6 +225,7 @@
   </div>
 </section>
 
+<<<<<<< HEAD
 <!-- Section 3: How a Mind Solves -->
 <section class="ma-sec ma-sec--journey" id="journey">
   <div class="wrap">
@@ -205,11 +284,23 @@
       <p class="ma-copy">Each month the CIRS Mathematics Department publishes the official winners for every grade division. Twenty-five bulletins across seven verified months are catalogued below. Where a division did not publish in a given month, it is honestly labeled as &ldquo;No document published&rdquo;.</p>
     </div>
 
+=======
+<section class="ma-sec" id="archive">
+  <div class="wrap">
+    <div class="ma-sechead rv">
+      <p class="ma-eyebrow"><span class="sc">The archive</span></p>
+      <h2 class="ma-h2">Month by month, <em>the winners.</em></h2>
+      <p class="ma-copy">Each month the mathematics department publishes the winners for every
+        grade zone, with the number who entered. Seven months are here; two are short a grade
+        group, and those gaps are the school&rsquo;s own.</p>
+    </div>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 {{MATH_FILTERS}}
 {{MATH_ARCHIVE}}
   </div>
 </section>
 
+<<<<<<< HEAD
 <!-- Section 5: Closing Invitation -->
 <section class="ma-sec ma-sec--last">
   <div class="wrap ma-last rv">
@@ -234,5 +325,12 @@
         <span class="ma-last__link-sub">Entrance examination &amp; inquiry</span>
       </a>
     </div>
+=======
+<section class="ma-sec ma-sec--last">
+  <div class="wrap ma-last rv">
+    <p class="ma-last__quote">Every problem is an opportunity to discover a new way of
+      thinking.</p>
+    <p class="ma-last__note">Keep questioning. Keep exploring. Keep solving.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   </div>
 </section>

@@ -1,0 +1,358 @@
+/* CIRS Captures — a five-chapter photo journal, its viewer, and the ending.
+   The opening carries the page's movement. Here the images hold still, with
+   a chapter index and sticky chapter headings helping readers through the
+   photographs. Each justified row preserves the photos' own proportions. */
+
+.cg{
+  --cg-gap:clamp(8px, 1.1vw, 16px);
+  scroll-margin-top:88px;
+}
+
+.cg__contents{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  margin:clamp(30px,4vw,60px) 0 clamp(44px,6vw,88px);
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+
+.cg__contents a{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+  min-width:0;
+  padding:18px clamp(10px,1.7vw,28px);
+  color:var(--ink);
+  font-family:var(--font-primary);
+  font-size:clamp(.93rem,1.15vw,1.1rem);
+  line-height:1.25;
+  text-decoration:none;
+  transition:background .2s var(--e), color .2s var(--e);
+}
+.cg__contents a + a{ border-left:1px solid var(--rule); }
+.cg__contents a:hover{ background:var(--paper-2); }
+.cg__contents a:focus-visible{ outline:2px solid var(--gold); outline-offset:-2px; }
+.cg__contents span{
+  color:var(--ink-mute);
+  font-size:.76rem;
+  font-variant-numeric:tabular-nums;
+}
+
+.cg__journal{ display:flex; flex-direction:column; gap:clamp(72px,10vw,144px); }
+.cg__chapter{
+  display:grid;
+  grid-template-columns:minmax(185px,22%) minmax(0,1fr);
+  align-items:start;
+  column-gap:clamp(24px,4vw,72px);
+  padding-top:clamp(24px,3vw,44px);
+  border-top:1px solid var(--rule);
+  scroll-margin-top:88px;
+}
+.cg__chapter-head{
+  position:sticky;
+  top:clamp(92px,11vh,126px);
+  padding-right:clamp(0px,1vw,12px);
+}
+.cg__chapter-count{
+  margin:0 0 12px;
+  color:var(--ink-mute);
+  font-size:.82rem;
+  font-variant-numeric:tabular-nums;
+}
+.cg__chapter-head h3{
+  margin:0 0 12px;
+  max-width:9ch;
+  font-family:var(--font-primary);
+  font-size:clamp(2.1rem,3.3vw,3.9rem);
+  font-weight:400;
+  line-height:.98;
+  letter-spacing:-.035em;
+  text-wrap:balance;
+}
+.cg__chapter-head > p:last-child{
+  max-width:27ch;
+  margin:0;
+  color:var(--ink-soft);
+  font-size:clamp(.9rem,1.05vw,1rem);
+  line-height:1.55;
+}
+
+.cg__grid{
+  display:flex;
+  flex-direction:column;
+  gap:var(--cg-gap);
+  min-width:0;
+}
+
+.cg__row{
+  display:flex;
+  gap:var(--cg-gap);
+}
+
+.cg__item{
+  flex:var(--ar) 1 0%;
+  min-width:0;
+  aspect-ratio:var(--ar);
+  position:relative;
+  display:block;
+  overflow:hidden;
+  background:var(--paper-3);
+  cursor:zoom-in;
+}
+
+.cg__item img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transition:transform .7s var(--e2), opacity .3s var(--e);
+}
+
+.cg__item-caption{
+  position:absolute;
+  z-index:1;
+  inset:auto 0 0;
+  padding:42px clamp(13px,1.6vw,24px) clamp(12px,1.6vw,22px);
+  background:linear-gradient(to top,rgba(12,17,13,.75),transparent);
+  color:#fff;
+  font-size:clamp(.78rem,.95vw,.94rem);
+  line-height:1.35;
+  opacity:0;
+  transition:opacity .22s var(--e);
+  pointer-events:none;
+}
+.cg__row--solo .cg__item-caption,
+.cg__item:hover .cg__item-caption,
+.cg__item:focus-visible .cg__item-caption{ opacity:1; }
+
+@media (hover:hover){
+  .cg__item:hover img{ transform:scale(1.025); }
+}
+
+.cg__item:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:3px;
+}
+
+.cg__note{
+  margin-top:clamp(20px, 2.4vw, 32px);
+  color:var(--ink-mute);
+  font-size:var(--fs-sm);
+}
+
+@media (max-width:920px){
+  .cg__contents{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .cg__contents a:nth-child(4){ border-left:0; }
+  .cg__contents a:nth-child(n+4){ border-top:1px solid var(--rule); }
+  .cg__chapter{ grid-template-columns:1fr; row-gap:24px; }
+  .cg__chapter-head{ position:static; display:grid; grid-template-columns:1fr 1fr; column-gap:24px; align-items:end; }
+  .cg__chapter-count{ grid-column:1 / -1; }
+  .cg__chapter-head h3{ max-width:none; margin:0; }
+  .cg__chapter-head > p:last-child{ max-width:30ch; }
+}
+
+/* A phone gives every image the width it needs to be more than a thumbnail. */
+@media (max-width:640px){
+  .cg__contents{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cg__contents a:nth-child(4){ border-left:1px solid var(--rule); }
+  .cg__contents a:nth-child(odd){ border-left:0; }
+  .cg__contents a:nth-child(n+3){ border-top:1px solid var(--rule); }
+  .cg__chapter-head{ display:block; }
+  .cg__chapter-head h3{ margin-bottom:12px; }
+  .cg__row{ flex-direction:column; }
+  .cg__item{ flex:none; width:100%; }
+  .cg__item-caption{ opacity:1; padding:40px 14px 12px; }
+}
+
+
+/* ------------------------------------------------------------
+   The ending
+   ------------------------------------------------------------ */
+
+.cg-end__figure{ margin:0; }
+
+.cg-end__figure picture{ display:block; }
+.cg-end__figure img{
+  display:block;
+  width:100%;
+  height:min(88svh, 66.667vw);
+  object-fit:cover;
+  object-position:50% 50%;
+  background:var(--paper-3);
+}
+
+.cg-end__caption{
+  padding-top:14px;
+  color:var(--ink-mute);
+  font-size:var(--fs-sm);
+}
+
+.cg-end__onward{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  padding-top:clamp(28px, 3vw, 40px);
+  padding-bottom:clamp(60px, 7.5vw, 120px);
+}
+
+
+/* ------------------------------------------------------------
+   The viewer
+   ------------------------------------------------------------
+   A native modal dialog: it takes the top layer, makes the page behind it
+   inert, and closes on Escape by itself. The frame is sized from the
+   photograph's shape (--cv-ar, set by the script) so that the tile shown
+   first and the full-size image that replaces it occupy exactly the same
+   box, and the swap never moves anything. --cv-reserve is the height kept
+   for the caption and the controls. */
+
+.cv{
+  --cv-ar:1.5;
+  --cv-pad-x:clamp(64px, 7vw, 104px);
+  --cv-pad-top:64px;
+  --cv-reserve:196px;
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  max-width:none;
+  max-height:none;
+  margin:0;
+  padding:env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+          env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  border:0;
+  background:rgba(10,7,9,.97);
+  color:var(--on-purple);
+  overflow:hidden;
+}
+.cv[open]{
+  display:grid;
+  grid-template-rows:1fr auto;
+}
+.cv::backdrop{ background:rgba(10,7,9,.6); }
+
+.cv__stage{
+  display:grid;
+  place-items:center;
+  min-height:0;
+  padding:var(--cv-pad-top) var(--cv-pad-x) 0;
+  /* The browser keeps vertical panning and pinch-zoom; a sideways swipe is
+     left to the script, which turns it into next and previous. */
+  touch-action:pan-y pinch-zoom;
+}
+
+.cv__figure{
+  margin:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.cv__frame{
+  position:relative;
+  width:min(100%, calc((100svh - var(--cv-reserve)) * var(--cv-ar)));
+  aspect-ratio:var(--cv-ar);
+  background:#171214;
+}
+
+.cv__frame img{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.cv__frame img.is-entering{ animation:cv-in .28s var(--e) both; }
+@keyframes cv-in{ from{ opacity:0; } to{ opacity:1; } }
+
+.cv__caption{
+  max-width:62ch;
+  min-height:3.2em;
+  padding-top:14px;
+  text-align:center;
+  font-size:var(--fs-sm);
+  line-height:1.5;
+  color:var(--on-purple-soft);
+}
+.cv__credit{
+  display:block;
+  color:var(--on-purple-mute);
+  font-size:var(--fs-xs);
+  letter-spacing:.02em;
+}
+.cv__credit[hidden]{ display:none; }
+
+.cv__bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  padding:6px 16px 20px;
+}
+
+.cv__count{
+  margin:0;
+  min-width:6ch;
+  text-align:center;
+  font-size:var(--fs-xs);
+  letter-spacing:.14em;
+  font-variant-numeric:tabular-nums;
+  color:var(--on-purple-mute);
+}
+
+.cv__btn{
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  cursor:pointer;
+  background:rgba(245,238,242,.08);
+  border:1px solid rgba(245,238,242,.22);
+  color:var(--on-purple);
+  transition:background .22s var(--e), color .22s var(--e), border-color .22s var(--e);
+}
+.cv__btn:hover{ background:var(--gold); color:var(--purple-ink); border-color:var(--gold); }
+.cv__btn:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+.cv__close{
+  position:absolute;
+  top:calc(env(safe-area-inset-top, 0px) + 10px);
+  right:calc(env(safe-area-inset-right, 0px) + 10px);
+  z-index:2;
+}
+
+/* On a wide window next and previous sit either side of the photograph,
+   where the eye already is; the count stays below it. */
+@media (min-width:641px){
+  .cv__prev, .cv__next{
+    position:absolute;
+    top:calc(50% - 30px);
+  }
+  .cv__prev{ left:calc(env(safe-area-inset-left, 0px) + clamp(8px, 1.6vw, 28px)); }
+  .cv__next{ right:calc(env(safe-area-inset-right, 0px) + clamp(8px, 1.6vw, 28px)); }
+}
+
+/* On a phone the photograph takes the whole width, and the controls go
+   below it, under the thumb. */
+@media (max-width:640px){
+  .cv{
+    --cv-pad-x:0px;
+    --cv-pad-top:60px;
+    --cv-reserve:210px;
+  }
+  .cv__caption{ padding-inline:16px; }
+  .cv__bar{ justify-content:space-between; padding:6px 16px 18px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cg__item img{ transition:none; }
+  .cg__item:hover img{ transform:none; }
+  .cv__frame img.is-entering{ animation:none; }
+}

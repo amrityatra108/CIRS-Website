@@ -129,11 +129,17 @@ async function initialise(){
     texture.generateMipmaps=false;
   }
 
+<<<<<<< HEAD
   // Where the pointer rests when there is no pointer. Every tear is scaled
   // by proximity() to this, so a value on the face means every tear is wide
   // open before the cursor has arrived and again the moment it leaves --
   // which is exactly what (.5,.5) was doing. Below the frame, everything is
   // shut.
+=======
+  // The cursor is parked below the composition until it enters. Its trail
+  // steers the neutral fluid field, but never cuts a hole through either
+  // face.
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   const PARK=new THREE.Vector2(.5,-.75);
 
   const uniforms={
@@ -175,6 +181,7 @@ async function initialise(){
         vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);
         return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),f.x),mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0)),f.x),f.y);
       }
+<<<<<<< HEAD
       // The tears. These were written to be driven by the cursor -- every
       // one of them is multiplied by proximity() to the pointer -- and then
       // never called: main() took its reveal from the flow field instead,
@@ -224,10 +231,13 @@ async function initialise(){
         return r*smoothstep(.05,.26,r);
       }
 
+=======
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       void main(){
         vec4 base=texture2D(uMenon,vUv);
         vec4 transformed=texture2D(uGurudev,vUv);
 
+<<<<<<< HEAD
         // A continuous domain-warped field spans the whole registered image.
         // Autonomous flow changes visibility while photographs stay registered.
         vec2 p=vUv;
@@ -282,6 +292,31 @@ async function initialise(){
         // faint and kept inside the tear.
         float localWarmth=smoothstep(.49,.51,contour)*(1.0-smoothstep(.505,.525,contour))*reveal*.035;
         composed.rgb=mix(composed.rgb,vec3(.68,.45,.19),localWarmth);
+=======
+        // Hover controls the state: Menon while the pointer is away, Gurudev
+        // while it is over the portrait. The state changes as one complete
+        // registered portrait, never as a face/body blend.
+        float reveal=step(.5,uActive);
+        vec4 composed=mix(base,transformed,reveal);
+
+        // A soft monochrome field ripples through the entire silhouette while
+        // the state changes. It follows the cursor with a delayed wake, but
+        // does not mask, distort, or recolour the historical photographs.
+        float t=uTime*.34;
+        vec2 drift=(uTrail[1]-vec2(.5))*.62+(uTrail[0]-uTrail[1])*1.35;
+        vec2 q=vUv*vec2(4.1,3.3)-drift+vec2(t*.38,-t*.27);
+        vec2 warp=vec2(noise(q+vec2(t,-t*.55)),noise(q+vec2(6.1-t*.61,2.7+t*.44)));
+        float field=noise(q+warp*1.55+vec2(t*.18,-t*.13));
+        float detail=noise(q*2.35-warp*.52+vec2(-t*.14,t*.19));
+        float fluid=smoothstep(.28,.74,field*.78+detail*.22);
+        float silhouette=smoothstep(.018,.22,max(base.a,transformed.a));
+        float transfer=sin(clamp(uActive,0.0,1.0)*3.14159265);
+        float veil=(.28+fluid*.72)*transfer*silhouette;
+        float luminance=dot(composed.rgb,vec3(.2126,.7152,.0722));
+        vec3 neutral=vec3(luminance*1.035+.018);
+        composed.rgb=mix(composed.rgb,neutral,veil*.62);
+        composed.rgb+=vec3(.028)*veil;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         gl_FragColor=composed;
       }
     `
@@ -294,7 +329,11 @@ async function initialise(){
   scene.add(plane);
 
   const state={
+<<<<<<< HEAD
     frame:0,lastFrame:0,elapsed:0,inView:true,inside:false,inHero:false,touch:false,lastEvent:0,lastHeroEvent:0,lastMove:performance.now(),active:1,targetActive:1,velocity:0,targetVelocity:0,
+=======
+    frame:0,lastFrame:0,elapsed:0,inView:true,inside:false,inHero:false,touch:false,lastEvent:0,lastHeroEvent:0,lastMove:performance.now(),active:0,targetActive:0,velocity:0,targetVelocity:0,
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     rx:0,ry:0,tx:0,ty:0,scale:1,targetRx:0,targetRy:0,targetTx:0,targetTy:0,targetScale:1,
     bgX:0,bgY:0,targetBgX:0,targetBgY:0,
     ringX:innerWidth*.5,ringY:innerHeight*.5,targetCursorX:innerWidth*.5,targetCursorY:innerHeight*.5
@@ -338,7 +377,11 @@ async function initialise(){
   }
   function leave(){
     uniforms.uPointer.value.copy(PARK);
+<<<<<<< HEAD
     state.inside=false;state.touch=false;state.targetVelocity=0;state.targetRx=0;state.targetRy=0;state.targetTx=0;state.targetTy=0;state.targetScale=1;
+=======
+    state.inside=false;state.touch=false;state.targetActive=0;state.targetVelocity=0;state.targetRx=0;state.targetRy=0;state.targetTx=0;state.targetTy=0;state.targetScale=1;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     cursor.classList.remove("is-over-portrait");requestRender();
   }
   function bounds(event){
@@ -368,12 +411,19 @@ async function initialise(){
     const dt=state.lastFrame?Math.min((time-state.lastFrame)/16.667,3):1;
     state.lastFrame=time;
     state.elapsed+=dt/60;
+<<<<<<< HEAD
     state.active+=(state.targetActive-state.active)*(state.targetActive>.5 ? 0.34 : 0.2);
+=======
+    // A deliberate, short handoff lets the neutral field travel across the
+    // full body before and after the complete portrait state changes.
+    state.active+=(state.targetActive-state.active)*(state.targetActive>.5 ? .055 : .05);
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     state.velocity+=(state.targetVelocity-state.velocity)*.18;
     state.targetVelocity*=.78;
     state.rx+=(state.targetRx-state.rx)*.09;state.ry+=(state.targetRy-state.ry)*.09;
     state.tx+=(state.targetTx-state.tx)*.09;state.ty+=(state.targetTy-state.ty)*.09;state.scale+=(state.targetScale-state.scale)*.09;
     state.bgX+=(state.targetBgX-state.bgX)*.035;state.bgY+=(state.targetBgY-state.bgY)*.035;
+<<<<<<< HEAD
     state.ringX+=(state.targetCursorX-state.ringX)*.22;state.ringY+=(state.targetCursorY-state.ringY)*.22;
     const trail=uniforms.uTrail.value;
     // uPrevious is what the tears follow. It used to be stepped 72% of the
@@ -382,6 +432,14 @@ async function initialise(){
     // instead, per frame and frame-rate corrected, is what makes a tear open
     // and close smoothly under the hand -- and it is what lets the pointer
     // ease back to PARK when the cursor leaves instead of snapping shut.
+=======
+    const ringEase=1-Math.pow(.80,dt);
+    state.ringX+=(state.targetCursorX-state.ringX)*ringEase;state.ringY+=(state.targetCursorY-state.ringY)*ringEase;
+    const trail=uniforms.uTrail.value;
+    // The ink sweep reads this slow pointer trail as a very slight global
+    // bend. Easing it per frame prevents mouse-event-rate jumps while the
+    // portraits themselves remain perfectly fixed.
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     uniforms.uPrevious.value.lerp(uniforms.uPointer.value,1-Math.pow(.90,dt));
     trail[0].lerp(uniforms.uPointer.value,1-Math.pow(.86,dt));
     trail[1].lerp(trail[0],1-Math.pow(.965,dt));
@@ -394,7 +452,13 @@ async function initialise(){
     parallaxLayers.front.style.transform=`translate3d(${-state.bgX*12}px,${-state.bgY*7}px,0)`;
     cursorRing.style.transform=`translate3d(${state.ringX}px,${state.ringY}px,0)`;
     renderer.render(scene,camera);
+<<<<<<< HEAD
     if(uniforms.uPrevious.value.distanceTo(uniforms.uPointer.value)>.0015||Math.abs(state.active-state.targetActive)>.002||state.active>.002||state.velocity>.003||Math.abs(state.rx-state.targetRx)>.002||Math.abs(state.ry-state.targetRy)>.002||Math.abs(state.tx-state.targetTx)>.02||Math.abs(state.ty-state.targetTy)>.02||Math.abs(state.scale-state.targetScale)>.0001||Math.abs(state.bgX-state.targetBgX)>.002||Math.abs(state.bgY-state.targetBgY)>.002||Math.abs(state.ringX-state.targetCursorX)>.08||Math.abs(state.ringY-state.targetCursorY)>.08)requestRender();
+=======
+    // Keep the field alive while the pointer is over the portrait and while
+    // its in/out transition settles; otherwise leave the GPU idle.
+    if(state.inside||uniforms.uPrevious.value.distanceTo(uniforms.uPointer.value)>.0015||Math.abs(state.active-state.targetActive)>.002||state.velocity>.003||Math.abs(state.bgX-state.targetBgX)>.002||Math.abs(state.bgY-state.targetBgY)>.002||Math.abs(state.ringX-state.targetCursorX)>.08||Math.abs(state.ringY-state.targetCursorY)>.08)requestRender();
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   }
 
   prototype.addEventListener("pointermove",sceneMove,{passive:true});

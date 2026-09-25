@@ -221,7 +221,11 @@
     }
 
     /* ---- the cursor label --------------------------------- */
+<<<<<<< HEAD
     if (fine.matches && !reduced) cursorLabel();
+=======
+    if (canMove && fine.matches && !reduced) cursorLabel();
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     return { field: field, points: points, lines: lines };
   }
@@ -244,8 +248,12 @@
     var zones = [
       [".ajc__pt", "Open"],
       [".ajc__panelClose", "Close"],
+<<<<<<< HEAD
       [".ajw__evName[href]", "Read"],
       [".ajw-track.is-live", "Scroll"]
+=======
+      [".ajw__evName[href]", "Read"]
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     ];
 
     var x = null, y = null;
@@ -270,6 +278,7 @@
     }, { passive: true });
 
     document.addEventListener("pointerleave", function () { tag.classList.remove("is-on"); });
+<<<<<<< HEAD
   }
 
   /* ==========================================================
@@ -463,12 +472,145 @@
 
     field.insertBefore(svg, field.firstChild);
     return { svg: svg, twinklers: twinklers };
+=======
+    window.addEventListener("scroll", function () { tag.classList.remove("is-on"); }, { passive: true });
+  }
+
+  /* ==========================================================
+     The flights
+     ----------------------------------------------------------
+     One aircraft per route, flying out of Siruvani and fading
+     as it arrives, then away and out again. Each is turned to
+     its heading every frame, so it flies along the curve of its
+     route rather than sliding down it. They are drawn into
+     the routes' own SVG so they share its frame exactly, and
+     they are moved along the routes' own geometry — each path
+     is sampled once into a table of points and the light is
+     read out of the table — so an aircraft cannot drift off
+     the line it belongs to, and no route is measured twice.
+
+     Nothing here carries information. A route that is filtered
+     out or dimmed takes its aircraft down with it; a route that
+     is asked about brightens its own. Decoration that contradicts
+     the state underneath it is worse than no decoration.
+     ========================================================== */
+  function buildFlights() {
+    var field = $("[data-constellation-field]");
+    var host = $("[data-flights]");
+    if (!field || !host) return null;
+
+    var NS = "http://www.w3.org/2000/svg";
+    var routes = $$(".ajc__line:not(.ajc__leader)", field);
+    if (!routes.length) return null;
+
+    var SAMPLES = 96;
+
+    // The aircraft, nose along +x, drawn once as one silhouette at the
+    // size it flies: about two frame units nose to tail, a dozen pixels
+    // at full width. Half an outline, mirrored, so it cannot come out
+    // lopsided — nose, fuselage, swept wing, tailplane, tail.
+    var PLANE = (function () {
+      var k = 0.09;
+      var half = [[12, 0], [10.6, -1.6], [3, -1.6], [-2.6, -11], [-5, -11],
+                  [-2.2, -1.6], [-8.4, -1.4], [-10.8, -5], [-12.6, -5],
+                  [-11.2, -0.8], [-12, 0]];
+      var pts = half.concat(half.slice(1, -1).reverse().map(function (p) {
+        return [p[0], -p[1]];
+      }));
+      return "M" + pts.map(function (p) {
+        return (p[0] * k).toFixed(3) + " " + (p[1] * k).toFixed(3);
+      }).join(" L") + "Z";
+    })();
+    var flights = [];
+
+    routes.forEach(function (path, i) {
+      var len = path.getTotalLength();
+      if (!len) return;
+      // The line's shape, read once. getPointAtLength is cheap enough
+      // one at a time and far too dear sixty times a second.
+      var xs = new Float32Array(SAMPLES + 1);
+      var ys = new Float32Array(SAMPLES + 1);
+      for (var k = 0; k <= SAMPLES; k++) {
+        var pt = path.getPointAtLength(len * k / SAMPLES);
+        xs[k] = pt.x; ys[k] = pt.y;
+      }
+      var plane = document.createElementNS(NS, "path");
+      plane.setAttribute("class", "ajc__flight");
+      plane.setAttribute("d", PLANE);
+      plane.setAttribute("opacity", "0");
+      host.appendChild(plane);
+      flights.push({
+        path: path, node: plane, xs: xs, ys: ys,
+        // Staggered starts and slightly different speeds, fixed per
+        // route, so the nineteen never fall into step and start to
+        // read as a machine rather than as traffic.
+        t: (i * 0.137) % 1,
+        speed: 0.055 + (i % 5) * 0.011,
+        fade: 0
+      });
+    });
+    if (!flights.length) return null;
+
+    var last = 0;
+    var running = false;
+
+    function frame(now) {
+      if (!running) return;
+      var dt = last ? Math.min((now - last) / 1000, 0.1) : 0;
+      last = now;
+      flights.forEach(function (f) {
+        f.t = (f.t + f.speed * dt) % 1;
+        var cls = f.path.classList;
+        // The route's own state decides the light's: out of the filter
+        // is dark, asked about is brighter than the rest.
+        var want = cls.contains("is-dim") ? 0 : (cls.contains("is-lit") ? 1 : 0.62);
+        f.fade += (want - f.fade) * Math.min(dt * 5, 1);
+        if (f.fade < 0.01) { f.node.setAttribute("opacity", "0"); return; }
+        var k = f.t * SAMPLES;
+        var i0 = Math.floor(k), u = k - i0;
+        var i1 = Math.min(i0 + 1, SAMPLES);
+        var dx = f.xs[i1] - f.xs[i0], dy = f.ys[i1] - f.ys[i0];
+        // Heading is the direction of the sample it is flying through.
+        // The frame's scale is the same both ways, so the angle measured
+        // here is the angle drawn.
+        f.node.setAttribute("transform",
+          "translate(" + (f.xs[i0] + dx * u).toFixed(2) + " " +
+                         (f.ys[i0] + dy * u).toFixed(2) + ") rotate(" +
+          (Math.atan2(dy, dx) * 57.29578).toFixed(1) + ")");
+        // In at the start of the run, out at the end of it, so a plane
+        // arrives rather than vanishing mid-ocean.
+        var env = Math.min(f.t / 0.14, 1) * Math.min((1 - f.t) / 0.2, 1);
+        f.node.setAttribute("opacity", (env * f.fade).toFixed(3));
+      });
+      requestAnimationFrame(frame);
+    }
+
+    return {
+      flights: flights,
+      play: function () {
+        // Below 900px the map is a list and its SVG is not drawn, so
+        // there is nothing for a light to run along. Checked here rather
+        // than at build time because a tablet can be turned.
+        if (running || !host.getClientRects().length) return;
+        running = true; last = 0;
+        requestAnimationFrame(frame);
+      },
+      pause: function () {
+        running = false;
+        flights.forEach(function (f) { f.node.setAttribute("opacity", "0"); });
+      }
+    };
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   }
 
   /* ==========================================================
      Motion
      ========================================================== */
+<<<<<<< HEAD
   function motion(parts, sky) {
+=======
+  function motion(parts, flights) {
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     /* ---- chapter 1: the opening --------------------------- */
     /* The site opens every page behind a full-screen curtain that cirs.js
        holds for up to 4.2 seconds, with the scroll locked under it. An
@@ -628,13 +770,18 @@
           .to(copy, { opacity: 1, y: 0, ease: "power2.out", duration: .7 }, .45);
       }
 
+<<<<<<< HEAD
       /* chapter 5: the pathway rail, pinned and dragged sideways */
+=======
+      /* chapter 5: one stable pathway frame, advanced by normal scrolling */
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       var track = $("[data-pathways]");
       var rail = $("[data-pathways-rail]");
       if (!track || !rail) return;
 
       var scenes = $$(".ajw", rail);
       var dots = $$(".ajw__dot");
+<<<<<<< HEAD
       var section = $(".aj-paths");
       var current = -1;
       // How far the rail actually has to travel sideways.
@@ -684,6 +831,46 @@
          reduced motion, or the engine having failed to load. */
       function goto(n) {
         var trig = railTween.scrollTrigger;
+=======
+      var current = -1;
+      var travel = function () {
+        return Math.round(window.innerHeight * scenes.length * .85);
+      };
+      function show(i) {
+        if (i === current) return;
+        current = i;
+        scenes.forEach(function (scene, n) {
+          var active = n === i;
+          if (!active && scene.contains(document.activeElement)) {
+            dots[i].focus({ preventScroll: true });
+          }
+          scene.classList.toggle("is-on", active);
+          scene.inert = !active;
+          scene.setAttribute("aria-hidden", active ? "false" : "true");
+        });
+        dots.forEach(function (dot, n) {
+          dot.classList.toggle("is-on", n === i);
+          if (n === i) dot.setAttribute("aria-current", "step");
+          else dot.removeAttribute("aria-current");
+        });
+      }
+      track.classList.add("is-live");
+      show(0);
+
+      var pathwayTrigger = ScrollTrigger.create({
+        trigger: track, start: "top top",
+        end: function () { return "+=" + travel(); },
+        pin: true, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          show(Math.min(scenes.length - 1, Math.round(self.progress * (scenes.length - 1))));
+        }
+      });
+
+      /* Dots use the page's scroll controller when present, with native
+         smooth scrolling as the fallback. */
+      function goto(n) {
+        var trig = pathwayTrigger;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         if (!trig) return;
         var p = scenes.length > 1 ? n / (scenes.length - 1) : 0;
         var top = Math.round(trig.start + (trig.end - trig.start) * p);
@@ -694,6 +881,7 @@
         // defaultPrevented means the engine took it; otherwise do it here.
         if (!ev.defaultPrevented) window.scrollTo({ top: top, behavior: "smooth" });
       }
+<<<<<<< HEAD
       dots.forEach(function (d, n) { d.addEventListener("click", function () { goto(n); }); });
 
       track.classList.add("is-live");
@@ -707,6 +895,27 @@
         scenes.forEach(function (s) { s.classList.add("is-on"); });
         dots.forEach(function (d) { d.classList.remove("is-on"); });
         if (section) gsap.set(section, { clearProps: "backgroundColor" });
+=======
+      var handlers = dots.map(function (dot, n) {
+        var handler = function () { goto(n); };
+        dot.addEventListener("click", handler);
+        return handler;
+      });
+
+      return function () {
+        // Leaving the desktop query: return every scene to reading order.
+        track.classList.remove("is-live");
+        scenes.forEach(function (s) {
+          s.classList.add("is-on");
+          s.inert = false;
+          s.removeAttribute("aria-hidden");
+        });
+        dots.forEach(function (d, n) {
+          d.classList.remove("is-on");
+          d.removeAttribute("aria-current");
+          d.removeEventListener("click", handlers[n]);
+        });
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         current = -1;
       };
     });
@@ -726,6 +935,7 @@
       $$(".ajw").forEach(function (s) { s.classList.add("is-on"); });
     });
 
+<<<<<<< HEAD
     /* ---- chapter 3: the field comes up -------------------- */
     var cField = $("[data-constellation-field]");
     if (cField) {
@@ -733,10 +943,36 @@
       var cPoints = $$(".ajc__pt", cField);
 
       cLines.forEach(function (l) {
+=======
+    /* ---- chapter 3: the map comes up ---------------------- */
+    /* In the order a reader can follow: the world arrives first, then
+       Siruvani lights on it, and only then do the routes run out of
+       Siruvani to the nineteen. Each route is drawn from its own start,
+       which is the origin, so the whole thing grows outward from India
+       rather than appearing at both ends at once. The routes are
+       staggered by how far they go — India first, then Britain, then
+       the Americas — which is the same order a reader's eye takes. */
+    var cField = $("[data-constellation-field]");
+    if (cField) {
+      var cMap = $(".ajc__map", cField);
+      var cOrigin = $(".ajc__origin", cField);
+      var cPoints = $$(".ajc__pt", cField);
+      // Only the routes are drawn. A leader is a name's tether, not a
+      // journey, and drawing the short ones first would have put every
+      // tether on the map before the first route left India.
+      var cRoutes = $$(".ajc__line:not(.ajc__leader)", cField);
+      var cLeaders = $$(".ajc__leader", cField);
+
+      var byReach = cRoutes.sort(function (a, b) {
+        return a.getTotalLength() - b.getTotalLength();
+      });
+      byReach.forEach(function (l) {
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         var d = l.getTotalLength();
         gsap.set(l, { strokeDasharray: d, strokeDashoffset: d, opacity: 1 });
       });
 
+<<<<<<< HEAD
       gsap.timeline({
         scrollTrigger: { trigger: cField, start: "top 78%", once: true }
       })
@@ -766,6 +1002,40 @@
             tws.forEach(function (t) { self.isActive ? t.play() : t.pause(); });
           });
         }
+=======
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: cField, start: "top 78%", once: true }
+      });
+      /* fromTo, not from: the sheet already holds these at opacity 0
+         under html.js-motion, so a from() would read that 0 as the
+         value to arrive at and animate nothing to nothing. */
+      if (cMap) tl.fromTo(cMap, { opacity: 0 },
+        { opacity: 1, duration: 1.1, ease: "power2.out" }, 0);
+      if (cOrigin) {
+        tl.fromTo(cOrigin, { opacity: 0 },
+            { opacity: 1, duration: .5, ease: "power2.out" }, .45)
+          .fromTo($(".ajc__originDot", cOrigin), { scale: .2 },
+            { scale: 1, duration: .9, ease: "back.out(2.4)" }, .45);
+      }
+      tl.to(byReach, {
+          strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut", stagger: .05
+        }, .85)
+        .to(cPoints, {
+          opacity: 1, duration: .5, ease: "power2.out", stagger: .04
+        }, 1.15)
+        .fromTo(cLeaders, { opacity: 0 },
+          { opacity: 1, duration: .5, ease: "power2.out", stagger: .04 }, 1.25);
+    }
+
+    /* ---- the lights on the routes ------------------------- */
+    /* Nothing off-screen should be animating. */
+    if (flights) {
+      ScrollTrigger.create({
+        trigger: "[data-constellation-field]",
+        start: "top bottom", end: "bottom top",
+        onToggle: function (self) { self.isActive ? flights.play() : flights.pause(); },
+        onRefresh: function (self) { if (self.isActive) flights.play(); }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       });
     }
 
@@ -833,7 +1103,11 @@
      transform:none, which is a different thing entirely on this page:
      every one of the nineteen destinations is placed on its arm with
      translate(-50%,-50%), so clearing transforms would have unpinned all
+<<<<<<< HEAD
      of them from the galaxy. The only transforms that genuinely have to
+=======
+     of them from the map. The only transforms that genuinely have to
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
      be undone are the two headline rows', and those are done by name,
      through GSAP, which knows what it set. */
   function failOpen() {
@@ -847,6 +1121,12 @@
        "[data-portal-plate], [data-portal-copy], [data-portal-depth]").forEach(function (el) {
       if (parseFloat(getComputedStyle(el).opacity) < .05) el.style.opacity = "1";
     });
+<<<<<<< HEAD
+=======
+    $$(".ajc__map, .ajc__origin").forEach(function (el) {
+      if (parseFloat(getComputedStyle(el).opacity) < .05) el.style.opacity = "1";
+    });
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     $$(".ajc__line").forEach(function (el) {
       if (parseFloat(getComputedStyle(el).opacity) < .05) el.style.opacity = "1";
       if (el.style.strokeDashoffset) el.style.strokeDashoffset = "0";
@@ -867,9 +1147,17 @@
 
   function start() {
     var parts = interactions();
+<<<<<<< HEAD
     var sky = buildSky();
     if (canMove) {
       try { motion(parts, sky); }
+=======
+    // The lights only ever run inside motion(); building them when there
+    // is none would put nineteen aircraft on the map that never move.
+    var flights = canMove ? buildFlights() : null;
+    if (canMove) {
+      try { motion(parts, flights); }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       catch (err) { failOpen(); }
       /* The sweep fires ONLY if nothing got built. It used to fire on a
          plain timer, and that made it a saboteur rather than a safety

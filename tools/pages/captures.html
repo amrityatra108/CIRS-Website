@@ -1,0 +1,117 @@
+<!-- The featured photographs. The first is the one the camera dissolves to:
+     with the motion running, this section lies over the last screen
+     of the opening and takes over from it on the frame the opening ends on,
+     so the photograph simply stays — then moves once, into the first of
+     three compositions drawn from the supplied photographs.
+     assets/js/captures-featured.js drives it and
+     assets/css/captures-featured.css lays it out. With reduced motion, a
+     film that fails or no JavaScript, the same three compositions are
+     simply three still screens, and the photograph that opened out of the
+     camera dissolve appears in the first of them. -->
+<section class="cf" id="featured" aria-labelledby="cf-title" data-cf
+         data-cf-phases="60 70 70 60 70 60 60">
+  <h2 class="sr-only" id="cf-title">Four photographs</h2>
+  <div class="cf__stage" data-cf-stage>
+    <div class="cf__lead" data-cf-lead aria-hidden="true">
+      <picture>
+        <source media="(max-aspect-ratio: 6/5)"
+                srcset="assets/img/captures-shot-portrait.jpg" width="810" height="1080">
+        <img src="assets/img/captures-shot.jpg" width="1425" height="1080" alt=""
+             loading="lazy" decoding="async">
+      </picture>
+    </div>
+    <p class="cf__restcap" data-cf-restcap aria-hidden="true">{{CAPTURES_LEAD_CAPTION}}</p>
+
+    <div class="cf__frame cf__frame--pair" data-cf-frame>
+      <figure class="cf__fig cf__fig--lead">
+        <div class="cf__pic" data-cf-slot>
+          <picture>
+            <source media="(max-aspect-ratio: 6/5)"
+                    srcset="assets/img/captures-shot-portrait.jpg" width="810" height="1080">
+            <img src="assets/img/captures-shot.jpg" width="1425" height="1080"
+                 alt="{{CAPTURES_LEAD_CAPTION}}" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption>{{CAPTURES_LEAD_CAPTION}}</figcaption>
+      </figure>
+      <figure class="cf__fig cf__fig--companion" data-cf-enter>
+        <div class="cf__pic">{{CAPTURES_FEATURED:companion}}</div>
+        <figcaption>{{CAPTURES_FEATURED_CAPTION:companion}}</figcaption>
+      </figure>
+    </div>
+
+    <div class="cf__frame cf__frame--portrait" data-cf-frame>
+      <figure class="cf__fig cf__fig--portrait">
+        <div class="cf__pic">{{CAPTURES_FEATURED:portrait}}</div>
+        <figcaption>{{CAPTURES_FEATURED_CAPTION:portrait}}</figcaption>
+      </figure>
+    </div>
+
+    <div class="cf__frame cf__frame--band" data-cf-frame>
+      <figure class="cf__fig cf__fig--wide">
+        <div class="cf__pic">{{CAPTURES_FEATURED:wide}}</div>
+        <figcaption>{{CAPTURES_FEATURED_CAPTION:wide}}</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<div class="film__seam" aria-hidden="true"></div>
+
+<!-- The journal. Each photograph is visible once in a chapter. Every tile
+     links to its full-size image; assets/js/captures-gallery.js opens that
+     link in the viewer when scripting is available. The order, captions and
+     chapter index come from tools/captures.py. -->
+<section class="section cg" id="photographs" aria-labelledby="cg-title">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">The photographs</span></p>
+      <h2 class="serif h2" id="cg-title" data-split>Look a little closer.</h2>
+      <p class="lead">{{CAPTURES_COUNT_CAP}} more photographs move from small creatures
+        and open views to moments together. Choose a chapter, or open any frame.</p>
+    </div>
+    {{CAPTURES_CHAPTER_NAV}}
+    <div class="cg__journal" data-cg>
+{{CAPTURES_GALLERY}}
+    </div>
+    <p class="note cg__note">Photographer credits will be added when confirmed.</p>
+  </div>
+</section>
+
+<!-- The ending: one photograph, seen once, and the way out. Kept still on
+     purpose — the page has already had its long movement at the top. -->
+<section class="cg-end" id="last-frame" aria-label="The last photograph">
+  <figure class="cg-end__figure">
+    {{CAPTURES_END}}
+    <figcaption class="cg-end__caption wrap">{{CAPTURES_END_CAPTION}}</figcaption>
+  </figure>
+  <div class="wrap cg-end__onward">
+    <a class="btn btn--outline" href="#photographs">Back to the photographs</a>
+    <a class="btn btn--primary" href="the-cirs-experience.html">THE CIRS EXPERIENCE</a>
+  </div>
+</section>
+
+<!-- The viewer. Its photograph is made by the script, which knows which one
+     was asked for; everything else is here so that it can be read. -->
+<dialog class="cv" id="capturesViewer" aria-label="Photograph viewer" data-cv data-lenis-prevent>
+  <button class="cv__btn cv__close" type="button" data-cv-close aria-label="Close the viewer">
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 3.5l11 11M14.5 3.5l-11 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
+  <div class="cv__stage" data-cv-stage>
+    <figure class="cv__figure">
+      <div class="cv__frame" data-cv-frame></div>
+      <figcaption class="cv__caption" aria-live="polite">
+        <span class="cv__text" data-cv-caption></span>
+        <span class="cv__credit" data-cv-credit hidden></span>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="cv__bar">
+    <button class="cv__btn cv__prev" type="button" data-cv-prev aria-label="Previous photograph">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3.5L5.5 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <p class="cv__count" data-cv-count></p>
+    <button class="cv__btn cv__next" type="button" data-cv-next aria-label="Next photograph">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M7 3.5L12.5 9 7 14.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</dialog>

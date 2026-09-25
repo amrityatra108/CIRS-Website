@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* A published article of the CIRS Blog.
 
    Scoped to body.blog, which every article page carries. The front page of the
@@ -117,3 +118,170 @@ body.blog{ background: var(--paper); }
 /* The ghost button is built for a dark ground; on paper it needs ink. */
 .btn--ghost-ink{ border-color: var(--rule); color: var(--ink-soft); }
 .btn--ghost-ink:hover{ background: var(--purple); color: #fff; border-color: var(--purple); }
+=======
+/* Reading pages for Ideas from CIRS. The student text remains the focus. */
+body.blog{
+  --art-paper:#FAF7F8;
+  --art-ink:#211B22;
+  --art-soft:#463C46;
+  --art-muted:#675B66;
+  --art-rule:#D6CCD2;
+  --art-gold:#FFC308;
+  background:var(--art-paper);
+  color:var(--art-ink);
+}
+.art{background:var(--art-paper)}
+.art__shell{
+  width:min(100%, 1190px);margin-inline:auto;
+  padding-inline:clamp(20px, 5vw, 64px);
+}
+.art__head{
+  padding-block:clamp(122px, 16vh, 172px) clamp(45px, 6vw, 85px);
+  border-bottom:1px solid var(--art-ink);
+}
+.art__breadcrumb{
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  margin-bottom:clamp(50px, 7vw, 90px);
+  color:var(--art-muted);font-size:14px;
+}
+.art__breadcrumb a{color:var(--art-ink);text-decoration:none;border-bottom:1px solid currentColor}
+.art__breadcrumb a:hover{color:#846300}
+.art__breadcrumb a:focus-visible,.art__rail a:focus-visible,
+.art__foot a:focus-visible,.art__related a:focus-visible{
+  outline:3px solid var(--art-gold);outline-offset:4px;
+}
+.art__edition{
+  display:flex;align-items:center;gap:10px;
+  margin:0 0 19px;color:#765A00;font-size:15px;
+}
+.art__edition span{color:var(--art-rule)}
+.art__title{
+  max-width:1050px;margin:0;
+  font-family:var(--font-primary);font-size:clamp(3.4rem, 7.2vw, 7.9rem);
+  line-height:.94;letter-spacing:-.053em;font-weight:500;
+  text-wrap:balance;overflow-wrap:anywhere;
+}
+.art__subtitle{
+  max-width:60ch;margin:clamp(22px, 3vw, 38px) 0 0;
+  color:var(--art-soft);font-size:clamp(19px, 2vw, 25px);
+  line-height:1.4;
+}
+.art__credits{
+  display:flex;flex-wrap:wrap;gap:6px clamp(16px, 3vw, 40px);
+  border-top:1px solid var(--art-rule);
+  margin-top:clamp(45px, 6vw, 76px);padding-top:18px;
+  color:var(--art-muted);font-size:15px;line-height:1.4;
+}
+.art__credits span:first-child{color:var(--art-ink)}
+.art__layout{
+  display:grid;grid-template-columns:minmax(130px,175px) minmax(0,735px);
+  gap:clamp(35px, 6vw, 90px);
+  width:min(100%, 1190px);margin-inline:auto;
+  padding:clamp(45px, 7vw, 88px) clamp(20px, 5vw, 64px) clamp(50px, 8vw, 100px);
+}
+.art__rail{
+  align-self:start;position:sticky;top:105px;
+  padding-top:4px;border-top:5px solid var(--art-gold);
+  color:var(--art-muted);font-size:14px;line-height:1.45;
+}
+.art__rail p{margin:20px 0 8px}
+.art__rail strong{
+  display:block;margin-bottom:26px;
+  color:var(--art-ink);font-size:clamp(1.45rem, 2vw, 1.85rem);
+  line-height:1.12;font-weight:500;
+}
+.art__rail a{
+  display:block;width:max-content;max-width:100%;margin-bottom:12px;
+  color:var(--art-ink);text-decoration:none;border-bottom:1px solid currentColor;
+}
+.art__rail a:hover,.art__foot a:hover{text-decoration:underline}
+.art__content{min-width:0}
+.art__hero{margin:0 0 clamp(34px, 5vw, 62px)}
+.art__hero img{
+  display:block;width:100%;height:auto;max-height:70vh;
+  object-fit:contain;object-position:center;
+  background:#EFEAED;
+}
+.art__hero figcaption{
+  padding-top:10px;color:var(--art-muted);
+  font-size:13px;line-height:1.4;
+}
+.art__body{max-width:72ch}
+.art__body h2{
+  margin:2.3em 0 .65em;
+  color:var(--art-ink);
+  font-family:var(--font-primary);
+  font-size:clamp(1.8rem, 3vw, 2.65rem);
+  font-weight:500;
+  line-height:1.1;
+  letter-spacing:-.035em;
+}
+.art__body p{
+  margin:0 0 1.2em;color:var(--art-soft);
+  font-size:clamp(18px, 1.45vw, 20px);
+  line-height:1.72;letter-spacing:.003em;
+  overflow-wrap:break-word;
+}
+.art__body p:first-child{font-size:clamp(20px, 1.7vw, 23px);line-height:1.55;color:var(--art-ink)}
+.art__body p:last-child{margin-bottom:0}
+.art__foot{
+  display:flex;justify-content:space-between;gap:20px;
+  border-top:1px solid var(--art-ink);
+  padding:28px 0 clamp(55px, 7vw, 100px);
+}
+.art__foot p{margin:0;color:var(--art-muted);font-size:16px;line-height:1.4}
+.art__foot a{
+  display:inline-block;margin:0 0 12px 24px;
+  color:var(--art-ink);font-size:15px;text-decoration:none;
+  border-bottom:1px solid currentColor;
+}
+.art__related{border-top:1px solid var(--art-rule);padding-bottom:clamp(70px, 9vw, 120px)}
+.art__related h2{
+  margin:28px 0 36px;font-size:clamp(2.3rem, 4vw, 4.5rem);
+  font-weight:500;line-height:1;letter-spacing:-.04em;
+}
+.art__related ul{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(20px, 3vw, 50px);padding:0;margin:0;list-style:none;
+}
+.art__related li{border-top:1px solid var(--art-rule);padding-top:18px}
+.art__related a{display:block;color:var(--art-ink);text-decoration:none}
+.art__related a span{
+  display:block;margin-bottom:15px;
+  color:#765A00;font-size:13px;line-height:1.4;
+}
+.art__related a strong{
+  display:block;font-size:clamp(1.5rem, 2.3vw, 2.35rem);
+  line-height:1.08;font-weight:500;letter-spacing:-.025em;
+}
+.art__related a:hover strong{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.1em}
+@media(max-width:800px){
+  .art__layout{grid-template-columns:1fr;gap:30px}
+  .art__rail{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px;
+    position:static;border-top-width:4px;padding-top:8px;
+  }
+  .art__rail p,.art__rail strong,.art__rail a{margin:0}
+  .art__rail strong{font-size:17px}
+  .art__hero img{max-height:62vh}
+}
+@media(max-width:600px){
+  .art__head{padding-bottom:42px}
+  .art__breadcrumb{margin-bottom:52px}
+  .art__title{font-size:clamp(3.2rem, 13vw, 5.4rem)}
+  .art__credits{margin-top:40px;gap:7px 16px}
+  .art__layout{padding-top:36px}
+  .art__rail{display:block}
+  .art__rail p{margin:10px 0 5px}
+  .art__rail strong{margin-bottom:15px}
+  .art__rail a{margin-bottom:8px}
+  .art__body p{font-size:18px;line-height:1.65}
+  .art__foot{display:block}
+  .art__foot div{margin-top:20px}
+  .art__foot a{margin:0 18px 12px 0}
+  .art__related ul{grid-template-columns:1fr;gap:24px}
+}
+@media(prefers-reduced-motion:reduce){
+  .art :is(a,img){scroll-behavior:auto;transition:none}
+}
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168

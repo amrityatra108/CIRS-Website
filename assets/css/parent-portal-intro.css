@@ -1,0 +1,189 @@
+/* Parent Portal: one photograph, editorial type, and immediate entry. */
+.portal-intro{
+  min-height:100svh;
+  display:grid;
+  align-items:center;
+  padding:clamp(116px,13svh,154px) 0 clamp(54px,7svh,86px);
+  overflow:clip;
+  background:var(--purple-ink);
+  color:var(--on-purple);
+}
+.portal-intro__inner{width:min(84vw,1320px);margin-inline:auto}
+.portal-intro__label{
+  margin:0 0 16px;
+  color:var(--gold-lit);
+  font-size:.78rem;
+  font-weight:500;
+  letter-spacing:.17em;
+  line-height:1.2;
+  text-transform:uppercase;
+}
+.portal-intro__stage{position:relative;height:clamp(410px,62svh,680px)}
+.portal-intro__photo{
+  position:absolute;
+  inset:0;
+  display:block;
+  overflow:hidden;
+  border:1px solid rgba(255,195,8,.56);
+  background:var(--purple-deep);
+}
+.portal-intro__photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 64%,rgba(14,11,18,.5) 100%);
+}
+.portal-intro__picture{
+  position:absolute;
+  inset:-24px 0;
+  display:block;
+  will-change:transform;
+}
+.portal-intro__image{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 48%;
+}
+.portal-intro__line{
+  position:absolute;
+  z-index:2;
+  top:50%;
+  right:0;
+  left:0;
+  height:1px;
+  background:var(--gold-lit);
+  opacity:0;
+  transform:scaleX(0);
+  transform-origin:center;
+  pointer-events:none;
+}
+.portal-intro__title{
+  position:absolute;
+  z-index:1;
+  left:clamp(18px,4.1vw,62px);
+  bottom:-.38em;
+  margin:0;
+  color:var(--on-purple);
+  font-family:var(--font-editorial);
+  font-size:clamp(5rem,8.2vw,8.3rem);
+  font-weight:400;
+  letter-spacing:-.07em;
+  line-height:.9;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.portal-intro__title-word{display:inline-block;overflow:hidden;vertical-align:bottom}
+.portal-intro__title-word>span{display:block}
+.portal-intro__title-word+.portal-intro__title-word{margin-left:.18em}
+.portal-intro__after{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:32px;
+  padding-top:clamp(75px,7vw,108px);
+  padding-left:clamp(18px,4.1vw,62px);
+}
+.portal-intro__note{
+  max-width:31ch;
+  margin:0;
+  color:var(--on-purple-soft);
+  font-size:clamp(1.05rem,1.5vw,1.3rem);
+  line-height:1.4;
+}
+.portal-intro__entry{
+  position:relative;
+  display:inline-flex;
+  flex:none;
+  align-items:center;
+  justify-content:center;
+  gap:.32em;
+  min-height:52px;
+  padding:12px 21px;
+  border:1px solid var(--gold);
+  color:var(--gold-lit);
+  font-size:1.03rem;
+  font-weight:500;
+  line-height:1.2;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background-color .22s var(--e),color .22s var(--e);
+  cursor:pointer;
+}
+.portal-intro__entry:hover,
+.portal-intro__entry:focus-visible{background:var(--gold);color:var(--purple-ink)}
+.portal-intro__entry:focus-visible{outline:2px solid var(--gold-lit);outline-offset:5px}
+.portal-intro__entry-border{
+  position:absolute;
+  inset:-1px;
+  width:calc(100% + 2px);
+  height:calc(100% + 2px);
+  overflow:visible;
+  opacity:0;
+  pointer-events:none;
+}
+.portal-intro__entry-border rect{
+  fill:none;
+  stroke:var(--gold);
+  stroke-width:1;
+  stroke-dasharray:1 1;
+  stroke-dashoffset:0;
+  vector-effect:non-scaling-stroke;
+}
+.portal-intro__entry-arrow{display:inline-block;transition:transform .22s var(--e)}
+.portal-intro__entry:hover .portal-intro__entry-arrow,
+.portal-intro__entry:focus-visible .portal-intro__entry-arrow{transform:translateX(5px)}
+html.portal-motion-pending .portal-intro__photo{clip-path:inset(50% 0 50% 0);will-change:clip-path}
+html.portal-motion-pending .portal-intro__image{transform:translateY(10px) scale(1.08);will-change:transform}
+html.portal-motion-pending .portal-intro__line{opacity:1;will-change:transform,opacity}
+html.portal-motion-pending .portal-intro__title-word>span{transform:translateY(110%);will-change:transform}
+html.portal-motion-pending .portal-intro__note,
+html.portal-motion-pending .portal-intro__entry{opacity:0;transform:translateY(16px)}
+html.portal-motion-pending .portal-intro__entry{border-color:transparent}
+html.portal-motion-pending .portal-intro__entry-border{opacity:1}
+html.portal-motion-pending .portal-intro__entry-border rect{stroke-dashoffset:1}
+@media (max-width:900px){
+  .portal-intro__stage{height:clamp(370px,53svh,600px)}
+  .portal-intro__title{font-size:clamp(4.1rem,8.5vw,6.8rem)}
+}
+@media (max-width:700px){
+  .portal-intro{align-items:start;padding:clamp(100px,13svh,124px) 0 48px}
+  .portal-intro__inner{width:calc(100% - 40px)}
+  .portal-intro__label{margin-bottom:12px;font-size:.71rem}
+  .portal-intro__stage{height:clamp(260px,48svh,500px)}
+  .portal-intro__photo::after{
+    background:linear-gradient(180deg,transparent 64%,rgba(14,11,18,.5) 100%);
+  }
+  .portal-intro__title{
+    left:18px;
+    bottom:-.32em;
+    font-size:clamp(2.9rem,11.7vw,4.5rem);
+    line-height:.85;
+    letter-spacing:-.065em;
+    white-space:normal;
+  }
+  .portal-intro__title-word{display:block}
+  .portal-intro__title-word+.portal-intro__title-word{margin-left:0}
+  .portal-intro__after{display:block;padding:64px 4px 0}
+  .portal-intro__note{max-width:34ch;font-size:1.08rem}
+  .portal-intro__entry{margin-top:20px;min-height:54px;padding-inline:22px}
+}
+@media (max-width:380px){
+  .portal-intro__inner{width:calc(100% - 32px)}
+  .portal-intro__title{left:14px}
+  .portal-intro__after{padding-top:58px}
+}
+@media (prefers-reduced-motion:reduce){
+  .portal-intro__picture{will-change:auto}
+  .portal-intro__entry,.portal-intro__entry-arrow{transition:none}
+  html.portal-motion-pending .portal-intro__photo{clip-path:none;will-change:auto}
+  html.portal-motion-pending .portal-intro__image,
+  html.portal-motion-pending .portal-intro__title-word>span,
+  html.portal-motion-pending .portal-intro__note,
+  html.portal-motion-pending .portal-intro__entry{opacity:1;transform:none;will-change:auto}
+  html.portal-motion-pending .portal-intro__line,
+  html.portal-motion-pending .portal-intro__entry-border{opacity:0}
+  html.portal-motion-pending .portal-intro__entry{border-color:var(--gold)}
+}

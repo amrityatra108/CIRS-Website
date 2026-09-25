@@ -7,8 +7,19 @@
 <meta name="description" content="Fee payment and the parent login for CIRS. The Parent Portal on this site is not open yet; both run on the school's existing systems.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/parent-portal.html">
+<<<<<<< HEAD
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+=======
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <meta property="og:type" content="website">
 <meta property="og:title" content="Parent Portal">
 <meta property="og:description" content="Fee payment and the parent login for CIRS. The Parent Portal on this site is not open yet; both run on the school's existing systems.">
@@ -20,6 +31,7 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<<<<<<< HEAD
 <link rel="stylesheet" href="assets/css/fonts.css?b=95">
 <link rel="stylesheet" href="assets/css/cirs.css?b=95">
 <link rel="stylesheet" href="assets/css/pages.css?b=95">
@@ -43,6 +55,36 @@
   <span class="curtain__bar"><i></i></span>
 </div>
 
+=======
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-portal-photo-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-portal-photo-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-portal-photo-1">
+
+<link rel="stylesheet" href="assets/css/connect.css?b=102-portal-photo-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-portal-photo-1">
+<script>
+(function(){
+  if (location.hash || window.scrollY > 8 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.documentElement.classList.add("portal-motion-pending");
+  window.__cirsPortalMotionFallback = window.setTimeout(function(){
+    document.documentElement.classList.remove("portal-motion-pending");
+  }, 8500);
+  document.addEventListener("DOMContentLoaded", function(){
+    window.setTimeout(function(){
+      if (!window.__cirsPortalMotionBooted) document.documentElement.classList.remove("portal-motion-pending");
+    }, 700);
+  }, {once:true});
+})();
+</script>
+<link rel="stylesheet" href="assets/css/parent-portal-intro.css?b=102-portal-photo-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-portal-photo-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-portal-photo-1-drawer-5">
+</head>
+
+<body class="connect parent-portal">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
@@ -64,7 +106,11 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
+<<<<<<< HEAD
 <header class="header is-first-section" id="header">
+=======
+<header class="header" id="header">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -195,55 +241,123 @@
     </div>
   </div>
 </header>
+<<<<<<< HEAD
 <div class="drawer" id="drawer" hidden>
   <nav class="drawer__grid" aria-label="All pages">
     <div>
       <p class="sc" id="dnav-vision">Vision</p>
       <ul aria-labelledby="dnav-vision">
+=======
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="4" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="false" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button" hidden>
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-student-life">Student Life</p>
       <ul aria-labelledby="dnav-student-life">
         <li><a href="student-life.html">Student Life</a></li>
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
       <ul aria-labelledby="dnav-literary-excellence">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
       <ul aria-labelledby="dnav-art-culture-music">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-connect">Connect</p>
       <ul aria-labelledby="dnav-connect">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="true" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button">
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html" aria-current="page">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
   </nav>
   <div class="drawer__utility">
@@ -258,6 +372,64 @@
   </div>
 </div>
 <main id="main">
+=======
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section class="portal-intro" id="portal-intro" aria-label="Parent Portal opening" data-ground="#0E0B12">
+  <div class="portal-intro__inner">
+    <p class="portal-intro__label">CIRS / Parents</p>
+    <div class="portal-intro__stage">
+      <div class="portal-intro__photo">
+        <picture class="portal-intro__picture">
+          <source media="(max-width:700px)" type="image/webp"
+                  srcset="assets/img/parent-portal/reading-mobile-560.webp 560w, assets/img/parent-portal/reading-mobile-960.webp 960w"
+                  sizes="calc(100vw - 40px)">
+          <source media="(max-width:700px)" type="image/jpeg"
+                  srcset="assets/img/parent-portal/reading-mobile-960.jpg 960w"
+                  sizes="calc(100vw - 40px)">
+          <source media="(max-width:900px) and (max-aspect-ratio:1/1)" type="image/webp"
+                  srcset="assets/img/parent-portal/reading-tablet-960.webp 960w, assets/img/parent-portal/reading-tablet-1600.webp 1600w"
+                  sizes="84vw">
+          <source type="image/webp"
+                  srcset="assets/img/parent-portal/reading-wide-1200.webp 1200w, assets/img/parent-portal/reading-wide-2000.webp 2000w, assets/img/parent-portal/reading-wide-2600.webp 2600w"
+                  sizes="(max-width:1500px) 84vw, 1320px">
+          <img class="portal-intro__image" src="assets/img/parent-portal/reading-wide-2000.jpg"
+               width="2000" height="930"
+               alt="An adult helps a child read a booklet during CIRS new student and parent orientation"
+               fetchpriority="high" decoding="async">
+        </picture>
+      </div>
+      <span class="portal-intro__line" aria-hidden="true"></span>
+      <p class="portal-intro__title"><span class="portal-intro__title-word"><span>Parent</span></span><span class="portal-intro__title-word"><span>Portal</span></span></p>
+    </div>
+    <div class="portal-intro__after">
+      <p class="portal-intro__note">Fee payment, parent login, and direct school contacts.</p>
+      <a class="portal-intro__entry" href="#portal">
+        <svg class="portal-intro__entry-border" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect x="0.5" y="0.5" width="99" height="99" pathLength="1"/></svg>
+        <span>Enter the portal</span><span class="portal-intro__entry-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+    </div>
+  </div>
+</section>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <section class="pagehead on-purple" id="top" data-ground="#1E1626">
   <div class="wrap pagehead__inner">
     <p class="marker"><span class="sc">Parents</span></p>
@@ -323,6 +495,7 @@
   </div>
 </section>
 </main>
+<<<<<<< HEAD
 <div class="footer-wrap">
 <footer class="footer">
   <div class="wrap">
@@ -349,10 +522,55 @@
 
       <div>
         <h4 class="sc">About</h4>
+=======
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <ul>
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
+<<<<<<< HEAD
           <li><a href="student-life.html#campus">Our Campus</a></li>
         </ul>
       </div>
@@ -360,11 +578,21 @@
       <div>
         <p class="sc" id="fnav-school">School</p>
         <ul aria-labelledby="fnav-school">
+=======
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
           <li><a href="why-cirs.html#junior">Junior School</a></li>
           <li><a href="why-cirs.html#senior">Senior School</a></li>
           <li><a href="sports.html#athletics">Athletics</a></li>
           <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
         </ul>
+<<<<<<< HEAD
       </div>
 
       <div>
@@ -386,6 +614,39 @@
           <li><a href="admissions.html#contact">Contact Us</a></li>
         </ul>
       </div>
+=======
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
 
     <div class="footer__bar">
@@ -400,10 +661,20 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
+<<<<<<< HEAD
 <script src="assets/vendor/gsap.min.js?b=95" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=95" defer></script>
 <script src="assets/vendor/lenis.min.js?b=95" defer></script>
 <script src="assets/js/cirs.js?b=95" defer></script>
 <script src="assets/js/pages.js?b=95" defer></script>
+=======
+<script src="assets/vendor/gsap.min.js?b=102-portal-photo-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-portal-photo-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-portal-photo-1" defer></script>
+<script src="assets/js/cirs.js?b=102-portal-photo-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-portal-photo-1" defer></script>
+<script src="assets/js/footer.js?b=102-portal-photo-1-footer-1" defer></script>
+<script src="assets/js/parent-portal-motion.js?b=102-portal-photo-1" defer></script>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </body>
 </html>

@@ -9,3 +9,16 @@
 [build]
   command = "python3 tools/build-site.py && python3 tools/stage-deploy.py"
   publish = "_site"
+<<<<<<< HEAD
+=======
+
+[[redirects]]
+  from = "/student-life.html"
+  to = "/the-cirs-experience.html"
+  status = 301
+
+[[redirects]]
+  from = "/student-life"
+  to = "/the-cirs-experience.html"
+  status = 301
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168

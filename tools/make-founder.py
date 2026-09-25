@@ -1,16 +1,26 @@
 #!/usr/bin/env python3
+<<<<<<< HEAD
 """Cut the Founder page's photographs from the archival scan.
+=======
+"""Cut the Founder page's science photograph from its archival scan.
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 assets/source/founder/ holds the archival masters at full resolution — like
 the rest of assets/source/, they are never deployed. This derives the web
 copies the page actually ships.
 
+<<<<<<< HEAD
 The grade is the point. The scan is a colour transparency: the sweater is a
 near-fluorescent red that would dominate a page built on parchment and muted
 greens, and would make the whole thing read as the "saffron spiritual website"
 the design deliberately avoids. Saturation comes down, the highlights warm
 toward paper, and a thin ivory wash ties the photograph to the ground it sits
 on — so the red settles into brick and the Himalaya into a soft grey-blue.
+=======
+The main portraits now come from the supplied Gurudev archive and are exported
+separately. This script retains the earlier science image used by the
+Education as Transformation section.
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 Run it after adding a scan; tools/build-site.py reads the output.
 """
@@ -33,6 +43,7 @@ WARMTH     = (1.030, 1.002, 0.958)   # per-channel gain, toward paper
 WASH       = ((244, 240, 232), 0.09)  # the page's own parchment, faintly over all
 
 # name -> (master, crop box on the master, output width)
+<<<<<<< HEAD
 # Boxes are in master pixels; the master is 4060x6091.
 CUTS = {
     # The hero: the whole frame. Its top half is pale, soft mountain, which is
@@ -43,6 +54,10 @@ CUTS = {
     "gurudev-portrait.jpg": ("gurudev-sidhbari.jpg", (1180, 2180, 3180, 4680), 1100),
     # The closing: he sits small under the mountain he studied beneath.
     "gurudev-himalaya.jpg": ("gurudev-sidhbari.jpg", (0, 500, 4060, 4560), 1700),
+=======
+# Boxes are in master pixels.
+CUTS = {
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     # Enquiry: a Vedanta teacher holding a laboratory vessel up to the light.
     # The scan carries the print's own border down its left edge and along the
     # bottom, so the crop starts inside it.

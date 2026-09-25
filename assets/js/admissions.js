@@ -4,6 +4,7 @@
   var body = document.body;
   if (!body.classList.contains("admissions")) return;
 
+<<<<<<< HEAD
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   body.classList.add("ad-enhanced");
 
@@ -62,6 +63,57 @@
     var updateProcess = function () {
       processFrame = 0;
       var circles = steps.map(function (step) { return step.querySelector(".ad-process__number"); });
+=======
+  var sections = Array.prototype.slice.call(document.querySelectorAll(".cirs-entry-section"));
+  var canObserve = typeof window.IntersectionObserver === "function";
+  body.classList.add("ad-enhanced");
+
+  function initHeroVideo() {
+    var video = document.querySelector(".pagehero__video");
+    if (!video) return;
+    var reduced = typeof window.matchMedia === "function"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+    function syncPlayback() {
+      if (reduced && reduced.matches) { video.pause(); return; }
+      var playback = video.play();
+      if (playback && typeof playback.catch === "function") playback.catch(function () {});
+    }
+    syncPlayback();
+    if (!reduced) return;
+    if (typeof reduced.addEventListener === "function") reduced.addEventListener("change", syncPlayback);
+    else if (typeof reduced.addListener === "function") reduced.addListener(syncPlayback);
+  }
+
+  // Section rules are decorative. Keep the page readable if observation fails.
+  function showSectionRules() {
+    sections.forEach(function (section) { section.classList.add("is-seen"); });
+  }
+
+  function initSectionRules() {
+    if (!canObserve) { showSectionRules(); return; }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-seen");
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -18% 0px", threshold: 0.08 });
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+
+  function initProcess() {
+    var process = document.querySelector(".ad-process");
+    if (!process) return;
+    var steps = Array.prototype.slice.call(process.querySelectorAll(".ad-process__item"));
+    var circles = steps.map(function (step) { return step.querySelector(".ad-process__number"); });
+    if (!steps.length || circles.some(function (circle) { return !circle; })) return;
+
+    var processFrame = 0;
+    var processCompleted = false;
+    function updateProcess() {
+      processFrame = 0;
+      if (!circles.every(function (circle) { return circle.isConnected; })) return;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       var first = circles[0].getBoundingClientRect();
       var last = circles[circles.length - 1].getBoundingClientRect();
       var firstY = first.top + first.height / 2;
@@ -82,15 +134,37 @@
         if (nextDistance < distance) { distance = nextDistance; nearest = index; }
       });
       steps.forEach(function (step, index) { step.classList.toggle("is-current", index === nearest); });
+<<<<<<< HEAD
     };
     var requestProcessUpdate = function () {
       if (!processFrame) processFrame = window.requestAnimationFrame(updateProcess);
     };
     window.addEventListener("scroll", requestProcessUpdate, { passive:true });
+=======
+    }
+
+    function requestProcessUpdate() {
+      if (!processFrame) processFrame = window.requestAnimationFrame(updateProcess);
+    }
+    // Lenis can suppress native scroll events; ScrollTrigger receives its ticks.
+    if (typeof window.ScrollTrigger !== "undefined") {
+      try {
+        window.ScrollTrigger.create({
+          trigger: process,
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: requestProcessUpdate,
+          onRefresh: requestProcessUpdate
+        });
+      } catch (error) { /* Native scrolling still updates the decoration. */ }
+    }
+    window.addEventListener("scroll", requestProcessUpdate, { passive: true });
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     window.addEventListener("resize", requestProcessUpdate);
     updateProcess();
   }
 
+<<<<<<< HEAD
   var dates = Array.prototype.slice.call(document.querySelectorAll(".ad-timeline li"));
   if (dates.length) {
     if (window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
@@ -125,4 +199,10 @@
     }, { rootMargin: "0px 0px -16% 0px", threshold: 0.16 });
     Array.prototype.forEach.call(revealTargets, function (el) { revealObserver.observe(el); });
   }
+=======
+  // An error in one enhancement must not prevent the others from starting.
+  try { initHeroVideo(); } catch (error) { /* The poster still fills the hero. */ }
+  try { initSectionRules(); } catch (error) { showSectionRules(); }
+  try { initProcess(); } catch (error) { /* The numbered list stays fully visible. */ }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 })();

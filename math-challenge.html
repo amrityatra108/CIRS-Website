@@ -7,8 +7,19 @@
 <meta name="description" content="The Math Challenge at Chinmaya International Residential School — monthly problems for four grade zones, and the habits of mind they are set to build.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/math-challenge.html">
+<<<<<<< HEAD
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+=======
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <meta property="og:type" content="website">
 <meta property="og:title" content="Math Challenge">
 <meta property="og:description" content="The Math Challenge at Chinmaya International Residential School — monthly problems for four grade zones, and the habits of mind they are set to build.">
@@ -20,17 +31,34 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<<<<<<< HEAD
 <link rel="stylesheet" href="assets/css/fonts.css?b=95">
 <link rel="stylesheet" href="assets/css/cirs.css?b=95">
 <link rel="stylesheet" href="assets/css/pages.css?b=95">
+=======
+<link rel="stylesheet" href="assets/css/fonts.css?b=102">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102">
+<link rel="stylesheet" href="assets/css/pages.css?b=102">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
+<<<<<<< HEAD
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/matharena.css?b=95">
 <link rel="stylesheet" href="assets/css/typography.css?b=95">
+=======
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/matharena.css?b=102">
+<link rel="stylesheet" href="assets/css/typography.css?b=102">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-drawer-5">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </head>
 
 <body class="matharena">
@@ -65,7 +93,11 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
+<<<<<<< HEAD
 <header class="header is-first-section is-bare" id="header">
+=======
+<header class="header" id="header">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -196,55 +228,123 @@
     </div>
   </div>
 </header>
+<<<<<<< HEAD
 <div class="drawer" id="drawer" hidden>
   <nav class="drawer__grid" aria-label="All pages">
     <div>
       <p class="sc" id="dnav-vision">Vision</p>
       <ul aria-labelledby="dnav-vision">
+=======
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="1" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="false" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button" hidden>
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-student-life">Student Life</p>
       <ul aria-labelledby="dnav-student-life">
         <li><a href="student-life.html">Student Life</a></li>
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="true" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button">
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html" aria-current="page">Math Challenge</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
       <ul aria-labelledby="dnav-literary-excellence">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
       <ul aria-labelledby="dnav-art-culture-music">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-connect">Connect</p>
       <ul aria-labelledby="dnav-connect">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
   </nav>
   <div class="drawer__utility">
@@ -286,10 +386,100 @@
       <a class="btn btn--primary" href="#puzzle">Try the visual puzzle</a>
       <a class="btn btn--outline" href="#zones">Choose your zone</a>
       <a class="btn btn--ghost" href="#archive">Browse archive</a>
+=======
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main id="main">
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#about">The idea</a>
+      <a href="#journey">The challenge journey</a>
+      <a href="#zones">Choose your challenge</a>
+      <a href="#archive">The archive</a>
+    </div>
+  </details>
+</nav>
+<section class="ma-hero" id="top" data-ground="#07070A">
+  <!-- The mathematics behind the heading. All of it is decoration and none of
+       it is read aloud: the grid, the orbits, the formulae and the points are
+       one aria-hidden layer, so a screen reader meets the heading first. -->
+  <div class="ma-field" aria-hidden="true">
+    <div class="ma-field__grid"></div>
+    <div class="ma-field__orbit"></div>
+    <div class="ma-field__formulae">
+      <span class="ma-f ma-f--1">x&sup2; + y&sup2; = z&sup2;</span>
+      <span class="ma-f ma-f--2">&pi; &asymp; 3.14159</span>
+      <span class="ma-f ma-f--3">&radic;144 = 12</span>
+      <span class="ma-f ma-f--4">&sum; n = n(n+1)/2</span>
+      <span class="ma-f ma-f--5">f(x) = ax&sup2; + bx + c</span>
+      <span class="ma-f ma-f--6">&infin;</span>
+      <span class="ma-f ma-f--7">&theta; = 90&deg;</span>
+      <span class="ma-f ma-f--8">a&sup2; &minus; b&sup2;</span>
+      <span class="ma-f ma-f--9">&int; f(x) dx</span>
+    </div>
+    <svg class="ma-field__ink" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice"
+         focusable="false">
+      <circle cx="240" cy="170" r="96" />
+      <circle cx="980" cy="520" r="132" />
+      <polygon points="905,150 1010,320 800,320" />
+      <path d="M90 560 L300 430 L470 520 L640 360" />
+      <circle class="ma-field__pt" cx="300" cy="430" r="4" />
+      <circle class="ma-field__pt" cx="470" cy="520" r="4" />
+      <circle class="ma-field__pt" cx="640" cy="360" r="4" />
+    </svg>
+  </div>
+
+  <div class="wrap ma-hero__inner">
+    <h1 class="ma-title">Math <em>Challenge</em></h1>
+    <p class="ma-strap">Question. Reason. Discover. Solve.</p>
+    <p class="ma-hero__cta">
+      <a class="btn btn--primary" href="#zones">Find your zone</a>
+      <a class="btn btn--ghost" href="#archive">The archive</a>
+    </p>
+  </div>
+</section>
+
+<section class="ma-sec ma-sec--open" id="about">
+  <div class="wrap ma-open">
+    <div class="ma-open__head rv">
+      <p class="ma-eyebrow"><span class="sc">The idea</span></p>
+      <h2 class="ma-h2">Think beyond <em>numbers.</em></h2>
+    </div>
+    <div class="ma-open__body rv">
+      <p class="ma-lead">Mathematics is more than numbers. It is about questioning, discovering
+        patterns, reasoning logically and finding creative solutions.</p>
+      <p class="ma-copy">A challenge problem is not a test of what was taught last week. It is
+        set so that the method is not obvious, so that the first idea usually fails, and so that
+        the student who gets there has had to think rather than remember.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
   </div>
 </section>
 
+<<<<<<< HEAD
 <!-- Section 1: The Interactive Demonstration Puzzle -->
 <section class="ma-sec ma-sec--puzzle" id="puzzle">
   <div class="wrap">
@@ -477,12 +667,84 @@
             <path d="M7 1v12M1.5 7.5L7 13l5.5-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
+=======
+<section class="ma-sec" id="journey">
+  <div class="wrap">
+    <div class="ma-sechead rv">
+      <p class="ma-eyebrow"><span class="sc">The challenge journey</span></p>
+      <h2 class="ma-h2">Five stages, <em>one problem.</em></h2>
+      <p class="ma-copy">Every challenge begins with a question. What follows is the same
+        whether the problem takes ten minutes or a week.</p>
+    </div>
+    <ol class="ma-journey">
+      <li class="ma-step rv">
+        <p class="ma-step__n">01</p>
+        <h3 class="ma-step__name">Question</h3>
+        <p class="ma-step__copy">Read it twice. Decide what is actually being asked, and what is only decoration.</p>
+      </li>
+      <li class="ma-step rv">
+        <p class="ma-step__n">02</p>
+        <h3 class="ma-step__name">Think</h3>
+        <p class="ma-step__copy">Look for the pattern, the symmetry, the thing that stays the same while everything else moves.</p>
+      </li>
+      <li class="ma-step rv">
+        <p class="ma-step__n">03</p>
+        <h3 class="ma-step__name">Explore</h3>
+        <p class="ma-step__copy">Try the small case. Draw it. Guess, then test the guess and find out why it failed.</p>
+      </li>
+      <li class="ma-step rv">
+        <p class="ma-step__n">04</p>
+        <h3 class="ma-step__name">Solve</h3>
+        <p class="ma-step__copy">Build the argument step by step, and check that each step follows from the one before it.</p>
+      </li>
+      <li class="ma-step rv">
+        <p class="ma-step__n">05</p>
+        <h3 class="ma-step__name">Discover</h3>
+        <p class="ma-step__copy">Ask what the problem was really about &mdash; that is the part that carries to the next one.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="ma-sec ma-sec--zones" id="zones">
+  <div class="wrap">
+    <div class="ma-sechead rv">
+      <p class="ma-eyebrow"><span class="sc">Choose your challenge</span></p>
+      <h2 class="ma-h2">Four zones, <em>one love of math.</em></h2>
+      <p class="ma-copy">Problems are set for four grade groups, so that a student in Grade V
+        and a student in Grade XII are each given something that is genuinely hard for them.</p>
+    </div>
+    <div class="ma-zones">
+      <article class="ma-zone rv" data-grade="5-6">
+        <p class="ma-zone__grade">Grades 5&ndash;6</p>
+        <h3 class="ma-zone__title">Foundation Challenge</h3>
+        <p class="ma-zone__copy">Number sense, pattern and logic &mdash; problems that reward noticing rather than calculating quickly.</p>
+        <span class="ma-zone__mark" aria-hidden="true">01</span>
+      </article>
+      <article class="ma-zone rv" data-grade="7-8">
+        <p class="ma-zone__grade">Grades 7&ndash;8</p>
+        <h3 class="ma-zone__title">Logic Challenge</h3>
+        <p class="ma-zone__copy">Reasoning stretched further: relationships, geometry and the kind of puzzle that needs a plan before a pencil.</p>
+        <span class="ma-zone__mark" aria-hidden="true">02</span>
+      </article>
+      <article class="ma-zone rv" data-grade="9-10">
+        <p class="ma-zone__grade">Grades 9&ndash;10</p>
+        <h3 class="ma-zone__title">Advanced Challenge</h3>
+        <p class="ma-zone__copy">Problems that ask a student to connect ideas from different parts of the syllabus, and to justify the connection.</p>
+        <span class="ma-zone__mark" aria-hidden="true">03</span>
+      </article>
+      <article class="ma-zone rv" data-grade="11-12">
+        <p class="ma-zone__grade">Grades 11&ndash;12</p>
+        <h3 class="ma-zone__title">Master Challenge</h3>
+        <p class="ma-zone__copy">Sustained problems of the sort that reward a whole evening, and the habits of mind that higher study asks for.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <span class="ma-zone__mark" aria-hidden="true">04</span>
       </article>
     </div>
   </div>
 </section>
 
+<<<<<<< HEAD
 <!-- Section 3: How a Mind Solves -->
 <section class="ma-sec ma-sec--journey" id="journey">
   <div class="wrap">
@@ -603,11 +865,26 @@
       <div class="ma-tools">
         <div class="ma-filters" role="group" aria-label="Filter archive by grade">
         <button type="button" class="ma-filter is-on" data-grade="all" aria-pressed="true">All Grades</button>
+=======
+<section class="ma-sec" id="archive">
+  <div class="wrap">
+    <div class="ma-sechead rv">
+      <p class="ma-eyebrow"><span class="sc">The archive</span></p>
+      <h2 class="ma-h2">Month by month, <em>the winners.</em></h2>
+      <p class="ma-copy">Each month the mathematics department publishes the winners for every
+        grade zone, with the number who entered. Seven months are here; two are short a grade
+        group, and those gaps are the school&rsquo;s own.</p>
+    </div>
+      <div class="ma-tools">
+        <div class="ma-filters" role="group" aria-label="Filter by grade">
+        <button type="button" class="ma-filter is-on" data-grade="all" aria-pressed="true">All</button>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <button type="button" class="ma-filter" data-grade="5-6" aria-pressed="false">Grades 5&ndash;6</button>
         <button type="button" class="ma-filter" data-grade="7-8" aria-pressed="false">Grades 7&ndash;8</button>
         <button type="button" class="ma-filter" data-grade="9-10" aria-pressed="false">Grades 9&ndash;10</button>
         <button type="button" class="ma-filter" data-grade="11-12" aria-pressed="false">Grades 11&ndash;12</button>
         </div>
+<<<<<<< HEAD
         <div class="ma-search-wrap">
           <label class="ma-search">
             <span class="vh">Search archive by month or year</span>
@@ -681,11 +958,54 @@
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6L9 1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 1v5h5M5 11h6M5 8h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <span>View Grades 11&ndash;12 Winners (PDF)</span>
               <span class="ma-card__arrow" aria-hidden="true">&rarr;</span>
+=======
+        <label class="ma-search">
+          <span class="vh">Search the winners by month</span>
+          <input type="search" id="maSearch" placeholder="Search by month"
+                 autocomplete="off">
+        </label>
+      </div>
+      <div class="ma-months" id="maGrid">
+      <section class="ma-month rv" data-month="2026-04">
+        <h3 class="ma-month__name">April 2026</h3>
+        <div class="ma-grid">
+          <article class="ma-card rv" data-grade="5-6"
+                   data-find="april 2026">
+            <h4 class="ma-card__title">Grades 5&ndash;6</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-04/grades-5-6.pdf">
+              <span class="vh">April 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="7-8"
+                   data-find="april 2026">
+            <h4 class="ma-card__title">Grades 7&ndash;8</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-04/grades-7-8.pdf">
+              <span class="vh">April 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="9-10"
+                   data-find="april 2026">
+            <h4 class="ma-card__title">Grades 9&ndash;10</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-04/grades-9-10.pdf">
+              <span class="vh">April 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="11-12"
+                   data-find="april 2026">
+            <h4 class="ma-card__title">Grades 11&ndash;12</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-04/grades-11-12.pdf">
+              <span class="vh">April 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             </a>
           </article>
         </div>
       </section>
       <section class="ma-month rv" data-month="2026-02">
+<<<<<<< HEAD
         <div class="ma-month__header">
           <h3 class="ma-month__name">February 2026</h3>
           <span class="ma-month__count">2 of 4 divisions published</span>
@@ -815,11 +1135,67 @@
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6L9 1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 1v5h5M5 11h6M5 8h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <span>View Grades 11&ndash;12 Winners (PDF)</span>
               <span class="ma-card__arrow" aria-hidden="true">&rarr;</span>
+=======
+        <h3 class="ma-month__name">February 2026</h3>
+        <div class="ma-grid">
+          <article class="ma-card rv" data-grade="5-6"
+                   data-find="february 2026">
+            <h4 class="ma-card__title">Grades 5&ndash;6</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-02/grades-5-6.pdf">
+              <span class="vh">February 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="7-8"
+                   data-find="february 2026">
+            <h4 class="ma-card__title">Grades 7&ndash;8</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-02/grades-7-8.pdf">
+              <span class="vh">February 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+        </div>
+      </section>
+      <section class="ma-month rv" data-month="2026-01">
+        <h3 class="ma-month__name">January 2026</h3>
+        <div class="ma-grid">
+          <article class="ma-card rv" data-grade="5-6"
+                   data-find="january 2026">
+            <h4 class="ma-card__title">Grades 5&ndash;6</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-01/grades-5-6.pdf">
+              <span class="vh">January 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="7-8"
+                   data-find="january 2026">
+            <h4 class="ma-card__title">Grades 7&ndash;8</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-01/grades-7-8.pdf">
+              <span class="vh">January 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="9-10"
+                   data-find="january 2026">
+            <h4 class="ma-card__title">Grades 9&ndash;10</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-01/grades-9-10.pdf">
+              <span class="vh">January 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="11-12"
+                   data-find="january 2026">
+            <h4 class="ma-card__title">Grades 11&ndash;12</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2026-01/grades-11-12.pdf">
+              <span class="vh">January 2026, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             </a>
           </article>
         </div>
       </section>
       <section class="ma-month rv" data-month="2025-10">
+<<<<<<< HEAD
         <div class="ma-month__header">
           <h3 class="ma-month__name">October 2025</h3>
           <span class="ma-month__count">3 of 4 divisions published</span>
@@ -950,11 +1326,75 @@
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6L9 1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 1v5h5M5 11h6M5 8h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <span>View Grades 11&ndash;12 Winners (PDF)</span>
               <span class="ma-card__arrow" aria-hidden="true">&rarr;</span>
+=======
+        <h3 class="ma-month__name">October 2025</h3>
+        <div class="ma-grid">
+          <article class="ma-card rv" data-grade="5-6"
+                   data-find="october 2025">
+            <h4 class="ma-card__title">Grades 5&ndash;6</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-10/grades-5-6.pdf">
+              <span class="vh">October 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="7-8"
+                   data-find="october 2025">
+            <h4 class="ma-card__title">Grades 7&ndash;8</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-10/grades-7-8.pdf">
+              <span class="vh">October 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="9-10"
+                   data-find="october 2025">
+            <h4 class="ma-card__title">Grades 9&ndash;10</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-10/grades-9-10.pdf">
+              <span class="vh">October 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+        </div>
+      </section>
+      <section class="ma-month rv" data-month="2025-09">
+        <h3 class="ma-month__name">September 2025</h3>
+        <div class="ma-grid">
+          <article class="ma-card rv" data-grade="5-6"
+                   data-find="september 2025">
+            <h4 class="ma-card__title">Grades 5&ndash;6</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-09/grades-5-6.pdf">
+              <span class="vh">September 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="7-8"
+                   data-find="september 2025">
+            <h4 class="ma-card__title">Grades 7&ndash;8</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-09/grades-7-8.pdf">
+              <span class="vh">September 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="9-10"
+                   data-find="september 2025">
+            <h4 class="ma-card__title">Grades 9&ndash;10</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-09/grades-9-10.pdf">
+              <span class="vh">September 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="11-12"
+                   data-find="september 2025">
+            <h4 class="ma-card__title">Grades 11&ndash;12</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-09/grades-11-12.pdf">
+              <span class="vh">September 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             </a>
           </article>
         </div>
       </section>
       <section class="ma-month rv" data-month="2025-08">
+<<<<<<< HEAD
         <div class="ma-month__header">
           <h3 class="ma-month__name">August 2025</h3>
           <span class="ma-month__count">4 of 4 divisions published</span>
@@ -1018,11 +1458,46 @@
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6L9 1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 1v5h5M5 11h6M5 8h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <span>View Grades 11&ndash;12 Winners (PDF)</span>
               <span class="ma-card__arrow" aria-hidden="true">&rarr;</span>
+=======
+        <h3 class="ma-month__name">August 2025</h3>
+        <div class="ma-grid">
+          <article class="ma-card rv" data-grade="5-6"
+                   data-find="august 2025">
+            <h4 class="ma-card__title">Grades 5&ndash;6</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-08/grades-5-6.pdf">
+              <span class="vh">August 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="7-8"
+                   data-find="august 2025">
+            <h4 class="ma-card__title">Grades 7&ndash;8</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-08/grades-7-8.pdf">
+              <span class="vh">August 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="9-10"
+                   data-find="august 2025">
+            <h4 class="ma-card__title">Grades 9&ndash;10</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-08/grades-9-10.pdf">
+              <span class="vh">August 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="11-12"
+                   data-find="august 2025">
+            <h4 class="ma-card__title">Grades 11&ndash;12</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-08/grades-11-12.pdf">
+              <span class="vh">August 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             </a>
           </article>
         </div>
       </section>
       <section class="ma-month rv" data-month="2025-07">
+<<<<<<< HEAD
         <div class="ma-month__header">
           <h3 class="ma-month__name">July 2025</h3>
           <span class="ma-month__count">4 of 4 divisions published</span>
@@ -1086,11 +1561,46 @@
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6L9 1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 1v5h5M5 11h6M5 8h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               <span>View Grades 11&ndash;12 Winners (PDF)</span>
               <span class="ma-card__arrow" aria-hidden="true">&rarr;</span>
+=======
+        <h3 class="ma-month__name">July 2025</h3>
+        <div class="ma-grid">
+          <article class="ma-card rv" data-grade="5-6"
+                   data-find="july 2025">
+            <h4 class="ma-card__title">Grades 5&ndash;6</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-07/grades-5-6.pdf">
+              <span class="vh">July 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="7-8"
+                   data-find="july 2025">
+            <h4 class="ma-card__title">Grades 7&ndash;8</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-07/grades-7-8.pdf">
+              <span class="vh">July 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="9-10"
+                   data-find="july 2025">
+            <h4 class="ma-card__title">Grades 9&ndash;10</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-07/grades-9-10.pdf">
+              <span class="vh">July 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+          <article class="ma-card rv" data-grade="11-12"
+                   data-find="july 2025">
+            <h4 class="ma-card__title">Grades 11&ndash;12</h4>
+            <a class="ma-card__open" href="assets/documents/math-challenge/2025-07/grades-11-12.pdf">
+              <span class="vh">July 2025, </span>See the winners
+              <span aria-hidden="true">&rarr;</span>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             </a>
           </article>
         </div>
       </section>
       </div>
+<<<<<<< HEAD
       <p class="ma-none" id="maNone" hidden>No archive bulletins match that search or grade filter.</p>
   </div>
 </section>
@@ -1119,6 +1629,17 @@
         <span class="ma-last__link-sub">Entrance examination &amp; inquiry</span>
       </a>
     </div>
+=======
+      <p class="ma-none" id="maNone" hidden>No month matches that search.</p>
+  </div>
+</section>
+
+<section class="ma-sec ma-sec--last">
+  <div class="wrap ma-last rv">
+    <p class="ma-last__quote">Every problem is an opportunity to discover a new way of
+      thinking.</p>
+    <p class="ma-last__note">Keep questioning. Keep exploring. Keep solving.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   </div>
 </section>
 <section class="uc">
@@ -1135,6 +1656,7 @@
   </div>
 </section>
 </main>
+<<<<<<< HEAD
 <div class="footer-wrap">
 <footer class="footer">
   <div class="wrap">
@@ -1161,10 +1683,55 @@
 
       <div>
         <h4 class="sc">About</h4>
+=======
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <ul>
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
+<<<<<<< HEAD
           <li><a href="student-life.html#campus">Our Campus</a></li>
         </ul>
       </div>
@@ -1172,11 +1739,21 @@
       <div>
         <p class="sc" id="fnav-school">School</p>
         <ul aria-labelledby="fnav-school">
+=======
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
           <li><a href="why-cirs.html#junior">Junior School</a></li>
           <li><a href="why-cirs.html#senior">Senior School</a></li>
           <li><a href="sports.html#athletics">Athletics</a></li>
           <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
         </ul>
+<<<<<<< HEAD
       </div>
 
       <div>
@@ -1198,6 +1775,39 @@
           <li><a href="admissions.html#contact">Contact Us</a></li>
         </ul>
       </div>
+=======
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
 
     <div class="footer__bar">
@@ -1212,11 +1822,21 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
+<<<<<<< HEAD
 <script src="assets/vendor/gsap.min.js?b=95" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=95" defer></script>
 <script src="assets/vendor/lenis.min.js?b=95" defer></script>
 <script src="assets/js/cirs.js?b=95" defer></script>
 <script src="assets/js/pages.js?b=95" defer></script>
 <script src="assets/js/matharena.js?b=95" defer></script>
+=======
+<script src="assets/vendor/gsap.min.js?b=102" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102" defer></script>
+<script src="assets/js/cirs.js?b=102-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102" defer></script>
+<script src="assets/js/footer.js?b=102-footer-1" defer></script>
+<script src="assets/js/matharena.js?b=102" defer></script>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </body>
 </html>

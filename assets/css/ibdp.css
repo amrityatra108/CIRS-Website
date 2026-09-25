@@ -16,6 +16,21 @@
 /* The trail sits under the banner rather than over it: the banner is the
    page's name and carries the only h1, and a crumb above it would read as
    though it were part of the heading. */
+<<<<<<< HEAD
+=======
+body.ibdp .section:not(.on-purple) :focus-visible,
+body.ibdp .crumbs :focus-visible{ outline-color:var(--purple-ink); }
+body.ibdp .pagehead__cta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:clamp(24px,3vw,38px);
+}
+.ibdp-anchor{ display:block; height:0; scroll-margin-top:88px; }
+@media (max-width:640px){
+  body.ibdp .pagehead__cta .btn{ width:100%; white-space:normal; text-align:center; }
+}
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 body.ibdp .crumbs{
   border-bottom: 1px solid var(--rule);
   padding-block: 14px;
@@ -174,3 +189,211 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
 }
 .ib-end h2{ margin: 0 0 12px; }
 .ib-end .copy{ margin: 0; }
+<<<<<<< HEAD
+=======
+
+/* ============================================================
+   Shared by both curriculum child pages. The CBSE page wears
+   this sheet too (body.ibdp), since everything above is the
+   curriculum family's furniture rather than the IB's alone.
+   What follows is the handful of arrangements added with it:
+   the three CBSE stages, a results table, and the IB's scoring.
+   ============================================================ */
+
+/* ---------------------------------------------------- the three stages */
+
+.cbstages{
+  display: grid;
+  gap: clamp(18px, 2.4vw, 30px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: stage;
+}
+@media (min-width: 900px){ .cbstages{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.cbstages__stage{
+  position: relative;
+  padding: clamp(22px, 2.6vw, 32px);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--purple-ink);
+}
+.cbstages__years{
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--maroon);
+}
+.cbstages__stage h3{ margin: 0 0 12px; }
+.cbstages__stage .copy{ margin: 0 0 18px; font-size: 15px; }
+.cbstages__list{
+  margin: 0;
+  padding: 16px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: 8px;
+}
+.cbstages__list li{
+  position: relative;
+  padding-left: 18px;
+  font-size: 15px;
+  color: var(--ink);
+}
+.cbstages__list li::before{
+  content: "";
+  position: absolute; left: 0; top: .6em;
+  width: 6px; height: 6px;
+  border: 1px solid var(--maroon);
+  transform: rotate(45deg);
+}
+
+/* ---------------------------------------------------------- the results */
+
+.cbresults{ margin: 0; border-top: 2px solid var(--purple-ink); }
+.cbresults__row{
+  display: grid;
+  gap: 6px 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+@media (min-width: 720px){
+  .cbresults__row{ grid-template-columns: minmax(200px, 1fr) 2fr; align-items: baseline; }
+}
+.cbresults__row dt{
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+.cbresults__row dd{ margin: 0; color: var(--ink-soft); font-size: 15px; }
+.cbresults__row dd b{
+  font-family: var(--font-primary);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 500;
+  color: var(--ink);
+  margin-right: 6px;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.cbresults__row dd span{ display: block; margin-top: 4px; color: var(--ink-mute); font-size: 14px; }
+
+/* ----------------------------------------------------- how the IB is scored */
+
+.ibscore{
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+@media (min-width: 760px){ .ibscore{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ibscore > div{ padding: clamp(22px, 2.6vw, 32px); background: var(--paper); }
+.ibscore dt{
+  font-family: var(--font-primary);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1;
+  color: var(--purple);
+  font-variant-numeric: lining-nums;
+}
+.ibscore dd{ margin: 12px 0 0; font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+.ibscore dd b{ display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
+
+/* The Diploma route is a concise programme guide. The CBSE child shares this
+   sheet, so its new rhythm and content modules live under this wrapper only. */
+.ibdp-programme > .section{
+  padding-block: clamp(56px, 6.2vw, 94px);
+}
+.ibdp-programme .sec-head{ max-width: 760px; }
+.ibdp-programme .ib-intro__fig{ aspect-ratio: 1 / 1; }
+.ibdp-programme .ib-intro__fig img{ object-position: center 46%; }
+.ibdp-programme .ib-intro__text{ max-width: 61ch; }
+.ibdp-programme .ibgrid__n{
+  color: var(--maroon);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.ibdp-programme .ibgrid__cell .copy,
+.ibdp-programme .ibcore__card .copy{ font-size: 16px; line-height: 1.6; }
+
+.ibdp-programme .ibdp-textlink{
+  color: var(--purple);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--maroon);
+  text-underline-offset: 5px;
+}
+.ibdp-programme .ibdp-textlink:hover{ color: var(--maroon); }
+.ibdp-programme .on-purple .ibdp-textlink{
+  color: var(--gold-lit);
+  text-decoration-color: currentColor;
+}
+.ibdp-programme .on-purple .ibdp-textlink:hover{ color: #fff; }
+
+.ibdp-availability{
+  display: grid;
+  gap: 22px 40px;
+  margin-top: clamp(34px, 4vw, 56px);
+  padding: clamp(24px, 3vw, 38px);
+  border-top: 3px solid var(--maroon);
+  background: var(--paper);
+}
+.ibdp-availability h3{ margin: 0 0 10px; }
+.ibdp-availability .copy{ margin: 0; }
+.ibdp-availability__links{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  justify-content: center;
+}
+@media (min-width: 960px){
+  .ibdp-availability{ grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); }
+}
+
+.ibdp-assessment-detail{
+  display: grid;
+  gap: 28px 48px;
+  margin-top: clamp(32px, 4vw, 54px);
+  padding-top: clamp(28px, 3vw, 40px);
+  border-top: 1px solid var(--rule);
+}
+.ibdp-assessment-detail h3{ margin: 0 0 12px; }
+.ibdp-assessment-detail .ibdp-textlink{ display: inline-block; margin-top: 18px; }
+@media (min-width: 760px){
+  .ibdp-assessment-detail{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.ibdp-context__layout,
+.ibdp-results__layout,
+.ibdp-next__layout{
+  display: grid;
+  gap: 22px clamp(32px, 6vw, 100px);
+}
+.ibdp-context__layout .h2,
+.ibdp-results__layout .h2,
+.ibdp-next__layout .h2{ max-width: 15ch; }
+.ibdp-context__body,
+.ibdp-results__body,
+.ibdp-next__body{ max-width: 60ch; }
+.ibdp-context__body .copy,
+.ibdp-results__body .copy{ margin-top: 18px; }
+.ibdp-context__body .ibdp-textlink,
+.ibdp-next__body > .ibdp-textlink{ display: inline-block; margin-top: 22px; }
+.ibdp-results__body .btn{ margin-top: 24px; }
+.ibdp-next{ background: var(--purple-deep); }
+.ibdp-next .ib-cta{ margin-top: 26px; }
+@media (min-width: 920px){
+  .ibdp-context__layout,
+  .ibdp-results__layout,
+  .ibdp-next__layout{ grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 620px){
+  .ibdp-programme .ib-cta .btn,
+  .ibdp-availability__links .btn,
+  .ibdp-next .ib-cta .btn{ width: 100%; white-space: normal; text-align: center; }
+  .ibdp-availability__links{ align-items: stretch; }
+}
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168

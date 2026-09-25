@@ -1,4 +1,5 @@
 <section class="cw-hero" id="top" aria-labelledby="cw-title">
+<<<<<<< HEAD
   <!-- Everything between here and the heading is decoration: a lit ground,
        grain, floating manuscript pages, glass, an ink stroke being drawn, a
        typewriter and a desk. All of it is aria-hidden, so a screen reader
@@ -354,5 +355,71 @@
       <a class="btn btn--primary" href="crossroads.html">The Crossroads archive</a>
       <a class="btn btn--outline" href="blog.html">CIRS Blog</a>
     </p>
+=======
+  <div class="wrap cw-hero__layout">
+    <div class="cw-hero__topline">
+      <p class="cw-hero__label">CIRS / Creative Writing</p>
+      <p class="cw-hero__edition">A student poetry anthology</p>
+    </div>
+    <div class="cw-hero__composition">
+      <h1 class="cw-hero__title" id="cw-title"><span>Words become</span> <span>worlds.</span></h1>
+      <blockquote class="cw-hero__excerpt" aria-label="A poem from the collection">
+        {{CW_HERO_EXCERPT}}
+      </blockquote>
+    </div>
+    <div class="cw-hero__footer">
+      <div class="cw-hero__summary">
+        <p class="cw-hero__subtitle">Poetry by the students of CIRS.</p>
+        <p class="cw-hero__measure"><span><strong>{{CW_COUNT}}</strong> poems</span><span class="cw-hero__measure-rule" aria-hidden="true"></span><span><strong>{{CW_WRITERS}}</strong> writers</span></p>
+      </div>
+      <a class="cw-hero__enter" href="#chapters">Explore the chapters <span aria-hidden="true">↘</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="cw-introduction" id="chapters" aria-labelledby="cw-index-heading">
+  <div class="wrap">
+    <div class="cw-introduction__head">
+      <p class="cw-kicker">The anthology</p>
+      <h2 id="cw-index-heading">Read by theme.</h2>
+      <p>Five themes, three poems from each. Choose a voice to open the complete poem.</p>
+    </div>
+    <div class="cw-rows__controls">
+      <button class="cw-rows__pause" type="button" aria-controls="cw-rows" aria-pressed="false">Pause motion</button>
+    </div>
+  </div>
+  <div class="cw-rows" id="cw-rows">
+{{CW_ROWS}}
+  </div>
+</section>
+
+{{CW_CHAPTERS}}
+
+<section class="cw-afterword" id="about-the-collection" aria-labelledby="cw-afterword-heading">
+  <div class="wrap cw-afterword__layout">
+    <div>
+      <p class="cw-kicker">About the collection</p>
+      <h2 id="cw-afterword-heading">A space for student voices.</h2>
+    </div>
+    <div class="cw-afterword__copy">
+      <p>This anthology presents student poems supplied in the Creative Writing collection. Each chapter follows the themes of that collection, with each writer credited beside their work.</p>
+      <p>For magazine articles and complete issues, visit CIRS&rsquo;s related publications.</p>
+      <div class="cw-afterword__links">
+        <a href="blog.html">CIRS Blog <span aria-hidden="true">↗</span></a>
+        <a href="crossroads.html">Crossroads archive <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cw-future" aria-labelledby="cw-future-heading">
+  <div class="wrap cw-future__layout">
+    <div>
+      <p class="cw-kicker">Future writing</p>
+      <h2 id="cw-future-heading">The collection can grow.</h2>
+    </div>
+    <p>Submission details will be published when they are available from the editorial board.</p>
+    <a href="#chapters">Back to the chapters <span aria-hidden="true">↑</span></a>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   </div>
 </section>

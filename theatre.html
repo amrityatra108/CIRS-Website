@@ -7,8 +7,19 @@
 <meta name="description" content="Productions, rehearsal and the stage at Chinmaya International Residential School.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/theatre.html">
+<<<<<<< HEAD
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+=======
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <meta property="og:type" content="website">
 <meta property="og:title" content="CIRS Theatre">
 <meta property="og:description" content="Productions, rehearsal and the stage at Chinmaya International Residential School.">
@@ -20,19 +31,42 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<<<<<<< HEAD
 <link rel="stylesheet" href="assets/css/fonts.css?b=95">
 <link rel="stylesheet" href="assets/css/cirs.css?b=95">
 <link rel="stylesheet" href="assets/css/pages.css?b=95">
+=======
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-theatre-acts-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-theatre-acts-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-theatre-acts-1">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
+<<<<<<< HEAD
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/typography.css?b=95">
 </head>
 
 <body>
+=======
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/culture.css?b=102-theatre-acts-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-theatre-acts-1">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=102-theatre-acts-1">
+<noscript><style>.film{height:100svh}.film[data-film-pending] .film__title{opacity:1}.film__video{display:none}body.theatre .film__still{visibility:visible}</style></noscript>
+<link rel="stylesheet" href="assets/css/theatre.css?b=102-theatre-acts-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-theatre-acts-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-theatre-acts-1-drawer-5">
+</head>
+
+<body class="culture film theatre">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Opening sequence. Removed from the DOM once it has played. -->
@@ -64,7 +98,11 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
+<<<<<<< HEAD
 <header class="header is-first-section" id="header">
+=======
+<header class="header" id="header">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -195,55 +233,123 @@
     </div>
   </div>
 </header>
+<<<<<<< HEAD
 <div class="drawer" id="drawer" hidden>
   <nav class="drawer__grid" aria-label="All pages">
     <div>
       <p class="sc" id="dnav-vision">Vision</p>
       <ul aria-labelledby="dnav-vision">
+=======
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="3" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="false" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button" hidden>
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-student-life">Student Life</p>
       <ul aria-labelledby="dnav-student-life">
         <li><a href="student-life.html">Student Life</a></li>
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
       <ul aria-labelledby="dnav-literary-excellence">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
       <ul aria-labelledby="dnav-art-culture-music">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="true" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button">
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html" aria-current="page">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-connect">Connect</p>
       <ul aria-labelledby="dnav-connect">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
   </nav>
   <div class="drawer__utility">
@@ -325,10 +431,982 @@
 
       <div>
         <h4 class="sc">About</h4>
+=======
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section class="film" id="theatre-opening" data-film data-film-phases="0.7 0.78 0.91" data-film-pending>
+  <div class="film__stage">
+    <img class="film__still" src="assets/img/theatre-opening-final.jpg" alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">
+    <video class="film__video" data-film-video
+           width="1280" height="720"
+           poster="assets/img/theatre-opening-poster.jpg"
+           preload="auto" muted playsinline disablepictureinpicture
+           aria-hidden="true" tabindex="-1">
+      <!-- H.264 first, which is the other way round from the rest of this
+           site. These files are not played but seeked, several times a
+           second, and H.264 is the one codec every browser that has it
+           decodes in hardware — so it is the path that scrubs without
+           stuttering wherever it exists. The VP9 is for the browsers built
+           without the proprietary decoder, which would otherwise have no
+           opening at all. Both are the same length at 24fps, so the mapping
+           in filmintro.js holds whichever one is picked. -->
+      <source src="assets/video/theatre-opening.mp4" type="video/mp4">
+      <source src="assets/video/theatre-opening.webm" type="video/webm">
+    </video>
+    <h1 class="film__title" data-film-title><span class="film__line">CIRS Theatre</span></h1>
+  </div>
+</section>
+<div class="film__seam" aria-hidden="true"></div>
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#about">CIRS Theatre</a>
+      <a href="#anand-utsav">Act I &middot; Anand Utsav</a>
+      <a href="#masquerades">Act II &middot; Masquerades</a>
+      <a href="#class-presentations">Act III &middot; Class Presentations</a>
+      <a href="#missing">Help complete the archive</a>
+      <a href="#more">Art, Culture &amp; Music</a>
+    </div>
+  </details>
+</nav>
+<section class="section cx-intro th-intro" id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">CIRS Theatre</span></p>
+      <h2 class="serif h2" data-split>Every Student, <em>On the Stage.</em></h2>
+      <p class="lead">For over three decades CIRS has been a whirlpool of theatrical activity &mdash; and the stage is not kept for a drama club. Every class, every house and the whole school take their turn on it.</p>
+    </div>
+    <div class="cx-intro__grid">
+      <div class="cx-intro__text rv">
+        <p class="copy">Every year the school churns out actors whose qualities are learnt on the stage and blossom into daily life. Confidence, expression and creativity find no limits here. Every novice aspires to the honourable title of &lsquo;actor&rsquo;, and theatre is always treated as sacred.</p>
+        <p class="copy">Programmes are put up to bring messages from our texts, stories from our students, and to celebrate the art of expression itself &mdash; with the concepts, the scripts and the acting done almost entirely by the students, on the stage and off it.</p>
+      </div>
+      <!-- The amphitheatre is cut from its camera original at twice the size
+           it used to be (tools/make-theatre.py), and it opens from a clip
+           without the push-in the shared reveal gives photographs, which
+           was softening it. -->
+      <figure class="cx-intro__fig th-reveal">
+        <img src="assets/img/theatre/amphitheatre-1000.webp"
+             srcset="assets/img/theatre/amphitheatre-1000.webp 1000w, assets/img/theatre/amphitheatre-2000.webp 2000w"
+             sizes="(min-width: 1320px) 640px, (min-width: 900px) 50vw, 100vw"
+             alt="The tiers of the open-air amphitheatre, seen from the stage" width="2000" height="1500" loading="lazy" decoding="async">
+        <figcaption>The amphitheatre, built into the slope.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="wrap">
+  <nav class="th-programme rv" aria-labelledby="th-programme-title">
+    <p class="th-programme__label" id="th-programme-title">Three ways to take the stage</p>
+    <p class="th-programme__lead">The whole school, the four houses and every class of twenty-five: each has its own turn in front of an audience.</p>
+    <ol class="th-programme__list">
+      <li><a class="th-programme__act" href="#anand-utsav"><span class="th-programme__n">I</span><span class="th-programme__name serif">Anand Utsav</span><span class="th-programme__who">The whole school</span></a></li>
+      <li><a class="th-programme__act" href="#masquerades"><span class="th-programme__n">II</span><span class="th-programme__name serif">Masquerades</span><span class="th-programme__who">The four houses</span></a></li>
+      <li><a class="th-programme__act" href="#class-presentations"><span class="th-programme__n">III</span><span class="th-programme__name serif">Class Presentations</span><span class="th-programme__who">Every class</span></a></li>
+    </ol>
+  </nav>
+  </div>
+</section>
+
+<!-- The three acts are written from tools/theatre.py, which holds every
+     photograph's source, house, year and caption, and every video link. -->
+<section class="th-au" id="anand-utsav" aria-labelledby="au-title" data-jump-label="Act I &middot; Anand Utsav">
+  <div class="th-au__track" data-au-track>
+    <div class="th-au__stage">
+      <img class="th-au__dark" src="assets/img/theatre/au-telephone-800.webp" srcset="assets/img/theatre/au-telephone-800.webp 800w, assets/img/theatre/au-telephone-1600.webp 1600w, assets/img/theatre/au-telephone-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="A student in a red kurta alone on a darkened stage, holding a telephone receiver" loading="lazy" decoding="async" style="--fx:46%;--fy:40%;--ar:2400/1350">
+      <div class="th-au__wide"><img class="th-au__wideimg" src="assets/img/theatre/au-forest-800.webp" srcset="assets/img/theatre/au-forest-800.webp 800w, assets/img/theatre/au-forest-1600.webp 1600w, assets/img/theatre/au-forest-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="A forest scene filling the stage: a large cast in costume under red light before a backdrop of trees" loading="lazy" decoding="async" style="--fx:50%;--fy:62%;--ar:2400/1350"></div>
+      <div class="th-au__scrim" aria-hidden="true"></div>
+      <header class="th-au__head">
+        <p class="th-label"><span class="th-label__act">Act I</span> The whole school &middot; Annual cultural programme</p>
+        <h2 class="th-au__title" id="au-title">Anand Utsav</h2>
+        <p class="th-au__sub">2024 &middot; <em>Transforming Lives! Transforming Vision!</em></p>
+      </header>
+      <p class="th-au__credit">The full stage, under red light</p>
+    </div>
+  </div>
+
+  <div class="wrap th-au__intro">
+    <p class="th-au__lede">Anand Utsav is the school&rsquo;s annual celebration, when parents come to campus &mdash; and its evening programme is the theatrical highlight of the year, for guests and students alike. The entire student body joins forces to put up a show to be remembered, with the concepts, the scripts and the acting done almost completely by the students, on the stage and off it.</p>
+    <dl class="th-facts">
+      <div><dt>Evening</dt><dd>15 October 2024, the second day</dd></div>
+      <div><dt>Stage</dt><dd>The main pandal, Arjuna Athletic Ground</dd></div>
+      <div><dt>On stage</dt><dd>The whole school</dd></div>
+    </dl>
+    <p class="th-watch"><a class="th-watch__link" href="https://www.youtube.com/watch?v=hWddJ6T9H2c" target="_blank" rel="noopener"><span class="th-watch__play" aria-hidden="true"></span>Watch the production <span class="th-watch__len">68:21</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></p>
+  </div>
+
+  <div class="th-au__seq">
+    <div class="wrap th-au__row th-au__row--court">
+      <figure class="th-fig">
+  <a class="th-photo" href="assets/img/theatre/au-court-1600.webp" data-th-open="anand-utsav:0"><img src="assets/img/theatre/au-court-800.webp" srcset="assets/img/theatre/au-court-800.webp 800w, assets/img/theatre/au-court-1600.webp 1600w" sizes="(min-width: 900px) 62vw, 100vw" width="1600" height="1067" alt="A royal court scene: seated figures in rich costume, guards with spears and a painted palace behind them" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">A court, in full costume</figcaption>
+</figure>
+    </div>
+    <figure class="th-fig th-bleed">
+  <a class="th-photo" href="assets/img/theatre/au-soldiers-2400.webp" data-th-open="anand-utsav:1"><img src="assets/img/theatre/au-soldiers-800.webp" srcset="assets/img/theatre/au-soldiers-800.webp 800w, assets/img/theatre/au-soldiers-1600.webp 1600w, assets/img/theatre/au-soldiers-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="A long line of students in army fatigues before a mountain backdrop" loading="lazy" decoding="async" style="--fx:50%;--fy:60%;--ar:2400/1350"></a>
+  <figcaption class="th-cap">An ensemble in uniform, across the whole stage</figcaption>
+</figure>
+    <div class="wrap th-au__row th-au__row--pair">
+      <figure class="th-fig th-au__dance">
+  <a class="th-photo" href="assets/img/theatre/au-dance-1600.webp" data-th-open="anand-utsav:2"><img src="assets/img/theatre/au-dance-800.webp" srcset="assets/img/theatre/au-dance-800.webp 800w, assets/img/theatre/au-dance-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="Dancers in violet, white and lilac before a painted palace" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Dancers before the palace</figcaption>
+</figure>
+      <figure class="th-fig th-au__sage">
+  <a class="th-photo" href="assets/img/theatre/au-sage-1280.webp" data-th-open="anand-utsav:3"><img src="assets/img/theatre/au-sage-640.webp" srcset="assets/img/theatre/au-sage-640.webp 640w, assets/img/theatre/au-sage-1280.webp 1280w" sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="2276" alt="A student made up as a white-haired sage in saffron, one arm raised, under violet light" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1280/2276"></a>
+  <figcaption class="th-cap">One figure, one light</figcaption>
+</figure>
+    </div>
+    <figure class="th-fig th-bleed th-au__finale">
+      <a class="th-photo" href="assets/img/theatre/au-finale-2400.webp" data-th-open="anand-utsav:4"><img src="assets/img/theatre/au-finale-800.webp" srcset="assets/img/theatre/au-finale-800.webp 800w, assets/img/theatre/au-finale-1600.webp 1600w, assets/img/theatre/au-finale-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="Hundreds of students crowded together on the stage, under a backdrop reading Transforming Lives" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:2400/1350"></a>
+      <figcaption class="th-au__finalecap">
+        <span class="th-au__finaleline serif">One stage. <em>The whole school.</em></span>
+        <span class="th-cap">Hundreds on the stage together</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap th-au__more">
+    <p class="th-list__head">Other years of Anand Utsav on the school&rsquo;s channel</p>
+    <ul class="th-list">
+        <li><a href="https://www.youtube.com/watch?v=-QrRDoSJ9Ww" target="_blank" rel="noopener"><span class="th-list__title">Maryada Purushottham</span><span class="th-list__note">Anand Utsav 2025 · Theater show</span><span class="th-list__len">67:36</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+        <li><a href="https://www.youtube.com/watch?v=XZg-NTpB1zo" target="_blank" rel="noopener"><span class="th-list__title">Dharmo Rakshati Rakshitah</span><span class="th-list__note">Anand Utsav 2023 · Cultural programme</span><span class="th-list__len">66:22</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+        <li><a href="https://www.youtube.com/watch?v=g_uTAO3wsO0" target="_blank" rel="noopener"><span class="th-list__title">CIRS Anand Utsav – 2019</span><span class="th-list__note">Recorded live</span><span class="th-list__len">79:17</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="th-mq" id="masquerades" aria-labelledby="mq-title" data-jump-label="Act II &middot; Masquerades">
+  <header class="wrap th-mq__open">
+    <figure class="th-mq__face"><img src="assets/img/theatre/mq-painted-face-640.webp" srcset="assets/img/theatre/mq-painted-face-640.webp 640w, assets/img/theatre/mq-painted-face-1280.webp 1280w" sizes="(min-width: 900px) 34vw, 70vw" width="1280" height="1920" alt="A student in dark body paint, half lit, looking out from the shadows" loading="lazy" decoding="async" style="--fx:50%;--fy:30%;--ar:1280/1920">
+      <figcaption class="th-cap">Vasistha House, Incursion, 2024</figcaption>
+    </figure>
+    <div class="th-mq__intro">
+      <p class="th-label"><span class="th-label__act">Act II</span> The four houses</p>
+      <h2 class="th-mq__title" id="mq-title">Masquerades</h2>
+      <p class="th-mq__lede">Four evenings. Four houses. Hundreds of students stoking the fire of theatre. Every house comes together to put up an hour-long play &mdash; fantasy or mystery, satire or thriller &mdash; and every eye in CIRS is hooked to the stage for every single second.</p>
+      <dl class="th-facts th-facts--dark">
+        <div><dt>Houses</dt><dd>Four</dd></div>
+        <div><dt>Evenings</dt><dd>One for each house</dd></div>
+        <div><dt>Each play</dt><dd>About an hour</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <div class="wrap th-bill">
+    <div class="th-bill__head">
+      <p class="th-bill__season">The programme &middot; Masquerade 2024, November</p>
+      <p class="th-bill__note">Four productions and 58 photographs from the school&rsquo;s archive. Choose a house, or step through every photograph in order.</p>
+      <button type="button" class="th-bill__all" data-th-view="all" hidden>View all 58 photographs</button>
+    </div>
+    <ol class="th-bill__list">
+      <li class="th-bill__item">
+        <a class="th-bill__link" href="#vasistha" data-house-link="vasistha">
+          <span class="th-bill__img"><img src="assets/img/theatre/vasistha-skull-staff-640.webp" srcset="assets/img/theatre/vasistha-skull-staff-640.webp 640w, assets/img/theatre/vasistha-skull-staff-1280.webp 1280w" sizes="(min-width: 900px) 24vw, (min-width: 560px) 48vw, 100vw" width="1280" height="2275" alt="A figure in black holding a staff topped with a skull" loading="lazy" decoding="async" style="--fx:50%;--fy:35%;--ar:1280/2275"></span>
+          <span class="th-bill__text">
+            <span class="th-bill__n">I</span>
+            <span class="th-bill__house serif">Vasistha</span>
+            <span class="th-bill__play"><em>Incursion</em></span>
+            <span class="th-bill__meta">2024 &middot; 14 photographs</span>
+          </span>
+        </a>
+      </li>
+      <li class="th-bill__item">
+        <a class="th-bill__link" href="#valmiki" data-house-link="valmiki">
+          <span class="th-bill__img"><img src="assets/img/theatre/valmiki-spotlight-800.webp" srcset="assets/img/theatre/valmiki-spotlight-800.webp 800w, assets/img/theatre/valmiki-spotlight-1600.webp 1600w" sizes="(min-width: 900px) 24vw, (min-width: 560px) 48vw, 100vw" width="1600" height="900" alt="An actor alone under a spotlight, a figure in the dark behind" loading="lazy" decoding="async" style="--fx:60%;--fy:45%;--ar:1600/900"></span>
+          <span class="th-bill__text">
+            <span class="th-bill__n">II</span>
+            <span class="th-bill__house serif">Valmiki</span>
+            <span class="th-bill__play"><em>Maledictus</em></span>
+            <span class="th-bill__meta">2024 &middot; 14 photographs</span>
+          </span>
+        </a>
+      </li>
+      <li class="th-bill__item">
+        <a class="th-bill__link" href="#vishwamitra" data-house-link="vishwamitra">
+          <span class="th-bill__img"><img src="assets/img/theatre/vishwamitra-gold-800.webp" srcset="assets/img/theatre/vishwamitra-gold-800.webp 800w, assets/img/theatre/vishwamitra-gold-1600.webp 1600w" sizes="(min-width: 900px) 24vw, (min-width: 560px) 48vw, 100vw" width="1600" height="900" alt="An actor in gold body paint raises a sword, a figure in black standing behind" loading="lazy" decoding="async" style="--fx:60%;--fy:45%;--ar:1600/900"></span>
+          <span class="th-bill__text">
+            <span class="th-bill__n">III</span>
+            <span class="th-bill__house serif">Vishwamitra</span>
+            <span class="th-bill__play"><em>The Imperium</em></span>
+            <span class="th-bill__meta">2024 &middot; 15 photographs</span>
+          </span>
+        </a>
+      </li>
+      <li class="th-bill__item">
+        <a class="th-bill__link" href="#vyasa" data-house-link="vyasa">
+          <span class="th-bill__img"><img src="assets/img/theatre/vyasa-turn-800.webp" srcset="assets/img/theatre/vyasa-turn-800.webp 800w, assets/img/theatre/vyasa-turn-1600.webp 1600w" sizes="(min-width: 900px) 24vw, (min-width: 560px) 48vw, 100vw" width="1600" height="1067" alt="A performer in a white and gold dress, mid-turn, arms out" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/1067"></span>
+          <span class="th-bill__text">
+            <span class="th-bill__n">IV</span>
+            <span class="th-bill__house serif">Vyasa</span>
+            <span class="th-bill__play"><em>Iridescente</em></span>
+            <span class="th-bill__meta">2024 &middot; 15 photographs</span>
+          </span>
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <div class="th-houses">
+    <nav class="th-rail" aria-label="Masquerade 2024 houses">
+      <div class="th-rail__inner">
+        <a href="#vasistha" data-house-link="vasistha"><span class="th-rail__n" aria-hidden="true">I</span>Vasistha</a>
+        <a href="#valmiki" data-house-link="valmiki"><span class="th-rail__n" aria-hidden="true">II</span>Valmiki</a>
+        <a href="#vishwamitra" data-house-link="vishwamitra"><span class="th-rail__n" aria-hidden="true">III</span>Vishwamitra</a>
+        <a href="#vyasa" data-house-link="vyasa"><span class="th-rail__n" aria-hidden="true">IV</span>Vyasa</a>
+      </div>
+    </nav>
+    <article class="th-house" id="vasistha" aria-labelledby="vasistha-title" data-house="vasistha">
+      <figure class="th-house__lead">
+        <a class="th-photo" href="assets/img/theatre/vasistha-hut-2400.webp" data-th-open="vasistha:0"><img class="th-house__leadimg" src="assets/img/theatre/vasistha-hut-800.webp" srcset="assets/img/theatre/vasistha-hut-800.webp 800w, assets/img/theatre/vasistha-hut-1600.webp 1600w, assets/img/theatre/vasistha-hut-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="Inside a thatched hut set: an elder in white holding a carved staff, and a younger actor leaning in" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:2400/1350"></a>
+        <figcaption class="th-house__label">
+          <span class="th-house__numeral" aria-hidden="true">I</span>
+          <div class="th-house__labeltext">
+            <span class="th-house__kicker">Vasistha House &middot; Masquerade 2024</span>
+            <h3 class="th-house__play serif" id="vasistha-title" tabindex="-1"><span class="sr-only">Vasistha House: </span><em>Incursion</em></h3>
+            <span class="th-house__count">14 photographs &middot; Inside the hut</span>
+          </div>
+        </figcaption>
+      </figure>
+      <div class="wrap th-house__bar">
+        <p class="th-watch th-watch--dark"><a class="th-watch__link" href="https://www.youtube.com/watch?v=T0EEKg1t92g" target="_blank" rel="noopener"><span class="th-watch__play" aria-hidden="true"></span>Watch the production <span class="th-watch__len">63:50</span><span class="sr-only"> (opens YouTube in a new tab)</span></a>
+          <a class="th-watch__alt" href="https://www.youtube.com/watch?v=mcS44liPzw8" target="_blank" rel="noopener">Trailer <span class="th-watch__len">2:06</span><span class="sr-only"> (opens YouTube in a new tab)</span></a>
+          <button type="button" class="th-watch__alt th-house__view" data-th-view="vasistha" hidden>Open the photographs</button></p>
+      </div>
+      <div class="wrap th-grid">
+        <div class="th-grid__row th-grid__row--feature">
+<figure class="th-fig th-g th-g--feature-0">
+  <a class="th-photo" href="assets/img/theatre/vasistha-elder-violet-1600.webp" data-th-open="vasistha:2"><img src="assets/img/theatre/vasistha-elder-violet-800.webp" srcset="assets/img/theatre/vasistha-elder-violet-800.webp 800w, assets/img/theatre/vasistha-elder-violet-1600.webp 1600w" sizes="(min-width: 900px) 64vw, 100vw" width="1600" height="900" alt="Under violet light, an elder in white with a staff, and a figure in purple holding up a shell" loading="lazy" decoding="async" style="--fx:65%;--fy:40%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Under violet light</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--feature-1">
+  <a class="th-photo" href="assets/img/theatre/vasistha-forest-dance-1600.webp" data-th-open="vasistha:3"><img src="assets/img/theatre/vasistha-forest-dance-800.webp" srcset="assets/img/theatre/vasistha-forest-dance-800.webp 800w, assets/img/theatre/vasistha-forest-dance-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A dance in the forest set: an actor in braces among dancers in floral dresses" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">A dance in the forest</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--feature-2">
+  <a class="th-photo" href="assets/img/theatre/vasistha-green-light-1600.webp" data-th-open="vasistha:4"><img src="assets/img/theatre/vasistha-green-light-800.webp" srcset="assets/img/theatre/vasistha-green-light-800.webp 800w, assets/img/theatre/vasistha-green-light-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="The cast in green light, several in white face paint" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">In green light</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/vasistha-full-stage-1600.webp" data-th-open="vasistha:5"><img src="assets/img/theatre/vasistha-full-stage-800.webp" srcset="assets/img/theatre/vasistha-full-stage-800.webp 800w, assets/img/theatre/vasistha-full-stage-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="896" alt="The whole stage: a forest set lit violet, dancers in pink and white, and one actor in braces" loading="lazy" decoding="async" style="--fx:50%;--fy:60%;--ar:1600/896"></a>
+  <figcaption class="th-cap">The whole stage</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--trio">
+<figure class="th-fig th-g th-g--trio-0">
+  <a class="th-photo" href="assets/img/theatre/vasistha-lights-1600.webp" data-th-open="vasistha:6"><img src="assets/img/theatre/vasistha-lights-800.webp" srcset="assets/img/theatre/vasistha-lights-800.webp 800w, assets/img/theatre/vasistha-lights-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A figure in a pointed hat and cloak in a set strung with fairy lights, a young actor beside" loading="lazy" decoding="async" style="--fx:45%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Among the strings of light</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--trio-1">
+  <a class="th-photo" href="assets/img/theatre/vasistha-body-paint-1600.webp" data-th-open="vasistha:7"><img src="assets/img/theatre/vasistha-body-paint-800.webp" srcset="assets/img/theatre/vasistha-body-paint-800.webp 800w, assets/img/theatre/vasistha-body-paint-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor with a painted back raises a staff overhead above another" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Body paint and a raised staff</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--trio-2">
+  <a class="th-photo" href="assets/img/theatre/vasistha-blue-light-1600.webp" data-th-open="vasistha:8"><img src="assets/img/theatre/vasistha-blue-light-800.webp" srcset="assets/img/theatre/vasistha-blue-light-800.webp 800w, assets/img/theatre/vasistha-blue-light-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor, arms flung wide, in a single blue light" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Arms wide, in blue light</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--duo">
+<figure class="th-fig th-g th-g--duo-0">
+  <a class="th-photo" href="assets/img/theatre/vasistha-foliage-1600.webp" data-th-open="vasistha:9"><img src="assets/img/theatre/vasistha-foliage-800.webp" srcset="assets/img/theatre/vasistha-foliage-800.webp 800w, assets/img/theatre/vasistha-foliage-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="1067" alt="An actor in dark body paint crouches forward in front of green-lit foliage" loading="lazy" decoding="async" style="--fx:55%;--fy:45%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">In the foliage</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--duo-1">
+  <a class="th-photo" href="assets/img/theatre/vasistha-red-cloth-1600.webp" data-th-open="vasistha:10"><img src="assets/img/theatre/vasistha-red-cloth-800.webp" srcset="assets/img/theatre/vasistha-red-cloth-800.webp 800w, assets/img/theatre/vasistha-red-cloth-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="1067" alt="Two actors in the forest set, one wrapped in red cloth" loading="lazy" decoding="async" style="--fx:55%;--fy:45%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">Two actors in the forest</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/vasistha-green-costumes-1600.webp" data-th-open="vasistha:11"><img src="assets/img/theatre/vasistha-green-costumes-800.webp" srcset="assets/img/theatre/vasistha-green-costumes-800.webp 800w, assets/img/theatre/vasistha-green-costumes-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="896" alt="The cast in green costumes surging across the stage with staffs, the audience close in front" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/896"></a>
+  <figcaption class="th-cap">The cast in green, across the stage</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--duo">
+<figure class="th-fig th-g th-g--duo-0">
+  <a class="th-photo" href="assets/img/theatre/vasistha-round-window-1600.webp" data-th-open="vasistha:12"><img src="assets/img/theatre/vasistha-round-window-800.webp" srcset="assets/img/theatre/vasistha-round-window-800.webp 800w, assets/img/theatre/vasistha-round-window-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="1067" alt="Three actors in casual clothes in a room set with a round window" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">A room with a round window</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--duo-1">
+  <a class="th-photo" href="assets/img/theatre/vasistha-off-stage-1600.webp" data-th-open="vasistha:13"><img src="assets/img/theatre/vasistha-off-stage-800.webp" srcset="assets/img/theatre/vasistha-off-stage-800.webp 800w, assets/img/theatre/vasistha-off-stage-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="896" alt="Off stage: cast members in face paint grinning at the camera" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/896"></a>
+  <figcaption class="th-cap">Off stage, still in paint</figcaption>
+</figure>
+        </div>
+      </div>
+      <div class="wrap th-house__foot">
+        <details class="th-more">
+          <summary class="th-more__toggle">Earlier Vasistha seasons on YouTube <span class="th-more__n">8</span></summary>
+          <ul class="th-list th-list--dark">
+          <li><a href="https://www.youtube.com/watch?v=xXx1UMMRg6k" target="_blank" rel="noopener"><span class="th-list__title">Vantara — Trailer 1</span><span class="th-list__note">Vasishta Productions · uploaded January 2026</span><span class="th-list__len">1:58</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=ahsfpRphrww" target="_blank" rel="noopener"><span class="th-list__title">Vantara — Trailer 2</span><span class="th-list__note">Vasishta Productions · uploaded January 2026</span><span class="th-list__len">1:05</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=irgJPObYt6Q" target="_blank" rel="noopener"><span class="th-list__title">The Anarchist — Trailer</span><span class="th-list__note">Masquerade 2022 · with Vishwamitra House</span><span class="th-list__len">1:38</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=hdKRmW4mnIk" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2018</span><span class="th-list__len">1:19</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=y1Lr7ViWMcE" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2017</span><span class="th-list__len">1:39</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=fVA42gm00PY" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2016</span><span class="th-list__len">1:30</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=7Boq4RjnQ30" target="_blank" rel="noopener"><span class="th-list__title">Zangoora — Trailer</span><span class="th-list__note">2015</span><span class="th-list__len">2:17</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=SsI4Tm5PP8Q" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2013</span><span class="th-list__len">2:47</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          </ul>
+        </details>
+        <a class="th-house__next" href="#valmiki" data-house-link="valmiki"><span class="th-house__nextlabel">Next</span> <span class="th-house__nextname">II. Valmiki &middot; <em>Maledictus</em></span></a>
+      </div>
+    </article>
+    <article class="th-house" id="valmiki" aria-labelledby="valmiki-title" data-house="valmiki">
+      <figure class="th-house__lead">
+        <a class="th-photo" href="assets/img/theatre/valmiki-song-2400.webp" data-th-open="valmiki:0"><img class="th-house__leadimg" src="assets/img/theatre/valmiki-song-800.webp" srcset="assets/img/theatre/valmiki-song-800.webp 800w, assets/img/theatre/valmiki-song-1600.webp 1600w, assets/img/theatre/valmiki-song-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="An actor in a wide-brimmed hat and braces sings with arms open, dancers with blue silks behind" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:2400/1350"></a>
+        <figcaption class="th-house__label">
+          <span class="th-house__numeral" aria-hidden="true">II</span>
+          <div class="th-house__labeltext">
+            <span class="th-house__kicker">Valmiki House &middot; Masquerade 2024</span>
+            <h3 class="th-house__play serif" id="valmiki-title" tabindex="-1"><span class="sr-only">Valmiki House: </span><em>Maledictus</em></h3>
+            <span class="th-house__count">14 photographs &middot; A song, with the whole company behind</span>
+          </div>
+        </figcaption>
+      </figure>
+      <div class="wrap th-house__bar">
+        <p class="th-watch th-watch--dark"><a class="th-watch__link" href="https://www.youtube.com/watch?v=fIMCetOlzCQ" target="_blank" rel="noopener"><span class="th-watch__play" aria-hidden="true"></span>Watch the production <span class="th-watch__len">67:23</span><span class="sr-only"> (opens YouTube in a new tab)</span></a>
+          <a class="th-watch__alt" href="https://www.youtube.com/watch?v=LDQe07FKQ3c" target="_blank" rel="noopener">Trailer <span class="th-watch__len">1:43</span><span class="sr-only"> (opens YouTube in a new tab)</span></a>
+          <button type="button" class="th-watch__alt th-house__view" data-th-view="valmiki" hidden>Open the photographs</button></p>
+      </div>
+      <div class="wrap th-grid">
+        <div class="th-grid__row th-grid__row--feature">
+<figure class="th-fig th-g th-g--feature-0">
+  <a class="th-photo" href="assets/img/theatre/valmiki-hat-jacket-1600.webp" data-th-open="valmiki:2"><img src="assets/img/theatre/valmiki-hat-jacket-800.webp" srcset="assets/img/theatre/valmiki-hat-jacket-800.webp 800w, assets/img/theatre/valmiki-hat-jacket-1600.webp 1600w" sizes="(min-width: 900px) 64vw, 100vw" width="1600" height="900" alt="An actor in a wide-brimmed hat faces another in a leather jacket" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Face to face</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--feature-1">
+  <a class="th-photo" href="assets/img/theatre/valmiki-grey-paint-1600.webp" data-th-open="valmiki:3"><img src="assets/img/theatre/valmiki-grey-paint-800.webp" srcset="assets/img/theatre/valmiki-grey-paint-800.webp 800w, assets/img/theatre/valmiki-grey-paint-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor painted grey leans on another in a hat" loading="lazy" decoding="async" style="--fx:55%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Grey paint and a battered hat</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--feature-2">
+  <a class="th-photo" href="assets/img/theatre/valmiki-staff-1600.webp" data-th-open="valmiki:4"><img src="assets/img/theatre/valmiki-staff-800.webp" srcset="assets/img/theatre/valmiki-staff-800.webp 800w, assets/img/theatre/valmiki-staff-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="Two actors in dark body paint, one holding a tall staff, with two actors in costume between them" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">The staff-bearers</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/valmiki-ribbons-1600.webp" data-th-open="valmiki:5"><img src="assets/img/theatre/valmiki-ribbons-800.webp" srcset="assets/img/theatre/valmiki-ribbons-800.webp 800w, assets/img/theatre/valmiki-ribbons-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="896" alt="The whole stage: dancers with blue silks above, and the company in front of the audience" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/896"></a>
+  <figcaption class="th-cap">Blue silks across the stage</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--trio">
+<figure class="th-fig th-g th-g--trio-0">
+  <a class="th-photo" href="assets/img/theatre/valmiki-grip-1600.webp" data-th-open="valmiki:6"><img src="assets/img/theatre/valmiki-grip-800.webp" srcset="assets/img/theatre/valmiki-grip-800.webp 800w, assets/img/theatre/valmiki-grip-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="In blue light, a cloaked figure grips another actor from behind while a third, in a green waistcoat, watches" loading="lazy" decoding="async" style="--fx:45%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">In blue light</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--trio-1">
+  <a class="th-photo" href="assets/img/theatre/valmiki-reach-1600.webp" data-th-open="valmiki:7"><img src="assets/img/theatre/valmiki-reach-800.webp" srcset="assets/img/theatre/valmiki-reach-800.webp 800w, assets/img/theatre/valmiki-reach-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor holding a tall staff reaches out an arm, the forest set dark behind" loading="lazy" decoding="async" style="--fx:65%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">A staff, and an outstretched arm</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--trio-2">
+  <a class="th-photo" href="assets/img/theatre/valmiki-star-1600.webp" data-th-open="valmiki:8"><img src="assets/img/theatre/valmiki-star-800.webp" srcset="assets/img/theatre/valmiki-star-800.webp 800w, assets/img/theatre/valmiki-star-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="Three actors around a glowing star-shaped prop" loading="lazy" decoding="async" style="--fx:40%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">The star</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--duo">
+<figure class="th-fig th-g th-g--duo-0">
+  <a class="th-photo" href="assets/img/theatre/valmiki-rope-1600.webp" data-th-open="valmiki:9"><img src="assets/img/theatre/valmiki-rope-800.webp" srcset="assets/img/theatre/valmiki-rope-800.webp 800w, assets/img/theatre/valmiki-rope-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="An actor swings a coil of rope in blue light, the audience seated close around the stage floor" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Among the audience</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--duo-1">
+  <a class="th-photo" href="assets/img/theatre/valmiki-struggle-1600.webp" data-th-open="valmiki:10"><img src="assets/img/theatre/valmiki-struggle-800.webp" srcset="assets/img/theatre/valmiki-struggle-800.webp 800w, assets/img/theatre/valmiki-struggle-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="900" alt="Two actors locked together in a struggle in blue light" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/900"></a>
+  <figcaption class="th-cap">A struggle in the dark</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/valmiki-smoke-1600.webp" data-th-open="valmiki:11"><img src="assets/img/theatre/valmiki-smoke-800.webp" srcset="assets/img/theatre/valmiki-smoke-800.webp 800w, assets/img/theatre/valmiki-smoke-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="896" alt="Actors in body paint, and one in white holding a staff that trails smoke" loading="lazy" decoding="async" style="--fx:60%;--fy:45%;--ar:1600/896"></a>
+  <figcaption class="th-cap">Smoke from the staff</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--duo">
+<figure class="th-fig th-g th-g--duo-0">
+  <a class="th-photo" href="assets/img/theatre/valmiki-sound-desk-1600.webp" data-th-open="valmiki:12"><img src="assets/img/theatre/valmiki-sound-desk-800.webp" srcset="assets/img/theatre/valmiki-sound-desk-800.webp 800w, assets/img/theatre/valmiki-sound-desk-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="A mixing desk, a laptop and a monitor speaker in the sound booth" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">The sound booth</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--duo-1">
+  <a class="th-photo" href="assets/img/theatre/valmiki-company-1600.webp" data-th-open="valmiki:13"><img src="assets/img/theatre/valmiki-company-800.webp" srcset="assets/img/theatre/valmiki-company-800.webp 800w, assets/img/theatre/valmiki-company-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="896" alt="The company gathered together on the hall floor in front of the stage" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/896"></a>
+  <figcaption class="th-cap">The company</figcaption>
+</figure>
+        </div>
+      </div>
+      <div class="wrap th-house__foot">
+        <details class="th-more">
+          <summary class="th-more__toggle">Earlier Valmiki seasons on YouTube <span class="th-more__n">7</span></summary>
+          <ul class="th-list th-list--dark">
+          <li><a href="https://www.youtube.com/watch?v=EfzbNboA4TE" target="_blank" rel="noopener"><span class="th-list__title">Melora</span><span class="th-list__note">Masquerade 2025</span><span class="th-list__len">1:17</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=P4GGqjywNhQ" target="_blank" rel="noopener"><span class="th-list__title">Inscenare — Trailer</span><span class="th-list__note">Masquerade 2022 · with Vyasa House</span><span class="th-list__len">1:38</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=YMccsEUTFmo" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2018</span><span class="th-list__len">2:01</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=Gfq8MvXjejk" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2017</span><span class="th-list__len">2:03</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=8bFocvpMhVs" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2016</span><span class="th-list__len">1:53</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=ZRIpcIDuCYg" target="_blank" rel="noopener"><span class="th-list__title">The Aladdin — Trailer</span><span class="th-list__note">2015</span><span class="th-list__len">2:14</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=7boWOTghbtg" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2013</span><span class="th-list__len">2:02</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          </ul>
+        </details>
+        <a class="th-house__next" href="#vishwamitra" data-house-link="vishwamitra"><span class="th-house__nextlabel">Next</span> <span class="th-house__nextname">III. Vishwamitra &middot; <em>The Imperium</em></span></a>
+      </div>
+    </article>
+    <article class="th-house" id="vishwamitra" aria-labelledby="vishwamitra-title" data-house="vishwamitra">
+      <figure class="th-house__lead">
+        <a class="th-photo" href="assets/img/theatre/vishwamitra-swords-2400.webp" data-th-open="vishwamitra:0"><img class="th-house__leadimg" src="assets/img/theatre/vishwamitra-swords-800.webp" srcset="assets/img/theatre/vishwamitra-swords-800.webp 800w, assets/img/theatre/vishwamitra-swords-1600.webp 1600w, assets/img/theatre/vishwamitra-swords-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="Two actors with swords among the cast, before a painted backdrop of houses and mountains" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:2400/1350"></a>
+        <figcaption class="th-house__label">
+          <span class="th-house__numeral" aria-hidden="true">III</span>
+          <div class="th-house__labeltext">
+            <span class="th-house__kicker">Vishwamitra House &middot; Masquerade 2024</span>
+            <h3 class="th-house__play serif" id="vishwamitra-title" tabindex="-1"><span class="sr-only">Vishwamitra House: </span><em>The Imperium</em></h3>
+            <span class="th-house__count">15 photographs &middot; Swords drawn, the village behind</span>
+          </div>
+        </figcaption>
+      </figure>
+      <div class="wrap th-house__bar">
+        <p class="th-watch th-watch--dark"><a class="th-watch__link" href="https://www.youtube.com/watch?v=ZlWd-PLTHaI" target="_blank" rel="noopener"><span class="th-watch__play" aria-hidden="true"></span>Watch the production <span class="th-watch__len">73:59</span><span class="sr-only"> (opens YouTube in a new tab)</span></a>
+          <a class="th-watch__alt" href="https://www.youtube.com/watch?v=2MzXLwLoszE" target="_blank" rel="noopener">Trailer <span class="th-watch__len">2:03</span><span class="sr-only"> (opens YouTube in a new tab)</span></a>
+          <button type="button" class="th-watch__alt th-house__view" data-th-view="vishwamitra" hidden>Open the photographs</button></p>
+      </div>
+      <div class="wrap th-grid">
+        <div class="th-grid__row th-grid__row--feature">
+<figure class="th-fig th-g th-g--feature-0">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-make-up-1600.webp" data-th-open="vishwamitra:2"><img src="assets/img/theatre/vishwamitra-make-up-800.webp" srcset="assets/img/theatre/vishwamitra-make-up-800.webp 800w, assets/img/theatre/vishwamitra-make-up-1600.webp 1600w" sizes="(min-width: 900px) 64vw, 100vw" width="1600" height="900" alt="Backstage: several students painting one actor&#x27;s face and chest" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Backstage, in make-up</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--feature-1">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-face-paint-1600.webp" data-th-open="vishwamitra:3"><img src="assets/img/theatre/vishwamitra-face-paint-800.webp" srcset="assets/img/theatre/vishwamitra-face-paint-800.webp 800w, assets/img/theatre/vishwamitra-face-paint-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A smiling actor in white and gold face paint" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Face paint, close up</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--feature-2">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-backdrop-1600.webp" data-th-open="vishwamitra:4"><img src="assets/img/theatre/vishwamitra-backdrop-800.webp" srcset="assets/img/theatre/vishwamitra-backdrop-800.webp 800w, assets/img/theatre/vishwamitra-backdrop-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="1067" alt="Students kneeling on a large cloth outdoors, painting it in sweeps of turquoise" loading="lazy" decoding="async" style="--fx:45%;--fy:55%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">Painting a backdrop</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-curtain-1600.webp" data-th-open="vishwamitra:5"><img src="assets/img/theatre/vishwamitra-curtain-800.webp" srcset="assets/img/theatre/vishwamitra-curtain-800.webp 800w, assets/img/theatre/vishwamitra-curtain-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="896" alt="The whole cast in a line, hands raised, before the painted backdrop of houses and mountains" loading="lazy" decoding="async" style="--fx:50%;--fy:60%;--ar:1600/896"></a>
+  <figcaption class="th-cap">The whole company, hands raised</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--duo has-portrait">
+<figure class="th-fig th-g th-g--duo-0">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-seated-1600.webp" data-th-open="vishwamitra:6"><img src="assets/img/theatre/vishwamitra-seated-800.webp" srcset="assets/img/theatre/vishwamitra-seated-800.webp 800w, assets/img/theatre/vishwamitra-seated-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="An actor seated on a draped block, arms spread wide in the dark" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Arms spread, in the dark</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--duo-1 is-portrait">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-portrait-1280.webp" data-th-open="vishwamitra:7"><img src="assets/img/theatre/vishwamitra-portrait-640.webp" srcset="assets/img/theatre/vishwamitra-portrait-640.webp 640w, assets/img/theatre/vishwamitra-portrait-1280.webp 1280w" sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="2275" alt="A cast member with white face paint and dark eyeliner, looking to one side" loading="lazy" decoding="async" style="--fx:50%;--fy:35%;--ar:1280/2275"></a>
+  <figcaption class="th-cap">Before going on</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--trio">
+<figure class="th-fig th-g th-g--trio-0">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-bed-1600.webp" data-th-open="vishwamitra:8"><img src="assets/img/theatre/vishwamitra-bed-800.webp" srcset="assets/img/theatre/vishwamitra-bed-800.webp 800w, assets/img/theatre/vishwamitra-bed-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="Two actors sitting on the edge of a bed in a room set" loading="lazy" decoding="async" style="--fx:60%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">A quieter scene</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--trio-1">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-armour-1600.webp" data-th-open="vishwamitra:9"><img src="assets/img/theatre/vishwamitra-armour-800.webp" srcset="assets/img/theatre/vishwamitra-armour-800.webp 800w, assets/img/theatre/vishwamitra-armour-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A figure in black armour in a doorway lit blue and white, another actor watching" loading="lazy" decoding="async" style="--fx:60%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">The armoured figure</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--trio-2">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-aisle-1600.webp" data-th-open="vishwamitra:10"><img src="assets/img/theatre/vishwamitra-aisle-800.webp" srcset="assets/img/theatre/vishwamitra-aisle-800.webp 800w, assets/img/theatre/vishwamitra-aisle-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor with a sword walks the aisle between rows of seated students" loading="lazy" decoding="async" style="--fx:45%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Down the aisle</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-beam-1600.webp" data-th-open="vishwamitra:11"><img src="assets/img/theatre/vishwamitra-beam-800.webp" srcset="assets/img/theatre/vishwamitra-beam-800.webp 800w, assets/img/theatre/vishwamitra-beam-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="896" alt="An actor lit by a single beam of light, students seated in the dark around" loading="lazy" decoding="async" style="--fx:55%;--fy:50%;--ar:1600/896"></a>
+  <figcaption class="th-cap">One beam of light</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--duo">
+<figure class="th-fig th-g th-g--duo-0">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-close-1600.webp" data-th-open="vishwamitra:12"><img src="assets/img/theatre/vishwamitra-close-800.webp" srcset="assets/img/theatre/vishwamitra-close-800.webp 800w, assets/img/theatre/vishwamitra-close-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="An actor in a white shirt, arms held wide, close to the camera" loading="lazy" decoding="async" style="--fx:55%;--fy:40%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Close enough to touch</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--duo-1">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-steps-1600.webp" data-th-open="vishwamitra:13"><img src="assets/img/theatre/vishwamitra-steps-800.webp" srcset="assets/img/theatre/vishwamitra-steps-800.webp 800w, assets/img/theatre/vishwamitra-steps-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="900" alt="A figure in dark costume crouches on draped steps" loading="lazy" decoding="async" style="--fx:55%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">On the steps</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-banner-1600.webp" data-th-open="vishwamitra:14"><img src="assets/img/theatre/vishwamitra-banner-800.webp" srcset="assets/img/theatre/vishwamitra-banner-800.webp 800w, assets/img/theatre/vishwamitra-banner-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="896" alt="The company cheering under a banner reading The Imperium" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/896"></a>
+  <figcaption class="th-cap">Under the banner</figcaption>
+</figure>
+        </div>
+      </div>
+      <div class="wrap th-house__foot">
+        <details class="th-more">
+          <summary class="th-more__toggle">Earlier Vishwamitra seasons on YouTube <span class="th-more__n">8</span></summary>
+          <ul class="th-list th-list--dark">
+          <li><a href="https://www.youtube.com/watch?v=G5C-ZwOjFfc" target="_blank" rel="noopener"><span class="th-list__title">El Diablo — Trailer</span><span class="th-list__note">Vishwamitra Productions · uploaded January 2026</span><span class="th-list__len">1:31</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=irgJPObYt6Q" target="_blank" rel="noopener"><span class="th-list__title">The Anarchist — Trailer</span><span class="th-list__note">Masquerade 2022 · with Vasistha House</span><span class="th-list__len">1:38</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=TBc2QiQpxgE" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2018</span><span class="th-list__len">2:14</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=YtkRYZAH6mY" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2017</span><span class="th-list__len">2:26</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=LP_ya4AeLRo" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2016</span><span class="th-list__len">2:07</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=epJFbrfj85A" target="_blank" rel="noopener"><span class="th-list__title">Lincoln</span><span class="th-list__note">Masquerade 2015 · the production</span><span class="th-list__len">81:33</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=G0dKF5LcYHs" target="_blank" rel="noopener"><span class="th-list__title">Lincoln — Trailer</span><span class="th-list__note">2015</span><span class="th-list__len">2:14</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=x6qiFz3deYo" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2013</span><span class="th-list__len">1:41</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          </ul>
+        </details>
+        <a class="th-house__next" href="#vyasa" data-house-link="vyasa"><span class="th-house__nextlabel">Next</span> <span class="th-house__nextname">IV. Vyasa &middot; <em>Iridescente</em></span></a>
+      </div>
+    </article>
+    <article class="th-house" id="vyasa" aria-labelledby="vyasa-title" data-house="vyasa">
+      <figure class="th-house__lead">
+        <a class="th-photo" href="assets/img/theatre/vyasa-throne-2400.webp" data-th-open="vyasa:0"><img class="th-house__leadimg" src="assets/img/theatre/vyasa-throne-800.webp" srcset="assets/img/theatre/vyasa-throne-800.webp 800w, assets/img/theatre/vyasa-throne-1600.webp 1600w, assets/img/theatre/vyasa-throne-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="A crowned figure on a throne beneath a lit heart, holding a white orb" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:2400/1350"></a>
+        <figcaption class="th-house__label">
+          <span class="th-house__numeral" aria-hidden="true">IV</span>
+          <div class="th-house__labeltext">
+            <span class="th-house__kicker">Vyasa House &middot; Masquerade 2024</span>
+            <h3 class="th-house__play serif" id="vyasa-title" tabindex="-1"><span class="sr-only">Vyasa House: </span><em>Iridescente</em></h3>
+            <span class="th-house__count">15 photographs &middot; The heart throne</span>
+          </div>
+        </figcaption>
+      </figure>
+      <div class="wrap th-house__bar">
+        <p class="th-watch th-watch--dark"><a class="th-watch__link" href="https://www.youtube.com/watch?v=QB5y9Y4h-k0" target="_blank" rel="noopener"><span class="th-watch__play" aria-hidden="true"></span>Watch the production <span class="th-watch__len">68:00</span><span class="sr-only"> (opens YouTube in a new tab)</span></a>
+          <a class="th-watch__alt" href="https://www.youtube.com/watch?v=XgO-X6jokU0" target="_blank" rel="noopener">Trailer <span class="th-watch__len">2:01</span><span class="sr-only"> (opens YouTube in a new tab)</span></a>
+          <button type="button" class="th-watch__alt th-house__view" data-th-view="vyasa" hidden>Open the photographs</button></p>
+      </div>
+      <div class="wrap th-grid">
+        <div class="th-grid__row th-grid__row--feature">
+<figure class="th-fig th-g th-g--feature-0">
+  <a class="th-photo" href="assets/img/theatre/vyasa-court-1600.webp" data-th-open="vyasa:2"><img src="assets/img/theatre/vyasa-court-800.webp" srcset="assets/img/theatre/vyasa-court-800.webp 800w, assets/img/theatre/vyasa-court-1600.webp 1600w" sizes="(min-width: 900px) 64vw, 100vw" width="1600" height="900" alt="A figure in a green jacket and a crowned figure with a staff before the heart set" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">At the heart set</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--feature-1">
+  <a class="th-photo" href="assets/img/theatre/vyasa-green-mask-1600.webp" data-th-open="vyasa:3"><img src="assets/img/theatre/vyasa-green-mask-800.webp" srcset="assets/img/theatre/vyasa-green-mask-800.webp 800w, assets/img/theatre/vyasa-green-mask-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A cast member in green spotted face paint and yellow spectacles" loading="lazy" decoding="async" style="--fx:40%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Green paint, yellow spectacles</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--feature-2">
+  <a class="th-photo" href="assets/img/theatre/vyasa-gold-gown-1600.webp" data-th-open="vyasa:4"><img src="assets/img/theatre/vyasa-gold-gown-800.webp" srcset="assets/img/theatre/vyasa-gold-gown-800.webp 800w, assets/img/theatre/vyasa-gold-gown-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A figure in a gold gown walks through the seated audience in blue light" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Through the audience</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/vyasa-tea-table-1600.webp" data-th-open="vyasa:5"><img src="assets/img/theatre/vyasa-tea-table-800.webp" srcset="assets/img/theatre/vyasa-tea-table-800.webp 800w, assets/img/theatre/vyasa-tea-table-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="900" alt="Actors crowded around a tea table beneath balloons and hanging lights" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">Around the tea table</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--trio">
+<figure class="th-fig th-g th-g--trio-0">
+  <a class="th-photo" href="assets/img/theatre/vyasa-lunge-1600.webp" data-th-open="vyasa:6"><img src="assets/img/theatre/vyasa-lunge-800.webp" srcset="assets/img/theatre/vyasa-lunge-800.webp 800w, assets/img/theatre/vyasa-lunge-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A figure in patterned body paint lunges low before the crowned figure holding an orb" loading="lazy" decoding="async" style="--fx:40%;--fy:55%;--ar:1600/900"></a>
+  <figcaption class="th-cap">The lunge</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--trio-1">
+  <a class="th-photo" href="assets/img/theatre/vyasa-crouch-1600.webp" data-th-open="vyasa:7"><img src="assets/img/theatre/vyasa-crouch-800.webp" srcset="assets/img/theatre/vyasa-crouch-800.webp 800w, assets/img/theatre/vyasa-crouch-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="1067" alt="A figure in patterned body paint crouches low against red drapes" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">Against the red drapes</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--trio-2">
+  <a class="th-photo" href="assets/img/theatre/vyasa-staff-1600.webp" data-th-open="vyasa:8"><img src="assets/img/theatre/vyasa-staff-800.webp" srcset="assets/img/theatre/vyasa-staff-800.webp 800w, assets/img/theatre/vyasa-staff-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="1067" alt="A figure in dark face paint raises both arms, holding a gilded staff" loading="lazy" decoding="async" style="--fx:55%;--fy:40%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">Both arms raised</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--duo">
+<figure class="th-fig th-g th-g--duo-0">
+  <a class="th-photo" href="assets/img/theatre/vyasa-kick-1600.webp" data-th-open="vyasa:9"><img src="assets/img/theatre/vyasa-kick-800.webp" srcset="assets/img/theatre/vyasa-kick-800.webp 800w, assets/img/theatre/vyasa-kick-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="A dancer in white kicks forward in front of the ensemble" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
+  <figcaption class="th-cap">The ensemble dances</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--duo-1">
+  <a class="th-photo" href="assets/img/theatre/vyasa-sashes-1600.webp" data-th-open="vyasa:10"><img src="assets/img/theatre/vyasa-sashes-800.webp" srcset="assets/img/theatre/vyasa-sashes-800.webp 800w, assets/img/theatre/vyasa-sashes-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="1067" alt="Dancers in black with red sashes, hands raised" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">Black and red</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/vyasa-banner-1600.webp" data-th-open="vyasa:11"><img src="assets/img/theatre/vyasa-banner-800.webp" srcset="assets/img/theatre/vyasa-banner-800.webp 800w, assets/img/theatre/vyasa-banner-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="900" alt="A hand-painted banner reading Iridescente above the stage" loading="lazy" decoding="async" style="--fx:50%;--fy:35%;--ar:1600/900"></a>
+  <figcaption class="th-cap">The banner</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--duo">
+<figure class="th-fig th-g th-g--duo-0">
+  <a class="th-photo" href="assets/img/theatre/vyasa-top-hat-1600.webp" data-th-open="vyasa:12"><img src="assets/img/theatre/vyasa-top-hat-800.webp" srcset="assets/img/theatre/vyasa-top-hat-800.webp 800w, assets/img/theatre/vyasa-top-hat-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="1067" alt="A figure in a tall hat and polka-dot sleeves beside a figure in an orange fur coat" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">A tall hat and an orange coat</figcaption>
+</figure>
+<figure class="th-fig th-g th-g--duo-1">
+  <a class="th-photo" href="assets/img/theatre/vyasa-kneel-1600.webp" data-th-open="vyasa:13"><img src="assets/img/theatre/vyasa-kneel-800.webp" srcset="assets/img/theatre/vyasa-kneel-800.webp 800w, assets/img/theatre/vyasa-kneel-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="1067" alt="Three actors kneel close together in pink light" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/1067"></a>
+  <figcaption class="th-cap">Three together</figcaption>
+</figure>
+        </div>
+        <div class="th-grid__row th-grid__row--full">
+<figure class="th-fig th-g th-g--full-0">
+  <a class="th-photo" href="assets/img/theatre/vyasa-company-1600.webp" data-th-open="vyasa:14"><img src="assets/img/theatre/vyasa-company-800.webp" srcset="assets/img/theatre/vyasa-company-800.webp 800w, assets/img/theatre/vyasa-company-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" width="1600" height="896" alt="The company crowded together in front of the heart set" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/896"></a>
+  <figcaption class="th-cap">The company</figcaption>
+</figure>
+        </div>
+      </div>
+      <div class="wrap th-house__foot">
+        <details class="th-more">
+          <summary class="th-more__toggle">Earlier Vyasa seasons on YouTube <span class="th-more__n">8</span></summary>
+          <ul class="th-list th-list--dark">
+          <li><a href="https://www.youtube.com/watch?v=khzY2dwtnrE" target="_blank" rel="noopener"><span class="th-list__title">Ivysherin — Trailer</span><span class="th-list__note">Vyasa Productions · uploaded January 2026</span><span class="th-list__len">2:10</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=P4GGqjywNhQ" target="_blank" rel="noopener"><span class="th-list__title">Inscenare — Trailer</span><span class="th-list__note">Masquerade 2022 · with Valmiki House</span><span class="th-list__len">1:38</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=rfNsT_1eSAk" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2018</span><span class="th-list__len">2:13</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=4V3SA84lv8U" target="_blank" rel="noopener"><span class="th-list__title">Imperium — Trailer</span><span class="th-list__note">2017</span><span class="th-list__len">2:15</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=YyrYMlsxt9g" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2016</span><span class="th-list__len">1:48</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=4zVnVIRazB0" target="_blank" rel="noopener"><span class="th-list__title">Vyasa House Masquerade 2015</span><span class="th-list__note">2015 · recording</span><span class="th-list__len">34:29</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=7aYY7nQH4mE" target="_blank" rel="noopener"><span class="th-list__title">Inside Out — Trailer</span><span class="th-list__note">2015</span><span class="th-list__len">2:05</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=1YbFJ4XF2tI" target="_blank" rel="noopener"><span class="th-list__title">Masquerade Trailer</span><span class="th-list__note">2013</span><span class="th-list__len">3:05</span><span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a></li>
+          </ul>
+        </details>
+        <a class="th-house__next" href="#class-presentations"><span class="th-house__nextlabel">Next</span> <span class="th-house__nextname">Act III &middot; Class Presentations</span></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section th-cp" id="class-presentations" aria-labelledby="cp-title" data-jump-label="Act III &middot; Class Presentations">
+  <div class="wrap">
+    <div class="th-cp__head">
+      <p class="th-label th-label--ink"><span class="th-label__act">Act III</span> Every class</p>
+      <h2 class="serif h2" id="cp-title">Class <em>Presentations.</em></h2>
+      <p class="lead">Every class of twenty-five gets the opportunity to put up a theatrical presentation in the school assembly once a year. Engaging every student through acting, dance, tech and lighting, theatre here is not limited to drama clubs but brings every pupil into its embrace. This is where prodigies are born.</p>
+      <p class="th-cp__note">Recorded and published by the school on its YouTube channel. Each class is named as its video names it, and each date is the date the video was uploaded.</p>
+    </div>
+    <ul class="th-videos">
+      <li class="th-video">
+        <a class="th-video__link" href="https://www.youtube.com/watch?v=h0w1Y3murJU" target="_blank" rel="noopener">
+          <span class="th-video__thumb"><img src="assets/img/theatre/yt/h0w1Y3murJU.webp" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="th-video__len">5:47</span></span>
+          <span class="th-video__class">Grade 8</span>
+          <span class="th-video__title serif">Dare to Dream</span>
+          <span class="th-video__meta">Uploaded April 2026</span>
+          <span class="th-video__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+        </a>
+      </li>
+      <li class="th-video">
+        <a class="th-video__link" href="https://www.youtube.com/watch?v=M1X5UxpTSdQ" target="_blank" rel="noopener">
+          <span class="th-video__thumb"><img src="assets/img/theatre/yt/M1X5UxpTSdQ.webp" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="th-video__len">9:19</span></span>
+          <span class="th-video__class">12th Management</span>
+          <span class="th-video__title serif">The Importance of Empathy</span>
+          <span class="th-video__meta">Uploaded March 2026</span>
+          <span class="th-video__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+        </a>
+      </li>
+      <li class="th-video">
+        <a class="th-video__link" href="https://www.youtube.com/watch?v=yhlidIk6ufM" target="_blank" rel="noopener">
+          <span class="th-video__thumb"><img src="assets/img/theatre/yt/yhlidIk6ufM.webp" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="th-video__len">7:01</span></span>
+          <span class="th-video__class">9th Grade</span>
+          <span class="th-video__title serif">The Battle Within</span>
+          <span class="th-video__meta">Uploaded March 2026</span>
+          <span class="th-video__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+        </a>
+      </li>
+      <li class="th-video">
+        <a class="th-video__link" href="https://www.youtube.com/watch?v=LUi91hmstMY" target="_blank" rel="noopener">
+          <span class="th-video__thumb"><img src="assets/img/theatre/yt/LUi91hmstMY.webp" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="th-video__len">5:11</span></span>
+          <span class="th-video__class">5th Grade</span>
+          <span class="th-video__title serif">Protect Nature!</span>
+          <span class="th-video__meta">Uploaded March 2026</span>
+          <span class="th-video__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+        </a>
+      </li>
+      <li class="th-video">
+        <a class="th-video__link" href="https://www.youtube.com/watch?v=PIaI4F8kIC8" target="_blank" rel="noopener">
+          <span class="th-video__thumb"><img src="assets/img/theatre/yt/PIaI4F8kIC8.webp" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="th-video__len">7:34</span></span>
+          <span class="th-video__class">IB 1st Year</span>
+          <span class="th-video__title serif">For One More Day</span>
+          <span class="th-video__meta">Uploaded March 2026</span>
+          <span class="th-video__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+        </a>
+      </li>
+      <li class="th-video">
+        <a class="th-video__link" href="https://www.youtube.com/watch?v=-3n1Ms17jao" target="_blank" rel="noopener">
+          <span class="th-video__thumb"><img src="assets/img/theatre/yt/-3n1Ms17jao.webp" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="th-video__len">5:44</span></span>
+          <span class="th-video__class">Grade 7</span>
+          <span class="th-video__title serif">Knowing the Nation</span>
+          <span class="th-video__meta">Uploaded March 2025</span>
+          <span class="th-video__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+        </a>
+      </li>
+    </ul>
+    <details class="th-archive">
+      <summary class="th-archive__toggle">Earlier class presentations, 2015&ndash;2019 <span class="th-archive__n">19</span></summary>
+      <ul class="th-vrows">
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=qh1LZqnmHOE" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/qh1LZqnmHOE.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - Class presentation by 7C on Kerala floods.</span>
+            <span class="th-vrow__meta">7C &middot; uploaded 2019 &middot; 5:36</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=SxUIJthDw1A" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/SxUIJthDw1A.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - Class presentation by10 C on Kerala floods.</span>
+            <span class="th-vrow__meta">10 C &middot; uploaded 2019 &middot; 7:16</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=7GL6BD-PoLo" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/7GL6BD-PoLo.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - Class presentation by 10B. Live in the moment.</span>
+            <span class="th-vrow__meta">10B &middot; uploaded 2019 &middot; 7:43</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=VzVlBfmg8ek" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/VzVlBfmg8ek.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">Class presentation by Class 11 science. SAY NO TO SUICIDE.</span>
+            <span class="th-vrow__meta">Class 11 Science &middot; uploaded 2019 &middot; 5:19</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=PSBkm2KabT8" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/PSBkm2KabT8.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">Class presentation by 11 Management.</span>
+            <span class="th-vrow__meta">11 Management &middot; uploaded 2019 &middot; 4:57</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=hZC0gSYXjH0" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/hZC0gSYXjH0.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - Class 10 B Presentation</span>
+            <span class="th-vrow__meta">10 B &middot; uploaded 2018 &middot; 7:23</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=jARHAh1WyZE" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/jARHAh1WyZE.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - Class 10 C Presentation</span>
+            <span class="th-vrow__meta">10 C &middot; uploaded 2018 &middot; 6:13</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=XhlQL5u9f2s" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/XhlQL5u9f2s.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - Class Presentation by 10 D</span>
+            <span class="th-vrow__meta">10 D &middot; uploaded 2018 &middot; 5:35</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=ILPM6xFXtXA" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/ILPM6xFXtXA.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - Class 11 Management Presentation</span>
+            <span class="th-vrow__meta">11 Management &middot; uploaded 2018 &middot; 4:59</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=T0VdRpLM4Jk" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/T0VdRpLM4Jk.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - CLASS PRESENTATION BY 7 A</span>
+            <span class="th-vrow__meta">7 A &middot; uploaded 2018 &middot; 6:38</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=0f14pDWoVVc" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/0f14pDWoVVc.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - CLASS PRESENTATION BY 5 B</span>
+            <span class="th-vrow__meta">5 B &middot; uploaded 2017 &middot; 8:16</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=jO9t7gN8v4A" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/jO9t7gN8v4A.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - CLASS PRESENTATION BY 11 th SCIENCE</span>
+            <span class="th-vrow__meta">11th Science &middot; uploaded 2017 &middot; 5:24</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=CnWj3OTRP3A" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/CnWj3OTRP3A.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - CLASS 10 B PRESENTATION</span>
+            <span class="th-vrow__meta">10 B &middot; uploaded 2016 &middot; 5:16</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=tLkWgIBgtkQ" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/tLkWgIBgtkQ.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - CLASS 6 B presentation</span>
+            <span class="th-vrow__meta">6 B &middot; uploaded 2016 &middot; 8:57</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=N0o6O4xjKIM" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/N0o6O4xjKIM.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - Class 7c Presentation about Mobile Use</span>
+            <span class="th-vrow__meta">7C &middot; uploaded 2015 &middot; 1:55</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=IzJvNBZZzw8" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/IzJvNBZZzw8.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - CLASS 6B PRESENTATION ABOUT &quot;AGRICULTURE&quot;</span>
+            <span class="th-vrow__meta">6B &middot; uploaded 2015 &middot; 10:34</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=wgpxdg4__2A" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/wgpxdg4__2A.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - IB Ist Year Class Presentation -&quot;About IB &quot;</span>
+            <span class="th-vrow__meta">IB 1st Year &middot; uploaded 2015 &middot; 6:10</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=9ltZfFC2lvU" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/9ltZfFC2lvU.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS - &quot;I transform, india transforms&quot; 12th Management Class Presentation 2015</span>
+            <span class="th-vrow__meta">12th Management &middot; 2015 &middot; uploaded 2015 &middot; 7:12</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+        <li class="th-vrow">
+          <a class="th-vrow__link" href="https://www.youtube.com/watch?v=_1YLD_SKHBM" target="_blank" rel="noopener">
+            <img src="assets/img/theatre/yt/_1YLD_SKHBM.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
+            <span class="th-vrow__title">CIRS 11 mgmt class presentation 2015</span>
+            <span class="th-vrow__meta">11 Management &middot; 2015 &middot; uploaded 2015 &middot; 7:15</span>
+            <span class="th-vrow__cta">Watch on YouTube <span class="th-ext" aria-hidden="true">&#8599;</span></span><span class="sr-only"> (opens YouTube in a new tab)</span>
+          </a>
+        </li>
+      </ul>
+    </details>
+    <p class="th-cp__links">
+      <a class="btn btn--outline" href="https://www.youtube.com/playlist?list=PLjprqkMR0QoY-Wg1DkYqtn5MiPAzVStN3" target="_blank" rel="noopener">The class presentation playlist<span class="sr-only"> (opens YouTube in a new tab)</span></a>
+      <a class="th-cp__channel" href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener">All videos on the CIRS channel <span class="th-ext" aria-hidden="true">&#8599;</span><span class="sr-only"> (opens YouTube in a new tab)</span></a>
+    </p>
+  </div>
+</section>
+
+<section class="section th-invite" id="missing" data-jump-label="Help complete the archive">
+  <div class="wrap th-invite__inner">
+    <div class="th-invite__text">
+      <p class="marker"><span class="sc">The programme is not finished</span></p>
+      <h2 class="serif h2">Photographs, titles <em>and recordings.</em></h2>
+      <p class="copy">This page shows what the school&rsquo;s photograph archive and its YouTube channel could confirm: one Anand Utsav evening, the four Masquerades of 2024 and the class presentations published since 2015. Photographs from other Masquerade seasons, the titles and casts of earlier productions, and recordings that never reached the channel are all still missing.</p>
+      <p class="copy">If you have them, send them to the school with the year, the house or class, and the name of the production, so that they can be added here.</p>
+    </div>
+    <p class="th-invite__action"><a class="btn btn--primary" href="mailto:info@cirschool.org?subject=CIRS%20Theatre%3A%20photographs%20and%20recordings">Write to info@cirschool.org</a></p>
+  </div>
+</section>
+
+<section class="section cx-onward" id="more">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">Art, Culture &amp; Music</span></p>
+      <h2 class="serif h2" data-split>More from <em>the stage and the studio.</em></h2>
+    </div>
+    <nav class="cx-onward__grid rv" aria-label="More from Art, Culture and Music">
+      <a class="cx-onward__link" href="cultural-gallery.html">
+        <span class="cx-onward__name serif">CIRS Cultural Gallery</span>
+        <span class="cx-onward__desc">Music, dance, theatre and art, on one wall</span>
+      </a>
+      <a class="cx-onward__link" href="art-attack.html">
+        <span class="cx-onward__name serif">CIRS Art Attack</span>
+        <span class="cx-onward__desc">Painting, craft and the things made for the stage</span>
+      </a>
+      <a class="cx-onward__link" href="festivals.html">
+        <span class="cx-onward__name serif">CIRS Festivals</span>
+        <span class="cx-onward__desc">The year, kept festival by festival</span>
+      </a>
+    </nav>
+  </div>
+</section>
+
+<!-- The photograph viewer. A native modal dialog: the page behind is inert
+     and Escape closes it. assets/js/theatre.js fills it from the JSON below. -->
+<dialog class="th-viewer" id="thViewer" aria-labelledby="thViewerTitle">
+  <div class="th-viewer__top">
+    <p class="th-viewer__where"><span class="th-viewer__title" id="thViewerTitle"></span> <span class="th-viewer__sub"></span></p>
+    <p class="th-viewer__count" aria-live="polite"></p>
+    <button type="button" class="th-viewer__close" data-th-close aria-label="Close the viewer" autofocus>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="th-viewer__stage" data-th-stage></div>
+  <p class="th-viewer__caption"></p>
+  <button type="button" class="th-viewer__step th-viewer__step--prev" data-th-step="-1" aria-label="Previous photograph">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M11 3.5L5.5 9l5.5 5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="th-viewer__step th-viewer__step--next" data-th-step="1" aria-label="Next photograph">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M7 3.5L12.5 9 7 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</dialog>
+<script type="application/json" id="th-viewer-data">{"groups":{"anand-utsav":{"label":"Anand Utsav 2024","sub":"Transforming Lives! Transforming Vision!","items":[{"src":"assets/img/theatre/au-court-1600.webp","tile":"assets/img/theatre/au-court-800.webp","w":1600,"h":1067,"alt":"A royal court scene: seated figures in rich costume, guards with spears and a painted palace behind them","caption":"A court, in full costume"},{"src":"assets/img/theatre/au-soldiers-2400.webp","tile":"assets/img/theatre/au-soldiers-800.webp","w":2400,"h":1350,"alt":"A long line of students in army fatigues before a mountain backdrop","caption":"An ensemble in uniform, across the whole stage"},{"src":"assets/img/theatre/au-dance-1600.webp","tile":"assets/img/theatre/au-dance-800.webp","w":1600,"h":900,"alt":"Dancers in violet, white and lilac before a painted palace","caption":"Dancers before the palace"},{"src":"assets/img/theatre/au-sage-1280.webp","tile":"assets/img/theatre/au-sage-640.webp","w":1280,"h":2276,"alt":"A student made up as a white-haired sage in saffron, one arm raised, under violet light","caption":"One figure, one light"},{"src":"assets/img/theatre/au-finale-2400.webp","tile":"assets/img/theatre/au-finale-800.webp","w":2400,"h":1350,"alt":"Hundreds of students crowded together on the stage, under a backdrop reading Transforming Lives","caption":"Hundreds on the stage together"}]},"vasistha":{"label":"Vasistha House","sub":"Incursion, Masquerade 2024","items":[{"src":"assets/img/theatre/vasistha-hut-2400.webp","tile":"assets/img/theatre/vasistha-hut-800.webp","w":2400,"h":1350,"alt":"Inside a thatched hut set: an elder in white holding a carved staff, and a younger actor leaning in","caption":"Inside the hut"},{"src":"assets/img/theatre/vasistha-skull-staff-1280.webp","tile":"assets/img/theatre/vasistha-skull-staff-640.webp","w":1280,"h":2275,"alt":"A figure in black holding a staff topped with a skull","caption":"The skull-topped staff"},{"src":"assets/img/theatre/vasistha-elder-violet-1600.webp","tile":"assets/img/theatre/vasistha-elder-violet-800.webp","w":1600,"h":900,"alt":"Under violet light, an elder in white with a staff, and a figure in purple holding up a shell","caption":"Under violet light"},{"src":"assets/img/theatre/vasistha-forest-dance-1600.webp","tile":"assets/img/theatre/vasistha-forest-dance-800.webp","w":1600,"h":900,"alt":"A dance in the forest set: an actor in braces among dancers in floral dresses","caption":"A dance in the forest"},{"src":"assets/img/theatre/vasistha-green-light-1600.webp","tile":"assets/img/theatre/vasistha-green-light-800.webp","w":1600,"h":900,"alt":"The cast in green light, several in white face paint","caption":"In green light"},{"src":"assets/img/theatre/vasistha-full-stage-1600.webp","tile":"assets/img/theatre/vasistha-full-stage-800.webp","w":1600,"h":896,"alt":"The whole stage: a forest set lit violet, dancers in pink and white, and one actor in braces","caption":"The whole stage"},{"src":"assets/img/theatre/vasistha-lights-1600.webp","tile":"assets/img/theatre/vasistha-lights-800.webp","w":1600,"h":900,"alt":"A figure in a pointed hat and cloak in a set strung with fairy lights, a young actor beside","caption":"Among the strings of light"},{"src":"assets/img/theatre/vasistha-body-paint-1600.webp","tile":"assets/img/theatre/vasistha-body-paint-800.webp","w":1600,"h":900,"alt":"An actor with a painted back raises a staff overhead above another","caption":"Body paint and a raised staff"},{"src":"assets/img/theatre/vasistha-blue-light-1600.webp","tile":"assets/img/theatre/vasistha-blue-light-800.webp","w":1600,"h":900,"alt":"An actor, arms flung wide, in a single blue light","caption":"Arms wide, in blue light"},{"src":"assets/img/theatre/vasistha-foliage-1600.webp","tile":"assets/img/theatre/vasistha-foliage-800.webp","w":1600,"h":1067,"alt":"An actor in dark body paint crouches forward in front of green-lit foliage","caption":"In the foliage"},{"src":"assets/img/theatre/vasistha-red-cloth-1600.webp","tile":"assets/img/theatre/vasistha-red-cloth-800.webp","w":1600,"h":1067,"alt":"Two actors in the forest set, one wrapped in red cloth","caption":"Two actors in the forest"},{"src":"assets/img/theatre/vasistha-green-costumes-1600.webp","tile":"assets/img/theatre/vasistha-green-costumes-800.webp","w":1600,"h":896,"alt":"The cast in green costumes surging across the stage with staffs, the audience close in front","caption":"The cast in green, across the stage"},{"src":"assets/img/theatre/vasistha-round-window-1600.webp","tile":"assets/img/theatre/vasistha-round-window-800.webp","w":1600,"h":1067,"alt":"Three actors in casual clothes in a room set with a round window","caption":"A room with a round window"},{"src":"assets/img/theatre/vasistha-off-stage-1600.webp","tile":"assets/img/theatre/vasistha-off-stage-800.webp","w":1600,"h":896,"alt":"Off stage: cast members in face paint grinning at the camera","caption":"Off stage, still in paint"}]},"valmiki":{"label":"Valmiki House","sub":"Maledictus, Masquerade 2024","items":[{"src":"assets/img/theatre/valmiki-song-2400.webp","tile":"assets/img/theatre/valmiki-song-800.webp","w":2400,"h":1350,"alt":"An actor in a wide-brimmed hat and braces sings with arms open, dancers with blue silks behind","caption":"A song, with the whole company behind"},{"src":"assets/img/theatre/valmiki-spotlight-1600.webp","tile":"assets/img/theatre/valmiki-spotlight-800.webp","w":1600,"h":900,"alt":"An actor alone under a spotlight, a figure in the dark behind","caption":"Alone in the spotlight"},{"src":"assets/img/theatre/valmiki-hat-jacket-1600.webp","tile":"assets/img/theatre/valmiki-hat-jacket-800.webp","w":1600,"h":900,"alt":"An actor in a wide-brimmed hat faces another in a leather jacket","caption":"Face to face"},{"src":"assets/img/theatre/valmiki-grey-paint-1600.webp","tile":"assets/img/theatre/valmiki-grey-paint-800.webp","w":1600,"h":900,"alt":"An actor painted grey leans on another in a hat","caption":"Grey paint and a battered hat"},{"src":"assets/img/theatre/valmiki-staff-1600.webp","tile":"assets/img/theatre/valmiki-staff-800.webp","w":1600,"h":900,"alt":"Two actors in dark body paint, one holding a tall staff, with two actors in costume between them","caption":"The staff-bearers"},{"src":"assets/img/theatre/valmiki-ribbons-1600.webp","tile":"assets/img/theatre/valmiki-ribbons-800.webp","w":1600,"h":896,"alt":"The whole stage: dancers with blue silks above, and the company in front of the audience","caption":"Blue silks across the stage"},{"src":"assets/img/theatre/valmiki-grip-1600.webp","tile":"assets/img/theatre/valmiki-grip-800.webp","w":1600,"h":900,"alt":"In blue light, a cloaked figure grips another actor from behind while a third, in a green waistcoat, watches","caption":"In blue light"},{"src":"assets/img/theatre/valmiki-reach-1600.webp","tile":"assets/img/theatre/valmiki-reach-800.webp","w":1600,"h":900,"alt":"An actor holding a tall staff reaches out an arm, the forest set dark behind","caption":"A staff, and an outstretched arm"},{"src":"assets/img/theatre/valmiki-star-1600.webp","tile":"assets/img/theatre/valmiki-star-800.webp","w":1600,"h":900,"alt":"Three actors around a glowing star-shaped prop","caption":"The star"},{"src":"assets/img/theatre/valmiki-rope-1600.webp","tile":"assets/img/theatre/valmiki-rope-800.webp","w":1600,"h":900,"alt":"An actor swings a coil of rope in blue light, the audience seated close around the stage floor","caption":"Among the audience"},{"src":"assets/img/theatre/valmiki-struggle-1600.webp","tile":"assets/img/theatre/valmiki-struggle-800.webp","w":1600,"h":900,"alt":"Two actors locked together in a struggle in blue light","caption":"A struggle in the dark"},{"src":"assets/img/theatre/valmiki-smoke-1600.webp","tile":"assets/img/theatre/valmiki-smoke-800.webp","w":1600,"h":896,"alt":"Actors in body paint, and one in white holding a staff that trails smoke","caption":"Smoke from the staff"},{"src":"assets/img/theatre/valmiki-sound-desk-1600.webp","tile":"assets/img/theatre/valmiki-sound-desk-800.webp","w":1600,"h":900,"alt":"A mixing desk, a laptop and a monitor speaker in the sound booth","caption":"The sound booth"},{"src":"assets/img/theatre/valmiki-company-1600.webp","tile":"assets/img/theatre/valmiki-company-800.webp","w":1600,"h":896,"alt":"The company gathered together on the hall floor in front of the stage","caption":"The company"}]},"vishwamitra":{"label":"Vishwamitra House","sub":"The Imperium, Masquerade 2024","items":[{"src":"assets/img/theatre/vishwamitra-swords-2400.webp","tile":"assets/img/theatre/vishwamitra-swords-800.webp","w":2400,"h":1350,"alt":"Two actors with swords among the cast, before a painted backdrop of houses and mountains","caption":"Swords drawn, the village behind"},{"src":"assets/img/theatre/vishwamitra-gold-1600.webp","tile":"assets/img/theatre/vishwamitra-gold-800.webp","w":1600,"h":900,"alt":"An actor in gold body paint raises a sword, a figure in black standing behind","caption":"Gold paint, sword raised"},{"src":"assets/img/theatre/vishwamitra-make-up-1600.webp","tile":"assets/img/theatre/vishwamitra-make-up-800.webp","w":1600,"h":900,"alt":"Backstage: several students painting one actor's face and chest","caption":"Backstage, in make-up"},{"src":"assets/img/theatre/vishwamitra-face-paint-1600.webp","tile":"assets/img/theatre/vishwamitra-face-paint-800.webp","w":1600,"h":900,"alt":"A smiling actor in white and gold face paint","caption":"Face paint, close up"},{"src":"assets/img/theatre/vishwamitra-backdrop-1600.webp","tile":"assets/img/theatre/vishwamitra-backdrop-800.webp","w":1600,"h":1067,"alt":"Students kneeling on a large cloth outdoors, painting it in sweeps of turquoise","caption":"Painting a backdrop"},{"src":"assets/img/theatre/vishwamitra-curtain-1600.webp","tile":"assets/img/theatre/vishwamitra-curtain-800.webp","w":1600,"h":896,"alt":"The whole cast in a line, hands raised, before the painted backdrop of houses and mountains","caption":"The whole company, hands raised"},{"src":"assets/img/theatre/vishwamitra-seated-1600.webp","tile":"assets/img/theatre/vishwamitra-seated-800.webp","w":1600,"h":900,"alt":"An actor seated on a draped block, arms spread wide in the dark","caption":"Arms spread, in the dark"},{"src":"assets/img/theatre/vishwamitra-portrait-1280.webp","tile":"assets/img/theatre/vishwamitra-portrait-640.webp","w":1280,"h":2275,"alt":"A cast member with white face paint and dark eyeliner, looking to one side","caption":"Before going on"},{"src":"assets/img/theatre/vishwamitra-bed-1600.webp","tile":"assets/img/theatre/vishwamitra-bed-800.webp","w":1600,"h":900,"alt":"Two actors sitting on the edge of a bed in a room set","caption":"A quieter scene"},{"src":"assets/img/theatre/vishwamitra-armour-1600.webp","tile":"assets/img/theatre/vishwamitra-armour-800.webp","w":1600,"h":900,"alt":"A figure in black armour in a doorway lit blue and white, another actor watching","caption":"The armoured figure"},{"src":"assets/img/theatre/vishwamitra-aisle-1600.webp","tile":"assets/img/theatre/vishwamitra-aisle-800.webp","w":1600,"h":900,"alt":"An actor with a sword walks the aisle between rows of seated students","caption":"Down the aisle"},{"src":"assets/img/theatre/vishwamitra-beam-1600.webp","tile":"assets/img/theatre/vishwamitra-beam-800.webp","w":1600,"h":896,"alt":"An actor lit by a single beam of light, students seated in the dark around","caption":"One beam of light"},{"src":"assets/img/theatre/vishwamitra-close-1600.webp","tile":"assets/img/theatre/vishwamitra-close-800.webp","w":1600,"h":900,"alt":"An actor in a white shirt, arms held wide, close to the camera","caption":"Close enough to touch"},{"src":"assets/img/theatre/vishwamitra-steps-1600.webp","tile":"assets/img/theatre/vishwamitra-steps-800.webp","w":1600,"h":900,"alt":"A figure in dark costume crouches on draped steps","caption":"On the steps"},{"src":"assets/img/theatre/vishwamitra-banner-1600.webp","tile":"assets/img/theatre/vishwamitra-banner-800.webp","w":1600,"h":896,"alt":"The company cheering under a banner reading The Imperium","caption":"Under the banner"}]},"vyasa":{"label":"Vyasa House","sub":"Iridescente, Masquerade 2024","items":[{"src":"assets/img/theatre/vyasa-throne-2400.webp","tile":"assets/img/theatre/vyasa-throne-800.webp","w":2400,"h":1350,"alt":"A crowned figure on a throne beneath a lit heart, holding a white orb","caption":"The heart throne"},{"src":"assets/img/theatre/vyasa-turn-1600.webp","tile":"assets/img/theatre/vyasa-turn-800.webp","w":1600,"h":1067,"alt":"A performer in a white and gold dress, mid-turn, arms out","caption":"Mid-turn"},{"src":"assets/img/theatre/vyasa-court-1600.webp","tile":"assets/img/theatre/vyasa-court-800.webp","w":1600,"h":900,"alt":"A figure in a green jacket and a crowned figure with a staff before the heart set","caption":"At the heart set"},{"src":"assets/img/theatre/vyasa-green-mask-1600.webp","tile":"assets/img/theatre/vyasa-green-mask-800.webp","w":1600,"h":900,"alt":"A cast member in green spotted face paint and yellow spectacles","caption":"Green paint, yellow spectacles"},{"src":"assets/img/theatre/vyasa-gold-gown-1600.webp","tile":"assets/img/theatre/vyasa-gold-gown-800.webp","w":1600,"h":900,"alt":"A figure in a gold gown walks through the seated audience in blue light","caption":"Through the audience"},{"src":"assets/img/theatre/vyasa-tea-table-1600.webp","tile":"assets/img/theatre/vyasa-tea-table-800.webp","w":1600,"h":900,"alt":"Actors crowded around a tea table beneath balloons and hanging lights","caption":"Around the tea table"},{"src":"assets/img/theatre/vyasa-lunge-1600.webp","tile":"assets/img/theatre/vyasa-lunge-800.webp","w":1600,"h":900,"alt":"A figure in patterned body paint lunges low before the crowned figure holding an orb","caption":"The lunge"},{"src":"assets/img/theatre/vyasa-crouch-1600.webp","tile":"assets/img/theatre/vyasa-crouch-800.webp","w":1600,"h":1067,"alt":"A figure in patterned body paint crouches low against red drapes","caption":"Against the red drapes"},{"src":"assets/img/theatre/vyasa-staff-1600.webp","tile":"assets/img/theatre/vyasa-staff-800.webp","w":1600,"h":1067,"alt":"A figure in dark face paint raises both arms, holding a gilded staff","caption":"Both arms raised"},{"src":"assets/img/theatre/vyasa-kick-1600.webp","tile":"assets/img/theatre/vyasa-kick-800.webp","w":1600,"h":900,"alt":"A dancer in white kicks forward in front of the ensemble","caption":"The ensemble dances"},{"src":"assets/img/theatre/vyasa-sashes-1600.webp","tile":"assets/img/theatre/vyasa-sashes-800.webp","w":1600,"h":1067,"alt":"Dancers in black with red sashes, hands raised","caption":"Black and red"},{"src":"assets/img/theatre/vyasa-banner-1600.webp","tile":"assets/img/theatre/vyasa-banner-800.webp","w":1600,"h":900,"alt":"A hand-painted banner reading Iridescente above the stage","caption":"The banner"},{"src":"assets/img/theatre/vyasa-top-hat-1600.webp","tile":"assets/img/theatre/vyasa-top-hat-800.webp","w":1600,"h":1067,"alt":"A figure in a tall hat and polka-dot sleeves beside a figure in an orange fur coat","caption":"A tall hat and an orange coat"},{"src":"assets/img/theatre/vyasa-kneel-1600.webp","tile":"assets/img/theatre/vyasa-kneel-800.webp","w":1600,"h":1067,"alt":"Three actors kneel close together in pink light","caption":"Three together"},{"src":"assets/img/theatre/vyasa-company-1600.webp","tile":"assets/img/theatre/vyasa-company-800.webp","w":1600,"h":896,"alt":"The company crowded together in front of the heart set","caption":"The company"}]}},"all":["vasistha","valmiki","vishwamitra","vyasa"]}</script>
+</main>
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <ul>
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
+<<<<<<< HEAD
           <li><a href="student-life.html#campus">Our Campus</a></li>
         </ul>
       </div>
@@ -336,11 +1414,21 @@
       <div>
         <p class="sc" id="fnav-school">School</p>
         <ul aria-labelledby="fnav-school">
+=======
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
           <li><a href="why-cirs.html#junior">Junior School</a></li>
           <li><a href="why-cirs.html#senior">Senior School</a></li>
           <li><a href="sports.html#athletics">Athletics</a></li>
           <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
         </ul>
+<<<<<<< HEAD
       </div>
 
       <div>
@@ -362,6 +1450,39 @@
           <li><a href="admissions.html#contact">Contact Us</a></li>
         </ul>
       </div>
+=======
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
 
     <div class="footer__bar">
@@ -376,10 +1497,21 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
+<<<<<<< HEAD
 <script src="assets/vendor/gsap.min.js?b=95" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=95" defer></script>
 <script src="assets/vendor/lenis.min.js?b=95" defer></script>
 <script src="assets/js/cirs.js?b=95" defer></script>
 <script src="assets/js/pages.js?b=95" defer></script>
+=======
+<script src="assets/vendor/gsap.min.js?b=102-theatre-acts-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-theatre-acts-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-theatre-acts-1" defer></script>
+<script src="assets/js/cirs.js?b=102-theatre-acts-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-theatre-acts-1" defer></script>
+<script src="assets/js/footer.js?b=102-theatre-acts-1-footer-1" defer></script>
+<script src="assets/js/filmintro.js?b=102-theatre-acts-1" defer></script>
+<script src="assets/js/theatre.js?b=102-theatre-acts-1" defer></script>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </body>
 </html>

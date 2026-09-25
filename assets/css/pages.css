@@ -88,6 +88,7 @@
 }
 
 /* ------------------------------------------------------------
+<<<<<<< HEAD
    Header over the open drawer
    ------------------------------------------------------------
    At the top of a page the header is transparent with white text,
@@ -120,11 +121,43 @@ body.menu-open .brand__sub{ color:var(--ink-mute); }
    navigation control gets its own soft-edged magnetic target. The
    dark glass belongs over photography; the paper version takes over
    once content reaches the bar or the menu opens.
+=======
+   Header — one component, two materials
+   ------------------------------------------------------------
+   One quiet capsule keeps the school identity central while each
+   navigation control gets its own soft-edged magnetic target.
+
+   The header has two states and exactly one switch between them:
+   .is-scrolled, which cirs.js sets once the page's opening has passed
+   up under the bar (see "Header state" there). Nothing else toggles it
+   and no page sets it for itself.
+
+     at the top     the capsule is clear: no fill, no border, no
+                    shadow, no blur, so nothing is laid across the
+                    opening picture. The lettering is light.
+     .is-scrolled   the capsule is cream glass with a hairline border,
+                    a soft shadow and the backdrop blur. The lettering
+                    is dark.
+
+   Two other things darken the lettering without touching the
+   material: body.litehead, a page that opens on paper and so can
+   never have white lettering (build-site.py), and body.menu-open,
+   the drawer, which is paper-coloured and also takes the glass. The
+   drawer is keyed on .menu-open, not .is-locked: cirs.js puts
+   is-locked on <body> for the intro curtain's scroll lock too, and
+   keying on it once laid a paper bar across every hero on load.
+
+   Only colour, border colour, shadow, opacity and the blur change
+   between the states. Size, padding, gap, position and font weight
+   are the same in both, so the bar never moves or resizes: the eye
+   reads one header changing its surface, not two headers swapping.
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
    ------------------------------------------------------------ */
 .header{
   top:clamp(10px,1.5vw,18px);
   padding-inline:clamp(12px,2vw,28px);
   pointer-events:none;
+<<<<<<< HEAD
 }
 .header.is-stuck,
 body.menu-open .header{
@@ -145,10 +178,81 @@ body.menu-open .header{
 @supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
   .header .wrap{
     background:rgba(255,255,255,.07);
+=======
+
+  /* The lettering, as tokens: light over the opening... */
+  --hd-name:#fff;
+  --hd-sub:rgba(255,255,255,.8);
+  --hd-mark:var(--gold-lit);
+  --hd-mark-hover:var(--gold-lit);
+  --hd-tab:#fff;
+  --hd-tab-bg:rgba(255,255,255,.055);
+  --hd-tab-line:rgba(255,255,255,.13);
+  --hd-tab-shadow:0 8px 24px rgba(14,11,18,0), inset 0 1px 0 rgba(255,255,255,.06);
+  --hd-tab-hover:#fff;
+  --hd-tab-hover-bg:rgba(255,255,255,.13);
+  --hd-tab-hover-line:rgba(255,215,92,.5);
+  --hd-tab-hover-shadow:0 8px 24px rgba(14,11,18,.2), inset 0 1px 0 rgba(255,255,255,.12);
+  --hd-enq-bg:rgba(57,42,72,0);
+
+  --hd-fade:350ms;
+  --hd-ink-fade:300ms;
+  transition:opacity var(--hd-fade) var(--e), visibility var(--hd-fade);
+}
+/* ...and dark over paper. */
+.header.is-scrolled,
+body.litehead .header,
+body.menu-open .header{
+  --hd-name:var(--purple);
+  --hd-sub:var(--ink-mute);
+  --hd-mark:var(--gold);
+  --hd-mark-hover:var(--gold);
+  --hd-tab:var(--ink);
+  --hd-tab-bg:rgba(57,42,72,.035);
+  --hd-tab-line:rgba(57,42,72,.12);
+  --hd-tab-shadow:0 8px 22px rgba(21,8,24,0), inset 0 1px 0 rgba(255,255,255,.8);
+  --hd-tab-hover:var(--purple);
+  --hd-tab-hover-bg:rgba(57,42,72,.09);
+  --hd-tab-hover-line:rgba(57,42,72,.24);
+  --hd-tab-hover-shadow:0 8px 22px rgba(21,8,24,.1), inset 0 1px 0 rgba(255,255,255,.9);
+  --hd-enq-bg:rgba(57,42,72,.035);
+}
+
+/* The capsule. Its clear state keeps the same shadow list as the glass
+   one with the colours at zero, so the two interpolate instead of
+   switching; the blur goes from none to its full value the same way. */
+.header .wrap{
+  width:min(100%,1180px);
+  padding:6px 8px;
+  border:1px solid rgba(57,42,72,0);
+  border-radius:999px;
+  background-color:rgba(250,247,248,0);
+  box-shadow:0 12px 36px rgba(21,8,24,0), inset 0 1px 0 rgba(255,255,255,0);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  pointer-events:auto;
+  transition:background-color var(--hd-fade) var(--e),
+             border-color var(--hd-fade) var(--e),
+             box-shadow var(--hd-fade) var(--e),
+             -webkit-backdrop-filter var(--hd-fade) var(--e),
+             backdrop-filter var(--hd-fade) var(--e);
+}
+.header.is-scrolled .wrap,
+body.menu-open .header .wrap{
+  background-color:rgba(250,247,248,.72);
+  border-color:rgba(57,42,72,.14);
+  box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8);
+}
+@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
+  .header.is-scrolled .wrap,
+  body.menu-open .header .wrap{
+    background-color:rgba(250,247,248,.64);
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     -webkit-backdrop-filter:blur(16px) saturate(125%);
     backdrop-filter:blur(16px) saturate(125%);
   }
 }
+<<<<<<< HEAD
 .header.is-stuck .wrap,
 body.menu-open .header .wrap{
   background:rgba(250,247,248,.72);
@@ -205,6 +309,14 @@ body.menu-open .header.is-bare.is-atop .wrap{
   border-color:rgba(57,42,72,.14);
   box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8);
 }
+=======
+/* Set by cirs.js while it puts the header into the state a page was
+   loaded or restored in: a refresh halfway down a page should show the
+   glass header, not watch the clear one turn into it. */
+.header.is-settling,
+.header.is-settling *{ transition:none !important; }
+
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .header__left,
 .header__right{
   display:flex; align-items:center;
@@ -215,13 +327,19 @@ body.menu-open .header.is-bare.is-atop .wrap{
 .header__right{ justify-self:end; }
 
 .brand img{ width:56px; }
+<<<<<<< HEAD
 .brand__name{ font-size:1.22rem; }
 .brand__sub{ font-size:.82rem; }
+=======
+.brand__name{ font-size:1.22rem; color:var(--hd-name); transition:color var(--hd-ink-fade) var(--e); }
+.brand__sub{ font-size:.82rem; color:var(--hd-sub); transition:color var(--hd-ink-fade) var(--e); }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 .htab{
   position:relative;
   display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:7px;
   min-height:44px; padding:0 13px;
+<<<<<<< HEAD
   border:1px solid rgba(255,255,255,.13); border-radius:999px;
   background:rgba(255,255,255,.055);
   color:#fff; white-space:nowrap;
@@ -229,6 +347,18 @@ body.menu-open .header.is-bare.is-atop .wrap{
   transition:color .28s var(--e2), background .28s var(--e2), border-color .28s var(--e2), box-shadow .28s var(--e2);
 }
 .htab__icon{ display:grid; place-items:center; height:18px; color:var(--gold-lit); transition:color .3s var(--e); }
+=======
+  border:1px solid var(--hd-tab-line); border-radius:999px;
+  background-color:var(--hd-tab-bg);
+  color:var(--hd-tab); white-space:nowrap;
+  box-shadow:var(--hd-tab-shadow);
+  transition:color var(--hd-ink-fade) var(--e),
+             background-color var(--hd-ink-fade) var(--e),
+             border-color var(--hd-ink-fade) var(--e),
+             box-shadow var(--hd-ink-fade) var(--e);
+}
+.htab__icon{ display:grid; place-items:center; height:18px; color:var(--hd-mark); transition:color var(--hd-ink-fade) var(--e); }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .htab__label{
   font-family:var(--font-primary);
   font-variant-caps:normal;
@@ -236,10 +366,19 @@ body.menu-open .header.is-bare.is-atop .wrap{
   letter-spacing:.035em; font-size:.9rem; line-height:1;
 }
 .htab:hover{
+<<<<<<< HEAD
   color:#fff; background:rgba(255,255,255,.13); border-color:rgba(255,215,92,.5);
   box-shadow:0 8px 24px rgba(14,11,18,.2), inset 0 1px 0 rgba(255,255,255,.12);
 }
 .htab:hover .htab__icon{ color:var(--gold-lit); }
+=======
+  color:var(--hd-tab-hover);
+  background-color:var(--hd-tab-hover-bg);
+  border-color:var(--hd-tab-hover-line);
+  box-shadow:var(--hd-tab-hover-shadow);
+}
+.htab:hover .htab__icon{ color:var(--hd-mark-hover); }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .htab:focus-visible{ outline-offset:2px; }
 
 /* The News mark carries a small gold dot, so the one header item that
@@ -255,6 +394,7 @@ body.menu-open .header.is-bare.is-atop .wrap{
 }
 .htab--menu .menubtn__dots i{ width:4px; height:4px; border-radius:50%; background:currentColor; }
 
+<<<<<<< HEAD
 /* Once the header is a solid bar over paper, the marks go dark. */
 .header.is-stuck .htab,
 body.menu-open .htab{
@@ -273,6 +413,8 @@ body.menu-open .htab:hover{
   box-shadow:0 8px 22px rgba(21,8,24,.1), inset 0 1px 0 rgba(255,255,255,.9);
 }
 
+=======
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 /* The wordmark is now larger, so it gives way sooner. Below 1040px it
    shrinks and wraps rather than pushing through the tabs; below 960px
    the tab labels go and the marks stand alone. This earlier breakpoint is
@@ -288,10 +430,33 @@ body.menu-open .htab:hover{
   .brand__sub{ display:none; }
   .htab{ padding-inline:11px; }
 }
+<<<<<<< HEAD
 @media (max-width:960px){
   .htab__label{ display:none; }
   .htab{ width:44px; min-height:44px; padding:0; }
 }
+=======
+/* Icon-only tabs keep their words for a screen reader. display:none took the
+   label out of the accessible name too, and News and Student Portal have no
+   aria-label, so on every phone they were announced as a bare "link". */
+@media (max-width:960px){
+  .htab__label{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    clip-path:inset(50%); white-space:nowrap;
+  }
+  .htab{ width:44px; min-height:44px; padding:0; }
+}
+/* A page with a fourth tab (Student Life's Student Portal) runs out of room
+   sooner: between 960px and 1200px the tab sat over the school's name. That
+   one tab goes to its icon first. */
+@media (max-width:1200px){
+  .htab--login .htab__label{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    clip-path:inset(50%); white-space:nowrap;
+  }
+  .htab--login{ width:44px; min-height:44px; padding:0; }
+}
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 @media (max-width:560px){
   .header{ top:8px; padding-inline:8px; }
   .header .wrap{ gap:5px; padding:5px 7px; }
@@ -301,7 +466,11 @@ body.menu-open .htab:hover{
   .brand__txt{ display:none; }
 }
 @media (prefers-reduced-motion:reduce){
+<<<<<<< HEAD
   .header .wrap,.htab{ transition-duration:0s; }
+=======
+  .header,.header .wrap,.htab,.htab__icon,.brand__name,.brand__sub{ transition-duration:0s; }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 }
 
 /* ------------------------------------------------------------
@@ -432,7 +601,11 @@ body.menu-open .htab:hover{
     rgba(30,22,38,.92) 85%,
     var(--purple-deep) 100%);
 }
+<<<<<<< HEAD
 .pagehero__media{ position:absolute; inset:0; z-index:0; }
+=======
+.pagehero__media{ position:absolute; inset:0; z-index:0; background:center/cover no-repeat; }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .pagehero__media img{ width:100%; height:100%; object-fit:cover; }
 
 /* Where the finished artwork is not in yet, the media slot carries a
@@ -476,6 +649,10 @@ body.menu-open .htab:hover{
   max-width:min(1000px,92vw);
 }
 .pagehero .marker{ margin-bottom:var(--space-4); }
+<<<<<<< HEAD
+=======
+.pagehero .marker::before{ border-color:var(--gold-lit); }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .pagehero .marker::after{ background:rgba(255,255,255,.28); max-width:120px; }
 .pagehero h1{
   font-size:clamp(2.6rem,6.4vw,5.4rem);
@@ -690,6 +867,7 @@ body.menu-open .htab:hover{
 }
 
 /* ------------------------------------------------------------
+<<<<<<< HEAD
    On this page — a transparent index that opens from the right
    ------------------------------------------------------------
    A long page of procedure needs a way to reach the middle of it.
@@ -707,6 +885,33 @@ body.menu-open .htab:hover{
 .jump__toggle{
   display:inline-flex; align-items:center; gap:9px;
   padding:11px 17px; border-radius:99px;
+=======
+   On this page — an index that opens above the back-to-top button
+   ------------------------------------------------------------
+   A long page needs a way to reach the middle of it. The index is a
+   native <details>: its summary is the button and comes before the
+   list, so Tab goes from the button into the first link, and it opens
+   with no script at all. It sits in the bottom-right corner, directly
+   above back-to-top, at every width. It used to be centred on the
+   right edge with its hidden panel counted in its height, which on a
+   short screen (200% zoom, a phone on its side) dropped the button
+   onto back-to-top and pushed the open list under the header. The
+   list now opens upwards from the button and scrolls within itself
+   when the screen is short.
+   ------------------------------------------------------------ */
+.jump{
+  position:fixed; z-index:95;
+  /* In line above the 48px back-to-top button, 12px clear of it. */
+  right:var(--float-edge);
+  bottom:calc(var(--float-edge) + 60px);
+}
+.jump__toggle{
+  display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  /* The icon alone, in a circle the size of back-to-top: a full-sized
+     touch target rather than a sliver. */
+  width:48px; height:48px; padding:0; border-radius:99px; cursor:pointer;
+  list-style:none;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   background:rgba(30,22,38,.62);
   -webkit-backdrop-filter:blur(14px) saturate(1.3);
           backdrop-filter:blur(14px) saturate(1.3);
@@ -715,6 +920,7 @@ body.menu-open .htab:hover{
   box-shadow:0 6px 26px rgba(14,11,18,.30);
   transition:background .25s var(--e), border-color .25s var(--e), color .25s var(--e);
 }
+<<<<<<< HEAD
 .jump__toggle:hover,
 .jump__toggle[aria-expanded="true"]{
   background:var(--gold); border-color:var(--gold); color:var(--purple-ink);
@@ -722,6 +928,33 @@ body.menu-open .htab:hover{
 .jump__toggle svg{ flex:none; }
 .jump__panel{
   min-width:230px; max-width:min(78vw,300px);
+=======
+.jump__toggle::-webkit-details-marker{ display:none; }
+.jump__toggle::marker{ content:""; }
+.jump__toggle:hover,
+.jump__details[open] > .jump__toggle{
+  background:var(--gold); border-color:var(--gold); color:var(--purple-ink);
+}
+.jump__toggle svg{ flex:none; }
+/* The label needs more room than the margin beside the reading column
+   has below 1600px, so there the button is its icon alone and the
+   words stay with screen readers — never over the text it indexes. */
+.jump__label{
+  position:absolute; width:1px; height:1px; overflow:hidden;
+  clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
+}
+@media (min-width:1600px){
+  .jump__toggle{ width:auto; height:auto; padding:11px 17px; }
+  .jump__label{ position:static; width:auto; height:auto; overflow:visible; clip:auto; clip-path:none; }
+}
+.jump__panel{
+  position:absolute; right:0; bottom:calc(100% + 10px);
+  min-width:230px; max-width:min(78vw,300px);
+  /* Never taller than the room between the header and the button. */
+  max-height:calc(100vh - var(--float-edge) - 60px - 48px - 10px - 96px);
+  max-height:calc(100dvh - var(--float-edge) - 60px - 48px - 10px - 96px);
+  overflow-y:auto; overscroll-behavior:contain;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   padding:var(--space-4) var(--space-4) var(--space-3);
   border-radius:14px;
   background:rgba(30,22,38,.62);
@@ -729,11 +962,18 @@ body.menu-open .htab:hover{
           backdrop-filter:blur(18px) saturate(1.3);
   border:1px solid rgba(255,255,255,.20);
   box-shadow:0 14px 44px rgba(14,11,18,.42);
+<<<<<<< HEAD
   opacity:0; visibility:hidden; transform:translateX(10px) scale(.98);
   transform-origin:top right;
   transition:opacity .26s var(--e), transform .26s var(--e), visibility .26s;
 }
 .jump.is-open .jump__panel{ opacity:1; visibility:visible; transform:none; }
+=======
+  transform-origin:bottom right;
+  animation:jump-in .26s var(--e);
+}
+@keyframes jump-in{ from{ opacity:0; transform:translateY(8px) scale(.98); } }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 .jump__panel p{
   font-family:var(--font-primary);
   font-variant-caps:normal;
@@ -752,6 +992,7 @@ body.menu-open .htab:hover{
 .jump__panel a:focus-visible{ color:var(--gold-lit); padding-left:5px; }
 .jump__panel a[aria-current="true"]{ color:var(--gold); font-weight:600; }
 
+<<<<<<< HEAD
 /* Out of the way of the back-to-top button on a phone, and never
    wider than the screen. */
 @media (max-width:620px){
@@ -761,6 +1002,10 @@ body.menu-open .htab:hover{
 }
 @media (prefers-reduced-motion:reduce){
   .jump__panel{ transition-duration:.001ms; }
+=======
+@media (prefers-reduced-motion:reduce){
+  .jump__panel{ animation:none; }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 }
 
 /* ------------------------------------------------------------
@@ -922,9 +1167,16 @@ body.menu-open .htab:hover{
    arrives, and remains if the video is blocked or the connection gives up. */
 .pagehero__video{ width:100%; height:100%; object-fit:cover; display:block; }
 @media (prefers-reduced-motion:reduce){
+<<<<<<< HEAD
   /* Honour the setting: the poster is the same wall, so nothing is lost. */
   .pagehero__video{ display:none; }
   .pagehero__media{ background:url("../img/admissions-honeycomb.jpg") center/cover no-repeat; }
+=======
+  /* Honour the setting: the still behind the video is its own poster, set
+     on .pagehero__media by hero_html(), so each hero keeps its picture. */
+  .pagehero__video{ display:none; }
+  .pagehero__media{ background-position:center; background-size:cover; background-repeat:no-repeat; }
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 }
 
 /* ============================================================
@@ -943,8 +1195,18 @@ body.menu-open .htab:hover{
    Escape, so a keyboard or a phone reaches the same thing.
    ============================================================ */
 .enq{ position:relative; }
+<<<<<<< HEAD
 .enq__btn{
   background:none; border:0; padding:2px 6px; cursor:pointer;
+=======
+/* Enquire has no border and, over the opening, no resting fill: it takes
+   the faint pill only with the dark lettering. A token, so the fill fades
+   with the rest of the header rather than switching; .htab:hover still
+   outranks it. */
+.enq__btn{
+  background:none; background-color:var(--hd-enq-bg);
+  border:0; padding:2px 6px; cursor:pointer;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   font:inherit;
 }
 
@@ -1400,6 +1662,29 @@ body.has-lightbox{ overflow:hidden; }
 .tl__text h3{ color:#fff; margin:0 0 var(--space-2); }
 .tl__text .copy{ color:var(--on-purple-soft); margin:0; }
 
+<<<<<<< HEAD
+=======
+/* A milestone with no archival frame owed to it is text alone, and sits
+   tighter than the founding years that carry one. */
+.tl__card--text{ padding-block:var(--space-3) var(--space-4); }
+@media (min-width:620px){ .tl__card--text{ grid-template-columns:1fr; } }
+
+/* The eras: a label on the spine, not a milestone. It keeps the long run
+   from 1979 to now readable as three chapters rather than one list. */
+.tl__era{ position:relative; padding-left:40px; margin-top:var(--space-4); }
+.tl__era:first-child{ margin-top:0; }
+.tl__era .sc{ font-size:.98rem; letter-spacing:.12em; }
+.tl__era::before{
+  content:""; position:absolute; left:3px; top:50%;
+  width:10px; height:10px; transform:translateY(-50%) rotate(45deg);
+  border:1px solid var(--gold-lit); background:var(--purple-deep);
+}
+@media (min-width:900px){
+  .tl__era{ padding-left:calc(120px + clamp(28px,3vw,48px)); }
+  .tl__era::before{ left:116px; }
+}
+
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 /* Nothing moves, and nothing waits to be activated. */
 @media (prefers-reduced-motion:reduce){
   .tl__card{ opacity:1; transform:none; transition:none; }
@@ -1764,6 +2049,19 @@ body.has-lightbox{ overflow:hidden; }
 }
 .step__aside .btn + .btn{ margin-left:6px; }
 
+<<<<<<< HEAD
+=======
+/* When a document is from, or until when it holds — both document pages.
+   An expired certificate, or an edition the school has not replaced, is
+   set in maroon so it cannot be read as current at a glance. */
+.docmeta{
+  display:block; margin-top:4px;
+  font-size:.8rem; letter-spacing:.01em; line-height:1.45; color:var(--ink-soft);
+}
+.docmeta--expired, .docmeta--stale{ color:var(--maroon); }
+.doclist__actions{ display:inline-flex; flex:none; align-items:baseline; gap:6px; }
+
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 /* ============================================================
    Alumni voices — what alumni say about the school, in their
    own words. Three short quotations, so they sit side by side
@@ -1789,6 +2087,32 @@ body.has-lightbox{ overflow:hidden; }
   letter-spacing:.06em; font-size:.95rem; color:var(--gold);
 }
 
+<<<<<<< HEAD
+=======
+/* Notable alumni biographies need more room than the short facts elsewhere. */
+#notable .factrail > div{
+  display:grid;
+  grid-template-columns:minmax(160px, 25%) minmax(0, 1fr);
+  align-items:start;
+  gap:clamp(16px, 3vw, 48px);
+  padding:clamp(22px, 2.5vw, 36px) 0;
+}
+#notable .factrail dd{
+  max-width:75ch;
+  text-align:left;
+  line-height:1.6;
+  font-weight:400;
+}
+#notable .factrail dd a{
+  color:inherit;
+  text-decoration:underline;
+  text-underline-offset:.2em;
+}
+@media (max-width:700px){
+  #notable .factrail > div{ grid-template-columns:1fr; gap:10px; }
+}
+
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 /* ============================================================
    About CIRS — the editorial scroll
    ------------------------------------------------------------
@@ -2160,3 +2484,193 @@ body.has-lightbox{ overflow:hidden; }
   .lifeband{ min-height:86svh; }
   .lifeband__say h2{ max-width:none; }
 }
+<<<<<<< HEAD
+=======
+
+/* ============================================================
+   Leadership — the messages reader
+   ------------------------------------------------------------
+   Stacked by default: every message in the page, each under its
+   own label, on paper. From 900px, once pages.js has added
+   .is-tabbed, a column of names on the left chooses the one
+   message shown on the right. The column is the only new piece;
+   the letter itself is set like the Principal's message below
+   it — the same italic, the same gold rules — so the two read
+   as one family.
+   ============================================================ */
+.msgs{ background:var(--paper); }
+.msgs__reader{ margin-top:clamp(var(--space-6),4vw,var(--space-8)); }
+.msgs__panel + .msgs__panel{
+  margin-top:var(--space-7); padding-top:var(--space-7); border-top:1px solid var(--rule);
+}
+.msgs__label{ margin:0 0 var(--space-4); }
+.msgs__label::after{
+  content:""; display:block; width:52px; height:2px; background:var(--gold);
+  margin-top:var(--space-3);
+}
+.msgs__body{ max-width:68ch; }
+.msgs__body p{
+  font-family:var(--font-primary); color:var(--ink);
+  font-size:clamp(1.06rem,1.35vw,1.22rem); line-height:1.66;
+  text-wrap:pretty; margin:0;
+}
+.msgs__body p + p{ margin-top:.9em; }
+/* The first paragraph is the letter's opening — set larger and in
+   italic, the way the Principal's message is set throughout. */
+.msgs__body p:first-child{
+  font-style:italic; font-size:clamp(1.18rem,1.7vw,1.44rem); line-height:1.5;
+}
+.msgs__sign{ font-style:italic; color:var(--ink-soft) !important; }
+.msgs__attr{
+  margin:var(--space-5) 0 0; padding-top:var(--space-4);
+  border-top:1px solid var(--rule); max-width:68ch;
+  font-family:var(--font-primary); letter-spacing:.06em; font-size:var(--fs-sm);
+  color:var(--ink-mute);
+}
+.msgs__attr b{ color:var(--purple); font-weight:600; letter-spacing:.02em; }
+
+.msgs__tabs[hidden]{ display:none; }
+.msgs__reader.is-tabbed .msgs__panel + .msgs__panel{ margin-top:0; padding-top:0; border-top:0; }
+.msgs__reader.is-tabbed .msgs__panel[hidden]{ display:none; }
+.msgs__reader.is-tabbed .msgs__panel{ animation:msgs-in .5s var(--e) both; }
+/* Narrow: the names are a strip that scrolls sideways above the letter. */
+.msgs__tabs{
+  display:flex; gap:0; overflow-x:auto; scrollbar-width:none;
+  margin:0 calc(-1 * var(--gut)) var(--space-6);
+  padding:0 var(--gut);
+  border-bottom:1px solid var(--rule);
+}
+.msgs__tabs::-webkit-scrollbar{ display:none; }
+@media (min-width:900px){
+  .msgs__reader.is-tabbed{
+    display:grid; grid-template-columns:minmax(240px,300px) 1fr;
+    gap:clamp(var(--space-6),5vw,var(--space-9)); align-items:start;
+  }
+  .msgs__reader.is-tabbed .msgs__panel{ grid-column:2; grid-row:1; }
+  .msgs__tabs{
+    grid-column:1; grid-row:1; position:sticky; top:110px;
+    flex-direction:column; overflow:visible; margin:0; padding:0;
+    border-bottom:0; border-left:1px solid var(--rule);
+  }
+}
+.msgs__tab{
+  appearance:none; background:none; border:0; cursor:pointer; text-align:left;
+  padding:var(--space-3) var(--space-4); margin-bottom:-1px; flex:none; max-width:210px;
+  border-bottom:2px solid transparent;
+  display:flex; flex-direction:column; gap:4px;
+  transition:border-color .3s var(--e), background .3s var(--e);
+}
+@media (min-width:900px){
+  .msgs__tab{
+    padding:var(--space-4) var(--space-5); margin:0 0 0 -1px; max-width:none;
+    border-bottom:0; border-left:2px solid transparent;
+  }
+}
+.msgs__tabname{ font-family:var(--font-primary); font-size:1.06rem; color:var(--ink-soft); line-height:1.25; transition:color .3s var(--e); }
+.msgs__tabrole{ font-family:var(--font-primary); font-size:var(--fs-xs); letter-spacing:.08em; color:var(--ink-mute); }
+.msgs__tab:hover .msgs__tabname{ color:var(--purple); }
+.msgs__tab[aria-selected="true"]{ border-color:var(--gold); background:var(--paper-2); }
+.msgs__tab[aria-selected="true"] .msgs__tabname{ color:var(--purple); font-weight:600; }
+.msgs__tab:focus-visible{ outline:2px solid var(--purple); outline-offset:-2px; }
+@keyframes msgs-in{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce){ .msgs__reader.is-tabbed .msgs__panel{ animation:none; } }
+
+/* The face beside each message: the person's own photograph where the
+   site has one, and otherwise their initial on the same purple disc, so
+   the six read as one set whichever of them have been photographed. */
+.msgs__head{ display:flex; align-items:center; gap:var(--space-4); margin-bottom:var(--space-5); }
+.msgs__head .msgs__label{ margin:0 0 4px; }
+.msgs__head .msgs__label::after{ display:none; }
+.msgs__face{
+  flex:none; margin:0; width:64px; height:64px; border-radius:50%; overflow:hidden;
+  display:grid; place-items:center;
+  background:var(--purple-deep); color:var(--gold-lit);
+  font-family:var(--font-primary); font-size:1.6rem;
+  box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--gold);
+}
+.msgs__face img{ width:100%; height:100%; object-fit:cover; object-position:center 20%; }
+.msgs__who{ margin:0; font-family:var(--font-primary); font-size:var(--fs-sm); color:var(--ink-mute); letter-spacing:.03em; }
+.msgs__who b{ color:var(--purple); font-weight:600; }
+
+/* ============================================================
+   Leadership — the Board, as a roster
+   ------------------------------------------------------------
+   One ruled row per person, in the order School Information lists
+   them: role and name, then what the school has supplied about
+   them, then a portrait. It replaced a grid of cards in which four
+   of seven were "photograph to be supplied" tiles and three
+   introductions were bracketed placeholders; a row now just goes
+   without what it does not have, so nothing on the page is a
+   stand-in. The portrait column keeps its width on rows without
+   one, so every name and every introduction starts on the same
+   line down the page.
+
+   Wide: three columns. Narrow: the portrait sits beside the name,
+   and the introduction runs the full width beneath both.
+   ============================================================ */
+.roster{
+  list-style:none; margin:clamp(36px,4vw,56px) 0 0; padding:0;
+  border-bottom:1px solid var(--rule);
+}
+.roster__row{
+  display:grid; column-gap:clamp(20px,3vw,48px); row-gap:var(--space-3);
+  grid-template-columns:minmax(0,1fr) 92px;
+  grid-template-areas:"id face" "text text";
+  align-items:start;
+  padding:clamp(22px,2.6vw,34px) 0;
+  border-top:1px solid var(--rule);
+}
+.roster__id{ grid-area:id; min-width:0; }
+.roster__text{ grid-area:text; min-width:0; }
+.roster__face{ grid-area:face; }
+/* A row with no portrait gives the name the full width. */
+.roster__row:not(:has(.roster__face)) .roster__id{ grid-column:1 / -1; }
+@media (min-width:640px){
+  .roster__row{
+    grid-template-columns:minmax(0,1fr) 120px;
+    grid-template-areas:"id face" "text face";
+  }
+  .roster__row:not(:has(.roster__face)) .roster__id{ grid-column:auto; }
+}
+@media (min-width:1000px){
+  .roster__row{
+    grid-template-columns:minmax(0,5fr) minmax(0,8fr) 152px;
+    grid-template-areas:"id text face";
+  }
+}
+
+.roster__role{
+  margin:0 0 6px;
+  font-family:var(--font-primary); font-size:.92rem; letter-spacing:.06em;
+  color:var(--maroon); text-wrap:balance;
+}
+.roster__name{
+  margin:0; color:var(--purple); font-weight:500;
+  font-size:clamp(1.4rem,2.3vw,1.9rem); line-height:1.15; text-wrap:balance;
+}
+.roster__text .copy{ margin:0; max-width:62ch; color:var(--ink-soft); text-wrap:pretty; }
+@media (min-width:1000px){ .roster__text{ padding-top:4px; } }
+.roster__more{ margin:0; font-family:var(--font-primary); }
+.roster__text .copy + .roster__more{ margin-top:var(--space-3); }
+.roster__more a{
+  display:inline-flex; align-items:center; gap:8px; padding:4px 0;
+  font-weight:600; color:var(--purple);
+  text-decoration:underline; text-underline-offset:4px; text-decoration-color:var(--gold);
+  transition:color .2s var(--e);
+}
+.roster__more a::after{ content:"\2192"; color:var(--gold); text-decoration:none; transition:transform .25s var(--e); }
+.roster__more a:hover{ color:var(--maroon); }
+.roster__more a:hover::after{ transform:translateX(3px); }
+.roster__more a:focus-visible{ outline:2px solid var(--purple); outline-offset:3px; border-radius:2px; }
+
+.roster__face{
+  margin:0; aspect-ratio:4/5; overflow:hidden; border-radius:10px;
+  background:var(--paper-2);
+  box-shadow:0 0 0 1px var(--rule), 0 14px 28px -18px rgba(30,22,38,.4);
+}
+.roster__face img{ display:block; width:100%; height:100%; object-fit:cover; }
+
+@media (prefers-reduced-motion:reduce){
+  .roster__more a, .roster__more a::after{ transition:none; }
+}
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168

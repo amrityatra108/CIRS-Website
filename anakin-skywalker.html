@@ -7,8 +7,19 @@
 <meta name="description" content="The Star Wars prequel is, at its core, a tragedy. Yet within popular discourse it has long been dismissed as pulp science fiction; a spectacle over substance sort of material.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/anakin-skywalker.html">
+<<<<<<< HEAD
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+=======
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <meta property="og:type" content="website">
 <meta property="og:title" content="Anakin Skywalker and the Poetics of Tragedy | CIRS Blog">
 <meta property="og:description" content="The Star Wars prequel is, at its core, a tragedy. Yet within popular discourse it has long been dismissed as pulp science fiction; a spectacle over substance sort of material.">
@@ -20,22 +31,40 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<<<<<<< HEAD
 <link rel="stylesheet" href="assets/css/fonts.css?b=95-blog-2">
 <link rel="stylesheet" href="assets/css/cirs.css?b=95-blog-2">
 <link rel="stylesheet" href="assets/css/pages.css?b=95-blog-2">
+=======
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-blog-editorial-1">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
+<<<<<<< HEAD
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/blog.css?b=95-blog-2">
 <link rel="stylesheet" href="assets/css/typography.css?b=95-blog-2">
+=======
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/blog.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-blog-editorial-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-blog-editorial-1-drawer-5">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </head>
 
 <body class="blog litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
 
+<<<<<<< HEAD
 <!-- Opening sequence. Removed from the DOM once it has played. -->
 <div class="curtain" id="curtain" aria-hidden="true">
   <img src="assets/img/logo.png" alt="" width="72" height="70">
@@ -44,6 +73,8 @@
   <span class="curtain__bar"><i></i></span>
 </div>
 
+=======
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
@@ -65,7 +96,11 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
+<<<<<<< HEAD
 <header class="header is-first-section is-stuck" id="header">
+=======
+<header class="header" id="header">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -196,55 +231,123 @@
     </div>
   </div>
 </header>
+<<<<<<< HEAD
 <div class="drawer" id="drawer" hidden>
   <nav class="drawer__grid" aria-label="All pages">
     <div>
       <p class="sc" id="dnav-vision">Vision</p>
       <ul aria-labelledby="dnav-vision">
+=======
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="0" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="true" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button">
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-student-life">Student Life</p>
       <ul aria-labelledby="dnav-student-life">
         <li><a href="student-life.html">Student Life</a></li>
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
       <ul aria-labelledby="dnav-literary-excellence">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
       <ul aria-labelledby="dnav-art-culture-music">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-connect">Connect</p>
       <ul aria-labelledby="dnav-connect">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
   </nav>
   <div class="drawer__utility">
@@ -256,10 +359,30 @@
   <div class="drawer__cta">
     <a class="btn btn--primary btn--lg" href="admissions.html#apply">Apply for admission</a>
     <a class="btn btn--outline btn--lg" href="admissions.html#visit">Book a campus visit</a>
+=======
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   </div>
 </div>
 <main id="main">
 <article class="art" id="top">
+<<<<<<< HEAD
   <div class="artwrap">
     <header class="art__head">
       <p class="art__back"><a href="blog.html"><span aria-hidden="true">&larr;</span> Back to the Blog</a></p>
@@ -270,10 +393,35 @@
       <p class="art__where">The Crossroads, Issue&nbsp;32 &middot; August 2026</p>
     </header>
 
+=======
+  <header class="art__head">
+    <div class="art__shell">
+      <nav class="art__breadcrumb" aria-label="Breadcrumb">
+        <a href="blog.html">Ideas from CIRS</a><span aria-hidden="true">/</span><span>Culture</span>
+      </nav>
+      <p class="art__edition">The Crossroads <span aria-hidden="true">/</span> Issue 32</p>
+      <h1 class="art__title">Anakin Skywalker and the Poetics of Tragedy</h1>
+      <div class="art__credits">
+        <span>Aayush S. B. | IB II Yr</span>
+        <span>August 2026</span>
+        <span>5 min read</span>
+      </div>
+    </div>
+  </header>
+  <div class="art__layout">
+    <aside class="art__rail" aria-label="Original publication">
+      <p>First published in</p>
+      <strong>The Crossroads<br>Issue 32</strong>
+      <a href="assets/documents/crossroads/crossroads-issue-32.pdf">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
+      <a href="crossroads.html">All Crossroads issues</a>
+    </aside>
+    <div class="art__content">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     <figure class="art__hero">
       <img src="assets/img/blog/anakin-skywalker.webp"
            alt="William Shakespeare holding a blue lightsaber and a copy of Hamlet against a galactic backdrop"
            width="1024" height="559" decoding="async">
+<<<<<<< HEAD
     </figure>
 
     <div class="art__body">
@@ -328,10 +476,106 @@
 
       <div>
         <h4 class="sc">About</h4>
+=======
+      <figcaption>Image supplied for the web edition.</figcaption>
+    </figure>
+
+      <div class="art__body">
+      <p>The Star Wars prequel is, at its core, a tragedy. Yet within popular discourse it has long been dismissed as pulp science fiction; a spectacle over substance sort of material. This article resists that dismissal. It reads Star Wars Episode III: Revenge of the Sith (2005), contrary to popular claim, not as blockbuster cinema, but as a literary text, and subjects its dialogue to the same scrutiny one might apply to Sophocles or Shakespeare.</p>
+      <p>The central claim lies in this: The dialogue in Revenge of the Sith (both Anakin&#x27;s own speech and the exchanges constructed around him) functions as a deliberate literary mechanism that builds him into a recognizable tragic hero, one whose contours are shaped by the conventions Aristotle delineated in the Poetics and which recur across the tragic canon from Oedipus to Macbeth. The analysis is mainly modelled around four Aristotelian categories: Hamartia (The fatal flaw that initiates the flaw), Peripeteia (the reversal of fortune), Anagnorisis (the moment of recognition), and the cathartic effect produced in the audience through Eleos and Phobos (pity and fear).</p>
+      <p>Aristotle’s Hamartia works not as vice but as frailty, an imperfection indigenous to the hero’s own nature, not imposed on him from without. In Anakin, this frailty takes the shape of a love so absolute it cannot tolerate the ordinary erosions of mortality, wedded to a conviction that sufficient will can bend even fate to heel. The seed of this flaw is sown in Episode II: Attack of the Clones, in the aftermath of his mother’s death, when he confesses the massacre of the Tusken Raiders to Padmé, with fury, rather than grief or regret.</p>
+      <p>This fury resolves into 3 words that indict the greater picture rather than himself, or the cosmos, if I may: “it’s not fair.” Here, in embryonic form is the tragedy entirely: a boy who cannot reconcile himself to a universe indifferent to his longing.</p>
+      <p>By Revenge of The Sith, this same inability of reconciliation has fastened itself to Padmé. When Anakin confesses that he has seen her death, “As clearly as I see you now”, the line performs a double labor, it renders his devotion total, and it exposes his relationship with the future as one of conquest rather than surrender.</p>
+      <p>A Jedi is schooled in relinquishment, Anakin has never once relinquished anything, and his vow that he &quot;won&#x27;t let this one become true&quot; is possession disguised in the vocabulary of love.</p>
+      <h2>Hamartia — The Tyranny of Devotion</h2>
+      <p>Aristotle’s Hamartia works not as vice but as frailty, an imperfection indigenous to the hero’s own nature, a not imposed on him from without. In Anakin, this frailty takes the shape of love so absolute it cannot tolerate the ordinary erosions of mortality, wedded to a conviction that sufficient will can bend even fate to heel.</p>
+      <h2>Peripeteia — The Reversal Born of the Self</h2>
+      <p>Aristotle held that the most devastating reversals are those the hero unknowingly manufactures himself. Anakin&#x27;s Peripeteia arrives in the Chancellor&#x27;s chambers, where he enters believing himself the exposer of treachery and departs its instrument. His plea to Mace Windu that Palpatine be tried, not executed, is in itself the hamartia made manifest in its purest form: the same desperate insistence that the universe yield to his terms rather than its own.</p>
+      <p>In striking down Windu, Anakin does not so much fall as continue, the gesture is not what most believe as rupture, but culmination, the tragic logic in which catastrophe emerges organically from character rather than intruding upon it. Every act that follows, the kneeling before his new master, the extinguishing of the Temple, unfolds with the merciless coherence tragedy demands, that which being, inevitability legible only in retrospect.</p>
+      <h2>Anagnorisis — The Ash of Understanding</h2>
+      <p>Anakin’s anagnorisis arrives as nothing but ash. On Mustafar, confronted by Padmé&#x27;s horror, he answers with the knife of accusation, rather than clarity. Obi-Wan, he insists, has turned her against him, a sentence that reveals the absolute absence of knowledge, a man narrating his ruin as persecution. True recognition is delayed until he lies mutilated upon the volcanic shore, his voice dissolving into a scream directed at the man who defeated him. This too yet fails as wisdom, barely at its threshold, the first dim apprehension of an irony too exquisite to be coincidence: the vision he tortured himself to avert, he alone brought into being.</p>
+      <h2>Catharsis — The Terror of Recognition</h2>
+      <p>Aristotle believed tragedy should leave its witness trembling with Eleos and Phobos in equal measure; pity for the one who falls, and dread at the narrowness of the distance between his fall and one&#x27;s own. It is this second current that popular memory has long declined to feel, for Anakin&#x27;s flaw is neither exotic nor alien; it is love disfigured by the fear of its own impermanence, the seductive and universal delusion that longing, sufficiently fierce, might compel the world into submission.</p>
+      <p>Few who have felt this impulse become Vader. But the mechanical exhalation that closes the film, supplanting forever the voice that carried three pictures, is not the sound of a monster&#x27;s birth. It is the sound of an entirely human hunger having consumed the vessel that once contained it, and it is in this recognition, rather than in spectacle, that the prequels finally earn the name they were so long denied: tragedy, in the oldest and most exacting sense of the word.</p>
+      </div>
+    </div>
+  </div>
+  <div class="art__shell">
+    <footer class="art__foot">
+      <p>Originally published in <em>The Crossroads</em>, Issue 32.</p>
+      <div><a href="assets/documents/crossroads/crossroads-issue-32.pdf">Read the complete issue (PDF)</a>
+        <a href="blog.html">Back to all stories</a></div>
+    </footer>
+    <section class="art__related" aria-labelledby="art-related-title">
+      <h2 id="art-related-title">Keep reading</h2>
+      <ul><li>
+          <a href="beyond-the-lobby.html">
+            <span>Culture / Issue 32</span>
+            <strong>Beyond the Lobby</strong>
+          </a>
+        </li><li>
+          <a href="notes-of-healing.html">
+            <span>Culture / Issue 30</span>
+            <strong>Notes of Healing</strong>
+          </a>
+        </li><li>
+          <a href="death-of-detail.html">
+            <span>Culture / Issue 4</span>
+            <strong>Death of Detail</strong>
+          </a>
+        </li></ul>
+    </section>
+  </div>
+</article>
+</main>
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <ul>
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
+<<<<<<< HEAD
           <li><a href="student-life.html#campus">Our Campus</a></li>
         </ul>
       </div>
@@ -339,11 +583,21 @@
       <div>
         <p class="sc" id="fnav-school">School</p>
         <ul aria-labelledby="fnav-school">
+=======
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
           <li><a href="why-cirs.html#junior">Junior School</a></li>
           <li><a href="why-cirs.html#senior">Senior School</a></li>
           <li><a href="sports.html#athletics">Athletics</a></li>
           <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
         </ul>
+<<<<<<< HEAD
       </div>
 
       <div>
@@ -365,6 +619,39 @@
           <li><a href="admissions.html#contact">Contact Us</a></li>
         </ul>
       </div>
+=======
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
 
     <div class="footer__bar">
@@ -379,10 +666,19 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
+<<<<<<< HEAD
 <script src="assets/vendor/gsap.min.js?b=95-blog-2" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=95-blog-2" defer></script>
 <script src="assets/vendor/lenis.min.js?b=95-blog-2" defer></script>
 <script src="assets/js/cirs.js?b=95-blog-2" defer></script>
 <script src="assets/js/pages.js?b=95-blog-2" defer></script>
+=======
+<script src="assets/vendor/gsap.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/cirs.js?b=102-blog-editorial-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/footer.js?b=102-blog-editorial-1-footer-1" defer></script>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </body>
 </html>

@@ -27,7 +27,15 @@ OUT = os.path.join(ROOT, "assets/img")
 # the wash flattens the bright blues it is built on and warms the whole thing,
 # which reads as a faded picture rather than a campaign banner. It is cut at
 # its own colours. Remove a name from here and it is graded like the rest.
+<<<<<<< HEAD
 UNGRADED = set()
+=======
+UNGRADED = {
+    # The Parent Portal opening shows its photograph as it was taken: parents
+    # and students in the hall, full strength under a scrim of its own.
+    "parent-portal-hero.jpg",
+}
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
 SHADOW = (36, 26, 56)
 HIGHLIGHT = (240, 229, 212)
@@ -51,6 +59,13 @@ PHOTOS = [
     ("life-split-beyond.jpg",    "drive-student-life-beyond.JPG",   (1800, 1200), (0.50, 0.50)),
     ("junior-school.jpg",       "IMG_1898.JPG", (1200, 1500), (0.50, 0.45)),
     ("senior-school.jpg",       "IMG_1894.JPG", (1200, 1500), (0.50, 0.45)),
+<<<<<<< HEAD
+=======
+    # Why CIRS, "Two boards. One ambition.": senior students cutting a cake
+    # together. Landscape like the other chapters; framed high so the faces
+    # and the joined hands keep the frame and the table skirt gives way.
+    ("why-senior.jpg",          "senior-celebration.jpg", (1600, 900), (0.50, 0.40)),
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 
     # The School History film window, matching the home page's 16:9 still.
     ("history-still.jpg",       "IMG_20210514_182259.jpg", (1600, 900), (0.50, 0.52)),
@@ -82,6 +97,14 @@ PHOTOS = [
     # and hands the others a photograph of their own subject.
     ("news-hero.jpg",           "IMG_2327.JPG",           (1280,  720), (0.50, 0.55)),
 
+<<<<<<< HEAD
+=======
+    # The Parent Portal opening, full-window behind "PARENT PORTAL". Cut at
+    # the source's own 3:2; the page's object-position keeps the aisle of
+    # students between the two rows of parents in frame on a narrow screen.
+    ("parent-portal-hero.jpg",  "0C9A3824.JPG",           (2000, 1334), (0.50, 0.50)),
+
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     # The Why CIRS opening frame. It replaces a 1200x1500 portrait of three
     # students that came in with the original redesign and whose own source
     # is not in this library — so when that page lost its banner and the
@@ -139,6 +162,29 @@ PHOTOS = [
     ("sports/basketball-shot.jpg",     "sports/basketball-shot.jpg",     (1000, 750), (0.50, 0.33)),
     ("sports/basketball-floodlit.jpg", "sports/basketball-floodlit.jpg", (1000, 750), (0.50, 0.46)),
 
+<<<<<<< HEAD
+=======
+    # Sports and Laurels editorial page ("Built in the Arena").
+    # High-resolution cuts from verified CIRS original photography.
+    ("sports/hero-track.jpg",          "HARI5692.JPG",                   (2400, 1500), (0.45, 0.55)),
+    ("sports/hero-reveal.jpg",         "IMG_9314.JPG",                   (2400, 1500), (0.55, 0.50)),
+    ("sports/shift-academic.jpg",      "IMG_1806.JPG",                   (1800, 1200), (0.34, 0.52)),
+    ("sports/shift-sports.jpg",        "DJI_0856.JPG",                   (1800, 1200), (0.50, 0.50)),
+    ("sports/sport-athletics.jpg",     "HARI5531.JPG",                   (1600, 1200), (0.50, 0.50)),
+    ("sports/sport-swimming.jpg",      "IMG_9314.JPG",                   (1600, 1200), (0.55, 0.50)),
+    ("sports/sport-football.jpg",      "IMG_3051.JPG",                   (1600, 1200), (0.50, 0.50)),
+    # A forehand drill on the green court, not the basketball game this slot
+    # used to show. Nudged right so the students' racquets keep the frame
+    # and the coach still stands at its left edge.
+    ("sports/sport-tennis.jpg",        "IMG_0851.JPG",                   (1600, 1200), (0.55, 0.50)),
+    ("sports/sport-archery.jpg",       "IMG_9879.JPG",                   (1600, 1200), (0.50, 0.50)),
+    ("sports/sport-climbing.jpg",      "IMG_6061.JPG",                   (1600, 1200), (0.50, 0.50)),
+    ("sports/house-parade.jpg",        "DSC_0059.JPG",                   (1600, 1000), (0.50, 0.50)),
+    ("sports/house-flag.jpg",          "2.JPG",                          (1600, 1000), (0.50, 0.50)),
+    ("sports/house-cheer.jpg",         "1.JPG",                          (1600, 1000), (0.50, 0.55)),
+    ("sports/laurels-team.jpg",        "8A5A3313.JPG",                   (1600, 1100), (0.50, 0.46)),
+
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     # The home page's horizontal run — ten photographs scrubbed sideways
     # between the hero and the film.
     #

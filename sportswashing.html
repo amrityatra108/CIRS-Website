@@ -7,8 +7,19 @@
 <meta name="description" content="The summer of 2023 changed football forever. It wasn’t just the usual go-to of European transfers; it was something weird. Why?">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/sportswashing.html">
+<<<<<<< HEAD
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+=======
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <meta property="og:type" content="website">
 <meta property="og:title" content="Sportswashing: The New Geopolitics | CIRS Blog">
 <meta property="og:description" content="The summer of 2023 changed football forever. It wasn’t just the usual go-to of European transfers; it was something weird. Why?">
@@ -20,22 +31,40 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<<<<<<< HEAD
 <link rel="stylesheet" href="assets/css/fonts.css?b=95-blog-2">
 <link rel="stylesheet" href="assets/css/cirs.css?b=95-blog-2">
 <link rel="stylesheet" href="assets/css/pages.css?b=95-blog-2">
+=======
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-blog-editorial-1">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
+<<<<<<< HEAD
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/blog.css?b=95-blog-2">
 <link rel="stylesheet" href="assets/css/typography.css?b=95-blog-2">
+=======
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/blog.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-blog-editorial-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-blog-editorial-1-drawer-5">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </head>
 
 <body class="blog litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
 
+<<<<<<< HEAD
 <!-- Opening sequence. Removed from the DOM once it has played. -->
 <div class="curtain" id="curtain" aria-hidden="true">
   <img src="assets/img/logo.png" alt="" width="72" height="70">
@@ -44,6 +73,8 @@
   <span class="curtain__bar"><i></i></span>
 </div>
 
+=======
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
@@ -65,7 +96,11 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
+<<<<<<< HEAD
 <header class="header is-first-section is-stuck" id="header">
+=======
+<header class="header" id="header">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -196,55 +231,123 @@
     </div>
   </div>
 </header>
+<<<<<<< HEAD
 <div class="drawer" id="drawer" hidden>
   <nav class="drawer__grid" aria-label="All pages">
     <div>
       <p class="sc" id="dnav-vision">Vision</p>
       <ul aria-labelledby="dnav-vision">
+=======
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="0" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="true" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button">
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-student-life">Student Life</p>
       <ul aria-labelledby="dnav-student-life">
         <li><a href="student-life.html">Student Life</a></li>
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
       <ul aria-labelledby="dnav-literary-excellence">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
       <ul aria-labelledby="dnav-art-culture-music">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-connect">Connect</p>
       <ul aria-labelledby="dnav-connect">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
   </nav>
   <div class="drawer__utility">
@@ -256,10 +359,30 @@
   <div class="drawer__cta">
     <a class="btn btn--primary btn--lg" href="admissions.html#apply">Apply for admission</a>
     <a class="btn btn--outline btn--lg" href="admissions.html#visit">Book a campus visit</a>
+=======
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   </div>
 </div>
 <main id="main">
 <article class="art" id="top">
+<<<<<<< HEAD
   <div class="artwrap">
     <header class="art__head">
       <p class="art__back"><a href="blog.html"><span aria-hidden="true">&larr;</span> Back to the Blog</a></p>
@@ -278,6 +401,38 @@
       <p>THE TRUTH THE TRUTH A TROPHY Shaurya Bhartia | XII MGMT In football we often talk about ‘club takeovers,’ but in reality, Western sports organisations like the PGA and debt-heavy football clubs are begging for Saudi capital to survive. By providing this rescue money Saudi Arabia isn't just buying a club or a tour, they are buying veto power over Western cultural institutions and into our subconscious mind.</p>
       <p>To understand the Saudi ideology, we must talk about Vision 2030, the brainchild of Crown Prince Mohammed bin Salman. This plan is centred around the Crown Prince's goal of turning his country into one that can survive – post the end of its petroeconomy. To do well, he needs us to buy into his vision, which is difficult when the world associates his regime with a brutal dictatorship similar to North Korea.</p>
       <p>This isn't just about global PR, it is also about internal stability. Sixty-three percent of the Saudi population is under the age of 30. Providing them with hardcore sports, like F1 or the FIFA World Cup, offers a distraction to keep their minds off major issues like unemployment, tethering their interests to state-controlled sports instead. This is what Saudi wants their ideal youth to be like. And this is not something which has been brought on by Saudi Arabia as a new project: it has been carried out by different countries for decades.This isn't just about global PR, it is also about internal stability.</p>
+=======
+  <header class="art__head">
+    <div class="art__shell">
+      <nav class="art__breadcrumb" aria-label="Breadcrumb">
+        <a href="blog.html">Ideas from CIRS</a><span aria-hidden="true">/</span><span>Sport</span>
+      </nav>
+      <p class="art__edition">The Crossroads <span aria-hidden="true">/</span> Issue 30</p>
+      <h1 class="art__title">Sportswashing: The New Geopolitics</h1>
+      <div class="art__credits">
+        <span>Shaurya Bhartia | XII MGMT</span>
+        <span>April 2026</span>
+        <span>5 min read</span>
+      </div>
+    </div>
+  </header>
+  <div class="art__layout">
+    <aside class="art__rail" aria-label="Original publication">
+      <p>First published in</p>
+      <strong>The Crossroads<br>Issue 30</strong>
+      <a href="assets/documents/crossroads/crossroads-issue-30.pdf">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
+      <a href="crossroads.html">All Crossroads issues</a>
+    </aside>
+    <div class="art__content">
+      <div class="art__body">
+      <p>The summer of 2023 changed football forever. It wasn’t just the usual go-to of European transfers; it was something weird. Why? When Cristiano Ronaldo moved to Al-Nassr, many dismissed it as a career-ending move. But then came other big names: Neymar. Sadio Mané. Firmino. Maharez. Saint-Maximin. And then the Ballon d&#x27;Or favorite, Karim Benzema. These players were all at the peak of their careers. Suddenly, the Saudi Pro League wasn&#x27;t just a retirement home, it was a glitch in the transfer market.</p>
+      <p>As a Liverpool fan, seeing club captain Jordan Henderson or Fabinho depart for the Middle East after a monstrous season felt odd. But to understand why this happened, we have to look past this season alone. We have to look at the real referee of global power: Geopolitics. This isn&#x27;t just about football, it&#x27;s about a concept called ‘Sportswashing.’ Sportswashing is ‘the practice of a nation, corporation, or individual using the prestige and emotional pull of sports to improve a tarnished reputation or distract from political controversy.’ A simple definition.</p>
+      <p>But not-so-simple impacts. The logic behind this is very simple: it is much harder to criticize a country’s human rights record or its lack of democratic freedom when you are cheering for a 90thminute winner by a player they bought for your team or when you are cheering for the F1 races hosted in their country. Soon unintentionally, you become emotionally attached to the country .</p>
+      <p>Saudi Arabia has generated enormous amounts of money from selling oil, but has a poor reputation regarding human rights, women’s rights, religious fundamentalism, and slavery. The government has been accused of supporting terrorism, bombing school buses full of children, and even killing U.S.-based journalists in their embassies. By spending billions on Cristiano Ronaldo, LIV Golf, and the 2034 World Cup, they are buying their way into a clean reputation, to distract us from these human rights records. This strategy creates a historical mirror, stretching from the 1936 Olympics in Nazi Germany to Saudi Arabia’s hosting of the 2023 Club World Cup.</p>
+      <p>In football we often talk about ‘club takeovers,’ but in reality, Western sports organisations like the PGA and debt-heavy football clubs are begging for Saudi capital to survive. By providing this rescue money Saudi Arabia isn&#x27;t just buying a club or a tour, they are buying veto power over Western cultural institutions and into our subconscious mind.</p>
+      <p>To understand the Saudi ideology, we must talk about Vision 2030, the brainchild of Crown Prince Mohammed bin Salman. This plan is centred around the Crown Prince&#x27;s goal of turning his country into one that can survive – post the end of its petroeconomy. To do well, he needs us to buy into his vision, which is difficult when the world associates his regime with a brutal dictatorship similar to North Korea.</p>
+      <p>This isn&#x27;t just about global PR, it is also about internal stability. Sixty-three percent of the Saudi population is under the age of 30. Providing them with hardcore sports, like F1 or the FIFA World Cup, offers a distraction to keep their minds off major issues like unemployment, tethering their interests to state-controlled sports instead. This is what Saudi wants their ideal youth to be like. And this is not something which has been brought on by Saudi Arabia as a new project: it has been carried out by different countries for decades.This isn&#x27;t just about global PR, it is also about internal stability.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       <p>Sixty-three percent of the Saudi population is under the age of 30. Providing them with hardcore sports like F1 or the FIFA World Cup, offers an anchor to keep their minds off major issues like unemployment, tethering their interests to state-controlled sports instead.</p>
       <p>This is what Saudi wants their ideal youth to be like. It is a strategic trade, “We give you the world’s best entertainment; you give us political stability.” And this is not something which has been brought on by Saudi as a new project: it has been carried out by different countries through decades: -Benito Mussolini’s Italy: used the 1934 FIFA World Cup to defend their fascist disciplinarian projects.</p>
       <p>-1936 Berlin Olympics: Nazi Germany used the Games to project a facade of a peaceful, tolerant nation while internally accelerating the holocaust.</p>
@@ -286,6 +441,7 @@
       <p>-The 2014 Sochi Olympics, The 2022 FIFA World Cup, the list goes on.</p>
       <p>-2022 FIFA World Cup: Qatar spent an estimated $220 billion on infrastructure to distract nations from its treatment of migrant laborers.</p>
       <p>-The 2026 FIFA World Cup: USA is showcasing a narrative of national unity, masking the reality of extreme political polarization, record-high baseless deportation rates and lack of due processes.</p>
+<<<<<<< HEAD
       <p>In 2017, just as the nation was warming up for the tenth season of IPL the Finance Bill was passed just as a "Money Bill," quietly merging 19 tribunals and making Aadhaar mandatory By classifying this bill as a Money Bill, the government effectively bypassed the opposition of the Rajya Sabha, allowing widely controversial shifts such as removing caps on corporate political funding to pass with minimal public scrutiny while the public was obliviously anchored to the pitch. This has the potential to make our government indebted to private organisations without us every knowing.</p>
       <p>Fast forward to last week; as RCB faced SRH, a Special Session was convened to fast-track the Constitution (131st Amendment) Bill and the Delimitation Bill. Aimed at putting into practice the 2023 Nari Shakti Vandan Adhiniyam for the 2029 elections, the amendment sensationally fell short of the required two-thirds majority in the Lok Sabha.Upon closer inspection, I've realised that these controversial Special Sessions are scheduled to coincide precisely with these IPL matches. This ensures that while the attention of fans is glued on the final overs, the country can be presented with fundamental changes that have the potential to alter the very things that we stand for.</p>
       <p>Ultimately, we must realize that every boundary shot and goal cheered for is a distraction. Whether in Riyadh or New Delhi, this is what we see everyday around us, yet fail to notice how r every small move made right in front of our eyes, has a much bigger play to it on the geopolitical arena.</p>
@@ -328,10 +484,89 @@
 
       <div>
         <h4 class="sc">About</h4>
+=======
+      <p>In 2017, just as the nation was warming up for the tenth season of IPL the Finance Bill was passed just as a &quot;Money Bill,&quot; quietly merging 19 tribunals and making Aadhaar mandatory By classifying this bill as a Money Bill, the government effectively bypassed the opposition of the Rajya Sabha, allowing widely controversial shifts such as removing caps on corporate political funding to pass with minimal public scrutiny while the public was obliviously anchored to the pitch. This has the potential to make our government indebted to private organisations without us every knowing.</p>
+      <p>Fast forward to last week; as RCB faced SRH, a Special Session was convened to fast-track the Constitution (131st Amendment) Bill and the Delimitation Bill. Aimed at putting into practice the 2023 Nari Shakti Vandan Adhiniyam for the 2029 elections, the amendment sensationally fell short of the required two-thirds majority in the Lok Sabha.Upon closer inspection, I&#x27;ve realised that these controversial Special Sessions are scheduled to coincide precisely with these IPL matches. This ensures that while the attention of fans is glued on the final overs, the country can be presented with fundamental changes that have the potential to alter the very things that we stand for.</p>
+      <p>Ultimately, we must realize that every boundary shot and goal cheered for is a distraction. Whether in Riyadh or New Delhi, this is what we see everyday around us, yet fail to notice how r every small move made right in front of our eyes, has a much bigger play to it on the geopolitical arena.</p>
+      </div>
+    </div>
+  </div>
+  <div class="art__shell">
+    <footer class="art__foot">
+      <p>Originally published in <em>The Crossroads</em>, Issue 30.</p>
+      <div><a href="assets/documents/crossroads/crossroads-issue-30.pdf">Read the complete issue (PDF)</a>
+        <a href="blog.html">Back to all stories</a></div>
+    </footer>
+    <section class="art__related" aria-labelledby="art-related-title">
+      <h2 id="art-related-title">Keep reading</h2>
+      <ul><li>
+          <a href="the-journey-behind-excellence.html">
+            <span>Sport / Issue 29</span>
+            <strong>The Journey Behind Excellence</strong>
+          </a>
+        </li><li>
+          <a href="geography-and-geopolitics.html">
+            <span>World / Issue 31</span>
+            <strong>Geography and Geopolitics</strong>
+          </a>
+        </li><li>
+          <a href="the-race-beyond.html">
+            <span>Economics / Issue 29</span>
+            <strong>The Race Beyond</strong>
+          </a>
+        </li></ul>
+    </section>
+  </div>
+</article>
+</main>
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <ul>
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
+<<<<<<< HEAD
           <li><a href="student-life.html#campus">Our Campus</a></li>
         </ul>
       </div>
@@ -339,11 +574,21 @@
       <div>
         <p class="sc" id="fnav-school">School</p>
         <ul aria-labelledby="fnav-school">
+=======
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
           <li><a href="why-cirs.html#junior">Junior School</a></li>
           <li><a href="why-cirs.html#senior">Senior School</a></li>
           <li><a href="sports.html#athletics">Athletics</a></li>
           <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
         </ul>
+<<<<<<< HEAD
       </div>
 
       <div>
@@ -365,6 +610,39 @@
           <li><a href="admissions.html#contact">Contact Us</a></li>
         </ul>
       </div>
+=======
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
 
     <div class="footer__bar">
@@ -379,10 +657,19 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
+<<<<<<< HEAD
 <script src="assets/vendor/gsap.min.js?b=95-blog-2" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=95-blog-2" defer></script>
 <script src="assets/vendor/lenis.min.js?b=95-blog-2" defer></script>
 <script src="assets/js/cirs.js?b=95-blog-2" defer></script>
 <script src="assets/js/pages.js?b=95-blog-2" defer></script>
+=======
+<script src="assets/vendor/gsap.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/cirs.js?b=102-blog-editorial-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/footer.js?b=102-blog-editorial-1-footer-1" defer></script>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </body>
 </html>

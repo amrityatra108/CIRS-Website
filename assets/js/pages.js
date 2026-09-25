@@ -11,14 +11,23 @@
   "use strict";
 
   /* ----------------------------------------------------------
+<<<<<<< HEAD
      "On this page" — the index that opens from the right edge.
      Progressive enhancement: the markup is a button and a list,
      so with this file blocked the links are still reachable, and
      the panel is simply always closed.
+=======
+     "On this page" — the index above the back-to-top button.
+     It is a native <details>, so it opens, closes and takes the
+     keyboard with this file blocked. What this adds is the rest:
+     Escape and a click elsewhere close it, choosing a link closes
+     it, and the section on screen is marked in the list.
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
      ---------------------------------------------------------- */
   var jump = document.querySelector(".jump");
   if (!jump) return;
 
+<<<<<<< HEAD
   var toggle = jump.querySelector(".jump__toggle");
   var panel = jump.querySelector(".jump__panel");
   if (!toggle || !panel) return;
@@ -62,11 +71,30 @@
       // Restore focus before closing: the focus handler opens the panel.
       toggle.focus();
       close();
+=======
+  var details = jump.querySelector(".jump__details");
+  var toggle = jump.querySelector(".jump__toggle");
+  var panel = jump.querySelector(".jump__panel");
+  if (!details || !toggle || !panel) return;
+
+  panel.addEventListener("click", function (e) {
+    if (e.target.closest("a")) details.open = false;
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && details.open) {
+      details.open = false;
+      toggle.focus();
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     }
   });
 
   document.addEventListener("click", function (e) {
+<<<<<<< HEAD
     if (isOpen() && !jump.contains(e.target)) close();
+=======
+    if (details.open && !jump.contains(e.target)) details.open = false;
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   });
 
   /* Mark the section currently on screen. Uses IntersectionObserver
@@ -243,3 +271,84 @@
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 })();
+<<<<<<< HEAD
+=======
+
+/* ------------------------------------------------------------
+   Leadership — the messages reader
+   ------------------------------------------------------------
+   The markup is every message in order, with the tab list hidden,
+   so with this file blocked every message is still read. Here it
+   becomes a tab list and one message at a time: a column of names
+   from 900px, a strip of names that scrolls sideways below it.
+   Arrow keys, Home and End move between tabs, as the ARIA tabs
+   pattern expects.
+   ------------------------------------------------------------ */
+(function () {
+  "use strict";
+  var reader = document.querySelector("[data-msgs]");
+  if (!reader) return;
+  var list = reader.querySelector('[role="tablist"]');
+  var tabs = Array.prototype.slice.call(reader.querySelectorAll('[role="tab"]'));
+  var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+  if (!list || !tabs.length) return;
+
+  function still() { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+
+  function select(i, focus) {
+    tabs.forEach(function (t, j) {
+      var on = j === i;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      if (panels[j]) panels[j].hidden = !on;
+    });
+    if (focus) tabs[i].focus();
+    // On the narrow strip, keep the chosen name in view.
+    if (list.scrollWidth > list.clientWidth) {
+      list.scrollTo({ left: tabs[i].offsetLeft - 20, behavior: still() ? "auto" : "smooth" });
+    }
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { select(i, false); });
+    t.addEventListener("keydown", function (e) {
+      var n = tabs.length, to = null;
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") to = (i + 1) % n;
+      else if (e.key === "ArrowUp" || e.key === "ArrowLeft") to = (i - 1 + n) % n;
+      else if (e.key === "Home") to = 0;
+      else if (e.key === "End") to = n - 1;
+      if (to === null) return;
+      e.preventDefault();
+      select(to, true);
+    });
+  });
+
+  reader.classList.add("is-tabbed");
+  list.hidden = false;
+  select(0, false);
+
+  // "Message from the …" in the Board roster. The link is a plain #msg-…
+  // anchor, which with no script lands on that message in the stacked
+  // reader. Here it chooses the matching tab and travels to the reader —
+  // through the shared smooth scroll when it is running, natively when it is
+  // not. It listens in the capture phase and stops the click there, because
+  // cirs.js gives every #anchor its own scroll, and that one would aim at a
+  // tab panel that is hidden until this has chosen it.
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("[data-msg-link]");
+    if (!a) return;
+    var i = -1;
+    tabs.forEach(function (t, j) { if (t.id === "msg-tab-" + a.getAttribute("data-msg-link")) i = j; });
+    if (i < 0) return;
+    e.preventDefault();
+    e.stopPropagation();
+    select(i, false);
+    var top = reader.getBoundingClientRect().top + window.pageYOffset - 120;
+    var ev = new CustomEvent("cirs-section-scroll", { cancelable: true, detail: { top: top, duration: 1.1 } });
+    if (window.dispatchEvent(ev)) window.scrollTo({ top: top, behavior: still() ? "auto" : "smooth" });
+    // Focus follows the reader's choice, so a keyboard reader lands on the
+    // tab and can move through the others with the arrow keys from there.
+    tabs[i].focus({ preventScroll: true });
+  }, true);
+})();
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168

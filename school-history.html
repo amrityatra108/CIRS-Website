@@ -7,8 +7,19 @@
 <meta name="description" content="How Chinmaya International Residential School came to be — Pujya Gurudev's vision, the rupee-by-rupee purchase of the land, and the inauguration on 6 June 1996.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/school-history.html">
+<<<<<<< HEAD
 <link rel="icon" type="image/jpeg" href="assets/img/favicon.jpg">
 <link rel="apple-touch-icon" href="assets/img/favicon.jpg">
+=======
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <meta property="og:type" content="website">
 <meta property="og:title" content="School History">
 <meta property="og:description" content="How Chinmaya International Residential School came to be — Pujya Gurudev's vision, the rupee-by-rupee purchase of the land, and the inauguration on 6 June 1996.">
@@ -20,16 +31,32 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<<<<<<< HEAD
 <link rel="stylesheet" href="assets/css/fonts.css?b=95">
 <link rel="stylesheet" href="assets/css/cirs.css?b=95">
 <link rel="stylesheet" href="assets/css/pages.css?b=95">
+=======
+<link rel="stylesheet" href="assets/css/fonts.css?b=102">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102">
+<link rel="stylesheet" href="assets/css/pages.css?b=102">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
      when there is no scripting, is the whole fix. Crossroads already does
+<<<<<<< HEAD
      this for its own curtain further down. -->
 <noscript><style>.curtain{display:none}</style></noscript>
 <link rel="stylesheet" href="assets/css/typography.css?b=95">
+=======
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/typography.css?b=102">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-drawer-5">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </head>
 
 <body>
@@ -64,7 +91,11 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
+<<<<<<< HEAD
 <header class="header is-first-section" id="header">
+=======
+<header class="header" id="header">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="header__left">
       <!-- Enquire opens the contact panel below rather than going anywhere.
@@ -195,55 +226,123 @@
     </div>
   </div>
 </header>
+<<<<<<< HEAD
 <div class="drawer" id="drawer" hidden>
   <nav class="drawer__grid" aria-label="All pages">
     <div>
       <p class="sc" id="dnav-vision">Vision</p>
       <ul aria-labelledby="dnav-vision">
+=======
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="0" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="true" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button">
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html" aria-current="page">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-student-life">Student Life</p>
       <ul aria-labelledby="dnav-student-life">
         <li><a href="student-life.html">Student Life</a></li>
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
       <ul aria-labelledby="dnav-literary-excellence">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
       <ul aria-labelledby="dnav-art-culture-music">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
     <div>
       <p class="sc" id="dnav-connect">Connect</p>
       <ul aria-labelledby="dnav-connect">
+=======
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
+<<<<<<< HEAD
     </div>
   </nav>
   <div class="drawer__utility">
@@ -265,6 +364,64 @@
     <p class="lead">A vision carried from the 1970s to a hundred acres in the Siruvani foothills, and the ninety-six students who began it.</p>
   </div>
 </section>
+=======
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main id="main">
+<section class="pagehero" id="top" data-ground="#0E0B12">
+  <div class="pagehero__media" style="background-image:url('assets/img/news-hero.jpg?b=102')">
+    <video class="pagehero__video" autoplay muted loop playsinline
+           poster="assets/img/news-hero.jpg?b=102" aria-hidden="true"
+           width="1280" height="720" fetchpriority="high">
+      <source src="assets/video/campus-loop.webm?b=102" type="video/webm">
+      <source src="assets/video/campus-loop.mp4?b=102" type="video/mp4">
+    </video>
+  </div>
+  <div class="pagehero__scrim" aria-hidden="true"></div>
+  <div class="wrap pagehero__inner">
+    <p class="marker"><span class="sc">Since 1996</span></p>
+    <h1 class="serif" data-split>School <em>History.</em></h1>
+    <p class="lead">A vision carried from the 1970s to a hundred acres in the Siruvani foothills, and the ninety-six students who began it.</p>
+    <p class="pagehero__cta">
+      <a class="btn btn--primary btn--lg" href="#timeline">Follow the timeline</a>
+      <a class="btn btn--ghost btn--lg" href="#film">Watch the film</a>
+    </p>
+
+  </div>
+</section>
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#origin">The origin</a>
+      <a href="#film">In the school&rsquo;s own words</a>
+      <a href="#timeline">The milestones</a>
+      <a href="#more">More of the Story is Coming.</a>
+    </div>
+  </details>
+</nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 <section class="section on-paper-2" id="origin">
   <div class="wrap">
     <div class="sec-head rv">
@@ -278,10 +435,18 @@
 
     <div class="prog" style="margin-top:clamp(30px,3.6vw,48px)">
       <div class="rv">
+<<<<<<< HEAD
         <p class="copy">In 1984 Swami Sahayanandaji traversed the length and breadth of India on
           foot, making the initial collection of one rupee from each individual towards the purchase
           of the land. Ten years later Pujya Guruji Swami Tejomayananda took up the vision and
           concretised it with, as the school&rsquo;s own account has it, unfailing vigour and energy.</p>
+=======
+        <p class="copy">In 1979 the Coimbatore Chinmaya Mission Committee found the land, and Pujya
+          Gurudev called it &lsquo;the Sidhbari of the South&rsquo;. From 1984 the money to buy it was
+          collected on foot, one rupee from every household. After Gurudev&rsquo;s Mahasamadhi in 1993,
+          Pujya Guruji Swami Tejomayananda took the project upon his own shoulders and carried it, as
+          the school&rsquo;s own account has it, with unfailing vigour and energy.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <p class="copy">On 6 June 1996 the Chinmaya International Residential School was inaugurated
           by Pujya Swami Chidanandaji, President of The Divine Life Society. It opened with
           ninety-six students in Grades V to VIII and eleven academic staff.</p>
@@ -327,19 +492,29 @@
   </div>
 </section>
 
+<<<<<<< HEAD
 <section class="tl" id="timeline" data-ground="#1E1626">
+=======
+<section class="tl on-purple" id="timeline" data-ground="#1E1626">
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">The milestones</span></p>
       <h2 class="serif h2" style="color:#fff" data-split>From a Vision <em>to a Campus.</em></h2>
+<<<<<<< HEAD
       <p class="lead">Five moments, in order. Scroll to follow the line; rest on a year to bring
         its frame forward.</p>
+=======
+      <p class="lead">Nearly fifty years, from the day the land was found to this year&rsquo;s results.
+        Scroll to follow the line; rest on a year to bring it forward.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
 
     <div class="tl__body">
       <span class="tl__spine" aria-hidden="true"><i class="tl__fill" id="tlFill"></i></span>
 
       <ol class="tl__list">
+<<<<<<< HEAD
         <li class="tl__item">
           <span class="tl__node" aria-hidden="true"></span>
           <p class="tl__when">1970s</p>
@@ -355,10 +530,26 @@
           </div>
         </li>
 
+=======
+        <li class="tl__era"><span class="sc">The founding</span></li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">1979</p>
+          <div class="tl__card">
+            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
+            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the land</span></figure>
+            <div class="tl__text">
+              <h3 class="serif h3">The land is found</h3>
+              <p class="copy">The Coimbatore Chinmaya Mission Committee, guided by A.&nbsp;Somasundaram, identifies the hundred acres that will become the campus. Pujya Gurudev proclaims the site &lsquo;the Sidhbari of the South&rsquo; &mdash; and that the school would be built there and nowhere else.</p>
+            </div>
+          </div>
+        </li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li class="tl__item">
           <span class="tl__node" aria-hidden="true"></span>
           <p class="tl__when">1984</p>
           <div class="tl__card">
+<<<<<<< HEAD
             <figure class="tl__shot"><span>Archival photograph<br>&mdash; the walk for the land</span></figure>
             <div class="tl__text">
               <h3 class="serif h3">One rupee at a time</h3>
@@ -396,16 +587,178 @@
           </div>
         </li>
 
+=======
+            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
+            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the walk for the land</span></figure>
+            <div class="tl__text">
+              <h3 class="serif h3">One rupee at a time</h3>
+              <p class="copy">Pujya Gurudev and Br. Sahaja Chaitanyaji begin a grassroots programme to collect one rupee from every household, on foot. It takes another ten years to procure all of the land the school needs.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">1993</p>
+          <div class="tl__card">
+            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
+            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the vision carried</span></figure>
+            <div class="tl__text">
+              <h3 class="serif h3">The project is carried on</h3>
+              <p class="copy">Pujya Gurudev attains Mahasamadhi. The indefatigable Swami Tejomayanandaji takes the project upon his own shoulders.</p>
+            </div>
+          </div>
+        </li>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <li class="tl__item">
           <span class="tl__node" aria-hidden="true"></span>
           <p class="tl__when">1996</p>
           <div class="tl__card">
+<<<<<<< HEAD
             <figure class="tl__shot"><span>Archival photograph<br>&mdash; the first roll</span></figure>
             <div class="tl__text">
               <h3 class="serif h3">Ninety-six students</h3>
               <p class="copy">The school opens with ninety-six students in Grades V to VIII and
                 eleven academic staff, led by Dr. Jaya Venugopal, with Brahmacharini Sumati Chaitanya
                 and Brahmachari Samahita Chaitanya as its spiritual guides.</p>
+=======
+            <!-- Replace the <span> with an <img> when the archive photograph arrives. -->
+            <figure class="tl__shot"><span>Archival photograph<br>&mdash; the inauguration</span></figure>
+            <div class="tl__text">
+              <h3 class="serif h3">The school is inaugurated</h3>
+              <p class="copy">CIRS is inaugurated by Swami Chidanandaji Maharaj, head of The Divine Life Society and Gurudev&rsquo;s dearest friend, in the presence of Pujya Guruji Swami Tejomayanandaji. Swamini Vimalanandaji becomes Director of CIRS. Gurudev&rsquo;s <i>sankalpa</i> has been fulfilled.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__era"><span class="sc">The school grows</span></li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2005</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">A resident director</h3>
+              <p class="copy">Pujya Guruji appoints Swami Swaroopanandaji as Resident Director of CIRS.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2009</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">A new Principal</h3>
+              <p class="copy">Smt. Shanti Krishnamurthy takes over as Principal of CIRS.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2011</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">The International School Award</h3>
+              <p class="copy">CIRS receives the British Council International School Award, recognising its international education initiatives.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2013</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">The Chinmaya Vision Award</h3>
+              <p class="copy">CIRS receives the Chinmaya Vision Award.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2016</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">Among the top four</h3>
+              <p class="copy">Education World ranks CIRS among the top four institutions in the country.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2018</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">Second in the country, first in CBSE</h3>
+              <p class="copy">CIRS rises through the ranks to second place, and ranks first in the CBSE Board results.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2018</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">Director &mdash; Academics &amp; Administration</h3>
+              <p class="copy">Smt. Shanti Krishnamurthy becomes Director &mdash; Academics and Administration.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__era"><span class="sc">Recent years</span></li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2019</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">Among the IB World Toppers</h3>
+              <p class="copy">A CIRS student is among the IB World Toppers, with a score of 45 out of 45.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2019</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">The first CIRSMUN</h3>
+              <p class="copy">The first CIRS Model United Nations is conducted.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2022</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">A 92% average in Science</h3>
+              <p class="copy">CIRS reports a 92% average in the Science stream in the Class XII Board Examinations, with 19 of 24 students scoring 90% or above.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2024</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">IB World Toppers, once more</h3>
+              <p class="copy">A CIRS student is once more among the IB World Toppers, setting the standard for generations to come.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2025</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">First prize for <i>Vayu Nigrah</i></h3>
+              <p class="copy">Three CIRS students win first prize in the Studentrepreneur competition at the SSVM Transforming India Conclave for <i>Vayu Nigrah</i>, a project that generates electricity from air-conditioning systems.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tl__item">
+          <span class="tl__node" aria-hidden="true"></span>
+          <p class="tl__when">2026</p>
+          <div class="tl__card tl__card--text">
+            <div class="tl__text">
+              <h3 class="serif h3">99% and two perfect scores</h3>
+              <p class="copy">The highest score in the CBSE Management stream is 99%, and two students achieve the highest possible IB score of 45 out of 45.</p>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
             </div>
           </div>
         </li>
@@ -418,10 +771,17 @@
   <div class="wrap more__inner">
     <p class="more__badge rv"><span class="more__dot" aria-hidden="true"></span> Still being written</p>
     <h2 class="serif more__head rv" data-split>More of the Story <em>is Coming.</em></h2>
+<<<<<<< HEAD
     <p class="lead rv">Twenty-five years leave more behind than five milestones. Further archival
       photographs, the accounts of the people who taught and boarded here, and the years between
       1996 and now will be added to this page as the school opens its archive.</p>
     <p class="more__ph rv"><em>[Placeholder &mdash; further milestones, photographs and first-hand
+=======
+    <p class="lead rv">Thirty years leave more behind than any list of milestones. Further archival
+      photographs and the accounts of the people who taught and boarded here will be added to this
+      page as the school opens its archive.</p>
+    <p class="more__ph rv"><em>[Placeholder &mdash; archival photographs and first-hand
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
       accounts to be supplied by the school.]</em></p>
     <p class="more__cta rv">Have a photograph, a document or a memory from the early years?
       <a href="mailto:info@cirschool.org">Send it to the school</a> and it can be added here.</p>
@@ -441,6 +801,7 @@
   </div>
 </section>
 </main>
+<<<<<<< HEAD
 <div class="footer-wrap">
 <footer class="footer">
   <div class="wrap">
@@ -467,10 +828,55 @@
 
       <div>
         <h4 class="sc">About</h4>
+=======
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
         <ul>
           <li><a href="why-cirs.html">Why CIRS</a></li>
           <li><a href="school-history.html">School History</a></li>
           <li><a href="leadership.html#people">Our People</a></li>
+<<<<<<< HEAD
           <li><a href="student-life.html#campus">Our Campus</a></li>
         </ul>
       </div>
@@ -478,11 +884,21 @@
       <div>
         <p class="sc" id="fnav-school">School</p>
         <ul aria-labelledby="fnav-school">
+=======
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
           <li><a href="why-cirs.html#junior">Junior School</a></li>
           <li><a href="why-cirs.html#senior">Senior School</a></li>
           <li><a href="sports.html#athletics">Athletics</a></li>
           <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
         </ul>
+<<<<<<< HEAD
       </div>
 
       <div>
@@ -504,6 +920,39 @@
           <li><a href="admissions.html#contact">Contact Us</a></li>
         </ul>
       </div>
+=======
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
     </div>
 
     <div class="footer__bar">
@@ -518,10 +967,19 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
+<<<<<<< HEAD
 <script src="assets/vendor/gsap.min.js?b=95" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=95" defer></script>
 <script src="assets/vendor/lenis.min.js?b=95" defer></script>
 <script src="assets/js/cirs.js?b=95" defer></script>
 <script src="assets/js/pages.js?b=95" defer></script>
+=======
+<script src="assets/vendor/gsap.min.js?b=102" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102" defer></script>
+<script src="assets/js/cirs.js?b=102-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102" defer></script>
+<script src="assets/js/footer.js?b=102-footer-1" defer></script>
+>>>>>>> 9da946b2e348966a1b475b04d55b22ea615c2168
 </body>
 </html>
