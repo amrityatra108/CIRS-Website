@@ -91,7 +91,7 @@ NEWS_FLASH = [
 # themselves.
 MENU = [
     ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
-    ("Student Life",         ["student-life", "curriculum", "our-results", "sports",
+    ("Student Life",         ["the-cirs-experience", "curriculum", "our-results", "sports",
                               "our-laurels", "math-challenge"]),
     ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
     ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
@@ -295,14 +295,14 @@ PAGES = {
                    "of Engineering, Medicine or Management in the senior years."),
         "sheet": "ibdp",
     },
-    "student-life": {
+    "the-cirs-experience": {
         "logintab": ("Student Portal", "https://cirs.in/school/"),
-        "nav": "Student Life",
-        "title": "Student Life",
+        "nav": "THE CIRS EXPERIENCE",
+        "title": "THE CIRS EXPERIENCE",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
                        "hundred-acre campus it happens on.",
         # No banner and no hero key: this page opens on a hero of its own,
-        # built in tools/pages/student-life.html — a drifting line of
+        # built in tools/pages/the-cirs-experience.html — a drifting line of
         # oversized lettering with photographs dealt up through it. It carries
         # the page's h1 and its own id="top". That hero is off-white, so the
         # header cannot float over it in white lettering: hence litehead.
@@ -599,7 +599,7 @@ SECTION_PAGE = {
     "junior": "why-cirs", "senior": "why-cirs",
     "quote": "leadership", "people": "leadership",
     "academics": "curriculum",
-    "life": "student-life", "day": "student-life", "campus": "student-life",
+    "life": "the-cirs-experience", "day": "the-cirs-experience", "campus": "the-cirs-experience",
     "athletics": "sports", "fields": "sports", "achievements": "sports",
     "arts": "cultural-gallery",
     "pathways": "alumni",
@@ -1585,7 +1585,7 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "why-cirs":
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
-    if slug == "student-life":
+    if slug == "the-cirs-experience":
         parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "our-results":
         parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
