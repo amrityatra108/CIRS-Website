@@ -1,13 +1,13 @@
-<!-- The featured photographs. The first is the one the camera's lens opened
-     onto: with the motion running, this section lies over the last screen
+<!-- The featured photographs. The first is the one the camera dissolves to:
+     with the motion running, this section lies over the last screen
      of the opening and takes over from it on the frame the opening ends on,
      so the photograph simply stays — then moves once, into the first of
-     three compositions, each made for its photograph's subject and shape.
+     three compositions drawn from the supplied photographs.
      assets/js/captures-featured.js drives it and
      assets/css/captures-featured.css lays it out. With reduced motion, a
      film that fails or no JavaScript, the same three compositions are
      simply three still screens, and the photograph that opened out of the
-     lens appears in the first of them. -->
+     camera dissolve appears in the first of them. -->
 <section class="cf" id="featured" aria-labelledby="cf-title" data-cf
          data-cf-phases="60 70 70 60 70 60 60">
   <h2 class="sr-only" id="cf-title">Four photographs</h2>
@@ -15,8 +15,8 @@
     <div class="cf__lead" data-cf-lead aria-hidden="true">
       <picture>
         <source media="(max-aspect-ratio: 6/5)"
-                srcset="assets/img/captures-shot-portrait.jpg" width="1620" height="2160">
-        <img src="assets/img/captures-shot.jpg" width="2400" height="1819" alt=""
+                srcset="assets/img/captures-shot-portrait.jpg" width="810" height="1080">
+        <img src="assets/img/captures-shot.jpg" width="1425" height="1080" alt=""
              loading="lazy" decoding="async">
       </picture>
     </div>
@@ -27,53 +27,53 @@
         <div class="cf__pic" data-cf-slot>
           <picture>
             <source media="(max-aspect-ratio: 6/5)"
-                    srcset="assets/img/captures-shot-portrait.jpg" width="1620" height="2160">
-            <img src="assets/img/captures-shot.jpg" width="2400" height="1819"
+                    srcset="assets/img/captures-shot-portrait.jpg" width="810" height="1080">
+            <img src="assets/img/captures-shot.jpg" width="1425" height="1080"
                  alt="{{CAPTURES_LEAD_CAPTION}}" loading="lazy" decoding="async">
           </picture>
         </div>
         <figcaption>{{CAPTURES_LEAD_CAPTION}}</figcaption>
       </figure>
-      <figure class="cf__fig cf__fig--kick" data-cf-enter>
-        <div class="cf__pic">{{CAPTURES_FEATURED:overhead-kick}}</div>
-        <figcaption>{{CAPTURES_FEATURED_CAPTION:overhead-kick}}</figcaption>
+      <figure class="cf__fig cf__fig--companion" data-cf-enter>
+        <div class="cf__pic">{{CAPTURES_FEATURED:companion}}</div>
+        <figcaption>{{CAPTURES_FEATURED_CAPTION:companion}}</figcaption>
       </figure>
     </div>
 
     <div class="cf__frame cf__frame--portrait" data-cf-frame>
-      <figure class="cf__fig cf__fig--greeting">
-        <div class="cf__pic">{{CAPTURES_FEATURED:greeting}}</div>
-        <figcaption>{{CAPTURES_FEATURED_CAPTION:greeting}}</figcaption>
+      <figure class="cf__fig cf__fig--portrait">
+        <div class="cf__pic">{{CAPTURES_FEATURED:portrait}}</div>
+        <figcaption>{{CAPTURES_FEATURED_CAPTION:portrait}}</figcaption>
       </figure>
     </div>
 
     <div class="cf__frame cf__frame--band" data-cf-frame>
-      <figure class="cf__fig cf__fig--air">
-        <div class="cf__pic">{{CAPTURES_FEATURED:campus-air}}</div>
-        <figcaption>{{CAPTURES_FEATURED_CAPTION:campus-air}}</figcaption>
+      <figure class="cf__fig cf__fig--wide">
+        <div class="cf__pic">{{CAPTURES_FEATURED:wide}}</div>
+        <figcaption>{{CAPTURES_FEATURED_CAPTION:wide}}</figcaption>
       </figure>
     </div>
   </div>
 </section>
 <div class="film__seam" aria-hidden="true"></div>
 
-<!-- The photographs. Each tile is a link to its full-size image, so without
-     scripting a tile simply opens the photograph; assets/js/captures-gallery.js
-     takes the click instead and shows it in the viewer below. The rows, the
-     captions and the order are tools/captures.py. -->
+<!-- The journal. Each photograph is visible once in a chapter. Every tile
+     links to its full-size image; assets/js/captures-gallery.js opens that
+     link in the viewer when scripting is available. The order, captions and
+     chapter index come from tools/captures.py. -->
 <section class="section cg" id="photographs" aria-labelledby="cg-title">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="marker"><span class="sc">The photographs</span></p>
-      <h2 class="serif h2" id="cg-title" data-split>The school, <em>in frames.</em></h2>
-      <p class="lead">{{CAPTURES_COUNT_CAP}} more from the school&rsquo;s own collection.
-        Select one to see it larger.</p>
+      <h2 class="serif h2" id="cg-title" data-split>Look a little closer.</h2>
+      <p class="lead">{{CAPTURES_COUNT_CAP}} more photographs move from small creatures
+        and open views to moments together. Choose a chapter, or open any frame.</p>
     </div>
-    <div class="cg__grid" data-cg>
+    {{CAPTURES_CHAPTER_NAV}}
+    <div class="cg__journal" data-cg>
 {{CAPTURES_GALLERY}}
     </div>
-    <p class="note cg__note"><em>[The names of the photographers, and of the occasions where
-      a caption does not give one, to be supplied by the CIRS Social Media Team.]</em></p>
+    <p class="note cg__note">Photographer credits will be added when confirmed.</p>
   </div>
 </section>
 

@@ -56,12 +56,6 @@ body.film main{ background:var(--paper); }
   object-position:var(--film-crop, 50% 50%);
   display:block;
   background:#000;
-  /* A slight push toward the lens while a photograph opens out of it
-     (Captures), written by the script as --film-push about the lens's own
-     centre, so the lens stays exactly where the photograph grows from.
-     Nothing writes it on a page without one, and it stays 1. */
-  transform-origin:var(--film-lens-x, 50%) var(--film-lens-y, 50%);
-  transform:scale(var(--film-push, 1));
   /* The film is scenery, never a player: it is not clickable, and it carries
      no controls. The element has never been given a controls attribute, but
      Chromium puts the whole panel up by itself — a play button, a scrubber,
@@ -105,7 +99,7 @@ body.film main{ background:var(--paper); }
   text-transform:uppercase;
   color:#FBFAF7;
   z-index:3;
-  /* --film-exit is the line leaving while a photograph opens (Captures). It
+  /* --film-exit is the line leaving as a photograph arrives (Captures). It
      is a plain fade on top of the reveal rather than the reveal run
      backwards, so the letters do not close up again on their way out. */
   opacity:calc(var(--film-reveal) * (1 - var(--film-exit, 0)));
@@ -125,29 +119,19 @@ body.film main{ background:var(--paper); }
   margin-right:calc(var(--film-track) * -1em);
 }
 
-/* The photograph a page's opening can end on (CIRS Captures). It fills the
-   stage like the film does, and the script moves it with three things only:
-   a transform that shrinks it into the lens and lets it grow back out, a clip
-   that is the lens's own ellipse, and its opacity. The clip is drawn in the
-   photograph's own coordinates, before the transform, so it can never be
-   larger than the picture it clips: while the photograph is still growing,
-   the opening in it is always inside its edges, and a straight edge of the
-   picture is never seen against the camera.
-
-   Until the file arrives, a blurred copy a few hundred bytes long stands in
-   for it (--film-shot-lqip), so a reader who scrolls straight to the end on
-   a slow connection sees the picture coming into focus rather than a blank
-   or black window. --film-focus is the point in it the opening treats as its
-   subject; the script reads it from here. */
+/* The photograph a page's opening can end on (CIRS Captures). It is already
+   full-screen and stationary; scrolling only changes its opacity over the
+   camera's final frame. Until the file arrives, a small blurred copy stands
+   in for it (--film-shot-lqip). --film-focus keeps the subject in the same
+   place as the following featured section. */
 .film__shot{
   position:absolute;
   inset:0;
   z-index:2;
   opacity:0;
-  transform-origin:0 0;
   pointer-events:none;
   background:#170C0A var(--film-shot-lqip, none) var(--film-focus, 50% 50%) / cover no-repeat;
-  will-change:transform, opacity;
+  will-change:opacity;
 }
 .film__shot picture,
 .film__photo{
@@ -169,18 +153,6 @@ body.film main{ background:var(--paper); }
   z-index:1;
   pointer-events:none;
   background:linear-gradient(to bottom, rgba(24,7,5,0) 70%, var(--film-seam-top) 100%);
-}
-/* Seen inside the lens, the photograph is darker at its rim, as anything is
-   through a barrel of glass. This lifts as it opens out. */
-.film__shot::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  opacity:var(--film-glass, 0);
-  background:radial-gradient(ellipse var(--film-glass-x, 50%) var(--film-glass-y, 50%)
-             at var(--film-glass-cx, 50%) var(--film-glass-cy, 50%),
-             rgba(8,4,3,0) 38%, rgba(8,4,3,.72) 100%);
 }
 
 /* The way out. No second effect — the foot of the frame simply becomes paper
@@ -279,25 +251,21 @@ body.captures{
   --film-ground:#04040A;
   --film-crop:50% 80%;
   --film-crop-narrow:32% 80%;
-  /* The film and the line keep the lengths they always had, and the
-     photograph out of the lens adds 130vh after them (see the page's entry
-     in tools/build-site.py); on narrow screens every length is scaled by the
-     same 320/360 as the rest of the opening. */
-  --film-run-page:590vh;
-  --film-run-page-narrow:535.56vh;
-  --film-focus:37% 40%;
+  /* The film and title keep their original scroll distances. A short
+     full-frame dissolve and a final hold follow them; narrow screens scale
+     the travel by the same 320/360 as the camera sequence. */
+  --film-run-page:530vh;
+  --film-run-page-narrow:482.22vh;
+  --film-focus:15% 55%;
   --film-shot-lqip:url(../img/captures-shot-lqip.jpg);
   --film-still-image:url(../img/captures-camera-final.jpg);
   --film-still-position:50% 80%;
-  /* The opening now ends on the photograph, so the ramp to paper starts on
-     the tone its foot is taken down to. The photograph's foot is not one
-     colour — bright dress on one side, dark stage on the other — so the
-     picture's own foot is faded to this (.film__shot::before) and the ramp
-     continues from it. The rise is a warm grey rather than a red, so the
-     way to paper does not pass through pink. */
-  --film-seam-top:#180705;
-  --film-seam-fold:#140604;
-  --film-seam-rise:#6A5B57;
+  /* The butterfly's grass meets a neutral green at the photograph's foot
+     (.film__shot::before); the ramp carries that tone on
+     toward the paper gallery. */
+  --film-seam-top:#141A15;
+  --film-seam-fold:#101610;
+  --film-seam-rise:#687066;
 }
 /* The still ends on the camera, so its seam keeps the camera's tones. */
 body.captures .film[data-film-still] .film__video{ visibility:hidden; }
@@ -307,11 +275,10 @@ body.captures .film[data-film-still] + .film__seam{
   --film-seam-rise:#6B6560;
 }
 /* The photograph changes at the same boundary as the film's crop, to a
-   portrait cut of the same picture: the landscape one, cropped to a phone,
-   is a strip of dark stage with the dancer half out of it. */
+   portrait cut of the same grass that keeps the butterfly in view. */
 @media (max-aspect-ratio:6/5){
   body.captures{
-    --film-focus:52% 40%;
+    --film-focus:45% 55%;
     --film-shot-lqip:url(../img/captures-shot-portrait-lqip.jpg);
     --film-still-position:32% 80%;
   }
