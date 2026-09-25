@@ -29,14 +29,7 @@
 <link rel="stylesheet" href="assets/css/fonts.css?b=102-journal-11">
 <link rel="stylesheet" href="assets/css/cirs.css?b=102-journal-11">
 <link rel="stylesheet" href="assets/css/pages.css?b=102-journal-11">
-<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
-     removes once it has played. With scripting off nothing removes it, and
-     it covers the page on every page of this site. One rule, applied only
-     when there is no scripting, is the whole fix. Crossroads already does
-     this for its own curtain further down. The footer rule is the same
-     kind of fallback: cirs.js unpins a footer taller than the window, and
-     without it a phone could never scroll up to the top of the footer. -->
-<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+
 <link rel="stylesheet" href="assets/css/news-journal.css?b=102-journal-11">
 <link rel="stylesheet" href="assets/css/typography.css?b=102-journal-11">
 <link rel="stylesheet" href="assets/css/footer.css?b=102-journal-11-footer-1">
@@ -45,14 +38,6 @@
 
 <body class="news-journal litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -812,7 +797,7 @@
 <script src="assets/vendor/gsap.min.js?b=102-journal-11" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=102-journal-11" defer></script>
 <script src="assets/vendor/lenis.min.js?b=102-journal-11" defer></script>
-<script src="assets/js/cirs.js?b=102-journal-11" defer></script>
+<script src="assets/js/cirs.js?b=102-journal-11-drawer-5" defer></script>
 <script src="assets/js/pages.js?b=102-journal-11" defer></script>
 <script src="assets/js/footer.js?b=102-journal-11-footer-1" defer></script>
 <script src="assets/js/news-journal.js?b=102-journal-11" defer></script>

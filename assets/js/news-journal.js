@@ -83,7 +83,7 @@
     var heroFadeTimer = null;
     var heroPendingIndex = null;
     var heroPaused = false;
-    var heroInterval = 1000;
+    var heroInterval = 9000;
     var heroFadeHalf = 210;
 
     function stopHeroTimer() {

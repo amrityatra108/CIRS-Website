@@ -1632,10 +1632,9 @@ def build(slug, page):
         head = head.replace("</head>",
             portal_motion_gate +
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
-    if slug in ("admissions", "school-info"):
-        # Its opening is visible immediately — Admissions' video hero, School
-        # Information's document sheets — so there is no curtain to hide
-        # when scripting is unavailable.
+    if slug in ("admissions", "school-info", "news"):
+        # These pages open immediately with their own video, document sheets,
+        # or journal masthead, so the shared curtain is unnecessary.
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
@@ -1679,11 +1678,9 @@ def build(slug, page):
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if slug in ("admissions", "school-info"):
-        # The video and poster already supply Admissions' opening, and the
-        # document sheets School Information's: each plays its own entrance
-        # at first paint. The shared curtain would hold either behind a blank
-        # screen for several seconds while fonts and its timeline settle.
+    if slug in ("admissions", "school-info", "news"):
+        # Admissions, School Information, and News each have their own visible
+        # opening. The shared curtain would delay it behind a blank screen.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
         chrome = chrome[:intro_start] + chrome[intro_end:]
