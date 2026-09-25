@@ -40,9 +40,10 @@ import mathchallenge
 import creativewriting
 import captures
 import theatre
+import festivals
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=101"
+CACHE_BUST = "b=102"
 
 # Questions to settle before an application is submitted.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -91,7 +92,7 @@ NEWS_FLASH = [
 # themselves.
 MENU = [
     ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
-    ("Student Life",         ["student-life", "curriculum", "our-results", "sports",
+    ("Student Life",         ["the-cirs-experience", "curriculum", "our-results", "sports",
                               "our-laurels", "math-challenge"]),
     ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
     ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
@@ -224,14 +225,19 @@ PAGES = {
         "title": "School Information",
         "description": "Affiliation status, governance, infrastructure and grievance-redressal details for "
                        "Chinmaya International Residential School, with the Important Documents portal.",
-        "banner": ("Affiliation &amp; compliance", "School <em>Information.</em>",
-                   "The affiliation, governance, infrastructure and grievance-redressal details CBSE and "
-                   "the affiliating authorities require every school to publish &mdash; and the Important "
-                   "Documents portal that carries the certificates behind them."),
-        # The two pages in the Connect column that had no sheet of their own
-        # share one, so the group reads as a group. See assets/css/connect.css.
-        "sheet": "connect",
-        "jump": True,
+        # No banner and no hero. The page opens on "The CIRS Record": four of
+        # the school's own certificates laid out as sheets of paper, cut from
+        # the PDFs by tools/make-record-previews.py, with the h1 beside them.
+        # The opening is ivory, so the header takes dark lettering. The page
+        # carries its own section index, so the shared "On this page" button
+        # stays off; and the under-construction note gives way to a records
+        # notice built from tools/documents.py, at the foot of the page.
+        "banner": None,
+        "sheet": "records",
+        "cache_suffix": "-records-1",
+        "litehead": True,
+        "jump": False,
+        "uc": False,
     },
     "important-documents": {
         "nav": "Important Documents",
@@ -295,14 +301,14 @@ PAGES = {
                    "of Engineering, Medicine or Management in the senior years."),
         "sheet": "ibdp",
     },
-    "student-life": {
+    "the-cirs-experience": {
         "logintab": ("Student Portal", "https://cirs.in/school/"),
-        "nav": "Student Life",
-        "title": "Student Life",
+        "nav": "THE CIRS EXPERIENCE",
+        "title": "THE CIRS EXPERIENCE",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
                        "hundred-acre campus it happens on.",
         # No banner and no hero key: this page opens on a hero of its own,
-        # built in tools/pages/student-life.html — a drifting line of
+        # built in tools/pages/the-cirs-experience.html — a drifting line of
         # oversized lettering with photographs dealt up through it. It carries
         # the page's h1 and its own id="top". That hero is off-white, so the
         # header cannot float over it in white lettering: hence litehead.
@@ -342,17 +348,16 @@ PAGES = {
         "title": "Crossroads | CIRS Monthly Magazine",
         "description": "The archive of Crossroads, the monthly magazine of Chinmaya "
                        "International Residential School — a student-run initiative to foster "
-                       "journalistic talent, edition by edition.",
+                       "literary talent, edition by edition.",
         # No flat band and no video hero: an archive opens on its own
         # masthead, built in tools/pages/crossroads.html.
         "banner": None,
     },
     "blog": {
         "nav": "CIRS Blog",
-        "title": "CIRS Blog",
-        "description": "Stories, ideas and perspectives from the CIRS community — student "
-                       "writing managed by the Crossroads Editorial Board and the CIRS "
-                       "Social Media Team.",
+        "title": "Ideas from CIRS | CIRS Blog",
+        "description": "Student articles first published in The Crossroads, collected "
+                       "as a journal of ideas from CIRS.",
         # No banner and no hero from the shared builders. A publication opens on
         # its own masthead, which the page brings with it, and it brings its own
         # sheet to set type larger than anything else on this site.
@@ -361,6 +366,9 @@ PAGES = {
         # it is a news stand and they are reading pages, and they share no
         # markup. blognews.css is scoped to body.blognews for that reason.
         "sheet": "blognews",
+        "cache_suffix": "-blog-editorial-1",
+        "jump": False,
+        "uc": False,
         # Newsreader carries the Blog interface and prose; its grid remains distinct.
         "litehead": True,
     },
@@ -432,11 +440,12 @@ PAGES = {
     "captures": {
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
+        "cache_suffix": "-captures-journal-2",
         # Not "as its students see it", which this page said while it was a
         # placeholder: none of these files records who took it, so the page
         # makes no claim about who did.
-        "description": "Photographs of the campus and the school year at Chinmaya International "
-                       "Residential School, from the school\u2019s own collection.",
+        "description": "Photographs of wildlife, the grounds, performances and gatherings "
+                       "in the CIRS Captures collection.",
         # No banner from the shared builder. This page opens on six seconds of
         # a camera coming out of the dark, which the reader scrubs with the
         # scroll, and the h1 is the one line that arrives once the film has
@@ -447,27 +456,20 @@ PAGES = {
             "video": "captures-camera",
             "poster": "captures-camera-poster.jpg",
             "title": "CIRS Captures",
-            # Then a photograph from the school appears in the camera's lens
-            # and opens out of it to fill the window. The phases keep the
-            # film and the line on the timing they always had, in absolute
-            # scroll distance — the film to 252vh, held to 277vh, the line up
-            # by 324vh — and add the photograph after them: read to 360vh, in
-            # the lens to 390vh, opened by 460vh, held to 490vh. Hence the
-            # longer run for this page in assets/css/filmintro.css.
-            "phases": [0.5143, 0.5657, 0.6612, 0.7347, 0.7959, 0.9388],
-            # The lens's front rim in the film's own pixels (1280x720): its
-            # centre, its two radii and its tilt in degrees, measured on the
-            # last frame. The radii are 4px inside the rim.
-            "lens": "388.4 359.3 65 124.4 6.56",
+            # Keep the camera and title at their original scroll distances:
+            # film to 252vh, final frame held to 277vh, title up by 324vh and
+            # read to 360vh. The photograph then dissolves across the whole
+            # frame by 400vh and rests for 30vh before the featured handoff.
+            "phases": [0.5860, 0.6442, 0.7535, 0.8372, 0.9302],
             # The film's last frame as a still, for reduced motion, a film
             # that fails and no scripting (tools/make-captures-shot.py).
             "still": "captures-camera-final.jpg",
-            # Two cuts of one photograph: the portrait one wherever the window
-            # is no wider than 6:5, the boundary the film's crop changes at.
+            # Two cuts of the supplied butterfly photograph: the portrait
+            # one keeps the subject in view on narrow screens.
             "shot": {
-                "src": "captures-shot.jpg", "size": (2400, 1819),
-                "narrow": "captures-shot-portrait.jpg", "narrow_size": (1620, 2160),
-                "alt": "A CIRS student dancing on stage in red, one arm raised",
+                "src": "captures-shot.jpg", "size": (1425, 1080),
+                "narrow": "captures-shot-portrait.jpg", "narrow_size": (810, 1080),
+                "alt": captures.LEAD_CAPTION,
             },
             # The featured photographs (tools/pages/captures.html) take over
             # from the opening's last frame, and the ramp to paper follows
@@ -502,25 +504,20 @@ PAGES = {
         },
     },
     "festivals": {
-        # The page body is tools/pages/festivals.html; its sheet is
-        # assets/css/culture.css, shared by the three Art, Culture & Music
-        # pages that open on a film.
-        "sheet": "culture",
-        "cache_suffix": "-festivals-film-2",
+        # The page body is tools/pages/festivals.html and its sheet
+        # assets/css/festivals.css. It opens on its own composition of seven
+        # of the school's photographs rather than on a film, so there is no
+        # "opening" here; the photographs, their provenance and the India
+        # calendar are in tools/festivals.py.
+        "sheet": "festivals",
+        "cache_suffix": "-festivals-year-1",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
-        "description": "The festivals kept through the year at Chinmaya International "
-                       "Residential School.",
+        "description": "Seven festivals kept through the school year at Chinmaya International "
+                       "Residential School, from Raksha Bandhan to Holi, in the school's own "
+                       "photographs.",
         "banner": None,
-        "opening": {
-            "video": "festivals-opening",
-            "poster": "festivals-opening-poster.jpg",
-            "still": "festivals-opening-final.jpg",
-            "still_element": True,
-            "title": "CIRS Festivals",
-            "title_markup": '<span class="film__festival-prefix">CIRS </span><span class="film__festival-name">Festivals</span>',
-            "pending": True,
-        },
+        "uc": False,
     },
     "theatre": {
         # The page body is tools/pages/theatre.html; its sheet is
@@ -617,7 +614,7 @@ SECTION_PAGE = {
     "junior": "why-cirs", "senior": "why-cirs",
     "quote": "leadership", "people": "leadership",
     "academics": "curriculum",
-    "life": "student-life", "day": "student-life", "campus": "student-life",
+    "life": "the-cirs-experience", "day": "the-cirs-experience", "campus": "the-cirs-experience",
     "athletics": "sports", "fields": "sports", "achievements": "sports",
     "arts": "cultural-gallery",
     "pathways": "alumni",
@@ -773,23 +770,23 @@ def film_html(slug, page):
     assets/css/filmintro.css and assets/js/filmintro.js.
 
     The film remains the opening's only dominant element. Our Sports adds one
-    discreet scroll cue over its first frames; CIRS Captures ends on a
-    photograph from the school that opens out of the camera's lens ("lens"
-    and "shot" in its entry, and the lens section of filmintro.js).
+    discreet scroll cue over its first frames; CIRS Captures dissolves from
+    the camera's final frame to the photograph declared by "shot" in its
+    entry (see the photo dissolve in filmintro.js).
     """
     film = page["opening"]
     phases = film.get("phases")
     attrs = f' data-film-phases="{" ".join(f"{v:g}" for v in phases)}"' if phases else ""
     if film.get("fps", 24) != 24:
         attrs += f' data-film-fps="{film["fps"]:g}"'
-    if film.get("lens"):
-        attrs += f' data-film-lens="{film["lens"]}"'
+    if film.get("shot"):
+        attrs += " data-film-photo"
     # The ramp to paper, unless the page puts it further down itself.
     seam = ("" if film.get("seam") is False else
             '\n<div class="film__seam" aria-hidden="true"></div>')
     shot = film.get("shot")
     # After the line in the document, so it is read after it, and over it on
-    # screen by z-index. See assets/js/filmintro.js for how it opens.
+    # screen by z-index. See assets/js/filmintro.js for the full-frame dissolve.
     shot = (
         '    <div class="film__shot" data-film-shot>\n'
         '      <picture>\n'
@@ -848,20 +845,14 @@ def esc(text, attr=False):
 
 
 def article_html(page):
-    """A published Crossroads article, set as a page of its own.
-
-    The words are the magazine's and they are all here — see tools/blogposts.py.
-    What this adds is only what a page needs around them: where the article
-    came from, who wrote it, and the way back to the blog and to the issue it
-    was printed in.
-    """
+    """A reading page for a complete student article from The Crossroads."""
     post = page["post"]
     issue = post["issue"]
     pdf = f"assets/documents/crossroads/crossroads-issue-{issue:02d}.pdf"
-    when = f" &middot; {post['date']}" if post["date"] else ""
-    by = (f'<p class="art__by">{esc(post["author"])}</p>' if post["author"]
-          else '<p class="art__by"><em>[Byline &mdash; to be supplied by the '
-               'Crossroads Editorial Board.]</em></p>')
+    when = f'        <span>{esc(post["date"])}</span>\n' if post["date"] else ""
+    by = esc(blog.byline(post))
+    subtitle = (f'      <p class="art__subtitle">{esc(post["subtitle"])}</p>\n'
+                if post.get("subtitle") else "")
     image = ""
     if post.get("image"):
         dimensions = (f' width="{post["image_width"]}" height="{post["image_height"]}"'
@@ -870,33 +861,45 @@ def article_html(page):
       <img src="assets/img/blog/{esc(post["image"], attr=True)}"
            alt="{esc(post.get("image_alt", ""), attr=True)}"
           {dimensions} decoding="async">
+      <figcaption>{esc(post.get("image_caption", "Image supplied for the web edition."))}</figcaption>
     </figure>
 
 '''
-    body = "\n".join(f"      <p>{esc(para)}</p>" for para in post["paragraphs"])
+    body = blog.body_html(post)
     return f'''<article class="art" id="top">
-  <div class="artwrap">
-    <header class="art__head">
-      <p class="art__back"><a href="blog.html"><span aria-hidden="true">&larr;</span> Back to the Blog</a></p>
-      <p class="art__flag"><a href="blog.html">CIRS Blog</a> &rarr;
-        <span>{esc(post["section"])}</span></p>
-      <h1 class="art__title serif">{esc(post["title"])}</h1>
-      {by}
-      <p class="art__where">The Crossroads, Issue&nbsp;{issue}{when}</p>
-    </header>
-
-{image}    <div class="art__body">
-{body}
+  <header class="art__head">
+    <div class="art__shell">
+      <nav class="art__breadcrumb" aria-label="Breadcrumb">
+        <a href="blog.html">Ideas from CIRS</a><span aria-hidden="true">/</span><span>{esc(post["section"])}</span>
+      </nav>
+      <p class="art__edition">The Crossroads <span aria-hidden="true">/</span> Issue {issue}</p>
+      <h1 class="art__title">{esc(post["title"])}</h1>
+{subtitle}      <div class="art__credits">
+        <span>{by}</span>
+{when}        <span>{blog.reading_time(post)} min read</span>
+      </div>
     </div>
-
+  </header>
+  <div class="art__layout">
+    <aside class="art__rail" aria-label="Original publication">
+      <p>First published in</p>
+      <strong>The Crossroads<br>Issue {issue}</strong>
+      <a href="{pdf}">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
+      <a href="crossroads.html">All Crossroads issues</a>
+    </aside>
+    <div class="art__content">
+{image}      <div class="art__body">
+{body}
+      </div>
+    </div>
+  </div>
+  <div class="art__shell">
     <footer class="art__foot">
-      <p>Printed in <b>The Crossroads</b>, Issue&nbsp;{issue}{when} &mdash; the monthly
-        magazine of Chinmaya International Residential School.</p>
-      <p class="art__onward">
-        <a class="btn btn--outline" href="{pdf}">Read the whole issue (PDF)</a>
-        <a class="btn btn--ghost-ink" href="blog.html">Back to the Blog</a>
-      </p>
+      <p>Originally published in <em>The Crossroads</em>, Issue {issue}.</p>
+      <div><a href="{pdf}">Read the complete issue (PDF)</a>
+        <a href="blog.html">Back to all stories</a></div>
     </footer>
+    {blog.related_html(post)}
   </div>
 </article>'''
 
@@ -1244,40 +1247,186 @@ def doc_meta(d):
     return f'<span class="docmeta docmeta--{status}">{docs.status_text(d)}</span>'
 
 
-def doclist_html():
-    """The compact, category-grouped list for the School Information page.
+# ---------------------------------------------------------------------------
+# The CIRS Record — School Information's document register and the status
+# lines around it. All of it is read from tools/documents.py, so the opening's
+# sheets, the register and the records notice at the foot of the page can
+# never disagree with each other or with the Important Documents portal.
+# ---------------------------------------------------------------------------
 
-    Every document with its date, and View beside Download: the notice above
-    this list promises the browser's own PDF viewer, so the list offers it.
-    Generated straight from tools/documents.py, so it can never list a
-    document the portal does not have, or omit one the portal does.
-    """
-    groups = []
+# What a visitor is told a document IS, in a word or two. The manifest's own
+# status says how current it is; availability and upload come first, because a
+# document nobody can open should say so before it says anything else.
+REGISTER_LABELS = {
+    "request":   "Available from the school on request",
+    "await":     "Awaiting upload",
+    "expired":   "Expired",
+    "stale":     "Newer edition awaited",
+    "valid":     "Valid",
+    "current":   "Current",
+    "permanent": "Permanent",
+    "dated":     "On file",
+    "undated":   "Date not supplied",
+}
+
+
+def register_status(d):
+    """The key of the one label a document wears in the register."""
+    if docs.is_on_request(d):
+        return "request"
+    if not docs.is_uploaded(d):
+        return "await"
+    status = docs.effective_status(d)
+    if status == "current":
+        return "valid" if d.get("valid_until") else "current"
+    return status
+
+
+def register_date(d):
+    """Every date the manifest holds for a document, in the order a reader
+    wants them: when it is from, and until when it held."""
+    parts = []
+    if d.get("issued"):
+        parts.append(f"Issued {d['issued']}")
+    if d.get("period"):
+        parts.append(f"Covers {d['period']}")
+    if d.get("valid_until"):
+        verb = "ran to" if docs.effective_status(d) == "expired" else "valid to"
+        parts.append(f"{verb} {d['valid_until']}" if parts
+                     else f"{verb.capitalize()} {d['valid_until']}")
+    return " &middot; ".join(parts) or "Date not supplied"
+
+
+def _plain(html):
+    """A title as text, for the search index and for sentences."""
+    text = re.sub(r"<[^>]+>", "", html)
+    return (text.replace("&amp;", "&").replace("&mdash;", "—")
+                .replace("&ndash;", "–").replace("&middot;", "·"))
+
+
+def _slug(text):
+    return re.sub(r"[^a-z0-9]+", "-", _plain(text).lower()).strip("-")
+
+
+def _size(d):
+    kb = os.path.getsize(os.path.join(ROOT, docs.asset_path(d))) / 1024
+    return f"{kb / 1024:.1f} MB" if kb >= 1000 else f"{kb:.0f} KB"
+
+
+def register_html():
+    """The searchable register on School Information: every document in the
+    manifest, grouped by its category, with its dates, one status label, and
+    View beside Download where there is a file to open. A document the school
+    keeps off the site offers a request by email instead, and one not yet
+    uploaded offers nothing — never a button that leads nowhere.
+
+    The search box and the filters are written with the hidden attribute and
+    shown by assets/js/records.js, so without scripting the register is simply
+    the complete list, which is all the controls would ever narrow it to."""
+    total = len(docs.DOCUMENTS)
+    groups, filters = [], []
     for category, items in docs.by_category():
+        slug = _slug(category)
+        filters.append(f'          <button type="button" class="reg__filter" data-reg-filter="{slug}" '
+                       f'aria-pressed="false">{category} <span class="reg__n">{len(items)}</span></button>')
         rows = []
         for d in items:
-            if docs.is_on_request(d):
-                actions = ""
-            elif docs.is_uploaded(d):
-                actions = (f'<a class="doclist__dl doclist__dl--view" href="{docs.asset_path(d)}" '
-                           f'target="_blank" rel="noopener" '
-                           f'aria-label="View {d["title"]} (PDF, opens in a new tab)">View</a>'
-                           f'<a class="doclist__dl" href="{docs.asset_path(d)}" download '
-                           f'aria-label="Download {d["title"]} (PDF)">Download</a>')
+            key = register_status(d)
+            title_text = _plain(d["title"])
+            if key == "request":
+                subject = f"Request: {title_text}".replace("&", "and").replace(" ", "%20")
+                actions = (f'<a class="reg__act reg__act--ask" href="mailto:info@cirschool.org?subject={subject}">'
+                           f'Request by email<span class="sr-only">: {d["title"]}</span></a>')
+                fmt = "Held by the school office"
+            elif key == "await":
+                actions = '<span class="reg__none">Not yet published</span>'
+                fmt = "No file yet"
             else:
-                actions = '<span class="doclist__await">Awaiting upload</span>'
-            meta = doc_meta(d) + (f'<span class="docmeta docmeta--request">{ON_REQUEST}</span>'
-                                  if docs.is_on_request(d) else "")
-            rows.append(f'        <li><span class="doclist__title">{d["title"]}{meta}</span>'
-                        + (f' <span class="doclist__actions">{actions}</span>' if actions else "")
-                        + '</li>')
-        groups.append(f'''      <div class="docgroup rv">
-        <h3 class="serif h3">{category}</h3>
-        <ul class="doclist">
+                path = docs.asset_path(d)
+                actions = (f'<a class="reg__act" href="{path}" target="_blank" rel="noopener">'
+                           f'View<span class="sr-only"> {d["title"]} (PDF, opens in a new tab)</span></a>'
+                           f'<a class="reg__act reg__act--dl" href="{path}" download>'
+                           f'Download<span class="sr-only"> {d["title"]} (PDF)</span></a>')
+                fmt = f"PDF &middot; {_size(d)}"
+            search = f"{title_text} {_plain(d['note'])}".lower().replace('"', "")
+            rows.append(f'''          <li class="reg__row reg__row--{key}" id="doc-{d["id"]}" data-reg-text="{search}">
+            <div class="reg__doc">
+              <p class="reg__title">{d["title"]}</p>
+              <p class="reg__note">{d["note"]}</p>
+            </div>
+            <p class="reg__when">{register_date(d)}<span class="reg__fmt">{fmt}</span></p>
+            <p class="reg__state"><span class="rst rst--{key}">{REGISTER_LABELS[key]}</span></p>
+            <p class="reg__acts">{actions}</p>
+          </li>''')
+        noun = "record" if len(items) == 1 else "records"
+        groups.append(f'''        <div class="reg__group" data-reg-group="{slug}">
+          <h3 class="reg__cat">{category} <span class="reg__n">{len(items)} {noun}</span></h3>
+          <ul class="reg__list">
 {chr(10).join(rows)}
-        </ul>
-      </div>''')
-    return '<div class="docgrid">\n' + "\n".join(groups) + '\n    </div>'
+          </ul>
+        </div>''')
+    return f'''<div class="reg" data-reg>
+      <div class="reg__tools" data-reg-tools hidden>
+        <div class="reg__search">
+          <label class="reg__label" for="regSearch">Search the register</label>
+          <input class="reg__input" id="regSearch" type="search" autocomplete="off" spellcheck="false"
+                 placeholder="e.g. fire safety, calendar" aria-describedby="regCount">
+        </div>
+        <div class="reg__filters" role="group" aria-label="Show one category">
+          <button type="button" class="reg__filter" data-reg-filter="all" aria-pressed="true">All <span class="reg__n">{total}</span></button>
+{chr(10).join(filters)}
+        </div>
+        <p class="reg__count" id="regCount" data-reg-count aria-live="polite">Showing all {total} records</p>
+      </div>
+      <div class="reg__groups" id="doclist">
+{chr(10).join(groups)}
+      </div>
+      <div class="reg__empty" data-reg-empty hidden>
+        <p class="reg__emptyhead">No record matches that search.</p>
+        <p>Try one word of the title &mdash; &ldquo;fire&rdquo;, &ldquo;calendar&rdquo;,
+          &ldquo;affiliation&rdquo; &mdash; or ask the school office at
+          <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
+        <button type="button" class="reg__reset" data-reg-reset>Clear the search and filters</button>
+      </div>
+    </div>'''
+
+
+def doc_sheet_status(doc_id):
+    """The status line on one of the opening's sheets: its label and its date,
+    so an expired letter can never be laid out there as if it were current."""
+    d = next(x for x in docs.DOCUMENTS if x["id"] == doc_id)
+    key = register_status(d)
+    detail = {
+        "valid": f"to {d.get('valid_until', '')}",
+        "expired": f"{d.get('valid_until', '')}, renewal awaited",
+        "permanent": f"issued {d.get('issued', '')}",
+        "dated": f"issued {d.get('issued', '')}",
+        "stale": f"issued {d.get('issued', '')}",
+    }.get(key, "")
+    return (f'<span class="rst rst--{key}">{REGISTER_LABELS[key]}</span>'
+            + (f' <span class="rec-tag__when">{detail}</span>' if detail else ""))
+
+
+def records_notice_html():
+    """The notice at the foot of School Information: which records have lapsed,
+    which are awaiting a newer edition or an upload, and which are held by the
+    school — each named and linked to its row in the register, and counted
+    from the manifest so the notice is never out of step with the page."""
+    buckets = [("expired", "Expired, renewal awaited"),
+               ("stale", "Newer edition awaited"),
+               ("await", "Awaiting upload"),
+               ("request", "Available from the school on request")]
+    rows = []
+    for key, label in buckets:
+        items = [d for d in docs.DOCUMENTS if register_status(d) == key]
+        if not items:
+            continue
+        links = ", ".join(f'<a href="#doc-{d["id"]}">{d["title"]}</a>' for d in items)
+        rows.append(f'''          <div class="rec-notice__row">
+            <dt><span class="rst rst--{key}">{label}</span> <span class="rec-notice__n">{len(items)}</span></dt>
+            <dd>{links}</dd>
+          </div>''')
+    return '<dl class="rec-notice__list">\n' + "\n".join(rows) + '\n        </dl>'
 
 
 def docportal_html():
@@ -1456,8 +1605,9 @@ def build(slug, page):
             '#portalIntroEntry{display:none}'
             'body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}'
             '</style></noscript>\n</head>')
-    if slug == "admissions":
-        # Its video hero opens immediately, so there is no curtain to hide
+    if slug in ("admissions", "school-info"):
+        # Its opening is visible immediately — Admissions' video hero, School
+        # Information's document sheets — so there is no curtain to hide
         # when scripting is unavailable.
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
@@ -1487,16 +1637,23 @@ def build(slug, page):
     chrome = read("tools/partials/chrome.html")
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
+    if slug == "blog" or page.get("post"):
+        # Journal pages open directly on readable type. The shared full-screen
+        # curtain would hide their masthead and force an unrelated wait.
+        intro_start = chrome.index("<!-- Opening sequence.")
+        intro_end = chrome.index("<!-- Film lightbox", intro_start)
+        chrome = chrome[:intro_start] + chrome[intro_end:]
     if slug == "parent-portal":
         # The full-window photograph is this page's opening; the shared opaque
         # curtain would cover it and run its own scroll lock.
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if slug == "admissions":
-        # The video and poster already supply this page's opening. The shared
-        # curtain can hold its application action behind a blank screen for
-        # several seconds while fonts and the intro timeline settle.
+    if slug in ("admissions", "school-info"):
+        # The video and poster already supply Admissions' opening, and the
+        # document sheets School Information's: each plays its own entrance
+        # at first paint. The shared curtain would hold either behind a blank
+        # screen for several seconds while fonts and its timeline settle.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
         chrome = chrome[:intro_start] + chrome[intro_end:]
@@ -1537,9 +1694,12 @@ def build(slug, page):
     content = expand_figs(content)
     if slug == "captures":
         content = captures.expand_featured(content)
+    if slug == "festivals":
+        content = festivals.expand(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
-                       .replace("{{DOCLIST}}", doclist_html())
+                       .replace("{{REGISTER}}", register_html() if slug == "school-info" else "")
+                       .replace("{{RECORDS_NOTICE}}", records_notice_html() if slug == "school-info" else "")
                        .replace("{{DOCPORTAL}}", docportal_html())
                        .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
@@ -1555,6 +1715,7 @@ def build(slug, page):
                        .replace("{{CAPTURES_END}}", captures.end_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
                        .replace("{{CAPTURES_COUNT_CAP}}", captures.count_word().capitalize())
+                       .replace("{{CAPTURES_CHAPTER_NAV}}", captures.chapter_nav_html() if slug == "captures" else "")
                        .replace("{{CW_ROWS}}", creativewriting.rows_html())
                        .replace("{{CW_JOURNEY}}", creativewriting.journey_html())
                        .replace("{{CW_COUNT}}", str(creativewriting.count()))
@@ -1575,6 +1736,8 @@ def build(slug, page):
                           .replace("{{THEATRE_MASQUERADES}}", theatre.masquerades_html())
                           .replace("{{THEATRE_CLASSES}}", theatre.classes_html())
                           .replace("{{THEATRE_VIEWER_DATA}}", theatre.viewer_data()))
+    content = re.sub(r"\{\{DOC_STATUS:([a-z0-9-]+)\}\}",
+                     lambda m: doc_sheet_status(m.group(1)), content)
     parts.append(content)
     # Every page carries the index; jump_html leaves it out where there is
     # nothing to jump to. "jump": False opts a page out. It is placed after
@@ -1589,6 +1752,10 @@ def build(slug, page):
     parts.append("</main>")
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
+        if slug == "captures":
+            # Captures already ends with its own full-width photograph.
+            # Keep that as the page's final image before the site footer.
+            footer = footer[footer.index('<div class="footer-wrap">'):]
         if slug == "admissions":
             footer = footer.replace('href="admissions.html#examination">Important Dates',
                                     'href="admissions.html#dates">Important Dates')
@@ -1605,18 +1772,24 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "why-cirs":
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
-    if slug == "student-life":
+    if slug == "the-cirs-experience":
         parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "our-results":
         parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
         parts.append(f'<script src="assets/js/admissions.js?{CACHE_BUST}" defer></script>')
+    if slug == "school-info":
+        parts.append(f'<script src="assets/js/records.js?{CACHE_BUST}" defer></script>')
     if slug == "alumni":
         parts.append(f'<script src="assets/js/alumni-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
+    if slug == "blog":
+        parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-editorial-1" defer></script>')
+    if slug == "festivals":
+        parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
@@ -1653,8 +1826,9 @@ for _post in blogposts.POSTS:
         "title": esc(_post["title"], attr=True) + " | CIRS Blog",
         "description": esc(_post["excerpt"][:180], attr=True),
         "sheet": "blog",
-        "cache_suffix": "-blog-2",
+        "cache_suffix": "-blog-editorial-1",
         "uc": False,
+        "jump": False,
         # An article opens on paper, so the header cannot float over it in
         # white lettering. The Blog's own masthead is dark and does not.
         "litehead": True,

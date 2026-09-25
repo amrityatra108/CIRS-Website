@@ -582,7 +582,7 @@ def programme_html():
         f'<span class="th-programme__name serif">{name}</span>'
         f'<span class="th-programme__who">{who}</span></a></li>' for n, sid, name, who in acts)
     return f'''<nav class="th-programme rv" aria-labelledby="th-programme-title">
-    <p class="th-programme__label" id="th-programme-title">The year, in three acts</p>
+    <p class="th-programme__label" id="th-programme-title">Three ways to take the stage</p>
     <p class="th-programme__lead">The whole school, the four houses and every class of twenty-five: each has its own turn in front of an audience.</p>
     <ol class="th-programme__list">
 {items}
@@ -812,7 +812,7 @@ def classes_html():
     <div class="th-cp__head">
       <p class="th-label th-label--ink"><span class="th-label__act">Act III</span> Every class</p>
       <h2 class="serif h2" id="cp-title">Class <em>Presentations.</em></h2>
-      <p class="lead">Every class of twenty-five puts up a theatrical presentation in the school assembly once a year. Engaging every student through acting, dance, tech and lighting, theatre here is not limited to drama clubs but brings every pupil into its embrace. This is where prodigies are born.</p>
+      <p class="lead">Every class of twenty-five gets the opportunity to put up a theatrical presentation in the school assembly once a year. Engaging every student through acting, dance, tech and lighting, theatre here is not limited to drama clubs but brings every pupil into its embrace. This is where prodigies are born.</p>
       <p class="th-cp__note">Recorded and published by the school on its YouTube channel. Each class is named as its video names it, and each date is the date the video was uploaded.</p>
     </div>
     <ul class="th-videos">
