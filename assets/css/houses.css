@@ -1,0 +1,1013 @@
+/* ============================================================
+   Our Houses
+   ------------------------------------------------------------
+   Scoped to body.houses, like every other page sheet here, and
+   built on the tokens cirs.css already declares. It adds one
+   family of colours of its own, and only because the page is
+   about them.
+
+   WHERE THE HOUSE COLOURS COME FROM
+   ------------------------------------------------------------
+   Not from a brief and not from a guess. No CIRS document in
+   this repository writes the house colours down, but the school
+   wears them, with the house name printed on the garment, in
+   photographs the school supplied for this site:
+
+     Vasishtha    a deep red basketball jersey reading VASISHTHA
+     Valmiki      VALMIKI on yellow investiture sashes
+     Vishwamitra  a green tee reading VISHWAMITRA
+     Vyasa        a blue tee reading VYASA
+
+   The hue of each token below is the hue measured off that
+   garment. See tools/houses.py for the file names, and
+   tools/make-houses.py for why those four frames are cropped
+   onto their lettering.
+
+   Two of the four are also confirmed in the school's own words,
+   in Sakshi, February 2008: "the colour of the Vasishtha House
+   is red", and Vishwamitra as "the green house". Vyasa is "the
+   blue dragon" in the same issue.
+
+   FOUR TOKENS PER HOUSE, AND WHY NOT ONE
+   ------------------------------------------------------------
+   A single token per house cannot be legible everywhere. The
+   yellow that is right for a flag is 2:1 on ivory; the red that
+   is right as lettering on ivory is muddy as a fill. So each
+   house has four, each measured:
+
+     --hf   the flag. A fill, under the house name, never text.
+     --ho   what goes ON the flag. White, or near-black for the
+            yellow — which is the one thing a four-colour scheme
+            has to get right and the reason this is a token
+            rather than a rule.
+     --hi   the house colour as ink, on ivory.
+     --hl   the house colour lit, on the dark grounds.
+
+   Measured against the site's own paper (#FAF7F8) and ink
+   (#0E0B12, #1E1626). Every pair is AA or better, and the worst
+   of them is 5.2:1:
+
+                  --ho on --hf   --hi on paper   --hl on ink
+     Vasishtha       7.90            8.80           5.35
+     Valmiki         8.78            7.26           7.88
+     Vishwamitra     5.22            8.66           8.34
+     Vyasa           7.63            9.46           7.31
+
+   And nothing on this page is identified by colour alone. Every
+   swatch, bar, stripe and table cell sits beside the house's
+   name in text — which is also why the table has a name in
+   every column head rather than four coloured columns.
+   ============================================================ */
+
+body.houses{
+  --h-vasishtha-f:#9E1B33; --h-vasishtha-o:#FFFFFF; --h-vasishtha-i:#8C1329; --h-vasishtha-l:#E8607E;
+  --h-valmiki-f:#E0A32A;   --h-valmiki-o:#0E0B12;   --h-valmiki-i:#6B4E05;   --h-valmiki-l:#E0A32A;
+  --h-vishwamitra-f:#1E7A63; --h-vishwamitra-o:#FFFFFF; --h-vishwamitra-i:#14513F; --h-vishwamitra-l:#4FC79E;
+  --h-vyasa-f:#2E5199;     --h-vyasa-o:#FFFFFF;     --h-vyasa-i:#23407A;     --h-vyasa-l:#7FA8F0;
+}
+
+/* One rule per house, and every component downstream reads --hf,
+   --ho, --hi and --hl without knowing which house it is in. That
+   is what keeps a fifth house from meaning a sweep of this file:
+   four lines here and one entry in tools/houses.py. */
+body.houses [data-house="vasishtha"]{
+  --hf:var(--h-vasishtha-f); --ho:var(--h-vasishtha-o);
+  --hi:var(--h-vasishtha-i); --hl:var(--h-vasishtha-l);
+}
+body.houses [data-house="valmiki"]{
+  --hf:var(--h-valmiki-f); --ho:var(--h-valmiki-o);
+  --hi:var(--h-valmiki-i); --hl:var(--h-valmiki-l);
+}
+body.houses [data-house="vishwamitra"]{
+  --hf:var(--h-vishwamitra-f); --ho:var(--h-vishwamitra-o);
+  --hi:var(--h-vishwamitra-i); --hl:var(--h-vishwamitra-l);
+}
+body.houses [data-house="vyasa"]{
+  --hf:var(--h-vyasa-f); --ho:var(--h-vyasa-o);
+  --hi:var(--h-vyasa-i); --hl:var(--h-vyasa-l);
+}
+
+/* Where each opening photograph is held as its zone changes shape.
+   ------------------------------------------------------------
+   A zone is 0.44 wide at rest and about 0.98 when it is live, so
+   one photograph has to survive both — and object-fit: cover
+   crops nearly half the width away at the narrow end. Centring
+   them would be no good: in three of the four the house's own
+   name is printed on a garment at the side of the frame, and
+   that lettering is the evidence for the colour. So the hold
+   point is on the lettering, per house, and it is the same
+   photograph that opens out as the zone grows.
+
+   These four numbers are the one thing on this page that is set
+   by eye rather than measured, and they are the only reason to
+   look at the opening frame after re-cropping a hero in
+   tools/make-houses.py. */
+body.houses .hsxz[data-house="vasishtha"] .hsxz__ph img{ object-position:84% 46% }
+body.houses .hsxz[data-house="valmiki"] .hsxz__ph img{ object-position:36% 44% }
+body.houses .hsxz[data-house="vishwamitra"] .hsxz__ph img{ object-position:66% 40% }
+body.houses .hsxz[data-house="vyasa"] .hsxz__ph img{ object-position:52% 34% }
+
+body.houses{ background:var(--purple-ink); }
+body.houses main{ background:var(--paper); }
+
+/* ============================================================
+   1. The opening frame
+   ------------------------------------------------------------
+   100svh, divided four ways, no gaps and no rounded corners:
+   four zones of one photograph, not four cards on a page.
+
+   The pin is position:sticky and nothing else, for the reason
+   cirs.css already records — ScrollTrigger's own pin rewrites
+   the document with a spacer, which on this site fights Lenis.
+   The track is the stage plus the travel the release scrubs
+   across.
+   ============================================================ */
+.hsx{ position:relative; background:var(--purple-ink); }
+.hsx__track{ height:184svh; height:184vh; }
+.hsx__stage{
+  position:sticky; top:0;
+  height:100svh; height:100vh;
+  overflow:hidden;
+  display:flex; align-items:flex-end;
+}
+
+.hsx__grid{ position:absolute; inset:0; display:flex; }
+
+/* The three hairlines between the zones. They are the first thing
+   the entrance draws, and they stay: the divisions are the
+   composition. */
+.hsx__rules{ position:absolute; inset:0; z-index:2; pointer-events:none; display:flex; }
+.hsx__rules span{
+  flex:1 1 0; border-right:1px solid rgba(255,255,255,.28);
+  transform:scaleY(0); transform-origin:50% 0;
+}
+.hsx__rules span:nth-child(3){ flex:2 1 0; }
+
+/* ---- one zone ---- */
+.hsxz{
+  position:relative; display:block; min-width:0; overflow:hidden;
+  flex:1 1 0; text-decoration:none; color:#fff;
+  transition:flex-grow .78s var(--e2);
+}
+.hsxz__ph{ position:absolute; inset:0; overflow:hidden; }
+.hsxz__ph img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 40%;
+  transform:scale(1.06) translate3d(var(--px,0px),var(--py,0px),0);
+  filter:saturate(.82) brightness(.78);
+  transition:transform .5s var(--e), filter .6s var(--e);
+}
+/* The house colour over the photograph, and the gradients that
+   guarantee the lettering its contrast whatever the frame
+   underneath is doing.
+
+   One colour layer, not a flood: the house colour comes up from
+   the foot of the zone and is gone by two thirds of the way up,
+   so the zone is identifiably red or green without the
+   photograph being tinted out of existence. The dark layer under
+   the title band is separate, and it is what the h1 is measured
+   against — white on rgba(14,11,18,.88) over a photograph, which
+   is what makes the title safe over any of the four frames. */
+.hsxz__tint{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to top, rgba(14,11,18,.88) 0%, rgba(14,11,18,.44) 28%, rgba(14,11,18,.22) 54%, rgba(14,11,18,.34) 100%),
+    linear-gradient(to top, var(--hf) 0%, var(--hf) 20%, transparent 68%);
+  opacity:1; transition:opacity .6s var(--e);
+}
+/* The flag: a solid rule of the house colour along the foot of the
+   zone. The gradient above it is atmosphere and reads differently
+   over four different photographs; this is the same eight pixels
+   of the same colour in every zone, which is what makes the four
+   comparable at a glance. */
+.hsxz__tint::after{
+  content:""; position:absolute; inset:auto 0 0 0; height:8px; background:var(--hf);
+}
+.hsxz__no{
+  position:absolute; top:clamp(84px,9vh,120px); left:0; right:0;
+  text-align:center; font-family:var(--font-primary);
+  font-size:.82rem; letter-spacing:.34em; color:rgba(255,255,255,.78);
+}
+/* The name sits in the upper half of the zone, above the band the
+   title crosses. The title still runs across the whole
+   composition — it runs across the photographs, which is the
+   composition — but it does not run across four other pieces of
+   lettering, which would cost both of them. */
+.hsxz__body{
+  position:absolute; inset:clamp(118px,13vh,168px) 0 auto 0;
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+}
+.hsxz__name{
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-family:var(--font-primary); font-weight:600;
+  font-size:clamp(1.9rem,3.4vw,3.1rem); line-height:1;
+  letter-spacing:.02em;
+  color:rgba(255,255,255,.66);
+  /* The names sit over photographs, so they carry their own
+     shadow rather than trusting the frame behind them. */
+  text-shadow:0 2px 18px rgba(14,11,18,.75);
+  transition:color .5s var(--e), -webkit-text-stroke-color .5s var(--e);
+}
+/* Outline at rest, filled when the zone is live. Guarded, because
+   a browser without text-stroke would otherwise render the name
+   in a transparent fill and show nothing at all. */
+@supports (-webkit-text-stroke: 1px #000){
+  .hsxz__name{ color:transparent; -webkit-text-stroke:1.3px rgba(255,255,255,.92); }
+}
+.hsxz__meta{
+  font-family:var(--font-primary); font-size:.74rem; letter-spacing:.2em;
+  text-transform:uppercase; color:rgba(255,255,255,.0);
+  transition:color .45s var(--e); text-align:center;
+}
+.hsxz__go{
+  font-family:var(--font-primary); font-size:.7rem; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--gold-lit);
+  opacity:0; transform:translateY(6px);
+  transition:opacity .45s var(--e), transform .45s var(--e);
+}
+.hsxz__go::after{ content:" \2192"; }
+
+/* ---- live: hover or keyboard focus ----
+   :has() is what lets the other three compress, and it is also
+   why the interaction needs no script at all: hovering or tabbing
+   to a zone is the whole mechanism. 3 against 0.82 x 3 puts the
+   live zone at 55% of the window, which is the figure the layout
+   was drawn to.
+
+   The :not() is load-bearing. Written as ":has(:hover) .hsxz",
+   the compressing rule carries the specificity of its own :has()
+   argument and so outranks ".hsxz:hover" — which compressed all
+   four zones including the one under the pointer, and the frame
+   never moved. Excluding the live zone from the rule instead of
+   out-ranking it afterwards is what keeps that from coming back
+   the next time a selector here is edited.
+
+   Width is deliberately NOT tied to .is-live, which the script
+   sets: a class that outlives the pointer must not hold the
+   layout open after the pointer has gone. It carries the change
+   from outline to filled lettering and nothing that lays out. */
+.hsx__grid:has(.hsxz:hover) .hsxz:not(:hover),
+.hsx__grid:has(.hsxz:focus-visible) .hsxz:not(:focus-visible){ flex-grow:.82; }
+.hsxz:hover,
+.hsxz:focus-visible{ flex-grow:3; }
+
+.hsxz:hover .hsxz__ph img,
+.hsxz:focus-visible .hsxz__ph img,
+.hsxz.is-live .hsxz__ph img{ filter:saturate(1) brightness(.92); transform:scale(1.11) translate3d(var(--px,0px),var(--py,0px),0); }
+.hsxz:hover .hsxz__tint,
+.hsxz:focus-visible .hsxz__tint,
+.hsxz.is-live .hsxz__tint{ opacity:.72; }
+.hsxz:hover .hsxz__name,
+.hsxz:focus-visible .hsxz__name,
+.hsxz.is-live .hsxz__name{ color:#fff; -webkit-text-stroke-color:transparent; }
+.hsxz:hover .hsxz__meta,
+.hsxz:focus-visible .hsxz__meta,
+.hsxz.is-live .hsxz__meta{ color:rgba(255,255,255,.88); }
+.hsxz:hover .hsxz__go,
+.hsxz:focus-visible .hsxz__go,
+.hsxz.is-live .hsxz__go{ opacity:1; transform:none; }
+
+.hsxz:focus-visible{ outline:3px solid var(--gold); outline-offset:-6px; }
+
+/* ---- the title, across the whole composition ---- */
+.hsx__say{
+  position:relative; z-index:3; width:100%;
+  padding-bottom:clamp(38px,6vh,74px);
+  pointer-events:none;
+}
+.hsx__say .marker{ margin-bottom:var(--space-3); }
+.hsx__say .sc{ color:var(--gold-lit); }
+.hsx__say .marker::after{ background:rgba(255,255,255,.3); max-width:140px; }
+.hsx__title{
+  font-family:var(--font-primary); font-weight:600; color:#fff;
+  font-size:clamp(3.1rem,8vw,9rem); line-height:.82; letter-spacing:-.055em;
+  text-wrap:balance;
+}
+.hsx__title em{ font-style:italic; color:var(--gold-lit); }
+.hsx__sub{
+  margin-top:var(--space-4); color:rgba(255,255,255,.86);
+  font-size:var(--fs-lead); font-family:var(--font-editorial);
+}
+.hsx__cue{
+  margin-top:var(--space-5); display:flex; align-items:center; gap:10px;
+  font-family:var(--font-primary); font-size:.72rem; letter-spacing:.2em;
+  text-transform:uppercase; color:rgba(255,255,255,.72);
+}
+.hsx__cuek{
+  width:26px; height:26px; border:1px solid rgba(255,255,255,.4);
+  border-radius:50%; position:relative; flex:none;
+}
+.hsx__cuek::after{
+  content:""; position:absolute; left:50%; top:8px; width:1px; height:8px;
+  background:#fff; animation:hsxcue 1.9s var(--e) infinite;
+}
+@keyframes hsxcue{
+  0%,100%{ transform:translateY(0); opacity:.4 }
+  50%{ transform:translateY(4px); opacity:1 }
+}
+
+/* The colour that fills the window as the hero releases. The
+   script scrubs its opacity and sets its colour to the live
+   house; it is the whole of the transition, so nothing about the
+   release touches layout. */
+.hsx__fill{
+  position:absolute; inset:0; z-index:4; pointer-events:none;
+  background:var(--hf,var(--purple-ink)); opacity:0;
+}
+
+/* ---- the entrance ----
+   Lines, then the photographs opening from the centre outward,
+   then the names, then the title. 1.55s end to end, and nothing
+   is waiting on a script: the page is interactive throughout. */
+@media (prefers-reduced-motion:no-preference){
+  .hsx__rules span{ animation:hsxrule .5s var(--e2) both; }
+  .hsx__rules span:nth-child(1){ animation-delay:.10s }
+  .hsx__rules span:nth-child(2){ animation-delay:.02s }
+  .hsx__rules span:nth-child(3){ animation-delay:.10s }
+  .hsxz__ph{ animation:hsxopen .78s var(--e2) both; }
+  .hsxz:nth-child(2) .hsxz__ph, .hsxz:nth-child(3) .hsxz__ph{ animation-delay:.16s }
+  .hsxz:nth-child(1) .hsxz__ph, .hsxz:nth-child(4) .hsxz__ph{ animation-delay:.34s }
+  .hsxz__body, .hsxz__no{ animation:hsxrise .6s var(--e2) both .78s; }
+  .hsx__say{ animation:hsxrise .7s var(--e2) both 1.0s; }
+}
+@keyframes hsxrule{ from{ transform:scaleY(0) } to{ transform:scaleY(1) } }
+@keyframes hsxopen{
+  from{ clip-path:inset(0 50% 0 50%) } to{ clip-path:inset(0 0 0 0) }
+}
+@keyframes hsxrise{ from{ opacity:0; transform:translateY(16px) } to{ opacity:1; transform:none } }
+
+/* ============================================================
+   2. The four chapters
+   ------------------------------------------------------------
+   One structure, four identities. What changes between them is
+   the colour, the photograph and which side the giant name
+   falls on; what does not change is where a reader looks for
+   the number, the name, the colour and the quotation.
+   ============================================================ */
+.hchs{ position:relative; background:var(--paper); }
+.hch{
+  position:relative; overflow:hidden;
+  padding-block:clamp(72px,9vw,136px);
+  background:var(--paper);
+}
+.hch:nth-child(even){ background:var(--paper-2); }
+
+/* The wipe. Without the script it is a 6px rule in the house's
+   colour at the top of the chapter, which is a chapter divider
+   that needs no explaining. With it, the bar contracts to a
+   vertical stripe, recolours and opens into the next house. */
+.hch__wipe{
+  position:absolute; top:0; left:0; right:0; height:6px;
+  background:var(--hf); transform-origin:50% 50%; z-index:3;
+}
+
+.hch__bleed{
+  position:relative; width:100%; aspect-ratio:16/9;
+  max-height:74svh; overflow:hidden;
+}
+.hch__bleed img{ width:100%; height:100%; object-fit:cover; display:block; }
+.hch__bleed::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(14,11,18,.34), transparent 58%);
+}
+
+/* The house name, oversized, behind the words. aria-hidden: the
+   real name is the h2 below it, and a screen reader should not
+   hear it twice. */
+.hch__ghost{
+  position:absolute; left:0; right:0; top:clamp(40px,6vw,86px);
+  font-family:var(--font-primary); font-weight:600;
+  font-size:clamp(4rem,15vw,15rem); line-height:.8; letter-spacing:-.055em;
+  color:var(--hi); opacity:.1; white-space:nowrap;
+  pointer-events:none; text-align:center;
+}
+.hch:nth-child(even) .hch__ghost{ text-align:right; padding-right:var(--gut) }
+.hch:nth-child(odd) .hch__ghost{ text-align:left; padding-left:var(--gut) }
+
+.hch__inner{ position:relative; z-index:2; margin-top:clamp(-72px,-5vw,-34px); }
+.hch:nth-child(even) .hch__inner{ text-align:right; margin-left:auto; }
+
+.hch__step{
+  display:flex; align-items:baseline; gap:8px; margin-bottom:var(--space-4);
+  font-family:var(--font-primary); letter-spacing:.2em;
+}
+.hch:nth-child(even) .hch__step{ justify-content:flex-end }
+.hch__no{ font-size:1.5rem; font-weight:600; color:var(--hi); }
+.hch__of{ font-size:.78rem; color:var(--ink-mute); }
+
+.hch__name{
+  font-family:var(--font-primary); font-weight:600; color:var(--ink);
+  font-size:clamp(2.6rem,6vw,5.2rem); line-height:.9; letter-spacing:-.04em;
+}
+.hch__id{
+  margin-top:var(--space-3); display:flex; align-items:center; gap:10px;
+  font-family:var(--font-primary); font-size:.8rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--hi);
+}
+.hch:nth-child(even) .hch__id{ justify-content:flex-end }
+.hch__swatch{
+  width:30px; height:10px; background:var(--hf); flex:none;
+  outline:1px solid rgba(14,11,18,.18); outline-offset:0;
+}
+.hch__dot{ color:var(--ink-mute) }
+
+.hch__says{
+  margin-top:var(--space-6); max-width:30ch;
+  border-left:3px solid var(--hf); padding-left:var(--space-5);
+}
+.hch:nth-child(even) .hch__says{
+  margin-left:auto; border-left:0; border-right:3px solid var(--hf);
+  padding-left:0; padding-right:var(--space-5);
+}
+.hch__says p{
+  font-family:var(--font-quote); font-style:italic;
+  font-size:clamp(1.3rem,2.3vw,2rem); line-height:1.24; color:var(--ink);
+  text-wrap:pretty;
+}
+.hch__says cite{
+  display:block; margin-top:var(--space-4); font-style:normal;
+  font-family:var(--font-primary); font-size:.78rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-mute);
+}
+.hch__fact{ margin-top:var(--space-5); max-width:48ch; }
+.hch:nth-child(even) .hch__fact,
+.hch:nth-child(even) .hch__says{ margin-left:auto }
+.hch__more{ margin-top:var(--space-5); }
+/* inline-flex with a min-height rather than a bare inline link: as inline
+   text this was a 16px-tall tap target, which is half of what a thumb needs.
+   The rule is under the border rather than on the box so it still reads as a
+   link rather than as a button. */
+.hch__more a{
+  display:inline-flex; align-items:center; min-height:44px;
+  font-family:var(--font-primary); font-size:.8rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--hi);
+  box-shadow:inset 0 -1px 0 currentColor;
+}
+.hch__more a::after{ content:" \2192" }
+.hch__more a:hover{ color:var(--ink) }
+
+/* ============================================================
+   3. The march
+   ------------------------------------------------------------
+   A horizontal run that the script pushes right to left as the
+   section is scrolled, with the house names passing behind it
+   at a different depth and grid lines running away underneath.
+   Left alone it is a scroll-snapping strip, which is what it is
+   on a phone regardless.
+   ============================================================ */
+.hmarch{ position:relative; overflow:hidden; padding-block:clamp(60px,7.5vw,110px); }
+.hmarch__head{ position:relative; z-index:2; }
+.hmarch__h{ color:#fff }
+.hmarch__h em{ color:var(--gold-lit) }
+
+.hmarch__field{
+  position:relative; margin-top:clamp(34px,4.4vw,60px);
+  padding-block:clamp(26px,3vw,44px);
+}
+/* The marching grid, in perspective. Decoration, and hidden from
+   assistive technology with the rest of the stagecraft. */
+.hmarch__grid{
+  position:absolute; inset:0; z-index:0; overflow:hidden;
+  background-image:
+    repeating-linear-gradient(to right, rgba(245,238,242,.13) 0 1px, transparent 1px 84px),
+    repeating-linear-gradient(to bottom, rgba(245,238,242,.08) 0 1px, transparent 1px 46px);
+  transform:perspective(560px) rotateX(46deg) scale(1.5);
+  transform-origin:50% 100%; opacity:.6; mask-image:linear-gradient(to top, #000, transparent);
+}
+.hmarch__names{
+  position:absolute; inset:auto 0 auto 0; top:50%; z-index:1;
+  display:flex; gap:clamp(40px,6vw,96px); transform:translateY(-50%);
+  white-space:nowrap; pointer-events:none;
+}
+.hmarch__names span{
+  font-family:var(--font-primary); font-weight:600;
+  font-size:clamp(3rem,9vw,8rem); line-height:.8; letter-spacing:-.05em;
+  color:rgba(245,238,242,.085);
+}
+.hmarch__run{
+  position:relative; z-index:2; display:flex; gap:clamp(14px,2vw,28px);
+  list-style:none; padding:0 var(--gut); margin:0;
+  overflow-x:auto; scroll-snap-type:x mandatory;
+  scrollbar-width:none; -ms-overflow-style:none;
+}
+.hmarch__run::-webkit-scrollbar{ display:none }
+.hmarch__run > li{ flex:none; width:min(72vw,520px); scroll-snap-align:center; }
+.hmarch__run figure{ margin:0 }
+.hmarch__run img{
+  width:100%; height:auto; display:block; aspect-ratio:3/2; object-fit:cover;
+}
+.hmarch__run figcaption{
+  margin-top:var(--space-3); font-family:var(--font-primary);
+  font-size:.82rem; letter-spacing:.06em; color:var(--on-purple-mute);
+}
+/* Once the script drives the run it owns the transform, so the
+   native scroll is handed back only where the script stands
+   down — reduced motion, and phones. */
+.hmarch__run.is-driven{ overflow:visible; scroll-snap-type:none; }
+.hmarch__run.is-driven > li{ width:min(38vw,480px) }
+
+.hmarch .note{ margin-top:clamp(28px,3.4vw,48px); color:var(--on-purple-mute); }
+
+/* ============================================================
+   4. Inter-house competition
+   ------------------------------------------------------------
+   A season line with the events as stops. The list underneath it
+   is the archive, and it is the thing that is actually on the
+   page: the script hides all but one panel, and if it never runs
+   every result is open and readable.
+   ============================================================ */
+.hcomp__lead{ margin:0 0 clamp(34px,4.4vw,56px); }
+.hcomp__lead img{ width:100%; height:auto; display:block; }
+.hcomp__lead figcaption{
+  margin-top:var(--space-3); font-size:var(--fs-sm); color:var(--ink-mute);
+}
+
+.hcomp__filters{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:var(--space-5); }
+.hcomp__filter{
+  appearance:none; background:transparent; cursor:pointer;
+  border:1px solid var(--rule); padding:9px 18px;
+  min-height:44px;
+  font-family:var(--font-primary); font-size:.78rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-soft);
+  transition:background .25s var(--e), color .25s var(--e), border-color .25s var(--e);
+}
+.hcomp__filter:hover{ border-color:var(--purple); color:var(--purple) }
+.hcomp__filter.is-on{ background:var(--purple); border-color:var(--purple); color:#fff }
+
+.hcomp__line{ position:relative; height:1px; background:var(--rule); margin-bottom:-1px; }
+/* The width animates; the colour does not.
+   ------------------------------------------------------------
+   This background is var(--hf), which the script changes by
+   setting data-house on the bar. A custom property is not an
+   interpolatable type unless it is registered with @property,
+   so "transition: background-color" on top of one does not
+   produce a cross-fade — in Chrome it produced a colour that
+   took about a second to begin moving and sometimes did not
+   change at all until the next click. Registering --hf would
+   fix the interpolation and would also make every other house
+   colour on this page animate, which is wrong: the swatches,
+   the flags and the chapter wipes are all discrete.
+
+   So the line slides and the colour steps. A season line moving
+   from one event to the next IS a discrete change, and it now
+   lands on the first frame instead of arriving late. */
+.hcomp__line span{
+  position:absolute; inset:0 auto 0 0; width:0; background:var(--hf,var(--purple));
+  height:3px; top:-1px; transition:width .6s var(--e2);
+}
+
+.hcomp__stops{
+  display:flex; gap:0; list-style:none; margin:0; padding:0;
+  overflow-x:auto; scrollbar-width:thin;
+}
+.hcomp__stops > li{ flex:1 1 0; min-width:150px; }
+.hcomp__stop{
+  appearance:none; background:transparent; cursor:pointer; width:100%;
+  border:0; border-top:1px solid transparent;
+  padding:var(--space-4) var(--space-3) var(--space-5);
+  min-height:44px; text-align:left; position:relative;
+  transition:background .25s var(--e);
+}
+.hcomp__stop::before{
+  content:""; position:absolute; top:-4px; left:var(--space-3);
+  width:9px; height:9px; background:var(--paper);
+  outline:1px solid var(--rule-soft); border-radius:50%;
+  transition:background .3s var(--e), outline-color .3s var(--e);
+}
+.hcomp__stop:hover{ background:rgba(57,42,72,.045) }
+.hcomp__stop.is-on::before{ background:var(--purple); outline-color:var(--purple) }
+.hcomp__when{
+  display:block; font-family:var(--font-primary); font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute);
+  margin-bottom:6px;
+}
+.hcomp__what{
+  display:block; font-family:var(--font-primary); font-size:.95rem;
+  line-height:1.24; color:var(--ink-soft);
+}
+.hcomp__stop.is-on .hcomp__what{ color:var(--ink); font-weight:600 }
+.hcomp__stop[hidden]{ display:none }
+.hcomp__stops > li[hidden]{ display:none }
+
+.hcomp__panels{
+  list-style:none; margin:clamp(30px,3.6vw,48px) 0 0; padding:0;
+}
+.hcomp__panel{
+  border-top:1px solid var(--rule); padding-block:clamp(28px,3.4vw,44px);
+}
+.hcomp__panels.is-driven .hcomp__panel{ display:none; border-top:0; }
+.hcomp__panels.is-driven .hcomp__panel.is-on{ display:block }
+.hcomp__tag{
+  font-family:var(--font-primary); font-size:.72rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-mute); margin-bottom:var(--space-3);
+}
+.hcomp__ev{
+  font-family:var(--font-primary); font-weight:600; color:var(--ink);
+  font-size:clamp(1.5rem,3vw,2.5rem); line-height:1.04; letter-spacing:-.02em;
+}
+
+.hcomp__order{
+  list-style:none; margin:var(--space-5) 0 0; padding:0;
+  display:grid; gap:2px; max-width:620px;
+}
+.hcomp__order > li{
+  display:grid; grid-template-columns:44px 1fr auto; align-items:center;
+  gap:var(--space-4); padding:var(--space-3) var(--space-4);
+  background:var(--hf); color:var(--ho);
+}
+.hcomp__pl{
+  font-family:var(--font-primary); font-weight:600; font-size:1.3rem;
+}
+.hcomp__hn{ font-family:var(--font-primary); font-size:1.05rem; }
+.hcomp__hc{
+  font-family:var(--font-primary); font-size:.72rem; letter-spacing:.18em;
+  text-transform:uppercase; opacity:.86;
+}
+/* The bars step in from first to fourth, so the order is legible
+   as a shape as well as a list of numbers. */
+.hcomp__order > li:nth-child(1){ width:100% }
+.hcomp__order > li:nth-child(2){ width:88% }
+.hcomp__order > li:nth-child(3){ width:76% }
+.hcomp__order > li:nth-child(4){ width:64% }
+
+.hcomp__awards{
+  margin:var(--space-5) 0 0; display:grid; gap:2px; max-width:620px;
+}
+.hcomp__awards > div{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--space-4);
+  padding:var(--space-3) var(--space-4);
+  border-left:6px solid var(--hf); background:var(--paper-2);
+}
+.hcomp__awards dt{
+  font-family:var(--font-primary); font-size:.74rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-mute);
+}
+.hcomp__awards dd{
+  margin:0; font-family:var(--font-primary); font-size:1.05rem;
+  font-weight:600; color:var(--ink);
+}
+.hcomp__note{ margin-top:var(--space-5); max-width:var(--measure); color:var(--ink-soft); }
+.hcomp__note a{ color:var(--purple); border-bottom:1px solid currentColor }
+.hcomp__src{
+  margin-top:var(--space-4); font-family:var(--font-primary);
+  font-size:.74rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-mute);
+}
+
+/* ============================================================
+   5. Sport
+   ============================================================ */
+.hsport__set{
+  display:grid; gap:clamp(18px,2.4vw,34px);
+  grid-template-columns:repeat(3,1fr);
+  align-items:start;
+}
+.hsport__one{ grid-column:1 / 3; margin:0 }
+.hsport__two{ grid-column:3 / 4; margin:0 }
+.hsport__three{ grid-column:1 / 2; margin:0 }
+.hsport__set figure img{ width:100%; height:auto; display:block; }
+.hsport__set figcaption{
+  margin-top:var(--space-3); font-size:var(--fs-sm); color:var(--ink-soft);
+  max-width:40ch;
+}
+.hsport__lab{
+  display:block; font-family:var(--font-primary); font-size:.72rem;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--purple);
+  margin-bottom:5px;
+}
+.hsport__cta{ margin-top:clamp(30px,3.6vw,48px) }
+
+/* ============================================================
+   6. Masquerade and culture
+   ------------------------------------------------------------
+   One dominant photograph, dark, with the four productions
+   revealed as panels over it. No spotlights and no particles:
+   the photograph is the stage.
+   ============================================================ */
+.hcult{ position:relative; background:var(--purple-ink); overflow:hidden; }
+.hcult__stage{ position:absolute; inset:0; margin:0; }
+.hcult__stage img{ width:100%; height:100%; object-fit:cover; display:block; opacity:.5 }
+.hcult__stage::after{
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(to right, rgba(14,11,18,.94) 0%, rgba(14,11,18,.62) 48%, rgba(14,11,18,.82) 100%);
+}
+.hcult__inner{
+  position:relative; z-index:2; padding-block:clamp(72px,9vw,140px);
+}
+.hcult__h{ color:#fff }
+.hcult__h em{ color:var(--gold-lit) }
+.hcult__head .lead{ color:var(--on-purple-soft) }
+.hcult__head .sc{ color:var(--gold-lit) }
+.hcult__head .marker::after{ background:rgba(255,255,255,.28); max-width:140px }
+
+.hcult__set{
+  list-style:none; margin:0; padding:0;
+  display:grid; gap:1px; grid-template-columns:repeat(4,1fr);
+  background:rgba(245,238,242,.16);
+}
+.hcult__set > li{
+  background:rgba(14,11,18,.72); padding:clamp(22px,2.6vw,34px);
+  border-top:4px solid var(--hf);
+  /* The panels arrive from the edge of the frame like stage flats;
+     the script staggers them, and CSS is what they arrive to. */
+  transition:background .4s var(--e);
+}
+.hcult__set > li:hover{ background:rgba(14,11,18,.55) }
+.hcult__who{
+  display:flex; align-items:center; gap:9px;
+  font-family:var(--font-primary); font-size:.74rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--hl);
+}
+.hcult__swatch{ width:22px; height:8px; background:var(--hf); flex:none }
+.hcult__title{
+  margin-top:var(--space-4); font-family:var(--font-quote); font-style:italic;
+  font-size:clamp(1.3rem,2.1vw,1.8rem); line-height:1.12; color:#fff;
+  letter-spacing:-.01em;
+}
+.hcult__about{
+  margin-top:var(--space-3); font-size:var(--fs-sm); line-height:1.5;
+  color:var(--on-purple-soft);
+}
+.hcult__note{ margin-top:clamp(28px,3.4vw,44px); color:var(--on-purple-mute) }
+.hcult__cta{ margin-top:clamp(26px,3vw,40px); display:flex; flex-wrap:wrap; gap:12px }
+
+/* ============================================================
+   7. The record
+   ------------------------------------------------------------
+   A table, because it is a table. The house colour is a stripe
+   at the left of a cell, never the cell's only content, and
+   every column head carries the house's name.
+   ============================================================ */
+.hrec__wrap{ overflow-x:auto; margin-top:clamp(26px,3vw,40px); }
+.hrec__table{
+  width:100%; min-width:860px; border-collapse:collapse;
+  font-family:var(--font-primary);
+}
+.hrec__table caption{
+  caption-side:bottom; margin-top:var(--space-4); text-align:left;
+  font-size:var(--fs-sm); color:var(--ink-mute); max-width:var(--measure);
+}
+.hrec__table th,
+.hrec__table td{
+  padding:var(--space-3) var(--space-4); text-align:left;
+  border-bottom:1px solid var(--rule-soft); vertical-align:top;
+  font-size:var(--fs-sm);
+}
+.hrec__table thead th{
+  border-bottom:1px solid var(--purple); color:var(--ink);
+  font-size:.76rem; letter-spacing:.16em; text-transform:uppercase;
+  white-space:nowrap;
+}
+.hrec__table thead th small,
+.hrec__table tbody th small{
+  display:block; margin-top:4px; font-size:.7rem; letter-spacing:.1em;
+  text-transform:none; color:var(--ink-mute); font-weight:400;
+}
+.hrec__table tbody th{
+  font-weight:600; color:var(--ink); max-width:26ch;
+  text-transform:none; letter-spacing:0; font-size:var(--fs-sm);
+}
+.hrec__table td[data-house]{
+  border-left:5px solid var(--hf); color:var(--hi); font-weight:600;
+}
+.hrec__table td[data-house] b{ font-size:1.05rem }
+.hrec__none{ color:var(--ink-mute) }
+.hrec__src{ color:var(--ink-mute); font-size:.76rem }
+.hrec__table tbody tr:hover td,
+.hrec__table tbody tr:hover th{ background:var(--paper-2) }
+
+/* ============================================================
+   8. The gallery
+   ============================================================ */
+.hgal__tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:var(--space-5); }
+.hgal__tab{
+  appearance:none; background:transparent; cursor:pointer;
+  border:1px solid var(--rule); padding:9px 18px; min-height:44px;
+  display:inline-flex; align-items:center; gap:9px;
+  font-family:var(--font-primary); font-size:.78rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-soft);
+  transition:background .25s var(--e), color .25s var(--e), border-color .25s var(--e);
+}
+.hgal__sw{ width:20px; height:8px; background:var(--hf); flex:none }
+.hgal__tab:hover{ border-color:var(--purple); color:var(--purple) }
+.hgal__tab.is-on{ background:var(--purple); border-color:var(--purple); color:#fff }
+
+.hgal__strip{
+  list-style:none; margin:0; padding:0 0 var(--space-4);
+  display:flex; gap:clamp(10px,1.4vw,18px);
+  overflow-x:auto; scroll-snap-type:x mandatory;
+  scrollbar-width:thin;
+}
+.hgal__strip > li{
+  flex:0 0 auto; width:clamp(210px,20vw,280px); scroll-snap-align:start;
+  transition:width .6s var(--e2);
+}
+.hgal__strip > li[hidden]{ display:none }
+.hgal__strip > li.is-open{ width:clamp(300px,34vw,520px) }
+.hgal__strip figure{ margin:0 }
+.hgal__strip img{
+  width:100%; height:auto; display:block; aspect-ratio:4/5; object-fit:cover;
+}
+.hgal__strip figcaption{
+  margin-top:var(--space-3); font-family:var(--font-primary); font-size:.8rem;
+  line-height:1.4;
+}
+.hgal__strip figcaption b{ display:block; color:var(--hi); letter-spacing:.06em }
+.hgal__strip figcaption span{ display:block; color:var(--ink-mute) }
+.hgal__strip button{
+  appearance:none; background:transparent; border:0; padding:0; cursor:pointer;
+  display:block; width:100%; text-align:left; color:inherit; font:inherit;
+}
+.hgal__strip button:focus-visible{ outline:3px solid var(--gold); outline-offset:3px }
+
+/* ============================================================
+   9. The reunion
+   ============================================================ */
+.hend{ position:relative; overflow:hidden; background:var(--purple-deep); }
+.hend__media{ position:absolute; inset:0; margin:0 }
+.hend__media img{ width:100%; height:100%; object-fit:cover; display:block; opacity:.48 }
+.hend__media::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(14,11,18,.93), rgba(14,11,18,.62));
+}
+.hend__inner{ position:relative; z-index:2; padding-block:clamp(78px,10vw,150px) }
+.hend__bars{ display:flex; gap:4px; margin-bottom:var(--space-6); max-width:340px }
+.hend__bars span{ flex:1 1 0; height:9px; background:var(--hf) }
+.hend__h{
+  font-family:var(--font-primary); font-weight:600; color:#fff;
+  font-size:clamp(2.7rem,7vw,7rem); line-height:.84; letter-spacing:-.05em;
+}
+/* cirs.js splits a [data-split] heading into .line-mask wrappers that are
+   overflow:hidden, so the reveal can slide each line up out of one. The mask
+   is the line box, and a display line-height of .84 makes the line box shorter
+   than the letters standing in it — at 1280 this cut 7px off "Four Houses."
+   and 10px off the italic "One Home.". Every other heading here is .h2 at
+   1.06 and never touched its mask; this is the only one set tight enough to
+   matter.
+
+   The padding gives the mask the room the glyphs need and the equal negative
+   margin gives the space back, so the line-height, the spacing and the reveal
+   are all exactly as they were and only the clipping is gone. */
+.hend__h .line-mask{ padding-block:.14em; margin-block:-.14em; }
+.hend__h em{ font-style:italic; color:var(--gold-lit) }
+.hend__lead{
+  margin-top:var(--space-5); color:var(--on-purple-soft); max-width:46ch;
+  font-family:var(--font-editorial);
+}
+.hend__links{
+  margin:clamp(34px,4vw,56px) 0 0; padding:0; list-style:none;
+  display:grid; gap:0; max-width:760px;
+  border-top:1px solid var(--rule-purple);
+}
+.hend__links li{ border-bottom:1px solid var(--rule-purple) }
+.hend__links a{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
+  padding:var(--space-4) 0; min-height:44px;
+  font-family:var(--font-primary); font-size:clamp(1rem,1.5vw,1.25rem);
+  color:#fff; transition:padding-left .3s var(--e), color .3s var(--e);
+}
+.hend__links a::after{ content:"\2192"; color:var(--gold-lit) }
+.hend__links a:hover{ padding-left:var(--space-4); color:var(--gold-lit) }
+
+/* ============================================================
+   10. Tablet and phone
+   ------------------------------------------------------------
+   The four-column opening is not reproduced small. A quarter of
+   a phone is 95px, which is not a photograph of anything — so
+   below 900px the zones stack, the names turn horizontal, the
+   compression rules are switched off and every zone is at rest
+   and fully legible. There is no hover-only content on this
+   page at any width: the meta line and the Explore label are
+   the only things hover reveals, and both are present and
+   visible in the stacked layout.
+   ============================================================ */
+@media (max-width:1080px){
+  .hcult__set{ grid-template-columns:repeat(2,1fr) }
+  .hsport__set{ grid-template-columns:repeat(2,1fr) }
+  .hsport__one{ grid-column:1 / 3 }
+  .hsport__two{ grid-column:1 / 2 }
+  .hsport__three{ grid-column:2 / 3 }
+}
+
+@media (max-width:900px){
+  /* No pin, no scrub, no expansion. */
+  .hsx__track{ height:auto }
+  .hsx__stage{ position:static; height:auto; display:block; overflow:visible }
+  .hsx__grid{ position:static; display:grid; grid-template-columns:1fr 1fr; gap:0 }
+  .hsx__rules{ display:none }
+  .hsx__fill{ display:none }
+  .hsxz{ flex:none; aspect-ratio:4/5; }
+  .hsx__grid:has(.hsxz:hover) .hsxz:not(:hover),
+  .hsx__grid:has(.hsxz:focus-visible) .hsxz:not(:focus-visible),
+  .hsxz:hover,
+  .hsxz:focus-visible{ flex-grow:0 }
+  .hsxz__ph img{ filter:saturate(1) brightness(.84); transform:none }
+  .hsxz__tint{ opacity:.78 }
+  .hsxz__no{ top:var(--space-4) }
+  .hsxz__body{
+    inset:auto var(--space-4) var(--space-4) var(--space-4);
+    align-items:flex-start; gap:8px;
+  }
+  .hsxz__name{
+    writing-mode:horizontal-tb; transform:none;
+    color:#fff; font-size:clamp(1.4rem,5.4vw,2.2rem);
+  }
+  .hsxz__meta{ color:rgba(255,255,255,.88); text-align:left }
+  .hsxz__go{ opacity:1; transform:none }
+  @supports (-webkit-text-stroke: 1px #000){
+    .hsxz__name{ -webkit-text-stroke:0; color:#fff }
+  }
+  .hsx__say{
+    position:relative; padding-block:clamp(84px,14vh,120px) clamp(40px,7vh,64px);
+    background:var(--purple-ink); pointer-events:auto;
+  }
+  .hsx__title{ font-size:clamp(2.6rem,11vw,4.4rem) }
+
+  .hch__ghost{ font-size:clamp(3rem,19vw,7rem); opacity:.13 }
+  .hch__inner,
+  .hch:nth-child(even) .hch__inner{ text-align:left; margin-top:var(--space-6) }
+  .hch:nth-child(even) .hch__step,
+  .hch:nth-child(even) .hch__id{ justify-content:flex-start }
+  .hch:nth-child(even) .hch__says{
+    margin-left:0; border-right:0; border-left:3px solid var(--hf);
+    padding-right:0; padding-left:var(--space-5);
+  }
+  .hch:nth-child(even) .hch__fact{ margin-left:0 }
+  .hch:nth-child(even) .hch__ghost{ text-align:left; padding-right:0; padding-left:var(--gut) }
+
+  /* The run keeps its native horizontal scroll and never traps
+     the page: the script stands down at this width. */
+  .hmarch__run > li{ width:min(82vw,420px) }
+  .hmarch__names span{ font-size:clamp(2.4rem,14vw,5rem) }
+
+  .hcomp__stops{ display:block; overflow:visible }
+  .hcomp__stops > li{ min-width:0 }
+  .hcomp__stop{
+    border-top:1px solid var(--rule-soft); padding:var(--space-4) 0 var(--space-4) var(--space-5);
+  }
+  .hcomp__stop::before{ top:50%; left:0; margin-top:-4px }
+  .hcomp__line{ display:none }
+
+  .hgal__strip > li,
+  .hgal__strip > li.is-open{ width:min(74vw,320px) }
+}
+
+@media (max-width:620px){
+  .hsx__grid{ grid-template-columns:1fr }
+  .hsxz{ aspect-ratio:5/4 }
+  .hcult__set{ grid-template-columns:1fr }
+  .hsport__set{ grid-template-columns:1fr }
+  .hsport__one,.hsport__two,.hsport__three{ grid-column:1 / -1 }
+  .hcomp__order > li{ grid-template-columns:34px 1fr; }
+  .hcomp__hc{ grid-column:2; margin-top:2px }
+  .hcomp__order > li:nth-child(1),
+  .hcomp__order > li:nth-child(2),
+  .hcomp__order > li:nth-child(3),
+  .hcomp__order > li:nth-child(4){ width:100% }
+  .hend__bars{ max-width:none }
+}
+
+/* ============================================================
+   11. Reduced motion
+   ------------------------------------------------------------
+   Everything below is content, not decoration, so nothing is
+   removed: the four houses become four ordinary sections, the
+   march and the gallery become static sequences, and every
+   colour, name, result and link stays exactly where it was.
+   What goes is the expansion, the pin, the scrub, the parallax
+   and the entrance.
+
+   The script makes the same checks and stands down; this is the
+   half that holds if it never loaded at all.
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  .hsx__track{ height:auto }
+  .hsx__stage{ position:static; height:auto; display:block; overflow:visible }
+  .hsx__grid{ position:static; display:grid; grid-template-columns:repeat(2,1fr) }
+  .hsx__rules, .hsx__fill{ display:none }
+  .hsxz{ flex:none; aspect-ratio:4/5 }
+  .hsx__grid:has(.hsxz:hover) .hsxz:not(:hover),
+  .hsx__grid:has(.hsxz:focus-visible) .hsxz:not(:focus-visible),
+  .hsxz:hover,
+  .hsxz:focus-visible{ flex-grow:0 }
+  .hsxz__ph, .hsxz__body, .hsxz__no, .hsx__say{ animation:none }
+  .hsxz__ph img{ transform:none; filter:saturate(1) brightness(.84) }
+  .hsxz__tint{ opacity:.78 }
+  .hsxz__name{
+    writing-mode:horizontal-tb; transform:none; color:#fff;
+    font-size:clamp(1.4rem,4vw,2.2rem);
+  }
+  .hsxz__meta{ color:rgba(255,255,255,.88) }
+  .hsxz__go{ opacity:1; transform:none }
+  .hsx__say{ position:relative; background:var(--purple-ink); pointer-events:auto;
+             padding-block:clamp(84px,12vh,120px) clamp(40px,6vh,64px) }
+  .hsx__cuek::after{ animation:none }
+  .hmarch__grid{ transform:none; opacity:.3 }
+  .hmarch__run{ overflow-x:auto; scroll-snap-type:x mandatory }
+  .hgal__strip > li.is-open{ width:clamp(210px,20vw,280px) }
+}
+@supports (-webkit-text-stroke: 1px #000){
+  @media (prefers-reduced-motion:reduce){
+    .hsxz__name{ -webkit-text-stroke:0; color:#fff }
+  }
+}

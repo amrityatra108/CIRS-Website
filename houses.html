@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Houses | CIRS</title>
+<meta name="description" content="The four houses of Chinmaya International Residential School — Vasishtha, Valmiki, Vishwamitra and Vyasa — their colours, symbols and a dated archive of published inter-house results.">
+<meta name="theme-color" content="#0E0B12">
+<link rel="canonical" href="https://www.cirschool.org/houses.html">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Our Houses | CIRS">
+<meta property="og:description" content="The four houses of Chinmaya International Residential School — Vasishtha, Valmiki, Vishwamitra and Vyasa — their colours, symbols and a dated archive of published inter-house results.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Our Houses | CIRS">
+<meta name="twitter:description" content="The four houses of Chinmaya International Residential School — Vasishtha, Valmiki, Vishwamitra and Vyasa — their colours, symbols and a dated archive of published inter-house results.">
+<meta name="twitter:image" content="assets/img/og.jpg">
+<!-- Four approved families, self-hosted with retained OFL notices. -->
+<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-houses-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-houses-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-houses-1">
+<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
+     removes once it has played. With scripting off nothing removes it, and
+     it covers the page on every page of this site. One rule, applied only
+     when there is no scripting, is the whole fix. Crossroads already does
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/houses.css?b=102-houses-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-houses-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-houses-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-houses-1-drawer-5">
+</head>
+
+<body class="houses">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Opening sequence. Removed from the DOM once it has played. -->
+<div class="curtain" id="curtain" aria-hidden="true">
+  <img src="assets/img/logo.png" alt="" width="72" height="70">
+  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
+  <span class="curtain__bar"><i></i></span>
+</div>
+
+<!-- Film lightbox, shared by every page. The iframe is built on open and
+     destroyed on close: nothing is requested from YouTube until someone asks
+     for the film, and removing the element is what actually stops the audio. -->
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
+  <div class="lightbox__back" data-close></div>
+  <div class="lightbox__panel">
+    <div class="lightbox__frame" id="lightboxFrame"></div>
+    <button type="button" class="lightbox__close" data-close aria-label="Close the film">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</dialog>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<button type="button" class="totop" id="totop" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+</button>
+<header class="header" id="header">
+  <div class="wrap">
+    <div class="header__left">
+      <!-- Enquire opens the contact panel below rather than going anywhere.
+           It stays a button so the keyboard and screen readers get a control
+           that announces its expanded state; hover opens it for a mouse. -->
+      <div class="enq" id="enq">
+        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic aria-label="Enquire"
+                aria-expanded="false" aria-controls="enqPanel">
+          <span class="htab__icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="htab__label">Enquire</span>
+        </button>
+
+        <div class="enq__panel" id="enqPanel">
+          <p class="enq__title sc">Talk to CIRS</p>
+
+          <a class="enq__row enq__row--wa" href="https://wa.me/919360461572"
+             target="_blank" rel="noopener">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>+91 93604 61572</b>
+              <small>WhatsApp &middot; Admissions Coordinator</small>
+            </span>
+          </a>
+
+          <a class="enq__row" href="mailto:info@cirschool.org">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><rect x="2.6" y="4.6" width="16.8" height="12.8" rx="1.6" stroke="currentColor" stroke-width="1.4"/><path d="m3.4 5.8 7.6 5.6 7.6-5.6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>info@cirschool.org</b>
+              <small>Email the school</small>
+            </span>
+          </a>
+
+          <!-- The three doors. Each goes to the page that explains what is
+               live and what is not, rather than straight out to the external
+               system — a parent who lands on a login screen with no warning
+               cannot tell the school's old system from the new site.
+
+               They carry no second line. "Through the Parent Portal" under
+               two rows that both went to the Parent Portal was restating the
+               destination the row already is, and it made three plain doors
+               look like three explanations. -->
+          <p class="enq__title enq__title--sep sc">Portals</p>
+
+          <a class="enq__row" href="parent-portal.html">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><rect x="2.6" y="5.2" width="16.8" height="11.6" rx="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M2.6 9.4h16.8" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 13.4h3.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>Fee payment</b>
+            </span>
+          </a>
+
+          <a class="enq__row" href="parent-portal.html">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7.8" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M4.8 18.4a6.2 6.2 0 0 1 12.4 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>Parent Login</b>
+            </span>
+          </a>
+
+          <a class="enq__row" href="https://cirs.in/school/cirsmark/"
+             target="_blank" rel="noopener">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M11 4.4 19.6 8 11 11.6 2.4 8 11 4.4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5.8 10v4.4c0 1.3 2.3 2.4 5.2 2.4s5.2-1.1 5.2-2.4V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>Student Login</b>
+            </span>
+          </a>
+
+          <p class="enq__title enq__title--sep sc">Follow CIRS</p>
+          <div class="enq__social">
+            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener"
+               aria-label="Instagram (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="enq__social-dot" cx="17.4" cy="6.7" r="1.1"/></svg>
+            </a>
+            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener"
+               aria-label="Facebook (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.8l.45-3.2H13.7V7.75c0-.93.3-1.56 1.64-1.56H17V3.3a22 22 0 0 0-2.43-.13c-2.4 0-4.05 1.47-4.05 4.17V9.8H7.8V13h2.72v8h3.18Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener"
+               aria-label="YouTube (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.15a3 3 0 0 0-2.1-2.12C17.05 5.5 12 5.5 12 5.5s-5.05 0-6.9.53A3 3 0 0 0 3 8.15a31 31 0 0 0 0 7.7 3 3 0 0 0 2.1 2.12c1.85.53 6.9.53 6.9.53s5.05 0 6.9-.53a3 3 0 0 0 2.1-2.12 31 31 0 0 0 0-7.7Z"/><path class="enq__social-play" d="m10 15.25 5-3.25-5-3.25v6.5Z"/></svg>
+            </a>
+            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener"
+               aria-label="LinkedIn (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 8.4H3.3V21h3.3V8.4ZM5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8.2 5.4H10V21h3.2v-6.25c0-1.65.32-3.25 2.37-3.25 2.02 0 2.05 1.9 2.05 3.36V21H21v-6.92c0-3.4-.73-6.01-4.7-6.01-1.9 0-3.18 1.04-3.7 2.02h-.04V8.4h.64Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a class="htab" href="index.html" data-magnetic aria-label="Home">
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="htab__label">Home</span>
+      </a>
+    </div>
+
+    <a class="brand" href="index.html" aria-label="Chinmaya International Residential School home">
+      <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
+      <span class="brand__txt">
+        <span class="brand__name">Chinmaya International Residential School</span>
+        <span class="brand__sub">Siruvani &middot; Coimbatore &middot; Founded 1996</span>
+      </span>
+    </a>
+
+    <div class="header__right">
+      <a class="htab htab--news" href="news.html" data-magnetic>
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
+        </span>
+        <span class="htab__label">News</span>
+      </a>
+      <button type="button" class="htab htab--menu" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu" data-magnetic>
+        <span class="htab__icon" aria-hidden="true">
+          <span class="menubtn__dots"><i></i><i></i><i></i><i></i></span>
+        </span>
+        <span class="htab__label">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="1" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="false" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button" hidden>
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+        <li><a href="founder.html">Founder</a></li>
+        <li><a href="why-cirs.html">Why CIRS</a></li>
+        <li><a href="school-history.html">School History</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="true" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button">
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+        <li><a href="curriculum.html">Curriculum</a></li>
+        <li><a href="our-results.html">Our Results</a></li>
+        <li><a href="sports.html">Our Sports</a></li>
+        <li><a href="houses.html" aria-current="page">Our Houses</a></li>
+        <li><a href="our-laurels.html">Our Laurels</a></li>
+        <li><a href="math-challenge.html">Math Challenge</a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+        <li><a href="crossroads.html">Crossroads</a></li>
+        <li><a href="blog.html">CIRS Blog</a></li>
+        <li><a href="creative-writing.html">Creative Writing</a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+        <li><a href="captures.html">CIRS Captures</a></li>
+        <li><a href="art-attack.html">CIRS Art Attack</a></li>
+        <li><a href="festivals.html">CIRS Festivals</a></li>
+        <li><a href="theatre.html">CIRS Theatre</a></li>
+        <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+        <li><a href="school-info.html">School Information</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="parent-portal.html">Parent Portal</a></li>
+        <li><a href="alumni.html">Alumni</a></li>
+      </ul>
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main id="main">
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#top">The houses of CIRS</a>
+      <a href="#march">The march past</a>
+      <a href="#competition">Inter-house</a>
+      <a href="#sport">Sport</a>
+      <a href="#culture">On stage</a>
+      <a href="#record">The record</a>
+      <a href="#gallery">In frames</a>
+      <a href="#together">Four Houses. One Home.</a>
+    </div>
+  </details>
+</nav>
+<!-- The Houses page.
+     Four identities inside one visual system: the opening frame gives all four
+     equal width and lets one take the screen, and every section after it keeps
+     the four visible as named participants rather than as colours.
+
+     The facts are in tools/houses.py, which also records where each one comes
+     from and what is still missing. Nothing on this page is written twice: the
+     chapters, the competition archive, the record table and the gallery are all
+     built from that one list. The photographs are cut by tools/make-houses.py.
+
+     Structure, and why it is this way round:
+
+       #top          the four-house opening, pinned, releasing into Vasishtha
+       #houses       four chapters, one per house
+       #march        the march past, a horizontal sequence
+       #competition  the inter-house archive, on a season line
+       #sport        the colour you compete for
+       #culture      the house productions, on a dark stage
+       #record       eight dated events from available sources, as a table
+       #gallery      one strip, filtered by house
+       #together     the four houses back in one frame
+
+     The opening interaction is CSS: :has() expands the hovered or focused zone
+     and compresses the other three, so it works before houses-journey.js
+     arrives and still works if it never does. The script adds the pointer
+     depth, the scroll release out of the hero, the chapter wipes, the
+     competition track and the gallery — all of it on top of markup that
+     already reads without it.
+-->
+
+<section class="hsx" id="top" data-ground="#0E0B12" data-houses-hero>
+  <div class="hsx__track">
+  <div class="hsx__stage">
+
+    <div class="hsx__grid" data-houses-grid>
+        <a class="hsxz" id="hero-vasishtha" data-house="vasishtha"
+           href="#house-vasishtha" data-houses-zone>
+          <span class="hsxz__ph">
+            <img src="assets/img/houses/hero-vasishtha.jpg" width="900" height="1125"
+                 srcset="assets/img/houses/hero-vasishtha-500.jpg?b=102-houses-1 500w, assets/img/houses/hero-vasishtha.jpg?b=102-houses-1 900w"
+                 sizes="(max-width: 620px) 100vw, (max-width: 900px) 50vw, 25vw"
+                 alt="A CIRS student in a deep red house jersey printed Vasishtha, playing on the outdoor basketball court"
+                 fetchpriority="high" decoding="async">
+          </span>
+          <span class="hsxz__tint" aria-hidden="true"></span>
+          <span class="hsxz__no" aria-hidden="true">01</span>
+          <span class="hsxz__body">
+            <span class="hsxz__name">Vasishtha</span>
+            <span class="hsxz__meta">Red &middot; the lion</span>
+            <span class="hsxz__go">Explore</span>
+          </span>
+        </a>
+        <a class="hsxz" id="hero-valmiki" data-house="valmiki"
+           href="#house-valmiki" data-houses-zone>
+          <span class="hsxz__ph">
+            <img src="assets/img/houses/hero-valmiki.jpg" width="900" height="1125"
+                 srcset="assets/img/houses/hero-valmiki-500.jpg?b=102-houses-1 500w, assets/img/houses/hero-valmiki.jpg?b=102-houses-1 900w"
+                 sizes="(max-width: 620px) 100vw, (max-width: 900px) 50vw, 25vw"
+                 alt="Students at a CIRS investiture ceremony wearing yellow Valmiki house sashes, right hands raised in the pledge"
+                 decoding="async">
+          </span>
+          <span class="hsxz__tint" aria-hidden="true"></span>
+          <span class="hsxz__no" aria-hidden="true">02</span>
+          <span class="hsxz__body">
+            <span class="hsxz__name">Valmiki</span>
+            <span class="hsxz__meta">Yellow &middot; the tiger</span>
+            <span class="hsxz__go">Explore</span>
+          </span>
+        </a>
+        <a class="hsxz" id="hero-vishwamitra" data-house="vishwamitra"
+           href="#house-vishwamitra" data-houses-zone>
+          <span class="hsxz__ph">
+            <img src="assets/img/houses/hero-vishwamitra.jpg" width="900" height="1125"
+                 srcset="assets/img/houses/hero-vishwamitra-500.jpg?b=102-houses-1 500w, assets/img/houses/hero-vishwamitra.jpg?b=102-houses-1 900w"
+                 sizes="(max-width: 620px) 100vw, (max-width: 900px) 50vw, 25vw"
+                 alt="A CIRS student in a green shirt working at a desk during a classroom activity"
+                 decoding="async">
+          </span>
+          <span class="hsxz__tint" aria-hidden="true"></span>
+          <span class="hsxz__no" aria-hidden="true">03</span>
+          <span class="hsxz__body">
+            <span class="hsxz__name">Vishwamitra</span>
+            <span class="hsxz__meta">Green &middot; the eagle</span>
+            <span class="hsxz__go">Explore</span>
+          </span>
+        </a>
+        <a class="hsxz" id="hero-vyasa" data-house="vyasa"
+           href="#house-vyasa" data-houses-zone>
+          <span class="hsxz__ph">
+            <img src="assets/img/houses/hero-vyasa.jpg" width="900" height="1125"
+                 srcset="assets/img/houses/hero-vyasa-500.jpg?b=102-houses-1 500w, assets/img/houses/hero-vyasa.jpg?b=102-houses-1 900w"
+                 sizes="(max-width: 620px) 100vw, (max-width: 900px) 50vw, 25vw"
+                 alt="A CIRS student in a blue house shirt printed Vyasa, waiting to return at a tennis session"
+                 decoding="async">
+          </span>
+          <span class="hsxz__tint" aria-hidden="true"></span>
+          <span class="hsxz__no" aria-hidden="true">04</span>
+          <span class="hsxz__body">
+            <span class="hsxz__name">Vyasa</span>
+            <span class="hsxz__meta">Blue &middot; the dragon</span>
+            <span class="hsxz__go">Explore</span>
+          </span>
+        </a>
+    </div>
+
+    <div class="hsx__rules" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- The live house's colour, filling the window as the hero releases into
+         its chapter. Opacity only: the release touches nothing that lays out. -->
+    <div class="hsx__fill" aria-hidden="true" data-houses-fill></div>
+
+    <div class="wrap hsx__say">
+      <p class="marker"><span class="sc">The houses of CIRS</span></p>
+      <h1 class="hsx__title" data-houses-title>Four Houses.<br><em>One CIRS.</em></h1>
+      <p class="hsx__sub">Different colours. Shared purpose.</p>
+      <p class="hsx__cue"><span class="hsx__cuek" aria-hidden="true"></span>Choose a house &mdash; or keep scrolling</p>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<div class="hchs" id="houses">
+<article class="hch" id="house-vasishtha" data-house="vasishtha"
+         data-houses-chapter data-from="vasishtha">
+  <div class="hch__wipe" aria-hidden="true" data-houses-wipe></div>
+  <div class="hch__bleed">
+    <img src="assets/img/houses/ch-vasishtha.jpg" width="1600" height="900" loading="lazy"
+         decoding="async" alt="A group of students in red CIRS shirts standing round a large numbered grid chalked on the floor, holding coloured ribbons">
+  </div>
+  <p class="hch__ghost" aria-hidden="true" data-houses-ghost>Vasishtha</p>
+  <div class="wrap hch__inner">
+    <p class="hch__step"><span class="hch__no">01</span>
+      <span class="hch__of">/ 04</span></p>
+    <h2 class="hch__name" data-houses-heading>Vasishtha</h2>
+    <p class="hch__id"><span class="hch__swatch" aria-hidden="true"></span>Red
+      <span class="hch__dot" aria-hidden="true">&middot;</span>The lion</p>
+    <blockquote class="hch__says">
+      <p>Just like the lion, our house symbolizes strength and determination, never giving up and a readiness to break new challenges.</p>
+      <cite>Vasishtha House, writing in <em>Sakshi</em>, February 2008</cite>
+    </blockquote>
+    <p class="copy hch__fact">Vasishtha was the first house to pass a thousand points in the school&rsquo;s history, and in February 2008 it described itself as the unbeaten champion of the march past. Its drills have used pompoms and poles, and before those, pyramids, umbrellas and leziums.</p>
+    <p class="hch__more"><a href="#gallery-vasishtha">Vasishtha in frames</a></p>
+  </div>
+</article>
+
+<article class="hch" id="house-valmiki" data-house="valmiki"
+         data-houses-chapter data-from="vasishtha">
+  <div class="hch__wipe" aria-hidden="true" data-houses-wipe></div>
+  <div class="hch__bleed">
+    <img src="assets/img/houses/ch-valmiki.jpg" width="1600" height="900" loading="lazy"
+         decoding="async" alt="A player in an amber CIRS shirt on the ball during a inter-house football match on the CIRS ground">
+  </div>
+  <p class="hch__ghost" aria-hidden="true" data-houses-ghost>Valmiki</p>
+  <div class="wrap hch__inner">
+    <p class="hch__step"><span class="hch__no">02</span>
+      <span class="hch__of">/ 04</span></p>
+    <h2 class="hch__name" data-houses-heading>Valmiki</h2>
+    <p class="hch__id"><span class="hch__swatch" aria-hidden="true"></span>Yellow
+      <span class="hch__dot" aria-hidden="true">&middot;</span>The tiger</p>
+    <blockquote class="hch__says">
+      <p>We perceive the goal through our all-seeing eye; that of a tiger, and we hope to continue our remarkable tradition of victory.</p>
+      <cite>Valmiki House, writing in <em>Sakshi</em>, February 2008</cite>
+    </blockquote>
+    <p class="copy hch__fact">Valmiki took both the overall championship and the best march past at Khel Mela 2008, and won the Senior Social Science Quiz in April that year. Its Khel Mela drill that season was a dupatta and cap drill.</p>
+    <p class="hch__more"><a href="#gallery-valmiki">Valmiki in frames</a></p>
+  </div>
+</article>
+
+<article class="hch" id="house-vishwamitra" data-house="vishwamitra"
+         data-houses-chapter data-from="valmiki">
+  <div class="hch__wipe" aria-hidden="true" data-houses-wipe></div>
+  <div class="hch__bleed">
+    <img src="assets/img/houses/ch-vishwamitra.jpg" width="1600" height="900" loading="lazy"
+         decoding="async" alt="A player in a green CIRS shirt covering across the ground during an inter-house football match">
+  </div>
+  <p class="hch__ghost" aria-hidden="true" data-houses-ghost>Vishwamitra</p>
+  <div class="wrap hch__inner">
+    <p class="hch__step"><span class="hch__no">03</span>
+      <span class="hch__of">/ 04</span></p>
+    <h2 class="hch__name" data-houses-heading>Vishwamitra</h2>
+    <p class="hch__id"><span class="hch__swatch" aria-hidden="true"></span>Green
+      <span class="hch__dot" aria-hidden="true">&middot;</span>The eagle</p>
+    <blockquote class="hch__says">
+      <p>A fierce and elegant eagle, soaring through cloudy night skies and bright days, soaring through life.</p>
+      <cite>Vishwamitra House, writing in <em>Sakshi</em>, February 2008</cite>
+    </blockquote>
+    <p class="copy hch__fact">The eagle has been Vishwamitra&rsquo;s symbol since 2005. The house won the Inter-House Aquatic Meet and the junior English quiz in the second term of 2008, and brought the fight drill &mdash; two armies, staged as a series of exercises &mdash; to Khel Mela for the first time.</p>
+    <p class="hch__more"><a href="#gallery-vishwamitra">Vishwamitra in frames</a></p>
+  </div>
+</article>
+
+<article class="hch" id="house-vyasa" data-house="vyasa"
+         data-houses-chapter data-from="vishwamitra">
+  <div class="hch__wipe" aria-hidden="true" data-houses-wipe></div>
+  <div class="hch__bleed">
+    <img src="assets/img/houses/ch-vyasa.jpg" width="1600" height="900" loading="lazy"
+         decoding="async" alt="Junior students in blue Vyasa house tees laying out Tamil letter cards on the floor of the hall">
+  </div>
+  <p class="hch__ghost" aria-hidden="true" data-houses-ghost>Vyasa</p>
+  <div class="wrap hch__inner">
+    <p class="hch__step"><span class="hch__no">04</span>
+      <span class="hch__of">/ 04</span></p>
+    <h2 class="hch__name" data-houses-heading>Vyasa</h2>
+    <p class="hch__id"><span class="hch__swatch" aria-hidden="true"></span>Blue
+      <span class="hch__dot" aria-hidden="true">&middot;</span>The dragon</p>
+    <blockquote class="hch__says">
+      <p>Winning is difficult, but not impossible, and this is the hope that keeps us striving for the impossible.</p>
+      <cite>Vyasa House, writing in <em>Sakshi</em>, February 2008</cite>
+    </blockquote>
+    <p class="copy hch__fact">Vyasa took the best drill cup at Khel Mela 2008 with a drill of hoops and a bamboo dance, and it won the Junior Science Quiz that November.</p>
+    <p class="hch__more"><a href="#gallery-vyasa">Vyasa in frames</a></p>
+  </div>
+</article>
+</div>
+
+<!-- The march.
+     A wide photographic sequence that moves right to left as the page is
+     scrolled, with the four house names passing behind it and marching-grid
+     lines running away in perspective. Without the script it is a normal
+     horizontal strip that a reader can swipe, which is what it becomes on a
+     phone in any case. -->
+<section class="hmarch on-purple" id="march" data-ground="#1E1626">
+  <div class="wrap">
+    <div class="sec-head hmarch__head rv">
+      <p class="marker"><span class="sc">The march past</span></p>
+      <h2 class="serif h2 hmarch__h" data-split>Colour.<br>Discipline.<br><em>Pride.</em></h2>
+      <p class="lead">The march past is judged, and it is won. Vasishtha called itself the
+        unbeaten champion of it in 2008; Valmiki took it that February. It is the one event
+        where a house is only as good as its quietest rank.</p>
+    </div>
+  </div>
+
+  <div class="hmarch__field" data-houses-march>
+    <div class="hmarch__names" aria-hidden="true" data-march-names>
+      <span>Vasishtha</span><span>Valmiki</span><span>Vishwamitra</span><span>Vyasa</span>
+      <span>Vasishtha</span><span>Valmiki</span><span>Vishwamitra</span><span>Vyasa</span>
+    </div>
+    <div class="hmarch__grid" aria-hidden="true"></div>
+    <ul class="hmarch__run" data-march-run>
+      <li>
+        <figure>
+          <img src="assets/img/houses/march-01.jpg" width="1200" height="800" loading="lazy"
+               decoding="async" alt="The colour party leading the march past down the track at CIRS, two flags carried at the front">
+          <figcaption>The colour party, at the head of the march</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="assets/img/houses/march-02.jpg" width="1200" height="800" loading="lazy"
+               decoding="async" alt="CIRS cadets drawn up in ranks on the parade ground, sashes over their shoulders">
+          <figcaption>Rank on rank, before the salute</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="assets/img/houses/march-03.jpg" width="1200" height="800" loading="lazy"
+               decoding="async" alt="A CIRS student speaking from the podium beside the athletics track, the covered dais behind">
+          <figcaption>From the podium, beside the track</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="assets/img/houses/march-04.jpg" width="1200" height="800" loading="lazy"
+               decoding="async" alt="Two people standing in an open jeep on the CIRS field, one wearing a ceremonial sash, acknowledging the crowd">
+          <figcaption>The lap afterwards</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+
+  <div class="wrap">
+    <p class="note rv"><em>[The march past photographed house by house &mdash; each house
+      behind its own flag, in its own colour &mdash; to be supplied by the school. The four
+      frames above are the parade and the ceremony around it, and are not attributed to any
+      one house.]</em></p>
+  </div>
+</section>
+
+<!-- Inter-house competition.
+     Authored as an ordinary ordered list of events, oldest first, each one a
+     dated source entry. houses-journey.js folds it into a season line with
+     the events as stops; with no script it stays a readable archive. -->
+<section class="section hcomp" id="competition">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">Inter-house</span></p>
+      <h2 class="serif h2" data-split>Competition<br><em>with purpose.</em></h2>
+      <p class="lead">The school's published house record includes sport, quizzes and
+        productions. Each result below is dated and names its source. A category missing from
+        this archive simply has no four-house result in the material available here.</p>
+    </div>
+
+    <figure class="hcomp__lead rv">
+      <img src="assets/img/houses/comp-quiz.jpg" width="1400" height="788" loading="lazy"
+           decoding="async" alt="CIRS students at a quiz table as a microphone is passed to a participant">
+      <figcaption>A quiz in progress at CIRS.</figcaption>
+    </figure>
+
+    <div class="hcomp__track" data-houses-track>
+      <h3 class="sr-only" id="comp-filter-h">Filter the archive by category</h3>
+      <div class="hcomp__filters" role="group" data-houses-filters aria-labelledby="comp-filter-h">
+        <button type="button" class="hcomp__filter is-on"
+            data-houses-filter="All" aria-pressed="true">All</button>
+        <button type="button" class="hcomp__filter"
+            data-houses-filter="Sport" aria-pressed="false">Sport</button>
+        <button type="button" class="hcomp__filter"
+            data-houses-filter="Quizzing" aria-pressed="false">Quizzing</button>
+        <button type="button" class="hcomp__filter"
+            data-houses-filter="Culture" aria-pressed="false">Culture</button>
+      </div>
+      <div class="hcomp__line" aria-hidden="true"><span data-houses-line></span></div>
+      <h3 class="sr-only" id="comp-stops-h">The events, oldest first</h3>
+      <ol class="hcomp__stops" data-houses-stops aria-labelledby="comp-stops-h">
+        <li><button type="button" class="hcomp__stop is-on"
+            data-houses-stop="0" data-cat="Sport"
+            aria-controls="event-0" aria-current="true">
+          <span class="hcomp__when">February 2008</span>
+          <span class="hcomp__what">Khel Mela &mdash; the 12th Annual Athletic and Aquatic Meet</span>
+        </button></li>
+        <li><button type="button" class="hcomp__stop"
+            data-houses-stop="1" data-cat="Quizzing"
+            aria-controls="event-1" aria-current="false">
+          <span class="hcomp__when">30 April 2008</span>
+          <span class="hcomp__what">Senior Social Science Quiz</span>
+        </button></li>
+        <li><button type="button" class="hcomp__stop"
+            data-houses-stop="2" data-cat="Culture"
+            aria-controls="event-2" aria-current="false">
+          <span class="hcomp__when">May 2008</span>
+          <span class="hcomp__what">The house symposiums</span>
+        </button></li>
+        <li><button type="button" class="hcomp__stop"
+            data-houses-stop="3" data-cat="Quizzing"
+            aria-controls="event-3" aria-current="false">
+          <span class="hcomp__when">22 October 2008</span>
+          <span class="hcomp__what">English Quiz, junior school</span>
+        </button></li>
+        <li><button type="button" class="hcomp__stop"
+            data-houses-stop="4" data-cat="Quizzing"
+            aria-controls="event-4" aria-current="false">
+          <span class="hcomp__when">5 November 2008</span>
+          <span class="hcomp__what">Mathematics Quiz, junior school</span>
+        </button></li>
+        <li><button type="button" class="hcomp__stop"
+            data-houses-stop="5" data-cat="Quizzing"
+            aria-controls="event-5" aria-current="false">
+          <span class="hcomp__when">19 November 2008</span>
+          <span class="hcomp__what">Junior Science Quiz</span>
+        </button></li>
+        <li><button type="button" class="hcomp__stop"
+            data-houses-stop="6" data-cat="Sport"
+            aria-controls="event-6" aria-current="false">
+          <span class="hcomp__when">23&ndash;24 November 2008</span>
+          <span class="hcomp__what">Inter-House Aquatic Meet</span>
+        </button></li>
+        <li><button type="button" class="hcomp__stop"
+            data-houses-stop="7" data-cat="Sport"
+            aria-controls="event-7" aria-current="false">
+          <span class="hcomp__when">2025&ndash;2026</span>
+          <span class="hcomp__what">Khel Mela &mdash; the 29th Annual Aquatic Meet</span>
+        </button></li>
+      </ol>
+    </div>
+
+    <ol class="hcomp__panels" data-houses-panels>
+      <li class="hcomp__panel is-on" id="event-0" data-houses-panel="0"
+          data-cat="Sport">
+        <p class="hcomp__tag">Sport &middot; February 2008</p>
+        <h3 class="hcomp__ev">Khel Mela &mdash; the 12th Annual Athletic and Aquatic Meet</h3>
+        <dl class="hcomp__awards">
+          <div data-house="valmiki">
+            <dt>Overall championship</dt><dd>Valmiki</dd>
+          </div>
+          <div data-house="valmiki">
+            <dt>Best march past</dt><dd>Valmiki</dd>
+          </div>
+          <div data-house="vasishtha">
+            <dt>Best individual activities</dt><dd>Vasishtha, Vishwamitra</dd>
+          </div>
+          <div data-house="vyasa">
+            <dt>Best drill</dt><dd>Vyasa</dd>
+          </div>
+        </dl>
+        <p class="hcomp__note">The same issue reports the best drill cup two ways: its list of winners names Vyasa alone, while its account of the drill competition says the cup went to Vasishtha and Vyasa together. The list is what is shown here.</p>
+        <p class="hcomp__src">Source: Sakshi, March 2008</p>
+      </li>
+      <li class="hcomp__panel" id="event-1" data-houses-panel="1"
+          data-cat="Quizzing">
+        <p class="hcomp__tag">Quizzing &middot; 30 April 2008</p>
+        <h3 class="hcomp__ev">Senior Social Science Quiz</h3>
+        <ol class="hcomp__order">
+          <li data-house="valmiki">
+            <span class="hcomp__pl">1</span>
+            <span class="hcomp__hn">Valmiki</span>
+            <span class="hcomp__hc">Yellow</span>
+          </li>
+          <li data-house="vasishtha">
+            <span class="hcomp__pl">2</span>
+            <span class="hcomp__hn">Vasishtha</span>
+            <span class="hcomp__hc">Red</span>
+          </li>
+          <li data-house="vyasa">
+            <span class="hcomp__pl">3</span>
+            <span class="hcomp__hn">Vyasa</span>
+            <span class="hcomp__hc">Blue</span>
+          </li>
+          <li data-house="vishwamitra">
+            <span class="hcomp__pl">4</span>
+            <span class="hcomp__hn">Vishwamitra</span>
+            <span class="hcomp__hc">Green</span>
+          </li>
+        </ol>
+        <p class="hcomp__src">Source: Sakshi, summer special, May 2008</p>
+      </li>
+      <li class="hcomp__panel" id="event-2" data-houses-panel="2"
+          data-cat="Culture">
+        <p class="hcomp__tag">Culture &middot; May 2008</p>
+        <h3 class="hcomp__ev">The house symposiums</h3>
+        <p class="hcomp__note">Four productions, one from each house, and the only house event in these sources that was staged rather than scored. The titles are under <a href="#culture">Where each house tells a story</a>.</p>
+        <p class="hcomp__src">Source: Sakshi, summer special, May 2008</p>
+      </li>
+      <li class="hcomp__panel" id="event-3" data-houses-panel="3"
+          data-cat="Quizzing">
+        <p class="hcomp__tag">Quizzing &middot; 22 October 2008</p>
+        <h3 class="hcomp__ev">English Quiz, junior school</h3>
+        <ol class="hcomp__order">
+          <li data-house="vishwamitra">
+            <span class="hcomp__pl">1</span>
+            <span class="hcomp__hn">Vishwamitra</span>
+            <span class="hcomp__hc">Green</span>
+          </li>
+          <li data-house="valmiki">
+            <span class="hcomp__pl">2</span>
+            <span class="hcomp__hn">Valmiki</span>
+            <span class="hcomp__hc">Yellow</span>
+          </li>
+          <li data-house="vyasa">
+            <span class="hcomp__pl">3</span>
+            <span class="hcomp__hn">Vyasa</span>
+            <span class="hcomp__hc">Blue</span>
+          </li>
+          <li data-house="vasishtha">
+            <span class="hcomp__pl">4</span>
+            <span class="hcomp__hn">Vasishtha</span>
+            <span class="hcomp__hc">Red</span>
+          </li>
+        </ol>
+        <p class="hcomp__note">Vishwamitra and Valmiki tied, and three further rounds were needed to separate them.</p>
+        <p class="hcomp__src">Source: CIRS e-newsletter, October&ndash;November 2008</p>
+      </li>
+      <li class="hcomp__panel" id="event-4" data-houses-panel="4"
+          data-cat="Quizzing">
+        <p class="hcomp__tag">Quizzing &middot; 5 November 2008</p>
+        <h3 class="hcomp__ev">Mathematics Quiz, junior school</h3>
+        <ol class="hcomp__order">
+          <li data-house="vasishtha">
+            <span class="hcomp__pl">1</span>
+            <span class="hcomp__hn">Vasishtha</span>
+            <span class="hcomp__hc">Red</span>
+          </li>
+          <li data-house="vishwamitra">
+            <span class="hcomp__pl">2</span>
+            <span class="hcomp__hn">Vishwamitra</span>
+            <span class="hcomp__hc">Green</span>
+          </li>
+          <li data-house="vyasa">
+            <span class="hcomp__pl">3</span>
+            <span class="hcomp__hn">Vyasa</span>
+            <span class="hcomp__hc">Blue</span>
+          </li>
+          <li data-house="valmiki">
+            <span class="hcomp__pl">4</span>
+            <span class="hcomp__hn">Valmiki</span>
+            <span class="hcomp__hc">Yellow</span>
+          </li>
+        </ol>
+        <p class="hcomp__src">Source: CIRS e-newsletter, October&ndash;November 2008</p>
+      </li>
+      <li class="hcomp__panel" id="event-5" data-houses-panel="5"
+          data-cat="Quizzing">
+        <p class="hcomp__tag">Quizzing &middot; 19 November 2008</p>
+        <h3 class="hcomp__ev">Junior Science Quiz</h3>
+        <ol class="hcomp__order">
+          <li data-house="vyasa">
+            <span class="hcomp__pl">1</span>
+            <span class="hcomp__hn">Vyasa</span>
+            <span class="hcomp__hc">Blue</span>
+          </li>
+          <li data-house="valmiki">
+            <span class="hcomp__pl">2</span>
+            <span class="hcomp__hn">Valmiki</span>
+            <span class="hcomp__hc">Yellow</span>
+          </li>
+          <li data-house="vishwamitra">
+            <span class="hcomp__pl">3</span>
+            <span class="hcomp__hn">Vishwamitra</span>
+            <span class="hcomp__hc">Green</span>
+          </li>
+          <li data-house="vasishtha">
+            <span class="hcomp__pl">4</span>
+            <span class="hcomp__hn">Vasishtha</span>
+            <span class="hcomp__hc">Red</span>
+          </li>
+        </ol>
+        <p class="hcomp__src">Source: CIRS e-newsletter, October&ndash;November 2008</p>
+      </li>
+      <li class="hcomp__panel" id="event-6" data-houses-panel="6"
+          data-cat="Sport">
+        <p class="hcomp__tag">Sport &middot; 23&ndash;24 November 2008</p>
+        <h3 class="hcomp__ev">Inter-House Aquatic Meet</h3>
+        <ol class="hcomp__order">
+          <li data-house="vishwamitra">
+            <span class="hcomp__pl">1</span>
+            <span class="hcomp__hn">Vishwamitra</span>
+            <span class="hcomp__hc">Green</span>
+          </li>
+          <li data-house="valmiki">
+            <span class="hcomp__pl">2</span>
+            <span class="hcomp__hn">Valmiki</span>
+            <span class="hcomp__hc">Yellow</span>
+          </li>
+          <li data-house="vyasa">
+            <span class="hcomp__pl">3</span>
+            <span class="hcomp__hn">Vyasa</span>
+            <span class="hcomp__hc">Blue</span>
+          </li>
+          <li data-house="vasishtha">
+            <span class="hcomp__pl">4</span>
+            <span class="hcomp__hn">Vasishtha</span>
+            <span class="hcomp__hc">Red</span>
+          </li>
+        </ol>
+        <p class="hcomp__src">Source: CIRS e-newsletter, October&ndash;November 2008</p>
+      </li>
+      <li class="hcomp__panel" id="event-7" data-houses-panel="7"
+          data-cat="Sport">
+        <p class="hcomp__tag">Sport &middot; 2025&ndash;2026</p>
+        <h3 class="hcomp__ev">Khel Mela &mdash; the 29th Annual Aquatic Meet</h3>
+        <p class="hcomp__note">A photographed ribbon names this as the 29th Annual Aquatic Meet; this repository does not contain its house placings.</p>
+        <p class="hcomp__src">Source: the meet&rsquo;s own medal ribbons</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- Sport.
+     Human first: faces, effort and the colour being competed for. One sport
+     dominates at a time, and the section hands off to the Sports page rather
+     than repeating it. -->
+<section class="section on-paper-2 hsport" id="sport">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">Sport</span></p>
+      <h2 class="serif h2" data-split>The colour<br><em>you compete for.</em></h2>
+      <p class="lead">The school's published house results include athletics and aquatic
+        events. A February 2008 issue records Khel Mela, while medal ribbons photographed
+        for 2025&ndash;2026 identify a 29th Annual Aquatic Meet. Current house standings
+        still need confirmation from the school.</p>
+    </div>
+
+    <div class="hsport__set">
+      <figure class="hsport__one rv">
+        <img src="assets/img/houses/sport-tennis.jpg" width="1600" height="900" loading="lazy"
+             decoding="async" alt="A line of CIRS students waiting to return at a tennis session, in Vyasa blue, Vishwamitra green and Vasishtha red house shirts">
+        <figcaption><span class="hsport__lab">Tennis</span>Three houses in one line, each in
+          its own colour, waiting to return.</figcaption>
+      </figure>
+      <figure class="hsport__two rv">
+        <img src="assets/img/houses/sport-athletics.jpg" width="1000" height="1250" loading="lazy"
+             decoding="async" alt="A CIRS athlete clearing the bar in the high jump against an open sky">
+        <figcaption><span class="hsport__lab">Athletics</span>Over the bar, at the annual
+          meet.</figcaption>
+      </figure>
+      <figure class="hsport__three rv">
+        <img src="assets/img/houses/sport-medals.jpg" width="1000" height="750" loading="lazy"
+             decoding="async" alt="A rack of medals on red ribbons printed Khel Mela, held ready at the CIRS swimming pool">
+        <figcaption><span class="hsport__lab">Swimming</span>The Khel Mela medals, waiting at
+          the pool.</figcaption>
+      </figure>
+    </div>
+
+    <p class="hsport__cta rv"><a class="btn btn--outline" href="sports.html#athletics">Explore CIRS sports</a></p>
+  </div>
+</section>
+
+<!-- Masquerade and culture.
+     Deliberately not folded into sport. The four house productions of May 2008
+     are the only house-by-house cultural record in this repository, and they
+     are quoted with their titles as the school printed them. Nothing is
+     invented to fill the section out — what is missing is named instead. -->
+<section class="hcult" id="culture" data-ground="#0E0B12">
+  <figure class="hcult__stage">
+    <img src="assets/img/houses/culture-night.jpg" width="1600" height="900" loading="lazy"
+         decoding="async" alt="A pyramid of CIRS students at night reaching for a pot strung high above them, the school gathered in a ring around it">
+  </figure>
+  <div class="wrap hcult__inner">
+    <div class="sec-head hcult__head rv">
+      <p class="marker"><span class="sc">On stage</span></p>
+      <h2 class="serif h2 hcult__h" data-split>Where each house<br><em>tells a story.</em></h2>
+      <p class="lead">In May 2008, each house staged a symposium of its own. The school's
+        <em>Sakshi</em> issue recorded four titles and accounts of those productions.
+        Details of later house productions need school confirmation.</p>
+    </div>
+
+    <ul class="hcult__set" data-houses-symposiums>
+      <li data-house="valmiki">
+        <p class="hcult__who"><span class="hcult__swatch" aria-hidden="true"></span>Valmiki</p>
+        <h3 class="hcult__title">The Twilight of the Gods</h3>
+        <p class="hcult__about">How past lives and experiences can shape us as individuals.</p>
+      </li>
+      <li data-house="vasishtha">
+        <p class="hcult__who"><span class="hcult__swatch" aria-hidden="true"></span>Vasishtha</p>
+        <h3 class="hcult__title">The Butterfly Effect</h3>
+        <p class="hcult__about">In life we do not usually get second chances, so we should make the best of the only opportunity we get.</p>
+      </li>
+      <li data-house="vishwamitra">
+        <p class="hcult__who"><span class="hcult__swatch" aria-hidden="true"></span>Vishwamitra</p>
+        <h3 class="hcult__title">V for Vendetta</h3>
+        <p class="hcult__about">Nothing in life is trivial enough to be underestimated.</p>
+      </li>
+      <li data-house="vyasa">
+        <p class="hcult__who"><span class="hcult__swatch" aria-hidden="true"></span>Vyasa</p>
+        <h3 class="hcult__title">The Breakthrough</h3>
+        <p class="hcult__about">When power and money are at stake, people forget more important relationships.</p>
+      </li>
+    </ul>
+
+    <p class="note hcult__note rv"><em>[Photographs of the house productions, and of
+      Masquerade house by house, to be supplied by the school &mdash; with the titles and
+      years of the productions staged since 2008. The four titles above are the only ones
+      recorded in this repository.]</em></p>
+
+    <p class="hcult__cta rv">
+      <a class="btn btn--ghost" href="cultural-gallery.html">The CIRS Cultural Gallery</a>
+      <a class="btn btn--ghost" href="theatre.html">CIRS Theatre</a>
+    </p>
+  </div>
+</section>
+
+<!-- The record.
+     Not a scoreboard. The available sources provide dated event results,
+     but no complete points total or current championship table. The eight
+     entries below are selected from those sources; other individual results
+     appear in the March 2008 issue. -->
+<section class="section hrec" id="record">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">The record</span></p>
+      <h2 class="serif h2" data-split>House achievements,<br><em>as published.</em></h2>
+      <p class="lead">Eight dated events from the school material available in this
+        repository. These sources do not provide a complete points total or current
+        championship standing, so this page does not assemble one from partial results.</p>
+    </div>
+
+    <div class="hrec__wrap rv">
+      <table class="hrec__table">
+        <caption>Inter-house results published by CIRS. A dash means the source named
+          no placing for that house in that event, not that the house did not take
+          part.</caption>
+        <thead>
+          <tr><th scope="col">Event</th><th scope="col">Vasishtha<small>Red</small></th><th scope="col">Valmiki<small>Yellow</small></th><th scope="col">Vishwamitra<small>Green</small></th><th scope="col">Vyasa<small>Blue</small></th><th scope="col">Published in</th></tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">Khel Mela &mdash; the 12th Annual Athletic and Aquatic Meet<small>February 2008 &middot; Sport</small></th>
+          <td data-house="vasishtha">Best individual activities</td>
+          <td data-house="valmiki">Overall championship; Best march past</td>
+          <td data-house="vishwamitra">Best individual activities</td>
+          <td data-house="vyasa">Best drill</td>
+          <td class="hrec__src">Sakshi, March 2008</td>
+        </tr>
+        <tr>
+          <th scope="row">Senior Social Science Quiz<small>30 April 2008 &middot; Quizzing</small></th>
+          <td data-house="vasishtha"><b>2nd</b></td>
+          <td data-house="valmiki"><b>1st</b></td>
+          <td data-house="vishwamitra"><b>4th</b></td>
+          <td data-house="vyasa"><b>3rd</b></td>
+          <td class="hrec__src">Sakshi, summer special, May 2008</td>
+        </tr>
+        <tr>
+          <th scope="row">The house symposiums<small>May 2008 &middot; Culture</small></th>
+          <td><span class="hrec__none">&mdash;</span></td>
+          <td><span class="hrec__none">&mdash;</span></td>
+          <td><span class="hrec__none">&mdash;</span></td>
+          <td><span class="hrec__none">&mdash;</span></td>
+          <td class="hrec__src">Sakshi, summer special, May 2008</td>
+        </tr>
+        <tr>
+          <th scope="row">English Quiz, junior school<small>22 October 2008 &middot; Quizzing</small></th>
+          <td data-house="vasishtha"><b>4th</b></td>
+          <td data-house="valmiki"><b>2nd</b></td>
+          <td data-house="vishwamitra"><b>1st</b></td>
+          <td data-house="vyasa"><b>3rd</b></td>
+          <td class="hrec__src">CIRS e-newsletter, October&ndash;November 2008</td>
+        </tr>
+        <tr>
+          <th scope="row">Mathematics Quiz, junior school<small>5 November 2008 &middot; Quizzing</small></th>
+          <td data-house="vasishtha"><b>1st</b></td>
+          <td data-house="valmiki"><b>4th</b></td>
+          <td data-house="vishwamitra"><b>2nd</b></td>
+          <td data-house="vyasa"><b>3rd</b></td>
+          <td class="hrec__src">CIRS e-newsletter, October&ndash;November 2008</td>
+        </tr>
+        <tr>
+          <th scope="row">Junior Science Quiz<small>19 November 2008 &middot; Quizzing</small></th>
+          <td data-house="vasishtha"><b>4th</b></td>
+          <td data-house="valmiki"><b>2nd</b></td>
+          <td data-house="vishwamitra"><b>3rd</b></td>
+          <td data-house="vyasa"><b>1st</b></td>
+          <td class="hrec__src">CIRS e-newsletter, October&ndash;November 2008</td>
+        </tr>
+        <tr>
+          <th scope="row">Inter-House Aquatic Meet<small>23&ndash;24 November 2008 &middot; Sport</small></th>
+          <td data-house="vasishtha"><b>4th</b></td>
+          <td data-house="valmiki"><b>2nd</b></td>
+          <td data-house="vishwamitra"><b>1st</b></td>
+          <td data-house="vyasa"><b>3rd</b></td>
+          <td class="hrec__src">CIRS e-newsletter, October&ndash;November 2008</td>
+        </tr>
+        <tr>
+          <th scope="row">Khel Mela &mdash; the 29th Annual Aquatic Meet<small>2025&ndash;2026 &middot; Sport</small></th>
+          <td><span class="hrec__none">&mdash;</span></td>
+          <td><span class="hrec__none">&mdash;</span></td>
+          <td><span class="hrec__none">&mdash;</span></td>
+          <td><span class="hrec__none">&mdash;</span></td>
+          <td class="hrec__src">the meet&rsquo;s own medal ribbons</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- The galleries.
+     One strip, filtered by house, rather than four strips: the school has not
+     supplied a curated set per house, and four thin strips padded out with
+     unattributed photographs would mean attributing photographs to houses on
+     no evidence. Each filter has its own id, so a chapter can link straight
+     to its own house's frames. -->
+<section class="section on-paper-2 hgal" id="gallery">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="marker"><span class="sc">In frames</span></p>
+      <h2 class="serif h2" data-split>The houses,<br><em>photographed.</em></h2>
+      <p class="lead">The school's photograph library includes house kit for all four
+        houses. These portraits come from those source frames; choose a house to see its
+        portrait.</p>
+    </div>
+
+    <h3 class="sr-only" id="gal-h">Choose a house</h3>
+    <div class="hgal__tabs" role="group" data-houses-tabs aria-labelledby="gal-h">
+        <button type="button" class="hgal__tab is-on" id="gallery-all" data-houses-house="all" aria-pressed="true">All four</button>
+        <button type="button" class="hgal__tab" id="gallery-vasishtha"
+            data-houses-house="vasishtha" aria-pressed="false">
+          <span class="hgal__sw" aria-hidden="true"></span>Vasishtha</button>
+        <button type="button" class="hgal__tab" id="gallery-valmiki"
+            data-houses-house="valmiki" aria-pressed="false">
+          <span class="hgal__sw" aria-hidden="true"></span>Valmiki</button>
+        <button type="button" class="hgal__tab" id="gallery-vishwamitra"
+            data-houses-house="vishwamitra" aria-pressed="false">
+          <span class="hgal__sw" aria-hidden="true"></span>Vishwamitra</button>
+        <button type="button" class="hgal__tab" id="gallery-vyasa"
+            data-houses-house="vyasa" aria-pressed="false">
+          <span class="hgal__sw" aria-hidden="true"></span>Vyasa</button>
+    </div>
+    <ul class="hgal__strip" data-houses-strip>
+        <li data-house="vasishtha">
+          <figure>
+            <img src="assets/img/houses/hero-vasishtha.jpg" width="900" height="1125" loading="lazy"
+                 decoding="async" alt="A CIRS student in a deep red house jersey printed Vasishtha, playing on the outdoor basketball court">
+            <figcaption><b>Vasishtha</b><span>The house jersey, on the outdoor court</span></figcaption>
+          </figure>
+        </li>
+        <li data-house="valmiki">
+          <figure>
+            <img src="assets/img/houses/hero-valmiki.jpg" width="900" height="1125" loading="lazy"
+                 decoding="async" alt="Students at a CIRS investiture ceremony wearing yellow Valmiki house sashes, right hands raised in the pledge">
+            <figcaption><b>Valmiki</b><span>The house sash, at an investiture</span></figcaption>
+          </figure>
+        </li>
+        <li data-house="vishwamitra">
+          <figure>
+            <img src="assets/img/houses/hero-vishwamitra.jpg" width="900" height="1125" loading="lazy"
+                 decoding="async" alt="A CIRS student in a green shirt working at a desk during a classroom activity">
+            <figcaption><b>Vishwamitra</b><span>The house tee, at a classroom contest</span></figcaption>
+          </figure>
+        </li>
+        <li data-house="vyasa">
+          <figure>
+            <img src="assets/img/houses/hero-vyasa.jpg" width="900" height="1125" loading="lazy"
+                 decoding="async" alt="A CIRS student in a blue house shirt printed Vyasa, waiting to return at a tennis session">
+            <figcaption><b>Vyasa</b><span>The house shirt, waiting to return</span></figcaption>
+          </figure>
+        </li>
+    </ul>
+
+    <p class="note rv"><em>[A curated gallery for each house &mdash; marching, sport, culture,
+      house groups, prize-giving and candid frames &mdash; to be supplied by the school. What
+      is above is what this repository can attribute to a named house with confidence.]</em></p>
+  </div>
+</section>
+
+<!-- The reunion. -->
+<section class="hend" id="together" data-ground="#1E1626">
+  <figure class="hend__media">
+    <img src="assets/img/houses/reunion.jpg" width="2000" height="900" loading="lazy"
+         decoding="async" alt="The whole of CIRS drawn up in ranks on the field in front of the school buildings">
+  </figure>
+  <div class="wrap hend__inner">
+    <div class="hend__bars" aria-hidden="true">
+      <span data-house="vasishtha"></span><span data-house="valmiki"></span><span data-house="vishwamitra"></span><span data-house="vyasa"></span>
+    </div>
+    <h2 class="serif hend__h" data-split>Four Houses.<br><em>One Home.</em></h2>
+    <p class="lead hend__lead">Competition gives each house its character. Community keeps
+      every colour together.</p>
+    <ul class="hend__links">
+      <li><a href="the-cirs-experience.html#houses">Explore the CIRS Experience</a></li>
+      <li><a href="sports.html#athletics">Discover Sports</a></li>
+      <li><a href="our-laurels.html#what">View School Laurels</a></li>
+      <li><a href="admissions.html">Begin your CIRS journey</a></li>
+    </ul>
+  </div>
+</section>
+<section class="uc">
+  <div class="wrap uc__inner">
+    <span class="uc__mark" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
+    </span>
+    <div>
+      <p class="uc__label">Under construction</p>
+      <p class="uc__text">This page is still being written. Photographs, names and figures marked
+        in brackets are placeholders awaiting the school, and more will be added here in the weeks
+        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
+    </div>
+  </div>
+</section>
+</main>
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+        <ul>
+          <li><a href="why-cirs.html">Why CIRS</a></li>
+          <li><a href="school-history.html">School History</a></li>
+          <li><a href="leadership.html#people">Our People</a></li>
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+          <li><a href="why-cirs.html#junior">Junior School</a></li>
+          <li><a href="why-cirs.html#senior">Senior School</a></li>
+          <li><a href="sports.html#athletics">Athletics</a></li>
+          <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; 1996&ndash;2026 Chinmaya International Residential School</span>
+      <span>J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</span>
+      <span>An undertaking of the Central Chinmaya Mission Trust</span>
+    </div>
+  </div>
+</footer>
+</div>
+<!-- The motion layer, served from this site rather than from a CDN. See
+     assets/vendor/README.md for the versions and where they came from.
+     defer keeps them in document order, so GSAP is defined before
+     ScrollTrigger looks for it. -->
+<script src="assets/vendor/gsap.min.js?b=102-houses-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-houses-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-houses-1" defer></script>
+<script src="assets/js/cirs.js?b=102-houses-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-houses-1" defer></script>
+<script src="assets/js/footer.js?b=102-houses-1-footer-1" defer></script>
+<script src="assets/js/houses-journey.js?b=102-houses-1" defer></script>
+</body>
+</html>
