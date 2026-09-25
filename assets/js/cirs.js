@@ -261,6 +261,10 @@
     // A hash is not necessarily a valid selector — #2026 is legal in a URL.
     try { t = document.querySelector(id); } catch (err) { return; }
     if (!t) return;
+    // A page whose anchors sit inside a scroll-driven scene (the Results book)
+    // knows where they are better than the element's box does, and can claim
+    // the jump by cancelling this.
+    if (!window.dispatchEvent(new CustomEvent("cirs-hash-open", { cancelable: true, detail: { target: t } }))) return;
     hashArmed = true;
 
     var timer;

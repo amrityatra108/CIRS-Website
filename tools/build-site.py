@@ -393,9 +393,11 @@ PAGES = {
         "description": "Board results, university placements and the record behind them at "
                        "Chinmaya International Residential School.",
         "sheet": "results",
-        "cache_suffix": "-results-13",
+        "cache_suffix": "-results-14",
         "uc": False,
         "banner": None,
+        # The book carries its own chapter controls.
+        "jump": False,
     },
     "our-laurels": {
         "nav": "Our Laurels",
@@ -1488,6 +1490,44 @@ def docportal_html():
     return '<div class="docportal">\n' + "\n".join(groups) + '\n    </div>'
 
 
+# ---- Our Results: the destinations directory --------------------------
+# Built from the Alumni page's own list (tools/alumni.py DESTINATIONS), so the
+# two pages cannot disagree about where CIRS students have gone. They did:
+# Results carried the eighteen from before NTU Singapore was supplied.
+
+def results_regions_html():
+    """The four region links in the destinations panel; each filters the directory."""
+    rows = []
+    for key, label in alumni.REGIONS:
+        rows.append(f'          <li><a href="#directory" data-region-link="{key}">'
+                    f'<span class="rb-regions__name">{label}</span> '
+                    f'<span class="rb-regions__count">{alumni.region_count(key)}'
+                    f'<span class="sr-only"> institutions</span></span></a></li>')
+    return "\n".join(rows)
+
+
+def results_filters_html():
+    buttons = [f'        <button type="button" class="is-active" data-filter="all" '
+               f'aria-pressed="true">All <span>{alumni.count()}</span></button>']
+    for key, label in alumni.REGIONS:
+        buttons.append(f'        <button type="button" data-filter="{key}" aria-pressed="false">'
+                       f'{label} <span>{alumni.region_count(key)}</span></button>')
+    return "\n".join(buttons)
+
+
+def results_directory_html():
+    labels = dict(alumni.REGIONS)
+    rows = []
+    for key, _label in alumni.REGIONS:
+        for _k, name, short, country, region, *_rest in alumni.DESTINATIONS:
+            if region != key:
+                continue
+            search = re.sub(r"&[a-z]+;", " ", f"{name} {short} {country} {labels[region]}").lower()
+            rows.append(f'      <li data-region="{region}" data-search="{" ".join(search.split())}">'
+                        f'<span>{country}</span>{name}</li>')
+    return "\n".join(rows)
+
+
 def artswall_html():
     """The wall's photographs, as an inert <template> the page's script reads.
 
@@ -1775,6 +1815,12 @@ def build(slug, page):
                        .replace("{{ALUMNI_PATHWAYS}}", alumni.pathways_html())
                        .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
                        .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
+    if slug == "our-results":
+        content = (content.replace("{{RESULTS_REGIONS}}", results_regions_html())
+                          .replace("{{RESULTS_FILTERS}}", results_filters_html())
+                          .replace("{{RESULTS_DIRECTORY}}", results_directory_html())
+                          .replace("{{RESULTS_COUNT_CAP}}", alumni.count_word().capitalize())
+                          .replace("{{RESULTS_COUNT}}", str(alumni.count())))
     if slug == "theatre":
         content = (content.replace("{{THEATRE_PROGRAMME}}", theatre.programme_html())
                           .replace("{{THEATRE_ANAND_UTSAV}}", theatre.anand_utsav_html())
