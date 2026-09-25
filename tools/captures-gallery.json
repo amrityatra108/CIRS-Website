@@ -72,6 +72,30 @@
       ],
       "full_path": "assets/img/captures/full/butterfly-white-flowers.jpg"
     },
+    "yellow-butterfly-orange-flower": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/yellow-butterfly-orange-flower.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/yellow-butterfly-orange-flower.jpg"
+    },
+    "butterfly-red-flowers": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/butterfly-red-flowers.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/butterfly-red-flowers.jpg"
+    },
     "grasshopper-stem": {
       "tile": [
         1012,
@@ -300,6 +324,30 @@
       ],
       "full_path": "assets/img/captures/full/brown-bird-branch.jpg"
     },
+    "yellow-bird-branches": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/yellow-bird-branches.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/yellow-bird-branches.jpg"
+    },
+    "black-white-bird-branch": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/black-white-bird-branch.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/black-white-bird-branch.jpg"
+    },
     "bird-in-large-tree": {
       "tile": [
         748,
@@ -348,6 +396,30 @@
       ],
       "full_path": "assets/img/captures/full/bird-white-blossoms.jpg"
     },
+    "bird-on-post": {
+      "tile": [
+        900,
+        1350
+      ],
+      "tile_path": "assets/img/captures/bird-on-post.jpg",
+      "full": [
+        1600,
+        2400
+      ],
+      "full_path": "assets/img/captures/full/bird-on-post.jpg"
+    },
+    "green-bird-wire": {
+      "tile": [
+        1371,
+        914
+      ],
+      "tile_path": "assets/img/captures/green-bird-wire.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/green-bird-wire.jpg"
+    },
     "squirrel-branch": {
       "tile": [
         990,
@@ -360,17 +432,17 @@
       ],
       "full_path": "assets/img/captures/full/squirrel-branch.jpg"
     },
-    "kingfisher-water": {
+    "squirrel-dark-tree": {
       "tile": [
         990,
         660
       ],
-      "tile_path": "assets/img/captures/kingfisher-water.jpg",
+      "tile_path": "assets/img/captures/squirrel-dark-tree.jpg",
       "full": [
         2400,
         1600
       ],
-      "full_path": "assets/img/captures/full/kingfisher-water.jpg"
+      "full_path": "assets/img/captures/full/squirrel-dark-tree.jpg"
     },
     "kingfisher-post": {
       "tile": [
@@ -396,10 +468,34 @@
       ],
       "full_path": "assets/img/captures/full/kingfisher-trunk.jpg"
     },
+    "pale-bird-wire": {
+      "tile": [
+        987,
+        658
+      ],
+      "tile_path": "assets/img/captures/pale-bird-wire.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/pale-bird-wire.jpg"
+    },
+    "brown-bird-wire": {
+      "tile": [
+        993,
+        658
+      ],
+      "tile_path": "assets/img/captures/brown-bird-wire.jpg",
+      "full": [
+        2400,
+        1590
+      ],
+      "full_path": "assets/img/captures/full/brown-bird-wire.jpg"
+    },
     "dove-branches": {
       "tile": [
-        990,
-        660
+        900,
+        600
       ],
       "tile_path": "assets/img/captures/dove-branches.jpg",
       "full": [
@@ -410,8 +506,8 @@
     },
     "bird-dark": {
       "tile": [
-        990,
-        660
+        900,
+        600
       ],
       "tile_path": "assets/img/captures/bird-dark.jpg",
       "full": [
@@ -419,6 +515,18 @@
         1600
       ],
       "full_path": "assets/img/captures/full/bird-dark.jpg"
+    },
+    "green-bird-branches": {
+      "tile": [
+        900,
+        596
+      ],
+      "tile_path": "assets/img/captures/green-bird-branches.jpg",
+      "full": [
+        2400,
+        1590
+      ],
+      "full_path": "assets/img/captures/full/green-bird-branches.jpg"
     },
     "bird-in-shade": {
       "tile": [
@@ -443,6 +551,78 @@
         1600
       ],
       "full_path": "assets/img/captures/full/bird-bare-branches.jpg"
+    },
+    "sunset-water": {
+      "tile": [
+        1800,
+        1200
+      ],
+      "tile_path": "assets/img/captures/sunset-water.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/sunset-water.jpg"
+    },
+    "waterbird-reeds": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/waterbird-reeds.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/waterbird-reeds.jpg"
+    },
+    "waterbird-reeds-flight": {
+      "tile": [
+        990,
+        660
+      ],
+      "tile_path": "assets/img/captures/waterbird-reeds-flight.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/waterbird-reeds-flight.jpg"
+    },
+    "heron-water": {
+      "tile": [
+        1094,
+        590
+      ],
+      "tile_path": "assets/img/captures/heron-water.jpg",
+      "full": [
+        2400,
+        1295
+      ],
+      "full_path": "assets/img/captures/full/heron-water.jpg"
+    },
+    "kingfisher-water": {
+      "tile": [
+        900,
+        600
+      ],
+      "tile_path": "assets/img/captures/kingfisher-water.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/kingfisher-water.jpg"
+    },
+    "birds-on-water": {
+      "tile": [
+        1800,
+        1200
+      ],
+      "tile_path": "assets/img/captures/birds-on-water.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/birds-on-water.jpg"
     },
     "raptor-stump": {
       "tile": [
@@ -503,6 +683,18 @@
         1276
       ],
       "full_path": "assets/img/captures/full/full-moon.jpg"
+    },
+    "kingfisher-blue-study": {
+      "tile": [
+        1800,
+        1012
+      ],
+      "tile_path": "assets/img/captures/kingfisher-blue-study.jpg",
+      "full": [
+        1920,
+        1080
+      ],
+      "full_path": "assets/img/captures/full/kingfisher-blue-study.jpg"
     },
     "grey-bird": {
       "tile": [
@@ -576,6 +768,30 @@
       ],
       "full_path": "assets/img/captures/full/black-white-bird.jpg"
     },
+    "birds-on-wire": {
+      "tile": [
+        1058,
+        615
+      ],
+      "tile_path": "assets/img/captures/birds-on-wire.jpg",
+      "full": [
+        2400,
+        1394
+      ],
+      "full_path": "assets/img/captures/full/birds-on-wire.jpg"
+    },
+    "green-birds-branches": {
+      "tile": [
+        922,
+        615
+      ],
+      "tile_path": "assets/img/captures/green-birds-branches.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/green-birds-branches.jpg"
+    },
     "grey-blue-bird": {
       "tile": [
         1218,
@@ -638,8 +854,8 @@
     },
     "performer-blue-light": {
       "tile": [
-        1190,
-        1080
+        900,
+        817
       ],
       "tile_path": "assets/img/captures/performer-blue-light.jpg",
       "full": [
@@ -647,6 +863,42 @@
         1080
       ],
       "full_path": "assets/img/captures/full/performer-blue-light.jpg"
+    },
+    "two-dancers": {
+      "tile": [
+        900,
+        1053
+      ],
+      "tile_path": "assets/img/captures/two-dancers.jpg",
+      "full": [
+        2051,
+        2400
+      ],
+      "full_path": "assets/img/captures/full/two-dancers.jpg"
+    },
+    "man-seated": {
+      "tile": [
+        1402,
+        935
+      ],
+      "tile_path": "assets/img/captures/man-seated.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/man-seated.jpg"
+    },
+    "children-window": {
+      "tile": [
+        900,
+        1457
+      ],
+      "tile_path": "assets/img/captures/children-window.jpg",
+      "full": [
+        1483,
+        2400
+      ],
+      "full_path": "assets/img/captures/full/children-window.jpg"
     },
     "seated-performer": {
       "tile": [

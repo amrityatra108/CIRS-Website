@@ -1,4 +1,4 @@
-/* CIRS Captures — a four-chapter photo journal, its viewer, and the ending.
+/* CIRS Captures — a five-chapter photo journal, its viewer, and the ending.
    The opening carries the page's movement. Here the images hold still, with
    a chapter index and sticky chapter headings helping readers through the
    photographs. Each justified row preserves the photos' own proportions. */
@@ -10,7 +10,7 @@
 
 .cg__contents{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(5,minmax(0,1fr));
   margin:clamp(30px,4vw,60px) 0 clamp(44px,6vw,88px);
   border-top:1px solid var(--rule);
   border-bottom:1px solid var(--rule);
@@ -142,6 +142,9 @@
 }
 
 @media (max-width:920px){
+  .cg__contents{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .cg__contents a:nth-child(4){ border-left:0; }
+  .cg__contents a:nth-child(n+4){ border-top:1px solid var(--rule); }
   .cg__chapter{ grid-template-columns:1fr; row-gap:24px; }
   .cg__chapter-head{ position:static; display:grid; grid-template-columns:1fr 1fr; column-gap:24px; align-items:end; }
   .cg__chapter-count{ grid-column:1 / -1; }
@@ -152,7 +155,8 @@
 /* A phone gives every image the width it needs to be more than a thumbnail. */
 @media (max-width:640px){
   .cg__contents{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .cg__contents a:nth-child(3){ border-left:0; }
+  .cg__contents a:nth-child(4){ border-left:1px solid var(--rule); }
+  .cg__contents a:nth-child(odd){ border-left:0; }
   .cg__contents a:nth-child(n+3){ border-top:1px solid var(--rule); }
   .cg__chapter-head{ display:block; }
   .cg__chapter-head h3{ margin-bottom:12px; }

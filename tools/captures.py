@@ -1,4 +1,4 @@
-"""CIRS Captures — a sixty-two-photograph journal from the supplied collections.
+"""CIRS Captures — an eighty-three-photograph journal from the supplied collections.
 
 The first sixteen photographs are in assets/source/captures-2026-09-24. The
 new ZIP has 43 photographs and one blank frame; nine repeat photographs in
@@ -6,8 +6,10 @@ the first collection. Its 34 new photographs are in
 assets/source/captures-2026-09-24-zip. The later Drive file and folder add
 twelve more photographs in assets/source/captures-2026-09-25 and
 assets/source/captures-2026-09-25-folder. The attachment's berry bird and a
-folder copy of the lizard are shown once. Every unique photograph appears
-once: four in the opening, 57 in the journal, and one at the end.
+folder copy of the lizard are shown once. A later folder update adds 21
+distinct photographs; repeated copies and a near-identical kingfisher frame
+are omitted. Every selected photograph appears once: four in the opening,
+78 in the journal, and one at the end.
 
 Captions describe what is visible; photographer, date, and exact location are
 not inferred. tools/make-captures-gallery.py writes the image sizes used by
@@ -66,6 +68,8 @@ CHAPTERS = [
              (new(4), "green-insect", "An iridescent green insect on a leafy branch")],
             [(folder("05-crs05364-2-.jpg"), "red-flower-sky", "A red flower silhouetted against the sky"),
              (folder("06-dsc08037.jpg"), "butterfly-white-flowers", "A butterfly on slender white flowers")],
+            [(folder("14-dsc05087.jpg"), "yellow-butterfly-orange-flower", "A yellow butterfly on an orange flower"),
+             (folder("15-dsc02280.jpg"), "butterfly-red-flowers", "A butterfly approaching red flowers")],
             [(new(5), "grasshopper-stem", "A grasshopper resting along a slender stem"),
              (new(15), "insect-on-stem", "A small insect clinging to a stem against green"),
              (new(26), "grasshopper-leaf", "A grasshopper on a broad green leaf")],
@@ -91,18 +95,37 @@ CHAPTERS = [
             [(folder("11-dsc09803.jpg"), "bird-orange-berries", "A small bird perched among orange berries"),
              (old("img-9515"), "hoopoe-branches", "A hoopoe perched among branches"),
              (new(2), "brown-bird-branch", "A brown bird on a bare branch against the sky")],
+            [(folder("16-dsc08899.jpg"), "yellow-bird-branches", "A yellow-bellied bird perched among branches"),
+             (folder("20-dsc07082.jpg"), "black-white-bird-branch", "A black and white bird on a bare branch")],
             [(new(3), "bird-in-large-tree", "A bird perched in the limbs of a broad tree"),
              (new(8), "bird-dense-leaves", "A small bird partly hidden in dense foliage")],
             [(old("dsc00453"), "bird-among-leaves", "A red-crested bird among broad green leaves"),
              (old("img-1396"), "bird-white-blossoms", "A small bird reaching into white blossoms")],
+            [(folder("21-img-9878.jpg"), "bird-on-post", "A small bird perched on a post against green"),
+             (folder("25-copy-of-dsc09801.jpg"), "green-bird-wire", "A small green bird perched on a wire")],
             [(old("img-1887"), "squirrel-branch", "A squirrel perched on a branch against blue sky"),
-             (old("kingfisher"), "kingfisher-water", "A kingfisher by the water, framed by tree trunks")],
+             (folder("33-copy-of-dsc00202.jpg"), "squirrel-dark-tree", "A squirrel clinging to a tree in shade")],
             [(old("img-4491"), "kingfisher-post", "A kingfisher perched on a post with trees behind"),
              (new(10), "kingfisher-trunk", "A kingfisher against the dark bark of a tree")],
+            [(folder("27-copy-of-indian-silverbill.jpg"), "pale-bird-wire", "A small pale bird perched on a wire at dusk"),
+             (folder("29-copy-of-copy-of-cb35bf1a-94be-4427-8c9d-9097f40fdfc9-l0-001-1-6-2024-7-08-57-pm.jpg"), "brown-bird-wire", "A small brown bird on a wire among bare branches")],
             [(old("img-4562"), "dove-branches", "A dove perched among yellow flowers and branches"),
-             (old("img-2030"), "bird-dark", "A small pale-headed bird against a dark background")],
+             (old("img-2030"), "bird-dark", "A small pale-headed bird against a dark background"),
+             (folder("30-copy-of-dsc-0047-1.jpg"), "green-bird-branches", "A small green bird among branches")],
             [(old("img-5244"), "bird-in-shade", "A bird on a branch in deep shade"),
              (old("img-5569"), "bird-bare-branches", "A small red-crowned bird among bare branches")],
+        ],
+    },
+    {
+        "slug": "by-the-water", "title": "By the water",
+        "intro": "Reeds, reflections and the birds that gather at the edge.",
+        "rows": [
+            [(folder("12-dsc09967.jpg"), "sunset-water", "The sun setting over water and distant birds")],
+            [(folder("13-dsc09853.jpg"), "waterbird-reeds", "A colorful waterbird among tall reeds"),
+             (folder("26-copy-of-dsc09849.jpg"), "waterbird-reeds-flight", "A colorful waterbird lifting from the reeds")],
+            [(folder("24-copy-of-dsc05149.jpg"), "heron-water", "A long-necked bird perched above green water"),
+             (old("kingfisher"), "kingfisher-water", "A kingfisher by the water, framed by tree trunks")],
+            [(folder("31-copy-of-dsc00046.jpg"), "birds-on-water", "A flock of birds moving across the water")],
         ],
     },
     {
@@ -114,12 +137,15 @@ CHAPTERS = [
              (new(12), "pale-bird-perch", "A pale bird on a thin bare branch")],
             [(new(11), "colorful-bird", "A colorful bird perched among sunlit leaves"),
              (folder("02-a-03-2.jpg"), "full-moon", "A bright full moon against a black sky")],
+            [(folder("28-copy-of-1untitled-design.png"), "kingfisher-blue-study", "A close view of a kingfisher against blue, with a black border")],
             [(old("img-4426"), "grey-bird", "A small grey bird seen through soft green foliage"),
              (new(28), "bird-on-roof", "A small bird perched on roof tiles")],
             [(new(16), "trees-at-dusk", "Trees framing an open field in evening light"),
              (new(29), "peacock-shade", "A peacock among dark leaves")],
             [(new(31), "brown-bird-branches", "A brown bird perched among crossing branches"),
              (new(32), "black-white-bird", "A black and white bird with a long tail in green foliage")],
+            [(folder("34-copy-of-dsc00628.jpg"), "birds-on-wire", "Two birds perched on a wire against blue sky"),
+             (folder("35-copy-of-dsc03869.jpg"), "green-birds-branches", "Two green birds on a bare branch against the sky")],
             [(new(36), "grey-blue-bird", "A grey-blue bird perched on a branch"),
              (new(38), "yellow-bird-sky", "A small yellow bird against blue sky"),
              (new(39), "bird-silhouette", "A bird silhouetted against a pale sky")],
@@ -127,11 +153,14 @@ CHAPTERS = [
     },
     {
         "slug": "together", "title": "Together",
-        "intro": "Performances and gatherings from the school collection.",
+        "intro": "Performances, gatherings and people in the collection.",
         "rows": [
             [(new(20), "people-seated-together", "People seated together on the floor")],
             [(new(17), "decorated-stage", "Flowers and artwork on a decorated stage"),
-             (new(18), "performer-blue-light", "A performer under blue stage lights")],
+             (new(18), "performer-blue-light", "A performer under blue stage lights"),
+             (folder("18-dsc02905.jpg"), "two-dancers", "Two performers dancing in colorful dress")],
+            [(folder("17-edit-man.jpg"), "man-seated", "A man seated alone in a light corridor"),
+             (folder("19-dsc00372.jpg"), "children-window", "Children looking out of a window")],
             [(new(19), "seated-performer", "A performer seated on stage"),
              (new(21), "singer-spotlight", "A singer holding a microphone on a dark stage"),
              (new(22), "group-outdoors", "A group gathered outdoors with flower garlands")],
@@ -161,7 +190,7 @@ def count():
 
 WORDS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen "
          "fourteen fifteen sixteen seventeen eighteen nineteen").split()
-TENS = {2: "twenty", 3: "thirty", 4: "forty", 5: "fifty"}
+TENS = {2: "twenty", 3: "thirty", 4: "forty", 5: "fifty", 6: "sixty", 7: "seventy"}
 
 
 def count_word():
