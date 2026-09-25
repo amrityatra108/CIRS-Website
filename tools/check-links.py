@@ -71,6 +71,11 @@ def main():
         refs = re.findall(r'\b(?:href|src|poster)="([^"]+)"', html)
         refs += [c for c in re.findall(r'\bcontent="([^"]+)"', html)
                  if c.startswith(("assets/", "http://", "https://"))]
+        # Each candidate in a srcset is a reference like any src: it must
+        # exist, and it is what keeps a responsive cut from reading as an
+        # orphan when the page's src names only the smallest.
+        for srcset in re.findall(r'\bsrcset="([^"]+)"', html):
+            refs += [c.split()[0] for c in srcset.split(",") if c.strip()]
         checked += len(refs)
 
         for ref in refs:
