@@ -1,358 +1,67 @@
 <section class="cw-hero" id="top" aria-labelledby="cw-title">
-  <!-- Everything between here and the heading is decoration: a lit ground,
-       grain, floating manuscript pages, glass, an ink stroke being drawn, a
-       typewriter and a desk. All of it is aria-hidden, so a screen reader
-       meets the heading first and none of it is read aloud. -->
-  <div class="cw-hero-bg" aria-hidden="true"></div>
-  <div class="cw-hero-light" aria-hidden="true"></div>
-  <div class="cw-grain" aria-hidden="true"></div>
-
-  <div class="cw-plane cw-plane--quotes" aria-hidden="true">
-    <span class="cw-quote cw-quote--open">&ldquo;</span>
-    <span class="cw-quote cw-quote--close">&rdquo;</span>
-  </div>
-
-  <div class="cw-plane cw-plane--paper" aria-hidden="true">
-    <div class="cw-floating-paper cw-floating-paper--1">
-      <svg viewBox="0 0 120 156">
-        <defs>
-          <linearGradient id="cwPaperShade1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#FFFFFF" stop-opacity=".22"/>
-            <stop offset="1" stop-color="#4A2939" stop-opacity=".24"/>
-          </linearGradient>
-        </defs>
-        <rect width="120" height="156" rx="2" fill="#FBF5EB" opacity=".93"/>
-        <rect width="120" height="156" rx="2" fill="url(#cwPaperShade1)"/>
-        <g fill="#241B25" opacity=".26">
-          <rect x="16" y="26" width="78" height="2.4" rx="1.2"/>
-          <rect x="16" y="42" width="88" height="2.4" rx="1.2"/>
-          <rect x="16" y="58" width="64" height="2.4" rx="1.2"/>
-          <rect x="16" y="74" width="84" height="2.4" rx="1.2"/>
-          <rect x="16" y="90" width="52" height="2.4" rx="1.2"/>
-          <rect x="16" y="106" width="76" height="2.4" rx="1.2"/>
-        </g>
-      </svg>
+  <div class="wrap cw-hero__layout">
+    <div class="cw-hero__topline">
+      <p class="cw-hero__label">CIRS / Creative Writing</p>
+      <p class="cw-hero__edition">A student poetry anthology</p>
     </div>
-    <div class="cw-floating-paper cw-floating-paper--2">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="2" fill="#FBF5EB" opacity=".9"/>
-        <g fill="#241B25" opacity=".22">
-          <rect x="14" y="24" width="66" height="2.2" rx="1.1"/>
-          <rect x="14" y="40" width="72" height="2.2" rx="1.1"/>
-          <rect x="14" y="56" width="48" height="2.2" rx="1.1"/>
-          <rect x="14" y="72" width="68" height="2.2" rx="1.1"/>
-        </g>
-      </svg>
+    <div class="cw-hero__composition">
+      <h1 class="cw-hero__title" id="cw-title"><span>Words become</span> <span>worlds.</span></h1>
+      <blockquote class="cw-hero__excerpt" aria-label="A poem from the collection">
+        {{CW_HERO_EXCERPT}}
+      </blockquote>
     </div>
-    <div class="cw-floating-paper cw-floating-paper--3">
-      <svg viewBox="0 0 110 142">
-        <rect width="110" height="142" rx="2" fill="#FBF5EB" opacity=".92"/>
-        <g fill="#241B25" opacity=".24">
-          <rect x="15" y="28" width="70" height="2.3" rx="1.15"/>
-          <rect x="15" y="44" width="80" height="2.3" rx="1.15"/>
-          <rect x="15" y="60" width="56" height="2.3" rx="1.15"/>
-          <rect x="15" y="76" width="74" height="2.3" rx="1.15"/>
-          <rect x="15" y="92" width="44" height="2.3" rx="1.15"/>
-        </g>
-        <path d="M15 112c10-7 18 5 27-1s13-8 22-3" stroke="#C69A4B" stroke-width="1.4"
-              fill="none" opacity=".55"/>
-      </svg>
+    <div class="cw-hero__footer">
+      <div class="cw-hero__summary">
+        <p class="cw-hero__subtitle">Poetry by the students of CIRS.</p>
+        <p class="cw-hero__measure"><span><strong>{{CW_COUNT}}</strong> poems</span><span class="cw-hero__measure-rule" aria-hidden="true"></span><span><strong>{{CW_WRITERS}}</strong> writers</span></p>
+      </div>
+      <a class="cw-hero__enter" href="#chapters">Explore the chapters <span aria-hidden="true">↘</span></a>
     </div>
-    <div class="cw-floating-paper cw-floating-paper--4">
-      <svg viewBox="0 0 86 110">
-        <rect width="86" height="110" rx="2" fill="#FBF5EB" opacity=".86"/>
-        <g fill="#241B25" opacity=".2">
-          <rect x="12" y="22" width="56" height="2" rx="1"/>
-          <rect x="12" y="36" width="62" height="2" rx="1"/>
-          <rect x="12" y="50" width="40" height="2" rx="1"/>
-        </g>
-      </svg>
-    </div>
-  </div>
-
-  <div class="cw-plane cw-plane--glass" aria-hidden="true">
-    <div class="cw-glass-orb cw-glass-orb--1"></div>
-    <div class="cw-glass-orb cw-glass-orb--2"></div>
-    <div class="cw-glass-orb cw-glass-orb--3"></div>
-  </div>
-
-  <div class="cw-plane cw-plane--ink" aria-hidden="true">
-    <svg class="cw-ink-trail" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="cwInkGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#C69A4B" stop-opacity="0"/>
-          <stop offset=".22" stop-color="#C69A4B" stop-opacity=".75"/>
-          <stop offset=".55" stop-color="#EAD39B" stop-opacity=".95"/>
-          <stop offset=".85" stop-color="#B76E79" stop-opacity=".6"/>
-          <stop offset="1" stop-color="#B76E79" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-      <path stroke-width="1.7"
-            d="M180 628c92-46 170 22 258-12s126-92 214-84 132 86 226 64 154-96 246-70"/>
-      <path class="cw-ink-flourish" stroke-width="1.3"
-            d="M1080 600c34-30 8-66-20-52s-20 60 18 66 76-26 92-58"/>
-      <path class="cw-ink-flourish" stroke-width="1.2"
-            d="M300 208c26-22 6-52-16-40s-14 46 16 50 58-22 70-46"/>
-    </svg>
-  </div>
-
-  <div class="cw-plane cw-plane--desk" aria-hidden="true">
-    <div class="cw-typewriter">
-      <svg viewBox="0 0 340 256">
-        <defs>
-          <linearGradient id="cwBody" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#3A2B3E"/><stop offset="1" stop-color="#1B141D"/>
-          </linearGradient>
-          <linearGradient id="cwDeck" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#2B2030"/><stop offset="1" stop-color="#171117"/>
-          </linearGradient>
-          <linearGradient id="cwSheet" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#FFFCF6"/><stop offset="1" stop-color="#E8DCC6"/>
-          </linearGradient>
-          <clipPath id="cwPaperClip"><rect x="60" y="-80" width="240" height="180"/></clipPath>
-        </defs>
-        <ellipse cx="170" cy="238" rx="150" ry="13" fill="#0C080D" opacity=".55"/>
-        <g class="cw-tw-carriage">
-          <g clip-path="url(#cwPaperClip)">
-            <g class="cw-tw-paper">
-              <rect x="122" y="-38" width="110" height="146" rx="1.5" fill="url(#cwSheet)"/>
-              <g fill="#241B25" opacity=".42">
-                <rect class="cw-tw-line" x="136" y="-16" width="80" height="2.2" rx="1.1"/>
-                <rect class="cw-tw-line cw-tw-line--2" x="136" y="2" width="68" height="2.2" rx="1.1"/>
-                <rect class="cw-tw-line cw-tw-line--3" x="136" y="20" width="76" height="2.2" rx="1.1"/>
-              </g>
-            </g>
-          </g>
-          <path d="M112 100 L238 100 L252 74 L126 74 Z" fill="#241B25" opacity=".85"/>
-          <path d="M112 100 L238 100 L252 74 L126 74 Z" fill="none" stroke="#C69A4B"
-                stroke-width=".9" opacity=".5"/>
-          <rect x="102" y="98" width="142" height="20" rx="10" fill="#151016"/>
-          <rect x="102" y="98" width="142" height="20" rx="10" fill="none" stroke="#C69A4B"
-                stroke-width=".9" opacity=".45"/>
-          <rect x="112" y="103" width="122" height="4" rx="2" fill="#EAD39B" opacity=".14"/>
-          <ellipse cx="99" cy="108" rx="11" ry="13" fill="#2E2233" stroke="#C69A4B"
-                   stroke-width=".9" opacity=".95"/>
-          <ellipse cx="247" cy="108" rx="11" ry="13" fill="#2E2233" stroke="#C69A4B"
-                   stroke-width=".9" opacity=".95"/>
-          <path d="M252 96 L274 84" stroke="#C69A4B" stroke-width="2.4" stroke-linecap="round"
-                opacity=".75"/>
-        </g>
-        <g stroke="#C69A4B" stroke-width="1.5" stroke-linecap="round" opacity=".5">
-          <path class="cw-tw-bar" d="M170 142 L166 120"/>
-          <path d="M154 144 L148 124" opacity=".7"/>
-          <path d="M186 144 L192 124" opacity=".7"/>
-          <path d="M140 148 L130 130" opacity=".5"/>
-          <path d="M200 148 L210 130" opacity=".5"/>
-        </g>
-        <g>
-          <circle cx="108" cy="140" r="15" fill="#241B25" stroke="#C69A4B" stroke-width="1.1"
-                  opacity=".9"/>
-          <circle cx="108" cy="140" r="6" fill="#4A2939"/>
-          <circle cx="232" cy="140" r="15" fill="#241B25" stroke="#C69A4B" stroke-width="1.1"
-                  opacity=".9"/>
-          <circle cx="232" cy="140" r="6" fill="#4A2939"/>
-        </g>
-        <path d="M46 228 H294 L272 176 H68 Z" fill="url(#cwBody)"/>
-        <path d="M46 228 H294 L272 176 H68 Z" fill="none" stroke="#C69A4B" stroke-width=".9"
-              opacity=".38"/>
-        <path d="M70 176 H270 L252 150 H88 Z" fill="url(#cwDeck)"/>
-        <path d="M70 176 H270 L252 150 H88 Z" fill="none" stroke="#C69A4B" stroke-width=".8"
-              opacity=".3"/>
-        <rect x="150" y="206" width="40" height="7" rx="3.5" fill="#C69A4B" opacity=".55"/>
-        <g fill="#2A1F2E" stroke="#C69A4B" stroke-width=".7">
-          <g class="cw-tw-key cw-tw-key--1"><ellipse cx="106" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--2"><ellipse cx="126" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--3"><ellipse cx="146" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--4"><ellipse cx="166" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--5"><ellipse cx="186" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--6"><ellipse cx="206" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--7"><ellipse cx="226" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--8"><ellipse cx="116" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--9"><ellipse cx="136" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--10"><ellipse cx="156" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--11"><ellipse cx="176" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--12"><ellipse cx="196" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--13"><ellipse cx="216" cy="158" rx="6.6" ry="4.6"/></g>
-        </g>
-        <rect x="128" y="188" width="84" height="8" rx="4" fill="#2A1F2E" stroke="#C69A4B"
-              stroke-width=".7"/>
-      </svg>
-    </div>
-
-    <div class="cw-manuscript">
-      <svg viewBox="0 0 220 278">
-        <defs>
-          <linearGradient id="cwMsShade" x1="0" y1="0" x2=".8" y2="1">
-            <stop offset="0" stop-color="#FFFFFF" stop-opacity=".2"/>
-            <stop offset="1" stop-color="#4A2939" stop-opacity=".26"/>
-          </linearGradient>
-        </defs>
-        <g transform="rotate(-5 110 139)">
-          <rect x="6" y="8" width="208" height="264" rx="2" fill="#0C080D" opacity=".35"/>
-          <rect x="0" y="0" width="208" height="264" rx="2" fill="#FBF5EB"/>
-          <rect x="0" y="0" width="208" height="264" rx="2" fill="url(#cwMsShade)"/>
-          <g stroke="#241B25" stroke-width="1.6" fill="none" opacity=".3" stroke-linecap="round">
-            <path d="M52 44c10-8 16 6 26 0s14-8 24-2 16 4 26-2"/>
-            <path d="M24 78c14-9 22 7 36 0s18-8 32-1 20 4 32-3"/>
-            <path d="M24 106c12-8 20 6 32 0s16-7 28-1 18 4 28-3"/>
-            <path d="M24 134c16-9 24 7 38 0s20-8 34-1"/>
-            <path d="M24 162c12-8 20 6 32 0s16-7 28-1 18 4 28-3"/>
-            <path d="M24 190c14-9 22 7 36 0s18-8 30-1"/>
-          </g>
-          <path d="M60 224c22-16 44 10 66-4" stroke="#B76E79" stroke-width="1.4" fill="none"
-                opacity=".5"/>
-        </g>
-      </svg>
-    </div>
-
-    <div class="cw-desk-tools">
-      <svg viewBox="0 0 300 150">
-        <defs>
-          <linearGradient id="cwPenBody" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#2B1F2F"/><stop offset=".5" stop-color="#4A2939"/>
-            <stop offset="1" stop-color="#1D161F"/>
-          </linearGradient>
-          <linearGradient id="cwGlass" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#EAD39B" stop-opacity=".3"/>
-            <stop offset="1" stop-color="#4A2939" stop-opacity=".9"/>
-          </linearGradient>
-        </defs>
-        <ellipse cx="150" cy="140" rx="120" ry="8" fill="#0C080D" opacity=".45"/>
-        <path d="M208 138 H276 L272 84 H212 Z" fill="url(#cwGlass)" stroke="#C69A4B"
-              stroke-width="1.1"/>
-        <path d="M214 138 H270 L268 104 H216 Z" fill="#3A2033" opacity=".95"/>
-        <rect x="230" y="70" width="28" height="16" rx="3" fill="#241B25" stroke="#C69A4B"
-              stroke-width="1"/>
-        <rect x="234" y="62" width="20" height="10" rx="3" fill="#C69A4B" opacity=".8"/>
-        <rect x="222" y="112" width="44" height="14" rx="2" fill="#FBF5EB" opacity=".14"/>
-        <path class="cw-ink-shine" d="M218 92 L222 132" stroke="#FBF5EB" stroke-width="3"
-              stroke-linecap="round" opacity=".3"/>
-        <g transform="rotate(-14 110 110)">
-          <rect x="34" y="98" width="128" height="15" rx="7.5" fill="url(#cwPenBody)"/>
-          <rect x="34" y="98" width="128" height="15" rx="7.5" fill="none" stroke="#C69A4B"
-                stroke-width=".8" opacity=".6"/>
-          <rect x="112" y="97" width="10" height="17" rx="2" fill="#C69A4B" opacity=".85"/>
-          <rect x="60" y="96" width="4" height="19" rx="2" fill="#EAD39B" opacity=".5"/>
-          <path d="M34 98 L6 105.5 L34 113 Z" fill="#EAD39B"/>
-          <path d="M22 105.5 H6" stroke="#241B25" stroke-width="1" opacity=".7"/>
-          <circle cx="22" cy="105.5" r="2" fill="#241B25" opacity=".75"/>
-          <rect x="150" y="96" width="14" height="19" rx="5" fill="#241B25" stroke="#C69A4B"
-                stroke-width=".8"/>
-        </g>
-      </svg>
-    </div>
-  </div>
-
-  <div class="cw-plane cw-plane--dust" aria-hidden="true">
-    <div class="cw-particles" id="cwParticles"></div>
-  </div>
-
-  <div class="cw-vignette" aria-hidden="true"></div>
-
-  <div class="cw-content">
-    <div class="cw-orbit" aria-hidden="true">
-      <svg viewBox="0 0 400 400">
-        <circle cx="200" cy="200" r="182" fill="none" stroke="#C69A4B" stroke-width=".8"
-                opacity=".22"/>
-        <circle cx="200" cy="200" r="156" fill="none" stroke="#EAD39B" stroke-width=".6"
-                opacity=".12" stroke-dasharray="2 12" stroke-linecap="round"/>
-        <g fill="#EAD39B">
-          <circle cx="200" cy="18" r="2.6" opacity=".8"/>
-          <circle cx="382" cy="200" r="2.2" opacity=".6"/>
-          <circle cx="200" cy="382" r="2.6" opacity=".7"/>
-          <circle cx="18" cy="200" r="2.2" opacity=".6"/>
-          <circle cx="329" cy="71" r="1.6" opacity=".45"/>
-          <circle cx="329" cy="329" r="1.6" opacity=".45"/>
-          <circle cx="71" cy="329" r="1.6" opacity=".45"/>
-          <circle cx="71" cy="71" r="1.6" opacity=".45"/>
-        </g>
-        <g font-size="30" fill="#C69A4B" opacity=".4">
-          <text x="278" y="62" text-anchor="middle">&ldquo;</text>
-          <text x="122" y="356" text-anchor="middle">&rdquo;</text>
-        </g>
-        <g stroke="#C69A4B" stroke-width="1" fill="none" opacity=".35" stroke-linecap="round">
-          <path d="M40 130c8-6 14 4 22 0"/>
-          <path d="M338 270c8-6 14 4 22 0"/>
-        </g>
-      </svg>
-    </div>
-
-    <h1 class="cw-heading" id="cw-title" data-text="Creative Writing">Creative Writing</h1>
-    <hr class="cw-rule">
-    <p class="cw-sub">Every thought has a story.</p>
   </div>
 </section>
 
-<section class="cw-sec cw-sec--intro">
-  <div class="wrap cw-intro rv">
-    <p class="cw-eyebrow"><span class="sc">A living collection</span></p>
-    <h2 class="cw-h2">Words become <em>worlds.</em></h2>
-    <p class="cw-lead">The imagination, the ideas and the voices of young writers. This is
-      where the school&rsquo;s creative writing will be published &mdash; class group by class
-      group, as the editorial board supplies it.</p>
-  </div>
-</section>
-
-<section class="cw-sec cw-sec--posters" id="stories">
-  <div class="wrap cw-sechead rv">
-    <p class="cw-eyebrow"><span class="sc">Student voices</span></p>
-    <h2 class="cw-h2">Stories on <em>the move.</em></h2>
-    <p class="cw-copy">Four class groups, and a place on the wall for every piece as it is
-      published. The slots are empty on purpose: no title, writer or story here is invented
-      while the school&rsquo;s own work is still to come.</p>
-  </div>
-{{CW_ROWS}}
-  <p class="wrap cw-rows__note rv">Published student writing already lives in the school
-    magazine, and is on the blog in full.
-    <a class="btn btn--outline" href="blog.html">Read it on the blog</a></p>
-</section>
-
-<section class="cw-sec cw-sec--await">
-  <div class="wrap cw-await rv">
-    <p class="cw-eyebrow"><span class="sc">Still to come</span></p>
-    <h2 class="cw-h2">Poetry, fiction <em>and how to submit.</em></h2>
-    <p class="cw-copy">Three things fill the wall above: the poems, the stories and the
-      address to send new work to. All three are <em>[awaiting the Crossroads Editorial
-      Board]</em>, and nothing has been written in their place.</p>
-    <ul class="cw-await__list">
-      <li>
-        <h3>Poetry</h3>
-        <p>Published as it is written.</p>
-      </li>
-      <li>
-        <h3>Fiction</h3>
-        <p>Short stories, and longer work in parts.</p>
-      </li>
-      <li>
-        <h3>Submissions</h3>
-        <p>How to send work to the editorial board.</p>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section class="cw-sec cw-sec--journey" id="journey">
+<section class="cw-introduction" id="chapters" aria-labelledby="cw-index-heading">
   <div class="wrap">
-    <div class="cw-sechead rv">
-      <p class="cw-eyebrow"><span class="sc">The creative process</span></p>
-      <h2 class="cw-h2">From a thought <em>to a story.</em></h2>
-      <p class="cw-copy">The same five stages whether the piece is a poem or an essay, and
-        whether it takes an evening or a term.</p>
+    <div class="cw-introduction__head">
+      <p class="cw-kicker">The anthology</p>
+      <h2 id="cw-index-heading">Read by theme.</h2>
+      <p>Five themes, three poems from each. Choose a voice to open the complete poem.</p>
     </div>
-    <ol class="cw-journey">
-{{CW_JOURNEY}}
-    </ol>
+    <div class="cw-rows__controls">
+      <button class="cw-rows__pause" type="button" aria-controls="cw-rows" aria-pressed="false">Pause motion</button>
+    </div>
+  </div>
+  <div class="cw-rows" id="cw-rows">
+{{CW_ROWS}}
   </div>
 </section>
 
-<section class="cw-sec cw-sec--last">
-  <div class="wrap cw-last rv">
-    <p class="cw-eyebrow"><span class="sc">Creative writing at CIRS</span></p>
-    <h2 class="cw-h2">The next story <em>is waiting.</em></h2>
-    <p class="cw-last__note">Every page begins with a thought.</p>
-    <p class="cw-last__cta">
-      <a class="btn btn--primary" href="crossroads.html">The Crossroads archive</a>
-      <a class="btn btn--outline" href="blog.html">CIRS Blog</a>
-    </p>
+{{CW_CHAPTERS}}
+
+<section class="cw-afterword" id="about-the-collection" aria-labelledby="cw-afterword-heading">
+  <div class="wrap cw-afterword__layout">
+    <div>
+      <p class="cw-kicker">About the collection</p>
+      <h2 id="cw-afterword-heading">A space for student voices.</h2>
+    </div>
+    <div class="cw-afterword__copy">
+      <p>This anthology presents student poems supplied in the Creative Writing collection. Each chapter follows the themes of that collection, with each writer credited beside their work.</p>
+      <p>For magazine articles and complete issues, visit CIRS&rsquo;s related publications.</p>
+      <div class="cw-afterword__links">
+        <a href="blog.html">CIRS Blog <span aria-hidden="true">↗</span></a>
+        <a href="crossroads.html">Crossroads archive <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cw-future" aria-labelledby="cw-future-heading">
+  <div class="wrap cw-future__layout">
+    <div>
+      <p class="cw-kicker">Future writing</p>
+      <h2 id="cw-future-heading">The collection can grow.</h2>
+    </div>
+    <p>Submission details will be published when they are available from the editorial board.</p>
+    <a href="#chapters">Back to the chapters <span aria-hidden="true">↑</span></a>
   </div>
 </section>

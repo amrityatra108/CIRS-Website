@@ -426,7 +426,7 @@ body.art-attack .film__art-name{
 body.art-attack .film__seam{
   height:clamp(130px, 18svh, 220px);
   background:linear-gradient(to bottom,
-              #170F18 0%, #211722 24%, #76686C 64%, var(--paper) 100%);
+              #170F18 0%, #211722 24%, #76686C 64%, #F6F1E8 100%);
 }
 body.art-attack .film[data-film-still] .film__video{ visibility:hidden; }
 @media (max-aspect-ratio:6/5){

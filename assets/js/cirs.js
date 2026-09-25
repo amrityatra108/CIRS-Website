@@ -1580,85 +1580,137 @@
   /* ==========================================================
      Header and drawer
      ========================================================== */
-  var drawer = $("#drawer"), burger = $("#burger"), drawerMotion = null;
+  var drawer = $("#drawer"), burger = $("#burger"), drawerClose = $("#drawerClose");
+  var drawerCloseTimer = null, drawerInerted = [];
 
-  function finishDrawerClose() {
-    if (!drawer || drawer.classList.contains("is-open")) return;
-    drawer.hidden = true;
-    if (animate) {
-      gsap.set([drawer].concat($$(".drawer__grid > div, .drawer__utility, .drawer__cta", drawer)), {
-        clearProps: "opacity,visibility,transform"
+  function isolateDrawer(open) {
+    if (open) {
+      drawerInerted = Array.prototype.slice.call(document.body.children).filter(function (el) {
+        return el !== drawer && !el.inert && el.tagName !== "SCRIPT";
       });
+      drawerInerted.forEach(function (el) { el.inert = true; });
+    } else {
+      drawerInerted.forEach(function (el) { el.inert = false; });
+      drawerInerted = [];
     }
   }
 
   function closeDrawer() {
     if (!drawer || !drawer.classList.contains("is-open")) return;
+    drawer.classList.remove("is-open");
+    document.body.classList.add("menu-closing");
+    document.body.classList.remove("menu-open");
+    // The page intro may still own the scroll lock underneath the menu.
+    if (!$("#curtain")) {
+      document.body.classList.remove("is-locked");
+      if (lenis) lenis.start();
+      openHash();
+    }
+    isolateDrawer(false);
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-label", "Open menu");
     burger.focus({ preventScroll: true });
-    if (animate && drawerMotion) {
-      drawerMotion.eventCallback("onReverseComplete", function () {
-        drawer.classList.remove("is-open");
-        document.body.classList.remove("is-locked", "menu-open");
-        if (lenis) lenis.start();
-        finishDrawerClose();
-      });
-      drawerMotion.reverse();
-      return;
-    }
-    drawer.classList.remove("is-open");
-    document.body.classList.remove("is-locked", "menu-open");
-    if (lenis) lenis.start();
-    window.setTimeout(finishDrawerClose, 420);
+    window.clearTimeout(drawerCloseTimer);
+    drawerCloseTimer = window.setTimeout(function () {
+      if (!drawer.classList.contains("is-open")) drawer.hidden = true;
+      document.body.classList.remove("menu-closing");
+    }, reduced ? 0 : 300);
   }
 
   (function chrome() {
     headerState();
-    if (!burger || !drawer) return;
+    if (!burger || !drawer || !drawerClose) return;
+    var groupTabs = $$(".drawer__group", drawer);
+    var groupPanels = $$(".drawer__panel", drawer);
+    var initialGroup = Math.max(0, Math.min(groupTabs.length - 1, Number(drawer.dataset.initialGroup) || 0));
+    var activeGroup = -1;
+    var hoverTimer = null;
+    var mobileMenu = window.matchMedia("(max-width:900px)");
+
+    function selectGroup(index) {
+      if ((index !== -1 && !groupTabs[index]) || index === activeGroup) return;
+      activeGroup = index;
+      groupTabs.forEach(function (tab, i) {
+        var selected = i === index;
+        tab.classList.toggle("is-active", selected);
+        tab.setAttribute("aria-expanded", String(selected));
+        groupPanels[i].hidden = !selected;
+      });
+    }
+    selectGroup(initialGroup);
+    groupTabs.forEach(function (tab, index) {
+      var expandedAtPointerDown = false;
+      tab.addEventListener("pointerdown", function () {
+        expandedAtPointerDown = index === activeGroup;
+      });
+      tab.addEventListener("focus", function () { selectGroup(index); });
+      tab.addEventListener("click", function (e) {
+        // A touch or pointer press focuses first. Remember the state before
+        // focus so a tap on a closed group opens it instead of closing it.
+        var collapse = mobileMenu.matches &&
+          (e.detail === 0 ? index === activeGroup : expandedAtPointerDown);
+        selectGroup(collapse ? -1 : index);
+        expandedAtPointerDown = false;
+      });
+      tab.addEventListener("mouseenter", function () {
+        if (mobileMenu.matches || !window.matchMedia("(hover: hover)").matches) return;
+        if (groupPanels[activeGroup] && groupPanels[activeGroup].contains(document.activeElement)) return;
+        window.clearTimeout(hoverTimer);
+        hoverTimer = window.setTimeout(function () {
+          if (drawer.classList.contains("is-open") && tab.matches(":hover")) selectGroup(index);
+        }, 65);
+      });
+      tab.addEventListener("mouseleave", function () { window.clearTimeout(hoverTimer); });
+      tab.addEventListener("keydown", function (e) {
+        var next = index;
+        if (e.key === "ArrowDown" || e.key === "ArrowRight") next = (index + 1) % groupTabs.length;
+        else if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = (index + groupTabs.length - 1) % groupTabs.length;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = groupTabs.length - 1;
+        else return;
+        e.preventDefault();
+        groupTabs[next].focus({ preventScroll:true });
+      });
+    });
     burger.addEventListener("click", function () {
       if (drawer.classList.contains("is-open")) { closeDrawer(); return; }
+      window.clearTimeout(drawerCloseTimer);
+      document.body.classList.remove("menu-closing");
+      selectGroup(initialGroup);
       drawer.hidden = false;
-      requestAnimationFrame(function () { drawer.classList.add("is-open"); });
+      // Flush the hidden state so the opacity transition starts on this open.
+      drawer.offsetWidth;
+      drawer.classList.add("is-open");
       burger.setAttribute("aria-expanded", "true");
       burger.setAttribute("aria-label", "Close menu");
-      // is-locked is the scroll lock and nothing more — the intro curtain uses
-      // it too. menu-open is what turns the header solid, and only the drawer
-      // sets it. See the note on body.menu-open .header in pages.css.
       document.body.classList.add("is-locked", "menu-open");
       if (lenis) lenis.stop();
-      if (animate) {
-        var pieces = $$(".drawer__grid > div, .drawer__utility, .drawer__cta", drawer);
-        if (drawerMotion) drawerMotion.kill();
-        drawerMotion = gsap.timeline({ paused:true, defaults:{ ease:"power3.out" } });
-        drawerMotion
-          .fromTo(drawer,
-            { autoAlpha:0, y:-10 },
-            { autoAlpha:1, y:0, duration:.42, overwrite:"auto" }, 0)
-          .fromTo(pieces,
-            { autoAlpha:0, y:16 },
-            { autoAlpha:1, y:0, duration:.5, stagger:.045, overwrite:"auto" }, .08)
-          .play(0);
-      }
+      isolateDrawer(true);
+      requestAnimationFrame(function () {
+        if (drawer.classList.contains("is-open")) drawerClose.focus({ preventScroll: true });
+      });
     });
+    drawerClose.addEventListener("click", closeDrawer);
     $$("a", drawer).forEach(function (a) { a.addEventListener("click", closeDrawer); });
     document.addEventListener("keydown", function (e) {
       if (!drawer.classList.contains("is-open")) return;
       if (e.key === "Escape") { e.preventDefault(); closeDrawer(); return; }
       if (e.key !== "Tab") return;
-      var items = [burger].concat($$("a[href], button", drawer).filter(function (el) {
-        return !el.disabled && el.getClientRects().length;
-      }));
+      var items = $$("a[href], button", drawer).filter(function (el) {
+        return !el.disabled && el.tabIndex >= 0 && el.getClientRects().length;
+      });
       var i = items.indexOf(document.activeElement);
-      e.preventDefault();
-      items[(i + (e.shiftKey ? items.length - 1 : 1)) % items.length].focus();
-    });
-    document.addEventListener("focusin", function (e) {
-      if (drawer.classList.contains("is-open") && e.target !== burger && !drawer.contains(e.target)) {
-        burger.focus({ preventScroll: true });
+      if (!items.length) return;
+      if (i === -1 || (e.shiftKey && i === 0) || (!e.shiftKey && i === items.length - 1)) {
+        e.preventDefault();
+        items[e.shiftKey ? items.length - 1 : 0].focus();
       }
     });
-    window.addEventListener("resize", function () { if (window.innerWidth > 1040) closeDrawer(); }, { passive: true });
+    document.addEventListener("focusin", function (e) {
+      if (drawer.classList.contains("is-open") && !drawer.contains(e.target)) {
+        drawerClose.focus({ preventScroll: true });
+      }
+    });
   })();
 
   /* ==========================================================

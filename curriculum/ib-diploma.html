@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="../assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="../assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/fonts.css?b=102">
-<link rel="stylesheet" href="../assets/css/cirs.css?b=102">
-<link rel="stylesheet" href="../assets/css/pages.css?b=102">
+<link rel="stylesheet" href="../assets/css/fonts.css?b=102-ibdp-1">
+<link rel="stylesheet" href="../assets/css/cirs.css?b=102-ibdp-1">
+<link rel="stylesheet" href="../assets/css/pages.css?b=102-ibdp-1">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,9 +37,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="../assets/css/ibdp.css?b=102">
-<link rel="stylesheet" href="../assets/css/typography.css?b=102">
-<link rel="stylesheet" href="../assets/css/footer.css?b=102-footer-1">
+<link rel="stylesheet" href="../assets/css/ibdp.css?b=102-ibdp-1">
+<link rel="stylesheet" href="../assets/css/typography.css?b=102-ibdp-1">
+<link rel="stylesheet" href="../assets/css/footer.css?b=102-ibdp-1-footer-1">
+<link rel="stylesheet" href="../assets/css/drawer.css?b=102-ibdp-1-drawer-5">
 </head>
 
 <body class="ibdp">
@@ -205,20 +206,41 @@
     </div>
   </div>
 </header>
-<div class="drawer" id="drawer" hidden>
-  <nav class="drawer__grid" aria-label="All pages">
-    <div>
-      <p class="sc" id="dnav-vision">Vision</p>
-      <ul aria-labelledby="dnav-vision">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="0" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="../index.html" aria-label="Chinmaya International Residential School home">
+        <img src="../assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="true" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button">
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
         <li><a href="../founder.html">Founder</a></li>
         <li><a href="../why-cirs.html">Why CIRS</a></li>
         <li><a href="../school-history.html">School History</a></li>
         <li><a href="../leadership.html">Leadership</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-student-life">Student Life</p>
-      <ul aria-labelledby="dnav-student-life">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
         <li><a href="../the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
         <li><a href="../curriculum.html">Curriculum</a></li>
         <li><a href="../our-results.html">Our Results</a></li>
@@ -226,53 +248,72 @@
         <li><a href="../our-laurels.html">Our Laurels</a></li>
         <li><a href="../math-challenge.html">Math Challenge</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
-      <ul aria-labelledby="dnav-literary-excellence">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
         <li><a href="../crossroads.html">Crossroads</a></li>
         <li><a href="../blog.html">CIRS Blog</a></li>
         <li><a href="../creative-writing.html">Creative Writing</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
-      <ul aria-labelledby="dnav-art-culture-music">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
         <li><a href="../captures.html">CIRS Captures</a></li>
         <li><a href="../art-attack.html">CIRS Art Attack</a></li>
         <li><a href="../festivals.html">CIRS Festivals</a></li>
         <li><a href="../theatre.html">CIRS Theatre</a></li>
         <li><a href="../cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-connect">Connect</p>
-      <ul aria-labelledby="dnav-connect">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
         <li><a href="../school-info.html">School Information</a></li>
         <li><a href="../news.html">News</a></li>
         <li><a href="../admissions.html">Admissions</a></li>
         <li><a href="../parent-portal.html">Parent Portal</a></li>
         <li><a href="../alumni.html">Alumni</a></li>
       </ul>
-    </div>
-  </nav>
-  <div class="drawer__utility">
-    <a href="../alumni.html">Alumni</a>
-    <a href="../school-info.html#calendar">Calendar</a>
-    <a href="tel:+914222613300">+91 422 261 3300</a>
-    <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+    </section>
   </div>
-  <div class="drawer__cta">
-    <a class="btn btn--primary btn--lg" href="../admissions.html#apply">Apply for admission</a>
-    <a class="btn btn--outline btn--lg" href="../admissions.html#visit">Book a campus visit</a>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="../admissions.html#apply">Apply for admission</a>
+        <a href="../admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="../alumni.html">Alumni</a>
+        <a href="../school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
   </div>
 </div>
 <main id="main">
 <section class="pagehead on-purple" id="top" data-ground="#1E1626">
   <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">International Baccalaureate, Geneva</span></p>
+    <p class="marker"><span class="sc">IB Diploma at CIRS</span></p>
     <h1 class="serif" data-split>IB Diploma Programme, <em>Grades XI and XII.</em></h1>
-    <p class="lead">A rigorous and holistic two years that develop independent thinking, research, communication and a global perspective.</p>
+    <p class="lead">Study six subject groups alongside the Diploma core. Ask the school which subjects and levels are available for your entry year.</p>
+    <p class="pagehead__cta">
+      <a class="btn btn--primary btn--lg" href="#groups">See the subject groups</a>
+      <a class="btn btn--ghost btn--lg" href="../curriculum.html#pathways">Compare pathways</a>
+    </p>
   </div>
 </section>
 <nav class="jump" aria-label="On this page">
@@ -283,369 +324,268 @@
     </summary>
     <div class="jump__panel" id="jumpPanel">
       <p aria-hidden="true">On this page</p>
-      <a href="#about">The seventh school in India</a>
-      <a href="#groups">The shape of the two years</a>
-      <a href="#core">What holds the six together</a>
-      <a href="#assessment">How the Diploma is scored</a>
-      <a href="#learning">How the work is done</a>
-      <a href="#residential">A residential campus</a>
+      <a href="#about">Diploma at CIRS</a>
+      <a href="#groups">Subject groups</a>
+      <a href="#core">The DP core</a>
+      <a href="#assessment">Assessment</a>
+      <a href="#at-cirs">Life at CIRS</a>
       <a href="#university">After the Diploma</a>
-      <a href="#results">Final examination, May 2026</a>
-      <a href="#experience">What the two years look like here</a>
+      <a href="#results">Published results</a>
+      <a href="#next">Plan your next step</a>
     </div>
   </details>
 </nav>
-<nav class="crumbs" aria-label="Breadcrumb">
-  <div class="wrap">
-    <ol class="crumbs__list">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../curriculum.html">Curriculum</a></li>
-      <li><span aria-current="page">IB Diploma</span></li>
-    </ol>
-  </div>
-</nav>
-
-<section class="section" id="about">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">The seventh school in India</span></p>
-      <h2 class="serif h2" data-split>The IB Diploma <em>at CIRS.</em></h2>
-      <p class="lead">CIRS was the seventh school in India authorised by the International
-        Baccalaureate, Geneva. The Diploma runs over the final two years &mdash; Grades XI and
-        XII &mdash; and is taken here as the alternative to the CBSE pathway the school has
-        offered since Grade V.</p>
+<div class="ibdp-programme">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <div class="wrap">
+      <ol class="crumbs__list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../curriculum.html">Curriculum</a></li>
+        <li><span aria-current="page">IB Diploma</span></li>
+      </ol>
     </div>
+  </nav>
 
-    <div class="ib-intro">
-      <div class="ib-intro__text rv">
-        <p class="copy">The programme is built to be demanding in a particular way. A student
-          takes six subjects rather than a stream, three or four of them at Higher Level, and
-          carries all six to the end. The breadth is the point: a scientist keeps writing, a
-          writer keeps up mathematics, and both keep a second language.</p>
-        <p class="copy">Around those six sit three requirements that belong to no single
-          subject &mdash; an independent research essay, a course on the nature of knowledge
-          itself, and a commitment to creativity, activity and service. They are what turn six
-          subjects into a diploma.</p>
-        <p class="copy">Every IB teacher here is IB-trained, and several serve as examiners for
-          the programme. University counselling runs alongside the two years through Naviance,
-          beginning a year earlier in Grade X.</p>
+  <section class="section ibdp-overview" id="about">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="marker"><span class="sc">Diploma at CIRS</span></p>
+        <h2 class="serif h2" data-split>Breadth, depth and work that is your own.</h2>
+        <p class="lead">At CIRS, the IB Diploma Programme is an option for Grades XI and XII.
+          It combines six subjects with a required core of research, reflection and activity.</p>
       </div>
-      <figure class="ib-intro__fig img-reveal rv">
-        <img src="../assets/img/senior-school.jpg"
-             alt="Senior School students at CIRS between classes"
-             width="1200" height="1500" loading="lazy">
-      </figure>
+
+      <div class="ib-intro">
+        <div class="ib-intro__text rv">
+          <p class="copy">Students choose from six subject groups, studying three or four subjects
+            at Higher Level (HL) and the rest at Standard Level (SL). The two levels differ in
+            scope, while both contribute to the Diploma score.</p>
+          <p class="copy">Alongside those subjects, every Diploma student completes Theory of
+            Knowledge, the Extended Essay and Creativity, Activity, Service. Together they
+            invite students to test ideas, pursue a question independently and take part in
+            experiences beyond their courses.</p>
+          <p class="copy">The IB sets the programme framework. The subjects and levels available
+            at CIRS for a particular intake need to be confirmed with the school.</p>
+          <p class="ib-cta">
+            <a class="btn btn--primary" href="#groups">Explore the subject groups</a>
+            <a class="ibdp-textlink" href="../curriculum.html#pathways">Compare the CIRS pathways</a>
+          </p>
+        </div>
+        <figure class="ib-intro__fig img-reveal rv">
+          <img src="../assets/img/senior-school.jpg"
+               alt="CIRS students working with electronic components and a laptop in a classroom"
+               width="1200" height="1500" loading="lazy" decoding="async">
+        </figure>
+      </div>
     </div>
+  </section>
 
-    <p class="ib-cta rv">
-      <a class="btn btn--primary" href="#groups">Explore the programme</a>
-      <a class="btn btn--outline" href="../admissions.html">Enquire about admissions</a>
-    </p>
-  </div>
-</section>
+  <section class="section on-paper-2" id="groups">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="marker"><span class="sc">Subject groups</span></p>
+        <h2 class="serif h2" data-split>Six groups keep the course broad.</h2>
+        <p class="lead">The IB groups describe the shape of the Diploma, not a list of subjects
+          currently offered by CIRS. An Arts subject may be replaced by an additional language,
+          individuals and societies, or sciences subject.</p>
+      </div>
 
-<section class="section on-paper-2" id="groups">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">The shape of the two years</span></p>
-      <h2 class="serif h2" data-split>Six subject groups, <em>three or four at Higher Level.</em></h2>
-      <p class="lead">A student takes one subject from each group, so no one leaves a discipline
-        behind at sixteen.</p>
+      <ol class="ibgrid">
+        <li class="ibgrid__cell rv">
+          <p class="ibgrid__n">Group 1</p>
+          <h3 class="serif h3">Studies in language and literature</h3>
+          <p class="copy">Read, interpret and write about language and texts.</p>
+        </li>
+        <li class="ibgrid__cell rv">
+          <p class="ibgrid__n">Group 2</p>
+          <h3 class="serif h3">Language acquisition</h3>
+          <p class="copy">Develop understanding and communication in an additional language.</p>
+        </li>
+        <li class="ibgrid__cell rv">
+          <p class="ibgrid__n">Group 3</p>
+          <h3 class="serif h3">Individuals and societies</h3>
+          <p class="copy">Investigate people, institutions and the world they shape.</p>
+        </li>
+        <li class="ibgrid__cell rv">
+          <p class="ibgrid__n">Group 4</p>
+          <h3 class="serif h3">Sciences</h3>
+          <p class="copy">Examine the natural world through evidence and inquiry.</p>
+        </li>
+        <li class="ibgrid__cell rv">
+          <p class="ibgrid__n">Group 5</p>
+          <h3 class="serif h3">Mathematics</h3>
+          <p class="copy">Study mathematical ideas, reasoning and applications.</p>
+        </li>
+        <li class="ibgrid__cell rv">
+          <p class="ibgrid__n">Group 6</p>
+          <h3 class="serif h3">The arts</h3>
+          <p class="copy">Study an arts subject, or an additional permitted subject in
+            languages, individuals and societies or sciences.</p>
+        </li>
+      </ol>
+
+      <div class="ibdp-availability rv" role="note">
+        <div>
+          <h3 class="serif h3">Ask for the current CIRS subject list.</h3>
+          <p class="copy">Before planning a combination, ask the IB Coordinator which subjects
+            CIRS offers for your entry year, which are available at HL or SL, and whether there
+            are prerequisites or timetable limits.</p>
+        </div>
+        <div class="ibdp-availability__links">
+          <a class="btn btn--outline" href="mailto:info@cirschool.org?subject=Current%20IB%20Diploma%20subjects%20and%20levels">Ask about subjects and levels</a>
+          <a class="ibdp-textlink" href="https://www.ibo.org/programmes/diploma-programme/curriculum/">Read the IB curriculum framework</a>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <ol class="ibgrid">
-      <li class="ibgrid__cell rv">
-        <p class="ibgrid__n">01</p>
-        <h3 class="serif h3">Studies in Language &amp; Literature</h3>
-        <p class="copy">The student&rsquo;s strongest language, read closely and written in
-          seriously.</p>
-      </li>
-      <li class="ibgrid__cell rv">
-        <p class="ibgrid__n">02</p>
-        <h3 class="serif h3">Language Acquisition</h3>
-        <p class="copy">A second language, carried to the end of the Diploma rather than
-          dropped.</p>
-      </li>
-      <li class="ibgrid__cell rv">
-        <p class="ibgrid__n">03</p>
-        <h3 class="serif h3">Individuals &amp; Societies</h3>
-        <p class="copy">How people, institutions and economies behave, studied with evidence.</p>
-      </li>
-      <li class="ibgrid__cell rv">
-        <p class="ibgrid__n">04</p>
-        <h3 class="serif h3">Sciences</h3>
-        <p class="copy">Laboratory work and the reasoning behind it, assessed together.</p>
-      </li>
-      <li class="ibgrid__cell rv">
-        <p class="ibgrid__n">05</p>
-        <h3 class="serif h3">Mathematics</h3>
-        <p class="copy">Taken by every candidate, at the level the student&rsquo;s course
-          demands.</p>
-      </li>
-      <li class="ibgrid__cell rv">
-        <p class="ibgrid__n">06</p>
-        <h3 class="serif h3">The Arts</h3>
-        <p class="copy">A made or performed body of work &mdash; or, instead, a second subject
-          from another group.</p>
-      </li>
-    </ol>
+  <section class="section" id="core">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="marker"><span class="sc">The DP core</span></p>
+        <h2 class="serif h2" data-split>Three requirements connect the subjects.</h2>
+        <p class="lead">The Diploma core is studied alongside the six subjects throughout
+          the programme.</p>
+      </div>
 
-    <p class="note rv" style="margin-top:28px">At CIRS the Diploma offers a range of subjects in
-      combinations of six, including two mandatory languages and Mathematics. <em>[Placeholder
-      &mdash; the subjects offered in each of the six groups, and which are available at Higher
-      Level, to be supplied by the IB Coordinator.]</em></p>
-  </div>
-</section>
-
-<section class="section" id="core">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">What holds the six together</span></p>
-      <h2 class="serif h2" data-split>The core: <em>an essay, a question and a commitment.</em></h2>
+      <div class="ibcore">
+        <article class="ibcore__card rv">
+          <p class="ibcore__tag"><span class="sc">TOK</span></p>
+          <h3 class="serif h3">Theory of Knowledge</h3>
+          <p class="copy">Students reflect on how knowledge is made and how we know what
+            we claim to know.</p>
+        </article>
+        <article class="ibcore__card rv">
+          <p class="ibcore__tag"><span class="sc">EE</span></p>
+          <h3 class="serif h3">Extended Essay</h3>
+          <p class="copy">Students pursue an independent research question and develop
+            an extended piece of academic writing.</p>
+        </article>
+        <article class="ibcore__card rv">
+          <p class="ibcore__tag"><span class="sc">CAS</span></p>
+          <h3 class="serif h3">Creativity, Activity, Service</h3>
+          <p class="copy">Students take part in experiences across all three strands.
+            CAS is required for the Diploma but does not add points to the score.</p>
+        </article>
+      </div>
     </div>
+  </section>
 
-    <div class="ibcore">
-      <article class="ibcore__card rv">
-        <p class="ibcore__tag"><span class="sc">TOK</span></p>
-        <h3 class="serif h3">Theory of Knowledge</h3>
-        <p class="copy">A course about how knowledge is made rather than about any one subject:
-          what counts as evidence, how a claim is justified, and why disciplines disagree.
-          Students examine and reflect on what they are being taught everywhere else.</p>
-      </article>
-      <article class="ibcore__card rv">
-        <p class="ibcore__tag"><span class="sc">EE</span></p>
-        <h3 class="serif h3">Extended Essay</h3>
-        <p class="copy">An independent piece of research on a question the student chooses and
-          frames, supervised but not directed. It is the first time most students carry a piece
-          of academic writing from question to conclusion alone.</p>
-      </article>
-      <article class="ibcore__card rv">
-        <p class="ibcore__tag"><span class="sc">CAS</span></p>
-        <h3 class="serif h3">Creativity, Activity, Service</h3>
-        <p class="copy">Learning that is not assessed by examination &mdash; something made,
-          something done physically, and something given to people outside the school. On a
-          residential campus this runs through the ordinary week rather than beside it.</p>
-      </article>
+  <section class="section on-paper-2" id="assessment">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="marker"><span class="sc">Assessment</span></p>
+        <h2 class="serif h2" data-split>How the Diploma is assessed.</h2>
+        <p class="lead">The six subjects and two scored core components contribute to a
+          possible total of 45 points. The IB also sets minimum conditions for the award.</p>
+      </div>
+
+      <dl class="ibscore">
+        <div class="rv">
+          <dt>7</dt>
+          <dd><b>Points per subject</b>Each of the six subjects is graded from 1 to 7,
+            contributing up to 42 points together.</dd>
+        </div>
+        <div class="rv">
+          <dt>+3</dt>
+          <dd><b>Possible core points</b>Theory of Knowledge and the Extended Essay can
+            contribute up to three further points.</dd>
+        </div>
+        <div class="rv">
+          <dt>45</dt>
+          <dd><b>Maximum total</b>CAS is required for the award of the Diploma but does
+            not contribute points.</dd>
+        </div>
+      </dl>
+
+      <div class="ibdp-assessment-detail">
+        <div class="rv">
+          <h3 class="serif h3">Coursework and examinations</h3>
+          <p class="copy">Most courses include written examinations at the end of the Diploma.
+            Depending on the subject, other work may be assessed externally or marked by
+            teachers and moderated by the IB.</p>
+        </div>
+        <div class="rv">
+          <h3 class="serif h3">Award conditions</h3>
+          <p class="copy">A candidate needs at least 24 points and must meet the IB&rsquo;s
+            other minimum requirements, including completion of the Diploma core. The
+            current conditions are set by the IB.</p>
+          <a class="ibdp-textlink" href="https://www.ibo.org/programmes/diploma-programme/assessment-and-exams/understanding-ib-assessment/">Read the IB assessment guide</a>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section on-paper-2" id="assessment">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">How the Diploma is scored</span></p>
-      <h2 class="serif h2" data-split>Forty-five points, <em>and how they are earned.</em></h2>
-      <p class="lead">Every subject is marked on the same scale, set by the International
-        Baccalaureate and moderated worldwide, so a CIRS score means what it means anywhere.</p>
-    </div>
-
-    <dl class="ibscore">
+  <section class="section ibdp-context" id="at-cirs">
+    <span class="ibdp-anchor" id="learning" aria-hidden="true"></span>
+    <span class="ibdp-anchor" id="residential" aria-hidden="true"></span>
+    <span class="ibdp-anchor" id="experience" aria-hidden="true"></span>
+    <div class="wrap ibdp-context__layout">
       <div class="rv">
-        <dt>7</dt>
-        <dd><b>Points per subject</b>Each of the six subjects is graded from 1 to 7, for up to 42
-          points in all.</dd>
+        <p class="marker"><span class="sc">Life at CIRS</span></p>
+        <h2 class="serif h2" data-split>The programme has a campus around it.</h2>
       </div>
+      <div class="ibdp-context__body rv">
+        <p class="lead">Students take the Diploma within the wider life of a residential
+          school. Read about the campus, houses, sport, arts and service in THE CIRS
+          EXPERIENCE.</p>
+        <p class="copy">Ask Admissions who can explain current boarding arrangements
+          and academic support for a Grade XI applicant.</p>
+        <a class="ibdp-textlink" href="../the-cirs-experience.html">Explore THE CIRS EXPERIENCE</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-paper-2 ibdp-context" id="university">
+    <div class="wrap ibdp-context__layout">
       <div class="rv">
-        <dt>+3</dt>
-        <dd><b>Points from the core</b>Theory of Knowledge and the Extended Essay together add up
-          to three further points.</dd>
+        <p class="marker"><span class="sc">After the Diploma</span></p>
+        <h2 class="serif h2" data-split>Plan subject choices with the next step in mind.</h2>
       </div>
+      <div class="ibdp-context__body rv">
+        <p class="lead">Subject combinations can affect university entry requirements.
+          Ask the IB Coordinator which combinations CIRS offers and how the school
+          supports applications for your intended entry year.</p>
+        <p class="copy">Current counselling services, timelines and graduate destinations
+          still need confirmation from the school.</p>
+        <a class="ibdp-textlink" href="mailto:info@cirschool.org?subject=IB%20Diploma%20university%20guidance">Ask about university guidance</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ibdp-results" id="results">
+    <div class="wrap ibdp-results__layout">
       <div class="rv">
-        <dt>45</dt>
-        <dd><b>The highest possible score</b>Reached by only a small share of candidates
-          worldwide in any session.</dd>
+        <p class="marker"><span class="sc">Published results</span></p>
+        <h2 class="serif h2" data-split>See the school&rsquo;s reported IB results.</h2>
       </div>
-    </dl>
-
-    <div class="ib-intro" style="margin-top:clamp(28px,3.6vw,48px);align-items:start">
-      <div class="ib-intro__text rv">
-        <h3 class="serif h3">Coursework and examinations</h3>
-        <p class="copy">Each subject is assessed in two ways. Internal assessment &mdash;
-          laboratory investigations, oral work, portfolios, a mathematical exploration &mdash; is
-          done over the two years, marked by the school&rsquo;s teachers and moderated by the IB.
-          External assessment is the written examinations, taken in May of Grade XII and marked by
-          IB examiners around the world.</p>
-      </div>
-      <div class="ib-intro__text rv">
-        <h3 class="serif h3">What it takes to be awarded the Diploma</h3>
-        <p class="copy">A candidate needs at least 24 points, with the core completed &mdash; the
-          Extended Essay submitted, Theory of Knowledge assessed and CAS fulfilled &mdash; and
-          must meet the IB&rsquo;s conditions on Higher and Standard Level results. The Diploma is
-          awarded on the whole programme, not on any one subject.</p>
+      <div class="ibdp-results__body rv">
+        <p class="copy">The Results page presents CIRS&rsquo;s school-reported Diploma
+          examination figures. For a dated source report or information about graduate
+          destinations, ask the school directly.</p>
+        <a class="btn btn--outline" href="../our-results.html#ib-results">Read IB results</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="learning">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">How the work is done</span></p>
-      <h2 class="serif h2" data-split>Learning beyond <em>the classroom.</em></h2>
-      <p class="lead">The Diploma is assessed on what a student can do unaided, so the habits
-        below are taught rather than assumed.</p>
-    </div>
-
-    <ul class="ibskills">
-      <li class="ibskills__item rv"><b>Inquiry</b><span>Starting from a question worth asking.</span></li>
-      <li class="ibskills__item rv"><b>Research</b><span>Finding sources, and weighing them.</span></li>
-      <li class="ibskills__item rv"><b>Critical thinking</b><span>Testing a claim before accepting it.</span></li>
-      <li class="ibskills__item rv"><b>Collaboration</b><span>Work that depends on other people.</span></li>
-      <li class="ibskills__item rv"><b>Communication</b><span>Writing and speaking to be understood.</span></li>
-      <li class="ibskills__item rv"><b>Reflection</b><span>Reading back over one&rsquo;s own thinking.</span></li>
-      <li class="ibskills__item rv"><b>Independent learning</b><span>Carrying work without being chased.</span></li>
-      <li class="ibskills__item rv"><b>Problem solving</b><span>Method when the answer is not given.</span></li>
-    </ul>
-  </div>
-</section>
-
-<section class="section on-paper-2" id="residential">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">A residential campus</span></p>
-      <h2 class="serif h2" data-split>Learning, living and <em>growing together.</em></h2>
-    </div>
-
-    <div class="ib-intro">
-      <figure class="ib-intro__fig img-reveal rv">
-        <img src="../assets/img/boarding.jpg"
-             alt="A boarding house at CIRS in the evening"
-             width="1600" height="900" loading="lazy">
-      </figure>
-      <div class="ib-intro__text rv">
-        <p class="copy">The Diploma asks for sustained independent work over two years, and a
-          boarding school can give that a shape a day school cannot: study hours that are part
-          of the day rather than negotiated at home, and teachers on the same campus when a
-          piece of work stalls.</p>
-        <p class="copy">The rest of the week is not suspended for it. Houses, sport, the arts,
-          clubs and the school&rsquo;s service work continue through Grades XI and XII &mdash; and
-          for a student in CAS they are not a distraction from the programme but part of it.</p>
-        <p class="copy">Value education runs across every grade here alongside the academic
-          timetable, the senior years included.</p>
+  <section class="section ibdp-next on-purple" id="next" data-ground="#1E1626">
+    <div class="wrap ibdp-next__layout">
+      <div class="rv">
+        <p class="marker"><span class="sc">Plan your next step</span></p>
+        <h2 class="serif h2" data-split>Considering the Diploma for Grade XI?</h2>
+      </div>
+      <div class="ibdp-next__body rv">
+        <p class="lead">Ask the school to confirm subjects and levels, entry requirements,
+          assessment arrangements and dates for your intended year.</p>
+        <p class="ib-cta">
+          <a class="btn btn--primary" href="mailto:info@cirschool.org?subject=IB%20Diploma%20Grade%20XI%20enquiry">Ask about the Diploma</a>
+          <a class="btn btn--ghost" href="../admissions.html">Read admissions guidance</a>
+        </p>
+        <a class="ibdp-textlink" href="../curriculum.html">Back to Curriculum</a>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section" id="university">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">After the Diploma</span></p>
-      <h2 class="serif h2" data-split>Preparing for university <em>and beyond.</em></h2>
-      <p class="lead">University counselling at CIRS runs through Naviance and begins in Grade X,
-        a year before the Diploma starts.</p>
-    </div>
-
-    <div class="ib-intro">
-      <div class="ib-intro__text rv">
-        <p class="copy">Much of what an application asks for, the programme has already required:
-          a research essay written and defended, coursework carried without supervision, a second
-          language, and two years of evidence that the student can manage their own time.</p>
-        <p class="copy">The Extended Essay in particular is the piece students draw on most &mdash;
-          it is the closest thing school offers to the work a first year at university asks
-          for.</p>
-        <p class="copy"><em>[Placeholder &mdash; the universities recent CIRS Diploma candidates
-          have gone on to, and the counselling calendar through Grades X to XII, to be supplied by
-          the school.]</em></p>
-      </div>
-      <figure class="ib-intro__fig img-reveal rv">
-        <img src="../assets/img/adm-examination.jpg"
-             alt="Candidates seated for an examination at CIRS"
-             width="1000" height="750" loading="lazy">
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section class="section on-paper-2" id="results">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Final examination, May 2026</span></p>
-      <h2 class="serif h2" data-split>Twenty-four candidates, <em>twenty-four diplomas.</em></h2>
-      <p class="lead">Every registered CIRS candidate was awarded the IB Diploma in the most recent
-        session.</p>
-    </div>
-
-    <dl class="cbresults">
-      <div class="cbresults__row rv">
-        <dt>Diplomas awarded</dt>
-        <dd><b>24 / 24</b> <span>All registered candidates</span></dd>
-      </div>
-      <div class="cbresults__row rv">
-        <dt>Average score</dt>
-        <dd><b>39.4</b> Diploma points <span>Eight students between 36 and 39 points</span></dd>
-      </div>
-      <div class="cbresults__row rv">
-        <dt>40 points or above</dt>
-        <dd><b>12</b> students <span>Half of the cohort</span></dd>
-      </div>
-      <div class="cbresults__row rv">
-        <dt>Highest score</dt>
-        <dd><b>45 / 45</b> <span>The highest possible score, achieved by two students</span></dd>
-      </div>
-    </dl>
-
-    <p class="copy rv" style="margin-top:28px">A CIRS student was among the IB World Toppers in 2019,
-      with a perfect 45, and another joined them in 2024. The full record, and where students went next, is
-      on <a href="../our-results.html">Our Results</a>.</p>
-  </div>
-</section>
-
-<section class="section" id="experience">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">What the two years look like here</span></p>
-      <h2 class="serif h2" data-split>The CIRS <em>IB experience.</em></h2>
-    </div>
-
-    <div class="ibcore ibcore--four">
-      <article class="ibcore__card rv">
-        <h3 class="serif h3">IB-trained faculty</h3>
-        <p class="copy">Every IB teacher at CIRS is IB-trained, and several serve as examiners
-          for the programme.</p>
-      </article>
-      <article class="ibcore__card rv">
-        <h3 class="serif h3">Research and inquiry</h3>
-        <p class="copy">The Extended Essay and Theory of Knowledge put a student&rsquo;s own
-          question at the centre of the two years.</p>
-      </article>
-      <article class="ibcore__card rv">
-        <h3 class="serif h3">Residential learning</h3>
-        <p class="copy">Study hours, houses and teachers on one hundred acres in the Siruvani
-          foothills.</p>
-      </article>
-      <article class="ibcore__card rv">
-        <h3 class="serif h3">University counselling</h3>
-        <p class="copy">Naviance from Grade X, running alongside the Diploma rather than after
-          it.</p>
-      </article>
-    </div>
-
-    <div class="ib-end rv">
-      <h2 class="serif h3">Considering the Diploma for Grade XI?</h2>
-      <p class="copy">Registration, the entrance examination and the dates for the coming year
-        are on the Admissions page. The CBSE pathway and the two curricula side by side are on
-        the Curriculum page.</p>
-      <p class="ib-cta">
-        <a class="btn btn--primary" href="../admissions.html">Admissions</a>
-        <a class="btn btn--outline" href="../curriculum.html">Back to Curriculum</a>
-      </p>
-    </div>
-  </div>
-</section>
-<section class="uc">
-  <div class="wrap uc__inner">
-    <span class="uc__mark" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
-    </span>
-    <div>
-      <p class="uc__label">Under construction</p>
-      <p class="uc__text">This page is still being written. Photographs, names and figures marked
-        in brackets are placeholders awaiting the school, and more will be added here in the weeks
-        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
-    </div>
-  </div>
-</section>
+  </section>
+</div>
 </main>
 <section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
   <picture class="closing-scene__picture" aria-hidden="true">
@@ -750,11 +690,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="../assets/vendor/gsap.min.js?b=102" defer></script>
-<script src="../assets/vendor/ScrollTrigger.min.js?b=102" defer></script>
-<script src="../assets/vendor/lenis.min.js?b=102" defer></script>
-<script src="../assets/js/cirs.js?b=102" defer></script>
-<script src="../assets/js/pages.js?b=102" defer></script>
-<script src="../assets/js/footer.js?b=102-footer-1" defer></script>
+<script src="../assets/vendor/gsap.min.js?b=102-ibdp-1" defer></script>
+<script src="../assets/vendor/ScrollTrigger.min.js?b=102-ibdp-1" defer></script>
+<script src="../assets/vendor/lenis.min.js?b=102-ibdp-1" defer></script>
+<script src="../assets/js/cirs.js?b=102-ibdp-1-drawer-5" defer></script>
+<script src="../assets/js/pages.js?b=102-ibdp-1" defer></script>
+<script src="../assets/js/footer.js?b=102-ibdp-1-footer-1" defer></script>
 </body>
 </html>

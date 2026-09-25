@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Creative Writing</title>
-<meta name="description" content="Essays, opinion and reflection by students of Chinmaya International Residential School, published in The Crossroads.">
+<title>Creative Writing | Words become worlds. | CIRS</title>
+<meta name="description" content="A curated anthology of poetry by students of Chinmaya International Residential School.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/creative-writing.html">
 <!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
@@ -16,19 +16,19 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Creative Writing">
-<meta property="og:description" content="Essays, opinion and reflection by students of Chinmaya International Residential School, published in The Crossroads.">
+<meta property="og:title" content="Creative Writing | Words become worlds. | CIRS">
+<meta property="og:description" content="A curated anthology of poetry by students of Chinmaya International Residential School.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Creative Writing">
-<meta name="twitter:description" content="Essays, opinion and reflection by students of Chinmaya International Residential School, published in The Crossroads.">
+<meta name="twitter:title" content="Creative Writing | Words become worlds. | CIRS">
+<meta name="twitter:description" content="A curated anthology of poetry by students of Chinmaya International Residential School.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102">
-<link rel="stylesheet" href="assets/css/pages.css?b=102">
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-anthology-2">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-anthology-2">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-anthology-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,9 +37,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/cwriting.css?b=102">
-<link rel="stylesheet" href="assets/css/typography.css?b=102">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-footer-1">
+<link rel="stylesheet" href="assets/css/cwriting.css?b=102-anthology-2">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-anthology-2">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-anthology-2-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-anthology-2-drawer-5">
 </head>
 
 <body class="cwriting">
@@ -205,20 +206,41 @@
     </div>
   </div>
 </header>
-<div class="drawer" id="drawer" hidden>
-  <nav class="drawer__grid" aria-label="All pages">
-    <div>
-      <p class="sc" id="dnav-vision">Vision</p>
-      <ul aria-labelledby="dnav-vision">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="2" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="false" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button" hidden>
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-student-life">Student Life</p>
-      <ul aria-labelledby="dnav-student-life">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
         <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
@@ -226,1313 +248,539 @@
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
-      <ul aria-labelledby="dnav-literary-excellence">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="true" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button">
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html" aria-current="page">Creative Writing</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
-      <ul aria-labelledby="dnav-art-culture-music">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-connect">Connect</p>
-      <ul aria-labelledby="dnav-connect">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
-    </div>
-  </nav>
-  <div class="drawer__utility">
-    <a href="alumni.html">Alumni</a>
-    <a href="school-info.html#calendar">Calendar</a>
-    <a href="tel:+914222613300">+91 422 261 3300</a>
-    <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+    </section>
   </div>
-  <div class="drawer__cta">
-    <a class="btn btn--primary btn--lg" href="admissions.html#apply">Apply for admission</a>
-    <a class="btn btn--outline btn--lg" href="admissions.html#visit">Book a campus visit</a>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
   </div>
 </div>
 <main id="main">
-<nav class="jump" aria-label="On this page">
-  <details class="jump__details">
-    <summary class="jump__toggle" title="On this page">
-      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span class="jump__label">On this page</span>
-    </summary>
-    <div class="jump__panel" id="jumpPanel">
-      <p aria-hidden="true">On this page</p>
-      <a href="#stories">Student voices</a>
-      <a href="#journey">The creative process</a>
-    </div>
-  </details>
-</nav>
 <section class="cw-hero" id="top" aria-labelledby="cw-title">
-  <!-- Everything between here and the heading is decoration: a lit ground,
-       grain, floating manuscript pages, glass, an ink stroke being drawn, a
-       typewriter and a desk. All of it is aria-hidden, so a screen reader
-       meets the heading first and none of it is read aloud. -->
-  <div class="cw-hero-bg" aria-hidden="true"></div>
-  <div class="cw-hero-light" aria-hidden="true"></div>
-  <div class="cw-grain" aria-hidden="true"></div>
-
-  <div class="cw-plane cw-plane--quotes" aria-hidden="true">
-    <span class="cw-quote cw-quote--open">&ldquo;</span>
-    <span class="cw-quote cw-quote--close">&rdquo;</span>
-  </div>
-
-  <div class="cw-plane cw-plane--paper" aria-hidden="true">
-    <div class="cw-floating-paper cw-floating-paper--1">
-      <svg viewBox="0 0 120 156">
-        <defs>
-          <linearGradient id="cwPaperShade1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#FFFFFF" stop-opacity=".22"/>
-            <stop offset="1" stop-color="#4A2939" stop-opacity=".24"/>
-          </linearGradient>
-        </defs>
-        <rect width="120" height="156" rx="2" fill="#FBF5EB" opacity=".93"/>
-        <rect width="120" height="156" rx="2" fill="url(#cwPaperShade1)"/>
-        <g fill="#241B25" opacity=".26">
-          <rect x="16" y="26" width="78" height="2.4" rx="1.2"/>
-          <rect x="16" y="42" width="88" height="2.4" rx="1.2"/>
-          <rect x="16" y="58" width="64" height="2.4" rx="1.2"/>
-          <rect x="16" y="74" width="84" height="2.4" rx="1.2"/>
-          <rect x="16" y="90" width="52" height="2.4" rx="1.2"/>
-          <rect x="16" y="106" width="76" height="2.4" rx="1.2"/>
-        </g>
-      </svg>
+  <div class="wrap cw-hero__layout">
+    <div class="cw-hero__topline">
+      <p class="cw-hero__label">CIRS / Creative Writing</p>
+      <p class="cw-hero__edition">A student poetry anthology</p>
     </div>
-    <div class="cw-floating-paper cw-floating-paper--2">
-      <svg viewBox="0 0 100 130">
-        <rect width="100" height="130" rx="2" fill="#FBF5EB" opacity=".9"/>
-        <g fill="#241B25" opacity=".22">
-          <rect x="14" y="24" width="66" height="2.2" rx="1.1"/>
-          <rect x="14" y="40" width="72" height="2.2" rx="1.1"/>
-          <rect x="14" y="56" width="48" height="2.2" rx="1.1"/>
-          <rect x="14" y="72" width="68" height="2.2" rx="1.1"/>
-        </g>
-      </svg>
+    <div class="cw-hero__composition">
+      <h1 class="cw-hero__title" id="cw-title"><span>Words become</span> <span>worlds.</span></h1>
+      <blockquote class="cw-hero__excerpt" aria-label="A poem from the collection">
+        <span class="cw-hero__excerpt-theme">From Turning a New Page</span><span class="cw-hero__excerpt-line">Still, sometimes in the margin,<br>there’s pressure without a mark</span><cite class="cw-hero__excerpt-credit">— Ananda Priyan</cite><a class="cw-hero__excerpt-link" href="#poem-turning-ananda-priyan">Read the poem <span aria-hidden="true">↗</span></a>
+      </blockquote>
     </div>
-    <div class="cw-floating-paper cw-floating-paper--3">
-      <svg viewBox="0 0 110 142">
-        <rect width="110" height="142" rx="2" fill="#FBF5EB" opacity=".92"/>
-        <g fill="#241B25" opacity=".24">
-          <rect x="15" y="28" width="70" height="2.3" rx="1.15"/>
-          <rect x="15" y="44" width="80" height="2.3" rx="1.15"/>
-          <rect x="15" y="60" width="56" height="2.3" rx="1.15"/>
-          <rect x="15" y="76" width="74" height="2.3" rx="1.15"/>
-          <rect x="15" y="92" width="44" height="2.3" rx="1.15"/>
-        </g>
-        <path d="M15 112c10-7 18 5 27-1s13-8 22-3" stroke="#C69A4B" stroke-width="1.4"
-              fill="none" opacity=".55"/>
-      </svg>
+    <div class="cw-hero__footer">
+      <div class="cw-hero__summary">
+        <p class="cw-hero__subtitle">Poetry by the students of CIRS.</p>
+        <p class="cw-hero__measure"><span><strong>15</strong> poems</span><span class="cw-hero__measure-rule" aria-hidden="true"></span><span><strong>14</strong> writers</span></p>
+      </div>
+      <a class="cw-hero__enter" href="#chapters">Explore the chapters <span aria-hidden="true">↘</span></a>
     </div>
-    <div class="cw-floating-paper cw-floating-paper--4">
-      <svg viewBox="0 0 86 110">
-        <rect width="86" height="110" rx="2" fill="#FBF5EB" opacity=".86"/>
-        <g fill="#241B25" opacity=".2">
-          <rect x="12" y="22" width="56" height="2" rx="1"/>
-          <rect x="12" y="36" width="62" height="2" rx="1"/>
-          <rect x="12" y="50" width="40" height="2" rx="1"/>
-        </g>
-      </svg>
-    </div>
-  </div>
-
-  <div class="cw-plane cw-plane--glass" aria-hidden="true">
-    <div class="cw-glass-orb cw-glass-orb--1"></div>
-    <div class="cw-glass-orb cw-glass-orb--2"></div>
-    <div class="cw-glass-orb cw-glass-orb--3"></div>
-  </div>
-
-  <div class="cw-plane cw-plane--ink" aria-hidden="true">
-    <svg class="cw-ink-trail" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="cwInkGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#C69A4B" stop-opacity="0"/>
-          <stop offset=".22" stop-color="#C69A4B" stop-opacity=".75"/>
-          <stop offset=".55" stop-color="#EAD39B" stop-opacity=".95"/>
-          <stop offset=".85" stop-color="#B76E79" stop-opacity=".6"/>
-          <stop offset="1" stop-color="#B76E79" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-      <path stroke-width="1.7"
-            d="M180 628c92-46 170 22 258-12s126-92 214-84 132 86 226 64 154-96 246-70"/>
-      <path class="cw-ink-flourish" stroke-width="1.3"
-            d="M1080 600c34-30 8-66-20-52s-20 60 18 66 76-26 92-58"/>
-      <path class="cw-ink-flourish" stroke-width="1.2"
-            d="M300 208c26-22 6-52-16-40s-14 46 16 50 58-22 70-46"/>
-    </svg>
-  </div>
-
-  <div class="cw-plane cw-plane--desk" aria-hidden="true">
-    <div class="cw-typewriter">
-      <svg viewBox="0 0 340 256">
-        <defs>
-          <linearGradient id="cwBody" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#3A2B3E"/><stop offset="1" stop-color="#1B141D"/>
-          </linearGradient>
-          <linearGradient id="cwDeck" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#2B2030"/><stop offset="1" stop-color="#171117"/>
-          </linearGradient>
-          <linearGradient id="cwSheet" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#FFFCF6"/><stop offset="1" stop-color="#E8DCC6"/>
-          </linearGradient>
-          <clipPath id="cwPaperClip"><rect x="60" y="-80" width="240" height="180"/></clipPath>
-        </defs>
-        <ellipse cx="170" cy="238" rx="150" ry="13" fill="#0C080D" opacity=".55"/>
-        <g class="cw-tw-carriage">
-          <g clip-path="url(#cwPaperClip)">
-            <g class="cw-tw-paper">
-              <rect x="122" y="-38" width="110" height="146" rx="1.5" fill="url(#cwSheet)"/>
-              <g fill="#241B25" opacity=".42">
-                <rect class="cw-tw-line" x="136" y="-16" width="80" height="2.2" rx="1.1"/>
-                <rect class="cw-tw-line cw-tw-line--2" x="136" y="2" width="68" height="2.2" rx="1.1"/>
-                <rect class="cw-tw-line cw-tw-line--3" x="136" y="20" width="76" height="2.2" rx="1.1"/>
-              </g>
-            </g>
-          </g>
-          <path d="M112 100 L238 100 L252 74 L126 74 Z" fill="#241B25" opacity=".85"/>
-          <path d="M112 100 L238 100 L252 74 L126 74 Z" fill="none" stroke="#C69A4B"
-                stroke-width=".9" opacity=".5"/>
-          <rect x="102" y="98" width="142" height="20" rx="10" fill="#151016"/>
-          <rect x="102" y="98" width="142" height="20" rx="10" fill="none" stroke="#C69A4B"
-                stroke-width=".9" opacity=".45"/>
-          <rect x="112" y="103" width="122" height="4" rx="2" fill="#EAD39B" opacity=".14"/>
-          <ellipse cx="99" cy="108" rx="11" ry="13" fill="#2E2233" stroke="#C69A4B"
-                   stroke-width=".9" opacity=".95"/>
-          <ellipse cx="247" cy="108" rx="11" ry="13" fill="#2E2233" stroke="#C69A4B"
-                   stroke-width=".9" opacity=".95"/>
-          <path d="M252 96 L274 84" stroke="#C69A4B" stroke-width="2.4" stroke-linecap="round"
-                opacity=".75"/>
-        </g>
-        <g stroke="#C69A4B" stroke-width="1.5" stroke-linecap="round" opacity=".5">
-          <path class="cw-tw-bar" d="M170 142 L166 120"/>
-          <path d="M154 144 L148 124" opacity=".7"/>
-          <path d="M186 144 L192 124" opacity=".7"/>
-          <path d="M140 148 L130 130" opacity=".5"/>
-          <path d="M200 148 L210 130" opacity=".5"/>
-        </g>
-        <g>
-          <circle cx="108" cy="140" r="15" fill="#241B25" stroke="#C69A4B" stroke-width="1.1"
-                  opacity=".9"/>
-          <circle cx="108" cy="140" r="6" fill="#4A2939"/>
-          <circle cx="232" cy="140" r="15" fill="#241B25" stroke="#C69A4B" stroke-width="1.1"
-                  opacity=".9"/>
-          <circle cx="232" cy="140" r="6" fill="#4A2939"/>
-        </g>
-        <path d="M46 228 H294 L272 176 H68 Z" fill="url(#cwBody)"/>
-        <path d="M46 228 H294 L272 176 H68 Z" fill="none" stroke="#C69A4B" stroke-width=".9"
-              opacity=".38"/>
-        <path d="M70 176 H270 L252 150 H88 Z" fill="url(#cwDeck)"/>
-        <path d="M70 176 H270 L252 150 H88 Z" fill="none" stroke="#C69A4B" stroke-width=".8"
-              opacity=".3"/>
-        <rect x="150" y="206" width="40" height="7" rx="3.5" fill="#C69A4B" opacity=".55"/>
-        <g fill="#2A1F2E" stroke="#C69A4B" stroke-width=".7">
-          <g class="cw-tw-key cw-tw-key--1"><ellipse cx="106" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--2"><ellipse cx="126" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--3"><ellipse cx="146" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--4"><ellipse cx="166" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--5"><ellipse cx="186" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--6"><ellipse cx="206" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--7"><ellipse cx="226" cy="170" rx="7" ry="5"/></g>
-          <g class="cw-tw-key cw-tw-key--8"><ellipse cx="116" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--9"><ellipse cx="136" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--10"><ellipse cx="156" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--11"><ellipse cx="176" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--12"><ellipse cx="196" cy="158" rx="6.6" ry="4.6"/></g>
-          <g class="cw-tw-key cw-tw-key--13"><ellipse cx="216" cy="158" rx="6.6" ry="4.6"/></g>
-        </g>
-        <rect x="128" y="188" width="84" height="8" rx="4" fill="#2A1F2E" stroke="#C69A4B"
-              stroke-width=".7"/>
-      </svg>
-    </div>
-
-    <div class="cw-manuscript">
-      <svg viewBox="0 0 220 278">
-        <defs>
-          <linearGradient id="cwMsShade" x1="0" y1="0" x2=".8" y2="1">
-            <stop offset="0" stop-color="#FFFFFF" stop-opacity=".2"/>
-            <stop offset="1" stop-color="#4A2939" stop-opacity=".26"/>
-          </linearGradient>
-        </defs>
-        <g transform="rotate(-5 110 139)">
-          <rect x="6" y="8" width="208" height="264" rx="2" fill="#0C080D" opacity=".35"/>
-          <rect x="0" y="0" width="208" height="264" rx="2" fill="#FBF5EB"/>
-          <rect x="0" y="0" width="208" height="264" rx="2" fill="url(#cwMsShade)"/>
-          <g stroke="#241B25" stroke-width="1.6" fill="none" opacity=".3" stroke-linecap="round">
-            <path d="M52 44c10-8 16 6 26 0s14-8 24-2 16 4 26-2"/>
-            <path d="M24 78c14-9 22 7 36 0s18-8 32-1 20 4 32-3"/>
-            <path d="M24 106c12-8 20 6 32 0s16-7 28-1 18 4 28-3"/>
-            <path d="M24 134c16-9 24 7 38 0s20-8 34-1"/>
-            <path d="M24 162c12-8 20 6 32 0s16-7 28-1 18 4 28-3"/>
-            <path d="M24 190c14-9 22 7 36 0s18-8 30-1"/>
-          </g>
-          <path d="M60 224c22-16 44 10 66-4" stroke="#B76E79" stroke-width="1.4" fill="none"
-                opacity=".5"/>
-        </g>
-      </svg>
-    </div>
-
-    <div class="cw-desk-tools">
-      <svg viewBox="0 0 300 150">
-        <defs>
-          <linearGradient id="cwPenBody" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#2B1F2F"/><stop offset=".5" stop-color="#4A2939"/>
-            <stop offset="1" stop-color="#1D161F"/>
-          </linearGradient>
-          <linearGradient id="cwGlass" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#EAD39B" stop-opacity=".3"/>
-            <stop offset="1" stop-color="#4A2939" stop-opacity=".9"/>
-          </linearGradient>
-        </defs>
-        <ellipse cx="150" cy="140" rx="120" ry="8" fill="#0C080D" opacity=".45"/>
-        <path d="M208 138 H276 L272 84 H212 Z" fill="url(#cwGlass)" stroke="#C69A4B"
-              stroke-width="1.1"/>
-        <path d="M214 138 H270 L268 104 H216 Z" fill="#3A2033" opacity=".95"/>
-        <rect x="230" y="70" width="28" height="16" rx="3" fill="#241B25" stroke="#C69A4B"
-              stroke-width="1"/>
-        <rect x="234" y="62" width="20" height="10" rx="3" fill="#C69A4B" opacity=".8"/>
-        <rect x="222" y="112" width="44" height="14" rx="2" fill="#FBF5EB" opacity=".14"/>
-        <path class="cw-ink-shine" d="M218 92 L222 132" stroke="#FBF5EB" stroke-width="3"
-              stroke-linecap="round" opacity=".3"/>
-        <g transform="rotate(-14 110 110)">
-          <rect x="34" y="98" width="128" height="15" rx="7.5" fill="url(#cwPenBody)"/>
-          <rect x="34" y="98" width="128" height="15" rx="7.5" fill="none" stroke="#C69A4B"
-                stroke-width=".8" opacity=".6"/>
-          <rect x="112" y="97" width="10" height="17" rx="2" fill="#C69A4B" opacity=".85"/>
-          <rect x="60" y="96" width="4" height="19" rx="2" fill="#EAD39B" opacity=".5"/>
-          <path d="M34 98 L6 105.5 L34 113 Z" fill="#EAD39B"/>
-          <path d="M22 105.5 H6" stroke="#241B25" stroke-width="1" opacity=".7"/>
-          <circle cx="22" cy="105.5" r="2" fill="#241B25" opacity=".75"/>
-          <rect x="150" y="96" width="14" height="19" rx="5" fill="#241B25" stroke="#C69A4B"
-                stroke-width=".8"/>
-        </g>
-      </svg>
-    </div>
-  </div>
-
-  <div class="cw-plane cw-plane--dust" aria-hidden="true">
-    <div class="cw-particles" id="cwParticles"></div>
-  </div>
-
-  <div class="cw-vignette" aria-hidden="true"></div>
-
-  <div class="cw-content">
-    <div class="cw-orbit" aria-hidden="true">
-      <svg viewBox="0 0 400 400">
-        <circle cx="200" cy="200" r="182" fill="none" stroke="#C69A4B" stroke-width=".8"
-                opacity=".22"/>
-        <circle cx="200" cy="200" r="156" fill="none" stroke="#EAD39B" stroke-width=".6"
-                opacity=".12" stroke-dasharray="2 12" stroke-linecap="round"/>
-        <g fill="#EAD39B">
-          <circle cx="200" cy="18" r="2.6" opacity=".8"/>
-          <circle cx="382" cy="200" r="2.2" opacity=".6"/>
-          <circle cx="200" cy="382" r="2.6" opacity=".7"/>
-          <circle cx="18" cy="200" r="2.2" opacity=".6"/>
-          <circle cx="329" cy="71" r="1.6" opacity=".45"/>
-          <circle cx="329" cy="329" r="1.6" opacity=".45"/>
-          <circle cx="71" cy="329" r="1.6" opacity=".45"/>
-          <circle cx="71" cy="71" r="1.6" opacity=".45"/>
-        </g>
-        <g font-size="30" fill="#C69A4B" opacity=".4">
-          <text x="278" y="62" text-anchor="middle">&ldquo;</text>
-          <text x="122" y="356" text-anchor="middle">&rdquo;</text>
-        </g>
-        <g stroke="#C69A4B" stroke-width="1" fill="none" opacity=".35" stroke-linecap="round">
-          <path d="M40 130c8-6 14 4 22 0"/>
-          <path d="M338 270c8-6 14 4 22 0"/>
-        </g>
-      </svg>
-    </div>
-
-    <h1 class="cw-heading" id="cw-title" data-text="Creative Writing">Creative Writing</h1>
-    <hr class="cw-rule">
-    <p class="cw-sub">Every thought has a story.</p>
   </div>
 </section>
 
-<section class="cw-sec cw-sec--intro">
-  <div class="wrap cw-intro rv">
-    <p class="cw-eyebrow"><span class="sc">A living collection</span></p>
-    <h2 class="cw-h2">Words become <em>worlds.</em></h2>
-    <p class="cw-lead">The imagination, the ideas and the voices of young writers. This is
-      where the school&rsquo;s creative writing will be published &mdash; class group by class
-      group, as the editorial board supplies it.</p>
-  </div>
-</section>
-
-<section class="cw-sec cw-sec--posters" id="stories">
-  <div class="wrap cw-sechead rv">
-    <p class="cw-eyebrow"><span class="sc">Student voices</span></p>
-    <h2 class="cw-h2">Stories on <em>the move.</em></h2>
-    <p class="cw-copy">Four class groups, and a place on the wall for every piece as it is
-      published. The slots are empty on purpose: no title, writer or story here is invented
-      while the school&rsquo;s own work is still to come.</p>
-  </div>
-      <div class="cw-row cw-row--left rv">
-        <p class="cw-row__label"><span class="sc">Classes V &ndash; VI</span> <span class="vh">&mdash; no pieces published yet; awaiting the Crossroads Editorial Board.</span></p>
-        <div class="cw-row__window">
-          <div class="cw-track" aria-hidden="true">
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes V &ndash; VI</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-      <div class="cw-row cw-row--right rv">
-        <p class="cw-row__label"><span class="sc">Classes VII &ndash; VIII</span> <span class="vh">&mdash; no pieces published yet; awaiting the Crossroads Editorial Board.</span></p>
-        <div class="cw-row__window">
-          <div class="cw-track" aria-hidden="true">
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes VII &ndash; VIII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-      <div class="cw-row cw-row--left rv">
-        <p class="cw-row__label"><span class="sc">Classes IX &ndash; X</span> <span class="vh">&mdash; no pieces published yet; awaiting the Crossroads Editorial Board.</span></p>
-        <div class="cw-row__window">
-          <div class="cw-track" aria-hidden="true">
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes IX &ndash; X</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-      <div class="cw-row cw-row--right rv">
-        <p class="cw-row__label"><span class="sc">Classes XI &ndash; XII</span> <span class="vh">&mdash; no pieces published yet; awaiting the Crossroads Editorial Board.</span></p>
-        <div class="cw-row__window">
-          <div class="cw-track" aria-hidden="true">
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">01</span>
-                  <span class="cw-poster__glyph">Aa</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">02</span>
-                  <span class="cw-poster__glyph">&#10022;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">03</span>
-                  <span class="cw-poster__glyph">&ldquo;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-            <article class="cw-poster cw-poster--slot">
-              <div class="cw-poster__card">
-                <span class="cw-poster__art" aria-hidden="true">
-                  <span class="cw-poster__num">04</span>
-                  <span class="cw-poster__glyph">&#9998;</span>
-                </span>
-                <span class="cw-poster__type">Classes XI &ndash; XII</span>
-                <span class="cw-poster__title">Awaiting a piece</span>
-                <span class="cw-poster__meta">To be supplied by the Crossroads
-                  Editorial Board</span>
-                <span class="cw-poster__read">Not yet published</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-  <p class="wrap cw-rows__note rv">Published student writing already lives in the school
-    magazine, and is on the blog in full.
-    <a class="btn btn--outline" href="blog.html">Read it on the blog</a></p>
-</section>
-
-<section class="cw-sec cw-sec--await">
-  <div class="wrap cw-await rv">
-    <p class="cw-eyebrow"><span class="sc">Still to come</span></p>
-    <h2 class="cw-h2">Poetry, fiction <em>and how to submit.</em></h2>
-    <p class="cw-copy">Three things fill the wall above: the poems, the stories and the
-      address to send new work to. All three are <em>[awaiting the Crossroads Editorial
-      Board]</em>, and nothing has been written in their place.</p>
-    <ul class="cw-await__list">
-      <li>
-        <h3>Poetry</h3>
-        <p>Published as it is written.</p>
-      </li>
-      <li>
-        <h3>Fiction</h3>
-        <p>Short stories, and longer work in parts.</p>
-      </li>
-      <li>
-        <h3>Submissions</h3>
-        <p>How to send work to the editorial board.</p>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section class="cw-sec cw-sec--journey" id="journey">
+<section class="cw-introduction" id="chapters" aria-labelledby="cw-index-heading">
   <div class="wrap">
-    <div class="cw-sechead rv">
-      <p class="cw-eyebrow"><span class="sc">The creative process</span></p>
-      <h2 class="cw-h2">From a thought <em>to a story.</em></h2>
-      <p class="cw-copy">The same five stages whether the piece is a poem or an essay, and
-        whether it takes an evening or a term.</p>
+    <div class="cw-introduction__head">
+      <p class="cw-kicker">The anthology</p>
+      <h2 id="cw-index-heading">Read by theme.</h2>
+      <p>Five themes, three poems from each. Choose a voice to open the complete poem.</p>
     </div>
-    <ol class="cw-journey">
-        <li class="cw-step rv">
-          <p class="cw-step__n">01</p>
-          <h3 class="cw-step__name">Imagine</h3>
-          <p class="cw-step__copy">Let the first idea arrive, before it is any good.</p>
-        </li>
-        <li class="cw-step rv">
-          <p class="cw-step__n">02</p>
-          <h3 class="cw-step__name">Explore</h3>
-          <p class="cw-step__copy">Follow the curiosity wherever it leads, and read.</p>
-        </li>
-        <li class="cw-step rv">
-          <p class="cw-step__n">03</p>
-          <h3 class="cw-step__name">Write</h3>
-          <p class="cw-step__copy">Give the idea a voice. A first draft is allowed to be one.</p>
-        </li>
-        <li class="cw-step rv">
-          <p class="cw-step__n">04</p>
-          <h3 class="cw-step__name">Refine</h3>
-          <p class="cw-step__copy">Shape the words, and cut the ones doing no work.</p>
-        </li>
-        <li class="cw-step rv">
-          <p class="cw-step__n">05</p>
-          <h3 class="cw-step__name">Share</h3>
-          <p class="cw-step__copy">Let the story find its reader.</p>
-        </li>
-    </ol>
+    <div class="cw-rows__controls">
+      <button class="cw-rows__pause" type="button" aria-controls="cw-rows" aria-pressed="false">Pause motion</button>
+    </div>
+  </div>
+  <div class="cw-rows" id="cw-rows">
+<div class="cw-row cw-row--left">
+  <div class="wrap cw-row__head">
+    <p class="cw-row__eyebrow">Chapter 01</p>
+    <h3 class="cw-row__title"><a href="#chapter-echoes-of-yesterday">Echoes of Yesterday</a></h3>
+    <p class="cw-row__count">3 selected poems</p>
+  </div>
+  <div class="cw-row__window">
+    <div class="cw-row__track">
+      <div class="cw-row__half">
+<a class="cw-row__card" href="#poem-echoes-disha-bhimani"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">A bunch of thoughts, encircling my mind</span><span class="cw-row__card-author">By Disha Priyen Bhimani</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-echoes-aayush-bhashyam"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">The wind still hums your half-sung tune,</span><span class="cw-row__card-author">By Aayush Sreenath Bhashyam</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-echoes-utkarsh-shah"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">Was it yesterday,</span><span class="cw-row__card-author">By Utkarsh Shah</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-echoes-disha-bhimani"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">A bunch of thoughts, encircling my mind</span><span class="cw-row__card-author">By Disha Priyen Bhimani</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-echoes-aayush-bhashyam"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">The wind still hums your half-sung tune,</span><span class="cw-row__card-author">By Aayush Sreenath Bhashyam</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-echoes-utkarsh-shah"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">Was it yesterday,</span><span class="cw-row__card-author">By Utkarsh Shah</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+      <div class="cw-row__half" aria-hidden="true">
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-echoes-disha-bhimani"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">A bunch of thoughts, encircling my mind</span><span class="cw-row__card-author">By Disha Priyen Bhimani</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-echoes-aayush-bhashyam"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">The wind still hums your half-sung tune,</span><span class="cw-row__card-author">By Aayush Sreenath Bhashyam</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-echoes-utkarsh-shah"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">Was it yesterday,</span><span class="cw-row__card-author">By Utkarsh Shah</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-echoes-disha-bhimani"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">A bunch of thoughts, encircling my mind</span><span class="cw-row__card-author">By Disha Priyen Bhimani</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-echoes-aayush-bhashyam"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">The wind still hums your half-sung tune,</span><span class="cw-row__card-author">By Aayush Sreenath Bhashyam</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-echoes-utkarsh-shah"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">Was it yesterday,</span><span class="cw-row__card-author">By Utkarsh Shah</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cw-row cw-row--right">
+  <div class="wrap cw-row__head">
+    <p class="cw-row__eyebrow">Chapter 02 <span aria-hidden="true">·</span> January 2026</p>
+    <h3 class="cw-row__title"><a href="#chapter-joy-of-little-things">Joy of Little Things</a></h3>
+    <p class="cw-row__count">3 selected poems</p>
+  </div>
+  <div class="cw-row__window">
+    <div class="cw-row__track">
+      <div class="cw-row__half">
+<a class="cw-row__card" href="#poem-joy-avika-mundra"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">There’s beauty in the sky</span><span class="cw-row__card-author">By Avika Mundra</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-joy-aryaa-shah"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Rain drumming on the dorm roof at night,</span><span class="cw-row__card-author">By Aryaa Rushab Shah</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-joy-anushya-uk"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">The joy of little things</span><span class="cw-row__card-author">By Anushya UK</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-joy-avika-mundra"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">There’s beauty in the sky</span><span class="cw-row__card-author">By Avika Mundra</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-joy-aryaa-shah"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Rain drumming on the dorm roof at night,</span><span class="cw-row__card-author">By Aryaa Rushab Shah</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-joy-anushya-uk"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">The joy of little things</span><span class="cw-row__card-author">By Anushya UK</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+      <div class="cw-row__half" aria-hidden="true">
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-joy-avika-mundra"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">There’s beauty in the sky</span><span class="cw-row__card-author">By Avika Mundra</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-joy-aryaa-shah"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Rain drumming on the dorm roof at night,</span><span class="cw-row__card-author">By Aryaa Rushab Shah</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-joy-anushya-uk"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">The joy of little things</span><span class="cw-row__card-author">By Anushya UK</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-joy-avika-mundra"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">There’s beauty in the sky</span><span class="cw-row__card-author">By Avika Mundra</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-joy-aryaa-shah"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Rain drumming on the dorm roof at night,</span><span class="cw-row__card-author">By Aryaa Rushab Shah</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-joy-anushya-uk"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">The joy of little things</span><span class="cw-row__card-author">By Anushya UK</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cw-row cw-row--left">
+  <div class="wrap cw-row__head">
+    <p class="cw-row__eyebrow">Chapter 03</p>
+    <h3 class="cw-row__title"><a href="#chapter-turning-a-new-page">Turning a New Page</a></h3>
+    <p class="cw-row__count">3 selected poems</p>
+  </div>
+  <div class="cw-row__window">
+    <div class="cw-row__track">
+      <div class="cw-row__half">
+<a class="cw-row__card" href="#poem-turning-tanmay-khakharia"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">As the lonely boy lies curled against the wall,</span><span class="cw-row__card-author">By Tanmay Mehul Khakharia</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-turning-ananda-priyan"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">I turned a page today</span><span class="cw-row__card-author">By Ananda Priyan</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-turning-aayush-bhashyam"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">Between the last word and the first,</span><span class="cw-row__card-author">By Aayush Sreenath Bhashyam</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-turning-tanmay-khakharia"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">As the lonely boy lies curled against the wall,</span><span class="cw-row__card-author">By Tanmay Mehul Khakharia</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-turning-ananda-priyan"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">I turned a page today</span><span class="cw-row__card-author">By Ananda Priyan</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-turning-aayush-bhashyam"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">Between the last word and the first,</span><span class="cw-row__card-author">By Aayush Sreenath Bhashyam</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+      <div class="cw-row__half" aria-hidden="true">
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-turning-tanmay-khakharia"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">As the lonely boy lies curled against the wall,</span><span class="cw-row__card-author">By Tanmay Mehul Khakharia</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-turning-ananda-priyan"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">I turned a page today</span><span class="cw-row__card-author">By Ananda Priyan</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-turning-aayush-bhashyam"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">Between the last word and the first,</span><span class="cw-row__card-author">By Aayush Sreenath Bhashyam</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-turning-tanmay-khakharia"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">As the lonely boy lies curled against the wall,</span><span class="cw-row__card-author">By Tanmay Mehul Khakharia</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-turning-ananda-priyan"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">I turned a page today</span><span class="cw-row__card-author">By Ananda Priyan</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-turning-aayush-bhashyam"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">Between the last word and the first,</span><span class="cw-row__card-author">By Aayush Sreenath Bhashyam</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cw-row cw-row--right">
+  <div class="wrap cw-row__head">
+    <p class="cw-row__eyebrow">Chapter 04 <span aria-hidden="true">·</span> April</p>
+    <h3 class="cw-row__title"><a href="#chapter-refuge-from-reality">Refuge from Reality</a></h3>
+    <p class="cw-row__count">3 selected poems</p>
+  </div>
+  <div class="cw-row__window">
+    <div class="cw-row__track">
+      <div class="cw-row__half">
+<a class="cw-row__card" href="#poem-refuge-kavya-prasad"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">Where I reside right now,</span><span class="cw-row__card-author">By Kavya Arun Prasad</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-refuge-adira-chellam"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Reality is not something easy</span><span class="cw-row__card-author">By Adira Chellam P</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-refuge-tarushi-agarwal"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">When the whole world gets way too loud,</span><span class="cw-row__card-author">By Tarushi agarwal</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-refuge-kavya-prasad"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">Where I reside right now,</span><span class="cw-row__card-author">By Kavya Arun Prasad</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-refuge-adira-chellam"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Reality is not something easy</span><span class="cw-row__card-author">By Adira Chellam P</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-refuge-tarushi-agarwal"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">When the whole world gets way too loud,</span><span class="cw-row__card-author">By Tarushi agarwal</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+      <div class="cw-row__half" aria-hidden="true">
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-refuge-kavya-prasad"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">Where I reside right now,</span><span class="cw-row__card-author">By Kavya Arun Prasad</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-refuge-adira-chellam"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Reality is not something easy</span><span class="cw-row__card-author">By Adira Chellam P</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-refuge-tarushi-agarwal"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">When the whole world gets way too loud,</span><span class="cw-row__card-author">By Tarushi agarwal</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-refuge-kavya-prasad"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">Where I reside right now,</span><span class="cw-row__card-author">By Kavya Arun Prasad</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-refuge-adira-chellam"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Reality is not something easy</span><span class="cw-row__card-author">By Adira Chellam P</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-refuge-tarushi-agarwal"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">When the whole world gets way too loud,</span><span class="cw-row__card-author">By Tarushi agarwal</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cw-row cw-row--left">
+  <div class="wrap cw-row__head">
+    <p class="cw-row__eyebrow">Chapter 05 <span aria-hidden="true">·</span> May</p>
+    <h3 class="cw-row__title"><a href="#chapter-lift-yourself-by-yourself">Lift Yourself by Yourself</a></h3>
+    <p class="cw-row__count">3 selected poems</p>
+  </div>
+  <div class="cw-row__window">
+    <div class="cw-row__track">
+      <div class="cw-row__half">
+<a class="cw-row__card" href="#poem-lift-jishnu-yogesh"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">Bound in chains, held up tight</span><span class="cw-row__card-author">By Jishnu Teja Yogesh</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-lift-ashmi-agarwal"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Caring, sharing and supporting your friends;</span><span class="cw-row__card-author">By Ashmi Agarwal</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<a class="cw-row__card" href="#poem-lift-vrittee-fogla"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">We all live in a world so full, </span><span class="cw-row__card-author">By Vrittee Fogla</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></a>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-lift-jishnu-yogesh"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">Bound in chains, held up tight</span><span class="cw-row__card-author">By Jishnu Teja Yogesh</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-lift-ashmi-agarwal"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Caring, sharing and supporting your friends;</span><span class="cw-row__card-author">By Ashmi Agarwal</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-lift-vrittee-fogla"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">We all live in a world so full, </span><span class="cw-row__card-author">By Vrittee Fogla</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+      <div class="cw-row__half" aria-hidden="true">
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-lift-jishnu-yogesh"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">Bound in chains, held up tight</span><span class="cw-row__card-author">By Jishnu Teja Yogesh</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-lift-ashmi-agarwal"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Caring, sharing and supporting your friends;</span><span class="cw-row__card-author">By Ashmi Agarwal</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-lift-vrittee-fogla"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">We all live in a world so full, </span><span class="cw-row__card-author">By Vrittee Fogla</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-lift-jishnu-yogesh"><span class="cw-row__card-number">Poem 01</span><span class="cw-row__card-opening">Bound in chains, held up tight</span><span class="cw-row__card-author">By Jishnu Teja Yogesh</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-lift-ashmi-agarwal"><span class="cw-row__card-number">Poem 02</span><span class="cw-row__card-opening">Caring, sharing and supporting your friends;</span><span class="cw-row__card-author">By Ashmi Agarwal</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+<div class="cw-row__card" aria-hidden="true" data-cw-target="#poem-lift-vrittee-fogla"><span class="cw-row__card-number">Poem 03</span><span class="cw-row__card-opening">We all live in a world so full, </span><span class="cw-row__card-author">By Vrittee Fogla</span><span class="cw-row__card-action">Read full poem <span aria-hidden="true">↗</span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
 </section>
 
-<section class="cw-sec cw-sec--last">
-  <div class="wrap cw-last rv">
-    <p class="cw-eyebrow"><span class="sc">Creative writing at CIRS</span></p>
-    <h2 class="cw-h2">The next story <em>is waiting.</em></h2>
-    <p class="cw-last__note">Every page begins with a thought.</p>
-    <p class="cw-last__cta">
-      <a class="btn btn--primary" href="crossroads.html">The Crossroads archive</a>
-      <a class="btn btn--outline" href="blog.html">CIRS Blog</a>
-    </p>
+<section class="cw-chapter cw-chapter--1" id="chapter-echoes-of-yesterday" aria-labelledby="chapter-echoes-of-yesterday-title">
+  <div class="cw-chapter__inner">
+    <header class="cw-chapter__head" data-cw-reveal>
+      <p class="cw-chapter__eyebrow">Chapter 01 </p>
+      <h2 class="cw-chapter__title" id="chapter-echoes-of-yesterday-title">Echoes of Yesterday</h2>
+      <div class="cw-chapter__details">
+        <p class="cw-chapter__count">3 poems · 3 writers</p>
+        <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <div class="cw-chapter__poems">
+    <article class="cw-poem" id="poem-echoes-disha-bhimani" aria-labelledby="poem-echoes-disha-bhimani-title">
+      <div class="cw-poem__topline"><span>Poem 01 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-echoes-disha-bhimani-title">A bunch of thoughts, encircling my mind</h3>
+      <p class="cw-poem__byline">By <span>Disha Priyen Bhimani</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">A bunch of thoughts, encircling my mind<br>Containing loud echoes of ideas, that I couldn’t find<br>From the echo of a bouncing basketball,<br>To the echo of a distant valley’s waterfall</p>
+<p class="cw-poem__stanza">The echoes of yesterday<br>Remind me of the tournament day.<br>Where the grief of our defeat,<br>Echoed through a hundred feet.</p>
+<p class="cw-poem__stanza">These echoes of yesterday are too heard to be forgotten,<br>But the hope is not to be disheartened<br>Because this can be<br>The echoes of tomorrow</p>
+<p class="cw-poem__stanza">As this can be the echo of tomorrow,<br>Not one of complete sorrow,<br>With this echo I shine bright<br>With my mind now ready to fight</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning A bunch of thoughts, encircling my mind by Disha Priyen Bhimani">
+        <a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-echoes-of-yesterday">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-echoes-aayush-bhashyam">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-echoes-aayush-bhashyam" aria-labelledby="poem-echoes-aayush-bhashyam-title">
+      <div class="cw-poem__topline"><span>Poem 02 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-echoes-aayush-bhashyam-title">The wind still hums your half-sung tune,</h3>
+      <p class="cw-poem__byline">By <span>Aayush Sreenath Bhashyam</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">The wind still hums your half-sung tune,<br>Through trembling blinds and ghostlit noon.<br>Where silence hums like something torn,<br>And dreams grow old but never mourn</p>
+<p class="cw-poem__stanza">The mirror hums with faded light<br>Its glass still holds the edge of night<br>The face returns, then slips away - <br>A ghost that never learnt to stay</p>
+<p class="cw-poem__stanza">The clocks all choke on ticking grief,<br>Their hands like prayers without belief.<br>And every dusk, the shadows wane,<br>But whisper back your name again.</p>
+<p class="cw-poem__stanza">Now every night, I drift astray,<br>Through ruins where your echoes lay - <br>And though the dawn still finds my eyes,<br>I live where your tomorrow dies</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning The wind still hums your half-sung tune, by Aayush Sreenath Bhashyam">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-echoes-disha-bhimani"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-echoes-of-yesterday">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-echoes-utkarsh-shah">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-echoes-utkarsh-shah" aria-labelledby="poem-echoes-utkarsh-shah-title">
+      <div class="cw-poem__topline"><span>Poem 03 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-echoes-utkarsh-shah-title">Was it yesterday,</h3>
+      <p class="cw-poem__byline">By <span>Utkarsh Shah</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">Was it yesterday,<br>I realized,<br>I was born,<br>From the heavens without being torn?</p>
+<p class="cw-poem__stanza">Was it yesterday, I used to weep “Stomach Pain”<br>To bunk school, achieving no gain?<br>But I did go to school, angry and sad<br>But so did I return daily, as a happy lad</p>
+<p class="cw-poem__stanza">Was it yesterday, when we used to spend every moment<br>With family and friends at home<br>Now we do long for such moments,<br>In a home away from home</p>
+<p class="cw-poem__stanza">Well, what are these,<br>These are the echoes of Yesterday,<br>Which we long to hear,<br>Even today!!</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Was it yesterday, by Utkarsh Shah">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-echoes-aayush-bhashyam"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-echoes-of-yesterday">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-joy-avika-mundra">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    </div>
   </div>
 </section>
-<section class="uc">
-  <div class="wrap uc__inner">
-    <span class="uc__mark" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
-    </span>
-    <div>
-      <p class="uc__label">Under construction</p>
-      <p class="uc__text">This page is still being written. Photographs, names and figures marked
-        in brackets are placeholders awaiting the school, and more will be added here in the weeks
-        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
+<blockquote class="cw-interlude" data-cw-reveal><p class="cw-interlude__line">Little lights proving everything&#x27;s alright</p><cite class="cw-interlude__credit">— Aryaa Rushab Shah</cite></blockquote>
+<section class="cw-chapter cw-chapter--2" id="chapter-joy-of-little-things" aria-labelledby="chapter-joy-of-little-things-title">
+  <div class="cw-chapter__inner">
+    <header class="cw-chapter__head" data-cw-reveal>
+      <p class="cw-chapter__eyebrow">Chapter 02 <span class="cw-chapter__month">January 2026</span></p>
+      <h2 class="cw-chapter__title" id="chapter-joy-of-little-things-title">Joy of Little Things</h2>
+      <div class="cw-chapter__details">
+        <p class="cw-chapter__count">3 poems · 3 writers</p>
+        <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <div class="cw-chapter__poems">
+    <article class="cw-poem" id="poem-joy-avika-mundra" aria-labelledby="poem-joy-avika-mundra-title">
+      <div class="cw-poem__topline"><span>Poem 01 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-joy-avika-mundra-title">There’s beauty in the sky</h3>
+      <p class="cw-poem__byline">By <span>Avika Mundra</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">There’s beauty in the sky<br>And in worlds gone by<br>In the vast, indelible ocean<br>In all its mystic motion</p>
+<p class="cw-poem__stanza">But those things rarely satisfy<br>The thirst in those eyes<br>That only sparkle and shine<br>At everything between the lines</p>
+<p class="cw-poem__stanza">At the steam from a morn’s cup,<br>Waking the weary soul up,<br>A silver thread in a weathered coat,<br>A lingering song from a distant throat,</p>
+<p class="cw-poem__stanza">Oh incomparable is the beauty<br>Hidden under the glamour of “pretty”</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning There’s beauty in the sky by Avika Mundra">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-echoes-utkarsh-shah"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-joy-of-little-things">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-joy-aryaa-shah">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-joy-aryaa-shah" aria-labelledby="poem-joy-aryaa-shah-title">
+      <div class="cw-poem__topline"><span>Poem 02 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-joy-aryaa-shah-title">Rain drumming on the dorm roof at night,</h3>
+      <p class="cw-poem__byline">By <span>Aryaa Rushab Shah</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">Rain drumming on the dorm roof at night,<br>Midnight chai snuck from the mess, shared quiet.<br>Nailing that math quiz, mates cheering low,<br>Fist-bumps under the study lamp&#x27;s glow.</p>
+<p class="cw-poem__stanza">Warden&#x27;s rare smile, &quot;Lights out soon,&quot;<br>Group study hacks, laughing through the grind.<br>Dawn fog on the field, first bell&#x27;s ring—<br>These small hostel wins? They keep me alive.</p>
+<p class="cw-poem__stanza">Sneaky card games post-lights out,<br>Whispers and giggles till someone snores.<br>Package from home—crisps and a note,<br>Tastes like freedom behind closed doors.</p>
+<p class="cw-poem__stanza">Sunday night roll call skipped in bed,<br>Foggy field walks, breath fogging the air.<br>Stars peeking through the hostel window,<br>Little lights proving everything&#x27;s alright</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Rain drumming on the dorm roof at night, by Aryaa Rushab Shah">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-joy-avika-mundra"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-joy-of-little-things">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-joy-anushya-uk">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-joy-anushya-uk" aria-labelledby="poem-joy-anushya-uk-title">
+      <div class="cw-poem__topline"><span>Poem 03 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-joy-anushya-uk-title">The joy of little things</h3>
+      <p class="cw-poem__byline">By <span>Anushya UK</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">The joy of little things<br>is not waking up happy every day,<br>but finding small reasons to smile anyway.</p>
+<p class="cw-poem__stanza">Like getting an extra chocolate at the bottom of the bag,<br>or when your favorite song plays<br>right when you needed it.</p>
+<p class="cw-poem__stanza">It’s laughing over dumb jokes<br>that don’t even make sense later,<br>and sitting quietly with someone<br>enjoying the silence.</p>
+<p class="cw-poem__stanza">It’s the smell of rain,<br>the feeling when warm sunlight peeps in through the window,<br>and watching the same old movies<br>because it somehow feels comfortable.</p>
+<p class="cw-poem__stanza">We keep thinking joy has to be big,<br>like something special or planned,<br>but most of the time<br>it’s just hidden in simple moments.</p>
+<p class="cw-poem__stanza">And maybe that’s why it matters—<br>because the little things,<br>don’t try to impress you.<br>They just show up.</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning The joy of little things by Anushya UK">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-joy-aryaa-shah"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-joy-of-little-things">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-turning-tanmay-khakharia">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
     </div>
+  </div>
+</section>
+<section class="cw-chapter cw-chapter--3" id="chapter-turning-a-new-page" aria-labelledby="chapter-turning-a-new-page-title">
+  <div class="cw-chapter__inner">
+    <header class="cw-chapter__head" data-cw-reveal>
+      <p class="cw-chapter__eyebrow">Chapter 03 </p>
+      <h2 class="cw-chapter__title" id="chapter-turning-a-new-page-title">Turning a New Page</h2>
+      <div class="cw-chapter__details">
+        <p class="cw-chapter__count">3 poems · 3 writers</p>
+        <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <div class="cw-chapter__poems">
+    <article class="cw-poem" id="poem-turning-tanmay-khakharia" aria-labelledby="poem-turning-tanmay-khakharia-title">
+      <div class="cw-poem__topline"><span>Poem 01 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-turning-tanmay-khakharia-title">As the lonely boy lies curled against the wall,</h3>
+      <p class="cw-poem__byline">By <span>Tanmay Mehul Khakharia</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">As the lonely boy lies curled against the wall,<br>Hoping for a respite from the pain,<br>The thought that keeps him going, a light in the suffocating dark:<br>The freedom of turning a new page.</p>
+<p class="cw-poem__stanza">As the writer crumples the upteenth page of words,<br>Compelled to give through and escape the despair,<br>The thought that drives his pen across the page:<br>The fulfillment of turning a new page.</p>
+<p class="cw-poem__stanza">As the woman crosses the war-ravaged fields, <br>Reaching for the safety beyond the booming weapons of hell,<br>The thought that pushes her broken, bloodied legs:<br>The hope of turning a new page.</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning As the lonely boy lies curled against the wall, by Tanmay Mehul Khakharia">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-joy-anushya-uk"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-turning-a-new-page">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-turning-ananda-priyan">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-turning-ananda-priyan" aria-labelledby="poem-turning-ananda-priyan-title">
+      <div class="cw-poem__topline"><span>Poem 02 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-turning-ananda-priyan-title">I turned a page today</h3>
+      <p class="cw-poem__byline">By <span>Ananda Priyan</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">I turned a page today<br>or something like it.<br>The corner folded clean,<br>no trace of what it held.</p>
+<p class="cw-poem__stanza">The words behave themselves now,<br>sit neatly in their lines.<br>No sudden slips of meaning,<br>no ink that runs too far.</p>
+<p class="cw-poem__stanza">Still, sometimes in the margin,<br>there’s pressure without a mark<br>as if a thought once rested there<br>and chose not to remain.</p>
+<p class="cw-poem__stanza">It’s nothing you could point to,<br>nothing you could prove.<br>Just how the paper softens<br>where it’s been held before.</p>
+<p class="cw-poem__stanza">I read it like it’s ordinary.<br>I let the sentences pass.<br>But something in the silence<br>lingers just a little longer.</p>
+<p class="cw-poem__stanza">I close the book or so I say,<br>But some pages don’t turn away.</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning I turned a page today by Ananda Priyan">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-turning-tanmay-khakharia"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-turning-a-new-page">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-turning-aayush-bhashyam">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-turning-aayush-bhashyam" aria-labelledby="poem-turning-aayush-bhashyam-title">
+      <div class="cw-poem__topline"><span>Poem 03 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-turning-aayush-bhashyam-title">Between the last word and the first,</h3>
+      <p class="cw-poem__byline">By <span>Aayush Sreenath Bhashyam</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">Between the last word and the first,<br> a breath the universe holds long.<br>The self, unmade, unquenched by thirst,<br> becomes the silence before song.<br>What burned was not the whole of you,<br> only the name you wore too tight.<br> The page turns white the way dawn&#x27;s dew<br> dissolves into arriving light.<br>Write nothing yet.<br> Just feel the blankness.<br> Even the ocean stills before it broke.<br>Some depths are born only from darkness <br>some flames rise only after smoke.</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Between the last word and the first, by Aayush Sreenath Bhashyam">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-turning-ananda-priyan"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-turning-a-new-page">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-refuge-kavya-prasad">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    </div>
+  </div>
+</section>
+<blockquote class="cw-interlude" data-cw-reveal><p class="cw-interlude__line">Here I don&#x27;t have to explain a thing,<br>I just draw until my thoughts take wing.</p><cite class="cw-interlude__credit">— Tarushi agarwal</cite></blockquote>
+<section class="cw-chapter cw-chapter--4" id="chapter-refuge-from-reality" aria-labelledby="chapter-refuge-from-reality-title">
+  <div class="cw-chapter__inner">
+    <header class="cw-chapter__head" data-cw-reveal>
+      <p class="cw-chapter__eyebrow">Chapter 04 <span class="cw-chapter__month">April</span></p>
+      <h2 class="cw-chapter__title" id="chapter-refuge-from-reality-title">Refuge from Reality</h2>
+      <div class="cw-chapter__details">
+        <p class="cw-chapter__count">3 poems · 3 writers</p>
+        <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <div class="cw-chapter__poems">
+    <article class="cw-poem" id="poem-refuge-kavya-prasad" aria-labelledby="poem-refuge-kavya-prasad-title">
+      <div class="cw-poem__topline"><span>Poem 01 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-refuge-kavya-prasad-title">Where I reside right now,</h3>
+      <p class="cw-poem__byline">By <span>Kavya Arun Prasad</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">Where I reside right now,<br>Is not where I want to be.<br>Scared and alone,<br>In a world not as care-free.</p>
+<p class="cw-poem__stanza">Responsibilities and worries,<br>Exist as live entities.<br>Troubling my mind constantly,<br>Sometimes getting me on my knees.</p>
+<p class="cw-poem__stanza">And I yearn with my heart,<br>A place where I can sleep.<br>The softness and warmth of the security,<br>A long rest without a peep.</p>
+<p class="cw-poem__stanza">So I go running back,<br>Blind, without clarity.<br>To my family, a warmth I’ll forever seek,<br>The one’s who I call, my refuge from reality.</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Where I reside right now, by Kavya Arun Prasad">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-turning-aayush-bhashyam"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-refuge-from-reality">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-refuge-adira-chellam">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-refuge-adira-chellam" aria-labelledby="poem-refuge-adira-chellam-title">
+      <div class="cw-poem__topline"><span>Poem 02 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-refuge-adira-chellam-title">Reality is not something easy</h3>
+      <p class="cw-poem__byline">By <span>Adira Chellam P</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">Reality is not something easy<br>It might make you go crazy<br>If I had to take a break from mine<br>I’ll run to the place which’ll make me shine.</p>
+<p class="cw-poem__stanza">Anytime to escape this toxic danger,<br>I neither have to meet my friends nor a stranger.<br>I just have to rush towards that room<br>Where my dance skills will unleash and bloom.</p>
+<p class="cw-poem__stanza">Its a place where I forget everything<br>I dance to my fullest and sometimes also sing.<br>This is my refuge, my way out,<br>I’ll dance forever with no doubt.</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Reality is not something easy by Adira Chellam P">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-refuge-kavya-prasad"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-refuge-from-reality">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-refuge-tarushi-agarwal">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-refuge-tarushi-agarwal" aria-labelledby="poem-refuge-tarushi-agarwal-title">
+      <div class="cw-poem__topline"><span>Poem 03 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-refuge-tarushi-agarwal-title">When the whole world gets way too loud,</h3>
+      <p class="cw-poem__byline">By <span>Tarushi agarwal</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">When the whole world gets way too loud,<br>And I just hate being in the crowd,<br>I open my drawer and grab a page,<br>To let go of all my stress and rage.</p>
+<p class="cw-poem__stanza">With a HB pencil in my hand,<br>I create my own quiet land.<br>No marks, no tests, no one to judge,<br>Just black lines and a charcoal smudge.</p>
+<p class="cw-poem__stanza">This notebook is my silent space,<br>My favorite little hiding place.<br>Here I don&#x27;t have to explain a thing,<br>I just draw until my thoughts take wing.</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning When the whole world gets way too loud, by Tarushi agarwal">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-refuge-adira-chellam"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-refuge-from-reality">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-lift-jishnu-yogesh">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    </div>
+  </div>
+</section>
+<section class="cw-chapter cw-chapter--5" id="chapter-lift-yourself-by-yourself" aria-labelledby="chapter-lift-yourself-by-yourself-title">
+  <div class="cw-chapter__inner">
+    <header class="cw-chapter__head" data-cw-reveal>
+      <p class="cw-chapter__eyebrow">Chapter 05 <span class="cw-chapter__month">May</span></p>
+      <h2 class="cw-chapter__title" id="chapter-lift-yourself-by-yourself-title">Lift Yourself by Yourself</h2>
+      <div class="cw-chapter__details">
+        <p class="cw-chapter__count">3 poems · 3 writers</p>
+        <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <div class="cw-chapter__poems">
+    <article class="cw-poem" id="poem-lift-jishnu-yogesh" aria-labelledby="poem-lift-jishnu-yogesh-title">
+      <div class="cw-poem__topline"><span>Poem 01 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-lift-jishnu-yogesh-title">Bound in chains, held up tight</h3>
+      <p class="cw-poem__byline">By <span>Jishnu Teja Yogesh</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">Bound in chains, held up tight<br>The world held its reins, denied me light.<br>Each passing second carved me thin<br>Until I had nothing more within</p>
+<p class="cw-poem__stanza">It broke through me, shattered my fame<br>It got me down, seized my flame<br>No light, not a ray<br>Just an evil bark engulfed in dismay</p>
+<p class="cw-poem__stanza">But when it all vanished aghast<br>Rose a faith to flabbergast<br>And when the end remained face-to-face<br>The flame it lit, burnt ablaze.</p>
+<p class="cw-poem__stanza">No force remained to keep me bound<br>No weight remained to drag me around<br>The world that ruled, now understands<br>Its my time and its I who commands…</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Bound in chains, held up tight by Jishnu Teja Yogesh">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-refuge-tarushi-agarwal"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-lift-yourself-by-yourself">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-lift-ashmi-agarwal">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-lift-ashmi-agarwal" aria-labelledby="poem-lift-ashmi-agarwal-title">
+      <div class="cw-poem__topline"><span>Poem 02 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-lift-ashmi-agarwal-title">Caring, sharing and supporting your friends;</h3>
+      <p class="cw-poem__byline">By <span>Ashmi Agarwal</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">Caring, sharing and supporting your friends;<br>That is fine, but it might come to an end.<br>When you are low and blue,<br>Your heart feels broken into two,<br>Friends may or may not be there to fix you.</p>
+<p class="cw-poem__stanza">Maybe once, maybe twice,<br>You will have people by your side.<br>But to prepare for the last time,<br>Learn to be alone.</p>
+<p class="cw-poem__stanza">Push your self, motivate yourself,<br>Because if not someone else,<br>You will always have yourself.</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Caring, sharing and supporting your friends; by Ashmi Agarwal">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-lift-jishnu-yogesh"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-lift-yourself-by-yourself">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-lift-vrittee-fogla">Next poem <span aria-hidden="true">→</span></a>
+      </nav>
+    </article>
+    <article class="cw-poem" id="poem-lift-vrittee-fogla" aria-labelledby="poem-lift-vrittee-fogla-title">
+      <div class="cw-poem__topline"><span>Poem 03 of 03</span><span>Opening line</span></div>
+      <h3 class="cw-poem__title" id="poem-lift-vrittee-fogla-title">We all live in a world so full, </h3>
+      <p class="cw-poem__byline">By <span>Vrittee Fogla</span></p>
+      <div class="cw-poem__body">
+<p class="cw-poem__stanza">We all live in a world so full, <br>All negativities gathered up.<br>We might go down on the way,<br>But to stay on track, we must get up.</p>
+<p class="cw-poem__stanza">You might have goals to fulfill,<br>You can get some help too.<br>But it will last only,<br>If you change yourself into someone new.</p>
+<p class="cw-poem__stanza">It is not that no one is there,<br>They are the sticks that support us,<br>But the actual strength comes from within,<br>For which lifting yourself is a must.</p>
+      </div>
+      <nav class="cw-poem__nav" aria-label="Navigate from poem beginning We all live in a world so full,  by Vrittee Fogla">
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-lift-ashmi-agarwal"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-lift-yourself-by-yourself">Back to chapter</a>
+      </nav>
+    </article>
+    </div>
+  </div>
+</section>
+
+<section class="cw-afterword" id="about-the-collection" aria-labelledby="cw-afterword-heading">
+  <div class="wrap cw-afterword__layout">
+    <div>
+      <p class="cw-kicker">About the collection</p>
+      <h2 id="cw-afterword-heading">A space for student voices.</h2>
+    </div>
+    <div class="cw-afterword__copy">
+      <p>This anthology presents student poems supplied in the Creative Writing collection. Each chapter follows the themes of that collection, with each writer credited beside their work.</p>
+      <p>For magazine articles and complete issues, visit CIRS&rsquo;s related publications.</p>
+      <div class="cw-afterword__links">
+        <a href="blog.html">CIRS Blog <span aria-hidden="true">↗</span></a>
+        <a href="crossroads.html">Crossroads archive <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cw-future" aria-labelledby="cw-future-heading">
+  <div class="wrap cw-future__layout">
+    <div>
+      <p class="cw-kicker">Future writing</p>
+      <h2 id="cw-future-heading">The collection can grow.</h2>
+    </div>
+    <p>Submission details will be published when they are available from the editorial board.</p>
+    <a href="#chapters">Back to the chapters <span aria-hidden="true">↑</span></a>
   </div>
 </section>
 </main>
@@ -1639,12 +887,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102" defer></script>
-<script src="assets/js/cirs.js?b=102" defer></script>
-<script src="assets/js/pages.js?b=102" defer></script>
-<script src="assets/js/footer.js?b=102-footer-1" defer></script>
-<script src="assets/js/cwriting.js?b=102" defer></script>
+<script src="assets/vendor/gsap.min.js?b=102-anthology-2" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-anthology-2" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-anthology-2" defer></script>
+<script src="assets/js/cirs.js?b=102-anthology-2-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-anthology-2" defer></script>
+<script src="assets/js/footer.js?b=102-anthology-2-footer-1" defer></script>
+<script src="assets/js/cwriting.js?b=102-anthology-2" defer></script>
 </body>
 </html>

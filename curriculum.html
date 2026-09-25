@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102-curriculum-5">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102-curriculum-5">
-<link rel="stylesheet" href="assets/css/pages.css?b=102-curriculum-5">
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-curriculum-6">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-curriculum-6">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-curriculum-6">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,9 +37,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/curriculum.css?b=102-curriculum-5">
-<link rel="stylesheet" href="assets/css/typography.css?b=102-curriculum-5">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-curriculum-5-footer-1">
+<link rel="stylesheet" href="assets/css/curriculum.css?b=102-curriculum-6">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-curriculum-6">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-curriculum-6-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-curriculum-6-drawer-5">
 </head>
 
 <body class="curriculum">
@@ -205,20 +206,41 @@
     </div>
   </div>
 </header>
-<div class="drawer" id="drawer" hidden>
-  <nav class="drawer__grid" aria-label="All pages">
-    <div>
-      <p class="sc" id="dnav-vision">Vision</p>
-      <ul aria-labelledby="dnav-vision">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="1" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="false" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button" hidden>
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-student-life">Student Life</p>
-      <ul aria-labelledby="dnav-student-life">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="true" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button">
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
         <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
         <li><a href="curriculum.html" aria-current="page">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
@@ -226,45 +248,60 @@
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
-      <ul aria-labelledby="dnav-literary-excellence">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
-      <ul aria-labelledby="dnav-art-culture-music">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-connect">Connect</p>
-      <ul aria-labelledby="dnav-connect">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
-    </div>
-  </nav>
-  <div class="drawer__utility">
-    <a href="alumni.html">Alumni</a>
-    <a href="school-info.html#calendar">Calendar</a>
-    <a href="tel:+914222613300">+91 422 261 3300</a>
-    <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+    </section>
   </div>
-  <div class="drawer__cta">
-    <a class="btn btn--primary btn--lg" href="admissions.html#apply">Apply for admission</a>
-    <a class="btn btn--outline btn--lg" href="admissions.html#visit">Book a campus visit</a>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
   </div>
 </div>
 <main id="main">
@@ -273,6 +310,10 @@
     <p class="marker"><span class="sc">Curriculum</span></p>
     <h1 class="serif" data-split>The shape of <em>learning at CIRS.</em></h1>
     <p class="lead">CBSE begins in Grade V. From Grade XI, students can choose the IB Diploma Programme. The Chinmaya Vision Programme connects academic study with daily school life.</p>
+    <p class="pagehead__cta">
+      <a class="btn btn--primary btn--lg" href="#pathways">Compare pathways</a>
+      <a class="btn btn--ghost btn--lg" href="admissions.html#apply">Admissions guide</a>
+    </p>
   </div>
 </section>
 <nav class="jump" aria-label="On this page">
@@ -283,6 +324,7 @@
     </summary>
     <div class="jump__panel" id="jumpPanel">
       <p aria-hidden="true">On this page</p>
+      <a href="#pathways">Compare pathways</a>
       <a href="#journey">Academic journey</a>
       <a href="#cbse">CBSE</a>
       <a href="#ib">IB Diploma Programme</a>
@@ -291,6 +333,50 @@
     </div>
   </details>
 </nav>
+<section class="section curriculum-pathways" id="pathways">
+  <div class="wrap">
+    <header class="curriculum-pathways__head">
+      <p class="marker"><span class="sc">Compare pathways</span></p>
+      <h2 class="serif h2" data-split>Two routes through <em>the senior years.</em></h2>
+      <p class="lead">In Grades XI and XII, families can explore CBSE and the IB Diploma at
+        CIRS. Compare how each programme is organised, then request the current subject and
+        entry information before making a choice.</p>
+    </header>
+
+    <div class="curriculum-pathways__grid">
+      <article class="curriculum-pathway" aria-labelledby="curriculum-cbse-title">
+        <p class="curriculum-pathway__name">CBSE</p>
+        <h3 class="serif h3" id="curriculum-cbse-title">A continuing national pathway</h3>
+        <dl>
+          <div><dt>Years at CIRS</dt><dd>Grades V to XII</dd></div>
+          <div><dt>Programme shape</dt><dd>A broad foundation through Grade X, then Engineering, Medicine or Management in the senior years.</dd></div>
+          <div><dt>Assessment</dt><dd>Board examinations in Grades X and XII.</dd></div>
+          <div><dt>Current subjects</dt><dd>Ask the Academic Office for the latest choices and permitted combinations.</dd></div>
+        </dl>
+        <a class="curriculum-pathway__link" href="#cbse">
+          <span>Explore CBSE on this page</span><span aria-hidden="true">&darr;</span>
+        </a>
+      </article>
+
+      <article class="curriculum-pathway" aria-labelledby="curriculum-ib-title">
+        <p class="curriculum-pathway__name">IB Diploma</p>
+        <h3 class="serif h3" id="curriculum-ib-title">A two-year diploma</h3>
+        <dl>
+          <div><dt>Years at CIRS</dt><dd>Grades XI and XII</dd></div>
+          <div><dt>Programme shape</dt><dd>Six subjects, including two languages and Mathematics, alongside the Diploma core.</dd></div>
+          <div><dt>Assessment</dt><dd>Subject assessments and the Diploma core form the final award.</dd></div>
+          <div><dt>Current subjects</dt><dd>Ask the IB Coordinator for the latest subjects, levels and prerequisites.</dd></div>
+        </dl>
+        <a class="curriculum-pathway__link" href="curriculum/ib-diploma.html">
+          <span>Read the IB Diploma programme</span><span aria-hidden="true">&nearr;</span>
+        </a>
+      </article>
+    </div>
+    <p class="curriculum-pathways__note">Subject availability, combinations and entry
+      requirements may vary by intake. <a href="mailto:info@cirschool.org?subject=Current%20Grade%20XI%20pathway%20choices">Ask the school for the current details</a>.</p>
+  </div>
+</section>
+
 <section class="section curriculum-journey" id="journey">
   <div class="wrap">
     <header class="curriculum-journey__head">
@@ -407,62 +493,51 @@
         <p class="ibgroups__n">Group 1</p>
         <h4 class="serif ibgroups__name">Language A1</h4>
         <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-and-literature/language-a-literature/" target="_blank" rel="noopener"><span class="ibgroups__subject">English A1</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-and-literature/language-a-literature/" target="_blank" rel="noopener"><span class="ibgroups__subject">English A1</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-and-literature/language-a-literature/" target="_blank" rel="noopener"><span class="ibgroups__subject">English A1</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
         </ul>
       </li>
       <li class="ibgroups__group">
         <p class="ibgroups__n">Group 2</p>
         <h4 class="serif ibgroups__name">Second Language</h4>
         <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener"><span class="ibgroups__subject">Hindi B</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-ab-initio/" target="_blank" rel="noopener"><span class="ibgroups__subject">French ab initio</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener"><span class="ibgroups__subject">French B</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener"><span class="ibgroups__subject">Hindi B</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-ab-initio/" target="_blank" rel="noopener"><span class="ibgroups__subject">French ab initio</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener"><span class="ibgroups__subject">French B</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
         </ul>
       </li>
       <li class="ibgroups__group">
         <p class="ibgroups__n">Group 3</p>
         <h4 class="serif ibgroups__name">Individuals and societies</h4>
         <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/economics/" target="_blank" rel="noopener"><span class="ibgroups__subject">Economics</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/economics/" target="_blank" rel="noopener"><span class="ibgroups__subject">Economics</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/business-and-management/" target="_blank" rel="noopener"><span class="ibgroups__subject">Business &amp; Management</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/business-and-management/" target="_blank" rel="noopener"><span class="ibgroups__subject">Business &amp; Management</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/psychology/" target="_blank" rel="noopener"><span class="ibgroups__subject">Psychology</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/psychology/" target="_blank" rel="noopener"><span class="ibgroups__subject">Psychology</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/economics/" target="_blank" rel="noopener"><span class="ibgroups__subject">Economics</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/business-and-management/" target="_blank" rel="noopener"><span class="ibgroups__subject">Business &amp; Management</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/psychology/" target="_blank" rel="noopener"><span class="ibgroups__subject">Psychology</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
         </ul>
       </li>
       <li class="ibgroups__group">
         <p class="ibgroups__n">Group 4</p>
         <h4 class="serif ibgroups__name">Experimental sciences</h4>
         <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/biology/" target="_blank" rel="noopener"><span class="ibgroups__subject">Biology</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/biology/" target="_blank" rel="noopener"><span class="ibgroups__subject">Biology</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/chemistry/" target="_blank" rel="noopener"><span class="ibgroups__subject">Chemistry</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/chemistry/" target="_blank" rel="noopener"><span class="ibgroups__subject">Chemistry</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/physics/" target="_blank" rel="noopener"><span class="ibgroups__subject">Physics</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/physics/" target="_blank" rel="noopener"><span class="ibgroups__subject">Physics</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/computer-science/" target="_blank" rel="noopener"><span class="ibgroups__subject">Computer Science</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/computer-science/" target="_blank" rel="noopener"><span class="ibgroups__subject">Computer Science</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/environmental-systems-and-societies/" target="_blank" rel="noopener"><span class="ibgroups__subject">Environmental Systems &amp; Societies (ESS)</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/biology/" target="_blank" rel="noopener"><span class="ibgroups__subject">Biology</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/chemistry/" target="_blank" rel="noopener"><span class="ibgroups__subject">Chemistry</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/physics/" target="_blank" rel="noopener"><span class="ibgroups__subject">Physics</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/computer-science/" target="_blank" rel="noopener"><span class="ibgroups__subject">Computer Science</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/environmental-systems-and-societies/" target="_blank" rel="noopener"><span class="ibgroups__subject">Environmental Systems &amp; Societies (ESS)</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
         </ul>
       </li>
       <li class="ibgroups__group">
         <p class="ibgroups__n">Group 5</p>
         <h4 class="serif ibgroups__name">Mathematics</h4>
         <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_analysis_en.pdf" target="_blank" rel="noopener"><span class="ibgroups__subject">Mathematics: Analysis &amp; Approaches (AA)</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_analysis_en.pdf" target="_blank" rel="noopener"><span class="ibgroups__subject">Mathematics: Analysis &amp; Approaches (AA)</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_application_en.pdf" target="_blank" rel="noopener"><span class="ibgroups__subject">Mathematics: Applications &amp; Interpretation (AI)</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_application_en.pdf" target="_blank" rel="noopener"><span class="ibgroups__subject">Mathematics: Applications &amp; Interpretation (AI)</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_analysis_en.pdf" target="_blank" rel="noopener"><span class="ibgroups__subject">Mathematics: Analysis &amp; Approaches (AA)</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_application_en.pdf" target="_blank" rel="noopener"><span class="ibgroups__subject">Mathematics: Applications &amp; Interpretation (AI)</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
         </ul>
       </li>
       <li class="ibgroups__group">
         <p class="ibgroups__n">Group 6</p>
         <h4 class="serif ibgroups__name">The arts</h4>
         <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/the-arts/visual-arts/" target="_blank" rel="noopener"><span class="ibgroups__subject">Visual Arts</span> <span class="ibgroups__lv">SL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/the-arts/visual-arts/" target="_blank" rel="noopener"><span class="ibgroups__subject">Visual Arts</span> <span class="ibgroups__lv ibgroups__lv--hl">HL</span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
+          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/the-arts/visual-arts/" target="_blank" rel="noopener"><span class="ibgroups__subject">Visual Arts</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
         </ul>
       </li>
     </ol>
@@ -615,11 +690,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102-curriculum-5" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102-curriculum-5" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102-curriculum-5" defer></script>
-<script src="assets/js/cirs.js?b=102-curriculum-5" defer></script>
-<script src="assets/js/pages.js?b=102-curriculum-5" defer></script>
-<script src="assets/js/footer.js?b=102-curriculum-5-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=102-curriculum-6" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-curriculum-6" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-curriculum-6" defer></script>
+<script src="assets/js/cirs.js?b=102-curriculum-6-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-curriculum-6" defer></script>
+<script src="assets/js/footer.js?b=102-curriculum-6-footer-1" defer></script>
 </body>
 </html>
