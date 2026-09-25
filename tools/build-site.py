@@ -47,7 +47,7 @@ import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=102"
+CACHE_BUST = "b=104"
 
 # Questions to settle before an application is submitted.
 HERO_DATES = '''    <dl class="pagehero__dates">
