@@ -57,6 +57,11 @@ every YouTube link. `tools/make-theatre.py` cuts the images into `assets/img/the
 school's Drive (the originals are not in the repository). A photograph is attributed to a house
 only by its Drive folder and the school's own YouTube titles, never by costume colour.
 
+Leadership's people, portrait crops and six messages are data in `tools/leadership.py`;
+`tools/make-leadership.py` cuts the portraits. The messages are the school's published text word
+for word — do not copy-edit them. The page keeps native scroll (no Lenis) so its `#msg-…` links
+are real history entries.
+
 ## Checks, before every push
 
 ```sh
