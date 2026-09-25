@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>News</title>
-<meta name="description" content="News and events from Chinmaya International Residential School — assemblies, weeks, competitions and the term's diary.">
+<title>News | The CIRS Journal</title>
+<meta name="description" content="The CIRS Journal: school news, results and stories from Chinmaya International Residential School in Siruvani, Coimbatore.">
 <meta name="theme-color" content="#0E0B12">
 <link rel="canonical" href="https://www.cirschool.org/news.html">
 <!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
@@ -16,42 +16,28 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="News">
-<meta property="og:description" content="News and events from Chinmaya International Residential School — assemblies, weeks, competitions and the term's diary.">
+<meta property="og:title" content="News | The CIRS Journal">
+<meta property="og:description" content="The CIRS Journal: school news, results and stories from Chinmaya International Residential School in Siruvani, Coimbatore.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="News">
-<meta name="twitter:description" content="News and events from Chinmaya International Residential School — assemblies, weeks, competitions and the term's diary.">
+<meta name="twitter:title" content="News | The CIRS Journal">
+<meta name="twitter:description" content="The CIRS Journal: school news, results and stories from Chinmaya International Residential School in Siruvani, Coimbatore.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102">
-<link rel="stylesheet" href="assets/css/pages.css?b=102">
-<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
-     removes once it has played. With scripting off nothing removes it, and
-     it covers the page on every page of this site. One rule, applied only
-     when there is no scripting, is the whole fix. Crossroads already does
-     this for its own curtain further down. The footer rule is the same
-     kind of fallback: cirs.js unpins a footer taller than the window, and
-     without it a phone could never scroll up to the top of the footer. -->
-<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/connect.css?b=102">
-<link rel="stylesheet" href="assets/css/typography.css?b=102">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-footer-1">
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-journal-11">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-journal-11">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-journal-11">
+
+<link rel="stylesheet" href="assets/css/news-journal.css?b=102-journal-11">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-journal-11">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-journal-11-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=102-journal-11-drawer-5">
 </head>
 
-<body class="connect">
+<body class="news-journal litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -190,7 +176,7 @@
     </a>
 
     <div class="header__right">
-      <a class="htab htab--news" href="news.html" data-magnetic>
+      <a class="htab htab--news" href="news.html" aria-current="page" data-magnetic>
         <span class="htab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
         </span>
@@ -205,20 +191,41 @@
     </div>
   </div>
 </header>
-<div class="drawer" id="drawer" hidden>
-  <nav class="drawer__grid" aria-label="All pages">
-    <div>
-      <p class="sc" id="dnav-vision">Vision</p>
-      <ul aria-labelledby="dnav-vision">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="4" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="false" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button" hidden>
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
         <li><a href="founder.html">Founder</a></li>
         <li><a href="why-cirs.html">Why CIRS</a></li>
         <li><a href="school-history.html">School History</a></li>
         <li><a href="leadership.html">Leadership</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-student-life">Student Life</p>
-      <ul aria-labelledby="dnav-student-life">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
         <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
@@ -226,101 +233,63 @@
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-literary-excellence">Literary Excellence</p>
-      <ul aria-labelledby="dnav-literary-excellence">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
         <li><a href="crossroads.html">Crossroads</a></li>
         <li><a href="blog.html">CIRS Blog</a></li>
         <li><a href="creative-writing.html">Creative Writing</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-art-culture-music">Art, Culture & Music</p>
-      <ul aria-labelledby="dnav-art-culture-music">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
         <li><a href="captures.html">CIRS Captures</a></li>
         <li><a href="art-attack.html">CIRS Art Attack</a></li>
         <li><a href="festivals.html">CIRS Festivals</a></li>
         <li><a href="theatre.html">CIRS Theatre</a></li>
         <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
       </ul>
-    </div>
-    <div>
-      <p class="sc" id="dnav-connect">Connect</p>
-      <ul aria-labelledby="dnav-connect">
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="true" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button">
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
         <li><a href="school-info.html">School Information</a></li>
         <li><a href="news.html" aria-current="page">News</a></li>
         <li><a href="admissions.html">Admissions</a></li>
         <li><a href="parent-portal.html">Parent Portal</a></li>
         <li><a href="alumni.html">Alumni</a></li>
       </ul>
+    </section>
+  </div>
+</nav>
     </div>
-  </nav>
-  <div class="drawer__utility">
-    <a href="alumni.html">Alumni</a>
-    <a href="school-info.html#calendar">Calendar</a>
-    <a href="tel:+914222613300">+91 422 261 3300</a>
-    <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
-  </div>
-  <div class="drawer__cta">
-    <a class="btn btn--primary btn--lg" href="admissions.html#apply">Apply for admission</a>
-    <a class="btn btn--outline btn--lg" href="admissions.html#visit">Book a campus visit</a>
-  </div>
-</div>
-<main id="main">
-<section class="pagehero" id="top" data-ground="#0E0B12">
-  <div class="pagehero__media" style="background-image:url('assets/img/news-hero.jpg?b=102')">
-    <video class="pagehero__video" autoplay muted loop playsinline
-           poster="assets/img/news-hero.jpg?b=102" aria-hidden="true"
-           width="1280" height="720" fetchpriority="high">
-      <source src="assets/video/campus-loop.webm?b=102" type="video/webm">
-      <source src="assets/video/campus-loop.mp4?b=102" type="video/mp4">
-    </video>
-  </div>
-  <div class="pagehero__scrim" aria-hidden="true"></div>
-  <div class="wrap pagehero__inner">
-    <p class="marker"><span class="sc">News from campus</span></p>
-    <h1 class="serif" data-split>The Campus, <em>As It Happens.</em></h1>
-    <p class="lead">Results, assemblies, weeks and celebrations, reported by the departments and the houses — and the dates already in the school calendar.</p>
-    <p class="pagehero__cta">
-      <a class="btn btn--primary btn--lg" href="#latest">Read the latest</a>
-      <a class="btn btn--ghost btn--lg" href="#diary">From the school diary</a>
-    </p>
-    <div class="newsflash" id="newsFlash">
-      <p class="newsflash__label"><span class="newsflash__dot" aria-hidden="true"></span>Latest</p>
-      <div class="newsflash__items">
-        <p class="newsflash__item is-on">
-          <span class="newsflash__when">Final examination, May 2026</span>
-          <a class="newsflash__what" href="#latest">Twenty-four candidates, twenty-four diplomas</a>
-        </p>
-        <p class="newsflash__item">
-          <span class="newsflash__when">CBSE, March&ndash;April 2026</span>
-          <a class="newsflash__what" href="#results">Class XII Management closes the year on a 94% average</a>
-        </p>
-        <p class="newsflash__item">
-          <span class="newsflash__when">4&ndash;9 August 2025</span>
-          <a class="newsflash__what" href="#highlights">English Week fills the portals with storytelling and spell bees</a>
-        </p>
-        <p class="newsflash__item">
-          <span class="newsflash__when">25 July 2025</span>
-          <a class="newsflash__what" href="#highlights">Science Expo draws fifty schools to 140 models</a>
-        </p>
-        <p class="newsflash__item">
-          <span class="newsflash__when">7&ndash;11 July 2025</span>
-          <a class="newsflash__what" href="#highlights">Mathematics Week ends with a house-wise Maths Run</a>
-        </p>
-        <p class="newsflash__item">
-          <span class="newsflash__when">From 19 April 2025</span>
-          <a class="newsflash__what" href="#more">Seva Week takes students to homes, centres and temples</a>
-        </p>
-        <p class="newsflash__item">
-          <span class="newsflash__when">19&ndash;21 January 2026</span>
-          <a class="newsflash__what" href="#diary">Chinmaya Olympiad in Mathematics and Science</a>
-        </p>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
       </div>
     </div>
   </div>
-</section>
+</div>
+<main id="main">
 <nav class="jump" aria-label="On this page">
   <details class="jump__details">
     <summary class="jump__toggle" title="On this page">
@@ -329,367 +298,396 @@
     </summary>
     <div class="jump__panel" id="jumpPanel">
       <p aria-hidden="true">On this page</p>
-      <a href="#latest">Latest</a>
-      <a href="#results">CBSE, March&ndash;April 2026</a>
-      <a href="#highlights">Highlighted stories</a>
-      <a href="#more">More from campus</a>
-      <a href="#diary">The diary</a>
+      <a href="#top">Twenty-four candidates. Twenty-four diplomas.</a>
+      <a href="#reports">Reports &amp; results</a>
+      <a href="#more">School life, in focus</a>
+      <a href="#browse">Browse the journal</a>
+      <a href="#archive">Archive</a>
     </div>
   </details>
 </nav>
-<section class="section" id="latest">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">Latest</span></p>
-      <h2 class="serif h2" data-split>The Story <em>Leading Today.</em></h2>
+<section class="journal-opening" id="top" aria-labelledby="journal-title">
+  <div class="journal-wrap">
+    <div class="journal-opening__folio"><span>CIRS / Journal</span><span>News</span></div>
+    <div class="journal-opening__masthead">
+      <h1 id="journal-title">Stories from CIRS<span class="journal-opening__period">.</span></h1>
+      <p>Results, ideas and moments from school life in Siruvani.</p>
     </div>
 
-    <div class="feature__inner" style="margin-top:clamp(28px,3.4vw,44px)">
-      <figure class="feature__media is-placeholder img-reveal">
-        <span class="feature__ph">Photograph &mdash; IB Diploma<br>results day to be supplied</span>
-      </figure>
-      <div class="feature__text rv">
-        <p class="newslead__date">Final examination, May 2026</p>
-        <h2 class="serif h2 newslead__title" data-split>Twenty-&#8288;four Candidates, <em>Twenty-&#8288;four Diplomas.</em></h2>
-        <p class="copy">All twenty-four candidates registered for the International Baccalaureate
-          Diploma in the May 2026 examination were awarded the diploma. The average total was
-          <b>39.4 points</b>, and the highest score was a perfect <b>45 out of 45</b>.</p>
-        <p class="copy" style="margin-top:10px">Twelve students scored 40 points or above, eight
-          scored between 36 and 39, and four scored below 36. <b>Adithyan Diwakar Vidya</b> and
-          <b>Shriya Shruti Misra</b> were the toppers, both with 45 out of 45.</p>
-
-        <dl class="factrail" style="margin-top:26px">
-          <div><dt>Average score</dt><dd>39.4 points</dd></div>
-          <div><dt>Top score</dt><dd>45 / 45</dd></div>
-          <div><dt>Diplomas awarded</dt><dd>24 of 24</dd></div>
-        </dl>
-
-        <p class="newsitem__src" style="margin-top:22px">Reported as <a
-          href="https://cirschool.org/news.html">CIRS excels in IB results 2026</a></p>
+    <section class="journal-hero" id="latest" aria-label="Latest CIRS stories" aria-roledescription="carousel">
+      <div class="journal-hero__stage" id="journal-hero-stage" aria-live="off">
+        <article class="journal-hero__slide journal-hero__slide--ib is-active" data-journal-slide>
+          <div class="journal-hero__copy">
+            <p class="journal-hero__meta"><span>Latest news / Achievements</span><span><time datetime="2026-05">May 2026</time> final examination</span></p>
+            <div><h2>Twenty-four candidates.<br>Twenty-four diplomas.</h2><p>All 24 candidates in the May 2026 IB Diploma examination earned the diploma. CIRS reported a 39.4-point average and a highest score of 45 out of 45.</p><a class="journal-hero__link" href="#ib-results-2026">Explore IB results <span aria-hidden="true">↗</span></a></div>
+          </div>
+          <div class="journal-hero__visual journal-hero__visual--type" aria-label="24 diplomas awarded to 24 candidates"><strong>24<span>/ 24</span></strong><small>IB diplomas awarded<br>May 2026 examination</small></div>
+        </article>
+        <article class="journal-hero__slide journal-hero__slide--cbse" data-journal-slide>
+          <div class="journal-hero__copy">
+            <p class="journal-hero__meta"><span>Achievements / Board results</span><span><time datetime="2026-03">March–April 2026</time> examinations</span></p>
+            <div><h2>CBSE board<br>results.</h2><p>Class XII Science, Class XII Management and Class X results, including the school-reported toppers, averages and score distributions.</p><a class="journal-hero__link" href="#cbse-results-2026">Explore CBSE results <span aria-hidden="true">↗</span></a></div>
+          </div>
+          <div class="journal-hero__visual journal-hero__visual--scores" aria-label="Top reported scores: 95.60 percent Science, 99.0 percent Management, 98.60 percent Class X"><span><b>95.60%</b><small>XII / Science</small></span><span><b>99.0%</b><small>XII / Management</small></span><span><b>98.60%</b><small>Class X</small></span></div>
+        </article>
+        <article class="journal-hero__slide journal-hero__slide--photo" data-journal-slide>
+          <div class="journal-hero__copy">
+            <p class="journal-hero__meta"><span>Campus / Student voice</span><span>Published <time datetime="2025-10-11">11 October 2025</time></span></p>
+            <div><h2>The student<br>vote.</h2><p>Class Representative Elections gave students a hands-on experience of nominations, campaigning, voting and counting.</p><a class="journal-hero__link" href="https://new.cirschool.org/cirs-general-election/">Read school report <span aria-hidden="true">↗</span></a></div>
+          </div>
+          <a class="journal-hero__visual journal-hero__visual--photo" href="https://new.cirschool.org/cirs-general-election/" aria-label="Read the CIRS Class Representative Elections report"><img src="assets/img/news/class-representative-elections-1200.webp" srcset="assets/img/news/class-representative-elections-720.webp 720w, assets/img/news/class-representative-elections-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 52vw" width="1200" height="620" alt="CIRS student writing at a desk during class representative elections, with an NCC cadet nearby" decoding="async"></a>
+        </article>
+        <article class="journal-hero__slide journal-hero__slide--photo" data-journal-slide>
+          <div class="journal-hero__copy">
+            <p class="journal-hero__meta"><span>Academics / Mathematics</span><span>Published <time datetime="2025-10-09">9 October 2025</time></span></p>
+            <div><h2>Mathematics<br>Week.</h2><p>Students took on the Maths Run and a senior quiz; Shishuvatika children explored mathematics through traditional Indian games.</p><a class="journal-hero__link" href="https://new.cirschool.org/mathematics-week-2025/">Read school report <span aria-hidden="true">↗</span></a></div>
+          </div>
+          <a class="journal-hero__visual journal-hero__visual--photo" href="https://new.cirschool.org/mathematics-week-2025/" aria-label="Read the CIRS Mathematics Week report"><img src="assets/img/news/mathematics-week-1200.webp" srcset="assets/img/news/mathematics-week-720.webp 720w, assets/img/news/mathematics-week-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 52vw" width="1200" height="620" alt="CIRS students working together on a tabletop mathematics challenge" decoding="async"></a>
+        </article>
+        <article class="journal-hero__slide journal-hero__slide--photo" data-journal-slide>
+          <div class="journal-hero__copy">
+            <p class="journal-hero__meta"><span>Academics / Science</span><span>Published <time datetime="2025-10-08">8 October 2025</time></span></p>
+            <div><h2>Science<br>Expo.</h2><p>Students presented more than 140 activities and models across Biology, Physics, Chemistry and Environmental Science. Around 50 schools attended.</p><a class="journal-hero__link" href="https://new.cirschool.org/science-expo/">Read school report <span aria-hidden="true">↗</span></a></div>
+          </div>
+          <a class="journal-hero__visual journal-hero__visual--photo" href="https://new.cirschool.org/science-expo/" aria-label="Read the CIRS Science Expo report"><img src="assets/img/news/science-expo-1200.webp" srcset="assets/img/news/science-expo-720.webp 720w, assets/img/news/science-expo-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 52vw" width="1200" height="620" alt="CIRS student explaining a science exhibit to a visitor at the Science Expo" decoding="async"></a>
+        </article>
       </div>
-    </div>
+      <div class="journal-hero__controls">
+        <p>Latest stories <span id="journal-hero-count">01 / 05</span></p>
+        <div class="journal-hero__indicators" role="group" aria-label="Choose a featured story">
+          <button type="button" data-journal-slide-to="0" aria-label="Show IB Diploma results" aria-pressed="true"></button>
+          <button type="button" data-journal-slide-to="1" aria-label="Show CBSE board results" aria-pressed="false"></button>
+          <button type="button" data-journal-slide-to="2" aria-label="Show Class Representative Elections" aria-pressed="false"></button>
+          <button type="button" data-journal-slide-to="3" aria-label="Show Mathematics Week" aria-pressed="false"></button>
+          <button type="button" data-journal-slide-to="4" aria-label="Show Science Expo" aria-pressed="false"></button>
+        </div>
+        <div class="journal-hero__actions"><button type="button" id="journal-hero-toggle" aria-label="Pause story rotation" aria-pressed="false">Pause</button><button type="button" id="journal-hero-prev" aria-label="Previous story">←</button><button type="button" id="journal-hero-next" aria-label="Next story">→</button></div>
+      </div>
+      <p class="journal-visually-hidden" id="journal-hero-announcement" role="status" aria-live="polite"></p>
+    </section>
+
+    <nav class="journal-shortcuts" aria-label="News page sections">
+      <a href="#results">Full results <span aria-hidden="true">↗</span></a>
+      <a href="#highlights">Highlighted reports <span aria-hidden="true">↗</span></a>
+      <a href="#diary">School diary <span aria-hidden="true">↗</span></a>
+    </nav>
+
+    <nav class="journal-highlights-nav" id="highlights" aria-label="Highlighted reports">
+      <div><p>Highlighted reports</p><span id="journal-highlight-count">1 of 3</span></div>
+      <ol>
+        <li><a href="#highlight-science" aria-current="true"><span>01</span> Science Expo</a></li>
+        <li><a href="#highlight-english"><span>02</span> English Week</a></li>
+        <li><a href="#highlight-mathematics"><span>03</span> Mathematics Week</a></li>
+      </ol>
+      <div class="journal-highlights-nav__progress" aria-hidden="true"><span id="journal-highlight-progress"></span></div>
+    </nav>
+    <article class="journal-feature" id="highlight-science">
+      <a class="journal-feature__link" href="https://new.cirschool.org/science-expo/" aria-label="Read Science Expo on the CIRS school site">
+        <div class="journal-feature__image">
+          <img src="assets/img/news/science-expo-1200.webp"
+               srcset="assets/img/news/science-expo-720.webp 720w, assets/img/news/science-expo-1200.webp 1200w"
+               sizes="(max-width: 760px) 100vw, 60vw" width="1200" height="620"
+               alt="CIRS student explaining a science exhibit to a visitor at the Science Expo"
+               loading="lazy" decoding="async">
+          <span class="journal-feature__caption">Science Expo / CIRS</span>
+        </div>
+        <div class="journal-feature__copy">
+          <p class="journal-feature__eyebrow">Selected story <span>Academics / <time datetime="2025-07-25">25 July 2025</time></span></p>
+          <div>
+            <h2>Science<br>Expo.</h2>
+            <p>At the Science Expo, students presented more than 140 activities and models across Biology, Physics, Chemistry and Environmental Science. Around 50 schools in and around Coimbatore attended.</p>
+            <span class="journal-read">Read story <span aria-hidden="true">↗</span></span>
+          </div>
+        </div>
+      </a>
+      <details class="journal-report" id="report-science-expo">
+        <summary>Read the full Science Expo report on this page</summary>
+        <div class="journal-report__body">
+          <h3>Science Expo</h3>
+          <p>As part of Science Week, the Department of Sciences hosted its Science Expo, turning the campus into a centre of exploration and innovation — over 140 activities and models across Biology, Physics, Chemistry and Environmental Science.</p>
+          <p>Presentations ranged from life processes and principles of motion to chemical reactions and sustainability, brought to life through interactive models, charts, digital displays and experiments. Around 50 schools from in and around Coimbatore attended.</p>
+          <p class="journal-report__source"><a href="https://new.cirschool.org/science-expo/">Read the original CIRS report <span aria-hidden="true">↗</span></a></p>
+        </div>
+      </details>
+    </article>
   </div>
 </section>
 
-<section class="section on-paper-2" id="results">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">CBSE, March&ndash;April 2026</span></p>
-      <h2 class="serif h2" data-split>The Board <em>Results.</em></h2>
-      <p class="lead">Class XII in both streams, and Class X. Toppers, class averages and the
-        distribution as the school reported them.</p>
+<section class="journal-latest" id="reports" aria-labelledby="latest-title">
+  <div class="journal-wrap">
+    <div class="journal-section-head">
+      <p class="journal-section-head__label">The journal</p>
+      <h2 id="latest-title">Reports &amp; results</h2>
+      <p>School results and longer reports, based on the school’s published accounts and photographs.</p>
     </div>
 
-    <dl class="factrail rv">
-      <div><dt>XII &mdash; Science topper</dt><dd>95.60%</dd></div>
-      <div><dt>XII &mdash; Management topper</dt><dd>99.0%</dd></div>
-      <div><dt>X topper</dt><dd>98.60%</dd></div>
-    </dl>
+    <div class="journal-results" id="results">
+      <article class="journal-result journal-result--ib" id="ib-results-2026">
+        <a class="journal-result__main" href="our-results.html#ib-results" aria-label="Explore the 2026 IB Diploma results">
+          <p class="journal-meta"><span>Achievements</span><span>Final examination / <time datetime="2026-05">May 2026</time></span></p>
+          <h3>Twenty-four candidates.<br>Twenty-four diplomas.</h3>
+          <p>Every candidate registered for the May 2026 IB Diploma examination was awarded the diploma. The average total was 39.4 points; the highest was 45 out of 45.</p>
+          <dl class="journal-facts"><div><dt>Average score</dt><dd>39.4 points</dd></div><div><dt>Top score</dt><dd>45 / 45</dd></div><div><dt>Diplomas awarded</dt><dd>24 of 24</dd></div></dl>
+          <div class="journal-result__bottom"><strong>24<span> / 24</span></strong><span class="journal-read">Explore results <span aria-hidden="true">↗</span></span></div>
+        </a>
+        <details class="journal-result__detail">
+          <summary>Read the full news brief</summary>
+          <div class="journal-result__detail-body">
+            <p>Twelve students scored 40 points or above, eight scored between 36 and 39, and four scored below 36. Adithyan Diwakar Vidya and Shriya Shruti Misra were the toppers, both with 45 out of 45.</p>
+            <p>These are the school-reported results for the May 2026 final examination.</p>
+          </div>
+        </details>
+      </article>
 
-    <div class="tablewrap rv" style="margin-top:30px">
-      <table class="tbl">
-        <caption>CBSE board examinations, March&ndash;April 2026 &mdash; full distribution.</caption>
-        <thead>
-          <tr>
-            <th scope="col">Class</th><th scope="col">Topper</th>
-            <th scope="col">Class average</th><th scope="col">Distribution</th>
-          </tr>
-        </thead>
+      <article class="journal-result journal-result--cbse" id="cbse-results-2026">
+        <a class="journal-result__main" href="our-results.html#cbse-results" aria-label="Explore the 2026 CBSE board results">
+          <p class="journal-meta"><span>Achievements</span><span>Board examinations / <time datetime="2026-03">March–April 2026</time></span></p>
+          <h3>CBSE board results</h3>
+          <p>Class XII Science, Class XII Management and Class X results, including the school-reported toppers, class averages and score distributions.</p>
+          <div class="journal-result__scores" aria-label="Top reported scores">
+            <span><b>95.60%</b><small>XII Science</small></span>
+            <span><b>99.0%</b><small>XII Management</small></span>
+            <span><b>98.60%</b><small>Class X</small></span>
+          </div>
+          <span class="journal-read">Explore results <span aria-hidden="true">↗</span></span>
+        </a>
+        <details class="journal-result__detail">
+          <summary>View full distribution</summary>
+          <div class="journal-result__detail-body journal-result__detail-body--scores">
+            <div><h4>Class XII / Science</h4><p>Sonakshi Birmiwal and Namburu Venkata Dheeraj topped with 95.60%. The class average was 91%; 12 students scored 90% or above and seven scored between 80% and 90%. There was one centum in Chemistry and two in IP.</p></div>
+            <div><h4>Class XII / Management</h4><p>Dhruvik Sachin Agarwal topped with 99.0%. The class average was 94%; 22 students scored 90% or above and four scored between 80% and 90%. There was one centum in Business Studies and two in Applied Mathematics.</p></div>
+            <div><h4>Class X</h4><p>Vishv Prem Nangia topped with 98.60%. The class average was 90%; 49 students scored 90% or above, 24 scored between 80% and 90%, and six scored below 80%. Centums were reported in Sanskrit (five), Hindi (two) and French (three).</p></div>
+          </div>
+        </details>
+      </article>
+    </div>
+
+    <section class="journal-results-table" aria-label="Full CBSE results distribution" tabindex="0">
+      <table>
+        <caption>CBSE board examinations, March–April 2026 — full distribution, as reported by CIRS.</caption>
+        <thead><tr><th scope="col">Class</th><th scope="col">Topper</th><th scope="col">Class average</th><th scope="col">Distribution</th></tr></thead>
         <tbody>
-          <tr>
-            <th scope="row">XII &mdash; Science</th>
-            <td>Sonakshi Birmiwal and Namburu Venkata Dheeraj, 95.60%</td>
-            <td>91%</td>
-            <td>12 at 90% and above, 7 between 80 and 90%. One centum in Chemistry, two in IP.</td>
-          </tr>
-          <tr>
-            <th scope="row">XII &mdash; Management</th>
-            <td>Dhruvik Sachin Agarwal, 99.0%</td>
-            <td>94%</td>
-            <td>22 at 90% and above, 4 between 80 and 90%. One centum in Business Studies, two in
-              Applied Mathematics.</td>
-          </tr>
-          <tr>
-            <th scope="row">X</th>
-            <td>Vishv Prem Nangia, 98.60%</td>
-            <td>90%</td>
-            <td>49 at 90% and above, 24 between 80 and 90%, 6 below 80%. Centums in Sanskrit (5),
-              Hindi (2) and French (3).</td>
-          </tr>
+          <tr><th scope="row">XII / Science</th><td>Sonakshi Birmiwal and Namburu Venkata Dheeraj, 95.60%</td><td>91%</td><td>12 at 90% and above, 7 between 80% and 90%. One centum in Chemistry, two in IP.</td></tr>
+          <tr><th scope="row">XII / Management</th><td>Dhruvik Sachin Agarwal, 99.0%</td><td>94%</td><td>22 at 90% and above, 4 between 80% and 90%. One centum in Business Studies, two in Applied Mathematics.</td></tr>
+          <tr><th scope="row">X</th><td>Vishv Prem Nangia, 98.60%</td><td>90%</td><td>49 at 90% and above, 24 between 80% and 90%, 6 below 80%. Centums in Sanskrit (5), Hindi (2) and French (3).</td></tr>
         </tbody>
       </table>
+    </section>
+    <p class="journal-results-source">Source: <a href="https://www.cirschool.org/news.html">CIRS school news</a>. The dates above are examination periods, not publication dates.</p>
+
+    <div class="journal-new-reports">
+      <article class="journal-new-report journal-new-report--lead">
+        <a href="https://new.cirschool.org/social-science-week/">
+          <div class="journal-new-report__image"><img src="assets/img/news/social-science-week-1200.webp" srcset="assets/img/news/social-science-week-720.webp 720w, assets/img/news/social-science-week-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 56vw" width="1200" height="620" alt="CIRS students and teachers holding certificates on a stage" loading="lazy" decoding="async"></div>
+          <div class="journal-new-report__copy"><p class="journal-meta"><span>Academics</span><span>Published <time datetime="2025-10-03">3 October 2025</time></span></p><h3>Social Science Week</h3><p>A Social Run, treasure hunt, election manifestos, field trip, quizzes and harvest festival activities brought social science beyond the classroom.</p><span class="journal-read">Read story <span aria-hidden="true">↗</span></span></div>
+        </a>
+      </article>
+      <article class="journal-new-report">
+        <a href="https://new.cirschool.org/chinmaya-vraja/">
+          <div class="journal-new-report__image"><img src="assets/img/news/chinmaya-vraja-1200.webp" srcset="assets/img/news/chinmaya-vraja-720.webp 720w, assets/img/news/chinmaya-vraja-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 36vw" width="1200" height="620" alt="CIRS community gathered for a puja in the Chinmaya Vraja hall" loading="lazy" decoding="async"></div>
+          <div class="journal-new-report__copy"><p class="journal-meta"><span>Campus</span><span>Published <time datetime="2025-10-02">2 October 2025</time></span></p><h3>Chinmaya Vraja</h3><p>A puja marked the opening of the school's new multipurpose hall, named Chinmaya Vraja.</p><span class="journal-read">Read story <span aria-hidden="true">↗</span></span></div>
+        </a>
+      </article>
+      <article class="journal-new-report">
+        <a href="https://new.cirschool.org/competitions/">
+          <div class="journal-new-report__image"><img src="assets/img/news/competitions-1200.webp" srcset="assets/img/news/competitions-720.webp 720w, assets/img/news/competitions-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 36vw" width="1200" height="620" alt="Collage of CIRS student award presentations and sports teams" loading="lazy" decoding="async"></div>
+          <div class="journal-new-report__copy"><p class="journal-meta"><span>Achievements / Sports</span><span>Published <time datetime="2025-10-01">1 October 2025</time></span></p><h3>Competitions across CIRS</h3><p>The school's roundup records results in quizzes, dance, instrumental music, football, yoga and basketball.</p><span class="journal-read">Read story <span aria-hidden="true">↗</span></span></div>
+        </a>
+      </article>
+    </div>
+
+    <div class="journal-photo-grid">
+      <article class="journal-story journal-story--large" id="highlight-english">
+        <a href="https://new.cirschool.org/english-week/" aria-label="Read English Week on the CIRS school site">
+          <div class="journal-story__image"><img src="assets/img/news/english-week-1200.webp" srcset="assets/img/news/english-week-720.webp 720w, assets/img/news/english-week-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 58vw" width="1200" height="620" alt="A CIRS student speaking during an English Week activity while classmates listen" loading="lazy" decoding="async"></div>
+          <div class="journal-story__copy"><p class="journal-meta"><span>Arts</span><span><time datetime="2025-08-04">4–9 August 2025</time></span></p><h3>English Week</h3><p>Storytelling, poetry recitation, Spell Bee, quizzes and classroom activities gave students many ways to use and enjoy English.</p><span class="journal-read">Read story <span aria-hidden="true">↗</span></span></div>
+        </a>
+      <details class="journal-report" id="report-english-week">
+        <summary>Read report on this page</summary>
+        <div class="journal-report__body">
+          <h3>English Week</h3>
+          <p>The English Week Celebration filled the portals of CIRS with creativity, confidence and the joy of learning English. The array of competitions included Storytelling, Handwriting, Poetry Recitation, Spell Bee, Quiz and HAM.</p>
+          <p>Teachers seamlessly integrated language enrichment activities into their regular English classes throughout the week, ensuring every student had an opportunity to engage, express and excel.</p>
+          <p class="journal-report__source"><a href="https://new.cirschool.org/english-week/">Read the original CIRS report <span aria-hidden="true">↗</span></a></p>
+        </div>
+      </details>
+      </article>
+      <article class="journal-story journal-story--compact" id="highlight-mathematics">
+        <a href="https://new.cirschool.org/mathematics-week-2025/" aria-label="Read Mathematics Week 2025 on the CIRS school site">
+          <div class="journal-story__image"><img src="assets/img/news/mathematics-week-1200.webp" srcset="assets/img/news/mathematics-week-720.webp 720w, assets/img/news/mathematics-week-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 36vw" width="1200" height="620" alt="CIRS students working together on a tabletop mathematics challenge" loading="lazy" decoding="async"></div>
+          <div class="journal-story__copy"><p class="journal-meta"><span>Academics</span><span><time datetime="2025-07-07">7–11 July 2025</time></span></p><h3>Mathematics Week 2025</h3><p>Students took on the Maths Run and a senior quiz; Shishuvatika children explored mathematics through traditional Indian games.</p><span class="journal-read">Read story <span aria-hidden="true">↗</span></span></div>
+        </a>
+      <details class="journal-report" id="report-mathematics-week">
+        <summary>Read report on this page</summary>
+        <div class="journal-report__body">
+          <h3>Mathematics Week 2025</h3>
+          <p>Middle school students took part in the Maths Run, solving challenges at eight interactive stations, while senior students showcased their skills in a quiz that tested critical thinking, riddles, error-spotting and rapid recall. Children in Shishuvatika explored mathematics through traditional Indian games.</p>
+          <p>In the evening, 160 senior students competed in the house-wise Maths Run. The celebrations, aligned with the Chinmaya Vision Programme, strengthened logical reasoning.</p>
+          <p class="journal-report__source"><a href="https://new.cirschool.org/mathematics-week-2025/">Read the original CIRS report <span aria-hidden="true">↗</span></a></p>
+        </div>
+      </details>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="newstrack" id="highlights">
-  <div class="newstrack__pin">
-    <div class="wrap newstrack__head">
-      <div class="sec-head">
-        <p class="marker"><span class="sc">Highlighted stories</span></p>
-        <h2 class="serif h2" data-split>The Weeks <em>Worth Slowing Down For.</em></h2>
-        <p class="lead">Three reports with the most to tell, from the English, Science and Mathematics weeks.</p>
-        <p class="newstrack__hint">Scroll to explore &rarr;</p>
-      </div>
+<section class="journal-dispatches" id="more" aria-labelledby="dispatches-title">
+  <div class="journal-wrap">
+    <div class="journal-section-head journal-section-head--compact">
+      <p class="journal-section-head__label">Across campus</p>
+      <h2 id="dispatches-title">School life, in focus</h2>
     </div>
-
-    <div class="newstrack__viewport">
-      <div class="newstrack__track">
-        <article class="newsitem">
-          <figure class="newsitem__media feature__media is-placeholder img-reveal">
-            <span class="feature__ph">Photograph &mdash; English Week<br>to be supplied</span>
-          </figure>
-          <div class="newsitem__body">
-            <p class="newsitem__tag">English &amp; Arts</p>
-            <p class="newsitem__date">4&ndash;9 August 2025</p>
-            <h3 class="serif h3">English Week</h3>
-            <p>The English Week Celebration filled the portals of CIRS with creativity, confidence
-              and the joy of learning English. The array of competitions included Storytelling,
-              Handwriting, Poetry Recitation, Spell Bee, Quiz and HAM.</p>
-            <p style="margin-top:10px">Teachers seamlessly integrated language enrichment
-              activities into their regular English classes throughout the week, ensuring every
-              student had an opportunity to engage, express and excel.</p>
-            <p class="newsitem__src"><a href="https://new.cirschool.org/english-week/">Read the
-              original</a></p>
-          </div>
-        </article>
-
-        <article class="newsitem">
-          <figure class="newsitem__media feature__media is-placeholder img-reveal">
-            <span class="feature__ph">Photograph &mdash; Science Expo<br>to be supplied</span>
-          </figure>
-          <div class="newsitem__body">
-            <p class="newsitem__tag">Science</p>
-            <p class="newsitem__date">25 July 2025</p>
-            <h3 class="serif h3">Science Expo</h3>
-            <p>As part of Science Week, the Department of Sciences hosted its Science Expo,
-              turning the campus into a centre of exploration and innovation &mdash; over 140
-              activities and models across Biology, Physics, Chemistry and Environmental
-              Science.</p>
-            <p style="margin-top:10px">Presentations ranged from life processes and principles of
-              motion to chemical reactions and sustainability, brought to life through interactive
-              models, charts, digital displays and experiments. Around 50 schools from in and
-              around Coimbatore attended.</p>
-            <p class="newsitem__src"><a href="https://new.cirschool.org/science-expo/">Read the
-              original</a></p>
-          </div>
-        </article>
-
-        <article class="newsitem">
-          <figure class="newsitem__media feature__media is-placeholder img-reveal">
-            <span class="feature__ph">Photograph &mdash; Mathematics<br>Week to be supplied</span>
-          </figure>
-          <div class="newsitem__body">
-            <p class="newsitem__tag">Mathematics</p>
-            <p class="newsitem__date">7&ndash;11 July 2025</p>
-            <h3 class="serif h3">Mathematics Week 2025</h3>
-            <p>Middle school students took part in the Maths Run, solving challenges at eight
-              interactive stations, while senior students showcased their skills in a quiz that
-              tested critical thinking, riddles, error-spotting and rapid recall. Children in
-              Shishuvatika explored mathematics through traditional Indian games.</p>
-            <p style="margin-top:10px">In the evening, 160 senior students competed in the
-              house-wise Maths Run. The celebrations, aligned with the Chinmaya Vision Programme,
-              strengthened logical reasoning.</p>
-            <p class="newsitem__src"><a
-              href="https://new.cirschool.org/mathematics-week-2025/">Read the original</a></p>
-          </div>
-        </article>
-      </div>
+    <div class="journal-dispatches__grid">
+      <article class="journal-story journal-story--election">
+        <a href="https://new.cirschool.org/cirs-general-election/" aria-label="Read the CIRS Class Representative Elections report">
+          <div class="journal-story__image"><img src="assets/img/news/class-representative-elections-1200.webp" srcset="assets/img/news/class-representative-elections-720.webp 720w, assets/img/news/class-representative-elections-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 56vw" width="1200" height="620" alt="CIRS student writing at a desk during class representative elections, with an NCC cadet nearby" loading="lazy" decoding="async"></div>
+          <div class="journal-story__copy"><p class="journal-meta"><span>Campus</span><span><time datetime="2025-04-25">25 April 2025</time></span></p><h3>A classroom becomes a constituency</h3><p>Class Representative Elections gave students a hands-on experience of nominations, campaigning, voting and counting.</p><span class="journal-read">Read story <span aria-hidden="true">↗</span></span></div>
+        </a>
+      <details class="journal-report" id="report-class-representative-elections">
+        <summary>Read report on this page</summary>
+        <div class="journal-report__body">
+          <h3>A classroom becomes a constituency</h3>
+          <p>CIRS conducted its annual Class Representative Elections, giving students a hands-on experience of democracy. Each classroom functioned as a constituency, with votes cast through a structured process explained earlier in a Social Science assembly.</p>
+          <p>NCC cadets organised election kits and managed ballot collection, while class and assistant teachers oversaw proceedings from nominations to counting. Campaigns featured confident speeches and creative posters.</p>
+          <p class="journal-report__source"><a href="https://new.cirschool.org/cirs-general-election/">Read the original CIRS report <span aria-hidden="true">↗</span></a></p>
+        </div>
+      </details>
+      </article>
+      <article class="journal-story journal-story--seva">
+        <a href="https://new.cirschool.org/seva-week/" aria-label="Read Seva Week on the CIRS school site">
+          <div class="journal-story__image"><img src="assets/img/news/seva-week-1200.webp" srcset="assets/img/news/seva-week-720.webp 720w, assets/img/news/seva-week-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 37vw" width="1200" height="620" alt="CIRS students handing supplies to a community member during Seva Week" loading="lazy" decoding="async"></div>
+          <div class="journal-story__copy"><p class="journal-meta"><span>Community</span><span>From <time datetime="2025-04-19">19 April 2025</time></span></p><h3>Seva Week</h3><p>Students organised awareness rallies, visited care centres, and helped clean and decorate nearby temples.</p><span class="journal-read">Read story <span aria-hidden="true">↗</span></span></div>
+        </a>
+      <details class="journal-report" id="report-seva-week">
+        <summary>Read report on this page</summary>
+        <div class="journal-report__body">
+          <h3>Seva Week</h3>
+          <p>Every year, in the month of April, the students engage in selfless service as part of Seva Week. They organised awareness rallies, visited old age homes and rehabilitation centres, cleaned temples around the campus and decorated them with rangolis.</p>
+          <p>These seva activities instilled a sense of contributing positively to society, leaving the students with a profound feeling of fulfilment.</p>
+          <p class="journal-report__source"><a href="https://new.cirschool.org/seva-week/">Read the original CIRS report <span aria-hidden="true">↗</span></a></p>
+        </div>
+      </details>
+      </article>
+      <article class="journal-story journal-story--vishu">
+        <a href="https://cirschool.org/tamil%202025/Index.html" aria-label="View the CIRS Vishu and Tamil New Year photo gallery">
+          <div class="journal-story__image"><img src="assets/img/news/vishu-tamil-new-year-1200.webp" srcset="assets/img/news/vishu-tamil-new-year-720.webp 720w, assets/img/news/vishu-tamil-new-year-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 45vw" width="1200" height="675" alt="CIRS students sharing a festive meal served on banana leaves" loading="lazy" decoding="async"></div>
+          <div class="journal-story__copy"><p class="journal-meta"><span>Community</span><span><time datetime="2025-04">April 2025</time></span></p><h3>Vishu and Tamil Puthandu</h3><p>The dorms celebrated the new year with the Vishu Kani, a traditional South Indian lunch and cultural programmes.</p><span class="journal-read">View school gallery <span aria-hidden="true">↗</span></span></div>
+        </a>
+      <details class="journal-report" id="report-vishu-tamil-puthandu">
+        <summary>Read report on this page</summary>
+        <div class="journal-report__body">
+          <h3>Vishu and Tamil Puthandu</h3>
+          <p>The dorms came alive as students celebrated both Vishu and Tamil Puthandu, ushering in the new year with joy, culture and togetherness. Students viewed the Vishu Kani arrangement — the idol of Lord Vishnu, a mirror, fruits and vegetables, and the golden yellow Kanikonna flowers.</p>
+          <p>A traditional South Indian lunch was served on banana leaves, and the evening was given to cultural programmes.</p>
+          <p class="journal-report__source"><a href="https://cirschool.org/tamil%202025/Index.html">View the CIRS school gallery <span aria-hidden="true">↗</span></a></p>
+        </div>
+      </details>
+      </article>
+      <article class="journal-story journal-story--havan">
+        <a href="https://cirschool.org/gaythri%20havan%202025/Index.html" aria-label="View the CIRS Gayathri Havan photo gallery">
+          <div class="journal-story__image"><img src="assets/img/news/gayathri-havan-1200.webp" srcset="assets/img/news/gayathri-havan-720.webp 720w, assets/img/news/gayathri-havan-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 45vw" width="1200" height="675" alt="CIRS students gathered around the ceremonial fire for Gayathri Havan" loading="lazy" decoding="async"></div>
+          <div class="journal-story__copy"><p class="journal-meta"><span>Campus</span><span><time datetime="2025-04-07">7 April 2025</time></span></p><h3>Gayathri Havan</h3><p>Students gathered in the Mathura Block quadrangle for the prayer that begins the academic year.</p><span class="journal-read">View school gallery <span aria-hidden="true">↗</span></span></div>
+        </a>
+      <details class="journal-report" id="report-gayathri-havan">
+        <summary>Read report on this page</summary>
+        <div class="journal-report__body">
+          <h3>Gayathri Havan</h3>
+          <p>The academic year at CIRS commences with the Gayatri Havan, performed in the quadrangle of the Mathura Block. Students took part seeking the blessings of the Goddess Gayathri before beginning the new session.</p>
+          <p>The school describes it as a unique way of offering prayers to Surya Bhagwan, the Lord of the Brilliance of the Intellect.</p>
+          <p class="journal-report__source"><a href="https://cirschool.org/gaythri%20havan%202025/Index.html">View the CIRS school gallery <span aria-hidden="true">↗</span></a></p>
+        </div>
+      </details>
+      </article>
     </div>
+    <article class="journal-note">
+      <p class="journal-meta"><span>Arts</span><span>Date not listed</span></p>
+      <div><h3>Solo Instrument</h3><p>The school’s original arts update is titled “Solo Instrument”; its report describes an inter-house dance competition. The event date is not supplied.</p></div>
+      <a href="https://new.cirschool.org/solo-instrument/">View original update <span aria-hidden="true">↗</span></a>
+      <details class="journal-report" id="report-solo-instrument">
+        <summary>Read report on this page</summary>
+        <div class="journal-report__body">
+          <h3>Solo Instrument: source note</h3>
+          <p>The school's linked update is titled “Solo Instrument”, but its report describes an inter-house senior and junior dance competition. No event date is supplied.</p>
+          <p>The report describes an eventful evening in which many children lit up the stage in vivid costumes — Krishna, Hanuman, and Narayan. Each movement and step filled the hall with a sense of divinity and purity.</p>
+          <p>The concept followed an open theme, and the students performed to classical and semi-classical tunes that were not adapted from films.</p>
+          <p class="journal-report__source"><a href="https://new.cirschool.org/solo-instrument/">Read the original CIRS update <span aria-hidden="true">↗</span></a></p>
+        </div>
+      </details>
+    </article>
+  </div>
+</section>
 
-    <div class="wrap">
-      <div class="newstrack__rail"><span class="newstrack__fill"></span></div>
-      <p class="newstrack__count"><b id="newsTrackCount">1 of 3</b></p>
+<section class="journal-submit" aria-labelledby="journal-submit-title">
+  <div class="journal-wrap journal-submit__inner">
+    <div><p class="journal-section-head__label">Send us your news</p><h2 id="journal-submit-title">Departments and houses,<br>tell us what happened.</h2><p>Reports and photographs for this page are welcome: match results, performances, olympiad placings, visits and camps.</p></div>
+    <a href="mailto:info@cirschool.org">info@cirschool.org <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+<section class="journal-browse" id="browse" aria-labelledby="browse-title">
+  <div class="journal-wrap">
+    <div class="journal-section-head journal-section-head--compact">
+      <p class="journal-section-head__label">Find a report</p>
+      <h2 id="browse-title">Browse the journal</h2>
+      <p>Use a subject or search term to find a published story or brief update.</p>
+    </div>
+    <div class="journal-browse__controls" id="journal-controls">
+      <div class="journal-browse__filters" role="group" aria-label="Filter stories by category">
+        <button type="button" data-journal-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-journal-filter="Academics" aria-pressed="false">Academics</button>
+        <button type="button" data-journal-filter="Arts" aria-pressed="false">Arts</button>
+        <button type="button" data-journal-filter="Campus" aria-pressed="false">Campus</button>
+        <button type="button" data-journal-filter="Community" aria-pressed="false">Community</button>
+        <button type="button" data-journal-filter="Achievements" aria-pressed="false">Achievements</button>
+        <button type="button" data-journal-filter="Sports" aria-pressed="false">Sports</button>
+      </div>
+      <label class="journal-browse__search">Search stories<input id="journal-search" type="search" placeholder="Search the journal" autocomplete="off" aria-controls="journal-archive-list"></label>
     </div>
   </div>
 </section>
 
-<section class="section on-paper-2" id="more">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">More from campus</span></p>
-      <h2 class="serif h2" data-split>Assemblies, Weeks <em>&amp; Celebrations.</em></h2>
-      <p class="lead">Reports from the departments and the houses.</p>
-    </div>
-
-    <!-- To add a new story: copy one <article class="newsitem rv"> block below (not the
-         --placeholder one), fill in its tag/date/heading/body/source, and drop a real photo
-         in place of the .feature__media.is-placeholder figure when one is supplied. The
-         placeholder card at the end of this grid is the template — leave it in place as the
-         next open slot. -->
-    <div class="newsgrid">
-      <article class="newsitem rv">
-        <figure class="newsitem__media feature__media is-placeholder img-reveal">
-          <span class="feature__ph">Photograph &mdash; Class<br>Representative Elections<br>to be
-            supplied</span>
-        </figure>
-        <div class="newsitem__body">
-          <p class="newsitem__tag">Civic Life</p>
-          <p class="newsitem__date">25 April 2025</p>
-          <h3 class="serif h3">A classroom becomes a constituency</h3>
-          <p>CIRS conducted its annual Class Representative Elections, giving students a
-            hands-on experience of democracy. Each classroom functioned as a constituency, with
-            votes cast through a structured process explained earlier in a Social Science
-            assembly.</p>
-          <p style="margin-top:10px">NCC cadets organised election kits and managed ballot
-            collection, while class and assistant teachers oversaw proceedings from nominations
-            to counting. Campaigns featured confident speeches and creative posters.</p>
-          <p class="newsitem__src"><a
-            href="https://new.cirschool.org/cirs-general-election/">Read the original</a></p>
-        </div>
-      </article>
-
-      <article class="newsitem rv">
-        <figure class="newsitem__media feature__media is-placeholder img-reveal">
-          <span class="feature__ph">Photograph &mdash; Seva Week<br>to be supplied</span>
-        </figure>
-        <div class="newsitem__body">
-          <p class="newsitem__tag">Service</p>
-          <p class="newsitem__date">From 19 April 2025</p>
-          <h3 class="serif h3">Seva Week</h3>
-          <p>Every year, in the month of April, the students engage in selfless service as part
-            of Seva Week. They organised awareness rallies, visited old age homes and
-            rehabilitation centres, cleaned temples around the campus and decorated them with
-            rangolis.</p>
-          <p style="margin-top:10px">These seva activities instilled a sense of contributing
-            positively to society, leaving the students with a profound feeling of fulfilment.</p>
-          <p class="newsitem__src"><a href="https://new.cirschool.org/seva-week/">Read the
-            original</a></p>
-        </div>
-      </article>
-
-      <article class="newsitem rv">
-        <figure class="newsitem__media feature__media is-placeholder img-reveal">
-          <span class="feature__ph">Photograph &mdash; Vishu and<br>Tamil Puthandu to be
-            supplied</span>
-        </figure>
-        <div class="newsitem__body">
-          <p class="newsitem__tag">Festivals</p>
-          <p class="newsitem__date">April 2025</p>
-          <h3 class="serif h3">Vishu and Tamil Puthandu</h3>
-          <p>The dorms came alive as students celebrated both Vishu and Tamil Puthandu, ushering
-            in the new year with joy, culture and togetherness. Students viewed the Vishu Kani
-            arrangement &mdash; the idol of Lord Vishnu, a mirror, fruits and vegetables, and the
-            golden yellow Kanikonna flowers.</p>
-          <p style="margin-top:10px">A traditional South Indian lunch was served on banana
-            leaves, and the evening was given to cultural programmes.</p>
-          <p class="newsitem__src"><a href="https://cirschool.org/news.html">Read the
-            original</a></p>
-        </div>
-      </article>
-
-      <article class="newsitem rv">
-        <figure class="newsitem__media feature__media is-placeholder img-reveal">
-          <span class="feature__ph">Photograph &mdash; Gayathri<br>Havan to be supplied</span>
-        </figure>
-        <div class="newsitem__body">
-          <p class="newsitem__tag">Tradition</p>
-          <p class="newsitem__date">7 April 2025</p>
-          <h3 class="serif h3">Gayathri Havan</h3>
-          <p>The academic year at CIRS commences with the Gayatri Havan, performed in the
-            quadrangle of the Mathura Block. Students took part seeking the blessings of the
-            Goddess Gayathri before beginning the new session.</p>
-          <p style="margin-top:10px">The school describes it as a unique way of offering prayers
-            to Surya Bhagwan, the Lord of the Brilliance of the Intellect.</p>
-          <p class="newsitem__src"><a href="https://cirschool.org/news.html">Read the
-            original</a></p>
-        </div>
-      </article>
-
-      <article class="newsitem rv">
-        <figure class="newsitem__media feature__media is-placeholder img-reveal">
-          <span class="feature__ph">Photograph &mdash; Solo<br>Instrument to be supplied</span>
-        </figure>
-        <div class="newsitem__body">
-          <p class="newsitem__tag">Arts</p>
-          <p class="newsitem__date">Inter-house</p>
-          <h3 class="serif h3">Solo Instrument</h3>
-          <p>The inter-house senior and junior dance competition was an eventful evening filled
-            with joy. Many children lit up the stage in vivid costumes &mdash; Krishna, Hanuman,
-            and even Narayan. Each movement and step filled the hall with a sense of divinity and
-            purity.</p>
-          <p style="margin-top:10px">The concept followed an open theme, and the students
-            performed to classical and semi-classical tunes that were not adapted from films.</p>
-          <p class="newsitem__src"><a href="https://new.cirschool.org/solo-instrument/">Read the
-            original</a></p>
-        </div>
-      </article>
-
-      <article class="newsitem newsitem--placeholder rv">
-        <div class="newsitem__body">
-          <p class="newsitem__tag">Placeholder</p>
-          <h3 class="serif h3"><em>[Next story headline]</em></h3>
-          <p><em>[A short summary of the next report from a department or house &mdash; match
-            results, performances, olympiad placings, visits and camps &mdash; goes here once it
-            is supplied.]</em></p>
-          <p class="newsitem__src"><em>[Date]</em> &middot; <em>[Source link]</em></p>
-        </div>
-      </article>
-    </div>
-
-    <div class="notice rv" style="margin-top:clamp(48px,6vw,84px)">
-      <div>
-        <p class="notice__label">Send us your news</p>
-        <h2 class="serif">Departments and houses, <em>tell us what happened.</em></h2>
-        <p>Reports and photographs for this page are welcome &mdash; match results, performances,
-          olympiad placings, visits and camps.</p>
-      </div>
-      <div class="notice__cta">
-        <a class="btn btn--primary btn--lg" href="mailto:info@cirschool.org">info@cirschool.org</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section on-purple" id="diary" data-ground="#1E1626">
-  <div class="wrap">
-    <div class="sec-head rv" style="margin-bottom:0">
-      <p class="marker"><span class="sc">The diary</span></p>
-      <h2 class="serif h2" style="color:#fff" data-split>From the <em>School Diary.</em></h2>
-      <p class="lead">The most recent dates the school has published, newest first.
-        <em>[Placeholder &mdash; the dates for the 2026&ndash;27 calendar to be supplied by the
-        school.]</em></p>
-    </div>
-
-    <div class="diary rv">
-      <div class="diary__row">
-        <p class="diary__when">23 January 2026</p>
-        <p class="diary__what">Vasant Panchami celebration</p>
-      </div>
-      <div class="diary__row">
-        <p class="diary__when">19&ndash;21 January 2026</p>
-        <p class="diary__what">Chinmaya Olympiad &mdash; Mathematics and Science</p>
-      </div>
-      <div class="diary__row">
-        <p class="diary__when">12 January 2026</p>
-        <p class="diary__what">National Youth Day</p>
-      </div>
-      <div class="diary__row">
-        <p class="diary__when">9 January 2026</p>
-        <p class="diary__what">Tyagaraja Aradhana Day</p>
-      </div>
-      <div class="diary__row">
-        <p class="diary__when">3 January 2026</p>
-        <p class="diary__what">Staff Orientation Programme on AI in Teaching</p>
-      </div>
-      <div class="diary__row">
-        <p class="diary__when">1&ndash;5 December 2025</p>
-        <p class="diary__what">Shaishav Shiksha Camp &mdash; teacher orientation</p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="uc">
-  <div class="wrap uc__inner">
-    <span class="uc__mark" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
-    </span>
+<section class="journal-archive" id="archive" aria-labelledby="archive-title">
+  <div class="journal-wrap journal-archive__layout">
     <div>
-      <p class="uc__label">Under construction</p>
-      <p class="uc__text">This page is still being written. Photographs, names and figures marked
-        in brackets are placeholders awaiting the school, and more will be added here in the weeks
-        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
+      <div class="journal-archive__head"><h2 id="archive-title">Archive</h2><p id="journal-status" role="status" aria-live="polite"></p></div>
+      <p class="journal-archive__context">Dates describe events, examination periods or article publication dates as labelled. An event date is not available for every report.</p>
+      <ol class="journal-archive__list" id="journal-archive-list">
+        <li data-journal-category="Achievements" data-journal-search="ib diploma results 2026 adithyan diwakar vidya shriya shruti misra 24 39.4 45"><a href="#ib-results-2026"><time datetime="2026-05">May 2026 exam</time><span>Twenty-four candidates, twenty-four diplomas</span><small>Achievements</small></a></li>
+        <li data-journal-category="Achievements" data-journal-search="cbse board results 2026 class x xii science management sonakshi birmiwal namburu venkata dheeraj dhruvik sachin agarwal vishv prem nangia"><a href="#cbse-results-2026"><time datetime="2026-03">Mar–Apr 2026 exams</time><span>CBSE board results</span><small>Achievements</small></a></li>
+        <li data-journal-category="Campus" data-journal-search="class representative elections democracy ncc ballots voting"><a href="https://new.cirschool.org/cirs-general-election/"><time datetime="2025-10-11">Published 11 Oct 2025</time><span>A classroom becomes a constituency</span><small>Campus</small></a></li>
+        <li data-journal-category="Arts" data-journal-search="solo instrument inter-house dance performance arts original update"><a href="https://new.cirschool.org/solo-instrument/"><time datetime="2025-10-10">Published 10 Oct 2025</time><span>Solo Instrument</span><small>Arts</small></a></li>
+        <li data-journal-category="Academics" data-journal-search="mathematics week maths run quiz shishuvatika games"><a href="https://new.cirschool.org/mathematics-week-2025/"><time datetime="2025-10-09">Published 9 Oct 2025</time><span>Mathematics Week 2025</span><small>Academics</small></a></li>
+        <li data-journal-category="Academics" data-journal-search="science expo biology physics chemistry environmental science models coimbatore"><a href="https://new.cirschool.org/science-expo/"><time datetime="2025-10-08">Published 8 Oct 2025</time><span>Science Expo</span><small>Academics</small></a></li>
+        <li data-journal-category="Arts" data-journal-search="english week storytelling poetry recitation spell bee quiz handwriting"><a href="https://new.cirschool.org/english-week/"><time datetime="2025-10-07">Published 7 Oct 2025</time><span>English Week</span><small>Arts</small></a></li>
+        <li data-journal-category="Community" data-journal-search="seva week selfless service rallies care centres temples"><a href="https://new.cirschool.org/seva-week/"><time datetime="2025-10-04">Published 4 Oct 2025</time><span>Seva Week</span><small>Community</small></a></li>
+        <li data-journal-category="Academics" data-journal-search="social science week social run treasure hunt field trip election manifestos harvest festivals"><a href="https://new.cirschool.org/social-science-week/"><time datetime="2025-10-03">Published 3 Oct 2025</time><span>Social Science Week</span><small>Academics</small></a></li>
+        <li data-journal-category="Campus" data-journal-search="chinmaya vraja new multipurpose hall puja opening swami swaroopananda"><a href="https://new.cirschool.org/chinmaya-vraja/"><time datetime="2025-10-02">Published 2 Oct 2025</time><span>Chinmaya Vraja</span><small>Campus</small></a></li>
+        <li data-journal-category="Achievements" data-journal-topics="Sports" data-journal-search="competitions achievements quizzes dance instrumental music football yoga basketball sports"><a href="https://new.cirschool.org/competitions/"><time datetime="2025-10-01">Published 1 Oct 2025</time><span>Competitions across CIRS</span><small>Achievements / Sports</small></a></li>
+        <li data-journal-category="Community" data-journal-search="vishu tamil puthandu new year kani banana leaf lunch cultural programmes"><a href="https://cirschool.org/tamil%202025/Index.html"><time datetime="2025-04">Apr 2025 (day not stated)</time><span>Vishu and Tamil Puthandu</span><small>Community</small></a></li>
+        <li data-journal-category="Campus" data-journal-search="gayathri havan prayers mathura block academic year"><a href="https://cirschool.org/gaythri%20havan%202025/Index.html"><time datetime="2025-04-07">7 Apr 2025</time><span>Gayathri Havan</span><small>Campus</small></a></li>
+      </ol>
+      <div class="journal-archive__empty" id="journal-empty" hidden><p>No stories match this search.</p><button type="button" id="journal-reset">Clear search and filters</button></div>
     </div>
+    <aside class="journal-diary" id="diary" aria-labelledby="diary-title">
+      <p class="journal-section-head__label">Brief updates</p>
+      <h3 id="diary-title">From the school diary</h3>
+      <p class="journal-diary__intro">Dated entries published by the school, without separate reports.</p>
+      <ol>
+        <li><time datetime="2026-01-23">23 January 2026</time><span>Vasant Panchami celebration</span></li>
+        <li><time datetime="2026-01-19">19–21 January 2026</time><span>Chinmaya Olympiad — Mathematics and Science</span></li>
+        <li><time datetime="2026-01-12">12 January 2026</time><span>National Youth Day</span></li>
+        <li><time datetime="2026-01-09">9 January 2026</time><span>Tyagaraja Aradhana Day</span></li>
+        <li><time datetime="2026-01-03">3 January 2026</time><span>Staff Orientation Programme on AI in Teaching</span></li>
+        <li><time datetime="2025-12-01">1–5 December 2025</time><span>Shaishav Shiksha Camp — teacher orientation</span></li>
+      </ol>
+    </aside>
+  </div>
+</section>
+
+<section class="journal-closing" aria-labelledby="journal-closing-title">
+  <div class="journal-wrap journal-closing__inner">
+    <div><p class="journal-section-head__label">Beyond the journal</p><h2 id="journal-closing-title">Keep exploring CIRS.</h2></div>
+    <nav aria-label="Explore more CIRS pages"><a href="the-cirs-experience.html">THE CIRS EXPERIENCE <span aria-hidden="true">↗</span></a><a href="our-results.html">Our Results <span aria-hidden="true">↗</span></a><a href="blog.html">CIRS Blog <span aria-hidden="true">↗</span></a></nav>
   </div>
 </section>
 </main>
@@ -796,11 +794,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102" defer></script>
-<script src="assets/js/cirs.js?b=102" defer></script>
-<script src="assets/js/pages.js?b=102" defer></script>
-<script src="assets/js/footer.js?b=102-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=102-journal-11" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-journal-11" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-journal-11" defer></script>
+<script src="assets/js/cirs.js?b=102-journal-11-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=102-journal-11" defer></script>
+<script src="assets/js/footer.js?b=102-journal-11-footer-1" defer></script>
+<script src="assets/js/news-journal.js?b=102-journal-11" defer></script>
 </body>
 </html>

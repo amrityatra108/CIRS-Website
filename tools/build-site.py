@@ -143,24 +143,15 @@ PAGES = {
     },
     "news": {
         "nav": "News",
-        "title": "News",
-        "description": "News and events from Chinmaya International Residential School — "
-                       "assemblies, weeks, competitions and the term's diary.",
-        # A hero rather than the flat band: a news page should open at the
-        # pace of the campus, so the opening is the campus in motion with the
-        # current headlines cycling under it.
-        "hero": ("News from campus", "The Campus, <em>As It Happens.</em>",
-                 "Results, assemblies, weeks and celebrations, reported by the departments and "
-                 "the houses — and the dates already in the school calendar."),
-        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
-        "hero_cta": [("Read the latest", "#latest", "primary"),
-                     ("From the school diary", "#diary", "ghost")],
-        "hero_extra": newsflash_html(),
-        # The hero was already the page's own. Below it the results table and
-        # the section heads were the shared components, unstyled, exactly as
-        # School Information had them — so it takes the same group sheet. See
-        # assets/css/connect.css.
-        "sheet": "connect",
+        "title": "News | The CIRS Journal",
+        "description": "The CIRS Journal: school news, results and stories from Chinmaya "
+                       "International Residential School in Siruvani, Coimbatore.",
+        # The journal supplies its own masthead, feature and archive. Its
+        # opening is readable immediately, without the shared video hero.
+        "sheet": "news-journal",
+        "cache_suffix": "-journal-11",
+        "litehead": True,
+        "uc": False,
     },
     "founder": {
         "litehead": True,
@@ -261,11 +252,13 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-5",
+        "cache_suffix": "-curriculum-6",
         "banner": ("Curriculum", "The shape of <em>learning at CIRS.</em>",
                    "CBSE begins in Grade V. From Grade XI, students can choose the IB Diploma "
                    "Programme. The Chinmaya Vision Programme connects academic study with "
                    "daily school life."),
+        "banner_cta": [("Compare pathways", "#pathways", "primary"),
+                       ("Admissions guide", "admissions.html#apply", "ghost")],
         "jump": True,
         "uc": False,
     },
@@ -280,11 +273,16 @@ PAGES = {
         "description": "The IB Diploma Programme at Chinmaya International Residential School "
                        "for Grades XI and XII — academic depth, independent learning, research "
                        "and a global perspective.",
-        "banner": ("International Baccalaureate, Geneva",
+        "banner": ("IB Diploma at CIRS",
                    "IB Diploma Programme, <em>Grades XI and XII.</em>",
-                   "A rigorous and holistic two years that develop independent thinking, "
-                   "research, communication and a global perspective."),
+                   "Study six subject groups alongside the Diploma core. Ask the school "
+                   "which subjects and levels are available for your entry year."),
+        "banner_cta": [("See the subject groups", "#groups", "primary"),
+                       ("Compare pathways", "curriculum.html#pathways", "ghost")],
         "sheet": "ibdp",
+        "cache_suffix": "-ibdp-1",
+        "jump": True,
+        "uc": False,
     },
     # The CBSE pathway's own page, the IB Diploma's twin: served at
     # /curriculum/cbse, reached from the Curriculum page, and not in MENU for
@@ -587,7 +585,7 @@ PAGES = {
                    "fee payment and the parent login the school runs today, and the people to ask."),
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
-        "cache_suffix": "-portal-intro-3",
+        "cache_suffix": "-portal-photo-1",
         # the page is itself an under-construction notice; the standard footer
         # one underneath it would only say the same thing twice.
         "uc": False,
@@ -637,6 +635,10 @@ def rewrite_links(html, slug):
     """Turn the old single-page #anchors into links that work across pages."""
     def swap(m):
         anchor = m.group(1)
+        # Curriculum now has its own #pathways; the legacy alias points to
+        # Alumni, so keep this page's banner action on its own section.
+        if slug == "curriculum" and anchor == "pathways":
+            return m.group(0)
         if anchor not in SECTION_PAGE:
             return m.group(0)          # href="#" placeholders, and #main
         target = SECTION_PAGE[anchor]
@@ -704,28 +706,39 @@ def to_depth(html, slug):
     return re.sub(r'\b(content)="(assets/[^"]*)"', climb, html)
 
 
-def nav_html(slug):
-    """The drawer's grid: one column per primary category, every child clickable.
+def menu_group_index(slug):
+    return next((i for i, (_, slugs) in enumerate(MENU) if slug in slugs), 0)
 
-    The categories are headings rather than links — there is no page behind
-    "Art, Culture & Music", only the five pages under it — so they are marked
-    up as headings and the list beneath each is labelled by it. That is what
-    lets a screen reader announce "Art, Culture & Music, list, five items"
-    instead of reading twenty-two links with no structure.
-    """
-    out = ['<nav class="drawer__grid" aria-label="All pages">']
-    for group, slugs in MENU:
+
+def nav_html(slug):
+    """Five typographic groups with accessible, directly linked panels."""
+    active = menu_group_index(slug)
+    out = ['<nav class="drawer__menu" aria-label="CIRS sections">']
+    arrival_y = (14, -10, 12, -12, 12)
+    arrival_z = (-200, -120, -260, -160, -220)
+    for i, (group, slugs) in enumerate(MENU):
         gid = "dnav-" + re.sub(r"[^a-z]+", "-", group.lower()).strip("-")
-        out.append("    <div>")
-        out.append(f'      <p class="sc" id="{gid}">{group}</p>')
-        out.append(f'      <ul aria-labelledby="{gid}">')
+        selected = "true" if i == active else "false"
+        current_class = " is-active" if i == active else ""
+        state = "" if i == active else " hidden"
+        out.append('  <div class="drawer__item">')
+        out.append(f'    <button type="button" class="drawer__group{current_class}" '
+                   f'id="{gid}-button" data-menu-index="{i}" '
+                   f'aria-controls="{gid}-panel" aria-expanded="{selected}" '
+                   f'style="--enter-delay:{i * 40}ms;--enter-y:{arrival_y[i]}px;'
+                   f'--enter-z:{arrival_z[i]}px">'
+                   f'<span class="drawer__group-number" aria-hidden="true">{i + 1:02d}</span>'
+                   f'<span class="drawer__group-word">{esc(group)}</span></button>')
+        out.append(f'    <section class="drawer__panel" id="{gid}-panel" '
+                   f'aria-labelledby="{gid}-button"{state}>')
+        out.append(f'      <p class="drawer__panel-kicker">{esc(group)} / {i + 1:02d}</p>')
+        out.append("      <ul>")
         for sl in slugs:
             page = PAGES[sl]
             here = ' aria-current="page"' if sl == slug else ""
-            out.append(f'        <li><a href="{sl}.html"{here}>{page["nav"]}</a></li>')
-        out.append("      </ul>")
-        out.append("    </div>")
-    out.append("  </nav>")
+            out.append(f'        <li><a href="{sl}.html"{here}>{esc(page["nav"])}</a></li>')
+        out += ['      </ul>', '    </section>', '  </div>']
+    out.append('</nav>')
     return "\n".join(out)
 
 
@@ -905,12 +918,15 @@ def article_html(page):
 
 def banner_html(page):
     eyebrow, heading, lead = page["banner"]
+    cta = "\n".join(f'      <a class="btn btn--{variant} btn--lg" href="{href}">{label}</a>'
+                    for label, href, variant in page.get("banner_cta", []))
+    cta = f'    <p class="pagehead__cta">\n{cta}\n    </p>\n' if cta else ""
     return f'''<section class="pagehead on-purple" id="top" data-ground="#1E1626">
   <div class="wrap pagehead__inner">
     <p class="marker"><span class="sc">{eyebrow}</span></p>
     <h1 class="serif" data-split>{heading}</h1>
     <p class="lead">{lead}</p>
-  </div>
+{cta}  </div>
 </section>'''
 
 
@@ -1595,19 +1611,30 @@ def build(slug, page):
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
+        # Hide the photograph and copy only when this one-time entrance can
+        # run. Without scripting or with reduced motion, the page is ready.
+        portal_motion_gate = (
+            '<script>\n(function(){\n'
+            '  if (location.hash || window.scrollY > 8 || '
+            'window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;\n'
+            '  document.documentElement.classList.add("portal-motion-pending");\n'
+            '  window.__cirsPortalMotionFallback = window.setTimeout(function(){\n'
+            '    document.documentElement.classList.remove("portal-motion-pending");\n'
+            '  }, 8500);\n'
+            '  document.addEventListener("DOMContentLoaded", function(){\n'
+            '    window.setTimeout(function(){\n'
+            '      if (!window.__cirsPortalMotionBooted) '
+            'document.documentElement.classList.remove("portal-motion-pending");\n'
+            '    }, 700);\n'
+            '  }, {once:true});\n'
+            '})();\n</script>\n'
+        )
         head = head.replace("</head>",
-            '<script>window.__portalOriginalRestoration=history.scrollRestoration;history.scrollRestoration="manual";</script>\n'
-            f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n'
-            '<noscript><style>html:has(body.parent-portal.portal-intro-active),'
-            'body.parent-portal.portal-intro-active{overflow:auto}'
-            'body.parent-portal.portal-intro-active :is(.skip-link,.header,.progress,.ring,.totop,#top,#portal,.footer-wrap){visibility:visible}'
-            '#portalIntroEntry{display:none}'
-            'body.parent-portal .portal-intro__title,body.parent-portal .portal-intro__entry{opacity:1;visibility:visible;transform:none}'
-            '</style></noscript>\n</head>')
-    if slug in ("admissions", "school-info"):
-        # Its opening is visible immediately — Admissions' video hero, School
-        # Information's document sheets — so there is no curtain to hide
-        # when scripting is unavailable.
+            portal_motion_gate +
+            f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
+    if slug in ("admissions", "school-info", "news"):
+        # These pages open immediately with their own video, document sheets,
+        # or journal masthead, so the shared curtain is unnecessary.
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
@@ -1617,6 +1644,9 @@ def build(slug, page):
     if not wall:
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/footer.css?{CACHE_BUST}-footer-1">\n</head>')
+
+    head = head.replace("</head>",
+        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-drawer-5">\n</head>')
 
     # A page that opens on a pale ground cannot have the header floating over
     # it in white lettering. "litehead" puts the class on <body>, and pages.css
@@ -1630,7 +1660,7 @@ def build(slug, page):
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "film" if page.get("opening") else None,
                            slug if page.get("opening") else None,
-                           "parent-portal portal-intro-active" if slug == "parent-portal" else None,
+                           "parent-portal" if slug == "parent-portal" else None,
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
     chrome = read("tools/partials/chrome.html")
@@ -1648,11 +1678,9 @@ def build(slug, page):
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if slug in ("admissions", "school-info"):
-        # The video and poster already supply Admissions' opening, and the
-        # document sheets School Information's: each plays its own entrance
-        # at first paint. The shared curtain would hold either behind a blank
-        # screen for several seconds while fonts and its timeline settle.
+    if slug in ("admissions", "school-info", "news"):
+        # Admissions, School Information, and News each have their own visible
+        # opening. The shared curtain would delay it behind a blank screen.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
         chrome = chrome[:intro_start] + chrome[intro_end:]
@@ -1660,7 +1688,10 @@ def build(slug, page):
              chrome.rstrip("\n")]
     if slug == "crossroads":
         parts[-1] = parts[-1].replace('class="curtain"', 'class="curtain crossroads-intro-curtain"')
-    drawer = read("tools/partials/drawer.html").replace("{{NAV}}", nav_html(slug))
+    drawer = (read("tools/partials/drawer.html")
+              .replace("{{NAV}}", nav_html(slug))
+              .replace("{{ACTIVE_GROUP}}", str(menu_group_index(slug)))
+              .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html"))
     # The home page needs no Home tab — the wordmark already leads here, and a
     # Home link on Home is a link to nowhere.
     header = (read("tools/partials/header.html")
@@ -1669,6 +1700,9 @@ def build(slug, page):
               .replace("{{HEADER_TABS}}",
                        EXTRA_TAB.format(href=page["logintab"][1], label=page["logintab"][0])
                        if page.get("logintab") else ""))
+    if slug == "news":
+        header = header.replace('class="htab htab--news" href="news.html"',
+                                'class="htab htab--news" href="news.html" aria-current="page"')
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
     if slug == "parent-portal":
@@ -1785,6 +1819,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/records.js?{CACHE_BUST}" defer></script>')
     if slug == "alumni":
         parts.append(f'<script src="assets/js/alumni-journey.js?{CACHE_BUST}" defer></script>')
+    if slug == "news":
+        parts.append(f'<script src="assets/js/news-journal.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
@@ -1805,7 +1841,7 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/captures-featured.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
     if slug == "parent-portal":
-        parts.append(f'<script src="assets/js/parent-portal-intro.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/parent-portal-motion.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
     parts += ["</body>", "</html>", ""]
