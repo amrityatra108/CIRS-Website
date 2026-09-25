@@ -342,7 +342,7 @@ PAGES = {
         "title": "Crossroads | CIRS Monthly Magazine",
         "description": "The archive of Crossroads, the monthly magazine of Chinmaya "
                        "International Residential School — a student-run initiative to foster "
-                       "journalistic talent, edition by edition.",
+                       "literary talent, edition by edition.",
         # No flat band and no video hero: an archive opens on its own
         # masthead, built in tools/pages/crossroads.html.
         "banner": None,
