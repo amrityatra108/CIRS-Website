@@ -4,7 +4,7 @@ build-site.py writes the page's three generated parts from here —
 
     {{LEAD_FEATURED}}   the four portraits that open the directory
     {{LEAD_DIRECTORS}}  the three further Directors, compact
-    {{LEAD_READER}}     "In their own words": the index and the six messages
+    {{LEAD_READER}}     "In their own words": the index and the five messages
 
 — and tools/make-leadership.py cuts every portrait named in PORTRAITS. Keeping
 the crop, the file widths and the markup in one place is what stops a srcset
@@ -53,7 +53,6 @@ PORTRAITS = {
     # The frame on the wall behind him, at the right, stays out.
     "balachandran":  ("assets/source/leadership/balachandran.jpg",  (127, 0, 767, 800)),
     "tejomayananda": ("assets/source/leadership/tejomayananda.jpg", (112, 0, 912, 1000)),
-    "chinmayananda": ("assets/img/founder/archive/p607-portrait.webp", (164, 128, 1064, 1253)),
 }
 
 STEPS = (320, 480, 640)
@@ -170,7 +169,7 @@ DIRECTORS = [
 
 # ---------------------------------------------------------------------------
 # The messages, in the order the school publishes them. "group" separates the
-# Founder and Pujya Guruji, whose messages belong to the school's beginning,
+# message of Pujya Guruji, which belongs to the school's beginning,
 # from the four who hold office at CIRS today.
 #   title    the author's own heading, where the school publishes one
 #   open     greeting lines, before the body
@@ -178,35 +177,6 @@ DIRECTORS = [
 #   close    sign-off lines, verbatim
 # ---------------------------------------------------------------------------
 MESSAGES = [
-    {
-        "id": "founder", "slug": "chinmayananda", "group": "origin",
-        "name": "Pujya Gurudev Swami Chinmayananda", "short": "Swami Chinmayananda",
-        "role": "Founder of CIRS",
-        "title": None, "open": [],
-        "body": [
-            "Never before in our national history did the best minds of India move out in such "
-            "spectacular numbers to serve communities in distant foreign lands, living amidst "
-            "unusual climates, strange food habits, peculiar social customs and confusing cultural "
-            "environments. Everywhere young Indians are scoring success with their performances in "
-            "science and technology, commerce and art. We salute them for all their excellence and "
-            "wish them even greater success in their professions.",
-            "Those who have gone abroad with their families try to contribute their Indian way of "
-            "life with the lifestyle of their adopted countries. At times such attempts create "
-            "pressures and conflicts over moral values and cultural patterns. The children see one "
-            "thing at home and meet contradictory situations outside. Because of this bi-cultural "
-            "experience they run the risk of picking up attitudes potentially dangerous and "
-            "sometimes suicidal to their future happiness and success.",
-            "I am glad my suggestions are now fully accepted both in India and abroad. CIRS will "
-            "provide an environment that will help integrate the best of each culture. It will be "
-            "a cultural home away from home for our growing children.",
-            "Send us your children. Let them have one to six years of cultural adventure during "
-            "their 11&ndash;18 years of age. Let us give them a chance to understand and absorb "
-            "Indian culture and heritage and return to the countries from where they came, to "
-            "continue their studies. Let us build up sufficient knowledge and taste in them to "
-            "feel a sense of identity with and a pride in their Indian heritage.",
-        ],
-        "close": [],
-    },
     {
         "id": "guruji", "slug": "tejomayananda", "group": "origin",
         "name": "Pujya Guruji Swami Tejomayananda", "short": "Swami Tejomayananda",
@@ -342,7 +312,10 @@ MESSAGES = [
     },
 ]
 
-GROUPS = {"origin": "Founder &amp; Guruji", "today": "The school today"}
+# The Founder, Pujya Gurudev Swami Chinmayananda, is not on this page: the
+# owner asked for him to be left off Leadership (September 2026). His message
+# is on cirschool.org if it is wanted back.
+GROUPS = {"origin": "Chinmaya Mission", "today": "The school today"}
 
 
 # ---------------------------------------------------------------------------
@@ -412,8 +385,7 @@ def reader_html():
         options.append(f'            <option value="{m["id"]}" data-role="{m["role"]}">{m["short"]}</option>')
         title = f'\n            <p class="ld-msg__title">{m["title"]}</p>' if m["title"] else ""
         body = "".join(f"\n            <p>{p}</p>" for p in m["body"])
-        kind = ("The Founder&rsquo;s message" if m["id"] == "founder"
-                else "Pujya Guruji&rsquo;s message" if m["id"] == "guruji"
+        kind = ("Pujya Guruji&rsquo;s message" if m["id"] == "guruji"
                 else f'Message from the {m["role"]}')
         panels.append(f'''      <article class="ld-msg" id="msg-{m["id"]}" role="tabpanel" aria-labelledby="msg-name-{m["id"]}" tabindex="-1">
         <header class="ld-msg__head">
@@ -458,7 +430,7 @@ def expand(html):
 
 def head_script():
     """Before first paint: say which message the URL asks for, so the reader
-    opens on it rather than showing all six and then collapsing. The index
+    opens on it rather than showing all five and then collapsing. The index
     shows only under html.ld-js (leadership.css). Deferred scripts have all
     run by DOMContentLoaded, so if leadership.js has not, the class comes off
     and every message is shown again."""
