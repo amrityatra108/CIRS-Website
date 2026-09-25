@@ -42,6 +42,7 @@ import creativewriting
 import captures
 import theatre
 import festivals
+import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=102"
@@ -184,27 +185,41 @@ PAGES = {
     },
     "school-history": {
         "nav": "School History",
-        "title": "School History",
-        "description": "How Chinmaya International Residential School came to be — Pujya Gurudev's "
-                       "vision, the rupee-by-rupee purchase of the land, and the inauguration on "
-                       "6 June 1996.",
-        # The same opening as News: the campus under the Ghats, in motion. A
-        # history page earns the photograph more than the flat band did — the
-        # buildings are the thing the story below ends in.
-        "hero": ("Since 1996", "School <em>History.</em>",
-                 "A vision carried from the 1970s to a hundred acres in the Siruvani foothills, "
-                 "and the ninety-six students who began it."),
-        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
-        "hero_cta": [("Follow the timeline", "#timeline", "primary"),
-                     ("Watch the film", "#film", "ghost")],
+        "title": "School History | The CIRS Archive",
+        "description": "The CIRS archive: Pujya Gurudev's idea, the land bought one rupee at a "
+                       "time, the inauguration on 6 June 1996 and the milestones since, each "
+                       "with its source.",
+        # No banner and no hero. The page opens on its own dark composition —
+        # the school's records set back at shallow depths behind the title —
+        # then tells six chapters in one bounded sticky sequence and ends on
+        # the complete archive. Every record is written from tools/history.py,
+        # which names each one's source; tools/make-history.py cuts the images.
+        "banner": None,
+        "sheet": "history",
+        "cache_suffix": "-history-1",
+        # The chapters carry their own visible index and "View all
+        # milestones", so the floating "On this page" control would repeat it.
+        "jump": False,
+        # Nothing on this page is a placeholder any more: what could not be
+        # sourced was taken out and is listed in tools/history.py.
+        "uc": False,
+        "closing": ("Have something to add", "to the archive?",
+                    [("Write to the school",
+                      "mailto:info@cirschool.org?subject=For%20the%20CIRS%20archive",
+                      "closing-scene__admissions"),
+                     ("View all milestones", "#timeline", "closing-scene__contact")],
+                    "Photographs, documents and recollections from any year are welcome at "
+                    "info@cirschool.org. The school reads everything it is sent and decides "
+                    "what is added; nothing is published automatically."),
     },
     "leadership": {
         "nav": "Leadership",
         "title": "Our Leadership",
         "description": "The Board of Directors of Chinmaya International Residential School, and "
                        "the staff and faculty.",
-        # The campus hero News and School History open on, so the Vision
-        # pages that are documents rather than compositions share one opening.
+        # The campus hero News opens on, so the Vision pages that are
+        # documents rather than compositions share one opening. (School
+        # History used to wear it too; it now opens on its own archive.)
         "hero": ("Governance", "Our <em>Leadership.</em>",
                  "CIRS is an undertaking of the Central Chinmaya Mission Trust, Mumbai, and is "
                  "managed by its Board of Directors."),
@@ -1106,7 +1121,7 @@ def closing_html(footer, closing):
     something more specific than "Explore Admissions" says it here, rather
     than adding a second invitation band just above the scene.
     """
-    first, second, links = closing
+    first, second, links, *note = closing
     start = footer.index('<h2 class="closing-scene__title"')
     end = footer.index("</div>", footer.index('<div class="closing-scene__links">')) + len("</div>")
     anchors = "\n".join(f'        <a class="{cls}" href="{href}">{label}</a>'
@@ -1114,7 +1129,8 @@ def closing_html(footer, closing):
     return (footer[:start]
             + f'<h2 class="closing-scene__title" id="closing-scene-title">\n'
               f'        <span>{first}</span>\n        <span>{second}</span>\n      </h2>\n'
-              f'      <div class="closing-scene__links">\n{anchors}\n      </div>'
+              + (f'      <p class="closing-scene__note">{note[0]}</p>\n' if note else "")
+            + f'      <div class="closing-scene__links">\n{anchors}\n      </div>'
             + footer[end:])
 
 
@@ -1709,10 +1725,11 @@ def build(slug, page):
         head = head.replace("</head>",
             portal_motion_gate +
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
-    if slug in ("admissions", "school-info", "news", "curriculum"):
+    if slug in ("admissions", "school-info", "news", "curriculum", "school-history"):
         # These pages open immediately with their own video, document sheets,
         # journal masthead or, on Curriculum, the photograph of learning the
-        # page leads with, so the shared curtain is unnecessary.
+        # page leads with — and School History on its archive's title — so
+        # the shared curtain is unnecessary.
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
@@ -1756,9 +1773,9 @@ def build(slug, page):
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if slug in ("admissions", "school-info", "news", "curriculum"):
-        # Admissions, School Information, News and Curriculum each have their
-        # own visible opening. The shared curtain would delay it behind a
+    if slug in ("admissions", "school-info", "news", "curriculum", "school-history"):
+        # Admissions, School Information, News, Curriculum and School History
+        # each have their own visible opening. The shared curtain would delay it behind a
         # blank screen.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
@@ -1810,6 +1827,8 @@ def build(slug, page):
         content = captures.expand_featured(content)
     if slug == "festivals":
         content = festivals.expand(content)
+    if slug == "school-history":
+        content = history.expand(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
                        .replace("{{REGISTER}}", register_html() if slug == "school-info" else "")
@@ -1920,6 +1939,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/artattack.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}" defer></script>')
+    if slug == "school-history":
+        parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
