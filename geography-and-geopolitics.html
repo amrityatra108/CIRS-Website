@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/pages.css?b=102-blog-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=102-blog-editorial-1">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,21 +37,13 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/blog.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/typography.css?b=102-blog-2">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-blog-2-footer-1">
+<link rel="stylesheet" href="assets/css/blog.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=102-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=102-blog-editorial-1-footer-1">
 </head>
 
 <body class="blog litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -269,50 +261,76 @@
 </div>
 <main id="main">
 <article class="art" id="top">
-  <div class="artwrap">
-    <header class="art__head">
-      <p class="art__back"><a href="blog.html"><span aria-hidden="true">&larr;</span> Back to the Blog</a></p>
-      <p class="art__flag"><a href="blog.html">CIRS Blog</a> &rarr;
-        <span>World</span></p>
-      <h1 class="art__title serif">Geography and Geopolitics</h1>
-      <p class="art__by">Shaurya Bhartia | XII Mgmt</p>
-      <p class="art__where">The Crossroads, Issue&nbsp;31 &middot; May 2026</p>
-    </header>
-
+  <header class="art__head">
+    <div class="art__shell">
+      <nav class="art__breadcrumb" aria-label="Breadcrumb">
+        <a href="blog.html">Ideas from CIRS</a><span aria-hidden="true">/</span><span>World</span>
+      </nav>
+      <p class="art__edition">The Crossroads <span aria-hidden="true">/</span> Issue 31</p>
+      <h1 class="art__title">Geography and Geopolitics</h1>
+      <div class="art__credits">
+        <span>Shaurya Bhartia | 12 Mgmt</span>
+        <span>May 2026</span>
+        <span>5 min read</span>
+      </div>
+    </div>
+  </header>
+  <div class="art__layout">
+    <aside class="art__rail" aria-label="Original publication">
+      <p>First published in</p>
+      <strong>The Crossroads<br>Issue 31</strong>
+      <a href="assets/documents/crossroads/crossroads-issue-31.pdf">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
+      <a href="crossroads.html">All Crossroads issues</a>
+    </aside>
+    <div class="art__content">
     <figure class="art__hero">
       <img src="assets/img/blog/geography-and-geopolitics.webp"
            alt="Hands moving chess pieces across a map of the world, illustrating geopolitical strategy"
            width="1024" height="572" decoding="async">
+      <figcaption>Image supplied for the web edition.</figcaption>
     </figure>
 
-    <div class="art__body">
-      <p>Every week, we stare at the "News of the Week" presentation on the screen, clapping loudly at the second anything mildly related to India, any sports team, or Donald Trump that flashes by. But have you ever tried to understand what’s actually going on behind those headlines? Or are you content with just having the worldview of a goldfish, only noticing whatever gets dropped into your bowl?</p>
+      <div class="art__body">
+      <p>Every week, we stare at the &quot;News of the Week&quot; presentation on the screen, clapping loudly at the second anything mildly related to India, any sports team, or Donald Trump that flashes by. But have you ever tried to understand what’s actually going on behind those headlines? Or are you content with just having the worldview of a goldfish, only noticing whatever gets dropped into your bowl?</p>
       <p>Daily newspapers and that weekly presentation are our main windows to the outside world. But reading the news and understanding the world are two very different things.</p>
-      <p>The problem is we only look at problems at their surfacewho won, who lost, who launched a missile. But global politics isn't a culmination of random moves around the world. Every move is a massive, multiplayer, carefully structured chess game that is dictated by a very stringent strategy book.</p>
+      <p>The problem is we only look at problems at their surfacewho won, who lost, who launched a missile. But global politics isn&#x27;t a culmination of random moves around the world. Every move is a massive, multiplayer, carefully structured chess game that is dictated by a very stringent strategy book.</p>
       <p>To actually understand this game, we need to stop staring at the players and start looking at the board itself. First, you need to understand what lies at the very base that forms its structure. It’s rivers. Mountains that surround it. Because in geopolitics, the map is the script. If you have been going through the newspapers anytime during the last 2 years, you would have recognized that Russian tanks are rolling into Ukraine, and Indian and Chinese soldiers are in tense standoffs in the Himalayas.</p>
       <p>On the surface, these look like two entirely different conflicts driven by different politicians. But if you strip away the speeches and look at the maps, both of these situations are driven by deep, geographically rooted motives.</p>
-      <p>First, we will move to Russia’s nightmare. Despite its monstrous size, most of Russia’s northern ports on the Arctic freeze over every winter. This cuts Russia off from a substantial amount of trade, and this also makes Russia vulnerable to naval attacks. To continue being a global superpower, Russia must have a "warm-water port" so its trade ships and navy can sail year-round. So why Ukraine? What's the prize? Simply put, it’s the port of Sevastopol located in Crimea on the Black Sea.</p>
-      <p>If Ukraine permanently allies with the West, Russia risks losing its only reliable, year-round door to the Mediterranean Sea and, consequently, the rest of the world's oceans. Russia's invasion isn't just about grabbing land: it’s a desperate fight because they are geographically imprisoned. They need that port to survive as a global superpower.</p>
-      <p>Shaurya Bhartia | 12 Mgmt Now let's go south on the world map, and look at the India-China border. Here, nature manifested differently: it fortified India with the most magnanimous fortress, the Himalayas.</p>
+      <p>First, we will move to Russia’s nightmare. Despite its monstrous size, most of Russia’s northern ports on the Arctic freeze over every winter. This cuts Russia off from a substantial amount of trade, and this also makes Russia vulnerable to naval attacks. To continue being a global superpower, Russia must have a &quot;warm-water port&quot; so its trade ships and navy can sail year-round. So why Ukraine? What&#x27;s the prize? Simply put, it’s the port of Sevastopol located in Crimea on the Black Sea.</p>
+      <p>If Ukraine permanently allies with the West, Russia risks losing its only reliable, year-round door to the Mediterranean Sea and, consequently, the rest of the world&#x27;s oceans. Russia&#x27;s invasion isn&#x27;t just about grabbing land: it’s a desperate fight because they are geographically imprisoned. They need that port to survive as a global superpower.</p>
+      <p>Now let&#x27;s go south on the world map, and look at the India-China border. Here, nature manifested differently: it fortified India with the most magnanimous fortress, the Himalayas.</p>
       <p>Since these mountains are so massive, a traditional, large-scale tank invasion between India and China is practically impossible. So why the tension? Because in this game, whoever controls the high ground controls the ultimate resource: water. China occupies Tibet, known as the Water Tower of Asia, and the starting point of rivers that quench an entire continent’s thirst. India’s geographic anxiety is that if China controls the peaks, it controls the water source. Now look at the contrast between the two - Russia fights because it is trapped by ice. India and China clash because their maps are too high.</p>
       <p>The best part about this rule is that it applies everywhere, directly or indirectly. Once you learn how to read the map, the whole world starts to make sense.</p>
-      <p>For a real-time example of geographic leverage, look at the Strait of Hormuz. This tiny, 21-mile ocean gap controls roughly 20% of the world's daily oil transport. It is the ultimate choke point, exhibiting how a country like Iran can use a gap in the map to hold a global superpower hostage.</p>
-      <p>Why hasn't China simply invaded Taiwan? The US Navy is not the only limiting factor - it's also the map. To attack, China has to cross over 100 miles of brutal ocean (the Taiwan Strait) and land on a heavily layered, mountainous island with only a few muddy beaches. Geography makes it the hardest military to infiltrate in modern history.</p>
+      <p>For a real-time example of geographic leverage, look at the Strait of Hormuz. This tiny, 21-mile ocean gap controls roughly 20% of the world&#x27;s daily oil transport. It is the ultimate choke point, exhibiting how a country like Iran can use a gap in the map to hold a global superpower hostage.</p>
+      <p>Why hasn&#x27;t China simply invaded Taiwan? The US Navy is not the only limiting factor - it&#x27;s also the map. To attack, China has to cross over 100 miles of brutal ocean (the Taiwan Strait) and land on a heavily layered, mountainous island with only a few muddy beaches. Geography makes it the hardest military to infiltrate in modern history.</p>
       <p>Ever wonder why some resource-rich African nations struggle with trade to date? Their massive rivers frequently transform high plateaus into steep waterfalls, making it physically impossible to sail cargo ships inland. Transport is thus done through the shores, making the prices hike steeply.</p>
-      <p>These aren't just fun trivia: they are the invisible rules of the metaphorical chessboard. Every headline flashing on the screen is just the latest move on a board that was shaped eons ago.</p>
-      <p>Since we don't have internet access during the day to instantly Google the backstory of every headline, we have to use our heads. This week, pick just ONE international conflict from the newspaper in the common room or from the "News of the Week" on Saturday.</p>
-      <p>Instead of just accepting what happened, go find an atlas or a map in the library. Look at the terrain where the headline is taking place. Is there a river? A mountain range? A narrow gap of sea? Ask yourself: If this mountain or river weren’t here, would these two countries still be fighting? Don't assume and create your own inferences from it; make sure you put forth the practicality of that being the motive before concluding.</p>
-      <p>It's time to stop simply watching the news and start reading the map.</p>
+      <p>These aren&#x27;t just fun trivia: they are the invisible rules of the metaphorical chessboard. Every headline flashing on the screen is just the latest move on a board that was shaped eons ago.</p>
+      <p>Since we don&#x27;t have internet access during the day to instantly Google the backstory of every headline, we have to use our heads. This week, pick just ONE international conflict from the newspaper in the common room or from the &quot;News of the Week&quot; on Saturday.</p>
+      <p>Instead of just accepting what happened, go find an atlas or a map in the library. Look at the terrain where the headline is taking place. Is there a river? A mountain range? A narrow gap of sea? Ask yourself: If this mountain or river weren’t here, would these two countries still be fighting? Don&#x27;t assume and create your own inferences from it; make sure you put forth the practicality of that being the motive before concluding.</p>
+      <p>It&#x27;s time to stop simply watching the news and start reading the map.</p>
+      </div>
     </div>
-
+  </div>
+  <div class="art__shell">
     <footer class="art__foot">
-      <p>Printed in <b>The Crossroads</b>, Issue&nbsp;31 &middot; May 2026 &mdash; the monthly
-        magazine of Chinmaya International Residential School.</p>
-      <p class="art__onward">
-        <a class="btn btn--outline" href="assets/documents/crossroads/crossroads-issue-31.pdf">Read the whole issue (PDF)</a>
-        <a class="btn btn--ghost-ink" href="blog.html">Back to the Blog</a>
-      </p>
+      <p>Originally published in <em>The Crossroads</em>, Issue 31.</p>
+      <div><a href="assets/documents/crossroads/crossroads-issue-31.pdf">Read the complete issue (PDF)</a>
+        <a href="blog.html">Back to all stories</a></div>
     </footer>
+    <section class="art__related" aria-labelledby="art-related-title">
+      <h2 id="art-related-title">Keep reading</h2>
+      <ul><li>
+          <a href="sportswashing.html">
+            <span>Sport / Issue 30</span>
+            <strong>Sportswashing: The New Geopolitics</strong>
+          </a>
+        </li><li>
+          <a href="trust-or-bust.html">
+            <span>Economics / Issue 29</span>
+            <strong>Trust or Bust: The Never-Ending Problem of the Prisoner&#x27;s Dilemma</strong>
+          </a>
+        </li></ul>
+    </section>
   </div>
 </article>
 </main>
@@ -419,11 +437,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102-blog-2" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102-blog-2" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102-blog-2" defer></script>
-<script src="assets/js/cirs.js?b=102-blog-2" defer></script>
-<script src="assets/js/pages.js?b=102-blog-2" defer></script>
-<script src="assets/js/footer.js?b=102-blog-2-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/cirs.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/pages.js?b=102-blog-editorial-1" defer></script>
+<script src="assets/js/footer.js?b=102-blog-editorial-1-footer-1" defer></script>
 </body>
 </html>

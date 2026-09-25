@@ -349,10 +349,9 @@ PAGES = {
     },
     "blog": {
         "nav": "CIRS Blog",
-        "title": "CIRS Blog",
-        "description": "Stories, ideas and perspectives from the CIRS community — student "
-                       "writing managed by the Crossroads Editorial Board and the CIRS "
-                       "Social Media Team.",
+        "title": "Ideas from CIRS | CIRS Blog",
+        "description": "Student articles first published in The Crossroads, collected "
+                       "as a journal of ideas from CIRS.",
         # No banner and no hero from the shared builders. A publication opens on
         # its own masthead, which the page brings with it, and it brings its own
         # sheet to set type larger than anything else on this site.
@@ -361,6 +360,9 @@ PAGES = {
         # it is a news stand and they are reading pages, and they share no
         # markup. blognews.css is scoped to body.blognews for that reason.
         "sheet": "blognews",
+        "cache_suffix": "-blog-editorial-1",
+        "jump": False,
+        "uc": False,
         # Newsreader carries the Blog interface and prose; its grid remains distinct.
         "litehead": True,
     },
@@ -830,20 +832,14 @@ def esc(text, attr=False):
 
 
 def article_html(page):
-    """A published Crossroads article, set as a page of its own.
-
-    The words are the magazine's and they are all here — see tools/blogposts.py.
-    What this adds is only what a page needs around them: where the article
-    came from, who wrote it, and the way back to the blog and to the issue it
-    was printed in.
-    """
+    """A reading page for a complete student article from The Crossroads."""
     post = page["post"]
     issue = post["issue"]
     pdf = f"assets/documents/crossroads/crossroads-issue-{issue:02d}.pdf"
-    when = f" &middot; {post['date']}" if post["date"] else ""
-    by = (f'<p class="art__by">{esc(post["author"])}</p>' if post["author"]
-          else '<p class="art__by"><em>[Byline &mdash; to be supplied by the '
-               'Crossroads Editorial Board.]</em></p>')
+    when = f'        <span>{esc(post["date"])}</span>\n' if post["date"] else ""
+    by = esc(blog.byline(post))
+    subtitle = (f'      <p class="art__subtitle">{esc(post["subtitle"])}</p>\n'
+                if post.get("subtitle") else "")
     image = ""
     if post.get("image"):
         dimensions = (f' width="{post["image_width"]}" height="{post["image_height"]}"'
@@ -852,33 +848,45 @@ def article_html(page):
       <img src="assets/img/blog/{esc(post["image"], attr=True)}"
            alt="{esc(post.get("image_alt", ""), attr=True)}"
           {dimensions} decoding="async">
+      <figcaption>{esc(post.get("image_caption", "Image supplied for the web edition."))}</figcaption>
     </figure>
 
 '''
-    body = "\n".join(f"      <p>{esc(para)}</p>" for para in post["paragraphs"])
+    body = blog.body_html(post)
     return f'''<article class="art" id="top">
-  <div class="artwrap">
-    <header class="art__head">
-      <p class="art__back"><a href="blog.html"><span aria-hidden="true">&larr;</span> Back to the Blog</a></p>
-      <p class="art__flag"><a href="blog.html">CIRS Blog</a> &rarr;
-        <span>{esc(post["section"])}</span></p>
-      <h1 class="art__title serif">{esc(post["title"])}</h1>
-      {by}
-      <p class="art__where">The Crossroads, Issue&nbsp;{issue}{when}</p>
-    </header>
-
-{image}    <div class="art__body">
-{body}
+  <header class="art__head">
+    <div class="art__shell">
+      <nav class="art__breadcrumb" aria-label="Breadcrumb">
+        <a href="blog.html">Ideas from CIRS</a><span aria-hidden="true">/</span><span>{esc(post["section"])}</span>
+      </nav>
+      <p class="art__edition">The Crossroads <span aria-hidden="true">/</span> Issue {issue}</p>
+      <h1 class="art__title">{esc(post["title"])}</h1>
+{subtitle}      <div class="art__credits">
+        <span>{by}</span>
+{when}        <span>{blog.reading_time(post)} min read</span>
+      </div>
     </div>
-
+  </header>
+  <div class="art__layout">
+    <aside class="art__rail" aria-label="Original publication">
+      <p>First published in</p>
+      <strong>The Crossroads<br>Issue {issue}</strong>
+      <a href="{pdf}">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
+      <a href="crossroads.html">All Crossroads issues</a>
+    </aside>
+    <div class="art__content">
+{image}      <div class="art__body">
+{body}
+      </div>
+    </div>
+  </div>
+  <div class="art__shell">
     <footer class="art__foot">
-      <p>Printed in <b>The Crossroads</b>, Issue&nbsp;{issue}{when} &mdash; the monthly
-        magazine of Chinmaya International Residential School.</p>
-      <p class="art__onward">
-        <a class="btn btn--outline" href="{pdf}">Read the whole issue (PDF)</a>
-        <a class="btn btn--ghost-ink" href="blog.html">Back to the Blog</a>
-      </p>
+      <p>Originally published in <em>The Crossroads</em>, Issue {issue}.</p>
+      <div><a href="{pdf}">Read the complete issue (PDF)</a>
+        <a href="blog.html">Back to all stories</a></div>
     </footer>
+    {blog.related_html(post)}
   </div>
 </article>'''
 
@@ -1466,6 +1474,12 @@ def build(slug, page):
     chrome = read("tools/partials/chrome.html")
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
+    if slug == "blog" or page.get("post"):
+        # Journal pages open directly on readable type. The shared full-screen
+        # curtain would hide their masthead and force an unrelated wait.
+        intro_start = chrome.index("<!-- Opening sequence.")
+        intro_end = chrome.index("<!-- Film lightbox", intro_start)
+        chrome = chrome[:intro_start] + chrome[intro_end:]
     if slug == "parent-portal":
         # The full-window photograph is this page's opening; the shared opaque
         # curtain would cover it and run its own scroll lock.
@@ -1597,6 +1611,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
+    if slug == "blog":
+        parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-editorial-1" defer></script>')
     if slug == "festivals":
         parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
@@ -1633,8 +1649,9 @@ for _post in blogposts.POSTS:
         "title": esc(_post["title"], attr=True) + " | CIRS Blog",
         "description": esc(_post["excerpt"][:180], attr=True),
         "sheet": "blog",
-        "cache_suffix": "-blog-2",
+        "cache_suffix": "-blog-editorial-1",
         "uc": False,
+        "jump": False,
         # An article opens on paper, so the header cannot float over it in
         # white lettering. The Blog's own masthead is dark and does not.
         "litehead": True,
