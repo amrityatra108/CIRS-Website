@@ -11,8 +11,9 @@ name (often a first name and an initial) and the class. Nothing is added to
 that. No work has a title, a medium or a year of its own in the magazine, so
 none is shown; what is shown instead is the issue it appeared in, and that
 issue's date as its own cover or contents page prints it (ISSUES below).
-The five paintings from the school's archive keep the captions the archive
-gave them, and no credit, because the archive gave none.
+The five paintings from the school's archive, the photographs and the two
+digital renders stay in the manifest but are not put on the page, which is
+for work made by hand (on_page below).
 
 Where a credit could not be read it is left out rather than guessed at. A
 work the magazine printed with no credit at all is left off the wall, unless
@@ -53,26 +54,48 @@ ISSUES = {
     30: "April 2026", 31: "May 2026", 32: "August 2026",
 }
 
+def on_page(w):
+    """What the page shows: work made by hand, printed in the Creative Corner."""
+    return "crossroads" in w["source"] and w["category"] in ("painting", "craft")
+
+
 # The filters, in the order they are offered. A filter is only offered if
 # the collection can fill it; "together" is any work credited to more than
 # one person, or to a house.
 FILTERS = [
     ("painting", "Painting &amp; drawing"),
-    ("photography", "Photography &amp; digital"),
     ("craft", "Craft"),
     ("together", "Made together"),
 ]
 MIN_FILTER = 6
 
-# The first thing the page hangs, before the collection: one large work, a
-# pair, a run of small works and another large work. Each work on the page
-# appears once, so these are not repeated in the collection below.
+# The first thing the page hangs, before the collection: a salon wall of the
+# most colourful work, in four rows that each fill the width. A large work
+# beside a cluster of six, three works of a size, a run of small ones, and a
+# cluster beside another large work. A cluster is a list of two rows. Each
+# work on the page appears once, so none of these is repeated in the
+# collection below or in the ribbons.
 OPENING_WORK = "cc26-27-02"         # the painting the opening's photograph gives way to
-HANG = {
-    "large": "cc04-12-06",
-    "pair": ["cc32-23-02", "cc19-22-01"],
-    "run": ["ar-paint1", "ar-paint5", "ar-paint3", "ar-paint2", "ar-paint4"],
-    "close": "cc03-12-01",
+HANG = [
+    ("lead", ["cc04-12-06",
+              [["cc08-25-03", "cc15-23-07", "cc10-23-05"],
+               ["cc14-23-01", "cc31-24-06", "cc22-23-10"]]]),
+    ("trio", ["cc05-23-02", "cc06-22-03", "cc21-22-01"]),
+    ("run", ["cc10-22-06", "cc22-22-01", "cc30-23-04", "cc11-23-08",
+             "cc19-22-03", "cc18-23-04", "cc32-23-05"]),
+    ("close", [[["cc26-27-03", "cc15-23-02", "cc21-23-04"],
+                ["cc13-23-04", "cc28-23-01", "cc11-23-06"]],
+               "cc03-12-01"]),
+]
+# Two bands of colour further down the page, each a line of works that drifts
+# sideways as the page scrolls past it (assets/js/artattack.js).
+RIBBONS = {
+    "warm": ["cc10-23-07", "cc20-23-04", "cc02-12-07", "cc10-23-02", "cc10-23-09",
+             "cc08-26-04", "cc22-23-11", "cc25-22-01", "cc31-24-05", "cc21-23-01",
+             "cc06-23-03", "cc17-23-02", "cc12-22-06", "cc19-23-05"],
+    "cool": ["cc28-23-05", "cc05-22-04", "cc08-25-02", "cc24-22-01", "cc15-22-01",
+             "cc16-23-02", "cc20-23-05", "cc07-22-04", "cc21-22-02", "cc07-22-03",
+             "cc11-23-02", "cc27-23-03", "cc21-23-06"],
 }
 FIRST_SHOWN = 30                    # works in the collection before "Show more"
 
@@ -135,7 +158,7 @@ def is_together(w):
 
 
 def cat_of(w):
-    return "photography" if w["category"] in ("photography", "digital") else w["category"]
+    return w["category"]
 
 
 CAT_LABEL = {"painting": "Painting or drawing", "photography": "Photograph",
@@ -147,24 +170,38 @@ def works_by_id(m=None):
     return {w["id"]: w for w in m["works"]}
 
 
+def hang_ids():
+    out = []
+    for _, items in HANG:
+        for item in items:
+            out.extend([i for row in item for i in row] if isinstance(item, list) else [item])
+    return out
+
+
+def placed():
+    """Works given a place of their own, each once."""
+    ids = [OPENING_WORK, *hang_ids(), *(i for r in RIBBONS.values() for i in r)]
+    assert len(ids) == len(set(ids)), "a work is placed twice"
+    return set(ids)
+
+
 def collection(m=None):
-    """Every work not given a place of its own, newest issue first."""
+    """Every work on the page not given a place of its own, newest issue first."""
     m = m or load()
-    placed = {OPENING_WORK, HANG["large"], HANG["close"], *HANG["pair"], *HANG["run"]}
-    rest = [w for w in m["works"] if w["id"] not in placed]
+    byid = works_by_id(m)
+    for i in placed():
+        assert on_page(byid[i]), f"{i} is placed but is not a work for this page"
+    taken = placed()
+    rest = [w for w in m["works"] if on_page(w) and w["id"] not in taken]
     return sorted(rest, key=lambda w: (-w["source"].get("crossroads", 0), w["id"]))
 
 
 def count(m=None):
-    return len((m or load())["works"])
-
-
-def crossroads_count(m=None):
-    return sum(1 for w in (m or load())["works"] if "crossroads" in w["source"])
+    return sum(1 for w in (m or load())["works"] if on_page(w))
 
 
 def issue_count(m=None):
-    return len({w["source"]["crossroads"] for w in (m or load())["works"] if "crossroads" in w["source"]})
+    return len({w["source"]["crossroads"] for w in (m or load())["works"] if on_page(w)})
 
 
 def work_attrs(w):
@@ -217,32 +254,82 @@ def work_html(w, cls="aa-work", sizes="(max-width: 700px) 50vw, 22vw", eager=Fal
             f'</a><figcaption>{label_html(w)}</figcaption></figure>')
 
 
+def ar_of(w):
+    return w["size"][0] / w["size"][1]
+
+
+def vw(frac, share=0.84):
+    """A share of the row as a sizes value; the row is about 84vw wide."""
+    return f"{max(8, round(frac * share * 100))}vw"
+
+
 def hang_html():
-    m = load()
-    byid = works_by_id(m)
-    large = work_html(byid[HANG["large"]], "aa-hang__work aa-hang__work--large",
-                      "(max-width: 700px) 92vw, 44vw")
-    pair = "\n".join(work_html(byid[i], "aa-hang__work", "(max-width: 700px) 46vw, 28vw")
-                     for i in HANG["pair"])
-    run = "\n".join(work_html(byid[i], "aa-hang__work aa-hang__work--small",
-                              "(max-width: 700px) 46vw, 18vw") for i in HANG["run"])
-    close = work_html(byid[HANG["close"]], "aa-hang__work aa-hang__work--large",
-                      "(max-width: 700px) 92vw, 40vw")
-    return f'''<div class="aa-hang">
-      <div class="aa-hang__row aa-hang__row--lead">
-        {large}
-      </div>
-      <div class="aa-hang__row aa-hang__row--pair">
-        {pair}
-      </div>
-      <div class="aa-hang__row aa-hang__row--run">
-        <p class="aa-hang__runhead">From the school&rsquo;s archive, with the captions it gave them</p>
-        {run}
-      </div>
-      <div class="aa-hang__row aa-hang__row--close">
-        {close}
-      </div>
-    </div>'''
+    """The salon wall. Every row fills the width and every work keeps its shape.
+
+    Works in a row share one height, so each is as wide as its proportions
+    make it (flex-grow by aspect ratio, in the sheet). A cluster beside a
+    large work is two such rows stacked; its width is solved here so that the
+    cluster, with its captions and gaps, stands exactly as tall as the large
+    work beside it with its one caption. With L the large work's height per
+    unit of width, K the cluster's (the sum of 1/S over its rows, S being a
+    row's summed aspect ratios) and M the gaps inside the cluster's rows
+    (the sum of (n - 1)/S), the cluster's width is
+
+        (row - gap) * L/(L+K) + gap * M/(L+K) - (caption + gap) / (L+K)
+
+    which the sheet evaluates, since only it knows the row's width, the gap
+    and the caption height (--cp, --cm and --cq are the three fractions)."""
+    byid = works_by_id()
+    rows = []
+    for kind, items in HANG:
+        works = [byid[i] for i in items if not isinstance(i, list)]
+        clusters = [i for i in items if isinstance(i, list)]
+        # The row's width in units of its height, for the sizes estimate.
+        units = sum(ar_of(w) for w in works)
+        for c in clusters:
+            units += 1 / sum(1 / sum(ar_of(byid[i]) for i in r) for r in c)
+        wide = kind in ("lead", "close")
+        out = []
+        for item in items:
+            if not isinstance(item, list):
+                w = byid[item]
+                out.append(work_html(w, "aa-hang__work",
+                                     f"(max-width: 760px) {'92vw' if wide else '46vw'}, "
+                                     f"{vw(ar_of(w) / units)}"))
+                continue
+            L = 1 / ar_of(works[0])
+            sums = [sum(ar_of(byid[i]) for i in r) for r in item]
+            K = sum(1 / S for S in sums)
+            M = sum((len(r) - 1) / S for r, S in zip(item, sums))
+            P, Q1, Q = L / (L + K), M / (L + K), 1 / (L + K)
+            subrows = []
+            for r, S in zip(item, sums):
+                cell = "\n".join(
+                    work_html(byid[i], "aa-hang__work",
+                              f"(max-width: 760px) {vw(ar_of(byid[i]) / S, 0.92)}, "
+                              f"{vw(ar_of(byid[i]) / S * P)}")
+                    for i in r)
+                subrows.append(f'<div class="aa-hang__sub">\n{cell}\n</div>')
+            out.append(f'<div class="aa-hang__cluster" style="--cp:{P:.4f};--cm:{Q1:.4f};--cq:{Q:.4f}">\n'
+                       + "\n".join(subrows) + "\n</div>")
+        rows.append(f'<div class="aa-hang__row aa-hang__row--{kind}">\n' + "\n".join(out) + "\n</div>")
+    return '<div class="aa-hang">\n' + "\n".join(rows) + "\n</div>"
+
+
+def ribbon_html(name):
+    """A band of works at one height, wider than the window, that drifts."""
+    byid = works_by_id()
+    figs = []
+    for i in RIBBONS[name]:
+        w = byid[i]
+        a = ar_of(w)
+        figs.append(work_html(w, "aa-ribbon__work",
+                              f"(max-width: 760px) {round(a * 150)}px, {round(a * 240)}px"))
+    label = {"warm": "More from the Creative Corner", "cool": "Still more from the Creative Corner"}[name]
+    return (f'<section class="aa-ribbon aa-ribbon--{name}" aria-label="{label}"'
+            f' data-aa-ribbon data-dir="{-1 if name == "warm" else 1}">\n'
+            '  <div class="aa-ribbon__track" data-aa-track>\n'
+            + "\n".join(figs) + "\n  </div>\n</section>")
 
 
 def filters_html():
@@ -312,7 +399,8 @@ def expand(content):
         "{{AA_FILTERS}}": filters_html,
         "{{AA_WALL}}": wall_html,
         "{{AA_COUNT}}": lambda: str(count(m)),
-        "{{AA_CROSSROADS_COUNT}}": lambda: str(crossroads_count(m)),
+        "{{AA_RIBBON:warm}}": lambda: ribbon_html("warm"),
+        "{{AA_RIBBON:cool}}": lambda: ribbon_html("cool"),
         "{{AA_ISSUE_COUNT}}": lambda: str(issue_count(m)),
         "{{AA_FIRST_SHOWN}}": lambda: str(FIRST_SHOWN),
     }

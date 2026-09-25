@@ -14,9 +14,9 @@
 
    The viewer. A native modal <dialog>: the page behind is inert, and
    Escape closes it. Arrow keys and the buttons step through the works
-   currently selected on the wall (the opening's and the hang's works lead),
-   swipes do the same on touch, and closing returns focus to the link that
-   opened it. The full-size image replaces the thumbnail once decoded, and
+   currently selected on the wall (the opening's, the hang's and the
+   ribbons' works lead), swipes do the same on touch, and closing returns
+   focus to the link that opened it. The full-size image replaces the thumbnail once decoded, and
    the neighbours are fetched next so that stepping is immediate. */
 (function () {
   "use strict";
@@ -50,6 +50,43 @@
       measure();
     }
   }
+
+  /* ---------------- Ribbons ----------------
+     Each band of works drifts sideways, by exactly the part of it that
+     does not fit the window, while the band crosses the screen: the warm
+     one leftward, the cool one rightward. Without this, or with reduced
+     motion, the band scrolls sideways by hand. A keyboard reader tabbing
+     into a band stops its drift, so the browser can scroll to the link. */
+  var ribbons = reduced ? [] : Array.prototype.slice.call(document.querySelectorAll("[data-aa-ribbon]"));
+  ribbons.forEach(function (band) {
+    var track = band.querySelector("[data-aa-track]");
+    var dir = +band.getAttribute("data-dir") || -1;
+    var ticking = false, on = true;
+    band.classList.add("is-drifting");
+    function place() {
+      ticking = false;
+      if (!on) return;
+      var r = band.getBoundingClientRect();
+      var vh = window.innerHeight;
+      if (r.bottom < -50 || r.top > vh + 50) return;
+      var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+      var room = Math.max(0, track.scrollWidth - band.clientWidth);
+      var x = -room * (dir < 0 ? p : 1 - p);
+      track.style.setProperty("--x", x.toFixed(1) + "px");
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(place); }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    band.addEventListener("focusin", function () {
+      if (!on) return;
+      on = false;
+      band.classList.remove("is-drifting");
+      track.style.removeProperty("--x");
+    });
+    place();
+  });
 
   /* ---------------- Wall ---------------- */
   var grid = document.querySelector("[data-aa-grid]");
@@ -133,11 +170,11 @@
     source: box.querySelector("[data-aa-source]"),
     note: box.querySelector("[data-aa-note]")
   };
-  var fixed = Array.prototype.slice.call(document.querySelectorAll(".aa-open__work, .aa-hang__work a"));
+  var fixed = Array.prototype.slice.call(document.querySelectorAll(".aa-open__work, .aa-hang__work a, .aa-ribbon__work a"));
   var list = [], current = -1, opener = null, fetched = {};
 
   function sequence() {
-    // The opening's work and the hang first, then whatever the wall has selected.
+    // The opening's work, the hang and the ribbons first, then whatever the wall has selected.
     var wall = grid ? selected().map(function (f) { return f.querySelector("a"); }) : [];
     return fixed.concat(wall);
   }

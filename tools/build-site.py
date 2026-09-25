@@ -484,13 +484,12 @@ PAGES = {
     "art-attack": {
         # The page body is tools/pages/art-attack.html; its works, credits and
         # photographs are tools/art-attack.json, read by tools/artattack.py and
-        # cut by tools/make-art-attack.py. It opens on paper, not on a film:
-        # a photograph of students at work that gives way, on scroll, to the
-        # first finished work (assets/js/artattack.js), so the header takes
-        # its dark lettering from the first paint.
+        # cut by tools/make-art-attack.py. It opens on the supplied film (see
+        # assets/css/filmintro.css for its frame), which gives way to a
+        # photograph of students at work and then, on scroll, the first
+        # finished work (assets/js/artattack.js). The film carries the h1.
         "sheet": "artattack",
-        "cache_suffix": "-art-attack-3",
-        "litehead": True,
+        "cache_suffix": "-art-attack-4",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Painting, drawing, craft and the things made for the stage by the students "
@@ -499,6 +498,15 @@ PAGES = {
         # The note that replaced the under-construction banner is specific:
         # what is missing, and where to send it. It is the page's own.
         "uc": False,
+        "opening": {
+            "video": "art-attack-opening",
+            "poster": "art-attack-opening-poster.jpg",
+            "still": "art-attack-opening-final.jpg",
+            "still_element": True,
+            "title": "CIRS Art Attack",
+            "title_markup": '<span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span>',
+            "pending": True,
+        },
     },
     "festivals": {
         # The page body is tools/pages/festivals.html and its sheet
