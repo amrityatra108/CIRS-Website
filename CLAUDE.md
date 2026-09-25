@@ -57,6 +57,14 @@ every YouTube link. `tools/make-theatre.py` cuts the images into `assets/img/the
 school's Drive (the originals are not in the repository). A photograph is attributed to a house
 only by its Drive folder and the school's own YouTube titles, never by costume colour.
 
+School History is the CIRS archive, and every date on it is written from `tools/history.py`:
+each event carries its source, and anything unconfirmed is a `note` there (never published) or
+held back in `UNRESOLVED`. `python3 tools/history.py` prints the report. `tools/make-history.py`
+cuts its exhibits into `assets/img/history/` from the school's own PDFs and Drive photographs;
+its sheet and script are `assets/css/history.css` and `assets/js/history.js`. Do not add a dated
+claim to that page without a source for it, and do not attribute a photograph to an event its
+own record does not support.
+
 ## Checks, before every push
 
 ```sh
