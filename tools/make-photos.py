@@ -48,7 +48,10 @@ PHOTOS = [
     # The Student Life opening worlds. The transparent foreground student is
     # derived separately by tools/make-life-split-cutout.py.
     ("life-split-academic.jpg",  "drive-student-life-academic.JPG", (1800, 1200), (0.50, 0.50)),
-    ("life-split-beyond.jpg",    "drive-student-life-beyond.JPG",   (1800, 1200), (0.50, 0.50)),
+    # life-split-beyond.jpg was cut with the other two and never wired into a
+    # page, so it is retired on the same terms as the deck above: uncomment
+    # and re-run to bring it back.
+    #   ("life-split-beyond.jpg",    "drive-student-life-beyond.JPG",   (1800, 1200), (0.50, 0.50)),
     ("junior-school.jpg",       "IMG_1898.JPG", (1200, 1500), (0.50, 0.45)),
     ("senior-school.jpg",       "IMG_1894.JPG", (1200, 1500), (0.50, 0.45)),
 
@@ -99,23 +102,29 @@ PHOTOS = [
     ("boarding.jpg",            "20180518_121042.jpg",    (1600,  900), (0.52, 0.50)),
     ("students.jpg",            "IMG_8075.JPG",           (1400,  640), (0.50, 0.48)),
 
-    # The Student Life hero deck. Ten photographs dealt up through the
-    # marquee — and deliberately ten different shapes. A deck of identical
-    # cards reads as a slideshow in a frame; a pile of a tall one, a wide
-    # one and a square one reads as photographs. The sizes below are the
-    # shapes, and the widths they are shown at are in pages.css.
+    # The Student Life deck. It was ten photographs dealt up through a
+    # marquee, in ten deliberately different shapes; the Student Life
+    # redesign replaced that opening and now shows four of them — 10 and 08
+    # in the hero, 05 and 07 as figures further down. The sizes below are
+    # the shapes, and the widths they are shown at are in pages.css.
     #
     # PROTOTYPE: these are stand-ins cut from the existing library so the
-    # motion can be judged. The school is curating ten.
-    ("slhero/card-01.jpg", "0C9A4097.JPG",  ( 900, 1200), (0.52, 0.42)),   # 3:4
-    ("slhero/card-02.jpg", "IMG_2480.JPG",  (1200,  800), (0.50, 0.45)),   # 3:2
-    ("slhero/card-03.jpg", "IMG_1625.JPG",  (1200,  750), (0.50, 0.52)),   # 8:5
-    ("slhero/card-04.jpg", "CRS00876.JPG",  ( 800, 1000), (0.50, 0.45)),   # 4:5
+    # motion could be judged. The school is curating its own.
+    #
+    # The other six are retired rather than kept: an unreferenced file is
+    # never deployed (stage-deploy.py copies only what a page asks for), so
+    # it is repo weight and a red check-links run. Their recipes stay here,
+    # commented, and uncommenting one and running this script brings the
+    # photograph straight back — every source is still in assets/source/.
+    #   ("slhero/card-01.jpg", "0C9A4097.JPG",  ( 900, 1200), (0.52, 0.42)),   # 3:4
+    #   ("slhero/card-02.jpg", "IMG_2480.JPG",  (1200,  800), (0.50, 0.45)),   # 3:2
+    #   ("slhero/card-03.jpg", "IMG_1625.JPG",  (1200,  750), (0.50, 0.52)),   # 8:5
+    #   ("slhero/card-04.jpg", "CRS00876.JPG",  ( 800, 1000), (0.50, 0.45)),   # 4:5
+    #   ("slhero/card-06.jpg", "IMG_9313.JPG",  (1000, 1000), (0.50, 0.50)),   # 1:1
+    #   ("slhero/card-09.jpg", "HARI7500.JPG",  ( 900,  900), (0.50, 0.45)),   # 1:1
     ("slhero/card-05.jpg", "_MG_0139.JPG",  ( 800, 1200), (0.50, 0.45)),   # 2:3
-    ("slhero/card-06.jpg", "IMG_9313.JPG",  (1000, 1000), (0.50, 0.50)),   # 1:1
     ("slhero/card-07.jpg", "IMG_6106.JPG",  ( 900, 1200), (0.50, 0.45)),   # 3:4
     ("slhero/card-08.jpg", "0C9A4128.JPG",  (1200,  800), (0.50, 0.42)),   # 3:2
-    ("slhero/card-09.jpg", "HARI7500.JPG",  ( 900,  900), (0.50, 0.45)),   # 1:1
     ("slhero/card-10.jpg", "IMG_2449.JPG",  (1200,  675), (0.50, 0.45)),   # 16:9
 
     # The Blog. Four fragments for the masthead collage, cut so each one reads

@@ -41,8 +41,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # the school was chosen over the close-up portraits in the same set: under a
 # heavy grade a face becomes an unreadable shape, whereas a crowd reads as
 # texture, and the empty paved foreground is where the headline lands.
-SOURCES = ["assets/source/IMG_20260423_091355.jpg",
-           "assets/img/aerial-duo.jpg", "assets/img/hero.jpg"]
+# aerial-duo.jpg used to sit between these two. It was the last page's
+# reference to it, and when the Student Life redesign dropped that reference
+# the file became an orphan and was retired; a fallback naming a file that is
+# no longer in the repository is worse than one fallback fewer.
+SOURCES = ["assets/source/IMG_20260423_091355.jpg", "assets/img/hero.jpg"]
 OUT = "assets/img/admissions-header.jpg"
 
 WIDTH, HEIGHT = 2400, 1200          # 2:1, covers a 1440px-wide banner at 2x
