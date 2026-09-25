@@ -1,9 +1,21 @@
 {
   "images": {
-    "bee-yellow-flower": {
+    "lizard-tree-trunk": {
       "tile": [
         1800,
         1200
+      ],
+      "tile_path": "assets/img/captures/lizard-tree-trunk.jpg",
+      "full": [
+        2400,
+        1600
+      ],
+      "full_path": "assets/img/captures/full/lizard-tree-trunk.jpg"
+    },
+    "bee-yellow-flower": {
+      "tile": [
+        900,
+        600
       ],
       "tile_path": "assets/img/captures/bee-yellow-flower.jpg",
       "full": [
@@ -14,8 +26,8 @@
     },
     "butterfly-flowers": {
       "tile": [
-        922,
-        615
+        900,
+        600
       ],
       "tile_path": "assets/img/captures/butterfly-flowers.jpg",
       "full": [
@@ -26,8 +38,8 @@
     },
     "green-insect": {
       "tile": [
-        1058,
-        614
+        900,
+        523
       ],
       "tile_path": "assets/img/captures/green-insect.jpg",
       "full": [
@@ -156,6 +168,18 @@
       ],
       "full_path": "assets/img/captures/full/bird-pink-blossoms.jpg"
     },
+    "bird-orange-berries": {
+      "tile": [
+        967,
+        642
+      ],
+      "tile_path": "assets/img/captures/bird-orange-berries.jpg",
+      "full": [
+        971,
+        645
+      ],
+      "full_path": "assets/img/captures/full/bird-orange-berries.jpg"
+    },
     "hoopoe-branches": {
       "tile": [
         900,
@@ -170,8 +194,8 @@
     },
     "brown-bird-branch": {
       "tile": [
-        1081,
-        1080
+        900,
+        899
       ],
       "tile_path": "assets/img/captures/brown-bird-branch.jpg",
       "full": [

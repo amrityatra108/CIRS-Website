@@ -1,10 +1,11 @@
-"""CIRS Captures — a fifty-photograph journal from the supplied collections.
+"""CIRS Captures — a fifty-two-photograph journal from the supplied collections.
 
 The first sixteen photographs are in assets/source/captures-2026-09-24. The
 new ZIP has 43 photographs and one blank frame; nine repeat photographs in
 the first collection. Its 34 new photographs are in
-assets/source/captures-2026-09-24-zip. Every unique photograph appears once:
-four in the opening, 45 in the journal, and one at the end.
+assets/source/captures-2026-09-24-zip. Two more supplied photographs are in
+assets/source/captures-2026-09-25. Every unique photograph appears once:
+four in the opening, 47 in the journal, and one at the end.
 
 Captions describe what is visible; photographer, date, and exact location are
 not inferred. tools/make-captures-gallery.py writes the image sizes used by
@@ -19,6 +20,7 @@ MANIFEST = os.path.join(HERE, "captures-gallery.json")
 
 OLD = "captures-2026-09-24"
 ZIP = "captures-2026-09-24-zip"
+ADDITIONS = "captures-2026-09-25"
 
 
 def old(name):
@@ -27,6 +29,10 @@ def old(name):
 
 def new(number):
     return f"{ZIP}/{number:02d}.jpg"
+
+
+def added(name):
+    return f"{ADDITIONS}/{name}"
 
 
 # (source file in assets/source, output name, caption, width of the cut)
@@ -47,8 +53,9 @@ CHAPTERS = [
         "slug": "small-worlds", "title": "Small worlds",
         "intro": "Flowers, insects and the creatures that appear when the camera moves closer.",
         "rows": [
-            [(old("img-9821"), "bee-yellow-flower", "A bee on a vivid yellow flower")],
-            [(old("dsc02269"), "butterfly-flowers", "A black and yellow butterfly on pale purple flowers"),
+            [(added("dsc09358.jpg"), "lizard-tree-trunk", "A golden lizard climbing a tree trunk")],
+            [(old("img-9821"), "bee-yellow-flower", "A bee on a vivid yellow flower"),
+             (old("dsc02269"), "butterfly-flowers", "A black and yellow butterfly on pale purple flowers"),
              (new(4), "green-insect", "An iridescent green insect on a leafy branch")],
             [(new(5), "grasshopper-stem", "A grasshopper resting along a slender stem"),
              (new(15), "insect-on-stem", "A small insect clinging to a stem against green"),
@@ -66,7 +73,8 @@ CHAPTERS = [
         "intro": "Perches, branches and the birds glimpsed between leaves.",
         "rows": [
             [(old("img-1007"), "bird-pink-blossoms", "A small dark bird amid pink blossoms")],
-            [(old("img-9515"), "hoopoe-branches", "A hoopoe perched among branches"),
+            [(added("bird-orange-berries.png"), "bird-orange-berries", "A small bird perched among orange berries"),
+             (old("img-9515"), "hoopoe-branches", "A hoopoe perched among branches"),
              (new(2), "brown-bird-branch", "A brown bird on a bare branch against the sky")],
             [(new(3), "bird-in-large-tree", "A bird perched in the limbs of a broad tree"),
              (new(8), "bird-dense-leaves", "A small bird partly hidden in dense foliage")],
@@ -158,7 +166,7 @@ def _esc(text):
 
 
 def chapter_nav_html():
-    """A short index keeps a fifty-photo page easy to browse."""
+    """A short index keeps the photo journal easy to browse."""
     links = [
         f'    <a href="#cg-{chapter["slug"]}">{_esc(chapter["title"])}'
         f'<span>{sum(map(len, chapter["rows"]))}</span></a>'
