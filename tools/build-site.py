@@ -34,6 +34,7 @@ import artattack
 import artswall
 import blog
 import founder
+import founder_story
 import houses
 import documents as docs
 import blogposts
@@ -174,7 +175,7 @@ PAGES = {
         # photograph set into them — and brings its own sheet to do it.
         "banner": None,
         "sheet": "founder",
-        "cache_suffix": "-founder-16",
+        "cache_suffix": "-founder-17",
     },
     "why-cirs": {
         "nav": "Why CIRS",
@@ -391,11 +392,11 @@ PAGES = {
         "cache_suffix": "-houses-1",
     },
     "crossroads": {
-        "nav": "Crossroads",
+        "nav": "The Crossroads",
         # The old site filed this under a "Creative Corner" this site does not
         # have; Student Life is where the arts and the clubs live here.
-        "title": "Crossroads | CIRS Monthly Magazine",
-        "description": "The archive of Crossroads, the monthly magazine of Chinmaya "
+        "title": "The Crossroads | CIRS Monthly Magazine",
+        "description": "Issues of The Crossroads, the monthly magazine of Chinmaya "
                        "International Residential School — a student-run initiative to foster "
                        "literary talent, edition by edition.",
         # No flat band and no video hero: an archive opens on its own
@@ -1071,7 +1072,7 @@ def article_html(page):
       <p>First published in</p>
       <strong>The Crossroads<br>Issue {issue}</strong>
       <a href="{pdf}">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
-      <a href="crossroads.html">All Crossroads issues</a>
+      <a href="crossroads.html">All issues of The Crossroads</a>
     </aside>
     <div class="art__content">
 {image}      <div class="art__body">
@@ -1334,8 +1335,8 @@ def crossroads_stories_covers():
             slot = rear_slot[delta]
             klass = f"crossroads-stories__rear crossroads-stories__rear--{slot}"
         cards.append(f'<a class="{klass}" href="{issue["pdf"]}" '
-                     f'aria-label="Read Crossroads {issue["label"]}">'
-                     f'<img src="{issue["cover"]}?{CACHE_BUST}" alt="Crossroads {issue["label"]} cover" '
+                     f'aria-label="Read The Crossroads {issue["label"]}">'
+                     f'<img src="{issue["cover"]}?{CACHE_BUST}" alt="The Crossroads {issue["label"]} cover" '
                      'width="300" height="420" loading="lazy" decoding="async"></a>')
     return '<div class="crossroads-stories__media"><div class="crossroads-stories__stack">' + ''.join(cards) + '</div></div>'
 
@@ -1372,10 +1373,10 @@ def crossroads_html():
 
         if issue["cover"]:
             face = (f'<img class="crcover__img" src="{issue["cover"]}?{CACHE_BUST}" '
-                    f'alt="Cover of Crossroads {label}" loading="lazy" '
+                    f'alt="Cover of The Crossroads {label}" loading="lazy" '
                     f'width="720" height="1008">')
         else:
-            face = (f'''<span class="crcover__mast">Crossroads</span>
+            face = (f'''<span class="crcover__mast">The Crossroads</span>
           <span class="crcover__num" aria-hidden="true">{n:02d}</span>
           <span class="crcover__sub">CIRS Monthly Magazine</span>''')
 
@@ -1389,16 +1390,16 @@ def crossroads_html():
             # download hidden behind a hover is no download at all on a
             # touch screen.
             cards.append(f'''      <article class="crcard{mods} rv">
-        <h3 class="sr-only">Crossroads {label}</h3>
+        <h3 class="sr-only">The Crossroads {label}</h3>
         <a class="crcard__link" href="{issue["pdf"]}" target="_blank" rel="noopener"
-           aria-label="Read Crossroads {label} in a new tab">
+           aria-label="Read The Crossroads {label} in a new tab">
           {cover}
         </a>
         <div class="crcard__foot">
           <span class="crcard__label">{label}</span>
           <a class="crcard__state" href="{issue["pdf"]}" target="_blank" rel="noopener">Read issue &rarr;</a>
           <a class="crcard__dl" href="{issue["pdf"]}" download
-             aria-label="Download Crossroads {label} as a PDF">
+             aria-label="Download The Crossroads {label} as a PDF">
             <svg width="13" height="13" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v8M3.5 6L7 9.5 10.5 6M2 12.5h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Download
           </a>
@@ -1406,7 +1407,7 @@ def crossroads_html():
       </article>''')
         else:
             cards.append(f'''      <article class="crcard{mods} is-pending rv">
-        <h3 class="sr-only">Crossroads {label}</h3>
+        <h3 class="sr-only">The Crossroads {label}</h3>
         {cover}
         <div class="crcard__foot">
           <span class="crcard__label">{label}</span>
@@ -2071,21 +2072,31 @@ def build(slug, page):
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
+    if slug in ("crossroads", "founder"):
+        # These pages open with their own films. The shared curtain would hide
+        # the skip control and add a second scroll lock. Keep the no-script
+        # footer fallback after removing the curtain-specific head block.
+        curtain_note = head.index("<!-- The opening curtain")
+        curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
+        head = (head[:curtain_note]
+                + '<noscript><style>.footer-wrap{position:relative}</style></noscript>'
+                + head[curtain_note_end:])
     if slug == "crossroads":
         head = head.replace(
             "</head>",
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-5">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-7">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-4">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
-            '<noscript><style>.crossroads-intro-curtain{display:none}'
+            '<noscript><style>.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening{display:none}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}'
             '.crossroads-intro[data-crossroads-intro-pending]{background:var(--cr-purple-deep)}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible!important}'
             '</style></noscript>\n</head>')
     if slug == "founder":
         head = head.replace("</head>",
-            f'<link rel="stylesheet" href="assets/css/founder-journey.css?{CACHE_BUST}">\n</head>')
+            f'<link rel="stylesheet" href="assets/css/founder-intro.css?{CACHE_BUST}-film-2">\n'
+            f'<link rel="stylesheet" href="assets/css/founder-gurudev-journey.css?{CACHE_BUST}-story-5">\n</head>')
     if slug == "sports":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
@@ -2212,8 +2223,10 @@ def build(slug, page):
         chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
-    if slug == "crossroads":
-        parts[-1] = parts[-1].replace('class="curtain"', 'class="curtain crossroads-intro-curtain"')
+    if slug in ("crossroads", "founder"):
+        intro_start = parts[-1].index("<!-- Opening sequence.")
+        intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
+        parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
     drawer = (read("tools/partials/drawer.html")
               .replace("{{NAV}}", nav_html(slug))
               .replace("{{ACTIVE_GROUP}}", str(menu_group_index(slug)))
@@ -2304,7 +2317,8 @@ def build(slug, page):
                        .replace("{{ALUMNI_VOICES}}", alumni.voices_html())
                        .replace("{{ALUMNI_PATHWAYS}}", alumni.pathways_html())
                        .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
-                       .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
+                       .replace("{{ALUMNI_COUNT}}", alumni.count_word())
+                       .replace("{{FOUNDER_GURUDEV_JOURNEY}}", founder_story.journey_html() if slug == "founder" else ""))
     if slug == "our-results":
         content = (content.replace("{{RESULTS_REGIONS}}", results_regions_html())
                           .replace("{{RESULTS_FILTERS}}", results_filters_html())
@@ -2350,12 +2364,13 @@ def build(slug, page):
     if not wall:
         parts.append(f'<script src="assets/js/footer.js?{CACHE_BUST}-footer-1" defer></script>')
     if slug == "crossroads":
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-6" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-7" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}-hover-4" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
     if slug == "founder":
-        parts.append(f'<script src="assets/js/founder-journey.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/founder-intro.js?{CACHE_BUST}-film-2" defer></script>')
+        parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-5" defer></script>')
     if slug == "why-cirs":
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
     if slug == "the-cirs-experience":
