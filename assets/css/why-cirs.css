@@ -1,8 +1,6 @@
 /* Why CIRS — viewport-sized panels for the section-scroll sequence. */
 body.why-cirs .saga,
 body.why-cirs .saga--open{
-  block-size:100vh;
-  block-size:100svh;
   min-block-size:100vh;
   min-block-size:100svh;
 }
@@ -11,8 +9,6 @@ body.why-cirs .saga--open{
    the first frame instead of cropping the teacher and most of the lesson out. */
 @media (max-width:760px){
   body.why-cirs .saga--open{
-    block-size:82vh;
-    block-size:82svh;
     min-block-size:82vh;
     min-block-size:82svh;
   }
@@ -78,40 +74,54 @@ body.why-cirs .panel__card .copy:first-of-type{
 body.why-cirs .saga__summary + .saga__more{margin-top:clamp(20px,2.4vw,30px)}
 body.why-cirs .panel__close{width:44px;height:44px}
 
-/* Let adjacent photographic chapters trade focus while the shared scroll
-   controller moves between them. The travel stays small: the photograph is
-   stable and only the editorial layer breathes out and back in. */
-body.why-cirs .saga__inner,
-body.why-cirs #facts>.wrap{
-  transition:opacity .28s var(--e),transform .4s var(--e2);
+/* Read-more panels pair their existing, relevant photograph with the full
+   text. On short screens the card itself scrolls while the image stays modest. */
+body.why-cirs .panel__card--illustrated{
+  display:grid;
+  grid-template-columns:42% minmax(0,1fr);
+  column-gap:clamp(26px,3vw,42px);
+  align-content:start;
+  width:min(100%,920px);
+  min-height:390px;
+  padding-left:clamp(30px,4vw,52px);
 }
-body.why-cirs.is-section-moving :is(.saga__inner,#facts>.wrap){will-change:opacity,transform}
-body.why-cirs .saga.is-section-leaving .saga__inner,
-body.why-cirs #facts.is-section-leaving>.wrap{
-  opacity:.35;
-  transform:translateY(var(--section-shift));
+body.why-cirs .panel__card--illustrated > :not(.panel__image):not(.panel__close){
+  grid-column:2;
 }
-body.why-cirs .saga.is-section-entering .saga__inner,
-body.why-cirs #facts.is-section-entering>.wrap{
-  opacity:1;
-  transform:translateY(var(--section-shift));
+body.why-cirs .panel__image{
+  position:absolute;
+  inset:0 auto 0 0;
+  width:42%;
+  margin:0;
+  overflow:hidden;
+  background:var(--dark-ink);
+}
+body.why-cirs .panel__image img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+body.why-cirs .panel__close{z-index:2}
+body.why-cirs .saga__more::after{content:"+";font-size:1.2em;line-height:0;transform:none}
+body.why-cirs .saga__more:hover::after{transform:none}
+
+@media(max-width:700px){
+  body.why-cirs .panel__card--illustrated{display:block;min-height:0;padding:0 26px 30px}
+  body.why-cirs .panel__image{
+    position:relative;
+    inset:auto;
+    width:calc(100% + 52px);
+    height:clamp(150px,25vh,220px);
+    margin:0 -26px 24px;
+  }
+  body.why-cirs .panel__label{margin-top:0}
 }
 
 @media (max-width:760px){
   body.why-cirs .saga__eyebrow{gap:16px}
   body.why-cirs .saga__summary{max-width:38ch}
   body.why-cirs #facts .factrail>div:last-child{padding-right:64px}
-}
-
-@media (prefers-reduced-motion:reduce){
-  body.why-cirs .saga__inner,
-  body.why-cirs #facts>.wrap{transition:none}
-}
-
-body.why-cirs .saga,
-body.why-cirs #facts{
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
 }
 
 /* The figures panel joins the same full-screen rhythm on desktop while

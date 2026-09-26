@@ -28,14 +28,14 @@
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=111-admissions-27">
-<link rel="stylesheet" href="assets/css/cirs.css?b=111-admissions-27">
-<link rel="stylesheet" href="assets/css/pages.css?b=111-admissions-27">
+<link rel="stylesheet" href="assets/css/fonts.css?b=112-admissions-27">
+<link rel="stylesheet" href="assets/css/cirs.css?b=112-admissions-27">
+<link rel="stylesheet" href="assets/css/pages.css?b=112-admissions-27">
 
-<link rel="stylesheet" href="assets/css/admissions.css?b=111-admissions-27">
-<link rel="stylesheet" href="assets/css/typography.css?b=111-admissions-27">
-<link rel="stylesheet" href="assets/css/footer.css?b=111-admissions-27-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=111-admissions-27-nav-1">
+<link rel="stylesheet" href="assets/css/admissions.css?b=112-admissions-27">
+<link rel="stylesheet" href="assets/css/typography.css?b=112-admissions-27">
+<link rel="stylesheet" href="assets/css/footer.css?b=112-admissions-27-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=112-admissions-27-nav-1">
 </head>
 
 <body class="admissions">
@@ -86,7 +86,7 @@
           <span class="nv-tab__label">Enquire</span>
         </button>
 
-        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" hidden>
+        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" data-lenis-prevent hidden>
           <div class="nv-enq__head">
             <p class="nv-enq__heading">Enquire</p>
             <button type="button" class="nv-enq__close" id="enqClose">Close<span class="nv-sr"> Enquire</span></button>
@@ -104,16 +104,14 @@
               </a>
             </section>
 
-            <!-- The three doors. Each goes to the page that explains what is
-                 live and what is not, rather than straight out to the external
-                 system — a parent who lands on a login screen with no warning
-                 cannot tell the school's old system from the new site. -->
+            <!-- These are three distinct school services. Keep each label tied
+                 to the destination identified by the school. -->
             <section class="nv-enq__col" aria-labelledby="enqPortals">
               <h2 class="nv-enq__title" id="enqPortals">Portals</h2>
               <ul class="nv-enq__doors">
-                <li><a href="parent-portal.html">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="parent-portal.html">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener">Student Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://easycollege.in/cirs/school/" target="_blank" rel="noopener" aria-label="Fee payment (opens in a new tab)">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/" target="_blank" rel="noopener" aria-label="Parent Login (opens in a new tab)">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener" aria-label="Teacher Login (opens in a new tab)">Teacher Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
               </ul>
             </section>
           </div>
@@ -177,7 +175,7 @@
      it is an accordion. It is a disclosure, not a dialog: its Close is the
      header's Menu control, so while it is open the page behind is made inert
      and Tab circles through the header and the menu together (cirs.js). -->
-<div class="nv-menu" id="drawer" data-initial-group="4" hidden>
+<div class="nv-menu" id="drawer" data-initial-group="4" data-lenis-prevent hidden>
   <h2 class="nv-sr" id="drawer-title">Site navigation</h2>
   <div class="nv-menu__stage">
     <nav class="nv-menu__nav" aria-labelledby="drawer-title">
@@ -266,12 +264,12 @@
 </div>
 <main id="main">
 <section class="pagehero" id="top" data-ground="#11110F">
-  <div class="pagehero__media" style="background-image:url('assets/img/admissions-honeycomb.jpg?b=111-admissions-27')">
+  <div class="pagehero__media" style="background-image:url('assets/img/admissions-honeycomb.jpg?b=112-admissions-27')">
     <video class="pagehero__video" preload="none" muted loop playsinline
-           poster="assets/img/admissions-honeycomb.jpg?b=111-admissions-27" aria-hidden="true"
+           poster="assets/img/admissions-honeycomb.jpg?b=112-admissions-27" aria-hidden="true"
            width="1920" height="960" fetchpriority="high">
-      <source src="assets/video/admissions-hero.webm?b=111-admissions-27" type="video/webm">
-      <source src="assets/video/admissions-hero.mp4?b=111-admissions-27" type="video/mp4">
+      <source src="assets/video/admissions-hero.webm?b=112-admissions-27" type="video/webm">
+      <source src="assets/video/admissions-hero.mp4?b=112-admissions-27" type="video/mp4">
     </video>
   </div>
   <div class="pagehero__scrim" aria-hidden="true"></div>
@@ -335,11 +333,12 @@
         enough to be understood rather than merely performed; and both are held inside a regard
         for all living beings that keeps belonging from narrowing into something smaller.</p>
       <p>The school sits in the Siruvani foothills outside Coimbatore and teaches CBSE and the
-        IB Diploma Programme on one campus. This guide links to the
-        application portal and published fee document, and helps families ask the Admissions
-        Office for the details that apply to their child.</p>
+        IB Diploma Programme on one campus. The school&rsquo;s
+        <a href="https://www.cirschool.org/admission.html">published admissions page</a> lists
+        registration for 2027&ndash;28. This guide links to the application portal and published fee
+        document, and helps families confirm the details that apply to their child.</p>
       <div class="ad-actions">
-        <a class="btn btn--primary" href="https://easycollege.in/cirs/school/application/index.aspx">Open the application portal</a>
+        <a class="btn btn--primary" href="https://easycollege.in/cirs/school/application/index.aspx">Register or sign in</a>
         <a class="cirs-entry-text-link" href="mailto:admissions@cirschool.org">Ask Admissions a question</a>
       </div>
     </div>
@@ -379,17 +378,17 @@
       <li class="ad-process__item">
         <div class="ad-process__number" aria-hidden="true">03</div>
         <div class="ad-process__body"><h3 class="serif h3">Review the application portal</h3>
-          <p>Open the linked CIRS application portal and check the form for your intended entry
-            year. Ask Admissions to confirm the required information and documents before submitting.</p></div>
+          <p>The CIRS application portal has separate Register and Registered User Login options.
+            Choose the one that matches your stage, and check the form for your intended entry year.</p></div>
         <div class="ad-process__fact"><img class="ad-process__image" src="assets/img/adm-assembly.jpg" alt="Students gathered for a school assembly" width="1000" height="750" loading="lazy"><strong>Check the current form</strong>
-          <span>Requirements should be confirmed with Admissions</span>
-          <a href="https://easycollege.in/cirs/school/application/index.aspx">Open the application portal</a></div>
+          <span>Check required fields and documents with Admissions before submitting</span>
+          <a href="https://easycollege.in/cirs/school/application/index.aspx">Register or sign in</a></div>
       </li>
       <li class="ad-process__item">
         <div class="ad-process__number" aria-hidden="true">04</div>
         <div class="ad-process__body"><h3 class="serif h3">Ask about assessment</h3>
-          <p>Find out whether an entrance assessment applies to your child, and ask for its
-            current papers, duration, date and location.</p></div>
+          <p>Review the school&rsquo;s published entrance-exam pattern below, then confirm the papers,
+            duration, date and location for your child&rsquo;s entry year.</p></div>
         <div class="ad-process__fact"><img class="ad-process__image" src="assets/img/adm-examination.jpg" alt="CIRS students writing an examination" width="1000" height="750" loading="lazy"><strong>Assessment details</strong>
           <span>Confirm the format and schedule directly</span>
           <a href="#examination">See what to ask</a></div>
@@ -419,8 +418,9 @@
     <div class="cirs-entry-heading cirs-entry-heading--split">
       <div><p class="ad-kicker"><span class="sc">Entry points and assessment</span></p>
         <h2 class="serif h2">Check the entry requirements.</h2></div>
-      <p class="lead">Ask the Admissions Office which classes are accepting applications for
-        your intended year, what eligibility criteria apply and how candidates are assessed.</p>
+      <p class="lead">The school publishes a grade-based entrance-exam pattern, but that section
+        still refers to 2026&ndash;27 while registration is listed for 2027&ndash;28. Confirm the
+        current pattern, class availability and dates with Admissions.</p>
     </div>
     <div class="cirs-entry-tablewrap">
       <table class="cirs-entry-table">
@@ -434,17 +434,20 @@
       </table>
     </div>
     <div class="ad-exam-grid">
-      <div class="ad-exam"><h3 class="serif h3">Assessment</h3>
-        <dl><div><dt>Format</dt><dd>Ask which papers or other assessments apply.</dd></div>
-          <div><dt>Duration</dt><dd>Confirm how long the assessment takes.</dd></div>
-          <div><dt>Location</dt><dd>Ask where a candidate may take it.</dd></div></dl></div>
+      <div class="ad-exam"><h3 class="serif h3">Published exam pattern</h3>
+        <dl><div><dt>Grades V&ndash;VI</dt><dd>English and Mathematics, two hours.</dd></div>
+          <div><dt>Grades VII&ndash;IX</dt><dd>English, Mathematics and Science, three hours.</dd></div>
+          <div><dt>Grade XI</dt><dd>The school lists CBSE stream and IB Diploma papers; it says the examination lasts three hours.</dd></div>
+          <div><dt>All classes</dt><dd>The published pattern includes a creative-writing section.</dd></div></dl></div>
       <div class="ad-exam"><h3 class="serif h3">Interview and next steps</h3>
         <dl><div><dt>Interview</dt><dd>Ask whether one is required for your child.</dd></div>
           <div><dt>Schedule</dt><dd>Confirm dates and how details will be sent.</dd></div>
           <div><dt>Decision</dt><dd>Ask how and when the school communicates offers.</dd></div></dl></div>
     </div>
-    <p class="cirs-entry-note"><strong>Current details:</strong> The fee schedule does not set the
-      admissions timetable. Confirm the entry year, assessment and joining dates with Admissions.</p>
+    <p class="cirs-entry-note"><strong>Check the current year:</strong> The
+      <a href="https://www.cirschool.org/admission.html">school&rsquo;s admissions page</a>
+      lists 2027&ndash;28 registration but its exam description still names 2026&ndash;27.
+      Confirm the assessment and joining dates with Admissions.</p>
   </div>
 </section>
 
@@ -474,8 +477,8 @@
     <div class="ad-download">
       <div><p class="ad-download__type">PDF document &middot; approximately 199 KB</p>
         <h3 class="serif h3">Schedule of Fee and Charges, 2027&ndash;2029</h3>
-        <p>The published schedule lists a &#8377;5,000 registration fee. Confirm the amount,
-          applicability and payment method with Admissions before paying.</p></div>
+        <p>The school says a &#8377;5,000 registration fee is paid online after the completed form
+          is submitted; cash is not accepted. Confirm applicability before paying.</p></div>
       <a class="btn btn--primary" href="assets/documents/school-info/fee-structure.pdf" download>Download the fee schedule</a>
     </div>
   </div>
@@ -507,10 +510,11 @@
     alt="CIRS academic buildings and lawn beneath the Siruvani hills" width="1600" height="900" loading="lazy"></div>
   <div class="ad-campus__content"><p class="ad-kicker"><span class="sc">Campus and residential life</span></p>
     <h2 class="serif h2">See where school life happens.</h2>
-    <p>CIRS is a residential school in the Siruvani foothills. Contact the Admissions Office
-      to ask whether a campus visit is available and to arrange the details before travelling.</p>
-    <ul class="ad-visit-list"><li>Confirm an available date and arrival time</li>
-      <li>Ask for directions and entry instructions</li><li>Check who may attend the visit</li></ul>
+    <p>CIRS is a residential school in the Siruvani foothills. The school currently lists
+      visits by prior appointment on Wednesdays and Saturdays, 10&ndash;11 a.m. IST. Arrange the
+      visit with Admissions before travelling.</p>
+    <ul class="ad-visit-list"><li>Request an appointment and await the school&rsquo;s confirmation</li>
+      <li>Bring the confirmation email for entry</li><li>Check who may attend the visit</li></ul>
     <div class="ad-actions"><a class="btn btn--ghost" href="mailto:admissions@cirschool.org?subject=Campus%20visit%20enquiry">Request a campus visit</a>
       <a class="cirs-entry-text-link cirs-entry-text-link--light" href="the-cirs-experience.html">Explore THE CIRS EXPERIENCE</a></div>
   </div>
@@ -525,11 +529,11 @@
     <div class="ad-faq">
       <details><summary>Which classes can families currently apply for?</summary><div><p>Ask Admissions which classes have places for your intended entry year and what eligibility criteria apply to your child.</p></div></details>
       <details><summary>Is CIRS a residential school?</summary><div><p>Yes. CIRS is a residential school in the Siruvani foothills near Coimbatore. Specific boarding arrangements for a candidate should be confirmed with Admissions.</p></div></details>
-      <details><summary>How do we apply?</summary><div><p>Open the linked CIRS application portal to see the current form. Confirm the applicable entry year, required fields and payment instructions with Admissions before submitting.</p><p><a href="https://easycollege.in/cirs/school/application/index.aspx">Open the application portal</a></p></div></details>
-      <details><summary>What does the entrance assessment cover?</summary><div><p>Ask Admissions whether an assessment applies to your child and request the current papers, duration, location and preparation guidance.</p></div></details>
+      <details><summary>How do we apply?</summary><div><p>Choose Register or Registered User Login in the CIRS application portal. The school lists 2027&ndash;28 registration and says the portal guides online payment of the registration fee after form submission. Confirm the current form and requirements before submitting.</p><p><a href="https://easycollege.in/cirs/school/application/index.aspx">Register or sign in</a></p></div></details>
+      <details><summary>What does the entrance assessment cover?</summary><div><p>The school publishes English and Mathematics for Grades V&ndash;VI, with Science added for Grades VII&ndash;IX. Grade XI papers depend on the CBSE stream or IB Diploma route. Its exam text still names 2026&ndash;27; ask Admissions to confirm the pattern, date, duration and centre for your child&rsquo;s year.</p></div></details>
       <details><summary>Where can we find the fee information?</summary><div><p>The published Schedule of Fee and Charges for 2027&ndash;2029 is available above as a PDF. Confirm its applicability with Admissions before making a financial decision.</p></div></details>
       <details><summary>Can international applicants use the same process?</summary><div><p>Contact Admissions to confirm application, assessment and document arrangements for families outside India.</p></div></details>
-      <details><summary>Can our family visit the school?</summary><div><p>Ask the Admissions Office whether visits are available, and confirm the date, arrival time and entry instructions before travelling.</p></div></details>
+      <details><summary>Can our family visit the school?</summary><div><p>The school lists visits by prior appointment on Wednesdays and Saturdays, 10&ndash;11 a.m. IST. Ask Admissions for an appointment and bring the confirmation email for entry.</p></div></details>
     </div>
   </div>
 </section>
@@ -650,12 +654,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=111-admissions-27" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=111-admissions-27" defer></script>
-<script src="assets/vendor/lenis.min.js?b=111-admissions-27" defer></script>
-<script src="assets/js/cirs.js?b=111-admissions-27-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=111-admissions-27" defer></script>
-<script src="assets/js/footer.js?b=111-admissions-27-footer-1" defer></script>
-<script src="assets/js/admissions.js?b=111-admissions-27" defer></script>
+<script src="assets/vendor/gsap.min.js?b=112-admissions-27" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=112-admissions-27" defer></script>
+<script src="assets/vendor/lenis.min.js?b=112-admissions-27" defer></script>
+<script src="assets/js/cirs.js?b=112-admissions-27-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=112-admissions-27" defer></script>
+<script src="assets/js/footer.js?b=112-admissions-27-footer-1" defer></script>
+<script src="assets/js/admissions.js?b=112-admissions-27" defer></script>
 </body>
 </html>

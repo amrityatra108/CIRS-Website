@@ -28,9 +28,9 @@
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=111-festivals-year-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=111-festivals-year-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=111-festivals-year-1">
+<link rel="stylesheet" href="assets/css/fonts.css?b=112-festivals-year-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=112-festivals-year-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=112-festivals-year-1">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -39,10 +39,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/festivals.css?b=111-festivals-year-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=111-festivals-year-1">
-<link rel="stylesheet" href="assets/css/footer.css?b=111-festivals-year-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=111-festivals-year-1-nav-1">
+<link rel="stylesheet" href="assets/css/festivals.css?b=112-festivals-year-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=112-festivals-year-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=112-festivals-year-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=112-festivals-year-1-nav-1">
 </head>
 
 <body class="festivals">
@@ -101,7 +101,7 @@
           <span class="nv-tab__label">Enquire</span>
         </button>
 
-        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" hidden>
+        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" data-lenis-prevent hidden>
           <div class="nv-enq__head">
             <p class="nv-enq__heading">Enquire</p>
             <button type="button" class="nv-enq__close" id="enqClose">Close<span class="nv-sr"> Enquire</span></button>
@@ -119,16 +119,14 @@
               </a>
             </section>
 
-            <!-- The three doors. Each goes to the page that explains what is
-                 live and what is not, rather than straight out to the external
-                 system — a parent who lands on a login screen with no warning
-                 cannot tell the school's old system from the new site. -->
+            <!-- These are three distinct school services. Keep each label tied
+                 to the destination identified by the school. -->
             <section class="nv-enq__col" aria-labelledby="enqPortals">
               <h2 class="nv-enq__title" id="enqPortals">Portals</h2>
               <ul class="nv-enq__doors">
-                <li><a href="parent-portal.html">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="parent-portal.html">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener">Student Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://easycollege.in/cirs/school/" target="_blank" rel="noopener" aria-label="Fee payment (opens in a new tab)">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/" target="_blank" rel="noopener" aria-label="Parent Login (opens in a new tab)">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener" aria-label="Teacher Login (opens in a new tab)">Teacher Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
               </ul>
             </section>
           </div>
@@ -192,7 +190,7 @@
      it is an accordion. It is a disclosure, not a dialog: its Close is the
      header's Menu control, so while it is open the page behind is made inert
      and Tab circles through the header and the menu together (cirs.js). -->
-<div class="nv-menu" id="drawer" data-initial-group="3" hidden>
+<div class="nv-menu" id="drawer" data-initial-group="3" data-lenis-prevent hidden>
   <h2 class="nv-sr" id="drawer-title">Site navigation</h2>
   <div class="nv-menu__stage">
     <nav class="nv-menu__nav" aria-labelledby="drawer-title">
@@ -717,7 +715,6 @@
     <a class="fx-cal__jump" href="#india-spring">March&ndash;May</a>
     <a class="fx-cal__jump" href="#india-monsoon">June&ndash;September</a>
     <a class="fx-cal__jump" href="#india-autumn">October&ndash;December</a>
-    <a class="fx-cal__jump" href="#india-lunar">Through the year</a>
   </nav>
   <div class="fx-cal">
     <div class="fx-cal__season" id="india-winter" role="group" aria-labelledby="india-winter-h">
@@ -762,11 +759,6 @@
           <h4 class="fx-cal__name">Mahavir Jayanti</h4>
           <p class="fx-cal__when">March&ndash;April</p>
           <p class="fx-cal__text">The birth of Vardhamana Mahavira, the twenty-fourth Tirthankara of the Jain tradition, with processions, worship and giving.</p>
-        </li>
-        <li class="fx-cal__item">
-          <h4 class="fx-cal__name">Easter</h4>
-          <p class="fx-cal__when">March&ndash;April</p>
-          <p class="fx-cal__text">The Christian feast of the Resurrection, closing Holy Week, kept by churches across India.</p>
         </li>
         <li class="fx-cal__item">
           <h4 class="fx-cal__name">Baisakhi</h4>
@@ -819,26 +811,6 @@
           <h4 class="fx-cal__name">Guru Nanak Gurpurab</h4>
           <p class="fx-cal__when">October&ndash;November</p>
           <p class="fx-cal__text">The birth of Guru Nanak, founder of the Sikh faith, on the full moon of Kartik: a continuous reading of the Guru Granth Sahib, processions and langar.</p>
-        </li>
-        <li class="fx-cal__item">
-          <h4 class="fx-cal__name">Christmas</h4>
-          <p class="fx-cal__when">25 December</p>
-          <p class="fx-cal__text">The birth of Jesus, kept by Christian communities across India with midnight services, carols and paper stars.</p>
-        </li>
-      </ul>
-    </div>
-    <div class="fx-cal__season" id="india-lunar" role="group" aria-labelledby="india-lunar-h">
-      <h3 class="fx-cal__season-h" id="india-lunar-h">Through the year</h3>
-      <ul class="fx-cal__list">
-        <li class="fx-cal__item">
-          <h4 class="fx-cal__name">Eid al-Fitr</h4>
-          <p class="fx-cal__when">Moves about eleven days earlier each year</p>
-          <p class="fx-cal__text">The end of Ramadan, the month of fasting, with morning prayers, new clothes and meals shared with family and neighbours.</p>
-        </li>
-        <li class="fx-cal__item">
-          <h4 class="fx-cal__name">Eid al-Adha</h4>
-          <p class="fx-cal__when">Moves about eleven days earlier each year</p>
-          <p class="fx-cal__text">The Feast of Sacrifice at the close of the Hajj, remembering Ibrahim's devotion, with prayers and meat shared with family, neighbours and those in need.</p>
         </li>
       </ul>
     </div>
@@ -1217,12 +1189,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=111-festivals-year-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=111-festivals-year-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=111-festivals-year-1" defer></script>
-<script src="assets/js/cirs.js?b=111-festivals-year-1-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=111-festivals-year-1" defer></script>
-<script src="assets/js/footer.js?b=111-festivals-year-1-footer-1" defer></script>
-<script src="assets/js/festivals.js?b=111-festivals-year-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=112-festivals-year-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=112-festivals-year-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=112-festivals-year-1" defer></script>
+<script src="assets/js/cirs.js?b=112-festivals-year-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=112-festivals-year-1" defer></script>
+<script src="assets/js/footer.js?b=112-festivals-year-1-footer-1" defer></script>
+<script src="assets/js/festivals.js?b=112-festivals-year-1" defer></script>
 </body>
 </html>

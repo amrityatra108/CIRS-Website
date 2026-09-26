@@ -752,7 +752,8 @@
 }
 .lightbox__panel{
   position:relative;
-  width:min(1120px, 92vw);
+  /* The height-derived width keeps 16:9 intact on short landscape screens. */
+  width:min(1120px, 92vw, 145.7vh);
   aspect-ratio:16/9; max-height:82vh;
   background:#000;
   border:1px solid var(--rule-dark);

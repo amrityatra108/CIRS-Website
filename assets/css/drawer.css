@@ -120,6 +120,7 @@
   position:fixed; top:var(--nv-hh); left:var(--gut); z-index:110;
   width:min(620px, calc(100vw - 2 * var(--gut)));
   max-height:calc(100dvh - var(--nv-hh) - 24px); overflow-y:auto; overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
   padding:var(--space-4) var(--space-6) var(--space-5);
   background:var(--paper);
   border:1px solid var(--rule); border-top:0;
@@ -235,6 +236,7 @@
   position:fixed; inset:var(--nv-hh) 0 0 0; z-index:116;
   display:flex; flex-direction:column;
   overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
   background:var(--paper);
   clip-path:inset(0 0 100% 0);
   visibility:hidden;

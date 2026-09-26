@@ -64,10 +64,55 @@ body.home .hsay__big{ color:var(--run-ink); }
 body.home .hsay__sub,
 body.home .hframe figcaption{ color:var(--run-soft); }
 body.home .hsay__eyebrow,
-body.home .hframe__n{ color:var(--run-accent); opacity:1; }
+body.home .hframe__n{
+  color:var(--run-accent);
+  opacity:1;
+  font-size:1rem;
+  font-weight:600;
+  font-variant-numeric:lining-nums tabular-nums;
+}
+body.home .hframe figcaption{ font-size:1rem; }
 body.home .hghost{ color:var(--run-ghost); opacity:.09; }
 body.home .hframe img{
   box-shadow:0 30px 80px rgba(42,42,38,.24), 0 0 0 1px rgba(255,255,255,.18);
+}
+
+/* The pinned gallery has a direct exit for readers who have seen enough. */
+body.home .hrun__skip{
+  position:absolute;
+  z-index:4;
+  left:clamp(18px,3vw,48px);
+  bottom:clamp(18px,3vw,42px);
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  min-height:44px;
+  padding:10px 16px;
+  border:1px solid rgba(24,24,21,.3);
+  border-radius:999px;
+  background:rgba(250,249,243,.94);
+  color:var(--dark-deep);
+  font-size:.9rem;
+  font-weight:600;
+  box-shadow:0 8px 28px rgba(24,24,21,.16);
+}
+body.home .hrun__skip:hover,
+body.home .hrun__skip:focus-visible{ background:#fff; border-color:var(--dark-deep); }
+body.home .hrun__skip:focus-visible{ outline:2px solid var(--dark-deep); outline-offset:3px; }
+@media(max-width:899px){
+  body.home .hrun__skip{top:12px;bottom:auto;left:var(--gut)}
+  body.home .hrun.is-static .hrun__pin{padding-top:76px}
+}
+
+/* Keep the factual grade range intact when the marker wraps on a phone. */
+body.home .hseq__grades{ white-space:nowrap; }
+body.home .hseq__type .sc{ font-size:1rem; }
+body.home .hseq__type h1 em{ font-family:"Newsreader",serif; font-weight:500; }
+@media(max-width:600px){
+  body.home .hseq__type{
+    bottom:calc(var(--float-edge) + 2 * var(--float-size) + 28px);
+    width:calc(100% - 2 * var(--gut));
+  }
 }
 
 /* The remaining homepage fades use warm neutral density plus quiet gold
@@ -109,7 +154,7 @@ body.home .filmwin__scrim{
     linear-gradient(180deg, rgba(17,17,15,.14) 0%, rgba(17,17,15,.72) 100%),
     radial-gradient(70% 65% at 50% 100%, rgba(201,169,97,.10), transparent 72%);
 }
-body.home .filmwin{ background:var(--home-night); }
+body.home .filmwin{ max-width:1120px; background:var(--home-night); }
 
 body.home .motto{
   background:#fff;

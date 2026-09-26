@@ -28,9 +28,9 @@
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=111-alumni-7">
-<link rel="stylesheet" href="assets/css/cirs.css?b=111-alumni-7">
-<link rel="stylesheet" href="assets/css/pages.css?b=111-alumni-7">
+<link rel="stylesheet" href="assets/css/fonts.css?b=112-alumni-7">
+<link rel="stylesheet" href="assets/css/cirs.css?b=112-alumni-7">
+<link rel="stylesheet" href="assets/css/pages.css?b=112-alumni-7">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -39,10 +39,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/alumni.css?b=111-alumni-7">
-<link rel="stylesheet" href="assets/css/typography.css?b=111-alumni-7">
-<link rel="stylesheet" href="assets/css/footer.css?b=111-alumni-7-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=111-alumni-7-nav-1">
+<link rel="stylesheet" href="assets/css/alumni.css?b=112-alumni-7">
+<link rel="stylesheet" href="assets/css/typography.css?b=112-alumni-7">
+<link rel="stylesheet" href="assets/css/footer.css?b=112-alumni-7-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=112-alumni-7-nav-1">
 </head>
 
 <body class="alumni">
@@ -101,7 +101,7 @@
           <span class="nv-tab__label">Enquire</span>
         </button>
 
-        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" hidden>
+        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" data-lenis-prevent hidden>
           <div class="nv-enq__head">
             <p class="nv-enq__heading">Enquire</p>
             <button type="button" class="nv-enq__close" id="enqClose">Close<span class="nv-sr"> Enquire</span></button>
@@ -119,16 +119,14 @@
               </a>
             </section>
 
-            <!-- The three doors. Each goes to the page that explains what is
-                 live and what is not, rather than straight out to the external
-                 system — a parent who lands on a login screen with no warning
-                 cannot tell the school's old system from the new site. -->
+            <!-- These are three distinct school services. Keep each label tied
+                 to the destination identified by the school. -->
             <section class="nv-enq__col" aria-labelledby="enqPortals">
               <h2 class="nv-enq__title" id="enqPortals">Portals</h2>
               <ul class="nv-enq__doors">
-                <li><a href="parent-portal.html">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="parent-portal.html">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener">Student Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://easycollege.in/cirs/school/" target="_blank" rel="noopener" aria-label="Fee payment (opens in a new tab)">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/" target="_blank" rel="noopener" aria-label="Parent Login (opens in a new tab)">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener" aria-label="Teacher Login (opens in a new tab)">Teacher Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
               </ul>
             </section>
           </div>
@@ -192,7 +190,7 @@
      it is an accordion. It is a disclosure, not a dialog: its Close is the
      header's Menu control, so while it is open the page behind is made inert
      and Tab circles through the header and the menu together (cirs.js). -->
-<div class="nv-menu" id="drawer" data-initial-group="4" hidden>
+<div class="nv-menu" id="drawer" data-initial-group="4" data-lenis-prevent hidden>
   <h2 class="nv-sr" id="drawer-title">Site navigation</h2>
   <div class="nv-menu__stage">
     <nav class="nv-menu__nav" aria-labelledby="drawer-title">
@@ -395,8 +393,8 @@
       <path class="ajc__line ajc__leader" data-region="india" data-line="srcc" d="M141.34 36.47 L141.34 33.97"/>
       <path class="ajc__line" data-region="india" data-line="nid" d="M142.39 49.12 C142.87 46.56 141.48 43.07 139.38 41.53"/>
       <path class="ajc__line ajc__leader" data-region="india" data-line="nid" d="M137.90 41.27 L136.96 41.10"/>
-      <path class="ajc__line" data-region="india" data-line="cvv" d="M142.39 49.12 C141.21 49.52 140.08 50.90 139.93 52.13"/>
-      <path class="ajc__line ajc__leader" data-region="india" data-line="cvv" d="M138.94 53.26 L136.00 56.58"/>
+      <path class="ajc__line" data-region="india" data-line="cvv" d="M142.39 49.12 C142.71 49.42 142.86 50.02 142.73 50.43"/>
+      <path class="ajc__line ajc__leader" data-region="india" data-line="cvv" d="M141.74 51.56 L138.80 54.88"/>
       <path class="ajc__line" data-region="uk" data-line="durham" d="M142.39 49.12 C135.52 33.97 115.50 20.77 98.87 20.42"/>
       <path class="ajc__line ajc__leader" data-region="uk" data-line="durham" d="M97.84 19.32 L96.55 17.95"/>
       <path class="ajc__line" data-region="uk" data-line="manchester" d="M142.39 49.12 C134.81 34.31 114.19 22.06 97.55 22.49"/>
@@ -469,7 +467,7 @@
       </li>
       <li class="ajc__item" data-region="india">
         <button type="button" class="ajc__pt" id="ajc-pt-cvv"
-                style="--x:69.966%;--y:53.234%;--lx:-2.300cqw;--ly:2.600cqw"
+                style="--x:71.366%;--y:51.498%;--lx:-2.300cqw;--ly:2.600cqw"
                 data-point="cvv" data-region="india" data-side="l"
                 aria-expanded="false" aria-controls="ajc-panel">
           <span class="ajc__dot" aria-hidden="true"></span>
@@ -1141,12 +1139,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=111-alumni-7" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=111-alumni-7" defer></script>
-<script src="assets/vendor/lenis.min.js?b=111-alumni-7" defer></script>
-<script src="assets/js/cirs.js?b=111-alumni-7-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=111-alumni-7" defer></script>
-<script src="assets/js/footer.js?b=111-alumni-7-footer-1" defer></script>
-<script src="assets/js/alumni-journey.js?b=111-alumni-7" defer></script>
+<script src="assets/vendor/gsap.min.js?b=112-alumni-7" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=112-alumni-7" defer></script>
+<script src="assets/vendor/lenis.min.js?b=112-alumni-7" defer></script>
+<script src="assets/js/cirs.js?b=112-alumni-7-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=112-alumni-7" defer></script>
+<script src="assets/js/footer.js?b=112-alumni-7-footer-1" defer></script>
+<script src="assets/js/alumni-journey.js?b=112-alumni-7" defer></script>
 </body>
 </html>
