@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102-results-13">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102-results-13">
-<link rel="stylesheet" href="assets/css/pages.css?b=102-results-13">
+<link rel="stylesheet" href="assets/css/fonts.css?b=107-results-14">
+<link rel="stylesheet" href="assets/css/cirs.css?b=107-results-14">
+<link rel="stylesheet" href="assets/css/pages.css?b=107-results-14">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,10 +37,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/results.css?b=102-results-13">
-<link rel="stylesheet" href="assets/css/typography.css?b=102-results-13">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-results-13-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=102-results-13-drawer-5">
+<link rel="stylesheet" href="assets/css/results.css?b=107-results-14">
+<link rel="stylesheet" href="assets/css/typography.css?b=107-results-14">
+<link rel="stylesheet" href="assets/css/footer.css?b=107-results-14-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=107-results-14-drawer-5">
 </head>
 
 <body class="results">
@@ -206,6 +206,11 @@
     </div>
   </div>
 </header>
+<!-- The gold hairline that holds the header's place once it has slid away
+     past the page's opening (cirs.js, "Header state"). Decoration only: the
+     header comes back by scrolling up, by the pointer at the top edge or by
+     keyboard focus, so the line takes no clicks and nothing announces it. -->
+<div class="site-nav-handle" aria-hidden="true"></div>
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="1" hidden>
   <div class="drawer__surface">
     <div class="drawer__topbar">
@@ -245,6 +250,7 @@
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html" aria-current="page">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
+        <li><a href="houses.html">Our Houses</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
@@ -305,186 +311,215 @@
   </div>
 </div>
 <main id="main">
-<nav class="jump" aria-label="On this page">
-  <details class="jump__details">
-    <summary class="jump__toggle" title="On this page">
-      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span class="jump__label">On this page</span>
-    </summary>
-    <div class="jump__panel" id="jumpPanel">
-      <p aria-hidden="true">On this page</p>
-      <a href="#top">CBSE Results</a>
-      <a href="#destinations">The next chapter.</a>
-      <a href="#directory">University directory</a>
-    </div>
-  </details>
-</nav>
-<section class="rj-story" id="top" aria-labelledby="results-title">
-  <div class="rj-stage">
-    <div class="rj-split" aria-hidden="true">
-      <figure class="rj-world rj-world--cbse">
-        <img src="assets/img/results-cbse-lab.webp" alt="" width="1800" height="1200" fetchpriority="high">
-        <span class="rj-world__wash"></span>
-        <figcaption class="rj-world__caption">
-          <span class="rj-world__label">CBSE</span>
-          <span class="rj-world__words"><b>What</b><b>The</b><b>Years</b></span>
-          <span class="rj-world__note">Theory &middot; Discipline &middot; Depth</span>
-        </figcaption>
-      </figure>
-      <figure class="rj-world rj-world--ib">
-        <img src="assets/img/results-ib-lab.webp" alt="" width="1800" height="1200" fetchpriority="high">
-        <span class="rj-world__wash"></span>
-        <figcaption class="rj-world__caption">
-          <span class="rj-world__label">IB</span>
-          <span class="rj-world__words"><b>Add</b><b>Up</b><b>To</b></span>
-          <span class="rj-world__note">Inquiry &middot; Research &middot; Perspective</span>
-        </figcaption>
-      </figure>
-      <span class="rj-seam"></span>
-    </div>
+<!-- The results book. Its pages are the page's content, not a picture of it:
+     results-journey.js lays them out as an open book and turns the leaves on
+     scroll, and without it — narrow screens, reduced motion, no script, or
+     "Plain results" — the same pages stand in ordinary document order.
 
-    <div class="rj-bookstage">
-      <div class="rj-book" aria-hidden="true">
-        <div class="rj-book__shadow"></div>
-        <div class="rj-book__block">
-          <div class="rj-book__pages"></div>
-          <div class="rj-spread rj-spread--cbse">
-            <div class="rj-paper rj-paper--left">
-              <p class="rj-folio">CIRS / 2026</p>
-              <h2>CBSE<br>Results</h2>
-              <p class="rj-big">99.0<span>%</span></p>
-              <p class="rj-caption">Highest reported score, Class XII Management</p>
-            </div>
-            <div class="rj-paper rj-paper--right">
-              <p class="rj-kicker">Board examinations / March&ndash;April 2026</p>
-              <dl class="rj-report">
-                <div><dt>XII Science</dt><dd><b>95.60%</b><span>Top score &middot; 91% class average</span></dd></div>
-                <div><dt>XII Management</dt><dd><b>99.0%</b><span>Top score &middot; 94% class average</span></dd></div>
-                <div><dt>Class X</dt><dd><b>98.60%</b><span>Top score &middot; 90% class average</span></dd></div>
-              </dl>
-              <p class="rj-source">School-reported 2026 distribution.</p>
-            </div>
-          </div>
-          <div class="rj-spread rj-spread--ib">
-            <div class="rj-paper rj-paper--left">
-              <p class="rj-folio">CIRS / MAY 2026</p>
-              <h2>IB<br>Results</h2>
-              <p class="rj-big">45<span>/45</span></p>
-              <p class="rj-caption">Highest reported Diploma score</p>
-            </div>
-            <div class="rj-paper rj-paper--right">
-              <p class="rj-kicker">International Baccalaureate Diploma</p>
-              <dl class="rj-report">
-                <div><dt>Diplomas awarded</dt><dd><b>24 / 24</b><span>All registered candidates</span></dd></div>
-                <div><dt>Average</dt><dd><b>39.4</b><span>Diploma points</span></dd></div>
-                <div><dt>40 points or above</dt><dd><b>12</b><span>Half of the cohort</span></dd></div>
-              </dl>
-              <p class="rj-source">Final examination, May 2026.</p>
-            </div>
-          </div>
-          <div class="rj-turn">
-            <div class="rj-turn__front rj-paper">
-              <p class="rj-kicker">Board examinations / March&ndash;April 2026</p>
-              <dl class="rj-report">
-                <div><dt>XII Science</dt><dd><b>95.60%</b><span>Top score &middot; 91% class average</span></dd></div>
-                <div><dt>XII Management</dt><dd><b>99.0%</b><span>Top score &middot; 94% class average</span></dd></div>
-                <div><dt>Class X</dt><dd><b>98.60%</b><span>Top score &middot; 90% class average</span></dd></div>
-              </dl>
-              <p class="rj-source">School-reported 2026 distribution.</p>
-            </div>
-            <div class="rj-turn__back rj-paper">
-              <p class="rj-folio">CIRS / MAY 2026</p>
-              <h2>IB<br>Results</h2>
-              <p class="rj-big">45<span>/45</span></p>
-              <p class="rj-caption">Highest reported Diploma score</p>
-            </div>
-          </div>
-          <div class="rj-cover">
-            <div class="rj-cover__front">
-              <img src="assets/img/logo.png" alt="" width="64" height="63">
-              <p>CIRS</p><h2>Our<br>Results</h2><span>2026</span>
-            </div>
-            <div class="rj-cover__back"></div>
-          </div>
-        </div>
+     Each leaf carries a right-hand page on its front and the next left-hand
+     page on its back, so the source order below is also the reading order.
+
+     Every figure here is as the school reported it. The CBSE PDF covers
+     Class X and XII Management for 2026; XII Science 2026 is in the school's
+     news brief only (the PDF carries XII Science for 2024, and three blank
+     pages). Class sizes are counted from the PDF. Do not change a number
+     without a source for it. -->
+<section class="rb" id="top" aria-labelledby="results-title" data-results-book>
+  <div class="rb-stage">
+    <div class="rb-intro">
+      <div class="rb-intro__inner">
+        <p class="rb-kicker">Our Results &middot; 2026</p>
+        <h1 id="results-title">What the years add&nbsp;up&nbsp;to.</h1>
+        <p class="rb-intro__lede">The 2026 CBSE and IB Diploma results, and the universities CIRS students have gone on&nbsp;to.</p>
+        <a class="rb-intro__read" href="#cbse-results" data-chapter-link="cbse">Read the results <span aria-hidden="true">&darr;</span></a>
       </div>
     </div>
 
-    <h1 class="sr-only" id="results-title">CIRS Results: CBSE, IB and university destinations</h1>
-    <p class="rj-scroll" aria-hidden="true">Scroll to turn the page</p>
+    <nav class="rb-chapters" aria-label="Results chapters">
+      <button type="button" class="rb-chapters__step" data-chapter-step="-1" aria-label="Previous page"><span aria-hidden="true">&larr;</span></button>
+      <ol class="rb-chapters__list">
+        <li><a href="#cbse-results" data-chapter-link="cbse"><span aria-hidden="true">01</span> CBSE</a></li>
+        <li><a href="#ib-results" data-chapter-link="ib"><span aria-hidden="true">02</span> IB Diploma</a></li>
+        <li><a href="#destinations" data-chapter-link="next"><span aria-hidden="true">03</span> Destinations</a></li>
+      </ol>
+      <button type="button" class="rb-chapters__step" data-chapter-step="1" aria-label="Next page"><span aria-hidden="true">&rarr;</span></button>
+      <button type="button" class="rb-chapters__plain" data-plain-toggle aria-pressed="false" hidden>Plain results</button>
+    </nav>
+
+    <div class="rb-bookwrap">
+      <div class="rb-book" data-book>
+        <div class="rb-shadow" aria-hidden="true"></div>
+        <div class="rb-board" aria-hidden="true"></div>
+
+        <div class="rb-page rb-page--l rb-page--photo" data-chapter="opening">
+          <figure class="rb-photo rb-photo--cbse">
+            <img src="assets/img/results-cbse-lab.webp" alt="A teacher demonstrates apparatus to students gathered round a laboratory bench." width="1800" height="1200" fetchpriority="high">
+            <figcaption><span>CBSE</span><span>Class X and XII</span></figcaption>
+          </figure>
+          <p class="rb-pageno" aria-hidden="true">i</p>
+        </div>
+
+        <div class="rb-leaf" data-leaf>
+          <div class="rb-face rb-face--front rb-page rb-page--r rb-page--photo" data-chapter="opening">
+            <figure class="rb-photo rb-photo--ib">
+              <img src="assets/img/results-ib-lab.webp" alt="Students working at microscopes in a biology laboratory." width="1800" height="1200" fetchpriority="high">
+              <figcaption><span>IB</span><span>Diploma Programme</span></figcaption>
+            </figure>
+            <p class="rb-pageno" aria-hidden="true">ii</p>
+          </div>
+
+          <article class="rb-face rb-face--back rb-page rb-page--l" id="cbse-results" data-chapter="cbse" aria-labelledby="cbse-title">
+            <p class="rb-folio"><span>Chapter 01</span><span>March&ndash;April 2026</span></p>
+            <h2 class="rb-title" id="cbse-title">CBSE Results</h2>
+            <p class="rb-hero">
+              <span class="rb-hero__num">99.0<small>%</small></span>
+              <span class="rb-hero__label">The highest individual score, in Class XII Management. One student&rsquo;s result, not an&nbsp;average.</span>
+            </p>
+            <figure class="rb-plate rb-plate--cbse"><img src="assets/img/results-cbse-lab.webp" alt="" width="1800" height="1200" loading="lazy"></figure>
+            <p class="rb-pageno" aria-hidden="true">1</p>
+          </article>
+        </div>
+
+        <div class="rb-leaf" data-leaf>
+          <div class="rb-face rb-face--front rb-page rb-page--r" data-chapter="cbse">
+            <p class="rb-folio"><span>Board examinations</span><span>2026</span></p>
+            <table class="rb-table">
+              <caption>Results by class, 2026</caption>
+              <thead>
+                <tr><th scope="col">Class</th><th scope="col">Highest<span class="sr-only"> score</span></th><th scope="col"><span class="sr-only">Class </span>Average</th><th scope="col">90%+<span class="sr-only">: students at 90% or above</span></th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">XII Science</th><td data-label="Highest score">95.60%</td><td data-label="Class average">91%</td><td data-label="At 90%+">12</td></tr>
+                <tr><th scope="row">XII Management</th><td data-label="Highest score">99.0%</td><td data-label="Class average">94%</td><td data-label="At 90%+">22 <span>of 26</span></td></tr>
+                <tr><th scope="row">Class X</th><td data-label="Highest score">98.60%</td><td data-label="Class average">90%</td><td data-label="At 90%+">49 <span>of 79</span></td></tr>
+              </tbody>
+            </table>
+            <p class="rb-note">Highest is one student&rsquo;s score; average is the whole class&rsquo;s; 90%+ counts the students who scored 90% or above. The size of the XII Science class is not in the published&nbsp;record.</p>
+            <p class="rb-sources"><span>Sources</span> <a href="assets/documents/school-info/cbse-results-past-three-years.pdf" target="_blank" rel="noopener">CBSE results, 2024&ndash;2026 <span class="rb-sources__kind">PDF</span></a> <a href="news.html#cbse-results-2026">School news brief</a></p>
+            <p class="rb-pageno" aria-hidden="true">2</p>
+          </div>
+
+          <article class="rb-face rb-face--back rb-page rb-page--l" id="ib-results" data-chapter="ib" aria-labelledby="ib-title">
+            <p class="rb-folio"><span>Chapter 02</span><span>May 2026</span></p>
+            <h2 class="rb-title" id="ib-title">IB Diploma</h2>
+            <p class="rb-hero">
+              <span class="rb-hero__num">24<small>&thinsp;/&thinsp;24</small></span>
+              <span class="rb-hero__label">Diplomas awarded: every candidate registered for the May 2026 examination earned&nbsp;one.</span>
+            </p>
+            <figure class="rb-plate rb-plate--ib"><img src="assets/img/results-ib-lab.webp" alt="" width="1800" height="1200" loading="lazy"></figure>
+            <p class="rb-pageno" aria-hidden="true">3</p>
+          </article>
+        </div>
+
+        <div class="rb-leaf" data-leaf>
+          <div class="rb-face rb-face--front rb-page rb-page--r" data-chapter="ib">
+            <p class="rb-folio"><span>Final examination</span><span>2026</span></p>
+            <p class="rb-subtitle">Diploma points, out of 45</p>
+            <dl class="rb-stats">
+              <div><dt>Average total</dt><dd><b>39.4</b> <span>points</span></dd></div>
+              <div><dt>Highest total</dt><dd><b>45<small>&thinsp;/&thinsp;45</small></b> <span>Two candidates</span></dd></div>
+            </dl>
+            <table class="rb-dist">
+              <caption>The 24 candidates by total points</caption>
+              <tbody>
+                <tr><th scope="row">40 or above</th><td><span class="rb-bar rb-bar--12" aria-hidden="true"></span><b>12</b></td></tr>
+                <tr><th scope="row">36 to 39</th><td><span class="rb-bar rb-bar--8" aria-hidden="true"></span><b>8</b></td></tr>
+                <tr><th scope="row">Below 36</th><td><span class="rb-bar rb-bar--4" aria-hidden="true"></span><b>4</b></td></tr>
+              </tbody>
+            </table>
+            <p class="rb-sources"><span>Source</span> <a href="news.html#ib-results-2026">School news brief: IB Diploma results</a></p>
+            <p class="rb-pageno" aria-hidden="true">4</p>
+          </div>
+
+          <div class="rb-face rb-face--back rb-page rb-page--l rb-page--colophon" data-chapter="ib">
+            <img class="rb-seal" src="assets/img/logo.png" alt="" width="320" height="312" loading="lazy">
+            <p class="rb-colophon__name">Chinmaya International Residential School</p>
+            <p class="rb-colophon__title">Our Results &middot; 2026</p>
+            <p class="rb-colophon__note">Every figure in this book is as the school reported it for the 2026 examinations. CBSE scores are percentages and IB Diploma scores are points out of 45: they measure different things, and are not compared&nbsp;here.</p>
+            <p class="rb-pageno" aria-hidden="true">5</p>
+          </div>
+        </div>
+
+        <!-- Under the last leaf. The destinations panel grows out of this page. -->
+        <div class="rb-page rb-page--r rb-page--end" aria-hidden="true">
+          <p class="rb-folio"><span>Chapter 03</span><span>Destinations</span></p>
+          <span class="rb-rule"></span>
+        </div>
+
+        <div class="rb-shade rb-shade--l" aria-hidden="true"></div>
+        <div class="rb-shade rb-shade--r" aria-hidden="true"></div>
+      </div>
+    </div>
+
+
+    <section class="rb-next" id="destinations" aria-labelledby="destinations-title">
+      <div class="rb-next__inner">
+        <p class="rb-kicker">Chapter 03 &middot; University destinations</p>
+        <h2 id="destinations-title">The next <em>chapter.</em></h2>
+        <div class="rb-next__copy">
+          <p class="rb-next__lede">Nineteen institutions CIRS students have gone on to, as the school has published them.</p>
+          <p class="rb-next__scope">The list is not dated. The school has published the institutions &mdash; not the years, the programmes, or which student went where &mdash; so it is not a list of the class of&nbsp;2026.</p>
+        </div>
+        <span class="rb-rule" aria-hidden="true"></span>
+        <ul class="rb-regions" aria-label="Browse the directory by region">
+          <li><a href="#directory" data-region-link="india"><span class="rb-regions__name">India</span> <span class="rb-regions__count">4<span class="sr-only"> institutions</span></span></a></li>
+          <li><a href="#directory" data-region-link="uk"><span class="rb-regions__name">United Kingdom</span> <span class="rb-regions__count">5<span class="sr-only"> institutions</span></span></a></li>
+          <li><a href="#directory" data-region-link="us"><span class="rb-regions__name">United States</span> <span class="rb-regions__count">7<span class="sr-only"> institutions</span></span></a></li>
+          <li><a href="#directory" data-region-link="apac"><span class="rb-regions__name">Asia&ndash;Pacific</span> <span class="rb-regions__count">3<span class="sr-only"> institutions</span></span></a></li>
+        </ul>
+      </div>
+    </section>
   </div>
 </section>
 
-<section class="rj-journal" aria-label="Results in an accessible reading format">
-  <header class="rj-journal__cover">
-    <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
-    <p>CIRS</p><h2>Our Results</h2><span>2026</span>
-  </header>
-  <article class="rj-journal__chapter" id="cbse-results">
-    <div class="rj-journal__heading"><p>Board examinations / March&ndash;April 2026</p><h2>CBSE Results</h2></div>
-    <p class="rj-journal__lead"><strong>99.0%</strong> was the highest reported score, in Class XII Management.</p>
-    <div class="rj-journal__columns">
-      <dl>
-        <div><dt>Class XII Science</dt><dd><b>95.60%</b> top score; <b>91%</b> class average</dd></div>
-        <div><dt>Class XII Management</dt><dd><b>99.0%</b> top score; <b>94%</b> class average</dd></div>
-        <div><dt>Class X</dt><dd><b>98.60%</b> top score; <b>90%</b> class average</dd></div>
-      </dl>
-      <p>Class XII Science reported 12 students at 90% and above; Management reported 22. Class X reported 49 students at 90% and above.</p>
+<section class="rb-directory" id="directory" aria-labelledby="directory-title">
+  <div class="rb-directory__inner">
+    <div class="rb-directory__head">
+      <h3 id="directory-title">University directory</h3>
+      <p>Search by name, or narrow the list to one region.</p>
     </div>
-    <a class="rj-textlink" href="assets/documents/school-info/cbse-results-past-three-years.pdf" target="_blank" rel="noopener">View CBSE results <span aria-hidden="true">&nearr;</span></a>
-  </article>
-  <article class="rj-journal__chapter" id="ib-results">
-    <div class="rj-journal__heading"><p>Final examination / May 2026</p><h2>IB Results</h2></div>
-    <p class="rj-journal__lead"><strong>24 of 24</strong> registered candidates were awarded the IB Diploma.</p>
-    <div class="rj-journal__columns">
-      <dl>
-        <div><dt>Average total</dt><dd><b>39.4</b> points</dd></div>
-        <div><dt>Highest score</dt><dd><b>45 / 45</b></dd></div>
-        <div><dt>40 points or above</dt><dd><b>12</b> students</dd></div>
-      </dl>
-      <p>Eight students scored between 36 and 39 points, and four scored below 36. No CBSE percentage is compared with an IB points total.</p>
-    </div>
-    <a class="rj-textlink" href="news.html#latest">View the IB results report</a>
-  </article>
-</section>
-
-<section class="rj-destinations" id="destinations" aria-labelledby="destinations-title">
-  <div class="rj-destinations__intro">
-    <p class="rj-label">University destinations</p><h2 id="destinations-title">The next<br><em>chapter.</em></h2>
-    <p>Academic results open doors. What students do next gives them direction.</p>
-  </div>
-  <div class="rj-route" aria-hidden="true"><svg viewBox="0 0 1000 420" preserveAspectRatio="none"><path class="rj-route__base" d="M0 212 C170 212 185 72 360 72 S590 350 760 246 S895 110 1000 110" pathLength="1"/><path class="rj-route__draw" d="M0 212 C170 212 185 72 360 72 S590 350 760 246 S895 110 1000 110" pathLength="1"/><circle class="rj-route__node" cx="42" cy="210" r="6"/><circle class="rj-route__node" cx="360" cy="72" r="6"/><circle class="rj-route__node" cx="760" cy="246" r="6"/><circle class="rj-route__node" cx="962" cy="116" r="6"/></svg></div>
-  <ol class="rj-destination-track">
-    <li class="rj-destination is-active" data-region="india"><span>01 / India</span><h3>From Siruvani<br>to India&rsquo;s leading institutions.</h3><p>Shri Ram College of Commerce &middot; National Institute of Design &middot; IIT Madras &middot; Chinmaya Vishwa Vidyapeeth</p></li>
-    <li class="rj-destination" data-region="uk"><span>02 / United Kingdom</span><h3>London, Manchester,<br>Durham and Warwick.</h3><p>Imperial College London &middot; London School of Economics &middot; University of Manchester &middot; Durham University &middot; University of Warwick</p></li>
-    <li class="rj-destination" data-region="usa"><span>03 / United States</span><h3>Across the American<br>academic landscape.</h3><p>University of Chicago &middot; Northwestern University &middot; New York University &middot; Boston University &middot; University of Virginia &middot; Purdue University &middot; Parsons</p></li>
-    <li class="rj-destination" data-region="asia-pacific"><span>04 / Asia&ndash;Pacific</span><h3>Singapore and<br>Hong Kong.</h3><p>National University of Singapore &middot; Hong Kong University of Science and Technology</p></li>
-  </ol>
-</section>
-
-<section class="rj-directory" id="directory" aria-labelledby="directory-title">
-  <div class="wrap">
-    <div class="rj-directory__head"><div><p class="rj-label">Practical archive</p><h2 id="directory-title">University directory</h2></div><p>Verified institution names already published by CIRS. Years, programmes and individual student mappings are not shown because the repository does not verify them.</p></div>
-    <form class="rj-filters" role="search" action="#directory">
+    <form class="rb-filters" role="search" action="#directory">
       <label for="destinationSearch">Search universities</label>
-      <div class="rj-searchrow"><input id="destinationSearch" type="search" placeholder="Search by university or region" autocomplete="off"><button type="submit">Search</button><button type="reset">Clear</button></div>
-      <fieldset><legend>Filter by region</legend><button type="button" class="is-active" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="india" aria-pressed="false">India</button><button type="button" data-filter="uk" aria-pressed="false">United Kingdom</button><button type="button" data-filter="usa" aria-pressed="false">United States</button><button type="button" data-filter="asia-pacific" aria-pressed="false">Asia&ndash;Pacific</button></fieldset>
+      <div class="rb-searchrow"><input id="destinationSearch" type="search" placeholder="University, abbreviation or country" autocomplete="off"><button type="submit">Search</button><button type="reset">Clear</button></div>
+      <fieldset>
+        <legend>Region</legend>
+        <button type="button" class="is-active" data-filter="all" aria-pressed="true">All <span>19</span></button>
+        <button type="button" data-filter="india" aria-pressed="false">India <span>4</span></button>
+        <button type="button" data-filter="uk" aria-pressed="false">United Kingdom <span>5</span></button>
+        <button type="button" data-filter="us" aria-pressed="false">United States <span>7</span></button>
+        <button type="button" data-filter="apac" aria-pressed="false">Asia&ndash;Pacific <span>3</span></button>
+      </fieldset>
     </form>
-    <p class="rj-directory__count" id="destinationCount" role="status" aria-live="polite" aria-atomic="true">18 verified destinations</p>
-    <ul class="rj-directory__list" id="destinationList">
-      <li data-region="india"><span>India</span>Shri Ram College of Commerce</li><li data-region="india"><span>India</span>National Institute of Design</li><li data-region="india"><span>India</span>IIT Madras</li><li data-region="india"><span>India</span>Chinmaya Vishwa Vidyapeeth</li>
-      <li data-region="uk"><span>United Kingdom</span>Imperial College London</li><li data-region="uk"><span>United Kingdom</span>The London School of Economics and Political Science</li><li data-region="uk"><span>United Kingdom</span>The University of Manchester</li><li data-region="uk"><span>United Kingdom</span>Durham University</li><li data-region="uk"><span>United Kingdom</span>University of Warwick</li>
-      <li data-region="usa"><span>United States</span>University of Chicago</li><li data-region="usa"><span>United States</span>Northwestern University</li><li data-region="usa"><span>United States</span>New York University</li><li data-region="usa"><span>United States</span>Boston University</li><li data-region="usa"><span>United States</span>University of Virginia</li><li data-region="usa"><span>United States</span>Purdue University</li><li data-region="usa"><span>United States</span>The New School &mdash; Parsons</li>
-      <li data-region="asia-pacific"><span>Asia&ndash;Pacific</span>National University of Singapore</li><li data-region="asia-pacific"><span>Asia&ndash;Pacific</span>The Hong Kong University of Science and Technology</li>
+    <p class="rb-directory__count" id="destinationCount" role="status" aria-live="polite" aria-atomic="true">19 institutions</p>
+    <ul class="rb-directory__list" id="destinationList">
+      <li data-region="india" data-search="iit madras iit madras india india"><span>India</span>IIT Madras</li>
+      <li data-region="india" data-search="shri ram college of commerce shri ram india india"><span>India</span>Shri Ram College of Commerce</li>
+      <li data-region="india" data-search="national institute of design nid india india"><span>India</span>National Institute of Design</li>
+      <li data-region="india" data-search="chinmaya vishwa vidyapeeth chinmaya vishwa vidyapeeth india india"><span>India</span>Chinmaya Vishwa Vidyapeeth</li>
+      <li data-region="uk" data-search="durham university durham united kingdom united kingdom"><span>United Kingdom</span>Durham University</li>
+      <li data-region="uk" data-search="the university of manchester manchester united kingdom united kingdom"><span>United Kingdom</span>The University of Manchester</li>
+      <li data-region="uk" data-search="university of warwick warwick united kingdom united kingdom"><span>United Kingdom</span>University of Warwick</li>
+      <li data-region="uk" data-search="imperial college london imperial united kingdom united kingdom"><span>United Kingdom</span>Imperial College London</li>
+      <li data-region="uk" data-search="the london school of economics and political science lse united kingdom united kingdom"><span>United Kingdom</span>The London School of Economics and Political Science</li>
+      <li data-region="us" data-search="northwestern university northwestern united states united states"><span>United States</span>Northwestern University</li>
+      <li data-region="us" data-search="university of chicago chicago united states united states"><span>United States</span>University of Chicago</li>
+      <li data-region="us" data-search="purdue university purdue united states united states"><span>United States</span>Purdue University</li>
+      <li data-region="us" data-search="university of virginia virginia united states united states"><span>United States</span>University of Virginia</li>
+      <li data-region="us" data-search="new york university nyu united states united states"><span>United States</span>New York University</li>
+      <li data-region="us" data-search="the new school parsons parsons united states united states"><span>United States</span>The New School &mdash; Parsons</li>
+      <li data-region="us" data-search="boston university boston united states united states"><span>United States</span>Boston University</li>
+      <li data-region="apac" data-search="national university of singapore nus singapore asia pacific"><span>Singapore</span>National University of Singapore</li>
+      <li data-region="apac" data-search="nanyang technological university ntu singapore asia pacific"><span>Singapore</span>Nanyang Technological University</li>
+      <li data-region="apac" data-search="the hong kong university of science and technology hkust hong kong asia pacific"><span>Hong Kong</span>The Hong Kong University of Science and Technology</li>
     </ul>
-    <p class="rj-directory__empty" id="destinationEmpty" hidden>No verified destinations match this search. Clear the filters to see the full directory.</p>
-  </div>
-</section>
+    <p class="rb-directory__empty" id="destinationEmpty" hidden>No institution in the directory matches that search. <button type="button" data-directory-clear>Show all 19</button></p>
 
-<section class="rj-final" aria-labelledby="results-final-title">
-  <div class="wrap rj-final__grid">
-    <h2 id="results-final-title">The result is<br>a milestone.<br><em>The journey<br>continues.</em></h2>
-    <nav aria-label="Continue from Results"><a href="curriculum.html">Explore the Curriculum</a><a href="alumni.html">Meet Our Alumni</a><a href="assets/documents/school-info/cbse-results-past-three-years.pdf" download>Download Results</a><a href="admissions.html#apply">Begin Your CIRS Journey</a></nav>
+    <nav class="rb-further" aria-label="Continue from Results">
+      <a href="assets/documents/school-info/cbse-results-past-three-years.pdf" download>Download CBSE results <span>PDF, 2024&ndash;2026</span></a>
+      <a href="news.html#ib-results-2026">IB Diploma results <span>School news brief</span></a>
+      <a href="curriculum.html">The curriculum <span>CBSE and IB at CIRS</span></a>
+      <a href="alumni.html">Our alumni <span>Where CIRS takes you</span></a>
+    </nav>
   </div>
 </section>
 </main>
@@ -591,12 +626,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102-results-13" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102-results-13" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102-results-13" defer></script>
-<script src="assets/js/cirs.js?b=102-results-13-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=102-results-13" defer></script>
-<script src="assets/js/footer.js?b=102-results-13-footer-1" defer></script>
-<script src="assets/js/results-journey.js?b=102-results-13" defer></script>
+<script src="assets/vendor/gsap.min.js?b=107-results-14" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=107-results-14" defer></script>
+<script src="assets/vendor/lenis.min.js?b=107-results-14" defer></script>
+<script src="assets/js/cirs.js?b=107-results-14-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=107-results-14" defer></script>
+<script src="assets/js/footer.js?b=107-results-14-footer-1" defer></script>
+<script src="assets/js/results-journey.js?b=107-results-14" defer></script>
 </body>
 </html>

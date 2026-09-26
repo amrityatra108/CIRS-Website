@@ -234,14 +234,20 @@
     <div class="arena-hero__layer arena-hero__layer--base">
       <img class="arena-hero__img" src="assets/img/sports/hero-track.jpg"
            alt="Runners rounding the CIRS athletics track against the Western Ghats"
-           width="2400" height="1500" fetchpriority="high" decoding="async">
+           width="2400" height="1500" decoding="async">
       <div class="arena-hero__scrim" aria-hidden="true"></div>
     </div>
 
-    <!-- Secondary reveal sports image: Swimmer in motion in CIRS pool -->
+    <!-- Secondary reveal sports image: swimmers on the blocks at the CIRS pool.
+         The same files as the Swimming chapter below, so the reveal costs no
+         download of its own; the pool photograph it replaces was the one the
+         home page already uses. -->
     <div class="arena-hero__layer arena-hero__layer--reveal" id="heroRevealLayer" aria-hidden="true">
-      <img class="arena-hero__img" src="assets/img/sports/hero-reveal.jpg"
-           alt="" width="2400" height="1500" decoding="async">
+      <picture>
+        <source media="(max-width: 720px)" srcset="assets/img/sports-experience/swimming-mobile.webp" type="image/webp">
+        <img class="arena-hero__img" src="assets/img/sports-experience/swimming-wide.webp"
+             alt="" width="1920" height="1200" decoding="async">
+      </picture>
       <div class="arena-hero__scrim arena-hero__scrim--reveal" aria-hidden="true"></div>
     </div>
   </div>
@@ -546,7 +552,7 @@
 
 <!-- ============================================================
      SECTION 4. HOUSE COMPETITION
-     Vasistha (Red), Valmiki (Yellow), Vishwamitra (Green), Vyasa (Blue).
+     Vasishtha (Red), Valmiki (Yellow), Vishwamitra (Green), Vyasa (Blue).
      Interactive vertical color bands on desktop, stacked on mobile.
      ============================================================ -->
 <section class="house-arena" id="houses" aria-labelledby="housesHeading">
@@ -562,7 +568,7 @@
   </div>
 
   <div class="house-bands" id="houseBands" role="tablist" aria-label="CIRS House Teams">
-    <!-- Vasistha (Red) -->
+    <!-- Vasishtha (Red) -->
     <article class="house-band house-band--vasistha is-active" id="house-vasistha"
              role="tabpanel" tabindex="0" aria-labelledby="tab-vasistha">
       <div class="house-band__media">
@@ -574,7 +580,7 @@
       <div class="house-band__content">
         <div class="house-band__header">
           <span class="house-band__color-tag">RED</span>
-          <h3 class="serif house-band__name" id="tab-vasistha">Vasistha</h3>
+          <h3 class="serif house-band__name" id="tab-vasistha">Vasishtha</h3>
         </div>
         <div class="house-band__details">
           <p class="house-band__identity">Discipline, leadership, and unwavering determination on the track and field.</p>
@@ -586,7 +592,7 @@
         </div>
       </div>
       <button type="button" class="house-band__trigger" aria-controls="house-vasistha" aria-expanded="true">
-        <span class="sr-only">Expand Vasistha House</span>
+        <span class="sr-only">Expand Vasishtha House</span>
       </button>
     </article>
 
@@ -982,9 +988,9 @@
           <strong>THE CIRS EXPERIENCE</strong>
           <span>Daily routines, dining, and residential houses</span>
         </a>
-        <a class="sports-link-card" href="the-cirs-experience.html#houses">
+        <a class="sports-link-card" href="houses.html">
           <strong>The Four Houses</strong>
-          <span>Vasistha, Valmiki, Vishwamitra, and Vyasa</span>
+          <span>Vasishtha, Valmiki, Vishwamitra, and Vyasa</span>
         </a>
         <a class="sports-link-card" href="our-results.html">
           <strong>Academic Results</strong>

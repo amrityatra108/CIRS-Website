@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102-student-life-9">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102-student-life-9">
-<link rel="stylesheet" href="assets/css/pages.css?b=102-student-life-9">
+<link rel="stylesheet" href="assets/css/fonts.css?b=107-student-life-9">
+<link rel="stylesheet" href="assets/css/cirs.css?b=107-student-life-9">
+<link rel="stylesheet" href="assets/css/pages.css?b=107-student-life-9">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,10 +37,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/student-life.css?b=102-student-life-9">
-<link rel="stylesheet" href="assets/css/typography.css?b=102-student-life-9">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-student-life-9-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=102-student-life-9-drawer-5">
+<link rel="stylesheet" href="assets/css/student-life.css?b=107-student-life-9">
+<link rel="stylesheet" href="assets/css/typography.css?b=107-student-life-9">
+<link rel="stylesheet" href="assets/css/footer.css?b=107-student-life-9-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=107-student-life-9-drawer-5">
 </head>
 
 <body class="student-life">
@@ -212,6 +212,11 @@
     </div>
   </div>
 </header>
+<!-- The gold hairline that holds the header's place once it has slid away
+     past the page's opening (cirs.js, "Header state"). Decoration only: the
+     header comes back by scrolling up, by the pointer at the top edge or by
+     keyboard focus, so the line takes no clicks and nothing announces it. -->
+<div class="site-nav-handle" aria-hidden="true"></div>
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="1" hidden>
   <div class="drawer__surface">
     <div class="drawer__topbar">
@@ -251,6 +256,7 @@
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
+        <li><a href="houses.html">Our Houses</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
@@ -453,11 +459,12 @@
 <section class="sj-houses" id="houses" aria-labelledby="sj-houses-title">
   <div class="wrap"><p class="sj-kicker">The house community</p><h2 id="sj-houses-title">Four houses.<br>One campus.</h2></div>
   <div class="sj-houses__stage">
-    <article class="sj-house red"><span>Red</span><h3>Vasistha</h3><p>One of four houses that shape shared life and inter-house participation.</p></article>
+    <article class="sj-house red"><span>Red</span><h3>Vasishtha</h3><p>One of four houses that shape shared life and inter-house participation.</p></article>
     <article class="sj-house yellow"><span>Yellow</span><h3>Valmiki</h3><p>House identity is carried through daily life, sport and cultural activity.</p></article>
     <article class="sj-house green"><span>Green</span><h3>Vishwamitra</h3><p>Students meet beyond their classrooms through a common house community.</p></article>
     <article class="sj-house blue"><span>Blue</span><h3>Vyasa</h3><p>Four distinct colours, held together by one residential school.</p></article>
   </div>
+  <div class="wrap sj-links"><a href="houses.html">Explore the four houses <span aria-hidden="true">→</span></a></div>
 </section>
 
 <section class="sj-work" id="student-work" aria-labelledby="sj-work-title">
@@ -606,12 +613,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102-student-life-9" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102-student-life-9" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102-student-life-9" defer></script>
-<script src="assets/js/cirs.js?b=102-student-life-9-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=102-student-life-9" defer></script>
-<script src="assets/js/footer.js?b=102-student-life-9-footer-1" defer></script>
-<script src="assets/js/student-life-journey.js?b=102-student-life-9" defer></script>
+<script src="assets/vendor/gsap.min.js?b=107-student-life-9" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=107-student-life-9" defer></script>
+<script src="assets/vendor/lenis.min.js?b=107-student-life-9" defer></script>
+<script src="assets/js/cirs.js?b=107-student-life-9-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=107-student-life-9" defer></script>
+<script src="assets/js/footer.js?b=107-student-life-9-footer-1" defer></script>
+<script src="assets/js/student-life-journey.js?b=107-student-life-9" defer></script>
 </body>
 </html>

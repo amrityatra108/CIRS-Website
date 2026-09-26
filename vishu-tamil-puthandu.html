@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vishu and Tamil Puthandu | CIRS News</title>
+<meta name="description" content="The dorms celebrated the new year with the Vishu Kani, a traditional South Indian lunch and cultural programmes.">
+<meta name="theme-color" content="#0E0B12">
+<link rel="canonical" href="https://www.cirschool.org/vishu-tamil-puthandu.html">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vishu and Tamil Puthandu | CIRS News">
+<meta property="og:description" content="The dorms celebrated the new year with the Vishu Kani, a traditional South Indian lunch and cultural programmes.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vishu and Tamil Puthandu | CIRS News">
+<meta name="twitter:description" content="The dorms celebrated the new year with the Vishu Kani, a traditional South Indian lunch and cultural programmes.">
+<meta name="twitter:image" content="assets/img/og.jpg">
+<!-- Four approved families, self-hosted with retained OFL notices. -->
+<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?b=107-news-archive-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=107-news-archive-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=107-news-archive-1">
+<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
+     removes once it has played. With scripting off nothing removes it, and
+     it covers the page on every page of this site. One rule, applied only
+     when there is no scripting, is the whole fix. Crossroads already does
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/blog.css?b=107-news-archive-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=107-news-archive-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=107-news-archive-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=107-news-archive-1-drawer-5">
+</head>
+
+<body class="blog litehead">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Opening sequence. Removed from the DOM once it has played. -->
+<div class="curtain" id="curtain" aria-hidden="true">
+  <img src="assets/img/logo.png" alt="" width="72" height="70">
+  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
+  <span class="curtain__bar"><i></i></span>
+</div>
+
+<!-- Film lightbox, shared by every page. The iframe is built on open and
+     destroyed on close: nothing is requested from YouTube until someone asks
+     for the film, and removing the element is what actually stops the audio. -->
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
+  <div class="lightbox__back" data-close></div>
+  <div class="lightbox__panel">
+    <div class="lightbox__frame" id="lightboxFrame"></div>
+    <button type="button" class="lightbox__close" data-close aria-label="Close the film">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</dialog>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<button type="button" class="totop" id="totop" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+</button>
+<header class="header" id="header">
+  <div class="wrap">
+    <div class="header__left">
+      <!-- Enquire opens the contact panel below rather than going anywhere.
+           It stays a button so the keyboard and screen readers get a control
+           that announces its expanded state; hover opens it for a mouse. -->
+      <div class="enq" id="enq">
+        <button type="button" class="htab enq__btn" id="enqBtn" data-magnetic aria-label="Enquire"
+                aria-expanded="false" aria-controls="enqPanel">
+          <span class="htab__icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="htab__label">Enquire</span>
+        </button>
+
+        <div class="enq__panel" id="enqPanel">
+          <p class="enq__title sc">Talk to CIRS</p>
+
+          <a class="enq__row enq__row--wa" href="https://wa.me/919360461572"
+             target="_blank" rel="noopener">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>+91 93604 61572</b>
+              <small>WhatsApp &middot; Admissions Coordinator</small>
+            </span>
+          </a>
+
+          <a class="enq__row" href="mailto:info@cirschool.org">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><rect x="2.6" y="4.6" width="16.8" height="12.8" rx="1.6" stroke="currentColor" stroke-width="1.4"/><path d="m3.4 5.8 7.6 5.6 7.6-5.6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>info@cirschool.org</b>
+              <small>Email the school</small>
+            </span>
+          </a>
+
+          <!-- The three doors. Each goes to the page that explains what is
+               live and what is not, rather than straight out to the external
+               system — a parent who lands on a login screen with no warning
+               cannot tell the school's old system from the new site.
+
+               They carry no second line. "Through the Parent Portal" under
+               two rows that both went to the Parent Portal was restating the
+               destination the row already is, and it made three plain doors
+               look like three explanations. -->
+          <p class="enq__title enq__title--sep sc">Portals</p>
+
+          <a class="enq__row" href="parent-portal.html">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><rect x="2.6" y="5.2" width="16.8" height="11.6" rx="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M2.6 9.4h16.8" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 13.4h3.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>Fee payment</b>
+            </span>
+          </a>
+
+          <a class="enq__row" href="parent-portal.html">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7.8" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M4.8 18.4a6.2 6.2 0 0 1 12.4 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>Parent Login</b>
+            </span>
+          </a>
+
+          <a class="enq__row" href="https://cirs.in/school/cirsmark/"
+             target="_blank" rel="noopener">
+            <span class="enq__ico" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M11 4.4 19.6 8 11 11.6 2.4 8 11 4.4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5.8 10v4.4c0 1.3 2.3 2.4 5.2 2.4s5.2-1.1 5.2-2.4V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="enq__txt">
+              <b>Student Login</b>
+            </span>
+          </a>
+
+          <p class="enq__title enq__title--sep sc">Follow CIRS</p>
+          <div class="enq__social">
+            <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener"
+               aria-label="Instagram (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="enq__social-dot" cx="17.4" cy="6.7" r="1.1"/></svg>
+            </a>
+            <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener"
+               aria-label="Facebook (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.8l.45-3.2H13.7V7.75c0-.93.3-1.56 1.64-1.56H17V3.3a22 22 0 0 0-2.43-.13c-2.4 0-4.05 1.47-4.05 4.17V9.8H7.8V13h2.72v8h3.18Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener"
+               aria-label="YouTube (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.15a3 3 0 0 0-2.1-2.12C17.05 5.5 12 5.5 12 5.5s-5.05 0-6.9.53A3 3 0 0 0 3 8.15a31 31 0 0 0 0 7.7 3 3 0 0 0 2.1 2.12c1.85.53 6.9.53 6.9.53s5.05 0 6.9-.53a3 3 0 0 0 2.1-2.12 31 31 0 0 0 0-7.7Z"/><path class="enq__social-play" d="m10 15.25 5-3.25-5-3.25v6.5Z"/></svg>
+            </a>
+            <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener"
+               aria-label="LinkedIn (opens in a new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 8.4H3.3V21h3.3V8.4ZM5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8.2 5.4H10V21h3.2v-6.25c0-1.65.32-3.25 2.37-3.25 2.02 0 2.05 1.9 2.05 3.36V21H21v-6.92c0-3.4-.73-6.01-4.7-6.01-1.9 0-3.18 1.04-3.7 2.02h-.04V8.4h.64Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a class="htab" href="index.html" data-magnetic aria-label="Home">
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="htab__label">Home</span>
+      </a>
+    </div>
+
+    <a class="brand" href="index.html" aria-label="Chinmaya International Residential School home">
+      <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
+      <span class="brand__txt">
+        <span class="brand__name">Chinmaya International Residential School</span>
+        <span class="brand__sub">Siruvani &middot; Coimbatore &middot; Founded 1996</span>
+      </span>
+    </a>
+
+    <div class="header__right">
+      <a class="htab htab--news" href="news.html" data-magnetic>
+        <span class="htab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
+        </span>
+        <span class="htab__label">News</span>
+      </a>
+      <button type="button" class="htab htab--menu" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu" data-magnetic>
+        <span class="htab__icon" aria-hidden="true">
+          <span class="menubtn__dots"><i></i><i></i><i></i><i></i></span>
+        </span>
+        <span class="htab__label">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- The gold hairline that holds the header's place once it has slid away
+     past the page's opening (cirs.js, "Header state"). Decoration only: the
+     header comes back by scrolling up, by the pointer at the top edge or by
+     keyboard focus, so the line takes no clicks and nothing announces it. -->
+<div class="site-nav-handle" aria-hidden="true"></div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="0" hidden>
+  <div class="drawer__surface">
+    <div class="drawer__topbar">
+      <a class="drawer__brand" href="index.html" aria-label="Chinmaya International Residential School home">
+        <img src="assets/img/logo.png" alt="" width="64" height="63">
+        <span>Chinmaya International<br>Residential School</span>
+      </a>
+      <button class="drawer__close" id="drawerClose" type="button" aria-label="Close menu">
+        <span>Close</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer__stage">
+      <h2 class="drawer__sr-only" id="drawer-title">Site navigation</h2>
+      <nav class="drawer__menu" aria-label="CIRS sections">
+  <div class="drawer__item">
+    <button type="button" class="drawer__group is-active" id="dnav-vision-button" data-menu-index="0" aria-controls="dnav-vision-panel" aria-expanded="true" style="--enter-delay:0ms;--enter-y:14px;--enter-z:-200px"><span class="drawer__group-number" aria-hidden="true">01</span><span class="drawer__group-word">Vision</span></button>
+    <section class="drawer__panel" id="dnav-vision-panel" aria-labelledby="dnav-vision-button">
+      <p class="drawer__panel-kicker">Vision / 01</p>
+      <ul>
+        <li><a href="founder.html">Founder</a></li>
+        <li><a href="why-cirs.html">Why CIRS</a></li>
+        <li><a href="school-history.html">School History</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-student-life-button" data-menu-index="1" aria-controls="dnav-student-life-panel" aria-expanded="false" style="--enter-delay:40ms;--enter-y:-10px;--enter-z:-120px"><span class="drawer__group-number" aria-hidden="true">02</span><span class="drawer__group-word">Student Life</span></button>
+    <section class="drawer__panel" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
+      <p class="drawer__panel-kicker">Student Life / 02</p>
+      <ul>
+        <li><a href="the-cirs-experience.html">THE CIRS EXPERIENCE</a></li>
+        <li><a href="curriculum.html">Curriculum</a></li>
+        <li><a href="our-results.html">Our Results</a></li>
+        <li><a href="sports.html">Our Sports</a></li>
+        <li><a href="houses.html">Our Houses</a></li>
+        <li><a href="our-laurels.html">Our Laurels</a></li>
+        <li><a href="math-challenge.html">Math Challenge</a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-literary-excellence-button" data-menu-index="2" aria-controls="dnav-literary-excellence-panel" aria-expanded="false" style="--enter-delay:80ms;--enter-y:12px;--enter-z:-260px"><span class="drawer__group-number" aria-hidden="true">03</span><span class="drawer__group-word">Literary Excellence</span></button>
+    <section class="drawer__panel" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="drawer__panel-kicker">Literary Excellence / 03</p>
+      <ul>
+        <li><a href="crossroads.html">Crossroads</a></li>
+        <li><a href="blog.html">CIRS Blog</a></li>
+        <li><a href="creative-writing.html">Creative Writing</a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-art-culture-music-button" data-menu-index="3" aria-controls="dnav-art-culture-music-panel" aria-expanded="false" style="--enter-delay:120ms;--enter-y:-12px;--enter-z:-160px"><span class="drawer__group-number" aria-hidden="true">04</span><span class="drawer__group-word">Art, Culture &amp; Music</span></button>
+    <section class="drawer__panel" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="drawer__panel-kicker">Art, Culture &amp; Music / 04</p>
+      <ul>
+        <li><a href="captures.html">CIRS Captures</a></li>
+        <li><a href="art-attack.html">CIRS Art Attack</a></li>
+        <li><a href="festivals.html">CIRS Festivals</a></li>
+        <li><a href="theatre.html">CIRS Theatre</a></li>
+        <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="drawer__item">
+    <button type="button" class="drawer__group" id="dnav-connect-button" data-menu-index="4" aria-controls="dnav-connect-panel" aria-expanded="false" style="--enter-delay:160ms;--enter-y:12px;--enter-z:-220px"><span class="drawer__group-number" aria-hidden="true">05</span><span class="drawer__group-word">Connect</span></button>
+    <section class="drawer__panel" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="drawer__panel-kicker">Connect / 05</p>
+      <ul>
+        <li><a href="school-info.html">School Information</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="parent-portal.html">Parent Portal</a></li>
+        <li><a href="alumni.html">Alumni</a></li>
+      </ul>
+    </section>
+  </div>
+</nav>
+    </div>
+
+    <div class="drawer__bottom">
+      <div class="drawer__cta">
+        <a href="admissions.html#apply">Apply for admission</a>
+        <a href="admissions.html#visit">Book a campus visit</a>
+      </div>
+      <div class="drawer__utility">
+        <a href="alumni.html">Alumni</a>
+        <a href="school-info.html#calendar">Calendar</a>
+        <a href="tel:+914222613300">+91 422 261 3300</a>
+        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main id="main">
+<article class="art" id="top">
+  <header class="art__head">
+    <div class="art__shell">
+      <nav class="art__breadcrumb" aria-label="Breadcrumb">
+        <a href="news.html">News</a><span aria-hidden="true">/</span><span>Community</span>
+      </nav>
+      <p class="art__edition">From the CIRS news archive</p>
+      <h1 class="art__title">Vishu and Tamil Puthandu</h1>
+      <p class="art__subtitle">The dorms celebrated the new year with the Vishu Kani, a traditional South Indian lunch and cultural programmes.</p>
+      <div class="art__credits">
+        <span>Community</span>
+        <span>April 2025</span>
+      </div>
+    </div>
+  </header>
+  <div class="art__layout">
+    <aside class="art__rail" aria-label="Where this was published">
+      <p>First published on</p>
+      <strong>The school&rsquo;s own<br>news pages</strong>
+      <a href="https://cirschool.org/tamil%202025/Index.html" target="_blank" rel="noopener">The original page <span aria-hidden="true">&#8599;</span></a>
+      <a href="news.html">All CIRS news</a>
+    </aside>
+    <div class="art__content">
+    <figure class="art__hero">
+      <img src="assets/img/news/vishu-tamil-new-year-1200.webp"
+           alt="CIRS students sharing a festive meal served on banana leaves"
+           width="1200" height="620" decoding="async">
+    </figure>
+
+      <div class="art__body">
+
+        <div class="newsgal">
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/02.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/03.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/04.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/05.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/06.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/07.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/08.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/09.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/10.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/11.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/12.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/13.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+          <figure class="newsgal__shot">
+            <img src="assets/img/news-archive/vishu-tamil-puthandu/14.jpg"
+                 alt="" width="1200" height="675" loading="lazy" decoding="async">
+          </figure>
+        </div>
+      </div>
+      <p class="art__back"><a href="news.html">&#8592; Back to News</a></p>
+    </div>
+  </div>
+</article>
+</main>
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>The journey continues</span>
+        <span>at CIRS</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+        <ul>
+          <li><a href="why-cirs.html">Why CIRS</a></li>
+          <li><a href="school-history.html">School History</a></li>
+          <li><a href="leadership.html#people">Our People</a></li>
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+          <li><a href="why-cirs.html#junior">Junior School</a></li>
+          <li><a href="why-cirs.html#senior">Senior School</a></li>
+          <li><a href="sports.html#athletics">Athletics</a></li>
+          <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; 1996&ndash;2026 Chinmaya International Residential School</span>
+      <span>J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</span>
+      <span>An undertaking of the Central Chinmaya Mission Trust</span>
+    </div>
+  </div>
+</footer>
+</div>
+<!-- The motion layer, served from this site rather than from a CDN. See
+     assets/vendor/README.md for the versions and where they came from.
+     defer keeps them in document order, so GSAP is defined before
+     ScrollTrigger looks for it. -->
+<script src="assets/vendor/gsap.min.js?b=107-news-archive-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=107-news-archive-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=107-news-archive-1" defer></script>
+<script src="assets/js/cirs.js?b=107-news-archive-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=107-news-archive-1" defer></script>
+<script src="assets/js/footer.js?b=107-news-archive-1-footer-1" defer></script>
+</body>
+</html>

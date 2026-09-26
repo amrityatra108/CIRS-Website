@@ -9,8 +9,11 @@
   <div class="founder-opening__label">THE FOUNDER<br><span>1916–1993</span></div>
   <h1 class="founder-opening__headline">FROM<br>SEEKER<br>TO GURUDEV</h1>
   <!-- The portrait is an animation with nothing inside it to operate, so it
-       is not a Tab stop: it took focus with no ring and nothing to do there. -->
-  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening/?v=29&amp;embed=1" title="Balakrishnan Menon to Swami Chinmayananda — flowing portrait" loading="eager"></iframe>
+       is not a Tab stop: it took focus with no ring and nothing to do there.
+       No slash after the directory: that is the address Vercel serves it at
+       (trailingSlash is false), so the frame loads without a redirect that
+       could drop "embed=1". Its own <base> resolves its files either way. -->
+  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening?v=30&amp;embed=1" title="Balakrishnan Menon to Swami Chinmayananda — flowing portrait" loading="eager"></iframe>
   <p class="founder-opening__description">Balakrishna Menon’s search for truth <br>became Swami Chinmayananda’s mission <br>to share it with the world.</p>
   <div class="founder-opening__identity"><p>SWAMI CHINMAYANANDA</p><span>VISIONARY • TEACHER • FOUNDER</span></div>
   <div class="founder-opening__closing"><p>A LIFE TRANSFORMED.<br>A VISION THAT CONTINUES.</p></div>
@@ -136,7 +139,7 @@
         <p class="fcopy">Begins to work at <em>National Herald</em>, writing articles in support of
           the Freedom Movement.</p>
       </div>
-      <figure class="ffig flife__shot"><img src="assets/img/founder/archive/2633-yr80-writing.webp" alt="Swami Chinmayananda writing at a desk in a later archival photograph" loading="lazy" decoding="async"><figcaption>A later photograph of Gurudev writing, 1980.</figcaption></figure>
+      <figure class="ffig flife__shot"><img src="assets/img/founder/archive/2633-yr80-writing.webp" srcset="assets/img/founder/archive/2633-yr80-writing-800.webp 800w, assets/img/founder/archive/2633-yr80-writing.webp 1200w" sizes="(max-width: 899px) 92vw, 44vw" alt="Swami Chinmayananda writing at a desk in a later archival photograph" width="1200" height="933" loading="lazy" decoding="async"><figcaption>A later photograph of Gurudev writing, 1980.</figcaption></figure>
     </li>
     <li class="flife__item rv founder-stop" data-route-stop data-route-id="seeker-1947-1949" data-route-x="5800" data-route-y="1200" data-route-period="1947&ndash;1949">
       <span class="flife__yr">1947&ndash;1949</span>
@@ -240,25 +243,18 @@
 
     <div class="founders-vehicle" data-founder-vehicle aria-hidden="true">
       <span class="founders-vehicle__shadow"></span>
-      <img class="founders-vehicle__fallback" src="assets/img/founder/amrit-vahini/side.png" width="1774" height="887" alt="">
+      <img class="founders-vehicle__fallback" src="assets/img/founder/amrit-vahini/side.webp" width="1330" height="665" alt="">
       <div class="founders-vehicle__view founders-vehicle__view--side" data-vehicle-view="side">
-        <img class="founders-vehicle__wheel founders-vehicle__wheel--rear" data-vehicle-wheel src="assets/img/founder/amrit-vahini/wheel-complete.png" width="1254" height="1254" alt="">
-        <img class="founders-vehicle__wheel founders-vehicle__wheel--front" data-vehicle-wheel src="assets/img/founder/amrit-vahini/wheel-complete.png" width="1254" height="1254" alt="">
-        <img class="founders-vehicle__body" src="assets/img/founder/amrit-vahini/body-no-wheels.png" width="1774" height="887" alt="">
+        <img class="founders-vehicle__wheel founders-vehicle__wheel--rear" data-vehicle-wheel src="assets/img/founder/amrit-vahini/wheel-complete.webp" width="256" height="256" alt="">
+        <img class="founders-vehicle__wheel founders-vehicle__wheel--front" data-vehicle-wheel src="assets/img/founder/amrit-vahini/wheel-complete.webp" width="256" height="256" alt="">
+        <img class="founders-vehicle__body" src="assets/img/founder/amrit-vahini/body-no-wheels.webp" width="1330" height="665" alt="">
       </div>
     </div>
-    <!-- Retained source views from the supplied Vahini set. They are inert: the
-         revised journey uses only the connected side assembly. -->
-    <template aria-hidden="true">
-      <img src="assets/img/founder/amrit-vahini/front-three-quarter.png" alt="">
-      <img src="assets/img/founder/amrit-vahini/overhead-turn.png" alt="">
-      <img src="assets/img/founder/amrit-vahini/rear-three-quarter.png" alt="">
-      <!-- Retained, non-displayed archive variants from the supplied set. -->
-      <img src="assets/img/founder/archive/p46-hero.webp" alt="">
-      <img src="assets/img/founder/archive/p53-portrait.webp" alt="">
-      <img src="assets/img/founder/archive/p607-portrait.webp" alt="">
-      <img src="assets/img/founder/archive/r664-early.webp" alt="">
-    </template>
+    <!-- The supplied Vahini set's other views (front three-quarter, overhead
+         turn, rear three-quarter) and the archive variants this page does not
+         show (p46-hero, p53-portrait, r664-early) are retained in
+         assets/source/founder/: kept, but not deployed. The revised journey
+         uses only the connected side assembly. -->
 
     <nav class="founders-journey__hud" aria-label="Founder journey progress">
       <div>

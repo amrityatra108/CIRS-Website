@@ -163,8 +163,25 @@ copy-everything stage produced a **153 MB deploy of a 6 MB site**.
 ### Vercel — the new home
 
 `vercel.json` carries the build command, `_site` as the output directory, `cleanUrls` (so
-`/admissions` works, as it does on Netlify today) and `X-Robots-Tag: noindex` for as long as
-this is a review preview.
+`/admissions` works, as it does on Netlify today), `trailingSlash: false` and
+`X-Robots-Tag: noindex` for as long as this is a review preview.
+
+`trailingSlash: false` is not a matter of taste. The pages reach their stylesheets, scripts and
+photographs by relative path, so `/news/` asked for `/news/assets/css/cirs.css` and rendered
+unstyled while returning 200. With it, every `/page/` is a 308 to `/page` — one rule for the
+whole site, where there used to be a hand-written redirect for `/admissions/` alone. Netlify
+already does the same without being told (a 301), and its redirect rules could not express it
+anyway: Netlify normalises the trailing slash before they are read.
+
+The one directory served as a page, `assets/founder-opening/` (the Founder page's framed
+opening), is therefore served at `/assets/founder-opening`. Its `index.html` carries a `<base>`
+so its relative files resolve from either form of the address, and the Founder page frames the
+slashless one, so nothing depends on a redirect keeping the frame's `?embed=1`.
+
+Any address that is no page gets `404.html`, with a 404 status, from both hosts — nothing in
+either configuration is needed for that. It is built like any page (`"404"` in `PAGES`), but a
+host serves it at whatever path failed, so the builder writes its references from the root
+(`/assets/...`) rather than relative to a directory it cannot know.
 
 To deploy it the first time, either:
 
@@ -179,8 +196,10 @@ Two things to watch on the first deploy:
   future image ever fails on a missing interpreter, either commit `_site/` (drop it from
   `.gitignore`) and set `"buildCommand": null`, or add a `package.json` so Vercel selects a
   runtime that includes Python.
-- **`_headers` is Netlify's file** and the staging script still writes it into `_site/`. On
-  Vercel it is inert — harmless, but `vercel.json` is what sets the headers there.
+- **`_headers` is Netlify's file.** Vercel does not read it — it published it as a plain file at
+  `/_headers` — so `vercel.json`'s build command runs `stage-deploy.py --vercel`, which leaves it
+  out; `vercel.json` sets the headers there. This is the one deliberate difference between the
+  two build commands.
 
 `.mcp.json` registers Vercel's MCP server at `https://mcp.vercel.com`. It authenticates over
 OAuth, which cannot be completed from a non-interactive session — run `/mcp` in an interactive
@@ -200,8 +219,8 @@ matters, because doing it the other way round leaves the school with no site at 
 
 1. Confirm every page loads on the Vercel URL, and that the honeycomb hero plays.
 2. Point any DNS or shared links at Vercel.
-3. Delete `netlify.toml`, and remove the `_headers` write from `tools/stage-deploy.py`
-   (`robots.txt` stays — it is host-agnostic).
+3. Delete `netlify.toml`, and remove the `_headers` write and the `--vercel` flag from
+   `tools/stage-deploy.py` and `vercel.json` (`robots.txt` stays — it is host-agnostic).
 4. Delete the Netlify site, so nobody bookmarks a copy that has stopped being updated.
 
 Leaving a stale Netlify deploy running is the failure mode worth avoiding: two live URLs for
@@ -224,8 +243,8 @@ links between pages still resolve, but a local server matches how it will behave
 
 ## Review previews and search engines
 
-`tools/stage-deploy.py` writes `_headers` and `robots.txt` into `_site/`, and `vercel.json`
-sets the same header. They keep the preview out of search results, because the pages still
+`tools/stage-deploy.py` writes `_headers` (for Netlify; not with `--vercel`) and `robots.txt`
+into `_site/`, and `vercel.json` sets the same header. They keep the preview out of search results, because the pages still
 carry bracketed placeholders and an under-construction note that should not be indexed under
 the school's name.
 
@@ -267,9 +286,6 @@ step with the site in silence, which is exactly the failure that check exists to
 - **Board results and university placement figures** from the examinations office.
 - **A photography shoot.** Every image is the school's own, re-cropped and graded, but the best
   available source is about 1400 px wide.
-- **The Principal's photograph and welcome message are live** — Smt. G. Rajeshwari, the name the
-  owner confirmed in September 2026. Her portrait is cut from the supplied `assets/img/principal.jpg`
-  by `tools/make-leadership.py`.
 - **News, on an ongoing basis.** `tools/pages/news.html` currently carries the six reports and
   the diary taken from new.cirschool.org. It is a hand-edited page: add an `<article class="newsitem">`
   to the grid for each new report, or replace the `.newslead` for a big one, then rebuild. Nothing
@@ -281,26 +297,58 @@ step with the site in silence, which is exactly the failure that check exists to
 - **The header animation for the Admissions banner** — a photograph or a short looping video. The
   banner currently renders a labelled placeholder rather than a stand-in picture, deliberately: a
   temporary photograph on an admissions banner is the kind of thing that quietly ships.
-- **Board of Directors introductions and portraits** for the roster on `leadership.html`. The
-  roster shows only what has been supplied — no stand-in tiles, no bracketed placeholders — so
-  what is missing is listed here rather than on the page. Seven people are named.
-  - *Introductions still needed:* Swami Anukoolananda and Smt. G. Rajeshwari (their rows carry
-    only a link to their message). Swami Swaroopananda's row uses the line School Information
-    already publishes — "Head of Chinmaya Mission worldwide, and head of the committee that
-    manages the School."
-  - *Portrait still needed:* Shri. Vijay Mahtaney. No official page carrying his photograph was
-    found. A new portrait goes in `tools/make-leadership.py` with a crop box, and then a
-    `<figure class="roster__face">` in his row.
-  - *Portraits from official pages, not from the school* (downloaded with the owner's approval,
-    September 2026; originals in `assets/source/leadership/`): Swami Swaroopananda and Pujya
-    Guruji Swami Tejomayananda from chinmayamission.com, Shri. Jagdish Moorjani from
-    citiustech.com (published in black and white), Shri. Siddharth Balachandran from
-    buimerccorp.com. The school may prefer photographs of its own, and should be content to use
-    these; either way, replace the file in `assets/source/leadership/` and re-run the script.
-  - *To confirm:* whether the Mahtaney and Balachandran introductions (Park Hyatt Chennai, the
-    BSE shareholding) are still current.
-- **A caption for the staff and faculty photograph** — occasion, date and names. The page says
-  only "The CIRS staff and faculty." until the school supplies it.
+- **Leadership (`leadership.html`) — what the school still has to confirm.** The page was
+  redesigned in September 2026 as a portrait gallery. Its people, portraits and all six messages
+  are data in `tools/leadership.py`; `tools/make-leadership.py` cuts the photographs. Nothing on
+  the page is a placeholder, so everything outstanding is listed here instead.
+  - *Roster discrepancy.* The school's own management page (cirschool.org/management.html) lists
+    eight people, including **Shri Ram Buxani, Director**, who is on neither this site's current
+    roster nor School Information. An older design artifact listed him too. He has **not** been
+    added back: confirm whether he is still a Director.
+  - *Mahtaney's name.* This site says "Shri Vijay Mahtaney"; the school's management page says
+    "Shri. Viju Mahtaney". Confirm the preferred form. There is still no approved photograph of
+    him, so his entry is text only, by design.
+  - *The Principal's name.* "Smt. G. Rajeshwari" (School Information, owner-confirmed); the
+    school site signs her message "Rajeshwari", and the old design artifact called her
+    "Rajeshwari Satish". Confirm the form to use everywhere.
+  - *Messages now follow the school's published text* (cirschool.org and new.cirschool.org agree
+    word for word), with greetings and sign-offs restored. This site previously carried edited
+    versions. The one that matters: **the Principal's message had been rewritten**, and the
+    rewrite reversed the published physics — it said "the higher the pressure in the eye, the
+    calmer it stays … the more violent … the winds", where the published message says "higher
+    the pressure in the eye of the storm, lower the intensity of the winds around it". The
+    published version is what the page shows; if the rewrite was approved by the Principal,
+    say so and it can go back. The Chairman's, Resident Director's and Director — Academics'
+    messages had also been copy-edited and had lost their sign-offs. One change is ours: the
+    Resident Director's "unsumountable" is set as "insurmountable". Confirm that, and whether the
+    school wants the grammar of any message corrected at source (for example "this natural
+    phenomena and study", "an yearend examination").
+  - *Titles and dates.* The Chairman's and the Resident Director's messages both carry the title
+    "Transcending Limitations" on the school site; both are kept. Pujya Guruji's message speaks of
+    "making the Chinmaya International Residential School a reality", so it predates the school's
+    opening; the page gives no date for any message because none is published.
+  - *Introductions still needed:* Swami Anukoolanandaji and Smt. G. Rajeshwari have none. Smt.
+    Shanti Krishnamurthy's ("Principal of CIRS from 2009 … Director — Academics and
+    Administration since 2018 … a Director of the CCMT Education Cell") came from this site's
+    earlier copy; confirm it.
+  - *Directors' introductions were trimmed* to what is about CIRS or could be checked: Moorjani
+    against cvv.ac.in and citiustech.com; Balachandran's Pravasi Bharatiya Samman; Mahtaney's
+    Park Hyatt Chennai against its published history. Removed as dated or unverifiable:
+    Mahtaney's "twenty-eight directorships" and present ownership of the hotel; Balachandran's
+    "largest individual shareholder of the Bombay Stock Exchange", the MRAMM award and the
+    consulate welfare work. cvv.ac.in also calls Moorjani a Trustee of the Central Chinmaya
+    Mission Trust — worth adding if the school confirms it.
+  - *Photographs.* The best available original of Smt. Shanti Krishnamurthy is a full-length
+    shot in which her face is small, so her portrait is only 356 px wide and will look soft on
+    high-density screens; a head-and-shoulders photograph would fix it. Swami Swaroopanandaji
+    (368 px) and Smt. G. Rajeshwari (484 px) would also benefit. Swami Swaroopanandaji and Pujya
+    Guruji Swami Tejomayananda are from chinmayamission.com, Shri Jagdish Moorjani from
+    citiustech.com (black and white as published), Shri Siddharth Balachandran from
+    buimerccorp.com — downloaded with the owner's approval, originals in
+    `assets/source/leadership/`. new.cirschool.org was checked for larger copies; it has none.
+  - *Staff and faculty photograph.* The page describes the staff in the school's own words from
+    new.cirschool.org/faculty and captions the photograph without a year, because none is known.
+    Send the occasion and year if it should be dated; it is not presented as the current roster.
 - **The Why CIRS photo is live** — `assets/img/why-cirs.jpg`, cropped from a supplied photo of three
   students to a 4:5 portrait, faces centred.
 - **Photography for the sections that still render as a labelled placeholder tile** instead of

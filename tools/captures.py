@@ -1,4 +1,4 @@
-"""CIRS Captures — an eighty-three-photograph journal from the supplied collections.
+"""CIRS Captures — an eighty-two-photograph journal from the supplied collections.
 
 The first sixteen photographs are in assets/source/captures-2026-09-24. The
 new ZIP has 43 photographs and one blank frame; nine repeat photographs in
@@ -7,9 +7,9 @@ assets/source/captures-2026-09-24-zip. The later Drive file and folder add
 twelve more photographs in assets/source/captures-2026-09-25 and
 assets/source/captures-2026-09-25-folder. The attachment's berry bird and a
 folder copy of the lizard are shown once. A later folder update adds 21
-distinct photographs; repeated copies and a near-identical kingfisher frame
-are omitted. Every selected photograph appears once: four in the opening,
-78 in the journal, and one at the end.
+photographs; repeated copies, a near-identical kingfisher frame and a second
+frame of the same kittens are omitted. Every selected photograph appears once: four in the opening,
+77 in the journal, and one at the end.
 
 Captions describe what is visible; photographer, date, and exact location are
 not inferred. tools/make-captures-gallery.py writes the image sizes used by
@@ -17,6 +17,7 @@ the site build. tools/make-captures-shot.py cuts the opening photograph.
 """
 
 import json
+import math
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -81,10 +82,12 @@ CHAPTERS = [
              (new(35), "bird-in-nest", "A dark bird in a nest among bright leaves")],
             [(folder("09--dsc0735.jpg"), "butterflies-leaves", "Several butterflies gathering on a leafy stem"),
              (folder("10--dsc0733.jpg"), "blue-butterfly-flowers", "A blue and black butterfly on small flowers")],
+            # Two frames of the same kittens on the same ledge were one
+            # photograph twice; the sharper, single-kitten frame closes the
+            # chapter alongside the pair it used to follow.
             [(new(30), "blue-bird-flowers", "A blue bird beside pale flowers"),
-             (new(42), "yellow-eyed-bird", "A yellow-eyed bird among branches")],
-            [(folder("03-dsc-0086.jpg"), "kitten-shelter", "A kitten looking out from a sheltered ledge"),
-             (folder("04-dsc-0085.jpg"), "kittens-shelter", "Two kittens together on a sheltered ledge")],
+             (new(42), "yellow-eyed-bird", "A yellow-eyed bird among branches"),
+             (folder("03-dsc-0086.jpg"), "kitten-shelter", "A kitten looking out from a sheltered ledge")],
         ],
     },
     {
@@ -135,9 +138,11 @@ CHAPTERS = [
             [(new(9), "raptor-stump", "A bird of prey perched on a weathered stump")],
             [(folder("01-img-0111.jpg"), "peacock-fan", "A peacock displaying its tail in a grassy clearing"),
              (new(12), "pale-bird-perch", "A pale bird on a thin bare branch")],
+            # The kingfisher arrived as a square photograph on a 16:9 black
+            # canvas; CROPS below takes the photograph and leaves the canvas.
             [(new(11), "colorful-bird", "A colorful bird perched among sunlit leaves"),
-             (folder("02-a-03-2.jpg"), "full-moon", "A bright full moon against a black sky")],
-            [(folder("28-copy-of-1untitled-design.png"), "kingfisher-blue-study", "A close view of a kingfisher against blue, with a black border")],
+             (folder("02-a-03-2.jpg"), "full-moon", "A bright full moon against a black sky"),
+             (folder("28-copy-of-1untitled-design.png"), "kingfisher-blue-study", "A close view of a kingfisher against blue")],
             [(old("img-4426"), "grey-bird", "A small grey bird seen through soft green foliage"),
              (new(28), "bird-on-roof", "A small bird perched on roof tiles")],
             [(new(16), "trees-at-dusk", "Trees framing an open field in evening light"),
@@ -170,6 +175,12 @@ CHAPTERS = [
 
 # The image builder works over the same flattened rows as the page.
 ROWS = [row for chapter in CHAPTERS for row in chapter["rows"]]
+
+# Output name -> (left, top, right, bottom) box in source pixels, for a source
+# that carries more than the photograph. Only an empty surround is cut away.
+CROPS = {
+    "kingfisher-blue-study": (0, 0, 1080, 1080),
+}
 
 # The ending: one photograph, kept out of the gallery above so that it is
 # seen once, at the end.
@@ -221,6 +232,17 @@ def chapter_nav_html():
     return '<nav class="cg__contents" aria-label="Photo chapters">\n' + "\n".join(links) + '\n</nav>'
 
 
+def _tile_srcset(s, frac):
+    """The 1x cut and the tile, and the width a tile with this share of its
+    row is drawn at: the whole column on a phone (one photograph to a row),
+    then its share of a column 92vw wide, 68vw, and at most 882px."""
+    if "small_path" not in s:
+        return ""
+    return (f' srcset="{s["small_path"]} {s["small"][0]}w, {s["tile_path"]} {s["tile"][0]}w"'
+            f' sizes="(max-width: 640px) 92vw, (max-width: 900px) {math.ceil(92 * frac)}vw,'
+            f' (max-width: 1300px) {math.ceil(68 * frac)}vw, {math.ceil(882 * frac)}px"')
+
+
 def gallery_html():
     """Every photograph is visible in a chapter and opens at full size.
 
@@ -233,6 +255,7 @@ def gallery_html():
         rows = []
         for row in chapter["rows"]:
             tiles = []
+            share = sum(sizes[n]["tile"][0] / sizes[n]["tile"][1] for _, n, _ in row)
             for _, name, caption in row:
                 s = sizes[name]
                 ratio = s["tile"][0] / s["tile"][1]
@@ -242,7 +265,7 @@ def gallery_html():
                     f'data-cg-index="{index}" data-cg-w="{s["full"][0]}" data-cg-h="{s["full"][1]}"'
                     + (f' data-cg-credit="{_esc(credit)}"' if credit else "") +
                     f' style="--ar:{ratio:.4f}">\n'
-                    f'            <img src="{s["tile_path"]}" width="{s["tile"][0]}" height="{s["tile"][1]}"\n'
+                    f'            <img src="{s["tile_path"]}"{_tile_srcset(s, ratio / share)} width="{s["tile"][0]}" height="{s["tile"][1]}"\n'
                     f'                 alt="{_esc(caption)}" loading="lazy" decoding="async">\n'
                     f'            <span class="cg__item-caption" aria-hidden="true">{_esc(caption)}</span>\n'
                     f'          </a>')

@@ -34,17 +34,26 @@ import artattack
 import artswall
 import blog
 import founder
+import houses
 import documents as docs
 import blogposts
+import newsarticles
 import crossroads
 import mathchallenge
 import creativewriting
 import captures
 import theatre
 import festivals
+import leadership
+import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=102"
+CACHE_BUST = "b=107"
+
+# Where a film's large-screen encode is offered. Everything that fails it —
+# a phone held either way up — takes the phone encode (tools/make-films.py),
+# so turning a phone never asks for a different file. A tablet passes it.
+FILM_LARGE = "(min-width: 768px) and (min-height: 501px)"
 
 # Questions to settle before an application is submitted.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -94,7 +103,7 @@ NEWS_FLASH = [
 MENU = [
     ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
     ("Student Life",         ["the-cirs-experience", "curriculum", "our-results", "sports",
-                              "our-laurels", "math-challenge"]),
+                              "houses", "our-laurels", "math-challenge"]),
     ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
     ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
                               "cultural-gallery"]),
@@ -184,33 +193,53 @@ PAGES = {
     },
     "school-history": {
         "nav": "School History",
-        "title": "School History",
-        "description": "How Chinmaya International Residential School came to be — Pujya Gurudev's "
-                       "vision, the rupee-by-rupee purchase of the land, and the inauguration on "
-                       "6 June 1996.",
-        # The same opening as News: the campus under the Ghats, in motion. A
-        # history page earns the photograph more than the flat band did — the
-        # buildings are the thing the story below ends in.
-        "hero": ("Since 1996", "School <em>History.</em>",
-                 "A vision carried from the 1970s to a hundred acres in the Siruvani foothills, "
-                 "and the ninety-six students who began it."),
-        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
-        "hero_cta": [("Follow the timeline", "#timeline", "primary"),
-                     ("Watch the film", "#film", "ghost")],
+        "title": "School History | The CIRS Archive",
+        "description": "The CIRS archive: Pujya Gurudev's idea, the land bought one rupee at a "
+                       "time, the inauguration on 6 June 1996 and the milestones since, each "
+                       "with its source.",
+        # No banner and no hero. The page opens on its own dark composition —
+        # the school's records set back at shallow depths behind the title —
+        # then tells six chapters in one bounded sticky sequence and ends on
+        # the complete archive. Every record is written from tools/history.py,
+        # which names each one's source; tools/make-history.py cuts the images.
+        "banner": None,
+        "sheet": "history",
+        "cache_suffix": "-history-1",
+        # The chapters carry their own visible index and "View all
+        # milestones", so the floating "On this page" control would repeat it.
+        "jump": False,
+        # Nothing on this page is a placeholder any more: what could not be
+        # sourced was taken out and is listed in tools/history.py.
+        "uc": False,
+        "closing": ("Have something to add", "to the archive?",
+                    [("Write to the school",
+                      "mailto:info@cirschool.org?subject=For%20the%20CIRS%20archive",
+                      "closing-scene__admissions"),
+                     ("View all milestones", "#timeline", "closing-scene__contact")],
+                    "Photographs, documents and recollections from any year are welcome at "
+                    "info@cirschool.org. The school reads everything it is sent and decides "
+                    "what is added; nothing is published automatically."),
     },
     "leadership": {
         "nav": "Leadership",
         "title": "Our Leadership",
-        "description": "The Board of Directors of Chinmaya International Residential School, and "
-                       "the staff and faculty.",
-        # The campus hero News and School History open on, so the Vision
-        # pages that are documents rather than compositions share one opening.
-        "hero": ("Governance", "Our <em>Leadership.</em>",
-                 "CIRS is an undertaking of the Central Chinmaya Mission Trust, Mumbai, and is "
-                 "managed by its Board of Directors."),
-        "hero_media": ("news-hero.jpg", "campus-loop.webm", "campus-loop.mp4", 1280, 720),
-        "hero_cta": [("Meet the Board", "#people", "primary"),
-                     ("Read their messages", "#messages", "ghost")],
+        "description": "The people who lead Chinmaya International Residential School, their "
+                       "messages in full, and the school's staff and faculty.",
+        # No hero and no banner. The page opens on ivory, with the h1 and the
+        # first four portraits of the directory together in the first screen:
+        # the people are the opening, not a campus photograph above them. It
+        # brings its own sheet and script (leadership.css, leadership.js) and
+        # the people and messages are data in tools/leadership.py. It keeps
+        # the browser's own scroll, so its message links are real history
+        # entries (cirs.js). There is no curtain, no "On this page" index —
+        # the opening's two links do that — and no under-construction note:
+        # nothing on the page is a placeholder.
+        "banner": None,
+        "sheet": "leadership",
+        "cache_suffix": "-leadership-1",
+        "litehead": True,
+        "jump": False,
+        "uc": False,
     },
     "school-info": {
         "nav": "School Information",
@@ -252,15 +281,25 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-6",
-        "banner": ("Curriculum", "The shape of <em>learning at CIRS.</em>",
-                   "CBSE begins in Grade V. From Grade XI, students can choose the IB Diploma "
-                   "Programme. The Chinmaya Vision Programme connects academic study with "
-                   "daily school life."),
-        "banner_cta": [("Compare pathways", "#pathways", "primary"),
-                       ("Admissions guide", "admissions.html#apply", "ghost")],
-        "jump": True,
+        "cache_suffix": "-curriculum-7",
+        # No banner. The page opens on its own paper composition, built in
+        # tools/pages/curriculum.html: the heading beside the Junior School
+        # photograph, with the page's own section index under it. That index
+        # is visible and labelled, so the floating "On this page" control
+        # would be a second copy of it; hence jump False. The opening is on
+        # paper, so the header wears dark lettering: hence litehead.
+        "banner": None,
+        "litehead": True,
+        "jump": False,
         "uc": False,
+        # One close rather than two: the shared closing scene carries this
+        # page's own invitation instead of a separate "next steps" band above it.
+        "closing": ("Discuss", "the next stage",
+                    [("Ask about subjects",
+                      "mailto:info@cirschool.org?subject=Grade%20XI%20and%20XII%20subject%20choices",
+                      "closing-scene__admissions"),
+                     ("Admissions guide", "admissions.html#apply", "closing-scene__contact"),
+                     ("Published results", "our-results.html", "closing-scene__contact")]),
     },
     # A child page of Curriculum, and the first page on this site whose slug
     # names a directory: it is written to curriculum/ib-diploma.html and
@@ -319,7 +358,7 @@ PAGES = {
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
         "sheet": "sports",
-        "cache_suffix": "-sports-2",
+        "cache_suffix": "-sports-3",
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
@@ -339,6 +378,17 @@ PAGES = {
             # wherever the line falls.
             "noscript_title_top": "88%",
         },
+    },
+    "houses": {
+        "barehead": True,
+        "nav": "Our Houses",
+        "title": "Our Houses | CIRS",
+        "description": "The four houses of Chinmaya International Residential School — "
+                       "Vasishtha, Valmiki, Vishwamitra and Vyasa — their colours, symbols "
+                       "and a dated archive of published inter-house results.",
+        "banner": None,
+        "sheet": "houses",
+        "cache_suffix": "-houses-1",
     },
     "crossroads": {
         "nav": "Crossroads",
@@ -393,9 +443,11 @@ PAGES = {
         "description": "Board results, university placements and the record behind them at "
                        "Chinmaya International Residential School.",
         "sheet": "results",
-        "cache_suffix": "-results-13",
+        "cache_suffix": "-results-14",
         "uc": False,
         "banner": None,
+        # The book carries its own chapter controls.
+        "jump": False,
     },
     "our-laurels": {
         "nav": "Our Laurels",
@@ -609,6 +661,24 @@ PAGES = {
         "cache_suffix": "-alumni-7",
         "uc": False,
     },
+    # What a visitor sees at an address that is no page of this site. Both
+    # hosts serve 404.html from the root of the deploy, with a 404 status,
+    # for any path that matches nothing, so the page cannot know where it is
+    # being shown from: "notfound" writes every reference on it from the root
+    # (see to_root), leaves out the curtain and the closing scene, and gives
+    # it no canonical address. Not in MENU; nobody navigates to it.
+    "404": {
+        "nav": "Page not found",
+        "title": "Page not found | CIRS",
+        "description": "This address is not a page of the Chinmaya International Residential "
+                       "School website.",
+        # The band and its links are the page, in tools/pages/404.html.
+        "banner": None,
+        "sheet": "notfound",
+        "notfound": True,
+        "jump": False,
+        "uc": False,
+    },
 }
 
 # Which page each of the old single-page section anchors now lives on.
@@ -686,8 +756,25 @@ def to_depth(html, slug):
     depth = slug.count("/")
     if not depth:
         return html
-    up = "../" * depth
+    return prefix_refs(html, "../" * depth)
 
+
+def to_root(html):
+    """Write every relative reference from the root of the site instead.
+
+    The not-found page is one file, 404.html, but a host serves it at
+    whatever path failed — /curriculum/cbse/nothing as readily as /nothing —
+    so no relative path can be right for it: "assets/css/cirs.css" would be
+    asked for from /curriculum/cbse/assets/ and the page would arrive
+    unstyled. "/assets/css/cirs.css" is right from anywhere. Only that page
+    is written this way; every other page stays relative, which is what lets
+    the site be opened from a folder as well as served.
+    """
+    return prefix_refs(html, "/")
+
+
+def prefix_refs(html, up):
+    """Put `up` in front of every relative reference, as to_depth describes."""
     def climb(m):
         attr, ref = m.group(1), m.group(2)
         if not ref or ref.startswith(("#", "/", "http://", "https://",
@@ -801,9 +888,11 @@ def film_html(slug, page):
         attrs += f' data-film-fps="{film["fps"]:g}"'
     if film.get("shot"):
         attrs += " data-film-photo"
-    # The ramp to paper, unless the page puts it further down itself.
+    # The ramp to paper, unless the page puts it further down itself. It is
+    # dark for more than half its depth, so the shared header treats it as a
+    # dark ground (data-header-theme; see "Header state" in cirs.js).
     seam = ("" if film.get("seam") is False else
-            '\n<div class="film__seam" aria-hidden="true"></div>')
+            '\n<div class="film__seam" data-header-theme="dark" aria-hidden="true"></div>')
     shot = film.get("shot")
     # After the line in the document, so it is read after it, and over it on
     # screen by z-index. See assets/js/filmintro.js for the full-frame dissolve.
@@ -844,8 +933,16 @@ def film_html(slug, page):
            stuttering wherever it exists. The VP9 is for the browsers built
            without the proprietary decoder, which would otherwise have no
            opening at all. Both are the same length at 24fps, so the mapping
-           in filmintro.js holds whichever one is picked. -->
-      <source src="assets/video/{film["video"]}.mp4" type="video/mp4">
+           in filmintro.js holds whichever one is picked.
+
+           Phones, in either orientation, take the 540p cut from
+           tools/make-films.py: the same frames, every one still a keyframe,
+           at a third of the weight. The large-screen file is listed first,
+           behind the query phones fail, so a browser that ignores media on
+           a video's sources keeps the file it always had. -->
+      <source src="assets/video/{film["video"]}.mp4" type="video/mp4"
+              media="{FILM_LARGE}">
+      <source src="assets/video/{film["video"]}-m.mp4" type="video/mp4">
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
 {cue}    <h1 class="film__title" data-film-title>{title}</h1>
@@ -862,6 +959,75 @@ def esc(text, attr=False):
     """
     out = (text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
     return out.replace('"', "&quot;") if attr else out
+
+
+def news_article_html(page):
+    """A report the school published on one of its own earlier sites.
+
+    It wears the same furniture as a Crossroads article, so an archived
+    report reads like part of this site rather than a page rescued from
+    another one, and inherits that sheet's measure and its behaviour on a
+    phone. The rail carries provenance instead of an issue number: what this
+    is, where it first appeared, and a way back to the News page.
+    """
+    art = page["news"]
+
+    image = ""
+    if art.get("image"):
+        image = (f'    <figure class="art__hero">\n'
+                 f'      <img src="{esc(art["image"], attr=True)}"\n'
+                 f'           alt="{esc(art.get("image_alt", ""), attr=True)}"\n'
+                 f'           width="1200" height="620" decoding="async">\n'
+                 f'    </figure>\n\n')
+
+    body = "\n".join(f"        <p>{esc(p)}</p>" for p in art["paragraphs"])
+
+    gallery = ""
+    if art.get("gallery"):
+        folder = os.path.join(ROOT, "assets/img/news-archive", art["gallery"])
+        shots = []
+        for name in sorted(os.listdir(folder)):
+            shots.append(
+                f'          <figure class="newsgal__shot">\n'
+                f'            <img src="assets/img/news-archive/{art["gallery"]}/{name}"\n'
+                f'                 alt="" width="1200" height="675" loading="lazy" decoding="async">\n'
+                f'          </figure>')
+        gallery = ('        <div class="newsgal">\n'
+                   + "\n".join(shots) + "\n        </div>\n")
+
+    dek = f'      <p class="art__subtitle">{esc(art["dek"])}</p>\n' if art.get("dek") else ""
+
+    return (f'<article class="art" id="top">\n'
+            f'  <header class="art__head">\n'
+            f'    <div class="art__shell">\n'
+            f'      <nav class="art__breadcrumb" aria-label="Breadcrumb">\n'
+            f'        <a href="news.html">News</a><span aria-hidden="true">/</span>'
+            f'<span>{esc(art["section"])}</span>\n'
+            f'      </nav>\n'
+            f'      <p class="art__edition">From the CIRS news archive</p>\n'
+            f'      <h1 class="art__title">{esc(art["title"])}</h1>\n'
+            f'{dek}      <div class="art__credits">\n'
+            f'        <span>{esc(art["section"])}</span>\n'
+            f'        <span>{esc(art["date"])}</span>\n'
+            f'      </div>\n'
+            f'    </div>\n'
+            f'  </header>\n'
+            f'  <div class="art__layout">\n'
+            f'    <aside class="art__rail" aria-label="Where this was published">\n'
+            f'      <p>First published on</p>\n'
+            f'      <strong>The school&rsquo;s own<br>news pages</strong>\n'
+            f'      <a href="{esc(art["source"], attr=True)}" target="_blank" rel="noopener">'
+            f'The original page <span aria-hidden="true">&#8599;</span></a>\n'
+            f'      <a href="news.html">All CIRS news</a>\n'
+            f'    </aside>\n'
+            f'    <div class="art__content">\n'
+            f'{image}      <div class="art__body">\n'
+            f'{body}\n'
+            f'{gallery}      </div>\n'
+            f'      <p class="art__back"><a href="news.html">&#8592; Back to News</a></p>\n'
+            f'    </div>\n'
+            f'  </div>\n'
+            f'</article>')
 
 
 def article_html(page):
@@ -1087,6 +1253,26 @@ POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
 </div>'''
 
 
+def closing_html(footer, closing):
+    """Give the shared closing scene a page's own heading and links.
+
+    The scene stays the site's one closing treatment; a page whose close says
+    something more specific than "Explore Admissions" says it here, rather
+    than adding a second invitation band just above the scene.
+    """
+    first, second, links, *note = closing
+    start = footer.index('<h2 class="closing-scene__title"')
+    end = footer.index("</div>", footer.index('<div class="closing-scene__links">')) + len("</div>")
+    anchors = "\n".join(f'        <a class="{cls}" href="{href}">{label}</a>'
+                         for label, href, cls in links)
+    return (footer[:start]
+            + f'<h2 class="closing-scene__title" id="closing-scene-title">\n'
+              f'        <span>{first}</span>\n        <span>{second}</span>\n      </h2>\n'
+              + (f'      <p class="closing-scene__note">{note[0]}</p>\n' if note else "")
+            + f'      <div class="closing-scene__links">\n{anchors}\n      </div>'
+            + footer[end:])
+
+
 def founder_fig(slot, cls="", sizes=""):
     """One photograph on the Founder page, or an honest gap where one is owed.
 
@@ -1101,7 +1287,20 @@ def founder_fig(slot, cls="", sizes=""):
         return (f'<figure class="{klass} ffig--gap" role="img" aria-label="{label}">'
                 f'<span class="ffig__mark">Archive image pending</span>'
                 f'<span class="ffig__what">{label}</span></figure>')
-    extra = f' sizes="{sizes}"' if sizes else ""
+    # Its own size, so the page keeps the space before the file arrives
+    # (founder.css draws every .ffig img at height:auto, which the attribute
+    # cannot override), and an 800px cut from tools/make-media.py for the
+    # screens that draw it at a third of its width.
+    extra = ""
+    dims = founder.size(slot)
+    if dims:
+        w, h, small = dims
+        extra = f' width="{w}" height="{h}"'
+        if small:
+            extra += (f' srcset="{small[0]}?{CACHE_BUST} {small[1]}w, {src}?{CACHE_BUST} {w}w"'
+                      f' sizes="{sizes or founder.SIZES.get(slot, "(max-width: 899px) 92vw, 44vw")}"')
+    elif sizes:
+        extra = f' sizes="{sizes}"'
     figcaption = f'<figcaption>{caption[0]}</figcaption>' if caption else ""
     return (f'<figure class="{klass}"><img src="{src}?{CACHE_BUST}" alt="{alt}" '
             f'loading="lazy" decoding="async"{extra}>{figcaption}</figure>')
@@ -1136,7 +1335,7 @@ def crossroads_stories_covers():
             klass = f"crossroads-stories__rear crossroads-stories__rear--{slot}"
         cards.append(f'<a class="{klass}" href="{issue["pdf"]}" '
                      f'aria-label="Read Crossroads {issue["label"]}">'
-                     f'<img src="{issue["cover"]}" alt="Crossroads {issue["label"]} cover" '
+                     f'<img src="{issue["cover"]}?{CACHE_BUST}" alt="Crossroads {issue["label"]} cover" '
                      'width="300" height="420" loading="lazy" decoding="async"></a>')
     return '<div class="crossroads-stories__media"><div class="crossroads-stories__stack">' + ''.join(cards) + '</div></div>'
 
@@ -1148,7 +1347,7 @@ def crossroads_latest(feature=False):
     if feature and issue["cover"]:
         return (f'<a class="crossroads-archive-hero__feature" href="{issue["pdf"]}" '
                 f'aria-label="Read the latest issue: {issue["label"]} (PDF)">'
-                f'<img src="{issue["cover"]}" alt="" width="300" height="420" loading="lazy" decoding="async">'
+                f'<img src="{issue["cover"]}?{CACHE_BUST}" alt="" width="300" height="420" loading="lazy" decoding="async">'
                 f'<span>Latest issue · {issue["label"]}</span></a>')
     if feature:
         return ""
@@ -1488,6 +1687,44 @@ def docportal_html():
     return '<div class="docportal">\n' + "\n".join(groups) + '\n    </div>'
 
 
+# ---- Our Results: the destinations directory --------------------------
+# Built from the Alumni page's own list (tools/alumni.py DESTINATIONS), so the
+# two pages cannot disagree about where CIRS students have gone. They did:
+# Results carried the eighteen from before NTU Singapore was supplied.
+
+def results_regions_html():
+    """The four region links in the destinations panel; each filters the directory."""
+    rows = []
+    for key, label in alumni.REGIONS:
+        rows.append(f'          <li><a href="#directory" data-region-link="{key}">'
+                    f'<span class="rb-regions__name">{label}</span> '
+                    f'<span class="rb-regions__count">{alumni.region_count(key)}'
+                    f'<span class="sr-only"> institutions</span></span></a></li>')
+    return "\n".join(rows)
+
+
+def results_filters_html():
+    buttons = [f'        <button type="button" class="is-active" data-filter="all" '
+               f'aria-pressed="true">All <span>{alumni.count()}</span></button>']
+    for key, label in alumni.REGIONS:
+        buttons.append(f'        <button type="button" data-filter="{key}" aria-pressed="false">'
+                       f'{label} <span>{alumni.region_count(key)}</span></button>')
+    return "\n".join(buttons)
+
+
+def results_directory_html():
+    labels = dict(alumni.REGIONS)
+    rows = []
+    for key, _label in alumni.REGIONS:
+        for _k, name, short, country, region, *_rest in alumni.DESTINATIONS:
+            if region != key:
+                continue
+            search = re.sub(r"&[a-z]+;", " ", f"{name} {short} {country} {labels[region]}").lower()
+            rows.append(f'      <li data-region="{region}" data-search="{" ".join(search.split())}">'
+                        f'<span>{country}</span>{name}</li>')
+    return "\n".join(rows)
+
+
 def artswall_html():
     """The wall's photographs, as an inert <template> the page's script reads.
 
@@ -1503,6 +1740,272 @@ def artswall_html():
                     f'<img src="{artswall.thumb(name)}" alt="{caption}" data-cat="{cat}">'
                     f'</a>')
     return ('<template id="wall-plates">\n' + "\n".join(rows) + "\n</template>")
+
+
+# ============================================================================
+# The Houses page
+# ----------------------------------------------------------------------------
+# Six builders, all reading tools/houses.py, which is the only place a house
+# name, colour, symbol or result is written down. The page source holds the
+# sections and the prose; these hold everything that is per-house, so a fifth
+# house — or a corrected spelling — is one edit in one file and appears in the
+# opening frame, the four chapters, the competition archive, the record table
+# and the gallery at once.
+# ============================================================================
+
+
+def houses_hero_html():
+    """The four zones of the opening frame.
+
+    Each zone is a link to its own chapter, so the whole interaction works
+    from the keyboard with nothing added: tab moves between four links, Enter
+    follows one, and :focus-visible expands the zone exactly as hover does.
+    The name is the link's text rather than a label beside it, which is what
+    gives the link its accessible name.
+
+    The photograph is a real <img> and not a background, so it is in the
+    accessibility tree with its alt text and the browser can size it. These
+    four are the only images on the page that are not lazy — they are the
+    fold — and for the same reason they are the only ones with a second
+    rendition. A zone is the whole width of a phone and half of a tablet,
+    where it is a 4:5 box like the photograph, so its width is what it needs.
+    On a desktop it is a quarter of the width but taller than the window, and
+    the 4:5 photograph is cover-fitted to that height: it needs 0.85 of the
+    window's height in width (763px of a 1440x900 window's 382px strip). Its
+    "sizes" said 25vw, which sent every desktop the 500px cut to stretch;
+    measured, it is 85vh.
+    """
+    zones = []
+    for i, h in enumerate(houses.HOUSES):
+        small = houses.img(h["hero"].replace(".jpg", "-500.jpg"))
+        zones.append(f'''        <a class="hsxz" id="hero-{h["slug"]}" data-house="{h["slug"]}"
+           href="#house-{h["slug"]}" data-houses-zone>
+          <span class="hsxz__ph">
+            <img src="{houses.img(h["hero"])}" width="900" height="1125"
+                 srcset="{small}?{CACHE_BUST} 500w, {houses.img(h["hero"])}?{CACHE_BUST} 900w"
+                 sizes="(max-width: 620px) 100vw, (max-width: 900px) 50vw, 85vh"
+                 alt="{esc(h["hero_alt"], attr=True)}"
+                 {"" if i else 'fetchpriority="high" '}decoding="async">
+          </span>
+          <span class="hsxz__tint" aria-hidden="true"></span>
+          <span class="hsxz__no" aria-hidden="true">{h["number"]}</span>
+          <span class="hsxz__body">
+            <span class="hsxz__name">{h["name"]}</span>
+            <span class="hsxz__meta">{h["colour"]} &middot; {h["symbol"].lower()}</span>
+            <span class="hsxz__go">Explore</span>
+          </span>
+        </a>''')
+    return "\n".join(zones)
+
+
+def houses_chapters_html():
+    """One chapter per house, in the order tools/houses.py lists them.
+
+    Each chapter opens with a wipe — a bar in the outgoing house's colour that
+    the script contracts, recolours and expands into the incoming one. With no
+    script it is a 6px rule in the house's colour, which is a perfectly good
+    chapter divider, so nothing is hidden behind the animation.
+
+    The house's own words are a <blockquote> with a <cite>, dated. That is
+    deliberate and it is not a motto: no CIRS house motto is documented
+    anywhere in this repository, and a line set large under a house name with
+    no attribution would read as one.
+    """
+    chapters = []
+    total = len(houses.HOUSES)
+    for i, h in enumerate(houses.HOUSES):
+        previous = houses.HOUSES[i - 1]["slug"] if i else h["slug"]
+        chapters.append(f'''<article class="hch" id="house-{h["slug"]}" data-house="{h["slug"]}"
+         data-houses-chapter data-from="{previous}">
+  <div class="hch__wipe" aria-hidden="true" data-houses-wipe></div>
+  <div class="hch__bleed">
+    <img src="{houses.img(h["frame"])}" width="1600" height="900" loading="lazy"
+         decoding="async" alt="{esc(h["frame_alt"], attr=True)}">
+  </div>
+  <p class="hch__ghost" aria-hidden="true" data-houses-ghost>{h["name"]}</p>
+  <div class="wrap hch__inner">
+    <p class="hch__step"><span class="hch__no">{h["number"]}</span>
+      <span class="hch__of">/ {total:02d}</span></p>
+    <h2 class="hch__name" data-houses-heading>{h["name"]}</h2>
+    <p class="hch__id"><span class="hch__swatch" aria-hidden="true"></span>{h["colour"]}
+      <span class="hch__dot" aria-hidden="true">&middot;</span>{h["symbol"]}</p>
+    <blockquote class="hch__says">
+      <p>{h["says"]}</p>
+      <cite>{h["name"]} House, writing in <em>Sakshi</em>, February 2008</cite>
+    </blockquote>
+    <p class="copy hch__fact">{h["fact"]}</p>
+    <p class="hch__more"><a href="#gallery-{h["slug"]}">{h["name"]} in frames</a></p>
+  </div>
+</article>''')
+    return "\n\n".join(chapters)
+
+
+def houses_track_html():
+    """The competition archive, and the season line the script lays over it.
+
+    Authored as an ordered list, oldest first: without the script every event
+    is open on the page and reads as an archive. The script turns the list
+    into a line of stops and shows one event at a time, which is the only
+    thing it changes.
+
+    A row is either placed — four houses, first to fourth — or judged, where
+    the school named awards instead of a ranking. Both shapes come straight
+    from the source; neither is converted into the other.
+    """
+    stops, panels = [], []
+    for i, r in enumerate(houses.RESULTS):
+        on = " is-on" if i == 0 else ""
+        stops.append(f'''        <li><button type="button" class="hcomp__stop{on}"
+            data-houses-stop="{i}" data-cat="{r["category"]}"
+            aria-controls="event-{i}" aria-current="{"true" if i == 0 else "false"}">
+          <span class="hcomp__when">{r["when"]}</span>
+          <span class="hcomp__what">{r["event"]}</span>
+        </button></li>''')
+
+        body = []
+        if r["order"]:
+            rows = []
+            for place, slug in enumerate(r["order"], 1):
+                rows.append(f'''          <li data-house="{slug}">
+            <span class="hcomp__pl">{place}</span>
+            <span class="hcomp__hn">{houses.name_of(slug)}</span>
+            <span class="hcomp__hc">{houses.colour_of(slug)}</span>
+          </li>''')
+            body.append('        <ol class="hcomp__order">\n' + "\n".join(rows) + "\n        </ol>")
+        if r["awards"]:
+            rows = []
+            for award, slugs in r["awards"]:
+                won = ", ".join(houses.name_of(s) for s in slugs)
+                rows.append(f'''          <div data-house="{slugs[0]}">
+            <dt>{award}</dt><dd>{won}</dd>
+          </div>''')
+            body.append('        <dl class="hcomp__awards">\n' + "\n".join(rows) + "\n        </dl>")
+        if r.get("note"):
+            body.append(f'        <p class="hcomp__note">{r["note"]}</p>')
+        if not r["order"] and not r["awards"] and not r.get("note"):
+            body.append('        <p class="hcomp__note">No placings were published.</p>')
+
+        panels.append(f'''      <li class="hcomp__panel{on}" id="event-{i}" data-houses-panel="{i}"
+          data-cat="{r["category"]}">
+        <p class="hcomp__tag">{r["category"]} &middot; {r["when"]}</p>
+        <h3 class="hcomp__ev">{r["event"]}</h3>
+{chr(10).join(body)}
+        <p class="hcomp__src">Source: {r["source"]}</p>
+      </li>''')
+
+    filters = "\n".join(
+        f'''        <button type="button" class="hcomp__filter{" is-on" if c == "All" else ""}"
+            data-houses-filter="{c}" aria-pressed="{"true" if c == "All" else "false"}">{c}</button>'''
+        for c in houses.CATEGORIES)
+
+    return f'''    <div class="hcomp__track" data-houses-track hidden>
+      <h3 class="sr-only" id="comp-filter-h">Filter the archive by category</h3>
+      <div class="hcomp__filters" role="group" data-houses-filters aria-labelledby="comp-filter-h">
+{filters}
+      </div>
+      <div class="hcomp__line" aria-hidden="true"><span data-houses-line></span></div>
+      <h3 class="sr-only" id="comp-stops-h">The events, oldest first</h3>
+      <ol class="hcomp__stops" data-houses-stops aria-labelledby="comp-stops-h">
+{chr(10).join(stops)}
+      </ol>
+    </div>
+
+    <ol class="hcomp__panels" data-houses-panels>
+{chr(10).join(panels)}
+    </ol>'''
+
+
+def houses_symposiums_html():
+    """The four house productions of May 2008, as panels on a dark stage."""
+    cards = []
+    for slug, title, about in houses.SYMPOSIUMS:
+        cards.append(f'''      <li data-house="{slug}">
+        <p class="hcult__who"><span class="hcult__swatch" aria-hidden="true"></span>{houses.name_of(slug)}</p>
+        <h3 class="hcult__title">{title}</h3>
+        <p class="hcult__about">{about}</p>
+      </li>''')
+    return ('    <ul class="hcult__set" data-houses-symposiums>\n'
+            + "\n".join(cards) + "\n    </ul>")
+
+
+def houses_record_html():
+    """Eight selected, dated event entries as one table.
+
+    A real <table> with a caption, scoped headers and a row per event: the
+    figures are data and a reader should be able to read down a column.
+    Placings are the four house names in order, and a judged event says what
+    was judged, in the same cell, rather than being forced into a ranking.
+    """
+    head = "".join(f'<th scope="col">{h["name"]}<small>{h["colour"]}</small></th>'
+                   for h in houses.HOUSES)
+    rows = []
+    for r in houses.RESULTS:
+        cells = []
+        for h in houses.HOUSES:
+            slug = h["slug"]
+            if r["order"] and slug in r["order"]:
+                place = r["order"].index(slug) + 1
+                suffix = {1: "st", 2: "nd", 3: "rd"}.get(place, "th")
+                cells.append(f'<td data-house="{slug}"><b>{place}{suffix}</b></td>')
+            elif r["awards"]:
+                won = [a for a, slugs in r["awards"] if slug in slugs]
+                if won:
+                    cells.append(f'<td data-house="{slug}">{"; ".join(won)}</td>')
+                else:
+                    cells.append('<td><span class="hrec__none">&mdash;</span></td>')
+            else:
+                cells.append('<td><span class="hrec__none">&mdash;</span></td>')
+        rows.append(f'''        <tr>
+          <th scope="row">{r["event"]}<small>{r["when"]} &middot; {r["category"]}</small></th>
+{"".join("          " + c + chr(10) for c in cells)}          <td class="hrec__src">{r["source"]}</td>
+        </tr>''')
+    return f'''    <div class="hrec__wrap rv">
+      <table class="hrec__table">
+        <caption>Inter-house results published by CIRS. A dash means the source named
+          no placing for that house in that event, not that the house did not take
+          part.</caption>
+        <thead>
+          <tr><th scope="col">Event</th>{head}<th scope="col">Published in</th></tr>
+        </thead>
+        <tbody>
+{chr(10).join(rows)}
+        </tbody>
+      </table>
+    </div>'''
+
+
+def houses_gallery_html():
+    """One named-kit portrait per house, in a filterable strip.
+
+    Every frame is a figure with a real caption outside the image, which is
+    what keeps it readable on a phone and in the accessibility tree. The
+    filter buttons carry the per-house ids the chapters link to, so
+    "#gallery-vasishtha" lands on Vasishtha's portrait with or without script
+    and the script presses it.
+    """
+    frames = []
+    for h in houses.HOUSES:
+        for name, alt, caption in ((h["hero"], h["hero_alt"], h["hero_cap"]),):
+            frames.append(f'''        <li id="gallery-{h["slug"]}" data-house="{h["slug"]}">
+          <figure>
+            <img src="{houses.img(name)}" width="900" height="1125" loading="lazy"
+                 decoding="async" alt="{esc(alt, attr=True)}">
+            <figcaption><b>{h["name"]}</b><span>{caption}</span></figcaption>
+          </figure>
+        </li>''')
+    tabs = ['        <button type="button" class="hgal__tab is-on" id="gallery-tab-all"'
+            ' data-houses-house="all" aria-pressed="true">All four</button>']
+    for h in houses.HOUSES:
+        tabs.append(f'''        <button type="button" class="hgal__tab" id="gallery-tab-{h["slug"]}"
+            data-houses-house="{h["slug"]}" aria-pressed="false">
+          <span class="hgal__sw" aria-hidden="true"></span>{h["name"]}</button>''')
+    return f'''    <div class="hgal__tabs" role="group" data-houses-tabs aria-labelledby="gal-h" hidden>
+      <h3 class="sr-only" id="gal-h">Choose a house</h3>
+{chr(10).join(tabs)}
+    </div>
+    <ul class="hgal__strip" data-houses-strip>
+{chr(10).join(frames)}
+    </ul>'''
 
 
 # A tab a single page adds to the header, beside News. Student Life is the
@@ -1543,6 +2046,12 @@ def build(slug, page):
                 .replace("{{DESCRIPTION}}", page["description"])
                 .replace("{{CANONICAL}}", "" if slug == "index" else f"{slug}.html")
                 .replace("{{CACHE_BUST}}", CACHE_BUST))
+    if page.get("notfound"):
+        # The not-found page has no address of its own to be canonical for,
+        # and is never one to index. This is not the review preview's
+        # site-wide noindex and does not go when that does at launch.
+        head = re.sub(r'<link rel="canonical"[^>]*>\n',
+                      '<meta name="robots" content="noindex">\n', head)
 
     # A wall fills the window and does not scroll, so it brings its own sheet
     # and its own script, and goes without the footer and the under-construction
@@ -1610,6 +2119,9 @@ def build(slug, page):
     if slug == "theatre":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/theatre.css?{CACHE_BUST}">\n</head>')
+    if slug == "leadership":
+        # The message a #msg-... URL asks for is chosen before first paint.
+        head = head.replace("</head>", leadership.head_script() + leadership.head_css() + "</head>")
     if slug == "captures":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/captures-featured.css?{CACHE_BUST}">\n'
@@ -1640,9 +2152,13 @@ def build(slug, page):
         head = head.replace("</head>",
             portal_motion_gate +
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
-    if slug in ("admissions", "school-info", "news"):
+    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership")
+            or page.get("notfound")):
         # These pages open immediately with their own video, document sheets,
-        # or journal masthead, so the shared curtain is unnecessary.
+        # journal masthead or, on Curriculum, the photograph of learning the
+        # page leads with — and School History on its archive's title — so
+        # the shared curtain is unnecessary. A visitor who has lost their way
+        # needs the way back at once, not a curtain first.
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
@@ -1686,9 +2202,11 @@ def build(slug, page):
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if slug in ("admissions", "school-info", "news"):
-        # Admissions, School Information, and News each have their own visible
-        # opening. The shared curtain would delay it behind a blank screen.
+    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership")
+            or page.get("notfound")):
+        # Admissions, School Information, News, Curriculum, School History and
+        # Leadership each have their own visible opening. The shared curtain would delay it behind a
+        # blank screen.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
         chrome = chrome[:intro_start] + chrome[intro_end:]
@@ -1728,6 +2246,8 @@ def build(slug, page):
     jump_at = len(parts)
     if page.get("post"):
         content = article_html(page)
+    elif page.get("news"):
+        content = news_article_html(page)
     elif page.get("soon"):
         content = soon_html(page)
     else:
@@ -1739,7 +2259,17 @@ def build(slug, page):
         content = captures.expand_featured(content)
     if slug == "festivals":
         content = festivals.expand(content)
+    if slug == "school-history":
+        content = history.expand(content)
+    if slug == "leadership":
+        content = leadership.expand(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
+                       .replace("{{HOUSES_HERO}}", houses_hero_html())
+                       .replace("{{HOUSES_CHAPTERS}}", houses_chapters_html())
+                       .replace("{{HOUSES_TRACK}}", houses_track_html())
+                       .replace("{{HOUSES_SYMPOSIUMS}}", houses_symposiums_html())
+                       .replace("{{HOUSES_RECORD}}", houses_record_html())
+                       .replace("{{HOUSES_GALLERY}}", houses_gallery_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
                        .replace("{{REGISTER}}", register_html() if slug == "school-info" else "")
                        .replace("{{RECORDS_NOTICE}}", records_notice_html() if slug == "school-info" else "")
@@ -1775,6 +2305,12 @@ def build(slug, page):
                        .replace("{{ALUMNI_PATHWAYS}}", alumni.pathways_html())
                        .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
                        .replace("{{ALUMNI_COUNT}}", alumni.count_word()))
+    if slug == "our-results":
+        content = (content.replace("{{RESULTS_REGIONS}}", results_regions_html())
+                          .replace("{{RESULTS_FILTERS}}", results_filters_html())
+                          .replace("{{RESULTS_DIRECTORY}}", results_directory_html())
+                          .replace("{{RESULTS_COUNT_CAP}}", alumni.count_word().capitalize())
+                          .replace("{{RESULTS_COUNT}}", str(alumni.count())))
     if slug == "theatre":
         content = (content.replace("{{THEATRE_PROGRAMME}}", theatre.programme_html())
                           .replace("{{THEATRE_ANAND_UTSAV}}", theatre.anand_utsav_html())
@@ -1797,19 +2333,24 @@ def build(slug, page):
     parts.append("</main>")
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
-        if slug == "captures":
-            # Captures already ends with its own full-width photograph.
+        if slug in ("captures", "leadership") or page.get("notfound"):
+            # Captures already ends with its own full-width photograph, and
+            # Leadership with its staff photograph and a compact pair of
+            # links: a second full-screen scene would compete with both.
             # Keep that as the page's final image before the site footer.
+            # The not-found page is kept to its one message and its links.
             footer = footer[footer.index('<div class="footer-wrap">'):]
         if slug == "admissions":
             footer = footer.replace('href="admissions.html#examination">Important Dates',
                                     'href="admissions.html#dates">Important Dates')
+        if page.get("closing"):
+            footer = closing_html(footer, page["closing"])
         parts.append(footer)
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
     if not wall:
         parts.append(f'<script src="assets/js/footer.js?{CACHE_BUST}-footer-1" defer></script>')
     if slug == "crossroads":
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-5" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-6" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}-hover-4" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
@@ -1833,12 +2374,20 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
+    if slug == "houses":
+        parts.append(f'<script src="assets/js/houses-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "blog":
         parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-editorial-1" defer></script>')
     if slug == "festivals":
         parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if slug == "art-attack":
         parts.append(f'<script src="assets/js/artattack.js?{CACHE_BUST}" defer></script>')
+    if slug == "leadership":
+        parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
+    if slug == "curriculum":
+        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}" defer></script>')
+    if slug == "school-history":
+        parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
@@ -1857,6 +2406,8 @@ def build(slug, page):
     # The index goes in after rewrite_links: its anchors name sections on this
     # page, and must not be sent to the page an old single-page anchor meant.
     html = to_depth(rewrite_links("\n".join(parts), slug).replace(JUMP_MARK, jump), slug)
+    if page.get("notfound"):
+        html = to_root(html)
     # A page with newly page-scoped assets can invalidate its own shared and
     # local files without rewriting every generated page in the repository.
     cache_suffix = page.get("cache_suffix", "")
@@ -1869,6 +2420,24 @@ def build(slug, page):
 # out above because they are data: seventeen entries in tools/blogposts.py,
 # each of which becomes a page with the site's own chrome around it. They are
 # not in MENU — the Blog is how a reader reaches them.
+# The school's own news reports, one page each. They are not in MENU — the
+# News page is how a reader reaches them, exactly as the Blog is for articles.
+for _art in newsarticles.ARTICLES:
+    PAGES[_art["slug"]] = {
+        "nav": esc(_art["title"]),
+        "title": esc(_art["title"], attr=True) + " | CIRS News",
+        "description": esc((_art["dek"] or _art["title"])[:180], attr=True),
+        "sheet": "blog",
+        "cache_suffix": "-news-archive-1",
+        "uc": False,
+        "jump": False,
+        # An archived report opens on paper like a Blog article does, so the
+        # header cannot float over it in white lettering.
+        "litehead": True,
+        "news": _art,
+    }
+
+
 for _post in blogposts.POSTS:
     PAGES[_post["slug"]] = {
         "nav": esc(_post["title"]),

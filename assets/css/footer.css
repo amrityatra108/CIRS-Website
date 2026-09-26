@@ -185,6 +185,8 @@ html.footer-zone-active .header{
   visibility:hidden;
   pointer-events:none;
 }
+/* The collapsed header's gold line goes with it. */
+html.footer-zone-active .header ~ .site-nav-handle{ opacity:0; }
 
 @media (min-width:740px){
   .footer__main{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:38px 30px; }

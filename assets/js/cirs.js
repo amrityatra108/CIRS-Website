@@ -28,6 +28,10 @@
   var hasGSAP = typeof window.gsap !== "undefined";
   var hasST = hasGSAP && typeof window.ScrollTrigger !== "undefined";
   var isAlumni = document.body.classList.contains("alumni");
+  // Alumni and Leadership keep the browser's own scroll and real URL
+  // fragments: Leadership's message links are history entries that Back
+  // and Forward must be able to walk (assets/js/leadership.js).
+  var nativeScroll = isAlumni || document.body.classList.contains("leadership");
   var animate = hasGSAP && !reduced;
 
   if (hasST) gsap.registerPlugin(ScrollTrigger);
@@ -41,7 +45,7 @@
   var lenis = null;
   // The photograph wall has its own infinite drag/scroll surface and must not
   // compete with document-level smooth scrolling.
-  if (typeof window.Lenis !== "undefined" && !reduced && !isAlumni && !document.body.classList.contains("wall")) {
+  if (typeof window.Lenis !== "undefined" && !reduced && !nativeScroll && !document.body.classList.contains("wall")) {
     lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.5 });
     if (hasGSAP) {
       lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
@@ -187,8 +191,8 @@
       if (id.length < 2) return;
       var t = document.querySelector(id);
       if (!t) return;
-      // Alumni uses native document scrolling and real URL fragments.
-      if (isAlumni) { closeDrawer(); return; }
+      // Alumni and Leadership use native document scrolling and real URL fragments.
+      if (nativeScroll) { closeDrawer(); return; }
       e.preventDefault();
       closeDrawer();
       scrollToSection(t);
@@ -261,6 +265,10 @@
     // A hash is not necessarily a valid selector — #2026 is legal in a URL.
     try { t = document.querySelector(id); } catch (err) { return; }
     if (!t) return;
+    // A page whose anchors sit inside a scroll-driven scene (the Results book)
+    // knows where they are better than the element's box does, and can claim
+    // the jump by cancelling this.
+    if (!window.dispatchEvent(new CustomEvent("cirs-hash-open", { cancelable: true, detail: { target: t } }))) return;
     hashArmed = true;
 
     var timer;
@@ -1458,6 +1466,217 @@
   }
 
   /* ==========================================================
+     Floating controls give way to the reading
+     ----------------------------------------------------------
+     On a phone there is no margin beside the text for back-to-top
+     and the page index to sit in: the column runs to within 20px
+     of the edge, and the two buttons stood over its right-hand
+     words, a table's last column, a link.
+
+     So below 900px a lane down the right-hand edge, as wide as the
+     buttons stand in from it, is kept clear of text. The lane is
+     measured from the buttons themselves, not assumed. Every line
+     of text that reaches into it is traced to the wrapper that
+     insets it from the edge — a .wrap, an article's column, a
+     page's own section — and only that wrapper's right padding is
+     widened, to clear the lane: its background still runs to the
+     edge, and the left-hand side of the column does not move. Where
+     nothing insets the text (a heading placed on its own), its own
+     block takes the padding. The pass reads the layout once, at
+     load and when the width changes, never while scrolling, and it
+     only ever adds: running it again on an unchanged page writes
+     nothing. cirs.css applies the marks only below 900px.
+
+     The buttons also step aside while the page is being read —
+     scrolled down — and come back the moment it is scrolled up,
+     which keeps them off photographs and links in the lane as well.
+     A little travel is needed either way, so a jittering finger does
+     not blink them. They stay while the index is open, and they stay
+     reachable: html.floats-tucked only fades them and takes their
+     pointer, and cirs.css brings back whichever one has keyboard focus.
+     ========================================================== */
+  function floatingControls() {
+    var totop = $("#totop"), jump = $(".jump");
+    if (!totop && !jump) return;
+    var details = jump && $(".jump__details", jump);
+    var narrow = window.matchMedia("(max-width: 900px)");
+    var root = document.documentElement;
+    var TRAVEL = 24;
+    var lastY = window.scrollY || window.pageYOffset || 0, travel = 0, tucked = false, queued = false;
+    function set(next) {
+      if (next === tucked) return;
+      tucked = next;
+      root.classList.toggle("floats-tucked", next);
+    }
+    function apply() {
+      queued = false;
+      var y = window.scrollY || window.pageYOffset || 0;
+      var dy = y - lastY;
+      lastY = y;
+      if (!narrow.matches || y < 8 || (details && details.open)) { travel = 0; set(false); return; }
+      if (!dy) return;
+      // Travel in one direction; turning round starts the count again.
+      travel = (dy > 0) === (travel > 0) ? travel + dy : dy;
+      if (travel > TRAVEL) set(true);
+      else if (travel < -TRAVEL) set(false);
+    }
+    function queue() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(apply);
+    }
+    window.addEventListener("scroll", queue, { passive: true });
+    if (narrow.addEventListener) narrow.addEventListener("change", queue);
+    if (details) details.addEventListener("toggle", queue);
+
+    /* ---- The lane ---- */
+    var GAP = 2;
+    var SKIP = "#header, .footer-wrap, dialog, .jump, .totop, .drawer, .curtain, .pop, script, style, noscript, template";
+    var marked = [], laneWidth = 0, refused = new WeakSet();
+    // The right-hand distance the buttons occupy: their inset from the edge
+    // and their width, as drawn. Read from the buttons, not from where they
+    // land, which moves if something on the page is wider than the window.
+    function lane() {
+      var most = 0;
+      [[totop, totop], [jump, jump && $(".jump__toggle", jump)]].forEach(function (pair) {
+        if (!pair[0] || !pair[1]) return;
+        var width = pair[1].getBoundingClientRect().width;
+        if (width) most = Math.max(most, (parseFloat(getComputedStyle(pair[0]).right) || 0) + width);
+      });
+      return most ? Math.ceil(most + GAP) : 0;
+    }
+    function block(el) {
+      // Text in a strip that scrolls sideways is bounded by the strip.
+      for (var n = el.parentElement; n && n !== document.body; n = n.parentElement) {
+        if (/(auto|scroll)/.test(getComputedStyle(n).overflowX) && n.scrollWidth > n.clientWidth + 1) return n;
+      }
+      for (n = el; n && n !== document.body; n = n.parentElement) {
+        var d = getComputedStyle(n).display;
+        if (d !== "inline" && d !== "contents") return n;
+      }
+      return el;
+    }
+    // The element whose right padding bounds this block: the nearest one
+    // spanning to the window's edge with an inset of its own. Its width is
+    // the window's, so more padding narrows what is inside it. A box already
+    // wider than the window is sized by its content, and padding would only
+    // widen it; there, and where nothing insets the text, the block itself
+    // takes the padding.
+    function wrapper(b, W) {
+      for (var n = b; n && n !== document.body; n = n.parentElement) {
+        var right = n.getBoundingClientRect().right;
+        if (right > W + 1) return b;
+        if (right >= W - 1 && parseFloat(getComputedStyle(n).paddingRight) > 0) return n;
+      }
+      return b;
+    }
+    function pass(W, limit) {
+      var need = [];
+      var roots = $$("main, [data-closing-scene]");
+      roots.forEach(function (rootEl) {
+        var seen = new WeakSet();
+        var walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT, null);
+        var node;
+        while ((node = walker.nextNode())) {
+          if (!/\S/.test(node.nodeValue)) continue;
+          var el = node.parentElement;
+          if (!el || seen.has(el)) continue;
+          seen.add(el);
+          var box = el.getBoundingClientRect();
+          if (!box.width || box.right <= limit + .5) continue;
+          if (el.closest(SKIP)) continue;
+          var range = document.createRange();
+          range.selectNodeContents(node);
+          var rects = range.getClientRects(), right = 0;
+          for (var i = 0; i < rects.length; i++) if (rects[i].width > 1) right = Math.max(right, rects[i].right);
+          if (right <= limit + .5) continue;
+          clear(block(el));
+        }
+        // Form fields draw no text node of their own.
+        $$("input:not([type=hidden]), select, textarea", rootEl).forEach(function (el) {
+          var box = el.getBoundingClientRect();
+          if (box.width && box.right > limit + .5 && !el.closest(SKIP)) clear(el);
+        });
+      });
+      function clear(b) {
+        // What shows of a block ends where an ancestor clips it: a card
+        // with overflow hidden cuts off a body wider than itself. Text cut
+        // off only by the page's own edge runs off it by design (a marquee).
+        var right = b.getBoundingClientRect().right, edge = right, at = b;
+        for (var n = b.parentElement; n && n !== document.body; n = n.parentElement) {
+          var ox = getComputedStyle(n).overflowX;
+          if (ox !== "hidden" && ox !== "clip") continue;
+          var r2 = n.getBoundingClientRect().right;
+          if (r2 < edge) { edge = r2; at = n; }
+        }
+        if (right > W + 1 && edge >= W - 1) return;
+        var w = wrapper(at, W);
+        var r = w.getBoundingClientRect();
+        var pad = parseFloat(getComputedStyle(w).paddingRight) || 0;
+        var want = Math.ceil(r.right - limit);
+        if (want > pad) need.push([w, want]);
+      }
+      // Every read above, every write here.
+      var wrote = [];
+      need.forEach(function (item) {
+        var w = item[0], cur = parseFloat(w.style.getPropertyValue("--float-pad")) || 0;
+        if (item[1] <= cur || refused.has(w)) return;
+        wrote.push([w, w.getBoundingClientRect().right, w.style.getPropertyValue("--float-pad"), w.classList.contains("float-lane")]);
+        w.style.setProperty("--float-pad", item[1] + "px");
+        if (!w.classList.contains("float-lane")) { w.classList.add("float-lane"); marked.push(w); }
+      });
+      // Padding must narrow a box's contents, never widen the box: one
+      // sized by what is in it grows instead. Put any such back as it was,
+      // and leave it alone from then on.
+      wrote.forEach(function (item) {
+        var w = item[0];
+        if (w.getBoundingClientRect().right <= item[1] + 1) return;
+        refused.add(w);
+        if (item[2]) w.style.setProperty("--float-pad", item[2]);
+        else w.style.removeProperty("--float-pad");
+        if (!item[3]) w.classList.remove("float-lane");
+      });
+      return wrote.length;
+    }
+    function reserve(fresh) {
+      if (!narrow.matches) return;
+      var W = document.documentElement.clientWidth;
+      var width = lane();
+      if (!width) return;
+      if (fresh || width !== laneWidth) {
+        marked.forEach(function (w) { w.classList.remove("float-lane"); w.style.removeProperty("--float-pad"); });
+        marked = [];
+        refused = new WeakSet();
+        laneWidth = width;
+      }
+      // A wrapper padded in one pass can push a nested block out in the
+      // next (a negative margin, a fixed width); three passes settle it.
+      var wrote = 0;
+      for (var k = 0, n = 1; k < 3 && n; k++) { n = pass(W, W - width); wrote += n; }
+      // The column is narrower, so the page is longer: pinned sections re-measure.
+      if (hasST && (wrote || fresh)) ScrollTrigger.refresh();
+    }
+    var reserveTimer = 0;
+    function later(fresh) {
+      window.clearTimeout(reserveTimer);
+      reserveTimer = window.setTimeout(function () { reserve(fresh); }, 200);
+    }
+    if (document.readyState === "complete") reserve(true);
+    else window.addEventListener("load", function () { reserve(true); }, { once: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { later(false); });
+    var lastW = window.innerWidth;
+    window.addEventListener("resize", function () {
+      if (window.innerWidth === lastW) return;   // a phone's toolbar, not a new width
+      lastW = window.innerWidth;
+      later(true);
+    }, { passive: true });
+    // Content that arrives after load (a gallery built from data) is
+    // swept when the page's height settles. Only additions are written,
+    // so a sweep of an unchanged page changes nothing and cannot loop.
+    if ("ResizeObserver" in window) new ResizeObserver(function () { later(false); }).observe(document.body);
+  }
+
+  /* ==========================================================
      Motto band drift
      ========================================================== */
   function mottoDrift() {
@@ -1473,11 +1692,12 @@
   /* ==========================================================
      Header state
      ----------------------------------------------------------
-     The one place the header's state is decided. It has two:
-     clear over the page's opening, and glass once the opening
-     has passed up under the bar. That is one class, .is-scrolled,
-     on #header — the materials, the ink and everything else a
-     page might want to vary hang off it in pages.css.
+     The one place the header's state is decided. It has three:
+     clear over the page's opening, glass once the opening's words
+     reach the bar, and dark glass while a dark section is under
+     it. That is two classes on #header — .is-scrolled and
+     .is-over-dark — and the materials, the ink and everything else
+     a page might want to vary hang off them in pages.css.
 
      This replaced two sentinels that toggled three classes
      (is-first-section, is-stuck and is-atop) at two different
@@ -1491,52 +1711,252 @@
      the two. Here there is one reading of the scroll position,
      taken once a frame, against one boundary.
 
-     The boundary is where the opening's lower edge meets the
-     bottom of the bar: the moment the page's own content starts
-     passing under it. There is a band either side of it rather
-     than a line — the header turns to glass a little below the
-     boundary and only clears again a little above it — so a
+     Clear or glass. The boundary used to be the opening's lower
+     edge, which left the clear bar lying across every line of
+     the opening's own copy as it scrolled up — the dates on
+     Admissions, the headline on the home page, an article's lead
+     picture. Clear is for the picture, not for the words, so the
+     boundary is now the opening's copy: the moment its first line
+     comes up to the bar, the bar turns to glass. The copy is
+     found, not declared — every text-bearing element in the
+     opening — so a new hero needs nothing added. A page whose
+     words are not the right line can mark its own with
+     data-header-clear-until. The opening's lower edge still
+     applies to an opening with no words at all.
+
+     The copy is read where it is drawn, once a frame and only
+     while the opening is still under the bar, because a sticky
+     stage holds its headline still while the page scrolls past
+     and a measured position would say it had long since gone.
+
+     There is a band rather than a line — the header clears again
+     only a little above the point where it turned to glass — so a
      scroll that comes to rest on the line, or a trackpad that
      jitters across it, cannot make it flicker.
+
+     Dark glass. The cream glass is laid over the page at .64, so
+     over a near-black section it turns a muddy grey and the dark
+     lettering sinks into it. While a dark section is under the
+     bar the glass takes the dark capsule Captures already uses.
+     Which section is under the bar is reported by one
+     IntersectionObserver whose root is a one-pixel line through
+     the bar, and whether it is dark is read from the section
+     itself: data-header-theme="dark" or "light" where a page says
+     so, otherwise its own background, or, where it has none, the
+     light lettering it was designed to carry.
+
+     Past the opening the bar also gets out of the way. That is
+     decided here too, from the same reading of the scroll, but
+     against the opening's lower edge rather than its copy — the
+     bar turns to glass while the opening is still passing under
+     it, and stays until the opening has gone. It resolves to one
+     of four modes, written to data-nav on #header:
+
+       hero        over the opening. The bar is simply there.
+       collapsed   past it. The bar has slid up out of the window
+                   and .site-nav-handle, a hairline of gold, holds
+                   its place. .is-collapsed is the one CSS switch.
+       revealed    past it, brought back: by scrolling up, or by
+                   the pointer reaching the top edge of the window.
+       held        past it and in use — the menu or the Enquire
+                   panel is open, a control has keyboard focus, or
+                   the pointer is on the bar or at the top edge.
+                   Nothing collapses the bar while it is held.
+
+     Direction is counted, not sampled: the scroll has to travel
+     REVEAL_UP pixels upward to bring the bar back and HIDE_DOWN
+     downward to send it away again, and any turn the other way
+     starts the count afresh, so jitter reaches neither. A bar the
+     pointer brought back waits LINGER after the pointer has gone
+     before it goes too; one brought back by scrolling or by use
+     stays until the page is scrolled on down.
      ========================================================== */
   function headerState() {
     var header = $("#header");
-    if (!header) return;
+    if (!header) return null;
     var BAND = 24;
+    // How far below the bar the copy is when the glass starts to come in,
+    // so the change has begun before the first line reaches it.
+    var LEAD = 12;
+    var REVEAL_UP = 48, HIDE_DOWN = 96;
+    var EDGE = 28, EDGE_DWELL = 90, LINGER = 800;
 
     var main = $("#main");
     // Ignore non-visual utility nodes (the gallery's canvas controls, for
-    // example) and use the first actual section on every page. Blog entries
-    // wrap the full story in one article, so their opening ends with the
-    // lead image rather than at the end of the story.
+    // example) and use the first actual section on every page. An article
+    // wraps the whole story in one element; its opening is the title block
+    // alone, so the bar has turned to glass before the lead picture, which
+    // follows the title, reaches it.
     var opening = main && main.querySelector(":scope > section, :scope > article");
     if (!opening && main) opening = main.firstElementChild;
     if (opening && opening.matches("article.art")) {
-      opening = $(".art__hero", opening) || $(".art__head", opening) || opening;
+      opening = $(".art__head", opening) || opening;
     }
 
-    var edge = 0, scrolled = null, queued = false;
+    var bar = header.querySelector(".wrap") || header;
+    var barTop = 0, barBottom = 0, openEdge = 80, maxY = 0;
+    var copy = [];
+    var scrolled = null, dark = false, darkShown = null, queued = false;
+    // Past the opening's lower edge, where the bar collapses.
+    var past = null, lastY = 0, travel = 0;
+    // What brought a collapsed bar back: "scroll", "pointer" or "use".
+    var revealed = false, source = null, mode = null;
+    var holds = { menu: false, enquire: false, focus: false, pointer: false, edge: false };
+    var near = false, dwellTimer = 0, lingerTimer = 0;
+
+    // The opening's copy: every element that draws words of its own, or the
+    // element(s) a page has marked. Gathered once per layout, never per frame.
+    // Anything fixed to the window inside the opening never passes under the
+    // bar, so it is left out.
+    function collect() {
+      copy = [];
+      if (!opening) return;
+      var marked = $$("[data-header-clear-until]", opening);
+      if (opening.hasAttribute("data-header-clear-until")) marked.unshift(opening);
+      if (marked.length) { copy = marked; return; }
+      var seen = [];
+      var walker = document.createTreeWalker(opening, NodeFilter.SHOW_TEXT, null);
+      var node;
+      while ((node = walker.nextNode()) && copy.length < 60) {
+        if (!/\S/.test(node.nodeValue)) continue;
+        var el = node.parentElement;
+        if (!el || seen.indexOf(el) !== -1) continue;
+        seen.push(el);
+        if (el.closest("script, style, noscript, template, dialog, [hidden]")) continue;
+        var fixed = false;
+        for (var n = el; n && n !== opening.parentElement; n = n.parentElement) {
+          if (getComputedStyle(n).position === "fixed") { fixed = true; break; }
+        }
+        if (!fixed) copy.push(el);
+      }
+    }
+
+    // The top of the highest line of copy on screen, or null when none is
+    // drawn (hidden at this width, or the opening has no words).
+    function copyTop() {
+      var top = null;
+      // A headline split into words or letters after it was gathered has
+      // been replaced; gather again rather than read boxes that are gone.
+      if (copy.length && !copy[0].isConnected) collect();
+      for (var i = 0; i < copy.length; i++) {
+        var r = copy[i].getBoundingClientRect();
+        if (r.width < 2 || r.height < 2) continue;
+        if (top === null || r.top < top) top = r.top;
+      }
+      return top;
+    }
 
     // Measured, not read every frame: it moves only when the layout does.
+    // Offsets rather than the bar's box, which is somewhere above the
+    // window while the header is collapsed.
     function measure() {
-      var bar = header.querySelector(".wrap") || header;
-      var barBottom = bar.getBoundingClientRect().bottom;
-      if (!opening) { edge = 80; return; }
+      maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      barTop = header.offsetTop + bar.offsetTop;
+      barBottom = barTop + bar.offsetHeight;
+      if (!opening) { openEdge = 80; return; }
       // A pinned opening is measured by its spacer, which holds its place
       // in the document while the section itself is fixed to the screen.
       var box = opening.parentElement && opening.parentElement.classList.contains("pin-spacer")
         ? opening.parentElement : opening;
       var bottom = box.getBoundingClientRect().bottom + (window.scrollY || window.pageYOffset || 0);
-      edge = Math.max(bottom - barBottom, 80);
+      openEdge = Math.max(bottom - barBottom, 80);
+    }
+
+    function isHeld() {
+      for (var k in holds) if (holds[k]) return true;
+      return false;
+    }
+
+    function render() {
+      var next = !past ? "hero" : isHeld() ? "held" : revealed ? "revealed" : "collapsed";
+      // Kept on as the bar arrives, so the line fades out thickened
+      // rather than shrinking back first.
+      header.classList.toggle("is-near", near && next !== "hero");
+      if (next === mode) return;
+      mode = next;
+      header.setAttribute("data-nav", next);
+      header.classList.toggle("is-collapsed", next === "collapsed");
+    }
+
+    function linger() {
+      window.clearTimeout(lingerTimer);
+      lingerTimer = window.setTimeout(function () {
+        if (isHeld() || source !== "pointer") return;
+        revealed = false;
+        render();
+      }, LINGER);
+    }
+
+    function hold(name, on) {
+      on = !!on;
+      if (holds[name] === on) return;
+      var was = isHeld();
+      holds[name] = on;
+      if (on) {
+        window.clearTimeout(lingerTimer);
+        travel = 0;
+        if (past) {
+          // The menu and keyboard focus are deliberate, and the bar they
+          // brought stays. Enquire opens on hover for a mouse, so it counts
+          // as the pointer's; on a touch screen the bar is already out.
+          if (name === "menu" || name === "focus") source = "use";
+          else if (!revealed) source = "pointer";
+          revealed = true;
+        }
+      } else if (was && !isHeld() && past) {
+        // A bar that was only ever showing because it was held — the
+        // opening scrolled away under a resting pointer — is let go as
+        // if the pointer had brought it: after a pause, not at once.
+        if (!revealed) { revealed = true; source = "pointer"; }
+        if (source === "pointer") linger();
+      }
+      render();
     }
 
     function apply() {
       queued = false;
       var y = window.scrollY || window.pageYOffset || 0;
-      var next = scrolled ? y > edge - BAND : y > edge + BAND;
-      if (next === scrolled) return;
-      scrolled = next;
-      header.classList.toggle("is-scrolled", next);
+      // The depth at which the bar turns to glass: the opening's lower edge,
+      // or sooner, the depth at which its first line of copy reaches the bar.
+      var edge = openEdge;
+      if (y < openEdge + BAND) {
+        var top = copyTop();
+        if (top !== null) edge = Math.min(edge, Math.max(y + top - barBottom - LEAD, 1));
+      }
+      var next = scrolled ? y > Math.max(edge - BAND, 0) : y > edge;
+      if (next !== scrolled) {
+        scrolled = next;
+        header.classList.toggle("is-scrolled", next);
+      }
+      if (dark !== darkShown) {
+        darkShown = dark;
+        header.classList.toggle("is-over-dark", dark);
+      }
+
+      // Collapse. Clamped, so an overscroll bounce at either end is not a
+      // direction.
+      var cy = Math.min(Math.max(y, 0), maxY || Infinity);
+      var dy = cy - lastY;
+      lastY = cy;
+      var beyond = past ? cy > openEdge - BAND : cy > openEdge + BAND;
+      if (beyond !== past) {
+        past = beyond;
+        // Crossing the boundary either way starts over: past it the bar
+        // begins collapsed, over the opening it is simply there.
+        revealed = false; source = null; travel = 0;
+        window.clearTimeout(lingerTimer);
+      } else if (past && dy) {
+        travel = (dy > 0) === (travel > 0) ? travel + dy : dy;
+        if (isHeld()) travel = 0;
+        else if (travel <= -REVEAL_UP && source !== "scroll" && source !== "use") {
+          revealed = true; source = "scroll";
+          window.clearTimeout(lingerTimer);
+        } else if (travel >= HIDE_DOWN && revealed) {
+          revealed = false; source = null;
+          window.clearTimeout(lingerTimer);
+        }
+      }
+      render();
     }
     function queue() {
       if (queued) return;
@@ -1545,6 +1965,76 @@
     }
     function remeasure() { measure(); queue(); }
 
+    /* ---- Which section is under the bar, and is it dark ---- */
+    function luminance(rgb) {
+      var c = rgb.match(/[\d.]+/g);
+      if (!c || c.length < 3) return null;
+      var a = c.length > 3 ? +c[3] : 1;
+      function lin(v) { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }
+      return { l: .2126 * lin(+c[0]) + .7152 * lin(+c[1]) + .0722 * lin(+c[2]), a: a };
+    }
+    // An element's own verdict, or null if it leaves it to what is behind it.
+    function themeOf(el) {
+      var said = el.getAttribute("data-header-theme");
+      if (said === "dark" || said === "light") return said;
+      var cs = getComputedStyle(el);
+      var bg = luminance(cs.backgroundColor);
+      if (bg && bg.a >= .5) return bg.l < .18 ? "dark" : "light";
+      // No ground of its own. A section set in light lettering was drawn
+      // to sit on something dark: a photograph, a film, the page behind.
+      if (el.tagName === "SECTION") {
+        var ink = luminance(cs.color);
+        if (ink && ink.l > .6) return "dark";
+      }
+      return null;
+    }
+    function resolve(el) {
+      for (var n = el; n && n !== document.documentElement; n = n.parentElement) {
+        var t = themeOf(n);
+        if (t) return t;
+      }
+      return "light";
+    }
+
+    var themeIO = null, themeTargets = [], under = [];
+    function onThemes(entries) {
+      entries.forEach(function (entry) {
+        var i = under.indexOf(entry.target);
+        if (entry.isIntersecting && i === -1) under.push(entry.target);
+        else if (!entry.isIntersecting && i !== -1) under.splice(i, 1);
+      });
+      // The innermost sections on the line decide; where two sit side by
+      // side and disagree, dark wins — the dark capsule holds its contrast
+      // over paper too, the cream one does not over black.
+      var next = false;
+      under.forEach(function (el) {
+        for (var k = 0; k < under.length; k++) {
+          if (under[k] !== el && el.contains(under[k])) return;
+        }
+        if (resolve(el) === "dark") next = true;
+      });
+      if (next !== dark) { dark = next; queue(); }
+    }
+    function watchThemes() {
+      if (typeof window.IntersectionObserver === "undefined" || !main) return;
+      if (themeIO) themeIO.disconnect();
+      under = [];
+      // The grounds a page is built from: its sections and chapter-sized
+      // articles, as wide as most of the window. A card in a grid is not a
+      // ground, whatever its colour; a page that says so is always heard.
+      var wide = window.innerWidth * .6;
+      themeTargets = $$("main section, main article, main > *, [data-header-theme]").filter(function (el) {
+        if (el.hasAttribute("data-header-theme")) return true;
+        return !el.matches("script, style, template, dialog, .jump") &&
+          el.getBoundingClientRect().width >= wide;
+      });
+      var line = Math.round((barTop + barBottom) / 2);
+      themeIO = new IntersectionObserver(onThemes, {
+        rootMargin: -line + "px 0px " + -(window.innerHeight - line - 1) + "px 0px"
+      });
+      themeTargets.forEach(function (el) { themeIO.observe(el); });
+    }
+
     // The state the page opens in is set without a transition, so a page
     // refreshed halfway down (or restored there by the browser) shows the
     // glass header at once rather than watching the clear one become it.
@@ -1552,10 +2042,14 @@
     // the scroll position, then two frames more so the settled state has
     // painted before transitions come back.
     header.classList.add("is-settling");
+    collect();
     measure();
     apply();
+    watchThemes();
     function settle() {
+      collect();
       remeasure();
+      watchThemes();
       requestAnimationFrame(function () {
         apply();
         requestAnimationFrame(function () { header.classList.remove("is-settling"); });
@@ -1567,7 +2061,14 @@
     // One reader of the scroll position. Lenis moves the window itself, so
     // the native event fires whether or not smooth scrolling is on.
     window.addEventListener("scroll", queue, { passive: true });
-    window.addEventListener("resize", remeasure, { passive: true });
+    var resizing = 0;
+    window.addEventListener("resize", function () {
+      remeasure();
+      // The line through the bar is in pixels, so the observer is rebuilt
+      // for the new window — once the resize has finished, not per event.
+      window.clearTimeout(resizing);
+      resizing = window.setTimeout(function () { collect(); watchThemes(); queue(); }, 150);
+    }, { passive: true });
     // A trigger rather than ScrollTrigger.addEventListener("refresh"). With
     // only the listener, a page reloaded halfway down came back near the top:
     // on pages that create no trigger of their own at boot, the browser's
@@ -1575,6 +2076,49 @@
     // header's old sentinels created one by accident; this does it on purpose.
     if (hasST) ScrollTrigger.create({ onRefresh: remeasure });
     if ("ResizeObserver" in window) new ResizeObserver(remeasure).observe(document.body);
+
+    // The pointer on the bar holds it. Touch is left out: a tap reports
+    // an enter and a leave of its own, and holds nothing.
+    bar.addEventListener("pointerenter", function (e) {
+      if (e.pointerType !== "touch") hold("pointer", true);
+    });
+    bar.addEventListener("pointerleave", function (e) {
+      if (e.pointerType !== "touch") hold("pointer", false);
+    });
+
+    // The top edge of the window. Reaching it lifts the handle at once
+    // and brings the bar after a short dwell, so a pointer merely on its
+    // way out of the window to the browser's tabs brings nothing.
+    function setNear(on) {
+      if (on === near) return;
+      near = on;
+      window.clearTimeout(dwellTimer);
+      if (near) dwellTimer = window.setTimeout(function () { hold("edge", true); }, EDGE_DWELL);
+      else hold("edge", false);
+      render();
+    }
+    document.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "touch") setNear(e.clientY <= EDGE);
+    }, { passive: true });
+    document.addEventListener("mouseout", function (e) {
+      if (!e.relatedTarget) { setNear(false); hold("pointer", false); }
+    });
+
+    // Keyboard focus anywhere in the header brings the bar and keeps it.
+    // Only keyboard focus: a mouse click also focuses the button it lands
+    // on, and that focus would otherwise hold the bar long after the
+    // pointer had left it.
+    header.addEventListener("focusin", function (e) {
+      var keyboard = true;
+      try { keyboard = e.target.matches(":focus-visible"); } catch (err) { /* older browser */ }
+      if (keyboard) hold("focus", true);
+    });
+    header.addEventListener("focusout", function (e) {
+      if (!header.contains(e.relatedTarget)) hold("focus", false);
+    });
+
+    // The menu and the Enquire panel report themselves through this.
+    return { hold: hold };
   }
 
   /* ==========================================================
@@ -1582,6 +2126,8 @@
      ========================================================== */
   var drawer = $("#drawer"), burger = $("#burger"), drawerClose = $("#drawerClose");
   var drawerCloseTimer = null, drawerInerted = [];
+  var navState = null;
+  function holdHeader(name, on) { if (navState) navState.hold(name, on); }
 
   function isolateDrawer(open) {
     if (open) {
@@ -1600,6 +2146,7 @@
     drawer.classList.remove("is-open");
     document.body.classList.add("menu-closing");
     document.body.classList.remove("menu-open");
+    holdHeader("menu", false);
     // The page intro may still own the scroll lock underneath the menu.
     if (!$("#curtain")) {
       document.body.classList.remove("is-locked");
@@ -1618,7 +2165,7 @@
   }
 
   (function chrome() {
-    headerState();
+    navState = headerState();
     if (!burger || !drawer || !drawerClose) return;
     var groupTabs = $$(".drawer__group", drawer);
     var groupPanels = $$(".drawer__panel", drawer);
@@ -1684,6 +2231,7 @@
       burger.setAttribute("aria-expanded", "true");
       burger.setAttribute("aria-label", "Close menu");
       document.body.classList.add("is-locked", "menu-open");
+      holdHeader("menu", true);
       if (lenis) lenis.stop();
       isolateDrawer(true);
       requestAnimationFrame(function () {
@@ -1895,6 +2443,7 @@
       open = next;
       wrap.classList.toggle("is-open", open);
       btn.setAttribute("aria-expanded", open ? "true" : "false");
+      holdHeader("enquire", open);
     }
 
     if (fine) {
@@ -2221,6 +2770,7 @@
   function start() {
     footerFit();
     backToTop();
+    floatingControls();
     enquirePanel();
     filmLightbox();
     glimpses();

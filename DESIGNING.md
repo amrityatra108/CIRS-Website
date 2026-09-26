@@ -154,8 +154,8 @@ lettering that actually sits at 8.17:1.
 
 ## 6. Deliberate, not oversights
 
-Three things look like mistakes and are not. Previous sessions have tried to
-"fix" all three.
+Four things look like mistakes and are not. Previous sessions have tried to
+"fix" the first three.
 
 - **`assets/source/` is a 171 MB photograph library that is never deployed.**
   `tools/stage-deploy.py` copies only the assets a page actually references —
@@ -169,6 +169,13 @@ Three things look like mistakes and are not. Previous sessions have tried to
   parents is worse than an obvious gap.
 - **`netlify.toml` and `vercel.json` both exist** during the move to Vercel and
   must be changed together until Netlify is retired. See `HOSTING.md`.
+- **Every opening film has a second, smaller file for phones** — `<name>-m.mp4`
+  beside `<name>.mp4` in `assets/video/`, cut by `tools/make-films.py`. The
+  scrubbed films keep every frame a keyframe in both (that is what makes the
+  scrubbing smooth; see `assets/js/filmintro.js`). If you replace a film, re-run
+  `python3 tools/make-films.py <name>` or phones keep playing the old one. The
+  same goes for the images `tools/make-media.py` cuts from masters in
+  `assets/source/` (Founder, Alumni, Blog cards): edit the master, re-run the tool.
 
 ---
 

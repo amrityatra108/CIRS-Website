@@ -7,13 +7,19 @@ exception and are covered in the next section.
 
 For every change, in this order:
 
-1. **Do the work on the branch** `claude/cool-dijkstra-7ycja1`, never directly on `main`.
+1. **Do the work on a branch of its own**, named for the change, never directly on `main`.
 2. **Run the checks** — see below. Do not offer work that has not passed them.
 3. **Ask before merging to `main`.** The owner confirms each merge; do not merge unprompted.
 4. **After merging, deploy and hand back a Vercel link** they can share for review.
 
 Steps 3 and 4 are the parts most easily forgotten. A change that is committed but not merged,
 or merged but not deployed, is not finished from the owner's point of view.
+
+There is no standing branch to work on, and there should not be one. There was, and it went
+stale: it sat hundreds of commits behind `main` while the work carried on around it, and it
+still held personal data that `main` had deliberately withdrawn. A branch that outlives the
+change it was made for stops being a workspace and becomes a second, older copy of the site —
+one that looks mergeable and is not. Branch for the change, merge it, let it go.
 
 ## Design sessions
 
@@ -51,6 +57,19 @@ every YouTube link. `tools/make-theatre.py` cuts the images into `assets/img/the
 school's Drive (the originals are not in the repository). A photograph is attributed to a house
 only by its Drive folder and the school's own YouTube titles, never by costume colour.
 
+Leadership's people, portrait crops and six messages are data in `tools/leadership.py`;
+`tools/make-leadership.py` cuts the portraits. The messages are the school's published text word
+for word — do not copy-edit them. The page keeps native scroll (no Lenis) so its `#msg-…` links
+are real history entries.
+
+School History is the CIRS archive, and every date on it is written from `tools/history.py`:
+each event carries its source, and anything unconfirmed is a `note` there (never published) or
+held back in `UNRESOLVED`. `python3 tools/history.py` prints the report. `tools/make-history.py`
+cuts its exhibits into `assets/img/history/` from the school's own PDFs and Drive photographs;
+its sheet and script are `assets/css/history.css` and `assets/js/history.js`. Do not add a dated
+claim to that page without a source for it, and do not attribute a photograph to an event its
+own record does not support.
+
 ## Checks, before every push
 
 ```sh
@@ -75,6 +94,11 @@ or the honeycomb. It needs playwright-core, which is not in the repository: poin
   placeholder with invented content — particularly not testimonials.
 - `netlify.toml` and `vercel.json` both exist during the move to Vercel and must be changed
   together until Netlify is retired. See HOSTING.md.
+- Every opening film has a phone cut, `assets/video/<name>-m.mp4`, from `tools/make-films.py`,
+  chosen by a media-aware `<source>`. Replace a film and re-run the tool. The scrubbed films are
+  all-intra in both cuts; never re-encode one with a longer keyframe interval. Images that
+  `tools/make-media.py` derives (Founder textures and layers, Alumni, Blog card sizes) have their
+  masters in `assets/source/`, which is why those PNGs are not in `assets/img`.
 
 ## What is not verifiable from a sandbox session
 

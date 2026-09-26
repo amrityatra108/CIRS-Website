@@ -65,6 +65,22 @@ SLOTS = {
 }
 
 
+# Supplied with the sets above and kept, but shown nowhere. The page used to
+# carry them in an inert <template>, which did nothing but make
+# stage-deploy.py upload every one of them. Naming them here keeps them in
+# the repository, and out of the deploy, until a slot wants one.
+RETAINED = [
+    # The other views of the Amrit Vahini; the journey uses only its side.
+    "assets/img/founder/amrit-vahini/front-three-quarter.png",
+    "assets/img/founder/amrit-vahini/overhead-turn.png",
+    "assets/img/founder/amrit-vahini/rear-three-quarter.png",
+    # Archive variants from the supplied set that no slot uses.
+    "assets/img/founder/archive/p46-hero.webp",
+    "assets/img/founder/archive/p53-portrait.webp",
+    "assets/img/founder/archive/r664-early.webp",
+]
+
+
 def path(slot):
     """The deployable path for a slot, or None when the file is not here."""
     name = SLOTS[slot][0]
@@ -72,6 +88,30 @@ def path(slot):
         return None
     rel = os.path.normpath(os.path.join("assets/img/founder", name)).replace(os.sep, "/")
     return rel if os.path.exists(os.path.join(ROOT, rel)) else None
+
+
+# The width a figure is drawn at, where it is not the usual column
+# ("(max-width: 899px) 92vw, 44vw", in tools/build-site.py), measured.
+SIZES = {
+    "children": "(max-width: 899px) 92vw, (max-width: 1100px) 68vw, 62vw",
+}
+# Drawn cover-fitted far wider than its column at every size, so a smaller
+# cut would never be the right one.
+UNCUT = {"students"}
+
+IMAGES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "founder-images.json")
+
+
+def size(slot):
+    """(width, height, smaller cut or None) for a slot's file, from
+    tools/founder-images.json (tools/make-media.py), or None if not listed."""
+    import json
+    try:
+        with open(IMAGES, encoding="utf-8") as f:
+            info = json.load(f).get(SLOTS[slot][0])
+    except FileNotFoundError:
+        return None
+    return (info["w"], info["h"], info.get("small")) if info else None
 
 
 def missing():

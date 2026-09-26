@@ -1,253 +1,369 @@
-<section class="section curriculum-pathways" id="pathways">
-  <div class="wrap">
-    <header class="curriculum-pathways__head">
-      <p class="marker"><span class="sc">Compare pathways</span></p>
-      <h2 class="serif h2" data-split>Two routes through <em>the senior years.</em></h2>
-      <p class="lead">In Grades XI and XII, families can explore CBSE and the IB Diploma at
-        CIRS. Compare how each programme is organised, then request the current subject and
-        entry information before making a choice.</p>
-    </header>
+<!-- Curriculum: "a path through learning". Each section has one job: the
+     opening orients, the route shows the grades, the table compares the two
+     senior pathways, the directory lists subjects, and the values section
+     places study inside school life. The close is the shared closing scene,
+     given this page's own words in tools/build-site.py.
 
-    <div class="curriculum-pathways__grid">
-      <article class="curriculum-pathway" aria-labelledby="curriculum-cbse-title">
-        <p class="curriculum-pathway__name">CBSE</p>
-        <h3 class="serif h3" id="curriculum-cbse-title">A continuing national pathway</h3>
-        <dl>
-          <div><dt>Years at CIRS</dt><dd>Grades V to XII</dd></div>
-          <div><dt>Programme shape</dt><dd>A broad foundation through Grade X, then Engineering, Medicine or Management in the senior years.</dd></div>
-          <div><dt>Assessment</dt><dd>Board examinations in Grades X and XII.</dd></div>
-          <div><dt>Current subjects</dt><dd>Ask the Academic Office for the latest choices and permitted combinations.</dd></div>
-        </dl>
-        <a class="curriculum-pathway__link" href="#cbse">
-          <span>Explore CBSE on this page</span><span aria-hidden="true">&darr;</span>
-        </a>
-      </article>
-
-      <article class="curriculum-pathway" aria-labelledby="curriculum-ib-title">
-        <p class="curriculum-pathway__name">IB Diploma</p>
-        <h3 class="serif h3" id="curriculum-ib-title">A two-year diploma</h3>
-        <dl>
-          <div><dt>Years at CIRS</dt><dd>Grades XI and XII</dd></div>
-          <div><dt>Programme shape</dt><dd>Six subjects, including two languages and Mathematics, alongside the Diploma core.</dd></div>
-          <div><dt>Assessment</dt><dd>Subject assessments and the Diploma core form the final award.</dd></div>
-          <div><dt>Current subjects</dt><dd>Ask the IB Coordinator for the latest subjects, levels and prerequisites.</dd></div>
-        </dl>
-        <a class="curriculum-pathway__link" href="curriculum/ib-diploma.html">
-          <span>Read the IB Diploma programme</span><span aria-hidden="true">&nearr;</span>
-        </a>
-      </article>
+     Content sources, and what is still open, are recorded in
+     docs/curriculum-content.md. Nothing here should state more than that
+     file can support. -->
+<header class="cur-open" id="top">
+  <div class="wrap cur-open__grid">
+    <div class="cur-open__text">
+      <p class="cur-eyebrow">Curriculum &middot; Grades V to XII</p>
+      <h1 class="cur-open__title">A foundation. <em>Then a direction.</em></h1>
+      <p class="cur-open__lead">Study through the CBSE pathway from Grade V. In Grades XI and
+        XII, continue with CBSE or choose the IB Diploma Programme.</p>
+      <p class="cur-open__actions">
+        <a class="btn btn--primary btn--lg" href="#pathways">Compare CBSE and IB</a>
+        <a class="cur-link" href="#subjects">Explore subjects</a>
+      </p>
     </div>
-    <p class="curriculum-pathways__note">Subject availability, combinations and entry
-      requirements may vary by intake. <a href="mailto:info@cirschool.org?subject=Current%20Grade%20XI%20pathway%20choices">Ask the school for the current details</a>.</p>
+    <figure class="cur-open__figure">
+      <div class="cur-open__frame">
+        <img src="assets/img/junior-school.jpg"
+             alt="Junior School students gathered round a laptop and the wheeled robot they are building"
+             width="1200" height="1500" fetchpriority="high" decoding="async">
+      </div>
+      <figcaption>Junior School students building a wheeled robot.</figcaption>
+    </figure>
   </div>
-</section>
+  <nav class="cur-index" aria-label="On this page">
+    <div class="wrap">
+      <div class="cur-index__inner">
+        <p class="cur-index__label" aria-hidden="true">On this page</p>
+        <ol class="cur-index__list">
+          <li><a href="#journey">Grade journey</a></li>
+          <li><a href="#pathways">Compare pathways</a></li>
+          <li><a href="#subjects">Subjects</a></li>
+          <li><a href="#beyond">School life</a></li>
+        </ol>
+      </div>
+    </div>
+  </nav>
+</header>
 
-<section class="section curriculum-journey" id="journey">
+<section class="cur-sec cur-journey" id="journey" aria-labelledby="journey-title">
   <div class="wrap">
-    <header class="curriculum-journey__head">
-      <p class="marker"><span class="sc">Academic journey</span></p>
-      <h2 class="serif h2" data-split>Learning changes shape <em>as students grow.</em></h2>
-      <p class="lead">Junior School covers Grades V to VIII; Senior School begins in
-        Grade IX. From Grade XI, students choose between CBSE and the IB Diploma.</p>
-    </header>
-
-    <ol class="curriculum-journey__rail">
-      <li>
-        <p class="curriculum-journey__years">V&ndash;VIII</p>
-        <div>
-          <p class="curriculum-journey__stage">Junior School</p>
-          <h3 class="serif h3">A broad beginning</h3>
-          <p>From Grades V to VIII, students study Science, Mathematics, English, two
-            other Indian languages and AI alongside the wider Junior School experience.</p>
-        </div>
+    <div class="cur-head">
+      <p class="cur-eyebrow">Grade journey</p>
+      <h2 class="cur-h2" id="journey-title">One route to Grade&nbsp;X, <em>two beyond it.</em></h2>
+    </div>
+    <ol class="cur-route">
+      <li class="cur-route__stage">
+        <p class="cur-route__years">Grades V&ndash;VIII</p>
+        <h3 class="cur-route__name">The foundation</h3>
+        <span class="cur-route__rail" aria-hidden="true"></span>
+        <p class="cur-route__text">CBSE Science, Mathematics, English, two other Indian
+          languages and AI, in the Junior School.</p>
       </li>
-      <li>
-        <p class="curriculum-journey__years">IX&ndash;X</p>
-        <div>
-          <p class="curriculum-journey__stage">Senior School</p>
-          <h3 class="serif h3">Towards the first board year</h3>
-          <p>CBSE continues through Grade X, when students sit the first of the school&rsquo;s
-            two CBSE board examinations.</p>
-        </div>
+      <li class="cur-route__stage">
+        <p class="cur-route__years">Grades IX&ndash;X</p>
+        <h3 class="cur-route__name">The first Board year</h3>
+        <span class="cur-route__rail" aria-hidden="true"></span>
+        <p class="cur-route__text">The same broad course, carried to the CBSE Board
+          examination at the end of Grade X.</p>
       </li>
-      <li>
-        <p class="curriculum-journey__years">XI&ndash;XII</p>
-        <div>
-          <p class="curriculum-journey__stage">Final two years</p>
-          <h3 class="serif h3">A choice of pathway</h3>
-          <p>Students continue with CBSE or take the two-year IB Diploma Programme on the
-            same residential campus.</p>
-          <div class="curriculum-journey__routes">
-            <a href="#cbse">Explore CBSE</a>
-            <a href="#ib">Explore the IB Diploma</a>
-          </div>
-        </div>
+      <li class="cur-route__stage cur-route__stage--fork">
+        <p class="cur-route__years">Grades XI&ndash;XII</p>
+        <h3 class="cur-route__name">A choice of pathway</h3>
+        <ul class="cur-route__branches">
+          <li>
+            <a href="#cbse">
+              <span class="cur-route__seg" aria-hidden="true"></span>
+              <span class="cur-route__branch"><b>CBSE</b> a senior stream</span>
+            </a>
+          </li>
+          <li>
+            <a href="#ib">
+              <span class="cur-route__seg" aria-hidden="true"></span>
+              <span class="cur-route__branch"><b>IB Diploma</b> six subjects and the core</span>
+            </a>
+          </li>
+        </ul>
       </li>
     </ol>
   </div>
 </section>
 
-<section class="section curriculum-cbse" id="cbse">
+<section class="cur-sec cur-compare" id="pathways" aria-labelledby="pathways-title">
   <div class="wrap">
-    <header class="curriculum-cbse__head">
-      <p class="marker"><span class="sc">CBSE</span></p>
-      <h2 class="serif h2" data-split>The national pathway, <em>Grade V to XII.</em></h2>
-      <p class="lead">CIRS is affiliated to the Central Board of Secondary Education,
-        New Delhi. English is the medium of instruction.</p>
-    </header>
-
-    <figure class="curriculum-cbse__image">
-      <img src="assets/img/academic-block.jpg"
-           alt="The academic block at CIRS, with classrooms around the lawn"
-           width="1400" height="325" loading="lazy" decoding="async">
-    </figure>
-
-    <div class="curriculum-cbse__body">
-      <p class="curriculum-cbse__index" aria-hidden="true">X <span>/</span> XII</p>
+    <div class="cur-head cur-head--split">
       <div>
-        <h3 class="serif h3">Two board milestones</h3>
-        <p class="copy">Students sit CBSE board examinations in Grades X and XII. From
-          Grade XI, the school describes Engineering, Medicine and Management as its
-          three senior streams. Families should confirm current subjects and combinations.</p>
-        <div class="curriculum-confirmation" role="note">
-          <strong>School confirmation needed</strong>
-          <p>Confirm the subject offering by grade, permitted stream combinations and
-            current CBSE affiliation particulars with the school.</p>
-          <a href="mailto:info@cirschool.org?subject=Current%20CBSE%20subject%20choices">Ask about CBSE subjects</a>
+        <p class="cur-eyebrow">Compare pathways</p>
+        <h2 class="cur-h2" id="pathways-title">Two pathways for <em>Grades XI and XII.</em></h2>
+      </div>
+      <p class="cur-intro">Every student follows the CBSE curriculum from Grade V to Grade X and
+        sits the CBSE Board examination at the end of Grade X. The choice below covers the final
+        two years only. Neither route is better in general: the right one depends on the subjects
+        a student wants and the next step they have in mind.</p>
+    </div>
+
+    <table class="cur-compare__table">
+      <caption class="sr-only">CBSE and the IB Diploma Programme compared for Grades XI and XII</caption>
+      <thead>
+        <tr>
+          <td></td>
+          <th scope="col">CBSE <span>Grades XI&ndash;XII</span></th>
+          <th scope="col">IB Diploma Programme <span>Grades XI&ndash;XII</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">How it is built</th>
+          <td><span class="cur-compare__prog">CBSE</span>A stream (Engineering, Medicine or
+            Management), each built on English and a set of core subjects, studied for two
+            years.</td>
+          <td><span class="cur-compare__prog">IB Diploma</span>Six subjects from six groups,
+            alongside the Diploma core: Theory of Knowledge, the Extended Essay and Creativity,
+            Activity, Service.</td>
+        </tr>
+        <tr>
+          <th scope="row">Assessment</th>
+          <td><span class="cur-compare__prog">CBSE</span>The CBSE Board examination at the end
+            of Grade XII.</td>
+          <td><span class="cur-compare__prog">IB Diploma</span>Examinations at the end of Grade
+            XII, with coursework assessed during the programme. Each subject is graded 1&ndash;7;
+            Theory of Knowledge and the Extended Essay add up to 3 points, for 45 in all.</td>
+        </tr>
+        <tr>
+          <th scope="row">Choosing subjects</th>
+          <td><span class="cur-compare__prog">CBSE</span>Choose a stream. The stream sets the
+            core subjects; electives are chosen alongside them.</td>
+          <td><span class="cur-compare__prog">IB Diploma</span>Choose one subject from each group,
+            three or four at Higher Level and the rest at Standard Level.</td>
+        </tr>
+        <tr>
+          <th scope="row">At CIRS</th>
+          <td><span class="cur-compare__prog">CBSE</span>Engineering, Medicine and Management
+            streams. Ask the school for this year&rsquo;s electives.</td>
+          <td><span class="cur-compare__prog">IB Diploma</span>Fifteen subjects across the six
+            groups. A combination runs when enough students choose it.</td>
+        </tr>
+        <tr>
+          <th scope="row">Subjects</th>
+          <td><span class="cur-compare__prog">CBSE</span><a class="cur-link" href="#cbse">CBSE senior streams</a></td>
+          <td><span class="cur-compare__prog">IB Diploma</span><a class="cur-link" href="#ib">IB Diploma subjects</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="cur-sec cur-subjects" id="subjects" aria-labelledby="subjects-title">
+  <div class="wrap">
+    <div class="cur-head cur-head--split">
+      <div>
+        <p class="cur-eyebrow">Subjects</p>
+        <h2 class="cur-h2" id="subjects-title">What students study <em>in Grades XI and XII.</em></h2>
+      </div>
+      <p class="cur-intro">For this year&rsquo;s subject combinations, levels and entry
+        requirements, write to the school at
+        <a class="cur-link" href="mailto:info@cirschool.org?subject=Grade%20XI%20and%20XII%20subject%20choices">info@cirschool.org</a>.</p>
+    </div>
+
+    <article class="cur-prog" id="cbse" aria-labelledby="cbse-title">
+      <div class="cur-prog__head">
+        <div class="cur-prog__intro">
+          <p class="cur-prog__tag">Central Board of Secondary Education, New Delhi</p>
+          <h3 class="cur-prog__title" id="cbse-title">CBSE senior streams</h3>
+          <dl class="cur-prog__facts">
+            <div><dt>Grades</dt><dd>V to XII at CIRS; streams in XI and XII</dd></div>
+            <div><dt>Structure</dt><dd>One stream: English, its core subjects and electives</dd></div>
+            <div><dt>Assessment</dt><dd>CBSE Board examinations in Grades X and XII</dd></div>
+          </dl>
+          <p class="cur-prog__more"><a class="cur-link" href="curriculum/cbse.html">Read the CBSE pathway in full</a></p>
         </div>
-        <a class="curriculum-inline-link" href="admissions.html#apply">See the admissions process</a>
+        <figure class="cur-prog__figure">
+          <img src="assets/img/academic-block.jpg"
+               srcset="assets/img/academic-block-800.jpg 800w, assets/img/academic-block.jpg 1392w"
+               sizes="(max-width: 900px) 92vw, (max-width: 1100px) 44vw, 570px"
+               alt="The academic block at CIRS: tiled roofs and a colonnade around a lawn"
+               width="1392" height="696" loading="lazy" decoding="async">
+          <figcaption>The academic block.</figcaption>
+        </figure>
       </div>
-    </div>
+
+      <table class="cur-streams">
+        <caption>Core subjects by stream, as the school last published them, for 2018&ndash;19</caption>
+        <thead>
+          <tr><th scope="col">Stream</th><th scope="col">Core subjects</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Engineering</th><td>English, Physics, Chemistry, Mathematics</td></tr>
+          <tr><th scope="row">Medicine</th><td>English, Physics, Chemistry, Biology</td></tr>
+          <tr><th scope="row">Management</th><td>English, Business Studies, Accountancy, Economics</td></tr>
+        </tbody>
+      </table>
+      <p class="cur-prog__ask">Electives and this year&rsquo;s combinations:
+        <a class="cur-link" href="mailto:info@cirschool.org?subject=Current%20CBSE%20Grade%20XI%20subjects">ask about CBSE subjects</a>.</p>
+    </article>
+
+    <article class="cur-prog" id="ib" aria-labelledby="ib-title">
+      <div class="cur-prog__head">
+        <div class="cur-prog__intro">
+          <p class="cur-prog__tag">International Baccalaureate</p>
+          <h3 class="cur-prog__title" id="ib-title">IB Diploma subjects</h3>
+          <dl class="cur-prog__facts">
+            <div><dt>Grades</dt><dd>XI and XII</dd></div>
+            <div><dt>Structure</dt><dd>Six subjects, three or four at Higher Level, and the Diploma core</dd></div>
+            <div><dt>Assessment</dt><dd>Examinations and coursework; 45 points in all</dd></div>
+          </dl>
+          <p class="cur-prog__more"><a class="cur-link" href="curriculum/ib-diploma.html">Read the IB Diploma guide in full</a></p>
+        </div>
+        <figure class="cur-prog__figure">
+          <img src="assets/img/results-ib-lab.webp"
+               alt="A student looks down a microscope at a laboratory bench, with others working behind her"
+               width="1800" height="1200" loading="lazy" decoding="async">
+          <figcaption>Microscope work in a school laboratory.</figcaption>
+        </figure>
+      </div>
+
+      <div class="cur-rules">
+        <div class="cur-rules__block">
+          <h4 class="cur-rules__title">The IB&rsquo;s rules, everywhere</h4>
+          <ul>
+            <li>Six subjects: one from each of Groups 1 to 5, and an arts subject or, in its place,
+              an additional language, individuals and societies or sciences subject.</li>
+            <li><b>HL</b> Higher Level goes further and deeper than <b>SL</b> Standard Level. Three
+              or four subjects are taken at HL; both levels are graded 1&ndash;7.</li>
+            <li>The core: Theory of Knowledge, the Extended Essay and Creativity, Activity,
+              Service.</li>
+          </ul>
+        </div>
+        <div class="cur-rules__block">
+          <h4 class="cur-rules__title">What CIRS offers</h4>
+          <ul>
+            <li>The subjects and levels below. A combination runs when enough students choose
+              it, so not every permitted combination is timetabled.</li>
+            <li>Ask the school which substitutions for an arts subject your timetable allows,
+              and about prerequisites.</li>
+          </ul>
+          <p><a class="cur-link" href="mailto:info@cirschool.org?subject=Current%20IB%20Diploma%20subjects%20and%20levels">Ask about IB subjects and levels</a></p>
+        </div>
+      </div>
+
+      <div class="cur-dir">
+        <table class="cur-group">
+          <caption><span>Group 1</span> Studies in language and literature</caption>
+          <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/" target="_blank" rel="noopener">English A<span class="sr-only">, opens the IB website in a new tab</span></a>
+                <small>Literature or language and literature: ask which course runs</small></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="cur-group">
+          <caption><span>Group 2</span> Language acquisition</caption>
+          <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener">Hindi B<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener">French B<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-ab-initio/" target="_blank" rel="noopener">French ab initio<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="cur-group">
+          <caption><span>Group 3</span> Individuals and societies</caption>
+          <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/business-and-management/" target="_blank" rel="noopener">Business Management<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/economics/" target="_blank" rel="noopener">Economics<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/psychology/" target="_blank" rel="noopener">Psychology<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="cur-group">
+          <caption><span>Group 4</span> Sciences</caption>
+          <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/biology/" target="_blank" rel="noopener">Biology<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/chemistry/" target="_blank" rel="noopener">Chemistry<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/physics/" target="_blank" rel="noopener">Physics<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/computer-science/" target="_blank" rel="noopener">Computer Science<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/environmental-systems-and-societies/" target="_blank" rel="noopener">Environmental Systems and Societies<span class="sr-only">, opens the IB website in a new tab</span></a>
+                <small>Interdisciplinary: counts towards Group 3 or Group 4</small></th>
+              <td>SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="cur-group">
+          <caption><span>Group 5</span> Mathematics</caption>
+          <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_analysis_en.pdf" target="_blank" rel="noopener">Mathematics: analysis and approaches<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_application_en.pdf" target="_blank" rel="noopener">Mathematics: applications and interpretation<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="cur-group">
+          <caption><span>Group 6</span> The arts</caption>
+          <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/the-arts/visual-arts/" target="_blank" rel="noopener">Visual Arts<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+              <td>SL</td><td>HL</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
   </div>
 </section>
 
-<section class="section curriculum-ib on-purple" id="ib" data-ground="#1E1626">
-  <div class="wrap curriculum-ib__layout">
-    <div class="curriculum-ib__content">
-      <p class="marker"><span class="sc">IB Diploma Programme</span></p>
-      <h2 class="serif h2" data-split>A second path through <em>the final two years.</em></h2>
-      <p class="lead">CIRS is an IB World School. In Grades XI and XII, students choose
-        six subjects, including two languages and Mathematics, alongside the Extended Essay,
-        Theory of Knowledge and Creativity, Activity, Service.</p>
-      <p class="curriculum-ib__more">Students study three or four subjects at Higher
-        Level and complete the Diploma core alongside their chosen subjects.</p>
-      <a class="btn btn--primary" href="curriculum/ib-diploma.html">Explore the IB Diploma Programme</a>
-      <a class="curriculum-ib__jump" href="#ib-subjects">See the subjects in each group</a>
-      <!-- School confirmation is also needed before restoring the earlier site's
-           seventh-in-India authorisation rank, IB-trained/examiner staffing and
-           current Naviance counselling claims. -->
-    </div>
-    <figure class="curriculum-ib__image">
-      <img src="assets/img/results-ib-lab.webp"
-           alt="A CIRS student working with a microscope in a school laboratory"
-           width="1800" height="1200" loading="lazy" decoding="async">
-    </figure>
-  </div>
-  <div class="wrap ibgroups" id="ib-subjects">
-    <div class="ibgroups__head">
-      <p class="marker"><span class="sc">IB subject groups</span></p>
-      <h3 class="serif ibgroups__title">The subjects offered <em>in each group.</em></h3>
-      <p class="ibgroups__intro">These are the subjects CIRS offers under each of the six groups.
-        Which combinations run depends on how many students choose each subject. Select a
-        subject to read about it on the International Baccalaureate&rsquo;s website.</p>
-      <p class="ibgroups__key"><span class="ibgroups__lv">SL</span> Standard Level
-        <span class="ibgroups__lv ibgroups__lv--hl">HL</span> Higher Level</p>
-    </div>
-    <ol class="ibgroups__grid">
-      <li class="ibgroups__group">
-        <p class="ibgroups__n">Group 1</p>
-        <h4 class="serif ibgroups__name">Language A1</h4>
-        <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-and-literature/language-a-literature/" target="_blank" rel="noopener"><span class="ibgroups__subject">English A1</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-        </ul>
-      </li>
-      <li class="ibgroups__group">
-        <p class="ibgroups__n">Group 2</p>
-        <h4 class="serif ibgroups__name">Second Language</h4>
-        <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener"><span class="ibgroups__subject">Hindi B</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-ab-initio/" target="_blank" rel="noopener"><span class="ibgroups__subject">French ab initio</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener"><span class="ibgroups__subject">French B</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-        </ul>
-      </li>
-      <li class="ibgroups__group">
-        <p class="ibgroups__n">Group 3</p>
-        <h4 class="serif ibgroups__name">Individuals and societies</h4>
-        <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/economics/" target="_blank" rel="noopener"><span class="ibgroups__subject">Economics</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/business-and-management/" target="_blank" rel="noopener"><span class="ibgroups__subject">Business &amp; Management</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/psychology/" target="_blank" rel="noopener"><span class="ibgroups__subject">Psychology</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-        </ul>
-      </li>
-      <li class="ibgroups__group">
-        <p class="ibgroups__n">Group 4</p>
-        <h4 class="serif ibgroups__name">Experimental sciences</h4>
-        <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/biology/" target="_blank" rel="noopener"><span class="ibgroups__subject">Biology</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/chemistry/" target="_blank" rel="noopener"><span class="ibgroups__subject">Chemistry</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/physics/" target="_blank" rel="noopener"><span class="ibgroups__subject">Physics</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/computer-science/" target="_blank" rel="noopener"><span class="ibgroups__subject">Computer Science</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/environmental-systems-and-societies/" target="_blank" rel="noopener"><span class="ibgroups__subject">Environmental Systems &amp; Societies (ESS)</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-        </ul>
-      </li>
-      <li class="ibgroups__group">
-        <p class="ibgroups__n">Group 5</p>
-        <h4 class="serif ibgroups__name">Mathematics</h4>
-        <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_analysis_en.pdf" target="_blank" rel="noopener"><span class="ibgroups__subject">Mathematics: Analysis &amp; Approaches (AA)</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-          <li><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_application_en.pdf" target="_blank" rel="noopener"><span class="ibgroups__subject">Mathematics: Applications &amp; Interpretation (AI)</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-        </ul>
-      </li>
-      <li class="ibgroups__group">
-        <p class="ibgroups__n">Group 6</p>
-        <h4 class="serif ibgroups__name">The arts</h4>
-        <ul class="ibgroups__list">
-          <li><a href="https://ibo.org/programmes/diploma-programme/curriculum/the-arts/visual-arts/" target="_blank" rel="noopener"><span class="ibgroups__subject">Visual Arts</span> <span class="ibgroups__levels"><span class="ibgroups__lv">SL</span><span class="ibgroups__lv ibgroups__lv--hl">HL</span></span><span class="curriculum-arrow ibgroups__arrow" aria-hidden="true"></span><span class="sr-only">, opens the IB website in a new tab</span></a></li>
-        </ul>
-      </li>
-    </ol>
-    <p class="ibgroups__ask">For the choices running this year, ask the IB Coordinator:
-      <a href="mailto:info@cirschool.org?subject=Current%20IB%20Diploma%20subject%20choices">info@cirschool.org</a></p>
-  </div>
-</section>
-
-<section class="section curriculum-beyond" id="beyond">
-  <div class="wrap curriculum-beyond__layout">
-    <figure class="curriculum-beyond__image">
+<section class="cur-sec cur-beyond" id="beyond" aria-labelledby="beyond-title">
+  <div class="wrap cur-beyond__layout">
+    <figure class="cur-beyond__figure">
       <img src="assets/img/vision.jpg"
-           alt="CIRS students practising yoga outdoors on the school grounds"
+           alt="A row of CIRS students seated on mats on the lawn, practising a breathing exercise"
            width="1600" height="900" loading="lazy" decoding="async">
+      <figcaption>Yoga on the school grounds.</figcaption>
     </figure>
-    <div class="curriculum-beyond__content">
-      <p class="marker"><span class="sc">Learning beyond subjects</span></p>
-      <h2 class="serif h2" data-split>Knowledge, service <em>and skill.</em></h2>
-      <p class="lead">Academic study sits within the Chinmaya Vision Programme and
-        the life of a residential school.</p>
-      <p class="copy">Value education runs across every grade alongside the academic
-        timetable. Students study the Bhagavad Geeta and the CCMT <i>Life &mdash; An
-        Aradhana</i> books, while spiritual classes and aartis bring that learning into
-        daily life. Morning assembly, yoga, service, arts and sport also sit alongside
-        classroom work.</p>
-      <div class="curriculum-confirmation" role="note">
-        <strong>Sequence requiring school confirmation</strong>
-        <p>The age-by-age sequence for the Bhagavad Geeta and <i>Life &mdash; An
-          Aradhana</i> still needs confirmation from the school.</p>
-      </div>
-      <a class="curriculum-inline-link" href="the-cirs-experience.html">See THE CIRS EXPERIENCE</a>
+    <div class="cur-beyond__text">
+      <p class="cur-eyebrow">School life</p>
+      <h2 class="cur-h2" id="beyond-title">Study inside <em>a residential day.</em></h2>
+      <p>Academic work sits within the Chinmaya Vision Programme and the life of a residential
+        school. Value education runs across every grade alongside the timetable: students study
+        the Bhagavad Geeta and the CCMT <i>Life &mdash; An Aradhana</i> books, and spiritual
+        classes and aartis carry that learning into the day.</p>
+      <p>Morning assembly, yoga, service, the arts and sport sit alongside classroom work.</p>
+      <p><a class="cur-link" href="the-cirs-experience.html">See THE CIRS EXPERIENCE</a></p>
     </div>
-  </div>
-</section>
-
-<section class="section curriculum-next on-purple" id="next" data-ground="#1E1626">
-  <div class="wrap curriculum-next__inner">
-    <div>
-      <p class="marker"><span class="sc">Next steps</span></p>
-      <h2 class="serif h2">Continue with <em>the details.</em></h2>
-      <p class="lead">Read how to apply, or see the school&rsquo;s published academic results.</p>
-    </div>
-    <nav class="curriculum-next__links" aria-label="Continue exploring academics">
-      <a href="admissions.html#apply"><span>Admissions process</span><span class="curriculum-arrow" aria-hidden="true"></span></a>
-      <a href="our-results.html"><span>Academic results</span><span class="curriculum-arrow" aria-hidden="true"></span></a>
-    </nav>
   </div>
 </section>

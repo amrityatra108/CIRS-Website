@@ -26,14 +26,14 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=102-records-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=102-records-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=102-records-1">
+<link rel="stylesheet" href="assets/css/fonts.css?b=107-records-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=107-records-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=107-records-1">
 
-<link rel="stylesheet" href="assets/css/records.css?b=102-records-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=102-records-1">
-<link rel="stylesheet" href="assets/css/footer.css?b=102-records-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=102-records-1-drawer-5">
+<link rel="stylesheet" href="assets/css/records.css?b=107-records-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=107-records-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=107-records-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=107-records-1-drawer-5">
 </head>
 
 <body class="records litehead">
@@ -191,6 +191,11 @@
     </div>
   </div>
 </header>
+<!-- The gold hairline that holds the header's place once it has slid away
+     past the page's opening (cirs.js, "Header state"). Decoration only: the
+     header comes back by scrolling up, by the pointer at the top edge or by
+     keyboard focus, so the line takes no clicks and nothing announces it. -->
+<div class="site-nav-handle" aria-hidden="true"></div>
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="4" hidden>
   <div class="drawer__surface">
     <div class="drawer__topbar">
@@ -230,6 +235,7 @@
         <li><a href="curriculum.html">Curriculum</a></li>
         <li><a href="our-results.html">Our Results</a></li>
         <li><a href="sports.html">Our Sports</a></li>
+        <li><a href="houses.html">Our Houses</a></li>
         <li><a href="our-laurels.html">Our Laurels</a></li>
         <li><a href="math-challenge.html">Math Challenge</a></li>
       </ul>
@@ -683,7 +689,7 @@
         </div>
       </div>
 
-      <div class="rec-safe rv" id="grievance">
+      <div class="rec-safe rv" id="grievance" data-header-theme="dark">
         <div class="rec-safe__main">
           <p class="rec-safe__k">Grievance redressal</p>
           <h3 class="rec-safe__title" id="grievance-title">Raise a concern</h3>
@@ -1184,12 +1190,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=102-records-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=102-records-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=102-records-1" defer></script>
-<script src="assets/js/cirs.js?b=102-records-1-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=102-records-1" defer></script>
-<script src="assets/js/footer.js?b=102-records-1-footer-1" defer></script>
-<script src="assets/js/records.js?b=102-records-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=107-records-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=107-records-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=107-records-1" defer></script>
+<script src="assets/js/cirs.js?b=107-records-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=107-records-1" defer></script>
+<script src="assets/js/footer.js?b=107-records-1-footer-1" defer></script>
+<script src="assets/js/records.js?b=107-records-1" defer></script>
 </body>
 </html>

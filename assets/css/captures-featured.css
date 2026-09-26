@@ -309,3 +309,42 @@ body.captures.cf-on #totop{
   opacity:0;
   pointer-events:none;
 }
+
+/* ============================================================
+   The header over the film opening
+   ------------------------------------------------------------
+   The shared header stays clear until the page's own content
+   starts passing under it. On most pages that is one screen.
+   Here the opening is a scrubbed film roughly 4,000px deep, so
+   the clear state holds for the whole of it — and the bar is
+   white lettering with nothing behind it. Against the film's
+   dark frames it reads; against its bright ones it disappears,
+   which is why it seems to come and go as the reader scrolls
+   one way and then the other. The frame, not the header, was
+   changing.
+
+   So while it is clear on this page it carries a dark capsule
+   of its own. It borrows the glass state's vocabulary — same
+   shadow list, same blur — so the two still interpolate, and
+   keeps white lettering legible over any frame the film lands
+   on. Once the header turns to glass past the opening, the
+   rule below stops applying and nothing here is in the way.
+
+   .68 is measured, not picked. The film can land on a bright
+   frame, so the capsule has to hold against the worst case, a
+   white one: at .42 the white name fell to 2.85:1 and at .55 to
+   4.33:1, both short. At .68 the name holds 6.7:1 and the
+   smaller sub-line, which is white at 80%, holds 5.1:1 — so
+   both clear 4.5:1 whatever the film is showing.
+   ============================================================ */
+body.captures .header:not(.is-scrolled) .wrap{
+  background-color:rgba(21,8,24,.68);
+  border-color:rgba(255,255,255,.18);
+  box-shadow:0 12px 36px rgba(21,8,24,.34), inset 0 1px 0 rgba(255,255,255,.12);
+}
+@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
+  body.captures .header:not(.is-scrolled) .wrap{
+    -webkit-backdrop-filter:blur(14px) saturate(120%);
+            backdrop-filter:blur(14px) saturate(120%);
+  }
+}

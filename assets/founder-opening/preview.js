@@ -1,7 +1,9 @@
 import * as THREE from "./vendor/three.module.min.js";
 
-const MENON="assets/menon-state-2048.png";
-const GURUDEV="assets/gurudev-state-2048.png";
+// WebP with a lossless alpha channel, cut from the PNG masters in
+// assets/source/founder-opening/ by tools/make-media.py: the same 2048 square.
+const MENON="assets/menon-state-2048.webp";
+const GURUDEV="assets/gurudev-state-2048.webp";
 const mount=document.querySelector("#founder-root");
 if(new URLSearchParams(location.search).has("embed")) document.documentElement.classList.add("is-embedded");
 
@@ -50,7 +52,7 @@ mount.innerHTML=`
     </div>
     <div class="portrait-stage" data-portrait>
       <div class="portrait-composition" data-composition>
-        <img class="portrait-fallback" src="${MENON}" alt="Balakrishna Menon">
+        <img class="portrait-fallback" src="${MENON}" crossorigin="anonymous" alt="Balakrishna Menon">
         <canvas class="portrait-canvas" data-canvas aria-label="Continuously flowing portrait transition between Balakrishna Menon and Gurudev Swami Chinmayananda"></canvas>
       </div>
       <p class="status" aria-live="polite" data-status>Loading interactive portrait</p>

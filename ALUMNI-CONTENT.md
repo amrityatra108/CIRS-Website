@@ -15,5 +15,6 @@ The restored *Where CIRS Takes You* layout is built from `tools/pages/alumni.htm
 - Graduating year or batch for **Hari Om Jani, Soham Desai, Divyaj DT, Shashwath Santosh, Kavya S, Roshan B, and Mugdha Sultania**. None is displayed without confirmation.
 - Current alumni association or coordinator details, if an active association exists, plus its approved contact destination.
 - Confirmation that the selected destination list is still current. It is presented as a selection, not a complete alumni register.
+- Larger originals of three portraits. **Divyaj DT** (387×516), **Soham Desai** (497×618) and **Hari Om Jani** (732×732) are smaller than the frame the page draws them in on a tablet or a high-density screen. Until the originals arrive, each figure is capped at 1.25× its photograph's width (`PORTRAIT_STRETCH` in `tools/alumni.py`) rather than enlarged further; nothing is upscaled or sharpened. At least 1200px on the short side would serve every layout. The masters are in `assets/source/alumni/`; `tools/make-media.py` cuts the WebP copies the page uses.
 
 If a visible photographer credit is required for any supplied photo, CIRS should provide its exact wording.

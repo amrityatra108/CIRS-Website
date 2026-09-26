@@ -1,0 +1,52 @@
+/* The not-found page — 404.html.
+
+   Scoped to body.notfound. It adds nothing to the site's design language:
+   the band is the shared .pagehead on purple, the button is .btn--primary,
+   and the type, colours and measure all come from cirs.css and pages.css.
+   What is here is only the arrangement: the band fills the first screen, so
+   the way back is the whole of what a lost visitor sees, and four onward
+   links sit under a hairline beneath it.
+
+   The page is served at whatever address failed, so build-site.py writes its
+   references from the root. This sheet references no asset of its own. */
+
+/* A pixel more than the window, not exactly the window: footer.js counts the
+   footer as reached — and hides the header — once the end of <main> is at or
+   above the foot of the window, and a page that ended exactly there would
+   open with its header, and so its menu, already gone. lvh is the tallest the
+   window gets on a phone, so the band stays past the fold as its bar hides. */
+body.notfound .notfound__band{
+  display:flex;
+  align-items:center;
+  min-height:calc(100vh + 1px);
+  min-height:calc(100lvh + 1px);
+}
+
+body.notfound .notfound__cta{ margin-top:clamp(28px,3.4vw,42px); }
+
+body.notfound .notfound__ways{
+  margin-top:clamp(44px,6vw,76px);
+  padding-top:20px;
+  border-top:1px solid var(--rule-purple);
+  max-width:var(--measure);
+}
+body.notfound .notfound__label{ margin-bottom:14px; }
+body.notfound .notfound__ways ul{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 28px;
+}
+body.notfound .notfound__ways a{
+  display:inline-block;
+  padding-block:8px;
+  color:var(--on-purple);
+  font-size:var(--fs-lead);
+  border-bottom:1px solid transparent;
+  transition:color .25s var(--e), border-color .25s var(--e);
+}
+body.notfound .notfound__ways a:hover{ color:var(--gold-lit); border-bottom-color:currentColor; }
+
+@media (max-width:640px){
+  body.notfound .notfound__cta .btn{ width:100%; text-align:center; }
+  body.notfound .notfound__ways ul{ flex-direction:column; gap:0; }
+}
