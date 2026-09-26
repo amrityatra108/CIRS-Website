@@ -38,23 +38,44 @@
      window, so the page stops scrolling first — and the chrome would stay
      over the scene to the very end. On a page without a scene (Captures,
      Leadership) the page's end is <main>'s lower edge, over the footer, and
-     the same line applies. It is read from the geometry, once a frame and
-     only while that edge is on screen, with a band so the chrome does not
-     flicker for a scroll that comes to rest on the line. */
+     the same line applies. So does a scene a page has put away: News keeps
+     the shared scene in its markup at no height at all, and that is not a
+     scene to give way to.
+
+     Some pages stop scrolling before their edge reaches that line at all:
+     where the footer under the edge is shorter than three quarters of the
+     window (News, Captures and Leadership on a desktop, whose 430px footer
+     leaves the edge at 470px in a 900px window), the edge's highest point
+     is short of the upper quarter. There the chrome goes as the page
+     arrives at its end, which is the most of the footer the reader will
+     ever see. The line is whichever of the two comes first.
+
+     It is read from the geometry, once a frame and only while that edge is
+     on screen, with a band so the chrome does not flicker for a scroll that
+     comes to rest on the line. */
   var main = document.querySelector("main");
-  var edgeEl = scene || main;
+  var sceneEdge = !!(scene && scene.offsetHeight);
+  var edgeEl = sceneEdge ? scene : main;
   if (edgeEl && "IntersectionObserver" in window) {
     var BAND = 24;
-    var bar = document.querySelector("#header .wrap") || document.querySelector("#header");
+    var header = document.querySelector("#header");
+    var bar = (header && header.querySelector(".wrap")) || header;
     var line = 0, near = false, active = null, queued = false;
     var measure = function () {
-      line = Math.max(bar ? bar.getBoundingClientRect().bottom : 0, window.innerHeight * .25);
+      // Offsets rather than the bar's box: a header collapsed past the
+      // opening has slid up out of the window, and its box with it.
+      var barBottom = bar ? header.offsetTop + (bar === header ? 0 : bar.offsetTop) + bar.offsetHeight : 0;
+      line = Math.max(barBottom, window.innerHeight * .25);
     };
     var update = function () {
       queued = false;
       var r = edgeEl.getBoundingClientRect();
-      var top = scene ? r.top : r.bottom;
-      var next = active ? top <= line + BAND : top <= line;
+      var top = sceneEdge ? r.top : r.bottom;
+      // Where the edge will stand once the page can scroll no further.
+      var rest = document.documentElement.scrollHeight - window.innerHeight -
+        (window.scrollY || window.pageYOffset || 0);
+      var target = Math.max(line, top - Math.max(rest, 0) + 2);
+      var next = active ? top <= target + BAND : top <= target;
       if (next === active) return;
       active = next;
       root.classList.toggle("footer-zone-active", next);

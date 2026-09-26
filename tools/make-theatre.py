@@ -8,7 +8,6 @@ Reads tools/theatre.py and writes assets/img/theatre/:
 
     <name>-800.webp  <name>-1600.webp    every photograph (portraits 640/1280)
     <name>-2400.webp                     full-bleed photographs as well
-    amphitheatre-1000.webp, -2000.webp   the opening's photograph, sharper
     yt/<video id>.webp                   the class-presentation thumbnails
 
 The camera originals are 24 to 38 megapixels and live on the school's Google
@@ -27,7 +26,6 @@ YouTube's thumbnails are copied rather than hot-linked, as the fonts and the
 motion libraries are: the page then depends on no third party to draw.
 """
 
-import importlib.util
 import io
 import os
 import sys
@@ -84,31 +82,6 @@ def photographs():
     return total
 
 
-def amphitheatre():
-    """The opening's photograph, from the camera original in assets/source.
-
-    The same crop and the same light grade as the arts wall's copy
-    (tools/make-arts-wall.py), so the opening looks as it always has — cut
-    twice as large, so it is sharp on a dense screen.
-    """
-    dests = {w: os.path.join(OUT, f"amphitheatre-{w}.webp") for w in (1000, 2000)}
-    if not FORCE and all(os.path.exists(d) for d in dests.values()):
-        return
-    spec = importlib.util.spec_from_file_location("artswall_cut", os.path.join(ROOT, "tools/make-arts-wall.py"))
-    wall = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(wall)
-    im = ImageOps.exif_transpose(Image.open(os.path.join(ROOT, "assets/source/IMG_2474.JPG"))).convert("RGB")
-    # 4:3 about the wall's focal point (0.50, 0.55)
-    w, h = im.size
-    tw, th = (w, round(w * 3 / 4)) if w * 3 / 4 <= h else (round(h * 4 / 3), h)
-    x = min(max(round(w * 0.5 - tw / 2), 0), w - tw)
-    y = min(max(round(h * 0.55 - th / 2), 0), h - th)
-    im = wall.grade(im.crop((x, y, x + tw, y + th)))
-    for width, dest in dests.items():
-        save(im, width, dest)
-    print(f"  amphitheatre from IMG_2474.JPG {w}x{h} -> {list(dests)}")
-
-
 def thumbnails():
     os.makedirs(os.path.join(OUT, "yt"), exist_ok=True)
     recent = {v["id"] for v in theatre.CLASS_RECENT}
@@ -140,12 +113,10 @@ def thumbnails():
 def main():
     os.makedirs(OUT, exist_ok=True)
     total = photographs()
-    amphitheatre()
     thumbnails()
     # Anything in the folder the manifest no longer names is removed, so the
     # orphan check in tools/check-links.py stays meaningful.
     keep = {f"{p['name']}-{w}.webp" for _, p in theatre.all_photos() for w in widths(p)}
-    keep |= {"amphitheatre-1000.webp", "amphitheatre-2000.webp"}
     for f in os.listdir(OUT):
         if f.endswith(".webp") and f not in keep:
             os.remove(os.path.join(OUT, f))

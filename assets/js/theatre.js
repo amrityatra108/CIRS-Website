@@ -3,8 +3,8 @@
    Four small things, each of which the page does without:
 
    1. Anand Utsav's stage. With motion allowed, the stage holds while the
-      scroll runs it: a darkened frame, then the whole stage opening out of
-      a slit of light and coming up to full colour. The script only turns the
+      scroll runs it: a darkened frame, then the whole stage fading in and
+      coming up to full colour. The script only turns the
       scroll into four numbers; assets/css/theatre.css draws with them.
       Without it the stage is simply the finished photograph.
    2. The houses. Choosing a house from the programme moves to its gallery,
@@ -32,7 +32,6 @@
     if (!document.body.classList.contains("theatre")) return;
     if (!reduced) document.body.classList.add("th-motion");
     stage();
-    reveal();
     houses();
     viewer();
   }
@@ -58,7 +57,7 @@
       var p = run > 0 ? clamp(-r.top / run) : 1;
       if (Math.abs(p - last) < 0.0005) return;
       last = p;
-      // Title first, in the dark; then the slit opens and the light rises;
+      // Title first, in the dark; then the full frame appears and the light rises;
       // the darkened frame is gone by the time the stage is fully open.
       box.style.setProperty("--type", ease(span(p, .02, .2)).toFixed(4));
       box.style.setProperty("--open", ease(span(p, .18, .66)).toFixed(4));
@@ -70,22 +69,6 @@
     window.addEventListener("scroll", queue, { passive: true });
     window.addEventListener("resize", function () { last = -1; queue(); });
     draw();
-  }
-
-  /* The amphitheatre opens from a clip as it arrives. */
-  function reveal() {
-    var figs = document.querySelectorAll(".th-reveal");
-    if (!figs.length) return;
-    if (reduced || !("IntersectionObserver" in window)) {
-      figs.forEach(function (f) { f.classList.add("is-in"); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
-      });
-    }, { rootMargin: "0px 0px -12% 0px" });
-    figs.forEach(function (f) { io.observe(f); });
   }
 
   /* 2 and 3. ------------------------------------------------------ houses */
