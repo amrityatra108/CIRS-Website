@@ -1,0 +1,82 @@
+PASS  five groups, same names, same order  — Vision | Student Life | Literary Excellence | Art, Culture &amp; Music | Connect
+PASS  24 child links: same labels, order and URLs  — 24 links
+PASS  Enquire: same 9 destinations, same order  — 9 links
+PASS  menu foot: same 6 destinations  — admissions.html#apply, admissions.html#visit, alumni.html, mailto:admissions@cirschool.org, school-info.html#calendar, tel:+914222613300
+PASS  header keeps Home and News destinations
+PASS  1440×900 category size 56–68px  — 61.9px
+PASS  1440×900 destination size 24–30px  — 28.1px
+PASS  split close to 52 / 48  — 52.0%
+PASS  no italic (synthetic or otherwise) on categories
+PASS  320px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–56
+PASS  320×568 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  360px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  360×740 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  375px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  375×667 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  390px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  390×844 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  414px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  414×896 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  600px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  600×900 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  768px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  768×1024 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  900px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  900×1000 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  901×700 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1024×768 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1280×720 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1366×768 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1440×900 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1680×1050 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1920×1080 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1024×768 nothing moves across 5 category changes  — destination list top 172.6px each time
+PASS  1280×720 nothing moves across 5 category changes  — destination list top 164.7px each time
+PASS  1440×900 nothing moves across 5 category changes  — destination list top 207.6px each time
+PASS  1920×1080 nothing moves across 5 category changes  — destination list top 279.2px each time
+PASS  rapid switching: one list visible, matches the active category, opacity 1  — {"vis":["dnav-literary-excellence-panel"],"op":["1"],"exp":["dnav-literary-excellence-button"]}
+PASS  destination links take the pointer 60ms into the opening
+PASS  menu: opens on its active category; arrows move and open categories  — dnav-student-life-button → dnav-literary-excellence-button
+PASS  menu: → enters the list, ↓ moves, ← returns  — The Crossroads → CIRS Blog → dnav-literary-excellence-button
+PASS  menu: Tab stays in header + menu, page behind inert
+PASS  menu: Escape closes and returns focus to Menu
+PASS  Enquire: opens on keyboard focus  — enqBtn
+PASS  Enquire: Escape closes, focus returns to Enquire and it stays closed
+PASS  Enquire: its Close button closes it and returns focus  — enqBtn
+FAIL  1440px scroll position kept through open, wheel over menu, close  — 1200 → 1990 → 2096
+FAIL  390px scroll position kept through open, wheel over menu, close  — 1200 → 1990 → 2096
+PASS  reduced motion: menu fully shown at once, no animations, list switches at once  — {"clip":"none","op":"1,1,1,1,1","anim":false}
+
+46 passed, 2 failed
+
+The two scroll-position failures above were the test, not the menu: it
+scrolled Our Sports to 1200px while the page was still running its opening,
+and the page moved on its own. Re-run with the page settled first, and with
+a control reading taken with no menu open, on ten pages at 1440 and 390:
+
+PASS  sports               1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  sports               390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  school-info          1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  school-info          390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  blog                 1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  blog                 390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  founder              1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  founder              390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  leadership           1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  leadership           390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  news                 1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  news                 390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  houses               1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  houses               390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  our-results          1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  our-results          390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  admissions           1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  admissions           390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  the-cirs-experience  1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+PASS  the-cirs-experience  390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
+
+Every page, both sizes (57 pages x 1440x900 and 390x844): no script errors;
+the header solid and on top at 25, 50, 75 and 100% of the page; menu and
+Enquire open and close; no sideways overflow; scroll position unchanged.
+  1440x900: 57 page views, 57 clean
+   390x844: 57 page views, 57 clean
