@@ -231,8 +231,37 @@
     });
     if (count) count.textContent = n + (n === 1 ? " photograph" : " photographs");
     if (empty) empty.hidden = n > 0;
+    settleLastRow();
     if (typeof window.ScrollTrigger !== "undefined") window.ScrollTrigger.refresh();
   }
+
+  /* A photograph left alone on the last row read as one that had been
+     forgotten. When that happens it is centred instead, at the size it
+     already had, as the archive's closing image. It spans the whole row so
+     dense packing cannot lift it into an earlier gap. */
+  function settleLastRow() {
+    if (!grid) return;
+    tiles.forEach(function (t) {
+      t.classList.remove("fx-tile--coda");
+      t.style.removeProperty("--coda-w");
+    });
+    var shown = tiles.filter(function (t) { return !t.hidden; });
+    if (shown.length < 2) return;
+    var last = shown[shown.length - 1];
+    var before = shown[shown.length - 2];
+    if (last.offsetTop <= before.offsetTop) return;
+    var cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+    var span = last.classList.contains("fx-tile--wide") ? 2 : 1;
+    if (cols <= span) return;
+    last.style.setProperty("--coda-w", last.getBoundingClientRect().width + "px");
+    last.classList.add("fx-tile--coda");
+  }
+  var settleTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(settleLastRow, 150);
+  }, { passive: true });
+  settleLastRow();
 
   chips.forEach(function (c) {
     c.addEventListener("click", function () {

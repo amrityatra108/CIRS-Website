@@ -415,6 +415,14 @@
       count.textContent = visible === total
         ? total + " institutions"
         : visible + " of " + total + (total === 1 ? " institution" : " institutions");
+      /* The count is the live region, so it is what a screen reader hears
+         when the list empties: the message itself, not just a zero. */
+      if (visible === 0) {
+        var said = document.createElement("span");
+        said.className = "sr-only";
+        said.textContent = ". No institutions match your search.";
+        count.appendChild(said);
+      }
       empty.hidden = visible !== 0;
     }
 
