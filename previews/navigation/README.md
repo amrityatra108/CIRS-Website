@@ -30,9 +30,18 @@ python3 -m http.server 8000     # from the repository root
   A `<base href="../../">` lets every href be written exactly as production
   writes it.
 - **Behaviour carried over from `cirs.js`.** Hover intent on the categories,
-  keyboard focus opening Enquire, Escape, the Tab loop while the menu is open,
-  and the header sliding away past the opening, with the gold hairline
-  holding its place.
+  keyboard focus opening Enquire, Escape, and the Tab loop while the menu is
+  open. The header does **not** hide on scroll: it stays a solid bar, and
+  there is no gold recovery line.
+- **Refinement pass.** One number column and one label column, with no
+  stepped indent and no italic. The panels split 52 / 48. Child links carry
+  no numbers, and each row's arrow sits in the same place. One gold marker
+  travels between the categories. On a phone the header shows the crest
+  with "CIRS" and keeps the words Enquire and Menu/Close visible. The
+  campus-visit action is a quiet link with the proposed wording "Ask about
+  a campus visit": admissions#visit offers an email enquiry, not a booking.
+  The checks and their results are in
+  `review/navigation-prototype/refinement/verification.txt`.
 
 ## Adopting it
 

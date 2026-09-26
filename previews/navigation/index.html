@@ -33,6 +33,10 @@
         </button>
 
         <section class="nv-enq__panel" id="nvEnqPanel" aria-label="Enquire" hidden>
+          <div class="nv-enq__head">
+            <p class="nv-enq__heading">Enquire</p>
+            <button type="button" class="nv-enq__close" id="nvEnqClose">Close<span class="nv-sr"> Enquire</span></button>
+          </div>
           <div class="nv-enq__grid">
             <section class="nv-enq__col" aria-labelledby="nvEnqTalk">
               <h2 class="nv-enq__title" id="nvEnqTalk">Talk to CIRS</h2>
@@ -88,6 +92,7 @@
       <img src="assets/img/logo.png" alt="Chinmaya International Residential School emblem" width="64" height="63">
       <span class="nv-brand__txt">
         <span class="nv-brand__name">Chinmaya International Residential School</span>
+        <span class="nv-brand__short" aria-hidden="true">CIRS</span>
         <span class="nv-brand__sub">Siruvani &middot; Coimbatore &middot; Founded 1996</span>
       </span>
     </a>
@@ -106,7 +111,6 @@
     </div>
   </div>
 </header>
-<div class="nv-handle" aria-hidden="true"></div>
 
 <!-- The full-screen menu. It opens under the header rather than over it:
      the bar stays where it was, Menu turns to Close, and the two ivory
@@ -123,12 +127,12 @@
           <span class="nv-cat__word">Vision</span>
         </button>
         <section class="nv-dest" id="nv-vision-panel" aria-labelledby="nv-vision-btn" hidden>
-          <p class="nv-dest__kicker" aria-hidden="true"><span class="nv-dest__count">01 / 05</span><span class="nv-dest__name">Vision</span></p>
+          <p class="nv-dest__kicker" aria-hidden="true">Vision</p>
           <ul class="nv-dest__list">
-            <li style="--j:0"><a href="founder.html" data-slug="founder"><span class="nv-dest__idx" aria-hidden="true">01</span><span class="nv-dest__label">Founder</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:1"><a href="why-cirs.html" data-slug="why-cirs"><span class="nv-dest__idx" aria-hidden="true">02</span><span class="nv-dest__label">Why CIRS</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:2"><a href="school-history.html" data-slug="school-history"><span class="nv-dest__idx" aria-hidden="true">03</span><span class="nv-dest__label">School History</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:3"><a href="leadership.html" data-slug="leadership"><span class="nv-dest__idx" aria-hidden="true">04</span><span class="nv-dest__label">Leadership</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="founder.html" data-slug="founder"><span class="nv-dest__label">Founder</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="why-cirs.html" data-slug="why-cirs"><span class="nv-dest__label">Why CIRS</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="school-history.html" data-slug="school-history"><span class="nv-dest__label">School History</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="leadership.html" data-slug="leadership"><span class="nv-dest__label">Leadership</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
           </ul>
         </section>
       </div>
@@ -138,15 +142,15 @@
           <span class="nv-cat__word">Student Life</span>
         </button>
         <section class="nv-dest" id="nv-student-life-panel" aria-labelledby="nv-student-life-btn" hidden>
-          <p class="nv-dest__kicker" aria-hidden="true"><span class="nv-dest__count">02 / 05</span><span class="nv-dest__name">Student Life</span></p>
+          <p class="nv-dest__kicker" aria-hidden="true">Student Life</p>
           <ul class="nv-dest__list">
-            <li style="--j:0"><a href="the-cirs-experience.html" data-slug="the-cirs-experience"><span class="nv-dest__idx" aria-hidden="true">01</span><span class="nv-dest__label">THE CIRS EXPERIENCE</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:1"><a href="curriculum.html" data-slug="curriculum"><span class="nv-dest__idx" aria-hidden="true">02</span><span class="nv-dest__label">Curriculum</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:2"><a href="our-results.html" data-slug="our-results"><span class="nv-dest__idx" aria-hidden="true">03</span><span class="nv-dest__label">Our Results</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:3"><a href="sports.html" data-slug="sports"><span class="nv-dest__idx" aria-hidden="true">04</span><span class="nv-dest__label">Our Sports</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:4"><a href="houses.html" data-slug="houses"><span class="nv-dest__idx" aria-hidden="true">05</span><span class="nv-dest__label">Our Houses</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:5"><a href="our-laurels.html" data-slug="our-laurels"><span class="nv-dest__idx" aria-hidden="true">06</span><span class="nv-dest__label">Our Laurels</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:6"><a href="math-challenge.html" data-slug="math-challenge"><span class="nv-dest__idx" aria-hidden="true">07</span><span class="nv-dest__label">Math Challenge</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="the-cirs-experience.html" data-slug="the-cirs-experience"><span class="nv-dest__label">THE CIRS EXPERIENCE</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="curriculum.html" data-slug="curriculum"><span class="nv-dest__label">Curriculum</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="our-results.html" data-slug="our-results"><span class="nv-dest__label">Our Results</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="sports.html" data-slug="sports"><span class="nv-dest__label">Our Sports</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="houses.html" data-slug="houses"><span class="nv-dest__label">Our Houses</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="our-laurels.html" data-slug="our-laurels"><span class="nv-dest__label">Our Laurels</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="math-challenge.html" data-slug="math-challenge"><span class="nv-dest__label">Math Challenge</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
           </ul>
         </section>
       </div>
@@ -156,11 +160,11 @@
           <span class="nv-cat__word">Literary Excellence</span>
         </button>
         <section class="nv-dest" id="nv-literary-excellence-panel" aria-labelledby="nv-literary-excellence-btn" hidden>
-          <p class="nv-dest__kicker" aria-hidden="true"><span class="nv-dest__count">03 / 05</span><span class="nv-dest__name">Literary Excellence</span></p>
+          <p class="nv-dest__kicker" aria-hidden="true">Literary Excellence</p>
           <ul class="nv-dest__list">
-            <li style="--j:0"><a href="crossroads.html" data-slug="crossroads"><span class="nv-dest__idx" aria-hidden="true">01</span><span class="nv-dest__label">Crossroads</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:1"><a href="blog.html" data-slug="blog"><span class="nv-dest__idx" aria-hidden="true">02</span><span class="nv-dest__label">CIRS Blog</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:2"><a href="creative-writing.html" data-slug="creative-writing"><span class="nv-dest__idx" aria-hidden="true">03</span><span class="nv-dest__label">Creative Writing</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="crossroads.html" data-slug="crossroads"><span class="nv-dest__label">Crossroads</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="blog.html" data-slug="blog"><span class="nv-dest__label">CIRS Blog</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="creative-writing.html" data-slug="creative-writing"><span class="nv-dest__label">Creative Writing</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
           </ul>
         </section>
       </div>
@@ -170,13 +174,13 @@
           <span class="nv-cat__word">Art, Culture &amp; Music</span>
         </button>
         <section class="nv-dest" id="nv-art-culture-music-panel" aria-labelledby="nv-art-culture-music-btn" hidden>
-          <p class="nv-dest__kicker" aria-hidden="true"><span class="nv-dest__count">04 / 05</span><span class="nv-dest__name">Art, Culture &amp; Music</span></p>
+          <p class="nv-dest__kicker" aria-hidden="true">Art, Culture &amp; Music</p>
           <ul class="nv-dest__list">
-            <li style="--j:0"><a href="captures.html" data-slug="captures"><span class="nv-dest__idx" aria-hidden="true">01</span><span class="nv-dest__label">CIRS Captures</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:1"><a href="art-attack.html" data-slug="art-attack"><span class="nv-dest__idx" aria-hidden="true">02</span><span class="nv-dest__label">CIRS Art Attack</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:2"><a href="festivals.html" data-slug="festivals"><span class="nv-dest__idx" aria-hidden="true">03</span><span class="nv-dest__label">CIRS Festivals</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:3"><a href="theatre.html" data-slug="theatre"><span class="nv-dest__idx" aria-hidden="true">04</span><span class="nv-dest__label">CIRS Theatre</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:4"><a href="cultural-gallery.html" data-slug="cultural-gallery"><span class="nv-dest__idx" aria-hidden="true">05</span><span class="nv-dest__label">CIRS Cultural Gallery</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="captures.html" data-slug="captures"><span class="nv-dest__label">CIRS Captures</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="art-attack.html" data-slug="art-attack"><span class="nv-dest__label">CIRS Art Attack</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="festivals.html" data-slug="festivals"><span class="nv-dest__label">CIRS Festivals</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="theatre.html" data-slug="theatre"><span class="nv-dest__label">CIRS Theatre</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="cultural-gallery.html" data-slug="cultural-gallery"><span class="nv-dest__label">CIRS Cultural Gallery</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
           </ul>
         </section>
       </div>
@@ -186,16 +190,17 @@
           <span class="nv-cat__word">Connect</span>
         </button>
         <section class="nv-dest" id="nv-connect-panel" aria-labelledby="nv-connect-btn" hidden>
-          <p class="nv-dest__kicker" aria-hidden="true"><span class="nv-dest__count">05 / 05</span><span class="nv-dest__name">Connect</span></p>
+          <p class="nv-dest__kicker" aria-hidden="true">Connect</p>
           <ul class="nv-dest__list">
-            <li style="--j:0"><a href="school-info.html" data-slug="school-info"><span class="nv-dest__idx" aria-hidden="true">01</span><span class="nv-dest__label">School Information</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:1"><a href="news.html" data-slug="news"><span class="nv-dest__idx" aria-hidden="true">02</span><span class="nv-dest__label">News</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:2"><a href="admissions.html" data-slug="admissions"><span class="nv-dest__idx" aria-hidden="true">03</span><span class="nv-dest__label">Admissions</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:3"><a href="parent-portal.html" data-slug="parent-portal"><span class="nv-dest__idx" aria-hidden="true">04</span><span class="nv-dest__label">Parent Portal</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-            <li style="--j:4"><a href="alumni.html" data-slug="alumni"><span class="nv-dest__idx" aria-hidden="true">05</span><span class="nv-dest__label">Alumni</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="school-info.html" data-slug="school-info"><span class="nv-dest__label">School Information</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="news.html" data-slug="news"><span class="nv-dest__label">News</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="admissions.html" data-slug="admissions"><span class="nv-dest__label">Admissions</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="parent-portal.html" data-slug="parent-portal"><span class="nv-dest__label">Parent Portal</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a href="alumni.html" data-slug="alumni"><span class="nv-dest__label">Alumni</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
           </ul>
         </section>
       </div>
+      <span class="nv-marker" id="nvMarker" aria-hidden="true"></span>
     </nav>
   </div>
 
@@ -208,7 +213,10 @@
     </ul>
     <div class="nv-menu__cta">
       <a class="nv-cta nv-cta--primary" href="admissions.html#apply">Apply for admission</a>
-      <a class="nv-cta" href="admissions.html#visit">Book a campus visit</a>
+      <!-- Proposed wording. Admissions#visit offers an email enquiry, not a
+           booking: "Contact the Admissions Office to ask whether a campus
+           visit is available". Production says "Book a campus visit". -->
+      <a class="nv-cta nv-cta--quiet" href="admissions.html#visit">Ask about a campus visit<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
 </div>
@@ -221,7 +229,7 @@
     <ul class="nv-demo__try">
       <li><b>Menu</b> opens the full-screen menu. Hover or arrow through the five categories; their pages appear on the right.</li>
       <li><b>Enquire</b> opens on hover, click or keyboard focus; <kbd>Esc</kbd> closes either.</li>
-      <li>Scroll down and the bar slides away behind a gold hairline; scroll up and it returns.</li>
+      <li>The bar stays put while the page scrolls, and opening or closing the menu keeps your place on the page.</li>
     </ul>
     <p class="nv-demo__viewing">Viewing as:
       <a href="previews/navigation/index.html?page=index">Home</a>
@@ -235,7 +243,7 @@
     <img src="assets/img/walkway.jpg" alt="A covered walkway on the CIRS campus" width="1600" height="1000">
   </figure>
   <section class="nv-demo__body">
-    <p>This page exists so the header can be seen over something. It is long enough to scroll, so the bar's slide-away and return can be tried, and it carries a photograph so that the solid ivory header can be judged against the school's own pictures as well as against paper.</p>
+    <p>This page exists so the header can be seen over something. It carries a photograph so that the solid ivory header can be judged against the school's own pictures as well as against paper, and it is long enough that opening the menu partway down can be checked for keeping your place.</p>
     <p>Every destination in the menu and in Enquire is the one production uses today, in the same order. Following one leaves the prototype for the live page.</p>
   </section>
 </main>

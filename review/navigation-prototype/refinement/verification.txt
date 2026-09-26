@@ -1,0 +1,50 @@
+PASS  five groups, same names, same order  — Vision | Student Life | Literary Excellence | Art, Culture &amp; Music | Connect
+PASS  24 child links: same labels, order and URLs  — 24 links
+PASS  Enquire: same 9 destinations, same order  — 9 links
+PASS  menu foot: same 6 destinations  — admissions.html#apply, admissions.html#visit, alumni.html, mailto:admissions@cirschool.org, school-info.html#calendar, tel:+914222613300
+PASS  header keeps Home and News destinations
+PASS  1440×900 category size 56–68px  — 61.9px
+PASS  1440×900 destination size 24–30px  — 28.1px
+PASS  split close to 52 / 48  — 52.0%
+PASS  no italic (synthetic or otherwise) on categories
+PASS  320px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–56
+PASS  320×568 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  360px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  360×740 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  375px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  375×667 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  390px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  390×844 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  414px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  414×896 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  600px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  600×900 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  768px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  768×1024 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  900px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
+PASS  900×1000 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  901×700 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1024×768 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1280×720 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1366×768 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1440×900 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1680×1050 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1920×1080 no clipping or sideways overflow (header, 5 menu states, Enquire)
+PASS  1024×768 nothing moves across 5 category changes  — destination list top 172.6px each time
+PASS  1280×720 nothing moves across 5 category changes  — destination list top 164.7px each time
+PASS  1440×900 nothing moves across 5 category changes  — destination list top 207.6px each time
+PASS  1920×1080 nothing moves across 5 category changes  — destination list top 279.2px each time
+PASS  rapid switching: one list visible, matches the active category, opacity 1  — {"vis":["nv-literary-excellence-panel"],"op":["1"],"exp":["nv-literary-excellence-btn"]}
+PASS  destination links take the pointer 60ms into the opening
+PASS  menu: opens on its active category; arrows move and open categories  — nv-student-life-btn → nv-literary-excellence-btn
+PASS  menu: → enters the list, ↓ moves, ← returns  — Crossroads → CIRS Blog → nv-literary-excellence-btn
+PASS  menu: Tab stays in header + menu, page behind inert
+PASS  menu: Escape closes and returns focus to Menu
+PASS  Enquire: opens on keyboard focus  — nvEnqBtn
+PASS  Enquire: Escape closes, focus returns to Enquire and it stays closed
+PASS  Enquire: its Close button closes it and returns focus  — nvEnqBtn
+PASS  1440px scroll position kept through open, wheel over menu, close  — 1200 → 1200 → 1200
+PASS  390px scroll position kept through open, wheel over menu, close  — 1200 → 1200 → 1200
+PASS  reduced motion: menu fully shown at once, no animations, list switches at once  — {"clip":"none","op":"1,1,1,1,1","anim":false}
+
+48 passed, 0 failed

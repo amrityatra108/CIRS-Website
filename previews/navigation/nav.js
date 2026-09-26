@@ -1,18 +1,18 @@
 /* Navigation prototype — header, full-screen menu, Enquire.
    Carries over what production's cirs.js already does for each control
-   (hover intent, keyboard focus opening Enquire, Escape, the Tab loop,
-   the header sliding away past the opening) and adds the menu's
-   choreography. Self-contained: no GSAP, no Lenis. */
+   (hover intent, keyboard focus opening Enquire, Escape, the Tab loop)
+   and adds the menu's travelling marker. The header does not hide on
+   scroll. Self-contained: no GSAP, no Lenis. */
 (function () {
   "use strict";
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  var body = document.body;
+  var root = document.documentElement, body = document.body;
   var header = $("#nvHeader");
-  var menu = $("#nvMenu"), menuBtn = $("#nvMenuBtn");
-  var enq = $("#nvEnq"), enqBtn = $("#nvEnqBtn"), enqPanel = $("#nvEnqPanel");
+  var menu = $("#nvMenu"), menuBtn = $("#nvMenuBtn"), nav = $(".nv-menu__nav", menu), marker = $("#nvMarker");
+  var enq = $("#nvEnq"), enqBtn = $("#nvEnqBtn"), enqPanel = $("#nvEnqPanel"), enqClose = $("#nvEnqClose");
   var cats = $$(".nv-cat", menu);
   var dests = $$(".nv-dest", menu);
 
@@ -38,63 +38,38 @@
   });
 
   /* ----------------------------------------------------------
-     Header: holds, and the slide away past the opening.
+     Menu: categories, destinations and the marker.
      ---------------------------------------------------------- */
-  var holds = { menu: false, enquire: false, focus: false, pointer: false };
-  var lastY = window.scrollY, away = false;
+  var active = -1, hoverTimer = null, closeTimer = null, inerted = [], savedY = 0;
 
-  function held() { return holds.menu || holds.enquire || holds.focus || holds.pointer; }
-  function setAway(next) {
-    if (next && held()) next = false;
-    if (next === away) return;
-    away = next;
-    header.classList.toggle("is-away", away);
-  }
-  function hold(name, on) { holds[name] = on; if (on) setAway(false); }
-
-  window.addEventListener("scroll", function () {
-    var y = window.scrollY, dy = y - lastY;
-    if (y < 160) setAway(false);
-    else if (dy > 6) setAway(true);
-    else if (dy < -6) setAway(false);
-    if (Math.abs(dy) > 6 || y < 160) lastY = y;
-  }, { passive: true });
-  document.addEventListener("pointermove", function (e) {
-    if (e.pointerType !== "mouse") return;
-    var near = e.clientY < 28;
-    if (near !== holds.pointer) hold("pointer", near);
-  }, { passive: true });
-  // Only keyboard focus holds the bar: a mouse click leaves focus on the
-  // control it pressed, and that alone should not pin the header.
-  header.addEventListener("focusin", function (e) {
-    try { if (e.target.matches(":focus-visible")) hold("focus", true); } catch (err) { /* older browser */ }
-  });
-  header.addEventListener("focusout", function (e) {
-    if (!header.contains(e.relatedTarget)) hold("focus", false);
-  });
-
-  /* ----------------------------------------------------------
-     Menu: categories and their destinations.
-     ---------------------------------------------------------- */
-  var active = -1, hoverTimer = null, closeTimer = null, inerted = [];
-
-  function reveal(panel, delay) {
-    if (still.matches) return;
-    panel.classList.remove("is-entering");
-    panel.style.setProperty("--d0", (delay || 0) + "ms");
-    void panel.offsetWidth;          // restart the animation on this panel
-    panel.classList.add("is-entering");
+  // The marker sits beside the first line of the open category's label.
+  function placeMarker(instant) {
+    if (!marker || narrow.matches || active < 0) { if (marker) marker.classList.remove("is-set"); return; }
+    var word = $(".nv-cat__word", cats[active]);
+    var navBox = nav.getBoundingClientRect(), wordBox = word.getBoundingClientRect();
+    var size = parseFloat(getComputedStyle(word).fontSize);
+    var lead = (parseFloat(getComputedStyle(word).lineHeight) - size) / 2;
+    var y = wordBox.top - navBox.top + lead + size * 0.16;
+    if (instant) marker.style.transition = "none";
+    marker.style.transform = "translateY(" + y.toFixed(1) + "px)";
+    marker.classList.add("is-set");
+    if (instant) { void marker.offsetWidth; marker.style.transition = ""; }
   }
 
-  function select(index, delay) {
-    if (index === active) return;
+  function select(index, opts) {
+    opts = opts || {};
+    if (index === active && !opts.force) return;
     active = index;
     cats.forEach(function (cat, i) {
       var on = i === index;
       cat.setAttribute("aria-expanded", String(on));
       dests[i].hidden = !on;
-      if (on) reveal(dests[i], delay);
+      // Only the incoming list animates; the outgoing one is gone at once,
+      // so a fast pass across the categories never leaves two lists up.
+      dests[i].classList.remove("is-entering");
+      if (on && !opts.quiet && !still.matches) { void dests[i].offsetWidth; dests[i].classList.add("is-entering"); }
     });
+    placeMarker(opts.instant);
   }
 
   cats.forEach(function (cat, i) {
@@ -137,7 +112,7 @@
   // From a destination, Left returns to its category.
   dests.forEach(function (panel, i) {
     panel.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowLeft" && !narrow.matches) { e.preventDefault(); cats[i].focus(); }
+      if (e.key === "ArrowLeft" && !narrow.matches) { e.preventDefault(); cats[i].focus(); return; }
       var links = $$("a", panel), k = links.indexOf(document.activeElement);
       if (k === -1) return;
       if (e.key === "ArrowDown") { e.preventDefault(); links[(k + 1) % links.length].focus(); }
@@ -160,38 +135,47 @@
   function openMenu() {
     setEnquire(false);
     window.clearTimeout(closeTimer);
-    active = -1;
+    savedY = window.scrollY;
     menu.hidden = false;
-    select(initial, 300);
+    menu.scrollTop = 0;
+    active = -1;
+    select(initial, { quiet: true, instant: true });
     void menu.offsetWidth;
     menu.classList.add("is-open");
     menuBtn.setAttribute("aria-expanded", "true");
     menuBtn.setAttribute("aria-label", "Close menu");
-    body.classList.add("nv-menu-open");
-    hold("menu", true);
+    root.classList.add("nv-menu-open");
     isolate(true);
-    window.setTimeout(function () {
-      if (menu.classList.contains("is-open")) cats[initial].focus({ preventScroll: true });
-    }, still.matches ? 0 : 160);
+    cats[initial].focus({ preventScroll: true });
   }
   function closeMenu(returnFocus) {
     if (!menu.classList.contains("is-open")) return;
     menu.classList.remove("is-open");
     menuBtn.setAttribute("aria-expanded", "false");
     menuBtn.setAttribute("aria-label", "Open menu");
-    body.classList.remove("nv-menu-open");
-    hold("menu", false);
+    root.classList.remove("nv-menu-open");
     isolate(false);
+    // The page behind was never scrolled; this only guards against a
+    // browser that resets it when overflow is restored.
+    if (window.scrollY !== savedY) window.scrollTo({ top: savedY, behavior: "instant" });
     if (returnFocus) menuBtn.focus({ preventScroll: true });
     closeTimer = window.setTimeout(function () {
       if (!menu.classList.contains("is-open")) menu.hidden = true;
-    }, still.matches ? 160 : 360);
+    }, still.matches ? 0 : 280);
   }
   menuBtn.setAttribute("aria-label", "Open menu");
   menuBtn.addEventListener("click", function () {
     if (menu.classList.contains("is-open")) closeMenu(false); else openMenu();
   });
   $$("a", menu).forEach(function (a) { a.addEventListener("click", function () { closeMenu(false); }); });
+
+  // The marker follows its category when the window changes size.
+  window.addEventListener("resize", function () {
+    if (menu.classList.contains("is-open")) {
+      if (!narrow.matches && active === -1) select(initial, { quiet: true });
+      placeMarker(true);
+    }
+  });
 
   // Tab circles through the header and the menu while it is open.
   document.addEventListener("keydown", function (e) {
@@ -203,7 +187,7 @@
     if (e.key !== "Tab") return;
     var items = $$("a[href], button", header).concat($$("a[href], button", menu)).filter(function (el) {
       return !el.disabled && !el.hidden && el.tabIndex >= 0 && el.getClientRects().length &&
-             !(enqPanel.contains(el) && !enqOpen);
+             !el.closest("[hidden]") && !(enqPanel.contains(el) && !enqOpen);
     });
     var k = items.indexOf(document.activeElement);
     if (k === -1 || (e.shiftKey && k === 0) || (!e.shiftKey && k === items.length - 1)) {
@@ -212,24 +196,20 @@
     }
   });
 
-  // Switching between one column and two while the menu is open: one
-  // column may have left every category closed; two always shows one.
-  narrow.addEventListener("change", function () {
-    if (!narrow.matches && active === -1) select(initial);
-  });
-
   /* ----------------------------------------------------------
-     Enquire: hover, click, keyboard focus, Escape.
+     Enquire: hover, click, keyboard focus, its own Close, Escape.
      ---------------------------------------------------------- */
-  var enqOpen = false, enqTimer = null;
-  enqPanel.hidden = false;           // the sheet is clipped shut, not removed
+  var enqOpen = false, enqTimer = null, returning = false;
+  enqPanel.hidden = false;           // the sheet is hidden by visibility, not removed
 
-  function setEnquire(next) {
+  function setEnquire(next, returnFocus) {
     if (next === enqOpen) return;
     enqOpen = next;
     enq.classList.toggle("is-open", enqOpen);
     enqBtn.setAttribute("aria-expanded", String(enqOpen));
-    hold("enquire", enqOpen);
+    // Focus goes back to the tab without the tab's own keyboard-focus
+    // rule reopening the sheet that was just closed.
+    if (!enqOpen && returnFocus) { returning = true; enqBtn.focus(); returning = false; }
   }
 
   enq.addEventListener("mouseenter", function () {
@@ -247,10 +227,15 @@
     window.clearTimeout(enqTimer);
     if (menu.classList.contains("is-open")) closeMenu(false);
     // With a mouse, arriving on the tab has already opened the sheet, so a
-    // click only ever opens; leaving is what closes it. Touch toggles.
+    // click only ever opens; leaving or Close is what shuts it. Touch toggles.
     setEnquire(hover.matches ? true : !enqOpen);
   });
+  enqClose.addEventListener("click", function () {
+    window.clearTimeout(enqTimer);
+    setEnquire(false, true);
+  });
   enq.addEventListener("focusin", function (e) {
+    if (returning) return;
     try { if (e.target.matches(":focus-visible") && !menu.classList.contains("is-open")) setEnquire(true); }
     catch (err) { /* older browser */ }
   });
@@ -258,7 +243,7 @@
     if (!enq.contains(e.relatedTarget)) setEnquire(false);
   });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && enqOpen) { e.preventDefault(); setEnquire(false); enqBtn.focus(); }
+    if (e.key === "Escape" && enqOpen) { e.preventDefault(); setEnquire(false, true); }
   });
   document.addEventListener("click", function (e) {
     if (enqOpen && !enq.contains(e.target)) setEnquire(false);
