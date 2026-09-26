@@ -132,9 +132,13 @@ The spacing scale (`--space-1` … `--space-10`)
 exists so new components are built on the same steps rather than one-off pixel
 values — please keep to it.
 
-Type: Newsreader for display, interface and running
-text; Literata for two selected introductions; EB Garamond for expressive
-italics; Tiro Devanagari Hindi for all Devanagari passages.
+Type: Mona Sans for English body, interface, labels, captions and film titles.
+Bodoni Moda is the open-licensed display face; Literata and EB Garamond
+retain selected editorial and quotation roles. A non-deployed Brier mapping
+remains in `tools/typography-brier.css` for a future licensed installation;
+do not activate it with trial files. Tiro
+Devanagari Hindi remains the face for all Devanagari passages. See
+`docs/typography.md` for roles and font licensing.
 
 **Changing a stylesheet or a hero asset? Bump `CACHE_BUST` in
 `tools/build-site.py`.** Returning visitors hold the old file otherwise, and
@@ -230,7 +234,7 @@ git push -u origin main
 
 GSAP, ScrollTrigger and Lenis are served from `assets/vendor/` now, not from
 a CDN, so a sandboxed session does load them: motion, scroll behaviour and the
-pinned sections can be checked here. All four approved font families are now
+pinned sections can be checked here. The current approved faces are
 self-hosted in assets/fonts/. Browser checks can verify font loading, line
 breaks and layout locally. Use docs/typography.md for font roles, licenses,
 rebuilding, and the limits of glyph and font-loading checks.

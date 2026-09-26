@@ -14,6 +14,13 @@ Thumbs.db
 # Staged deploy output, built by tools/stage-deploy.py
 _site/
 
+# Deployment credentials and licensed fonts stay outside this public repo.
+.vercel/
+.env
+.env*.local
+assets/fonts/[Bb]rier*.woff2
+assets/fonts/licenses/[Bb]rier*
+
 # Netlify CLI local link state
 .netlify/
 __pycache__/
