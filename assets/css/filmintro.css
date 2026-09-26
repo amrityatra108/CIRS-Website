@@ -544,17 +544,22 @@ body.theatre .film[data-film-still] .film__still{ visibility:visible; }
   body.theatre .film__title{
     --film-track-from:.09;
     --film-track-to:.20;
-    top:78%;
+    /* The contained 16:9 frame sits at 42% of the spare height. Keep the
+       title near its lower edge instead of placing it in the black below. */
+    top:calc(42svh + 27vw);
     font-size:clamp(34px, 5.2vw, 54px);
+    text-shadow:0 2px 8px #000, 0 0 20px #000;
   }
 }
 @media (max-width:720px){
   body.theatre .film__title{
     --film-track-from:.08;
     --film-track-to:.16;
-    top:64%;
     font-size:clamp(30px, 8.5vw, 42px);
   }
+}
+@media (max-width:720px) and (max-aspect-ratio:6/5){
+  body.theatre .film__title{ top:calc(42svh + 24vw); }
 }
 @media (max-width:360px){
   body.theatre .film__title{ font-size:clamp(27px, 8.2vw, 32px); }

@@ -581,7 +581,7 @@ PAGES = {
         # assets/css/culture.css, shared by the three Art, Culture & Music
         # pages that open on a film.
         "sheet": "culture",
-        "cache_suffix": "-theatre-acts-1",
+        "cache_suffix": "-theatre-acts-2",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
