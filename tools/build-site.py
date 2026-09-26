@@ -48,7 +48,7 @@ import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=106"
+CACHE_BUST = "b=107"
 
 # Questions to settle before an application is submitted.
 HERO_DATES = '''    <dl class="pagehero__dates">
@@ -883,9 +883,11 @@ def film_html(slug, page):
         attrs += f' data-film-fps="{film["fps"]:g}"'
     if film.get("shot"):
         attrs += " data-film-photo"
-    # The ramp to paper, unless the page puts it further down itself.
+    # The ramp to paper, unless the page puts it further down itself. It is
+    # dark for more than half its depth, so the shared header treats it as a
+    # dark ground (data-header-theme; see "Header state" in cirs.js).
     seam = ("" if film.get("seam") is False else
-            '\n<div class="film__seam" aria-hidden="true"></div>')
+            '\n<div class="film__seam" data-header-theme="dark" aria-hidden="true"></div>')
     shot = film.get("shot")
     # After the line in the document, so it is read after it, and over it on
     # screen by z-index. See assets/js/filmintro.js for the full-frame dissolve.

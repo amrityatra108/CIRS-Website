@@ -1197,3 +1197,14 @@ body.matharena .uc__mark { color: var(--ma-gold); border-color: var(--ma-line); 
   .ma-card:hover,
   .ma-last__link:hover { transform: none; }
 }
+
+/* Below 900px the shared floating controls keep a lane down the right-hand
+   edge clear of text (cirs.js), which narrows the column. The puzzle's
+   dashboard and the archive's search field were sized by their own content
+   and ran on past the column into that lane; here they take the column's
+   width instead. */
+@media (max-width: 900px) {
+  .ma-puzzle-stage > * { min-width: 0; }
+  .ma-search-wrap { max-width: 100%; }
+  .ma-search input { max-width: 100%; }
+}
