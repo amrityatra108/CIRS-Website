@@ -1,5 +1,12 @@
 <section class="crossroads-intro" id="crossroads-intro" aria-label="The Crossroads" data-crossroads-intro data-crossroads-intro-pending>
-  <video class="crossroads-intro__opening" data-crossroads-intro-opening src="assets/video/crossroads-opening.mp4" data-src="assets/video/crossroads-opening.mp4" poster="assets/img/crossroads/opening-final.jpg" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+  <!-- Phones take the 720p cut (tools/make-films.py); a browser that ignores
+       media on a video's sources keeps the 1080p film, which is listed first.
+       preload="auto" is deliberate: the film plays the moment the curtain
+       lifts and holds the page until it ends, so it buffers under the curtain. -->
+  <video class="crossroads-intro__opening" data-crossroads-intro-opening poster="assets/img/crossroads/opening-final.jpg" muted playsinline preload="auto" aria-hidden="true" tabindex="-1">
+    <source src="assets/video/crossroads-opening.mp4" type="video/mp4" media="(min-width: 768px) and (min-height: 501px)">
+    <source src="assets/video/crossroads-opening-m.mp4" type="video/mp4">
+  </video>
   <div class="crossroads-intro__base" aria-hidden="true"></div>
   <div class="crossroads-intro__reveal" aria-hidden="true">
     <img class="crossroads-intro__still" src="assets/img/crossroads/intro-text-free.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" fetchpriority="low">

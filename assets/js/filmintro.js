@@ -54,7 +54,11 @@
   var scrollCue = section.querySelector("[data-film-scroll-cue]");
   var photo = shot && shot.querySelector("img");
   var hasStill = section.hasAttribute("data-film-pending");
-  var sources = film ? film.querySelectorAll("source") : [];
+  // Only the sources this screen will try: one whose media query it fails is
+  // skipped, not failed, and never reports an error to count.
+  var sources = film ? [].filter.call(film.querySelectorAll("source"), function (source) {
+    return !source.media || window.matchMedia(source.media).matches;
+  }) : [];
   var failedSources = 0;
   var fallbackTimer = null;
   var unavailable = false;

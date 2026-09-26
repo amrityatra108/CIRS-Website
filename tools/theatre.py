@@ -647,11 +647,17 @@ def anand_utsav_html():
 </section>'''
 
 
+# The rows stay side by side down to 761px (assets/css/theatre.css goes to one
+# column at 760px), so a tablet draws a third of a row about 40vw wide, not
+# the whole window: measured, not assumed, at 768 and 820px.
 ROW_SIZES = {
-    "feature": ["(min-width: 900px) 64vw, 100vw", "(min-width: 900px) 32vw, 100vw", "(min-width: 900px) 32vw, 100vw"],
+    "feature": ["(min-width: 900px) 64vw, (min-width: 761px) 90vw, 100vw",
+                "(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw",
+                "(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw"],
     "full": ["(min-width: 1320px) 1320px, 100vw"],
-    "trio": ["(min-width: 900px) 32vw, 100vw"] * 3,
-    "duo": ["(min-width: 900px) 58vw, 100vw", "(min-width: 900px) 40vw, 100vw"],
+    "trio": ["(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw"] * 3,
+    "duo": ["(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw",
+            "(min-width: 900px) 40vw, (min-width: 761px) 51vw, 100vw"],
 }
 
 
@@ -660,7 +666,7 @@ def _row(kind, photos, group, start):
     for i, p in enumerate(photos):
         portrait = p["src"][1] > p["src"][0]
         cls = f"th-g th-g--{kind}-{i}" + (" is-portrait" if portrait else "")
-        sizes = "(min-width: 900px) 30vw, 100vw" if portrait else ROW_SIZES[kind][i]
+        sizes = "(min-width: 761px) 30vw, 100vw" if portrait else ROW_SIZES[kind][i]
         figs.append(photo_link(p, group, start + i, sizes, cls=cls))
     extra = " has-portrait" if any(p["src"][1] > p["src"][0] for p in photos) else ""
     return f'        <div class="th-grid__row th-grid__row--{kind}{extra}">\n' + "\n".join(figs) + "\n        </div>"
