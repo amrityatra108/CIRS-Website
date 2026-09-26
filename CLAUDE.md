@@ -59,6 +59,19 @@ every YouTube link. `tools/make-theatre.py` cuts the images into `assets/img/the
 school's Drive (the originals are not in the repository). A photograph is attributed to a house
 only by its Drive folder and the school's own YouTube titles, never by costume colour.
 
+The Founder page opens on the designer's Gurudev handoff: a four-second film
+(`assets/video/gurudev-intro.mp4`, phone cut by `tools/make-films.py`), then a WebGL portrait of
+two GLB busts — the young Balakrishna Menon first, the older Gurudev showing through a trail
+that follows the pointer, with paired swirls after two idle seconds — and an opt-in sound that
+follows cursor speed. `assets/js/founder-opening.js`, `founder-portrait.js` and
+`founder-liquid-sound.js`, styled by `assets/css/founder-portrait.css`. The busts are packed in
+`assets/models/gurudev-portraits.json` and the recording is
+`assets/audio/gurudev-liquid-source.m4a`, both as supplied. The reveal's shader, width, wake,
+swirl timing and the sound's settings are the designer's approved values; change them only on
+the designer's say. The life story below (`#life`) keeps the site's own copy, which has been
+corrected against the Chinmaya archives since the handoff was written — do not revert it to the
+handoff's `events.json`.
+
 Leadership's people, portrait crops and five messages are data in `tools/leadership.py`;
 `tools/make-leadership.py` cuts the portraits. The messages are the school's published text word
 for word — do not copy-edit them. The page keeps native scroll (no Lenis) so its `#msg-…` links

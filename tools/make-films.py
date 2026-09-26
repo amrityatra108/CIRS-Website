@@ -22,6 +22,9 @@ at 720p for phones. The supplied file is kept, never deployed, as the master
 in assets/source/video/, and every run encodes from that master — so running
 this again cannot compound the loss.
 
+The Founder intro arrived at a sensible rate, so its supplied file is left
+exactly as it is and only a 720p phone cut is made from it.
+
     python3 tools/make-films.py          # everything
     python3 tools/make-films.py sports-field theatre-opening
 
@@ -49,6 +52,14 @@ SCRUBBED = {
 # Played films: name -> (desktop CRF, phone CRF). Encoded from the master.
 PLAYED = {
     "crossroads-opening": (18, 21),
+}
+
+# Played films supplied at a sensible rate: name -> CRF of the phone encode.
+# The desktop file is the supplied one, byte for byte, and stays so; only
+# the 720p phone cut is derived from it. The Founder intro is four seconds
+# at 1080p50 and 7.6 Mbit/s, graded and titled by the designer.
+SUPPLIED = {
+    "gurudev-intro": 23,
 }
 
 ALL_INTRA = ["-g", "1", "-keyint_min", "1", "-sc_threshold", "0", "-bf", "0"]
@@ -98,6 +109,12 @@ def main():
             shutil.copy2(os.path.join(VIDEO, f"{name}.mp4"), master)
         run(master, os.path.join(VIDEO, f"{name}.mp4"), "1920:1080", desk)
         run(master, os.path.join(VIDEO, f"{name}-m.mp4"), "1280:720", phone)
+
+    for name, phone in SUPPLIED.items():
+        if wanted and name not in wanted:
+            continue
+        run(os.path.join(VIDEO, f"{name}.mp4"),
+            os.path.join(VIDEO, f"{name}-m.mp4"), "1280:720", phone)
 
 
 if __name__ == "__main__":

@@ -175,7 +175,7 @@ PAGES = {
         # photograph set into them — and brings its own sheet to do it.
         "banner": None,
         "sheet": "founder",
-        "cache_suffix": "-founder-17",
+        "cache_suffix": "-founder-18",
     },
     "why-cirs": {
         "nav": "Why CIRS",
@@ -718,6 +718,10 @@ def rewrite_links(html, slug):
         # Curriculum now has its own #pathways; the legacy alias points to
         # Alumni, so keep this page's banner action on its own section.
         if slug == "curriculum" and anchor == "pathways":
+            return m.group(0)
+        # Likewise the Founder page's own #life, the life story, which its
+        # opening's "Begin the journey" leads down to.
+        if slug == "founder" and anchor == "life":
             return m.group(0)
         if anchor not in SECTION_PAGE:
             return m.group(0)          # href="#" placeholders, and #main
@@ -2082,9 +2086,16 @@ def build(slug, page):
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible!important}'
             '</style></noscript>\n</head>')
     if slug == "founder":
+        # The opening's intro film and portrait both need scripting. Without
+        # it the film is hidden, and the still first portrait stands in for
+        # the interactive one, with only the link down to the life story.
         head = head.replace("</head>",
-            f'<link rel="stylesheet" href="assets/css/founder-intro.css?{CACHE_BUST}-film-2">\n'
-            f'<link rel="stylesheet" href="assets/css/founder-gurudev-journey.css?{CACHE_BUST}-story-5">\n</head>')
+            f'<link rel="stylesheet" href="assets/css/founder-portrait.css?{CACHE_BUST}-portrait-1">\n'
+            f'<link rel="stylesheet" href="assets/css/founder-gurudev-journey.css?{CACHE_BUST}-story-5">\n'
+            '<noscript><style>.gurudev-opening .gc-intro{display:none}'
+            '.gurudev-opening .gp-hero[hidden]{display:block!important}'
+            '.gurudev-opening :is(.gp-hint,.gp-watch,.gp-sound,.gp-toggle){display:none}'
+            '</style></noscript>\n</head>')
     if slug == "sports":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
@@ -2355,7 +2366,11 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}-hover-4" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
     if slug == "founder":
-        parts.append(f'<script src="assets/js/founder-intro.js?{CACHE_BUST}-film-2" defer></script>')
+        # In this order: the sound the portrait calls, the portrait, then the
+        # sequence that hands the intro film over to the portrait.
+        parts.append(f'<script src="assets/js/founder-liquid-sound.js?{CACHE_BUST}-portrait-1" defer></script>')
+        parts.append(f'<script src="assets/js/founder-portrait.js?{CACHE_BUST}-portrait-1" defer></script>')
+        parts.append(f'<script src="assets/js/founder-opening.js?{CACHE_BUST}-portrait-1" defer></script>')
         parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-5" defer></script>')
     if slug == "why-cirs":
         parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')

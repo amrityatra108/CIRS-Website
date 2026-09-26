@@ -28,43 +28,6 @@ body.founder{
 }
 body.founder .footer-wrap{ background:var(--f-paper-2); }
 
-/* Approved autonomous portrait opening, isolated from editorial page styles. */
-.founder .founder-opening{position:relative;box-sizing:border-box;height:100vh;height:100svh;min-height:420px;padding-top:100px;background:var(--paper-2);}
-.founder .founder-opening__frame{display:block;width:100%;height:100%;border:0;}
-/* The embedded portrait draws its own cursor. Hide the site-wide trailing
-   ring while the pointer is inside the iframe so the ring cannot freeze at
-   the browsing-context boundary and appear as a second cursor. */
-body.founder:has(.founder-opening__frame:hover) > .ring{opacity:0!important;}
-.founder .founder-opening__continue{position:absolute;bottom:24px;left:24px;z-index:2;display:flex;gap:20px;align-items:center;padding:12px 18px;border:1px solid var(--f-rule);border-radius:30px;background:var(--f-paper);color:var(--f-ink);font-size:12px;text-decoration:none;}
-.founder .founder-opening__continue:focus-visible{outline:2px solid var(--f-gold-ink);outline-offset:4px;}
-@media(max-width:700px){.founder .founder-opening__continue{left:50%;transform:translateX(-50%);white-space:nowrap;}}
-
-.founder .founder-opening{padding-bottom:160px;min-height:0;}
-.founder-opening__label,.founder-opening__headline,.founder-opening__description,.founder-opening__identity{position:absolute;z-index:2;margin:0;color:var(--f-ink);pointer-events:none;}
-.founder-opening__label{top:132px;left:4vw;font-size:12px;line-height:1.8;letter-spacing:.12em;}
-.founder-opening__label span{letter-spacing:.04em;}
-.founder-opening__headline{left:4vw;top:45%;transform:translateY(-35%);font-family:var(--font-display);font-weight:400;font-size:clamp(30px,3.6vw,66px);line-height:1.02;letter-spacing:-.025em;}
-.founder-opening__description{right:3vw;top:49%;width:23vw;font-size:clamp(12px,1.12vw,18px);line-height:1.7;}
-.founder-opening__description br{display:none;}
-.founder-opening__identity{bottom:96px;left:0;right:0;text-align:center;}
-.founder-opening__identity p{margin:0 0 9px;font-size:clamp(15px,1.3vw,21px);letter-spacing:.07em;}
-.founder-opening__identity span{font-size:10px;letter-spacing:.16em;color:var(--f-gold-ink);}
-.founder-opening__closing{position:absolute;bottom:20px;left:0;right:0;padding:0 24px;text-align:center;}
-.founder-opening__closing p{margin:0;color:var(--f-ink);font-size:clamp(16px,1.3vw,22px);line-height:1.4;letter-spacing:.03em;}
-@media(max-width:800px){
-  .founder .founder-opening{height:100svh;min-height:640px;padding:100px 0 16px;display:flex;flex-direction:column;}
-  .founder-opening__label,.founder-opening__headline,.founder-opening__description,.founder-opening__identity{position:static;transform:none;}
-  .founder-opening__label{margin:0 7vw 8px;font-size:9px;line-height:1.4;}
-  .founder-opening__headline{margin:0 7vw 8px;font-size:clamp(25px,5vw,36px);}
-  .founder .founder-opening__frame{height:0;min-height:120px;flex:1;order:2;}
-  .founder-opening__description{order:4;width:auto;max-width:38ch;margin:10px auto 0;padding:0 20px;font-size:12px;line-height:1.4;text-align:center;}
-  .founder-opening__identity{order:3;margin-top:8px;}
-  .founder-opening__identity p{font-size:13px;margin-bottom:4px;}
-  .founder-opening__identity span{font-size:8px;}
-  .founder-opening__closing{position:static;order:5;padding:12px 16px 0;}
-  .founder-opening__closing p{font-size:14px;}
-}
-
 /* Paper, not a flat fill: a trace of grain so large areas of empty
    ground read as a surface. Cheap — one repeating SVG, no image. */
 body.founder::before{

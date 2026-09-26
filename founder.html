@@ -28,16 +28,17 @@
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=111-founder-17">
-<link rel="stylesheet" href="assets/css/cirs.css?b=111-founder-17">
-<link rel="stylesheet" href="assets/css/pages.css?b=111-founder-17">
+<link rel="stylesheet" href="assets/css/fonts.css?b=111-founder-18">
+<link rel="stylesheet" href="assets/css/cirs.css?b=111-founder-18">
+<link rel="stylesheet" href="assets/css/pages.css?b=111-founder-18">
 <noscript><style>.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/founder.css?b=111-founder-17">
-<link rel="stylesheet" href="assets/css/typography.css?b=111-founder-17">
-<link rel="stylesheet" href="assets/css/founder-intro.css?b=111-founder-17-film-2">
-<link rel="stylesheet" href="assets/css/founder-gurudev-journey.css?b=111-founder-17-story-5">
-<link rel="stylesheet" href="assets/css/footer.css?b=111-founder-17-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=111-founder-17-nav-1">
+<link rel="stylesheet" href="assets/css/founder.css?b=111-founder-18">
+<link rel="stylesheet" href="assets/css/typography.css?b=111-founder-18">
+<link rel="stylesheet" href="assets/css/founder-portrait.css?b=111-founder-18-portrait-1">
+<link rel="stylesheet" href="assets/css/founder-gurudev-journey.css?b=111-founder-18-story-5">
+<noscript><style>.gurudev-opening .gc-intro{display:none}.gurudev-opening .gp-hero[hidden]{display:block!important}.gurudev-opening :is(.gp-hint,.gp-watch,.gp-sound,.gp-toggle){display:none}</style></noscript>
+<link rel="stylesheet" href="assets/css/footer.css?b=111-founder-18-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=111-founder-18-nav-1">
 </head>
 
 <body class="founder litehead">
@@ -285,28 +286,60 @@
     </div>
   </details>
 </nav>
-<!-- Founder film, portrait, life story and educational vision. -->
-<section class="founder-film-intro" id="founder-film-intro" aria-label="Gurudev opening film">
-  <video class="founder-film-intro__video" muted playsinline preload="metadata"
-         poster="assets/img/founder/gurudev-founder-intro-poster.jpg"
-         aria-label="Silent introductory film about Gurudev">
-    <source src="assets/video/gurudev-founder-intro.mp4" type="video/mp4">
-  </video>
-  <div class="founder-film-intro__actions">
-    <button class="founder-film-intro__toggle" type="button" data-founder-film-toggle hidden>Play intro</button>
-    <a class="founder-film-intro__skip" href="#founder-portrait">Skip intro <span aria-hidden="true">&rarr;</span></a>
+<!-- Founder opening: a four-second film, then the interactive portrait,
+     then the life story below. Supplied by the designer as the Gurudev
+     handoff; assets/js/founder-opening.js runs the sequence,
+     founder-portrait.js the portrait and founder-liquid-sound.js its
+     opt-in sound. Without scripting the head's noscript sheet hides the
+     film and shows the still portrait. -->
+<section class="gurudev-opening" id="top" data-gurudev-opening data-phase="intro" aria-label="Gurudev">
+  <div class="gc-opening">
+    <section class="gc-intro" aria-label="Gurudev opening film">
+      <video class="gc-intro-video" muted playsinline preload="metadata"
+             poster="assets/img/founder/gurudev-intro-poster.jpg"
+             aria-label="Four-second silent montage of Gurudev, ending on the word Gurudev">
+        <source src="assets/video/gurudev-intro.mp4" type="video/mp4"
+                media="(min-width: 768px) and (min-height: 501px)">
+        <source src="assets/video/gurudev-intro-m.mp4" type="video/mp4">
+      </video>
+      <!-- The film's last word, redrawn as vector lettering so it finishes
+           sharp. It fades in at 3.78s, in step with the film's own clock. -->
+      <div class="gc-title-sharp" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" focusable="false"><rect width="1920" height="1080" fill="#F6F0E2"/><path fill="#342F27" transform="translate(146.81400 646.40025) scale(0.14850000 -0.14850000)" d="M1392 113H1512V80Q1395 43 1288.0 20.0Q1181 -3 1084.5 -13.5Q988 -24 901 -24Q721 -24 570.5 23.0Q420 70 310.5 165.0Q201 260 140.5 401.0Q80 542 80 729Q80 944 184.5 1107.5Q289 1271 475.0 1362.5Q661 1454 906 1454Q1013 1454 1098.5 1440.5Q1184 1427 1263 1404L1143 1387L1280 1495H1295L1396 970L1366 963L1115 1360L1261 1205Q1170 1297 1077.0 1344.0Q984 1391 878 1391Q784 1391 702.0 1359.0Q620 1327 557.5 1256.0Q495 1185 460.0 1067.0Q425 949 425 776Q425 536 495.0 370.5Q565 205 681.0 119.0Q797 33 934 33Q976 33 1014.5 39.5Q1053 46 1086.5 58.5Q1120 71 1147 88L1075 14V556L884 605V640H1519V605L1392 562ZM2928 577V1353L2751 1397V1430H3167V1397L3004 1353V561Q3004 366 2932.5 236.0Q2861 106 2726.5 41.0Q2592 -24 2404 -24Q2195 -24 2052.5 43.0Q1910 110 1836.5 244.5Q1763 379 1763 582V1354L1600 1397V1430H2261V1397L2097 1354V569Q2097 421 2143.5 326.0Q2190 231 2281.5 185.5Q2373 140 2509 140Q2643 140 2736.5 185.0Q2830 230 2879.0 326.0Q2928 422 2928 577ZM3886 773Q4027 773 4102.5 849.0Q4178 925 4178 1072Q4178 1165 4146.0 1228.5Q4114 1292 4044.0 1325.0Q3974 1358 3861 1358H3487L3542 1430H3970Q4172 1430 4288.5 1385.0Q4405 1340 4455.5 1263.5Q4506 1187 4506 1089Q4506 997 4455.0 920.0Q4404 843 4303.5 794.5Q4203 746 4054 740V743Q4157 740 4224.5 712.0Q4292 684 4335.5 631.5Q4379 579 4410 500L4528 215Q4559 141 4585.5 105.5Q4612 70 4647.5 59.5Q4683 49 4740 49V0Q4587 -11 4491.5 -10.0Q4396 -9 4341.0 10.5Q4286 30 4254.0 70.5Q4222 111 4196 177L4053 538Q4025 608 3998.5 642.5Q3972 677 3941.5 689.0Q3911 701 3869 701H3534L3477 773ZM3752 1430V81L3920 33V0H3250V33L3418 81V1350L3250 1397V1430ZM6052 577V1353L5875 1397V1430H6291V1397L6128 1353V561Q6128 366 6056.5 236.0Q5985 106 5850.5 41.0Q5716 -24 5528 -24Q5319 -24 5176.5 43.0Q5034 110 4960.5 244.5Q4887 379 4887 582V1354L4724 1397V1430H5385V1397L5221 1354V569Q5221 421 5267.5 326.0Q5314 231 5405.5 185.5Q5497 140 5633 140Q5767 140 5860.5 185.0Q5954 230 6003.0 326.0Q6052 422 6052 577ZM7497 726Q7497 1044 7364.0 1198.5Q7231 1353 6967 1353H6711L6693 1430H7025Q7285 1430 7466.5 1350.0Q7648 1270 7743.5 1117.5Q7839 965 7839 748Q7839 501 7734.0 334.5Q7629 168 7448.5 84.0Q7268 0 7040 0H6693L6711 77H6999Q7159 77 7270.0 142.0Q7381 207 7439.0 350.0Q7497 493 7497 726ZM6376 0V33L6540 77V1354L6376 1397V1430H6874V0ZM8920 1056 8877 746 8920 438H8893L8770 700L8359 724V769L8770 796L8893 1056ZM9242 1008 9211 999 8976 1391 9136 1353H8282V1430H9005L9146 1499H9159ZM9010 43 9274 445 9308 436 9191 -66H9174L9041 0H8282V77H9160ZM7980 0V33L8144 77V1354L7980 1397V1430H8478V0ZM9450 1350 9294 1397V1430H9986V1397L9811 1352L10299 259L10246 238L10638 1350L10460 1398V1430H10872V1398L10719 1347L10224 -12H10069Z"/></svg></div>
+      <div class="gc-intro-actions">
+        <button class="gc-intro-pause" type="button" hidden>Pause intro</button>
+        <button class="gc-intro-skip" type="button">Skip intro <span aria-hidden="true">&rarr;</span></button>
+      </div>
+      <div class="gc-intro-fallback" hidden>
+        <p class="gc-intro-status" role="status">An opening glimpse of Gurudev&rsquo;s life.</p>
+        <button class="gc-intro-play" type="button">Play intro</button>
+      </div>
+      <div class="gc-intro-progress" aria-hidden="true"><span></span></div>
+    </section>
+    <section class="gp-hero" aria-label="Explore Gurudev&rsquo;s portrait" hidden
+             data-models="assets/models/gurudev-portraits.json"
+             data-sound="assets/audio/gurudev-liquid-source.m4a">
+      <div class="gp-images" aria-hidden="true">
+        <img class="gp-initial" src="assets/img/founder/gurudev-portrait-initial.webp" alt="" width="1048" height="1499" decoding="async">
+        <img class="gp-revealed" src="assets/img/founder/gurudev-portrait-revealed.webp" alt="" width="1048" height="1501" decoding="async">
+      </div>
+      <canvas class="gp-canvas" role="img" aria-label="A portrait of Gurudev as a young man. Moving the pointer turns it slightly and reveals the older Gurudev through a flowing trail."></canvas>
+      <div class="gp-header">
+        <h1 class="gp-brand">GURUDEV</h1>
+        <a class="gp-begin" href="#life">Begin the journey <span aria-hidden="true">&#8599;</span></a>
+      </div>
+      <p class="gp-hint">Move across the portrait.</p>
+      <div class="gp-footer">
+        <div class="gp-utilities">
+          <button class="gp-watch" type="button">Watch intro</button>
+          <button class="gp-sound" type="button" aria-pressed="false" aria-label="Sound off. Turn liquid sound on" aria-describedby="gp-sound-status">Sound off</button>
+        </div>
+        <span class="gp-name">SWAMI CHINMAYANANDA</span>
+        <button class="gp-toggle" type="button" aria-pressed="false">Reveal portrait</button>
+      </div>
+      <span id="gp-sound-status" class="gp-accessible gp-sound-status" role="status" aria-live="polite">Liquid sound is off.</span>
+      <span class="gp-accessible gp-portrait-status" role="status">The first portrait is visible. Explore with your pointer, or use Reveal portrait.</span>
+    </section>
   </div>
-  <p class="founder-film-intro__status" data-founder-film-status role="status" aria-live="polite" hidden></p>
-  <div class="founder-film-intro__progress" aria-hidden="true"><span data-founder-film-progress></span></div>
-</section>
-
-<section class="founder-opening" id="top" aria-label="Swami Chinmayananda, the founder">
-  <div class="founder-opening__label" id="founder-portrait">THE FOUNDER<br><span>1916–1993</span></div>
-  <h1 class="founder-opening__headline">THE<br>FOUNDER'S<br>VISION</h1>
-  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening?v=38&amp;embed=1" title="Swami Chinmayananda — interactive colour portrait" loading="eager"></iframe>
-  <p class="founder-opening__description">Swami Chinmayananda’s vision of education as transformation continues through CIRS.</p>
-  <div class="founder-opening__identity"><p>Swami Chinmayananda</p><span>OUR FOUNDER</span></div>
-  <div class="founder-opening__closing"><p>A LIFE TRANSFORMED.<br>A VISION THAT CONTINUES.</p></div>
 </section>
 <section class="founder-gurudev-journey" id="life" data-gurudev-journey
          aria-label="Gurudev's life story">
@@ -534,7 +567,7 @@ Herald</strong>
 <section class="fsec feduc" id="education">
   <div class="wrap feduc__open">
     <div class="feduc__plate">
-      <figure class="ffig"><img src="assets/img/founder/gurudev-enquiry.jpg?b=111-founder-17" alt="Pujya Gurudev Swami Chinmayananda holding a laboratory flask up to the light, examining it" loading="lazy" decoding="async" width="1300" height="1597" srcset="assets/img/founder/gurudev-enquiry-800.jpg?b=111-founder-17 800w, assets/img/founder/gurudev-enquiry.jpg?b=111-founder-17 1300w" sizes="(max-width: 899px) 92vw, 44vw"></figure>
+      <figure class="ffig"><img src="assets/img/founder/gurudev-enquiry.jpg?b=111-founder-18" alt="Pujya Gurudev Swami Chinmayananda holding a laboratory flask up to the light, examining it" loading="lazy" decoding="async" width="1300" height="1597" srcset="assets/img/founder/gurudev-enquiry-800.jpg?b=111-founder-18 800w, assets/img/founder/gurudev-enquiry.jpg?b=111-founder-18 1300w" sizes="(max-width: 899px) 92vw, 44vw"></figure>
       <p class="fcaption">A Vedanta teacher, holding a flask up to the light.
         From the school&rsquo;s archive.</p>
     </div>
@@ -567,9 +600,9 @@ Herald</strong>
         people among whom they live.</p>
     </div>
     <div class="fbeyond__archive rv" role="group" aria-label="Gurudev with children and communities">
-      <figure class="ffig fbeyond__archive-main"><img src="assets/img/founder/archive/2481-yr79-children.webp?b=111-founder-17" alt="Swami Chinmayananda seated with a large circle of children and families" loading="lazy" decoding="async" width="1600" height="1098" srcset="assets/img/founder/archive/2481-yr79-children-800.webp?b=111-founder-17 800w, assets/img/founder/archive/2481-yr79-children.webp?b=111-founder-17 1600w" sizes="(max-width: 899px) 92vw, (max-width: 1100px) 68vw, 62vw"></figure>
-      <figure class="ffig fbeyond__archive-side"><img src="assets/img/founder/archive/54yr270-community.webp?b=111-founder-17" alt="Swami Chinmayananda surrounded by children and members of a community" loading="lazy" decoding="async" width="1474" height="990" srcset="assets/img/founder/archive/54yr270-community-800.webp?b=111-founder-17 800w, assets/img/founder/archive/54yr270-community.webp?b=111-founder-17 1474w" sizes="(max-width: 899px) 92vw, 44vw"></figure>
-      <figure class="ffig fbeyond__archive-side fbeyond__archive-side--lower"><img src="assets/img/founder/archive/esan173-children.webp?b=111-founder-17" alt="Swami Chinmayananda seated with children and families in an archival group photograph" loading="lazy" decoding="async" width="1024" height="773"></figure>
+      <figure class="ffig fbeyond__archive-main"><img src="assets/img/founder/archive/2481-yr79-children.webp?b=111-founder-18" alt="Swami Chinmayananda seated with a large circle of children and families" loading="lazy" decoding="async" width="1600" height="1098" srcset="assets/img/founder/archive/2481-yr79-children-800.webp?b=111-founder-18 800w, assets/img/founder/archive/2481-yr79-children.webp?b=111-founder-18 1600w" sizes="(max-width: 899px) 92vw, (max-width: 1100px) 68vw, 62vw"></figure>
+      <figure class="ffig fbeyond__archive-side"><img src="assets/img/founder/archive/54yr270-community.webp?b=111-founder-18" alt="Swami Chinmayananda surrounded by children and members of a community" loading="lazy" decoding="async" width="1474" height="990" srcset="assets/img/founder/archive/54yr270-community-800.webp?b=111-founder-18 800w, assets/img/founder/archive/54yr270-community.webp?b=111-founder-18 1474w" sizes="(max-width: 899px) 92vw, 44vw"></figure>
+      <figure class="ffig fbeyond__archive-side fbeyond__archive-side--lower"><img src="assets/img/founder/archive/esan173-children.webp?b=111-founder-18" alt="Swami Chinmayananda seated with children and families in an archival group photograph" loading="lazy" decoding="async" width="1024" height="773"></figure>
     </div>
   </div>
   <ul class="fwords" aria-label="The qualities his educational vision asked for">
@@ -634,7 +667,7 @@ Herald</strong>
         history &rarr;</a></p>
     </div>
     <div class="fcampus__plate">
-      <figure class="ffig"><img src="assets/img/assembly-front.jpg?b=111-founder-17" alt="The school assembled in front of the main building at CIRS" loading="lazy" decoding="async" width="1400" height="640" srcset="assets/img/assembly-front-800.jpg?b=111-founder-17 800w, assets/img/assembly-front.jpg?b=111-founder-17 1400w" sizes="(max-width: 899px) 92vw, 44vw"></figure>
+      <figure class="ffig"><img src="assets/img/assembly-front.jpg?b=111-founder-18" alt="The school assembled in front of the main building at CIRS" loading="lazy" decoding="async" width="1400" height="640" srcset="assets/img/assembly-front-800.jpg?b=111-founder-18 800w, assets/img/assembly-front.jpg?b=111-founder-18 1400w" sizes="(max-width: 899px) 92vw, 44vw"></figure>
       <p class="fcaption">A hundred acres in the Siruvani foothills.</p>
     </div>
   </div>
@@ -706,7 +739,7 @@ Herald</strong>
 <section class="fsec fstudent" id="student">
   <div class="wrap fstudent__grid">
     <div class="fstudent__plate">
-      <figure class="ffig"><img src="assets/img/students.jpg?b=111-founder-17" alt="CIRS students standing together at a school gathering" loading="lazy" decoding="async" width="1400" height="640"></figure>
+      <figure class="ffig"><img src="assets/img/students.jpg?b=111-founder-18" alt="CIRS students standing together at a school gathering" loading="lazy" decoding="async" width="1400" height="640"></figure>
     </div>
     <div class="fstudent__text">
       <p class="fmeta rv">The purpose</p>
@@ -726,7 +759,7 @@ Herald</strong>
 
 <!-- ---------- 10. The vision lives on ------------------------ -->
 <section class="fsec fclose" id="continues">
-  <figure class="ffig fclose__plate"><img src="assets/img/founder/archive/2353-yr67-community.webp?b=111-founder-17" alt="Swami Chinmayananda welcomed by a community gathered around him" loading="lazy" decoding="async" width="1024" height="732"></figure>
+  <figure class="ffig fclose__plate"><img src="assets/img/founder/archive/2353-yr67-community.webp?b=111-founder-18" alt="Swami Chinmayananda welcomed by a community gathered around him" loading="lazy" decoding="async" width="1024" height="732"></figure>
   <div class="wrap fclose__inner">
     <p class="fmeta rv">Still continuing</p>
     <h2 class="fclose__head rv">The Vision<br><em>Lives On.</em></h2>
@@ -857,13 +890,15 @@ Herald</strong>
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=111-founder-17" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=111-founder-17" defer></script>
-<script src="assets/vendor/lenis.min.js?b=111-founder-17" defer></script>
-<script src="assets/js/cirs.js?b=111-founder-17-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=111-founder-17" defer></script>
-<script src="assets/js/footer.js?b=111-founder-17-footer-1" defer></script>
-<script src="assets/js/founder-intro.js?b=111-founder-17-film-2" defer></script>
-<script src="assets/js/founder-gurudev-journey.js?b=111-founder-17-story-5" defer></script>
+<script src="assets/vendor/gsap.min.js?b=111-founder-18" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=111-founder-18" defer></script>
+<script src="assets/vendor/lenis.min.js?b=111-founder-18" defer></script>
+<script src="assets/js/cirs.js?b=111-founder-18-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=111-founder-18" defer></script>
+<script src="assets/js/footer.js?b=111-founder-18-footer-1" defer></script>
+<script src="assets/js/founder-liquid-sound.js?b=111-founder-18-portrait-1" defer></script>
+<script src="assets/js/founder-portrait.js?b=111-founder-18-portrait-1" defer></script>
+<script src="assets/js/founder-opening.js?b=111-founder-18-portrait-1" defer></script>
+<script src="assets/js/founder-gurudev-journey.js?b=111-founder-18-story-5" defer></script>
 </body>
 </html>

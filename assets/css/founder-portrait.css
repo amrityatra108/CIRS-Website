@@ -1,0 +1,177 @@
+/* ============================================================
+   Founder opening: the four-second intro film, then the
+   interactive portrait. Ported from the designer's Gurudev handoff
+   (src/portrait.css and the intro styles of src/page.html); the
+   behaviour is in founder-opening.js, founder-portrait.js and
+   founder-liquid-sound.js.
+
+   Colours kept as they are, because they are meaning, not decoration:
+     --gc-seam   the warm ivory the intro film and its vector title are
+                 drawn on. The film fades into the portrait, whose WebGL
+                 composite (founder-portrait.js) paints the same ivory,
+                 so the ground of the whole opening is this film seam.
+     --gc-title  the ink of the film's last word, matched to its frames.
+   Everything else — lettering, rules, focus — reads the site's roles.
+
+   Newsreader is the designer's face for this opening: the intro's
+   GURUDEV is Newsreader, and the portrait's lettering continues it.
+   It is self-hosted in fonts.css; see docs/typography.md.
+   ============================================================ */
+.gurudev-opening{
+  --gc-seam:#F6F0E2;
+  --gc-title:#342F27;
+  --gc-face:'Newsreader', var(--font-editorial), Georgia, serif;
+  position:relative;
+  padding-top:var(--nv-hh);
+  background:var(--gc-seam);
+  color:var(--ink);
+  font-family:var(--gc-face);
+  font-optical-sizing:auto;
+}
+.gurudev-opening .gc-opening{
+  position:relative;
+  height:calc(100vh - var(--nv-hh));
+  height:calc(100svh - var(--nv-hh));
+  min-height:520px;
+  max-height:1100px;
+  overflow:hidden;
+  isolation:isolate;
+  background:var(--gc-seam);
+}
+.gurudev-opening [hidden]{ display:none !important; }
+
+/* ---------- The intro film ---------- */
+.gurudev-opening .gc-intro{
+  position:absolute; inset:0; z-index:10; overflow:hidden;
+  background:var(--gc-seam); color:var(--ink);
+  opacity:1; transition:opacity .55s cubic-bezier(.22,.61,.36,1);
+}
+.gurudev-opening[data-phase="leaving"] .gc-intro{ opacity:0; pointer-events:none; }
+.gurudev-opening .gc-intro-video{
+  display:block; width:100%; height:100%; object-fit:contain; background:var(--gc-seam);
+}
+.gurudev-opening .gc-title-sharp{
+  position:absolute; inset:0; background:var(--gc-seam); opacity:0; pointer-events:none;
+}
+.gurudev-opening .gc-title-sharp svg{ display:block; width:100%; height:100%; }
+.gurudev-opening .gc-title-sharp rect{ fill:var(--gc-seam); }
+.gurudev-opening .gc-title-sharp path{ fill:var(--gc-title); }
+.gurudev-opening .gc-intro-actions{
+  position:absolute; top:20px; right:20px; display:flex; gap:8px; align-items:center;
+}
+.gurudev-opening .gc-intro button{
+  min-height:44px; padding:10px 17px;
+  border:1px solid var(--rule); border-radius:24px;
+  background:var(--gc-seam); color:var(--ink);
+  font:500 15px/1.2 var(--gc-face); cursor:pointer;
+}
+.gurudev-opening .gc-intro button:hover{ background:var(--paper-3); }
+.gurudev-opening .gc-intro-fallback{
+  position:absolute; left:20px; right:20px; bottom:52px; text-align:center;
+}
+.gurudev-opening .gc-intro-status{
+  margin:0 auto 14px; max-width:36em;
+  font:400 16px/1.45 var(--gc-face); color:var(--ink-soft);
+}
+.gurudev-opening .gc-intro-progress{
+  position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--rule);
+}
+.gurudev-opening .gc-intro-progress span{
+  display:block; height:100%; background:var(--gold);
+  transform:scaleX(0); transform-origin:left center;
+}
+
+/* ---------- The portrait ---------- */
+.gurudev-opening .gp-hero{
+  position:absolute; inset:0; z-index:5; overflow:hidden; isolation:isolate;
+  background:var(--gc-seam); color:var(--ink);
+  touch-action:pan-y;
+}
+.gurudev-opening .gp-images,
+.gurudev-opening .gp-canvas{
+  position:absolute; inset:0; display:block; width:100%; height:100%; pointer-events:none;
+}
+.gurudev-opening .gp-images{ overflow:hidden; background:var(--gc-seam); }
+.gurudev-opening .gp-images img{
+  position:absolute; display:block; max-width:none; height:auto; object-fit:contain;
+  width:var(--gp-photo-width,72%); left:var(--gp-photo-left,14%); top:var(--gp-photo-top,15px);
+}
+.gurudev-opening .gp-images .gp-revealed{ opacity:0; }
+.gurudev-opening .gp-canvas{ opacity:0; transition:opacity .35s ease; }
+.gurudev-opening .gp-hero[data-renderer="webgl-3d"] .gp-canvas,
+.gurudev-opening .gp-hero[data-renderer="canvas-trail"] .gp-flat-canvas{ opacity:1; }
+
+.gurudev-opening .gp-header{
+  position:absolute; left:36px; right:36px; top:28px;
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  pointer-events:none;
+}
+.gurudev-opening .gp-brand{
+  margin:0; color:var(--ink);
+  font-family:var(--gc-face); font-size:28px; font-weight:400; line-height:1; letter-spacing:.1em;
+}
+.gurudev-opening .gp-hero :is(a, button){
+  pointer-events:auto; min-height:44px; padding:8px 0;
+  border:0; border-radius:0; background:transparent; color:var(--ink);
+  font:400 14px/1.2 var(--gc-face); white-space:nowrap; cursor:pointer;
+}
+.gurudev-opening .gp-hero :is(a, button):focus-visible{
+  outline:2px solid var(--focus); outline-offset:5px;
+}
+.gurudev-opening .gp-begin{
+  display:flex; align-items:center; gap:18px;
+  border-bottom:1px solid var(--gold) !important;
+  text-decoration:none;
+}
+.gurudev-opening .gp-begin span{ font-size:20px; }
+.gurudev-opening .gp-hint{
+  position:absolute; top:83px; left:36px; margin:0;
+  font:400 13px/1.4 var(--gc-face); letter-spacing:.015em; color:var(--ink-soft);
+  pointer-events:none; opacity:1; transition:opacity .45s ease;
+}
+.gurudev-opening .gp-hero[data-explored="true"] .gp-hint{ opacity:0; }
+.gurudev-opening .gp-footer{
+  position:absolute; left:36px; right:36px; bottom:20px;
+  display:grid; grid-template-columns:1fr auto 1fr; gap:22px; align-items:center;
+  pointer-events:none;
+}
+.gurudev-opening .gp-footer button{ color:var(--ink-soft); font-size:13px; justify-self:start; }
+.gurudev-opening .gp-utilities{ display:flex; align-items:center; gap:22px; justify-self:start; }
+.gurudev-opening .gp-sound[aria-pressed="true"]{
+  color:var(--ink); text-decoration:underline; text-underline-offset:5px; text-decoration-thickness:1px;
+}
+.gurudev-opening .gp-footer .gp-toggle{ justify-self:end; }
+.gurudev-opening .gp-name{
+  font-size:10px; letter-spacing:.19em; line-height:1.5; color:var(--ink-soft);
+  text-align:center; white-space:nowrap;
+}
+.gurudev-opening .gp-accessible{
+  position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap;
+}
+
+/* The portrait is its own cursor: the reveal follows the pointer. The
+   site's trailing ring would sit on the face as a second one. */
+body.founder:has(.gurudev-opening .gp-hero:hover) > .ring{ opacity:0 !important; }
+
+@media (max-width:650px){
+  .gurudev-opening .gp-header{ left:22px; right:22px; top:20px; gap:14px; }
+  .gurudev-opening .gp-brand{ font-size:22px; letter-spacing:.07em; }
+  .gurudev-opening .gp-begin{ font-size:13px !important; gap:12px; }
+  .gurudev-opening .gp-hint{ left:22px; top:75px; font-size:12px; }
+  .gurudev-opening .gp-footer{ left:22px; right:22px; bottom:14px; gap:12px; grid-template-columns:1fr 1fr; }
+  .gurudev-opening .gp-utilities{ gap:14px; }
+  .gurudev-opening .gp-name{ position:absolute; bottom:58px; left:0; right:0; }
+  .gurudev-opening .gc-intro-actions{ top:14px; right:14px; }
+  .gurudev-opening .gc-intro button{ font-size:14px; padding:10px 14px; }
+}
+@media (max-width:380px){
+  .gurudev-opening .gp-header{ left:18px; right:18px; gap:10px; }
+  .gurudev-opening .gp-brand{ font-size:20px; }
+  .gurudev-opening .gp-begin{ font-size:12px !important; gap:7px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .gurudev-opening .gc-intro,
+  .gurudev-opening .gp-canvas,
+  .gurudev-opening .gp-hint{ transition:none; }
+}
