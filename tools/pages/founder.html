@@ -1,227 +1,31 @@
-<!-- ============================================================
-     The Founder. An editorial portrait rather than a biography:
-     oversized letters at the weight of a watermark, the archival
-     photograph set into them, and the reading matter small and
-     quiet beside it. Every date here is verifiable; nothing is
-     presented as Gurudev's words that is not.
-     ============================================================ -->
-<section class="founder-opening" id="top" aria-label="From seeker to teacher">
-  <div class="founder-opening__label">THE FOUNDER<br><span>1916–1993</span></div>
-  <h1 class="founder-opening__headline">FROM<br>SEEKER<br>TO GURUDEV</h1>
-  <!-- The portrait is an animation with nothing inside it to operate, so it
-       is not a Tab stop: it took focus with no ring and nothing to do there.
-       No slash after the directory: that is the address Vercel serves it at
-       (trailingSlash is false), so the frame loads without a redirect that
-       could drop "embed=1". Its own <base> resolves its files either way. -->
-  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening?v=31&amp;embed=1" title="Balakrishnan Menon to Swami Chinmayananda — flowing portrait" loading="eager"></iframe>
-  <p class="founder-opening__description">Balakrishna Menon’s search for truth <br>became Swami Chinmayananda’s mission <br>to share it with the world.</p>
-  <div class="founder-opening__identity"><p>SWAMI CHINMAYANANDA</p><span>VISIONARY • TEACHER • FOUNDER</span></div>
+<!-- Founder film, portrait, life story and educational vision. -->
+<section class="founder-film-intro" id="founder-film-intro" aria-label="Gurudev opening film">
+  <video class="founder-film-intro__video" muted playsinline preload="metadata"
+         poster="assets/img/founder/gurudev-founder-intro-poster.jpg"
+         aria-label="Silent introductory film about Gurudev">
+    <source src="assets/video/gurudev-founder-intro.mp4" type="video/mp4">
+  </video>
+  <div class="founder-film-intro__actions">
+    <button class="founder-film-intro__toggle" type="button" data-founder-film-toggle hidden>Play intro</button>
+    <a class="founder-film-intro__skip" href="#founder-portrait">Skip intro <span aria-hidden="true">&rarr;</span></a>
+  </div>
+  <p class="founder-film-intro__status" data-founder-film-status role="status" aria-live="polite" hidden></p>
+  <div class="founder-film-intro__progress" aria-hidden="true"><span data-founder-film-progress></span></div>
+</section>
+
+<section class="founder-opening" id="top" aria-label="Swami Chinmayananda, the founder">
+  <div class="founder-opening__label" id="founder-portrait">THE FOUNDER<br><span>1916–1993</span></div>
+  <h1 class="founder-opening__headline">THE<br>FOUNDER'S<br>VISION</h1>
+  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening?v=38&amp;embed=1" title="Swami Chinmayananda — interactive colour portrait" loading="eager"></iframe>
+  <p class="founder-opening__description">Swami Chinmayananda’s vision of education as transformation continues through CIRS.</p>
+  <div class="founder-opening__identity"><p>Swami Chinmayananda</p><span>OUR FOUNDER</span></div>
   <div class="founder-opening__closing"><p>A LIFE TRANSFORMED.<br>A VISION THAT CONTINUES.</p></div>
 </section>
-<section class="fhero" id="founder-story">
-  <div class="fhero__ghost" aria-hidden="true">
-    <span>Gu</span><span>ru</span><span>dev</span>
-  </div>
-
-  {{FIG:hero|fhero__plate}}
-
-  <div class="wrap fhero__inner">
-    <p class="fmeta">Founder <i>·</i> Visionary <i>·</i> Teacher</p>
-    <span class="frule" aria-hidden="true"></span>
-    <h1 class="fhero__name">Swami<br>Chinmayananda</h1>
-    <span class="frule" aria-hidden="true"></span>
-    <p class="fhero__dates">1916 &mdash; 1993</p>
-    <p class="fhero__say">Education must not merely inform.<br>It must transform.</p>
-    <p class="fhero__sig">Chinmaya International<br>Residential School<br>
-      <span>Siruvani &middot; Coimbatore</span></p>
-  </div>
-
-</section>
-
-<!-- ---------- 2. Our visionary, our leader -------------------- -->
-<section class="fsec fintro" id="man">
-  <div class="wrap fintro__grid">
-    <div class="fintro__text">
-      <p class="fmeta rv">His story</p>
-      <h2 class="fdisplay rv">Our Visionary,<br>Our <em>Leader.</em></h2>
-      <p class="fcopy fcopy--lead rv">He was born Balakrishna Menon in Ernakulam in 1916,
-        read at St. Thomas College in Thrissur and took his M.A. at Lucknow, where he also began
-        law. He trained as a journalist under K. Rama Rao at the <em>National Herald</em>, worked
-        in the freedom movement, and was arrested and jailed for it.</p>
-      <p class="fcopy rv">What followed was not a career but a reversal. He went to Swami Sivananda&rsquo;s ashram at
-        Rishikesh in September 1947, and the visit turned his life over. On Sivaratri in 1949 he
-        received sannyasa from Swami Sivananda and the name Swami Chinmayananda, and was sent on
-        to Uttarkashi for deeper scriptural study under Swami Tapovan Maharaj.</p>
-      <p class="fcopy rv">He might have remained there. The decision that shaped everything after
-        it &mdash; including this school &mdash; was to come back down and teach Vedanta in
-        English, in public, to people who had never been told it was theirs to study.</p>
-    </div>
-
-    <div class="fintro__plate">
-      {{FIG:portrait}}
-      <p class="fcaption">From the school&rsquo;s archive. <a href="assets/img/founder/archive/p638-himalaya.webp">View Gurudev in the Himalayan setting.</a></p>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <ul class="fmarks rv">
-      <li><span class="fmarks__n">1916</span><span class="fmarks__t">Born, Ernakulam</span></li>
-      <li><span class="fmarks__n">1949</span><span class="fmarks__t">Sannyasa, Mahashivaratri</span></li>
-      <li><span class="fmarks__n">1951</span><span class="fmarks__t">First Jnana Yajna, Pune</span></li>
-      <li><span class="fmarks__n">1953</span><span class="fmarks__t">Chinmaya Mission founded</span></li>
-      <li><span class="fmarks__n">1993</span><span class="fmarks__t">Mahasamadhi</span></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ---------- 3. The life ------------------------------------ -->
-<section class="founders-journey" data-founder-journey aria-label="A chronological journey through the founder's life">
-  <div class="founders-journey__camera">
-    <div class="founders-journey__backgrounds" aria-hidden="true">
-      <i data-founder-background="ivory"></i>
-      <i data-founder-background="charcoal"></i>
-      <i data-founder-background="sage"></i>
-    </div>
-    <div class="founders-journey__world" data-founder-world>
-      <svg class="founders-journey__route" data-founder-route aria-hidden="true">
-        <path class="route-base" data-founder-route-base></path>
-        <path class="route-progress" data-founder-route-progress></path>
-        <g data-founder-route-points></g>
-      </svg>
-
-      <div class="founders-journey__opening" data-founder-opening aria-hidden="true">
-        <p>CIRS begins</p>
-        <strong>1996</strong>
-        <span class="founders-journey__school">Chinmaya International Residential School</span>
-        <span class="founders-journey__transition">The story behind that beginning starts earlier.</span>
-      </div>
-
-<section class="fsec flife" id="life">
-  <div class="wrap">
-    <div class="fsec__head rv founder-stop" data-route-stop data-route-id="life-intro" data-route-x="760" data-route-y="900" data-route-period="The Life">
-      <p class="fmeta">The Life</p>
-      <h2 class="fdisplay"><span class="flife-intro__line">A Journey of</span><em class="flife-intro__line">Transformation.</em></h2>
-    </div>
-  </div>
-
-  <ol class="flife__list wrap">
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="beginning-1916" data-route-x="760" data-route-y="1200" data-route-period="1916">
-      <span class="flife__yr">1916</span>
-      <div class="flife__body">
-        <h3 class="flife__h">The Beginning</h3>
-        <p class="fcopy">8 May, Balakrishna Menon is born to Parukutty and Kuttan Menon in Ernakulam.</p>
-      </div>
-      {{FIG:beginning|flife__shot}}
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="education-1921-1943" data-route-x="2000" data-route-y="1200" data-route-period="1921&ndash;1943">
-      <span class="flife__yr">1921&ndash;1943</span>
-      <div class="flife__body">
-        <h3 class="flife__h">Education</h3>
-        <p class="fcopy">From Vivekodayam High School to Lucknow University, Balan collects an FA
-          (Fellow of Arts), a BA (Bachelor of Arts) and nearly an MA (Master of Arts), before leaving
-          to join the freedom struggle.</p>
-      </div>
-      {{FIG:education|flife__shot}}
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="freedom-1942" data-route-x="3300" data-route-y="1000" data-route-period="1942">
-      <span class="flife__yr">1942</span>
-      <div class="flife__body">
-        <h3 class="flife__h">The Freedom Movement</h3>
-        <p class="fcopy">Balan begins to write and distribute leaflets for the freedom movement: a
-          warrant is issued for his arrest, until his capture in 1944.</p>
-      </div>
-      {{FIG:freedom|flife__shot}}
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="national-herald-1945" data-route-x="4500" data-route-y="1000" data-route-period="1945">
-      <span class="flife__yr">1945</span>
-      <div class="flife__body">
-        <h3 class="flife__h">National Herald</h3>
-        <p class="fcopy">Begins to work at <em>National Herald</em>, writing articles in support of
-          the Freedom Movement.</p>
-      </div>
-      <figure class="ffig flife__shot"><img src="assets/img/founder/archive/2633-yr80-writing.webp" srcset="assets/img/founder/archive/2633-yr80-writing-800.webp 800w, assets/img/founder/archive/2633-yr80-writing.webp 1200w" sizes="(max-width: 899px) 92vw, 44vw" alt="Swami Chinmayananda writing at a desk in a later archival photograph" width="1200" height="933" loading="lazy" decoding="async"><figcaption>A later photograph of Gurudev writing, 1980.</figcaption></figure>
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="seeker-1947-1949" data-route-x="5800" data-route-y="1200" data-route-period="1947&ndash;1949">
-      <span class="flife__yr">1947&ndash;1949</span>
-      <div class="flife__body">
-        <h3 class="flife__h">From Skeptic to Seeker</h3>
-        <p class="fcopy">Balan arrives at Rishikesh for an expose of Himalayan monks. He enters as
-          a skeptic, stays as a student, and leaves as a seeker. Swami Sivananda grants him sannyasa
-          diksha and the name Swami Chinmayananda, and points him toward Tapovanji Maharaj for the
-          study of the Upanishads.</p>
-      </div>
-      {{FIG:sannyasa|flife__shot flife__shot--document}}
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="vedanta-masses-1951" data-route-x="7000" data-route-y="1200" data-route-period="1951">
-      <span class="flife__yr">1951</span>
-      <div class="flife__body">
-        <h3 class="flife__h">Vedanta to the Masses</h3>
-        <p class="fcopy">Swami Chinmayananda descends to the plains with the mission of bringing
-          Vedanta to the masses. From 31 December 1951 to 8 April 1952, he holds his first Jnana
-          Yajna at the Ganesha Temple in Rasta Peth, Pune, teaching Vedanta in English to all who come.</p>
-      </div>
-      {{FIG:teaching|flife__shot}}
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="chinmaya-mission-1953" data-route-x="8300" data-route-y="1000" data-route-period="1953">
-      <div class="flife__text">
-        <span class="flife__yr">1953</span>
-        <div class="flife__body">
-          <h3 class="flife__h">Chinmaya Mission</h3>
-          <p class="fcopy">The first Jnana Yajna sparked a growing circle of study groups and
-            volunteers. In 1953, that shared work took the name Chinmaya Mission &mdash; an
-            organised movement created to carry Vedanta into everyday life.</p>
-        </div>
-      </div>
-      <div class="flife__gallery" role="group" aria-label="Early Chinmaya Mission photographs">
-        {{FIG:lecture|flife__shot}}
-        {{FIG:mission|flife__shot}}
-      </div>
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="rock-memorial-1963" data-route-x="10500" data-route-y="1000" data-route-period="1963">
-      <span class="flife__yr">1963</span>
-      <div class="flife__body">
-        <h3 class="flife__h">Vivekananda Rock Memorial</h3>
-        <p class="fcopy">Rs. 10,000 is collected to build the Vivekananda Rock Memorial.</p>
-      </div>
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="sandeepany-1963" data-route-x="10500" data-route-y="1300" data-route-period="1963">
-      <span class="flife__yr">1963</span>
-      <div class="flife__body">
-        <h3 class="flife__h">Sandeepany Sadhanalaya</h3>
-        <p class="fcopy">Establishment of Sandeepany Sadhanalaya.</p>
-      </div>
-      {{FIG:audience|flife__shot}}
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="vishva-hindu-parishad-1964" data-route-x="10500" data-route-y="1600" data-route-period="1964">
-      <span class="flife__yr">1964</span>
-      <div class="flife__body">
-        <h3 class="flife__h">Vishva Hindu Parishad</h3>
-        <p class="fcopy">Gurudev joins forces with RSS Pracharak Apte to form Vishva Hindu Parishad.</p>
-      </div>
-      {{FIG:vhp|flife__shot}}
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="foundation-1993" data-route-x="10500" data-route-y="1900" data-route-period="1993">
-      <span class="flife__yr">1993</span>
-      <div class="flife__body">
-        <h3 class="flife__h">Chinmaya International Foundation</h3>
-        <p class="fcopy">Adi Sankara&rsquo;s birth home is reborn as Chinmaya International Foundation.</p>
-      </div>
-      {{FIG:writing|flife__shot}}
-    </li>
-    <li class="flife__item rv founder-stop" data-route-stop data-route-id="mahasamadhi-1993" data-route-x="10500" data-route-y="2200" data-route-period="1993">
-      <span class="flife__yr">1993</span>
-      <div class="flife__body">
-        <h3 class="flife__h">Mahasamadhi</h3>
-        <p class="fcopy">3 August, Swami Chinmayananda attains Mahasamadhi.</p>
-      </div>
-      {{FIG:legacy|flife__shot}}
-    </li>
-  </ol>
-</section>
+{{FOUNDER_GURUDEV_JOURNEY}}
 
 <!-- ---------- 5. Education as transformation ----------------- -->
 <section class="fsec feduc" id="education">
-  <div class="wrap feduc__open founder-stop" data-route-stop data-route-id="education-transformation" data-route-period="The educational idea" data-route-title="Education as Transformation">
+  <div class="wrap feduc__open">
     <div class="feduc__plate">
       {{FIG:enquiry}}
       <p class="fcaption">A Vedanta teacher, holding a flask up to the light.
@@ -236,35 +40,6 @@
       <p class="fcopy">He saw no quarrel between the laboratory and the Upanishad. Both begin by
         holding a thing up to the light and asking what it actually is.</p>
     </div>
-  </div>
-</section>
-
-    </div>
-
-    <div class="founders-vehicle" data-founder-vehicle aria-hidden="true">
-      <span class="founders-vehicle__shadow"></span>
-      <img class="founders-vehicle__fallback" src="assets/img/founder/amrit-vahini/side.webp" width="1330" height="665" alt="">
-      <div class="founders-vehicle__view founders-vehicle__view--side" data-vehicle-view="side">
-        <img class="founders-vehicle__wheel founders-vehicle__wheel--rear" data-vehicle-wheel src="assets/img/founder/amrit-vahini/wheel-complete.webp" width="256" height="256" alt="">
-        <img class="founders-vehicle__wheel founders-vehicle__wheel--front" data-vehicle-wheel src="assets/img/founder/amrit-vahini/wheel-complete.webp" width="256" height="256" alt="">
-        <img class="founders-vehicle__body" src="assets/img/founder/amrit-vahini/body-no-wheels.webp" width="1330" height="665" alt="">
-      </div>
-    </div>
-    <!-- The supplied Vahini set's other views (front three-quarter, overhead
-         turn, rear three-quarter) and the archive variants this page does not
-         show (p46-hero, p53-portrait, r664-early) are retained in
-         assets/source/founder/: kept, but not deployed. The revised journey
-         uses only the connected side assembly. -->
-
-    <nav class="founders-journey__hud" aria-label="Founder journey progress">
-      <div>
-        <p class="founders-journey__label">Founder journey</p>
-        <p class="founders-journey__period"><span data-founder-period>The life</span><span aria-hidden="true"> · </span><span data-founder-title>A Journey of Transformation</span></p>
-      </div>
-      <div class="founders-journey__meter" aria-hidden="true"><i data-founder-meter></i></div>
-      <p class="founders-journey__count" aria-live="polite"><span data-founder-count>01</span> / <span data-founder-total>14</span></p>
-      <ol class="founders-journey__waypoints" data-founder-waypoints></ol>
-    </nav>
   </div>
 </section>
 

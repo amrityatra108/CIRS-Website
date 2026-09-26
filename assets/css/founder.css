@@ -48,7 +48,7 @@ body.founder:has(.founder-opening__frame:hover) > .ring{opacity:0!important;}
 .founder-opening__description br{display:none;}
 .founder-opening__identity{bottom:96px;left:0;right:0;text-align:center;}
 .founder-opening__identity p{margin:0 0 9px;font-size:clamp(15px,1.3vw,21px);letter-spacing:.07em;}
-.founder-opening__identity span{font-size:10px;letter-spacing:.16em;}
+.founder-opening__identity span{font-size:10px;letter-spacing:.16em;color:var(--f-gold-ink);}
 .founder-opening__closing{position:absolute;bottom:20px;left:0;right:0;padding:0 24px;text-align:center;}
 .founder-opening__closing p{margin:0;color:var(--f-ink);font-size:clamp(16px,1.3vw,22px);line-height:1.4;letter-spacing:.03em;}
 @media(max-width:800px){

@@ -1,14 +1,12 @@
 import * as THREE from "./vendor/three.module.min.js";
 
-// WebP with a lossless alpha channel, cut from the PNG masters in
-// assets/source/founder-opening/ by tools/make-media.py: the same 2048 square.
-const MENON="assets/menon-state-2048.webp";
-const GURUDEV="assets/gurudev-state-2048.webp";
+// Same 2048-pixel portrait, with a lossless alpha channel and compressed colour.
+const PORTRAIT="assets/swami-chinmayananda-registered.webp";
 const mount=document.querySelector("#founder-root");
 if(new URLSearchParams(location.search).has("embed")) document.documentElement.classList.add("is-embedded");
 
 mount.innerHTML=`
-  <main class="prototype" aria-label="Interactive founder portrait prototype">
+  <main class="prototype" aria-label="Interactive founder portrait">
     <div class="ambient" aria-hidden="true">
       <div class="ambient-layer ambient-layer--far" data-parallax="far">
         <div class="ambient-drift ambient-drift--far">
@@ -52,8 +50,8 @@ mount.innerHTML=`
     </div>
     <div class="portrait-stage" data-portrait>
       <div class="portrait-composition" data-composition>
-        <img class="portrait-fallback" src="${MENON}" crossorigin="anonymous" alt="Balakrishna Menon">
-        <canvas class="portrait-canvas" data-canvas aria-label="Continuously flowing portrait transition between Balakrishna Menon and Gurudev Swami Chinmayananda"></canvas>
+        <img class="portrait-fallback" src="${PORTRAIT}" crossorigin="anonymous" alt="Swami Chinmayananda">
+        <canvas class="portrait-canvas" data-canvas aria-label="Move over Swami Chinmayananda to reveal colour"></canvas>
       </div>
       <p class="status" aria-live="polite" data-status>Loading interactive portrait</p>
     </div>
@@ -94,7 +92,7 @@ function startAmbientDrift(){
 }
 
 if(matchMedia("(prefers-reduced-motion: reduce)").matches){
-  status.textContent="Static Balakrishna Menon portrait shown because reduced motion is enabled";
+  status.textContent="Static Swami Chinmayananda portrait shown because reduced motion is enabled";
 }else{
   startAmbientDrift();
   initialise();
@@ -105,7 +103,7 @@ async function initialise(){
   try{
     renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:"high-performance"});
   }catch{
-    status.textContent="Static Balakrishna Menon portrait shown because WebGL is unavailable";
+    status.textContent="Static Swami Chinmayananda portrait shown because WebGL is unavailable";
     return;
   }
 
@@ -114,35 +112,41 @@ async function initialise(){
   renderer.outputColorSpace=THREE.SRGBColorSpace;
 
   const loader=new THREE.TextureLoader();
-  let menon;
-  let gurudev;
+  let portraitTexture;
   try{
-    [menon,gurudev]=await Promise.all([loader.loadAsync(MENON),loader.loadAsync(GURUDEV)]);
+    portraitTexture=await loader.loadAsync(PORTRAIT);
   }catch{
     renderer.dispose();
-    status.textContent="Static Balakrishna Menon portrait shown because an image could not be loaded";
+    status.textContent="Static Swami Chinmayananda portrait shown because an image could not be loaded";
     return;
   }
 
-  for(const texture of [menon,gurudev]){
-    texture.colorSpace=THREE.SRGBColorSpace;
-    texture.minFilter=THREE.LinearFilter;
-    texture.magFilter=THREE.LinearFilter;
-    texture.generateMipmaps=false;
-  }
+  portraitTexture.colorSpace=THREE.SRGBColorSpace;
+  portraitTexture.minFilter=THREE.LinearFilter;
+  portraitTexture.magFilter=THREE.LinearFilter;
+  portraitTexture.generateMipmaps=false;
 
-  // The cursor is parked below the composition until it enters. Its trail
-  // steers the neutral fluid field, but never cuts a hole through either
-  // face.
+  // Use the supplied cutout's alpha so empty parts of the square stage do
+  // not trigger the colour brush.
+  let subjectAlpha;
+  try{
+    const hitCanvas=document.createElement("canvas");
+    hitCanvas.width=hitCanvas.height=256;
+    const hitContext=hitCanvas.getContext("2d",{willReadFrequently:true});
+    hitContext.drawImage(portraitTexture.image,0,0,256,256);
+    subjectAlpha=hitContext.getImageData(0,0,256,256).data;
+  }catch{}
+
+  // The reveal brush is parked below the portrait until the pointer enters.
   const PARK=new THREE.Vector2(.5,-.75);
 
   const uniforms={
-    uMenon:{value:menon},
-    uGurudev:{value:gurudev},
+    uPortrait:{value:portraitTexture},
     uPointer:{value:PARK.clone()},
     uPrevious:{value:PARK.clone()},
     uResolution:{value:new THREE.Vector2(1,1)},
     uActive:{value:0},
+    uBrushOpacity:{value:0},
     uTime:{value:0},
     uVelocity:{value:0}
   };
@@ -160,12 +164,12 @@ async function initialise(){
     fragmentShader:`
       precision highp float;
       varying vec2 vUv;
-      uniform sampler2D uMenon;
-      uniform sampler2D uGurudev;
+      uniform sampler2D uPortrait;
       uniform vec2 uPointer;
       uniform vec2 uPrevious;
       uniform vec2 uResolution;
       uniform float uActive;
+      uniform float uBrushOpacity;
       uniform float uTime;
       uniform float uVelocity;
       uniform vec2 uTrail[7];
@@ -176,18 +180,19 @@ async function initialise(){
         return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),f.x),mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0)),f.x),f.y);
       }
       void main(){
-        vec4 base=texture2D(uMenon,vUv);
-        vec4 transformed=texture2D(uGurudev,vUv);
+        vec4 portrait=texture2D(uPortrait,vUv);
+        float gray=dot(portrait.rgb,vec3(.2126,.7152,.0722));
 
-        // Hover controls the state: Menon while the pointer is away, Gurudev
-        // while it is over the portrait. The state changes as one complete
-        // registered portrait, never as a face/body blend.
-        float reveal=step(.5,uActive);
-        vec4 composed=mix(base,transformed,reveal);
+        // The soft brush reveals colour on the same photograph.
+        float radius=clamp(uResolution.x*.18,72.0,135.0);
+        float edgeNoise=((noise(vUv*vec2(19.0,23.0))-.5)*.28
+                        +(noise(vUv*vec2(43.0,37.0))-.5)*.10)*radius;
+        float cursorDistance=length((vUv-uPointer)*uResolution)+edgeNoise;
+        float colourBrush=1.0-smoothstep(radius*.68,radius*1.08,cursorDistance);
+        vec3 portraitColor=mix(vec3(gray),portrait.rgb,colourBrush*.68*uBrushOpacity);
 
-        // A soft monochrome field ripples through the entire silhouette while
-        // the state changes. It follows the cursor with a delayed wake, but
-        // does not mask, distort, or recolour the historical photographs.
+        // Keep the cursor-steered fluid light moving across the portrait
+        // as the colour brush appears and disappears.
         float t=uTime*.34;
         vec2 drift=(uTrail[1]-vec2(.5))*.62+(uTrail[0]-uTrail[1])*1.35;
         vec2 q=vUv*vec2(4.1,3.3)-drift+vec2(t*.38,-t*.27);
@@ -195,14 +200,15 @@ async function initialise(){
         float field=noise(q+warp*1.55+vec2(t*.18,-t*.13));
         float detail=noise(q*2.35-warp*.52+vec2(-t*.14,t*.19));
         float fluid=smoothstep(.28,.74,field*.78+detail*.22);
-        float silhouette=smoothstep(.018,.22,max(base.a,transformed.a));
+        float silhouette=smoothstep(.018,.22,portrait.a);
         float transfer=sin(clamp(uActive,0.0,1.0)*3.14159265);
         float veil=(.28+fluid*.72)*transfer*silhouette;
-        float luminance=dot(composed.rgb,vec3(.2126,.7152,.0722));
+        float luminance=dot(portraitColor,vec3(.2126,.7152,.0722));
         vec3 neutral=vec3(luminance*1.035+.018);
-        composed.rgb=mix(composed.rgb,neutral,veil*.62);
-        composed.rgb+=vec3(.028)*veil;
-        gl_FragColor=composed;
+        portraitColor=mix(portraitColor,neutral,veil*.62);
+        portraitColor+=vec3(.028)*veil;
+        gl_FragColor=vec4(portraitColor,portrait.a);
+        #include <colorspace_fragment>
       }
     `
   });
@@ -214,11 +220,13 @@ async function initialise(){
   scene.add(plane);
 
   const state={
-    frame:0,lastFrame:0,elapsed:0,inView:true,inside:false,inHero:false,touch:false,lastEvent:0,lastHeroEvent:0,lastMove:performance.now(),active:0,targetActive:0,velocity:0,targetVelocity:0,
+    frame:0,lastFrame:0,elapsed:0,inView:true,inside:false,inHero:false,touch:false,lastEvent:0,lastHeroEvent:0,lastMove:performance.now(),active:0,targetActive:0,brush:0,targetBrush:0,velocity:0,targetVelocity:0,
     rx:0,ry:0,tx:0,ty:0,scale:1,targetRx:0,targetRy:0,targetTx:0,targetTy:0,targetScale:1,
     bgX:0,bgY:0,targetBgX:0,targetBgY:0,
     ringX:innerWidth*.5,ringY:innerHeight*.5,targetCursorX:innerWidth*.5,targetCursorY:innerHeight*.5
   };
+  const coarsePointer=matchMedia("(pointer:coarse)").matches;
+  let touchPinned=false;
 
   function resize(){
     const rect=portrait.getBoundingClientRect();
@@ -234,10 +242,21 @@ async function initialise(){
     );
   }
 
+  function overSubject(position){
+    if(!subjectAlpha)return true;
+    const x=Math.min(255,Math.floor(position.x*256));
+    const y=Math.min(255,Math.floor((1-position.y)*256));
+    return subjectAlpha[(y*256+x)*4+3]>24;
+  }
+
   function move(event){
     if(event.pointerType==="touch"&&!state.touch)return;
     const now=performance.now();
     const next=point(event);
+    if(!overSubject(next)){
+      if(state.inside)leave();
+      return;
+    }
     const distance=next.distanceTo(uniforms.uPointer.value);
     uniforms.uPointer.value.copy(next);
     state.targetVelocity=Math.min(distance/Math.max(now-state.lastMove,12)*34,1);
@@ -245,20 +264,30 @@ async function initialise(){
     state.lastEvent=now;
     state.inside=true;
     state.targetActive=1;
+    state.targetBrush=1;
     state.targetTx=0;state.targetTy=0;state.targetRy=0;state.targetRx=0;state.targetScale=1;
     cursor.classList.add("is-over-portrait");
     requestRender();
   }
 
   function enter(event){if(event.pointerType!=="touch")move(event);}
-  function mouseMove(event){if(performance.now()-state.lastEvent>24)move(event);}
+  function mouseMove(event){if(!coarsePointer&&performance.now()-state.lastEvent>24)move(event);}
   function down(event){
     if(event.pointerType==="mouse")return;
+    if(touchPinned){leave();return;}
+    if(!overSubject(point(event)))return;
+    touchPinned=true;
     state.touch=true;portrait.setPointerCapture?.(event.pointerId);move(event);
   }
+  function up(event){
+    if(event.pointerType!=="touch"){leave();return;}
+    state.touch=false;
+    state.inside=false;
+    requestRender();
+  }
   function leave(){
-    uniforms.uPointer.value.copy(PARK);
-    state.inside=false;state.touch=false;state.targetActive=0;state.targetVelocity=0;state.targetRx=0;state.targetRy=0;state.targetTx=0;state.targetTy=0;state.targetScale=1;
+    touchPinned=false;
+    state.inside=false;state.touch=false;state.targetActive=0;state.targetBrush=0;state.targetVelocity=0;state.targetRx=0;state.targetRy=0;state.targetTx=0;state.targetTy=0;state.targetScale=1;
     cursor.classList.remove("is-over-portrait");requestRender();
   }
   function bounds(event){
@@ -279,18 +308,20 @@ async function initialise(){
     state.targetBgY=THREE.MathUtils.clamp((event.clientY/Math.max(innerHeight,1)-.5)*2,-1,1);
     requestRender();
   }
-  function sceneMouseMove(event){if(performance.now()-state.lastHeroEvent>24)sceneMove(event);}
+  function sceneMouseMove(event){if(!coarsePointer&&performance.now()-state.lastHeroEvent>24)sceneMove(event);}
   function sceneLeave(){
+    if(touchPinned)return;
     state.inHero=false;state.targetBgX=0;state.targetBgY=0;cursor.classList.remove("is-visible","is-over-portrait");leave();requestRender();
   }
+  function portraitLeave(event){if(event.pointerType==="touch"&&touchPinned)return;if(!touchPinned)leave();}
   function render(time){
     state.frame=0;if(!state.inView||document.hidden)return;
     const dt=state.lastFrame?Math.min((time-state.lastFrame)/16.667,3):1;
     state.lastFrame=time;
     state.elapsed+=dt/60;
-    // A deliberate, short handoff lets the neutral field travel across the
-    // full body before and after the complete portrait state changes.
+    // Let the fluid field and colour brush ease with the cursor.
     state.active+=(state.targetActive-state.active)*(state.targetActive>.5 ? .055 : .05);
+    state.brush+=(state.targetBrush-state.brush)*.14;
     state.velocity+=(state.targetVelocity-state.velocity)*.18;
     state.targetVelocity*=.78;
     state.rx+=(state.targetRx-state.rx)*.09;state.ry+=(state.targetRy-state.ry)*.09;
@@ -299,13 +330,13 @@ async function initialise(){
     const ringEase=1-Math.pow(.80,dt);
     state.ringX+=(state.targetCursorX-state.ringX)*ringEase;state.ringY+=(state.targetCursorY-state.ringY)*ringEase;
     const trail=uniforms.uTrail.value;
-    // The ink sweep reads this slow pointer trail as a very slight global
-    // bend. Easing it per frame prevents mouse-event-rate jumps while the
-    // portraits themselves remain perfectly fixed.
+    // Keep the existing cursor easing and ambient movement; the brush itself
+    // reads the exact pointer position so it cannot drift away from the hand.
     uniforms.uPrevious.value.lerp(uniforms.uPointer.value,1-Math.pow(.90,dt));
     trail[0].lerp(uniforms.uPointer.value,1-Math.pow(.86,dt));
     trail[1].lerp(trail[0],1-Math.pow(.965,dt));
     uniforms.uActive.value=state.active;
+    uniforms.uBrushOpacity.value=state.brush;
     uniforms.uVelocity.value=state.velocity;
     uniforms.uTime.value=state.elapsed;
     composition.style.transform=`translate3d(${state.tx}px,${state.ty}px,0) rotateX(${state.rx}deg) rotateY(${state.ry}deg) scale(${state.scale})`;
@@ -316,7 +347,7 @@ async function initialise(){
     renderer.render(scene,camera);
     // Keep the field alive while the pointer is over the portrait and while
     // its in/out transition settles; otherwise leave the GPU idle.
-    if(state.inside||uniforms.uPrevious.value.distanceTo(uniforms.uPointer.value)>.0015||Math.abs(state.active-state.targetActive)>.002||state.velocity>.003||Math.abs(state.bgX-state.targetBgX)>.002||Math.abs(state.bgY-state.targetBgY)>.002||Math.abs(state.ringX-state.targetCursorX)>.08||Math.abs(state.ringY-state.targetCursorY)>.08)requestRender();
+    if(state.inside||uniforms.uPrevious.value.distanceTo(uniforms.uPointer.value)>.0015||Math.abs(state.active-state.targetActive)>.002||Math.abs(state.brush-state.targetBrush)>.002||state.velocity>.003||Math.abs(state.bgX-state.targetBgX)>.002||Math.abs(state.bgY-state.targetBgY)>.002||Math.abs(state.ringX-state.targetCursorX)>.08||Math.abs(state.ringY-state.targetCursorY)>.08)requestRender();
   }
 
   prototype.addEventListener("pointermove",sceneMove,{passive:true});
@@ -327,12 +358,15 @@ async function initialise(){
   portrait.addEventListener("pointermove",move,{passive:true});
   portrait.addEventListener("pointerenter",enter,{passive:true});
   portrait.addEventListener("pointerdown",down,{passive:true});
-  portrait.addEventListener("pointerup",leave,{passive:true});
+  portrait.addEventListener("pointerup",up,{passive:true});
   portrait.addEventListener("pointercancel",leave,{passive:true});
-  portrait.addEventListener("pointerleave",leave,{passive:true});
+  portrait.addEventListener("pointerleave",portraitLeave,{passive:true});
   portrait.addEventListener("mousemove",mouseMove,{passive:true});
   portrait.addEventListener("mouseenter",mouseMove,{passive:true});
-  portrait.addEventListener("mouseleave",leave,{passive:true});
+  portrait.addEventListener("mouseleave",portraitLeave,{passive:true});
+  prototype.addEventListener("pointerdown",event=>{
+    if(touchPinned&&event.pointerType==="touch"&&!portrait.contains(event.target))leave();
+  },{passive:true});
   window.addEventListener("pointermove",bounds,{passive:true});
 
   const resizeObserver=new ResizeObserver(()=>{resize();requestRender();});
@@ -346,6 +380,6 @@ async function initialise(){
   addEventListener("pagehide",()=>{
     cancelAnimationFrame(state.frame);resizeObserver.disconnect();intersectionObserver.disconnect();window.removeEventListener("pointermove",bounds);
     window.gsap?.killTweensOf?.(".ambient-drift");
-    menon.dispose();gurudev.dispose();plane.geometry.dispose();material.dispose();renderer.dispose();
+    portraitTexture.dispose();plane.geometry.dispose();material.dispose();renderer.dispose();
   },{once:true});
 }

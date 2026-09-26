@@ -7,18 +7,14 @@ page actually needs. Nothing is enlarged: a derivative is never wider than
 its master, so a low-resolution photograph stays as sharp as it was and no
 sharper — it only stops costing more than it shows.
 
-    assets/founder-opening/assets/{menon,gurudev}-state-2048.webp
-        The Founder opening's two portrait textures. Same 2048 square, so the
-        WebGL plane samples exactly the same geometry; lossy colour over a
-        lossless alpha channel, so the silhouette's edge is bit-for-bit the
-        PNG's. Masters: assets/source/founder-opening/.
+    assets/founder-opening/assets/swami-chinmayananda-registered.webp
+        The Founder opening's registered 2048px portrait texture. Lossy colour
+        over lossless alpha keeps the silhouette edge exact. Its PNG master is
+        kept under assets/source/founder-opening/.
 
-    assets/img/founder/amrit-vahini/{side,body-no-wheels}.webp, wheel-complete.webp
-        The Amrit Vahini layers. The van is drawn at most 520 CSS px wide and
-        each wheel at 12.68% of that, so the body is cut at 1330x665 (the
-        master's exact 2:1, which assets/css/founder-journey.css's
-        aspect-ratio:1774/887 depends on) and the wheel at 256 square.
-        Masters: assets/source/founder/amrit-vahini/.
+    assets/img/founder/amrit-vahini/{side,body-no-wheels,wheel-complete}.webp
+        Optimized layers for the retained earlier Founder journey. The new
+        journey draws its own lighter vehicle; these stay outside the deploy.
 
     assets/img/alumni/<name>.webp
         The four alumni portraits, at their own size — three of them are
@@ -56,10 +52,8 @@ SOURCE = os.path.join(ROOT, "assets/source")
 
 # (master under assets/source, output, size or None for the master's own, quality)
 WEBP = [
-    ("founder-opening/menon-state-2048.png",
-     "assets/founder-opening/assets/menon-state-2048.webp", None, 92),
-    ("founder-opening/gurudev-state-2048.png",
-     "assets/founder-opening/assets/gurudev-state-2048.webp", None, 92),
+    ("founder-opening/swami-chinmayananda-registered.png",
+     "assets/founder-opening/assets/swami-chinmayananda-registered.webp", None, 92),
     ("founder/amrit-vahini/side.png",
      "assets/img/founder/amrit-vahini/side.webp", (1330, 665), 92),
     ("founder/amrit-vahini/body-no-wheels.png",

@@ -11,36 +11,8 @@
   "h": 640,
   "w": 1400
  },
- "archive/1277-yr60-mission.webp": {
-  "h": 773,
-  "w": 1024
- },
- "archive/1352-yr62-teaching.webp": {
-  "h": 849,
-  "small": [
-   "assets/img/founder/archive/1352-yr62-teaching-800.webp",
-   800
-  ],
-  "w": 1200
- },
- "archive/1499-yr67-lecture.webp": {
-  "h": 1665,
-  "small": [
-   "assets/img/founder/archive/1499-yr67-lecture-800.webp",
-   800
-  ],
-  "w": 1300
- },
- "archive/2033-yr65-vhp.webp": {
-  "h": 766,
-  "w": 1024
- },
  "archive/2353-yr67-community.webp": {
   "h": 732,
-  "w": 1024
- },
- "archive/2451-yr71-audience.webp": {
-  "h": 706,
   "w": 1024
  },
  "archive/2481-yr79-children.webp": {
@@ -51,14 +23,6 @@
   ],
   "w": 1600
  },
- "archive/2633-yr80-writing.webp": {
-  "h": 933,
-  "small": [
-   "assets/img/founder/archive/2633-yr80-writing-800.webp",
-   800
-  ],
-  "w": 1200
- },
  "archive/54yr270-community.webp": {
   "h": 990,
   "small": [
@@ -67,33 +31,9 @@
   ],
   "w": 1474
  },
- "archive/bsan3-education.webp": {
-  "h": 1466,
-  "small": [
-   "assets/img/founder/archive/bsan3-education-800.webp",
-   800
-  ],
-  "w": 1200
- },
- "archive/bsan39-early-years.webp": {
-  "h": 1267,
-  "w": 759
- },
  "archive/esan173-children.webp": {
   "h": 773,
   "w": 1024
- },
- "archive/esan93-sannyasa.webp": {
-  "h": 1095,
-  "small": [
-   "assets/img/founder/archive/esan93-sannyasa-800.webp",
-   800
-  ],
-  "w": 1271
- },
- "archive/official-chinmaya-context.webp": {
-  "h": 1400,
-  "w": 948
  },
  "archive/p607-portrait.webp": {
   "h": 1927,
@@ -103,18 +43,6 @@
   ],
   "w": 1400
  },
- "archive/p638-himalaya.webp": {
-  "h": 1510,
-  "w": 1039
- },
- "archive/r664-contemplative.webp": {
-  "h": 1356,
-  "small": [
-   "assets/img/founder/archive/r664-contemplative-800.webp",
-   800
-  ],
-  "w": 1111
- },
  "gurudev-enquiry.jpg": {
   "h": 1597,
   "small": [
@@ -122,13 +50,5 @@
    800
   ],
   "w": 1300
- },
- "gurudev-hero.jpg": {
-  "h": 2250,
-  "small": [
-   "assets/img/founder/gurudev-hero-800.jpg",
-   800
-  ],
-  "w": 1500
  }
 }
