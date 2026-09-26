@@ -1131,10 +1131,16 @@ section[id]{ scroll-margin-top:88px; }
 /* The corner the floating controls sit in. 24px at most, so back-to-top and
    the "On this page" button above it fit the margin beside the reading
    column from 1366px up instead of sitting over the text. */
-:root{ --float-edge:clamp(16px,1.7vw,24px); }
+:root{ --float-edge:clamp(16px,1.7vw,24px); --float-size:48px; }
+/* On a phone the pair move closer to the edge and down to 44px, still a full
+   touch target, so the lane cirs.js keeps clear of text for them ("Floating
+   controls give way to the reading") costs the column 52px, not 66px. */
+@media (max-width:560px){
+  :root{ --float-edge:max(6px, env(safe-area-inset-right)); --float-size:44px; }
+}
 .totop{
   position:fixed; right:var(--float-edge); bottom:var(--float-edge);
-  z-index:110; width:48px; height:48px; border-radius:50%;
+  z-index:110; width:var(--float-size); height:var(--float-size); border-radius:50%;
   background:var(--purple); color:#fff;
   display:grid; place-items:center;
   opacity:0; visibility:hidden; transform:translateY(10px);
@@ -1143,6 +1149,31 @@ section[id]{ scroll-margin-top:88px; }
 }
 .totop.is-on{ opacity:1; visibility:visible; transform:none; }
 .totop:hover{ background:var(--gold); }
+/* Below 900px there is no margin beside the text for the two floating
+   buttons, so cirs.js keeps a lane down the right-hand edge clear of text:
+   it marks the wrappers that inset the text from that edge with
+   .float-lane and the right padding each needs in --float-pad. Only the
+   right padding changes, so a wrapper's background still runs to the edge.
+   The buttons also step aside while the page is read downwards and return
+   when it is scrolled back up, which keeps them off photographs and links
+   in the lane too. Faded and out of the pointer's way, not hidden: a
+   button reached with the keyboard comes straight back. */
+@media (max-width:900px){
+  .float-lane{ padding-right:var(--float-pad) !important; }
+  /* A button that filled the old column wraps its words in the narrower
+     one rather than running out into the lane. */
+  .float-lane .btn{ max-width:100%; white-space:normal; }
+  .jump{ transition:opacity .3s var(--e), transform .3s var(--e); }
+  html.floats-tucked .totop.is-on:not(:focus-visible),
+  html.floats-tucked .jump:not(:focus-within){
+    opacity:0; transform:translateY(14px); pointer-events:none;
+  }
+}
+@media (max-width:900px) and (prefers-reduced-motion:reduce){
+  .jump{ transition:opacity .3s var(--e); }
+  html.floats-tucked .totop.is-on:not(:focus-visible),
+  html.floats-tucked .jump:not(:focus-within){ transform:none; }
+}
 
 /* ============================================================
    Footer reveal — content scrolls away over a fixed footer

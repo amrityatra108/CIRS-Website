@@ -9,8 +9,11 @@
   <div class="founder-opening__label">THE FOUNDER<br><span>1916–1993</span></div>
   <h1 class="founder-opening__headline">FROM<br>SEEKER<br>TO GURUDEV</h1>
   <!-- The portrait is an animation with nothing inside it to operate, so it
-       is not a Tab stop: it took focus with no ring and nothing to do there. -->
-  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening/?v=30&amp;embed=1" title="Balakrishnan Menon to Swami Chinmayananda — flowing portrait" loading="eager"></iframe>
+       is not a Tab stop: it took focus with no ring and nothing to do there.
+       No slash after the directory: that is the address Vercel serves it at
+       (trailingSlash is false), so the frame loads without a redirect that
+       could drop "embed=1". Its own <base> resolves its files either way. -->
+  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening?v=30&amp;embed=1" title="Balakrishnan Menon to Swami Chinmayananda — flowing portrait" loading="eager"></iframe>
   <p class="founder-opening__description">Balakrishna Menon’s search for truth <br>became Swami Chinmayananda’s mission <br>to share it with the world.</p>
   <div class="founder-opening__identity"><p>SWAMI CHINMAYANANDA</p><span>VISIONARY • TEACHER • FOUNDER</span></div>
   <div class="founder-opening__closing"><p>A LIFE TRANSFORMED.<br>A VISION THAT CONTINUES.</p></div>

@@ -5,6 +5,12 @@
 #
 # _site/ is generated and git-ignored: run the two commands below before
 # deploying, or let the build command do it.
+#
+# Kept in step with vercel.json, with two deliberate differences (HOSTING.md):
+# the build command here has no --vercel, because _headers is this host's file;
+# and there is no trailing-slash setting, because Netlify already redirects
+# /page/ to /page by itself and normalises the slash before redirects are read.
+# 404.html needs nothing here: Netlify serves it for any unknown path.
 
 [build]
   command = "python3 tools/build-site.py && python3 tools/stage-deploy.py"

@@ -65,6 +65,22 @@ SLOTS = {
 }
 
 
+# Supplied with the sets above and kept, but shown nowhere. The page used to
+# carry them in an inert <template>, which did nothing but make
+# stage-deploy.py upload every one of them. Naming them here keeps them in
+# the repository, and out of the deploy, until a slot wants one.
+RETAINED = [
+    # The other views of the Amrit Vahini; the journey uses only its side.
+    "assets/img/founder/amrit-vahini/front-three-quarter.png",
+    "assets/img/founder/amrit-vahini/overhead-turn.png",
+    "assets/img/founder/amrit-vahini/rear-three-quarter.png",
+    # Archive variants from the supplied set that no slot uses.
+    "assets/img/founder/archive/p46-hero.webp",
+    "assets/img/founder/archive/p53-portrait.webp",
+    "assets/img/founder/archive/r664-early.webp",
+]
+
+
 def path(slot):
     """The deployable path for a slot, or None when the file is not here."""
     name = SLOTS[slot][0]

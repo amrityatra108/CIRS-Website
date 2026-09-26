@@ -163,8 +163,25 @@ copy-everything stage produced a **153 MB deploy of a 6 MB site**.
 ### Vercel — the new home
 
 `vercel.json` carries the build command, `_site` as the output directory, `cleanUrls` (so
-`/admissions` works, as it does on Netlify today) and `X-Robots-Tag: noindex` for as long as
-this is a review preview.
+`/admissions` works, as it does on Netlify today), `trailingSlash: false` and
+`X-Robots-Tag: noindex` for as long as this is a review preview.
+
+`trailingSlash: false` is not a matter of taste. The pages reach their stylesheets, scripts and
+photographs by relative path, so `/news/` asked for `/news/assets/css/cirs.css` and rendered
+unstyled while returning 200. With it, every `/page/` is a 308 to `/page` — one rule for the
+whole site, where there used to be a hand-written redirect for `/admissions/` alone. Netlify
+already does the same without being told (a 301), and its redirect rules could not express it
+anyway: Netlify normalises the trailing slash before they are read.
+
+The one directory served as a page, `assets/founder-opening/` (the Founder page's framed
+opening), is therefore served at `/assets/founder-opening`. Its `index.html` carries a `<base>`
+so its relative files resolve from either form of the address, and the Founder page frames the
+slashless one, so nothing depends on a redirect keeping the frame's `?embed=1`.
+
+Any address that is no page gets `404.html`, with a 404 status, from both hosts — nothing in
+either configuration is needed for that. It is built like any page (`"404"` in `PAGES`), but a
+host serves it at whatever path failed, so the builder writes its references from the root
+(`/assets/...`) rather than relative to a directory it cannot know.
 
 To deploy it the first time, either:
 
@@ -179,8 +196,10 @@ Two things to watch on the first deploy:
   future image ever fails on a missing interpreter, either commit `_site/` (drop it from
   `.gitignore`) and set `"buildCommand": null`, or add a `package.json` so Vercel selects a
   runtime that includes Python.
-- **`_headers` is Netlify's file** and the staging script still writes it into `_site/`. On
-  Vercel it is inert — harmless, but `vercel.json` is what sets the headers there.
+- **`_headers` is Netlify's file.** Vercel does not read it — it published it as a plain file at
+  `/_headers` — so `vercel.json`'s build command runs `stage-deploy.py --vercel`, which leaves it
+  out; `vercel.json` sets the headers there. This is the one deliberate difference between the
+  two build commands.
 
 `.mcp.json` registers Vercel's MCP server at `https://mcp.vercel.com`. It authenticates over
 OAuth, which cannot be completed from a non-interactive session — run `/mcp` in an interactive
@@ -200,8 +219,8 @@ matters, because doing it the other way round leaves the school with no site at 
 
 1. Confirm every page loads on the Vercel URL, and that the honeycomb hero plays.
 2. Point any DNS or shared links at Vercel.
-3. Delete `netlify.toml`, and remove the `_headers` write from `tools/stage-deploy.py`
-   (`robots.txt` stays — it is host-agnostic).
+3. Delete `netlify.toml`, and remove the `_headers` write and the `--vercel` flag from
+   `tools/stage-deploy.py` and `vercel.json` (`robots.txt` stays — it is host-agnostic).
 4. Delete the Netlify site, so nobody bookmarks a copy that has stopped being updated.
 
 Leaving a stale Netlify deploy running is the failure mode worth avoiding: two live URLs for
@@ -224,8 +243,8 @@ links between pages still resolve, but a local server matches how it will behave
 
 ## Review previews and search engines
 
-`tools/stage-deploy.py` writes `_headers` and `robots.txt` into `_site/`, and `vercel.json`
-sets the same header. They keep the preview out of search results, because the pages still
+`tools/stage-deploy.py` writes `_headers` (for Netlify; not with `--vercel`) and `robots.txt`
+into `_site/`, and `vercel.json` sets the same header. They keep the preview out of search results, because the pages still
 carry bracketed placeholders and an under-construction note that should not be indexed under
 the school's name.
 
