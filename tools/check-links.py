@@ -57,7 +57,11 @@ def resolve(name, ref):
 
     "../assets/img/x.jpg" on curriculum/ib-diploma.html is assets/img/x.jpg;
     the same string on a page at the root would point outside the site.
+    "/assets/img/x.jpg" is read from the root of the site, wherever the page
+    is: 404.html is written that way, because a host serves it at any path.
     """
+    if ref.startswith("/"):
+        return os.path.normpath(ref.lstrip("/")).replace(os.sep, "/")
     joined = os.path.join(os.path.dirname(name), ref)
     return os.path.normpath(joined).replace(os.sep, "/")
 

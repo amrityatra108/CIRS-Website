@@ -656,6 +656,24 @@ PAGES = {
         "cache_suffix": "-alumni-7",
         "uc": False,
     },
+    # What a visitor sees at an address that is no page of this site. Both
+    # hosts serve 404.html from the root of the deploy, with a 404 status,
+    # for any path that matches nothing, so the page cannot know where it is
+    # being shown from: "notfound" writes every reference on it from the root
+    # (see to_root), leaves out the curtain and the closing scene, and gives
+    # it no canonical address. Not in MENU; nobody navigates to it.
+    "404": {
+        "nav": "Page not found",
+        "title": "Page not found | CIRS",
+        "description": "This address is not a page of the Chinmaya International Residential "
+                       "School website.",
+        # The band and its links are the page, in tools/pages/404.html.
+        "banner": None,
+        "sheet": "notfound",
+        "notfound": True,
+        "jump": False,
+        "uc": False,
+    },
 }
 
 # Which page each of the old single-page section anchors now lives on.
@@ -733,8 +751,25 @@ def to_depth(html, slug):
     depth = slug.count("/")
     if not depth:
         return html
-    up = "../" * depth
+    return prefix_refs(html, "../" * depth)
 
+
+def to_root(html):
+    """Write every relative reference from the root of the site instead.
+
+    The not-found page is one file, 404.html, but a host serves it at
+    whatever path failed — /curriculum/cbse/nothing as readily as /nothing —
+    so no relative path can be right for it: "assets/css/cirs.css" would be
+    asked for from /curriculum/cbse/assets/ and the page would arrive
+    unstyled. "/assets/css/cirs.css" is right from anywhere. Only that page
+    is written this way; every other page stays relative, which is what lets
+    the site be opened from a folder as well as served.
+    """
+    return prefix_refs(html, "/")
+
+
+def prefix_refs(html, up):
+    """Put `up` in front of every relative reference, as to_depth describes."""
     def climb(m):
         attr, ref = m.group(1), m.group(2)
         if not ref or ref.startswith(("#", "/", "http://", "https://",
@@ -1980,6 +2015,12 @@ def build(slug, page):
                 .replace("{{DESCRIPTION}}", page["description"])
                 .replace("{{CANONICAL}}", "" if slug == "index" else f"{slug}.html")
                 .replace("{{CACHE_BUST}}", CACHE_BUST))
+    if page.get("notfound"):
+        # The not-found page has no address of its own to be canonical for,
+        # and is never one to index. This is not the review preview's
+        # site-wide noindex and does not go when that does at launch.
+        head = re.sub(r'<link rel="canonical"[^>]*>\n',
+                      '<meta name="robots" content="noindex">\n', head)
 
     # A wall fills the window and does not scroll, so it brings its own sheet
     # and its own script, and goes without the footer and the under-construction
@@ -2080,11 +2121,13 @@ def build(slug, page):
         head = head.replace("</head>",
             portal_motion_gate +
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
-    if slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership"):
+    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership")
+            or page.get("notfound")):
         # These pages open immediately with their own video, document sheets,
         # journal masthead or, on Curriculum, the photograph of learning the
         # page leads with — and School History on its archive's title — so
-        # the shared curtain is unnecessary.
+        # the shared curtain is unnecessary. A visitor who has lost their way
+        # needs the way back at once, not a curtain first.
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
@@ -2128,7 +2171,8 @@ def build(slug, page):
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership"):
+    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership")
+            or page.get("notfound")):
         # Admissions, School Information, News, Curriculum, School History and
         # Leadership each have their own visible opening. The shared curtain would delay it behind a
         # blank screen.
@@ -2258,11 +2302,12 @@ def build(slug, page):
     parts.append("</main>")
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
-        if slug in ("captures", "leadership"):
+        if slug in ("captures", "leadership") or page.get("notfound"):
             # Captures already ends with its own full-width photograph, and
             # Leadership with its staff photograph and a compact pair of
             # links: a second full-screen scene would compete with both.
             # Keep that as the page's final image before the site footer.
+            # The not-found page is kept to its one message and its links.
             footer = footer[footer.index('<div class="footer-wrap">'):]
         if slug == "admissions":
             footer = footer.replace('href="admissions.html#examination">Important Dates',
@@ -2330,6 +2375,8 @@ def build(slug, page):
     # The index goes in after rewrite_links: its anchors name sections on this
     # page, and must not be sent to the page an old single-page anchor meant.
     html = to_depth(rewrite_links("\n".join(parts), slug).replace(JUMP_MARK, jump), slug)
+    if page.get("notfound"):
+        html = to_root(html)
     # A page with newly page-scoped assets can invalidate its own shared and
     # local files without rewriting every generated page in the repository.
     cache_suffix = page.get("cache_suffix", "")
