@@ -7,7 +7,7 @@ PASS  1440×900 category size 56–68px  — 61.9px
 PASS  1440×900 destination size 24–30px  — 28.1px
 PASS  split close to 52 / 48  — 52.0%
 PASS  no italic (synthetic or otherwise) on categories
-PASS  320px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–56
+PASS  320px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 88(2 lines) 72 · links 48–48
 PASS  320×568 no clipping or sideways overflow (header, 5 menu states, Enquire)
 PASS  360px compact rows 68–84 (grow when wrapped), links 46–54  — 72 72 72 72 72 · links 48–48
 PASS  360×740 no clipping or sideways overflow (header, 5 menu states, Enquire)
@@ -43,8 +43,8 @@ PASS  menu: Escape closes and returns focus to Menu
 PASS  Enquire: opens on keyboard focus  — enqBtn
 PASS  Enquire: Escape closes, focus returns to Enquire and it stays closed
 PASS  Enquire: its Close button closes it and returns focus  — enqBtn
-FAIL  1440px scroll position kept through open, wheel over menu, close  — 1200 → 1990 → 2096
-FAIL  390px scroll position kept through open, wheel over menu, close  — 1200 → 1990 → 2096
+FAIL  1440px scroll position kept through open, wheel over menu, close  — 1200 → 1991 → 2095
+FAIL  390px scroll position kept through open, wheel over menu, close  — 1200 → 1989 → 2096
 PASS  reduced motion: menu fully shown at once, no animations, list switches at once  — {"clip":"none","op":"1,1,1,1,1","anim":false}
 
 46 passed, 2 failed
@@ -75,8 +75,9 @@ PASS  admissions           390px  settled 1200 · no-menu 1200 · menu open+whee
 PASS  the-cirs-experience  1440px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
 PASS  the-cirs-experience  390px  settled 1200 · no-menu 1200 · menu open+wheel 1200 · closed 1200
 
-Every page, both sizes (57 pages x 1440x900 and 390x844): no script errors;
-the header solid and on top at 25, 50, 75 and 100% of the page; menu and
-Enquire open and close; no sideways overflow; scroll position unchanged.
+Every page, both sizes (57 pages at 1440x900 and 390x844), on the code as
+merged with main's typography: no script errors; the header solid and on
+top at 25, 50, 75 and 100% of the page; menu and Enquire open and close;
+no sideways overflow; scroll position unchanged.
   1440x900: 57 page views, 57 clean
    390x844: 57 page views, 57 clean
