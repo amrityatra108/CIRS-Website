@@ -85,7 +85,7 @@
         vy: dy,
         age: 0,
         maxAge: 70 + Math.random() * 40,
-        color: Math.random() > 0.4 ? "#D4AF5A" : "#38BDF8"
+        color: Math.random() > 0.4 ? "#C9A961" : "#38BDF8"
       });
       if (trails.length > maxTrails) trails.shift();
     }
@@ -121,7 +121,7 @@
 
       ctx.save();
       // Millimeter sub-grid
-      ctx.strokeStyle = "rgba(212, 175, 90, 0.035)";
+      ctx.strokeStyle = "rgba(201, 169, 97, 0.035)";
       ctx.lineWidth = 0.5;
       ctx.beginPath();
       for (var x = (offsetX % subGrid); x < width; x += subGrid) {
@@ -145,7 +145,7 @@
       ctx.stroke();
 
       // Coordinate axes
-      ctx.strokeStyle = "rgba(212, 175, 90, 0.18)";
+      ctx.strokeStyle = "rgba(201, 169, 97, 0.18)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(cx, 0); ctx.lineTo(cx, height);
@@ -153,7 +153,7 @@
       ctx.stroke();
 
       // Ticks along axes
-      ctx.strokeStyle = "rgba(212, 175, 90, 0.3)";
+      ctx.strokeStyle = "rgba(201, 169, 97, 0.3)";
       ctx.beginPath();
       for (var tx = cx % gridSize; tx < width; tx += gridSize) {
         ctx.moveTo(tx, cy - 3); ctx.lineTo(tx, cy + 3);
@@ -199,7 +199,7 @@
         var y2 = Math.sin(theta2) * radius;
 
         ctx.strokeStyle = (i % 2 === 0)
-          ? "rgba(212, 175, 90, " + (0.06 + progressRatio * 0.16) + ")"
+          ? "rgba(201, 169, 97, " + (0.06 + progressRatio * 0.16) + ")"
           : "rgba(56, 189, 248, " + (0.05 + progressRatio * 0.14) + ")";
 
         ctx.beginPath();
@@ -211,7 +211,7 @@
       // Golden ratio spiral arcs
       if (progressRatio > 0.25 || prefersReducedMotion) {
         ctx.beginPath();
-        ctx.strokeStyle = "rgba(212, 175, 90, " + (0.1 + progressRatio * 0.25) + ")";
+        ctx.strokeStyle = "rgba(201, 169, 97, " + (0.1 + progressRatio * 0.25) + ")";
         ctx.lineWidth = 1.2;
         var spiralTurns = 3.5;
         var a = 3;
@@ -254,8 +254,8 @@
       var pulse = 1 + 0.15 * Math.sin(time * 3);
       var grad = ctx.createRadialGradient(px, py, 2, px, py, 24 * pulse);
       grad.addColorStop(0, "rgba(56, 189, 248, 0.9)");
-      grad.addColorStop(0.3, "rgba(212, 175, 90, 0.45)");
-      grad.addColorStop(1, "rgba(212, 175, 90, 0)");
+      grad.addColorStop(0.3, "rgba(201, 169, 97, 0.45)");
+      grad.addColorStop(1, "rgba(201, 169, 97, 0)");
 
       ctx.fillStyle = grad;
       ctx.beginPath();
@@ -402,7 +402,7 @@
       var m = calculateMetrics();
 
       // 1. Grid background inside canvas
-      ctx.strokeStyle = "rgba(248, 246, 240, 0.04)";
+      ctx.strokeStyle = "rgba(250, 249, 243, 0.04)";
       ctx.lineWidth = 1;
       for (var x = 0; x < V_WIDTH; x += 40) {
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, V_HEIGHT); ctx.stroke();
@@ -412,7 +412,7 @@
       }
 
       // 2. Baseline L (Reflective riverbank)
-      ctx.strokeStyle = "rgba(212, 175, 90, 0.4)";
+      ctx.strokeStyle = "rgba(201, 169, 97, 0.4)";
       ctx.lineWidth = 2.5;
       ctx.beginPath();
       ctx.moveTo(LINE_X_MIN - 30, BASELINE_Y);
@@ -420,7 +420,7 @@
       ctx.stroke();
 
       // Baseline hatch marks below line
-      ctx.strokeStyle = "rgba(212, 175, 90, 0.18)";
+      ctx.strokeStyle = "rgba(201, 169, 97, 0.18)";
       ctx.lineWidth = 1;
       for (var hx = LINE_X_MIN - 20; hx <= LINE_X_MAX + 20; hx += 16) {
         ctx.beginPath();
@@ -431,7 +431,7 @@
 
       // Line L label
       ctx.font = "bold 13px Newsreader, Georgia, serif";
-      ctx.fillStyle = "rgba(212, 175, 90, 0.8)";
+      ctx.fillStyle = "rgba(201, 169, 97, 0.8)";
       ctx.fillText("Line L (Reflective Axis)", LINE_X_MIN - 20, BASELINE_Y - 10);
 
       // 3. Normal at P (perpendicular dashed line)
@@ -451,7 +451,7 @@
       ctx.fillText("Normal", p.x + 5, BASELINE_Y - 75);
 
       // 4. Angle arcs at P
-      ctx.strokeStyle = m.isOptimal ? "rgba(212, 175, 90, 0.9)" : "rgba(56, 189, 248, 0.7)";
+      ctx.strokeStyle = m.isOptimal ? "rgba(201, 169, 97, 0.9)" : "rgba(56, 189, 248, 0.7)";
       ctx.lineWidth = 1.5;
 
       // Arc for alpha (left)
@@ -467,7 +467,7 @@
       ctx.stroke();
 
       ctx.font = "12px sans-serif";
-      ctx.fillStyle = m.isOptimal ? "#F5D37E" : "#7DD3FC";
+      ctx.fillStyle = m.isOptimal ? "#E8D9B5" : "#7DD3FC";
       ctx.fillText("α=" + m.alpha + "°", p.x - 55, BASELINE_Y - 38);
       ctx.fillText("β=" + m.beta + "°", p.x + 18, BASELINE_Y - 38);
 
@@ -484,7 +484,7 @@
         ctx.stroke();
 
         // Line from P to B'
-        ctx.strokeStyle = "rgba(212, 175, 90, 0.4)";
+        ctx.strokeStyle = "rgba(201, 169, 97, 0.4)";
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(ptB_reflected.x, ptB_reflected.y);
@@ -492,7 +492,7 @@
 
         // Collinear straight line A -> B'
         ctx.setLineDash([6, 4]);
-        ctx.strokeStyle = "rgba(245, 211, 126, 0.85)";
+        ctx.strokeStyle = "rgba(232, 217, 181, 0.85)";
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(ptA.x, ptA.y);
@@ -518,13 +518,13 @@
 
       // 6. Draw Path Segments AP and PB
       ctx.lineWidth = m.isOptimal ? 3 : 2;
-      ctx.strokeStyle = m.isOptimal ? "#F5D37E" : "#38BDF8";
+      ctx.strokeStyle = m.isOptimal ? "#E8D9B5" : "#38BDF8";
       ctx.beginPath();
       ctx.moveTo(ptA.x, ptA.y);
       ctx.lineTo(p.x, p.y);
       ctx.stroke();
 
-      ctx.strokeStyle = m.isOptimal ? "#F5D37E" : "#D4AF5A";
+      ctx.strokeStyle = m.isOptimal ? "#E8D9B5" : "#C9A961";
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(ptB.x, ptB.y);
@@ -534,7 +534,7 @@
       drawAnchorPoint(ptA.x, ptA.y, "A (Start)", "#38BDF8");
 
       // 8. Draw Point B
-      drawAnchorPoint(ptB.x, ptB.y, "B (Destination)", "#D4AF5A");
+      drawAnchorPoint(ptB.x, ptB.y, "B (Destination)", "#C9A961");
 
       // 9. Draw Point P (Movable handle)
       drawPointP(p.x, p.y, m.isOptimal);
@@ -559,26 +559,26 @@
 
     function drawPointP(x, y, optimal) {
       var pulse = optimal ? 1.25 : 1;
-      var auraColor = optimal ? "rgba(212, 175, 90, 0.4)" : "rgba(56, 189, 248, 0.3)";
+      var auraColor = optimal ? "rgba(201, 169, 97, 0.4)" : "rgba(56, 189, 248, 0.3)";
 
       ctx.fillStyle = auraColor;
       ctx.beginPath();
       ctx.arc(x, y, 18 * pulse, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = optimal ? "#F5D37E" : "#FFFFFF";
+      ctx.fillStyle = optimal ? "#E8D9B5" : "#FFFFFF";
       ctx.beginPath();
       ctx.arc(x, y, 8, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.strokeStyle = optimal ? "#D4AF5A" : "#060609";
+      ctx.strokeStyle = optimal ? "#C9A961" : "#060605";
       ctx.lineWidth = 2.5;
       ctx.beginPath();
       ctx.arc(x, y, 8, 0, Math.PI * 2);
       ctx.stroke();
 
       ctx.font = "bold 14px sans-serif";
-      ctx.fillStyle = optimal ? "#F5D37E" : "#FFFFFF";
+      ctx.fillStyle = optimal ? "#E8D9B5" : "#FFFFFF";
       ctx.fillText("Point P", x - 22, y + 26);
     }
 
@@ -871,13 +871,13 @@
 
             if (currentStage === "04" || currentStage === "05") {
               // Highlighting parity in Stage 4 & 5
-              ctx.fillStyle = isDark ? "#1A1822" : "rgba(212, 175, 90, 0.28)";
+              ctx.fillStyle = isDark ? "#181815" : "rgba(201, 169, 97, 0.28)";
             } else {
-              ctx.fillStyle = isDark ? "#14151E" : "#242738";
+              ctx.fillStyle = isDark ? "#181815" : "#2A2925";
             }
             ctx.fillRect(x, y, tileSize, tileSize);
 
-            ctx.strokeStyle = "rgba(248, 246, 240, 0.08)";
+            ctx.strokeStyle = "rgba(250, 249, 243, 0.08)";
             ctx.lineWidth = 1;
             ctx.strokeRect(x, y, tileSize, tileSize);
           }
@@ -900,26 +900,26 @@
         ctx.fillText("2×1 Domino", dx + 8, dy + 26);
       } else if (currentStage === "02") {
         // Highlight edge sharing
-        ctx.strokeStyle = "#F5D37E";
+        ctx.strokeStyle = "#E8D9B5";
         ctx.lineWidth = 3;
         ctx.strokeRect(startX + 3 * tileSize, startY + 3 * tileSize, tileSize * 2, tileSize);
 
-        ctx.fillStyle = "#F5D37E";
+        ctx.fillStyle = "#E8D9B5";
         ctx.font = "12px sans-serif";
         ctx.fillText("Always 1 Dark + 1 Light", startX + 3 * tileSize - 10, startY + 3 * tileSize - 10);
       } else if (currentStage === "04") {
         // Stage 4 Solve: Tally banner
-        ctx.fillStyle = "rgba(13, 14, 20, 0.9)";
+        ctx.fillStyle = "rgba(17, 17, 15, 0.9)";
         ctx.fillRect(20, h - 60, w - 40, 44);
-        ctx.strokeStyle = "var(--ma-gold, #D4AF5A)";
+        ctx.strokeStyle = "var(--ma-gold, #C9A961)";
         ctx.strokeRect(20, h - 60, w - 40, 44);
 
         ctx.font = "bold 13px sans-serif";
-        ctx.fillStyle = "#F5D37E";
+        ctx.fillStyle = "#E8D9B5";
         ctx.fillText("Board: 30 Dark + 32 Light ≠ 31 Dominoes (Impossible!)", 36, h - 33);
       } else if (currentStage === "05") {
         // Stage 5 Discover
-        ctx.fillStyle = "rgba(13, 14, 20, 0.92)";
+        ctx.fillStyle = "rgba(17, 17, 15, 0.92)";
         ctx.fillRect(20, h - 60, w - 40, 44);
         ctx.strokeStyle = "#38BDF8";
         ctx.strokeRect(20, h - 60, w - 40, 44);
@@ -936,7 +936,7 @@
       var startX = (w - 2 * tileSize) / 2;
       var startY = (h - 2 * tileSize) / 2;
 
-      ctx.fillStyle = "#F8F6F0";
+      ctx.fillStyle = "#FAF9F3";
       ctx.font = "bold 16px sans-serif";
       ctx.fillText("Minimal Case: 2×2 Board", startX + 10, startY - 24);
 
@@ -950,19 +950,19 @@
       ctx.fillText("Excised", startX + 25, startY + 55);
 
       // (0,1) - remaining
-      ctx.fillStyle = "#1E2235";
+      ctx.fillStyle = "#1F1F1B";
       ctx.fillRect(startX + tileSize, startY, tileSize, tileSize);
-      ctx.strokeStyle = "#D4AF5A";
+      ctx.strokeStyle = "#C9A961";
       ctx.strokeRect(startX + tileSize, startY, tileSize, tileSize);
-      ctx.fillStyle = "#F5D37E";
+      ctx.fillStyle = "#E8D9B5";
       ctx.fillText("Square A", startX + tileSize + 20, startY + 55);
 
       // (1,0) - remaining
-      ctx.fillStyle = "#1E2235";
+      ctx.fillStyle = "#1F1F1B";
       ctx.fillRect(startX, startY + tileSize, tileSize, tileSize);
-      ctx.strokeStyle = "#D4AF5A";
+      ctx.strokeStyle = "#C9A961";
       ctx.strokeRect(startX, startY + tileSize, tileSize, tileSize);
-      ctx.fillStyle = "#F5D37E";
+      ctx.fillStyle = "#E8D9B5";
       ctx.fillText("Square B", startX + 20, startY + tileSize + 55);
 
       // (1,1) - excised
@@ -975,7 +975,7 @@
 
       // Note below
       ctx.font = "italic 13px sans-serif";
-      ctx.fillStyle = "#DFD9CE";
+      ctx.fillStyle = "#E3DCCB";
       ctx.fillText("Squares A & B only touch at a diagonal vertex — sharing NO edge.", startX - 40, startY + 2 * tileSize + 35);
       ctx.fillText("A single 2×1 domino CANNOT cover both!", startX + 10, startY + 2 * tileSize + 55);
     }

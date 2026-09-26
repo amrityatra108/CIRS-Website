@@ -7,8 +7,8 @@
    ============================================================ */
 
 body.sports {
-  background: #09070c;
-  color: #f5eef2;
+  background: #080807;
+  color: #faf9f3;
   overflow-x: clip;
 }
 
@@ -66,7 +66,7 @@ body.sports {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #09070c;
+  background: #080807;
   overflow: hidden;
   padding: calc(var(--space-8) + 30px) 0 var(--space-6);
 }
@@ -118,13 +118,13 @@ body.sports {
 .arena-hero__scrim {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 40%, rgba(9, 7, 12, 0.35) 0%, rgba(9, 7, 12, 0.85) 85%),
-              linear-gradient(180deg, rgba(9, 7, 12, 0.4) 0%, rgba(9, 7, 12, 0.95) 100%);
+  background: radial-gradient(circle at 50% 40%, rgba(8, 8, 7, 0.35) 0%, rgba(8, 8, 7, 0.85) 85%),
+              linear-gradient(180deg, rgba(8, 8, 7, 0.4) 0%, rgba(8, 8, 7, 0.95) 100%);
 }
 
 .arena-hero__scrim--reveal {
-  background: radial-gradient(circle at 50% 40%, rgba(8, 20, 36, 0.25) 0%, rgba(8, 20, 36, 0.85) 85%),
-              linear-gradient(180deg, rgba(8, 20, 36, 0.4) 0%, rgba(8, 20, 36, 0.95) 100%);
+  background: radial-gradient(circle at 50% 40%, rgba(20, 20, 17, 0.25) 0%, rgba(20, 20, 17, 0.85) 85%),
+              linear-gradient(180deg, rgba(20, 20, 17, 0.4) 0%, rgba(20, 20, 17, 0.95) 100%);
 }
 
 .arena-hero__inner {
@@ -141,7 +141,7 @@ body.sports {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(245, 238, 242, 0.15);
+  border-bottom: 1px solid rgba(250, 249, 243, 0.15);
   padding-bottom: var(--space-3);
   margin-top: var(--space-4);
 }
@@ -150,7 +150,7 @@ body.sports {
   margin: 0;
   font-size: var(--fs-xs);
   letter-spacing: 0.18em;
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   text-transform: uppercase;
   display: flex;
   gap: var(--space-4);
@@ -188,7 +188,7 @@ body.sports {
 
 .arena-hero__word:nth-child(2) {
   padding-left: clamp(20px, 8vw, 120px);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
 }
 
 .arena-hero__word:nth-child(3) {
@@ -206,7 +206,7 @@ body.sports {
   justify-content: space-between;
   align-items: flex-end;
   padding-top: var(--space-4);
-  border-top: 1px solid rgba(245, 238, 242, 0.15);
+  border-top: 1px solid rgba(250, 249, 243, 0.15);
 }
 
 .arena-hero__cta {
@@ -214,30 +214,30 @@ body.sports {
   align-items: center;
   gap: var(--space-2);
   background: var(--gold);
-  color: var(--purple-ink);
+  color: var(--dark-ink);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.95rem;
   padding: 14px 28px;
   border-radius: 40px;
-  box-shadow: 0 10px 30px rgba(255, 195, 8, 0.35);
+  box-shadow: 0 10px 30px rgba(201, 169, 97, 0.35);
   transition: transform 0.25s var(--e), box-shadow 0.25s var(--e), background 0.25s ease;
 }
 
 .arena-hero__cta:hover,
 .arena-hero__cta:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 14px 40px rgba(255, 195, 8, 0.5);
+  box-shadow: 0 14px 40px rgba(201, 169, 97, 0.5);
   background: var(--gold-lit);
-  color: var(--purple-ink);
+  color: var(--dark-ink);
 }
 
 .arena-hero__scroll-indicator {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   text-decoration: none;
   font-size: var(--fs-xs);
   letter-spacing: 0.16em;
@@ -290,7 +290,7 @@ body.sports {
    ============================================================ */
 .shift-sec {
   position: relative;
-  background: #100b17;
+  background: #11110f;
   color: #ffffff;
   padding: var(--space-10) 0;
   overflow: hidden;
@@ -337,13 +337,13 @@ body.sports {
 .shift-sec__scrim--indoor {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, #09070c 0%, rgba(30, 20, 15, 0.88) 50%, #100b17 100%);
+  background: linear-gradient(180deg, #080807 0%, rgba(24, 24, 21, 0.88) 50%, #11110f 100%);
 }
 
 .shift-sec__scrim--outdoor {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(16, 11, 23, 0.7) 0%, rgba(10, 15, 30, 0.88) 60%, #0d0a13 100%);
+  background: linear-gradient(180deg, rgba(17, 17, 15, 0.7) 0%, rgba(16, 16, 13, 0.88) 60%, #11110f 100%);
 }
 
 .shift-sec__inner {
@@ -365,16 +365,16 @@ body.sports {
 
 .shift-sec__lead {
   font-size: var(--fs-lead);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   max-width: 62ch;
 }
 
 /* Shift timeline progression */
 .shift-timeline {
-  background: rgba(14, 11, 18, 0.75);
+  background: rgba(17, 17, 15, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(245, 238, 242, 0.14);
+  border: 1px solid rgba(250, 249, 243, 0.14);
   border-radius: 16px;
   padding: var(--space-6);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
@@ -391,7 +391,7 @@ body.sports {
 
 .shift-timeline__progress {
   height: 100%;
-  background: linear-gradient(90deg, var(--gold) 0%, #ff8c42 50%, #5ce1e6 100%);
+  background: linear-gradient(90deg, var(--gold) 0%, #c9a961 50%, #5ce1e6 100%);
   transition: width 0.5s var(--e);
 }
 
@@ -434,7 +434,7 @@ body.sports {
 
 .shift-step__desc {
   font-size: var(--fs-sm);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   line-height: 1.5;
 }
 
@@ -449,7 +449,7 @@ body.sports {
    SECTION 3. SPORTS AT CIRS (EDITORIAL GALLERY)
    ============================================================ */
 .sports-gallery {
-  background: #0d0a13;
+  background: #11110f;
   padding: var(--space-10) 0;
   position: relative;
 }
@@ -506,7 +506,7 @@ body.sports {
 .sport-chapter__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(13, 10, 19, 0.2) 0%, rgba(13, 10, 19, 0.5) 45%, rgba(13, 10, 19, 0.94) 95%);
+  background: linear-gradient(180deg, rgba(17, 17, 15, 0.2) 0%, rgba(17, 17, 15, 0.5) 45%, rgba(17, 17, 15, 0.94) 95%);
 }
 
 .sport-chapter__content {
@@ -536,7 +536,7 @@ body.sports {
 
 .sport-chapter__desc {
   font-size: var(--fs-lead);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   max-width: 58ch;
   line-height: 1.55;
   margin-bottom: var(--space-5);
@@ -554,7 +554,7 @@ body.sports {
 .sport-chapter__meta dt {
   font-size: var(--fs-xs);
   letter-spacing: 0.14em;
-  color: var(--on-purple-mute);
+  color: var(--on-dark-mute);
   text-transform: uppercase;
   margin-bottom: 2px;
 }
@@ -594,7 +594,7 @@ body.sports {
 
 .sport-chapter__support-media figcaption {
   font-size: var(--fs-xs);
-  color: var(--on-purple-mute);
+  color: var(--on-dark-mute);
   padding: 4px 8px;
   background: rgba(0, 0, 0, 0.7);
 }
@@ -634,7 +634,7 @@ body.sports {
     position: absolute;
     inset: 0;
     z-index: 3;
-    background: #0d0a13;
+    background: #11110f;
     opacity: calc(var(--cover, 0) * 0.7);
     pointer-events: none;
   }
@@ -642,7 +642,7 @@ body.sports {
   .sport-chapter__content { padding-block: var(--space-8) clamp(48px, 8vh, 96px); }
   /* The counter reads as a page count once the cards stack. */
   .sport-chapter__num::after { content: " / 06"; opacity: .55; }
-  .sports-extended { margin-top: 0; padding-top: var(--space-10); padding-bottom: var(--space-10); position: relative; z-index: 1; background: #0d0a13; }
+  .sports-extended { margin-top: 0; padding-top: var(--space-10); padding-bottom: var(--space-10); position: relative; z-index: 1; background: #11110f; }
 }
 
 /* Extended sports grid */
@@ -657,7 +657,7 @@ body.sports {
 }
 
 .sports-extended__item {
-  background: rgba(25, 18, 32, 0.6);
+  background: rgba(24, 24, 21, 0.6);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
@@ -667,7 +667,7 @@ body.sports {
 
 .sports-extended__item:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 195, 8, 0.4);
+  border-color: rgba(201, 169, 97, 0.4);
 }
 
 .sports-extended__item h4 {
@@ -678,7 +678,7 @@ body.sports {
 
 .sports-extended__item p {
   margin: 0;
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   font-size: var(--fs-sm);
   line-height: 1.55;
 }
@@ -687,7 +687,7 @@ body.sports {
    SECTION 4. HOUSE COMPETITION
    ============================================================ */
 .house-arena {
-  background: #09070c;
+  background: #080807;
   padding: var(--space-10) 0;
   position: relative;
 }
@@ -802,7 +802,7 @@ body.sports {
 }
 
 .house-band--vasistha .house-band__color-tag { color: #ff7676; }
-.house-band--valmiki .house-band__color-tag { color: #ffd75c; }
+.house-band--valmiki .house-band__color-tag { color: #E0A32A; }
 .house-band--vishwamitra .house-band__color-tag { color: #6ee7b7; }
 .house-band--vyasa .house-band__color-tag { color: #93c5fd; }
 
@@ -827,7 +827,7 @@ body.sports {
 
 .house-band__identity {
   font-size: var(--fs-sm);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   margin-bottom: var(--space-3);
   line-height: 1.5;
 }
@@ -884,7 +884,7 @@ body.sports {
    SECTION 5. THE COMPETITION ARCHIVE
    ============================================================ */
 .laurel-archive {
-  background: #110d16;
+  background: #11110f;
   padding: var(--space-10) 0;
   position: relative;
 }
@@ -910,14 +910,14 @@ body.sports {
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--gold);
-  border-right: 2px solid rgba(255, 195, 8, 0.3);
+  border-right: 2px solid rgba(201, 169, 97, 0.3);
   padding-right: var(--space-4);
   text-align: right;
 }
 
 .archive-entry__card {
   min-width: 0;
-  background: rgba(22, 16, 29, 0.7);
+  background: rgba(19, 19, 17, 0.7);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
@@ -941,7 +941,7 @@ body.sports {
 }
 
 .archive-entry__date {
-  color: var(--on-purple-mute);
+  color: var(--on-dark-mute);
 }
 
 .archive-entry__title {
@@ -953,7 +953,7 @@ body.sports {
 .archive-entry__copy {
   margin: 0 0 var(--space-4);
   font-size: var(--fs-body);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   line-height: 1.6;
 }
 
@@ -970,7 +970,7 @@ body.sports {
   font-size: var(--fs-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--on-purple-mute);
+  color: var(--on-dark-mute);
   margin-bottom: 2px;
 }
 
@@ -981,8 +981,8 @@ body.sports {
 }
 
 .archive-notice {
-  background: rgba(25, 18, 33, 0.5);
-  border: 1px dashed rgba(255, 195, 8, 0.35);
+  background: rgba(24, 24, 21, 0.5);
+  border: 1px dashed rgba(201, 169, 97, 0.35);
   border-radius: 14px;
   padding: var(--space-6);
   margin-left: 164px;
@@ -994,7 +994,7 @@ body.sports {
 }
 
 .archive-notice__text {
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   font-size: var(--fs-sm);
   margin-bottom: var(--space-2);
 }
@@ -1006,7 +1006,7 @@ body.sports {
   }
   .archive-entry__year {
     border-right: none;
-    border-bottom: 2px solid rgba(255, 195, 8, 0.3);
+    border-bottom: 2px solid rgba(201, 169, 97, 0.3);
     padding-bottom: var(--space-1);
     text-align: left;
   }
@@ -1019,7 +1019,7 @@ body.sports {
    SECTION 6. ATHLETE STORIES
    ============================================================ */
 .athlete-stories {
-  background: #09070c;
+  background: #080807;
   padding: var(--space-10) 0;
 }
 
@@ -1034,7 +1034,7 @@ body.sports {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: var(--space-8);
-  background: rgba(20, 15, 26, 0.65);
+  background: rgba(17, 17, 15, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   overflow: hidden;
@@ -1092,19 +1092,19 @@ body.sports {
 
 .athlete-card__byline span {
   font-size: var(--fs-sm);
-  color: var(--on-purple-mute);
+  color: var(--on-dark-mute);
 }
 
 .athlete-card__narrative {
   font-size: var(--fs-body);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   line-height: 1.6;
   margin-bottom: var(--space-6);
 }
 
 .athlete-card--placeholder {
   grid-template-columns: 1fr;
-  background: rgba(18, 13, 24, 0.4);
+  background: rgba(17, 17, 15, 0.4);
   border-style: dashed;
 }
 
@@ -1125,7 +1125,7 @@ body.sports {
    SECTION 7. DISCIPLINE AND DAILY ROUTINE
    ============================================================ */
 .routine-sec {
-  background: #110d16;
+  background: #11110f;
   padding: var(--space-10) 0;
 }
 
@@ -1137,7 +1137,7 @@ body.sports {
 }
 
 .routine-card {
-  background: rgba(22, 16, 29, 0.7);
+  background: rgba(19, 19, 17, 0.7);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
@@ -1150,12 +1150,12 @@ body.sports {
 
 .routine-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 195, 8, 0.4);
+  border-color: rgba(201, 169, 97, 0.4);
 }
 
 .routine-card--highlight {
-  background: linear-gradient(180deg, rgba(45, 25, 60, 0.85) 0%, rgba(22, 16, 29, 0.9) 100%);
-  border-color: rgba(255, 195, 8, 0.45);
+  background: linear-gradient(180deg, rgba(31, 31, 27, 0.85) 0%, rgba(19, 19, 17, 0.9) 100%);
+  border-color: rgba(201, 169, 97, 0.45);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
@@ -1176,7 +1176,7 @@ body.sports {
 
 .routine-card__desc {
   font-size: var(--fs-sm);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   line-height: 1.55;
   margin: 0 0 var(--space-4);
 }
@@ -1186,7 +1186,7 @@ body.sports {
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--on-purple-mute);
+  color: var(--on-dark-mute);
   background: rgba(255, 255, 255, 0.08);
   padding: 3px 10px;
   border-radius: 20px;
@@ -1194,7 +1194,7 @@ body.sports {
 
 .routine-card--highlight .routine-card__tag {
   background: var(--gold);
-  color: var(--purple-ink);
+  color: var(--dark-ink);
   font-weight: 600;
 }
 
@@ -1207,7 +1207,7 @@ body.sports {
   min-height: 80svh;
   display: flex;
   align-items: center;
-  background: #09070c;
+  background: #080807;
   overflow: hidden;
   padding: var(--space-10) 0;
 }
@@ -1235,8 +1235,8 @@ body.sports {
 .laurel-ending__scrim {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(9, 7, 12, 0.5) 0%, rgba(9, 7, 12, 0.95) 90%),
-              linear-gradient(180deg, #110d16 0%, rgba(9, 7, 12, 0.85) 50%, #09070c 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(8, 8, 7, 0.5) 0%, rgba(8, 8, 7, 0.95) 90%),
+              linear-gradient(180deg, #11110f 0%, rgba(8, 8, 7, 0.85) 50%, #080807 100%);
 }
 
 .laurel-ending__inner {
@@ -1256,7 +1256,7 @@ body.sports {
 
 .laurel-ending__lead {
   font-size: var(--fs-lead);
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   margin: 0 auto var(--space-8);
   line-height: 1.6;
 }
@@ -1272,7 +1272,7 @@ body.sports {
    SECTION 9. PRACTICAL INFORMATION
    ============================================================ */
 .sports-practical {
-  background: #0c0910;
+  background: #11110f;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: var(--space-9) 0;
 }
@@ -1290,7 +1290,7 @@ body.sports {
 }
 
 .sports-practical__intro p {
-  color: var(--on-purple-soft);
+  color: var(--on-dark-soft);
   font-size: var(--fs-body);
   line-height: 1.6;
 }
@@ -1305,7 +1305,7 @@ body.sports {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  background: rgba(22, 16, 29, 0.6);
+  background: rgba(19, 19, 17, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 12px;
   padding: var(--space-4) var(--space-5);
@@ -1323,7 +1323,7 @@ body.sports {
 
 .sports-link-card span {
   font-size: var(--fs-sm);
-  color: var(--on-purple-mute);
+  color: var(--on-dark-mute);
   line-height: 1.4;
 }
 
@@ -1331,7 +1331,7 @@ body.sports {
 .sports-link-card:focus-visible {
   transform: translateY(-2px);
   border-color: var(--gold);
-  background: rgba(30, 22, 38, 0.85);
+  background: rgba(24, 24, 21, 0.85);
 }
 
 @media (max-width: 800px) {
@@ -1346,13 +1346,13 @@ body.sports {
    ------------------------------------------------------------
    Every accent that was maroon on this page is gold. On the dark
    grounds — everything from the arena down — that is the site's
-   own --gold-lit (12:1 and up). On the two pale grounds, the
+   own --gold-lit (8:1 and up). On the two pale grounds, the
    facilities list and the under-construction note, gold at full
-   strength would vanish (1.5:1), so they take a deep gold that
-   still reads as gold at 5:1 on paper. The house colour tags are
+   strength would vanish (2.1:1), so they take the site's label
+   colour, 9.9:1 on paper. The house colour tags are
    left alone: "Red" there names Vasistha's colour, not an accent.
    ============================================================ */
-body.sports { --sports-gold-ink: #8A6400; }
+body.sports { --sports-gold-ink: var(--label); }
 body.sports :is(.shift-sec, .sports-gallery, .house-arena, .laurel-archive,
   .athlete-stories, .routine-sec, .laurel-ending, .sports-practical) .sc{ color: var(--gold-lit); }
 body.sports :is(.shift-sec, .sports-gallery, .house-arena, .laurel-archive,
@@ -1362,6 +1362,17 @@ body.sports .sports-facilities__n,
 body.sports .uc__label{ color: var(--sports-gold-ink); }
 body.sports .uc .marker::before,
 body.sports .sports-ground .marker::before{ border-color: var(--sports-gold-ink); }
+
+/* The dark chapters: shared components that default to paper colours
+   (.lead in --ink-soft, the outlined button in --dark, notes in
+   --ink-mute) take their on-dark roles here, where they measured 1.3
+   to 3.1:1 on the page's near-black. */
+body.sports :is(.shift-sec, .sports-gallery, .house-arena, .laurel-archive,
+  .athlete-stories, .routine-sec, .laurel-ending) .lead{ color: var(--on-dark-soft); }
+body.sports :is(.shift-sec, .sports-gallery, .house-arena, .laurel-archive,
+  .athlete-stories, .routine-sec, .laurel-ending) .note{ color: var(--on-dark-mute); }
+body.sports .athlete-stories .btn--outline{ border-color: var(--gold); color: var(--on-dark); }
+body.sports .athlete-stories .btn--outline:hover{ background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
 
 /* ============================================================
    REDUCED MOTION OVERRIDES

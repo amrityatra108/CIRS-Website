@@ -14,14 +14,14 @@
    ============================================================ */
 
 body.artattack{
-  --aa-ivory:   #F6F1E8;
-  --aa-ivory-2: #EEE7DA;
-  --aa-paper:   #FCFAF6;
-  --aa-ink:     #1D1B1A;
-  --aa-soft:    #4C4742;
-  --aa-mute:    #665F58;   /* 5.2:1 on --aa-ivory */
-  --aa-rule:    #D9CFBF;
-  --aa-rule-2:  #E6DED1;
+  --aa-ivory:   var(--paper-2);
+  --aa-ivory-2: var(--paper-3);
+  --aa-paper:   var(--paper);
+  --aa-ink:     var(--ink);
+  --aa-soft:    var(--ink-soft);
+  --aa-mute:    var(--ink-mute);   /* 5.2:1 on --aa-ivory */
+  --aa-rule:    var(--on-dark-soft);
+  --aa-rule-2:  var(--rule);
   --aa-shadow:  0 1px 2px rgba(29,27,26,.10), 0 16px 34px -20px rgba(29,27,26,.34);
   /* The students' own colours, sampled from the walls of work below: used
      only as soft washes behind sections and as the chips of a marker. */
@@ -303,12 +303,12 @@ body.artattack .aa-sec figcaption,
 .aa-ribbon--warm{
   background:
     var(--aa-grain),
-    linear-gradient(100deg, #FBE1C4 0%, #F8D3CB 42%, #EFD9EE 78%, #E4DDF6 100%);
+    linear-gradient(100deg, #EDE7D8 0%, #F8D3CB 42%, #EFD9EE 78%, #E4DDF6 100%);
 }
 .aa-ribbon--cool{
   background:
     var(--aa-grain),
-    linear-gradient(100deg, #D6EEE6 0%, #DDE5F7 45%, #F3E0F0 75%, #FBE6C8 100%);
+    linear-gradient(100deg, #D6EEE6 0%, #DDE5F7 45%, #F3E0F0 75%, #EDE7D8 100%);
 }
 .aa-ribbon.is-drifting{ overflow:hidden; }
 .aa-ribbon__track{
@@ -472,7 +472,7 @@ body.artattack .aa-sec figcaption,
    ============================================================ */
 .aa-viewer{
   position:fixed; inset:0; width:100vw; height:100dvh; max-width:none; max-height:none;
-  margin:0; padding:0; border:0; background:#F3EEE5; color:var(--aa-ink);
+  margin:0; padding:0; border:0; background:#F4F0E6; color:var(--aa-ink);
 }
 .aa-viewer::backdrop{ background:rgba(20,18,17,.45); }
 .aa-viewer__inner{

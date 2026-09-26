@@ -1,10 +1,11 @@
 /* ============================================================
    Chinmaya International Residential School
    ------------------------------------------------------------
-   A deliberate identity refresh: deep purple, gold, dark red,
-   black and white carry the palette, replacing the previous
-   navy/saffron scheme. Photography is the school's own,
-   re-cropped and graded.
+   Ivory and white grounds, charcoal lettering, gold, with natural
+   green for campus and nature and a restrained royal purple for
+   small labels. The colour roles are the tokens below; page sheets
+   read them rather than defining their own. Photography is the
+   school's own, re-cropped and graded, and is never recoloured.
 
    Type:
      Newsreader           English display, body, interface and data
@@ -16,32 +17,86 @@
 :root{
   color-scheme: light;
 
-  --purple:        #392A48;
-  --purple-mid:    #2B2037;
-  --purple-deep:   #1E1626;
-  --purple-ink:    #0E0B12;
-  --gold:     #FFC308;
-  --gold-lit: #FFD75C;
-  --maroon:  #7A0F1E;
+  /* ----------------------------------------------------------
+     Colour. One system, in roles rather than hues: the owner's
+     ivory, gold, natural green and a restrained royal purple.
+     Page sheets read these roles; they do not define their own
+     paper, ink or gold. Ratios are WCAG, measured on the solid
+     pairs named; a surface that is not one of these is measured
+     where it is used.
+     ---------------------------------------------------------- */
 
-  --paper:    #FAF7F8;
-  --paper-2:  #F1EAEF;
-  --paper-3:  #E4DAE1;
+  /* Grounds. */
+  --paper:    #FAF9F3;   /* signature ivory */
+  --paper-2:  #F4F0E6;   /* alternate ivory */
+  --paper-3:  #EDE7D8;   /* cream */
   --white:    #FFFFFF;
 
-  --ink:       #1A1119;
-  --ink-soft:  #4E4350;
-  /* Secondary copy uses a solid colour rather than reduced opacity. This keeps
-     the hierarchy visible without making small text fragile on textured or
-     tinted sections. */
-  --ink-mute:  #685D6B;
-  --on-purple:      #F5EEF2;
-  --on-purple-soft: #D8CDD4;
-  --on-purple-mute: #B9ABB4;
+  /* The immersive dark sections. Warm charcoal, not a colour: they
+     frame photographs and carry gold, and a hue here would compete
+     with both. Lightest to darkest. */
+  --dark:       #2A2925;
+  --dark-mid:   #1F1F1B;
+  --dark-deep:  #181815;
+  --dark-ink:   #11110F;
 
-  --rule:       #DCD2D8;
-  --rule-soft:  #EAE1E6;
-  --rule-purple:  rgba(245,238,242,.20);
+  /* Gold has three jobs and a token for each.
+       --gold       fills, rules, icons, and lettering ON DARK
+                    (6.47:1 on --dark, 7.35:1 on --dark-mid).
+                    2.13:1 on ivory: never lettering on paper.
+       --gold-lit   the hover of a gold fill; lettering on dark.
+       --gold-ink   large lettering on paper only — 4.48:1 on
+                    ivory, 3.83:1 on cream. Not small text.     */
+  --gold:      #C9A961;
+  --gold-lit:  #D8BC7A;
+  --gold-pale: #E8D9B5;
+  --gold-ink:  #8F6E2F;
+  --gold-rgb:  201,169,97;
+  --on-gold:   #1F1F1B;   /* 7.35:1. White on this gold is 2.25:1. */
+
+  /* Small labels on paper — eyebrows, kickers, table heads. The
+     restrained royal purple: 9.86:1 on ivory, 8.43:1 on cream. */
+  --label:        #5B2A72;
+  --purple-pale:  #F3EDF6;
+
+  /* Green belongs to campus and nature, not to every button. */
+  --campus:       #2E5D3A;   /* 7.26:1 on ivory */
+  --campus-dark:  #173B27;
+  --sage:         #A7B896;
+  --nature-pale:  #DCE6D6;
+
+  /* Status: meaning only, never decoration. */
+  --ok:    #287A45;
+  --warn:  #D99A24;
+  --error: #B84A4A;
+  --info:  #4A8BA8;
+
+  /* Lettering on paper. The reference grey #706F68 is 4.78:1 on
+     ivory but 4.43:1 on the alternate ivory, 4.09:1 on cream and
+     3.61:1 on pale gold, and secondary copy sits on all of those.
+     --ink-mute is the nearest step that holds 4.5:1 on every light
+     ground in this palette: 6.17:1 on ivory, 5.27:1 on cream,
+     4.65:1 on pale gold, 5.06:1 on pale green. */
+  --ink:       #1F1F1B;   /* 15.68:1 on ivory */
+  --ink-soft:  #54534D;   /*  7.32:1 */
+  --ink-mute:  #5F5E58;
+
+  /* Lettering on the dark sections. Solid, not translucent, so a
+     photograph under a scrim cannot thin it. */
+  --on-dark:      #FAF9F3;
+  --on-dark-soft: #D6D3CA;   /* 9.73:1 on --dark */
+  --on-dark-mute: #B3B0A7;   /* 6.71:1 on --dark */
+
+  /* Separation. Decorative: a required control outline uses
+     --ink-mute, which is 6.17:1 against ivory. */
+  --rule:       #E3DCCB;
+  --rule-soft:  #EEE9DE;
+  --rule-dark:  rgba(250,249,243,.20);
+  --decoration-mute: #A8A69D;   /* disabled and decorative only */
+
+  /* Keyboard focus: 4.48:1 on ivory and 3.08:1 on --dark, so one
+     ring reads on both grounds. */
+  --focus: #8F6E2F;
 
   --font-primary: "Newsreader";
   --font-editorial: "Literata";
@@ -81,8 +136,8 @@
 
   /* A shared depth language: quiet enough to support the photography rather
      than becoming a second visual subject. */
-  --shadow-image: 0 22px 52px rgba(30,22,38,.14);
-  --shadow-control: 0 8px 22px rgba(30,22,38,.12);
+  --shadow-image: 0 22px 52px rgba(31,31,27,.14);
+  --shadow-control: 0 8px 22px rgba(31,31,27,.12);
 }
 
 /* ============================================================
@@ -110,8 +165,8 @@ h1,h2,h3,h4{ margin:0; font-weight:400; text-wrap:balance; }
 p{ margin:0; }
 ul,ol{ margin:0; padding:0; list-style:none; }
 strong,b{ font-weight:600; }
-::selection{ background:var(--gold); color:#fff; }
-:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+::selection{ background:var(--gold); color:var(--on-gold); }
+:focus-visible{ outline:2px solid var(--focus); outline-offset:3px; }
 
 .sr-only{
   position:absolute; width:1px; height:1px; padding:0; margin:-1px;
@@ -119,7 +174,7 @@ strong,b{ font-weight:600; }
 }
 .skip-link{
   position:absolute; left:12px; top:-60px; z-index:300;
-  background:var(--purple); color:#fff; padding:10px 18px; font-size:var(--fs-sm);
+  background:var(--dark); color:#fff; padding:10px 18px; font-size:var(--fs-sm);
   transition:top .18s var(--e);
 }
 .skip-link:focus{ top:10px; }
@@ -153,16 +208,16 @@ strong,b{ font-weight:600; }
   font-feature-settings:normal;
   letter-spacing:.06em;
   font-size:1.02rem;
-  color:var(--maroon);
+  color:var(--label);
   line-height:1;
 }
-/* Maroon small caps sit at 1.8:1 on the dark grounds — unreadable. Gold is
-   14:1 there. .on-purple is not the only dark section: the film panel, the
+/* Label-purple small caps sit at 1.9:1 on the dark grounds — unreadable.
+   Gold is 7.9:1 there. .on-dark is not the only dark section: the film panel, the
    footer, the closing band and the motto all set a dark background of their
    own, so every dark context is listed here rather than relying on one class
-   being remembered. On paper, maroon stays (10.3:1) — it is the accent that
-   ties the editorial type together. */
-:is(.on-purple, .filmsec, .footer, .finalcta, .band, .motto)
+   being remembered. On paper, the label purple stays (9.86:1) — it is the
+   accent that ties the editorial type together. */
+:is(.on-dark, .filmsec, .footer, .finalcta, .band, .motto)
   :is(.sc, .feature__tag, .dmoment__i){ color:var(--gold-lit); }
 
 /* Section marker: the small diamond and hairline repeat one recognisable CIRS
@@ -170,12 +225,12 @@ strong,b{ font-weight:600; }
 .marker{ display:flex; align-items:center; gap:14px; margin-bottom:20px; }
 .marker::before{
   content:""; width:7px; height:7px; flex:0 0 7px;
-  border:1px solid var(--maroon); transform:rotate(45deg);
+  border:1px solid var(--label); transform:rotate(45deg);
 }
 .marker::after{ content:""; height:1px; flex:1; background:var(--rule); }
-.on-purple .marker::before,
+.on-dark .marker::before,
 :is(.filmsec,.footer,.finalcta,.band,.motto) .marker::before{ border-color:var(--gold-lit); }
-.on-purple .marker::after{ background:var(--rule-purple); }
+.on-dark .marker::after{ background:var(--rule-dark); }
 
 /* Figures: oldstyle in editorial settings, lining+tabular in data */
 .osf{ font-variant-numeric:oldstyle-nums; }
@@ -192,8 +247,8 @@ strong,b{ font-weight:600; }
 section[id]{ scroll-margin-top:88px; }
 .section{ padding-block:clamp(60px,7.5vw,120px); }
 
-.on-purple{ background:var(--purple-deep); color:var(--on-purple); }
-.on-purple .lead,.on-purple .copy{ color:var(--on-purple-soft); }
+.on-dark{ background:var(--dark-deep); color:var(--on-dark); }
+.on-dark .lead,.on-dark .copy{ color:var(--on-dark-soft); }
 .on-paper-2{ background:var(--paper-2); }
 
 .sec-head{ max-width:660px; margin-bottom:clamp(34px,4vw,60px); }
@@ -259,15 +314,15 @@ section[id]{ scroll-margin-top:88px; }
   border-top:1.5px solid currentColor; border-right:1.5px solid currentColor;
   transform:rotate(45deg); transition:transform .25s var(--e);
 }
-.btn[href]:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(30,22,38,.17); }
+.btn[href]:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(24,24,21,.17); }
 .btn[href]:hover::after{ transform:translateX(2px) rotate(45deg); }
 .btn[href]:active{ transform:translateY(0); box-shadow:var(--shadow-control); }
-.btn--primary{ background:var(--gold); color:#1E1626; transition:border-color .25s var(--e); }
-.btn--primary:hover{ background:var(--maroon); color:#fff; }
-.btn--outline{ border-color:var(--purple); color:var(--purple); }
-.btn--outline:hover{ background:var(--purple); color:#fff; }
+.btn--primary{ background:var(--gold); color:var(--on-gold); transition:border-color .25s var(--e); }
+.btn--primary:hover{ background:var(--gold-lit); color:var(--on-gold); }
+.btn--outline{ border-color:var(--dark); color:var(--dark); }
+.btn--outline:hover{ background:var(--dark); color:#fff; }
 .btn--ghost{ border-color:rgba(255,255,255,.55); color:#fff; }
-.btn--ghost:hover{ background:#fff; color:var(--purple-deep); border-color:#fff; }
+.btn--ghost:hover{ background:#fff; color:var(--dark-deep); border-color:#fff; }
 .btn--lg{ padding:15px 30px; }
 
 /* The Menu control's four dots. The control itself is an .htab in
@@ -288,14 +343,14 @@ section[id]{ scroll-margin-top:88px; }
 .drawer__grid{ display:grid; gap:var(--space-6) var(--space-5); grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); }
 .drawer h4{ margin-bottom:var(--space-3); padding-bottom:9px; border-bottom:1px solid var(--rule); }
 .drawer li a{ display:block; padding:var(--space-2) 0; font-size:var(--fs-sm); color:var(--ink-soft); }
-.drawer li a:hover{ color:var(--purple); }
+.drawer li a:hover{ color:var(--dark); }
 .drawer__utility{
   display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-5);
   margin-top:var(--space-7); padding-top:var(--space-5); border-top:1px solid var(--rule);
   font-size:var(--fs-sm); color:var(--ink-mute);
 }
 .drawer__utility a{ color:var(--ink-soft); }
-.drawer__utility a:hover{ color:var(--purple); }
+.drawer__utility a:hover{ color:var(--dark); }
 .drawer__cta{ display:flex; gap:var(--space-3); flex-wrap:wrap; margin-top:var(--space-5); }
 
 /* ============================================================
@@ -307,7 +362,7 @@ section[id]{ scroll-margin-top:88px; }
 .hero{
   position:relative; min-height:100svh; min-height:100vh;
   display:flex; flex-direction:column; justify-content:flex-end;
-  background:var(--purple-ink); overflow:hidden; isolation:isolate;
+  background:var(--dark-ink); overflow:hidden; isolation:isolate;
 }
 .hero__media{
   position:absolute; inset:0; z-index:0;
@@ -326,9 +381,9 @@ section[id]{ scroll-margin-top:88px; }
 .hero__scrim{
   position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
-    linear-gradient(to top, rgba(21,8,24,.95) 0%, rgba(21,8,24,.86) 18%,
-                    rgba(21,8,24,.64) 38%, rgba(21,8,24,.20) 70%,
-                    rgba(21,8,24,.32) 100%);
+    linear-gradient(to top, rgba(24,24,21,.95) 0%, rgba(24,24,21,.86) 18%,
+                    rgba(24,24,21,.64) 38%, rgba(24,24,21,.20) 70%,
+                    rgba(24,24,21,.32) 100%);
 }
 
 /* Anchor the opening headline to the viewport, outside the page's capped grid. */
@@ -361,11 +416,11 @@ section[id]{ scroll-margin-top:88px; }
    Motto band
    ============================================================ */
 .motto{
-  background:var(--purple); color:#fff;
+  background:var(--dark); color:#fff;
   padding-block:clamp(44px,5.5vw,88px);
   text-align:center;
   background-image:
-    radial-gradient(130% 150% at 50% -10%, rgba(201,162,39,.13) 0%, rgba(201,162,39,0) 58%);
+    radial-gradient(130% 150% at 50% -10%, rgba(201,169,97,.13) 0%, rgba(201,169,97,0) 58%);
 }
 .motto__deva{
   font-family:var(--deva);
@@ -395,7 +450,7 @@ section[id]{ scroll-margin-top:88px; }
 .pull{
   font-family:var(--font-primary);
   font-size:clamp(1.5rem,2.6vw,2.25rem);
-  line-height:1.26; color:var(--purple); letter-spacing:-.01em;
+  line-height:1.26; color:var(--dark); letter-spacing:-.01em;
   margin-bottom:26px; text-wrap:balance;
 }
 .pull em{ font-style:italic; }
@@ -405,10 +460,10 @@ section[id]{ scroll-margin-top:88px; }
   font-size:4.1em;
   line-height:.82;
   padding:.05em .1em 0 0;
-  color:var(--maroon);
+  color:var(--label);
 }
 
-.factrail{ border-top:2px solid var(--purple); }
+.factrail{ border-top:2px solid var(--dark); }
 .factrail > div{
   display:flex; justify-content:space-between; gap:18px; align-items:baseline;
   padding:12px 0; border-bottom:1px solid var(--rule-soft);
@@ -419,7 +474,7 @@ section[id]{ scroll-margin-top:88px; }
   font-size:1rem; letter-spacing:.1em; color:var(--ink-mute);
 }
 .factrail dd{
-  margin:0; text-align:right; color:var(--purple); font-weight:500;
+  margin:0; text-align:right; color:var(--dark); font-weight:500;
   font-size:var(--fs-sm); font-variant-numeric:oldstyle-nums;
 }
 
@@ -431,7 +486,7 @@ section[id]{ scroll-margin-top:88px; }
 .prog__card{ display:flex; flex-direction:column; }
 .prog__card figure{
   margin:0 0 22px; overflow:hidden; aspect-ratio:16/9;
-  background:var(--purple-deep); box-shadow:var(--shadow-image);
+  background:var(--dark-deep); box-shadow:var(--shadow-image);
 }
 .prog__card img{ width:100%; height:100%; object-fit:cover; transition:transform .9s var(--e2); }
 .prog__card:hover img{ transform:scale(1.045); }
@@ -445,7 +500,7 @@ section[id]{ scroll-margin-top:88px; }
   display:flex; flex-wrap:wrap; gap:6px 26px; margin-top:auto; padding-top:16px;
   border-top:1px solid var(--rule); font-size:var(--fs-sm); color:var(--ink-mute);
 }
-.prog__meta b{ color:var(--purple); font-weight:600; }
+.prog__meta b{ color:var(--dark); font-weight:600; }
 /* The way through to a card's own page, where it has one. margin-top:auto
    holds it to the foot of the card so two cards side by side agree. */
 .prog__more{ margin:20px 0 0; }
@@ -469,13 +524,13 @@ section[id]{ scroll-margin-top:88px; }
    and frames can lead or lag their neighbours without ever
    swapping places with them.
    ============================================================ */
-.hrun{ position:relative; background:var(--purple-ink); }
+.hrun{ position:relative; background:var(--dark-ink); }
 .hrun__pin{
   height:100svh; height:100vh; overflow:hidden;
   background:
-    radial-gradient(120% 90% at 12% 0%, rgba(76,24,104,.55), transparent 60%),
-    radial-gradient(90% 80% at 92% 100%, rgba(57,42,72,.5), transparent 62%),
-    var(--purple-ink);
+    radial-gradient(120% 90% at 12% 0%, rgba(143,110,47,.34), transparent 60%),
+    radial-gradient(90% 80% at 92% 100%, rgba(42,41,37,.5), transparent 62%),
+    var(--dark-ink);
 }
 .hrun__viewport{
   height:100%; overflow:hidden;
@@ -501,7 +556,7 @@ section[id]{ scroll-margin-top:88px; }
 .hframe img{
   display:block; width:100%; max-width:none; height:auto;
   object-fit:cover; border-radius:12px;
-  border:1px solid rgba(255,195,8,.32);
+  border:1px solid rgba(201,169,97,.32);
   box-shadow:0 24px 64px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.08);
   backface-visibility:hidden;
 }
@@ -511,12 +566,12 @@ section[id]{ scroll-margin-top:88px; }
   display:block; margin-bottom:12px;
   font-family:var(--font-primary); font-variant-numeric:oldstyle-nums;
   font-size:clamp(.78rem,.92vw,.96rem); letter-spacing:.06em;
-  color:var(--on-purple); opacity:.52;
+  color:var(--on-dark); opacity:.52;
 }
 .hframe figcaption{
   margin-top:16px; max-width:34ch;
   font-family:var(--font-primary); font-size:.95rem; letter-spacing:.01em;
-  color:var(--on-purple-soft);
+  color:var(--on-dark-soft);
 }
 /* Preserve the source orientation instead of forcing every photograph into
    one card size. Landscape frames use the requested 16:9 crop; the two
@@ -549,13 +604,13 @@ section[id]{ scroll-margin-top:88px; }
 .hsay__big{
   font-family:var(--font-primary); font-weight:700; text-transform:none;
   font-size:clamp(1.8rem,3vw,3.2rem); line-height:.95;
-  letter-spacing:-.03em; color:var(--on-purple);
-  text-shadow:0 22px 42px rgba(55,39,4,.18);
+  letter-spacing:-.03em; color:var(--on-dark);
+  text-shadow:0 22px 42px rgba(42,42,38,.18);
   transform:translateZ(92px);
 }
 .hsay__sub{
   margin-top:clamp(18px,1.8vw,28px);
-  color:var(--on-purple-soft); font-size:var(--fs-lead);
+  color:var(--on-dark-soft); font-size:var(--fs-lead);
   transform:translateZ(38px);
 }
 .hsay--open{ width:clamp(320px,38vw,660px); }
@@ -568,7 +623,7 @@ section[id]{ scroll-margin-top:88px; }
   font-family:var(--font-primary); font-weight:700; text-transform:none;
   font-size:clamp(4rem,12vw,14rem); line-height:.9; letter-spacing:-.045em;
   /* Below eight per cent on this ground it simply is not there. */
-  color:var(--on-purple); opacity:.085;
+  color:var(--on-dark); opacity:.085;
   will-change:transform;
 }
 
@@ -633,15 +688,15 @@ section[id]{ scroll-margin-top:88px; }
 .dmoment{
   flex:none; width:clamp(250px,29vw,380px);
   display:flex; flex-direction:column; gap:12px;
-  padding-top:26px; border-top:2px solid var(--purple);
+  padding-top:26px; border-top:2px solid var(--dark);
 }
 .dmoment__t{
   font-family:var(--font-primary); font-size:clamp(2.2rem,3.6vw,3.2rem); line-height:.9;
-  color:var(--purple); font-variant-numeric:oldstyle-nums; letter-spacing:-.015em;
+  color:var(--dark); font-variant-numeric:oldstyle-nums; letter-spacing:-.015em;
 }
 .dmoment h3{ font-family:var(--font-primary); font-size:var(--fs-h3); line-height:1.16; color:var(--ink); }
 .dmoment p{ color:var(--ink-soft); font-size:var(--fs-sm); }
-.dmoment__i{ font-family:var(--font-primary); font-style:italic; color:var(--maroon); font-size:1.05rem; margin-top:auto; padding-top:14px; }
+.dmoment__i{ font-family:var(--font-primary); font-style:italic; color:var(--label); font-size:1.05rem; margin-top:auto; padding-top:14px; }
 
 .dayh__rail{
   position:relative; margin:0 var(--gut);
@@ -711,12 +766,12 @@ section[id]{ scroll-margin-top:88px; }
 }
 
 /* The six kinds of hour, as the ribbon coloured them. */
-.dmoment--wake{   border-top-color:#8C7E97; }
-.dmoment--active{ border-top-color:#5B4A6E; }
-.dmoment--spirit{ border-top-color:#7A0F1E; }
+.dmoment--wake{   border-top-color:var(--sage); }
+.dmoment--active{ border-top-color:var(--campus); }
+.dmoment--spirit{ border-top-color:var(--label); }
 .dmoment--meal{   border-top-color:var(--gold); }
-.dmoment--study{  border-top-color:var(--purple); }
-.dmoment--rest{   border-top-color:#2B2037; }
+.dmoment--study{  border-top-color:var(--dark); }
+.dmoment--rest{   border-top-color:var(--decoration-mute); }
 
 /* The key, which sits with the introduction rather than with either
    track, because it reads both of them. */
@@ -726,12 +781,12 @@ section[id]{ scroll-margin-top:88px; }
 }
 .daykey{ display:inline-flex; align-items:center; gap:7px; }
 .daykey::before{ content:""; width:11px; height:11px; border-radius:2px; flex:none; }
-.daykey--wake::before{   background:#8C7E97; }
-.daykey--active::before{ background:#5B4A6E; }
-.daykey--spirit::before{ background:#7A0F1E; }
+.daykey--wake::before{   background:var(--sage); }
+.daykey--active::before{ background:var(--campus); }
+.daykey--spirit::before{ background:var(--label); }
 .daykey--meal::before{   background:var(--gold); }
-.daykey--study::before{  background:var(--purple); }
-.daykey--rest::before{   background:#2B2037; }
+.daykey--study::before{  background:var(--dark); }
+.daykey--rest::before{   background:var(--decoration-mute); }
 
 /* ============================================================
    News track — pinned horizontal reel of highlighted stories
@@ -774,12 +829,12 @@ section[id]{ scroll-margin-top:88px; }
 /* ============================================================
    Campus band — duotone
    ============================================================ */
-.band{ position:relative; background:var(--purple-ink); overflow:hidden; }
+.band{ position:relative; background:var(--dark-ink); overflow:hidden; }
 .band__media{ position:absolute; inset:0; }
 .band__media img{ width:100%; height:100%; object-fit:cover; }
 .band__media::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(102deg, rgba(21,8,24,.90) 0%, rgba(21,8,24,.76) 52%, rgba(21,8,24,.58) 100%);
+  background:linear-gradient(102deg, rgba(24,24,21,.90) 0%, rgba(24,24,21,.76) 52%, rgba(24,24,21,.58) 100%);
 }
 .band__inner{ position:relative; z-index:2; padding-block:clamp(60px,7.5vw,116px); }
 .facilities{
@@ -788,7 +843,7 @@ section[id]{ scroll-margin-top:88px; }
   margin-top:clamp(30px,3.4vw,52px);
 }
 .facilities > div{
-  position:relative; padding:20px 0; border-top:1px solid var(--rule-purple);
+  position:relative; padding:20px 0; border-top:1px solid var(--rule-dark);
   transition:transform .45s var(--e);
 }
 .facilities > div::after{
@@ -798,7 +853,7 @@ section[id]{ scroll-margin-top:88px; }
 .facilities > div:hover{ transform:translateY(-4px); }
 .facilities > div:hover::after{ width:100%; }
 .facilities h3{ font-family:var(--font-primary); font-size:1.3rem; color:#fff; margin-bottom:6px; }
-.facilities p{ font-size:var(--fs-sm); color:var(--on-purple-soft); }
+.facilities p{ font-size:var(--fs-sm); color:var(--on-dark-soft); }
 
 /* ============================================================
    Record — large editorial figures
@@ -807,10 +862,10 @@ section[id]{ scroll-margin-top:88px; }
 .record > div{
   display:grid; gap:8px clamp(28px,4vw,64px);
   padding-block:clamp(26px,3vw,44px);
-  border-bottom:1px solid var(--rule-purple);
+  border-bottom:1px solid var(--rule-dark);
   align-items:baseline;
 }
-.record > div:first-child{ border-top:1px solid var(--rule-purple); }
+.record > div:first-child{ border-top:1px solid var(--rule-dark); }
 @media (min-width:820px){ .record > div{ grid-template-columns:minmax(0,.36fr) minmax(0,1fr); } }
 .record__fig{
   font-family:var(--font-primary); font-size:clamp(3rem,6.4vw,5.6rem); line-height:.9;
@@ -818,7 +873,7 @@ section[id]{ scroll-margin-top:88px; }
   font-variant-numeric:oldstyle-nums;
 }
 .record__fig sup{ font-size:.36em; vertical-align:super; letter-spacing:0; }
-.record p{ color:var(--on-purple-soft); font-size:var(--fs-lead); line-height:1.5; max-width:50ch; }
+.record p{ color:var(--on-dark-soft); font-size:var(--fs-lead); line-height:1.5; max-width:50ch; }
 .record p b{ color:#fff; font-weight:500; }
 
 /* ============================================================
@@ -826,19 +881,19 @@ section[id]{ scroll-margin-top:88px; }
    ============================================================ */
 .chart{ border:1px solid var(--rule); background:var(--white); overflow-x:auto; }
 .chart svg{ width:100%; height:auto; min-width:680px; }
-.chart .grat{ stroke:#E6E0D5; stroke-width:.6; fill:none; }
+.chart .grat{ stroke:#E3DCCB; stroke-width:.6; fill:none; }
 .chart .arc{ fill:none; stroke:var(--gold); stroke-width:.9; opacity:.7; }
-.chart .node circle{ fill:var(--purple); transition:fill .25s var(--e); }
+.chart .node circle{ fill:var(--dark); transition:fill .25s var(--e); }
 .chart .node text{ font-family:var(--font-primary); font-size:6.6px; font-weight:500; fill:#5A6771; }
-.chart .node:hover circle,.chart .node:focus circle{ fill:var(--maroon); }
-.chart .node:hover text,.chart .node:focus text{ fill:var(--maroon); }
+.chart .node:hover circle,.chart .node:focus circle{ fill:var(--label); }
+.chart .node:hover text,.chart .node:focus text{ fill:var(--label); }
 .chart .origin circle{ fill:var(--gold); }
-.chart .origin text{ fill:var(--maroon); font-weight:700; }
+.chart .origin text{ fill:var(--label); font-weight:700; }
 
 /* ============================================================
    Admissions
    ============================================================ */
-.steps{ counter-reset:step; border-top:2px solid var(--purple); }
+.steps{ counter-reset:step; border-top:2px solid var(--dark); }
 .step{
   display:grid; gap:6px 36px; padding-block:clamp(24px,2.8vw,40px);
   border-bottom:1px solid var(--rule-soft); align-items:start;
@@ -850,13 +905,13 @@ section[id]{ scroll-margin-top:88px; }
   line-height:.9; font-variant-numeric:oldstyle-nums;
 }
 .step__n::before{ content:counter(step,decimal-leading-zero); }
-.step h3{ margin-bottom:8px; color:var(--purple); }
+.step h3{ margin-bottom:8px; color:var(--dark); }
 .step p{ color:var(--ink-soft); font-size:var(--fs-sm); max-width:54ch; }
 .step__aside{
   font-size:var(--fs-sm); color:var(--ink-mute); line-height:1.95;
   border-left:1.5px solid var(--gold); padding-left:16px;
 }
-.step__aside b{ color:var(--purple); font-weight:600; }
+.step__aside b{ color:var(--dark); font-weight:600; }
 @media (max-width:879px){ .step__aside{ margin-top:12px; } }
 
 .adm-cta{
@@ -864,7 +919,7 @@ section[id]{ scroll-margin-top:88px; }
   margin-top:clamp(28px,3.2vw,46px); padding-top:26px; border-top:1px solid var(--rule);
 }
 .adm-cta__contact{ font-size:var(--fs-sm); color:var(--ink-mute); }
-.adm-cta__contact a{ color:var(--purple); font-weight:500; }
+.adm-cta__contact a{ color:var(--dark); font-weight:500; }
 
 /* ============================================================
    Leadership quote — a placeholder portrait (initials, not a
@@ -875,30 +930,30 @@ section[id]{ scroll-margin-top:88px; }
    hero and the Principal's message; links out to YouTube rather
    than embedding a player.
    ============================================================ */
-.filmsec{ position:relative; background:var(--purple-ink); overflow:hidden; }
+.filmsec{ position:relative; background:var(--dark-ink); overflow:hidden; }
 .filmsec__media{ position:absolute; inset:0; }
 .filmsec__media img{ width:100%; height:100%; object-fit:cover; opacity:.34; }
 .filmsec__media::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(14,11,18,.74) 0%, rgba(14,11,18,.95) 100%);
+  background:linear-gradient(180deg, rgba(17,17,15,.74) 0%, rgba(17,17,15,.95) 100%);
 }
 .filmsec__inner{ position:relative; z-index:2; padding-block:clamp(64px,7.5vw,120px); }
-.filmsec .lead{ color:var(--on-purple-soft); }
+.filmsec .lead{ color:var(--on-dark-soft); }
 
 .filmwin{
   display:block; position:relative; margin:clamp(36px,5vw,56px) auto 0; max-width:920px;
-  aspect-ratio:16/9; overflow:hidden; border-radius:6px; border:1px solid var(--rule-purple);
-  background:var(--purple-deep); cursor:pointer;
+  aspect-ratio:16/9; overflow:hidden; border-radius:6px; border:1px solid var(--rule-dark);
+  background:var(--dark-deep); cursor:pointer;
 }
 .filmwin__bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .filmwin__scrim{
   position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(14,11,18,.18) 0%, rgba(14,11,18,.72) 100%);
+  background:linear-gradient(180deg, rgba(17,17,15,.18) 0%, rgba(17,17,15,.72) 100%);
 }
 .filmwin__play{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   width:76px; height:76px; border-radius:50%; display:grid; place-items:center;
-  background:var(--gold); color:var(--purple-ink);
+  background:var(--gold); color:var(--dark-ink);
   transition:transform .3s var(--e), background .3s var(--e);
 }
 .filmwin:hover .filmwin__play{ transform:translate(-50%,-50%) scale(1.08); background:var(--gold-lit); }
@@ -912,7 +967,7 @@ section[id]{ scroll-margin-top:88px; }
   position:absolute; right:18px; top:16px; z-index:2;
   font-family:var(--font-primary); font-variant-caps:normal;
   font-feature-settings:normal; letter-spacing:.09em; font-size:.9rem;
-  color:var(--on-purple-soft); border:1px solid var(--rule-purple);
+  color:var(--on-dark-soft); border:1px solid var(--rule-dark);
   padding:4px 12px; border-radius:99px;
 }
 
@@ -921,24 +976,24 @@ section[id]{ scroll-margin-top:88px; }
   gap:9px 22px; margin-top:clamp(26px,3.2vw,38px);
 }
 .filmsec__socialtag{ color:var(--gold-lit); margin-right:2px; }
-.filmsec__social a{ color:var(--on-purple-soft); font-family:var(--font-primary); font-size:var(--fs-sm); }
+.filmsec__social a{ color:var(--on-dark-soft); font-family:var(--font-primary); font-size:var(--fs-sm); }
 .filmsec__social a:hover{ color:var(--gold-lit); }
 /* The icon row, drawn as the Enquire panel's social row is. Without a size
    the four links collapsed to nothing: invisible, yet still keyboard stops. */
 .filmsec__sociallinks{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
 .filmsec__sociallinks a{
   display:grid; width:44px; height:44px; place-items:center; border-radius:50%;
-  border:1px solid var(--rule-purple);
+  border:1px solid var(--rule-dark);
   transition:background .22s var(--e), color .22s var(--e), border-color .22s var(--e), transform .22s var(--e);
 }
 .filmsec__sociallinks svg{ width:21px; height:21px; overflow:visible; }
 .filmsec__sociallinks svg :is(rect,circle){ fill:none; stroke:currentColor; stroke-width:1.65; }
 .filmsec__sociallinks svg path,
 .filmsec__sociallinks svg .social-dot{ fill:currentColor; stroke:none; }
-.filmsec__sociallinks svg .social-play{ fill:var(--purple-ink); }
+.filmsec__sociallinks svg .social-play{ fill:var(--dark-ink); }
 .filmsec__sociallinks a:hover,
 .filmsec__sociallinks a:focus-visible{
-  background:var(--gold-lit); border-color:var(--gold-lit); color:var(--purple-ink);
+  background:var(--gold-lit); border-color:var(--gold-lit); color:var(--dark-ink);
   transform:translateY(-2px);
 }
 .filmsec__sociallinks a:hover .social-play,
@@ -950,7 +1005,7 @@ section[id]{ scroll-margin-top:88px; }
 }
 .quote__photo{
   position:relative; overflow:hidden; min-height:460px;
-  background:var(--purple-deep); margin:0;
+  background:var(--dark-deep); margin:0;
 }
 .quote__photo img{
   position:absolute; inset:0; width:100%; height:100%;
@@ -977,7 +1032,7 @@ section[id]{ scroll-margin-top:88px; }
   font-family:var(--font-primary); font-variant-caps:normal;
   font-feature-settings:normal; letter-spacing:.1em; font-size:1rem; color:var(--ink-mute);
 }
-.quote__attr b{ color:var(--purple); font-weight:600; }
+.quote__attr b{ color:var(--dark); font-weight:600; }
 /* ============================================================
    Feature panel — an alternating two-column component reused for
    every top-level destination (Why CIRS, Junior/Senior School,
@@ -991,14 +1046,14 @@ section[id]{ scroll-margin-top:88px; }
   .feature--reverse .feature__media{ order:2; }
   .feature--reverse .feature__text{ order:1; }
 }
-.feature__media{ position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--purple-deep); }
+.feature__media{ position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--dark-deep); }
 .feature__media img{ width:100%; height:100%; object-fit:cover; }
 .feature__media.is-placeholder{ display:grid; place-items:center; }
 .feature__ph{
   font-family:var(--font-primary); font-variant-caps:normal;
   font-feature-settings:normal; letter-spacing:.06em;
-  color:var(--on-purple-mute); text-align:center; padding:var(--space-4);
-  border:1px dashed var(--rule-purple);
+  color:var(--on-dark-mute); text-align:center; padding:var(--space-4);
+  border:1px dashed var(--rule-dark);
 }
 /* ============================================================
    Our People — board of directors grid, reusing the .feature__media
@@ -1011,7 +1066,7 @@ section[id]{ scroll-margin-top:88px; }
 .peopletile .feature__media{ aspect-ratio:4/5; }
 .peopletile .feature__media img{ object-position:center top; }
 .peopletile__body{ margin-top:16px; }
-.peopletile__role{ color:var(--purple); margin:4px 0 10px; }
+.peopletile__role{ color:var(--dark); margin:4px 0 10px; }
 .peopletile__bio{ font-size:var(--fs-sm); color:var(--ink-mute); }
 
 .teamphoto{
@@ -1026,7 +1081,7 @@ section[id]{ scroll-margin-top:88px; }
 }
 
 .feature__tag{
-  font-family:var(--font-primary); font-style:italic; color:var(--maroon);
+  font-family:var(--font-primary); font-style:italic; color:var(--label);
   font-size:1.08rem; margin:var(--space-2) 0 var(--space-3);
 }
 .feature__cta{ margin-top:var(--space-5); }
@@ -1034,12 +1089,12 @@ section[id]{ scroll-margin-top:88px; }
 /* ============================================================
    Closing CTA band
    ============================================================ */
-.finalcta{ position:relative; background:var(--purple-ink); overflow:hidden; }
+.finalcta{ position:relative; background:var(--dark-ink); overflow:hidden; }
 .finalcta__media{ position:absolute; inset:0; }
 .finalcta__media img{ width:100%; height:100%; object-fit:cover; opacity:.5; }
 .finalcta__media::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(21,8,24,.55) 0%, rgba(21,8,24,.94) 100%);
+  background:linear-gradient(180deg, rgba(24,24,21,.55) 0%, rgba(24,24,21,.94) 100%);
 }
 .finalcta__inner{
   position:relative; z-index:2; text-align:center;
@@ -1053,14 +1108,14 @@ section[id]{ scroll-margin-top:88px; }
 /* ============================================================
    Footer
    ============================================================ */
-.footer{ background:var(--purple-ink); color:var(--on-purple-soft); }
+.footer{ background:var(--dark-ink); color:var(--on-dark-soft); }
 .footer__main{ display:grid; gap:clamp(28px,3.4vw,52px); padding-block:clamp(48px,5.4vw,80px); }
 @media (min-width:900px){ .footer__main{ grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; } }
 .footer__utility{
   display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-5);
   padding-bottom:var(--space-5); font-size:var(--fs-xs);
 }
-.footer__utility a{ color:var(--on-purple-mute); }
+.footer__utility a{ color:var(--on-dark-mute); }
 .footer__utility a:hover{ color:#fff; }
 /* Each column's label, one pattern for all four. */
 .footer__main .sc{ margin-bottom:14px; }
@@ -1070,12 +1125,12 @@ section[id]{ scroll-margin-top:88px; }
 .footer__brand img{ width:58px; flex:none; }
 .footer__brand span{ font-family:var(--font-primary); color:#fff; font-size:1.2rem; line-height:1.24; }
 .footer address{ font-style:normal; font-size:var(--fs-sm); line-height:1.95; }
-.footer address a{ color:var(--on-purple-soft); }
+.footer address a{ color:var(--on-dark-soft); }
 .footer address a:hover{ color:#fff; }
 .footer__bar{
   display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
-  padding-block:18px; border-top:1px solid var(--rule-purple);
-  font-size:var(--fs-xs); color:var(--on-purple-mute);
+  padding-block:18px; border-top:1px solid var(--rule-dark);
+  font-size:var(--fs-xs); color:var(--on-dark-mute);
 }
 /* Below 1366px the floating controls sit over the page, not beside it, and
    at the very end of a page that is over the footer's last lines. The bar
@@ -1093,7 +1148,7 @@ section[id]{ scroll-margin-top:88px; }
   font-size:var(--fs-xs); color:var(--ink-mute); line-height:1.75;
   border-left:1.5px solid var(--rule); padding-left:14px; max-width:68ch; margin-top:24px;
 }
-.on-purple .note{ color:var(--on-purple-mute); border-left-color:var(--rule-purple); }
+.on-dark .note{ color:var(--on-dark-mute); border-left-color:var(--rule-dark); }
 
 /* ============================================================
    Trailing cursor ring — fine pointers only, native cursor kept
@@ -1114,7 +1169,7 @@ section[id]{ scroll-margin-top:88px; }
    Credentials ticker
    ============================================================ */
 .ticker{
-  background:var(--purple-ink); color:var(--on-purple-soft);
+  background:var(--dark-ink); color:var(--on-dark-soft);
   padding-block:15px; overflow:hidden;
   border-block:1px solid rgba(255,255,255,.10);
 }
@@ -1144,11 +1199,11 @@ section[id]{ scroll-margin-top:88px; }
 .totop{
   position:fixed; right:var(--float-edge); bottom:var(--float-edge);
   z-index:110; width:var(--float-size); height:var(--float-size); border-radius:50%;
-  background:var(--purple); color:#fff;
+  background:var(--dark); color:#fff;
   display:grid; place-items:center;
   opacity:0; visibility:hidden; transform:translateY(10px);
   transition:opacity .35s var(--e), transform .35s var(--e), visibility .35s, background .25s var(--e);
-  box-shadow:0 6px 24px rgba(21,8,24,.28);
+  box-shadow:0 6px 24px rgba(24,24,21,.28);
 }
 .totop.is-on{ opacity:1; visibility:visible; transform:none; }
 .totop:hover{ background:var(--gold); }
@@ -1196,7 +1251,7 @@ main{ position:relative; z-index:1; background:var(--paper); }
 /* Opening curtain. Removed from the document once it has played. */
 .curtain{
   position:fixed; inset:0; z-index:400;
-  background:var(--purple-deep); color:#fff;
+  background:var(--dark-deep); color:#fff;
   display:grid; place-content:center; justify-items:center; gap:22px;
   text-align:center; padding:24px;
 }
@@ -1268,7 +1323,7 @@ main{ position:relative; z-index:1; background:var(--paper); }
    fights Lenis and moves the boundary the header's scroll state
    watches. Sticky costs neither.
    ============================================================ */
-.hseq{ position:relative; background:var(--purple-ink); }
+.hseq{ position:relative; background:var(--dark-ink); }
 /* The track is the stage plus the travel. A 100svh stage in a 180svh
    track stands still for 80svh, and that 80 is the whole of the
    sequence's scrub. The plate reaches its frame at .62 of that — about
@@ -1323,9 +1378,9 @@ main{ position:relative; z-index:1; background:var(--paper); }
 .hseq__scrim{
   position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
-    linear-gradient(to top, rgba(21,8,24,.95) 0%, rgba(21,8,24,.86) 18%,
-                    rgba(21,8,24,.64) 38%, rgba(21,8,24,.20) 70%,
-                    rgba(21,8,24,.32) 100%);
+    linear-gradient(to top, rgba(24,24,21,.95) 0%, rgba(24,24,21,.86) 18%,
+                    rgba(24,24,21,.64) 38%, rgba(24,24,21,.20) 70%,
+                    rgba(24,24,21,.32) 100%);
 }
 
 /* The type is positioned against the plate's own box, not the window,

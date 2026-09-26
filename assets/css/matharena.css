@@ -6,21 +6,21 @@
    ========================================================================== */
 
 body.matharena {
-  --ma-black: #060609;
-  --ma-char: #0d0e14;
-  --ma-char-2: #141620;
-  --ma-char-3: #1c1e2c;
-  --ma-gold: #D4AF5A;
-  --ma-gold-lit: #F5D37E;
-  --ma-gold-dim: rgba(212, 175, 90, 0.16);
+  --ma-black: #060605;
+  --ma-char: var(--dark-ink);
+  --ma-char-2: var(--dark-deep);
+  --ma-char-3: var(--dark-mid);
+  --ma-gold: var(--gold);
+  --ma-gold-lit: var(--gold-pale);
+  --ma-gold-dim: rgba(201, 169, 97, 0.16);
   --ma-blue: #38BDF8;
   --ma-blue-lit: #7DD3FC;
   --ma-blue-dim: rgba(56, 189, 248, 0.14);
-  --ma-ivory: #F8F6F0;
-  --ma-cream: #DFD9CE;
-  --ma-grey: #8E8A80;
-  --ma-line: rgba(212, 175, 90, 0.22);
-  --ma-line-soft: rgba(248, 246, 240, 0.10);
+  --ma-ivory: var(--paper);
+  --ma-cream: var(--rule);
+  --ma-grey: var(--on-dark-mute);
+  --ma-line: rgba(201, 169, 97, 0.22);
+  --ma-line-soft: rgba(250, 249, 243, 0.10);
   --ma-line-blue: rgba(56, 189, 248, 0.22);
 
   background: var(--ma-black);
@@ -37,7 +37,7 @@ body.matharena #main {
   padding-block: clamp(60px, 8vw, 120px);
 }
 .ma-sec--puzzle {
-  background: radial-gradient(circle at 50% 0%, #11131c 0%, var(--ma-black) 70%);
+  background: radial-gradient(circle at 50% 0%, #11110F 0%, var(--ma-black) 70%);
   border-top: 1px solid var(--ma-line-soft);
 }
 .ma-sec--zones {
@@ -45,7 +45,7 @@ body.matharena #main {
   border-top: 1px solid var(--ma-line-soft);
 }
 .ma-sec--journey {
-  background: radial-gradient(ellipse at 50% 50%, #0e1018 0%, var(--ma-black) 80%);
+  background: radial-gradient(ellipse at 50% 50%, #11110f 0%, var(--ma-black) 80%);
   border-top: 1px solid var(--ma-line-soft);
 }
 .ma-sec--archive {
@@ -53,7 +53,7 @@ body.matharena #main {
   border-top: 1px solid var(--ma-line-soft);
 }
 .ma-sec--last {
-  background: linear-gradient(180deg, var(--ma-black) 0%, #0b0716 50%, var(--purple-ink, #0E071D) 100%);
+  background: linear-gradient(180deg, var(--ma-black) 0%, #11110f 50%, var(--dark-ink, #11110F) 100%);
   padding-block: clamp(64px, 8vw, 130px);
   border-top: 1px solid var(--ma-line-soft);
 }
@@ -129,8 +129,8 @@ body.matharena #main {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% 50%, transparent 20%, rgba(6,6,9,.65) 75%, var(--ma-black) 98%),
-    linear-gradient(180deg, rgba(6,6,9,.4) 0%, transparent 35%, transparent 65%, var(--ma-black) 100%);
+    radial-gradient(circle at 50% 50%, transparent 20%, rgba(6,6,5,.65) 75%, var(--ma-black) 98%),
+    linear-gradient(180deg, rgba(6,6,5,.4) 0%, transparent 35%, transparent 65%, var(--ma-black) 100%);
 }
 
 .ma-hero__inner {
@@ -153,7 +153,7 @@ body.matharena #main {
   padding: 6px 16px;
   margin-bottom: 22px;
   border-radius: 999px;
-  background: rgba(212, 175, 90, 0.08);
+  background: rgba(201, 169, 97, 0.08);
   border: 1px solid var(--ma-line);
   font-size: 12px;
   letter-spacing: 0.12em;
@@ -182,7 +182,7 @@ body.matharena #main {
   display: block;
   font-style: italic;
   color: var(--ma-gold-lit);
-  text-shadow: 0 0 28px rgba(212, 175, 90, 0.35);
+  text-shadow: 0 0 28px rgba(201, 169, 97, 0.35);
 }
 
 .ma-strap {
@@ -202,7 +202,7 @@ body.matharena #main {
   margin: clamp(24px, 3.2vw, 36px) auto 0;
   padding: 8px 18px;
   border-radius: 999px;
-  background: rgba(13, 14, 20, 0.85);
+  background: rgba(17, 17, 15, 0.85);
   border: 1px solid var(--ma-line-blue);
   backdrop-filter: blur(8px);
   font-size: 13px;
@@ -319,7 +319,7 @@ body.matharena #main {
 
 .ma-puzzle-canvas-wrap {
   position: relative;
-  background: #090a10;
+  background: #11110f;
   border: 1px solid var(--ma-line-soft);
   border-radius: 12px;
   overflow: hidden;
@@ -360,7 +360,7 @@ body.matharena #main {
 }
 .ma-readout--highlight {
   grid-column: 1 / -1;
-  background: rgba(212, 175, 90, 0.12);
+  background: rgba(201, 169, 97, 0.12);
   border: 1px solid var(--ma-line);
 }
 
@@ -445,7 +445,7 @@ input[type="range"]#puzzleSlider::-webkit-slider-thumb {
   height: 22px;
   border-radius: 50%;
   background: var(--ma-gold);
-  box-shadow: 0 0 10px rgba(212, 175, 90, 0.6);
+  box-shadow: 0 0 10px rgba(201, 169, 97, 0.6);
   cursor: pointer;
   border: 2px solid #fff;
   transition: transform 0.15s ease;
@@ -518,11 +518,11 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
   animation: ma-fade-down 0.4s ease;
 }
 .ma-puzzle-reveal__inner {
-  background: linear-gradient(135deg, rgba(212, 175, 90, 0.12) 0%, rgba(20, 22, 32, 0.95) 100%);
+  background: linear-gradient(135deg, rgba(201, 169, 97, 0.12) 0%, rgba(24, 24, 21, 0.95) 100%);
   border: 1px solid var(--ma-gold);
   border-radius: 12px;
   padding: 24px 28px;
-  box-shadow: 0 10px 30px rgba(212, 175, 90, 0.15);
+  box-shadow: 0 10px 30px rgba(201, 169, 97, 0.15);
 }
 .ma-reveal-tag {
   display: inline-block;
@@ -586,7 +586,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
   transform: translateY(-8px);
   border-color: var(--ma-gold);
   background: var(--ma-char-2);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5), 0 0 24px rgba(212, 175, 90, 0.16);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5), 0 0 24px rgba(201, 169, 97, 0.16);
 }
 
 .ma-zone__head {
@@ -603,7 +603,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(212, 175, 90, 0.1);
+  background: rgba(201, 169, 97, 0.1);
   color: var(--ma-gold);
   border: 1px solid var(--ma-line);
 }
@@ -713,7 +713,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
   border-color: var(--ma-gold);
   color: var(--ma-black);
   font-weight: 700;
-  box-shadow: 0 0 16px rgba(212, 175, 90, 0.4);
+  box-shadow: 0 0 16px rgba(201, 169, 97, 0.4);
 }
 
 .ma-journey-tab__num {
@@ -739,7 +739,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
 
 .ma-journey-diagram-wrap {
   position: relative;
-  background: #090910;
+  background: #11110F;
   border: 1px solid var(--ma-line-soft);
   border-radius: 12px;
   overflow: hidden;
@@ -759,7 +759,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
   margin-top: 14px;
   padding: 6px 14px;
   border-radius: 999px;
-  background: rgba(212, 175, 90, 0.12);
+  background: rgba(201, 169, 97, 0.12);
   border: 1px solid var(--ma-line);
   font-size: 12px;
   font-weight: 600;
@@ -791,8 +791,8 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
 }
 .ma-step.is-active {
   border-color: var(--ma-gold);
-  background: linear-gradient(135deg, rgba(212, 175, 90, 0.09) 0%, var(--ma-char-3) 100%);
-  box-shadow: 0 0 20px rgba(212, 175, 90, 0.12);
+  background: linear-gradient(135deg, rgba(201, 169, 97, 0.09) 0%, var(--ma-char-3) 100%);
+  box-shadow: 0 0 20px rgba(201, 169, 97, 0.12);
 }
 
 .ma-step__badge {
@@ -887,7 +887,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
   border-color: var(--ma-gold);
   color: var(--ma-black);
   font-weight: 700;
-  box-shadow: 0 0 14px rgba(212, 175, 90, 0.35);
+  box-shadow: 0 0 14px rgba(201, 169, 97, 0.35);
 }
 
 .ma-search-wrap {
@@ -911,7 +911,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
 .ma-search input:focus-visible {
   border-color: var(--ma-gold);
   outline: none;
-  box-shadow: 0 0 12px rgba(212, 175, 90, 0.25);
+  box-shadow: 0 0 12px rgba(201, 169, 97, 0.25);
 }
 
 .ma-months {
@@ -969,7 +969,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
 .ma-card--published:hover {
   border-color: var(--ma-gold);
   transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 90, 0.12);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(201, 169, 97, 0.12);
 }
 
 .ma-card__header {
@@ -1025,7 +1025,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
   margin-top: auto;
   padding: 10px 14px;
   border-radius: 8px;
-  background: rgba(212, 175, 90, 0.1);
+  background: rgba(201, 169, 97, 0.1);
   border: 1px solid var(--ma-line);
   font-size: 13px;
   font-weight: 600;
@@ -1046,14 +1046,14 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
 
 /* Empty / Missing Bulletin Card */
 .ma-card--empty {
-  background: rgba(13, 14, 20, 0.4);
-  border: 1px dashed rgba(248, 246, 240, 0.12);
+  background: rgba(17, 17, 15, 0.4);
+  border: 1px dashed rgba(250, 249, 243, 0.12);
   opacity: 0.85;
 }
 .ma-card__pill--none {
-  background: rgba(248, 246, 240, 0.05);
+  background: rgba(250, 249, 243, 0.05);
   color: var(--ma-grey);
-  border-color: rgba(248, 246, 240, 0.1);
+  border-color: rgba(250, 249, 243, 0.1);
 }
 .ma-card__empty-note {
   margin: 0 0 16px;
@@ -1132,7 +1132,7 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
   gap: 6px;
   padding: 22px 24px;
   border-radius: 10px;
-  background: rgba(13, 14, 20, 0.8);
+  background: rgba(17, 17, 15, 0.8);
   border: 1px solid var(--ma-line-soft);
   text-decoration: none;
   transition: all 0.3s ease;
@@ -1156,6 +1156,11 @@ input[type="range"]#puzzleSlider::-moz-range-thumb {
 /* ==========================================================================
    Accessibility & Dark Mode Controls
    ========================================================================== */
+
+/* The arena is dark throughout; the shared outlined button defaults to
+   dark lettering for paper (1.3:1 here). */
+body.matharena .btn--outline { border-color: var(--gold); color: var(--on-dark); }
+body.matharena .btn--outline:hover { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
 
 body.matharena :focus-visible {
   outline: 2px solid var(--ma-gold-lit);

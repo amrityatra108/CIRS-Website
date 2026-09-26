@@ -1,9 +1,9 @@
 /* Crossroads archive entrance; deliberately independent of the cinematic intro. */
-.crossroads-archive-hero { position:relative; min-height:calc(100svh - 88px); display:grid; align-items:center; overflow:hidden; isolation:isolate; background:#0d0710; padding:0; }
+.crossroads-archive-hero { position:relative; min-height:calc(100svh - 88px); display:grid; align-items:center; overflow:hidden; isolation:isolate; background:#11110f; padding:0; }
 .crossroads-archive-hero .crwall { z-index:0; filter:saturate(.78); }
 .crossroads-archive-hero__treatment,.crossroads-archive-hero__gradient { position:absolute; inset:0; pointer-events:none; }
-.crossroads-archive-hero__treatment { z-index:1; background:rgba(30,15,37,.17); }
-.crossroads-archive-hero__gradient { z-index:2; background:linear-gradient(90deg,rgba(10,5,13,.98),rgba(10,5,13,.94) 38%,rgba(10,5,13,.64) 61%,rgba(10,5,13,.12)),linear-gradient(0deg,rgba(10,5,13,.8),transparent 65%,rgba(10,5,13,.3)); }
+.crossroads-archive-hero__treatment { z-index:1; background:rgba(24,24,21,.17); }
+.crossroads-archive-hero__gradient { z-index:2; background:linear-gradient(90deg,rgba(7,7,6,.98),rgba(7,7,6,.94) 38%,rgba(7,7,6,.64) 61%,rgba(7,7,6,.12)),linear-gradient(0deg,rgba(7,7,6,.8),transparent 65%,rgba(7,7,6,.3)); }
 .crossroads-archive-hero__inner { position:relative; z-index:3; width:min(calc(100% - 96px),1440px); min-height:calc(100svh - 88px); margin-inline:auto; padding-top:max(104px,11vh); padding-bottom:clamp(40px,5vh,64px); display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:24px; align-items:center; }
 .crossroads-archive-hero__content { grid-column:1 / span 7; max-width:760px; min-width:0; align-self:center; transform:translateY(-3vh); }
 .crossroads-archive-hero__eyebrow { display:grid; grid-template-columns:auto auto minmax(48px,144px); align-items:center; gap:13px; width:fit-content; max-width:100%; margin-bottom:24px; color:#d8bc7a; font-family:"Newsreader"; font-size:14px; font-weight:600; letter-spacing:.04em; }
@@ -11,14 +11,14 @@
 .crossroads-archive-hero__eyebrow-line { height:1px; background:#d8bc7a85; }
 body .crossroads-archive-hero__title { margin:0; font-family:"Le Jour Serif","Newsreader"; font-size:clamp(80px,9.6vw,145px); font-weight:250; line-height:.9; letter-spacing:-.025em; color:#fff; white-space:nowrap; }
 .crossroads-archive-hero__statement { position:relative; z-index:2; max-width:520px; margin:28px 0 0; font-family:"EB Garamond"; font-size:clamp(24px,2vw,30px); font-style:italic; font-weight:400; line-height:1.16; color:#d8bc7a; opacity:1; }
-.crossroads-archive-hero__description { max-width:60ch; margin:18px 0 0; font-family:"Newsreader"; font-size:clamp(16px,1.15vw,18px); font-weight:400; line-height:1.55; color:#e4dfe6; }
+.crossroads-archive-hero__description { max-width:60ch; margin:18px 0 0; font-family:"Newsreader"; font-size:clamp(16px,1.15vw,18px); font-weight:400; line-height:1.55; color:#e3dccb; }
 .crossroads-archive-hero__footer { display:flex; align-items:center; justify-content:space-between; gap:24px; max-width:720px; margin-top:36px; padding-top:24px; border-top:1px solid #ffffff38; }
 .crossroads-archive-hero__actions { display:grid; gap:4px; }
 .crossroads-archive-hero__primary { display:inline-flex; align-items:center; justify-content:center; gap:12px; min-height:48px; padding:12px 22px; border:1px solid #c9a961; background:#c9a961; color:#1f1f1b; font-family:"Newsreader"; font-size:16px; font-weight:600; text-decoration:none; transition:background-color 180ms ease,transform 180ms ease; }
 .crossroads-archive-hero__primary:hover { background:#d8bc7a; transform:translateY(-2px); }
-.crossroads-archive-hero__secondary { display:inline-flex; justify-content:center; align-items:center; gap:9px; min-height:44px; color:#eee9f0; font-family:"Newsreader"; font-size:15px; text-decoration:underline; text-underline-offset:4px; }
-.crossroads-archive-hero__primary:focus-visible,.crossroads-archive-hero__secondary:focus-visible,.crossroads-archive-hero__feature:focus-visible { outline:3px solid #fff; outline-offset:5px; box-shadow:0 0 0 5px #0d0710; }
-.crossroads-archive-hero__feature { grid-column:10 / span 3; align-self:center; transform:translateY(-2vh); display:block; max-width:230px; justify-self:end; color:#f3e7c8; background:#160d1d; border:1px solid #c9a96180; text-decoration:none; box-shadow:0 12px 40px #0006; }
+.crossroads-archive-hero__secondary { display:inline-flex; justify-content:center; align-items:center; gap:9px; min-height:44px; color:#eee9de; font-family:"Newsreader"; font-size:15px; text-decoration:underline; text-underline-offset:4px; }
+.crossroads-archive-hero__primary:focus-visible,.crossroads-archive-hero__secondary:focus-visible,.crossroads-archive-hero__feature:focus-visible { outline:3px solid #fff; outline-offset:5px; box-shadow:0 0 0 5px #11110f; }
+.crossroads-archive-hero__feature { grid-column:10 / span 3; align-self:center; transform:translateY(-2vh); display:block; max-width:230px; justify-self:end; color:#ede7d8; background:#11110f; border:1px solid #c9a96180; text-decoration:none; box-shadow:0 12px 40px #0006; }
 .crossroads-archive-hero__feature img { display:block; width:100%; height:auto; aspect-ratio:300/420; object-fit:contain; }
 .crossroads-archive-hero__feature span { display:block; padding:14px 12px; font-family:"Newsreader"; font-size:14px; text-align:center; text-decoration:underline; text-underline-offset:3px; }
 .crossroads-archive-hero ~ #archive { scroll-margin-top:100px; }
@@ -30,7 +30,7 @@ body .crossroads-archive-hero__title { margin:0; font-family:"Le Jour Serif","Ne
  body .crossroads-archive-hero__title { font-size:clamp(76px,10vw,112px); }
  .crossroads-archive-hero__feature { grid-column:10 / span 3; }
  .crossroads-archive-hero__footer { flex-wrap:wrap; }
- .crossroads-archive-hero__gradient { background:linear-gradient(90deg,#0a050dfc,#0a050de8 55%,#0a050d30),linear-gradient(0deg,#0a050dd9,transparent); }
+ .crossroads-archive-hero__gradient { background:linear-gradient(90deg,#070706fc,#070706e8 55%,#07070630),linear-gradient(0deg,#070706d9,transparent); }
 }
 @media(max-width:767px) {
  .crossroads-archive-hero__inner { width:auto; margin:0; display:grid; grid-template-columns:minmax(0,1fr); align-items:center; padding:clamp(64px,10svh,96px) 20px max(32px,env(safe-area-inset-bottom)); }
@@ -41,7 +41,7 @@ body .crossroads-archive-hero__title { margin:0; font-family:"Le Jour Serif","Ne
  .crossroads-archive-hero__eyebrow { grid-template-columns:auto auto minmax(24px,64px); gap:10px; font-size:13px; }
  .crossroads-archive-hero__footer { align-items:stretch; flex-direction:column; gap:24px; margin-top:28px; }
  .crossroads-archive-hero__feature { display:none; }
- .crossroads-archive-hero__gradient { background:linear-gradient(180deg,#0a050d60,#0a050df2 180px,#0a050df7 65%,#0a050ded); }
+ .crossroads-archive-hero__gradient { background:linear-gradient(180deg,#07070660,#070706f2 180px,#070706f7 65%,#070706ed); }
 }
 @media(prefers-reduced-motion:reduce) { .crossroads-archive-hero__primary { transition:none; } .crossroads-archive-hero__primary:hover { transform:none; } }
 

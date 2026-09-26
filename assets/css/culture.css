@@ -60,14 +60,14 @@ body.culture .cx-row{
 }
 body.culture .cx-row__media{
   margin:0; position:relative; overflow:hidden;
-  aspect-ratio:4/3; background:var(--purple-deep);
+  aspect-ratio:4/3; background:var(--dark-deep);
 }
 body.culture .cx-row__media img{ width:100%; height:100%; object-fit:cover; display:block; }
 body.culture .cx-row__kicker{
   display:flex; align-items:baseline; gap:12px;
   margin:0 0 var(--space-3);
   font-family:var(--font-primary); font-style:italic;
-  font-size:1.08rem; color:var(--maroon);
+  font-size:1.08rem; color:var(--label);
 }
 body.culture .cx-row__n{
   font-style:normal; font-size:.8rem; font-weight:700; letter-spacing:.16em;
@@ -87,30 +87,30 @@ body.culture .cx-row__facts dt{
   font-family:var(--font-primary); font-size:var(--fs-xs);
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mute);
 }
-body.culture .cx-row__facts dd{ margin:2px 0 0; color:var(--purple); font-weight:600; }
+body.culture .cx-row__facts dd{ margin:2px 0 0; color:var(--dark); font-weight:600; }
 
 /* ------------------------------------------------------------ the band */
 
 body.culture .cx-band{
   background:
-    radial-gradient(70% 120% at 90% 0%, rgba(255,195,8,.10), transparent 60%),
-    var(--purple-deep);
+    radial-gradient(70% 120% at 90% 0%, rgba(201,169,97,.10), transparent 60%),
+    var(--dark-deep);
 }
 body.culture .cx-band__head{ max-width:760px; }
 body.culture .cx-band h2{ color:#fff; }
 body.culture .cx-band h2 em{ color:var(--gold-lit); }
-body.culture .cx-band .lead em{ color:var(--on-purple-mute); }
+body.culture .cx-band .lead em{ color:var(--on-dark-mute); }
 body.culture .cx-band__stats{
   display:grid; gap:1px;
   margin:clamp(var(--space-6),4vw,var(--space-8)) 0 0;
-  background:var(--rule-purple);
-  border:1px solid var(--rule-purple);
+  background:var(--rule-dark);
+  border:1px solid var(--rule-dark);
 }
 @media (min-width:640px){ body.culture .cx-band__stats{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media (min-width:1040px){ body.culture .cx-band__stats{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
 body.culture .cx-band__stats > div{
   padding:clamp(var(--space-5),2.6vw,var(--space-6));
-  background:var(--purple-deep);
+  background:var(--dark-deep);
 }
 body.culture .cx-band__stats dt{
   font-family:var(--font-primary);
@@ -118,7 +118,7 @@ body.culture .cx-band__stats dt{
   color:var(--gold-lit);
 }
 body.culture .cx-band__stats dd{
-  margin:8px 0 0; color:var(--on-purple-soft); font-size:var(--fs-sm); line-height:1.5;
+  margin:8px 0 0; color:var(--on-dark-soft); font-size:var(--fs-sm); line-height:1.5;
 }
 
 /* ---------------------------------------------------------- the gallery */

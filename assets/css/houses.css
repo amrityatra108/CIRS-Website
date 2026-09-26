@@ -61,7 +61,7 @@
 
 body.houses{
   --h-vasishtha-f:#9E1B33; --h-vasishtha-o:#FFFFFF; --h-vasishtha-i:#8C1329; --h-vasishtha-l:#E8607E;
-  --h-valmiki-f:#E0A32A;   --h-valmiki-o:#0E0B12;   --h-valmiki-i:#6B4E05;   --h-valmiki-l:#E0A32A;
+  --h-valmiki-f:#E0A32A;   --h-valmiki-o:#11110F;   --h-valmiki-i:#6B4E05;   --h-valmiki-l:#E0A32A;
   --h-vishwamitra-f:#1E7A63; --h-vishwamitra-o:#FFFFFF; --h-vishwamitra-i:#14513F; --h-vishwamitra-l:#4FC79E;
   --h-vyasa-f:#2E5199;     --h-vyasa-o:#FFFFFF;     --h-vyasa-i:#23407A;     --h-vyasa-l:#7FA8F0;
 }
@@ -107,7 +107,7 @@ body.houses .hsxz[data-house="valmiki"] .hsxz__ph img{ object-position:36% 44% }
 body.houses .hsxz[data-house="vishwamitra"] .hsxz__ph img{ object-position:66% 40% }
 body.houses .hsxz[data-house="vyasa"] .hsxz__ph img{ object-position:52% 34% }
 
-body.houses{ background:var(--purple-ink); }
+body.houses{ background:var(--dark-ink); }
 body.houses main{ background:var(--paper); }
 
 /* ============================================================
@@ -122,7 +122,7 @@ body.houses main{ background:var(--paper); }
    The track is the stage plus the travel the release scrubs
    across.
    ============================================================ */
-.hsx{ position:relative; background:var(--purple-ink); }
+.hsx{ position:relative; background:var(--dark-ink); }
 .hsx__track{ height:184svh; height:184vh; }
 .hsx__stage{
   position:sticky; top:0;
@@ -170,7 +170,7 @@ body.houses main{ background:var(--paper); }
 .hsxz__tint{
   position:absolute; inset:0;
   background:
-    linear-gradient(to top, rgba(14,11,18,.88) 0%, rgba(14,11,18,.44) 28%, rgba(14,11,18,.22) 54%, rgba(14,11,18,.34) 100%),
+    linear-gradient(to top, rgba(17,17,15,.88) 0%, rgba(17,17,15,.44) 28%, rgba(17,17,15,.22) 54%, rgba(17,17,15,.34) 100%),
     linear-gradient(to top, var(--hf) 0%, var(--hf) 20%, transparent 68%);
   opacity:1; transition:opacity .6s var(--e);
 }
@@ -204,7 +204,7 @@ body.houses main{ background:var(--paper); }
   color:rgba(255,255,255,.66);
   /* The names sit over photographs, so they carry their own
      shadow rather than trusting the frame behind them. */
-  text-shadow:0 2px 18px rgba(14,11,18,.75);
+  text-shadow:0 2px 18px rgba(17,17,15,.75);
   transition:color .5s var(--e), -webkit-text-stroke-color .5s var(--e);
 }
 /* Outline at rest, filled when the zone is live. Guarded, because
@@ -311,7 +311,7 @@ body.houses main{ background:var(--paper); }
    release touches layout. */
 .hsx__fill{
   position:absolute; inset:0; z-index:4; pointer-events:none;
-  background:var(--hf,var(--purple-ink)); opacity:0;
+  background:var(--hf,var(--dark-ink)); opacity:0;
 }
 
 /* ---- the entrance ----
@@ -367,7 +367,7 @@ body.houses main{ background:var(--paper); }
 .hch__bleed img{ width:100%; height:100%; object-fit:cover; display:block; }
 .hch__bleed::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(14,11,18,.34), transparent 58%);
+  background:linear-gradient(to top, rgba(17,17,15,.34), transparent 58%);
 }
 
 /* The house name, oversized, behind the words. aria-hidden: the
@@ -406,7 +406,7 @@ body.houses main{ background:var(--paper); }
 .hch:nth-child(even) .hch__id{ justify-content:flex-end }
 .hch__swatch{
   width:30px; height:10px; background:var(--hf); flex:none;
-  outline:1px solid rgba(14,11,18,.18); outline-offset:0;
+  outline:1px solid rgba(17,17,15,.18); outline-offset:0;
 }
 .hch__dot{ color:var(--ink-mute) }
 
@@ -468,8 +468,8 @@ body.houses main{ background:var(--paper); }
 .hmarch__grid{
   position:absolute; inset:0; z-index:0; overflow:hidden;
   background-image:
-    repeating-linear-gradient(to right, rgba(245,238,242,.13) 0 1px, transparent 1px 84px),
-    repeating-linear-gradient(to bottom, rgba(245,238,242,.08) 0 1px, transparent 1px 46px);
+    repeating-linear-gradient(to right, rgba(250,249,243,.13) 0 1px, transparent 1px 84px),
+    repeating-linear-gradient(to bottom, rgba(250,249,243,.08) 0 1px, transparent 1px 46px);
   transform:perspective(560px) rotateX(46deg) scale(1.5);
   transform-origin:50% 100%; opacity:.6; mask-image:linear-gradient(to top, #000, transparent);
 }
@@ -481,7 +481,7 @@ body.houses main{ background:var(--paper); }
 .hmarch__names span{
   font-family:var(--font-primary); font-weight:600;
   font-size:clamp(3rem,9vw,8rem); line-height:.8; letter-spacing:-.05em;
-  color:rgba(245,238,242,.085);
+  color:rgba(250,249,243,.085);
 }
 .hmarch__run{
   position:relative; z-index:2; display:flex; gap:clamp(14px,2vw,28px);
@@ -497,7 +497,7 @@ body.houses main{ background:var(--paper); }
 }
 .hmarch__run figcaption{
   margin-top:var(--space-3); font-family:var(--font-primary);
-  font-size:.82rem; letter-spacing:.06em; color:var(--on-purple-mute);
+  font-size:.82rem; letter-spacing:.06em; color:var(--on-dark-mute);
 }
 /* Once the script drives the run it owns the transform, so the
    native scroll is handed back only where the script stands
@@ -505,7 +505,7 @@ body.houses main{ background:var(--paper); }
 .hmarch__run.is-driven{ overflow:visible; scroll-snap-type:none; }
 .hmarch__run.is-driven > li{ width:min(38vw,480px) }
 
-.hmarch .note{ margin-top:clamp(28px,3.4vw,48px); color:var(--on-purple-mute); }
+.hmarch .note{ margin-top:clamp(28px,3.4vw,48px); color:var(--on-dark-mute); }
 
 /* ============================================================
    4. Inter-house competition
@@ -530,8 +530,8 @@ body.houses main{ background:var(--paper); }
   text-transform:uppercase; color:var(--ink-soft);
   transition:background .25s var(--e), color .25s var(--e), border-color .25s var(--e);
 }
-.hcomp__filter:hover{ border-color:var(--purple); color:var(--purple) }
-.hcomp__filter.is-on{ background:var(--purple); border-color:var(--purple); color:#fff }
+.hcomp__filter:hover{ border-color:var(--dark); color:var(--dark) }
+.hcomp__filter.is-on{ background:var(--dark); border-color:var(--dark); color:#fff }
 .hcomp__track[hidden]{ display:none }
 
 .hcomp__line{ position:relative; height:1px; background:var(--rule); margin-bottom:-1px; }
@@ -552,7 +552,7 @@ body.houses main{ background:var(--paper); }
    from one event to the next IS a discrete change, and it now
    lands on the first frame instead of arriving late. */
 .hcomp__line span{
-  position:absolute; inset:0 auto 0 0; width:0; background:var(--hf,var(--purple));
+  position:absolute; inset:0 auto 0 0; width:0; background:var(--hf,var(--dark));
   height:3px; top:-1px; transition:width .6s var(--e2);
 }
 
@@ -574,8 +574,8 @@ body.houses main{ background:var(--paper); }
   outline:1px solid var(--rule-soft); border-radius:50%;
   transition:background .3s var(--e), outline-color .3s var(--e);
 }
-.hcomp__stop:hover{ background:rgba(57,42,72,.045) }
-.hcomp__stop.is-on::before{ background:var(--purple); outline-color:var(--purple) }
+.hcomp__stop:hover{ background:rgba(42,41,37,.045) }
+.hcomp__stop.is-on::before{ background:var(--dark); outline-color:var(--dark) }
 .hcomp__when{
   display:block; font-family:var(--font-primary); font-size:.72rem;
   letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute);
@@ -647,7 +647,7 @@ body.houses main{ background:var(--paper); }
   font-weight:600; color:var(--ink);
 }
 .hcomp__note{ margin-top:var(--space-5); max-width:var(--measure); color:var(--ink-soft); }
-.hcomp__note a{ color:var(--purple); border-bottom:1px solid currentColor }
+.hcomp__note a{ color:var(--dark); border-bottom:1px solid currentColor }
 .hcomp__src{
   margin-top:var(--space-4); font-family:var(--font-primary);
   font-size:.74rem; letter-spacing:.14em; text-transform:uppercase;
@@ -672,7 +672,7 @@ body.houses main{ background:var(--paper); }
 }
 .hsport__lab{
   display:block; font-family:var(--font-primary); font-size:.72rem;
-  letter-spacing:.2em; text-transform:uppercase; color:var(--purple);
+  letter-spacing:.2em; text-transform:uppercase; color:var(--dark);
   margin-bottom:5px;
 }
 .hsport__cta{ margin-top:clamp(30px,3.6vw,48px) }
@@ -684,36 +684,36 @@ body.houses main{ background:var(--paper); }
    revealed as panels over it. No spotlights and no particles:
    the photograph is the stage.
    ============================================================ */
-.hcult{ position:relative; background:var(--purple-ink); overflow:hidden; }
+.hcult{ position:relative; background:var(--dark-ink); overflow:hidden; }
 .hcult__stage{ position:absolute; inset:0; margin:0; }
 .hcult__stage img{ width:100%; height:100%; object-fit:cover; display:block; opacity:.5 }
 .hcult__stage::after{
   content:""; position:absolute; inset:0;
   background:
-    linear-gradient(to right, rgba(14,11,18,.94) 0%, rgba(14,11,18,.62) 48%, rgba(14,11,18,.82) 100%);
+    linear-gradient(to right, rgba(17,17,15,.94) 0%, rgba(17,17,15,.62) 48%, rgba(17,17,15,.82) 100%);
 }
 .hcult__inner{
   position:relative; z-index:2; padding-block:clamp(72px,9vw,140px);
 }
 .hcult__h{ color:#fff }
 .hcult__h em{ color:var(--gold-lit) }
-.hcult__head .lead{ color:var(--on-purple-soft) }
+.hcult__head .lead{ color:var(--on-dark-soft) }
 .hcult__head .sc{ color:var(--gold-lit) }
 .hcult__head .marker::after{ background:rgba(255,255,255,.28); max-width:140px }
 
 .hcult__set{
   list-style:none; margin:0; padding:0;
   display:grid; gap:1px; grid-template-columns:repeat(4,1fr);
-  background:rgba(245,238,242,.16);
+  background:rgba(250,249,243,.16);
 }
 .hcult__set > li{
-  background:rgba(14,11,18,.72); padding:clamp(22px,2.6vw,34px);
+  background:rgba(17,17,15,.72); padding:clamp(22px,2.6vw,34px);
   border-top:4px solid var(--hf);
   /* The panels arrive from the edge of the frame like stage flats;
      the script staggers them, and CSS is what they arrive to. */
   transition:background .4s var(--e);
 }
-.hcult__set > li:hover{ background:rgba(14,11,18,.55) }
+.hcult__set > li:hover{ background:rgba(17,17,15,.55) }
 .hcult__who{
   display:flex; align-items:center; gap:9px;
   font-family:var(--font-primary); font-size:.74rem; letter-spacing:.18em;
@@ -727,9 +727,9 @@ body.houses main{ background:var(--paper); }
 }
 .hcult__about{
   margin-top:var(--space-3); font-size:var(--fs-sm); line-height:1.5;
-  color:var(--on-purple-soft);
+  color:var(--on-dark-soft);
 }
-.hcult__note{ margin-top:clamp(28px,3.4vw,44px); color:var(--on-purple-mute) }
+.hcult__note{ margin-top:clamp(28px,3.4vw,44px); color:var(--on-dark-mute) }
 .hcult__cta{ margin-top:clamp(26px,3vw,40px); display:flex; flex-wrap:wrap; gap:12px }
 
 /* ============================================================
@@ -755,7 +755,7 @@ body.houses main{ background:var(--paper); }
   font-size:var(--fs-sm);
 }
 .hrec__table thead th{
-  border-bottom:1px solid var(--purple); color:var(--ink);
+  border-bottom:1px solid var(--dark); color:var(--ink);
   font-size:.76rem; letter-spacing:.16em; text-transform:uppercase;
   white-space:nowrap;
 }
@@ -791,8 +791,8 @@ body.houses main{ background:var(--paper); }
   transition:background .25s var(--e), color .25s var(--e), border-color .25s var(--e);
 }
 .hgal__sw{ width:20px; height:8px; background:var(--hf); flex:none }
-.hgal__tab:hover{ border-color:var(--purple); color:var(--purple) }
-.hgal__tab.is-on{ background:var(--purple); border-color:var(--purple); color:#fff }
+.hgal__tab:hover{ border-color:var(--dark); color:var(--dark) }
+.hgal__tab.is-on{ background:var(--dark); border-color:var(--dark); color:#fff }
 
 .hgal__strip{
   list-style:none; margin:0; padding:0 0 var(--space-4);
@@ -825,12 +825,12 @@ body.houses main{ background:var(--paper); }
 /* ============================================================
    9. The reunion
    ============================================================ */
-.hend{ position:relative; overflow:hidden; background:var(--purple-deep); }
+.hend{ position:relative; overflow:hidden; background:var(--dark-deep); }
 .hend__media{ position:absolute; inset:0; margin:0 }
 .hend__media img{ width:100%; height:100%; object-fit:cover; display:block; opacity:.48 }
 .hend__media::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(14,11,18,.93), rgba(14,11,18,.62));
+  background:linear-gradient(to top, rgba(17,17,15,.93), rgba(17,17,15,.62));
 }
 .hend__inner{ position:relative; z-index:2; padding-block:clamp(78px,10vw,150px) }
 .hend__bars{ display:flex; gap:4px; margin-bottom:var(--space-6); max-width:340px }
@@ -853,15 +853,15 @@ body.houses main{ background:var(--paper); }
 .hend__h .line-mask{ padding-block:.14em; margin-block:-.14em; }
 .hend__h em{ font-style:italic; color:var(--gold-lit) }
 .hend__lead{
-  margin-top:var(--space-5); color:var(--on-purple-soft); max-width:46ch;
+  margin-top:var(--space-5); color:var(--on-dark-soft); max-width:46ch;
   font-family:var(--font-editorial);
 }
 .hend__links{
   margin:clamp(34px,4vw,56px) 0 0; padding:0; list-style:none;
   display:grid; gap:0; max-width:760px;
-  border-top:1px solid var(--rule-purple);
+  border-top:1px solid var(--rule-dark);
 }
-.hend__links li{ border-bottom:1px solid var(--rule-purple) }
+.hend__links li{ border-bottom:1px solid var(--rule-dark) }
 .hend__links a{
   display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
   padding:var(--space-4) 0; min-height:44px;
@@ -921,7 +921,7 @@ body.houses main{ background:var(--paper); }
   }
   .hsx__say{
     position:relative; padding-block:clamp(84px,14vh,120px) clamp(40px,7vh,64px);
-    background:var(--purple-ink); pointer-events:auto;
+    background:var(--dark-ink); pointer-events:auto;
   }
   .hsx__title{ font-size:clamp(2.6rem,11vw,4.4rem) }
 
@@ -1001,7 +1001,7 @@ body.houses main{ background:var(--paper); }
   }
   .hsxz__meta{ color:rgba(255,255,255,.88) }
   .hsxz__go{ opacity:1; transform:none }
-  .hsx__say{ position:relative; background:var(--purple-ink); pointer-events:auto;
+  .hsx__say{ position:relative; background:var(--dark-ink); pointer-events:auto;
              padding-block:clamp(84px,12vh,120px) clamp(40px,6vh,64px) }
   .hsx__cuek::after{ animation:none }
   .hmarch__grid{ transform:none; opacity:.3 }

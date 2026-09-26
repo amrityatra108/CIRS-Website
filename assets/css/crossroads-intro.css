@@ -2,10 +2,10 @@
   --cr-purple:#330740;
   --cr-purple-deep:#16031c;
   --cr-edge:#09020c;
-  --cr-gold:#ffc407;
-  --cr-gold-pale:#ffe69b;
-  --cr-gold-dark:#c28e00;
-  --cr-warm:#f7f0e6;
+  --cr-gold:var(--gold);
+  --cr-gold-pale:var(--gold-pale);
+  --cr-gold-dark:var(--gold);
+  --cr-warm:var(--paper-2);
   --crossroads-intro-x:50%;
   --crossroads-intro-y:42%;
   --crossroads-intro-radius:clamp(190px,26vw,390px);
@@ -49,7 +49,7 @@
 }
 .crossroads-intro[data-crossroads-intro-lit] .crossroads-intro__reveal { opacity:calc(.42 * (1 - var(--crossroads-intro-exit))); }
 .crossroads-intro::before { content:""; position:absolute; inset:0 0 auto; height:138px; z-index:30; background:linear-gradient(rgba(9,2,12,.88),rgba(9,2,12,.5) 52%,transparent); pointer-events:none; }
-.crossroads-intro::after { content:""; position:absolute; inset:52% 0 0; z-index:30; background:linear-gradient(transparent,#0e0b12); opacity:var(--crossroads-intro-exit); pointer-events:none; }
+.crossroads-intro::after { content:""; position:absolute; inset:52% 0 0; z-index:30; background:linear-gradient(transparent,#11110f); opacity:var(--crossroads-intro-exit); pointer-events:none; }
 .crossroads-intro__content {
   position:absolute;
   inset:118px clamp(32px,6vw,112px) 54px;
@@ -86,7 +86,7 @@
 }
 .crossroads-intro__eyebrow {
   margin:clamp(9px,1.7vh,16px) 0 0 4px;
-  color:rgba(247,240,230,.72);
+  color:rgba(244,240,230,.72);
   font-family:var(--font-primary);
   font-size:clamp(.72rem,.82vw,.88rem);
   font-weight:600;
@@ -98,7 +98,7 @@
   width:min(100%,1120px);
   margin-inline:auto;
   padding-top:clamp(22px,3vh,32px);
-  border-top:1px solid rgba(255,196,7,.32);
+  border-top:1px solid rgba(201,169,97,.32);
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -117,7 +117,7 @@
   font-family:var(--font-primary);
   font-size:clamp(.94rem,1.04vw,1.06rem);
   line-height:1.45;
-  color:rgba(247,240,230,.7);
+  color:rgba(244,240,230,.7);
 }
 .crossroads-intro__cta {
   pointer-events:auto;
@@ -128,8 +128,8 @@
   gap:19px;
   min-height:54px;
   padding:0 24px;
-  border:1px solid rgba(255,196,7,.78);
-  background:rgba(255,196,7,.08);
+  border:1px solid rgba(201,169,97,.78);
+  background:rgba(201,169,97,.08);
   color:var(--cr-warm);
   font-family:var(--font-primary);
   font-size:.78rem;
