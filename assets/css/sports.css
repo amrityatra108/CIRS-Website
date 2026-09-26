@@ -910,6 +910,7 @@ body.sports {
 }
 
 .archive-entry__card {
+  min-width: 0;
   background: rgba(22, 16, 29, 0.7);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -920,6 +921,7 @@ body.sports {
 
 .archive-entry__meta {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-4);
   font-size: var(--fs-xs);
   letter-spacing: 0.14em;
