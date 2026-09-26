@@ -3,6 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- The Founder page's opening, framed there; not a page of the site. -->
+  <meta name="robots" content="noindex">
+  <!-- Vercel serves this directory at /assets/founder-opening, without the
+       trailing slash, and every path below (and the textures preview.js
+       loads) is relative to the directory. Name it, so they resolve here
+       whichever form of the address the frame is loaded from. -->
+  <base href="/assets/founder-opening/">
   <meta name="theme-color" content="#f2efe8">
   <title>CIRS Founder — Seeker to Teacher</title>
   <link rel="stylesheet" href="preview.css">

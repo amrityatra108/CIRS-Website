@@ -19,11 +19,15 @@ of a 6 MB site. So the reference list, not the directory listing, decides.
 
     python3 tools/build-site.py     # pages first
     python3 tools/stage-deploy.py   # then stage them
+
+vercel.json's build command adds --vercel, which leaves out _headers: see
+the end of main().
 """
 
 import os
 import re
 import shutil
+import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "_site")
@@ -42,6 +46,7 @@ Disallow: /
 
 
 def main():
+    vercel = "--vercel" in sys.argv[1:]
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
@@ -66,12 +71,13 @@ def main():
 
     # Every assets/ path any page mentions, in an attribute or a stylesheet.
     # A page inside a directory reaches them with "../assets/...", so each
-    # reference is resolved against the page that makes it.
+    # reference is resolved against the page that makes it — and 404.html,
+    # served at whatever address failed, writes "/assets/..." from the root.
     wanted = set()
     for name in pages:
         html = open(os.path.join(ROOT, name), encoding="utf-8").read()
         here = os.path.dirname(name)
-        for r in re.findall(r'"((?:\.\./)*assets/[^"]+)"', html):
+        for r in re.findall(r'"(/?(?:\.\./)*assets/[^"]+)"', html):
             # A srcset holds several candidates, separated by commas, each
             # with a width or density descriptor after its path. Taking only
             # the first field of the whole value shipped the smallest cut
@@ -80,7 +86,11 @@ def main():
                 path = cand.strip().split()[0].split("?")[0] if cand.strip() else ""
                 if "assets/" not in path:
                     continue
-                rel = os.path.normpath(os.path.join(here, path))
+                if path.startswith("/"):
+                    path, base = path.lstrip("/"), ""
+                else:
+                    base = here
+                rel = os.path.normpath(os.path.join(base, path))
                 wanted.add(rel.replace(os.sep, "/"))
     # A stylesheet's url() is resolved by the browser against the stylesheet,
     # not against the page — so "../fonts/x.woff2" in assets/css/fonts.css
@@ -138,7 +148,12 @@ def main():
         print(f"  left behind {on_disk - kept} unreferenced asset(s) — "
               f"source photographs and the parked editor stay out of the deploy")
 
-    open(os.path.join(OUT, "_headers"), "w", encoding="utf-8").write(HEADERS)
+    # _headers is Netlify's configuration, read by Netlify and never served
+    # there. Vercel reads nothing from it and publishes it as an ordinary
+    # file at /_headers, so a Vercel build leaves it out: vercel.json sets
+    # the same noindex header on that host.
+    if not vercel:
+        open(os.path.join(OUT, "_headers"), "w", encoding="utf-8").write(HEADERS)
     open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8").write(ROBOTS)
 
     total = sum(os.path.getsize(os.path.join(r, f))

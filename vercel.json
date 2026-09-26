@@ -1,10 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "python3 tools/build-site.py && python3 tools/stage-deploy.py",
+  "buildCommand": "python3 tools/build-site.py && python3 tools/stage-deploy.py --vercel",
   "outputDirectory": "_site",
   "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
-    { "source": "/admissions/", "destination": "/admissions", "permanent": true },
     { "source": "/student-life", "destination": "/the-cirs-experience", "permanent": true },
     { "source": "/student-life.html", "destination": "/the-cirs-experience", "permanent": true }
   ],

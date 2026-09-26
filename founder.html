@@ -337,8 +337,11 @@
   <div class="founder-opening__label">THE FOUNDER<br><span>1916–1993</span></div>
   <h1 class="founder-opening__headline">FROM<br>SEEKER<br>TO GURUDEV</h1>
   <!-- The portrait is an animation with nothing inside it to operate, so it
-       is not a Tab stop: it took focus with no ring and nothing to do there. -->
-  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening/?v=29&amp;embed=1" title="Balakrishnan Menon to Swami Chinmayananda — flowing portrait" loading="eager"></iframe>
+       is not a Tab stop: it took focus with no ring and nothing to do there.
+       No slash after the directory: that is the address Vercel serves it at
+       (trailingSlash is false), so the frame loads without a redirect that
+       could drop "embed=1". Its own <base> resolves its files either way. -->
+  <iframe class="founder-opening__frame" tabindex="-1" src="assets/founder-opening?v=29&amp;embed=1" title="Balakrishnan Menon to Swami Chinmayananda — flowing portrait" loading="eager"></iframe>
   <p class="founder-opening__description">Balakrishna Menon’s search for truth <br>became Swami Chinmayananda’s mission <br>to share it with the world.</p>
   <div class="founder-opening__identity"><p>SWAMI CHINMAYANANDA</p><span>VISIONARY • TEACHER • FOUNDER</span></div>
   <div class="founder-opening__closing"><p>A LIFE TRANSFORMED.<br>A VISION THAT CONTINUES.</p></div>
@@ -575,18 +578,6 @@
         <img class="founders-vehicle__body" src="assets/img/founder/amrit-vahini/body-no-wheels.png" width="1774" height="887" alt="">
       </div>
     </div>
-    <!-- Retained source views from the supplied Vahini set. They are inert: the
-         revised journey uses only the connected side assembly. -->
-    <template aria-hidden="true">
-      <img src="assets/img/founder/amrit-vahini/front-three-quarter.png" alt="">
-      <img src="assets/img/founder/amrit-vahini/overhead-turn.png" alt="">
-      <img src="assets/img/founder/amrit-vahini/rear-three-quarter.png" alt="">
-      <!-- Retained, non-displayed archive variants from the supplied set. -->
-      <img src="assets/img/founder/archive/p46-hero.webp" alt="">
-      <img src="assets/img/founder/archive/p53-portrait.webp" alt="">
-      <img src="assets/img/founder/archive/p607-portrait.webp" alt="">
-      <img src="assets/img/founder/archive/r664-early.webp" alt="">
-    </template>
 
     <nav class="founders-journey__hud" aria-label="Founder journey progress">
       <div>
