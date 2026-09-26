@@ -33,7 +33,7 @@ body.wall .p1-hero-text{ font-weight:var(--weight-display); }
    the width-axis cut, which only these pages fetch. Stated here because
    this file is loaded after every page sheet and would otherwise overrule it. */
 body .film__title{ font-weight:200; font-stretch:105%; }
-body :is(.htab, .drawer a, .jump__toggle){ font-weight:var(--weight-nav); }
+body :is(.nv-tab, .nv-enq__close, .nv-menu__utility a, .nv-cta--quiet, .jump__toggle){ font-weight:var(--weight-nav); }
 body .btn{ font-weight:var(--weight-control); }
 body :is(.sc, .art__flag, .art__issue, .art__by, .nx-tag, .nx-meta, .fmeta, .fnav__label){ font-weight:var(--weight-label); }
 
@@ -62,7 +62,7 @@ body :is(:lang(hi), :lang(sa), .deva){
 }
 
 /* Keep small labels readable with the new English face. */
-.htab, .brand__sub, .art__flag, .art__issue, .nx-tag, .nx-meta,
+.art__flag, .art__issue, .nx-tag, .nx-meta,
 .fmeta, .fhero__sig, .fhero__cue, .fnav__label{ font-size:var(--fs-xs); }
 .sc{ line-height:1.3; }
 .btn{ line-height:1.35; }

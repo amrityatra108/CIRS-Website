@@ -65,26 +65,6 @@ body.founder:has(.founder-opening__frame:hover) > .ring{opacity:0!important;}
   .founder-opening__closing p{font-size:14px;}
 }
 
-/* The header. This page is in the pale-ground group ("litehead" in
-   build-site.py), which is what it always was in fact — it opens on
-   parchment — so the shared sheet already gives it dark-on-light lettering
-   and the dark-on-light pills. All that is left here is the hue: the site's
-   dark against parchment is a little cold, so the wordmark and the marks
-   take the page's own ink and soft instead.
-
-   It sets the header's ink tokens (see "Header" in pages.css) rather than
-   colouring the pieces directly, so the colours still change only where the
-   shared header changes them, on the same timing. body.founder .header
-   outranks .header.is-scrolled and, coming later, body.litehead .header. */
-body.founder .header{
-  --hd-name:var(--f-ink);
-  --hd-sub:var(--f-soft);
-  --hd-tab:var(--f-soft);
-  --hd-mark:var(--f-gold-ink);
-  --hd-mark-hover:var(--f-gold-ink);
-  --hd-tab-hover:var(--f-ink);
-}
-
 /* Paper, not a flat fill: a trace of grain so large areas of empty
    ground read as a surface. Cheap — one repeating SVG, no image. */
 body.founder::before{

@@ -43,10 +43,12 @@ python3 -m http.server 8000     # from the repository root
   The checks and their results are in
   `review/navigation-prototype/refinement/verification.txt`.
 
-## Adopting it
+## Adopted
 
-If it is approved, `nav.css` and `nav.js` become the header, drawer and
-Enquire rules in `pages.css`, `drawer.css` and `cirs.js`. `nav_html()` in
-`build-site.py` takes the `nv-item` markup, and `header.html` and
-`drawer.html` take the rest. Screenshots and a recording are in
-`review/navigation-prototype/`.
+The design is now the site's navigation. Production does not load these
+files; it is built from `tools/partials/header.html`,
+`tools/partials/drawer.html`, `nav_html()` in `tools/build-site.py`,
+`assets/css/drawer.css` and "Header, menu and Enquire" in
+`assets/js/cirs.js`. One difference from this prototype: the menu keeps the
+wording "Book a campus visit". This folder remains as the design record and
+review set.

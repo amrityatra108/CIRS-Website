@@ -49,7 +49,7 @@ import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=110"
+CACHE_BUST = "b=111"
 
 # Where a film's large-screen encode is offered. Everything that fails it —
 # a phone held either way up — takes the phone encode (tools/make-films.py),
@@ -808,33 +808,36 @@ def menu_group_index(slug):
 
 
 def nav_html(slug):
-    """Five typographic groups with accessible, directly linked panels."""
+    """The menu: five categories in one number column and one label column,
+    each followed by its pages. From 901px the pages of the open category
+    stand in the destination area beside the categories; below that each
+    category opens its pages beneath it. The open category is the current
+    page's, and the current page's link carries aria-current. The gold
+    marker is one element that cirs.js moves between the categories."""
     active = menu_group_index(slug)
-    out = ['<nav class="drawer__menu" aria-label="CIRS sections">']
-    arrival_y = (14, -10, 12, -12, 12)
-    arrival_z = (-200, -120, -260, -160, -220)
+    out = ['<nav class="nv-menu__nav" aria-labelledby="drawer-title">']
     for i, (group, slugs) in enumerate(MENU):
         gid = "dnav-" + re.sub(r"[^a-z]+", "-", group.lower()).strip("-")
         selected = "true" if i == active else "false"
-        current_class = " is-active" if i == active else ""
         state = "" if i == active else " hidden"
-        out.append('  <div class="drawer__item">')
-        out.append(f'    <button type="button" class="drawer__group{current_class}" '
-                   f'id="{gid}-button" data-menu-index="{i}" '
-                   f'aria-controls="{gid}-panel" aria-expanded="{selected}" '
-                   f'style="--enter-delay:{i * 40}ms;--enter-y:{arrival_y[i]}px;'
-                   f'--enter-z:{arrival_z[i]}px">'
-                   f'<span class="drawer__group-number" aria-hidden="true">{i + 1:02d}</span>'
-                   f'<span class="drawer__group-word">{esc(group)}</span></button>')
-        out.append(f'    <section class="drawer__panel" id="{gid}-panel" '
-                   f'aria-labelledby="{gid}-button"{state}>')
-        out.append(f'      <p class="drawer__panel-kicker">{esc(group)} / {i + 1:02d}</p>')
-        out.append("      <ul>")
+        out.append(f'  <div class="nv-item" style="--i:{i}">')
+        out.append(f'    <button type="button" class="nv-cat" id="{gid}-button" data-menu-index="{i}" '
+                   f'aria-expanded="{selected}" aria-controls="{gid}-panel">'
+                   f'<span class="nv-cat__num" aria-hidden="true">{i + 1:02d}</span>'
+                   f'<span class="nv-cat__word">{esc(group)}</span></button>')
+        out.append(f'    <section class="nv-dest" id="{gid}-panel" aria-labelledby="{gid}-button"{state}>')
+        out.append(f'      <p class="nv-dest__kicker" aria-hidden="true">{esc(group)}</p>')
+        out.append('      <ul class="nv-dest__list">')
         for sl in slugs:
             page = PAGES[sl]
             here = ' aria-current="page"' if sl == slug else ""
-            out.append(f'        <li><a href="{sl}.html"{here}>{esc(page["nav"])}</a></li>')
+            out.append(f'        <li><a href="{sl}.html"{here}><span class="nv-dest__label">{esc(page["nav"])}</span>'
+                       '<span class="nv-dest__here" aria-hidden="true">You are here</span>'
+                       '<svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" '
+                       'focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" '
+                       'stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>')
         out += ['      </ul>', '    </section>', '  </div>']
+    out.append('  <span class="nv-marker" aria-hidden="true"></span>')
     out.append('</nav>')
     return "\n".join(out)
 
@@ -1106,29 +1109,13 @@ def banner_html(page):
 </section>'''
 
 
-HOME_TAB = '''<a class="htab" href="index.html" data-magnetic aria-label="Home">
-        <span class="htab__icon" aria-hidden="true">
+HOME_TAB = '''      <a class="nv-tab nv-tab--home" href="index.html">
+        <span class="nv-tab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <span class="htab__label">Home</span>
-      </a>'''
-
-
-NEWS_TAB = '''<a class="htab htab--news" href="news.html" data-magnetic aria-label="News">
-        <span class="htab__icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
-        </span>
-        <span class="htab__label">News</span>
-      </a>'''
-
-
-STUDENT_PORTAL_TAB = '''<a class="htab htab--portal" href="https://cirs.in/school/"
-         target="_blank" rel="noopener" data-magnetic aria-label="Open Student Portal in a new tab">
-        <span class="htab__icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.2 6.2 9 2.8l6.8 3.4L9 9.6 2.2 6.2Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.6 7.5v4.1c1.2 1.1 2.7 1.7 4.4 1.7s3.2-.6 4.4-1.7V7.5M15.8 6.3v4.3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="htab__label">Student Portal</span>
-      </a>'''
+        <span class="nv-tab__label">Home</span>
+      </a>
+'''
 
 
 def hero_html(page):
@@ -2019,11 +2006,11 @@ def houses_gallery_html():
 # The mark is a student rather than a generic person: a mortarboard over a
 # head and shoulders, drawn at the same size and stroke weight as the News
 # and Menu marks so the three read as one row.
-EXTRA_TAB = """      <a class="htab htab--login" href="{href}" target="_blank" rel="noopener" data-magnetic>
-        <span class="htab__icon" aria-hidden="true">
+EXTRA_TAB = """      <a class="nv-tab nv-tab--login" href="{href}" target="_blank" rel="noopener">
+        <span class="nv-tab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.4 16 5.2 9 8 2 5.2 9 2.4Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.6 6.6v2.2c0 1.2 2 2.1 4.4 2.1s4.4-.9 4.4-2.1V6.6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M4.2 15.6a4.8 4.8 0 0 1 9.6 0" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
         </span>
-        <span class="htab__label">{label}</span>
+        <span class="nv-tab__label">{label}</span>
       </a>
 """
 
@@ -2182,13 +2169,11 @@ def build(slug, page):
             f'<link rel="stylesheet" href="assets/css/footer.css?{CACHE_BUST}-footer-1">\n</head>')
 
     head = head.replace("</head>",
-        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-drawer-5">\n</head>')
+        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-nav-1">\n</head>')
 
-    # A page that opens on a pale ground cannot have the header floating over
-    # it in white lettering. "litehead" puts the class on <body>, and pages.css
-    # gives the header dark lettering there from the first paint, with or
-    # without JavaScript. The header's own state — clear or glass — is the
-    # same on every page and belongs to cirs.js alone.
+    # "litehead" marks a page that opens on a pale ground. It once gave the
+    # floating header dark lettering there; the header is now one solid ivory
+    # bar on every page, but page sheets still key their openings on it.
     lite = bool(page.get("litehead"))
     # A page opening on a scrubbed film is marked twice: "film" for the
     # mechanics every such page shares, and its own slug for the handful of
@@ -2241,8 +2226,8 @@ def build(slug, page):
                        EXTRA_TAB.format(href=page["logintab"][1], label=page["logintab"][0])
                        if page.get("logintab") else ""))
     if slug == "news":
-        header = header.replace('class="htab htab--news" href="news.html"',
-                                'class="htab htab--news" href="news.html" aria-current="page"')
+        header = header.replace('class="nv-tab nv-tab--news" href="news.html"',
+                                'class="nv-tab nv-tab--news" href="news.html" aria-current="page"')
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
     if slug == "parent-portal":
