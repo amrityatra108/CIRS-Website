@@ -99,6 +99,12 @@ body.sports {
   transition: opacity 0.3s ease;
 }
 
+/* The reveal's <picture> only chooses a file; the image is laid out as if
+   it were the layer's own child, exactly like the base layer's. */
+.arena-hero__layer picture {
+  display: contents;
+}
+
 .arena-hero__img {
   width: 100%;
   height: 100%;
@@ -910,6 +916,7 @@ body.sports {
 }
 
 .archive-entry__card {
+  min-width: 0;
   background: rgba(22, 16, 29, 0.7);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -920,6 +927,7 @@ body.sports {
 
 .archive-entry__meta {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-4);
   font-size: var(--fs-xs);
   letter-spacing: 0.14em;

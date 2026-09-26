@@ -234,14 +234,20 @@
     <div class="arena-hero__layer arena-hero__layer--base">
       <img class="arena-hero__img" src="assets/img/sports/hero-track.jpg"
            alt="Runners rounding the CIRS athletics track against the Western Ghats"
-           width="2400" height="1500" fetchpriority="high" decoding="async">
+           width="2400" height="1500" decoding="async">
       <div class="arena-hero__scrim" aria-hidden="true"></div>
     </div>
 
-    <!-- Secondary reveal sports image: Swimmer in motion in CIRS pool -->
+    <!-- Secondary reveal sports image: swimmers on the blocks at the CIRS pool.
+         The same files as the Swimming chapter below, so the reveal costs no
+         download of its own; the pool photograph it replaces was the one the
+         home page already uses. -->
     <div class="arena-hero__layer arena-hero__layer--reveal" id="heroRevealLayer" aria-hidden="true">
-      <img class="arena-hero__img" src="assets/img/sports/hero-reveal.jpg"
-           alt="" width="2400" height="1500" decoding="async">
+      <picture>
+        <source media="(max-width: 720px)" srcset="assets/img/sports-experience/swimming-mobile.webp" type="image/webp">
+        <img class="arena-hero__img" src="assets/img/sports-experience/swimming-wide.webp"
+             alt="" width="1920" height="1200" decoding="async">
+      </picture>
       <div class="arena-hero__scrim arena-hero__scrim--reveal" aria-hidden="true"></div>
     </div>
   </div>

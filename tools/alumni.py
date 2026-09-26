@@ -210,7 +210,7 @@ ALUMNI = [
      "role": "Materials research, University of Oxford",
      "field": "Science and research",
      "batch": "", "place": "", "institution": "National University of Singapore",
-     "portrait": "assets/img/alumni/hari-om-jani.png", "portrait_size": (732, 732),
+     "portrait": "assets/img/alumni/hari-om-jani.webp", "portrait_size": (732, 732),
      "portrait_alt": "Hari Om Jani wearing glasses and a navy jacket against a plain background.",
      "then_portrait": "",
      "biography": (
@@ -229,7 +229,7 @@ ALUMNI = [
      "role": "Strength and conditioning coach",
      "field": "Sport",
      "batch": "", "place": "", "institution": "",
-     "portrait": "assets/img/alumni/soham-desai.png", "portrait_size": (497, 618),
+     "portrait": "assets/img/alumni/soham-desai.webp", "portrait_size": (497, 618),
      "portrait_alt": "Soham Desai standing with his arms folded in a navy sports shirt.",
      "then_portrait": "",
      "biography": (
@@ -244,7 +244,7 @@ ALUMNI = [
      "role": "Goalkeeper in India youth squads",
      "field": "Sport",
      "batch": "", "place": "", "institution": "",
-     "portrait": "assets/img/alumni/divyaj-dt.png", "portrait_size": (387, 516),
+     "portrait": "assets/img/alumni/divyaj-dt.webp", "portrait_size": (387, 516),
      "portrait_alt": "Divyaj DT, on the right in a red football kit, standing with another person.",
      "then_portrait": "",
      "biography": (
@@ -260,7 +260,7 @@ ALUMNI = [
      "role": "Designer, Google Creative Lab",
      "field": "Design",
      "batch": "", "place": "", "institution": "",
-     "portrait": "assets/img/alumni/shashwath-santosh.png", "portrait_size": (1194, 796),
+     "portrait": "assets/img/alumni/shashwath-santosh.webp", "portrait_size": (1194, 796),
      "portrait_alt": "Shashwath Santosh seated outdoors and speaking into a microphone.",
      "then_portrait": "",
      "biography": (
@@ -634,6 +634,24 @@ def _plate(person, kind="now"):
         </span>''' % (kind, initials, label)
 
 
+# How far a portrait may be drawn past its own pixels. Three of the supplied
+# portraits are small (387 to 732px); in the one-column layout a tablet gets,
+# the frame would stretch them to 707 CSS px — up to 3.65 times over on a
+# 2x screen. The figure stops at this multiple of the photograph's own width
+# in the 3:4 frame instead, which leaves every desktop and phone layout
+# exactly as it was. The school's larger originals are what will lift it.
+PORTRAIT_STRETCH = 1.25
+
+
+def _figure_cap(person):
+    """A max-width for the figure, or "" when the portrait can fill any frame."""
+    if not person.get("portrait"):
+        return ""
+    width, height = person.get("portrait_size", (900, 1200))
+    cap = round(min(width, height * 3 / 4) * PORTRAIT_STRETCH)
+    return ' style="max-width:%dpx"' % cap if cap < 720 else ""
+
+
 def people_html():
     """The four named alumni in the original alternating editorial layout."""
     chapters = []
@@ -661,7 +679,7 @@ def people_html():
         sources_html = '<p class="ajp__sources">%s</p>' % source_links if source_links else ""
 
         chapters.append('''  <article class="ajp" id="alumnus-%s" data-person="%s" data-side="%s">
-    <div class="ajp__figure">
+    <div class="ajp__figure"%s>
       <figure class="ajp__frame">
         %s
       </figure>
@@ -675,7 +693,7 @@ def people_html():
       <p class="ajp__meta">%s</p>
       %s
     </div>
-  </article>''' % (person["key"], person["key"], side, _plate(person), i + 1,
+  </article>''' % (person["key"], person["key"], side, _figure_cap(person), _plate(person), i + 1,
                    person["name"], person["role"], biography_html,
                    "".join(meta), sources_html))
     return "\n".join(chapters)

@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=106">
-<link rel="stylesheet" href="assets/css/cirs.css?b=106">
-<link rel="stylesheet" href="assets/css/pages.css?b=106">
+<link rel="stylesheet" href="assets/css/fonts.css?b=107">
+<link rel="stylesheet" href="assets/css/cirs.css?b=107">
+<link rel="stylesheet" href="assets/css/pages.css?b=107">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,14 +37,14 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=106">
-<link rel="stylesheet" href="assets/css/crossroads-intro.css?b=106-intro-5">
-<link rel="stylesheet" href="assets/css/crossroads-archive.css?b=106">
-<link rel="stylesheet" href="assets/css/crossroads-stories.css?b=106-hover-4">
-<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?b=106">
+<link rel="stylesheet" href="assets/css/typography.css?b=107">
+<link rel="stylesheet" href="assets/css/crossroads-intro.css?b=107-intro-5">
+<link rel="stylesheet" href="assets/css/crossroads-archive.css?b=107">
+<link rel="stylesheet" href="assets/css/crossroads-stories.css?b=107-hover-4">
+<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?b=107">
 <noscript><style>.crossroads-intro-curtain{display:none}.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}.crossroads-intro[data-crossroads-intro-pending]{background:var(--cr-purple-deep)}.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible!important}</style></noscript>
-<link rel="stylesheet" href="assets/css/footer.css?b=106-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=106-drawer-5">
+<link rel="stylesheet" href="assets/css/footer.css?b=107-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=107-drawer-5">
 </head>
 
 <body>
@@ -332,7 +332,14 @@
   </details>
 </nav>
 <section class="crossroads-intro" id="crossroads-intro" aria-label="The Crossroads" data-crossroads-intro data-crossroads-intro-pending>
-  <video class="crossroads-intro__opening" data-crossroads-intro-opening src="assets/video/crossroads-opening.mp4" data-src="assets/video/crossroads-opening.mp4" poster="assets/img/crossroads/opening-final.jpg" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+  <!-- Phones take the 720p cut (tools/make-films.py); a browser that ignores
+       media on a video's sources keeps the 1080p film, which is listed first.
+       preload="auto" is deliberate: the film plays the moment the curtain
+       lifts and holds the page until it ends, so it buffers under the curtain. -->
+  <video class="crossroads-intro__opening" data-crossroads-intro-opening poster="assets/img/crossroads/opening-final.jpg" muted playsinline preload="auto" aria-hidden="true" tabindex="-1">
+    <source src="assets/video/crossroads-opening.mp4" type="video/mp4" media="(min-width: 768px) and (min-height: 501px)">
+    <source src="assets/video/crossroads-opening-m.mp4" type="video/mp4">
+  </video>
   <div class="crossroads-intro__base" aria-hidden="true"></div>
   <div class="crossroads-intro__reveal" aria-hidden="true">
     <img class="crossroads-intro__still" src="assets/img/crossroads/intro-text-free.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" fetchpriority="low">
@@ -365,19 +372,19 @@
   <span class="crossroads-intro-target" id="crossroads-main" tabindex="-1" role="group" aria-label="Crossroads magazine"></span>
   <div class="crwall" aria-hidden="true">
       <div class="crwall__col">
-        <div class="crwall__run" data-dir="1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-32.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-27.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-22.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-17.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-12.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-07.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-02.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-32.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-27.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-22.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-17.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-12.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-07.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-02.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+        <div class="crwall__run" data-dir="1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-32.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-27.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-22.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-17.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-12.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-07.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-02.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-32.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-27.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-22.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-17.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-12.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-07.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-02.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
       </div>
       <div class="crwall__col">
-        <div class="crwall__run" data-dir="-1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-31.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-26.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-21.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-16.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-11.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-06.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-01.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-31.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-26.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-21.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-16.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-11.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-06.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-01.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+        <div class="crwall__run" data-dir="-1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-31.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-26.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-21.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-16.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-11.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-06.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-01.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-31.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-26.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-21.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-16.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-11.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-06.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-01.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
       </div>
       <div class="crwall__col">
-        <div class="crwall__run" data-dir="1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-30.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-25.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-20.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-15.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-10.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-05.jpg?b=106" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-30.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-25.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-20.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-15.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-10.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-05.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+        <div class="crwall__run" data-dir="1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-30.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-25.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-20.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-15.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-10.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-05.jpg?b=107" alt="" width="300" height="420" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-30.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-25.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-20.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-15.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-10.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-05.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
       </div>
       <div class="crwall__col">
-        <div class="crwall__run" data-dir="-1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-29.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-24.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-19.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-14.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-09.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-04.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-29.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-24.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-19.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-14.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-09.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-04.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+        <div class="crwall__run" data-dir="-1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-29.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-24.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-19.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-14.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-09.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-04.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-29.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-24.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-19.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-14.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-09.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-04.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
       </div>
       <div class="crwall__col">
-        <div class="crwall__run" data-dir="1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-28.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-23.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-18.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-13.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-08.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-03.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-28.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-23.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-18.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-13.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-08.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-03.jpg?b=106" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
+        <div class="crwall__run" data-dir="1"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-28.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-23.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-18.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-13.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-08.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-03.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-28.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-23.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-18.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-13.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-08.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><img class="crwall__cell" src="assets/img/crossroads/wall/issue-03.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"></div>
       </div>
     </div>
   <div class="crossroads-archive-hero__treatment" aria-hidden="true"></div>
@@ -399,7 +406,7 @@
         </div>
       </div>
     </div>
-    <a class="crossroads-archive-hero__feature" href="assets/documents/crossroads/crossroads-issue-32.pdf" aria-label="Read the latest issue: Issue 32 (PDF)"><img src="assets/img/crossroads/issue-32.jpg" alt="" width="300" height="420" loading="lazy" decoding="async"><span>Latest issue · Issue 32</span></a>
+    <a class="crossroads-archive-hero__feature" href="assets/documents/crossroads/crossroads-issue-32.pdf" aria-label="Read the latest issue: Issue 32 (PDF)"><img src="assets/img/crossroads/issue-32.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><span>Latest issue · Issue 32</span></a>
   </div>
 </section>
 
@@ -408,7 +415,7 @@
     <h2 class="crossroads-stories__accessible" id="crossroads-stories-heading">32 editions. Countless stories.</h2>
     <div class="crossroads-stories__spread">
       <div class="crossroads-stories__left" aria-hidden="true"><span class="crossroads-stories__number" data-crossroads-stories-number>32</span><em>editions.</em></div>
-      <div class="crossroads-stories__media"><div class="crossroads-stories__stack"><a class="crossroads-stories__rear crossroads-stories__rear--3" href="assets/documents/crossroads/crossroads-issue-32.pdf" aria-label="Read Crossroads Issue 32"><img src="assets/img/crossroads/issue-32.jpg" alt="Crossroads Issue 32 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--1" href="assets/documents/crossroads/crossroads-issue-31.pdf" aria-label="Read Crossroads Issue 31"><img src="assets/img/crossroads/issue-31.jpg" alt="Crossroads Issue 31 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__front" href="assets/documents/crossroads/crossroads-issue-30.pdf" aria-label="Read Crossroads Issue 30"><img src="assets/img/crossroads/issue-30.jpg" alt="Crossroads Issue 30 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--2" href="assets/documents/crossroads/crossroads-issue-29.pdf" aria-label="Read Crossroads Issue 29"><img src="assets/img/crossroads/issue-29.jpg" alt="Crossroads Issue 29 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--4" href="assets/documents/crossroads/crossroads-issue-28.pdf" aria-label="Read Crossroads Issue 28"><img src="assets/img/crossroads/issue-28.jpg" alt="Crossroads Issue 28 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--6" href="assets/documents/crossroads/crossroads-issue-27.pdf" aria-label="Read Crossroads Issue 27"><img src="assets/img/crossroads/issue-27.jpg" alt="Crossroads Issue 27 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--5" href="assets/documents/crossroads/crossroads-issue-26.pdf" aria-label="Read Crossroads Issue 26"><img src="assets/img/crossroads/issue-26.jpg" alt="Crossroads Issue 26 cover" width="300" height="420" loading="lazy" decoding="async"></a></div></div>
+      <div class="crossroads-stories__media"><div class="crossroads-stories__stack"><a class="crossroads-stories__rear crossroads-stories__rear--3" href="assets/documents/crossroads/crossroads-issue-32.pdf" aria-label="Read Crossroads Issue 32"><img src="assets/img/crossroads/issue-32.jpg?b=107" alt="Crossroads Issue 32 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--1" href="assets/documents/crossroads/crossroads-issue-31.pdf" aria-label="Read Crossroads Issue 31"><img src="assets/img/crossroads/issue-31.jpg?b=107" alt="Crossroads Issue 31 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__front" href="assets/documents/crossroads/crossroads-issue-30.pdf" aria-label="Read Crossroads Issue 30"><img src="assets/img/crossroads/issue-30.jpg?b=107" alt="Crossroads Issue 30 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--2" href="assets/documents/crossroads/crossroads-issue-29.pdf" aria-label="Read Crossroads Issue 29"><img src="assets/img/crossroads/issue-29.jpg?b=107" alt="Crossroads Issue 29 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--4" href="assets/documents/crossroads/crossroads-issue-28.pdf" aria-label="Read Crossroads Issue 28"><img src="assets/img/crossroads/issue-28.jpg?b=107" alt="Crossroads Issue 28 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--6" href="assets/documents/crossroads/crossroads-issue-27.pdf" aria-label="Read Crossroads Issue 27"><img src="assets/img/crossroads/issue-27.jpg?b=107" alt="Crossroads Issue 27 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--5" href="assets/documents/crossroads/crossroads-issue-26.pdf" aria-label="Read Crossroads Issue 26"><img src="assets/img/crossroads/issue-26.jpg?b=107" alt="Crossroads Issue 26 cover" width="300" height="420" loading="lazy" decoding="async"></a></div></div>
       <div class="crossroads-stories__right" aria-hidden="true"><span>Countless</span><span>stories.</span></div>
     </div>
     <p class="crossroads-stories__year"><span aria-hidden="true">2025–26</span><span class="sr-only">Academic year 2025 to 2026</span></p>
@@ -495,7 +502,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-32.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 32 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-32.jpg?b=106" alt="Cover of Crossroads Issue 32" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-32.jpg?b=107" alt="Cover of Crossroads Issue 32" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -513,7 +520,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-31.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 31 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-31.jpg?b=106" alt="Cover of Crossroads Issue 31" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-31.jpg?b=107" alt="Cover of Crossroads Issue 31" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -531,7 +538,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-30.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 30 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-30.jpg?b=106" alt="Cover of Crossroads Issue 30" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-30.jpg?b=107" alt="Cover of Crossroads Issue 30" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -549,7 +556,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-29.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 29 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-29.jpg?b=106" alt="Cover of Crossroads Issue 29" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-29.jpg?b=107" alt="Cover of Crossroads Issue 29" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -567,7 +574,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-28.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 28 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-28.jpg?b=106" alt="Cover of Crossroads Issue 28" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-28.jpg?b=107" alt="Cover of Crossroads Issue 28" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -585,7 +592,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-27.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 27 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-27.jpg?b=106" alt="Cover of Crossroads Issue 27" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-27.jpg?b=107" alt="Cover of Crossroads Issue 27" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -603,7 +610,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-26.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 26 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-26.jpg?b=106" alt="Cover of Crossroads Issue 26" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-26.jpg?b=107" alt="Cover of Crossroads Issue 26" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -621,7 +628,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-25.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 25 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-25.jpg?b=106" alt="Cover of Crossroads Issue 25" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-25.jpg?b=107" alt="Cover of Crossroads Issue 25" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -639,7 +646,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-24.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 24 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-24.jpg?b=106" alt="Cover of Crossroads Issue 24" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-24.jpg?b=107" alt="Cover of Crossroads Issue 24" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -657,7 +664,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-23.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 23 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-23.jpg?b=106" alt="Cover of Crossroads Issue 23" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-23.jpg?b=107" alt="Cover of Crossroads Issue 23" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -675,7 +682,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-22.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 22 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-22.jpg?b=106" alt="Cover of Crossroads Issue 22" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-22.jpg?b=107" alt="Cover of Crossroads Issue 22" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -693,7 +700,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-21.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 21 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-21.jpg?b=106" alt="Cover of Crossroads Issue 21" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-21.jpg?b=107" alt="Cover of Crossroads Issue 21" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -711,7 +718,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-20.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 20 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-20.jpg?b=106" alt="Cover of Crossroads Issue 20" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-20.jpg?b=107" alt="Cover of Crossroads Issue 20" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -729,7 +736,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-19.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 19 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-19.jpg?b=106" alt="Cover of Crossroads Issue 19" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-19.jpg?b=107" alt="Cover of Crossroads Issue 19" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -747,7 +754,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-18.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 18 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-18.jpg?b=106" alt="Cover of Crossroads Issue 18" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-18.jpg?b=107" alt="Cover of Crossroads Issue 18" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -765,7 +772,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-17.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 17 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-17.jpg?b=106" alt="Cover of Crossroads Issue 17" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-17.jpg?b=107" alt="Cover of Crossroads Issue 17" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -783,7 +790,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-16.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 16 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-16.jpg?b=106" alt="Cover of Crossroads Issue 16" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-16.jpg?b=107" alt="Cover of Crossroads Issue 16" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -801,7 +808,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-15.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 15 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-15.jpg?b=106" alt="Cover of Crossroads Issue 15" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-15.jpg?b=107" alt="Cover of Crossroads Issue 15" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -819,7 +826,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-14.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 14 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-14.jpg?b=106" alt="Cover of Crossroads Issue 14" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-14.jpg?b=107" alt="Cover of Crossroads Issue 14" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -837,7 +844,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-13.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 13 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-13.jpg?b=106" alt="Cover of Crossroads Issue 13" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-13.jpg?b=107" alt="Cover of Crossroads Issue 13" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -855,7 +862,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-12.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 12 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-12.jpg?b=106" alt="Cover of Crossroads Issue 12" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-12.jpg?b=107" alt="Cover of Crossroads Issue 12" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -873,7 +880,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-11.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 11 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-11.jpg?b=106" alt="Cover of Crossroads Issue 11" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-11.jpg?b=107" alt="Cover of Crossroads Issue 11" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -891,7 +898,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-10.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 10 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-10.jpg?b=106" alt="Cover of Crossroads Issue 10" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-10.jpg?b=107" alt="Cover of Crossroads Issue 10" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -909,7 +916,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-09.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 09 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-09.jpg?b=106" alt="Cover of Crossroads Issue 09" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-09.jpg?b=107" alt="Cover of Crossroads Issue 09" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -927,7 +934,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-08.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 08 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-08.jpg?b=106" alt="Cover of Crossroads Issue 08" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-08.jpg?b=107" alt="Cover of Crossroads Issue 08" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -945,7 +952,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-07.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 07 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-07.jpg?b=106" alt="Cover of Crossroads Issue 07" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-07.jpg?b=107" alt="Cover of Crossroads Issue 07" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -963,7 +970,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-06.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 06 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-06.jpg?b=106" alt="Cover of Crossroads Issue 06" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-06.jpg?b=107" alt="Cover of Crossroads Issue 06" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -981,7 +988,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-05.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 05 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-05.jpg?b=106" alt="Cover of Crossroads Issue 05" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-05.jpg?b=107" alt="Cover of Crossroads Issue 05" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -999,7 +1006,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-04.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 04 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-04.jpg?b=106" alt="Cover of Crossroads Issue 04" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-04.jpg?b=107" alt="Cover of Crossroads Issue 04" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -1017,7 +1024,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-03.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 03 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-03.jpg?b=106" alt="Cover of Crossroads Issue 03" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-03.jpg?b=107" alt="Cover of Crossroads Issue 03" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -1035,7 +1042,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-02.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 02 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-02.jpg?b=106" alt="Cover of Crossroads Issue 02" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-02.jpg?b=107" alt="Cover of Crossroads Issue 02" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -1053,7 +1060,7 @@
         <a class="crcard__link" href="assets/documents/crossroads/crossroads-issue-01.pdf" target="_blank" rel="noopener"
            aria-label="Read Crossroads Issue 01 in a new tab">
           <span class="crcover">
-          <img class="crcover__img" src="assets/img/crossroads/issue-01.jpg?b=106" alt="Cover of Crossroads Issue 01" loading="lazy" width="720" height="1008">
+          <img class="crcover__img" src="assets/img/crossroads/issue-01.jpg?b=107" alt="Cover of Crossroads Issue 01" loading="lazy" width="720" height="1008">
         </span>
         </a>
         <div class="crcard__foot">
@@ -1199,15 +1206,15 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=106" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=106" defer></script>
-<script src="assets/vendor/lenis.min.js?b=106" defer></script>
-<script src="assets/js/cirs.js?b=106-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=106" defer></script>
-<script src="assets/js/footer.js?b=106-footer-1" defer></script>
-<script src="assets/js/crossroads-intro.js?b=106-intro-5" defer></script>
-<script src="assets/js/crossroads-archive.js?b=106" defer></script>
-<script src="assets/js/crossroads-stories.js?b=106-hover-4" defer></script>
-<script src="assets/js/crossroads-manuscript.js?b=106" defer></script>
+<script src="assets/vendor/gsap.min.js?b=107" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=107" defer></script>
+<script src="assets/vendor/lenis.min.js?b=107" defer></script>
+<script src="assets/js/cirs.js?b=107-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=107" defer></script>
+<script src="assets/js/footer.js?b=107-footer-1" defer></script>
+<script src="assets/js/crossroads-intro.js?b=107-intro-6" defer></script>
+<script src="assets/js/crossroads-archive.js?b=107" defer></script>
+<script src="assets/js/crossroads-stories.js?b=107-hover-4" defer></script>
+<script src="assets/js/crossroads-manuscript.js?b=107" defer></script>
 </body>
 </html>

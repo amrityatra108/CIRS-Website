@@ -165,7 +165,7 @@
   .founder .founders-journey.is-static .founders-journey__camera{position:relative;height:auto;overflow:visible}
   .founder .founders-journey.is-static .founders-journey__world{position:relative;padding-left:42px}
   .founder .founders-journey.is-static .founders-journey__world::before{content:"";position:absolute;left:7px;top:clamp(230px,50vw,390px);bottom:5rem;width:1px;background:linear-gradient(var(--j-gold),var(--j-border) 18%,var(--j-gold) 72%,var(--j-border))}
-  .founder .founders-journey.is-static .founders-journey__opening{display:block;position:relative;min-height:clamp(230px,58vw,430px);margin-left:-42px;padding:48px 0 0 42px;background:url("../img/founder/amrit-vahini/side.png") right bottom/70% auto no-repeat}
+  .founder .founders-journey.is-static .founders-journey__opening{display:block;position:relative;min-height:clamp(230px,58vw,430px);margin-left:-42px;padding:48px 0 0 42px;background:url("../img/founder/amrit-vahini/side.webp") right bottom/70% auto no-repeat}
   .founder .founders-journey__opening p{margin:0 0 4px;font-family:var(--font-primary);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--j-gold-text)}
   .founder .founders-journey__opening strong{display:block;font-family:Newsreader,var(--font-primary);font-size:clamp(4rem,18vw,7rem);font-weight:400;line-height:.85;color:var(--j-gold-large)}
   .founder .founders-journey__opening span{display:block;max-width:29ch;margin-top:12px;font-family:var(--font-primary);font-size:.9rem}
