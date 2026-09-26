@@ -1,9 +1,15 @@
-/* Approved family roles. Loaded after all page-specific sheets. */
+/* Type roles. Loaded after all page-specific sheets.
+   Families are named once, in cirs.css :root; this sheet assigns them.
+   Mona Sans carries English body, interface, labels, captions, data and
+   the film titles. The display, editorial and quote roles keep their
+   current faces until licensed Brier is supplied — the Brier mapping is
+   ready in tools/typography-brier.css. */
 :root{
-  --weight-body:400;
+  --weight-body:350;
   --weight-display:600;
   --weight-section:500;
   --weight-subheading:500;
+  --weight-nav:450;
   --weight-control:600;
   --weight-label:500;
   --fs-body:1.0625rem;
@@ -11,7 +17,7 @@
   --fs-xs:.875rem;
 }
 html{ font-synthesis:none; font-optical-sizing:auto; }
-body, input, select, textarea, button, code, pre, kbd, samp, svg text{ font-family:var(--font-primary); }
+body, input, select, textarea, button, code, pre, kbd, samp, svg text{ font-family:var(--font-body); }
 input, select, textarea{ font-size:inherit; }
 
 /* Genuine variable weights, independent of legacy page-specific heading rules. */
@@ -22,19 +28,20 @@ body .hero__inner > h1{ font-weight:400; }
 body :is(h2, .h2){ font-weight:var(--weight-section); }
 body :is(h3, h4, .h3, .h4){ font-weight:var(--weight-subheading); }
 body.wall .p1-hero-text{ font-weight:var(--weight-display); }
-/* The one line on a scrubbed-film opening — CIRS Captures, Our Sports — is
-   the exception to the display weight: those openings are built on genuinely
-   thin lettering, so they ask for Jost's own Thin rather than a serif at 600.
-   Stated here because this file is loaded after every page sheet and would
-   otherwise overrule it. */
-body .film__title{ font-weight:100; }
-body :is(.htab, .btn, .drawer a, .jump__toggle){ font-weight:var(--weight-control); }
+/* The one line on a scrubbed-film opening — CIRS Captures, Our Sports,
+   CIRS Theatre — is built on genuinely thin lettering. Mona Sans's lightest
+   weight, a little expanded, keeps that airy line; font-stretch selects
+   the width-axis cut, which only these pages fetch. Stated here because
+   this file is loaded after every page sheet and would otherwise overrule it. */
+body .film__title{ font-weight:200; font-stretch:105%; }
+body :is(.htab, .drawer a, .jump__toggle){ font-weight:var(--weight-nav); }
+body .btn{ font-weight:var(--weight-control); }
 body :is(.sc, .art__flag, .art__issue, .art__by, .nx-tag, .nx-meta, .fmeta, .fnav__label){ font-weight:var(--weight-label); }
 
 /* Only these two existing introductions use the editorial family. */
 .crhero__lead, .advert__sub{ font-family:var(--font-editorial); }
 
-/* Quotations and expressive emphasis; attribution stays in the primary face. */
+/* Quotations and expressive emphasis; attribution stays in the interface face. */
 blockquote, .quote__text, .fhero__say, .motto__iast, .fmotto__roman,
 body :is(h1, h2, h3, h4, .h1) em, .saga__line em{
   font-family:var(--font-quote);
@@ -42,13 +49,14 @@ body :is(h1, h2, h3, h4, .h1) em, .saga__line em{
   font-weight:400;
 }
 blockquote p{ font-family:inherit; font-style:inherit; }
-blockquote cite, blockquote footer, figcaption{ font-family:var(--font-primary); }
+blockquote cite, blockquote footer, figcaption{ font-family:var(--font-ui); }
 
 /* :lang also covers descendants inheriting a Sanskrit/Hindi language tag. */
 body :is(:lang(hi), :lang(sa), .deva){
   font-family:var(--deva);
   font-weight:400;
   font-style:normal;
+  font-stretch:normal;
   line-height:1.5;
   letter-spacing:normal;
   text-transform:none;

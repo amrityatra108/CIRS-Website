@@ -43,7 +43,7 @@ body.founder:has(.founder-opening__frame:hover) > .ring{opacity:0!important;}
 .founder-opening__label,.founder-opening__headline,.founder-opening__description,.founder-opening__identity{position:absolute;z-index:2;margin:0;color:var(--f-ink);pointer-events:none;}
 .founder-opening__label{top:132px;left:4vw;font-size:12px;line-height:1.8;letter-spacing:.12em;}
 .founder-opening__label span{letter-spacing:.04em;}
-.founder-opening__headline{left:4vw;top:45%;transform:translateY(-35%);font-family:var(--font-primary);font-weight:400;font-size:clamp(30px,3.6vw,66px);line-height:1.02;letter-spacing:-.025em;}
+.founder-opening__headline{left:4vw;top:45%;transform:translateY(-35%);font-family:var(--font-display);font-weight:400;font-size:clamp(30px,3.6vw,66px);line-height:1.02;letter-spacing:-.025em;}
 .founder-opening__description{right:3vw;top:49%;width:23vw;font-size:clamp(12px,1.12vw,18px);line-height:1.7;}
 .founder-opening__description br{display:none;}
 .founder-opening__identity{bottom:96px;left:0;right:0;text-align:center;}
@@ -97,7 +97,7 @@ body.founder #progress{ display:none; }
 
 /* --- shared editorial furniture ----------------------------- */
 .founder .fmeta{
-  font-family:var(--font-primary); text-transform:none;
+  font-family:var(--font-ui); text-transform:none;
   letter-spacing:.06em; font-size:.68rem; line-height:1.4;
   color:var(--f-mute); margin:0;
 }
@@ -113,7 +113,7 @@ body.founder #progress{ display:none; }
   margin:var(--space-5) 0;
 }
 .founder .fdisplay{
-  font-family:var(--font-primary); font-weight:400;
+  font-family:var(--font-display); font-weight:400;
   font-size:clamp(2.1rem,5.4vw,4.4rem); line-height:1.02;
   letter-spacing:-.022em; color:var(--f-ink);
   margin:var(--space-4) 0 var(--space-6);
@@ -121,19 +121,19 @@ body.founder #progress{ display:none; }
 .founder .fdisplay--big{ font-size:clamp(2.6rem,7.4vw,6rem); }
 .founder .fdisplay em{ font-style:italic; color:var(--f-earth); }
 .founder .fcopy{
-  font-family:var(--font-primary); font-size:1rem; line-height:1.72;
+  font-family:var(--font-body); font-size:1rem; line-height:1.72;
   color:var(--f-soft); margin:0 0 var(--space-5); max-width:62ch;
 }
 .founder .fcopy--lead{
-  font-family:var(--font-primary); font-size:clamp(1.14rem,1.5vw,1.42rem);
+  font-family:var(--font-body); font-size:clamp(1.14rem,1.5vw,1.42rem);
   line-height:1.56; color:var(--f-ink);
 }
 .founder .fcaption{
-  font-family:var(--font-primary); font-size:.72rem; letter-spacing:.06em;
+  font-family:var(--font-ui); font-size:.72rem; letter-spacing:.06em;
   color:var(--f-mute); margin:var(--space-3) 0 0;
 }
 .founder .flink{
-  font-family:var(--font-primary); font-size:.86rem; letter-spacing:.04em;
+  font-family:var(--font-ui); font-size:.86rem; letter-spacing:.04em;
   color:var(--f-earth); text-decoration:none;
   border-bottom:1px solid var(--f-rule); padding-bottom:2px;
 }
@@ -150,11 +150,11 @@ body.founder #progress{ display:none; }
   border:1px solid var(--f-rule); background:var(--f-paper-2);
 }
 .founder .ffig__mark{
-  font-family:var(--font-primary); text-transform:none; letter-spacing:.06em;
+  font-family:var(--font-ui); text-transform:none; letter-spacing:.06em;
   font-size:.62rem; color:var(--f-gold-ink);
 }
 .founder .ffig__what{
-  font-family:var(--font-primary); font-style:italic; font-size:.98rem;
+  font-family:var(--font-body); font-style:italic; font-size:.98rem;
   line-height:1.4; color:var(--f-mute);
 }
 
@@ -175,7 +175,7 @@ body.founder #progress{ display:none; }
 .fhero__ghost{
   position:absolute; inset:0; z-index:0; pointer-events:none;
   display:flex; flex-direction:column; justify-content:center;
-  font-family:var(--font-primary); font-weight:400;
+  font-family:var(--font-display); font-weight:400;
   font-size:clamp(7rem,20vw,18rem); line-height:.78;
   letter-spacing:-.045em; color:var(--f-ghost);
   text-transform:none; white-space:nowrap;
@@ -218,22 +218,22 @@ body.founder #progress{ display:none; }
   .fhero__inner{ margin-left:clamp(220px,22vw,345px); }
 }
 .fhero__name{
-  font-family:var(--font-primary); font-weight:400;
+  font-family:var(--font-display); font-weight:400;
   font-size:clamp(2.2rem,4.2vw,3.65rem); line-height:1.02;
   letter-spacing:-.02em; color:var(--f-ink); margin:0;
 }
 .fhero__dates{
-  font-family:var(--font-primary); letter-spacing:.06em; font-size:.74rem;
+  font-family:var(--font-ui); letter-spacing:.06em; font-size:.74rem;
   color:var(--f-mute); margin:0;
 }
 .fhero__say{
-  font-family:var(--font-primary); font-style:italic;
+  font-family:var(--font-quote); font-style:italic;
   font-size:clamp(1rem,1.3vw,1.24rem); line-height:1.5;
   color:var(--f-earth); margin:var(--space-6) 0 0;
   text-wrap:balance;
 }
 .fhero__sig{
-  font-family:var(--font-primary); font-size:.7rem; letter-spacing:.1em;
+  font-family:var(--font-ui); font-size:.7rem; letter-spacing:.1em;
   text-transform:none; color:var(--f-soft);
   margin:var(--space-7) 0 0; line-height:1.7;
 }
@@ -260,11 +260,11 @@ body.founder #progress{ display:none; }
 }
 .fmarks li{ display:flex; flex-direction:column; gap:6px; }
 .fmarks__n{
-  font-family:var(--font-primary); font-size:clamp(1.9rem,3.4vw,2.9rem);
+  font-family:var(--font-display); font-size:clamp(1.9rem,3.4vw,2.9rem);
   line-height:1; color:var(--f-ink); font-variant-numeric:lining-nums;
 }
 .fmarks__t{
-  font-family:var(--font-primary); font-size:.76rem; letter-spacing:.08em;
+  font-family:var(--font-ui); font-size:.76rem; letter-spacing:.08em;
   text-transform:none; color:var(--f-mute); line-height:1.5;
 }
 
@@ -280,11 +280,11 @@ body.founder #progress{ display:none; }
 }
 .flife__text{ display:contents; }
 .flife__yr{
-  font-family:var(--font-primary); font-size:clamp(1.5rem,3vw,2.4rem);
+  font-family:var(--font-display); font-size:clamp(1.5rem,3vw,2.4rem);
   line-height:1; color:var(--f-gold-ink); font-variant-numeric:lining-nums;
 }
 .flife__h{
-  font-family:var(--font-primary); font-weight:400;
+  font-family:var(--font-display); font-weight:400;
   font-size:clamp(1.2rem,1.9vw,1.6rem); line-height:1.2;
   color:var(--f-ink); margin:0 0 var(--space-3);
 }
@@ -305,7 +305,7 @@ body.founder #progress{ display:none; }
   padding:0 var(--gut);
 }
 .fwords li{
-  font-family:var(--font-primary); font-weight:400; text-transform:none;
+  font-family:var(--font-display); font-weight:400; text-transform:none;
   font-size:clamp(2.2rem,9.5vw,7.5rem); line-height:1.02;
   letter-spacing:-.03em; color:var(--f-ink);
   border:0; padding-top:.14em; margin-bottom:.08em;
@@ -399,11 +399,11 @@ body.founder #progress{ display:none; }
 }
 .feduc__one{ border-top:1px solid var(--f-rule); padding-top:var(--space-5); }
 .feduc__n{
-  display:block; font-family:var(--font-primary); font-size:.68rem;
+  display:block; font-family:var(--font-ui); font-size:.68rem;
   letter-spacing:.06em; color:var(--f-gold-ink); margin-bottom:var(--space-4);
 }
 .feduc__h{
-  font-family:var(--font-primary); font-weight:400; text-transform:none;
+  font-family:var(--font-display); font-weight:400; text-transform:none;
   font-size:clamp(1.5rem,2.6vw,2.2rem); line-height:1;
   letter-spacing:-.01em; color:var(--f-ink); margin:0 0 var(--space-4);
 }
@@ -486,7 +486,7 @@ body.founder #progress{ display:none; }
   border-top:1px solid var(--f-rule);
 }
 .fcvp__h{
-  font-family:var(--font-primary); font-weight:400;
+  font-family:var(--font-display); font-weight:400;
   font-size:clamp(1.35rem,2.3vw,1.95rem); line-height:1.08;
   color:var(--f-sage); margin:0 0 var(--space-4);
 }
@@ -536,7 +536,7 @@ body.founder #progress{ display:none; }
 }
 .fmotto__gloss{
   margin:30px 0 0; color:#706F68;
-  font-family:var(--font-primary); font-size:clamp(1rem,1.35vw,1.25rem);
+  font-family:var(--font-body); font-size:clamp(1rem,1.35vw,1.25rem);
   line-height:1.5; letter-spacing:0;
 }
 .fmotto__right{
@@ -599,7 +599,7 @@ body.founder #progress{ display:none; }
 }
 .fclose__inner{ position:relative; z-index:1; }
 .fclose__head{
-  font-family:var(--font-primary); font-weight:400;
+  font-family:var(--font-display); font-weight:400;
   font-size:clamp(2.6rem,9vw,7rem); line-height:.98;
   letter-spacing:-.03em; color:var(--f-ink);
   margin:var(--space-5) 0 var(--space-6);

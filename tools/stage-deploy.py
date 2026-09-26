@@ -24,6 +24,7 @@ vercel.json's build command adds --vercel, which leaves out _headers: see
 the end of main().
 """
 
+import json
 import os
 import re
 import shutil
@@ -45,8 +46,25 @@ Disallow: /
 """
 
 
+def check_brier_publication():
+    """Keep commercial fonts out of the public source tree."""
+    font_dir = os.path.join(ROOT, "assets/fonts")
+    license_dir = os.path.join(font_dir, "licenses")
+    actual = {name for name in os.listdir(font_dir)
+              if name.lower().startswith("brier-") and name.lower().endswith(".woff2")}
+    actual.update("licenses/" + name for name in os.listdir(license_dir)
+                  if name.lower().startswith("brier"))
+    with open(os.path.join(font_dir, "manifest.json"), encoding="utf-8") as source:
+        manifest = json.load(source)
+    brier = [entry for entry in manifest["fonts"] if entry["family"] == "Brier"]
+    if actual or brier:
+        raise SystemExit("stage-deploy: licensed Brier files must not be staged from "
+                         "this public source tree; use private production staging")
+
+
 def main():
     vercel = "--vercel" in sys.argv[1:]
+    check_brier_publication()
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)

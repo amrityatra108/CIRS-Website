@@ -242,7 +242,7 @@ body.records .rec-kicker span{ color:var(--r-gold); }
 body.records .rec-title{
   margin:0;
   color:var(--r-ink);
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:400;
   font-size:clamp(3.2rem, min(6.5vw, 11.5vh), 7.4rem);
   line-height:.94;
@@ -704,7 +704,7 @@ body.records .rec-num span::after{
 body.records .rec-h2{
   max-width:20ch;
   color:var(--r-ink);
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:400;
   font-size:clamp(2.1rem, 3.7vw, 3.4rem);
   line-height:1.02;
@@ -721,7 +721,7 @@ body.records .rec-lede{
 }
 body.records .rec-h3{
   color:var(--r-ink);
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:500;
   font-size:clamp(1.25rem, 1.6vw, 1.5rem);
   line-height:1.2;
@@ -779,6 +779,7 @@ body.records .rec-facts dd{
 }
 body.records .rec-fact--figure dd{ margin-top:-6px; }
 body.records .rec-figure{
+  font-family:var(--font-display);
   font-size:clamp(2.6rem, 4.4vw, 3.8rem);
   line-height:1;
   letter-spacing:-.02em;
@@ -985,6 +986,7 @@ body.records .rec-measures dt{ color:var(--r-ink-3); }
 body.records .rec-measures dd{ margin:0; display:flex; align-items:baseline; flex-wrap:nowrap; gap:.3em; white-space:nowrap; }
 body.records .rec-measure{
   color:var(--r-ink);
+  font-family:var(--font-display);
   font-size:clamp(2.3rem, 3.7vw, 3.7rem);
   font-weight:300;
   line-height:1;
@@ -1052,6 +1054,7 @@ body.records .rec-counts{
 body.records .rec-counts li{ display:flex; align-items:baseline; gap:.4em; }
 body.records .rec-counts__n{
   color:var(--r-ink);
+  font-family:var(--font-display);
   font-size:1.7rem; font-weight:300; line-height:1; letter-spacing:-.02em;
 }
 @media (max-width:900px){
@@ -1090,7 +1093,7 @@ body.records .rec-safe{
 body.records .rec-safe__k{ color:var(--r-gold-lit); margin-bottom:var(--space-3); }
 body.records .rec-safe__title{
   color:var(--r-on-night);
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:400;
   font-size:clamp(2rem, 3.4vw, 3rem);
   line-height:1.02;
@@ -1109,7 +1112,7 @@ body.records .rec-safe__who{
   border-top:1px solid rgba(243,238,227,.18);
 }
 body.records .rec-safe__role{ color:var(--r-on-night-2); font-size:.92rem; }
-body.records .rec-safe__name{ color:var(--r-on-night); font-size:clamp(1.3rem, 1.9vw, 1.65rem); }
+body.records .rec-safe__name{ color:var(--r-on-night); font-family:var(--font-display); font-size:clamp(1.3rem, 1.9vw, 1.65rem); }
 body.records .rec-safe__lines{
   display:grid; gap:0;
   margin:var(--space-4) 0 0; padding:0; list-style:none;
@@ -1144,7 +1147,7 @@ body.records .rec-safe__side{
 }
 body.records .rec-safe__subtitle{
   color:var(--r-on-night);
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:500;
   font-size:1.12rem;
   line-height:1.35;
@@ -1291,7 +1294,7 @@ body.records .reg__cat{
   padding-bottom:var(--space-3);
   border-bottom:1px solid var(--r-ink);
   color:var(--r-ink);
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:500;
   font-size:clamp(1.2rem, 1.6vw, 1.45rem);
 }
@@ -1398,7 +1401,7 @@ body.records .rec-close__title{
   max-width:16ch;
   margin-bottom:var(--space-5);
   color:var(--r-ink);
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:400;
   font-size:clamp(2.2rem, 4vw, 3.6rem);
   line-height:1.02;

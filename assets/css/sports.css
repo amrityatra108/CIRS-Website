@@ -42,7 +42,7 @@ body.sports {
 }
 
 .sports-cursor__badge {
-  font-family: var(--font-primary), sans-serif;
+  font-family: var(--font-ui);
   font-size: 0.68rem;
   letter-spacing: 0.18em;
   font-weight: 600;
@@ -171,7 +171,7 @@ body.sports {
   display: flex;
   flex-direction: column;
   line-height: 0.86;
-  font-family: var(--font-primary), serif;
+  font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.04em;
   text-transform: uppercase;
@@ -425,7 +425,7 @@ body.sports {
 }
 
 .shift-step__label {
-  font-family: var(--font-primary), serif;
+  font-family: var(--font-ui);
   font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -906,7 +906,7 @@ body.sports {
 }
 
 .archive-entry__year {
-  font-family: var(--font-primary), serif;
+  font-family: var(--font-display);
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--gold);

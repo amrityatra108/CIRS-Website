@@ -38,7 +38,7 @@ body.culture .cx-intro__fig img{
 body.culture .cx-intro__fig figcaption,
 body.culture .cx-gallery figcaption{
   margin-top:10px;
-  font-family:var(--font-primary); font-style:italic;
+  font-family:var(--font-ui); font-style:italic;
   font-size:var(--fs-sm); color:var(--ink-mute);
 }
 
@@ -66,7 +66,7 @@ body.culture .cx-row__media img{ width:100%; height:100%; object-fit:cover; disp
 body.culture .cx-row__kicker{
   display:flex; align-items:baseline; gap:12px;
   margin:0 0 var(--space-3);
-  font-family:var(--font-primary); font-style:italic;
+  font-family:var(--font-body); font-style:italic;
   font-size:1.08rem; color:var(--maroon);
 }
 body.culture .cx-row__n{
@@ -84,7 +84,7 @@ body.culture .cx-row__facts{
   border-top:1px solid var(--rule);
 }
 body.culture .cx-row__facts dt{
-  font-family:var(--font-primary); font-size:var(--fs-xs);
+  font-family:var(--font-body); font-size:var(--fs-xs);
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mute);
 }
 body.culture .cx-row__facts dd{ margin:2px 0 0; color:var(--purple); font-weight:600; }
@@ -113,7 +113,7 @@ body.culture .cx-band__stats > div{
   background:var(--purple-deep);
 }
 body.culture .cx-band__stats dt{
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-size:clamp(1.5rem,2.4vw,2.1rem); line-height:1.1;
   color:var(--gold-lit);
 }

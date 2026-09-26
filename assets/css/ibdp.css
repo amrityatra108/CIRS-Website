@@ -266,7 +266,7 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
 }
 .cbresults__row dd{ margin: 0; color: var(--ink-soft); font-size: 15px; }
 .cbresults__row dd b{
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   font-weight: 500;
   color: var(--ink);
@@ -287,7 +287,7 @@ body.ibdp .crumbs__list [aria-current]{ color: var(--purple); font-weight: 600; 
 @media (min-width: 760px){ .ibscore{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .ibscore > div{ padding: clamp(22px, 2.6vw, 32px); background: var(--paper); }
 .ibscore dt{
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   line-height: 1;
   color: var(--purple);

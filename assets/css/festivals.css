@@ -963,6 +963,7 @@ html.fx-viewing{ overflow:hidden; }
 }
 .fx-together__stats div{ padding-top:16px; border-top:1px solid var(--rule-purple); }
 .fx-together__stats dt{
+  font-family:var(--font-display);
   font-size:clamp(1.6rem, 3vw, 2.5rem);
   line-height:1.05;
   color:var(--gold-lit);

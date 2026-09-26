@@ -87,7 +87,7 @@
 .crossroads-intro__eyebrow {
   margin:clamp(9px,1.7vh,16px) 0 0 4px;
   color:rgba(247,240,230,.72);
-  font-family:var(--font-primary);
+  font-family:var(--font-body);
   font-size:clamp(.72rem,.82vw,.88rem);
   font-weight:600;
   line-height:1.4;
@@ -114,7 +114,7 @@
 }
 .crossroads-intro .crossroads-intro__tagline {
   margin:3px 0 0;
-  font-family:var(--font-primary);
+  font-family:var(--font-body);
   font-size:clamp(.94rem,1.04vw,1.06rem);
   line-height:1.45;
   color:rgba(247,240,230,.7);
@@ -131,7 +131,7 @@
   border:1px solid rgba(255,196,7,.78);
   background:rgba(255,196,7,.08);
   color:var(--cr-warm);
-  font-family:var(--font-primary);
+  font-family:var(--font-body);
   font-size:.78rem;
   font-weight:650;
   line-height:1.2;

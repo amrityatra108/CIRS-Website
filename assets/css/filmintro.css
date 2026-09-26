@@ -92,8 +92,8 @@ body.film main{ background:var(--paper); }
   margin:0;
   padding:0 16px;
   text-align:center;
-  font-family:"Jost", var(--font-primary), sans-serif;
-  font-weight:100;
+  font-family:var(--font-ui);
+  font-weight:200;
   font-size:var(--film-size, clamp(26px, 3.8vw, 62px));
   line-height:1;
   text-transform:uppercase;
@@ -334,7 +334,7 @@ body.sports .film__scroll-cue{
   gap:11px;
   margin:0;
   color:var(--gold-lit);
-  font-family:var(--font-primary);
+  font-family:var(--font-body);
   font-size:.68rem;
   font-weight:600;
   letter-spacing:.16em;
@@ -406,7 +406,7 @@ body.art-attack .film__art-prefix{
   display:block;
   margin-bottom:clamp(12px, 2vh, 22px);
   padding-left:.42em;
-  font-family:"Jost", var(--font-primary), sans-serif;
+  font-family:var(--font-ui);
   font-size:clamp(12px, 1.2vw, 17px);
   font-weight:400;
   letter-spacing:.42em;
@@ -416,7 +416,7 @@ body.art-attack .film__art-prefix{
 }
 body.art-attack .film__art-name{
   display:block;
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-size:clamp(56px, 6.3vw, 100px);
   font-weight:500;
   letter-spacing:-.055em;
@@ -506,9 +506,9 @@ body.theatre .film__title{
   top:49%;
   bottom:auto;
   width:100%;
-  font-family:"Jost", sans-serif;
+  font-family:var(--font-ui);
   font-size:clamp(52px, 6vw, 92px);
-  font-weight:100;
+  font-weight:200;
   line-height:1;
   text-transform:uppercase;
   color:#F3CD83;

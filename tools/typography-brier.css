@@ -1,0 +1,149 @@
+/* Prepared Brier mapping. This file is deliberately not linked or deployed.
+
+   Activate only after CIRS_BRIER_DIR contains licensed Brier Bold (700) and
+   its private licence text, public web rights have been reviewed, a separate
+   publishable notice has been supplied, tools/make-fonts.py has generated
+   brier-bold.woff2, and the manifest and public notice have been checked. Copy the
+   active rules below to the END of assets/css/typography.css; the font URL
+   is relative to that destination. Never use a scraped CDN font.
+
+   The display alias exposes only the real Bold face. Some page sheets still
+   set 400, 500 or 600 on display elements; the alias prevents a supplied
+   Brier Regular from being selected for those elements. It also prevents
+   simulated intermediate weights while those page rules are consolidated.
+   No Brier italic face is declared or synthesized. With Bold alone, Mona Sans
+   carries every English role other than display, including editorial and
+   quotation text; Tiro Devanagari Hindi keeps the Devanagari role. When a
+   licensed Regular face is supplied, the optional block below assigns that
+   face to editorial and quotation text at 400. The existing weight tokens
+   remain untouched so the family switch has a narrow scope.
+*/
+@font-face{
+  font-family:"CIRS Brier Display";
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url("../fonts/brier-bold.woff2") format("woff2");
+}
+
+:root{
+  --font-display:"CIRS Brier Display";
+  --font-editorial:var(--font-body);
+  --font-quote:var(--font-body);
+}
+
+/* The single-face alias covers display text in page sheets even when their
+   declared weight is an older value. These two prominent exceptions can
+   report 700 directly without changing weights on editorial headings. */
+body .hero__inner > h1{ font-weight:700; }
+body.wall .p1-hero-text{ font-weight:700; }
+
+/* Emphasised display words use upright Bold, including the non-semantic
+   display components. The specificity beats page rules that request italic.
+   English em in a heading is display emphasis; Hindi/Sanskrit is excluded. */
+body :is(h1,h2,h3,h4,.h1,.h2,.h3,.h4,
+         .serif,.pull,.fdisplay,.hsx__title,.hend__h,
+         .crstate__line,.p1-hero-text,.saga__line)
+     em:not(:is(:lang(hi),:lang(sa),.deva)){
+  font-family:var(--font-display);
+  font-style:normal;
+  font-weight:700;
+}
+
+/* Keep script and film exceptions explicit when this block is pasted last. */
+body :is(:lang(hi),:lang(sa),.deva),
+body :is(:lang(hi),:lang(sa),.deva) :is(em,strong,b){
+  font-family:var(--deva);
+  font-style:normal;
+  font-weight:400;
+}
+body :is(h1,h2,h3,h4,.h1,.h2,.h3,.h4,
+         .serif,.pull,.fdisplay,.hsx__title,.hend__h,
+         .crstate__line,.p1-hero-text,.saga__line)
+     :is(:lang(hi),:lang(sa),.deva) em{
+  font-family:var(--deva);
+  font-style:normal;
+  font-weight:400;
+}
+body .film__title{
+  font-family:var(--font-ui);
+  font-style:normal;
+  font-weight:200;
+  font-stretch:105%;
+}
+
+/* Every direct editorial-role use. The role token supplies Mona Sans in the
+   Bold-only state and Brier Regular if the optional block is activated. */
+body :is(.ad-editorial,.hsx__sub,.hend__lead,.crhero__lead,.advert__sub,
+         .portal-intro__title,.sj-night h2,.sj-clock span,.sj-chapter h3,
+         .sj-schedule > h3,.sj-schedule h4,.sj-house h3,.sj-board strong,
+         .sj-accordions summary){
+  font-style:normal;
+  font-weight:400;
+}
+body.cwriting :is(.cw-hero__subtitle,.cw-poem__body){
+  font-style:normal;
+  font-weight:400;
+}
+body :is(.ad-editorial,.hsx__sub,.hend__lead,.crhero__lead,.advert__sub,
+         .portal-intro__title,.sj-night h2,.sj-clock span,.sj-chapter h3,
+         .sj-schedule > h3,.sj-schedule h4,.sj-house h3,.sj-board strong,
+         .sj-accordions summary)
+     :is(em,i):not(:is(:lang(hi),:lang(sa),.deva)),
+body.cwriting :is(.cw-hero__subtitle,.cw-poem__body)
+     :is(em,i):not(:is(:lang(hi),:lang(sa),.deva)){
+  font-family:var(--font-editorial);
+  font-style:normal;
+  font-weight:400;
+}
+
+/* Every direct quote-role use, including --aj-voice in Alumni. */
+body :is(blockquote,.quote__text,.motto__iast,.fmotto__roman,
+         .aa-label__title,.aa-viewer__title em,.aj-open__sub,
+         .ajv__mark,.ajv__quote p,.ajp__role,
+         .crossroads-archive-hero__statement,
+         .crossroads-manuscript__quote,.crossroads-manuscript__motto,
+         .fx-pongal__pull,.fx-together__line,.fhero__say,.fmotto__quote,
+         .hch__says p,.hcult__title){
+  font-style:normal;
+  font-weight:400;
+}
+body.cwriting :is(.cw-hero__excerpt-line,.cw-interlude__line),
+body.records .rec-unit{
+  font-style:normal;
+  font-weight:400;
+}
+
+/* Descendant emphasis inherits the quotation role instead of the display
+   heading rule. This also covers the viewer title's direct quote-role em. */
+body :is(blockquote,.quote__text,.motto__iast,.fmotto__roman,
+         .aa-label__title,.aa-viewer__title,.aj-open__sub,.ajv__quote,
+         .ajp__role,.crossroads-archive-hero__statement,
+         .crossroads-manuscript__motto,.fx-pongal__pull,.fx-together__line,
+         .fhero__say,.hch__says,.hcult__title)
+     :is(em,i):not(:is(:lang(hi),:lang(sa),.deva)),
+body.cwriting :is(.cw-hero__excerpt-line,.cw-interlude__line)
+     :is(em,i):not(:is(:lang(hi),:lang(sa),.deva)),
+body.records .rec-unit :is(em,i):not(:is(:lang(hi),:lang(sa),.deva)){
+  font-family:var(--font-quote);
+  font-style:normal;
+  font-weight:400;
+}
+blockquote p{ font-family:inherit; font-style:inherit; }
+
+/* OPTIONAL: only after licensed Brier Regular (400) has been generated and
+   verified as brier-regular.woff2, copy this block without the outer comment
+   markers. The upright 400 rules above already cover its role selectors.
+
+@font-face{
+  font-family:"CIRS Brier Regular";
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url("../fonts/brier-regular.woff2") format("woff2");
+}
+:root{
+  --font-editorial:"CIRS Brier Regular";
+  --font-quote:"CIRS Brier Regular";
+}
+*/

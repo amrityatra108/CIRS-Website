@@ -430,7 +430,7 @@
       }
 
       // Line L label
-      ctx.font = "bold 13px Newsreader, Georgia, serif";
+      ctx.font = "bold 13px 'Mona Sans', Arial, sans-serif";
       ctx.fillStyle = "rgba(212, 175, 90, 0.8)";
       ctx.fillText("Line L (Reflective Axis)", LINE_X_MIN - 20, BASELINE_Y - 10);
 
@@ -446,7 +446,7 @@
       ctx.restore();
 
       // Normal label
-      ctx.font = "11px sans-serif";
+      ctx.font = "11px 'Mona Sans', Arial, sans-serif";
       ctx.fillStyle = "rgba(148, 163, 184, 0.6)";
       ctx.fillText("Normal", p.x + 5, BASELINE_Y - 75);
 
@@ -466,7 +466,7 @@
       ctx.arc(p.x, p.y, 34, -Math.PI / 2, angB, false);
       ctx.stroke();
 
-      ctx.font = "12px sans-serif";
+      ctx.font = "12px 'Mona Sans', Arial, sans-serif";
       ctx.fillStyle = m.isOptimal ? "#F5D37E" : "#7DD3FC";
       ctx.fillText("α=" + m.alpha + "°", p.x - 55, BASELINE_Y - 38);
       ctx.fillText("β=" + m.beta + "°", p.x + 18, BASELINE_Y - 38);
@@ -511,7 +511,7 @@
         ctx.arc(ptB_reflected.x, ptB_reflected.y, 6, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.font = "bold 14px sans-serif";
+        ctx.font = "bold 14px 'Mona Sans', Arial, sans-serif";
         ctx.fillStyle = "#7DD3FC";
         ctx.fillText("B' (Mirror of B)", ptB_reflected.x + 12, ptB_reflected.y + 5);
       }
@@ -552,7 +552,7 @@
       ctx.arc(x, y, 7, 0, Math.PI * 2);
       ctx.stroke();
 
-      ctx.font = "bold 14px Newsreader, Georgia, serif";
+      ctx.font = "bold 14px 'Mona Sans', Arial, sans-serif";
       ctx.fillStyle = "#FFFFFF";
       ctx.fillText(label, x - 20, y - 14);
     }
@@ -577,7 +577,7 @@
       ctx.arc(x, y, 8, 0, Math.PI * 2);
       ctx.stroke();
 
-      ctx.font = "bold 14px sans-serif";
+      ctx.font = "bold 14px 'Mona Sans', Arial, sans-serif";
       ctx.fillStyle = optimal ? "#F5D37E" : "#FFFFFF";
       ctx.fillText("Point P", x - 22, y + 26);
     }
@@ -895,7 +895,7 @@
         ctx.fillRect(dx, dy, tileSize * 2, tileSize);
         ctx.strokeRect(dx, dy, tileSize * 2, tileSize);
 
-        ctx.font = "bold 12px sans-serif";
+        ctx.font = "bold 12px 'Mona Sans', Arial, sans-serif";
         ctx.fillStyle = "#FFFFFF";
         ctx.fillText("2×1 Domino", dx + 8, dy + 26);
       } else if (currentStage === "02") {
@@ -905,7 +905,7 @@
         ctx.strokeRect(startX + 3 * tileSize, startY + 3 * tileSize, tileSize * 2, tileSize);
 
         ctx.fillStyle = "#F5D37E";
-        ctx.font = "12px sans-serif";
+        ctx.font = "12px 'Mona Sans', Arial, sans-serif";
         ctx.fillText("Always 1 Dark + 1 Light", startX + 3 * tileSize - 10, startY + 3 * tileSize - 10);
       } else if (currentStage === "04") {
         // Stage 4 Solve: Tally banner
@@ -914,7 +914,7 @@
         ctx.strokeStyle = "var(--ma-gold, #D4AF5A)";
         ctx.strokeRect(20, h - 60, w - 40, 44);
 
-        ctx.font = "bold 13px sans-serif";
+        ctx.font = "bold 13px 'Mona Sans', Arial, sans-serif";
         ctx.fillStyle = "#F5D37E";
         ctx.fillText("Board: 30 Dark + 32 Light ≠ 31 Dominoes (Impossible!)", 36, h - 33);
       } else if (currentStage === "05") {
@@ -924,7 +924,7 @@
         ctx.strokeStyle = "#38BDF8";
         ctx.strokeRect(20, h - 60, w - 40, 44);
 
-        ctx.font = "bold 13px sans-serif";
+        ctx.font = "bold 13px 'Mona Sans', Arial, sans-serif";
         ctx.fillStyle = "#7DD3FC";
         ctx.fillText("Parity Invariant eliminates 2×10¹⁵ brute-force checks.", 40, h - 33);
       }
@@ -937,7 +937,7 @@
       var startY = (h - 2 * tileSize) / 2;
 
       ctx.fillStyle = "#F8F6F0";
-      ctx.font = "bold 16px sans-serif";
+      ctx.font = "bold 16px 'Mona Sans', Arial, sans-serif";
       ctx.fillText("Minimal Case: 2×2 Board", startX + 10, startY - 24);
 
       // (0,0) - excised
@@ -945,7 +945,7 @@
       ctx.fillRect(startX, startY, tileSize, tileSize);
       ctx.strokeStyle = "#EF4444";
       ctx.strokeRect(startX, startY, tileSize, tileSize);
-      ctx.font = "14px sans-serif";
+      ctx.font = "14px 'Mona Sans', Arial, sans-serif";
       ctx.fillStyle = "#EF4444";
       ctx.fillText("Excised", startX + 25, startY + 55);
 
@@ -974,7 +974,7 @@
       ctx.fillText("Excised", startX + tileSize + 25, startY + tileSize + 55);
 
       // Note below
-      ctx.font = "italic 13px sans-serif";
+      ctx.font = "italic 13px 'Mona Sans', Arial, sans-serif";
       ctx.fillStyle = "#DFD9CE";
       ctx.fillText("Squares A & B only touch at a diagonal vertex — sharing NO edge.", startX - 40, startY + 2 * tileSize + 35);
       ctx.fillText("A single 2×1 domino CANNOT cover both!", startX + 10, startY + 2 * tileSize + 55);

@@ -15,7 +15,7 @@
      .th-invite      what is still missing, and where to send it
      .th-viewer      the photograph viewer
 
-   Identity comes from cirs.css: Newsreader, ivory, gold, the diamond
+   Identity comes from cirs.css: its type roles, ivory, gold, the diamond
    marker. The dark ground is the theatre's, not a new brand colour —
    the colour on these pages is the stage lighting in the photographs.
    Motion is gated on .th-motion, which assets/js/theatre.js sets only
@@ -38,7 +38,7 @@ body.theatre{
 body.theatre .th-label{
   display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px;
   margin:0 0 var(--space-4);
-  font-family:var(--font-primary); font-size:var(--fs-xs); font-weight:600;
+  font-family:var(--font-body); font-size:var(--fs-xs); font-weight:600;
   letter-spacing:.18em; text-transform:uppercase; color:var(--th-soft);
 }
 body.theatre .th-label__act{
@@ -64,7 +64,7 @@ body.theatre .th-photo:hover img{ filter:brightness(1.08); }
 body.theatre .th-photo:focus-visible{ outline:2px solid var(--th-gold); outline-offset:3px; }
 body.theatre .th-cap{
   display:block; margin-top:10px;
-  font-family:var(--font-primary); font-style:italic;
+  font-family:var(--font-body); font-style:italic;
   font-size:var(--fs-sm); line-height:1.45; color:var(--th-mute);
 }
 body.theatre .th-ext{ display:inline-block; margin-left:4px; font-style:normal; }
@@ -209,7 +209,7 @@ body.theatre .th-au__head{
   max-width:calc(var(--maxw) + 2 * var(--gut)); margin-inline:auto;
 }
 body.theatre .th-au__title{
-  font-family:var(--font-primary); font-weight:300;
+  font-family:var(--font-display); font-weight:300;
   font-size:clamp(2.4rem, 11vw, 12rem); line-height:.86; letter-spacing:-.012em;
   text-transform:uppercase; color:#fff;
   text-shadow:0 2px 40px rgba(0,0,0,.35);
@@ -263,7 +263,7 @@ body.theatre .th-au__intro{
 }
 @media (min-width:900px){ body.theatre .th-au__intro{ grid-template-columns:minmax(0,7fr) minmax(0,5fr); align-items:start; } }
 body.theatre .th-au__lede{
-  font-family:var(--font-primary); font-size:clamp(1.2rem, 1.8vw, 1.55rem); line-height:1.5;
+  font-family:var(--font-body); font-size:clamp(1.2rem, 1.8vw, 1.55rem); line-height:1.5;
   color:var(--th-text); max-width:44ch; text-wrap:pretty;
 }
 body.theatre .th-au__intro .th-facts{ grid-template-columns:1fr; gap:var(--space-4); }
@@ -327,7 +327,7 @@ body.theatre .th-mq__face img{
 }
 @media (max-width:899px){ body.theatre .th-mq__face{ width:min(78%, 420px); } }
 body.theatre .th-mq__title{
-  font-family:var(--font-primary); font-weight:300;
+  font-family:var(--font-display); font-weight:300;
   font-size:clamp(2.4rem, 5.4vw, 6.2rem); line-height:.9; letter-spacing:-.012em;
   text-transform:uppercase; color:#fff;
 }
@@ -446,7 +446,7 @@ body.theatre .th-house__label{
   text-shadow:0 1px 14px rgba(8,6,11,.75);
 }
 body.theatre .th-house__numeral{
-  font-family:var(--font-primary); font-weight:300; font-size:clamp(3.4rem, 9vw, 9rem); line-height:.78;
+  font-family:var(--font-display); font-weight:300; font-size:clamp(3.4rem, 9vw, 9rem); line-height:.78;
   color:var(--th-gold);
 }
 body.theatre .th-house__labeltext{ display:grid; gap:6px; justify-items:start; }
@@ -531,7 +531,7 @@ body.theatre .th-house__next{
   display:inline-grid; gap:4px; text-align:right; margin-left:auto; color:#fff;
 }
 body.theatre .th-house__nextlabel{ font-size:var(--fs-xs); letter-spacing:.18em; text-transform:uppercase; color:var(--th-mute); }
-body.theatre .th-house__nextname{ font-family:var(--font-primary); font-size:clamp(1.2rem, 1.8vw, 1.6rem); }
+body.theatre .th-house__nextname{ font-family:var(--font-display); font-size:clamp(1.2rem, 1.8vw, 1.6rem); }
 body.theatre .th-house__nextname::after{ content:" \2193"; color:var(--th-gold); }
 body.theatre .th-house__next:hover .th-house__nextname{ color:var(--th-gold); }
 
@@ -604,13 +604,13 @@ body.theatre .th-archive{
 body.theatre .th-archive__toggle{
   display:flex; align-items:center; gap:12px; cursor:pointer; list-style:none;
   padding:var(--space-5) 0;
-  font-family:var(--font-primary); font-size:clamp(1.15rem, 1.6vw, 1.4rem); color:var(--ink);
+  font-family:var(--font-ui); font-size:clamp(1.15rem, 1.6vw, 1.4rem); color:var(--ink);
 }
 body.theatre .th-archive__toggle::-webkit-details-marker{ display:none; }
 body.theatre .th-archive__toggle::after{ content:"+"; margin-left:auto; color:var(--gold); font-size:1.5rem; line-height:1; }
 body.theatre .th-archive[open] .th-archive__toggle::after{ content:"\2212"; }
 body.theatre .th-archive__n{
-  font-family:var(--font-primary); font-size:var(--fs-xs); padding:2px 9px; border-radius:999px;
+  font-family:var(--font-ui); font-size:var(--fs-xs); padding:2px 9px; border-radius:999px;
   background:var(--paper-2); color:var(--ink-mute);
 }
 body.theatre .th-vrows{ display:grid; gap:1px; background:var(--rule); border-block:1px solid var(--rule); }
