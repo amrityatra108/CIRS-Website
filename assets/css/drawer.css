@@ -1,323 +1,579 @@
-/* Sitewide typographic menu. The five HTML group names provide the depth. */
-.drawer{
-  --menu-bg:var(--dark-ink);
-  --menu-surface:var(--dark-mid);
-  --menu-bar:var(--dark-ink);
-  --menu-text:var(--on-dark);
-  --menu-soft:var(--on-dark-soft);
-  --menu-gold:var(--gold-lit);
-  --menu-rule:rgba(var(--gold-rgb),.24);
-  --menu-divider:rgba(250,249,243,.17);
-  --menu-panel-rule:rgba(250,249,243,.16);
-  --menu-group:var(--on-dark-mute);
-  --menu-number:var(--gold);
-  --menu-close-border:#706F68;
-  --menu-secondary-border:#807F77;
-  --menu-edge-shadow:rgba(var(--gold-rgb),.26);
-  --menu-hover-wash:rgba(var(--gold-rgb),.08);
-  /* The Admissions / Enquire buttons: a gold fill, charcoal lettering. */
-  --menu-fill:var(--gold);
-  --menu-primary-text:var(--on-gold);
-  --menu-primary-hover:var(--gold-pale);
-  --menu-primary-hover-text:var(--on-gold);
-  position:fixed;
-  inset:0;
-  z-index:110;
-  height:100vh;
-  height:100dvh;
-  padding:0;
-  overflow-x:hidden;
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch;
-  color:var(--menu-text);
-  color-scheme:dark;
-  background:var(--menu-bg);
-  opacity:0;
-  visibility:hidden;
-  transform:none;
-  transition:opacity .22s ease,visibility 0s linear .22s;
+/* ============================================================
+   The site's navigation — header, full-screen menu, Enquire.
+   Type follows the roles in typography.css: the school's name and the
+   category words in the display face, everything else in the interface
+   and body face at the navigation weight.
+   Markup: tools/partials/header.html, tools/partials/drawer.html and
+   nav_html() in tools/build-site.py. Behaviour: "Header, menu and
+   Enquire" in assets/js/cirs.js. Worked out first as the prototype in
+   previews/navigation/, whose README records the brief.
+
+   Colour: none of its own. Every colour below is a role from the top
+   of assets/css/cirs.css, read as it stands:
+     --paper    signature ivory   header, category area, Enquire
+     --paper-2  alternate ivory   destination area
+     --ink / --ink-soft / --ink-mute   lettering
+     --rule     hairlines
+     --gold     rules, markers and the one filled button — never
+                lettering on ivory
+     --on-gold  lettering on the gold fill
+     --focus    the keyboard ring
+   No glass, no translucent capsule, no gradient.
+   ============================================================ */
+
+:root{
+  --nv-hh:76px;                         /* the header's height */
+  --nv-split:52%;                       /* category area | destination area */
+  --nv-num:3.25rem;                     /* the category number column */
+  --nv-cat-size:clamp(2.5rem, min(4.3vw, 7.4vh), 4.25rem);
+  --nv-cat-pad:clamp(6px, 1.5vh, 16px);
+  --nv-dest-size:clamp(1.375rem, min(1.95vw, 3.5vh), 1.85rem);
 }
-/* The page's light opening already uses litehead for first-paint header contrast. */
-body.litehead .drawer{
-  --menu-bg:var(--paper-2);
-  --menu-surface:var(--paper);
-  --menu-bar:var(--paper-3);
-  --menu-text:var(--ink);
-  --menu-soft:var(--ink-soft);
-  /* Accent lettering on ivory is the label purple: gold would be
-     2:1 here, and the dark gold 4.16:1. */
-  --menu-gold:var(--label);
-  --menu-rule:rgba(31,31,27,.24);
-  --menu-divider:rgba(31,31,27,.2);
-  --menu-panel-rule:rgba(31,31,27,.18);
-  --menu-group:var(--ink-soft);
-  --menu-number:var(--label);
-  --menu-close-border:var(--ink-mute);
-  --menu-secondary-border:var(--ink-mute);
-  --menu-edge-shadow:rgba(91,42,114,.2);
-  --menu-hover-wash:rgba(var(--gold-rgb),.14);
-  --menu-fill:var(--gold);
-  --menu-primary-text:var(--on-gold);
-  --menu-primary-hover:var(--gold-lit);
-  --menu-primary-hover-text:var(--on-gold);
-  color-scheme:light;
+.nv-sr{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
 }
-.drawer.is-open{opacity:1;visibility:visible;transform:none;transition:opacity .22s ease,visibility 0s}
-.drawer[hidden],.drawer__panel[hidden]{display:none!important}
-body.menu-open{overflow:hidden;overscroll-behavior:none}
-body.menu-open .ring,body.menu-closing .ring{display:none}
-.drawer__surface{
-  display:flex;
-  flex-direction:column;
-  min-height:100%;
-  isolation:isolate;
-  background:radial-gradient(ellipse at 35% 45%,var(--menu-surface),var(--menu-bg) 64%);
+
+/* ------------------------------------------------------------
+   Header — one solid ivory bar that stays where it is. Enquire
+   (and Home) left, the crest centred, News and Menu right. Gold
+   appears twice: the News dot, and the short rule under whichever
+   control is hovered or open.
+   ------------------------------------------------------------ */
+.nv-header{
+  position:fixed; top:0; left:0; right:0; z-index:118;
+  height:var(--nv-hh);
+  background:var(--paper);
+  border-bottom:1px solid var(--rule);
 }
-.drawer__topbar{
+.nv-header__bar{
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+  gap:var(--space-4);
+  height:100%;
+  padding-inline:var(--gut);
+}
+.nv-header__side{ display:flex; align-items:center; gap:var(--space-5); min-width:0; }
+.nv-header__side--left{ justify-self:start; }
+.nv-header__side--right{ justify-self:end; }
+
+.nv-brand{ display:flex; align-items:center; gap:13px; min-width:0; justify-self:center; color:var(--ink); }
+.nv-brand img{ width:48px; height:auto; flex:none; }
+.nv-brand__txt{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+.nv-brand__name{ font-family:var(--font-display); font-size:1.16rem; line-height:1.06; letter-spacing:-.005em; white-space:nowrap; }
+.nv-brand__sub{ font-family:var(--font-ui); font-size:.8rem; letter-spacing:.11em; line-height:1; color:var(--ink-mute); white-space:nowrap; }
+.nv-brand__short{ display:none; font-family:var(--font-display); font-size:1.2rem; letter-spacing:.08em; line-height:1; }
+
+.nv-tab{
   position:relative;
-  z-index:2;
-  flex:none;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  min-height:84px;
-  padding:12px var(--gut);
-  border-bottom:1px solid var(--menu-rule);
-  background:var(--menu-bar);
+  display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  min-height:44px; padding:0 2px;
+  color:var(--ink);
+  font-family:var(--font-ui);
+  font-size:.92rem; letter-spacing:.06em; line-height:1; white-space:nowrap;
 }
-.drawer__brand{display:flex;align-items:center;gap:13px;min-width:0;color:var(--menu-text)}
-.drawer__brand img{width:49px;height:auto;flex:none}
-.drawer__brand span{font-size:1.08rem;font-weight:600;line-height:1.06}
-.drawer__brand:hover span{color:var(--menu-gold)}
-.drawer__close{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:17px;
-  min-height:46px;
-  padding:10px 16px;
-  border:1px solid var(--menu-close-border);
-  color:var(--menu-text);
-  font-size:1rem;
-  line-height:1;
-  transition:color .2s ease,border-color .2s ease,background .2s ease;
+.nv-tab__icon{ display:grid; place-items:center; height:18px; color:var(--ink-soft); transition:color .2s var(--e); }
+/* The one gold gesture in the bar: a short rule under the control on
+   hover, which stays while its panel is open. */
+.nv-tab::after{
+  content:""; position:absolute; left:0; right:0; bottom:7px;
+  height:1px; background:var(--gold);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .28s var(--e2);
 }
-.drawer__close:hover,.drawer__close:focus-visible{color:var(--menu-gold);border-color:var(--menu-gold);background:var(--menu-hover-wash)}
-.drawer :focus-visible{outline:2px solid var(--menu-gold);outline-offset:3px}
-.drawer__sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.drawer__stage{
+.nv-tab[aria-expanded="true"]::after,
+.nv-tab[aria-current="page"]::after{ transform:scaleX(1); }
+@media (hover:hover){
+  .nv-tab:hover::after{ transform:scaleX(1); }
+  .nv-tab:hover .nv-tab__icon{ color:var(--ink); }
+}
+.nv-tab--news .nv-tab__icon{ position:relative; }
+.nv-tab--news .nv-tab__icon::after{
+  content:""; position:absolute; top:-1px; right:-3px;
+  width:5px; height:5px; border-radius:50%; background:var(--gold);
+}
+
+/* Menu ⇄ Close. Both words hold the same box, so the control never
+   changes width; the two lines fold into a cross. */
+.nv-tab--menu .nv-tab__label{ display:inline-grid; }
+.nv-menu-word{ grid-area:1/1; text-align:right; transition:opacity .16s var(--e); }
+.nv-menu-word--close{ opacity:0; }
+.nv-tab--menu[aria-expanded="true"] .nv-menu-word--open{ opacity:0; }
+.nv-tab--menu[aria-expanded="true"] .nv-menu-word--close{ opacity:1; }
+.nv-lines{ position:relative; width:22px; height:12px; flex:none; }
+.nv-lines i{
+  position:absolute; left:0; right:0; height:1.4px; background:currentColor;
+  transition:transform .3s var(--e2), top .3s var(--e2);
+}
+.nv-lines i:first-child{ top:2px; }
+.nv-lines i:last-child{ top:9px; left:7px; }
+.nv-tab--menu[aria-expanded="true"] .nv-lines i{ top:5.3px; left:0; }
+.nv-tab--menu[aria-expanded="true"] .nv-lines i:first-child{ transform:rotate(45deg); }
+.nv-tab--menu[aria-expanded="true"] .nv-lines i:last-child{ transform:rotate(-45deg); }
+
+/* ------------------------------------------------------------
+   Enquire — an opaque ivory sheet hung from the bar. Hierarchy
+   does the work: a small ruled heading, the contact itself set
+   large, what it is set small above it. It carries its own Close.
+   ------------------------------------------------------------ */
+.nv-enq{ position:relative; }
+.nv-enq__panel{
+  position:fixed; top:var(--nv-hh); left:var(--gut); z-index:110;
+  width:min(620px, calc(100vw - 2 * var(--gut)));
+  max-height:calc(100dvh - var(--nv-hh) - 24px); overflow-y:auto; overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:var(--space-4) var(--space-6) var(--space-5);
+  background:var(--paper);
+  border:1px solid var(--rule); border-top:0;
+  box-shadow:var(--shadow-image);
+  opacity:0; transform:translateY(-6px);
+  visibility:hidden;
+  transition:opacity .18s var(--e), transform .24s var(--e2), visibility 0s linear .24s;
+}
+.nv-enq__panel[hidden]{ display:none; }
+.nv-enq.is-open .nv-enq__panel{
+  opacity:1; transform:none; visibility:visible;
+  transition:opacity .18s var(--e), transform .24s var(--e2), visibility 0s;
+}
+/* A bridge over the bar's lower half, so the pointer can travel from
+   the tab into the sheet without passing through dead space. */
+.nv-enq__panel::before{ content:""; position:absolute; left:0; right:0; top:-24px; height:24px; }
+
+.nv-enq__head{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
+  min-height:44px; margin-bottom:var(--space-4);
+  border-bottom:1px solid var(--rule);
+}
+.nv-enq__heading{ color:var(--ink); font-size:1.05rem; letter-spacing:.01em; }
+.nv-enq__close{
+  position:relative; min-height:44px; padding:0 2px;
+  color:var(--ink); font-size:.92rem; letter-spacing:.06em;
+}
+.nv-enq__close::after{
+  content:""; position:absolute; left:0; right:0; bottom:9px; height:1px;
+  background:var(--gold); transform:scaleX(0); transform-origin:left;
+  transition:transform .28s var(--e2);
+}
+.nv-enq__close:focus-visible::after{ transform:scaleX(1); }
+
+.nv-enq__grid{
+  display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:var(--space-6);
+}
+.nv-enq__title{
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--font-ui);
+  margin:0 0 var(--space-3);
+  color:var(--ink-soft);
+  font-size:.74rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; line-height:1;
+}
+.nv-enq__title::before{ content:""; width:18px; height:1px; background:var(--gold); flex:none; }
+
+/* Both columns open on a hairline and are divided by hairlines; the
+   rule above Follow CIRS closes them both. */
+.nv-enq__contact{
+  display:block;
+  padding:var(--space-4) 0;
+  border-top:1px solid var(--rule);
+  color:var(--ink);
+}
+.nv-enq__meta{
+  display:block; margin-bottom:6px;
+  color:var(--ink-mute); font-size:.84rem; letter-spacing:.02em; line-height:1.3;
+}
+.nv-enq__value{
+  position:relative; display:inline-block; max-width:100%;
+  font-size:1.42rem; line-height:1.2; letter-spacing:-.01em;
+  overflow-wrap:anywhere;
+}
+.nv-enq__value::after{
+  content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px;
+  background:var(--gold); transform:scaleX(0); transform-origin:left;
+  transition:transform .3s var(--e2);
+}
+.nv-enq__contact:focus-visible .nv-enq__value::after{ transform:scaleX(1); }
+
+.nv-enq__doors{ border-top:1px solid var(--rule); }
+.nv-enq__doors li + li{ border-top:1px solid var(--rule); }
+.nv-enq__doors a{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-3);
+  min-height:52px; padding:var(--space-2) 0;
+  color:var(--ink); font-size:1.08rem;
+}
+.nv-enq__doors svg{ color:var(--ink-mute); flex:none; transition:transform .25s var(--e2), color .2s var(--e); }
+.nv-enq__doors a:focus-visible svg{ color:var(--ink); transform:translateX(3px); }
+
+.nv-enq__follow{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
+  flex-wrap:wrap;
+  margin-top:var(--space-3); padding-top:var(--space-4);
+  border-top:1px solid var(--rule);
+}
+.nv-enq__follow .nv-enq__title{ margin:0; }
+.nv-enq__social{ display:flex; gap:8px; }
+.nv-enq__social a{
+  display:grid; place-items:center; width:44px; height:44px;
+  border:1px solid var(--rule); border-radius:50%;
+  color:var(--ink-soft);
+  transition:background .2s var(--e), border-color .2s var(--e), color .2s var(--e);
+}
+.nv-enq__social svg{ width:20px; height:20px; overflow:visible; }
+.nv-enq__social svg :is(rect,circle){ fill:none; stroke:currentColor; stroke-width:1.65; }
+.nv-enq__social svg path{ fill:currentColor; stroke:none; }
+.nv-enq__social svg .nv-dot{ fill:currentColor; stroke:none; }
+.nv-enq__social svg .nv-play{ fill:var(--paper); }
+.nv-enq__social a:focus-visible{
+  background:var(--gold); border-color:var(--gold); color:var(--on-gold);
+}
+.nv-enq__social a:focus-visible .nv-play{ fill:var(--gold); }
+
+/* ------------------------------------------------------------
+   The full-screen menu. Two ivory grounds under the header: the
+   signature ivory carries the five categories in one number
+   column and one label column; the alternate ivory, past one
+   fine rule, carries the pages of the category that is open.
+   ------------------------------------------------------------ */
+.nv-menu{
+  position:fixed; inset:var(--nv-hh) 0 0 0; z-index:116;
+  display:flex; flex-direction:column;
+  overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  background:var(--paper);
+  clip-path:inset(0 0 100% 0);
+  visibility:hidden;
+  transition:clip-path .26s var(--e), visibility 0s linear .26s;
+}
+.nv-menu[hidden]{ display:none; }
+.nv-menu.is-open{
+  clip-path:inset(0 0 0 0);
+  visibility:visible;
+  transition:clip-path .42s var(--e2), visibility 0s;
+}
+/* The destination ground, and the fine rule that divides the two. */
+.nv-menu::before{
+  content:""; position:absolute; top:0; bottom:0; left:var(--nv-split); right:0;
+  background:var(--paper-2); z-index:0; pointer-events:none;
+}
+.nv-menu::after{
+  content:""; position:absolute; top:0; bottom:0; left:var(--nv-split);
+  width:1px; background:var(--rule); z-index:0; pointer-events:none;
+}
+
+.nv-menu__stage{ position:relative; z-index:1; flex:1 0 auto; display:flex; }
+.nv-menu__nav{
   position:relative;
   flex:1;
-  display:flex;
-  align-items:center;
-  width:100%;
-  max-width:1600px;
-  min-height:0;
-  margin:0 auto;
-  padding:28px var(--gut);
-}
-.drawer__menu{
   display:grid;
-  grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
-  grid-template-rows:repeat(5,auto);
-  column-gap:clamp(36px,4vw,64px);
-  width:100%;
-  perspective:1000px;
-  perspective-origin:32% 50%;
+  grid-template-columns:var(--nv-split) minmax(0,1fr);
+  grid-template-rows:repeat(5, auto);
+  align-content:center;
+  padding-block:clamp(20px, 5vh, 64px);
 }
-.drawer__item{display:contents}
-.drawer__item:nth-child(1)>.drawer__group{grid-row:1}
-.drawer__item:nth-child(2)>.drawer__group{grid-row:2}
-.drawer__item:nth-child(3)>.drawer__group{grid-row:3}
-.drawer__item:nth-child(4)>.drawer__group{grid-row:4}
-.drawer__item:nth-child(5)>.drawer__group{grid-row:5}
-.drawer__group{
+.nv-item{ display:contents; }
+.nv-item:nth-child(1) .nv-cat{ grid-row:1; }
+.nv-item:nth-child(2) .nv-cat{ grid-row:2; }
+.nv-item:nth-child(3) .nv-cat{ grid-row:3; }
+.nv-item:nth-child(4) .nv-cat{ grid-row:4; }
+.nv-item:nth-child(5) .nv-cat{ grid-row:5; }
+
+/* A category: one number column, one label column, on one baseline.
+   Nothing about it moves when it becomes active — only its colour
+   changes and the gold marker arrives beside it. */
+.nv-cat{
   grid-column:1;
   position:relative;
-  display:flex;
-  align-items:center;
-  gap:20px;
+  display:grid; grid-template-columns:var(--nv-num) minmax(0,1fr); align-items:baseline;
   width:100%;
-  min-height:84px;
-  padding:12px 12px 11px 11px;
-  border:0;
-  border-bottom:1px solid var(--menu-divider);
-  background:transparent;
-  color:var(--menu-group);
+  padding:var(--nv-cat-pad) clamp(24px,3vw,48px) var(--nv-cat-pad) var(--gut);
+  color:var(--ink-mute);
   text-align:left;
-  transform-style:preserve-3d;
+  transition:color .2s var(--e);
 }
-.drawer.is-open .drawer__group{animation:drawer-depth-arrive .72s cubic-bezier(.2,.72,.15,1) both;animation-delay:var(--enter-delay)}
-.drawer__group::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:22%;
-  width:2px;
-  height:56%;
-  background:var(--menu-gold);
-  box-shadow:0 0 10px var(--menu-edge-shadow);
-  opacity:0;
-  transition:opacity .28s ease;
-}
-.drawer__group:hover,.drawer__group:focus-visible,.drawer__group[aria-expanded="true"]{color:var(--menu-text)}
-.drawer__group:hover::before,.drawer__group:focus-visible::before,.drawer__group[aria-expanded="true"]::before{opacity:1}
-.drawer__group-number{
-  width:26px;
-  flex:none;
-  color:var(--menu-number);
-  font-size:.85rem;
-  font-variant-numeric:lining-nums;
+.nv-cat__num{
+  font-family:var(--font-ui);
+  font-size:.8rem; letter-spacing:.08em; font-variant-numeric:lining-nums tabular-nums;
   line-height:1;
 }
-.drawer__group-word{
-  position:relative;
-  display:inline-block;
-  min-width:0;
-  font-family:var(--font-display);
-  font-size:clamp(2.25rem,3.55vw,3.75rem);
-  font-weight:400;
-  letter-spacing:-.038em;
-  line-height:1.02;
-  transform:translateZ(-10px);
-  transition:transform .3s ease,color .3s ease;
+.nv-cat__word{
+  font-family:var(--font-display); font-weight:400;
+  font-size:var(--nv-cat-size);
+  line-height:1.04; letter-spacing:-.03em;
+  text-wrap:balance;
 }
-.drawer__group-word::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:100%;
-  height:1px;
-  background:var(--menu-gold);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .3s ease;
-}
-.drawer__group:hover .drawer__group-word,.drawer__group:focus-visible .drawer__group-word,.drawer__group[aria-expanded="true"] .drawer__group-word{transform:translate3d(7px,0,22px)}
-.drawer__group:hover .drawer__group-word::after,.drawer__group:focus-visible .drawer__group-word::after,.drawer__group[aria-expanded="true"] .drawer__group-word::after{transform:scaleX(1)}
-.drawer__group:hover:not([aria-expanded="true"]) .drawer__group-word{transform:translate3d(4px,0,14px)}
-.drawer__panel{
-  grid-column:2;
-  grid-row:1 / 6;
-  align-self:stretch;
-  min-height:420px;
-  padding:36px 0 24px clamp(36px,4vw,64px);
-  border-left:1px solid var(--menu-rule);
-  animation:drawer-panel-in .28s ease-out both;
-}
-.drawer__panel-kicker{
-  display:block;
-  margin:0 0 25px;
-  color:var(--menu-gold);
-  font-size:.87rem;
-  font-weight:500;
-  line-height:1;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.drawer__panel ul{padding:0;margin:0;list-style:none}
-.drawer__panel li{border-bottom:1px solid var(--menu-panel-rule)}
-.drawer .drawer__panel li a{
-  display:flex;
-  align-items:center;
-  min-height:58px;
-  padding:10px 0;
-  color:var(--menu-text);
-  font-size:clamp(1.3rem,1.65vw,1.6rem);
-  font-weight:400;
-  line-height:1.25;
-  transition:color .2s ease,padding-left .2s ease;
-}
-.drawer .drawer__panel li a:hover,.drawer .drawer__panel li a:focus-visible,.drawer .drawer__panel li a[aria-current="page"]{color:var(--menu-gold);padding-left:9px}
-.drawer__bottom{
-  position:relative;
-  z-index:2;
-  flex:none;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-  width:100%;
-  max-width:1600px;
-  min-height:107px;
-  margin:0 auto;
-  padding:17px var(--gut);
-  border-top:1px solid var(--menu-rule);
-  background:var(--menu-bar);
-}
-.drawer__cta{display:flex;gap:10px;flex-wrap:wrap;margin:0}
-.drawer__cta a{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:46px;
-  padding:11px 17px;
-  border:1px solid var(--menu-fill);
-  color:var(--menu-primary-text);
-  background:var(--menu-fill);
-  font-weight:500;
-  white-space:nowrap;
-}
-.drawer__cta a+a{border-color:var(--menu-secondary-border);color:var(--menu-text);background:transparent}
-.drawer__cta a:hover,.drawer__cta a:focus-visible{color:var(--menu-primary-hover-text);background:var(--menu-primary-hover);border-color:var(--menu-primary-hover)}
-.drawer__cta a+a:hover,.drawer__cta a+a:focus-visible{color:var(--menu-primary-text);background:var(--menu-fill);border-color:var(--menu-fill)}
-.drawer__utility{
-  display:grid;
-  grid-template-columns:repeat(2,max-content);
-  gap:5px 27px;
-  margin:0;
-  padding:0;
-  border:0;
-  color:var(--menu-soft);
-  font-size:.95rem;
-  line-height:1.25;
-}
-.drawer__utility a{color:var(--menu-soft);font-weight:400;overflow-wrap:anywhere}
-.drawer__utility a:hover,.drawer__utility a:focus-visible{color:var(--menu-gold);text-decoration:underline;text-underline-offset:4px}
-@keyframes drawer-depth-arrive{from{opacity:.62;transform:translate3d(0,var(--enter-y),var(--enter-z)) scale(.975)}to{opacity:1;transform:none}}
-@keyframes drawer-panel-in{from{opacity:.55;transform:translate3d(8px,0,-25px)}to{opacity:1;transform:none}}
+@media (hover:hover){ .nv-cat:hover{ color:var(--ink); } }
+.nv-cat[aria-expanded="true"]{ color:var(--ink); }
 
-@media(max-height:700px) and (min-width:901px){
-  .drawer__topbar{min-height:68px;padding-block:7px}
-  .drawer__brand img{width:40px}
-  .drawer__stage{padding-top:12px;padding-bottom:12px}
-  .drawer__group{min-height:69px;padding-block:7px}
-  .drawer__group-word{font-size:clamp(2.1rem,3.1vw,3.15rem)}
-  .drawer__panel{min-height:340px;padding-top:16px}
-  .drawer .drawer__panel li a{min-height:49px}
-  .drawer__bottom{min-height:78px;padding-block:10px}
+/* The active marker: one short gold rule that travels between the
+   categories rather than five that switch on and off. nav.js sets
+   its position; without script the open category keeps its colour. */
+.nv-marker{
+  position:absolute; left:calc(var(--gut) - 22px); top:0;
+  width:2px; height:calc(var(--nv-cat-size) * .7);
+  background:var(--gold);
+  opacity:0;
+  transition:transform .26s var(--e2), opacity .2s var(--e);
+  pointer-events:none;
 }
-@media(max-width:900px){
-  .drawer__topbar{position:sticky;top:0;min-height:72px;padding:9px var(--gut)}
-  .drawer__brand{gap:8px}
-  .drawer__brand img{width:40px}
-  .drawer__brand span{font-size:.9rem}
-  .drawer__close{min-height:44px;gap:7px;padding:8px 11px}
-  .drawer__stage{display:block;padding:19px var(--gut) 30px}
-  .drawer__menu{display:block;perspective:700px}
-  .drawer__item{display:block}
-  .drawer__group{min-height:68px;gap:16px;padding:10px 4px 9px 8px}
-  .drawer__group-number{width:24px}
-  .drawer__group-word{font-size:clamp(1.9rem,6.4vw,2.8rem)}
-  .drawer__panel{min-height:0;margin:0;padding:8px 0 21px 48px;border:0;animation:drawer-mobile-panel-in .25s ease-out both}
-  .drawer__panel-kicker{margin-bottom:6px;font-size:.75rem}
-  .drawer .drawer__panel li a{min-height:47px;font-size:1.16rem}
-  .drawer__bottom{display:block;padding:19px var(--gut) 24px}
-  .drawer__cta{margin-bottom:25px}
-  .drawer__utility{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px}
+.nv-marker.is-set{ opacity:1; }
+
+/* Destinations. All five share one grid area, and the closed ones are
+   laid out but invisible, so the area is always as tall as the
+   longest list: changing category never moves anything on the page.
+   The open list's heading sits on the first category's baseline. */
+.nv-dest{
+  grid-column:2; grid-row:1 / -1;
+  align-self:start;
+  width:100%; max-width:600px;
+  padding:0 var(--gut) 0 clamp(32px,4vw,72px);
 }
-@keyframes drawer-mobile-panel-in{from{opacity:.6;transform:translate3d(0,-3px,-22px)}to{opacity:1;transform:none}}
-@media(max-width:430px){
-  .drawer__brand span{font-size:.78rem}
-  .drawer__brand img{width:38px}
-  .drawer__group{min-height:62px}
-  .drawer__group-word{font-size:clamp(1.75rem,7.1vw,2.2rem)}
-  .drawer__cta{display:grid}
-  .drawer__cta a{width:100%;white-space:normal;text-align:center}
+.nv-dest[hidden]{ display:block; visibility:hidden; }
+.nv-dest__kicker{
+  display:flex; align-items:center; gap:12px;
+  margin:0 0 var(--space-4);
+  color:var(--ink-soft);
+  font-size:.74rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; line-height:1;
 }
-@media(prefers-reduced-motion:reduce){
-  .drawer,.drawer *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.nv-dest__kicker::before{ content:""; width:18px; height:1px; background:var(--gold); flex:none; }
+.nv-dest__list{ border-top:1px solid var(--rule); }
+.nv-dest__list li{ border-bottom:1px solid var(--rule); }
+.nv-dest__list a{
+  position:relative;
+  display:grid; grid-template-columns:minmax(0,1fr) auto 24px; align-items:center; column-gap:var(--space-3);
+  min-height:clamp(50px, 7vh, 64px); padding:8px 0;
+  color:var(--ink);
+}
+.nv-dest__label{ grid-column:1; font-size:var(--nv-dest-size); line-height:1.2; letter-spacing:-.012em; }
+.nv-dest__here{ grid-column:2; display:none; color:var(--ink-mute); font-size:.84rem; font-style:italic; letter-spacing:.01em; }
+.nv-dest__arrow{
+  grid-column:3; justify-self:end;
+  color:var(--ink-mute);
+  transition:transform .22s var(--e2), color .2s var(--e);
+}
+/* Hover draws a gold rule along the row's own hairline. */
+.nv-dest__list a::after{
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+  background:var(--gold); transform:scaleX(0); transform-origin:left;
+  transition:transform .3s var(--e2);
+}
+/* Hover only where there is a pointer to hover with: a tap on a phone
+   would otherwise leave the rule drawn under the row it touched. */
+.nv-dest__list a:focus-visible .nv-dest__arrow{ color:var(--ink); transform:translateX(3px); }
+.nv-dest__list a:focus-visible::after{ transform:scaleX(1); }
+@media (hover:hover){
+  .nv-dest__list a:hover .nv-dest__arrow{ color:var(--ink); transform:translateX(3px); }
+  .nv-dest__list a:hover::after{ transform:scaleX(1); }
+  .nv-enq__doors a:hover svg{ color:var(--ink); transform:translateX(3px); }
+  .nv-enq__contact:hover .nv-enq__value::after{ transform:scaleX(1); }
+  .nv-enq__social a:hover{ background:var(--gold); border-color:var(--gold); color:var(--on-gold); }
+  .nv-enq__social a:hover .nv-play{ fill:var(--gold); }
+  .nv-cta--quiet:hover{ text-decoration-color:var(--gold); }
+  .nv-cta--quiet:hover svg{ color:var(--ink); transform:translateX(3px); }
+  .nv-enq__close:hover::after{ transform:scaleX(1); }
+}
+/* The page being read stays a link. Its cue: a short gold rule in the
+   gutter beside it, and two quiet words before the arrow. */
+.nv-dest__list a[aria-current="page"] .nv-dest__here{ display:inline; }
+.nv-dest__list a[aria-current="page"]::before{
+  content:""; position:absolute; left:-18px; top:50%; width:2px; height:1.1em; margin-top:-.55em;
+  background:var(--gold);
+}
+
+/* Foot of the menu: utility on the category side, the admissions
+   action and the quieter visit link on the destination side. */
+.nv-menu__foot{
+  position:relative; z-index:1; flex:none;
+  display:grid; grid-template-columns:var(--nv-split) minmax(0,1fr); align-items:center;
+  border-top:1px solid var(--rule);
+  min-height:84px;
+}
+.nv-menu__utility{
+  display:flex; flex-wrap:wrap; gap:6px var(--space-5);
+  padding:var(--space-4) var(--gut) var(--space-4) calc(var(--gut) + var(--nv-num));
+  font-size:.92rem;
+}
+.nv-menu__utility a{ color:var(--ink-soft); }
+.nv-menu__utility a:hover, .nv-menu__utility a:focus-visible{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:5px; }
+.nv-menu__cta{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px var(--space-5);
+  padding:var(--space-4) var(--gut) var(--space-4) clamp(32px,4vw,72px);
+}
+.nv-cta{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:46px; padding:11px 18px;
+  font-size:.95rem; font-weight:500; white-space:nowrap;
+  transition:background .2s var(--e), border-color .2s var(--e), color .2s var(--e);
+}
+.nv-cta--primary{ background:var(--gold); border:1px solid var(--gold); color:var(--on-gold); }
+.nv-cta--primary:hover, .nv-cta--primary:focus-visible{ background:var(--gold-lit); border-color:var(--gold-lit); color:var(--on-gold); }
+.nv-cta--quiet{
+  min-height:44px; padding:0 2px;
+  color:var(--ink); font-weight:400;
+  text-decoration:underline; text-decoration-color:var(--rule); text-decoration-thickness:1px; text-underline-offset:6px;
+}
+.nv-cta--quiet svg{ color:var(--ink-mute); flex:none; transition:transform .22s var(--e2), color .2s var(--e); }
+.nv-cta--quiet:focus-visible{ text-decoration-color:var(--gold); }
+.nv-cta--quiet:focus-visible svg{ color:var(--ink); transform:translateX(3px); }
+
+/* The opening: the grounds unroll from under the bar and the
+   categories come up once, briefly. Nothing is withheld from the
+   pointer while it plays, and nothing plays on a category change
+   but a short fade of the incoming list. */
+.nv-menu.is-open .nv-cat{
+  animation:nv-rise .36s var(--e2) both;
+  animation-delay:calc(60ms + var(--i) * 30ms);
+}
+.nv-item{ --i:0; }
+.nv-menu.is-open .nv-menu__foot > *{ animation:nv-fade .3s var(--e) .16s both; }
+.nv-dest.is-entering{ animation:nv-fade-up .2s var(--e2) both; }
+@keyframes nv-rise{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+@keyframes nv-fade-up{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:none; } }
+@keyframes nv-fade{ from{ opacity:0; } to{ opacity:1; } }
+
+/* The page behind is locked by body.is-locked (cirs.css) and Lenis, and
+   keeps its place. The trailing cursor ring has nothing to do here. */
+body.menu-open .ring, body.menu-closing .ring{ display:none; }
+
+/* ------------------------------------------------------------
+   Short windows: the rows tighten before anything scrolls.
+   ------------------------------------------------------------ */
+@media (max-height:720px) and (min-width:901px){
+  .nv-menu__foot{ min-height:72px; }
+  .nv-dest__kicker{ margin-bottom:var(--space-3); }
+}
+
+/* ------------------------------------------------------------
+   Header below 1100px: the sub-line goes, and Home and News keep
+   their marks with their names read out rather than shown.
+   Enquire and Menu keep their words at every width.
+   ------------------------------------------------------------ */
+@media (max-width:1099px){
+  .nv-brand__sub{ display:none; }
+  .nv-brand__name{ font-size:1rem; }
+  .nv-header__side{ gap:var(--space-3); }
+  :is(.nv-tab--home, .nv-tab--news, .nv-tab--login) .nv-tab__label{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;
+  }
+  :is(.nv-tab--home, .nv-tab--news, .nv-tab--login){ min-width:40px; }
+  :is(.nv-tab--home, .nv-tab--news, .nv-tab--login)::after{ left:10px; right:10px; }
+}
+
+/* ------------------------------------------------------------
+   Tablet and phone: one column, an accordion. Each category opens
+   its pages directly beneath it on the alternate ivory, with the
+   links set on the category label column.
+   ------------------------------------------------------------ */
+@media (max-width:900px){
+  :root{ --nv-hh:64px; --nv-num:2.5rem; }
+  .nv-brand img{ width:40px; }
+
+  .nv-menu::before, .nv-menu::after{ display:none; }
+  .nv-menu__stage{ display:block; flex:none; }
+  .nv-menu__nav{ display:block; padding:0; }
+  .nv-marker{ display:none; }
+  .nv-item{ display:block; border-bottom:1px solid var(--rule); }
+  .nv-cat{
+    position:relative;
+    min-height:72px;
+    padding:14px var(--gut);
+    align-content:center;
+  }
+  .nv-cat__word{ font-size:clamp(1.75rem, 7vw, 2.5rem); line-height:1.08; }
+  /* The marker has no rows to travel between here, so the open
+     category carries its own. */
+  .nv-cat[aria-expanded="true"]::before{
+    content:""; position:absolute; left:calc(var(--gut) - 12px); top:50%;
+    width:2px; height:1.4rem; margin-top:-.7rem; background:var(--gold);
+  }
+  .nv-dest{
+    max-width:none;
+    padding:4px var(--gut) var(--space-3) calc(var(--gut) + var(--nv-num));
+    background:var(--paper-2);
+    border-top:1px solid var(--rule);
+  }
+  .nv-dest[hidden]{ display:none; }
+  .nv-dest__kicker{ display:none; }
+  .nv-dest__list{ border-top:0; }
+  .nv-dest__list li:last-child{ border-bottom:0; }
+  .nv-dest__list a{ min-height:48px; padding:6px 0; }
+  .nv-dest__label{ font-size:1.15rem; }
+  .nv-dest__list a[aria-current="page"]::before{ left:-14px; }
+
+  .nv-menu__foot{ display:flex; flex-direction:column; align-items:stretch; border-top:0; min-height:0; }
+  .nv-menu__cta{ order:-1; padding:var(--space-5) var(--gut) var(--space-4); gap:var(--space-2) var(--space-5); }
+  .nv-menu__cta .nv-cta--primary{ flex:1 1 220px; }
+  .nv-menu__utility{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px var(--space-4);
+    padding:var(--space-4) var(--gut) calc(var(--space-5) + env(safe-area-inset-bottom,0px));
+    border-top:1px solid var(--rule);
+  }
+
+  .nv-enq__panel{
+    left:0; right:0; width:auto;
+    max-height:calc(100dvh - var(--nv-hh));
+    padding:var(--space-2) var(--gut) var(--space-5);
+    border-inline:0;
+  }
+  .nv-enq__grid{ grid-template-columns:1fr; gap:var(--space-5); }
+}
+
+/* Below 760px the crest and CIRS stand in for the full name, which the
+   link still carries for assistive technology: set in the display face
+   the full name needs about that much room beside the controls. */
+@media (max-width:759px){
+  .nv-brand{ gap:8px; }
+  .nv-brand img{ width:34px; }
+  .nv-brand__txt{ display:block; }
+  .nv-brand__name{ display:none; }
+  .nv-brand__short{ display:block; }
+}
+/* Phones: Enquire keeps its word and gives up its mark. */
+@media (max-width:699px){
+  .nv-enq__btn .nv-tab__icon{ display:none; }
+  .nv-header__bar{ gap:var(--space-2); }
+  .nv-header__side{ gap:var(--space-1); }
+  .nv-tab{ font-size:.9rem; letter-spacing:.04em; }
+}
+/* The narrowest phones: the Menu mark goes (its word stays), the bar's
+   gutter and the icon targets tighten, so Enquire, the lockup and Menu
+   keep clear space between them down to 320px. */
+@media (max-width:380px){
+  .nv-lines{ display:none; }
+  .nv-header__bar{ padding-inline:14px; }
+  .nv-brand img{ width:30px; }
+  .nv-brand__short{ font-size:1.02rem; letter-spacing:.06em; }
+  :is(.nv-tab--home, .nv-tab--news, .nv-tab--login){ min-width:36px; }
+  .nv-menu__utility{ grid-template-columns:1fr; }
+}
+
+/* A page with a fourth control — Student Life's Student Portal, linked
+   nowhere else on that page. Its bar sizes each side to what it holds, so
+   the extra control cannot push into the lockup; the crest sits centred
+   between them rather than on the window's centre line. The portal keeps
+   its word from 1280px, the full name from 900px, and below 440px the Home
+   mark gives way to it (the crest still leads home). */
+.nv-header__bar:has(.nv-tab--login){ grid-template-columns:auto minmax(0,1fr) auto; }
+@media (max-width:1279px){
+  .nv-tab--login .nv-tab__label{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;
+  }
+  .nv-tab--login{ min-width:40px; }
+  .nv-tab--login::after{ left:10px; right:10px; }
+}
+@media (max-width:899px){
+  .nv-header__bar:has(.nv-tab--login) .nv-brand{ gap:8px; }
+  .nv-header__bar:has(.nv-tab--login) .nv-brand img{ width:34px; }
+  .nv-header__bar:has(.nv-tab--login) .nv-brand__txt{ display:block; }
+  .nv-header__bar:has(.nv-tab--login) .nv-brand__name{ display:none; }
+  .nv-header__bar:has(.nv-tab--login) .nv-brand__short{ display:block; }
+}
+@media (max-width:440px){
+  .nv-header__bar:has(.nv-tab--login) .nv-tab--home{ display:none; }
+}
+
+@media print{
+  .nv-header, .nv-menu{ display:none !important; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .nv-menu, .nv-menu.is-open, .nv-enq__panel, .nv-enq.is-open .nv-enq__panel{ transition:none !important; clip-path:none !important; transform:none !important; }
+  .nv-menu *, .nv-enq *, .nv-tab, .nv-tab *, .nv-marker{ animation:none !important; transition:none !important; }
 }

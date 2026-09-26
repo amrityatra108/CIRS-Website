@@ -33,17 +33,6 @@ body.results{
 }
 body.results main{ overflow:clip; background:var(--rb-paper); }
 body.results .footer-wrap{ position:relative; z-index:5; }
-body.results .header{ z-index:80; }
-/* The destinations panel is paper under the header while the stage is still
-   pinned, well before cirs.js's boundary (the stage's lower edge) arrives, so
-   the page lays the header's glass on for itself then. The ink comes from
-   body.litehead, which results-journey.js sets alongside rb-paper. */
-body.results.rb-paper .header .wrap{ background-color:rgba(250,249,243,.72); border-color:rgba(42,41,37,.14); box-shadow:0 12px 36px rgba(24,24,21,.12), inset 0 1px 0 rgba(255,255,255,.8); }
-@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
-  body.results.rb-paper .header .wrap{ background-color:rgba(250,249,243,.64); -webkit-backdrop-filter:blur(16px) saturate(125%); backdrop-filter:blur(16px) saturate(125%); }
-}
-/* The drawer is z-index 99: an open menu has to sit under its own close button. */
-body.results.menu-open .header{ z-index:100; }
 .results .sr-only{ position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
 
 /* ------------------------------------------------------------

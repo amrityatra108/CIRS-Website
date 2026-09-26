@@ -95,8 +95,13 @@ Most visual change needs no markup at all.
 - **`assets/css/cirs.css`** — the design system. The tokens sit at the top of
   the file: palette, type scale, spacing steps, measure. **Change the token,
   not the fifty places that use it.**
-- **`assets/css/pages.css`** — per-page components: header tabs, page hero,
-  jump menu, tables, the news list.
+- **`assets/css/pages.css`** — per-page components: page hero, jump menu,
+  tables, the news list.
+- **`assets/css/drawer.css`** — the header, the full-screen menu and the
+  Enquire sheet, on every page. The header is one solid ivory bar that never
+  changes or hides as the page scrolls; no page sheet should restyle or hide
+  it. Its behaviour is "Header, menu and Enquire" in `cirs.js`, and
+  `previews/navigation/README.md` records the brief it was designed to.
 
 The palette is ivory and white, charcoal, gold, natural green and a
 restrained royal purple, defined as **roles** at the top of `cirs.css`:

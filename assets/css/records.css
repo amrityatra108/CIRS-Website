@@ -555,25 +555,6 @@ body.records .rec-ids__v{
   body.records .rec-ids li + li{ border-top:1px solid var(--r-rule-2); margin-top:10px; }
 }
 
-/* The header is clear over the opening on every page, and turns to glass
-   only once the opening has passed under it. This opening is sheets of
-   typescript rising toward the bar as the page scrolls, and the school's
-   name set over lines of a letter is hard to read. So here the bar takes
-   its glass as soon as the page moves; records.js sets rec-moved. The
-   lettering is already dark, from litehead. */
-body.records.rec-moved .header .wrap{
-  background-color:rgba(250,249,243,.78);
-  border-color:rgba(42,41,37,.14);
-  box-shadow:0 12px 36px rgba(24,24,21,.12), inset 0 1px 0 rgba(255,255,255,.8);
-}
-@supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
-  body.records.rec-moved .header .wrap{
-    background-color:rgba(250,249,243,.66);
-    -webkit-backdrop-filter:blur(16px) saturate(125%);
-    backdrop-filter:blur(16px) saturate(125%);
-  }
-}
-
 /* ============================================================
    2. The body: the index beside the record
    ============================================================ */
