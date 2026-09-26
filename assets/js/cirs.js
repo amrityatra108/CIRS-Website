@@ -1779,7 +1779,7 @@
     // so the change has begun before the first line reaches it.
     var LEAD = 12;
     var REVEAL_UP = 48, HIDE_DOWN = 96;
-    var EDGE = 28, EDGE_DWELL = 90, LINGER = 800;
+    var EDGE = 64, EDGE_DWELL = 90, LINGER = 800;
 
     var main = $("#main");
     // Ignore non-visual utility nodes (the gallery's canvas controls, for
@@ -2086,9 +2086,10 @@
       if (e.pointerType !== "touch") hold("pointer", false);
     });
 
-    // The top edge of the window. Reaching it lifts the handle at once
-    // and brings the bar after a short dwell, so a pointer merely on its
-    // way out of the window to the browser's tabs brings nothing.
+    // The top of the window. The pointer need not touch the very edge:
+    // coming within EDGE of it — about where the bar would sit — lifts the
+    // handle at once and brings the bar after a short dwell, so a pointer
+    // merely passing through on its way to the browser's tabs brings nothing.
     function setNear(on) {
       if (on === near) return;
       near = on;

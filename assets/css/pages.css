@@ -256,8 +256,8 @@ body:not(.menu-open) .header.is-scrolled.is-over-dark .wrap{
 
    The handle runs under the reading-progress bar, which is the same gold
    at full strength, so while the header is away the line reads as the track
-   with the page's progress drawn along it. At the top edge, as the pointer
-   arrives, it thickens to 3px and comes to full strength a moment before
+   with the page's progress drawn along it. As the pointer comes up near the
+   top of the window, it thickens to 3px and comes to full strength a moment before
    the bar follows. */
 .header.is-collapsed{ translate:0 calc(-100% - 72px); }
 
