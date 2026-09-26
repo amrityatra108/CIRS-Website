@@ -97,7 +97,7 @@ PHOTOGRAPHS = [
     ("drive-28", "CIRS Cultural Gallery", "CIRS cultural gallery photograph 28"),
     ("drive-29", "CIRS Cultural Gallery", "CIRS cultural gallery photograph 29"),
     ("drive-30", "CIRS Cultural Gallery", "CIRS cultural gallery photograph 30"),
-    ("drive-31", "CIRS Cultural Gallery", "CIRS cultural gallery photograph 31"),
+    # drive-31 was the amphitheatre photograph above, a second time.
     ("drive-32", "CIRS Cultural Gallery", "CIRS cultural gallery photograph 32"),
     ("drive-33", "CIRS Cultural Gallery", "CIRS cultural gallery photograph 33"),
     ("drive-34", "CIRS Cultural Gallery", "CIRS cultural gallery photograph 34"),
@@ -150,7 +150,6 @@ DRIVE_IDS = {
     "drive-28": "1SjhGvyDNHybNi3OhNeD1vZjo-l0vfm1Q",
     "drive-29": "1r4bn0szqYB_i-mSuldxitsI-N-tkau2S",
     "drive-30": "11HA5xoqGAxewgVzeh3TM3PppvYev3ydI",
-    "drive-31": "1M8zXS7j9atrJHqKq2sA_kydbfHUYbgti",
     "drive-32": "1WXXFAVYlxKh2oIDuo8KbtnAaMHyHQlqs",
     "drive-33": "15XLVfpC-ku-xLNxBPm6n8y70CPvQwBlq",
     "drive-34": "17eSe_RrLEvuErwJy0Qu2Ew2SPyLZFi1i",

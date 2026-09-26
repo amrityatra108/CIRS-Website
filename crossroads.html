@@ -327,7 +327,14 @@
   </details>
 </nav>
 <section class="crossroads-intro" id="crossroads-intro" aria-label="The Crossroads" data-crossroads-intro data-crossroads-intro-pending>
-  <video class="crossroads-intro__opening" data-crossroads-intro-opening src="assets/video/crossroads-opening.mp4" data-src="assets/video/crossroads-opening.mp4" poster="assets/img/crossroads/opening-final.jpg" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+  <!-- Phones take the 720p cut (tools/make-films.py); a browser that ignores
+       media on a video's sources keeps the 1080p film, which is listed first.
+       preload="auto" is deliberate: the film plays the moment the curtain
+       lifts and holds the page until it ends, so it buffers under the curtain. -->
+  <video class="crossroads-intro__opening" data-crossroads-intro-opening poster="assets/img/crossroads/opening-final.jpg" muted playsinline preload="auto" aria-hidden="true" tabindex="-1">
+    <source src="assets/video/crossroads-opening.mp4" type="video/mp4" media="(min-width: 768px) and (min-height: 501px)">
+    <source src="assets/video/crossroads-opening-m.mp4" type="video/mp4">
+  </video>
   <div class="crossroads-intro__base" aria-hidden="true"></div>
   <div class="crossroads-intro__reveal" aria-hidden="true">
     <img class="crossroads-intro__still" src="assets/img/crossroads/intro-text-free.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" fetchpriority="low">
@@ -394,7 +401,7 @@
         </div>
       </div>
     </div>
-    <a class="crossroads-archive-hero__feature" href="assets/documents/crossroads/crossroads-issue-32.pdf" aria-label="Read the latest issue: Issue 32 (PDF)"><img src="assets/img/crossroads/issue-32.jpg" alt="" width="300" height="420" loading="lazy" decoding="async"><span>Latest issue · Issue 32</span></a>
+    <a class="crossroads-archive-hero__feature" href="assets/documents/crossroads/crossroads-issue-32.pdf" aria-label="Read the latest issue: Issue 32 (PDF)"><img src="assets/img/crossroads/issue-32.jpg?b=107" alt="" width="300" height="420" loading="lazy" decoding="async"><span>Latest issue · Issue 32</span></a>
   </div>
 </section>
 
@@ -403,7 +410,7 @@
     <h2 class="crossroads-stories__accessible" id="crossroads-stories-heading">32 editions. Countless stories.</h2>
     <div class="crossroads-stories__spread">
       <div class="crossroads-stories__left" aria-hidden="true"><span class="crossroads-stories__number" data-crossroads-stories-number>32</span><em>editions.</em></div>
-      <div class="crossroads-stories__media"><div class="crossroads-stories__stack"><a class="crossroads-stories__rear crossroads-stories__rear--3" href="assets/documents/crossroads/crossroads-issue-32.pdf" aria-label="Read Crossroads Issue 32"><img src="assets/img/crossroads/issue-32.jpg" alt="Crossroads Issue 32 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--1" href="assets/documents/crossroads/crossroads-issue-31.pdf" aria-label="Read Crossroads Issue 31"><img src="assets/img/crossroads/issue-31.jpg" alt="Crossroads Issue 31 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__front" href="assets/documents/crossroads/crossroads-issue-30.pdf" aria-label="Read Crossroads Issue 30"><img src="assets/img/crossroads/issue-30.jpg" alt="Crossroads Issue 30 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--2" href="assets/documents/crossroads/crossroads-issue-29.pdf" aria-label="Read Crossroads Issue 29"><img src="assets/img/crossroads/issue-29.jpg" alt="Crossroads Issue 29 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--4" href="assets/documents/crossroads/crossroads-issue-28.pdf" aria-label="Read Crossroads Issue 28"><img src="assets/img/crossroads/issue-28.jpg" alt="Crossroads Issue 28 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--6" href="assets/documents/crossroads/crossroads-issue-27.pdf" aria-label="Read Crossroads Issue 27"><img src="assets/img/crossroads/issue-27.jpg" alt="Crossroads Issue 27 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--5" href="assets/documents/crossroads/crossroads-issue-26.pdf" aria-label="Read Crossroads Issue 26"><img src="assets/img/crossroads/issue-26.jpg" alt="Crossroads Issue 26 cover" width="300" height="420" loading="lazy" decoding="async"></a></div></div>
+      <div class="crossroads-stories__media"><div class="crossroads-stories__stack"><a class="crossroads-stories__rear crossroads-stories__rear--3" href="assets/documents/crossroads/crossroads-issue-32.pdf" aria-label="Read Crossroads Issue 32"><img src="assets/img/crossroads/issue-32.jpg?b=107" alt="Crossroads Issue 32 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--1" href="assets/documents/crossroads/crossroads-issue-31.pdf" aria-label="Read Crossroads Issue 31"><img src="assets/img/crossroads/issue-31.jpg?b=107" alt="Crossroads Issue 31 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__front" href="assets/documents/crossroads/crossroads-issue-30.pdf" aria-label="Read Crossroads Issue 30"><img src="assets/img/crossroads/issue-30.jpg?b=107" alt="Crossroads Issue 30 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--2" href="assets/documents/crossroads/crossroads-issue-29.pdf" aria-label="Read Crossroads Issue 29"><img src="assets/img/crossroads/issue-29.jpg?b=107" alt="Crossroads Issue 29 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--4" href="assets/documents/crossroads/crossroads-issue-28.pdf" aria-label="Read Crossroads Issue 28"><img src="assets/img/crossroads/issue-28.jpg?b=107" alt="Crossroads Issue 28 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--6" href="assets/documents/crossroads/crossroads-issue-27.pdf" aria-label="Read Crossroads Issue 27"><img src="assets/img/crossroads/issue-27.jpg?b=107" alt="Crossroads Issue 27 cover" width="300" height="420" loading="lazy" decoding="async"></a><a class="crossroads-stories__rear crossroads-stories__rear--5" href="assets/documents/crossroads/crossroads-issue-26.pdf" aria-label="Read Crossroads Issue 26"><img src="assets/img/crossroads/issue-26.jpg?b=107" alt="Crossroads Issue 26 cover" width="300" height="420" loading="lazy" decoding="async"></a></div></div>
       <div class="crossroads-stories__right" aria-hidden="true"><span>Countless</span><span>stories.</span></div>
     </div>
     <p class="crossroads-stories__year"><span aria-hidden="true">2025–26</span><span class="sr-only">Academic year 2025 to 2026</span></p>
@@ -1200,7 +1207,7 @@
 <script src="assets/js/cirs.js?b=107-drawer-5" defer></script>
 <script src="assets/js/pages.js?b=107" defer></script>
 <script src="assets/js/footer.js?b=107-footer-1" defer></script>
-<script src="assets/js/crossroads-intro.js?b=107-intro-5" defer></script>
+<script src="assets/js/crossroads-intro.js?b=107-intro-6" defer></script>
 <script src="assets/js/crossroads-archive.js?b=107" defer></script>
 <script src="assets/js/crossroads-stories.js?b=107-hover-4" defer></script>
 <script src="assets/js/crossroads-manuscript.js?b=107" defer></script>

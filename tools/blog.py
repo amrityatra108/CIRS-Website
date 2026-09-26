@@ -5,6 +5,7 @@ The article text and publication metadata live in blogposts.py. This module
 only presents that source material and derives counts and reading times from it.
 """
 
+import os
 from collections import Counter
 from html import escape
 from math import ceil
@@ -102,11 +103,30 @@ def reading_time(post):
     return max(1, ceil((prose + headings) / 220))
 
 
-def image_html(post, loading="lazy"):
+# The slot each card draws its image in, from assets/css/blognews.css: the
+# story list's image column, and the smaller one beside Latest issue's stories.
+CARD_SIZES = {
+    "story": "(max-width: 425px) 80vw, (max-width: 540px) 340px, "
+             "(max-width: 760px) 120px, (max-width: 1000px) 145px, 185px",
+    "latest": "(max-width: 540px) 96px, (max-width: 760px) 120px, 110px",
+}
+
+
+def image_html(post, loading="lazy", slot="story"):
+    """A card's image: the 400, 800 and 1000px cuts from tools/make-media.py, and
+    the article's own image above them, so a card never fetches the
+    2000px lead the article page opens on unless a screen needs it."""
     if not post.get("image"):
         return ""
+    name = post["image"]
+    stem = os.path.splitext(name)[0]
+    width = post["image_width"]
+    candidates = [f"assets/img/blog/{esc(stem)}-{w}.webp {w}w"
+                  for w in (400, 800, 1000) if w < width]
+    candidates.append(f"assets/img/blog/{esc(name)} {width}w")
     return (
-        f'<img src="assets/img/blog/{esc(post["image"])}" '
+        f'<img src="assets/img/blog/{esc(name)}" '
+        f'srcset="{", ".join(candidates)}" sizes="{CARD_SIZES[slot]}" '
         f'alt="{esc(post.get("image_alt", ""))}" '
         f'width="{post["image_width"]}" height="{post["image_height"]}" '
         f'loading="{loading}" decoding="async">'
@@ -138,7 +158,7 @@ def _latest():
     for post in posts[1:]:
         image = (
             f'<a class="ij-latest__image" href="{esc(post["slug"])}.html">'
-            f'{image_html(post)}</a>' if post.get("image") else ""
+            f'{image_html(post, slot="latest")}</a>' if post.get("image") else ""
         )
         side.append(f"""<article class="ij-latest__side-story">
           <div class="ij-latest__side-copy">

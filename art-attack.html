@@ -323,8 +323,16 @@
            stuttering wherever it exists. The VP9 is for the browsers built
            without the proprietary decoder, which would otherwise have no
            opening at all. Both are the same length at 24fps, so the mapping
-           in filmintro.js holds whichever one is picked. -->
-      <source src="assets/video/art-attack-opening.mp4" type="video/mp4">
+           in filmintro.js holds whichever one is picked.
+
+           Phones, in either orientation, take the 540p cut from
+           tools/make-films.py: the same frames, every one still a keyframe,
+           at a third of the weight. The large-screen file is listed first,
+           behind the query phones fail, so a browser that ignores media on
+           a video's sources keeps the file it always had. -->
+      <source src="assets/video/art-attack-opening.mp4" type="video/mp4"
+              media="(min-width: 768px) and (min-height: 501px)">
+      <source src="assets/video/art-attack-opening-m.mp4" type="video/mp4">
       <source src="assets/video/art-attack-opening.webm" type="video/webm">
     </video>
     <h1 class="film__title" data-film-title><span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span></h1>
