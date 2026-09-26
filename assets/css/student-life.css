@@ -32,6 +32,7 @@ body.student-life main { overflow:clip; }
 .sj-festivals h2,
 .sj-practical h2 { font-size:clamp(3rem,6.5vw,7rem); }
 .sj-day__details>p { line-height:1.6; }
+.sj-day__details>.sj-photo-note { margin-top:.9rem; font-size:.86rem; color:#d9e0e5; }
 .sj-switch { display:flex; margin-top:2rem; border-bottom:1px solid #ffffff44; }
 .sj-switch button { min-height:48px; padding:.7rem 1rem; color:#fff; opacity:.55; border-bottom:2px solid transparent; }
 .sj-switch button.is-active { opacity:1; border-color:#d8bc7a; }
@@ -75,15 +76,15 @@ body.student-life main { overflow:clip; }
 .sj-schedule>h3 { margin-bottom:1.5rem; font-family:var(--font-editorial); font-size:clamp(2rem,4vw,4rem); }
 .sj-schedule__list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:#ffffff33; }
 .sj-schedule article { min-height:280px; padding:2rem; background-color:#13263a; background-position:center; background-size:cover; }
-.sj-schedule article[data-photo="0"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/01-lawn.jpg'); }
-.sj-schedule article[data-photo="1"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/slhero/card-10.jpg'); }
-.sj-schedule article[data-photo="2"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/05-table.jpg'); }
+.sj-schedule article[data-photo="0"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/campus-lawn.jpg'); }
+.sj-schedule article[data-photo="1"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/sports/hero-track.jpg'); }
+.sj-schedule article[data-photo="2"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/slhero/card-10.jpg'); }
 .sj-schedule article[data-photo="3"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/02-lesson.jpg'); }
-.sj-schedule article[data-photo="4"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/life-split-academic.jpg'); }
-.sj-schedule article[data-photo="5"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/06-field.jpg'); }
+.sj-schedule article[data-photo="4"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/news/vishu-tamil-new-year-1200.webp'); }
+.sj-schedule article[data-photo="5"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/life-split-academic.jpg'); }
 .sj-schedule article[data-photo="6"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/07-water.jpg'); }
-.sj-schedule article[data-photo="7"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/slhero/card-08.jpg'); }
-.sj-schedule article[data-photo="8"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/04-hall.jpg'); }
+.sj-schedule article[data-photo="7"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/04-hall.jpg'); }
+.sj-schedule article[data-photo="8"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/senior-school.jpg'); }
 .sj-schedule article[data-photo="9"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/10-night.jpg'); }
 .sj-schedule time { font-size:.8rem; letter-spacing:.08em; }
 .sj-schedule h4 { margin:1rem 0; font-family:var(--font-editorial); font-size:2rem; }

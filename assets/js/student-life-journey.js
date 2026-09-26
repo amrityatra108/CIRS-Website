@@ -153,6 +153,7 @@
 
   function selectSchedule(nextMode, announce) {
     mode = nextMode;
+    active = -1;
     root.querySelectorAll("[data-schedule]").forEach(function (button) {
       var selected = button.dataset.schedule === mode;
       button.classList.toggle("is-active", selected);

@@ -64,10 +64,28 @@ body.home .hsay__big{ color:var(--run-ink); }
 body.home .hsay__sub,
 body.home .hframe figcaption{ color:var(--run-soft); }
 body.home .hsay__eyebrow,
-body.home .hframe__n{ color:var(--run-accent); opacity:1; }
+body.home .hframe__n{
+  color:var(--run-accent);
+  opacity:1;
+  font-size:1rem;
+  font-weight:600;
+  font-variant-numeric:lining-nums tabular-nums;
+}
+body.home .hframe figcaption{ font-size:1rem; }
 body.home .hghost{ color:var(--run-ghost); opacity:.09; }
 body.home .hframe img{
   box-shadow:0 30px 80px rgba(42,42,38,.24), 0 0 0 1px rgba(255,255,255,.18);
+}
+
+/* The opening frame can put pale sky behind the navigation. Give the clear
+   header the same dark material used over dark scrolled sections so its white
+   name and gold icons keep their contrast while the footage changes. */
+body.home .header:not(.is-scrolled) .wrap{
+  background-color:rgba(24,24,21,.76);
+  border-color:rgba(255,255,255,.18);
+  box-shadow:0 12px 36px rgba(24,24,21,.28), inset 0 1px 0 rgba(255,255,255,.1);
+  -webkit-backdrop-filter:blur(14px) saturate(120%);
+  backdrop-filter:blur(14px) saturate(120%);
 }
 
 /* The pinned gallery has a direct exit for readers who have seen enough. */
