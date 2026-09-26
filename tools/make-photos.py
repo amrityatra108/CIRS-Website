@@ -31,12 +31,11 @@ UNGRADED = {
     # The Parent Portal opening shows its photograph as it was taken: parents
     # and students in the hall, full strength under a scrim of its own.
     "parent-portal-hero.jpg",
-    # The seven home-run photographs of 26 September 2026 keep the colour
+    # The home-run photographs of 26 September 2026 keep the colour
     # they were sent with.
     "hrun/01-holi.jpg",
     "hrun/02-window.jpg",
     "hrun/03-mun.jpg",
-    "hrun/04-relay.jpg",
     "hrun/06-swim.jpg",
     "hrun/08-candlelight.jpg",
     "hrun/09-microphone.jpg",
@@ -200,18 +199,18 @@ PHOTOS = [
     # deliberate and worth keeping: the run is the first thing under the
     # hero, and a photograph the reader meets here and again on Admissions
     # makes the library look smaller than it is.
-    # The ten the school supplied, in the order they sent them, with seven of
-    # them since replaced (01, 02, 03, 04, 06, 08 and 09) by photographs sent
-    # on 26 September 2026. The frame shapes now follow the photographs rather
+    # The ten the school supplied, in the order they sent them, with six of
+    # them since replaced (01, 02, 03, 06, 08 and 09) by photographs sent
+    # on 26 September 2026. Frame 04 reuses the higher-resolution relay photo
+    # already on Sports. The frame shapes now follow the photographs rather
     # than the other way round, so a Holi portrait is not cut down to a wide
-    # strip; tools/pages/index.html names each figure's shape. The window and
-    # the relay arrived small (697 and 179 pixels wide) and are cut at the
-    # size they came, never enlarged. The microphone photograph is upright
+    # strip; tools/pages/index.html names each figure's shape. The window
+    # arrived small (697 pixels wide) and is cut at the size it came, never
+    # enlarged. The microphone photograph is upright
     # once its camera rotation is applied, and is framed high for the faces.
     ("hrun/01-holi.jpg",        "home-gallery-2026-09-26/01-holi.png",        (1000, 1500), (0.50, 0.50)),
     ("hrun/02-window.jpg",      "home-gallery-2026-09-26/02-window.png",      (680, 850),   (0.50, 0.56)),
     ("hrun/03-mun.jpg",         "home-gallery-2026-09-26/03-cirs-mun.jpg",    (1500, 1000), (0.53, 0.50)),
-    ("hrun/04-relay.jpg",       "home-gallery-2026-09-26/04-relay.png",       (176, 220),   (0.50, 0.47)),
     ("hrun/05-assembly.jpg",    "drive-hrun-05.jpg",                          (1500, 1000), (0.50, 0.50)),
     ("hrun/06-swim.jpg",        "home-gallery-2026-09-26/06-swim.jpg",        (1500, 1000), (0.50, 0.50)),
     ("hrun/07-sparkler.jpg",    "drive-hrun-07.jpg",                          (1500, 1000), (0.52, 0.48)),

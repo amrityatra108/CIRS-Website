@@ -74,6 +74,7 @@ body.sports .film__seam{ display:none; }
   -webkit-text-fill-color:var(--gold-lit);
   -webkit-text-stroke:1px var(--dark-deep);
   text-shadow:0 3px 18px rgba(17,17,15,.45);
+  paint-order:stroke fill;
 }
 .sports-move__word [data-word-solid]{ opacity:calc(1 - var(--move-resolution,0)); }
 .sports-move__word [data-word-resolve]{
@@ -81,6 +82,7 @@ body.sports .film__seam{ display:none; }
   opacity:var(--move-resolution,0);
   -webkit-text-fill-color:var(--dark-deep);
   -webkit-text-stroke:1.5px var(--gold-lit);
+  paint-order:stroke fill;
 }
 .sports-move__defs{ position:absolute; width:0; height:0; overflow:hidden; }
 .sports-move__resolution{
@@ -259,9 +261,8 @@ html.sports-journey-ready .sports-move__resolution{
 .sports-chapters__markers span:nth-child(6){ top:calc(500svh + 88px); }
 .sports-chapters__markers span:nth-child(7){ top:calc(600svh + 88px); }
 .sports-chapters__markers span:nth-child(8){ top:calc(700svh + 88px); }
-.sports-chapters__markers span:nth-child(9){ top:calc(800svh + 88px); }
 
-html.sports-journey-ready .sports-chapters{ height:780svh; }
+html.sports-journey-ready .sports-chapters{ height:600svh; }
 html.sports-journey-ready .sports-chapters__stage{
   position:sticky;
   top:0;

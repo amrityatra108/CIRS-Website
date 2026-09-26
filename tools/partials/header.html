@@ -19,7 +19,7 @@
           <span class="nv-tab__label">Enquire</span>
         </button>
 
-        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" hidden>
+        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" data-lenis-prevent hidden>
           <div class="nv-enq__head">
             <p class="nv-enq__heading">Enquire</p>
             <button type="button" class="nv-enq__close" id="enqClose">Close<span class="nv-sr"> Enquire</span></button>
@@ -37,16 +37,14 @@
               </a>
             </section>
 
-            <!-- The three doors. Each goes to the page that explains what is
-                 live and what is not, rather than straight out to the external
-                 system — a parent who lands on a login screen with no warning
-                 cannot tell the school's old system from the new site. -->
+            <!-- These are three distinct school services. Keep each label tied
+                 to the destination identified by the school. -->
             <section class="nv-enq__col" aria-labelledby="enqPortals">
               <h2 class="nv-enq__title" id="enqPortals">Portals</h2>
               <ul class="nv-enq__doors">
-                <li><a href="parent-portal.html">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="parent-portal.html">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener">Student Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://easycollege.in/cirs/school/" target="_blank" rel="noopener" aria-label="Fee payment (opens in a new tab)">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/" target="_blank" rel="noopener" aria-label="Parent Login (opens in a new tab)">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener" aria-label="Teacher Login (opens in a new tab)">Teacher Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
               </ul>
             </section>
           </div>

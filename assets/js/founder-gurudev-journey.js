@@ -19,9 +19,10 @@
   const count = root.querySelector('[data-story-count]');
   const levels = [1,2.2,2.2,2.2,3.6,4.75,5.75,6.75,7.75,9.15,9.15,9.9,9.15];
   const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
+  const smooth = n => { const t=clamp(n,0,1); return t*t*(3-2*t); };
   const last = scenes.length - 1;
   let width = 0, height = 0, roadY = 0, total = 0, points = [], anchors = [];
-  let current = 0, target = 0, active = -1, frame = 0, lastTime = 0;
+  let current = 0, target = 0, active = -1, visiblePair = -1, frame = 0, lastTime = 0;
 
   function rounded(ps,r) {
     let d = `M ${ps[0].x} ${ps[0].y}`;
@@ -50,15 +51,15 @@
     const leg=clamp(progress,0,1)*last;
     const index=Math.min(last-1,Math.floor(leg));
     const within=leg-index;
-    const travelling=clamp((within-.3)/.5,0,1);
-    const eased=travelling*travelling*(3-2*travelling);
+    const travelling=clamp((within-.2)/.6,0,1);
+    const eased=smooth(travelling);
     return anchors[index]+eased*(anchors[index+1]-anchors[index]);
   }
 
   function layout() {
     if (!motion.matches) {
       if (frame) cancelAnimationFrame(frame);
-      frame=0;lastTime=0;active=-1;anchors=[];
+      frame=0;lastTime=0;active=-1;visiblePair=-1;anchors=[];
       root.classList.remove('is-enhanced');
       world.removeAttribute('style');
       svg.removeAttribute('width');
@@ -66,6 +67,7 @@
       svg.removeAttribute('viewBox');
       scenes.forEach(scene => {
         scene.classList.remove('is-active');
+        scene.classList.remove('is-visible');
         scene.removeAttribute('style');
         scene.removeAttribute('inert');
         scene.setAttribute('aria-hidden','false');
@@ -143,6 +145,14 @@
       const gap=Math.abs(anchor-current);
       if (gap<best) {best=gap;closest=i;}
     });
+    if (part.i!==visiblePair) {
+      visiblePair=part.i;
+      scenes.forEach((scene,i)=>{
+        const visible=i===part.i || i===part.i+1;
+        scene.classList.toggle('is-visible',visible);
+        if (!visible) scene.style.removeProperty('opacity');
+      });
+    }
     if (closest!==active) {
       active=closest;
       scenes.forEach((scene,i)=>{
@@ -153,10 +163,9 @@
       });
       count.textContent=active===last?'THE END':`${String(active+1).padStart(2,'0')} / ${String(last).padStart(2,'0')}`;
     }
-    const sceneOpacity=active===part.i
-      ?1-clamp((part.f-.12)/.18,0,1)
-      :clamp((part.f-.7)/.18,0,1);
-    scenes[active].style.opacity=String(sceneOpacity);
+    const fade=smooth((part.f-.15)/.7);
+    scenes[part.i].style.opacity=String(1-fade);
+    scenes[part.i+1].style.opacity=String(fade);
 
     const carWidth=clamp(width*.3,134,220),scale=carWidth/916;
     const probe=Math.max(3,539*scale*.24);
@@ -172,7 +181,7 @@
 
   function animate(now) {
     const dt=Math.min(50,lastTime?now-lastTime:16);lastTime=now;
-    current+= (target-current)*(1-Math.exp(-dt/145));
+    current+= (target-current)*(1-Math.exp(-dt/120));
     if (Math.abs(target-current)<.000005) current=target;
     render();
     if (current!==target) frame=requestAnimationFrame(animate);

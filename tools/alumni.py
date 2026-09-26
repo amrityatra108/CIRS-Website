@@ -142,7 +142,7 @@ DESTINATIONS = [
     ("nid",         "National Institute of Design", "NID",
      "India", "india", 23.03, 72.55, (0.0, 0.0), (-3.4, -0.6, "l")),
     ("cvv",         "Chinmaya Vishwa Vidyapeeth", "Chinmaya Vishwa Vidyapeeth",
-     "India", "india", 9.98, 76.55, (-2.4, 2.4), (-4.6, 5.2, "l")),
+     "India", "india", 9.98, 76.55, (0.4, 0.7), (-4.6, 5.2, "l")),
 
     # ---- United Kingdom ----
     ("durham",      "Durham University", "Durham",

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Parent Portal</title>
-<meta name="description" content="Fee payment and the parent login for CIRS. The Parent Portal on this site is not open yet; both run on the school's existing systems.">
+<meta name="description" content="Use the school's separate fee-payment and parent-login services, with contact details for help from CIRS.">
 <meta name="theme-color" content="#11110F">
 <link rel="canonical" href="https://www.cirschool.org/parent-portal.html">
 <!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
@@ -17,23 +17,23 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Parent Portal">
-<meta property="og:description" content="Fee payment and the parent login for CIRS. The Parent Portal on this site is not open yet; both run on the school's existing systems.">
+<meta property="og:description" content="Use the school's separate fee-payment and parent-login services, with contact details for help from CIRS.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Parent Portal">
-<meta name="twitter:description" content="Fee payment and the parent login for CIRS. The Parent Portal on this site is not open yet; both run on the school's existing systems.">
+<meta name="twitter:description" content="Use the school's separate fee-payment and parent-login services, with contact details for help from CIRS.">
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=111-portal-photo-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=111-portal-photo-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=111-portal-photo-1">
+<link rel="stylesheet" href="assets/css/fonts.css?b=112-portal-photo-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=112-portal-photo-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=112-portal-photo-1">
 
-<link rel="stylesheet" href="assets/css/connect.css?b=111-portal-photo-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=111-portal-photo-1">
+<link rel="stylesheet" href="assets/css/connect.css?b=112-portal-photo-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=112-portal-photo-1">
 <script>
 (function(){
   if (location.hash || window.scrollY > 8 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -48,9 +48,9 @@
   }, {once:true});
 })();
 </script>
-<link rel="stylesheet" href="assets/css/parent-portal-intro.css?b=111-portal-photo-1">
-<link rel="stylesheet" href="assets/css/footer.css?b=111-portal-photo-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=111-portal-photo-1-nav-1">
+<link rel="stylesheet" href="assets/css/parent-portal-intro.css?b=112-portal-photo-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=112-portal-photo-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=112-portal-photo-1-nav-1">
 </head>
 
 <body class="connect parent-portal">
@@ -101,7 +101,7 @@
           <span class="nv-tab__label">Enquire</span>
         </button>
 
-        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" hidden>
+        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" data-lenis-prevent hidden>
           <div class="nv-enq__head">
             <p class="nv-enq__heading">Enquire</p>
             <button type="button" class="nv-enq__close" id="enqClose">Close<span class="nv-sr"> Enquire</span></button>
@@ -119,16 +119,14 @@
               </a>
             </section>
 
-            <!-- The three doors. Each goes to the page that explains what is
-                 live and what is not, rather than straight out to the external
-                 system — a parent who lands on a login screen with no warning
-                 cannot tell the school's old system from the new site. -->
+            <!-- These are three distinct school services. Keep each label tied
+                 to the destination identified by the school. -->
             <section class="nv-enq__col" aria-labelledby="enqPortals">
               <h2 class="nv-enq__title" id="enqPortals">Portals</h2>
               <ul class="nv-enq__doors">
-                <li><a href="parent-portal.html">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="parent-portal.html">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener">Student Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://easycollege.in/cirs/school/" target="_blank" rel="noopener" aria-label="Fee payment (opens in a new tab)">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/" target="_blank" rel="noopener" aria-label="Parent Login (opens in a new tab)">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener" aria-label="Teacher Login (opens in a new tab)">Teacher Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
               </ul>
             </section>
           </div>
@@ -192,7 +190,7 @@
      it is an accordion. It is a disclosure, not a dialog: its Close is the
      header's Menu control, so while it is open the page behind is made inert
      and Tab circles through the header and the menu together (cirs.js). -->
-<div class="nv-menu" id="drawer" data-initial-group="4" hidden>
+<div class="nv-menu" id="drawer" data-initial-group="4" data-lenis-prevent hidden>
   <h2 class="nv-sr" id="drawer-title">Site navigation</h2>
   <div class="nv-menu__stage">
     <nav class="nv-menu__nav" aria-labelledby="drawer-title">
@@ -320,21 +318,20 @@
   <div class="wrap pagehead__inner">
     <p class="marker"><span class="sc">Parents</span></p>
     <h1 class="serif" data-split>Parent <em>Portal.</em></h1>
-    <p class="lead">A secure area for parents. It is not open yet &mdash; so this page carries the fee payment and the parent login the school runs today, and the people to ask.</p>
+    <p class="lead">Fee payment and parent login are available through the school&rsquo;s separate existing systems.</p>
   </div>
 </section>
 <section class="section ucpage" id="portal" data-ground="#181815">
   <div class="wrap ucpage__inner">
     <p class="ucpage__badge rv">
       <span class="ucpage__dot" aria-hidden="true"></span>
-      Under construction
+      Parent services
     </p>
 
-    <h2 class="serif ucpage__head rv" data-split>This part of the site is <em>still being built.</em></h2>
+    <h2 class="serif ucpage__head rv" data-split>Two ways to <em>stay connected.</em></h2>
 
-    <p class="lead rv">The Parent Portal that will live on this site is not open yet. Until it is,
-      fee payment and the parent login run on the school&rsquo;s existing systems. Both are
-      working, and both are here.</p>
+    <p class="lead rv">Use the school&rsquo;s existing systems for fee payment and parent login.
+      These are separate services, each with its own sign-in.</p>
 
     <div class="ucpage__doors rv">
       <a class="btn btn--primary btn--lg" href="https://easycollege.in/cirs/school/"
@@ -346,13 +343,10 @@
     <p class="ucpage__doornote rv">Both open the school&rsquo;s existing systems in a new tab
       &mdash; fee payment at easycollege.in, the parent login at cirs.in.</p>
 
-    <p class="ucpage__ph rv"><em>[Placeholder &mdash; what the portal will carry once it replaces
-      those two systems, and when it opens, to be confirmed by the school.]</em></p>
-
     <div class="ucpage__rule rv" aria-hidden="true"></div>
 
     <div class="ucpage__reach rv">
-      <p class="sc ucpage__reachlabel">Until it opens, reach the school directly</p>
+      <p class="sc ucpage__reachlabel">Need help? Reach the school directly</p>
       <div class="ucpage__rows">
         <a class="ucpage__row" href="tel:+914222613300">
           <span class="ucpage__ico" aria-hidden="true">
@@ -376,8 +370,8 @@
     </div>
 
     <p class="ucpage__foot rv">Looking for something else? The <a href="index.html">home page</a>
-      has the rest of the site, and <a href="admissions.html">Admissions</a> carries the
-      registration dates and the entrance examination.</p>
+      has the rest of the site, and <a href="admissions.html">Admissions</a> explains
+      registration and the entrance examination.</p>
   </div>
 </section>
 </main>
@@ -484,12 +478,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=111-portal-photo-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=111-portal-photo-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=111-portal-photo-1" defer></script>
-<script src="assets/js/cirs.js?b=111-portal-photo-1-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=111-portal-photo-1" defer></script>
-<script src="assets/js/footer.js?b=111-portal-photo-1-footer-1" defer></script>
-<script src="assets/js/parent-portal-motion.js?b=111-portal-photo-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=112-portal-photo-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=112-portal-photo-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=112-portal-photo-1" defer></script>
+<script src="assets/js/cirs.js?b=112-portal-photo-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=112-portal-photo-1" defer></script>
+<script src="assets/js/footer.js?b=112-portal-photo-1-footer-1" defer></script>
+<script src="assets/js/parent-portal-motion.js?b=112-portal-photo-1" defer></script>
 </body>
 </html>

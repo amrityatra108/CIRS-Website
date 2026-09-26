@@ -28,9 +28,9 @@
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=111">
-<link rel="stylesheet" href="assets/css/cirs.css?b=111">
-<link rel="stylesheet" href="assets/css/pages.css?b=111">
+<link rel="stylesheet" href="assets/css/fonts.css?b=112">
+<link rel="stylesheet" href="assets/css/cirs.css?b=112">
+<link rel="stylesheet" href="assets/css/pages.css?b=112">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -39,10 +39,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/home.css?b=111">
-<link rel="stylesheet" href="assets/css/typography.css?b=111">
-<link rel="stylesheet" href="assets/css/footer.css?b=111-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=111-nav-1">
+<link rel="stylesheet" href="assets/css/home.css?b=112">
+<link rel="stylesheet" href="assets/css/typography.css?b=112">
+<link rel="stylesheet" href="assets/css/footer.css?b=112-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=112-nav-1">
 </head>
 
 <body class="home">
@@ -101,7 +101,7 @@
           <span class="nv-tab__label">Enquire</span>
         </button>
 
-        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" hidden>
+        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" data-lenis-prevent hidden>
           <div class="nv-enq__head">
             <p class="nv-enq__heading">Enquire</p>
             <button type="button" class="nv-enq__close" id="enqClose">Close<span class="nv-sr"> Enquire</span></button>
@@ -119,16 +119,14 @@
               </a>
             </section>
 
-            <!-- The three doors. Each goes to the page that explains what is
-                 live and what is not, rather than straight out to the external
-                 system — a parent who lands on a login screen with no warning
-                 cannot tell the school's old system from the new site. -->
+            <!-- These are three distinct school services. Keep each label tied
+                 to the destination identified by the school. -->
             <section class="nv-enq__col" aria-labelledby="enqPortals">
               <h2 class="nv-enq__title" id="enqPortals">Portals</h2>
               <ul class="nv-enq__doors">
-                <li><a href="parent-portal.html">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="parent-portal.html">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener">Student Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://easycollege.in/cirs/school/" target="_blank" rel="noopener" aria-label="Fee payment (opens in a new tab)">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/" target="_blank" rel="noopener" aria-label="Parent Login (opens in a new tab)">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener" aria-label="Teacher Login (opens in a new tab)">Teacher Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
               </ul>
             </section>
           </div>
@@ -186,7 +184,7 @@
      it is an accordion. It is a disclosure, not a dialog: its Close is the
      header's Menu control, so while it is open the page behind is made inert
      and Tab circles through the header and the menu together (cirs.js). -->
-<div class="nv-menu" id="drawer" data-initial-group="0" hidden>
+<div class="nv-menu" id="drawer" data-initial-group="0" data-lenis-prevent hidden>
   <h2 class="nv-sr" id="drawer-title">Site navigation</h2>
   <div class="nv-menu__stage">
     <nav class="nv-menu__nav" aria-labelledby="drawer-title">
@@ -282,8 +280,9 @@
     </summary>
     <div class="jump__panel" id="jumpPanel">
       <p aria-hidden="true">On this page</p>
-      <a href="#top">Siruvani, Coimbatore &middot; Grades V&ndash;XII</a>
-      <a href="#run">ONE HUNDRED ACRES, FROM FIRST LIGHT</a>
+      <a href="#top">Rooted in values</a>
+      <a href="#run">A day at CIRS</a>
+      <a href="#film">Official CIRS Film</a>
       <a href="#glimpses">Glimpses of CIRS</a>
     </div>
   </details>
@@ -314,7 +313,7 @@
      The type layer is positioned against the same boxes, so the headline
      stays in register with the plate at any viewport rather than being
      placed against the window and drifting away from it. -->
-<section class="hseq" id="top" data-ground="#141411">
+<section class="hseq" id="top" data-jump-label="Rooted in values" data-ground="#141411">
   <div class="hseq__track">
     <div class="hseq__stage">
 
@@ -353,7 +352,7 @@
       </div>
 
       <div class="hseq__type">
-        <p class="marker"><span class="sc">Siruvani, Coimbatore &middot; Grades V&ndash;XII</span></p>
+        <p class="marker"><span class="sc">Siruvani, Coimbatore &middot; <span class="hseq__grades">Grades V&ndash;XII</span></span></p>
         <h1 class="serif h1" data-split>Rooted in <em>Values!</em><br>Ready for the <em>World.</em></h1>
       </div>
 
@@ -376,8 +375,9 @@
      Under 900px, or with motion off, .is-static lays the same items out as a
      native swipe track: absolute positioning on a 780vw canvas has no useful
      meaning on a phone. -->
-<section class="hrun" id="run" data-ground="#C9A961">
+<section class="hrun" id="run" data-jump-label="A day at CIRS" data-ground="#C9A961">
   <div class="hrun__pin">
+    <a class="hrun__skip" href="#film">Skip the photographs <span aria-hidden="true">&darr;</span></a>
     <div class="hrun__viewport">
       <div class="hrun__stage">
         <span class="hghost" data-depth="0.3" style="left:24vw; top:16%">A DAY</span>
@@ -427,8 +427,8 @@
         <figure class="hframe hframe--xl hframe--portrait" data-depth="1.12"
                  style="left:268vw; bottom:9%">
           <span class="hframe__n">04</span>
-          <img src="assets/img/hrun/04-relay.jpg" width="176" height="220" loading="lazy" decoding="async"
-               alt="A student in a blue jersey running down the track with a relay baton, another runner behind him.">
+          <img src="assets/img/sports-experience/track-sprint-action-mobile.webp" width="900" height="1950" loading="lazy" decoding="async"
+               alt="A student in a green jersey runs with a relay baton on the track, with other runners behind him.">
           <figcaption>On the track</figcaption>
         </figure>
 
@@ -483,7 +483,7 @@
           <span class="hframe__n">09</span>
           <img src="assets/img/hrun/09-microphone.jpg" width="1000" height="1500" loading="lazy" decoding="async"
                alt="Two students in suits at the microphone, one speaking while the other looks on.">
-          <figcaption>At the microphone</figcaption>
+          <figcaption>One student speaks, another listens</figcaption>
         </figure>
 
         <figure class="hframe hframe--xl hframe--wide" data-depth="1.1"
@@ -491,14 +491,14 @@
           <span class="hframe__n">10</span>
           <img src="assets/img/hrun/10-stage.jpg" width="1500" height="1000" loading="lazy" decoding="async"
                alt="A student on a darkened stage in a headset microphone, a painted question mark behind him.">
-          <figcaption>Under the lights</figcaption>
+          <figcaption>A student takes the stage</figcaption>
         </figure>
       </div>
     </div>
   </div>
 </section>
 
-<section class="filmsec" data-ground="#10100E">
+<section class="filmsec" id="film" data-jump-label="Official CIRS Film" data-ground="#10100E">
   <div class="filmsec__media">
     <img src="assets/img/film-audience.jpg" alt="" loading="lazy">
   </div>
@@ -561,7 +561,6 @@
 <section class="motto" data-ground="#FFFFFF">
   <div class="wrap">
     <p class="motto__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-    <p class="motto__iast">J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</p>
     <p class="motto__en">Knowledge &middot; Service &middot; Efficiency</p>
     <div class="motto__rule"></div>
   </div>
@@ -611,9 +610,9 @@
       boarders build lasting connections, uncover their passions, cultivate honourable character,
       and carry Knowledge, Service and Efficiency beyond the Siruvani foothills.</p>
     <div class="finalcta__cta">
-      <a class="btn btn--primary btn--lg" href="admissions.html" data-magnetic>Enquire</a>
-      <a class="btn btn--ghost btn--lg" href="admissions.html" data-magnetic>Visit</a>
-      <a class="btn btn--ghost btn--lg" href="admissions.html" data-magnetic>Apply</a>
+      <a class="btn btn--primary btn--lg" href="admissions.html#contact" data-magnetic>Enquire</a>
+      <a class="btn btn--ghost btn--lg" href="admissions.html#visit" data-magnetic>Visit</a>
+      <a class="btn btn--ghost btn--lg" href="admissions.html#apply" data-magnetic>Apply</a>
     </div>
   </div>
 </section>
@@ -734,11 +733,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=111" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=111" defer></script>
-<script src="assets/vendor/lenis.min.js?b=111" defer></script>
-<script src="assets/js/cirs.js?b=111-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=111" defer></script>
-<script src="assets/js/footer.js?b=111-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=112" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=112" defer></script>
+<script src="assets/vendor/lenis.min.js?b=112" defer></script>
+<script src="assets/js/cirs.js?b=112-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=112" defer></script>
+<script src="assets/js/footer.js?b=112-footer-1" defer></script>
 </body>
 </html>

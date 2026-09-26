@@ -49,7 +49,7 @@ import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=111"
+CACHE_BUST = "b=112"
 
 # Where a film's large-screen encode is offered. Everything that fails it —
 # a phone held either way up — takes the phone encode (tools/make-films.py),
@@ -341,7 +341,6 @@ PAGES = {
         "sheet": "ibdp",
     },
     "the-cirs-experience": {
-        "logintab": ("Student Portal", "https://cirs.in/school/"),
         "nav": "THE CIRS EXPERIENCE",
         "title": "THE CIRS EXPERIENCE",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
@@ -640,16 +639,15 @@ PAGES = {
         # removed from the drawer's utility strip at the same time, so the
         # drawer does not offer the same link twice.
         "title": "Parent Portal",
-        "description": "Fee payment and the parent login for CIRS. The Parent Portal on this "
-                       "site is not open yet; both run on the school's existing systems.",
+        "description": "Use the school's separate fee-payment and parent-login services, "
+                       "with contact details for help from CIRS.",
         "banner": ("Parents", "Parent <em>Portal.</em>",
-                   "A secure area for parents. It is not open yet &mdash; so this page carries the "
-                   "fee payment and the parent login the school runs today, and the people to ask."),
+                   "Fee payment and parent login are available through the school&rsquo;s "
+                   "separate existing systems."),
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
         "cache_suffix": "-portal-photo-1",
-        # the page is itself an under-construction notice; the standard footer
-        # one underneath it would only say the same thing twice.
+        # This page supplies its own contact and navigation footer.
         "uc": False,
     },
     "alumni": {
@@ -1747,6 +1745,37 @@ def artswall_html():
 # ============================================================================
 
 
+def sports_house_bands_html():
+    """Sports-page house bands from the same sourced data as the Houses page."""
+    bands = []
+    for index, h in enumerate(houses.HOUSES):
+        slug = h["slug"]
+        active = " is-active" if index == 0 else ""
+        expanded = "true" if index == 0 else "false"
+        bands.append(f'''    <article class="house-band house-band--{slug}{active}" id="sports-house-{slug}">
+      <div class="house-band__media">
+        <img src="{houses.img(h["hero"])}" alt="{esc(h["hero_alt"], attr=True)}"
+             width="900" height="1125" loading="lazy" decoding="async">
+        <div class="house-band__tint house-band__tint--{h["colour"].lower()}" aria-hidden="true"></div>
+      </div>
+      <div class="house-band__content">
+        <div class="house-band__header">
+          <span class="house-band__color-tag">{h["colour"].upper()}</span>
+          <h3 class="serif house-band__name"><button type="button" class="house-band__trigger"
+            id="sports-house-{slug}-name" aria-expanded="{expanded}"
+            aria-controls="sports-house-{slug}-details">{h["name"]}</button></h3>
+        </div>
+        <section class="house-band__details" id="sports-house-{slug}-details"
+                 aria-labelledby="sports-house-{slug}-name">
+          <p class="house-band__identity">{h["colour"]} house &middot; {h["symbol"]}</p>
+          <ul class="house-band__facts"><li><strong>From the school record:</strong> {h["fact"]}</li></ul>
+          <p class="house-band__link"><a href="houses.html#house-{slug}">Explore {h["name"]} House</a></p>
+        </section>
+      </div>
+    </article>''')
+    return "\n".join(bands)
+
+
 def houses_hero_html():
     """The four zones of the opening frame.
 
@@ -2001,23 +2030,6 @@ def houses_gallery_html():
     </ul>'''
 
 
-# A tab a single page adds to the header, beside News. Student Life is the
-# only page with one: its Student Login used to be an under-construction
-# section at the foot of a very long page, which is a poor place to put the
-# one thing a student comes for. As a header tab it is reachable from the
-# first screen, and only on the page it belongs to.
-#
-# The mark is a student rather than a generic person: a mortarboard over a
-# head and shoulders, drawn at the same size and stroke weight as the News
-# and Menu marks so the three read as one row.
-EXTRA_TAB = """      <a class="nv-tab nv-tab--login" href="{href}" target="_blank" rel="noopener">
-        <span class="nv-tab__icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.4 16 5.2 9 8 2 5.2 9 2.4Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.6 6.6v2.2c0 1.2 2 2.1 4.4 2.1s4.4-.9 4.4-2.1V6.6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M4.2 15.6a4.8 4.8 0 0 1 9.6 0" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-        </span>
-        <span class="nv-tab__label">{label}</span>
-      </a>
-"""
-
 UC = '''<section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -2233,9 +2245,7 @@ def build(slug, page):
     header = (read("tools/partials/header.html")
               .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html")
               .replace("{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
-              .replace("{{HEADER_TABS}}",
-                       EXTRA_TAB.format(href=page["logintab"][1], label=page["logintab"][0])
-                       if page.get("logintab") else ""))
+              .replace("{{HEADER_TABS}}", ""))
     if slug == "news":
         header = header.replace('class="nv-tab nv-tab--news" href="news.html"',
                                 'class="nv-tab nv-tab--news" href="news.html" aria-current="page"')
@@ -2274,6 +2284,7 @@ def build(slug, page):
     if slug == "leadership":
         content = leadership.expand(content)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
+                        .replace("{{SPORTS_HOUSE_BANDS}}", sports_house_bands_html() if slug == "sports" else "")
                        .replace("{{HOUSES_HERO}}", houses_hero_html())
                        .replace("{{HOUSES_CHAPTERS}}", houses_chapters_html())
                        .replace("{{HOUSES_TRACK}}", houses_track_html())
@@ -2372,8 +2383,6 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/founder-portrait.js?{CACHE_BUST}-portrait-1" defer></script>')
         parts.append(f'<script src="assets/js/founder-opening.js?{CACHE_BUST}-portrait-1" defer></script>')
         parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-5" defer></script>')
-    if slug == "why-cirs":
-        parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}" defer></script>')
     if slug == "the-cirs-experience":
         parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "our-results":

@@ -59,7 +59,7 @@
       last = p;
       // Title first, in the dark; then the full frame appears and the light rises;
       // the darkened frame is gone by the time the stage is fully open.
-      box.style.setProperty("--type", ease(span(p, .02, .2)).toFixed(4));
+      box.style.setProperty("--type", ease(span(p, .02, .32)).toFixed(4));
       box.style.setProperty("--open", ease(span(p, .18, .66)).toFixed(4));
       box.style.setProperty("--lit", ease(span(p, .28, .8)).toFixed(4));
       box.style.setProperty("--dark", (1 - ease(span(p, .3, .6))).toFixed(4));

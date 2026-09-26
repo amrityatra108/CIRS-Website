@@ -28,9 +28,9 @@
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=111-student-life-9">
-<link rel="stylesheet" href="assets/css/cirs.css?b=111-student-life-9">
-<link rel="stylesheet" href="assets/css/pages.css?b=111-student-life-9">
+<link rel="stylesheet" href="assets/css/fonts.css?b=112-student-life-9">
+<link rel="stylesheet" href="assets/css/cirs.css?b=112-student-life-9">
+<link rel="stylesheet" href="assets/css/pages.css?b=112-student-life-9">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -39,10 +39,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/student-life.css?b=111-student-life-9">
-<link rel="stylesheet" href="assets/css/typography.css?b=111-student-life-9">
-<link rel="stylesheet" href="assets/css/footer.css?b=111-student-life-9-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=111-student-life-9-nav-1">
+<link rel="stylesheet" href="assets/css/student-life.css?b=112-student-life-9">
+<link rel="stylesheet" href="assets/css/typography.css?b=112-student-life-9">
+<link rel="stylesheet" href="assets/css/footer.css?b=112-student-life-9-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=112-student-life-9-nav-1">
 </head>
 
 <body class="student-life">
@@ -101,7 +101,7 @@
           <span class="nv-tab__label">Enquire</span>
         </button>
 
-        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" hidden>
+        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" data-lenis-prevent hidden>
           <div class="nv-enq__head">
             <p class="nv-enq__heading">Enquire</p>
             <button type="button" class="nv-enq__close" id="enqClose">Close<span class="nv-sr"> Enquire</span></button>
@@ -119,16 +119,14 @@
               </a>
             </section>
 
-            <!-- The three doors. Each goes to the page that explains what is
-                 live and what is not, rather than straight out to the external
-                 system — a parent who lands on a login screen with no warning
-                 cannot tell the school's old system from the new site. -->
+            <!-- These are three distinct school services. Keep each label tied
+                 to the destination identified by the school. -->
             <section class="nv-enq__col" aria-labelledby="enqPortals">
               <h2 class="nv-enq__title" id="enqPortals">Portals</h2>
               <ul class="nv-enq__doors">
-                <li><a href="parent-portal.html">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="parent-portal.html">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener">Student Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://easycollege.in/cirs/school/" target="_blank" rel="noopener" aria-label="Fee payment (opens in a new tab)">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/" target="_blank" rel="noopener" aria-label="Parent Login (opens in a new tab)">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener" aria-label="Teacher Login (opens in a new tab)">Teacher Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
               </ul>
             </section>
           </div>
@@ -172,12 +170,6 @@
     </a>
 
     <div class="nv-header__side nv-header__side--right">
-      <a class="nv-tab nv-tab--login" href="https://cirs.in/school/" target="_blank" rel="noopener">
-        <span class="nv-tab__icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.4 16 5.2 9 8 2 5.2 9 2.4Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.6 6.6v2.2c0 1.2 2 2.1 4.4 2.1s4.4-.9 4.4-2.1V6.6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/><path d="M4.2 15.6a4.8 4.8 0 0 1 9.6 0" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-        </span>
-        <span class="nv-tab__label">Student Portal</span>
-      </a>
       <a class="nv-tab nv-tab--news" href="news.html">
         <span class="nv-tab__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
@@ -198,7 +190,7 @@
      it is an accordion. It is a disclosure, not a dialog: its Close is the
      header's Menu control, so while it is open the page behind is made inert
      and Tab circles through the header and the menu together (cirs.js). -->
-<div class="nv-menu" id="drawer" data-initial-group="1" hidden>
+<div class="nv-menu" id="drawer" data-initial-group="1" data-lenis-prevent hidden>
   <h2 class="nv-sr" id="drawer-title">Site navigation</h2>
   <div class="nv-menu__stage">
     <nav class="nv-menu__nav" aria-labelledby="drawer-title">
@@ -300,7 +292,7 @@
       <a href="#houses">Four houses. One campus.</a>
       <a href="#student-work">What students create for themselves.</a>
       <a href="#campus">Life on campus at a glance.</a>
-      <a href="#student-login">One day ends. Another story begins tomorrow.</a>
+      <a href="#continue">One day ends. Another story begins tomorrow.</a>
     </div>
   </details>
 </nav>
@@ -308,11 +300,10 @@
   <img class="sj-cover" src="assets/img/campus-band.jpg" alt="The CIRS campus below the Western Ghats" width="1920" height="1080" fetchpriority="high" decoding="async">
   <div class="sj-shade"></div>
   <div class="wrap sj-hero__content">
-    <p class="sj-kicker"><span>THE CIRS EXPERIENCE</span><span>Siruvani · 05:30</span></p>
+    <p class="sj-kicker">THE CIRS EXPERIENCE</p>
     <h1 id="sj-hero-title">Culture, community,<br>canvasses waiting<br>to be filled.</h1>
     <p>Every moment of every day is filled with dynamism, activity and silence. Even a single day brings change that lasts a lifetime.</p>
   </div>
-  <div class="sj-horizon" aria-hidden="true"><i></i></div>
   <a class="sj-down" href="#day">Follow the day <span aria-hidden="true">↓</span></a>
 </section>
 
@@ -324,6 +315,7 @@
     </div>
     <div class="sj-day__details">
       <p>Junior and senior school share the same rhythm at different times. Choose a schedule, then move through one complete day.</p>
+      <p class="sj-photo-note">Photographs illustrate school activities; they are not time-stamped records of one day.</p>
       <div class="sj-switch" role="group" aria-label="Choose daily schedule">
         <button type="button" class="is-active" data-schedule="senior" aria-pressed="true">Grades IX–XII</button>
         <button type="button" data-schedule="junior" aria-pressed="false">Grades V–VIII</button>
@@ -338,15 +330,15 @@
         <div class="sj-skyline"></div>
       </div>
       <div class="sj-scenes">
-        <img class="is-active" src="assets/img/hrun/01-lawn.jpg" alt="" width="1500" height="1000">
+        <img class="is-active" src="assets/img/campus-lawn.jpg" alt="" width="1600" height="900">
+        <img src="assets/img/sports/hero-track.jpg" alt="" width="2400" height="1500">
         <img src="assets/img/slhero/card-10.jpg" alt="" width="1200" height="675">
-        <img src="assets/img/hrun/05-table.jpg" alt="" width="1500" height="1000">
-        <img src="assets/img/hrun/02-lesson.jpg" alt="" width="1500" height="1000">
+        <img src="assets/img/hrun/02-lesson.jpg" alt="" width="1000" height="1250">
+        <img src="assets/img/news/vishu-tamil-new-year-1200.webp" alt="" width="1200" height="675">
         <img src="assets/img/life-split-academic.jpg" alt="" width="1800" height="1200">
-        <img src="assets/img/hrun/06-field.jpg" alt="" width="1500" height="1000">
         <img src="assets/img/hrun/07-water.jpg" alt="" width="1500" height="1000">
-        <img src="assets/img/slhero/card-08.jpg" alt="" width="900" height="900">
         <img src="assets/img/hrun/04-hall.jpg" alt="" width="1500" height="1000">
+        <img src="assets/img/senior-school.jpg" alt="" width="1200" height="1500">
         <img src="assets/img/hrun/10-night.jpg" alt="" width="1500" height="1000">
       </div>
       <div class="sj-shade"></div>
@@ -452,7 +444,7 @@
 </section>
 
 <section class="sj-practical" id="campus" aria-labelledby="sj-practical-title">
-  <div class="wrap sj-practical__grid"><div><p class="sj-kicker">Practical information</p><h2 id="sj-practical-title">Life on campus<br>at a glance.</h2><p>These essentials remain available without animation. Exact daily timings are listed for both age groups.</p><a class="sj-login" href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener">Student login <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></div><div class="sj-accordions">
+  <div class="wrap sj-practical__grid"><div><p class="sj-kicker">Practical information</p><h2 id="sj-practical-title">Life on campus<br>at a glance.</h2><p>These essentials remain available without animation. Exact daily timings are listed for both age groups.</p></div><div class="sj-accordions">
     <details open><summary>Daily schedules</summary><div class="sj-tables"><table><caption>Grades V–VIII</caption><tbody><tr><th>04:50</th><td>Rouser</td></tr><tr><th>05:30</th><td>Jogging</td></tr><tr><th>06:50</th><td>Spiritual class</td></tr><tr><th>07:25</th><td>Breakfast</td></tr><tr><th>07:50</th><td>Assembly</td></tr><tr><th>08:10</th><td>Classes</td></tr><tr><th>12:20</th><td>Lunch and rest</td></tr><tr><th>14:00</th><td>Study</td></tr><tr><th>16:00</th><td>Sports</td></tr><tr><th>18:30</th><td>Prayer and aarti</td></tr><tr><th>19:10</th><td>Dinner</td></tr><tr><th>21:00</th><td>Lights off</td></tr></tbody></table><table><caption>Grades IX–XII</caption><tbody><tr><th>05:30</th><td>Rouser</td></tr><tr><th>06:00</th><td>Jogging</td></tr><tr><th>07:30</th><td>Spiritual class</td></tr><tr><th>08:10</th><td>Breakfast</td></tr><tr><th>08:45</th><td>Assembly</td></tr><tr><th>09:10</th><td>Classes</td></tr><tr><th>13:30</th><td>Lunch and rest</td></tr><tr><th>15:20</th><td>Study</td></tr><tr><th>17:00</th><td>Sports</td></tr><tr><th>19:30</th><td>Prayer and aarti</td></tr><tr><th>20:10</th><td>Dinner</td></tr><tr><th>22:00</th><td>Milk, lights off</td></tr></tbody></table></div></details>
     <details><summary>Spiritual class and assembly</summary><p>After hot milk and biscuits, spiritual class brings Bhagavad Gita shlokas, stotram and japa into the day. Breakfast at the Annakshetra leads to assembly, where the Principal addresses the school and students regularly offer talks, speeches, book reviews and quizzes.</p></details>
     <details><summary>Dormitories and campus</summary><p>Residential houses are named for great figures of Bharat&rsquo;s history. Dormitories, classrooms, the Annakshetra dining hall and playing fields form one walkable campus.</p></details>
@@ -461,7 +453,7 @@
   </div></div>
 </section>
 
-<section class="sj-night" id="student-login" aria-labelledby="sj-night-title">
+<section class="sj-night" id="continue" aria-labelledby="sj-night-title">
   <img class="sj-cover" src="assets/img/hrun/10-night.jpg" alt="Students gathered in the CIRS amphitheatre at night" width="1500" height="1000" loading="lazy" decoding="async">
   <div class="sj-shade"></div><div class="wrap sj-night__content"><p class="sj-kicker">10:30 PM · Lights out</p><h2 id="sj-night-title">One day ends.<br><span>Another story<br>begins tomorrow.</span></h2><nav aria-label="Continue exploring"><a href="#houses">Explore the houses</a><a href="sports.html">Discover sports</a><a href="crossroads.html">Read student work</a><a href="admissions.html#visit">Plan a campus visit</a></nav></div>
 </section>
@@ -582,12 +574,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=111-student-life-9" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=111-student-life-9" defer></script>
-<script src="assets/vendor/lenis.min.js?b=111-student-life-9" defer></script>
-<script src="assets/js/cirs.js?b=111-student-life-9-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=111-student-life-9" defer></script>
-<script src="assets/js/footer.js?b=111-student-life-9-footer-1" defer></script>
-<script src="assets/js/student-life-journey.js?b=111-student-life-9" defer></script>
+<script src="assets/vendor/gsap.min.js?b=112-student-life-9" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=112-student-life-9" defer></script>
+<script src="assets/vendor/lenis.min.js?b=112-student-life-9" defer></script>
+<script src="assets/js/cirs.js?b=112-student-life-9-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=112-student-life-9" defer></script>
+<script src="assets/js/footer.js?b=112-student-life-9-footer-1" defer></script>
+<script src="assets/js/student-life-journey.js?b=112-student-life-9" defer></script>
 </body>
 </html>

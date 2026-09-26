@@ -309,9 +309,6 @@ INDIA = [
          "The birth of Vardhamana Mahavira, the twenty-fourth Tirthankara of the Jain tradition, "
          "with processions, worship and giving.",
          [BRIT + "Mahavira-Jayanti"]),
-        ("Easter", "March&ndash;April",
-         "The Christian feast of the Resurrection, closing Holy Week, kept by churches across India.",
-         [BRIT + "Easter-holiday"]),
         ("Baisakhi", "13 or 14 April",
          "The spring harvest festival of Punjab, when the wheat is ready. For Sikhs it also "
          "remembers the founding of the Khalsa in 1699.",
@@ -348,20 +345,6 @@ INDIA = [
          "The birth of Guru Nanak, founder of the Sikh faith, on the full moon of Kartik: a "
          "continuous reading of the Guru Granth Sahib, processions and langar.",
          ["https://www.britannica.com/science/calendar/The-sacred-calendar"]),
-        ("Christmas", "25 December",
-         "The birth of Jesus, kept by Christian communities across India with midnight services, "
-         "carols and paper stars.",
-         [BRIT + "Christmas"]),
-    ]),
-    ("Through the year", "lunar", [
-        ("Eid al-Fitr", "Moves about eleven days earlier each year",
-         "The end of Ramadan, the month of fasting, with morning prayers, new clothes and meals "
-         "shared with family and neighbours.",
-         [BRIT + "Id-al-Fitr"]),
-        ("Eid al-Adha", "Moves about eleven days earlier each year",
-         "The Feast of Sacrifice at the close of the Hajj, remembering Ibrahim's devotion, with "
-         "prayers and meat shared with family, neighbours and those in need.",
-         [BRIT + "Id-al-Adha"]),
     ]),
 ]
 
