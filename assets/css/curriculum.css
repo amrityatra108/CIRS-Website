@@ -584,7 +584,6 @@ body.curriculum .closing-scene{ min-height:72vh; min-height:72svh; }
   .curriculum .cur-h2{ font-size:clamp(2rem,9vw,2.6rem); }
   .curriculum .cur-index__inner{ gap:0 var(--space-4); }
   .curriculum .cur-index__list{ gap:0 var(--space-4); }
-  body.curriculum .header .brand{ min-width:44px; min-height:44px; justify-content:center; }
 }
 
 /* Touch: links set inside a sentence or a subject table keep their line,

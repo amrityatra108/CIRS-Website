@@ -388,7 +388,7 @@
   }
   window.addEventListener("wheel", function (event) {
     if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY) ||
-        event.target.closest("dialog, .drawer, input, textarea, select, [contenteditable=true]")) return;
+        event.target.closest("dialog, #drawer, input, textarea, select, [contenteditable=true]")) return;
     if (sectionMoving) { event.preventDefault(); event.stopImmediatePropagation(); return; }
     var destination = sectionDestination(event.deltaY);
     if (!sectionMoving && !destination) return;
@@ -402,7 +402,7 @@
     touchStartY = event.touches[0].clientY;
   }, {passive:true});
   window.addEventListener("touchmove", function (event) {
-    if (scrollLocked || event.touches.length !== 1 || event.target.closest("dialog, .drawer")) return;
+    if (scrollLocked || event.touches.length !== 1 || event.target.closest("dialog, #drawer")) return;
     var dx = touchStartX - event.touches[0].clientX;
     var dy = touchStartY - event.touches[0].clientY;
     if (Math.abs(dx) > Math.abs(dy)) return;
@@ -412,7 +412,7 @@
     if (!sectionMoving && Math.abs(dy) >= 40) moveSection(destination);
   }, {passive:false, capture:true});
   window.addEventListener("keydown", function (event) {
-    if (event.target.closest("a, button, input, textarea, select, [contenteditable=true], dialog, .drawer")) return;
+    if (event.target.closest("a, button, input, textarea, select, [contenteditable=true], dialog, #drawer")) return;
     var direction = event.key === "PageDown" || (event.key === " " && !event.shiftKey) ? 1 :
       event.key === "PageUp" || (event.key === " " && event.shiftKey) ? -1 : 0;
     if (!direction) return;

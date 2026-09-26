@@ -1537,7 +1537,7 @@
 
     /* ---- The lane ---- */
     var GAP = 2;
-    var SKIP = "#header, .footer-wrap, dialog, .jump, .totop, .drawer, .curtain, .pop, script, style, noscript, template";
+    var SKIP = "#header, .footer-wrap, dialog, .jump, .totop, #drawer, .curtain, .pop, script, style, noscript, template";
     var marked = [], laneWidth = 0, refused = new WeakSet();
     // The right-hand distance the buttons occupy: their inset from the edge
     // and their width, as drawn. Read from the buttons, not from where they
@@ -1696,450 +1696,37 @@
   }
 
   /* ==========================================================
-     Header state
+     Header, menu and Enquire
      ----------------------------------------------------------
-     The one place the header's state is decided. It has three:
-     clear over the page's opening, glass once the opening's words
-     reach the bar, and dark glass while a dark section is under
-     it. That is two classes on #header — .is-scrolled and
-     .is-over-dark — and the materials, the ink and everything else
-     a page might want to vary hang off them in pages.css.
+     The header is one solid ivory bar. It has no states: it is
+     not clear over the opening and glass below it, it does not
+     slide away as the page scrolls, and nothing on any page is
+     meant to hide it. So there is nothing here that reads the
+     scroll position.
 
-     This replaced two sentinels that toggled three classes
-     (is-first-section, is-stuck and is-atop) at two different
-     depths, each fed by three signals. One of those signals was
-     an IntersectionObserver marker placed at the boundary as it
-     stood on load and never moved; the others read the boundary
-     live. Once the page grew under it — photographs arriving,
-     pinned sections taking their spacers — the marker and the
-     scroll position disagreed about which side of the line the
-     page was on, and the header flipped back and forth between
-     the two. Here there is one reading of the scroll position,
-     taken once a frame, against one boundary.
+     The menu opens under the bar. Menu turns to Close, the page
+     behind is locked where it is (body.is-locked and Lenis) and
+     made inert, and Tab circles through the header and the menu
+     together, because the menu's Close is the header's control.
+     Beside the categories (901px and up) the pages of one
+     category are shown at a time and one gold marker travels to
+     the open category; below that each category is an accordion.
 
-     Clear or glass. The boundary used to be the opening's lower
-     edge, which left the clear bar lying across every line of
-     the opening's own copy as it scrolled up — the dates on
-     Admissions, the headline on the home page, an article's lead
-     picture. Clear is for the picture, not for the words, so the
-     boundary is now the opening's copy: the moment its first line
-     comes up to the bar, the bar turns to glass. The copy is
-     found, not declared — every text-bearing element in the
-     opening — so a new hero needs nothing added. A page whose
-     words are not the right line can mark its own with
-     data-header-clear-until. The opening's lower edge still
-     applies to an opening with no words at all.
-
-     The copy is read where it is drawn, once a frame and only
-     while the opening is still under the bar, because a sticky
-     stage holds its headline still while the page scrolls past
-     and a measured position would say it had long since gone.
-
-     There is a band rather than a line — the header clears again
-     only a little above the point where it turned to glass — so a
-     scroll that comes to rest on the line, or a trackpad that
-     jitters across it, cannot make it flicker.
-
-     Dark glass. The cream glass is laid over the page at .64, so
-     over a near-black section it turns a muddy grey and the dark
-     lettering sinks into it. While a dark section is under the
-     bar the glass takes the dark capsule Captures already uses.
-     Which section is under the bar is reported by one
-     IntersectionObserver whose root is a one-pixel line through
-     the bar, and whether it is dark is read from the section
-     itself: data-header-theme="dark" or "light" where a page says
-     so, otherwise its own background, or, where it has none, the
-     light lettering it was designed to carry.
-
-     Past the opening the bar also gets out of the way. That is
-     decided here too, from the same reading of the scroll, but
-     against the opening's lower edge rather than its copy — the
-     bar turns to glass while the opening is still passing under
-     it, and stays until the opening has gone. It resolves to one
-     of four modes, written to data-nav on #header:
-
-       hero        over the opening. The bar is simply there.
-       collapsed   past it. The bar has slid up out of the window
-                   and .site-nav-handle, a hairline of gold, holds
-                   its place. .is-collapsed is the one CSS switch.
-       revealed    past it, brought back: by scrolling up, or by
-                   the pointer reaching the top edge of the window.
-       held        past it and in use — the menu or the Enquire
-                   panel is open, a control has keyboard focus, or
-                   the pointer is on the bar or at the top edge.
-                   Nothing collapses the bar while it is held.
-
-     Direction is counted, not sampled: the scroll has to travel
-     REVEAL_UP pixels upward to bring the bar back and HIDE_DOWN
-     downward to send it away again, and any turn the other way
-     starts the count afresh, so jitter reaches neither. A bar the
-     pointer brought back waits LINGER after the pointer has gone
-     before it goes too; one brought back by scrolling or by use
-     stays until the page is scrolled on down.
+     Enquire is an ivory sheet hung from the bar. Hover opens it
+     for a mouse, a tap for a touch screen, keyboard focus for a
+     keyboard; its own Close, Escape, or leaving it shuts it.
      ========================================================== */
-  function headerState() {
-    var header = $("#header");
-    if (!header) return null;
-    var BAND = 24;
-    // How far below the bar the copy is when the glass starts to come in,
-    // so the change has begun before the first line reaches it.
-    var LEAD = 12;
-    var REVEAL_UP = 48, HIDE_DOWN = 96;
-    var EDGE = 64, EDGE_DWELL = 90, LINGER = 800;
-
-    var main = $("#main");
-    // Ignore non-visual utility nodes (the gallery's canvas controls, for
-    // example) and use the first actual section on every page. An article
-    // wraps the whole story in one element; its opening is the title block
-    // alone, so the bar has turned to glass before the lead picture, which
-    // follows the title, reaches it.
-    var opening = main && main.querySelector(":scope > section, :scope > article");
-    if (!opening && main) opening = main.firstElementChild;
-    if (opening && opening.matches("article.art")) {
-      opening = $(".art__head", opening) || opening;
-    }
-
-    var bar = header.querySelector(".wrap") || header;
-    var barTop = 0, barBottom = 0, openEdge = 80, maxY = 0;
-    var copy = [];
-    var scrolled = null, dark = false, darkShown = null, queued = false;
-    // Past the opening's lower edge, where the bar collapses.
-    var past = null, lastY = 0, travel = 0;
-    // What brought a collapsed bar back: "scroll", "pointer" or "use".
-    var revealed = false, source = null, mode = null;
-    var holds = { menu: false, enquire: false, focus: false, pointer: false, edge: false };
-    var near = false, dwellTimer = 0, lingerTimer = 0;
-
-    // The opening's copy: every element that draws words of its own, or the
-    // element(s) a page has marked. Gathered once per layout, never per frame.
-    // Anything fixed to the window inside the opening never passes under the
-    // bar, so it is left out.
-    function collect() {
-      copy = [];
-      if (!opening) return;
-      var marked = $$("[data-header-clear-until]", opening);
-      if (opening.hasAttribute("data-header-clear-until")) marked.unshift(opening);
-      if (marked.length) { copy = marked; return; }
-      var seen = [];
-      var walker = document.createTreeWalker(opening, NodeFilter.SHOW_TEXT, null);
-      var node;
-      while ((node = walker.nextNode()) && copy.length < 60) {
-        if (!/\S/.test(node.nodeValue)) continue;
-        var el = node.parentElement;
-        if (!el || seen.indexOf(el) !== -1) continue;
-        seen.push(el);
-        if (el.closest("script, style, noscript, template, dialog, [hidden]")) continue;
-        var fixed = false;
-        for (var n = el; n && n !== opening.parentElement; n = n.parentElement) {
-          if (getComputedStyle(n).position === "fixed") { fixed = true; break; }
-        }
-        if (!fixed) copy.push(el);
-      }
-    }
-
-    // The top of the highest line of copy on screen, or null when none is
-    // drawn (hidden at this width, or the opening has no words).
-    function copyTop() {
-      var top = null;
-      // A headline split into words or letters after it was gathered has
-      // been replaced; gather again rather than read boxes that are gone.
-      if (copy.length && !copy[0].isConnected) collect();
-      for (var i = 0; i < copy.length; i++) {
-        var r = copy[i].getBoundingClientRect();
-        if (r.width < 2 || r.height < 2) continue;
-        if (top === null || r.top < top) top = r.top;
-      }
-      return top;
-    }
-
-    // Measured, not read every frame: it moves only when the layout does.
-    // Offsets rather than the bar's box, which is somewhere above the
-    // window while the header is collapsed.
-    function measure() {
-      maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-      barTop = header.offsetTop + bar.offsetTop;
-      barBottom = barTop + bar.offsetHeight;
-      if (!opening) { openEdge = 80; return; }
-      // A pinned opening is measured by its spacer, which holds its place
-      // in the document while the section itself is fixed to the screen.
-      var box = opening.parentElement && opening.parentElement.classList.contains("pin-spacer")
-        ? opening.parentElement : opening;
-      var bottom = box.getBoundingClientRect().bottom + (window.scrollY || window.pageYOffset || 0);
-      openEdge = Math.max(bottom - barBottom, 80);
-    }
-
-    function isHeld() {
-      for (var k in holds) if (holds[k]) return true;
-      return false;
-    }
-
-    function render() {
-      var next = !past ? "hero" : isHeld() ? "held" : revealed ? "revealed" : "collapsed";
-      // Kept on as the bar arrives, so the line fades out thickened
-      // rather than shrinking back first.
-      header.classList.toggle("is-near", near && next !== "hero");
-      if (next === mode) return;
-      mode = next;
-      header.setAttribute("data-nav", next);
-      header.classList.toggle("is-collapsed", next === "collapsed");
-    }
-
-    function linger() {
-      window.clearTimeout(lingerTimer);
-      lingerTimer = window.setTimeout(function () {
-        if (isHeld() || source !== "pointer") return;
-        revealed = false;
-        render();
-      }, LINGER);
-    }
-
-    function hold(name, on) {
-      on = !!on;
-      if (holds[name] === on) return;
-      var was = isHeld();
-      holds[name] = on;
-      if (on) {
-        window.clearTimeout(lingerTimer);
-        travel = 0;
-        if (past) {
-          // The menu and keyboard focus are deliberate, and the bar they
-          // brought stays. Enquire opens on hover for a mouse, so it counts
-          // as the pointer's; on a touch screen the bar is already out.
-          if (name === "menu" || name === "focus") source = "use";
-          else if (!revealed) source = "pointer";
-          revealed = true;
-        }
-      } else if (was && !isHeld() && past) {
-        // A bar that was only ever showing because it was held — the
-        // opening scrolled away under a resting pointer — is let go as
-        // if the pointer had brought it: after a pause, not at once.
-        if (!revealed) { revealed = true; source = "pointer"; }
-        if (source === "pointer") linger();
-      }
-      render();
-    }
-
-    function apply() {
-      queued = false;
-      var y = window.scrollY || window.pageYOffset || 0;
-      // The depth at which the bar turns to glass: the opening's lower edge,
-      // or sooner, the depth at which its first line of copy reaches the bar.
-      var edge = openEdge;
-      if (y < openEdge + BAND) {
-        var top = copyTop();
-        if (top !== null) edge = Math.min(edge, Math.max(y + top - barBottom - LEAD, 1));
-      }
-      var next = scrolled ? y > Math.max(edge - BAND, 0) : y > edge;
-      if (next !== scrolled) {
-        scrolled = next;
-        header.classList.toggle("is-scrolled", next);
-      }
-      if (dark !== darkShown) {
-        darkShown = dark;
-        header.classList.toggle("is-over-dark", dark);
-      }
-
-      // Collapse. Clamped, so an overscroll bounce at either end is not a
-      // direction.
-      var cy = Math.min(Math.max(y, 0), maxY || Infinity);
-      var dy = cy - lastY;
-      lastY = cy;
-      var beyond = past ? cy > openEdge - BAND : cy > openEdge + BAND;
-      if (beyond !== past) {
-        past = beyond;
-        // Crossing the boundary either way starts over: past it the bar
-        // begins collapsed, over the opening it is simply there.
-        revealed = false; source = null; travel = 0;
-        window.clearTimeout(lingerTimer);
-      } else if (past && dy) {
-        travel = (dy > 0) === (travel > 0) ? travel + dy : dy;
-        if (isHeld()) travel = 0;
-        else if (travel <= -REVEAL_UP && source !== "scroll" && source !== "use") {
-          revealed = true; source = "scroll";
-          window.clearTimeout(lingerTimer);
-        } else if (travel >= HIDE_DOWN && revealed) {
-          revealed = false; source = null;
-          window.clearTimeout(lingerTimer);
-        }
-      }
-      render();
-    }
-    function queue() {
-      if (queued) return;
-      queued = true;
-      requestAnimationFrame(apply);
-    }
-    function remeasure() { measure(); queue(); }
-
-    /* ---- Which section is under the bar, and is it dark ---- */
-    function luminance(rgb) {
-      var c = rgb.match(/[\d.]+/g);
-      if (!c || c.length < 3) return null;
-      var a = c.length > 3 ? +c[3] : 1;
-      function lin(v) { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }
-      return { l: .2126 * lin(+c[0]) + .7152 * lin(+c[1]) + .0722 * lin(+c[2]), a: a };
-    }
-    // An element's own verdict, or null if it leaves it to what is behind it.
-    function themeOf(el) {
-      var said = el.getAttribute("data-header-theme");
-      if (said === "dark" || said === "light") return said;
-      var cs = getComputedStyle(el);
-      var bg = luminance(cs.backgroundColor);
-      if (bg && bg.a >= .5) return bg.l < .18 ? "dark" : "light";
-      // No ground of its own. A section set in light lettering was drawn
-      // to sit on something dark: a photograph, a film, the page behind.
-      if (el.tagName === "SECTION") {
-        var ink = luminance(cs.color);
-        if (ink && ink.l > .6) return "dark";
-      }
-      return null;
-    }
-    function resolve(el) {
-      for (var n = el; n && n !== document.documentElement; n = n.parentElement) {
-        var t = themeOf(n);
-        if (t) return t;
-      }
-      return "light";
-    }
-
-    var themeIO = null, themeTargets = [], under = [];
-    function onThemes(entries) {
-      entries.forEach(function (entry) {
-        var i = under.indexOf(entry.target);
-        if (entry.isIntersecting && i === -1) under.push(entry.target);
-        else if (!entry.isIntersecting && i !== -1) under.splice(i, 1);
-      });
-      // The innermost sections on the line decide; where two sit side by
-      // side and disagree, dark wins — the dark capsule holds its contrast
-      // over paper too, the cream one does not over black.
-      var next = false;
-      under.forEach(function (el) {
-        for (var k = 0; k < under.length; k++) {
-          if (under[k] !== el && el.contains(under[k])) return;
-        }
-        if (resolve(el) === "dark") next = true;
-      });
-      if (next !== dark) { dark = next; queue(); }
-    }
-    function watchThemes() {
-      if (typeof window.IntersectionObserver === "undefined" || !main) return;
-      if (themeIO) themeIO.disconnect();
-      under = [];
-      // The grounds a page is built from: its sections and chapter-sized
-      // articles, as wide as most of the window. A card in a grid is not a
-      // ground, whatever its colour; a page that says so is always heard.
-      var wide = window.innerWidth * .6;
-      themeTargets = $$("main section, main article, main > *, [data-header-theme]").filter(function (el) {
-        if (el.hasAttribute("data-header-theme")) return true;
-        return !el.matches("script, style, template, dialog, .jump") &&
-          el.getBoundingClientRect().width >= wide;
-      });
-      var line = Math.round((barTop + barBottom) / 2);
-      themeIO = new IntersectionObserver(onThemes, {
-        rootMargin: -line + "px 0px " + -(window.innerHeight - line - 1) + "px 0px"
-      });
-      themeTargets.forEach(function (el) { themeIO.observe(el); });
-    }
-
-    // The state the page opens in is set without a transition, so a page
-    // refreshed halfway down (or restored there by the browser) shows the
-    // glass header at once rather than watching the clear one become it.
-    // is-settling holds until the load event has let the browser restore
-    // the scroll position, then two frames more so the settled state has
-    // painted before transitions come back.
-    header.classList.add("is-settling");
-    collect();
-    measure();
-    apply();
-    watchThemes();
-    function settle() {
-      collect();
-      remeasure();
-      watchThemes();
-      requestAnimationFrame(function () {
-        apply();
-        requestAnimationFrame(function () { header.classList.remove("is-settling"); });
-      });
-    }
-    if (document.readyState === "complete") settle();
-    else window.addEventListener("load", settle, { once: true });
-
-    // One reader of the scroll position. Lenis moves the window itself, so
-    // the native event fires whether or not smooth scrolling is on.
-    window.addEventListener("scroll", queue, { passive: true });
-    var resizing = 0;
-    window.addEventListener("resize", function () {
-      remeasure();
-      // The line through the bar is in pixels, so the observer is rebuilt
-      // for the new window — once the resize has finished, not per event.
-      window.clearTimeout(resizing);
-      resizing = window.setTimeout(function () { collect(); watchThemes(); queue(); }, 150);
-    }, { passive: true });
-    // A trigger rather than ScrollTrigger.addEventListener("refresh"). With
-    // only the listener, a page reloaded halfway down came back near the top:
-    // on pages that create no trigger of their own at boot, the browser's
-    // scroll restoration does not survive ScrollTrigger's first refresh. The
-    // header's old sentinels created one by accident; this does it on purpose.
-    if (hasST) ScrollTrigger.create({ onRefresh: remeasure });
-    if ("ResizeObserver" in window) new ResizeObserver(remeasure).observe(document.body);
-
-    // The pointer on the bar holds it. Touch is left out: a tap reports
-    // an enter and a leave of its own, and holds nothing.
-    bar.addEventListener("pointerenter", function (e) {
-      if (e.pointerType !== "touch") hold("pointer", true);
-    });
-    bar.addEventListener("pointerleave", function (e) {
-      if (e.pointerType !== "touch") hold("pointer", false);
-    });
-
-    // The top of the window. The pointer need not touch the very edge:
-    // coming within EDGE of it — about where the bar would sit — lifts the
-    // handle at once and brings the bar after a short dwell, so a pointer
-    // merely passing through on its way to the browser's tabs brings nothing.
-    function setNear(on) {
-      if (on === near) return;
-      near = on;
-      window.clearTimeout(dwellTimer);
-      if (near) dwellTimer = window.setTimeout(function () { hold("edge", true); }, EDGE_DWELL);
-      else hold("edge", false);
-      render();
-    }
-    document.addEventListener("pointermove", function (e) {
-      if (e.pointerType !== "touch") setNear(e.clientY <= EDGE);
-    }, { passive: true });
-    document.addEventListener("mouseout", function (e) {
-      if (!e.relatedTarget) { setNear(false); hold("pointer", false); }
-    });
-
-    // Keyboard focus anywhere in the header brings the bar and keeps it.
-    // Only keyboard focus: a mouse click also focuses the button it lands
-    // on, and that focus would otherwise hold the bar long after the
-    // pointer had left it.
-    header.addEventListener("focusin", function (e) {
-      var keyboard = true;
-      try { keyboard = e.target.matches(":focus-visible"); } catch (err) { /* older browser */ }
-      if (keyboard) hold("focus", true);
-    });
-    header.addEventListener("focusout", function (e) {
-      if (!header.contains(e.relatedTarget)) hold("focus", false);
-    });
-
-    // The menu and the Enquire panel report themselves through this.
-    return { hold: hold };
-  }
-
-  /* ==========================================================
-     Header and drawer
-     ========================================================== */
-  var drawer = $("#drawer"), burger = $("#burger"), drawerClose = $("#drawerClose");
+  var drawer = $("#drawer"), burger = $("#burger");
   var drawerCloseTimer = null, drawerInerted = [];
-  var navState = null;
-  function holdHeader(name, on) { if (navState) navState.hold(name, on); }
+  // Set by enquirePanel(): the menu shuts the sheet when it opens.
+  var setEnquire = function () {};
+  var enquireOpen = function () { return false; };
 
   function isolateDrawer(open) {
+    var header = $("#header");
     if (open) {
       drawerInerted = Array.prototype.slice.call(document.body.children).filter(function (el) {
-        return el !== drawer && !el.inert && el.tagName !== "SCRIPT";
+        return el !== drawer && el !== header && !el.inert && el.tagName !== "SCRIPT";
       });
       drawerInerted.forEach(function (el) { el.inert = true; });
     } else {
@@ -2153,7 +1740,6 @@
     drawer.classList.remove("is-open");
     document.body.classList.add("menu-closing");
     document.body.classList.remove("menu-open");
-    holdHeader("menu", false);
     // The page intro may still own the scroll lock underneath the menu.
     if (!$("#curtain")) {
       document.body.classList.remove("is-locked");
@@ -2168,102 +1754,146 @@
     drawerCloseTimer = window.setTimeout(function () {
       if (!drawer.classList.contains("is-open")) drawer.hidden = true;
       document.body.classList.remove("menu-closing");
-    }, reduced ? 0 : 300);
+    }, reduced ? 0 : 280);
   }
 
   (function chrome() {
-    navState = headerState();
-    if (!burger || !drawer || !drawerClose) return;
-    var groupTabs = $$(".drawer__group", drawer);
-    var groupPanels = $$(".drawer__panel", drawer);
-    var initialGroup = Math.max(0, Math.min(groupTabs.length - 1, Number(drawer.dataset.initialGroup) || 0));
-    var activeGroup = -1;
-    var hoverTimer = null;
-    var mobileMenu = window.matchMedia("(max-width:900px)");
+    if (!burger || !drawer) return;
+    var header = $("#header");
+    var nav = $(".nv-menu__nav", drawer), marker = $(".nv-marker", drawer);
+    var cats = $$(".nv-cat", drawer), dests = $$(".nv-dest", drawer);
+    var initial = Math.max(0, Math.min(cats.length - 1, Number(drawer.dataset.initialGroup) || 0));
+    var active = -1, hoverTimer = null;
+    var narrow = window.matchMedia("(max-width:900px)");
+    var fine = window.matchMedia("(hover:hover) and (pointer:fine)");
 
-    function selectGroup(index) {
-      if ((index !== -1 && !groupTabs[index]) || index === activeGroup) return;
-      activeGroup = index;
-      groupTabs.forEach(function (tab, i) {
-        var selected = i === index;
-        tab.classList.toggle("is-active", selected);
-        tab.setAttribute("aria-expanded", String(selected));
-        groupPanels[i].hidden = !selected;
-      });
+    // The marker sits beside the first line of the open category's label.
+    function placeMarker(instant) {
+      if (!marker) return;
+      if (narrow.matches || active < 0) { marker.classList.remove("is-set"); return; }
+      var word = $(".nv-cat__word", cats[active]);
+      var cs = getComputedStyle(word);
+      var size = parseFloat(cs.fontSize);
+      var lead = (parseFloat(cs.lineHeight) - size) / 2;
+      var y = word.getBoundingClientRect().top - nav.getBoundingClientRect().top + lead + size * .16;
+      if (instant) marker.style.transition = "none";
+      marker.style.transform = "translateY(" + y.toFixed(1) + "px)";
+      marker.classList.add("is-set");
+      if (instant) { void marker.offsetWidth; marker.style.transition = ""; }
     }
-    selectGroup(initialGroup);
-    groupTabs.forEach(function (tab, index) {
-      var expandedAtPointerDown = false;
-      tab.addEventListener("pointerdown", function () {
-        expandedAtPointerDown = index === activeGroup;
+
+    function select(index, opts) {
+      opts = opts || {};
+      if (index === active && !opts.force) return;
+      active = index;
+      cats.forEach(function (cat, i) {
+        var on = i === index;
+        cat.setAttribute("aria-expanded", String(on));
+        dests[i].hidden = !on;
+        // Only the incoming list animates; the outgoing one goes at once, so
+        // a fast pass down the categories never leaves two lists showing.
+        dests[i].classList.remove("is-entering");
+        if (on && !opts.quiet && !reduced) { void dests[i].offsetWidth; dests[i].classList.add("is-entering"); }
       });
-      tab.addEventListener("focus", function () { selectGroup(index); });
-      tab.addEventListener("click", function (e) {
-        // A touch or pointer press focuses first. Remember the state before
-        // focus so a tap on a closed group opens it instead of closing it.
-        var collapse = mobileMenu.matches &&
-          (e.detail === 0 ? index === activeGroup : expandedAtPointerDown);
-        selectGroup(collapse ? -1 : index);
-        expandedAtPointerDown = false;
+      placeMarker(opts.instant);
+    }
+    select(initial, { quiet: true, instant: true });
+
+    cats.forEach(function (cat, i) {
+      var wasOpen = false;
+      cat.addEventListener("pointerdown", function () { wasOpen = i === active; });
+      cat.addEventListener("click", function (e) {
+        // In one column a category is an accordion and a second press closes
+        // it; beside the destinations it only ever opens. A tap focuses before
+        // it clicks, so the state before the press is what decides.
+        var collapse = narrow.matches && (e.detail === 0 ? i === active : wasOpen);
+        select(collapse ? -1 : i);
+        wasOpen = false;
       });
-      tab.addEventListener("mouseenter", function () {
-        if (mobileMenu.matches || !window.matchMedia("(hover: hover)").matches) return;
-        if (groupPanels[activeGroup] && groupPanels[activeGroup].contains(document.activeElement)) return;
+      cat.addEventListener("focus", function () { if (!narrow.matches) select(i); });
+      cat.addEventListener("mouseenter", function () {
+        if (narrow.matches || !fine.matches) return;
+        // A reader who has tabbed into a list is not dragged out of it by a
+        // pointer passing over another category.
+        if (dests[active] && dests[active].contains(document.activeElement)) return;
         window.clearTimeout(hoverTimer);
         hoverTimer = window.setTimeout(function () {
-          if (drawer.classList.contains("is-open") && tab.matches(":hover")) selectGroup(index);
-        }, 65);
+          if (drawer.classList.contains("is-open") && cat.matches(":hover")) select(i);
+        }, 90);
       });
-      tab.addEventListener("mouseleave", function () { window.clearTimeout(hoverTimer); });
-      tab.addEventListener("keydown", function (e) {
-        var next = index;
-        if (e.key === "ArrowDown" || e.key === "ArrowRight") next = (index + 1) % groupTabs.length;
-        else if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = (index + groupTabs.length - 1) % groupTabs.length;
+      cat.addEventListener("mouseleave", function () { window.clearTimeout(hoverTimer); });
+      cat.addEventListener("keydown", function (e) {
+        var next;
+        if (e.key === "ArrowDown") next = (i + 1) % cats.length;
+        else if (e.key === "ArrowUp") next = (i + cats.length - 1) % cats.length;
         else if (e.key === "Home") next = 0;
-        else if (e.key === "End") next = groupTabs.length - 1;
-        else return;
+        else if (e.key === "End") next = cats.length - 1;
+        else if (e.key === "ArrowRight" && !narrow.matches) {
+          var first = $("a", dests[active]);
+          if (first) { e.preventDefault(); first.focus(); }
+          return;
+        } else return;
         e.preventDefault();
-        groupTabs[next].focus({ preventScroll:true });
+        cats[next].focus();
       });
     });
-    burger.addEventListener("click", function () {
-      if (drawer.classList.contains("is-open")) { closeDrawer(); return; }
+    // In a list, the arrows move through it and Left returns to its category.
+    dests.forEach(function (panel, i) {
+      panel.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft" && !narrow.matches) { e.preventDefault(); cats[i].focus(); return; }
+        var links = $$("a", panel), k = links.indexOf(document.activeElement);
+        if (k === -1) return;
+        if (e.key === "ArrowDown") { e.preventDefault(); links[(k + 1) % links.length].focus(); }
+        if (e.key === "ArrowUp") { e.preventDefault(); links[(k + links.length - 1) % links.length].focus(); }
+      });
+    });
+
+    function openDrawer() {
+      setEnquire(false);
       window.clearTimeout(drawerCloseTimer);
       document.body.classList.remove("menu-closing");
-      selectGroup(initialGroup);
       drawer.hidden = false;
-      // Flush the hidden state so the opacity transition starts on this open.
-      drawer.offsetWidth;
+      drawer.scrollTop = 0;
+      active = -1;
+      select(initial, { quiet: true, instant: true });
+      // Flush the hidden state so the opening starts on this open.
+      void drawer.offsetWidth;
       drawer.classList.add("is-open");
       burger.setAttribute("aria-expanded", "true");
       burger.setAttribute("aria-label", "Close menu");
       document.body.classList.add("is-locked", "menu-open");
-      holdHeader("menu", true);
       if (lenis) lenis.stop();
       isolateDrawer(true);
-      requestAnimationFrame(function () {
-        if (drawer.classList.contains("is-open")) drawerClose.focus({ preventScroll: true });
-      });
+      cats[initial].focus({ preventScroll: true });
+    }
+    burger.addEventListener("click", function () {
+      if (drawer.classList.contains("is-open")) closeDrawer(); else openDrawer();
     });
-    drawerClose.addEventListener("click", closeDrawer);
     $$("a", drawer).forEach(function (a) { a.addEventListener("click", closeDrawer); });
+
+    window.addEventListener("resize", function () {
+      if (!drawer.classList.contains("is-open")) return;
+      if (!narrow.matches && active === -1) select(initial, { quiet: true });
+      placeMarker(true);
+    }, { passive: true });
+
     document.addEventListener("keydown", function (e) {
       if (!drawer.classList.contains("is-open")) return;
-      if (e.key === "Escape") { e.preventDefault(); closeDrawer(); return; }
+      if (e.key === "Escape") {
+        if (enquireOpen()) return;          // the innermost thing closes first
+        e.preventDefault(); closeDrawer(); return;
+      }
       if (e.key !== "Tab") return;
-      var items = $$("a[href], button", drawer).filter(function (el) {
-        return !el.disabled && el.tabIndex >= 0 && el.getClientRects().length;
+      var panel = $("#enqPanel");
+      var items = $$("a[href], button", header).concat($$("a[href], button", drawer)).filter(function (el) {
+        return !el.disabled && el.tabIndex >= 0 && el.getClientRects().length && !el.closest("[hidden]") &&
+               !(panel && panel.contains(el) && !enquireOpen());
       });
-      var i = items.indexOf(document.activeElement);
       if (!items.length) return;
-      if (i === -1 || (e.shiftKey && i === 0) || (!e.shiftKey && i === items.length - 1)) {
+      var k = items.indexOf(document.activeElement);
+      if (k === -1 || (e.shiftKey && k === 0) || (!e.shiftKey && k === items.length - 1)) {
         e.preventDefault();
         items[e.shiftKey ? items.length - 1 : 0].focus();
-      }
-    });
-    document.addEventListener("focusin", function (e) {
-      if (drawer.classList.contains("is-open") && !drawer.contains(e.target)) {
-        drawerClose.focus({ preventScroll: true });
       }
     });
   })();
@@ -2434,59 +2064,71 @@
 
 
   /* ==========================================================
-     Enquire panel
-     Hover for a mouse, click for a touch screen, focus for a
-     keyboard — all three drive the same open state.
+     Enquire
+     Hover for a mouse, a tap for a touch screen, focus for a
+     keyboard — all three drive the same open state. The sheet
+     has its own Close; Escape and leaving it shut it too.
      ========================================================== */
   function enquirePanel() {
-    var wrap = $("#enq"), btn = $("#enqBtn");
-    if (!wrap || !btn) return;
+    var wrap = $("#enq"), btn = $("#enqBtn"), panel = $("#enqPanel"), close = $("#enqClose");
+    if (!wrap || !btn || !panel) return;
 
-    var open = false, hoverTimer;
-    var fine = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+    var open = false, timer = null, returning = false;
+    var fine = window.matchMedia("(hover:hover) and (pointer:fine)");
+    var menuOpen = function () { return drawer && drawer.classList.contains("is-open"); };
+    // The sheet is shut by visibility, not removed, so it can ease in.
+    panel.hidden = false;
 
-    function set(next) {
+    function set(next, returnFocus) {
       if (next === open) return;
       open = next;
       wrap.classList.toggle("is-open", open);
       btn.setAttribute("aria-expanded", open ? "true" : "false");
-      holdHeader("enquire", open);
+      // Focus goes back to the tab without the tab's own keyboard-focus
+      // rule opening the sheet that was just shut.
+      if (!open && returnFocus) { returning = true; btn.focus(); returning = false; }
     }
+    setEnquire = set;
+    enquireOpen = function () { return open; };
 
-    if (fine) {
-      wrap.addEventListener("mouseenter", function () {
-        window.clearTimeout(hoverTimer);
-        set(true);
-      });
-      // A short grace period: the pointer may clip a corner on its way in.
-      wrap.addEventListener("mouseleave", function () {
-        hoverTimer = window.setTimeout(function () { set(false); }, 180);
-      });
-    }
-
+    wrap.addEventListener("mouseenter", function () {
+      if (!fine.matches || menuOpen()) return;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(function () { set(true); }, 70);
+    });
+    // A short grace period: the pointer may clip a corner on its way in.
+    wrap.addEventListener("mouseleave", function () {
+      if (!fine.matches) return;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(function () { set(false); }, 220);
+    });
     btn.addEventListener("click", function (e) {
       e.preventDefault();
-      // With a mouse, moving onto the tab has already opened the panel, so a
-      // plain toggle here would shut it the instant it was clicked. A mouse
-      // click therefore only ever opens; hovering away is what closes it.
-      // Touch has no hover, so there the click is the toggle.
-      set(fine ? true : !open);
+      window.clearTimeout(timer);
+      if (menuOpen()) closeDrawer();
+      // With a mouse, arriving on the tab has already opened the sheet, so a
+      // click only ever opens it; leaving, Close or Escape shuts it. Touch
+      // has no hover, so there the tap is the toggle.
+      set(fine.matches ? true : !open);
+    });
+    if (close) close.addEventListener("click", function () {
+      window.clearTimeout(timer);
+      set(false, true);
     });
 
-    // Only a *keyboard* focus opens it. Reacting to every focusin meant a
-    // mouse click opened the panel on focus and then the click handler below
-    // toggled it straight shut again, so it never appeared.
+    // Only a *keyboard* focus opens it: a mouse click also focuses the tab,
+    // and the click handler above has already decided what that means.
     wrap.addEventListener("focusin", function (e) {
+      if (returning || menuOpen()) return;
       var t = e.target;
-      if (!t || !t.matches) return;
-      try { if (t.matches(":focus-visible")) set(true); } catch (err) { /* older browser */ }
+      try { if (t && t.matches(":focus-visible")) set(true); } catch (err) { /* older browser */ }
     });
     wrap.addEventListener("focusout", function (e) {
       if (!wrap.contains(e.relatedTarget)) set(false);
     });
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && open) { set(false); btn.focus(); }
+      if (e.key === "Escape" && open) { e.preventDefault(); set(false, true); }
     });
     document.addEventListener("click", function (e) {
       if (open && !wrap.contains(e.target)) set(false);

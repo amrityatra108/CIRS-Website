@@ -28,7 +28,7 @@
      Where the floating header ends, so the index sits under it.
      ---------------------------------------------------------- */
   function measureHeader() {
-    var bar = $(".header .wrap") || $(".header");
+    var bar = $(".header");
     if (!bar) return;
     var bottom = bar.getBoundingClientRect().bottom;
     if (bottom > 0 && bottom < 200) {

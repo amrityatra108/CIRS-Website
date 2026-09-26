@@ -164,14 +164,6 @@ html.js-motion .aj-open__line:nth-child(2) > span{ transform:translateX(104vw); 
 html.js-motion .aj-open__sub{ opacity:0; }
 html.js-motion .aj-open__eyebrow{ opacity:0; }
 
-/* The navigation goes quiet over the opening and comes back the moment it
-   is scrolled past, hovered, or given focus from the keyboard. */
-body.alumni.aj-quiet .header{
-  opacity:.45; transition:opacity .5s var(--e);
-}
-body.alumni.aj-quiet .header:hover,
-body.alumni.aj-quiet .header:focus-within{ opacity:1; }
-
 /* ============================================================
    CHAPTER 2 — The departure portal
    ------------------------------------------------------------
@@ -1163,5 +1155,4 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   .aj-cursor{ transition:none !important; }
   .aj-cursor{ display:none; }
   .ajw__n, .ajw__label{ transition:none; }
-  body.alumni.aj-quiet .header{ opacity:1; }
 }

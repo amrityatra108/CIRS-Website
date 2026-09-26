@@ -264,7 +264,7 @@ body.admissions .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px r
   .ad-process.is-complete .ad-process__item:last-child::after{ opacity:1; transform:rotate(45deg) scale(1); }
 }
 @media print{
-  body.admissions .header,body.admissions .drawer,body.admissions .pagehero,body.admissions .jump,
+  body.admissions .header,body.admissions #drawer,body.admissions .pagehero,body.admissions .jump,
   body.admissions .ad-campus,body.admissions .ad-final,body.admissions .footer-wrap{ display:none !important; }
   body.admissions .cirs-entry-section{ padding:28px 0; break-inside:avoid; }
   body.admissions .ad-checklist{ box-shadow:none; }
