@@ -520,13 +520,16 @@ section[id]{ scroll-margin-top:88px; }
 }
 /* Preserve the source orientation instead of forcing every photograph into
    one card size. Landscape frames use the requested 16:9 crop; the two
-   portrait families retain their own 4:5 and 2:3 silhouettes. */
-.hframe:has(img[width="1500"][height="1000"]){ width:clamp(460px,46vw,690px); }
-.hframe:has(img[width="1500"][height="1000"]) img{ aspect-ratio:16 / 9; }
-.hframe:has(img[width="1000"][height="1250"]){ width:clamp(300px,29vw,430px); }
-.hframe:has(img[width="1000"][height="1250"]) img{ aspect-ratio:4 / 5; }
-.hframe:has(img[width="1000"][height="1500"]){ width:clamp(280px,26vw,390px); }
-.hframe:has(img[width="1000"][height="1500"]) img{ aspect-ratio:2 / 3; }
+   portrait families retain their own 4:5 and 2:3 silhouettes. The shape is
+   named on the figure rather than read off the image's pixel size, because
+   not every photograph the school sends is large enough to be cut at the
+   standard 1500 or 1000 pixels. */
+.hframe--wide{ width:clamp(460px,46vw,690px); }
+.hframe--wide img{ aspect-ratio:16 / 9; }
+.hframe--portrait{ width:clamp(300px,29vw,430px); }
+.hframe--portrait img{ aspect-ratio:4 / 5; }
+.hframe--tall{ width:clamp(280px,26vw,390px); }
+.hframe--tall img{ aspect-ratio:2 / 3; }
 
 /* --- the written statements ------------------------------- */
 .hsay{
@@ -598,9 +601,9 @@ section[id]{ scroll-margin-top:88px; }
 .hrun.is-static .hframe--m { --h:28vh; }
 .hrun.is-static .hframe--s { --h:24vh; }
 
-.hrun.is-static .hframe:has(img[width="1500"][height="1000"]){ width:min(82vw,620px); }
-.hrun.is-static .hframe:has(img[width="1000"][height="1250"]){ width:min(68vw,400px); }
-.hrun.is-static .hframe:has(img[width="1000"][height="1500"]){ width:min(62vw,360px); }
+.hrun.is-static .hframe--wide{ width:min(82vw,620px); }
+.hrun.is-static .hframe--portrait{ width:min(68vw,400px); }
+.hrun.is-static .hframe--tall{ width:min(62vw,360px); }
 
 @media (max-width:700px){
   .hrun.is-static .hsay__big{ font-size:clamp(1.7rem,7vw,2.4rem); }

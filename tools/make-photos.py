@@ -31,6 +31,15 @@ UNGRADED = {
     # The Parent Portal opening shows its photograph as it was taken: parents
     # and students in the hall, full strength under a scrim of its own.
     "parent-portal-hero.jpg",
+    # The seven home-run photographs of 26 September 2026 keep the colour
+    # they were sent with.
+    "hrun/01-holi.jpg",
+    "hrun/02-window.jpg",
+    "hrun/03-mun.jpg",
+    "hrun/04-relay.jpg",
+    "hrun/06-swim.jpg",
+    "hrun/08-candlelight.jpg",
+    "hrun/09-microphone.jpg",
 }
 
 SHADOW = (36, 26, 56)
@@ -185,23 +194,24 @@ PHOTOS = [
     # deliberate and worth keeping: the run is the first thing under the
     # hero, and a photograph the reader meets here and again on Admissions
     # makes the library look smaller than it is.
-    # The ten the school supplied, in the order they sent them. The run's
-    # shape is unchanged: four landscape, two 4:5 and two 2:3 as before, so
-    # the stage and its transitions do not move. Every source is landscape,
-    # so the four upright slots are the ones that needed a real decision —
-    # the focal point is set on the figure rather than the frame's middle,
-    # which is what keeps a singer or a speaker inside a 2:3 cut of a 3:2
-    # photograph instead of losing them out of the side.
-    ("hrun/01-sprint.jpg",   "drive-hrun-01.jpg", (1500, 1000), (0.40, 0.55)),
-    ("hrun/02-tyre.jpg",     "drive-hrun-02.jpg", (1000, 1250), (0.46, 0.52)),
-    ("hrun/03-swim.jpg",     "drive-hrun-03.jpg", (1000, 1250), (0.50, 0.45)),
-    ("hrun/04-run.jpg",      "drive-hrun-04.jpg", (1500, 1000), (0.50, 0.50)),
-    ("hrun/05-assembly.jpg", "drive-hrun-05.jpg", (1500, 1000), (0.50, 0.50)),
-    ("hrun/06-song.jpg",     "drive-hrun-06.jpg", (1000, 1500), (0.33, 0.55)),
-    ("hrun/07-sparkler.jpg", "drive-hrun-07.jpg", (1500, 1000), (0.52, 0.48)),
-    ("hrun/08-firework.jpg", "drive-hrun-08.jpg", (1500, 1000), (0.52, 0.45)),
-    ("hrun/09-speech.jpg",   "drive-hrun-09.jpg", (1000, 1500), (0.56, 0.45)),
-    ("hrun/10-stage.jpg",    "drive-hrun-10.jpg", (1500, 1000), (0.58, 0.40)),
+    # The ten the school supplied, in the order they sent them, with seven of
+    # them since replaced (01, 02, 03, 04, 06, 08 and 09) by photographs sent
+    # on 26 September 2026. The frame shapes now follow the photographs rather
+    # than the other way round, so a Holi portrait is not cut down to a wide
+    # strip; tools/pages/index.html names each figure's shape. The window and
+    # the relay arrived small (697 and 179 pixels wide) and are cut at the
+    # size they came, never enlarged. The microphone photograph is upright
+    # once its camera rotation is applied, and is framed high for the faces.
+    ("hrun/01-holi.jpg",        "home-gallery-2026-09-26/01-holi.png",        (1000, 1500), (0.50, 0.50)),
+    ("hrun/02-window.jpg",      "home-gallery-2026-09-26/02-window.png",      (680, 850),   (0.50, 0.56)),
+    ("hrun/03-mun.jpg",         "home-gallery-2026-09-26/03-cirs-mun.jpg",    (1500, 1000), (0.53, 0.50)),
+    ("hrun/04-relay.jpg",       "home-gallery-2026-09-26/04-relay.png",       (176, 220),   (0.50, 0.47)),
+    ("hrun/05-assembly.jpg",    "drive-hrun-05.jpg",                          (1500, 1000), (0.50, 0.50)),
+    ("hrun/06-swim.jpg",        "home-gallery-2026-09-26/06-swim.jpg",        (1500, 1000), (0.50, 0.50)),
+    ("hrun/07-sparkler.jpg",    "drive-hrun-07.jpg",                          (1500, 1000), (0.52, 0.48)),
+    ("hrun/08-candlelight.jpg", "home-gallery-2026-09-26/08-candlelight.jpg", (1500, 1000), (0.50, 0.58)),
+    ("hrun/09-microphone.jpg",  "home-gallery-2026-09-26/09-microphone.jpg",  (1000, 1500), (0.50, 0.42)),
+    ("hrun/10-stage.jpg",       "drive-hrun-10.jpg",                          (1500, 1000), (0.58, 0.40)),
 
     # The run's previous ten are not all retired with it. The CIRS Experience
     # and Alumni borrow seven of them for their own galleries and covers, and
