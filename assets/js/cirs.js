@@ -1506,11 +1506,37 @@
      boundary and only clears again a little above it — so a
      scroll that comes to rest on the line, or a trackpad that
      jitters across it, cannot make it flicker.
+
+     Past the opening the bar also gets out of the way. That is
+     the second thing decided here, from the same reading of the
+     scroll, and it resolves to one of four modes, written to
+     data-nav on #header:
+
+       hero        over the opening. The bar is simply there.
+       collapsed   past it. The bar has slid up out of the window
+                   and .site-nav-handle, a hairline of gold, holds
+                   its place. .is-collapsed is the one CSS switch.
+       revealed    past it, brought back: by scrolling up, or by
+                   the pointer reaching the top edge of the window.
+       held        past it and in use — the menu or the Enquire
+                   panel is open, a control has keyboard focus, or
+                   the pointer is on the bar or at the top edge.
+                   Nothing collapses the bar while it is held.
+
+     Direction is counted, not sampled: the scroll has to travel
+     REVEAL_UP pixels upward to bring the bar back and HIDE_DOWN
+     downward to send it away again, and any turn the other way
+     starts the count afresh, so jitter reaches neither. A bar the
+     pointer brought back waits LINGER after the pointer has gone
+     before it goes too; one brought back by scrolling or by use
+     stays until the page is scrolled on down.
      ========================================================== */
   function headerState() {
     var header = $("#header");
-    if (!header) return;
+    if (!header) return null;
     var BAND = 24;
+    var REVEAL_UP = 48, HIDE_DOWN = 96;
+    var EDGE = 28, EDGE_DWELL = 90, LINGER = 800;
 
     var main = $("#main");
     // Ignore non-visual utility nodes (the gallery's canvas controls, for
@@ -1523,12 +1549,20 @@
       opening = $(".art__hero", opening) || $(".art__head", opening) || opening;
     }
 
-    var edge = 0, scrolled = null, queued = false;
+    var bar = header.querySelector(".wrap") || header;
+    var edge = 0, maxY = 0, scrolled = null, queued = false;
+    var lastY = 0, travel = 0;
+    // What brought a collapsed bar back: "scroll", "pointer" or "use".
+    var revealed = false, source = null, mode = null;
+    var holds = { menu: false, enquire: false, focus: false, pointer: false, edge: false };
+    var near = false, dwellTimer = 0, lingerTimer = 0;
 
     // Measured, not read every frame: it moves only when the layout does.
+    // Offsets rather than the bar's box, which is somewhere above the
+    // window while the header is collapsed.
     function measure() {
-      var bar = header.querySelector(".wrap") || header;
-      var barBottom = bar.getBoundingClientRect().bottom;
+      maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      var barBottom = header.offsetTop + bar.offsetTop + bar.offsetHeight;
       if (!opening) { edge = 80; return; }
       // A pinned opening is measured by its spacer, which holds its place
       // in the document while the section itself is fixed to the screen.
@@ -1538,13 +1572,83 @@
       edge = Math.max(bottom - barBottom, 80);
     }
 
+    function isHeld() {
+      for (var k in holds) if (holds[k]) return true;
+      return false;
+    }
+
+    function render() {
+      var next = !scrolled ? "hero" : isHeld() ? "held" : revealed ? "revealed" : "collapsed";
+      // Kept on as the bar arrives, so the line fades out thickened
+      // rather than shrinking back first.
+      header.classList.toggle("is-near", near && next !== "hero");
+      if (next === mode) return;
+      mode = next;
+      header.setAttribute("data-nav", next);
+      header.classList.toggle("is-collapsed", next === "collapsed");
+    }
+
+    function linger() {
+      window.clearTimeout(lingerTimer);
+      lingerTimer = window.setTimeout(function () {
+        if (isHeld() || source !== "pointer") return;
+        revealed = false;
+        render();
+      }, LINGER);
+    }
+
+    function hold(name, on) {
+      on = !!on;
+      if (holds[name] === on) return;
+      var was = isHeld();
+      holds[name] = on;
+      if (on) {
+        window.clearTimeout(lingerTimer);
+        travel = 0;
+        if (scrolled) {
+          // The menu and keyboard focus are deliberate, and the bar they
+          // brought stays. Enquire opens on hover for a mouse, so it counts
+          // as the pointer's; on a touch screen the bar is already out.
+          if (name === "menu" || name === "focus") source = "use";
+          else if (!revealed) source = "pointer";
+          revealed = true;
+        }
+      } else if (was && !isHeld() && scrolled) {
+        // A bar that was only ever showing because it was held — the
+        // opening scrolled away under a resting pointer — is let go as
+        // if the pointer had brought it: after a pause, not at once.
+        if (!revealed) { revealed = true; source = "pointer"; }
+        if (source === "pointer") linger();
+      }
+      render();
+    }
+
     function apply() {
       queued = false;
-      var y = window.scrollY || window.pageYOffset || 0;
+      // Clamped, so an overscroll bounce at either end is not a direction.
+      var y = Math.min(Math.max(window.scrollY || window.pageYOffset || 0, 0), maxY || Infinity);
+      var dy = y - lastY;
+      lastY = y;
       var next = scrolled ? y > edge - BAND : y > edge + BAND;
-      if (next === scrolled) return;
-      scrolled = next;
-      header.classList.toggle("is-scrolled", next);
+      if (next !== scrolled) {
+        scrolled = next;
+        header.classList.toggle("is-scrolled", next);
+        // Crossing the boundary either way starts over: past it the bar
+        // begins collapsed, over the opening it is simply there.
+        revealed = false; source = null; travel = 0;
+        window.clearTimeout(lingerTimer);
+      } else if (scrolled && dy) {
+        travel = (dy > 0) === (travel > 0) ? travel + dy : dy;
+        if (isHeld()) travel = 0;
+        else if (travel <= -REVEAL_UP && source !== "scroll" && source !== "use") {
+          revealed = true; source = "scroll";
+          window.clearTimeout(lingerTimer);
+        } else if (travel >= HIDE_DOWN && revealed) {
+          revealed = false; source = null;
+          window.clearTimeout(lingerTimer);
+        }
+      }
+      render();
     }
     function queue() {
       if (queued) return;
@@ -1583,6 +1687,49 @@
     // header's old sentinels created one by accident; this does it on purpose.
     if (hasST) ScrollTrigger.create({ onRefresh: remeasure });
     if ("ResizeObserver" in window) new ResizeObserver(remeasure).observe(document.body);
+
+    // The pointer on the bar holds it. Touch is left out: a tap reports
+    // an enter and a leave of its own, and holds nothing.
+    bar.addEventListener("pointerenter", function (e) {
+      if (e.pointerType !== "touch") hold("pointer", true);
+    });
+    bar.addEventListener("pointerleave", function (e) {
+      if (e.pointerType !== "touch") hold("pointer", false);
+    });
+
+    // The top edge of the window. Reaching it lifts the handle at once
+    // and brings the bar after a short dwell, so a pointer merely on its
+    // way out of the window to the browser's tabs brings nothing.
+    function setNear(on) {
+      if (on === near) return;
+      near = on;
+      window.clearTimeout(dwellTimer);
+      if (near) dwellTimer = window.setTimeout(function () { hold("edge", true); }, EDGE_DWELL);
+      else hold("edge", false);
+      render();
+    }
+    document.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "touch") setNear(e.clientY <= EDGE);
+    }, { passive: true });
+    document.addEventListener("mouseout", function (e) {
+      if (!e.relatedTarget) { setNear(false); hold("pointer", false); }
+    });
+
+    // Keyboard focus anywhere in the header brings the bar and keeps it.
+    // Only keyboard focus: a mouse click also focuses the button it lands
+    // on, and that focus would otherwise hold the bar long after the
+    // pointer had left it.
+    header.addEventListener("focusin", function (e) {
+      var keyboard = true;
+      try { keyboard = e.target.matches(":focus-visible"); } catch (err) { /* older browser */ }
+      if (keyboard) hold("focus", true);
+    });
+    header.addEventListener("focusout", function (e) {
+      if (!header.contains(e.relatedTarget)) hold("focus", false);
+    });
+
+    // The menu and the Enquire panel report themselves through this.
+    return { hold: hold };
   }
 
   /* ==========================================================
@@ -1590,6 +1737,8 @@
      ========================================================== */
   var drawer = $("#drawer"), burger = $("#burger"), drawerClose = $("#drawerClose");
   var drawerCloseTimer = null, drawerInerted = [];
+  var navState = null;
+  function holdHeader(name, on) { if (navState) navState.hold(name, on); }
 
   function isolateDrawer(open) {
     if (open) {
@@ -1608,6 +1757,7 @@
     drawer.classList.remove("is-open");
     document.body.classList.add("menu-closing");
     document.body.classList.remove("menu-open");
+    holdHeader("menu", false);
     // The page intro may still own the scroll lock underneath the menu.
     if (!$("#curtain")) {
       document.body.classList.remove("is-locked");
@@ -1626,7 +1776,7 @@
   }
 
   (function chrome() {
-    headerState();
+    navState = headerState();
     if (!burger || !drawer || !drawerClose) return;
     var groupTabs = $$(".drawer__group", drawer);
     var groupPanels = $$(".drawer__panel", drawer);
@@ -1692,6 +1842,7 @@
       burger.setAttribute("aria-expanded", "true");
       burger.setAttribute("aria-label", "Close menu");
       document.body.classList.add("is-locked", "menu-open");
+      holdHeader("menu", true);
       if (lenis) lenis.stop();
       isolateDrawer(true);
       requestAnimationFrame(function () {
@@ -1903,6 +2054,7 @@
       open = next;
       wrap.classList.toggle("is-open", open);
       btn.setAttribute("aria-expanded", open ? "true" : "false");
+      holdHeader("enquire", open);
     }
 
     if (fine) {

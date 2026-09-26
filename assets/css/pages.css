@@ -140,7 +140,9 @@
 
   --hd-fade:350ms;
   --hd-ink-fade:300ms;
-  transition:opacity var(--hd-fade) var(--e), visibility var(--hd-fade);
+  --hd-slide:300ms;
+  transition:opacity var(--hd-fade) var(--e), visibility var(--hd-fade),
+             translate var(--hd-slide) var(--e);
 }
 /* ...and dark over paper. */
 .header.is-scrolled,
@@ -198,7 +200,40 @@ body.menu-open .header .wrap{
    loaded or restored in: a refresh halfway down a page should show the
    glass header, not watch the clear one turn into it. */
 .header.is-settling,
-.header.is-settling *{ transition:none !important; }
+.header.is-settling *,
+.header.is-settling ~ .site-nav-handle,
+.header.is-settling ~ .site-nav-handle::before{ transition:none !important; }
+
+/* Collapsed: past the opening, the bar slides up out of the window and a
+   2px line of the school's gold holds its place (cirs.js decides when; see
+   "Header state"). The slide is `translate`, not `transform`, so the
+   compositing transform cirs.css puts on .header is left alone. It clears
+   the bar's shadow as well as the bar. Nothing is hidden from the keyboard:
+   focus arriving in the header brings it straight back.
+
+   The handle runs under the reading-progress bar, which is the same gold
+   at full strength, so while the header is away the line reads as the track
+   with the page's progress drawn along it. At the top edge, as the pointer
+   arrives, it thickens to 3px and comes to full strength a moment before
+   the bar follows. */
+.header.is-collapsed{ translate:0 calc(-100% - 72px); }
+
+.site-nav-handle{
+  position:fixed; top:env(safe-area-inset-top,0px); left:0; right:0; z-index:119;
+  height:2px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 200ms var(--e);
+}
+.site-nav-handle::before{
+  content:""; position:absolute; inset:0;
+  background:var(--gold);
+  opacity:.55;
+  transform-origin:top;
+  transition:opacity 200ms var(--e), transform 200ms var(--e);
+}
+.header.is-collapsed ~ .site-nav-handle{ opacity:1; }
+.header.is-near ~ .site-nav-handle::before{ opacity:1; transform:scaleY(1.5); }
 
 .header__left,
 .header__right{
@@ -299,7 +334,8 @@ body.menu-open .header .wrap{
   .brand__txt{ display:none; }
 }
 @media (prefers-reduced-motion:reduce){
-  .header,.header .wrap,.htab,.htab__icon,.brand__name,.brand__sub{ transition-duration:0s; }
+  .header,.header .wrap,.htab,.htab__icon,.brand__name,.brand__sub,
+  .site-nav-handle,.site-nav-handle::before{ transition-duration:0s; }
 }
 
 /* ------------------------------------------------------------
