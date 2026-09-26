@@ -74,11 +74,19 @@
     if (document.getElementById("curtain")) return;
     if (!openingStarted) {
       openingStarted = true;
-      if (!opening.getAttribute("src")) {
+      // A film that lists its own <source>s has already chosen one by screen.
+      if (!opening.getAttribute("src") && !opening.querySelector("source")) {
         opening.src = opening.getAttribute("data-src");
         opening.load();
       }
     }
+    // Its <source>s begin loading while the page is parsed, before this
+    // deferred script listens, so a film that is missing has already failed
+    // unheard — and play() on a film with no source neither plays nor
+    // rejects. Loading again settles it, as in filmintro.js: a missing film
+    // fails again, now heard (the capture listener above), and ends the
+    // opening at once; one that was merely starting just starts.
+    if (opening.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) opening.load();
     opening.muted = true;
     opening.play().catch(finishOpening);
   }
@@ -94,6 +102,13 @@
     });
     opening.addEventListener("ended", finishOpening);
     opening.addEventListener("error", finishOpening);
+    // A missing file is reported on its <source>, where the error does not
+    // bubble; the film has failed only once the last source has too.
+    opening.addEventListener("error", function () {
+      setTimeout(function () {
+        if (opening.error || opening.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) finishOpening();
+      }, 0);
+    }, true);
     var openingObserver = new MutationObserver(function () {
       if (!document.getElementById("curtain")) { openingObserver.disconnect(); syncOpening(); }
     });

@@ -99,6 +99,12 @@ body.sports {
   transition: opacity 0.3s ease;
 }
 
+/* The reveal's <picture> only chooses a file; the image is laid out as if
+   it were the layer's own child, exactly like the base layer's. */
+.arena-hero__layer picture {
+  display: contents;
+}
+
 .arena-hero__img {
   width: 100%;
   height: 100%;

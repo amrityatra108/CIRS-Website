@@ -94,6 +94,11 @@ or the honeycomb. It needs playwright-core, which is not in the repository: poin
   placeholder with invented content — particularly not testimonials.
 - `netlify.toml` and `vercel.json` both exist during the move to Vercel and must be changed
   together until Netlify is retired. See HOSTING.md.
+- Every opening film has a phone cut, `assets/video/<name>-m.mp4`, from `tools/make-films.py`,
+  chosen by a media-aware `<source>`. Replace a film and re-run the tool. The scrubbed films are
+  all-intra in both cuts; never re-encode one with a longer keyframe interval. Images that
+  `tools/make-media.py` derives (Founder textures and layers, Alumni, Blog card sizes) have their
+  masters in `assets/source/`, which is why those PNGs are not in `assets/img`.
 
 ## What is not verifiable from a sandbox session
 

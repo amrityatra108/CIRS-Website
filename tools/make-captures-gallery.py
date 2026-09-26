@@ -14,7 +14,9 @@ report it as an orphan.
 The list of photographs, their captions and their layout live in
 tools/captures.py. Nothing here repaints a photograph: every output is the
 whole frame, resized, never cropped — the gallery lays each one out at its
-own shape, so there is nothing to crop it to.
+own shape, so there is nothing to crop it to. The one exception is a
+source that carries an empty surround as well as the photograph (CROPS in
+tools/captures.py): the surround is cut away, never the picture.
 
 A tile is cut at the size it is actually drawn, with room for a 1.5x screen:
 its share of a row at the page's widest, 1320px. So a photograph that has a
@@ -43,6 +45,12 @@ PAGE_WIDTH = 1320          # --maxw in assets/css/cirs.css
 DENSITY = 1.5
 TILE_MIN, TILE_MAX = 900, 1800
 FULL_LONG_EDGE = 2400
+# The gallery column itself stops at about 880px (assets/css/captures-gallery.css),
+# so a tile cut for PAGE_WIDTH at DENSITY is what a phone or a 2x screen wants
+# and twice what a 1x desktop draws. Each tile also gets a cut at its share of
+# GRID_WIDTH, offered first in its srcset (tools/captures.py).
+GRID_WIDTH = 882
+SMALL_MIN = 400
 END_WIDTHS = (1200, 2400)  # the ending runs the full width of the window; the
                            # smaller cut is what a phone asks for
 
@@ -80,6 +88,8 @@ def main():
         opened = []
         for source, name, _ in row:
             im = open_source(source)
+            if name in captures.CROPS:
+                im = im.crop(captures.CROPS[name])
             opened.append((im, name))
             ratios.append(im.width / im.height)
         share = sum(ratios)
@@ -93,6 +103,13 @@ def main():
             total += save(tile, tile_path, 78) + save(full, full_path, 80)
             images[name] = {"tile": [tile.width, tile.height], "tile_path": tile_path,
                             "full": [full.width, full.height], "full_path": full_path}
+            small_w = max(SMALL_MIN, round(GRID_WIDTH * ratio / share))
+            if small_w < tile.width * 0.8:
+                small = fit(im, small_w)
+                small_path = f"{OUT}/{name}-{small.width}.jpg"
+                total += save(small, small_path, 78)
+                images[name]["small"] = [small.width, small.height]
+                images[name]["small_path"] = small_path
             print(f"  write  {name:22s} tile {tile.width}x{tile.height}  full {full.width}x{full.height}")
 
     for source, name, _, width in captures.FEATURED:
@@ -115,7 +132,7 @@ def main():
     print(f"  write  {name:22s} {small.width}x{small.height} and {end.width}x{end.height}")
 
     written = {os.path.normpath(v[k]) for v in images.values()
-               for k in ("tile_path", "full_path", "lqip") if k in v}
+               for k in ("tile_path", "full_path", "lqip", "small_path") if k in v}
     for folder, _, files in os.walk(os.path.join(ROOT, OUT)):
         for f in files:
             rel = os.path.relpath(os.path.join(folder, f), ROOT)

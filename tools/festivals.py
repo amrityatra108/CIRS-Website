@@ -446,13 +446,23 @@ def expand(html):
                 .replace("{{FX_GAPS}}", GAPS))
 
 
+# The width each photograph is actually drawn at, measured at every one of
+# assets/css/festivals.css's breakpoints (520, 820, 1100px). The images are
+# cover-fitted, so a box taller than the photograph needs more than its own
+# width: a one-column tile on a phone draws a 3:2 photograph about 1.2 times
+# the window's width. Earlier values described a four-column grid at every
+# width, which sent a tablet the 640px cut for a 707px tile.
+SIZES_STRIP = "(max-width: 520px) 87vw, (max-width: 820px) 74vw, (max-width: 1100px) 56vw, 23vw"
+SIZES_TILE = "(max-width: 520px) 120vw, (max-width: 820px) 123vw, (max-width: 1100px) 61vw, 520px"
+
+
 def strip_html():
     """Seven photographs across the opening, one to a festival, in the year's
     order. Each is a link to its chapter: the opening is also the year's
     table of contents."""
     items = []
     for i, (slug, name, months, photo, n) in enumerate(FESTIVALS):
-        pic = img(photo, "(max-width: 720px) 40vw, 15vw", "fx-strip__img",
+        pic = img(photo, SIZES_STRIP, "fx-strip__img",
                   eager=True, alt="", pos=STRIP_POS.get(photo))
         items.append(f'''      <li class="fx-strip__item" style="--i:{i}">
         <a class="fx-strip__link" href="#{slug}">
@@ -502,7 +512,7 @@ def archive_html():
         fest, year, when, cap, alt, *_ = PHOTOS[name]
         info = _sizes()[name]
         shape = "tall" if info["h"] > info["w"] else "wide"
-        pic = img(name, "(max-width: 560px) 50vw, (max-width: 1100px) 33vw, 25vw", "fx-tile__img")
+        pic = img(name, SIZES_TILE, "fx-tile__img")
         tiles.append(f'''    <li class="fx-tile fx-tile--{shape}" data-festival="{fest}" data-year="{year}">
       <a class="fx-tile__link" href="{src(name)}" data-fx-open="{i}"
          data-caption="{_esc(cap)}" data-when="{_esc(NAMES[fest] + ', ' + when)}">

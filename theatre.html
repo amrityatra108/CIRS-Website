@@ -324,8 +324,16 @@
            stuttering wherever it exists. The VP9 is for the browsers built
            without the proprietary decoder, which would otherwise have no
            opening at all. Both are the same length at 24fps, so the mapping
-           in filmintro.js holds whichever one is picked. -->
-      <source src="assets/video/theatre-opening.mp4" type="video/mp4">
+           in filmintro.js holds whichever one is picked.
+
+           Phones, in either orientation, take the 540p cut from
+           tools/make-films.py: the same frames, every one still a keyframe,
+           at a third of the weight. The large-screen file is listed first,
+           behind the query phones fail, so a browser that ignores media on
+           a video's sources keeps the file it always had. -->
+      <source src="assets/video/theatre-opening.mp4" type="video/mp4"
+              media="(min-width: 768px) and (min-height: 501px)">
+      <source src="assets/video/theatre-opening-m.mp4" type="video/mp4">
       <source src="assets/video/theatre-opening.webm" type="video/webm">
     </video>
     <h1 class="film__title" data-film-title><span class="film__line">CIRS Theatre</span></h1>
@@ -554,15 +562,15 @@
       <div class="wrap th-grid">
         <div class="th-grid__row th-grid__row--feature">
 <figure class="th-fig th-g th-g--feature-0">
-  <a class="th-photo" href="assets/img/theatre/vasistha-elder-violet-1600.webp" data-th-open="vasistha:2"><img src="assets/img/theatre/vasistha-elder-violet-800.webp" srcset="assets/img/theatre/vasistha-elder-violet-800.webp 800w, assets/img/theatre/vasistha-elder-violet-1600.webp 1600w" sizes="(min-width: 900px) 64vw, 100vw" width="1600" height="900" alt="Under violet light, an elder in white with a staff, and a figure in purple holding up a shell" loading="lazy" decoding="async" style="--fx:65%;--fy:40%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-elder-violet-1600.webp" data-th-open="vasistha:2"><img src="assets/img/theatre/vasistha-elder-violet-800.webp" srcset="assets/img/theatre/vasistha-elder-violet-800.webp 800w, assets/img/theatre/vasistha-elder-violet-1600.webp 1600w" sizes="(min-width: 900px) 64vw, (min-width: 761px) 90vw, 100vw" width="1600" height="900" alt="Under violet light, an elder in white with a staff, and a figure in purple holding up a shell" loading="lazy" decoding="async" style="--fx:65%;--fy:40%;--ar:1600/900"></a>
   <figcaption class="th-cap">Under violet light</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--feature-1">
-  <a class="th-photo" href="assets/img/theatre/vasistha-forest-dance-1600.webp" data-th-open="vasistha:3"><img src="assets/img/theatre/vasistha-forest-dance-800.webp" srcset="assets/img/theatre/vasistha-forest-dance-800.webp 800w, assets/img/theatre/vasistha-forest-dance-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A dance in the forest set: an actor in braces among dancers in floral dresses" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-forest-dance-1600.webp" data-th-open="vasistha:3"><img src="assets/img/theatre/vasistha-forest-dance-800.webp" srcset="assets/img/theatre/vasistha-forest-dance-800.webp 800w, assets/img/theatre/vasistha-forest-dance-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="A dance in the forest set: an actor in braces among dancers in floral dresses" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">A dance in the forest</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--feature-2">
-  <a class="th-photo" href="assets/img/theatre/vasistha-green-light-1600.webp" data-th-open="vasistha:4"><img src="assets/img/theatre/vasistha-green-light-800.webp" srcset="assets/img/theatre/vasistha-green-light-800.webp 800w, assets/img/theatre/vasistha-green-light-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="The cast in green light, several in white face paint" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-green-light-1600.webp" data-th-open="vasistha:4"><img src="assets/img/theatre/vasistha-green-light-800.webp" srcset="assets/img/theatre/vasistha-green-light-800.webp 800w, assets/img/theatre/vasistha-green-light-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="The cast in green light, several in white face paint" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">In green light</figcaption>
 </figure>
         </div>
@@ -574,25 +582,25 @@
         </div>
         <div class="th-grid__row th-grid__row--trio">
 <figure class="th-fig th-g th-g--trio-0">
-  <a class="th-photo" href="assets/img/theatre/vasistha-lights-1600.webp" data-th-open="vasistha:6"><img src="assets/img/theatre/vasistha-lights-800.webp" srcset="assets/img/theatre/vasistha-lights-800.webp 800w, assets/img/theatre/vasistha-lights-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A figure in a pointed hat and cloak in a set strung with fairy lights, a young actor beside" loading="lazy" decoding="async" style="--fx:45%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-lights-1600.webp" data-th-open="vasistha:6"><img src="assets/img/theatre/vasistha-lights-800.webp" srcset="assets/img/theatre/vasistha-lights-800.webp 800w, assets/img/theatre/vasistha-lights-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="A figure in a pointed hat and cloak in a set strung with fairy lights, a young actor beside" loading="lazy" decoding="async" style="--fx:45%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">Among the strings of light</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--trio-1">
-  <a class="th-photo" href="assets/img/theatre/vasistha-body-paint-1600.webp" data-th-open="vasistha:7"><img src="assets/img/theatre/vasistha-body-paint-800.webp" srcset="assets/img/theatre/vasistha-body-paint-800.webp 800w, assets/img/theatre/vasistha-body-paint-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor with a painted back raises a staff overhead above another" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-body-paint-1600.webp" data-th-open="vasistha:7"><img src="assets/img/theatre/vasistha-body-paint-800.webp" srcset="assets/img/theatre/vasistha-body-paint-800.webp 800w, assets/img/theatre/vasistha-body-paint-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="An actor with a painted back raises a staff overhead above another" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/900"></a>
   <figcaption class="th-cap">Body paint and a raised staff</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--trio-2">
-  <a class="th-photo" href="assets/img/theatre/vasistha-blue-light-1600.webp" data-th-open="vasistha:8"><img src="assets/img/theatre/vasistha-blue-light-800.webp" srcset="assets/img/theatre/vasistha-blue-light-800.webp 800w, assets/img/theatre/vasistha-blue-light-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor, arms flung wide, in a single blue light" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-blue-light-1600.webp" data-th-open="vasistha:8"><img src="assets/img/theatre/vasistha-blue-light-800.webp" srcset="assets/img/theatre/vasistha-blue-light-800.webp 800w, assets/img/theatre/vasistha-blue-light-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="An actor, arms flung wide, in a single blue light" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">Arms wide, in blue light</figcaption>
 </figure>
         </div>
         <div class="th-grid__row th-grid__row--duo">
 <figure class="th-fig th-g th-g--duo-0">
-  <a class="th-photo" href="assets/img/theatre/vasistha-foliage-1600.webp" data-th-open="vasistha:9"><img src="assets/img/theatre/vasistha-foliage-800.webp" srcset="assets/img/theatre/vasistha-foliage-800.webp 800w, assets/img/theatre/vasistha-foliage-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="1067" alt="An actor in dark body paint crouches forward in front of green-lit foliage" loading="lazy" decoding="async" style="--fx:55%;--fy:45%;--ar:1600/1067"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-foliage-1600.webp" data-th-open="vasistha:9"><img src="assets/img/theatre/vasistha-foliage-800.webp" srcset="assets/img/theatre/vasistha-foliage-800.webp 800w, assets/img/theatre/vasistha-foliage-1600.webp 1600w" sizes="(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw" width="1600" height="1067" alt="An actor in dark body paint crouches forward in front of green-lit foliage" loading="lazy" decoding="async" style="--fx:55%;--fy:45%;--ar:1600/1067"></a>
   <figcaption class="th-cap">In the foliage</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--duo-1">
-  <a class="th-photo" href="assets/img/theatre/vasistha-red-cloth-1600.webp" data-th-open="vasistha:10"><img src="assets/img/theatre/vasistha-red-cloth-800.webp" srcset="assets/img/theatre/vasistha-red-cloth-800.webp 800w, assets/img/theatre/vasistha-red-cloth-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="1067" alt="Two actors in the forest set, one wrapped in red cloth" loading="lazy" decoding="async" style="--fx:55%;--fy:45%;--ar:1600/1067"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-red-cloth-1600.webp" data-th-open="vasistha:10"><img src="assets/img/theatre/vasistha-red-cloth-800.webp" srcset="assets/img/theatre/vasistha-red-cloth-800.webp 800w, assets/img/theatre/vasistha-red-cloth-1600.webp 1600w" sizes="(min-width: 900px) 40vw, (min-width: 761px) 51vw, 100vw" width="1600" height="1067" alt="Two actors in the forest set, one wrapped in red cloth" loading="lazy" decoding="async" style="--fx:55%;--fy:45%;--ar:1600/1067"></a>
   <figcaption class="th-cap">Two actors in the forest</figcaption>
 </figure>
         </div>
@@ -604,11 +612,11 @@
         </div>
         <div class="th-grid__row th-grid__row--duo">
 <figure class="th-fig th-g th-g--duo-0">
-  <a class="th-photo" href="assets/img/theatre/vasistha-round-window-1600.webp" data-th-open="vasistha:12"><img src="assets/img/theatre/vasistha-round-window-800.webp" srcset="assets/img/theatre/vasistha-round-window-800.webp 800w, assets/img/theatre/vasistha-round-window-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="1067" alt="Three actors in casual clothes in a room set with a round window" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/1067"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-round-window-1600.webp" data-th-open="vasistha:12"><img src="assets/img/theatre/vasistha-round-window-800.webp" srcset="assets/img/theatre/vasistha-round-window-800.webp 800w, assets/img/theatre/vasistha-round-window-1600.webp 1600w" sizes="(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw" width="1600" height="1067" alt="Three actors in casual clothes in a room set with a round window" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/1067"></a>
   <figcaption class="th-cap">A room with a round window</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--duo-1">
-  <a class="th-photo" href="assets/img/theatre/vasistha-off-stage-1600.webp" data-th-open="vasistha:13"><img src="assets/img/theatre/vasistha-off-stage-800.webp" srcset="assets/img/theatre/vasistha-off-stage-800.webp 800w, assets/img/theatre/vasistha-off-stage-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="896" alt="Off stage: cast members in face paint grinning at the camera" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/896"></a>
+  <a class="th-photo" href="assets/img/theatre/vasistha-off-stage-1600.webp" data-th-open="vasistha:13"><img src="assets/img/theatre/vasistha-off-stage-800.webp" srcset="assets/img/theatre/vasistha-off-stage-800.webp 800w, assets/img/theatre/vasistha-off-stage-1600.webp 1600w" sizes="(min-width: 900px) 40vw, (min-width: 761px) 51vw, 100vw" width="1600" height="896" alt="Off stage: cast members in face paint grinning at the camera" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/896"></a>
   <figcaption class="th-cap">Off stage, still in paint</figcaption>
 </figure>
         </div>
@@ -650,15 +658,15 @@
       <div class="wrap th-grid">
         <div class="th-grid__row th-grid__row--feature">
 <figure class="th-fig th-g th-g--feature-0">
-  <a class="th-photo" href="assets/img/theatre/valmiki-hat-jacket-1600.webp" data-th-open="valmiki:2"><img src="assets/img/theatre/valmiki-hat-jacket-800.webp" srcset="assets/img/theatre/valmiki-hat-jacket-800.webp 800w, assets/img/theatre/valmiki-hat-jacket-1600.webp 1600w" sizes="(min-width: 900px) 64vw, 100vw" width="1600" height="900" alt="An actor in a wide-brimmed hat faces another in a leather jacket" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-hat-jacket-1600.webp" data-th-open="valmiki:2"><img src="assets/img/theatre/valmiki-hat-jacket-800.webp" srcset="assets/img/theatre/valmiki-hat-jacket-800.webp 800w, assets/img/theatre/valmiki-hat-jacket-1600.webp 1600w" sizes="(min-width: 900px) 64vw, (min-width: 761px) 90vw, 100vw" width="1600" height="900" alt="An actor in a wide-brimmed hat faces another in a leather jacket" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">Face to face</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--feature-1">
-  <a class="th-photo" href="assets/img/theatre/valmiki-grey-paint-1600.webp" data-th-open="valmiki:3"><img src="assets/img/theatre/valmiki-grey-paint-800.webp" srcset="assets/img/theatre/valmiki-grey-paint-800.webp 800w, assets/img/theatre/valmiki-grey-paint-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor painted grey leans on another in a hat" loading="lazy" decoding="async" style="--fx:55%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-grey-paint-1600.webp" data-th-open="valmiki:3"><img src="assets/img/theatre/valmiki-grey-paint-800.webp" srcset="assets/img/theatre/valmiki-grey-paint-800.webp 800w, assets/img/theatre/valmiki-grey-paint-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="An actor painted grey leans on another in a hat" loading="lazy" decoding="async" style="--fx:55%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">Grey paint and a battered hat</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--feature-2">
-  <a class="th-photo" href="assets/img/theatre/valmiki-staff-1600.webp" data-th-open="valmiki:4"><img src="assets/img/theatre/valmiki-staff-800.webp" srcset="assets/img/theatre/valmiki-staff-800.webp 800w, assets/img/theatre/valmiki-staff-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="Two actors in dark body paint, one holding a tall staff, with two actors in costume between them" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-staff-1600.webp" data-th-open="valmiki:4"><img src="assets/img/theatre/valmiki-staff-800.webp" srcset="assets/img/theatre/valmiki-staff-800.webp 800w, assets/img/theatre/valmiki-staff-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="Two actors in dark body paint, one holding a tall staff, with two actors in costume between them" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">The staff-bearers</figcaption>
 </figure>
         </div>
@@ -670,25 +678,25 @@
         </div>
         <div class="th-grid__row th-grid__row--trio">
 <figure class="th-fig th-g th-g--trio-0">
-  <a class="th-photo" href="assets/img/theatre/valmiki-grip-1600.webp" data-th-open="valmiki:6"><img src="assets/img/theatre/valmiki-grip-800.webp" srcset="assets/img/theatre/valmiki-grip-800.webp 800w, assets/img/theatre/valmiki-grip-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="In blue light, a cloaked figure grips another actor from behind while a third, in a green waistcoat, watches" loading="lazy" decoding="async" style="--fx:45%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-grip-1600.webp" data-th-open="valmiki:6"><img src="assets/img/theatre/valmiki-grip-800.webp" srcset="assets/img/theatre/valmiki-grip-800.webp 800w, assets/img/theatre/valmiki-grip-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="In blue light, a cloaked figure grips another actor from behind while a third, in a green waistcoat, watches" loading="lazy" decoding="async" style="--fx:45%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">In blue light</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--trio-1">
-  <a class="th-photo" href="assets/img/theatre/valmiki-reach-1600.webp" data-th-open="valmiki:7"><img src="assets/img/theatre/valmiki-reach-800.webp" srcset="assets/img/theatre/valmiki-reach-800.webp 800w, assets/img/theatre/valmiki-reach-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor holding a tall staff reaches out an arm, the forest set dark behind" loading="lazy" decoding="async" style="--fx:65%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-reach-1600.webp" data-th-open="valmiki:7"><img src="assets/img/theatre/valmiki-reach-800.webp" srcset="assets/img/theatre/valmiki-reach-800.webp 800w, assets/img/theatre/valmiki-reach-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="An actor holding a tall staff reaches out an arm, the forest set dark behind" loading="lazy" decoding="async" style="--fx:65%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">A staff, and an outstretched arm</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--trio-2">
-  <a class="th-photo" href="assets/img/theatre/valmiki-star-1600.webp" data-th-open="valmiki:8"><img src="assets/img/theatre/valmiki-star-800.webp" srcset="assets/img/theatre/valmiki-star-800.webp 800w, assets/img/theatre/valmiki-star-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="Three actors around a glowing star-shaped prop" loading="lazy" decoding="async" style="--fx:40%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-star-1600.webp" data-th-open="valmiki:8"><img src="assets/img/theatre/valmiki-star-800.webp" srcset="assets/img/theatre/valmiki-star-800.webp 800w, assets/img/theatre/valmiki-star-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="Three actors around a glowing star-shaped prop" loading="lazy" decoding="async" style="--fx:40%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">The star</figcaption>
 </figure>
         </div>
         <div class="th-grid__row th-grid__row--duo">
 <figure class="th-fig th-g th-g--duo-0">
-  <a class="th-photo" href="assets/img/theatre/valmiki-rope-1600.webp" data-th-open="valmiki:9"><img src="assets/img/theatre/valmiki-rope-800.webp" srcset="assets/img/theatre/valmiki-rope-800.webp 800w, assets/img/theatre/valmiki-rope-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="An actor swings a coil of rope in blue light, the audience seated close around the stage floor" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-rope-1600.webp" data-th-open="valmiki:9"><img src="assets/img/theatre/valmiki-rope-800.webp" srcset="assets/img/theatre/valmiki-rope-800.webp 800w, assets/img/theatre/valmiki-rope-1600.webp 1600w" sizes="(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw" width="1600" height="900" alt="An actor swings a coil of rope in blue light, the audience seated close around the stage floor" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">Among the audience</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--duo-1">
-  <a class="th-photo" href="assets/img/theatre/valmiki-struggle-1600.webp" data-th-open="valmiki:10"><img src="assets/img/theatre/valmiki-struggle-800.webp" srcset="assets/img/theatre/valmiki-struggle-800.webp 800w, assets/img/theatre/valmiki-struggle-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="900" alt="Two actors locked together in a struggle in blue light" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-struggle-1600.webp" data-th-open="valmiki:10"><img src="assets/img/theatre/valmiki-struggle-800.webp" srcset="assets/img/theatre/valmiki-struggle-800.webp 800w, assets/img/theatre/valmiki-struggle-1600.webp 1600w" sizes="(min-width: 900px) 40vw, (min-width: 761px) 51vw, 100vw" width="1600" height="900" alt="Two actors locked together in a struggle in blue light" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/900"></a>
   <figcaption class="th-cap">A struggle in the dark</figcaption>
 </figure>
         </div>
@@ -700,11 +708,11 @@
         </div>
         <div class="th-grid__row th-grid__row--duo">
 <figure class="th-fig th-g th-g--duo-0">
-  <a class="th-photo" href="assets/img/theatre/valmiki-sound-desk-1600.webp" data-th-open="valmiki:12"><img src="assets/img/theatre/valmiki-sound-desk-800.webp" srcset="assets/img/theatre/valmiki-sound-desk-800.webp 800w, assets/img/theatre/valmiki-sound-desk-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="A mixing desk, a laptop and a monitor speaker in the sound booth" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-sound-desk-1600.webp" data-th-open="valmiki:12"><img src="assets/img/theatre/valmiki-sound-desk-800.webp" srcset="assets/img/theatre/valmiki-sound-desk-800.webp 800w, assets/img/theatre/valmiki-sound-desk-1600.webp 1600w" sizes="(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw" width="1600" height="900" alt="A mixing desk, a laptop and a monitor speaker in the sound booth" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">The sound booth</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--duo-1">
-  <a class="th-photo" href="assets/img/theatre/valmiki-company-1600.webp" data-th-open="valmiki:13"><img src="assets/img/theatre/valmiki-company-800.webp" srcset="assets/img/theatre/valmiki-company-800.webp 800w, assets/img/theatre/valmiki-company-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="896" alt="The company gathered together on the hall floor in front of the stage" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/896"></a>
+  <a class="th-photo" href="assets/img/theatre/valmiki-company-1600.webp" data-th-open="valmiki:13"><img src="assets/img/theatre/valmiki-company-800.webp" srcset="assets/img/theatre/valmiki-company-800.webp 800w, assets/img/theatre/valmiki-company-1600.webp 1600w" sizes="(min-width: 900px) 40vw, (min-width: 761px) 51vw, 100vw" width="1600" height="896" alt="The company gathered together on the hall floor in front of the stage" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/896"></a>
   <figcaption class="th-cap">The company</figcaption>
 </figure>
         </div>
@@ -745,15 +753,15 @@
       <div class="wrap th-grid">
         <div class="th-grid__row th-grid__row--feature">
 <figure class="th-fig th-g th-g--feature-0">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-make-up-1600.webp" data-th-open="vishwamitra:2"><img src="assets/img/theatre/vishwamitra-make-up-800.webp" srcset="assets/img/theatre/vishwamitra-make-up-800.webp 800w, assets/img/theatre/vishwamitra-make-up-1600.webp 1600w" sizes="(min-width: 900px) 64vw, 100vw" width="1600" height="900" alt="Backstage: several students painting one actor&#x27;s face and chest" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-make-up-1600.webp" data-th-open="vishwamitra:2"><img src="assets/img/theatre/vishwamitra-make-up-800.webp" srcset="assets/img/theatre/vishwamitra-make-up-800.webp 800w, assets/img/theatre/vishwamitra-make-up-1600.webp 1600w" sizes="(min-width: 900px) 64vw, (min-width: 761px) 90vw, 100vw" width="1600" height="900" alt="Backstage: several students painting one actor&#x27;s face and chest" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">Backstage, in make-up</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--feature-1">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-face-paint-1600.webp" data-th-open="vishwamitra:3"><img src="assets/img/theatre/vishwamitra-face-paint-800.webp" srcset="assets/img/theatre/vishwamitra-face-paint-800.webp 800w, assets/img/theatre/vishwamitra-face-paint-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A smiling actor in white and gold face paint" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-face-paint-1600.webp" data-th-open="vishwamitra:3"><img src="assets/img/theatre/vishwamitra-face-paint-800.webp" srcset="assets/img/theatre/vishwamitra-face-paint-800.webp 800w, assets/img/theatre/vishwamitra-face-paint-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="A smiling actor in white and gold face paint" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/900"></a>
   <figcaption class="th-cap">Face paint, close up</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--feature-2">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-backdrop-1600.webp" data-th-open="vishwamitra:4"><img src="assets/img/theatre/vishwamitra-backdrop-800.webp" srcset="assets/img/theatre/vishwamitra-backdrop-800.webp 800w, assets/img/theatre/vishwamitra-backdrop-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="1067" alt="Students kneeling on a large cloth outdoors, painting it in sweeps of turquoise" loading="lazy" decoding="async" style="--fx:45%;--fy:55%;--ar:1600/1067"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-backdrop-1600.webp" data-th-open="vishwamitra:4"><img src="assets/img/theatre/vishwamitra-backdrop-800.webp" srcset="assets/img/theatre/vishwamitra-backdrop-800.webp 800w, assets/img/theatre/vishwamitra-backdrop-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="1067" alt="Students kneeling on a large cloth outdoors, painting it in sweeps of turquoise" loading="lazy" decoding="async" style="--fx:45%;--fy:55%;--ar:1600/1067"></a>
   <figcaption class="th-cap">Painting a backdrop</figcaption>
 </figure>
         </div>
@@ -765,25 +773,25 @@
         </div>
         <div class="th-grid__row th-grid__row--duo has-portrait">
 <figure class="th-fig th-g th-g--duo-0">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-seated-1600.webp" data-th-open="vishwamitra:6"><img src="assets/img/theatre/vishwamitra-seated-800.webp" srcset="assets/img/theatre/vishwamitra-seated-800.webp 800w, assets/img/theatre/vishwamitra-seated-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="An actor seated on a draped block, arms spread wide in the dark" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-seated-1600.webp" data-th-open="vishwamitra:6"><img src="assets/img/theatre/vishwamitra-seated-800.webp" srcset="assets/img/theatre/vishwamitra-seated-800.webp 800w, assets/img/theatre/vishwamitra-seated-1600.webp 1600w" sizes="(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw" width="1600" height="900" alt="An actor seated on a draped block, arms spread wide in the dark" loading="lazy" decoding="async" style="--fx:50%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">Arms spread, in the dark</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--duo-1 is-portrait">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-portrait-1280.webp" data-th-open="vishwamitra:7"><img src="assets/img/theatre/vishwamitra-portrait-640.webp" srcset="assets/img/theatre/vishwamitra-portrait-640.webp 640w, assets/img/theatre/vishwamitra-portrait-1280.webp 1280w" sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="2275" alt="A cast member with white face paint and dark eyeliner, looking to one side" loading="lazy" decoding="async" style="--fx:50%;--fy:35%;--ar:1280/2275"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-portrait-1280.webp" data-th-open="vishwamitra:7"><img src="assets/img/theatre/vishwamitra-portrait-640.webp" srcset="assets/img/theatre/vishwamitra-portrait-640.webp 640w, assets/img/theatre/vishwamitra-portrait-1280.webp 1280w" sizes="(min-width: 761px) 30vw, 100vw" width="1280" height="2275" alt="A cast member with white face paint and dark eyeliner, looking to one side" loading="lazy" decoding="async" style="--fx:50%;--fy:35%;--ar:1280/2275"></a>
   <figcaption class="th-cap">Before going on</figcaption>
 </figure>
         </div>
         <div class="th-grid__row th-grid__row--trio">
 <figure class="th-fig th-g th-g--trio-0">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-bed-1600.webp" data-th-open="vishwamitra:8"><img src="assets/img/theatre/vishwamitra-bed-800.webp" srcset="assets/img/theatre/vishwamitra-bed-800.webp 800w, assets/img/theatre/vishwamitra-bed-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="Two actors sitting on the edge of a bed in a room set" loading="lazy" decoding="async" style="--fx:60%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-bed-1600.webp" data-th-open="vishwamitra:8"><img src="assets/img/theatre/vishwamitra-bed-800.webp" srcset="assets/img/theatre/vishwamitra-bed-800.webp 800w, assets/img/theatre/vishwamitra-bed-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="Two actors sitting on the edge of a bed in a room set" loading="lazy" decoding="async" style="--fx:60%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">A quieter scene</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--trio-1">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-armour-1600.webp" data-th-open="vishwamitra:9"><img src="assets/img/theatre/vishwamitra-armour-800.webp" srcset="assets/img/theatre/vishwamitra-armour-800.webp 800w, assets/img/theatre/vishwamitra-armour-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A figure in black armour in a doorway lit blue and white, another actor watching" loading="lazy" decoding="async" style="--fx:60%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-armour-1600.webp" data-th-open="vishwamitra:9"><img src="assets/img/theatre/vishwamitra-armour-800.webp" srcset="assets/img/theatre/vishwamitra-armour-800.webp 800w, assets/img/theatre/vishwamitra-armour-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="A figure in black armour in a doorway lit blue and white, another actor watching" loading="lazy" decoding="async" style="--fx:60%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">The armoured figure</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--trio-2">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-aisle-1600.webp" data-th-open="vishwamitra:10"><img src="assets/img/theatre/vishwamitra-aisle-800.webp" srcset="assets/img/theatre/vishwamitra-aisle-800.webp 800w, assets/img/theatre/vishwamitra-aisle-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="An actor with a sword walks the aisle between rows of seated students" loading="lazy" decoding="async" style="--fx:45%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-aisle-1600.webp" data-th-open="vishwamitra:10"><img src="assets/img/theatre/vishwamitra-aisle-800.webp" srcset="assets/img/theatre/vishwamitra-aisle-800.webp 800w, assets/img/theatre/vishwamitra-aisle-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="An actor with a sword walks the aisle between rows of seated students" loading="lazy" decoding="async" style="--fx:45%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">Down the aisle</figcaption>
 </figure>
         </div>
@@ -795,11 +803,11 @@
         </div>
         <div class="th-grid__row th-grid__row--duo">
 <figure class="th-fig th-g th-g--duo-0">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-close-1600.webp" data-th-open="vishwamitra:12"><img src="assets/img/theatre/vishwamitra-close-800.webp" srcset="assets/img/theatre/vishwamitra-close-800.webp 800w, assets/img/theatre/vishwamitra-close-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="An actor in a white shirt, arms held wide, close to the camera" loading="lazy" decoding="async" style="--fx:55%;--fy:40%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-close-1600.webp" data-th-open="vishwamitra:12"><img src="assets/img/theatre/vishwamitra-close-800.webp" srcset="assets/img/theatre/vishwamitra-close-800.webp 800w, assets/img/theatre/vishwamitra-close-1600.webp 1600w" sizes="(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw" width="1600" height="900" alt="An actor in a white shirt, arms held wide, close to the camera" loading="lazy" decoding="async" style="--fx:55%;--fy:40%;--ar:1600/900"></a>
   <figcaption class="th-cap">Close enough to touch</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--duo-1">
-  <a class="th-photo" href="assets/img/theatre/vishwamitra-steps-1600.webp" data-th-open="vishwamitra:13"><img src="assets/img/theatre/vishwamitra-steps-800.webp" srcset="assets/img/theatre/vishwamitra-steps-800.webp 800w, assets/img/theatre/vishwamitra-steps-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="900" alt="A figure in dark costume crouches on draped steps" loading="lazy" decoding="async" style="--fx:55%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vishwamitra-steps-1600.webp" data-th-open="vishwamitra:13"><img src="assets/img/theatre/vishwamitra-steps-800.webp" srcset="assets/img/theatre/vishwamitra-steps-800.webp 800w, assets/img/theatre/vishwamitra-steps-1600.webp 1600w" sizes="(min-width: 900px) 40vw, (min-width: 761px) 51vw, 100vw" width="1600" height="900" alt="A figure in dark costume crouches on draped steps" loading="lazy" decoding="async" style="--fx:55%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">On the steps</figcaption>
 </figure>
         </div>
@@ -847,15 +855,15 @@
       <div class="wrap th-grid">
         <div class="th-grid__row th-grid__row--feature">
 <figure class="th-fig th-g th-g--feature-0">
-  <a class="th-photo" href="assets/img/theatre/vyasa-court-1600.webp" data-th-open="vyasa:2"><img src="assets/img/theatre/vyasa-court-800.webp" srcset="assets/img/theatre/vyasa-court-800.webp 800w, assets/img/theatre/vyasa-court-1600.webp 1600w" sizes="(min-width: 900px) 64vw, 100vw" width="1600" height="900" alt="A figure in a green jacket and a crowned figure with a staff before the heart set" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-court-1600.webp" data-th-open="vyasa:2"><img src="assets/img/theatre/vyasa-court-800.webp" srcset="assets/img/theatre/vyasa-court-800.webp 800w, assets/img/theatre/vyasa-court-1600.webp 1600w" sizes="(min-width: 900px) 64vw, (min-width: 761px) 90vw, 100vw" width="1600" height="900" alt="A figure in a green jacket and a crowned figure with a staff before the heart set" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">At the heart set</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--feature-1">
-  <a class="th-photo" href="assets/img/theatre/vyasa-green-mask-1600.webp" data-th-open="vyasa:3"><img src="assets/img/theatre/vyasa-green-mask-800.webp" srcset="assets/img/theatre/vyasa-green-mask-800.webp 800w, assets/img/theatre/vyasa-green-mask-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A cast member in green spotted face paint and yellow spectacles" loading="lazy" decoding="async" style="--fx:40%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-green-mask-1600.webp" data-th-open="vyasa:3"><img src="assets/img/theatre/vyasa-green-mask-800.webp" srcset="assets/img/theatre/vyasa-green-mask-800.webp 800w, assets/img/theatre/vyasa-green-mask-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="A cast member in green spotted face paint and yellow spectacles" loading="lazy" decoding="async" style="--fx:40%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">Green paint, yellow spectacles</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--feature-2">
-  <a class="th-photo" href="assets/img/theatre/vyasa-gold-gown-1600.webp" data-th-open="vyasa:4"><img src="assets/img/theatre/vyasa-gold-gown-800.webp" srcset="assets/img/theatre/vyasa-gold-gown-800.webp 800w, assets/img/theatre/vyasa-gold-gown-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A figure in a gold gown walks through the seated audience in blue light" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-gold-gown-1600.webp" data-th-open="vyasa:4"><img src="assets/img/theatre/vyasa-gold-gown-800.webp" srcset="assets/img/theatre/vyasa-gold-gown-800.webp 800w, assets/img/theatre/vyasa-gold-gown-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="A figure in a gold gown walks through the seated audience in blue light" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/900"></a>
   <figcaption class="th-cap">Through the audience</figcaption>
 </figure>
         </div>
@@ -867,25 +875,25 @@
         </div>
         <div class="th-grid__row th-grid__row--trio">
 <figure class="th-fig th-g th-g--trio-0">
-  <a class="th-photo" href="assets/img/theatre/vyasa-lunge-1600.webp" data-th-open="vyasa:6"><img src="assets/img/theatre/vyasa-lunge-800.webp" srcset="assets/img/theatre/vyasa-lunge-800.webp 800w, assets/img/theatre/vyasa-lunge-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="900" alt="A figure in patterned body paint lunges low before the crowned figure holding an orb" loading="lazy" decoding="async" style="--fx:40%;--fy:55%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-lunge-1600.webp" data-th-open="vyasa:6"><img src="assets/img/theatre/vyasa-lunge-800.webp" srcset="assets/img/theatre/vyasa-lunge-800.webp 800w, assets/img/theatre/vyasa-lunge-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="900" alt="A figure in patterned body paint lunges low before the crowned figure holding an orb" loading="lazy" decoding="async" style="--fx:40%;--fy:55%;--ar:1600/900"></a>
   <figcaption class="th-cap">The lunge</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--trio-1">
-  <a class="th-photo" href="assets/img/theatre/vyasa-crouch-1600.webp" data-th-open="vyasa:7"><img src="assets/img/theatre/vyasa-crouch-800.webp" srcset="assets/img/theatre/vyasa-crouch-800.webp 800w, assets/img/theatre/vyasa-crouch-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="1067" alt="A figure in patterned body paint crouches low against red drapes" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/1067"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-crouch-1600.webp" data-th-open="vyasa:7"><img src="assets/img/theatre/vyasa-crouch-800.webp" srcset="assets/img/theatre/vyasa-crouch-800.webp 800w, assets/img/theatre/vyasa-crouch-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="1067" alt="A figure in patterned body paint crouches low against red drapes" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/1067"></a>
   <figcaption class="th-cap">Against the red drapes</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--trio-2">
-  <a class="th-photo" href="assets/img/theatre/vyasa-staff-1600.webp" data-th-open="vyasa:8"><img src="assets/img/theatre/vyasa-staff-800.webp" srcset="assets/img/theatre/vyasa-staff-800.webp 800w, assets/img/theatre/vyasa-staff-1600.webp 1600w" sizes="(min-width: 900px) 32vw, 100vw" width="1600" height="1067" alt="A figure in dark face paint raises both arms, holding a gilded staff" loading="lazy" decoding="async" style="--fx:55%;--fy:40%;--ar:1600/1067"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-staff-1600.webp" data-th-open="vyasa:8"><img src="assets/img/theatre/vyasa-staff-800.webp" srcset="assets/img/theatre/vyasa-staff-800.webp 800w, assets/img/theatre/vyasa-staff-1600.webp 1600w" sizes="(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw" width="1600" height="1067" alt="A figure in dark face paint raises both arms, holding a gilded staff" loading="lazy" decoding="async" style="--fx:55%;--fy:40%;--ar:1600/1067"></a>
   <figcaption class="th-cap">Both arms raised</figcaption>
 </figure>
         </div>
         <div class="th-grid__row th-grid__row--duo">
 <figure class="th-fig th-g th-g--duo-0">
-  <a class="th-photo" href="assets/img/theatre/vyasa-kick-1600.webp" data-th-open="vyasa:9"><img src="assets/img/theatre/vyasa-kick-800.webp" srcset="assets/img/theatre/vyasa-kick-800.webp 800w, assets/img/theatre/vyasa-kick-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="900" alt="A dancer in white kicks forward in front of the ensemble" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-kick-1600.webp" data-th-open="vyasa:9"><img src="assets/img/theatre/vyasa-kick-800.webp" srcset="assets/img/theatre/vyasa-kick-800.webp 800w, assets/img/theatre/vyasa-kick-1600.webp 1600w" sizes="(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw" width="1600" height="900" alt="A dancer in white kicks forward in front of the ensemble" loading="lazy" decoding="async" style="--fx:50%;--fy:50%;--ar:1600/900"></a>
   <figcaption class="th-cap">The ensemble dances</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--duo-1">
-  <a class="th-photo" href="assets/img/theatre/vyasa-sashes-1600.webp" data-th-open="vyasa:10"><img src="assets/img/theatre/vyasa-sashes-800.webp" srcset="assets/img/theatre/vyasa-sashes-800.webp 800w, assets/img/theatre/vyasa-sashes-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="1067" alt="Dancers in black with red sashes, hands raised" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/1067"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-sashes-1600.webp" data-th-open="vyasa:10"><img src="assets/img/theatre/vyasa-sashes-800.webp" srcset="assets/img/theatre/vyasa-sashes-800.webp 800w, assets/img/theatre/vyasa-sashes-1600.webp 1600w" sizes="(min-width: 900px) 40vw, (min-width: 761px) 51vw, 100vw" width="1600" height="1067" alt="Dancers in black with red sashes, hands raised" loading="lazy" decoding="async" style="--fx:45%;--fy:45%;--ar:1600/1067"></a>
   <figcaption class="th-cap">Black and red</figcaption>
 </figure>
         </div>
@@ -897,11 +905,11 @@
         </div>
         <div class="th-grid__row th-grid__row--duo">
 <figure class="th-fig th-g th-g--duo-0">
-  <a class="th-photo" href="assets/img/theatre/vyasa-top-hat-1600.webp" data-th-open="vyasa:12"><img src="assets/img/theatre/vyasa-top-hat-800.webp" srcset="assets/img/theatre/vyasa-top-hat-800.webp 800w, assets/img/theatre/vyasa-top-hat-1600.webp 1600w" sizes="(min-width: 900px) 58vw, 100vw" width="1600" height="1067" alt="A figure in a tall hat and polka-dot sleeves beside a figure in an orange fur coat" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/1067"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-top-hat-1600.webp" data-th-open="vyasa:12"><img src="assets/img/theatre/vyasa-top-hat-800.webp" srcset="assets/img/theatre/vyasa-top-hat-800.webp 800w, assets/img/theatre/vyasa-top-hat-1600.webp 1600w" sizes="(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw" width="1600" height="1067" alt="A figure in a tall hat and polka-dot sleeves beside a figure in an orange fur coat" loading="lazy" decoding="async" style="--fx:50%;--fy:40%;--ar:1600/1067"></a>
   <figcaption class="th-cap">A tall hat and an orange coat</figcaption>
 </figure>
 <figure class="th-fig th-g th-g--duo-1">
-  <a class="th-photo" href="assets/img/theatre/vyasa-kneel-1600.webp" data-th-open="vyasa:13"><img src="assets/img/theatre/vyasa-kneel-800.webp" srcset="assets/img/theatre/vyasa-kneel-800.webp 800w, assets/img/theatre/vyasa-kneel-1600.webp 1600w" sizes="(min-width: 900px) 40vw, 100vw" width="1600" height="1067" alt="Three actors kneel close together in pink light" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/1067"></a>
+  <a class="th-photo" href="assets/img/theatre/vyasa-kneel-1600.webp" data-th-open="vyasa:13"><img src="assets/img/theatre/vyasa-kneel-800.webp" srcset="assets/img/theatre/vyasa-kneel-800.webp 800w, assets/img/theatre/vyasa-kneel-1600.webp 1600w" sizes="(min-width: 900px) 40vw, (min-width: 761px) 51vw, 100vw" width="1600" height="1067" alt="Three actors kneel close together in pink light" loading="lazy" decoding="async" style="--fx:50%;--fy:55%;--ar:1600/1067"></a>
   <figcaption class="th-cap">Three together</figcaption>
 </figure>
         </div>

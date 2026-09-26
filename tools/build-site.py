@@ -50,6 +50,11 @@ import history
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=106"
 
+# Where a film's large-screen encode is offered. Everything that fails it —
+# a phone held either way up — takes the phone encode (tools/make-films.py),
+# so turning a phone never asks for a different file. A tablet passes it.
+FILM_LARGE = "(min-width: 768px) and (min-height: 501px)"
+
 # Questions to settle before an application is submitted.
 HERO_DATES = '''    <dl class="pagehero__dates">
       <div>
@@ -353,7 +358,7 @@ PAGES = {
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
         "sheet": "sports",
-        "cache_suffix": "-sports-2",
+        "cache_suffix": "-sports-3",
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
@@ -891,8 +896,16 @@ def film_html(slug, page):
            stuttering wherever it exists. The VP9 is for the browsers built
            without the proprietary decoder, which would otherwise have no
            opening at all. Both are the same length at 24fps, so the mapping
-           in filmintro.js holds whichever one is picked. -->
-      <source src="assets/video/{film["video"]}.mp4" type="video/mp4">
+           in filmintro.js holds whichever one is picked.
+
+           Phones, in either orientation, take the 540p cut from
+           tools/make-films.py: the same frames, every one still a keyframe,
+           at a third of the weight. The large-screen file is listed first,
+           behind the query phones fail, so a browser that ignores media on
+           a video's sources keeps the file it always had. -->
+      <source src="assets/video/{film["video"]}.mp4" type="video/mp4"
+              media="{FILM_LARGE}">
+      <source src="assets/video/{film["video"]}-m.mp4" type="video/mp4">
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
 {cue}    <h1 class="film__title" data-film-title>{title}</h1>
@@ -1237,7 +1250,20 @@ def founder_fig(slot, cls="", sizes=""):
         return (f'<figure class="{klass} ffig--gap" role="img" aria-label="{label}">'
                 f'<span class="ffig__mark">Archive image pending</span>'
                 f'<span class="ffig__what">{label}</span></figure>')
-    extra = f' sizes="{sizes}"' if sizes else ""
+    # Its own size, so the page keeps the space before the file arrives
+    # (founder.css draws every .ffig img at height:auto, which the attribute
+    # cannot override), and an 800px cut from tools/make-media.py for the
+    # screens that draw it at a third of its width.
+    extra = ""
+    dims = founder.size(slot)
+    if dims:
+        w, h, small = dims
+        extra = f' width="{w}" height="{h}"'
+        if small:
+            extra += (f' srcset="{small[0]}?{CACHE_BUST} {small[1]}w, {src}?{CACHE_BUST} {w}w"'
+                      f' sizes="{sizes or founder.SIZES.get(slot, "(max-width: 899px) 92vw, 44vw")}"')
+    elif sizes:
+        extra = f' sizes="{sizes}"'
     figcaption = f'<figcaption>{caption[0]}</figcaption>' if caption else ""
     return (f'<figure class="{klass}"><img src="{src}?{CACHE_BUST}" alt="{alt}" '
             f'loading="lazy" decoding="async"{extra}>{figcaption}</figure>')
@@ -1272,7 +1298,7 @@ def crossroads_stories_covers():
             klass = f"crossroads-stories__rear crossroads-stories__rear--{slot}"
         cards.append(f'<a class="{klass}" href="{issue["pdf"]}" '
                      f'aria-label="Read Crossroads {issue["label"]}">'
-                     f'<img src="{issue["cover"]}" alt="Crossroads {issue["label"]} cover" '
+                     f'<img src="{issue["cover"]}?{CACHE_BUST}" alt="Crossroads {issue["label"]} cover" '
                      'width="300" height="420" loading="lazy" decoding="async"></a>')
     return '<div class="crossroads-stories__media"><div class="crossroads-stories__stack">' + ''.join(cards) + '</div></div>'
 
@@ -1284,7 +1310,7 @@ def crossroads_latest(feature=False):
     if feature and issue["cover"]:
         return (f'<a class="crossroads-archive-hero__feature" href="{issue["pdf"]}" '
                 f'aria-label="Read the latest issue: {issue["label"]} (PDF)">'
-                f'<img src="{issue["cover"]}" alt="" width="300" height="420" loading="lazy" decoding="async">'
+                f'<img src="{issue["cover"]}?{CACHE_BUST}" alt="" width="300" height="420" loading="lazy" decoding="async">'
                 f'<span>Latest issue · {issue["label"]}</span></a>')
     if feature:
         return ""
@@ -1704,10 +1730,13 @@ def houses_hero_html():
     accessibility tree with its alt text and the browser can size it. These
     four are the only images on the page that are not lazy — they are the
     fold — and for the same reason they are the only ones with a second
-    rendition. A zone is a quarter of the window on a desktop and the whole
-    of it on a phone, and "sizes" is the arithmetic of exactly that, so a
-    phone fetches 500px and a desktop 900px instead of every visitor taking
-    the larger of the two.
+    rendition. A zone is the whole width of a phone and half of a tablet,
+    where it is a 4:5 box like the photograph, so its width is what it needs.
+    On a desktop it is a quarter of the width but taller than the window, and
+    the 4:5 photograph is cover-fitted to that height: it needs 0.85 of the
+    window's height in width (763px of a 1440x900 window's 382px strip). Its
+    "sizes" said 25vw, which sent every desktop the 500px cut to stretch;
+    measured, it is 85vh.
     """
     zones = []
     for i, h in enumerate(houses.HOUSES):
@@ -1717,7 +1746,7 @@ def houses_hero_html():
           <span class="hsxz__ph">
             <img src="{houses.img(h["hero"])}" width="900" height="1125"
                  srcset="{small}?{CACHE_BUST} 500w, {houses.img(h["hero"])}?{CACHE_BUST} 900w"
-                 sizes="(max-width: 620px) 100vw, (max-width: 900px) 50vw, 25vw"
+                 sizes="(max-width: 620px) 100vw, (max-width: 900px) 50vw, 85vh"
                  alt="{esc(h["hero_alt"], attr=True)}"
                  {"" if i else 'fetchpriority="high" '}decoding="async">
           </span>
@@ -2274,7 +2303,7 @@ def build(slug, page):
     if not wall:
         parts.append(f'<script src="assets/js/footer.js?{CACHE_BUST}-footer-1" defer></script>')
     if slug == "crossroads":
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-5" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-6" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}-hover-4" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
