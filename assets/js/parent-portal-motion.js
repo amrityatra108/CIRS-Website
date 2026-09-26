@@ -19,7 +19,6 @@
     var picture = intro.querySelector(".portal-intro__picture");
     var image = intro.querySelector(".portal-intro__image");
     var line = intro.querySelector(".portal-intro__line");
-    var words = intro.querySelectorAll(".portal-intro__title-word > span");
     var note = intro.querySelector(".portal-intro__note");
     var entry = intro.querySelector(".portal-intro__entry");
     var border = intro.querySelector(".portal-intro__entry-border rect");
@@ -74,7 +73,6 @@
       root.classList.remove("portal-motion-pending");
       gsap.set(photo, { clearProps: "clipPath" });
       gsap.set(image, { clearProps: "transform" });
-      gsap.set(words, { clearProps: "transform" });
       gsap.set([note, entry], { clearProps: "transform,opacity,visibility" });
       gsap.set(border, { clearProps: "strokeDashoffset" });
       gsap.set(line, { clearProps: "transform,opacity" });
@@ -109,10 +107,8 @@
         { scale: mobile ? 1.04 : 1.08, y: mobile ? 5 : 10 },
         { scale: 1, y: 0, duration: mobile ? 0.92 : 2.25, ease: "power2.out" }, 0);
       timeline.to(line, { opacity: 0, duration: mobile ? 0.2 : 0.42, ease: "power1.out" }, mobile ? 0.08 : 0.18);
-      timeline.to(words[0],
-        { y: 0, duration: mobile ? 0.42 : 0.85, ease: "power3.out" }, mobile ? 0.60 : 1.90);
-      timeline.to(words[1],
-        { y: 0, duration: mobile ? 0.42 : 0.85, ease: "power3.out" }, mobile ? 0.72 : 2.05);
+      // The title is already up (parent-portal-intro.css): a visitor should
+      // know which page this is before the photograph has even arrived.
       timeline.fromTo([note, entry], { y: 16, autoAlpha: 0 },
         { y: 0, autoAlpha: 1, duration: mobile ? 0.38 : 0.70, ease: "power2.out" }, mobile ? 1.08 : 2.95);
       timeline.fromTo(border, { strokeDashoffset: 1 },

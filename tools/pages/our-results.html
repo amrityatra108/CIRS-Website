@@ -174,7 +174,11 @@
     <ul class="rb-directory__list" id="destinationList">
 {{RESULTS_DIRECTORY}}
     </ul>
-    <p class="rb-directory__empty" id="destinationEmpty" hidden>No institution in the directory matches that search. <button type="button" data-directory-clear>Show all {{RESULTS_COUNT}}</button></p>
+    <div class="rb-directory__empty" id="destinationEmpty" hidden>
+      <p class="rb-directory__empty-title">No institutions match your search.</p>
+      <p>Check the spelling, or try an abbreviation or a country.</p>
+      <button type="button" data-directory-clear>Clear search and show all {{RESULTS_COUNT}}</button>
+    </div>
 
     <nav class="rb-further" aria-label="Continue from Results">
       <a href="assets/documents/school-info/cbse-results-past-three-years.pdf" download>Download CBSE results <span>PDF, 2024&ndash;2026</span></a>

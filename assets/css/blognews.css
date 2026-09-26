@@ -274,3 +274,14 @@ body.blognews :is(.ij-discovery,.ij-topics,.ij-story,.ij-empty)[hidden]{display:
 @media(prefers-reduced-motion:reduce){
   .ij-nav a,.ij-topics button{transition:none}
 }
+
+/* Touch: the section links and a story's issue links are small type. The
+   hit box grows around them without moving a line of the layout — padding
+   on the inline links, a transparent extension on the block ones, and a
+   little more room between stacked links so two boxes never overlap. */
+@media (pointer:coarse){
+  .ij-nav a{padding-block:14px}
+  .ij-lead__bottom a,.ij-story__details a{position:relative}
+  .ij-lead__bottom a::after,.ij-story__details a::after{content:"";position:absolute;inset:-10px -6px}
+  .ij-story__details{row-gap:20px}
+}

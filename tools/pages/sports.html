@@ -567,10 +567,9 @@
     </p>
   </div>
 
-  <div class="house-bands" id="houseBands" role="tablist" aria-label="CIRS House Teams">
+  <div class="house-bands" id="houseBands">
     <!-- Vasishtha (Red) -->
-    <article class="house-band house-band--vasistha is-active" id="house-vasistha"
-             role="tabpanel" tabindex="0" aria-labelledby="tab-vasistha">
+    <article class="house-band house-band--vasistha is-active" id="house-vasistha">
       <div class="house-band__media">
         <img src="assets/img/sports/house-parade.jpg"
              alt="CIRS house parade marching in formation"
@@ -580,25 +579,21 @@
       <div class="house-band__content">
         <div class="house-band__header">
           <span class="house-band__color-tag">RED</span>
-          <h3 class="serif house-band__name" id="tab-vasistha">Vasishtha</h3>
+          <h3 class="serif house-band__name"><button type="button" class="house-band__trigger" id="house-vasistha-name" aria-expanded="true" aria-controls="house-vasistha-details">Vasishtha</button></h3>
         </div>
-        <div class="house-band__details">
+        <section class="house-band__details" id="house-vasistha-details" aria-labelledby="house-vasistha-name">
           <p class="house-band__identity">Discipline, leadership, and unwavering determination on the track and field.</p>
           <ul class="house-band__facts">
             <li><strong>Annual Fixture:</strong> Khel Mela March-Past &amp; Athletics</li>
             <li><strong>House Spirit:</strong> Collective grit across all grades</li>
           </ul>
           <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
-        </div>
+        </section>
       </div>
-      <button type="button" class="house-band__trigger" aria-controls="house-vasistha" aria-expanded="true">
-        <span class="sr-only">Expand Vasishtha House</span>
-      </button>
     </article>
 
     <!-- Valmiki (Yellow) -->
-    <article class="house-band house-band--valmiki" id="house-valmiki"
-             role="tabpanel" tabindex="0" aria-labelledby="tab-valmiki">
+    <article class="house-band house-band--valmiki" id="house-valmiki">
       <div class="house-band__media">
         <img src="assets/img/sports/house-flag.jpg"
              alt="House parade flag held during ceremonial march-past"
@@ -608,25 +603,21 @@
       <div class="house-band__content">
         <div class="house-band__header">
           <span class="house-band__color-tag">YELLOW</span>
-          <h3 class="serif house-band__name" id="tab-valmiki">Valmiki</h3>
+          <h3 class="serif house-band__name"><button type="button" class="house-band__trigger" id="house-valmiki-name" aria-expanded="true" aria-controls="house-valmiki-details">Valmiki</button></h3>
         </div>
-        <div class="house-band__details">
+        <section class="house-band__details" id="house-valmiki-details" aria-labelledby="house-valmiki-name">
           <p class="house-band__identity">Creativity, strategic agility, and tactical teamwork across team sports.</p>
           <ul class="house-band__facts">
             <li><strong>Annual Fixture:</strong> Inter-House Basketball &amp; Swimming</li>
             <li><strong>House Spirit:</strong> Speed, enthusiasm, and cohesion</li>
           </ul>
           <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
-        </div>
+        </section>
       </div>
-      <button type="button" class="house-band__trigger" aria-controls="house-valmiki" aria-expanded="false">
-        <span class="sr-only">Expand Valmiki House</span>
-      </button>
     </article>
 
     <!-- Vishwamitra (Green) -->
-    <article class="house-band house-band--vishwamitra" id="house-vishwamitra"
-             role="tabpanel" tabindex="0" aria-labelledby="tab-vishwamitra">
+    <article class="house-band house-band--vishwamitra" id="house-vishwamitra">
       <div class="house-band__media">
         <img src="assets/img/sports/house-cheer.jpg"
              alt="Students gathered in house cheering section"
@@ -636,25 +627,21 @@
       <div class="house-band__content">
         <div class="house-band__header">
           <span class="house-band__color-tag">GREEN</span>
-          <h3 class="serif house-band__name" id="tab-vishwamitra">Vishwamitra</h3>
+          <h3 class="serif house-band__name"><button type="button" class="house-band__trigger" id="house-vishwamitra-name" aria-expanded="true" aria-controls="house-vishwamitra-details">Vishwamitra</button></h3>
         </div>
-        <div class="house-band__details">
+        <section class="house-band__details" id="house-vishwamitra-details" aria-labelledby="house-vishwamitra-name">
           <p class="house-band__identity">Tenacity, physical stamina, and quiet resolve through distance and endurance events.</p>
           <ul class="house-band__facts">
             <li><strong>Annual Fixture:</strong> House Maths Run &amp; Cross-Country</li>
             <li><strong>House Spirit:</strong> Endurance and unwavering focus</li>
           </ul>
           <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
-        </div>
+        </section>
       </div>
-      <button type="button" class="house-band__trigger" aria-controls="house-vishwamitra" aria-expanded="false">
-        <span class="sr-only">Expand Vishwamitra House</span>
-      </button>
     </article>
 
     <!-- Vyasa (Blue) -->
-    <article class="house-band house-band--vyasa" id="house-vyasa"
-             role="tabpanel" tabindex="0" aria-labelledby="tab-vyasa">
+    <article class="house-band house-band--vyasa" id="house-vyasa">
       <div class="house-band__media">
         <img src="assets/img/sports/hero-track.jpg"
              alt="CIRS runners rounding the track in inter-house competition"
@@ -664,20 +651,17 @@
       <div class="house-band__content">
         <div class="house-band__header">
           <span class="house-band__color-tag">BLUE</span>
-          <h3 class="serif house-band__name" id="tab-vyasa">Vyasa</h3>
+          <h3 class="serif house-band__name"><button type="button" class="house-band__trigger" id="house-vyasa-name" aria-expanded="true" aria-controls="house-vyasa-details">Vyasa</button></h3>
         </div>
-        <div class="house-band__details">
+        <section class="house-band__details" id="house-vyasa-details" aria-labelledby="house-vyasa-name">
           <p class="house-band__identity">Integrity, composure under pressure, and mutual encouragement across all competitions.</p>
           <ul class="house-band__facts">
             <li><strong>Annual Fixture:</strong> Football League &amp; Racquet Sports</li>
             <li><strong>House Spirit:</strong> Sportsmanship and relentless pursuit</li>
           </ul>
           <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
-        </div>
+        </section>
       </div>
-      <button type="button" class="house-band__trigger" aria-controls="house-vyasa" aria-expanded="false">
-        <span class="sr-only">Expand Vyasa House</span>
-      </button>
     </article>
   </div>
 </section>
