@@ -193,3 +193,12 @@ body.blog{
 }
 .art__back a{ color:var(--purple); font-weight:500; }
 .art__back a:hover{ color:var(--maroon); }
+
+/* Touch: the rail's links are 14px type; each takes a taller hit box
+   without shifting the rail, and the stacked ones are spaced so the boxes
+   do not overlap. */
+@media (pointer:coarse){
+  .art__breadcrumb a,.art__rail a{position:relative}
+  .art__breadcrumb a::after,.art__rail a::after{content:"";position:absolute;inset:-10px -6px}
+  .art__rail a{margin-bottom:20px}
+}

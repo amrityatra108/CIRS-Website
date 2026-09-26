@@ -531,6 +531,14 @@ body.artattack.has-lightbox{ overflow:hidden; }
   .aa-chapter--together .aa-chapter__text{ grid-column:1 / span 8; grid-row:2; }
   .aa-case{ grid-template-columns:1fr; }
 }
+/* A credit is a student's name and where the work was published, and on a
+   narrow wall an ellipsis was cutting names off mid-word. Here the label
+   wraps instead, and the caption grows to hold it. */
+@media (max-width:1000px){
+  .aa-hang .aa-label > span,
+  .aa-ribbon .aa-label > span{ white-space:normal; overflow:visible; text-overflow:clip; overflow-wrap:break-word; }
+  .aa-hang__work figcaption{ height:auto; min-height:calc(var(--cap) - 10px); overflow:visible; }
+}
 @media (max-width:760px){
   .aa-head--split{ grid-template-columns:1fr; }
   .aa-grid{ --row:128px; gap:26px 14px; }

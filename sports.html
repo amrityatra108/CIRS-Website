@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=107-sports-3">
-<link rel="stylesheet" href="assets/css/cirs.css?b=107-sports-3">
-<link rel="stylesheet" href="assets/css/pages.css?b=107-sports-3">
+<link rel="stylesheet" href="assets/css/fonts.css?b=108-sports-3">
+<link rel="stylesheet" href="assets/css/cirs.css?b=108-sports-3">
+<link rel="stylesheet" href="assets/css/pages.css?b=108-sports-3">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,13 +37,13 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/sports.css?b=107-sports-3">
-<link rel="stylesheet" href="assets/css/typography.css?b=107-sports-3">
-<link rel="stylesheet" href="assets/css/sports-journey.css?b=107-sports-3-sports-journey-5">
-<link rel="stylesheet" href="assets/css/filmintro.css?b=107-sports-3">
+<link rel="stylesheet" href="assets/css/sports.css?b=108-sports-3">
+<link rel="stylesheet" href="assets/css/typography.css?b=108-sports-3">
+<link rel="stylesheet" href="assets/css/sports-journey.css?b=108-sports-3-sports-journey-5">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=108-sports-3">
 <noscript><style>.film{height:100svh}body.sports .film__title{--film-title-top:88%}</style></noscript>
-<link rel="stylesheet" href="assets/css/footer.css?b=107-sports-3-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=107-sports-3-drawer-5">
+<link rel="stylesheet" href="assets/css/footer.css?b=108-sports-3-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=108-sports-3-drawer-5">
 </head>
 
 <body class="sports film sports">
@@ -68,6 +68,10 @@
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
   </div>
+  <!-- Escape is caught by the player while it has focus, and a page cannot
+       reach into a cross-origin frame to take it back, so the way out is
+       said once, quietly, under the film. -->
+  <p class="lightbox__hint" aria-hidden="true"><span class="lightbox__hint-key">Press Esc or click outside the film to close</span><span class="lightbox__hint-touch">Tap outside the film to close</span></p>
 </dialog>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
@@ -938,10 +942,9 @@
     </p>
   </div>
 
-  <div class="house-bands" id="houseBands" role="tablist" aria-label="CIRS House Teams">
+  <div class="house-bands" id="houseBands">
     <!-- Vasishtha (Red) -->
-    <article class="house-band house-band--vasistha is-active" id="house-vasistha"
-             role="tabpanel" tabindex="0" aria-labelledby="tab-vasistha">
+    <article class="house-band house-band--vasistha is-active" id="house-vasistha">
       <div class="house-band__media">
         <img src="assets/img/sports/house-parade.jpg"
              alt="CIRS house parade marching in formation"
@@ -951,25 +954,21 @@
       <div class="house-band__content">
         <div class="house-band__header">
           <span class="house-band__color-tag">RED</span>
-          <h3 class="serif house-band__name" id="tab-vasistha">Vasishtha</h3>
+          <h3 class="serif house-band__name"><button type="button" class="house-band__trigger" id="house-vasistha-name" aria-expanded="true" aria-controls="house-vasistha-details">Vasishtha</button></h3>
         </div>
-        <div class="house-band__details">
+        <section class="house-band__details" id="house-vasistha-details" aria-labelledby="house-vasistha-name">
           <p class="house-band__identity">Discipline, leadership, and unwavering determination on the track and field.</p>
           <ul class="house-band__facts">
             <li><strong>Annual Fixture:</strong> Khel Mela March-Past &amp; Athletics</li>
             <li><strong>House Spirit:</strong> Collective grit across all grades</li>
           </ul>
           <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
-        </div>
+        </section>
       </div>
-      <button type="button" class="house-band__trigger" aria-controls="house-vasistha" aria-expanded="true">
-        <span class="sr-only">Expand Vasishtha House</span>
-      </button>
     </article>
 
     <!-- Valmiki (Yellow) -->
-    <article class="house-band house-band--valmiki" id="house-valmiki"
-             role="tabpanel" tabindex="0" aria-labelledby="tab-valmiki">
+    <article class="house-band house-band--valmiki" id="house-valmiki">
       <div class="house-band__media">
         <img src="assets/img/sports/house-flag.jpg"
              alt="House parade flag held during ceremonial march-past"
@@ -979,25 +978,21 @@
       <div class="house-band__content">
         <div class="house-band__header">
           <span class="house-band__color-tag">YELLOW</span>
-          <h3 class="serif house-band__name" id="tab-valmiki">Valmiki</h3>
+          <h3 class="serif house-band__name"><button type="button" class="house-band__trigger" id="house-valmiki-name" aria-expanded="true" aria-controls="house-valmiki-details">Valmiki</button></h3>
         </div>
-        <div class="house-band__details">
+        <section class="house-band__details" id="house-valmiki-details" aria-labelledby="house-valmiki-name">
           <p class="house-band__identity">Creativity, strategic agility, and tactical teamwork across team sports.</p>
           <ul class="house-band__facts">
             <li><strong>Annual Fixture:</strong> Inter-House Basketball &amp; Swimming</li>
             <li><strong>House Spirit:</strong> Speed, enthusiasm, and cohesion</li>
           </ul>
           <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
-        </div>
+        </section>
       </div>
-      <button type="button" class="house-band__trigger" aria-controls="house-valmiki" aria-expanded="false">
-        <span class="sr-only">Expand Valmiki House</span>
-      </button>
     </article>
 
     <!-- Vishwamitra (Green) -->
-    <article class="house-band house-band--vishwamitra" id="house-vishwamitra"
-             role="tabpanel" tabindex="0" aria-labelledby="tab-vishwamitra">
+    <article class="house-band house-band--vishwamitra" id="house-vishwamitra">
       <div class="house-band__media">
         <img src="assets/img/sports/house-cheer.jpg"
              alt="Students gathered in house cheering section"
@@ -1007,25 +1002,21 @@
       <div class="house-band__content">
         <div class="house-band__header">
           <span class="house-band__color-tag">GREEN</span>
-          <h3 class="serif house-band__name" id="tab-vishwamitra">Vishwamitra</h3>
+          <h3 class="serif house-band__name"><button type="button" class="house-band__trigger" id="house-vishwamitra-name" aria-expanded="true" aria-controls="house-vishwamitra-details">Vishwamitra</button></h3>
         </div>
-        <div class="house-band__details">
+        <section class="house-band__details" id="house-vishwamitra-details" aria-labelledby="house-vishwamitra-name">
           <p class="house-band__identity">Tenacity, physical stamina, and quiet resolve through distance and endurance events.</p>
           <ul class="house-band__facts">
             <li><strong>Annual Fixture:</strong> House Maths Run &amp; Cross-Country</li>
             <li><strong>House Spirit:</strong> Endurance and unwavering focus</li>
           </ul>
           <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
-        </div>
+        </section>
       </div>
-      <button type="button" class="house-band__trigger" aria-controls="house-vishwamitra" aria-expanded="false">
-        <span class="sr-only">Expand Vishwamitra House</span>
-      </button>
     </article>
 
     <!-- Vyasa (Blue) -->
-    <article class="house-band house-band--vyasa" id="house-vyasa"
-             role="tabpanel" tabindex="0" aria-labelledby="tab-vyasa">
+    <article class="house-band house-band--vyasa" id="house-vyasa">
       <div class="house-band__media">
         <img src="assets/img/sports/hero-track.jpg"
              alt="CIRS runners rounding the track in inter-house competition"
@@ -1035,20 +1026,17 @@
       <div class="house-band__content">
         <div class="house-band__header">
           <span class="house-band__color-tag">BLUE</span>
-          <h3 class="serif house-band__name" id="tab-vyasa">Vyasa</h3>
+          <h3 class="serif house-band__name"><button type="button" class="house-band__trigger" id="house-vyasa-name" aria-expanded="true" aria-controls="house-vyasa-details">Vyasa</button></h3>
         </div>
-        <div class="house-band__details">
+        <section class="house-band__details" id="house-vyasa-details" aria-labelledby="house-vyasa-name">
           <p class="house-band__identity">Integrity, composure under pressure, and mutual encouragement across all competitions.</p>
           <ul class="house-band__facts">
             <li><strong>Annual Fixture:</strong> Football League &amp; Racquet Sports</li>
             <li><strong>House Spirit:</strong> Sportsmanship and relentless pursuit</li>
           </ul>
           <p class="note" style="margin-top:12px"><em>[Official house motto, standings, and annual championship tallies to be confirmed by the sports office.]</em></p>
-        </div>
+        </section>
       </div>
-      <button type="button" class="house-band__trigger" aria-controls="house-vyasa" aria-expanded="false">
-        <span class="sr-only">Expand Vyasa House</span>
-      </button>
     </article>
   </div>
 </section>
@@ -1500,13 +1488,13 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=107-sports-3" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=107-sports-3" defer></script>
-<script src="assets/vendor/lenis.min.js?b=107-sports-3" defer></script>
-<script src="assets/js/cirs.js?b=107-sports-3-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=107-sports-3" defer></script>
-<script src="assets/js/footer.js?b=107-sports-3-footer-1" defer></script>
-<script src="assets/js/filmintro.js?b=107-sports-3" defer></script>
-<script src="assets/js/sports-journey.js?b=107-sports-3" defer></script>
+<script src="assets/vendor/gsap.min.js?b=108-sports-3" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=108-sports-3" defer></script>
+<script src="assets/vendor/lenis.min.js?b=108-sports-3" defer></script>
+<script src="assets/js/cirs.js?b=108-sports-3-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=108-sports-3" defer></script>
+<script src="assets/js/footer.js?b=108-sports-3-footer-1" defer></script>
+<script src="assets/js/filmintro.js?b=108-sports-3" defer></script>
+<script src="assets/js/sports-journey.js?b=108-sports-3" defer></script>
 </body>
 </html>

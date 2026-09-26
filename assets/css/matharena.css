@@ -247,6 +247,19 @@ body.matharena #main {
   justify-content: center;
   margin: clamp(28px, 3.5vw, 42px) 0 0;
 }
+/* The site's outline button is purple on paper; on this black hero it all
+   but disappeared. Here it takes the arena's gold instead, between the
+   solid primary and the white ghost beside it. */
+.ma-hero__cta .btn--outline {
+  border-color: var(--ma-gold);
+  color: var(--ma-gold-lit);
+}
+.ma-hero__cta .btn--outline:hover,
+.ma-hero__cta .btn--outline:focus-visible {
+  background: var(--ma-gold);
+  border-color: var(--ma-gold);
+  color: var(--ma-char);
+}
 
 /* ==========================================================================
    2. Interactive Puzzle: Heron's Shortest Path
@@ -430,16 +443,38 @@ body.matharena #main {
   color: var(--ma-gold-lit);
 }
 
+/* The track is drawn 8px tall, but the input itself is 44px, so a finger
+   anywhere in the row takes it. The visible track is the element's
+   background, clipped to a band down its middle. */
 input[type="range"]#puzzleSlider {
   flex: 1;
+  min-width: 0;
   appearance: none;
-  background: var(--ma-char-3);
+  height: 44px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+input[type="range"]#puzzleSlider::-webkit-slider-runnable-track {
   height: 8px;
   border-radius: 4px;
-  outline: none;
+  background: var(--ma-char-3);
   border: 1px solid var(--ma-line-soft);
 }
+input[type="range"]#puzzleSlider::-moz-range-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--ma-char-3);
+  border: 1px solid var(--ma-line-soft);
+}
+input[type="range"]#puzzleSlider:focus-visible {
+  outline: 2px solid var(--ma-gold-lit);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
 input[type="range"]#puzzleSlider::-webkit-slider-thumb {
+  margin-top: -8px;
   appearance: none;
   width: 22px;
   height: 22px;

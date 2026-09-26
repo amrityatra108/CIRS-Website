@@ -846,6 +846,9 @@ body.festivals .fx-cal__name{
 .fx-tile{ grid-column:span 1; min-width:0; }
 .fx-tile--wide{ grid-column:span 2; }
 .fx-tile[hidden]{ display:none; }
+/* The last photograph, when it would sit alone at the left of its row
+   (assets/js/festivals.js settles this after every filter). */
+.fx-tile--coda{ grid-column:1 / -1; justify-self:center; width:100%; max-width:var(--coda-w); }
 .fx-tile__link{
   display:block;
   position:relative;
@@ -955,6 +958,10 @@ html.fx-viewing{ overflow:hidden; }
 }
 .fx-together__head .h2{ margin-bottom:18px; }
 .fx-together__head .h2 em{ display:block; }
+/* The line splitter gives each italic word an <em> of its own inside the
+   line it measured, so a block em there stacked "to", "Grade" and "XII."
+   one to a line. Inside a split line they run on again. */
+.fx-together__head .h2 .line-mask em{ display:inline; }
 .fx-together__stats{
   display:grid;
   grid-template-columns:repeat(2, minmax(0, 1fr));

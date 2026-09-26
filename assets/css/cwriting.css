@@ -968,3 +968,12 @@ body.cwriting.cw-quiet .cw-interlude__credit { color: var(--cw-gold-ink); }
   body.cwriting .cw-row__card[aria-hidden="true"] { display: none; }
   body.cwriting .cw-row__card { scroll-snap-align: start; }
 }
+
+/* Touch: the previous / next / back links under each poem take a 44px hit
+   box without moving, and wrapped rows sit far enough apart that the boxes
+   never overlap. */
+@media (pointer: coarse) {
+  body.cwriting .cw-poem__nav { row-gap: 24px; }
+  body.cwriting .cw-poem__nav a { position: relative; }
+  body.cwriting .cw-poem__nav a::after { content: ""; position: absolute; inset: -11px -6px; }
+}

@@ -44,6 +44,21 @@
           <source src="assets/video/campus-loop.webm" type="video/webm">
           <source src="assets/video/campus-loop.mp4" type="video/mp4">
         </video>
+        <!-- Under reduced motion the loop never starts: the poster stays up
+             in its place. Inline and straight after the element, so it runs
+             before the film has buffered enough to begin. -->
+        <script>
+        (function () {
+          var film = document.currentScript.previousElementSibling;
+          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+          function apply() {
+            if (reduce.matches) { film.removeAttribute("autoplay"); film.autoplay = false; film.pause(); }
+            else { film.autoplay = true; var go = film.play(); if (go && go.catch) go.catch(function () {}); }
+          }
+          if (reduce.matches) apply();
+          if (reduce.addEventListener) reduce.addEventListener("change", apply);
+        }());
+        </script>
         <div class="hseq__scrim" aria-hidden="true"></div>
       </div>
 

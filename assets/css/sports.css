@@ -846,19 +846,28 @@ body.sports {
   color: #ffffff;
 }
 
+/* The house name is the accordion's button. It reads as the heading
+   it sits in; on wide screens the whole band also answers a click. */
 .house-band__trigger {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  border: none;
-  z-index: 3;
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: left;
   cursor: pointer;
 }
 
-.house-band.is-active .house-band__trigger {
-  pointer-events: none;
+.house-band__trigger[aria-disabled="true"] {
+  cursor: default;
+}
+
+.house-band__trigger:focus-visible {
+  outline: 2px solid var(--gold-lit);
+  outline-offset: 4px;
 }
 
 @media (max-width: 900px) {
@@ -874,9 +883,6 @@ body.sports {
   .house-band .house-band__details {
     max-height: none !important;
     opacity: 1 !important;
-  }
-  .house-band__trigger {
-    display: none;
   }
 }
 
@@ -1127,6 +1133,13 @@ body.sports {
 .routine-sec {
   background: #110d16;
   padding: var(--space-10) 0;
+}
+
+/* PERFORMANCE is the page's longest single word, and at the hero size it
+   is wider than a phone's column (it spilled its mask by 57px at 320).
+   Only this heading scales with the window below that point. */
+.routine-sec .h1 {
+  font-size: min(var(--fs-hero), 9.6vw);
 }
 
 .routine-grid {

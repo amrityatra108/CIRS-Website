@@ -1464,3 +1464,16 @@ body.records .rec-notice__also{
   body.records .rec-go::after,
   body.records .reg__row{ transition:none; }
 }
+
+/* Touch: the contact addresses, telephone numbers and register links are
+   small type. Inline ones take a taller hit box through padding, which
+   moves nothing; the stacked addresses are spaced a little further apart
+   so their boxes do not overlap. */
+@media (pointer:coarse){
+  body.records .rec-alert__link a,
+  body.records .rec-table a,
+  body.records dd a:not(.rec-mail){ padding-block:12px; }
+  body.records .rec-fact--link dd{ gap:16px; }
+  body.records .rec-mail{ position:relative; }
+  body.records .rec-mail::after{ content:""; position:absolute; inset:-8px -4px; }
+}

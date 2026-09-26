@@ -69,7 +69,10 @@ body.wall.is-touch #cursor-ring, body.wall.is-touch #cursor-dot{ display:none; }
 /* --- THE FIELD --- */
 body.wall #p1-wrap{ position:fixed; inset:0; z-index:10; touch-action:none; outline:none; }
 body.wall #p1-viewport{ position:absolute; inset:0; perspective:1120px; perspective-origin:50% 48%; pointer-events:none; }
-body.wall #p1-viewport::after{ content:""; position:absolute; inset:0; z-index:20; pointer-events:none; background:linear-gradient(90deg, rgba(14,11,18,.58), transparent 18%, transparent 82%, rgba(14,11,18,.58)), radial-gradient(ellipse at 50% 48%, transparent 30%, rgba(14,11,18,.16) 68%, rgba(14,11,18,.42) 100%); }
+/* The first layer keeps a header zone: the photographs pass under the
+   site's header, and without it a bright tile sat directly behind the
+   wordmark and the header's buttons. It fades out well above the title. */
+body.wall #p1-viewport::after{ content:""; position:absolute; inset:0; z-index:20; pointer-events:none; background:linear-gradient(180deg, rgba(14,11,18,.8) 0, rgba(14,11,18,.5) 96px, rgba(14,11,18,0) 180px), linear-gradient(90deg, rgba(14,11,18,.58), transparent 18%, transparent 82%, rgba(14,11,18,.58)), radial-gradient(ellipse at 50% 48%, transparent 30%, rgba(14,11,18,.16) 68%, rgba(14,11,18,.42) 100%); }
 body.wall #p1-stage{ position:absolute; inset:0; transform-style:preserve-3d; transform-origin:50vw 50vh; will-change:transform; pointer-events:auto; }
 
 /* Tiles are plain: no backdrop blur (it re-samples everything behind each
@@ -98,9 +101,9 @@ body.wall .p1-hero{ position:fixed; inset:0; display:grid; place-items:center; a
 /* A photograph can sit bright behind the title. This darkens the middle of
    the window just enough to hold the type, and leaves with the fold, so the
    moment you start dragging there is nothing over the wall at all. */
-body.wall .p1-hero::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:calc(var(--fold) * .92); background:radial-gradient(ellipse 46% 38% at 50% 50%, rgba(14,11,18,.82) 0%, rgba(14,11,18,.55) 45%, rgba(14,11,18,0) 78%); }
+body.wall .p1-hero::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:calc(var(--fold) * .95); background:radial-gradient(ellipse var(--hero-scrim, 52% 40%) at 50% 50%, rgba(14,11,18,.86) 0%, rgba(14,11,18,.62) 48%, rgba(14,11,18,0) 80%); }
 body.wall .p1-hero__eyebrow{ position:relative; grid-column:1; margin:0; opacity:var(--fold); font-family:var(--font-primary); font-size:var(--fs-xs); letter-spacing:.06em; text-transform:none; color:rgba(var(--gold-rgb),.72); text-align:center; }
-body.wall .p1-hero__title{ position:relative; grid-column:1; display:grid; place-items:center; }
+body.wall .p1-hero__title{ position:relative; grid-column:1; display:grid; place-items:center; filter:drop-shadow(0 2px 18px rgba(14,11,18,.7)); }
 body.wall .p1-hero-text{ grid-area:1 / 1; margin:0; font-family:var(--font-primary); font-size:clamp(2.4rem, 8vw, 6.4rem); font-weight:500; text-align:center; line-height:.94; letter-spacing:-.015em; opacity:0; will-change:opacity; background:linear-gradient(180deg, var(--gold-lit) 0%, var(--gold) 55%, #A87A05 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 body.wall .p1-hero-text em{ font-style:italic; }
 body.wall .p1-hero-text.soft{ filter:blur(40px); }
@@ -138,7 +141,9 @@ body.wall .noscript{ position:fixed; inset:0; display:grid; place-items:center; 
   body.wall .m-right{ flex:1 1 auto; height:auto; padding:22px 22px calc(32px + env(safe-area-inset-bottom)); border-left:0; border-top:1px solid rgba(var(--gold-rgb),.2); }
   body.wall .m-meta{ margin-bottom:18px; padding-top:14px; }
   body.wall .m-close{ top:calc(6px + env(safe-area-inset-top)); right:4px; min-height:48px; padding:14px; opacity:.85; }   /* >= 44px tap target */
-  body.wall #p1-viewport::after{ background:linear-gradient(90deg, rgba(14,11,18,.42), transparent 22%, transparent 78%, rgba(14,11,18,.42)), radial-gradient(ellipse at 50% 48%, transparent 34%, rgba(14,11,18,.14) 72%, rgba(14,11,18,.34) 100%); }
+  body.wall #p1-viewport::after{ background:linear-gradient(180deg, rgba(14,11,18,.8) 0, rgba(14,11,18,.5) 72px, rgba(14,11,18,0) 140px), linear-gradient(90deg, rgba(14,11,18,.42), transparent 22%, transparent 78%, rgba(14,11,18,.42)), radial-gradient(ellipse at 50% 48%, transparent 34%, rgba(14,11,18,.14) 72%, rgba(14,11,18,.34) 100%); }
+  /* The title spans nearly the whole width of a phone, so its scrim does too. */
+  body.wall .p1-hero{ --hero-scrim:78% 26%; }
 }
 
 @media (prefers-reduced-motion: reduce){

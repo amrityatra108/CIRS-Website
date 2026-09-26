@@ -586,3 +586,10 @@ body.curriculum .closing-scene{ min-height:72vh; min-height:72svh; }
   .curriculum .cur-index__list{ gap:0 var(--space-4); }
   body.curriculum .header .brand{ min-width:44px; min-height:44px; justify-content:center; }
 }
+
+/* Touch: links set inside a sentence or a subject table keep their line,
+   and take a taller hit box through padding, which moves nothing. */
+@media (pointer:coarse){
+  .curriculum p .cur-link,
+  .curriculum .cur-dir a{ padding-block:12px; }
+}

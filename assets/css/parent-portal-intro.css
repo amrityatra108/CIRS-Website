@@ -138,7 +138,8 @@
 html.portal-motion-pending .portal-intro__photo{clip-path:inset(50% 0 50% 0);will-change:clip-path}
 html.portal-motion-pending .portal-intro__image{transform:translateY(10px) scale(1.08);will-change:transform}
 html.portal-motion-pending .portal-intro__line{opacity:1;will-change:transform,opacity}
-html.portal-motion-pending .portal-intro__title-word>span{transform:translateY(110%);will-change:transform}
+/* The title is not part of the entrance: it names the page from the first
+   frame, and the photograph opens behind it. */
 html.portal-motion-pending .portal-intro__note,
 html.portal-motion-pending .portal-intro__entry{opacity:0;transform:translateY(16px)}
 html.portal-motion-pending .portal-intro__entry{border-color:transparent}
@@ -180,7 +181,6 @@ html.portal-motion-pending .portal-intro__entry-border rect{stroke-dashoffset:1}
   .portal-intro__entry,.portal-intro__entry-arrow{transition:none}
   html.portal-motion-pending .portal-intro__photo{clip-path:none;will-change:auto}
   html.portal-motion-pending .portal-intro__image,
-  html.portal-motion-pending .portal-intro__title-word>span,
   html.portal-motion-pending .portal-intro__note,
   html.portal-motion-pending .portal-intro__entry{opacity:1;transform:none;will-change:auto}
   html.portal-motion-pending .portal-intro__line,
