@@ -158,17 +158,23 @@ CHAPTERS = [
     },
     {
         "slug": "together", "title": "Together",
-        "intro": "Performances, gatherings and people in the collection.",
+        "intro": "Shared moments and groups in the collection.",
         "rows": [
             [(new(20), "people-seated-together", "People seated together on the floor")],
-            [(new(17), "decorated-stage", "Flowers and artwork on a decorated stage"),
-             (new(18), "performer-blue-light", "A performer under blue stage lights"),
-             (folder("18-dsc02905.jpg"), "two-dancers", "Two performers dancing in colorful dress")],
-            [(folder("17-edit-man.jpg"), "man-seated", "A man seated alone in a light corridor"),
+            [(folder("18-dsc02905.jpg"), "two-dancers", "Two performers dancing in colorful dress"),
              (folder("19-dsc00372.jpg"), "children-window", "Children looking out of a window")],
-            [(new(19), "seated-performer", "A performer seated on stage"),
-             (new(21), "singer-spotlight", "A singer holding a microphone on a dark stage"),
-             (new(22), "group-outdoors", "A group gathered outdoors with flower garlands")],
+            [(new(22), "group-outdoors", "A group gathered outdoors with flower garlands")],
+        ],
+    },
+    {
+        "slug": "solo-and-stage", "title": "Solo and stage",
+        "intro": "Individual portraits and performance details from the collection.",
+        "rows": [
+            [(new(17), "decorated-stage", "Flowers and artwork on a decorated stage"),
+             (new(18), "performer-blue-light", "A performer under blue stage lights")],
+            [(folder("17-edit-man.jpg"), "man-seated", "A man seated alone in a light corridor"),
+             (new(19), "seated-performer", "A performer seated on stage")],
+            [(new(21), "singer-spotlight", "A singer holding a microphone on a dark stage")],
         ],
     },
 ]

@@ -206,9 +206,11 @@
      and re-aim, a few times at most, and never after the reader has taken
      the scroll back themselves. */
   function scrollToSection(t) {
-    var tries = 0, done = false;
+    var tries = 0, done = false, unlockObserver = null, unlockTimer = 0;
     function stop() {
       done = true;
+      if (unlockObserver) unlockObserver.disconnect();
+      window.clearTimeout(unlockTimer);
       window.removeEventListener("wheel", stop);
       window.removeEventListener("touchstart", stop);
       window.removeEventListener("keydown", stop);
@@ -233,7 +235,24 @@
     window.addEventListener("wheel", stop, { passive: true });
     window.addEventListener("touchstart", stop, { passive: true });
     window.addEventListener("keydown", stop);
-    go();
+    // A hash link can be activated during the opening curtain (including by
+    // keyboard or a browser restoring focus). Lenis is stopped until that
+    // curtain leaves; sending it a destination now silently drops the jump.
+    // Wait for the existing unlock, then let its ScrollTrigger refresh settle
+    // before measuring the target. The ordinary click path still runs at once.
+    if ($("#curtain") && document.body.classList.contains("is-locked")) {
+      unlockObserver = new MutationObserver(function () {
+        if (done || $("#curtain") || document.body.classList.contains("is-locked")) return;
+        unlockObserver.disconnect();
+        unlockObserver = null;
+        window.clearTimeout(unlockTimer);
+        requestAnimationFrame(function () { requestAnimationFrame(go); });
+      });
+      unlockObserver.observe(document.body, { childList:true, attributes:true, attributeFilter:["class"] });
+      unlockTimer = window.setTimeout(stop, 6000);
+    } else {
+      go();
+    }
   }
 
   /* ----------------------------------------------------------
@@ -1123,10 +1142,10 @@
 
     if (!hasST || !animate || typeof gsap.matchMedia !== "function") { staticMode(); return; }
 
-    var HOLD = 0.10;
-    // Move the measured gallery at half pace so the photographs have
-    // enough time to turn through the cylindrical field.
-    var PACE = 0.5;
+    var HOLD = 0.07;
+    // Keep the photographs readable while allowing the gallery to release
+    // after a shorter, more natural stretch of document scrolling.
+    var PACE = 0.35;
     var PARALLAX = 0.30;
 
     var mm = gsap.matchMedia();

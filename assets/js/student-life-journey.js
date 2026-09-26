@@ -96,8 +96,8 @@
     gsap.registerPlugin(ScrollTrigger);
     var data = scheduleData(mode);
     active = -1;
-    gsap.set(scenes, { autoAlpha:0, xPercent:100 });
-    gsap.set(scenes[0], { autoAlpha:.68, xPercent:0 });
+    gsap.set(scenes, { autoAlpha:0, scale:1.04 });
+    gsap.set(scenes[0], { autoAlpha:.68, scale:1 });
     gsap.set(trackFill, { scaleX:0 });
     gsap.set(trackSun, { x:0, scale:.82, backgroundColor:"#d5a84b", boxShadow:"0 0 8px rgba(213,168,75,.4)", "--moon-cover":0 });
     gsap.set(stars, { autoAlpha:0 });
@@ -121,8 +121,8 @@
       timeline.addLabel("chapter-" + chapterIndex, position);
       timeline.to(sticky, { backgroundColor:chapter.color, duration:1 }, position);
       if (chapterIndex > 0) {
-        timeline.to(scenes[chapterIndex - 1], { xPercent:-100, autoAlpha:.28, duration:.9 }, position - .35);
-        timeline.to(scenes[chapter.photo], { xPercent:0, autoAlpha:.68, duration:.9 }, position - .35);
+        timeline.to(scenes[chapterIndex - 1], { autoAlpha:0, scale:1.04, duration:.75 }, position - .375);
+        timeline.to(scenes[chapter.photo], { autoAlpha:.68, scale:1, duration:.75 }, position - .375);
       }
     });
     timeline.to(trackFill, { scaleX:1, duration:data.length - 1 }, 0);
@@ -172,15 +172,21 @@
       if (!rail) return;
       function items() { return Array.prototype.slice.call(rail.querySelectorAll("figure")); }
       function nearestIndex() {
-        var railLeft = rail.getBoundingClientRect().left;
-        var distances = items().map(function (item) { return Math.abs(item.getBoundingClientRect().left - railLeft); });
+        var railCenter = rail.getBoundingClientRect().left + rail.clientWidth / 2;
+        var distances = items().map(function (item) {
+          var rect = item.getBoundingClientRect();
+          return Math.abs(rect.left + rect.width / 2 - railCenter);
+        });
         return distances.indexOf(Math.min.apply(Math, distances));
       }
       function updateCount() { count.textContent = String(nearestIndex() + 1); }
       function move(direction) {
         var list = items();
         var nextIndex = Math.max(0, Math.min(list.length - 1, nearestIndex() + direction));
-        list[nextIndex].scrollIntoView({ behavior:reduced ? "auto" : "smooth", block:"nearest", inline:"center" });
+        var rect = list[nextIndex].getBoundingClientRect();
+        var railRect = rail.getBoundingClientRect();
+        var target = rail.scrollLeft + rect.left - railRect.left - (rail.clientWidth - rect.width) / 2;
+        rail.scrollTo({ left:target, behavior:reduced ? "auto" : "smooth" });
         count.textContent = String(nextIndex + 1);
       }
       controls.querySelector("[data-rail-prev]").addEventListener("click", function () { move(-1); });

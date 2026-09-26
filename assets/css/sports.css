@@ -801,7 +801,7 @@ body.sports {
   text-transform: uppercase;
 }
 
-.house-band--vasistha .house-band__color-tag { color: #ff7676; }
+.house-band--vasishtha .house-band__color-tag { color: #ff7676; }
 .house-band--valmiki .house-band__color-tag { color: #E0A32A; }
 .house-band--vishwamitra .house-band__color-tag { color: #6ee7b7; }
 .house-band--vyasa .house-band__color-tag { color: #93c5fd; }
@@ -845,6 +845,18 @@ body.sports {
 .house-band__facts li strong {
   color: #ffffff;
 }
+
+.house-band__link {
+  display:inline-block;
+  min-height:44px;
+  margin-top:var(--space-3);
+  padding-top:10px;
+  border-bottom:1px solid currentColor;
+  color:#fff;
+  font-weight:600;
+}
+
+.house-band__link:focus-visible { outline:3px solid var(--focus); outline-offset:4px; }
 
 /* The house name is the accordion's button. It reads as the heading
    it sits in; on wide screens the whole band also answers a click. */
@@ -1048,6 +1060,12 @@ body.sports {
   align-items: center;
 }
 
+.athlete-card--essay {
+  display:block;
+  width:min(100%, 980px);
+  margin-inline:auto;
+}
+
 .athlete-card__media {
   position: relative;
   min-height: 480px;
@@ -1106,16 +1124,6 @@ body.sports {
   color: var(--on-dark-soft);
   line-height: 1.6;
   margin-bottom: var(--space-6);
-}
-
-.athlete-card--placeholder {
-  grid-template-columns: 1fr;
-  background: rgba(17, 17, 15, 0.4);
-  border-style: dashed;
-}
-
-.athlete-card--placeholder .athlete-card__body {
-  padding: var(--space-6);
 }
 
 @media (max-width: 900px) {
@@ -1405,3 +1413,5 @@ body.sports .athlete-stories .btn--outline:hover{ background: var(--gold); borde
     display: none !important;
   }
 }
+body.sports .film__title { font-weight:600; }
+body.sports .film__scroll-cue { font-size:.82rem; }

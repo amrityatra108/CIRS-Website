@@ -17,11 +17,9 @@ body.student-life main { overflow:clip; }
 .sj-work h2,
 .sj-festivals h2,
 .sj-practical h2,
-.sj-night h2 { font-family:var(--font-editorial); font-weight:500; text-transform:uppercase; line-height:.87; letter-spacing:-.045em; }
-.sj-hero h1 { font-size:clamp(3.5rem,8vw,8.8rem); }
+.sj-night h2 { font-family:var(--font-editorial); font-weight:500; text-transform:uppercase; line-height:.98; letter-spacing:-.035em; }
+.sj-hero h1 { font-size:clamp(3.5rem,7.5vw,8.2rem); }
 .sj-hero__content>p:last-child { max-width:30rem; margin-top:1.7rem; font-size:1.25rem; }
-.sj-horizon { position:absolute; z-index:2; left:0; right:0; bottom:4.5rem; border-top:1px solid #ffffff88; animation:sj-line 1.8s ease both; transform-origin:left; }
-.sj-horizon i { position:absolute; top:-5px; left:8%; width:10px; height:10px; border-radius:50%; background:#d8bc7a; box-shadow:0 0 24px #d8bc7a; }
 .sj-down { position:absolute; z-index:3; right:4vw; bottom:1.8rem; color:#fff; }
 
 .sj-day { background:#081728; color:#fff; }
@@ -38,7 +36,7 @@ body.student-life main { overflow:clip; }
 .sj-switch button { min-height:48px; padding:.7rem 1rem; color:#fff; opacity:.55; border-bottom:2px solid transparent; }
 .sj-switch button.is-active { opacity:1; border-color:#d8bc7a; }
 
-.sj-journey { display:none; height:760vh; }
+.sj-journey { display:none; height:580vh; }
 .sj-motion .sj-journey { display:block; }
 .sj-journey__sticky { position:sticky; top:0; height:100svh; overflow:hidden; background:#081728; }
 .sj-sky { position:absolute; inset:0; overflow:hidden; background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 62%); }
@@ -200,7 +198,7 @@ body.student-life main { overflow:clip; }
 .sj-sports { padding:8rem 0; background:#17283a; color:#fff; }
 .sj-section-head { display:flex; justify-content:space-between; align-items:end; margin-bottom:4rem; }
 .sj-section-head h2 { font-size:clamp(3rem,5.8vw,6.5rem); }
-.sj-rail { display:flex; gap:var(--sj-gap); overflow-x:auto; padding:0 4vw 2rem; scroll-snap-type:x mandatory; scrollbar-width:thin; }
+.sj-rail { display:flex; gap:var(--sj-gap); overflow-x:auto; padding:0 max(4vw, calc((100vw - min(64vw, 820px)) / 2)) 2rem; scroll-snap-type:x mandatory; scrollbar-width:thin; }
 /* Every frame on the rail is the same 3:2. It used to be a fixed height in
    vh against a free width, so the same four photographs were a different
    shape on every window, and the two portrait sources were cropped to a
@@ -209,8 +207,7 @@ body.student-life main { overflow:clip; }
 .sj-rail-nav { display:flex; align-items:center; justify-content:flex-end; gap:1rem; margin-top:1rem; }
 .sj-rail-nav p { min-width:3rem; text-align:center; font-variant-numeric:tabular-nums; }
 .sj-links { display:flex; flex-wrap:wrap; gap:2rem; margin-top:2rem; }
-.sj-links a,
-.sj-login { padding:.7rem 0; border-bottom:1px solid currentColor; }
+.sj-links a { padding:.7rem 0; border-bottom:1px solid currentColor; }
 
 .sj-houses { padding-top:8rem; background:#e3dccb; }
 .sj-houses__stage { display:flex; min-height:70vh; margin-top:4rem; background:url('../img/adm-houses.jpg') center/cover; }
@@ -260,7 +257,6 @@ body.student-life main { overflow:clip; }
 .sj-night nav a { padding:.5rem 0; border-bottom:1px solid #ffffff88; }
 
 @keyframes sj-dawn { from { opacity:.12; transform:scale(1.04); } to { opacity:.72; transform:none; } }
-@keyframes sj-line { from { transform:scaleX(0); } }
 
 @media (max-width:800px) {
   .sj-hero h1 { font-size:clamp(3.2rem,14vw,5.2rem); }
@@ -287,6 +283,7 @@ body.student-life main { overflow:clip; }
   .sj-photo-wall__main { grid-row:auto; aspect-ratio:3/2; height:auto; }
   .sj-photo-wall__cut { aspect-ratio:4/5; }
   .sj-section-head { display:block; }
+  .sj-rail { padding-inline:9vw; }
   .sj-rail figure { flex-basis:82vw; }
   .sj-houses__stage { display:grid; min-height:0; background:none; }
   .sj-house { min-height:58svh; }
@@ -306,8 +303,7 @@ body.student-life main { overflow:clip; }
 }
 
 @media (prefers-reduced-motion:reduce) {
-  .sj-hero>.sj-cover,
-  .sj-horizon { animation:none; }
+  .sj-hero>.sj-cover { animation:none; }
   .sj-motion .sj-journey { display:none; }
   .sj-schedules,
   .sj-motion .sj-schedules { display:block; padding-bottom:5rem; }

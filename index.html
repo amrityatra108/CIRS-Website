@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=109">
-<link rel="stylesheet" href="assets/css/cirs.css?b=109">
-<link rel="stylesheet" href="assets/css/pages.css?b=109">
+<link rel="stylesheet" href="assets/css/fonts.css?b=110">
+<link rel="stylesheet" href="assets/css/cirs.css?b=110">
+<link rel="stylesheet" href="assets/css/pages.css?b=110">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,10 +37,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/home.css?b=109">
-<link rel="stylesheet" href="assets/css/typography.css?b=109">
-<link rel="stylesheet" href="assets/css/footer.css?b=109-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=109-drawer-5">
+<link rel="stylesheet" href="assets/css/home.css?b=110">
+<link rel="stylesheet" href="assets/css/typography.css?b=110">
+<link rel="stylesheet" href="assets/css/footer.css?b=110-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=110-drawer-5">
 </head>
 
 <body class="home">
@@ -117,18 +117,13 @@
             </span>
           </a>
 
-          <!-- The three doors. Each goes to the page that explains what is
-               live and what is not, rather than straight out to the external
-               system — a parent who lands on a login screen with no warning
-               cannot tell the school's old system from the new site.
-
-               They carry no second line. "Through the Parent Portal" under
-               two rows that both went to the Parent Portal was restating the
-               destination the row already is, and it made three plain doors
-               look like three explanations. -->
+          <!-- Each portal row uses the destination named on the school's
+               official site. Fee payment, parent login and teacher login
+               are three separate services. -->
           <p class="enq__title enq__title--sep sc">Portals</p>
 
-          <a class="enq__row" href="parent-portal.html">
+          <a class="enq__row" href="https://easycollege.in/cirs/school/"
+             target="_blank" rel="noopener">
             <span class="enq__ico" aria-hidden="true">
               <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><rect x="2.6" y="5.2" width="16.8" height="11.6" rx="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M2.6 9.4h16.8" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 13.4h3.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             </span>
@@ -137,7 +132,8 @@
             </span>
           </a>
 
-          <a class="enq__row" href="parent-portal.html">
+          <a class="enq__row" href="https://cirs.in/school/"
+             target="_blank" rel="noopener">
             <span class="enq__ico" aria-hidden="true">
               <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7.8" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M4.8 18.4a6.2 6.2 0 0 1 12.4 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             </span>
@@ -152,7 +148,7 @@
               <svg width="19" height="19" viewBox="0 0 22 22" fill="none"><path d="M11 4.4 19.6 8 11 11.6 2.4 8 11 4.4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5.8 10v4.4c0 1.3 2.3 2.4 5.2 2.4s5.2-1.1 5.2-2.4V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             </span>
             <span class="enq__txt">
-              <b>Student Login</b>
+              <b>Teacher Login</b>
             </span>
           </a>
 
@@ -209,7 +205,7 @@
      header comes back by scrolling up, by the pointer near the top or by
      keyboard focus, so the line takes no clicks and nothing announces it. -->
 <div class="site-nav-handle" aria-hidden="true"></div>
-<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="0" hidden>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" data-initial-group="0" data-lenis-prevent hidden>
   <div class="drawer__surface">
     <div class="drawer__topbar">
       <a class="drawer__brand" href="#top" aria-label="Chinmaya International Residential School home">
@@ -317,8 +313,9 @@
     </summary>
     <div class="jump__panel" id="jumpPanel">
       <p aria-hidden="true">On this page</p>
-      <a href="#top">Siruvani, Coimbatore &middot; Grades V&ndash;XII</a>
+      <a href="#top">Rooted in values</a>
       <a href="#run">ONE HUNDRED ACRES, FROM FIRST LIGHT</a>
+      <a href="#film">Official CIRS Film</a>
       <a href="#glimpses">Glimpses of CIRS</a>
     </div>
   </details>
@@ -349,7 +346,7 @@
      The type layer is positioned against the same boxes, so the headline
      stays in register with the plate at any viewport rather than being
      placed against the window and drifting away from it. -->
-<section class="hseq" id="top" data-ground="#141411">
+<section class="hseq" id="top" data-jump-label="Rooted in values" data-ground="#141411">
   <div class="hseq__track">
     <div class="hseq__stage">
 
@@ -388,7 +385,7 @@
       </div>
 
       <div class="hseq__type">
-        <p class="marker"><span class="sc">Siruvani, Coimbatore &middot; Grades V&ndash;XII</span></p>
+        <p class="marker"><span class="sc">Siruvani, Coimbatore &middot; <span class="hseq__grades">Grades V&ndash;XII</span></span></p>
         <h1 class="serif h1" data-split>Rooted in <em>Values!</em><br>Ready for the <em>World.</em></h1>
       </div>
 
@@ -413,6 +410,7 @@
      meaning on a phone. -->
 <section class="hrun" id="run" data-ground="#C9A961">
   <div class="hrun__pin">
+    <a class="hrun__skip" href="#film">Skip the photographs <span aria-hidden="true">&darr;</span></a>
     <div class="hrun__viewport">
       <div class="hrun__stage">
         <span class="hghost" data-depth="0.3" style="left:24vw; top:16%">A DAY</span>
@@ -518,7 +516,7 @@
           <span class="hframe__n">09</span>
           <img src="assets/img/hrun/09-microphone.jpg" width="1000" height="1500" loading="lazy" decoding="async"
                alt="Two students in suits at the microphone, one speaking while the other looks on.">
-          <figcaption>At the microphone</figcaption>
+          <figcaption>One student speaks, another listens</figcaption>
         </figure>
 
         <figure class="hframe hframe--xl hframe--wide" data-depth="1.1"
@@ -526,14 +524,14 @@
           <span class="hframe__n">10</span>
           <img src="assets/img/hrun/10-stage.jpg" width="1500" height="1000" loading="lazy" decoding="async"
                alt="A student on a darkened stage in a headset microphone, a painted question mark behind him.">
-          <figcaption>Under the lights</figcaption>
+          <figcaption>A student takes the stage</figcaption>
         </figure>
       </div>
     </div>
   </div>
 </section>
 
-<section class="filmsec" data-ground="#10100E">
+<section class="filmsec" id="film" data-jump-label="Official CIRS Film" data-ground="#10100E">
   <div class="filmsec__media">
     <img src="assets/img/film-audience.jpg" alt="" loading="lazy">
   </div>
@@ -596,7 +594,6 @@
 <section class="motto" data-ground="#FFFFFF">
   <div class="wrap">
     <p class="motto__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-    <p class="motto__iast">J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</p>
     <p class="motto__en">Knowledge &middot; Service &middot; Efficiency</p>
     <div class="motto__rule"></div>
   </div>
@@ -646,9 +643,9 @@
       boarders build lasting connections, uncover their passions, cultivate honourable character,
       and carry Knowledge, Service and Efficiency beyond the Siruvani foothills.</p>
     <div class="finalcta__cta">
-      <a class="btn btn--primary btn--lg" href="admissions.html" data-magnetic>Enquire</a>
-      <a class="btn btn--ghost btn--lg" href="admissions.html" data-magnetic>Visit</a>
-      <a class="btn btn--ghost btn--lg" href="admissions.html" data-magnetic>Apply</a>
+      <a class="btn btn--primary btn--lg" href="admissions.html#contact" data-magnetic>Enquire</a>
+      <a class="btn btn--ghost btn--lg" href="admissions.html#visit" data-magnetic>Visit</a>
+      <a class="btn btn--ghost btn--lg" href="admissions.html#apply" data-magnetic>Apply</a>
     </div>
   </div>
 </section>
@@ -769,11 +766,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=109" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=109" defer></script>
-<script src="assets/vendor/lenis.min.js?b=109" defer></script>
-<script src="assets/js/cirs.js?b=109-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=109" defer></script>
-<script src="assets/js/footer.js?b=109-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=110" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=110" defer></script>
+<script src="assets/vendor/lenis.min.js?b=110" defer></script>
+<script src="assets/js/cirs.js?b=110-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=110" defer></script>
+<script src="assets/js/footer.js?b=110-footer-1" defer></script>
 </body>
 </html>

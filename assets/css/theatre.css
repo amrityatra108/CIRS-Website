@@ -33,6 +33,8 @@ body.theatre{
   --th-gap:     clamp(12px, 1.6vw, 24px);
 }
 
+body.theatre .film__title{ font-weight:400; }
+
 /* ------------------------------------------------------------ shared */
 
 body.theatre .th-label{
@@ -209,8 +211,8 @@ body.theatre .th-au__head{
   max-width:calc(var(--maxw) + 2 * var(--gut)); margin-inline:auto;
 }
 body.theatre .th-au__title{
-  font-family:var(--font-primary); font-weight:300;
-  font-size:clamp(2.4rem, 11vw, 12rem); line-height:.86; letter-spacing:-.012em;
+  font-family:var(--font-primary); font-weight:500;
+  font-size:clamp(2.4rem, 11vw, 12rem); line-height:.94; letter-spacing:-.012em;
   text-transform:uppercase; color:#fff;
   text-shadow:0 2px 40px rgba(0,0,0,.35);
 }
@@ -231,7 +233,7 @@ body.theatre .th-au__credit{
 /* With motion, the stage holds while the scroll runs it: a darkened frame
    gives way to the full stage as the lights come up. Every value is a
    variable theatre.js sets from the scroll, so the reveal runs both ways. */
-body.theatre .th-au.is-live .th-au__track{ height:300vh; }
+body.theatre .th-au.is-live .th-au__track{ height:240vh; }
 body.theatre .th-au.is-live .th-au__stage{ position:sticky; top:0; height:100vh; height:100svh; }
 body.theatre .th-au.is-live .th-au__dark{
   display:block; opacity:var(--dark, 1);
@@ -240,18 +242,22 @@ body.theatre .th-au.is-live .th-au__dark{
 body.theatre .th-au.is-live .th-au__wide{
   opacity:var(--open, 0);
 }
+body.theatre .th-au.is-live .th-au__wide::after{
+  content:""; position:absolute; z-index:1; inset:0;
+  background:#000; opacity:calc((1 - var(--lit, 0)) * .72);
+  pointer-events:none; will-change:opacity;
+}
 body.theatre .th-au.is-live .th-au__wideimg{
   transform:scale(calc(1.14 - .14 * var(--open, 0)));
-  filter:brightness(calc(.3 + .7 * var(--lit, 0))) saturate(calc(.35 + .65 * var(--lit, 0)));
 }
 body.theatre .th-au.is-live .th-au__scrim{ opacity:calc(.35 + .65 * var(--lit, 0)); }
 body.theatre .th-au.is-live .th-au__head{
   opacity:var(--type, 0);
-  transform:translateY(calc((1 - var(--type, 0)) * 28px));
+  transform:translateY(calc((1 - var(--type, 0)) * 14px));
 }
 body.theatre .th-au.is-live .th-au__credit{ opacity:var(--credit, 0); }
 @media (max-width:760px){
-  body.theatre .th-au.is-live .th-au__track{ height:240vh; }
+  body.theatre .th-au.is-live .th-au__track{ height:200vh; }
   /* Left, clear of the page's floating buttons in the right-hand corner. */
   body.theatre .th-au__credit{ left:var(--gut); right:auto; bottom:var(--space-4); text-align:left; font-size:var(--fs-xs); }
   body.theatre .th-au__head{ padding-bottom:var(--space-8); }

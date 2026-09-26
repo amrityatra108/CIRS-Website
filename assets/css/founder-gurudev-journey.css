@@ -30,7 +30,7 @@
 body.founder-story-visible #totop{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(10px)}
 
 @media (min-width:900px) and (prefers-reduced-motion:no-preference){
-  .founder-gurudev-journey.is-enhanced{height:1300svh;height:1300vh;overflow:clip}
+  .founder-gurudev-journey.is-enhanced{height:1050svh;overflow:clip}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__runway{height:100%}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__viewport{position:absolute;inset:0;max-width:none;margin:0;padding:0;overflow:hidden}
@@ -42,6 +42,7 @@ body.founder-story-visible #totop{opacity:0;visibility:hidden;pointer-events:non
   .founder-gurudev-journey__road-marks{stroke:var(--story-paper);stroke-width:1.5;stroke-dasharray:18 16}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__scene{position:absolute;display:grid;grid-template-columns:1.04fr 1fr;gap:5%;align-items:center;margin:0;padding:26px 32px;border:0;background:transparent;opacity:0;visibility:hidden;pointer-events:none}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__scene.is-active{opacity:1;visibility:visible;pointer-events:auto}
+  .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__scene.is-visible{visibility:visible}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__scene.is-long{grid-template-columns:1.24fr .85fr}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__scene h2{font-size:clamp(2.1rem,3.4vw,3.5rem)}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__scene.is-long h2{font-size:clamp(1.95rem,2.7vw,2.75rem)}

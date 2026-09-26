@@ -201,17 +201,16 @@ body.houses main{ background:var(--paper); }
   font-family:var(--font-primary); font-weight:600;
   font-size:clamp(1.9rem,3.4vw,3.1rem); line-height:1;
   letter-spacing:.02em;
-  color:rgba(255,255,255,.66);
+  color:#fff;
   /* The names sit over photographs, so they carry their own
      shadow rather than trusting the frame behind them. */
-  text-shadow:0 2px 18px rgba(17,17,15,.75);
+  text-shadow:0 2px 18px rgba(17,17,15,.9), 0 0 4px rgba(17,17,15,.85);
   transition:color .5s var(--e), -webkit-text-stroke-color .5s var(--e);
 }
-/* Outline at rest, filled when the zone is live. Guarded, because
-   a browser without text-stroke would otherwise render the name
-   in a transparent fill and show nothing at all. */
+/* A fine dark edge keeps the white name readable over bright parts
+   of the house photographs, including the Vasishtha zone. */
 @supports (-webkit-text-stroke: 1px #000){
-  .hsxz__name{ color:transparent; -webkit-text-stroke:1.3px rgba(255,255,255,.92); }
+  .hsxz__name{ -webkit-text-stroke:.45px rgba(17,17,15,.75); }
 }
 .hsxz__meta{
   font-family:var(--font-primary); font-size:.74rem; letter-spacing:.2em;
@@ -383,7 +382,7 @@ body.houses main{ background:var(--paper); }
 .hch:nth-child(even) .hch__ghost{ text-align:right; padding-right:var(--gut) }
 .hch:nth-child(odd) .hch__ghost{ text-align:left; padding-left:var(--gut) }
 
-.hch__inner{ position:relative; z-index:2; margin-top:clamp(-72px,-5vw,-34px); }
+.hch__inner{ position:relative; z-index:2; margin-top:clamp(40px,5vw,72px); }
 .hch:nth-child(even) .hch__inner{ text-align:right; margin-left:auto; }
 
 .hch__step{

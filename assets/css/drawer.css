@@ -29,6 +29,7 @@
   overflow-x:hidden;
   overflow-y:auto;
   overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
   color:var(--menu-text);
   color-scheme:dark;
   background:var(--menu-bg);
