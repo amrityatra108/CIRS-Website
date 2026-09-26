@@ -37,7 +37,7 @@ PASS  1920×1080 nothing moves across 5 category changes  — destination list t
 PASS  rapid switching: one list visible, matches the active category, opacity 1  — {"vis":["nv-literary-excellence-panel"],"op":["1"],"exp":["nv-literary-excellence-btn"]}
 PASS  destination links take the pointer 60ms into the opening
 PASS  menu: opens on its active category; arrows move and open categories  — nv-student-life-btn → nv-literary-excellence-btn
-PASS  menu: → enters the list, ↓ moves, ← returns  — Crossroads → CIRS Blog → nv-literary-excellence-btn
+PASS  menu: → enters the list, ↓ moves, ← returns  — The Crossroads → CIRS Blog → nv-literary-excellence-btn
 PASS  menu: Tab stays in header + menu, page behind inert
 PASS  menu: Escape closes and returns focus to Menu
 PASS  Enquire: opens on keyboard focus  — nvEnqBtn
