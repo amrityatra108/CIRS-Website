@@ -260,6 +260,10 @@ body.artattack .aa-sec figcaption,
   border:0; border-bottom:1px solid var(--aa-rule); border-radius:0; appearance:none; cursor:pointer;
 }
 .aa-issue__select:hover{ border-bottom-color:var(--aa-ink); }
+@media (max-width:360px){
+  .aa-issue{ max-width:100%; min-width:0; }
+  .aa-issue__select{ min-width:0; max-width:100%; }
+}
 .aa-collection__status{ margin:18px 0 28px; font-size:.86rem; color:var(--aa-mute); min-height:1.3em; }
 
 .aa-grid{ --row:210px; display:flex; flex-wrap:wrap; gap:40px 30px; }
@@ -393,7 +397,7 @@ body.artattack .aa-sec figcaption,
 .aa-houses__stats div{ padding:22px 0 24px; border-top:1px solid var(--aa-rule); }
 .aa-houses__stats div:nth-child(-n+2){ border-top-color:var(--gold); }
 .aa-houses__stats dt{
-  font-family:var(--font-primary); font-size:clamp(1.5rem, 2.2vw, 2rem);
+  font-family:var(--font-display); font-size:clamp(1.5rem, 2.2vw, 2rem);
   line-height:1.1; letter-spacing:-.01em; color:var(--aa-ink);
 }
 .aa-houses__stats dd{ margin:8px 0 0; color:var(--aa-soft); max-width:24ch; }

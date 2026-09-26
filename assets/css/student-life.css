@@ -17,8 +17,8 @@ body.student-life main { overflow:clip; }
 .sj-work h2,
 .sj-festivals h2,
 .sj-practical h2,
-.sj-night h2 { font-family:var(--font-editorial); font-weight:500; text-transform:uppercase; line-height:.98; letter-spacing:-.035em; }
-.sj-hero h1 { font-size:clamp(3.5rem,7.5vw,8.2rem); }
+.sj-night h2 { font-family:var(--font-display); font-weight:500; text-transform:uppercase; line-height:.87; letter-spacing:-.045em; }
+.sj-hero h1 { font-size:clamp(3.5rem,7.5vw,8.2rem); line-height:1.08; }
 .sj-hero__content>p:last-child { max-width:30rem; margin-top:1.7rem; font-size:1.25rem; }
 .sj-down { position:absolute; z-index:3; right:4vw; bottom:1.8rem; color:#fff; }
 
@@ -301,6 +301,12 @@ body.student-life main { overflow:clip; }
 
 @media (min-width:801px) {
   .sj-festivals .sj-rail-nav { display:none; }
+}
+
+@media (max-width:359px) {
+  .sj-hero h1 { font-size:2.7rem; }
+  .sj-section-head h2 { font-size:2.5rem; }
+  .sj-night h2 { font-size:2.45rem; }
 }
 
 @media (prefers-reduced-motion:reduce) {

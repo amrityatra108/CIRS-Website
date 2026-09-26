@@ -4,7 +4,7 @@
 .crossroads-stories__accessible { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 /* Open arc: the active edition is upright, with increasingly tilted outer covers. */
 .crossroads-stories__spread { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:30px 40px; }
-.crossroads-stories__left,.crossroads-stories__right { display:flex; flex-direction:row; align-items:baseline; gap:.18em; font-family:"Newsreader"; font-size:clamp(40px,4.5vw,68px); font-weight:400; letter-spacing:-.045em; line-height:1; }
+.crossroads-stories__left,.crossroads-stories__right { display:flex; flex-direction:row; align-items:baseline; gap:.18em; font-family:var(--font-display); font-size:clamp(40px,4.5vw,68px); font-weight:400; letter-spacing:-.045em; line-height:1; }
 .crossroads-stories__right { justify-content:flex-end; }
 .crossroads-stories__left em { font-weight:400; }
 .crossroads-stories__number { color:var(--label); font-variant-numeric:tabular-nums; min-width:2ch; }
@@ -27,11 +27,11 @@
  .crossroads-stories__front:hover { z-index:12; transform:translateY(-3%) scale(1.06); border-color:#c9a961; box-shadow:0 26px 42px #1f1f1b55; }
  .crossroads-stories__stack a:hover img { filter:brightness(1.07) saturate(1.05); }
 }
-.crossroads-stories__year { width:min(100%,320px); margin:10px auto 0; display:flex; align-items:center; justify-content:center; gap:14px; color:var(--label); font-family:"Newsreader"; font-size:clamp(18px,1.7vw,24px); font-weight:500; letter-spacing:.16em; line-height:1; font-variant-numeric:lining-nums tabular-nums; }
+.crossroads-stories__year { width:min(100%,320px); margin:10px auto 0; display:flex; align-items:center; justify-content:center; gap:14px; color:var(--label); font-family:var(--font-ui); font-size:clamp(18px,1.7vw,24px); font-weight:500; letter-spacing:.16em; line-height:1; font-variant-numeric:lining-nums tabular-nums; }
 .crossroads-stories__year::before,.crossroads-stories__year::after { content:""; flex:1; height:1px; background:#d9c99f; }
 .crossroads-stories__footer { display:flex; align-items:center; justify-content:space-between; gap:32px; border-top:1px solid #e3dccb; padding-top:24px; margin-top:36px; }
-.crossroads-stories__footer p { margin:0; max-width:52ch; color:var(--label); font-family:"Newsreader"; font-size:18px; line-height:1.45; }
-.crossroads-stories__footer a { flex-shrink:0; display:inline-flex; align-items:center; gap:12px; min-height:44px; color:#1f1f1b; font-family:"Newsreader"; font-size:18px; text-decoration:underline; text-underline-offset:5px; }
+.crossroads-stories__footer p { margin:0; max-width:52ch; color:var(--label); font-family:var(--font-body); font-size:18px; line-height:1.45; }
+.crossroads-stories__footer a { flex-shrink:0; display:inline-flex; align-items:center; gap:12px; min-height:44px; color:#1f1f1b; font-family:var(--font-ui); font-size:18px; text-decoration:underline; text-underline-offset:5px; }
 .crossroads-stories__footer a:focus-visible { outline:3px solid var(--focus); outline-offset:4px; }
 @media(max-width:767px) {
  .crossroads-stories { padding:56px 20px; min-height:0; }

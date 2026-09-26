@@ -49,7 +49,7 @@ import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=110"
+CACHE_BUST = "b=111"
 
 # Where a film's large-screen encode is offered. Everything that fails it —
 # a phone held either way up — takes the phone encode (tools/make-films.py),
@@ -418,7 +418,7 @@ PAGES = {
         "cache_suffix": "-blog-editorial-1",
         "jump": False,
         "uc": False,
-        # Newsreader carries the Blog interface and prose; its grid remains distinct.
+        # Mona Sans carries the Blog interface and prose; its grid remains distinct.
         "litehead": True,
     },
     "cultural-gallery": {

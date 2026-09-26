@@ -77,9 +77,16 @@ body.why-cirs .panel__close{width:44px;height:44px}
 /* Read-more panels pair their existing, relevant photograph with the full
    text. On short screens the card itself scrolls while the image stays modest. */
 body.why-cirs .panel__card--illustrated{
+  display:grid;
+  grid-template-columns:42% minmax(0,1fr);
+  column-gap:clamp(26px,3vw,42px);
+  align-content:start;
   width:min(100%,920px);
   min-height:390px;
-  padding-left:calc(42% + clamp(26px,3vw,42px));
+  padding-left:clamp(30px,4vw,52px);
+}
+body.why-cirs .panel__card--illustrated > :not(.panel__image):not(.panel__close){
+  grid-column:2;
 }
 body.why-cirs .panel__image{
   position:absolute;
@@ -100,7 +107,7 @@ body.why-cirs .saga__more::after{content:"+";font-size:1.2em;line-height:0;trans
 body.why-cirs .saga__more:hover::after{transform:none}
 
 @media(max-width:700px){
-  body.why-cirs .panel__card--illustrated{min-height:0;padding:0 26px 30px}
+  body.why-cirs .panel__card--illustrated{display:block;min-height:0;padding:0 26px 30px}
   body.why-cirs .panel__image{
     position:relative;
     inset:auto;

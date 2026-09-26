@@ -16,11 +16,10 @@
    --aj-gold-ink for the two pale chapters (6.5:1 on the ivory).
    Nothing on this page sets gold on a light ground by hand.
 
-   THE TYPE. The site has no sans serif — Newsreader carries
-   display, body and interface across all forty-odd pages — so
-   the display/readable pairing here is Newsreader against
-   EB Garamond, which is the site's quotation face and does the
-   work the brief asked a sans to do: a second voice.
+   THE TYPE. The display face (--font-display) against the
+   quotation face (--font-quote), which does the work of a second
+   voice; labels and attributions are Mona Sans, the site's
+   interface face. Families are set once, in cirs.css.
 
    MOTION. Every "start hidden" state below is gated on
    html.js-motion, which cirs.js adds only when it is actually
@@ -45,7 +44,7 @@ body.alumni{
   --aj-hair:         rgba(244,240,230,.18);
   --aj-hair-soft:    rgba(244,240,230,.10);
 
-  --aj-display: var(--font-primary);
+  --aj-display: var(--font-display);
   --aj-voice:   var(--font-quote);
 
   background:var(--aj-ink);
@@ -610,7 +609,7 @@ html.js-motion .ajc__pt{ opacity:0; }
 }
 .ajv__name{
   position:relative; padding-left:38px;
-  font-family:var(--font-primary);
+  font-family:var(--font-ui);
   font-size:.74rem; letter-spacing:.20em; text-transform:uppercase;
   color:var(--aj-on-dark); font-weight:600;
 }

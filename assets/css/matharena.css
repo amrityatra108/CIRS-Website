@@ -25,7 +25,7 @@ body.matharena {
 
   background: var(--ma-black);
   color: var(--ma-cream);
-  font-family: inherit;
+  font-family: var(--font-body);
 }
 
 body.matharena #main {

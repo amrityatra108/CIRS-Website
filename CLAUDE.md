@@ -111,11 +111,12 @@ or the honeycomb. It needs playwright-core, which is not in the repository: poin
 from a CDN, so a sandbox session loads them and the reveals, the pinned sections and the smooth
 scroll can be checked before a change ships. This used to be the largest blind spot here.
 
-**Type now is, too.** Newsreader, Literata, EB Garamond and Tiro Devanagari Hindi are served
-from `assets/fonts/` rather than from fonts.googleapis.com, so a sandbox session renders the
-real lettering and line lengths, headline breaks and small caps can all be checked before a
-change ships. `tools/make-fonts.py` mirrors them; re-run it after changing a weight or adding
-a family and commit what changes.
+**Type now is, too.** Mona Sans serves English body and interface text. Bodoni Moda,
+Literata and EB Garamond serve the display, editorial and quotation roles;
+Tiro Devanagari Hindi still serves Devanagari. All current faces are self-hosted in
+`assets/fonts/`, so a sandbox session can check real lettering, line lengths and headline
+breaks. `tools/make-fonts.py` builds the font assets; see `docs/typography.md` before changing
+a face or weight.
 
 The cause, for anyone who meets it again elsewhere: it was never the certificate. The browser
 a session drives does not use `$HTTPS_PROXY`, which is what `curl` reads — so the request to
