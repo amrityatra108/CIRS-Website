@@ -140,6 +140,7 @@
   .founder .founders-journey__count{font-variant-numeric:tabular-nums;font-size:.75rem;letter-spacing:.08em;padding-bottom:1px}
   .founder .founders-journey__waypoints{display:none}
   .founder-journey-active .header{opacity:0;visibility:hidden;pointer-events:none}
+  body.founder-journey-active .header ~ .site-nav-handle{opacity:0}
 }
 
 @media (min-width:900px) and (max-height:800px) and (prefers-reduced-motion:no-preference){
