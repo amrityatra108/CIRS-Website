@@ -5,10 +5,10 @@
    campus, the departure, the field of destinations, the alumni,
    the pathways, the index, the return.
 
-   THE PALETTE. Warm ivory on deep charcoal, with CIRS navy and
-   an antique gold. The site's own purple is not used here: this
-   page is a night sky for most of its length, and the purple
-   reads as a colour against photographs rather than as ink.
+   THE PALETTE. Warm ivory on deep charcoal with the site's gold:
+   this page is a night sky for most of its length. The navy and
+   rose it once carried were decoration from outside the palette
+   and have gone; the pathway grounds below are all site roles.
 
    Gold has the problem palette.css documents at length — it is
    unreadable on pale grounds. So there are two tokens, not one:
@@ -29,26 +29,21 @@
    ============================================================ */
 
 body.alumni{
-  --aj-ink:        #0E0B12;
-  --aj-ink-2:      #141018;
-  --aj-ink-3:      #1C1722;
-  --aj-ivory:      #F7F3EC;
-  --aj-ivory-2:    #EFE9DF;
-  --aj-navy:       #16243A;
-  --aj-navy-lit:   #9FC0E8;
-  --aj-gold:       #C9922F;   /* on dark only  — 7.11:1 on --aj-ink   */
-  --aj-gold-lit:   #E8B24A;
-  --aj-gold-ink:   #6E5310;   /* on pale only  — 6.53:1 on --aj-ivory */
-  --aj-maroon:     #2A0A11;
-  --aj-slate:      #171C1E;
-  --aj-sage:       #A8C2BC;
-  --aj-rose:       #E0A2A8;
+  --aj-ink:        var(--dark-ink);
+  --aj-ink-2:      var(--dark-ink);
+  --aj-ink-3:      var(--dark-deep);
+  --aj-ivory:      var(--paper-2);
+  --aj-ivory-2:    var(--rule-soft);
+  --aj-gold:       var(--gold);   /* on dark only  — 8.40:1 on --aj-ink   */
+  --aj-gold-lit:   var(--gold-lit);
+  --aj-gold-ink:   var(--label);   /* on pale only  — 9.14:1 on --aj-ivory */
+  --aj-maroon:     var(--dark-deep);
 
-  --aj-on-dark:      #F7F3EC;
-  --aj-on-dark-soft: rgba(247,243,236,.76);
-  --aj-on-dark-mute: rgba(247,243,236,.52);
-  --aj-hair:         rgba(247,243,236,.18);
-  --aj-hair-soft:    rgba(247,243,236,.10);
+  --aj-on-dark:      var(--paper-2);
+  --aj-on-dark-soft: rgba(244,240,230,.76);
+  --aj-on-dark-mute: rgba(244,240,230,.52);
+  --aj-hair:         rgba(244,240,230,.18);
+  --aj-hair-soft:    rgba(244,240,230,.10);
 
   --aj-display: var(--font-primary);
   --aj-voice:   var(--font-quote);
@@ -110,10 +105,10 @@ body.alumni :focus-visible{
 .aj-open__wash{
   position:absolute; inset:0; z-index:1; pointer-events:none;
   background:
-    linear-gradient(to top, rgba(14,11,18,.94) 0%, rgba(14,11,18,.78) 26%,
-                    rgba(14,11,18,.34) 52%, rgba(14,11,18,.18) 74%,
-                    rgba(14,11,18,.42) 100%),
-    radial-gradient(120% 70% at 50% 100%, rgba(14,11,18,.55), transparent 62%);
+    linear-gradient(to top, rgba(17,17,15,.94) 0%, rgba(17,17,15,.78) 26%,
+                    rgba(17,17,15,.34) 52%, rgba(17,17,15,.18) 74%,
+                    rgba(17,17,15,.42) 100%),
+    radial-gradient(120% 70% at 50% 100%, rgba(17,17,15,.55), transparent 62%);
 }
 /* No max-width here. Capping this block is what wrapped "WHERE CIRS TAKES
    YOU" onto four lines on a wide screen and filled the window with it: the
@@ -146,7 +141,7 @@ body.alumni :focus-visible{
   font-size:clamp(1.9rem, 6.4vw, 5.8rem);
   line-height:1.0; letter-spacing:-.025em;
   text-transform:uppercase;
-  text-shadow:0 2px 26px rgba(5,4,10,.5);
+  text-shadow:0 2px 26px rgba(5,5,4,.5);
 }
 /* Two rows, each on one line. nowrap is the guarantee: the size above is
    chosen to fit, and if a future edit makes a row longer it will overflow
@@ -164,7 +159,7 @@ html.js-motion .aj-open__line:nth-child(2) > span{ transform:translateX(104vw); 
   max-width:38ch;
   font-size:clamp(1.15rem,2.1vw,1.8rem);
   line-height:1.4; color:var(--aj-on-dark-soft); letter-spacing:.01em;
-  text-shadow:0 1px 16px rgba(5,4,10,.7);
+  text-shadow:0 1px 16px rgba(5,5,4,.7);
 }
 html.js-motion .aj-open__sub{ opacity:0; }
 html.js-motion .aj-open__eyebrow{ opacity:0; }
@@ -200,7 +195,7 @@ body.alumni.aj-quiet .header:focus-within{ opacity:1; }
 .aj-portal__depth{
   position:absolute; inset:-10%;
   background:
-    radial-gradient(60% 50% at 50% 46%, rgba(201,146,47,.10), transparent 70%),
+    radial-gradient(60% 50% at 50% 46%, rgba(201,169,97,.10), transparent 70%),
     radial-gradient(90% 70% at 50% 120%, rgba(22,36,58,.55), transparent 70%);
   /* Visible by default so the dark is never flat without JavaScript; the
      rule below hands it to the timeline, which fades it up as the plate
@@ -318,14 +313,14 @@ html.js-motion .aj-portal__depth{ opacity:0; }
   container-type:inline-size;
   overflow:hidden;
   background:
-    radial-gradient(64% 84% at 50% 46%, rgba(26,32,58,.50), transparent 74%),
-    radial-gradient(120% 120% at 50% 50%, #07070E 30%, #030308 100%);
+    radial-gradient(64% 84% at 50% 46%, rgba(31,31,27,.50), transparent 74%),
+    radial-gradient(120% 120% at 50% 50%, #080806 30%, #040403 100%);
 }
 /* the vignette a lens gives, over everything */
 .ajc__field::after{
   content:""; position:absolute; inset:0; z-index:5; pointer-events:none;
   background:radial-gradient(118% 112% at 50% 48%,
-    transparent 48%, rgba(2,2,6,.50) 84%, rgba(2,2,6,.82) 100%);
+    transparent 48%, rgba(2,2,2,.50) 84%, rgba(2,2,2,.82) 100%);
 }
 .ajc__map{ position:absolute; inset:0; z-index:0; width:100%; height:100%; }
 /* Land is a shade, not a shape: a fill barely above the water and a
@@ -338,13 +333,13 @@ html.js-motion .aj-portal__depth{ opacity:0; }
 }
 .ajc__lines{ position:absolute; inset:0; z-index:2; width:100%; height:100%; }
 .ajc__line{
-  fill:none; stroke:rgba(190,208,240,.20); stroke-width:.7;
+  fill:none; stroke:rgba(232,217,181,.20); stroke-width:.7;
   vector-effect:non-scaling-stroke;
   transition:stroke .4s var(--e), stroke-width .4s var(--e), opacity .4s var(--e);
 }
 /* The hairline from a point out to its own name. Fainter than a route,
    because it carries no distance — it only says which name is whose. */
-.ajc__leader{ stroke:rgba(190,208,240,.16); stroke-width:.5; }
+.ajc__leader{ stroke:rgba(232,217,181,.16); stroke-width:.5; }
 .ajc__line.is-dim{ opacity:.05; }
 .ajc__line.is-lit{ stroke:var(--aj-gold-lit); stroke-width:1.5; opacity:1; }
 .ajc__leader.is-lit{ stroke-width:.8; }
@@ -355,7 +350,7 @@ html.js-motion .ajc__origin{ opacity:0; }
 /* The aircraft flying the routes: one per destination, out of Siruvani,
    turned to their heading. alumni-journey.js draws them and moves them;
    the sheet only says what colour they are. */
-.ajc__flight{ fill:#FFE9BE; }
+.ajc__flight{ fill:#EDE7D8; }
 
 /* the origin — CIRS, where every route starts */
 .ajc__origin{
@@ -366,15 +361,15 @@ html.js-motion .ajc__origin{ opacity:0; }
 }
 .ajc__originDot{
   width:9px; height:9px; border-radius:50%;
-  background:#FFFDF6;
+  background:#FFFFFF;
   /* Bright, and tight. The first draft threw ninety pixels of haze over
      southern India, which is where four of the nineteen destinations and
      two of their names are: the origin was erasing its own neighbours. */
   box-shadow:
-    0 0 0 3px rgba(255,236,190,.30),
-    0 0 12px 4px rgba(255,220,150,.70),
-    0 0 30px 10px rgba(226,168,86,.34),
-    0 0 62px 22px rgba(150,110,70,.16);
+    0 0 0 3px rgba(244,240,230,.30),
+    0 0 12px 4px rgba(232,217,181,.70),
+    0 0 30px 10px rgba(201,169,97,.34),
+    0 0 62px 22px rgba(143,110,47,.16);
 }
 .ajc__originName{
   /* In cqw like the destinations' names, so the origin does not swell
@@ -382,13 +377,13 @@ html.js-motion .ajc__origin{ opacity:0; }
      destinations standing closest to it. */
   font-size:clamp(.58rem, .95cqw, .72rem);
   letter-spacing:.24em; text-transform:uppercase;
-  color:#FFF3DC; font-weight:600; text-align:center;
+  color:#F4F0E6; font-weight:600; text-align:center;
   display:flex; flex-direction:column; line-height:1.35;
-  text-shadow:0 1px 8px rgba(3,3,8,.98), 0 0 18px rgba(3,3,8,.9);
+  text-shadow:0 1px 8px rgba(4,4,3,.98), 0 0 18px rgba(4,4,3,.9);
 }
 .ajc__originName small{
   font-size:.82em; letter-spacing:.16em; font-weight:400;
-  color:rgba(255,243,220,.62); text-transform:none;
+  color:rgba(244,240,230,.62); text-transform:none;
 }
 
 /* the points */
@@ -404,16 +399,16 @@ html.js-motion .ajc__origin{ opacity:0; }
 .ajc__dot{
   position:relative;
   width:7px; height:7px; border-radius:50%;
-  background:#FFF6E2;
-  box-shadow:0 0 7px 1px rgba(234,240,255,.55), 0 0 18px 4px rgba(159,192,232,.18);
+  background:#FAF9F3;
+  box-shadow:0 0 7px 1px rgba(250,249,243,.55), 0 0 18px 4px rgba(232,217,181,.18);
   transition:background-color .3s var(--e), box-shadow .35s var(--e), transform .35s var(--e);
 }
 .ajc__pt:hover .ajc__dot,
 .ajc__pt:focus-visible .ajc__dot,
 .ajc__pt.is-active .ajc__dot{
-  background:#FFF3D4; transform:scale(1.5);
-  box-shadow:0 0 0 4px rgba(201,146,47,.16), 0 0 14px 3px rgba(255,214,120,.75),
-             0 0 38px 10px rgba(201,146,47,.35);
+  background:#F4F0E6; transform:scale(1.5);
+  box-shadow:0 0 0 4px rgba(201,169,97,.16), 0 0 14px 3px rgba(232,217,181,.75),
+             0 0 38px 10px rgba(201,169,97,.35);
 }
 /* The flare a bright star throws, drawn only when one is asked about. It is
    gold and it is long, so it cannot be mistaken for the faint grey spikes
@@ -430,11 +425,11 @@ html.js-motion .ajc__origin{ opacity:0; }
 }
 .ajc__pt .ajc__dot::before{
   width:58px; height:1px;
-  background:linear-gradient(90deg, transparent, rgba(255,226,160,.95) 50%, transparent);
+  background:linear-gradient(90deg, transparent, rgba(232,217,181,.95) 50%, transparent);
 }
 .ajc__pt .ajc__dot::after{
   width:1px; height:58px;
-  background:linear-gradient(180deg, transparent, rgba(255,226,160,.95) 50%, transparent);
+  background:linear-gradient(180deg, transparent, rgba(232,217,181,.95) 50%, transparent);
 }
 .ajc__pt:hover .ajc__dot::before,
 .ajc__pt:focus-visible .ajc__dot::before,
@@ -461,7 +456,7 @@ html.js-motion .ajc__origin{ opacity:0; }
   display:flex; flex-direction:column; align-items:center; gap:1px;
   width:max-content; max-width:13ch; text-align:center;
   pointer-events:none;
-  text-shadow:0 1px 6px rgba(5,4,10,.95), 0 0 14px rgba(5,4,10,.8);
+  text-shadow:0 1px 6px rgba(5,5,4,.95), 0 0 14px rgba(5,5,4,.8);
   transition:opacity .28s var(--e);
 }
 .ajc__pt[data-side="r"] .ajc__label{
@@ -478,7 +473,7 @@ html.js-motion .ajc__origin{ opacity:0; }
      ones. The positions themselves are in tools/alumni.py. */
   font-size:clamp(.64rem, .98cqw, .78rem);
   line-height:1.2; letter-spacing:.012em; font-weight:600;
-  color:rgba(247,243,236,.82);
+  color:rgba(244,240,230,.82);
   transition:color .28s var(--e);
 }
 /* Taken out of flow: collapsed with max-height it still reported its full
@@ -495,7 +490,7 @@ html.js-motion .ajc__origin{ opacity:0; }
 .ajc__pt[data-side="l"] .ajc__country{ left:auto; right:0; transform:none; }
 .ajc__pt:hover .ajc__name,
 .ajc__pt:focus-visible .ajc__name,
-.ajc__pt.is-active .ajc__name{ color:#FFF6E2; }
+.ajc__pt.is-active .ajc__name{ color:#FAF9F3; }
 .ajc__pt:hover .ajc__country,
 .ajc__pt:focus-visible .ajc__country,
 .ajc__pt.is-active .ajc__country{ opacity:1; }
@@ -783,11 +778,14 @@ html:not(.js-motion) body.alumni .ajw-nav{ display:none; }
   content:""; display:block; width:26px; height:2px;
   background:var(--aj-accent); margin-bottom:12px;
 }
-.ajw[data-scene="ink"]{    --aj-scene:#0E0B12; --aj-accent:var(--aj-gold-lit); }
-.ajw[data-scene="navy"]{   --aj-scene:#16243A; --aj-accent:var(--aj-navy-lit); }
-.ajw[data-scene="gold"]{   --aj-scene:#2A2110; --aj-accent:#E8B24A; }
-.ajw[data-scene="slate"]{  --aj-scene:#171C1E; --aj-accent:var(--aj-sage); }
-.ajw[data-scene="maroon"]{ --aj-scene:#2A0A11; --aj-accent:var(--aj-rose); }
+/* Five pathways, five grounds from the one palette. The keys are the
+   ones tools/alumni.py writes; the pathway's name is always in text,
+   so no colour here carries meaning on its own. */
+.ajw[data-scene="ink"]{    --aj-scene:var(--dark-ink);    --aj-accent:var(--gold-lit); }
+.ajw[data-scene="navy"]{   --aj-scene:var(--dark);        --aj-accent:var(--gold-pale); }
+.ajw[data-scene="gold"]{   --aj-scene:var(--dark-mid);    --aj-accent:var(--gold); }
+.ajw[data-scene="slate"]{  --aj-scene:var(--dark-deep);   --aj-accent:var(--on-dark-soft); }
+.ajw[data-scene="maroon"]{ --aj-scene:var(--campus-dark); --aj-accent:var(--sage); }
 
 .ajw__n{
   margin:0 0 clamp(20px,3vw,30px);
@@ -971,8 +969,8 @@ a.ajw__evName{
 .aj-return__media img{ width:100%; height:100%; object-fit:cover; display:block; }
 .aj-return__wash{
   position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:linear-gradient(to right, rgba(14,11,18,.96) 0%, rgba(14,11,18,.88) 42%,
-                             rgba(14,11,18,.58) 72%, rgba(14,11,18,.48) 100%);
+  background:linear-gradient(to right, rgba(17,17,15,.96) 0%, rgba(17,17,15,.88) 42%,
+                             rgba(17,17,15,.58) 72%, rgba(17,17,15,.48) 100%);
 }
 .aj-return__inner{ position:relative; z-index:3; }
 .aj-return__head{
@@ -1127,7 +1125,7 @@ body.alumni .aj-return__acts .btn--ghost:hover{
 
   .aj-return{ min-height:auto; }
   .aj-return__wash{
-    background:linear-gradient(to top, rgba(14,11,18,.97) 30%, rgba(14,11,18,.72) 100%);
+    background:linear-gradient(to top, rgba(17,17,15,.97) 30%, rgba(17,17,15,.72) 100%);
   }
 }
 

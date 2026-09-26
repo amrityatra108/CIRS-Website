@@ -1,4 +1,4 @@
-:root{--paper:#f2efe8;--ink:#171914}
+:root{--paper:#f4f0e6;--ink:#171914}
 *{box-sizing:border-box}
 html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--paper)}
 body{display:grid;place-items:center}

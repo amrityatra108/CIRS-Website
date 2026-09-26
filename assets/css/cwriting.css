@@ -1,14 +1,14 @@
 /* Creative Writing: an anthology of student poems. Every rule is page scoped. */
 body.cwriting {
-  --cw-ivory: #f7f4ec;
-  --cw-ivory-deep: #eee9de;
-  --cw-charcoal: #211d22;
-  --cw-charcoal-soft: #302930;
-  --cw-ink: #29232a;
-  --cw-ink-soft: #5b5359;
-  --cw-gold: #d8bd7d;
-  --cw-gold-ink: #71511f;
-  --cw-rule: #d9d1c5;
+  --cw-ivory: var(--paper-2);
+  --cw-ivory-deep: var(--rule-soft);
+  --cw-charcoal: var(--dark-mid);
+  --cw-charcoal-soft: var(--dark);
+  --cw-ink: var(--dark);
+  --cw-ink-soft: var(--ink-soft);
+  --cw-gold: var(--gold-lit);
+  --cw-gold-ink: var(--label);
+  --cw-rule: #d6d3ca;
   background: var(--cw-ivory);
   color: var(--cw-ink);
 }
@@ -51,9 +51,9 @@ body.cwriting .cw-hero {
   overflow: hidden;
   color: var(--cw-ivory);
   background:
-    radial-gradient(circle at 76% 52%, rgba(216, 189, 125, .12), transparent 35%),
-    linear-gradient(118deg, #17151b 5%, #211d22 55%, #352b30);
-  border-bottom: 1px solid rgba(216, 189, 125, .45);
+    radial-gradient(circle at 76% 52%, rgba(216, 188, 122, .12), transparent 35%),
+    linear-gradient(118deg, #181815 5%, #1f1f1b 55%, #2a2925);
+  border-bottom: 1px solid rgba(216, 188, 122, .45);
   scroll-margin-top: 0;
 }
 
@@ -64,9 +64,9 @@ body.cwriting .cw-hero::before {
   right: -11%;
   width: min(76vw, 980px);
   aspect-ratio: 1;
-  border: 1px solid rgba(216, 189, 125, .15);
+  border: 1px solid rgba(216, 188, 122, .15);
   border-radius: 50%;
-  box-shadow: 0 0 0 85px rgba(216, 189, 125, .025);
+  box-shadow: 0 0 0 85px rgba(216, 188, 122, .025);
   content: "";
   pointer-events: none;
 }
@@ -105,7 +105,7 @@ body.cwriting .cw-hero__title {
   position: relative;
   z-index: 1;
   margin: 0;
-  color: #fbf9f4;
+  color: #faf9f3;
   font-family: var(--font-primary);
   font-size: clamp(6.5rem, 11.9vw, 11.2rem);
   font-weight: 500;
@@ -128,12 +128,12 @@ body.cwriting .cw-hero__footer {
   justify-content: space-between;
   gap: 34px;
   padding-top: 23px;
-  border-top: 1px solid rgba(216, 189, 125, .28);
+  border-top: 1px solid rgba(216, 188, 122, .28);
 }
 
 body.cwriting .cw-hero__subtitle {
   margin: 0;
-  color: #e6dde0;
+  color: #e3dccb;
   font-family: var(--font-editorial);
   font-size: clamp(1.12rem, 1.55vw, 1.4rem);
   line-height: 1.4;
@@ -150,7 +150,7 @@ body.cwriting .cw-hero__measure {
 }
 
 body.cwriting .cw-hero__measure strong {
-  color: #fff7df;
+  color: #faf9f3;
   font-variant-numeric: lining-nums tabular-nums;
   font-size: 1.18rem;
   font-weight: 500;
@@ -159,14 +159,14 @@ body.cwriting .cw-hero__measure strong {
 body.cwriting .cw-hero__measure-rule {
   width: 1px;
   height: 17px;
-  background: rgba(216, 189, 125, .5);
+  background: rgba(216, 188, 122, .5);
 }
 
 body.cwriting .cw-hero__enter {
   display: inline-flex;
   align-items: center;
   gap: 24px;
-  color: #f6ecdc;
+  color: #f4f0e6;
   font-size: 1.02rem;
   font-weight: 500;
   line-height: 1.2;
@@ -177,7 +177,7 @@ body.cwriting .cw-hero__enter span {
   place-items: center;
   width: 52px;
   aspect-ratio: 1;
-  border: 1px solid rgba(216, 189, 125, .72);
+  border: 1px solid rgba(216, 188, 122, .72);
   border-radius: 50%;
   color: var(--cw-gold);
   font-size: 1.35rem;
@@ -213,7 +213,7 @@ body.cwriting .cw-hero__excerpt {
 
 body.cwriting .cw-hero__excerpt-theme {
   display: block;
-  color: #ebd5a2;
+  color: #e8d9b5;
   font-size: .83rem;
   font-weight: 500;
   letter-spacing: .025em;
@@ -222,7 +222,7 @@ body.cwriting .cw-hero__excerpt-theme {
 body.cwriting .cw-hero__excerpt-line {
   display: block;
   margin-top: clamp(20px, 2vw, 28px);
-  color: #fffdf8;
+  color: #ffffff;
   font-family: var(--font-quote);
   font-size: clamp(2rem, 2.45vw, 2.6rem);
   font-style: italic;
@@ -234,7 +234,7 @@ body.cwriting .cw-hero__excerpt-line {
 body.cwriting .cw-hero__excerpt-credit {
   display: block;
   margin-top: 16px;
-  color: #f0dba8;
+  color: #e8d9b5;
   font-family: var(--font-primary);
   font-size: .92rem;
   font-style: normal;
@@ -251,7 +251,7 @@ body.cwriting .cw-hero__excerpt-link {
   min-width: 155px;
   margin-top: auto;
   padding-top: 15px;
-  color: #fff8ec;
+  color: #faf9f3;
   font-size: .86rem;
   font-weight: 500;
 }
@@ -276,7 +276,7 @@ body.cwriting .cw-introduction::before {
   width: min(65vw, 850px);
   height: 60%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(216, 189, 125, .18), transparent 68%);
+  background: radial-gradient(circle, rgba(216, 188, 122, .18), transparent 68%);
   pointer-events: none;
 }
 
@@ -467,7 +467,7 @@ body.cwriting a.cw-row__card:hover,
 body.cwriting .cw-row__card[data-cw-target]:hover,
 body.cwriting a.cw-row__card:focus-visible {
   border-color: var(--cw-gold-ink);
-  background: #fffefa;
+  background: #ffffff;
 }
 
 body.cwriting .cw-row__card-number {
@@ -625,7 +625,7 @@ body.cwriting .cw-chapter__poems {
   border: 1px solid rgba(255, 255, 255, .95);
   border-radius: 23px;
   background: rgba(255, 255, 255, .76);
-  box-shadow: 0 25px 72px rgba(43, 34, 35, .055), inset 0 1px 0 #fff;
+  box-shadow: 0 25px 72px rgba(42, 41, 37, .055), inset 0 1px 0 #fff;
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 }
@@ -750,7 +750,7 @@ body.cwriting .cw-interlude {
 body.cwriting .cw-interlude__line {
   display: block;
   max-width: 23ch;
-  color: #fffaf0;
+  color: #faf9f3;
   font-family: var(--font-quote);
   font-size: clamp(2.6rem, 5vw, 5rem);
   font-style: italic;
@@ -761,7 +761,7 @@ body.cwriting .cw-interlude__line {
 
 body.cwriting .cw-interlude__credit {
   display: block;
-  color: #e7cb8d;
+  color: #e8d9b5;
   font-family: var(--font-primary);
   font-size: .98rem;
   font-style: normal;
@@ -838,12 +838,12 @@ body.cwriting .cw-future__layout {
   gap: 30px clamp(45px, 8vw, 120px);
 }
 
-body.cwriting .cw-future .cw-kicker { color: #ebd19b; }
-body.cwriting .cw-future h2 { color: #fffaf0; }
+body.cwriting .cw-future .cw-kicker { color: #e8d9b5; }
+body.cwriting .cw-future h2 { color: #faf9f3; }
 
 body.cwriting .cw-future__layout > p {
   max-width: 37ch;
-  color: #e1d8d8;
+  color: #e3dccb;
   font-size: 1.12rem;
   line-height: 1.65;
 }
@@ -851,14 +851,14 @@ body.cwriting .cw-future__layout > p {
 body.cwriting .cw-future a {
   grid-column: 2;
   justify-self: start;
-  color: #f1dba7;
+  color: #e8d9b5;
 }
 
 /* The reader mode simplifies the surrounding treatment but keeps navigation. */
 body.cwriting.cw-quiet .cw-chapter,
 body.cwriting.cw-quiet .cw-chapter--2,
 body.cwriting.cw-quiet .cw-chapter--4 {
-  background: #fbfaf7;
+  background: #faf9f3;
 }
 
 body.cwriting.cw-quiet .cw-chapter__poems {
@@ -871,7 +871,7 @@ body.cwriting.cw-quiet .cw-chapter__poems {
 
 body.cwriting.cw-quiet .cw-interlude {
   color: var(--cw-ink);
-  background: #fbfaf7;
+  background: #faf9f3;
 }
 
 body.cwriting.cw-quiet .cw-interlude__line { color: var(--cw-ink); }

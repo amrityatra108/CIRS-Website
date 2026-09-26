@@ -97,7 +97,7 @@ body.film main{ background:var(--paper); }
   font-size:var(--film-size, clamp(26px, 3.8vw, 62px));
   line-height:1;
   text-transform:uppercase;
-  color:#FBFAF7;
+  color:#FAF9F3;
   z-index:3;
   /* --film-exit is the line leaving as a photograph arrives (Captures). It
      is a plain fade on top of the reveal rather than the reveal run
@@ -349,7 +349,7 @@ body.sports .film__scroll-cue span:first-child{
   width:26px;
   height:26px;
   place-items:center;
-  border:1px solid rgba(255,229,133,.76);
+  border:1px solid rgba(232,217,181,.76);
   border-radius:50%;
   font-size:1rem;
   letter-spacing:0;
@@ -396,7 +396,7 @@ body.art-attack .film__title{
   bottom:auto;
   width:min(86vw, 720px);
   padding:0;
-  color:#FFF9F0;
+  color:#FAF9F3;
   text-transform:none;
   transform:translate(-50%, calc(-50% + (1 - var(--film-reveal)) * 12px));
   filter:none;
@@ -412,7 +412,7 @@ body.art-attack .film__art-prefix{
   letter-spacing:.42em;
   line-height:1;
   text-transform:uppercase;
-  color:#EADBCD;
+  color:#E3DCCB;
 }
 body.art-attack .film__art-name{
   display:block;
@@ -426,7 +426,7 @@ body.art-attack .film__art-name{
 body.art-attack .film__seam{
   height:clamp(130px, 18svh, 220px);
   background:linear-gradient(to bottom,
-              #170F18 0%, #211722 24%, #76686C 64%, #F6F1E8 100%);
+              #170F18 0%, #211722 24%, #76686C 64%, #F4F0E6 100%);
 }
 body.art-attack .film[data-film-still] .film__video{ visibility:hidden; }
 @media (max-aspect-ratio:6/5){
@@ -511,7 +511,7 @@ body.theatre .film__title{
   font-weight:100;
   line-height:1;
   text-transform:uppercase;
-  color:#F3CD83;
+  color:#E8D9B5;
   text-shadow:0 1px 4px rgba(0, 0, 0, .25);
   transform:translateY(calc(-50% + (1 - var(--film-reveal)) * 12px));
   filter:none;
@@ -524,7 +524,7 @@ body.theatre .film__title::after{
   width:clamp(88px, 12vw, 170px);
   height:1px;
   margin:clamp(20px, 3vh, 34px) auto 0;
-  background:#C89A53;
+  background:#C9A961;
 }
 body.theatre .film[data-film-still] .film__video{ visibility:hidden; }
 body.theatre .film[data-film-still] .film__still{ visibility:visible; }

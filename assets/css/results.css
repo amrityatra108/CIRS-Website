@@ -11,17 +11,17 @@
      Every rule for it is prefixed .rb-on.
    ============================================================ */
 body.results{
-  --rb-navy:#101827;
-  --rb-navy-2:#172238;
-  --rb-cloth:#15203a;
-  --rb-ink:#1f1c17;
-  --rb-muted:#5f584d;
-  --rb-paper:#f3ebdd;
-  --rb-rule:#cdbfa8;
-  --rb-rule-dark:#a8987d;
-  --rb-gold:#d4a11d;
-  --rb-gold-lit:#e3c26c;
-  --rb-gold-ink:#835d12;
+  --rb-navy:var(--dark-ink);
+  --rb-navy-2:var(--ink);
+  --rb-cloth:var(--dark-mid);
+  --rb-ink:var(--ink);
+  --rb-muted:var(--ink-soft);
+  --rb-paper:var(--rule-soft);
+  --rb-rule:var(--rule);
+  --rb-rule-dark:var(--decoration-mute);
+  --rb-gold:var(--gold);
+  --rb-gold-lit:var(--gold-lit);
+  --rb-gold-ink:var(--label);
   --rb-sans:"Jost", system-ui, sans-serif;
   --rb-grain:radial-gradient(rgba(70,61,47,.07) .45px, transparent .6px);
   /* Room the fixed site header takes above the stage, and the chapter bar
@@ -38,9 +38,9 @@ body.results .header{ z-index:80; }
    pinned, well before cirs.js's boundary (the stage's lower edge) arrives, so
    the page lays the header's glass on for itself then. The ink comes from
    body.litehead, which results-journey.js sets alongside rb-paper. */
-body.results.rb-paper .header .wrap{ background-color:rgba(250,247,248,.72); border-color:rgba(57,42,72,.14); box-shadow:0 12px 36px rgba(21,8,24,.12), inset 0 1px 0 rgba(255,255,255,.8); }
+body.results.rb-paper .header .wrap{ background-color:rgba(250,249,243,.72); border-color:rgba(42,41,37,.14); box-shadow:0 12px 36px rgba(24,24,21,.12), inset 0 1px 0 rgba(255,255,255,.8); }
 @supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
-  body.results.rb-paper .header .wrap{ background-color:rgba(250,247,248,.64); -webkit-backdrop-filter:blur(16px) saturate(125%); backdrop-filter:blur(16px) saturate(125%); }
+  body.results.rb-paper .header .wrap{ background-color:rgba(250,249,243,.64); -webkit-backdrop-filter:blur(16px) saturate(125%); backdrop-filter:blur(16px) saturate(125%); }
 }
 /* The drawer is z-index 99: an open menu has to sit under its own close button. */
 body.results.menu-open .header{ z-index:100; }
@@ -49,28 +49,28 @@ body.results.menu-open .header{ z-index:100; }
 /* ------------------------------------------------------------
    The stage: navy, the headline, the chapter bar, the book
    ------------------------------------------------------------ */
-.rb{ position:relative; background:var(--rb-navy); color:#f4ecdf; }
+.rb{ position:relative; background:var(--rb-navy); color:#f4f0e6; }
 .rb-stage{ position:relative; padding:calc(var(--rb-top) + clamp(20px,4vw,44px)) var(--gut) 0; }
 .rb :focus-visible{ outline:2px solid var(--rb-gold-lit); outline-offset:3px; }
 .rb-page :focus-visible,.rb-next :focus-visible,.rb-directory :focus-visible{ outline-color:var(--rb-navy-2); }
 
 .rb-intro{ text-align:center; }
 .rb-kicker{ font:500 .8rem/1.3 var(--rb-sans); letter-spacing:.16em; text-transform:uppercase; color:var(--rb-gold-lit); }
-.rb-intro h1{ margin-top:12px; font:500 clamp(2.3rem,4.6vw,4.3rem)/1.02 var(--font-primary); letter-spacing:-.03em; color:#f7f1e6; }
-.rb-intro__lede{ max-width:44ch; margin:12px auto 0; font:1.06rem/1.5 var(--font-primary); color:rgba(244,236,223,.8); }
-.rb-intro__read{ display:inline-flex; align-items:center; gap:10px; min-height:44px; margin-top:16px; padding:0 22px; border:1px solid rgba(227,194,108,.6); border-radius:999px; font:500 .92rem/1 var(--rb-sans); letter-spacing:.03em; color:#f7f1e6; transition:background-color .2s ease,border-color .2s ease; }
+.rb-intro h1{ margin-top:12px; font:500 clamp(2.3rem,4.6vw,4.3rem)/1.02 var(--font-primary); letter-spacing:-.03em; color:#f4f0e6; }
+.rb-intro__lede{ max-width:44ch; margin:12px auto 0; font:1.06rem/1.5 var(--font-primary); color:rgba(244,240,230,.8); }
+.rb-intro__read{ display:inline-flex; align-items:center; gap:10px; min-height:44px; margin-top:16px; padding:0 22px; border:1px solid rgba(216,188,122,.6); border-radius:999px; font:500 .92rem/1 var(--rb-sans); letter-spacing:.03em; color:#f4f0e6; transition:background-color .2s ease,border-color .2s ease; }
 .rb-intro__read:hover{ background:rgba(255,255,255,.07); border-color:var(--rb-gold-lit); }
 
 /* The chapter bar. In the plain layout it is a row of links under the
    headline; in the book it sits under the book with previous and next. */
 .rb-chapters{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; margin-top:clamp(22px,3.5vw,36px); }
 .rb-chapters__list{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin:0; padding:0; list-style:none; }
-.rb-chapters a,.rb-chapters button{ display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 16px; border:1px solid rgba(244,236,223,.2); border-radius:999px; font:500 .92rem/1 var(--rb-sans); color:rgba(244,236,223,.86); transition:background-color .2s ease,border-color .2s ease,color .2s ease; }
+.rb-chapters a,.rb-chapters button{ display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 16px; border:1px solid rgba(244,240,230,.2); border-radius:999px; font:500 .92rem/1 var(--rb-sans); color:rgba(244,240,230,.86); transition:background-color .2s ease,border-color .2s ease,color .2s ease; }
 .rb-chapters a span{ font-size:.78rem; letter-spacing:.1em; color:var(--rb-gold-lit); }
-.rb-chapters a:hover,.rb-chapters button:hover{ color:#fff; border-color:rgba(244,236,223,.5); }
+.rb-chapters a:hover,.rb-chapters button:hover{ color:#fff; border-color:rgba(244,240,230,.5); }
 .rb-chapters a[aria-current="true"]{ color:#fff; border-color:var(--rb-gold-lit); background:rgba(255,255,255,.07); }
 .rb-chapters__step{ display:none!important; }
-.rb-chapters__plain[aria-pressed="true"]{ background:#f4ecdf; color:var(--rb-navy-2); border-color:#f4ecdf; }
+.rb-chapters__plain[aria-pressed="true"]{ background:#f4f0e6; color:var(--rb-navy-2); border-color:#f4f0e6; }
 .rb-chapters__plain[hidden]{ display:none!important; }
 
 /* ------------------------------------------------------------
@@ -89,8 +89,8 @@ body.results.menu-open .header{ z-index:100; }
 }
 /* The fold: each page darkens a little towards the spine, and the stack of
    leaves shows as a few lines along the outer and lower edges. */
-.rb-page--l{ background-image:linear-gradient(270deg,rgba(60,44,24,.15),rgba(60,44,24,0) 9%),var(--rb-grain); background-size:auto,4px 4px; box-shadow:-1px 1px 0 #d8ccb6,-2px 2px 0 #efe6d6,-3px 3px 0 #d3c6ae,-4px 4px 0 #ece2d1; }
-.rb-page--r{ background-image:linear-gradient(90deg,rgba(60,44,24,.13),rgba(60,44,24,0) 9%),var(--rb-grain); background-size:auto,4px 4px; box-shadow:1px 1px 0 #d8ccb6,2px 2px 0 #efe6d6,3px 3px 0 #d3c6ae,4px 4px 0 #ece2d1; }
+.rb-page--l{ background-image:linear-gradient(270deg,rgba(60,44,24,.15),rgba(60,44,24,0) 9%),var(--rb-grain); background-size:auto,4px 4px; box-shadow:-1px 1px 0 #d6d3ca,-2px 2px 0 #ede7d8,-3px 3px 0 #d3c6ae,-4px 4px 0 #ede7d8; }
+.rb-page--r{ background-image:linear-gradient(90deg,rgba(60,44,24,.13),rgba(60,44,24,0) 9%),var(--rb-grain); background-size:auto,4px 4px; box-shadow:1px 1px 0 #d6d3ca,2px 2px 0 #ede7d8,3px 3px 0 #d3c6ae,4px 4px 0 #ede7d8; }
 
 .rb-folio{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 16px; font:500 .84rem/1.35 var(--rb-sans); letter-spacing:.1em; text-transform:uppercase; color:var(--rb-gold-ink); }
 .rb-folio span{ white-space:nowrap; }
@@ -183,7 +183,7 @@ body.results.menu-open .header{ z-index:100; }
 .rb-regions li+li{ border-left:1px solid var(--rb-rule); }
 .rb-regions a{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; min-height:64px; padding:20px 20px 18px; font:500 clamp(1.08rem,1.5vw,1.36rem)/1.2 var(--font-primary); color:var(--rb-navy-2); transition:background-color .2s ease; }
 .rb-regions li:first-child a{ padding-left:0; }
-.rb-regions a:hover{ background:rgba(212,161,29,.1); }
+.rb-regions a:hover{ background:rgba(201,169,97,.1); }
 .rb-regions__count{ font:400 clamp(1.8rem,2.8vw,2.7rem)/1 var(--font-primary); color:var(--rb-gold-ink); font-variant-numeric:lining-nums; }
 
 .rb-directory{ padding:clamp(16px,3vw,40px) var(--gut) clamp(80px,10vw,140px); background:var(--rb-paper); }
@@ -224,7 +224,7 @@ body.results.menu-open .header{ z-index:100; }
   .rb-book{ row-gap:0; }
   .rb-page{ grid-column:1/-1; padding:28px clamp(20px,6vw,32px); }
   .rb-page--photo{ grid-column:auto; padding:14px 14px 12px; }
-  .rb-page--l:not(.rb-page--photo),.rb-page--r:not(.rb-page--photo){ background-image:var(--rb-grain); background-size:4px 4px; box-shadow:0 1px 0 #d8ccb6,0 2px 0 #efe6d6,0 3px 0 #d3c6ae; }
+  .rb-page--l:not(.rb-page--photo),.rb-page--r:not(.rb-page--photo){ background-image:var(--rb-grain); background-size:4px 4px; box-shadow:0 1px 0 #d6d3ca,0 2px 0 #ede7d8,0 3px 0 #d3c6ae; }
   #cbse-results,#ib-results,.rb-page--colophon{ margin-top:28px; }
   .rb-photo figcaption{ flex-direction:column; gap:2px; font-size:.72rem; }
   .rb-photo figcaption span+span{ letter-spacing:.06em; }
@@ -294,10 +294,10 @@ body.results.menu-open .header{ z-index:100; }
   border-radius:4px;
   background-color:var(--rb-cloth);
   background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.07) 0 1px,transparent 1px 3px);
-  box-shadow:0 4px 0 #0a1020,0 5px 0 #070c18,0 34px 60px -24px rgba(0,0,0,.75);
+  box-shadow:0 4px 0 #11110e,0 5px 0 #0d0d0a,0 34px 60px -24px rgba(0,0,0,.75);
 }
-.rb-on .rb-board::before{ content:""; position:absolute; top:0; bottom:0; left:calc(50% - 8px); width:16px; background:linear-gradient(90deg,#0b1222,#1c2945 50%,#0b1222); }
-.rb-on .rb-board::after{ content:""; position:absolute; inset:5px; border:1px solid rgba(212,161,29,.5); border-radius:2px; }
+.rb-on .rb-board::before{ content:""; position:absolute; top:0; bottom:0; left:calc(50% - 8px); width:16px; background:linear-gradient(90deg,#131310,#2a2a25 50%,#131310); }
+.rb-on .rb-board::after{ content:""; position:absolute; inset:5px; border:1px solid rgba(201,169,97,.5); border-radius:2px; }
 
 .rb-on .rb-page{ position:absolute; top:0; bottom:0; width:50%; min-height:0; padding:4.2cqh 4.4cqw 3.4cqh 3.8cqw; overflow:hidden; scroll-margin-top:0; }
 .rb-on .rb-page--l{ left:0; z-index:2; }
@@ -309,12 +309,12 @@ body.results.menu-open .header{ z-index:100; }
 .rb-on .rb-leaf>.rb-page{ left:0; width:100%; box-shadow:none; -webkit-backface-visibility:hidden; backface-visibility:hidden; }
 .rb-on .rb-face--back{ transform:rotateY(180deg); }
 /* A leaf darkens as it lifts from the light and brightens as it lands. */
-.rb-on .rb-face::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(38,27,12,.9),rgba(38,27,12,.55)); opacity:var(--shade,0); pointer-events:none; }
-.rb-on .rb-face--back::after{ background:linear-gradient(270deg,rgba(38,27,12,.9),rgba(38,27,12,.55)); }
+.rb-on .rb-face::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(31,31,27,.9),rgba(31,31,27,.55)); opacity:var(--shade,0); pointer-events:none; }
+.rb-on .rb-face--back::after{ background:linear-gradient(270deg,rgba(31,31,27,.9),rgba(31,31,27,.55)); }
 /* The shadow a turning leaf casts on the page it is leaving or landing on. */
 .rb-on .rb-shade{ display:block; position:absolute; top:0; bottom:0; z-index:35; width:50%; opacity:0; pointer-events:none; }
-.rb-on .rb-shade--l{ left:0; background:linear-gradient(270deg,rgba(28,20,8,.42),rgba(28,20,8,.14) 40%,rgba(28,20,8,0) 85%); }
-.rb-on .rb-shade--r{ left:50%; background:linear-gradient(90deg,rgba(28,20,8,.42),rgba(28,20,8,.14) 40%,rgba(28,20,8,0) 85%); }
+.rb-on .rb-shade--l{ left:0; background:linear-gradient(270deg,rgba(24,24,21,.42),rgba(24,24,21,.14) 40%,rgba(24,24,21,0) 85%); }
+.rb-on .rb-shade--r{ left:50%; background:linear-gradient(90deg,rgba(24,24,21,.42),rgba(24,24,21,.14) 40%,rgba(24,24,21,0) 85%); }
 
 /* Type set to the page, not to the window. */
 .rb-on .rb-title{ margin-top:2.6cqh; font-size:clamp(2rem,7.4cqh,3.8rem); }

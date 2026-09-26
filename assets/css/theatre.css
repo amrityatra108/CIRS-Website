@@ -23,12 +23,12 @@
    ============================================================ */
 
 body.theatre{
-  --th-night:   #0C0910;
-  --th-night-2: #141019;
-  --th-line:    rgba(245,238,242,.14);
-  --th-text:    #F5EEF2;
-  --th-soft:    #D3C8CF;
-  --th-mute:    #A99DA6;   /* 7.3:1 on the night ground */
+  --th-night:   var(--dark-ink);
+  --th-night-2: var(--dark-ink);
+  --th-line:    rgba(250,249,243,.14);
+  --th-text:    var(--on-dark);
+  --th-soft:    var(--on-dark-soft);
+  --th-mute:    var(--on-dark-mute);   /* 7.3:1 on the night ground */
   --th-gold:    var(--gold-lit);
   --th-gap:     clamp(12px, 1.6vw, 24px);
 }
@@ -48,7 +48,7 @@ body.theatre .th-label__act::before{
   content:""; width:7px; height:7px; border:1px solid currentColor; transform:rotate(45deg);
 }
 body.theatre .th-label--ink{ color:var(--ink-mute); }
-body.theatre .th-label--ink .th-label__act{ color:var(--maroon); }
+body.theatre .th-label--ink .th-label__act{ color:var(--label); }
 
 body.theatre .th-fig{ margin:0; min-width:0; }
 body.theatre .th-photo{
@@ -87,17 +87,17 @@ body.theatre .th-watch{ display:flex; flex-wrap:wrap; align-items:center; gap:va
 body.theatre .th-watch__link{
   display:inline-flex; align-items:center; gap:12px;
   padding:11px 20px 11px 12px;
-  border:1px solid rgba(255,215,92,.55); border-radius:999px;
+  border:1px solid rgba(216,188,122,.55); border-radius:999px;
   color:var(--th-text); font-weight:600; font-size:var(--fs-sm);
   transition:background .25s var(--e), border-color .25s var(--e), color .25s var(--e);
 }
-body.theatre .th-watch__link:hover{ background:var(--th-gold); border-color:var(--th-gold); color:var(--purple-ink); }
+body.theatre .th-watch__link:hover{ background:var(--th-gold); border-color:var(--th-gold); color:var(--dark-ink); }
 body.theatre .th-watch__play{
   width:26px; height:26px; border-radius:50%; background:var(--th-gold); flex:none; position:relative;
 }
 body.theatre .th-watch__play::after{
   content:""; position:absolute; left:10px; top:8px;
-  border-left:8px solid var(--purple-ink); border-top:5px solid transparent; border-bottom:5px solid transparent;
+  border-left:8px solid var(--dark-ink); border-top:5px solid transparent; border-bottom:5px solid transparent;
 }
 body.theatre .th-watch__len{ font-weight:400; color:var(--th-mute); font-variant-numeric:tabular-nums; }
 body.theatre .th-watch__link:hover .th-watch__len{ color:inherit; }
@@ -148,7 +148,7 @@ body.theatre .th-programme{
   body.theatre .th-programme__list{ grid-column:2; grid-row:1 / span 2; }
 }
 body.theatre .th-programme__label{
-  font-size:var(--fs-xs); font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--maroon);
+  font-size:var(--fs-xs); font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--label);
 }
 body.theatre .th-programme__lead{ color:var(--ink-soft); max-width:36ch; }
 body.theatre .th-programme__list{ display:grid; gap:1px; background:var(--rule); border:1px solid var(--rule); }
@@ -161,7 +161,7 @@ body.theatre .th-programme__act{
 }
 body.theatre .th-programme__act:hover{ background:var(--paper-2); }
 body.theatre .th-programme__n{
-  font-size:var(--fs-sm); font-weight:600; letter-spacing:.12em; color:var(--maroon);
+  font-size:var(--fs-sm); font-weight:600; letter-spacing:.12em; color:var(--label);
 }
 body.theatre .th-programme__name{ font-size:clamp(1.3rem, 1.9vw, 1.7rem); line-height:1.1; color:var(--ink); }
 body.theatre .th-programme__name::after{
@@ -178,7 +178,7 @@ body.theatre .th-au{
 /* The house lights go down: paper to night, before the first frame. */
 body.theatre .th-au::before{
   content:""; display:block; height:clamp(120px, 24vh, 260px);
-  background:linear-gradient(to bottom, var(--paper) 0%, #D9D0D6 22%, #3A2F3E 62%, var(--th-night) 100%);
+  background:linear-gradient(to bottom, var(--paper) 0%, #D6D3CA 22%, #34342E 62%, var(--th-night) 100%);
 }
 
 body.theatre .th-au__stage{
@@ -198,13 +198,13 @@ body.theatre .th-au__wide{ position:absolute; inset:0; }
 body.theatre .th-au__scrim{
   position:absolute; inset:0; pointer-events:none;
   background:
-    linear-gradient(to top, rgba(12,9,16,.94) 0%, rgba(12,9,16,.78) 30%, rgba(12,9,16,.42) 52%, rgba(12,9,16,0) 72%),
-    linear-gradient(to bottom, rgba(12,9,16,.55) 0%, rgba(12,9,16,0) 22%);
+    linear-gradient(to top, rgba(17,17,15,.94) 0%, rgba(17,17,15,.78) 30%, rgba(17,17,15,.42) 52%, rgba(17,17,15,0) 72%),
+    linear-gradient(to bottom, rgba(17,17,15,.55) 0%, rgba(17,17,15,0) 22%);
 }
 body.theatre .th-au__head .th-label{ color:var(--th-text); }
 body.theatre .th-au__head{
   position:absolute; left:0; right:0; bottom:0;
-  text-shadow:0 1px 16px rgba(12,9,16,.7);
+  text-shadow:0 1px 16px rgba(17,17,15,.7);
   padding:0 var(--gut) clamp(var(--space-6), 6vh, var(--space-8));
   max-width:calc(var(--maxw) + 2 * var(--gut)); margin-inline:auto;
 }
@@ -225,7 +225,7 @@ body.theatre .th-au__credit{
   position:absolute; right:var(--gut); bottom:clamp(20px, 3.4vh, 36px);
   max-width:24ch; text-align:right;
   font-style:italic; font-size:var(--fs-sm); color:var(--th-soft);
-  text-shadow:0 1px 12px rgba(12,9,16,.8);
+  text-shadow:0 1px 12px rgba(17,17,15,.8);
 }
 
 /* With motion, the stage holds while the scroll runs it: a darkened frame
@@ -384,7 +384,7 @@ body.theatre .th-bill__text{
   position:absolute; inset:auto 0 0 0;
   display:grid; gap:2px;
   padding:var(--space-7) clamp(var(--space-3), 1.6vw, var(--space-5)) clamp(var(--space-3), 1.6vw, var(--space-5));
-  background:linear-gradient(to top, rgba(12,9,16,.94) 10%, rgba(12,9,16,.6) 60%, rgba(12,9,16,0));
+  background:linear-gradient(to top, rgba(17,17,15,.94) 10%, rgba(17,17,15,.6) 60%, rgba(17,17,15,0));
 }
 body.theatre .th-bill__n{ font-size:var(--fs-sm); font-weight:600; letter-spacing:.14em; color:var(--th-gold); }
 body.theatre .th-bill__house{ font-size:clamp(1.35rem, 2.4vw, 2.2rem); line-height:1.05; }
@@ -403,7 +403,7 @@ body.theatre .th-rail{
 body.theatre .th-rail__inner{
   pointer-events:auto;
   display:flex; gap:2px; padding:4px;
-  background:rgba(12,9,16,.82);
+  background:rgba(17,17,15,.82);
   -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
   border:1px solid var(--th-line); border-radius:999px;
   max-width:calc(100vw - 24px); overflow-x:auto; scrollbar-width:none;
@@ -417,8 +417,8 @@ body.theatre .th-rail a{
 }
 body.theatre .th-rail__n{ font-size:var(--fs-xs); letter-spacing:.1em; color:var(--th-mute); }
 body.theatre .th-rail a:hover{ color:#fff; }
-body.theatre .th-rail a[aria-current="true"]{ background:var(--th-gold); color:var(--purple-ink); }
-body.theatre .th-rail a[aria-current="true"] .th-rail__n{ color:var(--purple-ink); }
+body.theatre .th-rail a[aria-current="true"]{ background:var(--th-gold); color:var(--dark-ink); }
+body.theatre .th-rail a[aria-current="true"] .th-rail__n{ color:var(--dark-ink); }
 @media (max-width:760px){
   body.theatre .th-rail{ top:72px; }
   body.theatre .th-rail a{ padding:7px 11px; }
@@ -441,9 +441,9 @@ body.theatre .th-house__label{
   position:absolute; left:0; right:0; bottom:0;
   display:flex; align-items:flex-end; gap:clamp(var(--space-4), 2.4vw, var(--space-7));
   padding:var(--space-9) var(--gut) clamp(var(--space-5), 4vw, var(--space-7));
-  background:linear-gradient(to top, rgba(8,6,11,.95) 0%, rgba(8,6,11,.86) 45%, rgba(8,6,11,.58) 76%, rgba(8,6,11,0) 100%);
+  background:linear-gradient(to top, rgba(7,7,6,.95) 0%, rgba(7,7,6,.86) 45%, rgba(7,7,6,.58) 76%, rgba(7,7,6,0) 100%);
   pointer-events:none;
-  text-shadow:0 1px 14px rgba(8,6,11,.75);
+  text-shadow:0 1px 14px rgba(7,7,6,.75);
 }
 body.theatre .th-house__numeral{
   font-family:var(--font-primary); font-weight:300; font-size:clamp(3.4rem, 9vw, 9rem); line-height:.78;
@@ -560,7 +560,7 @@ body.theatre .th-cp{
 body.theatre .th-cp::before{
   content:""; display:block; height:clamp(100px, 18vh, 200px);
   margin-bottom:clamp(var(--space-6), 5vw, var(--space-8));
-  background:linear-gradient(to bottom, var(--th-night) 0%, #3A2F3E 36%, #D9D0D6 78%, var(--paper) 100%);
+  background:linear-gradient(to bottom, var(--th-night) 0%, #34342E 36%, #D6D3CA 78%, var(--paper) 100%);
 }
 body.theatre .th-cp__head{ max-width:760px; margin-bottom:clamp(var(--space-6), 4vw, var(--space-8)); }
 body.theatre .th-cp__head .h2{ margin-bottom:18px; }
@@ -582,19 +582,19 @@ body.theatre .th-video__link:hover .th-video__thumb img{ transform:scale(1.025);
 body.theatre .th-video__len{
   position:absolute; right:8px; bottom:8px;
   padding:2px 7px; border-radius:4px;
-  background:rgba(14,11,18,.84); color:#fff;
+  background:rgba(17,17,15,.84); color:#fff;
   font-size:var(--fs-xs); font-weight:600; font-variant-numeric:tabular-nums;
 }
 body.theatre .th-video__class{
-  font-size:var(--fs-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--maroon);
+  font-size:var(--fs-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--label);
 }
 body.theatre .th-video__title{ font-size:clamp(1.25rem, 1.6vw, 1.45rem); line-height:1.2; color:var(--ink); }
 body.theatre .th-video__meta{ font-size:var(--fs-sm); color:var(--ink-mute); }
 body.theatre .th-video__cta{
-  margin-top:4px; font-size:var(--fs-sm); font-weight:600; color:var(--purple);
+  margin-top:4px; font-size:var(--fs-sm); font-weight:600; color:var(--dark);
   text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:4px; text-decoration-thickness:1.5px;
 }
-body.theatre .th-video__link:hover .th-video__cta{ color:var(--maroon); }
+body.theatre .th-video__link:hover .th-video__cta{ color:var(--label); }
 body.theatre .th-video__link:focus-visible{ outline:2px solid var(--gold); outline-offset:6px; }
 
 body.theatre .th-archive{
@@ -626,17 +626,17 @@ body.theatre .th-vrow__link:hover{ background:var(--paper-2); }
 body.theatre .th-vrow__link img{ grid-row:1 / 4; width:128px; height:72px; object-fit:cover; background:var(--paper-3); }
 body.theatre .th-vrow__title{ font-size:.98rem; line-height:1.35; color:var(--ink); }
 body.theatre .th-vrow__meta{ font-size:var(--fs-xs); color:var(--ink-mute); }
-body.theatre .th-vrow__cta{ font-size:var(--fs-xs); font-weight:600; color:var(--purple); }
+body.theatre .th-vrow__cta{ font-size:var(--fs-xs); font-weight:600; color:var(--dark); }
 
 body.theatre .th-cp__links{
   display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-4) var(--space-6);
   margin-top:clamp(var(--space-7), 5vw, var(--space-8));
 }
 body.theatre .th-cp__channel{
-  font-size:var(--fs-sm); font-weight:600; color:var(--purple);
+  font-size:var(--fs-sm); font-weight:600; color:var(--dark);
   border-bottom:1px solid var(--gold); padding-bottom:2px;
 }
-body.theatre .th-cp__channel:hover{ color:var(--maroon); }
+body.theatre .th-cp__channel:hover{ color:var(--label); }
 
 /* ------------------------------------------------------------ the closing */
 
@@ -652,13 +652,13 @@ body.theatre .th-invite__action .btn{ white-space:normal; }
 body.theatre dialog.th-viewer{
   width:100vw; height:100vh; height:100dvh; max-width:none; max-height:none;
   margin:0; padding:0; border:0; inset:0;
-  background:rgba(8,6,11,.97); color:var(--th-text);
+  background:rgba(7,7,6,.97); color:var(--th-text);
   overflow:hidden;
 }
 body.theatre dialog.th-viewer[open]{
   display:grid; grid-template-rows:auto minmax(0,1fr) auto;
 }
-body.theatre dialog.th-viewer::backdrop{ background:rgba(8,6,11,.9); }
+body.theatre dialog.th-viewer::backdrop{ background:rgba(7,7,6,.9); }
 body.theatre .th-viewer__top{
   display:flex; align-items:center; gap:var(--space-4);
   padding:var(--space-4) var(--space-4) var(--space-3) var(--gut);
@@ -671,11 +671,11 @@ body.theatre .th-viewer__close,
 body.theatre .th-viewer__step{
   display:inline-grid; place-items:center;
   width:46px; height:46px; border-radius:50%;
-  border:1px solid var(--th-line); background:rgba(20,16,25,.7); color:#fff;
+  border:1px solid var(--th-line); background:rgba(17,17,15,.7); color:#fff;
   transition:border-color .2s var(--e), background .2s var(--e);
 }
 body.theatre .th-viewer__close:hover,
-body.theatre .th-viewer__step:hover{ border-color:var(--th-gold); background:rgba(20,16,25,.95); }
+body.theatre .th-viewer__step:hover{ border-color:var(--th-gold); background:rgba(17,17,15,.95); }
 body.theatre .th-viewer__stage{
   display:flex; align-items:center; justify-content:center;
   min-height:0; padding:0 clamp(12px, 7vw, 96px);

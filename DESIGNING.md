@@ -98,9 +98,37 @@ Most visual change needs no markup at all.
 - **`assets/css/pages.css`** — per-page components: header tabs, page hero,
   jump menu, tables, the news list.
 
-The identity is deep purple, gold, dark red, black and white. **Red text on
-purple was deliberately removed and replaced with gold** because it was
-illegible; do not reintroduce it. The spacing scale (`--space-1` … `--space-10`)
+The palette is ivory and white, charcoal, gold, natural green and a
+restrained royal purple, defined as **roles** at the top of `cirs.css`:
+
+- **Grounds** `--paper` ivory `#FAF9F3`, `--paper-2` `#F4F0E6`, `--paper-3`
+  cream `#EDE7D8`, `--white`; the immersive dark sections are warm charcoal,
+  `--dark` … `--dark-ink`, not a colour.
+- **Lettering** `--ink`, `--ink-soft`, `--ink-mute` on paper; `--on-dark`,
+  `--on-dark-soft`, `--on-dark-mute` on the dark sections.
+- **Gold** `--gold` `#C9A961` is a fill, a rule, an icon, or lettering *on
+  dark*. On ivory it is 2.13:1 — never lettering there. `--gold-ink`
+  `#8F6E2F` is large lettering on paper only (4.48:1 on ivory, which is
+  below 4.5:1 for body text). Text on a gold fill is `--on-gold` charcoal,
+  never white (white on gold is 2.25:1).
+- **Small labels on paper** — eyebrows, kickers, table heads — are
+  `--label`, the royal purple `#5B2A72` (9.86:1). If the owner prefers
+  charcoal labels, that is this one token.
+- **Green** `--campus`, `--sage`, `--nature-pale` belong to campus and nature
+  contexts, not to every button. **Status** `--ok`, `--warn`, `--error`,
+  `--info` carry meaning only.
+- **Focus** is `--focus`, which reads on both ivory and charcoal.
+
+A page sheet reads these roles. It does not define its own paper, ink or gold;
+where a page keeps local token names, they are aliases of these. Colours that
+are *meaning*, not decoration, are kept as they are and listed at the top of
+their sheet: the four house colours, the festival inks (Onam marigold, Holi
+magenta), the Records page's status colours, Math Arena's gold/blue move
+markers, and film "seam" colours matched to the frames of a video. Never
+recolour photographs, scans, artwork, covers, films or logos, and never
+attribute a house by costume colour.
+
+The spacing scale (`--space-1` … `--space-10`)
 exists so new components are built on the same steps rather than one-off pixel
 values — please keep to it.
 
@@ -224,7 +252,5 @@ does not move the number, the diagnosis is wrong — do not push harder on it.**
 
 Do not resolve these unilaterally; they are the owner's calls.
 
-- Primary buttons are white-on-gold at **1.61:1**, below the 4.5:1 minimum.
-  Dark purple text on the same gold gives 12.15:1. Undecided.
 - A rewritten "CIRS is a family" passage is drafted but not yet placed on the
   Why CIRS page.

@@ -92,6 +92,11 @@ or the honeycomb. It needs playwright-core, which is not in the repository: poin
   `assets/img`; that would break the orphan check in `check-links.py`.
 - Placeholder copy says plainly that it is waiting for the school. Do not replace a bracketed
   placeholder with invented content — particularly not testimonials.
+- Colour is a set of roles at the top of `assets/css/cirs.css` (grounds, ink, gold, label,
+  campus green, status, focus). Page sheets read those roles; page-local colour tokens are
+  aliases of them. Gold `--gold` is never lettering on ivory, and text on a gold fill is
+  `--on-gold`, not white. House colours, festival inks, status colours and film seam colours
+  are meaning, not decoration, and stay. DESIGNING.md §4 has the detail.
 - `netlify.toml` and `vercel.json` both exist during the move to Vercel and must be changed
   together until Netlify is retired. See HOSTING.md.
 - Every opening film has a phone cut, `assets/video/<name>-m.mp4`, from `tools/make-films.py`,

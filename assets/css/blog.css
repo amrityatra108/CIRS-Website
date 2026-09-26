@@ -1,11 +1,11 @@
 /* Reading pages for Ideas from CIRS. The student text remains the focus. */
 body.blog{
-  --art-paper:#FAF7F8;
-  --art-ink:#211B22;
-  --art-soft:#463C46;
-  --art-muted:#675B66;
-  --art-rule:#D6CCD2;
-  --art-gold:#FFC308;
+  --art-paper:var(--paper);
+  --art-ink:var(--ink);
+  --art-soft:var(--ink-soft);
+  --art-muted:var(--ink-mute);
+  --art-rule:#D6D3CA;
+  --art-gold:var(--gold);
   background:var(--art-paper);
   color:var(--art-ink);
 }
@@ -24,14 +24,14 @@ body.blog{
   color:var(--art-muted);font-size:14px;
 }
 .art__breadcrumb a{color:var(--art-ink);text-decoration:none;border-bottom:1px solid currentColor}
-.art__breadcrumb a:hover{color:#846300}
+.art__breadcrumb a:hover{color:var(--label)}
 .art__breadcrumb a:focus-visible,.art__rail a:focus-visible,
 .art__foot a:focus-visible,.art__related a:focus-visible{
   outline:3px solid var(--art-gold);outline-offset:4px;
 }
 .art__edition{
   display:flex;align-items:center;gap:10px;
-  margin:0 0 19px;color:#765A00;font-size:15px;
+  margin:0 0 19px;color:var(--label);font-size:15px;
 }
 .art__edition span{color:var(--art-rule)}
 .art__title{
@@ -79,7 +79,7 @@ body.blog{
 .art__hero img{
   display:block;width:100%;height:auto;max-height:70vh;
   object-fit:contain;object-position:center;
-  background:#EFEAED;
+  background:#EEE9DE;
 }
 .art__hero figcaption{
   padding-top:10px;color:var(--art-muted);
@@ -127,7 +127,7 @@ body.blog{
 .art__related a{display:block;color:var(--art-ink);text-decoration:none}
 .art__related a span{
   display:block;margin-bottom:15px;
-  color:#765A00;font-size:13px;line-height:1.4;
+  color:var(--label);font-size:13px;line-height:1.4;
 }
 .art__related a strong{
   display:block;font-size:clamp(1.5rem, 2.3vw, 2.35rem);
@@ -191,5 +191,5 @@ body.blog{
   padding-top:var(--space-5);
   border-top:1px solid var(--rule);
 }
-.art__back a{ color:var(--purple); font-weight:500; }
-.art__back a:hover{ color:var(--maroon); }
+.art__back a{ color:var(--dark); font-weight:500; }
+.art__back a:hover{ color:var(--label); }

@@ -12,24 +12,24 @@
 body.founder{
   /* A warmer ground than the site's --paper, which is faintly cool.
      Parchment, charcoal, sage and a gold used once or twice. */
-  --f-paper:   #F4F0E8;
-  --f-paper-2: #ECE6DA;
-  --f-ghost:   #E3DCCC;
-  --f-ink:     #211E19;
-  --f-soft:    #684124;
-  --f-mute:    #805128;
-  --f-rule:    #DAD2C2;   /* hairlines only — never a text colour */
-  --f-sage:    #92581F;
-  --f-earth:   #92581F;
-  --f-gold:    #A8823A;   /* rules, marks and text on the dark ground */
-  --f-gold-ink:#7E622B;   /* the same gold, dark enough to be read on paper */
+  --f-paper:   var(--paper-2);
+  --f-paper-2: var(--paper-3);
+  --f-ghost:   var(--rule);
+  --f-ink:     var(--ink);
+  --f-soft:    var(--ink-soft);
+  --f-mute:    var(--ink-soft);
+  --f-rule:    #D6D3CA;   /* hairlines only — never a text colour */
+  --f-sage:    var(--label);
+  --f-earth:   var(--ink-soft);
+  --f-gold:    var(--gold);   /* rules, marks and text on the dark ground */
+  --f-gold-ink:var(--label);   /* the same gold, dark enough to be read on paper */
 
   background:var(--f-paper); color:var(--f-ink);
 }
 body.founder .footer-wrap{ background:var(--f-paper-2); }
 
 /* Approved autonomous portrait opening, isolated from editorial page styles. */
-.founder .founder-opening{position:relative;box-sizing:border-box;height:100vh;height:100svh;min-height:420px;padding-top:100px;background:#f2efe8;}
+.founder .founder-opening{position:relative;box-sizing:border-box;height:100vh;height:100svh;min-height:420px;padding-top:100px;background:var(--paper-2);}
 .founder .founder-opening__frame{display:block;width:100%;height:100%;border:0;}
 /* The embedded portrait draws its own cursor. Hide the site-wide trailing
    ring while the pointer is inside the iframe so the ring cannot freeze at
@@ -69,7 +69,7 @@ body.founder:has(.founder-opening__frame:hover) > .ring{opacity:0!important;}
    build-site.py), which is what it always was in fact — it opens on
    parchment — so the shared sheet already gives it dark-on-light lettering
    and the dark-on-light pills. All that is left here is the hue: the site's
-   purple against parchment is a little cold, so the wordmark and the marks
+   dark against parchment is a little cold, so the wordmark and the marks
    take the page's own ink and soft instead.
 
    It sets the header's ink tokens (see "Header" in pages.css) rather than
@@ -452,7 +452,7 @@ body.founder #progress{ display:none; }
   border-top:1px solid var(--f-rule);
   background:
     radial-gradient(58% 52% at 84% 14%,
-      rgba(168,130,58,.16) 0%, rgba(168,130,58,.055) 46%, rgba(168,130,58,0) 74%),
+      rgba(201,169,97,.16) 0%, rgba(201,169,97,.055) 46%, rgba(201,169,97,0) 74%),
     linear-gradient(180deg,
       var(--f-paper) 0%, var(--f-paper-2) 62%, var(--f-ghost) 100%);
 }
@@ -525,7 +525,7 @@ body.founder #progress{ display:none; }
   letter-spacing:.12em; text-transform:uppercase;
 }
 .fmotto__deva{
-  margin:0 0 20px; color:#706F68;
+  margin:0 0 20px; color:var(--ink-mute);
   font-family:var(--deva); font-size:clamp(1.24rem,1.65vw,1.55rem);
   line-height:1.5; letter-spacing:0;
 }
@@ -535,7 +535,7 @@ body.founder #progress{ display:none; }
   font-weight:400; font-style:italic; line-height:.88; letter-spacing:-.045em;
 }
 .fmotto__gloss{
-  margin:30px 0 0; color:#706F68;
+  margin:30px 0 0; color:var(--ink-mute);
   font-family:var(--font-primary); font-size:clamp(1rem,1.35vw,1.25rem);
   line-height:1.5; letter-spacing:0;
 }
@@ -554,7 +554,7 @@ body.founder #progress{ display:none; }
 .fmotto__verse p{margin:0}
 .founder .fmotto__say{
   max-width:66ch; margin:30px 0 0; padding-left:clamp(25px,2.5vw,35px);
-  color:#706F68; font-size:1rem; line-height:1.72;
+  color:var(--ink-mute); font-size:1rem; line-height:1.72;
 }
 
 @media (max-width:959px){

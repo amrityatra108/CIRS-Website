@@ -7,7 +7,7 @@
 
    The architecture came from the archive built as a standalone
    folder. What changed, so that it belongs to the site: the
-   palette is the site's purple and gold rather than its own
+   palette is the site's charcoal and gold rather than its own
    near-copies, the type follows the approved Newsreader system,
    the site's header sits over it, and the fold names the page.
 
@@ -26,8 +26,8 @@ body.wall{
    on <body>. Without it iOS still rubber-bands the document. */
 html:has(> body.wall), body.wall{
   margin:0; padding:0; width:100%; height:100%; overflow:hidden;
-  background:radial-gradient(ellipse at 50% 40%, var(--purple) 0%, var(--purple-ink) 70%);
-  background-color:var(--purple-ink);
+  background:radial-gradient(ellipse at 50% 40%, var(--dark) 0%, var(--dark-ink) 70%);
+  background-color:var(--dark-ink);
   color:var(--paper);
   overscroll-behavior:none;
   -webkit-user-select:none; user-select:none;
@@ -69,22 +69,22 @@ body.wall.is-touch #cursor-ring, body.wall.is-touch #cursor-dot{ display:none; }
 /* --- THE FIELD --- */
 body.wall #p1-wrap{ position:fixed; inset:0; z-index:10; touch-action:none; outline:none; }
 body.wall #p1-viewport{ position:absolute; inset:0; perspective:1120px; perspective-origin:50% 48%; pointer-events:none; }
-body.wall #p1-viewport::after{ content:""; position:absolute; inset:0; z-index:20; pointer-events:none; background:linear-gradient(90deg, rgba(14,11,18,.58), transparent 18%, transparent 82%, rgba(14,11,18,.58)), radial-gradient(ellipse at 50% 48%, transparent 30%, rgba(14,11,18,.16) 68%, rgba(14,11,18,.42) 100%); }
+body.wall #p1-viewport::after{ content:""; position:absolute; inset:0; z-index:20; pointer-events:none; background:linear-gradient(90deg, rgba(17,17,15,.58), transparent 18%, transparent 82%, rgba(17,17,15,.58)), radial-gradient(ellipse at 50% 48%, transparent 30%, rgba(17,17,15,.16) 68%, rgba(17,17,15,.42) 100%); }
 body.wall #p1-stage{ position:absolute; inset:0; transform-style:preserve-3d; transform-origin:50vw 50vh; will-change:transform; pointer-events:auto; }
 
 /* Tiles are plain: no backdrop blur (it re-samples everything behind each
    tile every frame) and no overflow clipping on a 3D layer (that forces a
    mask). The photograph rounds its own corners instead. */
-body.wall .p1-tile{ padding:0; font:inherit; appearance:none; position:absolute; left:0; top:0; width:100px; height:100px; box-sizing:border-box; background:rgba(57,42,72,.9); border-radius:12px; border:1px solid rgba(var(--gold-rgb),.24); -webkit-backface-visibility:hidden; backface-visibility:hidden; contain:layout style; transition:border-color .24s ease, box-shadow .24s ease; }
+body.wall .p1-tile{ padding:0; font:inherit; appearance:none; position:absolute; left:0; top:0; width:100px; height:100px; box-sizing:border-box; background:rgba(42,41,37,.9); border-radius:12px; border:1px solid rgba(var(--gold-rgb),.24); -webkit-backface-visibility:hidden; backface-visibility:hidden; contain:layout style; transition:border-color .24s ease, box-shadow .24s ease; }
 body.wall .p1-tile img{ display:block; width:100%; height:100%; object-fit:cover; border-radius:11px; opacity:.56; filter:saturate(.78) brightness(.82); transition:opacity .32s ease, filter .32s ease, transform .32s ease; pointer-events:none; -webkit-user-drag:none; }
-body.wall .p1-tile.depth-back{ border-color:rgba(var(--gold-rgb),.12); box-shadow:0 8px 22px rgba(8,5,10,.18); }
+body.wall .p1-tile.depth-back{ border-color:rgba(var(--gold-rgb),.12); box-shadow:0 8px 22px rgba(6,6,5,.18); }
 body.wall .p1-tile.depth-back img{ opacity:.27; filter:saturate(.55) brightness(.64); }
-body.wall .p1-tile.depth-main{ box-shadow:0 18px 42px rgba(8,5,10,.38); }
-body.wall .p1-tile.depth-front{ border-color:rgba(var(--gold-rgb),.48); box-shadow:0 34px 72px rgba(8,5,10,.58), 0 0 0 1px rgba(var(--gold-rgb),.08); }
+body.wall .p1-tile.depth-main{ box-shadow:0 18px 42px rgba(6,6,5,.38); }
+body.wall .p1-tile.depth-front{ border-color:rgba(var(--gold-rgb),.48); box-shadow:0 34px 72px rgba(6,6,5,.58), 0 0 0 1px rgba(var(--gold-rgb),.08); }
 body.wall .p1-tile.depth-front img{ opacity:.82; filter:saturate(.92) brightness(.92); }
-body.wall .p1-tile.is-hovered{ border-color:rgba(var(--gold-rgb),.88); box-shadow:0 38px 84px rgba(8,5,10,.64), 0 0 32px rgba(var(--gold-rgb),.12); }
+body.wall .p1-tile.is-hovered{ border-color:rgba(var(--gold-rgb),.88); box-shadow:0 38px 84px rgba(6,6,5,.64), 0 0 32px rgba(var(--gold-rgb),.12); }
 body.wall .p1-tile.is-hovered img{ opacity:1; filter:saturate(1.05) brightness(1.04); transform:scale(1.018); }
-body.wall .p1-tile:focus-visible{ outline:3px solid #fff; outline-offset:4px; box-shadow:0 0 0 7px #1E1626; }
+body.wall .p1-tile:focus-visible{ outline:3px solid #fff; outline-offset:4px; box-shadow:0 0 0 7px #181815; }
 body.wall .p1-tile:focus-visible img{ opacity:1; }
 @media (hover: hover) and (pointer: fine){ body.wall .p1-tile{ cursor:pointer; } }
 
@@ -98,10 +98,10 @@ body.wall .p1-hero{ position:fixed; inset:0; display:grid; place-items:center; a
 /* A photograph can sit bright behind the title. This darkens the middle of
    the window just enough to hold the type, and leaves with the fold, so the
    moment you start dragging there is nothing over the wall at all. */
-body.wall .p1-hero::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:calc(var(--fold) * .92); background:radial-gradient(ellipse 46% 38% at 50% 50%, rgba(14,11,18,.82) 0%, rgba(14,11,18,.55) 45%, rgba(14,11,18,0) 78%); }
+body.wall .p1-hero::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:calc(var(--fold) * .92); background:radial-gradient(ellipse 46% 38% at 50% 50%, rgba(17,17,15,.82) 0%, rgba(17,17,15,.55) 45%, rgba(17,17,15,0) 78%); }
 body.wall .p1-hero__eyebrow{ position:relative; grid-column:1; margin:0; opacity:var(--fold); font-family:var(--font-primary); font-size:var(--fs-xs); letter-spacing:.06em; text-transform:none; color:rgba(var(--gold-rgb),.72); text-align:center; }
 body.wall .p1-hero__title{ position:relative; grid-column:1; display:grid; place-items:center; }
-body.wall .p1-hero-text{ grid-area:1 / 1; margin:0; font-family:var(--font-primary); font-size:clamp(2.4rem, 8vw, 6.4rem); font-weight:500; text-align:center; line-height:.94; letter-spacing:-.015em; opacity:0; will-change:opacity; background:linear-gradient(180deg, var(--gold-lit) 0%, var(--gold) 55%, #A87A05 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+body.wall .p1-hero-text{ grid-area:1 / 1; margin:0; font-family:var(--font-primary); font-size:clamp(2.4rem, 8vw, 6.4rem); font-weight:500; text-align:center; line-height:.94; letter-spacing:-.015em; opacity:0; will-change:opacity; background:linear-gradient(180deg, var(--gold-lit) 0%, var(--gold) 55%, #C9A961 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 body.wall .p1-hero-text em{ font-style:italic; }
 body.wall .p1-hero-text.soft{ filter:blur(40px); }
 
@@ -110,18 +110,18 @@ body.wall .p1-hud{ position:fixed; z-index:80; font-size:var(--fs-xs); text-tran
 body.wall .hud-br{ bottom:34px; right:34px; }
 
 /* --- THE OPENED PHOTOGRAPH --- */
-body.wall .wallmodal{ display:none; position:fixed; inset:0; background:rgba(14,11,18,.98); -webkit-backdrop-filter:blur(50px); backdrop-filter:blur(50px); z-index:5000000; opacity:0; transition:opacity .45s ease; flex-direction:row; touch-action:pan-y; -webkit-user-select:text; user-select:text; }
+body.wall .wallmodal{ display:none; position:fixed; inset:0; background:rgba(17,17,15,.98); -webkit-backdrop-filter:blur(50px); backdrop-filter:blur(50px); z-index:5000000; opacity:0; transition:opacity .45s ease; flex-direction:row; touch-action:pan-y; -webkit-user-select:text; user-select:text; }
 body.wall .wallmodal.is-open{ opacity:1; }
 body.wall .m-left{ flex:1.8; min-width:0; min-height:0; height:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:40px; box-sizing:border-box; }
-body.wall .m-right{ flex:1.2; min-width:0; height:100%; background:var(--purple-deep); padding:100px 60px; display:flex; flex-direction:column; font-family:var(--font-primary); overflow-y:auto; border-left:1px solid rgba(var(--gold-rgb),.2); box-sizing:border-box; }
+body.wall .m-right{ flex:1.2; min-width:0; height:100%; background:var(--dark-deep); padding:100px 60px; display:flex; flex-direction:column; font-family:var(--font-primary); overflow-y:auto; border-left:1px solid rgba(var(--gold-rgb),.2); box-sizing:border-box; }
 body.wall .m-right h3{ font-family:var(--font-primary); font-size:clamp(1.7rem, 3vw, 2.4rem); font-weight:500; color:var(--gold-lit); margin:0 0 20px; line-height:1.12; overflow-wrap:anywhere; }
-body.wall .m-right p{ color:var(--on-purple-soft); line-height:1.8; font-size:var(--fs-sm); white-space:pre-line; margin:0; }
+body.wall .m-right p{ color:var(--on-dark-soft); line-height:1.8; font-size:var(--fs-sm); white-space:pre-line; margin:0; }
 body.wall .m-meta{ font-size:var(--fs-xs); color:rgba(var(--gold-rgb),.75); border-top:1px solid rgba(var(--gold-rgb),.25); padding-top:20px; margin-bottom:40px; letter-spacing:.06em; text-transform:none; }
 body.wall .m-close{ position:absolute; top:30px; right:30px; padding:10px; color:var(--gold); font-size:var(--fs-xs); letter-spacing:.06em; cursor:pointer; transition:opacity .3s; z-index:5000001; opacity:.65; font-family:var(--font-primary); background:none; border:0; border-radius:6px; }
 body.wall .m-close:hover, body.wall .m-close:focus-visible{ opacity:1; }
 body.wall .m-close:focus-visible{ outline:1px solid var(--gold); outline-offset:2px; }
 body.wall .m-close:focus:not(:focus-visible){ outline:none; }
-body.wall #m-media-cont img{ max-width:95%; max-height:90vh; width:auto; height:auto; object-fit:contain; border-radius:4px; box-shadow:0 20px 80px rgba(14,11,18,.6), 0 0 0 1px rgba(var(--gold-rgb),.25); }
+body.wall #m-media-cont img{ max-width:95%; max-height:90vh; width:auto; height:auto; object-fit:contain; border-radius:4px; box-shadow:0 20px 80px rgba(17,17,15,.6), 0 0 0 1px rgba(var(--gold-rgb),.25); }
 
 body.wall .noscript{ position:fixed; inset:0; display:grid; place-items:center; padding:24px; text-align:center; font-family:var(--font-primary); color:var(--gold-lit); z-index:10; }
 
@@ -132,13 +132,13 @@ body.wall .noscript{ position:fixed; inset:0; display:grid; place-items:center; 
   body.wall .hud-br{ bottom:calc(20px + env(safe-area-inset-bottom)); right:18px; }
   body.wall .hud-br{ left:0; right:0; text-align:center; }
 
-  body.wall .wallmodal{ flex-direction:column; -webkit-backdrop-filter:none; backdrop-filter:none; background:var(--purple-ink); }
+  body.wall .wallmodal{ flex-direction:column; -webkit-backdrop-filter:none; backdrop-filter:none; background:var(--dark-ink); }
   body.wall .m-left{ flex:0 0 auto; height:auto; padding:calc(64px + env(safe-area-inset-top)) 16px 12px; }
   body.wall #m-media-cont img{ max-width:100%; max-height:56vh; }
   body.wall .m-right{ flex:1 1 auto; height:auto; padding:22px 22px calc(32px + env(safe-area-inset-bottom)); border-left:0; border-top:1px solid rgba(var(--gold-rgb),.2); }
   body.wall .m-meta{ margin-bottom:18px; padding-top:14px; }
   body.wall .m-close{ top:calc(6px + env(safe-area-inset-top)); right:4px; min-height:48px; padding:14px; opacity:.85; }   /* >= 44px tap target */
-  body.wall #p1-viewport::after{ background:linear-gradient(90deg, rgba(14,11,18,.42), transparent 22%, transparent 78%, rgba(14,11,18,.42)), radial-gradient(ellipse at 50% 48%, transparent 34%, rgba(14,11,18,.14) 72%, rgba(14,11,18,.34) 100%); }
+  body.wall #p1-viewport::after{ background:linear-gradient(90deg, rgba(17,17,15,.42), transparent 22%, transparent 78%, rgba(17,17,15,.42)), radial-gradient(ellipse at 50% 48%, transparent 34%, rgba(17,17,15,.14) 72%, rgba(17,17,15,.34) 100%); }
 }
 
 @media (prefers-reduced-motion: reduce){

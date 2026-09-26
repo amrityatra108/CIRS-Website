@@ -122,7 +122,7 @@
       // (the house symposiums, and the 2025-2026 aquatic meet), and leaving
       // the previous winner's colour on the line through them showed a house
       // colour against a result this page is explicit about not having. The
-      // line falls back to var(--purple) with no house attribute set.
+      // line falls back to var(--dark) with no house attribute set.
       var first = one("[data-house]", panels[index]);
       if (first) lineFill.setAttribute("data-house", first.getAttribute("data-house"));
       else lineFill.removeAttribute("data-house");

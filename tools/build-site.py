@@ -48,7 +48,7 @@ import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=107"
+CACHE_BUST = "b=108"
 
 # Where a film's large-screen encode is offered. Everything that fails it —
 # a phone held either way up — takes the phone encode (tools/make-films.py),
@@ -1095,7 +1095,7 @@ def banner_html(page):
     cta = "\n".join(f'      <a class="btn btn--{variant} btn--lg" href="{href}">{label}</a>'
                     for label, href, variant in page.get("banner_cta", []))
     cta = f'    <p class="pagehead__cta">\n{cta}\n    </p>\n' if cta else ""
-    return f'''<section class="pagehead on-purple" id="top" data-ground="#1E1626">
+    return f'''<section class="pagehead on-dark" id="top" data-ground="#181815">
   <div class="wrap pagehead__inner">
     <p class="marker"><span class="sc">{eyebrow}</span></p>
     <h1 class="serif" data-split>{heading}</h1>
@@ -1158,7 +1158,7 @@ def hero_html(page):
     extra = page.get("hero_extra", "")
     split_attr = ' data-split' if page.get("hero_split", True) else ''
     video_load = ' preload="none"' if page.get("sheet") == "admissions" else ' autoplay'
-    return f'''<section class="pagehero" id="top" data-ground="#0E0B12">
+    return f'''<section class="pagehero" id="top" data-ground="#11110F">
   <div class="pagehero__media" style="background-image:url('assets/img/{poster}?{CACHE_BUST}')">
     <video class="pagehero__video"{video_load} muted loop playsinline
            poster="assets/img/{poster}?{CACHE_BUST}" aria-hidden="true"

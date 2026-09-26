@@ -5,8 +5,8 @@
   align-items:center;
   padding:clamp(116px,13svh,154px) 0 clamp(54px,7svh,86px);
   overflow:clip;
-  background:var(--purple-ink);
-  color:var(--on-purple);
+  background:var(--dark-ink);
+  color:var(--on-dark);
 }
 .portal-intro__inner{width:min(84vw,1320px);margin-inline:auto}
 .portal-intro__label{
@@ -24,15 +24,15 @@
   inset:0;
   display:block;
   overflow:hidden;
-  border:1px solid rgba(255,195,8,.56);
-  background:var(--purple-deep);
+  border:1px solid rgba(201,169,97,.56);
+  background:var(--dark-deep);
 }
 .portal-intro__photo::after{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
-  background:linear-gradient(180deg,transparent 64%,rgba(14,11,18,.5) 100%);
+  background:linear-gradient(180deg,transparent 64%,rgba(17,17,15,.5) 100%);
 }
 .portal-intro__picture{
   position:absolute;
@@ -66,7 +66,7 @@
   left:clamp(18px,4.1vw,62px);
   bottom:-.38em;
   margin:0;
-  color:var(--on-purple);
+  color:var(--on-dark);
   font-family:var(--font-editorial);
   font-size:clamp(5rem,8.2vw,8.3rem);
   font-weight:400;
@@ -89,7 +89,7 @@
 .portal-intro__note{
   max-width:31ch;
   margin:0;
-  color:var(--on-purple-soft);
+  color:var(--on-dark-soft);
   font-size:clamp(1.05rem,1.5vw,1.3rem);
   line-height:1.4;
 }
@@ -113,7 +113,7 @@
   cursor:pointer;
 }
 .portal-intro__entry:hover,
-.portal-intro__entry:focus-visible{background:var(--gold);color:var(--purple-ink)}
+.portal-intro__entry:focus-visible{background:var(--gold);color:var(--dark-ink)}
 .portal-intro__entry:focus-visible{outline:2px solid var(--gold-lit);outline-offset:5px}
 .portal-intro__entry-border{
   position:absolute;
@@ -154,7 +154,7 @@ html.portal-motion-pending .portal-intro__entry-border rect{stroke-dashoffset:1}
   .portal-intro__label{margin-bottom:12px;font-size:.71rem}
   .portal-intro__stage{height:clamp(260px,48svh,500px)}
   .portal-intro__photo::after{
-    background:linear-gradient(180deg,transparent 64%,rgba(14,11,18,.5) 100%);
+    background:linear-gradient(180deg,transparent 64%,rgba(17,17,15,.5) 100%);
   }
   .portal-intro__title{
     left:18px;
