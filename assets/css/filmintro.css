@@ -359,7 +359,13 @@ body.sports .film__scroll-cue span:first-child{
    The supplied film ends with warm pigment at left and blue/violet at right.
    Their dark central gap is the place for the heading, well clear of the
    coloured forms. Its first frame is very dark; the initial video poster is
-   that frame, while the stage carries the final still for static fallbacks. */
+   that frame, while the stage carries the final still for static fallbacks.
+
+   Unlike the other openings, the heading does not wait for the film to end.
+   The film's first fifth is black, so a reader who stopped there saw an
+   empty screen and no name for the page. The title is up from the first
+   frame and the pigment blooms behind it; a soft shadow keeps it legible
+   while the colour passes through the middle of the frame. */
 body.art-attack{
   --film-ground:#0B080D;
   --film-crop:50% 50%;
@@ -398,10 +404,25 @@ body.art-attack .film__title{
   padding:0;
   color:#FFF9F0;
   text-transform:none;
-  transform:translate(-50%, calc(-50% + (1 - var(--film-reveal)) * 12px));
+  opacity:calc(1 - var(--film-exit, 0));
+  transform:translate(-50%, -50%);
   filter:none;
-  will-change:opacity, transform;
+  text-shadow:0 2px 30px rgba(11, 8, 13, .55), 0 0 2px rgba(11, 8, 13, .35);
+  will-change:auto;
 }
+body.art-attack .film[data-film-pending] .film__title{ opacity:1; }
+/* A soft pool of shade behind the heading, for the seconds the pigment
+   blooms through the middle of the frame. Over the black opening and the
+   dark centre of the final frame it is all but invisible. */
+body.art-attack .film__title::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-45% -10%;
+  background:radial-gradient(closest-side, rgba(11, 8, 13, .62), rgba(11, 8, 13, .38) 55%, rgba(11, 8, 13, 0));
+  pointer-events:none;
+}
+body.art-attack .film__art-prefix{ text-shadow:0 0 10px rgba(11, 8, 13, .85), 0 1px 3px rgba(11, 8, 13, .7); }
 body.art-attack .film__art-prefix{
   display:block;
   margin-bottom:clamp(12px, 2vh, 22px);

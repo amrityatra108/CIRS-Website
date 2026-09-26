@@ -138,39 +138,81 @@
   /* ------------------------------------------------------------
      3. HOUSE COMPETITION BANDS INTERACTION
      ------------------------------------------------------------ */
-  const houseBands = document.querySelectorAll('.house-band');
+  /* An accordion. Each house name is a button in its heading that
+     controls the details panel below it; a closed panel is inert at
+     once and hidden once its fold has finished, so a screen reader
+     never reads details the eye cannot see. Wide screens keep exactly
+     one house open, the band widening to hold it; below 900px the
+     bands stack, all open, and each name folds its own house. */
+  const houseBands = Array.prototype.slice.call(document.querySelectorAll('.house-band'));
+  const wideHouses = window.matchMedia('(min-width: 901px)');
 
   if (houseBands.length) {
-    function activateHouse(band) {
-      houseBands.forEach(b => {
-        const isActive = (b === band);
-        b.classList.toggle('is-active', isActive);
-        b.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-        const btn = b.querySelector('.house-band__trigger');
-        if (btn) btn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-      });
-    }
+    const partsOf = band => {
+      const button = band.querySelector('.house-band__trigger');
+      return { button, panel: button && document.getElementById(button.getAttribute('aria-controls')) };
+    };
+
+    const setOpen = (band, open, instant) => {
+      const { button, panel } = partsOf(band);
+      if (!button || !panel) return;
+      clearTimeout(band._foldTimer);
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) {
+        panel.hidden = false;
+        panel.inert = false;
+        void panel.offsetHeight;
+      } else {
+        panel.inert = true;
+        if (instant || prefersReducedMotion || !wideHouses.matches) panel.hidden = true;
+        else band._foldTimer = setTimeout(() => { panel.hidden = true; }, 500);
+      }
+      if (wideHouses.matches) {
+        band.classList.toggle('is-active', open);
+        if (open) button.setAttribute('aria-disabled', 'true');
+        else button.removeAttribute('aria-disabled');
+      }
+    };
+
+    const activateHouse = band => {
+      if (band.classList.contains('is-active')) return;
+      houseBands.forEach(b => { if (b !== band) setOpen(b, false); });
+      setOpen(band, true);
+    };
+
+    const layout = () => {
+      houseBands.forEach(band => partsOf(band).button && partsOf(band).button.removeAttribute('aria-disabled'));
+      if (wideHouses.matches) {
+        const open = houseBands.find(b => b.classList.contains('is-active')) || houseBands[0];
+        houseBands.forEach(b => b.classList.remove('is-active'));
+        houseBands.forEach(b => setOpen(b, b === open, true));
+      } else {
+        houseBands.forEach(b => setOpen(b, true, true));
+      }
+    };
 
     houseBands.forEach(band => {
-      const trigger = band.querySelector('.house-band__trigger');
+      const { button } = partsOf(band);
+      if (!button) return;
+
+      button.addEventListener('click', () => {
+        if (wideHouses.matches) activateHouse(band);
+        else setOpen(band, button.getAttribute('aria-expanded') !== 'true');
+      });
+
+      // The whole band is a pointer target on wide screens; keyboard
+      // and screen-reader users reach it through the button.
+      band.addEventListener('click', (e) => {
+        if (wideHouses.matches && !e.target.closest('.house-band__trigger')) activateHouse(band);
+      });
 
       band.addEventListener('mouseenter', () => {
-        if (!isTouch && window.innerWidth > 900) {
-          activateHouse(band);
-        }
+        if (!isTouch && wideHouses.matches) activateHouse(band);
       });
-
-      band.addEventListener('focusin', () => {
-        activateHouse(band);
-      });
-
-      if (trigger) {
-        trigger.addEventListener('click', (e) => {
-          e.preventDefault();
-          activateHouse(band);
-        });
-      }
     });
+
+    layout();
+    wideHouses.addEventListener('change', layout);
   }
 
   /* ------------------------------------------------------------
@@ -294,6 +336,20 @@
     return 0.14 + ((index - 1) / (last - 1)) * 0.72;
   }
 
+  /* Every caption sits in the same corner, and the image wipes overlap,
+     so tying a caption to its own image left two half-read headlines on
+     top of each other mid-wipe. Each caption instead owns the stretch of
+     scroll between its image's half-way point and the next one's, fades
+     out before that hand-off and only fades in after it. */
+  var CAPTION_GAP = 0.012;
+  var CAPTION_FADE = 0.022;
+
+  function captionOpacity(index, p) {
+    var start = index === 0 ? -1 : chapterCenter(index) + CAPTION_GAP / 2;
+    var end = index === scenes.length - 1 ? 2 : chapterCenter(index + 1) - CAPTION_GAP / 2;
+    return smooth((p - start) / CAPTION_FADE) * smooth((end - p) / CAPTION_FADE);
+  }
+
   function setChapterProgress(progress) {
     var p = clamp(progress);
     var revealWidth = window.innerWidth <= 720 ? 0.14 : 0.12;
@@ -310,9 +366,8 @@
       scene.style.setProperty("--chapter-left", ((1 - reveal) * 100).toFixed(2) + "%");
       scene.style.setProperty("--chapter-top", ((1 - reveal) * 100).toFixed(2) + "%");
 
-      var next = reveals[index + 1] || 0;
       var caption = scene.querySelector(".sports-chapter__caption");
-      if (caption) caption.style.setProperty("--chapter-caption", (reveal * (1 - next)).toFixed(3));
+      if (caption) caption.style.setProperty("--chapter-caption", captionOpacity(index, p).toFixed(3));
     });
 
     var current = 0;

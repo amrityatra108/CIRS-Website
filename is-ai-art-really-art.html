@@ -26,9 +26,9 @@
 <meta name="twitter:image" content="assets/img/og.jpg">
 <!-- Four approved families, self-hosted with retained OFL notices. -->
 <link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=107-blog-editorial-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=107-blog-editorial-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=107-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/fonts.css?b=108-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=108-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=108-blog-editorial-1">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -37,10 +37,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/blog.css?b=107-blog-editorial-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=107-blog-editorial-1">
-<link rel="stylesheet" href="assets/css/footer.css?b=107-blog-editorial-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=107-blog-editorial-1-drawer-5">
+<link rel="stylesheet" href="assets/css/blog.css?b=108-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=108-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=108-blog-editorial-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=108-blog-editorial-1-drawer-5">
 </head>
 
 <body class="blog litehead">
@@ -57,6 +57,10 @@
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
   </div>
+  <!-- Escape is caught by the player while it has focus, and a page cannot
+       reach into a cross-origin frame to take it back, so the way out is
+       said once, quietly, under the film. -->
+  <p class="lightbox__hint" aria-hidden="true"><span class="lightbox__hint-key">Press Esc or click outside the film to close</span><span class="lightbox__hint-touch">Tap outside the film to close</span></p>
 </dialog>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
@@ -456,11 +460,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=107-blog-editorial-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=107-blog-editorial-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=107-blog-editorial-1" defer></script>
-<script src="assets/js/cirs.js?b=107-blog-editorial-1-drawer-5" defer></script>
-<script src="assets/js/pages.js?b=107-blog-editorial-1" defer></script>
-<script src="assets/js/footer.js?b=107-blog-editorial-1-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=108-blog-editorial-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=108-blog-editorial-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=108-blog-editorial-1" defer></script>
+<script src="assets/js/cirs.js?b=108-blog-editorial-1-drawer-5" defer></script>
+<script src="assets/js/pages.js?b=108-blog-editorial-1" defer></script>
+<script src="assets/js/footer.js?b=108-blog-editorial-1-footer-1" defer></script>
 </body>
 </html>

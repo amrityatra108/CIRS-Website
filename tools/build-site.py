@@ -48,7 +48,7 @@ import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=107"
+CACHE_BUST = "b=108"
 
 # Where a film's large-screen encode is offered. Everything that fails it —
 # a phone held either way up — takes the phone encode (tools/make-films.py),
@@ -539,7 +539,8 @@ PAGES = {
         # cut by tools/make-art-attack.py. It opens on the supplied film (see
         # assets/css/filmintro.css for its frame), which gives way to a
         # photograph of students at work and then, on scroll, the first
-        # finished work (assets/js/artattack.js). The film carries the h1.
+        # finished work (assets/js/artattack.js). The film carries the h1,
+        # which is up from its first frame rather than arriving at its end.
         "sheet": "artattack",
         "cache_suffix": "-art-attack-4",
         "nav": "CIRS Art Attack",

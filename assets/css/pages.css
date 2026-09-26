@@ -1151,6 +1151,17 @@ body:not(.menu-open) .header.is-scrolled.is-over-dark .wrap{
 }
 .lightbox__close:hover{ background:var(--gold); color:var(--purple-ink); border-color:var(--gold); }
 body.has-lightbox{ overflow:hidden; }
+.lightbox__hint{
+  position:absolute; left:16px; right:16px; bottom:clamp(10px, 3.2vh, 30px);
+  margin:0; text-align:center; pointer-events:none;
+  font-family:var(--font-primary); font-size:.8rem; letter-spacing:.04em;
+  color:rgba(245,238,242,.62);
+}
+.lightbox__hint-touch{ display:none; }
+@media (pointer:coarse){
+  .lightbox__hint-key{ display:none; }
+  .lightbox__hint-touch{ display:inline; }
+}
 
 /* The window is a link, and a link that opens a player should say so. */
 .filmwin{ cursor:pointer; }
@@ -2280,3 +2291,10 @@ body.has-lightbox{ overflow:hidden; }
   .lifeband__say h2{ max-width:none; }
 }
 
+
+/* Touch: "Read issue" on a Crossroads card is small type at the card's
+   foot. It takes a 44px hit box without moving anything. */
+@media (pointer:coarse){
+  .crcard__state{ position:relative; }
+  .crcard__state::after{ content:""; position:absolute; inset:-11px -6px; }
+}
