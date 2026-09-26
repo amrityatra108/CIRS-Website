@@ -1,16 +1,16 @@
 /* Homepage colour direction
-   Purple highlights and fades are replaced here, without changing the
-   shared palette used by the school's inner pages. Gold stays luminous in
+   The home page reads the shared palette; its local names below are
+   aliases of the roles in cirs.css. Gold stays luminous in
    small areas and translucent in large ones so the photography still leads. */
 
 body.home{
-  --home-gold:#F4BE24;
-  --home-gold-lit:#FFD86A;
-  --home-gold-deep:#D2A51F;
-  --home-ivory:#FFF9E8;
-  --home-ink:#1C170A;
-  --home-night:#121008;
-  --home-curtain:#FFFFF0;
+  --home-gold:var(--gold-lit);
+  --home-gold-lit:var(--gold-pale);
+  --home-gold-deep:var(--gold);
+  --home-ivory:var(--paper);
+  --home-ink:var(--dark-deep);
+  --home-night:var(--dark-ink);
+  --home-curtain:var(--paper);
 }
 
 /* The lower hero wash remains dark enough for the white headline. Gold is a
@@ -19,12 +19,12 @@ body.home .hero{ background:var(--home-night); }
 body.home .hero__scrim{
   background:
     linear-gradient(to top,
-      rgba(18,16,8,.94) 0%, rgba(18,16,8,.84) 18%,
-      rgba(18,16,8,.58) 38%, rgba(18,16,8,.15) 70%,
-      rgba(18,16,8,.25) 100%),
+      rgba(17,17,15,.94) 0%, rgba(17,17,15,.84) 18%,
+      rgba(17,17,15,.58) 38%, rgba(17,17,15,.15) 70%,
+      rgba(17,17,15,.25) 100%),
     radial-gradient(95% 54% at 48% 100%,
-      rgba(255,195,8,.16) 0%, rgba(255,195,8,.07) 42%,
-      rgba(255,195,8,0) 76%);
+      rgba(201,169,97,.16) 0%, rgba(201,169,97,.07) 42%,
+      rgba(201,169,97,0) 76%);
 }
 
 /* Horizontal passage: gold ground with dark text at the opening. At the
@@ -38,13 +38,13 @@ body.home .hrun__pin{
   position:relative;
   isolation:isolate;
   --run-ivory:0;
-  --run-ink:#1C170A;
-  --run-soft:#443711;
-  --run-accent:#4A3500;
-  --run-ghost:#1C170A;
+  --run-ink:var(--dark-deep);
+  --run-soft:#3A3934;
+  --run-accent:#3A3934;
+  --run-ghost:var(--dark-deep);
   background:
-    radial-gradient(105% 82% at 10% 0%, rgba(255,244,195,.34), transparent 58%),
-    radial-gradient(82% 76% at 92% 100%, rgba(255,217,82,.20), transparent 64%),
+    radial-gradient(105% 82% at 10% 0%, rgba(244,240,230,.34), transparent 58%),
+    radial-gradient(82% 76% at 92% 100%, rgba(232,217,181,.20), transparent 64%),
     var(--home-gold-deep);
 }
 body.home .hrun__pin::before{
@@ -54,7 +54,7 @@ body.home .hrun__pin::before{
   z-index:0;
   pointer-events:none;
   background:
-    radial-gradient(86% 72% at 82% 18%, rgba(244,190,36,.10), transparent 64%),
+    radial-gradient(86% 72% at 82% 18%, rgba(216,188,122,.10), transparent 64%),
     var(--home-ivory);
   opacity:var(--run-ivory);
   will-change:opacity;
@@ -67,7 +67,7 @@ body.home .hsay__eyebrow,
 body.home .hframe__n{ color:var(--run-accent); opacity:1; }
 body.home .hghost{ color:var(--run-ghost); opacity:.09; }
 body.home .hframe img{
-  box-shadow:0 30px 80px rgba(55,39,4,.24), 0 0 0 1px rgba(255,255,255,.18);
+  box-shadow:0 30px 80px rgba(42,42,38,.24), 0 0 0 1px rgba(255,255,255,.18);
 }
 
 /* The remaining homepage fades use warm neutral density plus quiet gold
@@ -79,35 +79,35 @@ body.home .footer{
   background-color:var(--home-night);
 }
 
-/* The opening curtain, on the home page only. The shared curtain is CIRS
-   purple, which arrives as a full screen of saturated colour before any of
-   the photography does. Here it opens on ivory instead.
+/* The opening curtain, on the home page only. The shared curtain is the
+   charcoal of the dark sections, a full screen of it before any of the
+   photography arrives. Here it opens on ivory instead.
 
    Every mark on it has to be restated, not just the ground: the shared
    curtain letters itself in white on gold for a dark screen, and on ivory
    white falls to 1.01:1 — invisible rather than merely faint. The type moves
-   to the two primaries that hold against it, purple at 13:1 and maroon at
-   10.9:1, keeping the original hierarchy of statement then accent. The
-   progress hairline goes with them, because gold on ivory is 1.6:1 and would
+   to the two roles that hold against it, --dark at 13.8:1 and --label at
+   9.86:1, keeping the original hierarchy of statement then accent. The
+   progress hairline goes with them, because gold on ivory is 2.1:1 and would
    read as an empty line for the whole of the load. */
 body.home .curtain{
   background:var(--home-curtain);
-  color:var(--purple);
+  color:var(--dark);
 }
-body.home .curtain__deva{ color:var(--purple); }
-body.home .curtain__en{ color:var(--maroon); }
-body.home .curtain__bar{ background:rgba(57,42,72,.20); }
-body.home .curtain__bar i{ background:var(--purple); }
+body.home .curtain__deva{ color:var(--dark); }
+body.home .curtain__en{ color:var(--label); }
+body.home .curtain__bar{ background:rgba(42,41,37,.20); }
+body.home .curtain__bar i{ background:var(--dark); }
 
 body.home .filmsec__media::after{
   background:
-    linear-gradient(180deg, rgba(18,16,8,.72) 0%, rgba(18,16,8,.94) 100%),
-    radial-gradient(80% 70% at 50% 100%, rgba(255,195,8,.12), transparent 68%);
+    linear-gradient(180deg, rgba(17,17,15,.72) 0%, rgba(17,17,15,.94) 100%),
+    radial-gradient(80% 70% at 50% 100%, rgba(201,169,97,.12), transparent 68%);
 }
 body.home .filmwin__scrim{
   background:
-    linear-gradient(180deg, rgba(18,16,8,.14) 0%, rgba(18,16,8,.72) 100%),
-    radial-gradient(70% 65% at 50% 100%, rgba(255,195,8,.10), transparent 72%);
+    linear-gradient(180deg, rgba(17,17,15,.14) 0%, rgba(17,17,15,.72) 100%),
+    radial-gradient(70% 65% at 50% 100%, rgba(201,169,97,.10), transparent 72%);
 }
 body.home .filmwin{ background:var(--home-night); }
 
@@ -115,10 +115,11 @@ body.home .motto{
   background:#fff;
   color:var(--ink);
 }
-body.home .motto__deva,
-body.home .motto__iast{
-  color:#806000;
-}
+/* The motto on white: the Devanagari is display-sized, so the dark gold
+   reads (4.73:1 on white, large text); the transliteration is body-sized
+   and takes the label colour. */
+body.home .motto__deva{ color:var(--gold-ink); }
+body.home .motto__iast{ color:var(--label); }
 body.home .motto__en{
   color:var(--ink-soft);
 }
@@ -129,7 +130,7 @@ body.home .motto__rule{
 /* Photo crossfades keep their own stagger. Tone uses one class on the section,
    so hundreds of tiles do not each run a separate blend-mode animation. */
 body.home .glimpse{
-  background:#18151D;
+  background:#181815;
 }
 body.home .glimpse .marker .sc{
   color:var(--home-gold-lit);
@@ -152,10 +153,10 @@ body.home .glimpse.is-tone-flipped .gt:nth-child(odd):hover{
 
 body.home .finalcta__media::after{
   background:
-    linear-gradient(180deg, rgba(18,16,8,.46) 0%, rgba(18,16,8,.92) 100%),
-    radial-gradient(85% 68% at 50% 100%, rgba(255,195,8,.14), transparent 72%);
+    linear-gradient(180deg, rgba(17,17,15,.46) 0%, rgba(17,17,15,.92) 100%),
+    radial-gradient(85% 68% at 50% 100%, rgba(201,169,97,.14), transparent 72%);
 }
-body.home .totop{ background:#8B6710; box-shadow:0 6px 24px rgba(55,39,4,.24); }
+body.home .totop{ background:#8F6E2F; box-shadow:0 6px 24px rgba(42,42,38,.24); }
 
 @media (prefers-reduced-motion:reduce){
   body.home .hrun__pin::before{ transition:none; }

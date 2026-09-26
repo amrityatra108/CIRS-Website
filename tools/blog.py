@@ -138,7 +138,7 @@ def rail_html():
       <li><a href="#latest">Latest issue</a></li>
       <li><a href="#stories">All stories</a></li>
       <li><a href="#archive">From the archive</a></li>
-      <li><a href="#crossroads-link">Crossroads</a></li>
+      <li><a href="#crossroads-link">The Crossroads</a></li>
     </ul>"""
 
 
@@ -172,7 +172,7 @@ def _latest():
       <div class="ij-section__head">
         <div><p class="ij-section__number">01 / The current edition</p>
           <h2 id="ij-latest-title">Latest issue</h2></div>
-        <a class="ij-issue-link" href="{issue_pdf(lead)}">Crossroads {latest_issue} <span aria-hidden="true">↗</span></a>
+        <a class="ij-issue-link" href="{issue_pdf(lead)}">The Crossroads {latest_issue} <span aria-hidden="true">↗</span></a>
       </div>
       <div class="ij-latest__spread">
         <article class="ij-lead">

@@ -1,7 +1,7 @@
 /* The not-found page — 404.html.
 
    Scoped to body.notfound. It adds nothing to the site's design language:
-   the band is the shared .pagehead on purple, the button is .btn--primary,
+   the band is the shared .pagehead on the dark ground, the button is .btn--primary,
    and the type, colours and measure all come from cirs.css and pages.css.
    What is here is only the arrangement: the band fills the first screen, so
    the way back is the whole of what a lost visitor sees, and four onward
@@ -27,7 +27,7 @@ body.notfound .notfound__cta{ margin-top:clamp(28px,3.4vw,42px); }
 body.notfound .notfound__ways{
   margin-top:clamp(44px,6vw,76px);
   padding-top:20px;
-  border-top:1px solid var(--rule-purple);
+  border-top:1px solid var(--rule-dark);
   max-width:var(--measure);
 }
 body.notfound .notfound__label{ margin-bottom:14px; }
@@ -39,7 +39,7 @@ body.notfound .notfound__ways ul{
 body.notfound .notfound__ways a{
   display:inline-block;
   padding-block:8px;
-  color:var(--on-purple);
+  color:var(--on-dark);
   font-size:var(--fs-lead);
   border-bottom:1px solid transparent;
   transition:color .25s var(--e), border-color .25s var(--e);

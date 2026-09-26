@@ -30,7 +30,7 @@
   --cf-travel:450vh;
   position:relative;
   z-index:1;
-  color:var(--on-purple);
+  color:var(--on-dark);
   /* Shown as still screens, this follows the still of the camera, whose
      foot is a warm grey: the ground comes down from it rather than
      starting as an edge. */
@@ -77,7 +77,7 @@
   font-size:.84rem;
   line-height:1.5;
   letter-spacing:.01em;
-  color:rgba(245,238,242,.74);
+  color:rgba(250,249,243,.74);
 }
 
 /* Blurred stand-ins, a few hundred bytes each, drawn until the file comes. */
@@ -280,7 +280,7 @@
   bottom:clamp(18px, 4.5vh, 44px);
   margin:0;
   opacity:0;
-  color:rgba(245,238,242,.8);
+  color:rgba(250,249,243,.8);
 }
 
 .cf--pinned .cf__fig--companion,
@@ -338,9 +338,9 @@ body.captures.cf-on #totop{
    both clear 4.5:1 whatever the film is showing.
    ============================================================ */
 body.captures .header:not(.is-scrolled) .wrap{
-  background-color:rgba(21,8,24,.68);
+  background-color:rgba(24,24,21,.68);
   border-color:rgba(255,255,255,.18);
-  box-shadow:0 12px 36px rgba(21,8,24,.34), inset 0 1px 0 rgba(255,255,255,.12);
+  box-shadow:0 12px 36px rgba(24,24,21,.34), inset 0 1px 0 rgba(255,255,255,.12);
 }
 @supports ((-webkit-backdrop-filter:blur(16px)) or (backdrop-filter:blur(16px))){
   body.captures .header:not(.is-scrolled) .wrap{

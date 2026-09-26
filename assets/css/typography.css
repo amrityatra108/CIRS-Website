@@ -1,9 +1,8 @@
 /* Type roles. Loaded after all page-specific sheets.
    Families are named once, in cirs.css :root; this sheet assigns them.
    Mona Sans carries English body, interface, labels, captions, data and
-   the film titles. The display, editorial and quote roles keep their
-   current faces until licensed Brier is supplied — the Brier mapping is
-   ready in tools/typography-brier.css. */
+   the film titles. Bodoni Moda carries display lettering; Literata and
+   EB Garamond retain the editorial and quotation roles. */
 :root{
   --weight-body:350;
   --weight-display:600;

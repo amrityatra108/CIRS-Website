@@ -1,7 +1,7 @@
 /* ============================================================
    Leadership — "In their own words"
    ------------------------------------------------------------
-   The markup holds all six messages in full, one after another,
+   The markup holds all five messages in full, one after another,
    so with no scripting every message is read and every #msg-…
    link lands. A small script in <head> (tools/leadership.py)
    marks <html> with the message the URL names before first

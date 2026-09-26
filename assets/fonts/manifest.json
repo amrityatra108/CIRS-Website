@@ -1,6 +1,7 @@
 {
   "revision": "f2bd09badbc763d8757951d52deec29da27e85fb",
   "mona_sans_revision": "0f7dc66ddd766605eb0e75c3f47bf9d1dd38ceca",
+  "bodoni_moda_revision": "30ce6cdc354ef179a3b72ba0f0e71826e599348c",
   "fonts": [
     {
       "family": "Mona Sans",
@@ -68,6 +69,46 @@
       "source_sha256": "6dd9d760c5fc0c9a7e70b462eeb6b59172ac59ce3514793c930f2c623c785be4",
       "woff2_sha256": "6dd9d760c5fc0c9a7e70b462eeb6b59172ac59ce3514793c930f2c623c785be4",
       "bytes": 125004
+    },
+    {
+      "family": "Bodoni Moda",
+      "style": "normal",
+      "weights": "400 900",
+      "axes": {
+        "wght": [
+          400.0,
+          900.0
+        ]
+      },
+      "pinned_axes": {
+        "opsz": 11
+      },
+      "file": "bodonimoda-normal.woff2",
+      "source": "https://raw.githubusercontent.com/indestructible-type/Bodoni/30ce6cdc354ef179a3b72ba0f0e71826e599348c/fonts/variable/BodoniModa%5Bopsz%2Cwght%5D.ttf",
+      "license": "https://raw.githubusercontent.com/indestructible-type/Bodoni/30ce6cdc354ef179a3b72ba0f0e71826e599348c/OFL.txt",
+      "source_sha256": "550f5e34ee0a828d7941b1fe9bc58b34e5260d3f33a61532e6d0a0114e79a5cf",
+      "woff2_sha256": "32eb31168b33b384ace0aae38f9f4710ab418c0a5669f037b44dece1939a6678",
+      "bytes": 43144
+    },
+    {
+      "family": "Bodoni Moda",
+      "style": "italic",
+      "weights": "400 900",
+      "axes": {
+        "wght": [
+          400.0,
+          900.0
+        ]
+      },
+      "pinned_axes": {
+        "opsz": 11
+      },
+      "file": "bodonimoda-italic.woff2",
+      "source": "https://raw.githubusercontent.com/indestructible-type/Bodoni/30ce6cdc354ef179a3b72ba0f0e71826e599348c/fonts/variable/BodoniModa-Italic%5Bopsz%2Cwght%5D.ttf",
+      "license": "https://raw.githubusercontent.com/indestructible-type/Bodoni/30ce6cdc354ef179a3b72ba0f0e71826e599348c/OFL.txt",
+      "source_sha256": "dfff1619f8f6871c6372f8855b67211f9a73b4e93d45aca868cd8f46a48622de",
+      "woff2_sha256": "cfb7b704d2898f2edd3de24a9bb219181241b37a885598a8831c78ea364ba81c",
+      "bytes": 48948
     },
     {
       "family": "Newsreader",

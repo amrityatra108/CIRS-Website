@@ -11,10 +11,6 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # id -> (file under assets/img/founder, alt text, gap label[, archival caption])
 SLOTS = {
-    "hero": ("gurudev-hero.jpg",
-             "Pujya Gurudev Swami Chinmayananda seated before the Himalaya at Sidhbari, "
-             "one hand raised mid-sentence",
-             "Archival portrait of Pujya Gurudev"),
     "portrait": ("archive/p607-portrait.webp",
                  "A warm close portrait of Pujya Gurudev Swami Chinmayananda",
                  "Archival portrait of Pujya Gurudev"),
@@ -22,36 +18,8 @@ SLOTS = {
                 "Pujya Gurudev Swami Chinmayananda holding a laboratory flask up to the "
                 "light, examining it",
                 "Archival photograph of Pujya Gurudev"),
-    "himalaya": ("archive/p638-himalaya.webp",
-                 "Pujya Gurudev Swami Chinmayananda seated before the Himalayan range",
-                 "Archival photograph in the Himalaya"),
     "vision": ("archive/2353-yr67-community.webp",
                "Swami Chinmayananda welcomed by a community gathered around him", ""),
-    "beginning": ("archive/official-chinmaya-context.webp",
-                  "Swami Chinmayananda standing before the Himalayan foothills in an official "
-                  "Chinmaya Mission portrait", "",
-                  "A later portrait from Chinmaya Mission; shown as biographical context, not the 1916 birth event."),
-    "education": ("archive/bsan3-education.webp",
-                  "Balakrishna Menon seated with members of his family in an archival portrait", ""),
-    "freedom": ("archive/bsan39-early-years.webp",
-                "Balakrishna Menon as a young man in an archival outdoor portrait", ""),
-    "sannyasa": ("archive/esan93-sannyasa.webp",
-                 "Swami Chinmayananda with fellow sannyasis beside the Ganga in 1949", ""),
-    "teaching": ("archive/1352-yr62-teaching.webp",
-                 "Swami Chinmayananda seated at a low teaching desk during a discourse", ""),
-    "lecture": ("archive/1499-yr67-lecture.webp",
-                "Swami Chinmayananda speaking from a lectern at an early lecture series", ""),
-    "mission": ("archive/1277-yr60-mission.webp",
-                "Swami Chinmayananda in discussion with organisers at a Chinmaya Mission gathering", ""),
-    "audience": ("archive/2451-yr71-audience.webp",
-                 "A large audience gathered around Swami Chinmayananda for a discourse", ""),
-    "writing": ("archive/2633-yr80-writing.webp",
-                "Swami Chinmayananda writing at a desk with companions standing nearby", ""),
-    "vhp": ("archive/2033-yr65-vhp.webp",
-            "Swami Chinmayananda walking with a group at a public gathering in 1965", "",
-            "Archival public appearance from 1965; shown as period context."),
-    "legacy": ("archive/r664-contemplative.webp",
-               "Swami Chinmayananda seated with his hands clasped in quiet contemplation", ""),
     "children": ("archive/2481-yr79-children.webp",
                  "Swami Chinmayananda seated with a large circle of children and families", ""),
     "community": ("archive/54yr270-community.webp",
@@ -70,14 +38,32 @@ SLOTS = {
 # stage-deploy.py upload every one of them. Naming them here keeps them in
 # the repository, and out of the deploy, until a slot wants one.
 RETAINED = [
-    # The other views of the Amrit Vahini; the journey uses only its side.
-    "assets/img/founder/amrit-vahini/front-three-quarter.png",
-    "assets/img/founder/amrit-vahini/overhead-turn.png",
-    "assets/img/founder/amrit-vahini/rear-three-quarter.png",
+    # Earlier Founder treatments and photographs remain available as source
+    # media; the current page does not request or deploy them.
+    "assets/img/founder/gurudev-hero.jpg",
+    "assets/source/founder/amrit-vahini/body-no-wheels.png",
+    "assets/source/founder/amrit-vahini/side.png",
+    "assets/source/founder/amrit-vahini/wheel-complete.png",
+    "assets/img/founder/archive/1277-yr60-mission.webp",
+    "assets/img/founder/archive/1352-yr62-teaching.webp",
+    "assets/img/founder/archive/1499-yr67-lecture.webp",
+    "assets/img/founder/archive/2033-yr65-vhp.webp",
+    "assets/img/founder/archive/2451-yr71-audience.webp",
+    "assets/img/founder/archive/2633-yr80-writing.webp",
+    "assets/img/founder/archive/bsan3-education.webp",
+    "assets/img/founder/archive/bsan39-early-years.webp",
+    "assets/img/founder/archive/esan93-sannyasa.webp",
+    "assets/img/founder/archive/official-chinmaya-context.webp",
+    "assets/img/founder/archive/p638-himalaya.webp",
+    "assets/img/founder/archive/r664-contemplative.webp",
+    # Earlier vehicle views remain in the source collection for future use.
+    "assets/source/founder/amrit-vahini/front-three-quarter.png",
+    "assets/source/founder/amrit-vahini/overhead-turn.png",
+    "assets/source/founder/amrit-vahini/rear-three-quarter.png",
     # Archive variants from the supplied set that no slot uses.
-    "assets/img/founder/archive/p46-hero.webp",
-    "assets/img/founder/archive/p53-portrait.webp",
-    "assets/img/founder/archive/r664-early.webp",
+    "assets/source/founder/archive/p46-hero.webp",
+    "assets/source/founder/archive/p53-portrait.webp",
+    "assets/source/founder/archive/r664-early.webp",
 ]
 
 
@@ -90,25 +76,21 @@ def path(slot):
     return rel if os.path.exists(os.path.join(ROOT, rel)) else None
 
 
-# The width a figure is drawn at, where it is not the usual column
-# ("(max-width: 899px) 92vw, 44vw", in tools/build-site.py), measured.
+# The media manifest records dimensions and available 800px cuts for the
+# archival photographs still used below the new life story.
 SIZES = {
     "children": "(max-width: 899px) 92vw, (max-width: 1100px) 68vw, 62vw",
 }
-# Drawn cover-fitted far wider than its column at every size, so a smaller
-# cut would never be the right one.
 UNCUT = {"students"}
-
 IMAGES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "founder-images.json")
 
 
 def size(slot):
-    """(width, height, smaller cut or None) for a slot's file, from
-    tools/founder-images.json (tools/make-media.py), or None if not listed."""
+    """(width, height, smaller cut or None) for a deployed Founder slot."""
     import json
     try:
-        with open(IMAGES, encoding="utf-8") as f:
-            info = json.load(f).get(SLOTS[slot][0])
+        with open(IMAGES, encoding="utf-8") as source:
+            info = json.load(source).get(SLOTS[slot][0])
     except FileNotFoundError:
         return None
     return (info["w"], info["h"], info.get("small")) if info else None

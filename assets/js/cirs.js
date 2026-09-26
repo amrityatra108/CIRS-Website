@@ -1099,10 +1099,13 @@
       var t = clamp01((progress - .42) / .08);
       t = t * t * (3 - 2 * t);
       pin.style.setProperty("--run-ivory", t.toFixed(3));
-      pin.style.setProperty("--run-ink", rgb([28,23,10], [126,88,0], t));
-      pin.style.setProperty("--run-soft", rgb([68,55,17], [102,75,8], t));
-      pin.style.setProperty("--run-accent", rgb([74,53,0], [152,104,0], t));
-      pin.style.setProperty("--run-ghost", rgb([28,23,10], [190,142,18], t));
+      // Charcoal on the gold (7.91:1, soft 5.14:1) to the palette's roles
+      // on ivory: the large lines in --gold-ink (4.48:1, large text only),
+      // caption and index in --ink-soft and --ink-mute (7.32:1, 4.78:1).
+      pin.style.setProperty("--run-ink", rgb([24,24,21], [143,110,47], t));
+      pin.style.setProperty("--run-soft", rgb([58,57,52], [84,83,77], t));
+      pin.style.setProperty("--run-accent", rgb([58,57,52], [112,111,104], t));
+      pin.style.setProperty("--run-ghost", rgb([24,24,21], [201,169,97], t));
     }
     function syncStaticTheme() {
       var max = Math.max(viewport.scrollWidth - viewport.clientWidth, 0);
@@ -1299,10 +1302,13 @@
   }
 
   /* ==========================================================
-     Page ground shifts between paper and purple
+     Page ground shifts between paper and the dark sections
      ========================================================== */
   function groundShift() {
     if (!hasST || !animate) return;
+    // The paper the page returns to is the one its stylesheet declares,
+    // so a palette change cannot leave a stale colour behind here.
+    var paper = getComputedStyle(document.body).getPropertyValue("--paper").trim() || "#FAF9F3";
     $$("[data-ground]").forEach(function (sec) {
       var colour = sec.getAttribute("data-ground");
       ScrollTrigger.create({
@@ -1311,7 +1317,7 @@
         end: "bottom 45%",
         onToggle: function (self) {
           if (self.isActive) gsap.to(document.body, { backgroundColor: colour, duration: .6, ease: "power2.out" });
-          else gsap.to(document.body, { backgroundColor: "#FAF7F8", duration: .6, ease: "power2.out" });
+          else gsap.to(document.body, { backgroundColor: paper, duration: .6, ease: "power2.out" });
         }
       });
     });

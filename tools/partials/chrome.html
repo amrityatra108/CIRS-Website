@@ -19,6 +19,9 @@
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
   </div>
+  <!-- The cross-origin player can catch Escape while it has focus. Keep a
+       visible, reliable way out next to the labelled close button. -->
+  <p class="lightbox__hint" aria-hidden="true"><span class="lightbox__hint-key">Click outside the film to close</span><span class="lightbox__hint-touch">Tap outside the film to close</span></p>
 </dialog>
 
 <div class="progress" id="progress" aria-hidden="true"></div>

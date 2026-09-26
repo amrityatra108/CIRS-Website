@@ -116,12 +116,12 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
             ctx.lineWidth = 0.5;
             for (let k = 0; k < 4; k++) {
                 const s = bands[k]; if (!s.length) continue;
-                ctx.strokeStyle = `rgba(255,195,8,${(0.22 * (k + 0.5) / 4).toFixed(3)})`;
+                ctx.strokeStyle = `rgba(201,169,97,${(0.22 * (k + 0.5) / 4).toFixed(3)})`;
                 ctx.beginPath();
                 for (let q = 0; q < s.length; q += 4) { ctx.moveTo(s[q], s[q + 1]); ctx.lineTo(s[q + 2], s[q + 3]); }
                 ctx.stroke();
             }
-            ctx.fillStyle = 'rgba(255,215,92,0.6)';
+            ctx.fillStyle = 'rgba(216,188,122,0.6)';
             ctx.beginPath();
             for (const p of pts) { ctx.moveTo(p.x + p.s, p.y); ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2); }
             ctx.fill();

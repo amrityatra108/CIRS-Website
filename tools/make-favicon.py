@@ -24,7 +24,7 @@ Two decisions worth stating, because neither is obvious from the output:
 
   * The touch icon is NOT transparent. iOS composites a transparent touch
     icon onto black and then applies its own mask, and black is not one of
-    this site's colours. It gets --purple-ink #0E0B12 instead, which is the
+    this site's colours. It gets --dark-ink #0E0B12 instead, which is the
     ground the site already declares as its theme-color, so the home-screen
     icon matches the browser chrome the site asks for rather than fighting it.
     The tab icons stay transparent, which is what the tab wants.
@@ -47,7 +47,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SOURCE = os.path.join(ROOT, "assets", "img", "logo.png")
 OUT = os.path.join(ROOT, "assets", "img")
 
-# The site's --purple-ink, and the <meta name="theme-color"> value in
+# The site's --dark-ink, and the <meta name="theme-color"> value in
 # tools/partials/head.html. Keep the three in step.
 INK = (14, 11, 18, 255)
 

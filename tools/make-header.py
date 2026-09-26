@@ -48,14 +48,14 @@ OUT = "assets/img/admissions-header.jpg"
 WIDTH, HEIGHT = 2400, 1200          # 2:1, covers a 1440px-wide banner at 2x
 
 # The duotone ramp. The shadow is a saturated purple rather than the near
-# black of --purple-ink: black shadows give a grey, sepia-looking midtone,
+# black of --dark-ink: black shadows give a grey, sepia-looking midtone,
 # and what makes the picture belong to this site is purple in the middle of
 # the range, not only at the bottom of it. The highlight is warmed toward
 # the gold accent for the same reason.
 SHADOW = (32, 22, 54)
 HIGHLIGHT = (232, 206, 158)
 KEEP_COLOUR = 0.10                  # a trace of the original hue survives
-WASH = (30, 22, 38)                 # --purple-deep, laid over to unify
+WASH = (30, 22, 38)                 # --dark-deep, laid over to unify
 WASH_ALPHA = 0.26
 
 

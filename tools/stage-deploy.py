@@ -51,12 +51,14 @@ def check_brier_publication():
     font_dir = os.path.join(ROOT, "assets/fonts")
     license_dir = os.path.join(font_dir, "licenses")
     actual = {name for name in os.listdir(font_dir)
-              if name.lower().startswith("brier-") and name.lower().endswith(".woff2")}
+              if name.lower().startswith("brier") and
+              name.lower().endswith((".woff2", ".woff", ".ttf", ".otf"))}
     actual.update("licenses/" + name for name in os.listdir(license_dir)
                   if name.lower().startswith("brier"))
     with open(os.path.join(font_dir, "manifest.json"), encoding="utf-8") as source:
         manifest = json.load(source)
-    brier = [entry for entry in manifest["fonts"] if entry["family"] == "Brier"]
+    brier = [entry for entry in manifest["fonts"]
+             if entry["family"].casefold().startswith("brier")]
     if actual or brier:
         raise SystemExit("stage-deploy: licensed Brier files must not be staged from "
                          "this public source tree; use private production staging")

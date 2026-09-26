@@ -1,11 +1,12 @@
 /* Prepared Brier mapping. This file is deliberately not linked or deployed.
 
-   Activate only after CIRS_BRIER_DIR contains licensed Brier Bold (700) and
-   its private licence text, public web rights have been reviewed, a separate
-   publishable notice has been supplied, tools/make-fonts.py has generated
-   brier-bold.woff2, and the manifest and public notice have been checked. Copy the
-   active rules below to the END of assets/css/typography.css; the font URL
-   is relative to that destination. Never use a scraped CDN font.
+   Activate only after seller-supplied Brier webfont files and the CIRS Web
+   License have been checked for the production domain. Keep the files and
+   private licence outside this public repository. A private deployment step
+   must copy the original webfonts byte for byte and inject the active CSS
+   with URLs using their original filenames. tools/make-fonts.py handles only
+   open fonts and intentionally refuses Brier. Never use a trial or a scraped
+   CDN font for publication.
 
    The display alias exposes only the real Bold face. Some page sheets still
    set 400, 500 or 600 on display elements; the alias prevents a supplied
@@ -131,9 +132,9 @@ body.records .rec-unit :is(em,i):not(:is(:lang(hi),:lang(sa),.deva)){
 }
 blockquote p{ font-family:inherit; font-style:inherit; }
 
-/* OPTIONAL: only after licensed Brier Regular (400) has been generated and
-   verified as brier-regular.woff2, copy this block without the outer comment
-   markers. The upright 400 rules above already cover its role selectors.
+/* OPTIONAL: after licensed Brier Regular (400) has been supplied as a webfont,
+   copy this block without the outer comment markers, updating its URL to the
+   seller's original filename. The upright 400 rules above cover its selectors.
 
 @font-face{
   font-family:"CIRS Brier Regular";

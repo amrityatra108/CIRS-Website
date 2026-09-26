@@ -19,7 +19,7 @@
    are shared, and every rule that touches them is keyed to
    body.connect so the pages that already use them correctly are
    left exactly as they are. Within these pages the same rules are
-   keyed off .on-purple, because News closes on a dark band and
+   keyed off .on-dark, because News closes on a dark band and
    ink-on-paper colours do not belong on it.
 
    What it does, in order:
@@ -44,14 +44,14 @@ body.connect{
      read as one system rather than as scattered var() calls. */
   --c-rule:      var(--rule);
   --c-rule-soft: var(--rule-soft);
-  --c-key:       var(--purple);
+  --c-key:       var(--dark);
   /* Gold carried dark enough to be read as ink. The site's own #FFC308 is
      1.51:1 on paper — pale yellow on white, unreadable as lettering — and
      assets/css/palette.css has already worked out what it becomes on a pale
      ground, at the same hue, so this is that value rather than a new one:
      5.57:1 on --paper and 5.01:1 on --paper-2, which is the darker of the
      two grounds these sections alternate between. */
-  --c-accent:    #756300;
+  --c-accent:    var(--label);
 }
 
 /* ------------------------------------------------------------
@@ -65,7 +65,7 @@ body.connect{
    somewhere to rest between two tables.
    ------------------------------------------------------------ */
 body.connect main{ background:var(--paper); }
-body.connect .section:not(.on-purple){
+body.connect .section:not(.on-dark){
   position:relative;
   background-image:
     radial-gradient(74% 46% at 86% 0%,
@@ -74,21 +74,21 @@ body.connect .section:not(.on-purple){
 body.connect .section.on-paper-2{
   background-image:
     radial-gradient(70% 44% at 12% 0%,
-      rgba(57,42,72,.055) 0%, rgba(57,42,72,.018) 44%, rgba(57,42,72,0) 74%);
+      rgba(42,41,37,.055) 0%, rgba(42,41,37,.018) 44%, rgba(42,41,37,0) 74%);
 }
 /* News closes on a dark band. It takes the same light, pitched for a ground
    it has to be seen against rather than felt on. */
-body.connect .section.on-purple{
+body.connect .section.on-dark{
   position:relative;
   background-image:
     radial-gradient(76% 52% at 84% 0%,
-      rgba(255,195,8,.11) 0%, rgba(255,195,8,.035) 44%, rgba(255,195,8,0) 74%);
+      rgba(201,169,97,.11) 0%, rgba(201,169,97,.035) 44%, rgba(201,169,97,0) 74%);
 }
 /* A hairline between bands. Two adjacent sections of nearly the same
    tone met with nothing to mark the join — which a dark band does not
    need, and would be a pale scar across. */
-body.connect .section + .section:not(.on-purple){ border-top:1px solid var(--c-rule-soft); }
-body.connect .section.on-purple + .section{ border-top:0; }
+body.connect .section + .section:not(.on-dark){ border-top:1px solid var(--c-rule-soft); }
+body.connect .section.on-dark + .section{ border-top:0; }
 
 /* ------------------------------------------------------------
    2. Section heads
@@ -133,20 +133,20 @@ body.connect .sec-head h2{ text-wrap:balance; }
    three or four to a screen instead of one, and a term is a
    thumb's width from its value at every size.
    ------------------------------------------------------------ */
-body.connect .section:not(.on-purple) .factrail{
+body.connect .section:not(.on-dark) .factrail{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));
   column-gap:clamp(24px,3vw,56px);
   border-top:2px solid var(--c-key);
 }
-body.connect .section:not(.on-purple) .factrail > div{
+body.connect .section:not(.on-dark) .factrail > div{
   gap:clamp(12px,1.6vw,26px);
   padding:15px 0;
 }
-body.connect .section:not(.on-purple) .factrail dt{
+body.connect .section:not(.on-dark) .factrail dt{
   font-size:.9rem; letter-spacing:.09em; color:var(--ink-mute);
 }
-body.connect .section:not(.on-purple) .factrail dd{
+body.connect .section:not(.on-dark) .factrail dd{
   color:var(--ink); font-weight:500; font-size:.97rem;
   text-align:right;
 }
@@ -154,7 +154,7 @@ body.connect .section:not(.on-purple) .factrail dd{
    list and the Resident Director's address — so it keeps its single file.
    Splitting a 580px column again would set "Director — Academics &
    Administration" over three lines to save nothing. */
-body.connect .section:not(.on-purple) .prog .factrail{ grid-template-columns:1fr; }
+body.connect .section:not(.on-dark) .prog .factrail{ grid-template-columns:1fr; }
 
 /* ------------------------------------------------------------
    4. The tables
@@ -170,40 +170,40 @@ body.connect .section:not(.on-purple) .prog .factrail{ grid-template-columns:1fr
    is capped at a measure so a long particular sets as a paragraph
    rather than as one line across the full width.
    ------------------------------------------------------------ */
-body.connect .section:not(.on-purple) .tablewrap{
+body.connect .section:not(.on-dark) .tablewrap{
   border:0; background:none;
   margin-top:clamp(26px,3vw,44px);
 }
 /* The caption is there for anyone reading the table out of its page, and it
    was setting as a stray grey sentence above it. It is a label now. */
-body.connect .section:not(.on-purple) .tbl caption{
+body.connect .section:not(.on-dark) .tbl caption{
   padding:0 0 var(--space-3);
   font-style:normal;
   font-size:.72rem; letter-spacing:.13em; text-transform:uppercase;
   color:var(--ink-mute);
 }
-body.connect .section:not(.on-purple) .tbl th,
-body.connect .section:not(.on-purple) .tbl td{
+body.connect .section:not(.on-dark) .tbl th,
+body.connect .section:not(.on-dark) .tbl td{
   padding:18px clamp(16px,2vw,32px) 18px 0;
   border-bottom:1px solid var(--c-rule-soft);
   font-size:.97rem; line-height:1.6;
 }
-body.connect .section:not(.on-purple) .tbl thead th{
+body.connect .section:not(.on-dark) .tbl thead th{
   padding-bottom:12px;
   border-bottom:1px solid var(--c-accent);
   color:var(--c-accent);
   font-size:.78rem; letter-spacing:.13em; text-transform:uppercase;
 }
-body.connect .section:not(.on-purple) .tbl tbody th{
+body.connect .section:not(.on-dark) .tbl tbody th{
   color:var(--ink); font-weight:600;
   /* The particulars are sentences, not labels — "NOC from State/UT or
      recommendation of Embassy of India" cannot be nowrap without
      pushing the table into its scroller on every screen. */
   white-space:normal;
 }
-body.connect .section:not(.on-purple) .tbl td{ color:var(--ink-soft); max-width:62ch; }
-body.connect .section:not(.on-purple) .tbl tbody tr:hover th,
-body.connect .section:not(.on-purple) .tbl tbody tr:hover td{ background:rgba(117,99,0,.035); }
+body.connect .section:not(.on-dark) .tbl td{ color:var(--ink-soft); max-width:62ch; }
+body.connect .section:not(.on-dark) .tbl tbody tr:hover th,
+body.connect .section:not(.on-dark) .tbl tbody tr:hover td{ background:rgba(117,99,0,.035); }
 
 /* ------------------------------------------------------------
    5. Contact details
@@ -233,16 +233,16 @@ body.connect .ucpage .tbl a{
 }
 body.connect .tbl a[href^="tel:"]:hover,
 body.connect .tbl a[href^="mailto:"]:hover{
-  color:var(--purple);
-  text-decoration-color:var(--purple);
+  color:var(--dark);
+  text-decoration-color:var(--dark);
 }
 /* The general link treatment inside a table — to the documents portal,
    mostly — stays distinct from a contact action. */
 body.connect .tbl td > a:not([href^="tel:"]):not([href^="mailto:"]){
-  color:var(--purple);
+  color:var(--dark);
   text-decoration:underline;
   text-underline-offset:3px;
-  text-decoration-color:rgba(57,42,72,.32);
+  text-decoration-color:rgba(42,41,37,.32);
 }
 
 /* ------------------------------------------------------------
@@ -264,7 +264,7 @@ body.connect .notice{ margin-top:clamp(8px,1.4vw,20px); }
    portal is not open, and it puts the two systems that are
    running where a visitor can reach them. Its problem was shape.
    Everything sat in a 760px column down the left of a dark band,
-   so two thirds of the screen was empty purple, and the three
+   so two thirds of the screen was empty dark ground, and the three
    ways to reach the school — the part of the page with the most
    practical value — arrived last, smallest, and in a single file.
 
@@ -275,7 +275,7 @@ body.connect .notice{ margin-top:clamp(8px,1.4vw,20px); }
 body.connect .ucpage{
   background-image:
     radial-gradient(58% 48% at 82% 6%,
-      rgba(255,195,8,.10) 0%, rgba(255,195,8,.03) 46%, rgba(255,195,8,0) 74%);
+      rgba(201,169,97,.10) 0%, rgba(201,169,97,.03) 46%, rgba(201,169,97,0) 74%);
 }
 @media (min-width:960px){
   body.connect .ucpage__inner{
@@ -300,10 +300,10 @@ body.connect .ucpage{
     grid-column:2; grid-row:1 / span 7;
     align-self:start;
     padding:clamp(26px,2.6vw,38px) clamp(22px,2.4vw,34px);
-    border:1px solid rgba(255,195,8,.22);
+    border:1px solid rgba(201,169,97,.22);
     background:
-      radial-gradient(120% 120% at 0% 0%, rgba(255,195,8,.09), rgba(255,195,8,0) 62%),
-      rgba(14,11,18,.34);
+      radial-gradient(120% 120% at 0% 0%, rgba(201,169,97,.09), rgba(201,169,97,0) 62%),
+      rgba(17,17,15,.34);
   }
   body.connect .ucpage__foot{ grid-column:1 / -1; }
 }
@@ -314,10 +314,10 @@ body.connect .ucpage__row{
   margin:0; border-radius:0;
   padding:var(--space-4) var(--space-3);
 }
-body.connect .ucpage__row + .ucpage__row{ border-top:1px solid var(--rule-purple); }
+body.connect .ucpage__row + .ucpage__row{ border-top:1px solid var(--rule-dark); }
 body.connect .ucpage__reachlabel{
   padding-bottom:var(--space-3);
-  border-bottom:1px solid rgba(255,195,8,.28);
+  border-bottom:1px solid rgba(201,169,97,.28);
 }
 
 /* ------------------------------------------------------------
@@ -327,27 +327,27 @@ body.connect .ucpage__reachlabel{
    ------------------------------------------------------------ */
 
 /* Links inside running copy looked like the copy around them. */
-body.connect .section:not(.on-purple) .copy a,
-body.connect .section:not(.on-purple) .sec-head .lead a{
-  color:var(--purple); text-decoration:underline; text-underline-offset:3px;
-  text-decoration-color:rgba(57,42,72,.35);
+body.connect .section:not(.on-dark) .copy a,
+body.connect .section:not(.on-dark) .sec-head .lead a{
+  color:var(--dark); text-decoration:underline; text-underline-offset:3px;
+  text-decoration-color:rgba(42,41,37,.35);
   transition:text-decoration-color .2s var(--e);
 }
-body.connect .section:not(.on-purple) .copy a:hover,
-body.connect .section:not(.on-purple) .sec-head .lead a:hover{ text-decoration-color:var(--purple); }
+body.connect .section:not(.on-dark) .copy a:hover,
+body.connect .section:not(.on-dark) .sec-head .lead a:hover{ text-decoration-color:var(--dark); }
 
 /* Photograph placeholders on paper. They were near-black slabs, the
    heaviest thing on a pale page and the least informative. They are
    now the archive's pale hatched frame — the same one the School
    History timeline uses — so a gap reads as a gap, not as content. */
-body.connect .section:not(.on-purple) .feature__media.is-placeholder,
+body.connect .section:not(.on-dark) .feature__media.is-placeholder,
 body.connect .newstrack .feature__media.is-placeholder{
   background:
-    repeating-linear-gradient(135deg, transparent 0 7px, rgba(57,42,72,.045) 7px 14px),
+    repeating-linear-gradient(135deg, transparent 0 7px, rgba(42,41,37,.045) 7px 14px),
     var(--paper-2);
   border:1px solid var(--c-rule);
 }
-body.connect .section:not(.on-purple) .feature__media.is-placeholder .feature__ph,
+body.connect .section:not(.on-dark) .feature__media.is-placeholder .feature__ph,
 body.connect .newstrack .feature__media.is-placeholder .feature__ph{
   color:var(--ink-mute); border-color:var(--c-rule);
 }
