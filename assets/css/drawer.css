@@ -1,5 +1,8 @@
 /* ============================================================
    The site's navigation — header, full-screen menu, Enquire.
+   Type follows the roles in typography.css: the school's name and the
+   category words in the display face, everything else in the interface
+   and body face at the navigation weight.
    Markup: tools/partials/header.html, tools/partials/drawer.html and
    nav_html() in tools/build-site.py. Behaviour: "Header, menu and
    Enquire" in assets/js/cirs.js. Worked out first as the prototype in
@@ -56,15 +59,16 @@
 .nv-brand{ display:flex; align-items:center; gap:13px; min-width:0; justify-self:center; color:var(--ink); }
 .nv-brand img{ width:48px; height:auto; flex:none; }
 .nv-brand__txt{ display:flex; flex-direction:column; gap:3px; min-width:0; }
-.nv-brand__name{ font-size:1.16rem; line-height:1.06; letter-spacing:-.005em; white-space:nowrap; }
-.nv-brand__sub{ font-size:.8rem; letter-spacing:.11em; line-height:1; color:var(--ink-mute); white-space:nowrap; }
-.nv-brand__short{ display:none; font-size:1.2rem; letter-spacing:.08em; line-height:1; }
+.nv-brand__name{ font-family:var(--font-display); font-size:1.16rem; line-height:1.06; letter-spacing:-.005em; white-space:nowrap; }
+.nv-brand__sub{ font-family:var(--font-ui); font-size:.8rem; letter-spacing:.11em; line-height:1; color:var(--ink-mute); white-space:nowrap; }
+.nv-brand__short{ display:none; font-family:var(--font-display); font-size:1.2rem; letter-spacing:.08em; line-height:1; }
 
 .nv-tab{
   position:relative;
   display:inline-flex; align-items:center; justify-content:center; gap:9px;
   min-height:44px; padding:0 2px;
   color:var(--ink);
+  font-family:var(--font-ui);
   font-size:.92rem; letter-spacing:.06em; line-height:1; white-space:nowrap;
 }
 .nv-tab__icon{ display:grid; place-items:center; height:18px; color:var(--ink-soft); transition:color .2s var(--e); }
@@ -156,6 +160,7 @@
 }
 .nv-enq__title{
   display:flex; align-items:center; gap:10px;
+  font-family:var(--font-ui);
   margin:0 0 var(--space-3);
   color:var(--ink-soft);
   font-size:.74rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; line-height:1;
@@ -282,10 +287,12 @@
   transition:color .2s var(--e);
 }
 .nv-cat__num{
+  font-family:var(--font-ui);
   font-size:.8rem; letter-spacing:.08em; font-variant-numeric:lining-nums tabular-nums;
   line-height:1;
 }
 .nv-cat__word{
+  font-family:var(--font-display); font-weight:400;
   font-size:var(--nv-cat-size);
   line-height:1.04; letter-spacing:-.03em;
   text-wrap:balance;
@@ -506,15 +513,18 @@ body.menu-open .ring, body.menu-closing .ring{ display:none; }
   .nv-enq__grid{ grid-template-columns:1fr; gap:var(--space-5); }
 }
 
-/* Phones: the crest and CIRS stand in for the full name, which the
-   link still carries for assistive technology. Enquire keeps its
-   word and gives up its mark. */
-@media (max-width:699px){
+/* Below 760px the crest and CIRS stand in for the full name, which the
+   link still carries for assistive technology: set in the display face
+   the full name needs about that much room beside the controls. */
+@media (max-width:759px){
   .nv-brand{ gap:8px; }
   .nv-brand img{ width:34px; }
   .nv-brand__txt{ display:block; }
   .nv-brand__name{ display:none; }
   .nv-brand__short{ display:block; }
+}
+/* Phones: Enquire keeps its word and gives up its mark. */
+@media (max-width:699px){
   .nv-enq__btn .nv-tab__icon{ display:none; }
   .nv-header__bar{ gap:var(--space-2); }
   .nv-header__side{ gap:var(--space-1); }
@@ -532,9 +542,27 @@ body.menu-open .ring, body.menu-closing .ring{ display:none; }
   .nv-menu__utility{ grid-template-columns:1fr; }
 }
 
-/* A page with a fourth control — Student Life's Student Portal, which is
-   linked nowhere else on that page — gives up the Home mark below 440px,
-   where there is no room for both. The crest still leads home. */
+/* A page with a fourth control — Student Life's Student Portal, linked
+   nowhere else on that page. Its bar sizes each side to what it holds, so
+   the extra control cannot push into the lockup; the crest sits centred
+   between them rather than on the window's centre line. The portal keeps
+   its word from 1280px, the full name from 900px, and below 440px the Home
+   mark gives way to it (the crest still leads home). */
+.nv-header__bar:has(.nv-tab--login){ grid-template-columns:auto minmax(0,1fr) auto; }
+@media (max-width:1279px){
+  .nv-tab--login .nv-tab__label{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;
+  }
+  .nv-tab--login{ min-width:40px; }
+  .nv-tab--login::after{ left:10px; right:10px; }
+}
+@media (max-width:899px){
+  .nv-header__bar:has(.nv-tab--login) .nv-brand{ gap:8px; }
+  .nv-header__bar:has(.nv-tab--login) .nv-brand img{ width:34px; }
+  .nv-header__bar:has(.nv-tab--login) .nv-brand__txt{ display:block; }
+  .nv-header__bar:has(.nv-tab--login) .nv-brand__name{ display:none; }
+  .nv-header__bar:has(.nv-tab--login) .nv-brand__short{ display:block; }
+}
 @media (max-width:440px){
   .nv-header__bar:has(.nv-tab--login) .nv-tab--home{ display:none; }
 }

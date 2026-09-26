@@ -184,7 +184,7 @@ body.houses main{ background:var(--paper); }
 }
 .hsxz__no{
   position:absolute; top:clamp(84px,9vh,120px); left:0; right:0;
-  text-align:center; font-family:var(--font-primary);
+  text-align:center; font-family:var(--font-ui);
   font-size:.82rem; letter-spacing:.34em; color:rgba(255,255,255,.78);
 }
 /* The name sits in the upper half of the zone, above the band the
@@ -198,7 +198,7 @@ body.houses main{ background:var(--paper); }
 }
 .hsxz__name{
   writing-mode:vertical-rl; transform:rotate(180deg);
-  font-family:var(--font-primary); font-weight:600;
+  font-family:var(--font-display); font-weight:600;
   font-size:clamp(1.9rem,3.4vw,3.1rem); line-height:1;
   letter-spacing:.02em;
   color:rgba(255,255,255,.66);
@@ -214,12 +214,12 @@ body.houses main{ background:var(--paper); }
   .hsxz__name{ color:transparent; -webkit-text-stroke:1.3px rgba(255,255,255,.92); }
 }
 .hsxz__meta{
-  font-family:var(--font-primary); font-size:.74rem; letter-spacing:.2em;
+  font-family:var(--font-ui); font-size:.74rem; letter-spacing:.2em;
   text-transform:uppercase; color:rgba(255,255,255,.0);
   transition:color .45s var(--e); text-align:center;
 }
 .hsxz__go{
-  font-family:var(--font-primary); font-size:.7rem; letter-spacing:.26em;
+  font-family:var(--font-ui); font-size:.7rem; letter-spacing:.26em;
   text-transform:uppercase; color:var(--gold-lit);
   opacity:0; transform:translateY(6px);
   transition:opacity .45s var(--e), transform .45s var(--e);
@@ -278,7 +278,7 @@ body.houses main{ background:var(--paper); }
 .hsx__say .sc{ color:var(--gold-lit); }
 .hsx__say .marker::after{ background:rgba(255,255,255,.3); max-width:140px; }
 .hsx__title{
-  font-family:var(--font-primary); font-weight:600; color:#fff;
+  font-family:var(--font-display); font-weight:600; color:#fff;
   font-size:clamp(3.1rem,8vw,9rem); line-height:.82; letter-spacing:-.055em;
   text-wrap:balance;
 }
@@ -289,7 +289,7 @@ body.houses main{ background:var(--paper); }
 }
 .hsx__cue{
   margin-top:var(--space-5); display:flex; align-items:center; gap:10px;
-  font-family:var(--font-primary); font-size:.72rem; letter-spacing:.2em;
+  font-family:var(--font-ui); font-size:.72rem; letter-spacing:.2em;
   text-transform:uppercase; color:rgba(255,255,255,.72);
 }
 .hsx__cuek{
@@ -375,7 +375,7 @@ body.houses main{ background:var(--paper); }
    hear it twice. */
 .hch__ghost{
   position:absolute; left:0; right:0; top:clamp(40px,6vw,86px);
-  font-family:var(--font-primary); font-weight:600;
+  font-family:var(--font-display); font-weight:600;
   font-size:clamp(4rem,15vw,15rem); line-height:.8; letter-spacing:-.055em;
   color:var(--hi); opacity:.1; white-space:nowrap;
   pointer-events:none; text-align:center;
@@ -388,19 +388,19 @@ body.houses main{ background:var(--paper); }
 
 .hch__step{
   display:flex; align-items:baseline; gap:8px; margin-bottom:var(--space-4);
-  font-family:var(--font-primary); letter-spacing:.2em;
+  font-family:var(--font-ui); letter-spacing:.2em;
 }
 .hch:nth-child(even) .hch__step{ justify-content:flex-end }
 .hch__no{ font-size:1.5rem; font-weight:600; color:var(--hi); }
 .hch__of{ font-size:.78rem; color:var(--ink-mute); }
 
 .hch__name{
-  font-family:var(--font-primary); font-weight:600; color:var(--ink);
+  font-family:var(--font-display); font-weight:600; color:var(--ink);
   font-size:clamp(2.6rem,6vw,5.2rem); line-height:.9; letter-spacing:-.04em;
 }
 .hch__id{
   margin-top:var(--space-3); display:flex; align-items:center; gap:10px;
-  font-family:var(--font-primary); font-size:.8rem; letter-spacing:.2em;
+  font-family:var(--font-ui); font-size:.8rem; letter-spacing:.2em;
   text-transform:uppercase; color:var(--hi);
 }
 .hch:nth-child(even) .hch__id{ justify-content:flex-end }
@@ -425,7 +425,7 @@ body.houses main{ background:var(--paper); }
 }
 .hch__says cite{
   display:block; margin-top:var(--space-4); font-style:normal;
-  font-family:var(--font-primary); font-size:.78rem; letter-spacing:.14em;
+  font-family:var(--font-ui); font-size:.78rem; letter-spacing:.14em;
   text-transform:uppercase; color:var(--ink-mute);
 }
 .hch__fact{ margin-top:var(--space-5); max-width:48ch; }
@@ -438,7 +438,7 @@ body.houses main{ background:var(--paper); }
    link rather than as a button. */
 .hch__more a{
   display:inline-flex; align-items:center; min-height:44px;
-  font-family:var(--font-primary); font-size:.8rem; letter-spacing:.16em;
+  font-family:var(--font-ui); font-size:.8rem; letter-spacing:.16em;
   text-transform:uppercase; color:var(--hi);
   box-shadow:inset 0 -1px 0 currentColor;
 }
@@ -479,7 +479,7 @@ body.houses main{ background:var(--paper); }
   white-space:nowrap; pointer-events:none;
 }
 .hmarch__names span{
-  font-family:var(--font-primary); font-weight:600;
+  font-family:var(--font-display); font-weight:600;
   font-size:clamp(3rem,9vw,8rem); line-height:.8; letter-spacing:-.05em;
   color:rgba(250,249,243,.085);
 }
@@ -496,7 +496,7 @@ body.houses main{ background:var(--paper); }
   width:100%; height:auto; display:block; aspect-ratio:3/2; object-fit:cover;
 }
 .hmarch__run figcaption{
-  margin-top:var(--space-3); font-family:var(--font-primary);
+  margin-top:var(--space-3); font-family:var(--font-ui);
   font-size:.82rem; letter-spacing:.06em; color:var(--on-dark-mute);
 }
 /* Once the script drives the run it owns the transform, so the
@@ -526,7 +526,7 @@ body.houses main{ background:var(--paper); }
   appearance:none; background:transparent; cursor:pointer;
   border:1px solid var(--rule); padding:9px 18px;
   min-height:44px;
-  font-family:var(--font-primary); font-size:.78rem; letter-spacing:.14em;
+  font-family:var(--font-ui); font-size:.78rem; letter-spacing:.14em;
   text-transform:uppercase; color:var(--ink-soft);
   transition:background .25s var(--e), color .25s var(--e), border-color .25s var(--e);
 }
@@ -577,12 +577,12 @@ body.houses main{ background:var(--paper); }
 .hcomp__stop:hover{ background:rgba(42,41,37,.045) }
 .hcomp__stop.is-on::before{ background:var(--dark); outline-color:var(--dark) }
 .hcomp__when{
-  display:block; font-family:var(--font-primary); font-size:.72rem;
+  display:block; font-family:var(--font-ui); font-size:.72rem;
   letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute);
   margin-bottom:6px;
 }
 .hcomp__what{
-  display:block; font-family:var(--font-primary); font-size:.95rem;
+  display:block; font-family:var(--font-body); font-size:.95rem;
   line-height:1.24; color:var(--ink-soft);
 }
 .hcomp__stop.is-on .hcomp__what{ color:var(--ink); font-weight:600 }
@@ -598,11 +598,11 @@ body.houses main{ background:var(--paper); }
 .hcomp__panels.is-driven .hcomp__panel{ display:none; border-top:0; }
 .hcomp__panels.is-driven .hcomp__panel.is-on{ display:block }
 .hcomp__tag{
-  font-family:var(--font-primary); font-size:.72rem; letter-spacing:.2em;
+  font-family:var(--font-ui); font-size:.72rem; letter-spacing:.2em;
   text-transform:uppercase; color:var(--ink-mute); margin-bottom:var(--space-3);
 }
 .hcomp__ev{
-  font-family:var(--font-primary); font-weight:600; color:var(--ink);
+  font-family:var(--font-display); font-weight:600; color:var(--ink);
   font-size:clamp(1.5rem,3vw,2.5rem); line-height:1.04; letter-spacing:-.02em;
 }
 
@@ -616,11 +616,11 @@ body.houses main{ background:var(--paper); }
   background:var(--hf); color:var(--ho);
 }
 .hcomp__pl{
-  font-family:var(--font-primary); font-weight:600; font-size:1.3rem;
+  font-family:var(--font-display); font-weight:600; font-size:1.3rem;
 }
-.hcomp__hn{ font-family:var(--font-primary); font-size:1.05rem; }
+.hcomp__hn{ font-family:var(--font-ui); font-size:1.05rem; }
 .hcomp__hc{
-  font-family:var(--font-primary); font-size:.72rem; letter-spacing:.18em;
+  font-family:var(--font-ui); font-size:.72rem; letter-spacing:.18em;
   text-transform:uppercase; opacity:.86;
 }
 /* The bars step in from first to fourth, so the order is legible
@@ -639,17 +639,17 @@ body.houses main{ background:var(--paper); }
   border-left:6px solid var(--hf); background:var(--paper-2);
 }
 .hcomp__awards dt{
-  font-family:var(--font-primary); font-size:.74rem; letter-spacing:.18em;
+  font-family:var(--font-ui); font-size:.74rem; letter-spacing:.18em;
   text-transform:uppercase; color:var(--ink-mute);
 }
 .hcomp__awards dd{
-  margin:0; font-family:var(--font-primary); font-size:1.05rem;
+  margin:0; font-family:var(--font-ui); font-size:1.05rem;
   font-weight:600; color:var(--ink);
 }
 .hcomp__note{ margin-top:var(--space-5); max-width:var(--measure); color:var(--ink-soft); }
 .hcomp__note a{ color:var(--dark); border-bottom:1px solid currentColor }
 .hcomp__src{
-  margin-top:var(--space-4); font-family:var(--font-primary);
+  margin-top:var(--space-4); font-family:var(--font-ui);
   font-size:.74rem; letter-spacing:.14em; text-transform:uppercase;
   color:var(--ink-mute);
 }
@@ -671,7 +671,7 @@ body.houses main{ background:var(--paper); }
   max-width:40ch;
 }
 .hsport__lab{
-  display:block; font-family:var(--font-primary); font-size:.72rem;
+  display:block; font-family:var(--font-ui); font-size:.72rem;
   letter-spacing:.2em; text-transform:uppercase; color:var(--dark);
   margin-bottom:5px;
 }
@@ -716,7 +716,7 @@ body.houses main{ background:var(--paper); }
 .hcult__set > li:hover{ background:rgba(17,17,15,.55) }
 .hcult__who{
   display:flex; align-items:center; gap:9px;
-  font-family:var(--font-primary); font-size:.74rem; letter-spacing:.18em;
+  font-family:var(--font-ui); font-size:.74rem; letter-spacing:.18em;
   text-transform:uppercase; color:var(--hl);
 }
 .hcult__swatch{ width:22px; height:8px; background:var(--hf); flex:none }
@@ -742,7 +742,7 @@ body.houses main{ background:var(--paper); }
 .hrec__wrap{ overflow-x:auto; margin-top:clamp(26px,3vw,40px); }
 .hrec__table{
   width:100%; min-width:860px; border-collapse:collapse;
-  font-family:var(--font-primary);
+  font-family:var(--font-ui);
 }
 .hrec__table caption{
   caption-side:bottom; margin-top:var(--space-4); text-align:left;
@@ -786,7 +786,7 @@ body.houses main{ background:var(--paper); }
   appearance:none; background:transparent; cursor:pointer;
   border:1px solid var(--rule); padding:9px 18px; min-height:44px;
   display:inline-flex; align-items:center; gap:9px;
-  font-family:var(--font-primary); font-size:.78rem; letter-spacing:.14em;
+  font-family:var(--font-ui); font-size:.78rem; letter-spacing:.14em;
   text-transform:uppercase; color:var(--ink-soft);
   transition:background .25s var(--e), color .25s var(--e), border-color .25s var(--e);
 }
@@ -811,7 +811,7 @@ body.houses main{ background:var(--paper); }
   width:100%; height:auto; display:block; aspect-ratio:4/5; object-fit:cover;
 }
 .hgal__strip figcaption{
-  margin-top:var(--space-3); font-family:var(--font-primary); font-size:.8rem;
+  margin-top:var(--space-3); font-family:var(--font-ui); font-size:.8rem;
   line-height:1.4;
 }
 .hgal__strip figcaption b{ display:block; color:var(--hi); letter-spacing:.06em }
@@ -836,7 +836,7 @@ body.houses main{ background:var(--paper); }
 .hend__bars{ display:flex; gap:4px; margin-bottom:var(--space-6); max-width:340px }
 .hend__bars span{ flex:1 1 0; height:9px; background:var(--hf) }
 .hend__h{
-  font-family:var(--font-primary); font-weight:600; color:#fff;
+  font-family:var(--font-display); font-weight:600; color:#fff;
   font-size:clamp(2.7rem,7vw,7rem); line-height:.84; letter-spacing:-.05em;
 }
 /* cirs.js splits a [data-split] heading into .line-mask wrappers that are
@@ -865,7 +865,7 @@ body.houses main{ background:var(--paper); }
 .hend__links a{
   display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
   padding:var(--space-4) 0; min-height:44px;
-  font-family:var(--font-primary); font-size:clamp(1rem,1.5vw,1.25rem);
+  font-family:var(--font-ui); font-size:clamp(1rem,1.5vw,1.25rem);
   color:#fff; transition:padding-left .3s var(--e), color .3s var(--e);
 }
 .hend__links a::after{ content:"\2192"; color:var(--gold-lit) }

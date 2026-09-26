@@ -20,10 +20,9 @@
      .ld-staff    the staff and faculty photograph at its own
                   proportions, then a compact pair of links.
 
-   Type: Newsreader (the site's serif) for names, headings and
-   the messages themselves; Jost for the supporting text, roles
-   and links, so what is said about a person reads differently
-   from what they say.
+   Type: the display face for names and headings, Mona Sans for
+   the messages and for the supporting text, roles and links;
+   --ld-sans names the second of those.
 
    Photographs are shown as they are: no overlay, no tint, no
    rounded crop, no card. Colour comes from the robes, the
@@ -57,7 +56,7 @@ body.leadership{
   --ld-dark-2:   var(--dark-mid);
   --ld-on-dark:  var(--paper-2);
   --ld-on-dark-2:var(--on-dark-soft);
-  --ld-sans: "Jost", var(--font-primary);
+  --ld-sans: var(--font-ui);
   /* The fixed header's foot is at about 76px, 64px on a phone. */
   --ld-head: 112px;
 
@@ -106,7 +105,7 @@ body.leadership [id="directors"]{ scroll-margin-top:var(--ld-head); }
 }
 .ld-title{
   margin:0;
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:500;
   font-style:normal;
   font-size:clamp(2.8rem, 9.2vw, 8.5rem);
@@ -200,7 +199,7 @@ body.leadership [id="directors"]{ scroll-margin-top:var(--ld-head); }
 }
 .ld-person__name{
   margin:0;
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:500;
   font-size:clamp(1.3rem, 1.05rem + .7vw, 1.6rem);
   line-height:1.15;
@@ -248,7 +247,7 @@ body.leadership [id="directors"]{ scroll-margin-top:var(--ld-head); }
 }
 .ld-h3{
   margin:0;
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:500;
   font-size:clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
   line-height:1.1;
@@ -290,7 +289,7 @@ body.leadership [id="directors"]{ scroll-margin-top:var(--ld-head); }
 }
 .ld-dir__name{
   margin:0;
-  font-family:var(--font-primary); font-weight:500;
+  font-family:var(--font-display); font-weight:500;
   font-size:1.3rem; line-height:1.2;
   color:var(--ld-ink);
 }
@@ -319,7 +318,7 @@ body.leadership [id="directors"]{ scroll-margin-top:var(--ld-head); }
 .ld-words__head{ max-width:860px; margin-bottom:clamp(32px, 4vw, 56px); }
 .ld-h2{
   margin:0;
-  font-family:var(--font-primary);
+  font-family:var(--font-display);
   font-weight:500;
   font-size:clamp(2.4rem, 1.6rem + 3.4vw, 4.75rem);
   line-height:.98;
@@ -373,7 +372,7 @@ html:not(.ld-js) .ld-reader{ grid-template-columns:minmax(0,1fr); }
   transition:background-color .2s var(--e), border-color .2s var(--e);
 }
 .ld-idx__name{
-  font-family:var(--font-primary); font-size:1.06rem; line-height:1.25;
+  font-family:var(--font-ui); font-size:1.06rem; line-height:1.25;
   color:var(--ld-on-dark);
 }
 .ld-idx__role{
@@ -463,6 +462,10 @@ body.leadership .ld-msg:focus-visible{ outline:none; }
   .ld-msg__head{ grid-template-columns:112px minmax(0,1fr); align-items:end; column-gap:var(--space-5); }
 }
 @media (max-width:419px){ .ld-msg__head{ grid-template-columns:88px minmax(0,1fr); column-gap:var(--space-4); } }
+@media (max-width:359px){
+  .ld-msg__head{ grid-template-columns:minmax(0,1fr); }
+  .ld-msg__face{ width:88px; }
+}
 .ld-msg__face{ margin:0; aspect-ratio:4 / 5; overflow:hidden; background:var(--ld-ivory-2); }
 .ld-msg__face img{ display:block; width:100%; height:100%; object-fit:cover; }
 .ld-msg__kind{
@@ -473,7 +476,7 @@ body.leadership .ld-msg:focus-visible{ outline:none; }
 }
 .ld-msg__name{
   margin:0;
-  font-family:var(--font-primary); font-weight:500;
+  font-family:var(--font-display); font-weight:500;
   font-size:1.35rem; line-height:1.2;
   color:var(--ld-ink);
   text-wrap:balance;
@@ -486,7 +489,7 @@ body.leadership .ld-msg:focus-visible{ outline:none; }
 }
 .ld-msg__text{
   max-width:66ch;
-  font-family:var(--font-primary);
+  font-family:var(--font-body);
   font-size:1.125rem;
   line-height:1.65;
   color:var(--ld-ink);
@@ -561,7 +564,7 @@ p:not(.ld-msg__sign) + .ld-msg__sign{ margin-top:1.6em !important; }
   color:var(--ld-gold-ink);
 }
 .ld-end__t{
-  font-family:var(--font-primary); font-weight:500;
+  font-family:var(--font-display); font-weight:500;
   font-size:clamp(1.35rem, 1.1rem + .8vw, 1.8rem); line-height:1.2;
 }
 .ld-end__t::after{

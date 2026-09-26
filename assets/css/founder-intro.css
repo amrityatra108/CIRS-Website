@@ -46,7 +46,7 @@
   border-radius: 24px;
   background: rgba(244, 240, 230, .94);
   color: var(--ink);
-  font: 500 15px/1.2 var(--font-primary, Georgia, serif);
+  font: 500 15px/1.2 var(--font-ui);
   text-decoration: none;
   cursor: pointer;
   transition: background-color .18s ease;
@@ -88,7 +88,7 @@
   border-radius: 18px;
   background: rgba(244, 240, 230, .96);
   color: var(--ink);
-  font: 400 14px/1.45 var(--font-primary, Georgia, serif);
+  font: 400 14px/1.45 var(--font-ui);
   clip: auto;
   clip-path: none;
   white-space: normal;

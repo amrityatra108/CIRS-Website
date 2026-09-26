@@ -87,7 +87,7 @@ body.cwriting .cw-hero__topline {
 body.cwriting .cw-hero__edition {
   margin: 0;
   color: #cbbeb9;
-  font-family: var(--font-editorial);
+  font-family: var(--font-ui);
   font-size: 1.04rem;
 }
 
@@ -106,7 +106,7 @@ body.cwriting .cw-hero__title {
   z-index: 1;
   margin: 0;
   color: #faf9f3;
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
   font-size: clamp(6.5rem, 11.9vw, 11.2rem);
   font-weight: 500;
   line-height: .88;
@@ -235,7 +235,7 @@ body.cwriting .cw-hero__excerpt-credit {
   display: block;
   margin-top: 16px;
   color: #e8d9b5;
-  font-family: var(--font-primary);
+  font-family: var(--font-ui);
   font-size: .92rem;
   font-style: normal;
   font-weight: 500;
@@ -482,7 +482,7 @@ body.cwriting .cw-row__card-number {
 body.cwriting .cw-row__card-opening {
   flex: 1;
   color: var(--cw-charcoal);
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
   font-size: clamp(1.8rem, 2.15vw, 2.35rem);
   font-weight: 500;
   line-height: 1.12;
@@ -762,7 +762,7 @@ body.cwriting .cw-interlude__line {
 body.cwriting .cw-interlude__credit {
   display: block;
   color: #e8d9b5;
-  font-family: var(--font-primary);
+  font-family: var(--font-ui);
   font-size: .98rem;
   font-style: normal;
   line-height: 1.5;
