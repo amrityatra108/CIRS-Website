@@ -229,9 +229,8 @@ body.theatre .th-au__credit{
 }
 
 /* With motion, the stage holds while the scroll runs it: a darkened frame
-   first, then the whole stage opening out of a slit of light and coming up
-   to full colour. Every value is a variable theatre.js sets from the scroll,
-   so the reveal is the reader's to run forwards and back. */
+   gives way to the full stage as the lights come up. Every value is a
+   variable theatre.js sets from the scroll, so the reveal runs both ways. */
 body.theatre .th-au.is-live .th-au__track{ height:300vh; }
 body.theatre .th-au.is-live .th-au__stage{ position:sticky; top:0; height:100vh; height:100svh; }
 body.theatre .th-au.is-live .th-au__dark{
@@ -239,7 +238,7 @@ body.theatre .th-au.is-live .th-au__dark{
   filter:brightness(.9) saturate(.9);
 }
 body.theatre .th-au.is-live .th-au__wide{
-  clip-path:inset(calc((1 - var(--open, 0)) * 7%) calc((1 - var(--open, 0)) * 49.6%));
+  opacity:var(--open, 0);
 }
 body.theatre .th-au.is-live .th-au__wideimg{
   transform:scale(calc(1.14 - .14 * var(--open, 0)));
