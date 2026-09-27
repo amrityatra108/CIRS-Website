@@ -57,9 +57,11 @@
   letter-spacing:.1em;
   text-transform:uppercase;
   cursor:pointer;
+  text-decoration:none;
   touch-action:manipulation;
   transition:background 180ms ease,color 180ms ease,opacity 180ms ease;
 }
+.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__skip,
 .crossroads-intro[data-crossroads-intro-locked] .crossroads-intro__skip,
 .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__skip { display:inline-flex; align-items:center; justify-content:center; }
 .crossroads-intro__play:not([hidden]) { display:inline-flex;align-items:center;justify-content:center;right:auto;left:clamp(16px,3vw,40px); }
@@ -238,7 +240,7 @@
 html.crossroads-intro-scroll-locked,html.crossroads-intro-scroll-locked body { overflow:hidden!important; overscroll-behavior:none; }
 .crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) { background:var(--cr-purple-deep) url("../img/crossroads/opening-poster.jpg") center/cover no-repeat; }
 .crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) .crossroads-intro__base,.crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) .crossroads-intro__reveal { visibility:hidden; }
-.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content { visibility:hidden; opacity:0; }
+.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content { visibility:visible; opacity:1; }
 @media (prefers-reduced-motion:reduce) {
   .crossroads-intro[data-crossroads-intro-film]::after,.crossroads-intro[data-crossroads-intro-film] .crossroads-intro__content { transition:none; }
   .crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__opening,

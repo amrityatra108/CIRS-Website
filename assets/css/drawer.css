@@ -168,18 +168,12 @@ body.menu-open .nv-header :focus-visible{ outline-color:var(--focus); }
 .nv-header.is-settling,.nv-header.is-settling *{ transition:none!important; }
 body:has(#curtain) .nv-header,
 body.founder:has(.gurudev-opening[data-phase="intro"]) .nv-header,
-body.founder:has(.gurudev-opening[data-phase="leaving"]) .nv-header,
-body:has(.crossroads-intro[data-crossroads-intro-pending]) .nv-header,
-body:has(.crossroads-intro[data-crossroads-intro-film]) .nv-header,
-body:has(.crossroads-intro[data-crossroads-intro-finishing]) .nv-header{
-  opacity:0; visibility:hidden;
+body.founder:has(.gurudev-opening[data-phase="leaving"]) .nv-header{
+  opacity:0; visibility:hidden; pointer-events:none;
 }
 body:has(#curtain) .nv-header__bar,
 body.founder:has(.gurudev-opening[data-phase="intro"]) .nv-header__bar,
-body.founder:has(.gurudev-opening[data-phase="leaving"]) .nv-header__bar,
-body:has(.crossroads-intro[data-crossroads-intro-pending]) .nv-header__bar,
-body:has(.crossroads-intro[data-crossroads-intro-film]) .nv-header__bar,
-body:has(.crossroads-intro[data-crossroads-intro-finishing]) .nv-header__bar{
+body.founder:has(.gurudev-opening[data-phase="leaving"]) .nv-header__bar{
   pointer-events:none;
 }
 .nv-header__side{ display:flex; align-items:center; gap:var(--space-5); min-width:0; }

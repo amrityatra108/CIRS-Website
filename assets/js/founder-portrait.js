@@ -31,7 +31,7 @@
  let packedStrokeIds=[];
  let width=1,height=1,dpr=1,active=false,visible=true,loaded=false,disposed=false,gl=null,meshProgram=null,postProgram=null,maskProgram=null,maskTarget=null,screenBuffer=null;
  let models=[],targets=[],resources=[],listeners=[],resizeObserver,intersectionObserver,removalObserver;
- let raf=0,lastFrame=0,full=0,targetFull=0,yaw=0,pitch=0,targetYaw=0,targetPitch=0;
+let raf=0,lastFrame=0,full=0,targetFull=0,yaw=0,pitch=0,targetYaw=0,targetPitch=0,initializeStarted=false;
  let inside=false,contextLost=false,pinned=false,tx=0,ty=0,px=0,py=0,lastSample=null,trail=[],stroke=0,speed=0,lastInput=null,lastMotion=0,meshDirty=true;
  let fallbackCanvas=null,fallbackContext=null,fallbackMask=null,fallbackMaskContext=null,fallbackLayer=null,fallbackLayerContext=null,fallbackReady=false;
  const deg=Math.PI/180,cameraDistance=2.8,eyeZ=.0935;
@@ -298,7 +298,8 @@
   toggle.textContent=pinned?'Return to first portrait':'Reveal portrait';toggle.setAttribute('aria-pressed',String(pinned));status.textContent=pinned?'The older portrait is visible.':'Move across the portrait to reveal the older Gurudev through a flowing trail.';
   armIdle();if(reduced.matches){full=targetFull;draw()}request();if(persist)root.dispatchEvent(new CustomEvent('gurudev:portrait-choice',{detail:{revealed:pinned}}));
  }
- function activate(value){interruptIdle(false);active=Boolean(value);root.__gurudevLiquidSound?.setActive(active);if(active){size();request();armIdle()}else{cancelAnimationFrame(raf);raf=0;inside=false;trail=[];strokeData.fill(0);lastSample=null;lastInput=null;targetYaw=targetPitch=yaw=pitch=0;meshDirty=true}}
+ function startInitialize(){if(initializeStarted||disposed)return;initializeStarted=true;initialize()}
+ function activate(value){interruptIdle(false);active=Boolean(value);root.__gurudevLiquidSound?.setActive(active);if(active){startInitialize();size();request();armIdle()}else{cancelAnimationFrame(raf);raf=0;inside=false;trail=[];strokeData.fill(0);lastSample=null;lastInput=null;targetYaw=targetPitch=yaw=pitch=0;meshDirty=true}}
  async function initialize(){
   try{
    if(!('DecompressionStream' in window))throw Error('Geometry decoder unavailable');
@@ -327,5 +328,9 @@
  removalObserver=new MutationObserver(()=>{if(!root.isConnected)cleanup()});removalObserver.observe(document.documentElement,{childList:true,subtree:true});
  hint.textContent=coarse.matches?'Drag across the portrait.':'Move across the portrait.';
  root.__gurudevPortrait={activate,reset(){reveal(false,false);full=targetFull=0;targetYaw=targetPitch=yaw=pitch=0;meshDirty=true;hero.dataset.explored='false';draw()},reveal,dispose:cleanup,inspect(){return{active,loaded,renderer:hero.dataset.renderer,reveal:'cursor-fluid-trail',inside,pinned,full,trailCount:trail.length,trailLifetime:settings.trail,idleFlow:inspectIdle(),packedStrokeIds:packedStrokeIds.slice(),maskSamples:Array.from(strokeData),automaticTrailCount:trail.filter(p=>p.automatic).length,strokeCount:Array.from(strokeData).filter((v,i)=>i%4===2&&v>.1).length,yaw:yaw/deg,pitch:pitch/deg,targetYaw:targetYaw/deg,targetPitch:targetPitch/deg,vertexCounts:models.map(m=>m.vertexCount),rafRunning:Boolean(raf),size:[width,height]}}};
- size();initialize();
+ // The hero is hidden behind the opening film on a fresh visit. Its 2.8 MB
+ // packed portrait payload is not needed until the portrait becomes visible.
+ // activate(true) also covers deep links and the reduced-motion fast path.
+ size();
+ if(!hero.hidden)startInitialize();
 })();

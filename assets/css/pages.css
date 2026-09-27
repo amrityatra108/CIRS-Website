@@ -780,6 +780,8 @@ body.has-lightbox{ overflow:hidden; }
   color:rgba(245,238,242,.62);
 }
 .lightbox__hint-touch{ display:none; }
+.lightbox__exit,.lightbox__fallback{ pointer-events:auto; color:inherit; text-decoration:underline; text-underline-offset:.18em; }
+.lightbox__exit{ padding:0; border:0; background:none; font:inherit; cursor:pointer; }
 @media (pointer:coarse){
   .lightbox__hint-key{ display:none; }
   .lightbox__hint-touch{ display:inline; }
