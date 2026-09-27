@@ -19,7 +19,7 @@
     if (runnerTween) runnerTween.kill();
     if (stack) stack.querySelectorAll('.house-stage-echo').forEach(function (el) { el.remove(); });
     if (gs) panels.forEach(function (panel) {
-      gs.set(panel.querySelectorAll(':scope>figure,:scope>.house-stage__copy,:scope>figure img,:scope>figure figcaption'), {clearProps:'transform,opacity,--sport-line'});
+      gs.set(panel.querySelectorAll(':scope>.house-stage__media,:scope>.house-stage__copy,.house-stage__media img,.house-stage__media figcaption'), {clearProps:'transform,opacity,--sport-line'});
     });
   }
   function moveRunner(animate) {
@@ -54,7 +54,7 @@
     if (animate) {
       stageTween = gs.timeline({defaults:{ease:'power3.out'},onComplete:function () { if (echo) echo.remove(); }});
       stageTween.to(echo,{x:-direction*22,opacity:0,duration:.25},0)
-        .fromTo(incoming.querySelector(':scope>figure'),{x:direction*24,opacity:0},{x:0,opacity:1,duration:.5},.08)
+        .fromTo(incoming.querySelector('.house-stage__media'),{x:direction*24,opacity:0},{x:0,opacity:1,duration:.5},.08)
         .fromTo(incoming.querySelector('.house-stage__copy'),{y:12},{y:0,duration:.4},.14);
       if (id === 'sport') {
         stageTween.fromTo(incoming.querySelector('figure img'),{scale:1.03},{scale:1,duration:.55},0)
@@ -158,12 +158,12 @@
       var outgoing=chapter.querySelector('.house-wipe__out'),incoming=chapter.querySelector('.house-wipe__in');
       var wipe=gs.timeline({scrollTrigger:{id:'houses-wipe-'+index,trigger:chapter,start:'top bottom',end:'top 42%',scrub:true},defaults:{ease:'power2.inOut'}});
       // Switch at the same 1.2%-wide stripe: never interpolate house colours.
-      wipe.fromTo(outgoing,{scaleX:index?1:.012,scaleY:1},{scaleX:index?.012:1,duration:.28},0);
-      if(!index)wipe.to(outgoing,{scaleX:.012,duration:.16},.28);
-      var turn=index?.28:.44;
-      wipe.set(outgoing,{opacity:0},turn).set(incoming,{scaleX:.012,scaleY:1,opacity:.96},turn)
-        .to(incoming,{scaleX:1,duration:.22},turn)
-        .to(incoming,{scaleY:.004,opacity:0,duration:.34},turn+.22);
+      wipe.fromTo(outgoing,{scaleX:.012,scaleY:1},{scaleX:1,duration:.18},0)
+        .to(outgoing,{scaleX:.012,duration:.18},.18);
+      var turn=.36;
+      wipe.set(outgoing,{opacity:0},turn).set(incoming,{scaleX:.012,scaleY:1,opacity:1},turn)
+        .to(incoming,{scaleX:1,duration:.18},turn)
+        .to(incoming,{scaleY:.004,opacity:0,duration:.26},turn+.18);
       // A bounded entrance: content is settled while the chapter is still entering.
       var enter=gs.timeline({scrollTrigger:{id:'houses-enter-'+index,trigger:chapter,start:'top 94%',end:'top 38%',scrub:true},defaults:{ease:'power2.out'}});
       enter.from(chapter.querySelector('.house-spread__index'),{y:12,duration:.2},0)
@@ -173,12 +173,9 @@
         .from(chapter.querySelectorAll('.house-copy-block'),{y:14,stagger:.05,duration:.3},.2)
         .from(chapter.querySelector('.house-signature-line'),{scaleX:0,duration:.4},.04);
       gs.fromTo(chapter.querySelector('.house-spread__ghost'),{xPercent:-3},{xPercent:3,ease:'none',scrollTrigger:{id:'houses-ghost-'+index,trigger:chapter,start:'top bottom',end:'bottom top',scrub:true}});
-      gs.fromTo(chapter.querySelector('figure img'),{yPercent:1.5,scale:1.035},{yPercent:-1.5,scale:1.035,ease:'none',scrollTrigger:{id:'houses-photo-'+index,trigger:chapter,start:'top bottom',end:'bottom top',scrub:true}});
     });
-    var firstOut=chapters[0].querySelector('.house-wipe__out');
-    function handoff(event) { firstOut.style.backgroundColor=getComputedStyle(event.currentTarget).getPropertyValue('--house-colour'); }
-    var zones=Array.from(document.querySelectorAll('.house-zone'));
-    zones.forEach(function (zone) {zone.addEventListener('pointerenter',handoff);zone.addEventListener('focus',handoff);});
+    // The first handoff always belongs to Vasishta, regardless of hero exploration.
+    gs.to(document.querySelector('.house-opening__panels'),{scale:.975,transformOrigin:'50% 100%',ease:'none',scrollTrigger:{id:'houses-hero-recede',trigger:chapters[0],start:'top bottom',end:'top 45%',scrub:true}});
     var meet=document.querySelector('#competition');
     gs.timeline({scrollTrigger:{id:'houses-converge',trigger:meet,start:'top bottom',end:'top 42%',scrub:true}})
       .fromTo(meet.querySelectorAll('.house-convergence span'),{xPercent:function(i){return (i-1.5)*110;},y:function(i){return i%2?60:-60;},scaleY:9},{xPercent:0,y:0,scaleY:1,duration:.6,ease:'power2.inOut',stagger:.035},0)
@@ -196,21 +193,8 @@
     refresh();
     return function () {
       document.body.classList.remove('houses-motion');
-      firstOut.style.removeProperty('background-color');
-      zones.forEach(function(zone){zone.removeEventListener('pointerenter',handoff);zone.removeEventListener('focus',handoff);});
+
     };
-  });
-  // Desktop march travels with the document. Focusing the strip gives native horizontal control.
-  media.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)',function () {
-    var march=document.querySelector('.house-march'),viewport=march.querySelector('.house-march__viewport'),track=march.querySelector('.house-march__track');
-    var tween=gs.to(track,{x:function(){return -Math.max(0,track.scrollWidth-viewport.clientWidth);},ease:'none',scrollTrigger:{id:'houses-march',trigger:march,start:'top 90%',end:'bottom 15%',scrub:true,invalidateOnRefresh:true}});
-    gs.to(march.querySelector('.house-march__ghost'),{xPercent:-7,ease:'none',scrollTrigger:{id:'houses-march-type',trigger:march,start:'top bottom',end:'bottom top',scrub:true}});
-    gs.fromTo(march.querySelector('.house-march__stripes'),{xPercent:-3},{xPercent:3,ease:'none',scrollTrigger:{id:'houses-march-stripes',trigger:march,start:'top bottom',end:'bottom top',scrub:true}});
-    gs.to(march,{'--track-shift':'3%',ease:'none',scrollTrigger:{id:'houses-march-grid',trigger:march,start:'top bottom',end:'bottom top',scrub:true}});
-    function manual(){tween.scrollTrigger.disable(false);gs.set(track,{x:0});}
-    function automatic(){viewport.scrollLeft=0;tween.scrollTrigger.enable();refresh();}
-    viewport.addEventListener('focus',manual);viewport.addEventListener('blur',automatic);
-    return function(){viewport.removeEventListener('focus',manual);viewport.removeEventListener('blur',automatic);viewport.scrollLeft=0;};
   });
   if(document.fonts)document.fonts.ready.then(refresh);
   window.addEventListener('load',refresh,{once:true});
