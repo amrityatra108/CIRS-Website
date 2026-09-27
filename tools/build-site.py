@@ -2272,10 +2272,10 @@ def build(slug, page):
         intro_start = parts[-1].index("<!-- Opening sequence.")
         intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
         parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
-        parts.insert(2, '''<div class="home-intro" id="homeIntro" role="region" aria-label="CIRS opening film">
+        parts.insert(2, '''<section class="home-intro" id="homeIntro" aria-label="CIRS opening film">
   <video id="homeIntroVideo" src="assets/video/campus-loop.mp4" poster="assets/img/home-opening-poster.jpg" muted playsinline preload="auto" fetchpriority="high" aria-label="Campus opening film"></video>
   <div class="home-intro__controls"><button type="button" data-home-play hidden>Play film</button><button type="button" data-home-skip>Skip intro</button></div>
-</div>''')
+</section>''')
         parts.insert(3, "<script>\n" + read("assets/js/home-intro.js") + "\n</script>")
     if slug in ("crossroads", "founder"):
         intro_start = parts[-1].index("<!-- Opening sequence.")
