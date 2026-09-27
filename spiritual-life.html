@@ -1,0 +1,1122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spiritual Life at CIRS</title>
+<meta name="description" content="Swadhyaya, sadhana and seva at Chinmaya International Residential School: the daily practices, sacred occasions and student-led service rooted in the vision of Pujya Gurudev Swami Chinmayananda.">
+<meta name="theme-color" content="#11110F">
+<link rel="canonical" href="https://www.cirschool.org/spiritual-life.html">
+<!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
+     from assets/img/logo.png. The JPEG these replaced could not hold an alpha
+     channel, so the round crest arrived in the tab baked onto a white square.
+     The touch icon alone is opaque, on the theme-color above, because iOS
+     composites a transparent one onto black. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Spiritual Life at CIRS">
+<meta property="og:description" content="Swadhyaya, sadhana and seva at Chinmaya International Residential School: the daily practices, sacred occasions and student-led service rooted in the vision of Pujya Gurudev Swami Chinmayananda.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Spiritual Life at CIRS">
+<meta name="twitter:description" content="Swadhyaya, sadhana and seva at Chinmaya International Residential School: the daily practices, sacred occasions and student-led service rooted in the vision of Pujya Gurudev Swami Chinmayananda.">
+<meta name="twitter:image" content="assets/img/og.jpg">
+<!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
+     faces every first screen sets are preloaded: Mona Sans and the display face. -->
+<link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?b=113-spiritual-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=113-spiritual-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=113-spiritual-1">
+<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
+     removes once it has played. With scripting off nothing removes it, and
+     it covers the page on every page of this site. One rule, applied only
+     when there is no scripting, is the whole fix. Crossroads already does
+     this for its own curtain further down. The footer rule is the same
+     kind of fallback: cirs.js unpins a footer taller than the window, and
+     without it a phone could never scroll up to the top of the footer. -->
+<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/spiritual.css?b=113-spiritual-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=113-spiritual-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=113-spiritual-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=113-spiritual-1-nav-3">
+<noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
+</head>
+
+<body class="spiritual">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Opening sequence. Removed from the DOM once it has played. -->
+<div class="curtain" id="curtain" aria-hidden="true">
+  <img src="assets/img/logo.png" alt="" width="72" height="70">
+  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+  <p class="curtain__iast" lang="sa-Latn">J&ntilde;&#257;na&#7747; Sev&#257; ca Kau&#347;alam</p>
+  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
+  <span class="curtain__bar"><i></i></span>
+</div>
+
+<!-- Film lightbox, shared by every page. The iframe is built on open and
+     destroyed on close: nothing is requested from YouTube until someone asks
+     for the film, and removing the element is what actually stops the audio. -->
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
+  <div class="lightbox__back" data-close></div>
+  <div class="lightbox__panel">
+    <div class="lightbox__frame" id="lightboxFrame"></div>
+    <button type="button" class="lightbox__close" data-close aria-label="Close the film">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <!-- The cross-origin player can catch Escape while it has focus. Keep a
+       visible, reliable way out next to the labelled close button. -->
+  <p class="lightbox__hint" aria-hidden="true"><span class="lightbox__hint-key">Click outside the film to close</span><span class="lightbox__hint-touch">Tap outside the film to close</span></p>
+</dialog>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<button type="button" class="totop" id="totop" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+</button>
+<!-- The original controls stay fixed while the shared controller changes
+     only the bar's surface and ink at the opening/content boundary. -->
+<header class="header nv-header" id="header" data-header-mode="hero" data-header-start="hero" data-header-tone="dark" data-header-surface="light">
+  <div class="nv-header__bar">
+    <div class="nv-header__side nv-header__side--left">
+      <!-- Enquire opens the contact sheet below rather than going anywhere.
+           It stays a button so the keyboard and screen readers get a control
+           that announces its expanded state; hover opens it for a mouse. It
+           keeps its word at every width. -->
+      <div class="nv-enq" id="enq">
+        <button type="button" class="nv-tab nv-enq__btn" id="enqBtn" aria-expanded="false" aria-controls="enqPanel">
+          <span class="nv-tab__icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.6" stroke="currentColor" stroke-width="1.25"/><path d="M9 8.1v4.3M9 5.6h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nv-tab__label">Enquire</span>
+        </button>
+
+        <section class="nv-enq__panel" id="enqPanel" aria-label="Enquire" data-lenis-prevent hidden>
+          <div class="nv-enq__head">
+            <p class="nv-enq__heading">Enquire</p>
+            <button type="button" class="nv-enq__close" id="enqClose">Close<span class="nv-sr"> Enquire</span></button>
+          </div>
+          <div class="nv-enq__grid">
+            <section class="nv-enq__col" aria-labelledby="enqTalk">
+              <h2 class="nv-enq__title" id="enqTalk">Talk to CIRS</h2>
+              <a class="nv-enq__contact" href="https://wa.me/919360461572" target="_blank" rel="noopener">
+                <span class="nv-enq__meta">WhatsApp &middot; Admissions Coordinator</span>
+                <span class="nv-enq__value">+91 93604 61572</span>
+              </a>
+              <a class="nv-enq__contact" href="mailto:info@cirschool.org">
+                <span class="nv-enq__meta">Email the school</span>
+                <span class="nv-enq__value">info@cirschool.org</span>
+              </a>
+            </section>
+
+            <!-- These are three distinct school services. Keep each label tied
+                 to the destination identified by the school. -->
+            <section class="nv-enq__col" aria-labelledby="enqPortals">
+              <h2 class="nv-enq__title" id="enqPortals">Portals</h2>
+              <ul class="nv-enq__doors">
+                <li><a href="https://easycollege.in/cirs/school/" target="_blank" rel="noopener" aria-label="Fee payment (opens in a new tab)">Fee payment<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/" target="_blank" rel="noopener" aria-label="Parent Login (opens in a new tab)">Parent Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+                <li><a href="https://cirs.in/school/cirsmark/" target="_blank" rel="noopener" aria-label="Teacher Login (opens in a new tab)">Teacher Login<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="nv-enq__follow">
+            <h2 class="nv-enq__title" id="enqFollow">Follow CIRS</h2>
+            <div class="nv-enq__social" role="group" aria-labelledby="enqFollow">
+              <a href="https://www.instagram.com/cirschool" target="_blank" rel="noopener" aria-label="Instagram (opens in a new tab)">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="nv-dot" cx="17.4" cy="6.7" r="1.1"/></svg>
+              </a>
+              <a href="https://www.facebook.com/CIRS.Coimbatore" target="_blank" rel="noopener" aria-label="Facebook (opens in a new tab)">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.8l.45-3.2H13.7V7.75c0-.93.3-1.56 1.64-1.56H17V3.3a22 22 0 0 0-2.43-.13c-2.4 0-4.05 1.47-4.05 4.17V9.8H7.8V13h2.72v8h3.18Z"/></svg>
+              </a>
+              <a href="https://www.youtube.com/@CIRS-YouTube" target="_blank" rel="noopener" aria-label="YouTube (opens in a new tab)">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.15a3 3 0 0 0-2.1-2.12C17.05 5.5 12 5.5 12 5.5s-5.05 0-6.9.53A3 3 0 0 0 3 8.15a31 31 0 0 0 0 7.7 3 3 0 0 0 2.1 2.12c1.85.53 6.9.53 6.9.53s5.05 0 6.9-.53a3 3 0 0 0 2.1-2.12 31 31 0 0 0 0-7.7Z"/><path class="nv-play" d="m10 15.25 5-3.25-5-3.25v6.5Z"/></svg>
+              </a>
+              <a href="https://in.linkedin.com/school/chinmaya-international-residential-school/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 8.4H3.3V21h3.3V8.4ZM5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8.2 5.4H10V21h3.2v-6.25c0-1.65.32-3.25 2.37-3.25 2.02 0 2.05 1.9 2.05 3.36V21H21v-6.92c0-3.4-.73-6.01-4.7-6.01-1.9 0-3.18 1.04-3.7 2.02h-.04V8.4h.64Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+      <a class="nv-tab nv-tab--home" href="index.html">
+        <span class="nv-tab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.6 7.6 9 2.2l6.4 5.4M4.4 9.2v6.2h9.2V9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="nv-tab__label">Home</span>
+      </a>
+    </div>
+
+    <!-- Below 700px the crest carries "CIRS"; the link's name is still the
+         school's full name. -->
+    <a class="nv-brand" href="index.html" aria-label="Chinmaya International Residential School home">
+      <img src="assets/img/logo.png" alt="" width="64" height="63">
+      <span class="nv-brand__txt" aria-hidden="true">
+        <span class="nv-brand__name">Chinmaya International Residential School</span>
+        <span class="nv-brand__sub">Siruvani &middot; Coimbatore &middot; Founded 1996</span>
+        <span class="nv-brand__short">CIRS</span>
+      </span>
+    </a>
+
+    <div class="nv-header__side nv-header__side--right">
+      <a class="nv-tab nv-tab--news" href="news.html">
+        <span class="nv-tab__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.4 3.6h9.4v10.8H3.6a1.2 1.2 0 0 1-1.2-1.2V3.6Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M11.8 6.6h3.8v6.6a1.2 1.2 0 0 1-1.2 1.2h-2.6" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M4.8 6.4h4.6M4.8 9h4.6M4.8 11.6h2.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/></svg>
+        </span>
+        <span class="nv-tab__label">News</span>
+      </a>
+      <button type="button" class="nv-tab nv-tab--menu" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <span class="nv-tab__label"><span class="nv-menu-word nv-menu-word--open">Menu</span><span class="nv-menu-word nv-menu-word--close" aria-hidden="true">Close</span></span>
+        <span class="nv-lines" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- The full-screen menu. It opens under the header rather than over it:
+     the bar stays where it is, Menu turns to Close, and two ivory grounds
+     unroll beneath it — the categories on the signature ivory, the pages of
+     the open one on the alternate ivory, past one fine rule. Below 901px
+     it is an accordion. It is a disclosure, not a dialog: its Close is the
+     header's Menu control, so while it is open the page behind is made inert
+     and Tab circles through the header and the menu together (cirs.js). -->
+<div class="nv-menu" id="drawer" data-initial-group="1" data-lenis-prevent hidden>
+  <h2 class="nv-sr" id="drawer-title">Site navigation</h2>
+  <div class="nv-menu__stage">
+    <nav class="nv-menu__nav" aria-labelledby="drawer-title">
+  <div class="nv-item" style="--i:0">
+    <button type="button" class="nv-cat" id="dnav-vision-button" data-menu-index="0" aria-expanded="false" aria-controls="dnav-vision-panel"><span class="nv-cat__num" aria-hidden="true">01</span><span class="nv-cat__word">Vision</span></button>
+    <section class="nv-dest" id="dnav-vision-panel" aria-labelledby="dnav-vision-button" hidden>
+      <p class="nv-dest__kicker" aria-hidden="true">Vision</p>
+      <ul class="nv-dest__list">
+        <li><a href="founder.html"><span class="nv-dest__label">Founder</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="why-cirs.html"><span class="nv-dest__label">Why CIRS</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="school-history.html"><span class="nv-dest__label">School History</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="leadership.html"><span class="nv-dest__label">Leadership</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="nv-item" style="--i:1">
+    <button type="button" class="nv-cat" id="dnav-student-life-button" data-menu-index="1" aria-expanded="true" aria-controls="dnav-student-life-panel"><span class="nv-cat__num" aria-hidden="true">02</span><span class="nv-cat__word">Student Life</span></button>
+    <section class="nv-dest" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button">
+      <p class="nv-dest__kicker" aria-hidden="true">Student Life</p>
+      <ul class="nv-dest__list">
+        <li><a href="the-cirs-experience.html"><span class="nv-dest__label">The CIRS experience</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="spiritual-life.html" aria-current="page"><span class="nv-dest__label">Spiritual Life</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="curriculum.html"><span class="nv-dest__label">Curriculum</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="our-results.html"><span class="nv-dest__label">Our Results</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="sports.html"><span class="nv-dest__label">Our Sports</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="houses.html"><span class="nv-dest__label">Our Houses</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="our-laurels.html"><span class="nv-dest__label">Our Laurels</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="math-challenge.html"><span class="nv-dest__label">Math Challenge</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="nv-item" style="--i:2">
+    <button type="button" class="nv-cat" id="dnav-literary-excellence-button" data-menu-index="2" aria-expanded="false" aria-controls="dnav-literary-excellence-panel"><span class="nv-cat__num" aria-hidden="true">03</span><span class="nv-cat__word">Literary Excellence</span></button>
+    <section class="nv-dest" id="dnav-literary-excellence-panel" aria-labelledby="dnav-literary-excellence-button" hidden>
+      <p class="nv-dest__kicker" aria-hidden="true">Literary Excellence</p>
+      <ul class="nv-dest__list">
+        <li><a href="crossroads.html"><span class="nv-dest__label">The Crossroads</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="blog.html"><span class="nv-dest__label">CIRS Blog</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="creative-writing.html"><span class="nv-dest__label">Creative Writing</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="nv-item" style="--i:3">
+    <button type="button" class="nv-cat" id="dnav-art-culture-music-button" data-menu-index="3" aria-expanded="false" aria-controls="dnav-art-culture-music-panel"><span class="nv-cat__num" aria-hidden="true">04</span><span class="nv-cat__word">Art, Culture &amp; Music</span></button>
+    <section class="nv-dest" id="dnav-art-culture-music-panel" aria-labelledby="dnav-art-culture-music-button" hidden>
+      <p class="nv-dest__kicker" aria-hidden="true">Art, Culture &amp; Music</p>
+      <ul class="nv-dest__list">
+        <li><a href="captures.html"><span class="nv-dest__label">CIRS Captures</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="art-attack.html"><span class="nv-dest__label">CIRS Art Attack</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="festivals.html"><span class="nv-dest__label">CIRS Festivals</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="theatre.html"><span class="nv-dest__label">CIRS Theatre</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="cultural-gallery.html"><span class="nv-dest__label">CIRS Cultural Gallery</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </section>
+  </div>
+  <div class="nv-item" style="--i:4">
+    <button type="button" class="nv-cat" id="dnav-connect-button" data-menu-index="4" aria-expanded="false" aria-controls="dnav-connect-panel"><span class="nv-cat__num" aria-hidden="true">05</span><span class="nv-cat__word">Connect</span></button>
+    <section class="nv-dest" id="dnav-connect-panel" aria-labelledby="dnav-connect-button" hidden>
+      <p class="nv-dest__kicker" aria-hidden="true">Connect</p>
+      <ul class="nv-dest__list">
+        <li><a href="school-info.html"><span class="nv-dest__label">School Information</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="news.html"><span class="nv-dest__label">News</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="admissions.html"><span class="nv-dest__label">Admissions</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="parent-portal.html"><span class="nv-dest__label">Parent Portal</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="alumni.html"><span class="nv-dest__label">Alumni</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </section>
+  </div>
+  <span class="nv-marker" aria-hidden="true"></span>
+</nav>
+  </div>
+
+  <div class="nv-menu__foot">
+    <ul class="nv-menu__utility">
+      <li><a href="alumni.html">Alumni</a></li>
+      <li><a href="school-info.html#calendar">Calendar</a></li>
+      <li><a href="tel:+914222613300">+91 422 261 3300</a></li>
+      <li><a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a></li>
+    </ul>
+    <!-- One filled action. The visit is a quieter link: Admissions#visit is
+         where a family asks the office about arranging one. -->
+    <div class="nv-menu__cta">
+      <a class="nv-cta nv-cta--primary" href="admissions.html#apply">Apply for admission</a>
+      <a class="nv-cta nv-cta--quiet" href="admissions.html#visit">Book a campus visit<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</div>
+<main id="main">
+<nav class="jump" aria-label="On this page">
+  <details class="jump__details">
+    <summary class="jump__toggle" title="On this page">
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true"><path d="M1 1h12M1 6h12M1 11h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="jump__label">On this page</span>
+    </summary>
+    <div class="jump__panel" id="jumpPanel">
+      <p aria-hidden="true">On this page</p>
+      <a href="#vision">The place of the spirit</a>
+      <a href="#guides">Our spiritual guides</a>
+      <a href="#day">A day rooted in awareness</a>
+      <a href="#swadhyaya">Swādhyāya · Study</a>
+      <a href="#sadhana">Sādhanā · Practice</a>
+      <a href="#seva">Sevā · Service</a>
+      <a href="#students">Led by students</a>
+      <a href="#gallery">In pictures</a>
+      <a href="#character">Character and service</a>
+    </div>
+  </details>
+</nav>
+<!-- Spiritual Life. Every activity, its frequency and its audience are taken
+     from the school's own account, "Spiritual Page" (Google Doc, 2026). The
+     page follows that document's three headings — Swadhyaya, Sadhana, Seva —
+     and adds nothing it does not say. Where the page needs something the
+     document does not give (the spiritual guides' portraits and roles), it
+     says so in brackets instead of supplying it.
+
+     The photographs are the school's own. Those whose occasion is recorded
+     (the Gayathri Havan of 7 April 2025, the festival poojas, Seva Week) are
+     captioned with it; the rest, cut by tools/make-spiritual.py, carry no
+     record of their occasion, so their captions say only what they show and
+     never attribute them to a named practice. Sheet: assets/css/spiritual.css;
+     script: assets/js/spiritual.js. -->
+
+<!-- ---------- 1. Opening ------------------------------------- -->
+<section class="sp-hero" id="top" aria-labelledby="sp-title">
+  <picture class="sp-hero__media">
+    <source media="(max-aspect-ratio: 4/5)"
+            srcset="assets/img/spiritual/hero-tall-600.webp 600w, assets/img/spiritual/hero-tall-900.webp 900w"
+            sizes="100vw" width="900" height="1400">
+    <img class="sp-hero__img" src="assets/img/spiritual/hero-1920.webp"
+         srcset="assets/img/spiritual/hero-1280.webp 1280w, assets/img/spiritual/hero-1920.webp 1920w, assets/img/spiritual/hero-2400.webp 2400w"
+         sizes="100vw" width="2400" height="1350" fetchpriority="high" decoding="async"
+         alt="Students in saffron kurtas seated cross-legged on the brick rings of the CIRS amphitheatre after dark">
+  </picture>
+  <div class="sp-hero__scrim" aria-hidden="true"></div>
+  <div class="wrap sp-hero__inner">
+    <p class="sp-hero__deva" lang="sa">स्वाध्याय &middot; साधना &middot; सेवा</p>
+    <h1 class="sp-hero__title" id="sp-title">Spiritual Life <em>at CIRS</em></h1>
+    <p class="sp-hero__lead">Every morning opens with the Bhagavad Gita and the Upanishads;
+      every evening closes in bhajans. Between them runs a life of study, practice and
+      service, in the vision of Pujya Gurudev Swami Chinmayananda.</p>
+    <a class="sp-hero__cue" href="#vision">Begin <span aria-hidden="true">&darr;</span></a>
+  </div>
+</section>
+
+<!-- ---------- 2. The place of the spirit --------------------- -->
+<section class="sp-sec sp-vision" id="vision" data-jump-label="The place of the spirit">
+  <div class="wrap sp-vision__grid">
+    <div class="sp-vision__head">
+      <p class="sp-meta rv">The place of the spirit</p>
+      <h2 class="sp-display rv">An education that <em>transforms.</em></h2>
+    </div>
+    <div class="sp-vision__body">
+      <p class="sp-copy sp-copy--lead rv">Pujya Gurudev Swami Chinmayananda envisioned an
+        education that transforms rather than informs, and CIRS was built on that vision. The
+        Chinmaya Vision Programme, which holds culture, philosophy and academics together, is
+        not a subject on the timetable here. It shows up in the shape of the day.</p>
+      <p class="sp-copy rv">Spirit is one of the four aspects the school sets out to educate,
+        beside body, mind and intellect: the subtler aspects of personality, and the vast
+        literature and scripture of Bharat. Alumni often recommend CIRS for the inner
+        transformation students go through within its walls.</p>
+      <p class="sp-copy rv"><a class="sp-link" href="founder.html">Pujya Gurudev&rsquo;s life
+        and vision <span aria-hidden="true">&rarr;</span></a></p>
+    </div>
+  </div>
+  <div class="wrap">
+    <ol class="sp-pillars" aria-label="The three strands of spiritual life at CIRS">
+      <li class="sp-pillar rv">
+        <a href="#swadhyaya">
+          <span class="sp-pillar__deva" lang="sa">स्वाध्याय</span>
+          <span class="sp-pillar__name">Swādhyāya</span>
+          <span class="sp-pillar__gloss">Study: the scriptures, and the self they point to.</span>
+        </a>
+      </li>
+      <li class="sp-pillar rv">
+        <a href="#sadhana">
+          <span class="sp-pillar__deva" lang="sa">साधना</span>
+          <span class="sp-pillar__name">Sādhanā</span>
+          <span class="sp-pillar__gloss">Practice: chanting, japa, aarti and prayer, day by day.</span>
+        </a>
+      </li>
+      <li class="sp-pillar rv">
+        <a href="#seva">
+          <span class="sp-pillar__deva" lang="sa">सेवा</span>
+          <span class="sp-pillar__name">Sevā</span>
+          <span class="sp-pillar__gloss">Service: selfless work, taken up as a lifelong commitment.</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ---------- 3. Our spiritual guides ------------------------ -->
+<section class="sp-sec sp-guides" id="guides" data-jump-label="Our spiritual guides">
+  <div class="wrap sp-guides__grid">
+    <div class="sp-guides__head">
+      <p class="sp-meta rv">Our spiritual guides</p>
+      <h2 class="sp-display rv">Guides on <em>the path.</em></h2>
+      <p class="sp-copy sp-copy--lead rv">Spiritual guides have been part of CIRS since the day
+        it opened.</p>
+      <p class="sp-guides__deva rv" lang="sa" aria-hidden="true">गुरु</p>
+    </div>
+    <div class="sp-guides__body">
+      <ol class="sp-record">
+        <li class="sp-record__item rv">
+          <p class="sp-record__when"><time datetime="1996-06-06">6 June 1996</time></p>
+          <p class="sp-record__what">The school opened with Brahmacharini Sumati Chaitanya and
+            Brahmachari Samahita Chaitanya as its spiritual guides.</p>
+          <p class="sp-record__src"><a class="sp-link" href="school-history.html">From the
+            school&rsquo;s published history</a></p>
+        </li>
+        <li class="sp-record__item rv">
+          <p class="sp-record__when"><time datetime="2025-04">April 2025</time></p>
+          <p class="sp-record__what">The school&rsquo;s report of that month&rsquo;s
+            class-representative elections names Sanatan Chaitanya as Spiritual Guide.</p>
+          <p class="sp-record__src"><a class="sp-link" href="cirs-general-election.html">Read
+            the report</a></p>
+        </li>
+      </ol>
+      <div class="sp-pending rv">
+        <p class="sp-pending__label">Awaiting the school</p>
+        <p>[Portraits of the present spiritual guides, their names as they wish to be
+          introduced, and a short account of their role with students and staff.]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 4. A day rooted in awareness ------------------- -->
+<!-- Only the practices the document says are kept daily, in the order of
+     the day. The full timetable lives on The CIRS experience. -->
+<section class="sp-sec sp-day" id="day" data-jump-label="A day rooted in awareness">
+  <div class="wrap sp-day__grid">
+    <div class="sp-day__head">
+      <p class="sp-meta rv">The daily rhythm</p>
+      <h2 class="sp-display rv">A Day Rooted <em>in Awareness.</em></h2>
+      <p class="sp-copy rv">Four practices return every day, from the first class of the
+        morning to the last light of the evening.</p>
+      <p class="sp-copy rv"><a class="sp-link" href="the-cirs-experience.html">The full
+        timetable, on The CIRS experience <span aria-hidden="true">&rarr;</span></a></p>
+    </div>
+    <ol class="sp-line" data-sp-line>
+      <li class="sp-step">
+        <p class="sp-step__when">Every morning</p>
+        <h3 class="sp-step__title">Spiritual class <span lang="sa">स्वाध्याय</span></h3>
+        <p class="sp-copy">The Bhagavad Gita, the Upanishads, and the Ramayana and the
+          Mahabharata, studied as students&rsquo; own inheritance.</p>
+        <figure class="sp-fig sp-step__fig">
+          <img src="assets/img/spiritual/prayer-hall-720.webp"
+               srcset="assets/img/spiritual/prayer-hall-720.webp 720w, assets/img/spiritual/prayer-hall-1280.webp 1280w"
+               sizes="(min-width: 900px) 40vw, 90vw" width="1280" height="854" loading="lazy" decoding="async"
+               alt="Senior students seated cross-legged in rows in a hall, palms joined, eyes closed">
+          <figcaption>Morning prayer in the hall.</figcaption>
+        </figure>
+        <a class="sp-link" href="#classes">Spiritual classes <span aria-hidden="true">&darr;</span></a>
+      </li>
+      <li class="sp-step">
+        <p class="sp-step__when">Every morning</p>
+        <h3 class="sp-step__title">Sādhanā, 108 times <span lang="sa">साधना</span></h3>
+        <p class="sp-copy">Alone and in silence, each student chants a mantra of their choice
+          108 times.</p>
+        <a class="sp-link" href="#sadhana-daily">Daily sādhanā <span aria-hidden="true">&darr;</span></a>
+      </li>
+      <li class="sp-step">
+        <p class="sp-step__when">Before every meal</p>
+        <h3 class="sp-step__title">Prayer before food <span lang="sa">अन्न</span></h3>
+        <p class="sp-copy">A pause to give thanks to Bhagwan for the anna on the plate.</p>
+        <a class="sp-link" href="#anna">Prayer before food <span aria-hidden="true">&darr;</span></a>
+      </li>
+      <li class="sp-step">
+        <p class="sp-step__when">Every evening</p>
+        <h3 class="sp-step__title">Aarti and bhajans <span lang="sa">आरती</span></h3>
+        <p class="sp-copy">After the long day, lively bhajans sung in devotion to Bhagwan.</p>
+        <figure class="sp-fig sp-step__fig">
+          <img src="assets/img/spiritual/amphi-lead-720.webp"
+               srcset="assets/img/spiritual/amphi-lead-720.webp 720w, assets/img/spiritual/amphi-lead-1280.webp 1280w"
+               sizes="(min-width: 900px) 40vw, 90vw" width="1280" height="854" loading="lazy" decoding="async"
+               alt="Students in saffron kurtas seated on the amphitheatre steps at night, a teacher in saffron seated before them">
+          <figcaption>Evening in the amphitheatre.</figcaption>
+        </figure>
+        <a class="sp-link" href="#aarti">Aartis <span aria-hidden="true">&darr;</span></a>
+      </li>
+    </ol>
+  </div>
+  <div class="wrap">
+    <aside class="sp-season rv" aria-label="In examination season">
+      <p class="sp-season__when">In examination season, every morning</p>
+      <p class="sp-season__what">The <a href="#medha">Medhā Sūktam</a>, chanted eleven times.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ---------- 5a. Swadhyaya ---------------------------------- -->
+<section class="sp-sec sp-chapter" id="swadhyaya" data-jump-label="Swādhyāya · Study">
+  <div class="wrap">
+    <header class="sp-chapter__head">
+      <p class="sp-chapter__n rv" aria-hidden="true">I</p>
+      <p class="sp-chapter__deva rv" lang="sa" aria-hidden="true">स्वाध्याय</p>
+      <h2 class="sp-display rv">Swādhyāya <em>&middot; Study</em></h2>
+      <p class="sp-copy sp-copy--lead rv">The scriptures are read at CIRS as a living
+        inheritance, and carried out to the places where the Mission&rsquo;s own teachers are
+        formed.</p>
+    </header>
+
+    <article class="sp-story" id="classes">
+      <div class="sp-story__side rv">
+        <h3 class="sp-story__title">Spiritual classes</h3>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>Every morning</dd></div>
+          <div><dt>Who</dt><dd>Every student</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">Every morning, students learn the sacred knowledge
+          preserved in the Bhagavad Gita and the Upanishads.</p>
+        <p class="sp-copy rv">Alongside it they study the Ramayana and the Mahabharata as
+          Bharat&rsquo;s own rich history, and take inspiration from Bhagwan Shri Ram and Shri
+          Krishna, embodiments of dharma. At a time when many young people are drawn away from
+          their roots, values and culture, these classes give students a way back to them.</p>
+      </div>
+    </article>
+
+    <article class="sp-story sp-story--tours" id="tours">
+      <div class="sp-story__side rv">
+        <h3 class="sp-story__title">Educational and spiritual tours</h3>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>Every year</dd></div>
+          <div><dt>Who</dt><dd>Every batch</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">Every year, every batch travels to a spiritually
+          energised place as part of its educational tour.</p>
+        <p class="sp-copy rv">Chinmaya Mission counts these places among its &ldquo;Chaar
+          Dhaam&rdquo;. They matter, the school holds, because they are where living masters are
+          formed, who go on to serve and touch the lives of many. Students call the tours
+          transformational.</p>
+        <ol class="sp-dhaam">
+          <li class="rv">
+            <span class="sp-dhaam__n" aria-hidden="true">01</span>
+            <h4>Sidhbari Ashram</h4>
+            <p>The final resting place of Pujya Gurudev Swami Chinmayananda after his
+              Mahasamadhi.</p>
+          </li>
+          <li class="rv">
+            <span class="sp-dhaam__n" aria-hidden="true">02</span>
+            <h4>Chinmaya International Foundation, Kerala</h4>
+            <p>At the birthplace of Adi Shankaracharya. Researchers from all over the world come
+              here to study India&rsquo;s scriptures and texts.</p>
+          </li>
+          <li class="rv">
+            <span class="sp-dhaam__n" aria-hidden="true">03</span>
+            <h4>Sandeepany Sadhanalaya, Mumbai</h4>
+            <p>The headquarters of Chinmaya Mission, where seekers from across the globe study
+              the Vedanta course in English.</p>
+          </li>
+        </ol>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ---------- 5b. Sadhana ------------------------------------ -->
+<section class="sp-sec sp-chapter sp-chapter--alt" id="sadhana" data-jump-label="Sādhanā · Practice">
+  <div class="wrap">
+    <header class="sp-chapter__head">
+      <p class="sp-chapter__n rv" aria-hidden="true">II</p>
+      <p class="sp-chapter__deva rv" lang="sa" aria-hidden="true">साधना</p>
+      <h2 class="sp-display rv">Sādhanā <em>&middot; Practice</em></h2>
+      <p class="sp-copy sp-copy--lead rv">Practice kept daily, practice that trains the mind
+        and the tongue, and the sacred occasions that mark the year.</p>
+    </header>
+
+    <h3 class="sp-theme rv">Every day</h3>
+
+    <article class="sp-story" id="sadhana-daily">
+      <div class="sp-story__side rv">
+        <h4 class="sp-story__title">Daily sādhanā</h4>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>Every morning</dd></div>
+          <div><dt>Who</dt><dd>Each student, alone</dd></div>
+          <div><dt>Practice</dt><dd>A mantra of their choice, 108 times</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body sp-story__body--fig">
+        <div>
+          <p class="sp-copy sp-copy--lead rv">Every morning students sit alone in silence and
+            chant the mantra of their choice 108 times.</p>
+          <p class="sp-copy rv">The practice is known as &ldquo;cleaning the clutter&rdquo;
+            stored in the mind. A mind full of distraction, always in the future or the past,
+            slowly settles into the present moment, where reality is. Working from there,
+            students meet the most efficient and productive version of themselves. It is one
+            reason for the dynamism of CIRS students.</p>
+        </div>
+        <figure class="sp-fig sp-fig--tall rv">
+          <img src="assets/img/spiritual/palms-640.webp"
+               srcset="assets/img/spiritual/palms-640.webp 640w, assets/img/spiritual/palms-1000.webp 1000w"
+               sizes="(min-width: 900px) 24vw, 70vw" width="1000" height="1250" loading="lazy" decoding="async"
+               alt="A boy in school uniform with palms joined and eyes lowered">
+          <figcaption>Palms joined, eyes lowered.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="sp-story" id="anna">
+      <div class="sp-story__side rv">
+        <h4 class="sp-story__title">Prayer before food</h4>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>Before every meal</dd></div>
+          <div><dt>Who</dt><dd>Every student</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">Before every meal, students pause to give thanks to
+          Bhagwan for the anna placed before them.</p>
+        <p class="sp-copy rv">In a land where agriculture has been at the heart of civilisation
+          for thousands of years, anna is not merely food: it is revered. The prayer reminds
+          students never to take their food, or the countless efforts behind it, for
+          granted.</p>
+      </div>
+    </article>
+
+    <article class="sp-story" id="aarti">
+      <div class="sp-story__side rv">
+        <h4 class="sp-story__title">Aartis</h4>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>Every evening</dd></div>
+          <div><dt>Who</dt><dd>Every student</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">After a long and tiring day, students gather every
+          evening to sing lively, energetic bhajans in devotion to Bhagwan.</p>
+        <p class="sp-copy rv">In that devotion, and in surrendering oneself to the Lord, the
+          stress and negative tendencies of the day fall away. Students leave free and calm,
+          with the energy to carry on.</p>
+      </div>
+    </article>
+
+    <h3 class="sp-theme rv">Training the mind and the tongue</h3>
+
+    <article class="sp-story" id="medha">
+      <div class="sp-story__side rv">
+        <h4 class="sp-story__title">Medhā Sūktam <span lang="sa">मेधासूक्तम्</span></h4>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>Every morning in examination season; the nine days of Navratri</dd></div>
+          <div><dt>Practice</dt><dd>Chanted eleven times</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">When examinations bring days and nights of hard
+          study, students chant the Medhā Sūktam, an offering to Mother Saraswati, eleven times
+          every morning.</p>
+        <p class="sp-copy rv">Given their whole attention, the chant leaves the mind calm and
+          clear, and trains it to be completely focused on whatever it is doing. Concepts are
+          grasped quickly and well. The Medhā Sūktam is also chanted through the nine days of
+          Navratri, as an offering to Shakti.</p>
+      </div>
+    </article>
+
+    <article class="sp-story" id="japa">
+      <div class="sp-story__side rv">
+        <h4 class="sp-story__title">Japa <span lang="sa">जप</span></h4>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>Through the year</dd></div>
+          <div><dt>Practice</dt><dd>Around two hundred written pages a year</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">Over a year, a CIRS student writes around two
+          hundred pages of japa.</p>
+        <p class="sp-copy rv">Most often they write the name of the form of Bhagwan dearest to
+          them, and some turn the name into artworks full of devotion. Like chanting, writing
+          the name aligns body, mind and intellect, so that the work which follows is done
+          well.</p>
+      </div>
+    </article>
+
+    <article class="sp-story" id="subhashi">
+      <div class="sp-story__side rv">
+        <h4 class="sp-story__title">Subhashi <span lang="sa">सुभाषी</span></h4>
+        <dl class="sp-facts">
+          <div><dt>What</dt><dd>An award for pure, noble and righteous speech</dd></div>
+          <div><dt>Who</dt><dd>Students</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">Subhashi is an award for students whose speech stays
+          pure, noble and righteous, free of negative and abusive language.</p>
+        <p class="sp-copy rv">The aim is not merely to stop using bad words. It is to form the
+          habit of speaking words that are truthful, respectful and uplifting, a habit that
+          becomes lifelong and keeps a student pointed in the right direction.</p>
+      </div>
+    </article>
+
+    <h3 class="sp-theme rv">Sacred occasions</h3>
+
+    <article class="sp-story" id="havan">
+      <div class="sp-story__side rv">
+        <h4 class="sp-story__title">Gayatri Havan <span lang="sa">गायत्री हवन</span></h4>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>The start of each academic year</dd></div>
+          <div><dt>Who</dt><dd>Students</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">The new academic year begins with the Gayatri
+          Mantra and an offering to the sacred fire.</p>
+        <p class="sp-copy rv">As their studies resume, students purify the mind and invoke the
+          divine energy of Mother Gayatri. The havan marks an auspicious new beginning: a chance
+          to correct the previous year&rsquo;s mistakes and to grow better, stronger and
+          happier.</p>
+        <figure class="sp-fig sp-fig--wide rv">
+          <img src="assets/img/news-archive/gayathri-havan/13.jpg" width="1200" height="675"
+               sizes="(min-width: 900px) 58vw, 100vw" loading="lazy" decoding="async"
+               alt="Boys in saffron kurtas seated around the sacred fire, making offerings into it">
+          <figcaption>Gayathri Havan in the Mathura Block quadrangle, 7 April 2025.
+            <a class="sp-link" href="gayathri-havan.html">All the photographs</a></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="sp-story" id="pooja">
+      <div class="sp-story__side rv">
+        <h4 class="sp-story__title">Festival pooja <span lang="sa">पूजा</span></h4>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>The morning of every festival</dd></div>
+          <div><dt>Who</dt><dd>The whole school</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">Diwali, Holi, Ganesh Chaturthi: every festival at
+          CIRS is kept with dynamism and devotion, and every one begins with a morning pooja
+          invoking Bhagwan&rsquo;s blessings on the whole school.</p>
+        <p class="sp-copy rv">Each pooja is a surrender of the ego and a thanksgiving for all
+          that has been given. It is a humbling experience: students come to see themselves as
+          instruments through which Bhagwan serves the world.</p>
+        <div class="sp-pair">
+          <figure class="sp-fig rv">
+            <img src="assets/img/festivals/jan-pooja-640.webp"
+                 srcset="assets/img/festivals/jan-pooja-640.webp 640w, assets/img/festivals/jan-pooja-1280.webp 1280w"
+                 sizes="(min-width: 900px) 28vw, 90vw" width="1280" height="853" loading="lazy" decoding="async"
+                 alt="Teachers seated on either side of a flower-decked altar with a white Krishna murti">
+            <figcaption>The morning pooja, Janmashtami, 4 September 2026.</figcaption>
+          </figure>
+          <figure class="sp-fig rv">
+            <img src="assets/img/festivals/pongal-pooja-640.webp"
+                 srcset="assets/img/festivals/pongal-pooja-640.webp 640w, assets/img/festivals/pongal-pooja-1280.webp 1280w"
+                 sizes="(min-width: 900px) 28vw, 90vw" width="1280" height="1920" loading="lazy" decoding="async"
+                 alt="A teacher lighting lamps at an altar hung with sugarcane and marigolds in a sunlit courtyard">
+            <figcaption>The Pongal pooja in the courtyard, 15 January 2026.</figcaption>
+          </figure>
+        </div>
+        <p class="sp-copy rv"><a class="sp-link" href="festivals.html">The festivals of the
+          school year <span aria-hidden="true">&rarr;</span></a></p>
+      </div>
+    </article>
+
+    <article class="sp-story" id="matru-pitru">
+      <div class="sp-story__side rv">
+        <h4 class="sp-story__title">Matru Pitru Pooja <span lang="sa">मातृ पितृ पूजा</span></h4>
+        <dl class="sp-facts">
+          <div><dt>Who</dt><dd>Students and their parents</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">For a parent, few moments are more moving than a
+          child bowing before them in gratitude.</p>
+        <p class="sp-copy rv">During this pooja, parents and children remember the countless
+          moments they have shared since childhood. Students thank their parents for their love,
+          sacrifices, guidance and care, and affirm that they will always respect, love and
+          serve them.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ---------- 5c. Seva --------------------------------------- -->
+<section class="sp-sec sp-chapter" id="seva" data-jump-label="Sevā · Service">
+  <div class="wrap">
+    <header class="sp-chapter__head">
+      <p class="sp-chapter__n rv" aria-hidden="true">III</p>
+      <p class="sp-chapter__deva rv" lang="sa" aria-hidden="true">सेवा</p>
+      <h2 class="sp-display rv">Sevā <em>&middot; Service</em></h2>
+      <p class="sp-copy sp-copy--lead rv">Service at CIRS is not a single act. It is taught as
+        a lifelong commitment, and practised well beyond the campus.</p>
+    </header>
+
+    <article class="sp-story" id="balsevak">
+      <div class="sp-story__side rv">
+        <h3 class="sp-story__title">Chinmaya Balsevak Program</h3>
+        <dl class="sp-facts">
+          <div><dt>What</dt><dd>120 hours of sevā in society</dd></div>
+          <div><dt>Who</dt><dd>Students</dd></div>
+          <div><dt>By</dt><dd>CCMT Education Cell (CCMTEC)</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">An initiative of CCMTEC in which students complete
+          120 hours of sevā, contributing to society, so that they understand service as a
+          lifelong commitment rather than a one-time activity.</p>
+        <p class="sp-copy rv">At CIRS students have led awareness rallies, cleaned temples,
+          visited and spent time in orphanages, and made paper bags to distribute in government
+          hospitals and schools.</p>
+        <figure class="sp-fig sp-fig--wide rv">
+          <img src="assets/img/news/seva-week-720.webp"
+               srcset="assets/img/news/seva-week-720.webp 720w, assets/img/news/seva-week-1200.webp 1200w"
+               sizes="(min-width: 900px) 58vw, 100vw" width="1200" height="620" loading="lazy" decoding="async"
+               alt="CIRS students handing supplies to a community member">
+          <figcaption>Seva Week, April 2025.
+            <a class="sp-link" href="seva-week.html">Read the report</a></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="sp-story" id="sammelan">
+      <div class="sp-story__side rv">
+        <h3 class="sp-story__title">Chinmaya Vishwa Sammelan</h3>
+        <dl class="sp-facts">
+          <div><dt>When</dt><dd>The forthcoming Sammelan</dd></div>
+          <div><dt>Who</dt><dd>CIRS students, as volunteers</dd></div>
+        </dl>
+      </div>
+      <div class="sp-story__body">
+        <p class="sp-copy sp-copy--lead rv">At the forthcoming Chinmaya Vishwa Sammelan, CIRS
+          students will serve Gurudev&rsquo;s vision selflessly as volunteers.</p>
+        <p class="sp-copy rv">They will run stalls and look after groups, and take on literary
+          work, writing newsletters, magazines and articles for the Mahotsav. The work is a
+          climb up the staircase of selflessness, and a training in leadership: learning to
+          handle whatever situation arises.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ---------- 6. Student spiritual development --------------- -->
+<!-- The document describes student-led work only. It says nothing of staff
+     spiritual development, so the page has no staff section. -->
+<section class="sp-sec sp-students" id="students" data-jump-label="Led by students">
+  <div class="wrap">
+    <header class="sp-chapter__head">
+      <p class="sp-meta rv">Student spiritual development</p>
+      <h2 class="sp-display rv">Led by <em>students.</em></h2>
+      <p class="sp-copy sp-copy--lead rv">In Chinmaya Yuva Kendra CIRS, and in the care seniors
+        give juniors, students carry spiritual life for themselves and take it to others.</p>
+    </header>
+
+    <div class="sp-yuva">
+      <article class="sp-yuva__one rv" id="book-fair">
+        <p class="sp-yuva__tag">CHYK CIRS &middot; Fundraising</p>
+        <h3>A fair of spiritual books</h3>
+        <p class="sp-copy">Chyks sell spiritual books, among them the Bhagavad Gita,
+          <i>Kindle Life</i> and <i>We Must</i>, to spread their knowledge and inspire readers
+          to improve their lives. The book fair has raised more than one lakh rupees for
+          projects Chinmaya Mission takes up for the world.</p>
+      </article>
+      <article class="sp-yuva__one rv" id="merchandise">
+        <p class="sp-yuva__tag">CHYK CIRS &middot; At Anand Utsav</p>
+        <h3>CHYK merchandise</h3>
+        <p class="sp-copy">At <a class="sp-link" href="theatre.html#anand-utsav">Anand
+          Utsav</a>, one of the biggest festivals at CIRS, CHYK CIRS sells T-shirts, hoodies,
+          pens, stickers, bottles and notebooks designed to connect students with their nation
+          and culture. The proceeds go to charity work.</p>
+      </article>
+      <article class="sp-yuva__one rv" id="yuva-samvad">
+        <p class="sp-yuva__tag">CHYK CIRS &middot; Every year</p>
+        <h3>Chyk Yuva Samvad</h3>
+        <p class="sp-copy">Speakers chosen from CIRS address students of other schools in
+          Coimbatore on Bharatiya culture and history, awakening curiosity about the true nature
+          of Bharat. The speakers grow as organisers and speakers, in the service of a higher
+          purpose.</p>
+      </article>
+      <article class="sp-yuva__one rv" id="mentorship">
+        <p class="sp-yuva__tag">Seniors and juniors</p>
+        <h3>Mentorship</h3>
+        <p class="sp-copy">In the gurukul, teacher and student lived together, and the teacher
+          guided each student by knowing them fully. CIRS, a residential school, keeps that
+          spirit: senior students mentor juniors and inspire them to become leaders who
+          contribute to society. Personal mentorship is among the most important parts of
+          student life here.</p>
+      </article>
+    </div>
+
+    <figure class="sp-voice rv">
+      <blockquote>
+        <p>Spirituality is no secluded field. In fact, it is not a field at all, because it
+          deals instead with the one commonality that threads together all fields of the
+          world: your Self.</p>
+      </blockquote>
+      <figcaption>Adithyan Diwakar Vidya, Class IB II, in
+        <a class="sp-link" href="voyages-in-the-yuva-kendra.html"><cite>Voyages in the Yuva
+        Kendra</cite></a>, The Crossroads, February 2026</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ---------- 7. Gallery ------------------------------------- -->
+<section class="sp-sec sp-gallery" id="gallery" data-jump-label="In pictures">
+  <div class="wrap">
+    <header class="sp-gallery__head">
+      <p class="sp-meta rv">In pictures</p>
+      <h2 class="sp-display rv">Spiritual life, <em>as it looks.</em></h2>
+    </header>
+    <div class="sp-wall">
+      <figure class="sp-fig sp-wall__wide rv">
+        <img src="assets/img/festivals/jan-lamps-1280.webp"
+             srcset="assets/img/festivals/jan-lamps-640.webp 640w, assets/img/festivals/jan-lamps-1280.webp 1280w, assets/img/festivals/jan-lamps-1920.webp 1920w"
+             sizes="(min-width: 900px) 66vw, 100vw" width="1920" height="1278" loading="lazy" decoding="async"
+             alt="A dark hall with a portrait on stage lit only by the lamps before it">
+        <figcaption>Janmashtami, just before midnight: the hall dark but for the lamps. 4 September 2026.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/spiritual/palms-girl-640.webp"
+             srcset="assets/img/spiritual/palms-girl-640.webp 640w, assets/img/spiritual/palms-girl-1000.webp 1000w"
+             sizes="(min-width: 900px) 30vw, 100vw" width="1000" height="1250" loading="lazy" decoding="async"
+             alt="A girl in school uniform smiling, palms joined">
+        <figcaption>Palms joined.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/news-archive/gayathri-havan/05.jpg" width="1200" height="675"
+             sizes="(min-width: 900px) 30vw, 100vw" loading="lazy" decoding="async"
+             alt="Two girls in saffron kurtas seated at microphones, chanting">
+        <figcaption>Chanting at the Gayathri Havan, 7 April 2025.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/festivals/jan-aarti-640.webp"
+             srcset="assets/img/festivals/jan-aarti-640.webp 640w, assets/img/festivals/jan-aarti-1280.webp 1280w"
+             sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="1920" loading="lazy" decoding="async"
+             alt="A teacher waving an aarti lamp before a garlanded murti">
+        <figcaption>Aarti at the garlanded murti, Janmashtami 2026.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/spiritual/stage-pooja-720.webp"
+             srcset="assets/img/spiritual/stage-pooja-720.webp 720w, assets/img/spiritual/stage-pooja-1280.webp 1280w"
+             sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="854" loading="lazy" decoding="async"
+             alt="A pooja on a stage hung with devotional paintings, a swami in saffron seated beside teachers and students">
+        <figcaption>A pooja on the school stage.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/spiritual/fire-hall-720.webp"
+             srcset="assets/img/spiritual/fire-hall-720.webp 720w, assets/img/spiritual/fire-hall-1280.webp 1280w"
+             sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="800" loading="lazy" decoding="async"
+             alt="Students making offerings into a sacred fire before a garlanded portrait and brass lamps, a swami leading">
+        <figcaption>An offering to the fire in the prayer hall.</figcaption>
+      </figure>
+      <figure class="sp-fig sp-wall__wide rv">
+        <img src="assets/img/festivals/ganesh-lake-1280.webp"
+             srcset="assets/img/festivals/ganesh-lake-640.webp 640w, assets/img/festivals/ganesh-lake-1280.webp 1280w, assets/img/festivals/ganesh-lake-1920.webp 1920w"
+             sizes="(min-width: 900px) 66vw, 100vw" width="1920" height="1280" loading="lazy" decoding="async"
+             alt="A raft carrying the Ganesh murti crossing a lake below cloud-covered hills">
+        <figcaption>The Ganesh murti crosses the school&rsquo;s lake, 28 September 2023.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/spiritual/procession-720.webp"
+             srcset="assets/img/spiritual/procession-720.webp 720w, assets/img/spiritual/procession-1280.webp 1280w"
+             sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="854" loading="lazy" decoding="async"
+             alt="Adults in saffron and festive dress shouldering a pole beneath a decorated Ganesh murti, students gathered around">
+        <figcaption>The Ganesh murti carried in procession on campus.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/festivals/jan-bhajan-640.webp"
+             srcset="assets/img/festivals/jan-bhajan-640.webp 640w, assets/img/festivals/jan-bhajan-1280.webp 1280w"
+             sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="853" loading="lazy" decoding="async"
+             alt="A group of students seated on stage singing before a blue projected mandala">
+        <figcaption>Bhajan singers on stage, Janmashtami 2026.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/spiritual/amphi-close-720.webp"
+             srcset="assets/img/spiritual/amphi-close-720.webp 720w, assets/img/spiritual/amphi-close-1280.webp 1280w"
+             sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="854" loading="lazy" decoding="async"
+             alt="Students in saffron kurtas seated cross-legged on the amphitheatre steps, hands in a mudra">
+        <figcaption>In the amphitheatre after dark.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/spiritual/prayer-lead-720.webp"
+             srcset="assets/img/spiritual/prayer-lead-720.webp 720w, assets/img/spiritual/prayer-lead-1280.webp 1280w"
+             sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="854" loading="lazy" decoding="async"
+             alt="Rows of students seated in a hall with palms joined, a teacher in a saffron kurta standing before them">
+        <figcaption>Prayer in the hall, a teacher leading.</figcaption>
+      </figure>
+      <figure class="sp-fig rv">
+        <img src="assets/img/festivals/pongal-altar-640.webp"
+             srcset="assets/img/festivals/pongal-altar-640.webp 640w, assets/img/festivals/pongal-altar-1280.webp 1280w"
+             sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="1920" loading="lazy" decoding="async"
+             alt="A girl placing an offering on an altar hung with sugarcane, marigold garlands, fruit and a brass lamp">
+        <figcaption>An offering at the Pongal altar, 15 January 2026.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 8. Closing ------------------------------------- -->
+<section class="sp-close" id="character" data-jump-label="Character and service">
+  <div class="wrap sp-close__inner">
+    <p class="sp-close__deva rv" lang="sa">ज्ञानं सेवा च कौशलम्</p>
+    <p class="sp-close__iast rv">Jñānaṃ Sevā ca Kauśalam</p>
+    <h2 class="sp-close__title rv">Character, carried <em>into every day.</em></h2>
+    <p class="sp-close__copy rv">None of this is kept apart from ordinary school life. It is
+      heard in the way students speak, which the Subhashi award honours; seen in the pause
+      before every meal and the evening&rsquo;s bhajans; and carried outwards in a hundred and
+      twenty hours of sevā and the work of the Yuva Kendra.</p>
+    <p class="sp-close__copy rv">The school&rsquo;s motto holds the whole of it: knowledge is
+      gained to serve the world efficiently, with compassion and dedication.</p>
+  </div>
+</section>
+<section class="uc">
+  <div class="wrap uc__inner">
+    <span class="uc__mark" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
+    </span>
+    <div>
+      <p class="uc__label">Under construction</p>
+      <p class="uc__text">This page is still being written. Photographs, names and figures marked
+        in brackets are placeholders awaiting the school, and more will be added here in the weeks
+        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
+    </div>
+  </div>
+</section>
+</main>
+<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
+  <picture class="closing-scene__picture" aria-hidden="true">
+    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
+    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
+         width="1920" height="1080" loading="lazy" decoding="async">
+  </picture>
+  <div class="closing-scene__grade" aria-hidden="true"></div>
+  <div class="wrap closing-scene__inner">
+    <div class="closing-scene__content">
+      <h2 class="closing-scene__title" id="closing-scene-title">
+        <span>Come and see</span>
+        <span>the day for yourself</span>
+      </h2>
+      <div class="closing-scene__links">
+        <a class="closing-scene__admissions" href="admissions.html#visit">Plan a visit</a>
+        <a class="closing-scene__contact" href="the-cirs-experience.html">The CIRS experience</a>
+        <a class="closing-scene__contact" href="founder.html">Our Founder</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-wrap">
+<footer class="footer" aria-label="Site footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__identity">
+        <div class="footer__brand">
+          <img src="assets/img/logo.png" alt="Official CIRS seal" width="72" height="70" loading="lazy">
+          <span>Chinmaya International<br>Residential School</span>
+        </div>
+        <address class="footer__address">
+          <p>Siruvani Main Road<br>Coimbatore 641 114, Tamil Nadu, India</p>
+          <p>
+            <a href="tel:+914222613300">+91 422 261 3300</a><br>
+            <a href="tel:+914222613303">+91 422 261 3303</a><br>
+            <a href="mailto:info@cirschool.org">info@cirschool.org</a>
+          </p>
+        </address>
+      </div>
+
+      <nav class="footer__group" aria-labelledby="footer-about-title">
+        <h2 class="footer__heading" id="footer-about-title">About</h2>
+        <ul>
+          <li><a href="why-cirs.html">Why CIRS</a></li>
+          <li><a href="school-history.html">School History</a></li>
+          <li><a href="leadership.html#people">Our People</a></li>
+          <li><a href="the-cirs-experience.html#campus">Our Campus</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-school-title">
+        <h2 class="footer__heading" id="footer-school-title">School</h2>
+        <ul>
+          <li><a href="why-cirs.html#junior">Junior School</a></li>
+          <li><a href="why-cirs.html#senior">Senior School</a></li>
+          <li><a href="sports.html#athletics">Athletics</a></li>
+          <li><a href="cultural-gallery.html">CIRS Cultural Gallery</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-academics-title">
+        <h2 class="footer__heading" id="footer-academics-title">Academics</h2>
+        <ul>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="curriculum/cbse.html">CBSE</a></li>
+          <li><a href="curriculum/ib-diploma.html">IB Diploma</a></li>
+          <li><a href="alumni.html#pathways">University Counselling</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-admissions-title">
+        <h2 class="footer__heading" id="footer-admissions-title">Admissions</h2>
+        <ul>
+          <li><a href="admissions.html#apply">Application Information</a></li>
+          <li><a href="admissions.html#fees">Fee Structure</a></li>
+          <li><a href="admissions.html#dates">Important Dates</a></li>
+          <li><a href="admissions.html#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__group" aria-labelledby="footer-community-title">
+        <h2 class="footer__heading" id="footer-community-title">Community &amp; resources</h2>
+        <ul>
+          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="school-info.html#calendar">Calendar</a></li>
+          <li><a href="important-documents.html">Important Documents</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; 1996&ndash;2026 Chinmaya International Residential School</span>
+      <span>J&ntilde;&#0257;na&#7745; sev&#0257; ca kau&#0347;alam</span>
+      <span>An undertaking of the Central Chinmaya Mission Trust</span>
+    </div>
+  </div>
+</footer>
+</div>
+<!-- The motion layer, served from this site rather than from a CDN. See
+     assets/vendor/README.md for the versions and where they came from.
+     defer keeps them in document order, so GSAP is defined before
+     ScrollTrigger looks for it. -->
+<script src="assets/vendor/gsap.min.js?b=113-spiritual-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=113-spiritual-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=113-spiritual-1" defer></script>
+<script src="assets/js/cirs.js?b=113-spiritual-1-header-1" defer></script>
+<script src="assets/js/pages.js?b=113-spiritual-1" defer></script>
+<script src="assets/js/footer.js?b=113-spiritual-1-footer-1" defer></script>
+<script src="assets/js/spiritual.js?b=113-spiritual-1" defer></script>
+</body>
+</html>

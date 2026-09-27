@@ -103,7 +103,7 @@ NEWS_FLASH = [
 # themselves.
 MENU = [
     ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
-    ("Student Life",         ["the-cirs-experience", "curriculum", "our-results", "sports",
+    ("Student Life",         ["the-cirs-experience", "spiritual-life", "curriculum", "our-results", "sports",
                               "houses", "our-laurels", "math-challenge"]),
     ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
     ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
@@ -352,6 +352,28 @@ PAGES = {
         # header cannot float over it in white lettering: hence litehead.
         "sheet": "student-life",
         "cache_suffix": "-student-life-9",
+    },
+    "spiritual-life": {
+        "nav": "Spiritual Life",
+        "title": "Spiritual Life at CIRS",
+        "description": "Swadhyaya, sadhana and seva at Chinmaya International Residential "
+                       "School: the daily practices, sacred occasions and student-led service "
+                       "rooted in the vision of Pujya Gurudev Swami Chinmayananda.",
+        # No banner. The page opens on a full-window photograph of its own —
+        # students seated in the amphitheatre after dark — which carries the
+        # h1, and the header floats over it in white lettering until the
+        # first scroll. Every activity on the page is taken from the school's
+        # own account ("Spiritual Page", 2026); see the comment at the top of
+        # tools/pages/spiritual-life.html. Photographs are cut by
+        # tools/make-spiritual.py. The spiritual guides' portraits and roles
+        # are bracketed placeholders, so the under-construction note stays.
+        "banner": None,
+        "sheet": "spiritual",
+        "cache_suffix": "-spiritual-1",
+        "closing": ("Come and see", "the day for yourself",
+                    [("Plan a visit", "admissions.html#visit", "closing-scene__admissions"),
+                     ("The CIRS experience", "the-cirs-experience.html", "closing-scene__contact"),
+                     ("Our Founder", "founder.html", "closing-scene__contact")]),
     },
     "sports": {
         "nav": "Our Sports",
@@ -2420,6 +2442,8 @@ def build(slug, page):
         parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-5" defer></script>')
     if slug == "the-cirs-experience":
         parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
+    if slug == "spiritual-life":
+        parts.append(f'<script src="assets/js/spiritual.js?{CACHE_BUST}" defer></script>')
     if slug == "our-results":
         parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
