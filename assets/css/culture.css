@@ -143,6 +143,7 @@ body.culture .cx-gallery__cell:hover img{ transform:scale(1.03); }
   body.culture .cx-gallery__cell--wide{ grid-column:span 2; }
   body.culture .cx-gallery__cell--wide img{ aspect-ratio:8/3.05; }
 }
+body.theatre .cx-gallery__cell--wide img{ aspect-ratio:3/2; object-fit:contain; background:#1d171a; }
 body.culture .cx-note{ margin-top:var(--space-5); }
 
 /* Student paintings are shown whole, never cropped: each sits on a pale

@@ -181,8 +181,8 @@
         closePanel(false);
         if (status) {
           status.textContent = want === "all"
-            ? "Showing all " + shown + " destinations."
-            : "Showing " + shown + " destination" + (shown === 1 ? "" : "s") +
+            ? "Showing all " + shown + " mapped destinations."
+            : "Showing " + shown + " mapped destination" + (shown === 1 ? "" : "s") +
               " — " + regionLabel(want) + ".";
         }
       });
