@@ -341,8 +341,8 @@ PAGES = {
         "sheet": "ibdp",
     },
     "the-cirs-experience": {
-        "nav": "The CIRS experience",
-        "title": "The CIRS experience",
+        "nav": "The CIRS Experience",
+        "title": "The CIRS Experience",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
                        "hundred-acre campus it happens on.",
         # No banner and no hero key: this page opens on a hero of its own,
