@@ -44,8 +44,9 @@ works and is silently undone by the next build**, and CI fails on the drift. Edi
 
 The menu is generated from the page list in `tools/build-site.py`, so adding a page there puts
 it in the menu of every page at once. The header, menu and Enquire sheet are drawn by
-`assets/css/drawer.css`. The header is a solid ivory bar that never hides on scroll, so a page
-sheet must not restyle or hide it.
+`assets/css/drawer.css`. The shared controller in `assets/js/cirs.js` keeps the approved controls
+transparent over visual openings and gives them an opaque surface over content. Page sheets
+should not restyle or hide the shared header.
 
 Arts, Music & Theatre is the one page that is not a document. It is a full-window field of
 photographs — `"wall": True` in that page list — so it wears the header but no footer, no

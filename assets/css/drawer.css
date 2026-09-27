@@ -18,7 +18,8 @@
                 lettering on ivory
      --on-gold  lettering on the gold fill
      --focus    the keyboard ring
-   The fixed bar has a lightly frosted ivory surface; menu sheets remain opaque.
+   The bar clears over a visual opening and becomes opaque over content.
+   Menu and Enquire sheets remain the approved opaque ivory.
    ============================================================ */
 
 :root{
@@ -35,25 +36,67 @@
 }
 
 /* ------------------------------------------------------------
-   Header — one lightly frosted ivory bar that stays where it is. Enquire
-   (and Home) left, the crest centred, News and Menu right. Gold
+   Header — original Enquire and Home left, crest centred, News and Menu
+   right. The surface clears over a visual opening. Gold
    appears twice: the News dot, and the short rule under whichever
    control is hovered or open.
    ------------------------------------------------------------ */
 .nv-header{
   position:fixed; top:0; left:0; right:0; z-index:118;
   height:var(--nv-hh);
-  background:var(--paper);
-  border-bottom:1px solid var(--rule);
-  box-shadow:0 3px 18px rgba(20,30,33,.09);
+  --nav-name:var(--ink);
+  --nav-sub:var(--ink-mute);
+  --nav-text:var(--ink);
+  --nav-icon:var(--ink-soft);
+  --nav-hover:var(--ink);
+  background-color:transparent;
+  border-bottom:1px solid transparent;
+  box-shadow:none;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  transition:background-color .35s var(--e), border-color .35s var(--e),
+             box-shadow .35s var(--e), opacity .35s var(--e), visibility .35s;
 }
-@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
-  .nv-header{
-    background:rgba(250,249,243,.86);
-    -webkit-backdrop-filter:blur(14px) saturate(1.25);
-    backdrop-filter:blur(14px) saturate(1.25);
-    border-bottom-color:rgba(255,255,255,.7);
-  }
+.nv-header[data-header-mode="hero"][data-header-tone="dark"]{
+  --nav-name:#fff;
+  --nav-sub:rgba(255,255,255,.9);
+  --nav-text:#fff;
+  --nav-icon:rgba(255,255,255,.9);
+  --nav-hover:#fff;
+}
+.nv-header[data-header-mode="content"]{
+  background-color:var(--paper);
+  border-bottom-color:var(--rule);
+  box-shadow:0 3px 14px rgba(20,30,33,.07);
+}
+.nv-header[data-header-mode="content"][data-header-surface="dark"]{
+  --nav-name:#fff;
+  --nav-sub:rgba(255,255,255,.9);
+  --nav-text:#fff;
+  --nav-icon:rgba(255,255,255,.9);
+  --nav-hover:#fff;
+  background-color:#392A48;
+  border-bottom-color:rgba(255,255,255,.2);
+}
+body.menu-open .nv-header[data-header-mode],
+body .nv-header[data-header-mode]:has(.nv-enq.is-open){
+  --nav-name:var(--ink);
+  --nav-sub:var(--ink-mute);
+  --nav-text:var(--ink);
+  --nav-icon:var(--ink-soft);
+  --nav-hover:var(--ink);
+  background-color:var(--paper);
+  border-bottom-color:var(--rule);
+  box-shadow:0 3px 14px rgba(20,30,33,.07);
+}
+.nv-header.is-settling,.nv-header.is-settling *{ transition:none!important; }
+body:has(#curtain) .nv-header,
+body.founder:has(.gurudev-opening[data-phase="intro"]) .nv-header,
+body.founder:has(.gurudev-opening[data-phase="leaving"]) .nv-header,
+body:has(.crossroads-intro[data-crossroads-intro-pending]) .nv-header,
+body:has(.crossroads-intro[data-crossroads-intro-film]) .nv-header,
+body:has(.crossroads-intro[data-crossroads-intro-finishing]) .nv-header{
+  opacity:0; visibility:hidden; pointer-events:none;
 }
 .nv-header__bar{
   display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
@@ -65,22 +108,23 @@
 .nv-header__side--left{ justify-self:start; }
 .nv-header__side--right{ justify-self:end; }
 
-.nv-brand{ display:flex; align-items:center; gap:13px; min-width:0; justify-self:center; color:var(--ink); }
+.nv-brand{ display:flex; align-items:center; gap:13px; min-width:0; justify-self:center; color:var(--nav-name); transition:color .3s var(--e); }
 .nv-brand img{ width:48px; height:auto; flex:none; }
 .nv-brand__txt{ display:flex; flex-direction:column; gap:3px; min-width:0; }
 .nv-brand__name{ font-family:var(--font-display); font-size:1.16rem; line-height:1.06; letter-spacing:-.005em; white-space:nowrap; }
-.nv-brand__sub{ font-family:var(--font-ui); font-size:.8rem; letter-spacing:.11em; line-height:1; color:var(--ink-mute); white-space:nowrap; }
+.nv-brand__sub{ font-family:var(--font-ui); font-size:.8rem; letter-spacing:.11em; line-height:1; color:var(--nav-sub); white-space:nowrap; transition:color .3s var(--e); }
 .nv-brand__short{ display:none; font-family:var(--font-display); font-size:1.2rem; letter-spacing:.08em; line-height:1; }
 
 .nv-tab{
   position:relative;
   display:inline-flex; align-items:center; justify-content:center; gap:9px;
   min-height:44px; padding:0 2px;
-  color:var(--ink);
+  color:var(--nav-text);
   font-family:var(--font-ui);
   font-size:.92rem; letter-spacing:.06em; line-height:1; white-space:nowrap;
+  transition:color .3s var(--e);
 }
-.nv-tab__icon{ display:grid; place-items:center; height:18px; color:var(--ink-soft); transition:color .2s var(--e); }
+.nv-tab__icon{ display:grid; place-items:center; height:18px; color:var(--nav-icon); transition:color .2s var(--e); }
 /* The one gold gesture in the bar: a short rule under the control on
    hover, which stays while its panel is open. */
 .nv-tab::after{
@@ -93,7 +137,7 @@
 .nv-tab[aria-current="page"]::after{ transform:scaleX(1); }
 @media (hover:hover){
   .nv-tab:hover::after{ transform:scaleX(1); }
-  .nv-tab:hover .nv-tab__icon{ color:var(--ink); }
+  .nv-tab:hover .nv-tab__icon{ color:var(--nav-hover); }
 }
 .nv-tab--news .nv-tab__icon{ position:relative; }
 .nv-tab--news .nv-tab__icon::after{
@@ -583,6 +627,7 @@ body.menu-open .ring, body.menu-closing .ring{ display:none; }
 }
 
 @media (prefers-reduced-motion:reduce){
+  .nv-header,.nv-brand,.nv-brand__sub{ transition:none!important; }
   .nv-menu, .nv-menu.is-open, .nv-enq__panel, .nv-enq.is-open .nv-enq__panel{ transition:none !important; clip-path:none !important; transform:none !important; }
   .nv-menu *, .nv-enq *, .nv-tab, .nv-tab *, .nv-marker{ animation:none !important; transition:none !important; }
 }

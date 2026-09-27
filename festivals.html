@@ -42,7 +42,8 @@
 <link rel="stylesheet" href="assets/css/festivals.css?b=112-festivals-year-1">
 <link rel="stylesheet" href="assets/css/typography.css?b=112-festivals-year-1">
 <link rel="stylesheet" href="assets/css/footer.css?b=112-festivals-year-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=112-festivals-year-1-nav-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=112-festivals-year-1-nav-2">
+<noscript><style>.nv-header{opacity:1!important;visibility:visible!important;background-color:var(--paper)!important;border-bottom-color:var(--rule)!important}</style></noscript>
 </head>
 
 <body class="festivals">
@@ -80,13 +81,9 @@
     <path d="M7 13V1M1.5 6.5L7 1l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
   </svg>
 </button>
-<!-- The header: one solid ivory bar that stays where it is. Enquire (and
-     Home) on the left, the crest in the middle, News and Menu on the right.
-     It has no states of its own — no clear-over-the-opening, no glass, no
-     sliding away — so nothing here changes as the page scrolls. The sheet
-     is assets/css/drawer.css; the behaviour is "Header, menu and Enquire"
-     in cirs.js. -->
-<header class="header nv-header" id="header">
+<!-- The original controls stay fixed while the shared controller changes
+     only the bar's surface and ink at the opening/content boundary. -->
+<header class="header nv-header" id="header" data-header-mode="hero" data-header-start="hero" data-header-tone="dark" data-header-surface="light">
   <div class="nv-header__bar">
     <div class="nv-header__side nv-header__side--left">
       <!-- Enquire opens the contact sheet below rather than going anywhere.
@@ -211,7 +208,7 @@
     <section class="nv-dest" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
       <p class="nv-dest__kicker" aria-hidden="true">Student Life</p>
       <ul class="nv-dest__list">
-        <li><a href="the-cirs-experience.html"><span class="nv-dest__label">THE CIRS EXPERIENCE</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="the-cirs-experience.html"><span class="nv-dest__label">The CIRS experience</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
         <li><a href="curriculum.html"><span class="nv-dest__label">Curriculum</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
         <li><a href="our-results.html"><span class="nv-dest__label">Our Results</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
         <li><a href="sports.html"><span class="nv-dest__label">Our Sports</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
@@ -1192,7 +1189,7 @@
 <script src="assets/vendor/gsap.min.js?b=112-festivals-year-1" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=112-festivals-year-1" defer></script>
 <script src="assets/vendor/lenis.min.js?b=112-festivals-year-1" defer></script>
-<script src="assets/js/cirs.js?b=112-festivals-year-1-drawer-5" defer></script>
+<script src="assets/js/cirs.js?b=112-festivals-year-1-header-1" defer></script>
 <script src="assets/js/pages.js?b=112-festivals-year-1" defer></script>
 <script src="assets/js/footer.js?b=112-festivals-year-1-footer-1" defer></script>
 <script src="assets/js/festivals.js?b=112-festivals-year-1" defer></script>
