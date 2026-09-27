@@ -1,9 +1,9 @@
 /* ============================================================
    Chinmaya International Residential School
    ------------------------------------------------------------
-   Ivory and white grounds, charcoal lettering, gold, with natural
-   green for campus and nature and a restrained royal purple for
-   small labels. The colour roles are the tokens below; page sheets
+   Ivory and white grounds, charcoal lettering, approved gold, and
+   the earlier deep-purple brand accent. Natural green remains for
+   campus and nature where it has meaning. Page sheets
    read them rather than defining their own. Photography is the
    school's own, re-cropped and graded, and is never recoloured.
 
@@ -25,7 +25,7 @@
 
   /* ----------------------------------------------------------
      Colour. One system, in roles rather than hues: the owner's
-     ivory, gold, natural green and a restrained royal purple.
+     ivory, gold, natural green and restored deep purple.
      Page sheets read these roles; they do not define their own
      paper, ink or gold. Ratios are WCAG, measured on the solid
      pairs named; a surface that is not one of these is measured
@@ -60,9 +60,13 @@
   --gold-rgb:  201,169,97;
   --on-gold:   #1F1F1B;   /* 7.35:1. White on this gold is 2.25:1. */
 
-  /* Small labels on paper — eyebrows, kickers, table heads. The
-     restrained royal purple: 9.86:1 on ivory, 8.43:1 on cream. */
-  --label:        #5B2A72;
+  /* Earlier brand palette recovered from the stylesheet before b04ab898.
+     Keep current ivory and gold; use purple for decorative brand roles. */
+  --brand:        #392A48;
+  --brand-mid:    #2B2037;
+  --brand-deep:   #1E1626;
+  --maroon:       #7A0F1E;
+  --label:        var(--brand);
   --purple-pale:  #F3EDF6;
 
   /* Green belongs to campus and nature, not to every button. */
@@ -717,7 +721,7 @@ section[id]{ scroll-margin-top:88px; }
 
 /* The six kinds of hour, as the ribbon coloured them. */
 .dmoment--wake{   border-top-color:var(--sage); }
-.dmoment--active{ border-top-color:var(--campus); }
+.dmoment--active{ border-top-color:var(--brand); }
 .dmoment--spirit{ border-top-color:var(--label); }
 .dmoment--meal{   border-top-color:var(--gold); }
 .dmoment--study{  border-top-color:var(--dark); }
@@ -732,7 +736,7 @@ section[id]{ scroll-margin-top:88px; }
 .daykey{ display:inline-flex; align-items:center; gap:7px; }
 .daykey::before{ content:""; width:11px; height:11px; border-radius:2px; flex:none; }
 .daykey--wake::before{   background:var(--sage); }
-.daykey--active::before{ background:var(--campus); }
+.daykey--active::before{ background:var(--brand); }
 .daykey--spirit::before{ background:var(--label); }
 .daykey--meal::before{   background:var(--gold); }
 .daykey--study::before{  background:var(--dark); }
@@ -1058,7 +1062,7 @@ section[id]{ scroll-margin-top:88px; }
 /* ============================================================
    Footer
    ============================================================ */
-.footer{ background:var(--dark-ink); color:var(--on-dark-soft); }
+.footer{ background:var(--brand-deep); color:var(--on-dark-soft); }
 .footer__main{ display:grid; gap:clamp(28px,3.4vw,52px); padding-block:clamp(48px,5.4vw,80px); }
 @media (min-width:900px){ .footer__main{ grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; } }
 .footer__utility{

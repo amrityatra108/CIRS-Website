@@ -776,7 +776,7 @@ html:not(.js-motion) body.alumni .ajw-nav{ display:none; }
 .ajw[data-scene="navy"]{   --aj-scene:var(--dark);        --aj-accent:var(--gold-pale); }
 .ajw[data-scene="gold"]{   --aj-scene:var(--dark-mid);    --aj-accent:var(--gold); }
 .ajw[data-scene="slate"]{  --aj-scene:var(--dark-deep);   --aj-accent:var(--on-dark-soft); }
-.ajw[data-scene="maroon"]{ --aj-scene:var(--campus-dark); --aj-accent:var(--sage); }
+.ajw[data-scene="maroon"]{ --aj-scene:var(--maroon); --aj-accent:var(--gold-pale); }
 
 .ajw__n{
   margin:0 0 clamp(20px,3vw,30px);

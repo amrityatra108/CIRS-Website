@@ -490,6 +490,34 @@ body.art-attack .film[data-film-still] .film__video{ visibility:hidden; }
    The title occupies the unlit air, above the reflective floor. On portrait
    screens the whole proscenium is shown within the viewport, and the title
    settles below it where neither the curtains nor the stage are covered. */
+/* The recovered diya-to-rangoli film leads into the existing festival year. */
+body.festivals{
+  --film-ground:#1B0C08;
+  --film-crop:50% 50%;
+  --film-crop-narrow:50% 50%;
+  --film-seam-top:#291209;
+  --film-seam-fold:#432016;
+  --film-seam-rise:#9A705A;
+}
+body.festivals .film__stage{background:#1B0C08 url("../img/festivals-opening-poster.jpg") center/cover no-repeat;}
+body.festivals .film__still{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:var(--film-crop);
+}
+body.festivals .film__stage::after{
+  content:"";position:absolute;z-index:1;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(21,8,5,.72),transparent 40%,transparent 70%,#291209);
+}
+body.festivals .film__title{
+  z-index:2;top:clamp(112px,16svh,170px);bottom:auto;
+  color:#FFE5AC;font-family:var(--font-display);font-weight:400;
+  font-size:clamp(2.5rem,6vw,5.5rem);text-transform:none;
+  text-shadow:0 2px 12px rgba(22,8,4,.75);
+}
+body.festivals .film[data-film-pending] .film__title{opacity:1;}
+body.festivals .film[data-film-still] .film__video{visibility:hidden;}
+@media (prefers-reduced-motion:reduce){body.festivals .film__video{visibility:hidden;}}
+
 body.theatre{
   --film-ground:#080304;
   --film-crop:50% 50%;
