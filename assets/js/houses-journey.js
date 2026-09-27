@@ -19,7 +19,7 @@
     if (runnerTween) runnerTween.kill();
     if (stack) stack.querySelectorAll('.house-stage-echo').forEach(function (el) { el.remove(); });
     if (gs) panels.forEach(function (panel) {
-      gs.set(panel.querySelectorAll(':scope>.house-stage__media,:scope>.house-stage__copy,.house-stage__media img,.house-stage__media figcaption'), {clearProps:'transform,opacity,--sport-line'});
+      gs.set(panel.querySelectorAll(':scope>.house-stage__media,:scope>.house-stage__copy,.house-stage__media img,.house-stage__media figcaption,.house-culture-grid figure'), {clearProps:'transform,opacity,--sport-line'});
     });
   }
   function moveRunner(animate) {
@@ -40,8 +40,10 @@
       // Decorative old photograph only; never duplicate IDs, controls or accessible content.
       echo = document.createElement('div'); echo.className = 'house-stage-echo';
       echo.setAttribute('aria-hidden','true'); echo.inert = true;
-      echo.style.width = previous.querySelector('figure').offsetWidth + 'px';
-      echo.appendChild(previous.querySelector('figure').cloneNode(true)); stack.appendChild(echo);
+      echo.style.width = previous.querySelector('.house-stage__media').offsetWidth + 'px';
+      echo.appendChild(previous.querySelector('.house-stage__media').cloneNode(true));
+      echo.querySelectorAll('[id]').forEach(function (el) { el.removeAttribute('id'); });
+      stack.appendChild(echo);
     }
     active = id;
     tabs.forEach(function (tab) {
@@ -56,6 +58,9 @@
       stageTween.to(echo,{x:-direction*22,opacity:0,duration:.25},0)
         .fromTo(incoming.querySelector('.house-stage__media'),{x:direction*24,opacity:0},{x:0,opacity:1,duration:.5},.08)
         .fromTo(incoming.querySelector('.house-stage__copy'),{y:12},{y:0,duration:.4},.14);
+      if (id === 'culture') {
+        stageTween.fromTo(incoming.querySelectorAll('.house-culture-grid figure'),{y:12,opacity:.35},{y:0,opacity:1,duration:.35,stagger:.055},.08);
+      }
       if (id === 'sport') {
         stageTween.fromTo(incoming.querySelector('figure img'),{scale:1.03},{scale:1,duration:.55},0)
           .fromTo(incoming.querySelector('figure'),{'--sport-line':0},{'--sport-line':1,duration:.5},.08)
@@ -151,51 +156,101 @@
   if (!gs || !ST) return; // All interactions above work without the animation libraries.
   gs.registerPlugin(ST);
   var media=gs.matchMedia();
-  media.add('(prefers-reduced-motion: no-preference)',function () {
+  media.add({motion:'(prefers-reduced-motion: no-preference)',desktop:'(min-width:901px)'},function (context) {
+    if (!context.conditions.motion) return;
     document.body.classList.add('houses-motion');
+    var desktop=context.conditions.desktop;
     var chapters=Array.from(document.querySelectorAll('.house-spread'));
+    var titleLayers=[];
     chapters.forEach(function (chapter,index) {
-      var outgoing=chapter.querySelector('.house-wipe__out'),incoming=chapter.querySelector('.house-wipe__in');
-      var wipe=gs.timeline({scrollTrigger:{id:'houses-wipe-'+index,trigger:chapter,start:'top bottom',end:'top 42%',scrub:true},defaults:{ease:'power2.inOut'}});
-      // Switch at the same 1.2%-wide stripe: never interpolate house colours.
-      wipe.fromTo(outgoing,{scaleX:.012,scaleY:1},{scaleX:1,duration:.18},0)
-        .to(outgoing,{scaleX:.012,duration:.18},.18);
-      var turn=.36;
-      wipe.set(outgoing,{opacity:0},turn).set(incoming,{scaleX:.012,scaleY:1,opacity:1},turn)
-        .to(incoming,{scaleX:1,duration:.18},turn)
-        .to(incoming,{scaleY:.004,opacity:0,duration:.26},turn+.18);
-      // A bounded entrance: content is settled while the chapter is still entering.
-      var enter=gs.timeline({scrollTrigger:{id:'houses-enter-'+index,trigger:chapter,start:'top 94%',end:'top 38%',scrub:true},defaults:{ease:'power2.out'}});
-      enter.from(chapter.querySelector('.house-spread__index'),{y:12,duration:.2},0)
-        .from(chapter.querySelector('.house-spread__colour'),{y:10,duration:.2},.03)
-        .from(chapter.querySelector('h2>span'),{yPercent:105,duration:.35},.06)
-        .from(chapter.querySelector('figure'),{y:18,scale:.985,opacity:.5,duration:.32},.14)
-        .from(chapter.querySelectorAll('.house-copy-block'),{y:14,stagger:.05,duration:.3},.2)
-        .from(chapter.querySelector('.house-signature-line'),{scaleX:0,duration:.4},.04);
-      gs.fromTo(chapter.querySelector('.house-spread__ghost'),{xPercent:-3},{xPercent:3,ease:'none',scrollTrigger:{id:'houses-ghost-'+index,trigger:chapter,start:'top bottom',end:'bottom top',scrub:true}});
+      var figure=chapter.querySelector('figure');
+      var mask=chapter.querySelector('.house-photo-mask');
+      var picture=mask.querySelector('img');
+      var heading=chapter.querySelector('h2');
+      var word=heading.querySelector('span');
+      var number=chapter.querySelector('.house-spread__index');
+      var colour=chapter.querySelector('.house-spread__colour');
+      var line=chapter.querySelector('.house-signature-line');
+      var blocks=chapter.querySelectorAll('.house-copy-block');
+      var link=chapter.querySelector('.house-spread__copy a');
+      var ghost=chapter.querySelector('.house-spread__ghost');
+      var tracking=getComputedStyle(word).letterSpacing;
+      var ghostOpacity=+getComputedStyle(ghost).opacity;
+      var slices=[];
+      if(desktop) {
+        var layer=document.createElement('div');layer.className='house-title-slices';
+        layer.setAttribute('aria-hidden','true');layer.inert=true;
+        for(var i=0;i<3;i++) {
+          var slice=document.createElement('span');slice.textContent=word.textContent;
+          slice.style.clipPath='inset('+(i*100/3)+'% 0 '+((2-i)*100/3)+'% 0)';
+          layer.appendChild(slice);slices.push(slice);
+        }
+        heading.appendChild(layer);titleLayers.push(layer);
+      }
+      // Synchronous sets run only after GSAP and ScrollTrigger are available.
+      // Base HTML/CSS is readable; matchMedia reverts every set on teardown.
+      gs.set([figure,heading,number,colour,ghost],{opacity:0});
+      gs.set(number,{y:10});gs.set(colour,{x:10,'--marker-scale':0});
+      gs.set(line,{scaleX:0,opacity:0});
+      gs.set(mask,{clipPath:desktop?'inset(0% 0% 100% 0%)':'inset(0% 0% 12% 0%)'});
+      gs.set(picture,{scale:desktop?1.035:1.015});
+      gs.set(word,{yPercent:115,skewY:desktop?6:0,letterSpacing:'.012em',opacity:0});
+      gs.set(blocks,{opacity:0,y:28});gs.set(link,{autoAlpha:0,y:8});
+      if(desktop) gs.set(slices,{yPercent:115,skewY:6,opacity:0,letterSpacing:'.012em',x:function(i){return [-18,22,-12][i];}});
+      var enter=gs.timeline({paused:true,defaults:{ease:'power3.out'}});
+      enter.fromTo(number,{opacity:0,y:10},{opacity:1,y:0,duration:.14,immediateRender:false},0)
+        .fromTo(colour,{opacity:0,x:10,'--marker-scale':0},{opacity:1,x:0,'--marker-scale':1,duration:.14,immediateRender:false},.02)
+        .fromTo(line,{opacity:0,scaleX:0},{opacity:1,scaleX:1,duration:.18,immediateRender:false},.04)
+        .fromTo(figure,{opacity:0},{opacity:1,duration:.14,immediateRender:false},.12)
+        .fromTo(mask,{clipPath:desktop?'inset(0% 0% 100% 0%)':'inset(0% 0% 12% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:.36,ease:'power2.inOut',immediateRender:false},.12)
+        .fromTo(picture,{scale:desktop?1.035:1.015},{scale:1,duration:.36,immediateRender:false},.12)
+        .fromTo(heading,{opacity:0},{opacity:1,duration:.01,immediateRender:false},.22)
+        .fromTo(word,{yPercent:115,skewY:desktop?6:0,letterSpacing:'.012em',opacity:0},{yPercent:0,skewY:0,letterSpacing:tracking,opacity:desktop?0:1,duration:.48,immediateRender:false},.22)
+        .fromTo(ghost,{opacity:0},{opacity:ghostOpacity,duration:.2,immediateRender:false},.28)
+        .fromTo(blocks,{opacity:0,y:28},{opacity:1,y:0,duration:.26,stagger:.07,immediateRender:false},.53)
+        .fromTo(link,{autoAlpha:0,y:8},{autoAlpha:1,y:0,duration:.14,immediateRender:false},.72);
+      if(desktop) {
+        enter.fromTo(slices,{yPercent:115,skewY:6,opacity:0,letterSpacing:'.012em'},{yPercent:0,skewY:0,opacity:1,letterSpacing:tracking,duration:.48,immediateRender:false},.22)
+          .fromTo(slices,{x:function(i){return [-18,22,-12][i];}},{x:0,duration:.35,ease:'power3.out',immediateRender:false},.30)
+          .fromTo(slices,{opacity:1},{opacity:0,duration:.001,immediateRender:false},.70)
+          .fromTo(word,{opacity:0},{opacity:1,duration:.001,immediateRender:false},.70);
+      }
+      if(index>0) {
+        var previous=chapters[index-1];
+        enter.fromTo(previous.querySelector('figure'),{yPercent:0},{yPercent:-2,duration:.4,immediateRender:false},0)
+          .fromTo(previous.querySelector('.house-spread__copy'),{y:0},{y:-12,duration:.4,immediateRender:false},0)
+          .fromTo(previous.querySelector('h2>span'),{y:0},{y:-30,duration:.4,immediateRender:false},0);
+      }
+      // One entry trigger coordinates the complete chapter. A short triggered
+      // sequence finishes even when the visitor stops at the threshold.
+      ST.create({id:'houses-handoff-'+index,trigger:chapter,animation:enter,
+        start:'top 78%',end:'top 40%',invalidateOnRefresh:true,
+        toggleActions:'play complete none reset',
+        onUpdate:function(self){
+          if(self.progress>0 && self.progress<.25) {
+            if(self.direction<0) enter.reverse(); else enter.play();
+          }
+        },
+        onLeaveBack:function(){enter.pause(0);},
+        onRefresh:function(self){
+          if(self.scroll()<self.start) enter.pause(0);
+          else if(!enter.isActive()) enter.progress(1).pause();
+        }
+      });
     });
-    // The first handoff always belongs to Vasishta, regardless of hero exploration.
-    gs.to(document.querySelector('.house-opening__panels'),{scale:.975,transformOrigin:'50% 100%',ease:'none',scrollTrigger:{id:'houses-hero-recede',trigger:chapters[0],start:'top bottom',end:'top 45%',scrub:true}});
-    var meet=document.querySelector('#competition');
-    gs.timeline({scrollTrigger:{id:'houses-converge',trigger:meet,start:'top bottom',end:'top 42%',scrub:true}})
-      .fromTo(meet.querySelectorAll('.house-convergence span'),{xPercent:function(i){return (i-1.5)*110;},y:function(i){return i%2?60:-60;},scaleY:9},{xPercent:0,y:0,scaleY:1,duration:.6,ease:'power2.inOut',stagger:.035},0)
-      .from(meet.querySelector('.house-section-heading'),{y:24,duration:.35},.25);
-    var archive=document.querySelector('#record');
-    gs.fromTo(archive.querySelector('.house-archive-wash'),{opacity:.18},{opacity:0,ease:'none',scrollTrigger:{id:'houses-archive-drain',trigger:archive,start:'top bottom',end:'top 55%',scrub:true}});
-    gs.from(archive.querySelector('.house-archive-line'),{scaleX:0,ease:'none',scrollTrigger:{id:'houses-archive',trigger:archive,start:'top 95%',end:'top 48%',scrub:true}});
-    var closing=document.querySelector('#together');
-    gs.timeline({scrollTrigger:{id:'houses-closing',trigger:closing,start:'top bottom',end:'top 18%',scrub:true},defaults:{ease:'power2.inOut'}})
-      .fromTo(closing.querySelectorAll('.house-closing-reveal span'),{scaleX:.012,scaleY:0},{scaleX:.012,scaleY:1,duration:.26,stagger:.025},0)
-      .to(closing.querySelectorAll('.house-closing-reveal span'),{scaleX:1,duration:.25},.32)
-      .to(closing.querySelectorAll('.house-closing-reveal span'),{xPercent:function(i){return (1.5-i)*100;},scaleX:.008,duration:.28},.59)
-      .to(closing.querySelectorAll('.house-closing-reveal span'),{opacity:0,duration:.12},.85)
-      .from(closing.querySelector('h2'),{y:28,duration:.3},.69);
+    [['competition','.house-convergence','houses-converge'],['together','.house-closing__bars','houses-closing']].forEach(function(item){
+      var section=document.getElementById(item[0]),lines=section.querySelector(item[1]);
+      gs.timeline({scrollTrigger:{id:item[2],trigger:lines,start:'top 94%',end:'top 65%',scrub:true}})
+        .fromTo(lines.querySelectorAll('span'),{scaleX:.3,x:function(i){return i%2?14:-14;}},{scaleX:1,x:0,duration:.4,stagger:.025,ease:'power2.out'},0)
+        .from(section.querySelector('h2'),{y:16,duration:.3},.08);
+    });
     refresh();
     return function () {
+      titleLayers.forEach(function(el){el.remove();});
       document.body.classList.remove('houses-motion');
-
     };
   });
   if(document.fonts)document.fonts.ready.then(refresh);
   window.addEventListener('load',refresh,{once:true});
+  window.addEventListener('pageshow',refresh);
 })();

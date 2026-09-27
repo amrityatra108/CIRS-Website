@@ -220,13 +220,11 @@ def chapters_html():
         sentences = h['description'].split('. ')
         cut = 2
         blocks = '. '.join(sentences[:cut]) + '. </span><span class="house-copy-block">' + '. '.join(sentences[cut:])
-        previous = PAGE_HOUSES[i-1]['slug'] if i else 'vasishtha'
         out.append(f'''<article class="house-spread" id="house-{h['slug']}" data-house="{h['slug']}" aria-labelledby="name-{h['slug']}">
-  <div class="house-wipe" aria-hidden="true"><span class="house-wipe__out" data-house="{previous}"></span><span class="house-wipe__in"></span></div>
   <span class="house-spread__ghost" aria-hidden="true">{h['name']}</span>
   <header class="house-spread__heading"><p class="house-spread__index">{h['number']} <span>/ 04</span></p><h2 id="name-{h['slug']}"><span>{h['name']}</span></h2><p class="house-spread__colour">{h['colour']}</p></header>
   <span class="house-signature-line" aria-hidden="true"></span>
-  <div class="house-spread__body"><figure>{photo_html(path, alt)}<figcaption>{cap}</figcaption></figure>
+  <div class="house-spread__body"><figure><div class="house-photo-mask">{photo_html(path, alt)}</div><figcaption>{cap}</figcaption></figure>
   <div class="house-spread__copy"><p><span class="house-copy-block">{blocks}</span></p><a href="#gallery-{h['slug']}">View {h['name']} photographs <span aria-hidden="true">↗</span></a></div></div>
 </article>''')
     return '\n'.join(out)
@@ -253,12 +251,12 @@ STAGES = [
 
 
 def stage_html():
-    tabs = '\n'.join(f'<button type="button" id="tab-{s["id"]}" data-stage-tab="{s["id"]}" aria-controls="{s["id"]}">{s["label"]}</button>' for s in STAGES)
+    tabs = '\n'.join(f'<button type="button" id="tab-{s["id"]}" data-stage-tab="{s["id"]}" aria-controls="{s["id"]}"><span aria-hidden="true">{i+1:02d}</span> {s["label"]}</button>' for i,s in enumerate(STAGES))
     panels = []
     participants = '<ul class="house-participants" aria-label="The four houses">' + ''.join(f'<li data-house="{h["slug"]}"><span aria-hidden="true"></span>{h["name"]}</li>' for h in PAGE_HOUSES) + '</ul>'
     for s in STAGES:
-        link = '<a class="house-stage__link" href="sports.html">Explore CIRS sports →</a>' if s['id']=='sport' else ('<a class="house-stage__link" href="theatre.html#masquerades">Explore CIRS Theatre →</a>' if s['id']=='culture' else '')
-        media = march_html() if s['id'] == 'march' else f'<figure>{photo_html(s["image"],s["alt"])}<figcaption>{s["caption"]}</figcaption></figure>'
+        link = '<a class="house-stage__link" href="sports.html">Explore CIRS Sports →</a>' if s['id']=='sport' else ('<a class="house-stage__link" href="theatre.html#masquerades">Explore CIRS Theatre →</a>' if s['id']=='culture' else '')
+        media = march_html() if s['id'] == 'march' else culture_html() if s['id'] == 'culture' else f'<figure>{photo_html(s["image"],s["alt"])}<figcaption>{s["caption"]}</figcaption></figure>'
         panels.append(f'''<section class="house-stage" id="{s['id']}" data-stage-panel aria-labelledby="stage-heading-{s['id']}">
 <div class="house-stage__media">{media}</div>
 <div class="house-stage__copy"><h3 id="stage-heading-{s['id']}">{s['title']}</h3><p>{s['copy']}</p>{participants}
@@ -298,7 +296,7 @@ def archive_html():
 
 
 GALLERY_THEATRE = {
-    'vasishtha': ('vasistha25-company-1600.webp', 'Vasishta performers gathered after Vantara', 'The company after Vantara · 2025'),
+    'vasishtha': ('vasistha25-violet-1600.webp', 'A Vasishta performer under violet stage light in Vantara', 'Vantara · Masquerade 2025'),
     'valmiki': ('valmiki25-after-1600.webp', 'Two Valmiki performers after Melora, one in body paint and one in a red coat', 'After Melora · 2025'),
     'vishwamitra': ('vishwamitra25-guitar-1600.webp', 'Vishwamitra performers at a guitar stall on the El Diablo stage', 'A scene from El Diablo · 2025'),
     'vyasa': ('vyasa25-make-up-1600.webp', 'A Vyasa student applying stage make-up for Ivysherin', 'Backstage at Ivysherin · 2025'),
@@ -332,3 +330,17 @@ def march_html():
     ]
     frames = ''.join(f'<figure>{photo_html(img(path),alt,1600,1100)}<figcaption>{caption}</figcaption></figure>' for path,caption,alt in photos)
     return '<div class="house-march"><section class="house-march__viewport" tabindex="0" aria-label="March photographs. Swipe or use arrow keys to explore."><div class="house-march__track">'+frames+'</div></section><p class="house-march__cue">Two views of the school parade <span aria-hidden="true">↔</span></p></div>'
+
+
+CULTURE_PHOTOS = [
+    ('vasishtha', 'Vantara', 'vasistha25-violet-1600.webp', 'A Vasishta performer under violet stage light in Vantara'),
+    ('valmiki', 'Melora', 'valmiki25-dance-1600.webp', 'Valmiki performers dancing together across the Melora stage'),
+    ('vishwamitra', 'El Diablo', 'vishwamitra25-courtyard-1600.webp', 'Vishwamitra performers in the courtyard scene of El Diablo'),
+    ('vyasa', 'Ivysherin', 'vyasa25-make-up-1600.webp', 'A Vyasa student applying stage make-up for Ivysherin'),
+]
+
+
+def culture_html():
+    return '<div class="house-culture-grid">' + ''.join(
+        f'<figure data-house="{slug}">{photo_html("assets/img/theatre/"+file,alt)}<figcaption><b>{current_name(slug)}</b><span>{title} · 2025</span></figcaption></figure>'
+        for slug,title,file,alt in CULTURE_PHOTOS) + '</div>'

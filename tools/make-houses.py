@@ -210,6 +210,11 @@ EDITORIAL_PHOTOS += [(name.replace('.jpg', '-'+str(w)+'.jpg'), src, (w,round(w*1
 EDITORIAL_PHOTOS += [(name.replace('.jpg','-800.jpg'),src,(800,round(800*size[1]/size[0])),focal,box)
                      for name,src,size,focal,box in EDITORIAL_PHOTOS[4:14]]
 
+EDITORIAL_PHOTOS += [
+    ('community.jpg', 'houses-zip/IMG_4280.JPG', (2000,1200), (.5,.48), None),
+    ('community-800.jpg', 'houses-zip/IMG_4280.JPG', (800,480), (.5,.48), None),
+]
+
 
 def make_editorial():
     for name,source,(w,h),focal,box in EDITORIAL_PHOTOS:

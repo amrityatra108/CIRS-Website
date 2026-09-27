@@ -56,3 +56,11 @@ All current generated crops are listed below. Originals are read at full resolut
 - The archive source link sport-medals.jpg comes from 0G8A3883.JPG, whose ribbons identify Khel Mela 2025–26. No house placings are inferred.
 
 The former banner-led house march photographs are removed from this page under the current brief. Older mixed-sash and generic-shirt identity crops remain excluded. Source originals and legacy assets are retained; see tools/houses-retired-media.md. Historical records and source discrepancies remain dated in the archive.
+## Photography-led chapter revision
+
+- community.jpg (2000x1200) and community-800.jpg (800x480): assets/source/houses-zip/IMG_4280.JPG, focal (0.5,0.48), no grading. Two students pose courtside, with named Vishwamitra shirts behind them. Shared school context only; no guessed date, individual foreground house attribution or award claim. Selected after reviewing all 47 images in the supplied ZIP. IMG_0306.JPG was considered but not used because its specific team celebration is less suitable as evidence of the whole community.
+- Culture is a four-house 2x2 composition: vasistha25-violet-1600.webp (Vantara), valmiki25-dance-1600.webp (Melora), vishwamitra25-courtyard-1600.webp (El Diablo), vyasa25-make-up-1600.webp (Ivysherin). House/production/2025 attribution is recorded by tools/theatre.py from the approved Masquerade folders.
+- The gallery Vasishta theatre frame now uses vasistha25-violet-1600.webp, replacing the company photograph containing animal costumes. It is a documented performance photograph, not a house emblem.
+- All earlier responsive hero/chapter/source mappings remain unchanged. The previous formal reunion image and single-house Culture presentation are retired from the Houses page.
+
+Closing original SHA-256: `71fa6f900dbcebd47d4b2b45de49f8f75cc1282b2561043aae1814566faddf75`.
