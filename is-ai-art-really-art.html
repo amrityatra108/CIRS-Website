@@ -24,13 +24,14 @@
 <meta name="twitter:title" content="Is AI - Art Really Art? | CIRS Blog">
 <meta name="twitter:description" content="In today’s world, nearly everything we do has a trace of artificial intelligence in it, from our daily tasks to our school projects.">
 <meta name="twitter:image" content="assets/img/og.jpg">
+<link rel="preload" href="assets/js/navigation.js?b=113-blog-editorial-1-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?b=113-blog-editorial-1">
 <link rel="stylesheet" href="assets/css/cirs.css?b=113-blog-editorial-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=113-blog-editorial-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=113-blog-editorial-1-lightbox-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -42,7 +43,7 @@
 <link rel="stylesheet" href="assets/css/blog.css?b=113-blog-editorial-1">
 <link rel="stylesheet" href="assets/css/typography.css?b=113-blog-editorial-1">
 <link rel="stylesheet" href="assets/css/footer.css?b=113-blog-editorial-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=113-blog-editorial-1-nav-3">
+<link rel="stylesheet" href="assets/css/drawer.css?b=113-blog-editorial-1-nav-4">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -52,17 +53,15 @@
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
-<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" aria-describedby="lightboxHint" hidden>
   <div class="lightbox__back" data-close></div>
   <div class="lightbox__panel">
-    <div class="lightbox__frame" id="lightboxFrame"></div>
     <button type="button" class="lightbox__close" data-close aria-label="Close the film">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
+    <div class="lightbox__frame" id="lightboxFrame"></div>
   </div>
-  <!-- The cross-origin player can catch Escape while it has focus. Keep a
-       visible, reliable way out next to the labelled close button. -->
-  <p class="lightbox__hint" aria-hidden="true"><span class="lightbox__hint-key">Click outside the film to close</span><span class="lightbox__hint-touch">Tap outside the film to close</span></p>
+  <p class="lightbox__hint" id="lightboxHint"><span class="lightbox__hint-key">Use your browser&rsquo;s Back command while the player has focus, or Tab through its controls to reach Close the film. Click outside to close.</span><span class="lightbox__hint-touch">Tap outside the player to close.</span> <button type="button" class="lightbox__exit" data-close>Close the film</button> <a class="lightbox__fallback" id="lightboxFallbackLink" href="https://youtu.be/" target="_blank" rel="noopener">Open on YouTube if the player is unavailable.</a></p>
 </dialog>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
@@ -267,6 +266,7 @@
   </div>
 </div>
 <main id="main">
+<script src="assets/js/navigation.js?b=113-blog-editorial-1-core-3"></script>
 <article class="art" id="top">
   <header class="art__head">
     <div class="art__shell">
@@ -428,7 +428,7 @@
 <script src="assets/vendor/gsap.min.js?b=113-blog-editorial-1" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=113-blog-editorial-1" defer></script>
 <script src="assets/vendor/lenis.min.js?b=113-blog-editorial-1" defer></script>
-<script src="assets/js/cirs.js?b=113-blog-editorial-1-header-1" defer></script>
+<script src="assets/js/cirs.js?b=113-blog-editorial-1-header-5" defer></script>
 <script src="assets/js/pages.js?b=113-blog-editorial-1" defer></script>
 <script src="assets/js/footer.js?b=113-blog-editorial-1-footer-1" defer></script>
 </body>

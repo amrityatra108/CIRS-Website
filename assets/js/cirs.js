@@ -2099,8 +2099,11 @@
       frame.innerHTML = "";
       document.body.classList.remove("has-lightbox");
       if (lenis) {
-        lenis.scrollTo(readingY, { immediate: true });
         if (canResumeScroll()) lenis.start();
+        // A viewport rotation while the dialog is open changes Lenis's
+        // measured limit. Refresh it before restoring the captured position.
+        lenis.resize();
+        lenis.scrollTo(readingY, { immediate: true });
       } else window.scrollTo(0, readingY);
       if (opener && opener.isConnected) {
         try { opener.focus({ preventScroll: true }); } catch (err) { opener.focus(); }

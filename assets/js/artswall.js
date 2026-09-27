@@ -520,7 +520,17 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
     closeBtn.addEventListener('click', closeModal);
     // Tap outside the photo to close -- ignoring the click that the opening tap itself produces.
     modal.addEventListener('click', e => {
-        if (performance.now() - modalOpenedAt < 400) return;
+        const justOpened = performance.now() - modalOpenedAt < 400;
+        if (justOpened) {
+            // The pointerup handler builds the modal before the browser sends
+            // its compatibility click. That click can move focus back to the
+            // page after the first animation-frame focus repair.
+            if (!e.target.closest('#m-close')) requestAnimationFrame(() => {
+                if (!modalActive || modal.contains(document.activeElement)) return;
+                try { closeBtn.focus({ preventScroll: true }); } catch (_) { closeBtn.focus(); }
+            });
+            return;
+        }
         if (e.target === modal || e.target === mediaCont) closeModal();
     });
 
