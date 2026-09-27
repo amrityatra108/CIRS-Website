@@ -1,8 +1,9 @@
 """The four CIRS houses, and every fact this site states about them.
 
-One module, read by tools/build-site.py, which writes the house chapters, the
-competition archive, the standings table and the gallery into the page. There
-is no second copy of a house name, a colour or a result anywhere.
+Current page identity and rendering live in PAGE_HOUSES and the renderers below.
+The original HOUSES list remains as a historical data adapter for Sports.
+Approved current spelling is Vasishta; the legacy vasishtha anchor is retained.
+RESULTS and SYMPOSIUMS preserve dated school evidence, never current standings.
 
 WHERE EACH FACT COMES FROM
 --------------------------
@@ -340,3 +341,172 @@ def colour_of(slug):
 
 def img(name):
     return f"{DIR}/{name}"
+
+
+# Current identity copy supplied by the school in the redesign brief.
+# HOUSES above remains the historical manifest consumed by Sports.
+# Stable slugs intentionally preserve existing incoming URLs.
+APPROVED_DESCRIPTIONS = {'Vasishta': 'The blazing untamed red of the fire runs through each member of this house. They strive for perfection with every heartbeat. Like fire they engulf fear, doubt, hatred and anger, pushing aside every obstacle in their way. They march forward with red in their veins and the spirit of remaining undaunted. Like the great Sage Vasishta they remain steadfast to their duties and possess wisdom that guides their fierce battles.', 'Valmiki': 'The Valmiki house stands tall, rooted in values and tenacity. With every failure, they gain experience and learning, serving as a stepping stone to success. The colour yellow represents their optimistic approach to every adversity and their journey to emerge victorious. Bound by ideals, they walk the trail of Sage Valmiki, writing their own epic of resilience, valour and growth.', 'Vishwamitra': 'The Vishwamitra house is testimony to the journey of growth and self control. Similar to the green, deep forests they do not fear storms. Their roots extend miles beyond one can see. They charge ahead with the unstoppable force of nature and refuse to wilt. They inherit the spirit of Sage Vishwamitra, shaping their own destiny. They are the commanders of tomorrow.', 'Vyasa': 'The deep, infinite blue shapes the soul of this house. They don’t merely compete, rather they strive for excellence in every breath. The boundless blue sky serves as their reminder to surpass limits and break barriers while carrying energy and enthusiasm in every stride. They are the torch bearers of the timeless legacy of Sage Vyasa, displaying absolute focus and unshakable composure.'}
+
+PAGE_HOUSES = [
+    dict(h, name="Vasishta" if h["slug"] == "vasishtha" else h["name"],
+         description=APPROVED_DESCRIPTIONS["Vasishta" if h["slug"] == "vasishtha" else h["name"]],
+         hero="identity-" + h["slug"] + ".jpg",
+         frame="spread-" + h["slug"] + ".jpg")
+    for h in HOUSES
+]
+PAGE_MEDIA = {
+    "vasishtha": ("Vasishta basketball players in red shirts bearing the house name", "In red, on the court", "A Vasishta student climbing a wall, the house name visible on the red shirt", "Finding the next foothold"),
+    "valmiki": ("Valmiki players gathered in yellow shirts with the house name across their backs", "A moment with the team", "Valmiki players passing a basketball, with the house name visible on yellow shirts", "Moving the ball together"),
+    "vishwamitra": ("A Vishwamitra student carrying the house placard and wearing a named green sash", "Leading the house procession", "Vishwamitra players gathered beside the court in green shirts bearing the house name", "Gathering before the game"),
+    "vyasa": ("Vyasa players gathered courtside, with the house name on a blue shirt", "The blue of belonging", "Vyasa players in a basketball huddle, their house name visible on blue shirts", "Coming together on court"),
+}
+for h in PAGE_HOUSES:
+    h["hero_alt"], h["hero_cap"], h["frame_alt"], h["frame_cap"] = PAGE_MEDIA[h["slug"]]
+
+
+def current_name(slug):
+    return next(h["name"] for h in PAGE_HOUSES if h["slug"] == slug)
+
+# Page renderers: complete HTML is readable before progressive enhancement.
+from html import escape as _escape
+
+
+def photo_html(path, alt, width=1600, height=900, eager=False):
+    return (f'<img src="{path}" width="{width}" height="{height}" '
+            f'alt="{_escape(alt, quote=True)}" decoding="async" '
+            + ('fetchpriority="high"' if eager else 'loading="lazy"') + '>')
+
+
+def hero_html():
+    out = []
+    for h in PAGE_HOUSES:
+        out.append(f'''<a class="house-zone" href="#house-{h['slug']}" data-house="{h['slug']}" aria-label="Explore {h['name']}, {h['colour']} house">
+  <img src="{img(h['hero'])}" srcset="{img(h['hero'].replace('.jpg','-500.jpg'))} 500w, {img(h['hero'])} 900w" sizes="(max-width: 900px) 50vw, 46vw" width="900" height="1125" alt="{_escape(h['hero_alt'])}" decoding="async"{' fetchpriority="high"' if h['number']=='01' else ''}>
+  <span class="house-zone__number" aria-hidden="true">{h['number']}</span>
+  <span class="house-zone__label"><span class="house-zone__name">{h['name']}</span><span class="house-zone__colour">{h['colour']}<span class="house-zone__explore" aria-hidden="true"><small>Explore</small> ↗</span></span></span>
+</a>''')
+    return '\n'.join(out)
+
+
+def chapters_html():
+    out = []
+    for i, h in enumerate(PAGE_HOUSES):
+        path = img(h['frame'])
+        alt, cap = h['frame_alt'], h['frame_cap']
+        sentences = h['description'].split('. ')
+        cut = 2
+        blocks = '. '.join(sentences[:cut]) + '. </span><span class="house-copy-block">' + '. '.join(sentences[cut:])
+        previous = PAGE_HOUSES[i-1]['slug'] if i else 'vasishtha'
+        out.append(f'''<article class="house-spread" id="house-{h['slug']}" data-house="{h['slug']}" aria-labelledby="name-{h['slug']}">
+  <div class="house-wipe" aria-hidden="true"><span class="house-wipe__out" data-house="{previous}"></span><span class="house-wipe__in"></span></div>
+  <span class="house-spread__ghost" aria-hidden="true">{h['name']}</span>
+  <header class="house-spread__heading"><p class="house-spread__index">{h['number']} <span>/ 04</span></p><h2 id="name-{h['slug']}"><span>{h['name']}</span></h2><p class="house-spread__colour">{h['colour']}</p></header>
+  <span class="house-signature-line" aria-hidden="true"></span>
+  <div class="house-spread__body"><figure>{photo_html(path, alt)}<figcaption>{cap}</figcaption></figure>
+  <div class="house-spread__copy"><p><span class="house-copy-block">{blocks}</span></p><a href="#gallery-{h['slug']}">View {h['name']} photographs <span aria-hidden="true">↗</span></a></div></div>
+</article>''')
+    return '\n'.join(out)
+
+
+STAGES = [
+    dict(id='march', label='March', title='Moving as one.', image='assets/img/houses/shared-march.jpg',
+         alt='The Vasishta contingent marching with a red house banner and named placard', caption='Vasishta on the school track',
+         copy='The march past brings discipline and collective effort into view. Step, rhythm and formation turn individual practice into a shared performance.',
+         record='February 2008 · Khel Mela: Valmiki received the best march past award.', archive=0),
+    dict(id='sport', label='Sport', title='A colour to play for.', image='assets/img/houses/sport-tennis.jpg',
+         alt='Students practising tennis, with Vyasa and Vasishta named on their blue and red shirts', caption='House colours together on the tennis court',
+         copy='From the court to the pool, the house gives individual effort a team to belong to. Competition and the everyday work of practice share the same ground.',
+         record='2025–26 · Khel Mela: the medal ribbons identify the 29th Annual Aquatic Meet.', archive=7),
+    dict(id='quizzing', label='Quizzing', title='Thinking together.', image='assets/img/houses/comp-quiz.jpg',
+         alt='CIRS students discussing a quiz answer at a table, one student holding a microphone', caption='A school quiz in progress',
+         copy='A question, a quick exchange, a shared answer. The quiz table gives teamwork another form, with listening and judgement as important as recall.',
+         record='30 April 2008 · Valmiki won the Senior Social Science Quiz.', archive=1),
+    dict(id='culture', label='Culture', title='A house takes the stage.', image='assets/img/theatre/vishwamitra25-courtyard-1600.webp',
+         alt='Vishwamitra performers in a courtyard scene from El Diablo', caption='Vishwamitra · El Diablo · Masquerade 2025',
+         copy='On stage, a house becomes a company. The 2025 Masquerade photographs record Melora, Vantara, El Diablo and Ivysherin: four productions made by four houses.',
+         record='May 2008 · The house symposiums: four earlier productions recorded in Sakshi.', archive=2),
+]
+
+
+def stage_html():
+    tabs = '\n'.join(f'<button type="button" id="tab-{s["id"]}" data-stage-tab="{s["id"]}" aria-controls="{s["id"]}">{s["label"]}</button>' for s in STAGES)
+    panels = []
+    participants = '<ul class="house-participants" aria-label="The four houses">' + ''.join(f'<li data-house="{h["slug"]}"><span aria-hidden="true"></span>{h["name"]}</li>' for h in PAGE_HOUSES) + '</ul>'
+    for s in STAGES:
+        link = '<a class="house-stage__link" href="sports.html">Explore CIRS sports →</a>' if s['id']=='sport' else ('<a class="house-stage__link" href="theatre.html#masquerades">Explore CIRS Theatre →</a>' if s['id']=='culture' else '')
+        march = march_html() if s['id'] == 'march' else ''
+        panels.append(f'''<section class="house-stage" id="{s['id']}" data-stage-panel aria-labelledby="stage-heading-{s['id']}">
+<figure>{photo_html(s['image'],s['alt'])}<figcaption>{s['caption']}</figcaption></figure>
+<div class="house-stage__copy"><h3 id="stage-heading-{s['id']}">{s['title']}</h3><p>{s['copy']}</p>{participants}
+<p class="house-stage__record">{s['record']} <a href="#event-{s['archive']}">Read archive entry</a></p>{link}</div>{march}</section>''')
+    return '<div class="house-stage-tabs" data-stage-tabs aria-label="Explore house activities" hidden>'+tabs+'</div>\n'+'<div class="house-stage-stack">'+'\n'.join(panels)+'</div>'
+
+
+SOURCE_LINKS = {
+    'Sakshi, March 2008': 'pdf/Sakshi Newleter March 2008.pdf',
+    'Sakshi, summer special, May 2008': 'pdf/Sakshi Newleter summer special May 2008.pdf',
+    'CIRS e-newsletter, October&ndash;November 2008': 'pdf/E-Newletter Octnov08.pdf',
+    'the meet&rsquo;s own medal ribbons': 'assets/img/houses/sport-medals.jpg',
+}
+
+
+def archive_html():
+    rows = []
+    for i, r in enumerate(RESULTS):
+        details = []
+        if r['order']:
+            details.append('<ol class="house-placings">'+''.join(f'<li>{current_name(s)}</li>' for s in r['order'])+'</ol>')
+        if r['awards']:
+            details.append('<ul>'+''.join(f'<li>{award}: {", ".join(current_name(s) for s in slugs)}</li>' for award,slugs in r['awards'])+'</ul>')
+        if i == 0:
+            # Preserve the original spelling when quoting the conflicting source.
+            details.append('<p>The winners’ list names Vyasa for best drill. The same issue’s account credits “Vasishtha and Vyasa house”. Both readings are preserved here.</p>')
+        if i == 2:
+            details.append('<p>2008 archive · House symposiums</p><ul>'+''.join(f'<li>{current_name(slug)} — <cite>{title}</cite></li>' for slug,title,_ in SYMPOSIUMS)+'</ul>')
+        if i == 3:
+            details.append('<p>Vishwamitra and Valmiki were tied before three further rounds decided the result.</p>')
+        if i == 7:
+            details.append('<p>The medal ribbons read “XXIX Annual Aquatic Meet” and “Khel Mela 2025–2026”.</p>')
+        source = SOURCE_LINKS[r['source']].replace(' ','%20')
+        details.append(f'<p class="house-archive__source">Source: <a href="{source}">{r["source"]}</a></p>')
+        rows.append(f'''<li><details id="event-{i}"><summary><span class="house-archive__date">{r['when']}</span><span>{r['event']}</span><span class="house-archive__plus" aria-hidden="true">+</span></summary><div class="house-archive__detail">{''.join(details)}</div></details></li>''')
+    return '<ol class="house-archive__list">'+''.join(rows)+'</ol>'
+
+
+GALLERY_THEATRE = {
+    'vasishtha': ('vasistha25-company-1600.webp', 'Vasishta performers gathered after Vantara', 'The company after Vantara · 2025'),
+    'valmiki': ('valmiki25-after-1600.webp', 'Two Valmiki performers after Melora, one in body paint and one in a red coat', 'After Melora · 2025'),
+    'vishwamitra': ('vishwamitra25-guitar-1600.webp', 'Vishwamitra performers at a guitar stall on the El Diablo stage', 'A scene from El Diablo · 2025'),
+    'vyasa': ('vyasa25-make-up-1600.webp', 'A Vyasa student applying stage make-up for Ivysherin', 'Backstage at Ivysherin · 2025'),
+}
+
+
+GALLERY_SPORT = {
+    'vasishtha': ('Vasishta players gathered on the basketball court in named red shirts', 'Together on court'),
+    'valmiki': ('Valmiki players raising their hands together in named yellow shirts', 'Hands together before play'),
+    'vishwamitra': ('Vishwamitra players huddling in named green shirts', 'A team in green'),
+    'vyasa': ('Vyasa players talking courtside in named blue shirts', 'In the team circle'),
+}
+
+
+def gallery_html():
+    buttons = '<button type="button" data-house-filter="all" aria-pressed="true">All</button>'
+    buttons += ''.join(f'<button type="button" data-house-filter="{h["slug"]}" aria-pressed="false">{h["name"]}</button>' for h in PAGE_HOUSES)
+    frames = []
+    for h in PAGE_HOUSES:
+        name,alt,cap = GALLERY_THEATRE[h['slug']]
+        for j,(path,a,c) in enumerate([(img('gallery-'+h['slug']+'.jpg'), *GALLERY_SPORT[h['slug']]), ('assets/img/theatre/'+name,alt,cap)]):
+            anchor = f' id="gallery-{h["slug"]}"' if j==0 else ''
+            frames.append(f'<li{anchor} data-gallery-house="{h["slug"]}" data-house="{h["slug"]}"><figure>{photo_html(path,a,900,1125)}<figcaption><b>{h["name"]}</b><span>{c}</span></figcaption></figure></li>')
+    return f'<div class="house-gallery__filters" role="group" aria-label="Filter photographs by house" hidden>{buttons}</div><p class="house-gallery__status" role="status" aria-live="polite">8 photographs · Scroll or swipe to explore</p><ul class="house-gallery__strip" tabindex="0" aria-label="House photographs">'+''.join(frames)+'</ul>'
+
+
+def march_html():
+    photos = [
+        ('vasishtha', 'shared-march.jpg', 'Vasishta', 'Vasishta contingent with its named red banner'),
+        ('vishwamitra', 'march-green.jpg', 'Vishwamitra', 'Vishwamitra contingent with its named green banner'),
+        ('vyasa', 'march-blue.jpg', 'Vyasa', 'Vyasa contingent behind the named blue placard'),
+    ]
+    frames = ''.join(f'<figure data-house="{slug}">{photo_html(img(path),alt,1000,700).replace('loading="lazy"', 'loading="eager"')}<figcaption>{name} · On the march</figcaption></figure>' for slug,path,name,alt in photos)
+    return '<div class="house-march"><span class="house-march__ghost" aria-hidden="true">Vasishta · Valmiki · Vishwamitra · Vyasa</span><section class="house-march__viewport" tabindex="0" aria-label="March past photographs. Scroll horizontally to explore."><div class="house-march__track">'+frames+'</div></section><div class="house-march__stripes" aria-hidden="true">'+''.join(f'<i data-house="{h["slug"]}"></i>' for h in PAGE_HOUSES)+'</div></div>'

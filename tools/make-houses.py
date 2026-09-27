@@ -187,5 +187,47 @@ def main():
     print(f"  {len(PHOTOS)} photographs, {total} KB")
 
 
-if __name__ == "__main__":
-    main()
+
+# Page-specific derivatives preserve legacy assets used by Sports.
+# Natural camera colour; no tint, monochrome grade or retouching.
+EDITORIAL_PHOTOS = [
+    ('identity-vasishtha.jpg', 'houses-zip/IMG_3868.JPG', (900,1125), (.52,.48), None),
+    ('identity-valmiki.jpg', 'houses-zip/IMG_4057.JPG', (900,1125), (.48,.5), None),
+    ('identity-vishwamitra.jpg', 'houses-supplied/0C9A0853.JPG', (900,1125), (.6,.25), (.64,.15,.90,.97)),
+    ('identity-vyasa.jpg', 'houses-zip/IMG_2516.JPG', (900,1125), (.47,.5), None),
+    ('spread-vasishtha.jpg', 'houses-supplied/IMG_0618.JPG', (1600,1000), (.55,.52), None),
+    ('spread-vishwamitra.jpg', 'houses-zip/IMG_3956.JPG', (1600,1000), (.5,.5), None),
+    ('spread-valmiki.jpg', 'houses-zip/IMG_3357.JPG', (1600,1000), (.5,.5), None),
+    ('shared-march.jpg', 'houses-supplied/0C9A4241.JPG', (1600,1000), (.5,.5), None),
+    ('spread-vyasa.jpg', 'houses-zip/IMG_3905.JPG', (1600,1000), (.5,.5), None),
+]
+EDITORIAL_PHOTOS += [(name.replace('.jpg','-500.jpg'),src,(500,625),focal,box)
+                     for name,src,size,focal,box in EDITORIAL_PHOTOS[:4]]
+
+
+EDITORIAL_PHOTOS += [
+    ('gallery-'+slug+'.jpg', 'houses-zip/'+src, (900,1125), (.5,.5), None)
+    for slug,src in [('vasishtha','IMG_3491.JPG'),('valmiki','IMG_4059.JPG'),('vishwamitra','IMG_3562.JPG'),('vyasa','IMG_3850.JPG')]
+]
+
+
+EDITORIAL_PHOTOS += [
+    ('march-green.jpg', 'houses-supplied/0C9A0853.JPG', (1000,700), (.5,.5), None),
+    ('march-blue.jpg', 'houses-zip/IMG_9582.JPG', (1000,700), (.5,.5), None),
+]
+
+
+def make_editorial():
+    for name,source,(w,h),focal,box in EDITORIAL_PHOTOS:
+        im = ImageOps.exif_transpose(Image.open(os.path.join(SRC,source))).convert('RGB')
+        cut = cover(region(im,box),w,h,focal)
+        cut.save(os.path.join(OUT,name),'JPEG',quality=86,optimize=True,progressive=True)
+        print(name, w, h)
+
+
+if __name__ == '__main__':
+    if '--editorial' in sys.argv:
+        make_editorial()
+    else:
+        main()
+        make_editorial()

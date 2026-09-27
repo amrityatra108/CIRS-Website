@@ -1,482 +1,217 @@
-/* Our Houses — the journey through the four identities.
- *
- * Six pieces, each of which stands down on its own if what it needs is not
- * there. Nothing here is required for the page to be readable, and that is
- * the design rather than a nicety:
- *
- *   1. the opening frame   which house is live, and the pointer depth
- *   2. the release         the live house's colour filling the window as
- *                          the hero is scrolled past
- *   3. the chapter wipes   the outgoing colour contracting to a stripe and
- *                          opening into the incoming one
- *   4. the march           the horizontal run, and the names behind it
- *   5. the competition     the season line, one event at a time
- *   6. the gallery         expand a frame, filter by house, arrow keys
- *
- * The opening interaction itself is CSS — :has() expands the hovered or
- * focused zone — so a visitor can use this page with the script blocked. What
- * 1 adds on top is the pointer depth and a live house that survives the mouse
- * leaving, which is what the release in 2 needs.
- *
- * Pinning is position:sticky in assets/css/houses.css and nothing else, for
- * the reason cirs.css records: ScrollTrigger's own pin rewrites the document
- * with a spacer, which on this site fights Lenis and moves the boundary the
- * header's probe watches. ScrollTrigger is used here only to read progress.
- *
- * EVERYTHING WIDTH-DEPENDENT GOES THROUGH gsap.matchMedia().
- * ----------------------------------------------------------------------
- * This was first written as `if (wide.matches) { ... }` around the setup, and
- * it was wrong in a way that only showed up under test: the query is read
- * once, when the script runs, so a window that is narrow at that moment and
- * wide a second later — a pane still laying out, a phone turned on its side,
- * anyone dragging a window edge — never gets the desktop behaviour, and a
- * window that goes the other way keeps a pinned hero at 480px. matchMedia
- * builds each context when it becomes true and REVERTS everything it set when
- * it stops being true, including the inline styles, so resizing across the
- * breakpoint lands in a clean state in both directions. It also makes the
- * reduced-motion branch a context rather than a load-time decision, so the
- * page follows the setting being changed.
- */
+/* Houses: progressive enhancement, native scrolling, reversible local motion. */
 (function () {
-  "use strict";
-
-  var root = document.body;
-  if (!root.classList.contains("houses")) return;
-
-  var gsap = window.gsap;
-  var ScrollTrigger = window.ScrollTrigger;
-  if (gsap && ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
-
-  var reduced = matchMedia("(prefers-reduced-motion: reduce)");
-
-  function all(sel, from) {
-    return Array.prototype.slice.call((from || document).querySelectorAll(sel));
+  'use strict';
+  if (!document.body.classList.contains('houses')) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var gs = window.gsap, ST = window.ScrollTrigger;
+  var tablist = document.querySelector('[data-stage-tabs]');
+  var tabs = Array.from(document.querySelectorAll('[data-stage-tab]'));
+  var panels = Array.from(document.querySelectorAll('[data-stage-panel]'));
+  var stack = document.querySelector('.house-stage-stack');
+  var active = null, stageTween = null, runner = null, runnerTween = null;
+  var refreshFrame = 0;
+  function refresh() {
+    if (!ST || refreshFrame) return;
+    refreshFrame = requestAnimationFrame(function () { refreshFrame = 0; ST.refresh(); });
   }
-  function one(sel, from) { return (from || document).querySelector(sel); }
-
-  var hero = one("[data-houses-hero]");
-  var zones = all("[data-houses-zone]");
-  var fill = one("[data-houses-fill]");
-  var title = one("[data-houses-title]");
-
-  /* The live house is what the release fills the window with. It starts as
-     the first house, so a visitor who scrolls without touching anything still
-     gets a deterministic order — Vasishtha, then the rest — rather than
-     nothing at all. */
-  var live = zones.length ? zones[0] : null;
-  if (fill && live) fill.setAttribute("data-house", live.getAttribute("data-house"));
-
-  function setLive(zone) {
-    if (!zone) return;
-    live = zone;
-    zones.forEach(function (z) { z.classList.toggle("is-live", z === live); });
-    if (fill) fill.setAttribute("data-house", live.getAttribute("data-house"));
+  function cleanStage() {
+    if (stageTween) stageTween.kill();
+    if (runnerTween) runnerTween.kill();
+    if (stack) stack.querySelectorAll('.house-stage-echo').forEach(function (el) { el.remove(); });
+    if (gs) panels.forEach(function (panel) {
+      gs.set(panel.querySelectorAll(':scope>figure,:scope>.house-stage__copy,:scope>figure img,:scope>figure figcaption'), {clearProps:'transform,opacity,--sport-line'});
+    });
   }
-
-  /* A zone is a link to its chapter. Following it should leave that house
-     live, so the chapter a reader lands in is the one the hero was showing.
-     Outside every context: it is navigation, not motion. */
-  zones.forEach(function (zone) {
-    zone.addEventListener("click", function () { setLive(zone); });
-  });
-
-  /* ==========================================================
-     5. Inter-house competition
-     ----------------------------------------------------------
-     Not in a context: this is behaviour, not motion, and it is
-     wanted at every width and under reduced motion.
-
-     The panels are all on the page and all open. This collapses
-     them to one at a time and lights the matching stop, and it
-     only does so after it has run: is-driven is added here, so
-     the no-script page is the full archive rather than a single
-     event with seven hidden behind a control that does nothing.
-     ========================================================== */
-  (function competition() {
-    var track = one("[data-houses-track]");
-    var panels = all("[data-houses-panel]");
-    var stops = all("[data-houses-stop]");
-    var lineFill = one("[data-houses-line]");
-    var list = one("[data-houses-panels]");
-    if (!track || !list || !panels.length || !stops.length) return;
-
-    list.classList.add("is-driven");
-
-    function show(index) {
-      stops.forEach(function (stop, i) {
-        var on = i === index;
-        stop.classList.toggle("is-on", on);
-        stop.setAttribute("aria-current", on ? "true" : "false");
-      });
-      panels.forEach(function (panel, i) {
-        panel.classList.toggle("is-on", i === index);
-      });
-      if (!lineFill) return;
-      var visible = stops.filter(function (s) { return !s.parentNode.hidden; });
-      var at = visible.indexOf(stops[index]);
-      var of = Math.max(1, visible.length - 1);
-      lineFill.style.width = (at <= 0 ? 0 : (at / of) * 100) + "%";
-      // The line takes the colour of the house that won the event it has
-      // reached — and gives that colour up again when it reaches one that was
-      // never placed. Two of these events have no published placings at all
-      // (the house symposiums, and the 2025-2026 aquatic meet), and leaving
-      // the previous winner's colour on the line through them showed a house
-      // colour against a result this page is explicit about not having. The
-      // line falls back to var(--dark) with no house attribute set.
-      var first = one("[data-house]", panels[index]);
-      if (first) lineFill.setAttribute("data-house", first.getAttribute("data-house"));
-      else lineFill.removeAttribute("data-house");
+  function moveRunner(animate) {
+    if (!runner || !active) return;
+    var tab = tabs.find(function (el) { return el.dataset.stageTab === active; });
+    var vars = {x:tab.offsetLeft,y:tab.offsetTop,scaleX:tab.offsetWidth,duration:animate ? .5 : 0,ease:'power3.out'};
+    if (runnerTween) runnerTween.kill();
+    runnerTween = gs.to(runner, vars);
+  }
+  function activate(id, focus) {
+    if (!panels.some(function (panel) { return panel.id === id; })) return;
+    var previous = document.getElementById(active), incoming = document.getElementById(id);
+    var animate = gs && !reduced.matches && active && active !== id;
+    var direction = tabs.findIndex(function (t) { return t.dataset.stageTab === id; }) > tabs.findIndex(function (t) { return t.dataset.stageTab === active; }) ? 1 : -1;
+    cleanStage();
+    var echo;
+    if (animate && previous) {
+      // Decorative old photograph only; never duplicate IDs, controls or accessible content.
+      echo = document.createElement('div'); echo.className = 'house-stage-echo';
+      echo.setAttribute('aria-hidden','true'); echo.inert = true;
+      echo.style.width = previous.querySelector('figure').offsetWidth + 'px';
+      echo.appendChild(previous.querySelector('figure').cloneNode(true)); stack.appendChild(echo);
     }
-
-    stops.forEach(function (stop, i) {
-      stop.addEventListener("click", function () { show(i); });
-      // Left and right walk the season line, which is what a line of stops
-      // invites and what a row of buttons does not give on its own.
-      stop.addEventListener("keydown", function (event) {
-        var step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
-        if (!step) return;
-        event.preventDefault();
-        var open = stops.filter(function (s) { return !s.parentNode.hidden; });
-        var at = open.indexOf(stop);
-        var next = open[Math.min(open.length - 1, Math.max(0, at + step))];
-        if (next) { next.focus(); show(stops.indexOf(next)); }
-      });
-    });
-
-    all("[data-houses-filter]").forEach(function (button) {
-      button.addEventListener("click", function () {
-        var want = button.getAttribute("data-houses-filter");
-        all("[data-houses-filter]").forEach(function (b) {
-          var on = b === button;
-          b.classList.toggle("is-on", on);
-          b.setAttribute("aria-pressed", on ? "true" : "false");
-        });
-        var firstVisible = -1;
-        stops.forEach(function (stop, i) {
-          var keep = want === "All" || stop.getAttribute("data-cat") === want;
-          stop.parentNode.hidden = !keep;
-          panels[i].hidden = !keep;
-          if (keep && firstVisible < 0) firstVisible = i;
-        });
-        if (firstVisible >= 0) show(firstVisible);
-      });
-    });
-
-    show(0);
-    // Until the event handlers exist, the full archive is readable below and
-    // the controls stay out of both the visual and keyboard flow.
-    track.hidden = false;
-  })();
-
-  /* ==========================================================
-     6. The gallery
-     ----------------------------------------------------------
-     Also not in a context, and for the same reason. Each frame
-     becomes a button so it can be opened from the keyboard as
-     well as the pointer, and the buttons are built here rather
-     than in the markup: a control that does nothing without a
-     script should not be served to someone who has none. Left
-     and right move along the strip; the adjacent frames stay
-     visible, which is the point of a strip.
-     ========================================================== */
-  (function gallery() {
-    var strip = one("[data-houses-strip]");
-    if (!strip) return;
-    var items = all("li", strip);
-
-    items.forEach(function (item) {
-      var figure = one("figure", item);
-      if (!figure) return;
-      var button = document.createElement("button");
-      button.type = "button";
-      button.setAttribute("aria-expanded", "false");
-      figure.parentNode.insertBefore(button, figure);
-      button.appendChild(figure);
-
-      function open() {
-        items.forEach(function (other) {
-          var on = other === item;
-          other.classList.toggle("is-open", on);
-          var b = one("button", other);
-          if (b) b.setAttribute("aria-expanded", on ? "true" : "false");
-        });
-        item.scrollIntoView({ block: "nearest", inline: "nearest",
-                              behavior: reduced.matches ? "auto" : "smooth" });
-      }
-
-      button.addEventListener("click", open);
-      button.addEventListener("focus", open);
-      button.addEventListener("keydown", function (event) {
-        var step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
-        if (!step) return;
-        event.preventDefault();
-        var shown = items.filter(function (i) { return !i.hidden; });
-        var at = shown.indexOf(item);
-        var next = shown[Math.min(shown.length - 1, Math.max(0, at + step))];
-        var b = next && one("button", next);
-        if (b) b.focus();
-      });
-    });
-
-    var tabs = all("[data-houses-house]");
-    var tabGroup = one("[data-houses-tabs]");
-    function filter(slug) {
-      tabs.forEach(function (tab) {
-        var on = tab.getAttribute("data-houses-house") === slug;
-        tab.classList.toggle("is-on", on);
-        tab.setAttribute("aria-pressed", on ? "true" : "false");
-      });
-      items.forEach(function (item) {
-        var keep = slug === "all" || item.getAttribute("data-house") === slug;
-        item.hidden = !keep;
-        // A frame that is being filtered away gives up its expanded state with
-        // it. Left alone, an open frame kept .is-open while hidden: returning
-        // to "All" then showed one frame already expanded with nothing focused
-        // on it, and aria-expanded="true" sat on a button no one could reach.
-        if (!keep && item.classList.contains("is-open")) {
-          item.classList.remove("is-open");
-          var button = one("button", item);
-          if (button) button.setAttribute("aria-expanded", "false");
-        }
-      });
-    }
+    active = id;
     tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        filter(tab.getAttribute("data-houses-house"));
-      });
+      var selected = tab.dataset.stageTab === id;
+      tab.setAttribute('aria-selected',String(selected)); tab.tabIndex = selected ? 0 : -1;
+      if (selected && focus) tab.focus();
     });
-
-    // A chapter links to the portrait itself so the destination also works
-    // without script. With script, that link filters the strip to its house.
-    function applyTab(id) {
-      if (!id || id.indexOf("gallery-") !== 0) return;
-      var slug = id.slice("gallery-".length);
-      var tab = tabs.find(function (candidate) {
-        return candidate.getAttribute("data-houses-house") === slug;
-      });
-      if (tab) filter(slug);
-    }
-
-    // Two ways in, and both are needed.
-    //
-    // hashchange covers a pasted URL, a bookmark and the back button. It does
-    // NOT cover a reader clicking the link on the page: cirs.js intercepts
-    // in-page anchors to hand them to Lenis for a smooth scroll, calls
-    // preventDefault and never writes location.hash — so the chapter link
-    // scrolled the gallery into view with all four houses still showing,
-    // which is the one thing that link exists not to do. Listening for the
-    // click as well is independent of who ends up handling the navigation.
-    document.addEventListener("click", function (event) {
-      var link = event.target.closest && event.target.closest('a[href^="#gallery-"]');
-      if (link) applyTab(link.getAttribute("href").slice(1));
-    });
-    window.addEventListener("hashchange", function () {
-      applyTab((location.hash || "").replace("#", ""));
-    });
-    applyTab((location.hash || "").replace("#", ""));
-    if (tabGroup) tabGroup.hidden = false;
-  })();
-
-  /* Everything below this point is motion, and everything below this point
-     is therefore inside a context that can be reverted. */
-  if (!gsap || !ScrollTrigger || !gsap.matchMedia) return;
-
-  var mm = gsap.matchMedia();
-
-  /* ==========================================================
-     Motion at every width
-     ----------------------------------------------------------
-     The chapter wipes, the depths, and the two entrances that
-     are not width-dependent.
-     ========================================================== */
-  mm.add("(prefers-reduced-motion: no-preference)", function () {
-
-    /* ---- 3. the chapter wipes ----
-       One bar per chapter. Entering, it is a full-width band in the
-       OUTGOING house's colour; it contracts to a narrow vertical stripe at
-       the middle of the scrub, changes to the INCOMING colour there, and
-       opens out again. So the colours never cross-fade into a muddle: one
-       leaves, the other arrives, and for an instant there is only a stripe.
-
-       The first chapter's outgoing colour is its own, which makes its wipe a
-       plain opening rather than a change — correct, because the hero has just
-       filled the window with it. */
-    all("[data-houses-chapter]").forEach(function (chapter) {
-      var wipe = one("[data-houses-wipe]", chapter);
-      var ghost = one("[data-houses-ghost]", chapter);
-      var frame = one(".hch__bleed img", chapter);
-      var from = chapter.getAttribute("data-from");
-      var to = chapter.getAttribute("data-house");
-
-      if (wipe) {
-        ScrollTrigger.create({
-          trigger: chapter,
-          start: "top bottom",
-          end: "top 42%",
-          onUpdate: function (self) {
-            var p = self.progress;
-            // 1 at the edges, 0.02 in the middle: a band, a stripe, a band.
-            var w = Math.max(0.02, Math.abs(p - 0.5) * 2);
-            wipe.style.transform = "scaleX(" + w.toFixed(3) + ") scaleY(" +
-              (1 + (1 - w) * 22).toFixed(2) + ")";
-            wipe.setAttribute("data-house", p < 0.5 ? from : to);
-          }
-        });
+    panels.forEach(function (panel) { panel.hidden = panel.id !== id; });
+    moveRunner(animate);
+    if (animate) {
+      stageTween = gs.timeline({defaults:{ease:'power3.out'},onComplete:function () { if (echo) echo.remove(); }});
+      stageTween.to(echo,{x:-direction*22,opacity:0,duration:.25},0)
+        .fromTo(incoming.querySelector(':scope>figure'),{x:direction*24,opacity:0},{x:0,opacity:1,duration:.5},.08)
+        .fromTo(incoming.querySelector('.house-stage__copy'),{y:12},{y:0,duration:.4},.14);
+      if (id === 'sport') {
+        stageTween.fromTo(incoming.querySelector('figure img'),{scale:1.03},{scale:1,duration:.55},0)
+          .fromTo(incoming.querySelector('figure'),{'--sport-line':0},{'--sport-line':1,duration:.5},.08)
+          .fromTo(incoming.querySelector('figcaption'),{opacity:0,y:5},{opacity:1,y:0,duration:.3},.22);
       }
-
-      // The oversized name and the photograph move at different depths, so
-      // the chapter has some thickness to it rather than sliding as a slab.
-      if (ghost) {
-        gsap.fromTo(ghost, { xPercent: -6 }, {
-          xPercent: 6, ease: "none",
-          scrollTrigger: { trigger: chapter, start: "top bottom", end: "bottom top", scrub: 0.6 }
-        });
-      }
-      if (frame) {
-        gsap.fromTo(frame, { yPercent: -4 }, {
-          yPercent: 4, ease: "none",
-          scrollTrigger: { trigger: chapter, start: "top bottom", end: "bottom top", scrub: 0.8 }
-        });
-      }
+    }
+    refresh();
+  }
+  if (tablist && tabs.length) {
+    tablist.hidden = false; tablist.setAttribute('role','tablist');
+    if (gs) { runner=document.createElement('span'); runner.className='house-tab-runner'; runner.setAttribute('aria-hidden','true');tablist.appendChild(runner); }
+    tabs.forEach(function (tab,index) {
+      tab.setAttribute('role','tab');
+      tab.addEventListener('click',function () { activate(tab.dataset.stageTab,false); });
+      tab.addEventListener('keydown',function (event) {
+        var next;
+        if (event.key==='ArrowRight'||event.key==='ArrowDown') next=(index+1)%tabs.length;
+        if (event.key==='ArrowLeft'||event.key==='ArrowUp') next=(index+tabs.length-1)%tabs.length;
+        if (event.key==='Home') next=0;
+        if (event.key==='End') next=tabs.length-1;
+        if (next===undefined) return;
+        event.preventDefault();activate(tabs[next].dataset.stageTab,true);
+      });
     });
-
-    /* ---- the symposium flats, and the four bars of the ending ---- */
-    var set = one("[data-houses-symposiums]");
-    if (set) {
-      gsap.from(all("li", set), {
-        opacity: 0, yPercent: 12, duration: 0.85, ease: "power3.out", stagger: 0.09,
-        scrollTrigger: { trigger: set, start: "top 86%", once: true }
-      });
-    }
-    var bars = all(".hend__bars span");
-    if (bars.length) {
-      gsap.from(bars, {
-        scaleX: 0, transformOrigin: "0% 50%", duration: 0.8, ease: "expo.out", stagger: 0.08,
-        scrollTrigger: { trigger: ".hend__bars", start: "top 90%", once: true }
-      });
-    }
-    if (title) {
-      gsap.from(title, { yPercent: 16, opacity: 0, duration: 1.1, ease: "expo.out", delay: 0.95 });
-    }
+    panels.forEach(function (panel) { panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','tab-'+panel.id);panel.tabIndex=0; });
+    activate('march',false);
+  }
+  var filters=Array.from(document.querySelectorAll('[data-house-filter]'));
+  var frames=Array.from(document.querySelectorAll('[data-gallery-house]'));
+  var strip=document.querySelector('.house-gallery__strip');
+  var status=document.querySelector('.house-gallery__status');
+  var selectedFrame=null;
+  frames.forEach(function (frame,index) {
+    var img=frame.querySelector('img'),button=document.createElement('button');
+    button.type='button';button.className='house-gallery__select';button.setAttribute('aria-pressed','false');
+    button.setAttribute('aria-label','Expand photograph '+(index+1)+': '+img.alt);
+    img.parentNode.insertBefore(button,img);button.appendChild(img);
+    button.addEventListener('click',function () { selectFrame(selectedFrame===frame?null:frame,false); });
   });
-
-  /* ==========================================================
-     Motion above the breakpoint only
-     ----------------------------------------------------------
-     The release and the march. Both are pinned or scrubbed
-     horizontal motion, which is exactly what the mobile layout
-     in houses.css does not have — so they are built when the
-     window is wide and reverted when it is not, rather than
-     decided once at load.
-     ========================================================== */
-  mm.add("(min-width: 901px) and (prefers-reduced-motion: no-preference)", function () {
-
-    /* ---- 1. the opening frame: which house is live, and the depth ----
-       Inside the context because both only make sense where the zones
-       expand; reverting drops the listeners with the context. */
-    var offs = [];
-    function on(el, type, fn) {
-      el.addEventListener(type, fn);
-      offs.push(function () { el.removeEventListener(type, fn); });
+  function selectFrame(frame,focus) {
+    selectedFrame=frame;
+    frames.forEach(function (item) {var yes=item===frame;item.classList.toggle('is-selected',yes);item.querySelector('button').setAttribute('aria-pressed',String(yes));});
+    if (frame) {
+      if (focus) frame.querySelector('button').focus({preventScroll:true});
+      strip.scrollTo({left:frame.offsetLeft-strip.offsetLeft-(strip.clientWidth-frame.offsetWidth)/2,behavior:reduced.matches?'instant':'smooth'});
     }
-    var fine = matchMedia("(hover: hover) and (pointer: fine)");
-    zones.forEach(function (zone) {
-      // The expansion itself stays in CSS, and .is-live deliberately carries
-      // no width: the class outlives the pointer so the release knows whose
-      // colour to use, and a class that outlives the pointer must not hold
-      // the layout open.
-      on(zone, "pointerenter", function () { setLive(zone); });
-      on(zone, "focus", function () { setLive(zone); });
-      if (!fine.matches) return;
-      // Depth, on the photograph only, and small: about 10px at the edge of
-      // the zone. A transform, so it costs no layout.
-      on(zone, "pointermove", function (event) {
-        var box = zone.getBoundingClientRect();
-        var x = (event.clientX - box.left) / box.width - 0.5;
-        var y = (event.clientY - box.top) / box.height - 0.5;
-        zone.style.setProperty("--px", (-x * 20).toFixed(1) + "px");
-        zone.style.setProperty("--py", (-y * 14).toFixed(1) + "px");
-      });
-      on(zone, "pointerleave", function () {
-        zone.style.removeProperty("--px");
-        zone.style.removeProperty("--py");
-      });
+  }
+  if (strip) strip.addEventListener('keydown',function (event) {
+    if (event.altKey||event.ctrlKey||event.metaKey) return;
+    if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+    event.preventDefault();
+    var visible=frames.filter(function (frame) {return !frame.hidden;});
+    var current=event.target.closest('[data-gallery-house]')||selectedFrame;
+    var index=visible.indexOf(current);
+    var next=event.key==='Home'?0:event.key==='End'?visible.length-1:Math.max(0,Math.min(visible.length-1,index+(event.key==='ArrowRight'?1:-1)));
+    selectFrame(visible[next],true);
+  });
+  function filterHouse(house) {
+    selectFrame(null,false);
+    filters.forEach(function (button) {button.setAttribute('aria-pressed',String(button.dataset.houseFilter===house));});
+    frames.forEach(function (frame) {frame.hidden=house!=='all'&&frame.dataset.galleryHouse!==house;});
+    strip.scrollLeft=0;
+    status.textContent=frames.filter(function (frame) {return !frame.hidden;}).length+' photographs · Scroll or swipe to explore';
+    refresh();
+  }
+  if (filters.length) {
+    document.querySelector('.house-gallery__filters').hidden=false;
+    filters.forEach(function (button) {button.addEventListener('click',function () {filterHouse(button.dataset.houseFilter);});});
+  }
+  function followHash() {
+    var id=location.hash.slice(1);
+    if (panels.some(function (panel) {return panel.id===id;})) activate(id,false);
+    if (id.indexOf('gallery-')===0 && filters.some(function (button) {return button.dataset.houseFilter===id.slice(8);})) filterHouse(id.slice(8));
+    var target=document.getElementById(id);
+    if (target&&target.tagName==='DETAILS') target.open=true;
+    if (target && (id.indexOf('gallery-')===0||id.indexOf('event-')===0||panels.includes(target))) {
+      requestAnimationFrame(function () {refresh();target.scrollIntoView({block:'start',behavior:'instant'});});
+    }
+  }
+  document.addEventListener('click',function (event) {
+    var link=event.target.closest('a[href^="#"]');if(!link)return;
+    var id=link.getAttribute('href').slice(1),target=document.getElementById(id);
+    if (id.indexOf('gallery-')===0) filterHouse(id.slice(8));
+    if(target&&target.tagName==='DETAILS')target.open=true;
+    if(location.hash==='#'+id)followHash();
+  });
+  document.querySelectorAll('.house-archive details').forEach(function (el) {el.addEventListener('toggle',refresh);});
+  window.addEventListener('hashchange',followHash);
+  window.addEventListener('resize',function () {moveRunner(false);});
+  reduced.addEventListener('change',function () {cleanStage();moveRunner(false);});
+  followHash();
+
+  if (!gs || !ST) return; // All interactions above work without the animation libraries.
+  gs.registerPlugin(ST);
+  var media=gs.matchMedia();
+  media.add('(prefers-reduced-motion: no-preference)',function () {
+    document.body.classList.add('houses-motion');
+    var chapters=Array.from(document.querySelectorAll('.house-spread'));
+    chapters.forEach(function (chapter,index) {
+      var outgoing=chapter.querySelector('.house-wipe__out'),incoming=chapter.querySelector('.house-wipe__in');
+      var wipe=gs.timeline({scrollTrigger:{id:'houses-wipe-'+index,trigger:chapter,start:'top bottom',end:'top 42%',scrub:true},defaults:{ease:'power2.inOut'}});
+      // Switch at the same 1.2%-wide stripe: never interpolate house colours.
+      wipe.fromTo(outgoing,{scaleX:index?1:.012,scaleY:1},{scaleX:index?.012:1,duration:.28},0);
+      if(!index)wipe.to(outgoing,{scaleX:.012,duration:.16},.28);
+      var turn=index?.28:.44;
+      wipe.set(outgoing,{opacity:0},turn).set(incoming,{scaleX:.012,scaleY:1,opacity:.96},turn)
+        .to(incoming,{scaleX:1,duration:.22},turn)
+        .to(incoming,{scaleY:.004,opacity:0,duration:.34},turn+.22);
+      // A bounded entrance: content is settled while the chapter is still entering.
+      var enter=gs.timeline({scrollTrigger:{id:'houses-enter-'+index,trigger:chapter,start:'top 94%',end:'top 38%',scrub:true},defaults:{ease:'power2.out'}});
+      enter.from(chapter.querySelector('.house-spread__index'),{y:12,duration:.2},0)
+        .from(chapter.querySelector('.house-spread__colour'),{y:10,duration:.2},.03)
+        .from(chapter.querySelector('h2>span'),{yPercent:105,duration:.35},.06)
+        .from(chapter.querySelector('figure'),{y:18,scale:.985,opacity:.5,duration:.32},.14)
+        .from(chapter.querySelectorAll('.house-copy-block'),{y:14,stagger:.05,duration:.3},.2)
+        .from(chapter.querySelector('.house-signature-line'),{scaleX:0,duration:.4},.04);
+      gs.fromTo(chapter.querySelector('.house-spread__ghost'),{xPercent:-3},{xPercent:3,ease:'none',scrollTrigger:{id:'houses-ghost-'+index,trigger:chapter,start:'top bottom',end:'bottom top',scrub:true}});
+      gs.fromTo(chapter.querySelector('figure img'),{yPercent:1.5,scale:1.035},{yPercent:-1.5,scale:1.035,ease:'none',scrollTrigger:{id:'houses-photo-'+index,trigger:chapter,start:'top bottom',end:'bottom top',scrub:true}});
     });
-
-    /* ---- 2. the release ----
-       The sticky stage stands still through the second 84vh of its track, and
-       that travel is the scrub distance. Across it the title rises away, the
-       three quiet zones fade back, and the live house's colour comes up over
-       the whole window — which is the handover into its chapter.
-
-       Opacity and transform only, and it reverses because it reads progress
-       rather than running a sequence of toggles. */
-    var track = hero && one(".hsx__track", hero);
-    var say = hero && one(".hsx__say", hero);
-    if (track && fill) {
-      ScrollTrigger.create({
-        trigger: track,
-        start: "top top",
-        end: "bottom bottom",
-        onUpdate: function (self) {
-          // Nothing happens through the first third: the opening frame is
-          // meant to be looked at before it starts dissolving.
-          var p = Math.max(0, (self.progress - 0.34) / 0.66);
-          fill.style.opacity = (p * 0.96).toFixed(3);
-          if (say) {
-            say.style.transform = "translate3d(0," + (-p * 26).toFixed(1) + "vh,0)";
-            say.style.opacity = (1 - Math.min(1, p * 1.5)).toFixed(3);
-          }
-          zones.forEach(function (z) {
-            z.style.opacity = z === live ? "1" : (1 - p * 0.85).toFixed(3);
-          });
-        }
-      });
-    }
-
-    /* ---- 4. the march ----
-       The run is pushed sideways as the section passes, and the names behind
-       it travel further, so the two read as separate distances. It is NOT
-       pinned and it does not take the wheel: the page keeps scrolling
-       normally throughout, which is what keeps this from becoming a section
-       a reader can get stuck in. Below the breakpoint, and under reduced
-       motion, the run keeps its own native horizontal scroll instead. */
-    var march = one("[data-houses-march]");
-    var run = march && one("[data-march-run]", march);
-    var names = march && one("[data-march-names]", march);
-    if (run) {
-      run.classList.add("is-driven");
-      // How far it has to travel to show its last frame, measured rather
-      // than assumed, and re-measured when the window changes.
-      gsap.to(run, {
-        x: function () { return -Math.max(0, run.scrollWidth - run.clientWidth + 40); },
-        ease: "none",
-        scrollTrigger: {
-          trigger: march, start: "top 82%", end: "bottom 18%",
-          scrub: 0.7, invalidateOnRefresh: true
-        }
-      });
-      if (names) {
-        gsap.fromTo(names, { xPercent: 4 }, {
-          xPercent: -26, ease: "none",
-          scrollTrigger: { trigger: march, start: "top bottom", end: "bottom top", scrub: 0.9 }
-        });
-      }
-    }
-
-    // What matchMedia cannot revert on its own: the listeners above, the
-    // class on the run, and the inline properties the two scrubs write
-    // straight onto style rather than through gsap.set.
+    var firstOut=chapters[0].querySelector('.house-wipe__out');
+    function handoff(event) { firstOut.style.backgroundColor=getComputedStyle(event.currentTarget).getPropertyValue('--house-colour'); }
+    var zones=Array.from(document.querySelectorAll('.house-zone'));
+    zones.forEach(function (zone) {zone.addEventListener('pointerenter',handoff);zone.addEventListener('focus',handoff);});
+    var meet=document.querySelector('#competition');
+    gs.timeline({scrollTrigger:{id:'houses-converge',trigger:meet,start:'top bottom',end:'top 42%',scrub:true}})
+      .fromTo(meet.querySelectorAll('.house-convergence span'),{xPercent:function(i){return (i-1.5)*110;},y:function(i){return i%2?60:-60;},scaleY:9},{xPercent:0,y:0,scaleY:1,duration:.6,ease:'power2.inOut',stagger:.035},0)
+      .from(meet.querySelector('.house-section-heading'),{y:24,duration:.35},.25);
+    var archive=document.querySelector('#record');
+    gs.fromTo(archive.querySelector('.house-archive-wash'),{opacity:.18},{opacity:0,ease:'none',scrollTrigger:{id:'houses-archive-drain',trigger:archive,start:'top bottom',end:'top 55%',scrub:true}});
+    gs.from(archive.querySelector('.house-archive-line'),{scaleX:0,ease:'none',scrollTrigger:{id:'houses-archive',trigger:archive,start:'top 95%',end:'top 48%',scrub:true}});
+    var closing=document.querySelector('#together');
+    gs.timeline({scrollTrigger:{id:'houses-closing',trigger:closing,start:'top bottom',end:'top 18%',scrub:true},defaults:{ease:'power2.inOut'}})
+      .fromTo(closing.querySelectorAll('.house-closing-reveal span'),{scaleX:.012,scaleY:0},{scaleX:.012,scaleY:1,duration:.26,stagger:.025},0)
+      .to(closing.querySelectorAll('.house-closing-reveal span'),{scaleX:1,duration:.25},.32)
+      .to(closing.querySelectorAll('.house-closing-reveal span'),{xPercent:function(i){return (1.5-i)*100;},scaleX:.008,duration:.28},.59)
+      .to(closing.querySelectorAll('.house-closing-reveal span'),{opacity:0,duration:.12},.85)
+      .from(closing.querySelector('h2'),{y:28,duration:.3},.69);
+    refresh();
     return function () {
-      offs.forEach(function (off) { off(); });
-      if (run) run.classList.remove("is-driven");
-      if (fill) fill.style.removeProperty("opacity");
-      if (say) { say.style.removeProperty("transform"); say.style.removeProperty("opacity"); }
-      zones.forEach(function (z) {
-        z.style.removeProperty("opacity");
-        z.style.removeProperty("--px");
-        z.style.removeProperty("--py");
-      });
+      document.body.classList.remove('houses-motion');
+      firstOut.style.removeProperty('background-color');
+      zones.forEach(function(zone){zone.removeEventListener('pointerenter',handoff);zone.removeEventListener('focus',handoff);});
     };
   });
+  // Desktop march travels with the document. Focusing the strip gives native horizontal control.
+  media.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)',function () {
+    var march=document.querySelector('.house-march'),viewport=march.querySelector('.house-march__viewport'),track=march.querySelector('.house-march__track');
+    var tween=gs.to(track,{x:function(){return -Math.max(0,track.scrollWidth-viewport.clientWidth);},ease:'none',scrollTrigger:{id:'houses-march',trigger:march,start:'top 90%',end:'bottom 15%',scrub:true,invalidateOnRefresh:true}});
+    gs.to(march.querySelector('.house-march__ghost'),{xPercent:-7,ease:'none',scrollTrigger:{id:'houses-march-type',trigger:march,start:'top bottom',end:'bottom top',scrub:true}});
+    gs.fromTo(march.querySelector('.house-march__stripes'),{xPercent:-3},{xPercent:3,ease:'none',scrollTrigger:{id:'houses-march-stripes',trigger:march,start:'top bottom',end:'bottom top',scrub:true}});
+    gs.to(march,{'--track-shift':'3%',ease:'none',scrollTrigger:{id:'houses-march-grid',trigger:march,start:'top bottom',end:'bottom top',scrub:true}});
+    function manual(){tween.scrollTrigger.disable(false);gs.set(track,{x:0});}
+    function automatic(){viewport.scrollLeft=0;tween.scrollTrigger.enable();refresh();}
+    viewport.addEventListener('focus',manual);viewport.addEventListener('blur',automatic);
+    return function(){viewport.removeEventListener('focus',manual);viewport.removeEventListener('blur',automatic);viewport.scrollLeft=0;};
+  });
+  if(document.fonts)document.fonts.ready.then(refresh);
+  window.addEventListener('load',refresh,{once:true});
 })();
