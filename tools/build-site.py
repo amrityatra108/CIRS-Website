@@ -282,10 +282,11 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-7",
+        "cache_suffix": "-curriculum-8",
         # No banner. The page opens on its own paper composition, built in
-        # tools/pages/curriculum.html: the heading beside the Junior School
-        # photograph, with the page's own section index under it. That index
+        # tools/pages/curriculum.html: the heading beside a pair of classroom
+        # photographs, the page's facts on a rule, and its own section index
+        # under them. That index
         # is visible and labelled, so the floating "On this page" control
         # would be a second copy of it; hence jump False. The opening is on
         # paper, so the header wears dark lettering: hence litehead.

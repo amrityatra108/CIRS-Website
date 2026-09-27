@@ -28,14 +28,14 @@
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=113-curriculum-7">
-<link rel="stylesheet" href="assets/css/cirs.css?b=113-curriculum-7">
-<link rel="stylesheet" href="assets/css/pages.css?b=113-curriculum-7">
+<link rel="stylesheet" href="assets/css/fonts.css?b=113-curriculum-8">
+<link rel="stylesheet" href="assets/css/cirs.css?b=113-curriculum-8">
+<link rel="stylesheet" href="assets/css/pages.css?b=113-curriculum-8">
 
-<link rel="stylesheet" href="assets/css/curriculum.css?b=113-curriculum-7">
-<link rel="stylesheet" href="assets/css/typography.css?b=113-curriculum-7">
-<link rel="stylesheet" href="assets/css/footer.css?b=113-curriculum-7-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=113-curriculum-7-nav-3">
+<link rel="stylesheet" href="assets/css/curriculum.css?b=113-curriculum-8">
+<link rel="stylesheet" href="assets/css/typography.css?b=113-curriculum-8">
+<link rel="stylesheet" href="assets/css/footer.css?b=113-curriculum-8-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=113-curriculum-8-nav-3">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -260,43 +260,58 @@
   </div>
 </div>
 <main id="main">
-<!-- Curriculum: "a path through learning". Each section has one job: the
-     opening orients, the route shows the grades, the table compares the two
-     senior pathways, the directory lists subjects, and the values section
-     places study inside school life. The close is the shared closing scene,
-     given this page's own words in tools/build-site.py.
+<!-- Curriculum: an editorial path through learning at CIRS. The page moves
+     from the approach, to the route through the grades, to the two senior
+     pathways, to the subjects themselves, and closes on the residential day
+     that study sits inside. The close is the shared closing scene, given
+     this page's own words in tools/build-site.py.
 
      Content sources, and what is still open, are recorded in
      docs/curriculum-content.md. Nothing here should state more than that
      file can support. -->
-<header class="cur-open" id="top">
-  <div class="wrap cur-open__grid">
-    <div class="cur-open__text">
-      <p class="cur-eyebrow">Curriculum &middot; Grades V to XII</p>
-      <h1 class="cur-open__title">A foundation. <em>Then a direction.</em></h1>
-      <p class="cur-open__lead">Study through the CBSE pathway from Grade V. In Grades XI and
-        XII, continue with CBSE or choose the IB Diploma Programme.</p>
-      <p class="cur-open__actions">
-        <a class="btn btn--primary btn--lg" href="#pathways">Compare CBSE and IB</a>
-        <a class="cur-link" href="#subjects">Explore subjects</a>
-      </p>
-    </div>
-    <figure class="cur-open__figure">
-      <div class="cur-open__frame">
-        <img src="assets/img/hrun/02-lesson.jpg"
-             alt="Teacher demonstrating a science experiment to CIRS students"
-             width="1000" height="1250" fetchpriority="high" decoding="async">
+<header class="cur-hero" id="top">
+  <div class="wrap">
+    <div class="cur-hero__grid">
+      <div class="cur-hero__text">
+        <p class="cur-trail"><a href="the-cirs-experience.html">Student Life</a><span aria-hidden="true">/</span>Curriculum</p>
+        <h1 class="cur-hero__title">One foundation. <em>Then a direction of&nbsp;one&rsquo;s&nbsp;own.</em></h1>
+        <p class="cur-hero__lead">From Grade V, students follow the CBSE curriculum, in English, on
+          one campus. In Grades XI and XII they continue with CBSE or choose the IB Diploma
+          Programme &mdash; and all of it is studied inside the life of a residential school.</p>
+        <p class="cur-hero__actions">
+          <a class="btn btn--primary btn--lg" href="#pathways">Compare CBSE and IB</a>
+          <a class="cur-link" href="#subjects">Explore subjects</a>
+        </p>
       </div>
-      <figcaption>Learning through a classroom demonstration.</figcaption>
-    </figure>
+      <div class="cur-hero__media">
+        <figure class="cur-hero__main">
+          <img src="assets/img/hrun/02-lesson.jpg"
+               alt="Teacher demonstrating a science experiment to CIRS students"
+               width="1000" height="1250" fetchpriority="high" decoding="async">
+        </figure>
+        <figure class="cur-hero__inset">
+          <img src="assets/img/senior-school.jpg"
+               alt="Senior students at a laboratory bench with a laptop and apparatus"
+               width="1200" height="1500" decoding="async">
+        </figure>
+        <p class="cur-hero__caption">Learning by demonstration, and by doing.</p>
+      </div>
+    </div>
+    <dl class="cur-facts">
+      <div><dt>Grades</dt><dd>V to XII</dd></div>
+      <div><dt>Medium</dt><dd>English</dd></div>
+      <div><dt>Affiliation</dt><dd>CBSE, New Delhi</dd></div>
+      <div><dt>Grades XI&ndash;XII</dt><dd>CBSE or IB Diploma</dd></div>
+    </dl>
   </div>
   <nav class="cur-index" aria-label="On this page">
     <div class="wrap">
       <div class="cur-index__inner">
         <p class="cur-index__label" aria-hidden="true">On this page</p>
         <ol class="cur-index__list">
+          <li><a href="#approach">Approach</a></li>
           <li><a href="#journey">Grade journey</a></li>
-          <li><a href="#pathways">Compare pathways</a></li>
+          <li><a href="#pathways">Pathways</a></li>
           <li><a href="#subjects">Subjects</a></li>
           <li><a href="#beyond">School life</a></li>
         </ol>
@@ -305,42 +320,104 @@
   </nav>
 </header>
 
+<section class="cur-sec cur-approach" id="approach" aria-labelledby="approach-title">
+  <div class="wrap">
+    <div class="cur-approach__grid">
+      <div class="cur-approach__head">
+        <p class="cur-eyebrow">Our approach</p>
+        <h2 class="cur-h2" id="approach-title">Broad for as long as it can be. <em>Deep when it counts.</em></h2>
+      </div>
+      <div class="cur-approach__text">
+        <p class="cur-approach__lead">A student can join in Grade V and leave after Grade XII
+          without changing schools: one faculty, one campus and one set of expectations,
+          carried through eight years rather than handed from school to school.</p>
+        <p>The early years keep a broad course. Nothing is narrowed until it has to be; in
+          Grade XI a student chooses what to study in depth, and the last two years are spent
+          on it.</p>
+      </div>
+    </div>
+
+    <ol class="cur-tenets">
+      <li class="rv">
+        <span class="cur-tenets__num" aria-hidden="true">01</span>
+        <h3 class="cur-tenets__title">Continuity</h3>
+        <p>Eight years on one campus, from the first year of the Junior School to the Class XII
+          Board examination.</p>
+      </li>
+      <li class="rv">
+        <span class="cur-tenets__num" aria-hidden="true">02</span>
+        <h3 class="cur-tenets__title">Breadth, then depth</h3>
+        <p>A broad course to Grade X. Then a CBSE stream, or six IB subjects and the Diploma
+          core.</p>
+      </li>
+      <li class="rv">
+        <span class="cur-tenets__num" aria-hidden="true">03</span>
+        <h3 class="cur-tenets__title">Values alongside</h3>
+        <p>The Chinmaya Vision Programme runs across every grade, beside the timetable rather
+          than inside one lesson.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
 <section class="cur-sec cur-journey" id="journey" aria-labelledby="journey-title">
   <div class="wrap">
-    <div class="cur-head">
-      <p class="cur-eyebrow">Grade journey</p>
-      <h2 class="cur-h2" id="journey-title">One route to Grade&nbsp;X, <em>two beyond it.</em></h2>
+    <div class="cur-head cur-head--split">
+      <div>
+        <p class="cur-eyebrow">Grade journey</p>
+        <h2 class="cur-h2" id="journey-title">One route to Grade&nbsp;X, <em>two beyond it.</em></h2>
+      </div>
+      <p class="cur-intro">Every student follows the CBSE curriculum from Grade V and sits the
+        CBSE Board examination at the end of Grade X. The choice of pathway covers the final
+        two years only.</p>
     </div>
+
     <ol class="cur-route">
       <li class="cur-route__stage">
+        <span class="cur-route__num" aria-hidden="true">01</span>
+        <span class="cur-route__rail" aria-hidden="true"></span>
+        <figure class="cur-route__figure">
+          <img src="assets/img/junior-school.jpg"
+               alt="Junior School students building a wheeled robot"
+               width="1200" height="1500" loading="lazy" decoding="async">
+        </figure>
         <p class="cur-route__years">Grades V&ndash;VIII</p>
         <h3 class="cur-route__name">The foundation</h3>
-        <span class="cur-route__rail" aria-hidden="true"></span>
-        <p class="cur-route__text">CBSE Science, Mathematics, English, two additional languages
-          and AI in the Junior School. Published Class X results list Hindi, Sanskrit, Tamil
-          and French as language subjects; ask CIRS which options run in each grade.</p>
+        <p class="cur-route__text">Science, Mathematics, English, two additional languages and
+          artificial intelligence. Published Class X results list Hindi, Sanskrit, Tamil and
+          French as language subjects; ask which options run in each grade.</p>
       </li>
       <li class="cur-route__stage">
+        <span class="cur-route__num" aria-hidden="true">02</span>
+        <span class="cur-route__rail" aria-hidden="true"></span>
+        <figure class="cur-route__figure">
+          <img src="assets/img/adm-examination.jpg"
+               alt="CIRS students writing an examination"
+               width="1000" height="750" loading="lazy" decoding="async">
+        </figure>
         <p class="cur-route__years">Grades IX&ndash;X</p>
         <h3 class="cur-route__name">The first Board year</h3>
-        <span class="cur-route__rail" aria-hidden="true"></span>
-        <p class="cur-route__text">The same broad course, carried to the CBSE Board
-          examination at the end of Grade X.</p>
+        <p class="cur-route__text">The same broad course, carried to the CBSE Board examination
+          at the end of Grade X &mdash; the first external examination a CIRS student sits.</p>
       </li>
       <li class="cur-route__stage cur-route__stage--fork">
+        <span class="cur-route__num" aria-hidden="true">03</span>
+        <span class="cur-route__rail" aria-hidden="true"></span>
         <p class="cur-route__years">Grades XI&ndash;XII</p>
         <h3 class="cur-route__name">A choice of pathway</h3>
         <ul class="cur-route__branches">
           <li>
             <a href="#cbse">
-              <span class="cur-route__seg" aria-hidden="true"></span>
-              <span class="cur-route__branch"><b>CBSE</b> a senior stream</span>
+              <span class="cur-route__branch-tag">CBSE</span>
+              <span class="cur-route__branch-name">Engineering, Medicine or Management</span>
+              <span class="cur-route__branch-note">A senior stream, closed by the Class XII Board examination</span>
             </a>
           </li>
           <li>
             <a href="#ib">
-              <span class="cur-route__seg" aria-hidden="true"></span>
-              <span class="cur-route__branch"><b>IB Diploma</b> six subjects and the core</span>
+              <span class="cur-route__branch-tag">IB Diploma</span>
+              <span class="cur-route__branch-name">Six subjects and the Diploma core</span>
+              <span class="cur-route__branch-note">Examinations and coursework, graded out of 45</span>
             </a>
           </li>
         </ul>
@@ -349,67 +426,105 @@
   </div>
 </section>
 
-<section class="cur-sec cur-compare" id="pathways" aria-labelledby="pathways-title">
+<section class="cur-sec cur-paths" id="pathways" aria-labelledby="pathways-title">
   <div class="wrap">
     <div class="cur-head cur-head--split">
       <div>
-        <p class="cur-eyebrow">Compare pathways</p>
+        <p class="cur-eyebrow">Pathways</p>
         <h2 class="cur-h2" id="pathways-title">Two pathways for <em>Grades XI and XII.</em></h2>
       </div>
-      <p class="cur-intro">Every student follows the CBSE curriculum from Grade V to Grade X and
-        sits the CBSE Board examination at the end of Grade X. The choice below covers the final
-        two years only. Neither route is better in general: the right one depends on the subjects
-        a student wants and the next step they have in mind.</p>
+      <p class="cur-intro">Neither route is better in general: the right one depends on the
+        subjects a student wants and the next step they have in mind.</p>
     </div>
 
-    <table class="cur-compare__table">
-      <caption class="sr-only">CBSE and the IB Diploma Programme compared for Grades XI and XII</caption>
-      <thead>
-        <tr>
-          <td></td>
-          <th scope="col">CBSE <span>Grades XI&ndash;XII</span></th>
-          <th scope="col">IB Diploma Programme <span>Grades XI&ndash;XII</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">How it is built</th>
-          <td><span class="cur-compare__prog">CBSE</span>A stream (Engineering, Medicine or
-            Management), each built on English and a set of core subjects, studied for two
-            years.</td>
-          <td><span class="cur-compare__prog">IB Diploma</span>Six subjects from six groups,
-            alongside the Diploma core: Theory of Knowledge, the Extended Essay and Creativity,
-            Activity, Service.</td>
-        </tr>
-        <tr>
-          <th scope="row">Assessment</th>
-          <td><span class="cur-compare__prog">CBSE</span>The CBSE Board examination at the end
-            of Grade XII.</td>
-          <td><span class="cur-compare__prog">IB Diploma</span>Examinations at the end of Grade
-            XII, with coursework assessed during the programme. Each subject is graded 1&ndash;7;
-            Theory of Knowledge and the Extended Essay add up to 3 points, for 45 in all.</td>
-        </tr>
-        <tr>
-          <th scope="row">Choosing subjects</th>
-          <td><span class="cur-compare__prog">CBSE</span>Choose a stream. The stream sets the
-            core subjects; electives are chosen alongside them.</td>
-          <td><span class="cur-compare__prog">IB Diploma</span>Choose one subject from each group,
-            three or four at Higher Level and the rest at Standard Level.</td>
-        </tr>
-        <tr>
-          <th scope="row">At CIRS</th>
-          <td><span class="cur-compare__prog">CBSE</span>Engineering, Medicine and Management
-            streams. Ask the school for this year&rsquo;s electives.</td>
-          <td><span class="cur-compare__prog">IB Diploma</span>Fifteen subjects across the six
-            groups. A combination runs when enough students choose it.</td>
-        </tr>
-        <tr>
-          <th scope="row">Subjects</th>
-          <td><span class="cur-compare__prog">CBSE</span><a class="cur-link" href="#cbse">CBSE senior streams</a></td>
-          <td><span class="cur-compare__prog">IB Diploma</span><a class="cur-link" href="#ib">IB Diploma subjects</a></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="cur-paths__cards">
+      <article class="cur-card cur-card--cbse rv" aria-labelledby="card-cbse-title">
+        <figure class="cur-card__figure">
+          <img src="assets/img/results-cbse-lab.webp"
+               alt="A teacher demonstrates apparatus to students gathered round a laboratory bench"
+               width="1800" height="1200" loading="lazy" decoding="async">
+        </figure>
+        <div class="cur-card__body">
+          <p class="cur-card__tag">Central Board of Secondary Education, New Delhi</p>
+          <h3 class="cur-card__title" id="card-cbse-title">CBSE</h3>
+          <p class="cur-card__text">A stream &mdash; Engineering, Medicine or Management &mdash;
+            built on English and a set of core subjects, studied for two years.</p>
+          <dl class="cur-card__facts">
+            <div><dt>Grades</dt><dd>V to XII at CIRS; streams in XI and XII</dd></div>
+            <div><dt>Structure</dt><dd>One stream: English, its core subjects and electives</dd></div>
+            <div><dt>Assessment</dt><dd>CBSE Board examinations in Grades X and XII</dd></div>
+          </dl>
+          <p class="cur-card__more"><a class="cur-arrow" href="curriculum/cbse.html">Read the CBSE pathway in full</a></p>
+        </div>
+      </article>
+      <article class="cur-card cur-card--ib rv" aria-labelledby="card-ib-title">
+        <figure class="cur-card__figure">
+          <img src="assets/img/results-ib-lab.webp"
+               alt="A student looks down a microscope at a laboratory bench, with others working behind her"
+               width="1800" height="1200" loading="lazy" decoding="async">
+        </figure>
+        <div class="cur-card__body">
+          <p class="cur-card__tag">International Baccalaureate</p>
+          <h3 class="cur-card__title" id="card-ib-title">IB Diploma Programme</h3>
+          <p class="cur-card__text">Six subjects from six groups, alongside the Diploma core:
+            Theory of Knowledge, the Extended Essay and Creativity, Activity, Service.</p>
+          <dl class="cur-card__facts">
+            <div><dt>Grades</dt><dd>XI and XII</dd></div>
+            <div><dt>Structure</dt><dd>Six subjects, three or four at Higher Level, and the Diploma core</dd></div>
+            <div><dt>Assessment</dt><dd>Examinations and coursework; 45 points in all</dd></div>
+          </dl>
+          <p class="cur-card__more"><a class="cur-arrow" href="curriculum/ib-diploma.html">Read the IB Diploma guide in full</a></p>
+        </div>
+      </article>
+    </div>
+
+    <div class="cur-compare">
+      <h3 class="cur-h3">At a glance</h3>
+      <table class="cur-compare__table">
+        <caption class="sr-only">CBSE and the IB Diploma Programme compared for Grades XI and XII</caption>
+        <thead>
+          <tr>
+            <td></td>
+            <th scope="col">CBSE <span>Grades XI&ndash;XII</span></th>
+            <th scope="col">IB Diploma Programme <span>Grades XI&ndash;XII</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">How it is built</th>
+            <td><span class="cur-compare__prog">CBSE</span>A stream (Engineering, Medicine or
+              Management), each built on English and a set of core subjects, studied for two
+              years.</td>
+            <td><span class="cur-compare__prog">IB Diploma</span>Six subjects from six groups,
+              alongside the Diploma core: Theory of Knowledge, the Extended Essay and Creativity,
+              Activity, Service.</td>
+          </tr>
+          <tr>
+            <th scope="row">Assessment</th>
+            <td><span class="cur-compare__prog">CBSE</span>The CBSE Board examination at the end
+              of Grade XII.</td>
+            <td><span class="cur-compare__prog">IB Diploma</span>Examinations at the end of Grade
+              XII, with coursework assessed during the programme. Each subject is graded
+              1&ndash;7; Theory of Knowledge and the Extended Essay add up to 3 points, for 45 in
+              all.</td>
+          </tr>
+          <tr>
+            <th scope="row">Choosing subjects</th>
+            <td><span class="cur-compare__prog">CBSE</span>Choose a stream. The stream sets the
+              core subjects; electives are chosen alongside them.</td>
+            <td><span class="cur-compare__prog">IB Diploma</span>Choose one subject from each
+              group, three or four at Higher Level and the rest at Standard Level.</td>
+          </tr>
+          <tr>
+            <th scope="row">At CIRS</th>
+            <td><span class="cur-compare__prog">CBSE</span>Engineering, Medicine and Management
+              streams. Ask the school for this year&rsquo;s electives.</td>
+            <td><span class="cur-compare__prog">IB Diploma</span>Fifteen subjects across the six
+              groups. A combination runs when enough students choose it.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -427,59 +542,35 @@
 
     <article class="cur-prog" id="cbse" aria-labelledby="cbse-title">
       <div class="cur-prog__head">
-        <div class="cur-prog__intro">
-          <p class="cur-prog__tag">Central Board of Secondary Education, New Delhi</p>
-          <h3 class="cur-prog__title" id="cbse-title">CBSE senior streams</h3>
-          <dl class="cur-prog__facts">
-            <div><dt>Grades</dt><dd>V to XII at CIRS; streams in XI and XII</dd></div>
-            <div><dt>Structure</dt><dd>One stream: English, its core subjects and electives</dd></div>
-            <div><dt>Assessment</dt><dd>CBSE Board examinations in Grades X and XII</dd></div>
-          </dl>
-          <p class="cur-prog__more"><a class="cur-link" href="curriculum/cbse.html">Read the CBSE pathway in full</a></p>
-        </div>
-        <figure class="cur-prog__figure">
-          <img src="assets/img/academic-block.jpg"
-               srcset="assets/img/academic-block-800.jpg 800w, assets/img/academic-block.jpg 1392w"
-               sizes="(max-width: 900px) 92vw, (max-width: 1100px) 44vw, 570px"
-               alt="The academic block at CIRS: tiled roofs and a colonnade around a lawn"
-               width="1392" height="696" loading="lazy" decoding="async">
-          <figcaption>The academic block.</figcaption>
-        </figure>
+        <p class="cur-prog__tag">CBSE</p>
+        <h3 class="cur-prog__title" id="cbse-title">Three senior streams</h3>
+        <p class="cur-prog__note">Core subjects by stream, as the school last published them, for
+          2018&ndash;19. English is studied in all three.</p>
       </div>
-
-      <table class="cur-streams">
-        <caption>Core subjects by stream, as the school last published them, for 2018&ndash;19</caption>
-        <thead>
-          <tr><th scope="col">Stream</th><th scope="col">Core subjects</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Engineering</th><td>English, Physics, Chemistry, Mathematics</td></tr>
-          <tr><th scope="row">Medicine</th><td>English, Physics, Chemistry, Biology</td></tr>
-          <tr><th scope="row">Management</th><td>English, Business Studies, Accountancy, Economics</td></tr>
-        </tbody>
-      </table>
+      <ul class="cur-streams">
+        <li class="rv">
+          <h4 class="cur-streams__name">Engineering</h4>
+          <ul class="cur-streams__list"><li>English</li><li>Physics</li><li>Chemistry</li><li>Mathematics</li></ul>
+        </li>
+        <li class="rv">
+          <h4 class="cur-streams__name">Medicine</h4>
+          <ul class="cur-streams__list"><li>English</li><li>Physics</li><li>Chemistry</li><li>Biology</li></ul>
+        </li>
+        <li class="rv">
+          <h4 class="cur-streams__name">Management</h4>
+          <ul class="cur-streams__list"><li>English</li><li>Business Studies</li><li>Accountancy</li><li>Economics</li></ul>
+        </li>
+      </ul>
       <p class="cur-prog__ask">Electives and this year&rsquo;s combinations:
         <a class="cur-link" href="mailto:info@cirschool.org?subject=Current%20CBSE%20Grade%20XI%20subjects">ask about CBSE subjects</a>.</p>
     </article>
 
     <article class="cur-prog" id="ib" aria-labelledby="ib-title">
       <div class="cur-prog__head">
-        <div class="cur-prog__intro">
-          <p class="cur-prog__tag">International Baccalaureate</p>
-          <h3 class="cur-prog__title" id="ib-title">IB Diploma subjects</h3>
-          <dl class="cur-prog__facts">
-            <div><dt>Grades</dt><dd>XI and XII</dd></div>
-            <div><dt>Structure</dt><dd>Six subjects, three or four at Higher Level, and the Diploma core</dd></div>
-            <div><dt>Assessment</dt><dd>Examinations and coursework; 45 points in all</dd></div>
-          </dl>
-          <p class="cur-prog__more"><a class="cur-link" href="curriculum/ib-diploma.html">Read the IB Diploma guide in full</a></p>
-        </div>
-        <figure class="cur-prog__figure">
-          <img src="assets/img/results-ib-lab.webp"
-               alt="A student looks down a microscope at a laboratory bench, with others working behind her"
-               width="1800" height="1200" loading="lazy" decoding="async">
-          <figcaption>Microscope work in a school laboratory.</figcaption>
-        </figure>
+        <p class="cur-prog__tag">IB Diploma Programme</p>
+        <h3 class="cur-prog__title" id="ib-title">Fifteen subjects in six groups</h3>
+        <p class="cur-prog__note">The subjects and levels offered at CIRS. A combination runs when
+          enough students choose it, so not every permitted combination is timetabled.</p>
       </div>
 
       <div class="cur-rules">
@@ -490,15 +581,11 @@
               an additional language, individuals and societies or sciences subject.</li>
             <li><b>HL</b> Higher Level goes further and deeper than <b>SL</b> Standard Level. Three
               or four subjects are taken at HL; both levels are graded 1&ndash;7.</li>
-            <li>The core: Theory of Knowledge, the Extended Essay and Creativity, Activity,
-              Service.</li>
           </ul>
         </div>
         <div class="cur-rules__block">
-          <h4 class="cur-rules__title">What CIRS offers</h4>
+          <h4 class="cur-rules__title">At CIRS</h4>
           <ul>
-            <li>The subjects and levels below. A combination runs when enough students choose
-              it, so not every permitted combination is timetabled.</li>
             <li>Ask the school which substitutions for an arts subject your timetable allows,
               and about prerequisites.</li>
           </ul>
@@ -507,7 +594,8 @@
       </div>
 
       <div class="cur-dir">
-        <table class="cur-group">
+        <div class="cur-group rv">
+        <table>
           <caption><span>Group 1</span> Studies in language and literature</caption>
           <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
           <tbody>
@@ -518,7 +606,9 @@
             </tr>
           </tbody>
         </table>
-        <table class="cur-group">
+        </div>
+        <div class="cur-group rv">
+        <table>
           <caption><span>Group 2</span> Language acquisition</caption>
           <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
           <tbody>
@@ -536,7 +626,9 @@
             </tr>
           </tbody>
         </table>
-        <table class="cur-group">
+        </div>
+        <div class="cur-group rv">
+        <table>
           <caption><span>Group 3</span> Individuals and societies</caption>
           <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
           <tbody>
@@ -554,7 +646,9 @@
             </tr>
           </tbody>
         </table>
-        <table class="cur-group">
+        </div>
+        <div class="cur-group rv">
+        <table>
           <caption><span>Group 4</span> Sciences</caption>
           <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
           <tbody>
@@ -581,7 +675,9 @@
             </tr>
           </tbody>
         </table>
-        <table class="cur-group">
+        </div>
+        <div class="cur-group rv">
+        <table>
           <caption><span>Group 5</span> Mathematics</caption>
           <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
           <tbody>
@@ -595,7 +691,9 @@
             </tr>
           </tbody>
         </table>
-        <table class="cur-group">
+        </div>
+        <div class="cur-group rv">
+        <table>
           <caption><span>Group 6</span> The arts</caption>
           <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
           <tbody>
@@ -605,28 +703,69 @@
             </tr>
           </tbody>
         </table>
+        </div>
+      </div>
+
+      <div class="cur-core">
+        <div class="cur-core__head">
+          <p class="cur-core__tag">At the centre of the Diploma</p>
+          <h4 class="cur-core__title">The Diploma core</h4>
+        </div>
+        <ol class="cur-core__list">
+          <li>
+            <h5>Theory of Knowledge</h5>
+            <p>Students reflect on how knowledge is made and how we know what we claim to
+              know.</p>
+          </li>
+          <li>
+            <h5>Extended Essay</h5>
+            <p>Students pursue an independent research question and develop an extended piece
+              of academic writing.</p>
+          </li>
+          <li>
+            <h5>Creativity, Activity, Service</h5>
+            <p>Experiences across all three strands. Required for the Diploma, but it does not
+              add points to the score.</p>
+          </li>
+        </ol>
       </div>
     </article>
   </div>
 </section>
 
 <section class="cur-sec cur-beyond" id="beyond" aria-labelledby="beyond-title">
-  <div class="wrap cur-beyond__layout">
-    <figure class="cur-beyond__figure">
-      <img src="assets/img/vision.jpg"
-           alt="A row of CIRS students seated on mats on the lawn, practising a breathing exercise"
-           width="1600" height="900" loading="lazy" decoding="async">
-      <figcaption>Yoga on the school grounds.</figcaption>
-    </figure>
-    <div class="cur-beyond__text">
-      <p class="cur-eyebrow">School life</p>
-      <h2 class="cur-h2" id="beyond-title">Study inside <em>a residential day.</em></h2>
-      <p>Academic work sits within the Chinmaya Vision Programme and the life of a residential
-        school. Value education runs across every grade alongside the timetable: students study
-        the Bhagavad Geeta and the CCMT <i>Life &mdash; An Aradhana</i> books, and spiritual
-        classes and aartis carry that learning into the day.</p>
-      <p>Morning assembly, yoga, service, the arts and sport sit alongside classroom work.</p>
-      <p><a class="cur-link" href="the-cirs-experience.html">See The CIRS experience</a></p>
+  <div class="wrap">
+    <div class="cur-beyond__layout">
+      <div class="cur-beyond__text">
+        <p class="cur-eyebrow">School life</p>
+        <h2 class="cur-h2" id="beyond-title">Study inside <em>a residential day.</em></h2>
+        <p>Academic work sits within the Chinmaya Vision Programme and the life of a residential
+          school. Value education runs across every grade alongside the timetable: students
+          study the Bhagavad Geeta and the CCMT <i>Life &mdash; An Aradhana</i> books, and
+          spiritual classes and aartis carry that learning into the day.</p>
+        <p>Morning assembly, yoga, service, the arts and sport sit alongside classroom work.</p>
+        <p class="cur-beyond__more"><a class="cur-arrow" href="the-cirs-experience.html">Follow a day at CIRS</a></p>
+      </div>
+      <div class="cur-beyond__mosaic">
+        <figure class="cur-beyond__a">
+          <img src="assets/img/vision.jpg"
+               alt="A row of CIRS students seated on mats on the lawn, practising a breathing exercise"
+               width="1600" height="900" loading="lazy" decoding="async">
+          <figcaption>Yoga on the school grounds.</figcaption>
+        </figure>
+        <figure class="cur-beyond__b">
+          <img src="assets/img/hrun/03-mun.jpg"
+               alt="Four students in suits smiling on stage beside a United Nations flag, a giant gavel at their feet"
+               width="1500" height="1000" loading="lazy" decoding="async">
+          <figcaption>At CIRS MUN.</figcaption>
+        </figure>
+        <figure class="cur-beyond__c">
+          <img src="assets/img/motto.jpg"
+               alt="Students seated cross-legged with their palms joined at morning prayer"
+               width="1600" height="900" loading="lazy" decoding="async">
+          <figcaption>Morning prayer.</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -735,12 +874,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=113-curriculum-7" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=113-curriculum-7" defer></script>
-<script src="assets/vendor/lenis.min.js?b=113-curriculum-7" defer></script>
-<script src="assets/js/cirs.js?b=113-curriculum-7-header-1" defer></script>
-<script src="assets/js/pages.js?b=113-curriculum-7" defer></script>
-<script src="assets/js/footer.js?b=113-curriculum-7-footer-1" defer></script>
-<script src="assets/js/curriculum.js?b=113-curriculum-7" defer></script>
+<script src="assets/vendor/gsap.min.js?b=113-curriculum-8" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=113-curriculum-8" defer></script>
+<script src="assets/vendor/lenis.min.js?b=113-curriculum-8" defer></script>
+<script src="assets/js/cirs.js?b=113-curriculum-8-header-1" defer></script>
+<script src="assets/js/pages.js?b=113-curriculum-8" defer></script>
+<script src="assets/js/footer.js?b=113-curriculum-8-footer-1" defer></script>
+<script src="assets/js/curriculum.js?b=113-curriculum-8" defer></script>
 </body>
 </html>

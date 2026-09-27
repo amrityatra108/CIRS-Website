@@ -27,6 +27,12 @@ implementation brief" of the same date.
 - CBSE: Engineering, Medicine and Management streams; core subjects as
   published for 2018–19, labelled with that year.
 
+- Page furniture added in the September 2026 redesign restates the above
+  and nothing more: the opening facts (Grades V to XII, English medium, CBSE
+  affiliation, CBSE or IB in XI and XII), the three approach statements
+  (continuity, breadth then depth, values alongside, from the CBSE page), and
+  the Diploma core descriptions, which are the IB Diploma page's own.
+
 ## Open questions for the school
 
 1. **English A course.** The school page says "English A1", a retired name.
