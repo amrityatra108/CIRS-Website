@@ -36,6 +36,7 @@ import blog
 import founder
 import founder_story
 import houses
+import sports_house_history
 import documents as docs
 import blogposts
 import newsarticles
@@ -411,7 +412,7 @@ PAGES = {
                        "and a dated archive of published inter-house results.",
         "banner": None,
         "sheet": "houses",
-        "cache_suffix": "-houses-2",
+        "cache_suffix": "-houses-4",
         "uc": False,
         "jump": False,
     },
@@ -1808,7 +1809,7 @@ def artswall_html():
 def sports_house_bands_html():
     """Sports-page house bands from the same sourced data as the Houses page."""
     bands = []
-    for index, h in enumerate(houses.HOUSES):
+    for index, h in enumerate(sports_house_history.HOUSES):
         slug = h["slug"]
         active = " is-active" if index == 0 else ""
         expanded = "true" if index == 0 else "false"

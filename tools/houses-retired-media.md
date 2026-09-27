@@ -20,3 +20,19 @@ originals and the older hero files still used by Sports are preserved.
 | assets/img/houses/march-03.jpg | Speech at dais, not a procession. |
 | assets/img/houses/march-04.jpg | Inspection vehicle, not a house-specific procession. |
 | assets/img/houses/sport-athletics.jpg | Removed to avoid duplicating the Sports page. |
+
+## Superseded by the photographic revision
+
+These derivatives are retained as source history, not used by the current Houses page.
+The former named-house procession frames contained unapproved animal artwork on flags.
+
+- assets/img/houses/march-blue.jpg
+- assets/img/houses/march-green.jpg
+- assets/img/houses/shared-march.jpg
+- assets/img/houses/identity-vasishtha-500.jpg
+- assets/img/houses/identity-valmiki-500.jpg
+- assets/img/houses/identity-vishwamitra-500.jpg
+- assets/img/houses/identity-vyasa-500.jpg
+
+The current 720/1440/1800 hero variants replace the older 500px versions. The
+new general March photographs make no individual-house attribution.
