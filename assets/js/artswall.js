@@ -48,7 +48,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
     const easeK = (rate, dt) => 1 - Math.pow(1 - rate, dt / 16.667);
 
     let W = innerWidth, H = innerHeight;
-    let modalActive = false, modalOpenedAt = 0, lastFocus = null;
+    let modalActive = false, modalOpenedAt = 0, lastFocus = null, lastPlate = -1, restoringFocus = false;
     let touchMode = matchMedia('(hover: none), (pointer: coarse)').matches;
     const mouse = { x: W / 2, y: H / 2 };
     const lerpCursor = { x: W / 2, y: H / 2 };
@@ -220,7 +220,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
                         if (e.detail === 0) openModal(slot.plate, el);
                     });
                     el.addEventListener('focus', () => {
-                        if (!el.matches(':focus-visible') || modalActive) return;
+                        if (!el.matches(':focus-visible') || modalActive || restoringFocus) return;
                         this.vx = this.vy = this.wheelX = this.wheelY = 0;
                         this.panX = W / 2 - slot.wx; this.panY = H / 2 - slot.wy;
                         this.frame(16.7, performance.now());
@@ -450,6 +450,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         const d = plates[i]; if (!d) return;
         modalActive = true; modalOpenedAt = performance.now();
         lastFocus = from || document.activeElement;
+        lastPlate = i;
         drag.active = false; p1.vx = p1.vy = 0; p1.wheelX = p1.wheelY = 0;
         mTitle.textContent = d.title;
         mMeta.textContent = `${d.cat} \u00b7 Arts, Music & Theatre`;
@@ -463,6 +464,12 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         modal.removeAttribute('inert');
         void modal.offsetWidth; modal.classList.add('is-open');
         try { closeBtn.focus({ preventScroll: true }); } catch (_) { closeBtn.focus(); }
+        // Touch browsers can clear programmatic focus after pointerup. Reassert
+        // it on the next frame so keyboard and screen-reader users enter the dialog.
+        requestAnimationFrame(() => {
+            if (!modalActive) return;
+            try { closeBtn.focus({ preventScroll: true }); } catch (_) { closeBtn.focus(); }
+        });
         if (!touchMode) { ring.classList.remove('is-snapped'); p1.snapped = false; }
     }
 
@@ -475,15 +482,55 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
             modal.style.display = 'none'; modal.setAttribute('aria-hidden', 'true');
             modal.setAttribute('inert', '');
             mediaCont.textContent = ''; modalActive = false; last = performance.now();
-            const back = lastFocus && lastFocus !== document.body && document.contains(lastFocus) ? lastFocus : wrap;
-            try { back.focus({ preventScroll: true }); } catch (_) {}
+            // Let the resized wall paint before choosing a tile; the original
+            // button may have been replaced or moved outside the viewport.
+            function restoreFocus(attempt) {
+                if (token !== modalToken || modalActive) return;
+                p1.frame(16.7, performance.now());
+                const available = p1.slots.filter(s => s.plate >= 0 && !s.hidden);
+                const visible = available.filter(s => {
+                    const r = s.el.getBoundingClientRect();
+                    return r.right > 0 && r.left < W && r.bottom > 0 && r.top < H;
+                });
+                const candidates = visible.length ? visible : available;
+                const matching = candidates.filter(s => s.plate === lastPlate);
+                const nearest = (matching.length ? matching : candidates).sort((a, b) => {
+                    const ar = a.el.getBoundingClientRect(), br = b.el.getBoundingClientRect();
+                    return Math.hypot(ar.left + ar.width / 2 - W / 2, ar.top + ar.height / 2 - H / 2)
+                         - Math.hypot(br.left + br.width / 2 - W / 2, br.top + br.height / 2 - H / 2);
+                })[0];
+                const original = lastFocus && lastFocus !== document.body && document.contains(lastFocus) ? lastFocus : null;
+                const rect = original && original.getBoundingClientRect();
+                const originalVisible = rect && rect.right > 0 && rect.left < W && rect.bottom > 0 && rect.top < H
+                    && getComputedStyle(original).visibility !== 'hidden';
+                const back = attempt === 0 && originalVisible ? original : nearest && nearest.el;
+                if (!back && attempt < 5) { requestAnimationFrame(() => restoreFocus(attempt + 1)); return; }
+                restoringFocus = true;
+                try { (back || wrap).focus({ preventScroll: true }); }
+                catch (_) { (back || wrap).focus(); }
+                restoringFocus = false;
+                if (document.activeElement === document.body && attempt < 5) {
+                    requestAnimationFrame(() => restoreFocus(attempt + 1));
+                }
+            }
+            requestAnimationFrame(() => restoreFocus(0));
         }, REDUCED ? 0 : 460);
     }
 
     closeBtn.addEventListener('click', closeModal);
     // Tap outside the photo to close -- ignoring the click that the opening tap itself produces.
     modal.addEventListener('click', e => {
-        if (performance.now() - modalOpenedAt < 400) return;
+        const justOpened = performance.now() - modalOpenedAt < 400;
+        if (justOpened) {
+            // The pointerup handler builds the modal before the browser sends
+            // its compatibility click. That click can move focus back to the
+            // page after the first animation-frame focus repair.
+            if (!e.target.closest('#m-close')) requestAnimationFrame(() => {
+                if (!modalActive || modal.contains(document.activeElement)) return;
+                try { closeBtn.focus({ preventScroll: true }); } catch (_) { closeBtn.focus(); }
+            });
+            return;
+        }
         if (e.target === modal || e.target === mediaCont) closeModal();
     });
 

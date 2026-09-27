@@ -24,56 +24,55 @@
 <meta name="twitter:title" content="CIRS Art Attack">
 <meta name="twitter:description" content="Painting, drawing, craft and the things made for the stage by the students of Chinmaya International Residential School.">
 <meta name="twitter:image" content="assets/img/og.jpg">
+<link rel="preload" href="assets/js/navigation.js?b=113-art-attack-6-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
-<link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=113-art-attack-4">
-<link rel="stylesheet" href="assets/css/cirs.css?b=113-art-attack-4">
-<link rel="stylesheet" href="assets/css/pages.css?b=113-art-attack-4">
-<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
-     removes once it has played. With scripting off nothing removes it, and
-     it covers the page on every page of this site. One rule, applied only
-     when there is no scripting, is the whole fix. Crossroads already does
-     this for its own curtain further down. The footer rule is the same
-     kind of fallback: cirs.js unpins a footer taller than the window, and
-     without it a phone could never scroll up to the top of the footer. -->
-<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/artattack.css?b=113-art-attack-4">
-<link rel="stylesheet" href="assets/css/typography.css?b=113-art-attack-4">
-<link rel="stylesheet" href="assets/css/filmintro.css?b=113-art-attack-4">
-<noscript><style>.film{height:100svh}.film[data-film-pending] .film__title{opacity:1}.film__video{display:none}body.art-attack .film__still{visibility:visible}</style></noscript>
-<link rel="stylesheet" href="assets/css/footer.css?b=113-art-attack-4-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=113-art-attack-4-nav-3">
+<link rel="stylesheet" href="assets/css/fonts.css?b=113-art-attack-6">
+<link rel="stylesheet" href="assets/css/cirs.css?b=113-art-attack-6">
+<link rel="stylesheet" href="assets/css/pages.css?b=113-art-attack-6-lightbox-2">
+<noscript><style>.footer-wrap{position:relative}</style></noscript>
+<link rel="stylesheet" href="assets/css/artattack.css?b=113-art-attack-6">
+<link rel="stylesheet" href="assets/css/typography.css?b=113-art-attack-6">
+<link rel="stylesheet" href="assets/css/filmintro.css?b=113-art-attack-6">
+<style id="art-attack-critical">
+body.art-attack{--film-ground:#0B080D;--film-crop:50% 50%;--film-crop-narrow:50% 50%;background:#0B080D}
+body.art-attack .film{position:relative;height:var(--film-run,460vh);background:#000}
+body.art-attack .film__stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#0B080D}
+body.art-attack .film__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;pointer-events:none;opacity:1;transition:opacity .3s ease-out}
+body.art-attack .film[data-film-pending] .film__video{opacity:0}
+body.art-attack .film[data-film-pending] .film__still{visibility:visible}
+body.art-attack .film__still{position:absolute;z-index:0;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%}
+body.art-attack .film__stage:after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:clamp(70px,13svh,150px);background:linear-gradient(to bottom,transparent,#170F18);pointer-events:none}
+body.art-attack .film__title{position:absolute;z-index:2;left:50%;right:auto;top:49%;bottom:auto;width:min(86vw,720px);margin:0;padding:0;color:#FAF9F3;text-align:center;text-transform:none;opacity:1;transform:translate(-50%,-50%);filter:none;text-shadow:0 2px 30px rgba(11,8,13,.55),0 0 2px rgba(11,8,13,.35)}
+body.art-attack .film__art-prefix{display:block;margin-bottom:clamp(12px,2vh,22px);padding-left:.42em;font-family:var(--font-ui,Arial,sans-serif);font-size:clamp(12px,1.2vw,17px);font-weight:400;letter-spacing:.42em;line-height:1;text-transform:uppercase;color:#E3DCCB}
+body.art-attack .film__art-name{display:block;font-family:var(--font-display,Georgia,serif);font-size:clamp(56px,6.3vw,100px);font-weight:500;letter-spacing:-.055em;line-height:.92;white-space:nowrap}
+@media(max-aspect-ratio:6/5){body.art-attack .film__still{object-position:50% 50%}body.art-attack .film__title{top:52%}}
+@media(max-width:720px){body.art-attack .film__title{width:calc(100vw - 32px)}body.art-attack .film__art-prefix{font-size:12px}body.art-attack .film__art-name{font-size:clamp(48px,12vw,76px)}}
+@media(max-width:360px){body.art-attack .film__art-name{font-size:clamp(42px,11.5vw,52px)}}
+@media(prefers-reduced-motion:reduce){body.art-attack .film{height:100svh}}
+</style>
+<noscript><style>.film{height:100svh}body.art-attack .film{height:100svh}.film[data-film-pending] .film__title{opacity:1}.film__video{display:none}body.art-attack .film__still{visibility:visible}</style></noscript>
+<link rel="preload" href="assets/img/art-attack-opening-final.jpg" as="image" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/footer.css?b=113-art-attack-6-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=113-art-attack-6-nav-4">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
 <body class="artattack film art-attack">
 <a class="skip-link" href="#main">Skip to main content</a>
 
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__iast" lang="sa-Latn">J&ntilde;&#257;na&#7747; Sev&#257; ca Kau&#347;alam</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
-
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
-<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" aria-describedby="lightboxHint" hidden>
   <div class="lightbox__back" data-close></div>
   <div class="lightbox__panel">
-    <div class="lightbox__frame" id="lightboxFrame"></div>
     <button type="button" class="lightbox__close" data-close aria-label="Close the film">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
+    <div class="lightbox__frame" id="lightboxFrame"></div>
   </div>
-  <!-- The cross-origin player can catch Escape while it has focus. Keep a
-       visible, reliable way out next to the labelled close button. -->
-  <p class="lightbox__hint" aria-hidden="true"><span class="lightbox__hint-key">Click outside the film to close</span><span class="lightbox__hint-touch">Tap outside the film to close</span></p>
+  <p class="lightbox__hint" id="lightboxHint"><span class="lightbox__hint-key">Use your browser&rsquo;s Back command while the player has focus, or Tab through its controls to reach Close the film. Click outside to close.</span><span class="lightbox__hint-touch">Tap outside the player to close.</span> <button type="button" class="lightbox__exit" data-close>Close the film</button> <a class="lightbox__fallback" id="lightboxFallbackLink" href="https://youtu.be/" target="_blank" rel="noopener">Open on YouTube if the player is unavailable.</a></p>
 </dialog>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
@@ -284,7 +283,7 @@
     <video class="film__video" data-film-video
            width="1280" height="720"
            poster="assets/img/art-attack-opening-poster.jpg"
-           preload="auto" muted playsinline disablepictureinpicture
+           preload="none" muted playsinline disablepictureinpicture
            aria-hidden="true" tabindex="-1">
       <!-- H.264 first, which is the other way round from the rest of this
            site. These files are not played but seeked, several times a
@@ -306,9 +305,32 @@
       <source src="assets/video/art-attack-opening.webm" type="video/webm">
     </video>
     <h1 class="film__title" data-film-title><span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span></h1>
-  </div>
+
+    <script>
+      (function (video) {
+        var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var constrained = connection && (connection.saveData || ["slow-2g", "2g", "3g"].indexOf(connection.effectiveType) !== -1);
+        if (!video || reduced || constrained) return;
+        var still = document.currentScript.closest(".film").querySelector(".film__still");
+        function loadAfterPaint() {
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              window.setTimeout(function () { if (!document.hidden) video.load(); }, 50);
+            });
+          });
+        }
+        // The opening still carries the first useful composition. Let its
+        // high-priority request finish before the film competes for bandwidth.
+        if (still && !still.complete) {
+          still.addEventListener("load", loadAfterPaint, { once: true });
+          still.addEventListener("error", loadAfterPaint, { once: true });
+        } else loadAfterPaint();
+      })(document.currentScript.closest(".film").querySelector("[data-film-video]"));
+    </script>  </div>
 </section>
 <div class="film__seam" data-header-theme="dark" aria-hidden="true"></div>
+<script src="assets/js/navigation.js?b=113-art-attack-6-core-3"></script>
 <nav class="jump" aria-label="On this page">
   <details class="jump__details">
     <summary class="jump__toggle" title="On this page">
@@ -356,11 +378,11 @@
     </div>
     <div class="aa-open__wall">
       <figure class="aa-open__hung">
-        <a class="aa-open__work" href="assets/img/art-attack/works/cc26-27-02.webp" data-aa-work="cc26-27-02" data-w="603" data-h="811" data-cat="painting" data-issue="26" data-kind="Painting or drawing" data-source="The Crossroads, Issue 26 · Anand Utsav issue" data-name="Tarushi A." data-grade="Grade XI"><img src="assets/img/art-attack/works/cc26-27-02.webp" width="603" height="811" alt="Two cupped hands in rainbow colours on black" fetchpriority="high" decoding="async"></a><p class="aa-open__label"><span class="aa-label__name">Tarushi A.</span><span class="aa-label__meta">Grade XI · The Crossroads, Issue 26 · Anand Utsav issue</span></p>
+        <a class="aa-open__work" href="assets/img/art-attack/works/cc26-27-02.webp" data-aa-work="cc26-27-02" data-w="603" data-h="811" data-cat="painting" data-issue="26" data-kind="Painting or drawing" data-source="The Crossroads, Issue 26 · Anand Utsav issue" data-name="Tarushi A." data-grade="Grade XI"><img src="assets/img/art-attack/works/cc26-27-02.webp" width="603" height="811" alt="Two cupped hands in rainbow colours on black" loading="lazy" fetchpriority="low" decoding="async"></a><p class="aa-open__label"><span class="aa-label__name">Tarushi A.</span><span class="aa-label__meta">Grade XI · The Crossroads, Issue 26 · Anand Utsav issue</span></p>
       </figure>
     </div>
     <div class="aa-open__photo" data-aa-photo>
-      <figure class="aa-open__shot"><img src="assets/img/art-attack/photos/pot-blue.webp" srcset="assets/img/art-attack/photos/pot-blue-m.webp 900w, assets/img/art-attack/photos/pot-blue.webp 1800w" sizes="(max-width: 700px) 100vw, 62vw" width="1800" height="1200" alt="Four students bent over a pale blue clay pot, painting a band of pink and orange with fine brushes" loading="eager" fetchpriority="high" decoding="async"><figcaption>Painting pots for Pongal, January 2025</figcaption></figure>
+      <figure class="aa-open__shot"><img src="assets/img/art-attack/photos/pot-blue.webp" srcset="assets/img/art-attack/photos/pot-blue-m.webp 900w, assets/img/art-attack/photos/pot-blue.webp 1800w" sizes="(max-width: 700px) 100vw, 62vw" width="1800" height="1200" alt="Four students bent over a pale blue clay pot, painting a band of pink and orange with fine brushes" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Painting pots for Pongal, January 2025</figcaption></figure>
     </div>
   </div>
 </section>
@@ -738,7 +760,7 @@
     </header>
 
     <article class="aa-chapter">
-      <figure class="aa-chapter__lead"><img src="assets/img/art-attack/photos/floorwork.webp" srcset="assets/img/art-attack/photos/floorwork-m.webp 900w, assets/img/art-attack/photos/floorwork.webp 1800w" sizes="(max-width: 700px) 100vw, 66vw" width="1800" height="1200" alt="Students seated on the floor around sheets of paper, painting and drawing" loading="lazy" decoding="async"><figcaption>Working on the floor</figcaption></figure>
+      <figure class="aa-chapter__lead"><img src="assets/img/art-attack/photos/floorwork.webp" srcset="assets/img/art-attack/photos/floorwork-m.webp 900w, assets/img/art-attack/photos/floorwork.webp 1800w" sizes="(max-width: 700px) 100vw, 66vw" width="1800" height="1200" alt="Students seated on the floor around sheets of paper, painting and drawing" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Working on the floor</figcaption></figure>
       <div class="aa-chapter__text">
         <p class="aa-chapter__n">01</p>
         <h3 class="aa-h3">Painting &amp; drawing</h3>
@@ -754,13 +776,13 @@
         <p>Craft is taught alongside painting &mdash; work made by hand, finished with care, and put out on the
           table for the school to see.</p>
       </div>
-      <figure class="aa-chapter__tall"><img src="assets/img/art-attack/photos/handwork.webp" srcset="assets/img/art-attack/photos/handwork-m.webp 900w, assets/img/art-attack/photos/handwork.webp 1800w" sizes="(max-width: 700px) 100vw, 34vw" width="1800" height="2699" alt="A student arranging handmade craft pieces on a display table" loading="lazy" decoding="async"><figcaption>Handwork, on display</figcaption></figure>
-      <figure class="aa-chapter__board"><img src="assets/img/art-attack/photos/paper-board.webp" srcset="assets/img/art-attack/photos/paper-board-m.webp 900w, assets/img/art-attack/photos/paper-board.webp 1800w" sizes="(max-width: 700px) 100vw, 32vw" width="1800" height="1012" alt="Folded paper stars, birds and boxes pinned on a white cloth above a table of paper forms" loading="lazy" decoding="async"><figcaption>Folded paper, pinned up for Fine Arts Week 2026</figcaption></figure>
-      <figure class="aa-chapter__table"><img src="assets/img/art-attack/photos/paper-table.webp" srcset="assets/img/art-attack/photos/paper-table-m.webp 900w, assets/img/art-attack/photos/paper-table.webp 1800w" sizes="(max-width: 700px) 60vw, 22vw" width="1800" height="3199" alt="Close view of a table covered with folded and cut paper pieces" loading="lazy" decoding="async"><figcaption>Paper craft on the tables, Fine Arts Week 2026</figcaption></figure>
+      <figure class="aa-chapter__tall"><img src="assets/img/art-attack/photos/handwork.webp" srcset="assets/img/art-attack/photos/handwork-m.webp 900w, assets/img/art-attack/photos/handwork.webp 1800w" sizes="(max-width: 700px) 100vw, 34vw" width="1800" height="2699" alt="A student arranging handmade craft pieces on a display table" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Handwork, on display</figcaption></figure>
+      <figure class="aa-chapter__board"><img src="assets/img/art-attack/photos/paper-board.webp" srcset="assets/img/art-attack/photos/paper-board-m.webp 900w, assets/img/art-attack/photos/paper-board.webp 1800w" sizes="(max-width: 700px) 100vw, 32vw" width="1800" height="1012" alt="Folded paper stars, birds and boxes pinned on a white cloth above a table of paper forms" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Folded paper, pinned up for Fine Arts Week 2026</figcaption></figure>
+      <figure class="aa-chapter__table"><img src="assets/img/art-attack/photos/paper-table.webp" srcset="assets/img/art-attack/photos/paper-table-m.webp 900w, assets/img/art-attack/photos/paper-table.webp 1800w" sizes="(max-width: 700px) 60vw, 22vw" width="1800" height="3199" alt="Close view of a table covered with folded and cut paper pieces" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Paper craft on the tables, Fine Arts Week 2026</figcaption></figure>
     </article>
 
     <article class="aa-chapter aa-chapter--together">
-      <figure class="aa-chapter__lead"><img src="assets/img/art-attack/photos/banner.webp" srcset="assets/img/art-attack/photos/banner-m.webp 900w, assets/img/art-attack/photos/banner.webp 1800w" sizes="(max-width: 700px) 100vw, 58vw" width="1800" height="1200" alt="A teacher and students at a long table, working on a purple banner with yellow lettering" loading="lazy" decoding="async"><figcaption>Painting the banner</figcaption></figure>
+      <figure class="aa-chapter__lead"><img src="assets/img/art-attack/photos/banner.webp" srcset="assets/img/art-attack/photos/banner-m.webp 900w, assets/img/art-attack/photos/banner.webp 1800w" sizes="(max-width: 700px) 100vw, 58vw" width="1800" height="1200" alt="A teacher and students at a long table, working on a purple banner with yellow lettering" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Painting the banner</figcaption></figure>
       <div class="aa-chapter__text">
         <p class="aa-chapter__n">03</p>
         <h3 class="aa-h3">Made together</h3>
@@ -777,8 +799,8 @@
           hands working around it, taking the brush in turn.</p>
       </div>
       <div class="aa-case__pair">
-        <figure class="aa-case__shot"><img src="assets/img/art-attack/photos/pot-red-1.webp" srcset="assets/img/art-attack/photos/pot-red-1-m.webp 900w, assets/img/art-attack/photos/pot-red-1.webp 1800w" sizes="(max-width: 700px) 100vw, 42vw" width="1800" height="1200" alt="Four students seated on newspaper around a red clay pot painted with green leaves and white dots, one holding a small pink pot and a brush" loading="lazy" decoding="async"><figcaption>Painting pots for Pongal, January 2025</figcaption></figure>
-        <figure class="aa-case__shot"><img src="assets/img/art-attack/photos/pot-red-2.webp" srcset="assets/img/art-attack/photos/pot-red-2-m.webp 900w, assets/img/art-attack/photos/pot-red-2.webp 1800w" sizes="(max-width: 700px) 100vw, 42vw" width="1800" height="1200" alt="The same red pot a moment later, a student leaning in to paint along its rim" loading="lazy" decoding="async"><figcaption>The same pot, a few moments on</figcaption></figure>
+        <figure class="aa-case__shot"><img src="assets/img/art-attack/photos/pot-red-1.webp" srcset="assets/img/art-attack/photos/pot-red-1-m.webp 900w, assets/img/art-attack/photos/pot-red-1.webp 1800w" sizes="(max-width: 700px) 100vw, 42vw" width="1800" height="1200" alt="Four students seated on newspaper around a red clay pot painted with green leaves and white dots, one holding a small pink pot and a brush" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Painting pots for Pongal, January 2025</figcaption></figure>
+        <figure class="aa-case__shot"><img src="assets/img/art-attack/photos/pot-red-2.webp" srcset="assets/img/art-attack/photos/pot-red-2-m.webp 900w, assets/img/art-attack/photos/pot-red-2.webp 1800w" sizes="(max-width: 700px) 100vw, 42vw" width="1800" height="1200" alt="The same red pot a moment later, a student leaning in to paint along its rim" loading="lazy" fetchpriority="low" decoding="async"><figcaption>The same pot, a few moments on</figcaption></figure>
       </div>
     </div>
   </div>
@@ -803,7 +825,7 @@
 
 <section class="aa-sec aa-stage" id="stage" aria-labelledby="stageTitle">
   <div class="aa-wrap aa-stage__grid">
-    <figure class="aa-stage__shot"><img src="assets/img/art-attack/photos/masks.webp" srcset="assets/img/art-attack/photos/masks-m.webp 900w, assets/img/art-attack/photos/masks.webp 1800w" sizes="(max-width: 700px) 100vw, 55vw" width="1800" height="1200" alt="Students holding up white masks they have made" loading="lazy" decoding="async"><figcaption>Masks, made for the stage</figcaption></figure>
+    <figure class="aa-stage__shot"><img src="assets/img/art-attack/photos/masks.webp" srcset="assets/img/art-attack/photos/masks-m.webp 900w, assets/img/art-attack/photos/masks.webp 1800w" sizes="(max-width: 700px) 100vw, 55vw" width="1800" height="1200" alt="Students holding up white masks they have made" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Masks, made for the stage</figcaption></figure>
     <div class="aa-stage__text">
       <p class="aa-marker"><span class="sc">Made for the stage</span></p>
       <h2 class="aa-h2" id="stageTitle">From the Art Room <em>to the Stage.</em></h2>
@@ -827,11 +849,11 @@
         talk visitors through it. Where the school&rsquo;s records name the exhibition and its date, the caption does too.</p>
     </header>
     <div class="aa-display__grid">
-      <figure class="aa-display__lead"><img src="assets/img/art-attack/photos/display-talk.webp" srcset="assets/img/art-attack/photos/display-talk-m.webp 900w, assets/img/art-attack/photos/display-talk.webp 1800w" sizes="(max-width: 700px) 100vw, 64vw" width="1800" height="1012" alt="A student gestures towards framed photographs on a display wall as younger students listen" loading="lazy" decoding="async"><figcaption>A student talks younger visitors through the work</figcaption></figure>
-      <figure class="aa-display__side"><img src="assets/img/art-attack/photos/reading.webp" srcset="assets/img/art-attack/photos/reading-m.webp 900w, assets/img/art-attack/photos/reading.webp 1800w" sizes="(max-width: 700px) 100vw, 30vw" width="1800" height="1200" alt="Students reading work laid out on tables at an exhibition" loading="lazy" decoding="async"><figcaption>The exhibition, being read</figcaption></figure>
-      <figure class="aa-display__wide"><img src="assets/img/art-attack/photos/ib-wall.webp" srcset="assets/img/art-attack/photos/ib-wall-m.webp 900w, assets/img/art-attack/photos/ib-wall.webp 1800w" sizes="(max-width: 700px) 100vw, 46vw" width="1800" height="1200" alt="A display wall of drawings and paintings, with an easel holding a drawing on book pages, a relief torso and a boxed model on plinths" loading="lazy" decoding="async"><figcaption>IB Visual Arts exhibition, April 2024</figcaption></figure>
-      <figure class="aa-display__detail"><img src="assets/img/art-attack/photos/ib-model.webp" srcset="assets/img/art-attack/photos/ib-model-m.webp 900w, assets/img/art-attack/photos/ib-model.webp 1800w" sizes="(max-width: 700px) 100vw, 24vw" width="1800" height="1200" alt="A model room seen through wooden bars, its walls covered in small pictures" loading="lazy" decoding="async"><figcaption>IB Visual Arts exhibition, April 2024</figcaption></figure>
-      <figure class="aa-display__end"><img src="assets/img/art-attack/photos/clay-table.webp" srcset="assets/img/art-attack/photos/clay-table-m.webp 900w, assets/img/art-attack/photos/clay-table.webp 1800w" sizes="(max-width: 700px) 100vw, 24vw" width="1800" height="1202" alt="Students gathered around a long table of small clay figures, one pointing" loading="lazy" decoding="async"><figcaption>Students at a table of clay figures</figcaption></figure>
+      <figure class="aa-display__lead"><img src="assets/img/art-attack/photos/display-talk.webp" srcset="assets/img/art-attack/photos/display-talk-m.webp 900w, assets/img/art-attack/photos/display-talk.webp 1800w" sizes="(max-width: 700px) 100vw, 64vw" width="1800" height="1012" alt="A student gestures towards framed photographs on a display wall as younger students listen" loading="lazy" fetchpriority="low" decoding="async"><figcaption>A student talks younger visitors through the work</figcaption></figure>
+      <figure class="aa-display__side"><img src="assets/img/art-attack/photos/reading.webp" srcset="assets/img/art-attack/photos/reading-m.webp 900w, assets/img/art-attack/photos/reading.webp 1800w" sizes="(max-width: 700px) 100vw, 30vw" width="1800" height="1200" alt="Students reading work laid out on tables at an exhibition" loading="lazy" fetchpriority="low" decoding="async"><figcaption>The exhibition, being read</figcaption></figure>
+      <figure class="aa-display__wide"><img src="assets/img/art-attack/photos/ib-wall.webp" srcset="assets/img/art-attack/photos/ib-wall-m.webp 900w, assets/img/art-attack/photos/ib-wall.webp 1800w" sizes="(max-width: 700px) 100vw, 46vw" width="1800" height="1200" alt="A display wall of drawings and paintings, with an easel holding a drawing on book pages, a relief torso and a boxed model on plinths" loading="lazy" fetchpriority="low" decoding="async"><figcaption>IB Visual Arts exhibition, April 2024</figcaption></figure>
+      <figure class="aa-display__detail"><img src="assets/img/art-attack/photos/ib-model.webp" srcset="assets/img/art-attack/photos/ib-model-m.webp 900w, assets/img/art-attack/photos/ib-model.webp 1800w" sizes="(max-width: 700px) 100vw, 24vw" width="1800" height="1200" alt="A model room seen through wooden bars, its walls covered in small pictures" loading="lazy" fetchpriority="low" decoding="async"><figcaption>IB Visual Arts exhibition, April 2024</figcaption></figure>
+      <figure class="aa-display__end"><img src="assets/img/art-attack/photos/clay-table.webp" srcset="assets/img/art-attack/photos/clay-table-m.webp 900w, assets/img/art-attack/photos/clay-table.webp 1800w" sizes="(max-width: 700px) 100vw, 24vw" width="1800" height="1202" alt="Students gathered around a long table of small clay figures, one pointing" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Students at a table of clay figures</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1015,13 +1037,13 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=113-art-attack-4" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=113-art-attack-4" defer></script>
-<script src="assets/vendor/lenis.min.js?b=113-art-attack-4" defer></script>
-<script src="assets/js/cirs.js?b=113-art-attack-4-header-1" defer></script>
-<script src="assets/js/pages.js?b=113-art-attack-4" defer></script>
-<script src="assets/js/footer.js?b=113-art-attack-4-footer-1" defer></script>
-<script src="assets/js/artattack.js?b=113-art-attack-4" defer></script>
-<script src="assets/js/filmintro.js?b=113-art-attack-4" defer></script>
+<script src="assets/vendor/gsap.min.js?b=113-art-attack-6" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=113-art-attack-6" defer></script>
+<script src="assets/vendor/lenis.min.js?b=113-art-attack-6" defer></script>
+<script src="assets/js/cirs.js?b=113-art-attack-6-header-5" defer></script>
+<script src="assets/js/pages.js?b=113-art-attack-6" defer></script>
+<script src="assets/js/footer.js?b=113-art-attack-6-footer-1" defer></script>
+<script src="assets/js/artattack.js?b=113-art-attack-6" defer></script>
+<script src="assets/js/filmintro.js?b=113-art-attack-6" defer></script>
 </body>
 </html>

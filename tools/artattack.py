@@ -371,7 +371,7 @@ def opening_work_html():
     full = f"{IMG}/works/{w['id']}.webp"
     return (f'<a class="aa-open__work" href="{full}" {work_attrs(w)}>'
             f'<img src="{full}" width="{w["size"][0]}" height="{w["size"][1]}" alt="{esc(w["alt"])}" '
-            f'fetchpriority="high" decoding="async"></a>'
+            f'loading="lazy" fetchpriority="low" decoding="async"></a>'
             f'<p class="aa-open__label"><span class="aa-label__name">{esc(names)}</span>'
             f'<span class="aa-label__meta">{esc(grade)} · {esc(source_line(w))}</span></p>')
 
@@ -383,7 +383,7 @@ def photos_by_id(m=None):
 def photo_html(pid, cls, sizes="(max-width: 700px) 100vw, 60vw", eager=False, caption=True):
     p = photos_by_id()[pid]
     big, small = f"{IMG}/photos/{pid}.webp", f"{IMG}/photos/{pid}-m.webp"
-    load = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy"'
+    load = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy" fetchpriority="low"'
     img = (f'<img src="{big}" srcset="{small} {p["mobile"][0]}w, {big} {p["size"][0]}w" sizes="{sizes}" '
            f'width="{p["size"][0]}" height="{p["size"][1]}" alt="{esc(p["alt"])}" {load} decoding="async">')
     cap = f'<figcaption>{esc(p["caption"])}</figcaption>' if caption else ""

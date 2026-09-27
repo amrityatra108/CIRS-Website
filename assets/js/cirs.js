@@ -56,6 +56,18 @@
     }
   }
 
+  // Page-specific openings and modal surfaces share this one scroll engine.
+  // A late unlock from one surface must not override another surface's lock.
+  function canResumeScroll() {
+    return !document.body.classList.contains("is-locked") &&
+      !document.body.classList.contains("menu-open") &&
+      !document.body.classList.contains("portal-intro-active") &&
+      !document.body.classList.contains("has-lightbox") &&
+      !document.documentElement.classList.contains("crossroads-intro-scroll-locked") &&
+      !document.querySelector("dialog[open]");
+  }
+  if (lenis && !canResumeScroll()) lenis.stop();
+
   // Route Crossroads section steps through the existing scroll controller.
   if (document.querySelector("[data-crossroads-intro]")) {
     window.addEventListener("crossroads-intro-scroll", function (event) {
@@ -88,7 +100,13 @@
   window.addEventListener("cirs-portal-scroll-lock", function (event) {
     if (!lenis || !event.detail) return;
     if (event.detail.locked) lenis.stop();
-    else if (!document.body.classList.contains("menu-open")) lenis.start();
+    else if (canResumeScroll()) lenis.start();
+  });
+
+  window.addEventListener("crossroads-intro-scroll-lock", function (event) {
+    if (!lenis || !event.detail) return;
+    if (event.detail.locked) lenis.stop();
+    else if (canResumeScroll()) lenis.start();
   });
 
   /* ----------------------------------------------------------
@@ -192,9 +210,9 @@
       var t = document.querySelector(id);
       if (!t) return;
       // Alumni and Leadership use native document scrolling and real URL fragments.
-      if (nativeScroll) { closeDrawer(); return; }
+      if (nativeScroll) { if (window.CIRSNavigation) window.CIRSNavigation.closeDrawer(); return; }
       e.preventDefault();
-      closeDrawer();
+      if (window.CIRSNavigation) window.CIRSNavigation.closeDrawer();
       scrollToSection(t);
     });
   });
@@ -413,7 +431,7 @@
       finished = true;
       if (curtain.parentNode) curtain.remove();
       document.body.classList.remove("is-locked");
-      if (lenis) lenis.start();
+      if (lenis && canResumeScroll()) lenis.start();
       if (hasST) ScrollTrigger.refresh();
       // The scroll is free and the layout is settled: if this page was opened
       // at an anchor, this is the first moment it can honour it.
@@ -1107,6 +1125,14 @@
     var pin = $(".hrun__pin", sec), viewport = $(".hrun__viewport", sec), stage = $(".hrun__stage", sec);
     if (!stage) return;
 
+    if (viewport) viewport.addEventListener("keydown", function (event) {
+      if (!sec.classList.contains("is-static") || event.target !== viewport || event.altKey || event.ctrlKey || event.metaKey) return;
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      var direction = event.key === "ArrowRight" ? 1 : -1;
+      viewport.scrollLeft += direction * Math.max(48, Math.round(viewport.clientWidth * .65));
+    });
+
     function clamp01(n) { return n < 0 ? 0 : n > 1 ? 1 : n; }
     function mix(a, b, t) { return Math.round(a + (b - a) * t); }
     function rgb(a, b, t) {
@@ -1132,6 +1158,9 @@
     }
     function staticMode() {
       sec.classList.add("is-static");
+      viewport.setAttribute("tabindex", "0");
+      viewport.setAttribute("role", "region");
+      viewport.setAttribute("aria-label", "A day at CIRS photographs and stories");
       window.requestAnimationFrame(syncStaticTheme);
     }
 
@@ -1152,6 +1181,9 @@
 
     mm.add("(min-width: 900px)", function () {
       sec.classList.remove("is-static");
+      viewport.removeAttribute("tabindex");
+      viewport.removeAttribute("role");
+      viewport.removeAttribute("aria-label");
 
       var layers = $$("[data-depth]", stage).map(function (el) {
         var d = parseFloat(el.getAttribute("data-depth")) || 1;
@@ -1825,215 +1857,8 @@
     if ("ResizeObserver" in window) new ResizeObserver(remeasure).observe(document.body);
   }
 
-  /* ==========================================================
-     Header, menu and Enquire
-     ----------------------------------------------------------
-     One controller chooses between the clear controls over a full-screen
-     opening and the floating pill, which the first scroll gathers them
-     into. The original controls and menu stay put.
-
-     The menu opens under the bar. Menu turns to Close, the page
-     behind is locked where it is (body.is-locked and Lenis) and
-     made inert, and Tab circles through the header and the menu
-     together, because the menu's Close is the header's control.
-     Beside the categories (901px and up) the pages of one
-     category are shown at a time and one gold marker travels to
-     the open category; below that each category is an accordion.
-
-     Enquire is an ivory sheet hung from the bar. Hover opens it
-     for a mouse, a tap for a touch screen, keyboard focus for a
-     keyboard; its own Close, Escape, or leaving it shuts it.
-     ========================================================== */
-  var drawer = $("#drawer"), burger = $("#burger");
-  var drawerCloseTimer = null, drawerInerted = [];
-  // Set by enquirePanel(): the menu shuts the sheet when it opens.
-  var setEnquire = function () {};
-  var enquireOpen = function () { return false; };
-
-  function isolateDrawer(open) {
-    var header = $("#header");
-    if (open) {
-      drawerInerted = Array.prototype.slice.call(document.body.children).filter(function (el) {
-        return el !== drawer && el !== header && !el.inert && el.tagName !== "SCRIPT";
-      });
-      drawerInerted.forEach(function (el) { el.inert = true; });
-    } else {
-      drawerInerted.forEach(function (el) { el.inert = false; });
-      drawerInerted = [];
-    }
-  }
-
-  function closeDrawer() {
-    if (!drawer || !drawer.classList.contains("is-open")) return;
-    drawer.classList.remove("is-open");
-    document.body.classList.add("menu-closing");
-    document.body.classList.remove("menu-open");
-    // The page intro may still own the scroll lock underneath the menu.
-    if (!$("#curtain")) {
-      document.body.classList.remove("is-locked");
-      if (lenis) lenis.start();
-      openHash();
-    }
-    isolateDrawer(false);
-    burger.setAttribute("aria-expanded", "false");
-    burger.setAttribute("aria-label", "Open menu");
-    // The pointer that closed the menu is usually still over Menu. Let the
-    // rule retract now, and give the hover rule back once the pointer leaves.
-    if (burger.matches(":hover")) {
-      burger.classList.add("is-settling-rule");
-      burger.addEventListener("pointerleave", function () {
-        burger.classList.remove("is-settling-rule");
-      }, { once: true });
-    }
-    burger.focus({ preventScroll: true });
-    window.clearTimeout(drawerCloseTimer);
-    drawerCloseTimer = window.setTimeout(function () {
-      if (!drawer.classList.contains("is-open")) drawer.hidden = true;
-      document.body.classList.remove("menu-closing");
-    }, reduced ? 0 : 280);
-  }
-
-  (function chrome() {
-    headerState();
-    if (!burger || !drawer) return;
-    var header = $("#header");
-    var nav = $(".nv-menu__nav", drawer), marker = $(".nv-marker", drawer);
-    var cats = $$(".nv-cat", drawer), dests = $$(".nv-dest", drawer);
-    var initial = Math.max(0, Math.min(cats.length - 1, Number(drawer.dataset.initialGroup) || 0));
-    var active = -1, hoverTimer = null;
-    var narrow = window.matchMedia("(max-width:900px)");
-    var fine = window.matchMedia("(hover:hover) and (pointer:fine)");
-
-    // The marker sits beside the first line of the open category's label.
-    function placeMarker(instant) {
-      if (!marker) return;
-      if (narrow.matches || active < 0) { marker.classList.remove("is-set"); return; }
-      var word = $(".nv-cat__word", cats[active]);
-      var cs = getComputedStyle(word);
-      var size = parseFloat(cs.fontSize);
-      var lead = (parseFloat(cs.lineHeight) - size) / 2;
-      var y = word.getBoundingClientRect().top - nav.getBoundingClientRect().top + lead + size * .16;
-      if (instant) marker.style.transition = "none";
-      marker.style.transform = "translateY(" + y.toFixed(1) + "px)";
-      marker.classList.add("is-set");
-      if (instant) { void marker.offsetWidth; marker.style.transition = ""; }
-    }
-
-    function select(index, opts) {
-      opts = opts || {};
-      if (index === active && !opts.force) return;
-      active = index;
-      cats.forEach(function (cat, i) {
-        var on = i === index;
-        cat.setAttribute("aria-expanded", String(on));
-        dests[i].hidden = !on;
-        // Only the incoming list animates; the outgoing one goes at once, so
-        // a fast pass down the categories never leaves two lists showing.
-        dests[i].classList.remove("is-entering");
-        if (on && !opts.quiet && !reduced) { void dests[i].offsetWidth; dests[i].classList.add("is-entering"); }
-      });
-      placeMarker(opts.instant);
-    }
-    select(initial, { quiet: true, instant: true });
-
-    cats.forEach(function (cat, i) {
-      var wasOpen = false;
-      cat.addEventListener("pointerdown", function () { wasOpen = i === active; });
-      cat.addEventListener("click", function (e) {
-        // In one column a category is an accordion and a second press closes
-        // it; beside the destinations it only ever opens. A tap focuses before
-        // it clicks, so the state before the press is what decides.
-        var collapse = narrow.matches && (e.detail === 0 ? i === active : wasOpen);
-        select(collapse ? -1 : i);
-        wasOpen = false;
-      });
-      cat.addEventListener("focus", function () { if (!narrow.matches) select(i); });
-      cat.addEventListener("mouseenter", function () {
-        if (narrow.matches || !fine.matches) return;
-        // A reader who has tabbed into a list is not dragged out of it by a
-        // pointer passing over another category.
-        if (dests[active] && dests[active].contains(document.activeElement)) return;
-        window.clearTimeout(hoverTimer);
-        hoverTimer = window.setTimeout(function () {
-          if (drawer.classList.contains("is-open") && cat.matches(":hover")) select(i);
-        }, 90);
-      });
-      cat.addEventListener("mouseleave", function () { window.clearTimeout(hoverTimer); });
-      cat.addEventListener("keydown", function (e) {
-        var next;
-        if (e.key === "ArrowDown") next = (i + 1) % cats.length;
-        else if (e.key === "ArrowUp") next = (i + cats.length - 1) % cats.length;
-        else if (e.key === "Home") next = 0;
-        else if (e.key === "End") next = cats.length - 1;
-        else if (e.key === "ArrowRight" && !narrow.matches) {
-          var first = $("a", dests[active]);
-          if (first) { e.preventDefault(); first.focus(); }
-          return;
-        } else return;
-        e.preventDefault();
-        cats[next].focus();
-      });
-    });
-    // In a list, the arrows move through it and Left returns to its category.
-    dests.forEach(function (panel, i) {
-      panel.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowLeft" && !narrow.matches) { e.preventDefault(); cats[i].focus(); return; }
-        var links = $$("a", panel), k = links.indexOf(document.activeElement);
-        if (k === -1) return;
-        if (e.key === "ArrowDown") { e.preventDefault(); links[(k + 1) % links.length].focus(); }
-        if (e.key === "ArrowUp") { e.preventDefault(); links[(k + links.length - 1) % links.length].focus(); }
-      });
-    });
-
-    function openDrawer() {
-      setEnquire(false);
-      window.clearTimeout(drawerCloseTimer);
-      document.body.classList.remove("menu-closing");
-      drawer.hidden = false;
-      drawer.scrollTop = 0;
-      active = -1;
-      select(initial, { quiet: true, instant: true });
-      // Flush the hidden state so the opening starts on this open.
-      void drawer.offsetWidth;
-      drawer.classList.add("is-open");
-      burger.setAttribute("aria-expanded", "true");
-      burger.setAttribute("aria-label", "Close menu");
-      document.body.classList.add("is-locked", "menu-open");
-      if (lenis) lenis.stop();
-      isolateDrawer(true);
-      cats[initial].focus({ preventScroll: true });
-    }
-    burger.addEventListener("click", function () {
-      if (drawer.classList.contains("is-open")) closeDrawer(); else openDrawer();
-    });
-    $$("a", drawer).forEach(function (a) { a.addEventListener("click", closeDrawer); });
-
-    window.addEventListener("resize", function () {
-      if (!drawer.classList.contains("is-open")) return;
-      if (!narrow.matches && active === -1) select(initial, { quiet: true });
-      placeMarker(true);
-    }, { passive: true });
-
-    document.addEventListener("keydown", function (e) {
-      if (!drawer.classList.contains("is-open")) return;
-      if (e.key === "Escape") {
-        if (enquireOpen()) return;          // the innermost thing closes first
-        e.preventDefault(); closeDrawer(); return;
-      }
-      if (e.key !== "Tab") return;
-      var panel = $("#enqPanel");
-      var items = $$("a[href], button", header).concat($$("a[href], button", drawer)).filter(function (el) {
-        return !el.disabled && el.tabIndex >= 0 && el.getClientRects().length && !el.closest("[hidden]") &&
-               !(panel && panel.contains(el) && !enquireOpen());
-      });
-      if (!items.length) return;
-      var k = items.indexOf(document.activeElement);
-      if (k === -1 || (e.shiftKey && k === 0) || (!e.shiftKey && k === items.length - 1)) {
-        e.preventDefault();
-        items[e.shiftKey ? items.length - 1 : 0].focus();
-      }
-    });
-  })();
+  // Header appearance remains part of the shared page layer.
+  headerState();
 
   /* ==========================================================
      University pathways chart
@@ -2201,78 +2026,6 @@
 
 
   /* ==========================================================
-     Enquire
-     Hover for a mouse, a tap for a touch screen, focus for a
-     keyboard — all three drive the same open state. The sheet
-     has its own Close; Escape and leaving it shut it too.
-     ========================================================== */
-  function enquirePanel() {
-    var wrap = $("#enq"), btn = $("#enqBtn"), panel = $("#enqPanel"), close = $("#enqClose");
-    if (!wrap || !btn || !panel) return;
-
-    var open = false, timer = null, returning = false;
-    var fine = window.matchMedia("(hover:hover) and (pointer:fine)");
-    var menuOpen = function () { return drawer && drawer.classList.contains("is-open"); };
-    // The sheet is shut by visibility, not removed, so it can ease in.
-    panel.hidden = false;
-
-    function set(next, returnFocus) {
-      if (next === open) return;
-      open = next;
-      wrap.classList.toggle("is-open", open);
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-      // Focus goes back to the tab without the tab's own keyboard-focus
-      // rule opening the sheet that was just shut.
-      if (!open && returnFocus) { returning = true; btn.focus(); returning = false; }
-    }
-    setEnquire = set;
-    enquireOpen = function () { return open; };
-
-    wrap.addEventListener("mouseenter", function () {
-      if (!fine.matches || menuOpen()) return;
-      window.clearTimeout(timer);
-      timer = window.setTimeout(function () { set(true); }, 70);
-    });
-    // A short grace period: the pointer may clip a corner on its way in.
-    wrap.addEventListener("mouseleave", function () {
-      if (!fine.matches) return;
-      window.clearTimeout(timer);
-      timer = window.setTimeout(function () { set(false); }, 220);
-    });
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      window.clearTimeout(timer);
-      if (menuOpen()) closeDrawer();
-      // With a mouse, arriving on the tab has already opened the sheet, so a
-      // click only ever opens it; leaving, Close or Escape shuts it. Touch
-      // has no hover, so there the tap is the toggle.
-      set(fine.matches ? true : !open);
-    });
-    if (close) close.addEventListener("click", function () {
-      window.clearTimeout(timer);
-      set(false, true);
-    });
-
-    // Only a *keyboard* focus opens it: a mouse click also focuses the tab,
-    // and the click handler above has already decided what that means.
-    wrap.addEventListener("focusin", function (e) {
-      if (returning || menuOpen()) return;
-      var t = e.target;
-      try { if (t && t.matches(":focus-visible")) set(true); } catch (err) { /* older browser */ }
-    });
-    wrap.addEventListener("focusout", function (e) {
-      if (!wrap.contains(e.relatedTarget)) set(false);
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && open) { e.preventDefault(); set(false, true); }
-    });
-    document.addEventListener("click", function (e) {
-      if (open && !wrap.contains(e.target)) set(false);
-    });
-  }
-
-  /* ==========================================================
      Film lightbox
      The iframe is built on open and removed on close: YouTube is
      not contacted until someone asks for the film, and removing
@@ -2283,8 +2036,11 @@
     var triggers = $$("[data-video]");
     if (!box || !frame || !triggers.length) return;
 
-    var opener = null;
-    var readingY = 0;
+    var opener = null, readingY = 0;
+    var closeButton = $(".lightbox__close", box);
+    var fallbackLink = $("#lightboxFallbackLink", box);
+    var historyKey = "__cirsFilmLightbox", historyToken = null;
+    var historyReturnPending = false, pendingOpen = null, lastClosed = null, historySequence = 0;
     var panel = $(".lightbox__panel", box);
     // Focus guards also catch Tab leaving the cross-origin player's document.
     var before = document.createElement("span"), after = document.createElement("span");
@@ -2292,11 +2048,31 @@
     panel.prepend(before); panel.append(after);
     before.addEventListener("focus", function () { $(".lightbox__close", box).focus(); });
     after.addEventListener("focus", function () { var player = $("iframe", frame); if (player) player.focus(); });
+    function currentHistoryToken() {
+      var state = window.history.state;
+      return state && typeof state === "object" ? state[historyKey] : null;
+    }
 
-    function open(id, from) {
+    function pushHistoryToken(token) {
+      var state = window.history.state;
+      var next = state && typeof state === "object" ? Object.assign({}, state) : {};
+      next[historyKey] = token;
+      window.history.pushState(next, "", window.location.href);
+    }
+
+    function open(id, from, fromHistory, existingToken) {
+      if (historyReturnPending) { pendingOpen = { id: id, from: from }; return; }
+      if (!box.hidden) return;
       opener = from || null;
       readingY = window.scrollY;
-      if (lenis) { lenis.scrollTo(readingY, { immediate:true }); lenis.stop(); }
+      if (fromHistory) historyToken = existingToken;
+      else {
+        historyToken = "film-" + Date.now() + "-" + (++historySequence);
+        pushHistoryToken(historyToken);
+      }
+      // Freeze an in-flight smooth scroll at the visible reading position.
+      if (lenis) { lenis.scrollTo(readingY, { immediate: true }); lenis.stop(); }
+      if (fallbackLink) fallbackLink.href = (from && from.href) || "https://youtu.be/" + encodeURIComponent(id);
       var f = document.createElement("iframe");
       f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) +
               "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
@@ -2310,21 +2086,34 @@
       box.hidden = false;
       box.showModal();
       document.body.classList.add("has-lightbox");
-      var close = $(".lightbox__close", box);
-      if (close) close.focus();
+      if (closeButton) closeButton.focus();
     }
 
-    function close() {
+    function close(fromHistory) {
       if (box.hidden) return;
+      var token = historyToken;
+      var closedId = opener && opener.getAttribute("data-video");
+      var closedFrom = opener;
       box.close();
       box.hidden = true;
       frame.innerHTML = "";
       document.body.classList.remove("has-lightbox");
-      if (lenis) { lenis.scrollTo(readingY, { immediate:true }); lenis.start(); }
-      else window.scrollTo(0, readingY);
-      if (opener) {
-        try { opener.focus({ preventScroll:true }); } catch (err) { opener.focus(); }
-        opener = null;
+      if (lenis) {
+        if (canResumeScroll()) lenis.start();
+        // A viewport rotation while the dialog is open changes Lenis's
+        // measured limit. Refresh it before restoring the captured position.
+        lenis.resize();
+        lenis.scrollTo(readingY, { immediate: true });
+      } else window.scrollTo(0, readingY);
+      if (opener && opener.isConnected) {
+        try { opener.focus({ preventScroll: true }); } catch (err) { opener.focus(); }
+      }
+      opener = null;
+      historyToken = null;
+      if (token) lastClosed = { token: token, id: closedId, from: closedFrom };
+      if (!fromHistory && token && currentHistoryToken() === token) {
+        historyReturnPending = true;
+        window.history.back();
       }
     }
 
@@ -2344,8 +2133,28 @@
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !box.hidden) close();
-      // Native Tab enters the iframe; the guards wrap at either boundary.
       // The native modal keeps background content inert until it closes.
+    });
+    // A cross-origin player can keep keyboard focus in its own control set.
+    // Give browser Back a same-URL history entry so it remains a reliable
+    // parent-dialog exit even when the player's keyboard events stay inside
+    // YouTube. Normal Close removes that entry again.
+    window.addEventListener("popstate", function () {
+      if (historyReturnPending) {
+        historyReturnPending = false;
+        var queued = pendingOpen;
+        pendingOpen = null;
+        if (queued) open(queued.id, queued.from);
+        return;
+      }
+      var token = currentHistoryToken();
+      if (!box.hidden && historyToken && token !== historyToken) {
+        close(true);
+        return;
+      }
+      if (box.hidden && lastClosed && token === lastClosed.token && lastClosed.id) {
+        open(lastClosed.id, lastClosed.from, true, lastClosed.token);
+      }
     });
   }
 
@@ -2563,7 +2372,6 @@
     footerFit();
     backToTop();
     floatingControls();
-    enquirePanel();
     filmLightbox();
     glimpses();
     historyTimeline();

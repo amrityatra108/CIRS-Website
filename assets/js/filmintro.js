@@ -77,6 +77,9 @@
   var payoff = !!(photo && section.hasAttribute("data-film-photo") && READ_END < PHOTO_END);
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  var artAttackConstrained = document.body.classList.contains("art-attack") && connection &&
+    (connection.saveData || ["slow-2g", "2g", "3g"].indexOf(connection.effectiveType) !== -1);
   var hasST = typeof window.gsap !== "undefined" &&
               typeof window.ScrollTrigger !== "undefined";
 
@@ -90,6 +93,14 @@
   var trigger = null;
   var furnished = null; // whether the site's furniture is currently put away
   var written = {};    // the last value of every style this file writes
+
+  // Art Attack carries a tiny first-paint copy of its approved opening rules
+  // so the title can sit over the still while external styles are in flight.
+  // Once this controller runs, the full page sheet owns the animation again.
+  if (document.body.classList.contains("art-attack")) {
+    var critical = document.getElementById("art-attack-critical");
+    if (critical) critical.remove();
+  }
 
   function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function span(p, a, b) { return b > a ? clamp((p - a) / (b - a)) : (p >= b ? 1 : 0); }
@@ -226,7 +237,7 @@
      joins in when its metadata arrives. */
   function start() {
     if (unavailable) return;
-    if (reduced.matches || !hasST) { still(); return; }
+    if (reduced.matches || !hasST || artAttackConstrained) { still(); return; }
     if (film.error) { fallback(); return; }
     /* The film begins loading while the page is still being parsed, before
        this deferred script runs, so if every source has already failed, the

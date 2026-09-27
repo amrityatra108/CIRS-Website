@@ -585,6 +585,7 @@ section[id]{ scroll-margin-top:88px; }
   scroll-snap-type:x proximity; scroll-padding-inline-start:var(--gut);
   -webkit-overflow-scrolling:touch;
 }
+.hrun.is-static .hrun__viewport:focus-visible{outline:2px solid var(--on-dark);outline-offset:-3px}
 .hrun.is-static .hrun__stage{
   width:auto; height:auto;
   display:flex; align-items:flex-start; gap:clamp(30px,7vw,72px);

@@ -94,17 +94,17 @@
     paths.forEach(item=>item.setAttribute('d',d));
     total=path.getTotalLength();
     if (!Number.isFinite(total) || total<=0) return;
-    const samples=Array.from({length:4801},(_,i)=>{
-      const length=total*i/4800,p=path.getPointAtLength(length);
-      return {length,x:p.x,y:p.y};
-    });
+    // The route is constructed with monotonically increasing x coordinates.
+    // Find each scene's exact point on that route with a bounded search instead
+    // of scanning thousands of samples on every initial layout and resize.
     anchors=points.map(point=>{
-      let best=samples[0],distance=Infinity;
-      for (const sample of samples) {
-        const candidate=(sample.x-point.x)**2+(sample.y-point.y)**2;
-        if (candidate<distance) {distance=candidate;best=sample;}
+      let low=0,high=total;
+      for (let i=0;i<20;i++) {
+        const length=(low+high)/2;
+        if (path.getPointAtLength(length).x<point.x) low=length;
+        else high=length;
       }
-      return best.length/total;
+      return (low+high)/(2*total);
     });
     if (!anchors.every((anchor,i)=>Number.isFinite(anchor) && (i===0 || anchor>anchors[i-1]))) {
       root.classList.remove('is-enhanced');
@@ -202,6 +202,5 @@
   addEventListener('scroll',readScroll,{passive:true});
   addEventListener('resize',layout,{passive:true});
   motion.addEventListener('change',layout);
-  if (document.fonts) document.fonts.ready.then(layout);
   layout();
 })();
