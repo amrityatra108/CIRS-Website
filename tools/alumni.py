@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The alumni journey: every destination, voice and named alumnus on one page.
+"""The alumni journey: destinations, voices and named alumni on one page.
 
 The Alumni page is a journey rather than a directory — campus, departure, a
 field of destinations, the alumni themselves, the pathways out, the index and
@@ -7,12 +7,13 @@ the way back — and every one of those chapters is built from the lists below.
 This file is the whole of the page's content. Nothing on it is written into
 tools/pages/alumni.html except the chapters' own copy.
 
-CONTENT IS EITHER SCHOOL-PUBLISHED OR LINKED TO AN ATTRIBUTABLE SOURCE.
+Destination institutions come from the sanitized, institution-only
+alumni-destinations.json. The raw registration workbook and row-level review
+remain outside this repository. Map coordinates exist only for the previously
+published, school-approved points; other identified institutions stay in the
+searchable directory without guessed locations.
 
-The previous page carried eighteen institutions grouped into four regions,
-three alumni quotations, four named alumni with their present roles, and a
-note that further alumni were to be supplied. Those records remain. The
-current page includes short, source-linked biographies and four photographs
+The page also includes source-linked biographies and four photographs
 supplied by CIRS. Batch years and unverified personal details are omitted.
 
 WHAT IS DELIBERATELY MISSING.
@@ -24,9 +25,9 @@ ALUMNI-CONTENT.md tracks what is still missing.
 
 TO PUBLISH MORE.
 
-  A destination — add to DESTINATIONS. It appears as a point on the map,
-  a row in the index, and a filterable member of its region. Give it a
-  latitude and a longitude; the map places it and draws its route.
+  A destination — add a sanitized institution entry to
+  alumni-destinations.json. Verified coordinates add a map point; entries
+  without them remain in the directory.
 
   An alumnus — add to ALUMNI. Name and one verified line is enough to
   publish. Add an extended account in "biography" when one is supplied;
@@ -40,6 +41,8 @@ counts and the editorial chapters all build from these lists.
 """
 
 import os
+import json
+from pathlib import Path
 import sys
 from html import escape
 
@@ -56,7 +59,10 @@ REGIONS = [
     ("india", "India"),
     ("uk",    "United Kingdom"),
     ("us",    "United States"),
+    ("canada", "Canada"),
     ("apac",  "Asia&ndash;Pacific"),
+    ("europe", "Europe"),
+    ("middle-east", "Middle East"),
 ]
 
 # ------------------------------------------------------------------
@@ -109,9 +115,9 @@ def route(ax, ay, bx, by):
 # ------------------------------------------------------------------
 # The destinations: institutions CIRS students have gone on to.
 #
-# Eighteen of the nineteen were on the previous version of this page and
-# are reproduced exactly. NTU Singapore was supplied afterwards by the
-# school — which is how every further one should arrive.
+# Previously published points retain their reviewed coordinates. Identified
+# alumni-reported institutions without reviewed campus locations are listed
+# in the directory only.
 #
 #   key       stable id, used by the panel and the index
 #   name      as it should read in full
@@ -133,53 +139,13 @@ def route(ax, ay, bx, by):
 #             to. Five of these are in Britain, which is why the offsets
 #             are written down rather than computed.
 # ------------------------------------------------------------------
-DESTINATIONS = [
-    # ---- India ----
-    ("iitm",        "IIT Madras", "IIT Madras",
-     "India", "india", 13.01, 80.24, (0.4, 0.4), (4.8, 0.4, "r")),
-    ("srcc",        "Shri Ram College of Commerce", "Shri Ram",
-     "India", "india", 28.69, 77.21, (0.0, 0.0), (0.0, -5.0, "c")),
-    ("nid",         "National Institute of Design", "NID",
-     "India", "india", 23.03, 72.55, (0.0, 0.0), (-3.4, -0.6, "l")),
-    ("cvv",         "Chinmaya Vishwa Vidyapeeth", "Chinmaya Vishwa Vidyapeeth",
-     "India", "india", 9.98, 76.55, (0.4, 0.7), (-4.6, 5.2, "l")),
-
-    # ---- United Kingdom ----
-    ("durham",      "Durham University", "Durham",
-     "United Kingdom", "uk", 54.77, -1.58, (-0.4, -1.4), (-3.0, -3.2, "l")),
-    ("manchester",  "The University of Manchester", "Manchester",
-     "United Kingdom", "uk", 53.47, -2.23, (-1.4, -0.1), (-3.0, 0.0, "l")),
-    ("warwick",     "University of Warwick", "Warwick",
-     "United Kingdom", "uk", 52.38, -1.56, (-0.2, 1.0), (-3.0, 3.4, "l")),
-    ("imperial",    "Imperial College London", "Imperial",
-     "United Kingdom", "uk", 51.50, -0.18, (0.6, 1.6), (3.0, 2.6, "r")),
-    ("lse",         "The London School of Economics and Political Science", "LSE",
-     "United Kingdom", "uk", 51.51, -0.12, (1.4, -0.3), (3.0, -2.0, "r")),
-
-    # ---- Asia–Pacific ----
-    ("nus",         "National University of Singapore", "NUS",
-     "Singapore", "apac", 1.30, 103.78, (0.9, 0.7), (3.0, 1.8, "r")),
-    ("ntu",         "Nanyang Technological University", "NTU",
-     "Singapore", "apac", 1.35, 103.68, (-0.9, -0.7), (-3.0, 2.6, "l")),
-    ("hkust",       "The Hong Kong University of Science and Technology", "HKUST",
-     "Hong Kong", "apac", 22.34, 114.26, (0.0, 0.0), (3.2, 0.4, "r")),
-
-    # ---- United States ----
-    ("northwestern", "Northwestern University", "Northwestern",
-     "United States", "us", 42.06, -87.69, (-0.9, -0.9), (-3.0, -5.2, "l")),
-    ("chicago",     "University of Chicago", "Chicago",
-     "United States", "us", 41.79, -87.60, (0.2, 0.3), (-3.4, 1.0, "l")),
-    ("purdue",      "Purdue University", "Purdue",
-     "United States", "us", 40.42, -86.91, (0.9, 1.0), (0.0, 4.4, "c")),
-    ("virginia",    "University of Virginia", "Virginia",
-     "United States", "us", 38.03, -78.51, (0.0, 0.0), (2.8, 3.0, "r")),
-    ("nyu",         "New York University", "NYU",
-     "United States", "us", 40.73, -73.99, (0.0, 0.2), (3.4, 0.6, "r")),
-    ("parsons",     "The New School &mdash; Parsons", "Parsons",
-     "United States", "us", 40.74, -73.99, (-0.9, -0.9), (-3.0, -2.4, "l")),
-    ("boston",      "Boston University", "Boston",
-     "United States", "us", 42.35, -71.11, (0.6, -0.8), (3.0, -2.2, "r")),
-]
+DESTINATION_RECORDS = json.loads(
+    Path(__file__).with_name("alumni-destinations.json").read_text(encoding="utf-8")
+)
+DESTINATIONS = [(d["key"], d["name"], d["short"], d["country"], d["region"],
+                 d["lat"], d["lon"], tuple(d["nudge"]), tuple(d["label"]))
+                for d in DESTINATION_RECORDS]
+MAPPED_DESTINATIONS = [d for d in DESTINATIONS if d[5] is not None and d[6] is not None]
 
 
 def place(lat, lon, nudge=(0.0, 0.0)):
@@ -323,9 +289,8 @@ PATHWAYS = [
 
     {"key": "design", "label": "Design and the arts",
      "heading": "Some of them <em>make things.</em>",
-     "copy": "Two of the {COUNT} destinations are design schools rather than "
-             "universities, and one of the four alumni the school has named works as "
-             "a designer.",
+     "copy": "Design schools also appear among the destinations, and one of the four "
+             "alumni the school has named works as a designer.",
      "anchors": ["nid", "parsons"], "people": ["shashwat-santosh"],
      "ground": "gold"},
 
@@ -399,6 +364,10 @@ def region_count(region):
     return sum(1 for d in DESTINATIONS if d[4] == region)
 
 
+def mapped_region_count(region):
+    return sum(1 for d in MAPPED_DESTINATIONS if d[4] == region)
+
+
 def country_count():
     return len({d[3] for d in DESTINATIONS})
 
@@ -432,7 +401,7 @@ def routes_svg():
     """
     ox, oy = ORIGIN
     out = []
-    for key, _n, _s, _c, region, lat, lon, nudge, label in DESTINATIONS:
+    for key, _n, _s, _c, region, lat, lon, nudge, label in MAPPED_DESTINATIONS:
         x, y = place(lat, lon, nudge)
         out.append(
             '      <path class="ajc__line" data-region="%s" data-line="%s" d="%s"/>'
@@ -485,10 +454,10 @@ def constellation_html():
     a map. There is one DOM, and no second markup path that can rot.
     """
     ox, oy = ORIGIN
-    total = len(DESTINATIONS)
+    total = len(MAPPED_DESTINATIONS)
     points = []
     for i, (key, name, short, country, region,
-            lat, lon, nudge, label) in enumerate(DESTINATIONS):
+            lat, lon, nudge, label) in enumerate(MAPPED_DESTINATIONS):
         x, y = place(lat, lon, nudge)
         lx, ly, side = label
         points.append('''      <li class="ajc__item" data-region="%s">
@@ -512,14 +481,14 @@ def constellation_html():
         filters.append(
             '      <button type="button" class="ajc__filter" data-filter="%s" '
             'aria-pressed="false">%s <span class="ajc__fcount">%d</span></button>'
-            % (key, label, region_count(key)))
+            % (key, label, mapped_region_count(key)))
 
     return '''<div class="ajc" data-constellation>
   <div class="ajc__bar">
     <div class="ajc__filters" role="group" aria-label="Filter the destinations by region">
 %(filters)s
     </div>
-    <p class="ajc__status" data-constellation-status role="status">Showing all %(total)d destinations.</p>
+    <p class="ajc__status" data-constellation-status role="status">Showing %(total)d mapped destinations. The directory below lists all %(all)d institutions.</p>
   </div>
 
   <div class="ajc__field" data-constellation-field>
@@ -558,7 +527,7 @@ def constellation_html():
       </button>
     </div>
   </div>
-</div>''' % {"filters": "\n".join(filters), "total": total,
+</div>''' % {"filters": "\n".join(filters), "total": total, "all": len(DESTINATIONS),
               "map": map_svg(), "lines": routes_svg(),
               "vw": VB_W, "vh": VB_H,
               "ox": ox / VB_W * 100, "oy": oy / VB_H * 100,
@@ -572,9 +541,8 @@ def constellation_html():
 def destinations_html():
     """The index: text first, grouped by region, filterable and searchable.
 
-    No logo wall. Eighteen institutions is a list, and a list set properly
-    is easier to read and to search than eighteen pictures of wordmarks the
-    school has no licence to reproduce.
+    Names and search attributes are escaped from the sanitized institution
+    dataset.
     """
     groups = []
     for region, label in REGIONS:
@@ -586,7 +554,8 @@ def destinations_html():
             rows.append('''          <li class="ajd__row" data-region="%s" data-search="%s">
             <span class="ajd__name">%s</span>
             <span class="ajd__country">%s</span>
-          </li>''' % (region, search, name, country))
+          </li>''' % (escape(region, quote=True), escape(search, quote=True),
+                     escape(name), escape(country)))
         groups.append('''      <section class="ajd__group" data-region="%s">
         <h3 class="ajd__region"><span class="sc">%s</span>
           <span class="ajd__n">%d<span class="sr-only"> destinations</span></span></h3>

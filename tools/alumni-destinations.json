@@ -1,0 +1,2852 @@
+[
+  {
+    "key": "curtin-university",
+    "name": "Curtin University",
+    "short": "Curtin University",
+    "country": "Australia",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "sp-jain-school-of-global-management",
+    "name": "Sp Jain School Of Global Management",
+    "short": "Sp Jain School Of Global Management",
+    "country": "Australia",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-new-south-wales",
+    "name": "University Of New South Wales",
+    "short": "University Of New South Wales",
+    "country": "Australia",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-sydney",
+    "name": "University of Sydney",
+    "short": "University of Sydney",
+    "country": "Australia",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-wollongong",
+    "name": "University of Wollongong",
+    "short": "University of Wollongong",
+    "country": "Australia",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "george-brown-college",
+    "name": "George Brown College",
+    "short": "George Brown College",
+    "country": "Canada",
+    "region": "canada",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-british-columbia",
+    "name": "University of British Columbia",
+    "short": "University of British Columbia",
+    "country": "Canada",
+    "region": "canada",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-victoria",
+    "name": "University of Victoria",
+    "short": "University of Victoria",
+    "country": "Canada",
+    "region": "canada",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-waterloo",
+    "name": "University of Waterloo",
+    "short": "University of Waterloo",
+    "country": "Canada",
+    "region": "canada",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "york-university",
+    "name": "York University",
+    "short": "York University",
+    "country": "Canada",
+    "region": "canada",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "american-graduate-school-in-paris",
+    "name": "American Graduate School in Paris",
+    "short": "American Graduate School in Paris",
+    "country": "France",
+    "region": "europe",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "hkust",
+    "name": "The Hong Kong University of Science and Technology",
+    "short": "HKUST",
+    "country": "Hong Kong",
+    "region": "apac",
+    "lat": 22.34,
+    "lon": 114.26,
+    "nudge": [
+      0.0,
+      0.0
+    ],
+    "label": [
+      3.2,
+      0.4,
+      "r"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "the-university-of-hong-kong",
+    "name": "The University of Hong Kong",
+    "short": "The University of Hong Kong",
+    "country": "Hong Kong",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "alliance-university",
+    "name": "Alliance University",
+    "short": "Alliance University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "amity-university",
+    "name": "Amity University (campus unspecified)",
+    "short": "Amity University (campus unspecified)",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "amity-university-noida",
+    "name": "Amity University Noida",
+    "short": "Amity University Noida",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "amrita-school-of-engineering",
+    "name": "Amrita School of Engineering",
+    "short": "Amrita School of Engineering",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "amrita-vishwa-vidyapeetham",
+    "name": "Amrita Vishwa Vidyapeetham",
+    "short": "Amrita Vishwa Vidyapeetham",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "anna-university",
+    "name": "Anna University",
+    "short": "Anna University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "bangalore-university",
+    "name": "Bangalore University",
+    "short": "Bangalore University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "cvv",
+    "name": "Chinmaya Vishwa Vidyapeeth",
+    "short": "Chinmaya Vishwa Vidyapeeth",
+    "country": "India",
+    "region": "india",
+    "lat": 9.98,
+    "lon": 76.55,
+    "nudge": [
+      -2.4,
+      2.4
+    ],
+    "label": [
+      -4.6,
+      5.2,
+      "l"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "christ-university",
+    "name": "CHRIST University",
+    "short": "CHRIST University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "college-of-architecture-trivandrum",
+    "name": "College Of Architecture Trivandrum",
+    "short": "College Of Architecture Trivandrum",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "college-of-engineering-guindy-anna-university",
+    "name": "College of Engineering Guindy, Anna University",
+    "short": "College of Engineering Guindy, Anna University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "dayanand-sagar-university",
+    "name": "Dayanand Sagar University",
+    "short": "Dayanand Sagar University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "delhi-university",
+    "name": "Delhi University",
+    "short": "Delhi University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "doon-business-school-and-allied-sciences",
+    "name": "Doon Business School and Allied Sciences",
+    "short": "Doon Business School and Allied Sciences",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "dy-patil-school-of-medicine",
+    "name": "DY Patil School Of Medicine",
+    "short": "DY Patil School Of Medicine",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "faculty-of-management-studies",
+    "name": "Faculty of Management Studies",
+    "short": "Faculty of Management Studies",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "fergusson-college",
+    "name": "Fergusson College",
+    "short": "Fergusson College",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "flame-university",
+    "name": "FLAME University",
+    "short": "FLAME University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "gujarat-university",
+    "name": "Gujarat University",
+    "short": "Gujarat University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "hr-college",
+    "name": "Hr college",
+    "short": "Hr college",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "ibs",
+    "name": "Ibs",
+    "short": "Ibs",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "icfai",
+    "name": "Icfai",
+    "short": "Icfai",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "iitm",
+    "name": "IIT Madras",
+    "short": "IIT Madras",
+    "country": "India",
+    "region": "india",
+    "lat": 13.01,
+    "lon": 80.24,
+    "nudge": [
+      0.4,
+      0.4
+    ],
+    "label": [
+      4.8,
+      0.4,
+      "r"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "indian-school-of-design-and-innovation-parsons-mumbai",
+    "name": "Indian School of Design and Innovation Parsons Mumbai",
+    "short": "Indian School of Design and Innovation Parsons Mumbai",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "inifd",
+    "name": "INIFD",
+    "short": "INIFD",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "institute-of-chartered-accountants-of-india",
+    "name": "Institute of Chartered Accountants of India",
+    "short": "Institute of Chartered Accountants of India",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "institute-of-law-nirma-university-ahmedabad",
+    "name": "Institute of Law, Nirma University, Ahmedabad",
+    "short": "Institute of Law, Nirma University, Ahmedabad",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "j-d-birla-institute",
+    "name": "J. D. Birla Institute",
+    "short": "J. D. Birla Institute",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "jadavpur-university",
+    "name": "Jadavpur University",
+    "short": "Jadavpur University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "jai-hind-college",
+    "name": "Jai Hind College",
+    "short": "Jai Hind College",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "jain-university",
+    "name": "Jain university",
+    "short": "Jain university",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "karunya-university",
+    "name": "Karunya University",
+    "short": "Karunya University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "kiit-university",
+    "name": "KIIT University",
+    "short": "KIIT University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "kirori-mal-college",
+    "name": "Kirori Mal College",
+    "short": "Kirori Mal College",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "kumaraguru-college-of-technology",
+    "name": "Kumaraguru College of Technology",
+    "short": "Kumaraguru College of Technology",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "loyola-college",
+    "name": "Loyola College",
+    "short": "Loyola College",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "m-s-ramaiah-institute-of-technology",
+    "name": "M S Ramaiah Institute of Technology",
+    "short": "M S Ramaiah Institute of Technology",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "m-o-p-vaishnav-college-for-women",
+    "name": "M.O.P. Vaishnav College for Women",
+    "short": "M.O.P. Vaishnav College for Women",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "maharashtra-institute-of-technology-school-of-management",
+    "name": "Maharashtra Institute of Technology, School of Management",
+    "short": "Maharashtra Institute of Technology, School of Management",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "manipal-institute-of-technology",
+    "name": "Manipal Institute of Technology",
+    "short": "Manipal Institute of Technology",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "manipal-university",
+    "name": "Manipal University",
+    "short": "Manipal University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "mc-gans-ooty-school-of-architecture",
+    "name": "Mc'gans ooty school of architecture",
+    "short": "Mc'gans ooty school of architecture",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "mithibai-college",
+    "name": "Mithibai College",
+    "short": "Mithibai College",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "mount-carmel-college",
+    "name": "Mount Carmel college",
+    "short": "Mount Carmel college",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "national-institute-of-bank-management",
+    "name": "National Institute of Bank Management",
+    "short": "National Institute of Bank Management",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "nid",
+    "name": "National Institute of Design",
+    "short": "NID",
+    "country": "India",
+    "region": "india",
+    "lat": 23.03,
+    "lon": 72.55,
+    "nudge": [
+      0.0,
+      0.0
+    ],
+    "label": [
+      -3.4,
+      -0.6,
+      "l"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "national-institute-of-technology-tiruchirappalli",
+    "name": "National Institute of Technology Tiruchirappalli",
+    "short": "National Institute of Technology Tiruchirappalli",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "nlu-delhi",
+    "name": "NLU, Delhi",
+    "short": "NLU, Delhi",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "nmims",
+    "name": "NMIMS",
+    "short": "NMIMS",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "nmims-balwant-seth-school-of-architecture",
+    "name": "NMIMS-Balwant Seth School of Architecture",
+    "short": "NMIMS-Balwant Seth School of Architecture",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "o-p-jindal-global-university",
+    "name": "O.P. Jindal Global University",
+    "short": "O.P. Jindal Global University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "pearl-academy",
+    "name": "Pearl Academy",
+    "short": "Pearl Academy",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "ppg-institute-of-technology",
+    "name": "Ppg Institute of technology",
+    "short": "Ppg Institute of technology",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "prin-l-n-welingkar-institute-of-management-development-research",
+    "name": "Prin.L.N Welingkar institute of management development & research",
+    "short": "Prin.L.N Welingkar institute of management development & research",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "psg-college-of-technology",
+    "name": "PSG College of Technology",
+    "short": "PSG College of Technology",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "psg-institute-of-technology",
+    "name": "PSG Institute of Technology",
+    "short": "PSG Institute of Technology",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "sardar-patel-university",
+    "name": "Sardar Patel university",
+    "short": "Sardar Patel university",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "savitribai-phule-pune-university",
+    "name": "Savitribai Phule Pune University",
+    "short": "Savitribai Phule Pune University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "school-of-allied-health-sciences-manipal-university",
+    "name": "School of Allied Health Sciences, Manipal University",
+    "short": "School of Allied Health Sciences, Manipal University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "school-of-inspired-leadership",
+    "name": "School of Inspired Leadership",
+    "short": "School of Inspired Leadership",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "school-of-planning-and-architecture",
+    "name": "School of planning and architecture",
+    "short": "School of planning and architecture",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "shiv-nadar-university",
+    "name": "Shiv Nadar University",
+    "short": "Shiv Nadar University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "shri-devraj-urs-medical-university",
+    "name": "Shri Devraj URS Medical University",
+    "short": "Shri Devraj URS Medical University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "srcc",
+    "name": "Shri Ram College of Commerce",
+    "short": "Shri Ram",
+    "country": "India",
+    "region": "india",
+    "lat": 28.69,
+    "lon": 77.21,
+    "nudge": [
+      0.0,
+      0.0
+    ],
+    "label": [
+      0.0,
+      -5.0,
+      "c"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "sri-sri-university",
+    "name": "Sri Sri University",
+    "short": "Sri Sri University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "sri-venkateswara-college",
+    "name": "Sri Venkateswara College",
+    "short": "Sri Venkateswara College",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "srishti-university-of-art-design-technology",
+    "name": "Srishti University of Art, Design Technology",
+    "short": "Srishti University of Art, Design Technology",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "srm-institute-of-science-and-technology",
+    "name": "SRM Institute of Science and Technology",
+    "short": "SRM Institute of Science and Technology",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "st-joseph-s-college-of-law",
+    "name": "St Joseph's college of law",
+    "short": "St Joseph's college of law",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "st-joseph-s-college-of-arts-and-science",
+    "name": "St. Joseph's College of Arts and Science",
+    "short": "St. Joseph's College of Arts and Science",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "st-joseph-s-college-of-commerce-bengaluru",
+    "name": "St. Joseph's college of commerce, Bengaluru",
+    "short": "St. Joseph's college of commerce, Bengaluru",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "st-xavier-s-college-kolkata",
+    "name": "St. Xavier's College, Kolkata",
+    "short": "St. Xavier's College, Kolkata",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "st-xavier-s-college-mumbai",
+    "name": "St. Xavier's College, Mumbai",
+    "short": "St. Xavier's College, Mumbai",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "st-xavier-s-college-ranchi",
+    "name": "St.Xavier's College, Ranchi",
+    "short": "St.Xavier's College, Ranchi",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "symbiosis-centre-for-management-studies",
+    "name": "Symbiosis Centre for Management Studies",
+    "short": "Symbiosis Centre for Management Studies",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "symbiosis-centre-for-media-and-communication",
+    "name": "Symbiosis Centre for Media and Communication",
+    "short": "Symbiosis Centre for Media and Communication",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "symbiosis-college-of-arts-and-commerce",
+    "name": "Symbiosis College of Arts and Commerce",
+    "short": "Symbiosis College of Arts and Commerce",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "symbiosis-institute-of-media-and-communication",
+    "name": "Symbiosis Institute of Media and Communication",
+    "short": "Symbiosis Institute of Media and Communication",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "symbiosis-international-university",
+    "name": "Symbiosis International University",
+    "short": "Symbiosis International University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "symbiosis-school-of-economics",
+    "name": "Symbiosis School of Economics",
+    "short": "Symbiosis School of Economics",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "t-a-pai-management-institute",
+    "name": "T A Pai Management Institute",
+    "short": "T A Pai Management Institute",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-madras",
+    "name": "University of Madras",
+    "short": "University of Madras",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-mumbai",
+    "name": "University of Mumbai",
+    "short": "University of Mumbai",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-petroleum-and-energy-studies",
+    "name": "University of Petroleum and Energy Studies",
+    "short": "University of Petroleum and Energy Studies",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "utkal-university",
+    "name": "Utkal University",
+    "short": "Utkal University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "vellore-institute-of-technology",
+    "name": "Vellore Institute of Technology",
+    "short": "Vellore Institute of Technology",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "visvesvaraya-technological-university",
+    "name": "Visvesvaraya Technological University",
+    "short": "Visvesvaraya Technological University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-canterbury",
+    "name": "University of Canterbury",
+    "short": "University of Canterbury",
+    "country": "New Zealand",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "james-cook-university-singapore",
+    "name": "James Cook University Singapore",
+    "short": "James Cook University Singapore",
+    "country": "Singapore",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "kaplan-higher-education-academy",
+    "name": "Kaplan Higher Education Academy",
+    "short": "Kaplan Higher Education Academy",
+    "country": "Singapore",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "mdis",
+    "name": "Mdis",
+    "short": "Mdis",
+    "country": "Singapore",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "ntu",
+    "name": "Nanyang Technological University",
+    "short": "NTU",
+    "country": "Singapore",
+    "region": "apac",
+    "lat": 1.35,
+    "lon": 103.68,
+    "nudge": [
+      -0.9,
+      -0.7
+    ],
+    "label": [
+      -3.0,
+      2.6,
+      "l"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "nus",
+    "name": "National University of Singapore",
+    "short": "NUS",
+    "country": "Singapore",
+    "region": "apac",
+    "lat": 1.3,
+    "lon": 103.78,
+    "nudge": [
+      0.9,
+      0.7
+    ],
+    "label": [
+      3.0,
+      1.8,
+      "r"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "university-of-bradford-singapore",
+    "name": "University of Bradford (Singapore study centre)",
+    "short": "University of Bradford (Singapore study centre)",
+    "country": "Singapore",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; institution checked"
+  },
+  {
+    "key": "university-of-london-singapore",
+    "name": "University of London (Singapore study centre)",
+    "short": "University of London (Singapore study centre)",
+    "country": "Singapore",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; institution checked"
+  },
+  {
+    "key": "htmi-switzerland",
+    "name": "HTMi Hotel and Tourism Management Institute Switzerland",
+    "short": "HTMi Hotel and Tourism Management Institute Switzerland",
+    "country": "Switzerland",
+    "region": "europe",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; institution checked"
+  },
+  {
+    "key": "bukovinian-state-medical-university",
+    "name": "Bukovinian State Medical University",
+    "short": "Bukovinian State Medical University",
+    "country": "Ukraine",
+    "region": "europe",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "bits-pilani-dubai-campus",
+    "name": "BITS Pilani Dubai Campus",
+    "short": "BITS Pilani Dubai Campus",
+    "country": "United Arab Emirates",
+    "region": "middle-east",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "institute-of-management-technology",
+    "name": "Institute of management technology",
+    "short": "Institute of management technology",
+    "country": "United Arab Emirates",
+    "region": "middle-east",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-wollongong-in-dubai",
+    "name": "University of Wollongong in Dubai",
+    "short": "University of Wollongong in Dubai",
+    "country": "United Arab Emirates",
+    "region": "middle-east",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "cardiff-university",
+    "name": "Cardiff University",
+    "short": "Cardiff University",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "durham",
+    "name": "Durham University",
+    "short": "Durham",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": 54.77,
+    "lon": -1.58,
+    "nudge": [
+      -0.4,
+      -1.4
+    ],
+    "label": [
+      -3.0,
+      -3.2,
+      "l"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "glasgow-caledonian-university",
+    "name": "Glasgow Caledonian University",
+    "short": "Glasgow Caledonian University",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "imperial",
+    "name": "Imperial College London",
+    "short": "Imperial",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": 51.5,
+    "lon": -0.18,
+    "nudge": [
+      0.6,
+      1.6
+    ],
+    "label": [
+      3.0,
+      2.6,
+      "r"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "oxford-brookes-university",
+    "name": "Oxford Brookes University",
+    "short": "Oxford Brookes University",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "royal-holloway-university-of-london",
+    "name": "Royal Holloway, University of London",
+    "short": "Royal Holloway, University of London",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "lse",
+    "name": "The London School of Economics and Political Science",
+    "short": "LSE",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": 51.51,
+    "lon": -0.12,
+    "nudge": [
+      1.4,
+      -0.3
+    ],
+    "label": [
+      3.0,
+      -2.0,
+      "r"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "manchester",
+    "name": "The University of Manchester",
+    "short": "Manchester",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": 53.47,
+    "lon": -2.23,
+    "nudge": [
+      -1.4,
+      -0.1
+    ],
+    "label": [
+      -3.0,
+      0.0,
+      "l"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "university-college-london",
+    "name": "University College London",
+    "short": "University College London",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; institution checked"
+  },
+  {
+    "key": "university-of-bristol",
+    "name": "University Of Bristol",
+    "short": "University Of Bristol",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-liverpool",
+    "name": "University of Liverpool",
+    "short": "University of Liverpool",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-nottingham",
+    "name": "University of Nottingham",
+    "short": "University of Nottingham",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-sheffield",
+    "name": "University of Sheffield",
+    "short": "University of Sheffield",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-the-arts-london",
+    "name": "University of the Arts London",
+    "short": "University of the Arts London",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "warwick",
+    "name": "University of Warwick",
+    "short": "Warwick",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": 52.38,
+    "lon": -1.56,
+    "nudge": [
+      -0.2,
+      1.0
+    ],
+    "label": [
+      -3.0,
+      3.4,
+      "l"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "university-of-westminster",
+    "name": "University of Westminster",
+    "short": "University of Westminster",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "boston",
+    "name": "Boston University",
+    "short": "Boston",
+    "country": "United States",
+    "region": "us",
+    "lat": 42.35,
+    "lon": -71.11,
+    "nudge": [
+      0.6,
+      -0.8
+    ],
+    "label": [
+      3.0,
+      -2.2,
+      "r"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "carnegie-mellon-university",
+    "name": "Carnegie Mellon University",
+    "short": "Carnegie Mellon University",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "cornell-university",
+    "name": "Cornell University",
+    "short": "Cornell University",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "emory-university",
+    "name": "Emory University",
+    "short": "Emory University",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "fairleigh-dickinson-university",
+    "name": "Fairleigh Dickinson University",
+    "short": "Fairleigh Dickinson University",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "florida-institute-of-technology",
+    "name": "Florida Institute of Technology",
+    "short": "Florida Institute of Technology",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "georgia-institute-of-technology",
+    "name": "Georgia Institute of Technology",
+    "short": "Georgia Institute of Technology",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "hofstra-university",
+    "name": "Hofstra University",
+    "short": "Hofstra University",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "nyu",
+    "name": "New York University",
+    "short": "NYU",
+    "country": "United States",
+    "region": "us",
+    "lat": 40.73,
+    "lon": -73.99,
+    "nudge": [
+      0.0,
+      0.2
+    ],
+    "label": [
+      3.4,
+      0.6,
+      "r"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "northwestern",
+    "name": "Northwestern University",
+    "short": "Northwestern",
+    "country": "United States",
+    "region": "us",
+    "lat": 42.06,
+    "lon": -87.69,
+    "nudge": [
+      -0.9,
+      -0.9
+    ],
+    "label": [
+      -3.0,
+      -5.2,
+      "l"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "purdue",
+    "name": "Purdue University",
+    "short": "Purdue",
+    "country": "United States",
+    "region": "us",
+    "lat": 40.42,
+    "lon": -86.91,
+    "nudge": [
+      0.9,
+      1.0
+    ],
+    "label": [
+      0.0,
+      4.4,
+      "c"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "rochester-institute-of-technology",
+    "name": "Rochester Institute of Technology",
+    "short": "Rochester Institute of Technology",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "parsons",
+    "name": "The New School — Parsons",
+    "short": "Parsons",
+    "country": "United States",
+    "region": "us",
+    "lat": 40.74,
+    "lon": -73.99,
+    "nudge": [
+      -0.9,
+      -0.9
+    ],
+    "label": [
+      -3.0,
+      -2.4,
+      "l"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "university-of-california-irvine",
+    "name": "University of California, Irvine",
+    "short": "University of California, Irvine",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "chicago",
+    "name": "University of Chicago",
+    "short": "Chicago",
+    "country": "United States",
+    "region": "us",
+    "lat": 41.79,
+    "lon": -87.6,
+    "nudge": [
+      0.2,
+      0.3
+    ],
+    "label": [
+      -3.4,
+      1.0,
+      "l"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "university-of-illinois-urbana-champaign",
+    "name": "University of Illinois - Urbana Champaign",
+    "short": "University of Illinois - Urbana Champaign",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-scranton",
+    "name": "University of Scranton",
+    "short": "University of Scranton",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-southern-california",
+    "name": "University of Southern California",
+    "short": "University of Southern California",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-toledo",
+    "name": "University of Toledo",
+    "short": "University of Toledo",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  },
+  {
+    "key": "virginia",
+    "name": "University of Virginia",
+    "short": "Virginia",
+    "country": "United States",
+    "region": "us",
+    "lat": 38.03,
+    "lon": -78.51,
+    "nudge": [
+      0.0,
+      0.0
+    ],
+    "label": [
+      2.8,
+      3.0,
+      "r"
+    ],
+    "basis": "previous school-approved destination"
+  },
+  {
+    "key": "university-of-wisconsin-madison",
+    "name": "University of Wisconsin- Madison",
+    "short": "University of Wisconsin- Madison",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported"
+  }
+]

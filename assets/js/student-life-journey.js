@@ -9,7 +9,7 @@
   var hasScrollTrigger = hasGSAP && typeof window.ScrollTrigger !== "undefined";
   var journey = root.querySelector(".sj-journey");
   var sticky = root.querySelector(".sj-journey__sticky");
-  var scenes = Array.prototype.slice.call(root.querySelectorAll(".sj-scenes img"));
+  var scenes = Array.prototype.slice.call(root.querySelectorAll(".sj-scenes > *"));
   var stars = root.querySelector(".sj-stars");
   var clock = root.querySelector(".sj-clock span");
   var period = root.querySelector(".sj-clock small");

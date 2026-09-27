@@ -18,7 +18,7 @@
                 lettering on ivory
      --on-gold  lettering on the gold fill
      --focus    the keyboard ring
-   No glass, no translucent capsule, no gradient.
+   The fixed bar has a lightly frosted ivory surface; menu sheets remain opaque.
    ============================================================ */
 
 :root{
@@ -35,7 +35,7 @@
 }
 
 /* ------------------------------------------------------------
-   Header — one solid ivory bar that stays where it is. Enquire
+   Header — one lightly frosted ivory bar that stays where it is. Enquire
    (and Home) left, the crest centred, News and Menu right. Gold
    appears twice: the News dot, and the short rule under whichever
    control is hovered or open.
@@ -45,6 +45,15 @@
   height:var(--nv-hh);
   background:var(--paper);
   border-bottom:1px solid var(--rule);
+  box-shadow:0 3px 18px rgba(20,30,33,.09);
+}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .nv-header{
+    background:rgba(250,249,243,.86);
+    -webkit-backdrop-filter:blur(14px) saturate(1.25);
+    backdrop-filter:blur(14px) saturate(1.25);
+    border-bottom-color:rgba(255,255,255,.7);
+  }
 }
 .nv-header__bar{
   display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
