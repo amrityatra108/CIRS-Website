@@ -412,7 +412,7 @@ PAGES = {
                        "and a dated archive of published inter-house results.",
         "banner": None,
         "sheet": "houses",
-        "cache_suffix": "-houses-4",
+        "cache_suffix": "-houses-6",
         "uc": False,
         "jump": False,
     },

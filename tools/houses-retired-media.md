@@ -36,3 +36,5 @@ The former named-house procession frames contained unapproved animal artwork on 
 
 The current 720/1440/1800 hero variants replace the older 500px versions. The
 new general March photographs make no individual-house attribution.
+
+- assets/img/houses/reunion.jpg — formal formation replaced by the supplied candid IMG_4280.JPG in the photography-led revision; retained as history.
