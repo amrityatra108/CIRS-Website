@@ -28,9 +28,9 @@
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=112">
-<link rel="stylesheet" href="assets/css/cirs.css?b=112">
-<link rel="stylesheet" href="assets/css/pages.css?b=112">
+<link rel="stylesheet" href="assets/css/fonts.css?b=113">
+<link rel="stylesheet" href="assets/css/cirs.css?b=113">
+<link rel="stylesheet" href="assets/css/pages.css?b=113">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -39,121 +39,24 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/home.css?b=112">
-<link rel="preload" as="image" href="assets/img/home-opening-poster.jpg" fetchpriority="high">
-<style>body.home-intro-pending{overflow:hidden;scrollbar-gutter:stable}body.home-intro-pending :is(.header,.drawer,.progress,.ring,.totop,main,.footer-wrap,.skip-link){visibility:hidden!important}.home-intro{position:fixed;inset:0;z-index:400;background:#1E1626 url("assets/img/home-opening-poster.jpg") center/cover no-repeat}</style><script>setTimeout(function(){if(!window.__homeIntroReady){document.body.classList.remove("home-intro-pending");var film=document.getElementById("homeIntro");if(film)film.remove();document.querySelectorAll(".header,.drawer,main,.footer-wrap").forEach(function(node){node.inert=false});window.dispatchEvent(new CustomEvent("cirs-intro-scroll-lock",{detail:{locked:false}}))}},12000)</script><noscript><style>.home-intro{display:none}body.home-intro-pending{overflow:auto}body.home-intro-pending :is(.header,.drawer,.progress,.ring,.totop,main,.footer-wrap,.skip-link){visibility:visible!important}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=112">
-<link rel="stylesheet" href="assets/css/footer.css?b=112-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=112-nav-2">
-<noscript><style>.nv-header{opacity:1!important;visibility:visible!important;background-color:var(--paper)!important;border-bottom-color:var(--rule)!important}</style></noscript>
+<link rel="stylesheet" href="assets/css/home.css?b=113">
+<link rel="stylesheet" href="assets/css/typography.css?b=113">
+<link rel="stylesheet" href="assets/css/footer.css?b=113-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=113-nav-3">
+<noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
-<body class="home home-intro-pending">
-<section class="home-intro" id="homeIntro" aria-label="CIRS opening film">
-  <video id="homeIntroVideo" src="assets/video/campus-loop.mp4" poster="assets/img/home-opening-poster.jpg" muted playsinline preload="auto" fetchpriority="high" aria-label="Campus opening film"></video>
-  <div class="home-intro__controls"><button type="button" data-home-play hidden>Play film</button><button type="button" data-home-skip>Skip intro</button></div>
-</section>
-<script>
-/* Home's approved campus film owns entry. The static poster is its first frame. */
-(function () {
-  "use strict";
-  var intro = document.getElementById("homeIntro");
-  var film = document.getElementById("homeIntroVideo");
-  if (!intro || !film) return;
-  var playButton = intro.querySelector("[data-home-play]");
-  var skipButton = intro.querySelector("[data-home-skip]");
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var state = "boot";
-  var startupTimer, stallTimer, exitTimer;
-  function underlay() {
-    return [document.querySelector(".header"), document.querySelector(".drawer"),
-      document.querySelector("main"), document.querySelector(".footer-wrap")].filter(Boolean);
-  }
-  var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
-
-  function lock(locked) {
-    underlay().forEach(function (node) { node.inert = locked; });
-    window.dispatchEvent(new CustomEvent("cirs-intro-scroll-lock", {detail:{locked:locked}}));
-  }
-  function cleanup() {
-    clearTimeout(startupTimer);
-    clearTimeout(stallTimer);
-    clearTimeout(exitTimer);
-  }
-  function finishIntro(reason, immediate) {
-    if (state === "exiting" || state === "entered") return;
-    state = "exiting";
-    cleanup();
-    film.pause(); // Keep the currently displayed frame through the crossfade.
-    document.body.classList.remove("home-intro-pending");
-    document.body.classList.add("home-intro-exiting");
-    var duration = immediate ? 0 : reduced.matches ? 80 : reason === "skip" ? 500 : 750;
-    intro.style.transitionDuration = duration + "ms";
-    function entered() {
-      if (state !== "exiting") return;
-      state = "entered";
-      var focusFromIntro = intro.contains(document.activeElement);
-      intro.remove();
-      document.body.classList.remove("home-intro-exiting");
-      lock(false);
-      window.dispatchEvent(new Event("cirs-home-intro-entered"));
-      if (focusFromIntro) {
-        var focusHero = function () {
-          var heading = document.querySelector(".hseq__type h1");
-          if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); }
-        };
-        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", focusHero, {once:true});
-        else focusHero();
-      }
-      if (window.ScrollTrigger) requestAnimationFrame(function () { ScrollTrigger.refresh(); });
-    }
-    exitTimer = setTimeout(entered, duration + 40);
-  }
-  function showPlay() {
-    if (state === "exiting" || state === "entered") return;
-    state = "awaiting-play";
-    playButton.hidden = false;
-    skipButton.textContent = "Continue to website";
-  }
-  function start() {
-    if (state === "exiting" || state === "entered") return;
-    clearTimeout(startupTimer);
-    state = "awaiting-play";
-    film.muted = true;
-    var request;
-    try { request = film.play(); } catch (error) { showPlay(); return; }
-    if (request && request.catch) request.catch(showPlay);
-    startupTimer = setTimeout(showPlay, 8000);
-  }
-  lock(true);
-  document.addEventListener("DOMContentLoaded", function () {
-    if (state !== "entered") lock(true);
-  }, {once:true});
-  skipButton.addEventListener("click", function () { finishIntro("skip"); });
-  playButton.addEventListener("click", start);
-  film.addEventListener("playing", function () {
-    if (state === "exiting" || state === "entered") return;
-    state = "playing";
-    clearTimeout(startupTimer);
-    clearTimeout(stallTimer);
-    playButton.hidden = true;
-    skipButton.textContent = "Skip intro";
-    stallTimer = setTimeout(function () { finishIntro("timeout"); }, Math.max(30000, (film.duration || 20) * 1000 + 10000));
-  });
-  film.addEventListener("ended", function () { finishIntro("ended"); });
-  film.addEventListener("error", function () { finishIntro("error"); });
-  film.addEventListener("stalled", function () {
-    if (state === "playing") { clearTimeout(stallTimer); stallTimer = setTimeout(function () { finishIntro("stalled"); }, 10000); }
-  });
-  window.addEventListener("pageshow", function (event) { if (event.persisted) finishIntro("restored", true); });
-  if ((nav && nav.type === "back_forward") || location.hash) finishIntro("deep-link", true);
-  else if (reduced.matches) showPlay();
-  else start();
-  window.__homeIntroReady = true;
-}());
-
-</script>
+<body class="home">
 <a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Opening sequence. Removed from the DOM once it has played. -->
+<div class="curtain" id="curtain" aria-hidden="true">
+  <img src="assets/img/logo.png" alt="" width="72" height="70">
+  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+  <p class="curtain__iast" lang="sa-Latn">J&ntilde;&#257;na&#7747; Sev&#257; ca Kau&#347;alam</p>
+  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
+  <span class="curtain__bar"><i></i></span>
+</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -658,15 +561,16 @@
   </div>
 </div>
 
-<section class="motto" data-ground="#FFFFFF">
+<section class="motto" data-ground="#F4F0E6">
   <div class="wrap">
     <p class="motto__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
+    <p class="motto__iast" lang="sa-Latn">J&ntilde;&#257;na&#7747; Sev&#257; ca Kau&#347;alam</p>
     <p class="motto__en">Knowledge &middot; Service &middot; Efficiency</p>
     <div class="motto__rule"></div>
   </div>
 </section>
 
-<section class="glimpse" id="glimpses" data-ground="#171714">
+<section class="glimpse" id="glimpses" data-ground="#F4F0E6">
   <div class="wrap">
     <div class="glimpse__head rv">
     <p class="marker"><span class="sc">Glimpses of CIRS</span></p>
@@ -744,7 +648,7 @@
         <span>at CIRS</span>
       </h2>
       <div class="closing-scene__links">
-        <a class="closing-scene__admissions" href="admissions.html#apply">Explore Admissions</a>
+        <a class="closing-scene__admissions" href="admissions.html">Explore Admissions</a>
         <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
       </div>
     </div>
@@ -833,11 +737,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=112" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=112" defer></script>
-<script src="assets/vendor/lenis.min.js?b=112" defer></script>
-<script src="assets/js/cirs.js?b=112-header-1" defer></script>
-<script src="assets/js/pages.js?b=112" defer></script>
-<script src="assets/js/footer.js?b=112-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=113" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=113" defer></script>
+<script src="assets/vendor/lenis.min.js?b=113" defer></script>
+<script src="assets/js/cirs.js?b=113-header-1" defer></script>
+<script src="assets/js/pages.js?b=113" defer></script>
+<script src="assets/js/footer.js?b=113-footer-1" defer></script>
 </body>
 </html>

@@ -1,28 +1,38 @@
 /* Homepage colour direction
-   The home page reads the shared palette; its local names below are
-   aliases of the roles in cirs.css. Gold stays luminous in
-   small areas and translucent in large ones so the photography still leads. */
+   The home page wears the Founder page's scheme rather than the site's
+   deep purple: parchment grounds, warm charcoal for the photographic dark
+   scenes, and the bright school gold. The purple roles are re-pointed here,
+   on body.home only, so every shared component on the page (the ticker,
+   the footer, the closing scene, the buttons) follows without being
+   restyled one by one. Lettering keeps the ratios measured in cirs.css:
+   --ink 15.68:1 and --ink-soft 7.32:1 on ivory; white on the charcoal
+   is 16.5:1 or better. The local names below are aliases of those roles. */
 
 body.home{
+  /* The Founder page's charcoal (founder-journey.css), in place of purple. */
+  --dark:       #2A2925;
+  --dark-mid:   #1F1F1B;
+  --dark-deep:  #1F1F1B;
+  --dark-ink:   #11110F;
+  --brand:      #2A2925;
+  --brand-mid:  #1F1F1B;
+  --brand-deep: #1F1F1B;
+  --on-gold:    var(--ink);        /* 10.28:1 on --gold */
+  --label:      var(--ink-soft);   /* the Founder page's meta lettering */
+
   --home-gold:var(--gold-lit);
   --home-gold-lit:var(--gold-pale);
   --home-gold-deep:var(--gold);
   --home-ivory:var(--paper);
+  --home-parchment:var(--paper-2);
   --home-ink:var(--dark-deep);
   --home-night:var(--brand-deep);
-  --home-curtain:var(--paper);
+  /* The Founder page's dark scene: charcoal lit warm from above. */
+  --home-night-glow:radial-gradient(circle at 72% 22%, #2A2925, #1F1F1B 52%, #11110F 100%);
 }
 
-/* Home's approved campus film owns the first viewport until its handoff. */
-.home-intro{overflow:hidden;isolation:isolate;opacity:1;transition:opacity 750ms ease;}
-.home-intro video{display:block;width:100%;height:100%;object-fit:cover;background:#1E1626 url('../img/home-opening-poster.jpg') center/cover no-repeat;}
-.home-intro__controls{position:absolute;right:clamp(16px,3vw,40px);bottom:max(20px,env(safe-area-inset-bottom));display:flex;gap:12px;z-index:1;}
-.home-intro__controls button{min-height:44px;padding:10px 18px;background:rgba(30,22,38,.88);border:1px solid rgba(255,255,255,.7);color:#fff;font:600 .88rem/1.2 var(--font-ui);cursor:pointer;}
-.home-intro__controls button[hidden]{display:none;}
-.home-intro__controls button:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
-body.home-intro-exiting{overflow:hidden;scrollbar-gutter:stable;}
-body.home-intro-exiting .home-intro{opacity:0;pointer-events:none;}
-@media (prefers-reduced-motion:reduce){.home-intro{transition-duration:80ms;}}
+/* The opening's stage, behind the inset plate. The headline is white over it. */
+body.home .hseq{ background:var(--home-night-glow); }
 
 /* The lower hero wash remains dark enough for the white headline. Gold is a
    low-opacity light within the wash, not an opaque colour sheet over campus. */
@@ -30,9 +40,9 @@ body.home .hero{ background:var(--home-night); }
 body.home .hero__scrim{
   background:
     linear-gradient(to top,
-      rgba(30,22,38,.94) 0%, rgba(30,22,38,.84) 18%,
-      rgba(30,22,38,.58) 38%, rgba(30,22,38,.15) 70%,
-      rgba(30,22,38,.25) 100%),
+      rgba(17,17,15,.94) 0%, rgba(17,17,15,.84) 18%,
+      rgba(17,17,15,.58) 38%, rgba(17,17,15,.15) 70%,
+      rgba(17,17,15,.25) 100%),
     radial-gradient(95% 54% at 48% 100%,
       rgba(var(--gold-rgb),.17) 0%, rgba(var(--gold-rgb),.07) 42%,
       rgba(var(--gold-rgb),0) 76%);
@@ -130,30 +140,16 @@ body.home .hseq__type h1 em{ font-family:"Newsreader",serif; font-weight:500; }
    illumination. None of these layers exceeds 18% gold opacity. */
 body.home .filmsec,
 body.home .finalcta,
-body.home .ticker,
 body.home .footer{
   background-color:var(--home-night);
 }
 
-/* The opening curtain, on the home page only. The shared curtain is the
-   charcoal of the dark sections, a full screen of it before any of the
-   photography arrives. Here it opens on ivory instead.
-
-   Every mark on it has to be restated, not just the ground: the shared
-   curtain letters itself in white on gold for a dark screen, and on ivory
-   white falls to 1.01:1 — invisible rather than merely faint. The type moves
-   to the two roles that hold against it, --dark at 13.8:1 and --label at
-   9.86:1, keeping the original hierarchy of statement then accent. The
-   progress hairline goes with them, because gold on ivory is 2.1:1 and would
-   read as an empty line for the whole of the load. */
-body.home .curtain{
-  background:var(--home-curtain);
-  color:var(--dark);
+/* The credentials ticker is a band of the bright gold, lettered in ink. */
+body.home .ticker{
+  background:var(--gold); color:var(--ink);
+  border-block-color:rgba(31,31,27,.14);
 }
-body.home .curtain__deva{ color:var(--dark); }
-body.home .curtain__en{ color:var(--label); }
-body.home .curtain__bar{ background:rgba(42,41,37,.20); }
-body.home .curtain__bar i{ background:var(--dark); }
+body.home .ticker__set i{ background:var(--ink); }
 
 body.home .filmsec__media::after{
   background:
@@ -168,14 +164,16 @@ body.home .filmwin__scrim{
 body.home .filmwin{ max-width:1120px; background:var(--home-night); }
 
 body.home .motto{
-  background:#fff;
+  background:
+    radial-gradient(90% 120% at 50% -10%, rgba(var(--gold-rgb),.16), transparent 62%),
+    var(--home-parchment);
   color:var(--ink);
 }
-/* The motto on white: the Devanagari is display-sized, so the dark gold
-   reads (4.73:1 on white, large text); the transliteration is body-sized
-   and takes the label colour. */
+/* The motto on parchment: the Devanagari is display-sized, so the dark gold
+   reads (4.3:1 on parchment, large text); the transliteration beneath it is
+   body-sized and takes --ink-soft (6.9:1). */
 body.home .motto__deva{ color:var(--gold-ink); }
-body.home .motto__iast{ color:var(--label); }
+body.home .motto__iast{ color:var(--ink-soft); }
 body.home .motto__en{
   color:var(--ink-soft);
 }
@@ -186,11 +184,16 @@ body.home .motto__rule{
 /* Photo crossfades keep their own stagger. Tone uses one class on the section,
    so hundreds of tiles do not each run a separate blend-mode animation. */
 body.home .glimpse{
-  background:var(--brand-deep);
+  background:var(--home-parchment);
 }
+body.home .glimpse__head h2{ color:var(--ink); }
+body.home .glimpse__head h2 em{ color:var(--gold-ink); }
+body.home .glimpse__head .lead{ color:var(--ink-soft); }
 body.home .glimpse .marker .sc{
-  color:var(--home-gold-lit);
+  color:var(--ink-soft);
 }
+body.home .glimpse .marker::before{ border-color:var(--gold-ink); }
+body.home .glimpse .gt{ background:var(--paper-3); }
 body.home .glimpse .gt img{
   filter:none;
 }
@@ -209,10 +212,10 @@ body.home .glimpse.is-tone-flipped .gt:nth-child(odd):hover{
 
 body.home .finalcta__media::after{
   background:
-    linear-gradient(180deg, rgba(30,22,38,.46) 0%, rgba(30,22,38,.92) 100%),
+    linear-gradient(180deg, rgba(17,17,15,.46) 0%, rgba(17,17,15,.92) 100%),
     radial-gradient(85% 68% at 50% 100%, rgba(var(--gold-rgb),.14), transparent 72%);
 }
-body.home .totop{ background:var(--gold); color:var(--on-gold); box-shadow:0 6px 24px rgba(30,22,38,.24); }
+body.home .totop{ background:var(--gold); color:var(--on-gold); box-shadow:0 6px 24px rgba(17,17,15,.24); }
 
 @media (prefers-reduced-motion:reduce){
   body.home .hrun__pin::before{ transition:none; }

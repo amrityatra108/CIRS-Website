@@ -49,7 +49,7 @@ import leadership
 import history
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=112"
+CACHE_BUST = "b=113"
 
 # Where a film's large-screen encode is offered. Everything that fails it —
 # a phone held either way up — takes the phone encode (tools/make-films.py),
@@ -2082,19 +2082,6 @@ def build(slug, page):
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
-    if slug == "index":
-        # The campus film and its own poster are Home's first painted surface.
-        # The inline rule takes effect before deferred page scripts can run.
-        head = head.replace("</head>",
-            '<link rel="preload" as="image" href="assets/img/home-opening-poster.jpg" fetchpriority="high">\n'
-            '<style>body.home-intro-pending{overflow:hidden;scrollbar-gutter:stable}'
-            'body.home-intro-pending :is(.header,.drawer,.progress,.ring,.totop,main,.footer-wrap,.skip-link){visibility:hidden!important}'
-            '.home-intro{position:fixed;inset:0;z-index:400;background:#1E1626 url("assets/img/home-opening-poster.jpg") center/cover no-repeat}'
-            '</style><script>setTimeout(function(){if(!window.__homeIntroReady){document.body.classList.remove("home-intro-pending");var film=document.getElementById("homeIntro");if(film)film.remove();document.querySelectorAll(".header,.drawer,main,.footer-wrap").forEach(function(node){node.inert=false});window.dispatchEvent(new CustomEvent("cirs-intro-scroll-lock",{detail:{locked:false}}))}},12000)</script>'
-            '<noscript><style>.home-intro{display:none}body.home-intro-pending{overflow:auto}'
-            'body.home-intro-pending :is(.header,.drawer,.progress,.ring,.totop,main,.footer-wrap,.skip-link){visibility:visible!important}'
-            '</style></noscript>\n</head>')
-
     # Shared typography follows page sheets so the approved roles stay consistent.
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
@@ -2220,25 +2207,34 @@ def build(slug, page):
             f'<link rel="stylesheet" href="assets/css/footer.css?{CACHE_BUST}-footer-1">\n</head>')
 
     head = head.replace("</head>",
-        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-nav-2">\n'
+        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-nav-3">\n'
+        # Without scripting nothing moves the header between its states, so
+        # it stays the readable pill throughout.
         '<noscript><style>.nv-header{opacity:1!important;visibility:visible!important;'
-        'background-color:var(--paper)!important;border-bottom-color:var(--rule)!important}'
+        '--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);'
+        '--nav-icon:var(--ink-soft);--nav-lift:none}'
+        '.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;'
+        'height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;'
+        'border-radius:999px!important;background-color:var(--paper)!important;'
+        'border-color:var(--rule)!important}'
         '</style></noscript>\n</head>')
 
-    # Openings with no visual hero start on the structured bar. Other pages
-    # keep the original controls clear over their first visual section.
+    # Openings with no full-screen visual hero start on the floating pill.
+    # Other pages keep the controls clear over their first visual section
+    # and gather into the pill once the reader scrolls.
     lite = bool(page.get("litehead"))
-    header_start = ("content" if page.get("banner") or page.get("post") or page.get("notfound")
-                    or slug in ("news", "leadership", "school-info", "blog", "cultural-gallery")
+    header_start = ("content" if page.get("banner") or page.get("post") or page.get("news")
+                    or page.get("notfound")
+                    or slug in ("news", "leadership", "school-info", "blog", "cultural-gallery",
+                                "curriculum")
                     else "hero")
-    header_tone = "light" if lite or slug == "creative-writing" else "dark"
+    header_tone = "light" if lite else "dark"
     # A page opening on a scrubbed film is marked twice: "film" for the
     # mechanics every such page shares, and its own slug for the handful of
     # decisions its footage makes for it.
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "film" if page.get("opening") else None,
                            slug if page.get("opening") else None,
-                           "home-intro-pending" if slug == "index" else None,
                            "crossroads-intro-active" if slug == "crossroads" else None,
                            "parent-portal" if slug == "parent-portal" else None,
                            "litehead" if lite else None] if c]
@@ -2268,15 +2264,6 @@ def build(slug, page):
         chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
-    if slug == "index":
-        intro_start = parts[-1].index("<!-- Opening sequence.")
-        intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
-        parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
-        parts.insert(2, '''<section class="home-intro" id="homeIntro" aria-label="CIRS opening film">
-  <video id="homeIntroVideo" src="assets/video/campus-loop.mp4" poster="assets/img/home-opening-poster.jpg" muted playsinline preload="auto" fetchpriority="high" aria-label="Campus opening film"></video>
-  <div class="home-intro__controls"><button type="button" data-home-play hidden>Play film</button><button type="button" data-home-skip>Skip intro</button></div>
-</section>''')
-        parts.insert(3, "<script>\n" + read("assets/js/home-intro.js") + "\n</script>")
     if slug in ("crossroads", "founder"):
         intro_start = parts[-1].index("<!-- Opening sequence.")
         intro_end = parts[-1].index("<!-- Film lightbox", intro_start)

@@ -47,8 +47,6 @@
   // compete with document-level smooth scrolling.
   if (typeof window.Lenis !== "undefined" && !reduced && !nativeScroll && !document.body.classList.contains("wall")) {
     lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.5 });
-    if (document.body.classList.contains("home-intro-pending") ||
-        document.body.classList.contains("home-intro-exiting")) lenis.stop();
     if (hasGSAP) {
       lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
       gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
@@ -88,11 +86,6 @@
   // A page-specific opening can hold the existing Lenis controller until its
   // entry control is used, without replacing the site's scroll engine.
   window.addEventListener("cirs-portal-scroll-lock", function (event) {
-    if (!lenis || !event.detail) return;
-    if (event.detail.locked) lenis.stop();
-    else if (!document.body.classList.contains("menu-open")) lenis.start();
-  });
-  window.addEventListener("cirs-intro-scroll-lock", function (event) {
     if (!lenis || !event.detail) return;
     if (event.detail.locked) lenis.stop();
     else if (!document.body.classList.contains("menu-open")) lenis.start();
@@ -442,11 +435,11 @@
 
     var tl = gsap.timeline({ onComplete: finish });
 
-    tl.from(curtain.querySelectorAll("img, .curtain__deva, .curtain__en"), {
+    tl.from(curtain.querySelectorAll("img, .curtain__deva, .curtain__iast, .curtain__en"), {
         opacity: 0, y: 16, duration: .7, ease: "power2.out", stagger: .12
       })
       .to(curtain.querySelector(".curtain__bar i"), { width: "100%", duration: .9, ease: "power1.inOut" }, "-=.25")
-      .to(curtain.querySelectorAll("img, .curtain__deva, .curtain__en, .curtain__bar"), {
+      .to(curtain.querySelectorAll("img, .curtain__deva, .curtain__iast, .curtain__en, .curtain__bar"), {
         opacity: 0, y: -12, duration: .45, ease: "power2.in", stagger: .05
       })
       .to(curtain, { yPercent: -100, duration: .95, ease: "expo.inOut" }, "-=.1");
@@ -1724,20 +1717,14 @@
   function headerState() {
     var header = $("#header");
     if (!header) return;
-    var BAND = 24;
+    // Over a full-screen opening the controls sit clear on the picture; the
+    // first real scroll gathers them into the floating pill, and they come
+    // back out only near the very top. Two thresholds, so a reader resting
+    // on the boundary does not make the header flicker between the two.
+    var PILL_IN = 56, PILL_OUT = 16;
 
     var main = $("#main");
-    // Ignore non-visual utility nodes (the gallery's canvas controls, for
-    // example) and use the first actual section on every page. Blog entries
-    // wrap the full story in one article, so their opening ends with the
-    // lead image rather than at the end of the story.
-    var opening = main && (main.querySelector("[data-header-opening]") ||
-      main.querySelector(":scope > section, :scope > article, :scope > header"));
-    if (!opening && main) opening = main.firstElementChild;
-    if (opening && opening.matches("article.art")) {
-      opening = $(".art__hero", opening) || $(".art__head", opening) || opening;
-    }
-    var edge = 0, barBottom = 0, zones = [], scrolled = null, queued = false;
+    var barBottom = 0, zones = [], scrolled = null, queued = false;
     var contentFirst = header.dataset.headerStart === "content";
 
     function darkGround(node) {
@@ -1783,19 +1770,12 @@
         }
         return { top: rect.top + y, bottom: rect.bottom + y, dark: dark };
       }).filter(Boolean);
-      if (!opening) { edge = 0; return; }
-      // A pinned opening is measured by its spacer, which holds its place
-      // in the document while the section itself is fixed to the screen.
-      var box = opening.parentElement && opening.parentElement.classList.contains("pin-spacer")
-        ? opening.parentElement : opening;
-      var bottom = box.getBoundingClientRect().bottom + (window.scrollY || window.pageYOffset || 0);
-      edge = bottom - barBottom;
     }
 
     function apply() {
       queued = false;
       var y = window.scrollY || window.pageYOffset || 0;
-      var next = contentFirst || !opening || (scrolled ? y > edge - BAND : y > edge + BAND);
+      var next = contentFirst || (scrolled ? y > PILL_OUT : y > PILL_IN);
       var at = y + barBottom;
       var dark = false;
       zones.forEach(function (zone) { if (at >= zone.top && at < zone.bottom) dark = zone.dark; });
@@ -1848,8 +1828,9 @@
   /* ==========================================================
      Header, menu and Enquire
      ----------------------------------------------------------
-     One controller reads the opening boundary and chooses transparent
-     hero or structured content. The original controls and menu stay put.
+     One controller chooses between the clear controls over a full-screen
+     opening and the floating pill, which the first scroll gathers them
+     into. The original controls and menu stay put.
 
      The menu opens under the bar. Menu turns to Close, the page
      behind is locked where it is (body.is-locked and Lenis) and
@@ -1896,6 +1877,14 @@
     isolateDrawer(false);
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-label", "Open menu");
+    // The pointer that closed the menu is usually still over Menu. Let the
+    // rule retract now, and give the hover rule back once the pointer leaves.
+    if (burger.matches(":hover")) {
+      burger.classList.add("is-settling-rule");
+      burger.addEventListener("pointerleave", function () {
+        burger.classList.remove("is-settling-rule");
+      }, { once: true });
+    }
     burger.focus({ preventScroll: true });
     window.clearTimeout(drawerCloseTimer);
     drawerCloseTimer = window.setTimeout(function () {

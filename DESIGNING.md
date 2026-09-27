@@ -98,9 +98,11 @@ Most visual change needs no markup at all.
 - **`assets/css/pages.css`** — per-page components: page hero, jump menu,
   tables, the news list.
 - **`assets/css/drawer.css`** — the header, the full-screen menu and the
-  Enquire sheet, on every page. The header is one solid ivory bar that never
-  changes or hides as the page scrolls; no page sheet should restyle or hide
-  it. Its behaviour is "Header, menu and Enquire" in `cirs.js`, and
+  Enquire sheet, on every page. Over a full-screen opening the controls sit
+  clear on the picture with no bar; the first scroll gathers them into a
+  compact, translucent ivory pill, which is where pages without a full-screen
+  opening start (`header_start` in `tools/build-site.py`). No page sheet
+  should restyle or hide it. Its behaviour is "Header, menu and Enquire" in `cirs.js`, and
   `previews/navigation/README.md` records the brief it was designed to.
 
 The palette is ivory and white, charcoal, gold, natural green and a
