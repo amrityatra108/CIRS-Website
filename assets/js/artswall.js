@@ -464,6 +464,12 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         modal.removeAttribute('inert');
         void modal.offsetWidth; modal.classList.add('is-open');
         try { closeBtn.focus({ preventScroll: true }); } catch (_) { closeBtn.focus(); }
+        // Touch browsers can clear programmatic focus after pointerup. Reassert
+        // it on the next frame so keyboard and screen-reader users enter the dialog.
+        requestAnimationFrame(() => {
+            if (!modalActive) return;
+            try { closeBtn.focus({ preventScroll: true }); } catch (_) { closeBtn.focus(); }
+        });
         if (!touchMode) { ring.classList.remove('is-snapped'); p1.snapped = false; }
     }
 

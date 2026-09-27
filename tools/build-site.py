@@ -2139,7 +2139,7 @@ def build(slug, page):
             "</head>",
             '<style>body.crossroads-intro-active :is(.progress,.ring,.totop,.jump,.footer-wrap){visibility:hidden!important}'
             'body.crossroads-intro-active .crossroads-intro{background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}'
-            '</style><script>setTimeout(function(){if(!window.__crossroadsIntroReady&&document.body&&document.body.classList.contains("crossroads-intro-active")){document.body.classList.remove("crossroads-intro-active");document.documentElement.classList.remove("crossroads-intro-scroll-locked");var film=document.querySelector("[data-crossroads-intro]");if(film){film.removeAttribute("data-crossroads-intro-pending");film.removeAttribute("data-crossroads-intro-film");film.removeAttribute("data-crossroads-intro-locked");var content=film.querySelector(".crossroads-intro__content");if(content)content.inert=false;Array.prototype.forEach.call(film.parentElement.children,function(node){if(node!==film)node.inert=false)}}},18000)</script>'
+            '</style>'
             '<link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">\n'
             f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-9" as="script" fetchpriority="high">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-9">\n'
