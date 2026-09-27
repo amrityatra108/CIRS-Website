@@ -441,7 +441,7 @@ PAGES = {
         # it is a news stand and they are reading pages, and they share no
         # markup. blognews.css is scoped to body.blognews for that reason.
         "sheet": "blognews",
-        "cache_suffix": "-blog-editorial-1",
+        "cache_suffix": "-blog-superpass-2",
         "jump": False,
         "uc": False,
         # Mona Sans carries the Blog interface and prose; its grid remains distinct.
