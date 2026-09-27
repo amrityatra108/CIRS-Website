@@ -39,8 +39,8 @@
 .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening,
 .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__opening,
 .crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__opening { display:block; }
-.crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__opening { opacity:0; transition:opacity 240ms ease; }
-.crossroads-intro__skip {
+.crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__opening { opacity:0; transition:opacity var(--crossroads-opening-exit-duration,750ms) ease; }
+.crossroads-intro__skip,.crossroads-intro__play {
   display:none;
   position:absolute;
   z-index:60;
@@ -62,9 +62,10 @@
 }
 .crossroads-intro[data-crossroads-intro-locked] .crossroads-intro__skip,
 .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__skip { display:inline-flex; align-items:center; justify-content:center; }
-.crossroads-intro__skip:hover { background:var(--cr-gold); color:var(--cr-purple-deep); }
-.crossroads-intro__skip:focus-visible { outline:3px solid #fff; outline-offset:4px; }
-.crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__skip { visibility:hidden; pointer-events:none; }
+.crossroads-intro__play:not([hidden]) { display:inline-flex;align-items:center;justify-content:center;right:auto;left:clamp(16px,3vw,40px); }
+.crossroads-intro__skip:hover,.crossroads-intro__play:hover { background:var(--cr-gold); color:var(--cr-purple-deep); }
+.crossroads-intro__skip:focus-visible,.crossroads-intro__play:focus-visible { outline:3px solid #fff; outline-offset:4px; }
+.crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__skip,.crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__play { visibility:hidden; pointer-events:none; }
 .crossroads-intro[data-crossroads-intro-opening-playing] .crossroads-intro__content > :not(.crossroads-intro__cta) { visibility:hidden; }
 .crossroads-intro[data-crossroads-intro-opening-playing] .crossroads-intro__cta { position:absolute; bottom:0; }
 .crossroads-intro[data-crossroads-intro-video-ready] .crossroads-intro__video { opacity:1; }
@@ -233,9 +234,9 @@
 .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__content { opacity:1; transition:opacity 700ms ease 360ms,transform 900ms cubic-bezier(.2,.65,.3,1) 300ms; }
 .crossroads-intro[data-crossroads-intro-film][data-crossroads-intro-opening-playing]::after { opacity:0; }
 .crossroads-intro[data-crossroads-intro-film][data-crossroads-intro-opening-playing] .crossroads-intro__content { opacity:0; visibility:hidden; transform:translateY(12px) scale(.975); transition:none; }
-.crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__content { opacity:1; visibility:visible; transform:none; transition:opacity 240ms ease,transform 240ms ease; }
+.crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__content { opacity:1; visibility:visible; transform:none; transition:opacity var(--crossroads-opening-exit-duration,750ms) ease,transform var(--crossroads-opening-exit-duration,750ms) ease; }
 html.crossroads-intro-scroll-locked,html.crossroads-intro-scroll-locked body { overflow:hidden!important; overscroll-behavior:none; }
-.crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) { background:var(--cr-purple-deep) url("../img/crossroads/opening-final.jpg") center/cover no-repeat; }
+.crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) { background:var(--cr-purple-deep) url("../img/crossroads/opening-poster.jpg") center/cover no-repeat; }
 .crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) .crossroads-intro__base,.crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) .crossroads-intro__reveal { visibility:hidden; }
 .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content { visibility:hidden; opacity:0; }
 @media (prefers-reduced-motion:reduce) {
@@ -246,14 +247,8 @@ html.crossroads-intro-scroll-locked,html.crossroads-intro-scroll-locked body { o
 @media (max-width:600px) {
   .crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]),
   .crossroads-intro[data-crossroads-intro-film] {
-    background:linear-gradient(rgba(9,2,12,.75),rgba(9,2,12,.75)),url("../img/crossroads/opening-final.jpg") center/cover no-repeat;
+    background:var(--cr-purple-deep) url("../img/crossroads/opening-poster.jpg") center/cover no-repeat;
   }
   .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening,
   .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__opening { object-fit:contain; object-position:center; background:transparent; }
-}
-@media (prefers-reduced-motion:reduce) {
-  .crossroads-intro[data-crossroads-intro-pending] { background:var(--cr-purple-deep); }
-  .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening { display:none; }
-  .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base { visibility:visible; }
-  .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content { visibility:visible; opacity:1; }
 }

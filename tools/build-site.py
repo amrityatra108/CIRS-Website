@@ -341,8 +341,8 @@ PAGES = {
         "sheet": "ibdp",
     },
     "the-cirs-experience": {
-        "nav": "The CIRS Experience",
-        "title": "The CIRS Experience",
+        "nav": "The CIRS experience",
+        "title": "The CIRS experience",
         "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
                        "hundred-acre campus it happens on.",
         # No banner and no hero key: this page opens on a hero of its own,
@@ -562,11 +562,8 @@ PAGES = {
         },
     },
     "festivals": {
-        # The page body is tools/pages/festivals.html and its sheet
-        # assets/css/festivals.css. It opens on its own composition of seven
-        # of the school's photographs rather than on a film, so there is no
-        # "opening" here; the photographs, their provenance and the India
-        # calendar are in tools/festivals.py.
+        # Restore the approved diya-to-rangoli film before the current
+        # photograph-led year. Keep the documented festival chapters below.
         "sheet": "festivals",
         "cache_suffix": "-festivals-year-1",
         "nav": "CIRS Festivals",
@@ -575,6 +572,15 @@ PAGES = {
                        "Residential School, from Raksha Bandhan to Holi, in the school's own "
                        "photographs.",
         "banner": None,
+        "opening": {
+            "video": "festivals-opening",
+            "mobile_video": None,
+            "poster": "festivals-opening-poster.jpg",
+            "still": "festivals-opening-final.jpg",
+            "still_element": True,
+            "title": "CIRS Festivals",
+            "pending": True,
+        },
         "uc": False,
     },
     "theatre": {
@@ -926,6 +932,10 @@ def film_html(slug, page):
         '<span aria-hidden="true">↓</span><span>Scroll to discover</span></p>\n'
         if slug == "sports" else ""
     )
+    mobile_video = film.get("mobile_video", f'{film["video"]}-m')
+    mobile_source = (f'<source src="assets/video/{mobile_video}.mp4" type="video/mp4">'
+                     if mobile_video else
+                     f'<source src="assets/video/{film["video"]}.mp4" type="video/mp4">')
     return f'''<section class="film" id="{slug}-opening" data-film{attrs}>
   <div class="film__stage">
 {still}    <video class="film__video" data-film-video
@@ -942,14 +952,14 @@ def film_html(slug, page):
            opening at all. Both are the same length at 24fps, so the mapping
            in filmintro.js holds whichever one is picked.
 
-           Phones, in either orientation, take the 540p cut from
-           tools/make-films.py: the same frames, every one still a keyframe,
-           at a third of the weight. The large-screen file is listed first,
+           Pages with a mobile cut use it on phones in either orientation;
+           Festivals currently uses its approved full-resolution MP4 there.
+           The large-screen file is listed first,
            behind the query phones fail, so a browser that ignores media on
            a video's sources keeps the file it always had. -->
       <source src="assets/video/{film["video"]}.mp4" type="video/mp4"
               media="{FILM_LARGE}">
-      <source src="assets/video/{film["video"]}-m.mp4" type="video/mp4">
+      {mobile_source}
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
 {cue}    <h1 class="film__title" data-film-title>{title}</h1>
@@ -2072,6 +2082,19 @@ def build(slug, page):
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
+    if slug == "index":
+        # The campus film and its own poster are Home's first painted surface.
+        # The inline rule takes effect before deferred page scripts can run.
+        head = head.replace("</head>",
+            '<link rel="preload" as="image" href="assets/img/home-opening-poster.jpg" fetchpriority="high">\n'
+            '<style>body.home-intro-pending{overflow:hidden;scrollbar-gutter:stable}'
+            'body.home-intro-pending :is(.header,.drawer,.progress,.ring,.totop,main,.footer-wrap,.skip-link){visibility:hidden!important}'
+            '.home-intro{position:fixed;inset:0;z-index:400;background:#1E1626 url("assets/img/home-opening-poster.jpg") center/cover no-repeat}'
+            '</style><script>setTimeout(function(){if(!window.__homeIntroReady){document.body.classList.remove("home-intro-pending");var film=document.getElementById("homeIntro");if(film)film.remove();document.querySelectorAll(".header,.drawer,main,.footer-wrap").forEach(function(node){node.inert=false});window.dispatchEvent(new CustomEvent("cirs-intro-scroll-lock",{detail:{locked:false}}))}},12000)</script>'
+            '<noscript><style>.home-intro{display:none}body.home-intro-pending{overflow:auto}'
+            'body.home-intro-pending :is(.header,.drawer,.progress,.ring,.totop,main,.footer-wrap,.skip-link){visibility:visible!important}'
+            '</style></noscript>\n</head>')
+
     # Shared typography follows page sheets so the approved roles stay consistent.
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
@@ -2088,11 +2111,16 @@ def build(slug, page):
     if slug == "crossroads":
         head = head.replace(
             "</head>",
+            '<style>body.crossroads-intro-active :is(.header,.drawer,.progress,.ring,.totop,.jump,.skip-link,.footer-wrap){visibility:hidden!important}'
+            'body.crossroads-intro-active .crossroads-intro{background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}'
+            '</style><script>setTimeout(function(){if(!window.__crossroadsIntroReady&&document.body&&document.body.classList.contains("crossroads-intro-active")){document.body.classList.remove("crossroads-intro-active");document.documentElement.classList.remove("crossroads-intro-scroll-locked");var film=document.querySelector("[data-crossroads-intro]");if(film){film.removeAttribute("data-crossroads-intro-pending");film.removeAttribute("data-crossroads-intro-film");film.removeAttribute("data-crossroads-intro-locked");var content=film.querySelector(".crossroads-intro__content");if(content)content.inert=false;Array.prototype.forEach.call(film.parentElement.children,function(node){if(node!==film)node.inert=false})}}},18000)</script>'
+            '<link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-7">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-4">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
-            '<noscript><style>.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening{display:none}'
+            '<noscript><style>body.crossroads-intro-active :is(.header,.drawer,.progress,.ring,.totop,.jump,.skip-link,.footer-wrap){visibility:visible!important}'
+            '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening{display:none}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:visible;opacity:1}'
             '.crossroads-intro[data-crossroads-intro-pending]{background:var(--cr-purple-deep)}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base{visibility:visible!important}'
@@ -2210,6 +2238,8 @@ def build(slug, page):
     classes = [c for c in ["wall" if wall else page.get("sheet"),
                            "film" if page.get("opening") else None,
                            slug if page.get("opening") else None,
+                           "home-intro-pending" if slug == "index" else None,
+                           "crossroads-intro-active" if slug == "crossroads" else None,
                            "parent-portal" if slug == "parent-portal" else None,
                            "litehead" if lite else None] if c]
     body_class = " ".join(classes)
@@ -2238,6 +2268,15 @@ def build(slug, page):
         chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
+    if slug == "index":
+        intro_start = parts[-1].index("<!-- Opening sequence.")
+        intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
+        parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
+        parts.insert(2, '''<section class="home-intro" id="homeIntro" aria-label="CIRS opening film">
+  <video id="homeIntroVideo" src="assets/video/campus-loop.mp4" poster="assets/img/home-opening-poster.jpg" muted playsinline preload="auto" fetchpriority="high" aria-label="Campus opening film"></video>
+  <div class="home-intro__controls"><button type="button" data-home-play hidden>Play film</button><button type="button" data-home-skip>Skip intro</button></div>
+</section>''')
+        parts.insert(3, "<script>\n" + read("assets/js/home-intro.js") + "\n</script>")
     if slug in ("crossroads", "founder"):
         intro_start = parts[-1].index("<!-- Opening sequence.")
         intro_end = parts[-1].index("<!-- Film lightbox", intro_start)

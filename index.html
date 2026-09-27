@@ -40,22 +40,120 @@
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
 <link rel="stylesheet" href="assets/css/home.css?b=112">
+<link rel="preload" as="image" href="assets/img/home-opening-poster.jpg" fetchpriority="high">
+<style>body.home-intro-pending{overflow:hidden;scrollbar-gutter:stable}body.home-intro-pending :is(.header,.drawer,.progress,.ring,.totop,main,.footer-wrap,.skip-link){visibility:hidden!important}.home-intro{position:fixed;inset:0;z-index:400;background:#1E1626 url("assets/img/home-opening-poster.jpg") center/cover no-repeat}</style><script>setTimeout(function(){if(!window.__homeIntroReady){document.body.classList.remove("home-intro-pending");var film=document.getElementById("homeIntro");if(film)film.remove();document.querySelectorAll(".header,.drawer,main,.footer-wrap").forEach(function(node){node.inert=false});window.dispatchEvent(new CustomEvent("cirs-intro-scroll-lock",{detail:{locked:false}}))}},12000)</script><noscript><style>.home-intro{display:none}body.home-intro-pending{overflow:auto}body.home-intro-pending :is(.header,.drawer,.progress,.ring,.totop,main,.footer-wrap,.skip-link){visibility:visible!important}</style></noscript>
 <link rel="stylesheet" href="assets/css/typography.css?b=112">
 <link rel="stylesheet" href="assets/css/footer.css?b=112-footer-1">
 <link rel="stylesheet" href="assets/css/drawer.css?b=112-nav-2">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;background-color:var(--paper)!important;border-bottom-color:var(--rule)!important}</style></noscript>
 </head>
 
-<body class="home">
-<a class="skip-link" href="#main">Skip to main content</a>
+<body class="home home-intro-pending">
+<section class="home-intro" id="homeIntro" aria-label="CIRS opening film">
+  <video id="homeIntroVideo" src="assets/video/campus-loop.mp4" poster="assets/img/home-opening-poster.jpg" muted playsinline preload="auto" fetchpriority="high" aria-label="Campus opening film"></video>
+  <div class="home-intro__controls"><button type="button" data-home-play hidden>Play film</button><button type="button" data-home-skip>Skip intro</button></div>
+</section>
+<script>
+/* Home's approved campus film owns entry. The static poster is its first frame. */
+(function () {
+  "use strict";
+  var intro = document.getElementById("homeIntro");
+  var film = document.getElementById("homeIntroVideo");
+  if (!intro || !film) return;
+  var playButton = intro.querySelector("[data-home-play]");
+  var skipButton = intro.querySelector("[data-home-skip]");
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var state = "boot";
+  var startupTimer, stallTimer, exitTimer;
+  function underlay() {
+    return [document.querySelector(".header"), document.querySelector(".drawer"),
+      document.querySelector("main"), document.querySelector(".footer-wrap")].filter(Boolean);
+  }
+  var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
 
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
+  function lock(locked) {
+    underlay().forEach(function (node) { node.inert = locked; });
+    window.dispatchEvent(new CustomEvent("cirs-intro-scroll-lock", {detail:{locked:locked}}));
+  }
+  function cleanup() {
+    clearTimeout(startupTimer);
+    clearTimeout(stallTimer);
+    clearTimeout(exitTimer);
+  }
+  function finishIntro(reason, immediate) {
+    if (state === "exiting" || state === "entered") return;
+    state = "exiting";
+    cleanup();
+    film.pause(); // Keep the currently displayed frame through the crossfade.
+    document.body.classList.remove("home-intro-pending");
+    document.body.classList.add("home-intro-exiting");
+    var duration = immediate ? 0 : reduced.matches ? 80 : reason === "skip" ? 500 : 750;
+    intro.style.transitionDuration = duration + "ms";
+    function entered() {
+      if (state !== "exiting") return;
+      state = "entered";
+      var focusFromIntro = intro.contains(document.activeElement);
+      intro.remove();
+      document.body.classList.remove("home-intro-exiting");
+      lock(false);
+      window.dispatchEvent(new Event("cirs-home-intro-entered"));
+      if (focusFromIntro) {
+        var focusHero = function () {
+          var heading = document.querySelector(".hseq__type h1");
+          if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); }
+        };
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", focusHero, {once:true});
+        else focusHero();
+      }
+      if (window.ScrollTrigger) requestAnimationFrame(function () { ScrollTrigger.refresh(); });
+    }
+    exitTimer = setTimeout(entered, duration + 40);
+  }
+  function showPlay() {
+    if (state === "exiting" || state === "entered") return;
+    state = "awaiting-play";
+    playButton.hidden = false;
+    skipButton.textContent = "Continue to website";
+  }
+  function start() {
+    if (state === "exiting" || state === "entered") return;
+    clearTimeout(startupTimer);
+    state = "awaiting-play";
+    film.muted = true;
+    var request;
+    try { request = film.play(); } catch (error) { showPlay(); return; }
+    if (request && request.catch) request.catch(showPlay);
+    startupTimer = setTimeout(showPlay, 8000);
+  }
+  lock(true);
+  document.addEventListener("DOMContentLoaded", function () {
+    if (state !== "entered") lock(true);
+  }, {once:true});
+  skipButton.addEventListener("click", function () { finishIntro("skip"); });
+  playButton.addEventListener("click", start);
+  film.addEventListener("playing", function () {
+    if (state === "exiting" || state === "entered") return;
+    state = "playing";
+    clearTimeout(startupTimer);
+    clearTimeout(stallTimer);
+    playButton.hidden = true;
+    skipButton.textContent = "Skip intro";
+    stallTimer = setTimeout(function () { finishIntro("timeout"); }, Math.max(30000, (film.duration || 20) * 1000 + 10000));
+  });
+  film.addEventListener("ended", function () { finishIntro("ended"); });
+  film.addEventListener("error", function () { finishIntro("error"); });
+  film.addEventListener("stalled", function () {
+    if (state === "playing") { clearTimeout(stallTimer); stallTimer = setTimeout(function () { finishIntro("stalled"); }, 10000); }
+  });
+  window.addEventListener("pageshow", function (event) { if (event.persisted) finishIntro("restored", true); });
+  if ((nav && nav.type === "back_forward") || location.hash) finishIntro("deep-link", true);
+  else if (reduced.matches) showPlay();
+  else start();
+  window.__homeIntroReady = true;
+}());
+
+</script>
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -208,7 +306,7 @@
     <section class="nv-dest" id="dnav-student-life-panel" aria-labelledby="dnav-student-life-button" hidden>
       <p class="nv-dest__kicker" aria-hidden="true">Student Life</p>
       <ul class="nv-dest__list">
-        <li><a href="the-cirs-experience.html"><span class="nv-dest__label">The CIRS Experience</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="the-cirs-experience.html"><span class="nv-dest__label">The CIRS experience</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
         <li><a href="curriculum.html"><span class="nv-dest__label">Curriculum</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
         <li><a href="our-results.html"><span class="nv-dest__label">Our Results</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
         <li><a href="sports.html"><span class="nv-dest__label">Our Sports</span><span class="nv-dest__here" aria-hidden="true">You are here</span><svg class="nv-dest__arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
@@ -330,24 +428,23 @@
            inside covers it. Cropping is object-fit's job, which is the
            same cover-crop a shader would have to compute by hand. -->
       <div class="hseq__plate">
-        <video class="hseq__video" autoplay muted loop playsinline
-               poster="assets/img/hero.jpg" aria-hidden="true"
+        <video class="hseq__video" muted loop playsinline preload="none"
+               poster="assets/img/home-opening-poster.jpg" aria-hidden="true"
                width="1280" height="720" fetchpriority="high">
           <source src="assets/video/campus-loop.webm" type="video/webm">
           <source src="assets/video/campus-loop.mp4" type="video/mp4">
         </video>
-        <!-- Under reduced motion the loop never starts: the poster stays up
-             in its place. Inline and straight after the element, so it runs
-             before the film has buffered enough to begin. -->
         <script>
         (function () {
           var film = document.currentScript.previousElementSibling;
           var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
           function apply() {
-            if (reduce.matches) { film.removeAttribute("autoplay"); film.autoplay = false; film.pause(); }
-            else { film.autoplay = true; var go = film.play(); if (go && go.catch) go.catch(function () {}); }
+            if (reduce.matches || document.body.classList.contains("home-intro-pending") ||
+                document.body.classList.contains("home-intro-exiting")) film.pause();
+            else { var go = film.play(); if (go && go.catch) go.catch(function () {}); }
           }
-          if (reduce.matches) apply();
+          apply();
+          window.addEventListener("cirs-home-intro-entered", apply);
           if (reduce.addEventListener) reduce.addEventListener("change", apply);
         }());
         </script>

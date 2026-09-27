@@ -47,6 +47,8 @@
   // compete with document-level smooth scrolling.
   if (typeof window.Lenis !== "undefined" && !reduced && !nativeScroll && !document.body.classList.contains("wall")) {
     lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.5 });
+    if (document.body.classList.contains("home-intro-pending") ||
+        document.body.classList.contains("home-intro-exiting")) lenis.stop();
     if (hasGSAP) {
       lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
       gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
@@ -86,6 +88,11 @@
   // A page-specific opening can hold the existing Lenis controller until its
   // entry control is used, without replacing the site's scroll engine.
   window.addEventListener("cirs-portal-scroll-lock", function (event) {
+    if (!lenis || !event.detail) return;
+    if (event.detail.locked) lenis.stop();
+    else if (!document.body.classList.contains("menu-open")) lenis.start();
+  });
+  window.addEventListener("cirs-intro-scroll-lock", function (event) {
     if (!lenis || !event.detail) return;
     if (event.detail.locked) lenis.stop();
     else if (!document.body.classList.contains("menu-open")) lenis.start();
@@ -2288,6 +2295,7 @@
     if (!box || !frame || !triggers.length) return;
 
     var opener = null;
+    var readingY = 0;
     var panel = $(".lightbox__panel", box);
     // Focus guards also catch Tab leaving the cross-origin player's document.
     var before = document.createElement("span"), after = document.createElement("span");
@@ -2298,6 +2306,8 @@
 
     function open(id, from) {
       opener = from || null;
+      readingY = window.scrollY;
+      if (lenis) { lenis.scrollTo(readingY, { immediate:true }); lenis.stop(); }
       var f = document.createElement("iframe");
       f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) +
               "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
@@ -2311,7 +2321,6 @@
       box.hidden = false;
       box.showModal();
       document.body.classList.add("has-lightbox");
-      if (lenis) lenis.stop();
       var close = $(".lightbox__close", box);
       if (close) close.focus();
     }
@@ -2322,8 +2331,12 @@
       box.hidden = true;
       frame.innerHTML = "";
       document.body.classList.remove("has-lightbox");
-      if (lenis) lenis.start();
-      if (opener) { opener.focus(); opener = null; }
+      if (lenis) { lenis.scrollTo(readingY, { immediate:true }); lenis.start(); }
+      else window.scrollTo(0, readingY);
+      if (opener) {
+        try { opener.focus({ preventScroll:true }); } catch (err) { opener.focus(); }
+        opener = null;
+      }
     }
 
     triggers.forEach(function (t) {

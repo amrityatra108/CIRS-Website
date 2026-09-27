@@ -26,7 +26,14 @@
   if (!details || !toggle || !panel) return;
 
   panel.addEventListener("click", function (e) {
-    if (e.target.closest("a")) details.open = false;
+    var link = e.target.closest("a");
+    if (!link) return;
+    // The shared smooth-scroll handler prevents the native hash update.
+    // Keep the Why CIRS section index shareable and Back/Forward aware.
+    if (document.body.classList.contains("why-cirs") && link.hash && location.hash !== link.hash) {
+      history.pushState(null, "", link.hash);
+    }
+    details.open = false;
   });
 
   document.addEventListener("keydown", function (e) {

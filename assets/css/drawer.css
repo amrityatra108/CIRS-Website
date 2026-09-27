@@ -18,8 +18,8 @@
                 lettering on ivory
      --on-gold  lettering on the gold fill
      --focus    the keyboard ring
-   The bar clears over a visual opening and becomes opaque over content.
-   Menu and Enquire sheets remain the approved opaque ivory.
+   The bar carries the recovered purple as a restrained glass surface.
+   Menu and Enquire sheets remain opaque ivory for longer reading.
    ============================================================ */
 
 :root{
@@ -37,23 +37,21 @@
 
 /* ------------------------------------------------------------
    Header — original Enquire and Home left, crest centred, News and Menu
-   right. The surface clears over a visual opening. Gold
-   appears twice: the News dot, and the short rule under whichever
+   right. The purple surface is lighter over the hero and denser over
+   content. Gold appears in the News dot and the control rule under whichever
    control is hovered or open.
    ------------------------------------------------------------ */
 .nv-header{
   position:fixed; top:0; left:0; right:0; z-index:118;
   height:var(--nv-hh);
-  --nav-name:var(--ink);
-  --nav-sub:var(--ink-mute);
-  --nav-text:var(--ink);
-  --nav-icon:var(--ink-soft);
-  --nav-hover:var(--ink);
-  background-color:transparent;
-  border-bottom:1px solid transparent;
-  box-shadow:none;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
+  --nav-name:var(--on-dark);
+  --nav-sub:var(--on-dark-soft);
+  --nav-text:var(--on-dark);
+  --nav-icon:var(--on-dark-soft);
+  --nav-hover:var(--gold-lit);
+  background-color:var(--brand);
+  border-bottom:1px solid rgba(255,255,255,.22);
+  box-shadow:0 5px 20px rgba(14,11,18,.18);
   transition:background-color .35s var(--e), border-color .35s var(--e),
              box-shadow .35s var(--e), opacity .35s var(--e), visibility .35s;
 }
@@ -62,21 +60,22 @@
   --nav-sub:rgba(255,255,255,.9);
   --nav-text:#fff;
   --nav-icon:rgba(255,255,255,.9);
-  --nav-hover:#fff;
+  --nav-hover:var(--gold-lit);
 }
 .nv-header[data-header-mode="content"]{
-  background-color:var(--paper);
-  border-bottom-color:var(--rule);
-  box-shadow:0 3px 14px rgba(20,30,33,.07);
+  background-color:var(--brand-mid);
 }
 .nv-header[data-header-mode="content"][data-header-surface="dark"]{
-  --nav-name:#fff;
-  --nav-sub:rgba(255,255,255,.9);
-  --nav-text:#fff;
-  --nav-icon:rgba(255,255,255,.9);
-  --nav-hover:#fff;
-  background-color:#392A48;
-  border-bottom-color:rgba(255,255,255,.2);
+  background-color:var(--brand);
+}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .nv-header{
+    background-color:rgba(57,42,72,.86);
+    -webkit-backdrop-filter:blur(12px) saturate(1.06);
+    backdrop-filter:blur(12px) saturate(1.06);
+  }
+  .nv-header[data-header-mode="content"]{ background-color:rgba(43,32,55,.94); }
+  .nv-header[data-header-mode="content"][data-header-surface="dark"]{ background-color:rgba(57,42,72,.94); }
 }
 body.menu-open .nv-header[data-header-mode],
 body .nv-header[data-header-mode]:has(.nv-enq.is-open){
@@ -88,7 +87,16 @@ body .nv-header[data-header-mode]:has(.nv-enq.is-open){
   background-color:var(--paper);
   border-bottom-color:var(--rule);
   box-shadow:0 3px 14px rgba(20,30,33,.07);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
 }
+@media (prefers-reduced-transparency:reduce){
+  .nv-header{ background-color:var(--brand);-webkit-backdrop-filter:none;backdrop-filter:none; }
+  .nv-header[data-header-mode="content"]{ background-color:var(--brand-mid); }
+  body.menu-open .nv-header[data-header-mode],body .nv-header[data-header-mode]:has(.nv-enq.is-open){ background-color:var(--paper); }
+}
+.nv-header :focus-visible{ outline-color:var(--gold-lit); }
+body.menu-open .nv-header :focus-visible,body .nv-header:has(.nv-enq.is-open) :focus-visible{ outline-color:var(--focus); }
 .nv-header.is-settling,.nv-header.is-settling *{ transition:none!important; }
 body:has(#curtain) .nv-header,
 body.founder:has(.gurudev-opening[data-phase="intro"]) .nv-header,

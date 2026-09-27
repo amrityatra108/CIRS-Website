@@ -17,16 +17,20 @@
   var video = intro.querySelector("[data-crossroads-intro-video]");
   var opening = intro.querySelector("[data-crossroads-intro-opening]");
   var skip = intro.querySelector("[data-crossroads-intro-skip]");
+  var play = intro.querySelector("[data-crossroads-intro-play]");
   var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   var navigationEntry = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
   var historyReturn = navigationEntry && navigationEntry.type === "back_forward";
   var openingStarted = false, openingDone = false, openingTimer = null, finishTimer = null;
   var openingState = "pending";
   // performance.now() is relative to navigation. A late deferred script must
-  // never begin a fresh lock after the visitor has already waited six seconds.
+  // never begin a new lock after the opening film's bounded playback window.
   var intentReadyAt = 2000;
-  var lockDeadlineAt = 6000;
+  var lockDeadlineAt = 10000;
   var content = intro.querySelector(".crossroads-intro__content");
+  var coveredSections = Array.prototype.slice.call(intro.parentElement.children)
+    .filter(function (node) { return node !== intro; })
+    .map(function (node) { return {node:node, wasInert:node.inert}; });
   var scrollLocked = false;
   var focusAfterSkip = false;
   var touchOpeningX = 0, touchOpeningY = 0;
@@ -38,6 +42,7 @@
     document.documentElement.classList.toggle("crossroads-intro-scroll-locked", locked);
     intro.toggleAttribute("data-crossroads-intro-locked", locked);
     if (content) content.inert = locked;
+    coveredSections.forEach(function (item) { item.node.inert = locked || item.wasInert; });
   }
   function removeLockListeners() {
     window.removeEventListener("wheel", onOpeningWheel, true);
@@ -80,6 +85,7 @@
     document.removeEventListener("keydown", onOpeningEscape, true);
     intro.removeEventListener("click", onIntroClick);
     if (skip) skip.removeEventListener("click", onSkipClick);
+    if (play) play.removeEventListener("click", onPlayClick);
     if (opening) {
       opening.removeEventListener("playing", onOpeningPlaying);
       opening.removeEventListener("ended", finishOpening);
@@ -95,6 +101,7 @@
     finishTimer = null;
     intro.removeAttribute("data-crossroads-intro-film");
     intro.removeAttribute("data-crossroads-intro-finishing");
+    document.body.classList.remove("crossroads-intro-active");
     if (focusAfterSkip && enter) {
       focusAfterSkip = false;
       enter.focus({preventScroll:true});
@@ -114,13 +121,15 @@
     lockScroll(false);
     removeOpeningListeners();
     if (opening) opening.pause();
+    if (play) play.hidden = true;
     intro.removeAttribute("data-crossroads-intro-opening-playing");
     intro.removeAttribute("data-crossroads-intro-pending");
     intro.setAttribute("data-crossroads-intro-settled", "");
     if (immediate === true || reduced.matches || !hadFilm) settleOpeningVisual();
     else {
       intro.setAttribute("data-crossroads-intro-finishing", "");
-      finishTimer = setTimeout(settleOpeningVisual, 240);
+      intro.style.setProperty("--crossroads-opening-exit-duration", quick ? "500ms" : "750ms");
+      finishTimer = setTimeout(settleOpeningVisual, quick ? 500 : 750);
     }
     if (immediate !== true && !quick && !reduced.matches && hadFilm && intro.getBoundingClientRect().bottom > 88) {
       intro.setAttribute("data-crossroads-intro-arriving", "");
@@ -130,13 +139,9 @@
   }
   function releaseOpening() {
     if (openingState === "released" || openingState === "complete") return;
-    if (openingState !== "active" || document.hidden) { finishOpening(false, true); return; }
-    clearTimeout(openingTimer);
-    openingTimer = null;
-    lockScroll(false);
-    removeLockListeners();
-    intro.removeAttribute("data-crossroads-intro-pending");
-    openingState = "released";
+    // A timed release must also complete the handoff. Leaving the film in a
+    // paused "released" state can strand the shared header behind it.
+    finishOpening(false, true);
   }
   function onOpeningEscape(event) {
     if (event.key !== "Escape" || openingState === "complete") return;
@@ -148,6 +153,25 @@
     if (event.detail === 0 && document.activeElement === skip) focusAfterSkip = true;
     finishOpening(false, true);
   }
+  function onPlayClick() {
+    if (openingState === "complete" || !opening) return;
+    play.hidden = true;
+    selectOpeningSource();
+    opening.muted = true;
+    var playback;
+    try { playback = opening.play(); } catch (error) { showPlayChoice(); return; }
+    if (playback) playback.catch(showPlayChoice);
+  }
+  function showPlayChoice() {
+    if (openingState === "complete") return;
+    clearTimeout(openingTimer);
+    openingTimer = null;
+    openingState = "awaiting-play";
+    if (opening) opening.pause();
+    intro.removeAttribute("data-crossroads-intro-opening-playing");
+    intro.removeAttribute("data-crossroads-intro-film");
+    if (play) play.hidden = false;
+  }
   function onIntroClick(event) {
     if (openingState !== "complete" && !event.target.closest("[data-crossroads-intro-enter]")) finishOpening(false, true);
   }
@@ -156,14 +180,17 @@
     if (openingState === "pending") openingState = "active";
     intro.setAttribute("data-crossroads-intro-opening-playing", "");
     intro.setAttribute("data-crossroads-intro-film", "");
+    if (play) play.hidden = true;
+    clearTimeout(openingTimer);
+    openingTimer = setTimeout(releaseOpening, 10000);
     if (video) video.pause();
   }
   function onOpeningError() { finishOpening(false, true); }
-  function onConnectionChange() { if (slowConnection()) finishOpening(true); }
-  function onMotionChange() { if (reduced.matches) finishOpening(true); }
+  function onConnectionChange() { if (slowConnection()) showPlayChoice(); }
+  function onMotionChange() { if (reduced.matches) showPlayChoice(); }
   function onOpeningVisibility() { if (document.hidden) finishOpening(true); }
   function onOpeningPageHide() { finishOpening(true); }
-  if (!document.hidden && !historyReturn && performance.now() < lockDeadlineAt && !reduced.matches && !slowConnection() && (!location.hash || location.hash === "#crossroads-intro")) {
+  if (!document.hidden && !historyReturn && performance.now() < lockDeadlineAt && (!location.hash || location.hash === "#crossroads-intro")) {
     lockScroll(true);
     window.addEventListener("wheel", onOpeningWheel, {passive:false, capture:true});
     window.addEventListener("touchstart", onOpeningTouchStart, {passive:true, capture:true});
@@ -172,6 +199,7 @@
     document.addEventListener("keydown", onOpeningEscape, {capture:true});
     intro.addEventListener("click", onIntroClick);
     if (skip) skip.addEventListener("click", onSkipClick);
+    if (play) play.addEventListener("click", onPlayClick);
     if (opening) {
       opening.addEventListener("playing", onOpeningPlaying);
       opening.addEventListener("ended", finishOpening);
@@ -182,6 +210,7 @@
     document.addEventListener("visibilitychange", onOpeningVisibility);
     window.addEventListener("pagehide", onOpeningPageHide);
     openingTimer = setTimeout(releaseOpening, Math.max(0, lockDeadlineAt - performance.now()));
+    if (reduced.matches || slowConnection()) showPlayChoice();
   } else finishOpening(true);
   function releaseRestoredScroll() {
     // Live reload / history restoration may place the reader below the movie.
@@ -195,22 +224,22 @@
     if (event.persisted) finishOpening(true);
     else releaseRestoredScroll();
   });
+  function selectOpeningSource() {
+    if (openingStarted || !opening) return;
+    openingStarted = true;
+    opening.src = window.matchMedia("(min-width: 768px) and (min-height: 501px)").matches ?
+      opening.getAttribute("data-src") : opening.getAttribute("data-mobile-src");
+    opening.load();
+  }
   function syncOpening() {
     if (!opening || openingDone) return;
-    if (reduced.matches || slowConnection()) { finishOpening(true); return; }
+    if ((reduced.matches || slowConnection()) && openingState !== "active") { showPlayChoice(); return; }
     if (!active || document.hidden) { opening.pause(); return; }
-    if (!openingStarted) {
-      openingStarted = true;
-      // Match the same desktop threshold as the site's other optimized films.
-      // Select only after the intro qualifies, so reduced motion and Save-Data
-      // do not trigger a film request while the page is parsed.
-      opening.src = window.matchMedia("(min-width: 768px) and (min-height: 501px)").matches ?
-        opening.getAttribute("data-src") : opening.getAttribute("data-mobile-src");
-      opening.load();
-    }
+    // Defer media selection until the intro qualifies or Play is requested.
+    selectOpeningSource();
     opening.muted = true;
     var playback = opening.play();
-    if (playback) playback.catch(function () { finishOpening(false, true); });
+    if (playback) playback.catch(showPlayChoice);
   }
   function primeAmbientVideo(playNow) {
     if (!video || reduced.matches || slowConnection() || getComputedStyle(reveal).display === "none") return;
@@ -434,4 +463,5 @@
     target.focus({ preventScroll:true });
     moveSection(target);
   }, true);
+  window.__crossroadsIntroReady = true;
 }());

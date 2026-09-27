@@ -28,9 +28,9 @@
    ============================================================ */
 
 body.alumni{
-  --aj-ink:        var(--dark-ink);
-  --aj-ink-2:      var(--dark-ink);
-  --aj-ink-3:      var(--dark-deep);
+  --aj-ink:        var(--brand-deep);
+  --aj-ink-2:      var(--brand-mid);
+  --aj-ink-3:      var(--brand);
   --aj-ivory:      var(--paper-2);
   --aj-ivory-2:    var(--rule-soft);
   --aj-gold:       var(--gold);   /* on dark only  — 8.40:1 on --aj-ink   */
@@ -186,7 +186,7 @@ html.js-motion .aj-open__eyebrow{ opacity:0; }
 .aj-portal__depth{
   position:absolute; inset:-10%;
   background:
-    radial-gradient(60% 50% at 50% 46%, rgba(201,169,97,.10), transparent 70%),
+    radial-gradient(60% 50% at 50% 46%, rgba(var(--gold-rgb),.10), transparent 70%),
     radial-gradient(90% 70% at 50% 120%, rgba(22,36,58,.55), transparent 70%);
   /* Visible by default so the dark is never flat without JavaScript; the
      rule below hands it to the timeline, which fades it up as the plate
@@ -359,7 +359,7 @@ html.js-motion .ajc__origin{ opacity:0; }
   box-shadow:
     0 0 0 3px rgba(244,240,230,.30),
     0 0 12px 4px rgba(232,217,181,.70),
-    0 0 30px 10px rgba(201,169,97,.34),
+    0 0 30px 10px rgba(var(--gold-rgb),.34),
     0 0 62px 22px rgba(143,110,47,.16);
 }
 .ajc__originName{
@@ -398,8 +398,8 @@ html.js-motion .ajc__origin{ opacity:0; }
 .ajc__pt:focus-visible .ajc__dot,
 .ajc__pt.is-active .ajc__dot{
   background:#F4F0E6; transform:scale(1.5);
-  box-shadow:0 0 0 4px rgba(201,169,97,.16), 0 0 14px 3px rgba(232,217,181,.75),
-             0 0 38px 10px rgba(201,169,97,.35);
+  box-shadow:0 0 0 4px rgba(var(--gold-rgb),.16), 0 0 14px 3px rgba(255,231,166,.75),
+             0 0 38px 10px rgba(var(--gold-rgb),.35);
 }
 /* The flare a bright star throws, drawn only when one is asked about. It is
    gold and it is long, so it cannot be mistaken for the faint grey spikes
@@ -776,7 +776,7 @@ html:not(.js-motion) body.alumni .ajw-nav{ display:none; }
 .ajw[data-scene="navy"]{   --aj-scene:var(--dark);        --aj-accent:var(--gold-pale); }
 .ajw[data-scene="gold"]{   --aj-scene:var(--dark-mid);    --aj-accent:var(--gold); }
 .ajw[data-scene="slate"]{  --aj-scene:var(--dark-deep);   --aj-accent:var(--on-dark-soft); }
-.ajw[data-scene="maroon"]{ --aj-scene:var(--campus-dark); --aj-accent:var(--sage); }
+.ajw[data-scene="maroon"]{ --aj-scene:var(--maroon); --aj-accent:var(--gold-pale); }
 
 .ajw__n{
   margin:0 0 clamp(20px,3vw,30px);
