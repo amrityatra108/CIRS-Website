@@ -106,9 +106,10 @@ def reading_time(post):
 # The slot each card draws its image in, from assets/css/blognews.css: the
 # story list's image column, and the smaller one beside Latest issue's stories.
 CARD_SIZES = {
-    "story": "(max-width: 425px) 80vw, (max-width: 540px) 340px, "
-             "(max-width: 760px) 120px, (max-width: 1000px) 145px, 185px",
-    "latest": "(max-width: 540px) 96px, (max-width: 760px) 120px, 110px",
+    "story": "(max-width: 600px) 32vw, 150px",
+    "latest": "(max-width: 600px) 30vw, 140px",
+    "feature": "(max-width: 600px) 72vw, (max-width: 1000px) 38vw, 26vw",
+    "spread": "(max-width: 600px) 90vw, (max-width: 1000px) 60vw, 46vw",
 }
 
 
@@ -136,9 +137,10 @@ def image_html(post, loading="lazy", slot="story"):
 def rail_html():
     return """<ul class="ij-nav__list">
       <li><a href="#latest">Latest issue</a></li>
+      <li><a href="#campus-culture">Campus &amp; culture</a></li>
+      <li><a href="#world-sport">World &amp; sport</a></li>
       <li><a href="#stories">All stories</a></li>
       <li><a href="#archive">From the archive</a></li>
-      <li><a href="#crossroads-link">The Crossroads</a></li>
     </ul>"""
 
 
@@ -150,76 +152,131 @@ def issue_count():
     return len(blogposts.issues())
 
 
+# Every image remains attached to its existing article. Each is shown only once
+# on the index; the complete searchable collection repeats links, not imagery.
+FRONT_SLUGS = {
+    "death-of-rationalism", "beyond-the-lobby", "anakin-skywalker",
+    "notes-of-healing", "rumors-at-cirs", "voyages-in-the-yuva-kendra",
+    "geography-and-geopolitics", "the-journey-behind-excellence",
+}
+
+
+def editorial_photo(post, *, loading="lazy", slot="feature", caption=True):
+    if not post.get("image"):
+        return ""
+    credit = post.get("image_caption", "") if caption else ""
+    caption_html = f"<figcaption>{esc(credit)}</figcaption>" if credit else ""
+    return f'''<figure class="ij-photo ij-photo--{esc(post['slug'])}">
+      <a href="{esc(post['slug'])}.html" aria-label="Read {esc(post['title'])}">{image_html(post, loading=loading, slot=slot)}</a>
+      {caption_html}</figure>'''
+
+
+def editorial_meta(post):
+    date = f" / {esc(post['date'])}" if post.get("date") else ""
+    return f"Issue {post['issue']}{date}"
+
+
+def article_module(post, variant, *, image=True, excerpt=True, heading="h3"):
+    photo = editorial_photo(post, slot="spread" if variant in {"image-feature", "world-feature"} else "latest",
+                            caption=variant == "image-feature") if image else ""
+    deck = f'<p class="ij-deck">{esc(post["excerpt"])}</p>' if excerpt else ""
+    return f'''<article class="ij-module ij-module--{variant}">
+      <p class="ij-kicker">{esc(post['section'])}</p>
+      {photo}
+      <{heading}><a href="{esc(post['slug'])}.html">{esc(post['title'])}</a></{heading}>
+      {deck}
+      <p class="ij-byline">{esc(byline(post))}</p>
+      <p class="ij-meta">{editorial_meta(post)} <span>{reading_time(post)} min read</span></p>
+    </article>'''
+
+
 def _latest():
     latest_issue = max(blogposts.issues())
-    posts = [p for p in blogposts.by_issue() if p["issue"] == latest_issue]
-    lead = posts[0]
-    side = []
-    for post in posts[1:]:
-        image = (
-            f'<a class="ij-latest__image" href="{esc(post["slug"])}.html">'
-            f'{image_html(post, slot="latest")}</a>' if post.get("image") else ""
-        )
-        side.append(f"""<article class="ij-latest__side-story">
-          <div class="ij-latest__side-copy">
-            <p class="ij-category">{esc(post["section"])}</p>
-            <h3><a href="{esc(post["slug"])}.html">{esc(post["title"])}</a></h3>
-            <p class="ij-latest__side-meta">{esc(byline(post))}</p>
-          </div>
-          {image}
-        </article>""")
-    return f"""<section class="ij-section ij-latest" id="latest" aria-labelledby="ij-latest-title">
-      <div class="ij-section__head">
-        <div><p class="ij-section__number">01 / The current edition</p>
-          <h2 id="ij-latest-title">Latest issue</h2></div>
-        <a class="ij-issue-link" href="{issue_pdf(lead)}">The Crossroads {latest_issue} <span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="ij-latest__spread">
+    latest = [p for p in blogposts.by_issue() if p["issue"] == latest_issue]
+    lead = latest[0]
+    supporting = "".join(article_module(p, "secondary") for p in latest[1:])
+    return f'''<section class="ij-front" id="latest" aria-labelledby="ij-edition-title">
+      <div class="ij-edition"><h2 id="ij-edition-title">The latest edition</h2>
+        <a href="{issue_pdf(lead)}">The Crossroads / {editorial_meta(lead)} <span aria-hidden="true">↗</span></a></div>
+      <div class="ij-front__grid">
         <article class="ij-lead">
-          <p class="ij-lead__label">Lead essay <span aria-hidden="true">/</span> {esc(lead["section"])}</p>
-          <h3><a href="{esc(lead["slug"])}.html">{esc(lead["title"])}</a></h3>
-          <p class="ij-lead__excerpt">{esc(lead["excerpt"])}</p>
-          <div class="ij-lead__bottom">
-            <span>{esc(byline(lead))}</span>
-            <span>{reading_time(lead)} min read</span>
-            <a href="{esc(lead["slug"])}.html">Read the essay <span aria-hidden="true">→</span></a>
+          <div class="ij-lead__copy"><p class="ij-kicker">{esc(lead['section'])} / The lead essay</p>
+            <h3><a href="{esc(lead['slug'])}.html">{esc(lead['title'])}</a></h3>
+            <p class="ij-deck">{esc(lead['excerpt'])}</p>
+            <p class="ij-byline">{esc(byline(lead))}</p>
+            <p class="ij-meta">{editorial_meta(lead)} <span>{reading_time(lead)} min read</span></p>
+            <a class="ij-read" href="{esc(lead['slug'])}.html">Read the essay <span aria-hidden="true">→</span></a>
           </div>
+          {editorial_photo(lead, loading='eager')}
         </article>
-        <div class="ij-latest__aside">
-          <p class="ij-latest__aside-label">Also in Issue {latest_issue}</p>
-          {''.join(side)}
+        <div class="ij-secondary">{supporting}</div>
+      </div>
+    </section>'''
+
+
+def _editorial_spreads():
+    posts = {p["slug"]: p for p in blogposts.POSTS}
+    quote = reading_paragraphs(posts["death-of-rationalism"])[1]
+    return f'''<section class="ij-section" id="campus-culture" aria-labelledby="ij-campus-title">
+      <div class="ij-section__head"><h2 id="ij-campus-title">Campus &amp; culture</h2><p>Life, expression and the ideas between classes</p></div>
+      <div class="ij-middle">
+        <div class="ij-middle__feature">{article_module(posts['notes-of-healing'], 'image-feature')}</div>
+        <div class="ij-middle__column">
+          {article_module(posts['rumors-at-cirs'], 'narrow')}
+          {article_module(posts['voyages-in-the-yuva-kendra'], 'brief', excerpt=False)}
+        </div>
+        <aside class="ij-opinion" aria-labelledby="ij-opinion-title">
+          <h3 id="ij-opinion-title">Opinion &amp; reflection</h3>
+          {article_module(posts['is-ai-art-really-art'], 'text-feature', image=False, heading='h4')}
+          <figure class="ij-thought"><blockquote><p>“{esc(quote)}”</p></blockquote>
+            <figcaption>From <a href="death-of-rationalism.html">The Death of Rationalism</a> / Issue 32</figcaption></figure>
+          {article_module(posts['my-home'], 'brief', image=False, excerpt=False, heading='h4')}
+        </aside>
+      </div>
+    </section>
+    <section class="ij-section" id="world-sport" aria-labelledby="ij-world-title">
+      <div class="ij-section__head"><h2 id="ij-world-title">World &amp; sport</h2><p>Power, competition and the pursuit of excellence</p></div>
+      <div class="ij-world">
+        {article_module(posts['geography-and-geopolitics'], 'world-feature')}
+        <div class="ij-world__rail">
+          {article_module(posts['sportswashing'], 'text-feature', image=False)}
+          {article_module(posts['the-journey-behind-excellence'], 'brief', excerpt=False)}
         </div>
       </div>
-    </section>"""
+    </section>'''
 
 
 def _story_row(post, index):
-    image = (
-        f'<a class="ij-story__image" href="{esc(post["slug"])}.html" '
-        f'aria-label="Read {esc(post["title"])}">{image_html(post)}</a>'
-        if post.get("image") else ""
-    )
+    image = editorial_photo(post, slot="story", caption=False) if post["slug"] not in FRONT_SLUGS else ""
+    variant = "visual-brief" if image else "index-brief"
+    # Newspaper rows: 8/4, 6/3/3, 4/8, 3/6/3, 4/8, 6/6, 3/6/3.
+    # Roles follow the actual stories and survive search and sorting.
+    emphasis = {
+        "death-of-rationalism": "feature", "anakin-skywalker": "review",
+        "is-ai-art-really-art": "brief", "rumors-at-cirs": "brief",
+        "geography-and-geopolitics": "feature", "sportswashing": "brief",
+        "notes-of-healing": "review", "my-home": "brief",
+        "the-race-beyond": "feature", "trust-or-bust": "review",
+        "the-journey-behind-excellence": "review", "the-social-glue": "brief",
+        "death-of-detail": "review", "resurgence": "brief",
+    }
+    if post["slug"] in emphasis:
+        variant += " ij-story--" + emphasis[post["slug"]]
     searchable = " ".join([
         post["title"], post["section"], byline(post),
         f"Issue {post['issue']}", post["excerpt"],
     ])
-    row_class = "ij-story" if post.get("image") else "ij-story ij-story--type"
-    return f"""<article class="{row_class}" data-story data-category="{esc(post["section"])}"
-      data-issue="{post["issue"]}" data-title="{esc(post["title"])}"
+    return f'''<article class="ij-story ij-story--{variant}" data-story data-category="{esc(post['section'])}"
+      data-issue="{post['issue']}" data-title="{esc(post['title'])}"
       data-order="{index}" data-search="{esc(searchable)}">
-      <span class="ij-story__number" aria-hidden="true">{index + 1:02d}</span>
-      <div class="ij-story__copy">
-        <p class="ij-story__category">{esc(post["section"])}</p>
-        <h3><a href="{esc(post["slug"])}.html">{esc(post["title"])}</a></h3>
-        <p class="ij-story__excerpt">{esc(post["excerpt"])}</p>
-      </div>
-      <div class="ij-story__details">
-        <span>{esc(byline(post))}</span>
-        <a href="{issue_pdf(post)}">Issue {post["issue"]}</a>
-        <span>{reading_time(post)} min read</span>
-      </div>
       {image}
-    </article>"""
+      <div class="ij-story__copy"><p class="ij-kicker">{esc(post['section'])}</p>
+        <h3><a href="{esc(post['slug'])}.html">{esc(post['title'])}</a></h3>
+        <p class="ij-deck">{esc(post['excerpt'])}</p>
+        <p class="ij-byline">{esc(byline(post))}</p>
+        <p class="ij-meta"><a href="{issue_pdf(post)}">{editorial_meta(post)}</a><span>{reading_time(post)} min read</span></p>
+      </div>
+    </article>'''
 
 
 def _topics():
@@ -241,9 +298,8 @@ def _stories():
                      for i, post in enumerate(blogposts.by_issue()))
     return f"""<section class="ij-section ij-stories" id="stories" aria-labelledby="ij-stories-title" data-journal>
       <div class="ij-section__head">
-        <div><p class="ij-section__number">02 / The complete collection</p>
-          <h2 id="ij-stories-title">All stories</h2></div>
-        <span class="ij-section__aside">{count()} articles across {issue_count()} issues</span>
+        <h2 id="ij-stories-title">All stories</h2>
+        <p>{count()} articles across {issue_count()} issues</p>
       </div>
       <div class="ij-discovery" data-discovery hidden>
         <div class="ij-discovery__search">
@@ -287,16 +343,15 @@ def _archive():
         </article>""")
     return f"""<section class="ij-section ij-archive" id="archive" aria-labelledby="ij-archive-title">
       <div class="ij-section__head">
-        <div><p class="ij-section__number">03 / Earlier voices</p>
-          <h2 id="ij-archive-title">From the archive</h2></div>
-        <span class="ij-section__aside">Also listed above in All stories</span>
+        <h2 id="ij-archive-title">From the archive</h2>
+        <p>Earlier voices from The Crossroads</p>
       </div>
       <div class="ij-archive__grid">{''.join(entries)}</div>
     </section>"""
 
 
 def front_html():
-    markup = (_latest() + _stories() + _archive() +
+    markup = (_latest() + _editorial_spreads() + _stories() + _archive() +
               """<section class="ij-connection" id="crossroads-link" aria-labelledby="ij-crossroads-title">
       <div>
         <p class="ij-connection__kicker">Every article began in print</p>
