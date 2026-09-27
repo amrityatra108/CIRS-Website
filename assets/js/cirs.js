@@ -1721,14 +1721,135 @@
         scrollTrigger: { trigger: band, start: "top bottom", end: "bottom top", scrub: .8 } });
   }
 
+  function headerState() {
+    var header = $("#header");
+    if (!header) return;
+    var BAND = 24;
+
+    var main = $("#main");
+    // Ignore non-visual utility nodes (the gallery's canvas controls, for
+    // example) and use the first actual section on every page. Blog entries
+    // wrap the full story in one article, so their opening ends with the
+    // lead image rather than at the end of the story.
+    var opening = main && (main.querySelector("[data-header-opening]") ||
+      main.querySelector(":scope > section, :scope > article, :scope > header"));
+    if (!opening && main) opening = main.firstElementChild;
+    if (opening && opening.matches("article.art")) {
+      opening = $(".art__hero", opening) || $(".art__head", opening) || opening;
+    }
+    var edge = 0, barBottom = 0, zones = [], scrolled = null, queued = false;
+    var contentFirst = header.dataset.headerStart === "content";
+
+    function darkGround(node) {
+      var declared = node.getAttribute("data-header-theme");
+      if (declared) return declared === "dark";
+      var raw = node.getAttribute("data-ground") || getComputedStyle(node).backgroundColor;
+      var hex = raw.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+      var rgb = raw.match(/^rgba?\(([^)]+)\)/i);
+      var channels;
+      if (hex) {
+        var value = hex[1].length === 3 ? hex[1].split("").map(function (c) { return c + c; }).join("") : hex[1];
+        channels = [0, 2, 4].map(function (i) { return parseInt(value.slice(i, i + 2), 16); });
+      } else if (rgb) {
+        channels = rgb[1].split(",").map(Number);
+        if (channels.length > 3 && channels[3] === 0) return null;
+      } else return null;
+      return channels[0] * .2126 + channels[1] * .7152 + channels[2] * .0722 < 145;
+    }
+
+    // Measured, not read every frame: it moves only when the layout does.
+    function measure() {
+      var bar = header.querySelector(".nv-header__bar") || header;
+      barBottom = bar.getBoundingClientRect().bottom;
+      var nodes = main ? Array.prototype.slice.call(main.querySelectorAll(":scope > section, :scope > article, :scope > header, [data-ground], [data-header-theme]")) : [];
+      var footer = $(".footer");
+      if (footer) nodes.push(footer);
+      zones = nodes.map(function (node) {
+        var dark = darkGround(node);
+        if (dark === null) return null;
+        var box = node.parentElement && node.parentElement.classList.contains("pin-spacer") ? node.parentElement : node;
+        var rect = box.getBoundingClientRect();
+        var y = window.scrollY || window.pageYOffset || 0;
+        // The sticky footer sits behind the main page while scrolling. Its
+        // viewport rect is not where the footer enters the document flow.
+        // Measure it after the preceding content so it cannot tint the bar
+        // over a light section several screens earlier.
+        if (node === footer && footer.parentElement &&
+            getComputedStyle(footer.parentElement).position === "sticky" &&
+            footer.parentElement.previousElementSibling) {
+          var before = footer.parentElement.previousElementSibling;
+          var top = before.getBoundingClientRect().bottom + y;
+          return { top: top, bottom: top + footer.parentElement.offsetHeight, dark: dark };
+        }
+        return { top: rect.top + y, bottom: rect.bottom + y, dark: dark };
+      }).filter(Boolean);
+      if (!opening) { edge = 0; return; }
+      // A pinned opening is measured by its spacer, which holds its place
+      // in the document while the section itself is fixed to the screen.
+      var box = opening.parentElement && opening.parentElement.classList.contains("pin-spacer")
+        ? opening.parentElement : opening;
+      var bottom = box.getBoundingClientRect().bottom + (window.scrollY || window.pageYOffset || 0);
+      edge = bottom - barBottom;
+    }
+
+    function apply() {
+      queued = false;
+      var y = window.scrollY || window.pageYOffset || 0;
+      var next = contentFirst || !opening || (scrolled ? y > edge - BAND : y > edge + BAND);
+      var at = y + barBottom;
+      var dark = false;
+      zones.forEach(function (zone) { if (at >= zone.top && at < zone.bottom) dark = zone.dark; });
+      header.dataset.headerSurface = dark ? "dark" : "light";
+      if (next === scrolled) return;
+      scrolled = next;
+      header.classList.toggle("is-scrolled", next);
+      header.dataset.headerMode = next ? "content" : "hero";
+    }
+    function queue() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(apply);
+    }
+    function remeasure() { measure(); queue(); }
+
+    // The state the page opens in is set without a transition, so a page
+    // refreshed halfway down (or restored there by the browser) shows the
+    // structured header at once rather than watching the clear one become it.
+    // is-settling holds until the load event has let the browser restore
+    // the scroll position, then two frames more so the settled state has
+    // painted before transitions come back.
+    header.classList.add("is-settling");
+    measure();
+    apply();
+    function settle() {
+      remeasure();
+      requestAnimationFrame(function () {
+        apply();
+        requestAnimationFrame(function () { header.classList.remove("is-settling"); });
+      });
+    }
+    if (document.readyState === "complete") settle();
+    else window.addEventListener("load", settle, { once: true });
+
+    // One reader of the scroll position. Lenis moves the window itself, so
+    // the native event fires whether or not smooth scrolling is on.
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", remeasure, { passive: true });
+    window.addEventListener("pageshow", remeasure);
+    // A trigger rather than ScrollTrigger.addEventListener("refresh"). With
+    // only the listener, a page reloaded halfway down came back near the top:
+    // on pages that create no trigger of their own at boot, the browser's
+    // scroll restoration does not survive ScrollTrigger's first refresh. The
+    // header's old sentinels created one by accident; this does it on purpose.
+    if (hasST) ScrollTrigger.create({ onRefresh: remeasure });
+    if ("ResizeObserver" in window) new ResizeObserver(remeasure).observe(document.body);
+  }
+
   /* ==========================================================
      Header, menu and Enquire
      ----------------------------------------------------------
-     The header is one solid ivory bar. It has no states: it is
-     not clear over the opening and glass below it, it does not
-     slide away as the page scrolls, and nothing on any page is
-     meant to hide it. So there is nothing here that reads the
-     scroll position.
+     One controller reads the opening boundary and chooses transparent
+     hero or structured content. The original controls and menu stay put.
 
      The menu opens under the bar. Menu turns to Close, the page
      behind is locked where it is (body.is-locked and Lenis) and
@@ -1784,6 +1905,7 @@
   }
 
   (function chrome() {
+    headerState();
     if (!burger || !drawer) return;
     var header = $("#header");
     var nav = $(".nv-menu__nav", drawer), marker = $(".nv-marker", drawer);

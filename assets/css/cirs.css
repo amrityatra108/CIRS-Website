@@ -38,30 +38,24 @@
   --paper-3:  #EDE7D8;   /* cream */
   --white:    #FFFFFF;
 
-  /* The immersive dark sections. Warm charcoal, not a colour: they
-     frame photographs and carry gold, and a hue here would compete
-     with both. Lightest to darkest. */
-  --dark:       #2A2925;
-  --dark-mid:   #1F1F1B;
-  --dark-deep:  #181815;
-  --dark-ink:   #11110F;
+  /* The school's recovered purple gives shared dark scenes their ground.
+     Film-specific black frames remain owned by each film page. */
+  --dark:       #392A48;
+  --dark-mid:   #2B2037;
+  --dark-deep:  #1E1626;
+  --dark-ink:   #1E1626;
 
-  /* Gold has three jobs and a token for each.
-       --gold       fills, rules, icons, and lettering ON DARK
-                    (6.47:1 on --dark, 7.35:1 on --dark-mid).
-                    2.13:1 on ivory: never lettering on paper.
-       --gold-lit   the hover of a gold fill; lettering on dark.
-       --gold-ink   large lettering on paper only — 4.48:1 on
-                    ivory, 3.83:1 on cream. Not small text.     */
-  --gold:      #C9A961;
-  --gold-lit:  #D8BC7A;
-  --gold-pale: #E8D9B5;
+  /* Earlier school gold is bright on purple (8.17:1), and too light for
+     text on ivory. --gold-ink remains the readable paper text role. */
+  --gold:      #FFC308;
+  --gold-lit:  #FFD75C;
+  --gold-pale: #FFE7A6;
   --gold-ink:  #8F6E2F;
-  --gold-rgb:  201,169,97;
-  --on-gold:   #1F1F1B;   /* 7.35:1. White on this gold is 2.25:1. */
+  --gold-rgb:  255,195,8;
+  --on-gold:   #1E1626;
 
-  /* Earlier brand palette recovered from the stylesheet before b04ab898.
-     Keep current ivory and gold; use purple for decorative brand roles. */
+  /* Brand and gold from the stylesheet before b04ab898; current ivory and
+     typography remain in place. */
   --brand:        #392A48;
   --brand-mid:    #2B2037;
   --brand-deep:   #1E1626;
@@ -104,8 +98,7 @@
   --rule-dark:  rgba(250,249,243,.20);
   --decoration-mute: #A8A69D;   /* disabled and decorative only */
 
-  /* Keyboard focus: 4.48:1 on ivory and 3.08:1 on --dark, so one
-     ring reads on both grounds. */
+  /* Keyboard focus on paper; dark surfaces use bright gold below. */
   --focus: #8F6E2F;
 
   --font-body: "Mona Sans", Arial, sans-serif;
@@ -374,7 +367,7 @@ section[id]{ scroll-margin-top:88px; }
   padding-block:clamp(44px,5.5vw,88px);
   text-align:center;
   background-image:
-    radial-gradient(130% 150% at 50% -10%, rgba(201,169,97,.13) 0%, rgba(201,169,97,0) 58%);
+    radial-gradient(130% 150% at 50% -10%, rgba(var(--gold-rgb),.13) 0%, rgba(var(--gold-rgb),0) 58%);
 }
 .motto__deva{
   font-family:var(--deva);
@@ -446,7 +439,7 @@ section[id]{ scroll-margin-top:88px; }
 .prog__card:hover img{ transform:scale(1.045); }
 .prog__head{ display:flex; align-items:baseline; gap:14px; margin-bottom:12px; }
 .prog__idx{
-  font-family:var(--font-display); font-size:1.5rem; color:var(--gold);
+  font-family:var(--font-display); font-size:1.5rem; color:var(--gold-ink);
   font-variant-numeric:oldstyle-nums; line-height:1;
 }
 .prog__card h3{ margin-bottom:12px; }
@@ -510,7 +503,7 @@ section[id]{ scroll-margin-top:88px; }
 .hframe img{
   display:block; width:100%; max-width:none; height:auto;
   object-fit:cover; border-radius:12px;
-  border:1px solid rgba(201,169,97,.32);
+  border:1px solid rgba(var(--gold-rgb),.32);
   box-shadow:0 24px 64px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.08);
   backface-visibility:hidden;
 }
@@ -1160,7 +1153,8 @@ section[id]{ scroll-margin-top:88px; }
   box-shadow:0 6px 24px rgba(24,24,21,.28);
 }
 .totop.is-on{ opacity:1; visibility:visible; transform:none; }
-.totop:hover{ background:var(--gold); }
+.totop:hover{ background:var(--gold); color:var(--on-gold); }
+.on-dark :focus-visible,.filmsec :focus-visible,.footer :focus-visible,.finalcta :focus-visible,.band :focus-visible{ outline-color:var(--gold-lit); }
 /* Below 900px there is no margin beside the text for the two floating
    buttons, so cirs.js keeps a lane down the right-hand edge clear of text:
    it marks the wrappers that inset the text from that edge with

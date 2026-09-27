@@ -9,7 +9,7 @@ body.home{
   --home-gold-deep:var(--gold);
   --home-ivory:var(--paper);
   --home-ink:var(--dark-deep);
-  --home-night:var(--dark-ink);
+  --home-night:var(--brand-deep);
   --home-curtain:var(--paper);
 }
 
@@ -30,12 +30,12 @@ body.home .hero{ background:var(--home-night); }
 body.home .hero__scrim{
   background:
     linear-gradient(to top,
-      rgba(17,17,15,.94) 0%, rgba(17,17,15,.84) 18%,
-      rgba(17,17,15,.58) 38%, rgba(17,17,15,.15) 70%,
-      rgba(17,17,15,.25) 100%),
+      rgba(30,22,38,.94) 0%, rgba(30,22,38,.84) 18%,
+      rgba(30,22,38,.58) 38%, rgba(30,22,38,.15) 70%,
+      rgba(30,22,38,.25) 100%),
     radial-gradient(95% 54% at 48% 100%,
-      rgba(201,169,97,.16) 0%, rgba(201,169,97,.07) 42%,
-      rgba(201,169,97,0) 76%);
+      rgba(var(--gold-rgb),.17) 0%, rgba(var(--gold-rgb),.07) 42%,
+      rgba(var(--gold-rgb),0) 76%);
 }
 
 /* Horizontal passage: gold ground with dark text at the opening. At the
@@ -158,12 +158,12 @@ body.home .curtain__bar i{ background:var(--dark); }
 body.home .filmsec__media::after{
   background:
     linear-gradient(180deg, rgba(17,17,15,.72) 0%, rgba(17,17,15,.94) 100%),
-    radial-gradient(80% 70% at 50% 100%, rgba(201,169,97,.12), transparent 68%);
+    radial-gradient(80% 70% at 50% 100%, rgba(var(--gold-rgb),.12), transparent 68%);
 }
 body.home .filmwin__scrim{
   background:
     linear-gradient(180deg, rgba(17,17,15,.14) 0%, rgba(17,17,15,.72) 100%),
-    radial-gradient(70% 65% at 50% 100%, rgba(201,169,97,.10), transparent 72%);
+    radial-gradient(70% 65% at 50% 100%, rgba(var(--gold-rgb),.10), transparent 72%);
 }
 body.home .filmwin{ max-width:1120px; background:var(--home-night); }
 
@@ -186,7 +186,7 @@ body.home .motto__rule{
 /* Photo crossfades keep their own stagger. Tone uses one class on the section,
    so hundreds of tiles do not each run a separate blend-mode animation. */
 body.home .glimpse{
-  background:#181815;
+  background:var(--brand-deep);
 }
 body.home .glimpse .marker .sc{
   color:var(--home-gold-lit);
@@ -209,10 +209,10 @@ body.home .glimpse.is-tone-flipped .gt:nth-child(odd):hover{
 
 body.home .finalcta__media::after{
   background:
-    linear-gradient(180deg, rgba(17,17,15,.46) 0%, rgba(17,17,15,.92) 100%),
-    radial-gradient(85% 68% at 50% 100%, rgba(201,169,97,.14), transparent 72%);
+    linear-gradient(180deg, rgba(30,22,38,.46) 0%, rgba(30,22,38,.92) 100%),
+    radial-gradient(85% 68% at 50% 100%, rgba(var(--gold-rgb),.14), transparent 72%);
 }
-body.home .totop{ background:#8F6E2F; box-shadow:0 6px 24px rgba(42,42,38,.24); }
+body.home .totop{ background:var(--gold); color:var(--on-gold); box-shadow:0 6px 24px rgba(30,22,38,.24); }
 
 @media (prefers-reduced-motion:reduce){
   body.home .hrun__pin::before{ transition:none; }

@@ -2220,12 +2220,18 @@ def build(slug, page):
             f'<link rel="stylesheet" href="assets/css/footer.css?{CACHE_BUST}-footer-1">\n</head>')
 
     head = head.replace("</head>",
-        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-nav-1">\n</head>')
+        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-nav-2">\n'
+        '<noscript><style>.nv-header{opacity:1!important;visibility:visible!important;'
+        'background-color:var(--paper)!important;border-bottom-color:var(--rule)!important}'
+        '</style></noscript>\n</head>')
 
-    # "litehead" marks a page that opens on a pale ground. It once gave the
-    # floating header dark lettering there; the header is now one solid ivory
-    # bar on every page, but page sheets still key their openings on it.
+    # Openings with no visual hero start on the structured bar. Other pages
+    # keep the original controls clear over their first visual section.
     lite = bool(page.get("litehead"))
+    header_start = ("content" if page.get("banner") or page.get("post") or page.get("notfound")
+                    or slug in ("news", "leadership", "school-info", "blog", "cultural-gallery")
+                    else "hero")
+    header_tone = "light" if lite or slug == "creative-writing" else "dark"
     # A page opening on a scrubbed film is marked twice: "film" for the
     # mechanics every such page shares, and its own slug for the handful of
     # decisions its footage makes for it.
@@ -2279,11 +2285,14 @@ def build(slug, page):
               .replace("{{NAV}}", nav_html(slug))
               .replace("{{ACTIVE_GROUP}}", str(menu_group_index(slug)))
               .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html"))
-    # The home page needs no Home tab — the wordmark already leads here, and a
-    # Home link on Home is a link to nowhere.
+    # Keep the approved Home control on every page. On Home it returns to the
+    # opening hero without reloading the page or replaying the curtain.
     header = (read("tools/partials/header.html")
               .replace("{{BRAND_HREF}}", "#top" if slug == "index" else "index.html")
-              .replace("{{HOME_TAB}}", "" if slug == "index" else HOME_TAB)
+              .replace("{{HOME_TAB}}", HOME_TAB.replace('href="index.html"', 'href="#top"')
+                       if slug == "index" else HOME_TAB)
+              .replace("{{HEADER_MODE}}", header_start)
+              .replace("{{HEADER_TONE}}", header_tone)
               .replace("{{HEADER_TABS}}", ""))
     if slug == "news":
         header = header.replace('class="nv-tab nv-tab--news" href="news.html"',
