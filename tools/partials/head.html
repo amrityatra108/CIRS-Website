@@ -24,13 +24,14 @@
 <meta name="twitter:title" content="{{TITLE}}">
 <meta name="twitter:description" content="{{DESCRIPTION}}">
 <meta name="twitter:image" content="assets/img/og.jpg">
+<link rel="preload" href="assets/js/navigation.js?{{CACHE_BUST}}-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?{{CACHE_BUST}}">
 <link rel="stylesheet" href="assets/css/cirs.css?{{CACHE_BUST}}">
-<link rel="stylesheet" href="assets/css/pages.css?{{CACHE_BUST}}">
+<link rel="stylesheet" href="assets/css/pages.css?{{CACHE_BUST}}-lightbox-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only

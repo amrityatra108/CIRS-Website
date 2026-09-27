@@ -24,18 +24,19 @@
 <meta name="twitter:title" content="News | The CIRS Journal">
 <meta name="twitter:description" content="The CIRS Journal: school news, results and stories from Chinmaya International Residential School in Siruvani, Coimbatore.">
 <meta name="twitter:image" content="assets/img/og.jpg">
+<link rel="preload" href="assets/js/navigation.js?b=113-journal-11-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?b=113-journal-11">
 <link rel="stylesheet" href="assets/css/cirs.css?b=113-journal-11">
-<link rel="stylesheet" href="assets/css/pages.css?b=113-journal-11">
+<link rel="stylesheet" href="assets/css/pages.css?b=113-journal-11-lightbox-2">
 
 <link rel="stylesheet" href="assets/css/news-journal.css?b=113-journal-11">
 <link rel="stylesheet" href="assets/css/typography.css?b=113-journal-11">
 <link rel="stylesheet" href="assets/css/footer.css?b=113-journal-11-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=113-journal-11-nav-3">
+<link rel="stylesheet" href="assets/css/drawer.css?b=113-journal-11-nav-4">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -45,17 +46,15 @@
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
      for the film, and removing the element is what actually stops the audio. -->
-<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" hidden>
+<dialog class="lightbox" id="lightbox" aria-label="The official CIRS film" aria-describedby="lightboxHint" hidden>
   <div class="lightbox__back" data-close></div>
   <div class="lightbox__panel">
-    <div class="lightbox__frame" id="lightboxFrame"></div>
     <button type="button" class="lightbox__close" data-close aria-label="Close the film">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
+    <div class="lightbox__frame" id="lightboxFrame"></div>
   </div>
-  <!-- The cross-origin player can catch Escape while it has focus. Keep a
-       visible, reliable way out next to the labelled close button. -->
-  <p class="lightbox__hint" aria-hidden="true"><span class="lightbox__hint-key">Click outside the film to close</span><span class="lightbox__hint-touch">Tap outside the film to close</span></p>
+  <p class="lightbox__hint" id="lightboxHint"><span class="lightbox__hint-key">Use your browser&rsquo;s Back command while the player has focus, or Tab through its controls to reach Close the film. Click outside to close.</span><span class="lightbox__hint-touch">Tap outside the player to close.</span> <button type="button" class="lightbox__exit" data-close>Close the film</button> <a class="lightbox__fallback" id="lightboxFallbackLink" href="https://youtu.be/" target="_blank" rel="noopener">Open on YouTube if the player is unavailable.</a></p>
 </dialog>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
@@ -261,6 +260,7 @@
   </div>
 </div>
 <main id="main">
+<script src="assets/js/navigation.js?b=113-journal-11-core-3"></script>
 <nav class="jump" aria-label="On this page">
   <details class="jump__details">
     <summary class="jump__toggle" title="On this page">
@@ -292,7 +292,7 @@
             <p class="journal-hero__meta"><span>Latest news / Achievements</span><span><time datetime="2026-05">May 2026</time> final examination</span></p>
             <div><h2>Twenty-four candidates.<br>Twenty-four diplomas.</h2><p>All 24 candidates in the May 2026 IB Diploma examination earned the diploma. CIRS reported a 39.4-point average and a highest score of 45 out of 45.</p><a class="journal-hero__link" href="#ib-results-2026">Explore IB results <span aria-hidden="true">↗</span></a></div>
           </div>
-          <div class="journal-hero__visual journal-hero__visual--type" aria-label="24 diplomas awarded to 24 candidates"><strong>24<span>/ 24</span></strong><small>IB diplomas awarded<br>May 2026 examination</small></div>
+          <div class="journal-hero__visual journal-hero__visual--type"><strong>24<span>/ 24</span></strong><small>IB diplomas awarded<br>May 2026 examination</small></div>
         </article>
         <article class="journal-hero__slide journal-hero__slide--cbse" data-journal-slide>
           <div class="journal-hero__copy">
@@ -584,7 +584,7 @@
       </ol>
       <div class="journal-archive__empty" id="journal-empty" hidden><p>No stories match this search.</p><button type="button" id="journal-reset">Clear search and filters</button></div>
     </div>
-    <aside class="journal-diary" id="diary" aria-labelledby="diary-title">
+    <section class="journal-diary" id="diary" aria-labelledby="diary-title">
       <p class="journal-section-head__label">Brief updates</p>
       <h3 id="diary-title">From the school diary</h3>
       <p class="journal-diary__intro">Dated entries published by the school, without separate reports.</p>
@@ -596,7 +596,7 @@
         <li><time datetime="2026-01-03">3 January 2026</time><span>Staff Orientation Programme on AI in Teaching</span></li>
         <li><time datetime="2025-12-01">1–5 December 2025</time><span>Shaishav Shiksha Camp — teacher orientation</span></li>
       </ol>
-    </aside>
+    </section>
   </div>
 </section>
 
@@ -713,7 +713,7 @@
 <script src="assets/vendor/gsap.min.js?b=113-journal-11" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js?b=113-journal-11" defer></script>
 <script src="assets/vendor/lenis.min.js?b=113-journal-11" defer></script>
-<script src="assets/js/cirs.js?b=113-journal-11-header-1" defer></script>
+<script src="assets/js/cirs.js?b=113-journal-11-header-5" defer></script>
 <script src="assets/js/pages.js?b=113-journal-11" defer></script>
 <script src="assets/js/footer.js?b=113-journal-11-footer-1" defer></script>
 <script src="assets/js/news-journal.js?b=113-journal-11" defer></script>

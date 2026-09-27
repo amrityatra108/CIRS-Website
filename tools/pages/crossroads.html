@@ -3,7 +3,7 @@
        avoids a video request when motion or data preferences skip the intro. -->
   <video class="crossroads-intro__opening" data-crossroads-intro-opening data-src="assets/video/crossroads-opening.mp4" data-mobile-src="assets/video/crossroads-opening-m.mp4" poster="assets/img/crossroads/opening-poster.jpg" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
   <button class="crossroads-intro__play" type="button" data-crossroads-intro-play hidden>Play intro</button>
-  <button class="crossroads-intro__skip" type="button" data-crossroads-intro-skip>Skip intro</button>
+  <a class="crossroads-intro__skip" href="#crossroads-main" data-crossroads-intro-skip>Skip intro</a>
   <div class="crossroads-intro__base" aria-hidden="true"></div>
   <div class="crossroads-intro__reveal" aria-hidden="true">
     <img class="crossroads-intro__still" src="assets/img/crossroads/intro-text-free.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" fetchpriority="low">
@@ -14,7 +14,7 @@
       <img class="crossroads-intro__pen" src="assets/img/crossroads/pen-logo.svg" alt="" aria-hidden="true" width="210" height="302">
       <div class="crossroads-intro__wordmark">
         <h1 class="crossroads-intro__title">
-          <img class="crossroads-intro-title-art" src="assets/img/crossroads/title-restored.svg" alt="The Crossroads" width="4096" height="1368" decoding="async">
+          <img class="crossroads-intro-title-art" src="assets/img/crossroads/title-restored.svg" alt="The Crossroads" width="4096" height="1368" decoding="async" fetchpriority="high">
         </h1>
         <p class="crossroads-intro__eyebrow">CIRS · The Student Magazine</p>
       </div>

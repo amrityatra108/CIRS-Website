@@ -282,10 +282,11 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-7",
+        "cache_suffix": "-curriculum-8",
         # No banner. The page opens on its own paper composition, built in
-        # tools/pages/curriculum.html: the heading beside the Junior School
-        # photograph, with the page's own section index under it. That index
+        # tools/pages/curriculum.html: the heading beside a pair of classroom
+        # photographs, the page's facts on a rule, and its own section index
+        # under them. That index
         # is visible and labelled, so the floating "On this page" control
         # would be a second copy of it; hence jump False. The opening is on
         # paper, so the header wears dark lettering: hence litehead.
@@ -564,7 +565,7 @@ PAGES = {
         # finished work (assets/js/artattack.js). The film carries the h1,
         # which is visible from its first frame.
         "sheet": "artattack",
-        "cache_suffix": "-art-attack-4",
+        "cache_suffix": "-art-attack-6",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Painting, drawing, craft and the things made for the stage by the students "
@@ -949,6 +950,29 @@ def film_html(slug, page):
     still = (f'    <img class="film__still" src="assets/img/{film["still"]}" '
              'alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">\n'
              if film.get("still") and still_element else "")
+    preload = "none" if slug == "art-attack" else "auto"
+    progressive_loader = ('''\n    <script>
+      (function (video) {
+        var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var constrained = connection && (connection.saveData || ["slow-2g", "2g", "3g"].indexOf(connection.effectiveType) !== -1);
+        if (!video || reduced || constrained) return;
+        var still = document.currentScript.closest(".film").querySelector(".film__still");
+        function loadAfterPaint() {
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              window.setTimeout(function () { if (!document.hidden) video.load(); }, 50);
+            });
+          });
+        }
+        // The opening still carries the first useful composition. Let its
+        // high-priority request finish before the film competes for bandwidth.
+        if (still && !still.complete) {
+          still.addEventListener("load", loadAfterPaint, { once: true });
+          still.addEventListener("error", loadAfterPaint, { once: true });
+        } else loadAfterPaint();
+      })(document.currentScript.closest(".film").querySelector("[data-film-video]"));
+    </script>''') if slug == "art-attack" else ""
     cue = (
         '    <p class="film__scroll-cue" data-film-scroll-cue>'
         '<span aria-hidden="true">↓</span><span>Scroll to discover</span></p>\n'
@@ -963,7 +987,7 @@ def film_html(slug, page):
 {still}    <video class="film__video" data-film-video
            width="1280" height="720"
            poster="assets/img/{film["poster"]}"
-           preload="auto" muted playsinline disablepictureinpicture
+           preload="{preload}" muted playsinline disablepictureinpicture
            aria-hidden="true" tabindex="-1">
       <!-- H.264 first, which is the other way round from the rest of this
            site. These files are not played but seeked, several times a
@@ -985,7 +1009,7 @@ def film_html(slug, page):
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
 {cue}    <h1 class="film__title" data-film-title>{title}</h1>
-{shot}  </div>
+{shot}{progressive_loader}  </div>
 </section>{seam}'''
 
 
@@ -1359,7 +1383,7 @@ def crossroads_stories_covers():
         cards.append(f'<a class="{klass}" href="{issue["pdf"]}" '
                      f'aria-label="Read The Crossroads {issue["label"]}">'
                      f'<img src="{issue["cover"]}?{CACHE_BUST}" alt="The Crossroads {issue["label"]} cover" '
-                     'width="300" height="420" loading="lazy" decoding="async"></a>')
+                     'width="300" height="420" loading="lazy" decoding="async" fetchpriority="low"></a>')
     return '<div class="crossroads-stories__media"><div class="crossroads-stories__stack">' + ''.join(cards) + '</div></div>'
 
 
@@ -1370,7 +1394,7 @@ def crossroads_latest(feature=False):
     if feature and issue["cover"]:
         return (f'<a class="crossroads-archive-hero__feature" href="{issue["pdf"]}" '
                 f'aria-label="Read the latest issue: {issue["label"]} (PDF)">'
-                f'<img src="{issue["cover"]}?{CACHE_BUST}" alt="" width="300" height="420" loading="lazy" decoding="async">'
+                f'<img src="{issue["cover"]}?{CACHE_BUST}" alt="" width="300" height="420" loading="lazy" decoding="async" fetchpriority="low">'
                 f'<span>Latest issue · {issue["label"]}</span></a>')
     if feature:
         return ""
@@ -1395,7 +1419,7 @@ def crossroads_html():
 
         if issue["cover"]:
             face = (f'<img class="crcover__img" src="{issue["cover"]}?{CACHE_BUST}" '
-                    f'alt="Cover of The Crossroads {label}" loading="lazy" '
+                    f'alt="Cover of The Crossroads {label}" loading="lazy" fetchpriority="low" '
                     f'width="720" height="1008">')
         else:
             face = (f'''<span class="crcover__mast">The Crossroads</span>
@@ -1470,7 +1494,9 @@ def crosswall_html():
                                    "assets/img/crossroads/wall/")
                 # The second copy is the same file the first already
                 # fetched, and only exists to close the loop.
-                lazy = ' loading="lazy"' if (copy or c >= 3) else ''
+                # The wall follows a full-screen introduction. Its covers are
+                # decoration and must not delay the title or essential controls.
+                lazy = ' loading="lazy" fetchpriority="low"'
                 tiles.append(f'<img class="crwall__cell" src="{wall}?{CACHE_BUST}"'
                              f' alt="" width="300" height="420"{lazy} decoding="async">')
         cols.append(f'      <div class="crwall__col">\n'
@@ -2108,7 +2134,7 @@ def build(slug, page):
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
-    if slug in ("crossroads", "founder"):
+    if slug in ("crossroads", "founder", "art-attack"):
         # These pages open with their own films. The shared curtain would hide
         # the skip control and add a second scroll lock. Keep the no-script
         # footer fallback after removing the curtain-specific head block.
@@ -2117,14 +2143,28 @@ def build(slug, page):
         head = (head[:curtain_note]
                 + '<noscript><style>.footer-wrap{position:relative}</style></noscript>'
                 + head[curtain_note_end:])
+    if slug == "art-attack":
+        # The title has a safe system-font fallback; let the still and CSS
+        # establish the opening before optional webfont files compete.
+        head = head.replace(
+            '<link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>\n', "")
+        head = head.replace(
+            '<link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>\n', "")
     if slug == "crossroads":
+        # Crossroads opens with vector lettering, so font preloads compete
+        # with its introduction and navigation before text needs them.
+        head = head.replace(
+            '<link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>\n', "")
+        head = head.replace(
+            '<link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>\n', "")
         head = head.replace(
             "</head>",
-            '<style>body.crossroads-intro-active :is(.header,.drawer,.progress,.ring,.totop,.jump,.skip-link,.footer-wrap){visibility:hidden!important}'
+            '<style>body.crossroads-intro-active :is(.progress,.ring,.totop,.jump,.footer-wrap){visibility:hidden!important}'
             'body.crossroads-intro-active .crossroads-intro{background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}'
-            '</style><script>setTimeout(function(){if(!window.__crossroadsIntroReady&&document.body&&document.body.classList.contains("crossroads-intro-active")){document.body.classList.remove("crossroads-intro-active");document.documentElement.classList.remove("crossroads-intro-scroll-locked");var film=document.querySelector("[data-crossroads-intro]");if(film){film.removeAttribute("data-crossroads-intro-pending");film.removeAttribute("data-crossroads-intro-film");film.removeAttribute("data-crossroads-intro-locked");var content=film.querySelector(".crossroads-intro__content");if(content)content.inert=false;Array.prototype.forEach.call(film.parentElement.children,function(node){if(node!==film)node.inert=false})}}},18000)</script>'
+            '</style>'
             '<link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-7">\n'
+            f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-9" as="script" fetchpriority="high">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-9">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-4">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
@@ -2140,7 +2180,7 @@ def build(slug, page):
         # the interactive one, with only the link down to the life story.
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-portrait.css?{CACHE_BUST}-portrait-1">\n'
-            f'<link rel="stylesheet" href="assets/css/founder-gurudev-journey.css?{CACHE_BUST}-story-5">\n'
+            f'<link rel="stylesheet" href="assets/css/founder-gurudev-journey.css?{CACHE_BUST}-story-6">\n'
             '<noscript><style>.gurudev-opening .gc-intro{display:none}'
             '.gurudev-opening .gp-hero[hidden]{display:block!important}'
             '.gurudev-opening :is(.gp-hint,.gp-watch,.gp-sound,.gp-toggle){display:none}'
@@ -2171,10 +2211,35 @@ def build(slug, page):
                  if opening.get("still") and opening.get("still_element") else "")
         pending = ('.film[data-film-pending] .film__title{opacity:1}'
                    if opening.get("pending") or opening.get("still") else "")
+        critical_art_attack = ('''<style id="art-attack-critical">
+body.art-attack{--film-ground:#0B080D;--film-crop:50% 50%;--film-crop-narrow:50% 50%;background:#0B080D}
+body.art-attack .film{position:relative;height:var(--film-run,460vh);background:#000}
+body.art-attack .film__stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#0B080D}
+body.art-attack .film__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;pointer-events:none;opacity:1;transition:opacity .3s ease-out}
+body.art-attack .film[data-film-pending] .film__video{opacity:0}
+body.art-attack .film[data-film-pending] .film__still{visibility:visible}
+body.art-attack .film__still{position:absolute;z-index:0;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%}
+body.art-attack .film__stage:after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:clamp(70px,13svh,150px);background:linear-gradient(to bottom,transparent,#170F18);pointer-events:none}
+body.art-attack .film__title{position:absolute;z-index:2;left:50%;right:auto;top:49%;bottom:auto;width:min(86vw,720px);margin:0;padding:0;color:#FAF9F3;text-align:center;text-transform:none;opacity:1;transform:translate(-50%,-50%);filter:none;text-shadow:0 2px 30px rgba(11,8,13,.55),0 0 2px rgba(11,8,13,.35)}
+body.art-attack .film__art-prefix{display:block;margin-bottom:clamp(12px,2vh,22px);padding-left:.42em;font-family:var(--font-ui,Arial,sans-serif);font-size:clamp(12px,1.2vw,17px);font-weight:400;letter-spacing:.42em;line-height:1;text-transform:uppercase;color:#E3DCCB}
+body.art-attack .film__art-name{display:block;font-family:var(--font-display,Georgia,serif);font-size:clamp(56px,6.3vw,100px);font-weight:500;letter-spacing:-.055em;line-height:.92;white-space:nowrap}
+@media(max-aspect-ratio:6/5){body.art-attack .film__still{object-position:50% 50%}body.art-attack .film__title{top:52%}}
+@media(max-width:720px){body.art-attack .film__title{width:calc(100vw - 32px)}body.art-attack .film__art-prefix{font-size:12px}body.art-attack .film__art-name{font-size:clamp(48px,12vw,76px)}}
+@media(max-width:360px){body.art-attack .film__art-name{font-size:clamp(42px,11.5vw,52px)}}
+@media(prefers-reduced-motion:reduce){body.art-attack .film{height:100svh}}
+</style>\n''') if slug == "art-attack" else ""
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/filmintro.css?{CACHE_BUST}">\n'
-            f'<noscript><style>.film{{height:100svh}}{nudge}{pending}{still}'
+            f'{critical_art_attack}'
+            f'<noscript><style>.film{{height:100svh}}body.art-attack .film{{height:100svh}}{nudge}{pending}{still}'
             '</style></noscript>\n</head>')
+        if slug == "art-attack" and opening.get("still"):
+            # This is the approved frame behind the title. Discover it in the
+            # head so the large archive document and the later film request do
+            # not keep the first visible composition black on a slow link.
+            head = head.replace(
+                "</head>",
+                f'<link rel="preload" href="assets/img/{opening["still"]}" as="image" fetchpriority="high">\n</head>')
     if slug == "theatre":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/theatre.css?{CACHE_BUST}">\n</head>')
@@ -2229,7 +2294,7 @@ def build(slug, page):
             f'<link rel="stylesheet" href="assets/css/footer.css?{CACHE_BUST}-footer-1">\n</head>')
 
     head = head.replace("</head>",
-        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-nav-3">\n'
+        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-nav-4">\n'
         # Without scripting nothing moves the header between its states, so
         # it stays the readable pill throughout.
         '<noscript><style>.nv-header{opacity:1!important;visibility:visible!important;'
@@ -2286,7 +2351,7 @@ def build(slug, page):
         chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
-    if slug in ("crossroads", "founder"):
+    if slug in ("crossroads", "founder", "art-attack"):
         intro_start = parts[-1].index("<!-- Opening sequence.")
         intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
         parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
@@ -2319,6 +2384,12 @@ def build(slug, page):
         parts.append(hero_html(page))
     elif page.get("banner"):
         parts.append(banner_html(page))
+    # The page shell can continue parsing for several seconds on a slow
+    # connection. Start the shared navigation controller once its header,
+    # drawer and main landmark (including the opening composition) exist;
+    # waiting for the deferred bundle at the end of a long archive page leaves
+    # Menu inert. The head preload avoids a second request in the common case.
+    parts.append(f'<script src="assets/js/navigation.js?{CACHE_BUST}-core-3"></script>')
     # The "On this page" index goes here, before the content it indexes.
     jump_at = len(parts)
     if page.get("post"):
@@ -2425,11 +2496,15 @@ def build(slug, page):
         if page.get("closing"):
             footer = closing_html(footer, page["closing"])
         parts.append(footer)
+    if slug == "crossroads":
+        # This page-specific controller only owns the introduction. Load it
+        # before shared animation dependencies so Skip and its bounded lock
+        # are ready as soon as the critical styles have arrived.
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-9" defer></script>')
     parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
     if not wall:
         parts.append(f'<script src="assets/js/footer.js?{CACHE_BUST}-footer-1" defer></script>')
     if slug == "crossroads":
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-7" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-archive.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-stories.js?{CACHE_BUST}-hover-4" defer></script>')
         parts.append(f'<script src="assets/js/crossroads-manuscript.js?{CACHE_BUST}" defer></script>')
@@ -2437,7 +2512,7 @@ def build(slug, page):
         # In this order: the sound the portrait calls, the portrait, then the
         # sequence that hands the intro film over to the portrait.
         parts.append(f'<script src="assets/js/founder-liquid-sound.js?{CACHE_BUST}-portrait-1" defer></script>')
-        parts.append(f'<script src="assets/js/founder-portrait.js?{CACHE_BUST}-portrait-1" defer></script>')
+        parts.append(f'<script src="assets/js/founder-portrait.js?{CACHE_BUST}-portrait-2" defer></script>')
         parts.append(f'<script src="assets/js/founder-opening.js?{CACHE_BUST}-portrait-1" defer></script>')
         parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-5" defer></script>')
     if slug == "the-cirs-experience":
@@ -2484,7 +2559,7 @@ def build(slug, page):
     if slug == "parent-portal":
         parts.append(f'<script src="assets/js/parent-portal-motion.js?{CACHE_BUST}" defer></script>')
     if wall:
-        parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}-focus-1" defer></script>')
     parts += ["</body>", "</html>", ""]
 
     # The index goes in after rewrite_links: its anchors name sections on this

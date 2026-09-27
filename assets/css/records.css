@@ -330,20 +330,22 @@ body.records .rec-plane{
   pointer-events:none;
 }
 /* Placement, in units of the stage. x is from the centre line. The front
-   sheet is the one current certificate; the three behind it are older. */
+   sheet is the one current certificate; the three behind it are older.
+   Keep their scroll fade low: each sheet also carries readable status labels,
+   and fading the whole plane made those labels fail text contrast. */
 body.records .rec-plane--noc{
   --x:-25.5; --y:3; --w:18.5; --z:-70px; --r:-6.5deg; --ry:7deg; --rx:3deg;
-  --mx:-80px; --my:40px; --mz:-260px; --fade:.5;
+  --mx:-80px; --my:40px; --mz:-260px; --fade:.08;
   --ex:-40px; --ey:30px; --er:-4deg; --d:.05s;
 }
 body.records .rec-plane--cbse{
   --x:3.5; --y:0; --w:18.5; --z:-50px; --r:5deg; --ry:-6deg; --rx:2deg;
-  --mx:70px; --my:-60px; --mz:-220px; --fade:.5;
+  --mx:70px; --my:-60px; --mz:-220px; --fade:.08;
   --ex:40px; --ey:-20px; --er:5deg; --d:.12s;
 }
 body.records .rec-plane--land{
   --x:5.5; --y:17.5; --w:17; --z:-20px; --r:-2.5deg; --ry:-8deg; --rx:4deg;
-  --mx:100px; --my:70px; --mz:-300px; --fade:.55;
+  --mx:100px; --my:70px; --mz:-300px; --fade:.08;
   --ex:30px; --ey:50px; --er:-3deg; --d:.18s;
 }
 body.records .rec-plane--front{
