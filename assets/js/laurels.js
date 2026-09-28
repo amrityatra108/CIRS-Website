@@ -80,8 +80,14 @@
      its crown; paired leaves along each, shrinking towards the tip. Returns
      candidate points, the leaf tips, and (optionally) one leaf left out. */
   function wreath(cx, cy, R, leavesPerSide, perLeaf, omitLast) {
-    var pts = [], tips = [], missing = null;
+    var pts = [], tips = [], missing = null, leaves = [], stems = [];
     [1, -1].forEach(function (side) {
+      var stem = [];
+      for (var q = 0; q <= 36; q++) {
+        var sa = Math.PI / 2 + side * (0.24 + (q / 36) * 2.4);
+        stem.push([cx + R * Math.cos(sa), cy + R * Math.sin(sa)]);
+      }
+      stems.push(stem);
       for (var k = 0; k < leavesPerSide; k++) {
         var t = (k + 0.5) / leavesPerSide;
         var a = Math.PI / 2 + side * (0.24 + t * 2.4);
@@ -108,17 +114,20 @@
             outline.push([bx + dx * u * len - px * hw, by + dy * u * len - py * hw]);
           }
           var tip = [bx + dx * len, by + dy * len];
+          var poly = outline.filter(function (_, n) { return n % 2 === 0; })
+            .concat(outline.filter(function (_, n) { return n % 2 === 1; }).reverse());
           if (omitLast && side === -1 && inout === 1 && k === leavesPerSide - 1) {
             missing = { outline: outline, tip: tip, base: [bx, by] };
             return;
           }
+          leaves.push(poly);
           outline.forEach(function (p) { pts.push([p[0], p[1], 1]); });
           for (var m = 1; m < 4; m++) pts.push([bx + dx * len * m / 4, by + dy * len * m / 4, 1]);
           tips.push(tip);
         });
       }
     });
-    return { pts: pts, tips: tips, missing: missing };
+    return { pts: pts, tips: tips, missing: missing, leaves: leaves, stems: stems };
   }
 
   function Field(canvas, mode) {
@@ -142,10 +151,11 @@
     var small = w < 700;
     var hero = this.mode === "hero";
     var n = hero ? (small ? 260 : 620) : (small ? 190 : 380);
-    var cx = w / 2, cy = hero ? h / 2 : h * 0.3;
-    var R = hero ? Math.min(w, h) * (small ? 0.36 : 0.33) : Math.min(w, h) * (small ? 0.17 : 0.15);
+    var cx = w / 2, cy = hero ? h / 2 : h * (small ? 0.3 : 0.27);
+    var R = hero ? Math.min(w, h) * (small ? 0.36 : 0.33) : Math.min(w, h) * (small ? 0.17 : 0.125);
     var W = wreath(cx, cy, R, small ? 10 : 13, small ? 5 : 8, !hero);
     this.cx = cx; this.cy = cy; this.R = R; this.missing = W.missing;
+    this.leaves = W.leaves; this.stems = W.stems;
     var r = rng(hero ? 1996 : 2026);
 
     // Targets: every candidate point, thinned or repeated to n.
@@ -199,8 +209,8 @@
   Field.prototype.draw = function (time) {
     var x = this.x, w = this.w, h = this.h, p = this.p, hero = this.mode === "hero";
     var gather = hero ? p : p;
-    var fall = hero ? clamp((p - 0.72) / 0.28, 0, 1) : 0;
-    var toIvory = hero ? clamp((p - 0.93) / 0.07, 0, 1) : 0;
+    var fall = hero ? clamp((p - 0.8) / 0.2, 0, 1) : 0;
+    var toIvory = hero ? clamp((p - 0.94) / 0.06, 0, 1) : 0;
 
     // Ground: ink, a plum glow, and at the very end the ivory of what follows.
     x.globalAlpha = 1;
@@ -219,7 +229,7 @@
 
     for (var i = 0; i < this.P.length; i++) {
       var q = this.P[i];
-      var c = ease(clamp((gather - 0.06 - q.d * 0.22) / 0.4, 0, 1));
+      var c = ease(clamp((gather - 0.04 - q.d * 0.16) / 0.36, 0, 1));
       var f = fall > 0 ? ease(clamp((fall - q.d * 0.3) / 0.7, 0, 1)) : 0;
       var dx = q.tx - cx, dy = q.ty - cy;
       var tx = cx + dx * cs - dy * sn, ty = cy + dx * sn + dy * cs;
@@ -253,6 +263,31 @@
         var s = q.s * (1 + c * 0.25);
         x.fillRect(px - s / 2, py - s / 2, s, s);
       }
+    }
+
+    // As the points settle, fine lines ink the leaves and stems between them,
+    // so the wreath resolves from dust into a drawn laurel.
+    var ink = ease(clamp((gather - 0.5) / 0.16, 0, 1)) * (1 - clamp(fall * 1.8, 0, 1));
+    if (ink > 0.01 && this.leaves) {
+      x.save();
+      x.translate(cx, cy); x.rotate(rot); x.translate(-cx, -cy);
+      x.lineJoin = "round"; x.lineCap = "round";
+      x.strokeStyle = "rgb(255,215,92)"; x.fillStyle = "rgb(255,215,92)";
+      x.globalAlpha = ink * 0.34; x.lineWidth = 1.1;
+      this.stems.forEach(function (st) {
+        x.beginPath(); x.moveTo(st[0][0], st[0][1]);
+        for (var m = 1; m < st.length; m++) x.lineTo(st[m][0], st[m][1]);
+        x.stroke();
+      });
+      x.lineWidth = 0.8;
+      this.leaves.forEach(function (lf) {
+        x.beginPath(); x.moveTo(lf[0][0], lf[0][1]);
+        for (var m = 1; m < lf.length; m++) x.lineTo(lf[m][0], lf[m][1]);
+        x.closePath();
+        x.globalAlpha = ink * 0.07; x.fill();
+        x.globalAlpha = ink * 0.42; x.stroke();
+      });
+      x.restore();
     }
 
     // The closing laurel keeps one leaf unplaced: an outline, breathing.
@@ -312,13 +347,13 @@
     if (heroField) { heroField.p = p; if (heroVisible) heroField.draw(time); }
     if (reduced) return;
     var e = heroEls;
-    var a = ease(clamp(p / 0.4, 0, 1));
+    var a = ease(clamp(p / 0.34, 0, 1));
     e.our.style.opacity = 1 - clamp(p / 0.2, 0, 1);
     e.our.style.transform = "translate3d(0," + (-p * 140) + "px,0)";
     e.laurels.style.transform = "translate3d(0," + (-a * 8) + "vh,0) scale(" + (1 - a * 0.62) + ")";
-    e.laurels.style.opacity = 1 - clamp((p - 0.26) / 0.14, 0, 1);
+    e.laurels.style.opacity = 1 - clamp((p - 0.22) / 0.14, 0, 1);
     e.line.style.opacity = e.cue.style.opacity = 1 - clamp(p / 0.08, 0, 1);
-    e.note.style.opacity = clamp((p - 0.44) / 0.1, 0, 1) * (1 - clamp((p - 0.7) / 0.08, 0, 1));
+    e.note.style.opacity = clamp((p - 0.4) / 0.1, 0, 1) * (1 - clamp((p - 0.77) / 0.06, 0, 1));
     if (p > 0.08) e.peek.classList.remove("is-on");
   }
   if (hero && "IntersectionObserver" in window) {
@@ -481,6 +516,7 @@
     if (state.year !== "all") parts.push(state.year === "undated" ? "undated" : state.year);
     status.textContent = "Showing " + shown + " of " + items.length + " laurels" + (parts.length ? ": " + parts.join(" · ") : "") + ".";
     empty.hidden = shown !== 0;
+    if (grid) queuePack();
   }
   if (filters) {
     filters.addEventListener("click", function (e) {
@@ -494,6 +530,32 @@
     var reset = $("[data-lr-reset]", archive);
     if (reset) reset.addEventListener("click", function () { state = { cat: "all", level: "all", year: "all" }; applyFilters(true); });
     applyFilters(false);
+  }
+
+  /* Masonry: each visible laurel spans as many 8px rows as it is tall. */
+  var grid = archive ? $("[data-lr-grid]", archive) : null;
+  var packQueued = false;
+  function packGrid() {
+    packQueued = false;
+    if (!grid) return;
+    items.forEach(function (it) {
+      if (it.hidden) return;
+      it.style.setProperty("--rs", Math.ceil(it.getBoundingClientRect().height / 8) + 1);
+    });
+  }
+  function queuePack() {
+    if (packQueued) return;
+    packQueued = true;
+    requestAnimationFrame(packGrid);
+  }
+  if (grid) {
+    if ("ResizeObserver" in window) {
+      var packRO = new ResizeObserver(queuePack);
+      items.forEach(function (it) { packRO.observe($(".lr-card", it)); });
+    }
+    queuePack();
+    window.addEventListener("load", queuePack);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(queuePack);
   }
 
   var dialog = $("#lr-dialog");
@@ -723,6 +785,7 @@
         if (closeField) closeField.build();
       }
       setCine();
+      if (typeof queuePack === "function") queuePack();
       if (reduced) drawStill();
     }, 160);
   });
