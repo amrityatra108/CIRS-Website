@@ -48,6 +48,7 @@ import theatre
 import festivals
 import leadership
 import history
+import laurels
 import experience
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -482,40 +483,51 @@ PAGES = {
         "nav": "Our Laurels",
         "title": "Our Laurels",
         "description": "Competitions won, representative honours and the CIRS students who "
-                       "carried them.",
-        "banner": ("Our laurels", "Honours, <em>Named.</em>",
-                   "Competitions won, representative honours, and the students who carried them."),
-        "soon": ([("Inter-school", "Competition names, years and placings"),
-                  ("District and state", "Selections and results"),
-                  ("National", "Representative honours and participation"),
-                  ("Inter-house", "The house championship and its holders")],
-                 "competition names, years, placings and the students involved, to be supplied "
-                 "by the sports office and the activities office",
-                 [("sports.html", "Our Sports")]),
+                       "carried them: the school's achievement archive, from 2007 to today.",
+        # The archive brings its own opening: a field of points, one for each
+        # laurel, that gathers into a wreath. Every record is written from
+        # tools/laurels.py, which names its source.
+        "banner": None,
+        "sheet": "laurels",
+        "cache_suffix": "-laurels-2",
+        "uc": False,
+        "jump": False,
     },
     "math-challenge": {
         "nav": "Math Challenge",
         "title": "Math Challenge",
         "description": "The Math Challenge at Chinmaya International Residential School — "
-                       "monthly problems for four grade zones, and the habits of mind they "
-                       "are set to build.",
-        # No banner from the shared builder. This page opens on a field of
-        # mathematics it brings itself, and it is the one dark page on the
-        # site — assets/css/matharena.css, scoped to body.matharena.
+                       "four grade divisions, and the winners' bulletins the mathematics "
+                       "department publishes month by month.",
+        # No banner from the shared builder. The page opens on its own
+        # installation: a sculpture of 216 blocks that the stage's scroll
+        # turns from cube to field to torus (assets/js/math-sculpture.js,
+        # loaded by assets/js/matharena.js), on ivory, so the header opens
+        # in ink. Styles in assets/css/matharena.css, scoped to body.matharena.
         "banner": None,
         "sheet": "matharena",
+        "litehead": True,
+        "cache_suffix": "-kinetic-1",
     },
     "creative-writing": {
         "nav": "Creative Writing",
-        "title": "Creative Writing | Words become worlds. | CIRS",
-        "description": "A curated anthology of poetry by students of Chinmaya "
-                       "International Residential School.",
-        # This anthology supplies its own typographic opening and h1.
+        "title": "Creative Writing | Written at CIRS",
+        "description": "Stories, poems, thoughts and imaginations by the Junior and Senior "
+                       "School students of Chinmaya International Residential School, "
+                       "published edition by edition.",
+        # "The Living Manuscript": a blank page whose scattered words assemble
+        # into the h1, then the two collections and their editions. Every
+        # edition, poem and presentation is data in
+        # tools/creative-writing-content.json, rendered by tools/creativewriting.py,
+        # which also adds the Junior, Senior and edition pages below.
         "banner": None,
         "sheet": "cwriting",
-        "cache_suffix": "-anthology-2",
+        "cache_suffix": "-manuscript-1",
         "jump": False,
         "uc": False,
+        # The opening is pale paper, so the header letters in ink over it.
+        "litehead": True,
+        "cw": {"kind": "main", "collection": "all"},
     },
     "captures": {
         "nav": "CIRS Captures",
@@ -844,6 +856,10 @@ def prefix_refs(html, up):
 
 
 def menu_group_index(slug):
+    # The Creative Writing collections and editions open the menu on the
+    # group their parent page belongs to.
+    if slug.startswith("creative-writing/"):
+        slug = "creative-writing"
     return next((i for i, (_, slugs) in enumerate(MENU) if slug in slugs), 0)
 
 
@@ -1916,12 +1932,33 @@ def build(slug, page):
             '<link rel="modulepreload" href="assets/founder-opening/vendor/three.core.js">\n'
             '<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("sp-boot","sl-body-motion");setTimeout(function(){if(!window.__spiritualOpeningReady)document.documentElement.classList.remove("sp-boot");if(!window.__spiritualBodyReady)document.documentElement.classList.remove("sl-body-motion")},5000)}</script>\n</head>')
 
+    if slug == "math-challenge":
+        # Decided before first paint, so the stage never lays out twice:
+        # mc-motion lets headings ride in, mc-kinetic makes the stage the
+        # tall scrolled installation. Without motion, WebGL or height it
+        # stays an ordinary opening. A timer undoes both if the page script
+        # never starts, so nothing waits on a script that did not arrive.
+        # The sculpture is imported by matharena.js with this same query; the
+        # preload also puts it in front of stage-deploy.py, which ships only
+        # what a page names.
+        head = head.replace("</head>",
+            f'<link rel="modulepreload" href="assets/js/math-sculpture.js?{CACHE_BUST}">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.module.min.js">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.core.js">\n'
+            '<script>(function(){var d=document.documentElement;'
+            'if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;'
+            'd.classList.add("mc-motion");'
+            'if("WebGLRenderingContext" in window&&innerHeight>=500)d.classList.add("mc-kinetic");'
+            'setTimeout(function(){if(!window.__mcBooted)d.classList.remove("mc-motion","mc-kinetic")},6000)'
+            '})()</script>\n</head>')
+
     # Shared typography follows page sheets so the approved roles stay consistent.
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
-    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
-        # These pages open with their own films. The shared curtain would hide
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life", "math-challenge"):
+        # These pages open with their own films (Math Challenge with its
+        # sculpture, whose first frame is the page's heading and actions). The shared curtain would hide
         # the skip control and add a second scroll lock. Keep the no-script
         # footer fallback after removing the curtain-specific head block.
         curtain_note = head.index("<!-- The opening curtain")
@@ -1976,6 +2013,8 @@ def build(slug, page):
             '@media (min-width:651px){.gurudev-opening .gp-images img{width:auto;height:calc(100% - 132px);'
             'left:50%;top:64px;transform:translateX(-50%)}}'
             '</style></noscript>\n</head>')
+    if page.get("cw"):
+        head = head.replace("</head>", creativewriting.head_html(page["cw"]) + "</head>")
     if slug == "sports":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
@@ -2034,6 +2073,12 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "theatre":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/theatre.css?{CACHE_BUST}">\n</head>')
+    if slug == "our-laurels":
+        # The opening's two words are set in Newsreader, the face the Founder
+        # opening introduced; preload it in place of the display face.
+        head = head.replace(
+            '<link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>\n',
+            '<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>\n')
     if slug == "leadership":
         # The message a #msg-... URL asks for is chosen before first paint.
         head = head.replace("</head>", leadership.head_script() + leadership.head_css() + "</head>")
@@ -2067,7 +2112,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         head = head.replace("</head>",
             portal_motion_gate +
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
-    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership")
+    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership",
+                 "our-laurels")
             or page.get("notfound")):
         # These pages open immediately with their own video, document sheets,
         # journal masthead or, on Curriculum, the rising path of the grades
@@ -2119,8 +2165,9 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     chrome = read("tools/partials/chrome.html")
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
-    if slug == "blog" or page.get("post"):
-        # Journal pages open directly on readable type. The shared full-screen
+    if slug == "blog" or page.get("post") or page.get("cw"):
+        # Journal pages open directly on readable type, and Creative Writing
+        # opens on its own blank page and cursor. The shared full-screen
         # curtain would hide their masthead and force an unrelated wait.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
@@ -2131,7 +2178,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership")
+    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership",
+                 "our-laurels")
             or page.get("notfound")):
         # Admissions, School Information, News, Curriculum, School History and
         # Leadership each have their own visible opening. The shared curtain would delay it behind a
@@ -2141,7 +2189,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
-    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life", "math-challenge"):
         intro_start = parts[-1].index("<!-- Opening sequence.")
         intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
         parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
@@ -2182,7 +2230,9 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     parts.append(f'<script src="assets/js/navigation.js?{CACHE_BUST}-core-3"></script>')
     # The "On this page" index goes here, before the content it indexes.
     jump_at = len(parts)
-    if page.get("post"):
+    if page.get("cw"):
+        content = creativewriting.render(page["cw"])
+    elif page.get("post"):
         content = article_html(page)
     elif page.get("news"):
         content = news_article_html(page)
@@ -2199,6 +2249,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         content = festivals.expand(content)
     if slug == "school-history":
         content = history.expand(content)
+    if slug == "our-laurels":
+        content = laurels.expand(content)
     if slug == "leadership":
         content = leadership.expand(content)
     if slug == "the-cirs-experience":
@@ -2221,20 +2273,15 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                        .replace("{{CROSSROADS_LATEST_LINK}}", crossroads_latest())
                        .replace("{{CROSSROADS_LATEST_FEATURE}}", crossroads_latest(feature=True))
                        .replace("{{CROSSROADS_STORIES_COVERS}}", crossroads_stories_covers())
-                       .replace("{{MATH_JOURNEY}}", mathchallenge.journey_html())
-                       .replace("{{MATH_ZONES}}", mathchallenge.zones_html())
-                       .replace("{{MATH_FILTERS}}", mathchallenge.filters_html())
-                       .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html())
+                       .replace("{{MATH_JOURNEY}}", mathchallenge.journey_html() if slug == "math-challenge" else "")
+                       .replace("{{MATH_ZONES}}", mathchallenge.zones_html() if slug == "math-challenge" else "")
+                       .replace("{{MATH_FILTERS}}", mathchallenge.filters_html() if slug == "math-challenge" else "")
+                       .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html() if slug == "math-challenge" else "")
                        .replace("{{CAPTURES_GALLERY}}", captures.gallery_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END}}", captures.end_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
                        .replace("{{CAPTURES_COUNT_CAP}}", captures.count_word().capitalize())
                        .replace("{{CAPTURES_CHAPTER_NAV}}", captures.chapter_nav_html() if slug == "captures" else "")
-                       .replace("{{CW_ROWS}}", creativewriting.rows_html())
-                       .replace("{{CW_CHAPTERS}}", creativewriting.chapters_html())
-                       .replace("{{CW_HERO_EXCERPT}}", creativewriting.hero_excerpt_html())
-                       .replace("{{CW_COUNT}}", str(creativewriting.count()))
-                       .replace("{{CW_WRITERS}}", str(creativewriting.writer_count()))
                        .replace("{{BLOG_FRONT}}", blog.front_html())
                        .replace("{{BLOG_RAIL}}", blog.rail_html())
                        .replace("{{BLOG_COUNT}}", str(blog.count()))
@@ -2275,7 +2322,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     parts.append("</main>")
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
-        if slug in ("captures", "leadership", "the-cirs-experience") or page.get("notfound"):
+        if slug in ("captures", "leadership", "the-cirs-experience", "our-laurels") or page.get("notfound"):
             # Captures already ends with its own full-width photograph, and
             # Leadership with its staff photograph and a compact pair of
             # links: a second full-screen scene would compete with both.
@@ -2326,8 +2373,11 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "news":
         parts.append(f'<script src="assets/js/news-journal.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":
+        # The archive, the divisions and the stage's lettering. It imports
+        # the optional sculpture (math-sculpture.js) itself, so a failed
+        # graphics load cannot take the filters or the links with it.
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
-    if slug == "creative-writing":
+    if page.get("cw"):
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
     if slug == "houses":
         parts.append(f'<script src="assets/js/houses-journey.js?{CACHE_BUST}-houses-3" defer></script>')
@@ -2343,6 +2393,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-1" defer></script>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
+    if slug == "our-laurels":
+        parts.append(f'<script src="assets/js/laurels.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
@@ -2407,6 +2459,12 @@ for _post in blogposts.POSTS:
         "litehead": True,
         "post": _post,
     }
+
+
+# Creative Writing's two collection views and one page per edition, all
+# written from tools/creative-writing-content.json. Not in MENU: the
+# Creative Writing page is how a reader reaches them.
+PAGES.update(creativewriting.page_entries())
 
 
 if __name__ == "__main__":

@@ -1,1047 +1,342 @@
-/**
- * The CIRS Math Challenge — Interactive Arena
- * Includes:
- * 1. Hero Geometric Canvas: "The moment a pattern appears"
- * 2. Heron's Shortest Path Demonstration Puzzle
- * 3. Challenge Zones selection & archive anchor linking
- * 4. "How a Mind Solves" 5-stage interactive proof of invariants
- * 5. Complete verified monthly archive filtering and search
- */
+/* ============================================================
+   Math Challenge — page controller
+   1. The results archive: month search, division filter, count,
+      empty state and Reset. The records are in the HTML; this only
+      hides and shows them.
+   2. The four divisions: each row is a real link to #archive; on the
+      way it selects that division in the filter and says so.
+   3. The stage: one progress value for the scrolled installation,
+      the lettering it moves, and the optional sculpture it loads
+      (math-sculpture.js). A failed sculpture leaves the plain
+      opening; nothing else here depends on it.
+   The shared Lenis instance in cirs.js is the only scroll engine;
+   this file only reads the scroll and asks cirs.js to move it.
+   ============================================================ */
 (function () {
   "use strict";
 
-  // Check reduced motion preference
-  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var doc = document, root = doc.documentElement;
+  var $ = function (s, c) { return (c || doc).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
+  var reducedQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var thisScript = doc.currentScript;
 
-  /* ==========================================================================
-     1. HERO CANVAS: "The moment a pattern appears"
-     ========================================================================== */
-  (function initHeroCanvas() {
-    var canvas = document.getElementById("heroCanvas");
-    if (!canvas) return;
+  window.__mcBooted = true;
 
-    var ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function range(p, a, b) { return clamp((p - a) / (b - a)); }
+  function smooth(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
 
-    var width = 0, height = 0, dpr = 1;
-    var pointer = { x: 0, y: 0, px: 0, py: 0, active: false, movedDistance: 0 };
-    var discoveryProgress = prefersReducedMotion ? 100 : 0;
-    var discoveryStatus = document.getElementById("heroDiscoveryStatus");
-    var discoveryText = document.getElementById("heroDiscoveryText");
-    var skipBtn = document.getElementById("heroSkipBtn");
+  /* ==========================================================
+     1. The archive
+     ========================================================== */
+  function initArchive() {
+    var list = $("#mcMonths");
+    if (!list) return null;
+    var months = $$(".mc-month", list);
+    var buttons = $$(".mc-filter");
+    var search = $("#mcSearch");
+    var count = $("#mcCount");
+    var reset = $("#mcReset");
+    var none = $("#mcNone");
+    var noneText = $("#mcNoneText");
+    var totals = months.map(function (m) { return $$(".mc-doc", m).length; });
+    var state = { grade: "all", term: "" };
+    var announceTimer = 0;
 
-    var trails = [];
-    var maxTrails = 120;
-    var animFrameId = null;
-
-    function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = canvas.parentElement.offsetWidth || window.innerWidth;
-      height = canvas.parentElement.offsetHeight || window.innerHeight;
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-
-      if (!pointer.active) {
-        pointer.x = width / 2;
-        pointer.y = height / 2;
-        pointer.px = pointer.x;
-        pointer.py = pointer.y;
-      }
+    function gradeName(key) {
+      var b = buttons.filter(function (x) { return x.dataset.grade === key; })[0];
+      return b ? b.textContent.trim() : "";
     }
-    window.addEventListener("resize", resize);
-    resize();
-
-    // Mouse & Touch Tracking
-    function onPointerMove(e) {
-      var rect = canvas.getBoundingClientRect();
-      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      var clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      var newX = clientX - rect.left;
-      var newY = clientY - rect.top;
-
-      var dx = newX - pointer.x;
-      var dy = newY - pointer.y;
-      var dist = Math.sqrt(dx * dx + dy * dy);
-
-      pointer.px = pointer.x;
-      pointer.py = pointer.y;
-      pointer.x = newX;
-      pointer.y = newY;
-      pointer.active = true;
-      pointer.movedDistance += dist;
-
-      if (discoveryProgress < 100) {
-        discoveryProgress = Math.min(100, discoveryProgress + dist * 0.08);
-        updateDiscoveryUI();
-      }
-
-      // Add harmonic trail points
-      trails.push({
-        x: pointer.x,
-        y: pointer.y,
-        vx: dx,
-        vy: dy,
-        age: 0,
-        maxAge: 70 + Math.random() * 40,
-        color: Math.random() > 0.4 ? "#C9A961" : "#38BDF8"
-      });
-      if (trails.length > maxTrails) trails.shift();
+    function norm(text) {
+      return String(text || "").toLowerCase().replace(/[–—]/g, "-").replace(/\s+/g, " ").trim();
     }
-
-    function updateDiscoveryUI() {
-      if (!discoveryText) return;
-      if (discoveryProgress < 30) {
-        discoveryText.textContent = "Tracing harmonic tangents (" + Math.round(discoveryProgress) + "%)";
-      } else if (discoveryProgress < 70) {
-        discoveryText.textContent = "Constructing geometric envelope (" + Math.round(discoveryProgress) + "%)";
-      } else if (discoveryProgress < 100) {
-        discoveryText.textContent = "Resolving symmetry axis (" + Math.round(discoveryProgress) + "%)";
-      } else {
-        discoveryText.textContent = "Geometric relationship resolved: Harmonic Envelope";
-        if (discoveryStatus) discoveryStatus.classList.add("is-complete");
-      }
-    }
-
-    if (skipBtn) {
-      skipBtn.addEventListener("click", function () {
-        discoveryProgress = 100;
-        updateDiscoveryUI();
-      });
-    }
-
-    window.addEventListener("mousemove", onPointerMove, { passive: true });
-    window.addEventListener("touchmove", onPointerMove, { passive: true });
-
-    // Drawing the background grid & geometric construction
-    function drawGrid(cx, cy, offsetX, offsetY) {
-      var gridSize = 45;
-      var subGrid = 15;
-
-      ctx.save();
-      // Millimeter sub-grid
-      ctx.strokeStyle = "rgba(201, 169, 97, 0.035)";
-      ctx.lineWidth = 0.5;
-      ctx.beginPath();
-      for (var x = (offsetX % subGrid); x < width; x += subGrid) {
-        ctx.moveTo(x, 0); ctx.lineTo(x, height);
-      }
-      for (var y = (offsetY % subGrid); y < height; y += subGrid) {
-        ctx.moveTo(0, y); ctx.lineTo(width, y);
-      }
-      ctx.stroke();
-
-      // Major coordinate grid
-      ctx.strokeStyle = "rgba(56, 189, 248, 0.07)";
-      ctx.lineWidth = 0.8;
-      ctx.beginPath();
-      for (var mx = (offsetX % gridSize); mx < width; mx += gridSize) {
-        ctx.moveTo(mx, 0); ctx.lineTo(mx, height);
-      }
-      for (var my = (offsetY % gridSize); my < height; my += gridSize) {
-        ctx.moveTo(0, my); ctx.lineTo(width, my);
-      }
-      ctx.stroke();
-
-      // Coordinate axes
-      ctx.strokeStyle = "rgba(201, 169, 97, 0.18)";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(cx, 0); ctx.lineTo(cx, height);
-      ctx.moveTo(0, cy); ctx.lineTo(width, cy);
-      ctx.stroke();
-
-      // Ticks along axes
-      ctx.strokeStyle = "rgba(201, 169, 97, 0.3)";
-      ctx.beginPath();
-      for (var tx = cx % gridSize; tx < width; tx += gridSize) {
-        ctx.moveTo(tx, cy - 3); ctx.lineTo(tx, cy + 3);
-      }
-      for (var ty = cy % gridSize; ty < height; ty += gridSize) {
-        ctx.moveTo(cx - 3, ty); ctx.lineTo(cx + 3, ty);
-      }
-      ctx.stroke();
-      ctx.restore();
-    }
-
-    var time = 0;
-    function render() {
-      time += 0.015;
-      ctx.clearRect(0, 0, width, height);
-
-      var cx = width / 2;
-      var cy = height / 2;
-      var parallaxX = (pointer.x - cx) * 0.05;
-      var parallaxY = (pointer.y - cy) * 0.05;
-
-      drawGrid(cx + parallaxX, cy + parallaxY, parallaxX, parallaxY);
-
-      var progressRatio = discoveryProgress / 100;
-
-      // Draw mathematical harmonic curves
-      ctx.save();
-      ctx.translate(cx + parallaxX, cy + parallaxY);
-
-      // Rotating epicycloid / cardioid envelope
-      var numPoints = prefersReducedMotion ? 64 : Math.floor(16 + progressRatio * 48);
-      var radius = Math.min(width, height) * (0.22 + progressRatio * 0.08);
-
-      ctx.lineWidth = 0.9;
-      for (var i = 0; i < numPoints; i++) {
-        var theta1 = (i / numPoints) * Math.PI * 2 + (prefersReducedMotion ? 0 : time * 0.2);
-        var mult = 2 + progressRatio;
-        var theta2 = theta1 * mult;
-
-        var x1 = Math.cos(theta1) * radius;
-        var y1 = Math.sin(theta1) * radius;
-        var x2 = Math.cos(theta2) * radius;
-        var y2 = Math.sin(theta2) * radius;
-
-        ctx.strokeStyle = (i % 2 === 0)
-          ? "rgba(201, 169, 97, " + (0.06 + progressRatio * 0.16) + ")"
-          : "rgba(56, 189, 248, " + (0.05 + progressRatio * 0.14) + ")";
-
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-      }
-
-      // Golden ratio spiral arcs
-      if (progressRatio > 0.25 || prefersReducedMotion) {
-        ctx.beginPath();
-        ctx.strokeStyle = "rgba(201, 169, 97, " + (0.1 + progressRatio * 0.25) + ")";
-        ctx.lineWidth = 1.2;
-        var spiralTurns = 3.5;
-        var a = 3;
-        var b = 0.2;
-        for (var t = 0; t < spiralTurns * Math.PI * 2; t += 0.05) {
-          var r = a * Math.exp(b * t);
-          var sx = r * Math.cos(t + (prefersReducedMotion ? 0 : time * 0.1));
-          var sy = r * Math.sin(t + (prefersReducedMotion ? 0 : time * 0.1));
-          if (t === 0) ctx.moveTo(sx, sy);
-          else ctx.lineTo(sx, sy);
-        }
-        ctx.stroke();
-      }
-      ctx.restore();
-
-      // Render interactive user trails
-      if (!prefersReducedMotion && trails.length > 1) {
-        for (var j = 0; j < trails.length; j++) {
-          var tr = trails[j];
-          tr.age++;
-          var life = 1 - tr.age / tr.maxAge;
-          if (life <= 0) continue;
-
-          ctx.save();
-          ctx.strokeStyle = tr.color;
-          ctx.globalAlpha = life * 0.55;
-          ctx.lineWidth = life * 2;
-          ctx.beginPath();
-          ctx.arc(tr.x, tr.y, (1 - life) * 12 + 1, 0, Math.PI * 2);
-          ctx.stroke();
-          ctx.restore();
-        }
-        trails = trails.filter(function (t) { return t.age < t.maxAge; });
-      }
-
-      // The Seed / Cursor Point
-      var px = pointer.x;
-      var py = pointer.y;
-
-      var pulse = 1 + 0.15 * Math.sin(time * 3);
-      var grad = ctx.createRadialGradient(px, py, 2, px, py, 24 * pulse);
-      grad.addColorStop(0, "rgba(56, 189, 248, 0.9)");
-      grad.addColorStop(0.3, "rgba(201, 169, 97, 0.45)");
-      grad.addColorStop(1, "rgba(201, 169, 97, 0)");
-
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(px, py, 24 * pulse, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = "#FFFFFF";
-      ctx.beginPath();
-      ctx.arc(px, py, 3, 0, Math.PI * 2);
-      ctx.fill();
-
-      if (!prefersReducedMotion) {
-        animFrameId = requestAnimationFrame(render);
-      }
-    }
-
-    if (prefersReducedMotion) {
-      render();
-    } else {
-      render();
-    }
-  })();
-
-  /* ==========================================================================
-     2. EDITORIAL DEMONSTRATION PUZZLE: Heron's Shortest Path
-     ========================================================================== */
-  (function initPuzzle() {
-    var canvas = document.getElementById("puzzleCanvas");
-    if (!canvas) return;
-
-    var ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    var slider = document.getElementById("puzzleSlider");
-    var nudgeLeft = document.getElementById("puzzleNudgeLeft");
-    var nudgeRight = document.getElementById("puzzleNudgeRight");
-    var posPercent = document.getElementById("puzzlePosPercent");
-    var checkBtn = document.getElementById("puzzleCheckBtn");
-    var hintBtn = document.getElementById("puzzleHintBtn");
-    var hintBox = document.getElementById("puzzleHintBox");
-    var proofBtn = document.getElementById("puzzleProofBtn");
-    var revealBox = document.getElementById("puzzleRevealBox");
-    var resetBtn = document.getElementById("puzzleResetBtn");
-    var srStatus = document.getElementById("puzzleSrStatus");
-
-    var readoutAP = document.getElementById("readoutAP");
-    var readoutPB = document.getElementById("readoutPB");
-    var readoutTotal = document.getElementById("readoutTotal");
-    var readoutAlpha = document.getElementById("readoutAlpha");
-    var readoutBeta = document.getElementById("readoutBeta");
-
-    // Coordinates setup on a 800 x 420 virtual space
-    var V_WIDTH = 800;
-    var V_HEIGHT = 420;
-    var BASELINE_Y = 270;
-    var LINE_X_MIN = 80;
-    var LINE_X_MAX = 720;
-
-    var ptA = { x: 170, y: 80, label: "A" };
-    var ptB = { x: 640, y: 135, label: "B" };
-    var ptB_reflected = { x: ptB.x, y: BASELINE_Y + (BASELINE_Y - ptB.y), label: "B'" };
-
-    // Exact mathematical minimum:
-    // Slope of line connecting A and B' is m = (B'_y - A_y) / (B'_x - A_x)
-    // x_optimal satisfies: (BASELINE_Y - A_y) / (x_optimal - A_x) = m
-    var slopeABprime = (ptB_reflected.y - ptA.y) / (ptB_reflected.x - ptA.x);
-    var optimalX = ptA.x + (BASELINE_Y - ptA.y) / slopeABprime;
-    var optimalPercent = ((optimalX - LINE_X_MIN) / (LINE_X_MAX - LINE_X_MIN)) * 100;
-
-    var currentPercent = 25.0; // initial slider position
-    var isDragging = false;
-    var showProof = false;
-    var isSolved = false;
-
-    function getPointP() {
-      var x = LINE_X_MIN + (currentPercent / 100) * (LINE_X_MAX - LINE_X_MIN);
-      return { x: x, y: BASELINE_Y };
-    }
-
-    function calculateMetrics() {
-      var p = getPointP();
-      var dxA = ptA.x - p.x;
-      var dyA = ptA.y - p.y;
-      var lenAP = Math.sqrt(dxA * dxA + dyA * dyA);
-
-      var dxB = ptB.x - p.x;
-      var dyB = ptB.y - p.y;
-      var lenPB = Math.sqrt(dxB * dxB + dyB * dyB);
-
-      var total = lenAP + lenPB;
-
-      // Scale to human-friendly units (e.g. 1 unit = 20px)
-      var scale = 20;
-      var uAP = (lenAP / scale).toFixed(2);
-      var uPB = (lenPB / scale).toFixed(2);
-      var uTotal = (total / scale).toFixed(2);
-
-      // Incident angle alpha: angle with normal at P
-      // normal is vertical up: (0, -1)
-      var alpha = (Math.atan2(Math.abs(p.x - ptA.x), Math.abs(BASELINE_Y - ptA.y)) * (180 / Math.PI)).toFixed(1);
-      var beta = (Math.atan2(Math.abs(ptB.x - p.x), Math.abs(BASELINE_Y - ptB.y)) * (180 / Math.PI)).toFixed(1);
-
-      return {
-        ap: uAP,
-        pb: uPB,
-        total: uTotal,
-        alpha: alpha,
-        beta: beta,
-        diff: Math.abs(parseFloat(alpha) - parseFloat(beta)),
-        isOptimal: Math.abs(currentPercent - optimalPercent) < 1.4
-      };
-    }
-
-    function updateUI() {
-      var m = calculateMetrics();
-      if (readoutAP) readoutAP.textContent = m.ap;
-      if (readoutPB) readoutPB.textContent = m.pb;
-      if (readoutTotal) readoutTotal.textContent = m.total;
-      if (readoutAlpha) readoutAlpha.textContent = m.alpha + "°";
-      if (readoutBeta) readoutBeta.textContent = m.beta + "°";
-      if (posPercent) posPercent.textContent = Math.round(currentPercent) + "%";
-      if (slider) slider.value = currentPercent;
-
-      if (m.isOptimal) {
-        isSolved = true;
-        if (checkBtn) {
-          checkBtn.textContent = "Solution Verified!";
-          checkBtn.classList.add("is-solved");
-        }
-      } else {
-        isSolved = false;
-        if (checkBtn) {
-          checkBtn.textContent = "Check Solution";
-          checkBtn.classList.remove("is-solved");
-        }
-      }
-
-      draw();
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, V_WIDTH, V_HEIGHT);
-      var p = getPointP();
-      var m = calculateMetrics();
-
-      // 1. Grid background inside canvas
-      ctx.strokeStyle = "rgba(250, 249, 243, 0.04)";
-      ctx.lineWidth = 1;
-      for (var x = 0; x < V_WIDTH; x += 40) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, V_HEIGHT); ctx.stroke();
-      }
-      for (var y = 0; y < V_HEIGHT; y += 40) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(V_WIDTH, y); ctx.stroke();
-      }
-
-      // 2. Baseline L (Reflective riverbank)
-      ctx.strokeStyle = "rgba(201, 169, 97, 0.4)";
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      ctx.moveTo(LINE_X_MIN - 30, BASELINE_Y);
-      ctx.lineTo(LINE_X_MAX + 30, BASELINE_Y);
-      ctx.stroke();
-
-      // Baseline hatch marks below line
-      ctx.strokeStyle = "rgba(201, 169, 97, 0.18)";
-      ctx.lineWidth = 1;
-      for (var hx = LINE_X_MIN - 20; hx <= LINE_X_MAX + 20; hx += 16) {
-        ctx.beginPath();
-        ctx.moveTo(hx, BASELINE_Y);
-        ctx.lineTo(hx - 8, BASELINE_Y + 12);
-        ctx.stroke();
-      }
-
-      // Line L label
-      ctx.font = "bold 13px 'Mona Sans', Arial, sans-serif";
-      ctx.fillStyle = "rgba(201, 169, 97, 0.8)";
-      ctx.fillText("Line L (Reflective Axis)", LINE_X_MIN - 20, BASELINE_Y - 10);
-
-      // 3. Normal at P (perpendicular dashed line)
-      ctx.save();
-      ctx.setLineDash([4, 4]);
-      ctx.strokeStyle = "rgba(148, 163, 184, 0.4)";
-      ctx.lineWidth = 1.2;
-      ctx.beginPath();
-      ctx.moveTo(p.x, BASELINE_Y - 90);
-      ctx.lineTo(p.x, BASELINE_Y);
-      ctx.stroke();
-      ctx.restore();
-
-      // Normal label
-      ctx.font = "11px 'Mona Sans', Arial, sans-serif";
-      ctx.fillStyle = "rgba(148, 163, 184, 0.6)";
-      ctx.fillText("Normal", p.x + 5, BASELINE_Y - 75);
-
-      // 4. Angle arcs at P
-      ctx.strokeStyle = m.isOptimal ? "rgba(201, 169, 97, 0.9)" : "rgba(56, 189, 248, 0.7)";
-      ctx.lineWidth = 1.5;
-
-      // Arc for alpha (left)
-      var angA = Math.atan2(ptA.y - p.y, ptA.x - p.x);
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 34, -Math.PI / 2, angA, true);
-      ctx.stroke();
-
-      // Arc for beta (right)
-      var angB = Math.atan2(ptB.y - p.y, ptB.x - p.x);
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 34, -Math.PI / 2, angB, false);
-      ctx.stroke();
-
-      ctx.font = "12px 'Mona Sans', Arial, sans-serif";
-      ctx.fillStyle = m.isOptimal ? "#E8D9B5" : "#7DD3FC";
-      ctx.fillText("α=" + m.alpha + "°", p.x - 55, BASELINE_Y - 38);
-      ctx.fillText("β=" + m.beta + "°", p.x + 18, BASELINE_Y - 38);
-
-      // 5. If Proof is active, draw reflected point B' and straight line A -> B'
-      if (showProof) {
-        ctx.save();
-        // Virtual line from B to B'
-        ctx.setLineDash([3, 5]);
-        ctx.strokeStyle = "rgba(56, 189, 248, 0.35)";
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.moveTo(ptB.x, ptB.y);
-        ctx.lineTo(ptB_reflected.x, ptB_reflected.y);
-        ctx.stroke();
-
-        // Line from P to B'
-        ctx.strokeStyle = "rgba(201, 169, 97, 0.4)";
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(ptB_reflected.x, ptB_reflected.y);
-        ctx.stroke();
-
-        // Collinear straight line A -> B'
-        ctx.setLineDash([6, 4]);
-        ctx.strokeStyle = "rgba(232, 217, 181, 0.85)";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(ptA.x, ptA.y);
-        ctx.lineTo(ptB_reflected.x, ptB_reflected.y);
-        ctx.stroke();
-        ctx.restore();
-
-        // Reflected Point B'
-        ctx.fillStyle = "rgba(56, 189, 248, 0.2)";
-        ctx.beginPath();
-        ctx.arc(ptB_reflected.x, ptB_reflected.y, 14, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = "#38BDF8";
-        ctx.beginPath();
-        ctx.arc(ptB_reflected.x, ptB_reflected.y, 6, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.font = "bold 14px 'Mona Sans', Arial, sans-serif";
-        ctx.fillStyle = "#7DD3FC";
-        ctx.fillText("B' (Mirror of B)", ptB_reflected.x + 12, ptB_reflected.y + 5);
-      }
-
-      // 6. Draw Path Segments AP and PB
-      ctx.lineWidth = m.isOptimal ? 3 : 2;
-      ctx.strokeStyle = m.isOptimal ? "#E8D9B5" : "#38BDF8";
-      ctx.beginPath();
-      ctx.moveTo(ptA.x, ptA.y);
-      ctx.lineTo(p.x, p.y);
-      ctx.stroke();
-
-      ctx.strokeStyle = m.isOptimal ? "#E8D9B5" : "#C9A961";
-      ctx.beginPath();
-      ctx.moveTo(p.x, p.y);
-      ctx.lineTo(ptB.x, ptB.y);
-      ctx.stroke();
-
-      // 7. Draw Point A
-      drawAnchorPoint(ptA.x, ptA.y, "A (Start)", "#38BDF8");
-
-      // 8. Draw Point B
-      drawAnchorPoint(ptB.x, ptB.y, "B (Destination)", "#C9A961");
-
-      // 9. Draw Point P (Movable handle)
-      drawPointP(p.x, p.y, m.isOptimal);
-    }
-
-    function drawAnchorPoint(x, y, label, color) {
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.arc(x, y, 7, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.strokeStyle = "#FFFFFF";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(x, y, 7, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.font = "bold 14px 'Mona Sans', Arial, sans-serif";
-      ctx.fillStyle = "#FFFFFF";
-      ctx.fillText(label, x - 20, y - 14);
-    }
-
-    function drawPointP(x, y, optimal) {
-      var pulse = optimal ? 1.25 : 1;
-      var auraColor = optimal ? "rgba(201, 169, 97, 0.4)" : "rgba(56, 189, 248, 0.3)";
-
-      ctx.fillStyle = auraColor;
-      ctx.beginPath();
-      ctx.arc(x, y, 18 * pulse, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = optimal ? "#E8D9B5" : "#FFFFFF";
-      ctx.beginPath();
-      ctx.arc(x, y, 8, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.strokeStyle = optimal ? "#C9A961" : "#060605";
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      ctx.arc(x, y, 8, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.font = "bold 14px 'Mona Sans', Arial, sans-serif";
-      ctx.fillStyle = optimal ? "#E8D9B5" : "#FFFFFF";
-      ctx.fillText("Point P", x - 22, y + 26);
-    }
-
-    // Canvas coordinate conversion helper
-    function getCanvasCoordinates(e) {
-      var rect = canvas.getBoundingClientRect();
-      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      var clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      var scaleX = V_WIDTH / rect.width;
-      var scaleY = V_HEIGHT / rect.height;
-      return {
-        x: (clientX - rect.left) * scaleX,
-        y: (clientY - rect.top) * scaleY
-      };
-    }
-
-    function updateFromCanvasX(canvasX) {
-      var clamped = Math.max(LINE_X_MIN, Math.min(LINE_X_MAX, canvasX));
-      currentPercent = ((clamped - LINE_X_MIN) / (LINE_X_MAX - LINE_X_MIN)) * 100;
-      updateUI();
-    }
-
-    canvas.addEventListener("mousedown", function (e) {
-      var pos = getCanvasCoordinates(e);
-      var p = getPointP();
-      var dist = Math.hypot(pos.x - p.x, pos.y - p.y);
-      if (dist < 40 || Math.abs(pos.y - BASELINE_Y) < 35) {
-        isDragging = true;
-        updateFromCanvasX(pos.x);
-      }
-    });
-
-    window.addEventListener("mousemove", function (e) {
-      if (!isDragging) return;
-      var pos = getCanvasCoordinates(e);
-      updateFromCanvasX(pos.x);
-    });
-
-    window.addEventListener("mouseup", function () {
-      isDragging = false;
-    });
-
-    canvas.addEventListener("touchstart", function (e) {
-      var pos = getCanvasCoordinates(e);
-      var p = getPointP();
-      var dist = Math.hypot(pos.x - p.x, pos.y - p.y);
-      if (dist < 45 || Math.abs(pos.y - BASELINE_Y) < 40) {
-        isDragging = true;
-        updateFromCanvasX(pos.x);
-        e.preventDefault();
-      }
-    }, { passive: false });
-
-    window.addEventListener("touchmove", function (e) {
-      if (!isDragging) return;
-      var pos = getCanvasCoordinates(e);
-      updateFromCanvasX(pos.x);
-      e.preventDefault();
-    }, { passive: false });
-
-    window.addEventListener("touchend", function () {
-      isDragging = false;
-    });
-
-    // Slider input
-    if (slider) {
-      slider.addEventListener("input", function () {
-        currentPercent = parseFloat(slider.value);
-        updateUI();
-      });
-    }
-
-    // Keyboard & Nudge Controls
-    if (nudgeLeft) {
-      nudgeLeft.addEventListener("click", function () {
-        currentPercent = Math.max(0, currentPercent - 1.5);
-        updateUI();
-      });
-    }
-    if (nudgeRight) {
-      nudgeRight.addEventListener("click", function () {
-        currentPercent = Math.min(100, currentPercent + 1.5);
-        updateUI();
-      });
-    }
-
-    window.addEventListener("keydown", function (e) {
-      if (document.activeElement === slider || document.activeElement === canvas) {
-        if (e.key === "ArrowLeft") {
-          currentPercent = Math.max(0, currentPercent - 1);
-          updateUI();
-          e.preventDefault();
-        } else if (e.key === "ArrowRight") {
-          currentPercent = Math.min(100, currentPercent + 1);
-          updateUI();
-          e.preventDefault();
-        }
-      }
-    });
-
-    // Action Buttons
-    if (checkBtn) {
-      checkBtn.addEventListener("click", function () {
-        var m = calculateMetrics();
-        if (m.isOptimal) {
-          if (revealBox) revealBox.hidden = false;
-          if (srStatus) srStatus.textContent = "Correct! Point P is at the geometric minimum path length.";
-          showProof = true;
-          draw();
-        } else {
-          var advice = (currentPercent < optimalPercent) ? "Try moving Point P further right." : "Try moving Point P further left.";
-          if (srStatus) srStatus.textContent = "Not quite at minimum. " + advice + " Total length is " + m.total + ".";
-          alert("Total length is currently " + m.total + " units.\n" + advice + "\nNotice that angle α (" + m.alpha + "°) does not yet equal angle β (" + m.beta + "°).");
-        }
-      });
-    }
-
-    if (hintBtn) {
-      hintBtn.addEventListener("click", function () {
-        var isHidden = hintBox.hidden;
-        hintBox.hidden = !isHidden;
-        hintBtn.setAttribute("aria-expanded", isHidden ? "true" : "false");
-        hintBtn.textContent = isHidden ? "Hide Hint" : "Hint";
-      });
-    }
-
-    if (proofBtn) {
-      proofBtn.addEventListener("click", function () {
-        showProof = !showProof;
-        proofBtn.textContent = showProof ? "Hide Proof" : "Show Proof";
-        if (revealBox) revealBox.hidden = !showProof;
-        draw();
-      });
-    }
-
-    if (resetBtn) {
-      resetBtn.addEventListener("click", function () {
-        currentPercent = 25.0;
-        showProof = false;
-        if (proofBtn) proofBtn.textContent = "Show Proof";
-        if (hintBox) hintBox.hidden = true;
-        if (hintBtn) {
-          hintBtn.setAttribute("aria-expanded", "false");
-          hintBtn.textContent = "Hint";
-        }
-        if (revealBox) revealBox.hidden = true;
-        updateUI();
-      });
-    }
-
-    updateUI();
-  })();
-
-  /* ==========================================================================
-     3. FOUR CHALLENGE ZONES: Direct Filtering & Navigation
-     ========================================================================== */
-  (function initZones() {
-    var zoneCards = document.querySelectorAll(".ma-zone");
-    var archiveSection = document.getElementById("archive");
-
-    zoneCards.forEach(function (card) {
-      var grade = card.dataset.grade;
-      var btn = card.querySelector(".ma-zone__btn");
-
-      function activateZone() {
-        var targetFilter = document.querySelector('.ma-filter[data-grade="' + grade + '"]');
-        if (targetFilter) {
-          targetFilter.click();
-        }
-        if (archiveSection) {
-          archiveSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-
-      if (btn) {
-        btn.addEventListener("click", function (e) {
-          e.stopPropagation();
-          activateZone();
+    function plural(n, one, many) { return n + " " + (n === 1 ? one : many); }
+
+    function apply(opts) {
+      opts = opts || {};
+      var terms = state.term ? state.term.split(" ") : [];
+      var shown = 0, monthsShown = 0;
+      months.forEach(function (m, i) {
+        var find = m.dataset.find || "";
+        var termOk = terms.every(function (t) { return find.indexOf(t) !== -1; });
+        var n = 0;
+        $$(".mc-doc", m).forEach(function (d) {
+          var ok = termOk && (state.grade === "all" || d.dataset.grade === state.grade);
+          d.hidden = !ok;
+          if (ok) n++;
         });
-      }
+        m.hidden = n === 0;
+        var meta = $(".mc-month__meta", m);
+        if (meta) {
+          meta.innerHTML = '<span class="mc-month__n">' + n + "</span> " +
+            (n === totals[i] ? (n === 1 ? "bulletin" : "bulletins") : "of " + totals[i] + " bulletins");
+        }
+        if (n) { shown += n; monthsShown++; }
+      });
 
-      card.addEventListener("click", activateZone);
-      card.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          activateZone();
+      var filtered = state.grade !== "all" || !!state.term;
+      var text;
+      if (shown) {
+        text = plural(shown, "bulletin", "bulletins") + " " +
+          (monthsShown === 1 ? "in 1 month" : "across " + monthsShown + " months");
+        if (state.grade !== "all") text += " · " + gradeName(state.grade);
+        if (state.term) text += " · “" + search.value.trim() + "”";
+      } else {
+        text = "No published bulletins match";
+      }
+      none.hidden = shown !== 0;
+      if (!shown && noneText) {
+        var what = [];
+        if (state.term) what.push("“" + search.value.trim() + "”");
+        if (state.grade !== "all") what.push(gradeName(state.grade));
+        noneText.textContent = "Nothing in the archive matches " + what.join(" in ") +
+          ". Months and divisions appear here only when a bulletin was published.";
+      }
+      reset.hidden = !filtered;
+
+      // The count is the live region. Typing would announce every
+      // keystroke, so a search waits until the reader pauses.
+      window.clearTimeout(announceTimer);
+      if (opts.quiet) announceTimer = window.setTimeout(function () { count.textContent = text; }, 450);
+      else count.textContent = text;
+    }
+
+    function setGrade(key, opts) {
+      if (!buttons.some(function (b) { return b.dataset.grade === key; })) key = "all";
+      state.grade = key;
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.grade === key)); });
+      apply(opts);
+    }
+    function clear(focusTarget) {
+      state.term = "";
+      search.value = "";
+      setGrade("all");
+      if (focusTarget) focusTarget.focus();
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () { setGrade(b.dataset.grade); });
+    });
+    search.addEventListener("input", function () {
+      state.term = norm(search.value);
+      apply({ quiet: true });
+    });
+    search.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && search.value) { e.preventDefault(); clear(); search.focus(); }
+    });
+    // Reset from the tally hides itself; the reader lands on "All divisions".
+    reset.addEventListener("click", function () { clear(buttons[0]); });
+    $$("[data-reset]").forEach(function (b) {
+      b.addEventListener("click", function () { clear(search); });
+    });
+
+    // ?grade=9-10 opens the archive on a division; the browser may also
+    // have restored a search from history.
+    var params = new URLSearchParams(window.location.search);
+    var asked = params.get("grade");
+    if (search.value) state.term = norm(search.value);
+    if (asked || state.term) setGrade(asked || "all", { quiet: true });
+
+    return { setGrade: setGrade, buttons: buttons };
+  }
+
+  /* ==========================================================
+     2. The divisions
+     ========================================================== */
+  function initZones(archive) {
+    if (!archive) return;
+    $$(".mc-zone__link").forEach(function (link) {
+      // cirs.js already takes every #hash link to its section through the
+      // shared scroll. This only selects the division on the way and puts
+      // the keyboard on the filter it chose, without moving the page itself.
+      link.addEventListener("click", function () {
+        var key = link.dataset.grade;
+        archive.setGrade(key);
+        var pressed = archive.buttons.filter(function (b) { return b.dataset.grade === key; })[0];
+        if (pressed) {
+          try { pressed.focus({ preventScroll: true }); } catch (err) { pressed.focus(); }
         }
       });
     });
-  })();
+  }
 
-  /* ==========================================================================
-     4. HOW A MIND SOLVES: Five Stages, One Problem (The Mutilated Chessboard)
-     ========================================================================== */
-  (function initJourney() {
-    var canvas = document.getElementById("journeyCanvas");
-    if (!canvas) return;
+  /* ==========================================================
+     3. Headings that ride out of their masks, once
+     ========================================================== */
+  function initReveals() {
+    var heads = $$(".mc-h2");
+    if (!root.classList.contains("mc-motion") || !heads.length) return;
+    if (!("IntersectionObserver" in window)) {
+      heads.forEach(function (h) { h.classList.add("is-in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("is-in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    heads.forEach(function (h) { io.observe(h); });
+  }
 
-    var ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  /* ==========================================================
+     4. The stage
+     ========================================================== */
+  function initStage() {
+    var stage = $(".mc-stage");
+    if (!stage) return;
+    var view = $(".mc-stage__view", stage);
+    var art = $("#mcArt");
+    var canvas = $(".mc-art__canvas", art);
+    var fallback = $(".mc-art__fallback", art);
+    var pulse = $("#mcPulse");
+    var open = $(".mc-open", stage);
+    var progress = 0, queued = false, failed = false, sculpture = null;
+    var listeners = [];
+    var lastState = -1, lastDark = null, lastPast = null;
 
-    var tabs = Array.prototype.slice.call(document.querySelectorAll(".ma-journey-tab"));
-    var steps = Array.prototype.slice.call(document.querySelectorAll(".ma-step"));
-    var stageBadge = document.getElementById("journeyStageBadge");
-    var currentStage = "01";
+    // Kinetic only where motion is allowed, WebGL exists and the window is
+    // tall enough to compose the pinned stage in. The head script made the
+    // same decision before first paint; this keeps it as the window changes.
+    function wantKinetic() {
+      return !failed && !reducedQuery.matches && "WebGLRenderingContext" in window && window.innerHeight >= 500;
+    }
+    function kinetic() { return root.classList.contains("mc-kinetic"); }
 
-    var stageTitles = {
-      "01": "Stage 1: Question — Excising Corners",
-      "02": "Stage 2: Think — Invariant Tile Rule",
-      "03": "Stage 3: Explore — Minimal 2×2 Case",
-      "04": "Stage 4: Solve — Parity Proof (30 ≠ 32)",
-      "05": "Stage 5: Discover — The Invariant Principle"
+    function read() {
+      if (!kinetic()) return 0;
+      var r = stage.getBoundingClientRect();
+      var length = r.height - view.offsetHeight;
+      return length > 0 ? clamp(-r.top / length) : 0;
+    }
+
+    function paint() {
+      queued = false;
+      progress = read();
+      var p = progress;
+      var s = view.style;
+      if (kinetic()) {
+        // The same windows the sculpture uses (math-sculpture.js): the cube
+        // is held, opens into the field (.18-.48), curls into the torus
+        // (.48-.76) and settles. The lettering is staged around them so no
+        // line ever sits across the edge of the purple.
+        var exit = smooth(range(p, 0.15, 0.33));
+        var wipe = smooth(range(p, 0.46, 0.6));
+        var lead = smooth(range(p, 0.58, 0.66));
+        var leadOut = smooth(range(p, 0.73, 0.79));
+        var end = smooth(range(p, 0.8, 0.9));
+        s.setProperty("--exit", exit.toFixed(4));
+        s.setProperty("--wipe", wipe.toFixed(4));
+        s.setProperty("--lead", lead.toFixed(4));
+        s.setProperty("--lead-out", leadOut.toFixed(4));
+        s.setProperty("--end", end.toFixed(4));
+        var st = p < 0.33 ? 0 : p < 0.62 ? 1 : 2;
+        if (st !== lastState) { view.dataset.state = st; lastState = st; }
+        var dark = wipe > 0.5;
+        if (dark !== lastDark) { view.classList.toggle("is-dark", dark); lastDark = dark; }
+        var past = p > 0.3;
+        if (past !== lastPast) { view.classList.toggle("is-past-open", past); lastPast = past; }
+      } else if (lastState !== -1) {
+        ["--exit", "--wipe", "--lead", "--lead-out", "--end"].forEach(function (k) { s.removeProperty(k); });
+        view.classList.remove("is-dark", "is-past-open");
+        delete view.dataset.state;
+        lastState = -1; lastDark = null; lastPast = null;
+      }
+      stage.classList.toggle("is-kinetic", kinetic());
+      for (var i = 0; i < listeners.length; i++) listeners[i](p);
+    }
+    function queue() {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(paint);
+    }
+
+    // On a portrait screen the sculpture takes the space the lettering
+    // leaves between the title and the line below it, however the title
+    // wraps. Offsets, not boxes: they ignore the exit transforms.
+    var portraitQuery = window.matchMedia("(max-width: 760px), (max-aspect-ratio: 4/5)");
+    var title = $(".mc-title", stage), copy = $(".mc-open__copy", stage);
+    function fitArt() {
+      if (!kinetic() || !portraitQuery.matches) {
+        view.style.removeProperty("--art-y");
+        view.style.removeProperty("--art-size");
+        return;
+      }
+      var top = open.offsetTop + title.offsetTop + title.offsetHeight;
+      var bottom = open.offsetTop + copy.offsetTop;
+      var gap = bottom - top;
+      var size = Math.max(140, Math.min(view.offsetWidth * 0.86, gap - 12));
+      view.style.setProperty("--art-y", Math.round(top + gap / 2) + "px");
+      view.style.setProperty("--art-size", Math.round(size) + "px");
+    }
+
+    function setMode() {
+      var want = wantKinetic();
+      if (want !== kinetic()) {
+        root.classList.toggle("mc-kinetic", want);
+        if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+      }
+      fitArt();
+      queue();
+      modeListeners.forEach(function (fn) { fn(); });
+    }
+    var modeListeners = [];
+    if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(setMode);
+
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", setMode, { passive: true });
+    window.addEventListener("pageshow", setMode);
+    if (reducedQuery.addEventListener) reducedQuery.addEventListener("change", setMode);
+    setMode();
+
+    // A link in the opening, reached by Tab after the lettering has left,
+    // brings the opening back rather than focusing something unseen. The
+    // return is all but immediate: the shared scroll holds a lock while it
+    // moves, and an Enter pressed during a longer glide would be lost.
+    open.addEventListener("focusin", function () {
+      if (!kinetic() || progress < 0.08) return;
+      var top = stage.getBoundingClientRect().top + window.scrollY;
+      var handled = !window.dispatchEvent(new CustomEvent("cirs-section-scroll", {
+        cancelable: true, detail: { top: top, duration: 0.05 }
+      }));
+      if (!handled) window.scrollTo(0, top);
+    });
+
+    // The sculpture is optional. Import it only where it can be drawn.
+    function fail() {
+      failed = true;
+      art.classList.remove("is-live");
+      if (pulse) pulse.hidden = true;
+      setMode();
+    }
+    var api = {
+      stage: stage, view: view, art: art, canvas: canvas, fallback: fallback, pulse: pulse,
+      progress: function () { return progress; },
+      kinetic: kinetic,
+      reduced: function () { return reducedQuery.matches; },
+      onProgress: function (fn) { listeners.push(fn); },
+      onMode: function (fn) { modeListeners.push(fn); },
+      fail: fail
     };
-
-    function setStage(stageId) {
-      currentStage = stageId;
-
-      tabs.forEach(function (tab) {
-        var on = tab.dataset.step === stageId;
-        tab.classList.toggle("is-active", on);
-        tab.setAttribute("aria-selected", on ? "true" : "false");
-      });
-
-      steps.forEach(function (step) {
-        var on = step.dataset.step === stageId;
-        step.classList.toggle("is-active", on);
-      });
-
-      if (stageBadge && stageTitles[stageId]) {
-        stageBadge.textContent = stageTitles[stageId];
-      }
-
-      drawStage();
-    }
-
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        setStage(tab.dataset.step);
-      });
+    if (!("WebGLRenderingContext" in window) || !canvas) { fail(); return; }
+    var src = thisScript && thisScript.src ? thisScript.src : "assets/js/matharena.js";
+    var url = new URL("math-sculpture.js" + (src.indexOf("?") > -1 ? src.slice(src.indexOf("?")) : ""), src).href;
+    import(url).then(function (mod) {
+      sculpture = mod.mount(api);
+      if (!sculpture) fail();
+    }).catch(function (err) {
+      if (window.console) console.warn("Math Challenge: the sculpture could not start.", err);
+      fail();
     });
+  }
 
-    steps.forEach(function (step) {
-      step.addEventListener("click", function () {
-        setStage(step.dataset.step);
-      });
-    });
-
-    function drawStage() {
-      var w = canvas.width;
-      var h = canvas.height;
-      ctx.clearRect(0, 0, w, h);
-
-      if (currentStage === "03") {
-        drawMiniCase(w, h);
-      } else {
-        drawChessboard(w, h);
-      }
-    }
-
-    function drawChessboard(w, h) {
-      var size = 8;
-      var tileSize = 44;
-      var startX = (w - size * tileSize) / 2;
-      var startY = (h - size * tileSize) / 2;
-
-      for (var r = 0; r < size; r++) {
-        for (var c = 0; c < size; c++) {
-          var isCutCorner = (r === 0 && c === 0) || (r === 7 && c === 7);
-          var x = startX + c * tileSize;
-          var y = startY + r * tileSize;
-
-          if (isCutCorner) {
-            // Excised corner
-            ctx.fillStyle = "rgba(239, 68, 68, 0.12)";
-            ctx.fillRect(x, y, tileSize, tileSize);
-
-            ctx.strokeStyle = "rgba(239, 68, 68, 0.5)";
-            ctx.lineWidth = 1.5;
-            ctx.strokeRect(x + 2, y + 2, tileSize - 4, tileSize - 4);
-
-            // Draw red X
-            ctx.strokeStyle = "rgba(239, 68, 68, 0.8)";
-            ctx.beginPath();
-            ctx.moveTo(x + 10, y + 10); ctx.lineTo(x + tileSize - 10, y + tileSize - 10);
-            ctx.moveTo(x + tileSize - 10, y + 10); ctx.lineTo(x + 10, y + tileSize - 10);
-            ctx.stroke();
-          } else {
-            // Chessboard coloring
-            var isDark = (r + c) % 2 === 0;
-
-            if (currentStage === "04" || currentStage === "05") {
-              // Highlighting parity in Stage 4 & 5
-              ctx.fillStyle = isDark ? "#181815" : "rgba(201, 169, 97, 0.28)";
-            } else {
-              ctx.fillStyle = isDark ? "#181815" : "#2A2925";
-            }
-            ctx.fillRect(x, y, tileSize, tileSize);
-
-            ctx.strokeStyle = "rgba(250, 249, 243, 0.08)";
-            ctx.lineWidth = 1;
-            ctx.strokeRect(x, y, tileSize, tileSize);
-          }
-        }
-      }
-
-      // Draw Domino Demonstration
-      if (currentStage === "01") {
-        // Draw sample 2x1 domino beside grid
-        ctx.fillStyle = "rgba(56, 189, 248, 0.4)";
-        ctx.strokeStyle = "#38BDF8";
-        ctx.lineWidth = 2;
-        var dx = startX + 2 * tileSize;
-        var dy = startY + 3 * tileSize;
-        ctx.fillRect(dx, dy, tileSize * 2, tileSize);
-        ctx.strokeRect(dx, dy, tileSize * 2, tileSize);
-
-        ctx.font = "bold 12px 'Mona Sans', Arial, sans-serif";
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillText("2×1 Domino", dx + 8, dy + 26);
-      } else if (currentStage === "02") {
-        // Highlight edge sharing
-        ctx.strokeStyle = "#E8D9B5";
-        ctx.lineWidth = 3;
-        ctx.strokeRect(startX + 3 * tileSize, startY + 3 * tileSize, tileSize * 2, tileSize);
-
-        ctx.fillStyle = "#E8D9B5";
-        ctx.font = "12px 'Mona Sans', Arial, sans-serif";
-        ctx.fillText("Always 1 Dark + 1 Light", startX + 3 * tileSize - 10, startY + 3 * tileSize - 10);
-      } else if (currentStage === "04") {
-        // Stage 4 Solve: Tally banner
-        ctx.fillStyle = "rgba(17, 17, 15, 0.9)";
-        ctx.fillRect(20, h - 60, w - 40, 44);
-        ctx.strokeStyle = "var(--ma-gold, #C9A961)";
-        ctx.strokeRect(20, h - 60, w - 40, 44);
-
-        ctx.font = "bold 13px 'Mona Sans', Arial, sans-serif";
-        ctx.fillStyle = "#E8D9B5";
-        ctx.fillText("Board: 30 Dark + 32 Light ≠ 31 Dominoes (Impossible!)", 36, h - 33);
-      } else if (currentStage === "05") {
-        // Stage 5 Discover
-        ctx.fillStyle = "rgba(17, 17, 15, 0.92)";
-        ctx.fillRect(20, h - 60, w - 40, 44);
-        ctx.strokeStyle = "#38BDF8";
-        ctx.strokeRect(20, h - 60, w - 40, 44);
-
-        ctx.font = "bold 13px 'Mona Sans', Arial, sans-serif";
-        ctx.fillStyle = "#7DD3FC";
-        ctx.fillText("Parity Invariant eliminates 2×10¹⁵ brute-force checks.", 40, h - 33);
-      }
-    }
-
-    function drawMiniCase(w, h) {
-      // 2x2 grid with opposite corners missing
-      var tileSize = 100;
-      var startX = (w - 2 * tileSize) / 2;
-      var startY = (h - 2 * tileSize) / 2;
-
-      ctx.fillStyle = "#FAF9F3";
-      ctx.font = "bold 16px 'Mona Sans', Arial, sans-serif";
-      ctx.fillText("Minimal Case: 2×2 Board", startX + 10, startY - 24);
-
-      // (0,0) - excised
-      ctx.fillStyle = "rgba(239, 68, 68, 0.15)";
-      ctx.fillRect(startX, startY, tileSize, tileSize);
-      ctx.strokeStyle = "#EF4444";
-      ctx.strokeRect(startX, startY, tileSize, tileSize);
-      ctx.font = "14px 'Mona Sans', Arial, sans-serif";
-      ctx.fillStyle = "#EF4444";
-      ctx.fillText("Excised", startX + 25, startY + 55);
-
-      // (0,1) - remaining
-      ctx.fillStyle = "#1F1F1B";
-      ctx.fillRect(startX + tileSize, startY, tileSize, tileSize);
-      ctx.strokeStyle = "#C9A961";
-      ctx.strokeRect(startX + tileSize, startY, tileSize, tileSize);
-      ctx.fillStyle = "#E8D9B5";
-      ctx.fillText("Square A", startX + tileSize + 20, startY + 55);
-
-      // (1,0) - remaining
-      ctx.fillStyle = "#1F1F1B";
-      ctx.fillRect(startX, startY + tileSize, tileSize, tileSize);
-      ctx.strokeStyle = "#C9A961";
-      ctx.strokeRect(startX, startY + tileSize, tileSize, tileSize);
-      ctx.fillStyle = "#E8D9B5";
-      ctx.fillText("Square B", startX + 20, startY + tileSize + 55);
-
-      // (1,1) - excised
-      ctx.fillStyle = "rgba(239, 68, 68, 0.15)";
-      ctx.fillRect(startX + tileSize, startY + tileSize, tileSize, tileSize);
-      ctx.strokeStyle = "#EF4444";
-      ctx.strokeRect(startX + tileSize, startY + tileSize, tileSize, tileSize);
-      ctx.fillStyle = "#EF4444";
-      ctx.fillText("Excised", startX + tileSize + 25, startY + tileSize + 55);
-
-      // Note below
-      ctx.font = "italic 13px 'Mona Sans', Arial, sans-serif";
-      ctx.fillStyle = "#E3DCCB";
-      ctx.fillText("Squares A & B only touch at a diagonal vertex — sharing NO edge.", startX - 40, startY + 2 * tileSize + 35);
-      ctx.fillText("A single 2×1 domino CANNOT cover both!", startX + 10, startY + 2 * tileSize + 55);
-    }
-
-    setStage("01");
-  })();
-
-  /* ==========================================================================
-     5. CHALLENGE ARCHIVE: Filter and Search
-     ========================================================================== */
-  (function initArchive() {
-    var grid = document.getElementById("maGrid");
-    if (!grid) return;
-
-    var cards = Array.prototype.slice.call(grid.querySelectorAll(".ma-card"));
-    var months = Array.prototype.slice.call(grid.querySelectorAll(".ma-month"));
-    var buttons = Array.prototype.slice.call(document.querySelectorAll(".ma-filter"));
-    var search = document.getElementById("maSearch");
-    var none = document.getElementById("maNone");
-    var currentGrade = "all";
-    var currentTerm = "";
-
-    function applyFilter() {
-      var shownCount = 0;
-
-      cards.forEach(function (card) {
-        var cardGrade = card.dataset.grade;
-        var cardFind = (card.dataset.find || "").toLowerCase();
-
-        var matchesGrade = (currentGrade === "all" || cardGrade === currentGrade);
-        var matchesTerm = (!currentTerm || cardFind.indexOf(currentTerm) !== -1);
-
-        var isVisible = matchesGrade && matchesTerm;
-        card.hidden = !isVisible;
-
-        if (isVisible) shownCount++;
-      });
-
-      // Hide months that have zero visible cards
-      months.forEach(function (m) {
-        var hasVisible = !!m.querySelector(".ma-card:not([hidden])");
-        m.hidden = !hasVisible;
-      });
-
-      if (none) {
-        none.hidden = shownCount !== 0;
-      }
-    }
-
-    buttons.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        currentGrade = btn.dataset.grade;
-        buttons.forEach(function (b) {
-          var on = b === btn;
-          b.classList.toggle("is-on", on);
-          b.setAttribute("aria-pressed", on ? "true" : "false");
-        });
-        applyFilter();
-      });
-    });
-
-    if (search) {
-      search.addEventListener("input", function () {
-        currentTerm = search.value.trim().toLowerCase();
-        applyFilter();
-      });
-    }
-  })();
+  function boot() {
+    initZones(initArchive());
+    initReveals();
+    initStage();
+  }
+  if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", boot, { once: true });
+  else boot();
 })();
