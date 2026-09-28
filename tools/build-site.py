@@ -489,7 +489,7 @@ PAGES = {
         # tools/laurels.py, which names its source.
         "banner": None,
         "sheet": "laurels",
-        "cache_suffix": "-laurels-1",
+        "cache_suffix": "-laurels-2",
         "uc": False,
         "jump": False,
     },
