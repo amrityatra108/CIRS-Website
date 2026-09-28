@@ -187,5 +187,46 @@ def main():
     print(f"  {len(PHOTOS)} photographs, {total} KB")
 
 
-if __name__ == "__main__":
-    main()
+
+# Current photographic page: originals, natural colour and reproducible crops.
+EDITORIAL_PHOTOS = [
+    ('identity-vasishtha.jpg', 'houses-zip/IMG_3868.JPG', (1440,2016), (.48,.48), None),
+    ('identity-valmiki.jpg', 'houses-zip/IMG_4057.JPG', (1440,2016), (.48,.5), None),
+    ('identity-vishwamitra.jpg', 'houses-zip/IMG_3956.JPG', (1440,2016), (.52,.48), None),
+    ('identity-vyasa.jpg', 'houses-zip/IMG_2516.JPG', (1440,2016), (.47,.5), None),
+    ('spread-vasishtha.jpg', 'houses-supplied/IMG_0618.JPG', (1600,1100), (.55,.52), None),
+    ('spread-valmiki.jpg', 'houses-zip/IMG_3357.JPG', (1600,1100), (.5,.5), None),
+    ('spread-vishwamitra.jpg', 'houses-zip/IMG_3562.JPG', (1600,1100), (.5,.5), None),
+    ('spread-vyasa.jpg', 'houses-zip/IMG_3905.JPG', (1600,1100), (.5,.5), None),
+    ('gallery-vasishtha.jpg', 'houses-zip/IMG_3491.JPG', (1600,1100), (.5,.5), None),
+    ('gallery-valmiki.jpg', 'houses-zip/IMG_4059.JPG', (1600,1100), (.5,.5), None),
+    ('gallery-vishwamitra.jpg', 'houses-zip/IMG_2720.JPG', (1600,2000), (.5,.60), None),
+    ('gallery-vyasa.jpg', 'houses-zip/IMG_3850.JPG', (1600,1100), (.5,.5), None),
+    ('march-formation.jpg', 'DSC_0059.JPG', (1600,1100), (.5,.48), None),
+    ('march-procession.jpg', 'IMG_0195.JPG', (1600,1100), (.5,.48), None),
+]
+EDITORIAL_PHOTOS += [(name.replace('.jpg', '-'+str(w)+'.jpg'), src, (w,round(w*1.4)), focal,box)
+                     for name,src,size,focal,box in EDITORIAL_PHOTOS[:4] for w in (720,1800)]
+EDITORIAL_PHOTOS += [(name.replace('.jpg','-800.jpg'),src,(800,round(800*size[1]/size[0])),focal,box)
+                     for name,src,size,focal,box in EDITORIAL_PHOTOS[4:14]]
+
+EDITORIAL_PHOTOS += [
+    ('community.jpg', 'houses-zip/IMG_4280.JPG', (2000,1200), (.5,.48), None),
+    ('community-800.jpg', 'houses-zip/IMG_4280.JPG', (800,480), (.5,.48), None),
+]
+
+
+def make_editorial():
+    for name,source,(w,h),focal,box in EDITORIAL_PHOTOS:
+        im = ImageOps.exif_transpose(Image.open(os.path.join(SRC,source))).convert('RGB')
+        cut = cover(region(im,box),w,h,focal)
+        cut.save(os.path.join(OUT,name),'JPEG',quality=86,optimize=True,progressive=True)
+        print(name, w, h)
+
+
+if __name__ == '__main__':
+    if '--editorial' in sys.argv:
+        make_editorial()
+    else:
+        main()
+        make_editorial()

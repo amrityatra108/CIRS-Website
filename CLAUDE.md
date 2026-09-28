@@ -79,6 +79,13 @@ Leadership's people, portrait crops and five messages are data in `tools/leaders
 for word — do not copy-edit them. The page keeps native scroll (no Lenis) so its `#msg-…` links
 are real history entries.
 
+Spiritual Life (`tools/pages/spiritual-life.html`) is written from the school's own account,
+the "Spiritual Page" Google Doc: every activity, frequency and audience on it comes from there,
+grouped under that document's Swadhyaya, Sadhana and Seva. Its extra photographs are cut from
+`assets/source/` by `tools/make-spiritual.py`; those carry no record of their occasion, so their
+captions describe the frame and never name a practice. Its sheet and script are
+`assets/css/spiritual.css` and `assets/js/spiritual.js`.
+
 School History is the CIRS archive, and every date on it is written from `tools/history.py`:
 each event carries its source, and anything unconfirmed is a `note` there (never published) or
 held back in `UNRESOLVED`. `python3 tools/history.py` prints the report. `tools/make-history.py`

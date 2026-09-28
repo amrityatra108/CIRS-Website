@@ -36,6 +36,7 @@ import blog
 import founder
 import founder_story
 import houses
+import sports_house_history
 import documents as docs
 import blogposts
 import newsarticles
@@ -104,7 +105,7 @@ NEWS_FLASH = [
 # themselves.
 MENU = [
     ("Vision",               ["founder", "why-cirs", "school-history", "leadership"]),
-    ("Student Life",         ["the-cirs-experience", "curriculum", "our-results", "sports",
+    ("Student Life",         ["the-cirs-experience", "spiritual-life", "curriculum", "our-results", "sports",
                               "houses", "our-laurels", "math-challenge"]),
     ("Literary Excellence",  ["crossroads", "blog", "creative-writing"]),
     ("Art, Culture & Music", ["captures", "art-attack", "festivals", "theatre",
@@ -358,6 +359,28 @@ PAGES = {
         "cache_suffix": "-experience-1",
         "uc": False,
     },
+    "spiritual-life": {
+        "nav": "Spiritual Life",
+        "title": "Spiritual Life at CIRS",
+        "description": "Swadhyaya, sadhana and seva at Chinmaya International Residential "
+                       "School: the daily practices, sacred occasions and student-led service "
+                       "rooted in the vision of Pujya Gurudev Swami Chinmayananda.",
+        # No banner. The page opens on a full-window photograph of its own —
+        # students seated in the amphitheatre after dark — which carries the
+        # h1, and the header floats over it in white lettering until the
+        # first scroll. Every activity on the page is taken from the school's
+        # own account ("Spiritual Page", 2026); see the comment at the top of
+        # tools/pages/spiritual-life.html. Photographs are cut by
+        # tools/make-spiritual.py. The spiritual guides' portraits and roles
+        # are bracketed placeholders, so the under-construction note stays.
+        "banner": None,
+        "sheet": "spiritual",
+        "cache_suffix": "-spiritual-three-1",
+        "closing": ("Come and see", "the day for yourself",
+                    [("Plan a visit", "admissions.html#visit", "closing-scene__admissions"),
+                     ("The CIRS experience", "the-cirs-experience.html", "closing-scene__contact"),
+                     ("Our Founder", "founder.html", "closing-scene__contact")]),
+    },
     "sports": {
         "nav": "Our Sports",
         "title": "Sports & Laurels — Built in the Arena | CIRS",
@@ -389,11 +412,13 @@ PAGES = {
         "nav": "Our Houses",
         "title": "Our Houses | CIRS",
         "description": "The four houses of Chinmaya International Residential School — "
-                       "Vasishtha, Valmiki, Vishwamitra and Vyasa — their colours, symbols "
+                       "Vasishta, Valmiki, Vishwamitra and Vyasa — their colours, identities "
                        "and a dated archive of published inter-house results.",
         "banner": None,
         "sheet": "houses",
-        "cache_suffix": "-houses-1",
+        "cache_suffix": "-houses-6",
+        "uc": False,
+        "jump": False,
     },
     "crossroads": {
         "nav": "The Crossroads",
@@ -420,7 +445,7 @@ PAGES = {
         # it is a news stand and they are reading pages, and they share no
         # markup. blognews.css is scoped to body.blognews for that reason.
         "sheet": "blognews",
-        "cache_suffix": "-blog-editorial-1",
+        "cache_suffix": "-blog-superpass-2",
         "jump": False,
         "uc": False,
         # Mona Sans carries the Blog interface and prose; its grid remains distinct.
@@ -724,6 +749,9 @@ def rewrite_links(html, slug):
     """Turn the old single-page #anchors into links that work across pages."""
     def swap(m):
         anchor = m.group(1)
+        # Spiritual Life's gallery/day belong to its own chapter navigation.
+        if slug == "spiritual-life" and anchor in ("top", "gallery", "day", "vision"):
+            return m.group(0)
         # Curriculum now has its own #pathways; the legacy alias points to
         # Alumni, so keep this page's banner action on its own section.
         if slug == "curriculum" and anchor == "pathways":
@@ -1788,7 +1816,7 @@ def artswall_html():
 def sports_house_bands_html():
     """Sports-page house bands from the same sourced data as the Houses page."""
     bands = []
-    for index, h in enumerate(houses.HOUSES):
+    for index, h in enumerate(sports_house_history.HOUSES):
         slug = h["slug"]
         active = " is-active" if index == 0 else ""
         expanded = "true" if index == 0 else "false"
@@ -1816,258 +1844,25 @@ def sports_house_bands_html():
     return "\n".join(bands)
 
 
+# Houses owns its page rendering; Sports retains the historical data above.
 def houses_hero_html():
-    """The four zones of the opening frame.
-
-    Each zone is a link to its own chapter, so the whole interaction works
-    from the keyboard with nothing added: tab moves between four links, Enter
-    follows one, and :focus-visible expands the zone exactly as hover does.
-    The name is the link's text rather than a label beside it, which is what
-    gives the link its accessible name.
-
-    The photograph is a real <img> and not a background, so it is in the
-    accessibility tree with its alt text and the browser can size it. These
-    four are the only images on the page that are not lazy — they are the
-    fold — and for the same reason they are the only ones with a second
-    rendition. A zone is the whole width of a phone and half of a tablet,
-    where it is a 4:5 box like the photograph, so its width is what it needs.
-    On a desktop it is a quarter of the width but taller than the window, and
-    the 4:5 photograph is cover-fitted to that height: it needs 0.85 of the
-    window's height in width (763px of a 1440x900 window's 382px strip). Its
-    "sizes" said 25vw, which sent every desktop the 500px cut to stretch;
-    measured, it is 85vh.
-    """
-    zones = []
-    for i, h in enumerate(houses.HOUSES):
-        small = houses.img(h["hero"].replace(".jpg", "-500.jpg"))
-        zones.append(f'''        <a class="hsxz" id="hero-{h["slug"]}" data-house="{h["slug"]}"
-           href="#house-{h["slug"]}" data-houses-zone>
-          <span class="hsxz__ph">
-            <img src="{houses.img(h["hero"])}" width="900" height="1125"
-                 srcset="{small}?{CACHE_BUST} 500w, {houses.img(h["hero"])}?{CACHE_BUST} 900w"
-                 sizes="(max-width: 620px) 100vw, (max-width: 900px) 50vw, 85vh"
-                 alt="{esc(h["hero_alt"], attr=True)}"
-                 {"" if i else 'fetchpriority="high" '}decoding="async">
-          </span>
-          <span class="hsxz__tint" aria-hidden="true"></span>
-          <span class="hsxz__no" aria-hidden="true">{h["number"]}</span>
-          <span class="hsxz__body">
-            <span class="hsxz__name">{h["name"]}</span>
-            <span class="hsxz__meta">{h["colour"]} &middot; {h["symbol"].lower()}</span>
-            <span class="hsxz__go">Explore</span>
-          </span>
-        </a>''')
-    return "\n".join(zones)
+    return houses.hero_html()
 
 
 def houses_chapters_html():
-    """One chapter per house, in the order tools/houses.py lists them.
-
-    Each chapter opens with a wipe — a bar in the outgoing house's colour that
-    the script contracts, recolours and expands into the incoming one. With no
-    script it is a 6px rule in the house's colour, which is a perfectly good
-    chapter divider, so nothing is hidden behind the animation.
-
-    The house's own words are a <blockquote> with a <cite>, dated. That is
-    deliberate and it is not a motto: no CIRS house motto is documented
-    anywhere in this repository, and a line set large under a house name with
-    no attribution would read as one.
-    """
-    chapters = []
-    total = len(houses.HOUSES)
-    for i, h in enumerate(houses.HOUSES):
-        previous = houses.HOUSES[i - 1]["slug"] if i else h["slug"]
-        chapters.append(f'''<article class="hch" id="house-{h["slug"]}" data-house="{h["slug"]}"
-         data-houses-chapter data-from="{previous}">
-  <div class="hch__wipe" aria-hidden="true" data-houses-wipe></div>
-  <div class="hch__bleed">
-    <img src="{houses.img(h["frame"])}" width="1600" height="900" loading="lazy"
-         decoding="async" alt="{esc(h["frame_alt"], attr=True)}">
-  </div>
-  <p class="hch__ghost" aria-hidden="true" data-houses-ghost>{h["name"]}</p>
-  <div class="wrap hch__inner">
-    <p class="hch__step"><span class="hch__no">{h["number"]}</span>
-      <span class="hch__of">/ {total:02d}</span></p>
-    <h2 class="hch__name" data-houses-heading>{h["name"]}</h2>
-    <p class="hch__id"><span class="hch__swatch" aria-hidden="true"></span>{h["colour"]}
-      <span class="hch__dot" aria-hidden="true">&middot;</span>{h["symbol"]}</p>
-    <blockquote class="hch__says">
-      <p>{h["says"]}</p>
-      <cite>{h["name"]} House, writing in <em>Sakshi</em>, February 2008</cite>
-    </blockquote>
-    <p class="copy hch__fact">{h["fact"]}</p>
-    <p class="hch__more"><a href="#gallery-{h["slug"]}">{h["name"]} in frames</a></p>
-  </div>
-</article>''')
-    return "\n\n".join(chapters)
+    return houses.chapters_html()
 
 
 def houses_track_html():
-    """The competition archive, and the season line the script lays over it.
-
-    Authored as an ordered list, oldest first: without the script every event
-    is open on the page and reads as an archive. The script turns the list
-    into a line of stops and shows one event at a time, which is the only
-    thing it changes.
-
-    A row is either placed — four houses, first to fourth — or judged, where
-    the school named awards instead of a ranking. Both shapes come straight
-    from the source; neither is converted into the other.
-    """
-    stops, panels = [], []
-    for i, r in enumerate(houses.RESULTS):
-        on = " is-on" if i == 0 else ""
-        stops.append(f'''        <li><button type="button" class="hcomp__stop{on}"
-            data-houses-stop="{i}" data-cat="{r["category"]}"
-            aria-controls="event-{i}" aria-current="{"true" if i == 0 else "false"}">
-          <span class="hcomp__when">{r["when"]}</span>
-          <span class="hcomp__what">{r["event"]}</span>
-        </button></li>''')
-
-        body = []
-        if r["order"]:
-            rows = []
-            for place, slug in enumerate(r["order"], 1):
-                rows.append(f'''          <li data-house="{slug}">
-            <span class="hcomp__pl">{place}</span>
-            <span class="hcomp__hn">{houses.name_of(slug)}</span>
-            <span class="hcomp__hc">{houses.colour_of(slug)}</span>
-          </li>''')
-            body.append('        <ol class="hcomp__order">\n' + "\n".join(rows) + "\n        </ol>")
-        if r["awards"]:
-            rows = []
-            for award, slugs in r["awards"]:
-                won = ", ".join(houses.name_of(s) for s in slugs)
-                rows.append(f'''          <div data-house="{slugs[0]}">
-            <dt>{award}</dt><dd>{won}</dd>
-          </div>''')
-            body.append('        <dl class="hcomp__awards">\n' + "\n".join(rows) + "\n        </dl>")
-        if r.get("note"):
-            body.append(f'        <p class="hcomp__note">{r["note"]}</p>')
-        if not r["order"] and not r["awards"] and not r.get("note"):
-            body.append('        <p class="hcomp__note">No placings were published.</p>')
-
-        panels.append(f'''      <li class="hcomp__panel{on}" id="event-{i}" data-houses-panel="{i}"
-          data-cat="{r["category"]}">
-        <p class="hcomp__tag">{r["category"]} &middot; {r["when"]}</p>
-        <h3 class="hcomp__ev">{r["event"]}</h3>
-{chr(10).join(body)}
-        <p class="hcomp__src">Source: {r["source"]}</p>
-      </li>''')
-
-    filters = "\n".join(
-        f'''        <button type="button" class="hcomp__filter{" is-on" if c == "All" else ""}"
-            data-houses-filter="{c}" aria-pressed="{"true" if c == "All" else "false"}">{c}</button>'''
-        for c in houses.CATEGORIES)
-
-    return f'''    <div class="hcomp__track" data-houses-track hidden>
-      <h3 class="sr-only" id="comp-filter-h">Filter the archive by category</h3>
-      <div class="hcomp__filters" role="group" data-houses-filters aria-labelledby="comp-filter-h">
-{filters}
-      </div>
-      <div class="hcomp__line" aria-hidden="true"><span data-houses-line></span></div>
-      <h3 class="sr-only" id="comp-stops-h">The events, oldest first</h3>
-      <ol class="hcomp__stops" data-houses-stops aria-labelledby="comp-stops-h">
-{chr(10).join(stops)}
-      </ol>
-    </div>
-
-    <ol class="hcomp__panels" data-houses-panels>
-{chr(10).join(panels)}
-    </ol>'''
-
-
-def houses_symposiums_html():
-    """The four house productions of May 2008, as panels on a dark stage."""
-    cards = []
-    for slug, title, about in houses.SYMPOSIUMS:
-        cards.append(f'''      <li data-house="{slug}">
-        <p class="hcult__who"><span class="hcult__swatch" aria-hidden="true"></span>{houses.name_of(slug)}</p>
-        <h3 class="hcult__title">{title}</h3>
-        <p class="hcult__about">{about}</p>
-      </li>''')
-    return ('    <ul class="hcult__set" data-houses-symposiums>\n'
-            + "\n".join(cards) + "\n    </ul>")
+    return houses.stage_html()
 
 
 def houses_record_html():
-    """Eight selected, dated event entries as one table.
-
-    A real <table> with a caption, scoped headers and a row per event: the
-    figures are data and a reader should be able to read down a column.
-    Placings are the four house names in order, and a judged event says what
-    was judged, in the same cell, rather than being forced into a ranking.
-    """
-    head = "".join(f'<th scope="col">{h["name"]}<small>{h["colour"]}</small></th>'
-                   for h in houses.HOUSES)
-    rows = []
-    for r in houses.RESULTS:
-        cells = []
-        for h in houses.HOUSES:
-            slug = h["slug"]
-            if r["order"] and slug in r["order"]:
-                place = r["order"].index(slug) + 1
-                suffix = {1: "st", 2: "nd", 3: "rd"}.get(place, "th")
-                cells.append(f'<td data-house="{slug}"><b>{place}{suffix}</b></td>')
-            elif r["awards"]:
-                won = [a for a, slugs in r["awards"] if slug in slugs]
-                if won:
-                    cells.append(f'<td data-house="{slug}">{"; ".join(won)}</td>')
-                else:
-                    cells.append('<td><span class="hrec__none">&mdash;</span></td>')
-            else:
-                cells.append('<td><span class="hrec__none">&mdash;</span></td>')
-        rows.append(f'''        <tr>
-          <th scope="row">{r["event"]}<small>{r["when"]} &middot; {r["category"]}</small></th>
-{"".join("          " + c + chr(10) for c in cells)}          <td class="hrec__src">{r["source"]}</td>
-        </tr>''')
-    return f'''    <div class="hrec__wrap rv">
-      <table class="hrec__table">
-        <caption>Inter-house results published by CIRS. A dash means the source named
-          no placing for that house in that event, not that the house did not take
-          part.</caption>
-        <thead>
-          <tr><th scope="col">Event</th>{head}<th scope="col">Published in</th></tr>
-        </thead>
-        <tbody>
-{chr(10).join(rows)}
-        </tbody>
-      </table>
-    </div>'''
+    return houses.archive_html()
 
 
 def houses_gallery_html():
-    """One named-kit portrait per house, in a filterable strip.
-
-    Every frame is a figure with a real caption outside the image, which is
-    what keeps it readable on a phone and in the accessibility tree. The
-    filter buttons carry the per-house ids the chapters link to, so
-    "#gallery-vasishtha" lands on Vasishtha's portrait with or without script
-    and the script presses it.
-    """
-    frames = []
-    for h in houses.HOUSES:
-        for name, alt, caption in ((h["hero"], h["hero_alt"], h["hero_cap"]),):
-            frames.append(f'''        <li id="gallery-{h["slug"]}" data-house="{h["slug"]}">
-          <figure>
-            <img src="{houses.img(name)}" width="900" height="1125" loading="lazy"
-                 decoding="async" alt="{esc(alt, attr=True)}">
-            <figcaption><b>{h["name"]}</b><span>{caption}</span></figcaption>
-          </figure>
-        </li>''')
-    tabs = ['        <button type="button" class="hgal__tab is-on" id="gallery-tab-all"'
-            ' data-houses-house="all" aria-pressed="true">All four</button>']
-    for h in houses.HOUSES:
-        tabs.append(f'''        <button type="button" class="hgal__tab" id="gallery-tab-{h["slug"]}"
-            data-houses-house="{h["slug"]}" aria-pressed="false">
-          <span class="hgal__sw" aria-hidden="true"></span>{h["name"]}</button>''')
-    return f'''    <div class="hgal__tabs" role="group" data-houses-tabs aria-labelledby="gal-h" hidden>
-      <h3 class="sr-only" id="gal-h">Choose a house</h3>
-{chr(10).join(tabs)}
-    </div>
-    <ul class="hgal__strip" data-houses-strip>
-{chr(10).join(frames)}
-    </ul>'''
+    return houses.gallery_html()
 
 
 UC = '''<section class="uc">
@@ -2112,11 +1907,21 @@ def build(slug, page):
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
+    if slug == "spiritual-life":
+        # A synchronous gate establishes the optional scene before first paint.
+        # No script or a failed module leaves a readable photographic opening.
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/spiritual-opening.css?{CACHE_BUST}">\n'
+            '<link rel="modulepreload" href="assets/js/spiritual-light.js">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.module.min.js">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.core.js">\n'
+            '<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("sp-boot","sl-body-motion");setTimeout(function(){if(!window.__spiritualOpeningReady)document.documentElement.classList.remove("sp-boot");if(!window.__spiritualBodyReady)document.documentElement.classList.remove("sl-body-motion")},5000)}</script>\n</head>')
+
     # Shared typography follows page sheets so the approved roles stay consistent.
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
-    if slug in ("crossroads", "founder", "art-attack"):
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
         # These pages open with their own films. The shared curtain would hide
         # the skip control and add a second scroll lock. Keep the no-script
         # footer fallback after removing the curtain-specific head block.
@@ -2333,7 +2138,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
-    if slug in ("crossroads", "founder", "art-attack"):
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
         intro_start = parts[-1].index("<!-- Opening sequence.")
         intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
         parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
@@ -2400,7 +2205,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                        .replace("{{HOUSES_HERO}}", houses_hero_html())
                        .replace("{{HOUSES_CHAPTERS}}", houses_chapters_html())
                        .replace("{{HOUSES_TRACK}}", houses_track_html())
-                       .replace("{{HOUSES_SYMPOSIUMS}}", houses_symposiums_html())
+
                        .replace("{{HOUSES_RECORD}}", houses_record_html())
                        .replace("{{HOUSES_GALLERY}}", houses_gallery_html())
                        .replace("{{ARTSWALL_COUNT}}", str(artswall.count()))
@@ -2485,7 +2290,10 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         # before shared animation dependencies so Skip and its bounded lock
         # are ready as soon as the critical styles have arrived.
         parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-9" defer></script>')
-    parts.append(read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST).rstrip("\n"))
+    shared_scripts = read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST)
+    if slug == "houses":
+        shared_scripts = "\n".join(line for line in shared_scripts.splitlines() if 'src="assets/vendor/lenis.min.js' not in line)
+    parts.append(shared_scripts.rstrip("\n"))
     if not wall:
         parts.append(f'<script src="assets/js/footer.js?{CACHE_BUST}-footer-1" defer></script>')
     if slug == "crossroads":
@@ -2501,6 +2309,9 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-5" defer></script>')
     if slug == "the-cirs-experience":
         parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}-experience-1" defer></script>')
+    if slug == "spiritual-life":
+        parts.append(f'<script src="assets/js/spiritual.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script type="module" src="assets/js/spiritual-opening.js?{CACHE_BUST}"></script>')
     if slug == "our-results":
         parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
@@ -2516,7 +2327,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
     if slug == "houses":
-        parts.append(f'<script src="assets/js/houses-journey.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/houses-journey.js?{CACHE_BUST}-houses-3" defer></script>')
     if slug == "blog":
         parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-editorial-1" defer></script>')
     if slug == "festivals":
