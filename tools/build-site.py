@@ -1966,10 +1966,15 @@ def build(slug, page):
         # the interactive one, with only the link down to the life story.
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/founder-portrait.css?{CACHE_BUST}-portrait-1">\n'
-            f'<link rel="stylesheet" href="assets/css/founder-gurudev-journey.css?{CACHE_BUST}-story-6">\n'
+            f'<link rel="stylesheet" href="assets/css/founder-gurudev-journey.css?{CACHE_BUST}-story-7">\n'
             '<noscript><style>.gurudev-opening .gc-intro{display:none}'
             '.gurudev-opening .gp-hero[hidden]{display:block!important}'
             '.gurudev-opening :is(.gp-hint,.gp-watch,.gp-sound,.gp-toggle){display:none}'
+            # The script sizes the still to the window (--gp-photo-*). Without
+            # it the default is 72% of the width, which on a wide window is
+            # taller than the window: cropped, and over the name beneath it.
+            '@media (min-width:651px){.gurudev-opening .gp-images img{width:auto;height:calc(100% - 132px);'
+            'left:50%;top:64px;transform:translateX(-50%)}}'
             '</style></noscript>\n</head>')
     if slug == "sports":
         head = head.replace("</head>",
@@ -2304,7 +2309,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/founder-liquid-sound.js?{CACHE_BUST}-portrait-1" defer></script>')
         parts.append(f'<script src="assets/js/founder-portrait.js?{CACHE_BUST}-portrait-2" defer></script>')
         parts.append(f'<script src="assets/js/founder-opening.js?{CACHE_BUST}-portrait-1" defer></script>')
-        parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-5" defer></script>')
+        parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-6" defer></script>')
     if slug == "the-cirs-experience":
         parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}-experience-1" defer></script>')
     if slug == "spiritual-life":
