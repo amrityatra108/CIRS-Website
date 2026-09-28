@@ -544,8 +544,95 @@ HELD = [
      "one laurel that would support an Innovation category."),
     ("Spell Bee names", "The 2025 report says students won, but lists no names."),
     ("Green School Award year", "Why CIRS names the award, not the year."),
-    ("Photographs of the 2025 competitions", "Only the report's collage is in hand; the "
-     "school's Drive may hold originals of the yoga, football and quiz presentations."),
+    ("Photographs of the 2025 inter-school results", "None is in the Drive: its numbered folders "
+     "cover the school's own 2026 events. The featured laurels use illustrative school photographs, "
+     "captioned for what they show."),
+    ("Drive originals over 10 MB", "The connector will not hand over files over 10 MB, so these "
+     "folders were not pulled and need the school to export smaller copies: 16 Science Quiz "
+     "Juniors, 30 English Quiz, 32 English Jr Quiz, 28 Story telling, 15 Trinity Exam Achievers, "
+     "34 HAM, 33 ShishuVatika Poem Rec, 9 Khel Mela, and 31 Spell Bee beyond four frames. "
+     "The 'chinmaya olympiad winners' folder is empty."),
+    ("Placings for the three competitions in SEASON", "The photographs show the events; no "
+     "placing or name is supplied, so none is stated."),
+]
+
+# ---------------------------------------------------------------------------
+# Competitions in the school's own photographs: "Where the next laurel begins".
+#
+# These are events, not laurels: the photographs show a competition in
+# progress, and the school has not supplied its placings, so none is stated.
+# Each date is one the photographs themselves carry: the Spell Bee's is on the
+# screen behind the speaker; the others are the phones' own timestamps
+# (IMG_20260212_..., IMG_20260227_...) and agree with the school's folder
+# titles. No student is named. The Drive connector will not hand over files
+# over 10 MB, so only the photographs below were pulled; the Science Quiz,
+# English Quiz, Storytelling, Trinity, HAM and Khel Mela folders hold larger
+# originals (see HELD). tools/make-laurels.py cuts the images.
+#
+#   file / id / folder   the original in the school's Drive
+#   size                 (large w, h, small w, h) as the tool cuts them
+# ---------------------------------------------------------------------------
+SEASON_IMG = "assets/img/laurels"
+SEASON_PHOTOS = {
+    "sb-1": dict(file="CRS00027.JPG", id="1r_9mTWwdPu-WNxdXlvoJ6IPvXUlfdV26", folder="31. Spell Bee",
+                 size=(1600, 900, 800, 450),
+                 alt="A junior student spelling into a microphone on the stage of the school hall, "
+                     "in front of a screen reading Junior Spell Bee Competition, with two judges at "
+                     "a red-clothed table and pupils seated on the right",
+                 cap="The Junior Spell Bee Competition, 18 August 2026"),
+    "sb-2": dict(file="CRS00033.JPG", id="1Yv0QvETnnxENXwuW82S8lj5TF7-B-wwv", folder="31. Spell Bee",
+                 size=(1600, 900, 800, 450),
+                 alt="A student at the microphone on stage beside the Junior Spell Bee Competition "
+                     "screen, the judges at their red table to the left",
+                 cap="At the microphone, beside the competition screen"),
+    "po-1": dict(file="IMG_20260212_180819.jpg", id="1FZyniPmNz7BtMUjzPI7WIwFYpkWGN0R2",
+                 folder="10. LANGUAGE POEM RECITATION", size=(1600, 900, 800, 450),
+                 alt="A student in school uniform reciting at a microphone on a tiled terrace, "
+                     "tiers of pupils in mustard kurtas seated behind",
+                 cap="The Language Poem Recitation, 12 February 2026"),
+    "po-2": dict(file="IMG_20260212_180828.jpg", id="1tso6IEljUVZFpsP15NrT6fUncRLJADnn",
+                 folder="10. LANGUAGE POEM RECITATION", size=(1600, 900, 800, 450),
+                 alt="Two judges seated at a round table making notes, pupils in mustard kurtas on "
+                     "tiered steps behind them",
+                 cap="The judges&rsquo; table"),
+    "po-3": dict(file="IMG_20260212_181121.jpg", id="1oA-yUFkKSJvMGoTX4-JydtvkXbsX0dA0",
+                 folder="10. LANGUAGE POEM RECITATION", size=(900, 1600, 450, 800),
+                 alt="A girl in school uniform reciting at a microphone stand in front of a "
+                     "wooden door",
+                 cap="A reciter at the microphone"),
+    "da-1": dict(file="IMG_20260227_184526.jpg", id="1_d7_nonRbUC9NFjlgpf-VPQaCdHzojcT",
+                 folder="17. Junior Group Dance Competition", size=(1600, 900, 800, 450),
+                 alt="Dancers in yellow costumes and red scarves in a line across a stage with a "
+                     "blue backdrop and a Dance Competition banner",
+                 cap="The Junior Group Dance Competition, 27 February 2026"),
+    "da-2": dict(file="IMG_20260227_185020.jpg", id="1ljKU9Q_MWmLg_8rLjjiZUJ0Bt25wgQ10",
+                 folder="17. Junior Group Dance Competition", size=(1600, 900, 800, 450),
+                 alt="A boy in an indigo costume in mid-step on stage, a group of dancers in white "
+                     "and red behind him",
+                 cap="A group in indigo, white and red"),
+    "da-3": dict(file="IMG_20260227_183959.jpg", id="14updB0L2HcwPfUk5uRMSBVgTVZfYML9T",
+                 folder="17. Junior Group Dance Competition", size=(1600, 900, 800, 450),
+                 alt="Four dancers in black tops and gold trousers striking a pose on a stage with "
+                     "a blue backdrop",
+                 cap="Four dancers in black and gold"),
+}
+
+SEASON = [
+    {"id": "spell-bee-2026", "name": "Junior Spell Bee", "date": "18 August 2026", "ghost": "18 Aug",
+     "layout": "a", "photos": ["sb-1", "sb-2"],
+     "line": "The screen behind the speaker reads &lsquo;Chinmaya International Residential School "
+             "welcomes you to the Junior Spell Bee Competition&rsquo;, and gives the date.",
+     "basis": "Dated from the screen in the photograph."},
+    {"id": "poem-2026", "name": "Language Poem Recitation", "date": "12 February 2026",
+     "ghost": "12 Feb", "layout": "b", "photos": ["po-1", "po-2", "po-3"],
+     "line": "One pupil at a time recites at a microphone, before judges at a table and a school "
+             "seated on the steps.",
+     "basis": "Dated from the photographs&rsquo; own timestamps and the school&rsquo;s folder title."},
+    {"id": "dance-2026", "name": "Junior Group Dance Competition", "date": "27 February 2026",
+     "ghost": "27 Feb", "layout": "c", "photos": ["da-1", "da-2", "da-3"],
+     "line": "Groups take the stage one after another beneath a hand-painted &lsquo;Dance "
+             "Competition&rsquo; banner.",
+     "basis": "Dated from the photographs&rsquo; own timestamps and the school&rsquo;s folder title."},
 ]
 
 # ---------------------------------------------------------------------------
@@ -639,6 +726,45 @@ def meta_html(l, cls):
 def source_html(l, cls="lr-source"):
     label, href = l["source"]
     return f'<p class="{cls}">Source: <a href="{href}">{label}</a></p>'
+
+
+def season_photo(key, sizes, n):
+    r = SEASON_PHOTOS[key]
+    lw, lh, sw, sh = r["size"]
+    img = (f'<img src="{SEASON_IMG}/{key}-800.jpg" '
+           f'srcset="{SEASON_IMG}/{key}-800.jpg {sw}w, {SEASON_IMG}/{key}-1600.jpg {lw}w" '
+           f'sizes="{sizes}" width="{lw}" height="{lh}" alt="{plain(r["alt"])}" '
+           f'loading="lazy" decoding="async">')
+    orient = "portrait" if lh > lw else "landscape"
+    return (f'<figure class="lr-event__ph lr-event__ph--{n} is-{orient}" style="--i:{n}">'
+            f'<div class="lr-event__frame" style="aspect-ratio:{lw}/{lh}">{img}</div>'
+            f'<figcaption>{r["cap"]}</figcaption></figure>')
+
+
+def season_html():
+    out = []
+    for ev in SEASON:
+        sizes = {"a": ["(max-width: 899px) 92vw, 62vw", "(max-width: 899px) 92vw, 30vw"],
+                 "b": ["(max-width: 899px) 92vw, 62vw", "(max-width: 899px) 92vw, 40vw",
+                       "(max-width: 899px) 60vw, 22vw"],
+                 "c": ["(max-width: 899px) 92vw, 56vw", "(max-width: 899px) 92vw, 34vw",
+                       "(max-width: 899px) 92vw, 34vw"]}[ev["layout"]]
+        photos = "".join(season_photo(k, sizes[i], i + 1) for i, k in enumerate(ev["photos"]))
+        out.append(
+            f'      <li class="lr-event lr-event--{ev["layout"]}" id="season-{ev["id"]}">\n'
+            f'        <article class="lr-event__inner" aria-labelledby="ev-{ev["id"]}">\n'
+            f'          <p class="lr-event__ghost" aria-hidden="true">{ev["ghost"]}</p>\n'
+            f'          <header class="lr-event__head">\n'
+            f'            <p class="lr-event__meta"><span>Competition</span><span>{ev["date"]}</span></p>\n'
+            f'            <h3 class="lr-event__title" id="ev-{ev["id"]}">{ev["name"]}</h3>\n'
+            f'            <p class="lr-event__line">{ev["line"]}</p>\n'
+            f'            <p class="lr-event__status">Placings: not yet published on this site.</p>\n'
+            f'            <p class="lr-event__basis">{ev["basis"]}</p>\n'
+            f'          </header>\n'
+            f'          {photos}\n'
+            f'        </article>\n'
+            f'      </li>')
+    return "\n".join(out)
 
 
 def forms_html():
@@ -910,6 +1036,7 @@ def expand(content):
                    .replace("{{LAURELS_FILTERS}}", filters_html())
                    .replace("{{LAURELS_GRID}}", grid_html())
                    .replace("{{LAURELS_TIMELINE}}", timeline_html())
+                   .replace("{{LAURELS_SEASON}}", season_html())
                    .replace("{{LAURELS_NAMES}}", names)
                    .replace("{{LAURELS_NAME_COUNT}}", str(count))
                    .replace("{{LAURELS_COUNT}}", str(len(LAURELS)))
