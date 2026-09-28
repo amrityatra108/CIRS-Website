@@ -74,6 +74,15 @@ the designer's say. The life story below (`#life`) keeps the site's own copy, wh
 corrected against the Chinmaya archives since the handoff was written — do not revert it to the
 handoff's `events.json`.
 
+Math Challenge opens on a sculpture of 216 bevelled blocks that its stage's scroll turns from a
+6×6×6 cube into an 18×12 field and then a torus (`assets/js/math-sculpture.js`, Three.js from
+`assets/founder-opening/vendor/`). `assets/js/matharena.js` owns the archive filters, the
+division links and the stage's one progress value, and imports the sculpture itself, so a failed
+graphics load leaves a plain opening with the drawn cube. The drawings are made from the same
+numbers by `tools/make-math-sculpture.py` — keep its constants in step with the script's. The
+archive is `tools/mathchallenge.py`: the PDFs are the school's winners' bulletins, not problem
+papers, and a month lists only the bulletins that exist.
+
 Leadership's people, portrait crops and five messages are data in `tools/leadership.py`;
 `tools/make-leadership.py` cuts the portraits. The messages are the school's published text word
 for word — do not copy-edit them. The page keeps native scroll (no Lenis) so its `#msg-…` links
@@ -85,6 +94,14 @@ grouped under that document's Swadhyaya, Sadhana and Seva. Its extra photographs
 `assets/source/` by `tools/make-spiritual.py`; those carry no record of their occasion, so their
 captions describe the frame and never name a practice. Its sheet and script are
 `assets/css/spiritual.css` and `assets/js/spiritual.js`.
+
+Curriculum (`tools/pages/curriculum.html`) is the Curriculum Atlas: one gold path from the
+opening through the grade journey, dividing at Grade X into CBSE and the IB Diploma. Its facts
+come only from `docs/curriculum-content.md`. The markup is complete reading order;
+`assets/js/curriculum.js` makes the scenes (`html.cur-live`: sticky stages on windows at least
+1024×680 with motion; `html.cur-lite`: scroll accents otherwise) through `gsap.matchMedia`, and
+nothing runs under reduced motion. Elements the script moves are centred with margins, not the
+CSS `translate` property, which GSAP folds into its transform and leaves behind on revert.
 
 School History is the CIRS archive, and every date on it is written from `tools/history.py`:
 each event carries its source, and anything unconfirmed is a `note` there (never published) or
