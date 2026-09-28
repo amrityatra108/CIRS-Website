@@ -48,6 +48,7 @@ import theatre
 import festivals
 import leadership
 import history
+import laurels
 import experience
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -482,16 +483,15 @@ PAGES = {
         "nav": "Our Laurels",
         "title": "Our Laurels",
         "description": "Competitions won, representative honours and the CIRS students who "
-                       "carried them.",
-        "banner": ("Our laurels", "Honours, <em>Named.</em>",
-                   "Competitions won, representative honours, and the students who carried them."),
-        "soon": ([("Inter-school", "Competition names, years and placings"),
-                  ("District and state", "Selections and results"),
-                  ("National", "Representative honours and participation"),
-                  ("Inter-house", "The house championship and its holders")],
-                 "competition names, years, placings and the students involved, to be supplied "
-                 "by the sports office and the activities office",
-                 [("sports.html", "Our Sports")]),
+                       "carried them: the school's achievement archive, from 2007 to today.",
+        # The archive brings its own opening: a field of points, one for each
+        # laurel, that gathers into a wreath. Every record is written from
+        # tools/laurels.py, which names its source.
+        "banner": None,
+        "sheet": "laurels",
+        "cache_suffix": "-laurels-1",
+        "uc": False,
+        "jump": False,
     },
     "math-challenge": {
         "nav": "Math Challenge",
@@ -2029,6 +2029,12 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "theatre":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/theatre.css?{CACHE_BUST}">\n</head>')
+    if slug == "our-laurels":
+        # The opening's two words are set in Newsreader, the face the Founder
+        # opening introduced; preload it in place of the display face.
+        head = head.replace(
+            '<link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>\n',
+            '<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>\n')
     if slug == "leadership":
         # The message a #msg-... URL asks for is chosen before first paint.
         head = head.replace("</head>", leadership.head_script() + leadership.head_css() + "</head>")
@@ -2062,7 +2068,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         head = head.replace("</head>",
             portal_motion_gate +
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
-    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership")
+    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership",
+                 "our-laurels")
             or page.get("notfound")):
         # These pages open immediately with their own video, document sheets,
         # journal masthead or, on Curriculum, the rising path of the grades
@@ -2126,7 +2133,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         start = chrome.index("<!-- Opening sequence.")
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
-    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership")
+    if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership",
+                 "our-laurels")
             or page.get("notfound")):
         # Admissions, School Information, News, Curriculum, School History and
         # Leadership each have their own visible opening. The shared curtain would delay it behind a
@@ -2194,6 +2202,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         content = festivals.expand(content)
     if slug == "school-history":
         content = history.expand(content)
+    if slug == "our-laurels":
+        content = laurels.expand(content)
     if slug == "leadership":
         content = leadership.expand(content)
     if slug == "the-cirs-experience":
@@ -2270,7 +2280,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     parts.append("</main>")
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
-        if slug in ("captures", "leadership", "the-cirs-experience") or page.get("notfound"):
+        if slug in ("captures", "leadership", "the-cirs-experience", "our-laurels") or page.get("notfound"):
             # Captures already ends with its own full-width photograph, and
             # Leadership with its staff photograph and a compact pair of
             # links: a second full-screen scene would compete with both.
@@ -2338,6 +2348,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-1" defer></script>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
+    if slug == "our-laurels":
+        parts.append(f'<script src="assets/js/laurels.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
