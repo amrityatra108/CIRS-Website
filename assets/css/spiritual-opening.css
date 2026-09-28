@@ -1,0 +1,48 @@
+/* The opening is a single document scene. Its photograph lives below WebGL;
+   the sticky surface never escapes its parent or covers the next chapter. */
+.spiritual .sl-entry{--sl-night:color-mix(in srgb,var(--dark-deep) 62%,#000);--sl-gold:color-mix(in srgb,var(--gold-pale) 64%,var(--gold-ink));position:relative;background:var(--sl-night);color:var(--paper);isolation:isolate}
+.spiritual .sl-entry__stage{position:relative;min-height:100svh;overflow:clip;isolation:isolate;background:var(--sl-night)}
+.spiritual .sl-entry__photo,.spiritual .sl-entry__shade,.spiritual .sl-entry__canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.spiritual .sl-entry__photo{display:block;opacity:.44}
+.spiritual .sl-entry__photo img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;display:block}
+.spiritual .sl-entry__shade{background:linear-gradient(180deg,rgba(16,10,21,.48),transparent 30%,transparent 65%,rgba(16,10,21,.58))}
+.spiritual .sl-entry__canvas{z-index:2;opacity:0;transition:opacity 1s}
+.spiritual .sl-entry.is-webgl .sl-entry__canvas{opacity:1}
+.spiritual .sl-entry__copy{position:relative;z-index:3;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:130px 7vw 140px}
+.spiritual .sl-entry__eyebrow{font-family:var(--font-ui);font-size:.7rem;letter-spacing:.21em;color:var(--sl-gold);margin:0 0 30px}
+.spiritual .sl-entry__title{font-family:var(--font-display);font-weight:400;line-height:1.02;font-size:clamp(3.2rem,7.1vw,8.6rem);letter-spacing:-.045em;margin:0;text-wrap:balance}
+.spiritual .sl-entry__line{display:block;overflow:clip;padding:.12em .06em;margin:-.12em -.06em}
+.spiritual .sl-entry__line>span{display:block;animation:sl-title-in 1.9s cubic-bezier(.16,1,.3,1) both}
+.spiritual .sl-entry__line:nth-child(2)>span{animation-delay:.16s}
+.spiritual .sl-entry__strands{font-family:var(--font-ui);font-weight:350;font-size:.8rem;letter-spacing:.16em;margin:28px 0 0;color:var(--on-dark-soft)}
+.spiritual .sl-entry__cue{position:absolute;bottom:45px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:13px;color:var(--paper);font:400 .68rem var(--font-ui);letter-spacing:.1em;text-decoration:none;padding:12px;white-space:nowrap;animation:sl-cue-in 1s 1.3s both}
+.spiritual .sl-entry__cue::after{content:"";width:1px;height:42px;background:var(--sl-gold);transform-origin:top}
+.spiritual .sl-entry__edge{position:absolute;z-index:3;left:4vw;bottom:46px;font:400 .62rem var(--font-ui);letter-spacing:.1em;color:var(--on-dark-mute)}
+.spiritual .sl-entry__landing{position:relative;z-index:3;max-width:540px;padding:0 24px 65px;margin:0 auto;text-align:center}
+.sp-boot .spiritual .sl-entry__landing{position:absolute;inset:auto 8vw 7vh;opacity:0;visibility:hidden;margin:0;padding:0;text-align:left}
+.spiritual .sl-entry__landing p{font:350 clamp(.95rem,1.1vw,1.15rem)/1.65 var(--font-body);color:var(--paper);margin:0}
+.spiritual .sl-entry__landing small{display:block;font:400 .65rem var(--font-ui);letter-spacing:.13em;color:var(--gold-pale);margin-bottom:16px}
+.spiritual .sl-entry__fallback{position:absolute;width:40svh;height:40svh;max-width:78vw;max-height:78vw;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid color-mix(in srgb,var(--sl-gold) 20%,transparent);border-radius:50%;pointer-events:none}
+.spiritual .sl-entry__fallback::before,.spiritual .sl-entry__fallback::after{content:"";position:absolute;inset:14px;border:1px solid color-mix(in srgb,var(--sl-gold) 14%,transparent);border-radius:50%}
+.spiritual .sl-entry__fallback::after{inset:-18px}
+.spiritual .sl-entry.is-webgl .sl-entry__fallback{opacity:0}
+.sp-boot .spiritual .sl-entry{height:250svh}
+.sp-boot .spiritual .sl-entry__stage{height:100svh;position:sticky;top:0}
+.sp-boot .spiritual .sl-entry__photo{opacity:0;clip-path:circle(0% at 50% 50%)}
+.spiritual .sl-entry a:focus-visible{outline:2px solid var(--gold-pale);outline-offset:6px}
+@keyframes sl-title-in{from{clip-path:inset(100% 0 0);transform:translateY(105%);opacity:0;letter-spacing:-.025em}to{clip-path:inset(0);transform:translateY(0);opacity:1;letter-spacing:-.045em}}
+@keyframes sl-cue-in{from{opacity:0}to{opacity:1}}
+@media(max-width:767px){
+ .spiritual .sl-entry__title{font-size:clamp(2.8rem,10.5vw,5rem);line-height:1.09;letter-spacing:-.05em}
+ .spiritual .sl-entry__copy{padding:115px 22px 135px}
+ .spiritual .sl-entry__eyebrow{font-size:.61rem;letter-spacing:.16em;margin-bottom:30px}
+ .spiritual .sl-entry__strands{font-size:.68rem;letter-spacing:.1em;max-width:260px;line-height:1.8;margin-top:28px}
+ .spiritual .sl-entry__edge{display:none}
+ .sp-boot .spiritual .sl-entry__landing{inset:auto 26px 7vh;max-width:32ch}
+ .spiritual .sl-entry__landing p{font-size:.9rem;line-height:1.6}
+ .sp-boot .spiritual .sl-entry{height:230svh}
+}
+@media(prefers-reduced-motion:reduce){
+ .spiritual .sl-entry__line>span,.spiritual .sl-entry__cue{animation:none}
+ .spiritual .sl-entry__canvas{transition:none;opacity:.4}
+}
