@@ -507,15 +507,23 @@ PAGES = {
     },
     "creative-writing": {
         "nav": "Creative Writing",
-        "title": "Creative Writing | Words become worlds. | CIRS",
-        "description": "A curated anthology of poetry by students of Chinmaya "
-                       "International Residential School.",
-        # This anthology supplies its own typographic opening and h1.
+        "title": "Creative Writing | Written at CIRS",
+        "description": "Stories, poems, thoughts and imaginations by the Junior and Senior "
+                       "School students of Chinmaya International Residential School, "
+                       "published edition by edition.",
+        # "The Living Manuscript": a blank page whose scattered words assemble
+        # into the h1, then the two collections and their editions. Every
+        # edition, poem and presentation is data in
+        # tools/creative-writing-content.json, rendered by tools/creativewriting.py,
+        # which also adds the Junior, Senior and edition pages below.
         "banner": None,
         "sheet": "cwriting",
-        "cache_suffix": "-anthology-2",
+        "cache_suffix": "-manuscript-1",
         "jump": False,
         "uc": False,
+        # The opening is pale paper, so the header letters in ink over it.
+        "litehead": True,
+        "cw": {"kind": "main", "collection": "all"},
     },
     "captures": {
         "nav": "CIRS Captures",
@@ -844,6 +852,10 @@ def prefix_refs(html, up):
 
 
 def menu_group_index(slug):
+    # The Creative Writing collections and editions open the menu on the
+    # group their parent page belongs to.
+    if slug.startswith("creative-writing/"):
+        slug = "creative-writing"
     return next((i for i, (_, slugs) in enumerate(MENU) if slug in slugs), 0)
 
 
@@ -1971,6 +1983,8 @@ def build(slug, page):
             '.gurudev-opening .gp-hero[hidden]{display:block!important}'
             '.gurudev-opening :is(.gp-hint,.gp-watch,.gp-sound,.gp-toggle){display:none}'
             '</style></noscript>\n</head>')
+    if page.get("cw"):
+        head = head.replace("</head>", creativewriting.head_html(page["cw"]) + "</head>")
     if slug == "sports":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
@@ -2121,8 +2135,9 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     chrome = read("tools/partials/chrome.html")
     if slug == "founder":
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
-    if slug == "blog" or page.get("post"):
-        # Journal pages open directly on readable type. The shared full-screen
+    if slug == "blog" or page.get("post") or page.get("cw"):
+        # Journal pages open directly on readable type, and Creative Writing
+        # opens on its own blank page and cursor. The shared full-screen
         # curtain would hide their masthead and force an unrelated wait.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
@@ -2185,7 +2200,9 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     parts.append(f'<script src="assets/js/navigation.js?{CACHE_BUST}-core-3"></script>')
     # The "On this page" index goes here, before the content it indexes.
     jump_at = len(parts)
-    if page.get("post"):
+    if page.get("cw"):
+        content = creativewriting.render(page["cw"])
+    elif page.get("post"):
         content = article_html(page)
     elif page.get("news"):
         content = news_article_html(page)
@@ -2235,11 +2252,6 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                        .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
                        .replace("{{CAPTURES_COUNT_CAP}}", captures.count_word().capitalize())
                        .replace("{{CAPTURES_CHAPTER_NAV}}", captures.chapter_nav_html() if slug == "captures" else "")
-                       .replace("{{CW_ROWS}}", creativewriting.rows_html())
-                       .replace("{{CW_CHAPTERS}}", creativewriting.chapters_html())
-                       .replace("{{CW_HERO_EXCERPT}}", creativewriting.hero_excerpt_html())
-                       .replace("{{CW_COUNT}}", str(creativewriting.count()))
-                       .replace("{{CW_WRITERS}}", str(creativewriting.writer_count()))
                        .replace("{{BLOG_FRONT}}", blog.front_html())
                        .replace("{{BLOG_RAIL}}", blog.rail_html())
                        .replace("{{BLOG_COUNT}}", str(blog.count()))
@@ -2332,7 +2344,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/news-journal.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
-    if slug == "creative-writing":
+    if page.get("cw"):
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
     if slug == "houses":
         parts.append(f'<script src="assets/js/houses-journey.js?{CACHE_BUST}-houses-3" defer></script>')
@@ -2414,6 +2426,12 @@ for _post in blogposts.POSTS:
         "litehead": True,
         "post": _post,
     }
+
+
+# Creative Writing's two collection views and one page per edition, all
+# written from tools/creative-writing-content.json. Not in MENU: the
+# Creative Writing page is how a reader reaches them.
+PAGES.update(creativewriting.page_entries())
 
 
 if __name__ == "__main__":
