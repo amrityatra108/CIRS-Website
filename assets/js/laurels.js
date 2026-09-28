@@ -742,6 +742,9 @@
     namesSec.style.setProperty("--np", ((k - 0.5) * 2).toFixed(3));
   }
 
+  /* The season in photographs: each event reveals once, as it arrives. */
+  $$(".lr-event").forEach(function (ev) { onSeen(ev); });
+
   /* ==========================================================
      10. Closing
      ========================================================== */
