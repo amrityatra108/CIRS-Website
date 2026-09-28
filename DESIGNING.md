@@ -130,8 +130,8 @@ A page sheet reads these roles. It does not define its own paper, ink or gold;
 where a page keeps local token names, they are aliases of these. Colours that
 are *meaning*, not decoration, are kept as they are and listed at the top of
 their sheet: the four house colours, the festival inks (Onam marigold, Holi
-magenta), the Records page's status colours, Math Arena's gold/blue move
-markers, and film "seam" colours matched to the frames of a video. Never
+magenta), the Records page's status colours, and film "seam" colours matched
+to the frames of a video. Never
 recolour photographs, scans, artwork, covers, films or logos, and never
 attribute a house by costume colour.
 
