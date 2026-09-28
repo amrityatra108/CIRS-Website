@@ -283,16 +283,15 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-8",
-        # No banner. The page opens on its own paper composition, built in
-        # tools/pages/curriculum.html: the heading beside a pair of classroom
-        # photographs, the page's facts on a rule, and its own section index
-        # under them. That index
-        # is visible and labelled, so the floating "On this page" control
-        # would be a second copy of it; hence jump False. The opening is on
-        # paper, so the header wears dark lettering: hence litehead.
+        "cache_suffix": "-curriculum-atlas-1",
+        # No banner. The page opens on its own full-window scene, built in
+        # tools/pages/curriculum.html: the gold path of the grades rising
+        # through the school's purple, the heading, the page's facts and its
+        # own section index. That index is visible and labelled, so the
+        # floating "On this page" control would be a second copy of it; hence
+        # jump False. The opening is dark and full-screen, so the header
+        # starts clear over it in light lettering, as over any hero.
         "banner": None,
-        "litehead": True,
         "jump": False,
         "uc": False,
         # One close rather than two: the shared closing scene carries this
@@ -2062,8 +2061,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership")
             or page.get("notfound")):
         # These pages open immediately with their own video, document sheets,
-        # journal masthead or, on Curriculum, the photograph of learning the
-        # page leads with — and School History on its archive's title — so
+        # journal masthead or, on Curriculum, the rising path of the grades
+        # the page leads with — and School History on its archive's title — so
         # the shared curtain is unnecessary. A visitor who has lost their way
         # needs the way back at once, not a curtain first.
         curtain_note = head.index("<!-- The opening curtain")
@@ -2095,8 +2094,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     lite = bool(page.get("litehead"))
     header_start = ("content" if page.get("banner") or page.get("post") or page.get("news")
                     or page.get("notfound")
-                    or slug in ("news", "leadership", "school-info", "blog", "cultural-gallery",
-                                "curriculum")
+                    or slug in ("news", "leadership", "school-info", "blog", "cultural-gallery")
                     else "hero")
     header_tone = "light" if lite else "dark"
     # A page opening on a scrubbed film is marked twice: "film" for the
@@ -2331,7 +2329,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "leadership":
         parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":
-        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-1" defer></script>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
