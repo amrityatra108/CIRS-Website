@@ -494,13 +494,17 @@ PAGES = {
         "nav": "Math Challenge",
         "title": "Math Challenge",
         "description": "The Math Challenge at Chinmaya International Residential School — "
-                       "monthly problems for four grade zones, and the habits of mind they "
-                       "are set to build.",
-        # No banner from the shared builder. This page opens on a field of
-        # mathematics it brings itself, and it is the one dark page on the
-        # site — assets/css/matharena.css, scoped to body.matharena.
+                       "four grade divisions, and the winners' bulletins the mathematics "
+                       "department publishes month by month.",
+        # No banner from the shared builder. The page opens on its own
+        # installation: a sculpture of 216 blocks that the stage's scroll
+        # turns from cube to field to torus (assets/js/math-sculpture.js,
+        # loaded by assets/js/matharena.js), on ivory, so the header opens
+        # in ink. Styles in assets/css/matharena.css, scoped to body.matharena.
         "banner": None,
         "sheet": "matharena",
+        "litehead": True,
+        "cache_suffix": "-kinetic-1",
     },
     "creative-writing": {
         "nav": "Creative Writing",
@@ -1913,12 +1917,33 @@ def build(slug, page):
             '<link rel="modulepreload" href="assets/founder-opening/vendor/three.core.js">\n'
             '<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("sp-boot","sl-body-motion");setTimeout(function(){if(!window.__spiritualOpeningReady)document.documentElement.classList.remove("sp-boot");if(!window.__spiritualBodyReady)document.documentElement.classList.remove("sl-body-motion")},5000)}</script>\n</head>')
 
+    if slug == "math-challenge":
+        # Decided before first paint, so the stage never lays out twice:
+        # mc-motion lets headings ride in, mc-kinetic makes the stage the
+        # tall scrolled installation. Without motion, WebGL or height it
+        # stays an ordinary opening. A timer undoes both if the page script
+        # never starts, so nothing waits on a script that did not arrive.
+        # The sculpture is imported by matharena.js with this same query; the
+        # preload also puts it in front of stage-deploy.py, which ships only
+        # what a page names.
+        head = head.replace("</head>",
+            f'<link rel="modulepreload" href="assets/js/math-sculpture.js?{CACHE_BUST}">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.module.min.js">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.core.js">\n'
+            '<script>(function(){var d=document.documentElement;'
+            'if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;'
+            'd.classList.add("mc-motion");'
+            'if("WebGLRenderingContext" in window&&innerHeight>=500)d.classList.add("mc-kinetic");'
+            'setTimeout(function(){if(!window.__mcBooted)d.classList.remove("mc-motion","mc-kinetic")},6000)'
+            '})()</script>\n</head>')
+
     # Shared typography follows page sheets so the approved roles stay consistent.
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
-    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
-        # These pages open with their own films. The shared curtain would hide
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life", "math-challenge"):
+        # These pages open with their own films (Math Challenge with its
+        # sculpture, whose first frame is the page's heading and actions). The shared curtain would hide
         # the skip control and add a second scroll lock. Keep the no-script
         # footer fallback after removing the curtain-specific head block.
         curtain_note = head.index("<!-- The opening curtain")
@@ -2134,7 +2159,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
-    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life", "math-challenge"):
         intro_start = parts[-1].index("<!-- Opening sequence.")
         intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
         parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
@@ -2212,10 +2237,10 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                        .replace("{{CROSSROADS_LATEST_LINK}}", crossroads_latest())
                        .replace("{{CROSSROADS_LATEST_FEATURE}}", crossroads_latest(feature=True))
                        .replace("{{CROSSROADS_STORIES_COVERS}}", crossroads_stories_covers())
-                       .replace("{{MATH_JOURNEY}}", mathchallenge.journey_html())
-                       .replace("{{MATH_ZONES}}", mathchallenge.zones_html())
-                       .replace("{{MATH_FILTERS}}", mathchallenge.filters_html())
-                       .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html())
+                       .replace("{{MATH_JOURNEY}}", mathchallenge.journey_html() if slug == "math-challenge" else "")
+                       .replace("{{MATH_ZONES}}", mathchallenge.zones_html() if slug == "math-challenge" else "")
+                       .replace("{{MATH_FILTERS}}", mathchallenge.filters_html() if slug == "math-challenge" else "")
+                       .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html() if slug == "math-challenge" else "")
                        .replace("{{CAPTURES_GALLERY}}", captures.gallery_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END}}", captures.end_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
@@ -2317,6 +2342,9 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "news":
         parts.append(f'<script src="assets/js/news-journal.js?{CACHE_BUST}" defer></script>')
     if slug == "math-challenge":
+        # The archive, the divisions and the stage's lettering. It imports
+        # the optional sculpture (math-sculpture.js) itself, so a failed
+        # graphics load cannot take the filters or the links with it.
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if slug == "creative-writing":
         parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
