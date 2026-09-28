@@ -1,228 +1,284 @@
+/* The CIRS experience — one school day, both schools at once.
+
+   The page is complete without this file: the day is written as twelve
+   events, in order, each with the Junior and Senior timings it covers
+   (tools/experience.py). On a window wide and tall enough for it, this turns
+   the same markup into a pinned stage: the event in the middle, each school's
+   own times beside it, and the whole day as two thin lanes underneath with
+   the current event lit in both. Scrolling moves from one event to the next;
+   the photograph changes with the event.
+
+   It owns no smooth scrolling of its own. The position comes from
+   ScrollTrigger's lifecycle when the site's GSAP is loaded (Lenis feeds it),
+   otherwise from a single rAF-throttled scroll listener. Moves requested by
+   the buttons go through the shared "cirs-section-scroll" event, so Lenis
+   lands them when it is running. */
 (function () {
   "use strict";
 
-  var root = document.querySelector(".sj-day");
+  var root = document.querySelector(".xd");
   if (!root) return;
+  var run = root.querySelector("[data-xd-run]");
+  var live = root.querySelector("[data-xd-live]");
+  var nav = root.querySelector("[data-xd-nav]");
+  var status = document.querySelector("[data-xd-status]");
+  if (!run || !live || !nav) return;
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var hasGSAP = typeof window.gsap !== "undefined";
-  var hasScrollTrigger = hasGSAP && typeof window.ScrollTrigger !== "undefined";
-  var journey = root.querySelector(".sj-journey");
-  var sticky = root.querySelector(".sj-journey__sticky");
-  var scenes = Array.prototype.slice.call(root.querySelectorAll(".sj-scenes > *"));
-  var stars = root.querySelector(".sj-stars");
-  var clock = root.querySelector(".sj-clock span");
-  var period = root.querySelector(".sj-clock small");
-  var range = root.querySelector(".sj-chapter small");
-  var title = root.querySelector(".sj-chapter h3");
-  var copy = root.querySelector(".sj-chapter p");
-  var school = root.querySelector(".sj-school");
-  var current = root.querySelector(".sj-controls b");
-  var total = root.querySelector(".sj-controls i");
-  var index = root.querySelector(".sj-index");
-  var status = root.querySelector("[data-day-status]");
-  var trackFill = root.querySelector(".sj-track span");
-  var trackSun = root.querySelector(".sj-track i");
-  var timeline = null;
-  var mode = "senior";
-  var active = -1;
+  var wide = window.matchMedia("(min-width: 900px) and (min-height: 600px)");
+  var hasST = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
 
-  function scheduleArticles(name) {
-    return Array.prototype.slice.call(root.querySelectorAll('[data-schedule-panel="' + name + '"] article'));
+  var $ = function (sel, ctx) { return (ctx || root).querySelector(sel); };
+  var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || root).querySelectorAll(sel)); };
+
+  var FIRST = Number(run.dataset.first), LAST = Number(run.dataset.last);
+
+  /* ---------- The day, read back from the page ---------- */
+  var events = $$(".xp").map(function (li) {
+    var track = function (side) { return $('[data-track="' + side + '"]', li); };
+    var slots = function (side) {
+      return $$("li[data-start]", track(side)).map(function (s) {
+        return { start: Number(s.dataset.start), end: Number(s.dataset.end), kind: s.dataset.kind,
+                 what: $(".xp__what", s).textContent };
+      });
+    };
+    return {
+      el: li,
+      scene: li.dataset.scene || "",
+      same: li.hasAttribute("data-same"),
+      title: $(".xp__title", li).textContent,
+      gap: $(".xp__gap", li).textContent,
+      line: $(".xp__line", li).textContent,
+      body: { junior: $("[data-body]", track("junior")), senior: $("[data-body]", track("senior")) },
+      slots: { junior: slots("junior"), senior: slots("senior") }
+    };
+  });
+  var N = events.length;
+
+  var figures = {};
+  $$(".xp__photo").forEach(function (fig) { figures[fig.dataset.scene] = fig; });
+
+  function hm(t) {
+    var h = Math.floor(t / 60), m = t - h * 60;
+    return { c: ((h + 11) % 12 + 1) + ":" + (m < 10 ? "0" : "") + m, p: h < 12 ? "am" : "pm" };
+  }
+  function range(a, b) {
+    var x = hm(a), y = hm(b);
+    return x.p === y.p ? x.c + "–" + y.c + " " + y.p : x.c + " " + x.p + " – " + y.c + " " + y.p;
   }
 
-  function scheduleData(name) {
-    return scheduleArticles(name).map(function (article) {
-      return {
-        time: article.dataset.time,
-        period: article.dataset.period,
-        range: article.dataset.range,
-        photo: Number(article.dataset.photo),
-        color: article.dataset.color,
-        title: article.querySelector("h4").textContent,
-        copy: article.querySelector("p").textContent
-      };
-    });
+  /* ---------- The stage ---------- */
+  var cards = { junior: $('[data-card="junior"] [data-body]', live), senior: $('[data-card="senior"] [data-body]', live) };
+  var countEl = $("[data-count]", live), titleEl = $("[data-title]", live);
+  var gapEl = $("[data-gap]", live), lineEl = $("[data-line]", live), captionEl = $("[data-caption]", live);
+  var ribbons = $("[data-ribbons]", live);
+  var jumps = $$("[data-go]", nav), stepBtns = $$("[data-step]", nav);
+  var stage = $("[data-xd-stage]");
+
+  // The tint over the photographs follows the hour the Junior event starts:
+  // before light, day, the warmer end of the afternoon, dusk and night. One
+  // purple family throughout, lightest by day; the photographs carry the colour.
+  var SKY = [
+    [290, [22, 16, 30], .9], [350, [30, 22, 38], .78], [440, [36, 27, 46], .6],
+    [560, [40, 31, 50], .46], [900, [40, 31, 50], .46], [1040, [52, 34, 50], .52],
+    [1110, [44, 28, 48], .64], [1200, [30, 22, 38], .76], [1290, [22, 16, 30], .86],
+    [1350, [16, 11, 22], .93]
+  ];
+  function sky(t) {
+    var k = 0;
+    while (k < SKY.length - 2 && t > SKY[k + 1][0]) k++;
+    var a = SKY[k], b = SKY[k + 1];
+    var f = Math.max(0, Math.min(1, (t - a[0]) / (b[0] - a[0])));
+    var rgb = a[1].map(function (c, n) { return Math.round(c + (b[1][n] - c) * f); });
+    return { rgb: rgb.join(" "), a: (a[2] + (b[2] - a[2]) * f).toFixed(3) };
   }
 
-  function updateSchedulePanels() {
-    root.querySelectorAll("[data-schedule-panel]").forEach(function (panel) {
-      var selected = panel.dataset.schedulePanel === mode;
-      panel.classList.toggle("is-active", selected);
-      panel.toggleAttribute("hidden", !selected && document.documentElement.classList.contains("sj-enhanced"));
-    });
-  }
-
-  function renderIndex() {
-    var data = scheduleData(mode);
-    index.innerHTML = data.map(function (chapter, chapterIndex) {
-      return '<li><button type="button" data-jump="' + chapterIndex + '" aria-label="Go to ' + chapter.time + ' ' + chapter.period + '">' + chapter.time + "</button></li>";
-    }).join("");
-    total.textContent = String(data.length);
-  }
-
-  function showChapter(next, announce) {
-    var data = scheduleData(mode);
-    var nextIndex = Math.max(0, Math.min(data.length - 1, next));
-    if (nextIndex === active) return;
-    active = nextIndex;
-    var chapter = data[active];
-    clock.textContent = chapter.time;
-    period.textContent = chapter.period;
-    range.textContent = chapter.range;
-    title.textContent = chapter.title;
-    copy.textContent = chapter.copy;
-    current.textContent = String(active + 1);
-    index.querySelectorAll("button").forEach(function (button, buttonIndex) {
-      if (buttonIndex === active) button.setAttribute("aria-current", "true");
-      else button.removeAttribute("aria-current");
-    });
-    if (announce) status.textContent = chapter.time + " " + chapter.period + ", " + chapter.title + ". " + chapter.copy;
-  }
-
-  function destroyTimeline() {
-    if (!timeline) return;
-    if (timeline.scrollTrigger) timeline.scrollTrigger.kill();
-    timeline.kill();
-    timeline = null;
-  }
-
-  function buildTimeline() {
-    destroyTimeline();
-    document.documentElement.classList.remove("sj-motion");
-    if (!hasScrollTrigger || reduced || window.innerWidth <= 800) return;
-    document.documentElement.classList.add("sj-motion");
-
-    gsap.registerPlugin(ScrollTrigger);
-    var data = scheduleData(mode);
-    active = -1;
-    gsap.set(scenes, { autoAlpha:0, scale:1.04 });
-    gsap.set(scenes[0], { autoAlpha:.68, scale:1 });
-    gsap.set(trackFill, { scaleX:0 });
-    gsap.set(trackSun, { x:0, scale:.82, backgroundColor:"#d5a84b", boxShadow:"0 0 8px rgba(213,168,75,.4)", "--moon-cover":0 });
-    gsap.set(stars, { autoAlpha:0 });
-
-    timeline = gsap.timeline({
-      defaults:{ ease:"none" },
-      scrollTrigger:{
-        trigger:journey,
-        start:"top top",
-        end:"bottom bottom",
-        scrub:.55,
-        invalidateOnRefresh:true,
-        onUpdate:function (self) {
-          showChapter(Math.round(self.progress * (data.length - 1)), false);
-        }
-      }
-    });
-
-    data.forEach(function (chapter, chapterIndex) {
-      var position = chapterIndex;
-      timeline.addLabel("chapter-" + chapterIndex, position);
-      timeline.to(sticky, { backgroundColor:chapter.color, duration:1 }, position);
-      if (chapterIndex > 0) {
-        timeline.to(scenes[chapterIndex - 1], { autoAlpha:0, scale:1.04, duration:.75 }, position - .375);
-        timeline.to(scenes[chapter.photo], { autoAlpha:.68, scale:1, duration:.75 }, position - .375);
-      }
-    });
-    timeline.to(trackFill, { scaleX:1, duration:data.length - 1 }, 0);
-    timeline.to(trackSun, { x:function () { return root.querySelector(".sj-track").clientWidth; }, duration:data.length - 1 }, 0);
-    timeline.to(trackSun, { scale:1.24, backgroundColor:"#ffe7a0", boxShadow:"0 0 10px 3px rgba(255,214,104,.78)", duration:(data.length - 1) * .42 }, 0);
-    timeline.to(trackSun, { scale:1, backgroundColor:"#e99a52", boxShadow:"0 0 8px 2px rgba(225,111,52,.55)", duration:(data.length - 1) * .3 }, (data.length - 1) * .42);
-    timeline.to(trackSun, { scale:1.08, backgroundColor:"#f1eee1", boxShadow:"0 0 8px 2px rgba(211,224,255,.45)", "--moon-cover":1, duration:(data.length - 1) * .18 }, (data.length - 1) * .78);
-    timeline.to(stars, { autoAlpha:1, duration:(data.length - 1) * .18 }, (data.length - 1) * .78);
-    timeline.duration(data.length - 1);
-    showChapter(0, false);
-    requestAnimationFrame(function () { ScrollTrigger.refresh(); });
-  }
-
-  function seekChapter(chapterIndex, announce) {
-    var data = scheduleData(mode);
-    var targetIndex = Math.max(0, Math.min(data.length - 1, chapterIndex));
-    if (!timeline || !timeline.scrollTrigger) {
-      showChapter(targetIndex, announce);
-      return;
-    }
-    var trigger = timeline.scrollTrigger;
-    var destination = trigger.start + (trigger.end - trigger.start) * (targetIndex / (data.length - 1));
-    var event = new CustomEvent("cirs-section-scroll", { cancelable:true, detail:{ top:destination, duration:.65 } });
-    window.dispatchEvent(event);
-    if (!event.defaultPrevented) window.scrollTo({ top:destination, behavior:reduced ? "auto" : "smooth" });
-    showChapter(targetIndex, announce);
-  }
-
-  function selectSchedule(nextMode, announce) {
-    mode = nextMode;
-    active = -1;
-    root.querySelectorAll("[data-schedule]").forEach(function (button) {
-      var selected = button.dataset.schedule === mode;
-      button.classList.toggle("is-active", selected);
-      button.setAttribute("aria-pressed", String(selected));
-    });
-    school.textContent = mode === "senior" ? "Senior School · Grades IX–XII" : "Junior School · Grades V–VIII";
-    updateSchedulePanels();
-    renderIndex();
-    buildTimeline();
-    showChapter(0, announce);
-  }
-
-  function setupRailControls() {
-    document.querySelectorAll("[data-rail-controls]").forEach(function (controls) {
-      var rail = document.getElementById(controls.dataset.railControls);
-      var count = controls.querySelector("p span");
-      if (!rail) return;
-      function items() { return Array.prototype.slice.call(rail.querySelectorAll("figure")); }
-      function nearestIndex() {
-        var railCenter = rail.getBoundingClientRect().left + rail.clientWidth / 2;
-        var distances = items().map(function (item) {
-          var rect = item.getBoundingClientRect();
-          return Math.abs(rect.left + rect.width / 2 - railCenter);
+  var segs = [];
+  function buildRibbons() {
+    if (ribbons.dataset.built) return;
+    ribbons.dataset.built = "1";
+    events.forEach(function (ev, k) {
+      ["junior", "senior"].forEach(function (side) {
+        ev.slots[side].forEach(function (s) {
+          var seg = document.createElement("span");
+          seg.className = "xd__seg";
+          seg.dataset.lane = side;
+          seg.dataset.kind = s.kind;
+          seg.dataset.event = String(k);
+          seg.style.left = ((s.start - FIRST) / (LAST - FIRST) * 100) + "%";
+          seg.style.width = ((s.end - s.start) / (LAST - FIRST) * 100) + "%";
+          ribbons.appendChild(seg);
+          segs.push(seg);
         });
-        return distances.indexOf(Math.min.apply(Math, distances));
-      }
-      function updateCount() { count.textContent = String(nearestIndex() + 1); }
-      function move(direction) {
-        var list = items();
-        var nextIndex = Math.max(0, Math.min(list.length - 1, nearestIndex() + direction));
-        var rect = list[nextIndex].getBoundingClientRect();
-        var railRect = rail.getBoundingClientRect();
-        var target = rail.scrollLeft + rect.left - railRect.left - (rail.clientWidth - rect.width) / 2;
-        rail.scrollTo({ left:target, behavior:reduced ? "auto" : "smooth" });
-        count.textContent = String(nextIndex + 1);
-      }
-      controls.querySelector("[data-rail-prev]").addEventListener("click", function () { move(-1); });
-      controls.querySelector("[data-rail-next]").addEventListener("click", function () { move(1); });
-      rail.addEventListener("scroll", updateCount, { passive:true });
-      rail.addEventListener("keydown", function (event) {
-        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-        event.preventDefault();
-        move(event.key === "ArrowRight" ? 1 : -1);
       });
     });
   }
 
-  document.documentElement.classList.add("sj-enhanced");
-  root.addEventListener("click", function (event) {
+  var current = -1;
+
+  function show(k) {
+    if (k === current) return;
+    current = k;
+    var ev = events[k];
+    countEl.textContent = (k + 1 < 10 ? "0" : "") + (k + 1);
+    titleEl.textContent = ev.title;
+    gapEl.textContent = ev.gap;
+    lineEl.textContent = ev.line;
+    ["junior", "senior"].forEach(function (side) {
+      cards[side].innerHTML = ev.body[side].innerHTML;
+    });
+    live.classList.toggle("is-aligned", ev.same);
+    var fig = ev.scene ? figures[ev.scene] : null;
+    var cap = fig ? fig.querySelector("figcaption") : null;
+    captionEl.textContent = cap ? "Photograph: " + cap.textContent : "";
+    // This event's photograph, and its neighbours' so they are loaded before
+    // they are needed. Nothing further away is drawn.
+    var near = [k - 1, k, k + 1].map(function (n) { return events[n] && events[n].scene; });
+    Object.keys(figures).forEach(function (key) {
+      figures[key].classList.toggle("is-shown", !!fig && key === ev.scene);
+      figures[key].classList.toggle("is-near", near.indexOf(key) !== -1);
+    });
+    segs.forEach(function (seg) { seg.classList.toggle("is-on", Number(seg.dataset.event) === k); });
+    jumps.forEach(function (b, n) {
+      if (n === k) { b.setAttribute("aria-current", "step"); b.tabIndex = 0; }
+      else { b.removeAttribute("aria-current"); b.tabIndex = -1; }
+    });
+    stepBtns[0].disabled = k === 0;
+    stepBtns[1].disabled = k === N - 1;
+    var tone = sky(ev.slots.junior[0].start);
+    stage.style.setProperty("--xd-rgb", tone.rgb);
+    stage.style.setProperty("--xd-a", tone.a);
+  }
+
+  function render(p) {
+    show(Math.max(0, Math.min(N - 1, Math.floor(Math.max(0, p) * N))));
+  }
+
+  /* ---------- Moving through the day ---------- */
+  function runBox() {
+    var box = run.getBoundingClientRect();
+    var y = window.scrollY || window.pageYOffset || 0;
+    return { top: box.top + y, length: Math.max(1, run.offsetHeight - window.innerHeight) };
+  }
+  function progressNow() {
+    var b = runBox();
+    return ((window.scrollY || window.pageYOffset || 0) - b.top) / b.length;
+  }
+  function topFor(k) {
+    var b = runBox();
+    return Math.round(b.top + (k + 0.5) / N * b.length);
+  }
+
+  function goTo(k, focusButton) {
+    k = Math.max(0, Math.min(N - 1, k));
+    var top = topFor(k);
+    var event = new CustomEvent("cirs-section-scroll", { cancelable: true, detail: { top: top, duration: reduced ? 0.01 : 0.9 } });
+    window.dispatchEvent(event);
+    if (!event.defaultPrevented) window.scrollTo({ top: top, behavior: reduced ? "instant" : "smooth" });
+    show(k);
+    announce(k);
+    if (focusButton) jumps[k].focus({ preventScroll: true });
+  }
+
+  function announce(k) {
+    if (!status) return;
+    var ev = events[k], j = ev.slots.junior, s = ev.slots.senior;
+    status.textContent = (k + 1) + " of " + N + ". " + ev.title + ". Junior School: " +
+      range(j[0].start, j[j.length - 1].end) + ". Senior School: " +
+      range(s[0].start, s[s.length - 1].end) + ". " + ev.gap + ".";
+  }
+
+  nav.addEventListener("click", function (event) {
     var button = event.target.closest("button");
-    if (!button) return;
-    if (button.dataset.schedule) selectSchedule(button.dataset.schedule, true);
-    else if (button.hasAttribute("data-prev")) seekChapter(active - 1, true);
-    else if (button.hasAttribute("data-next")) seekChapter(active + 1, true);
-    else if (button.dataset.jump !== undefined) seekChapter(Number(button.dataset.jump), true);
+    if (!button || !nav.contains(button)) return;
+    if (button.hasAttribute("data-step")) goTo(current + Number(button.dataset.step), false);
+    else if (button.hasAttribute("data-go")) goTo(Number(button.dataset.go), false);
   });
-  index.addEventListener("keydown", function (event) {
-    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight" && event.key !== "Home" && event.key !== "End") return;
+  // One tab stop for the twelve steps; the arrow keys move along them.
+  nav.addEventListener("keydown", function (event) {
+    if (!event.target.hasAttribute("data-go")) return;
+    var k = Number(event.target.dataset.go), to = null;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") to = k + 1;
+    else if (event.key === "ArrowLeft" || event.key === "ArrowUp") to = k - 1;
+    else if (event.key === "Home") to = 0;
+    else if (event.key === "End") to = N - 1;
+    if (to === null) return;
     event.preventDefault();
-    var length = scheduleData(mode).length;
-    var next = event.key === "Home" ? 0 : event.key === "End" ? length - 1 : active + (event.key === "ArrowRight" ? 1 : -1);
-    seekChapter(next, true);
-    var target = index.querySelectorAll("button")[Math.max(0, Math.min(length - 1, next))];
-    if (target) target.focus({ preventScroll:true });
+    goTo(to, true);
   });
-  setupRailControls();
-  selectSchedule("senior", false);
+
+  /* ---------- Switching the stage on and off ---------- */
+  var trigger = null, listening = false, queued = false;
+
+  function onScroll() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; render(progressNow()); });
+  }
+
+  function enable() {
+    root.classList.add("is-stage");
+    nav.hidden = false;
+    buildRibbons();
+    current = -1;
+    if (hasST) {
+      window.gsap.registerPlugin(window.ScrollTrigger);
+      // ScrollTrigger is the tick, not the ruler: while it refreshes after a
+      // resize its own progress can be stale, so the page is measured.
+      trigger = window.ScrollTrigger.create({
+        trigger: run, start: "top top", end: "bottom bottom",
+        onUpdate: function () { render(progressNow()); },
+        onRefresh: function () { render(progressNow()); }
+      });
+      window.ScrollTrigger.refresh();
+    } else if (!listening) {
+      listening = true;
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
+    render(progressNow());
+  }
+
+  function disable() {
+    root.classList.remove("is-stage");
+    nav.hidden = true;
+    if (trigger) { trigger.kill(); trigger = null; }
+    if (listening) { window.removeEventListener("scroll", onScroll); listening = false; }
+    Object.keys(figures).forEach(function (key) { figures[key].classList.remove("is-shown", "is-near"); });
+    if (hasST) window.ScrollTrigger.refresh();
+  }
+
+  var on = false;
+  function apply() {
+    if (wide.matches === on) return;
+    // Keep the reader on the same event across the switch.
+    var keep = on ? current : null;
+    var inside = keep !== null && keep >= 0 && progressNow() >= 0 && progressNow() <= 1;
+    on = wide.matches;
+    if (on) enable(); else disable();
+    if (!on && inside) events[keep].el.scrollIntoView({ block: "start", behavior: "instant" });
+  }
+
+  // A resize inside the stage changes its length, so the same scroll offset
+  // is a different event. Hold the event the reader was on before the first
+  // resize of a burst, and put them back on it once the window settles.
+  var resizeTimer, hold = null;
   window.addEventListener("resize", function () {
-    window.clearTimeout(window.__sjResizeTimer);
-    window.__sjResizeTimer = window.setTimeout(buildTimeline, 220);
-  });
+    if (!on) return;
+    if (hold === null) { var p = progressNow(); hold = { k: current, inside: p > 0 && p < 1 }; }
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(function () {
+      var h = hold;
+      hold = null;
+      if (!on || !h || !h.inside || h.k < 0) return;
+      var top = topFor(h.k);
+      var event = new CustomEvent("cirs-section-scroll", { cancelable: true, detail: { top: top, duration: 0.01 } });
+      window.dispatchEvent(event);
+      if (!event.defaultPrevented) window.scrollTo({ top: top, behavior: "instant" });
+      show(h.k);
+    }, 320);
+  }, { passive: true });
+
+  if (wide.addEventListener) wide.addEventListener("change", apply);
+  else if (wide.addListener) wide.addListener(apply);
+  apply();
 }());

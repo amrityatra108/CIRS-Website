@@ -48,6 +48,7 @@ import theatre
 import festivals
 import leadership
 import history
+import experience
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=113"
@@ -344,15 +345,18 @@ PAGES = {
     "the-cirs-experience": {
         "nav": "The CIRS experience",
         "title": "The CIRS experience",
-        "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
-                       "hundred-acre campus it happens on.",
-        # No banner and no hero key: this page opens on a hero of its own,
-        # built in tools/pages/the-cirs-experience.html — a drifting line of
-        # oversized lettering with photographs dealt up through it. It carries
-        # the page's h1 and its own id="top". That hero is off-white, so the
-        # header cannot float over it in white lettering: hence litehead.
+        "description": "Residential life at CIRS: one school day for Junior and Senior School, "
+                       "side by side, and the hundred-acre campus it happens on.",
+        # No banner and no hero key: this page opens on a photograph of its
+        # own, built in tools/pages/the-cirs-experience.html, which carries the
+        # page's h1 and its own id="top". It is dark, so the header floats over
+        # it in light lettering. Every time and photograph on the page is
+        # written from tools/experience.py. The page ends on its own night
+        # section, so it takes no shared closing scene (see below), and nothing
+        # on it is a placeholder, so no under-construction note.
         "sheet": "student-life",
-        "cache_suffix": "-student-life-9",
+        "cache_suffix": "-experience-1",
+        "uc": False,
     },
     "spiritual-life": {
         "nav": "Spiritual Life",
@@ -2192,6 +2196,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         content = history.expand(content)
     if slug == "leadership":
         content = leadership.expand(content)
+    if slug == "the-cirs-experience":
+        content = experience.expand(content, CACHE_BUST)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                         .replace("{{SPORTS_HOUSE_BANDS}}", sports_house_bands_html() if slug == "sports" else "")
                        .replace("{{HOUSES_HERO}}", houses_hero_html())
@@ -2264,7 +2270,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     parts.append("</main>")
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
-        if slug in ("captures", "leadership") or page.get("notfound"):
+        if slug in ("captures", "leadership", "the-cirs-experience") or page.get("notfound"):
             # Captures already ends with its own full-width photograph, and
             # Leadership with its staff photograph and a compact pair of
             # links: a second full-screen scene would compete with both.
@@ -2300,7 +2306,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/founder-opening.js?{CACHE_BUST}-portrait-1" defer></script>')
         parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-5" defer></script>')
     if slug == "the-cirs-experience":
-        parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}-experience-1" defer></script>')
     if slug == "spiritual-life":
         parts.append(f'<script src="assets/js/spiritual.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script type="module" src="assets/js/spiritual-opening.js?{CACHE_BUST}"></script>')
