@@ -1,15 +1,17 @@
-/* Creative Writing — "The Living Manuscript".
+/* Creative Writing: a student literary journal.
    The page is complete without this file: every edition, poem, link and
    download is in the HTML. This adds, in order of the page:
-     the hero's words, which lean towards a pointer and gather into the title
-     the collection switch (All / Junior / Senior) as tabs
-     entrances as each section is reached (never before)
-     the cover-to-edition transition
-     "Give me a line"
-     the afterword's typing
-     the edition reader: one poem at a time, index, progress, drawer
-   html.cw-js was set in the head so nothing is drawn and then hidden;
-   html.cw-still (reduced motion) leaves every piece at rest. */
+     "Another line": a second student's line in the hero, swapped in place
+     the hero's two words parting on the first scroll (wide, tall windows)
+     the editions as two opposing waves around a sticky preview (the same)
+     opening an edition: the chosen title carries over to its page
+     one sliced word, once
+     on an edition, a small "which poem" mark and focus that follows a link
+   The shared script (cirs.js) owns GSAP's registration and Lenis; nothing
+   here creates a second scroll engine, pins for more than a short hold, or
+   listens to the wheel. Reading, on an edition page, has no motion at all.
+   The two media queries are the ones head_html() in creativewriting.py
+   marks <html> with before first paint; keep them in step. */
 (function () {
   "use strict";
 
@@ -18,473 +20,24 @@
   window.__cwBooted = true;
 
   var root = document.documentElement;
-  var reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  if (reduceQuery.matches) root.classList.add("cw-still");
-  var still = root.classList.contains("cw-still");
-  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var SPLIT = "(min-width:900px) and (min-height:620px) and (prefers-reduced-motion:no-preference)";
+  // A wave of faded titles is not for a reader who asked for more contrast.
+  var WAVE = "(min-width:1100px) and (min-height:620px) and (prefers-reduced-motion:no-preference)" +
+             " and (prefers-contrast:no-preference) and (forced-colors:none)";
 
   function $(s, c) { return (c || document).querySelector(s); }
   function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-
-  /* Scroll through the site's own engine (Lenis) when it is running. */
-  function scrollToY(y, duration) {
-    var handled = !window.dispatchEvent(new CustomEvent("cirs-section-scroll", {
-      cancelable: true, detail: { top: y, duration: duration || 0.9 }
-    }));
-    if (!handled) window.scrollTo({ top: y, behavior: still ? "auto" : "smooth" });
-  }
-  function refreshTriggers() {
-    if (window.ScrollTrigger) window.ScrollTrigger.refresh();
-  }
-
-  /* ---------------------------------------------------------- entrances */
-  var observer = null;
-  function reveal(el) { el.classList.add("is-in"); }
-  function watch(els) {
-    if (still || !("IntersectionObserver" in window)) { els.forEach(reveal); return; }
-    if (!observer) {
-      observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          reveal(entry.target);
-          observer.unobserve(entry.target);
-        });
-      }, { rootMargin: "0px 0px -12% 0px", threshold: 0.01 });
-    }
-    els.forEach(function (el) { if (!el.classList.contains("is-in")) observer.observe(el); });
-  }
-  function staggerWall(scope) {
-    $$(".cw-wall", scope).forEach(function (wall) {
-      $$(".cw-wall__item", wall).forEach(function (item, i) {
-        item.style.setProperty("--d", (i % 2) * 0.14 + "s");
-      });
-    });
-  }
-
-  /* ---------------------------------------------------------- hero */
-  function hero() {
-    var el = $("[data-cw-hero]");
-    if (!el) return;
-    var words = $$(".cw-word", el);
-    var title = $("[data-cw-title]", el);
-    var caret = $("[data-cw-caret]", el);
-    var afters = $$("[data-cw-after]", el);
-    afters.forEach(function (a, i) { a.style.setProperty("--d", (0.1 + i * 0.22) + "s"); });
-
-    if (still || !title || !caret || !words.length) {
-      el.classList.add("is-ready");
-      if (!still) el.classList.add("is-assembled");
-      return;
-    }
-    // Arriving part-way down the page (a restored scroll, a link to a
-    // section): the title is simply there.
-    if (window.scrollY > el.offsetHeight * 0.4) {
-      el.classList.add("is-ready", "is-assembled");
-      scrollOut();
-      return;
-    }
-    el.classList.add("is-blank", "is-ready");
-
-    /* Words lean towards a nearby pointer, and drift a little on touch. */
-    var states = words.map(function (w) { return { el: w, x: 0, y: 0, tx: 0, ty: 0, hx: 0, hy: 0 }; });
-    var pointer = { x: -1e5, y: -1e5 };
-    var running = false, assembled = false, visible = true, frame = 0;
-    function measure() {
-      states.forEach(function (s) {
-        var r = s.el.getBoundingClientRect();
-        s.hx = r.left + r.width / 2 - s.x;
-        s.hy = r.top + r.height / 2 - s.y + window.scrollY;
-      });
-    }
-    function tick() {
-      frame = 0;
-      var moving = false, scroll = window.scrollY, R = Math.max(180, Math.min(window.innerWidth, 1400) * 0.2);
-      states.forEach(function (s) {
-        var dx = pointer.x - s.hx, dy = pointer.y - (s.hy - scroll);
-        var d = Math.sqrt(dx * dx + dy * dy);
-        if (d < R && d > 0) {
-          var f = Math.pow(1 - d / R, 2), pull = Math.min(26, d * 0.22);
-          s.tx = dx / d * pull * f * 1.6; s.ty = dy / d * pull * f * 1.6;
-        } else { s.tx = 0; s.ty = 0; }
-        s.x += (s.tx - s.x) * 0.12; s.y += (s.ty - s.y) * 0.12;
-        if (Math.abs(s.tx - s.x) > 0.1 || Math.abs(s.ty - s.y) > 0.1) moving = true;
-        s.el.style.setProperty("--mx", s.x.toFixed(2) + "px");
-        s.el.style.setProperty("--my", s.y.toFixed(2) + "px");
-      });
-      if (moving && !assembled && visible) frame = requestAnimationFrame(tick);
-      else running = false;
-    }
-    function kick() { if (!running && !assembled && visible) { running = true; frame = requestAnimationFrame(tick); } }
-    function onPointer(e) {
-      if (e.pointerType === "touch" && e.type === "pointermove" && !e.isPrimary) return;
-      pointer.x = e.clientX; pointer.y = e.clientY; kick();
-    }
-    function onLeave() { pointer.x = -1e5; pointer.y = -1e5; kick(); }
-    measure();
-    window.addEventListener("resize", measure, { passive: true });
-    el.addEventListener("pointermove", onPointer, { passive: true });
-    el.addEventListener("pointerdown", onPointer, { passive: true });
-    el.addEventListener("pointerleave", onLeave, { passive: true });
-    if (!finePointer) el.classList.add("is-drifting");
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; }).observe(el);
-    }
-
-    /* The gathering: each letter of the title is taken from the nearest
-       scattered word that holds it, and flies to its place. */
-    function assemble() {
-      if (assembled) return;
-      assembled = true;
-      cancelAnimationFrame(frame);
-      window.clearTimeout(timer);
-      ["wheel", "touchmove", "keydown", "scroll"].forEach(function (t) { window.removeEventListener(t, early); });
-
-      var box = el.getBoundingClientRect();
-      var c0 = caret.getBoundingClientRect();
-      el.classList.remove("is-blank", "is-drifting");
-      var c1 = caret.getBoundingClientRect();
-
-      var layer = document.createElement("div");
-      layer.className = "cw-hero__fly";
-      layer.setAttribute("aria-hidden", "true");
-      el.appendChild(layer);
-
-      var sources = [];
-      words.forEach(function (w) {
-        var rot = parseFloat(getComputedStyle(w).getPropertyValue("--r")) || 0;
-        var size = parseFloat(getComputedStyle(w).fontSize) || 20;
-        $$(".cw-l", w).forEach(function (l) {
-          var r = l.getBoundingClientRect();
-          sources.push({ el: l, ch: l.textContent.toLowerCase(), r: r, rot: rot, size: size, used: false });
-        });
-      });
-      var targets = $$(".cw-ch", title);
-      var last = 0;
-      var tone = getComputedStyle(root);
-      var mute = tone.getPropertyValue("--ink-mute").trim() || "#5F5E58";
-      var ink = tone.getPropertyValue("--ink").trim() || "#1F1F1B";
-      targets.forEach(function (t, i) {
-        var tr = t.getBoundingClientRect();
-        var ch = t.textContent.toLowerCase();
-        var best = null, bestD = Infinity;
-        sources.forEach(function (s) {
-          if (s.used || s.ch !== ch) return;
-          var dx = s.r.left - tr.left, dy = s.r.top - tr.top, d = dx * dx + dy * dy;
-          if (d < bestD) { bestD = d; best = s; }
-        });
-        var delay = 120 + i * 42 + Math.random() * 90;
-        var dur = 1150;
-        if (!best) {
-          window.setTimeout(function () { t.classList.add("is-lit"); }, delay + dur * 0.8);
-          return;
-        }
-        best.used = true;
-        // Set at the title's size and scaled down to the word's, so the
-        // letter is drawn sharp when it arrives rather than enlarged.
-        var tSize = parseFloat(getComputedStyle(t).fontSize) || 100;
-        var k = tSize / best.size;
-        var fly = document.createElement("span");
-        fly.className = "cw-fly";
-        fly.textContent = best.el.textContent;
-        fly.style.fontSize = tSize + "px";
-        layer.appendChild(fly);
-        var fw = fly.offsetWidth, fh = fly.offsetHeight;
-        var sx = best.r.left + best.r.width / 2 - box.left, sy = best.r.top + best.r.height / 2 - box.top;
-        fly.style.left = (sx - fw / 2) + "px";
-        fly.style.top = (sy - fh / 2) + "px";
-        best.el.style.opacity = "0";
-        var dx = tr.left + tr.width / 2 - box.left - sx, dy = tr.top + tr.height / 2 - box.top - sy;
-        var anim = fly.animate([
-          { transform: "translate(0,0) rotate(" + best.rot + "deg) scale(" + (1 / k) + ")", opacity: 1, color: mute },
-          { transform: "translate(" + dx + "px," + dy + "px) rotate(0deg) scale(1)", opacity: 1, color: ink, offset: 0.86 },
-          { transform: "translate(" + dx + "px," + dy + "px) rotate(0deg) scale(1)", opacity: 0, color: ink }
-        ], { duration: dur, delay: delay, easing: "cubic-bezier(.7,0,.2,1)", fill: "both" });
-        window.setTimeout(function () { t.classList.add("is-lit"); }, delay + dur * 0.78);
-        last = Math.max(last, delay + dur);
-        void anim;
-      });
-      // Every letter no word gave away fades where it stood.
-      sources.forEach(function (s) {
-        if (s.used) return;
-        s.el.animate([{ opacity: 1, transform: "none", filter: "blur(0)" },
-                      { opacity: 0, transform: "translateY(-10px)", filter: "blur(3px)" }],
-                     { duration: 700, delay: Math.random() * 380, easing: "ease-out", fill: "forwards" });
-      });
-      // The cursor moves from the middle of the page to the end of the title.
-      caret.animate([
-        { transform: "translate(" + (c0.left - c1.left) + "px," + (c0.top - c1.top) + "px) scaleY(" + (c0.height / Math.max(c1.height, 1)) + ")" },
-        { transform: "none" }
-      ], { duration: 1300, delay: 200, easing: "cubic-bezier(.7,0,.2,1)", fill: "backwards" });
-
-      window.setTimeout(function () {
-        el.classList.add("is-assembled");
-        layer.remove();
-        // After the subtitle has finished arriving, so the scrubbed exit
-        // starts from what is on screen.
-        window.setTimeout(scrollOut, 1900);
-      }, Math.max(last, 1500) + 60);
-    }
-    function early(e) {
-      if (e.type === "keydown" && !/^(ArrowDown|PageDown|Space| |End)$/.test(e.key)) return;
-      assemble();
-    }
-    ["wheel", "touchmove", "keydown", "scroll"].forEach(function (t) {
-      window.addEventListener(t, early, { passive: true });
-    });
-    var timer = window.setTimeout(assemble, 1500);
-
-    /* As the hero leaves, CREATIVE and WRITING part to either side: the
-       page opens into its two collections. */
-    function scrollOut() {
-      if (still || !window.gsap || !window.ScrollTrigger) return;
-      var lines = $$(".cw-hero__line", el);
-      var trigger = { trigger: el, start: "top top", end: "bottom top", scrub: 0.6 };
-      if (lines[0]) gsap.to(lines[0], { xPercent: -16, ease: "none", scrollTrigger: trigger });
-      if (lines[1]) gsap.to(lines[1], { xPercent: 16, ease: "none", scrollTrigger: trigger });
-      var fade = { trigger: el, start: "top top", end: "45% top", scrub: 0.4 };
-      gsap.fromTo($$(".cw-hero__sub, .cw-hero__meta", el), { opacity: 1, y: 0 },
-        { opacity: 0, y: -20, ease: "none", immediateRender: false, scrollTrigger: fade });
-      gsap.fromTo($$(".cw-hero__cue", el), { opacity: 1 },
-        { opacity: 0, ease: "none", immediateRender: false, scrollTrigger: fade });
-    }
-  }
-
-  function splitRule() {
-    var split = $("[data-cw-split]");
-    if (!split) return;
-    watch($$(".cw-split__half", split));
-    var rule = $("[data-cw-rule]", split);
-    if (!rule || still || !window.gsap || !window.ScrollTrigger) return;
-    gsap.fromTo(rule, { "--rule": 0 }, {
-      "--rule": 1, ease: "none",
-      scrollTrigger: { trigger: split, start: "top 85%", end: "top 15%", scrub: 0.5 }
-    });
-  }
-
-  /* ---------------------------------------------------------- collections */
-  function collections() {
-    var page = $("[data-cw-page]");
-    var sw = $("[data-cw-switch]");
-    if (!page || !sw) return;
-    var tabs = $$("[data-cw-pick]", sw);
-    var panels = $$("[data-cw-panel]");
-    var thumb = $(".cw-switch__thumb", sw);
-    var active = page.getAttribute("data-cw-active") || "all";
-    var busy = false;
-
-    sw.setAttribute("role", "tablist");
-    sw.removeAttribute("aria-label");
-    sw.setAttribute("aria-label", "Collections");
-    tabs.forEach(function (t) {
-      var key = t.getAttribute("data-cw-pick");
-      t.id = "cw-tab-" + key;
-      t.setAttribute("role", "tab");
-      t.removeAttribute("aria-current");
-      t.setAttribute("aria-selected", String(key === active));
-      t.tabIndex = key === active ? 0 : -1;
-    });
-    panels.forEach(function (p) {
-      p.setAttribute("role", "tabpanel");
-      p.setAttribute("aria-labelledby", "cw-tab-" + p.getAttribute("data-cw-panel"));
-    });
-
-    function place() {
-      var t = tabs.filter(function (x) { return x.getAttribute("data-cw-pick") === active; })[0];
-      if (!t || !thumb) return;
-      sw.style.setProperty("--thumb-x", t.offsetLeft + "px");
-      sw.style.setProperty("--thumb-w", t.offsetWidth + "px");
-      sw.classList.add("is-live");
-    }
-    place();
-    window.addEventListener("resize", place, { passive: true });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
-
-    function panelFor(key) { return panels.filter(function (p) { return p.getAttribute("data-cw-panel") === key; })[0]; }
-    function wire(panel) {
-      staggerWall(panel);
-      watch($$("[data-cw-reveal], .cw-wall__item, .cw-featured", panel));
-    }
-    panels.forEach(function (p) { if (!p.hidden) wire(p); });
-
-    function select(key, opts) {
-      opts = opts || {};
-      if (key === active || busy) { if (opts.scroll) toEditions(); return; }
-      var from = panelFor(active), to = panelFor(key);
-      if (!to) return;
-      active = key;
-      page.setAttribute("data-cw-active", key);
-      tabs.forEach(function (t) {
-        var on = t.getAttribute("data-cw-pick") === key;
-        t.setAttribute("aria-selected", String(on));
-        t.tabIndex = on ? 0 : -1;
-      });
-      place();
-      updateUrl(key);
-      function swap() {
-        if (from) { from.hidden = true; from.classList.remove("is-leaving"); }
-        to.hidden = false;
-        if (!still) {
-          to.classList.add("is-entering");
-          window.setTimeout(function () { to.classList.remove("is-entering"); }, 750);
-        }
-        wire(to);
-        busy = false;
-        refreshTriggers();
-        if (opts.scroll) toEditions();
-      }
-      if (still || !from) { swap(); return; }
-      busy = true;
-      from.classList.add("is-leaving");
-      window.setTimeout(swap, 220);
-    }
-    function toEditions() {
-      var target = $("#editions");
-      if (target) scrollToY(target.getBoundingClientRect().top + window.scrollY - 20, 1.1);
-    }
-    // /creative-writing/junior and /senior are siblings: the address can
-    // follow the switch between them without moving the page's base. On the
-    // root page it stays, since every relative link is written from there.
-    function updateUrl(key) {
-      if (key === "all" || !window.history.replaceState) return;
-      var m = window.location.pathname.match(/\/creative-writing\/(junior|senior)(\.html)?$/);
-      if (!m) return;
-      window.history.replaceState(null, "", key + (m[2] || "") + window.location.search + "#editions");
-    }
-
-    sw.addEventListener("click", function (e) {
-      var t = e.target.closest("[data-cw-pick]");
-      if (!t) return;
-      e.preventDefault();
-      select(t.getAttribute("data-cw-pick"));
-    });
-    sw.addEventListener("keydown", function (e) {
-      var i = tabs.indexOf(document.activeElement);
-      if (i < 0) return;
-      var next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
-      if (next === undefined) return;
-      e.preventDefault();
-      next = (next + tabs.length) % tabs.length;
-      tabs[next].focus();
-      select(tabs[next].getAttribute("data-cw-pick"));
-    });
-    // The two halves of the split open their collection here.
-    $$(".cw-split [data-cw-pick]").forEach(function (a) {
-      a.addEventListener("click", function (e) {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
-        e.preventDefault();
-        e.stopPropagation();
-        select(a.getAttribute("data-cw-pick"), { scroll: true });
-      }, true);
-    });
-  }
-
-  /* ---------------------------------------------------------- cover → edition */
-  function coverTransitions() {
-    if (still) return;
-    var crossDocument = "onpagereveal" in window;
-    document.addEventListener("click", function (e) {
-      var a = e.target.closest && e.target.closest("[data-cw-cover], [data-cw-cover-link]");
-      if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      var cover = a.hasAttribute("data-cw-cover-link")
-        ? $(".cw-featured__cover", a.closest(".cw-featured")) : a;
-      if (!cover) return;
-      $$("[data-cw-cover]").forEach(function (c) { c.style.viewTransitionName = ""; });
-      if (crossDocument) { cover.style.viewTransitionName = "cw-cover"; return; }
-      // Without cross-document transitions, the cover opens to fill the
-      // window in its own colour, and the edition opens on that colour.
-      e.preventDefault();
-      var r = cover.getBoundingClientRect();
-      var veil = document.createElement("div");
-      veil.className = "cw-veil";
-      veil.style.background = getComputedStyle(cover).backgroundColor;
-      body.appendChild(veil);
-      var W = window.innerWidth, H = window.innerHeight;
-      var from = "inset(" + r.top + "px " + (W - r.right) + "px " + (H - r.bottom) + "px " + r.left + "px)";
-      var go = function () { window.location.href = a.href; };
-      var anim = veil.animate([{ clipPath: from }, { clipPath: "inset(0px 0px 0px 0px)" }],
-                              { duration: 520, easing: "cubic-bezier(.7,0,.2,1)", fill: "forwards" });
-      anim.onfinish = go;
-      window.setTimeout(go, 800);
-    });
-    window.addEventListener("pageshow", function () {
-      $$(".cw-veil").forEach(function (v) { v.remove(); });
-      $$("[data-cw-cover]").forEach(function (c) { c.style.viewTransitionName = ""; });
-    });
-  }
-
-  /* ---------------------------------------------------------- give me a line */
-  function lines() {
-    var section = $("[data-cw-lines]");
-    if (!section) return;
-    var templates = $$("template[data-cw-line]", section);
-    var stage = $("[data-cw-line-stage]", section);
-    var button = $("[data-cw-line-button]", section);
-    if (!templates.length || !stage || !button) return;
-    var last = -1;
-    stage.innerHTML = '<p class="cw-line__empty">A line is waiting.</p>';
-    button.hidden = false;
-    function show() {
-      var i;
-      do { i = Math.floor(Math.random() * templates.length); } while (templates.length > 1 && i === last);
-      last = i;
-      var figure = templates[i].content.firstElementChild.cloneNode(true);
-      if (!still) {
-        var p = $("blockquote p", figure);
-        var n = 0;
-        $$("br", p).forEach(function (br) { br.setAttribute("data-br", ""); });
-        Array.prototype.slice.call(p.childNodes).forEach(function (node) {
-          if (node.nodeType !== 3) return;
-          var frag = document.createDocumentFragment();
-          node.textContent.split(/(\s+)/).forEach(function (part) {
-            if (!part) return;
-            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
-            var w = document.createElement("span");
-            w.className = "w"; w.textContent = part; w.style.setProperty("--i", n++);
-            frag.appendChild(w);
-          });
-          p.replaceChild(frag, node);
-        });
-        var cap = $("figcaption", figure);
-        cap.classList.add("is-late");
-        cap.style.setProperty("--late", (0.25 + n * 0.045) + "s");
-      }
-      stage.innerHTML = "";
-      stage.appendChild(figure);
-      stage.classList.remove("is-out");
-      button.firstChild.nodeValue = "Another line ";
-    }
-    button.addEventListener("click", function () {
-      if (still || !$(".cw-line__quote", stage)) { show(); return; }
-      stage.classList.add("is-out");
-      window.setTimeout(show, 230);
-    });
-  }
-
-  /* ---------------------------------------------------------- afterword */
-  function typing() {
-    $$("[data-cw-type]").forEach(function (el) {
-      if (still) { el.classList.add("is-split", "is-in"); return; }
-      var caret = $(".cw-caret", el);
-      var text = el.textContent;
-      var sr = document.createElement("span");
-      sr.className = "sr-only"; sr.textContent = text;
-      var shown = document.createElement("span");
-      shown.setAttribute("aria-hidden", "true");
-      text.split("").forEach(function (ch, i) {
-        var c = document.createElement("span");
-        c.className = "c"; c.textContent = ch; c.style.setProperty("--i", i);
-        shown.appendChild(c);
-      });
-      el.textContent = "";
-      el.appendChild(sr); el.appendChild(shown);
-      if (caret) shown.appendChild(caret);
-      el.classList.add("is-split");
-      watch([el]);
-    });
+  function make(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
   }
 
   /* ---------------------------------------------------------- old addresses */
+  /* The anthology's #poem-… and #chapter-… addresses, sent to where they went. */
   function legacy() {
     var h = window.location.hash.slice(1);
     if (!/^(poem|chapter)-[a-z0-9-]+$/.test(h)) return;
@@ -494,181 +47,435 @@
     if (a) window.location.replace(new URL(a.getAttribute("href"), window.location.href).href);
   }
 
-  /* ---------------------------------------------------------- the reader */
-  function reader() {
-    var section = $("[data-cw-reader]");
-    if (!section) return;
-    var poems = $$("[data-cw-poem]", section);
-    if (!poems.length) return;
-    var rail = $("[data-cw-rail]", section);
-    var indexLinks = $$(".cw-index [data-cw-goto]", section);
-    var nows = $$("[data-cw-now]", section);
-    var fills = $$(".cw-progress__fill", section);
-    var bar = $("[data-cw-drawer-open]", section);
-    var closeBtn = $("[data-cw-drawer-close]", section);
-    var current = -1;
-    var n = poems.length;
+  /* ---------------------------------------------------------- another line */
+  /* One more of the students' lines, from the same stored excerpts the
+     collection is built on. Author, edition and poem link come with it in
+     one piece; nothing is autoplayed, timed or scrambled, and focus stays
+     on the button. Without this the first line stays where it is. */
+  function anotherLine() {
+    var button = $("[data-cw-another]");
+    var stage = $("[data-cw-stage]");
+    if (!button || !stage) return;
+    var pool = $$("template[data-cw-line]").map(function (t) { return t.content.firstElementChild; });
+    if (pool.length < 2) return;
+    var announce = $("[data-cw-announce]");
+    var first = $(".cw-quote", stage);
+    var current = first ? first.getAttribute("data-cw-key") : "";
+    var runs = [];
+    var busy = false;
+    button.hidden = false;
 
-    section.classList.add("is-paged");
-
-    function fromHash() {
-      var h = window.location.hash.slice(1);
-      for (var i = 0; i < n; i++) if (poems[i].id === h) return i;
-      return -1;
-    }
-    function show(i, entering) {
-      poems.forEach(function (p, k) { p.classList.toggle("is-current", k === i); });
-      var p = poems[i];
-      if (entering && !still) {
-        $$(".cw-verse__stanza", p).forEach(function (s, k) { s.style.setProperty("--s", Math.min(k, 8)); });
-        p.classList.remove("is-entering");
-        void p.offsetWidth;
-        p.classList.add("is-entering");
-      }
-      indexLinks.forEach(function (a, k) {
-        if (k === i) a.setAttribute("aria-current", "true");
-        else a.removeAttribute("aria-current");
+    /* Keep the stage as tall as the tallest line so nothing below it moves. */
+    function reserve() {
+      var ghost = stage.cloneNode(false);
+      ghost.removeAttribute("data-cw-stage");
+      ghost.setAttribute("aria-hidden", "true");
+      ghost.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;min-height:0;width:" + stage.clientWidth + "px";
+      stage.parentNode.insertBefore(ghost, stage);
+      var tallest = 0;
+      pool.forEach(function (q) {
+        ghost.innerHTML = "";
+        ghost.appendChild(q.cloneNode(true));
+        tallest = Math.max(tallest, ghost.offsetHeight);
       });
-      var label = (i + 1 < 10 ? "0" : "") + (i + 1);
-      nows.forEach(function (el) { el.textContent = label; });
-      current = i;
-      progress();
+      ghost.remove();
+      stage.style.minHeight = Math.ceil(tallest) + "px";
     }
-    function progress() {
-      var p = poems[current];
-      if (!p) return;
-      var r = p.getBoundingClientRect();
-      var within = clamp((window.innerHeight - r.top) / Math.max(r.height + window.innerHeight * 0.2, 1), 0, 1);
-      var value = (current + within) / n;
-      fills.forEach(function (f) { f.style.setProperty("--p", value.toFixed(4)); });
-    }
-    function go(i, focus) {
-      if (i < 0 || i >= n || i === current) return;
-      show(i, true);
-      if (window.history.replaceState) window.history.replaceState(null, "", "#" + poems[i].id);
-      var top = section.getBoundingClientRect().top + window.scrollY;
-      var poemTop = poems[i].getBoundingClientRect().top + window.scrollY - 110;
-      if (window.scrollY > poemTop + 4 || window.scrollY < top - window.innerHeight * 0.5) scrollToY(Math.max(poemTop, 0), 0.8);
-      if (focus) {
-        var h = $("h2", poems[i]);
-        if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
-      }
-    }
-
-    var start = fromHash();
-    show(start < 0 ? 0 : start, false);
-
-    document.addEventListener("click", function (e) {
-      var a = e.target.closest && e.target.closest("[data-cw-goto]");
-      if (!a || !section.contains(a) || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
-      e.preventDefault();
-      e.stopPropagation();
-      closeDrawer(false);
-      go(parseInt(a.getAttribute("data-cw-goto"), 10), e.detail === 0);
-    }, true);
-    window.addEventListener("hashchange", function () {
-      var i = fromHash();
-      if (i >= 0) go(i, false);
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
-      var t = e.target;
-      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.closest("[role=tablist]"))) return;
-      if (body.classList.contains("menu-open")) return;
-      var r = section.getBoundingClientRect();
-      if (r.bottom < 80 || r.top > window.innerHeight * 0.6) return;
-      e.preventDefault();
-      go(current + (e.key === "ArrowRight" ? 1 : -1), true);
-    });
-    var queued = false;
-    window.addEventListener("scroll", function () {
-      if (queued) return;
-      queued = true;
-      requestAnimationFrame(function () { queued = false; progress(); });
+    reserve();
+    var timer = 0;
+    window.addEventListener("resize", function () {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(reserve, 200);
     }, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(reserve);
 
-    /* Phones and tablets: the index is a sheet drawn up from the bar. */
-    if (!bar || !rail) return;
-    bar.hidden = false;
-    var back = null, lastFocus = null;
-    var narrow = window.matchMedia("(max-width: 1023px)");
-    function isOpen() { return rail.classList.contains("is-open"); }
-    function openDrawer() {
-      if (!narrow.matches) return;
-      lastFocus = document.activeElement;
-      back = document.createElement("div");
-      back.className = "cw-drawer-back";
-      back.addEventListener("click", function () { closeDrawer(true); });
-      // Inside the reader, so it sits under the sheet; the body class lifts
-      // the page above the site's fixed controls while the sheet is open.
-      section.insertBefore(back, section.firstChild);
-      body.classList.add("cw-drawer-open");
-      requestAnimationFrame(function () { back.classList.add("is-on"); });
-      rail.classList.add("is-open");
-      rail.setAttribute("role", "dialog");
-      rail.setAttribute("aria-modal", "true");
-      bar.setAttribute("aria-expanded", "true");
-      window.dispatchEvent(new CustomEvent("cirs-portal-scroll-lock", { detail: { locked: true } }));
-      var target = $('[aria-current="true"]', rail) || closeBtn;
-      window.setTimeout(function () { if (target) target.focus({ preventScroll: true }); }, 60);
+    function pick() {
+      var n = 0, q;
+      do { q = pool[Math.floor(Math.random() * pool.length)]; } while (q.getAttribute("data-cw-key") === current && n++ < 30);
+      return q.cloneNode(true);
     }
-    function closeDrawer(restore) {
-      if (!isOpen()) return;
-      rail.classList.remove("is-open");
-      body.classList.remove("cw-drawer-open");
-      rail.removeAttribute("role");
-      rail.removeAttribute("aria-modal");
-      bar.setAttribute("aria-expanded", "false");
-      if (back) {
-        var b = back; back = null;
-        b.classList.remove("is-on");
-        window.setTimeout(function () { b.remove(); }, 400);
+    function put(node) {
+      stage.innerHTML = "";
+      stage.appendChild(node);
+      current = node.getAttribute("data-cw-key");
+      var read = $("[data-cw-read]");
+      if (read) read.setAttribute("href", node.getAttribute("data-cw-href"));
+      if (announce) {
+        var text = $$(".cw-quote__text .cw-l", node).map(function (l) { return l.textContent; }).join(" ");
+        announce.textContent = "Another line: " + text + ", " +
+          $(".cw-quote__author", node).textContent + ", " + $(".cw-quote__edition", node).textContent + ".";
       }
-      window.dispatchEvent(new CustomEvent("cirs-portal-scroll-lock", { detail: { locked: false } }));
-      if (restore && lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
     }
-    bar.addEventListener("click", function () { if (isOpen()) closeDrawer(true); else openDrawer(); });
-    if (closeBtn) closeBtn.addEventListener("click", function () { closeDrawer(true); });
-    document.addEventListener("keydown", function (e) {
-      if (!isOpen()) return;
-      if (e.key === "Escape") { e.preventDefault(); closeDrawer(true); return; }
-      if (e.key !== "Tab") return;
-      var f = $$("a[href], button:not([hidden])", rail).filter(function (x) { return x.offsetParent !== null; });
-      if (!f.length) return;
-      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
-      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    function stop() { runs.forEach(function (a) { a.cancel(); }); runs = []; }
+
+    button.addEventListener("click", function () {
+      var next = pick();
+      var old = $(".cw-quote", stage);
+      var wasBusy = busy;
+      stop();
+      if (still || !old || !old.animate) { put(next); busy = false; return; }
+      function enter() {
+        put(next);
+        var a = next.animate([{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "none" }],
+                             { duration: 380, easing: "cubic-bezier(.16,1,.3,1)" });
+        a.onfinish = function () { busy = false; };
+        runs.push(a);
+      }
+      // Clicked mid-swap: no queue, straight to the newest line.
+      if (wasBusy) { enter(); return; }
+      busy = true;
+      var out = old.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-10px)" }],
+                            { duration: 260, easing: "ease-in", fill: "forwards" });
+      out.onfinish = enter;
+      runs.push(out);
     });
-    $$('a[href="#presentation"]', rail).forEach(function (a) {
-      a.addEventListener("click", function () { closeDrawer(false); }, true);
+  }
+
+  /* ---------------------------------------------------------- opening an edition */
+  /* A title is a real link and one click opens it. Where the browser can
+     carry an element from one page to the next (cross-document view
+     transitions), the chosen title is named and becomes the edition's own
+     heading. Elsewhere, on the wave, the title swells, the rest let go, and
+     the page follows about half a second later. Lists and phones just
+     navigate. */
+  function openings() {
+    var carries = "onpagereveal" in window;
+    function names() { $$("[data-cw-title]").forEach(function (t) { t.style.viewTransitionName = ""; }); }
+    function reset() {
+      names();
+      $$(".cw-wave.is-leaving").forEach(function (w) { w.classList.remove("is-leaving"); });
+      $$(".cw-wave__item.is-chosen").forEach(function (i) { i.classList.remove("is-chosen"); });
+    }
+    document.addEventListener("click", function (e) {
+      if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest && e.target.closest("a[data-cw-open]");
+      if (!a) return;
+      var title = a.hasAttribute("data-cw-title") ? a : (a.querySelector("[data-cw-title]") || a.closest("[data-cw-title]"));
+      if (!title) return;
+      reset();
+      var wave = a.closest(".cw-wave");
+      var item = a.closest("[data-cw-item]");
+      var waving = wave && item && root.classList.contains("cw-wave-on");
+      if (carries && !still) {
+        title.style.viewTransitionName = "cw-title";
+        if (waving) { wave.classList.add("is-leaving"); item.classList.add("is-chosen"); }
+        return;
+      }
+      if (still || !waving) return;
+      e.preventDefault();
+      wave.classList.add("is-leaving");
+      item.classList.add("is-chosen");
+      window.setTimeout(function () { window.location.href = a.href; }, 460);
     });
-    if (narrow.addEventListener) narrow.addEventListener("change", function () { if (!narrow.matches) closeDrawer(false); });
-    // The bar shows while the poems are on screen, and steps aside after.
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        bar.classList.toggle("is-on", entries[0].isIntersecting);
-      }, { rootMargin: "-30% 0px -20% 0px" }).observe($(".cw-poems", section));
-    } else bar.classList.add("is-on");
+    window.addEventListener("pageshow", reset);
+  }
+
+  /* ---------------------------------------------------------- the reading */
+  /* No motion. A small mark of which poem is in view, and focus that
+     follows an in-page link to its heading. Back and Forward are the
+     browser's own. */
+  function reading() {
+    var poems = $$("[data-cw-poem]");
+    if (poems.length) {
+      var now = $("[data-cw-now]");
+      var who = $(".cw-rail__who");
+      if (now && who && "IntersectionObserver" in window) {
+        var seen = {};
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { seen[en.target.id] = en.isIntersecting; });
+          var here = poems.filter(function (p) { return seen[p.id]; })[0];
+          if (here) {
+            now.textContent = here.getAttribute("data-cw-n");
+            who.textContent = here.getAttribute("data-cw-who");
+          }
+        }, { rootMargin: "-40% 0px -50% 0px" });
+        poems.forEach(function (p) { io.observe(p); });
+      }
+    }
+    if (!$(".cw-edition")) return;
+    // The links between poems are the browser's own fragment navigation (each
+    // carries the page's address, see edition_html), so the address changes
+    // and Back and Forward walk the poems. All that is added is where focus goes.
+    window.addEventListener("hashchange", function () {
+      var id = "";
+      try { id = decodeURIComponent(window.location.hash.slice(1)); } catch (err) { return; }
+      var t = id && document.getElementById(id);
+      var h = t && $("h2", t);
+      if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+    });
+  }
+
+  /* ---------------------------------------------------------- one sliced word */
+  /* "Voices" resolves once, its upper and lower halves drawn together. The
+     real word stays in the heading for readers; the halves are for the eye. */
+  function slice() {
+    if (still || !("IntersectionObserver" in window) || !Element.prototype.animate) return;
+    $$("[data-cw-slice]").forEach(function (h) {
+      var text = h.textContent;
+      var wrap = make("span", "cw-slice");
+      wrap.setAttribute("aria-hidden", "true");
+      var a = make("span", "cw-slice__a", text);
+      var b = make("span", "cw-slice__b", text);
+      wrap.appendChild(a); wrap.appendChild(b);
+      h.textContent = "";
+      h.appendChild(make("span", "sr-only", text));
+      h.appendChild(wrap);
+      a.style.opacity = b.style.opacity = "0";
+      new IntersectionObserver(function (entries, io) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        a.style.opacity = b.style.opacity = "";
+        var opts = { duration: 800, easing: "cubic-bezier(.16,1,.3,1)", fill: "backwards" };
+        a.animate([{ opacity: 0, transform: "translateX(-12%)" }, { opacity: 1, transform: "none" }], opts);
+        var last = b.animate([{ opacity: 0, transform: "translateX(12%)" }, { opacity: 1, transform: "none" }], opts);
+        // Resolved: the heading is simply its word again.
+        last.onfinish = function () { h.textContent = text; };
+      }, { threshold: 0.6 }).observe(h);
+    });
+  }
+
+  /* ---------------------------------------------------------- the hero opens apart */
+  /* Held for a short run (CSS sticky, so the page still scrolls
+     normally): CREATIVE eases left and up, WRITING right and down, and
+     "Two schools. Many voices." comes up between them. The line and the
+     poem fade first. */
+  function heroSplit(mm) {
+    mm.add(SPLIT, function () {
+      var zone = $("[data-cw-zone]");
+      var hero = $("[data-cw-hero]");
+      var a = $("[data-cw-a]");
+      var b = $("[data-cw-b]");
+      var between = $("[data-cw-between]");
+      if (!zone || !hero || !a || !b || !between) return;
+      root.classList.add("cw-split-on");
+      var fades = $$("[data-cw-fade]", hero);
+      var em = function () { return parseFloat(window.getComputedStyle(a).fontSize) || 100; };
+      // How far CREATIVE may go left without touching the edge of the window.
+      var room = function () {
+        return Math.max(0, a.getBoundingClientRect().left - window.gsap.getProperty(a, "x") - 14);
+      };
+      var tl = window.gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: zone, start: "top top", end: "bottom bottom", scrub: true,
+          invalidateOnRefresh: true,
+          onUpdate: function (self) { hero.classList.toggle("is-past", self.progress > 0.55); }
+        }
+      });
+      tl.to(a, {
+        x: function () { return -Math.min(window.innerWidth * 0.08, room()); },
+        y: function () { return -em() * 0.34; }, duration: 1
+      }, 0);
+      tl.to(b, {
+        x: function () { return window.innerWidth * 0.08; },
+        y: function () { return em() * 0.34; }, duration: 1
+      }, 0);
+      tl.fromTo(between, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4 }, 0.3);
+      tl.to(fades, { opacity: 0, y: -18, duration: 0.34 }, 0);
+      return function () {
+        hero.classList.remove("is-past");
+        root.classList.remove("cw-split-on");
+      };
+    });
+  }
+
+  /* ---------------------------------------------------------- the wave */
+  /* One finite list of real links, no clones. Each title is placed by its
+     distance from the reading line (the middle of the window): the nearer,
+     the fuller, larger and straighter; the farther, the fainter and the more
+     it leans, the left and right columns leaning in mirror image, and the
+     two columns drifting very slightly against each other. The preview in
+     the middle is the active title's own text. Which title is active:
+     keyboard focus, else a pointer that has rested on one, else the one on
+     the reading line. */
+  function wave(mm) {
+    mm.add(WAVE, function () {
+      var box = $("[data-cw-wave]");
+      var list = box && $(".cw-wave__list", box);
+      var items = list ? $$("[data-cw-item]", list) : [];
+      var preview = box && $("[data-cw-preview-body]", box);
+      if (!items.length || !preview) return;
+      root.classList.add("cw-wave-on");
+
+      var n = items.length;
+      var left = items.map(function (it) { return it.getAttribute("data-side") === "left"; });
+      var K = 0.06;                   // how far the columns drift against each other
+      var cy = [], listTop = 0, unit = 100, mid = 0, vh = 0, amp = 20, centre = 0;
+      var st = [];                    // per title: x, y, scale, opacity as last computed
+      var scrollIdx = 0, hover = null, focus = null, active = -1;
+      var intent = 0, letgo = 0;
+
+      function measure() {
+        var lr = list.getBoundingClientRect();
+        listTop = lr.top + window.scrollY;
+        cy = items.map(function (it) { return it.offsetTop + it.offsetHeight / 2; });
+        var span = Math.max.apply(null, cy) - Math.min.apply(null, cy);
+        unit = n > 1 ? Math.max(60, span / (n - 1)) : 120;
+        var wr = box.getBoundingClientRect();
+        centre = wr.top + window.scrollY + wr.height / 2;
+        vh = window.innerHeight;
+        amp = clamp(window.innerWidth * 0.017, 14, 26);
+      }
+
+      function compute() {
+        mid = window.scrollY + vh / 2;
+        var drift = K * (mid - centre);
+        var best = -1, bestD = Infinity, cur = Infinity;
+        items.forEach(function (it, i) {
+          var dy = left[i] ? -drift : drift;
+          var d = (listTop + cy[i] + dy - mid) / unit;
+          var ad = Math.abs(d);
+          var w = Math.exp(-Math.pow(ad, 1.5) / 0.9);
+          var lean = Math.sin(clamp(d, -1.75, 1.75) * 0.9);
+          st[i] = { x: (left[i] ? 1 : -1) * amp * lean, y: dy, s: 0.94 + 0.06 * w, o: 0.26 + 0.74 * w, d: ad };
+          if (ad < bestD) { bestD = ad; best = i; }
+          if (i === scrollIdx) cur = ad;
+        });
+        // A little hysteresis, so two titles level with the line do not trade places.
+        if (best !== scrollIdx && bestD < cur - 0.12) scrollIdx = best;
+      }
+
+      function paint() {
+        items.forEach(function (it, i) {
+          var s = st[i];
+          if (!s) return;
+          it.style.transform = "translate3d(" + s.x.toFixed(1) + "px," + s.y.toFixed(1) + "px,0) scale(" + s.s.toFixed(3) + ")";
+          it.style.opacity = (i === active ? 1 : Math.min(s.o, 0.55)).toFixed(2);
+        });
+      }
+
+      /* -- the preview: a copy of the active title's own words */
+      var shown = -1, token = 0, busy = false, runs = [];
+      function fill(i) {
+        var it = items[i];
+        var when = $(".cw-wave__when", it);
+        var frag = document.createDocumentFragment();
+        var bar = make("span", "cw-preview__bar");
+        bar.setAttribute("aria-hidden", "true");
+        frag.appendChild(bar);
+        if (when) frag.appendChild(make("p", "cw-preview__when", when.textContent));
+        frag.appendChild(make("p", "cw-preview__title", $(".cw-wave__title", it).textContent));
+        var detail = $("[data-cw-detail]", it).cloneNode(true);
+        detail.removeAttribute("data-cw-detail");
+        frag.appendChild(detail);
+        preview.textContent = "";
+        preview.appendChild(frag);
+        preview.style.setProperty("--ed-mark", it.style.getPropertyValue("--ed-mark"));
+      }
+      function stop() { runs.forEach(function (a) { a.cancel(); }); runs = []; }
+      function swap(i) {
+        var wasBusy = busy;
+        stop();
+        var mine = ++token;
+        if (shown < 0 || !preview.animate) { fill(i); shown = i; busy = false; return; }
+        shown = i;
+        function enter() {
+          stop();               // a finished "out" still holds its last frame
+          fill(i);
+          busy = true;
+          var a = preview.animate([{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "none" }],
+                                  { duration: 320, easing: "cubic-bezier(.16,1,.3,1)" });
+          a.onfinish = function () { if (mine === token) busy = false; };
+          runs.push(a);
+        }
+        // Scrolling fast: nothing queues. A change mid-swap goes straight in.
+        if (wasBusy) { enter(); return; }
+        busy = true;
+        var out = preview.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-12px)" }],
+                                  { duration: 140, easing: "ease-in", fill: "forwards" });
+        out.onfinish = function () { if (mine === token) enter(); };
+        runs.push(out);
+      }
+
+      function resolve() {
+        var next = focus !== null ? focus : hover !== null ? hover : scrollIdx;
+        if (next === active) return false;
+        active = next;
+        items.forEach(function (it, i) { it.classList.toggle("is-active", i === active); });
+        swap(active);
+        return true;
+      }
+      function frame() { compute(); resolve(); paint(); }
+
+      /* -- pointer and keyboard */
+      var offs = [];
+      function on(target, type, fn, opts) {
+        target.addEventListener(type, fn, opts);
+        offs.push(function () { target.removeEventListener(type, fn, opts); });
+      }
+      items.forEach(function (it, i) {
+        on(it, "pointerenter", function (e) {
+          if (e.pointerType !== "mouse") return;
+          window.clearTimeout(letgo);
+          window.clearTimeout(intent);
+          // Only a pointer that rests on a title changes the preview.
+          intent = window.setTimeout(function () { hover = i; resolve(); paint(); }, 110);
+        });
+        on(it, "pointerleave", function (e) {
+          if (e.pointerType !== "mouse") return;
+          window.clearTimeout(intent);
+          window.clearTimeout(letgo);
+          letgo = window.setTimeout(function () { if (hover === i) { hover = null; resolve(); paint(); } }, 140);
+        });
+        on(it, "focusin", function () { focus = i; resolve(); paint(); });
+        on(it, "focusout", function (e) {
+          if (it.contains(e.relatedTarget)) return;
+          if (focus === i) { focus = null; resolve(); paint(); }
+        });
+      });
+
+      measure();
+      frame();
+      var trigger = window.ScrollTrigger.create({
+        trigger: box, start: "top bottom", end: "bottom top",
+        onUpdate: frame,
+        onRefresh: function () { measure(); frame(); }
+      });
+      var ro = null;
+      if ("ResizeObserver" in window) {
+        ro = new ResizeObserver(function () { measure(); frame(); });
+        ro.observe(list);
+      }
+
+      return function () {
+        window.clearTimeout(intent);
+        window.clearTimeout(letgo);
+        stop();
+        offs.forEach(function (off) { off(); });
+        if (ro) ro.disconnect();
+        trigger.kill();
+        items.forEach(function (it) {
+          it.style.transform = ""; it.style.opacity = ""; it.classList.remove("is-active");
+        });
+        preview.textContent = "";
+        root.classList.remove("cw-wave-on");
+      };
+    });
   }
 
   /* ---------------------------------------------------------- boot */
   legacy();
-  reader();
-  collections();
-  typing();
-  lines();
-  coverTransitions();
-  watch($$("[data-cw-reveal]").filter(function (el) { return !el.closest("[data-cw-panel]"); }));
-  // The shared script owns GSAP's registration and Lenis; the hero, the
-  // split's rule and anything scrubbed wait for it and for the faces.
+  anotherLine();
+  reading();
+  openings();
+  slice();
+
   function late() {
-    if (window.gsap && window.ScrollTrigger) window.gsap.registerPlugin(window.ScrollTrigger);
-    hero();
-    splitRule();
+    var g = window.gsap, ST = window.ScrollTrigger;
+    if (!g || !ST || typeof g.matchMedia !== "function") {
+      // No GSAP: the page stays the plain list it was written as.
+      root.classList.remove("cw-split-on", "cw-wave-on");
+      return;
+    }
+    g.registerPlugin(ST);
+    var mm = g.matchMedia();
+    heroSplit(mm);
+    wave(mm);
+    var refresh = function () { ST.refresh(); };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+    window.addEventListener("load", refresh);
   }
-  var fonts = document.fonts && document.fonts.ready;
-  var started = false;
-  function once() { if (!started) { started = true; late(); } }
-  if (fonts) fonts.then(once);
-  window.setTimeout(once, 1200);
+  // cirs.js sets GSAP up on DOMContentLoaded; this runs just after it.
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", late);
+  else late();
 })();
