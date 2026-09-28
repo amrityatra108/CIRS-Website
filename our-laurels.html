@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Our Laurels</title>
-<meta name="description" content="Competitions won, representative honours and the CIRS students who carried them.">
+<meta name="description" content="Competitions won, representative honours and the CIRS students who carried them: the school's achievement archive, from 2007 to today.">
 <meta name="theme-color" content="#11110F">
 <link rel="canonical" href="https://www.cirschool.org/our-laurels.html">
 <!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
@@ -17,46 +17,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Our Laurels">
-<meta property="og:description" content="Competitions won, representative honours and the CIRS students who carried them.">
+<meta property="og:description" content="Competitions won, representative honours and the CIRS students who carried them: the school's achievement archive, from 2007 to today.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Our Laurels">
-<meta name="twitter:description" content="Competitions won, representative honours and the CIRS students who carried them.">
+<meta name="twitter:description" content="Competitions won, representative honours and the CIRS students who carried them: the school's achievement archive, from 2007 to today.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preload" href="assets/js/navigation.js?b=113-core-3" as="script" fetchpriority="high">
+<link rel="preload" href="assets/js/navigation.js?b=113-laurels-1-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=113">
-<link rel="stylesheet" href="assets/css/cirs.css?b=113">
-<link rel="stylesheet" href="assets/css/pages.css?b=113-lightbox-2">
-<!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
-     removes once it has played. With scripting off nothing removes it, and
-     it covers the page on every page of this site. One rule, applied only
-     when there is no scripting, is the whole fix. Crossroads already does
-     this for its own curtain further down. The footer rule is the same
-     kind of fallback: cirs.js unpins a footer taller than the window, and
-     without it a phone could never scroll up to the top of the footer. -->
-<noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/typography.css?b=113">
-<link rel="stylesheet" href="assets/css/footer.css?b=113-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=113-nav-4">
+<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?b=113-laurels-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=113-laurels-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=113-laurels-1-lightbox-2">
+
+<link rel="stylesheet" href="assets/css/laurels.css?b=113-laurels-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=113-laurels-1">
+<link rel="stylesheet" href="assets/css/footer.css?b=113-laurels-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=113-laurels-1-nav-4">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
-<body>
+<body class="laurels">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__iast" lang="sa-Latn">J&ntilde;&#257;na&#7747; Sev&#257; ca Kau&#347;alam</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -82,7 +67,7 @@
 </button>
 <!-- The original controls stay fixed while the shared controller changes
      only the bar's surface and ink at the opening/content boundary. -->
-<header class="header nv-header" id="header" data-header-mode="content" data-header-start="content" data-header-tone="dark" data-header-surface="light">
+<header class="header nv-header" id="header" data-header-mode="hero" data-header-start="hero" data-header-tone="dark" data-header-surface="light">
   <div class="nv-header__bar">
     <div class="nv-header__side nv-header__side--left">
       <!-- Enquire opens the contact sheet below rather than going anywhere.
@@ -275,70 +260,933 @@
   </div>
 </div>
 <main id="main">
-<section class="pagehead on-dark" id="top" data-ground="#181815">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">Our laurels</span></p>
-    <h1 class="serif" data-split>Honours, <em>Named.</em></h1>
-    <p class="lead">Competitions won, representative honours, and the students who carried them.</p>
+<script src="assets/js/navigation.js?b=113-laurels-1-core-3"></script>
+<!-- Our Laurels: the achievement archive.
+     Every laurel on this page is written from tools/laurels.py, which names
+     the published record each one is copied from. Edit the laurels there,
+     not here. The sheet is assets/css/laurels.css and the motion
+     assets/js/laurels.js; without either, every laurel, name and source is
+     still here, in order. -->
+<div class="lr" id="laurels">
+
+<section class="lr-hero" aria-labelledby="lr-title" data-lr-hero>
+  <div class="lr-hero__stage">
+    <canvas class="lr-field lr-field--hero" data-lr-field="hero" aria-hidden="true"></canvas>
+    <div class="lr-hero__type">
+      <h1 class="lr-hero__title" id="lr-title">
+        <span class="lr-hero__word lr-hero__word--our">Our</span>
+        <span class="lr-hero__word lr-hero__word--laurels">Laurels</span>
+      </h1>
+      <p class="lr-hero__line"><span class="lr-nw">Achievement at CIRS</span>
+        <span class="lr-dot" aria-hidden="true">&middot;</span>
+        <span class="lr-nw">1996 <span class="lr-arrow" aria-hidden="true">&rarr;</span><span class="sr-only">to</span> Today</span></p>
+    </div>
+    <p class="lr-hero__wreath-note" aria-hidden="true"><b>32</b> laurels on record</p>
+    <p class="lr-hero__cue" aria-hidden="true"><span>Scroll</span></p>
+    <div class="lr-hero__peek" data-lr-peek aria-hidden="true"></div>
+  </div>
+  <script type="application/json" id="lr-points">[{"y":2026,"t":"Twenty-four diplomas from twenty-four candidates","c":"Academics · International"},{"y":2026,"t":"99.0 per cent in Class XII Management","c":"Academics"},{"y":2026,"t":"Joint toppers in Class XII Science","c":"Academics"},{"y":2026,"t":"98.60 per cent in Class X","c":"Academics"},{"y":2025,"t":"Winners of the QUZBIZ Zonal Quiz","c":"Academics"},{"y":2025,"t":"Senior champions at The Hindu In School Quiz","c":"Academics"},{"y":2025,"t":"First prize at the Lotus Quiz","c":"Academics"},{"y":2025,"t":"Third at the AQMEN Quiz","c":"Academics"},{"y":2025,"t":"Overall champions, South Zone Yoga","c":"Sport"},{"y":2025,"t":"Under-14 champions, eleven-a-side","c":"Sport"},{"y":2025,"t":"Second runners-up, Under-11 football","c":"Sport"},{"y":2025,"t":"Third place, both Under-19 teams","c":"Sport"},{"y":2025,"t":"Runners-up, Under-16 girls","c":"Sport"},{"y":2025,"t":"First prize for bhajan","c":"Arts"},{"y":2025,"t":"First in Wind, second in Rhythm","c":"Arts"},{"y":2025,"t":"Third place, Under-19 girls’ dance","c":"Arts"},{"y":2025,"t":"First place in public speaking","c":"Speech"},{"y":2025,"t":"Three places in English declamation","c":"Speech"},{"y":2025,"t":"Second and fourth in storytelling","c":"Speech"},{"y":2025,"t":"Second place in English extempore","c":"Speech"},{"y":2025,"t":"Laurels at the Sahodaya Spell Bee","c":"Speech"},{"y":2019,"t":"Second in India, first in Tamil Nadu","c":"The School"},{"y":2019,"t":"A CBSE Lead School","c":"Leadership · The School"},{"y":2019,"t":"Every candidate above 80 per cent","c":"Academics"},{"y":2017,"t":"Top 500 Schools of India","c":"The School"},{"y":2012,"t":"The CCMT Education Cell Vision Award","c":"The School"},{"y":2011,"t":"The International School Award","c":"International · The School"},{"y":2008,"t":"Valmiki take the Khel Mela","c":"Sport"},{"y":2008,"t":"Vishwamitra win the Aquatic Meet","c":"Sport"},{"y":2008,"t":"Four quizzes, four winners","c":"Academics"},{"y":2007,"t":"Invited to Rashtrapati Bhavan","c":"Leadership"},{"y":"","t":"The Green School Award","c":"The School"}]</script>
+</section>
+
+<section class="lr-forms" aria-labelledby="lr-forms-title" data-lr-forms>
+  <div class="lr-forms__stage">
+    <header class="lr-forms__head wrap">
+      <p class="lr-kicker">Achievement at CIRS</p>
+      <h2 class="lr-forms__title" id="lr-forms-title">Excellence has many forms.</h2>
+    </header>
+    <ol class="lr-forms__list">
+      <li class="lr-form lr-form--1" data-form="academics" style="--len:9">
+        <h3 class="lr-form__word" aria-label="Academics"><span aria-hidden="true" style="--i:0">A</span><span aria-hidden="true" style="--i:1">c</span><span aria-hidden="true" style="--i:2">a</span><span aria-hidden="true" style="--i:3">d</span><span aria-hidden="true" style="--i:4">e</span><span aria-hidden="true" style="--i:5">m</span><span aria-hidden="true" style="--i:6">i</span><span aria-hidden="true" style="--i:7">c</span><span aria-hidden="true" style="--i:8">s</span></h3>
+        <figure class="lr-form__media"><div class="lr-form__frame"><img src="assets/img/life-split-academic.jpg" width="1800" height="1200" alt="CIRS students at their desks during an examination, one looking up" sizes="(max-width: 760px) 92vw, 46vw" loading="lazy" decoding="async"></div><figcaption>An examination hall at CIRS</figcaption></figure>
+        <p class="lr-form__note"><span class="lr-form__n">01</span> Twenty-four IB diplomas from twenty-four candidates, May 2026.</p>
+      </li>
+      <li class="lr-form lr-form--2" data-form="sport" style="--len:5">
+        <h3 class="lr-form__word" aria-label="Sport"><span aria-hidden="true" style="--i:0">S</span><span aria-hidden="true" style="--i:1">p</span><span aria-hidden="true" style="--i:2">o</span><span aria-hidden="true" style="--i:3">r</span><span aria-hidden="true" style="--i:4">t</span></h3>
+        <figure class="lr-form__media"><div class="lr-form__frame"><img src="assets/img/sports/hero-track.jpg" width="2400" height="1500" alt="Runners rounding the CIRS athletics track, flags and palms behind them" sizes="(max-width: 760px) 92vw, 46vw" loading="lazy" decoding="async"></div><figcaption>The CIRS athletics track</figcaption></figure>
+        <p class="lr-form__note"><span class="lr-form__n">02</span> Overall champions of the South Zone Yoga Competition, July 2025.</p>
+      </li>
+      <li class="lr-form lr-form--3" data-form="arts" style="--len:4">
+        <h3 class="lr-form__word" aria-label="Arts"><span aria-hidden="true" style="--i:0">A</span><span aria-hidden="true" style="--i:1">r</span><span aria-hidden="true" style="--i:2">t</span><span aria-hidden="true" style="--i:3">s</span></h3>
+        <figure class="lr-form__media"><div class="lr-form__frame"><img src="assets/img/arts/ensemble.jpg" width="1600" height="1194" alt="A row of dancers in costume raising their arms on a stage lit in violet" sizes="(max-width: 760px) 92vw, 46vw" loading="lazy" decoding="async"></div><figcaption>A dance ensemble on the CIRS stage</figcaption></figure>
+        <p class="lr-form__note"><span class="lr-form__n">03</span> First prize at the Interschool Bhajan Competition, July 2025.</p>
+      </li>
+      <li class="lr-form lr-form--4" data-form="innovation" style="--len:10">
+        <h3 class="lr-form__word" aria-label="Innovation"><span aria-hidden="true" style="--i:0">I</span><span aria-hidden="true" style="--i:1">n</span><span aria-hidden="true" style="--i:2">n</span><span aria-hidden="true" style="--i:3">o</span><span aria-hidden="true" style="--i:4">v</span><span aria-hidden="true" style="--i:5">a</span><span aria-hidden="true" style="--i:6">t</span><span aria-hidden="true" style="--i:7">i</span><span aria-hidden="true" style="--i:8">o</span><span aria-hidden="true" style="--i:9">n</span></h3>
+        <figure class="lr-form__media"><div class="lr-form__frame"><img src="assets/img/news/science-expo-1200.webp" width="1200" height="620" alt="A CIRS student explaining a science exhibit to a visitor at the Science Expo" sizes="(max-width: 760px) 92vw, 46vw" loading="lazy" decoding="async"></div><figcaption>The Science Expo, 25 July 2025</figcaption></figure>
+        <p class="lr-form__note"><span class="lr-form__n">04</span> More than 140 models and activities at the Science Expo, July 2025.</p>
+      </li>
+      <li class="lr-form lr-form--5" data-form="leadership" style="--len:10">
+        <h3 class="lr-form__word" aria-label="Leadership"><span aria-hidden="true" style="--i:0">L</span><span aria-hidden="true" style="--i:1">e</span><span aria-hidden="true" style="--i:2">a</span><span aria-hidden="true" style="--i:3">d</span><span aria-hidden="true" style="--i:4">e</span><span aria-hidden="true" style="--i:5">r</span><span aria-hidden="true" style="--i:6">s</span><span aria-hidden="true" style="--i:7">h</span><span aria-hidden="true" style="--i:8">i</span><span aria-hidden="true" style="--i:9">p</span></h3>
+        <figure class="lr-form__media"><div class="lr-form__frame"><img src="assets/img/news/class-representative-elections-1200.webp" width="1200" height="620" alt="A CIRS student writing at a desk during the class representative elections, an NCC cadet beside her" sizes="(max-width: 760px) 92vw, 46vw" loading="lazy" decoding="async"></div><figcaption>Class Representative Elections, 25 April 2025</figcaption></figure>
+        <p class="lr-form__note"><span class="lr-form__n">05</span> Every classroom a constituency: the class elections of April 2025.</p>
+      </li>
+      <li class="lr-form lr-form--6" data-form="service" style="--len:7">
+        <h3 class="lr-form__word" aria-label="Service"><span aria-hidden="true" style="--i:0">S</span><span aria-hidden="true" style="--i:1">e</span><span aria-hidden="true" style="--i:2">r</span><span aria-hidden="true" style="--i:3">v</span><span aria-hidden="true" style="--i:4">i</span><span aria-hidden="true" style="--i:5">c</span><span aria-hidden="true" style="--i:6">e</span></h3>
+        <figure class="lr-form__media"><div class="lr-form__frame"><img src="assets/img/news/seva-week-1200.webp" width="1200" height="620" alt="CIRS students handing supplies to a member of the community during Seva Week" sizes="(max-width: 760px) 92vw, 46vw" loading="lazy" decoding="async"></div><figcaption>Seva Week, April 2025</figcaption></figure>
+        <p class="lr-form__note"><span class="lr-form__n">06</span> Rallies, care homes and temple grounds: Seva Week, every April.</p>
+      </li>
+    </ol>
+    <p class="lr-forms__count" aria-hidden="true"><span data-lr-form-n>01</span> / 06</p>
   </div>
 </section>
-<script src="assets/js/navigation.js?b=113-core-3"></script>
-<section class="section" id="what">
+
+<section class="lr-numbers" aria-labelledby="lr-numbers-title">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="marker"><span class="sc">In preparation</span></p>
-      <h2 class="serif h2" data-split>What will be <em>on this page.</em></h2>
-    </div>
+    <header class="lr-numbers__head">
+      <p class="lr-kicker lr-kicker--dark">In figures</p>
+      <h2 class="lr-numbers__title" id="lr-numbers-title">Counted, not claimed.</h2>
+      <p class="lr-numbers__lead">Every figure below is taken from a result the school has
+        published, and links to it.</p>
+    </header>
+    <ol class="lr-numbers__list">
+      <li class="lr-number">
+        <p class="lr-number__figure" data-count="24"><span class="lr-number__big">24</span><span class="lr-number__suffix">/24</span></p>
+        <div class="lr-number__copy">
+          <p class="lr-number__label">IB Diplomas awarded</p>
+          <p class="lr-number__context">Every candidate in the May 2026 examination earned the diploma.</p>
+          <p class="lr-source">Source: <a href="news.html#ib-results-2026">The school&rsquo;s IB results brief</a></p>
+        </div>
+      </li>
+      <li class="lr-number">
+        <p class="lr-number__figure" data-count="45"><span class="lr-number__big">45</span><span class="lr-number__suffix">/45</span></p>
+        <div class="lr-number__copy">
+          <p class="lr-number__label">The maximum, twice</p>
+          <p class="lr-number__context">Two students reached the highest score the IB Diploma allows.</p>
+          <p class="lr-source">Source: <a href="news.html#ib-results-2026">The school&rsquo;s IB results brief</a></p>
+        </div>
+      </li>
+      <li class="lr-number">
+        <p class="lr-number__figure" data-count="17"><span class="lr-number__big">17</span></p>
+        <div class="lr-number__copy">
+          <p class="lr-number__label">Medals at South Zone Yoga</p>
+          <p class="lr-number__context">Six gold, five silver and six bronze, and the Overall Championship, July 2025.</p>
+          <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+        </div>
+      </li>
+      <li class="lr-number">
+        <p class="lr-number__figure" data-count="8"><span class="lr-number__big">8</span><span class="lr-number__suffix">th</span></p>
+        <div class="lr-number__copy">
+          <p class="lr-number__label">Year first in Tamil Nadu</p>
+          <p class="lr-number__context">Education World&rsquo;s 2019 survey, which also placed CIRS second in India among co-educational boarding schools.</p>
+          <p class="lr-source">Source: <a href="school-history.html#record-ranking-2019">School History: Education World survey</a></p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
 
-    <dl class="factrail rv">
-      <div><dt>Inter-school</dt><dd>Competition names, years and placings</dd></div>
-      <div><dt>District and state</dt><dd>Selections and results</dd></div>
-      <div><dt>National</dt><dd>Representative honours and participation</dd></div>
-      <div><dt>Inter-house</dt><dd>The house championship and its holders</dd></div>
-    </dl>
-
-    <p class="note rv" style="margin-top:24px"><em>[Placeholder &mdash; competition names, years, placings and the students involved, to be supplied by the sports office and the activities office.]</em></p>
-
-    <div class="soon__onward rv">
-      <a class="btn btn--outline" href="sports.html">Our Sports</a>
+<section class="lr-reel" aria-labelledby="lr-reel-title" data-lr-reel>
+  <div class="lr-reel__stage">
+    <header class="lr-reel__head">
+      <p class="lr-kicker">The laurel reel</p>
+      <h2 class="lr-reel__title" id="lr-reel-title">From Rashtrapati Bhavan<br>to forty-five out of forty-five.</h2>
+      <p class="lr-reel__lead">Eight honours from 2007&ndash;2026, in the order they came.</p>
+    </header>
+    <p class="lr-reel__progress" aria-hidden="true"><span class="lr-reel__bar"><i data-lr-reel-bar></i></span></p>
+    <div class="lr-reel__viewport">
+      <ol class="lr-reel__track" data-lr-track>
+        <li class="lr-spread lr-spread--a" data-year="2007">
+          <article class="lr-spread__inner" aria-labelledby="reel-kalam-2007">
+            <p class="lr-spread__year" aria-hidden="true">2007</p>
+            <figure class="lr-spread__media"><div class="lr-spread__frame"><img src="assets/img/history/kalam-2007-sm.jpg" width="640" height="921" alt="The first typed page of the school&#x27;s account of its students&#x27; meeting with President A. P. J. Abdul Kalam" sizes="(max-width: 760px) 92vw, 34vw" loading="lazy" decoding="async"></div><figcaption>The first page of the school&rsquo;s account of the meeting</figcaption></figure>
+            <div class="lr-spread__copy">
+              <p class="lr-spread__meta"><span>Leadership</span><span>National</span><span>7 May 2007</span></p>
+              <h3 class="lr-spread__title" id="reel-kalam-2007">Invited to Rashtrapati Bhavan</h3>
+              <p class="lr-spread__event">An interaction with President A.&nbsp;P.&nbsp;J. Abdul Kalam, New Delhi</p>
+              <p class="lr-spread__text">A vacation assignment on the President&rsquo;s &lsquo;Vision for India 2020&rsquo;, recast by the school as &lsquo;My Vision for Myself, my Family, my School and my Country&rsquo;, led to an invitation: thirty-two students from Classes VI to XII met President Kalam in the Committee Room of Rashtrapati Bhavan.</p>
+              <p class="lr-source">Source: <a href="school-history.html#record-kalam-2007">School History: At Rashtrapati Bhavan</a></p>
+            </div>
+          </article>
+        </li>
+        <li class="lr-spread lr-spread--b" data-year="2008">
+          <article class="lr-spread__inner" aria-labelledby="reel-khel-mela-2008">
+            <p class="lr-spread__year" aria-hidden="true">2008</p>
+            <figure class="lr-spread__media"><div class="lr-spread__frame"><img src="assets/img/history/sakshi-2008-sm.jpg" width="640" height="871" alt="The cover of the Chinmaya Sakshi e-newsletter, summer special, May 2008" sizes="(max-width: 760px) 92vw, 34vw" loading="lazy" decoding="async"></div><figcaption><i>Chinmaya Sakshi</i>, May 2008: the newsletter that printed the year&rsquo;s house results</figcaption></figure>
+            <div class="lr-spread__copy">
+              <p class="lr-spread__meta"><span>Sport</span><span>Inter-house</span><span>February 2008</span></p>
+              <h3 class="lr-spread__title" id="reel-khel-mela-2008">Valmiki take the Khel Mela</h3>
+              <p class="lr-spread__event">Khel Mela, the 12th Annual Athletic and Aquatic Meet</p>
+              <p class="lr-spread__text">Valmiki won the overall championship and the best march past. Vasishta and Vishwamitra shared the award for best individual activities, and the list of winners gives the best drill to Vyasa (the same issue&rsquo;s account of the drill says the cup went to Vasishta and Vyasa together).</p>
+              <p class="lr-source">Source: <a href="houses.html#record"><i>Sakshi</i>, March 2008, on the Houses record</a></p>
+            </div>
+          </article>
+        </li>
+        <li class="lr-spread lr-spread--c" data-year="2011">
+          <article class="lr-spread__inner" aria-labelledby="reel-isa-2011">
+            <p class="lr-spread__year" aria-hidden="true">2011</p>
+            <figure class="lr-spread__media"><div class="lr-spread__frame"><img src="assets/img/history/isa-2010-sm.jpg" width="640" height="943" alt="The first page of the CIRS Junior School holiday assignment, December 2010, explaining the International School Award" sizes="(max-width: 760px) 92vw, 34vw" loading="lazy" decoding="async"></div><figcaption>The December 2010 assignment set for the International School Award programme</figcaption></figure>
+            <div class="lr-spread__copy">
+              <p class="lr-spread__meta"><span>International &middot; The School</span><span>International</span><span>2011</span></p>
+              <h3 class="lr-spread__title" id="reel-isa-2011">The International School Award</h3>
+              <p class="lr-spread__event">British Council</p>
+              <p class="lr-spread__text">CIRS received the British Council&rsquo;s International School Award, which recognises good practice in bringing an international dimension into the curriculum. The Junior School had taken up the programme the year before, with holiday assignments on the wider world.</p>
+              <p class="lr-source">Source: <a href="school-history.html#record-isa-award-2011">School History: The International School Award</a></p>
+            </div>
+          </article>
+        </li>
+        <li class="lr-spread lr-spread--d" data-year="2012">
+          <article class="lr-spread__inner" aria-labelledby="reel-vision-award-2012">
+            <p class="lr-spread__year" aria-hidden="true">2012</p>
+            <figure class="lr-spread__media"><div class="lr-spread__frame"><img src="assets/img/history/vision-2012-lg.jpg" width="1400" height="933" alt="A trophy inscribed Central Chinmaya Mission Trust Education Cell Vision Award 2012, held up with its certificate by a woman in a sari and a swami in saffron" sizes="(max-width: 760px) 92vw, 34vw" loading="lazy" decoding="async"></div><figcaption>The Vision Award and its certificate at the presentation. The people pictured are not named in the school&rsquo;s record</figcaption></figure>
+            <div class="lr-spread__copy">
+              <p class="lr-spread__meta"><span>The School</span><span>2012</span></p>
+              <h3 class="lr-spread__title" id="reel-vision-award-2012">The CCMT Education Cell Vision Award</h3>
+              <p class="lr-spread__event">Education Cell, Central Chinmaya Mission Trust</p>
+              <p class="lr-spread__text">The Education Cell of the Central Chinmaya Mission Trust presented its Vision Award for 2012 to CIRS, Coimbatore.</p>
+              <p class="lr-source">Source: <a href="school-history.html#record-vision-award-2012">School History: The CCMT Education Cell Vision Award</a></p>
+            </div>
+          </article>
+        </li>
+        <li class="lr-spread lr-spread--a" data-year="2017">
+          <article class="lr-spread__inner" aria-labelledby="reel-brainfeed-2017">
+            <p class="lr-spread__year" aria-hidden="true">2017</p>
+            <figure class="lr-spread__media"><div class="lr-spread__frame"><img src="assets/img/history/brainfeed-2017-lg.jpg" width="1400" height="1746" alt="A wooden plaque with a gold panel reading brainfeed school excellence awards, Top 500 Schools of India 2017-18" sizes="(max-width: 760px) 92vw, 34vw" loading="lazy" decoding="async"></div><figcaption>The plaque, dated 12 November 2017, Bengaluru</figcaption></figure>
+            <div class="lr-spread__copy">
+              <p class="lr-spread__meta"><span>The School</span><span>National</span><span>12 November 2017</span></p>
+              <h3 class="lr-spread__title" id="reel-brainfeed-2017">Top 500 Schools of India</h3>
+              <p class="lr-spread__event">Brainfeed School Excellence Awards 2017&ndash;18, Bengaluru</p>
+              <p class="lr-spread__text">Brainfeed&rsquo;s School Excellence Awards named CIRS among the Top 500 Schools of India 2017&ndash;18, in the category Best International Boarding / Happiness Quotient Index / Influential School Brand, and among the best international schools of Tamil Nadu.</p>
+              <p class="lr-source">Source: <a href="school-history.html#record-brainfeed-2017">School History: Brainfeed Top 500 Schools of India</a></p>
+            </div>
+          </article>
+        </li>
+        <li class="lr-spread lr-spread--e" data-year="2019">
+          <article class="lr-spread__inner" aria-labelledby="reel-ranking-2019">
+            <p class="lr-spread__year" aria-hidden="true">2019</p>
+            <figure class="lr-spread__media"><div class="lr-spread__frame"><img src="assets/img/history/report-2019-sm.jpg" width="640" height="940" alt="The first page of the CIRS Annual Report dated 15 October 2019" sizes="(max-width: 760px) 92vw, 34vw" loading="lazy" decoding="async"></div><figcaption>Annual Report, 15 October 2019, which records the survey</figcaption></figure>
+            <div class="lr-spread__copy">
+              <p class="lr-spread__meta"><span>The School</span><span>National</span><span>2019</span></p>
+              <h3 class="lr-spread__title" id="reel-ranking-2019">Second in India, first in Tamil Nadu</h3>
+              <p class="lr-spread__event">Education World school survey, conducted by C fore</p>
+              <p class="lr-spread__text">In Education World&rsquo;s 2019 survey CIRS rose from fourth to second place in the country among co-educational boarding schools, and kept first place in Tamil Nadu for the eighth consecutive year.</p>
+              <p class="lr-source">Source: <a href="school-history.html#record-ranking-2019">School History: Education World survey</a></p>
+            </div>
+          </article>
+        </li>
+        <li class="lr-spread lr-spread--b" data-year="2025">
+          <article class="lr-spread__inner" aria-labelledby="reel-yoga-2025">
+            <p class="lr-spread__year" aria-hidden="true">2025</p>
+            <figure class="lr-spread__media"><div class="lr-spread__frame"><img src="assets/img/sports-experience/yoga-group-wide.webp" width="1920" height="1200" alt="CIRS students in blue tracksuits holding a standing yoga pose on the school ground, hills behind them" sizes="(max-width: 760px) 92vw, 34vw" loading="lazy" decoding="async"></div><figcaption>Yoga on the CIRS ground, beneath the Siruvani hills</figcaption></figure>
+            <div class="lr-spread__copy">
+              <p class="lr-spread__meta"><span>Sport</span><span>Zonal</span><span>13 July 2025</span></p>
+              <h3 class="lr-spread__title" id="reel-yoga-2025">Overall champions, South Zone Yoga</h3>
+              <p class="lr-spread__event">South Zone Yoga Competition 2025&ndash;26, School Games Sport Development Foundation India, Erode</p>
+              <p class="lr-spread__text">Across every category, CIRS students brought home six gold, five silver and six bronze medals, and with them the Overall Championship.</p>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </article>
+        </li>
+        <li class="lr-spread lr-spread--d" data-year="2026">
+          <article class="lr-spread__inner" aria-labelledby="reel-ib-2026">
+            <p class="lr-spread__year" aria-hidden="true">2026</p>
+            <figure class="lr-spread__media"><div class="lr-spread__frame"><img src="assets/img/results-ib-lab.webp" width="1800" height="1200" alt="A CIRS student looking into a microscope in a biology laboratory" sizes="(max-width: 760px) 92vw, 34vw" loading="lazy" decoding="async"></div><figcaption>A biology practical at CIRS</figcaption></figure>
+            <div class="lr-spread__copy">
+              <p class="lr-spread__meta"><span>Academics &middot; International</span><span>International</span><span>May 2026</span></p>
+              <h3 class="lr-spread__title" id="reel-ib-2026">Twenty-four diplomas from twenty-four candidates</h3>
+              <p class="lr-spread__event">IB Diploma Programme, May 2026 examination</p>
+              <p class="lr-spread__text">Every candidate registered for the May 2026 IB Diploma examination was awarded the diploma, with an average of 39.4 points. Twelve scored 40 or above. Adithyan Diwakar Vidya and Shriya Shruti Misra both scored 45 out of 45, the maximum the Diploma allows.</p>
+              <p class="lr-source">Source: <a href="news.html#ib-results-2026">The school&rsquo;s IB results brief</a></p>
+            </div>
+          </article>
+        </li>
+      </ol>
     </div>
   </div>
 </section>
-<section class="uc">
-  <div class="wrap uc__inner">
-    <span class="uc__mark" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4.5v4M8 11.2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.2"/></svg>
-    </span>
-    <div>
-      <p class="uc__label">Under construction</p>
-      <p class="uc__text">This page is still being written. Photographs, names and figures marked
-        in brackets are placeholders awaiting the school, and more will be added here in the weeks
-        ahead. <a href="mailto:info@cirschool.org">Tell us what is missing.</a></p>
+
+<section class="lr-features" aria-labelledby="lr-features-title">
+  <h2 class="sr-only" id="lr-features-title">Featured laurels</h2>
+  <article class="lr-feature lr-feature--low-left" id="featured-ib-2026" aria-labelledby="feature-ib-2026-title">
+    <figure class="lr-feature__media"><div class="lr-feature__frame"><img src="assets/img/results-ib-lab.webp" width="1800" height="1200" alt="A CIRS student looking into a microscope in a biology laboratory" sizes="100vw" loading="lazy" decoding="async"></div><figcaption class="lr-feature__cap">A biology practical at CIRS</figcaption></figure>
+    <div class="lr-feature__copy">
+      <p class="lr-feature__index" aria-hidden="true">01</p>
+      <p class="lr-feature__meta"><span>Academics &middot; International</span><span>International</span><span>May 2026</span></p>
+      <h3 class="lr-feature__title" id="feature-ib-2026-title" aria-label="Two perfect scores."><span class="lr-line"><span style="--i:0">Two</span></span> <span class="lr-line"><span style="--i:1">perfect</span></span> <span class="lr-line"><span style="--i:2">scores.</span></span></h3>
+      <p class="lr-feature__event">IB Diploma Programme, May 2026 examination</p>
+      <p class="lr-feature__text">Every candidate registered for the May 2026 IB Diploma examination was awarded the diploma, with an average of 39.4 points. Twelve scored 40 or above. Adithyan Diwakar Vidya and Shriya Shruti Misra both scored 45 out of 45, the maximum the Diploma allows.</p>
+      <ul class="lr-feature__names"><li>Adithyan Diwakar Vidya</li><li>Shriya Shruti Misra</li></ul>
+      <p class="lr-source lr-source--dark">Source: <a href="news.html#ib-results-2026">The school&rsquo;s IB results brief</a></p>
     </div>
-  </div>
+  </article>
+  <article class="lr-feature lr-feature--top-right" id="featured-yoga-2025" aria-labelledby="feature-yoga-2025-title">
+    <figure class="lr-feature__media"><div class="lr-feature__frame"><img src="assets/img/sports-experience/yoga-group-wide.webp" width="1920" height="1200" alt="CIRS students in blue tracksuits holding a standing yoga pose on the school ground, hills behind them" sizes="100vw" loading="lazy" decoding="async"></div><figcaption class="lr-feature__cap">Yoga on the CIRS ground, beneath the Siruvani hills</figcaption></figure>
+    <div class="lr-feature__copy">
+      <p class="lr-feature__index" aria-hidden="true">02</p>
+      <p class="lr-feature__meta"><span>Sport</span><span>Zonal</span><span>13 July 2025</span></p>
+      <h3 class="lr-feature__title" id="feature-yoga-2025-title" aria-label="Six gold. Five silver. Six bronze."><span class="lr-line"><span style="--i:0">Six</span></span> <span class="lr-line"><span style="--i:1">gold.</span></span> <span class="lr-line"><span style="--i:2">Five</span></span> <span class="lr-line"><span style="--i:3">silver.</span></span> <span class="lr-line"><span style="--i:4">Six</span></span> <span class="lr-line"><span style="--i:5">bronze.</span></span></h3>
+      <p class="lr-feature__event">South Zone Yoga Competition 2025&ndash;26, School Games Sport Development Foundation India, Erode</p>
+      <p class="lr-feature__text">Across every category, CIRS students brought home six gold, five silver and six bronze medals, and with them the Overall Championship.</p>
+      
+      <p class="lr-source lr-source--dark">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+    </div>
+  </article>
+  <article class="lr-feature lr-feature--split" id="featured-football-u14-2025" aria-labelledby="feature-football-u14-2025-title">
+    <figure class="lr-feature__media"><div class="lr-feature__frame"><img src="assets/img/sports/sport-football.jpg" width="1600" height="1200" alt="Young CIRS footballers in green and amber shirts chasing the ball on the school field" sizes="100vw" loading="lazy" decoding="async"></div><figcaption class="lr-feature__cap">Football on the CIRS field</figcaption></figure>
+    <div class="lr-feature__copy">
+      <p class="lr-feature__index" aria-hidden="true">03</p>
+      <p class="lr-feature__meta"><span>Sport</span><span>Inter-school</span><span>2025</span></p>
+      <h3 class="lr-feature__title" id="feature-football-u14-2025-title" aria-label="Champions of thirty-six schools."><span class="lr-line"><span style="--i:0">Champions</span></span> <span class="lr-line"><span style="--i:1">of</span></span> <span class="lr-line"><span style="--i:2">thirty-six</span></span> <span class="lr-line"><span style="--i:3">schools.</span></span></h3>
+      <p class="lr-feature__event">11-on-11 Football Tournament, Chandrakanthi Public School, Coimbatore</p>
+      <p class="lr-feature__text">The CIRS Under-14 boys won the eleven-a-side tournament against 36 schools, and Tanay Lakshman of Grade 8 was named Best Player.</p>
+      <ul class="lr-feature__names"><li>Tanay Lakshman</li></ul>
+      <p class="lr-source lr-source--dark">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+    </div>
+  </article>
+  <article class="lr-feature lr-feature--low-right" id="featured-quzbiz-2025" aria-labelledby="feature-quzbiz-2025-title">
+    <figure class="lr-feature__media"><div class="lr-feature__frame"><img src="assets/img/houses/comp-quiz.jpg" width="1400" height="788" alt="CIRS students discussing a quiz answer at a table, one student holding a microphone" sizes="100vw" loading="lazy" decoding="async"></div><figcaption class="lr-feature__cap">A quiz in progress at CIRS</figcaption></figure>
+    <div class="lr-feature__copy">
+      <p class="lr-feature__index" aria-hidden="true">04</p>
+      <p class="lr-feature__meta"><span>Academics</span><span>Zonal</span><span>29 August 2025</span></p>
+      <h3 class="lr-feature__title" id="feature-quzbiz-2025-title" aria-label="One team from a hundred and eighty."><span class="lr-line"><span style="--i:0">One</span></span> <span class="lr-line"><span style="--i:1">team</span></span> <span class="lr-line"><span style="--i:2">from</span></span> <span class="lr-line"><span style="--i:3">a</span></span> <span class="lr-line"><span style="--i:4">hundred</span></span> <span class="lr-line"><span style="--i:5">and</span></span> <span class="lr-line"><span style="--i:6">eighty.</span></span></h3>
+      <p class="lr-feature__event">QUZBIZ Zonal Quiz, Yuva Bharati School, Coimbatore</p>
+      <p class="lr-feature__text">Two CIRS teams entered the zonal round of QUZBIZ. Out of 180 teams, Adithyan Diwakar and Heril Goti reached the final, led throughout and won, taking certificates, a cash prize of &#8377;10,000 and a place in the State-level quiz in Chennai.</p>
+      <ul class="lr-feature__names"><li>Adithyan Diwakar &amp; Heril Goti</li></ul>
+      <p class="lr-source lr-source--dark">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+    </div>
+  </article>
+  <article class="lr-feature lr-feature--centre" id="featured-bhajan-2025" aria-labelledby="feature-bhajan-2025-title">
+    <figure class="lr-feature__media"><div class="lr-feature__frame"><img src="assets/img/arts/tabla.jpg" width="1600" height="1194" alt="CIRS students seated on a carpet at tabla, their teacher beside them" sizes="100vw" loading="lazy" decoding="async"></div><figcaption class="lr-feature__cap">A tabla class at CIRS</figcaption></figure>
+    <div class="lr-feature__copy">
+      <p class="lr-feature__index" aria-hidden="true">05</p>
+      <p class="lr-feature__meta"><span>Arts</span><span>Inter-school</span><span>26 July 2025</span></p>
+      <h3 class="lr-feature__title" id="feature-bhajan-2025-title" aria-label="Ten voices, one first prize."><span class="lr-line"><span style="--i:0">Ten</span></span> <span class="lr-line"><span style="--i:1">voices,</span></span> <span class="lr-line"><span style="--i:2">one</span></span> <span class="lr-line"><span style="--i:3">first</span></span> <span class="lr-line"><span style="--i:4">prize.</span></span></h3>
+      <p class="lr-feature__event">Interschool Bhajan Competition, Suguna International School</p>
+      <p class="lr-feature__text">Ten CIRS students from Grades 7 to 12 sang for the school and took first prize among more than twenty schools.</p>
+      
+      <p class="lr-source lr-source--dark">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+    </div>
+  </article>
 </section>
-</main>
-<section class="closing-scene" data-closing-scene aria-labelledby="closing-scene-title">
-  <picture class="closing-scene__picture" aria-hidden="true">
-    <source media="(max-width: 680px)" srcset="assets/img/campus-lawn.jpg 1600w" sizes="100vw">
-    <img class="closing-scene__image" src="assets/img/campus-band.jpg" alt=""
-         width="1920" height="1080" loading="lazy" decoding="async">
-  </picture>
-  <div class="closing-scene__grade" aria-hidden="true"></div>
-  <div class="wrap closing-scene__inner">
-    <div class="closing-scene__content">
-      <h2 class="closing-scene__title" id="closing-scene-title">
-        <span>The journey continues</span>
-        <span>at CIRS</span>
-      </h2>
-      <div class="closing-scene__links">
-        <a class="closing-scene__admissions" href="admissions.html">Explore Admissions</a>
-        <a class="closing-scene__contact" href="admissions.html#contact">Contact Us</a>
+
+<section class="lr-archive" id="archive" aria-labelledby="lr-archive-title" data-lr-archive>
+  <div class="wrap">
+    <header class="lr-archive__head">
+      <p class="lr-kicker">The complete archive</p>
+      <h2 class="lr-archive__title" id="lr-archive-title">Explore the laurels.</h2>
+      <p class="lr-archive__lead">32 laurels, each copied from a record the school
+        has published and linked to it. Choose one to read it in full.</p>
+    </header>
+    <div class="lr-filters" data-lr-filters hidden>
+      <ol class="lr-cats" aria-label="Filter by category">
+        <li><button type="button" class="lr-cat" data-cat="all" aria-pressed="true"><span class="lr-cat__n">00</span><span class="lr-cat__name">All</span><span class="lr-cat__count">32</span></button></li>
+        <li><button type="button" class="lr-cat" data-cat="academics" aria-pressed="false"><span class="lr-cat__n">01</span><span class="lr-cat__name">Academics</span><span class="lr-cat__count">10</span></button></li>
+        <li><button type="button" class="lr-cat" data-cat="sport" aria-pressed="false"><span class="lr-cat__n">02</span><span class="lr-cat__name">Sport</span><span class="lr-cat__count">7</span></button></li>
+        <li><button type="button" class="lr-cat" data-cat="arts" aria-pressed="false"><span class="lr-cat__n">03</span><span class="lr-cat__name">Arts</span><span class="lr-cat__count">3</span></button></li>
+        <li><button type="button" class="lr-cat" data-cat="speech" aria-pressed="false"><span class="lr-cat__n">04</span><span class="lr-cat__name">Speech</span><span class="lr-cat__count">5</span></button></li>
+        <li><button type="button" class="lr-cat" data-cat="leadership" aria-pressed="false"><span class="lr-cat__n">05</span><span class="lr-cat__name">Leadership</span><span class="lr-cat__count">2</span></button></li>
+        <li><button type="button" class="lr-cat" data-cat="international" aria-pressed="false"><span class="lr-cat__n">06</span><span class="lr-cat__name">International</span><span class="lr-cat__count">2</span></button></li>
+        <li><button type="button" class="lr-cat" data-cat="school" aria-pressed="false"><span class="lr-cat__n">07</span><span class="lr-cat__name">The School</span><span class="lr-cat__count">6</span></button></li>
+      </ol>
+      <div class="lr-opts">
+        <div class="lr-opts__group" role="group" aria-labelledby="lr-level-label"><span class="lr-opts__label" id="lr-level-label">Level</span><button type="button" class="lr-opt" data-level="all" aria-pressed="true">Every level</button><button type="button" class="lr-opt" data-level="inter-house" aria-pressed="false">Inter-house</button><button type="button" class="lr-opt" data-level="inter-school" aria-pressed="false">Inter-school</button><button type="button" class="lr-opt" data-level="zonal" aria-pressed="false">Zonal</button><button type="button" class="lr-opt" data-level="national" aria-pressed="false">National</button><button type="button" class="lr-opt" data-level="international" aria-pressed="false">International</button></div>
+        <div class="lr-opts__group" role="group" aria-labelledby="lr-year-label"><span class="lr-opts__label" id="lr-year-label">Year</span><button type="button" class="lr-opt" data-year="all" aria-pressed="true">Every year</button><button type="button" class="lr-opt" data-year="2026" aria-pressed="false">2026</button><button type="button" class="lr-opt" data-year="2025" aria-pressed="false">2025</button><button type="button" class="lr-opt" data-year="2019" aria-pressed="false">2019</button><button type="button" class="lr-opt" data-year="2017" aria-pressed="false">2017</button><button type="button" class="lr-opt" data-year="2012" aria-pressed="false">2012</button><button type="button" class="lr-opt" data-year="2011" aria-pressed="false">2011</button><button type="button" class="lr-opt" data-year="2008" aria-pressed="false">2008</button><button type="button" class="lr-opt" data-year="2007" aria-pressed="false">2007</button><button type="button" class="lr-opt" data-year="undated" aria-pressed="false">Undated</button></div>
       </div>
     </div>
+    <p class="lr-archive__status" role="status" data-lr-status></p>
+    <ul class="lr-grid" data-lr-grid>
+      <li class="lr-item lr-item--feature" id="laurel-ib-2026" data-cats="academics international" data-level="international" data-year="2026">
+        <article class="lr-card" aria-labelledby="card-ib-2026">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/results-ib-lab.webp" width="1800" height="1200" alt="A CIRS student looking into a microscope in a biology laboratory" sizes="(max-width: 760px) 92vw, 62vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">A biology practical at CIRS</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics &middot; International</span><span>International</span><span>May 2026</span></p>
+            <h3 class="lr-card__title" id="card-ib-2026"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="ib-2026">Twenty-four diplomas from twenty-four candidates</button></h3>
+            <p class="lr-card__result">24 of 24 diplomas &middot; two scores of 45 out of 45</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">IB Diploma Programme, May 2026 examination</p>
+              <p class="lr-card__text">Every candidate registered for the May 2026 IB Diploma examination was awarded the diploma, with an average of 39.4 points. Twelve scored 40 or above. Adithyan Diwakar Vidya and Shriya Shruti Misra both scored 45 out of 45, the maximum the Diploma allows.</p>
+              <ul class="lr-card__names"><li><b>Adithyan Diwakar Vidya</b> 45 out of 45 in the IB Diploma</li><li><b>Shriya Shruti Misra</b> 45 out of 45 in the IB Diploma</li></ul>
+              <p class="lr-source">Source: <a href="news.html#ib-results-2026">The school&rsquo;s IB results brief</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--text" id="laurel-cbse-xii-management-2026" data-cats="academics" data-level="national" data-year="2026">
+        <article class="lr-card" aria-labelledby="card-cbse-xii-management-2026">
+          <p class="lr-card__figure" aria-hidden="true">99.0</p>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics</span><span>National</span><span>March&ndash;April 2026</span></p>
+            <h3 class="lr-card__title" id="card-cbse-xii-management-2026"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="cbse-xii-management-2026">99.0 per cent in Class XII Management</button></h3>
+            <p class="lr-card__result">Stream topper, 99.0%</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">CBSE Class XII board examinations</p>
+              <p class="lr-card__text">Dhruvik Sachin Agarwal topped the Class XII Management stream with 99.0%. The stream averaged 94%; 22 students scored 90% or above, and there was one centum in Business Studies and two in Applied Mathematics.</p>
+              <ul class="lr-card__names"><li><b>Dhruvik Sachin Agarwal</b> 99.0% in Class XII Management</li></ul>
+              <p class="lr-source">Source: <a href="news.html#cbse-results-2026">The school&rsquo;s CBSE results brief</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-cbse-xii-science-2026" data-cats="academics" data-level="national" data-year="2026">
+        <article class="lr-card" aria-labelledby="card-cbse-xii-science-2026">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/results-cbse-lab.webp" width="1800" height="1200" alt="A teacher demonstrating apparatus to students gathered round a laboratory bench" sizes="(max-width: 760px) 40vw, 30vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">A physics demonstration at CIRS</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics</span><span>National</span><span>March&ndash;April 2026</span></p>
+            <h3 class="lr-card__title" id="card-cbse-xii-science-2026"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="cbse-xii-science-2026">Joint toppers in Class XII Science</button></h3>
+            <p class="lr-card__result">Two toppers, 95.60% each</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">CBSE Class XII board examinations</p>
+              <p class="lr-card__text">Sonakshi Birmiwal and Namburu Venkata Dheeraj topped the Class XII Science stream with 95.60% each. The class averaged 91%, twelve students scored 90% or above, and there was one centum in Chemistry and two in IP.</p>
+              <ul class="lr-card__names"><li><b>Sonakshi Birmiwal</b> 95.60% in Class XII Science</li><li><b>Namburu Venkata Dheeraj</b> 95.60% in Class XII Science</li></ul>
+              <p class="lr-source">Source: <a href="news.html#cbse-results-2026">The school&rsquo;s CBSE results brief</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--text" id="laurel-cbse-x-2026" data-cats="academics" data-level="national" data-year="2026">
+        <article class="lr-card" aria-labelledby="card-cbse-x-2026">
+          <p class="lr-card__figure" aria-hidden="true">98.60</p>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics</span><span>National</span><span>March&ndash;April 2026</span></p>
+            <h3 class="lr-card__title" id="card-cbse-x-2026"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="cbse-x-2026">98.60 per cent in Class X</button></h3>
+            <p class="lr-card__result">Class topper, 98.60%</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">CBSE Class X board examinations</p>
+              <p class="lr-card__text">Vishv Prem Nangia topped Class X with 98.60%. Forty-nine students scored 90% or above, and centums were recorded in Sanskrit (five), Hindi (two) and French (three).</p>
+              <ul class="lr-card__names"><li><b>Vishv Prem Nangia</b> 98.60% in Class X</li></ul>
+              <p class="lr-source">Source: <a href="news.html#cbse-results-2026">The school&rsquo;s CBSE results brief</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--wide" id="laurel-quzbiz-2025" data-cats="academics" data-level="zonal" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-quzbiz-2025">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/houses/comp-quiz.jpg" width="1400" height="788" alt="CIRS students discussing a quiz answer at a table, one student holding a microphone" sizes="(max-width: 760px) 92vw, 50vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">A quiz in progress at CIRS</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics</span><span>Zonal</span><span>29 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-quzbiz-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="quzbiz-2025">Winners of the QUZBIZ Zonal Quiz</button></h3>
+            <p class="lr-card__result">First of 180 teams &middot; through to the State-level quiz</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">QUZBIZ Zonal Quiz, Yuva Bharati School, Coimbatore</p>
+              <p class="lr-card__text">Two CIRS teams entered the zonal round of QUZBIZ. Out of 180 teams, Adithyan Diwakar and Heril Goti reached the final, led throughout and won, taking certificates, a cash prize of &#8377;10,000 and a place in the State-level quiz in Chennai.</p>
+              <ul class="lr-card__names"><li><b>Adithyan Diwakar &amp; Heril Goti</b> QUZBIZ Zonal Quiz, first of 180 teams</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--text" id="laurel-hindu-quiz-2025" data-cats="academics" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-hindu-quiz-2025">
+          <p class="lr-card__figure" aria-hidden="true">1st</p>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics</span><span>Inter-school</span><span>22 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-hindu-quiz-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="hindu-quiz-2025">Senior champions at The Hindu In School Quiz</button></h3>
+            <p class="lr-card__result">Senior 1st and 3rd &middot; junior 2nd</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">The Hindu In School Quiz, NGP College, Coimbatore</p>
+              <p class="lr-card__text">Five CIRS teams took part among 2,000. In the senior category Adithyan and Heril were champions and Vishv Prem and Swarit placed third; in the junior category Devansh and Pradyuth came second. Govardhan and Hridit, Arnav and Jashit, and Viraj and Divyam were singled out for recognition.</p>
+              
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--text" id="laurel-lotus-quiz-2025" data-cats="academics" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-lotus-quiz-2025">
+          <p class="lr-card__figure" aria-hidden="true">1 / 40</p>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics</span><span>Inter-school</span><span>20 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-lotus-quiz-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="lotus-quiz-2025">First prize at the Lotus Quiz</button></h3>
+            <p class="lr-card__result">First of 40 teams</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Lotus Quiz, Satchidananda Jothi Niketan International School, Mettupalayam</p>
+              <p class="lr-card__text">Devansh Mazumdar and Pradyuth Senthilkumar won the Lotus Quiz against forty teams, and were given certificates, trophies and a cash prize of &#8377;5,000.</p>
+              <ul class="lr-card__names"><li><b>Devansh Mazumdar &amp; Pradyuth Senthilkumar</b> Lotus Quiz, first of 40 teams</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-aqmen-2025" data-cats="academics" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-aqmen-2025">
+          
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics</span><span>Inter-school</span><span>5 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-aqmen-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="aqmen-2025">Third at the AQMEN Quiz</button></h3>
+            <p class="lr-card__result">Third of 55 teams</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">AQMEN Quiz, PSBB Millennium School, Coimbatore</p>
+              <p class="lr-card__text">The Quiz Club&rsquo;s junior team, Devansh Mazumdar of Grade 8 and Arnav Anand of Grade 7, placed third among 55 teams from schools across Coimbatore in a quiz set by Prof. Rangarajan, winning certificates and &#8377;1,000.</p>
+              <ul class="lr-card__names"><li><b>Devansh Mazumdar &amp; Arnav Anand</b> AQMEN Quiz, third of 55 teams</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--feature" id="laurel-yoga-2025" data-cats="sport" data-level="zonal" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-yoga-2025">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/sports-experience/yoga-group-wide.webp" width="1920" height="1200" alt="CIRS students in blue tracksuits holding a standing yoga pose on the school ground, hills behind them" sizes="(max-width: 760px) 92vw, 62vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">Yoga on the CIRS ground, beneath the Siruvani hills</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Sport</span><span>Zonal</span><span>13 July 2025</span></p>
+            <h3 class="lr-card__title" id="card-yoga-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="yoga-2025">Overall champions, South Zone Yoga</button></h3>
+            <p class="lr-card__result">Overall Championship &middot; 6 gold, 5 silver, 6 bronze</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">South Zone Yoga Competition 2025&ndash;26, School Games Sport Development Foundation India, Erode</p>
+              <p class="lr-card__text">Across every category, CIRS students brought home six gold, five silver and six bronze medals, and with them the Overall Championship.</p>
+              
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--tall" id="laurel-football-u14-2025" data-cats="sport" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-football-u14-2025">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/sports/sport-football.jpg" width="1600" height="1200" alt="Young CIRS footballers in green and amber shirts chasing the ball on the school field" sizes="(max-width: 760px) 92vw, 32vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">Football on the CIRS field</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Sport</span><span>Inter-school</span><span>2025</span></p>
+            <h3 class="lr-card__title" id="card-football-u14-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="football-u14-2025">Under-14 champions, eleven-a-side</button></h3>
+            <p class="lr-card__result">Champions of 36 schools &middot; Best Player</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">11-on-11 Football Tournament, Chandrakanthi Public School, Coimbatore</p>
+              <p class="lr-card__text">The CIRS Under-14 boys won the eleven-a-side tournament against 36 schools, and Tanay Lakshman of Grade 8 was named Best Player.</p>
+              <ul class="lr-card__names"><li><b>Tanay Lakshman</b> Best Player, Under-14 football</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-takshila-2025" data-cats="sport" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-takshila-2025">
+          
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Sport</span><span>Inter-school</span><span>28&ndash;29 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-takshila-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="takshila-2025">Second runners-up, Under-11 football</button></h3>
+            <p class="lr-card__result">Second runners-up &middot; Best Defender</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Takshila Inter-School 7-on-7 Football Tournament, Delhi Public School, Coimbatore</p>
+              <p class="lr-card__text">The Under-11 boys finished as second runners-up, and Arnav Ramoliya of Grade 5 was given the Best Defender Award.</p>
+              <ul class="lr-card__names"><li><b>Arnav Ramoliya</b> Best Defender, Under-11 football</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--wide" id="laurel-kpr-basketball-2025" data-cats="sport" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-kpr-basketball-2025">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/sports-experience/basketball-game-wide.webp" width="1920" height="1200" alt="Players leaping for a rebound under the basket on the CIRS outdoor court" sizes="(max-width: 760px) 92vw, 50vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">A rebound on the CIRS outdoor court</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Sport</span><span>Inter-school</span><span>9&ndash;10 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-kpr-basketball-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="kpr-basketball-2025">Third place, both Under-19 teams</button></h3>
+            <p class="lr-card__result">Boys 3rd &middot; girls 3rd</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">KPR Basketball Tournament 2025, KPR Engineering College, Coimbatore</p>
+              <p class="lr-card__text">With twenty teams from four districts competing, the CIRS Under-19 boys and Under-19 girls both finished third.</p>
+              
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--text" id="laurel-sahodaya-basketball-2025" data-cats="sport" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-sahodaya-basketball-2025">
+          <p class="lr-card__figure" aria-hidden="true">2nd</p>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Sport</span><span>Inter-school</span><span>24&ndash;25 July 2025</span></p>
+            <h3 class="lr-card__title" id="card-sahodaya-basketball-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="sahodaya-basketball-2025">Runners-up, Under-16 girls</button></h3>
+            <p class="lr-card__result">Runners-up of 22 teams</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Coimbatore Sahodaya Basketball Tournament 2025, SNS CBSE School</p>
+              <p class="lr-card__text">The Under-16 girls reached the final of a 22-team category and finished as runners-up.</p>
+              
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--tall" id="laurel-bhajan-2025" data-cats="arts" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-bhajan-2025">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/arts/tabla.jpg" width="1600" height="1194" alt="CIRS students seated on a carpet at tabla, their teacher beside them" sizes="(max-width: 760px) 92vw, 32vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">A tabla class at CIRS</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Arts</span><span>Inter-school</span><span>26 July 2025</span></p>
+            <h3 class="lr-card__title" id="card-bhajan-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="bhajan-2025">First prize for bhajan</button></h3>
+            <p class="lr-card__result">First of more than 20 schools</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Interschool Bhajan Competition, Suguna International School</p>
+              <p class="lr-card__text">Ten CIRS students from Grades 7 to 12 sang for the school and took first prize among more than twenty schools.</p>
+              
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--wide" id="laurel-instrumental-2025" data-cats="arts" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-instrumental-2025">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/arts/band.jpg" width="1600" height="1194" alt="The CIRS student band performing outdoors in uniform" sizes="(max-width: 760px) 92vw, 50vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">The CIRS band</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Arts</span><span>Inter-school</span><span>26 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-instrumental-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="instrumental-2025">First in Wind, second in Rhythm</button></h3>
+            <p class="lr-card__result">Wind 1st &middot; Rhythm 2nd &middot; 41 schools</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">46th Sahodaya Inter School Instrumental Music Competition, CS Academy, Coimbatore</p>
+              <p class="lr-card__text">Thirteen students represented CIRS across four categories: Wind, Rhythm, Keyboard and Band. Among 41 schools, Yuvraj Tibrewal of Class 9 placed first in Wind and Arham Jain of Class 9 second in Rhythm.</p>
+              <ul class="lr-card__names"><li><b>Yuvraj Tibrewal</b> First in Wind, Sahodaya instrumental music</li><li><b>Arham Jain</b> Second in Rhythm, Sahodaya instrumental music</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-dance-2025" data-cats="arts" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-dance-2025">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/arts/ensemble.jpg" width="1600" height="1194" alt="A row of dancers in costume raising their arms on a stage lit in violet" sizes="(max-width: 760px) 40vw, 30vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">A dance ensemble on the CIRS stage</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Arts</span><span>Inter-school</span><span>16 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-dance-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="dance-2025">Third place, Under-19 girls&rsquo; dance</button></h3>
+            <p class="lr-card__result">Third of 25 schools</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Interschool Sahodaya Dance Competition, Benglen Public School</p>
+              <p class="lr-card__text">CIRS entered three groups: Under-14 girls, Under-19 boys and Under-19 girls. Among 25 schools, the Under-19 girls placed third.</p>
+              
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--wide" id="laurel-public-speaking-2025" data-cats="speech" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-public-speaking-2025">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/hrun/03-mun.jpg" width="1500" height="1000" alt="Students in suits gathered with a flag at a CIRS Model United Nations" sizes="(max-width: 760px) 92vw, 50vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">Delegates at a Model United Nations held at CIRS</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Speech</span><span>Inter-school</span><span>23 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-public-speaking-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="public-speaking-2025">First place in public speaking</button></h3>
+            <p class="lr-card__result">First place</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Public speaking competition, Vidhya Niketan School (CBSE), Vilanankurichi</p>
+              <p class="lr-card__text">Pradyum Tibarewal of Grade 12 took first place.</p>
+              <ul class="lr-card__names"><li><b>Pradyum Tibarewal</b> First in public speaking; second in declamation</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--text" id="laurel-declamation-2025" data-cats="speech" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-declamation-2025">
+          <p class="lr-card__figure" aria-hidden="true">2 &middot; 3 &middot; 2</p>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Speech</span><span>Inter-school</span><span>9 August 2025</span></p>
+            <h3 class="lr-card__title" id="card-declamation-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="declamation-2025">Three places in English declamation</button></h3>
+            <p class="lr-card__result">Two seconds and a third</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">English Declamation Competition, The United Public School, Periyanaickenpalayam</p>
+              <p class="lr-card__text">Saptarshi Pal of Grade 8 placed second, Adhyatma Ghranthik Agarwal of Grade 10 third, and Pradyum Tibarewal of Grade 12 second.</p>
+              <ul class="lr-card__names"><li><b>Saptarshi Pal</b> Second in English declamation</li><li><b>Adhyatma Ghranthik Agarwal</b> Third in English declamation</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-storytelling-2025" data-cats="speech" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-storytelling-2025">
+          
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Speech</span><span>Inter-school</span><span>2025</span></p>
+            <h3 class="lr-card__title" id="card-storytelling-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="storytelling-2025">Second and fourth in storytelling</button></h3>
+            <p class="lr-card__result">Category D 2nd &middot; category C 4th</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">46th CBSE Sahodaya Inter-school Storytelling Competition, Aksharam International School</p>
+              <p class="lr-card__text">Aashi Kedia of Grade 10 won second place in category D, and Anokhi Kankani of Grade 8 fourth place in category C.</p>
+              <ul class="lr-card__names"><li><b>Aashi Kedia</b> Second in Sahodaya storytelling</li><li><b>Anokhi Kankani</b> Fourth in Sahodaya storytelling</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-extempore-2025" data-cats="speech" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-extempore-2025">
+          
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Speech</span><span>Inter-school</span><span>2025</span></p>
+            <h3 class="lr-card__title" id="card-extempore-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="extempore-2025">Second place in English extempore</button></h3>
+            <p class="lr-card__result">Category B, second</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">English Extempore Competition, CMC International School, Coimbatore</p>
+              <p class="lr-card__text">Amayra Goel of Grade 8 took second place in category B.</p>
+              <ul class="lr-card__names"><li><b>Amayra Goel</b> Second in English extempore</li></ul>
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small is-pending" id="laurel-spell-bee-2025" data-cats="speech" data-level="inter-school" data-year="2025">
+        <article class="lr-card" aria-labelledby="card-spell-bee-2025">
+          
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Speech</span><span>Inter-school</span><span>2025</span></p>
+            <h3 class="lr-card__title" id="card-spell-bee-2025"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="spell-bee-2025">Laurels at the Sahodaya Spell Bee</button></h3>
+            <p class="lr-card__result">[Placings to be supplied by the school]</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">46th CBSE Sahodaya English Spell Bee, Anugraha Mandhir CBSE Senior Secondary School, Coimbatore</p>
+              <p class="lr-card__text">The school&rsquo;s report says CIRS students brought laurels from this Spell Bee. [The students&rsquo; names and placings are not in the published report and are to be supplied by the school.]</p>
+              
+              <p class="lr-source">Source: <a href="competitions.html">Competitions across CIRS, the school&rsquo;s report of 1 October 2025</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--tall" id="laurel-ranking-2019" data-cats="school" data-level="national" data-year="2019">
+        <article class="lr-card" aria-labelledby="card-ranking-2019">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/history/report-2019-sm.jpg" width="640" height="940" alt="The first page of the CIRS Annual Report dated 15 October 2019" sizes="(max-width: 760px) 92vw, 32vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">Annual Report, 15 October 2019, which records the survey</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>The School</span><span>National</span><span>2019</span></p>
+            <h3 class="lr-card__title" id="card-ranking-2019"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="ranking-2019">Second in India, first in Tamil Nadu</button></h3>
+            <p class="lr-card__result">2nd co-educational boarding school in India &middot; 1st in Tamil Nadu, eighth year running</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Education World school survey, conducted by C fore</p>
+              <p class="lr-card__text">In Education World&rsquo;s 2019 survey CIRS rose from fourth to second place in the country among co-educational boarding schools, and kept first place in Tamil Nadu for the eighth consecutive year.</p>
+              
+              <p class="lr-source">Source: <a href="school-history.html#record-ranking-2019">School History: Education World survey</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--text" id="laurel-lead-school-2019" data-cats="leadership school" data-level="national" data-year="2019">
+        <article class="lr-card" aria-labelledby="card-lead-school-2019">
+          <p class="lr-card__figure" aria-hidden="true">5</p>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Leadership &middot; The School</span><span>National</span><span>2019</span></p>
+            <h3 class="lr-card__title" id="card-lead-school-2019"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="lead-school-2019">A CBSE Lead School</button></h3>
+            <p class="lr-card__result">Selected to guide five CBSE schools</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Central Board of Secondary Education</p>
+              <p class="lr-card__text">The CBSE selected CIRS as one of its Lead Schools, to guide five other CBSE schools.</p>
+              
+              <p class="lr-source">Source: <a href="school-history.html#record-report-2019">School History: the Annual Report, 15 October 2019</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-cbse-2019" data-cats="academics" data-level="national" data-year="2019">
+        <article class="lr-card" aria-labelledby="card-cbse-2019">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/life-split-academic.jpg" width="1800" height="1200" alt="CIRS students at their desks during an examination, one looking up" sizes="(max-width: 760px) 40vw, 30vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">An examination hall at CIRS</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics</span><span>National</span><span>2019</span></p>
+            <h3 class="lr-card__title" id="card-cbse-2019"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="cbse-2019">Every candidate above 80 per cent</button></h3>
+            <p class="lr-card__result">45 of 45 above 80% &middot; 41 above 90%</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">CBSE Class XII board examinations</p>
+              <p class="lr-card__text">All 45 students who sat the Class XII examination scored above 80% in aggregate, and 41 of them above 90%. Science averaged 92.06% and Management 94.23%.</p>
+              
+              <p class="lr-source">Source: <a href="school-history.html#record-cbse-2019">School History: Class XII results, 2019</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--tall" id="laurel-brainfeed-2017" data-cats="school" data-level="national" data-year="2017">
+        <article class="lr-card" aria-labelledby="card-brainfeed-2017">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/history/brainfeed-2017-lg.jpg" width="1400" height="1746" alt="A wooden plaque with a gold panel reading brainfeed school excellence awards, Top 500 Schools of India 2017-18" sizes="(max-width: 760px) 92vw, 32vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">The plaque, dated 12 November 2017, Bengaluru</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>The School</span><span>National</span><span>12 November 2017</span></p>
+            <h3 class="lr-card__title" id="card-brainfeed-2017"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="brainfeed-2017">Top 500 Schools of India</button></h3>
+            <p class="lr-card__result">Named among the Top 500 Schools of India</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Brainfeed School Excellence Awards 2017&ndash;18, Bengaluru</p>
+              <p class="lr-card__text">Brainfeed&rsquo;s School Excellence Awards named CIRS among the Top 500 Schools of India 2017&ndash;18, in the category Best International Boarding / Happiness Quotient Index / Influential School Brand, and among the best international schools of Tamil Nadu.</p>
+              
+              <p class="lr-source">Source: <a href="school-history.html#record-brainfeed-2017">School History: Brainfeed Top 500 Schools of India</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--feature" id="laurel-vision-award-2012" data-cats="school" data-level="" data-year="2012">
+        <article class="lr-card" aria-labelledby="card-vision-award-2012">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/history/vision-2012-lg.jpg" width="1400" height="933" alt="A trophy inscribed Central Chinmaya Mission Trust Education Cell Vision Award 2012, held up with its certificate by a woman in a sari and a swami in saffron" sizes="(max-width: 760px) 92vw, 62vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">The Vision Award and its certificate at the presentation. The people pictured are not named in the school&rsquo;s record</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>The School</span><span>2012</span></p>
+            <h3 class="lr-card__title" id="card-vision-award-2012"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="vision-award-2012">The CCMT Education Cell Vision Award</button></h3>
+            <p class="lr-card__result">Vision Award for 2012</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Education Cell, Central Chinmaya Mission Trust</p>
+              <p class="lr-card__text">The Education Cell of the Central Chinmaya Mission Trust presented its Vision Award for 2012 to CIRS, Coimbatore.</p>
+              
+              <p class="lr-source">Source: <a href="school-history.html#record-vision-award-2012">School History: The CCMT Education Cell Vision Award</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-isa-2011" data-cats="international school" data-level="international" data-year="2011">
+        <article class="lr-card" aria-labelledby="card-isa-2011">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/history/isa-2010-sm.jpg" width="640" height="943" alt="The first page of the CIRS Junior School holiday assignment, December 2010, explaining the International School Award" sizes="(max-width: 760px) 40vw, 30vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">The December 2010 assignment set for the International School Award programme</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>International &middot; The School</span><span>International</span><span>2011</span></p>
+            <h3 class="lr-card__title" id="card-isa-2011"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="isa-2011">The International School Award</button></h3>
+            <p class="lr-card__result">International School Award</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">British Council</p>
+              <p class="lr-card__text">CIRS received the British Council&rsquo;s International School Award, which recognises good practice in bringing an international dimension into the curriculum. The Junior School had taken up the programme the year before, with holiday assignments on the wider world.</p>
+              
+              <p class="lr-source">Source: <a href="school-history.html#record-isa-award-2011">School History: The International School Award</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--wide" id="laurel-khel-mela-2008" data-cats="sport" data-level="inter-house" data-year="2008">
+        <article class="lr-card" aria-labelledby="card-khel-mela-2008">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/history/sakshi-2008-sm.jpg" width="640" height="871" alt="The cover of the Chinmaya Sakshi e-newsletter, summer special, May 2008" sizes="(max-width: 760px) 92vw, 50vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap"><i>Chinmaya Sakshi</i>, May 2008: the newsletter that printed the year&rsquo;s house results</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Sport</span><span>Inter-house</span><span>February 2008</span></p>
+            <h3 class="lr-card__title" id="card-khel-mela-2008"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="khel-mela-2008">Valmiki take the Khel Mela</button></h3>
+            <p class="lr-card__result">Overall championship and best march past: Valmiki</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Khel Mela, the 12th Annual Athletic and Aquatic Meet</p>
+              <p class="lr-card__text">Valmiki won the overall championship and the best march past. Vasishta and Vishwamitra shared the award for best individual activities, and the list of winners gives the best drill to Vyasa (the same issue&rsquo;s account of the drill says the cup went to Vasishta and Vyasa together).</p>
+              <ul class="lr-card__names"><li><b>Valmiki</b> Khel Mela: overall championship and best march past</li><li><b>Vasishta</b> Khel Mela: best individual activities, shared</li><li><b>Vishwamitra</b> Khel Mela: best individual activities, shared</li><li><b>Vyasa</b> Khel Mela: best drill</li></ul>
+              <p class="lr-source">Source: <a href="houses.html#record"><i>Sakshi</i>, March 2008, on the Houses record</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--text" id="laurel-aquatic-2008" data-cats="sport" data-level="inter-house" data-year="2008">
+        <article class="lr-card" aria-labelledby="card-aquatic-2008">
+          <p class="lr-card__figure" aria-hidden="true">1st</p>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Sport</span><span>Inter-house</span><span>23&ndash;24 November 2008</span></p>
+            <h3 class="lr-card__title" id="card-aquatic-2008"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="aquatic-2008">Vishwamitra win the Aquatic Meet</button></h3>
+            <p class="lr-card__result">Vishwamitra first, Valmiki second</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Inter-House Aquatic Meet</p>
+              <p class="lr-card__text">Vishwamitra won the Inter-House Aquatic Meet, ahead of Valmiki, Vyasa and Vasishta.</p>
+              <ul class="lr-card__names"><li><b>Vishwamitra</b> Inter-House Aquatic Meet</li></ul>
+              <p class="lr-source">Source: <a href="houses.html#record">CIRS e-newsletter, October&ndash;November 2008, on the Houses record</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-quizzes-2008" data-cats="academics" data-level="inter-house" data-year="2008">
+        <article class="lr-card" aria-labelledby="card-quizzes-2008">
+          
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Academics</span><span>Inter-house</span><span>April&ndash;November 2008</span></p>
+            <h3 class="lr-card__title" id="card-quizzes-2008"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="quizzes-2008">Four quizzes, four winners</button></h3>
+            <p class="lr-card__result">Valmiki, Vishwamitra, Vasishta and Vyasa each win one</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Inter-house quizzes, senior and junior school</p>
+              <p class="lr-card__text">Valmiki won the Senior Social Science Quiz on 30 April. In the junior school, Vishwamitra won the English Quiz on 22 October after three tie-break rounds against Valmiki, Vasishta the Mathematics Quiz on 5 November, and Vyasa the Science Quiz on 19 November.</p>
+              <ul class="lr-card__names"><li><b>Valmiki</b> Senior Social Science Quiz</li><li><b>Vishwamitra</b> Junior English Quiz</li><li><b>Vasishta</b> Junior Mathematics Quiz</li><li><b>Vyasa</b> Junior Science Quiz</li></ul>
+              <p class="lr-source">Source: <a href="houses.html#record">CIRS e-newsletter, October&ndash;November 2008, on the Houses record</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--small" id="laurel-kalam-2007" data-cats="leadership" data-level="national" data-year="2007">
+        <article class="lr-card" aria-labelledby="card-kalam-2007">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/history/kalam-2007-sm.jpg" width="640" height="921" alt="The first typed page of the school&#x27;s account of its students&#x27; meeting with President A. P. J. Abdul Kalam" sizes="(max-width: 760px) 40vw, 30vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">The first page of the school&rsquo;s account of the meeting</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>Leadership</span><span>National</span><span>7 May 2007</span></p>
+            <h3 class="lr-card__title" id="card-kalam-2007"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="kalam-2007">Invited to Rashtrapati Bhavan</button></h3>
+            <p class="lr-card__result">32 students received by the President</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">An interaction with President A.&nbsp;P.&nbsp;J. Abdul Kalam, New Delhi</p>
+              <p class="lr-card__text">A vacation assignment on the President&rsquo;s &lsquo;Vision for India 2020&rsquo;, recast by the school as &lsquo;My Vision for Myself, my Family, my School and my Country&rsquo;, led to an invitation: thirty-two students from Classes VI to XII met President Kalam in the Committee Room of Rashtrapati Bhavan.</p>
+              
+              <p class="lr-source">Source: <a href="school-history.html#record-kalam-2007">School History: At Rashtrapati Bhavan</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li class="lr-item lr-item--wide" id="laurel-green-school" data-cats="school" data-level="national" data-year="undated">
+        <article class="lr-card" aria-labelledby="card-green-school">
+          <figure class="lr-card__media"><div class="lr-card__frame"><img src="assets/img/forest-air.jpg" width="1600" height="900" alt="The CIRS campus from the air, the forest closing around it on every side" sizes="(max-width: 760px) 92vw, 50vw" loading="lazy" decoding="async"></div><figcaption class="lr-card__cap">The campus from the air, most of its hundred acres left to native growth</figcaption></figure>
+          <div class="lr-card__body">
+            <p class="lr-card__meta"><span>The School</span><span>National</span><span>[Year to be confirmed by the school]</span></p>
+            <h3 class="lr-card__title" id="card-green-school"><button type="button" class="lr-card__open" aria-haspopup="dialog" data-laurel="green-school">The Green School Award</button></h3>
+            <p class="lr-card__result">Green School Award</p>
+            <div class="lr-card__more">
+              <p class="lr-card__event">Centre for Science and Environment, New Delhi</p>
+              <p class="lr-card__text">Roughly eighty of the campus&rsquo;s hundred acres have been left to native flora and fauna. It cost the school land it could have built on, and earned it the Green School Award from the Centre for Science and Environment, New Delhi.</p>
+              
+              <p class="lr-source">Source: <a href="why-cirs.html">Why CIRS, the school&rsquo;s own account</a></p>
+            </div>
+          </div>
+        </article>
+      </li>
+    </ul>
+    <p class="lr-archive__empty" data-lr-empty hidden>No laurel on record matches all three.
+      <button type="button" class="lr-link" data-lr-reset>Show every laurel</button></p>
+    <p class="lr-archive__more">Departments and houses: match results, placings and photographs
+      for this archive are welcome at <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
   </div>
 </section>
 
+<section class="lr-timeline" aria-labelledby="lr-timeline-title" data-lr-timeline>
+  <div class="wrap">
+    <header class="lr-timeline__head">
+      <p class="lr-kicker">Year by year</p>
+      <h2 class="lr-timeline__title" id="lr-timeline-title">1996 to today.</h2>
+      <p class="lr-timeline__lead">The years with a laurel on record. Choose one to see what it holds.</p>
+    </header>
+    <div class="lr-tl__rail" data-lr-rail>
+      <span class="lr-tl__end lr-tl__end--start">1996</span>
+      <div class="lr-tl__track"><span class="lr-tl__line" aria-hidden="true"></span><span class="lr-tl__handle" aria-hidden="true"></span>
+        <ol class="lr-tl__years" aria-label="Years with laurels on record"><li style="--x:0.3667" class=""><button type="button" class="lr-tl__year" data-year="2007" aria-pressed="false" aria-controls="lr-tl-2007"><span class="lr-tl__y">2007</span><span class="lr-tl__n">1 laurel</span></button></li><li style="--x:0.4000" class="is-alt"><button type="button" class="lr-tl__year" data-year="2008" aria-pressed="false" aria-controls="lr-tl-2008"><span class="lr-tl__y">2008</span><span class="lr-tl__n">3 laurels</span></button></li><li style="--x:0.5000" class=""><button type="button" class="lr-tl__year" data-year="2011" aria-pressed="false" aria-controls="lr-tl-2011"><span class="lr-tl__y">2011</span><span class="lr-tl__n">1 laurel</span></button></li><li style="--x:0.5333" class="is-alt"><button type="button" class="lr-tl__year" data-year="2012" aria-pressed="false" aria-controls="lr-tl-2012"><span class="lr-tl__y">2012</span><span class="lr-tl__n">1 laurel</span></button></li><li style="--x:0.7000" class=""><button type="button" class="lr-tl__year" data-year="2017" aria-pressed="false" aria-controls="lr-tl-2017"><span class="lr-tl__y">2017</span><span class="lr-tl__n">1 laurel</span></button></li><li style="--x:0.7667" class="is-alt"><button type="button" class="lr-tl__year" data-year="2019" aria-pressed="false" aria-controls="lr-tl-2019"><span class="lr-tl__y">2019</span><span class="lr-tl__n">3 laurels</span></button></li><li style="--x:0.9667" class=""><button type="button" class="lr-tl__year" data-year="2025" aria-pressed="false" aria-controls="lr-tl-2025"><span class="lr-tl__y">2025</span><span class="lr-tl__n">17 laurels</span></button></li><li style="--x:1.0000" class="is-alt"><button type="button" class="lr-tl__year" data-year="2026" aria-pressed="false" aria-controls="lr-tl-2026"><span class="lr-tl__y">2026</span><span class="lr-tl__n">4 laurels</span></button></li></ol>
+      </div>
+      <span class="lr-tl__end lr-tl__end--end">Today</span>
+    </div>
+    <div class="lr-tl__panels" data-lr-panels><div class="lr-tl__panel" id="lr-tl-2007" data-year="2007"><h3 class="lr-tl__head"><span>2007</span> <small>1 laurel on record</small></h3><ol class="lr-tl__list"><li><a href="#laurel-kalam-2007" data-laurel-link="kalam-2007"><span class="lr-tl__cat">Leadership</span><span class="lr-tl__title">Invited to Rashtrapati Bhavan</span><span class="lr-tl__when">7 May 2007</span></a></li></ol><button type="button" class="lr-tl__show" data-show-year="2007">Show 2007 in the archive <span aria-hidden="true">&uarr;</span></button></div><div class="lr-tl__panel" id="lr-tl-2008" data-year="2008"><h3 class="lr-tl__head"><span>2008</span> <small>3 laurels on record</small></h3><ol class="lr-tl__list"><li><a href="#laurel-khel-mela-2008" data-laurel-link="khel-mela-2008"><span class="lr-tl__cat">Sport</span><span class="lr-tl__title">Valmiki take the Khel Mela</span><span class="lr-tl__when">February 2008</span></a></li><li><a href="#laurel-aquatic-2008" data-laurel-link="aquatic-2008"><span class="lr-tl__cat">Sport</span><span class="lr-tl__title">Vishwamitra win the Aquatic Meet</span><span class="lr-tl__when">23&ndash;24 November 2008</span></a></li><li><a href="#laurel-quizzes-2008" data-laurel-link="quizzes-2008"><span class="lr-tl__cat">Academics</span><span class="lr-tl__title">Four quizzes, four winners</span><span class="lr-tl__when">April&ndash;November 2008</span></a></li></ol><button type="button" class="lr-tl__show" data-show-year="2008">Show 2008 in the archive <span aria-hidden="true">&uarr;</span></button></div><div class="lr-tl__panel" id="lr-tl-2011" data-year="2011"><h3 class="lr-tl__head"><span>2011</span> <small>1 laurel on record</small></h3><ol class="lr-tl__list"><li><a href="#laurel-isa-2011" data-laurel-link="isa-2011"><span class="lr-tl__cat">International &middot; The School</span><span class="lr-tl__title">The International School Award</span><span class="lr-tl__when">2011</span></a></li></ol><button type="button" class="lr-tl__show" data-show-year="2011">Show 2011 in the archive <span aria-hidden="true">&uarr;</span></button></div><div class="lr-tl__panel" id="lr-tl-2012" data-year="2012"><h3 class="lr-tl__head"><span>2012</span> <small>1 laurel on record</small></h3><ol class="lr-tl__list"><li><a href="#laurel-vision-award-2012" data-laurel-link="vision-award-2012"><span class="lr-tl__cat">The School</span><span class="lr-tl__title">The CCMT Education Cell Vision Award</span><span class="lr-tl__when">2012</span></a></li></ol><button type="button" class="lr-tl__show" data-show-year="2012">Show 2012 in the archive <span aria-hidden="true">&uarr;</span></button></div><div class="lr-tl__panel" id="lr-tl-2017" data-year="2017"><h3 class="lr-tl__head"><span>2017</span> <small>1 laurel on record</small></h3><ol class="lr-tl__list"><li><a href="#laurel-brainfeed-2017" data-laurel-link="brainfeed-2017"><span class="lr-tl__cat">The School</span><span class="lr-tl__title">Top 500 Schools of India</span><span class="lr-tl__when">12 November 2017</span></a></li></ol><button type="button" class="lr-tl__show" data-show-year="2017">Show 2017 in the archive <span aria-hidden="true">&uarr;</span></button></div><div class="lr-tl__panel" id="lr-tl-2019" data-year="2019"><h3 class="lr-tl__head"><span>2019</span> <small>3 laurels on record</small></h3><ol class="lr-tl__list"><li><a href="#laurel-ranking-2019" data-laurel-link="ranking-2019"><span class="lr-tl__cat">The School</span><span class="lr-tl__title">Second in India, first in Tamil Nadu</span><span class="lr-tl__when">2019</span></a></li><li><a href="#laurel-lead-school-2019" data-laurel-link="lead-school-2019"><span class="lr-tl__cat">Leadership &middot; The School</span><span class="lr-tl__title">A CBSE Lead School</span><span class="lr-tl__when">2019</span></a></li><li><a href="#laurel-cbse-2019" data-laurel-link="cbse-2019"><span class="lr-tl__cat">Academics</span><span class="lr-tl__title">Every candidate above 80 per cent</span><span class="lr-tl__when">2019</span></a></li></ol><button type="button" class="lr-tl__show" data-show-year="2019">Show 2019 in the archive <span aria-hidden="true">&uarr;</span></button></div><div class="lr-tl__panel" id="lr-tl-2025" data-year="2025"><h3 class="lr-tl__head"><span>2025</span> <small>17 laurels on record</small></h3><ol class="lr-tl__list"><li><a href="#laurel-quzbiz-2025" data-laurel-link="quzbiz-2025"><span class="lr-tl__cat">Academics</span><span class="lr-tl__title">Winners of the QUZBIZ Zonal Quiz</span><span class="lr-tl__when">29 August 2025</span></a></li><li><a href="#laurel-hindu-quiz-2025" data-laurel-link="hindu-quiz-2025"><span class="lr-tl__cat">Academics</span><span class="lr-tl__title">Senior champions at The Hindu In School Quiz</span><span class="lr-tl__when">22 August 2025</span></a></li><li><a href="#laurel-lotus-quiz-2025" data-laurel-link="lotus-quiz-2025"><span class="lr-tl__cat">Academics</span><span class="lr-tl__title">First prize at the Lotus Quiz</span><span class="lr-tl__when">20 August 2025</span></a></li><li><a href="#laurel-aqmen-2025" data-laurel-link="aqmen-2025"><span class="lr-tl__cat">Academics</span><span class="lr-tl__title">Third at the AQMEN Quiz</span><span class="lr-tl__when">5 August 2025</span></a></li><li><a href="#laurel-yoga-2025" data-laurel-link="yoga-2025"><span class="lr-tl__cat">Sport</span><span class="lr-tl__title">Overall champions, South Zone Yoga</span><span class="lr-tl__when">13 July 2025</span></a></li><li><a href="#laurel-football-u14-2025" data-laurel-link="football-u14-2025"><span class="lr-tl__cat">Sport</span><span class="lr-tl__title">Under-14 champions, eleven-a-side</span><span class="lr-tl__when">2025</span></a></li><li><a href="#laurel-takshila-2025" data-laurel-link="takshila-2025"><span class="lr-tl__cat">Sport</span><span class="lr-tl__title">Second runners-up, Under-11 football</span><span class="lr-tl__when">28&ndash;29 August 2025</span></a></li><li><a href="#laurel-kpr-basketball-2025" data-laurel-link="kpr-basketball-2025"><span class="lr-tl__cat">Sport</span><span class="lr-tl__title">Third place, both Under-19 teams</span><span class="lr-tl__when">9&ndash;10 August 2025</span></a></li><li><a href="#laurel-sahodaya-basketball-2025" data-laurel-link="sahodaya-basketball-2025"><span class="lr-tl__cat">Sport</span><span class="lr-tl__title">Runners-up, Under-16 girls</span><span class="lr-tl__when">24&ndash;25 July 2025</span></a></li><li><a href="#laurel-bhajan-2025" data-laurel-link="bhajan-2025"><span class="lr-tl__cat">Arts</span><span class="lr-tl__title">First prize for bhajan</span><span class="lr-tl__when">26 July 2025</span></a></li><li><a href="#laurel-instrumental-2025" data-laurel-link="instrumental-2025"><span class="lr-tl__cat">Arts</span><span class="lr-tl__title">First in Wind, second in Rhythm</span><span class="lr-tl__when">26 August 2025</span></a></li><li><a href="#laurel-dance-2025" data-laurel-link="dance-2025"><span class="lr-tl__cat">Arts</span><span class="lr-tl__title">Third place, Under-19 girls&rsquo; dance</span><span class="lr-tl__when">16 August 2025</span></a></li><li><a href="#laurel-public-speaking-2025" data-laurel-link="public-speaking-2025"><span class="lr-tl__cat">Speech</span><span class="lr-tl__title">First place in public speaking</span><span class="lr-tl__when">23 August 2025</span></a></li><li><a href="#laurel-declamation-2025" data-laurel-link="declamation-2025"><span class="lr-tl__cat">Speech</span><span class="lr-tl__title">Three places in English declamation</span><span class="lr-tl__when">9 August 2025</span></a></li><li><a href="#laurel-storytelling-2025" data-laurel-link="storytelling-2025"><span class="lr-tl__cat">Speech</span><span class="lr-tl__title">Second and fourth in storytelling</span><span class="lr-tl__when">2025</span></a></li><li><a href="#laurel-extempore-2025" data-laurel-link="extempore-2025"><span class="lr-tl__cat">Speech</span><span class="lr-tl__title">Second place in English extempore</span><span class="lr-tl__when">2025</span></a></li><li><a href="#laurel-spell-bee-2025" data-laurel-link="spell-bee-2025"><span class="lr-tl__cat">Speech</span><span class="lr-tl__title">Laurels at the Sahodaya Spell Bee</span><span class="lr-tl__when">2025</span></a></li></ol><button type="button" class="lr-tl__show" data-show-year="2025">Show 2025 in the archive <span aria-hidden="true">&uarr;</span></button></div><div class="lr-tl__panel" id="lr-tl-2026" data-year="2026"><h3 class="lr-tl__head"><span>2026</span> <small>4 laurels on record</small></h3><ol class="lr-tl__list"><li><a href="#laurel-ib-2026" data-laurel-link="ib-2026"><span class="lr-tl__cat">Academics &middot; International</span><span class="lr-tl__title">Twenty-four diplomas from twenty-four candidates</span><span class="lr-tl__when">May 2026</span></a></li><li><a href="#laurel-cbse-xii-management-2026" data-laurel-link="cbse-xii-management-2026"><span class="lr-tl__cat">Academics</span><span class="lr-tl__title">99.0 per cent in Class XII Management</span><span class="lr-tl__when">March&ndash;April 2026</span></a></li><li><a href="#laurel-cbse-xii-science-2026" data-laurel-link="cbse-xii-science-2026"><span class="lr-tl__cat">Academics</span><span class="lr-tl__title">Joint toppers in Class XII Science</span><span class="lr-tl__when">March&ndash;April 2026</span></a></li><li><a href="#laurel-cbse-x-2026" data-laurel-link="cbse-x-2026"><span class="lr-tl__cat">Academics</span><span class="lr-tl__title">98.60 per cent in Class X</span><span class="lr-tl__when">March&ndash;April 2026</span></a></li></ol><button type="button" class="lr-tl__show" data-show-year="2026">Show 2026 in the archive <span aria-hidden="true">&uarr;</span></button></div></div>
+  </div>
+</section>
+
+<section class="lr-names" aria-labelledby="lr-names-title" data-lr-names>
+  <div class="wrap">
+    <header class="lr-names__head">
+      <p class="lr-kicker lr-kicker--dark">The roll</p>
+      <h2 class="lr-names__title" id="lr-names-title">Behind every laurel is a name.</h2>
+      <p class="lr-names__lead">23 students, teams and houses named in the
+        school&rsquo;s records. Choose a name to see what it was for.</p>
+    </header>
+    <ul class="lr-names__field" data-lr-namefield>
+      <li class="lr-name lr-name--s4 lr-name--r" style="--drift:-1.00"><button type="button" class="lr-name__btn" aria-describedby="lr-name-0">Adithyan Diwakar Vidya</button><span class="lr-name__detail" id="lr-name-0">45 out of 45 in the IB Diploma, 2026</span></li>
+      <li class="lr-name lr-name--s1 lr-name--i" style="--drift:-0.20"><button type="button" class="lr-name__btn" aria-describedby="lr-name-1">Dhruvik Sachin Agarwal</button><span class="lr-name__detail" id="lr-name-1">99.0% in Class XII Management, 2026</span></li>
+      <li class="lr-name lr-name--s3 lr-name--r" style="--drift:0.60"><button type="button" class="lr-name__btn" aria-describedby="lr-name-2">Namburu Venkata Dheeraj</button><span class="lr-name__detail" id="lr-name-2">95.60% in Class XII Science, 2026</span></li>
+      <li class="lr-name lr-name--s5 lr-name--r" style="--drift:-0.80"><button type="button" class="lr-name__btn" aria-describedby="lr-name-3">Adithyan Diwakar &amp; Heril Goti</button><span class="lr-name__detail" id="lr-name-3">QUZBIZ Zonal Quiz, first of 180 teams, 2025</span></li>
+      <li class="lr-name lr-name--s2 lr-name--i" style="--drift:0.00"><button type="button" class="lr-name__btn" aria-describedby="lr-name-4">Devansh Mazumdar &amp; Arnav Anand</button><span class="lr-name__detail" id="lr-name-4">AQMEN Quiz, third of 55 teams, 2025</span></li>
+      <li class="lr-name lr-name--s4 lr-name--r" style="--drift:0.80"><button type="button" class="lr-name__btn" aria-describedby="lr-name-5">Arnav Ramoliya</button><span class="lr-name__detail" id="lr-name-5">Best Defender, Under-11 football, 2025</span></li>
+      <li class="lr-name lr-name--s1 lr-name--r" style="--drift:-0.60"><button type="button" class="lr-name__btn" aria-describedby="lr-name-6">Arham Jain</button><span class="lr-name__detail" id="lr-name-6">Second in Rhythm, Sahodaya instrumental music, 2025</span></li>
+      <li class="lr-name lr-name--s3 lr-name--i" style="--drift:0.20"><button type="button" class="lr-name__btn" aria-describedby="lr-name-7">Saptarshi Pal</button><span class="lr-name__detail" id="lr-name-7">Second in English declamation, 2025</span></li>
+      <li class="lr-name lr-name--s5 lr-name--r" style="--drift:1.00"><button type="button" class="lr-name__btn" aria-describedby="lr-name-8">Aashi Kedia</button><span class="lr-name__detail" id="lr-name-8">Second in Sahodaya storytelling, 2025</span></li>
+      <li class="lr-name lr-name--s2 lr-name--r" style="--drift:-0.40"><button type="button" class="lr-name__btn" aria-describedby="lr-name-9">Amayra Goel</button><span class="lr-name__detail" id="lr-name-9">Second in English extempore, 2025</span></li>
+      <li class="lr-name lr-name--s4 lr-name--i lr-name--house" style="--drift:0.40"><button type="button" class="lr-name__btn" aria-describedby="lr-name-10">Vasishta</button><span class="lr-name__detail" id="lr-name-10">Khel Mela: best individual activities, shared, 2008; Junior Mathematics Quiz, 2008</span></li>
+      <li class="lr-name lr-name--s1 lr-name--r lr-name--house" style="--drift:-1.00"><button type="button" class="lr-name__btn" aria-describedby="lr-name-11">Vyasa</button><span class="lr-name__detail" id="lr-name-11">Khel Mela: best drill, 2008; Junior Science Quiz, 2008</span></li>
+      <li class="lr-name lr-name--s3 lr-name--r" style="--drift:-0.20"><button type="button" class="lr-name__btn" aria-describedby="lr-name-12">Shriya Shruti Misra</button><span class="lr-name__detail" id="lr-name-12">45 out of 45 in the IB Diploma, 2026</span></li>
+      <li class="lr-name lr-name--s5 lr-name--i" style="--drift:0.60"><button type="button" class="lr-name__btn" aria-describedby="lr-name-13">Sonakshi Birmiwal</button><span class="lr-name__detail" id="lr-name-13">95.60% in Class XII Science, 2026</span></li>
+      <li class="lr-name lr-name--s2 lr-name--r" style="--drift:-0.80"><button type="button" class="lr-name__btn" aria-describedby="lr-name-14">Vishv Prem Nangia</button><span class="lr-name__detail" id="lr-name-14">98.60% in Class X, 2026</span></li>
+      <li class="lr-name lr-name--s4 lr-name--r" style="--drift:0.00"><button type="button" class="lr-name__btn" aria-describedby="lr-name-15">Devansh Mazumdar &amp; Pradyuth Senthilkumar</button><span class="lr-name__detail" id="lr-name-15">Lotus Quiz, first of 40 teams, 2025</span></li>
+      <li class="lr-name lr-name--s1 lr-name--i" style="--drift:0.80"><button type="button" class="lr-name__btn" aria-describedby="lr-name-16">Tanay Lakshman</button><span class="lr-name__detail" id="lr-name-16">Best Player, Under-14 football, 2025</span></li>
+      <li class="lr-name lr-name--s3 lr-name--r" style="--drift:-0.60"><button type="button" class="lr-name__btn" aria-describedby="lr-name-17">Yuvraj Tibrewal</button><span class="lr-name__detail" id="lr-name-17">First in Wind, Sahodaya instrumental music, 2025</span></li>
+      <li class="lr-name lr-name--s5 lr-name--r" style="--drift:0.20"><button type="button" class="lr-name__btn" aria-describedby="lr-name-18">Pradyum Tibarewal</button><span class="lr-name__detail" id="lr-name-18">First in public speaking; second in declamation, 2025</span></li>
+      <li class="lr-name lr-name--s2 lr-name--i" style="--drift:1.00"><button type="button" class="lr-name__btn" aria-describedby="lr-name-19">Adhyatma Ghranthik Agarwal</button><span class="lr-name__detail" id="lr-name-19">Third in English declamation, 2025</span></li>
+      <li class="lr-name lr-name--s4 lr-name--r" style="--drift:-0.40"><button type="button" class="lr-name__btn" aria-describedby="lr-name-20">Anokhi Kankani</button><span class="lr-name__detail" id="lr-name-20">Fourth in Sahodaya storytelling, 2025</span></li>
+      <li class="lr-name lr-name--s1 lr-name--r lr-name--house" style="--drift:0.40"><button type="button" class="lr-name__btn" aria-describedby="lr-name-21">Valmiki</button><span class="lr-name__detail" id="lr-name-21">Khel Mela: overall championship and best march past, 2008; Senior Social Science Quiz, 2008</span></li>
+      <li class="lr-name lr-name--s3 lr-name--i lr-name--house" style="--drift:-1.00"><button type="button" class="lr-name__btn" aria-describedby="lr-name-22">Vishwamitra</button><span class="lr-name__detail" id="lr-name-22">Khel Mela: best individual activities, shared, 2008; Inter-House Aquatic Meet, 2008; Junior English Quiz, 2008</span></li>
+    </ul>
+    <p class="lr-names__reading" data-lr-reading aria-hidden="true"></p>
+  </div>
+</section>
+
+<section class="lr-close" aria-labelledby="lr-close-title" data-lr-close>
+  <canvas class="lr-field lr-field--close" data-lr-field="close" aria-hidden="true"></canvas>
+  <div class="lr-close__type">
+    <h2 class="lr-close__title" id="lr-close-title">
+      <span class="lr-line"><span>The next laurel</span></span>
+      <span class="lr-line"><span>has not been won yet.</span></span>
+    </h2>
+    <p class="lr-close__line">The story continues.</p>
+  </div>
+</section>
+
+<dialog class="lr-dialog" id="lr-dialog" aria-labelledby="lr-dialog-title">
+  <div class="lr-dialog__panel">
+    <button type="button" class="lr-dialog__close" data-lr-close-dialog aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+    <div class="lr-dialog__media" data-lr-dialog-media></div>
+    <div class="lr-dialog__body">
+      <p class="lr-dialog__meta" data-lr-dialog-meta></p>
+      <h2 class="lr-dialog__title" id="lr-dialog-title" data-lr-dialog-title>Laurel</h2>
+      <p class="lr-dialog__result" data-lr-dialog-result></p>
+      <div class="lr-dialog__more" data-lr-dialog-more></div>
+    </div>
+  </div>
+</dialog>
+
+</div>
+</main>
 <div class="footer-wrap">
 <footer class="footer" aria-label="Site footer">
   <div class="wrap">
@@ -421,11 +1269,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=113" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=113" defer></script>
-<script src="assets/vendor/lenis.min.js?b=113" defer></script>
-<script src="assets/js/cirs.js?b=113-header-5" defer></script>
-<script src="assets/js/pages.js?b=113" defer></script>
-<script src="assets/js/footer.js?b=113-footer-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=113-laurels-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=113-laurels-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=113-laurels-1" defer></script>
+<script src="assets/js/cirs.js?b=113-laurels-1-header-5" defer></script>
+<script src="assets/js/pages.js?b=113-laurels-1" defer></script>
+<script src="assets/js/footer.js?b=113-laurels-1-footer-1" defer></script>
+<script src="assets/js/laurels.js?b=113-laurels-1" defer></script>
 </body>
 </html>

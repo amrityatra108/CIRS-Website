@@ -1,326 +1,562 @@
-body.student-life { background:#eee9de; color:#13202a; }
-body.student-life main { overflow:clip; }
-.sj-cover,
-.sj-scenes > * { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.sj-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(4,13,26,.88),rgba(4,13,26,.14)),linear-gradient(0deg,rgba(4,13,26,.72),transparent 55%); }
-.sj-kicker { display:flex; gap:1rem; font-size:.78rem; letter-spacing:.1em; }
-
-.sj-hero { position:relative; min-height:100svh; color:#fff; background:#081728; }
-.sj-hero>.sj-cover { opacity:.72; animation:sj-dawn 2.2s ease both; }
-.sj-hero__content { position:relative; z-index:1; display:flex; min-height:100svh; flex-direction:column; justify-content:flex-end; padding-bottom:clamp(7rem,14vh,10rem); }
-.sj-hero .sj-kicker { justify-content:space-between; max-width:31rem; margin-bottom:2rem; }
-.sj-hero h1,
-.sj-day h2,
-.sj-heading h2,
-.sj-section-head h2,
-.sj-houses h2,
-.sj-work h2,
-.sj-festivals h2,
-.sj-practical h2,
-.sj-night h2 { font-family:var(--font-display); font-weight:500; text-transform:uppercase; line-height:.87; letter-spacing:-.045em; }
-.sj-hero h1 { font-size:clamp(3.5rem,7.5vw,8.2rem); line-height:1.08; }
-.sj-hero__content>p:last-child { max-width:30rem; margin-top:1.7rem; font-size:1.25rem; }
-.sj-down { position:absolute; z-index:3; right:4vw; bottom:1.8rem; color:#fff; }
-
-.sj-day { background:#081728; color:#fff; }
-.sj-day__intro { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(18rem,1fr); gap:clamp(3rem,6vw,7rem); align-items:end; padding:8rem var(--gut) 6rem; }
-.sj-day__heading .sj-kicker { margin-bottom:1.5rem; }
-.sj-day h2,
-.sj-heading h2,
-.sj-houses h2,
-.sj-work h2,
-.sj-festivals h2,
-.sj-practical h2 { font-size:clamp(3rem,6.5vw,7rem); }
-.sj-day__details>p { line-height:1.6; }
-.sj-day__details>.sj-photo-note { margin-top:.9rem; font-size:.86rem; color:#d9e0e5; }
-.sj-switch { display:flex; margin-top:2rem; border-bottom:1px solid #ffffff44; }
-.sj-switch button { min-height:48px; padding:.7rem 1rem; color:#fff; opacity:.55; border-bottom:2px solid transparent; }
-.sj-switch button.is-active { opacity:1; border-color:#d8bc7a; }
-
-.sj-journey { display:none; height:580vh; }
-.sj-motion .sj-journey { display:block; }
-.sj-journey__sticky { position:sticky; top:0; height:100svh; overflow:hidden; background:#081728; }
-.sj-sky { position:absolute; inset:0; overflow:hidden; background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 62%); }
-.sj-stars { position:absolute; inset:0; visibility:hidden; opacity:0; background-image:radial-gradient(circle at 8% 18%,#fff 0 1px,transparent 1.6px),radial-gradient(circle at 17% 34%,#fff8 0 1px,transparent 1.5px),radial-gradient(circle at 28% 12%,#fff 0 1.2px,transparent 1.8px),radial-gradient(circle at 39% 29%,#fff9 0 1px,transparent 1.6px),radial-gradient(circle at 51% 9%,#fff 0 1px,transparent 1.5px),radial-gradient(circle at 62% 24%,#fff 0 1.2px,transparent 1.8px),radial-gradient(circle at 73% 14%,#fff9 0 1px,transparent 1.6px),radial-gradient(circle at 84% 31%,#fff 0 1px,transparent 1.5px),radial-gradient(circle at 94% 11%,#fff 0 1.2px,transparent 1.8px),radial-gradient(circle at 12% 53%,#fff8 0 1px,transparent 1.6px),radial-gradient(circle at 34% 47%,#fff 0 1px,transparent 1.5px),radial-gradient(circle at 57% 56%,#fff9 0 1.2px,transparent 1.8px),radial-gradient(circle at 78% 49%,#fff 0 1px,transparent 1.6px),radial-gradient(circle at 90% 61%,#fff8 0 1px,transparent 1.5px); }
-.sj-skyline { position:absolute; inset:auto 0 0; height:34%; background:linear-gradient(0deg,rgba(5,11,18,.48),transparent); }
-.sj-scenes,
-.sj-journey__sticky>.sj-shade { position:absolute; inset:0; }
-.sj-scenes > * { visibility:hidden; opacity:0; will-change:transform,opacity; }
-.sj-scenes > *.is-active { visibility:visible; opacity:.68; }
-.sj-scenes .sj-scene--plain { background:radial-gradient(circle at 70% 30%,#486077,#10253d 55%,#081728); }
-.sj-journey__content { position:relative; z-index:2; height:100%; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto 1fr auto; padding-block:8rem 6rem; }
-/* Clear the column of times pinned at the right edge (.sj-index: 1.5rem in,
-   44px wide), which the copy otherwise ran underneath below 1320px. */
-.sj-journey__content { padding-right:max(var(--gut), 5.5rem); }
-.sj-school { grid-column:1/-1; text-transform:uppercase; font-size:.78rem; letter-spacing:.1em; }
-.sj-clock,
-.sj-chapter { align-self:center; }
-.sj-clock span { font-family:var(--font-editorial); font-size:clamp(5rem,12vw,12rem); line-height:.75; letter-spacing:-.07em; }
-.sj-clock small { margin-left:1rem; }
-.sj-chapter { max-width:30rem; }
-.sj-chapter h3 { margin:.7rem 0 1rem; font-family:var(--font-editorial); font-size:clamp(2.8rem,5vw,6rem); font-weight:500; line-height:.92; }
-.sj-chapter p { font-size:1.12rem; line-height:1.5; }
-.sj-controls { grid-column:1/-1; display:flex; align-items:center; gap:1rem; }
-.sj-controls button,
-.sj-rail-nav button { width:48px; height:48px; border:1px solid currentColor; border-radius:50%; color:inherit; }
-.sj-controls i { font-style:normal; }
-.sj-track { position:absolute; z-index:3; left:4vw; right:4vw; bottom:2rem; height:1px; background:#ffffff55; }
-.sj-track span { display:block; width:100%; height:1px; background:#d8bc7a; transform:scaleX(0); transform-origin:left; }
-.sj-track i { --moon-cover:0; position:absolute; top:-7px; left:0; width:15px; height:15px; overflow:hidden; border-radius:50%; background:#d8bc7a; transform:translateX(-50%); box-shadow:0 0 8px #d8bc7a66; will-change:transform,background-color,box-shadow; }
-.sj-track i::after { content:""; position:absolute; inset:-2px; border-radius:50%; background:#070d18; opacity:var(--moon-cover); transform:translate(5px,-3px); }
-.sj-index { position:absolute; z-index:3; right:1.5rem; top:50%; transform:translateY(-50%); }
-.sj-index button { min-width:44px; min-height:32px; color:#fff; font-size:.72rem; opacity:.45; }
-.sj-index button[aria-current=true] { opacity:1; }
-
-.sj-schedules { padding:0 5vw 6rem; }
-.sj-schedule { max-width:1200px; margin:0 auto 4rem; }
-.sj-schedule>h3 { margin-bottom:1.5rem; font-family:var(--font-editorial); font-size:clamp(2rem,4vw,4rem); }
-.sj-schedule__list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:#ffffff33; }
-.sj-schedule article { min-height:280px; padding:2rem; background-color:#13263a; background-position:center; background-size:cover; }
-.sj-schedule article[data-photo="0"] { background-image:linear-gradient(140deg,#081728,#29445e); }
-.sj-schedule article[data-photo="1"] { background-image:linear-gradient(140deg,#17283d,#526b7b); }
-.sj-schedule article[data-photo="2"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/slhero/card-01.jpg'); }
-.sj-schedule article[data-photo="3"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/02-lesson.jpg'); }
-.sj-schedule article[data-photo="4"] { background-image:linear-gradient(140deg,#463829,#bd9166); }
-.sj-schedule article[data-photo="5"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/life-split-academic.jpg'); }
-.sj-schedule article[data-photo="6"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/06-field.jpg'); }
-.sj-schedule article[data-photo="7"] { background-image:linear-gradient(0deg,#050d19e8,#050d1955),url('../img/hrun/04-hall.jpg'); }
-.sj-schedule article[data-photo="8"] { background-image:linear-gradient(140deg,#17283a,#31435a); }
-.sj-schedule article[data-photo="9"] { background-image:linear-gradient(140deg,#070d18,#182b41); }
-.sj-schedule time { font-size:.8rem; letter-spacing:.08em; }
-.sj-schedule h4 { margin:1rem 0; font-family:var(--font-editorial); font-size:2rem; }
-.sj-schedule p { max-width:34rem; line-height:1.55; }
-.sj-motion .sj-schedules { display:none; }
-
-.sj-home,
-.sj-work,
-.sj-practical { padding:clamp(6rem,11vw,11rem) 0; }
-.sj-heading { display:grid; grid-template-columns:.6fr 1.3fr 1fr; gap:3rem; align-items:end; margin-bottom:5rem; }
-.sj-heading>p:last-child { line-height:1.7; }
-/* ------------------------------------------------------------
-   The photography
+/* ============================================================
+   The CIRS experience
    ------------------------------------------------------------
-   Three galleries on this page — the residential wall, the sports
-   rail and the festival strip — were each sized in their own unit
-   and captioned in their own way, so the same school photographs
-   arrived at a different shape on every screen and sat under a
-   small beige tab that belonged to none of them.
+   One story in six parts, in one visual system: the site's purple for
+   the day and the night, ivory and cream for everything the reader
+   stops to read, and gold only for the time — the clock, the marker,
+   the current step. Type is the site's own roles (cirs.css); headings
+   are sentence case, and only the small labels are set in capitals.
 
-   They are one presentation now, and the rules below are shared by
-   all three:
+   The day (section.xd) is written as a plain vertical sequence of ten
+   phases, each listing both schools. That is what a phone, a tablet,
+   a reader without scripting and a screen reader get. On a wide,
+   tall enough window assets/js/student-life-journey.js adds .is-stage,
+   and the same phases become a pinned stage with a live clock and the
+   two schools' current activities side by side.
+   ============================================================ */
 
-     * every frame is an aspect-ratio, not a viewport height, so a
-       photograph is cropped identically on a laptop, a monitor and
-       a phone, and the crop is a decision rather than a side effect
-       of how tall the window happens to be;
-     * the crops are a family — 3:2 through the wall and the rail,
-       4:3 through the strip, which is what those three photographs
-       already are, so they are shown very nearly uncut;
-     * the caption sits on the photograph under a gradient foot,
-       the way a frame is captioned in print, instead of on a chip
-       laid over it;
-     * the image rests slightly wider than its frame and settles
-       back on hover — one property, transform, and nothing that
-       moves unless the reader asks for it.
+body.student-life{
+  --xp-night: var(--dark-deep);
+  --xp-dusk:  var(--dark-mid);
+  --xp-purple: var(--dark);
+  /* House colours are meaning, not decoration: the four accents beside the
+     house names. The same values as assets/css/houses.css. */
+  --xp-vasishtha: #9E1B33;
+  --xp-valmiki: #E0A32A;
+  --xp-vishwamitra: #1E7A63;
+  --xp-vyasa: #2E5199;
+  /* Where sticky things sit: just under the floating header pill. */
+  --xp-under-head: calc(var(--nv-pill-h, 58px) + 2 * var(--nv-pill-inset, 10px));
+  background: var(--paper);
+  color: var(--ink);
+}
+body.student-life main{ overflow: clip; }
+body.student-life figure{ margin: 0; }
 
-   The current photographs and captions match the section's activities;
-   object-position is set once, high enough to keep faces in the
-   frame when a portrait source is shown in a landscape one.
+/* The small label above every heading. */
+.xk{
+  margin: 0 0 1.1rem;
+  font: var(--weight-label, 500) var(--fs-xs)/1.3 var(--font-ui);
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--label);
+}
+.xh .xk, .xd .xk, .xn .xk{ color: var(--gold); }
+
+.xh__title, .xd__heading, .xl__heading, .xb__heading, .xq__heading, .xn__heading{
+  font-family: var(--font-display);
+  font-weight: var(--weight-section, 500);
+  letter-spacing: -.02em;
+  line-height: 1.02;
+  text-transform: none;
+}
+
+/* A text link, with the arrow the sections share. */
+.xa{
+  display: inline-flex; align-items: center; gap: .45em;
+  min-height: 44px;
+  color: var(--brand); font-weight: 500;
+  text-decoration: underline; text-decoration-color: var(--gold);
+  text-decoration-thickness: 1px; text-underline-offset: .35em;
+  transition: text-decoration-thickness .2s var(--e);
+}
+.xa:hover{ text-decoration-thickness: 2px; }
+.xa span{ transition: transform .25s var(--e); }
+.xa:hover span{ transform: translateX(3px); }
+
+/* ------------------------------------------------------------
+   A. The opening
    ------------------------------------------------------------ */
-.sj-photo-wall,
-.sj-rail,
-.sj-festival-strip { --sj-gap:clamp(12px,1.35vw,22px); }
-/* The browser's own margin on <figure> is 1em 40px, and it was still on:
-   every frame on this page sat eighty pixels narrower than the track it
-   was given, which is why the gaps between the festival photographs
-   measured a hundred pixels where the grid asked for twenty. */
-.sj-photo-wall figure,
-.sj-rail figure,
-.sj-festival-strip figure { margin:0; }
-
-.sj-photo-wall { display:grid; grid-template-columns:1.52fr .78fr; grid-template-rows:auto auto; gap:var(--sj-gap); }
-.sj-photo-wall figure { position:relative; overflow:hidden; background:#0f1c28; aspect-ratio:3/2; }
-/* The main frame is told to fill the two rows beside it rather than
-   carrying a ratio of its own, so the wall closes exactly and the
-   three photographs share one baseline at every width. */
-.sj-photo-wall__main { grid-row:1/3; aspect-ratio:auto; height:100%; }
-
-.sj-photo-wall img,
-.sj-rail img,
-.sj-festival-strip img {
-  width:100%; height:100%;
-  object-fit:cover; object-position:center 32%;
-  transform:scale(1.035); transform-origin:center 40%;
-  transition:transform 1.15s cubic-bezier(.16,1,.3,1);
+.xh{
+  position: relative; display: flex; align-items: flex-end;
+  min-height: 100svh; overflow: hidden;
+  color: var(--on-dark); background: var(--xp-night);
 }
-.sj-photo-wall figure:hover img,
-.sj-rail figure:hover img,
-.sj-festival-strip figure:hover img { transform:scale(1); }
-
-/* The cut-out. object-fit:cover on a masked subject crops the mask and
-   fills the rest with whatever is behind it; contain shows the trace
-   whole, on a ground deep enough for it to read as a plate rather than
-   as a photograph that failed to load. */
-.sj-photo-wall__cut {
+.xh__photo, .xh__photo img{
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.xh__photo img{ object-fit: cover; object-position: 50% 45%; }
+/* Two layers: air for the header at the top, and the reading ground at the
+   foot that runs straight on into the day below. */
+.xh__shade{
+  position: absolute; inset: 0;
   background:
-    radial-gradient(82% 68% at 50% 18%, #1d3346 0%, #14222f 58%, #0d1821 100%);
+    linear-gradient(180deg, rgb(30 22 38 / .55) 0%, rgb(30 22 38 / 0) 24%),
+    linear-gradient(0deg, var(--xp-night) 0%, rgb(30 22 38 / .9) 16%, rgb(30 22 38 / .5) 38%, rgb(30 22 38 / 0) 60%);
 }
-.sj-photo-wall__cut img {
-  object-fit:contain; object-position:center bottom;
-  padding:clamp(14px,1.6vw,26px) clamp(14px,1.6vw,26px) 0;
-  transform:none;
+/* The words sit at the foot, over the track, where the photograph has
+   nothing to say: the runners' faces keep the upper two thirds. */
+.xh__inner{
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 31rem);
+  column-gap: clamp(2rem, 6vw, 6rem); align-items: end;
+  padding-block: 9rem clamp(3rem, 8vh, 5.5rem);
 }
-.sj-photo-wall__cut:hover img { transform:none; }
-
-/* The caption, shared by all three galleries. */
-.sj-photo-wall figure::after,
-.sj-rail figure::after,
-.sj-festival-strip figure::after {
-  content:""; position:absolute; inset:auto 0 0 0; height:46%;
-  pointer-events:none;
-  background:linear-gradient(to top,
-    rgba(4,13,26,.88) 0%, rgba(4,13,26,.62) 34%, rgba(4,13,26,.18) 68%, transparent 100%);
+.xh__title{
+  grid-column: 1 / -1;
+  font-size: clamp(3rem, 7.2vw, 6.9rem);
+  line-height: .98;
 }
-.sj-photo-wall figcaption,
-.sj-rail figcaption,
-.sj-festival-strip figcaption {
-  position:absolute; z-index:1;
-  left:clamp(14px,1.6vw,26px); right:clamp(14px,1.6vw,26px);
-  bottom:clamp(12px,1.4vw,22px);
-  color:#eee9de; font-size:.74rem;
-  letter-spacing:.11em; text-transform:uppercase; line-height:1.45;
+.xh__lead{
+  grid-column: 1; grid-row: 2 / span 2; align-self: start;
+  max-width: 26ch; margin: 1.3rem 0 0;
+  font-family: var(--font-editorial); font-size: clamp(1.3rem, 2.1vw, 1.9rem);
+  line-height: 1.3; color: var(--gold-pale);
 }
-
-@media (prefers-reduced-motion:reduce){
-  .sj-photo-wall img,
-  .sj-rail img,
-  .sj-festival-strip img { transition:none; transform:none; }
+.xh__copy{
+  grid-column: 2;
+  max-width: 34rem; margin: 1.5rem 0 0;
+  font-size: var(--fs-lead); line-height: 1.55; color: var(--on-dark-soft);
 }
-
-.sj-sports { padding:8rem 0; background:#17283a; color:#fff; }
-.sj-section-head { display:flex; justify-content:space-between; align-items:end; margin-bottom:4rem; }
-.sj-section-head h2 { font-size:clamp(3rem,5.8vw,6.5rem); }
-.sj-rail { display:flex; gap:var(--sj-gap); overflow-x:auto; padding:0 max(4vw, calc((100vw - min(64vw, 820px)) / 2)) 2rem; scroll-snap-type:x mandatory; scrollbar-width:thin; }
-/* Every frame on the rail is the same 3:2. It used to be a fixed height in
-   vh against a free width, so the same four photographs were a different
-   shape on every window, and the two portrait sources were cropped to a
-   band across the middle of the subject. */
-.sj-rail figure { position:relative; overflow:hidden; background:#0f1c28; flex:0 0 min(64vw,820px); aspect-ratio:3/2; scroll-snap-align:center; }
-.sj-rail-nav { display:flex; align-items:center; justify-content:flex-end; gap:1rem; margin-top:1rem; }
-.sj-rail-nav p { min-width:3rem; text-align:center; font-variant-numeric:tabular-nums; }
-.sj-links { display:flex; flex-wrap:wrap; gap:2rem; margin-top:2rem; }
-.sj-links a { padding:.7rem 0; border-bottom:1px solid currentColor; }
-
-.sj-houses { padding-top:8rem; background:#e3dccb; }
-.sj-houses__stage { display:flex; min-height:70vh; margin-top:4rem; background:url('../img/adm-houses.jpg') center/cover; }
-.sj-house { --house:#333c; flex:1; display:flex; flex-direction:column; justify-content:flex-end; padding:2.5rem; color:#fff; background-color:var(--house); transition:flex .4s; }
-.sj-houses__stage:hover .sj-house:hover { flex:1.7; }
-.sj-house.red { --house:#6f1927e8; }
-.sj-house.yellow { --house:#c9a961e5; color:#11110f; }
-.sj-house.green { --house:#26553be8; }
-.sj-house.blue { --house:#1b3e69e8; }
-.sj-house h3 { margin:.5rem 0; font-family:var(--font-editorial); font-size:clamp(1.8rem,3vw,3.3rem); }
-.sj-house p { line-height:1.5; }
-
-.sj-work__grid,
-.sj-practical__grid { display:grid; grid-template-columns:1fr 1.2fr; gap:6rem; }
-.sj-board { display:grid; grid-template-columns:1fr 1fr; gap:1rem; transform:rotate(.4deg); }
-.sj-board a { display:flex; min-height:230px; flex-direction:column; padding:2rem; background:#faf9f3; border:1px solid #cfc3b0; box-shadow:2px 4px #0002; }
-.sj-board a:nth-child(2) { transform:rotate(-1.8deg); background:#d9e0d3; }
-.sj-board a:nth-child(3) { grid-column:1/-1; background:#e8d9b5; }
-.sj-board strong { margin:auto 0 .5rem; font:2rem var(--font-editorial); }
-
-.sj-festivals { padding:8rem 0; background:#1f1f1b; color:#fff; }
-/* Three photographs that are all 1600x1194 — very close to 4:3 — so the
-   strip carries 4:3 and shows them essentially uncut. The middle frame
-   keeps its drop, which is the strip's own rhythm and the reason it is a
-   strip rather than a row; it is stated in the shared gap now rather than
-   in six rems, so it holds its proportion as the column narrows. */
-.sj-festival-strip { display:grid; grid-template-columns:1.22fr .92fr 1.06fr; gap:var(--sj-gap); align-items:start; margin:4rem 4vw 0; }
-.sj-festival-strip figure { position:relative; overflow:hidden; background:#0f1c28; aspect-ratio:4/3; }
-.sj-festival-strip figure:nth-child(2) { margin-top:clamp(36px,6vw,96px); }
-.sj-practical__grid>div>p:not(.sj-kicker) { max-width:30rem; margin:2rem 0; line-height:1.65; }
-.sj-accordions details { border-top:1px solid #958b7d; }
-.sj-accordions details:last-child { border-bottom:1px solid #958b7d; }
-.sj-accordions summary { cursor:pointer; padding:1.4rem 0; font:1.5rem var(--font-editorial); }
-.sj-accordions details>p { padding-bottom:1.5rem; line-height:1.6; }
-.sj-tables { display:grid; grid-template-columns:1fr 1fr; gap:2rem; padding-bottom:2rem; }
-.sj-tables table { width:100%; border-collapse:collapse; }
-.sj-tables caption { margin-bottom:.7rem; text-align:left; font-weight:bold; }
-.sj-tables th,
-.sj-tables td { padding:.35rem 0; border-bottom:1px solid #0002; text-align:left; font-size:.9rem; }
-.sj-tables th { width:5rem; }
-
-.sj-night { position:relative; min-height:100svh; color:#fff; }
-.sj-night__content { position:relative; z-index:1; display:flex; min-height:100svh; flex-direction:column; justify-content:flex-end; padding-bottom:8rem; }
-.sj-night h2 { margin:2rem 0; font-size:clamp(3.5rem,7.5vw,8rem); }
-.sj-night h2 span { color:#d8bc7a; }
-.sj-night nav { display:flex; flex-wrap:wrap; gap:1rem 2.5rem; }
-.sj-night nav a { padding:.5rem 0; border-bottom:1px solid #ffffff88; }
-
-@keyframes sj-dawn { from { opacity:.12; transform:scale(1.04); } to { opacity:.72; transform:none; } }
-
-@media (max-width:800px) {
-  .sj-hero h1 { font-size:clamp(3.2rem,14vw,5.2rem); }
-  .sj-day__intro,
-  .sj-heading,
-  .sj-work__grid,
-  .sj-practical__grid { grid-template-columns:1fr; gap:2rem; }
-  .sj-day__intro { padding:6rem var(--gut) 3rem; }
-  .sj-day__intro h2 { font-size:clamp(2.3rem,11.5vw,3rem); }
-  .sj-motion .sj-journey { display:none; }
-  .sj-schedules,
-  .sj-motion .sj-schedules { display:block; padding-bottom:5rem; }
-  .sj-enhanced .sj-schedule:not(.is-active) { display:none; }
-  .sj-schedule__list { display:block; background:none; }
-  .sj-schedule article { position:relative; min-height:72svh; display:flex; flex-direction:column; justify-content:flex-end; margin-bottom:1rem; overflow:hidden; }
-  .sj-schedule article::before { content:""; position:absolute; inset:0; z-index:0; background:linear-gradient(0deg,#050d1966,#050d1900); }
-  .sj-schedule article>* { position:relative; z-index:1; }
-  .sj-schedule h4 { font-size:2.7rem; }
-  /* One column, and the same crops the wide layout uses — the main frame
-     takes the ratio it inherited from the grid on desktop, so a phone
-     sees the photographs the way the design intends rather than in
-     whatever shape a percentage of its own height produces. */
-  .sj-photo-wall { grid-template-columns:1fr; grid-template-rows:auto; }
-  .sj-photo-wall__main { grid-row:auto; aspect-ratio:3/2; height:auto; }
-  .sj-photo-wall__cut { aspect-ratio:4/5; }
-  .sj-section-head { display:block; }
-  .sj-rail { padding-inline:9vw; }
-  .sj-rail figure { flex-basis:82vw; }
-  .sj-houses__stage { display:grid; min-height:0; background:none; }
-  .sj-house { min-height:58svh; }
-  .sj-board { grid-template-columns:1fr; transform:none; }
-  .sj-board a,
-  .sj-board a:nth-child(2),
-  .sj-board a:nth-child(3) { grid-column:auto; transform:none; }
-  .sj-festival-strip { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin; }
-  .sj-festival-strip figure,
-  .sj-festival-strip figure:nth-child(2) { flex:0 0 82vw; margin:0; scroll-snap-align:center; }
-  .sj-tables { grid-template-columns:1fr; }
-  .sj-night nav { display:grid; }
+.xh__down{
+  grid-column: 2; justify-self: start;
+  display: inline-flex; align-items: center; gap: .5rem;
+  min-height: 44px; margin-top: 1rem;
+  color: var(--on-dark); font-weight: 500;
+  border-bottom: 1px solid rgb(255 195 8 / .7);
 }
+.xh__down span{ color: var(--gold); }
 
-@media (min-width:801px) {
-  .sj-festivals .sj-rail-nav { display:none; }
+/* ------------------------------------------------------------
+   B. The day — shared by both layouts
+   ------------------------------------------------------------ */
+.xd{ position: relative; background: var(--xp-night); color: var(--on-dark); }
+.xd__intro{
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 5vw, 6rem); align-items: end;
+  padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(2.5rem, 5vw, 4.5rem);
 }
+.xd__intro .xk{ grid-column: 1 / -1; margin-bottom: -.4rem; }
+.xd__heading{ max-width: 13ch; font-size: clamp(2.4rem, 5vw, 4.6rem); }
+.xd__lede p{ margin: 0; max-width: 34rem; line-height: 1.6; color: var(--on-dark-soft); }
+.xd__lede .xd__note{ margin-top: 1rem; font-size: var(--fs-xs); color: var(--on-dark-mute); }
 
-@media (max-width:359px) {
-  .sj-hero h1 { font-size:2.7rem; }
-  .sj-section-head h2 { font-size:2.5rem; }
-  .sj-night h2 { font-size:2.45rem; }
+/* The sequence: every phase in order, both schools in each. */
+.xd__phases{ list-style: none; margin: 0; padding: 0 0 clamp(3rem, 8vw, 6rem); }
+.xp{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "when" "title" "gap" "line" "tracks" "photo";
+  max-width: var(--maxw); margin-inline: auto;
+  padding: 0 var(--gut) clamp(2.75rem, 7vw, 4.5rem);
+}
+.xp__text{ display: contents; }
+/* The two start times, pinned under the header while the event is read. */
+.xp__when{
+  grid-area: when;
+  position: sticky; top: var(--xp-under-head); z-index: 2;
+  display: flex; justify-content: space-between; gap: 1rem;
+  margin: 0 calc(-1 * var(--gut)) .9rem; padding: .55rem var(--gut);
+  font: 600 var(--fs-sm)/1.3 var(--font-ui);
+  font-variant-numeric: tabular-nums; letter-spacing: .02em;
+  color: var(--gold-lit);
+  background: rgb(30 22 38 / .94);
+  border-top: 1px solid rgb(255 195 8 / .45);
+}
+.xp__title{
+  grid-area: title; margin: .15rem 0 .35rem;
+  font-family: var(--font-display); font-weight: var(--weight-section, 500);
+  font-size: clamp(1.9rem, 4.6vw, 2.8rem); line-height: 1.05; letter-spacing: -.015em;
+}
+.xp__gap{ grid-area: gap; margin: 0 0 .6rem; font: 600 var(--fs-sm)/1.35 var(--font-ui); color: var(--gold-lit); }
+.xp__line{ grid-area: line; margin: 0 0 1.4rem; max-width: 40rem; line-height: 1.55; color: var(--on-dark-soft); }
+.xp__tracks{
+  grid-area: tracks;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px;
+  background: rgb(250 249 243 / .16);
+  border: 1px solid rgb(250 249 243 / .16);
+}
+.xp__track{ padding: 1rem 1.1rem 1.1rem; background: var(--xp-night); }
+.xp__school{
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .2rem .8rem;
+  margin: 0 0 .5rem;
+  font: 600 var(--fs-xs)/1.3 var(--font-ui); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--on-dark);
+}
+.xp__school span{ font-weight: 400; letter-spacing: .02em; text-transform: none; color: var(--on-dark-mute); }
+.xp__range{
+  margin: 0; font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.25rem, 3.2vw, 1.6rem); line-height: 1.15;
+  font-variant-numeric: lining-nums tabular-nums; color: var(--on-dark);
+}
+/* An event that gathers several slots lists them under its range; an event
+   of one slot keeps the list for the script and does not show it. */
+.xp__slots{ list-style: none; margin: .6rem 0 0; padding: 0; }
+.xp__slots--one{ display: none; }
+.xp__slots li{
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .1rem .8rem;
+  padding: .4rem 0; border-top: 1px solid rgb(250 249 243 / .12);
+  font-size: var(--fs-sm); line-height: 1.4;
+}
+.xp__time{ font-variant-numeric: tabular-nums; color: var(--on-dark-soft); white-space: nowrap; }
+.xp__what{ color: var(--on-dark); }
+.xp__photo{ grid-area: photo; margin-top: 1.1rem; }
+.xp__photo img{ display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; background: var(--xp-dusk); }
+.xp__photo figcaption{ margin-top: .55rem; font-size: var(--fs-xs); line-height: 1.4; color: var(--on-dark-mute); }
+
+/* Wider sequence (tablet, or a short landscape window): the event beside
+   its photograph, and the two schools across the full width below. */
+@media (min-width: 700px){
+  .xp{
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-areas: "when when" "title photo" "gap photo" "line photo" "tracks tracks";
+    grid-template-rows: auto auto auto 1fr auto;
+    column-gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .xp:not(:has(.xp__photo)){ grid-template-areas: "when when" "title title" "gap gap" "line line" "tracks tracks"; }
+  .xp__photo{ margin-top: .2rem; align-self: start; }
+  .xp__tracks{ margin-top: 1.2rem; }
+}
+/* A phone keeps the two schools side by side — the comparison is the
+   point. Only below 360px, where two columns would be too narrow to read,
+   do they stack. */
+@media (max-width: 519px){
+  .xp__track{ padding: .8rem .75rem .9rem; }
+  .xp__school{ display: block; }
+  .xp__school span{ display: block; margin-top: .15rem; }
+  .xp__slots li{ grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .xp__time{ font-size: .82rem; white-space: normal; }
+}
+@media (max-width: 359px){
+  .xp__tracks{ grid-template-columns: minmax(0, 1fr); }
 }
 
-@media (prefers-reduced-motion:reduce) {
-  .sj-hero>.sj-cover { animation:none; }
-  .sj-motion .sj-journey { display:none; }
-  .sj-schedules,
-  .sj-motion .sj-schedules { display:block; padding-bottom:5rem; }
-  .sj-enhanced .sj-schedule:not(.is-active) { display:none; }
-  .sj-schedule__list { display:block; background:none; }
-  .sj-schedule article { min-height:auto; padding:1.5rem; border-bottom:1px solid #ffffff33; }
-  .sj-schedule h4 { font-size:1.6rem; }
-  .sj-house,
-  .sj-scenes > * { transition:none; }
-  .sj-stars { display:none; }
-  html:focus-within { scroll-behavior:auto; }
+/* The stage's own parts are not shown until the script builds the stage. */
+.xd__live{ display: none; }
+.xd__nav[hidden]{ display: none; }
+
+/* ------------------------------------------------------------
+   B. The day — the pinned stage (wide windows, script on)
+   ------------------------------------------------------------ */
+.xd.is-stage .xd__run{ position: relative; height: calc(100vh + var(--xd-run, 470vh)); }
+.xd.is-stage .xd__stage{
+  --xd-rgb: 22 16 30; --xd-a: .95;
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+  background: var(--xp-night);
+}
+.xd.is-stage .xd__phases{ position: absolute; inset: 0; padding: 0; }
+.xd.is-stage .xp{ position: absolute; inset: 0; display: block; max-width: none; padding: 0; }
+/* The phases' own words stay in the document, in order, for a screen
+   reader; the live panel above them is what the eye reads. */
+.xd.is-stage .xp__text{
+  display: block; position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+.xd.is-stage .xp__photo{ position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .9s var(--e); }
+.xd.is-stage .xp__photo.is-shown{ opacity: 1; }
+.xd.is-stage .xp__photo img{ width: 100%; height: 100%; aspect-ratio: auto; }
+/* Only the scene on screen and its two neighbours are drawn, so the lazy
+   photographs load one step ahead rather than all at once. */
+.xd.is-stage .xp__photo:not(.is-near) img{ display: none; }
+.xd.is-stage .xp__photo figcaption{ display: none; }
+
+.xd__scrim{ display: none; }
+.xd.is-stage .xd__scrim{
+  display: block; position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(180deg, rgb(var(--xd-rgb) / .5) 0%, rgb(var(--xd-rgb) / 0) 22%),
+    linear-gradient(0deg, rgb(var(--xd-rgb) / .92) 0%, rgb(var(--xd-rgb) / 0) 34%),
+    rgb(var(--xd-rgb) / var(--xd-a, .88));
+  transition: background-color .6s linear;
+}
+
+.xd.is-stage .xd__live{
+  position: absolute; inset: 0; z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(14.5rem, 1fr) minmax(0, 34rem) minmax(14.5rem, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  align-items: center; column-gap: clamp(1.25rem, 3vw, 3rem);
+  padding: calc(var(--xp-under-head) + 1.5rem) max(var(--gut), 2rem) 9.5rem;
+  max-width: 1480px; margin-inline: auto;
+}
+.xd__card{
+  position: relative; z-index: 1; width: 100%; max-width: 21.5rem;
+  padding: 1.15rem 1.35rem 1.25rem;
+  background: var(--paper); color: var(--ink);
+  box-shadow: 0 18px 50px rgb(14 9 18 / .35);
+}
+.xd__card--junior{ justify-self: start; }
+.xd__card--senior{ justify-self: end; }
+.xd__card::before{
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+  background: var(--brand);
+}
+.xd__school{
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .1rem .8rem;
+  margin: 0; font: 600 var(--fs-xs)/1.3 var(--font-ui);
+  letter-spacing: .1em; text-transform: uppercase; color: var(--label);
+}
+.xd__school span{ font-weight: 400; letter-spacing: .02em; text-transform: none; color: var(--ink-mute); }
+/* The side card carries the school's own timing for the event: the range
+   large, and the slots it gathers beneath it. */
+.xd__body{ margin-top: .7rem; }
+.xd__card .xp__range{
+  font-size: clamp(1.9rem, 2.7vw, 2.8rem); line-height: 1.05; letter-spacing: -.01em;
+  color: var(--ink); text-wrap: balance;
+}
+.xd__card .xp__slots{ margin-top: .85rem; border-top: 1px solid var(--rule); }
+.xd__card .xp__slots li{ border-top: 0; padding: .45rem 0 0; }
+.xd__card .xp__what{ color: var(--ink); }
+.xd__card .xp__time{ color: var(--ink-soft); }
+
+/* The centre words sit on the photograph itself, so they carry a soft
+   shade of their own, in the tint of the hour, rather than a box. */
+.xd__centre{ position: relative; isolation: isolate; text-align: center; }
+/* Wide enough that the ends of the explanatory line still sit on it over the
+   brightest photograph (measured: 4.5:1 or better at every phase). */
+.xd__centre::before{
+  content: ""; position: absolute; inset: -4rem -8rem; z-index: -1;
+  background: radial-gradient(closest-side, rgb(var(--xd-rgb) / .84), rgb(var(--xd-rgb) / .78) 68%, rgb(var(--xd-rgb) / 0));
+}
+.xd__count{
+  margin: 0; font: 600 var(--fs-xs)/1 var(--font-ui); letter-spacing: .14em;
+  font-variant-numeric: tabular-nums; color: var(--gold-lit);
+}
+.xd__title{
+  margin: .9rem auto 0; max-width: 12ch;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: min(6.4vw, 11vh); line-height: .98; letter-spacing: -.025em;
+  color: var(--on-dark); text-wrap: balance;
+}
+.xd__gap{
+  margin: 1.2rem 0 0; font: 600 var(--fs-sm)/1.3 var(--font-ui);
+  letter-spacing: .04em; color: var(--gold-lit);
+}
+.xd__line{ margin: .7rem auto 0; max-width: 31rem; font-size: 1rem; line-height: 1.5; color: var(--on-dark-soft); text-wrap: pretty; }
+
+/* When both schools keep the very same time, both cards take the gold bar. */
+.xd__live.is-aligned .xd__card::before{ height: 4px; background: var(--gold); }
+
+.xd__caption{
+  position: absolute; left: max(var(--gut), 2rem); bottom: 7.1rem; margin: 0;
+  max-width: 40rem; font-size: var(--fs-xs); line-height: 1.4; color: var(--on-dark-soft);
+}
+
+/* The whole day in two thin lanes, on a true clock: the Senior lane sits
+   visibly later than the Junior one. The current event is lit in both. */
+.xd__rail{
+  position: absolute; left: max(var(--gut), 2rem); right: max(var(--gut), 5.75rem); bottom: 4.6rem;
+  display: grid; grid-template-columns: 4.2rem minmax(0, 1fr); align-items: center;
+  padding-inline: 3.4rem;
+}
+.xd__rail-key{
+  display: grid; gap: 3px; margin: 0;
+  font: 500 .66rem/9px var(--font-ui); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--on-dark-mute);
+}
+.xd__ribbons{ position: relative; height: 21px; }
+.xd__seg{ position: absolute; height: 9px; background: rgb(250 249 243 / .22); box-shadow: inset -1px 0 0 rgb(30 22 38 / .9); transition: background-color .3s var(--e); }
+.xd__seg[data-lane="senior"]{ top: 12px; }
+.xd__seg[data-kind="study"]{ background: rgb(250 249 243 / .32); }
+.xd__seg[data-kind="meal"]{ background: rgb(250 249 243 / .42); }
+.xd__seg[data-kind="spirit"]{ background: rgb(250 249 243 / .5); }
+.xd__seg[data-kind="active"]{ background: rgb(250 249 243 / .6); }
+.xd__seg[data-kind="rest"]{ background: rgb(250 249 243 / .12); }
+.xd__seg.is-on{ background: var(--gold); }
+
+.xd.is-stage .xd__nav{
+  position: absolute; z-index: 3;
+  left: max(var(--gut), 2rem); right: max(var(--gut), 5.75rem); bottom: 1.1rem;
+  display: flex; align-items: center; gap: .6rem;
+}
+.xd__step{
+  flex: 0 0 auto; display: grid; place-items: center;
+  width: 44px; height: 44px; border-radius: 50%;
+  color: var(--on-dark); border: 1px solid rgb(250 249 243 / .5);
+  transition: background-color .2s var(--e), color .2s var(--e), border-color .2s var(--e);
+}
+.xd__step:hover{ background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.xd__step:disabled{ opacity: .35; pointer-events: none; }
+.xd__jumps{
+  flex: 1 1 auto; list-style: none; margin: 0; padding: 0 0 0 4.2rem;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+.xd__jump{
+  width: 100%; min-height: 44px; padding: .35rem .1rem 0;
+  font: 500 .74rem/1.15 var(--font-ui);
+  color: var(--on-dark-mute); text-align: center;
+  border-top: 1px solid rgb(250 249 243 / .2);
+  transition: color .2s var(--e), border-color .2s var(--e);
+}
+.xd__jump:hover{ color: var(--on-dark); border-top-color: rgb(250 249 243 / .6); }
+.xd__jump[aria-current="step"]{ color: var(--gold-lit); border-top: 2px solid var(--gold); }
+.xd .xd__step:focus-visible, .xd .xd__jump:focus-visible{ outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* A laptop with a short window: the explanatory line gives way first. */
+@media (max-height: 760px){
+  .xd.is-stage .xd__live{ padding-bottom: 8.6rem; }
+  .xd__line{ display: none; }
+}
+
+/* ------------------------------------------------------------
+   C. Life together
+   ------------------------------------------------------------ */
+.xl{ padding-block: clamp(4.5rem, 10vw, 8.5rem); background: var(--paper); }
+.xl__grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .54fr) minmax(0, .54fr);
+  grid-template-areas: "main text text" "main d1 d2";
+  grid-template-rows: auto 1fr;
+  gap: clamp(1.25rem, 2.2vw, 2rem) clamp(1.25rem, 2.6vw, 2.5rem);
+}
+.xl__main{ grid-area: main; }
+.xl__text{ grid-area: text; align-self: end; padding-bottom: .5rem; }
+.xl__detail:nth-of-type(2){ grid-area: d1; }
+.xl__detail:nth-of-type(3){ grid-area: d2; }
+.xl__detail{ align-self: end; }
+.xl__heading{ max-width: 14ch; font-size: clamp(2.2rem, 4.2vw, 4rem); }
+.xl__text > p{ max-width: 36rem; margin: 1.2rem 0 0; line-height: 1.65; color: var(--ink-soft); }
+.xl__text > .xl__houses{ color: var(--ink); }
+.xl__house{ white-space: nowrap; }
+.xl__house::before{
+  content: ""; display: inline-block; width: .5em; height: .5em; margin-right: .32em;
+  border-radius: 50%; vertical-align: .06em; background: var(--hc);
+}
+.xl__house--vasishtha{ --hc: var(--xp-vasishtha); }
+.xl__house--valmiki{ --hc: var(--xp-valmiki); }
+.xl__house--vishwamitra{ --hc: var(--xp-vishwamitra); }
+.xl__house--vyasa{ --hc: var(--xp-vyasa); }
+.xl__text .xa{ margin-top: 1rem; }
+.xl figure img, .xb figure img{ display: block; width: 100%; height: auto; background: var(--paper-3); }
+.xl figcaption, .xb figcaption{
+  margin-top: .6rem; font-size: var(--fs-xs); line-height: 1.45; color: var(--ink-mute);
+}
+
+/* ------------------------------------------------------------
+   D. Life beyond the timetable
+   ------------------------------------------------------------ */
+.xb{ padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--paper-2); }
+.xb__head{
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: .5rem clamp(1.5rem, 5vw, 5rem); align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.xb__head .xk{ grid-column: 1 / -1; margin-bottom: .4rem; }
+.xb__heading{ max-width: 13ch; font-size: clamp(2.2rem, 4.2vw, 4rem); }
+.xb__head > p:last-child{ margin: 0; max-width: 28rem; line-height: 1.6; color: var(--ink-soft); }
+.xb__paths{
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 3rem); align-items: start;
+}
+/* The one irregularity: the middle path sits lower, so the three read as
+   photographs laid on a table rather than as a row of cards. */
+.xb__path:nth-child(2){ margin-top: clamp(2rem, 6vw, 5.5rem); }
+.xb__title{
+  margin: 1.4rem 0 .35rem;
+  font-family: var(--font-display); font-weight: var(--weight-section, 500);
+  font-size: clamp(1.8rem, 2.6vw, 2.5rem); line-height: 1;
+}
+.xb__path > p{ margin: 0; line-height: 1.55; color: var(--ink-soft); }
+.xb__path > .xa{ margin-top: .4rem; }
+.xb__links{ display: flex; flex-wrap: wrap; gap: 0 1.4rem; margin-top: .4rem !important; }
+
+/* ------------------------------------------------------------
+   E. Practical information
+   ------------------------------------------------------------ */
+.xq{ padding-block: clamp(4rem, 8vw, 7rem); background: var(--paper); border-top: 1px solid var(--rule); }
+.xq__grid{ display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 2fr); gap: clamp(2rem, 5vw, 5rem); }
+.xq__heading{ max-width: 11ch; font-size: clamp(2rem, 3.4vw, 3.1rem); }
+.xq__head > p:last-child{ margin: 1rem 0 0; max-width: 24rem; line-height: 1.6; color: var(--ink-soft); }
+.xq__tables{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(1.5rem, 3vw, 2.5rem); align-items: start; }
+.xq summary{
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  min-height: 56px; padding: .9rem 0; cursor: pointer; list-style: none;
+  font-family: var(--font-display); font-size: 1.3rem; line-height: 1.2;
+  border-top: 1px solid var(--ink-mute);
+}
+.xq summary::-webkit-details-marker{ display: none; }
+.xq summary::after{
+  content: "+"; flex: 0 0 auto; font: 400 1.4rem/1 var(--font-ui); color: var(--brand);
+  transition: transform .25s var(--e);
+}
+.xq details[open] > summary::after{ transform: rotate(45deg); }
+.xq summary small{ display: block; margin-top: .25rem; font: 400 var(--fs-xs)/1.3 var(--font-ui); color: var(--ink-mute); }
+.xq summary:focus-visible{ outline: 2px solid var(--focus); outline-offset: 4px; }
+.xq__table table{ width: 100%; margin: .2rem 0 1.5rem; border-collapse: collapse; font-size: var(--fs-sm); }
+.xq__table th, .xq__table td{ padding: .45rem .25rem .45rem 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+.xq__table thead th{ font: 600 var(--fs-xs)/1.3 var(--font-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-mute); }
+.xq__table tbody th{ width: 46%; font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.xq__notes{ margin-top: 1.5rem; }
+.xq__notes details:last-child{ border-bottom: 1px solid var(--ink-mute); }
+.xq__notes details > p{ margin: 0; padding: 0 0 1.4rem; max-width: 44rem; line-height: 1.65; color: var(--ink-soft); }
+.xq__notes a{ color: var(--brand); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: .25em; }
+
+/* ------------------------------------------------------------
+   F. Night
+   ------------------------------------------------------------ */
+.xn{
+  position: relative; display: flex; align-items: flex-end;
+  min-height: min(100svh, 62rem); overflow: hidden;
+  color: var(--on-dark); background: var(--xp-night);
+}
+.xn__photo, .xn__photo img{ position: absolute; inset: 0; width: 100%; height: 100%; }
+.xn__photo img{ object-fit: cover; object-position: 50% 40%; }
+.xn__shade{
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(0deg, var(--xp-night) 0%, rgb(30 22 38 / .88) 30%, rgb(30 22 38 / .35) 62%, rgb(30 22 38 / .15) 100%),
+    linear-gradient(90deg, rgb(30 22 38 / .55) 0%, rgb(30 22 38 / 0) 60%);
+}
+.xn__inner{ position: relative; z-index: 1; padding-block: 8rem clamp(3.5rem, 8vw, 6rem); }
+.xn__heading{ max-width: 15ch; font-size: clamp(2.4rem, 5.4vw, 5rem); }
+.xn__heading em{ color: var(--gold-lit); }
+.xn__times{
+  display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); gap: 1rem clamp(2rem, 5vw, 4.5rem);
+  margin: 2rem 0 0;
+}
+.xn__times dt{ font: 600 var(--fs-xs)/1.3 var(--font-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--on-dark-mute); }
+.xn__times dd{ margin: .35rem 0 0; font-size: 1.05rem; font-variant-numeric: tabular-nums; color: var(--on-dark); }
+.xn__next{ display: flex; flex-wrap: wrap; gap: .25rem 2rem; margin-top: 2.4rem; padding-top: 1.4rem; border-top: 1px solid rgb(250 249 243 / .22); }
+.xn__next a{
+  display: inline-flex; align-items: center; min-height: 44px;
+  color: var(--on-dark); text-decoration: underline; text-decoration-color: rgb(255 195 8 / .8);
+  text-decoration-thickness: 1px; text-underline-offset: .35em;
+}
+.xn__next a:hover{ color: var(--gold-lit); }
+.xh a:focus-visible, .xn a:focus-visible, .xd a:focus-visible{ outline: 2px solid var(--gold); outline-offset: 4px; }
+
+/* ------------------------------------------------------------
+   Narrow screens
+   ------------------------------------------------------------ */
+@media (max-width: 899px){
+  .xd__intro, .xb__head, .xq__grid, .xh__inner{ grid-template-columns: minmax(0, 1fr); }
+  .xh__lead, .xh__copy, .xh__down{ grid-column: 1; grid-row: auto; }
+  .xh__copy{ margin-top: 1rem; }
+  .xd__intro .xk{ margin-bottom: 0; }
+  .xl__grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "text text" "main main" "d1 d2";
+    grid-template-rows: auto;
+  }
+  .xl__text{ padding-bottom: 0; }
+  .xb__paths{ grid-template-columns: minmax(0, 1fr); gap: 2.25rem; }
+  .xb__path:nth-child(2){ margin-top: 0; }
+  /* On a phone each path is a row: the photograph beside its words, not
+     three full-height portraits one after another. */
+  .xb__path{
+    display: grid; grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr; column-gap: 1.1rem;
+  }
+  .xb__path > figure{ grid-row: 1 / 4; }
+  .xb__title{ margin-top: 0; }
+}
+@media (max-width: 599px){
+  /* A phone's hero keeps the words on a deeper ground: the tall crop puts
+     the runners closer to them. */
+  .xh__shade{
+    background:
+      linear-gradient(180deg, rgb(30 22 38 / .55) 0%, rgb(30 22 38 / 0) 20%),
+      linear-gradient(0deg, var(--xp-night) 0%, rgb(30 22 38 / .94) 34%, rgb(30 22 38 / .64) 56%, rgb(30 22 38 / 0) 78%);
+  }
+  .xh__inner{ padding-top: 6rem; }
+  .xh__copy{ font-size: 1rem; }
+  .xq__tables{ grid-template-columns: minmax(0, 1fr); }
+  .xl__grid{ grid-template-areas: "text text" "main main" "d1 d1" "d2 d2"; }
+  .xn__times{ grid-template-columns: minmax(0, 1fr); }
+  .xn__next{ display: grid; gap: 0; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .xd.is-stage .xp__photo, .xd.is-stage .xd__scrim,
+  .xd__step, .xd__jump, .xa, .xa span, .xq summary::after{ transition: none; }
 }
