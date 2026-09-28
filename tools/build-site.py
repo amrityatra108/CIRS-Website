@@ -371,7 +371,7 @@ PAGES = {
         # are bracketed placeholders, so the under-construction note stays.
         "banner": None,
         "sheet": "spiritual",
-        "cache_suffix": "-spiritual-1",
+        "cache_suffix": "-spiritual-three-1",
         "closing": ("Come and see", "the day for yourself",
                     [("Plan a visit", "admissions.html#visit", "closing-scene__admissions"),
                      ("The CIRS experience", "the-cirs-experience.html", "closing-scene__contact"),
@@ -745,6 +745,9 @@ def rewrite_links(html, slug):
     """Turn the old single-page #anchors into links that work across pages."""
     def swap(m):
         anchor = m.group(1)
+        # Spiritual Life's gallery/day belong to its own chapter navigation.
+        if slug == "spiritual-life" and anchor in ("top", "gallery", "day", "vision"):
+            return m.group(0)
         # Curriculum now has its own #pathways; the legacy alias points to
         # Alumni, so keep this page's banner action on its own section.
         if slug == "curriculum" and anchor == "pathways":
@@ -1900,11 +1903,21 @@ def build(slug, page):
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
+    if slug == "spiritual-life":
+        # A synchronous gate establishes the optional scene before first paint.
+        # No script or a failed module leaves a readable photographic opening.
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/spiritual-opening.css?{CACHE_BUST}">\n'
+            '<link rel="modulepreload" href="assets/js/spiritual-light.js">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.module.min.js">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.core.js">\n'
+            '<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("sp-boot","sl-body-motion");setTimeout(function(){if(!window.__spiritualOpeningReady)document.documentElement.classList.remove("sp-boot");if(!window.__spiritualBodyReady)document.documentElement.classList.remove("sl-body-motion")},5000)}</script>\n</head>')
+
     # Shared typography follows page sheets so the approved roles stay consistent.
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
-    if slug in ("crossroads", "founder", "art-attack"):
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
         # These pages open with their own films. The shared curtain would hide
         # the skip control and add a second scroll lock. Keep the no-script
         # footer fallback after removing the curtain-specific head block.
@@ -2121,7 +2134,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
-    if slug in ("crossroads", "founder", "art-attack"):
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
         intro_start = parts[-1].index("<!-- Opening sequence.")
         intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
         parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
@@ -2292,6 +2305,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "spiritual-life":
         parts.append(f'<script src="assets/js/spiritual.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script type="module" src="assets/js/spiritual-opening.js?{CACHE_BUST}"></script>')
     if slug == "our-results":
         parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
