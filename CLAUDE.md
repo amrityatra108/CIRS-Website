@@ -86,6 +86,14 @@ grouped under that document's Swadhyaya, Sadhana and Seva. Its extra photographs
 captions describe the frame and never name a practice. Its sheet and script are
 `assets/css/spiritual.css` and `assets/js/spiritual.js`.
 
+Curriculum (`tools/pages/curriculum.html`) is the Curriculum Atlas: one gold path from the
+opening through the grade journey, dividing at Grade X into CBSE and the IB Diploma. Its facts
+come only from `docs/curriculum-content.md`. The markup is complete reading order;
+`assets/js/curriculum.js` makes the scenes (`html.cur-live`: sticky stages on windows at least
+1024×680 with motion; `html.cur-lite`: scroll accents otherwise) through `gsap.matchMedia`, and
+nothing runs under reduced motion. Elements the script moves are centred with margins, not the
+CSS `translate` property, which GSAP folds into its transform and leaves behind on revert.
+
 School History is the CIRS archive, and every date on it is written from `tools/history.py`:
 each event carries its source, and anything unconfirmed is a `note` there (never published) or
 held back in `UNRESOLVED`. `python3 tools/history.py` prints the report. `tools/make-history.py`

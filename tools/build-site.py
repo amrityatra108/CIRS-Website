@@ -49,6 +49,7 @@ import festivals
 import leadership
 import history
 import laurels
+import experience
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_BUST = "b=113"
@@ -284,16 +285,15 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-8",
-        # No banner. The page opens on its own paper composition, built in
-        # tools/pages/curriculum.html: the heading beside a pair of classroom
-        # photographs, the page's facts on a rule, and its own section index
-        # under them. That index
-        # is visible and labelled, so the floating "On this page" control
-        # would be a second copy of it; hence jump False. The opening is on
-        # paper, so the header wears dark lettering: hence litehead.
+        "cache_suffix": "-curriculum-atlas-1",
+        # No banner. The page opens on its own full-window scene, built in
+        # tools/pages/curriculum.html: the gold path of the grades rising
+        # through the school's purple, the heading, the page's facts and its
+        # own section index. That index is visible and labelled, so the
+        # floating "On this page" control would be a second copy of it; hence
+        # jump False. The opening is dark and full-screen, so the header
+        # starts clear over it in light lettering, as over any hero.
         "banner": None,
-        "litehead": True,
         "jump": False,
         "uc": False,
         # One close rather than two: the shared closing scene carries this
@@ -346,15 +346,18 @@ PAGES = {
     "the-cirs-experience": {
         "nav": "The CIRS experience",
         "title": "The CIRS experience",
-        "description": "Residential life at CIRS, the shape of an ordinary school day, and the "
-                       "hundred-acre campus it happens on.",
-        # No banner and no hero key: this page opens on a hero of its own,
-        # built in tools/pages/the-cirs-experience.html — a drifting line of
-        # oversized lettering with photographs dealt up through it. It carries
-        # the page's h1 and its own id="top". That hero is off-white, so the
-        # header cannot float over it in white lettering: hence litehead.
+        "description": "Residential life at CIRS: one school day for Junior and Senior School, "
+                       "side by side, and the hundred-acre campus it happens on.",
+        # No banner and no hero key: this page opens on a photograph of its
+        # own, built in tools/pages/the-cirs-experience.html, which carries the
+        # page's h1 and its own id="top". It is dark, so the header floats over
+        # it in light lettering. Every time and photograph on the page is
+        # written from tools/experience.py. The page ends on its own night
+        # section, so it takes no shared closing scene (see below), and nothing
+        # on it is a placeholder, so no under-construction note.
         "sheet": "student-life",
-        "cache_suffix": "-student-life-9",
+        "cache_suffix": "-experience-1",
+        "uc": False,
     },
     "spiritual-life": {
         "nav": "Spiritual Life",
@@ -372,7 +375,7 @@ PAGES = {
         # are bracketed placeholders, so the under-construction note stays.
         "banner": None,
         "sheet": "spiritual",
-        "cache_suffix": "-spiritual-1",
+        "cache_suffix": "-spiritual-three-1",
         "closing": ("Come and see", "the day for yourself",
                     [("Plan a visit", "admissions.html#visit", "closing-scene__admissions"),
                      ("The CIRS experience", "the-cirs-experience.html", "closing-scene__contact"),
@@ -745,6 +748,9 @@ def rewrite_links(html, slug):
     """Turn the old single-page #anchors into links that work across pages."""
     def swap(m):
         anchor = m.group(1)
+        # Spiritual Life's gallery/day belong to its own chapter navigation.
+        if slug == "spiritual-life" and anchor in ("top", "gallery", "day", "vision"):
+            return m.group(0)
         # Curriculum now has its own #pathways; the legacy alias points to
         # Alumni, so keep this page's banner action on its own section.
         if slug == "curriculum" and anchor == "pathways":
@@ -1900,11 +1906,21 @@ def build(slug, page):
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
+    if slug == "spiritual-life":
+        # A synchronous gate establishes the optional scene before first paint.
+        # No script or a failed module leaves a readable photographic opening.
+        head = head.replace("</head>",
+            f'<link rel="stylesheet" href="assets/css/spiritual-opening.css?{CACHE_BUST}">\n'
+            '<link rel="modulepreload" href="assets/js/spiritual-light.js">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.module.min.js">\n'
+            '<link rel="modulepreload" href="assets/founder-opening/vendor/three.core.js">\n'
+            '<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("sp-boot","sl-body-motion");setTimeout(function(){if(!window.__spiritualOpeningReady)document.documentElement.classList.remove("sp-boot");if(!window.__spiritualBodyReady)document.documentElement.classList.remove("sl-body-motion")},5000)}</script>\n</head>')
+
     # Shared typography follows page sheets so the approved roles stay consistent.
     head = head.replace("</head>",
         f'<link rel="stylesheet" href="assets/css/typography.css?{CACHE_BUST}">\n</head>')
 
-    if slug in ("crossroads", "founder", "art-attack"):
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
         # These pages open with their own films. The shared curtain would hide
         # the skip control and add a second scroll lock. Keep the no-script
         # footer fallback after removing the curtain-specific head block.
@@ -2056,8 +2072,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                  "our-laurels")
             or page.get("notfound")):
         # These pages open immediately with their own video, document sheets,
-        # journal masthead or, on Curriculum, the photograph of learning the
-        # page leads with — and School History on its archive's title — so
+        # journal masthead or, on Curriculum, the rising path of the grades
+        # the page leads with — and School History on its archive's title — so
         # the shared curtain is unnecessary. A visitor who has lost their way
         # needs the way back at once, not a curtain first.
         curtain_note = head.index("<!-- The opening curtain")
@@ -2089,8 +2105,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     lite = bool(page.get("litehead"))
     header_start = ("content" if page.get("banner") or page.get("post") or page.get("news")
                     or page.get("notfound")
-                    or slug in ("news", "leadership", "school-info", "blog", "cultural-gallery",
-                                "curriculum")
+                    or slug in ("news", "leadership", "school-info", "blog", "cultural-gallery")
                     else "hero")
     header_tone = "light" if lite else "dark"
     # A page opening on a scrubbed film is marked twice: "film" for the
@@ -2129,7 +2144,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         chrome = chrome[:intro_start] + chrome[intro_end:]
     parts = [head, f'<body class="{body_class}">' if body_class else "<body>",
              chrome.rstrip("\n")]
-    if slug in ("crossroads", "founder", "art-attack"):
+    if slug in ("crossroads", "founder", "art-attack", "spiritual-life"):
         intro_start = parts[-1].index("<!-- Opening sequence.")
         intro_end = parts[-1].index("<!-- Film lightbox", intro_start)
         parts[-1] = parts[-1][:intro_start] + parts[-1][intro_end:]
@@ -2191,6 +2206,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         content = laurels.expand(content)
     if slug == "leadership":
         content = leadership.expand(content)
+    if slug == "the-cirs-experience":
+        content = experience.expand(content, CACHE_BUST)
     content = (content.replace("{{ARTSWALL}}", artswall_html())
                         .replace("{{SPORTS_HOUSE_BANDS}}", sports_house_bands_html() if slug == "sports" else "")
                        .replace("{{HOUSES_HERO}}", houses_hero_html())
@@ -2263,7 +2280,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     parts.append("</main>")
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
-        if slug in ("captures", "leadership", "our-laurels") or page.get("notfound"):
+        if slug in ("captures", "leadership", "the-cirs-experience", "our-laurels") or page.get("notfound"):
             # Captures already ends with its own full-width photograph, and
             # Leadership with its staff photograph and a compact pair of
             # links: a second full-screen scene would compete with both.
@@ -2299,9 +2316,10 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/founder-opening.js?{CACHE_BUST}-portrait-1" defer></script>')
         parts.append(f'<script src="assets/js/founder-gurudev-journey.js?{CACHE_BUST}-story-5" defer></script>')
     if slug == "the-cirs-experience":
-        parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/student-life-journey.js?{CACHE_BUST}-experience-1" defer></script>')
     if slug == "spiritual-life":
         parts.append(f'<script src="assets/js/spiritual.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script type="module" src="assets/js/spiritual-opening.js?{CACHE_BUST}"></script>')
     if slug == "our-results":
         parts.append(f'<script src="assets/js/results-journey.js?{CACHE_BUST}" defer></script>')
     if slug == "admissions":
@@ -2327,7 +2345,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "leadership":
         parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":
-        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-1" defer></script>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
     if slug == "our-laurels":
