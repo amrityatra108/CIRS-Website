@@ -232,6 +232,16 @@ PHOTOS = [
     ("hrun/06-field.jpg",   "8A5A3313.JPG", (1000, 1500), (0.50, 0.46)),
     ("hrun/07-water.jpg",   "IMG_9314.JPG", (1500, 1000), (0.55, 0.50)),
     ("hrun/10-night.jpg",   "IMG_2474.JPG", (1500, 1000), (0.50, 0.52)),
+    # The Curriculum Atlas. Two plates for the grade journey, 4:5 so the
+    # foundation's frame and the Board years' frame are the same window —
+    # a junior class at a long bench, then rows of desks — and three for
+    # the close, where a ruled line, a compass circle and a measured frame
+    # become the edges of photographs. None of these is used elsewhere.
+    ("curriculum/foundation.jpg",  "IMG_1933.JPG", (1000, 1250), (0.66, 0.60)),
+    ("curriculum/board.jpg",       "IMG_9069.JPG", (1000, 1250), (0.40, 0.60)),
+    ("curriculum/life-court.jpg",  "IMG_1939.JPG", (1600, 1000), (0.50, 0.62)),
+    ("curriculum/life-circle.jpg", "DSC_8050.JPG", (1000, 1000), (0.56, 0.55)),
+    ("curriculum/life-hall.jpg",   "IMG_1689.JPG", (1200,  900), (0.40, 0.62)),
 ]
 
 

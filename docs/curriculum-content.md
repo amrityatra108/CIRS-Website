@@ -5,7 +5,7 @@ file supports. When the school answers one of the open questions, change the
 page and move the item into "Settled".
 
 Last reviewed: 25 September 2026, against the audit "CIRS Curriculum: audit and
-implementation brief" of the same date.
+implementation brief" of the same date; page furniture re-checked 28 September 2026.
 
 ## Sources
 
@@ -32,6 +32,19 @@ implementation brief" of the same date.
   affiliation, CBSE or IB in XI and XII), the three approach statements
   (continuity, breadth then depth, values alongside, from the CBSE page), and
   the Diploma core descriptions, which are the IB Diploma page's own.
+
+- The Curriculum Atlas redesign (28 September 2026) adds no facts. Its
+  large figures restate the lines beside them: CBSE "1 stream", "1 of 3
+  streams", "3 streams" and "X & XII Board examinations"; IB "6 subjects and
+  the core", "3–4 at Higher Level", "45 points in all" and "15 subjects in
+  six groups". The foundation's five subjects are shown again, set on ruled
+  lines, for the Board years, because the page says those years carry "the
+  same broad course". The closing heading ("The timetable is only part of
+  the day") frames the paragraph under it and makes no claim of its own.
+- Photographs added in that redesign are cut by `tools/make-photos.py` into
+  `assets/img/curriculum/` from camera originals in `assets/source/`
+  (IMG_1933, IMG_9069, IMG_1939, DSC_8050, IMG_1689). None carries a record
+  of its class or occasion, so captions and alt text describe the frame only.
 
 ## Open questions for the school
 
