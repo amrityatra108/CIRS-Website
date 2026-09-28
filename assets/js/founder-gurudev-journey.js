@@ -22,7 +22,9 @@
   const smooth = n => { const t=clamp(n,0,1); return t*t*(3-2*t); };
   const last = scenes.length - 1;
   let width = 0, height = 0, roadY = 0, total = 0, points = [], anchors = [];
+  let cardH = 0, cardTop = 118;
   let current = 0, target = 0, active = -1, visiblePair = -1, frame = 0, lastTime = 0;
+  let heading = 1, lastY = 0, restTimer = 0, held = false;
 
   function rounded(ps,r) {
     let d = `M ${ps[0].x} ${ps[0].y}`;
@@ -118,7 +120,7 @@
     svg.setAttribute('viewBox',`0 0 ${worldWidth} ${worldHeight}`);
     const cardHeight=Math.min(472,Math.max(290,h-275));
     roadY=h-18;
-    const cardTop=118;
+    cardH=cardHeight;cardTop=118;
     scenes.forEach((scene,i)=>{
       scene.style.width=`${w*.94}px`;
       scene.style.height=`${cardHeight}px`;
@@ -130,15 +132,23 @@
     readScroll();
   }
 
-  function render() {
-    if (!root.classList.contains('is-enhanced') || !anchors.length) return;
-    current=clamp(current,anchors[0],anchors[last]);
-    const distance=current*total,p=path.getPointAtLength(distance),part=segment(current);
+  // Where the camera stands, and how the two neighbouring scenes are mixed,
+  // for a position on the route. render() draws from it; presence() and
+  // restOn() ask it about positions the page is not at.
+  function view(value) {
+    const distance=value*total,part=segment(value);
     const framing=Math.sin(part.f*Math.PI)**2;
     const lead=framing*Math.min(80,width*.14);
     const camera=path.getPointAtLength(clamp(distance+lead,0,total));
     const cameraY=roadY-framing*190;
-    world.style.transform=`translate3d(${width/2-camera.x}px,${cameraY-camera.y}px,0)`;
+    return {distance,part,camera,cameraY,x:width/2-camera.x,y:cameraY-camera.y,fade:smooth((part.f-.15)/.7)};
+  }
+
+  function render() {
+    if (!root.classList.contains('is-enhanced') || !anchors.length) return;
+    current=clamp(current,anchors[0],anchors[last]);
+    const v=view(current),distance=v.distance,p=path.getPointAtLength(distance),part=v.part,cameraY=v.cameraY;
+    world.style.transform=`translate3d(${v.x}px,${v.y}px,0)`;
 
     let closest=0,best=Infinity;
     anchors.forEach((anchor,i)=>{
@@ -163,9 +173,8 @@
       });
       count.textContent=active===last?'THE END':`${String(active+1).padStart(2,'0')} / ${String(last).padStart(2,'0')}`;
     }
-    const fade=smooth((part.f-.15)/.7);
-    scenes[part.i].style.opacity=String(1-fade);
-    scenes[part.i+1].style.opacity=String(fade);
+    scenes[part.i].style.opacity=String(1-v.fade);
+    scenes[part.i+1].style.opacity=String(v.fade);
 
     const carWidth=clamp(width*.3,134,220),scale=carWidth/916;
     const probe=Math.max(3,539*scale*.24);
@@ -188,7 +197,57 @@
     else {frame=0;lastTime=0;}
   }
 
+  /* How much of a scene a reader could take in at a position on the route: the
+     larger of the two neighbouring cards' share on screen, weighted by how
+     far each has faded in. The camera stands still for the first and last
+     fifth of every leg, so the road between two scenes is mostly a drive: the
+     van, the route and the counter, with the next card still arriving. That
+     is the design, and it is good to pass through. */
+  function presence(value) {
+    const v=view(value),w=width*.94;
+    let best=0;
+    [[v.part.i,1-v.fade],[v.part.i+1,v.fade]].forEach(([k,opacity]) => {
+      const left=points[k].x-width*.47+v.x,top=points[k].y-roadY+cardTop+v.y;
+      const across=Math.max(0,Math.min(width,left+w)-Math.max(0,left));
+      const down=Math.max(0,Math.min(height,top+cardH)-Math.max(0,top));
+      best=Math.max(best,opacity*across*down/(w*cardH));
+    });
+    return best;
+  }
+
+  /* But it is wrong to stop in. A reader who let go of the wheel on the road
+     was left with a van on a corner and no words, as still as any scene. So a
+     scroll that comes to rest with no scene readable carries on, the way it
+     was going, to the first position where the next one is fully up, through
+     the same event the site's other pages use to ask Lenis for a move. A rest
+     anywhere a scene can be read is left exactly where it is. */
+  function restOn() {
+    restTimer=0;
+    if (held || document.hidden || !root.classList.contains('is-enhanced') || !anchors.length) return;
+    const rect=root.getBoundingClientRect(),travel=root.offsetHeight-innerHeight;
+    if (travel<=0 || rect.top>0 || rect.bottom<innerHeight) return;
+    const from=clamp(-rect.top/travel,0,1);
+    if (presence(distanceForScroll(from))>=.6) return;
+    const step=heading*.0008;
+    for (let progress=from;progress>=0 && progress<=1;progress+=step) {
+      if (presence(distanceForScroll(progress))<.98) continue;
+      const top=Math.round(rect.top+scrollY+progress*travel);
+      const move=new CustomEvent('cirs-section-scroll',{cancelable:true,detail:{top,duration:.7,easing:t=>1-Math.pow(1-t,3)}});
+      if (window.dispatchEvent(move)) window.scrollTo({top,behavior:'smooth'});
+      return;
+    }
+  }
+  function armRest() {
+    clearTimeout(restTimer);
+    restTimer=setTimeout(restOn,200);
+  }
+
   function readScroll() {
+    // Which way the reader is going, from the window and only past a few
+    // pixels: Lenis lands every glide with a sub-pixel step the other way,
+    // which is not the reader turning round.
+    if (Math.abs(scrollY-lastY)>=4) {heading=scrollY>lastY?1:-1;lastY=scrollY;}
+    armRest();
     const rect=root.getBoundingClientRect();
     document.body.classList.toggle('founder-story-visible',rect.top<innerHeight && rect.bottom>0);
     if (!root.classList.contains('is-enhanced') || !anchors.length) return;
@@ -200,6 +259,12 @@
   }
 
   addEventListener('scroll',readScroll,{passive:true});
+  // Not while a finger or a mouse button is down: a rest is a let-go.
+  const grab = () => {held=true;};
+  const release = () => {held=false;armRest();};
+  addEventListener('pointerdown',grab,{passive:true});
+  addEventListener('pointerup',release,{passive:true});
+  addEventListener('pointercancel',release,{passive:true});
   addEventListener('resize',layout,{passive:true});
   motion.addEventListener('change',layout);
   layout();
