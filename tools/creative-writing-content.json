@@ -1,62 +1,382 @@
 {
   "_readme": [
-    "The Creative Writing collection. tools/creativewriting.py renders every page from this file.",
-    "An edition is one monthly or topic collection for one school. Its URL is /creative-writing/<school>/<month>-<year> (or its id when the date is not recorded).",
-    "school: 'junior' | 'senior' | null. null means the level has not been confirmed by the school; the edition is listed under All only.",
-    "month (1-12) and year may be null when the source does not record them. Nothing is inferred.",
-    "status: 'published' needs poems; 'awaiting' is a planned edition shown with plain 'to be supplied' copy and no poems (set showAwaiting false to hide them all).",
-    "theme.mood: one of dawn, dusk, paper, night, meadow, ember, monsoon, chalk, sky. theme.shape: portrait | landscape | square. Optional theme.ground / theme.ink / theme.accent hex overrides are contrast-checked at build.",
-    "ppt: null, or {\"file\": \"assets/downloads/creative-writing/<name>.pptx\"}. File size and slide count are read from the file at build.",
-    "poem.title may be null (the opening line is shown). poem.grade may be null (not shown). poem.lines are verbatim excerpts (the hero's \"Another line\", and each edition's preview); each is checked against the poem at build.",
-    "epigraph is a verbatim line from one of the edition's poems, checked at build.",
-    "Never add writing, names or grades that the school has not supplied."
+    "Canonical Creative Writing data; build-site.py and creativewriting.py render every route.",
+    "Poem text and stanza boundaries reconciled with the connected original on 2026-09-30.",
+    "School and grade belong to individual poems. Unknown fields remain null.",
+    "Month without year is a label, never a chronological date. Legacy routes are empty archive pointers.",
+    "Source line ranges refer to the readable Drive snapshot. No numeric student identifiers are published.",
+    "authorId merges exact case-insensitive names only; unresolved spelling variants remain separate.",
+    "downloads contains actual repository files only; an empty list renders no download control."
   ],
-  "sourceNote": "Curated from the supplied Creative Writing collection. Student identifiers and grades are omitted.",
-  "showAwaiting": true,
+  "sources": {
+    "creative-writing-original": {
+      "documentId": "1EXh83gXIChBdEiUDzmZtavBB_A9Irb2vjesliV8FrpA",
+      "url": "https://drive.google.com/file/d/1EXh83gXIChBdEiUDzmZtavBB_A9Irb2vjesliV8FrpA",
+      "modifiedTime": "2026-09-27T04:23:56.402Z",
+      "reconciledOn": "2026-09-30"
+    }
+  },
   "schools": {
     "junior": {
       "name": "Junior School",
-      "grades": "Grades V–VIII",
-      "line": "Small Writers. Big Worlds."
+      "grades": "Grades 5–8"
     },
     "senior": {
       "name": "Senior School",
-      "grades": "Grades IX–XII",
-      "line": "Ideas Finding Their Voice."
+      "grades": "Grades 9–12 and IB"
     }
   },
-  "archiveYears": [
-    2026,
-    2025,
-    2024
+  "legacyRoutes": [
+    {
+      "path": "creative-writing/junior/july-2026",
+      "collection": "junior"
+    },
+    {
+      "path": "creative-writing/junior/august-2026",
+      "collection": "junior"
+    },
+    {
+      "path": "creative-writing/junior/september-2026",
+      "collection": "junior"
+    },
+    {
+      "path": "creative-writing/senior/july-2026",
+      "collection": "senior"
+    },
+    {
+      "path": "creative-writing/senior/august-2026",
+      "collection": "senior"
+    },
+    {
+      "path": "creative-writing/senior/september-2026",
+      "collection": "senior"
+    }
+  ],
+  "unresolved": [
+    {
+      "sourceLines": [
+        1592,
+        1592
+      ],
+      "note": "Standalone Mansavi - 10th grade byline has no associated poem text. Do not attach it to another poem."
+    },
+    {
+      "poem": "dawn-orchestra",
+      "note": "No author or grade is recorded for the July poem; preserve text under All Writing."
+    },
+    {
+      "poems": [
+        "echoes-disha-bhimani",
+        "echoes-adwaith-pn"
+      ],
+      "note": "No grades recorded; keep available under All Writing."
+    },
+    {
+      "note": "Kavya Ranjeet/Ranjeeth and Sivayani/Sivayini spellings are retained verbatim. Identities are not merged without confirmation."
+    },
+    {
+      "note": "No edition download files are supplied in the source or repository."
+    }
   ],
   "editions": [
     {
       "id": "joy-of-little-things",
-      "slug": null,
-      "school": null,
+      "topic": "Joy of Little Things",
       "month": 1,
       "year": 2026,
-      "topic": "Joy of Little Things",
-      "subtitle": null,
       "epigraph": {
         "poem": "joy-aryaa-shah",
         "text": "Little lights proving everything's alright"
       },
-      "intro": "Rain on the dorm roof, a favourite song arriving on time, steam from a morning cup: three writers on the small things that carry a day.",
-      "theme": {
-        "mood": "dawn",
-        "shape": "portrait"
-      },
-      "ppt": null,
-      "featured": true,
       "status": "published",
+      "school": null,
+      "downloads": [],
       "poems": [
+        {
+          "id": "joy-ved-tulsyan",
+          "title": null,
+          "author": "Ved Tulsyan",
+          "authorId": "ved-tulsyan",
+          "grade": "Grade 11 · Management",
+          "school": "senior",
+          "stanzas": [
+            "The joy of little things,\nFrom the sound of the bat to hearing the birds sing\nYou never know what life brings.",
+            "Life’s too short to complain.\nFrom unnecessary sorrows, you must refrain.",
+            "It is those tiny tiny moments\nAs primitive as watching a comet.\nThat fits your heart with bliss.\nAnd that is what is the joy of little things."
+          ],
+          "lines": [
+            "The joy of little things,\nFrom the sound of the bat to hearing the birds sing"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              468,
+              480
+            ],
+            "bylineLine": 483,
+            "sha256": "cfd6ed2254faf304c7b7010f08b5425893e95e8908094caf84401012916a6193"
+          }
+        },
+        {
+          "id": "joy-shresth-kedia",
+          "title": null,
+          "author": "Shresth Kedia",
+          "authorId": "shresth-kedia",
+          "grade": "Grade 11 · Management",
+          "school": "senior",
+          "stanzas": [
+            "I have cherished these things\nSince the day I took these lens.\nEach time I pick it up,\nMy entire vision changes.",
+            "I discovered how much joy these things have,\nJust taking a good look is all the crave.\nThe joy that the perfect photo gives,\nIt can’t be explored through words.",
+            "From a small chirp that changes the mood,\nTo what makes us feel good.\nOh! Remember it all going through my ears,\nThat left me with nothing but happy tears.",
+            "These small things are what difference\nTo what we have and will do hence."
+          ],
+          "lines": [
+            "I have cherished these things\nSince the day I took these lens."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              523,
+              542
+            ],
+            "bylineLine": 545,
+            "sha256": "0062450229b6070bd83be54e8a91b37b4f9ede4ebdbad103c36b9efcaeb61e38"
+          }
+        },
+        {
+          "id": "joy-utkarsh-shah",
+          "title": null,
+          "author": "Utkarsh Shah",
+          "authorId": "utkarsh-shah",
+          "grade": "Grade 11 · Science",
+          "school": "senior",
+          "stanzas": [
+            "There are a number of things,\nWhich are a source of joy.\nBut what excites me,\nMakes me a jolly boy.",
+            "Watching my favorite batsman bat\nTo listening to my favorite band,\nPlaying cricket with that brand’s bat\nTo playing keyboard with my favorite music band.",
+            "Discovering the world of pi,\nTo eating my favorite pie.\nReading atom structures by Bohr,\nBut these never get me bored.",
+            "Watching movies with an intellect,\nUntil my mind gets to recollect.\nGrinding series late at night,\nUntil my schedule kicks me tight."
+          ],
+          "lines": [
+            "There are a number of things,\nWhich are a source of joy."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              573,
+              594
+            ],
+            "bylineLine": 597,
+            "sha256": "878965cc0612e71e85e1ae9094943d701dc39ac66fc6e6a555f517370732b941"
+          }
+        },
+        {
+          "id": "joy-arnav-saraf",
+          "title": null,
+          "author": "Arnav Saraf",
+          "authorId": "arnav-saraf",
+          "grade": "Grade 11 · Management",
+          "school": "senior",
+          "stanzas": [
+            "One late noon, it was cloud’s day,\nThe sky dark and the feeling gay.\nFew soldiers fight in the battlefield,\nWhile the king plays with no guilt.",
+            "I look at them and tell my lads,\n“You are living your lives”.\nWish we’d be out of this mess,\nTo relive these times with complete bliss.",
+            "On a nearby puddle they play,\nWith their rides and swords they prey.\nSlaying weach other and their guards,\nAnd splashing the elixir on our lords.",
+            "The battle continues with screams\nBut for us, slaves, we only live with dreams.\nThe joy of these little things that we see at night\nAre what we wish to attain with all our might."
+          ],
+          "lines": [
+            "One late noon, it was cloud’s day,\nThe sky dark and the feeling gay."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              621,
+              642
+            ],
+            "bylineLine": 645,
+            "sha256": "256820b816affdbbc50a07c95a258dac8732f44b38d81f3a3abda298e58f75f2"
+          }
+        },
+        {
+          "id": "joy-jishnu-yogesh",
+          "title": null,
+          "author": "Jishnu Teja Yogesh",
+          "authorId": "jishnu-teja-yogesh",
+          "grade": "IB year 1",
+          "school": "senior",
+          "stanzas": [
+            "As I take a stroll down the streets,\nTiny pearls of water greet.\nA sound surrounded, not upbeat,\nBut a melodious and euphonious tweet.",
+            "They gather softly on my sleeve\nLike secrets the drizzle chose to leave\nMagically, the day feels light\nThe ripples gather below gently but with might.",
+            "No glory, no big claim\nNo sun, no blazing flame.\nThe chaos inside me drowned\nBy the king but uncrowned.",
+            "Nature roars beyond my sight\nCovered by this subtle delight\nBut in a drop that kissed my hand,\nI found more delight than he had ever planned"
+          ],
+          "lines": [
+            "As I take a stroll down the streets,\nTiny pearls of water greet."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              669,
+              690
+            ],
+            "bylineLine": 693,
+            "sha256": "f97eb16788f0b5fd5cdeb49b7ebc180793ee54439c62c9cc072a1209c14e6732"
+          }
+        },
+        {
+          "id": "joy-kavya-ranjeeth",
+          "title": null,
+          "author": "Kavya Ranjeeth",
+          "authorId": "kavya-ranjeeth",
+          "grade": "Grade 9",
+          "school": "senior",
+          "stanzas": [
+            "Waking up hours after the alarm rang,\ntaking a sip of coffee, staring at the sun.\nSharing food and laughing too,\nspending hours making slime with glue.\nJoy moves steady, not in a rush,\nteaching hearts with the softest touch.\nWe spend our days running around,\nwhile joy stays quiet, waiting to be found.\nIt whispers like a gentle song,\n“I’ve been here all along.”\nWe rush through moments way too fast,\nthen wonder why happiness feels like the past."
+          ],
+          "lines": [
+            "Waking up hours after the alarm rang,\ntaking a sip of coffee, staring at the sun."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              724,
+              735
+            ],
+            "bylineLine": 736,
+            "sha256": "69f66dce9f3efeffbfb6e8677d977eb172e663955e1b1877cb36f72342092bde"
+          }
+        },
+        {
+          "id": "joy-manasvi-mandhana",
+          "title": null,
+          "author": "Manasvi Mandhana",
+          "authorId": "manasvi-mandhana",
+          "grade": "Grade 9",
+          "school": "senior",
+          "stanzas": [
+            "From the brightly shining star,\nTo the crescent moon in the sky,\nI feel alive in every way,\nLightening my heart a little more.\nThe soothing sound of the shores,\nAnd the sun beaming with joy,\nSomething special waits for me,\nConcealed in the little pleasures of my life.\nDuring these peaceful times, I find myself\nNoticing the most pleasant things around,\nFinding joy in every moment I spend,\nWith calm and tranquility in my emotions."
+          ],
+          "lines": [
+            "From the brightly shining star,\nTo the crescent moon in the sky,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              764,
+              775
+            ],
+            "bylineLine": 776,
+            "sha256": "123db00b092c5447498fc92e0f74c57e44dcbba9ddd00b88ef032a70491f4a9d"
+          }
+        },
+        {
+          "id": "joy-saranya-d",
+          "title": null,
+          "author": "Saranya D",
+          "authorId": "saranya-d",
+          "grade": "Grade 9",
+          "school": "senior",
+          "stanzas": [
+            "In drops of sunlight, joy waits.\nIn bright, rapid laughter,\nOn chilly mornings, in hot tea,\nearly in the morning in birds.",
+            "It resides under shared umbrellas.\nLittle moments, gently shining, in books, puddles, and the breeze\nThat gave heart comfort.",
+            "It lurks in subdued kindness,\nIn the notes we leave behind,\nIn soft words and borrowed smiles,\nAnd we're hoping for peace.",
+            "When stars blink before bed,\nDreams are just beginning.\nLittle daily things bring joy.\nThat gently fills the heart."
+          ],
+          "lines": [
+            "In drops of sunlight, joy waits.\nIn bright, rapid laughter,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              812,
+              832
+            ],
+            "bylineLine": 833,
+            "sha256": "868d10d3dbca113e400708a7126ec1864e4248af326e3d7941cde3c953005cc3"
+          }
+        },
+        {
+          "id": "joy-tarushi-agarwal",
+          "title": null,
+          "author": "Tarushi Agarwal",
+          "authorId": "tarushi-agarwal",
+          "grade": "Grade 11 · Management",
+          "school": "senior",
+          "stanzas": [
+            "It all lies in the joy of little things,\nThe quiet moments,\nAnd the ones we almost miss.",
+            "It's found in the shared smiles\nAnd the inside jokes.\nIn the back of school notes\nAnd in the first note of a familiar song.",
+            "It's all about the shared laughs in class,\nAnd the late nights in dorm,\nIt's in the comforting turn that signals the road home.",
+            "These things aren't loud and don't ask for attention\nThey simply remain,\nReminding us that we the joy in these moments,\nAre enough."
+          ],
+          "lines": [
+            "It all lies in the joy of little things,\nThe quiet moments,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              859,
+              878
+            ],
+            "bylineLine": 881,
+            "sha256": "059ad220672ab7002af8b23e1ed1434cd968800ee3bd380fde86f13ab2723d38"
+          }
+        },
+        {
+          "id": "joy-rakshana",
+          "title": null,
+          "author": "S.Rakshana",
+          "authorId": "s-rakshana",
+          "grade": "Grade 9B",
+          "school": "senior",
+          "stanzas": [
+            "Joy lives in little moments,\nWith friends I see each day,\nIn sitting next to classmates\nAnd talking on the way.",
+            "It’s sharing books and lending pens,\nHelping when we can,\nLaughing softly in the class,\nAnd trying to understand.",
+            "These small things make school feel nice,\nThey help me feel okay,\nBecause joy is in the little things\nThat happens every day."
+          ],
+          "lines": [
+            "Joy lives in little moments,\nWith friends I see each day,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              905,
+              920
+            ],
+            "bylineLine": 921,
+            "sha256": "a31df151749e2190e91bef96f8343bfc0ae4e03f7cf9438db18bb5b7acdf5644"
+          }
+        },
+        {
+          "id": "joy-aryan-ig",
+          "title": null,
+          "author": "Aryan IG",
+          "authorId": "aryan-ig",
+          "grade": "Grade 11 · Science",
+          "school": "senior",
+          "stanzas": [
+            "One time I was 7,\nHalf a rupee candy,\nMade me feel like heaven,\nHit me like a melody.",
+            "Or the time i was 10,\nWhen I had my best friend,\nWith no evil, no pretend,\nForever conversations, he was a godsend.",
+            "13 was the time,\nTeen talks, teen vibe,\nBack of the bus, where it belongs,\nWe played and sang the most beautiful songs.",
+            "Life hit hard and hard it hit me,\nRejection, betrayal, cheating with no mercy,\nthe cake wasn't great, but the icing,\nFriends, family, you kept me going."
+          ],
+          "lines": [
+            "One time I was 7,\nHalf a rupee candy,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              957,
+              978
+            ],
+            "bylineLine": 981,
+            "sha256": "cf39ba49d38c879178c703a60fb5c0080b587fc41e7dc4fec600f46187a80574"
+          }
+        },
         {
           "id": "joy-avika-mundra",
           "title": null,
           "author": "Avika Mundra",
-          "grade": null,
+          "authorId": "avika-mundra",
+          "grade": "IB year 1",
+          "school": "senior",
           "stanzas": [
             "There’s beauty in the sky\nAnd in worlds gone by\nIn the vast, indelible ocean\nIn all its mystic motion",
             "But those things rarely satisfy\nThe thirst in those eyes\nThat only sparkle and shine\nAt everything between the lines",
@@ -65,13 +385,24 @@
           ],
           "lines": [
             "That only sparkle and shine\nAt everything between the lines"
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1005,
+              1024
+            ],
+            "bylineLine": 1025,
+            "sha256": "74e3c0f05d8dfa83dd81feac0bcf00110578971c8c41d084e21faf61016ca1b4"
+          }
         },
         {
           "id": "joy-aryaa-shah",
           "title": null,
           "author": "Aryaa Rushab Shah",
-          "grade": null,
+          "authorId": "aryaa-rushab-shah",
+          "grade": "Grade 11 · Management",
+          "school": "senior",
           "stanzas": [
             "Rain drumming on the dorm roof at night,\nMidnight chai snuck from the mess, shared quiet.\nNailing that math quiz, mates cheering low,\nFist-bumps under the study lamp's glow.",
             "Warden's rare smile, \"Lights out soon,\"\nGroup study hacks, laughing through the grind.\nDawn fog on the field, first bell's ring—\nThese small hostel wins? They keep me alive.",
@@ -80,13 +411,24 @@
           ],
           "lines": [
             "Stars peeking through the hostel window,\nLittle lights proving everything's alright"
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1055,
+              1076
+            ],
+            "bylineLine": 1079,
+            "sha256": "9f839dec537da088db3b605dbb2c2b8ba956c72bc3b9db5efb68fb7bb3d4a41f"
+          }
         },
         {
           "id": "joy-anushya-uk",
           "title": null,
           "author": "Anushya UK",
-          "grade": null,
+          "authorId": "anushya-uk",
+          "grade": "IB year 1",
+          "school": "senior",
           "stanzas": [
             "The joy of little things\nis not waking up happy every day,\nbut finding small reasons to smile anyway.",
             "Like getting an extra chocolate at the bottom of the bag,\nor when your favorite song plays\nright when you needed it.",
@@ -97,36 +439,125 @@
           ],
           "lines": [
             "because the little things,\ndon’t try to impress you.\nThey just show up."
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1097,
+              1128
+            ],
+            "bylineLine": 1129,
+            "sha256": "a86174815bbb27bc222f1c03fc898d5eb4632ed993cf42ec2135aa25f2b8a0e9"
+          }
+        },
+        {
+          "id": "joy-saket-kalyani",
+          "title": null,
+          "author": "Saket Kalyani",
+          "authorId": "saket-kalyani",
+          "grade": "Grade 11 · Management",
+          "school": "senior",
+          "stanzas": [
+            "Daily I hope something big to happen\nSomething life changing, something memorable\nImagining the future in hopes of the better",
+            "But now I realize something better\nThat the small moments\nThe laughter with my loved ones\nThe angry, sad, scary moments",
+            "I hope for another moment\nWith friends who I may never meet again\nAnd the people who helped me mature",
+            "So I keep in mind now\nTo cherish each and every moment\nNot regret the past and obsess the future\nBut live in the present"
+          ],
+          "lines": [
+            "Daily I hope something big to happen\nSomething life changing, something memorable"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1135,
+              1154
+            ],
+            "bylineLine": 1157,
+            "sha256": "b789049aed95af677d1d5659fa51e868d96d21f696122f31c673e2ea41a1d658"
+          }
+        },
+        {
+          "id": "joy-sivayani-a",
+          "title": null,
+          "author": "Sivayani A",
+          "authorId": "sivayani-a",
+          "grade": "Grade 9",
+          "school": "senior",
+          "stanzas": [
+            "Drenched wet and dancing in the rain,\nInside jokes we can never drain,\nPacking our bags - “no homework we shout”\n“No jogging” - our vanished pout",
+            "Endless UNO and monopoly games,\nGifts we smile at as we read names,\nBlowing bubbles in the lemonade\nCountless 11:11 wishes we made",
+            "A 400 page book finished in a day,\nMidnight singing with friends,\nTogether we set the fabulous trends,\nSneaking around, broken vases,",
+            "As back benchers we always come last,\nSharing moments of past,\ninnocence , believing the tooth fairy,\nAnd the memories we carry",
+            "Joy of little things I’ll never forget,\nNone of these moments I regret."
+          ],
+          "lines": [
+            "Drenched wet and dancing in the rain,\nInside jokes we can never drain,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1186,
+              1211
+            ],
+            "bylineLine": 1214,
+            "sha256": "6373943838b5a469b9c29fda5ba740bddeb3ec0a242ce4328234f6208f3c0134"
+          }
         }
-      ]
+      ],
+      "source": {
+        "document": "creative-writing-original",
+        "headingLines": [
+          432,
+          433
+        ]
+      },
+      "intro": "The small pleasures of school days, friendship and the world around us."
     },
     {
       "id": "echoes-of-yesterday",
-      "slug": null,
-      "school": null,
+      "topic": "Echoes of Yesterday",
       "month": null,
       "year": null,
-      "topic": "Echoes of Yesterday",
-      "subtitle": null,
       "epigraph": {
         "poem": "echoes-aayush-bhashyam",
         "text": "The mirror hums with faded light"
       },
-      "intro": "A lost tournament, a half-sung tune, a home left behind: three writers listen for what yesterday still says.",
-      "theme": {
-        "mood": "dusk",
-        "shape": "landscape"
-      },
-      "ppt": null,
-      "featured": false,
       "status": "published",
+      "school": null,
+      "downloads": [],
       "poems": [
+        {
+          "id": "echoes-shresth-kedia",
+          "title": null,
+          "author": "Shresth Kedia",
+          "authorId": "shresth-kedia",
+          "grade": "Grade 11 · Management",
+          "school": "senior",
+          "stanzas": [
+            "It feels like everything was yesterday\nIf we sit for a day,\nAnd think of yesterday,\nIt cannot be covered in a day",
+            "All the fun I’ve had,\nBecause of my friends\nAll the scoldings I’ve had,\nBecause of my teachers",
+            "Those memories still cherished,\nDeep in my heart as always.\nSome echoes haunt others’ play,\nHope that they always stay"
+          ],
+          "lines": [
+            "It feels like everything was yesterday\nIf we sit for a day,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              5,
+              20
+            ],
+            "bylineLine": 23,
+            "sha256": "079a1171739197047d46e7dd3d34b0220f0b12a0e2f1c537973199e843fe8c82"
+          }
+        },
         {
           "id": "echoes-disha-bhimani",
           "title": null,
           "author": "Disha Priyen Bhimani",
+          "authorId": "disha-priyen-bhimani",
           "grade": null,
+          "school": null,
           "stanzas": [
             "A bunch of thoughts, encircling my mind\nContaining loud echoes of ideas, that I couldn’t find\nFrom the echo of a bouncing basketball,\nTo the echo of a distant valley’s waterfall",
             "The echoes of yesterday\nRemind me of the tournament day.\nWhere the grief of our defeat,\nEchoed through a hundred feet.",
@@ -135,13 +566,50 @@
           ],
           "lines": [
             "As this can be the echo of tomorrow,\nNot one of complete sorrow,"
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              50,
+              71
+            ],
+            "bylineLine": 74,
+            "sha256": "5d76a0105d3ac7461b855c50bff1d17aa87c78c352fefefa5d00ff1cb69c3aaa"
+          }
+        },
+        {
+          "id": "echoes-kavya-ranjeet",
+          "title": null,
+          "author": "Kavya Ranjeet",
+          "authorId": "kavya-ranjeet",
+          "grade": "Grade 9",
+          "school": "senior",
+          "stanzas": [
+            "The echoes of yesterday softly call,\nGlimpses of moments rise and fall.\nWeaving the threads of stories old,\nWhen love was sung with hearts of gold.",
+            "The warmth that feels so far,\nLike one of those distant stars.\nThough times change and hearts mend,\nSome bonds just never end.",
+            "In the echoes of our yesterday,\nWe find light in endless ways.\nNow echoes fill the empty space,\nWhere once it was a happy place.",
+            "So let the years go, let them pass,\nWe’ll hold these moments like glass.\nThe love we’ve shared in many ways,\nA love that time can never erase."
+          ],
+          "lines": [
+            "The echoes of yesterday softly call,\nGlimpses of moments rise and fall."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              103,
+              124
+            ],
+            "bylineLine": 127,
+            "sha256": "26ef33928081befa9f970fb8c8fa5cd798d04d4104ab4a6cb5e25552d39dccdc"
+          }
         },
         {
           "id": "echoes-aayush-bhashyam",
           "title": null,
           "author": "Aayush Sreenath Bhashyam",
-          "grade": null,
+          "authorId": "aayush-sreenath-bhashyam",
+          "grade": "IB year 1",
+          "school": "senior",
           "stanzas": [
             "The wind still hums your half-sung tune,\nThrough trembling blinds and ghostlit noon.\nWhere silence hums like something torn,\nAnd dreams grow old but never mourn",
             "The mirror hums with faded light\nIts glass still holds the edge of night\nThe face returns, then slips away - \nA ghost that never learnt to stay",
@@ -150,13 +618,77 @@
           ],
           "lines": [
             "The mirror hums with faded light\nIts glass still holds the edge of night"
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              153,
+              174
+            ],
+            "bylineLine": 175,
+            "sha256": "9354b5efe564af94774c4086de234f6852042c88153e210eb349beba1267174f"
+          }
+        },
+        {
+          "id": "echoes-saket-kalyani",
+          "title": null,
+          "author": "Saket Kalyani",
+          "authorId": "saket-kalyani",
+          "grade": "Grade 11 · Management",
+          "school": "senior",
+          "stanzas": [
+            "The echoes of yesterday remind me\nOf my mistakes that weren’t meant to be\nThey tell me I have failed, putting me in mystery.",
+            "Yet I cling to a brighter hope,\nWere I can grow more and more\nYesterday’s failures tied to me as rope,\nTomorrow brings me a better hope",
+            "To live in the past is the greatest sin,\nAs one gets stuck in what could’ve been.\nForgetting about what you can be\nLimitting yourself to what you can see.",
+            "As the days keep flying by,\nI don’t stick to yesterday or cry.\nEvery second has a price to pay,\nTo live to the fullest every day."
+          ],
+          "lines": [
+            "The echoes of yesterday remind me\nOf my mistakes that weren’t meant to be"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              205,
+              225
+            ],
+            "bylineLine": 228,
+            "sha256": "a0b1f9b5cd8608280dcdb00d7d87f08a84ee5c3d6807de4cd3affd14f346ed66"
+          }
+        },
+        {
+          "id": "echoes-jishnu-yogesh",
+          "title": null,
+          "author": "Jishnu Teja Yogesh",
+          "authorId": "jishnu-teja-yogesh",
+          "grade": "IB year 1",
+          "school": "senior",
+          "stanzas": [
+            "When he closed his eyes, darkness spread,\nIn sorrow, his eyes wept and bled.\nRegrets return, memories haunt,\nEmotions flow but never forget to taunt",
+            "Mind ripped, heart torn apart,\nEchoes do, really play a part.\nYesterday haunts puts him in the dread\nSinking in reality he was dead.",
+            "But these echoes don’t always torment,\nThey also possess emotions that we can never invent.\nThey may curse you and make you plead,\nBut they can also bless you and make you lead.",
+            "They comfort me, help me push,\nI succeed and to it shall the world hush.\nThey help me triumph and hold my victory,\nAnd with that I begin my own story.",
+            "The way echoes are, are dual,\nThey help you or they pull you to a duel.\nBut in the end, those are that shape us.\nThose craft us and those build us."
+          ],
+          "lines": [
+            "When he closed his eyes, darkness spread,\nIn sorrow, his eyes wept and bled."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              258,
+              285
+            ],
+            "bylineLine": 288,
+            "sha256": "bad02ff1c0ddfa6502e5cfa25744336a69ac44f6ad67912c953e7e5a762b0a03"
+          }
         },
         {
           "id": "echoes-utkarsh-shah",
           "title": null,
           "author": "Utkarsh Shah",
-          "grade": null,
+          "authorId": "utkarsh-shah",
+          "grade": "Grade 11 · Science",
+          "school": "senior",
           "stanzas": [
             "Was it yesterday,\nI realized,\nI was born,\nFrom the heavens without being torn?",
             "Was it yesterday, I used to weep “Stomach Pain”\nTo bunk school, achieving no gain?\nBut I did go to school, angry and sad\nBut so did I return daily, as a happy lad",
@@ -165,36 +697,72 @@
           ],
           "lines": [
             "Now we do long for such moments,\nIn a home away from home"
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              306,
+              327
+            ],
+            "bylineLine": 330,
+            "sha256": "ed154c6c18f7bbfe41ee723b2ad2b4e30775f54d038240368abd6be8e2f8b2b3"
+          }
+        },
+        {
+          "id": "echoes-adwaith-pn",
+          "title": null,
+          "author": "Adwaith PN",
+          "authorId": "adwaith-pn",
+          "grade": null,
+          "school": null,
+          "stanzas": [
+            "Sometimes I remember things\nFrom days that passed away.\nLittle moments come back to me\nSounds like the soft echoes of yesterday",
+            "I think about the fun I had,\nThe smiles and games we shared.\nThose memories make me happy still,\nEven as life puts me through ups and downs.",
+            "As I look towards what's ahead,\nI keep those moments close and true.\nThe past may be gone, but never forgotten,\nAnd the echoes of yesterday still ring in my ear."
+          ],
+          "lines": [
+            "Sometimes I remember things\nFrom days that passed away."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              358,
+              373
+            ],
+            "bylineLine": 376,
+            "sha256": "3004c18b4910807dbbdbf44bba15d150ce8e44e4275cfc1bebf7c1a71782dd6a"
+          }
         }
-      ]
+      ],
+      "source": {
+        "document": "creative-writing-original",
+        "headingLines": [
+          1,
+          2
+        ]
+      },
+      "intro": "Friendship, memory and the days that stay with us."
     },
     {
       "id": "turning-a-new-page",
-      "slug": null,
-      "school": null,
+      "topic": "Turning a New Page",
       "month": null,
       "year": null,
-      "topic": "Turning a New Page",
-      "subtitle": null,
       "epigraph": {
         "poem": "turning-ananda-priyan",
         "text": "Just how the paper softens\nwhere it’s been held before."
       },
-      "intro": "Freedom, fulfilment, hope and a blank page: three writers on beginning again.",
-      "theme": {
-        "mood": "paper",
-        "shape": "square"
-      },
-      "ppt": null,
-      "featured": false,
       "status": "published",
+      "school": null,
+      "downloads": [],
       "poems": [
         {
           "id": "turning-tanmay-khakharia",
           "title": null,
           "author": "Tanmay Mehul Khakharia",
-          "grade": null,
+          "authorId": "tanmay-mehul-khakharia",
+          "grade": "IB year 2",
+          "school": "senior",
           "stanzas": [
             "As the lonely boy lies curled against the wall,\nHoping for a respite from the pain,\nThe thought that keeps him going, a light in the suffocating dark:\nThe freedom of turning a new page.",
             "As the writer crumples the upteenth page of words,\nCompelled to give through and escape the despair,\nThe thought that drives his pen across the page:\nThe fulfillment of turning a new page.",
@@ -202,65 +770,241 @@
           ],
           "lines": [
             "The thought that drives his pen across the page:\nThe fulfillment of turning a new page."
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1218,
+              1233
+            ],
+            "bylineLine": 1262,
+            "sha256": "9828f681740cdaec51a511378e853993bc74ee17ebbf1db52f4a7e71ffb2a9a8"
+          }
+        },
+        {
+          "id": "turning-nishanth-reddy",
+          "title": null,
+          "author": "Nishanth Reddy",
+          "authorId": "nishanth-reddy",
+          "grade": "IB year 2",
+          "school": "senior",
+          "stanzas": [
+            "There comes a time in a child\nwhere the pages of life flutter wild\nfrom paths of pain and turns of disdain\nfrom bouts of glory to moments engraved in memory\nthe constant cries of the sinners so incessant\nplaguing the youth ever so effervescent\nwe are shrouded in the darkness of ignorance\nowing to humanity’s unholy penance\nthe poisonous ego of the individual\nand the cunning apathy of of our race\nforms a viciousness so habitual\nsurmounts to battles a child has to face\nalas! a doom may indeed be prophesized\nbut a cure lies in the depths of calamity\nthe depths reached through the purity of a child\nwhich can rid us of our profanity\nit’s up to the children of today \nto turn to pages of tomorrow\nturning a new page to humanity\nrooted in values of child-like purity"
+          ],
+          "lines": [
+            "There comes a time in a child\nwhere the pages of life flutter wild"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1273,
+              1292
+            ],
+            "bylineLine": 1315,
+            "sha256": "5c4e3253f27b852eb48c93543446398b3b1c8330fc6d3a94f033a846cbce2384"
+          }
         },
         {
           "id": "turning-ananda-priyan",
           "title": null,
           "author": "Ananda Priyan",
-          "grade": null,
+          "authorId": "ananda-priyan",
+          "grade": "Grade 12 · Science",
+          "school": "senior",
           "stanzas": [
-            "I turned a page today\nor something like it.\nThe corner folded clean,\nno trace of what it held.",
-            "The words behave themselves now,\nsit neatly in their lines.\nNo sudden slips of meaning,\nno ink that runs too far.",
-            "Still, sometimes in the margin,\nthere’s pressure without a mark\nas if a thought once rested there\nand chose not to remain.",
-            "It’s nothing you could point to,\nnothing you could prove.\nJust how the paper softens\nwhere it’s been held before.",
-            "I read it like it’s ordinary.\nI let the sentences pass.\nBut something in the silence\nlingers just a little longer.",
-            "I close the book or so I say,\nBut some pages don’t turn away."
+            "I turned a page today\nor something like it.\nThe corner folded clean,\nno trace of what it held.\nThe words behave themselves now,\nsit neatly in their lines.\nNo sudden slips of meaning,\nno ink that runs too far.\nStill, sometimes in the margin,\nthere’s pressure without a mark\nas if a thought once rested there\nand chose not to remain.\nIt’s nothing you could point to,\nnothing you could prove.\nJust how the paper softens\nwhere it’s been held before.\nI read it like it’s ordinary.\nI let the sentences pass.\nBut something in the silence\nlingers just a little longer.\nI close the book or so I say,\nBut some pages don’t turn away."
           ],
           "lines": [
             "Just how the paper softens\nwhere it’s been held before."
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1317,
+              1338
+            ],
+            "bylineLine": 1341,
+            "sha256": "a3434905131c1504bbf725568d94e263344bb4cff280fc28b27616ab4d192c6c"
+          }
+        },
+        {
+          "id": "turning-jishnu-yogesh",
+          "title": null,
+          "author": "Jishnu Teja Yogesh",
+          "authorId": "jishnu-teja-yogesh",
+          "grade": "IB year 1",
+          "school": "senior",
+          "stanzas": [
+            "Life, a tapestry of stories intertwined.\nSome common yet some of a whole different kind.\nA journal of pages, worn and torn.\nThe author, a child, from when they were born.",
+            "A tale that follows from cradle to grave.\nInvincible, are those that end brave.\nFor trials will linger all along\nAnd pull you away from where you strive to belong.",
+            "Yet fingers linger on pages once known\nTracing ink like it’s carved on stone.\nBut something within starts quietly to shift,\nA tremor of change, a hesitant drift.\nThe ink of the past begins to release,\nIts grip grows lighter, its echoes find peace.\nThe weight of “what was” no longer remains,\nJust fragments of stories and softened refrains.\nA silence appears—untouched, undefined,\nNo echoes behind, no script pre-designed.\nAnd there, in the hush where nothing has stayed\nYou become the hand… and the unwritten blade."
+          ],
+          "lines": [
+            "Life, a tapestry of stories intertwined.\nSome common yet some of a whole different kind."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1350,
+              1373
+            ],
+            "bylineLine": 1376,
+            "sha256": "653c852463fcd8f6ab13faaf1614b709a8f099a12514c565b3e6459cdb6a3786"
+          }
         },
         {
           "id": "turning-aayush-bhashyam",
           "title": null,
           "author": "Aayush Sreenath Bhashyam",
-          "grade": null,
+          "authorId": "aayush-sreenath-bhashyam",
+          "grade": "IB year 2",
+          "school": "senior",
           "stanzas": [
             "Between the last word and the first,\n a breath the universe holds long.\nThe self, unmade, unquenched by thirst,\n becomes the silence before song.\nWhat burned was not the whole of you,\n only the name you wore too tight.\n The page turns white the way dawn's dew\n dissolves into arriving light.\nWrite nothing yet.\n Just feel the blankness.\n Even the ocean stills before it broke.\nSome depths are born only from darkness \nsome flames rise only after smoke."
           ],
           "lines": [
             "The page turns white the way dawn's dew\ndissolves into arriving light."
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1381,
+              1393
+            ],
+            "bylineLine": 1396,
+            "sha256": "6f310ec7e12911bff432d03f19a2d01aa420a0859dda6ad1b0fcedb168b91a05"
+          }
+        },
+        {
+          "id": "turning-shresth-kedia",
+          "title": null,
+          "author": "Shresth Kedia",
+          "authorId": "shresth-kedia",
+          "grade": "Grade 11 · Management",
+          "school": "senior",
+          "stanzas": [
+            "It’s that time of the year again,\nChanging grades and starting new,\nArriving at the last stage of school,\nThe last dance conquered by a few.",
+            "Old leaves shed and new ones get a base\nEverything changes in a way\nAchievements take place in our case\nAs we grow to our maximum",
+            "The world changes a lot,\nPeople might say its just a grade,\nBut the pressure of 12th is not easy,\nThe students stay afraid.",
+            "Turning a new page could be better,\nFor people looking for a new space,\nAs it brings them good luck\nLike an angel on the heaven"
+          ],
+          "lines": [
+            "It’s that time of the year again,\nChanging grades and starting new,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1413,
+              1434
+            ],
+            "bylineLine": 1437,
+            "sha256": "51466e23599238424885da261cd12cb420a0af087f47fc025c38898a5f1d3224"
+          }
+        },
+        {
+          "id": "turning-sivayini-a",
+          "title": null,
+          "author": "Sivayini A",
+          "authorId": "sivayini-a",
+          "grade": "Grade 10",
+          "school": "senior",
+          "stanzas": [
+            "Wounds, cuts, betrayal washed,\nsecrets, whispers, gossips hushed,\nNew year, new mind, a new start,\nFocus and aim the dart,\nBecome one of a kind,\nPatience to unwind,\nNo grudges to be held,\nBroken bonds to mend,\nDistractions out of the frame,\nMore dragons to tame,\nNow a fresh slate,\nNo point whining it’s fate,\nSky high we must reach,\nThrow out the blood sucking leech,\nlaughter, fun, memories and more,\nWith a happy sigh we arrive at shore."
+          ],
+          "lines": [
+            "Wounds, cuts, betrayal washed,\nsecrets, whispers, gossips hushed,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1464,
+              1479
+            ],
+            "bylineLine": 1482,
+            "sha256": "02e9b33a3f53bd26a096566aa9fac88b2ff89f2dfaee9667f77ebd1335065ae6"
+          }
+        },
+        {
+          "id": "turning-kavya-ranjeeth",
+          "title": null,
+          "author": "Kavya Ranjeeth",
+          "authorId": "kavya-ranjeeth",
+          "grade": "Grade 10",
+          "school": "senior",
+          "stanzas": [
+            "Words that deliver so much to feel,\nThrough every moment I learnt to heal.\nPages and pages of stories made,\nWritten so that they wouldn’t fade.",
+            "Then, new words start to appear,\nCrafting memories with ones who are dear.\nLike seeing the moon after long,\nWhile it sings its silent song.",
+            "Then I turned to the nest page,\nTo find myself freed from the cage.\nWasn’t easy but flipped it away,\nDidn’t want anything bothering to stay."
+          ],
+          "lines": [
+            "Words that deliver so much to feel,\nThrough every moment I learnt to heal."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1504,
+              1519
+            ],
+            "bylineLine": 1522,
+            "sha256": "cbe27f6d863296f0f7b2ee61652387dd7c3990179e47c22aa78d0945aa263523"
+          }
+        },
+        {
+          "id": "turning-anushya-uk",
+          "title": null,
+          "author": "Anushya UK",
+          "authorId": "anushya-uk",
+          "grade": "IB year 2",
+          "school": "senior",
+          "stanzas": [
+            "It feels like just yesterday\nwhen I thought this would be my forever,\nwhen I hoped things would stay the same,\nwhere there was no room\nfor regrets or heartache.",
+            "Now, as I turn to a new page,\nthe margins feel wide again.\nThere’s space for mistakes\nthat don’t sting as much,\nfor sentences that don’t have to be perfect,\nand for stories still waiting to be written.",
+            "The old chapters remain,\nreminding me why I can’t go back there again.\nAfter all, those lessons shaped me,\nmade me who I am today.",
+            "They’re not shut completely,\nbut they’re not wide open either.\nThey sit quietly in a corner,\njust out of reach,\nas I step into something new."
+          ],
+          "lines": [
+            "It feels like just yesterday\nwhen I thought this would be my forever,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1556,
+              1581
+            ],
+            "bylineLine": 1582,
+            "sha256": "2d993c33bc7944bd63c8760ccf7b08837277e948d7d438567a14183870440b07"
+          }
         }
-      ]
+      ],
+      "source": {
+        "document": "creative-writing-original",
+        "headingLines": [
+          1217,
+          1217
+        ]
+      },
+      "intro": "Beginnings, change and the possibility of a fresh page."
     },
     {
       "id": "refuge-from-reality",
-      "slug": null,
-      "school": null,
+      "topic": "Refuge from Reality",
       "month": 4,
       "year": null,
-      "topic": "Refuge from Reality",
-      "subtitle": null,
       "epigraph": {
         "poem": "refuge-tarushi-agarwal",
         "text": "I create my own quiet land."
       },
-      "intro": "A family, a dance room, a notebook and an HB pencil: three writers name the places they go to breathe.",
-      "theme": {
-        "mood": "night",
-        "shape": "portrait"
-      },
-      "ppt": null,
-      "featured": false,
       "status": "published",
+      "school": null,
+      "downloads": [],
       "poems": [
         {
           "id": "refuge-kavya-prasad",
           "title": null,
           "author": "Kavya Arun Prasad",
-          "grade": null,
+          "authorId": "kavya-arun-prasad",
+          "grade": "Grade 9C",
+          "school": "senior",
           "stanzas": [
             "Where I reside right now,\nIs not where I want to be.\nScared and alone,\nIn a world not as care-free.",
             "Responsibilities and worries,\nExist as live entities.\nTroubling my mind constantly,\nSometimes getting me on my knees.",
@@ -269,13 +1013,78 @@
           ],
           "lines": [
             "To my family, a warmth I’ll forever seek,\nThe one’s who I call, my refuge from reality."
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1596,
+              1617
+            ],
+            "bylineLine": 1622,
+            "sha256": "726d13a8cfcd13c3653351eb0c110fe788286825a5f39332b418384b078a0a52"
+          }
+        },
+        {
+          "id": "refuge-nakshatra-gavaskar",
+          "title": "My brother, my refuge",
+          "author": "Nakshatra Gavaskar",
+          "authorId": "nakshatra-gavaskar",
+          "grade": "Grade 9B",
+          "school": "senior",
+          "stanzas": [
+            "When reality hits too hard at times,\nAnd everything in my head goes wrong,\nWhatever I do feels like crimes\nAnd life is just slow and long.",
+            "Sometimes I feel like crying,\nSometimes I just get mad\nAt people who were just consoling,\nAnd make them sad as well.",
+            "Then I figured out,\nThat there was this one guy,\nWho I have always known about\nWho wouldn’t let me cry.",
+            "At times, he’s my refuge,\nAt times my soul,\nAt times my only fuse,\nAnd in my life he plays a huge role."
+          ],
+          "lines": [
+            "When reality hits too hard at times,\nAnd everything in my head goes wrong,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1652,
+              1673
+            ],
+            "bylineLine": 1678,
+            "sha256": "86f3c7ecdc2baf972f63db3a5c5c724cdaadcab663782aa5255851f1744d57d7",
+            "titleLine": 1649
+          }
+        },
+        {
+          "id": "refuge-jishnu-yogesh",
+          "title": null,
+          "author": "Jishnu Teja Yogesh",
+          "authorId": "jishnu-teja-yogesh",
+          "grade": "IB year 2",
+          "school": "senior",
+          "stanzas": [
+            "It was all right, just as I’d planned.\nThe world walked, according to my stride.\nIt was a life upon which I held command.\nWithout pain, to my word, it did abide.",
+            "But reality does not knock,\nIt tears straight through.\nA life no strength could mock,\nVanished into the blue.",
+            "Nothing stood, nothing remained\n“Oh what ruins” screamed my hopeful gaze\nNo voice, nothing responded,\nAll that answered me was empty space.",
+            "But as the final strand of hope,\nVanished into the unknown\nThere was a power that pulled it back as a rope\nBefore it was completely blown.",
+            "In that light, reality did not dare,\nThe burden of the world, no more mine to bear.\nA quiet refuge, untouched by despair,\nEven ruin could not follow me there."
+          ],
+          "lines": [
+            "It was all right, just as I’d planned.\nThe world walked, according to my stride."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1703,
+              1730
+            ],
+            "bylineLine": 1741,
+            "sha256": "e5533c25cee064cd82ecc3c319ef262c6d4b6782f15ffaf2380b073afb71b75e"
+          }
         },
         {
           "id": "refuge-adira-chellam",
           "title": null,
           "author": "Adira Chellam P",
-          "grade": null,
+          "authorId": "adira-chellam-p",
+          "grade": "Grade 9B",
+          "school": "senior",
           "stanzas": [
             "Reality is not something easy\nIt might make you go crazy\nIf I had to take a break from mine\nI’ll run to the place which’ll make me shine.",
             "Anytime to escape this toxic danger,\nI neither have to meet my friends nor a stranger.\nI just have to rush towards that room\nWhere my dance skills will unleash and bloom.",
@@ -283,50 +1092,139 @@
           ],
           "lines": [
             "I just have to rush towards that room\nWhere my dance skills will unleash and bloom."
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1750,
+              1765
+            ],
+            "bylineLine": 1768,
+            "sha256": "210b1dbb9477f504d90b816e7f20534f4876fdd50c72ef664873b8484bbf9ecd"
+          }
         },
         {
           "id": "refuge-tarushi-agarwal",
           "title": null,
           "author": "Tarushi agarwal",
-          "grade": null,
+          "authorId": "tarushi-agarwal",
+          "grade": "Grade 12 · Management",
+          "school": "senior",
           "stanzas": [
-            "When the whole world gets way too loud,\nAnd I just hate being in the crowd,\nI open my drawer and grab a page,\nTo let go of all my stress and rage.",
-            "With a HB pencil in my hand,\nI create my own quiet land.\nNo marks, no tests, no one to judge,\nJust black lines and a charcoal smudge.",
-            "This notebook is my silent space,\nMy favorite little hiding place.\nHere I don't have to explain a thing,\nI just draw until my thoughts take wing."
+            "When the whole world gets way too loud,\nAnd I just hate being in the crowd,\nI open my drawer and grab a page,\nTo let go of all my stress and rage.\nWith a HB pencil in my hand,\nI create my own quiet land.\nNo marks, no tests, no one to judge,\nJust black lines and a charcoal smudge.\nThis notebook is my silent space,\nMy favorite little hiding place.\nHere I don't have to explain a thing,\nI just draw until my thoughts take wing."
           ],
           "lines": [
             "With a HB pencil in my hand,\nI create my own quiet land."
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1817,
+              1828
+            ],
+            "bylineLine": 1829,
+            "sha256": "65b2e54e4323eb79f2bf1dfa65b830a3e975308dc5865cc81286260b7c828782"
+          }
+        },
+        {
+          "id": "refuge-anushya-uk",
+          "title": null,
+          "author": "Anushya UK",
+          "authorId": "anushya-uk",
+          "grade": "IB year 2",
+          "school": "senior",
+          "stanzas": [
+            "When academic stress get way too tense,\nAnd nothing makes any sense,\nI sneak up the stairs to the open roof,\nAway from every lecture and proof.\nThe wind up here is cool and sweet,\nFar away from the noisy street.\nI look up at the moon and stars,\nAnd forget about my hidden scars.\nSitting alone on the chilly floor,\nI don't have to pretend anymore.\nThe night sky wraps me in its breeze,\nAnd puts my crazy mind at ease."
+          ],
+          "lines": [
+            "When academic stress get way too tense,\nAnd nothing makes any sense,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1853,
+              1864
+            ],
+            "bylineLine": 1865,
+            "sha256": "2b40b039802bae210c08fb616edf124565c311d554602ba6e0764fab9ab7d55e"
+          }
+        },
+        {
+          "id": "refuge-hardik-saralia",
+          "title": null,
+          "author": "Hardik Saralia",
+          "authorId": "hardik-saralia",
+          "grade": "Grade 12 · Management",
+          "school": "senior",
+          "stanzas": [
+            "Whenever life feels way too heavy,\nAnd my head turns totally messy,\nI don't want to talk to anyone around,\nI just need to block out every sound.\nI plug my earphones in my ears,\nAnd instantly drop all my fears.\nMy favorite song starts to play,\nWashing all bad vibes away.\nIn this world of beats and bass,\nI finally find my personal space.\nNo fake smiles, no extra noise,\nJust me, the music, and a singer's voice."
+          ],
+          "lines": [
+            "Whenever life feels way too heavy,\nAnd my head turns totally messy,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1893,
+              1904
+            ],
+            "bylineLine": 1905,
+            "sha256": "3353f0978f9a363abb5ba337eac4164e239385a4105473065c658bdaf0d32c55"
+          }
+        },
+        {
+          "id": "refuge-sumedha-sarangi",
+          "title": null,
+          "author": "Sumedha Sarangi",
+          "authorId": "sumedha-sarangi",
+          "grade": "Grade 12 · Science",
+          "school": "senior",
+          "stanzas": [
+            "Whenever people misunderstand me,\nAnd reality feels like a penalty,\nI don't scream or fight out loud,\nI just walk away from the crowd.\nI pull out my old rough diary page,\nWhere I spill my truth at every stage.\nI write down words I can never say,\nJust to make it through another day.\nMy ink writes what my heart really feels,\nIt's the only thing that actually heals.\nThis small book hidden under my bed,\nClears out all the chaos inside my head."
+          ],
+          "lines": [
+            "Whenever people misunderstand me,\nAnd reality feels like a penalty,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1927,
+              1938
+            ],
+            "bylineLine": 1939,
+            "sha256": "ddb3a9f99fd6dd0c62eb6e7d06be32d43d086393e713bbf3d71c4006319e105c"
+          }
         }
-      ]
+      ],
+      "source": {
+        "document": "creative-writing-original",
+        "headingLines": [
+          1595,
+          1595
+        ]
+      },
+      "intro": "Family, music, dance and the places we turn to for comfort."
     },
     {
       "id": "lift-yourself-by-yourself",
-      "slug": null,
-      "school": null,
+      "topic": "Lift Yourself by Yourself",
       "month": 5,
       "year": null,
-      "topic": "Lift Yourself by Yourself",
-      "subtitle": null,
       "epigraph": {
         "poem": "lift-jishnu-yogesh",
         "text": "No weight remained to drag me around"
       },
-      "intro": "Chains, friendships and the strength that comes from within: three writers on standing up again.",
-      "theme": {
-        "mood": "meadow",
-        "shape": "landscape"
-      },
-      "ppt": null,
-      "featured": false,
       "status": "published",
+      "school": null,
+      "downloads": [],
       "poems": [
         {
           "id": "lift-jishnu-yogesh",
           "title": null,
           "author": "Jishnu Teja Yogesh",
-          "grade": null,
+          "authorId": "jishnu-teja-yogesh",
+          "grade": "IB year 2",
+          "school": "senior",
           "stanzas": [
             "Bound in chains, held up tight\nThe world held its reins, denied me light.\nEach passing second carved me thin\nUntil I had nothing more within",
             "It broke through me, shattered my fame\nIt got me down, seized my flame\nNo light, not a ray\nJust an evil bark engulfed in dismay",
@@ -335,13 +1233,49 @@
           ],
           "lines": [
             "No force remained to keep me bound\nNo weight remained to drag me around"
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              1944,
+              1965
+            ],
+            "bylineLine": 1970,
+            "sha256": "68379752b89382d5251f838260341190507946fac6b10df6a04a137ddb8a30bf"
+          }
+        },
+        {
+          "id": "lift-aadhya-tulsyan",
+          "title": null,
+          "author": "Aadhya Tulsyan",
+          "authorId": "aadhya-tulsyan",
+          "grade": "Grade 11",
+          "school": "senior",
+          "stanzas": [
+            "When the winds chase you to the edge,\nWhen your fears break your pledge,\nThat’s when you’ve got to make the choice,\nListen to your heart and ignore that empty noise.",
+            "Jump and rise!\nTo see you zenith, you’ve got to experience your demise,\nBecause when you choose the difficult path,\nYou discover success’ addictive wrath.",
+            "Stumbling you shall fall,\nBut lift yourself and stand tall,\nBecause the toughest story,\nContains the most magnificent glory."
+          ],
+          "lines": [
+            "When the winds chase you to the edge,\nWhen your fears break your pledge,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              2000,
+              2015
+            ],
+            "bylineLine": 2016,
+            "sha256": "a4c3d173486c2a529efe196ad070e70da4f4b59eea23c5047e17f7f5fbf0d389"
+          }
         },
         {
           "id": "lift-ashmi-agarwal",
           "title": null,
           "author": "Ashmi Agarwal",
-          "grade": null,
+          "authorId": "ashmi-agarwal",
+          "grade": "Grade 9B",
+          "school": "senior",
           "stanzas": [
             "Caring, sharing and supporting your friends;\nThat is fine, but it might come to an end.\nWhen you are low and blue,\nYour heart feels broken into two,\nFriends may or may not be there to fix you.",
             "Maybe once, maybe twice,\nYou will have people by your side.\nBut to prepare for the last time,\nLearn to be alone.",
@@ -349,13 +1283,24 @@
           ],
           "lines": [
             "Push your self, motivate yourself,\nBecause if not someone else,\nYou will always have yourself."
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              2052,
+              2067
+            ],
+            "bylineLine": 2068,
+            "sha256": "7f2368cca6893efb2d55b2b5aea9c62921b895dec46841b353f86aed70194a98"
+          }
         },
         {
           "id": "lift-vrittee-fogla",
           "title": null,
           "author": "Vrittee Fogla",
-          "grade": null,
+          "authorId": "vrittee-fogla",
+          "grade": "Grade 9B",
+          "school": "senior",
           "stanzas": [
             "We all live in a world so full, \nAll negativities gathered up.\nWe might go down on the way,\nBut to stay on track, we must get up.",
             "You might have goals to fulfill,\nYou can get some help too.\nBut it will last only,\nIf you change yourself into someone new.",
@@ -363,123 +1308,149 @@
           ],
           "lines": [
             "But the actual strength comes from within,\nFor which lifting yourself is a must."
-          ]
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              2098,
+              2113
+            ],
+            "bylineLine": 2114,
+            "sha256": "863d2c2f5d044ed96a066301420fd408c049e12b9b3a29fb566200b3a3d3b288"
+          }
+        },
+        {
+          "id": "lift-janaki",
+          "title": null,
+          "author": "Janaki",
+          "authorId": "janaki",
+          "grade": "Grade 9B",
+          "school": "senior",
+          "stanzas": [
+            "There are people to push you low,\nBut it is you who decides to go up or down.\nPeople may kick you or prick you,\nBut it's you who has to move on.",
+            "With little sparkling eyes,\nI see the world outside,\nTrying my best to chase others' praise.\nBut why am I trying to prove it when I know myself.",
+            "It is me who lifts or pulls myself down,\nIt is up to me to build a life for myself.",
+            "There are friends, \nBut where are they when I cry?\nAt the end of the day,\nIt is up to me to decide,\nHow I want to live my life."
+          ],
+          "lines": [
+            "There are people to push you low,\nBut it is you who decides to go up or down."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              2148,
+              2168
+            ],
+            "bylineLine": 2169,
+            "sha256": "fda112ef68a6c10cfaeaf24d5eb147ec8069214c74eadb345d0f3d30096f7665"
+          }
+        },
+        {
+          "id": "lift-m-k-nedra",
+          "title": null,
+          "author": "M K Nedra",
+          "authorId": "m-k-nedra",
+          "grade": "Grade 9D",
+          "school": "senior",
+          "stanzas": [
+            "When you feel low,\nDon’t hide in others' shadows.\nInstead come out and,\nLift yourself by yourself.",
+            "Follow no one else,\nBut your inner self.\nDon’t fear anything,\nJust prove yourself.",
+            "Wake up to reality,\nBefore it's too late.\nThere will be no one to guide you,\nBut yourself. "
+          ],
+          "lines": [
+            "When you feel low,\nDon’t hide in others' shadows."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              2331,
+              2346
+            ],
+            "bylineLine": 2347,
+            "sha256": "83f3f0f749ea6f36e03d35f7a2d15de728ff968227b413964c72c748a256ac9b"
+          }
+        },
+        {
+          "id": "lift-aarush-chhaparia",
+          "title": null,
+          "author": "Aarush Chhaparia",
+          "authorId": "aarush-chhaparia",
+          "grade": "Grade 9D",
+          "school": "senior",
+          "stanzas": [
+            "Lift yourself by yourself,\nA value so great,\nHelps in reaching the goal of oneself.",
+            "Hardships may block the way,\nFrom the path of righteousness we must not stray,\nAs it is the only way.",
+            "To taste success in life today,\nLifting yourself\no is the only way,\nSo lift yourself by yourself today."
+          ],
+          "lines": [
+            "Lift yourself by yourself,\nA value so great,"
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              2383,
+              2396
+            ],
+            "bylineLine": 2397,
+            "sha256": "8cfa8f9a0d959946016311546e4ba448ab2ad876cbac465eec658f95f5e8f994"
+          }
         }
-      ]
-    },
-    {
-      "id": "junior-freedom-2026",
-      "slug": null,
-      "school": "junior",
-      "month": 8,
-      "year": 2026,
-      "topic": "Freedom",
-      "subtitle": null,
-      "epigraph": null,
-      "intro": null,
-      "theme": {
-        "mood": "ember",
-        "shape": "portrait"
+      ],
+      "source": {
+        "document": "creative-writing-original",
+        "headingLines": [
+          1943,
+          1943
+        ]
       },
-      "ppt": null,
-      "featured": true,
-      "status": "awaiting",
-      "poems": []
+      "intro": "Reflections on resilience and the strength to begin again."
     },
     {
-      "id": "junior-monsoon-2026",
-      "slug": null,
-      "school": "junior",
+      "id": "the-dawn-of-a-new-era",
+      "topic": "The Dawn of a New Era",
       "month": 7,
-      "year": 2026,
-      "topic": "Monsoon",
-      "subtitle": null,
+      "year": null,
       "epigraph": null,
-      "intro": null,
-      "theme": {
-        "mood": "monsoon",
-        "shape": "landscape"
+      "status": "published",
+      "school": null,
+      "downloads": [],
+      "poems": [
+        {
+          "id": "dawn-orchestra",
+          "title": null,
+          "author": null,
+          "authorId": null,
+          "grade": null,
+          "school": null,
+          "stanzas": [
+            "The time has come for a new beginning.\nStarting from changing the violin string.",
+            "Cello bringing harmony,\nAnd the flute completing the symphony.",
+            "The bass would add some depth,\nThe drums filling the rhythm with every breath",
+            "If all the instruments came together,\nIt would feel like sunshine in bad weather.",
+            "An orchestra of peace,\nTogetherness across the seas"
+          ],
+          "lines": [
+            "The time has come for a new beginning.\nStarting from changing the violin string."
+          ],
+          "source": {
+            "document": "creative-writing-original",
+            "bodyLines": [
+              2406,
+              2423
+            ],
+            "bylineLine": null,
+            "sha256": "2a39c4c21bf9d7a55874953e4625935973d1bf1343b60c4a6c9e2f5cd54f8a13"
+          }
+        }
+      ],
+      "source": {
+        "document": "creative-writing-original",
+        "headingLines": [
+          2405,
+          2405
+        ]
       },
-      "ppt": null,
-      "featured": false,
-      "status": "awaiting",
-      "poems": []
-    },
-    {
-      "id": "junior-teachers-2026",
-      "slug": null,
-      "school": "junior",
-      "month": 9,
-      "year": 2026,
-      "topic": "Teachers",
-      "subtitle": null,
-      "epigraph": null,
-      "intro": null,
-      "theme": {
-        "mood": "chalk",
-        "shape": "square"
-      },
-      "ppt": null,
-      "featured": false,
-      "status": "awaiting",
-      "poems": []
-    },
-    {
-      "id": "senior-freedom-2026",
-      "slug": null,
-      "school": "senior",
-      "month": 8,
-      "year": 2026,
-      "topic": "Freedom",
-      "subtitle": null,
-      "epigraph": null,
-      "intro": null,
-      "theme": {
-        "mood": "ember",
-        "shape": "landscape"
-      },
-      "ppt": null,
-      "featured": true,
-      "status": "awaiting",
-      "poems": []
-    },
-    {
-      "id": "senior-monsoon-2026",
-      "slug": null,
-      "school": "senior",
-      "month": 7,
-      "year": 2026,
-      "topic": "Monsoon",
-      "subtitle": null,
-      "epigraph": null,
-      "intro": null,
-      "theme": {
-        "mood": "monsoon",
-        "shape": "portrait"
-      },
-      "ppt": null,
-      "featured": false,
-      "status": "awaiting",
-      "poems": []
-    },
-    {
-      "id": "senior-teachers-2026",
-      "slug": null,
-      "school": "senior",
-      "month": 9,
-      "year": 2026,
-      "topic": "Teachers",
-      "subtitle": null,
-      "epigraph": null,
-      "intro": null,
-      "theme": {
-        "mood": "chalk",
-        "shape": "square"
-      },
-      "ppt": null,
-      "featured": false,
-      "status": "awaiting",
-      "poems": []
+      "intro": "An orchestra of instruments becomes a poem about togetherness."
     }
   ]
 }

@@ -1,712 +1,233 @@
-/* ============================================================
-   Creative Writing: a student literary journal.
-   Every rule is scoped to body.cwriting. Grounds, ink, gold and the type
-   roles are the site's own (cirs.css, typography.css); the one family of
-   page-local colours is each edition's atmosphere (--ed-ground, --ed-ink,
-   --ed-soft, --ed-accent, --ed-mark), which is meaning, like the festival
-   inks: tools/creativewriting.py writes it into the page and contrast-checks it.
-
-   The page has four temperaments, and only the first three move:
-     hero      emotional   a deep-purple opening, one student's line
-     wave      experimental the editions as two opposing waves of titles
-     archive   systematic   a plain chronological record
-     reading   calm         no motion at all
-   The markup is complete without cwriting.js. Layouts the script adds are
-   marked on <html> before first paint (head_html in creativewriting.py):
-     cw-split-on   the hero holds while its two words part
-     cw-wave-on    the editions become two columns around a sticky preview
-   Without them the page is a plain editorial list, which is also what
-   phones, short windows and reduced motion get.
-   ============================================================ */
-
-body.cwriting{
-  --cw-ease: cubic-bezier(.16,1,.3,1);
-  --cw-glide: cubic-bezier(.65,0,.2,1);
-  --tint: color-mix(in srgb, var(--ed-ground, var(--paper-3)) 12%, var(--paper));
-  background:var(--paper);
-  color:var(--ink);
-}
-body.cwriting #main{ position:relative; z-index:1; background:var(--paper); overflow-x:clip; }
-body.cwriting :is(a, button):focus-visible{ outline:2px solid var(--focus); outline-offset:4px; }
-/* A heading focused by script after an in-page link is a landing place, not a control. */
-body.cwriting [tabindex="-1"]:focus{ outline:none; }
-body.cwriting .cw-hero :is(a, button):focus-visible{ outline-color:var(--gold-lit); }
-
-body.cwriting .cw-eyebrow{
-  margin:0 0 var(--space-4);
-  font-family:var(--font-ui); font-size:.76rem; font-weight:600;
-  letter-spacing:.22em; line-height:1.3; text-transform:uppercase;
-  color:var(--label);
-}
-
-/* ============================================================
-   1 · Hero: deep purple, the title, a real line
-   ============================================================ */
-body.cwriting .cw-hero{
-  position:relative; isolation:isolate;
-  display:flex; align-items:center;
-  min-height:100vh; min-height:100svh;
-  background:var(--dark-mid); color:var(--on-dark);
-}
-body.cwriting .cw-hero__grid{
-  width:100%; max-width:1560px; margin-inline:auto;
-  padding:clamp(104px,15svh,150px) var(--gut) clamp(56px,9svh,96px);
-  display:grid; grid-template-columns:minmax(0,1fr); row-gap:clamp(48px,9vw,80px);
-  align-items:center;
-}
-body.cwriting .cw-hero__label{
-  margin:0 0 clamp(16px,3svh,28px);
-  font-family:var(--font-ui); font-size:.76rem; font-weight:600;
-  letter-spacing:.24em; text-transform:uppercase; color:var(--on-dark-soft);
-}
-body.cwriting .cw-hero__label a{ border-bottom:1px solid rgba(250,249,243,.35); padding-block:10px 3px; }
-body.cwriting .cw-hero__label a:hover{ color:var(--on-dark); border-color:var(--gold-lit); }
-body.cwriting .cw-hero__label--gold{ display:flex; align-items:center; gap:1em; white-space:nowrap; color:var(--gold-lit); }
-body.cwriting .cw-hero__label--gold::after{ content:""; flex:0 1 6.5rem; min-width:1.5rem; height:1px; background:rgba(255,215,92,.45); }
-
-/* The title is typeset, not scattered: CREATIVE hangs at the margin,
-   WRITING sits in italic one indent further in. */
-body.cwriting .cw-hero__titleblock{ position:relative; }
-body.cwriting .cw-hero__title{
-  margin:0; color:var(--on-dark);
-  font-family:var(--font-display); font-weight:500; text-transform:uppercase;
-  font-size:clamp(2.6rem, 15.2vw, 6.2rem);
-  line-height:.96; letter-spacing:-.02em;
-}
-body.cwriting .cw-hero__word{ display:block; width:max-content; max-width:100%; }
-body.cwriting .cw-hero__word--b{
-  padding-left:clamp(1.2rem, 8vw, 6rem);
-  font-style:italic; font-weight:400; letter-spacing:-.015em;
-}
-body.cwriting .cw-hero__between{
-  margin:clamp(16px,2.4svh,26px) 0 0;
-  font-family:var(--font-ui); font-size:.78rem; font-weight:600;
-  letter-spacing:.3em; text-transform:uppercase; color:var(--gold-lit);
-}
-body.cwriting .cw-hero__sub{
-  max-width:26ch; margin:clamp(20px,3.4svh,34px) 0 0;
-  font-family:var(--font-editorial); font-weight:350;
-  font-size:clamp(1.06rem,1.4vw,1.25rem); line-height:1.5; color:var(--on-dark-soft);
-}
-body.cwriting .cw-hero__cue,
-body.cwriting .cw-quote__read{
-  display:inline-flex; align-items:center; gap:.7em; min-height:44px;
-  margin-top:clamp(14px,2.4svh,24px);
-  font-family:var(--font-ui); font-size:.8rem; font-weight:600;
-  letter-spacing:.18em; text-transform:uppercase; color:var(--on-dark);
-  border-bottom:1px solid var(--gold); padding-block:6px 4px;
-  transition:color .25s ease, border-color .25s ease;
-}
-body.cwriting .cw-hero__cue{ align-self:flex-start; }
-body.cwriting .cw-hero__cue:hover, body.cwriting .cw-quote__read:hover{ color:var(--gold-lit); }
-body.cwriting .cw-hero__cue span, body.cwriting .cw-quote__read span{ transition:transform .35s var(--cw-ease); }
-body.cwriting .cw-hero__cue:hover span, body.cwriting .cw-quote__read:hover span{ transform:translateY(3px); }
-body.cwriting .cw-quote__read:hover span{ transform:translateX(4px); }
-
-/* The student's line. */
-body.cwriting .cw-hero__stage{ position:relative; }
-body.cwriting .cw-quote{ margin:0; }
-body.cwriting .cw-quote__text{ margin:0; padding:0; border:0; background:none; quotes:none; }
-body.cwriting .cw-quote__text p{
-  margin:0; padding-left:.44em;
-  font-family:var(--font-quote); font-style:italic; font-weight:400;
-  font-size:clamp(1.5rem, min(2.1vw, 4.4svh), 2.5rem);
-  line-height:1.2; color:var(--on-dark);
-}
-/* Each authored line is a block; one that wraps hangs. The quotation
-   marks are drawn, so the words stay exactly as the student wrote them. */
-body.cwriting .cw-l{ display:block; padding-left:.9em; text-indent:-.9em; text-wrap:pretty; }
-body.cwriting :is(.cw-quote__text, .cw-wave__quote, .cw-feature__quote) .cw-l:first-child::before{ content:"\201C"; margin-left:-.44em; }
-body.cwriting :is(.cw-quote__text, .cw-wave__quote, .cw-feature__quote) .cw-l:last-child::after{ content:"\201D"; }
-body.cwriting .cw-quote__cap{
-  display:flex; flex-direction:column; gap:.25em;
-  margin-top:clamp(16px,2.8svh,28px);
-}
-body.cwriting .cw-quote__author{
-  font-family:var(--font-ui); font-size:.82rem; font-weight:650;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--gold-lit);
-}
-body.cwriting .cw-quote__edition{
-  font-family:var(--font-quote); font-style:italic; font-size:clamp(1.15rem,1.5vw,1.35rem); color:var(--on-dark);
-}
-body.cwriting .cw-quote__when{
-  font-family:var(--font-ui); font-size:.74rem; font-weight:600;
-  letter-spacing:.2em; text-transform:uppercase; color:var(--on-dark-mute);
-}
-body.cwriting .cw-hero__actions{
-  display:flex; flex-wrap:wrap; align-items:center; gap:4px 28px; margin-top:clamp(14px,2.6svh,26px);
-}
-body.cwriting .cw-hero__actions .cw-quote__read{ margin-top:0; }
-body.cwriting .cw-hero__another{
-  display:inline-flex; align-items:center; gap:.7em; min-height:44px; padding:0 22px;
-  border:1px solid rgba(250,249,243,.5); border-radius:999px;
-  font-family:var(--font-ui); font-size:.78rem; font-weight:600;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--on-dark); background:transparent;
-  transition:background-color .25s ease, color .25s ease, border-color .25s ease;
-}
-body.cwriting .cw-hero__another[hidden]{ display:none; }
-body.cwriting .cw-hero__another:hover{ background:var(--gold); border-color:var(--gold); color:var(--on-gold); }
-
-/* Compact opening for a school's own page: the collection is one screen away. */
-body.cwriting .cw-hero--compact{ min-height:min(64svh,580px); }
-body.cwriting .cw-hero--compact .cw-hero__grid{ align-items:end; padding-bottom:clamp(40px,7svh,72px); }
-body.cwriting .cw-hero__kicker{
-  display:block; margin-bottom:clamp(12px,2svh,20px);
-  font-family:var(--font-ui); font-size:.78rem; font-weight:600; font-style:normal;
-  letter-spacing:.26em; line-height:1.2; color:var(--gold-lit);
-}
-body.cwriting .cw-hero--compact .cw-hero__title{ font-size:clamp(2.5rem, 12vw, 5.6rem); }
-body.cwriting .cw-hero__line{
-  margin:0; max-width:18ch;
-  font-family:var(--font-quote); font-style:italic; font-size:clamp(1.6rem,3vw,2.6rem); line-height:1.15;
-  color:var(--on-dark);
-}
-body.cwriting .cw-hero__grades{
-  margin:14px 0 0;
-  font-family:var(--font-ui); font-size:.76rem; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase; color:var(--gold-lit);
-}
-
-/* Entrance: CSS only, 0.7–1s, and nothing waits on it. */
-@keyframes cw-in{ from{ opacity:0; transform:translateY(var(--dy,20px)); } }
-@keyframes cw-in-x{ from{ opacity:0; transform:translateX(20px); } }
-@keyframes cw-fade{ from{ opacity:0; } }
-body.cwriting .cw-hero__word--a{ --dy:20px; animation:cw-in .7s var(--cw-ease) backwards; }
-body.cwriting .cw-hero__word--b{ --dy:28px; animation:cw-in .8s var(--cw-ease) .08s backwards; }
-body.cwriting .cw-hero__side{ animation:cw-in-x .8s var(--cw-ease) .2s backwards; }
-body.cwriting .cw-hero :is(.cw-hero__label, .cw-hero__between, .cw-hero__sub, .cw-hero__cue, .cw-hero__line, .cw-hero__grades){
-  animation:cw-fade .7s ease .35s backwards;
-}
-
-/* Wide, tall windows: two columns, and the hero holds while the words part. */
-@media (min-width:900px){
-  body.cwriting .cw-hero__grid{
-    grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
-    column-gap:clamp(32px,4.4vw,88px); row-gap:0;
-  }
-  body.cwriting .cw-hero__title{ font-size:clamp(2.9rem, min(8.6vw, 14.5svh), 7.8rem); }
-  body.cwriting .cw-hero__lead{ padding-left:clamp(0rem, 1.6vw, 2rem); }
-  body.cwriting .cw-hero__word--b{ padding-left:clamp(2rem, 6vw, 6.5rem); }
-  body.cwriting .cw-hero--compact .cw-hero__title{ font-size:clamp(2.6rem, min(7vw, 13svh), 6.4rem); }
-  body.cwriting .cw-hero--compact .cw-hero__side{ justify-self:end; text-align:left; }
-}
-html.cw-split-on body.cwriting .cw-zone{ height:calc(100svh + 62svh); }
-html.cw-split-on body.cwriting .cw-hero{ position:sticky; top:0; height:100svh; min-height:0; }
-html.cw-split-on body.cwriting .cw-hero__between{
-  position:absolute; left:0; right:0; top:50%; margin:0;
-  transform:translateY(-50%); opacity:0; text-align:center; animation:none;
-}
-body.cwriting .cw-hero.is-past :is(.cw-hero__side, .cw-hero__sub, .cw-hero__cue, .cw-hero__label){ visibility:hidden; }
-
-/* ============================================================
-   2 · The collection: a compact filter, then the editions
-   ============================================================ */
-body.cwriting .cw-collection{ position:relative; background:var(--paper); color:var(--ink); padding-top:clamp(48px,5vw,72px); }
-body.cwriting .cw-collection__bar{
-  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
-  gap:12px 40px; padding-bottom:clamp(14px,2vw,24px); border-bottom:1px solid var(--rule);
-}
-body.cwriting .cw-collection__title{
-  margin:0; font-family:var(--font-display); font-style:italic; font-weight:400;
-  font-size:clamp(1.9rem,3.2vw,2.8rem); line-height:1; letter-spacing:-.01em;
-}
-body.cwriting .cw-collection__stats{
-  margin:10px 0 0; font-family:var(--font-ui); font-size:.76rem; font-weight:600;
-  letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute);
-}
-body.cwriting .cw-filter{ display:flex; flex-wrap:wrap; column-gap:clamp(18px,3vw,40px); }
-body.cwriting .cw-filter__link{
-  position:relative; display:inline-flex; align-items:center; min-height:44px;
-  font-family:var(--font-ui); font-size:.8rem; font-weight:560;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft);
-  transition:color .25s ease;
-}
-body.cwriting .cw-filter__link::after{
-  content:""; position:absolute; left:0; right:0; bottom:5px; height:2px; background:var(--ink);
-  transform:scaleX(0); transform-origin:0 50%; transition:transform .4s var(--cw-ease);
-}
-body.cwriting .cw-filter__link:hover{ color:var(--ink); }
-body.cwriting .cw-filter__link:hover::after{ transform:scaleX(1); }
-body.cwriting .cw-filter__link[aria-current="page"]{ color:var(--ink); font-weight:720; }
-body.cwriting .cw-filter__link[aria-current="page"]::after{ transform:scaleX(1); }
-
-/* The list: every width, and the whole page without a script. */
-body.cwriting .cw-wave{ position:relative; }
-body.cwriting .cw-wave__list{
-  list-style:none; margin:0 auto; padding:0 var(--gut); max-width:var(--maxw);
-}
-body.cwriting .cw-wave__item{
-  display:grid; grid-template-columns:minmax(0,1fr); gap:10px;
-  padding-block:clamp(28px,5vw,52px); border-bottom:1px solid var(--rule);
-}
-body.cwriting .cw-wave__kicker{
-  display:flex; align-items:baseline; gap:1.2em; margin:0;
-  font-family:var(--font-ui); font-size:.74rem; font-weight:600;
-  letter-spacing:.2em; text-transform:uppercase; color:var(--label);
-  font-variant-numeric:tabular-nums lining-nums;
-}
-body.cwriting .cw-wave__no{ color:var(--ink-mute); }
-body.cwriting .cw-wave__link{ display:inline-block; justify-self:start; padding-block:4px; }
-body.cwriting .cw-wave__title{
-  display:inline; font-family:var(--font-display); font-weight:500;
-  font-size:clamp(1.9rem,9.6vw,2.7rem); line-height:1.04; letter-spacing:-.02em;
-  color:var(--brand); text-wrap:balance;
-  background:linear-gradient(var(--gold),var(--gold)) 0 100% / 0% 3px no-repeat;
-  -webkit-box-decoration-break:clone; box-decoration-break:clone;
-  transition:background-size .5s var(--cw-ease), color .25s ease;
-}
-body.cwriting .cw-wave__link:hover .cw-wave__title{ background-size:100% 3px; }
-body.cwriting .cw-wave__detail{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
-body.cwriting .cw-wave__school{
-  margin:0; font-family:var(--font-ui); font-size:.74rem; font-weight:600;
-  letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft);
-}
-body.cwriting .cw-wave__quote{ margin:0; padding:0; border:0; background:none; quotes:none; }
-body.cwriting .cw-wave__quote p{
-  margin:0; padding-left:.44em;
-  font-family:var(--font-quote); font-style:italic; font-weight:400;
-  font-size:clamp(1.25rem,4.8vw,1.6rem); line-height:1.28; color:var(--ink);
-}
-body.cwriting .cw-wave__by{
-  margin:0; font-family:var(--font-ui); font-size:.8rem; font-weight:650;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--ink);
-}
-body.cwriting .cw-wave__intro{ margin:0; max-width:44ch; font-family:var(--font-editorial); font-size:1rem; line-height:1.55; color:var(--ink-soft); }
-body.cwriting .cw-wave__meta, body.cwriting .cw-wave__ppt{ margin:0; font-size:.9rem; color:var(--ink-soft); }
-body.cwriting .cw-wave__actions{ display:flex; flex-wrap:wrap; gap:6px 24px; margin-top:4px; }
-body.cwriting .cw-wave__read, body.cwriting .cw-wave__open{
-  display:inline-flex; align-items:center; gap:.6em; min-height:44px;
-  font-family:var(--font-ui); font-size:.8rem; font-weight:650;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--brand);
-  border-bottom:1px solid currentColor; align-self:flex-start; padding-block:6px 4px; height:fit-content;
-}
-body.cwriting .cw-wave__actions{ align-items:center; }
-body.cwriting .cw-wave__read:hover, body.cwriting .cw-wave__open:hover{ color:var(--ink); }
-body.cwriting .cw-wave__open{ display:none; }
-body.cwriting .cw-wave__stage{ display:none; }
-body.cwriting .cw-wave__empty{ padding-block:60px; font-family:var(--font-quote); font-style:italic; font-size:1.3rem; color:var(--ink-soft); }
-
-@media (min-width:760px){
-  body.cwriting .cw-wave__item{
-    grid-template-columns:minmax(6.5rem,8rem) minmax(0,1.2fr) minmax(0,1fr);
-    column-gap:clamp(24px,3.4vw,48px); align-items:start;
-  }
-  body.cwriting .cw-wave__kicker{ flex-direction:column; gap:.5em; padding-top:.7em; }
-  body.cwriting .cw-wave__title{ font-size:clamp(2.2rem,4.4vw,3.6rem); }
-  body.cwriting .cw-wave__quote p{ font-size:clamp(1.25rem,2vw,1.6rem); }
-}
-
-/* Two opposing waves. The titles are one chronological list; each sits in
-   the left or right column, half a row apart, around a preview that holds
-   still. cwriting.js gives each title its place on the wave as the page
-   scrolls: opacity, scale and a small sideways lean by distance from the
-   reading line, the two columns leaning in mirror image. */
-html.cw-wave-on body.cwriting .cw-wave{
-  --row:clamp(168px,22svh,232px);
-  --pw:clamp(320px,31vw,470px);
-  /* The last title must reach the reading line while the preview is held,
-     so the foot has the full half-window. The head needs less: the first
-     title is already near the line when the section is reached. */
-  padding-block:max(calc(50svh - var(--row) / 2 - 130px), 80px) max(calc(50svh - var(--row) / 2), 96px);
-}
-html.cw-wave-on body.cwriting .cw-wave__list{
-  position:relative; max-width:none; margin:0;
-  padding-inline:calc(var(--gut) + 24px);
-  display:grid; grid-template-columns:minmax(0,1fr) var(--pw) minmax(0,1fr);
-  grid-template-rows:repeat(var(--rows), calc(var(--row) / 2));
-  column-gap:clamp(24px,3.4vw,64px);
-}
-html.cw-wave-on body.cwriting .cw-wave__item{
-  grid-row:var(--r) / span 2; grid-column:1;
-  display:flex; flex-direction:column; justify-content:center; gap:6px;
-  width:fit-content; max-width:100%; padding:0; border:0;
-  transform-origin:0 50%; opacity:.3; transform:scale(.94);
-  transition:opacity .2s linear; will-change:transform,opacity;
-}
-html.cw-wave-on body.cwriting .cw-wave__item[data-side="right"]{
-  grid-column:3; justify-self:end; align-items:flex-end; text-align:right; transform-origin:100% 50%;
-}
-html.cw-wave-on body.cwriting .cw-wave__kicker{ flex-direction:row; padding:0; gap:1em; }
-html.cw-wave-on body.cwriting .cw-wave__item[data-side="right"] .cw-wave__kicker{ flex-direction:row-reverse; }
-html.cw-wave-on body.cwriting .cw-wave__link{ justify-self:auto; }
-html.cw-wave-on body.cwriting .cw-wave__title{
-  font-size:clamp(2rem,3.7vw,4.2rem); line-height:1.04;
-  translate:0 0; transition:background-size .5s var(--cw-ease), translate .4s var(--cw-ease);
-}
-html.cw-wave-on body.cwriting .cw-wave__link:hover .cw-wave__title,
-html.cw-wave-on body.cwriting .cw-wave__link:focus-visible .cw-wave__title{ translate:5px 0; }
-html.cw-wave-on body.cwriting .cw-wave__item[data-side="right"] .cw-wave__link:hover .cw-wave__title,
-html.cw-wave-on body.cwriting .cw-wave__item[data-side="right"] .cw-wave__link:focus-visible .cw-wave__title{ translate:-5px 0; }
-html.cw-wave-on body.cwriting .cw-wave__item.is-active .cw-wave__title,
-html.cw-wave-on body.cwriting .cw-wave__link:focus-visible .cw-wave__title{ background-size:100% 3px; }
-html.cw-wave-on body.cwriting .cw-wave__link:focus-visible{ outline:2px solid var(--focus); outline-offset:8px; }
-html.cw-wave-on body.cwriting .cw-wave__detail{ display:none; }
-
-html.cw-wave-on body.cwriting .cw-wave__stage{ display:block; position:absolute; inset:0; pointer-events:none; }
-html.cw-wave-on body.cwriting .cw-wave__pin{ position:sticky; top:0; height:100svh; display:grid; place-items:center; }
-body.cwriting .cw-preview{ width:var(--pw); pointer-events:auto; }
-body.cwriting .cw-preview__body{
-  display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
-}
-body.cwriting .cw-preview__bar{ width:38px; height:3px; margin-bottom:6px; background:var(--ed-mark, var(--brand)); }
-body.cwriting .cw-preview__when{
-  margin:0; font-family:var(--font-ui); font-size:.76rem; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase; color:var(--label);
-}
-body.cwriting .cw-preview__title{
-  margin:0; font-family:var(--font-display); font-style:italic; font-weight:400;
-  font-size:clamp(1.3rem,1.8vw,1.75rem); line-height:1.1; color:var(--ink);
-}
-body.cwriting .cw-preview .cw-wave__quote p{
-  font-size:clamp(1.5rem,2.2vw,2.3rem); line-height:1.22; color:var(--brand); padding-left:0;
-}
-body.cwriting .cw-preview .cw-l{ padding-left:0; text-indent:0; text-wrap:balance; }
-body.cwriting .cw-preview .cw-l:first-child::before{ margin-left:0; }
-html.cw-wave-on body.cwriting .cw-preview .cw-wave__detail{ display:flex; align-items:center; text-align:center; gap:12px; }
-body.cwriting .cw-preview .cw-wave__actions{ justify-content:center; margin-top:8px; }
-body.cwriting .cw-preview .cw-wave__open{ display:inline-flex; color:var(--ink-soft); }
-body.cwriting .cw-preview .cw-wave__meta{ font-size:.86rem; }
-
-/* A title chosen: it swells a little, the rest let go. */
-body.cwriting .cw-wave.is-leaving .cw-wave__item:not(.is-chosen){ opacity:0 !important; transition:opacity .3s ease; }
-body.cwriting .cw-wave.is-leaving .cw-preview{ opacity:0; transition:opacity .25s ease; }
-html.cw-wave-on body.cwriting .cw-wave.is-leaving .is-chosen .cw-wave__title{ scale:1.045; transition:scale .45s var(--cw-ease); }
-
-/* ============================================================
-   3 · Featured editions, and one sliced word
-   ============================================================ */
-body.cwriting .cw-featured{ padding-block:clamp(64px,7vw,110px) clamp(90px,11vw,170px); background:var(--paper-2); }
-body.cwriting .cw-featured__head{ margin-bottom:clamp(48px,7vw,104px); }
-body.cwriting .cw-featured__title{
-  margin:0; font-family:var(--font-display); font-weight:500; text-transform:uppercase;
-  font-size:clamp(3.4rem,12vw,10.5rem); line-height:.86; letter-spacing:-.03em; color:var(--brand);
-}
-body.cwriting .cw-slice{ display:inline-grid; }
-body.cwriting .cw-slice__a, body.cwriting .cw-slice__b{ grid-area:1 / 1; }
-/* The halves overlap by a pixel so no hairline shows where they meet. */
-body.cwriting .cw-slice__a{ clip-path:inset(0 0 calc(50% - 1px) 0); }
-body.cwriting .cw-slice__b{ clip-path:inset(calc(50% - 1px) 0 0 0); }
-body.cwriting .cw-featured__list{ list-style:none; margin:0; padding:0; display:grid; gap:clamp(72px,10vw,150px); }
-body.cwriting .cw-feature{ display:grid; grid-template-columns:minmax(0,1fr); row-gap:14px; }
-body.cwriting .cw-feature > *{ margin:0; }
-body.cwriting .cw-feature__when, body.cwriting .cw-feature__school{
-  font-family:var(--font-ui); font-size:.76rem; font-weight:600;
-  letter-spacing:.2em; text-transform:uppercase; color:var(--label);
-}
-body.cwriting .cw-feature__school{ color:var(--ink-soft); }
-body.cwriting .cw-feature__title{ font-family:var(--font-display); font-weight:500; line-height:.98; letter-spacing:-.025em; }
-body.cwriting .cw-feature__title a{ color:var(--brand); }
-body.cwriting .cw-feature__title span{
-  background:linear-gradient(var(--gold),var(--gold)) 0 100% / 0% 4px no-repeat;
-  -webkit-box-decoration-break:clone; box-decoration-break:clone;
-  transition:background-size .55s var(--cw-ease);
-}
-body.cwriting .cw-feature__title a:hover span{ background-size:100% 4px; }
-body.cwriting .cw-feature--large .cw-feature__title{ font-size:clamp(2.6rem, min(7.2vw, calc(118vw / var(--lw))), 6.8rem); text-transform:uppercase; }
-body.cwriting .cw-feature--small .cw-feature__title{ font-size:clamp(2rem,4.2vw,3.5rem); }
-body.cwriting .cw-feature__writers{
-  font-family:var(--font-ui); font-size:.86rem; font-weight:560; letter-spacing:.08em; color:var(--ink-soft);
-}
-body.cwriting .cw-feature__quote{ margin:10px 0 0; padding:0; border:0; background:none; quotes:none; max-width:36rem; }
-body.cwriting .cw-feature__quote p{
-  margin:0; padding-left:.44em; font-family:var(--font-quote); font-style:italic; font-weight:400;
-  font-size:clamp(1.4rem,2.2vw,2.1rem); line-height:1.24; color:var(--ink);
-}
-body.cwriting .cw-feature__quote footer{
-  margin-top:10px; font-style:normal; font-family:var(--font-ui); font-size:.78rem; font-weight:650;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--ink);
-}
-body.cwriting .cw-feature__intro{ max-width:44ch; font-family:var(--font-editorial); font-weight:350; font-size:1.05rem; line-height:1.6; color:var(--ink-soft); }
-body.cwriting .cw-feature__read{
-  justify-self:start; display:inline-flex; align-items:center; gap:.6em; min-height:44px; margin-top:6px;
-  font-family:var(--font-ui); font-size:.8rem; font-weight:650; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--brand); border-bottom:1px solid currentColor; padding-block:6px 4px; height:fit-content;
-}
-body.cwriting .cw-feature__read:hover{ color:var(--ink); }
-@media (min-width:900px){
-  body.cwriting .cw-feature--large{
-    grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); column-gap:clamp(32px,5vw,96px);
-    grid-template-rows:auto auto auto auto 1fr;
-  }
-  body.cwriting .cw-feature--large > :is(.cw-feature__when, .cw-feature__title, .cw-feature__school, .cw-feature__writers, .cw-feature__read){ grid-column:1; }
-  body.cwriting .cw-feature--large .cw-feature__quote{ grid-column:2; grid-row:2 / span 3; align-self:end; }
-  body.cwriting .cw-feature--large .cw-feature__intro{ grid-column:2; grid-row:5; align-self:start; margin-top:12px; }
-  body.cwriting .cw-feature--small{ margin-left:auto; width:min(100%,40rem); }
-}
-
-/* ============================================================
-   4 · Archive: plain, chronological
-   ============================================================ */
-body.cwriting .cw-archive{ padding-block:clamp(90px,11vw,160px); background:var(--paper); }
-body.cwriting .cw-archive__head{ margin-bottom:clamp(36px,5vw,64px); }
-body.cwriting .cw-archive__title{
-  margin:0; font-family:var(--font-display); font-weight:500;
-  font-size:clamp(2rem,4vw,3.5rem); line-height:1; letter-spacing:-.015em;
-}
-body.cwriting .cw-archive__year{
-  display:grid; grid-template-columns:minmax(0,3fr) minmax(0,9fr); gap:var(--gut);
-  padding-block:clamp(22px,3vw,40px) clamp(30px,4vw,56px); border-top:1px solid var(--ink);
-}
-body.cwriting .cw-archive__label{
-  align-self:start; position:sticky; top:96px; margin:0;
-  font-family:var(--font-display); font-weight:500; font-size:clamp(2.2rem,4.2vw,4rem);
-  line-height:.92; letter-spacing:-.02em; font-variant-numeric:lining-nums;
-}
-body.cwriting .cw-archive__label--note{ font-family:var(--font-quote); font-style:italic; font-weight:400; font-size:clamp(1.5rem,2.4vw,2.1rem); line-height:1.1; letter-spacing:0; }
-body.cwriting .cw-archive__list{ list-style:none; margin:0; padding:0; }
-body.cwriting .cw-archive__row + .cw-archive__row{ border-top:1px solid var(--rule); }
-body.cwriting .cw-archive__link{
-  display:grid; grid-template-columns:3.6rem minmax(0,1fr) 11rem 10rem 1.5rem;
-  align-items:baseline; gap:var(--space-4); padding:18px 4px; min-height:44px;
-  transition:background-color .25s ease, padding .4s var(--cw-ease);
-}
-body.cwriting .cw-archive__link:hover{ background:rgba(31,31,27,.035); padding-left:12px; }
-body.cwriting .cw-archive__month{
-  font-family:var(--font-ui); font-size:.74rem; font-weight:600; letter-spacing:.18em;
-  text-transform:uppercase; color:var(--label);
-}
-body.cwriting .cw-archive__topic{ font-family:var(--font-display); font-size:clamp(1.3rem,2vw,1.75rem); line-height:1.15; color:var(--ink); }
-body.cwriting .cw-archive__level, body.cwriting .cw-archive__count{ font-size:.86rem; color:var(--ink-soft); }
-body.cwriting .cw-archive__row.is-awaiting .cw-archive__topic{ color:var(--ink-soft); }
-body.cwriting .cw-archive__go{ transition:transform .35s var(--cw-ease); }
-body.cwriting .cw-archive__link:hover .cw-archive__go{ transform:translateX(4px); }
-body.cwriting .cw-archive__ppt{
-  display:inline-block; margin:-6px 0 16px calc(3.6rem + var(--space-4) + 4px);
-  font-family:var(--font-ui); font-size:.78rem; font-weight:650; letter-spacing:.1em; color:var(--brand);
-  border-bottom:1px solid currentColor;
-}
-body.cwriting .cw-archive__none{ margin:0; padding-block:18px; font-family:var(--font-quote); font-style:italic; font-size:1.2rem; color:var(--ink-soft); }
-
-/* ============================================================
-   5 · An edition: opening, contents, reading, more
-   The reading is the one quiet part of the site: no motion, warm ivory,
-   dark ink, the edition's own colour only as a mark and a tint.
-   ============================================================ */
-body.cwriting .cw-head{
-  padding:clamp(112px,18svh,176px) 0 clamp(44px,6vw,80px);
-  background:var(--tint); color:var(--ink); border-bottom:1px solid var(--rule);
-}
-body.cwriting .cw-head__crumbs ol{
-  display:flex; flex-wrap:wrap; gap:.4em 0; list-style:none; margin:0; padding:0;
-  font-family:var(--font-ui); font-size:.76rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--ink-soft);
-}
-body.cwriting .cw-head__crumbs li{ display:flex; align-items:center; min-height:44px; }
-body.cwriting .cw-head__crumbs li + li::before{ content:"/"; margin-inline:.9em; color:var(--ink-mute); }
-body.cwriting .cw-head__crumbs a{ border-bottom:1px solid transparent; }
-body.cwriting .cw-head__crumbs a:hover{ color:var(--ink); border-color:currentColor; }
-body.cwriting .cw-head__crumbs [aria-current]{ color:var(--ink); }
-body.cwriting .cw-head__title{
-  position:relative; margin:clamp(28px,5vw,56px) 0 0; padding-top:24px;
-  font-family:var(--font-display); font-weight:500; text-transform:uppercase;
-  font-size:clamp(2.5rem, min(10vw, 17svh, calc(128vw / var(--lw))), 8.6rem);
-  line-height:.92; letter-spacing:-.025em; color:var(--brand); text-wrap:balance;
-  view-transition-name:cw-title;
-}
-body.cwriting .cw-head__title::before{
-  content:""; position:absolute; top:0; left:.06em; width:56px; height:4px; background:var(--ed-mark, var(--brand));
-}
-body.cwriting .cw-head__intro{
-  max-width:46ch; margin:clamp(24px,3.4vw,40px) 0 0;
-  font-family:var(--font-editorial); font-weight:350;
-  font-size:clamp(1.05rem,1.45vw,1.3rem); line-height:1.6; color:var(--ink-soft);
-}
-body.cwriting .cw-head__facts{
-  display:flex; flex-wrap:wrap; gap:8px clamp(20px,3vw,44px); list-style:none; margin:clamp(28px,4vw,48px) 0 0; padding:20px 0 0;
-  border-top:1px solid rgba(31,31,27,.28);
-  font-family:var(--font-ui); font-size:.78rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft);
-}
-body.cwriting .cw-head__facts strong{
-  margin-right:.35em; font-family:var(--font-display); font-weight:500; font-size:1.7em; letter-spacing:0;
-  line-height:1; color:var(--ink); vertical-align:-.12em;
-}
-body.cwriting .cw-head__download{
-  display:inline-flex; flex-direction:column; gap:4px; margin-top:clamp(24px,3vw,36px);
-  padding:16px 26px; border:1px solid var(--ink); border-radius:999px;
-  font-family:var(--font-ui); color:var(--ink);
-  transition:background-color .25s ease, color .25s ease;
-}
-body.cwriting .cw-head__download-label{ font-size:.86rem; font-weight:650; letter-spacing:.1em; text-transform:uppercase; }
-body.cwriting .cw-head__download-file{ font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); font-variant-numeric:tabular-nums; }
-body.cwriting .cw-head__download:hover{ background:var(--ink); color:var(--paper); }
-body.cwriting .cw-head__download:hover .cw-head__download-file{ color:var(--on-dark-soft); }
-
-body.cwriting .cw-contents{ padding-block:clamp(48px,7vw,96px) clamp(24px,4vw,56px); background:var(--paper); }
-body.cwriting .cw-contents__label{
-  margin:0 0 20px; font-family:var(--font-ui); font-size:.76rem; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase; color:var(--label);
-}
-body.cwriting .cw-contents__list{ list-style:none; margin:0; padding:0; border-top:1px solid var(--ink); }
-body.cwriting .cw-contents__link{
-  display:grid; grid-template-columns:3.4rem minmax(0,1.1fr) minmax(0,1fr) 2rem;
-  align-items:baseline; gap:8px clamp(16px,3vw,40px);
-  padding-block:clamp(18px,2.6vw,32px); border-bottom:1px solid var(--rule);
-  transition:padding .4s var(--cw-ease), background-color .25s ease;
-}
-body.cwriting .cw-contents__link:hover{ background:rgba(31,31,27,.03); padding-left:10px; }
-body.cwriting .cw-contents__no{
-  font-family:var(--font-ui); font-size:.78rem; font-weight:600; letter-spacing:.14em; color:var(--ink-mute);
-  font-variant-numeric:tabular-nums lining-nums;
-}
-body.cwriting .cw-contents__who{
-  font-family:var(--font-display); font-weight:500; font-size:clamp(1.8rem,3.9vw,3.4rem);
-  line-height:1.05; letter-spacing:-.02em; color:var(--brand);
-}
-body.cwriting .cw-contents__what{
-  font-family:var(--font-quote); font-style:italic; font-size:clamp(1.1rem,1.5vw,1.3rem); line-height:1.3; color:var(--ink-soft);
-}
-body.cwriting .cw-contents__go{ justify-self:end; font-size:1.2rem; color:var(--brand); transition:transform .35s var(--cw-ease); }
-body.cwriting .cw-contents__link:hover .cw-contents__go{ transform:translateX(5px); }
-
-body.cwriting .cw-reading{ background:var(--paper); color:var(--ink); }
-body.cwriting .cw-reading__layout{
-  display:grid; grid-template-columns:minmax(0,14rem) minmax(0,38rem); justify-content:center;
-  column-gap:clamp(48px,8vw,140px); width:100%; max-width:var(--maxw); margin-inline:auto;
-  padding:clamp(56px,8vw,112px) var(--gut) clamp(80px,10vw,140px);
-}
-body.cwriting .cw-rail__inner{ position:sticky; top:104px; display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
-body.cwriting .cw-rail__back, body.cwriting .cw-rail__link{
-  display:inline-flex; align-items:center; gap:.5em; min-height:44px;
-  font-family:var(--font-ui); font-size:.76rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft);
-  border-bottom:1px solid transparent;
-}
-body.cwriting .cw-rail__back:hover, body.cwriting .cw-rail__link:hover{ color:var(--ink); border-color:currentColor; }
-body.cwriting .cw-rail__title{ margin:8px 0 0; font-family:var(--font-display); font-style:italic; font-size:1.45rem; line-height:1.15; color:var(--brand); }
-body.cwriting .cw-rail__when{ margin:0; font-family:var(--font-ui); font-size:.74rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-mute); }
-body.cwriting .cw-rail__now{
-  display:flex; flex-direction:column; gap:4px; margin:14px 0 6px; padding-block:14px; width:100%;
-  border-block:1px solid var(--rule);
-  font-family:var(--font-ui); font-size:.8rem; font-weight:600; letter-spacing:.14em; color:var(--ink-soft);
-  font-variant-numeric:tabular-nums lining-nums;
-}
-body.cwriting .cw-rail__count{ display:block; }
-body.cwriting .cw-rail__who{ font-family:var(--font-editorial); font-size:1rem; font-weight:450; letter-spacing:0; color:var(--ink); }
-
-body.cwriting .cw-poem{ scroll-margin-top:96px; }
-body.cwriting .cw-poem + .cw-poem{ margin-top:clamp(96px,12vw,170px); padding-top:clamp(96px,12vw,170px); border-top:1px solid var(--rule); }
-body.cwriting .cw-poem__head{ padding-bottom:clamp(22px,3vw,34px); border-bottom:1px solid var(--ink); }
-body.cwriting .cw-poem__meta{
-  display:flex; justify-content:space-between; gap:1em; margin:0;
-  font-family:var(--font-ui); font-size:.76rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--ink-soft); font-variant-numeric:tabular-nums lining-nums;
-}
-body.cwriting .cw-poem__name{
-  margin:clamp(22px,3.4vw,40px) 0 0;
-  font-family:var(--font-display); font-weight:500; font-size:clamp(2rem,4.2vw,3.5rem);
-  line-height:1.04; letter-spacing:-.02em; color:var(--brand); text-wrap:balance;
-}
-body.cwriting .cw-poem__name--writer{ font-size:clamp(1.9rem,3.8vw,3.1rem); }
-body.cwriting .cw-poem__author{ margin:14px 0 0; font-family:var(--font-ui); font-size:.84rem; font-weight:650; letter-spacing:.16em; text-transform:uppercase; }
-body.cwriting .cw-poem__grade{ margin:6px 0 0; font-family:var(--font-ui); font-size:.84rem; color:var(--ink-soft); letter-spacing:.06em; }
-body.cwriting .cw-verse{
-  margin-top:clamp(36px,5vw,64px);
-  font-family:var(--font-editorial); font-weight:380;
-  font-size:clamp(1.0625rem, .98rem + .55vw, 1.375rem); line-height:1.7; color:var(--ink);
-}
-body.cwriting .cw-verse__stanza{ margin:0; }
-body.cwriting .cw-verse__stanza + .cw-verse__stanza{ margin-top:1.55em; }
-body.cwriting .cw-verse__l{ display:block; padding-left:1.4em; text-indent:-1.4em; }
-body.cwriting .cw-verse__l--in{ padding-left:2.6em; }
-body.cwriting .cw-poem__nav{
-  display:grid; grid-template-columns:1fr auto 1fr; align-items:start; gap:var(--space-5);
-  margin-top:clamp(56px,7vw,96px); padding-top:var(--space-5); border-top:1px solid var(--rule);
-}
-body.cwriting .cw-poem__step{ display:flex; flex-direction:column; gap:6px; min-height:44px; }
-body.cwriting .cw-poem__step--next{ text-align:right; align-items:flex-end; }
-body.cwriting .cw-poem__step-label{ font-family:var(--font-ui); font-size:.76rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); }
-body.cwriting .cw-poem__step-name{ font-family:var(--font-display); font-size:1.3rem; line-height:1.15; color:var(--brand); }
-body.cwriting a.cw-poem__step:hover .cw-poem__step-label{ color:var(--ink); }
-body.cwriting a.cw-poem__step:hover .cw-poem__step-name{ text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:5px; }
-body.cwriting .cw-poem__contents{
-  display:inline-flex; align-items:center; min-height:44px; padding-inline:6px;
-  font-family:var(--font-ui); font-size:.76rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft);
-  border-bottom:1px solid transparent;
-}
-body.cwriting .cw-poem__contents:hover{ color:var(--ink); border-color:currentColor; }
-
-body.cwriting .cw-awaiting{ background:var(--paper); }
-body.cwriting .cw-awaiting__wrap{ max-width:48rem; padding-block:clamp(72px,10vw,140px); }
-body.cwriting .cw-awaiting__title{
-  margin:0 0 var(--space-5); font-family:var(--font-display); font-style:italic; font-weight:400;
-  font-size:clamp(2rem,4vw,3.4rem); line-height:1.05; color:var(--brand);
-}
-body.cwriting .cw-awaiting p{ margin:0; font-family:var(--font-editorial); font-size:1.12rem; line-height:1.65; color:var(--ink-soft); }
-
-body.cwriting .cw-pres{ padding-block:clamp(44px,6vw,80px); background:var(--tint); border-block:1px solid var(--rule); }
-body.cwriting .cw-pres__wrap{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px 40px; }
-body.cwriting .cw-pres__title{ margin:0; font-family:var(--font-display); font-weight:500; font-size:clamp(1.8rem,3vw,2.6rem); color:var(--brand); }
-body.cwriting .cw-pres .cw-head__download{ margin-top:0; }
-
-body.cwriting .cw-more{ padding-block:clamp(64px,8vw,112px); background:var(--paper-2); }
-body.cwriting .cw-more__heading{
-  margin:0 0 24px; font-family:var(--font-ui); font-size:.76rem; font-weight:600;
-  letter-spacing:.22em; text-transform:uppercase; color:var(--label);
-}
-body.cwriting .cw-more__list{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--gut); }
-body.cwriting .cw-more__link{ display:flex; flex-direction:column; gap:8px; padding-top:20px; border-top:1px solid var(--ink); }
-body.cwriting .cw-more__label{ font-family:var(--font-ui); font-size:.74rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); }
-body.cwriting .cw-more__topic{ font-family:var(--font-display); font-weight:500; font-size:clamp(1.8rem,3vw,2.7rem); line-height:1.02; letter-spacing:-.02em; color:var(--brand); }
-body.cwriting .cw-more__link:hover .cw-more__topic{ text-decoration:underline; text-decoration-thickness:2px; text-decoration-color:var(--gold); text-underline-offset:6px; }
-body.cwriting .cw-more__meta{ font-size:.9rem; color:var(--ink-soft); }
-body.cwriting .cw-more__all{
-  display:inline-flex; align-items:center; gap:.7em; min-height:44px; margin-top:clamp(32px,4vw,52px);
-  font-family:var(--font-ui); font-size:.8rem; font-weight:650; letter-spacing:.16em; text-transform:uppercase; color:var(--brand);
-  border-bottom:1px solid currentColor; padding-block:6px 4px; height:fit-content;
-}
-body.cwriting .cw-more__all:hover{ color:var(--ink); }
-
-/* ============================================================
-   Opening an edition: the chosen title becomes the edition's title
-   ============================================================ */
-@view-transition{ navigation:auto; }
-@media (prefers-reduced-motion:reduce){ @view-transition{ navigation:none; } }
-::view-transition-group(root){ animation-duration:.42s; }
-::view-transition-group(cw-title){ animation-duration:.55s; animation-timing-function:cubic-bezier(.65,0,.2,1); }
-
-/* ============================================================
-   Tablet and phone
-   ============================================================ */
-@media (max-width:1023px){
-  body.cwriting .cw-reading__layout{ grid-template-columns:minmax(0,38rem); }
-  body.cwriting .cw-rail{ display:none; }
-  body.cwriting .cw-archive__link{ grid-template-columns:3.4rem minmax(0,1fr) 10rem 1.5rem; }
-  body.cwriting .cw-archive__count{ display:none; }
-}
-@media (max-width:759px){
-  body.cwriting .cw-collection__bar{ flex-direction:column; align-items:flex-start; }
-  body.cwriting .cw-filter{ width:100%; justify-content:space-between; column-gap:8px; }
-  body.cwriting .cw-archive__year{ grid-template-columns:1fr; gap:var(--space-3); }
-  body.cwriting .cw-archive__label{ position:static; }
-  body.cwriting .cw-archive__link{ grid-template-columns:3rem minmax(0,1fr) 1.5rem; row-gap:4px; padding:16px 0; }
-  body.cwriting .cw-archive__month{ grid-column:1; grid-row:1; }
-  body.cwriting .cw-archive__topic{ grid-column:2; grid-row:1; }
-  body.cwriting .cw-archive__level{ grid-column:2; grid-row:2; font-size:.8rem; }
-  body.cwriting .cw-archive__go{ grid-column:3; grid-row:1 / span 2; align-self:center; }
-  body.cwriting .cw-archive__ppt{ margin-left:3rem; }
-  body.cwriting .cw-contents__link{ grid-template-columns:2.6rem minmax(0,1fr) 1.6rem; }
-  body.cwriting .cw-contents__what{ grid-column:2; }
-  body.cwriting .cw-contents__go{ grid-column:3; grid-row:1 / span 2; align-self:center; }
-  body.cwriting .cw-poem__nav{ grid-template-columns:1fr 1fr; }
-  body.cwriting .cw-poem__contents{ order:3; grid-column:1 / -1; justify-self:center; }
-  body.cwriting .cw-poem__step--none{ display:none; }
-  body.cwriting .cw-poem__step--next{ grid-column:2; }
-  body.cwriting .cw-more__list{ grid-template-columns:1fr; }
-}
-@media (max-width:420px){
-  body.cwriting .cw-hero__between{ letter-spacing:.18em; }
-  body.cwriting .cw-hero__label{ letter-spacing:.18em; }
-  body.cwriting .cw-verse__l{ padding-left:1em; text-indent:-1em; }
-  body.cwriting .cw-verse__l--in{ padding-left:1.8em; }
-  body.cwriting .cw-filter__link{ font-size:.72rem; letter-spacing:.1em; }
-}
-@media (max-width:359px){
-  body.cwriting .cw-filter{ justify-content:flex-start; column-gap:22px; }
-}
-
-/* Reduced motion: everything at rest, nothing waiting to arrive. */
-@media (prefers-reduced-motion:reduce){
-  body.cwriting *, body.cwriting *::before, body.cwriting *::after{
-    animation:none !important; transition-duration:.01ms !important; transition-delay:0s !important;
-    scroll-behavior:auto !important;
-  }
+/* CIRS literary collection. All rules stay inside body.cwriting; shared
+   header/footer retain their own tokens and controller. */
+@font-face{font-family:"CW Hand";src:url("../creative-writing/caveat.woff2") format("woff2");font-display:swap;font-style:normal;font-weight:400}
+body.cwriting{background:#160F22}
+html:has(>body.cwriting){scroll-behavior:auto}
+body.cwriting :is(.cw-page,.cw-edition){
+  --cw-plum:#160F22;--cw-plum-secondary:#24182F;--cw-paper:#F2EADC;
+  --cw-ink:#2C2039;--cw-muted:#65586A;--cw-gold:#C2A465;
+  --cw-rule:rgba(44,32,57,.23);color:var(--cw-ink);background:var(--cw-paper);
+}
+body.cwriting .cw-wrap{width:min(1248px,calc(100% - 112px));margin-inline:auto}
+body.cwriting :is(.cw-page,.cw-edition) :is(a,button,summary):focus-visible{outline:2px solid currentColor;outline-offset:5px}
+body.cwriting :is(.cw-page,.cw-edition) :is(h1,h2,h3){font-weight:400;letter-spacing:-.035em;text-wrap:balance}
+body.cwriting .cw-meta{font-family:var(--font-ui);font-size:12px;line-height:1.5;letter-spacing:.035em;margin:0}
+body.cwriting .cw-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+body.cwriting .ring{display:none}
+body.cwriting .cw-hero{position:relative;background:var(--cw-plum);color:var(--cw-paper);isolation:isolate;overflow:hidden}
+body.cwriting .cw-hero::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.18;background-image:url("../creative-writing/paper-grain.svg");pointer-events:none}
+body.cwriting .cw-hero-grid{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:64px;min-height:min(870px,100svh);padding-block:170px 94px}
+body.cwriting .cw-hero-lead{position:relative;min-width:0}
+body.cwriting .cw-hero .cw-meta{color:var(--cw-gold);margin-bottom:32px}
+body.cwriting .cw-hero h1{font-size:clamp(72px,8.6vw,130px);line-height:.97;margin:0 0 30px;letter-spacing:-.055em;animation:cw-title-in .7s ease-out both}
+body.cwriting .cw-hero h1 span{display:block}
+body.cwriting .cw-hero h1 span+span{padding-left:42px}
+body.cwriting .cw-hero-intro{font-size:15px;line-height:1.7;max-width:340px;color:#D5C9D4;margin:0 0 26px}
+body.cwriting .cw-explore{display:inline-flex;align-items:center;gap:38px;min-height:44px;border-bottom:1px solid rgba(242,234,220,.42);font-family:var(--font-ui);font-size:13px}
+body.cwriting .cw-explore span{color:var(--cw-gold);font-size:21px;transition:transform .2s}
+body.cwriting .cw-explore:is(:hover,:focus-visible) span{transform:translateY(3px)}
+body.cwriting .cw-hand{position:absolute;right:-16px;bottom:26px;font-family:"CW Hand",cursive;font-size:32px;color:var(--cw-gold);transform:rotate(-12deg);white-space:nowrap}
+body.cwriting .cw-paper-stage{position:relative;min-width:0;padding:16px 9px 20px}
+body.cwriting .cw-paper-back{position:absolute;inset:13px 9px 23px;background:#C4AC93;transform:rotate(5deg);box-shadow:0 22px 52px #0004}
+body.cwriting .cw-paper{position:relative;padding:40px 42px 30px;background:var(--cw-paper);color:var(--cw-ink);transform:rotate(-3deg);box-shadow:0 12px 35px #0003}
+body.cwriting .cw-paper::before{content:"";position:absolute;inset:0;background-image:url("../creative-writing/paper-grain.svg");opacity:.36;pointer-events:none}
+body.cwriting .cw-paper-label{font-family:var(--font-ui);font-size:11px;letter-spacing:.035em;border-bottom:1px solid var(--cw-rule);padding-bottom:16px;margin:0 0 36px}
+body.cwriting .cw-feature{position:relative;min-height:220px;margin:0}
+body.cwriting .cw-feature blockquote{padding:0;margin:0 0 30px;border:0;background:none}
+body.cwriting .cw-feature blockquote p{font-family:var(--font-editorial);font-size:clamp(25px,2.35vw,36px);line-height:1.36;letter-spacing:-.035em;margin:0;min-height:3.1em}
+body.cwriting .cw-excerpt-line{display:block;overflow-wrap:anywhere;white-space:pre-wrap}
+body.cwriting .cw-feature figcaption{display:grid;gap:4px;font-family:var(--font-ui);line-height:1.5}
+body.cwriting .cw-feature-author{font-size:12px;font-weight:650;overflow-wrap:anywhere}
+body.cwriting .cw-feature-grade{font-size:11px;color:var(--cw-muted)}
+body.cwriting .cw-feature-grade:empty{display:none}
+body.cwriting .cw-feature-edition{font-size:12px;margin-top:14px}
+body.cwriting .cw-feature-date{font-size:11px;color:var(--cw-muted)}
+body.cwriting .cw-paper-actions{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;border-top:1px solid var(--cw-rule);padding-top:17px;margin-top:25px}
+body.cwriting .cw-read{display:inline-flex;gap:26px;align-items:center;min-height:44px;font-size:13px;font-family:var(--font-ui);font-weight:600}
+body.cwriting .cw-read span{font-size:20px;transition:transform .2s}
+body.cwriting .cw-read:is(:hover,:focus-visible) span{transform:translate(3px,-3px)}
+body.cwriting .cw-another{padding:8px 0;border:0;background:transparent;font-family:var(--font-ui);font-size:11px;min-height:44px;cursor:pointer;color:var(--cw-muted)}
+body.cwriting .cw-another span{font-size:16px;margin-left:6px}
+body.cwriting .cw-another:hover{text-decoration:underline;text-underline-offset:5px}
+body.cwriting .cw-another[hidden]{display:none}
+body.cwriting .cw-ink{display:block;width:115px;height:23px;margin:18px 0 0 auto;color:var(--cw-muted)}
+body.cwriting .cw-archive{padding-block:84px 110px;scroll-margin-top:115px}
+body.cwriting .cw-archive-intro{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding-bottom:40px}
+body.cwriting .cw-archive-intro h2{font-size:clamp(40px,4.5vw,66px);line-height:1.06;margin:0}
+body.cwriting .cw-archive-intro>p{font-family:var(--font-editorial);font-size:17px;line-height:1.7;margin:0;max-width:500px}
+body.cwriting .cw-archive-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 30px;padding-block:20px;border-block:1px solid var(--cw-rule)}
+body.cwriting .cw-filter{display:flex;gap:30px;font-family:var(--font-ui);font-size:13px}
+body.cwriting .cw-filter a{display:flex;align-items:center;min-height:44px;border-bottom:2px solid transparent}
+body.cwriting .cw-filter a[aria-current]{border-color:var(--cw-ink);font-weight:650}
+body.cwriting .cw-filter a:hover{border-color:var(--cw-muted)}
+body.cwriting .cw-stats{font-size:11px;font-family:var(--font-ui);color:var(--cw-muted);margin:0}
+body.cwriting .cw-archive-list{list-style:none;margin:0;padding:0}
+body.cwriting .cw-archive-row{display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px;border-bottom:1px solid var(--cw-rule);padding-block:34px 30px}
+body.cwriting .cw-row-date{font-family:var(--font-ui);font-size:11px;color:var(--cw-muted);line-height:1.7;padding-top:8px}
+body.cwriting .cw-row-main{min-width:0}
+body.cwriting .cw-row-main h3{font-size:clamp(29px,3.2vw,45px);line-height:1.12;margin:0}
+body.cwriting .cw-row-main h3 a{display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+body.cwriting .cw-row-arrow{font-family:var(--font-ui);font-size:26px;font-weight:300;transition:transform .25s;flex-shrink:0}
+body.cwriting .cw-row-main h3 a:is(:hover,:focus-visible){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:8px}
+body.cwriting .cw-row-main h3 a:is(:hover,:focus-visible) .cw-row-arrow{transform:translate(4px,-4px)}
+body.cwriting .cw-row-count{font-family:var(--font-ui);font-size:11px;color:var(--cw-muted);margin:12px 0}
+body.cwriting .cw-row-excerpt{font-family:var(--font-editorial);font-size:15px;line-height:1.6;max-width:640px;margin:0}
+body.cwriting .cw-row-excerpt>span{display:block;font-family:var(--font-ui);font-size:10px;color:var(--cw-muted);margin-top:7px}
+body.cwriting .cw-matching-poems{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;list-style:none;padding:0;margin:24px 0 0}
+body.cwriting .cw-matching-poems a{display:flex;flex-direction:column;padding:12px 0;border-top:1px solid var(--cw-rule);font-family:var(--font-ui);font-size:12px;gap:4px;min-height:44px}
+body.cwriting .cw-matching-poems span{font-size:10px;color:var(--cw-muted)}
+body.cwriting .cw-matching-poems a:hover{text-decoration:underline;text-underline-offset:4px}
+body.cwriting .cw-index-head{padding-block:145px 50px}
+body.cwriting .cw-index-head .cw-meta{margin-top:28px;color:var(--cw-muted)}
+body.cwriting .cw-index-head h1{font-size:clamp(54px,7vw,100px);line-height:1.05;margin-top:14px}
+body.cwriting .cw-index-head p:last-child{font-family:var(--font-editorial);font-size:18px;line-height:1.6;margin-bottom:0}
+body.cwriting .cw-index-head+.cw-archive{padding-top:35px}
+body.cwriting .cw-index-head+.cw-archive .cw-archive-intro{display:none}
+body.cwriting .cw-back{display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-ui);font-size:12px;text-decoration:underline;text-underline-offset:5px}
+body.cwriting .cw-empty{padding-block:48px 20px;max-width:650px}
+body.cwriting .cw-empty h3{font-size:32px;line-height:1.25;margin:0}
+body.cwriting .cw-empty>p{font-family:var(--font-editorial);font-size:18px;line-height:1.65}
+body.cwriting .cw-edition-head{padding-block:145px 38px}
+body.cwriting .cw-breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px 22px;padding:0;margin:0;font-family:var(--font-ui);font-size:11px;line-height:1.6}
+body.cwriting .cw-breadcrumb li+li::before{content:"/";margin-right:22px;color:var(--cw-muted)}
+body.cwriting .cw-breadcrumb a{text-decoration:underline;text-underline-offset:4px}
+body.cwriting .cw-edition-head h1{font-size:clamp(48px,5.8vw,84px);line-height:1.07;max-width:950px;margin-top:25px}
+body.cwriting .cw-edition-intro{font-family:var(--font-editorial);font-size:18px;line-height:1.6;max-width:660px;margin:20px 0}
+body.cwriting .cw-edition-facts{font-family:var(--font-ui);font-size:11px;color:var(--cw-muted);line-height:1.8;margin:0}
+body.cwriting #contents{scroll-margin-top:112px}
+body.cwriting .cw-mobile-contents{border-block:1px solid var(--cw-rule);padding:18px 0}
+body.cwriting .cw-mobile-contents summary{font-family:var(--font-ui);font-size:13px;cursor:pointer;min-height:44px;padding-block:12px}
+body.cwriting .cw-mobile-contents summary>span{float:right;font-size:11px;color:var(--cw-muted)}
+body.cwriting .cw-contents-list{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+body.cwriting .cw-contents-list a{display:grid;grid-template-columns:28px minmax(0,1fr);gap:14px;min-height:44px;padding:15px 0;border-top:1px solid var(--cw-rule)}
+body.cwriting .cw-number{font-family:var(--font-ui);font-size:11px;color:var(--cw-muted);padding-top:3px}
+body.cwriting .cw-contents-name{display:block;font-family:var(--font-editorial);font-size:17px;line-height:1.4;overflow-wrap:anywhere}
+body.cwriting .cw-contents-preview{display:block;font-size:11px;color:var(--cw-muted);line-height:1.6;margin-top:5px;overflow-wrap:anywhere}
+body.cwriting .cw-contents-grade{display:block;font-family:var(--font-ui);font-size:10px;color:var(--cw-muted);margin-top:5px}
+body.cwriting .cw-contents-list a:hover .cw-contents-name{text-decoration:underline;text-underline-offset:4px}
+body.cwriting .cw-reader{display:grid;grid-template-columns:240px minmax(0,680px);gap:90px;justify-content:center;padding-block:56px 70px}
+body.cwriting .cw-rail{position:sticky;top:110px;align-self:start;max-height:calc(100svh - 135px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:15px}
+body.cwriting .cw-rail-title{font-family:var(--font-editorial);font-size:19px;line-height:1.4;margin:12px 0 22px}
+body.cwriting .cw-contents-list--compact{display:block}
+body.cwriting .cw-contents-list--compact a{grid-template-columns:20px minmax(0,1fr);gap:8px;padding-block:11px}
+body.cwriting .cw-contents-list--compact .cw-contents-name{font-family:var(--font-ui);font-size:11px;line-height:1.5}
+body.cwriting .cw-contents-list--compact :is(.cw-contents-preview,.cw-contents-grade){display:none}
+body.cwriting .cw-contents-list--compact a[aria-current]{border-left:2px solid var(--cw-ink);padding-left:8px}
+body.cwriting .cw-poems{min-width:0}
+body.cwriting .cw-poem{scroll-margin-top:120px;padding-block:20px 52px;outline-offset:8px}
+body.cwriting .cw-poem:focus{outline:none}
+body.cwriting .cw-poem+.cw-poem{border-top:1px solid var(--cw-rule);padding-top:55px}
+body.cwriting .cw-poem-head{margin-bottom:32px}
+body.cwriting .cw-poem-head .cw-meta{color:var(--cw-muted);font-size:11px}
+body.cwriting .cw-poem-head h2{font-size:clamp(32px,3.5vw,48px);line-height:1.14;margin-top:14px;overflow-wrap:anywhere;text-wrap:pretty}
+body.cwriting .cw-poem-author{font-family:var(--font-ui);font-size:13px;margin:14px 0 0}
+body.cwriting .cw-poem-grade{font-family:var(--font-ui);font-size:12px;color:var(--cw-muted);margin:12px 0 0}
+body.cwriting .cw-permalink{font-family:var(--font-ui);font-size:11px;display:inline-flex;gap:14px;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:4px;margin-top:6px;color:var(--cw-muted)}
+body.cwriting .cw-verse{font-family:var(--font-editorial);font-size:21px;font-weight:400;line-height:1.8;letter-spacing:0}
+body.cwriting .cw-stanza{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;tab-size:2}
+body.cwriting .cw-stanza+.cw-stanza{margin-top:1.55em}
+body.cwriting .cw-poem-nav{display:grid;grid-template-columns:1fr auto 1fr;gap:14px 20px;border-top:1px solid var(--cw-rule);margin-top:42px;padding-top:16px;font-family:var(--font-ui);font-size:11px}
+body.cwriting .cw-poem-nav a{display:flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:5px}
+body.cwriting .cw-poem-nav a[rel=next]{justify-self:end;text-align:right}
+body.cwriting .cw-poem-nav .cw-poem-collection{grid-column:1/-1;justify-self:start}
+body.cwriting .cw-more{border-top:1px solid var(--cw-rule);padding-block:40px 70px;display:flex;flex-wrap:wrap;gap:22px 40px}
+body.cwriting .cw-more .cw-meta{flex-basis:100%;color:var(--cw-muted)}
+body.cwriting .cw-more>a{font-family:var(--font-editorial);font-size:20px;line-height:1.5;min-height:44px;text-decoration:underline;text-underline-offset:6px}
+body.cwriting .cw-empty-route{padding-block:150px 100px;min-height:70svh}
+body.cwriting .cw-empty-route h1{font-size:clamp(40px,6vw,78px);line-height:1.12;max-width:850px;margin:32px 0}
+body.cwriting .cw-empty-route p{font-family:var(--font-editorial);font-size:18px;line-height:1.7;max-width:650px}
+body.cwriting .cw-empty-actions{display:flex;flex-wrap:wrap;gap:15px 38px;align-items:center;margin-top:25px;font-family:var(--font-ui);font-size:13px}
+body.cwriting .cw-empty-actions>a:last-child{text-decoration:underline;text-underline-offset:5px;min-height:44px;display:flex;align-items:center}
+@keyframes cw-title-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:1100px){
+  body.cwriting .cw-wrap{width:calc(100% - 72px)}
+  body.cwriting .cw-hero-grid{gap:32px;padding-block:160px 70px;min-height:auto}
+  body.cwriting .cw-hero h1{font-size:clamp(64px,8.5vw,95px)}
+  body.cwriting .cw-paper{padding:28px}
+  body.cwriting .cw-hand{position:static;display:block;margin:30px 0 0 90px;width:max-content}
+  body.cwriting .cw-reader{grid-template-columns:200px minmax(0,640px);gap:45px}
+  body.cwriting .cw-archive-row{grid-template-columns:170px minmax(0,1fr)}
+}
+@media(max-width:850px){
+  body.cwriting .cw-hero-grid{grid-template-columns:1fr;max-width:600px;gap:32px;padding-block:145px 60px}
+  body.cwriting .cw-hero h1{font-size:clamp(72px,13vw,108px)}
+  body.cwriting .cw-hero-intro{max-width:400px}
+  body.cwriting .cw-hand{position:absolute;right:5px;bottom:32px;margin:0;font-size:29px}
+  body.cwriting .cw-paper-stage{margin:8px 15px 0;max-width:510px}
+  body.cwriting .cw-feature{min-height:220px}
+  body.cwriting .cw-feature blockquote p{font-size:32px}
+  body.cwriting .cw-archive-intro{gap:32px;grid-template-columns:1fr;max-width:610px}
+  body.cwriting .cw-reader{display:block;max-width:670px;padding-top:30px}
+  body.cwriting .cw-rail{display:none}
+  body.cwriting .cw-verse{font-size:20px}
+  body.cwriting .cw-contents-list{grid-template-columns:1fr}
+  body.cwriting .cw-archive-row{grid-template-columns:140px minmax(0,1fr)}
+}
+@media(max-width:540px){
+  body.cwriting .cw-wrap{width:calc(100% - 44px)}
+  body.cwriting .cw-hero-grid{padding-block:112px 50px;gap:25px}
+  body.cwriting .cw-hero .cw-meta{margin-bottom:23px;font-size:11px}
+  body.cwriting .cw-hero h1{font-size:clamp(61px,18vw,90px);margin-bottom:23px}
+  body.cwriting .cw-hero h1 span+span{padding-left:22px}
+  body.cwriting .cw-hero-intro{max-width:290px;font-size:13px;margin-bottom:14px}
+  body.cwriting .cw-hand{position:absolute;right:0;bottom:6px;margin:0;font-size:25px}
+  body.cwriting .cw-paper-stage{margin-inline:7px;padding:10px 4px}
+  body.cwriting .cw-paper{padding:22px 23px 18px;transform:rotate(-2deg)}
+  body.cwriting .cw-paper-back{inset:10px 4px 14px;transform:rotate(3deg)}
+  body.cwriting .cw-paper-label{margin-bottom:20px}
+  body.cwriting .cw-feature{min-height:226px}
+  body.cwriting .cw-feature blockquote p{font-size:24px;line-height:1.4;min-height:3.6em}
+  body.cwriting .cw-feature blockquote{margin-bottom:20px}
+  body.cwriting .cw-paper-actions{gap:5px;margin-top:15px}
+  body.cwriting .cw-read{font-size:12px;gap:15px}
+  body.cwriting .cw-another{font-size:10px}
+  body.cwriting .cw-archive{padding-block:50px 65px}
+  body.cwriting .cw-archive-intro{gap:20px;padding-bottom:25px}
+  body.cwriting .cw-archive-intro>p{font-size:16px}
+  body.cwriting .cw-archive-bar{padding-block:10px 17px}
+  body.cwriting .cw-filter{gap:25px;width:100%;font-size:12px}
+  body.cwriting .cw-archive-row{grid-template-columns:1fr;gap:13px;padding-block:26px}
+  body.cwriting .cw-row-date{padding:0;font-size:10px}
+  body.cwriting .cw-row-main h3{font-size:32px}
+  body.cwriting .cw-row-excerpt{font-size:14px}
+  body.cwriting .cw-matching-poems{grid-template-columns:1fr}
+  body.cwriting .cw-index-head{padding-block:135px 25px}
+  body.cwriting .cw-index-head h1{font-size:56px}
+  body.cwriting .cw-index-head p:last-child{font-size:16px}
+  body.cwriting .cw-edition-head{padding-block:132px 28px}
+  body.cwriting .cw-edition-head h1{font-size:47px;line-height:1.1}
+  body.cwriting .cw-edition-intro{font-size:16px}
+  body.cwriting .cw-edition-facts{font-size:10px}
+  body.cwriting .cw-breadcrumb ol{font-size:10px;gap:5px 12px}
+  body.cwriting .cw-breadcrumb li+li::before{margin-right:12px}
+  body.cwriting .cw-contents-list a{gap:7px;grid-template-columns:26px minmax(0,1fr)}
+  body.cwriting .cw-contents-name{font-size:17px}
+  body.cwriting .cw-reader{padding-block:24px 20px}
+  body.cwriting .cw-poem-head{margin-bottom:23px}
+  body.cwriting .cw-poem-head h2{font-size:34px}
+  body.cwriting .cw-verse{font-size:18px;line-height:1.8}
+  body.cwriting .cw-poem-nav{grid-template-columns:1fr 1fr;font-size:11px;gap:6px 20px}
+  body.cwriting .cw-poem-nav a[href$='#contents']{grid-column:1/-1;grid-row:2}
+  body.cwriting .cw-poem-nav a[rel=next]{grid-column:2;grid-row:1}
+  body.cwriting .cw-more{padding-block:30px 50px;gap:18px}
+  body.cwriting .cw-empty-route{padding-block:135px 65px}
+}
+@media(prefers-reduced-motion:reduce){
+  body.cwriting :is(.cw-page,.cw-edition) *,body.cwriting :is(.cw-page,.cw-edition) *::before,body.cwriting :is(.cw-page,.cw-edition) *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+@media print{
+  body.cwriting{background:white;color:black}
+  body.cwriting :is(.header,.drawer,.curtain,.footer-wrap,.closing-scene,.progress,.ring,.totop,.skip-link,.pop,.cw-rail,.cw-contents-section,.cw-poem-nav,.cw-permalink,.cw-more,.cw-breadcrumb,.cw-paper-actions,.cw-explore,.cw-filter){display:none!important}
+  body.cwriting :is(.cw-page,.cw-edition,.cw-hero,.cw-archive){background:white;color:black}
+  body.cwriting .cw-wrap{width:100%;max-width:none}
+  body.cwriting .cw-edition-head{padding:0 0 20pt}
+  body.cwriting .cw-edition-head h1{font-size:28pt}
+  body.cwriting .cw-reader{display:block;padding:0}
+  body.cwriting .cw-poem{padding:20pt 0;break-before:page}
+  body.cwriting .cw-poem:first-child{break-before:auto}
+  body.cwriting .cw-poem-head{break-after:avoid}
+  body.cwriting .cw-poem-head h2{font-size:22pt}
+  body.cwriting .cw-verse{font-size:12pt;line-height:1.65}
+  body.cwriting .cw-stanza{break-inside:avoid}
+  body.cwriting .cw-stanza+.cw-stanza{margin-top:14pt}
 }

@@ -28,10 +28,11 @@
   var hasGSAP = typeof window.gsap !== "undefined";
   var hasST = hasGSAP && typeof window.ScrollTrigger !== "undefined";
   var isAlumni = document.body.classList.contains("alumni");
-  // Alumni and Leadership keep the browser's own scroll and real URL
+  // Alumni, Leadership and Creative Writing keep native scroll and real URL
   // fragments: Leadership's message links are history entries that Back
   // and Forward must be able to walk (assets/js/leadership.js).
-  var nativeScroll = isAlumni || document.body.classList.contains("leadership");
+  var nativeScroll = isAlumni || document.body.classList.contains("leadership") ||
+    document.body.classList.contains("cwriting");
   var animate = hasGSAP && !reduced;
 
   if (hasST) gsap.registerPlugin(ScrollTrigger);

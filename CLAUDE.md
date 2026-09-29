@@ -93,20 +93,22 @@ numbers by `tools/make-math-sculpture.py` — keep its constants in step with th
 archive is `tools/mathchallenge.py`: the PDFs are the school's winners' bulletins, not problem
 papers, and a month lists only the bulletins that exist.
 
-Creative Writing is a student literary journal written from `tools/creative-writing-content.json` by
-`tools/creativewriting.py` (page shell `tools/pages/creative-writing.html`, sheet `assets/css/cwriting.css`,
-script `assets/js/cwriting.js`). The same generator writes `creative-writing/junior.html`, `senior.html` and one
-page per edition. Every edition, poem, excerpt and presentation is data there; a field the school has not
-supplied (school level, month, year, title, grade, presentation) is left out, never guessed, and an edition
-with no confirmed level stays under All. The hero's line and "Another line" come only from the stored,
-build-verified excerpts. The editions are one chronological list in the HTML; on windows at least 1100×620 with
-motion and normal contrast, `cwriting.js` lays it out as two opposing waves around a sticky preview through
-`gsap.matchMedia` (marks `cw-wave-on` and `cw-split-on` are set on `<html>` in `head_html()` so a reload does not
-jump, and torn down again if the script or GSAP is missing). Edition pages are deliberately still: no motion, the
-poems in one flow with real `#poem-…` anchors. `cirs.js` scrolls every `href="#…"` itself and leaves no history
-entry, so the links between poems carry the page's own address (`…/january-2026.html#poem-…`, see `edition_html`);
-the browser then does the navigation, which is what keeps Back and Forward working. Do not turn them back into
-bare `#` links. A presentation link exists only for an edition whose `ppt` file is in the repository.
+Creative Writing is a literary collection written from `tools/creative-writing-content.json` by
+`tools/creativewriting.py` (shell `tools/pages/creative-writing.html`, sheet `assets/css/cwriting.css`, script
+`assets/js/cwriting.js`). The same generator writes Junior/Senior views, anthology readers and legacy monthly
+archive pointers. Only published editions appear in archives. School level and verified grade belong to each
+poem, so mixed or unclassified work is never classified from another author's grade. Unknown dates stay unknown;
+month-only labels do not receive a year. Counts come from the dataset; author identities merge exact names only,
+with unresolved spelling variants documented there. Student identifiers are never published.
+
+The plum opening features a paper sheet with a source-verified excerpt. "Another line" changes text, attribution
+and destination together, with one short live announcement and no automatic cycling. Poems remain complete,
+selectable text on warm paper; their characters, whitespace and stanza boundaries are checked against source
+digests. The shared controller uses native scrolling for `body.cwriting`; full page-path fragment links preserve
+history. The page script aligns direct anchors after fonts/load and provides mobile Contents and a sticky desktop
+rail. There is no pinned scene, text splitting, second scroll instance or visible custom cursor. A download renders
+only from an actual validated entry in an edition's `downloads` list. `python tools/check-creative-writing.py`
+checks text and anchors; optional `--source-text` reads a private Drive snapshot, which must stay out of Git.
 
 Leadership's people, portrait crops and five messages are data in `tools/leadership.py`;
 `tools/make-leadership.py` cuts the portraits. The messages are the school's published text word

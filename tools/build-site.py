@@ -514,18 +514,16 @@ PAGES = {
     "creative-writing": {
         "nav": "Creative Writing",
         "title": "Creative Writing | Written at CIRS",
-        "description": "Stories, poems, thoughts and imaginations by the Junior and Senior "
-                       "School students of Chinmaya International Residential School, "
-                       "published edition by edition.",
-        # A student literary journal: a deep-purple opening (a real student
-        # line beside the title, and "Another line"), then the editions as two
-        # opposing waves of titles, a short featured set and the archive.
+        "description": "Poems by students of Chinmaya International Residential School. "
+                       "Explore the collection and read each edition.",
+        # Student literary collection: plum introduction, paper excerpt,
+        # published editorial archive and warm-paper poem readers.
         # Every edition, poem and presentation is data in
         # tools/creative-writing-content.json, rendered by tools/creativewriting.py,
         # which also adds the Junior, Senior and edition pages below.
         "banner": None,
         "sheet": "cwriting",
-        "cache_suffix": "-journal-1",
+        "cache_suffix": "-literary-2",
         "jump": False,
         "uc": False,
         # The opening is deep purple, so the header letters in light over it.
@@ -2182,7 +2180,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
     if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership",
                  "our-laurels")
-            or page.get("notfound")):
+            or page.get("notfound") or page.get("cw")):
         # These pages open immediately with their own video, document sheets,
         # journal masthead or, on Curriculum, the rising path of the grades
         # the page leads with — and School History on its archive's title — so
@@ -2217,6 +2215,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     lite = bool(page.get("litehead"))
     header_start = ("content" if page.get("banner") or page.get("post") or page.get("news")
                     or page.get("notfound")
+                    or (page.get("cw") and (page["cw"]["kind"] != "main"
+                        or page["cw"].get("collection") != "all"))
                     or slug in ("news", "leadership", "school-info", "blog", "cultural-gallery")
                     else "hero")
     header_tone = "light" if lite else "dark"
