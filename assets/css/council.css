@@ -1,0 +1,243 @@
+/* ============================================================
+   The Student Council's pledges
+   ------------------------------------------------------------
+   Each group of the Student Council 2026-27 wrote a pledge for the
+   school's October 2026 bulletin. It is a first-person statement, so
+   it is set as one: the words large, in the quotation face, with the
+   students' names and role beneath them and their photograph beside.
+   tools/sakshi.py writes the markup and holds every word; nothing
+   here shortens or reflows a pledge to suit a layout.
+
+   The same markup is printed on four pages, and each page brings its
+   own ground. A pledge reads its colours from the tokens on .cp, so a
+   page sets those tokens for its own ground and the layout below is
+   shared. The house colour is meaning, not decoration: on the Houses
+   page it is the rule and the quotation mark, and never lettering.
+   ============================================================ */
+
+.cp{
+  --cp-ink: var(--ink);
+  --cp-soft: var(--ink-soft);
+  --cp-label: var(--label);
+  --cp-mark: var(--gold-ink);
+  --cp-rule: var(--rule);
+  --cp-radius: 4px;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(28px, 4.5vw, 72px);
+  align-items: center;
+  color: var(--cp-ink);
+}
+.cp__photo{ margin: 0; min-width: 0; }
+.cp .cp__photo img{
+  display: block; width: 100%; height: auto;
+  border-radius: var(--cp-radius);
+}
+.cp .cp__photo figcaption{
+  margin: 12px 0 0;
+  font: 400 .78rem/1.5 var(--font-ui);
+  letter-spacing: .01em;
+  color: var(--cp-soft);
+}
+.cp__voice{ min-width: 0; }
+.cp__eyebrow{
+  margin: 0 0 12px;
+  font: 600 .72rem/1.4 var(--font-ui);
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--cp-label);
+}
+.cp .cp__role{
+  margin: 0 0 clamp(18px, 2.2vw, 30px);
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.9rem, 3.1vw, 2.9rem);
+  line-height: 1.06; letter-spacing: -.03em;
+  text-transform: none;
+  color: var(--cp-ink);
+}
+.cp .cp__pledge{ margin: 0; min-width: 0; }
+.cp__pledge blockquote{ margin: 0; padding: 0; }
+.cp__pledge blockquote::before{
+  content: "\201C" / "";
+  display: block;
+  margin: 0 0 -.05em -.03em;
+  font: 400 clamp(4.4rem, 7vw, 6.4rem)/.72 var(--font-quote);
+  color: var(--cp-mark);
+}
+.cp__pledge blockquote p{
+  margin: 0 0 1em;
+  font-family: var(--font-quote); font-weight: 400; font-style: italic;
+  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+  line-height: 1.52; letter-spacing: 0;
+  color: var(--cp-ink);
+  text-wrap: pretty; hyphens: manual; overflow-wrap: break-word;
+}
+.cp__pledge blockquote p:last-child{ margin-bottom: 0; }
+.cp .cp__pledge figcaption{
+  margin: clamp(22px, 2.6vw, 34px) 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--cp-rule);
+  font-size: inherit; color: inherit;
+}
+.cp__names{
+  list-style: none; margin: 0 0 10px; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 6px 26px;
+}
+.cp__names li{
+  font: 650 clamp(.82rem, .95vw, .95rem)/1.35 var(--font-ui);
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--cp-ink);
+}
+.cp__tag{
+  display: block;
+  font: 500 .78rem/1.5 var(--font-ui);
+  letter-spacing: .05em;
+  color: var(--cp-label);
+}
+
+/* The photograph beside, then the words beside it, alternating where a page
+   lists two pledges one after another. */
+.cp--flip .cp__photo{ order: 2; }
+
+@media (max-width: 860px){
+  .cp{ grid-template-columns: minmax(0, 1fr); gap: 26px; align-items: start; }
+  .cp .cp__photo, .cp--flip .cp__photo{ order: -1; }
+  .cp__pledge blockquote p{ font-size: clamp(1.12rem, 4.6vw, 1.3rem); line-height: 1.55; }
+  .cp .cp__role{ font-size: clamp(1.8rem, 8vw, 2.4rem); }
+}
+
+/* ------------------------------------------------------------
+   Student Life: the School Deans, and the rest of the council.
+   ------------------------------------------------------------ */
+.xc{ padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--paper); border-top: 1px solid var(--rule); }
+.xc__head{
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: .5rem clamp(1.5rem, 5vw, 5rem); align-items: end;
+  margin-bottom: clamp(2.2rem, 4.5vw, 3.6rem);
+}
+.xc__head .xk{ grid-column: 1 / -1; margin-bottom: .4rem; }
+.xc__heading{
+  max-width: 14ch; margin: 0;
+  font-family: var(--font-display); font-weight: var(--weight-section, 500);
+  font-size: clamp(2.2rem, 4.2vw, 4rem); letter-spacing: -.02em; line-height: 1.02;
+}
+.xc__head > p:last-child{ margin: 0; max-width: 30rem; line-height: 1.6; color: var(--ink-soft); }
+.xc__all{ margin: 0 0 clamp(3rem, 6vw, 5.5rem); }
+.xc__all img{
+  display: block; width: 100%; height: auto; border-radius: 4px;
+  aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 84%;
+}
+.xc__all figcaption{ margin-top: .6rem; font-size: var(--fs-xs); line-height: 1.45; color: var(--ink-mute); }
+.xc__more{
+  margin-top: clamp(3rem, 6vw, 5.5rem);
+  padding-top: clamp(1.4rem, 2.6vw, 2rem);
+  border-top: 1px solid var(--ink-mute);
+}
+.xc__more h3{
+  margin: 0 0 1rem;
+  font: var(--weight-label, 500) var(--fs-xs)/1.3 var(--font-ui);
+  letter-spacing: .12em; text-transform: uppercase; color: var(--label);
+}
+.xc__more ul{
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .25rem clamp(1.2rem, 3vw, 3rem);
+}
+.xc__more li a{
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  min-height: 48px; padding: .7rem 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink); text-decoration: none;
+  font-family: var(--font-display); font-size: 1.25rem; line-height: 1.2;
+}
+.xc__more li a small{ font: 450 .8rem/1.3 var(--font-ui); color: var(--ink-mute); text-align: right; }
+.xc__more li a:hover{ border-bottom-color: var(--gold-ink); }
+.xc__more li a:focus-visible{ outline: 2px solid var(--focus); outline-offset: 4px; }
+@media (max-width: 860px){
+  .xc__head{ grid-template-columns: minmax(0, 1fr); }
+  .xc__more ul{ grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ------------------------------------------------------------
+   Spiritual Life: the Cultural Secretaries.
+   ------------------------------------------------------------ */
+body.spiritual .sl-council{
+  background: var(--sl-paper);
+  padding: 120px 8vw 130px;
+  position: relative; isolation: isolate;
+}
+body.spiritual .sl-council .sl-chapter__head{ margin-bottom: clamp(44px, 6vw, 84px); }
+body.spiritual .sl-council .cp{
+  --cp-mark: var(--sl-ink-gold);
+  --cp-label: var(--sl-ink-gold);
+  --cp-rule: var(--sl-rule);
+}
+body.spiritual .sl-council .sl-link{ font-size: .85rem; }
+/* The section's own heading already names the group and the council, so the
+   card's eyebrow and heading stay in the outline for a screen reader and
+   leave the page to the words. */
+body.spiritual .sl-council .cp :is(.cp__eyebrow, .cp__role),
+body.sports .sports-leaders .cp__eyebrow{
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+@media (max-width: 720px){
+  body.spiritual .sl-council{ padding: 80px 24px 90px; }
+}
+
+/* ------------------------------------------------------------
+   Sports: the Sports Secretaries, on the page's near-black, in the
+   card the athletes' own stories use.
+   ------------------------------------------------------------ */
+body.sports .sports-leaders{
+  background: #080807;
+  padding: var(--space-10) 0 var(--space-6);
+}
+body.sports .sports-leaders .sc{ color: var(--gold-lit); }
+body.sports .sports-leaders .marker::before{ border-color: var(--gold-lit); }
+body.sports .sports-leaders .lead{ color: var(--on-dark-soft); }
+body.sports .sports-leaders__card{ margin-top: var(--space-8); }
+body.sports .sports-leaders .cp{
+  --cp-ink: #ffffff;
+  --cp-soft: var(--on-dark-soft);
+  --cp-label: var(--gold);
+  --cp-mark: var(--gold);
+  --cp-rule: rgba(255, 255, 255, .16);
+  --cp-radius: 12px;
+  padding: var(--space-8);
+  background: rgba(17, 17, 15, .65);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
+}
+body.sports .sports-leaders .cp__pledge blockquote{
+  border-left: 3px solid var(--gold);
+  padding-left: var(--space-4);
+}
+body.sports .sports-leaders .cp__pledge blockquote::before{ content: none; }
+body.sports .sports-leaders .cp__pledge blockquote p{ font-style: italic; }
+@media (max-width: 860px){
+  body.sports .sports-leaders .cp{ padding: var(--space-5); }
+}
+
+/* ------------------------------------------------------------
+   Houses: each house captains' pledge closes that house's chapter,
+   under the house's own colour.
+   ------------------------------------------------------------ */
+body.houses .house-spread .cp{
+  --cp-mark: var(--house-colour);
+  position: relative; z-index: 2;
+  margin-top: clamp(38px, 5vw, 72px);
+  padding-top: clamp(30px, 4vw, 56px);
+  border-top: 1px solid var(--rule);
+}
+body.houses .house-spread .cp::before{
+  content: ""; position: absolute; left: 0; top: -2px;
+  width: 120px; height: 3px; background: var(--house-colour);
+}
+body.houses .house-spread .cp figure{ order: 0; margin-bottom: 0 !important; }
+body.houses .house-spread .cp .cp__photo{ order: 0; }
+body.houses .house-spread .cp--flip .cp__photo{ order: 2; }
+body.houses .house-spread .cp .cp__photo figcaption{ font-size: .78rem; color: var(--cp-soft); margin-top: 12px; }
+body.houses .house-spread .cp .cp__pledge figcaption{ font-size: inherit; margin-top: clamp(22px, 2.6vw, 34px); }
+@media (max-width: 860px){
+  body.houses .house-spread .cp .cp__photo, body.houses .house-spread .cp--flip .cp__photo{ order: -1; }
+}
