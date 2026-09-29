@@ -30,6 +30,10 @@ PUBLISHED = ('The school&rsquo;s published history, '
              '<a href="https://cirschool.org/history.html" target="_blank" rel="noopener">'
              'cirschool.org</a>')
 
+AR2025 = ('The school&rsquo;s Annual Report, 7 October 2025 &middot; '
+          '<a href="assets/documents/school-info/annual-report.pdf" target="_blank" '
+          'rel="noopener">Open the PDF</a>')
+
 # name -> (small w, h, large w, h). tools/make-history.py prints these; the
 # build writes them into the page so every image reserves its box before it
 # loads, without the build needing Pillow.
@@ -301,9 +305,9 @@ EVENTS = [
      "caption": "Annual Report, 15 October 2019, first page.",
      "source": 'Annual Report, 15 October 2019, published on '
                '<a href="school-info.html">School Information</a> &middot; '
-               '<a href="assets/documents/school-info/annual-report.pdf" target="_blank" '
+               '<a href="assets/documents/school-info/annual-report-2019.pdf" target="_blank" '
                'rel="noopener">Open the PDF</a>',
-     "note": "These are the latest figures with a confirmed reporting year. The published "
+     "note": "Superseded as the latest figures by report-2025. The published "
              "history's '577 students, 69 faculty and 78 staff, from 23 States of India and 19 "
              "other countries' carries no year (that page is copyright 2011, file dated 2013), "
              "and the 2023 brochure says 575 students, 120 staff, 27 other countries. None of "
@@ -316,7 +320,7 @@ EVENTS = [
              "schools, and kept first place in Tamil Nadu for the eighth consecutive year.",
      "exhibit": None,
      "source": 'The school&rsquo;s Annual Report, 15 October 2019 &middot; '
-               '<a href="assets/documents/school-info/annual-report.pdf" target="_blank" '
+               '<a href="assets/documents/school-info/annual-report-2019.pdf" target="_blank" '
                'rel="noopener">Open the PDF</a>',
      "note": "REPLACES two unsourced entries in the earlier draft: '2016, Education World ranks "
              "CIRS among the top four' and '2018, second in the country, first in CBSE'. The "
@@ -334,6 +338,83 @@ EVENTS = [
      "note": "The earlier draft's '2022: a 92% average in Science, 19 of 24 students at 90% or "
              "above' has no source in hand, and 92% is the 2019 Science average. It is not "
              "published; confirm whether 2022 is a separate result."},
+    # ---- From the Annual Report of 7 October 2025 -----------------------
+    {"id": "vigyan-goshti-2024", "when": "2&ndash;6 December 2024", "period": "later",
+     "title": "Vigyan Goshti at CIRS",
+     "summary": "A five-day seminar for 130 science teachers from across the country.",
+     "body": "CIRS hosted Vigyan Goshti, a five-day seminar for science teachers organised by "
+             "CCMTEC and led by Smt. Shanti Krishnamurthy, Director of CCMTEC. 130 science "
+             "teachers from all over the country attended, with CIRS teachers among the "
+             "resource persons.",
+     "exhibit": None,
+     "source": AR2025},
+    {"id": "results-2025", "when": "2025", "period": "later",
+     "title": "Board results, 2025",
+     "summary": "Class XII: 45 of 47 above 80%. Class X: an average of 89.2%.",
+     "body": "In the 2025 CBSE Class XII examination, 34 of 47 students secured above 90% and "
+             "45 of 47 above 80% in the aggregate; the Science stream averaged 89% and the "
+             "Management stream 93%. In Class X, 56 of 95 students secured 90% or more, 85 "
+             "were above 80%, and the class averaged 89.2%. In the IB Diploma, 8 of 19 "
+             "students scored above 40 points out of 45, the highest 44, and the class "
+             "averaged 38.9.",
+     "exhibit": None,
+     "source": AR2025,
+     "note": "The report gives the IB average as '38.9 %'; with scores 'out of 45' it is "
+             "points, and is published as 38.9. The report's 'Out of 600 up IB school, CIRS "
+             "stands 15th in the world' cannot be read reliably and is not published."},
+    {"id": "solar-2025", "when": "9 May 2025", "period": "later",
+     "title": "An alumnus gives the school solar power",
+     "summary": "Raghav Agarwalla, who left CIRS in 2004, funds a 200&nbsp;kVA solar plant.",
+     "body": "Raghav Agarwalla, an alumnus who passed out of CIRS in 2004, donated "
+             "&#8377;83,74,000 for the 200&nbsp;kVA solar panels installed behind the school "
+             "auditorium.",
+     "exhibit": None,
+     "source": AR2025,
+     "note": "The report writes the sum as 'Rs. 83,74,000 (84 Lakh, 74 thousand)'. The figure "
+             "and the words disagree (83,74,000 is 83 lakh 74 thousand); the figure is "
+             "published. Confirm with the school."},
+    {"id": "ncc-2025", "when": "1&ndash;10 July 2025", "period": "later",
+     "title": "Best Cadets at the NCC camp",
+     "summary": "36 CIRS cadets attend the annual training camp; the school wins Best Cadets.",
+     "body": "36 NCC cadets from CIRS took part in the Annual Training Camp at Kalaignar "
+             "Karunanidhi Institute of Technology, winning medals in the drill test, quiz, "
+             "relay, shot put and football, and CIRS received the overall Best Cadets award.",
+     "exhibit": None,
+     "source": AR2025},
+    {"id": "yoga-2025", "when": "13 July 2025", "period": "later",
+     "title": "South Zone Yoga overall championship",
+     "summary": "Six gold, five silver and six bronze medals at Erode.",
+     "body": "At the South Zone Yoga Competition organised by the School Games Sport "
+             "Development Foundation India at Erode, CIRS students won 6 gold, 5 silver and 6 "
+             "bronze medals and the overall championship.",
+     "exhibit": None,
+     "source": AR2025},
+    {"id": "mun-2025", "when": "August 2025", "period": "later",
+     "title": "Harvard and IIMUN",
+     "summary": "40 students at Harvard Model United Nations; 34 at IIMUN in Mumbai.",
+     "body": "Forty CIRS students took part in Harvard Model United Nations from 14 to 17 August "
+             "2025, where two received Outstanding Delegate awards; over the same dates, 34 "
+             "students represented nations at the IIMUN Championship Conference in Mumbai.",
+     "exhibit": None,
+     "source": AR2025},
+    {"id": "report-2025", "when": "7 October 2025", "period": "later",
+     "title": "The school in its twenty-ninth year",
+     "summary": "596 students from 16 Indian states and 16 countries; second in India&rsquo;s "
+                "co-educational boarding schools.",
+     "body": "In its 29th year the school reported 596 students &mdash; 378 boys and 218 girls "
+             "&mdash; from 16 Indian states and 16 countries, with 70 faculty members and 71 "
+             "members of the administrative team, and remained one of the CBSE&rsquo;s Lead "
+             "Schools. Education World ranked CIRS second in the country among co-educational "
+             "boarding schools and first in Tamil Nadu and Coimbatore for the 14th consecutive "
+             "year; Brainfeed ranked it third in the country and first in the state and the "
+             "city.",
+     "exhibit": None,
+     "source": AR2025,
+     "note": "The report says '16 states in India and 16 different countries across the "
+             "world'; the 2019 report said '18 other countries'. Whether India is counted "
+             "among the 16 is not stated, so the page says '16 countries'. The ranking's "
+             "survey year is not given. Fourteenth consecutive year agrees with the 2019 "
+             "report's eighth."},
     {"id": "cbse-2026", "when": "March&ndash;April 2026", "period": "later",
      "title": "CBSE Class XII, 2026",
      "summary": "The highest Management score is 99.0%.",
@@ -447,7 +528,9 @@ UNRESOLVED = [
     ("2024, IB World Toppers once more", "No source in hand."),
     ("2025, Vayu Nigrah first prize, SSVM Transforming India Conclave", "Drive holds the "
      "project's flyers dated October 2024, which suggests the year may be 2024. The prize "
-     "itself is unconfirmed."),
+     "itself is unconfirmed. The Annual Report of 7 October 2025 records a different "
+     "prize: Team Vayunigrah overall winners of the JK Lakshmipat University 'My City, My Lab' "
+     "Ideathon on 1 December 2024. That does not settle the SSVM claim."),
 ]
 
 BY_ID = {e["id"]: e for e in EVENTS}

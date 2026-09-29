@@ -139,12 +139,17 @@ DOCUMENTS = [
      # The list as signed and stamped by the school carries no date.
      "status": "undated"},
     {"id": "annual-report", "category": "Administration &amp; governance",
-     "title": "Annual Report",
+     "title": "Annual Report 2025",
      "note": "The school's annual report for 2025: enrolment, results, achievements and the year's activities.",
      "file": "annual-report.pdf",
      # Converted to PDF from the school's "Annual Report- 2025.docx", which
      # is dated 7th October 2025. Replaces the report of 15 Oct 2019.
      "issued": "7 Oct 2025", "status": "current"},
+    {"id": "annual-report-2019", "category": "Administration &amp; governance",
+     "title": "Annual Report 2019",
+     "note": "The school's annual report for 2019, kept for the record; School History cites it.",
+     "file": "annual-report-2019.pdf",
+     "issued": "15 Oct 2019", "status": "dated"},
     {"id": "pta-list", "category": "Administration &amp; governance",
      "title": "Parent Teacher Association",
      "note": "The Parent Teacher Association member list.",
