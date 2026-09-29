@@ -97,11 +97,13 @@ captions describe the frame and never name a practice. Its sheet and script are
 
 Curriculum (`tools/pages/curriculum.html`) is the Curriculum Atlas: one gold path from the
 opening through the grade journey, dividing at Grade X into CBSE and the IB Diploma. Its facts
-come only from `docs/curriculum-content.md`. The markup is complete reading order;
-`assets/js/curriculum.js` makes the scenes (`html.cur-live`: sticky stages on windows at least
-1024×680 with motion; `html.cur-lite`: scroll accents otherwise) through `gsap.matchMedia`, and
-nothing runs under reduced motion. Elements the script moves are centred with margins, not the
-CSS `translate` property, which GSAP folds into its transform and leaves behind on revert.
+come only from `docs/curriculum-content.md`. The markup is complete reading order, and the
+CBSE/IB comparison is a real `<table>`. `assets/js/curriculum.js` adds two modes, each built
+when its media query holds and removed when it stops: `html.cur-stage` (windows at least
+1024×680 with motion) stacks the journey's photographs in one CSS-sticky frame and uncovers the
+stage being read — native scroll, nothing pinned by script, no GSAP; `html.cur-motion` gives
+the division, the Diploma core and the school-life photographs a once-only entrance. Nothing
+moves under reduced motion, and the IB index's current group is marked in every mode.
 
 School History is the CIRS archive, and every date on it is written from `tools/history.py`:
 each event carries its source, and anything unconfirmed is a `note` there (never published) or

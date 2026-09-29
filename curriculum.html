@@ -24,19 +24,19 @@
 <meta name="twitter:title" content="Curriculum | CBSE & IB Diploma Programme">
 <meta name="twitter:description" content="Follow the academic journey at Chinmaya International Residential School: CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, and the Chinmaya Vision Programme across school life.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preload" href="assets/js/navigation.js?b=113-curriculum-atlas-1-core-3" as="script" fetchpriority="high">
+<link rel="preload" href="assets/js/navigation.js?b=113-curriculum-atlas-2-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=113-curriculum-atlas-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=113-curriculum-atlas-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=113-curriculum-atlas-1-lightbox-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=113-curriculum-atlas-2">
+<link rel="stylesheet" href="assets/css/cirs.css?b=113-curriculum-atlas-2">
+<link rel="stylesheet" href="assets/css/pages.css?b=113-curriculum-atlas-2-lightbox-2">
 
-<link rel="stylesheet" href="assets/css/curriculum.css?b=113-curriculum-atlas-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=113-curriculum-atlas-1">
-<link rel="stylesheet" href="assets/css/footer.css?b=113-curriculum-atlas-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=113-curriculum-atlas-1-nav-4">
+<link rel="stylesheet" href="assets/css/curriculum.css?b=113-curriculum-atlas-2">
+<link rel="stylesheet" href="assets/css/typography.css?b=113-curriculum-atlas-2">
+<link rel="stylesheet" href="assets/css/footer.css?b=113-curriculum-atlas-2-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=113-curriculum-atlas-2-nav-4">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -260,71 +260,56 @@
   </div>
 </div>
 <main id="main">
-<script src="assets/js/navigation.js?b=113-curriculum-atlas-1-core-3"></script>
-<!-- Curriculum: the Curriculum Atlas. One gold path runs through the page:
-     it rises through the opening, runs down the grade journey, divides at
-     Grade X into CBSE and the IB Diploma, carries the two programmes side
-     by side through the comparison, and at the end turns into the edges of
-     photographs of school life. The close is the shared closing scene, given
-     this page's own words in tools/build-site.py.
+<script src="assets/js/navigation.js?b=113-curriculum-atlas-2-core-3"></script>
+<!-- Curriculum: the Curriculum Atlas. One gold route runs through the page:
+     it rises through the opening, runs down the grade journey beside the
+     photographs, divides at Grade X into CBSE and the IB Diploma, and those
+     two lines become the two columns of the comparison. The close is the
+     shared closing scene, given this page's own words in tools/build-site.py.
 
-     Everything here is ordinary reading order first. assets/js/curriculum.js
-     turns the journey, the comparison, the IB groups, the Diploma core and
-     the close into scroll-driven scenes on large windows (html.cur-live) and
-     lighter scroll accents on small ones (html.cur-lite); without it, or with
-     reduced motion, the same markup is the page, complete and static.
+     The grade journey is the one scroll-linked scene. On a large window with
+     motion (html.cur-stage) its photographs hold in one sticky frame while the
+     reading column passes beside them; everything after it is ordinary
+     reading. assets/js/curriculum.js adds that stage and a few once-only
+     entrances. Without it, or with reduced motion, the same markup is the
+     page, complete and static: each stage's photograph sits with its text.
 
      Content sources, and what is still open, are recorded in
      docs/curriculum-content.md. Nothing here should state more than that
      file can support. -->
 
-<!-- Marks the page as scripted before it paints, so the opening's path can
+<!-- Marks the page as scripted before it paints, so the opening's route can
      wait for assets/js/curriculum.js to fit it rather than show whole and
-     then redraw. If that script never arrives, the path fades in anyway. -->
+     then redraw. If that script never arrives, the route fades in anyway. -->
 <script>document.documentElement.classList.add("cur-js");</script>
 <header class="atl-open" id="top">
   <div class="atl-open__field" aria-hidden="true">
-    <!-- Faint linework of the subjects: each plate is drawn once, in fine
-         ivory, and drifts at its own depth with the pointer. -->
-    <div class="atl-plate atl-plate--geo" data-depth="0.5">
-      <svg viewBox="0 0 240 240"><circle cx="120" cy="120" r="92"/><path d="M120 28 199.7 166 40.3 166Z"/><path d="M120 28V166M40.3 166 159.9 97M199.7 166 80.1 97"/><path d="M24 150a100 100 0 0 1 40-94M214 150a100 100 0 0 0-40-94" class="atl-dash"/><circle cx="120" cy="120" r="2.5" class="atl-dot"/><text x="113" y="20">A</text><text x="28" y="182">B</text><text x="204" y="182">C</text></svg>
-    </div>
-    <div class="atl-plate atl-plate--mol" data-depth="0.9">
-      <svg viewBox="0 0 220 200"><path d="M80 50 115 30 150 50 150 90 115 110 80 90Z"/><path d="M88 55 115 39M142 55V85M115 101 88 85"/><path d="M150 50 185 30M115 110V150M80 50 45 30"/><circle cx="185" cy="30" r="5"/><circle cx="115" cy="150" r="5"/><circle cx="45" cy="30" r="5"/><text x="120" y="172">OH</text><text x="192" y="24">C</text></svg>
-    </div>
-    <div class="atl-plate atl-plate--grid" data-depth="0.3">
-      <svg viewBox="0 0 260 220"><path d="M20 190H250M30 200V10"/><path d="M30 160h-5M30 130h-5M30 100h-5M30 70h-5M30 40h-5M60 190v5M90 190v5M120 190v5M150 190v5M180 190v5M210 190v5M240 190v5"/><path d="M40 30Q135 350 230 30" class="atl-dash"/><text x="236" y="206">x</text><text x="16" y="14">y</text></svg>
-    </div>
-    <div class="atl-plate atl-plate--lens" data-depth="0.7">
+    <!-- Two faint plates of subject linework, kept to the route's side of
+         the opening and away from the heading. -->
+    <div class="atl-plate atl-plate--lens">
       <svg viewBox="0 0 300 160"><path d="M10 80H290"/><path d="M150 20Q172 80 150 140Q128 80 150 20Z"/><path d="M40 40 150 40 260 110M40 80 260 80M40 120 150 120 260 50" class="atl-dash"/><text x="206" y="98">F</text><circle cx="210" cy="80" r="2.5" class="atl-dot"/></svg>
     </div>
-    <div class="atl-plate atl-plate--wave" data-depth="0.4">
-      <svg viewBox="0 0 320 90"><path d="M0 45H320"/><path d="M0 45C20 5 40 5 60 45S100 85 120 45 160 5 180 45 220 85 240 45 280 5 300 45"/><text x="296" y="30">&lambda;</text></svg>
+    <div class="atl-plate atl-plate--mol">
+      <svg viewBox="0 0 220 200"><path d="M80 50 115 30 150 50 150 90 115 110 80 90Z"/><path d="M88 55 115 39M142 55V85M115 101 88 85"/><path d="M150 50 185 30M115 110V150M80 50 45 30"/><circle cx="185" cy="30" r="5"/><circle cx="115" cy="150" r="5"/><circle cx="45" cy="30" r="5"/><text x="120" y="172">OH</text><text x="192" y="24">C</text></svg>
     </div>
-    <div class="atl-plate atl-plate--page" data-depth="0.6">
-      <svg viewBox="0 0 220 240"><path d="M30 10V230"/><path d="M40 40H200M40 70H200M40 100H170M40 130H200M40 160H150M40 190H200"/><path d="M44 104q60 6 120 -2" class="atl-mark"/><path d="M14 64v46" class="atl-mark"/><text x="178" y="165">&para;</text></svg>
-    </div>
-    <p class="atl-letters" data-depth="1">
-      <span lang="hi">&#x0905;</span><span lang="ta">&#x0B85;</span><span lang="fr">&eacute;</span><span>&pi;</span><span>&Sigma;</span><span lang="sa">&#x0915;</span>
-    </p>
   </div>
 
   <div class="atl-open__visual" aria-hidden="true">
     <svg class="atl-open__route atl-open__route--wide" data-fit viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path class="atl-route-ghost" d="M50 100C50 74 82 66 73 12"/>
-      <path class="atl-route-line" d="M50 100C50 74 82 66 73 12" pathLength="1"/>
+      <path class="atl-route-ghost" d="M20 100C20 66 80 62 66 8"/>
+      <path class="atl-route-line" d="M20 100C20 66 80 62 66 8" pathLength="1"/>
     </svg>
     <svg class="atl-open__route atl-open__route--narrow" data-fit viewBox="0 0 100 100" preserveAspectRatio="none">
       <path class="atl-route-ghost" d="M6 100C6 62 88 70 84 6"/>
       <path class="atl-route-line" d="M6 100C6 62 88 70 84 6" pathLength="1"/>
     </svg>
     <ol class="atl-open__grades">
-      <li style="--x:53.3;--y:86;--mx:14.5;--my:81.8;--s:1;--i:0" data-depth="1.2">V</li>
-      <li style="--x:59;--y:75.9;--mx:30;--my:71.3;--s:.86;--i:1" data-depth="1">VI</li>
-      <li style="--x:65.3;--y:65.8;--mx:47.7;--my:62.1;--s:.74;--i:2" data-depth=".82">VII</li>
-      <li style="--x:70.5;--y:54.5;--mx:63.8;--my:51.8;--s:.64;--i:3" data-depth=".66">VIII</li>
-      <li style="--x:73.8;--y:41.6;--mx:75.9;--my:39;--s:.56;--i:4" data-depth=".5">IX</li>
-      <li style="--x:74.5;--y:26.9;--mx:82.8;--my:23.2;--s:.5;--i:5" data-depth=".38">X</li>
+      <li style="--x:23.9;--y:86;--mx:25.3;--my:74;--s:1;--i:0">V</li>
+      <li style="--x:32.9;--y:75;--mx:46;--my:63;--s:.86;--i:1">VI</li>
+      <li style="--x:45.4;--y:64;--mx:63.5;--my:52;--s:.74;--i:2">VII</li>
+      <li style="--x:57.5;--y:52;--mx:74.5;--my:41;--s:.64;--i:3">VIII</li>
+      <li style="--x:65.3;--y:39;--mx:81.1;--my:29;--s:.56;--i:4">IX</li>
+      <li style="--x:68.1;--y:24;--mx:83.9;--my:16;--s:.5;--i:5">X</li>
     </ol>
   </div>
 
@@ -336,7 +321,7 @@
     </h1>
     <p class="atl-open__lead">From Grade V, students follow the CBSE curriculum, in English, on
       one campus. In Grades XI and XII they continue with CBSE or choose the IB Diploma
-      Programme &mdash; and all of it is studied inside the life of a residential school.</p>
+      Programme, and all of it is studied inside the life of a residential school.</p>
     <p class="atl-open__actions">
       <a class="btn btn--primary btn--lg" href="#pathways">Compare CBSE and IB</a>
       <a class="atl-link atl-link--light" href="#subjects">Explore subjects</a>
@@ -348,10 +333,12 @@
       <div><dt>Grades XI&ndash;XII</dt><dd>CBSE or IB Diploma</dd></div>
     </dl>
     <nav class="atl-index" aria-label="On this page">
+      <p class="atl-index__label" aria-hidden="true">On this page</p>
       <ol>
         <li><a href="#journey">Grade journey</a></li>
         <li><a href="#pathways">Pathways</a></li>
         <li><a href="#subjects">Subjects</a></li>
+        <li><a href="#ib">IB subject groups</a></li>
         <li><a href="#core">Diploma core</a></li>
         <li><a href="#beyond">School life</a></li>
       </ol>
@@ -359,13 +346,11 @@
   </div>
 </header>
 
-<!-- The approach: three statements set as notes in the margin of the path. -->
+<!-- The approach: a short spread and three notes on thin rules. -->
 <section class="atl-approach" id="approach" aria-labelledby="approach-title">
-  <span class="atl-spine" aria-hidden="true"><i></i></span>
   <div class="wrap">
     <div class="atl-spread">
       <div class="atl-spread__l">
-        <p class="atl-eyebrow">Our approach</p>
         <h2 class="atl-h2" id="approach-title">Broad for as long as it can be. <em>Deep when it counts.</em></h2>
       </div>
       <div class="atl-spread__r">
@@ -380,19 +365,16 @@
 
     <ol class="atl-notes">
       <li class="atl-note">
-        <span class="atl-note__num" aria-hidden="true">01</span>
         <h3 class="atl-note__title">Continuity</h3>
         <p>Eight years on one campus, from the first year of the Junior School to the Class XII
           Board examination.</p>
       </li>
       <li class="atl-note">
-        <span class="atl-note__num" aria-hidden="true">02</span>
         <h3 class="atl-note__title">Breadth, then depth</h3>
         <p>A broad course to Grade X. Then a CBSE stream, or six IB subjects and the Diploma
           core.</p>
       </li>
       <li class="atl-note">
-        <span class="atl-note__num" aria-hidden="true">03</span>
         <h3 class="atl-note__title">Values alongside</h3>
         <p>The Chinmaya Vision Programme runs across every grade, beside the timetable rather
           than inside one lesson.</p>
@@ -401,244 +383,177 @@
   </div>
 </section>
 
-<!-- The grade journey. One route to Grade X, then two. On a large window
-     the stage holds while the route is walked: the foundation, the Board
-     years, the Grade X node, and the division into two pathways. -->
+<!-- The grade journey. Three columns on a large window: the route with its
+     stages, the reading column, and the photographs. In reading order each
+     stage is its text followed by its photograph; html.cur-stage lays the
+     photographs one over another in a single sticky frame, and the stage
+     being read is the one shown. The frame is sticky only within this grid,
+     so it lets go before the Grade X division below it. -->
 <section class="atl-journey" id="journey" aria-labelledby="journey-title">
-  <div class="atl-journey__intro">
-    <span class="atl-spine atl-spine--dawn" aria-hidden="true"><i></i></span>
-    <div class="wrap atl-spread">
-      <div class="atl-spread__l">
-        <p class="atl-eyebrow">Grade journey</p>
-        <h2 class="atl-h2" id="journey-title">One route to Grade&nbsp;X, <em>two beyond it.</em></h2>
-      </div>
-      <div class="atl-spread__r">
-        <p class="atl-intro">Every student follows the CBSE curriculum from Grade V and sits the
-          CBSE Board examination at the end of Grade X. The choice of pathway covers the final
-          two years only.</p>
-      </div>
+  <div class="wrap atl-journey__head atl-spread">
+    <div class="atl-spread__l">
+      <p class="atl-eyebrow">Grade journey</p>
+      <h2 class="atl-h2" id="journey-title">One route to Grade&nbsp;X, <em>two beyond it.</em></h2>
+    </div>
+    <div class="atl-spread__r">
+      <p class="atl-intro">Every student follows the CBSE curriculum from Grade V and sits the
+        CBSE Board examination at the end of Grade X. The choice of pathway covers the final
+        two years only.</p>
     </div>
   </div>
 
-  <div class="atl-journey__track">
-    <div class="atl-stage">
-      <!-- The route itself. Decorative: the grades it marks are all named in
-           the text beside it. -->
-      <div class="atl-route" aria-hidden="true">
-        <span class="atl-route__rail"><i></i></span>
-        <ol class="atl-route__marks">
-          <li style="--at:16">V</li><li style="--at:23">VI</li><li style="--at:30">VII</li>
-          <li style="--at:37">VIII</li><li style="--at:54" class="is-board">IX</li>
-        </ol>
-      </div>
-
-      <ol class="atl-phases">
-        <li class="atl-phase atl-phase--found">
-          <div class="atl-phase__text">
-            <p class="atl-phase__years">Grades V&ndash;VIII</p>
-            <h3 class="atl-phase__name">The foundation</h3>
-            <p class="atl-phase__body">Science, Mathematics, English, two additional languages and
-              artificial intelligence. Published Class X results list Hindi, Sanskrit, Tamil and
-              French as language subjects; ask which options run in each grade.</p>
-          </div>
-          <div class="atl-phase__plate">
-            <!-- Breadth: the subjects of the foundation, scattered wide. They
-                 are the same five the paragraph names, so they are hidden
-                 from assistive technology rather than read twice. -->
-            <ul class="atl-breadth" aria-hidden="true">
-              <li style="--bx:4;--by:6">Science</li>
-              <li style="--bx:50;--by:4">Mathematics</li>
-              <li style="--bx:68;--by:88">English</li>
-              <li style="--bx:0;--by:78">Two additional languages</li>
-              <li style="--bx:24;--by:42">Artificial intelligence</li>
-            </ul>
-            <figure class="atl-phase__figure">
-              <img src="assets/img/curriculum/foundation.jpg"
-                   alt="Junior School students at a long classroom bench, working with coloured cards while their teacher looks on"
-                   width="1000" height="1250" loading="lazy" decoding="async">
-            </figure>
-          </div>
-        </li>
-        <li class="atl-phase atl-phase--board">
-          <div class="atl-phase__text">
-            <p class="atl-phase__years">Grades IX&ndash;X</p>
-            <h3 class="atl-phase__name">The first Board year</h3>
-            <p class="atl-phase__body">The same broad course, carried to the CBSE Board examination
-              at the end of Grade X &mdash; the first external examination a CIRS student sits.</p>
-          </div>
-          <div class="atl-phase__plate">
-            <!-- Order: the same page ruled into lines as the Board approaches. -->
-            <span class="atl-ruled" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            <figure class="atl-phase__figure">
-              <img src="assets/img/curriculum/board.jpg"
-                   alt="Students writing at rows of classroom desks"
-                   width="1000" height="1250" loading="lazy" decoding="async">
-            </figure>
-          </div>
-        </li>
-        <li class="atl-phase atl-phase--fork">
-          <div class="atl-phase__text">
-            <p class="atl-phase__years">After Grade X &middot; Grades XI&ndash;XII</p>
-            <h3 class="atl-phase__name">A choice of pathway</h3>
-          </div>
-          <!-- Grade X, and the division of the one route into two. -->
-          <div class="atl-junction" aria-hidden="true">
-            <svg class="atl-fork" data-fit viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path class="atl-fork__l is-wide" d="M50 0C50 46 25 50 25 100" pathLength="1"/>
-              <path class="atl-fork__r is-wide" d="M50 0C50 46 75 50 75 100" pathLength="1"/>
-              <path class="atl-fork__join is-narrow" d="M5.6 0C5.6 22 50 14 50 38" pathLength="1"/>
-              <path class="atl-fork__l is-narrow" d="M50 38C50 72 25 64 25 100" pathLength="1"/>
-              <path class="atl-fork__r is-narrow" d="M50 38C50 72 75 64 75 100" pathLength="1"/>
-            </svg>
-            <div class="atl-node">
-              <span class="atl-node__ring"></span>
-              <span class="atl-node__pulse"></span>
-              <span class="atl-node__x">X</span>
-            </div>
-          </div>
-          <ul class="atl-branches">
-            <li class="atl-branch atl-branch--cbse">
-              <a href="#cbse">
-                <span class="atl-branch__tag">CBSE</span>
-                <span class="atl-branch__name">Engineering, Medicine or Management</span>
-                <span class="atl-branch__note">A senior stream, closed by the Class XII Board examination</span>
-              </a>
-            </li>
-            <li class="atl-branch atl-branch--ib">
-              <a href="#ib">
-                <span class="atl-branch__tag">IB Diploma</span>
-                <span class="atl-branch__name">Six subjects and the Diploma core</span>
-                <span class="atl-branch__note">Examinations and coursework, graded out of 45</span>
-              </a>
-            </li>
-          </ul>
-        </li>
+  <div class="wrap atl-jr">
+    <nav class="atl-jr__route" aria-label="Grade journey stages">
+      <ol>
+        <li><a href="#journey-foundation" data-step="0"><b>V&ndash;VIII</b> <span>The foundation</span></a></li>
+        <li><a href="#journey-board" data-step="1"><b>IX&ndash;X</b> <span>The first Board year</span></a></li>
+        <li><a href="#journey-division" data-step="2"><b>XI&ndash;XII</b> <span>A choice of pathway</span></a></li>
       </ol>
+    </nav>
+
+    <div class="atl-step" id="journey-foundation" data-step="0">
+      <p class="atl-step__years">Grades V&ndash;VIII</p>
+      <h3 class="atl-step__name">The foundation</h3>
+      <p class="atl-step__body">Science, Mathematics, English, two additional languages and
+        artificial intelligence. Published Class X results list Hindi, Sanskrit, Tamil and
+        French as language subjects; ask which options run in each grade.</p>
     </div>
+    <figure class="atl-shot" data-step="0">
+      <span class="atl-shot__img"><img src="assets/img/curriculum/foundation.jpg"
+           alt="Junior School students at a long classroom bench, working with coloured cards while their teacher looks on"
+           width="1000" height="1250" loading="lazy" decoding="async"></span>
+      <span class="atl-shot__edge" aria-hidden="true"></span>
+      <span class="atl-shot__slate" aria-hidden="true"><b>V&ndash;VIII</b></span>
+    </figure>
+
+    <div class="atl-step" id="journey-board" data-step="1">
+      <p class="atl-step__years">Grades IX&ndash;X</p>
+      <h3 class="atl-step__name">The first Board year</h3>
+      <p class="atl-step__body">The same broad course, carried to the CBSE Board examination
+        at the end of Grade X: the first external examination a CIRS student sits.</p>
+    </div>
+    <figure class="atl-shot" data-step="1">
+      <span class="atl-shot__img"><img src="assets/img/curriculum/board.jpg"
+           alt="Students writing at rows of classroom desks"
+           width="1000" height="1250" loading="lazy" decoding="async"></span>
+      <span class="atl-shot__edge" aria-hidden="true"></span>
+      <span class="atl-shot__slate" aria-hidden="true"><b>IX&ndash;X</b></span>
+    </figure>
+  </div>
+
+  <!-- Grade X, and the division of the one route into two. The branches end
+       over the comparison's two columns, which the next section sets in the
+       same grid. The drawing is decorative; the two destinations are links. -->
+  <div class="wrap atl-div" id="journey-division">
+    <div class="atl-div__map">
+      <svg class="atl-div__fork" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path class="atl-div__stem" d="M0.7 0V30" pathLength="1"/>
+        <path class="atl-div__b1" d="M0.7 30C0.7 70 22 60 22 100" pathLength="1"/>
+        <path class="atl-div__b2" d="M0.7 30C0.7 82 61 52 61 100" pathLength="1"/>
+      </svg>
+      <span class="atl-div__node" aria-hidden="true"><span>X</span></span>
+      <div class="atl-div__text">
+        <p class="atl-step__years">After Grade X &middot; Grades XI&#8288;&ndash;&#8288;XII</p>
+        <h3 class="atl-step__name">A choice of pathway</h3>
+      </div>
+    </div>
+    <ul class="atl-div__ends">
+      <li class="atl-div__end atl-div__end--cbse">
+        <a href="#cbse">
+          <span class="atl-div__tag">CBSE</span>
+          <span class="atl-div__name">Engineering, Medicine or Management</span>
+          <span class="atl-div__note">A senior stream, closed by the Class XII Board examination</span>
+        </a>
+      </li>
+      <li class="atl-div__end atl-div__end--ib">
+        <a href="#ib">
+          <span class="atl-div__tag">IB Diploma</span>
+          <span class="atl-div__name">Six subjects and the Diploma core</span>
+          <span class="atl-div__note">Examinations and coursework, graded out of 45</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </section>
 
-<!-- The two pathways, side by side. Four themes, one at a time on a large
-     window; in reading order, each theme is a heading with the two
-     programmes under it. -->
+<!-- The two pathways, as one table: four themes down the side, the two
+     programmes across. On a phone each theme is a heading with the two
+     programmes under it, from the same cells. -->
 <section class="atl-paths" id="pathways" aria-labelledby="pathways-title">
-  <div class="atl-paths__head">
-    <span class="atl-twin" aria-hidden="true"><i></i><i></i></span>
-    <div class="wrap">
-      <p class="atl-eyebrow">Pathways</p>
+  <div class="wrap">
+    <div class="atl-paths__head">
       <h2 class="atl-h2" id="pathways-title">Two pathways for <em>Grades XI and XII.</em></h2>
       <p class="atl-intro">Neither route is better in general: the right one depends on the
         subjects a student wants and the next step they have in mind.</p>
     </div>
-  </div>
 
-  <div class="atl-paths__track">
-    <div class="atl-cmp">
-      <div class="atl-cmp__heads">
-        <div class="atl-cmp__prog atl-cmp__prog--cbse">
-          <span class="atl-cmp__node" aria-hidden="true"></span>
-          <p class="atl-cmp__tag">Central Board of Secondary Education, New Delhi</p>
-          <p class="atl-cmp__title">CBSE</p>
-          <p class="atl-cmp__grades">Grades V to XII at CIRS; streams in XI and XII</p>
-        </div>
-        <div class="atl-cmp__prog atl-cmp__prog--ib">
-          <span class="atl-cmp__node" aria-hidden="true"></span>
-          <p class="atl-cmp__tag">International Baccalaureate</p>
-          <p class="atl-cmp__title">IB Diploma Programme</p>
-          <p class="atl-cmp__grades">Grades XI and XII</p>
-        </div>
-      </div>
-
-      <figure class="atl-cmp__photo atl-cmp__photo--cbse" aria-hidden="true">
-        <img src="assets/img/results-cbse-lab.webp" alt=""
-             width="1800" height="1200" loading="lazy" decoding="async">
-      </figure>
-      <figure class="atl-cmp__photo atl-cmp__photo--ib" aria-hidden="true">
-        <img src="assets/img/results-ib-lab.webp" alt=""
-             width="1800" height="1200" loading="lazy" decoding="async">
-      </figure>
-
-      <ol class="atl-themes">
-        <li class="atl-theme">
-          <h3 class="atl-theme__name"><span class="atl-theme__num" aria-hidden="true">01</span> Structure</h3>
-          <div class="atl-theme__side atl-theme__side--cbse">
-            <p class="atl-theme__prog">CBSE</p>
-            <p class="atl-theme__stat"><b>1</b> stream</p>
-            <p class="atl-theme__text">A stream (Engineering, Medicine or Management), each built on
-              English and a set of core subjects, studied for two years.</p>
-          </div>
-          <div class="atl-theme__side atl-theme__side--ib">
-            <p class="atl-theme__prog">IB Diploma</p>
-            <p class="atl-theme__stat"><b>6</b> subjects and the core</p>
-            <p class="atl-theme__text">Six subjects from six groups, three or four at Higher Level,
-              alongside the Diploma core: Theory of Knowledge, the Extended Essay and Creativity,
-              Activity, Service.</p>
-          </div>
-        </li>
-        <li class="atl-theme">
-          <h3 class="atl-theme__name"><span class="atl-theme__num" aria-hidden="true">02</span> Subject choice</h3>
-          <div class="atl-theme__side atl-theme__side--cbse">
-            <p class="atl-theme__prog">CBSE</p>
-            <p class="atl-theme__stat"><b>1</b> of 3 streams</p>
-            <p class="atl-theme__text">Choose a stream. The stream sets the core subjects; electives
-              are chosen alongside them.</p>
-          </div>
-          <div class="atl-theme__side atl-theme__side--ib">
-            <p class="atl-theme__prog">IB Diploma</p>
-            <p class="atl-theme__stat"><b>3&ndash;4</b> at Higher Level</p>
-            <p class="atl-theme__text">Choose one subject from each group, three or four at Higher
-              Level and the rest at Standard Level.</p>
-          </div>
-        </li>
-        <li class="atl-theme">
-          <h3 class="atl-theme__name"><span class="atl-theme__num" aria-hidden="true">03</span> Assessment</h3>
-          <div class="atl-theme__side atl-theme__side--cbse">
-            <p class="atl-theme__prog">CBSE</p>
-            <p class="atl-theme__stat"><b>X &amp; XII</b> Board examinations</p>
-            <p class="atl-theme__text">CBSE Board examinations in Grades X and XII; the Class XII
-              examination closes the senior stream.</p>
-          </div>
-          <div class="atl-theme__side atl-theme__side--ib">
-            <p class="atl-theme__prog">IB Diploma</p>
-            <p class="atl-theme__stat"><b>45</b> points in all</p>
-            <p class="atl-theme__text">Examinations at the end of Grade XII, with coursework assessed
-              during the programme. Each subject is graded 1&ndash;7; Theory of Knowledge and the
-              Extended Essay add up to 3 points, for 45 in all.</p>
-          </div>
-        </li>
-        <li class="atl-theme">
-          <h3 class="atl-theme__name"><span class="atl-theme__num" aria-hidden="true">04</span> At CIRS</h3>
-          <div class="atl-theme__side atl-theme__side--cbse">
-            <p class="atl-theme__prog">CBSE</p>
-            <p class="atl-theme__stat"><b>3</b> streams</p>
-            <p class="atl-theme__text">Engineering, Medicine and Management streams. Ask the school
-              for this year&rsquo;s electives.</p>
-          </div>
-          <div class="atl-theme__side atl-theme__side--ib">
-            <p class="atl-theme__prog">IB Diploma</p>
-            <p class="atl-theme__stat"><b>15</b> subjects in six groups</p>
-            <p class="atl-theme__text">Fifteen subjects across the six groups. A combination runs
-              when enough students choose it.</p>
-          </div>
-        </li>
-      </ol>
-
-      <p class="atl-cmp__dial" aria-hidden="true"><i></i><i></i><i></i><i></i></p>
-    </div>
-  </div>
-
-  <div class="atl-paths__ends">
-    <span class="atl-twin atl-twin--end" aria-hidden="true"><i></i><i></i></span>
-    <div class="wrap atl-ends">
-      <a class="atl-end atl-end--cbse" href="curriculum/cbse.html">
-        <span class="atl-end__tag">CBSE, Grades V to XII</span>
-        <span class="atl-end__title">Read the CBSE pathway in&nbsp;full</span>
-      </a>
-      <a class="atl-end atl-end--ib" href="curriculum/ib-diploma.html">
-        <span class="atl-end__tag">IB Diploma, Grades XI and XII</span>
-        <span class="atl-end__title">Read the IB Diploma guide in&nbsp;full</span>
-      </a>
-    </div>
+    <table class="atl-cmp">
+      <caption class="sr-only">CBSE and the IB Diploma Programme compared, Grades XI and XII</caption>
+      <thead>
+        <tr>
+          <td></td>
+          <th scope="col" class="atl-cmp__prog">
+            <span class="atl-cmp__tag">Central Board of Secondary Education, New Delhi</span>
+            <span class="atl-cmp__title">CBSE</span>
+            <span class="atl-cmp__grades">Grades V to XII at CIRS; streams in XI and XII</span>
+          </th>
+          <th scope="col" class="atl-cmp__prog">
+            <span class="atl-cmp__tag">International Baccalaureate</span>
+            <span class="atl-cmp__title">IB Diploma Programme</span>
+            <span class="atl-cmp__grades">Grades XI and XII</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Structure</th>
+          <td data-prog="CBSE"><p class="atl-cmp__stat">1 stream</p>
+            <p>A stream (Engineering, Medicine or Management), each built on English and a set
+              of core subjects, studied for two years.</p></td>
+          <td data-prog="IB Diploma"><p class="atl-cmp__stat">6 subjects and the core</p>
+            <p>Six subjects from six groups, three or four at Higher Level, alongside the Diploma
+              core: Theory of Knowledge, the Extended Essay and Creativity, Activity,
+              Service.</p></td>
+        </tr>
+        <tr>
+          <th scope="row">Subject choice</th>
+          <td data-prog="CBSE"><p class="atl-cmp__stat">1 of 3 streams</p>
+            <p>Choose a stream. The stream sets the core subjects; electives are chosen alongside
+              them.</p></td>
+          <td data-prog="IB Diploma"><p class="atl-cmp__stat">3&ndash;4 at Higher Level</p>
+            <p>Choose one subject from each group, three or four at Higher Level and the rest at
+              Standard Level.</p></td>
+        </tr>
+        <tr>
+          <th scope="row">Assessment</th>
+          <td data-prog="CBSE"><p class="atl-cmp__stat">X &amp; XII Board examinations</p>
+            <p>CBSE Board examinations in Grades X and XII; the Class XII examination closes the
+              senior stream.</p></td>
+          <td data-prog="IB Diploma"><p class="atl-cmp__stat">45 points in all</p>
+            <p>Examinations at the end of Grade XII, with coursework assessed during the
+              programme. Each subject is graded 1&ndash;7; Theory of Knowledge and the Extended
+              Essay add up to 3 points, for 45 in all.</p></td>
+        </tr>
+        <tr>
+          <th scope="row">At CIRS</th>
+          <td data-prog="CBSE"><p class="atl-cmp__stat">3 streams</p>
+            <p>Engineering, Medicine and Management streams. Ask the school for this
+              year&rsquo;s electives.</p></td>
+          <td data-prog="IB Diploma"><p class="atl-cmp__stat">15 subjects in six groups</p>
+            <p>Fifteen subjects across the six groups. A combination runs when enough students
+              choose it.</p></td>
+        </tr>
+        <tr class="atl-cmp__guides">
+          <th scope="row">In full</th>
+          <td data-prog="CBSE"><a class="atl-end" href="curriculum/cbse.html">
+            <span class="atl-end__tag">CBSE, Grades V to XII</span>
+            <span class="atl-end__title">Read the CBSE pathway in&nbsp;full</span></a></td>
+          <td data-prog="IB Diploma"><a class="atl-end" href="curriculum/ib-diploma.html">
+            <span class="atl-end__tag">IB Diploma, Grades XI and XII</span>
+            <span class="atl-end__title">Read the IB Diploma guide in&nbsp;full</span></a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
@@ -651,44 +566,29 @@
       <a class="atl-link" href="mailto:info@cirschool.org?subject=Grade%20XI%20and%20XII%20subject%20choices">info@cirschool.org</a>.</p>
   </div>
 
-  <!-- CBSE: three streams set as three large words. On a large window each
-       word opens its subjects beside it; in reading order, and on a phone,
-       every list is simply there. -->
+  <!-- CBSE: three ruled rows, the stream on one side and its published core
+       subjects on the other. Every list is always there. -->
   <article class="atl-streams" id="cbse" aria-labelledby="cbse-title">
     <div class="wrap">
       <div class="atl-prog-head">
         <p class="atl-prog-head__tag">CBSE</p>
         <h3 class="atl-prog-head__title" id="cbse-title">Three senior streams</h3>
-        <p class="atl-prog-head__note">Core subjects by stream, as the school last published them, for
-          2018&ndash;19. English is studied in all three.</p>
+        <p class="atl-prog-head__note"><span class="atl-year" aria-hidden="true">As published for 2018&ndash;19</span>
+          Core subjects by stream, as the school last published them, for 2018&ndash;19. English is
+          studied in all three.</p>
       </div>
       <ul class="atl-stream-list">
         <li class="atl-stream">
           <h4 class="atl-stream__name" id="stream-engineering">Engineering</h4>
-          <div class="atl-stream__subjects" id="stream-engineering-subjects">
-            <svg class="atl-stream__fan" data-fit viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M0 50C45 50 45 12.5 100 12.5" pathLength="1"/><path d="M0 50C45 50 45 37.5 100 37.5" pathLength="1"/><path d="M0 50C45 50 45 62.5 100 62.5" pathLength="1"/><path d="M0 50C45 50 45 87.5 100 87.5" pathLength="1"/>
-            </svg>
-            <ul class="atl-stream__list" aria-labelledby="stream-engineering"><li>English</li><li>Physics</li><li>Chemistry</li><li>Mathematics</li></ul>
-          </div>
+          <ul class="atl-stream__list" aria-labelledby="stream-engineering"><li>English</li><li>Physics</li><li>Chemistry</li><li>Mathematics</li></ul>
         </li>
         <li class="atl-stream">
           <h4 class="atl-stream__name" id="stream-medicine">Medicine</h4>
-          <div class="atl-stream__subjects" id="stream-medicine-subjects">
-            <svg class="atl-stream__fan" data-fit viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M0 50C45 50 45 12.5 100 12.5" pathLength="1"/><path d="M0 50C45 50 45 37.5 100 37.5" pathLength="1"/><path d="M0 50C45 50 45 62.5 100 62.5" pathLength="1"/><path d="M0 50C45 50 45 87.5 100 87.5" pathLength="1"/>
-            </svg>
-            <ul class="atl-stream__list" aria-labelledby="stream-medicine"><li>English</li><li>Physics</li><li>Chemistry</li><li>Biology</li></ul>
-          </div>
+          <ul class="atl-stream__list" aria-labelledby="stream-medicine"><li>English</li><li>Physics</li><li>Chemistry</li><li>Biology</li></ul>
         </li>
         <li class="atl-stream">
           <h4 class="atl-stream__name" id="stream-management">Management</h4>
-          <div class="atl-stream__subjects" id="stream-management-subjects">
-            <svg class="atl-stream__fan" data-fit viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M0 50C45 50 45 12.5 100 12.5" pathLength="1"/><path d="M0 50C45 50 45 37.5 100 37.5" pathLength="1"/><path d="M0 50C45 50 45 62.5 100 62.5" pathLength="1"/><path d="M0 50C45 50 45 87.5 100 87.5" pathLength="1"/>
-            </svg>
-            <ul class="atl-stream__list" aria-labelledby="stream-management"><li>English</li><li>Business Studies</li><li>Accountancy</li><li>Economics</li></ul>
-          </div>
+          <ul class="atl-stream__list" aria-labelledby="stream-management"><li>English</li><li>Business Studies</li><li>Accountancy</li><li>Economics</li></ul>
         </li>
       </ul>
       <p class="atl-prog-head__ask">Electives and this year&rsquo;s combinations:
@@ -696,9 +596,9 @@
     </div>
   </article>
 
-  <!-- IB: the six groups as one sequence. On a large window the page's
-       scroll carries the groups past, one at a time; in reading order they
-       are six tables. -->
+  <!-- IB: six tables in reading order. On a wide window the group index
+       beside them stays in view; it is navigation, and the tables scroll as
+       ordinary text. -->
   <article class="atl-ib" id="ib" aria-labelledby="ib-title">
     <div class="wrap">
       <div class="atl-prog-head">
@@ -727,10 +627,8 @@
           <p><a class="atl-link" href="mailto:info@cirschool.org?subject=Current%20IB%20Diploma%20subjects%20and%20levels">Ask about IB subjects and levels</a></p>
         </div>
       </div>
-    </div>
 
-    <div class="atl-ib__track">
-      <div class="atl-ib__stage">
+      <div class="atl-ib__body">
         <nav class="atl-ib__rail" aria-label="IB subject groups">
           <ol>
             <li><a href="#ib-g1"><b>1</b> Language and literature</a></li>
@@ -741,229 +639,187 @@
             <li><a href="#ib-g6"><b>6</b> The arts</a></li>
           </ol>
         </nav>
-        <div class="atl-ib__view">
-          <div class="atl-groups">
-            <div class="atl-group" id="ib-g1">
-              <span class="atl-group__num" aria-hidden="true">1</span>
-              <table>
-                <caption><span>Group 1</span> Studies in language and literature</caption>
-                <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/" target="_blank" rel="noopener">English A<span class="sr-only">, opens the IB website in a new tab</span></a>
-                      <small>Literature or language and literature: ask which course runs</small></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="atl-group" id="ib-g2">
-              <span class="atl-group__num" aria-hidden="true">2</span>
-              <table>
-                <caption><span>Group 2</span> Language acquisition</caption>
-                <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener">Hindi B<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener">French B<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-ab-initio/" target="_blank" rel="noopener">French ab initio<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="atl-group" id="ib-g3">
-              <span class="atl-group__num" aria-hidden="true">3</span>
-              <table>
-                <caption><span>Group 3</span> Individuals and societies</caption>
-                <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/business-and-management/" target="_blank" rel="noopener">Business Management<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/economics/" target="_blank" rel="noopener">Economics<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/psychology/" target="_blank" rel="noopener">Psychology<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="atl-group" id="ib-g4">
-              <span class="atl-group__num" aria-hidden="true">4</span>
-              <table>
-                <caption><span>Group 4</span> Sciences</caption>
-                <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/biology/" target="_blank" rel="noopener">Biology<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/chemistry/" target="_blank" rel="noopener">Chemistry<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/physics/" target="_blank" rel="noopener">Physics<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/computer-science/" target="_blank" rel="noopener">Computer Science<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/environmental-systems-and-societies/" target="_blank" rel="noopener">Environmental Systems and Societies<span class="sr-only">, opens the IB website in a new tab</span></a>
-                      <small>Interdisciplinary: counts towards Group 3 or Group 4</small></th>
-                    <td class="is-on">SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="atl-group" id="ib-g5">
-              <span class="atl-group__num" aria-hidden="true">5</span>
-              <table>
-                <caption><span>Group 5</span> Mathematics</caption>
-                <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_analysis_en.pdf" target="_blank" rel="noopener">Mathematics: analysis and approaches<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_application_en.pdf" target="_blank" rel="noopener">Mathematics: applications and interpretation<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="atl-group" id="ib-g6">
-              <span class="atl-group__num" aria-hidden="true">6</span>
-              <table>
-                <caption><span>Group 6</span> The arts</caption>
-                <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/the-arts/visual-arts/" target="_blank" rel="noopener">Visual Arts<span class="sr-only">, opens the IB website in a new tab</span></a></th>
-                    <td class="is-on">SL</td><td class="is-on">HL</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="atl-groups">
+          <div class="atl-group" id="ib-g1">
+            <span class="atl-group__num" aria-hidden="true">1</span>
+            <table>
+              <caption><span>Group 1</span> Studies in language and literature</caption>
+              <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/" target="_blank" rel="noopener">English A<span class="sr-only">, opens the IB website in a new tab</span></a>
+                    <small>Literature or language and literature: ask which course runs</small></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="atl-group" id="ib-g2">
+            <span class="atl-group__num" aria-hidden="true">2</span>
+            <table>
+              <caption><span>Group 2</span> Language acquisition</caption>
+              <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener">Hindi B<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-b/" target="_blank" rel="noopener">French B<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/language-acquisition/language-ab-initio/" target="_blank" rel="noopener">French ab initio<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="atl-group" id="ib-g3">
+            <span class="atl-group__num" aria-hidden="true">3</span>
+            <table>
+              <caption><span>Group 3</span> Individuals and societies</caption>
+              <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/business-and-management/" target="_blank" rel="noopener">Business Management<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/economics/" target="_blank" rel="noopener">Economics<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/individuals-and-societies/psychology/" target="_blank" rel="noopener">Psychology<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="atl-group" id="ib-g4">
+            <span class="atl-group__num" aria-hidden="true">4</span>
+            <table>
+              <caption><span>Group 4</span> Sciences</caption>
+              <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/biology/" target="_blank" rel="noopener">Biology<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/chemistry/" target="_blank" rel="noopener">Chemistry<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/physics/" target="_blank" rel="noopener">Physics<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/computer-science/" target="_blank" rel="noopener">Computer Science<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/sciences/environmental-systems-and-societies/" target="_blank" rel="noopener">Environmental Systems and Societies<span class="sr-only">, opens the IB website in a new tab</span></a>
+                    <small>Interdisciplinary: counts towards Group 3 or Group 4</small></th>
+                  <td class="is-on">SL</td><td><span aria-hidden="true">&ndash;</span><span class="sr-only">Not offered</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="atl-group" id="ib-g5">
+            <span class="atl-group__num" aria-hidden="true">5</span>
+            <table>
+              <caption><span>Group 5</span> Mathematics</caption>
+              <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_analysis_en.pdf" target="_blank" rel="noopener">Mathematics: analysis and approaches<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/globalassets/new-structure/programmes/dp/pdfs/sb_maths_application_en.pdf" target="_blank" rel="noopener">Mathematics: applications and interpretation<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="atl-group" id="ib-g6">
+            <span class="atl-group__num" aria-hidden="true">6</span>
+            <table>
+              <caption><span>Group 6</span> The arts</caption>
+              <thead><tr><th scope="col">Subject</th><th scope="col"><abbr title="Standard Level">SL</abbr></th><th scope="col"><abbr title="Higher Level">HL</abbr></th></tr></thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="https://ibo.org/programmes/diploma-programme/curriculum/the-arts/visual-arts/" target="_blank" rel="noopener">Visual Arts<span class="sr-only">, opens the IB website in a new tab</span></a></th>
+                  <td class="is-on">SL</td><td class="is-on">HL</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </article>
 
-  <!-- The Diploma core: one dark scene, three rings round the centre. -->
+  <!-- The Diploma core: the page's one later purple scene. Three positions
+       on one gold line, each with its full name and explanation. -->
   <article class="atl-core" id="core" aria-labelledby="core-title">
-    <div class="atl-core__track">
-      <div class="atl-core__stage">
-        <div class="atl-core__orbits" aria-hidden="true">
-          <svg viewBox="0 0 600 600">
-            <defs>
-              <path id="orbit-tok" d="M300 170a130 130 0 1 1 0 260a130 130 0 1 1 0-260"/>
-              <path id="orbit-ee" d="M300 100a200 200 0 1 1 0 400a200 200 0 1 1 0-400"/>
-              <path id="orbit-cas" d="M300 30a270 270 0 1 1 0 540a270 270 0 1 1 0-540"/>
-            </defs>
-            <g class="atl-orbits">
-              <g class="atl-orbit atl-orbit--tok">
-                <circle class="atl-orbit__ring" cx="300" cy="300" r="130"/>
-                <path class="atl-orbit__ticks" d="M300 164v12M436 300h-12M300 436v-12M164 300h12"/>
-                <text><textPath href="#orbit-tok" startOffset="4%">Theory of Knowledge</textPath></text>
-                <circle class="atl-orbit__bead" cx="300" cy="430" r="4.5"/>
-              </g>
-              <g class="atl-orbit atl-orbit--ee">
-                <circle class="atl-orbit__ring" cx="300" cy="300" r="200"/>
-                <path class="atl-orbit__ticks" d="M300 94v12M506 300h-12M300 506v-12M94 300h12"/>
-                <text><textPath href="#orbit-ee" startOffset="37%">Extended Essay</textPath></text>
-                <circle class="atl-orbit__bead" cx="100" cy="300" r="4.5"/>
-              </g>
-              <g class="atl-orbit atl-orbit--cas">
-                <circle class="atl-orbit__ring" cx="300" cy="300" r="270"/>
-                <path class="atl-orbit__ticks" d="M300 24v12M576 300h-12M300 576v-12M24 300h12"/>
-                <text><textPath href="#orbit-cas" startOffset="62%">Creativity, Activity, Service</textPath></text>
-                <circle class="atl-orbit__bead" cx="570" cy="300" r="4.5"/>
-              </g>
-            </g>
-          </svg>
-          <p class="atl-core__centre"><span>IB Diploma</span> Core</p>
-        </div>
-        <div class="atl-core__text">
-          <p class="atl-core__tag">At the centre of the Diploma</p>
-          <h3 class="atl-core__title" id="core-title">The Diploma core</h3>
-          <ol class="atl-core__list">
-            <li>
-              <h4>Theory of Knowledge</h4>
-              <p>Students reflect on how knowledge is made and how we know what we claim to
-                know.</p>
-            </li>
-            <li>
-              <h4>Extended Essay</h4>
-              <p>Students pursue an independent research question and develop an extended piece
-                of academic writing.</p>
-            </li>
-            <li>
-              <h4>Creativity, Activity, Service</h4>
-              <p>Experiences across all three strands. Required for the Diploma, but it does not
-                add points to the score.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
+    <div class="wrap">
+      <h3 class="atl-core__title" id="core-title">The Diploma core</h3>
+      <ol class="atl-core__list">
+        <li>
+          <h4>Theory of Knowledge</h4>
+          <p>Students reflect on how knowledge is made and how we know what we claim to
+            know.</p>
+        </li>
+        <li>
+          <h4>Extended Essay</h4>
+          <p>Students pursue an independent research question and develop an extended piece
+            of academic writing.</p>
+        </li>
+        <li>
+          <h4>Creativity, Activity, Service</h4>
+          <p>Experiences across all three strands. Required for the Diploma, but it does not
+            add points to the score.</p>
+        </li>
+      </ol>
     </div>
   </article>
 </section>
 
-<!-- School life: the drawing gives way to photographs. A ruled line
-     becomes the edge of the first, a compass circle the mask of the
-     second, a measured frame the border of the third. -->
+<!-- School life: one photographic composition beside the text. The
+     photographs carry no record of their class or occasion, so the captions
+     describe the frame only. -->
 <section class="atl-beyond" id="beyond" aria-labelledby="beyond-title">
-  <div class="atl-beyond__track">
-    <div class="atl-beyond__stage">
-      <div class="atl-beyond__text">
-        <p class="atl-eyebrow">School life</p>
-        <h2 class="atl-h2" id="beyond-title">The timetable is <em>only part of the day.</em></h2>
-        <p>Academic work sits within the Chinmaya Vision Programme and the life of a residential
-          school. Value education runs across every grade alongside the timetable: students
-          study the Bhagavad Geeta and the CCMT <i>Life &mdash; An Aradhana</i> books, and
-          spiritual classes and aartis carry that learning into the day.</p>
-        <p>Morning assembly, yoga, service, the arts and sport sit alongside classroom work.</p>
-        <p class="atl-beyond__more"><a class="atl-arrow" href="the-cirs-experience.html">Follow a day at CIRS</a></p>
-      </div>
-      <div class="atl-beyond__plates">
-        <figure class="atl-life atl-life--line">
-          <span class="atl-life__rule" aria-hidden="true"></span>
-          <span class="atl-life__img"><img src="assets/img/curriculum/life-court.jpg"
-               alt="Students measuring out lines on an outdoor court with a long ruler while a teacher looks on"
-               width="1600" height="1000" loading="lazy" decoding="async"></span>
-          <figcaption>Measuring out lines on the court.</figcaption>
-        </figure>
-        <figure class="atl-life atl-life--circle">
-          <svg class="atl-life__compass" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="49"/><path d="M50 50 84.6 15.4"/><circle class="atl-life__pin" cx="50" cy="50" r="1.4"/></svg>
-          <span class="atl-life__img"><img src="assets/img/curriculum/life-circle.jpg"
-               alt="A small group of students seated on the floor with their teacher, books open in front of them"
-               width="1000" height="1000" loading="lazy" decoding="async"></span>
-          <figcaption>On the floor, books open.</figcaption>
-        </figure>
-        <figure class="atl-life atl-life--frame">
-          <span class="atl-life__dims" aria-hidden="true"><i></i><i></i></span>
-          <span class="atl-life__img"><img src="assets/img/curriculum/life-hall.jpg"
-               alt="Students seated in rows in a hall, eyes closed and palms joined"
-               width="1200" height="900" loading="lazy" decoding="async"></span>
-          <figcaption>In the hall, palms joined.</figcaption>
-        </figure>
-      </div>
+  <div class="wrap atl-beyond__inner">
+    <div class="atl-beyond__text">
+      <h2 class="atl-h2" id="beyond-title">The timetable is <em>only part of the day.</em></h2>
+      <p>Academic work sits within the Chinmaya Vision Programme and the life of a residential
+        school. Value education runs across every grade alongside the timetable: students
+        study the Bhagavad Geeta and the CCMT <i>Life &mdash; An Aradhana</i> books, and
+        spiritual classes and aartis carry that learning into the day.</p>
+      <p>Morning assembly, yoga, service, the arts and sport sit alongside classroom work.</p>
+      <p class="atl-beyond__more"><a class="atl-arrow" href="the-cirs-experience.html">Follow a day at CIRS</a></p>
+    </div>
+    <div class="atl-beyond__plates">
+      <figure class="atl-life atl-life--main">
+        <span class="atl-life__img"><img src="assets/img/curriculum/life-court.jpg"
+             alt="Students measuring out lines on an outdoor court with a long ruler while a teacher looks on"
+             width="1600" height="1000" loading="lazy" decoding="async"></span>
+        <figcaption>Measuring out lines on the court.</figcaption>
+      </figure>
+      <figure class="atl-life atl-life--a">
+        <span class="atl-life__img"><img src="assets/img/curriculum/life-circle.jpg"
+             alt="A small group of students seated on the floor with their teacher, books open in front of them"
+             width="1000" height="1000" loading="lazy" decoding="async"></span>
+        <figcaption>On the floor, books open.</figcaption>
+      </figure>
+      <figure class="atl-life atl-life--b">
+        <span class="atl-life__img"><img src="assets/img/curriculum/life-hall.jpg"
+             alt="Students seated in rows in a hall, eyes closed and palms joined"
+             width="1200" height="900" loading="lazy" decoding="async"></span>
+        <figcaption>In the hall, palms joined.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -1072,12 +928,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=113-curriculum-atlas-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=113-curriculum-atlas-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=113-curriculum-atlas-1" defer></script>
-<script src="assets/js/cirs.js?b=113-curriculum-atlas-1-header-5" defer></script>
-<script src="assets/js/pages.js?b=113-curriculum-atlas-1" defer></script>
-<script src="assets/js/footer.js?b=113-curriculum-atlas-1-footer-1" defer></script>
-<script src="assets/js/curriculum.js?b=113-curriculum-atlas-1-atlas-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=113-curriculum-atlas-2" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=113-curriculum-atlas-2" defer></script>
+<script src="assets/vendor/lenis.min.js?b=113-curriculum-atlas-2" defer></script>
+<script src="assets/js/cirs.js?b=113-curriculum-atlas-2-header-5" defer></script>
+<script src="assets/js/pages.js?b=113-curriculum-atlas-2" defer></script>
+<script src="assets/js/footer.js?b=113-curriculum-atlas-2-footer-1" defer></script>
+<script src="assets/js/curriculum.js?b=113-curriculum-atlas-2-atlas-2" defer></script>
 </body>
 </html>
