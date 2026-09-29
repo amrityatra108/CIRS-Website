@@ -103,6 +103,12 @@ Leadership's people, portrait crops and five messages are data in `tools/leaders
 for word — do not copy-edit them. The page keeps native scroll (no Lenis) so its `#msg-…` links
 are real history entries.
 
+News's "The term in review" (`#term`) and its article pages are written from `tools/cvpnews.py`, which
+is written only from the school's CVP report for October 2025 – March 2026 and records every conflict
+in that report and how it was settled. `tools/make-news-cvp.py` cuts the photographs from the report's
+PDF (not in the repository) into `assets/img/news/cvp/`. Add nothing to those articles that the report
+does not say.
+
 Spiritual Life (`tools/pages/spiritual-life.html`) is written from the school's own account,
 the "Spiritual Page" Google Doc: every activity, frequency and audience on it comes from there,
 grouped under that document's Swadhyaya, Sadhana and Seva. Its extra photographs are cut from
