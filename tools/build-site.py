@@ -484,12 +484,13 @@ PAGES = {
         "title": "Our Laurels",
         "description": "Competitions won, representative honours and the CIRS students who "
                        "carried them: the school's achievement archive, from 2007 to today.",
-        # The archive brings its own opening: a field of points, one for each
-        # laurel, that gathers into a wreath. Every record is written from
-        # tools/laurels.py, which names its source.
+        # A hall of achievement: it opens on the count, travels through the
+        # fields, the figures and the years, and ends in the complete archive.
+        # Every record is written from tools/laurels.py, which names its source
+        # and audits every figure set large against it.
         "banner": None,
         "sheet": "laurels",
-        "cache_suffix": "-laurels-3",
+        "cache_suffix": "-laurels-4",
         "uc": False,
         "jump": False,
     },
@@ -2080,6 +2081,18 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         head = head.replace(
             '<link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>\n',
             '<link rel="preload" href="assets/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>\n')
+        # The opening's first frame is its start state, not its end state: this
+        # marks the document before anything paints (laurels.css hides the count,
+        # its word and the fragments while it is set), and laurels.js takes it
+        # off when the entrance begins. If scripting never arrives, or motion is
+        # reduced, the page shows itself.
+        head = head.replace("</head>",
+            '<script>(function(){var d=document.documentElement;'
+            'if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;'
+            'd.classList.add("lr-pre");'
+            'setTimeout(function(){d.classList.remove("lr-pre")},4500)})()</script>\n'
+            # Without scripting the archive's rows cannot open, so every record is laid open.
+            '<noscript><style>.lr-row__panel[hidden]{display:block}.lr-row__plus{display:none}</style></noscript>\n</head>')
     if slug == "leadership":
         # The message a #msg-... URL asks for is chosen before first paint.
         head = head.replace("</head>", leadership.head_script() + leadership.head_css() + "</head>")

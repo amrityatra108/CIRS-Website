@@ -1,107 +1,55 @@
-<!-- Our Laurels: the achievement archive.
-     Every laurel on this page is written from tools/laurels.py, which names
-     the published record each one is copied from. Edit the laurels there,
-     not here. The sheet is assets/css/laurels.css and the motion
-     assets/js/laurels.js; without either, every laurel, name and source is
-     still here, in order. -->
+<!-- Our Laurels: a hall of achievement.
+     Every laurel, figure and line on this page is written from
+     tools/laurels.py, which names the published record each one comes from
+     and checks, at every build, that the figures it sets large are in that
+     record. Edit the laurels there, not here.
+     The sheet is assets/css/laurels.css and the motion assets/js/laurels.js
+     (GSAP and ScrollTrigger on the site's own Lenis). Without either, or with
+     motion reduced, or on a phone, every record is here in plain order. -->
 <div class="lr" id="laurels">
 
-<section class="lr-hero" aria-labelledby="lr-title" data-lr-hero>
-  <div class="lr-hero__stage">
-    <canvas class="lr-field lr-field--hero" data-lr-field="hero" aria-hidden="true"></canvas>
-    <div class="lr-hero__type">
-      <h1 class="lr-hero__title" id="lr-title">
-        <span class="lr-hero__word lr-hero__word--our">Our</span>
-        <span class="lr-hero__word lr-hero__word--laurels">Laurels</span>
-      </h1>
-      <p class="lr-hero__line"><span class="lr-nw">Achievement at CIRS</span>
-        <span class="lr-dot" aria-hidden="true">&middot;</span>
-        <span class="lr-nw">1996 <span class="lr-arrow" aria-hidden="true">&rarr;</span><span class="sr-only">to</span> Today</span></p>
-    </div>
-    <p class="lr-hero__wreath-note" aria-hidden="true"><b>{{LAURELS_COUNT}}</b> laurels on record</p>
-    <p class="lr-hero__cue" aria-hidden="true"><span>Scroll</span></p>
-    <div class="lr-hero__peek" data-lr-peek aria-hidden="true"></div>
-  </div>
-  <script type="application/json" id="lr-points">{{LAURELS_POINTS}}</script>
-</section>
-
-<section class="lr-forms" aria-labelledby="lr-forms-title" data-lr-forms>
-  <div class="lr-forms__stage">
-    <header class="lr-forms__head wrap">
-      <p class="lr-kicker">Achievement at CIRS</p>
-      <h2 class="lr-forms__title" id="lr-forms-title">Excellence has many forms.</h2>
-    </header>
-    <ol class="lr-forms__list">
-{{LAURELS_FORMS}}
-    </ol>
-    <p class="lr-forms__count" aria-hidden="true"><span data-lr-form-n>01</span> / 06</p>
-  </div>
-</section>
-
-<section class="lr-numbers" aria-labelledby="lr-numbers-title">
-  <div class="wrap">
-    <header class="lr-numbers__head">
-      <p class="lr-kicker lr-kicker--dark">In figures</p>
-      <h2 class="lr-numbers__title" id="lr-numbers-title">Counted, not claimed.</h2>
-      <p class="lr-numbers__lead">Every figure below is taken from a result the school has
-        published, and links to it.</p>
-    </header>
-    <ol class="lr-numbers__list">
-{{LAURELS_NUMBERS}}
-    </ol>
-  </div>
-</section>
-
-<section class="lr-reel" aria-labelledby="lr-reel-title" data-lr-reel>
-  <div class="lr-reel__stage">
-    <header class="lr-reel__head">
-      <p class="lr-kicker">The laurel reel</p>
-      <h2 class="lr-reel__title" id="lr-reel-title">From Rashtrapati Bhavan<br>to forty-five out of forty-five.</h2>
-      <p class="lr-reel__lead">Eight honours from {{LAURELS_YEAR_SPAN}}, in the order they came.</p>
-    </header>
-    <p class="lr-reel__progress" aria-hidden="true"><span class="lr-reel__bar"><i data-lr-reel-bar></i></span></p>
-    <div class="lr-reel__viewport">
-      <ol class="lr-reel__track" data-lr-track>
-{{LAURELS_REEL}}
+<section class="lr-world" aria-label="The record at a glance" data-lr-world style="--units:{{LAURELS_CAT_UNITS}}">
+  <div class="lr-world__stage">
+    <div class="lr-scene" data-lr-scene>
+      {{LAURELS_HERO}}
+      <h2 class="lr-forms__title" data-lr-forms-title>Excellence<br>has many forms.</h2>
+      <ol class="lr-cats" data-lr-cats>
+{{LAURELS_CATEGORIES}}
       </ol>
     </div>
+    <p class="lr-mast" data-lr-mast aria-hidden="true"><b>{{LAURELS_COUNT}}</b> Laurels <span>{{LAURELS_FIRST}} &rarr; {{LAURELS_LAST}}</span></p>
+    <nav class="lr-catindex" data-lr-catindex aria-label="Fields of achievement"><ol>{{LAURELS_CAT_INDEX}}</ol></nav>
+    <p class="lr-cue" data-lr-cue aria-hidden="true"><span>Scroll</span></p>
+  </div>
+</section>
+
+<section class="lr-count" aria-labelledby="lr-count-title" data-lr-count>
+  <div class="lr-count__stage">
+    <h2 class="lr-count__title" id="lr-count-title" data-lr-count-title>Counted,<br>not claimed.</h2>
+    <ol class="lr-count__list" data-lr-stats>
+{{LAURELS_STATS}}
+    </ol>
+    <ul class="lr-ledger" data-lr-ledger aria-hidden="true">{{LAURELS_LEDGER}}</ul>
+  </div>
+</section>
+
+<section class="lr-reel" aria-labelledby="lr-reel-title" data-lr-reel style="--n:{{LAURELS_MILESTONE_N}}">
+  <div class="lr-reel__stage">
+    <header class="lr-reel__head" data-lr-reel-head>
+      <p class="lr-kicker">The Laurel Reel</p>
+      <h2 class="lr-reel__title" id="lr-reel-title">{{LAURELS_FIRST}} to {{LAURELS_LAST}},<br>one record at a time.</h2>
+    </header>
+    <ol class="lr-reel__list" data-lr-milestones>
+{{LAURELS_MILESTONES}}
+    </ol>
+    <div class="lr-reel__final" data-lr-final></div>
+    <nav class="lr-rail" data-lr-rail aria-label="Milestones by year"><ol>{{LAURELS_RAIL}}</ol></nav>
   </div>
 </section>
 
 <section class="lr-features" aria-labelledby="lr-features-title">
   <h2 class="sr-only" id="lr-features-title">Featured laurels</h2>
 {{LAURELS_FEATURES}}
-</section>
-
-<section class="lr-archive" id="archive" aria-labelledby="lr-archive-title" data-lr-archive>
-  <div class="wrap">
-    <header class="lr-archive__head">
-      <p class="lr-kicker">The complete archive</p>
-      <h2 class="lr-archive__title" id="lr-archive-title">Explore the laurels.</h2>
-      <p class="lr-archive__lead">{{LAURELS_COUNT}} laurels, each copied from a record the school
-        has published and linked to it. Choose one to read it in full.</p>
-    </header>
-{{LAURELS_FILTERS}}
-    <p class="lr-archive__status" role="status" data-lr-status></p>
-    <ul class="lr-grid" data-lr-grid>
-{{LAURELS_GRID}}
-    </ul>
-    <p class="lr-archive__empty" data-lr-empty hidden>No laurel on record matches all three.
-      <button type="button" class="lr-link" data-lr-reset>Show every laurel</button></p>
-    <p class="lr-archive__more">Departments and houses: match results, placings and photographs
-      for this archive are welcome at <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
-  </div>
-</section>
-
-<section class="lr-timeline" aria-labelledby="lr-timeline-title" data-lr-timeline>
-  <div class="wrap">
-    <header class="lr-timeline__head">
-      <p class="lr-kicker">Year by year</p>
-      <h2 class="lr-timeline__title" id="lr-timeline-title">1996 to today.</h2>
-      <p class="lr-timeline__lead">The years with a laurel on record. Choose one to see what it holds.</p>
-    </header>
-{{LAURELS_TIMELINE}}
-  </div>
 </section>
 
 <section class="lr-names" aria-labelledby="lr-names-title" data-lr-names>
@@ -134,29 +82,54 @@
   </div>
 </section>
 
-<section class="lr-close" aria-labelledby="lr-close-title" data-lr-close>
-  <canvas class="lr-field lr-field--close" data-lr-field="close" aria-hidden="true"></canvas>
-  <div class="lr-close__type">
-    <h2 class="lr-close__title" id="lr-close-title">
-      <span class="lr-line"><span>The next laurel</span></span>
-      <span class="lr-line"><span>has not been won yet.</span></span>
-    </h2>
-    <p class="lr-close__line">The story continues.</p>
+<section class="lr-archive" id="archive" aria-labelledby="lr-archive-title" data-lr-archive>
+  <div class="wrap">
+    <header class="lr-archive__head">
+      <p class="lr-kicker">The complete archive</p>
+      <h2 class="lr-archive__title" id="lr-archive-title">{{LAURELS_COUNT}} records.</h2>
+      <p class="lr-archive__lead">Each is copied from a record the school has published, and links
+        back to it. Choose one to read it in full.</p>
+    </header>
+{{LAURELS_FILTERS}}
+    <div class="lr-search" data-lr-search hidden>
+      <label class="lr-search__label" for="lr-q">Search the archive</label>
+      <input class="lr-search__input" id="lr-q" type="search" autocomplete="off" spellcheck="false"
+             placeholder="A name, a year, a competition">
+      <p class="lr-search__status" role="status" data-lr-status></p>
+    </div>
+    <ol class="lr-rows" data-lr-rows>
+{{LAURELS_ROWS}}
+    </ol>
+    <p class="lr-archive__empty" data-lr-empty hidden>No record matches. <button type="button" class="lr-link" data-lr-reset>Show every record</button></p>
+    <p class="lr-archive__more">Departments and houses: results, placings and photographs for this
+      archive are welcome at <a href="mailto:info@cirschool.org">info@cirschool.org</a>.</p>
+  </div>
+  <figure class="lr-peek" data-lr-peek aria-hidden="true"><img alt="" width="640" height="420" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></figure>
+</section>
+
+<section class="lr-end" aria-labelledby="lr-end-title" data-lr-end>
+  <div class="wrap lr-end__inner">
+    <p class="lr-end__range" aria-hidden="true">{{LAURELS_FIRST}} <i>&rarr;</i> {{LAURELS_LAST}}</p>
+    <h2 class="lr-end__title" id="lr-end-title"><span class="lr-line"><span>And still</span></span> <span class="lr-line"><span>counting.</span></span></h2>
+    <p class="lr-end__note">{{LAURELS_COUNT}} laurels on record. The school opened on
+      <a href="{{LAURELS_OPENED_HREF}}">{{LAURELS_OPENED}}</a>; the earliest laurel in this
+      archive is from {{LAURELS_FIRST}}.</p>
   </div>
 </section>
 
-<dialog class="lr-dialog" id="lr-dialog" aria-labelledby="lr-dialog-title">
-  <div class="lr-dialog__panel">
-    <button type="button" class="lr-dialog__close" data-lr-close-dialog aria-label="Close">
+<dialog class="lr-inspect" id="lr-inspect" aria-labelledby="lr-inspect-cap">
+  <div class="lr-inspect__bar">
+    <p class="lr-inspect__count" data-lr-inspect-count aria-hidden="true"></p>
+    <button type="button" class="lr-inspect__btn" data-lr-inspect-prev aria-label="Previous exhibit">&larr;</button>
+    <button type="button" class="lr-inspect__btn" data-lr-inspect-next aria-label="Next exhibit">&rarr;</button>
+    <button type="button" class="lr-inspect__btn lr-inspect__close" data-lr-inspect-close aria-label="Close">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
-    <div class="lr-dialog__media" data-lr-dialog-media></div>
-    <div class="lr-dialog__body">
-      <p class="lr-dialog__meta" data-lr-dialog-meta></p>
-      <h2 class="lr-dialog__title" id="lr-dialog-title" data-lr-dialog-title>Laurel</h2>
-      <p class="lr-dialog__result" data-lr-dialog-result></p>
-      <div class="lr-dialog__more" data-lr-dialog-more></div>
-    </div>
+  </div>
+  <div class="lr-inspect__stage" data-lr-inspect-stage></div>
+  <div class="lr-inspect__foot">
+    <p class="lr-inspect__cap" id="lr-inspect-cap" data-lr-inspect-cap></p>
+    <p class="lr-inspect__links" data-lr-inspect-links></p>
   </div>
 </dialog>
 
