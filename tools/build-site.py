@@ -629,7 +629,7 @@ PAGES = {
         # assets/css/culture.css, shared by the three Art, Culture & Music
         # pages that open on a film.
         "sheet": "culture",
-        "cache_suffix": "-theatre-acts-2",
+        "cache_suffix": "-theatre-stage-2",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
@@ -641,10 +641,24 @@ PAGES = {
             "still": "theatre-opening-final.jpg",
             "still_element": True,
             "title": "CIRS Theatre",
-            "phases": (0.70, 0.78, 0.91),
+            # The film keeps its original scroll distances (film to 252vh, the
+            # last frame held to 281vh, the title up by 328vh), now as
+            # fractions of a 470vh travel, because the page's own sheet lets
+            # the run go on for 110vh more. That extra is the handoff: the
+            # film's last frame darkens, one line of light is drawn, the page
+            # names itself and the line opens onto the Prologue (body.theatre
+            # in assets/css/theatre.css; th-hand in assets/js/theatre.js).
+            "phases": (0.5362, 0.5974, 0.6970),
+            "stage_extra": theatre.handoff_html(),
+            # Without scripting the film is its still frame, and the page's own
+            # rule that holds the title back until the film reveals it would
+            # leave that frame with no name on it.
+            "noscript_css": "body.theatre .film[data-film-pending] .film__title{opacity:1}",
         },
-        # After the opening, three acts — Anand Utsav, Masquerades and Class
-        # Presentations — written from tools/theatre.py, with a sheet and a
+        # After the opening, a Prologue and a programme, then three acts —
+        # Anand Utsav, Masquerades and Class Presentations — with an
+        # intermission, an archive request and a curtain call between and
+        # after them, written from tools/theatre.py, with a sheet and a
         # script of their own (assets/css/theatre.css, assets/js/theatre.js).
         # The page closes on its own request for missing photographs and
         # recordings, which says precisely what the shared under-construction
@@ -1034,7 +1048,7 @@ def film_html(slug, page):
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
 {cue}    <h1 class="film__title" data-film-title>{title}</h1>
-{shot}{progressive_loader}  </div>
+{film.get("stage_extra", "")}{shot}{progressive_loader}  </div>
 </section>{seam}'''
 
 
@@ -2041,6 +2055,7 @@ def build(slug, page):
                  if opening.get("still") and opening.get("still_element") else "")
         pending = ('.film[data-film-pending] .film__title{opacity:1}'
                    if opening.get("pending") or opening.get("still") else "")
+        pending += opening.get("noscript_css", "")
         critical_art_attack = ('''<style id="art-attack-critical">
 body.art-attack{--film-ground:#0B080D;--film-crop:50% 50%;--film-crop-narrow:50% 50%;background:#0B080D}
 body.art-attack .film{position:relative;height:var(--film-run,460vh);background:#000}
@@ -2301,10 +2316,14 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                           .replace("{{RESULTS_COUNT_CAP}}", alumni.count_word().capitalize())
                           .replace("{{RESULTS_COUNT}}", str(alumni.count())))
     if slug == "theatre":
-        content = (content.replace("{{THEATRE_PROGRAMME}}", theatre.programme_html())
+        content = (content.replace("{{THEATRE_PROLOGUE}}", theatre.prologue_html())
+                          .replace("{{THEATRE_PROGRAMME}}", theatre.programme_html())
                           .replace("{{THEATRE_ANAND_UTSAV}}", theatre.anand_utsav_html())
+                          .replace("{{THEATRE_INTERMISSION}}", theatre.intermission_html())
                           .replace("{{THEATRE_MASQUERADES}}", theatre.masquerades_html())
                           .replace("{{THEATRE_CLASSES}}", theatre.classes_html())
+                          .replace("{{THEATRE_CURTAIN_CALL}}", theatre.curtain_call_html())
+                          .replace("{{THEATRE_ONWARD}}", theatre.onward_html())
                           .replace("{{THEATRE_VIEWER_DATA}}", theatre.viewer_data()))
     content = re.sub(r"\{\{DOC_STATUS:([a-z0-9-]+)\}\}",
                      lambda m: doc_sheet_status(m.group(1)), content)
