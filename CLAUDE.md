@@ -144,6 +144,18 @@ its sheet and script are `assets/css/history.css` and `assets/js/history.js`. Do
 claim to that page without a source for it, and do not attribute a photograph to an event its
 own record does not support.
 
+Our Laurels is the hall of achievement, and everything on it is written from `tools/laurels.py`:
+the 56 records, their sources and images, and the evidence-checked sequences built on them
+(`FRAGMENTS`, `LEADS`, `COUNTED`, `TUNNEL`, `FEATURES`). `audit()` fails the build if a quoted
+figure or label is not in its own record; `python3 tools/laurels.py` prints the report and what
+is `HELD` back. The hero count and date range are computed from the data, never typed. The
+sheet and script are `assets/css/laurels.css` and `assets/js/laurels.js`, on the site's own GSAP
+and Lenis, with no WebGL: `gsap.matchMedia` gives `body.lr-cine` (sticky stages of real DOM in CSS
+3D, driven by custom properties) on windows at least 900×560 with motion, a lite document
+otherwise, and the plain document under reduced motion or without script — all with the same
+content. Do not add a record, figure or photograph without a source, and do not name a student
+the record does not name. `tools/make-laurels.py` cuts the Drive season photographs.
+
 ## Checks, before every push
 
 ```sh

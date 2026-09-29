@@ -807,7 +807,6 @@ for _l in LAURELS:
     assert _l["level"] is None or _l["level"] in LEVEL_NAME, _l["id"]
 
 YEARS = sorted({l["year"] for l in LAURELS if l["year"]}, reverse=True)
-FIRST_YEAR, LAST_YEAR = 1996, 2026
 
 # Held back, with the reason. Printed by `python3 tools/laurels.py`.
 HELD = [
@@ -915,73 +914,228 @@ SEASON = [
 ]
 
 # ---------------------------------------------------------------------------
-# The designed sequences. Each names laurels by id; the words are the page's.
+# The designed sequences. Each names laurels by id and shows only what the
+# record says. "evidence" is the phrase in the record that carries a figure or
+# a line the page sets large; audit() fails the build if it is not there, so a
+# number on the page can never drift from its record.
 # ---------------------------------------------------------------------------
 
-# 2 — Excellence has many forms. A form is not a laurel: each line is a fact
-# from the site, and the photograph is the school's.
-FORMS = [
-    ("academics", "Academics", "academic",
-     "Twenty-four IB diplomas from twenty-four candidates, May 2026."),
-    ("sport", "Sport", "track",
-     "Overall champions of the South Zone Yoga Competition, July 2025."),
-    ("arts", "Arts", "ensemble",
-     "First prize at the Interschool Bhajan Competition, July 2025."),
-    ("innovation", "Innovation", "expo",
-     "More than 140 models and activities at the Science Expo, July 2025."),
-    ("leadership", "Leadership", "elections",
-     "Every classroom a constituency: the class elections of April 2025."),
-    ("service", "Service", "seva",
-     "Rallies, care homes and temple grounds: Seva Week, every April."),
+FIRST_YEAR, LAST_YEAR = min(YEARS), max(YEARS)
+SCHOOL_OPENED = ("6 June 1996", "school-history.html#record-inauguration-1996")
+
+# How a source is described on the page. Only what the link really is:
+# a report the school published, its own annual report, a record in the
+# School History archive, a newsletter as reproduced, the school's own account.
+SOURCE_KINDS = {
+    "news.html": "Results brief",
+    "competitions.html": "School report",
+    "school-history.html": "Archive record",
+    "houses.html": "Newsletter record",
+    "why-cirs.html": "School account",
+}
+
+# The larger scans, for looking closely. A "document" is a page photographed
+# or scanned; the other exhibits are photographs of an object or an occasion.
+LG = {
+    "kalam": ("assets/img/history/kalam-2007-lg.jpg", 1170, 1683),
+    "sakshi": ("assets/img/history/sakshi-2008-lg.jpg", 1332, 1812),
+    "isa": ("assets/img/history/isa-2010-lg.jpg", 1087, 1601),
+    "report": ("assets/img/history/report-2019-lg.jpg", 1087, 1597),
+}
+DOCUMENTS = {"kalam", "sakshi", "isa", "report"}
+
+# 1 — the opening: fragments of evidence at three depths around the count.
+#     (shown, laurel, evidence, depth, x %, y %, kept on a phone)
+FRAGMENTS = [
+    ("45 / 45", "ib-2026", "45 out of 45", "near", 71, 17, True),
+    ("99.0%", "cbse-xii-management-2026", "99.0%", "near", 9, 72, True),
+    ("6 · 5 · 6", "yoga-2025", "6 gold, 5 silver, 6 bronze", "mid", 14, 20, True),
+    ("24 / 24", "ib-2026", "24 of 24 diplomas", "mid", 82, 60, False),
+    ("Top 500", "brainfeed-2017", "Top 500 Schools of India", "mid", 74, 82, True),
+    ("Rashtrapati Bhavan", "kalam-2007", "Rashtrapati Bhavan", "far", 4, 90, False),
+    ("14th consecutive year", "ranking-2025", "14th consecutive year", "far", 3, 54, False),
+    ("top 100 of one lakh", "vssf-2025", "top 100 of one lakh", "far", 84, 44, False),
+    ("₹1 lakh", "jklu-2024", "₹1 lakh", "far", 15, 38, False),
 ]
 
-# 3 — In figures. (figure, suffix, label, context, laurel id)
-NUMBERS = [
-    ("24", "/24", "IB Diplomas awarded",
-     "Every candidate in the May 2026 examination earned the diploma.", "ib-2026"),
-    ("45", "/45", "The maximum, twice",
-     "Two students reached the highest score the IB Diploma allows.", "ib-2026"),
-    ("17", "", "Medals at South Zone Yoga",
-     "Six gold, five silver and six bronze, and the Overall Championship, July 2025.",
-     "yoga-2025"),
-    ("14", "th", "Year first in Tamil Nadu",
-     "Education World&rsquo;s ranking reported in October 2025, which also placed CIRS second "
-     "in India among co-educational boarding schools.", "ranking-2025"),
+# 2 — one field at a time. The lead is the record that introduces the field;
+#     "label" is a phrase taken from it, "stat" a figure in its evidence.
+LEADS = {
+    "academics": dict(laurel="ib-2026", stat="45 / 45", evidence="45 out of 45",
+                      label="two scores of 45 out of 45"),
+    "sport": dict(laurel="football-u14-2025", stat="36", evidence="36 schools",
+                  label="Champions of 36 schools"),
+    "arts": dict(laurel="bhajan-2025", stat="1st", evidence="First of more than 20 schools",
+                 label="First of more than 20 schools"),
+    "speech": dict(laurel="public-speaking-2025", stat="1st", evidence="First place",
+                   label="First place"),
+    "innovation": dict(laurel="jklu-2024", stat="₹1 lakh", evidence="₹1 lakh",
+                       label="Overall winners"),
+    "leadership": dict(laurel="kalam-2007", stat="32", evidence="32 students",
+                       label="32 students received by the President"),
+    "international": dict(laurel="isa-2011", stat=None, evidence="International School Award",
+                          label="International School Award"),
+    "school": dict(laurel="brainfeed-2017", stat="Top 500", evidence="Top 500 Schools of India",
+                   label="Named among the Top 500 Schools of India"),
+}
+
+# 3 — counted, not claimed. One figure to a screen; the evidence is the phrase
+#     in the record that holds it. "17" is the sum of the record's own 6 + 5 + 6.
+COUNTED = [
+    dict(stat="24 / 24", label="IB Diplomas", laurel="ib-2026", evidence="24 of 24 diplomas",
+         note="Every candidate registered for the May 2026 IB Diploma examination was awarded "
+              "the diploma."),
+    dict(stat="45 / 45", label="Perfect scores", laurel="ib-2026", evidence="45 out of 45",
+         note="Two students, the maximum the Diploma allows."),
+    dict(stat="99.0%", label="Class XII Management", laurel="cbse-xii-management-2026",
+         evidence="99.0%", note="The stream topper, in the CBSE board examinations."),
+    dict(stat="17", label="Medals at South Zone Yoga", laurel="yoga-2025",
+         evidence="6 gold, 5 silver, 6 bronze",
+         note="Six gold, five silver and six bronze, with the Overall Championship."),
+    dict(stat="14th", label="Year first in Tamil Nadu", laurel="ranking-2025",
+         evidence="14th consecutive year",
+         note="Education World ranked CIRS first in Tamil Nadu and Coimbatore for the 14th "
+              "consecutive year."),
+    dict(stat="100", label="The top 100 of one lakh", laurel="vssf-2025",
+         evidence="top 100 of one lakh",
+         note="Two students, selected through the SPOT test for the VSSF Science Camp."),
 ]
 
-# 4 — The reel, oldest first. (laurel id, composition)
-REEL = [
-    ("kalam-2007", "a"),
-    ("khel-mela-2008", "b"),
-    ("isa-2011", "c"),
-    ("vision-award-2012", "d"),
-    ("brainfeed-2017", "a"),
-    ("ranking-2019", "e"),
-    ("yoga-2025", "b"),
-    ("ib-2026", "d"),
-]
+# 4 — the reel, oldest first: the milestones that have their own exhibit.
+TUNNEL = ["kalam-2007", "khel-mela-2008", "isa-2011", "vision-award-2012", "brainfeed-2017",
+          "ranking-2019", "yoga-2025", "ib-2026"]
 
-# 5 — Featured laurels. (laurel id, headline, composition)
+# 5 — featured laurels, in the order the page has always given them. The first
+#     is the last milestone of the reel, and the reel hands over to it.
+#     (laurel, headline, template, stat, evidence)
 FEATURES = [
-    ("ib-2026", "Two perfect scores.", "low-left"),
-    ("yoga-2025", "Six gold. Five silver. Six bronze.", "top-right"),
-    ("football-u14-2025", "Champions of thirty-six schools.", "split"),
-    ("quzbiz-2025", "One team from a hundred and eighty.", "low-right"),
-    ("bhajan-2025", "Ten voices, one first prize.", "centre"),
+    ("ib-2026", "Two perfect scores.", "full", "45 / 45", "45 out of 45"),
+    ("yoga-2025", "Six gold. Five silver. Six bronze.", "right", None, None),
+    ("football-u14-2025", "Champions of thirty-six schools.", "type", "36 schools", "36 schools"),
+    ("quzbiz-2025", "One team from a hundred and eighty.", "wide", "1 of 180", "First of 180 teams"),
+    ("bhajan-2025", "Ten voices, one first prize.", "centre", "10 voices", "Ten CIRS students"),
 ]
+
+
+# ---------------------------------------------------------------------------
+# Audit: the checks a reader would want made, run at every build.
+# ---------------------------------------------------------------------------
+
+def plain_text(s):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", s or ""))).strip()
+
+
+def record_text(l):
+    parts = [l["title"], l["event"], l["result"], l["text"]] + [n for n, _ in l["names"]]
+    return plain_text(" ".join(parts)).lower()
+
+
+def audit(root="."):
+    """Returns (errors, warnings). An error stops the build."""
+    import os
+    errors, warns, pages = [], [], {}
+
+    def page(href):
+        p = href.split("#")[0]
+        if p not in pages:
+            if not os.path.exists(os.path.join(root, p)):
+                pages[p] = None
+            elif p.endswith(".html"):
+                pages[p] = open(os.path.join(root, p), encoding="utf-8").read()
+            else:
+                pages[p] = ""          # a document: its existence is the check
+        return pages[p]
+
+    seen, titles = set(), {}
+    for l in LAURELS:
+        i = l["id"]
+        if i in seen:
+            errors.append((i, "duplicate id"))
+        seen.add(i)
+        t = plain_text(l["title"]).lower()
+        if t in titles:
+            errors.append((i, f"duplicate title with {titles[t]}"))
+        titles[t] = i
+        for k in ("title", "event", "result", "text", "when"):
+            if not plain_text(l.get(k)):
+                errors.append((i, f"empty {k}"))
+        if not l["cats"]:
+            errors.append((i, "no category"))
+        for c in l["cats"]:
+            if c not in CAT_NAME:
+                errors.append((i, f"unknown category {c}"))
+        h = page(l["source"][1])
+        if h is None:
+            errors.append((i, f"source missing: {l['source'][1]}"))
+        elif "#" in l["source"][1] and l["source"][1].split("#")[0].endswith(".html") \
+                and f'id="{l["source"][1].split("#")[1]}"' not in h:
+            errors.append((i, f"source anchor missing: {l['source'][1]}"))
+        if l["image"] and not os.path.exists(os.path.join(root, IMAGES[l["image"]][0])):
+            errors.append((i, "image file missing"))
+        if l["year"] is None:
+            warns.append((i, "undated: kept out of the chronology"))
+        if l["level"] is None:
+            warns.append((i, "no level recorded"))
+
+    def need(what, lid, phrase):
+        l = BY_ID.get(lid)
+        if l is None:
+            errors.append((what, f"unknown laurel {lid}"))
+        elif phrase.lower() not in record_text(l):
+            errors.append((what, f"'{phrase}' is not in the record {lid}"))
+
+    for shown, lid, ev, *_ in FRAGMENTS:
+        need(f"fragment {shown}", lid, ev)
+    for cat, d in LEADS.items():
+        if cat not in CAT_NAME:
+            errors.append((f"lead {cat}", "unknown category"))
+        need(f"lead {cat}", d["laurel"], d["evidence"])
+        need(f"lead {cat} label", d["laurel"], d["label"])
+        if cat not in BY_ID[d["laurel"]]["cats"]:
+            errors.append((f"lead {cat}", f"{d['laurel']} is not in that category"))
+    for c in COUNTED:
+        need(f"counted {c['stat']}", c["laurel"], c["evidence"])
+    for lid in TUNNEL:
+        l = BY_ID[lid]
+        if not l["image"]:
+            errors.append((f"reel {lid}", "a milestone needs its own exhibit"))
+        if l["year"] is None:
+            errors.append((f"reel {lid}", "undated"))
+    years = [BY_ID[i]["year"] for i in TUNNEL]
+    if years != sorted(years):
+        errors.append(("reel", "not in chronological order"))
+    for lid, _h, _t, stat, ev in FEATURES:
+        if lid not in BY_ID:
+            errors.append((f"feature {lid}", "unknown laurel"))
+        elif stat:
+            need(f"feature {lid}", lid, ev)
+    for key in LG:
+        if not os.path.exists(os.path.join(root, LG[key][0])):
+            errors.append((f"scan {key}", "large scan missing"))
+    if page(SCHOOL_OPENED[1]) is None or f'id="{SCHOOL_OPENED[1].split("#")[1]}"' not in page(SCHOOL_OPENED[1]):
+        errors.append(("ending", f"anchor missing: {SCHOOL_OPENED[1]}"))
+    for k, r in SEASON_PHOTOS.items():
+        if not os.path.exists(os.path.join(root, SEASON_IMG, f"{k}-1600.jpg")):
+            errors.append((f"season {k}", "image missing"))
+    return errors, warns
 
 
 # ---------------------------------------------------------------------------
 # Rendering
 # ---------------------------------------------------------------------------
 
+ARROW = "&#8599;"
+
+
 def plain(text):
     """Entity-laden HTML as the words it says, for an attribute."""
     return html.escape(html.unescape(re.sub(r"<[^>]+>", "", text)), quote=True)
 
 
-def img_html(key, sizes, cls="", eager=False, lazy=True):
+def img_html(key, sizes, cls="", eager=False, lazy=True, large=False):
     path, w, h, alt, _cap, _ev = IMAGES[key]
+    if large and key in LG:
+        path, w, h = LG[key]
     klass = f' class="{cls}"' if cls else ""
     load = ' fetchpriority="high"' if eager else (' loading="lazy"' if lazy else "")
     return (f'<img{klass} src="{path}" width="{w}" height="{h}" alt="{plain(alt)}" '
@@ -996,16 +1150,36 @@ def cats_label(l):
     return " &middot; ".join(CAT_NAME[c] for c in l["cats"])
 
 
-def meta_html(l, cls):
-    level = f'<span>{LEVEL_NAME[l["level"]]}</span>' if l["level"] else ""
-    return (f'<p class="{cls}"><span>{cats_label(l)}</span>{level}'
-            f'<span>{l["when"]}</span></p>')
+def year_text(l):
+    return str(l["year"]) if l["year"] else "Undated"
 
 
-def source_html(l, cls="lr-source"):
+def source_kind(l):
+    href = l["source"][1]
+    if href.endswith(".pdf"):
+        return "Annual report"
+    return SOURCE_KINDS[href.split("#")[0]]
+
+
+def source_link(l, cls="lr-src", cursor="view"):
     label, href = l["source"]
-    return f'<p class="{cls}">Source: <a href="{href}">{label}</a></p>'
+    ext = ' target="_blank" rel="noopener"' if href.endswith(".pdf") else ""
+    return (f'<a class="{cls}" href="{href}"{ext} data-cursor="{cursor}" '
+            f'aria-label="Source: {plain(label)}">{source_kind(l)} '
+            f'<span aria-hidden="true">{ARROW}</span></a>')
 
+
+def source_line(l):
+    label, href = l["source"]
+    ext = ' target="_blank" rel="noopener"' if href.endswith(".pdf") else ""
+    return f'<p class="lr-srcline">Source: <a href="{href}"{ext}>{label}</a></p>'
+
+
+def fit_var(text):
+    return len(plain_text(text))
+
+
+# ---- the seasons in photographs ------------------------------------------
 
 def season_photo(key, sizes, n):
     r = SEASON_PHOTOS[key]
@@ -1046,114 +1220,170 @@ def season_html():
     return "\n".join(out)
 
 
-def forms_html():
-    out = []
-    for i, (key, word, image, note) in enumerate(FORMS):
-        out.append(
-            f'      <li class="lr-form lr-form--{i % 6 + 1}" data-form="{key}" '
-            f'style="--len:{len(word)}">\n'
-            f'        <h3 class="lr-form__word" aria-label="{word}">'
-            + "".join(f'<span aria-hidden="true" style="--i:{j}">{ch}</span>'
-                      for j, ch in enumerate(word)) +
-            '</h3>\n'
-            f'        <figure class="lr-form__media"><div class="lr-form__frame">'
-            f'{img_html(image, "(max-width: 760px) 92vw, 46vw")}</div>'
-            f'<figcaption>{caption(image)}</figcaption></figure>\n'
-            f'        <p class="lr-form__note"><span class="lr-form__n">{i + 1:02d}</span> {note}</p>\n'
-            f'      </li>')
-    return "\n".join(out)
+# ---- 1: the opening --------------------------------------------------------
 
-
-def numbers_html():
-    out = []
-    for i, (fig, suffix, label, context, lid) in enumerate(NUMBERS):
-        suf = f'<span class="lr-number__suffix">{suffix}</span>' if suffix else ""
-        label_src, href = BY_ID[lid]["source"]
-        out.append(
-            f'      <li class="lr-number">\n'
-            f'        <p class="lr-number__figure" data-count="{fig}">'
-            f'<span class="lr-number__big">{fig}</span>{suf}</p>\n'
-            f'        <div class="lr-number__copy">\n'
-            f'          <p class="lr-number__label">{label}</p>\n'
-            f'          <p class="lr-number__context">{context}</p>\n'
-            f'          <p class="lr-source">Source: <a href="{href}">{label_src}</a></p>\n'
-            f'        </div>\n'
-            f'      </li>')
-    return "\n".join(out)
-
-
-def reel_html():
-    out = []
-    for i, (lid, comp) in enumerate(REEL):
+def hero_html():
+    frags = []
+    for shown, lid, _ev, depth, x, y, phone in FRAGMENTS:
         l = BY_ID[lid]
+        frags.append(
+            f'<li class="lr-frag lr-frag--{depth}{"" if phone else " lr-frag--wide"}" '
+            f'style="--x:{x};--y:{y}"><span class="lr-frag__v">{shown}</span>'
+            f'<span class="lr-frag__m">{year_text(l)} &middot; {CAT_NAME[l["cats"][0]]}</span></li>')
+    return (
+        '<div class="lr-hero" data-lr-hero>\n'
+        '      <h1 class="lr-hero__h1" id="lr-title">'
+        f'<span class="lr-hero__num" data-lr-num>{len(LAURELS)}</span> '
+        '<span class="lr-hero__word" data-lr-word>Laurels</span></h1>\n'
+        '      <p class="lr-hero__range" data-lr-range><span>Years of achievement at CIRS</span>'
+        f'<b>{FIRST_YEAR}<i aria-hidden="true"> &rarr; </i><span class="sr-only"> to </span>{LAST_YEAR}</b></p>\n'
+        '      <ul class="lr-frags" aria-hidden="true">' + "".join(frags) + '</ul>\n'
+        '    </div>')
+
+
+# ---- 2: many forms ---------------------------------------------------------
+
+def journey_html():
+    lis, index = [], []
+    for i, (key, name) in enumerate(CATEGORIES):
+        d = LEADS[key]
+        l = BY_ID[d["laurel"]]
+        n = sum(1 for x in LAURELS if key in x["cats"])
         media = ""
         if l["image"]:
-            media = (f'<figure class="lr-spread__media"><div class="lr-spread__frame">'
-                     f'{img_html(l["image"], "(max-width: 760px) 92vw, 34vw")}</div>'
-                     f'<figcaption>{caption(l["image"])}</figcaption></figure>')
-        out.append(
-            f'        <li class="lr-spread lr-spread--{comp}" data-year="{l["year"]}">\n'
-            f'          <article class="lr-spread__inner" aria-labelledby="reel-{lid}">\n'
-            f'            <p class="lr-spread__year" aria-hidden="true">{l["year"]}</p>\n'
-            f'            {media}\n'
-            f'            <div class="lr-spread__copy">\n'
-            f'              {meta_html(l, "lr-spread__meta")}\n'
-            f'              <h3 class="lr-spread__title" id="reel-{lid}">{l["title"]}</h3>\n'
-            f'              <p class="lr-spread__event">{l["event"]}</p>\n'
-            f'              <p class="lr-spread__text">{l["text"]}</p>\n'
-            f'              {source_html(l)}\n'
-            f'            </div>\n'
-            f'          </article>\n'
-            f'        </li>')
-    return "\n".join(out)
+            k = l["image"]
+            kind = "doc" if k in DOCUMENTS else "photo"
+            media = (f'<figure class="lr-cat__media is-{kind}">'
+                     f'<div class="lr-cat__frame">{img_html(k, "(max-width: 899px) 86vw, 34vw")}</div>'
+                     f'<figcaption>{caption(k)}</figcaption></figure>')
+        stat = (f'<p class="lr-cat__stat" style="--len:{fit_var(d["stat"])}">{d["stat"]}</p>'
+                if d["stat"] else "")
+        lis.append(
+            f'      <li class="lr-cat lr-cat--{[1, 4, 2, 3][i % 4]}{"" if l["image"] else " is-bare"}" '
+            f'id="cat-{key}" data-cat="{key}" style="--len:{fit_var(name)}">\n'
+            f'        <article aria-labelledby="cat-{key}-t">\n'
+            f'          <p class="lr-cat__n" aria-hidden="true">{i + 1:02d}</p>\n'
+            f'          <h3 class="lr-cat__name" id="cat-{key}-t">{name}</h3>\n'
+            f'          {media}\n'
+            f'          {stat}\n'
+            f'          <div class="lr-cat__copy">\n'
+            f'            <p class="lr-cat__label">{d["label"]}</p>\n'
+            f'            <p class="lr-cat__title">{l["title"]}</p>\n'
+            f'            <p class="lr-cat__meta">{l["event"]} &middot; {year_text(l)}</p>\n'
+            f'            <p class="lr-cat__links">{source_link(l)}'
+            f'<a class="lr-more" href="#archive" data-lr-filter="{key}" data-cursor="view">'
+            f'All {n} in {name.lower()} <span aria-hidden="true">{ARROW}</span></a></p>\n'
+            f'          </div>\n'
+            f'        </article>\n'
+            f'      </li>')
+        index.append(f'<li><a href="#cat-{key}" data-go="{i}"><span>{i + 1:02d}</span><em>{name}</em></a></li>')
+    return "\n".join(lis), "".join(index)
 
 
-def names_line(l):
-    return ", ".join(n for n, _ in l["names"]).replace("&amp;", "and")
+# ---- 3: counted, not claimed ----------------------------------------------
 
+def counted_html():
+    lis, ledger = [], []
+    for i, c in enumerate(COUNTED):
+        l = BY_ID[c["laurel"]]
+        lis.append(
+            f'      <li class="lr-stat" data-i="{i}" style="--len:{fit_var(c["stat"])}">\n'
+            f'        <p class="lr-stat__fig">{c["stat"]}</p>\n'
+            f'        <p class="lr-stat__label">{c["label"]}</p>\n'
+            f'        <p class="lr-stat__meta">{l["event"]} &middot; {l["when"]}</p>\n'
+            f'        <p class="lr-stat__note">{c["note"]}</p>\n'
+            f'        <p class="lr-stat__src">{source_link(l)}</p>\n'
+            f'      </li>')
+        ledger.append(f'<li>{c["stat"]}<span> {c["label"]}</span></li>')
+    return "\n".join(lis), "".join(ledger)
+
+
+# ---- 4: the reel ------------------------------------------------------------
+
+def tunnel_html():
+    lis, rail = [], []
+    n = len(TUNNEL)
+    for i, lid in enumerate(TUNNEL):
+        l = BY_ID[lid]
+        k = l["image"]
+        kind = "doc" if k in DOCUMENTS else "photo"
+        big = LG.get(k, (IMAGES[k][0], IMAGES[k][1], IMAGES[k][2]))
+        lis.append(
+            f'      <li class="lr-ms lr-ms--{"a" if i % 2 == 0 else "b"} lr-ms--{kind}" id="ms-{lid}" data-i="{i}" '
+            f'data-year="{l["year"]}">\n'
+            f'        <article class="lr-ms__inner" aria-labelledby="ms-{lid}-t">\n'
+            f'          <p class="lr-ms__year" aria-hidden="true">{l["year"]}</p>\n'
+            f'          <figure class="lr-ms__media is-{kind}">\n'
+            f'            <a class="lr-ms__open" data-cursor="open" href="{big[0]}" '
+            f'data-large="{big[0]}" data-w="{big[1]}" data-h="{big[2]}" data-i="{i}" '
+            f'aria-haspopup="dialog" aria-label="Look closely: {plain(caption(k))}">'
+            f'<span class="lr-ms__frame" style="--ar:{IMAGES[k][1] / IMAGES[k][2]:.4f}">{img_html(k, "(max-width: 899px) 86vw, 40vw", lazy=i > 1)}</span>'
+            f'</a>\n'
+            f'            <figcaption>{caption(k)}</figcaption>\n'
+            f'          </figure>\n'
+            f'          <div class="lr-ms__copy">\n'
+            f'            <p class="lr-ms__meta"><span>{cats_label(l)}</span><span>{l["when"]}</span></p>\n'
+            f'            <h3 class="lr-ms__title" id="ms-{lid}-t">{l["title"]}</h3>\n'
+            f'            <p class="lr-ms__event">{l["event"]}</p>\n'
+            f'            <p class="lr-ms__text">{l["text"]}</p>\n'
+            f'            <p class="lr-ms__src">{source_link(l)}</p>\n'
+            f'          </div>\n'
+            f'        </article>\n'
+            f'      </li>')
+        rail.append(f'<li style="--f:{i / (n - 1):.4f}"><button type="button" data-go="{i}" '
+                    f'aria-label="Go to {l["year"]}: {plain(l["title"])}"><span>{l["year"]}</span>'
+                    f'</button></li>')
+    return "\n".join(lis), "".join(rail)
+
+
+# ---- 5: featured -------------------------------------------------------------
 
 def features_html():
     out = []
-    for i, (lid, headline, comp) in enumerate(FEATURES):
+    for i, (lid, headline, tpl, stat, _ev) in enumerate(FEATURES):
         l = BY_ID[lid]
+        words = headline.split(" ")
+        title = " ".join(f'<span class="lr-line"><span style="--i:{j}">{w}</span></span>'
+                         for j, w in enumerate(words))
         names = ""
         if l["names"]:
             names = ('<ul class="lr-feature__names">' + "".join(
                 f'<li>{n}</li>' for n, _ in l["names"]) + '</ul>')
-        words = headline.split(" ")
-        title = " ".join(f'<span class="lr-line"><span style="--i:{j}">{w}</span></span>'
-                         for j, w in enumerate(words))
+        fig = (f'<p class="lr-feature__stat" style="--len:{fit_var(stat)}">{stat}</p>' if stat else "")
         out.append(
-            f'  <article class="lr-feature lr-feature--{comp}" id="featured-{lid}" '
+            f'  <article class="lr-feature lr-feature--{tpl}" id="featured-{lid}" '
             f'aria-labelledby="feature-{lid}-title">\n'
             f'    <figure class="lr-feature__media">'
-            f'<div class="lr-feature__frame">{img_html(l["image"], "100vw")}</div>'
+            f'<div class="lr-feature__frame">{img_html(l["image"], "100vw", eager=i == 0, lazy=i > 0)}</div>'
             f'<figcaption class="lr-feature__cap">{caption(l["image"])}</figcaption></figure>\n'
             f'    <div class="lr-feature__copy">\n'
             f'      <p class="lr-feature__index" aria-hidden="true">{i + 1:02d}</p>\n'
-            f'      {meta_html(l, "lr-feature__meta")}\n'
+            f'      <p class="lr-feature__meta"><span>{cats_label(l)}</span><span>{l["when"]}</span></p>\n'
             f'      <h3 class="lr-feature__title" id="feature-{lid}-title" '
             f'aria-label="{plain(headline)}">{title}</h3>\n'
+            f'      {fig}\n'
             f'      <p class="lr-feature__event">{l["event"]}</p>\n'
             f'      <p class="lr-feature__text">{l["text"]}</p>\n'
             f'      {names}\n'
-            f'      {source_html(l, "lr-source lr-source--dark")}\n'
+            f'      <p class="lr-feature__src">{source_link(l)}</p>\n'
             f'    </div>\n'
             f'  </article>')
     return "\n".join(out)
 
 
-def filters_html():
+# ---- 6: the archive ----------------------------------------------------------
+
+def archive_filters_html():
     total = len(LAURELS)
-    cats = [f'<li><button type="button" class="lr-cat" data-cat="all" aria-pressed="true">'
-            f'<span class="lr-cat__n">00</span><span class="lr-cat__name">All</span>'
-            f'<span class="lr-cat__count">{total}</span></button></li>']
+    cats = [f'<li><button type="button" class="lr-cat-btn" data-cat="all" aria-pressed="true">'
+            f'<span class="lr-cat-btn__n">00</span><span class="lr-cat-btn__name">All</span>'
+            f'<span class="lr-cat-btn__c">{total}</span></button></li>']
     for i, (key, name) in enumerate(CATEGORIES, 1):
         n = sum(1 for l in LAURELS if key in l["cats"])
-        cats.append(f'<li><button type="button" class="lr-cat" data-cat="{key}" '
-                    f'aria-pressed="false"><span class="lr-cat__n">{i:02d}</span>'
-                    f'<span class="lr-cat__name">{name}</span>'
-                    f'<span class="lr-cat__count">{n}</span></button></li>')
+        cats.append(f'<li><button type="button" class="lr-cat-btn" data-cat="{key}" '
+                    f'aria-pressed="false"><span class="lr-cat-btn__n">{i:02d}</span>'
+                    f'<span class="lr-cat-btn__name">{name}</span>'
+                    f'<span class="lr-cat-btn__c">{n}</span></button></li>')
     levels = ['<button type="button" class="lr-opt" data-level="all" aria-pressed="true">'
               'Every level</button>']
     for key, name in LEVELS:
@@ -1169,104 +1399,64 @@ def filters_html():
                      'aria-pressed="false">Undated</button>')
     return (
         '    <div class="lr-filters" data-lr-filters hidden>\n'
-        '      <ol class="lr-cats" aria-label="Filter by category">\n        '
-        + "\n        ".join(cats) +
+        '      <ol class="lr-fcats" aria-label="Filter by field">\n        ' + "\n        ".join(cats) +
         '\n      </ol>\n'
         '      <div class="lr-opts">\n'
-        '        <div class="lr-opts__group" role="group" aria-labelledby="lr-level-label">'
-        '<span class="lr-opts__label" id="lr-level-label">Level</span>'
-        + "".join(levels) + '</div>\n'
         '        <div class="lr-opts__group" role="group" aria-labelledby="lr-year-label">'
-        '<span class="lr-opts__label" id="lr-year-label">Year</span>'
-        + "".join(years) + '</div>\n'
+        '<span class="lr-opts__label" id="lr-year-label">Year</span>' + "".join(years) + '</div>\n'
+        '        <div class="lr-opts__group" role="group" aria-labelledby="lr-level-label">'
+        '<span class="lr-opts__label" id="lr-level-label">Level</span>' + "".join(levels) + '</div>\n'
         '      </div>\n'
         '    </div>')
 
 
-def grid_html():
+def rows_html():
     out = []
     for l in LAURELS:
-        weight = l["weight"]
-        has_img = bool(l["image"]) and weight != "text"
-        media = ""
-        if has_img:
-            sizes = {"feature": "(max-width: 760px) 92vw, 62vw",
-                     "wide": "(max-width: 760px) 92vw, 50vw",
-                     "tall": "(max-width: 760px) 92vw, 32vw",
-                     "small": "(max-width: 760px) 40vw, 30vw"}[weight]
-            media = (f'<figure class="lr-card__media"><div class="lr-card__frame">'
-                     f'{img_html(l["image"], sizes)}</div>'
-                     f'<figcaption class="lr-card__cap">{caption(l["image"])}</figcaption>'
-                     f'</figure>')
-        figure = (f'<p class="lr-card__figure" aria-hidden="true">{l["figure"]}</p>'
-                  if weight == "text" and l.get("figure") else "")
-        year = l["year"] or "undated"
         names = ""
         if l["names"]:
-            names = ('<ul class="lr-card__names">' + "".join(
+            names = ('<ul class="lr-row__names">' + "".join(
                 f'<li><b>{n}</b> {what}</li>' for n, what in l["names"]) + '</ul>')
-        pending = " is-pending" if l.get("pending") else ""
+        img = ""
+        peek = ""
+        if l["image"]:
+            k = l["image"]
+            src = IMAGES[k][0]
+            peek = f' data-peek="{src}" data-peek-w="{IMAGES[k][1]}" data-peek-h="{IMAGES[k][2]}"'
+            img = (f'<figure class="lr-row__fig"><div class="lr-row__frame">'
+                   f'{img_html(k, "(max-width: 899px) 86vw, 30vw")}</div>'
+                   f'<figcaption>{caption(k)}</figcaption></figure>')
+        q = plain_text(" ".join([l["title"], l["result"], l["event"], l["text"], cats_label(l),
+                                 l["when"]] + [n for n, _ in l["names"]])).lower()
         out.append(
-            f'      <li class="lr-item lr-item--{weight}{pending}" id="laurel-{l["id"]}" '
-            f'data-cats="{" ".join(l["cats"])}" data-level="{l["level"] or ""}" '
-            f'data-year="{year}">\n'
-            f'        <article class="lr-card" aria-labelledby="card-{l["id"]}">\n'
-            f'          {media}{figure}\n'
-            f'          <div class="lr-card__body">\n'
-            f'            {meta_html(l, "lr-card__meta")}\n'
-            f'            <h3 class="lr-card__title" id="card-{l["id"]}">'
-            f'<button type="button" class="lr-card__open" aria-haspopup="dialog" '
-            f'data-laurel="{l["id"]}">{l["title"]}</button></h3>\n'
-            f'            <p class="lr-card__result">{l["result"]}</p>\n'
-            f'            <div class="lr-card__more">\n'
-            f'              <p class="lr-card__event">{l["event"]}</p>\n'
-            f'              <p class="lr-card__text">{l["text"]}</p>\n'
-            f'              {names}\n'
-            f'              {source_html(l)}\n'
-            f'            </div>\n'
+            f'      <li class="lr-row" id="laurel-{l["id"]}" data-cats="{" ".join(l["cats"])}" '
+            f'data-level="{l["level"] or ""}" data-year="{l["year"] or "undated"}" '
+            f'data-q="{html.escape(q, quote=True)}"{peek}>\n'
+            f'        <div class="lr-row__line">\n'
+            f'          <h3 class="lr-row__h"><button type="button" class="lr-row__btn" '
+            f'aria-expanded="false" aria-controls="row-{l["id"]}" data-cursor="view">'
+            f'<span class="lr-row__year">{year_text(l)}</span>'
+            f'<span class="lr-row__title">{l["title"]}<small class="lr-row__result">{l["result"]}</small></span>'
+            f'<span class="lr-row__cat">{CAT_NAME[l["cats"][0]]}</span>'
+            f'<span class="lr-row__plus" aria-hidden="true"></span></button></h3>\n'
+            f'          {source_link(l, "lr-row__src")}\n'
+            f'        </div>\n'
+            f'        <div class="lr-row__panel" id="row-{l["id"]}" hidden>\n'
+            f'          <div class="lr-row__body">\n'
+            f'            <p class="lr-row__meta">{cats_label(l)}'
+            f'{" &middot; " + LEVEL_NAME[l["level"]] if l["level"] else ""} &middot; {l["when"]}</p>\n'
+            f'            <p class="lr-row__event">{l["event"]}</p>\n'
+            f'            <p class="lr-row__text">{l["text"]}</p>\n'
+            f'            {names}\n'
+            f'            {source_line(l)}\n'
             f'          </div>\n'
-            f'        </article>\n'
+            f'          {img}\n'
+            f'        </div>\n'
             f'      </li>')
     return "\n".join(out)
 
 
-def timeline_html():
-    span = LAST_YEAR - FIRST_YEAR
-    marks, panels = [], []
-    for i, y in enumerate(sorted(YEARS)):
-        items = [l for l in LAURELS if l["year"] == y]
-        n = len(items)
-        x = (y - FIRST_YEAR) / span
-        marks.append(
-            f'<li style="--x:{x:.4f}" class="{"is-alt" if i % 2 else ""}">'
-            f'<button type="button" class="lr-tl__year" data-year="{y}" aria-pressed="false" '
-            f'aria-controls="lr-tl-{y}"><span class="lr-tl__y">{y}</span>'
-            f'<span class="lr-tl__n">{n} {"laurel" if n == 1 else "laurels"}</span>'
-            f'</button></li>')
-        rows = "".join(
-            f'<li><a href="#laurel-{l["id"]}" data-laurel-link="{l["id"]}">'
-            f'<span class="lr-tl__cat">{cats_label(l)}</span>'
-            f'<span class="lr-tl__title">{l["title"]}</span>'
-            f'<span class="lr-tl__when">{l["when"]}</span></a></li>' for l in items)
-        panels.append(
-            f'<div class="lr-tl__panel" id="lr-tl-{y}" data-year="{y}">'
-            f'<h3 class="lr-tl__head"><span>{y}</span> '
-            f'<small>{n} {"laurel" if n == 1 else "laurels"} on record</small></h3>'
-            f'<ol class="lr-tl__list">{rows}</ol>'
-            f'<button type="button" class="lr-tl__show" data-show-year="{y}">'
-            f'Show {y} in the archive <span aria-hidden="true">&uarr;</span></button></div>')
-    return (
-        '    <div class="lr-tl__rail" data-lr-rail>\n'
-        f'      <span class="lr-tl__end lr-tl__end--start">{FIRST_YEAR}</span>\n'
-        '      <div class="lr-tl__track"><span class="lr-tl__line" aria-hidden="true"></span>'
-        '<span class="lr-tl__handle" aria-hidden="true"></span>\n'
-        '        <ol class="lr-tl__years" aria-label="Years with laurels on record">'
-        + "".join(marks) + '</ol>\n'
-        '      </div>\n'
-        '      <span class="lr-tl__end lr-tl__end--end">Today</span>\n'
-        '    </div>\n'
-        '    <div class="lr-tl__panels" data-lr-panels>' + "".join(panels) + '</div>')
-
+# ---- 7: the names ------------------------------------------------------------
 
 def names_html():
     """The roll of names. Sizes and drift are fixed here, not random, so the
@@ -1298,35 +1488,50 @@ def names_html():
     return "\n".join(out), len(order)
 
 
-def hero_points_json():
-    """The laurels as points for the opening field: enough to preview."""
-    pts = [{"y": l["year"] or "", "t": plain(l["title"]), "c": plain(cats_label(l))}
-           for l in LAURELS]
-    return json.dumps(pts, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-
-
 def expand(content):
+    errors, warns = audit()
+    if errors:
+        raise SystemExit("laurels audit failed:\n" + "\n".join(f"  {a}: {b}" for a, b in errors))
     names, count = names_html()
-    people = sum(len(l["names"]) for l in LAURELS)
-    return (content.replace("{{LAURELS_FORMS}}", forms_html())
-                   .replace("{{LAURELS_NUMBERS}}", numbers_html())
-                   .replace("{{LAURELS_REEL}}", reel_html())
+    cats, cat_index = journey_html()
+    stats, ledger = counted_html()
+    ms, rail = tunnel_html()
+    units = 2.0 + 0.85 * len(CATEGORIES)
+    return (content.replace("{{LAURELS_HERO}}", hero_html())
+                   .replace("{{LAURELS_CATEGORIES}}", cats)
+                   .replace("{{LAURELS_CAT_INDEX}}", cat_index)
+                   .replace("{{LAURELS_CAT_UNITS}}", f"{units:.2f}")
+                   .replace("{{LAURELS_STATS}}", stats)
+                   .replace("{{LAURELS_LEDGER}}", ledger)
+                   .replace("{{LAURELS_MILESTONES}}", ms)
+                   .replace("{{LAURELS_RAIL}}", rail)
+                   .replace("{{LAURELS_MILESTONE_N}}", str(len(TUNNEL)))
                    .replace("{{LAURELS_FEATURES}}", features_html())
-                   .replace("{{LAURELS_FILTERS}}", filters_html())
-                   .replace("{{LAURELS_GRID}}", grid_html())
-                   .replace("{{LAURELS_TIMELINE}}", timeline_html())
+                   .replace("{{LAURELS_FILTERS}}", archive_filters_html())
+                   .replace("{{LAURELS_ROWS}}", rows_html())
                    .replace("{{LAURELS_SEASON}}", season_html())
                    .replace("{{LAURELS_NAMES}}", names)
                    .replace("{{LAURELS_NAME_COUNT}}", str(count))
                    .replace("{{LAURELS_COUNT}}", str(len(LAURELS)))
-                   .replace("{{LAURELS_YEAR_SPAN}}", f"{min(YEARS)}&ndash;{max(YEARS)}")
-                   .replace("{{LAURELS_POINTS}}", hero_points_json()))
+                   .replace("{{LAURELS_FIRST}}", str(FIRST_YEAR))
+                   .replace("{{LAURELS_LAST}}", str(LAST_YEAR))
+                   .replace("{{LAURELS_OPENED}}", SCHOOL_OPENED[0])
+                   .replace("{{LAURELS_OPENED_HREF}}", SCHOOL_OPENED[1]))
 
 
 if __name__ == "__main__":
-    print(f"{len(LAURELS)} laurels, {len(YEARS)} years: {', '.join(map(str, sorted(YEARS)))}")
+    print(f"{len(LAURELS)} laurels, {FIRST_YEAR}-{LAST_YEAR}, {len(YEARS)} years: "
+          f"{', '.join(map(str, sorted(YEARS)))}")
     for c, name in CATEGORIES:
         print(f"  {name:14} {sum(1 for l in LAURELS if c in l['cats'])}")
+    errors, warns = audit()
+    print(f"\naudit: {len(errors)} errors, {len(warns)} notes")
+    for a, b in errors:
+        print(f"  ERROR  {a}: {b}")
+    for a, b in warns:
+        print(f"  note   {a}: {b}")
+    print(f"  {sum(1 for l in LAURELS if not l['image'])} of {len(LAURELS)} records have no image "
+          f"(typography carries them)")
     print("\nHeld back:")
     for what, why in HELD:
         print(f"  - {what}: {why}")
