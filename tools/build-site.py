@@ -2130,7 +2130,17 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "captures":
         head = head.replace("</head>",
             f'<link rel="stylesheet" href="assets/css/captures-featured.css?{CACHE_BUST}">\n'
-            f'<link rel="stylesheet" href="assets/css/captures-gallery.css?{CACHE_BUST}">\n</head>')
+            f'<link rel="stylesheet" href="assets/css/captures-gallery.css?{CACHE_BUST}">\n'
+            f'<link rel="stylesheet" href="assets/css/captures-hero.css?{CACHE_BUST}">\n'
+            # "Through our eyes" starts from its dark first frame. That is
+            # decided before first paint, so the field is never drawn
+            # finished and then hidden; a timer undoes it if the page script
+            # never starts, which leaves the field's written composition.
+            '<script>(function(){var d=document.documentElement;'
+            'if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;'
+            'd.classList.add("toe-motion");'
+            'setTimeout(function(){if(!window.__toeBooted)d.classList.remove("toe-motion")},6000)'
+            '})()</script>\n</head>')
     if slug == "parent-portal":
         # This page has no shared curtain, including its no-script override.
         curtain_note = head.index("<!-- The opening curtain")
@@ -2323,6 +2333,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                        .replace("{{MATH_FILTERS}}", mathchallenge.filters_html() if slug == "math-challenge" else "")
                        .replace("{{MATH_ARCHIVE}}", mathchallenge.archive_html() if slug == "math-challenge" else "")
                        .replace("{{CAPTURES_GALLERY}}", captures.gallery_html() if slug == "captures" else "")
+                       .replace("{{CAPTURES_HERO_BEHIND}}", captures.hero_html()[0] if slug == "captures" else "")
+                       .replace("{{CAPTURES_HERO_OVER}}", captures.hero_html()[1] if slug == "captures" else "")
                        .replace("{{CAPTURES_END}}", captures.end_html() if slug == "captures" else "")
                        .replace("{{CAPTURES_END_CAPTION}}", captures.END[2])
                        .replace("{{CAPTURES_COUNT_CAP}}", captures.count_word().capitalize())
@@ -2460,6 +2472,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "captures":
         parts.append(f'<script src="assets/js/captures-featured.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/captures-hero.js?{CACHE_BUST}" defer></script>')
     if slug == "parent-portal":
         parts.append(f'<script src="assets/js/parent-portal-motion.js?{CACHE_BUST}" defer></script>')
     if wall:

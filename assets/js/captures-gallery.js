@@ -43,7 +43,7 @@
     return fetched[url];
   }
 
-  function show(i, animate) {
+  function show(i, animate, hint) {
     i = wrap(i);
     current = i;
     var item = items[i], tile = tileImage(i);
@@ -55,9 +55,11 @@
     img.height = h;
     // The full-size image if it is already here (a neighbour fetched in
     // advance); otherwise the tile, which is small, and which the page has
-    // usually loaded already.
+    // usually loaded already — or, from "Through our eyes", the copy that
+    // field has on screen, which certainly is.
     var full = fetchFull(i);
-    img.src = full.complete && full.naturalWidth ? full.src : (tile.currentSrc || tile.src);
+    img.src = full.complete && full.naturalWidth ? full.src
+            : (hint || (tile.complete && tile.naturalWidth ? tile.currentSrc || tile.src : tile.src));
     if (animate) img.className = "is-entering";
 
     // The photograph on screen stays until the next one has decoded, so that
@@ -98,12 +100,40 @@
     else full.addEventListener("load", swap);
   }
 
-  function open(i, from) {
+  function open(i, from, rect, hint) {
     opener = from;
-    show(i, false);
+    if (rect) box.style.setProperty("--cv-ar",
+      (+items[wrap(i)].getAttribute("data-cg-w") / +items[wrap(i)].getAttribute("data-cg-h")).toFixed(4));
+    show(i, false, hint);
     box.showModal();
     document.body.classList.add("has-lightbox");
+    if (rect) fly(rect);
   }
+
+  // From "Through our eyes": the photograph leaves its card where the card
+  // is on screen, and grows into the frame, while the ground comes up behind
+  // it; the caption and controls follow once it has nearly arrived.
+  function fly(rect) {
+    var to = frame.getBoundingClientRect();
+    if (!to.width || !to.height || typeof frame.animate !== "function") return;
+    var dx = rect.left - to.left, dy = rect.top - to.top;
+    var sx = rect.width / to.width, sy = rect.height / to.height;
+    box.classList.add("cv--from");
+    var flight = frame.animate([
+      { transformOrigin: "0 0", transform: "translate(" + dx + "px," + dy + "px) scale(" + sx + "," + sy + ")" },
+      { transformOrigin: "0 0", transform: "none" }
+    ], { duration: 640, easing: "cubic-bezier(.22,.8,.16,1)" });
+    flight.onfinish = flight.oncancel = function () {
+      window.setTimeout(function () { box.classList.remove("cv--from"); }, 520);
+    };
+  }
+
+  document.addEventListener("captures:view", function (e) {
+    var d = e.detail || {};
+    if (box.open || typeof d.index !== "number" || !items[d.index]) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    open(d.index, d.opener || null, reduce ? null : d.from, d.src);
+  });
 
   function step(d) { if (box.open) show(current + d, true); }
 

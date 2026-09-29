@@ -1,0 +1,387 @@
+/* CIRS Captures — "Through our eyes", the field of photographs between the
+   featured compositions and the journal. Loaded only on captures.html.
+
+   One perspective, on the stage, is the camera. The cards are laid out in
+   two 3D layers either side of the title: the back and middle cards behind
+   it, the front cards over it, both moved by the same camera, so they read
+   as one space with the title standing in it. Each card is written where it
+   is seen (tools/captures.py, HERO): its position and width are divided by
+   its depth's scale here, so a card further back sits further out and is
+   laid out larger, and the perspective brings it back to where it was
+   written. That also keeps the photographs sharp: nothing is ever drawn
+   larger than it was laid out.
+
+   What is written here is the finished composition, which is what no
+   scripting and reduced motion see. html.toe-motion (set before first paint
+   by the page head) is the entrance's first frame: the stage, its ground
+   and grain, and nothing else yet. assets/js/captures-hero.js takes it from
+   there and, once the section is reached, runs the entrance, the camera and
+   the exit, all on the shared GSAP ticker. */
+
+.toe{
+  --toe-ground:#110C16;
+  --toe-exit:90vh;
+  --W:100vw;
+  --H:100vh;
+  --P:calc(max(100vw, 100vh) * .95);
+  position:relative;
+  z-index:1;
+  background:var(--toe-ground);
+  color:var(--on-dark);
+}
+@supports (height:100svh){
+  .toe{ --H:100svh; --P:calc(max(100vw, 100svh) * .95); }
+}
+
+/* Between the featured photographs, whose ground is a green-black, and this
+   one's purple-black: both are nearly black, so a short ramp is enough. */
+.toe-seam{
+  height:clamp(80px, 12vh, 160px);
+  background:linear-gradient(to bottom, #141A15 0%, #121217 55%, var(--toe-ground, #110C16) 100%);
+}
+body.captures .film__seam.toe-seam--out{
+  /* The foot of the stage at the end of its exit, when the shade is over it. */
+  --film-seam-top:#0B080E;
+  --film-seam-fold:#0E0B12;
+  --film-seam-rise:#6C6672;
+}
+
+.toe__stage{
+  position:relative;
+  height:100vh;
+  height:100svh;
+  overflow:hidden;
+  perspective:var(--P);
+  perspective-origin:50% 50%;
+  background:
+    radial-gradient(120% 90% at 50% 46%, #1E1626 0%, #150F1B 52%, #0C0910 100%)
+    var(--toe-ground);
+}
+
+/* Grain: fixed, faint, never animated. */
+.toe__stage::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:6;
+  pointer-events:none;
+  opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px 160px;
+}
+
+
+/* ------------------------------------------------------------
+   The field
+   ------------------------------------------------------------ */
+
+.toe__world{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  transform-style:preserve-3d;
+  /* The camera turns about the middle of the field's depth. */
+  transform-origin:50% 50% calc(var(--P) * -.45);
+  pointer-events:none;
+}
+.toe__world--over{ z-index:3; }
+
+.toe__card{
+  /* The layout in use: wide by default, the phone's below 720px. */
+  --x:var(--sx);
+  --y:var(--sy);
+  --cw:var(--w);
+  --cz:var(--z);
+  --crx:var(--rx);
+  --cry:var(--ry);
+  --crz:var(--rz);
+  --k:calc(1 - var(--cz));
+  --fog:.08;
+  position:absolute;
+  left:50%;
+  top:50%;
+  display:block;
+  width:calc(var(--cw) * var(--k) * var(--W));
+  aspect-ratio:var(--ar);
+  margin-left:calc(var(--cw) * var(--k) * var(--W) / -2);
+  margin-top:calc(var(--cw) * var(--k) * var(--W) / var(--ar) / -2);
+  transform:
+    translate3d(calc(var(--x) * var(--k) * var(--W)),
+                calc(var(--y) * var(--k) * var(--H)),
+                calc(var(--cz) * var(--P)))
+    rotateX(calc(var(--crx) * 1deg))
+    rotateY(calc(var(--cry) * 1deg))
+    rotateZ(calc(var(--crz) * 1deg));
+  backface-visibility:hidden;
+  pointer-events:auto;
+  color:inherit;
+  text-decoration:none;
+  outline:none;
+}
+.toe__card--mid{ --fog:.26; }
+.toe__card--back{ --fog:.5; }
+
+.toe__pic{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  border-radius:2px;
+  background:#1A1420;
+  box-shadow:0 calc(var(--k) * 26px) calc(var(--k) * 60px) calc(var(--k) * -22px) rgba(4,2,6,.72);
+}
+.toe__pic img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+
+/* Depth is a veil of the ground over the photograph, not transparency, so
+   cards never show through one another. */
+.toe__fog{
+  position:absolute;
+  inset:0;
+  border-radius:2px;
+  background:#0E0A12;
+  opacity:var(--fog);
+  pointer-events:none;
+  transition:opacity .55s var(--e);
+}
+
+/* The photograph's chapter and caption, under it. The type is scaled up by
+   the card's depth, so every caption is seen at the same size. */
+.toe__meta{
+  position:absolute;
+  left:0;
+  top:100%;
+  width:max-content;
+  max-width:calc(24em + 2px);
+  padding-top:.7em;
+  overflow:hidden;
+  font-family:var(--font-ui);
+  font-size:calc(.74rem * var(--k));
+  line-height:1.4;
+  letter-spacing:.01em;
+  color:var(--on-dark-soft);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .5s var(--e);
+}
+.toe__card--end .toe__meta{ left:auto; right:0; text-align:right; }
+.toe__meta-in{
+  display:block;
+  transform:translateY(105%);
+  transition:transform .6s var(--e);
+}
+.toe__meta-ch{
+  display:block;
+  margin-bottom:.2em;
+  font-size:.86em;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--on-dark-mute);
+}
+
+/* Without the script (or with reduced motion), a card answers the pointer
+   and the keyboard on its own. */
+.toe:not(.is-live) .toe__card:is(:hover, :focus-visible) .toe__fog{ opacity:0; }
+.toe:not(.is-live) .toe__card:is(:hover, :focus-visible) .toe__meta{ opacity:1; }
+.toe:not(.is-live) .toe__card:is(:hover, :focus-visible) .toe__meta-in{ transform:none; }
+.toe__card:focus-visible .toe__pic{ outline:2px solid var(--gold); outline-offset:4px; }
+
+/* Driven by the script: no transitions to fight it. */
+.toe.is-live .toe__fog,
+.toe.is-live .toe__meta,
+.toe.is-live .toe__meta-in{ transition:none; }
+.toe.is-live .toe__card{ will-change:transform, opacity; }
+.toe.is-live .toe__world{ will-change:transform; }
+
+
+/* ------------------------------------------------------------
+   The title
+   ------------------------------------------------------------ */
+
+.toe__head{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  display:grid;
+  place-content:center;
+  justify-items:start;
+  pointer-events:none;
+}
+/* A soft darkening under the lettering, so the dimmed cards behind it never
+   thin it. */
+.toe__head::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:min(84vw, 1100px);
+  height:62%;
+  transform:translate(-50%, -50%);
+  background:radial-gradient(closest-side, rgba(14,10,18,.72), rgba(14,10,18,.42) 55%, rgba(14,10,18,0));
+}
+.toe__title{
+  position:relative;
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:clamp(3.2rem, 10.2vw, 10.4rem);
+  line-height:.92;
+  letter-spacing:-.02em;
+  color:var(--on-dark);
+}
+.toe__line{
+  display:block;
+  /* Room for the descender of the g and the overhang of the italic-ish
+     terminals, so the mask used by the entrance never trims a glyph. */
+  padding-bottom:.06em;
+}
+.toe__line > span{ display:inline-block; }
+.toe__line--2{ padding-left:1.1em; }
+
+.toe__accent{
+  position:relative;
+  display:block;
+  width:clamp(44px, 4.4vw, 64px);
+  height:2px;
+  margin-top:clamp(16px, 3vh, 30px);
+  background:var(--gold);
+  transform-origin:left center;
+}
+
+
+/* ------------------------------------------------------------
+   The foot: where this is, and the ways on
+   ------------------------------------------------------------ */
+
+.toe__foot{
+  position:absolute;
+  left:var(--gut);
+  right:var(--gut);
+  bottom:clamp(18px, 4.5vh, 40px);
+  z-index:4;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  pointer-events:none;
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  line-height:1.4;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--on-dark-soft);
+}
+.toe__foot p{ margin:0; }
+.toe__index span{ color:var(--on-dark); }
+/* One line, under the page's floating "On this page" button. */
+.toe__controls{
+  display:flex;
+  align-items:baseline;
+  gap:clamp(18px, 2.6vw, 36px);
+}
+.toe__hint{ color:var(--on-dark-mute); }
+.toe__browse{
+  pointer-events:auto;
+  display:inline-block;
+  padding:6px 0;
+  color:var(--on-dark);
+  text-decoration:none;
+  border-bottom:1px solid rgba(250,249,243,.32);
+  transition:color .3s var(--e), border-color .3s var(--e);
+}
+.toe__browse:hover{ color:var(--gold-lit); border-color:var(--gold-lit); }
+.toe__browse:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; }
+
+/* The exit's darkening, over everything but the grain. */
+.toe__shade{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  background:#07050A;
+  opacity:0;
+  pointer-events:none;
+}
+
+/* Without scripting the hint has nothing to drag. */
+.toe:not(.is-live) .toe__hint{ display:none; }
+
+
+/* ------------------------------------------------------------
+   With motion: the stage is held while the reader scrolls out of it
+   ------------------------------------------------------------ */
+
+.toe-motion .toe{ height:calc(100vh + var(--toe-exit)); }
+@supports (height:100svh){
+  .toe-motion .toe{ height:calc(100svh + var(--toe-exit)); }
+}
+.toe-motion .toe__stage{
+  position:sticky;
+  top:0;
+}
+
+/* The entrance's first frame: the ground and its grain. The script takes
+   every one of these from here, so nothing is drawn finished and then
+   hidden. */
+.toe-motion .toe__card{ opacity:0; }
+.toe-motion .toe__line{ clip-path:inset(125% -8% -30% -8%); transform:translateY(50px); }
+.toe-motion .toe__accent{ transform:scaleX(0); }
+.toe-motion [data-toe-foot]{ opacity:0; transform:translateY(10px); }
+
+.toe.is-live .toe__stage{ cursor:grab; }
+.toe.is-dragging .toe__stage,
+.toe.is-dragging .toe__card{ cursor:grabbing; }
+.toe.is-live .toe__stage{ touch-action:pan-y; }
+
+/* While the stage is held, the site's reading rule and back-to-top button
+   stay away, as they do through the opening. */
+body.captures.toe-on #progress,
+body.captures.toe-on #totop{
+  opacity:0;
+  pointer-events:none;
+}
+
+
+/* ------------------------------------------------------------
+   Phones: fewer photographs, less depth
+   ------------------------------------------------------------ */
+
+@media (max-width:720px){
+  .toe{ --toe-exit:70vh; }
+  .toe__card--wide{ display:none; }
+  .toe__card{
+    --x:var(--nsx);
+    --y:var(--nsy);
+    --cw:var(--nw);
+    --cz:var(--nz);
+    --crx:calc(var(--nrx) * .5);
+    --cry:calc(var(--nry) * .5);
+    --crz:var(--nrz);
+  }
+  .toe__card--nend .toe__meta{ left:auto; right:0; text-align:right; }
+  .toe__card--nstart .toe__meta{ left:0; right:auto; text-align:left; }
+  .toe__title{ font-size:clamp(3rem, 16vw, 5.4rem); }
+  .toe__line--2{ padding-left:.7em; }
+  .toe__head::before{ width:100vw; height:44%; }
+  /* Two rows: where this is, then the ways on, each on one line. */
+  .toe__foot{
+    flex-wrap:wrap;
+    row-gap:8px;
+    font-size:.66rem;
+    letter-spacing:.14em;
+  }
+  .toe__foot p,
+  .toe__browse{ white-space:nowrap; }
+  .toe__controls{ width:100%; justify-content:space-between; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .toe__fog,
+  .toe__meta,
+  .toe__meta-in{ transition:none; }
+}

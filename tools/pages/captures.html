@@ -55,7 +55,41 @@
     </div>
   </div>
 </section>
-<div class="film__seam" data-header-theme="dark" aria-hidden="true"></div>
+
+<!-- "Through our eyes": a field of journal photographs held in depth, the
+     way into the journal. Written here as its final composition, which is
+     what no scripting sees. With motion, assets/js/captures-hero.js makes the
+     field's one camera and brings it in from the dark when the section is
+     reached, then lets the reader lean it with the pointer and turn it by
+     dragging; every card opens the viewer on its photograph. The cards are
+     tools/captures.py (HERO), and assets/css/captures-hero.css lays them out. -->
+<div class="toe-seam" data-header-theme="dark" aria-hidden="true"></div>
+<section class="toe" id="through-our-eyes" aria-labelledby="toe-title" data-toe data-header-theme="dark">
+  <div class="toe__stage" data-toe-stage>
+    <div class="toe__world toe__world--behind" data-toe-world>
+{{CAPTURES_HERO_BEHIND}}
+    </div>
+    <div class="toe__head">
+      <h2 class="toe__title" id="toe-title">
+        <span class="toe__line" data-toe-line><span>Through</span></span>
+        <span class="toe__line toe__line--2" data-toe-line><span>our eyes.</span></span>
+      </h2>
+      <span class="toe__accent" data-toe-accent aria-hidden="true"></span>
+    </div>
+    <div class="toe__world toe__world--over" data-toe-world>
+{{CAPTURES_HERO_OVER}}
+    </div>
+    <div class="toe__foot">
+      <p class="toe__index" data-toe-foot><span>01</span> / Through our eyes</p>
+      <div class="toe__controls">
+        <p class="toe__hint" data-toe-foot aria-hidden="true">Drag to explore</p>
+        <a class="toe__browse" href="#photographs" data-toe-foot>Browse photographs <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="toe__shade" data-toe-shade aria-hidden="true"></div>
+  </div>
+</section>
+<div class="film__seam toe-seam--out" data-header-theme="dark" aria-hidden="true"></div>
 
 <!-- The journal. Each photograph is visible once in a chapter. Every tile
      links to its full-size image; assets/js/captures-gallery.js opens that

@@ -271,6 +271,19 @@
 .cv__frame img.is-entering{ animation:cv-in .28s var(--e) both; }
 @keyframes cv-in{ from{ opacity:0; } to{ opacity:1; } }
 
+/* Opened from "Through our eyes": the photograph flies out of its card
+   (assets/js/captures-gallery.js), so the ground comes up behind it rather
+   than being there at once, and the caption and controls arrive after it. */
+.cv.cv--from{ animation:cv-ground .5s var(--e) both; }
+.cv.cv--from::backdrop{ background:transparent; }
+.cv--from .cv__frame{ background:transparent; }
+.cv--from .cv__caption{ animation:cv-rise .5s .38s var(--e) both; }
+/* Opacity only: a transform on the bar would move the buttons it places. */
+.cv--from .cv__bar,
+.cv--from .cv__close{ animation:cv-in .5s .38s var(--e) both; }
+@keyframes cv-ground{ from{ background-color:rgba(8,8,7,0); } }
+@keyframes cv-rise{ from{ opacity:0; transform:translateY(6px); } }
+
 .cv__caption{
   max-width:62ch;
   min-height:3.2em;
