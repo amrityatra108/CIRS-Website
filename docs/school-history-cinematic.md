@@ -35,7 +35,7 @@ focus return. Longer accounts also have native inline disclosures.
 Mobile, reduced motion, unavailable WebGL, texture failure and context loss use
 the readable photograph-and-text document. A successful texture load precedes
 enabling the enhanced layout. Pixel ratio is capped at 1.5; textures load around
-the active chapter, duplicate portrait textures are shared, and rendering stops
+the active chapter, every photographic plane has a distinct source, and rendering stops
 offscreen, while idle and in hidden tabs. Page exit disposes textures,
 geometries, materials, the renderer, observers and page listeners. Font loading
 and viewport changes refresh geometry. Changing reduced motion clears the
@@ -60,6 +60,8 @@ load and after geometry changes.
   existing record interaction controller.
 - `tools/stage-deploy.py`: explicitly includes the dynamically imported scene.
 - `tools/make-history-supplied.py`: repeatable proportion-preserving JPEG cuts.
+- `tools/make-history-distinct.py`: distinct official-source photographs and
+  an unaltered first-page rendering of the 2025 Annual Report.
 - `assets/img/history/supplied-{rupee,opening,isa,poland}-{sm,lg}.jpg`.
 - `assets/documents/school-info/annual-report-2019.pdf`: the historical report
   from remote main, preserving the original 2019 citation now that the current
@@ -110,6 +112,11 @@ they and the review evidence are excluded from staged deployment.
 | [Poland collaboration](https://drive.google.com/file/d/1sbEgPvkKlsMM9_MO_ys1gvk1x1IUnCsM/view) | A readable classroom whiteboard names the CIRS–Poland advertising project and February 2014, corroborating the existing newsletter record. |
 | Existing Gurudev, Vision Award and document exhibits | Existing source records and captions retained. Undated portraits are labelled as such. Historical document pages remain documents, not invented event photographs. |
 | Campus opening/arrival | Existing school assets `forest-air.jpg` and `campus-band.jpg`. Presented as the campus today, never as 1970s or 1984 photographs. |
+| Gurudev with Guruji and fellow students | [Chinmaya Mission's Guruji biography](https://www.chinmayamission.com/global/swami-tejomayananda). Context for the founding vision; photograph date unrecorded, with no school occasion inferred. |
+| Sidhbari memorial | [Chinmaya Archives](https://archives.chinmayamission.com/sidhbari-samadhi-sthal). Explicitly captioned as Gurudev's Samadhi Sthal at Sidhbari; not presented as a photograph of the 1993 ceremony. |
+| Guruji portrait | The official Guruji biography above. Context portrait of the project leader; not presented as a construction photograph from 1994. |
+| 2025 chapter | First page of the school's published Annual Report, 7 October 2025. Replaces the repeated contemporary campus image. |
+| Archive closing | The existing `campus-lawn.jpg` courtyard photograph, on every viewport. Distinct from the arrival and opening photographs. |
 
 Other inspected supplied files were not assigned to an event solely by their
 filenames. No historical photographs were generated or fabricated. No unsupported
@@ -179,3 +186,36 @@ School History's repeat-build check passed. The authorised release integrates
 the scoped change onto current main. Its full link check passes: **95 pages,
 14,563 references**, with no orphan errors. Why CIRS and other generated routes
 remain unchanged from current main after the release build.
+
+## Distinct-image correction
+
+The owner reported the portrait repeated on neighboring planes. The controller
+had borrowed the first chapter's portrait for chapters with no image and also
+reused the arrival campus image in the recent chapter. The correction removes
+both overrides and supplies the distinct, attributed exhibits listed above.
+The original close portrait appears only in the typography expansion. Source
+generation asserts unique chapter assignments; the WebGL scene rejects repeated
+image assignments, including small/large aliases, and uses the readable fallback.
+
+Archive records retain every original account, exhibit caption and citation.
+Where an exhibit already appears in a chapter, its record links to the full image
+instead of displaying it again. Other exhibits appear once in the archive; the
+dialog moves that original figure into its view and restores it on close or
+previous/next navigation. Thumbnail copies are removed. The site's repeated
+brand emblem is outside this photographic rule. The SVG inauguration mask and
+its normal-flow fallback are two rendering modes of the same presentation.
+
+Official source masters and exact URLs are retained in
+`assets/source/history-distinct/provenance.json`; source masters stay outside
+the deployment. The cutting tool requires Pillow and PyMuPDF only when remaking
+images; the site's build retains its existing dependencies.
+
+Correction evidence is in `review/school-history-cinematic/distinct-images/`.
+The rendered page has 21 distinct image elements excluding the brand emblem,
+with distinct normalized pixel fingerprints and a visually inspected contact
+sheet. All nine chapters have distinct exhibits. Browser checks cover 1440×900,
+1024×768, 390×844 and 768×1024, search/reset, Escape/Back, modal figure identity,
+previous/next restoration, reduced motion, no JavaScript, WebGL failure, context
+loss and chapter deep links. All 31 complete record objects match the previous
+release, including captions and citations. Build, link, HTML and JS checks pass;
+staging includes all 21 images and the dynamically imported scene.

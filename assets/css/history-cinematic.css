@@ -124,6 +124,10 @@ body.history .hx-card:hover .hx-card__title{color:var(--hx-gold)}
 body.history .hx-rec__detail{font-size:18px;padding:0 0 35px;max-width:65ch}
 body.history .hx-rec__figure img{max-height:600px;object-fit:contain}
 body.history .hx-rec__source{font-size:13px}
+body.history .hx-rec__exhibit{margin:0 0 24px;font-size:14px;line-height:1.6;color:var(--hx-ivory-soft)}
+body.history .hx-rec__exhibit p{margin:0 0 8px}
+body.history .hx-dialog .hx-rec__exhibit{color:var(--hx-ink-soft)}
+body.history .hx-dialog .hx-rec__exhibit a{color:var(--hx-ink)}
 body.history .hx-disclosure{padding-bottom:20px;max-width:65ch}
 body.history .hx-disclosure summary{font:14px var(--font-body);padding:10px 0;color:var(--hx-ivory-soft);cursor:pointer}
 body.history .hx-disclosure summary:focus-visible{outline:2px solid var(--hx-gold);outline-offset:3px}

@@ -4,6 +4,14 @@
 import * as THREE from '../founder-opening/vendor/three.module.min.js';
 
 export function createWorld(canvas, stations, onDirty) {
+  // Guard the scene itself as well as the source dataset. A bad assignment
+  // falls back to the readable document instead of stacking a photograph.
+  const assigned=new Set();
+  for(const station of stations)for(const image of station.images||[]){
+    const key=new URL(image.src,location.href).pathname.replace(/-(sm|lg)\.jpg$/,'');
+    if(assigned.has(key))return null;
+    assigned.add(key);
+  }
   let renderer;
   try { renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:false, powerPreference:'default'}); }
   catch { return null; }
