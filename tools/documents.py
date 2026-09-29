@@ -32,12 +32,12 @@ DOCUMENTS = [
     # ---- Affiliation &amp; recognition -----------------------------------
     {"id": "cbse-affiliation-letter", "category": "Affiliation &amp; recognition",
      "title": "CBSE Affiliation Letter",
-     "note": "The most recent affiliation letter from the Central Board of Secondary Education on file.",
+     "note": "CBSE's letter extending the school's general affiliation up to Senior Secondary level.",
      "file": "cbse-affiliation-letter.pdf",
-     # The letter is dated 3 Oct 2020 and grants extension "01.04.2020 to
-     # 31.03.2025".
-     "issued": "3 Oct 2020", "period": "2020–2025", "valid_until": "31 Mar 2025",
-     "status": "expired"},
+     # Letter no. CBSE/1930154/EX-01142-2526/2025-26, dated 08/04/2024, grants
+     # "Extension of General Affiliation" for "01.04.2025 to 31.03.2030".
+     "issued": "8 Apr 2024", "period": "2025–2030", "valid_until": "31 Mar 2030",
+     "status": "current"},
     {"id": "state-recognition", "category": "Affiliation &amp; recognition",
      "title": "Recognition from State Government",
      "note": "The Government of Tamil Nadu's recognition of the school.",
@@ -71,10 +71,18 @@ DOCUMENTS = [
      "file": "school-safety-policy.pdf",
      "issued": "July 2018 (second edition)", "status": "dated"},
     {"id": "fire-safety-certificate", "category": "Safety &amp; compliance",
-     "title": "Fire Safety Certificate",
-     "note": "Certificate confirming the campus's fire safety compliance.",
+     "title": "Fire Safety Certificate &mdash; Main School",
+     "note": "Fire and Rescue Services, Thondamuthur: no objection for the main school building (ground, first and second floors).",
      "file": "fire-safety-certificate.pdf",
+     # No. 27/2025. Renewal fell due on 17.08.2026; the certificate supplied
+     # in September 2026 is the IB building's, below, not this one's renewal.
      "issued": "18 Aug 2025", "valid_until": "17 Aug 2026", "status": "expired"},
+    {"id": "fire-safety-certificate-ib", "category": "Safety &amp; compliance",
+     "title": "Fire Safety Certificate &mdash; IB Curriculum Building",
+     "note": "Fire and Rescue Services, Thondamuthur: no objection for the IB Curriculum building (ground and first floors).",
+     "file": "fire-safety-certificate-ib.pdf",
+     # No. 18/2026, inspected and issued 17.08.2026; next renewal 16.08.2029.
+     "issued": "17 Aug 2026", "valid_until": "16 Aug 2029", "status": "current"},
     {"id": "building-safety-certificate", "category": "Safety &amp; compliance",
      "title": "Building Safety Certificate",
      "note": "Certificate confirming the structural safety of school buildings.",
@@ -126,14 +134,17 @@ DOCUMENTS = [
     # ---- Administration &amp; governance -----------------------------------
     {"id": "school-management-committee", "category": "Administration &amp; governance",
      "title": "School Management Committee",
-     "note": "The current School Management Committee, as CBSE's mandatory disclosure requires.",
+     "note": "The School Management Committee, as CBSE's mandatory disclosure requires. Private email addresses and non-school telephone numbers are withheld.",
      "file": "school-management-committee.pdf",
+     # The list as signed and stamped by the school carries no date.
      "status": "undated"},
     {"id": "annual-report", "category": "Administration &amp; governance",
      "title": "Annual Report",
-     "note": "The school's published annual report.",
+     "note": "The school's annual report for 2025: enrolment, results, achievements and the year's activities.",
      "file": "annual-report.pdf",
-     "issued": "15 Oct 2019", "status": "stale"},
+     # Converted to PDF from the school's "Annual Report- 2025.docx", which
+     # is dated 7th October 2025. Replaces the report of 15 Oct 2019.
+     "issued": "7 Oct 2025", "status": "current"},
     {"id": "pta-list", "category": "Administration &amp; governance",
      "title": "Parent Teacher Association",
      "note": "The Parent Teacher Association member list.",
