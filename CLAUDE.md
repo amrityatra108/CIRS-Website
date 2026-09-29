@@ -93,6 +93,21 @@ numbers by `tools/make-math-sculpture.py` — keep its constants in step with th
 archive is `tools/mathchallenge.py`: the PDFs are the school's winners' bulletins, not problem
 papers, and a month lists only the bulletins that exist.
 
+Creative Writing is a student literary journal written from `tools/creative-writing-content.json` by
+`tools/creativewriting.py` (page shell `tools/pages/creative-writing.html`, sheet `assets/css/cwriting.css`,
+script `assets/js/cwriting.js`). The same generator writes `creative-writing/junior.html`, `senior.html` and one
+page per edition. Every edition, poem, excerpt and presentation is data there; a field the school has not
+supplied (school level, month, year, title, grade, presentation) is left out, never guessed, and an edition
+with no confirmed level stays under All. The hero's line and "Another line" come only from the stored,
+build-verified excerpts. The editions are one chronological list in the HTML; on windows at least 1100×620 with
+motion and normal contrast, `cwriting.js` lays it out as two opposing waves around a sticky preview through
+`gsap.matchMedia` (marks `cw-wave-on` and `cw-split-on` are set on `<html>` in `head_html()` so a reload does not
+jump, and torn down again if the script or GSAP is missing). Edition pages are deliberately still: no motion, the
+poems in one flow with real `#poem-…` anchors. `cirs.js` scrolls every `href="#…"` itself and leaves no history
+entry, so the links between poems carry the page's own address (`…/january-2026.html#poem-…`, see `edition_html`);
+the browser then does the navigation, which is what keeps Back and Forward working. Do not turn them back into
+bare `#` links. A presentation link exists only for an edition whose `ppt` file is in the repository.
+
 Leadership's people, portrait crops and five messages are data in `tools/leadership.py`;
 `tools/make-leadership.py` cuts the portraits. The messages are the school's published text word
 for word — do not copy-edit them. The page keeps native scroll (no Lenis) so its `#msg-…` links
@@ -107,11 +122,13 @@ captions describe the frame and never name a practice. Its sheet and script are
 
 Curriculum (`tools/pages/curriculum.html`) is the Curriculum Atlas: one gold path from the
 opening through the grade journey, dividing at Grade X into CBSE and the IB Diploma. Its facts
-come only from `docs/curriculum-content.md`. The markup is complete reading order;
-`assets/js/curriculum.js` makes the scenes (`html.cur-live`: sticky stages on windows at least
-1024×680 with motion; `html.cur-lite`: scroll accents otherwise) through `gsap.matchMedia`, and
-nothing runs under reduced motion. Elements the script moves are centred with margins, not the
-CSS `translate` property, which GSAP folds into its transform and leaves behind on revert.
+come only from `docs/curriculum-content.md`. The markup is complete reading order, and the
+CBSE/IB comparison is a real `<table>`. `assets/js/curriculum.js` adds two modes, each built
+when its media query holds and removed when it stops: `html.cur-stage` (windows at least
+1024×680 with motion) stacks the journey's photographs in one CSS-sticky frame and uncovers the
+stage being read — native scroll, nothing pinned by script, no GSAP; `html.cur-motion` gives
+the division, the Diploma core and the school-life photographs a once-only entrance. Nothing
+moves under reduced motion, and the IB index's current group is marked in every mode.
 
 School History is the CIRS archive, and every date on it is written from `tools/history.py`:
 each event carries its source, and anything unconfirmed is a `note` there (never published) or

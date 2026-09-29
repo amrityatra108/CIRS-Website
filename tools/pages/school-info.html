@@ -37,10 +37,10 @@
         </li>
         <li class="rec-plane rec-plane--cbse">
           <a class="rec-sheet" href="#doc-cbse-affiliation-letter">
-            <span class="rec-paper"><img src="assets/img/records/cbse-2020.jpg" width="560" height="814"
-              alt="The CBSE letter of 3 October 2020 extending the school's affiliation, number 1930154, for the period 1 April 2020 to 31 March 2025"
+            <span class="rec-paper"><img src="assets/img/records/cbse-2025.jpg" width="560" height="749"
+              alt="The CBSE letter dated 8 April 2024 extending the school's general affiliation, number 1930154, up to Senior Secondary level for the period 1 April 2025 to 31 March 2030"
               loading="lazy" decoding="async"></span>
-            <span class="rec-tag"><span class="rec-tag__title">CBSE Affiliation Letter, 2020</span>
+            <span class="rec-tag"><span class="rec-tag__title">CBSE Affiliation Letter, 2025&ndash;30</span>
               <span class="rec-tag__status">{{DOC_STATUS:cbse-affiliation-letter}}</span></span>
           </a>
         </li>
@@ -139,9 +139,8 @@
     </section>
 
     <!-- 02 ─ Affiliation. Every row of the old School Details table, grouped
-         into three row groups. The affiliation letter on file lapsed on
-         31.03.2025; that stays at the head of the section until a newer
-         letter is in tools/documents.py. -->
+         into three row groups. The extension of affiliation is read from the
+         CBSE letter in tools/documents.py (01.04.2025 to 31.03.2030). -->
     <section class="rec-sec rec-sec--affiliation" id="affiliation" aria-labelledby="affiliation-title">
       <header class="rec-head rv">
         <p class="rec-num"><span>02</span> Affiliation &amp; registration</p>
@@ -150,16 +149,6 @@
           to publish, exactly as filed by CIRS. The certificate behind each, with its date, is in the
           <a href="#documents">document register</a>.</p>
       </header>
-
-      <div class="rec-alert rv" role="note" aria-labelledby="affiliation-status">
-        <p class="rec-alert__head" id="affiliation-status">{{DOC_STATUS:cbse-affiliation-letter}}
-          <span class="rec-alert__what">Extension of affiliation</span></p>
-        <p class="rec-alert__body">The most recent CBSE affiliation letter on file extended the
-          school&rsquo;s affiliation to <strong>31 March 2025</strong>. The current extension of
-          affiliation letter, and its validity date, are awaited from the school.</p>
-        <p class="rec-alert__link"><a href="#doc-cbse-affiliation-letter">The letter on file, in the
-          register</a></p>
-      </div>
 
       <div class="rec-tablewrap rv" id="details">
         <table class="rec-table">
@@ -210,12 +199,11 @@
               <th scope="row">Affiliated with the Board since</th>
               <td class="rec-table__num">01.04.1997</td>
             </tr>
-            <tr class="rec-table__flag">
+            <tr>
               <th scope="row">Extension of affiliation upto</th>
-              <td><span class="rec-table__num">31.03.2025</span>, on the most recent CBSE affiliation
-                letter on file.
-                <span class="rec-await"><span class="rec-await__k">Awaiting the school</span> The
-                current extension of affiliation letter and its validity date.</span></td>
+              <td><span class="rec-table__num">31.03.2030</span> &mdash; extension of general
+                affiliation up to Senior Secondary level, for 01.04.2025 to 31.03.2030
+                (<a href="#doc-cbse-affiliation-letter">CBSE letter</a>)</td>
             </tr>
           </tbody>
           <tbody>
@@ -237,7 +225,8 @@
 
     <!-- 03 ─ Governance. Two bodies, set side by side so they cannot be
          mistaken for one: the Board, which manages the school, and the
-         School Management Committee CBSE asks for, whose list is awaited. -->
+         School Management Committee CBSE asks for, as the school's signed
+         list gives it. -->
     <section class="rec-sec rec-sec--governance" id="governance" aria-labelledby="governance-title">
       <header class="rec-head rv">
         <p class="rec-num"><span>03</span> Governance</p>
@@ -262,14 +251,26 @@
           </dl>
         </div>
 
-        <div class="rec-body-card rec-body-card--pending rv">
+        <div class="rec-body-card rv">
           <p class="rec-body-card__k">Required by CBSE &middot; a separate body</p>
           <h3 class="rec-h3" id="smc-title">School Management Committee</h3>
           <p class="rec-copy">CBSE&rsquo;s mandatory disclosure asks every school to publish its School
-            Management Committee, which is a separate body from the Board of Directors.</p>
-          <p class="rec-await rec-await--block"><span class="rec-await__k">Awaiting the school</span>
-            The current School Management Committee list, to be published in the
-            <a href="#doc-school-management-committee">document register</a>.</p>
+            Management Committee, which is a separate body from the Board of Directors. The signed
+            list is in the <a href="#doc-school-management-committee">document register</a>.</p>
+          <dl class="rec-people">
+            <div><dt>Swami Swaroopananda</dt><dd>Chairman</dd></div>
+            <div><dt>Swami Anukoolananda</dt><dd>Resident Director</dd></div>
+            <div><dt>Sri Vijay Mahtaney</dt><dd>Entrepreneur</dd></div>
+            <div><dt>Dr. Ram Buxani</dt><dd>Entrepreneur</dd></div>
+            <div><dt>Sri Siddharth Balachandran</dt><dd>Entrepreneur</dd></div>
+            <div><dt>Sri Jagdish Moorjani</dt><dd>Entrepreneur</dd></div>
+            <div><dt>Smt. Shanti Krishnamurthy</dt><dd>Director &mdash; Academics &amp; Administration</dd></div>
+            <div><dt>Smt. Rajeshwari G.</dt><dd>Principal</dd></div>
+            <div><dt>Smt. K. Navamani</dt><dd>CBSE School Principal &mdash; Correspondent, Angappa Senior Secondary School</dd></div>
+            <div><dt>Sumathy V</dt><dd>Parent Member</dd></div>
+            <div><dt>Sri E. Ganesh</dt><dd>Teacher Member</dd></div>
+            <div><dt>Sri S. Satish Kumar</dt><dd>Teacher Member &mdash; HOD, Science</dd></div>
+          </dl>
         </div>
       </div>
 
@@ -491,9 +492,8 @@
       <p class="rec-copy">Each record&rsquo;s status is read from the document itself. These are the
         ones still owed by the school or held by its office, each marked where it belongs above:</p>
       {{RECORDS_NOTICE}}
-      <p class="rec-copy rec-notice__also">Also awaited from the school: the current School Management
-        Committee list, the 2026&ndash;27 enrolment table, and the medical facilities&rsquo; details and
-        photographs.</p>
+      <p class="rec-copy rec-notice__also">Also awaited from the school: the 2026&ndash;27 enrolment
+        table, and the medical facilities&rsquo; details and photographs.</p>
     </div>
   </div>
 </section>

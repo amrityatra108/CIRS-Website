@@ -42,7 +42,7 @@ WHERE THE WORDS COME FROM
 # A person appears only with a photograph published under their own name —
 # supplied by the school, or from the official page of an organisation they
 # belong to (originals in assets/source/leadership/, see make-leadership.py).
-# Shri Vijay Mahtaney has none, and is shown without one.
+# Shri Vijay Mahtaney has none; his row carries a lettered placeholder.
 # ---------------------------------------------------------------------------
 PORTRAITS = {
     "swaroopananda": ("assets/source/leadership/swaroopananda.jpg", (270, 99, 638, 559)),
@@ -342,13 +342,19 @@ def featured_html():
 
 def directors_html():
     """One ruled row each: who, what, and — at the row's end — a portrait.
-    A person with no approved photograph has a row that simply ends after
-    the text: not a silhouette, not an empty frame, not somebody else."""
+    A person with no approved photograph keeps the same frame, lettered with
+    their initials and "Photograph awaited": a placeholder that says what it
+    is, never a silhouette and never somebody else's photograph."""
     items = []
     for p in DIRECTORS:
-        face = (f'\n      <figure class="ld-dir__face">{img(p["slug"], "", "96px")}</figure>'
-                if p["slug"] else "")
-        cls = "ld-dir" if p["slug"] else "ld-dir ld-dir--text"
+        if p["slug"]:
+            face = f'\n      <figure class="ld-dir__face">{img(p["slug"], "", "96px")}</figure>'
+        else:
+            initials = "".join(w[0] for w in p["name"].split() if w not in ("Shri", "Smt.", "Dr."))
+            face = ('\n      <figure class="ld-dir__face ld-dir__face--pending" aria-hidden="true">'
+                    f'<span class="ld-dir__initials">{initials}</span>'
+                    '<span class="ld-dir__awaited">Photograph awaited</span></figure>')
+        cls = "ld-dir"
         items.append(f'''    <li class="{cls}">
       <div class="ld-dir__id">
         <p class="ld-person__role">{p["role"]}</p>

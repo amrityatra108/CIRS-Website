@@ -608,3 +608,36 @@ p:not(.ld-msg__sign) + .ld-msg__sign{ margin-top:1.6em !important; }
   .ld-person:focus-within .ld-person__frame img{ transform:none; }
   .ld-msg.is-entering{ animation:none; }
 }
+
+/* A Director without an approved photograph: the portrait's own frame,
+   lettered, saying plainly that the photograph is awaited. */
+.ld-dir__face--pending{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  border:1px solid var(--ld-rule); background:var(--ld-ivory-2);
+  text-align:center;
+}
+.ld-dir__initials{
+  font-family:var(--font-display); font-weight:500; font-size:1.7rem; line-height:1;
+  letter-spacing:.02em; color:var(--ld-ink-2);
+}
+.ld-dir__awaited{
+  padding-inline:6px;
+  font-family:var(--ld-sans); font-size:.62rem; line-height:1.25; letter-spacing:.04em;
+  color:var(--ld-ink-3);
+}
+
+/* "In their own words" on a phone. The sheet sat inside the page's gutter
+   with its own padding inside that, which left the letter a 268px column at
+   1.125rem: seven words to a line and screens of it. The sheet now runs
+   almost to the edges of the window, with a tighter inset and body-size
+   type, so a line holds nine to eleven words. */
+@media (max-width:600px){
+  .ld-sheet{
+    margin-inline:-24px;
+    padding:24px 20px 32px;
+    border-radius:4px;
+  }
+  .ld-msg__text{ font-size:1.02rem; line-height:1.62; }
+  .ld-msg__text p + p{ margin-top:.95em; }
+  .ld-msg__head{ grid-template-columns:76px minmax(0,1fr); column-gap:var(--space-4); }
+}

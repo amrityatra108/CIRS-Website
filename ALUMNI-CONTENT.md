@@ -7,6 +7,7 @@ The restored *Where CIRS Takes You* layout is built from `tools/pages/alumni.htm
 - Four supplied photographs: Hari Om Jani, Soham Desai, Divyaj DT, and Shashwath Santosh. The Divyaj photo shows him on the right in the red kit. CIRS confirmed in the project conversation on 24 September 2026 that it has each alumnus's publication consent and the image rights, including any required credit arrangements. The underlying permission records remain with CIRS.
 - Four short biographies with public source links in `tools/alumni.py`.
 - Three alumni quotations and the school's 19 institution destination selection.
+- Sixteen further institutions from the school's "Where our Alumni Are - 2026" form (61 responses from the CBSE and IB leavers of 2026, September 2026), marked `"basis": "alumni-reported; Where our Alumni Are, 2026"` in `tools/alumni-destinations.json`. Only institution names were taken; the names of students and which of them went where stay out of the repository. Entries that name no single institution (a national service posting, a combined programme, a "St. Xavier's College" with no city) were left out.
 - The official alumni database form, school-office email, and telephone.
 
 ## Still needed from the school

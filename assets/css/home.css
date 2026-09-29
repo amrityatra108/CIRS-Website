@@ -220,3 +220,97 @@ body.home .totop{ background:var(--gold); color:var(--on-gold); box-shadow:0 6px
 @media (prefers-reduced-motion:reduce){
   body.home .hrun__pin::before{ transition:none; }
 }
+
+/* ---- Phones: "A day at CIRS" as a deck of cards ----------------------
+   cirs.js (homeRun) adds .is-deck under 900px when motion is allowed. The
+   section is given a height; the pin sticks for its length and the script
+   sets each card's transform from the scroll. Desktop is untouched. */
+@media (max-width:899px){
+  body.home .hrun.is-deck .hrun__pin{
+    position:sticky; top:0; height:100svh; height:100vh; overflow:hidden;
+  }
+  body.home .hrun.is-deck .hrun__viewport{
+    height:100%; overflow:visible; perspective:1100px; perspective-origin:50% 45%;
+    touch-action:pan-y;
+  }
+  body.home .hrun.is-deck .hrun__viewport:focus-visible{ outline:2px solid var(--dark-deep); outline-offset:-6px; }
+  body.home .hrun.is-deck .hrun__stage{
+    display:block; width:100%; height:100%; min-width:0; padding:0; transform:none !important;
+  }
+  body.home .hrun.is-deck .hghost{ display:none; }
+  body.home .hrun.is-deck .hframe,
+  body.home .hrun.is-deck .hsay{
+    position:absolute; inset:auto !important;
+    left:50% !important; top:54% !important;
+    margin:0; flex:none;
+    width:min(84vw,340px);
+    border-radius:22px;
+    transform-origin:50% 110%;
+    will-change:transform, opacity;
+    backface-visibility:hidden;
+  }
+  body.home .hrun.is-deck .hframe{
+    padding:12px 12px 14px;
+    background:#FAF9F3;
+    box-shadow:0 22px 50px rgba(24,24,21,.28), 0 0 0 1px rgba(24,24,21,.06);
+  }
+  body.home .hrun.is-deck .hframe--portrait{ width:min(74vw,300px); }
+  body.home .hrun.is-deck .hframe--tall{ width:min(66vw,270px); }
+  body.home .hrun.is-deck .hframe img{
+    width:100%; border-radius:14px; border:0; box-shadow:none;
+  }
+  body.home .hrun.is-deck .hframe__n{ margin-bottom:8px; color:var(--ink-soft); font-size:.85rem; }
+  body.home .hrun.is-deck .hframe figcaption{
+    margin-top:10px; color:var(--dark-deep); font-size:.95rem; font-weight:500;
+  }
+  body.home .hrun.is-deck .hsay{
+    padding:28px 24px 30px;
+    background:linear-gradient(160deg, #FAF9F3 0%, #F1EAD8 100%);
+    box-shadow:0 22px 50px rgba(24,24,21,.26), inset 0 0 0 1px rgba(143,110,47,.22);
+  }
+  body.home .hrun.is-deck .hsay > *{ transform:none; }
+  body.home .hrun.is-deck .hsay__eyebrow{ color:var(--gold-ink); font-size:.9rem; margin-bottom:14px; }
+  body.home .hrun.is-deck .hsay__big{
+    color:var(--dark-deep); font-size:clamp(1.65rem,7.4vw,2.2rem); text-shadow:none;
+  }
+  body.home .hrun.is-deck .hsay__sub{ color:var(--ink-soft); font-size:1rem; line-height:1.5; margin-top:14px; }
+  body.home .hrun.is-deck .hrun__skip{ top:auto; bottom:18px; left:var(--gut); }
+
+  body.home .hrun__count{
+    position:absolute; z-index:4; right:var(--gut); bottom:28px; margin:0;
+    font-family:var(--font-ui); font-size:.85rem; font-weight:600; letter-spacing:.06em;
+    font-variant-numeric:tabular-nums; color:var(--run-ink);
+  }
+  body.home .hrun__cue{
+    position:absolute; z-index:4; left:50%; bottom:84px; margin:0;
+    transform:translate(-50%,12px); opacity:0; pointer-events:none;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    font-family:var(--font-ui); font-size:.85rem; font-weight:600; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--run-ink);
+    transition:opacity .35s ease, transform .35s ease;
+  }
+  body.home .hrun__cue span{ font-size:1.2rem; animation:hrun-cue 1.4s ease-in-out infinite; }
+  body.home .hrun__cue.is-on{ opacity:1; transform:translate(-50%,0); }
+  @keyframes hrun-cue{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(7px); } }
+
+  /* Motion off or no GSAP: the phone layout is a vertical column, not a
+     sideways track that has to be swiped. */
+  body.home .hrun.is-static .hrun__viewport{ overflow:visible; }
+  body.home .hrun.is-static .hrun__stage{
+    flex-direction:column; align-items:center; gap:44px;
+  }
+  body.home .hrun.is-static .hframe--wide,
+  body.home .hrun.is-static .hsay{ width:min(88vw,560px); }
+  body.home .hrun.is-static .hframe--portrait{ width:min(76vw,420px); }
+  body.home .hrun.is-static .hframe--tall{ width:min(70vw,380px); }
+}
+@media (max-width:899px) and (prefers-reduced-motion:reduce){
+  body.home .hrun__cue span{ animation:none; }
+}
+
+/* The opening photograph on a portrait screen: the cover crop keeps the
+   portico and the ridge behind it at the centre of the frame instead of
+   the left-hand wing. */
+@media (max-aspect-ratio:4/5){
+  body.home .hseq__video{ object-position:69% 40%; }
+}

@@ -95,6 +95,25 @@
     "basis": "alumni-reported"
   },
   {
+    "key": "university-of-melbourne",
+    "name": "University of Melbourne",
+    "short": "University of Melbourne",
+    "country": "Australia",
+    "region": "apac",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
     "key": "george-brown-college",
     "name": "George Brown College",
     "short": "George Brown College",
@@ -207,6 +226,44 @@
       "c"
     ],
     "basis": "alumni-reported"
+  },
+  {
+    "key": "karlsruhe-institute-of-technology",
+    "name": "Karlsruhe Institute of Technology",
+    "short": "Karlsruhe Institute of Technology",
+    "country": "Germany",
+    "region": "europe",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "leuphana-university-luneburg",
+    "name": "Leuphana University Lüneburg",
+    "short": "Leuphana University Lüneburg",
+    "country": "Germany",
+    "region": "europe",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
   },
   {
     "key": "hkust",
@@ -1900,6 +1957,215 @@
     "basis": "alumni-reported"
   },
   {
+    "key": "ashoka-university",
+    "name": "Ashoka University",
+    "short": "Ashoka University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "bits-pilani-k-k-birla-goa-campus",
+    "name": "BITS Pilani, K K Birla Goa Campus",
+    "short": "BITS Pilani, K K Birla Goa Campus",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "cept-university",
+    "name": "CEPT University",
+    "short": "CEPT University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "istituto-marangoni-mumbai",
+    "name": "Istituto Marangoni, Mumbai",
+    "short": "Istituto Marangoni, Mumbai",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "krea-university",
+    "name": "Krea University",
+    "short": "Krea University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "mahindra-university",
+    "name": "Mahindra University",
+    "short": "Mahindra University",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "masters-union",
+    "name": "Masters' Union",
+    "short": "Masters' Union",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "shiv-nadar-university-chennai",
+    "name": "Shiv Nadar University, Chennai",
+    "short": "Shiv Nadar University, Chennai",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "visvesvaraya-national-institute-of-technology-nagpur",
+    "name": "Visvesvaraya National Institute of Technology, Nagpur",
+    "short": "Visvesvaraya National Institute of Technology, Nagpur",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "whistling-woods-international",
+    "name": "Whistling Woods International",
+    "short": "Whistling Woods International",
+    "country": "India",
+    "region": "india",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
+    "key": "university-college-dublin",
+    "name": "University College Dublin",
+    "short": "University College Dublin",
+    "country": "Ireland",
+    "region": "europe",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
     "key": "university-of-canterbury",
     "name": "University of Canterbury",
     "short": "University of Canterbury",
@@ -2451,6 +2717,25 @@
     "basis": "alumni-reported"
   },
   {
+    "key": "university-of-st-andrews",
+    "name": "University of St Andrews",
+    "short": "University of St Andrews",
+    "country": "United Kingdom",
+    "region": "uk",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
+  },
+  {
     "key": "boston",
     "name": "Boston University",
     "short": "Boston",
@@ -2848,5 +3133,24 @@
       "c"
     ],
     "basis": "alumni-reported"
+  },
+  {
+    "key": "university-of-california-los-angeles",
+    "name": "University of California, Los Angeles",
+    "short": "University of California, Los Angeles",
+    "country": "United States",
+    "region": "us",
+    "lat": null,
+    "lon": null,
+    "nudge": [
+      0,
+      0
+    ],
+    "label": [
+      0,
+      0,
+      "c"
+    ],
+    "basis": "alumni-reported; Where our Alumni Are, 2026"
   }
 ]

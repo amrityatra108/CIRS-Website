@@ -11,15 +11,15 @@ redrawn, retyped or moved.
                                          of Private Schools, dated July 2026,
                                          valid up to 08.09.2027
     assets/img/records/noc-1996.jpg      The State NOC, 15 July 1996
-    assets/img/records/cbse-2020.jpg     The CBSE extension-of-affiliation letter
-                                         of 3 October 2020, which ran to
-                                         31.03.2025 and has EXPIRED
+    assets/img/records/cbse-2025.jpg     The CBSE extension-of-affiliation letter
+                                         dated 08.04.2024, for 01.04.2025 to
+                                         31.03.2030
     assets/img/records/land-2020.jpg     The Perur Taluk Office land certificate,
                                          24 January 2020
 
 Each sheet on the page carries its real date and status in text beside it,
-read from tools/documents.py — the CBSE letter says "Expired" there, because
-it has. Choosing a different document means changing SHEETS below AND the
+read from tools/documents.py, so a sheet whose document lapses is marked
+"Expired" there without anyone editing the page. Choosing a different document means changing SHEETS below AND the
 record in tools/pages/school-info.html, and checking the new one for anything
 personal before it is set this large: these four carry no student, staff or
 family details, only the school's own name, address and reference numbers.
@@ -50,7 +50,7 @@ PAPER = (248, 244, 234)
 SHEETS = {
     "recognition": ("state-government-recognition.pdf", 700, (0.035, 0.05, 0.975, 0.975), 1.06),
     "noc-1996":    ("state-noc.pdf",                    560, (0.08, 0.012, 0.93, 0.88), 1.08),
-    "cbse-2020":   ("cbse-affiliation-letter.pdf",      560, (0.04, 0.03, 0.96, 0.975), 1.0),
+    "cbse-2025":   ("cbse-affiliation-letter.pdf",      560, (0.05, 0.035, 0.95, 0.965), 1.0),
     "land-2020":   ("land-certificate.pdf",             560, (0.06, 0.04, 0.95, 0.97), 1.04),
 }
 

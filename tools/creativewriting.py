@@ -1,24 +1,30 @@
 #!/usr/bin/env python3
-"""Render CIRS Creative Writing — "The Living Manuscript" — from structured content.
+"""Render CIRS Creative Writing, a student literary journal, from structured content.
 
 Every edition, poem, presentation and excerpt comes from
 creative-writing-content.json (its "_readme" describes each field). This module
 supplies layout, navigation and checks, never writing or attribution:
 
-  * an epigraph or "Give me a line" excerpt must appear verbatim in its poem
+  * an epigraph or excerpt must appear verbatim in its poem
   * a presentation's size and slide count are read from the file itself
   * an edition's atmosphere is contrast-checked before it is published
   * an edition awaiting the school's poems says so, and shows no count
+  * a field the source does not record (date, level, grade, title,
+    presentation) is left out, never guessed
 
 Pages written from here (all through tools/build-site.py):
 
-  creative-writing.html                   All editions
-  creative-writing/junior.html            the same page, Junior School chosen
-  creative-writing/senior.html            the same page, Senior School chosen
-  creative-writing/<school>/<slug>.html   one edition and its reader
+  creative-writing.html                   All writing: hero, collection, archive
+  creative-writing/junior.html            the same page for the Junior School
+  creative-writing/senior.html            the same page for the Senior School
+  creative-writing/<school>/<slug>.html   one edition, its contents and its poems
 
 <school> is "anthology" for an edition whose level the school has not yet
 confirmed. <slug> is "<month>-<year>" when both are recorded, else the id.
+
+The collection is one chronological list. assets/js/cwriting.js lays it out as
+two opposing waves on a wide, tall, motion-friendly window and leaves it as an
+editorial list everywhere else; the markup here is complete either way.
 """
 
 from __future__ import annotations
@@ -58,24 +64,6 @@ MOODS = {
     "chalk":   {"ground": "#1F3B2D", "ink": "#F4F0E6", "soft": "#CAD6C5", "accent": "#FFE7A6"},
     "sky":     {"ground": "#DDE9EE", "ink": "#16303A", "soft": "#344E5A", "accent": "#2F6E86"},
 }
-
-# The hero's scattered words. Between them they hold every letter of
-# CREATIVE WRITING — "voice" is the only V, "tomorrow" the only W — which is
-# what lets cwriting.js assemble the title out of them. Positions are
-# percentages of the hero, chosen to keep the centre clear for the cursor.
-HERO_WORDS = [
-    ("dream",       14, 22, -4, 1.35),
-    ("memory",      70, 16,  3, 1.1),
-    ("rain",        86, 44, -2, 1.5),
-    ("home",        24, 70,  2, 1.2),
-    ("silence",     58, 78, -3, 1.3),
-    ("courage",     8,  48,  3, 1.05),
-    ("tomorrow",    72, 64,  2, 1.25),
-    ("imagination", 30, 36, -2, 1.0),
-    ("voice",       46, 14,  4, 1.2),
-]
-HERO_TITLE = ("Creative", "Writing")
-
 
 def esc(value) -> str:
     return html.escape(str(value), quote=True)
@@ -285,11 +273,20 @@ def writer_count() -> int:
     return len({p["author"].casefold() for _, _, p in published_poems()})
 
 
+
+
 # ---------------------------------------------------------------- fragments
+
+# The two layouts the script adds on top of the list. Kept here, next to the
+# markup they belong to; the head script below and cwriting.js repeat them.
+SPLIT_QUERY = "(min-width:900px) and (min-height:620px) and (prefers-reduced-motion:no-preference)"
+WAVE_QUERY = ("(min-width:1100px) and (min-height:620px) and (prefers-reduced-motion:no-preference)"
+              " and (prefers-contrast:no-preference) and (forced-colors:none)")
+
 
 def _style(e: dict) -> str:
     """The edition's atmosphere, and the length of its longest word, which
-    the display lettering uses to fit a cover of any width."""
+    the display lettering uses to fit a title of any width."""
     t = e["theme_css"]
     mark = t["ground"] if t["dark"] else t["ink"]
     longest = max(len(word) for word in e["topic"].split())
@@ -298,11 +295,8 @@ def _style(e: dict) -> str:
             f'--lw:{max(longest, 5)}')
 
 
-def _tone(e: dict) -> str:
-    return "dark" if e["theme_css"]["dark"] else "light"
-
-
 def poem_title(p: dict) -> str:
+    """The poem's title, or, when the school gave none, its opening line."""
     return p.get("title") or p["stanzas"][0].splitlines()[0].strip()
 
 
@@ -323,239 +317,351 @@ def _counts(e: dict) -> str:
     return f'{_plural(len(e["poems"]), "poem")} · {_plural(e["writers"], "writer")}'
 
 
-# Junior covers carry a hand-drawn stroke: one path, drawn in the accent.
-DOODLES = [
-    '<svg class="cw-doodle" viewBox="0 0 120 24" aria-hidden="true" focusable="false"><path pathLength="100" d="M3 15c14-9 25 7 39-1s24-8 36 1 25 4 39-6" /></svg>',
-    '<svg class="cw-doodle" viewBox="0 0 120 24" aria-hidden="true" focusable="false"><path pathLength="100" d="M4 12c20 6 40 7 58 2 16-5 34-7 54 1" /><path pathLength="100" d="M20 19c22 3 48 2 78-4" /></svg>',
-    '<svg class="cw-doodle" viewBox="0 0 120 24" aria-hidden="true" focusable="false"><path pathLength="100" d="M3 18c8-12 16-12 22 0s14 12 22 0 14-12 22 0 14 12 22 0 12-10 26-4" /></svg>',
-]
-
-
-def cover_html(e: dict, n: int, layout: dict, loading: str = "lazy") -> str:
-    """One edition cover on the wall. Typography is the picture."""
-    school = e["school"] or "anthology"
-    awaiting = e["status"] != "published"
-    issue = e["issue"] or ""
-    level = level_label(e)
-    epigraph = ""
-    if e.get("epigraph"):
-        epigraph = (f'<span class="cw-cover__epigraph">&ldquo;{esc(e["epigraph"]["text"]).replace(chr(10), " ")}&rdquo;'
-                    f'<span class="cw-cover__epigraph-by">{esc(e["epigraph"]["author"])}</span></span>')
-    doodle = DOODLES[n % len(DOODLES)] if school == "junior" else ""
-    label = f'{e["topic"]}, {e["date"] or "undated"}, {level}. {_counts(e)}.'
-    style = (f'{_style(e)};--c-start:{layout["start"]};--c-span:{layout["span"]};'
-             f'--c-shift:{layout["shift"]};--m-width:{layout["mwidth"]};--m-align:{layout["malign"]}')
-    return f'''      <li class="cw-wall__item cw-wall__item--{e["shape"]}" style="{style}">
-        <a class="cw-cover cw-cover--{school} cw-cover--{_tone(e)}{" is-awaiting" if awaiting else ""}" href="{esc(e["href"])}" data-cw-cover>
-          <span class="sr-only">{esc(label)} {"View" if awaiting else "Read"} edition</span>
-          <span class="cw-cover__face" aria-hidden="true">
-            <span class="cw-cover__top"><span class="cw-cover__issue">{esc(issue)}</span><span class="cw-cover__school">{esc(school_name(e["school"]) or "Anthology")}</span></span>
-            <span class="cw-cover__topic">{esc(e["topic"])}{doodle}</span>
-            {epigraph}
-            <span class="cw-cover__meta"><span>{esc(_counts(e))}</span><span>{esc(level)}</span></span>
-            <span class="cw-cover__cta">{"View" if awaiting else "Read"} edition <span class="cw-arrow">&rarr;</span></span>
-          </span>
-        </a>
-      </li>'''
-
-
-SPANS = {"portrait": 4, "square": 5, "landscape": 7}
-
-
-def wall_layout(items: list[dict]) -> list[dict]:
-    """An asymmetric editorial wall: two covers a row on twelve columns, the
-    heavier side and the dropped cover alternating row by row, so any mix of
-    portrait, landscape and square covers stays balanced without a grid of
-    equal cards. Phones get a single varied column instead (m-width/m-align)."""
-    out = []
-    for r in range(0, len(items), 2):
-        row = items[r:r + 2]
-        spans = [SPANS[e["shape"]] for e in row]
-        if len(row) == 2:
-            while sum(spans) > 11:
-                i = 0 if spans[0] >= spans[1] else 1
-                spans[i] -= 1
-            if (r // 2) % 2 == 0:
-                starts, shifts = [1, 13 - spans[1]], [0, 1]
-            else:
-                free = 12 - sum(spans)
-                first = 1 + (1 if free >= 3 else 0)
-                starts, shifts = [first, 13 - spans[1] - (1 if free >= 4 else 0)], [1, 0]
-        else:
-            starts = [2 if (r // 2) % 2 == 0 else 13 - spans[0] - 1]
-            shifts = [0]
-        for i, e in enumerate(row):
-            k = r + i
-            out.append({
-                "start": starts[i], "span": spans[i], "shift": shifts[i],
-                "mwidth": {"portrait": "78%", "square": "88%", "landscape": "100%"}[e["shape"]],
-                "malign": ("0 auto 0 0" if k % 2 == 0 else "0 0 0 auto")
-                          if e["shape"] != "landscape" else "0",
-            })
+def _writers(e: dict) -> list[str]:
+    seen, out = set(), []
+    for p in e["poems"]:
+        if p["author"].casefold() not in seen:
+            seen.add(p["author"].casefold())
+            out.append(p["author"])
     return out
 
 
-def wall_html(collection: str) -> str:
-    feature = featured(collection)
-    items = [e for e in in_collection(collection) if e is not feature]
-    if not items:
-        return ('<p class="cw-wall__empty">More editions will appear here as the school '
-                'publishes them.</p>')
-    layout = wall_layout(items)
-    covers = "\n".join(cover_html(e, n, layout[n]) for n, e in enumerate(items))
-    return f'''    <ol class="cw-wall" aria-label="{esc(_collection_name(collection))} editions">
-{covers}
-    </ol>'''
+def _ppt_line(e: dict) -> str:
+    """'PPTX · 18 slides · 4.2 MB', from what the file itself says."""
+    ppt = e["ppt"]
+    if not ppt:
+        return ""
+    bits = [ppt["ext"]]
+    if ppt.get("slides"):
+        bits.append(_plural(ppt["slides"], "slide"))
+    bits.append(ppt["size"])
+    return " · ".join(bits)
 
+
+def _br(lines: list[str]) -> str:
+    """An excerpt's lines, each its own block so a long one can wrap with a
+    hanging indent, as it does in the poem."""
+    return "".join(f'<span class="cw-l">{esc(line)}</span>' for line in lines)
+
+
+# ---------------------------------------------------------------- excerpts
+
+def _excerpt(e: dict, p: dict, text: str, key: str) -> dict:
+    return {"lines": _lines(text), "author": p["author"], "poem": p["id"], "e": e,
+            "key": key, "href": f'{e["href"]}#poem-{p["id"]}'}
+
+
+def excerpt_pool() -> list[dict]:
+    """Every stored excerpt, in edition and poem order. Each was checked
+    against its poem when the data was loaded."""
+    out = []
+    for e, _, p in published_poems():
+        for k, text in enumerate(p.get("lines") or []):
+            out.append(_excerpt(e, p, text, f'{p["id"]}-{k}'))
+    return out
+
+
+def edition_excerpt(e: dict) -> dict | None:
+    """The verbatim lines that stand for an edition: the excerpt that holds
+    its epigraph, else the epigraph itself, else the first excerpt stored."""
+    pool = [x for x in excerpt_pool() if x["e"] is e]
+    epigraph = e.get("epigraph")
+    if epigraph:
+        want = set(_lines(epigraph["text"]))
+        for x in pool:
+            if x["poem"] == epigraph["poem"] and want <= set(x["lines"]):
+                return x
+        poem = next(p for p in e["poems"] if p["id"] == epigraph["poem"])
+        return _excerpt(e, poem, epigraph["text"], f'{poem["id"]}-epigraph')
+    return pool[0] if pool else None
+
+
+def hero_quote() -> dict | None:
+    """The opening line on the landing page: the featured edition's own."""
+    e = featured("all")
+    if e and e["status"] == "published":
+        x = edition_excerpt(e)
+        if x:
+            return x
+    pool = excerpt_pool()
+    return pool[0] if pool else None
+
+
+def quote_figure(x: dict) -> str:
+    """The hero's line with its writer and edition. Where it can be read
+    rides along as data-cw-href, for the one "Read this poem" link."""
+    e = x["e"]
+    when = f'<span class="cw-quote__when">{esc(e["date"])}</span>' if e["date"] else ""
+    return (f'<figure class="cw-quote" data-cw-key="{esc(x["key"])}" data-cw-href="{esc(x["href"])}">'
+            f'<blockquote class="cw-quote__text"><p>{_br(x["lines"])}</p></blockquote>'
+            f'<figcaption class="cw-quote__cap">'
+            f'<span class="cw-quote__author">{esc(x["author"])}</span>'
+            f'<span class="cw-quote__edition">{esc(e["topic"])}</span>{when}'
+            f'</figcaption>'
+            f'</figure>')
+
+
+# ---------------------------------------------------------------- the hero
 
 def _collection_name(collection: str) -> str:
     return "All" if collection == "all" else school_name(collection)
 
 
-def featured_html(collection: str) -> str:
-    e = featured(collection)
-    if not e:
-        return ""
-    awaiting = e["status"] != "published"
-    school = e["school"] or "anthology"
-    issue_no = f'No. {e["month"]:02d}' if e["month"] else "Anthology"
-    rows = [("Month", e["date"] or "Not recorded"), ("Topic", e["topic"]),
-            ("School", level_label(e)),
-            ("Poems", str(len(e["poems"])) if not awaiting else "To be supplied")]
-    meta = "\n".join(f'          <div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k, v in rows)
-    intro = e.get("intro") or ("The poems and presentation for this edition will be "
-                               "published here once the school supplies them.")
-    epigraph = ""
-    if e.get("epigraph"):
-        epigraph = (f'<p class="cw-featured__epigraph">&ldquo;{esc(e["epigraph"]["text"]).replace(chr(10), "<br>")}&rdquo;'
-                    f'<span>{esc(e["epigraph"]["author"])}</span></p>')
-    doodle = DOODLES[0] if school == "junior" else ""
-    return f'''    <article class="cw-featured cw-featured--{school} cw-featured--{_tone(e)}" style="{_style(e)}" aria-labelledby="cw-featured-{collection}">
-      <a class="cw-featured__cover cw-cover--{school}{" is-awaiting" if awaiting else ""}" href="{esc(e["href"])}" data-cw-cover tabindex="-1" aria-hidden="true">
-        <span class="cw-featured__mast">CIRS <em>Creative Writing</em></span>
-        <span class="cw-featured__issue"><span>{esc(issue_no)}</span><span>{esc(e["date"] or "")}</span></span>
-        <span class="cw-featured__topic">{esc(e["topic"])}{doodle}</span>
-        {epigraph}
-        <span class="cw-featured__foot"><span>{esc(school_name(e["school"]) or "Anthology")}</span><span>{esc(_counts(e))}</span></span>
-      </a>
-      <div class="cw-featured__text" data-cw-reveal>
-        <p class="cw-eyebrow">Featured edition</p>
-        <h3 class="cw-featured__title" id="cw-featured-{collection}">{esc(e["topic"])}</h3>
-        <dl class="cw-featured__meta">
-{meta}
-        </dl>
-        <p class="cw-featured__intro">{esc(intro)}</p>
-        <a class="cw-featured__read" href="{esc(e["href"])}" data-cw-cover-link>{"View" if awaiting else "Read"} edition <span class="cw-arrow" aria-hidden="true">&rarr;</span></a>
+def hero_html(collection: str) -> str:
+    if collection != "all":
+        info = data()["schools"][collection]
+        name = school_name(collection)
+        first, _, second = name.partition(" ")
+        return f'''<section class="cw-hero cw-hero--compact" id="top" aria-labelledby="cw-title" data-cw-hero>
+  <div class="cw-hero__grid">
+    <div class="cw-hero__lead">
+      <p class="cw-hero__label"><a href="creative-writing.html"><span aria-hidden="true">&larr;</span> All writing</a></p>
+      <h1 class="cw-hero__title" id="cw-title"><span class="cw-hero__kicker">Creative Writing</span> <span class="cw-hero__word cw-hero__word--a">{esc(first)}</span> <span class="cw-hero__word cw-hero__word--b">{esc(second)}</span></h1>
+    </div>
+    <div class="cw-hero__side">
+      <p class="cw-hero__line">{esc(info["line"])}</p>
+      <p class="cw-hero__grades">{esc(info["grades"])}</p>
+      <a class="cw-hero__cue" href="#editions">Explore the writing <span aria-hidden="true">&darr;</span></a>
+    </div>
+  </div>
+</section>'''
+
+    first = hero_quote()
+    pool = excerpt_pool()
+    side = ""
+    if first:
+        another = ""
+        templates = ""
+        if len(pool) >= 2:
+            another = ('<button class="cw-hero__another" type="button" data-cw-another hidden>'
+                       'Another line <span aria-hidden="true">&#8635;</span></button>')
+            templates = "\n      ".join(
+                f'<template data-cw-line>{quote_figure(x)}</template>' for x in pool)
+        side = f'''    <div class="cw-hero__side" id="give-me-a-line" data-cw-fade>
+      <p class="cw-hero__label cw-hero__label--gold">From the collection</p>
+      <div class="cw-hero__stage" data-cw-stage>
+        {quote_figure(first)}
       </div>
-    </article>'''
-
-
-def panels_html(active: str) -> str:
-    blocks = []
-    for c in COLLECTIONS:
-        if c == "all":
-            line = ("Every edition, Junior and Senior. Choose a collection to read one "
-                    "school&rsquo;s writing.")
-        else:
-            info = data()["schools"][c]
-            line = f'{esc(info["line"])} <span>{esc(info["grades"])}</span>'
-        hidden = "" if c == active else " hidden"
-        blocks.append(f'''  <div class="cw-panel cw-panel--{c}" id="cw-panel-{c}" data-cw-panel="{c}"{hidden}>
-    <p class="wrap cw-panel__line">{line}</p>
-    <div class="wrap">
-{featured_html(c)}
+      <div class="cw-hero__actions">
+        <a class="cw-quote__read" href="{esc(first["href"])}" data-cw-read>Read this poem <span aria-hidden="true">&rarr;</span></a>
+        {another}
+      </div>
+      <p class="sr-only" role="status" aria-live="polite" data-cw-announce></p>
+      {templates}
+    </div>'''
+    return f'''<div class="cw-zone" data-cw-zone>
+<section class="cw-hero" id="top" aria-labelledby="cw-title" data-cw-hero>
+  <div class="cw-hero__grid">
+    <div class="cw-hero__lead">
+      <p class="cw-hero__label" data-cw-fade>CIRS <span aria-hidden="true">&middot;</span> Student writing</p>
+      <div class="cw-hero__titleblock">
+        <h1 class="cw-hero__title" id="cw-title"><span class="cw-hero__word cw-hero__word--a" data-cw-a>Creative</span> <span class="cw-hero__word cw-hero__word--b" data-cw-b>Writing</span></h1>
+        <p class="cw-hero__between" data-cw-between>Two schools. Many voices.</p>
+      </div>
+      <p class="cw-hero__sub" data-cw-fade>Poetry, stories and thoughts written at CIRS.</p>
+      <a class="cw-hero__cue" href="#editions" data-cw-fade>Explore the writing <span aria-hidden="true">&darr;</span></a>
     </div>
-    <div class="wrap cw-panel__wall">
-      <h3 class="cw-panel__wall-title" data-cw-reveal>{"More editions" if featured(c) else "Editions"}</h3>
-{wall_html(c)}
-    </div>
-  </div>''')
-    return "\n".join(blocks)
+{side}
+  </div>
+</section>
+</div>'''
 
 
-def switch_html(active: str) -> str:
+# ---------------------------------------------------------------- the collection
+
+def filter_html(active: str) -> str:
     targets = {"all": "creative-writing.html", "junior": "creative-writing/junior.html",
                "senior": "creative-writing/senior.html"}
-    names = {"all": "All", "junior": "Junior School", "senior": "Senior School"}
+    names = {"all": "All writing", "junior": "Junior School", "senior": "Senior School"}
     links = "\n".join(
-        f'      <a class="cw-switch__option" href="{targets[c]}#editions" data-cw-pick="{c}"'
-        f' aria-controls="cw-panel-{c}"{" aria-current=\"page\"" if c == active else ""}>{names[c]}</a>'
+        f'      <a class="cw-filter__link" href="{targets[c]}#editions"'
+        f'{" aria-current=\"page\"" if c == active else ""}>{names[c]}</a>'
         for c in COLLECTIONS)
-    return f'''    <nav class="cw-switch" aria-label="Collections" data-cw-switch>
+    return f'''    <nav class="cw-filter" aria-label="Collections">
 {links}
-      <span class="cw-switch__thumb" aria-hidden="true"></span>
     </nav>'''
 
 
-def hero_words_html() -> str:
-    out = []
-    for word, x, y, r, s in HERO_WORDS:
-        letters = "".join(f'<span class="cw-l">{esc(ch)}</span>' for ch in word)
-        out.append(f'<span class="cw-word" style="--x:{x}%;--y:{y}%;--r:{r}deg;--s:{s}">{letters}</span>')
-    return "\n      ".join(out)
-
-
-def hero_title_html() -> str:
-    lines = []
-    for n, line in enumerate(HERO_TITLE):
-        chars = "".join(f'<span class="cw-ch">{esc(ch)}</span>' for ch in line.upper())
-        caret = ('<span class="cw-caret" data-cw-caret></span>'
-                 if n == len(HERO_TITLE) - 1 else "")
-        lines.append(f'<span class="cw-hero__line cw-hero__line--{n + 1}">{chars}{caret}</span>')
-    return (f'<span class="sr-only">{" ".join(HERO_TITLE)}</span>'
-            f'<span class="cw-hero__letters" aria-hidden="true">{"".join(lines)}</span>')
-
-
-def lines_html() -> str:
-    """Every stored excerpt, as templates the page draws one from."""
-    items = []
-    for e, n, p in published_poems():
-        for text in p.get("lines") or []:
-            body = "<br>".join(esc(line) for line in _lines(text))
-            grade = _grade(p)
-            edition = f'{e["topic"]}{" · " + e["date"] if e["date"] else ""}'
-            items.append(
-                f'<figure class="cw-line__quote">'
-                f'<blockquote><p>{body}</p></blockquote>'
-                f'<figcaption><span class="cw-line__author">{esc(p["author"])}</span>'
-                + (f'<span class="cw-line__grade">{esc(grade)}</span>' if grade else "")
-                + f'<span class="cw-line__edition">{esc(edition)}</span>'
-                f'<a class="cw-line__read" href="{esc(e["href"])}#poem-{esc(p["id"])}">Read poem <span class="cw-arrow" aria-hidden="true">&rarr;</span></a>'
-                f'</figcaption></figure>')
+def stats_line(collection: str) -> str:
+    items = in_collection(collection)
+    published = [e for e in items if e["status"] == "published"]
     if not items:
         return ""
-    return "\n".join(f"<template data-cw-line>{item}</template>" for item in items), items[0]
+    head = _plural(len(items), "edition")
+    if not published:
+        return f"{head} · Poems to be supplied"
+    poems = sum(len(e["poems"]) for e in published)
+    writers = len({p["author"].casefold() for e in published for p in e["poems"]})
+    return f'{head} · {_plural(poems, "poem")} · {_plural(writers, "writer")}'
 
 
-def archive_html() -> str:
-    years = sorted({*data().get("archiveYears", []),
-                    *(e["year"] for e in editions() if e["year"])}, reverse=True)
-    groups = [(str(y), [e for e in editions() if e["year"] == y]) for y in years]
-    undated = [e for e in editions() if not e["year"]]
+def wave_sides(items: list[dict], collection: str) -> list[dict]:
+    """Which column each title sits in, and the grid row it starts on.
+
+    A column is a layout decision and says nothing about a school. Where the
+    collection holds both confirmed Junior and confirmed Senior editions, the
+    Junior ones lean left and the Senior ones right, and an edition whose
+    level is unconfirmed goes to the shorter side. Everywhere else (one
+    school's page, or nothing yet confirmed) the titles simply alternate.
+    Each title takes two half-rows and the right column starts a half-row
+    lower, which is what makes the zigzag."""
+    schools = {e["school"] for e in items}
+    split = collection == "all" and {"junior", "senior"} <= schools
+    taken = {"left": 0, "right": 0}
+    out = []
+    for n, e in enumerate(items):
+        if split and e["school"] in SCHOOLS:
+            side = "left" if e["school"] == "junior" else "right"
+        elif split:
+            side = "left" if taken["left"] <= taken["right"] else "right"
+        else:
+            side = "left" if n % 2 == 0 else "right"
+        k = taken[side]
+        taken[side] += 1
+        out.append({"side": side, "row": 2 * k + 1 + (side == "right")})
+    return out
+
+
+def wave_item_html(e: dict, n: int, place: dict) -> str:
+    x = edition_excerpt(e) if e["status"] == "published" else None
+    school = school_name(e["school"])
+    when = f'<span class="cw-wave__when">{esc(e["date"])}</span>' if e["date"] else ""
+    detail = []
+    if school:
+        detail.append(f'<p class="cw-wave__school">{esc(school)}</p>')
+    if x:
+        detail.append(f'<blockquote class="cw-wave__quote"><p>{_br(x["lines"])}</p></blockquote>'
+                      f'<p class="cw-wave__by">{esc(x["author"])}</p>')
+    elif e["status"] == "published" and e.get("intro"):
+        detail.append(f'<p class="cw-wave__intro">{esc(e["intro"])}</p>')
+    detail.append(f'<p class="cw-wave__meta">{esc(_counts(e))}</p>')
+    if e["ppt"]:
+        detail.append(f'<p class="cw-wave__ppt">Presentation &middot; {esc(_ppt_line(e))}</p>')
+    actions = []
+    if x:
+        actions.append(f'<a class="cw-wave__read" href="{esc(x["href"])}">Read poem '
+                       f'<span aria-hidden="true">&rarr;</span></a>')
+    actions.append(f'<a class="cw-wave__open" href="{esc(e["href"])}">'
+                   f'{"Open edition" if e["status"] == "published" else "View edition"}</a>')
+    detail.append(f'<div class="cw-wave__actions">{"".join(actions)}</div>')
+    body = "\n        ".join(detail)
+    return f'''      <li class="cw-wave__item" style="{_style(e)};--r:{place["row"]}" data-cw-item data-side="{place["side"]}">
+        <p class="cw-wave__kicker"><span class="cw-wave__no">{n + 1:02d}</span>{when}</p>
+        <a class="cw-wave__link" href="{esc(e["href"])}" data-cw-open data-cw-title><span class="cw-wave__title">{esc(e["topic"])}</span></a>
+        <div class="cw-wave__detail" data-cw-detail>
+        {body}
+        </div>
+      </li>'''
+
+
+def wave_html(collection: str) -> str:
+    items = in_collection(collection)
+    if not items:
+        return ('<p class="wrap cw-wave__empty">More editions will appear here as the '
+                'school publishes them.</p>')
+    places = wave_sides(items, collection)
+    rows = max(p["row"] for p in places) + 1
+    lis = "\n".join(wave_item_html(e, n, places[n]) for n, e in enumerate(items))
+    return f'''  <div class="cw-wave" data-cw-wave>
+    <ol class="cw-wave__list" style="--rows:{rows}" aria-label="{esc(_collection_name(collection))} editions, newest first">
+{lis}
+    </ol>
+    <div class="cw-wave__stage">
+      <div class="cw-wave__pin">
+        <section class="cw-preview" aria-label="Selected edition" data-cw-preview>
+          <div class="cw-preview__body" data-cw-preview-body></div>
+        </section>
+      </div>
+    </div>
+  </div>'''
+
+
+# ---------------------------------------------------------------- featured
+
+def featured_picks(collection: str, limit: int = 3) -> list[dict]:
+    """Published editions, the featured ones first, then in the order the
+    school's data lists them (which makes no claim about recency)."""
+    pool = [e for e in in_collection(collection) if e["status"] == "published"]
+    return sorted(pool, key=lambda e: (not e.get("featured"), e["order"]))[:limit]
+
+
+def featured_html(collection: str) -> str:
+    picks = featured_picks(collection)
+    if not picks:
+        return ""
+    entries = []
+    for n, e in enumerate(picks):
+        x = edition_excerpt(e)
+        quote = ""
+        if x:
+            quote = (f'<blockquote class="cw-feature__quote"><p>{_br(x["lines"])}</p>'
+                     f'<footer>{esc(x["author"])}</footer></blockquote>')
+        intro = f'<p class="cw-feature__intro">{esc(e["intro"])}</p>' if e.get("intro") else ""
+        when = f'<p class="cw-feature__when">{esc(e["date"])}</p>' if e["date"] else ""
+        school = school_name(e["school"])
+        tag = f'<p class="cw-feature__school">{esc(school)}</p>' if school else ""
+        size = "large" if n % 2 == 0 else "small"
+        entries.append(f'''      <li class="cw-feature cw-feature--{size}" style="{_style(e)}">
+        {when}
+        <h3 class="cw-feature__title" data-cw-title><a href="{esc(e["href"])}" data-cw-open><span>{esc(e["topic"])}</span></a></h3>
+        {tag}
+        <p class="cw-feature__writers">{esc(", ".join(_writers(e)))}</p>
+        {quote}
+        {intro}
+        <a class="cw-feature__read" href="{esc(e["href"])}">Open edition <span aria-hidden="true">&rarr;</span></a>
+      </li>''')
+    body = "\n".join(entries)
+    return f'''<section class="cw-featured" id="featured" aria-labelledby="cw-featured-title">
+  <div class="wrap">
+    <header class="cw-featured__head">
+      <p class="cw-eyebrow">Featured editions</p>
+      <h2 class="cw-featured__title" id="cw-featured-title" data-cw-slice>Voices</h2>
+    </header>
+    <ol class="cw-featured__list">
+{body}
+    </ol>
+  </div>
+</section>'''
+
+
+# ---------------------------------------------------------------- archive
+
+def archive_html(collection: str) -> str:
+    pool = [e for e in editions() if collection == "all" or e["school"] == collection]
+    years = sorted({*data().get("archiveYears", []), *(e["year"] for e in pool if e["year"])},
+                   reverse=True)
+    groups = [(str(y), [e for e in pool if e["year"] == y]) for y in years]
+    undated = [e for e in pool if not e["year"]]
     if undated:
         groups.append(("Year not recorded", undated))
-    rows = []
-    for label, items in groups:
+    out = []
+    for n, (label, items) in enumerate(groups):
         items = sorted(items, key=lambda e: (-(e["month"] or 0), e["order"]))
         if items:
-            entries = "\n".join(
-                f'''          <li class="cw-archive__entry{" is-awaiting" if e["status"] != "published" else ""}" style="{_style(e)}">
-            <a href="{esc(e["href"])}">
-              <span class="cw-archive__month">{esc(MONTHS[e["month"] - 1] if e["month"] else "—")}</span>
-              <span class="cw-archive__topic">{esc(e["topic"])}</span>
-              <span class="cw-archive__school">{esc(school_name(e["school"]) or "Level to be confirmed")}</span>
+            rows = []
+            for e in items:
+                month = MONTHS[e["month"] - 1][:3] if e["month"] else "&ndash;"
+                level = school_name(e["school"]) or "Level to be confirmed"
+                ppt = (f'<a class="cw-archive__ppt" href="{esc(e["ppt"]["href"])}" download>'
+                       f'Presentation &middot; {esc(_ppt_line(e))}</a>') if e["ppt"] else ""
+                rows.append(f'''          <li class="cw-archive__row{" is-awaiting" if e["status"] != "published" else ""}" style="{_style(e)}">
+            <a class="cw-archive__link" href="{esc(e["href"])}" data-cw-open>
+              <span class="cw-archive__month">{month}</span>
+              <span class="cw-archive__topic" data-cw-title>{esc(e["topic"])}</span>
+              <span class="cw-archive__level">{esc(level)}</span>
               <span class="cw-archive__count">{esc(_counts(e))}</span>
-              <span class="cw-arrow" aria-hidden="true">&rarr;</span>
-            </a>
-          </li>''' for e in items)
-            body = f'        <ol class="cw-archive__list">\n{entries}\n        </ol>'
+              <span class="cw-archive__go" aria-hidden="true">&rarr;</span>
+            </a>{ppt}
+          </li>''')
+            body = ('        <ol class="cw-archive__list">\n' + "\n".join(rows) + "\n        </ol>")
         else:
             body = '        <p class="cw-archive__none">Editions from this year are to be added.</p>'
-        rows.append(f'''      <div class="cw-archive__year" data-cw-reveal>
-        <h3 class="cw-archive__label">{esc(label)}</h3>
+        note = "" if label.isdigit() else " cw-archive__label--note"
+        out.append(f'''      <section class="cw-archive__year" aria-labelledby="cw-year-{n}">
+        <h3 class="cw-archive__label{note}" id="cw-year-{n}">{esc(label)}</h3>
 {body}
-      </div>''')
-    return "\n".join(rows)
+      </section>''')
+    return "\n".join(out)
 
 
 def legacy_html() -> str:
@@ -572,21 +678,15 @@ def legacy_html() -> str:
 
 def main_html(active: str) -> str:
     template = TEMPLATE_PATH.read_text(encoding="utf-8").rstrip("\n")
-    lines = lines_html()
-    templates, first = lines if lines else ("", "")
     return (template
-            .replace("{{CW_HERO_WORDS}}", hero_words_html())
-            .replace("{{CW_HERO_TITLE}}", hero_title_html())
-            .replace("{{CW_SWITCH}}", switch_html(active))
-            .replace("{{CW_PANELS}}", panels_html(active))
             .replace("{{CW_ACTIVE}}", active)
-            .replace("{{CW_LINES}}", templates)
-            .replace("{{CW_FIRST_LINE}}", first)
-            .replace("{{CW_ARCHIVE}}", archive_html())
-            .replace("{{CW_LEGACY}}", legacy_html() if active == "all" else "")
-            .replace("{{CW_COUNT}}", str(count()))
-            .replace("{{CW_WRITERS}}", str(writer_count()))
-            .replace("{{CW_YEAR}}", str(max((e["year"] or 0) for e in editions()) or "")))
+            .replace("{{CW_HERO}}", hero_html(active))
+            .replace("{{CW_STATS}}", esc(stats_line(active)))
+            .replace("{{CW_FILTER}}", filter_html(active))
+            .replace("{{CW_WAVE}}", wave_html(active))
+            .replace("{{CW_FEATURED}}", featured_html(active))
+            .replace("{{CW_ARCHIVE}}", archive_html(active))
+            .replace("{{CW_LEGACY}}", legacy_html() if active == "all" else ""))
 
 
 # ---------------------------------------------------------------- an edition
@@ -609,39 +709,14 @@ def _neighbours(e: dict):
     return (shelf[i - 1] if i else None), (shelf[i + 1] if i + 1 < len(shelf) else None)
 
 
-def presentation_html(e: dict) -> str:
-    ppt = e["ppt"]
-    school = school_name(e["school"])
-    heading = f'{school + " " if school else ""}Creative Writing'
-    counts = []
-    if e["status"] == "published":
-        counts.append(_plural(len(e["poems"]), "poem"))
-    if ppt and ppt.get("slides"):
-        counts.append(_plural(ppt["slides"], "slide"))
-    counts_html = f'<p class="cw-pres__counts">{esc(" · ".join(counts))}</p>' if counts else ""
-    if ppt:
-        action = (f'<a class="cw-pres__download" href="{esc(ppt["href"])}" download '
-                  f'aria-describedby="cw-pres-file">Download Presentation <span class="cw-pres__arrow" aria-hidden="true">&darr;</span></a>'
-                  f'<p class="cw-pres__file" id="cw-pres-file">{esc(ppt["ext"])} · {esc(ppt["size"])}</p>')
-    else:
-        action = ('<p class="cw-pres__pending">The presentation for this edition will be '
-                  'available to download here once the school supplies it.</p>')
-    return f'''  <section class="cw-pres{" is-pending" if not ppt else ""}" id="presentation" aria-labelledby="cw-pres-title">
-    <div class="wrap cw-pres__layout">
-      <div class="cw-pres__deck" aria-hidden="true">
-        <span class="cw-pres__slide"></span><span class="cw-pres__slide"></span>
-        <span class="cw-pres__slide cw-pres__slide--front"><span>{esc(e["topic"])}</span><small>{esc(e["date"] or "")}</small></span>
-      </div>
-      <div class="cw-pres__text" data-cw-reveal>
-        <p class="cw-eyebrow">The Presentation Edition</p>
-        <h2 class="cw-pres__title" id="cw-pres-title">{esc(e["topic"])}</h2>
-        <p class="cw-pres__date">{esc(e["date"] or "Date not recorded")}</p>
-        <p class="cw-pres__school">{esc(heading)}</p>
-        {counts_html}
-        {action}
-      </div>
-    </div>
-  </section>'''
+def _download(e: dict) -> str:
+    """The presentation link, or nothing: an edition without one shows no control."""
+    if not e["ppt"]:
+        return ""
+    return (f'<a class="cw-head__download" href="{esc(e["ppt"]["href"])}" download>'
+            f'<span class="cw-head__download-label">Download presentation '
+            f'<span aria-hidden="true">&darr;</span></span>'
+            f'<span class="cw-head__download-file">{esc(_ppt_line(e))}</span></a>')
 
 
 def edition_html(e: dict) -> str:
@@ -649,148 +724,158 @@ def edition_html(e: dict) -> str:
     awaiting = e["status"] != "published"
     poems = e["poems"]
     total = len(poems)
-    crumbs = [('creative-writing.html', "Creative Writing")]
-    if e["school"]:
-        crumbs.append((f'creative-writing/{e["school"]}.html', school_name(e["school"])))
-    crumb_html = '<span aria-hidden="true">/</span>'.join(
-        f'<a href="{href}">{esc(label)}</a>' for href, label in crumbs)
-    ppt_chip = ('<a class="cw-open__ppt" href="#presentation">Edition PPT '
-                '<span aria-hidden="true">&darr;</span></a>')
-    counts = ""
-    if not awaiting:
-        counts = (f'<p class="cw-open__counts"><span><strong>{e["writers"]}</strong> {"writer" if e["writers"] == 1 else "writers"}</span>'
-                  f'<span><strong>{total}</strong> {"poem" if total == 1 else "poems"}</span></p>')
-    else:
-        counts = '<p class="cw-open__counts cw-open__counts--pending">Poems to be supplied</p>'
-    intro = f'<p class="cw-open__intro">{esc(e["intro"])}</p>' if e.get("intro") else ""
-    level_note = ("" if e["school"] else
-                  '<p class="cw-open__note">School level to be confirmed</p>')
-    issue = (f'<p class="cw-open__issue">{esc(e["issue"])}</p>' if e["issue"] else
-             '<p class="cw-open__issue cw-open__issue--undated">Date not recorded</p>')
-    doodle = DOODLES[0] if school == "junior" else ""
+    back = (f'creative-writing/{e["school"]}.html#editions' if e["school"]
+            else "creative-writing.html#editions")
+    # In-page links carry the page's own address. The shared script scrolls
+    # every href="#…" itself and leaves no history entry; an address with the
+    # page's path is the browser's own same-document navigation, so the
+    # address changes, Back and Forward walk the poems, and a refresh lands
+    # where the reader was.
+    here = esc(e["href"])
 
-    opening = f'''<header class="cw-open cw-open--{school}" id="top" data-cw-open>
-  <div class="wrap cw-open__layout">
-    <div class="cw-open__bar">
-      <nav class="cw-open__crumbs" aria-label="Breadcrumb">{crumb_html}</nav>
-      {ppt_chip}
-    </div>
-    <div class="cw-open__title">
-      {issue}
-      <h1 class="cw-open__topic">{esc(e["topic"])}{doodle}</h1>
-      <p class="cw-open__kind">Creative Writing Collection</p>
-      <p class="cw-open__school">{esc(school_name(e["school"]) or "Anthology")}</p>
-      {level_note}
-    </div>
-    <div class="cw-open__foot">
-      {counts}
-      {intro}
-      <a class="cw-open__begin" href="#reader">{"Begin reading" if not awaiting else "About this edition"} <span aria-hidden="true">&darr;</span></a>
-    </div>
+    crumbs = ['<li><a href="creative-writing.html">Creative Writing</a></li>']
+    if e["school"]:
+        crumbs.append(f'<li><a href="creative-writing/{e["school"]}.html">{esc(school_name(e["school"]))}</a></li>')
+    crumbs.append(f'<li><span aria-current="page">{esc(e["date"] or e["topic"])}</span></li>')
+
+    facts = []
+    if awaiting:
+        facts.append('<li>Poems to be supplied</li>')
+    else:
+        facts.append(f'<li><strong>{e["writers"]}</strong> {"writer" if e["writers"] == 1 else "writers"}</li>')
+        facts.append(f'<li><strong>{total}</strong> {"poem" if total == 1 else "poems"}</li>')
+    facts.append(f'<li>{esc(school_name(e["school"]))}</li>' if e["school"]
+                 else '<li>School level to be confirmed</li>')
+    intro = f'<p class="cw-head__intro">{esc(e["intro"])}</p>' if e.get("intro") else ""
+
+    head = f'''<header class="cw-head" id="top">
+  <div class="wrap cw-head__wrap">
+    <nav class="cw-head__crumbs" aria-label="Breadcrumb"><ol>{"".join(crumbs)}</ol></nav>
+    <h1 class="cw-head__title" data-cw-title>{esc(e["topic"])}</h1>
+    {intro}
+    <ul class="cw-head__facts">{"".join(facts)}</ul>
+    {_download(e)}
   </div>
 </header>'''
 
     if awaiting:
-        reader = f'''<section class="cw-reader cw-reader--awaiting" id="reader" aria-labelledby="cw-awaiting-title">
-  <div class="wrap cw-awaiting">
-    <p class="cw-eyebrow">This edition</p>
+        body = f'''<section class="cw-awaiting" id="contents" aria-labelledby="cw-awaiting-title">
+  <div class="wrap cw-awaiting__wrap">
     <h2 class="cw-awaiting__title" id="cw-awaiting-title">Awaiting the writers&rsquo; pages.</h2>
     <p>The poems for {esc(e["topic"])}{", " + esc(e["date"]) if e["date"] else ""} will be published here, each with its writer and grade, once the school supplies them.</p>
   </div>
 </section>'''
     else:
-        index = "\n".join(
-            f'          <li><a class="cw-index__link" href="#poem-{esc(p["id"])}" data-cw-goto="{i}"'
-            f'{" aria-current=\"true\"" if i == 0 else ""}><span class="cw-index__n">{i + 1:02d}</span>'
-            f'<span class="cw-index__t">{esc(poem_title(p))}</span></a></li>'
-            for i, p in enumerate(poems))
+        contents = "\n".join(
+            f'''      <li><a class="cw-contents__link" href="{here}#poem-{esc(p["id"])}">
+        <span class="cw-contents__no">{i + 1:02d}</span>
+        <span class="cw-contents__who">{esc(p["author"])}</span>
+        <span class="cw-contents__what">{esc(poem_title(p))}</span>
+        <span class="cw-contents__go" aria-hidden="true">&rarr;</span>
+      </a></li>''' for i, p in enumerate(poems))
         articles = []
         for i, p in enumerate(poems):
-            prev_p, next_p = (poems[i - 1] if i else None), (poems[i + 1] if i + 1 < total else None)
-            nav = []
+            prev_p = poems[i - 1] if i else None
+            next_p = poems[i + 1] if i + 1 < total else None
             if prev_p:
-                nav.append(f'<a class="cw-poem__step cw-poem__step--prev" href="#poem-{esc(prev_p["id"])}" rel="prev" data-cw-goto="{i - 1}">'
-                           f'<span class="cw-poem__step-label"><span aria-hidden="true">&larr;</span> Previous poem</span>'
-                           f'<span class="cw-poem__step-title">{esc(poem_title(prev_p))}</span></a>')
+                prev = (f'<a class="cw-poem__step cw-poem__step--prev" href="{here}#poem-{esc(prev_p["id"])}" rel="prev">'
+                        f'<span class="cw-poem__step-label"><span aria-hidden="true">&larr;</span> Previous poem</span>'
+                        f'<span class="cw-poem__step-name">{esc(prev_p["author"])}</span></a>')
             else:
-                nav.append('<span class="cw-poem__step cw-poem__step--prev cw-poem__step--none" aria-hidden="true"></span>')
+                prev = '<span class="cw-poem__step cw-poem__step--none" aria-hidden="true"></span>'
             if next_p:
-                nav.append(f'<a class="cw-poem__step cw-poem__step--next" href="#poem-{esc(next_p["id"])}" rel="next" data-cw-goto="{i + 1}">'
-                           f'<span class="cw-poem__step-label">Next poem <span aria-hidden="true">&rarr;</span></span>'
-                           f'<span class="cw-poem__step-title">{esc(poem_title(next_p))}</span></a>')
+                nxt = (f'<a class="cw-poem__step cw-poem__step--next" href="{here}#poem-{esc(next_p["id"])}" rel="next">'
+                       f'<span class="cw-poem__step-label">Next poem <span aria-hidden="true">&rarr;</span></span>'
+                       f'<span class="cw-poem__step-name">{esc(next_p["author"])}</span></a>')
             else:
-                nav.append('<a class="cw-poem__step cw-poem__step--next" href="#presentation">'
-                           '<span class="cw-poem__step-label">End of the edition <span aria-hidden="true">&darr;</span></span>'
-                           '<span class="cw-poem__step-title">The presentation edition</span></a>')
+                nxt = (f'<a class="cw-poem__step cw-poem__step--next" href="{here}#more">'
+                       '<span class="cw-poem__step-label">End of the edition <span aria-hidden="true">&darr;</span></span>'
+                       '<span class="cw-poem__step-name">More editions</span></a>')
             titled = bool(p.get("title"))
             grade = _grade(p)
+            byline = ""
+            if titled:
+                byline += f'<p class="cw-poem__author">{esc(p["author"])}</p>'
+            if grade:
+                byline += f'<p class="cw-poem__grade">{esc(grade)}</p>'
             stanzas = "\n".join("          " + _stanza(s) for s in p["stanzas"])
-            articles.append(f'''      <article class="cw-poem" id="poem-{esc(p["id"])}" aria-labelledby="poem-{esc(p["id"])}-title" data-cw-poem="{i}">
-        <p class="cw-poem__count"><span>{i + 1:02d}</span> / {total:02d}</p>
-        {"" if titled else '<p class="cw-poem__untitled">Untitled &middot; first line</p>'}
-        <h2 class="cw-poem__title{"" if titled else " cw-poem__title--line"}" id="poem-{esc(p["id"])}-title">{esc(poem_title(p))}</h2>
-        <p class="cw-poem__by"><span class="cw-poem__author">{esc(p["author"])}</span>{f'<span class="cw-poem__grade">{esc(grade)}</span>' if grade else ""}</p>
+            name_cls = "cw-poem__name" + ("" if titled else " cw-poem__name--writer")
+            articles.append(f'''      <article class="cw-poem" id="poem-{esc(p["id"])}" aria-labelledby="poem-{esc(p["id"])}-name" data-cw-poem data-cw-n="{i + 1:02d}" data-cw-who="{esc(p["author"])}">
+        <header class="cw-poem__head">
+          <p class="cw-poem__meta"><span>{esc(e["topic"])}</span><span>{i + 1:02d} / {total:02d}</span></p>
+          <h2 class="{name_cls}" id="poem-{esc(p["id"])}-name">{esc(poem_title(p) if titled else p["author"])}</h2>
+          {byline}
+        </header>
         <div class="cw-verse">
 {stanzas}
         </div>
-        <nav class="cw-poem__nav" aria-label="Poems either side of {esc(poem_title(p))}">
-          {"".join(nav)}
+        <nav class="cw-poem__nav" aria-label="After the poem by {esc(p["author"])}">
+          {prev}
+          <a class="cw-poem__contents" href="{here}#contents">Contents</a>
+          {nxt}
         </nav>
       </article>''')
-        reader = f'''<section class="cw-reader" id="reader" aria-label="The poems" data-cw-reader>
-  <div class="cw-reader__layout">
-    <aside class="cw-rail" id="cw-rail" aria-label="In this edition" data-cw-rail>
+        rail_ppt = f'<a class="cw-rail__link" href="{here}#presentation">Presentation</a>' if e["ppt"] else ""
+        rail_back = f'All {esc(school_name(e["school"]))}' if e["school"] else "All writing"
+        rail_when = f'<p class="cw-rail__when">{esc(e["date"])}</p>' if e["date"] else ""
+        body = f'''<section class="cw-contents" id="contents" aria-labelledby="cw-contents-title">
+  <div class="wrap">
+    <h2 class="cw-contents__label" id="cw-contents-title">Contents</h2>
+    <ol class="cw-contents__list">
+{contents}
+    </ol>
+  </div>
+</section>
+
+<div class="cw-reading" id="reader" data-cw-reading>
+  <div class="cw-reading__layout">
+    <aside class="cw-rail" aria-label="Edition navigation">
       <div class="cw-rail__inner">
-        <div class="cw-rail__head">
-          <p class="cw-rail__title">{esc(e["topic"])}</p>
-          <button class="cw-rail__close" type="button" data-cw-drawer-close>Close <span class="sr-only">the poem index</span></button>
-        </div>
-        <a class="cw-rail__ppt" href="#presentation">Edition PPT <span aria-hidden="true">&darr;</span></a>
-        <div class="cw-progress" data-cw-progress>
-          <span class="cw-progress__label"><span data-cw-now>01</span> / {total:02d}</span>
-          <span class="cw-progress__track" aria-hidden="true"><span class="cw-progress__fill"></span></span>
-        </div>
-        <nav class="cw-index" aria-label="Poems in this edition">
-          <ol>
-{index}
-          </ol>
-        </nav>
-        <p class="cw-rail__keys">Use <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to turn poems</p>
+        <a class="cw-rail__back" href="{back}"><span aria-hidden="true">&larr;</span> {rail_back}</a>
+        <p class="cw-rail__title">{esc(e["topic"])}</p>
+        {rail_when}
+        <p class="cw-rail__now" aria-hidden="true"><span class="cw-rail__count"><span data-cw-now>01</span> / {total:02d}</span><span class="cw-rail__who">{esc(poems[0]["author"])}</span></p>
+        <a class="cw-rail__link" href="{here}#contents">Contents</a>
+        {rail_ppt}
       </div>
     </aside>
     <div class="cw-poems">
 {chr(10).join(articles)}
     </div>
   </div>
-  <button class="cw-readbar" type="button" aria-controls="cw-rail" aria-expanded="false" data-cw-drawer-open>
-    <span class="cw-readbar__label">Poems</span>
-    <span class="cw-readbar__count"><span data-cw-now>01</span> / {total:02d}</span>
-    <span class="cw-readbar__track" aria-hidden="true"><span class="cw-progress__fill"></span></span>
-  </button>
+</div>'''
+
+    pres = ""
+    if e["ppt"]:
+        pres = f'''
+<section class="cw-pres" id="presentation" aria-labelledby="cw-pres-title">
+  <div class="wrap cw-pres__wrap">
+    <h2 class="cw-pres__title" id="cw-pres-title">Presentation</h2>
+    {_download(e)}
+  </div>
 </section>'''
 
     before, after = _neighbours(e)
     more = []
     for label, other in (("Newer edition", before), ("Earlier edition", after)):
         if other:
-            more.append(f'''    <a class="cw-more__link" href="{esc(other["href"])}" style="{_style(other)}" data-cw-cover>
-      <span class="cw-more__label">{label}</span>
-      <span class="cw-more__topic">{esc(other["topic"])}</span>
-      <span class="cw-more__date">{esc(other["date"] or "Date not recorded")} · {esc(_counts(other))}</span>
-    </a>''')
-    back = (f'creative-writing/{e["school"]}.html#editions' if e["school"]
-            else "creative-writing.html#editions")
-    more_html = f'''<nav class="cw-more wrap" aria-label="More editions">
-  <div class="cw-more__grid">
-{chr(10).join(more)}
+            more.append(f'''      <li><a class="cw-more__link" href="{esc(other["href"])}" style="{_style(other)}" data-cw-open>
+        <span class="cw-more__label">{label}</span>
+        <span class="cw-more__topic" data-cw-title>{esc(other["topic"])}</span>
+        <span class="cw-more__meta">{esc(" · ".join(x for x in (other["date"], _counts(other)) if x))}</span>
+      </a></li>''')
+    more_list = f'    <ul class="cw-more__list">\n{chr(10).join(more)}\n    </ul>\n' if more else ""
+    all_name = (esc(school_name(e["school"])) + " ") if e["school"] else ""
+    more_html = f'''<nav class="cw-more" id="more" aria-labelledby="cw-more-title">
+  <div class="wrap">
+    <h2 class="cw-more__heading" id="cw-more-title">More editions</h2>
+{more_list}    <a class="cw-more__all" href="{back}">All {all_name}editions <span aria-hidden="true">&rarr;</span></a>
   </div>
-  <a class="cw-more__all" href="{back}">All {esc(school_name(e["school"]) + " " if e["school"] else "")}editions <span class="cw-arrow" aria-hidden="true">&rarr;</span></a>
 </nav>'''
 
-    return f'''<div class="cw-edition cw-edition--{school} cw-edition--{_tone(e)}{" is-awaiting" if awaiting else ""}" style="{_style(e)}" data-cw-edition="{esc(e["id"])}">
-{opening}
-{reader}
-{presentation_html(e)}
+    return f'''<div class="cw-edition cw-edition--{school}{" is-awaiting" if awaiting else ""}" style="{_style(e)}" data-cw-edition="{esc(e["id"])}">
+{head}
+{body}{pres}
 {more_html}
 </div>'''
 
@@ -801,12 +886,12 @@ def page_entries() -> dict:
     """The PAGES entries build-site.py adds: the two collection views and
     every edition. None is in MENU; Creative Writing is how a reader reaches them."""
     base = {"sheet": "cwriting", "banner": None, "jump": False, "uc": False,
-            "litehead": True, "cache_suffix": "-manuscript-1"}
+            "cache_suffix": "-journal-1"}
     pages = {}
     for c in SCHOOLS:
         name = school_name(c)
         pages[f"creative-writing/{c}"] = dict(
-            base, nav=f"{name} Creative Writing",
+            base, nav=f"{name} Creative Writing", litehead=False,
             title=f"{name} Creative Writing | CIRS",
             description=f'{data()["schools"][c]["line"]} Creative writing from the {name} '
                         f"of Chinmaya International Residential School, edition by edition.",
@@ -816,9 +901,9 @@ def page_entries() -> dict:
         when = f', {e["date"]}' if e["date"] else ""
         pages[e["path"]] = dict(
             base, nav=esc(e["topic"]),
-            # The opening is the edition's own ground: ink lettering on a
-            # pale one, the header's light lettering on a dark one.
-            litehead=not e["theme_css"]["dark"],
+            # Every edition opens on the site's ivory, with its own colour as
+            # a restrained accent, so the header letters in ink.
+            litehead=True,
             title=esc(f'{e["topic"]}{when} | {name + " " if name else ""}Creative Writing | CIRS'),
             description=esc((e.get("intro") or f'The {e["topic"]} edition of CIRS Creative Writing.')[:180]),
             cw={"kind": "edition", "edition": e["id"]})
@@ -833,13 +918,19 @@ def render(spec: dict) -> str:
 
 
 def head_html(spec: dict) -> str:
-    """Before first paint: mark the page for its entrances, so nothing below
-    the fold is drawn and then hidden. If cwriting.js never runs, the mark is
-    taken off again and the whole page shows. The shared curtain is not used
-    here; a returning tab's is hidden at once rather than flashed."""
-    return ('<script>(function(d){var h=d.documentElement;h.classList.add("cw-js");'
-            'try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)h.classList.add("cw-still")}catch(e){}'
-            'setTimeout(function(){if(!window.__cwBooted)h.classList.remove("cw-js")},5000)})(document)</script>\n')
+    """Before first paint: mark the page for the layouts the script will add,
+    so a reload part-way down does not jump when the script arrives. If
+    cwriting.js never runs, every mark is taken off again and the page is
+    the plain, complete document it was written as."""
+    marks = ""
+    if spec["kind"] == "main":
+        wave = f'if(w.matchMedia("{WAVE_QUERY}").matches)h.classList.add("cw-wave-on");'
+        split = (f'if(w.matchMedia("{SPLIT_QUERY}").matches)h.classList.add("cw-split-on");'
+                 if spec["collection"] == "all" else "")
+        marks = f"{split}{wave}"
+    return ('<script>(function(d,w){var h=d.documentElement;h.classList.add("cw-js");'
+            f'try{{{marks}}}catch(e){{}}'
+            'setTimeout(function(){if(!w.__cwBooted)h.classList.remove("cw-js","cw-split-on","cw-wave-on")},5000)})(document,window)</script>\n')
 
 
 if __name__ == "__main__":

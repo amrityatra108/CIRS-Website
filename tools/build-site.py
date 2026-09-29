@@ -52,7 +52,7 @@ import laurels
 import experience
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=113"
+CACHE_BUST = "b=114"
 
 # Where a film's large-screen encode is offered. Everything that fails it —
 # a phone held either way up — takes the phone encode (tools/make-films.py),
@@ -201,14 +201,14 @@ PAGES = {
         "description": "The CIRS archive: Pujya Gurudev's idea, the land bought one rupee at a "
                        "time, the inauguration on 6 June 1996 and the milestones since, each "
                        "with its source.",
-        # No banner and no hero. The page opens on its own dark composition —
-        # the school's records set back at shallow depths behind the title —
-        # then tells six chapters in one bounded sticky sequence and ends on
-        # the complete archive. Every record is written from tools/history.py,
+        # No banner and no hero. The page opens on a near-dark field with the
+        # first year, then tells the history as one continuous journey — a
+        # camera path through the records on a wide window, an editorial
+        # column everywhere else — and ends on the complete archive. Every record is written from tools/history.py,
         # which names each one's source; tools/make-history.py cuts the images.
         "banner": None,
         "sheet": "history",
-        "cache_suffix": "-history-1",
+        "cache_suffix": "-history-2",
         # The chapters carry their own visible index and "View all
         # milestones", so the floating "On this page" control would repeat it.
         "jump": False,
@@ -285,7 +285,7 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-atlas-1",
+        "cache_suffix": "-curriculum-atlas-2",
         # No banner. The page opens on its own full-window scene, built in
         # tools/pages/curriculum.html: the gold path of the grades rising
         # through the school's purple, the heading, the page's facts and its
@@ -515,18 +515,19 @@ PAGES = {
         "description": "Stories, poems, thoughts and imaginations by the Junior and Senior "
                        "School students of Chinmaya International Residential School, "
                        "published edition by edition.",
-        # "The Living Manuscript": a blank page whose scattered words assemble
-        # into the h1, then the two collections and their editions. Every
-        # edition, poem and presentation is data in
+        # A student literary journal: a deep-purple opening (a real student
+        # line beside the title, and "Another line"), then the editions as two
+        # opposing waves of titles, a short featured set and the archive.
+        # Every edition, poem and presentation is data in
         # tools/creative-writing-content.json, rendered by tools/creativewriting.py,
         # which also adds the Junior, Senior and edition pages below.
         "banner": None,
         "sheet": "cwriting",
-        "cache_suffix": "-manuscript-1",
+        "cache_suffix": "-journal-1",
         "jump": False,
         "uc": False,
-        # The opening is pale paper, so the header letters in ink over it.
-        "litehead": True,
+        # The opening is deep purple, so the header letters in light over it.
+        "litehead": False,
         "cw": {"kind": "main", "collection": "all"},
     },
     "captures": {
@@ -2182,8 +2183,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
     if slug == "blog" or page.get("post") or page.get("cw"):
         # Journal pages open directly on readable type, and Creative Writing
-        # opens on its own blank page and cursor. The shared full-screen
-        # curtain would hide their masthead and force an unrelated wait.
+        # opens on the title and a student's own line. The shared full-screen
+        # curtain would hide them and force an unrelated wait.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
         chrome = chrome[:intro_start] + chrome[intro_end:]
@@ -2409,9 +2410,12 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "leadership":
         parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":
-        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-1" defer></script>')
+        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-2" defer></script>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
+        # The journey's controller. It imports Three.js (history-world.js) only
+        # on a window wide enough for the 3D path, so a phone never fetches it.
+        parts.append(f'<script type="module" src="assets/js/history-journey.js?{CACHE_BUST}"></script>')
     if slug == "our-laurels":
         parts.append(f'<script src="assets/js/laurels.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):

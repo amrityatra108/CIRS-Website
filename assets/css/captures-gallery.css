@@ -356,3 +356,25 @@
   .cg__item:hover img{ transform:none; }
   .cv__frame img.is-entering{ animation:none; }
 }
+
+/* ---- Phones: a collage, not a column --------------------------------------
+   Each chapter used to become one photograph under another, forty screens of
+   the same shape. The rows now keep their own arrangement: a single
+   photograph runs full width; a pair sits side by side at its own shapes,
+   justified to the row like the desktop grid; a row of three becomes one
+   wide frame over two square ones. Captions stay on the full-width frames,
+   where there is room for them; every tile still opens the viewer. */
+@media (max-width:640px){
+  .cg__grid{ gap:8px; }
+  .cg__row{ flex-direction:row; gap:8px; }
+  .cg__row > .cg__item{ flex:var(--ar) 1 0%; width:auto; }
+  .cg__row:not(.cg__row--solo) .cg__item-caption{ display:none; }
+  .cg__row:has(> .cg__item:nth-child(3)){
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .cg__row:has(> .cg__item:nth-child(3)) > .cg__item{ width:100%; aspect-ratio:1; }
+  .cg__row:has(> .cg__item:nth-child(3)) > .cg__item:first-child{
+    grid-column:1 / -1; aspect-ratio:16 / 10;
+  }
+  .cg__row:has(> .cg__item:nth-child(3)) > .cg__item:first-child .cg__item-caption{ display:block; opacity:1; }
+}

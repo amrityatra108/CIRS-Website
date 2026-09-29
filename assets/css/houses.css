@@ -268,3 +268,40 @@ body.houses{--house-red:#a8243b;--house-yellow:#f1c928;--house-green:#287246;--h
 
 /* Keep refresh measurement scrolls synchronous; Lenis handles user scrolling. */
 html:has(body.houses.houses-motion){scroll-behavior:auto!important}
+
+/* ---- Phones ------------------------------------------------------------
+   Opening: each house's panel is tinted its own colour while its photograph
+   loads and keeps a trace of it after, so the four read as four houses from
+   the first paint rather than four dark bands with a name on each.
+
+   Explore the four houses: cirs.js pads the right of text wrappers to keep a
+   lane clear for the floating buttons, and that padding pushed each house's
+   photograph off centre. The photograph now spans both gutters again; the
+   text keeps its lane.
+
+   In frames: a collage in two columns instead of a strip to be swiped. */
+@media (max-width:900px){
+  .house-zone{ background:linear-gradient(160deg, var(--house-colour) 0%, #1a1028 78%); }
+  .house-zone::before{ opacity:.14; }
+  .house-spread.float-lane > .house-spread__body > figure,
+  .house-spread.float-lane figure{ margin-right:calc(var(--gut) - var(--float-pad, 0px)) !important; }
+  .house-spread figure{ align-self:stretch; }
+  .house-spread .house-photo-mask > img{ object-position:50% 45%; }
+
+  .house-gallery__hint{ display:none; }
+  .house-gallery__strip{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px;
+    overflow:visible; scroll-snap-type:none; padding:8px var(--gut) 24px !important;
+  }
+  .house-gallery__strip > li,
+  .house-gallery__strip > li:nth-child(even){ flex:none; min-width:0; padding-top:0; }
+  .house-gallery__strip > li[hidden]{ display:none; }
+  .house-gallery__strip > li:nth-child(3n+1){ grid-column:1 / -1; }
+  .house-gallery__strip figure img,
+  .house-gallery__strip > li:nth-child(even) img{
+    width:100%; height:auto; aspect-ratio:4 / 5; object-fit:cover; object-position:50% 40%;
+  }
+  .house-gallery__strip > li:nth-child(3n+1) img{ aspect-ratio:16 / 10; }
+  .house-gallery__strip > li.is-selected img{ object-fit:cover; background:none; }
+  .house-gallery__strip figcaption{ font-size:.8rem; }
+}
