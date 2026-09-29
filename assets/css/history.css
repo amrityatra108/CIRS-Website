@@ -3,38 +3,38 @@
    ------------------------------------------------------------
    Scoped to body.history. The page is built from tools/history.py.
 
-   Two arrangements of the same markup:
+   The journey is one document in reading order, in two arrangements:
 
-   LIST  the default, and what a phone, a short window, reduced
-         motion and a page without scripting all get. Chapters are
-         a column of exhibits, each with a shallow stack of paper
-         behind it, and ordinary scrolling.
-   STAGE html.hx-staged, set by assets/js/history.js on a wide,
-         tall window when motion is allowed. The chapter list
-         becomes one bounded sticky sequence: the current exhibit
-         faces the reader, the next two wait behind it, and the
-         text holds still in its own column while the pictures move.
+   FLOW  the default, and what a phone, a short window, reduced
+         motion, a failed WebGL context and a page without
+         scripting all get: an editorial column of years,
+         headings, text and the archive's own photographs.
+   LIVE  html.hj-live, set by assets/js/history-journey.js on a
+         wide, tall window with motion allowed, once the first
+         WebGL frame has drawn. A fixed canvas behind the page
+         carries the camera path through the photographs
+         (history-world.js); each moment's text holds in the left
+         column while the camera moves, and each photograph's
+         caption is set beside its plate.
 
-   Colour: warm charcoal, ivory, and a gold held back to rules,
-   labels and dates. The archive's own images keep their colour;
-   nothing here tints them.
+   Colour: the site's plum ground, ivory type, and gold held back
+   to dates. The archive's images keep their own colour; nothing
+   here tints them.
    ============================================================ */
 
 body.history{
   --hx-deep:    var(--dark-ink);
   --hx-char:    var(--dark-deep);
   --hx-char-2:  var(--dark);
-  --hx-char-3:  var(--dark);
   --hx-ivory:   var(--rule-soft);
   --hx-paper:   var(--paper-3);
-  --hx-ivory-soft: rgba(238,233,222,.80);
-  --hx-ivory-mute: rgba(238,233,222,.64);
+  --hx-ivory-soft: rgba(238,233,222,.82);
+  --hx-ivory-mute: rgba(238,233,222,.66);
   --hx-gold:    var(--gold);     /* 8.4:1 on --hx-char */
   --hx-gold-ink:var(--label);     /* 5.6:1 on --hx-paper */
   --hx-rule:    rgba(238,233,222,.16);
   --hx-ink:     var(--ink);     /* type on ivory */
   --hx-ink-soft:var(--ink-soft);
-  --hx-shadow:  0 26px 60px rgba(0,0,0,.42), 0 4px 14px rgba(0,0,0,.28);
   background:var(--hx-char);
   color:var(--hx-ivory);
 }
@@ -45,320 +45,276 @@ body.history .hx-label{
   font-family:var(--font-body); font-size:var(--fs-xs); font-weight:600;
   letter-spacing:.2em; text-transform:uppercase; color:var(--hx-gold);
 }
-
-/* ---- buttons -------------------------------------------------------- */
-body.history .hx-btn{
-  display:inline-flex; align-items:center; justify-content:center; gap:10px;
-  min-height:48px; padding:12px 22px;
-  font-family:var(--font-body); font-size:var(--fs-sm); font-weight:600; letter-spacing:.01em;
-  color:var(--hx-ivory); border:1px solid rgba(238,233,222,.42); border-radius:2px;
-  transition:background .25s var(--e), color .25s var(--e), border-color .25s var(--e);
-}
-body.history .hx-btn:hover{ border-color:var(--hx-ivory); background:rgba(238,233,222,.08); }
-body.history .hx-btn--primary{ background:var(--hx-ivory); color:var(--hx-ink); border-color:var(--hx-ivory); }
-body.history .hx-btn--primary:hover{ background:#fff; color:var(--hx-ink); }
-body.history :is(.hx-btn, .hx-nav a, .hx-ch__more, .hx-ch__link, .hx-filter, .hx-card, .hx-dialog button):focus-visible{
+body.history :is(.hj a, .hx-filter, .hx-card, .hx-dialog button, .hx-archive a):focus-visible{
   outline:2px solid var(--hx-gold); outline-offset:3px;
 }
 
 /* ============================================================
-   1. The opening
+   1. The journey — FLOW (the default)
    ============================================================ */
-body.history .hx-opening{
-  position:relative; overflow:hidden; isolation:isolate;
-  min-height:100svh; display:flex; align-items:center;
-  padding-block:clamp(120px,16vh,168px) clamp(72px,10vh,112px);
-  background:
-    radial-gradient(120% 90% at 78% 40%, #2A2925 0%, var(--hx-char) 52%, var(--hx-deep) 100%);
+body.history .hj{
+  --pad:max(clamp(20px,6.5vw,128px), calc((100% - 1560px) / 2));
+  position:relative;
 }
-body.history .hx-opening__inner{ position:relative; z-index:2; width:100%; }
-body.history .hx-opening__title{
-  margin:0; max-width:11ch;
+body.history .hj-canvas{ display:none; }
+
+/* ---- the opening: a small name, a large year, nothing else ---------- */
+body.history .hj-intro{
+  position:relative; min-height:100svh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(112px,16vh,160px) var(--pad) clamp(96px,14vh,140px);
+}
+body.history .hj-intro__mark{
+  margin:0; font-family:var(--font-body); font-size:var(--fs-sm); letter-spacing:.02em;
+  color:var(--hx-ivory-mute);
+}
+body.history .hj-intro__title{
+  margin:6px 0 0; font-family:var(--font-display); font-weight:400;
+  font-size:clamp(1.55rem,2.3vw,2.2rem); line-height:1.1; color:var(--hx-ivory);
+}
+body.history .hj-intro__year{
+  margin:clamp(28px,6vh,64px) 0 0 -.05em;
   font-family:var(--font-display); font-weight:400;
-  font-size:clamp(2.9rem, 7.4vw, 6.6rem); line-height:.98; letter-spacing:-.02em;
+  font-size:clamp(5.5rem,19vw,17rem); line-height:.84; letter-spacing:-.035em;
   color:var(--hx-ivory);
 }
-body.history .hx-opening__lead{
-  margin:var(--space-5) 0 0; max-width:34ch;
-  font-family:var(--font-body); font-size:var(--fs-lead); line-height:1.45;
-  color:var(--hx-ivory-soft);
+body.history .hj-intro__lede{
+  margin:clamp(28px,5vh,48px) 0 0; max-width:30rem;
+  font-family:var(--font-editorial); font-size:var(--fs-lead); line-height:1.5; color:var(--hx-ivory-soft);
 }
-body.history .hx-opening__actions{ display:flex; flex-wrap:wrap; gap:var(--space-3); margin:var(--space-7) 0 0; }
+body.history .hj-intro__skip{ margin:18px 0 0; font-family:var(--font-body); font-size:var(--fs-sm); }
+body.history .hj-intro__skip a,
+body.history .hj-more,
+body.history .hj-end__links a{
+  display:inline-flex; align-items:center; min-height:44px;
+  color:var(--hx-ivory); text-decoration:underline; text-decoration-color:rgba(238,233,222,.4);
+  text-underline-offset:5px; text-decoration-thickness:1px;
+  transition:text-decoration-color .25s var(--e), color .25s var(--e);
+}
+body.history :is(.hj-intro__skip a, .hj-more, .hj-end__links a):hover{ text-decoration-color:var(--hx-ivory); }
+body.history .hj-intro__cue{
+  position:absolute; left:var(--pad); bottom:clamp(24px,5vh,44px); margin:0;
+  display:flex; align-items:center; gap:14px;
+  font-family:var(--font-body); font-size:var(--fs-xs); letter-spacing:.04em; color:var(--hx-ivory-mute);
+  transition:opacity .5s var(--e);
+}
+body.history .hj-intro__cue::before{ content:""; width:36px; height:1px; background:currentColor; }
+html.hj-scrolled body.history .hj-intro__cue{ opacity:0; }
 
-/* The records behind the title. They sit to the right of the copy and
-   below it on a phone, small and dimmed, at three shallow depths. */
-body.history .hx-opening__field{
-  position:absolute; inset:0; z-index:1; pointer-events:none;
-  perspective:1400px; perspective-origin:70% 45%;
+/* ---- the index of moments ------------------------------------------- */
+body.history .hj-index ol{
+  display:flex; flex-wrap:wrap; gap:4px 18px; margin:0; padding:0 var(--pad) 24px; list-style:none;
 }
-body.history .hx-float{
-  --w:clamp(92px, 11vw, 170px);
-  position:absolute; display:block; width:var(--w); aspect-ratio:var(--ar);
-  background:var(--hx-char-2); box-shadow:var(--hx-shadow);
-  transform:translate3d(0,0,calc(var(--z) * -70px)) rotate(var(--r, 0deg));
-  opacity:calc(.62 - var(--z) * .1);
+body.history .hj-index a{
+  display:inline-flex; align-items:center; gap:10px; min-height:36px;
+  font-family:var(--font-body); font-size:var(--fs-xs); letter-spacing:.04em;
+  color:var(--hx-ivory-mute); text-decoration:none; transition:color .3s var(--e);
 }
-body.history .hx-float img{ width:100%; height:100%; object-fit:cover; display:block; }
-body.history .hx-float::after{       /* recedes into the charcoal, not into grey */
-  content:""; position:absolute; inset:0; background:var(--hx-char);
-  opacity:calc(var(--z) * .12);
+body.history .hj-index a::before{
+  content:""; width:0; height:1px; background:currentColor; transition:width .4s var(--e2);
 }
-body.history .hx-float--1{ left:60%; top:16%; --r:-2.4deg; --w:clamp(120px,13vw,200px); }
-body.history .hx-float--2{ left:78%; top:9%;  --r:3deg; }
-body.history .hx-float--3{ left:87%; top:46%; --r:-3.5deg; }
-body.history .hx-float--4{ left:72%; top:52%; --r:2deg; }
-body.history .hx-float--5{ left:52%; top:62%; --r:-1.5deg; }
-body.history .hx-float--6{ left:91%; top:78%; --r:4deg; }
-body.history .hx-float--type{
-  left:62%; top:82%; --r:-3deg; padding:14px; display:flex; flex-direction:column; justify-content:space-between;
-  background:var(--hx-paper); color:var(--hx-ink);
-}
-body.history .hx-float--type2{ left:83%; top:26%; --r:2.5deg; }
-body.history .hx-float__when{ font-family:var(--font-ui); font-size:clamp(1.1rem,1.8vw,1.6rem); line-height:1; }
-body.history .hx-float__t{ font-family:var(--font-body); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--hx-gold-ink); }
+body.history .hj-index a:hover{ color:var(--hx-ivory); }
+body.history .hj-index a[aria-current]{ color:var(--hx-ivory); }
+body.history .hj-index a[aria-current]::before{ width:16px; }
 
-@media (max-width:760px){
-  body.history .hx-opening{ align-items:flex-start; min-height:auto; padding-bottom:clamp(280px,70vw,340px); }
-  body.history .hx-float{ --w:clamp(74px,22vw,108px); opacity:calc(.5 - var(--z) * .08); }
-  body.history .hx-float--1{ left:6%;  top:auto; bottom:48px; --w:clamp(92px,26vw,124px); }
-  body.history .hx-float--2{ left:32%; top:auto; bottom:108px; }
-  body.history .hx-float--3{ left:56%; top:auto; bottom:36px; }
-  body.history .hx-float--4{ left:78%; top:auto; bottom:128px; }
-  body.history .hx-float--5,
-  body.history .hx-float--6{ display:none; }
-  body.history .hx-float--type{ left:74%; top:auto; bottom:4px; padding:10px; }
-  body.history .hx-float--type2{ left:40%; top:auto; bottom:-24px; }
+/* ---- a moment -------------------------------------------------------- */
+body.history .hj-scene{
+  display:grid; grid-template-columns:minmax(0,1fr); gap:clamp(32px,5vw,56px);
+  padding:clamp(72px,12vh,128px) var(--pad);
+  scroll-margin-top:72px;
 }
+body.history .hj-scene--quiet{ padding-block:clamp(120px,22vh,220px); }
+body.history .hj-text{ max-width:34rem; }
+body.history .hj-year{
+  margin:0 0 18px; font-family:var(--font-display); font-weight:400;
+  font-size:clamp(2.7rem,6.6vw,5.4rem); line-height:.95; letter-spacing:-.02em; color:var(--hx-ivory);
+}
+/* Bodoni Moda has no rupee sign; Literata, the editorial face, sets it. */
+body.history .hj-big{
+  margin:-4px 0 12px -.04em; font-family:"Bodoni Moda", "Literata", Georgia, serif; font-weight:400;
+  font-size:clamp(6rem,30vw,13rem); line-height:.9; color:var(--hx-ivory-soft);
+}
+body.history .hj-head{
+  margin:0 0 16px; font-family:var(--font-display); font-weight:400;
+  font-size:clamp(1.55rem,2.4vw,2.3rem); line-height:1.12; color:var(--hx-ivory);
+}
+body.history .hj-copy{
+  margin:0 0 14px; font-family:var(--font-editorial); font-size:clamp(1.02rem,.3vw + .95rem,1.14rem);
+  line-height:1.62; color:var(--hx-ivory-soft);
+}
+body.history .hj-actions{ display:flex; flex-wrap:wrap; gap:0 24px; margin:10px 0 0; font-family:var(--font-body); font-size:var(--fs-sm); }
 
-/* A slow arrival, once, when motion is allowed. */
-@media (prefers-reduced-motion:no-preference){
-  html.hx-motion body.history .hx-float{ animation:hx-settle 1.6s var(--e2) both; animation-delay:calc(var(--z) * .12s); }
-  @keyframes hx-settle{
-    from{ opacity:0; transform:translate3d(0,24px,calc(var(--z) * -70px - 120px)) rotate(var(--r,0deg)); }
-  }
+body.history .hj-facts{ display:flex; flex-wrap:wrap; gap:14px 36px; margin:22px 0 18px; }
+body.history .hj-facts div{ display:flex; flex-direction:column-reverse; }
+body.history .hj-facts dd{
+  margin:0; font-family:var(--font-display); font-size:clamp(2rem,3.4vw,2.8rem); line-height:1; color:var(--hx-ivory);
 }
+body.history .hj-facts dt{ margin-top:6px; font-family:var(--font-body); font-size:var(--fs-xs); letter-spacing:.03em; color:var(--hx-ivory-mute); }
 
-/* ============================================================
-   2. The chapters — LIST arrangement (default)
-   ============================================================ */
-body.history .hx-seq{ position:relative; background:var(--hx-char); }
-body.history .hx-stage__head{
-  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--space-4);
-  padding-block:var(--space-8) var(--space-6);
+body.history .hj-notes{ margin:20px 0 6px; padding:0; list-style:none; border-top:1px solid var(--hx-rule); }
+body.history .hj-notes li{ border-bottom:1px solid var(--hx-rule); }
+body.history .hj-notes a{
+  display:grid; grid-template-columns:8.2rem minmax(0,1fr); gap:14px; align-items:baseline;
+  padding:9px 0; min-height:44px; box-sizing:border-box;
+  color:var(--hx-ivory-soft); text-decoration:none; transition:color .25s var(--e);
 }
-body.history .hx-stage__title{
-  margin:0; font-family:var(--font-ui); font-weight:400;
-  font-size:var(--fs-sm); letter-spacing:.2em; text-transform:uppercase; color:var(--hx-gold);
-}
+body.history .hj-notes a:hover{ color:var(--hx-ivory); }
+body.history .hj-notes a:hover .hj-notes__what{ text-decoration:underline; text-underline-offset:4px; text-decoration-color:rgba(238,233,222,.45); }
+body.history .hj-notes__when{ font-family:var(--font-body); font-size:var(--fs-xs); letter-spacing:.03em; color:var(--hx-gold); }
+body.history .hj-notes__what{ font-family:var(--font-body); font-size:.95rem; line-height:1.45; }
 
-/* The chapter index. On a phone it scrolls sideways rather than wrapping
-   into a block; the page never does. */
-body.history .hx-nav{ display:flex; align-items:center; gap:var(--space-4); min-width:0; max-width:100%; }
-body.history .hx-nav__list{
-  display:flex; gap:2px; margin:0; padding:0; list-style:none; min-width:0;
-  overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+/* ---- photographs, in the column -------------------------------------- */
+body.history .hj-plates{ display:grid; gap:clamp(28px,4vw,48px); align-content:start; }
+body.history .hj-fig{ margin:0; }
+body.history .hj-fig img{
+  display:block; width:min(100%, calc(74svh * var(--ar))); height:auto;
+  box-shadow:0 18px 44px rgba(0,0,0,.34);
 }
-body.history .hx-nav__list::-webkit-scrollbar{ display:none; }
-body.history .hx-nav a{
-  display:inline-flex; align-items:baseline; gap:7px; white-space:nowrap;
-  min-height:44px; padding:12px 12px 10px;
-  font-family:var(--font-body); font-size:var(--fs-sm); color:var(--hx-ivory-mute);
-  border-bottom:1px solid var(--hx-rule);
-  transition:color .25s var(--e), border-color .25s var(--e);
-}
-body.history .hx-nav a:hover{ color:var(--hx-ivory); }
-body.history .hx-nav a[aria-current]{ color:var(--hx-ivory); border-bottom-color:var(--hx-gold); }
-body.history .hx-nav__n{ font-size:.72rem; letter-spacing:.08em; color:var(--hx-gold); }
-body.history .hx-nav__all{
-  flex:none; color:var(--hx-ivory) !important; border-bottom-color:rgba(238,233,222,.5) !important;
+body.history .hj-cap{
+  margin-top:12px; max-width:36rem;
+  font-family:var(--font-body); font-size:.86rem; line-height:1.5; color:var(--hx-ivory-mute);
 }
 
-body.history .hx-chapters{ list-style:none; margin-block:0; padding-bottom:var(--space-9); }
-body.history .hx-ch{
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  align-items:center; gap:clamp(32px,6vw,96px);
-  padding-block:clamp(48px,8vw,112px);
-  border-top:1px solid var(--hx-rule);
-  scroll-margin-top:88px;
-}
-body.history .hx-ch__visual{ order:2; display:grid; place-items:center; min-width:0; }
-body.history .hx-ch__text{ order:1; min-width:0; max-width:34rem; }
-body.history .hx-ch__when{
-  display:flex; align-items:baseline; gap:14px; margin:0 0 var(--space-4);
-  font-family:var(--font-ui); font-size:clamp(1.05rem,1.4vw,1.3rem); color:var(--hx-gold);
-}
-body.history .hx-ch__n{ font-size:.74rem; letter-spacing:.14em; color:var(--hx-ivory-mute); }
-body.history .hx-ch__head{
+/* The school now: the campus from the air, edge to edge. */
+body.history .hj-scene--now .hj-plates{ margin-inline:calc(-1 * var(--pad)); }
+body.history .hj-scene--now .hj-fig img{ width:100%; box-shadow:none; }
+body.history .hj-scene--now .hj-cap{ padding-inline:var(--pad); }
+
+/* ---- the close ------------------------------------------------------- */
+body.history .hj-end__frame .hj-fig{ margin:0; }
+body.history .hj-end__frame img{ display:block; width:100%; height:auto; }
+body.history .hj-end__frame .hj-cap{ padding-inline:var(--pad); }
+body.history .hj-end__text{ padding:clamp(72px,12vh,140px) var(--pad) clamp(88px,14vh,160px); }
+body.history .hj-end__span{
   margin:0; font-family:var(--font-display); font-weight:400;
-  font-size:clamp(2.1rem,3.8vw,3.4rem); line-height:1.04; letter-spacing:-.015em; color:var(--hx-ivory);
+  font-size:clamp(2.6rem,7vw,6.4rem); line-height:1; letter-spacing:-.02em; color:var(--hx-ivory);
 }
-body.history .hx-ch__copy{
-  margin:var(--space-5) 0 0; max-width:var(--measure);
-  font-family:var(--font-body); font-size:var(--fs-lead); line-height:1.55; color:var(--hx-ivory-soft);
+body.history .hj-end__span span[aria-hidden]{ color:var(--hx-gold); padding-inline:.12em; }
+body.history .hj-end__line{
+  margin:clamp(20px,3vh,32px) 0 0; max-width:38rem;
+  font-family:var(--font-editorial); font-size:var(--fs-lead); line-height:1.55; color:var(--hx-ivory-soft);
 }
-body.history .hx-ch__aside{
-  margin:var(--space-4) 0 0; padding-left:var(--space-4); border-left:1px solid var(--hx-gold);
-  font-family:var(--font-body); font-size:var(--fs-sm); line-height:1.5; color:var(--hx-ivory-mute);
-}
-body.history .hx-ch__facts{ display:flex; flex-wrap:wrap; gap:var(--space-5); margin:var(--space-5) 0 0; }
-body.history .hx-ch__facts div{ min-width:6rem; }
-body.history .hx-ch__facts dt{ font-size:var(--fs-xs); letter-spacing:.14em; text-transform:uppercase; color:var(--hx-ivory-mute); }
-body.history .hx-ch__facts dd{ margin:4px 0 0; font-family:var(--font-display); font-size:1.9rem; line-height:1; color:var(--hx-ivory); }
-body.history .hx-ch__actions{ display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-2) var(--space-5); margin:var(--space-6) 0 0; }
-body.history :is(.hx-ch__more, .hx-ch__link){
-  display:inline-flex; align-items:center; gap:8px; min-height:44px;
-  font-family:var(--font-ui); font-size:var(--fs-sm); font-weight:600; color:var(--hx-ivory);
-  border-bottom:1px solid rgba(238,233,222,.4);
-}
-body.history .hx-ch__more::after{
-  content:""; width:6px; height:6px; border-top:1.5px solid currentColor; border-right:1.5px solid currentColor;
-  transform:rotate(45deg);
-}
-body.history .hx-ch__link{ font-weight:400; color:var(--hx-ivory-soft); }
-body.history :is(.hx-ch__more, .hx-ch__link):hover{ border-bottom-color:var(--hx-gold); }
+body.history .hj-end__links{ display:flex; flex-wrap:wrap; gap:0 28px; margin:24px 0 0; font-family:var(--font-body); font-size:var(--fs-sm); }
 
-/* ---- an exhibit ------------------------------------------------------
-   Its box is sized from its own proportions, so a letter stays a letter
-   and a photograph a photograph: never cropped, never letterboxed. */
-body.history .hx-ex{
-  --W:min(100%, 440px); --H:min(62vh, 560px);
-  position:relative; margin:0;
-  width:min(var(--W), calc(var(--H) * var(--ar)));
-  aspect-ratio:var(--ar);
-  background:var(--hx-char-2);
-  box-shadow:var(--hx-shadow);
-}
-body.history .hx-ex img{ display:block; width:100%; height:100%; object-fit:contain; }
-
-/* In the list, a shallow stack of paper behind each exhibit — the only
-   hint of depth a phone gets. Offset shadows rather than extra elements,
-   so the exhibit's own box is still the whole of it. */
-html:not(.hx-staged) body.history .hx-ex{
-  box-shadow:
-    10px -9px 0 -1px var(--hx-char-3),
-    19px -17px 0 -3px #3B362F,
-    var(--hx-shadow);
+/* A wider window in the column arrangement (reduced motion, no WebGL):
+   the text and its photographs side by side. */
+@media (min-width:1000px){
+  body.history .hj-scene{ grid-template-columns:minmax(0,5fr) minmax(0,6fr); align-items:start; }
+  body.history .hj-text{ position:sticky; top:120px; }
+  body.history .hj-scene--now{ grid-template-columns:minmax(0,1fr); }
+  body.history .hj-scene--now .hj-text{ position:static; }
+  body.history .hj-plates{ grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); }
+  body.history .hj-plates:has(> :only-child){ grid-template-columns:minmax(0,1fr); }
+  body.history .hj-index{
+    position:fixed; right:clamp(14px,1.8vw,30px); top:50%; z-index:30;
+    transform:translateY(-50%); opacity:0; visibility:hidden;
+    transition:opacity .5s var(--e), visibility 0s linear .5s;
+  }
+  body.history .hj-index ol{ flex-direction:column; align-items:flex-end; gap:0; padding:0; }
+  body.history .hj-index a{ flex-direction:row-reverse; }
+  html.hj-inview body.history .hj-index{ opacity:1; visibility:visible; transition:opacity .5s var(--e); }
+  /* Without scripting the index cannot follow the page; it stays a row. */
+  html:not(.hx-js) body.history .hj-index{ position:static; transform:none; opacity:1; visibility:visible; }
+  html:not(.hx-js) body.history .hj-index ol{ flex-direction:row; padding:0 var(--pad) 24px; gap:4px 18px; }
 }
 
-/* ---- the typographic exhibits ---------------------------------------- */
-body.history .hx-ex--type{
-  display:flex; flex-direction:column; justify-content:space-between;
-  padding:clamp(20px,2.4vw,32px);
-  background:var(--hx-paper); color:var(--hx-ink);
+/* Arrival: the name first, then the year. Short, and nothing waits on it. */
+@media (prefers-reduced-motion:no-preference){
+  html.hx-js body.history .hj-intro > *{ animation:hj-in .9s var(--e) both; }
+  html.hx-js body.history .hj-intro__title{ animation-delay:.08s; }
+  html.hx-js body.history .hj-intro__year{ animation:hj-mask 1.1s var(--e2) .18s both; }
+  html.hx-js body.history .hj-intro__lede{ animation-delay:.45s; }
+  html.hx-js body.history .hj-intro__skip,
+  html.hx-js body.history .hj-intro__cue{ animation-delay:.6s; }
+  /* The column arrangement with motion: each moment settles as it comes
+     into view — opacity only, and the year uncovered from the top. */
+  html.hj-flow body.history .hj-scene:not(.is-in) :is(.hj-head, .hj-copy, .hj-facts, .hj-notes, .hj-actions, .hj-big, .hj-fig){ opacity:0; }
+  html.hj-flow body.history .hj-scene:not(.is-in) .hj-year{ clip-path:inset(0 0 100% 0); }
+  html.hj-flow body.history .hj-scene :is(.hj-head, .hj-copy, .hj-facts, .hj-notes, .hj-actions, .hj-big, .hj-fig){ transition:opacity .8s var(--e) .12s; }
+  html.hj-flow body.history .hj-scene .hj-year{ transition:clip-path .9s var(--e2); }
 }
-body.history .hx-type__when{
-  margin:0; font-family:var(--font-display); font-size:clamp(1.9rem,3.4vw,3rem); line-height:1;
-  letter-spacing:-.01em; color:var(--hx-ink);
-}
-body.history .hx-type__title{
-  margin:0; font-family:var(--font-display); font-size:clamp(1rem,1.3vw,1.2rem); line-height:1.3;
-  color:var(--hx-ink-soft);
-}
-body.history .hx-type__src{
-  margin:auto 0 0; padding-top:var(--space-3); border-top:1px solid rgba(24,24,21,.2);
-  font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--hx-gold-ink);
-}
-
-/* One rupee at a time: fifty-four marks gather into one field. --a runs
-   from 0 (scattered) to 1 (gathered); without scripting it is 1. */
-@property --a{ syntax:"<number>"; inherits:true; initial-value:1; }
-body.history .hx-ex--rupee{ --a:1; }
-html.hx-motion body.history .hx-ex--rupee{ --a:0; transition:--a 1.4s var(--e2); }
-html.hx-motion body.history .hx-ex--rupee.is-on{ --a:1; }
-html.hx-staged body.history .hx-ex--rupee{ transition:none; }
-body.history .hx-rupee__field{ position:absolute; inset:0; container-type:size; }
-body.history .hx-rupee__field i{
-  position:absolute; left:0; top:0; width:3.4cqw; aspect-ratio:1; margin:-1.7cqw 0 0 -1.7cqw;
-  border-radius:1px; background:var(--hx-ink);
-  --t:clamp(0, calc((var(--a) - var(--d)) / (1 - .45)), 1);
-  transform:translate(calc((var(--x0) + (var(--x1) - var(--x0)) * var(--t)) * 1cqw),
-                      calc((var(--y0) + (var(--y1) - var(--y0)) * var(--t)) * 1cqh));
-  opacity:calc(.35 + var(--t) * .65);
-}
-body.history .hx-ex--rupee .hx-type__when,
-body.history .hx-ex--rupee .hx-type__title{ position:relative; }
-body.history .hx-ex--rupee .hx-type__title{ margin-top:auto; font-size:clamp(1.05rem,1.5vw,1.35rem); color:var(--hx-ink); }
-
-/* 1993 and 1994, two records in one frame, kept apart by a rule. */
-body.history .hx-ex--diptych{ flex-direction:row; gap:0; padding:0; }
-body.history .hx-dip{ flex:1 1 0; display:flex; flex-direction:column; gap:var(--space-4); padding:clamp(20px,2.4vw,32px); }
-body.history .hx-dip--a{ background:#E3DCCB; }
-body.history .hx-dip + .hx-dip{ border-left:1px solid rgba(24,24,21,.18); }
-body.history .hx-dip .hx-type__title{ font-size:clamp(1.02rem,1.4vw,1.3rem); color:var(--hx-ink); }
-
-/* 6 June 1996: 96 squares and 11 marks. */
-body.history .hx-ex--opening{ gap:var(--space-4); }
-body.history .hx-open__groups{ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:clamp(18px,2.4vw,32px); }
-body.history .hx-open__marks{ display:grid; gap:3px; }
-body.history .hx-open__set--students .hx-open__marks{ grid-template-columns:repeat(12, 1fr); }
-body.history .hx-open__set--staff .hx-open__marks{ grid-template-columns:repeat(3, 1fr); width:clamp(40px,4.6vw,62px); }
-body.history .hx-open__marks i{ display:block; aspect-ratio:1; background:var(--hx-ink); }
-body.history .hx-open__set--staff .hx-open__marks i{ border-radius:50%; background:var(--hx-gold-ink); }
-body.history .hx-open__label{ margin:var(--space-3) 0 0; font-size:var(--fs-xs); letter-spacing:.1em; text-transform:uppercase; color:var(--hx-ink-soft); }
-body.history .hx-open__label b{ font-family:var(--font-ui); font-size:1.1rem; font-weight:600; letter-spacing:0; color:var(--hx-ink); margin-right:4px; }
-body.history .hx-open__grades{ font-size:clamp(1.1rem,1.5vw,1.35rem); color:var(--hx-ink); }
-/* A short grouped reveal: rows of twenty-four, then the staff. */
-html.hx-motion body.history .hx-ex--opening .hx-open__marks i{
-  opacity:0; transform:scale(.4);
-  transition:opacity .35s var(--e), transform .45s var(--e2);
-  transition-delay:calc(var(--g) * .14s);
-}
-html.hx-motion body.history .hx-ex--opening.is-on .hx-open__marks i{ opacity:1; transform:none; }
+@keyframes hj-in{ from{ opacity:0; } to{ opacity:1; } }
+@keyframes hj-mask{ from{ opacity:0; clip-path:inset(0 0 100% 0); } to{ opacity:1; clip-path:inset(0 0 -10% 0); } }
 
 /* ============================================================
-   3. The chapters — STAGE arrangement
+   2. The journey — LIVE (html.hj-live)
+   The canvas is fixed behind the page; everything else is still
+   ordinary markup scrolling over it. history-journey.js writes
+   --o, --m and --y on each moment's text, and each caption's place.
    ============================================================ */
-html.hx-staged body.history .hx-seq{ height:var(--hx-seq-h, 520vh); }
-html.hx-staged body.history .hx-stage{
-  position:sticky; top:0; height:100vh; overflow:hidden;
-  display:grid; grid-template-rows:auto minmax(0,1fr);
-  padding-top:84px;
-}
-html.hx-staged body.history .hx-stage__head{ padding-block:var(--space-4) 0; position:relative; z-index:200; }
-html.hx-staged body.history .hx-chapters{ position:relative; padding-bottom:0; height:100%; }
-html.hx-staged body.history .hx-ch{
-  position:absolute; inset:0 var(--gut); padding:0 0 clamp(28px,5vh,56px); border:0;
-  /* inset matches .wrap's own gutter: the list is the wrap */
-  grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+html.hj-live body.history .hj-canvas{
+  display:block; position:fixed; inset:0; z-index:0; width:100%; height:100%;
   pointer-events:none;
 }
-html.hx-staged body.history .hx-ch.is-current{ pointer-events:auto; }
-html.hx-staged body.history .hx-ch__visual{
-  height:100%; perspective:1500px; perspective-origin:30% 50%;
-}
-html.hx-staged body.history .hx-ex{
-  --W:min(100%, 34vw, 500px); --H:min(64vh, 600px);
-  transform-origin:50% 55%;
-  will-change:transform, opacity;
-  backface-visibility:hidden;
-}
-html.hx-staged body.history .hx-ex::after{  /* depth reads as a darker ground, not grey */
-  content:""; position:absolute; inset:0; background:var(--hx-char); pointer-events:none;
-  opacity:var(--dim, 0);
-}
-html.hx-staged body.history .hx-ch__text{ will-change:opacity; }
-html.hx-staged body.history .hx-ch__text[data-hidden]{ visibility:hidden; }
+html.hj-live body.history .hj-canvas.is-off{ visibility:hidden; }
+html.hj-live body.history .hj > :not(.hj-canvas){ position:relative; z-index:1; }
+html.hj-live body.history .hj > .hj-index{ position:fixed; z-index:30; }
 
-/* The overview at the end of the sequence: each exhibit's own date and
-   title, written under it once the arrangement has settled. */
-body.history .hx-ex__cap,
-body.history .hx-stage__over{ display:none; }
-html.hx-staged body.history .hx-ex__cap{
-  display:block; position:absolute; left:0; right:0; top:100%; padding-top:10px;
-  font-family:var(--font-body); line-height:1.3; color:var(--hx-ivory-soft);
-  /* written at its own size, whatever the exhibit has been scaled to */
-  font-size:calc(.84rem / var(--s, 1)); padding-top:calc(10px / var(--s, 1));
-  opacity:var(--capo, 0);
+html.hj-live body.history .hj-scene{
+  display:block; min-height:155svh; padding:0 var(--pad);
 }
-html.hx-staged body.history .hx-stage__over{
-  display:block; position:absolute; left:0; right:0; bottom:clamp(12px,2.2vh,24px); z-index:150; margin:0; text-align:center;
-  font-family:var(--font-body); font-size:var(--fs-sm); letter-spacing:.16em; text-transform:uppercase;
-  color:var(--hx-gold); opacity:var(--o, 0); pointer-events:none;
+html.hj-live body.history #chapter-rupee{ min-height:165svh; }
+html.hj-live body.history .hj-scene--quiet{ min-height:190svh; padding:0 var(--pad); }
+html.hj-live body.history #chapter-opening{ min-height:185svh; }
+html.hj-live body.history #chapter-first{ min-height:170svh; }
+html.hj-live body.history .hj-scene--now{ min-height:165svh; }
+html.hj-live body.history .hj-text{
+  position:sticky; top:var(--top, 26svh); max-width:min(27rem, 31vw);
+  opacity:var(--o, 0);
+  clip-path:inset(0 0 calc(var(--m, 1) * 100%) 0);
+  transform:translate3d(0, calc(var(--y, 0) * 1px), 0);
 }
-html.hx-staged body.history .hx-ex__cap b{ display:block; font-weight:400; color:var(--hx-gold); letter-spacing:.04em; }
+/* Out of view but still in the tab order: focusing a link here brings its
+   moment to the screen (history-journey.js). */
+html.hj-live body.history .hj-text[data-hidden]{ pointer-events:none; }
+html.hj-live body.history .hj-scene--quiet .hj-text{ max-width:min(24rem, 30vw); }
+html.hj-live body.history .hj-year{ font-size:clamp(2.6rem,4.4vw,4.6rem); }
+html.hj-live body.history .hj-big{ display:none; }
+/* The opening's date is carved into the drawing in the scene; the page
+   keeps it for assistive technology rather than setting it twice. */
+html.hj-live body.history #chapter-opening .hj-year{
+  position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;
+}
+html.hj-live body.history .hj-notes a{ padding:6px 0; min-height:36px; }
+html.hj-live body.history .hj-notes__what{ font-size:.88rem; }
+html.hj-live body.history .hj-facts{ margin:16px 0 14px; }
+html.hj-live body.history .hj-facts dd{ font-size:clamp(1.6rem,2.4vw,2.2rem); }
+
+/* The photographs are drawn in the scene; their images stay in the page
+   for assistive technology and their captions are set beside the plates. */
+html.hj-live body.history .hj-plates{ position:absolute; top:0; left:0; width:0; height:0; margin:0; display:block; }
+html.hj-live body.history .hj-plates .hj-fig img{
+  position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); box-shadow:none;
+}
+html.hj-live body.history .hj-plates .hj-fig{
+  position:fixed; left:0; top:0; z-index:2; width:var(--w, 240px);
+  transform:translate3d(var(--x, -999px), var(--yy, -999px), 0);
+  opacity:var(--co, 0); pointer-events:none;
+}
+html.hj-live body.history .hj-plates .hj-cap{
+  margin:0; max-width:none; padding:0; font-size:.8rem; line-height:1.45; color:var(--hx-ivory-soft);
+}
+
+/* The close: the last plate becomes the photograph itself. */
+html.hj-live body.history .hj-end__stage{ height:210svh; }
+html.hj-live body.history .hj-end__frame{
+  position:sticky; top:0; height:100svh; overflow:hidden;
+}
+html.hj-live body.history .hj-end__frame .hj-fig{ position:absolute; inset:0; }
+html.hj-live body.history .hj-end__frame img{
+  position:absolute; left:0; top:0; max-width:none; object-fit:cover; box-shadow:none;
+  width:var(--fw, 1px); height:var(--fh, 1px);
+  transform:translate3d(var(--fx, 0px), var(--fy, 0px), 0);
+  opacity:var(--fo, 0);
+}
+html.hj-live body.history .hj-end__frame .hj-cap{
+  position:absolute; left:var(--pad); bottom:clamp(20px,4vh,36px); margin:0; padding:0;
+  color:rgba(255,255,255,.94); text-shadow:0 1px 14px rgba(0,0,0,.6);
+  opacity:var(--fc, 0);
+}
 
 /* ============================================================
-   4. The archive
+   3. The archive
    ============================================================ */
 body.history .hx-archive{
   position:relative; padding-block:clamp(72px,10vw,140px);
@@ -480,7 +436,7 @@ body.history .hx-dialog__step button[disabled]{ opacity:.35; cursor:default; }
 }
 
 /* ============================================================
-   5. The film, and the close
+   4. The film
    ============================================================ */
 body.history .hx-film{ padding-block:clamp(72px,9vw,128px); background:var(--hx-deep); border-top:1px solid var(--hx-rule); }
 body.history .hx-film__inner{ display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:clamp(32px,5vw,80px); align-items:center; }
@@ -500,19 +456,10 @@ body.history .closing-scene__note{
    Narrow windows
    ============================================================ */
 @media (max-width:900px){
-  body.history .hx-ch{ grid-template-columns:minmax(0,1fr); gap:var(--space-7); }
-  body.history .hx-ch__visual{ order:1; justify-items:start; padding-right:22px; }
-  body.history .hx-ch__text{ order:2; }
-  body.history .hx-ex{ --W:min(100%, 420px); --H:58vh; }
   body.history .hx-film__inner{ grid-template-columns:minmax(0,1fr); }
 }
 @media (max-width:560px){
-  body.history .hx-open__groups{ grid-template-columns:minmax(0,1fr); gap:var(--space-4); }
-  body.history .hx-open__set--staff .hx-open__marks{ grid-template-columns:repeat(11, 1fr); width:100%; }
-  body.history .hx-stage__head{ padding-block:var(--space-7) var(--space-4); }
-  body.history .hx-nav{ flex-direction:column; align-items:stretch; gap:0; width:100%; }
-  body.history .hx-nav__all{ justify-content:flex-start; }
   body.history .hx-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
   body.history .hx-card__title{ font-size:1rem; }
-  body.history .hx-opening__actions .hx-btn{ flex:1 1 100%; }
+  body.history .hj-notes a{ grid-template-columns:minmax(0,1fr); gap:2px; }
 }

@@ -1,33 +1,48 @@
 <!-- School History: the CIRS archive.
      Everything dated on this page is written from tools/history.py, which
      records where each event comes from. Edit the history there, not here.
-     The sheet is assets/css/history.css and the motion assets/js/history.js;
-     without either, every chapter and every record is still here, in order. -->
+     The journey below is one document in reading order: every moment's year,
+     heading, text and photographs are real markup. assets/js/history-journey.js
+     adds the camera path over it (assets/js/history-world.js) on a wide window
+     with motion allowed; a phone, reduced motion, a failed WebGL context or no
+     scripting at all read the same moments as an editorial column. -->
 
-<section class="hx-opening" id="top" aria-labelledby="hx-title">
-  {{HISTORY_OPENING_RECORDS}}
-  <div class="wrap hx-opening__inner">
-    <p class="hx-label">The CIRS Archive</p>
-    <h1 class="hx-opening__title" id="hx-title">Before the school opened.</h1>
-    <p class="hx-opening__lead">Explore the people, decisions and milestones behind CIRS.</p>
-    <p class="hx-opening__actions">
-      <a class="hx-btn hx-btn--primary" href="#chapters">Explore the archive</a>
-      <a class="hx-btn" href="#timeline">View all milestones</a>
-    </p>
-  </div>
-</section>
+<div class="hj" id="chapters">
+  <canvas class="hj-canvas" aria-hidden="true"></canvas>
 
-<section class="hx-seq" id="chapters" aria-labelledby="hx-seq-title">
-  <div class="hx-stage">
-    <div class="wrap hx-stage__head">
-      <h2 class="hx-stage__title" id="hx-seq-title">The story in six chapters</h2>
-      {{HISTORY_CHAPTER_NAV}}
+  <header class="hj-intro" id="top">
+    <p class="hj-intro__mark">Chinmaya International Residential School</p>
+    <h1 class="hj-intro__title">School History</h1>
+    <p class="hj-intro__year" aria-hidden="true">1970s</p>
+    <p class="hj-intro__lede">From Pujya Gurudev&rsquo;s idea to the school today.
+      Every date here carries its source.</p>
+    <p class="hj-intro__skip"><a href="#timeline">Go straight to all {{HISTORY_COUNT}} records</a></p>
+    <p class="hj-intro__cue" aria-hidden="true">Scroll to begin</p>
+  </header>
+
+  {{HISTORY_INDEX}}
+
+{{HISTORY_SCENES}}
+
+  <section class="hj-scene hj-scene--now" id="chapter-now" data-hj-scene aria-labelledby="chapter-now-h">
+    <div class="hj-text">
+      <p class="hj-year">Coimbatore</p>
+      <h2 class="hj-head" id="chapter-now-h">The school now.</h2>
     </div>
-    <ol class="wrap hx-chapters">
-{{HISTORY_CHAPTERS}}
-    </ol>
-  </div>
-</section>
+    <div class="hj-plates">{{HISTORY_NOW}}</div>
+  </section>
+
+  <section class="hj-end" aria-labelledby="hj-end-title">
+    <div class="hj-end__stage"><div class="hj-end__frame">{{HISTORY_FULL}}</div></div>
+    <div class="hj-end__text">
+      <h2 class="hj-end__span" id="hj-end-title">1970s <span aria-hidden="true">&rarr;</span><span class="sr-only">to</span> the present</h2>
+      <p class="hj-end__line">CIRS opened in 1996 with 96 students and 11 academic staff. In its
+        24th year it reported 580 students, from 22 Indian states and 18 other countries.</p>
+      <p class="hj-end__links"><a href="#timeline">All {{HISTORY_COUNT}} records, with their sources</a>
+        <a href="#film">The school&rsquo;s film, Through the Years</a></p>
+    </div>
+  </section>
+</div>
 
 <section class="hx-archive" id="timeline" aria-labelledby="hx-archive-title">
   <div class="wrap">
