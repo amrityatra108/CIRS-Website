@@ -45,6 +45,8 @@
 <noscript><style>.film{height:100svh}body.art-attack .film{height:100svh}.film__stage{background:#000 url(assets/img/captures-camera-final.jpg) var(--film-still-position, 50% 50%)/cover no-repeat}.film__video{visibility:hidden}.film__shot{display:none}.film[data-film-pending] .film__title{opacity:1}</style></noscript>
 <link rel="stylesheet" href="assets/css/captures-featured.css?b=114-captures-journal-2">
 <link rel="stylesheet" href="assets/css/captures-gallery.css?b=114-captures-journal-2">
+<link rel="stylesheet" href="assets/css/captures-hero.css?b=114-captures-journal-2">
+<script>(function(){var d=document.documentElement;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("toe-motion");setTimeout(function(){if(!window.__toeBooted)d.classList.remove("toe-motion")},6000)})()</script>
 <link rel="stylesheet" href="assets/css/footer.css?b=114-captures-journal-2-footer-1">
 <link rel="stylesheet" href="assets/css/drawer.css?b=114-captures-journal-2-nav-4">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
@@ -327,6 +329,7 @@
     <div class="jump__panel" id="jumpPanel">
       <p aria-hidden="true">On this page</p>
       <a href="#featured">Four photographs</a>
+      <a href="#through-our-eyes">Through our eyes.</a>
       <a href="#photographs">The photographs</a>
       <a href="#cg-among-the-trees">Among the trees</a>
       <a href="#cg-by-the-water">By the water</a>
@@ -393,7 +396,114 @@
     </div>
   </div>
 </section>
-<div class="film__seam" data-header-theme="dark" aria-hidden="true"></div>
+
+<!-- "Through our eyes": a field of journal photographs held in depth, the
+     way into the journal. Written here as its final composition, which is
+     what no scripting sees. With motion, assets/js/captures-hero.js makes the
+     field's one camera and brings it in from the dark when the section is
+     reached, then lets the reader lean it with the pointer and turn it by
+     dragging; every card opens the viewer on its photograph. The cards are
+     tools/captures.py (HERO), and assets/css/captures-hero.css lays them out. -->
+<div class="toe-seam" data-header-theme="dark" aria-hidden="true"></div>
+<section class="toe" id="through-our-eyes" aria-labelledby="toe-title" data-toe data-header-theme="dark">
+  <div class="toe__stage" data-toe-stage>
+    <div class="toe__world toe__world--behind" data-toe-world>
+      <a class="toe__card toe__card--back toe__card--wide" href="assets/img/captures/full/lizard-tree-trunk.jpg" data-toe-card data-toe-layer="back" data-toe-index="0" style="--ar:1.5000;--sx:-0.12;--sy:-0.3;--w:0.1;--z:-0.9;--rx:-3;--ry:1.9;--rz:-1.5">
+        <span class="toe__pic"><img src="assets/img/captures/lizard-tree-trunk.jpg" srcset="assets/img/captures/lizard-tree-trunk-882.jpg 882w, assets/img/captures/lizard-tree-trunk.jpg 1800w" sizes="19vw" width="1800" height="1200" alt="A golden lizard climbing a tree trunk" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Small worlds</span> A golden lizard climbing a tree trunk</span></span>
+      </a>
+      <a class="toe__card toe__card--back toe__card--wide toe__card--end" href="assets/img/captures/full/bird-pink-blossoms.jpg" data-toe-card data-toe-layer="back" data-toe-index="22" style="--ar:1.5000;--sx:0.13;--sy:-0.27;--w:0.09;--z:-0.95;--rx:-2.7;--ry:-2.1;--rz:1.2">
+        <span class="toe__pic"><img src="assets/img/captures/bird-pink-blossoms.jpg" srcset="assets/img/captures/bird-pink-blossoms-882.jpg 882w, assets/img/captures/bird-pink-blossoms.jpg 1800w" sizes="18vw" width="1800" height="1200" alt="A small dark bird amid pink blossoms" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Among the trees</span> A small dark bird amid pink blossoms</span></span>
+      </a>
+      <a class="toe__card toe__card--back toe__card--wide" href="assets/img/captures/full/waterbird-reeds.jpg" data-toe-card data-toe-layer="back" data-toe-index="46" style="--ar:1.5000;--sx:-0.22;--sy:0.31;--w:0.095;--z:-0.85;--rx:3.1;--ry:3.5;--rz:1">
+        <span class="toe__pic"><img src="assets/img/captures/waterbird-reeds.jpg" srcset="assets/img/captures/waterbird-reeds-441.jpg 441w, assets/img/captures/waterbird-reeds.jpg 990w" sizes="18vw" width="990" height="660" alt="A colorful waterbird among tall reeds" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">By the water</span> A colorful waterbird among tall reeds</span></span>
+      </a>
+      <a class="toe__card toe__card--back toe__card--end toe__card--nend" href="assets/img/captures/full/performer-blue-light.jpg" data-toe-card data-toe-layer="back" data-toe-index="73" style="--ar:1.1016;--sx:0.31;--sy:0.03;--w:0.075;--z:-0.9;--rx:0.3;--ry:-5;--rz:-1;--nsx:0.3;--nsy:0.15;--nw:0.24;--nz:-0.45;--nrx:1.5;--nry:-4.8;--nrz:1.5">
+        <span class="toe__pic"><img src="assets/img/captures/performer-blue-light.jpg" srcset="assets/img/captures/performer-blue-light-400.jpg 400w, assets/img/captures/performer-blue-light.jpg 900w" sizes="(max-width: 720px) 35vw, 15vw" width="900" height="817" alt="A performer under blue stage lights" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Solo and stage</span> A performer under blue stage lights</span></span>
+      </a>
+      <a class="toe__card toe__card--back toe__card--wide" href="assets/img/captures/full/butterflies-leaves.jpg" data-toe-card data-toe-layer="back" data-toe-index="17" style="--ar:1.5000;--sx:-0.33;--sy:-0.03;--w:0.085;--z:-0.95;--rx:-0.3;--ry:5.3;--rz:0.8">
+        <span class="toe__pic"><img src="assets/img/captures/butterflies-leaves.jpg" srcset="assets/img/captures/butterflies-leaves-441.jpg 441w, assets/img/captures/butterflies-leaves.jpg 990w" sizes="17vw" width="990" height="660" alt="Several butterflies gathering on a leafy stem" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Small worlds</span> Several butterflies gathering on a leafy stem</span></span>
+      </a>
+      <a class="toe__card toe__card--back toe__card--wide" href="assets/img/captures/full/trees-at-dusk.jpg" data-toe-card data-toe-layer="back" data-toe-index="59" style="--ar:0.7500;--sx:0.08;--sy:0.33;--w:0.055;--z:-0.9;--rx:3.3;--ry:-1.3;--rz:-0.8">
+        <span class="toe__pic"><img src="assets/img/captures/trees-at-dusk.jpg" srcset="assets/img/captures/trees-at-dusk-400.jpg 400w, assets/img/captures/trees-at-dusk.jpg 810w" sizes="11vw" width="810" height="1080" alt="Trees framing an open field in evening light" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Sky and shade</span> Trees framing an open field in evening light</span></span>
+      </a>
+      <a class="toe__card toe__card--mid toe__card--nend" href="assets/img/captures/full/sunset-water.jpg" data-toe-card data-toe-layer="mid" data-toe-index="45" style="--ar:1.5000;--sx:-0.31;--sy:-0.285;--w:0.145;--z:-0.42;--rx:-2.8;--ry:5;--rz:1.2;--nsx:0.17;--nsy:0.31;--nw:0.46;--nz:-0.25;--nrx:3.1;--nry:-2.7;--nrz:-1">
+        <span class="toe__pic"><img src="assets/img/captures/sunset-water.jpg" srcset="assets/img/captures/sunset-water-882.jpg 882w, assets/img/captures/sunset-water.jpg 1800w" sizes="(max-width: 720px) 58vw, 21vw" width="1800" height="1200" alt="The sun setting over water and distant birds" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">By the water</span> The sun setting over water and distant birds</span></span>
+      </a>
+      <a class="toe__card toe__card--mid toe__card--wide toe__card--end" href="assets/img/captures/full/blue-butterfly-flowers.jpg" data-toe-card data-toe-layer="mid" data-toe-index="18" style="--ar:1.5000;--sx:0.36;--sy:-0.21;--w:0.135;--z:-0.45;--rx:-2.1;--ry:-5.8;--rz:-1.4">
+        <span class="toe__pic"><img src="assets/img/captures/blue-butterfly-flowers.jpg" srcset="assets/img/captures/blue-butterfly-flowers-441.jpg 441w, assets/img/captures/blue-butterfly-flowers.jpg 990w" sizes="20vw" width="990" height="660" alt="A blue and black butterfly on small flowers" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Small worlds</span> A blue and black butterfly on small flowers</span></span>
+      </a>
+      <a class="toe__card toe__card--mid toe__card--wide" href="assets/img/captures/full/full-moon.jpg" data-toe-card data-toe-layer="mid" data-toe-index="55" style="--ar:1.0922;--sx:-0.07;--sy:0.35;--w:0.08;--z:-0.5;--rx:3.5;--ry:1.1;--rz:0.6">
+        <span class="toe__pic"><img src="assets/img/captures/full-moon.jpg" srcset="assets/img/captures/full-moon-400.jpg 400w, assets/img/captures/full-moon.jpg 900w" sizes="12vw" width="900" height="824" alt="A bright full moon against a black sky" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Sky and shade</span> A bright full moon against a black sky</span></span>
+      </a>
+      <a class="toe__card toe__card--mid toe__card--wide toe__card--end" href="assets/img/captures/full/children-window.jpg" data-toe-card data-toe-layer="mid" data-toe-index="70" style="--ar:0.6177;--sx:0.24;--sy:0.3;--w:0.066;--z:-0.35;--rx:3;--ry:-3.8;--rz:1.4">
+        <span class="toe__pic"><img src="assets/img/captures/children-window.jpg" srcset="assets/img/captures/children-window-400.jpg 400w, assets/img/captures/children-window.jpg 900w" sizes="9vw" width="900" height="1457" alt="Children looking out of a window" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Together</span> Children looking out of a window</span></span>
+      </a>
+      <a class="toe__card toe__card--mid toe__card--wide" href="assets/img/captures/full/brown-bird-branch.jpg" data-toe-card data-toe-layer="mid" data-toe-index="25" style="--ar:1.0011;--sx:0.02;--sy:-0.325;--w:0.06;--z:-0.5;--rx:-3.2;--ry:-0.3;--rz:-0.6">
+        <span class="toe__pic"><img src="assets/img/captures/brown-bird-branch.jpg" srcset="assets/img/captures/brown-bird-branch-400.jpg 400w, assets/img/captures/brown-bird-branch.jpg 900w" sizes="9vw" width="900" height="899" alt="A brown bird on a bare branch against the sky" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Among the trees</span> A brown bird on a bare branch against the sky</span></span>
+      </a>
+    </div>
+    <div class="toe__head">
+      <h2 class="toe__title" id="toe-title">
+        <span class="toe__line" data-toe-line><span>Through</span></span>
+        <span class="toe__line toe__line--2" data-toe-line><span>our eyes.</span></span>
+      </h2>
+      <span class="toe__accent" data-toe-accent aria-hidden="true"></span>
+    </div>
+    <div class="toe__world toe__world--over" data-toe-world>
+      <a class="toe__card toe__card--front toe__card--nstart" href="assets/img/captures/full/kingfisher-trunk.jpg" data-toe-card data-toe-layer="front" data-toe-index="37" style="--ar:0.8858;--sx:-0.41;--sy:0.2;--w:0.115;--z:0.06;--rx:2;--ry:6.6;--rz:-1.8;--nsx:-0.27;--nsy:0.27;--nw:0.36;--nz:0.04;--nrx:2.7;--nry:4.3;--nrz:-1.5">
+        <span class="toe__pic"><img src="assets/img/captures/kingfisher-trunk.jpg" srcset="assets/img/captures/kingfisher-trunk-400.jpg 400w, assets/img/captures/kingfisher-trunk.jpg 900w" sizes="(max-width: 720px) 35vw, 11vw" width="900" height="1016" alt="A kingfisher against the dark bark of a tree" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Among the trees</span> A kingfisher against the dark bark of a tree</span></span>
+      </a>
+      <a class="toe__card toe__card--front toe__card--end toe__card--nend" href="assets/img/captures/full/peacock-fan.jpg" data-toe-card data-toe-layer="front" data-toe-index="52" style="--ar:0.6667;--sx:0.42;--sy:0.17;--w:0.095;--z:0.08;--rx:1.7;--ry:-6.7;--rz:1.6;--nsx:0.29;--nsy:-0.28;--nw:0.29;--nz:0.05;--nrx:-2.8;--nry:-4.6;--nrz:1.5">
+        <span class="toe__pic"><img src="assets/img/captures/peacock-fan.jpg" srcset="assets/img/captures/peacock-fan-412.jpg 412w, assets/img/captures/peacock-fan.jpg 924w" sizes="(max-width: 720px) 28vw, 9vw" width="924" height="1386" alt="A peacock displaying its tail in a grassy clearing" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Sky and shade</span> A peacock displaying its tail in a grassy clearing</span></span>
+      </a>
+      <a class="toe__card toe__card--front toe__card--end toe__card--nstart" href="assets/img/captures/full/bee-yellow-flower.jpg" data-toe-card data-toe-layer="front" data-toe-index="1" style="--ar:1.5000;--sx:0.22;--sy:-0.33;--w:0.1;--z:0.02;--rx:-3.3;--ry:-3.5;--rz:1;--nsx:-0.21;--nsy:-0.31;--nw:0.42;--nz:-0.2;--nrx:-3.1;--nry:3.4;--nrz:-1.2">
+        <span class="toe__pic"><img src="assets/img/captures/bee-yellow-flower.jpg" srcset="assets/img/captures/bee-yellow-flower-400.jpg 400w, assets/img/captures/bee-yellow-flower.jpg 900w" sizes="(max-width: 720px) 51vw, 10vw" width="900" height="600" alt="A bee on a vivid yellow flower" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Small worlds</span> A bee on a vivid yellow flower</span></span>
+      </a>
+      <a class="toe__card toe__card--front toe__card--wide" href="assets/img/captures/full/two-dancers.jpg" data-toe-card data-toe-layer="front" data-toe-index="69" style="--ar:0.8547;--sx:-0.43;--sy:-0.12;--w:0.08;--z:0.03;--rx:-1.2;--ry:6.9;--rz:-1.2">
+        <span class="toe__pic"><img src="assets/img/captures/two-dancers.jpg" srcset="assets/img/captures/two-dancers-400.jpg 400w, assets/img/captures/two-dancers.jpg 900w" sizes="8vw" width="900" height="1053" alt="Two performers dancing in colorful dress" loading="lazy" decoding="async"></span>
+        <span class="toe__fog" aria-hidden="true"></span>
+        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in"><span class="toe__meta-ch">Together</span> Two performers dancing in colorful dress</span></span>
+      </a>
+    </div>
+    <div class="toe__foot">
+      <p class="toe__index" data-toe-foot><span>01</span> / Through our eyes</p>
+      <div class="toe__controls">
+        <p class="toe__hint" data-toe-foot aria-hidden="true">Drag to explore</p>
+        <a class="toe__browse" href="#photographs" data-toe-foot>Browse photographs <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="toe__shade" data-toe-shade aria-hidden="true"></div>
+  </div>
+</section>
+<div class="film__seam toe-seam--out" data-header-theme="dark" aria-hidden="true"></div>
 
 <!-- The journal. Each photograph is visible once in a chapter. Every tile
      links to its full-size image; assets/js/captures-gallery.js opens that
@@ -1072,5 +1182,6 @@
 <script src="assets/js/filmintro.js?b=114-captures-journal-2" defer></script>
 <script src="assets/js/captures-featured.js?b=114-captures-journal-2" defer></script>
 <script src="assets/js/captures-gallery.js?b=114-captures-journal-2" defer></script>
+<script src="assets/js/captures-hero.js?b=114-captures-journal-2" defer></script>
 </body>
 </html>
