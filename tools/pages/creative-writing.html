@@ -1,29 +1,10 @@
-<div class="cw-page" data-cw-page data-cw-active="{{CW_ACTIVE}}">
+<div class="cw-page">
 {{CW_HERO}}
-
-<section class="cw-collection" id="editions" aria-labelledby="cw-editions-title" data-cw-collection>
-  <div class="wrap cw-collection__bar" id="collections">
-    <div class="cw-collection__lead">
-      <h2 class="cw-collection__title" id="cw-editions-title">The editions</h2>
-      <p class="cw-collection__stats">{{CW_STATS}}</p>
-    </div>
-{{CW_FILTER}}
-  </div>
-{{CW_WAVE}}
-</section>
-
-{{CW_FEATURED}}
-
-<section class="cw-archive" id="archive" aria-labelledby="cw-archive-title">
-  <div class="wrap">
-    <header class="cw-archive__head">
-      <p class="cw-eyebrow">Archive</p>
-      <h2 class="cw-archive__title" id="cw-archive-title">Every edition, year by year</h2>
-    </header>
-    <div class="cw-archive__years">
-{{CW_ARCHIVE}}
-    </div>
+<section class="cw-archive" id="archive" aria-labelledby="cw-archive-title" data-header-theme="light">
+  <div class="cw-wrap">
+    <div class="cw-archive-intro"><h2 id="cw-archive-title">The collection</h2><p>{{CW_INTRO}}</p></div>
+    <div class="cw-archive-bar">{{CW_FILTER}}<p class="cw-stats">{{CW_STATS}}</p></div>
+    <div id="editions">{{CW_ARCHIVE}}</div>
   </div>
 </section>
-{{CW_LEGACY}}
 </div>
