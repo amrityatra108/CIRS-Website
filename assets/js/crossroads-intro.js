@@ -127,17 +127,114 @@
     intro.removeAttribute("data-crossroads-intro-opening-playing");
     intro.removeAttribute("data-crossroads-intro-pending");
     intro.setAttribute("data-crossroads-intro-settled", "");
+    var handing = false;
     if (immediate === true || reduced.matches || !hadFilm) settleOpeningVisual();
+    else if (!quick && (handing = handOff())) { /* the film becomes the lockup */ }
     else {
       intro.setAttribute("data-crossroads-intro-finishing", "");
       intro.style.setProperty("--crossroads-opening-exit-duration", quick ? "500ms" : "750ms");
       finishTimer = setTimeout(settleOpeningVisual, quick ? 500 : 750);
     }
-    if (immediate !== true && !quick && !reduced.matches && hadFilm && intro.getBoundingClientRect().bottom > 88) {
+    if (!handing && immediate !== true && !quick && !reduced.matches && hadFilm && intro.getBoundingClientRect().bottom > 88) {
       intro.setAttribute("data-crossroads-intro-arriving", "");
       setTimeout(function () { intro.removeAttribute("data-crossroads-intro-arriving"); }, 1200);
     }
     stop();
+  }
+  /* The film ends on its own lockup: the quill centred above "The Crossroads",
+     over the illustrated scene. The page's lockup is the same quill and the
+     same wordmark, set side by side on the purple ground. Fading one out and
+     the other in showed the logo twice, in two places. So when the film
+     plays to its end:
+
+       1. its last frame is held for a moment;
+       2. the page's quill and wordmark are laid exactly over the film's,
+          measured from where the frame is actually drawn at this window's
+          size and crop, and the film and the page's lockup crossfade on one
+          curve, so at every instant there is one logo in one place;
+       3. with the film gone, the lockup glides from the film's composition
+          into its own, and the motto and the way in fade up under it;
+       4. the film is unloaded.
+
+     Positions in the film's final frame, as fractions of its width and
+     height, measured from assets/video/crossroads-opening.mp4 (the phone cut
+     is the same composition): the feather's centre and height, and the
+     wordmark's centre and width. Inked bounds of the two SVGs are fractions
+     of their own boxes. A skip, a scroll or a click still ends the film at
+     once, as before; this is only the film's own ending. */
+  var FILM_FEATHER = { cx:.563, cy:.428, h:.376 };
+  var FILM_WORDMARK = { cx:.519, cy:.7246, w:.4786 };
+  var PEN_INK = { x0:.0357, y0:.0563, x1:.9452, y1:.9768, aspect:210 / 302 };
+  var TITLE_INK = { x0:.0127, y0:.0819, x1:.9775, y1:.9094 };
+  var HOLD = 350, CROSSFADE = 900, GLIDE = 1000;
+  function handOff() {
+    var pen = intro.querySelector(".crossroads-intro__pen");
+    var title = intro.querySelector(".crossroads-intro-title-art");
+    if (!opening || !opening.videoWidth || !pen || !title) return false;
+    var others = [intro.querySelector(".crossroads-intro__eyebrow"), intro.querySelector(".crossroads-intro__footer")].filter(Boolean);
+    intro.setAttribute("data-crossroads-intro-handoff", "");
+    intro.removeAttribute("data-crossroads-intro-film");
+
+    var box = opening.getBoundingClientRect(), fit = getComputedStyle(opening).objectFit;
+    var vw = opening.videoWidth, vh = opening.videoHeight;
+    var s = fit === "contain" ? Math.min(box.width / vw, box.height / vh) : Math.max(box.width / vw, box.height / vh);
+    var dw = vw * s, dh = vh * s, ox = box.left + (box.width - dw) / 2, oy = box.top + (box.height - dh) / 2;
+
+    function inkOfPen() {
+      var r = pen.getBoundingClientRect(), w = r.width, h = r.height;
+      if (w / h > PEN_INK.aspect) w = h * PEN_INK.aspect; else h = w / PEN_INK.aspect;
+      var left = r.left + (r.width - w) / 2, top = r.top + (r.height - h) / 2;
+      return { x0:left + w * PEN_INK.x0, x1:left + w * PEN_INK.x1, y0:top + h * PEN_INK.y0, y1:top + h * PEN_INK.y1 };
+    }
+    function inkOfTitle() {
+      var r = title.getBoundingClientRect();
+      return { x0:r.left + r.width * TITLE_INK.x0, x1:r.left + r.width * TITLE_INK.x1,
+               y0:r.top + r.height * TITLE_INK.y0, y1:r.top + r.height * TITLE_INK.y1 };
+    }
+    function lay(el, ink, scale, tx, ty) {
+      var r = el.getBoundingClientRect(), cx = (ink.x0 + ink.x1) / 2, cy = (ink.y0 + ink.y1) / 2;
+      el.style.transition = "none";
+      el.style.transformOrigin = (cx - r.left) + "px " + (cy - r.top) + "px";
+      el.style.transform = "translate(" + (tx - cx) + "px," + (ty - cy) + "px) scale(" + scale + ")";
+      el.style.opacity = "0";
+    }
+    var penInk = inkOfPen(), titleInk = inkOfTitle();
+    lay(pen, penInk, FILM_FEATHER.h * dh / (penInk.y1 - penInk.y0), ox + FILM_FEATHER.cx * dw, oy + FILM_FEATHER.cy * dh);
+    lay(title, titleInk, FILM_WORDMARK.w * dw / (titleInk.x1 - titleInk.x0), ox + FILM_WORDMARK.cx * dw, oy + FILM_WORDMARK.cy * dh);
+    others.forEach(function (el) { el.style.transition = "none"; el.style.opacity = "0"; });
+    var parts = [pen, title];
+
+    setTimeout(function () {
+      intro.setAttribute("data-crossroads-intro-dissolve", "");
+      parts.forEach(function (el) {
+        el.style.transition = "opacity " + CROSSFADE + "ms ease";
+        el.style.opacity = "1";
+      });
+    }, HOLD);
+    setTimeout(function () {
+      parts.forEach(function (el) {
+        el.style.transition = "transform " + GLIDE + "ms cubic-bezier(.22,.7,.2,1)";
+        el.style.transform = "none";
+      });
+      others.forEach(function (el) {
+        el.style.transition = "opacity 700ms ease 450ms";
+        el.style.opacity = "1";
+      });
+    }, HOLD + CROSSFADE);
+    setTimeout(function () {
+      parts.concat(others).forEach(function (el) {
+        el.style.removeProperty("transition");
+        el.style.removeProperty("transform");
+        el.style.removeProperty("transform-origin");
+        el.style.removeProperty("opacity");
+      });
+      intro.removeAttribute("data-crossroads-intro-handoff");
+      intro.removeAttribute("data-crossroads-intro-dissolve");
+      opening.removeAttribute("src");
+      opening.load();
+      settleOpeningVisual();
+    }, HOLD + CROSSFADE + GLIDE + 500);
+    return true;
   }
   function releaseOpening() {
     if (openingState === "released" || openingState === "complete") return;

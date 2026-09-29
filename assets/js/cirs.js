@@ -1709,11 +1709,24 @@
     // wider than the window is sized by its content, and padding would only
     // widen it; there, and where nothing insets the text, the block itself
     // takes the padding.
+    //
+    // It never climbs past a box that also holds a photograph, a film or a
+    // canvas. Padding such a box narrows the picture with the text and pushes
+    // it off centre, which is how every full-width photograph on a phone used
+    // to sit a lane's width left of the middle. There the text's own nearest
+    // box, below the picture's container, takes the padding instead.
+    // A sideways strip of photographs is its own bound: it takes the padding
+    // itself rather than passing it up to the section around it.
+    var MEDIA = "img, picture, video, canvas, iframe";
+    function holdsMedia(n) { return !!n.querySelector(MEDIA); }
     function wrapper(b, W) {
+      var safe = b;
       for (var n = b; n && n !== document.body; n = n.parentElement) {
         var right = n.getBoundingClientRect().right;
         if (right > W + 1) return b;
+        if (n !== b && holdsMedia(n)) return safe;
         if (right >= W - 1 && parseFloat(getComputedStyle(n).paddingRight) > 0) return n;
+        safe = n;
       }
       return b;
     }
