@@ -53,7 +53,10 @@
     const leg=clamp(progress,0,1)*last;
     const index=Math.min(last-1,Math.floor(leg));
     const within=leg-index;
-    const travelling=clamp((within-.2)/.6,0,1);
+    // The van drives for the middle three quarters of each leg, not the
+    // middle three fifths: the same road over more scroll reads as a steady
+    // drive rather than a dash between two held cards.
+    const travelling=clamp((within-.12)/.76,0,1);
     const eased=smooth(travelling);
     return anchors[index]+eased*(anchors[index+1]-anchors[index]);
   }
@@ -176,7 +179,10 @@
     scenes[part.i].style.opacity=String(1-v.fade);
     scenes[part.i+1].style.opacity=String(v.fade);
 
-    const carWidth=clamp(width*.3,134,220),scale=carWidth/916;
+    // Large enough to read as a vehicle and to see Gurudev on its side, and
+    // bounded by the window's height too, so on a short window it stays
+    // below the cards rather than driving into them.
+    const carWidth=clamp(Math.min(width*.21,height*.36),200,340),scale=carWidth/916;
     const probe=Math.max(3,539*scale*.24);
     const before=path.getPointAtLength(Math.max(0,distance-probe));
     const after=path.getPointAtLength(Math.min(total,distance+probe));
@@ -190,7 +196,7 @@
 
   function animate(now) {
     const dt=Math.min(50,lastTime?now-lastTime:16);lastTime=now;
-    current+= (target-current)*(1-Math.exp(-dt/120));
+    current+= (target-current)*(1-Math.exp(-dt/170));
     if (Math.abs(target-current)<.000005) current=target;
     render();
     if (current!==target) frame=requestAnimationFrame(animate);

@@ -1709,11 +1709,24 @@
     // wider than the window is sized by its content, and padding would only
     // widen it; there, and where nothing insets the text, the block itself
     // takes the padding.
+    //
+    // It never climbs past a box that also holds a photograph, a film or a
+    // canvas. Padding such a box narrows the picture with the text and pushes
+    // it off centre, which is how every full-width photograph on a phone used
+    // to sit a lane's width left of the middle. There the text's own nearest
+    // box, below the picture's container, takes the padding instead.
+    // A sideways strip of photographs is its own bound: it takes the padding
+    // itself rather than passing it up to the section around it.
+    var MEDIA = "img, picture, video, canvas, iframe";
+    function holdsMedia(n) { return !!n.querySelector(MEDIA); }
     function wrapper(b, W) {
+      var safe = b;
       for (var n = b; n && n !== document.body; n = n.parentElement) {
         var right = n.getBoundingClientRect().right;
         if (right > W + 1) return b;
+        if (n !== b && holdsMedia(n)) return safe;
         if (right >= W - 1 && parseFloat(getComputedStyle(n).paddingRight) > 0) return n;
+        safe = n;
       }
       return b;
     }
@@ -2160,7 +2173,11 @@
       var f = document.createElement("iframe");
       f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) +
               "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
-      f.title = "The official CIRS film";
+      // A page that names its recording (Theatre's productions) says so;
+      // every other film is the official CIRS film, as before.
+      var named = from && from.getAttribute("data-video-title");
+      f.title = named || "The official CIRS film";
+      box.setAttribute("aria-label", named || "The official CIRS film");
       f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; " +
                 "gyroscope; picture-in-picture; web-share";
       f.setAttribute("allowfullscreen", "");
@@ -2205,6 +2222,9 @@
       t.addEventListener("click", function (e) {
         var id = t.getAttribute("data-video");
         if (!id) return;              // no id: leave the href alone
+        // A named recording is an ordinary link too: a modified click opens
+        // it in a new tab as the browser always would.
+        if (t.hasAttribute("data-video-title") && (e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
         e.preventDefault();
         open(id, t);
       });

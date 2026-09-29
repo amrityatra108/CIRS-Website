@@ -195,6 +195,44 @@ END = ("captures-2026-09-24/img-1990.jpg", "end", "A long-necked bird on a branc
 # Photographer credits, by output name, once the school can confirm them.
 CREDITS = {}
 
+# "Through our eyes": the field of photographs between the featured
+# compositions and the journal (tools/pages/captures.html). Every card is a
+# journal photograph, and opens the viewer on it, so the field is a way into
+# the journal rather than a second copy of it.
+#
+# One row per card: (output name, layer, wide, narrow). A layout is
+# (sx, sy, w, z, rz): the card's centre as a share of the window from its
+# middle, its width as a share of the window's width, its depth as a share
+# of the perspective distance (negative is further away) and a small roll in
+# degrees. Positions are where the card is seen, not where it sits in space:
+# assets/css/captures-hero.css and assets/js/captures-hero.js both divide by
+# the depth's scale, so a card further back is placed further out and drawn
+# larger, and lands where it is written here. narrow is None for a card left
+# out of the phone composition. The title keeps the middle of the window
+# (about ±0.27 across and ±0.18 down on a wide window), and only back cards,
+# dimmed, go behind it.
+HERO = [
+    # Back: first to arrive, dimmest, furthest.
+    ("lizard-tree-trunk",      "back",  (-0.12, -0.30, 0.100, -0.90, -1.5), None),
+    ("bird-pink-blossoms",     "back",  ( 0.13, -0.27, 0.090, -0.95,  1.2), None),
+    ("waterbird-reeds",        "back",  (-0.22,  0.31, 0.095, -0.85,  1.0), None),
+    ("performer-blue-light",   "back",  ( 0.31,  0.03, 0.075, -0.90, -1.0), (0.30, 0.15, 0.24, -0.45, 1.5)),
+    ("butterflies-leaves",     "back",  (-0.33, -0.03, 0.085, -0.95,  0.8), None),
+    ("trees-at-dusk",          "back",  ( 0.08,  0.33, 0.055, -0.90, -0.8), None),
+    # Middle.
+    ("sunset-water",           "mid",   (-0.31, -0.285, 0.145, -0.42,  1.2), (0.17, 0.31, 0.46, -0.25, -1.0)),
+    ("blue-butterfly-flowers", "mid",   ( 0.36, -0.21, 0.135, -0.45, -1.4), None),
+    ("full-moon",              "mid",   (-0.07,  0.35, 0.080, -0.50,  0.6), None),
+    ("children-window",        "mid",   ( 0.24,  0.30, 0.066, -0.35,  1.4), None),
+    ("brown-bird-branch",      "mid",   ( 0.02, -0.325, 0.060, -0.50, -0.6), None),
+    # Front: last to arrive, at full strength; two of them pass the outer
+    # edges of the title as it is revealed.
+    ("kingfisher-trunk",       "front", (-0.41,  0.20, 0.115,  0.06, -1.8), (-0.27, 0.27, 0.36, 0.04, -1.5)),
+    ("peacock-fan",            "front", ( 0.42,  0.17, 0.095,  0.08,  1.6), (0.29, -0.28, 0.29, 0.05, 1.5)),
+    ("bee-yellow-flower",      "front", ( 0.22, -0.33, 0.100,  0.02,  1.0), (-0.21, -0.31, 0.42, -0.20, -1.2)),
+    ("two-dancers",            "front", (-0.43, -0.12, 0.080,  0.03, -1.2), None),
+]
+
 
 def items():
     """Every gallery photograph in reading order, as (source, name, caption)."""
@@ -324,3 +362,53 @@ def expand_featured(html):
     html = re.sub(r"\{\{CAPTURES_FEATURED_CAPTION:([a-z-]+)\}\}",
                   lambda m: featured_caption(m.group(1)), html)
     return html.replace("{{CAPTURES_LEAD_CAPTION}}", _esc(LEAD_CAPTION))
+
+
+def _hero_layout(prefix, layout):
+    """One layout as custom properties. The card leans towards the middle of
+    the window, a few degrees at most, by where it is seen."""
+    sx, sy, w, z, rz = layout
+    return (f"--{prefix}sx:{sx:g};--{prefix}sy:{sy:g};--{prefix}w:{w:g};--{prefix}z:{z:g};"
+            f"--{prefix}rx:{round(sy * 10, 1):g};--{prefix}ry:{round(-sx * 16, 1):g};--{prefix}rz:{rz:g}")
+
+
+def hero_html():
+    """The cards of "Through our eyes", in two layers: the back and middle
+    cards go behind the title, the front cards over it. Each is a link to its
+    full-size photograph, like a journal tile, and names the journal index
+    the viewer opens on."""
+    sizes = _sizes()
+    index = {name: i for i, (_, name, _) in enumerate(items())}
+    chapter = {name: c["title"] for c in CHAPTERS for row in c["rows"] for _, name, _ in row}
+    caption = {name: text for _, name, text in items()}
+    layers = {"behind": [], "over": []}
+    for name, layer, wide, narrow in HERO:
+        s = sizes[name]
+        ratio = s["tile"][0] / s["tile"][1]
+        style = f"--ar:{ratio:.4f};" + _hero_layout("", wide)
+        if narrow:
+            style += ";" + _hero_layout("n", narrow)
+        # The width the card is laid out at: its seen width over its depth's
+        # scale (see HERO above).
+        vw = math.ceil(wide[2] * (1 - wide[3]) * 100)
+        sizes_attr = (f"(max-width: 720px) {math.ceil(narrow[2] * (1 - narrow[3]) * 100)}vw, {vw}vw"
+                      if narrow else f"{vw}vw")
+        # A card on the right-hand side hangs its caption from its right edge,
+        # so the caption stays in the window.
+        classes = f"toe__card toe__card--{layer}" + ("" if narrow else " toe__card--wide")
+        if wide[0] > 0.12:
+            classes += " toe__card--end"
+        if narrow:
+            classes += " toe__card--nend" if narrow[0] > 0.1 else " toe__card--nstart"
+        layers["over" if layer == "front" else "behind"].append(
+            f'      <a class="{classes}" href="{s["full_path"]}" data-toe-card data-toe-layer="{layer}"'
+            f' data-toe-index="{index[name]}" style="{style}">\n'
+            f'        <span class="toe__pic"><img src="{s["tile_path"]}"'
+            f' srcset="{s["small_path"]} {s["small"][0]}w, {s["tile_path"]} {s["tile"][0]}w"'
+            f' sizes="{sizes_attr}" width="{s["tile"][0]}" height="{s["tile"][1]}"'
+            f' alt="{_esc(caption[name])}" loading="lazy" decoding="async"></span>\n'
+            f'        <span class="toe__fog" aria-hidden="true"></span>\n'
+            f'        <span class="toe__meta" aria-hidden="true"><span class="toe__meta-in">'
+            f'<span class="toe__meta-ch">{_esc(chapter[name])}</span> {_esc(caption[name])}</span></span>\n'
+            f'      </a>')
+    return ("\n".join(layers["behind"]), "\n".join(layers["over"]))

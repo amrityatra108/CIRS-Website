@@ -62,7 +62,7 @@ DOCUMENTS = [
      "title": "Mandatory Public Disclosure",
      "note": "The CBSE-mandated public disclosure statement.",
      "file": "mandatory-public-disclosure.pdf",
-     "issued": "4 Apr 2024", "status": "stale"},
+     "issued": "4 Apr 2024", "status": "dated"},
 
     # ---- Safety &amp; compliance certificates -----------------------------
     {"id": "school-safety-policy", "category": "Safety &amp; compliance",
@@ -121,12 +121,12 @@ DOCUMENTS = [
      "title": "Declaration on Use of Textbooks Published by Private Publishers",
      "note": "The school's declaration on its use of privately published textbooks.",
      "file": "textbooks-declaration.pdf",
-     "period": "2019–20", "status": "stale"},
+     "period": "2019–20", "status": "dated"},
     {"id": "academic-calendar", "category": "Academics &amp; results",
      "title": "Annual Academic Calendar",
      "note": "The school's calendar of academic dates and events for the year.",
      "file": "annual-academic-calendar.pdf",
-     "period": "2024–25", "status": "stale"},
+     "period": "2024–25", "status": "dated"},
 
     # ---- Administration &amp; governance -----------------------------------
     {"id": "school-management-committee", "category": "Administration &amp; governance",
@@ -170,12 +170,12 @@ DOCUMENTS = [
      "title": "Circular &mdash; Anand Utsav",
      "note": "Circular issued for the Anand Utsav celebration.",
      "file": "circular-anand-utsav.pdf",
-     "issued": "22 Aug 2019", "status": "stale"},
+     "issued": "22 Aug 2019", "status": "dated"},
     {"id": "circular-khel-mela", "category": "School circulars",
      "title": "Circular &mdash; Khel Mela",
      "note": "Circular issued for the Khel Mela sports event.",
      "file": "circular-khel-mela.pdf",
-     "issued": "21 Oct 2019", "status": "stale"},
+     "issued": "21 Oct 2019", "status": "dated"},
 ]
 
 # The order categories are grouped in, on both pages.

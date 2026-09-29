@@ -28,7 +28,7 @@
 body.founder-story-visible #totop{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(10px)}
 
 @media (min-width:900px) and (prefers-reduced-motion:no-preference){
-  .founder-gurudev-journey.is-enhanced{height:1050svh;overflow:clip}
+  .founder-gurudev-journey.is-enhanced{height:1500svh;overflow:clip}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__runway{height:100%}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate}
   .founder-gurudev-journey.is-enhanced .founder-gurudev-journey__viewport{position:absolute;inset:0;max-width:none;margin:0;padding:0;overflow:hidden}

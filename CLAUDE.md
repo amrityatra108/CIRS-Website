@@ -55,11 +55,21 @@ banner and no scroll. Its photographs are listed in `tools/artswall.py` and cut 
 `tools/make-arts-wall.py`; its sheet and script are `assets/css/artswall.css` and
 `assets/js/artswall.js`, both scoped to `body.wall`.
 
-CIRS Theatre's three acts (Anand Utsav, Masquerades, Class Presentations) are written from
-`tools/theatre.py`, which records every photograph's Drive source, house, year and caption and
-every YouTube link. `tools/make-theatre.py` cuts the images into `assets/img/theatre/` from the
+CIRS Theatre is written as a performance: the scrubbed opening film, a handoff onto the ivory
+Prologue, the Programme, then Act I Anand Utsav, an intermission, Act II Masquerades (a four-house
+playbill, finite house galleries and a photograph viewer) and Act III Class Presentations, and
+finally the archive request and the way onward. Everything but the archive request is written
+from `tools/theatre.py`, which records every photograph's Drive source, house, year and caption
+and every YouTube link (the markup functions sit below its data; never copy those arrays into
+the script). `tools/make-theatre.py` cuts the images into `assets/img/theatre/` from the
 school's Drive (the originals are not in the repository). A photograph is attributed to a house
-only by its Drive folder and the school's own YouTube titles, never by costume colour.
+only by its Drive folder and the school's own YouTube titles, never by costume colour. The sheet
+and script are `assets/css/theatre.css` and `assets/js/theatre.js` (all scoped to `body.theatre`;
+one scroll owner, no second Lenis). The film itself is the shared one, and the handoff runs
+inside its own sticky stage; its phase fractions in `tools/build-site.py` keep the original
+timing. On this page `<body>` carries the class `film`, so the film's `.film{height:…}` sizes the
+body too: never give the body `overflow:hidden` here (it clips the whole page to the film's
+height); lock scroll on `html`.
 
 The Founder page opens on the designer's Gurudev handoff: a four-second film
 (`assets/video/gurudev-intro.mp4`, phone cut by `tools/make-films.py`), then a WebGL portrait of
@@ -102,6 +112,12 @@ Leadership's people, portrait crops and five messages are data in `tools/leaders
 `tools/make-leadership.py` cuts the portraits. The messages are the school's published text word
 for word — do not copy-edit them. The page keeps native scroll (no Lenis) so its `#msg-…` links
 are real history entries.
+
+News's "The term in review" (`#term`) and its article pages are written from `tools/cvpnews.py`, which
+is written only from the school's CVP report for October 2025 – March 2026 and records every conflict
+in that report and how it was settled. `tools/make-news-cvp.py` cuts the photographs from the report's
+PDF (not in the repository) into `assets/img/news/cvp/`. Add nothing to those articles that the report
+does not say.
 
 Spiritual Life (`tools/pages/spiritual-life.html`) is written from the school's own account,
 the "Spiritual Page" Google Doc: every activity, frequency and audience on it comes from there,
