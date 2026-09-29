@@ -274,17 +274,12 @@ html:has(body.houses.houses-motion){scroll-behavior:auto!important}
    loads and keeps a trace of it after, so the four read as four houses from
    the first paint rather than four dark bands with a name on each.
 
-   Explore the four houses: cirs.js pads the right of text wrappers to keep a
-   lane clear for the floating buttons, and that padding pushed each house's
-   photograph off centre. The photograph now spans both gutters again; the
-   text keeps its lane.
+   Explore the four houses: each house's photograph spans the column.
 
    In frames: a collage in two columns instead of a strip to be swiped. */
 @media (max-width:900px){
   .house-zone{ background:linear-gradient(160deg, var(--house-colour) 0%, #1a1028 78%); }
   .house-zone::before{ opacity:.14; }
-  .house-spread.float-lane > .house-spread__body > figure,
-  .house-spread.float-lane figure{ margin-right:calc(var(--gut) - var(--float-pad, 0px)) !important; }
   .house-spread figure{ align-self:stretch; }
   .house-spread .house-photo-mask > img{ object-position:50% 45%; }
 

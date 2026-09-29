@@ -574,10 +574,42 @@ _check()
 
 
 # -------------------------------------------------------------------- markup
+#
+# The page is a performance in the order it is written here:
+#
+#   film -> handoff -> Prologue -> Programme
+#        -> Act I  Anand Utsav          (dark: the house lights come up)
+#        -> Intermission                (ivory)
+#        -> Act II Masquerades          (dark: a playbill, then a chapter per house)
+#        -> Act III Class Presentations (ivory: a production index)
+#        -> the archive request -> curtain call -> more from the arts
+#
+# Every act is written from the records above, so a photograph or a title
+# cannot appear here that is not in them. assets/js/theatre.js reads only
+# attributes written here (data-th-open, data-house-link, data-thumb ...); it
+# holds no list of its own.
 
 EXTERNAL = ' target="_blank" rel="noopener"'
 NEW_TAB = '<span class="sr-only"> (opens YouTube in a new tab)</span>'
+PLAYS = '<span class="sr-only"> (plays in a window on this page)</span>'
 ARROW = '<span class="th-ext" aria-hidden="true">&#8599;</span>'
+GO = '<span class="th-go" aria-hidden="true">&#8594;</span>'
+
+
+def video_attrs(vid, title):
+    """A link to a recording on the school's channel. The shared film lightbox
+    (assets/js/cirs.js) plays it in a window on this page and builds the player
+    only when it is asked for; the href is the way to YouTube if it cannot."""
+    return f'href="{watch(vid)}" data-video="{vid}" data-video-title="{esc(title)}"{EXTERNAL}'
+
+
+def _class_year(v):
+    return int(v["uploaded"].split()[-1])
+
+
+def _class_span():
+    years = [_class_year(v) for v in CLASS_RECENT + CLASS_EARLIER]
+    return min(years), max(years)
 
 
 def photo_link(p, group, index, sizes, cls="", caption=True):
@@ -592,48 +624,130 @@ def photo_link(p, group, index, sizes, cls="", caption=True):
 
 
 def _list_row(v):
-    return (f'<li><a href="{watch(v["id"])}"{EXTERNAL}><span class="th-list__title">{esc(v["title"])}</span>'
+    return (f'<li><a {video_attrs(v["id"], v["title"])}><span class="th-list__title">{esc(v["title"])}</span>'
             f'<span class="th-list__note">{esc(v["note"])}</span><span class="th-list__len">{v["length"]}</span>'
-            f'{ARROW}{NEW_TAB}</a></li>')
+            f'{ARROW}{PLAYS}</a></li>')
 
+
+# ------------------------------------------------------- the film's handoff
+
+def handoff_html():
+    """What lies over the film's last frame while the Prologue arrives:
+    the edges darken, one warm line is drawn across the stage, the picture
+    goes to black, the page names itself, and the line opens onto ivory.
+    Decorative: the h1 is the film's title and the Prologue holds the same
+    sentence as a heading, so none of this is announced twice. assets/js/
+    theatre.js draws it from the scroll; without it, it is not shown."""
+    return '''    <div class="th-hand" aria-hidden="true" data-th-hand>
+      <div class="th-hand__edge"></div>
+      <div class="th-hand__night"></div>
+      <div class="th-hand__trace"></div>
+      <p class="th-hand__label">CIRS Theatre</p>
+      <p class="th-hand__say">Every Student, <em>On the Stage.</em></p>
+      <div class="th-hand__paper"></div>
+    </div>
+'''
+
+
+# ----------------------------------------------------------------- prologue
+
+def prologue_html():
+    p = ANAND_UTSAV["sequence"][3]           # the many-armed tableau
+    cap = f'{p["caption"]}, {ANAND_UTSAV["event"]}.'
+    return f'''<section class="th-prologue" id="about" aria-labelledby="th-prologue-title" data-jump-label="Prologue">
+  <div class="wrap th-prologue__grid">
+    <div class="th-prologue__lead">
+      <p class="th-label th-label--ink"><span class="th-label__num" aria-hidden="true">00</span><span class="th-label__act">Prologue</span> CIRS Theatre</p>
+      <h2 class="th-prologue__title" id="th-prologue-title">Every Student, <em>On the Stage.</em></h2>
+    </div>
+    <figure class="th-prologue__fig th-fig">
+      <a class="th-photo img-reveal" href="{file(p, widths(p)[-1])}" data-th-open="anand-utsav:3">{img(p, "(min-width: 900px) 40vw, 100vw")}</a>
+      <figcaption class="th-cap">{esc(cap)}</figcaption>
+    </figure>
+    <div class="th-prologue__text">
+      <p class="th-prologue__lede">For over three decades CIRS has been a whirlpool of theatrical activity &mdash; and the stage is not kept for a drama club. Every class, every house and the whole school take their turn on it.</p>
+      <p class="copy">Every year the school churns out actors whose qualities are learnt on the stage and blossom into daily life. Confidence, expression and creativity find no limits here. Every novice aspires to the honourable title of &lsquo;actor&rsquo;, and theatre is always treated as sacred.</p>
+      <p class="copy">Programmes are put up to bring messages from our texts, stories from our students, and to celebrate the art of expression itself &mdash; with the concepts, the scripts and the acting done almost entirely by the students, on the stage and off it.</p>
+    </div>
+  </div>
+</section>'''
+
+
+# ---------------------------------------------------------------- programme
 
 def programme_html():
+    au = ANAND_UTSAV
+    first, last = _class_span()
+    total = len(CLASS_RECENT) + len(CLASS_EARLIER)
+    still = CLASS_RECENT[0]
+    dates = f'{HOUSES[0]["date"].split()[0]}&ndash;{HOUSES[-1]["date"]} {HOUSES[0]["year"]}'
     acts = [
-        ("I", "anand-utsav", "Anand Utsav", "The whole school"),
-        ("II", "masquerades", "Masquerades", "The four houses"),
-        ("III", "class-presentations", "Class Presentations", "Every class"),
+        {"n": "01", "id": "anand-utsav", "name": "Anand Utsav", "who": "The whole school",
+         "detail": f'{au["year"]} &middot; <em>{esc(au["title"])}</em>',
+         "media": img(au["wide"], "(min-width: 900px) 30vw, 0px"),
+         "cap": f'Act I &middot; {esc(au["wide"]["caption"])}'},
+        {"n": "02", "id": "masquerades", "name": "Masquerades", "who": "The four houses, four evenings",
+         "detail": dates,
+         "media": img(MASQUERADE_OPENER, "(min-width: 900px) 30vw, 0px"),
+         "cap": f'Act II &middot; {esc(MASQUERADE_OPENER["caption"])}'},
+        {"n": "03", "id": "class-presentations", "name": "Class Presentations", "who": "Every class",
+         "detail": f'{total} recordings, {first}&ndash;{last}',
+         "media": f'<img src="{DIR}/yt/{still["id"]}.webp" alt="" width="640" height="360" loading="lazy" decoding="async">',
+         "cap": f'Act III &middot; {esc(still["class"])}, {esc(still["title"].split(" | ")[0])} (a still from the recording)',
+         "still": True},
     ]
-    items = "\n".join(
-        f'      <li><a class="th-programme__act" href="#{sid}">'
-        f'<span class="th-programme__n">{n}</span>'
-        f'<span class="th-programme__name serif">{name}</span>'
-        f'<span class="th-programme__who">{who}</span></a></li>' for n, sid, name, who in acts)
-    return f'''<nav class="th-programme rv" aria-labelledby="th-programme-title">
-    <p class="th-programme__label" id="th-programme-title">Three ways to take the stage</p>
-    <p class="th-programme__lead">The whole school, the four houses and every class of twenty-five: each has its own turn in front of an audience.</p>
-    <ol class="th-programme__list">
-{items}
-    </ol>
-  </nav>'''
+    rows = "\n".join(
+        f'        <li><a class="th-prog__row" href="#{a["id"]}" data-act="{a["id"]}" data-preview="{i}">'
+        f'<span class="th-prog__n" aria-hidden="true">{a["n"]}</span>'
+        f'<span class="th-prog__name">{a["name"]}</span>'
+        f'<span class="th-prog__meta"><span class="th-prog__who">{a["who"]}</span>'
+        f'<span class="th-prog__detail">{a["detail"]}</span></span>'
+        f'{GO}</a></li>' for i, a in enumerate(acts))
+    slides = "\n".join(
+        f'          <div class="th-prog__slide{" th-prog__slide--still" if a.get("still") else ""}{" is-on" if i == 0 else ""}" data-slide="{i}">{a["media"]}'
+        f'<p class="th-prog__cap">{a["cap"]}</p></div>' for i, a in enumerate(acts))
+    return f'''<section class="th-prog" id="programme" aria-labelledby="th-prog-title" data-jump-label="The programme">
+  <div class="wrap">
+    <header class="th-prog__head">
+      <p class="th-label th-label--ink"><span class="th-label__act">Programme</span> Three ways to take the stage</p>
+      <h2 class="th-prog__title" id="th-prog-title">The Programme</h2>
+      <p class="th-prog__lead">The whole school, the four houses and every class of twenty-five: each has its own turn in front of an audience.</p>
+    </header>
+    <div class="th-prog__body" data-programme>
+      <ol class="th-prog__list">
+{rows}
+      </ol>
+      <div class="th-prog__preview" aria-hidden="true" data-programme-preview>
+        <div class="th-prog__stack">
+{slides}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>'''
 
+
+# -------------------------------------------------------------- Act I
 
 def anand_utsav_html():
     au = ANAND_UTSAV
-    court, soldiers, dance, sage, finale = au["sequence"]
+    court, sunset, mountain = au["sequence"][0], au["sequence"][1], au["sequence"][2]
     rec = au["recording"]
     more = "\n".join("        " + _list_row(v) for v in au["more"])
+    slabs = "<i></i>" * 5
     return f'''<section class="th-au" id="anand-utsav" aria-labelledby="au-title" data-jump-label="Act I &middot; Anand Utsav">
   <div class="th-au__track" data-au-track>
     <div class="th-au__stage">
-      {img(au["dark"], "100vw", cls="th-au__dark")}
       <div class="th-au__wide">{img(au["wide"], "100vw", cls="th-au__wideimg")}</div>
+      <div class="th-au__slabs" aria-hidden="true">{slabs}</div>
+      {img(au["dark"], "100vw", cls="th-au__dark")}
       <div class="th-au__scrim" aria-hidden="true"></div>
       <header class="th-au__head">
         <p class="th-label"><span class="th-label__act">Act I</span> The whole school &middot; Annual cultural programme</p>
-        <h2 class="th-au__title" id="au-title">Anand Utsav</h2>
+        <h2 class="th-au__title" id="au-title"><span>Anand</span> <span>Utsav</span></h2>
         <p class="th-au__sub">{au["year"]} &middot; <em>{esc(au["title"])}</em></p>
       </header>
-      <p class="th-au__credit">{esc(au["wide"]["caption"])}</p>
+      <p class="th-au__credit">{esc(au["wide"]["caption"])}<span class="th-au__date">{au["date"]}</span></p>
     </div>
   </div>
 
@@ -644,25 +758,17 @@ def anand_utsav_html():
       <div><dt>Production</dt><dd><em>{esc(au["title"])}</em></dd></div>
       <div><dt>On stage</dt><dd>The whole school</dd></div>
     </dl>
-    <p class="th-watch"><a class="th-watch__link" href="{watch(rec["id"])}"{EXTERNAL}><span class="th-watch__play" aria-hidden="true"></span>Watch the production <span class="th-watch__len">{rec["length"]}</span>{NEW_TAB}</a></p>
+    <p class="th-watch"><a class="th-watch__link" {video_attrs(rec["id"], rec["title"])}><span class="th-watch__play" aria-hidden="true"></span>Watch the production <span class="th-watch__len">{rec["length"]}</span>{PLAYS}</a></p>
   </div>
 
   <div class="th-au__seq">
     <div class="wrap th-au__row th-au__row--court">
       {photo_link(court, "anand-utsav", 0, "(min-width: 900px) 62vw, 100vw")}
     </div>
-    {photo_link(soldiers, "anand-utsav", 1, "100vw", cls="th-bleed")}
-    <div class="wrap th-au__row th-au__row--pair">
-      {photo_link(dance, "anand-utsav", 2, "(min-width: 900px) 58vw, 100vw", cls="th-au__dance")}
-      {photo_link(sage, "anand-utsav", 3, "(min-width: 900px) 30vw, 100vw", cls="th-au__sage")}
+    {photo_link(sunset, "anand-utsav", 1, "100vw", cls="th-bleed")}
+    <div class="wrap th-au__row th-au__row--mountain">
+      {photo_link(mountain, "anand-utsav", 2, "(min-width: 900px) 52vw, 100vw")}
     </div>
-    <figure class="th-fig th-bleed th-au__finale">
-      <a class="th-photo" href="{file(finale, widths(finale)[-1])}" data-th-open="anand-utsav:4">{img(finale, "100vw")}</a>
-      <figcaption class="th-au__finalecap">
-        <span class="th-au__finaleline serif">One stage. <em>The whole school.</em></span>
-        <span class="th-cap">{esc(finale["caption"])}</span>
-      </figcaption>
-    </figure>
   </div>
 
   <div class="wrap th-au__more">
@@ -674,29 +780,57 @@ def anand_utsav_html():
 </section>'''
 
 
-# The rows stay side by side down to 761px (assets/css/theatre.css goes to one
-# column at 760px), so a tablet draws a third of a row about 40vw wide, not
-# the whole window: measured, not assumed, at 768 and 820px.
-ROW_SIZES = {
-    "feature": ["(min-width: 900px) 64vw, (min-width: 761px) 90vw, 100vw",
-                "(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw",
-                "(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw"],
-    "full": ["(min-width: 1320px) 1320px, 100vw"],
-    "trio": ["(min-width: 900px) 32vw, (min-width: 761px) 40vw, 100vw"] * 3,
-    "duo": ["(min-width: 900px) 58vw, (min-width: 761px) 71vw, 100vw",
-            "(min-width: 900px) 40vw, (min-width: 761px) 51vw, 100vw"],
-}
+# ------------------------------------------------------------ intermission
+
+def intermission_html():
+    return '''<section class="th-inter" id="intermission" aria-labelledby="th-inter-title" data-jump-label="Intermission">
+  <div class="wrap th-inter__inner">
+    <p class="th-label th-label--ink"><span class="th-label__act">Intermission</span></p>
+    <h2 class="th-inter__title" id="th-inter-title"><span>Four houses.</span> <span>Four evenings.</span> <span>One stage.</span></h2>
+  </div>
+  <span class="th-inter__rule" aria-hidden="true"></span>
+</section>'''
 
 
-def _row(kind, photos, group, start):
-    figs = []
-    for i, p in enumerate(photos):
-        portrait = p["src"][1] > p["src"][0]
-        cls = f"th-g th-g--{kind}-{i}" + (" is-portrait" if portrait else "")
-        sizes = "(min-width: 761px) 30vw, 100vw" if portrait else ROW_SIZES[kind][i]
-        figs.append(photo_link(p, group, start + i, sizes, cls=cls))
-    extra = " has-portrait" if any(p["src"][1] > p["src"][0] for p in photos) else ""
-    return f'        <div class="th-grid__row th-grid__row--{kind}{extra}">\n' + "\n".join(figs) + "\n        </div>"
+# -------------------------------------------------------------- Act II
+
+# The pictures that carry the cinematic gallery: one track a house, finite,
+# in the order the viewer steps through. The lead is not in the track: it is
+# the chapter's opening frame, above it.
+
+def _reel(h):
+    photos = house_photos(h)[1:]
+    total = len(photos) + 1
+    slides = []
+    for k, p in enumerate(photos):
+        w, hh = dims(p)
+        slides.append(
+            f'            <li class="th-reel__slide" style="--ar:{w}/{hh};--arn:{w / hh:.4f}">\n'
+            f'              <figure class="th-fig">\n'
+            f'                <a class="th-photo" href="{file(p, widths(p)[-1])}" data-th-open="{h["id"]}:{k + 1}">'
+            f'{img(p, "(min-width: 761px) 100vh, 100vw")}</a>\n'
+            f'                <figcaption class="th-cap">{esc(p["caption"])}</figcaption>\n'
+            f'              </figure>\n'
+            f'            </li>')
+    arrow_l = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M11 3.5L5.5 9l5.5 5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    arrow_r = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M7 3.5L12.5 9 7 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    return f'''      <div class="th-reel" data-reel data-total="{total}">
+        <div class="wrap th-reel__bar">
+          <p class="th-reel__id"><span class="th-reel__house">{h["name"]}</span><span class="th-reel__count"><span data-reel-now>02</span> / {total}</span></p>
+          <div class="th-reel__ctl" data-reel-ctl hidden>
+            <button type="button" class="th-reel__btn" data-reel-step="-1" aria-label="Previous photograph, {h["name"]} House">{arrow_l}</button>
+            <button type="button" class="th-reel__btn" data-reel-step="1" aria-label="Next photograph, {h["name"]} House">{arrow_r}</button>
+          </div>
+        </div>
+        <details class="th-reel__set" open>
+          <summary class="th-reel__sum">View photographs <span class="th-reel__sumn">{len(photos)}</span></summary>
+          <section class="th-reel__viewport" aria-label="{h["name"]} House photographs" tabindex="0" data-reel-track>
+            <ul class="th-reel__track">
+{chr(10).join(slides)}
+            </ul>
+          </section>
+        </details>
+      </div>'''
 
 
 def _more_list(h):
@@ -715,15 +849,14 @@ def _watch_bar(h):
     rec, trailers = h.get("recording"), h.get("trailers", [])
     parts = []
     if rec:
-        parts.append(f'<a class="th-watch__link" href="{watch(rec["id"])}"{EXTERNAL}><span class="th-watch__play" aria-hidden="true"></span>'
-                     f'Watch the production <span class="th-watch__len">{rec["length"]}</span>{NEW_TAB}</a>')
+        parts.append(f'<a class="th-watch__link" {video_attrs(rec["id"], rec["title"])}><span class="th-watch__play" aria-hidden="true"></span>'
+                     f'Watch the production <span class="th-watch__len">{rec["length"]}</span>{PLAYS}</a>')
     for j, t in enumerate(trailers):
         if not rec and j == 0:
-            parts.append(f'<a class="th-watch__link" href="{watch(t["id"])}"{EXTERNAL}><span class="th-watch__play" aria-hidden="true"></span>'
-                         f'Watch the trailer <span class="th-watch__len">{t["length"]}</span>{NEW_TAB}</a>')
+            parts.append(f'<a class="th-watch__link" {video_attrs(t["id"], t["title"])}><span class="th-watch__play" aria-hidden="true"></span>'
+                         f'Watch the trailer <span class="th-watch__len">{t["length"]}</span>{PLAYS}</a>')
         else:
-            parts.append(f'<a class="th-watch__alt" href="{watch(t["id"])}"{EXTERNAL}>{t["label"]} <span class="th-watch__len">{t["length"]}</span>{NEW_TAB}</a>')
-    parts.append(f'<button type="button" class="th-watch__alt th-house__view" data-th-view="{h["id"]}" hidden>Open the photographs</button>')
+            parts.append(f'<a class="th-watch__alt" {video_attrs(t["id"], t["title"])}>{t["label"]} <span class="th-watch__len">{t["length"]}</span>{PLAYS}</a>')
     note = ("" if rec else
             '\n        <p class="th-house__note">The full recording of this production is not on the school&rsquo;s channel.</p>')
     return '<p class="th-watch th-watch--dark">' + "\n          ".join(parts) + "</p>" + note
@@ -732,14 +865,7 @@ def _watch_bar(h):
 def house_html(h, i):
     photos = house_photos(h)
     lead = photos[0]
-    watch_bar = _watch_bar(h)
     nxt = HOUSES[i + 1] if i + 1 < len(HOUSES) else None
-    rows, index = [], 2   # 0 is the lead, 1 is the programme card
-    by = {p["name"]: p for p in h["gallery"]}
-    for kind, names in h["layout"]:
-        ps = [by[n] for n in names]
-        rows.append(_row(kind, ps, h["id"], index))
-        index += len(ps)
     if nxt:
         onward = (f'<a class="th-house__next" href="#{nxt["id"]}" data-house-link="{nxt["id"]}">'
                   f'<span class="th-house__nextlabel">Next</span> '
@@ -754,17 +880,16 @@ def house_html(h, i):
           <span class="th-house__numeral" aria-hidden="true">{h["numeral"]}</span>
           <div class="th-house__labeltext">
             <span class="th-house__kicker">{h["name"]} House &middot; Masquerade {h["year"]} &middot; {h["date"]}</span>
-            <h3 class="th-house__play serif" id="{h["id"]}-title" tabindex="-1"><span class="sr-only">{h["name"]} House: </span><em>{esc(h["title"])}</em></h3>
+            <h3 class="th-house__play" id="{h["id"]}-title" tabindex="-1"><span class="sr-only">{h["name"]} House: </span><em>{esc(h["title"])}</em></h3>
             <span class="th-house__count">{house_count(h)} photographs &middot; {esc(lead["caption"])}</span>
           </div>
         </figcaption>
       </figure>
       <div class="wrap th-house__bar">
-        {watch_bar}
+        {_watch_bar(h)}
+        <button type="button" class="th-watch__alt th-house__view" data-th-view="{h["id"]}" hidden>Open all {house_count(h)} in the viewer</button>
       </div>
-      <div class="wrap th-grid">
-{chr(10).join(rows)}
-      </div>
+{_reel(h)}
       <div class="wrap th-house__foot">
 {_more_list(h)}
         {onward}
@@ -774,31 +899,27 @@ def house_html(h, i):
 
 def masquerades_html():
     op = MASQUERADE_OPENER
-    cards = []
-    for h in HOUSES:
+    first = HOUSES[0]
+    rows, slides, caps = [], [], []
+    for i, h in enumerate(HOUSES):
         card = {p["name"]: p for p in h["gallery"]}[h["card"]]
-        cards.append(f'''      <li class="th-bill__item">
-        <a class="th-bill__link" href="#{h["id"]}" data-house-link="{h["id"]}">
-          <span class="th-bill__img">{img(card, "(min-width: 900px) 24vw, (min-width: 560px) 48vw, 100vw")}</span>
-          <span class="th-bill__text">
-            <span class="th-bill__n">{h["numeral"]}</span>
-            <span class="th-bill__house serif">{h["name"]}</span>
-            <span class="th-bill__play"><em>{esc(h["title"])}</em></span>
-            <span class="th-bill__meta">{h["date"]} &middot; {house_count(h)} photographs</span>
-          </span>
-        </a>
-      </li>''')
+        rows.append(f'''        <li><a class="th-bill__row" href="#{h["id"]}" data-house-link="{h["id"]}" data-house="{h["id"]}" data-bill="{i}">
+          <span class="th-bill__n" aria-hidden="true">{h["numeral"]}</span>
+          <span class="th-bill__house">{h["name"]}</span>
+          <span class="th-bill__play"><em>{esc(h["title"])}</em></span>
+          <span class="th-bill__meta">{h["date"]} {h["year"]} &middot; {house_count(h)} photographs</span>
+          {GO}
+        </a></li>''')
+        slides.append(f'          {img(card, "(min-width: 900px) 34vw, 0px", cls="th-bill__img" + (" is-on" if i == 0 else ""))}')
+        caps.append(f'          <p class="th-bill__cap{" is-on" if i == 0 else ""}"><span class="th-bill__capname">{h["name"]} House &middot; <em>{esc(h["title"])}</em></span>{esc(card["caption"])}</p>')
+    houses = "\n".join(house_html(h, i) for i, h in enumerate(HOUSES))
     rail = "\n".join(f'        <a href="#{h["id"]}" data-house-link="{h["id"]}"><span class="th-rail__n" aria-hidden="true">{h["numeral"]}</span>{h["name"]}</a>'
                      for h in HOUSES)
-    houses = "\n".join(house_html(h, i) for i, h in enumerate(HOUSES))
     return f'''<section class="th-mq" id="masquerades" aria-labelledby="mq-title" data-jump-label="Act II &middot; Masquerades">
   <header class="wrap th-mq__open">
-    <figure class="th-mq__face">{img(op, "(min-width: 900px) 34vw, 70vw")}
-      <figcaption class="th-cap">{esc(op["caption"])}</figcaption>
-    </figure>
+    <p class="th-label"><span class="th-label__act">Act II</span> The four houses</p>
+    <h2 class="th-mq__title" id="mq-title">Masquerades</h2>
     <div class="th-mq__intro">
-      <p class="th-label"><span class="th-label__act">Act II</span> The four houses</p>
-      <h2 class="th-mq__title" id="mq-title">Masquerades</h2>
       <p class="th-mq__lede">Four evenings. Four houses. Hundreds of students stoking the fire of theatre. Every house comes together to put up an hour-long play &mdash; fantasy or mystery, satire or thriller &mdash; and every eye in CIRS is hooked to the stage for every single second.</p>
       <dl class="th-facts th-facts--dark">
         <div><dt>Houses</dt><dd>Four</dd></div>
@@ -806,21 +927,35 @@ def masquerades_html():
         <div><dt>Each play</dt><dd>About an hour</dd></div>
       </dl>
     </div>
+    <figure class="th-mq__face th-fig">{img(op, "(min-width: 900px) 34vw, 70vw")}
+      <figcaption class="th-cap">{esc(op["caption"])}</figcaption>
+    </figure>
   </header>
 
-  <div class="wrap th-bill">
+  <div class="wrap th-bill" id="playbill">
     <div class="th-bill__head">
-      <p class="th-bill__season">The programme &middot; Masquerade {HOUSES[0]["year"]}, {HOUSES[0]["date"].split()[0]}&ndash;{HOUSES[-1]["date"]}</p>
+      <h3 class="th-bill__title">The four-house playbill</h3>
+      <p class="th-bill__season">Masquerade {first["year"]} &middot; {first["date"].split()[0]}&ndash;{HOUSES[-1]["date"]}</p>
       <p class="th-bill__note">Four productions and {total_masquerade()} photographs from the school&rsquo;s archive. Choose a house, or step through every photograph in order.</p>
       <button type="button" class="th-bill__all" data-th-view="all" hidden>View all {total_masquerade()} photographs</button>
     </div>
-    <ol class="th-bill__list">
-{chr(10).join(cards)}
-    </ol>
+    <div class="th-bill__body" data-playbill>
+      <ol class="th-bill__list">
+{chr(10).join(rows)}
+      </ol>
+      <figure class="th-bill__preview" aria-hidden="true" data-playbill-preview>
+        <div class="th-bill__stack">
+{chr(10).join(slides)}
+        </div>
+        <figcaption class="th-bill__caps">
+{chr(10).join(caps)}
+        </figcaption>
+      </figure>
+    </div>
   </div>
 
   <div class="th-houses">
-    <nav class="th-rail" aria-label="Masquerade {HOUSES[0]["year"]} houses">
+    <nav class="th-rail" aria-label="Masquerade {first["year"]} houses">
       <div class="th-rail__inner">
 {rail}
       </div>
@@ -830,55 +965,125 @@ def masquerades_html():
 </section>'''
 
 
-def _video_card(v):
+# -------------------------------------------------------------- Act III
+
+def _prod_row(v):
     name = v["title"].split(" | ")[0]
-    return f'''      <li class="th-video">
-        <a class="th-video__link" href="{watch(v["id"])}"{EXTERNAL}>
-          <span class="th-video__thumb"><img src="{DIR}/yt/{v["id"]}.webp" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="th-video__len">{v["length"]}</span></span>
-          <span class="th-video__class">{esc(v["class"])}</span>
-          <span class="th-video__title serif">{esc(name)}</span>
-          <span class="th-video__meta">Uploaded {v["uploaded"]}</span>
-          <span class="th-video__cta">Watch on YouTube {ARROW}</span>{NEW_TAB}
-        </a>
-      </li>'''
+    when = v["uploaded"]
+    # The still is written into the row, held back (display:none, and lazy, so
+    # it is not fetched), and shown by theatre.js in the preview beside the
+    # list when a fine pointer or the keyboard is on the row.
+    return (f'          <li><a class="th-prod" {video_attrs(v["id"], v["title"])} '
+            f'data-thumb-label="{esc(v["class"])} &middot; {esc(name)}" data-len="{v["length"]}">'
+            f'<img class="th-prod__still" src="{DIR}/yt/{v["id"]}.webp" alt="" width="640" height="360" '
+            f'loading="lazy" decoding="async" hidden>'
+            f'<span class="th-prod__class">{esc(v["class"])}</span>'
+            f'<span class="th-prod__title">{esc(name)}</span>'
+            f'<span class="th-prod__meta">Uploaded {when} &middot; {v["length"]}</span>'
+            f'<span class="th-prod__go">Watch {GO}</span>{PLAYS}</a></li>')
 
 
-def _video_row(v):
-    year = f' &middot; {v["year"]}' if v.get("year") else ""
-    return f'''        <li class="th-vrow">
-          <a class="th-vrow__link" href="{watch(v["id"])}"{EXTERNAL}>
-            <img src="{DIR}/yt/{v["id"]}.webp" alt="" width="320" height="180" loading="lazy" decoding="async">
-            <span class="th-vrow__title">{esc(v["title"])}</span>
-            <span class="th-vrow__meta">{esc(v["class"])}{year} &middot; uploaded {v["uploaded"]} &middot; {v["length"]}</span>
-            <span class="th-vrow__cta">Watch on YouTube {ARROW}</span>{NEW_TAB}
-          </a>
-        </li>'''
+def _years(videos):
+    """Year headings, latest first, each with its rows in the order the
+    record lists them. The year is the year the video was uploaded."""
+    by = {}
+    for v in videos:
+        by.setdefault(_class_year(v), []).append(v)
+    out = []
+    for y in sorted(by, reverse=True):
+        rows = "\n".join(_prod_row(v) for v in by[y])
+        out.append(f'''        <div class="th-year">
+          <h3 class="th-year__y">{y}</h3>
+          <ul class="th-year__rows">
+{rows}
+          </ul>
+        </div>''')
+    return "\n".join(out)
 
 
 def classes_html():
-    recent = "\n".join(_video_card(v) for v in CLASS_RECENT)
-    earlier = "\n".join(_video_row(v) for v in CLASS_EARLIER)
-    return f'''<section class="section th-cp" id="class-presentations" aria-labelledby="cp-title" data-jump-label="Act III &middot; Class Presentations">
+    first, last = _class_span()
+    by_year = {}
+    for v in CLASS_RECENT:
+        by_year.setdefault(_class_year(v), []).append(v)
+    lead = by_year[max(by_year)][0]          # the first row of the list
+    lead_name = lead["title"].split(" | ")[0]
+    early_first = min(_class_year(v) for v in CLASS_EARLIER)
+    early_last = max(_class_year(v) for v in CLASS_EARLIER)
+    return f'''<section class="th-cp" id="class-presentations" aria-labelledby="cp-title" data-jump-label="Act III &middot; Class Presentations">
   <div class="wrap">
-    <div class="th-cp__head">
+    <header class="th-cp__head">
       <p class="th-label th-label--ink"><span class="th-label__act">Act III</span> Every class</p>
-      <h2 class="serif h2" id="cp-title">Class <em>Presentations.</em></h2>
-      <p class="lead">Every class of twenty-five gets the opportunity to put up a theatrical presentation in the school assembly once a year. Engaging every student through acting, dance, tech and lighting, theatre here is not limited to drama clubs but brings every pupil into its embrace. This is where prodigies are born.</p>
-      <p class="th-cp__note">Recorded and published by the school on its YouTube channel. Each class is named as its video names it, and each date is the date the video was uploaded.</p>
+      <h2 class="th-cp__title" id="cp-title"><span>Class</span> <span>Presentations</span></h2>
+      <div class="th-cp__intro">
+        <p class="th-cp__lead">Every class of twenty-five gets the opportunity to put up a theatrical presentation in the school assembly once a year. Engaging every student through acting, dance, tech and lighting, theatre here is not limited to drama clubs but brings every pupil into its embrace. This is where prodigies are born.</p>
+        <p class="th-cp__note">Recorded and published by the school on its YouTube channel. Each class is named as its video names it, and each year is the year the video was uploaded.</p>
+      </div>
+    </header>
+    <div class="th-cp__body" data-cp>
+      <div class="th-cp__index">
+{_years(CLASS_RECENT)}
+        <details class="th-past">
+          <summary class="th-past__toggle">Earlier years, {early_first}&ndash;{early_last} <span class="th-past__n">{len(CLASS_EARLIER)}</span></summary>
+{_years(CLASS_EARLIER)}
+        </details>
+      </div>
+      <aside class="th-cp__preview" aria-hidden="true" data-cp-preview>
+        <div class="th-cp__frame"><img src="{DIR}/yt/{lead["id"]}.webp" alt="" width="640" height="360" decoding="async"></div>
+        <p class="th-cp__still">{esc(lead["class"])} &middot; {esc(lead_name)} &middot; {lead["length"]} &middot; a still from the recording</p>
+      </aside>
     </div>
-    <ul class="th-videos">
-{recent}
-    </ul>
-    <details class="th-archive">
-      <summary class="th-archive__toggle">Earlier class presentations, 2015&ndash;2019 <span class="th-archive__n">{len(CLASS_EARLIER)}</span></summary>
-      <ul class="th-vrows">
-{earlier}
-      </ul>
-    </details>
     <p class="th-cp__links">
       <a class="btn btn--outline" href="{CLASS_PLAYLIST}"{EXTERNAL}>The class presentation playlist{NEW_TAB}</a>
       <a class="th-cp__channel" href="{CHANNEL}"{EXTERNAL}>All videos on the CIRS channel {ARROW}{NEW_TAB}</a>
     </p>
+  </div>
+</section>'''
+
+
+# ------------------------------------------------------------ curtain call
+
+def curtain_call_html():
+    au = ANAND_UTSAV
+    p = au["sequence"][4]
+    return f'''<section class="th-final" id="curtain-call" aria-labelledby="th-final-title" data-jump-label="Curtain call">
+  <figure class="th-final__fig th-fig">
+    <a class="th-photo" href="{file(p, widths(p)[-1])}" data-th-open="anand-utsav:4">{img(p, "100vw")}</a>
+    <figcaption class="th-cap th-final__cap">{esc(p["caption"])}, {esc(au["event"])}.</figcaption>
+  </figure>
+  <div class="wrap th-final__inner">
+    <p class="th-label"><span class="th-label__act">Curtain call</span></p>
+    <h2 class="th-final__title" id="th-final-title"><span>The stage never</span> <em>really empties.</em></h2>
+    <p class="th-final__line">Every class takes its turn in the school assembly once a year.</p>
+  </div>
+</section>'''
+
+
+# ---------------------------------------------------------- more from the arts
+
+ONWARD = [
+    ("festivals.html", "CIRS Festivals", "The year, kept festival by festival"),
+    ("art-attack.html", "CIRS Art Attack", "Painting, craft and the things made for the stage"),
+    ("cultural-gallery.html", "Cultural Gallery", "Music, dance, theatre and art, on one wall"),
+    ("captures.html", "CIRS Captures", "Photographs of wildlife, the grounds, performances and gatherings"),
+]
+
+
+def onward_html():
+    rows = "\n".join(
+        f'        <li><a class="th-onward__row" href="{href}"><span class="th-onward__name">{name}</span>'
+        f'<span class="th-onward__desc">{desc}</span>{GO}</a></li>' for href, name, desc in ONWARD)
+    return f'''<section class="th-onward" id="more" aria-labelledby="th-onward-title" data-jump-label="More from Art, Culture &amp; Music">
+  <div class="wrap">
+    <header class="th-onward__head">
+      <p class="th-label th-label--ink"><span class="th-label__act">Art, Culture &amp; Music</span></p>
+      <h2 class="th-onward__title" id="th-onward-title">More from <em>the stage and the studio.</em></h2>
+    </header>
+    <nav aria-label="More from Art, Culture and Music">
+      <ul class="th-onward__list">
+{rows}
+      </ul>
+    </nav>
   </div>
 </section>'''
 

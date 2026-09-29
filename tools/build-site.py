@@ -40,6 +40,7 @@ import sports_house_history
 import documents as docs
 import blogposts
 import newsarticles
+import cvpnews
 import crossroads
 import mathchallenge
 import creativewriting
@@ -52,7 +53,7 @@ import laurels
 import experience
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=114"
+CACHE_BUST = "b=115"
 
 # Where a film's large-screen encode is offered. Everything that fails it —
 # a phone held either way up — takes the phone encode (tools/make-films.py),
@@ -630,7 +631,7 @@ PAGES = {
         # assets/css/culture.css, shared by the three Art, Culture & Music
         # pages that open on a film.
         "sheet": "culture",
-        "cache_suffix": "-theatre-acts-2",
+        "cache_suffix": "-theatre-stage-2",
         "nav": "CIRS Theatre",
         "title": "CIRS Theatre",
         "description": "Productions, rehearsal and the stage at Chinmaya International "
@@ -642,10 +643,24 @@ PAGES = {
             "still": "theatre-opening-final.jpg",
             "still_element": True,
             "title": "CIRS Theatre",
-            "phases": (0.70, 0.78, 0.91),
+            # The film keeps its original scroll distances (film to 252vh, the
+            # last frame held to 281vh, the title up by 328vh), now as
+            # fractions of a 470vh travel, because the page's own sheet lets
+            # the run go on for 110vh more. That extra is the handoff: the
+            # film's last frame darkens, one line of light is drawn, the page
+            # names itself and the line opens onto the Prologue (body.theatre
+            # in assets/css/theatre.css; th-hand in assets/js/theatre.js).
+            "phases": (0.5362, 0.5974, 0.6970),
+            "stage_extra": theatre.handoff_html(),
+            # Without scripting the film is its still frame, and the page's own
+            # rule that holds the title back until the film reveals it would
+            # leave that frame with no name on it.
+            "noscript_css": "body.theatre .film[data-film-pending] .film__title{opacity:1}",
         },
-        # After the opening, three acts — Anand Utsav, Masquerades and Class
-        # Presentations — written from tools/theatre.py, with a sheet and a
+        # After the opening, a Prologue and a programme, then three acts —
+        # Anand Utsav, Masquerades and Class Presentations — with an
+        # intermission, an archive request and a curtain call between and
+        # after them, written from tools/theatre.py, with a sheet and a
         # script of their own (assets/css/theatre.css, assets/js/theatre.js).
         # The page closes on its own request for missing photographs and
         # recordings, which says precisely what the shared under-construction
@@ -1035,7 +1050,7 @@ def film_html(slug, page):
       <source src="assets/video/{film["video"]}.webm" type="video/webm">
     </video>
 {cue}    <h1 class="film__title" data-film-title>{title}</h1>
-{shot}{progressive_loader}  </div>
+{film.get("stage_extra", "")}{shot}{progressive_loader}  </div>
 </section>{seam}'''
 
 
@@ -1066,13 +1081,29 @@ def news_article_html(page):
         image = (f'    <figure class="art__hero">\n'
                  f'      <img src="{esc(art["image"], attr=True)}"\n'
                  f'           alt="{esc(art.get("image_alt", ""), attr=True)}"\n'
-                 f'           width="1200" height="620" decoding="async">\n'
+                 f'           width="{art.get("image_size", (1200, 620))[0]}" height="{art.get("image_size", (1200, 620))[1]}" decoding="async">\n'
                  f'    </figure>\n\n')
 
-    body = "\n".join(f"        <p>{esc(p)}</p>" for p in art["paragraphs"])
+    if art.get("blocks"):
+        # Written for this site from a school report (tools/cvpnews.py):
+        # paragraphs under a few plain headings.
+        body = "\n".join(f"        <h2>{esc(t)}</h2>" if kind == "h" else f"        <p>{esc(t)}</p>"
+                         for kind, t in art["blocks"])
+    else:
+        body = "\n".join(f"        <p>{esc(p)}</p>" for p in art["paragraphs"])
 
     gallery = ""
-    if art.get("gallery"):
+    if art.get("figures"):
+        shots = []
+        for f in art["figures"]:
+            shots.append(
+                f'          <figure class="newsgal__shot">\n'
+                f'            <img src="{esc(f["src"], attr=True)}"\n'
+                f'                 alt="{esc(f["alt"], attr=True)}" width="{f["w"]}" height="{f["h"]}" loading="lazy" decoding="async">\n'
+                f'          </figure>')
+        gallery = ('        <div class="newsgal newsgal--report">\n'
+                   + "\n".join(shots) + "\n        </div>\n")
+    elif art.get("gallery"):
         folder = os.path.join(ROOT, "assets/img/news-archive", art["gallery"])
         shots = []
         for name in sorted(os.listdir(folder)):
@@ -1085,6 +1116,24 @@ def news_article_html(page):
                    + "\n".join(shots) + "\n        </div>\n")
 
     dek = f'      <p class="art__subtitle">{esc(art["dek"])}</p>\n' if art.get("dek") else ""
+    if art.get("report"):
+        edition = esc(art["report"])
+        rail = (f'    <aside class="art__rail" aria-label="About this report">\n'
+                f'      <p>Written from</p>\n'
+                f'      <strong>The school&rsquo;s CVP report,<br>{esc(cvpnews.TERM)}</strong>\n'
+                + (f'      <p>{esc(art["who"])}</p>\n' if art.get("who") else "") +
+                f'      <a href="news.html#term">The term in review</a>\n'
+                f'      <a href="news.html">All CIRS news</a>\n'
+                f'    </aside>\n')
+    else:
+        edition = "From the CIRS news archive"
+        rail = (f'    <aside class="art__rail" aria-label="Where this was published">\n'
+                f'      <p>First published on</p>\n'
+                f'      <strong>The school&rsquo;s own<br>news pages</strong>\n'
+                f'      <a href="{esc(art.get("source", ""), attr=True)}" target="_blank" rel="noopener">'
+                f'The original page <span aria-hidden="true">&#8599;</span></a>\n'
+                f'      <a href="news.html">All CIRS news</a>\n'
+                f'    </aside>\n')
 
     return (f'<article class="art" id="top">\n'
             f'  <header class="art__head">\n'
@@ -1093,7 +1142,7 @@ def news_article_html(page):
             f'        <a href="news.html">News</a><span aria-hidden="true">/</span>'
             f'<span>{esc(art["section"])}</span>\n'
             f'      </nav>\n'
-            f'      <p class="art__edition">From the CIRS news archive</p>\n'
+            f'      <p class="art__edition">{edition}</p>\n'
             f'      <h1 class="art__title">{esc(art["title"])}</h1>\n'
             f'{dek}      <div class="art__credits">\n'
             f'        <span>{esc(art["section"])}</span>\n'
@@ -1102,13 +1151,7 @@ def news_article_html(page):
             f'    </div>\n'
             f'  </header>\n'
             f'  <div class="art__layout">\n'
-            f'    <aside class="art__rail" aria-label="Where this was published">\n'
-            f'      <p>First published on</p>\n'
-            f'      <strong>The school&rsquo;s own<br>news pages</strong>\n'
-            f'      <a href="{esc(art["source"], attr=True)}" target="_blank" rel="noopener">'
-            f'The original page <span aria-hidden="true">&#8599;</span></a>\n'
-            f'      <a href="news.html">All CIRS news</a>\n'
-            f'    </aside>\n'
+            f'{rail}'
             f'    <div class="art__content">\n'
             f'{image}      <div class="art__body">\n'
             f'{body}\n'
@@ -2042,6 +2085,7 @@ def build(slug, page):
                  if opening.get("still") and opening.get("still_element") else "")
         pending = ('.film[data-film-pending] .film__title{opacity:1}'
                    if opening.get("pending") or opening.get("still") else "")
+        pending += opening.get("noscript_css", "")
         critical_art_attack = ('''<style id="art-attack-critical">
 body.art-attack{--film-ground:#0B080D;--film-crop:50% 50%;--film-crop-narrow:50% 50%;background:#0B080D}
 body.art-attack .film{position:relative;height:var(--film-run,460vh);background:#000}
@@ -2307,6 +2351,10 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                        .replace("{{ALUMNI_COUNT_CAP}}", alumni.count_word().capitalize())
                        .replace("{{ALUMNI_COUNT}}", alumni.count_word())
                        .replace("{{FOUNDER_GURUDEV_JOURNEY}}", founder_story.journey_html() if slug == "founder" else ""))
+    if slug == "news":
+        # The term in review, and its entries in the archive: tools/cvpnews.py.
+        content = (content.replace("{{NEWS_TERM}}", cvpnews.term_html())
+                          .replace("{{NEWS_TERM_ARCHIVE}}", cvpnews.archive_html()))
     if slug == "our-results":
         content = (content.replace("{{RESULTS_REGIONS}}", results_regions_html())
                           .replace("{{RESULTS_FILTERS}}", results_filters_html())
@@ -2314,10 +2362,14 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                           .replace("{{RESULTS_COUNT_CAP}}", alumni.count_word().capitalize())
                           .replace("{{RESULTS_COUNT}}", str(alumni.count())))
     if slug == "theatre":
-        content = (content.replace("{{THEATRE_PROGRAMME}}", theatre.programme_html())
+        content = (content.replace("{{THEATRE_PROLOGUE}}", theatre.prologue_html())
+                          .replace("{{THEATRE_PROGRAMME}}", theatre.programme_html())
                           .replace("{{THEATRE_ANAND_UTSAV}}", theatre.anand_utsav_html())
+                          .replace("{{THEATRE_INTERMISSION}}", theatre.intermission_html())
                           .replace("{{THEATRE_MASQUERADES}}", theatre.masquerades_html())
                           .replace("{{THEATRE_CLASSES}}", theatre.classes_html())
+                          .replace("{{THEATRE_CURTAIN_CALL}}", theatre.curtain_call_html())
+                          .replace("{{THEATRE_ONWARD}}", theatre.onward_html())
                           .replace("{{THEATRE_VIEWER_DATA}}", theatre.viewer_data()))
     content = re.sub(r"\{\{DOC_STATUS:([a-z0-9-]+)\}\}",
                      lambda m: doc_sheet_status(m.group(1)), content)
@@ -2446,7 +2498,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
 # not in MENU — the Blog is how a reader reaches them.
 # The school's own news reports, one page each. They are not in MENU — the
 # News page is how a reader reaches them, exactly as the Blog is for articles.
-for _art in newsarticles.ARTICLES:
+for _art in newsarticles.ARTICLES + cvpnews.ARTICLES:
     PAGES[_art["slug"]] = {
         "nav": esc(_art["title"]),
         "title": esc(_art["title"], attr=True) + " | CIRS News",
