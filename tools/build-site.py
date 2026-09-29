@@ -2197,7 +2197,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
             f'<link rel="stylesheet" href="assets/css/footer.css?{CACHE_BUST}-footer-1">\n</head>')
 
     head = head.replace("</head>",
-        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-nav-4">\n'
+        f'<link rel="stylesheet" href="assets/css/drawer.css?{CACHE_BUST}-nav-5">\n'
         # Without scripting nothing moves the header between its states, so
         # it stays the readable pill throughout.
         '<noscript><style>.nv-header{opacity:1!important;visibility:visible!important;'
