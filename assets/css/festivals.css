@@ -1189,3 +1189,50 @@ html.fx-viewing{ overflow:hidden; }
   .fx-tile__link:hover .fx-tile__img{ transform:none; }
   .fx-frame__img{ transform:none !important; opacity:1 !important; }
 }
+
+/* ---- Phones --------------------------------------------------------------
+   The seven festivals: the opening strip ran sideways past the window and
+   had to be swiped. On a phone it is a grid that shows all seven at once,
+   the year's first festival across the top and the other six in two rows.
+   The sticky index keeps every festival reachable too: its numbers stay,
+   and only the festival being read carries its name, so the bar fits
+   without scrolling sideways.
+
+   Pongal and Holi: the photographs that were staggered across a six-column
+   grid, each overhanging the other, are set as matched pairs, cut on their
+   subjects. The Holi band keeps more of its crowd. No photograph changes. */
+@media (max-width:820px){
+  .fx-open__strip{ padding-inline:var(--gut); }
+  .fx-strip{
+    display:grid; grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:14px 10px; overflow:visible; scroll-snap-type:none; padding:0; align-items:start;
+  }
+  .fx-strip__item{ flex:none; margin-bottom:0; min-width:0; }
+  .fx-strip__item:first-child{ grid-column:1 / -1; }
+  .fx-strip__img{ aspect-ratio:4 / 5; max-height:none; }
+  .fx-strip__item:first-child .fx-strip__img{ aspect-ratio:16 / 9; }
+  .fx-strip__label{ padding-top:8px; margin-top:8px; }
+  .fx-strip__months{ font-size:.62rem; letter-spacing:.1em; }
+  .fx-strip__name{ font-size:.9rem; }
+
+  .fx-pongal__altar{ grid-column:1 / span 3 !important; }
+  .fx-pongal__pooja{ grid-column:4 / -1 !important; order:3 !important; }
+  .fx-pongal__altar .fx-fig__frame,
+  .fx-pongal__pooja .fx-fig__frame{ aspect-ratio:2 / 3; }
+  .fx-holi__portrait{ grid-column:1 / span 3 !important; }
+  .fx-holi__boy{ grid-column:4 / -1 !important; margin-top:0 !important; }
+  .fx-holi__portrait .fx-fig__frame,
+  .fx-holi__boy .fx-fig__frame{ aspect-ratio:3 / 4; }
+  .fx-holi__portrait img{ object-position:50% 40%; }
+  .fx-holi__boy img{ object-position:50% 30%; }
+  .fx-holi__field .fx-band__frame{ height:auto; aspect-ratio:4 / 3; }
+  .fx-holi__field img{ object-position:48% 45%; }
+}
+@media (max-width:520px){
+  .fx-index__list{ justify-content:space-between; overflow:visible; gap:0; }
+  .fx-index__link{ padding-inline:8px; }
+  /* Hidden from sight only: each link still announces its festival. */
+  .fx-index__link:not([aria-current]) .fx-index__name{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;
+  }
+}

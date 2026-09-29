@@ -123,7 +123,7 @@
     filters.forEach(function (button) {button.setAttribute('aria-pressed',String(button.dataset.houseFilter===house));});
     frames.forEach(function (frame) {frame.hidden=house!=='all'&&frame.dataset.galleryHouse!==house;});
     strip.scrollLeft=0;
-    status.textContent=frames.filter(function (frame) {return !frame.hidden;}).length+' photographs · Scroll or swipe to explore';
+    status.innerHTML=frames.filter(function (frame) {return !frame.hidden;}).length+' photographs<span class="house-gallery__hint"> · Scroll or swipe to explore</span>';
     refresh();
   }
   if (filters.length) {

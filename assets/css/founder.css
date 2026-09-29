@@ -662,3 +662,24 @@ body.founder #progress{ display:none; }
   .founder .fclose__plate img{object-position:52% center}
   .founder .fstudent__plate img{min-height:360px;height:480px}
 }
+
+/* ---- Phones: section order and rhythm ----------------------------------
+   The Gurudev journey ends on "A moment to reflect". On a phone the next
+   thing used to be the flask photograph, alone and uncaptioned by any
+   heading, which read as a stray image. The section's heading now leads
+   and the photograph follows it, so the flask arrives as the illustration
+   of "Education as Transformation". Side by side from 760px, unchanged.
+
+   The gaps named in review are closed to one step of the page's own
+   scale: before "The Vision Beyond the Four Walls", after the five words,
+   and between the motto and the photograph that follows it. */
+@media (max-width:759px){
+  .founder .feduc__open .fsec__head{ order:1; }
+  .founder .feduc__open .feduc__plate{ order:2; }
+  .founder #education{ padding-top:var(--space-8); padding-bottom:var(--space-6); }
+  .founder #education .feduc__open{ margin-bottom:0; }
+  .founder #vision{ padding-top:var(--space-7); padding-bottom:var(--space-6); }
+  .founder .feduc--continuation{ padding-top:var(--space-6); }
+  .founder .fmotto{ padding-bottom:40px !important; }
+  .founder #student{ padding-top:var(--space-6); }
+}

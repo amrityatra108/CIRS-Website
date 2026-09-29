@@ -205,7 +205,7 @@ def hero_html():
     out = []
     for h in PAGE_HOUSES:
         out.append(f'''<a class="house-zone" href="#house-{h['slug']}" data-house="{h['slug']}" aria-label="Explore {h['name']}, {h['colour']} house">
-  <img src="{img(h['hero'])}" srcset="{img(h['hero'].replace('.jpg','-720.jpg'))} 720w, {img(h['hero'])} 1440w, {img(h['hero'].replace('.jpg','-1800.jpg'))} 1800w" sizes="(max-width: 430px) 100vw, (max-width: 900px) 50vw, 44vw" width="1440" height="2016" alt="{_escape(h['hero_alt'])}" decoding="async"{' fetchpriority="high"' if h['number']=='01' else ''}>
+  <img src="{img(h['hero'])}" srcset="{img(h['hero'].replace('.jpg','-500.jpg'))} 500w, {img(h['hero'].replace('.jpg','-720.jpg'))} 720w, {img(h['hero'])} 1440w, {img(h['hero'].replace('.jpg','-1800.jpg'))} 1800w" sizes="(max-width: 430px) 100vw, (max-width: 900px) 50vw, 44vw" width="1440" height="2016" alt="{_escape(h['hero_alt'])}" decoding="async"{' fetchpriority="high"' if h['number']=='01' else ''}>
   <span class="house-zone__number" aria-hidden="true">{h['number']}</span>
   <span class="house-zone__label"><span class="house-zone__name">{h['name']}</span><span class="house-zone__colour">{h['colour']}<span class="house-zone__explore" aria-hidden="true"><small>Explore</small> ↗</span></span></span>
 </a>''')
@@ -320,7 +320,7 @@ def gallery_html():
         for j,(path,a,c) in enumerate([(img('gallery-'+h['slug']+'.jpg'), *GALLERY_SPORT[h['slug']]), ('assets/img/theatre/'+name,alt,cap)]):
             anchor = f' id="gallery-{h["slug"]}"' if j==0 else ''
             frames.append(f'<li{anchor} data-gallery-house="{h["slug"]}" data-house="{h["slug"]}"><figure>{photo_html(path,a,1600,1100)}<figcaption><b>{h["name"]}</b><span>{c}</span></figcaption></figure></li>')
-    return f'<div class="house-gallery__filters" role="group" aria-label="Filter photographs by house" hidden>{buttons}</div><p class="house-gallery__status" role="status" aria-live="polite">8 photographs · Scroll or swipe to explore</p><ul class="house-gallery__strip" tabindex="0" aria-label="House photographs">'+''.join(frames)+'</ul>'
+    return f'<div class="house-gallery__filters" role="group" aria-label="Filter photographs by house" hidden>{buttons}</div><p class="house-gallery__status" role="status" aria-live="polite">8 photographs<span class="house-gallery__hint"> · Scroll or swipe to explore</span></p><ul class="house-gallery__strip" tabindex="0" aria-label="House photographs">'+''.join(frames)+'</ul>'
 
 
 def march_html():

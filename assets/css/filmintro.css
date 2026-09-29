@@ -280,8 +280,24 @@ body.captures .film[data-film-still] + .film__seam{
   body.captures{
     --film-focus:45% 55%;
     --film-shot-lqip:url(../img/captures-shot-portrait-lqip.jpg);
-    --film-still-position:32% 80%;
+    --film-still-position:50% 50%;
+    --film-crop-narrow:50% 50%;
   }
+}
+/* A phone held upright. Both cuts of the film have the lens dead centre, so
+   the slice taken from the left (above) put it off to one side, and a 16:9
+   frame filled on its height is four lenses wide: what showed was a curve of
+   the barrel. Here the frame is fitted to the width and enlarged until the
+   front of the lens meets the sides of the window, so the whole lens sits
+   centred in the dark, which is the film's own ground. */
+@media (max-aspect-ratio:3/4){
+  body.captures .film__video{
+    object-fit:contain; object-position:50% 50%; transform:scale(1.75);
+    /* The frame's own top and bottom edges dissolve into the ground. */
+    -webkit-mask-image:linear-gradient(to bottom, transparent 37%, #000 43%, #000 57%, transparent 63%);
+            mask-image:linear-gradient(to bottom, transparent 37%, #000 43%, #000 57%, transparent 63%);
+  }
+  body.captures .film[data-film-still] .film__stage{ background-size:175% auto; background-position:50% 50%; }
 }
 body.captures .film__title{
   --film-title-bottom:clamp(56px, 8.5vh, 110px);
@@ -523,6 +539,14 @@ body.festivals .film__title{
 body.festivals .film[data-film-pending] .film__title{opacity:1;}
 body.festivals .film[data-film-still] .film__video{visibility:hidden;}
 @media (prefers-reduced-motion:reduce){body.festivals .film__video{visibility:hidden;}}
+/* On a phone the diya is centred: the flame stands at about 40% of the
+   film's width, so a centred slice of a 16:9 frame left it on the window's
+   left edge. The poster and the still take the same slice. */
+@media (max-aspect-ratio:6/5){
+  body.festivals{ --film-crop-narrow:37% 50%; }
+  body.festivals .film__stage{ background-position:37% 50%; }
+  body.festivals .film__still{ object-position:37% 50%; }
+}
 
 body.theatre{
   --film-ground:#080304;

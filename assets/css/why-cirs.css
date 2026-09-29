@@ -133,3 +133,47 @@ body.why-cirs .saga__more:hover::after{transform:none}
     align-items:center;
   }
 }
+
+/* ---- Phones: the chapters' photographs -----------------------------------
+   Each chapter used to lay its photograph under the words at the full
+   height of the window. Six of the seven are landscape, so a 380px-wide
+   phone kept about a quarter of each frame's width: the cake-cutting of
+   "From Grade XI" became two faces, the Junior School robot fell out of the
+   bottom. On a phone the photograph now takes the top of the chapter at a
+   shape that keeps about half its width, anchored on its subject, and the
+   words sit on the dark ground below it. Desktop is unchanged. */
+@media (max-width:760px){
+  body.why-cirs .saga:not(.saga--open){
+    display:flex; flex-direction:column; justify-content:flex-end;
+    background:#11110F;
+  }
+  body.why-cirs .saga:not(.saga--open) .saga__media{
+    position:relative; inset:auto; flex:0 0 auto;
+    height:58svh; height:58vh; min-height:300px;
+  }
+  body.why-cirs .saga:not(.saga--open) .saga__media::after{
+    background:linear-gradient(to top, #11110F 0%, rgba(17,17,15,.55) 22%, rgba(17,17,15,0) 55%);
+  }
+  body.why-cirs .saga:not(.saga--open) .saga__inner{
+    padding-top:0; margin-top:-28px; padding-bottom:40px;
+  }
+  body.why-cirs #founding .saga__media img{ object-position:50% 50%; }
+  body.why-cirs #forest   .saga__media img{ object-position:62% 55%; }
+  body.why-cirs #motto    .saga__media img{ object-position:40% 55%; }
+  body.why-cirs #boarding .saga__media img{ object-position:50% 45%; }
+  body.why-cirs #vision   .saga__media img{ object-position:74% 60%; }
+  /* Portrait, and nearly the frame's own shape: the whole photograph shows,
+     centred, with the robot in it. */
+  body.why-cirs #junior   .saga__media img{ object-position:50% 50%; }
+  /* The six at the cake, their hands on the knife. */
+  body.why-cirs #senior   .saga__media img{ object-position:45% 62%; }
+}
+
+/* The photograph at the head of each "Read about ..." panel, on a phone. */
+@media (max-width:700px){
+  body.why-cirs .panel__image{ height:clamp(190px,32vh,270px); }
+  body.why-cirs #panel-senior .panel__image img{ object-position:50% 30%; }
+  body.why-cirs #panel-junior .panel__image img{ object-position:28% 72%; }
+  body.why-cirs #panel-vision .panel__image img{ object-position:74% 60%; }
+  body.why-cirs #panel-forest .panel__image img{ object-position:62% 55%; }
+}

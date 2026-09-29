@@ -1248,9 +1248,151 @@
       };
     });
 
+    // Phones: the same photographs and statements as a deck of cards. The
+    // deck is pinned by CSS sticky and the page's own vertical scroll deals
+    // it: each card flips away to the left as the next comes forward, so
+    // nothing has to be swiped to be seen. A horizontal swipe, or an arrow
+    // key, moves the page to the next or previous card, which keeps scroll
+    // position and deck one state. The section has a finite height and
+    // releases into the film below like any other.
     mm.add("(max-width: 899px)", function () {
-      staticMode();
-      return function () {};
+      var cards = Array.prototype.filter.call(stage.children, function (el) {
+        return el.classList.contains("hframe") || el.classList.contains("hsay");
+      });
+      var n = cards.length;
+      if (n < 2) { staticMode(); return function () {}; }
+      sec.classList.remove("is-static");
+      sec.classList.add("is-deck");
+      viewport.setAttribute("tabindex", "0");
+      viewport.setAttribute("role", "region");
+      viewport.setAttribute("aria-label",
+        "A day at CIRS, " + n + " cards. Scroll, swipe or use the arrow keys to move between them.");
+
+      var count = document.createElement("p");
+      count.className = "hrun__count";
+      count.setAttribute("aria-hidden", "true");
+      var cue = document.createElement("p");
+      cue.className = "hrun__cue";
+      cue.setAttribute("aria-hidden", "true");
+      cue.innerHTML = "Scroll down <span>&darr;</span>";
+      pin.appendChild(count);
+      pin.appendChild(cue);
+      // The deck shows its next cards from the start, so their photographs
+      // cannot wait for the lazy loader's idea of the viewport.
+      cards.forEach(function (c) { var im = c.querySelector("img"); if (im) im.loading = "eager"; });
+
+      // One card per 55% of a screen, measured from the layout viewport at
+      // setup and on a width change only: a phone's toolbar showing and
+      // hiding changes innerHeight on every scroll and must not re-deal it.
+      var step = 0, width = 0, p = 0, drag = 0;
+      function size() {
+        var h = document.documentElement.clientHeight;
+        width = window.innerWidth;
+        step = Math.round(h * .55);
+        sec.style.height = (h + step * (n - 1) + Math.round(h * .25)) + "px";
+      }
+      size();
+
+      function render() {
+        var q = Math.max(0, Math.min(n - 1, p + drag));
+        for (var i = 0; i < n; i++) {
+          var d = i - q, c = cards[i], x = 0, y = 0, r = 0, ry = 0, s = 1, o = 1;
+          if (d < 0) {
+            // Leaving to the left, turning away from the reader as it goes.
+            var t = Math.min(-d, 1);
+            x = -t * width * 1.15; y = -t * 18; r = -t * 14; ry = -t * 28; o = 1 - t * .15;
+          } else {
+            // Waiting in the stack behind, each a little lower and smaller,
+            // tilted alternately so the deck reads as cards, not a column.
+            var k = Math.min(d, 2);
+            y = -k * 14; s = 1 - k * .07; r = (i % 2 ? 1 : -1) * Math.min(d, 1) * 3.2;
+            o = d > 2 ? Math.max(0, 3 - d) * .5 : 1 - Math.max(0, d - 1) * .5;
+          }
+          c.style.transform = "translate(-50%,-50%) translate3d(" + x.toFixed(1) + "px," +
+            y.toFixed(1) + "px,0) rotateY(" + ry.toFixed(2) + "deg) rotate(" + r.toFixed(2) +
+            "deg) scale(" + s.toFixed(3) + ")";
+          c.style.opacity = o.toFixed(3);
+          c.style.zIndex = String(n - i);
+          c.style.pointerEvents = Math.abs(d) < .5 ? "auto" : "none";
+        }
+        var at = Math.round(q) + 1;
+        count.textContent = (at < 10 ? "0" : "") + at + " / " + (n < 10 ? "0" : "") + n;
+        cue.classList.toggle("is-on", q > n - 1.35);
+        paintTheme(q / (n - 1));
+      }
+
+      var st = ScrollTrigger.create({
+        trigger: sec,
+        start: "top top",
+        end: function () { return "+=" + step * (n - 1); },
+        invalidateOnRefresh: true,
+        onUpdate: function (self) { p = self.progress * (n - 1); render(); }
+      });
+      render();
+
+      function goTo(i) {
+        i = Math.max(0, Math.min(n - 1, i));
+        var y = st.start + i * step;
+        if (lenis) lenis.scrollTo(y, { duration: .7 });
+        else window.scrollTo({ top: y, behavior: "smooth" });
+      }
+
+      // A horizontal swipe drags the front card with the finger and, past a
+      // short threshold, flips it away left (next) or brings the last one
+      // back from the left (previous). Vertical gestures stay with the page:
+      // the viewport's touch-action is pan-y.
+      var sx = 0, sy = 0, axis = "";
+      function onStart(e) {
+        var t = e.touches[0]; sx = t.clientX; sy = t.clientY; axis = ""; drag = 0;
+      }
+      function onMove(e) {
+        var t = e.touches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+        if (!axis && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+        if (axis !== "x") return;
+        drag = Math.max(-1, Math.min(1, -dx / (width * .8)));
+        render();
+      }
+      function onEnd(e) {
+        if (axis !== "x") return;
+        var dx = e.changedTouches[0].clientX - sx;
+        drag = 0;
+        if (Math.abs(dx) > 40) goTo(Math.round(p) + (dx < 0 ? 1 : -1));
+        else render();
+      }
+      function onKey(e) {
+        if (e.target !== viewport || e.altKey || e.ctrlKey || e.metaKey) return;
+        if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+        e.preventDefault();
+        goTo(Math.round(p) + (e.key === "ArrowRight" ? 1 : -1));
+      }
+      viewport.addEventListener("touchstart", onStart, { passive: true });
+      viewport.addEventListener("touchmove", onMove, { passive: true });
+      viewport.addEventListener("touchend", onEnd, { passive: true });
+      viewport.addEventListener("keydown", onKey);
+
+      var lastW = window.innerWidth;
+      function onResize() {
+        if (window.innerWidth === lastW) return;
+        lastW = window.innerWidth; size(); ScrollTrigger.refresh();
+      }
+      window.addEventListener("resize", onResize);
+      ScrollTrigger.refresh();
+
+      return function () {
+        st.kill();
+        viewport.removeEventListener("touchstart", onStart);
+        viewport.removeEventListener("touchmove", onMove);
+        viewport.removeEventListener("touchend", onEnd);
+        viewport.removeEventListener("keydown", onKey);
+        window.removeEventListener("resize", onResize);
+        cards.forEach(function (c) {
+          c.style.transform = ""; c.style.opacity = ""; c.style.zIndex = ""; c.style.pointerEvents = "";
+        });
+        count.remove(); cue.remove();
+        sec.style.height = "";
+        sec.classList.remove("is-deck");
+        paintTheme(0);
+      };
     });
   }
 

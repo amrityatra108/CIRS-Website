@@ -69,6 +69,24 @@ function init() {
       if (target && scenes.indexOf(target) <= k) lit = a;
     }
     indexLinks.forEach((a) => (a === lit ? a.setAttribute("aria-current", "step") : a.removeAttribute("aria-current")));
+    showReading(k, indexLinks.indexOf(lit));
+  }
+
+  // The column arrangement (a phone, a narrow window, reduced motion) has
+  // no index beside it, so a small line under the header names the moment
+  // being read: "3 of 8 · 3 August 1993 · Gurudev attains Mahasamadhi",
+  // numbered as the index of moments is.
+  // It repeats what is on the page and is hidden from assistive technology.
+  const reading = document.createElement("p");
+  reading.className = "hj-reading";
+  reading.setAttribute("aria-hidden", "true");
+  journey.appendChild(reading);
+  function showReading(k, n) {
+    const s = scenes[k];
+    if (!s || n < 0) return;
+    const year = s.querySelector(".hj-year"), head = s.querySelector(".hj-head");
+    reading.innerHTML = `<b>${n + 1} of ${indexLinks.length}</b><span>${year ? year.textContent.trim() : ""}</span>` +
+      `<span>${head ? head.textContent.trim() : ""}</span>`;
   }
   const seen = new IntersectionObserver((entries) => {
     inView = entries[0].isIntersecting;
