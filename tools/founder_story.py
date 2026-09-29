@@ -3,6 +3,7 @@
 import html
 import json
 import os
+import struct
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "tools", "data", "founder-gurudev-events.json")
@@ -12,6 +13,26 @@ PHOTO_IDS = {"A202", "A203", "A209", "A210", "A213", "A214", "A218"}
 
 def esc(value):
     return html.escape(str(value), quote=True)
+
+
+def _jpeg_size(path):
+    """(width, height) from a JPEG's frame header, or None. Declared on the
+    <img> so the reading column reserves its space before the file arrives."""
+    try:
+        with open(path, "rb") as f:
+            data = f.read()
+    except OSError:
+        return None
+    i = 2
+    while i + 9 < len(data):
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        if data[i + 1] in (0xC0, 0xC1, 0xC2):
+            height, width = struct.unpack(">HH", data[i + 5:i + 9])
+            return width, height
+        i += 2 + struct.unpack(">H", data[i + 2:i + 4])[0]
+    return None
 
 
 def _scene(event, index):
@@ -26,9 +47,11 @@ def _scene(event, index):
     )
     if event.get("asset") in PHOTO_IDS:
         image = f"{MEDIA}/{esc(event['asset'])}.jpg"
+        size = _jpeg_size(os.path.join(ROOT, image))
+        dims = f' width="{size[0]}" height="{size[1]}"' if size else ""
         media = (
             '      <figure class="founder-gurudev-journey__media">\n'
-            f'        <img src="{image}" alt="{esc(event["alt"])}" '
+            f'        <img src="{image}" alt="{esc(event["alt"])}"{dims} '
             'loading="lazy" decoding="async">\n'
             f'        <figcaption>{esc(event["caption"])}</figcaption>\n'
             "      </figure>"
@@ -84,9 +107,9 @@ def journey_html():
           </div>
           <div class="founder-gurudev-journey__vehicle" data-story-vehicle aria-hidden="true">
             <div class="founder-gurudev-journey__vehicle-art" data-vehicle-art>
-              <img class="founder-gurudev-journey__vehicle-body" src="{vehicle}" alt="">
-              <span class="founder-gurudev-journey__wheel founder-gurudev-journey__wheel--rear" data-wheel="rear"><img src="{vehicle}" alt=""></span>
-              <span class="founder-gurudev-journey__wheel founder-gurudev-journey__wheel--front" data-wheel="front"><img src="{vehicle}" alt=""></span>
+              <img class="founder-gurudev-journey__vehicle-body" src="{vehicle}" width="916" height="476" alt="">
+              <span class="founder-gurudev-journey__wheel founder-gurudev-journey__wheel--rear" data-wheel="rear"><img src="{vehicle}" width="916" height="476" alt=""></span>
+              <span class="founder-gurudev-journey__wheel founder-gurudev-journey__wheel--front" data-wheel="front"><img src="{vehicle}" width="916" height="476" alt=""></span>
             </div>
           </div>
         </div>
