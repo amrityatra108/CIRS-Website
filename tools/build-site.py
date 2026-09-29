@@ -285,7 +285,7 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-atlas-1",
+        "cache_suffix": "-curriculum-atlas-2",
         # No banner. The page opens on its own full-window scene, built in
         # tools/pages/curriculum.html: the gold path of the grades rising
         # through the school's purple, the heading, the page's facts and its
@@ -2390,7 +2390,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "leadership":
         parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":
-        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-1" defer></script>')
+        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-2" defer></script>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
     if slug == "our-laurels":
