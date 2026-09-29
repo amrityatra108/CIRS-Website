@@ -8,6 +8,8 @@ site already publishes, and names that record in "source":
                              results, published 1 October 2025
                              (tools/newsarticles.py, slug "competitions")
     news.html#…-results-2026 the school's results briefs for 2026
+    annual-report.pdf        the school's Annual Report of 7 October 2025, in
+                             the document register on School Information
     school-history.html      tools/history.py, where every dated record
                              carries its own source
     houses.html#record       tools/houses.py RESULTS: the 2008 inter-house
@@ -120,13 +122,14 @@ IMAGES = {
 
 # ---------------------------------------------------------------------------
 # Categories and levels. The key is what the filters and each record carry.
-# Innovation is not offered: no laurel in hand is for it (see HELD).
+# Innovation came in with the Annual Report of 7 October 2025.
 # ---------------------------------------------------------------------------
 CATEGORIES = [
     ("academics", "Academics"),
     ("sport", "Sport"),
     ("arts", "Arts"),
     ("speech", "Speech"),
+    ("innovation", "Innovation"),
     ("leadership", "Leadership"),
     ("international", "International"),
     ("school", "The School"),
@@ -137,6 +140,7 @@ LEVELS = [
     ("inter-house", "Inter-house"),
     ("inter-school", "Inter-school"),
     ("zonal", "Zonal"),
+    ("state", "State"),
     ("national", "National"),
     ("international", "International"),
 ]
@@ -146,6 +150,8 @@ ROUNDUP = ("Competitions across CIRS, the school&rsquo;s report of 1 October 202
            "competitions.html")
 IB_BRIEF = ("The school&rsquo;s IB results brief", "news.html#ib-results-2026")
 CBSE_BRIEF = ("The school&rsquo;s CBSE results brief", "news.html#cbse-results-2026")
+AR2025 = ("The school&rsquo;s Annual Report, 7 October 2025",
+          "assets/documents/school-info/annual-report.pdf")
 
 
 def history(record, label):
@@ -372,15 +378,284 @@ LAURELS = [
      "source": ROUNDUP, "image": None, "weight": "small"},
     {"id": "spell-bee-2025", "year": 2025, "when": "2025",
      "cats": ["speech"], "level": "inter-school",
-     "title": "Laurels at the Sahodaya Spell Bee",
+     "title": "Two seconds and a fourth at the Sahodaya Spell Bee",
      "event": "46th CBSE Sahodaya English Spell Bee, Anugraha Mandhir CBSE Senior Secondary "
               "School, Coimbatore",
-     "result": "[Placings to be supplied by the school]",
-     "text": "The school&rsquo;s report says CIRS students brought laurels from this Spell Bee. "
-             "[The students&rsquo; names and placings are not in the published report and are "
-             "to be supplied by the school.]",
+     "result": "Two seconds and a fourth",
+     "text": "Tanay Lakshman of Grade 8 and Rhea of Grade 10 each took second place, and "
+             "M.&nbsp;K. Prateethi of Class 12 fourth.",
+     "names": [("M.&nbsp;K. Prateethi", "Fourth in the Sahodaya Spell Bee")],
+     "source": AR2025, "image": None, "weight": "text", "figure": "2 &middot; 2 &middot; 4"},
+
+    # ---- 2025, from the Annual Report of 7 October 2025 --------------------
+    # Names as the report prints them. The report spells one Class XII student
+    # "Kanistha C", "Kanishta" and "Kansihtha Chopra", and one swimmer "DILIP
+    # REDDY" and "Dhilip Reddy"; each laurel keeps its own paragraph's spelling
+    # and nothing is merged. First names alone stay out of the roll.
+    {"id": "ranking-2025", "year": 2025, "when": "Reported October 2025",
+     "cats": ["school"], "level": "national",
+     "title": "Second in India, first in Tamil Nadu for the fourteenth year",
+     "event": "Education World and Brainfeed school rankings",
+     "result": "Education World: 2nd in India, 1st in Tamil Nadu &middot; Brainfeed: 3rd in India",
+     "text": "Education World ranked CIRS second in the country among India&rsquo;s top "
+             "co-educational boarding schools, and first in Tamil Nadu and Coimbatore for the "
+             "14th consecutive year. Brainfeed ranked the school third in the country and first "
+             "in both the state and the city.",
      "names": [],
-     "source": ROUNDUP, "image": None, "weight": "small", "pending": True},
+     "source": history("report-2025", "the Annual Report, 7 October 2025"),
+     "image": None, "weight": "text", "figure": "14"},
+    {"id": "cbse-xii-2025", "year": 2025, "when": "2025",
+     "cats": ["academics"], "level": "national",
+     "title": "45 of 47 above 80 per cent in Class XII",
+     "event": "CBSE Class XII board examinations",
+     "result": "Management topper 98.6% &middot; Science topper 98.4%",
+     "text": "V Athmika topped the Management stream with 98.6% and Kanistha C the Science "
+             "stream with 98.4%. Of 47 students, 34 scored above 90% and 45 above 80%; Science "
+             "averaged 89% and Management 93%, with centums in Mathematics, Physical Education, "
+             "Informatics Practices and Business Studies.",
+     "names": [("V Athmika", "98.6% in Class XII Management, 2025"),
+               ("Kanistha C", "98.4% in Class XII Science, 2025")],
+     "source": AR2025, "image": None, "weight": "text", "figure": "98.6"},
+    {"id": "cbse-x-2025", "year": 2025, "when": "2025",
+     "cats": ["academics"], "level": "national",
+     "title": "An average of 89.2 per cent in Class X",
+     "event": "CBSE Class X board examinations",
+     "result": "Class topper 97.8% &middot; 56 of 95 at 90% or above",
+     "text": "Ved Tulsian topped Class X with 97.8%. Of 95 students, 56 scored 90% or above and "
+             "85 above 80%, and there were centums in Mathematics (eleven), Sanskrit (four), "
+             "French (two), Science and Hindi.",
+     "names": [("Ved Tulsian", "97.8% in Class X, 2025")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "ib-2025", "year": 2025, "when": "May 2025",
+     "cats": ["academics", "international"], "level": "international",
+     "title": "44 out of 45 in the IB Diploma",
+     "event": "IB Diploma Programme, May 2025 examination",
+     "result": "8 of 19 above 40 points &middot; highest 44",
+     "text": "Shubhaang Agarwal scored 44 out of 45, followed by Raahi with 43, and Reshmi and "
+             "Rishi Iyer with 42. Eight of the 19 candidates scored above 40, and the class "
+             "averaged 38.9 points.",
+     "names": [("Shubhaang Agarwal", "44 out of 45 in the IB Diploma, 2025"),
+               ("Rishi Iyer", "42 out of 45 in the IB Diploma, 2025")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "studentrepreneur-2025", "year": 2025, "when": "Reported October 2025",
+     "cats": ["innovation"], "level": "inter-school",
+     "title": "First prize at SSVM Studentrepreneur",
+     "event": "&lsquo;SSVM Studentrepreneur&rsquo; competition, SSVM, Coimbatore",
+     "result": "First prize &middot; &#8377;75,000",
+     "text": "Raunak, Naitik and Arnav won first prize for their project, and a cash reward of "
+             "&#8377;75,000.",
+     "names": [],
+     "source": AR2025, "image": None, "weight": "text", "figure": "1st"},
+    {"id": "youth-made-2025", "year": 2025, "when": "29 May 2025",
+     "cats": ["innovation"], "level": None,
+     "title": "A prize at the Youth MADE Festival",
+     "event": "2025 Youth MADE Festival",
+     "result": "Prize of $500",
+     "text": "The project of Kanishk C K, Aaditya Tulsyan, Vishwanth, Hema Ruthvick and Arjun "
+             "Reddy was recognised for its creativity, innovation and potential impact, and "
+             "won $500.",
+     "names": [("Kanishk C K", "Youth MADE Festival prize, 2025"),
+               ("Aaditya Tulsyan", "Youth MADE Festival prize, 2025"),
+               ("Hema Ruthvick", "Youth MADE Festival prize, 2025"),
+               ("Arjun Reddy", "Youth MADE Festival prize, 2025")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "mindkraft-2025", "year": 2025, "when": "2025",
+     "cats": ["innovation", "academics", "arts"], "level": "inter-school",
+     "title": "Ideathon winners at Mindkraft",
+     "event": "Mindkraft 2025, Karunya University, on World Water Day",
+     "result": "Ideathon 1st &middot; quiz 2nd and 3rd &middot; painting 2nd",
+     "text": "Competing against universities and colleges across Tamil Nadu, Kanishk, Krishnav "
+             "Deorah and Aaditya Tulsyan won the Ideathon and &#8377;5,000. In the quiz, "
+             "Vishvprem, Divyam, Aneesh and Viraj Lal came second and Krishnav Deorah, Aaditya "
+             "Tulsyan and Kanishk third; Ritika Deorah was second in the painting competition.",
+     "names": [("Krishnav Deorah", "Mindkraft Ideathon, first"),
+               ("Ritika Deorah", "Mindkraft painting, second")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "zestro-2025", "year": 2025, "when": "25&ndash;26 February 2025",
+     "cats": ["innovation", "academics"], "level": "inter-school",
+     "title": "Overall champions at ZESTRO&rsquo;25",
+     "event": "ZESTRO&rsquo;25, a national-level technical symposium, Karunya Deemed University",
+     "result": "Overall championship &middot; quiz 1st and 2nd",
+     "text": "In the quiz Divyam, Vishvprem and Swarit won and Pradyuth, Jasith and Devansh were "
+             "runners-up. A CIRS team won the Project Expo and Paper Presentation with a "
+             "project on forest animal conservation, and CIRS took the overall championship.",
+     "names": [],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "robotica-2025", "year": 2025, "when": "7 February 2025",
+     "cats": ["innovation"], "level": "inter-school",
+     "title": "Runners-up at Robotica",
+     "event": "Robotica 2025, the Robotics Club of VIT Chennai",
+     "result": "Runners-up",
+     "text": "Amogh Agarwal, Aryaman Bansal and Kanishk C K took the runners-up place in the "
+             "robotics competition.",
+     "names": [("Amogh Agarwal", "Robotica 2025, runners-up"),
+               ("Aryaman Bansal", "Robotica 2025, runners-up")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "vssf-2025", "year": 2025, "when": "12&ndash;14 June 2025",
+     "cats": ["academics"], "level": "national",
+     "title": "Top 100 of a lakh, VSSF Science Camp",
+     "event": "SPOT test and Science Camp, Vikram Sarabhai Science Foundation, Pune",
+     "result": "Two of the top 100 in India",
+     "text": "Pradyuth Senthilkumar of Grade 9 and Kansihtha Chopra of Grade 12 were selected "
+             "among the top 100 of one lakh participants across the country through the SPOT "
+             "test, and attended the VSSF Science Camp in Pune.",
+     "names": [("Pradyuth Senthilkumar", "VSSF SPOT test, top 100 in India"),
+               ("Kansihtha Chopra", "VSSF SPOT test, top 100 in India")],
+     "source": AR2025, "image": None, "weight": "text", "figure": "100"},
+    {"id": "yuvika-2025", "year": 2025, "when": "19&ndash;30 May 2025",
+     "cats": ["academics"], "level": "national",
+     "title": "Selected for ISRO YUVIKA",
+     "event": "ISRO YUVIKA 2025, Vikram Sarabhai Space Centre, Thiruvananthapuram",
+     "result": "Selected to represent the school",
+     "text": "Ritika Deorah was selected for ISRO&rsquo;s YUVIKA programme, where she worked "
+             "with ISRO scientists on group projects and science quizzes.",
+     "names": [("Ritika Deorah", "ISRO YUVIKA 2025")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "space-quiz-2025", "year": 2025, "when": "29&ndash;31 July 2025",
+     "cats": ["academics"], "level": None,
+     "title": "To Sriharikota for a launch",
+     "event": "Space Quiz, Sri Shakthi Engineering and Technology",
+     "result": "Among the top 100 winners",
+     "text": "As two of the top 100 winners of the Space Quiz, Naitik Agarwala of Class 11 and "
+             "Anirudhha Koganti of the first IB year visited ISRO&rsquo;s Satish Dhawan Space "
+             "Centre and watched the NISAR satellite launch aboard the GSLV-F16 on 30 July "
+             "2025.",
+     "names": [("Naitik Agarwala", "Space Quiz, top 100"),
+               ("Anirudhha Koganti", "Space Quiz, top 100")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "aviation-quiz-2025", "year": 2025, "when": "Reported October 2025",
+     "cats": ["academics"], "level": "state",
+     "title": "Third in the state aviation quiz",
+     "event": "State-level Quiz on the Aviation Industry, Remo International College with Hindu "
+              "Tamil Thisai",
+     "result": "Third of 12 finalists &middot; &#8377;5,000",
+     "text": "Divyam Gupta was one of the 12 finalists from Tamil Nadu and Puducherry and took "
+             "third place, with a cash prize of &#8377;5,000.",
+     "names": [("Divyam Gupta", "Third, state aviation quiz")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "hmun-2025", "year": 2025, "when": "14&ndash;17 August 2025",
+     "cats": ["speech", "leadership", "international"], "level": "international",
+     "title": "Outstanding delegates at Harvard MUN",
+     "event": "Harvard Model United Nations (HMUN) 2025",
+     "result": "Two Outstanding Delegate awards",
+     "text": "Forty CIRS students took part. Adwaith and Aryan received Outstanding Delegate "
+             "awards; Shwet, Ashi, Aniruddha and Shaurya were named determined delegates, and "
+             "Sairam received a diplomatic commendation.",
+     "names": [],
+     "source": history("mun-2025", "Harvard and IIMUN"), "image": None, "weight": "small"},
+    {"id": "iimun-2025", "year": 2025, "when": "14&ndash;17 August 2025",
+     "cats": ["speech", "leadership"], "level": "national",
+     "title": "Mentions at the IIMUN Championship",
+     "event": "14th IIMUN Championship Conference 2025, Mumbai",
+     "result": "A special mention and two verbal mentions",
+     "text": "34 CIRS students represented nations. Aryaman Bansal received a special mention, "
+             "and Ahana Nair and Sannvi Bagaria verbal mentions.",
+     "names": [("Aryaman Bansal", "Special mention, IIMUN 2025"),
+               ("Ahana Nair", "Verbal mention, IIMUN 2025"),
+               ("Sannvi Bagaria", "Verbal mention, IIMUN 2025")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "ncc-2025", "year": 2025, "when": "1&ndash;10 July 2025",
+     "cats": ["leadership"], "level": None,
+     "title": "Best Cadets at the NCC camp",
+     "event": "NCC Annual Training Camp, Kalaignar Karunanidhi Institute of Technology",
+     "result": "Overall Best Cadets award",
+     "text": "36 CIRS cadets won medals in the drill test, quiz, relay, shot put and football, "
+             "and the school received the overall Best Cadets award.",
+     "names": [],
+     "source": history("ncc-2025", "Best Cadets at the NCC camp"),
+     "image": None, "weight": "text", "figure": "36"},
+    {"id": "south-zone-swimming-2025", "year": 2025, "when": "26&ndash;30 August 2025",
+     "cats": ["sport"], "level": "zonal",
+     "title": "Two bronzes at South Zone swimming",
+     "event": "South Zone Swimming Competition 2025&ndash;26, The Navabharath International "
+              "School, Annur",
+     "result": "Under-17 relay bronze &middot; Under-17 girls 400 m bronze",
+     "text": "Among more than 1,500 swimmers from 310 schools, Shrey Kothari, Arav Jagadesh, "
+             "Vidhur Vaibhav, Chundi Sai Bava Rishi and Sidharth Abinav Raja won bronze in the "
+             "Under-17 boys&rsquo; 4 &times; 100 m freestyle relay, and Anagha Mappat bronze in "
+             "the Under-17 girls&rsquo; 400 m.",
+     "names": [("Anagha Mappat", "Bronze, 400 m, South Zone swimming")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "state-swimming-2025", "year": 2025, "when": "5 July 2025",
+     "cats": ["sport"], "level": "state",
+     "title": "Gold in the 200 m freestyle",
+     "event": "Prime Sports State Level Swimming Competition, The Life Spring Swimming Club",
+     "result": "One gold and two bronze &middot; 75 schools",
+     "text": "Among more than 350 swimmers from 75 schools, Shrey Kothari won gold in the 200 m "
+             "freestyle and bronze in the 100 m butterfly, and Dhilip Reddy bronze in the 100 m "
+             "freestyle. At the CM Trophy on 6 September, at Bharathiar University, Shrey Kothari "
+             "won bronze in the 200 m butterfly and the 200 m individual medley, and Dilip Reddy "
+             "bronze in the 100 m freestyle.",
+     "names": [("Shrey Kothari", "Gold, 200 m freestyle, state level")],
+     "source": AR2025, "image": None, "weight": "text", "figure": "Gold"},
+    {"id": "tennis-2025", "year": 2025, "when": "May and September 2025",
+     "cats": ["sport"], "level": "state",
+     "title": "A title and two finals in tennis",
+     "event": "Jharkhand State Tennis Tournament, and the GST Tennis Tournament, Global School "
+              "of Tennis",
+     "result": "Under-16 singles winner &middot; Under-18 state runner-up",
+     "text": "Shaurya Gadhyan was runner-up in the Under-18 singles of the Jharkhand state "
+             "tournament in May. At the GST tournament on 28 September, Deepansh Gupta won the "
+             "Under-16 singles, he and Shaurya Gadhyan were runners-up in the Under-16 doubles, "
+             "and Yug Goyal placed third in the Under-14 singles.",
+     "names": [("Deepansh Gupta", "Winner, Under-16 singles, GST tennis"),
+               ("Shaurya Gadhyan", "Runner-up, Under-18 singles, Jharkhand state")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "football-u16-2025", "year": 2025, "when": "28&ndash;29 August 2025",
+     "cats": ["sport"], "level": "inter-school",
+     "title": "Runners-up, Under-16 and Under-12 football",
+     "event": "46th Sahodaya 11-on-11 Inter School Football Tournament, Agaram Public School, "
+              "Karur",
+     "result": "Under-16 runners-up &middot; Under-12 runners-up",
+     "text": "The CIRS Under-16 boys finished as runners-up. At the 3rd Nathan Memorial "
+             "tournament on 4&ndash;5 July, at Vivekam Sr. Sec. School, Coimbatore, the "
+             "Under-12 boys were also runners-up, and Anirudh E.S of Grade 6 was named Best "
+             "Player.",
+     "names": [("Anirudh E.S", "Best Player, Under-12 football")],
+     "source": AR2025, "image": None, "weight": "text", "figure": "2nd"},
+    {"id": "district-2025", "year": 2025, "when": "2025",
+     "cats": ["sport"], "level": None,
+     "title": "Called up by the district",
+     "event": "Coimbatore district selections",
+     "result": "Basketball camp &middot; Sub Junior hockey team",
+     "text": "Yug Didwania of Grade 8 was selected for the Coimbatore district basketball camp "
+             "on 4 August 2025, and Hardik Saralia was among the final 18 players chosen for "
+             "the Coimbatore District Sub Junior Men&rsquo;s Hockey Team.",
+     "names": [("Yug Didwania", "Coimbatore district basketball camp"),
+               ("Hardik Saralia", "Coimbatore District Sub Junior hockey team")],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "vanijya-ratna-2025", "year": 2025, "when": "Reported October 2025",
+     "cats": ["school"], "level": None,
+     "title": "Vanijya Ratna for a CIRS teacher",
+     "event": "Commerce Teachers Foundation",
+     "result": "Vanijya Ratna Award",
+     "text": "Dr. Rashmi was given the Vanijya Ratna Award for her contribution to education; "
+             "her students averaged 96% in Accountancy.",
+     "names": [],
+     "source": AR2025, "image": None, "weight": "small"},
+
+    # ---- 2024 ------------------------------------------------------------
+    {"id": "kreativity-2024", "year": 2024, "when": "27&ndash;28 December 2024",
+     "cats": ["innovation"], "level": "national",
+     "title": "Third at the Kreativity League, IIT Delhi",
+     "event": "Kreativity League 2024 Grand Finale, IIT Delhi",
+     "result": "Third of 300 participants &middot; &#8377;9,000",
+     "text": "Among 300 participants, Jayam, Gatik and Arnav took third place, winning trophies "
+             "and a cash prize of &#8377;9,000.",
+     "names": [],
+     "source": AR2025, "image": None, "weight": "small"},
+    {"id": "jklu-2024", "year": 2024, "when": "1 December 2024",
+     "cats": ["innovation"], "level": None,
+     "title": "Overall winners, &lsquo;My City, My Lab&rsquo;",
+     "event": "JK Lakshmipat University &lsquo;My City, My Lab&rsquo; Ideathon 2024",
+     "result": "Overall winners &middot; &#8377;1 lakh",
+     "text": "Team Vayunigrah &mdash; Jayam Mangalam Modi, Gatik Chhawachharia and Arnav "
+             "Agarwal &mdash; won the Ideathon for their innovative approach and practical "
+             "solution design, and a prize of one lakh rupees.",
+     "names": [("Jayam Mangalam Modi", "JKLU Ideathon, overall winners"),
+               ("Gatik Chhawachharia", "JKLU Ideathon, overall winners"),
+               ("Arnav Agarwal", "JKLU Ideathon, overall winners")],
+     "source": AR2025, "image": None, "weight": "text", "figure": "&#8377;1L"},
 
     # ---- 2019 ------------------------------------------------------------
     {"id": "ranking-2019", "year": 2019, "when": "2019",
@@ -540,9 +815,13 @@ HELD = [
     ("Among the top 50 CBSE schools in India", "On the home ticker; no source or year."),
     ("IB World Toppers, 45/45, 2019 and 2024", "Held in tools/history.py UNRESOLVED."),
     ("Vayu Nigrah, first prize, SSVM Transforming India Conclave",
-     "Prize unconfirmed; the year may be 2024 (tools/history.py UNRESOLVED). This is the "
-     "one laurel that would support an Innovation category."),
-    ("Spell Bee names", "The 2025 report says students won, but lists no names."),
+     "Prize unconfirmed; the year may be 2024 (tools/history.py UNRESOLVED). The Annual "
+     "Report's JKLU Ideathon win by Team Vayunigrah (jklu-2024) is a different prize."),
+    ("Annual Report 2025: the yoga teacher's first place, the Kangeyam Marathon and the "
+     "CBSE Cluster VI athletics", "The yoga line cannot be read reliably; the marathon (6th to "
+     "8th among 26,000) and athletics (5th to 8th) placings are taking part, not laurels."),
+    ("Annual Report 2025: 'Out of 600 up IB school, CIRS stands 15th in the world'",
+     "Cannot be read reliably; see tools/history.py, results-2025."),
     ("Green School Award year", "Why CIRS names the award, not the year."),
     ("Photographs of the 2025 inter-school results", "None is in the Drive: its numbered folders "
      "cover the school's own 2026 events. The featured laurels use illustrative school photographs, "
@@ -665,9 +944,9 @@ NUMBERS = [
     ("17", "", "Medals at South Zone Yoga",
      "Six gold, five silver and six bronze, and the Overall Championship, July 2025.",
      "yoga-2025"),
-    ("8", "th", "Year first in Tamil Nadu",
-     "Education World&rsquo;s 2019 survey, which also placed CIRS second in India among "
-     "co-educational boarding schools.", "ranking-2019"),
+    ("14", "th", "Year first in Tamil Nadu",
+     "Education World&rsquo;s ranking reported in October 2025, which also placed CIRS second "
+     "in India among co-educational boarding schools.", "ranking-2025"),
 ]
 
 # 4 — The reel, oldest first. (laurel id, composition)

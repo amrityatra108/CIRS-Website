@@ -71,17 +71,12 @@ DOCUMENTS = [
      "file": "school-safety-policy.pdf",
      "issued": "July 2018 (second edition)", "status": "dated"},
     {"id": "fire-safety-certificate", "category": "Safety &amp; compliance",
-     "title": "Fire Safety Certificate &mdash; Main School",
-     "note": "Fire and Rescue Services, Thondamuthur: no objection for the main school building (ground, first and second floors).",
+     "title": "Fire Safety Certificate",
+     "note": "No objection certificate from Fire and Rescue Services, Thondamuthur.",
      "file": "fire-safety-certificate.pdf",
-     # No. 27/2025. Renewal fell due on 17.08.2026; the certificate supplied
-     # in September 2026 is the IB building's, below, not this one's renewal.
-     "issued": "18 Aug 2025", "valid_until": "17 Aug 2026", "status": "expired"},
-    {"id": "fire-safety-certificate-ib", "category": "Safety &amp; compliance",
-     "title": "Fire Safety Certificate &mdash; IB Curriculum Building",
-     "note": "Fire and Rescue Services, Thondamuthur: no objection for the IB Curriculum building (ground and first floors).",
-     "file": "fire-safety-certificate-ib.pdf",
      # No. 18/2026, inspected and issued 17.08.2026; next renewal 16.08.2029.
+     # The school confirmed in September 2026 that this is the campus's fire
+     # safety certificate; it replaces No. 27/2025 (renewal due 17.08.2026).
      "issued": "17 Aug 2026", "valid_until": "16 Aug 2029", "status": "current"},
     {"id": "building-safety-certificate", "category": "Safety &amp; compliance",
      "title": "Building Safety Certificate",
@@ -107,7 +102,9 @@ DOCUMENTS = [
      "title": "Self Affidavit",
      "note": "The school's self-affidavit submitted to the affiliating authority.",
      "file": "self-affidavit.pdf",
-     "issued": "19 Jan 2019", "status": "stale"},
+     # The school confirmed in September 2026 that the affidavit does not
+     # change from year to year, so it stands without a newer edition.
+     "issued": "19 Jan 2019", "status": "permanent"},
 
     # ---- Academics &amp; results ------------------------------------------
     {"id": "cbse-results-three-year", "category": "Academics &amp; results",
