@@ -199,14 +199,14 @@ PAGES = {
         "description": "The CIRS archive: Pujya Gurudev's idea, the land bought one rupee at a "
                        "time, the inauguration on 6 June 1996 and the milestones since, each "
                        "with its source.",
-        # No banner and no hero. The page opens on its own dark composition —
-        # the school's records set back at shallow depths behind the title —
-        # then tells six chapters in one bounded sticky sequence and ends on
-        # the complete archive. Every record is written from tools/history.py,
+        # No banner and no hero. The page opens on a near-dark field with the
+        # first year, then tells the history as one continuous journey — a
+        # camera path through the records on a wide window, an editorial
+        # column everywhere else — and ends on the complete archive. Every record is written from tools/history.py,
         # which names each one's source; tools/make-history.py cuts the images.
         "banner": None,
         "sheet": "history",
-        "cache_suffix": "-history-1",
+        "cache_suffix": "-history-2",
         # The chapters carry their own visible index and "View all
         # milestones", so the floating "On this page" control would repeat it.
         "jump": False,
@@ -2334,6 +2334,9 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}" defer></script>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
+        # The journey's controller. It imports Three.js (history-world.js) only
+        # on a window wide enough for the 3D path, so a phone never fetches it.
+        parts.append(f'<script type="module" src="assets/js/history-journey.js?{CACHE_BUST}"></script>')
     if page.get("opening"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":

@@ -10,8 +10,8 @@ and are never published.
 
 The page is built in three parts, all from EVENTS:
 
-    CHAPTERS   six chapters for the scrolled sequence, each naming the
-               events it tells; its "Read more" opens the lead record
+    SCENES     the moments of the journey at the top of the page, each
+               naming the records it tells and the exhibits it shows
     EVENTS     the complete archive, in date order, every event with a
                unique id — two things can happen in one year
     EXHIBITS   the images, cut by tools/make-history.py
@@ -352,57 +352,85 @@ EVENTS = [
                'News</a>'},
 ]
 
-# The six chapters of the scrolled sequence. "events" are the records the
-# chapter tells, in order; the first is the one "Read more" opens. "exhibit"
-# is an image from EXHIBITS or one of the three designed compositions:
-# "rupee", "diptych" and "opening".
-CHAPTERS = [
-    {"id": "chapter-idea", "short": "The idea", "when": "1970s",
-     "headline": "The idea came first.",
-     "text": "Pujya Gurudev Swami Chinmayananda conceived an international school in India, "
-             "and the idea met with an overwhelming response from around the world. Bangalore, "
-             "Lucknow, the Andamans and Himachal Pradesh were weighed before Coimbatore was "
-             "chosen.",
-     "exhibit": "gurudev", "events": ["idea-1970s"]},
-    {"id": "chapter-rupee", "short": "The land", "when": "From 1984",
-     "headline": "One rupee at a time.",
-     "text": "To buy the land, Swami Sahayanandaji travelled the length and breadth of India on "
-             "foot, making the first collection: one rupee from each person.",
-     "aside": "The marks stand for many people taking part. They are not a count of those "
-              "who gave.",
-     "exhibit": "rupee", "events": ["rupee-1984"]},
-    {"id": "chapter-shape", "short": "Taking shape", "when": "1993 &ndash; 1994",
-     "headline": "The project takes shape.",
-     "text": "Gurudev attained Mahasamadhi on 3 August 1993 and did not see the school open. "
-             "In 1994, as the school&rsquo;s own account records, Pujya Guruji Swami "
-             "Tejomayananda set about making the vision concrete, and the work progressed by "
-             "leaps and bounds.",
-     "exhibit": "diptych", "events": ["guruji-1994", "mahasamadhi-1993", "project-1996"]},
-    {"id": "chapter-opening", "short": "The opening", "when": "6 June 1996",
-     "headline": "The school opens.",
-     "text": "Inaugurated by Pujya Swami Chidanandaji, President of The Divine Life Society. "
-             "The first staff were headed by Dr. Jaya Venugopal, with Brahmacharini Sumati "
-             "Chaitanya and Brahmachari Samahita Chaitanya as spiritual guides.",
-     "exhibit": "opening", "events": ["inauguration-1996", "first-school-1996"]},
-    {"id": "chapter-early", "short": "Early years", "when": "1996 &ndash; 2010",
-     "headline": "A school finds its voice.",
-     "text": "Within weeks of opening the State cleared the way to CBSE affiliation. In 2007 "
-             "thirty-two students met President Kalam at Rashtrapati Bhavan, and by 2010 the "
-             "students were writing and laying out newsletters of their own.",
-     "exhibit": "sakshi-2008",
-     "events": ["sakshi-2008", "noc-1996", "kalam-2007", "reflections-2010", "isa-2010",
-                "director-2005", "principal-2009"]},
-    {"id": "chapter-later", "short": "Later years", "when": "2011 &ndash; 2026",
-     "headline": "A wider world, and a longer record.",
-     "text": "The International School Award, the CCMT Education Cell&rsquo;s Vision Award for "
-             "2012, and by 2019 a school of 580 students from 22 states and 18 other "
-             "countries. Examination results and honours are kept in full on their own pages.",
-     "exhibit": "vision-2012",
+# The journey: the history told as one continuous passage, a moment at a
+# time. Every sentence is a record's own wording or a plain shortening of it.
+#   records  the events a moment tells; the first is the one its
+#            "Read the record" link opens
+#   plates   images shown with it, each the exhibit of one of those records
+#   notes    further records, listed with their dates
+#   index    the moment's label in the small index at the edge of the window
+# The 3D placement of each plate is presentation, and lives with the rest of
+# the camera path in assets/js/history-world.js.
+SCENES = [
+    {"id": "chapter-idea", "index": "1970s", "year": "1970s",
+     "head": "The idea came first.",
+     "text": ["Pujya Gurudev Swami Chinmayananda conceived an international school in India, "
+              "and the idea met with an overwhelming response from around the world. Bangalore, "
+              "Lucknow, the Andamans and Himachal Pradesh were weighed before Coimbatore was "
+              "chosen."],
+     "records": ["idea-1970s"], "plates": ["gurudev"]},
+    {"id": "chapter-rupee", "index": "1984", "year": "1984", "big": "&#8377;1",
+     "head": "One rupee at a time.",
+     "text": ["To buy the land, Swami Sahayanandaji travelled the length and breadth of India on "
+              "foot, making the first collection: one rupee from each person."],
+     "records": ["rupee-1984"]},
+    {"id": "chapter-shape", "index": "1993", "year": "3 August 1993", "quiet": True,
+     "head": "Gurudev attains Mahasamadhi.",
+     "text": ["Pujya Gurudev Swami Chinmayananda attained Mahasamadhi on 3 August 1993. He did "
+              "not see the school he had conceived open its doors."],
+     "records": ["mahasamadhi-1993"]},
+    {"id": "chapter-concrete", "index": "1994", "year": "1994",
+     "head": "The vision is made concrete.",
+     "text": ["Pujya Guruji Swami Tejomayananda proceeded to concretise the vision of Pujya "
+              "Gurudev with unfailing vigour and energy, and the work progressed by leaps and "
+              "bounds.",
+              "Devotees around the world contributed generously. Swamini Vimalanandaji and "
+              "Dr. G.&nbsp;S. Keshawamurthy guided and executed the project to its completion."],
+     "records": ["guruji-1994", "project-1996"]},
+    {"id": "chapter-opening", "index": "1996", "year": "6 June 1996",
+     "head": "The school opens.",
+     "text": ["The Chinmaya International Residential School was inaugurated by Pujya Swami "
+              "Chidanandaji, President of The Divine Life Society. The plaque at the main "
+              "building records that he did so in the presence of Swami Tejomayananda, Head of "
+              "Chinmaya Mission, on Thursday, 6 June 1996."],
+     "records": ["inauguration-1996"]},
+    {"id": "chapter-first", "index": None, "year": "June 1996",
+     "head": "Ninety-six students, eleven teachers.",
+     "text": ["CIRS started with 96 students from Grade V to Grade VIII and 11 academic staff, "
+              "headed by Dr. Jaya Venugopal, with Brahmacharini Sumati Chaitanya and "
+              "Brahmachari Samahita Chaitanya as spiritual guides.",
+              "Within weeks, on 15 July 1996, the Government of Tamil Nadu raised no objection "
+              "to the middle classes being affiliated to the CBSE, on one condition: that Tamil "
+              "be taught as a second language."],
+     "facts": [("96", "students"), ("11", "academic staff"), ("V&ndash;VIII", "grades")],
+     "records": ["first-school-1996", "noc-1996"], "plates": ["noc-1996"]},
+    {"id": "chapter-early", "index": "2005", "year": "2005 &ndash; 2010",
+     "head": "A school finds its voice.",
+     "text": ["A Resident Director, a meeting with the President at Rashtrapati Bhavan, and "
+              "newsletters the students wrote, edited and laid out themselves."],
+     "notes": ["director-2005", "kalam-2007", "sakshi-2008", "principal-2009",
+               "reflections-2010", "isa-2010"],
+     "records": ["director-2005"], "plates": ["kalam-2007", "sakshi-2008", "reflections-2010"]},
+    {"id": "chapter-later", "index": "2011", "year": "2011 &ndash; 2019",
+     "head": "A wider world, and a longer record.",
+     "text": ["The International School Award, the CCMT Education Cell&rsquo;s Vision Award for "
+              "2012, and by 2019 a school of 580 students from 22 Indian states and 18 other "
+              "countries."],
+     "notes": ["isa-award-2011", "vision-award-2012", "poland-2014", "brainfeed-2017",
+               "director-2018", "report-2019"],
      "links": [("Our Results", "our-results.html"), ("Our Laurels", "our-laurels.html")],
-     "events": ["vision-award-2012", "isa-award-2011", "poland-2014", "brainfeed-2017",
-                "director-2018", "report-2019", "ranking-2019", "cbse-2019", "cbse-2026",
-                "ib-2026"]},
+     "records": ["vision-award-2012"], "plates": ["vision-2012", "brainfeed-2017", "report-2019"]},
 ]
+
+# Photographs of the campus as it stands, cut by tools/make-photos.py for
+# other pages. Neither carries a date, so neither caption gives one.
+CAMPUS = {
+    "forest-air": (1600, 900, "The CIRS campus from the air, the forest closing around it on "
+                              "every side",
+                   "The campus from the air, the forest closing around it on every side."),
+    "campus-band": (1920, 1080, "The CIRS campus below the Western Ghats",
+                    "The campus below the Western Ghats."),
+}
 
 # Held back from the page until the school supplies a source. Listed here so
 # the next person knows what was taken out and why; see also each "note".
@@ -424,9 +452,12 @@ UNRESOLVED = [
 
 BY_ID = {e["id"]: e for e in EVENTS}
 assert len(BY_ID) == len(EVENTS), "every event needs a unique id"
-for _c in CHAPTERS:
-    for _id in _c["events"]:
-        assert _id in BY_ID, f"{_c['id']} names an unknown event {_id}"
+BY_EXHIBIT = {e["exhibit"]: e for e in EVENTS if e.get("exhibit")}
+for _s in SCENES:
+    for _id in _s["records"] + _s.get("notes", []):
+        assert _id in BY_ID, f"{_s['id']} names an unknown event {_id}"
+    for _x in _s.get("plates", []):
+        assert _x in BY_EXHIBIT and BY_EXHIBIT[_x]["id"] in _s["records"] + _s.get("notes", []),             f"{_s['id']} shows {_x}, which is not the exhibit of a record it tells"
 
 
 def attr(text):
@@ -455,119 +486,86 @@ def ratio(name):
     return f"{sw / sh:.4f}"
 
 
-# ---- the designed compositions ---------------------------------------------
+# ---- the journey ---------------------------------------------------------------
 
-def rupee_html():
-    """Small marks that gather into one field.
-
-    Each mark starts scattered and settles into a block of rows. The
-    positions are fixed here rather than random, so the page is the same on
-    every load and the stylesheet can place them before any script runs."""
-    cols, rows = 9, 6
-    marks = []
-    n = 0
-    for r in range(rows):
-        for c in range(cols):
-            # The settled field: a block of rows, centred.
-            x1 = 14 + c * (72 / (cols - 1))
-            y1 = 22 + r * (50 / (rows - 1))
-            # A scatter that is deterministic but not a grid: two
-            # incommensurate steps walk each mark to its own start.
-            x0 = (n * 37.3 + 11) % 92 + 4
-            y0 = (n * 23.7 + 7) % 84 + 8
-            marks.append(f'<i style="--x0:{x0:.1f};--y0:{y0:.1f};--x1:{x1:.1f};--y1:{y1:.1f};'
-                         f'--d:{(n % 9) * 0.02 + (n // 9) * 0.035:.3f}"></i>')
-            n += 1
-    return (f'<div class="hx-ex hx-ex--type hx-ex--rupee" style="--ar:.8" data-exhibit="rupee">'
-            f'<div class="hx-rupee__field" aria-hidden="true">{"".join(marks)}</div>'
-            f'<p class="hx-type__when">1984</p>'
-            f'<p class="hx-type__title">One rupee,<br>from each person.</p>'
-            f'</div>')
+def record_link(event_id, label="Read the record"):
+    e = BY_ID[event_id]
+    return (f'<a class="hj-more" href="#record-{e["id"]}" data-hx-record="{e["id"]}">{label}'
+            f'<span class="sr-only">: {plain(e["title"])}</span></a>')
 
 
-def diptych_html():
-    return ('<div class="hx-ex hx-ex--type hx-ex--diptych" style="--ar:1.18" data-exhibit="diptych">'
-            '<div class="hx-dip hx-dip--a">'
-            '<p class="hx-type__when">3 August 1993</p>'
-            '<p class="hx-type__title">Gurudev attains Mahasamadhi.</p>'
-            '<p class="hx-type__src">Founder chronology</p></div>'
-            '<div class="hx-dip hx-dip--b">'
-            '<p class="hx-type__when">1994</p>'
-            '<p class="hx-type__title">Pujya Guruji makes the vision concrete.</p>'
-            '<p class="hx-type__src">The school&rsquo;s published history</p></div>'
-            '</div>')
+def plate_html(name, eager=False):
+    """One exhibit as a figure: an image and its record's own caption.
+
+    The caption is the record's alone. It is never prefixed with the record's
+    date: the portrait of Gurudev, for one, is not of the year it is shown with.
+
+    With the 3D journey running, the image is drawn in the scene instead and
+    the figure keeps only its caption, set beside the plate; everywhere else
+    it is simply the photograph, in the text's column."""
+    e = BY_EXHIBIT[name]
+    return (f'<figure class="hj-fig" data-hj-plate="{name}" style="--ar:{ratio(name)}">'
+            + img_html(name, e["alt"], "(max-width: 999px) 88vw, 640px", eager=eager)
+            + f'<figcaption class="hj-cap">{e["caption"]}</figcaption></figure>')
 
 
-def opening_html():
-    """96 squares for the students and 11 marks for the academic staff.
-
-    Grouped so they arrive in a few beats rather than counting up one at a
-    time; the numbers themselves are in the text beside it, for everyone."""
-    students = "".join(f'<i style="--g:{i // 24}"></i>' for i in range(96))
-    staff = "".join(f'<i style="--g:{4 + i // 6}"></i>' for i in range(11))
-    return ('<div class="hx-ex hx-ex--type hx-ex--opening" style="--ar:1.02" data-exhibit="opening">'
-            '<p class="hx-type__when">6 June 1996</p>'
-            '<div class="hx-open__groups" aria-hidden="true">'
-            f'<div class="hx-open__set hx-open__set--students"><div class="hx-open__marks">{students}</div>'
-            '<p class="hx-open__label"><b>96</b> students</p></div>'
-            f'<div class="hx-open__set hx-open__set--staff"><div class="hx-open__marks">{staff}</div>'
-            '<p class="hx-open__label"><b>11</b> academic staff</p></div>'
-            '</div>'
-            '<p class="hx-type__title hx-open__grades">Grades V&ndash;VIII</p>'
-            '</div>')
+def campus_html(name, cls, eager=False):
+    w, h, alt, caption = CAMPUS[name]
+    load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+    return (f'<figure class="hj-fig {cls}" data-hj-plate="{name}" style="--ar:{w / h:.4f}">'
+            f'<img src="assets/img/{name}.jpg" width="{w}" height="{h}" alt="{attr(alt)}" '
+            f'{load} decoding="async">'
+            f'<figcaption class="hj-cap">{caption}</figcaption></figure>')
 
 
-def exhibit_html(chapter, eager=False):
-    ex = chapter["exhibit"]
-    if ex == "rupee":
-        return rupee_html()
-    if ex == "diptych":
-        return diptych_html()
-    if ex == "opening":
-        return opening_html()
-    lead = next(BY_ID[i] for i in chapter["events"] if BY_ID[i].get("exhibit") == ex)
-    return (f'<figure class="hx-ex hx-ex--img" style="--ar:{ratio(ex)}" data-exhibit="{ex}">'
-            + img_html(ex, lead["alt"], "(max-width: 900px) 86vw, 34vw", eager=eager)
-            + '</figure>')
+def index_html():
+    items = "".join(f'<li><a href="#{s["id"]}" data-hj-go="{s["id"]}">{s["index"]}</a></li>'
+                    for s in SCENES if s["index"])
+    return (f'<nav class="hj-index" aria-label="Moments in the history"><ol>{items}'
+            f'<li><a href="#chapter-now" data-hj-go="chapter-now">Now</a></li></ol></nav>')
 
 
-# ---- the page's parts --------------------------------------------------------
-
-def chapter_nav_html():
-    items = "".join(
-        f'<li><a href="#{c["id"]}" data-hx-jump="{i}"><span class="hx-nav__n">{i + 1:02d}</span>'
-        f'<span class="hx-nav__t">{c["short"]}</span></a></li>'
-        for i, c in enumerate(CHAPTERS))
-    return (f'<nav class="hx-nav" aria-label="Chapters of the history">'
-            f'<ol class="hx-nav__list">{items}</ol>'
-            f'<a class="hx-nav__all" href="#timeline">View all milestones</a></nav>')
-
-
-def chapters_html():
+def scenes_html():
     out = []
-    for i, c in enumerate(CHAPTERS):
-        lead = BY_ID[c["events"][0]]
-        aside = f'<p class="hx-ch__aside">{c["aside"]}</p>' if c.get("aside") else ""
-        extra = ""
-        if c["exhibit"] == "opening":
-            # The composition's figures, as text, for every reader.
-            extra = ('<dl class="hx-ch__facts"><div><dt>Students</dt><dd>96</dd></div>'
-                     '<div><dt>Academic staff</dt><dd>11</dd></div>'
-                     '<div><dt>Grades</dt><dd>V&ndash;VIII</dd></div></dl>')
-        links = "".join(f'<a class="hx-ch__link" href="{href}">{label}</a>'
-                        for label, href in c.get("links", []))
-        more = (f'<a class="hx-ch__more" href="#record-{lead["id"]}" data-hx-record="{lead["id"]}">'
-                f'Read more<span class="sr-only"> about {plain(lead["title"])}</span></a>')
+    for n, s in enumerate(SCENES):
+        big = f'<p class="hj-big" aria-hidden="true">{s["big"]}</p>' if s.get("big") else ""
+        paras = "".join(f'<p class="hj-copy">{t}</p>' for t in s["text"])
+        facts = ""
+        if s.get("facts"):
+            facts = ('<dl class="hj-facts">' + "".join(
+                f'<div><dt>{label}</dt><dd>{figure}</dd></div>' for figure, label in s["facts"])
+                + '</dl>')
+        notes = ""
+        if s.get("notes"):
+            notes = ('<ol class="hj-notes">' + "".join(
+                f'<li><a href="#record-{i}" data-hx-record="{i}">'
+                f'<span class="hj-notes__when">{BY_ID[i]["when"]}</span>'
+                f'<span class="hj-notes__what">{BY_ID[i]["summary"]}</span></a></li>'
+                for i in s["notes"]) + '</ol>')
+        links = "".join(f'<a class="hj-more" href="{href}">{label}</a>'
+                        for label, href in s.get("links", []))
+        more = "" if s.get("notes") else record_link(s["records"][0])
+        plates = "".join(plate_html(x, eager=(n == 0)) for x in s.get("plates", []))
+        quiet = " hj-scene--quiet" if s.get("quiet") else ""
         out.append(
-            f'<li class="hx-ch" id="{c["id"]}" data-hx-chapter="{i}">'
-            f'<div class="hx-ch__visual">{exhibit_html(c, eager=(i == 0))}</div>'
-            f'<div class="hx-ch__text">'
-            f'<p class="hx-ch__when"><span class="hx-ch__n">{i + 1:02d}</span>{c["when"]}</p>'
-            f'<h3 class="hx-ch__head">{c["headline"]}</h3>'
-            f'<p class="hx-ch__copy">{c["text"]}</p>{extra}{aside}'
-            f'<p class="hx-ch__actions">{more}{links}</p>'
-            f'</div></li>')
+            f'<section class="hj-scene{quiet}" id="{s["id"]}" data-hj-scene aria-labelledby="{s["id"]}-h">'
+            f'<div class="hj-text">'
+            f'<p class="hj-year">{s["year"]}</p>{big}'
+            f'<h2 class="hj-head" id="{s["id"]}-h">{s["head"]}</h2>'
+            f'{paras}{facts}{notes}'
+            f'<p class="hj-actions">{more}{links}</p>'
+            f'</div>'
+            + (f'<div class="hj-plates">{plates}</div>' if plates else "")
+            + '</section>')
     return "\n".join(out)
+
+
+def now_html():
+    return campus_html("forest-air", "hj-fig--air")
+
+
+def full_html():
+    return campus_html("campus-band", "hj-fig--full")
 
 
 def filters_html():
@@ -617,31 +615,11 @@ def archive_html():
     return "\n".join(out)
 
 
-def opening_records_html():
-    """The records drifting behind the opening's title, at shallow depths.
-
-    Real exhibits, set back and small; the copy is the thing to read. They are
-    decoration here — every one appears again, captioned, further down — so
-    the whole field is hidden from assistive technology."""
-    picks = [("gurudev", 1), ("noc-1996", 2), ("kalam-2007", 3), ("sakshi-2008", 2),
-             ("report-2019", 3), ("brainfeed-2017", 1)]
-    cards = []
-    for n, (name, depth) in enumerate(picks):
-        cards.append(f'<span class="hx-float hx-float--{n + 1}" style="--z:{depth};--ar:{ratio(name)}">'
-                     + img_html(name, "", "220px", eager=(n < 3)) + '</span>')
-    cards.append('<span class="hx-float hx-float--type" style="--z:2;--ar:.8">'
-                 '<span class="hx-float__when">1984</span>'
-                 '<span class="hx-float__t">One rupee at a time</span></span>')
-    cards.append('<span class="hx-float hx-float--type hx-float--type2" style="--z:3;--ar:.8">'
-                 '<span class="hx-float__when">6.6.1996</span>'
-                 '<span class="hx-float__t">96 students</span></span>')
-    return f'<div class="hx-opening__field" aria-hidden="true">{"".join(cards)}</div>'
-
-
 def expand(content):
-    return (content.replace("{{HISTORY_OPENING_RECORDS}}", opening_records_html())
-                   .replace("{{HISTORY_CHAPTER_NAV}}", chapter_nav_html())
-                   .replace("{{HISTORY_CHAPTERS}}", chapters_html())
+    return (content.replace("{{HISTORY_INDEX}}", index_html())
+                   .replace("{{HISTORY_SCENES}}", scenes_html())
+                   .replace("{{HISTORY_NOW}}", now_html())
+                   .replace("{{HISTORY_FULL}}", full_html())
                    .replace("{{HISTORY_FILTERS}}", filters_html())
                    .replace("{{HISTORY_ARCHIVE}}", archive_html())
                    .replace("{{HISTORY_COUNT}}", str(len(EVENTS))))
