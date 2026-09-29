@@ -96,8 +96,9 @@
 /* Over the opening the lettering carries its own shadow instead of a bar. */
 .nv-header[data-header-mode="hero"] :is(.nv-brand, .nv-tab){ filter:var(--nav-lift); }
 
-/* The pill: on scroll, by default on pages without a full-screen opening,
-   and while the Enquire sheet hangs from it. */
+/* The pill: on scroll and by default on pages without a full-screen opening.
+   Enquire adds its reading surface without moving the trigger: gathering the
+   hero bar under a stationary pointer caused repeated mouseleave/open loops. */
 .nv-header[data-header-mode="content"],
 .nv-header:has(.nv-enq.is-open){
   --nav-name:var(--ink);
@@ -105,14 +106,17 @@
   --nav-text:var(--ink);
   --nav-icon:var(--ink-soft);
   --nav-hover:var(--ink);
+  --nav-lift:none;
 }
-.nv-header[data-header-mode="content"] .nv-header__bar,
-.nv-header:has(.nv-enq.is-open) .nv-header__bar{
+.nv-header[data-header-mode="content"] .nv-header__bar{
   width:min(calc(100% - 2 * var(--nv-pill-inset)), var(--nv-pill-max));
   height:var(--nv-pill-h);
   margin-top:var(--nv-pill-inset);
   padding-inline:clamp(14px, 2vw, 28px);
   border-radius:999px;
+}
+.nv-header[data-header-mode="content"] .nv-header__bar,
+.nv-header:has(.nv-enq.is-open) .nv-header__bar{
   background-color:rgba(250,249,243,.95);
   border-color:rgba(31,31,27,.08);
   box-shadow:0 10px 32px rgba(17,17,15,.14), 0 1px 3px rgba(17,17,15,.08);
@@ -126,10 +130,8 @@
   }
 }
 /* Compact: the crest steps down and the sub-line folds away inside the pill. */
-.nv-header[data-header-mode="content"] .nv-brand img,
-.nv-header:has(.nv-enq.is-open) .nv-brand img{ width:calc(var(--nv-crest) * .8); }
-.nv-header[data-header-mode="content"] .nv-brand__sub,
-.nv-header:has(.nv-enq.is-open) .nv-brand__sub{ max-height:0; opacity:0; }
+.nv-header[data-header-mode="content"] .nv-brand img{ width:calc(var(--nv-crest) * .8); }
+.nv-header[data-header-mode="content"] .nv-brand__sub{ max-height:0; opacity:0; }
 
 /* The menu is a full-screen ivory sheet under the bar, so while it is open
    the bar opens out to meet it edge to edge. */
