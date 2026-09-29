@@ -3,7 +3,7 @@
     "Canonical Creative Writing data; build-site.py and creativewriting.py render every route.",
     "Poem text and stanza boundaries reconciled with the connected original on 2026-09-30.",
     "School and grade belong to individual poems. Unknown fields remain null.",
-    "Month without year is a label, never a chronological date. Legacy routes are empty archive pointers.",
+    "Month without year is a label, never a chronological date. Retired empty monthly routes redirect to the visible school indexes; no page is generated for them.",
     "Source line ranges refer to the readable Drive snapshot. No numeric student identifiers are published.",
     "authorId merges exact case-insensitive names only; unresolved spelling variants remain separate.",
     "downloads contains actual repository files only; an empty list renders no download control."
@@ -26,7 +26,7 @@
       "grades": "Grades 9–12 and IB"
     }
   },
-  "legacyRoutes": [
+  "retiredRoutes": [
     {
       "path": "creative-writing/junior/july-2026",
       "collection": "junior"

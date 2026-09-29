@@ -6,7 +6,21 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/student-life", "destination": "/the-cirs-experience", "permanent": true },
-    { "source": "/student-life.html", "destination": "/the-cirs-experience", "permanent": true }
+    { "source": "/student-life.html", "destination": "/the-cirs-experience", "permanent": true },
+    { "source": "/creative-writing/junior/july-2026", "destination": "/creative-writing/junior", "permanent": true },
+    { "source": "/creative-writing/junior/july-2026.html", "destination": "/creative-writing/junior", "permanent": true },
+    { "source": "/creative-writing/junior/august-2026", "destination": "/creative-writing/junior", "permanent": true },
+    { "source": "/creative-writing/junior/august-2026.html", "destination": "/creative-writing/junior", "permanent": true },
+    { "source": "/creative-writing/junior/september-2026", "destination": "/creative-writing/junior", "permanent": true },
+    { "source": "/creative-writing/junior/september-2026.html", "destination": "/creative-writing/junior", "permanent": true },
+    { "source": "/creative-writing/senior/july-2026", "destination": "/creative-writing/senior", "permanent": true },
+    { "source": "/creative-writing/senior/july-2026.html", "destination": "/creative-writing/senior", "permanent": true },
+    { "source": "/creative-writing/senior/august-2026", "destination": "/creative-writing/senior", "permanent": true },
+    { "source": "/creative-writing/senior/august-2026.html", "destination": "/creative-writing/senior", "permanent": true },
+    { "source": "/creative-writing/senior/september-2026", "destination": "/creative-writing/senior", "permanent": true },
+    { "source": "/creative-writing/senior/september-2026.html", "destination": "/creative-writing/senior", "permanent": true },
+    { "source": "/assets/founder-opening", "destination": "/founder", "permanent": true },
+    { "source": "/assets/founder-opening/index.html", "destination": "/founder", "permanent": true }
   ],
   "headers": [
     {
