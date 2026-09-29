@@ -2173,7 +2173,11 @@
       var f = document.createElement("iframe");
       f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) +
               "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
-      f.title = "The official CIRS film";
+      // A page that names its recording (Theatre's productions) says so;
+      // every other film is the official CIRS film, as before.
+      var named = from && from.getAttribute("data-video-title");
+      f.title = named || "The official CIRS film";
+      box.setAttribute("aria-label", named || "The official CIRS film");
       f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; " +
                 "gyroscope; picture-in-picture; web-share";
       f.setAttribute("allowfullscreen", "");
@@ -2218,6 +2222,9 @@
       t.addEventListener("click", function (e) {
         var id = t.getAttribute("data-video");
         if (!id) return;              // no id: leave the href alone
+        // A named recording is an ordinary link too: a modified click opens
+        // it in a new tab as the browser always would.
+        if (t.hasAttribute("data-video-title") && (e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
         e.preventDefault();
         open(id, t);
       });
