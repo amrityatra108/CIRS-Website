@@ -132,6 +132,11 @@ def main():
             if rel.startswith("assets/"):
                 wanted.add(rel)
 
+    # History imports its scene only when WebGL and desktop motion are useful.
+    # Include that runtime without a preload that would make phones fetch it.
+    if "assets/js/history-cinematic-journey.js" in wanted:
+        wanted.add("assets/js/history-cinematic-world.js")
+
     # The Founder iframe is a self-contained bundle with relative JS imports
     # and texture URLs. Ship its runtime files, not the directory as a file.
     founder_bundle = "assets/founder-opening"

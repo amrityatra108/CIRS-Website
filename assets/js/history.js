@@ -29,19 +29,40 @@
   var items = grid ? $$(".hx-item", grid) : [];
   var filters = $$("[data-hx-filter]");
   var status = $("#hx-archive-status");
+  var search = $("#hx-search"), decade = $("#hx-decade"), period = "all";
+  var searchable = items.map(function (it) { return it.textContent.toLocaleLowerCase(); });
+  var searchControls = $(".hx-search"), filterControls = $(".hx-filters");
+  if (searchControls) searchControls.hidden = false;
+  if (filterControls) filterControls.hidden = false;
+  function filterRecords() {
+    var query = search ? search.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean) : [];
+    var selected = decade ? decade.value : "all", shown = 0;
+    items.forEach(function (it, i) {
+      var on = (period === "all" || it.getAttribute("data-hx-period") === period) &&
+        (selected === "all" || it.getAttribute("data-hx-decade") === selected) &&
+        query.every(function (word) { return searchable[i].includes(word); });
+      it.hidden = !on;
+      if (on) shown++;
+    });
+    if (status) status.textContent = shown + " of " + items.length + " records";
+    var empty = $(".hx-empty"); if (empty) empty.hidden = shown !== 0;
+  }
+  if (search) search.addEventListener("input", filterRecords);
+  if (decade) decade.addEventListener("change", filterRecords);
+  var reset = $("#hx-reset");
+  if (reset) reset.addEventListener("click", function () {
+    search.value = ""; decade.value = "all"; period = "all";
+    filters.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-hx-filter") === "all")); });
+    filterRecords(); search.focus();
+  });
   filters.forEach(function (b) {
     b.addEventListener("click", function () {
-      var key = b.getAttribute("data-hx-filter"), shown = 0;
+      period = b.getAttribute("data-hx-filter");
       filters.forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); });
-      items.forEach(function (it) {
-        var on = key === "all" || it.getAttribute("data-hx-period") === key;
-        it.hidden = !on;
-        if (on) shown++;
-      });
-      if (status) status.textContent = shown + (shown === 1 ? " record" : " records") +
-        (key === "all" ? "" : ": " + b.firstChild.textContent.trim());
+      filterRecords();
     });
   });
+  filterRecords();
 
   /* ==========================================================
      RECORD: one record in its own view

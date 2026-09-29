@@ -38,6 +38,10 @@ AR2025 = ('The school&rsquo;s Annual Report, 7 October 2025 &middot; '
 # build writes them into the page so every image reserves its box before it
 # loads, without the build needing Pillow.
 EXHIBITS = {
+    "supplied-rupee": (640, 480, 1448, 1086),
+    "supplied-opening": (640, 480, 1448, 1086),
+    "supplied-isa": (640, 425, 1600, 1063),
+    "supplied-poland": (640, 427, 1536, 1024),
     "gurudev":          (640, 881, 1400, 1927),
     "noc-1996":         (640, 906, 1400, 1981),
     "kalam-2007":       (640, 921, 1170, 1683),
@@ -78,8 +82,11 @@ EVENTS = [
      "body": "Swami Sahayanandaji travelled the length and breadth of India on foot, making the "
              "initial collection towards the purchase of the land: one rupee from each "
              "individual.",
-     "exhibit": None,
-     "source": PUBLISHED,
+     "exhibit": "supplied-rupee",
+     "alt": "An archival black-and-white photograph of a collection on foot outside a shop",
+     "caption": "A collection on foot. Photograph supplied for the fundraising chapter; "
+                "the date and identities in the photograph are not independently recorded.",
+     "source": PUBLISHED + '; photograph from the <a href="https://drive.google.com/file/d/1hwLnhl-qm21F-NUtLYMaAdZan2G4BESe/view" target="_blank" rel="noopener">supplied school archive</a>',
      "note": "The earlier draft of this page named Pujya Gurudev and Br. Sahaja Chaitanyaji and "
              "said 'one rupee from every household'; it also said the land took 'another ten "
              "years' to procure. The school's published history names Swami Sahayanandaji and "
@@ -125,12 +132,16 @@ EVENTS = [
              "Chidanandaji, President of The Divine Life Society. The plaque at the main "
              "building records that he did so in the presence of Swami Tejomayananda, Head of "
              "Chinmaya Mission, on Thursday, 6 June 1996.",
-     "exhibit": None,
-     "source": PUBLISHED + '; the inauguration plaque at the main building',
+     "exhibit": "supplied-opening",
+     "alt": "The school inauguration ceremony, with the unveiled plaque recording 6 June 1996",
+     "caption": "The inauguration at CIRS. The plaque in the supplied photograph records "
+                "Thursday, 6 June 1996, and names the inaugurator and those in whose presence it took place.",
+     "source": PUBLISHED + '; <a href="https://drive.google.com/file/d/1XvYfF_NTKD1TYHTh5cIyUqWU_FSrGLcM/view" target="_blank" rel="noopener">the inauguration photograph and its plaque</a>',
      "note": "The plaque is legible only in part in a 2018 school photograph on Drive "
              "('bal sevak award.JPG'). A straight photograph of it would make a strong exhibit "
              "for this record; none is in hand. No photograph of the inauguration itself has "
-             "been found."},
+             "been found at that time. A ceremony photograph was supplied on 30 September 2026; "
+             "its legible plaque corroborates the date and occasion. The user approved its use."},
     {"id": "first-school-1996", "when": "June 1996", "period": "early",
      "title": "Ninety-six students, eleven teachers",
      "summary": "96 students in Grades V to VIII, and 11 academic staff.",
@@ -241,7 +252,11 @@ EVENTS = [
      "body": "CIRS received the British Council&rsquo;s International School Award, which "
              "recognises good practice in bringing an international dimension into the "
              "curriculum.",
-     "exhibit": None,
+     "exhibit": "supplied-isa",
+     "alt": "The British Council presents a framed International School Award certificate naming CIRS",
+     "caption": "The British Council&rsquo;s International School Award presentation. "
+                "The supplied photograph names CIRS on the certificate; the photograph date "
+                "and the people pictured are not independently recorded.",
      "source": "The school&rsquo;s own account, supplied for this website; its former website "
                "carried a gallery titled &lsquo;CIRS Receives ISA Award&rsquo;",
      "note": "The year 2011 is from the school-supplied content. The former website's gallery "
@@ -270,7 +285,10 @@ EVENTS = [
              "college in Poland on a shared project, &lsquo;Trends in advertising: the impact "
              "of language and culture on advertising&rsquo;, exchanging videos, worksheets "
              "and advertisements of their own.",
-     "exhibit": None,
+     "exhibit": "supplied-poland",
+     "alt": "Students in a CIRS classroom on a video call with Poland; the whiteboard describes the February 2014 collaboration",
+     "caption": "The CIRS&ndash;Poland Student Collaboration Project. The whiteboard in the "
+                "supplied photograph names the advertising project and dates it February 2014.",
      "source": "The school&rsquo;s newsletter page on the partnership, May 2014, kept from its "
                "former website"},
     {"id": "brainfeed-2017", "when": "12 November 2017", "period": "later",
@@ -537,6 +555,25 @@ BY_ID = {e["id"]: e for e in EVENTS}
 assert len(BY_ID) == len(EVENTS), "every event needs a unique id"
 BY_EXHIBIT = {e["exhibit"]: e for e in EVENTS if e.get("exhibit")}
 for _s in SCENES:
+    if _s['id'] == 'chapter-rupee':
+        _s['plates'] = ['supplied-rupee']
+    if _s['id'] == 'chapter-opening':
+        _s['plates'] = ['supplied-opening']
+    if _s['id'] == 'chapter-first':
+        _s['text'] = [BY_ID['first-school-1996']['summary'],
+                     'On 15 July 1996, Tamil Nadu raised no objection to CBSE affiliation, '
+                     'on one condition: Tamil should be taught as a second language.']
+    if _s['id'] == 'chapter-later':
+        _s['plates'] = ['supplied-isa', 'vision-2012', 'supplied-poland']
+SCENES.append({
+    'id': 'chapter-recent', 'index': '2025', 'year': '2024 &ndash; 2026',
+    'head': 'The next generation.',
+    'text': [BY_ID['report-2025']['summary'], BY_ID['ib-2026']['summary']],
+    'records': ['report-2025', 'ib-2026'],
+    'notes': ['vigyan-goshti-2024', 'results-2025', 'solar-2025', 'ncc-2025',
+              'yoga-2025', 'mun-2025', 'report-2025', 'cbse-2026', 'ib-2026'],
+})
+for _s in SCENES:
     for _id in _s["records"] + _s.get("notes", []):
         assert _id in BY_ID, f"{_s['id']} names an unknown event {_id}"
     for _x in _s.get("plates", []):
@@ -602,8 +639,8 @@ def campus_html(name, cls, eager=False):
 
 
 def index_html():
-    items = "".join(f'<li><a href="#{s["id"]}" data-hj-go="{s["id"]}">{s["index"]}</a></li>'
-                    for s in SCENES if s["index"])
+    items = "".join(f'<li><a href="#{s["id"]}" data-hj-go="{s["id"]}" aria-label="{plain(s["year"] + ": " + s["head"])}">{s["index"] or "Opening class"}</a></li>'
+                    for s in SCENES)
     return (f'<nav class="hj-index" aria-label="Moments in the history"><ol>{items}'
             f'<li><a href="#chapter-now" data-hj-go="chapter-now">Now</a></li></ol></nav>')
 
@@ -627,17 +664,19 @@ def scenes_html():
                 for i in s["notes"]) + '</ol>')
         links = "".join(f'<a class="hj-more" href="{href}">{label}</a>'
                         for label, href in s.get("links", []))
-        more = "" if s.get("notes") else record_link(s["records"][0])
+        more = record_link(s["records"][0])
         plates = "".join(plate_html(x, eager=(n == 0)) for x in s.get("plates", []))
         quiet = " hj-scene--quiet" if s.get("quiet") else ""
         out.append(
             f'<section class="hj-scene{quiet}" id="{s["id"]}" data-hj-scene aria-labelledby="{s["id"]}-h">'
-            f'<div class="hj-text">'
+            f'<div class="hj-text" tabindex="-1">'
             f'<p class="hj-year">{s["year"]}</p>{big}'
             f'<h2 class="hj-head" id="{s["id"]}-h">{s["head"]}</h2>'
             f'{paras}{facts}{notes}'
             f'<p class="hj-actions">{more}{links}</p>'
+            f'<p class="hj-source">{BY_ID[s["records"][0]]["source"]}</p>'
             f'</div>'
+            + ('<div class="hj-medallion" aria-hidden="true"><span>&#8377;1</span></div><p class="hj-illustration">Illustrative medallion</p>' if s['id'] == 'chapter-rupee' else '')
             + (f'<div class="hj-plates">{plates}</div>' if plates else "")
             + '</section>')
     return "\n".join(out)
@@ -683,19 +722,33 @@ def archive_html():
             thumb = (f'<span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true">'
                      f'<span>{e["when"]}</span></span>')
             full = ""
+        disclosure = len(e['body']) > 420
+        detail_start = '<details class="hx-disclosure"><summary>Expand this account</summary>' if disclosure else ''
+        detail_end = '</details>' if disclosure else ''
         out.append(
-            f'<li class="hx-item" data-hx-period="{e["period"]}">'
+            f'<li class="hx-item" data-hx-period="{e["period"]}" data-hx-decade="{decade(e)}">'
             f'<article class="hx-rec" id="record-{e["id"]}" aria-labelledby="record-{e["id"]}-t">'
             f'<button type="button" class="hx-card" data-hx-open="{e["id"]}" aria-haspopup="dialog">'
             f'{thumb}<span class="hx-card__when">{e["when"]}</span>'
-            f'<span class="hx-card__title" id="record-{e["id"]}-t">{e["title"]}</span></button>'
-            f'<div class="hx-rec__detail">'
+            f'<span class="hx-card__title" id="record-{e["id"]}-t">{e["title"]}</span>'
+            f'<span class="hx-card__summary">{e["summary"]}</span><span class="hx-card__open">Read record</span></button>'
+            f'{detail_start}<div class="hx-rec__detail">'
             f'<p class="hx-rec__meta"><span>{e["when"]}</span> &middot; {periods[e["period"]]}</p>'
             f'<h3 class="hx-rec__title">{e["title"]}</h3>'
             f'{full}<p class="hx-rec__body">{e["body"]}</p>'
             f'<p class="hx-rec__source"><span>Source</span> {e["source"]}</p>'
-            f'</div></article></li>')
+            f'</div>{detail_end}</article></li>')
     return "\n".join(out)
+
+
+def decade(event):
+    import re
+    year = int(re.search(r'(?:19|20)\d{2}', html.unescape(event['when'])).group())
+    return str(year // 10 * 10)
+
+
+def decade_options():
+    return ''.join(f'<option value="{d}">{d}s</option>' for d in sorted({decade(e) for e in EVENTS}))
 
 
 def expand(content):
@@ -704,6 +757,7 @@ def expand(content):
                    .replace("{{HISTORY_NOW}}", now_html())
                    .replace("{{HISTORY_FULL}}", full_html())
                    .replace("{{HISTORY_FILTERS}}", filters_html())
+                   .replace("{{HISTORY_DECADES}}", decade_options())
                    .replace("{{HISTORY_ARCHIVE}}", archive_html())
                    .replace("{{HISTORY_COUNT}}", str(len(EVENTS))))
 

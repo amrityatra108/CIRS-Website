@@ -2,60 +2,77 @@
      Everything dated on this page is written from tools/history.py, which
      records where each event comes from. Edit the history there, not here.
      The journey below is one document in reading order: every moment's year,
-     heading, text and photographs are real markup. assets/js/history-journey.js
-     adds the camera path over it (assets/js/history-world.js) on a wide window
+     heading, text and photographs are real markup. assets/js/history-cinematic-journey.js
+     adds the camera path over it (assets/js/history-cinematic-world.js) on a wide window
      with motion allowed; a phone, reduced motion, a failed WebGL context or no
      scripting at all read the same moments as an editorial column. -->
 
+<header class="hj-hero" id="top" data-header-theme="dark">
+  <img class="hj-hero__image" src="assets/img/forest-air.jpg" width="1600" height="900"
+       alt="The CIRS campus surrounded by forest below the Western Ghats" fetchpriority="high" decoding="async">
+  <div class="hj-hero__text">
+    <p class="hj-label">The making of CIRS</p>
+    <h1><span class="hj-line"><span>A vision.</span></span><span class="hj-line"><span>A school.</span></span><span class="hj-line"><span>A living legacy.</span></span></h1>
+    <p class="hj-hero__intro">Imagined by Pujya Gurudev Swami Chinmayananda. Built through the generosity of many. Opened on 6 June 1996.</p>
+    <div class="hj-hero__links"><a href="#chapters" data-hj-go="chapter-idea">Explore the history</a><a href="#timeline">View all records</a></div>
+  </div>
+  <p class="hj-hero__caption">The campus today. The story begins in the 1970s.</p>
+  <span class="hj-hero__scroll" aria-hidden="true">Scroll to explore <span>&darr;</span></span>
+</header>
+
+<section class="hj-expansion" aria-labelledby="hj-expansion-title">
+  <div class="hj-expansion__stage">
+    <h2 id="hj-expansion-title"><span class="hj-expansion__left">The beginning</span><span class="hj-expansion__right">of CIRS</span></h2>
+    <figure class="hj-expansion__image">
+      <img src="assets/img/history/gurudev-lg.jpg" width="1400" height="1927" alt="Pujya Gurudev Swami Chinmayananda, from the school archive" loading="lazy" decoding="async">
+      <figcaption>A vision for an international school in India. Portrait date unrecorded.</figcaption>
+    </figure>
+    <p class="hj-expansion__note">An idea that would become a place.</p>
+  </div>
+</section>
+
 <div class="hj" id="chapters">
-  <canvas class="hj-canvas" aria-hidden="true"></canvas>
-
-  <header class="hj-intro" id="top">
-    <p class="hj-intro__mark">Chinmaya International Residential School</p>
-    <h1 class="hj-intro__title">School History</h1>
-    <p class="hj-intro__year" aria-hidden="true">1970s</p>
-    <p class="hj-intro__lede">From Pujya Gurudev&rsquo;s idea to the school today.
-      Every date here carries its source.</p>
-    <p class="hj-intro__skip"><a href="#timeline">Go straight to all {{HISTORY_COUNT}} records</a></p>
-    <p class="hj-intro__cue" aria-hidden="true">Scroll to begin</p>
-  </header>
-
+  <div class="hj-stage" aria-hidden="true">
+    <canvas class="hj-canvas"></canvas>
+    <svg class="hj-blinds" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs><mask id="hj-opening-mask" maskUnits="userSpaceOnUse"><rect class="hj-mask-base" fill="black"></rect><g class="hj-mask-strips"></g></mask></defs>
+      <image href="assets/img/history/supplied-opening-lg.jpg" mask="url(#hj-opening-mask)" preserveAspectRatio="xMidYMid meet"></image>
+    </svg>
+    <div class="hj-stage__shade"></div>
+    <p class="hj-stage__caption"></p>
+  </div>
   {{HISTORY_INDEX}}
-
 {{HISTORY_SCENES}}
-
-  <section class="hj-scene hj-scene--now" id="chapter-now" data-hj-scene aria-labelledby="chapter-now-h">
-    <div class="hj-text">
-      <p class="hj-year">Coimbatore</p>
-      <h2 class="hj-head" id="chapter-now-h">The school now.</h2>
-    </div>
-    <div class="hj-plates">{{HISTORY_NOW}}</div>
-  </section>
-
-  <section class="hj-end" aria-labelledby="hj-end-title">
-    <div class="hj-end__stage"><div class="hj-end__frame">{{HISTORY_FULL}}</div></div>
-    <div class="hj-end__text">
-      <h2 class="hj-end__span" id="hj-end-title">1970s <span aria-hidden="true">&rarr;</span><span class="sr-only">to</span> the present</h2>
-      <p class="hj-end__line">CIRS opened in 1996 with 96 students and 11 academic staff. In its
-        29th year, 2025, it reported 596 students, from 16 Indian states and 16 countries.</p>
-      <p class="hj-end__links"><a href="#timeline">All {{HISTORY_COUNT}} records, with their sources</a>
-        <a href="#film">The school&rsquo;s film, Through the Years</a></p>
-    </div>
-  </section>
 </div>
+
+<section class="hj-present" id="chapter-now" aria-labelledby="chapter-now-h" data-header-theme="dark">
+  {{HISTORY_FULL}}
+  <div class="hj-present__text" tabindex="-1">
+    <p class="hj-label">CIRS today</p>
+    <h2 id="chapter-now-h">The story continues.</h2>
+    <p>From the first 96 students to the generations who followed. A school, and a history still being written.</p>
+    <div class="hj-hero__links"><a href="the-cirs-experience.html">The CIRS Experience</a><a href="admissions.html">Admissions</a></div>
+  </div>
+</section>
 
 <section class="hx-archive" id="timeline" aria-labelledby="hx-archive-title">
   <div class="wrap">
     <div class="hx-archive__head">
       <p class="hx-label">The complete archive</p>
-      <h2 class="hx-archive__title" id="hx-archive-title">All milestones.</h2>
+      <h2 class="hx-archive__title" id="hx-archive-title">The complete record.</h2>
       <p class="hx-archive__lead">{{HISTORY_COUNT}} records in date order, each with its source.
         Choose one to read it in full.</p>
     </div>
-    <div class="hx-filters" role="group" aria-label="Show records from">
+    <div class="hx-search" hidden>
+      <label>Search the history<input type="search" id="hx-search" placeholder="A name, a year, a milestone&hellip;" autocomplete="off"></label>
+      <label>Decade<select id="hx-decade"><option value="all">Every decade</option>{{HISTORY_DECADES}}</select></label>
+      <button type="button" id="hx-reset">Reset</button>
+    </div>
+    <div class="hx-filters" role="group" aria-label="Show records from" hidden>
       {{HISTORY_FILTERS}}
     </div>
-    <p class="hx-archive__status sr-only" id="hx-archive-status" aria-live="polite"></p>
+    <p class="hx-archive__status" id="hx-archive-status" aria-live="polite"></p>
+    <p class="hx-empty" hidden>No matching records. Try another term or reset the filters.</p>
     <ol class="hx-grid" id="hx-grid">
 {{HISTORY_ARCHIVE}}
     </ol>

@@ -202,14 +202,14 @@ PAGES = {
         "description": "The CIRS archive: Pujya Gurudev's idea, the land bought one rupee at a "
                        "time, the inauguration on 6 June 1996 and the milestones since, each "
                        "with its source.",
-        # No banner and no hero. The page opens on a near-dark field with the
-        # first year, then tells the history as one continuous journey — a
-        # camera path through the records on a wide window, an editorial
-        # column everywhere else — and ends on the complete archive. Every record is written from tools/history.py,
+        # A photographic opening, typographic expansion, finite archival
+        # camera path and complete record. HTML provides the normal-flow
+        # mobile, reduced-motion and graphics-failure experience.
+        # Every record is written from tools/history.py,
         # which names each one's source; tools/make-history.py cuts the images.
         "banner": None,
         "sheet": "history",
-        "cache_suffix": "-history-2",
+        "cache_suffix": "-history-cinematic-3",
         # The chapters carry their own visible index and "View all
         # milestones", so the floating "On this page" control would repeat it.
         "jump": False,
@@ -2457,10 +2457,11 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "curriculum":
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-2" defer></script>')
     if slug == "school-history":
-        parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}" defer></script>')
-        # The journey's controller. It imports Three.js (history-world.js) only
+        parts[0] = parts[0].replace('</head>', f'<link rel="stylesheet" href="assets/css/history-cinematic.css?{CACHE_BUST}">\n</head>')
+        parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}-cinematic-3" defer></script>')
+        # The journey's controller imports Three.js only
         # on a window wide enough for the 3D path, so a phone never fetches it.
-        parts.append(f'<script type="module" src="assets/js/history-journey.js?{CACHE_BUST}"></script>')
+        parts.append(f'<script type="module" src="assets/js/history-cinematic-journey.js?{CACHE_BUST}-3"></script>')
     if slug == "our-laurels":
         parts.append(f'<script src="assets/js/laurels.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):
