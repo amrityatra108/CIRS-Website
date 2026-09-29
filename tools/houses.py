@@ -7,6 +7,8 @@ Stable vasishtha URL fragments retain incoming links; visible name is Vasishta.
 The unrelated legacy Sports presentation lives in sports_house_history.py.
 """
 
+import sakshi  # the house captains' pledges, each printed in its own house's chapter
+
 HOUSES = [
     dict(slug='vasishtha', name='Vasishta', colour='Red', number='01'),
     dict(slug='valmiki', name='Valmiki', colour='Yellow', number='02'),
@@ -226,6 +228,7 @@ def chapters_html():
   <span class="house-signature-line" aria-hidden="true"></span>
   <div class="house-spread__body"><figure><div class="house-photo-mask">{photo_html(path, alt)}</div><figcaption>{cap}</figcaption></figure>
   <div class="house-spread__copy"><p><span class="house-copy-block">{blocks}</span></p><a href="#gallery-{h['slug']}">View {h['name']} photographs <span aria-hidden="true">↗</span></a></div></div>
+  {sakshi.pledge_html(h['slug'], sizes="(max-width: 860px) 100vw, 40vw", extra="cp--flip" if i % 2 else "")}
 </article>''')
     return '\n'.join(out)
 

@@ -202,3 +202,20 @@ body.blog{
   .art__breadcrumb a::after,.art__rail a::after{content:"";position:absolute;inset:-10px -6px}
   .art__rail a{margin-bottom:20px}
 }
+
+/* The school's bulletin, written into news articles (tools/sakshi.py):
+   lists for schedules and results, and photographs set into the text. The
+   figures keep the size the school supplied, so a small one is not stretched. */
+.art__body ul{margin:0 0 1.4em;padding:0;list-style:none;border-top:1px solid var(--art-rule)}
+.art__body ul li{
+  margin:0;padding:.7em 0 .7em 1.1em;position:relative;
+  border-bottom:1px solid var(--art-rule);
+  color:var(--art-soft);font-size:clamp(16px, 1.25vw, 18px);line-height:1.55;
+  overflow-wrap:break-word;
+}
+.art__body ul li::before{content:"";position:absolute;left:0;top:1.28em;width:5px;height:5px;border-radius:50%;background:var(--art-gold)}
+.art__body ul.art__links li::before{background:var(--art-ink)}
+.art__body .art__links a,.art__body p a{color:var(--art-ink);text-decoration:underline;text-underline-offset:4px}
+.art__body strong{color:var(--art-ink);font-weight:600}
+.art__fig{margin:1.8em 0}
+.art__fig img{display:block;width:auto;max-width:100%;height:auto;border-radius:6px;background:var(--paper-2)}
