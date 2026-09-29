@@ -473,9 +473,14 @@ def filter_html(active: str) -> str:
     targets = {"all": "creative-writing.html", "junior": "creative-writing/junior.html",
                "senior": "creative-writing/senior.html"}
     names = {"all": "All writing", "junior": "Junior School", "senior": "Senior School"}
+    # The current-page marker is built outside the f-string: a backslash in an
+    # f-string expression is a syntax error before Python 3.12, and this file
+    # would not import at all on 3.11 — which is what the school's own machines
+    # and most shared hosts still run.
+    current = ' aria-current="page"'
     links = "\n".join(
         f'      <a class="cw-filter__link" href="{targets[c]}#editions"'
-        f'{" aria-current=\"page\"" if c == active else ""}>{names[c]}</a>'
+        f'{current if c == active else ""}>{names[c]}</a>'
         for c in COLLECTIONS)
     return f'''    <nav class="cw-filter" aria-label="Collections">
 {links}

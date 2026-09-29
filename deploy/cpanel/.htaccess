@@ -1,0 +1,114 @@
+# ============================================================
+# Chinmaya International Residential School
+# Apache / cPanel configuration for the STAGING site
+#   https://new.cirschool.org/
+#
+# Upload this file into the document root of the new.cirschool.org
+# subdomain, alongside index.html. It does nothing to any other
+# domain on the account: an .htaccess only governs the directory it
+# sits in and the directories below it, so the existing site under
+# public_html/ is untouched by it.
+#
+# What this replaces. The site is hosted on Vercel today, and
+# vercel.json does five things Apache has to be told about instead:
+# cleanUrls, trailingSlash:false, one 301 redirect, the noindex
+# header, and serving 404.html for an unknown path. Each is below,
+# in that order.
+# ============================================================
+
+Options -Indexes
+DirectoryIndex index.html
+
+# ---------- 1. Keep the staging site out of Google ----------
+# vercel.json sets X-Robots-Tag: noindex for the whole site, and
+# robots.txt in the upload disallows everything. Both are deliberate:
+# the pages still carry bracketed placeholders that must not be
+# indexed under the school's name. Keep BOTH until the real launch.
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+
+# ---------- 2. The 404 page ----------
+# 404.html is built like any other page and expects to be served from
+# the root, so its links are written root-relative.
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ---------- 3. The one content redirect ----------
+  # Student Life was renamed. Both hosts carry this; without it, a
+  # link anyone saved to the old name dead-ends.
+  RewriteRule ^student-life(\.html)?$ /the-cirs-experience.html [R=301,L]
+
+  # ---------- 4. Strip a trailing slash ----------
+  # Not cosmetic. Every page reaches its stylesheets, scripts and
+  # photographs by RELATIVE path, so /news/ makes the browser ask for
+  # /news/assets/css/cirs.css and the page renders unstyled while
+  # still returning 200. Vercel does this with trailingSlash:false.
+  # Real directories are excluded, so assets/founder-opening/ — the
+  # one directory that is served as a page — still works.
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+  # ---------- 5. Extensionless URLs (Vercel's cleanUrls) ----------
+  # The site's own links all end in .html, so the site works without
+  # this rule. It is here so that any address copied from the Vercel
+  # preview — /admissions, /curriculum/ib-diploma — still resolves.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+)$ /$1.html [L]
+</IfModule>
+
+# ---------- 6. Media types ----------
+# Shared hosts on older Apache builds sometimes serve .webp and
+# .woff2 as octet-stream, which makes photographs fail to display and
+# the four self-hosted typefaces fall back to a system serif.
+<IfModule mod_mime.c>
+  AddType image/webp                    .webp
+  AddType image/svg+xml                 .svg
+  AddType font/woff2                    .woff2
+  AddType video/mp4                     .mp4
+  AddType video/webm                    .webm
+  AddType audio/mp4                     .m4a
+  AddType application/pdf               .pdf
+  AddType model/gltf-binary             .glb
+  AddType application/manifest+json     .webmanifest
+</IfModule>
+
+# ---------- 7. Compression ----------
+# Only the text formats. Photographs, video and PDFs are already
+# compressed and re-compressing them wastes CPU for nothing.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ---------- 8. Caching ----------
+# Every stylesheet, script and photograph is requested with a ?b=NN
+# cache-busting query string that changes when the file changes, so a
+# long cache on assets is safe. HTML must NOT be cached, or a rebuild
+# is invisible to anyone who has already visited.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                        "access plus 1 month"
+  ExpiresByType text/html               "access plus 0 seconds"
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType font/woff2              "access plus 1 year"
+  ExpiresByType video/mp4               "access plus 1 year"
+  ExpiresByType video/webm              "access plus 1 year"
+  ExpiresByType application/pdf         "access plus 1 month"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
