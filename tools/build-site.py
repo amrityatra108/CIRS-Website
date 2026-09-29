@@ -41,6 +41,7 @@ import documents as docs
 import blogposts
 import newsarticles
 import cvpnews
+import sakshi
 import crossroads
 import mathchallenge
 import creativewriting
@@ -163,7 +164,7 @@ PAGES = {
         # The journal supplies its own masthead, feature and archive. Its
         # opening is readable immediately, without the shared video hero.
         "sheet": "news-journal",
-        "cache_suffix": "-journal-11",
+        "cache_suffix": "-journal-12",
         "litehead": True,
         "uc": False,
     },
@@ -357,7 +358,9 @@ PAGES = {
         # section, so it takes no shared closing scene (see below), and nothing
         # on it is a placeholder, so no under-construction note.
         "sheet": "student-life",
-        "cache_suffix": "-experience-1",
+        "cache_suffix": "-experience-2",
+        # The School Deans' pledge (tools/sakshi.py); sheet: assets/css/council.css.
+        "council": True,
         "uc": False,
     },
     "spiritual-life": {
@@ -376,7 +379,9 @@ PAGES = {
         # are bracketed placeholders, so the under-construction note stays.
         "banner": None,
         "sheet": "spiritual",
-        "cache_suffix": "-spiritual-three-1",
+        "cache_suffix": "-spiritual-three-2",
+        # The Cultural Secretaries' pledge (tools/sakshi.py).
+        "council": True,
         "closing": ("Come and see", "the day for yourself",
                     [("Plan a visit", "admissions.html#visit", "closing-scene__admissions"),
                      ("The CIRS experience", "the-cirs-experience.html", "closing-scene__contact"),
@@ -387,7 +392,9 @@ PAGES = {
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
         "sheet": "sports",
-        "cache_suffix": "-sports-3",
+        "cache_suffix": "-sports-4",
+        # The Sports Secretaries' pledge (tools/sakshi.py).
+        "council": True,
         # No banner from the shared builder. Like CIRS Captures, this page
         # opens on a film the reader scrubs — five seconds from a wet ball to
         # the field at sunrise under the Ghats — and the h1 is the one line
@@ -417,7 +424,9 @@ PAGES = {
                        "and a dated archive of published inter-house results.",
         "banner": None,
         "sheet": "houses",
-        "cache_suffix": "-houses-6",
+        "cache_suffix": "-houses-7",
+        # Each house's captains' pledge (tools/sakshi.py, printed by tools/houses.py).
+        "council": True,
         "uc": False,
         "jump": False,
     },
@@ -1065,6 +1074,24 @@ def esc(text, attr=False):
     return out.replace('"', "&quot;") if attr else out
 
 
+def news_block_html(art, kind, t):
+    """One block of a written-for-this-site news article."""
+    if kind == "h":
+        return f"        <h2>{esc(t)}</h2>"
+    if kind == "ul":
+        return ("        <ul>\n" + "\n".join(f"          <li>{esc(line)}</li>" for line in t)
+                + "\n        </ul>")
+    if kind == "html":
+        return f"        {t}"
+    if kind == "fig":
+        f = art["inline"][t]
+        return (f'        <figure class="art__fig">\n'
+                f'          <img src="{esc(f["src"], attr=True)}" alt="{esc(f["alt"], attr=True)}" '
+                f'width="{f["w"]}" height="{f["h"]}" loading="lazy" decoding="async">\n'
+                f'        </figure>')
+    return f"        <p>{esc(t)}</p>"
+
+
 def news_article_html(page):
     """A report the school published on one of its own earlier sites.
 
@@ -1085,10 +1112,11 @@ def news_article_html(page):
                  f'    </figure>\n\n')
 
     if art.get("blocks"):
-        # Written for this site from a school report (tools/cvpnews.py):
-        # paragraphs under a few plain headings.
-        body = "\n".join(f"        <h2>{esc(t)}</h2>" if kind == "h" else f"        <p>{esc(t)}</p>"
-                         for kind, t in art["blocks"])
+        # Written for this site from a school report (tools/cvpnews.py) or from
+        # the school's bulletin (tools/sakshi.py): paragraphs under a few plain
+        # headings. The bulletin's stories may also carry lists, a photograph
+        # set into the text ("fig") and markup the module wrote itself ("html").
+        body = "\n".join(news_block_html(art, kind, t) for kind, t in art["blocks"])
     else:
         body = "\n".join(f"        <p>{esc(p)}</p>" for p in art["paragraphs"])
 
@@ -1123,6 +1151,15 @@ def news_article_html(page):
                 f'      <strong>The school&rsquo;s CVP report,<br>{esc(cvpnews.TERM)}</strong>\n'
                 + (f'      <p>{esc(art["who"])}</p>\n' if art.get("who") else "") +
                 f'      <a href="news.html#term">The term in review</a>\n'
+                f'      <a href="news.html">All CIRS news</a>\n'
+                f'    </aside>\n')
+    elif art.get("bulletin"):
+        edition = "From Chinmaya Sakshi, October 2026"
+        rail = (f'    <aside class="art__rail" aria-label="About this report">\n'
+                f'      <p>From the school&rsquo;s bulletin</p>\n'
+                f'      <strong>{esc(sakshi.ISSUE)},<br>{esc(sakshi.ISSUE_LINE)}</strong>\n'
+                + (f'      <p>{esc(art["who"])}</p>\n' if art.get("who") else "") +
+                f'      <a href="news.html#sakshi">More from the bulletin</a>\n'
                 f'      <a href="news.html">All CIRS news</a>\n'
                 f'    </aside>\n')
     else:
@@ -1966,6 +2003,13 @@ def build(slug, page):
             "</head>",
             f'<link rel="stylesheet" href="assets/css/{sheet}.css?{CACHE_BUST}">\n</head>')
 
+    if page.get("council"):
+        # The Student Council's pledges (tools/sakshi.py) share one sheet; each
+        # page sets the tokens for its own ground in it.
+        head = head.replace(
+            "</head>",
+            f'<link rel="stylesheet" href="assets/css/council.css?{CACHE_BUST}">\n</head>')
+
     if slug == "spiritual-life":
         # A synchronous gate establishes the optional scene before first paint.
         # No script or a failed module leaves a readable photographic opening.
@@ -2354,7 +2398,16 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "news":
         # The term in review, and its entries in the archive: tools/cvpnews.py.
         content = (content.replace("{{NEWS_TERM}}", cvpnews.term_html())
-                          .replace("{{NEWS_TERM_ARCHIVE}}", cvpnews.archive_html()))
+                          .replace("{{NEWS_TERM_ARCHIVE}}", cvpnews.archive_html())
+                          .replace("{{NEWS_SAKSHI}}", sakshi.section_html())
+                          .replace("{{NEWS_SAKSHI_ARCHIVE}}", sakshi.archive_html()))
+    if "{{COUNCIL_" in content:
+        # The Student Council's pledges, each printed on the page of its group.
+        content = (content.replace("{{COUNCIL_DEANS}}", sakshi.pledge_html("deans"))
+                          .replace("{{COUNCIL_GROUP}}", sakshi.group_photo_html())
+                          .replace("{{COUNCIL_LINKS}}", sakshi.links_html())
+                          .replace("{{COUNCIL_CULTURAL}}", sakshi.pledge_html("cultural", extra="cp--flip"))
+                          .replace("{{COUNCIL_SPORTS}}", sakshi.pledge_html("sports")))
     if slug == "our-results":
         content = (content.replace("{{RESULTS_REGIONS}}", results_regions_html())
                           .replace("{{RESULTS_FILTERS}}", results_filters_html())
@@ -2498,13 +2551,15 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
 # not in MENU — the Blog is how a reader reaches them.
 # The school's own news reports, one page each. They are not in MENU — the
 # News page is how a reader reaches them, exactly as the Blog is for articles.
-for _art in newsarticles.ARTICLES + cvpnews.ARTICLES:
+for _art in newsarticles.ARTICLES + cvpnews.ARTICLES + sakshi.ARTICLES:
     PAGES[_art["slug"]] = {
         "nav": esc(_art["title"]),
         "title": esc(_art["title"], attr=True) + " | CIRS News",
         "description": esc((_art["dek"] or _art["title"])[:180], attr=True),
         "sheet": "blog",
-        "cache_suffix": "-news-archive-1",
+        # The bulletin's stories need blog.css's list and figure rules, which
+        # earlier archived reports do not, so they carry a suffix of their own.
+        "cache_suffix": "-sakshi-1" if _art.get("bulletin") else "-news-archive-1",
         "uc": False,
         "jump": False,
         # An archived report opens on paper like a Blog article does, so the

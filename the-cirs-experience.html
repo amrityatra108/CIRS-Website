@@ -24,14 +24,14 @@
 <meta name="twitter:title" content="The CIRS experience">
 <meta name="twitter:description" content="Residential life at CIRS: one school day for Junior and Senior School, side by side, and the hundred-acre campus it happens on.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preload" href="assets/js/navigation.js?b=115-experience-1-core-3" as="script" fetchpriority="high">
+<link rel="preload" href="assets/js/navigation.js?b=115-experience-2-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=115-experience-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=115-experience-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=115-experience-1-lightbox-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=115-experience-2">
+<link rel="stylesheet" href="assets/css/cirs.css?b=115-experience-2">
+<link rel="stylesheet" href="assets/css/pages.css?b=115-experience-2-lightbox-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -40,10 +40,11 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/student-life.css?b=115-experience-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=115-experience-1">
-<link rel="stylesheet" href="assets/css/footer.css?b=115-experience-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=115-experience-1-nav-4">
+<link rel="stylesheet" href="assets/css/student-life.css?b=115-experience-2">
+<link rel="stylesheet" href="assets/css/council.css?b=115-experience-2">
+<link rel="stylesheet" href="assets/css/typography.css?b=115-experience-2">
+<link rel="stylesheet" href="assets/css/footer.css?b=115-experience-2-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=115-experience-2-nav-4">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -276,7 +277,7 @@
   </div>
 </div>
 <main id="main">
-<script src="assets/js/navigation.js?b=115-experience-1-core-3"></script>
+<script src="assets/js/navigation.js?b=115-experience-2-core-3"></script>
 <nav class="jump" aria-label="On this page">
   <details class="jump__details">
     <summary class="jump__toggle" title="On this page">
@@ -287,6 +288,7 @@
       <p aria-hidden="true">On this page</p>
       <a href="#day">The same rhythm, at different times.</a>
       <a href="#life-together">A campus that never really stops.</a>
+      <a href="#student-council">The Student Council, in its own words.</a>
       <a href="#beyond">Life beyond the timetable.</a>
       <a href="#campus">Life on campus at a glance.</a>
       <a href="#night">One campus goes quiet, an hour apart.</a>
@@ -300,8 +302,8 @@
      filled from there by tools/build-site.py. -->
 <section class="xh" id="top" aria-labelledby="xh-title" data-header-theme="dark">
   <picture class="xh__photo">
-    <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/experience/hero-tall-720.webp?b=115-experience-1 720w, assets/img/experience/hero-tall-1080.webp?b=115-experience-1 1080w" sizes="100vw">
-    <img src="assets/img/experience/hero-wide-1600.webp?b=115-experience-1" srcset="assets/img/experience/hero-wide-960.webp?b=115-experience-1 960w, assets/img/experience/hero-wide-1600.webp?b=115-experience-1 1600w, assets/img/experience/hero-wide-2400.webp?b=115-experience-1 2400w" sizes="100vw" width="1600" height="1067" alt="CIRS students running together across the athletic field, trees behind them" fetchpriority="high" decoding="async">
+    <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/experience/hero-tall-720.webp?b=115-experience-2 720w, assets/img/experience/hero-tall-1080.webp?b=115-experience-2 1080w" sizes="100vw">
+    <img src="assets/img/experience/hero-wide-1600.webp?b=115-experience-2" srcset="assets/img/experience/hero-wide-960.webp?b=115-experience-2 960w, assets/img/experience/hero-wide-1600.webp?b=115-experience-2 1600w, assets/img/experience/hero-wide-2400.webp?b=115-experience-2 2400w" sizes="100vw" width="1600" height="1067" alt="CIRS students running together across the athletic field, trees behind them" fetchpriority="high" decoding="async">
   </picture>
   <div class="xh__shade" aria-hidden="true"></div>
   <div class="wrap xh__inner">
@@ -327,7 +329,7 @@
     <ol class="xd__phases">
     <li class="xp" id="day-rouser" data-event="0" data-scene="jog" data-short="Rouser">
       <figure class="xp__photo" data-scene="jog">
-        <img src="assets/img/experience/jog-wide-1280.webp?b=115-experience-1" srcset="assets/img/experience/jog-wide-800.webp?b=115-experience-1 800w, assets/img/experience/jog-wide-1280.webp?b=115-experience-1 1280w, assets/img/experience/jog-wide-1920.webp?b=115-experience-1 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
+        <img src="assets/img/experience/jog-wide-1280.webp?b=115-experience-2" srcset="assets/img/experience/jog-wide-800.webp?b=115-experience-2 800w, assets/img/experience/jog-wide-1280.webp?b=115-experience-2 1280w, assets/img/experience/jog-wide-1920.webp?b=115-experience-2 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
         <figcaption>Jogging on the campus road, past the signpost to the Annakshetra and the residences</figcaption>
       </figure>
       <div class="xp__text">
@@ -363,7 +365,7 @@
     </li>
     <li class="xp" id="day-spiritual-class" data-event="1" data-scene="spiritual-hall" data-short="Spiritual class">
       <figure class="xp__photo" data-scene="spiritual-hall">
-        <img src="assets/img/experience/spiritual-hall-wide-1280.webp?b=115-experience-1" srcset="assets/img/experience/spiritual-hall-wide-800.webp?b=115-experience-1 800w, assets/img/experience/spiritual-hall-wide-1280.webp?b=115-experience-1 1280w, assets/img/experience/spiritual-hall-wide-1600.webp?b=115-experience-1 1600w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
+        <img src="assets/img/experience/spiritual-hall-wide-1280.webp?b=115-experience-2" srcset="assets/img/experience/spiritual-hall-wide-800.webp?b=115-experience-2 800w, assets/img/experience/spiritual-hall-wide-1280.webp?b=115-experience-2 1280w, assets/img/experience/spiritual-hall-wide-1600.webp?b=115-experience-2 1600w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
         <figcaption>In the hall beneath Pujya Gurudev&rsquo;s portrait</figcaption>
       </figure>
       <div class="xp__text">
@@ -395,7 +397,7 @@
     </li>
     <li class="xp" id="day-breakfast" data-event="2" data-scene="onam-lunch" data-short="Breakfast">
       <figure class="xp__photo" data-scene="onam-lunch">
-        <img src="assets/img/experience/onam-lunch-wide-1280.webp?b=115-experience-1" srcset="assets/img/experience/onam-lunch-wide-800.webp?b=115-experience-1 800w, assets/img/experience/onam-lunch-wide-1280.webp?b=115-experience-1 1280w, assets/img/experience/onam-lunch-wide-1920.webp?b=115-experience-1 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
+        <img src="assets/img/experience/onam-lunch-wide-1280.webp?b=115-experience-2" srcset="assets/img/experience/onam-lunch-wide-800.webp?b=115-experience-2 800w, assets/img/experience/onam-lunch-wide-1280.webp?b=115-experience-2 1280w, assets/img/experience/onam-lunch-wide-1920.webp?b=115-experience-2 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
         <figcaption>Onam lunch in the dining hall</figcaption>
       </figure>
       <div class="xp__text">
@@ -427,7 +429,7 @@
     </li>
     <li class="xp" id="day-assembly" data-event="3" data-scene="prayer-hall" data-short="Assembly">
       <figure class="xp__photo" data-scene="prayer-hall">
-        <img src="assets/img/experience/prayer-hall-wide-1280.webp?b=115-experience-1" srcset="assets/img/experience/prayer-hall-wide-800.webp?b=115-experience-1 800w, assets/img/experience/prayer-hall-wide-1280.webp?b=115-experience-1 1280w, assets/img/experience/prayer-hall-wide-1920.webp?b=115-experience-1 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
+        <img src="assets/img/experience/prayer-hall-wide-1280.webp?b=115-experience-2" srcset="assets/img/experience/prayer-hall-wide-800.webp?b=115-experience-2 800w, assets/img/experience/prayer-hall-wide-1280.webp?b=115-experience-2 1280w, assets/img/experience/prayer-hall-wide-1920.webp?b=115-experience-2 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
         <figcaption>Prayer in the hall</figcaption>
       </figure>
       <div class="xp__text">
@@ -459,7 +461,7 @@
     </li>
     <li class="xp" id="day-classes" data-event="4" data-scene="classroom" data-short="Classes">
       <figure class="xp__photo" data-scene="classroom">
-        <img src="assets/img/experience/classroom-wide-1280.webp?b=115-experience-1" srcset="assets/img/experience/classroom-wide-800.webp?b=115-experience-1 800w, assets/img/experience/classroom-wide-1280.webp?b=115-experience-1 1280w, assets/img/experience/classroom-wide-1920.webp?b=115-experience-1 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
+        <img src="assets/img/experience/classroom-wide-1280.webp?b=115-experience-2" srcset="assets/img/experience/classroom-wide-800.webp?b=115-experience-2 800w, assets/img/experience/classroom-wide-1280.webp?b=115-experience-2 1280w, assets/img/experience/classroom-wide-1920.webp?b=115-experience-2 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
         <figcaption>A junior class at work with their teacher</figcaption>
       </figure>
       <div class="xp__text">
@@ -575,7 +577,7 @@
     </li>
     <li class="xp" id="day-study" data-event="8" data-scene="laptop" data-short="Study">
       <figure class="xp__photo" data-scene="laptop">
-        <img src="assets/img/experience/laptop-wide-1280.webp?b=115-experience-1" srcset="assets/img/experience/laptop-wide-800.webp?b=115-experience-1 800w, assets/img/experience/laptop-wide-1280.webp?b=115-experience-1 1280w, assets/img/experience/laptop-wide-1920.webp?b=115-experience-1 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
+        <img src="assets/img/experience/laptop-wide-1280.webp?b=115-experience-2" srcset="assets/img/experience/laptop-wide-800.webp?b=115-experience-2 800w, assets/img/experience/laptop-wide-1280.webp?b=115-experience-2 1280w, assets/img/experience/laptop-wide-1920.webp?b=115-experience-2 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
         <figcaption>Working together on a circuit and a laptop</figcaption>
       </figure>
       <div class="xp__text">
@@ -607,7 +609,7 @@
     </li>
     <li class="xp" id="day-sports" data-event="9" data-scene="field" data-short="Sports">
       <figure class="xp__photo" data-scene="field">
-        <img src="assets/img/experience/field-wide-1280.webp?b=115-experience-1" srcset="assets/img/experience/field-wide-800.webp?b=115-experience-1 800w, assets/img/experience/field-wide-1280.webp?b=115-experience-1 1280w, assets/img/experience/field-wide-1920.webp?b=115-experience-1 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
+        <img src="assets/img/experience/field-wide-1280.webp?b=115-experience-2" srcset="assets/img/experience/field-wide-800.webp?b=115-experience-2 800w, assets/img/experience/field-wide-1280.webp?b=115-experience-2 1280w, assets/img/experience/field-wide-1920.webp?b=115-experience-2 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
         <figcaption>A bicycle kick on the field below the hills</figcaption>
       </figure>
       <div class="xp__text">
@@ -669,7 +671,7 @@
     </li>
     <li class="xp" id="day-dinner" data-event="11" data-scene="reading" data-short="Dinner">
       <figure class="xp__photo" data-scene="reading">
-        <img src="assets/img/experience/reading-wide-1280.webp?b=115-experience-1" srcset="assets/img/experience/reading-wide-800.webp?b=115-experience-1 800w, assets/img/experience/reading-wide-1280.webp?b=115-experience-1 1280w, assets/img/experience/reading-wide-1920.webp?b=115-experience-1 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
+        <img src="assets/img/experience/reading-wide-1280.webp?b=115-experience-2" srcset="assets/img/experience/reading-wide-800.webp?b=115-experience-2 800w, assets/img/experience/reading-wide-1280.webp?b=115-experience-2 1280w, assets/img/experience/reading-wide-1920.webp?b=115-experience-2 1920w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async">
         <figcaption>Studying together, out of uniform</figcaption>
       </figure>
       <div class="xp__text">
@@ -752,7 +754,7 @@
 <section class="xl" id="life-together" aria-labelledby="xl-title">
   <div class="wrap xl__grid">
     <figure class="xl__main">
-    <img src="assets/img/experience/together-tall-960.webp?b=115-experience-1" srcset="assets/img/experience/together-tall-640.webp?b=115-experience-1 640w, assets/img/experience/together-tall-960.webp?b=115-experience-1 960w, assets/img/experience/together-tall-1280.webp?b=115-experience-1 1280w" sizes="(min-width: 900px) 44vw, 100vw" width="960" height="1200" alt="Senior students sitting together, laughing, on a platform of logs among the trees" loading="lazy" decoding="async">
+    <img src="assets/img/experience/together-tall-960.webp?b=115-experience-2" srcset="assets/img/experience/together-tall-640.webp?b=115-experience-2 640w, assets/img/experience/together-tall-960.webp?b=115-experience-2 960w, assets/img/experience/together-tall-1280.webp?b=115-experience-2 1280w" sizes="(min-width: 900px) 44vw, 100vw" width="960" height="1200" alt="Senior students sitting together, laughing, on a platform of logs among the trees" loading="lazy" decoding="async">
     <figcaption>Seniors together, out of uniform</figcaption>
   </figure>
     <div class="xl__text">
@@ -763,13 +765,60 @@
       <a class="xa" href="houses.html">Explore the four houses <span aria-hidden="true">&rarr;</span></a>
     </div>
     <figure class="xl__detail">
-    <img src="assets/img/experience/vishu-lunch-wide-1000.webp?b=115-experience-1" srcset="assets/img/experience/vishu-lunch-wide-640.webp?b=115-experience-1 640w, assets/img/experience/vishu-lunch-wide-1000.webp?b=115-experience-1 1000w, assets/img/experience/vishu-lunch-wide-1400.webp?b=115-experience-1 1400w" sizes="(min-width: 900px) 26vw, (min-width: 600px) 46vw, 100vw" width="1000" height="667" alt="Junior boys at a dining-hall table with steel plates and tumblers, waving at the camera" loading="lazy" decoding="async">
+    <img src="assets/img/experience/vishu-lunch-wide-1000.webp?b=115-experience-2" srcset="assets/img/experience/vishu-lunch-wide-640.webp?b=115-experience-2 640w, assets/img/experience/vishu-lunch-wide-1000.webp?b=115-experience-2 1000w, assets/img/experience/vishu-lunch-wide-1400.webp?b=115-experience-2 1400w" sizes="(min-width: 900px) 26vw, (min-width: 600px) 46vw, 100vw" width="1000" height="667" alt="Junior boys at a dining-hall table with steel plates and tumblers, waving at the camera" loading="lazy" decoding="async">
     <figcaption>Lunch on Vishu and Tamil New Year, in the dining hall</figcaption>
   </figure>
     <figure class="xl__detail">
-    <img src="assets/img/experience/billiards-wide-1000.webp?b=115-experience-1" srcset="assets/img/experience/billiards-wide-640.webp?b=115-experience-1 640w, assets/img/experience/billiards-wide-1000.webp?b=115-experience-1 1000w, assets/img/experience/billiards-wide-1400.webp?b=115-experience-1 1400w" sizes="(min-width: 900px) 26vw, (min-width: 600px) 46vw, 100vw" width="1000" height="667" alt="A student lining up a shot at a billiards table while two friends watch" loading="lazy" decoding="async">
+    <img src="assets/img/experience/billiards-wide-1000.webp?b=115-experience-2" srcset="assets/img/experience/billiards-wide-640.webp?b=115-experience-2 640w, assets/img/experience/billiards-wide-1000.webp?b=115-experience-2 1000w, assets/img/experience/billiards-wide-1400.webp?b=115-experience-2 1400w" sizes="(min-width: 900px) 26vw, (min-width: 600px) 46vw, 100vw" width="1000" height="667" alt="A student lining up a shot at a billiards table while two friends watch" loading="lazy" decoding="async">
     <figcaption>A game of billiards</figcaption>
   </figure>
+  </div>
+</section>
+
+<!-- The Student Council. The School Deans' pledge is printed here; the other
+     groups' pledges are printed on the pages where their work belongs, and
+     listed below. Every word is written from tools/sakshi.py. -->
+<section class="xc" id="student-council" aria-labelledby="xc-title">
+  <div class="wrap">
+    <div class="xc__head">
+      <p class="xk">Student leadership</p>
+      <h2 class="xc__heading" id="xc-title">The Student Council, in its own words.</h2>
+      <p>The Student Council 2026&ndash;27 is led by the School Deans. Each group of the council wrote a pledge for the school&rsquo;s bulletin; the Deans&rsquo; is printed here.</p>
+    </div>
+    <figure class="xc__all">
+      <img src="assets/img/council/council-1600.webp" srcset="assets/img/council/council-800.webp 800w, assets/img/council/council-1600.webp 1600w" sizes="(max-width: 860px) 100vw, 1200px" width="1600" height="1067" alt="The Student Council 2026–27 standing in rows on the steps of a school building, in sashes over school uniform, with a swami in saffron among them" loading="lazy" decoding="async">
+      <figcaption>The Student Council 2026–27, as the bulletin pictures it. The sashes name each office.</figcaption>
+    </figure>
+    <article class="cp cp--deans" id="deans-pledge" aria-labelledby="cp-deans-title" data-pledge="deans">
+  <figure class="cp__photo">
+    <img src="assets/img/council/deans-1600.webp" srcset="assets/img/council/deans-800.webp 800w, assets/img/council/deans-1600.webp 1600w" sizes="(max-width: 820px) 100vw, 44vw" width="1600" height="901" alt="The two School Deans of the Student Council 2026–27 standing side by side among green plants" decoding="async" loading="lazy">
+    <figcaption>From left: Aarav Ashish Bhartia and Rhea Sontakke.</figcaption>
+  </figure>
+  <div class="cp__voice">
+    <p class="cp__eyebrow">Student Council 2026–27</p>
+    <h3 class="cp__role" id="cp-deans-title">School Deans</h3>
+    <figure class="cp__pledge">
+      <blockquote>
+          <p>Inspired by Gurudev’s vision, of “Spreading Maximum Happiness to Maximum People for The Maximum Amount of Time,” we, the Student Deans of CIRS 2026 - 27, aspire to contribute to it. Our aim is to transform ourselves and our fellow students into strong, capable and cultured individuals. We shall not fear to stand for Dharma and shall work together to safeguard the glory of Bharat with our dynamic spirituality.</p>
+      </blockquote>
+      <figcaption>
+        <ul class="cp__names" aria-label="School Deans"><li>Aarav Ashish Bhartia</li><li>Rhea Sontakke</li></ul>
+        <span class="cp__tag">School Deans, Student Council 2026–27</span>
+      </figcaption>
+    </figure>
+  </div>
+</article>
+    <div class="xc__more">
+      <h3 id="xc-more-title">The rest of the council, in its own words</h3>
+      <ul aria-labelledby="xc-more-title">
+        <li><a href="spiritual-life.html#cultural-secretaries">Cultural Secretaries <small>Spiritual Life</small></a></li>
+        <li><a href="sports.html#secretaries">Sports Secretaries <small>Our Sports</small></a></li>
+        <li><a href="houses.html#pledge-vasishtha">Vasishta House Captains <small>Our Houses</small></a></li>
+        <li><a href="houses.html#pledge-valmiki">Valmiki House Captains <small>Our Houses</small></a></li>
+        <li><a href="houses.html#pledge-vishwamitra">Vishwamitra House Captains <small>Our Houses</small></a></li>
+        <li><a href="houses.html#pledge-vyasa">Vyasa House Captains <small>Our Houses</small></a></li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -783,7 +832,7 @@
     <ul class="xb__paths">
       <li class="xb__path">
         <figure class="xb__photo">
-    <img src="assets/img/experience/tyre-tall-960.webp?b=115-experience-1" srcset="assets/img/experience/tyre-tall-640.webp?b=115-experience-1 640w, assets/img/experience/tyre-tall-960.webp?b=115-experience-1 960w, assets/img/experience/tyre-tall-1280.webp?b=115-experience-1 1280w" sizes="(min-width: 900px) 30vw, 100vw" width="960" height="1200" alt="A junior student laughing as she swings through a hanging tyre, friends walking behind" loading="lazy" decoding="async">
+    <img src="assets/img/experience/tyre-tall-960.webp?b=115-experience-2" srcset="assets/img/experience/tyre-tall-640.webp?b=115-experience-2 640w, assets/img/experience/tyre-tall-960.webp?b=115-experience-2 960w, assets/img/experience/tyre-tall-1280.webp?b=115-experience-2 1280w" sizes="(min-width: 900px) 30vw, 100vw" width="960" height="1200" alt="A junior student laughing as she swings through a hanging tyre, friends walking behind" loading="lazy" decoding="async">
     <figcaption>The tyre swing</figcaption>
   </figure>
         <h3 class="xb__title">Move</h3>
@@ -792,7 +841,7 @@
       </li>
       <li class="xb__path">
         <figure class="xb__photo">
-    <img src="assets/img/experience/flute-tall-900.webp?b=115-experience-1" srcset="assets/img/experience/flute-tall-640.webp?b=115-experience-1 640w, assets/img/experience/flute-tall-900.webp?b=115-experience-1 900w" sizes="(min-width: 900px) 30vw, 100vw" width="900" height="1125" alt="Two students in school uniform seated on a rug, playing bamboo flutes" loading="lazy" decoding="async">
+    <img src="assets/img/experience/flute-tall-900.webp?b=115-experience-2" srcset="assets/img/experience/flute-tall-640.webp?b=115-experience-2 640w, assets/img/experience/flute-tall-900.webp?b=115-experience-2 900w" sizes="(min-width: 900px) 30vw, 100vw" width="900" height="1125" alt="Two students in school uniform seated on a rug, playing bamboo flutes" loading="lazy" decoding="async">
     <figcaption>Flute practice</figcaption>
   </figure>
         <h3 class="xb__title">Create</h3>
@@ -801,7 +850,7 @@
       </li>
       <li class="xb__path">
         <figure class="xb__photo">
-    <img src="assets/img/experience/puja-tall-960.webp?b=115-experience-1" srcset="assets/img/experience/puja-tall-640.webp?b=115-experience-1 640w, assets/img/experience/puja-tall-960.webp?b=115-experience-1 960w, assets/img/experience/puja-tall-1280.webp?b=115-experience-1 1280w" sizes="(min-width: 900px) 30vw, 100vw" width="960" height="1200" alt="Students in yellow kurtas seated in a long row on the floor, each with a plate of flowers for a puja" loading="lazy" decoding="async">
+    <img src="assets/img/experience/puja-tall-960.webp?b=115-experience-2" srcset="assets/img/experience/puja-tall-640.webp?b=115-experience-2 640w, assets/img/experience/puja-tall-960.webp?b=115-experience-2 960w, assets/img/experience/puja-tall-1280.webp?b=115-experience-2 1280w" sizes="(min-width: 900px) 30vw, 100vw" width="960" height="1200" alt="Students in yellow kurtas seated in a long row on the floor, each with a plate of flowers for a puja" loading="lazy" decoding="async">
     <figcaption>Students seated for a puja</figcaption>
   </figure>
         <h3 class="xb__title">Celebrate</h3>
@@ -899,8 +948,8 @@
 
 <section class="xn" id="night" aria-labelledby="xn-title" data-header-theme="dark">
   <picture class="xn__photo">
-    <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/experience/night-tall-720.webp?b=115-experience-1 720w, assets/img/experience/night-tall-1080.webp?b=115-experience-1 1080w" sizes="100vw">
-    <img src="assets/img/experience/night-wide-1920.webp?b=115-experience-1" srcset="assets/img/experience/night-wide-1280.webp?b=115-experience-1 1280w, assets/img/experience/night-wide-1920.webp?b=115-experience-1 1920w" sizes="100vw" width="1920" height="1280" alt="Students in yellow kurtas seated in the lit amphitheatre after dark, a teacher facing them" loading="lazy" decoding="async">
+    <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/experience/night-tall-720.webp?b=115-experience-2 720w, assets/img/experience/night-tall-1080.webp?b=115-experience-2 1080w" sizes="100vw">
+    <img src="assets/img/experience/night-wide-1920.webp?b=115-experience-2" srcset="assets/img/experience/night-wide-1280.webp?b=115-experience-2 1280w, assets/img/experience/night-wide-1920.webp?b=115-experience-2 1920w" sizes="100vw" width="1920" height="1280" alt="Students in yellow kurtas seated in the lit amphitheatre after dark, a teacher facing them" loading="lazy" decoding="async">
   </picture>
   <div class="xn__shade" aria-hidden="true"></div>
   <div class="wrap xn__inner">
@@ -1001,12 +1050,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=115-experience-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=115-experience-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=115-experience-1" defer></script>
-<script src="assets/js/cirs.js?b=115-experience-1-header-5" defer></script>
-<script src="assets/js/pages.js?b=115-experience-1" defer></script>
-<script src="assets/js/footer.js?b=115-experience-1-footer-1" defer></script>
-<script src="assets/js/student-life-journey.js?b=115-experience-1-experience-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=115-experience-2" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=115-experience-2" defer></script>
+<script src="assets/vendor/lenis.min.js?b=115-experience-2" defer></script>
+<script src="assets/js/cirs.js?b=115-experience-2-header-5" defer></script>
+<script src="assets/js/pages.js?b=115-experience-2" defer></script>
+<script src="assets/js/footer.js?b=115-experience-2-footer-1" defer></script>
+<script src="assets/js/student-life-journey.js?b=115-experience-2-experience-1" defer></script>
 </body>
 </html>
