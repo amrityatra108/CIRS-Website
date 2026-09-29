@@ -1,75 +1,28 @@
 <div class="cw-page" data-cw-page data-cw-active="{{CW_ACTIVE}}">
-<section class="cw-hero" id="top" aria-labelledby="cw-title" data-cw-hero>
-  <div class="cw-hero__field" aria-hidden="true" data-cw-field>
-      {{CW_HERO_WORDS}}
-  </div>
-  <div class="cw-hero__stage">
-    <h1 class="cw-hero__title" id="cw-title" data-cw-title>{{CW_HERO_TITLE}}</h1>
-    <p class="cw-hero__sub" data-cw-after>Stories. Poems. Thoughts. Imaginations.<br><em>Written at CIRS.</em></p>
-    <p class="cw-hero__meta" data-cw-after><span>Junior School</span><span aria-hidden="true">&middot;</span><span>Senior School</span><span aria-hidden="true">&middot;</span><span>{{CW_YEAR}}</span></p>
-  </div>
-  <a class="cw-hero__cue" href="#collections" data-cw-after>Turn the page <span aria-hidden="true">&darr;</span></a>
-</section>
-
-<section class="cw-split" id="collections" aria-labelledby="cw-split-title" data-cw-split>
-  <h2 class="sr-only" id="cw-split-title">Two collections</h2>
-  <span class="cw-split__rule" aria-hidden="true" data-cw-rule></span>
-  <div class="cw-split__half cw-split__half--junior" data-cw-half="junior">
-    <p class="cw-split__grades">Grades V&ndash;VIII</p>
-    <h3 class="cw-split__name"><span>Junior</span> <span>School</span></h3>
-    <p class="cw-split__line">Small Writers.<br><strong>Big Worlds.<svg class="cw-doodle cw-doodle--loop" viewBox="0 0 120 24" aria-hidden="true" focusable="false"><path pathLength="100" d="M3 15c14-9 25 7 39-1s24-8 36 1 25 4 39-6"/></svg></strong></p>
-    <svg class="cw-split__star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 3l3.8 11.4L36 15.2l-9.8 7.3 3.6 11.8L20 27.2l-9.8 7.1 3.6-11.8L4 15.2l12.2-.8z"/></svg>
-    <a class="cw-split__go" href="creative-writing/junior.html#editions" data-cw-pick="junior">Open the Junior collection <span class="cw-arrow" aria-hidden="true">&rarr;</span></a>
-  </div>
-  <div class="cw-split__half cw-split__half--senior" data-cw-half="senior">
-    <p class="cw-split__grades">Grades IX&ndash;XII</p>
-    <h3 class="cw-split__name"><span>Senior</span> <span>School</span></h3>
-    <p class="cw-split__line">Ideas finding<br><em>their voice.</em></p>
-    <a class="cw-split__go" href="creative-writing/senior.html#editions" data-cw-pick="senior">Open the Senior collection <span class="cw-arrow" aria-hidden="true">&rarr;</span></a>
-  </div>
-</section>
+{{CW_HERO}}
 
 <section class="cw-collection" id="editions" aria-labelledby="cw-editions-title" data-cw-collection>
-  <div class="wrap cw-collection__head">
-    <div>
-      <p class="cw-eyebrow">The editions</p>
-      <h2 class="cw-collection__title" id="cw-editions-title">Read by <em>month</em> and <em>theme</em>.</h2>
+  <div class="wrap cw-collection__bar" id="collections">
+    <div class="cw-collection__lead">
+      <h2 class="cw-collection__title" id="cw-editions-title">The editions</h2>
+      <p class="cw-collection__stats">{{CW_STATS}}</p>
     </div>
-{{CW_SWITCH}}
+{{CW_FILTER}}
   </div>
-{{CW_PANELS}}
+{{CW_WAVE}}
 </section>
 
-<section class="cw-line" id="give-me-a-line" aria-labelledby="cw-line-title" data-cw-lines>
-  <div class="wrap cw-line__layout">
-    <div class="cw-line__head">
-      <h2 class="cw-line__title" id="cw-line-title">Give me a line</h2>
-      <p class="cw-line__note">One line, chosen at random, from the students&rsquo; own writing.</p>
-      <button class="cw-line__button" type="button" data-cw-line-button hidden>Give me a line <span class="cw-caret cw-caret--small" aria-hidden="true"></span></button>
-    </div>
-    <div class="cw-line__stage" aria-live="polite" data-cw-line-stage>
-{{CW_FIRST_LINE}}
-    </div>
-  </div>
-{{CW_LINES}}
-</section>
+{{CW_FEATURED}}
 
 <section class="cw-archive" id="archive" aria-labelledby="cw-archive-title">
   <div class="wrap">
-    <div class="cw-archive__head" data-cw-reveal>
+    <header class="cw-archive__head">
       <p class="cw-eyebrow">Archive</p>
-      <h2 class="cw-archive__title" id="cw-archive-title">Every edition, year by year.</h2>
-    </div>
+      <h2 class="cw-archive__title" id="cw-archive-title">Every edition, year by year</h2>
+    </header>
     <div class="cw-archive__years">
 {{CW_ARCHIVE}}
     </div>
-  </div>
-</section>
-
-<section class="cw-finale" aria-label="Afterword">
-  <div class="wrap">
-    <p class="cw-finale__line" data-cw-type>And the page is never really finished.<span class="cw-caret" aria-hidden="true"></span></p>
-    <p class="cw-finale__links"><a href="blog.html">CIRS Blog <span class="cw-arrow" aria-hidden="true">&rarr;</span></a><a href="crossroads.html">The Crossroads archive <span class="cw-arrow" aria-hidden="true">&rarr;</span></a></p>
   </div>
 </section>
 {{CW_LEGACY}}

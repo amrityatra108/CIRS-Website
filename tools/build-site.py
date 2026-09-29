@@ -515,18 +515,19 @@ PAGES = {
         "description": "Stories, poems, thoughts and imaginations by the Junior and Senior "
                        "School students of Chinmaya International Residential School, "
                        "published edition by edition.",
-        # "The Living Manuscript": a blank page whose scattered words assemble
-        # into the h1, then the two collections and their editions. Every
-        # edition, poem and presentation is data in
+        # A student literary journal: a deep-purple opening (a real student
+        # line beside the title, and "Another line"), then the editions as two
+        # opposing waves of titles, a short featured set and the archive.
+        # Every edition, poem and presentation is data in
         # tools/creative-writing-content.json, rendered by tools/creativewriting.py,
         # which also adds the Junior, Senior and edition pages below.
         "banner": None,
         "sheet": "cwriting",
-        "cache_suffix": "-manuscript-1",
+        "cache_suffix": "-journal-1",
         "jump": False,
         "uc": False,
-        # The opening is pale paper, so the header letters in ink over it.
-        "litehead": True,
+        # The opening is deep purple, so the header letters in light over it.
+        "litehead": False,
         "cw": {"kind": "main", "collection": "all"},
     },
     "captures": {
@@ -2167,8 +2168,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         chrome = chrome.replace('<div class="progress" id="progress" aria-hidden="true"></div>\n', "")
     if slug == "blog" or page.get("post") or page.get("cw"):
         # Journal pages open directly on readable type, and Creative Writing
-        # opens on its own blank page and cursor. The shared full-screen
-        # curtain would hide their masthead and force an unrelated wait.
+        # opens on the title and a student's own line. The shared full-screen
+        # curtain would hide them and force an unrelated wait.
         intro_start = chrome.index("<!-- Opening sequence.")
         intro_end = chrome.index("<!-- Film lightbox", intro_start)
         chrome = chrome[:intro_start] + chrome[intro_end:]

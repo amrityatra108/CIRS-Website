@@ -7,7 +7,7 @@
     "status: 'published' needs poems; 'awaiting' is a planned edition shown with plain 'to be supplied' copy and no poems (set showAwaiting false to hide them all).",
     "theme.mood: one of dawn, dusk, paper, night, meadow, ember, monsoon, chalk, sky. theme.shape: portrait | landscape | square. Optional theme.ground / theme.ink / theme.accent hex overrides are contrast-checked at build.",
     "ppt: null, or {\"file\": \"assets/downloads/creative-writing/<name>.pptx\"}. File size and slide count are read from the file at build.",
-    "poem.title may be null (the opening line is shown). poem.grade may be null (not shown). poem.lines are verbatim excerpts for 'Give me a line'; each is checked against the poem at build.",
+    "poem.title may be null (the opening line is shown). poem.grade may be null (not shown). poem.lines are verbatim excerpts (the hero's \"Another line\", and each edition's preview); each is checked against the poem at build.",
     "epigraph is a verbatim line from one of the edition's poems, checked at build.",
     "Never add writing, names or grades that the school has not supplied."
   ],
