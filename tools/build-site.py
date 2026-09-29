@@ -209,7 +209,7 @@ PAGES = {
         # which names each one's source; tools/make-history.py cuts the images.
         "banner": None,
         "sheet": "history",
-        "cache_suffix": "-history-cinematic-3",
+        "cache_suffix": "-history-cinematic-4",
         # The chapters carry their own visible index and "View all
         # milestones", so the floating "On this page" control would repeat it.
         "jump": False,
@@ -2410,6 +2410,13 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         if slug == "admissions":
             footer = footer.replace('href="admissions.html#examination">Important Dates',
                                     'href="admissions.html#dates">Important Dates')
+        if slug == "school-history":
+            # The arrival already uses campus-band. Give the archive's close
+            # the courtyard photograph on every viewport, in one picture.
+            footer = footer.replace('src="assets/img/campus-band.jpg"',
+                                    'src="assets/img/campus-lawn.jpg"', 1)
+            footer = footer.replace('width="1920" height="1080"',
+                                    'width="1600" height="900"', 1)
         if page.get("closing"):
             footer = closing_html(footer, page["closing"])
         parts.append(footer)
@@ -2470,11 +2477,11 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "curriculum":
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-2" defer></script>')
     if slug == "school-history":
-        parts[0] = parts[0].replace('</head>', f'<link rel="stylesheet" href="assets/css/history-cinematic.css?{CACHE_BUST}">\n</head>')
-        parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}-cinematic-3" defer></script>')
+        parts[0] = parts[0].replace('</head>', f'<link rel="stylesheet" href="assets/css/history-cinematic.css?{CACHE_BUST}-4">\n</head>')
+        parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}-cinematic-4" defer></script>')
         # The journey's controller imports Three.js only
         # on a window wide enough for the 3D path, so a phone never fetches it.
-        parts.append(f'<script type="module" src="assets/js/history-cinematic-journey.js?{CACHE_BUST}-3"></script>')
+        parts.append(f'<script type="module" src="assets/js/history-cinematic-journey.js?{CACHE_BUST}-4"></script>')
     if slug == "our-laurels":
         parts.append(f'<script src="assets/js/laurels.js?{CACHE_BUST}" defer></script>')
     if page.get("opening"):

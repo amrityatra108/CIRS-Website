@@ -18,13 +18,10 @@ function boot(){
  const controller=new AbortController(),signal=controller.signal;
  let world=null,loading=false,epoch=0,frame=0,visible=true,anchors=[],active=-1;
  let expStart=0,expRange=1,progress=0,lastTime=0,settled=true,expTravel=innerWidth*.6,blindPairs=[],gsapContext=null,disposed=false;
- const portrait=scenes[0].querySelector('.hj-fig');
  const stations=scenes.map(s=>{
-  const figures=[...s.querySelectorAll('.hj-fig')],selected=figures.length?figures:[portrait];
-  return {id:s.id,images:selected.map(fig=>{const img=fig.querySelector('img');return {src:img.src.replace('-sm.jpg','-lg.jpg'),ratio:+img.getAttribute('width')/+img.getAttribute('height')};}),caption:figures.length?figures[0].querySelector('figcaption').textContent:'Pujya Gurudev Swami Chinmayananda. Archival portrait; photograph date unrecorded.'};
+  const figures=[...s.querySelectorAll('.hj-fig')];
+  return {id:s.id,images:figures.map(fig=>{const img=fig.querySelector('img');return {src:img.src.replace('-sm.jpg','-lg.jpg'),ratio:+img.getAttribute('width')/+img.getAttribute('height')};}),caption:figures[0]?.querySelector('figcaption').textContent||''};
  });
- stations.at(-1).images=[{src:'assets/img/campus-band.jpg',ratio:16/9}];
- stations.at(-1).caption='The campus today. Recent records come from the dated Annual Report and results briefs.';
  function measure(){
   if(disposed)return;
   expStart=expansion.getBoundingClientRect().top+scrollY;expRange=Math.max(1,expansion.offsetHeight-innerHeight);
@@ -100,7 +97,7 @@ function boot(){
   if(world||loading){measure();return;}
   loading=true;
   try{
-   const {createWorld}=await import('./history-cinematic-world.js');
+   const {createWorld}=await import('./history-cinematic-world.js?v=4');
    if(token!==epoch||disposed)return;
    stage.style.display='block';stage.style.height='100svh';stage.style.width='100%';stage.style.position='absolute';stage.style.opacity='0';canvas.style.display='block';canvas.style.width='100%';canvas.style.height='100%';
    world=createWorld(canvas,stations,kick);if(!world)throw Error('WebGL unavailable');

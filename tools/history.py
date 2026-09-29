@@ -38,6 +38,10 @@ AR2025 = ('The school&rsquo;s Annual Report, 7 October 2025 &middot; '
 # build writes them into the page so every image reserves its box before it
 # loads, without the build needing Pillow.
 EXHIBITS = {
+    "gurudev-lineage": (640, 426, 1400, 932),
+    "samadhi-sthal": (640, 427, 1024, 683),
+    "guruji-portrait": (640, 427, 1400, 933),
+    "report-2025": (640, 828, 1400, 1812),
     "supplied-rupee": (640, 480, 1448, 1086),
     "supplied-opening": (640, 480, 1448, 1086),
     "supplied-isa": (640, 425, 1600, 1063),
@@ -554,7 +558,43 @@ UNRESOLVED = [
 BY_ID = {e["id"]: e for e in EVENTS}
 assert len(BY_ID) == len(EVENTS), "every event needs a unique id"
 BY_EXHIBIT = {e["exhibit"]: e for e in EVENTS if e.get("exhibit")}
+# Context images supplement a record without changing its historical account
+# or replacing its original exhibit/caption. Each photograph belongs to one
+# presentation on this page. Source masters and URLs are recorded alongside it.
+CONTEXT_EXHIBITS = {
+    "gurudev-lineage": {
+        "record": "idea-1970s",
+        "alt": "Pujya Gurudev Swami Chinmayananda seated with Swami Tejomayananda and fellow students",
+        "caption": "Pujya Gurudev with Swami Tejomayananda and fellow students. Chinmaya Mission archive; photograph date unrecorded.",
+        "source": '<a href="https://www.chinmayamission.com/global/swami-tejomayananda" target="_blank" rel="noopener">Chinmaya Mission photograph</a>',
+    },
+    "samadhi-sthal": {
+        "record": "mahasamadhi-1993",
+        "alt": "Gurudev's Samadhi Sthal in Sidhbari with the mountains behind it",
+        "caption": "Gurudev&rsquo;s Samadhi Sthal at Sidhbari. Memorial photograph from Chinmaya Archives; photograph date unrecorded.",
+        "source": '<a href="https://archives.chinmayamission.com/sidhbari-samadhi-sthal" target="_blank" rel="noopener">Chinmaya Archives photograph</a>',
+    },
+    "guruji-portrait": {
+        "record": "guruji-1994",
+        "alt": "Swami Tejomayananda standing in a Chinmaya Mission exhibition",
+        "caption": "Swami Tejomayananda. Portrait published by Chinmaya Mission; photograph date unrecorded.",
+        "source": '<a href="https://www.chinmayamission.com/global/swami-tejomayananda" target="_blank" rel="noopener">Chinmaya Mission portrait</a>',
+    },
+    "report-2025": {
+        "record": "report-2025",
+        "alt": "First page of the CIRS Annual Report headed 7 October 2025",
+        "caption": "The school&rsquo;s Annual Report, 7 October 2025, first page.",
+    },
+}
+for _name, _context in CONTEXT_EXHIBITS.items():
+    BY_EXHIBIT[_name] = {**BY_ID[_context["record"]], **_context}
 for _s in SCENES:
+    if _s['id'] == 'chapter-idea':
+        _s['plates'] = ['gurudev-lineage']
+    if _s['id'] == 'chapter-shape':
+        _s['plates'] = ['samadhi-sthal']
+    if _s['id'] == 'chapter-concrete':
+        _s['plates'] = ['guruji-portrait']
     if _s['id'] == 'chapter-rupee':
         _s['plates'] = ['supplied-rupee']
     if _s['id'] == 'chapter-opening':
@@ -570,6 +610,7 @@ SCENES.append({
     'head': 'The next generation.',
     'text': [BY_ID['report-2025']['summary'], BY_ID['ib-2026']['summary']],
     'records': ['report-2025', 'ib-2026'],
+    'plates': ['report-2025'],
     'notes': ['vigyan-goshti-2024', 'results-2025', 'solar-2025', 'ncc-2025',
               'yoga-2025', 'mun-2025', 'report-2025', 'cbse-2026', 'ib-2026'],
 })
@@ -578,6 +619,14 @@ for _s in SCENES:
         assert _id in BY_ID, f"{_s['id']} names an unknown event {_id}"
     for _x in _s.get("plates", []):
         assert _x in BY_EXHIBIT and BY_EXHIBIT[_x]["id"] in _s["records"] + _s.get("notes", []),             f"{_s['id']} shows {_x}, which is not the exhibit of a record it tells"
+
+# The portrait appears once in the typography expansion. Other exhibits each
+# have one chapter owner; archive entries link to these photographs instead
+# of reproducing them. A repeated assignment fails the source build.
+EXPANSION_EXHIBIT = "gurudev"
+_cinematic_exhibits = [EXPANSION_EXHIBIT] + [x for s in SCENES for x in s.get("plates", [])]
+assert len(_cinematic_exhibits) == len(set(_cinematic_exhibits)), "a History photograph must have one presentation"
+CINEMATIC_EXHIBITS = set(_cinematic_exhibits)
 
 
 def attr(text):
@@ -638,6 +687,13 @@ def campus_html(name, cls, eager=False):
             f'<figcaption class="hj-cap">{caption}</figcaption></figure>')
 
 
+def expansion_html():
+    e = BY_EXHIBIT[EXPANSION_EXHIBIT]
+    return ('<figure class="hj-expansion__image">'
+            + img_html(EXPANSION_EXHIBIT, e["alt"], "(max-width: 767px) 88vw, 80vw")
+            + f'<figcaption>{e["caption"]}</figcaption></figure>')
+
+
 def index_html():
     items = "".join(f'<li><a href="#{s["id"]}" data-hj-go="{s["id"]}" aria-label="{plain(s["year"] + ": " + s["head"])}">{s["index"] or "Opening class"}</a></li>'
                     for s in SCENES)
@@ -666,6 +722,11 @@ def scenes_html():
                         for label, href in s.get("links", []))
         more = record_link(s["records"][0])
         plates = "".join(plate_html(x, eager=(n == 0)) for x in s.get("plates", []))
+        context_sources = [CONTEXT_EXHIBITS[x]["source"] for x in s.get("plates", [])
+                           if x in CONTEXT_EXHIBITS and "source" in CONTEXT_EXHIBITS[x]]
+        source = BY_ID[s["records"][0]]["source"]
+        if context_sources:
+            source += '; ' + '; '.join(dict.fromkeys(context_sources))
         quiet = " hj-scene--quiet" if s.get("quiet") else ""
         out.append(
             f'<section class="hj-scene{quiet}" id="{s["id"]}" data-hj-scene aria-labelledby="{s["id"]}-h">'
@@ -674,7 +735,7 @@ def scenes_html():
             f'<h2 class="hj-head" id="{s["id"]}-h">{s["head"]}</h2>'
             f'{paras}{facts}{notes}'
             f'<p class="hj-actions">{more}{links}</p>'
-            f'<p class="hj-source">{BY_ID[s["records"][0]]["source"]}</p>'
+            f'<p class="hj-source">{source}</p>'
             f'</div>'
             + ('<div class="hj-medallion" aria-hidden="true"><span>&#8377;1</span></div><p class="hj-illustration">Illustrative medallion</p>' if s['id'] == 'chapter-rupee' else '')
             + (f'<div class="hj-plates">{plates}</div>' if plates else "")
@@ -711,16 +772,16 @@ def archive_html():
     for e in EVENTS:
         ex = e.get("exhibit")
         if ex:
-            thumb = (f'<span class="hx-card__thumb" style="--ar:{ratio(ex)}">'
-                     + img_html(ex, "", "(max-width: 700px) 44vw, 220px") + '</span>')
-            full = (f'<figure class="hx-rec__figure">'
-                    f'<a class="hx-rec__full" href="{IMG}/{ex}-lg.jpg" target="_blank" rel="noopener">'
-                    + img_html(ex, e["alt"], "(max-width: 900px) 92vw, 560px", cls="hx-rec__img")
-                    + f'<span class="sr-only"> (open the full image)</span></a>'
-                    f'<figcaption>{e["caption"]}</figcaption></figure>')
+            if ex in CINEMATIC_EXHIBITS:
+                full = (f'<div class="hx-rec__exhibit"><p>{e["caption"]}</p>'
+                        f'<a href="{IMG}/{ex}-lg.jpg" target="_blank" rel="noopener">View the archival image</a></div>')
+            else:
+                full = (f'<figure class="hx-rec__figure">'
+                        f'<a class="hx-rec__full" href="{IMG}/{ex}-lg.jpg" target="_blank" rel="noopener">'
+                        + img_html(ex, e["alt"], "(max-width: 900px) 92vw, 560px", cls="hx-rec__img")
+                        + f'<span class="sr-only"> (open the full image)</span></a>'
+                        f'<figcaption>{e["caption"]}</figcaption></figure>')
         else:
-            thumb = (f'<span class="hx-card__thumb hx-card__thumb--type" aria-hidden="true">'
-                     f'<span>{e["when"]}</span></span>')
             full = ""
         disclosure = len(e['body']) > 420
         detail_start = '<details class="hx-disclosure"><summary>Expand this account</summary>' if disclosure else ''
@@ -729,7 +790,7 @@ def archive_html():
             f'<li class="hx-item" data-hx-period="{e["period"]}" data-hx-decade="{decade(e)}">'
             f'<article class="hx-rec" id="record-{e["id"]}" aria-labelledby="record-{e["id"]}-t">'
             f'<button type="button" class="hx-card" data-hx-open="{e["id"]}" aria-haspopup="dialog">'
-            f'{thumb}<span class="hx-card__when">{e["when"]}</span>'
+            f'<span class="hx-card__when">{e["when"]}</span>'
             f'<span class="hx-card__title" id="record-{e["id"]}-t">{e["title"]}</span>'
             f'<span class="hx-card__summary">{e["summary"]}</span><span class="hx-card__open">Read record</span></button>'
             f'{detail_start}<div class="hx-rec__detail">'
@@ -753,6 +814,7 @@ def decade_options():
 
 def expand(content):
     return (content.replace("{{HISTORY_INDEX}}", index_html())
+                   .replace("{{HISTORY_EXPANSION}}", expansion_html())
                    .replace("{{HISTORY_SCENES}}", scenes_html())
                    .replace("{{HISTORY_NOW}}", now_html())
                    .replace("{{HISTORY_FULL}}", full_html())

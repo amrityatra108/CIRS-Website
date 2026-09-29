@@ -68,7 +68,13 @@
      RECORD: one record in its own view
      ========================================================== */
   var dlg = $("#hx-dialog"), body = $("#hx-dialog-body");
-  var openId = null, opener = null;
+  var openId = null, opener = null, borrowedFigure = null;
+
+  function returnFigure() {
+    if (!borrowedFigure) return;
+    borrowedFigure.marker.replaceWith(borrowedFigure.figure);
+    borrowedFigure = null;
+  }
 
   function visibleIds() {
     return items.filter(function (it) { return !it.hidden; })
@@ -78,12 +84,20 @@
   function fill(id) {
     var rec = document.getElementById("record-" + id);
     if (!rec || !body) return false;
+    returnFigure();
     var detail = $(".hx-rec__detail", rec).cloneNode(true);
+    var originalFigure = $(".hx-rec__figure", rec), figureCopy = $(".hx-rec__figure", detail);
+    if (originalFigure && figureCopy) {
+      var marker = document.createComment("Archive exhibit returns here when its dialog closes");
+      originalFigure.before(marker);
+      figureCopy.replaceWith(originalFigure);
+      borrowedFigure = { figure: originalFigure, marker: marker };
+    }
     var title = $(".hx-rec__title", detail);
     title.id = "hx-dialog-title";
     if ($(".hx-rec__figure", detail)) detail.classList.add("has-figure");
     var img = $("img", detail);
-    if (img) { img.setAttribute("sizes", "(max-width: 760px) 92vw, 900px"); img.removeAttribute("loading"); }
+    if (img) img.removeAttribute("loading");
     body.replaceChildren(detail);
     openId = id;
     var ids = visibleIds(), k = ids.indexOf(id);
@@ -107,6 +121,7 @@
   function closeRecord(fromHistory) {
     if (!dlg || !dlg.open) return;
     dlg.close();
+    returnFigure();
     body.replaceChildren();
     lock(false);
     if (!fromHistory) {
