@@ -272,3 +272,11 @@ html.crossroads-intro-scroll-locked,html.crossroads-intro-scroll-locked body { o
   .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__opening,
   .crossroads-intro[data-crossroads-intro-handoff] .crossroads-intro__opening { object-fit:contain; object-position:center; background:transparent; }
 }
+
+/* Recompose the supplied lettering into two lines; both crops use the same SVG. */
+.crossroads-intro-title-line{display:block;position:relative;overflow:hidden;width:100%;aspect-ratio:1520/725}
+.crossroads-intro-title-line--the{width:28%;aspect-ratio:650/725;margin-inline:auto}
+.crossroads-intro-title-line .crossroads-intro-title-art{position:absolute;top:0;left:-42.763%;width:142.763%;max-width:none;height:auto}
+.crossroads-intro-title-line--the .crossroads-intro-title-art{left:0;width:333.846%}
+.crossroads-intro__wordmark{width:100%;max-width:min(540px,64vh);margin-inline:auto}
+@media(max-width:700px) and (max-height:690px){.crossroads-intro__wordmark{max-width:36vh}}
