@@ -38,7 +38,10 @@ UNGRADED = {
     "hrun/03-mun.jpg",
     "hrun/06-swim.jpg",
     "hrun/08-candlelight.jpg",
-    "hrun/09-microphone.jpg",
+    # and those of 30 September 2026, which replace frames 03, 05 and 09.
+    "hrun/03-campus.jpg",
+    "hrun/05-lab.jpg",
+    "hrun/09-meditation.jpg",
 }
 
 SHADOW = (36, 26, 56)
@@ -210,12 +213,18 @@ PHOTOS = [
     # once its camera rotation is applied, and is framed high for the faces.
     ("hrun/01-holi.jpg",        "home-gallery-2026-09-26/01-holi.png",        (1000, 1500), (0.50, 0.50)),
     ("hrun/02-window.jpg",      "home-gallery-2026-09-26/02-window.png",      (680, 850),   (0.50, 0.56)),
+    # Frames 03, 05 and 09 were replaced again by photographs sent on 30
+    # September 2026. The MUN photograph is still cut, because Our Laurels
+    # shows it; the assembly and microphone photographs had no other page
+    # and have gone. The meditation photograph came wide, so frame 09 is
+    # now a wide frame, cut at the 16:9 the frame shows.
     ("hrun/03-mun.jpg",         "home-gallery-2026-09-26/03-cirs-mun.jpg",    (1500, 1000), (0.53, 0.50)),
-    ("hrun/05-assembly.jpg",    "drive-hrun-05.jpg",                          (1500, 1000), (0.50, 0.50)),
+    ("hrun/03-campus.jpg",      "home-gallery-2026-09-30/3.jpg",              (1500, 1000), (0.50, 0.55)),
+    ("hrun/05-lab.jpg",         "home-gallery-2026-09-30/5.jpg",              (1500, 1000), (0.50, 0.50)),
     ("hrun/06-swim.jpg",        "home-gallery-2026-09-26/06-swim.jpg",        (1500, 1000), (0.50, 0.50)),
     ("hrun/07-sparkler.jpg",    "drive-hrun-07.jpg",                          (1500, 1000), (0.52, 0.48)),
     ("hrun/08-candlelight.jpg", "home-gallery-2026-09-26/08-candlelight.jpg", (1500, 1000), (0.50, 0.58)),
-    ("hrun/09-microphone.jpg",  "home-gallery-2026-09-26/09-microphone.jpg",  (1000, 1500), (0.50, 0.42)),
+    ("hrun/09-meditation.jpg",  "home-gallery-2026-09-30/9.png",              (1600, 900),  (0.50, 0.50)),
     ("hrun/10-stage.jpg",       "drive-hrun-10.jpg",                          (1500, 1000), (0.58, 0.40)),
 
     # The run's previous ten are not all retired with it. The CIRS Experience

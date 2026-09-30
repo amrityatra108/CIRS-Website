@@ -38,14 +38,22 @@ AR2025 = ('The school&rsquo;s Annual Report, 7 October 2025 &middot; '
 # build writes them into the page so every image reserves its box before it
 # loads, without the build needing Pillow.
 EXHIBITS = {
-    "gurudev-lineage": (640, 426, 1400, 932),
     "samadhi-sthal": (640, 427, 1024, 683),
-    "guruji-portrait": (640, 427, 1400, 933),
     "report-2025": (640, 828, 1400, 1812),
     "supplied-rupee": (640, 480, 1448, 1086),
     "supplied-opening": (640, 480, 1448, 1086),
     "supplied-isa": (640, 425, 1600, 1063),
     "supplied-poland": (640, 427, 1536, 1024),
+    # The school's "history" folder on Drive, each file named for its year
+    # (30 September 2026); cut by tools/make-history-supplied.py.
+    "supplied-1970": (640, 876, 701, 960),
+    "supplied-1994": (640, 480, 1448, 1086),
+    "supplied-until-1996": (640, 427, 1536, 1024),
+    "supplied-june-1996": (640, 480, 1448, 1086),
+    "supplied-2005": (640, 427, 1536, 1024),
+    "supplied-2009": (640, 960, 1467, 2200),
+    "supplied-2018": (279, 279, 279, 279),
+    "supplied-2019": (640, 820, 1600, 2050),
     "gurudev":          (640, 881, 1400, 1927),
     "noc-1996":         (640, 906, 1400, 1981),
     "kalam-2007":       (640, 921, 1170, 1683),
@@ -74,12 +82,12 @@ EVENTS = [
              "Gurudev Swami Chinmayananda, and it met with an overwhelming response from all "
              "over the world. Bangalore, Lucknow, the Andamans and Himachal Pradesh were each "
              "evaluated before Coimbatore was chosen.",
-     "exhibit": "gurudev",
-     "alt": "A close colour portrait of Pujya Gurudev Swami Chinmayananda, smiling, in saffron "
-            "robes and spectacles",
-     "caption": "Pujya Gurudev Swami Chinmayananda. A portrait from the school&rsquo;s archive; "
-                "the date of the photograph is not recorded.",
-     "source": PUBLISHED},
+     "exhibit": "supplied-1970",
+     "alt": "An archival black-and-white photograph of a swami in robes walking across rough "
+            "ground on a building site, with others behind him",
+     "caption": "A building site, in the photograph the school filed under 1970. The place and "
+                "the people pictured are not named in the record.",
+     "source": PUBLISHED + '; photograph from the ' + '<a href="https://drive.google.com/file/d/1nAJOfr2_rt_8lhWjU5EZMlPWVXe9ss5b/view" target="_blank" rel="noopener">supplied school archive</a>'},
     {"id": "rupee-1984", "when": "1984", "period": "before",
      "title": "One rupee at a time",
      "summary": "The first collection towards the land: one rupee from each person, gathered on foot.",
@@ -102,9 +110,13 @@ EVENTS = [
      "summary": "Pujya Gurudev attains Mahasamadhi, three years before the school opens.",
      "body": "Pujya Gurudev Swami Chinmayananda attained Mahasamadhi on 3 August 1993. He did "
              "not see the school he had conceived open its doors.",
-     "exhibit": None,
+     "exhibit": "gurudev",
+     "alt": "A close colour portrait of Pujya Gurudev Swami Chinmayananda, smiling, in saffron "
+            "robes and spectacles",
+     "caption": "Pujya Gurudev Swami Chinmayananda. A portrait from the school&rsquo;s archive; "
+                "the date of the photograph is not recorded.",
      "source": 'The chronology of Gurudev&rsquo;s life on this site&rsquo;s '
-               '<a href="founder.html#life">Founder</a> page',
+               '<a href="founder.html#life">Founder</a> page; portrait from the ' + '<a href="https://drive.google.com/file/d/1amUjwTsvRJDy5LaRs1lZcMsCy_oA22Qj/view" target="_blank" rel="noopener">supplied school archive</a>',
      "note": "The school's published history does not mention 1993; it moves from 1984 to 1994. "
              "The earlier draft said that after the Mahasamadhi Pujya Guruji 'took the project "
              "upon his own shoulders' — that wording has no source in hand and is not used."},
@@ -114,16 +126,25 @@ EVENTS = [
      "body": "Pujya Guruji Swami Tejomayananda proceeded to concretise the vision of Pujya "
              "Gurudev with unfailing vigour and energy, and the work progressed by leaps and "
              "bounds.",
-     "exhibit": None,
-     "source": PUBLISHED},
+     "exhibit": "supplied-1994",
+     "alt": "An archival black-and-white photograph of a swami holding a plan and pointing "
+            "across a building site, men in shirts beside him and foundations behind",
+     "caption": "Plans on the site, in the photograph the school filed under 1994. The people "
+                "pictured are not named in the record.",
+     "source": PUBLISHED + '; photograph from the ' + '<a href="https://drive.google.com/file/d/1cZGB8kauMLJO0K_x0p8ltXiITze37n3e/view" target="_blank" rel="noopener">supplied school archive</a>'},
     {"id": "project-1996", "when": "Until 1996", "period": "before",
      "title": "Guided to completion",
      "summary": "Devotees give generously; the project is guided and executed to completion.",
      "body": "Many devotees around the world contributed generously. Swamini Vimalanandaji and "
              "Dr. G.&nbsp;S. Keshawamurthy played a significant role in guiding and executing "
              "the project to its completion.",
-     "exhibit": None,
-     "source": PUBLISHED,
+     "exhibit": "supplied-until-1996",
+     "alt": "A swamini in saffron at a desk spread with plans, beneath a framed portrait of "
+            "Gurudev, a man seated across the desk from her",
+     "caption": "Plans on a desk, in the photograph the school filed under &lsquo;Until "
+                "1996&rsquo;. The camera&rsquo;s date stamp reads 28 6 1996; the people "
+                "pictured are not named in the record.",
+     "source": PUBLISHED + '; photograph from the ' + '<a href="https://drive.google.com/file/d/1nGP6aThh6fCOKrK7NsP2yUDtveItFoxz/view" target="_blank" rel="noopener">supplied school archive</a>',
      "note": "The published history gives no dates for this. The earlier draft said Swamini "
              "Vimalanandaji 'becomes Director of CIRS' in 1996; that is not in the published "
              "history and is not used."},
@@ -152,8 +173,12 @@ EVENTS = [
      "body": "CIRS started with 96 students from Grade V to Grade VIII and 11 academic staff, "
              "headed by Dr. Jaya Venugopal, with Brahmacharini Sumati Chaitanya and "
              "Brahmachari Samahita Chaitanya as spiritual guides.",
-     "exhibit": None,
-     "source": PUBLISHED,
+     "exhibit": "supplied-june-1996",
+     "alt": "Students in uniform standing in rows before the school's main building, teachers "
+            "and guests on its steps and the hills behind",
+     "caption": "Students before the main building, in the photograph the school filed under "
+                "June 1996. The occasion is not recorded.",
+     "source": PUBLISHED + '; photograph from the ' + '<a href="https://drive.google.com/file/d/1R9buBM6OmFiA_V98BRhd77qmf_g6ZPQR/view" target="_blank" rel="noopener">supplied school archive</a>',
      "note": "DISCREPANCY: the school's 2023 brochure (Drive, 'CIRS.pdf') says the school began "
              "'with just 94 students and eight teachers'. The page follows the published "
              "history (96 and 11). The school should say which is right."},
@@ -176,8 +201,14 @@ EVENTS = [
      "title": "A Resident Director",
      "summary": "Swami Swaroopanandaji becomes Resident Director of CIRS.",
      "body": "Pujya Guruji appointed Swami Swaroopanandaji as Resident Director of CIRS.",
-     "exhibit": None,
-     "source": "The school&rsquo;s own account, supplied for this website",
+     "exhibit": "supplied-2005",
+     "alt": "A swami in saffron lighting a lamp before a garlanded portrait of Gurudev, staff "
+            "and students watching",
+     "caption": "A lamp lit before Gurudev&rsquo;s portrait, in the photograph the school "
+                "filed under 2005. The occasion and the people pictured are not named in the "
+                "record.",
+     "source": "The school&rsquo;s own account, supplied for this website; photograph from the "
+               + '<a href="https://drive.google.com/file/d/15d6GgKpuhPpvoz50dtOSiEtsr3PuEvqY/view" target="_blank" rel="noopener">supplied school archive</a>',
      "note": "From the content the school supplied for the redesign. No appointment letter or "
              "dated publication has been seen. Confirm the year."},
     {"id": "kalam-2007", "when": "7 May 2007", "period": "early",
@@ -215,8 +246,11 @@ EVENTS = [
      "title": "A new Principal",
      "summary": "Smt. Shanti Krishnamurthy becomes Principal of CIRS.",
      "body": "Smt. Shanti Krishnamurthy became Principal of CIRS.",
-     "exhibit": None,
-     "source": 'The school&rsquo;s introduction on <a href="leadership.html">Leadership</a>'},
+     "exhibit": "supplied-2009",
+     "alt": "A woman in a blue silk sari standing on a lawn, smiling",
+     "caption": "The photograph the school filed under 2009.",
+     "source": 'The school&rsquo;s introduction on <a href="leadership.html">Leadership</a>; '
+               'photograph from the ' + '<a href="https://drive.google.com/file/d/14poW2KoFidGFBdhagGkJmGVX3Y9hulgC/view" target="_blank" rel="noopener">supplied school archive</a>'},
     {"id": "reflections-2010", "when": "August 2010", "period": "early",
      "title": "Reflections, the IB newsletter",
      "summary": "The IB students&rsquo; own newsletter reports their tour of Sri Lanka.",
@@ -312,8 +346,13 @@ EVENTS = [
      "title": "Director &mdash; Academics and Administration",
      "summary": "Smt. Shanti Krishnamurthy takes on the direction of the school.",
      "body": "Smt. Shanti Krishnamurthy became Director &mdash; Academics and Administration.",
-     "exhibit": None,
-     "source": 'The school&rsquo;s introduction on <a href="leadership.html">Leadership</a>'},
+     "exhibit": "supplied-2018",
+     "alt": "A portrait of a smiling woman in a pale sari",
+     "caption": "The photograph the school filed under 2018.",
+     "source": 'The school&rsquo;s introduction on <a href="leadership.html">Leadership</a>; '
+               'photograph from the ' + '<a href="https://drive.google.com/file/d/1bDirpVyUpnabY3gKYsHSREsCSpRwMQyG/view" target="_blank" rel="noopener">supplied school archive</a>',
+     "note": "The supplied photograph is 279 pixels square, too small for the journey, so it "
+             "is shown only in this record, at its own size. Ask the school for a larger copy."},
     {"id": "report-2019", "when": "15 October 2019", "period": "later",
      "title": "The school in its twenty-fourth year",
      "summary": "580 students from 22 states and 18 countries; a CBSE Lead School.",
@@ -340,10 +379,16 @@ EVENTS = [
      "body": "In Education World&rsquo;s 2019 survey, conducted by the Delhi-based C fore, CIRS "
              "moved from fourth to second place in the country among co-educational boarding "
              "schools, and kept first place in Tamil Nadu for the eighth consecutive year.",
-     "exhibit": None,
+     "exhibit": "supplied-2019",
+     "alt": "A framed EducationWorld certificate, India School Rankings 2019-20, Co-Ed Boarding "
+            "Schools, naming Chinmaya International Residential School, Coimbatore: India 2, "
+            "Tamil Nadu 1",
+     "caption": "The EducationWorld India School Rankings 2019&ndash;20 certificate, Co-Ed "
+                "Boarding Schools: India 2, Tamil Nadu 1. Signed by the publisher and dated "
+                "28 September 2019.",
      "source": 'The school&rsquo;s Annual Report, 15 October 2019 &middot; '
                '<a href="assets/documents/school-info/annual-report-2019.pdf" target="_blank" '
-               'rel="noopener">Open the PDF</a>',
+               'rel="noopener">Open the PDF</a>; the certificate, from the ' + '<a href="https://drive.google.com/file/d/1-gNcHmuBKqYSS8qVXu3TEgL3v44BxTts/view" target="_blank" rel="noopener">supplied school archive</a>',
      "note": "REPLACES two unsourced entries in the earlier draft: '2016, Education World ranks "
              "CIRS among the top four' and '2018, second in the country, first in CBSE'. The "
              "annual report implies fourth place in the preceding survey but does not give "
@@ -562,23 +607,11 @@ BY_EXHIBIT = {e["exhibit"]: e for e in EVENTS if e.get("exhibit")}
 # or replacing its original exhibit/caption. Each photograph belongs to one
 # presentation on this page. Source masters and URLs are recorded alongside it.
 CONTEXT_EXHIBITS = {
-    "gurudev-lineage": {
-        "record": "idea-1970s",
-        "alt": "Pujya Gurudev Swami Chinmayananda seated with Swami Tejomayananda and fellow students",
-        "caption": "Pujya Gurudev with Swami Tejomayananda and fellow students. Chinmaya Mission archive; photograph date unrecorded.",
-        "source": '<a href="https://www.chinmayamission.com/global/swami-tejomayananda" target="_blank" rel="noopener">Chinmaya Mission photograph</a>',
-    },
     "samadhi-sthal": {
         "record": "mahasamadhi-1993",
         "alt": "Gurudev's Samadhi Sthal in Sidhbari with the mountains behind it",
         "caption": "Gurudev&rsquo;s Samadhi Sthal at Sidhbari. Memorial photograph from Chinmaya Archives; photograph date unrecorded.",
         "source": '<a href="https://archives.chinmayamission.com/sidhbari-samadhi-sthal" target="_blank" rel="noopener">Chinmaya Archives photograph</a>',
-    },
-    "guruji-portrait": {
-        "record": "guruji-1994",
-        "alt": "Swami Tejomayananda standing in a Chinmaya Mission exhibition",
-        "caption": "Swami Tejomayananda. Portrait published by Chinmaya Mission; photograph date unrecorded.",
-        "source": '<a href="https://www.chinmayamission.com/global/swami-tejomayananda" target="_blank" rel="noopener">Chinmaya Mission portrait</a>',
     },
     "report-2025": {
         "record": "report-2025",
@@ -589,22 +622,28 @@ CONTEXT_EXHIBITS = {
 for _name, _context in CONTEXT_EXHIBITS.items():
     BY_EXHIBIT[_name] = {**BY_ID[_context["record"]], **_context}
 for _s in SCENES:
+    # The school's own photographs, placed by the year each was filed under.
     if _s['id'] == 'chapter-idea':
-        _s['plates'] = ['gurudev-lineage']
+        _s['plates'] = ['supplied-1970']
     if _s['id'] == 'chapter-shape':
         _s['plates'] = ['samadhi-sthal']
     if _s['id'] == 'chapter-concrete':
-        _s['plates'] = ['guruji-portrait']
+        _s['plates'] = ['supplied-1994', 'supplied-until-1996']
     if _s['id'] == 'chapter-rupee':
         _s['plates'] = ['supplied-rupee']
     if _s['id'] == 'chapter-opening':
         _s['plates'] = ['supplied-opening']
+    if _s['id'] == 'chapter-early':
+        _s['plates'] = ['supplied-2005', 'kalam-2007', 'sakshi-2008', 'supplied-2009',
+                        'reflections-2010']
     if _s['id'] == 'chapter-first':
+        _s['plates'] = ['supplied-june-1996', 'noc-1996']
         _s['text'] = [BY_ID['first-school-1996']['summary'],
                      'On 15 July 1996, Tamil Nadu raised no objection to CBSE affiliation, '
                      'on one condition: Tamil should be taught as a second language.']
     if _s['id'] == 'chapter-later':
-        _s['plates'] = ['supplied-isa', 'vision-2012', 'supplied-poland']
+        _s['plates'] = ['supplied-isa', 'vision-2012', 'supplied-poland', 'supplied-2019']
+        _s['notes'].insert(_s['notes'].index('report-2019'), 'ranking-2019')
 SCENES.append({
     'id': 'chapter-recent', 'index': '2025', 'year': '2024 &ndash; 2026',
     'head': 'The next generation.',

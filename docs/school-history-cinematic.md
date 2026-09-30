@@ -219,3 +219,29 @@ previous/next restoration, reduced motion, no JavaScript, WebGL failure, context
 loss and chapter deep links. All 31 complete record objects match the previous
 release, including captions and citations. Build, link, HTML and JS checks pass;
 staging includes all 21 images and the dynamically imported scene.
+
+## The school's year-named photographs (30 September 2026)
+
+The school's "history" folder on Drive holds thirteen photographs, each named
+for the year it belongs to. They are placed by that name, and each caption
+says it is the photograph "the school filed under" that year rather than
+dating the photograph itself; nobody is named from a face.
+
+- 1970 → the 1970s chapter, replacing the Chinmaya Mission lineage photograph.
+- 1993 is the portrait of Gurudev already in the opening expansion. It is now
+  the exhibit of the Mahasamadhi record; the 1993 chapter keeps the Samadhi
+  Sthal photograph, because a photograph has one presentation on this page.
+- 1994 → the 1994 chapter, replacing the Mission portrait of Guruji.
+- "Until 1996" → the same chapter, as the exhibit of the project record. Its
+  camera date stamp reads 28 6 1996, and the caption says so.
+- "June 1996" → the opening-class chapter, before the NOC letter.
+- 1984, "6 June 1996", 2011 and 2014 are the four photographs already here.
+- 2005 and 2009 → the 2005–2010 chapter, with the three documents it had.
+- 2019, the EducationWorld 2019–20 certificate → the exhibit of the existing
+  `ranking-2019` record, which the 2019 Annual Report already sources; the
+  certificate agrees with it (India 2, Tamil Nadu 1).
+- 2018 is 279 pixels square: it is the exhibit of its record only, shown at
+  its own size, and not in the journey. A larger copy has been asked for.
+
+The originals are in `assets/source/history-drive-2026-09-30/` (never
+deployed) and `tools/make-history-supplied.py` cuts them.

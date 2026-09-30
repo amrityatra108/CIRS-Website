@@ -12,10 +12,11 @@ import pymupdf
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'assets/source/history-distinct'
 OUT = ROOT / 'assets/img/history'
+# The lineage and Guruji photographs were retired on 30 September 2026, when
+# the school's own photographs for the 1970s and 1994 took their chapters;
+# their masters stay in the source folder.
 PHOTOS = {
-    'gurudev-lineage': 'gurudev-lineage.webp',
     'samadhi-sthal': 'samadhi-sthal.jpg',
-    'guruji-portrait': 'guruji-teaching.webp',
 }
 
 
