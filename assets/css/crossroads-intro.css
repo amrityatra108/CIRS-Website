@@ -1,7 +1,7 @@
 .crossroads-intro {
-  --cr-purple:#330740;
-  --cr-purple-deep:#16031c;
-  --cr-edge:#09020c;
+  --cr-purple:#000;
+  --cr-purple-deep:#000;
+  --cr-edge:#000;
   --cr-gold:var(--gold);
   --cr-gold-pale:var(--gold-pale);
   --cr-gold-dark:var(--gold);
@@ -16,14 +16,14 @@
   height:100dvh;
   min-height:520px;
   overflow:hidden;
-  background:radial-gradient(ellipse 75% 90% at 52% 44%,#360b42 0%,#200627 48%,#100315 100%);
+  background:#000;
   color:#fff;
   text-align:center;
 }
 .crossroads-intro__base,.crossroads-intro__reveal { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
 .crossroads-intro__base {
   z-index:10;
-  background:radial-gradient(ellipse 75% 90% at 52% 44%,#360b42 0%,#200627 48%,#100315 100%);
+  background:#000;
 }
 .crossroads-intro__base::after {
   content:"";
@@ -79,7 +79,7 @@
   mask-image:radial-gradient(circle var(--crossroads-intro-radius) at var(--crossroads-intro-x) var(--crossroads-intro-y),#000 0%,#000 30%,transparent 100%);
 }
 .crossroads-intro[data-crossroads-intro-lit] .crossroads-intro__reveal { opacity:calc(.42 * (1 - var(--crossroads-intro-exit))); }
-.crossroads-intro::before { content:""; position:absolute; inset:0 0 auto; height:138px; z-index:30; background:linear-gradient(rgba(9,2,12,.88),rgba(9,2,12,.5) 52%,transparent); pointer-events:none; }
+.crossroads-intro::before { content:""; position:absolute; inset:0 0 auto; height:138px; z-index:30; background:linear-gradient(rgba(0,0,0,.88),rgba(0,0,0,.5) 52%,transparent); pointer-events:none; }
 .crossroads-intro::after { content:""; position:absolute; inset:52% 0 0; z-index:30; background:linear-gradient(transparent,#11110f); opacity:var(--crossroads-intro-exit); pointer-events:none; }
 .crossroads-intro__content {
   position:absolute;
@@ -232,7 +232,7 @@
 .crossroads-intro[data-crossroads-intro-film] { background:var(--cr-edge); }
 .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__opening { display:block; height:100%; object-fit:cover; }
 .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__base,.crossroads-intro[data-crossroads-intro-film] .crossroads-intro__reveal { visibility:hidden; }
-.crossroads-intro[data-crossroads-intro-film]::after { inset:0; z-index:45; background:radial-gradient(ellipse at 50% 50%,var(--cr-purple-deep) 0%,rgba(22,3,28,.98) 38%,rgba(9,2,12,.78) 78%); opacity:1; transition:opacity 900ms ease; pointer-events:none; }
+.crossroads-intro[data-crossroads-intro-film]::after { inset:0; z-index:45; background:radial-gradient(ellipse at 50% 50%,var(--cr-purple-deep) 0%,rgba(0,0,0,.98) 38%,rgba(0,0,0,.78) 78%); opacity:1; transition:opacity 900ms ease; pointer-events:none; }
 .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__content { opacity:1; transition:opacity 700ms ease 360ms,transform 900ms cubic-bezier(.2,.65,.3,1) 300ms; }
 .crossroads-intro[data-crossroads-intro-film][data-crossroads-intro-opening-playing]::after { opacity:0; }
 .crossroads-intro[data-crossroads-intro-film][data-crossroads-intro-opening-playing] .crossroads-intro__content { opacity:0; visibility:hidden; transform:translateY(12px) scale(.975); transition:none; }
@@ -272,3 +272,11 @@ html.crossroads-intro-scroll-locked,html.crossroads-intro-scroll-locked body { o
   .crossroads-intro[data-crossroads-intro-film] .crossroads-intro__opening,
   .crossroads-intro[data-crossroads-intro-handoff] .crossroads-intro__opening { object-fit:contain; object-position:center; background:transparent; }
 }
+
+/* Recompose the supplied lettering into two lines; both crops use the same SVG. */
+.crossroads-intro-title-line{display:block;position:relative;overflow:hidden;width:100%;aspect-ratio:1520/725}
+.crossroads-intro-title-line--the{width:28%;aspect-ratio:650/725;margin-inline:auto}
+.crossroads-intro-title-line .crossroads-intro-title-art{position:absolute;top:0;left:-42.763%;width:142.763%;max-width:none;height:auto}
+.crossroads-intro-title-line--the .crossroads-intro-title-art{left:0;width:333.846%}
+.crossroads-intro__wordmark{width:100%;max-width:min(540px,64vh);margin-inline:auto}
+@media(max-width:700px) and (max-height:690px){.crossroads-intro__wordmark{max-width:36vh}}

@@ -27,7 +27,7 @@ body.laurels{
   --lr-ivory-2: var(--paper-2);
   --lr-gold: var(--gold);
   --lr-gold-soft: var(--gold-pale);
-  --lr-gold-ink: var(--gold-ink);
+  --lr-gold-ink: #715520;
   --lr-serif: "Newsreader", var(--font-editorial), Georgia, serif;
   --lr-ease: cubic-bezier(.16,1,.3,1);
   --lr-vh: 100svh;
@@ -709,12 +709,6 @@ body.laurels .lr :is(h1,h2,h3){ font-family: var(--lr-serif); font-weight: var(-
 .lr .lr-end__title{ margin: 0; font-size: clamp(3.4rem, 12vw, 13rem); line-height: .9; --lw: 200; letter-spacing: -.045em; }
 .lr-end__note{ margin: 0; max-width: 46ch; font-size: var(--fs-sm); color: var(--on-dark-mute); }
 .lr-end__note a{ color: var(--on-dark-soft); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(250,249,243,.3); }
-.lr-live .lr-end:not(.is-seen) .lr-end__title .lr-line > span{ transform: translateY(135%); }
-.lr-live .lr-end__title .lr-line > span{ transition: transform 1.4s var(--lr-ease); }
-.lr-live .lr-end__title .lr-line:nth-child(2) > span{ transition-delay: .16s; }
-.lr-live .lr-end:not(.is-seen) :is(.lr-end__range, .lr-end__note){ opacity: 0; }
-.lr-live .lr-end :is(.lr-end__range, .lr-end__note){ transition: opacity 1.4s .5s; }
-
 /* ============================================================
    Looking closely: a document comes forward and the page dims
    ============================================================ */
@@ -786,3 +780,49 @@ body.laurels .ring.has-label::after{ opacity: 1; }
   .lr-ms__year{ top: 56px; z-index: 0; color: rgba(250, 249, 243, .62); }
   .lr-ms__media, .lr-ms__copy{ position: relative; z-index: 1; }
 }
+
+/* Our Laurels: ivory and gold carry the records. The opening and featured
+   photographic stories retain the two deliberate dark contrasts. */
+body.laurels, body.laurels main { background: var(--lr-ivory); }
+.lr-count, .lr-reel, .lr-names, .lr-end {
+  --on-dark: var(--ink);
+  --on-dark-soft: var(--ink-soft);
+  --on-dark-mute: #625769;
+  --lr-gold-soft: #715520;
+  --rule-dark: var(--rule);
+  background: var(--lr-ivory); color: var(--ink);
+  border-top: 1px solid var(--rule);
+}
+.lr-count { background: var(--lr-ivory-2); }
+.lr-stat__fig, .lr-ms__year { color: var(--lr-gold-ink); }
+.lr-stat__label { letter-spacing: .16em; }
+.lr-stat__note, .lr-ms__text { line-height: 1.65; }
+.lr-cine .lr-ms { background: var(--lr-ivory); }
+.lr-ms__frame { background: var(--lr-ivory-2); }
+.lr-rail ol, .lr-rail button::before { background: var(--rule); }
+.lr-reel .lr-kicker, .lr-names .lr-kicker { color: var(--ink-soft); }
+.lr-names__reading span { background: var(--lr-ivory-2); box-shadow: 0 8px 24px #2b203714; }
+.lr-names__field.is-dim .lr-name__btn { opacity: .55; }
+.lr-names__field.is-dim .lr-name.is-on .lr-name__btn { color: var(--lr-gold-ink); }
+.lr-end__range i { color: var(--lr-gold-ink); }
+.lr-end__note a { text-decoration-color: var(--rule); }
+.lr .lr-end__title { position: relative; font-size: clamp(3.2rem, 10vw, 11rem); line-height: 1.02; }
+.lr-end__previous { display: none; }
+.lr-end__words { display: block; }
+.lr-end__words > span { display: block; }
+.lr-end.is-motion .lr-end__title { min-height: 3.06em; }
+.lr-end.is-motion .lr-end__previous { display: block; position: absolute; inset: 0; }
+.lr-end.is-motion .lr-end__words { position: relative; }
+.lr-end__dust { position: absolute; inset: 0; pointer-events: none; }
+.lr-icon { width: 18px; height: 18px; flex: 0 0 auto; vertical-align: middle; }
+.lr-inspect__btn .lr-icon { width: 16px; height: 16px; }
+.lr :is(a,button,summary):focus-visible { outline: 2px solid var(--lr-gold-ink); outline-offset: 4px; }
+@media (max-width: 899px) { .lr-ms__year { color: var(--lr-gold-ink); } }
+/* The first featured composition is hosted in the reel on wide screens;
+   its text still sits over a dark photograph. */
+.lr-reel__final { --on-dark: #faf9f3; --on-dark-soft: #e4dfd5; --on-dark-mute: #d4cec6; --lr-gold-soft: var(--gold-pale); --lr-gold-ink: var(--gold); }
+.lr-icon { display: inline-block; }
+.lr-features :is(a,button):focus-visible, .lr-reel__final :is(a,button):focus-visible { outline-color: var(--lr-gold); }
+.lr-end__range { display: flex; align-items: center; gap: .35em; }
+.lr-end__range i { display: inline-flex; }
+.lr-cine .lr-rail ol, .lr-cine .lr-rail button::before { background: var(--rule); }

@@ -392,7 +392,7 @@ PAGES = {
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
         "sheet": "sports",
-        "cache_suffix": "-sports-4",
+        "cache_suffix": "-sports-5",
         # The Sports Secretaries' pledge (tools/sakshi.py).
         "council": True,
         # No banner from the shared builder. Like CIRS Captures, this page
@@ -519,7 +519,7 @@ PAGES = {
         "banner": None,
         "sheet": "matharena",
         "litehead": True,
-        "cache_suffix": "-math-white-gold-2",
+        "cache_suffix": "-math-white-gold-3",
     },
     "creative-writing": {
         "nav": "Creative Writing",
@@ -543,7 +543,7 @@ PAGES = {
     "captures": {
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
-        "cache_suffix": "-captures-green-inward-3",
+        "cache_suffix": "-captures-green-inward-4",
         # Not "as its students see it", which this page said while it was a
         # placeholder: none of these files records who took it, so the page
         # makes no claim about who did.
@@ -607,7 +607,7 @@ PAGES = {
         # The supplied film now plays once in the page-specific hero.
         # The documented festival chapters and photographs remain below.
         "sheet": "festivals",
-        "cache_suffix": "-festivals-hero-1",
+        "cache_suffix": "-festivals-white-gold-2",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
         "description": "Seven festivals kept through the school year at Chinmaya International "
@@ -2089,8 +2089,15 @@ def build(slug, page):
                 + '<noscript><style>.footer-wrap{position:relative}</style></noscript>'
                 + head[curtain_note_end:])
     if slug == "festivals":
+        # Set the intro before first paint: the opening poster covers the
+        # final still until video decoding starts. A missing page script
+        # releases the readable static hero without an opaque page overlay.
         head = head.replace("</head>",
-            '<link rel="preload" as="image" href="assets/img/festivals-opening-final.jpg" fetchpriority="high">\n'
+            '<link rel="preload" as="image" href="assets/img/festivals-opening-poster.jpg" fetchpriority="high">\n'
+            '<script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;'
+            'document.documentElement.classList.add("fx-intro-pending");'
+            'window.__fxIntroFallback=setTimeout(function(){document.documentElement.classList.remove("fx-intro-pending");window.dispatchEvent(new Event("fx-intro-fallback"))},8000)'
+            '})()</script>\n'
             '<noscript><style>body.festivals .header{position:absolute}</style></noscript>\n</head>')
     if slug == "art-attack":
         head = head.replace("</head>", '<link rel="preload" as="image" href="assets/img/art-attack-opening-poster.jpg" fetchpriority="high">\n</head>')
@@ -2110,12 +2117,12 @@ def build(slug, page):
             "</head>",
             read("tools/partials/crossroads-startup.html") +
             '<style>body.crossroads-intro-active :is(.progress,.ring,.totop,.jump,.footer-wrap){visibility:hidden!important}'
-            'body.crossroads-intro-active .crossroads-intro{background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}'
+            'body.crossroads-intro-active .crossroads-intro{background:#000 url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}'
             '</style>'
             '<link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">\n'
-            f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-11" as="script" fetchpriority="high">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-10">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
+            f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-13" as="script" fetchpriority="high">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-12">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}-title-2">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-5">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
             '<noscript><style>body.crossroads-intro-active :is(.header,.drawer,.progress,.ring,.totop,.jump,.skip-link,.footer-wrap){visibility:visible!important}'
@@ -2499,7 +2506,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         # This page-specific controller only owns the introduction. Load it
         # before shared animation dependencies so Skip and its bounded lock
         # are ready as soon as the critical styles have arrived.
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-11" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-13" defer></script>')
     # Only video pages need media ownership; unrelated pages keep their scripts.
     if not page.get("cw") and (slug == "index" or page.get("hero_media") or page.get("opening")):
         parts.append(f'<script src="assets/js/media-lifecycle.js?{CACHE_BUST}" defer></script>')
@@ -2557,6 +2564,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-1" defer></script>')
+    if slug == "blog" or page.get("post"):
+        parts[0] = parts[0].replace('</head>', f'<link rel="stylesheet" href="assets/css/blog-palette.css?{CACHE_BUST}-1">\n</head>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}-restored-1" defer></script>')
     if slug == "why-cirs":

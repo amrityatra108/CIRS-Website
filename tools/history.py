@@ -301,7 +301,7 @@ EVENTS = [
      "caption": "Annual Report, 15 October 2019, first page.",
      "source": 'Annual Report, 15 October 2019, published on '
                '<a href="school-info.html">School Information</a> &middot; '
-               '<a href="assets/documents/school-info/annual-report.pdf" target="_blank" '
+               '<a href="assets/documents/school-info/annual-report-2019.pdf" target="_blank" '
                'rel="noopener">Open the PDF</a>',
      "note": "These are the latest figures with a confirmed reporting year. The published "
              "history's '577 students, 69 faculty and 78 staff, from 23 States of India and 19 "
@@ -316,7 +316,7 @@ EVENTS = [
              "schools, and kept first place in Tamil Nadu for the eighth consecutive year.",
      "exhibit": None,
      "source": 'The school&rsquo;s Annual Report, 15 October 2019 &middot; '
-               '<a href="assets/documents/school-info/annual-report.pdf" target="_blank" '
+               '<a href="assets/documents/school-info/annual-report-2019.pdf" target="_blank" '
                'rel="noopener">Open the PDF</a>',
      "note": "REPLACES two unsourced entries in the earlier draft: '2016, Education World ranks "
              "CIRS among the top four' and '2018, second in the country, first in CBSE'. The "
@@ -334,6 +334,50 @@ EVENTS = [
      "note": "The earlier draft's '2022: a 92% average in Science, 19 of 24 students at 90% or "
              "above' has no source in hand, and 92% is the 2019 Science average. It is not "
              "published; confirm whether 2022 is a separate result."},
+    {'body': '36 NCC cadets from CIRS took part in the Annual Training Camp at Kalaignar Karunanidhi '
+          'Institute of Technology, winning medals in the drill test, quiz, relay, shot put and '
+          'football, and CIRS received the overall Best Cadets award.',
+  'exhibit': None,
+  'id': 'ncc-2025',
+  'period': 'later',
+  'source': 'The school&rsquo;s Annual Report, 7 October 2025 &middot; <a '
+            'href="assets/documents/school-info/annual-report.pdf" target="_blank" '
+            'rel="noopener">Open the PDF</a>',
+  'summary': '36 CIRS cadets attend the annual training camp; the school wins Best Cadets.',
+  'title': 'Best Cadets at the NCC camp',
+  'when': '1&ndash;10 July 2025'},
+ {'body': 'Forty CIRS students took part in Harvard Model United Nations from 14 to 17 August '
+          '2025, where two received Outstanding Delegate awards; over the same dates, 34 students '
+          'represented nations at the IIMUN Championship Conference in Mumbai.',
+  'exhibit': None,
+  'id': 'mun-2025',
+  'period': 'later',
+  'source': 'The school&rsquo;s Annual Report, 7 October 2025 &middot; <a '
+            'href="assets/documents/school-info/annual-report.pdf" target="_blank" '
+            'rel="noopener">Open the PDF</a>',
+  'summary': '40 students at Harvard Model United Nations; 34 at IIMUN in Mumbai.',
+  'title': 'Harvard and IIMUN',
+  'when': 'August 2025'},
+ {'body': 'In its 29th year the school reported 596 students &mdash; 378 boys and 218 girls '
+          '&mdash; from 16 Indian states and 16 countries, with 70 faculty members and 71 members '
+          'of the administrative team, and remained one of the CBSE&rsquo;s Lead Schools. '
+          'Education World ranked CIRS second in the country among co-educational boarding schools '
+          'and first in Tamil Nadu and Coimbatore for the 14th consecutive year; Brainfeed ranked '
+          'it third in the country and first in the state and the city.',
+  'exhibit': None,
+  'id': 'report-2025',
+  'note': "The report says '16 states in India and 16 different countries across the world'; the "
+          "2019 report said '18 other countries'. Whether India is counted among the 16 is not "
+          "stated, so the page says '16 countries'. The ranking's survey year is not given. "
+          "Fourteenth consecutive year agrees with the 2019 report's eighth.",
+  'period': 'later',
+  'source': 'The school&rsquo;s Annual Report, 7 October 2025 &middot; <a '
+            'href="assets/documents/school-info/annual-report.pdf" target="_blank" '
+            'rel="noopener">Open the PDF</a>',
+  'summary': '596 students from 16 Indian states and 16 countries; second in India&rsquo;s '
+             'co-educational boarding schools.',
+  'title': 'The school in its twenty-ninth year',
+  'when': '7 October 2025'},
     {"id": "cbse-2026", "when": "March&ndash;April 2026", "period": "later",
      "title": "CBSE Class XII, 2026",
      "summary": "The highest Management score is 99.0%.",
@@ -423,50 +467,7 @@ UNRESOLVED = [
 ]
 
 # Keep the three source records linked from Our Laurels after restoring the archive.
-EVENTS.extend([{'body': '36 NCC cadets from CIRS took part in the Annual Training Camp at Kalaignar Karunanidhi '
-          'Institute of Technology, winning medals in the drill test, quiz, relay, shot put and '
-          'football, and CIRS received the overall Best Cadets award.',
-  'exhibit': None,
-  'id': 'ncc-2025',
-  'period': 'later',
-  'source': 'The school&rsquo;s Annual Report, 7 October 2025 &middot; <a '
-            'href="assets/documents/school-info/annual-report.pdf" target="_blank" '
-            'rel="noopener">Open the PDF</a>',
-  'summary': '36 CIRS cadets attend the annual training camp; the school wins Best Cadets.',
-  'title': 'Best Cadets at the NCC camp',
-  'when': '1&ndash;10 July 2025'},
- {'body': 'Forty CIRS students took part in Harvard Model United Nations from 14 to 17 August '
-          '2025, where two received Outstanding Delegate awards; over the same dates, 34 students '
-          'represented nations at the IIMUN Championship Conference in Mumbai.',
-  'exhibit': None,
-  'id': 'mun-2025',
-  'period': 'later',
-  'source': 'The school&rsquo;s Annual Report, 7 October 2025 &middot; <a '
-            'href="assets/documents/school-info/annual-report.pdf" target="_blank" '
-            'rel="noopener">Open the PDF</a>',
-  'summary': '40 students at Harvard Model United Nations; 34 at IIMUN in Mumbai.',
-  'title': 'Harvard and IIMUN',
-  'when': 'August 2025'},
- {'body': 'In its 29th year the school reported 596 students &mdash; 378 boys and 218 girls '
-          '&mdash; from 16 Indian states and 16 countries, with 70 faculty members and 71 members '
-          'of the administrative team, and remained one of the CBSE&rsquo;s Lead Schools. '
-          'Education World ranked CIRS second in the country among co-educational boarding schools '
-          'and first in Tamil Nadu and Coimbatore for the 14th consecutive year; Brainfeed ranked '
-          'it third in the country and first in the state and the city.',
-  'exhibit': None,
-  'id': 'report-2025',
-  'note': "The report says '16 states in India and 16 different countries across the world'; the "
-          "2019 report said '18 other countries'. Whether India is counted among the 16 is not "
-          "stated, so the page says '16 countries'. The ranking's survey year is not given. "
-          "Fourteenth consecutive year agrees with the 2019 report's eighth.",
-  'period': 'later',
-  'source': 'The school&rsquo;s Annual Report, 7 October 2025 &middot; <a '
-            'href="assets/documents/school-info/annual-report.pdf" target="_blank" '
-            'rel="noopener">Open the PDF</a>',
-  'summary': '596 students from 16 Indian states and 16 countries; second in India&rsquo;s '
-             'co-educational boarding schools.',
-  'title': 'The school in its twenty-ninth year',
-  'when': '7 October 2025'}])
+
 
 BY_ID = {e["id"]: e for e in EVENTS}
 assert len(BY_ID) == len(EVENTS), "every event needs a unique id"

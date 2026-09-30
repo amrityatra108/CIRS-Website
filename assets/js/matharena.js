@@ -185,7 +185,8 @@
     window.addEventListener("scroll", queue, {passive:true});
     window.addEventListener("resize", queue, {passive:true});
     window.addEventListener("pageshow", queue);
-    mode.addEventListener("change", queue);
+    if (mode.addEventListener) mode.addEventListener("change", queue);
+    else if (mode.addListener) mode.addListener(queue);
     paint();
   }
 
@@ -331,6 +332,7 @@
     window.addEventListener("resize", setMode, { passive: true });
     window.addEventListener("pageshow", setMode);
     if (reducedQuery.addEventListener) reducedQuery.addEventListener("change", setMode);
+    else if (reducedQuery.addListener) reducedQuery.addListener(setMode);
     setMode();
 
     // A link in the opening, reached by Tab after the lettering has left,

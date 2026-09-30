@@ -1,7 +1,7 @@
 <!-- Establish the poster before the deferred controller or media can load. -->
 <style>
-body.crossroads-intro-active{background:#16031c}
-.crossroads-intro[data-crossroads-intro-pending]{position:relative;min-height:100svh;overflow:hidden;background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}
+body.crossroads-intro-active{background:#000}
+.crossroads-intro[data-crossroads-intro-pending]{position:relative;min-height:100svh;overflow:hidden;background:#000 url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}
 .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:hidden;opacity:0}
 .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base,.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__reveal{visibility:hidden}
 .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -16,16 +16,31 @@ body.crossroads-intro-active{background:#16031c}
 // observes the same navigation deadline and cannot restart the film.
 setTimeout(function () {
   if (window.__crossroadsIntroReady) return;
-  var intro = document.querySelector("[data-crossroads-intro]");
-  if (!intro) return;
   window.__crossroadsStartupExpired = true;
-  intro.querySelectorAll("video").forEach(function (video) { video.pause(); });
-  ["pending", "film", "opening-playing", "locked"].forEach(function (state) {
-    intro.removeAttribute("data-crossroads-intro-" + state);
-  });
-  intro.setAttribute("data-crossroads-intro-settled", "");
-  document.documentElement.classList.remove("crossroads-intro-scroll-locked");
-  document.body.classList.remove("crossroads-intro-active");
-  if (window.__crossroadsStartupUnlock) window.__crossroadsStartupUnlock();
+  var waiting;
+  function recover() {
+    if (window.__crossroadsIntroReady) { if (waiting) waiting.disconnect(); return; }
+    var intro = document.querySelector("[data-crossroads-intro]");
+    if (!intro) return false;
+    if (waiting) waiting.disconnect();
+    intro.querySelectorAll("video").forEach(function (video) { video.pause(); });
+    ["pending", "film", "opening-playing", "locked"].forEach(function (state) {
+      intro.removeAttribute("data-crossroads-intro-" + state);
+    });
+    intro.setAttribute("data-crossroads-intro-settled", "");
+    document.documentElement.classList.remove("crossroads-intro-scroll-locked");
+    document.body.classList.remove("crossroads-intro-active");
+    if (window.__crossroadsStartupUnlock) window.__crossroadsStartupUnlock();
+    return true;
+  }
+  if (!recover() && document.readyState === "loading") {
+    // A streamed response can still be parsing its head at the deadline.
+    // Recover in the microtask when the intro arrives, before it can paint.
+    waiting = new MutationObserver(recover);
+    waiting.observe(document.documentElement, {childList:true, subtree:true});
+    document.addEventListener("DOMContentLoaded", function () {
+      recover(); waiting.disconnect();
+    }, {once:true});
+  }
 }, Math.max(0, 6000 - performance.now()));
 </script>
