@@ -34,8 +34,8 @@
 <link rel="stylesheet" href="assets/css/typography.css?b=115">
 <!-- Establish the poster before the deferred controller or media can load. -->
 <style>
-body.crossroads-intro-active{background:#16031c}
-.crossroads-intro[data-crossroads-intro-pending]{position:relative;min-height:100svh;overflow:hidden;background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}
+body.crossroads-intro-active{background:#000}
+.crossroads-intro[data-crossroads-intro-pending]{position:relative;min-height:100svh;overflow:hidden;background:#000 url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}
 .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content{visibility:hidden;opacity:0}
 .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__base,.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__reveal{visibility:hidden}
 .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -78,9 +78,9 @@ setTimeout(function () {
   }
 }, Math.max(0, 6000 - performance.now()));
 </script>
-<style>body.crossroads-intro-active :is(.progress,.ring,.totop,.jump,.footer-wrap){visibility:hidden!important}body.crossroads-intro-active .crossroads-intro{background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}</style><link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">
-<link rel="preload" href="assets/js/crossroads-intro.js?b=115-intro-11" as="script" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/crossroads-intro.css?b=115-intro-11">
+<style>body.crossroads-intro-active :is(.progress,.ring,.totop,.jump,.footer-wrap){visibility:hidden!important}body.crossroads-intro-active .crossroads-intro{background:#000 url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}</style><link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">
+<link rel="preload" href="assets/js/crossroads-intro.js?b=115-intro-12" as="script" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/crossroads-intro.css?b=115-intro-12">
 <link rel="stylesheet" href="assets/css/crossroads-archive.css?b=115">
 <link rel="stylesheet" href="assets/css/crossroads-stories.css?b=115-hover-4">
 <link rel="stylesheet" href="assets/css/crossroads-manuscript.css?b=115">
@@ -1209,7 +1209,7 @@ setTimeout(function () {
   </div>
 </footer>
 </div>
-<script src="assets/js/crossroads-intro.js?b=115-intro-11" defer></script>
+<script src="assets/js/crossroads-intro.js?b=115-intro-12" defer></script>
 <!-- The motion layer, served from this site rather than from a CDN. See
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before

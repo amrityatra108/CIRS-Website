@@ -239,7 +239,7 @@
     if (play) play.hidden = false;
   }
   function onIntroClick(event) {
-    if (openingState !== "complete" && !event.target.closest("[data-crossroads-intro-enter]")) finishOpening(false, true);
+    if (openingState !== "complete" && !event.target.closest("[data-crossroads-intro-enter], [data-crossroads-intro-play]")) finishOpening(false, true);
   }
   function onOpeningPlaying() {
     if (openingState === "complete") return;
