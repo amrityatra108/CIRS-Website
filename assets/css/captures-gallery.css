@@ -391,3 +391,12 @@
   }
   .cg__row:has(> .cg__item:nth-child(3)) > .cg__item:first-child .cg__item-caption{ display:block; opacity:1; }
 }
+
+/* The original featured-photo green continues through every journal chapter. */
+body.captures :is(.cg,.cg-end){
+ --ink:var(--on-dark);--ink-soft:var(--on-dark-soft);--ink-mute:var(--on-dark-mute);
+ --paper:var(--captures-ground);--paper-2:#202A22;--paper-3:var(--captures-ground);
+ --rule:rgba(250,249,243,.22);--label:var(--gold);
+ background:var(--captures-ground);color:var(--ink);
+}
+body.captures .cg-end__onward a{color:var(--on-dark)}

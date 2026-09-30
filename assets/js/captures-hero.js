@@ -256,7 +256,8 @@
     var e = exit * exit * (3 - 2 * exit);
     var camX = pointer.x * .026 * W * lw;
     var camY = pointer.y * .018 * H * lw + cam.y * H + iw * .0035 * H * Math.sin(time * .57);
-    var camZ = cam.z * P + e * .3 * P;
+    // A restrained forward dolly; no lateral explosion of the photographs.
+    var camZ = cam.z * P + e * .12 * P;
     var turnY = drag.rY + pointer.x * 2.2 * lw;
     var turnX = drag.rX - pointer.y * 1.3 * lw;
     var world = "translate3d(" + fixed(-camX) + "px," + fixed(-camY) + "px," + fixed(camZ) + "px) rotateX(" +
@@ -266,7 +267,7 @@
     }
 
     // Each card.
-    var spread = 1 + e * .22;
+    var spread = 1 - e * .16;
     var any = hovered && !drag.on && !focus.card;
     for (var i = 0; i < visible.length; i++) {
       var c = visible[i], L = c.L;
@@ -313,12 +314,12 @@
     var ho = ((1 - .45 * focus.v) * (1 - .92 * e)).toFixed(3);
     if (ho !== head.__o) {
       head.style.opacity = ho;
-      head.style.transform = e ? "translate3d(0," + (-e * 4).toFixed(2) + "vh,0)" : "";
+      head.style.transform = e ? "scale(" + (1 + e * .08).toFixed(3) + ")" : "";
       head.__o = ho;
     }
     var fo = ((1 - .7 * focus.v) * (1 - Math.min(1, e * 2.2))).toFixed(3);
     if (fo !== footBox.__o) { footBox.style.opacity = fo; footBox.__o = fo; }
-    var so = (e * .62).toFixed(3);
+    var so = (e * .22).toFixed(3);
     if (so !== shade.__o) { shade.style.opacity = so; shade.__o = so; }
   }
 

@@ -542,7 +542,7 @@ PAGES = {
     "captures": {
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
-        "cache_suffix": "-captures-journal-2",
+        "cache_suffix": "-captures-green-inward-3",
         # Not "as its students see it", which this page said while it was a
         # placeholder: none of these files records who took it, so the page
         # makes no claim about who did.
