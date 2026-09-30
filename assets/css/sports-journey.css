@@ -561,3 +561,14 @@ html.sports-journey-ready .sports-chapters__markers span{ top:88px; }
     margin:0;
   }
 }
+
+body.sports .sports-ground {background:#fffefa;}
+body.sports .sports-leaders {background:#fffefa;color:#272720;}
+body.sports .sports-leaders :is(.sc,.cp__eyebrow) {color:#806019;}
+body.sports .sports-leaders .marker::before {border-color:#806019;}
+body.sports .sports-leaders .lead {color:#55554a;}
+body.sports .sports-leaders .cp {
+  --cp-ink:#272720;--cp-soft:#55554a;--cp-label:#806019;
+  --cp-mark:#806019;--cp-rule:#dfd3b5;
+  background:#fff;border-color:#dfd3b5;box-shadow:0 8px 28px rgba(98,74,20,.055);
+}
