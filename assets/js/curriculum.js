@@ -105,7 +105,7 @@
     var undoStage = null, undoMotion = null;
     function apply() {
       var motion = !reduce.matches;
-      var stage = motion && wide.matches;
+      var stage = false; // The numbered academic split owns the feature sequence.
       if (stage && !undoStage) undoStage = journeyStage();
       else if (!stage && undoStage) { undoStage(); undoStage = null; }
       if (motion && !undoMotion) undoMotion = entrances();

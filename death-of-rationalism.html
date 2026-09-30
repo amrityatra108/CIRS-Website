@@ -45,9 +45,10 @@
 <link rel="stylesheet" href="assets/css/footer.css?b=115-blog-editorial-1-footer-1">
 <link rel="stylesheet" href="assets/css/drawer.css?b=115-blog-editorial-1-nav-5">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
+<link rel="stylesheet" href="assets/css/coordinated.css?b=115-blog-editorial-1-1">
 </head>
 
-<body class="blog litehead">
+<body class="cirs-redesign blog litehead">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
@@ -268,7 +269,8 @@
 </div>
 <main id="main">
 <script src="assets/js/navigation.js?b=115-blog-editorial-1-core-3"></script>
-<article class="art" id="top">
+<script src="assets/js/coordinated.js?b=115-blog-editorial-1-1" defer></script>
+<article class="art rd-essay" id="top" data-rd-chapters>
   <header class="art__head">
     <div class="art__shell">
       <nav class="art__breadcrumb" aria-label="Breadcrumb">
@@ -281,16 +283,7 @@
         <span>August 2026</span>
         <span>6 min read</span>
       </div>
-    </div>
-  </header>
-  <div class="art__layout">
-    <aside class="art__rail" aria-label="Original publication">
-      <p>First published in</p>
-      <strong>The Crossroads<br>Issue 32</strong>
-      <a href="assets/documents/crossroads/crossroads-issue-32.pdf">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
-      <a href="crossroads.html">All issues of The Crossroads</a>
-    </aside>
-    <div class="art__content">
+<p class="rd-essay__intro">Rationalism was meant to be a method, not an identity. It was to be the discipline of honest seeing, not another tribe of the like-minded. You question, you examine, you see clearly.</p>    </div>
     <figure class="art__hero">
       <img src="assets/img/blog/death-of-rationalism.webp"
            alt="Illustrated stone hall breaking apart between geometric lines and dark smoke"
@@ -298,11 +291,21 @@
       <figcaption>Illustration supplied for the web edition.</figcaption>
     </figure>
 
+  </header>
+  <div class="art__layout" id="essay-reading">
+    <aside class="art__rail" aria-label="Original publication">
+<nav class="rd-essay__chapters" aria-label="Essay chapters"><a href="#essay-reading">Beginning</a><a href="#essay-chapter-1">01 · The Outward Gaze</a></nav>
+      <p>First published in</p>
+      <strong>The Crossroads<br>Issue 32</strong>
+      <a href="assets/documents/crossroads/crossroads-issue-32.pdf">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
+      <a href="crossroads.html">All issues of The Crossroads</a>
+    </aside>
+    <div class="art__content">
       <div class="art__body">
       <p>Rationalism was meant to be a method, not an identity. It was to be the discipline of honest seeing, not another tribe of the like-minded. You question, you examine, you see clearly. You hold no belief sacred, no authority exempt — including your own. Every conclusion must justify itself and if it cannot, you let it go. That is the original promise. From the Greek sceptics to the Enlightenment philosophers to the modern scientific temper, this is what rationalism has always claimed as its essence: the courage to ask, the willingness to discard, the refusal to bow before any idea simply because it is old or revered or comfortable.</p>
       <p>The courage to question rather than blindly obey, to examine rather than merely accept: this is what allows the mind to mature and society to remain free.</p>
       <p>None of this is an argument against rationalism as a method. The method works. Peer review catches errors, replication weeds out fraud, falsification disciplines speculation. The institution of science corrects what the individual scientist cannot. But the method’s virtue does not automatically transfer to the practitioner. A system can be self-correcting while the people within it remain thoroughly self-deceived. It is this gap, between what rationalism promises and what the rationalist practices, that concerns us here.</p>
-      <h2>The Outward Gaze</h2>
+      <h2 id="essay-chapter-1">The Outward Gaze</h2>
       <p>Watch the rationalist in action. He will tell you precisely why the pilgrim is wasting his time at the temple, but he cannot tell you why he himself spent three hours last night arguing with strangers on the internet. He will explain the cognitive biases that make people believe in astrology, yet he has never once examined the compulsion that makes him need to correct them. He writes essays on why people cling to tradition.</p>
       <p>Still, he cannot see that his own identity as “the one who sees through tradition” is just as clung to, just as defended, just as psychologically necessary to him as any ritual is to a devotee.</p>
       <p>This is the fatal flaw. Reason directed only outward is not complete reason; it is half-reason, and half-reason is often more dangerous than no reason at all because it comes with the illusion of completeness.</p>

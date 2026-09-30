@@ -23,12 +23,6 @@
       </p>
     </div>
 
-    <ol class="mc-states" aria-hidden="true">
-      <li><span>01</span> Cube <em>6&times;6&times;6</em></li>
-      <li><span>02</span> Field <em>18&times;12</em></li>
-      <li><span>03</span> Torus <em>18&times;12</em></li>
-    </ol>
-
     <div class="mc-say">
       <p class="mc-say__lead"><span class="mc-line"><span>Four divisions,</span></span> <span class="mc-line"><span>one love of <em>mathematics.</em></span></span></p>
       <div class="mc-say__end">
@@ -37,12 +31,42 @@
       </div>
     </div>
 
-    <button type="button" class="mc-pulse" id="mcPulse" hidden>
-      <span class="mc-pulse__ring" aria-hidden="true"></span>Pulse sculpture
-    </button>
+    <div class="mc-controls" aria-label="Sculpture controls">
+      <ol class="mc-states" hidden>
+        <li><button type="button" data-mc-shape="0" aria-pressed="true"><span>01</span> Cube <em>6×6×6</em></button></li>
+        <li><button type="button" data-mc-shape="1" aria-pressed="false"><span>02</span> Field <em>18×12</em></button></li>
+        <li><button type="button" data-mc-shape="2" aria-pressed="false"><span>03</span> Torus <em>18×12</em></button></li>
+      </ol>
+      <button type="button" class="mc-pulse" id="mcPulse" aria-pressed="false" hidden>
+        <span class="mc-pulse__ring" aria-hidden="true"></span>Pulse sculpture
+      </button>
+    </div>
   </div>
   <span class="mc-stage__dark" data-header-theme="dark" aria-hidden="true"></span>
 </section>
+<section class="rd-math" id="demonstration" aria-labelledby="rd-math-h">
+ <header><p>From the CIRS mathematics newsletter</p><h2 id="rd-math-h">One number.<br>Two ways to see it.</h2><p>Explore the two cube decompositions of 1729 shown in the school’s December 2016 newsletter, printed page 1.</p><a href="#math-solution">Show full solution</a></header>
+ <div class="rd-math__layout">
+  <div class="rd-math-workspace" data-rd-math data-step="0">
+   <nav aria-label="Demonstration stages"><button type="button" data-math-stage="0" aria-pressed="true">01 Problem</button><button type="button" data-math-stage="1" aria-pressed="false">02 Construction</button><button type="button" data-math-stage="2" aria-pressed="false">03 Reasoning</button><button type="button" data-math-stage="3" aria-pressed="false">04 Result</button></nav>
+   <p class="rd-math__question">Can the same number be a sum of two positive cubes in two different ways?</p>
+   <div class="rd-math__diagram"><svg viewBox="0 0 600 265" role="img" aria-label="Two pairs of cubes with edge lengths one and twelve, and nine and ten units. Each unit is represented by ten SVG units."><g fill="none" stroke="#d8b76a" stroke-width="1.5"><path d="M30 120h10v10h-10Z M30 120l3.3333333333333335 -3.3333333333333335h10l-3.3333333333333335 3.3333333333333335 M40 120l3.3333333333333335 -3.3333333333333335v10l-3.3333333333333335 3.3333333333333335"/></g><text x="35.0" y="160" text-anchor="middle" fill="#faf9f3" font-size="19">1³</text><g fill="none" stroke="#d8b76a" stroke-width="1.5"><path d="M90 60h120v120h-120Z M90 60l40.0 -40.0h120l-40.0 40.0 M210 60l40.0 -40.0v120l-40.0 40.0"/></g><text x="150.0" y="210" text-anchor="middle" fill="#faf9f3" font-size="19">12³</text><g fill="none" stroke="#d8b76a" stroke-width="1.5"><path d="M330 90h90v90h-90Z M330 90l30.0 -30.0h90l-30.0 30.0 M420 90l30.0 -30.0v90l-30.0 30.0"/></g><text x="375.0" y="210" text-anchor="middle" fill="#faf9f3" font-size="19">9³</text><g fill="none" stroke="#d8b76a" stroke-width="1.5"><path d="M450 80h100v100h-100Z M450 80l33.333333333333336 -33.333333333333336h100l-33.333333333333336 33.333333333333336 M550 80l33.333333333333336 -33.333333333333336v100l-33.333333333333336 33.333333333333336"/></g><text x="500.0" y="210" text-anchor="middle" fill="#faf9f3" font-size="19">10³</text><text x="270" y="153" fill="#d8b76a" font-size="30">=</text></svg><span class="rd-math__scan" aria-hidden="true"></span></div>
+   <p class="rd-math__calculation" data-math-display>Find two pairs of positive integers.</p>
+   <p class="rd-math__result">1³ + 12³ = 9³ + 10³ = <strong>1729</strong></p>
+  </div>
+  <div class="rd-math__solution" id="math-solution" tabindex="-1">
+   <h3>A complete solution</h3>
+   <ol>
+    <li data-math-reason="0"><h4>01. The problem</h4><p>Find a number that can be expressed as two different sums of two positive cubes.</p></li>
+    <li data-math-reason="1"><h4>02. Build the cubes</h4><p>Try the pairs (1, 12) and (9, 10). A cube with side <var>n</var> has volume <var>n</var>³.</p></li>
+    <li data-math-reason="2"><h4>03. Calculate each pair</h4><p>1³ = 1 and 12³ = 1728, so their sum is 1729.<br>9³ = 729 and 10³ = 1000, so their sum is also 1729.</p></li>
+    <li data-math-reason="3"><h4>04. Verify the equality</h4><p><math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="One cubed plus twelve cubed equals nine cubed plus ten cubed equals one thousand seven hundred and twenty-nine"><msup><mn>1</mn><mn>3</mn></msup><mo>+</mo><msup><mn>12</mn><mn>3</mn></msup><mo>=</mo><msup><mn>9</mn><mn>3</mn></msup><mo>+</mo><msup><mn>10</mn><mn>3</mn></msup><mo>=</mo><mn>1729</mn></math></p><p>Both pairs contain different positive integers, and both give the same sum.</p></li>
+   </ol>
+   <a href="assets/documents/math-challenge/december-2016-newsletter.pdf">Read the original newsletter</a>
+  </div>
+ </div>
+</section>
+
 
 <section class="mc-zones" id="zones" data-jump-label="Divisions" aria-labelledby="mc-zones-title">
   <div class="wrap">

@@ -37,9 +37,9 @@ const VIEW = {
   // On a portrait screen the field turns lengthwise to fill it.
   Bt: [0.86, -1.32, 0]
 };
-const IVORY = new THREE.Color("#f1ebdd");
-const STONE = new THREE.Color("#e2d9c4");
-const GOLD = new THREE.Color("#cca042");
+const IVORY = new THREE.Color("#c49a48");
+const STONE = new THREE.Color("#a57d36");
+const GOLD = new THREE.Color("#d4af62");
 
 const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const range = (p, a, b) => clamp((p - a) / (b - a));
@@ -131,6 +131,40 @@ function viewQuat(e) {
   return new THREE.Quaternion().setFromEuler(new THREE.Euler(e[0], e[1], e[2], "XYZ"));
 }
 
+/* Original, small HDR studio map. Soft rectangular reflection sources are
+   prefiltered once by PMREM, so metal receives broad reflections without
+   a downloaded HDR asset, bloom, or another per-frame render pass. */
+function studioEnvironment(renderer) {
+  const w = 256, h = 128, data = new Float32Array(w * h * 4);
+  const panels = [
+    [-.9, .7, .7, .58, .34, 3.3, [1, .86, .66]],
+    [1, .2, .6, .35, .62, 1.25, [.86, .92, 1]],
+    [.3, .5, -1, .22, .58, 3.2, [1, .91, .73]],
+    [0, 1, 0, .9, .35, 1.0, [1, .96, .88]]
+  ].map(([x,y,z,a,b,power,colour]) => ({dir:new THREE.Vector3(x,y,z).normalize(),a,b,power,colour}));
+  const dir=new THREE.Vector3(), horizontal=new THREE.Vector3(), vertical=new THREE.Vector3();
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++) {
+    const theta=(y+.5)/h*Math.PI, phi=(x+.5)/w*Math.PI*2;
+    dir.set(-Math.sin(theta)*Math.cos(phi),Math.cos(theta),Math.sin(theta)*Math.sin(phi));
+    const rgb=[.07,.075,.085];
+    for(const panel of panels) {
+      horizontal.crossVectors(new THREE.Vector3(0,1,0),panel.dir);
+      if(horizontal.lengthSq()<.001) horizontal.set(1,0,0);
+      horizontal.normalize(); vertical.crossVectors(panel.dir,horizontal);
+      const facing=dir.dot(panel.dir);
+      if(facing<=0)continue;
+      const u=dir.dot(horizontal)/facing/panel.a,v=dir.dot(vertical)/facing/panel.b;
+      const intensity=panel.power*Math.exp(-Math.pow(u,4)-Math.pow(v,4));
+      for(let c=0;c<3;c++)rgb[c]+=intensity*panel.colour[c];
+    }
+    const i=(y*w+x)*4;data[i]=rgb[0];data[i+1]=rgb[1];data[i+2]=rgb[2];data[i+3]=1;
+  }
+  const texture=new THREE.DataTexture(data,w,h,THREE.RGBAFormat,THREE.FloatType);
+  texture.mapping=THREE.EquirectangularReflectionMapping;texture.needsUpdate=true;
+  const pmrem=new THREE.PMREMGenerator(renderer), target=pmrem.fromEquirectangular(texture);
+  texture.dispose();pmrem.dispose();return target;
+}
+
 /* ============================================================
    mount(api) — api comes from matharena.js
    ============================================================ */
@@ -149,8 +183,8 @@ export function mount(api) {
     return null;
   }
   renderer.setClearColor(0x000000, 0);
-  renderer.toneMapping = THREE.NeutralToneMapping;
-  renderer.toneMappingExposure = 1.0;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
 
   const S = build();
   const scene = new THREE.Scene();
@@ -159,16 +193,21 @@ export function mount(api) {
   const group = new THREE.Group();
   scene.add(group);
 
-  scene.add(new THREE.HemisphereLight(0xfff8ec, 0xbfb29a, 1.45));
-  const key = new THREE.DirectionalLight(0xffffff, 2.5);
+  const environment = studioEnvironment(renderer);
+  scene.environment = environment.texture;
+  scene.add(new THREE.HemisphereLight(0xfff2db, 0x24232c, .45));
+  const key = new THREE.DirectionalLight(0xffe1ad, 3.2);
   key.position.set(-0.62, 0.66, 0.58).multiplyScalar(10);
   scene.add(key);
-  const fill = new THREE.DirectionalLight(0xebe6f4, 0.4);
+  const fill = new THREE.DirectionalLight(0xe6edff, 1.1);
   fill.position.set(0.72, -0.08, 0.42).multiplyScalar(10);
   scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffe7bd, 2.0);
+  rim.position.set(4, 5, -6);
+  scene.add(rim);
 
   const geometry = bevelledBox(BLOCK, BEVEL);
-  const material = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.74, metalness: 0 });
+  const material = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .30, metalness: .85, envMapIntensity: 1.15 });
   const mesh = new THREE.InstancedMesh(geometry, material, COUNT);
   mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
   for (let i = 0; i < COUNT; i++) mesh.setColorAt(i, S.base[i]);
@@ -192,7 +231,7 @@ export function mount(api) {
 
   let width = 1, height = 1, frames = null, tallView = false;
   let raf = 0, last = 0, visible = true, lost = false, live = false, destroyed = false;
-  let progress = api.progress(), shownProgress = -1;
+  let progress = api.progress(), shownProgress = -1, displayedProgress = progress;
   let pointer = { x: 0, y: 0, on: false, strength: 0 };
   let pulseAt = -1, pulseOrigin = null;
   let pokes = [];
@@ -230,11 +269,11 @@ export function mount(api) {
       A: [ax, ay, DIST],
       A2: [ax, ay - height * 0.01, DIST / 1.04],
       B: tall ? [width * 0.5, height * 0.52, at(RADIUS_B, Math.min(height * 0.92, width * 2.4))]
-              : [width * 0.52, height * 0.5, at(RADIUS_B, Math.min(width * 0.92, height * 1.45))],
-      C: tall ? [width * 0.5, height * 0.67, at(RADIUS_C, Math.min(width * 1.02, height * 0.52))]
-              : [width * 0.71, height * 0.52, at(RADIUS_C, Math.min(height * 0.86, width * 0.5))],
-      D: tall ? [width * 0.5, height * 0.67, at(RADIUS_C, Math.min(width * 0.98, height * 0.5))]
-              : [width * 0.72, height * 0.5, at(RADIUS_C, Math.min(height * 0.8, width * 0.46))]
+              : [width * 0.5, height * 0.51, at(RADIUS_B, Math.min(width * .78, height * 1.02))],
+      C: tall ? [width * 0.5, height * 0.5, at(RADIUS_C, width * .92)]
+              : [width * 0.74, height * 0.51, at(RADIUS_C, Math.min(height * 0.76, width * 0.48))],
+      D: tall ? [width * 0.5, height * 0.5, at(RADIUS_C, width * .9)]
+              : [width * 0.74, height * 0.51, at(RADIUS_C, Math.min(height * 0.76, width * 0.46))]
     };
     shownProgress = -1;
     wake();
@@ -258,6 +297,11 @@ export function mount(api) {
     camera.updateProjectionMatrix();
 
     qView.copy(VQ.A).slerp(VQ.A2, e0).slerp(tallView ? VQ.Bt : VQ.B, gAB).slerp(VQ.C, gBC).slerp(VQ.D, gD);
+    if (!compact() && !api.reduced()) {
+      Qt.setFromEuler(new THREE.Euler((pointer.y / height - .5) * .07 * pointer.strength,
+        (pointer.x / width - .5) * .09 * pointer.strength, 0));
+      qView.multiply(Qt);
+    }
     group.quaternion.copy(qView);
     group.updateMatrixWorld(true);
     qInv.copy(qView).invert();
@@ -314,6 +358,7 @@ export function mount(api) {
     const reach = Math.min(width, height) * (compact() ? 0.2 : 0.15);
     const reach2 = reach * reach;
     const sources = [];
+    // Restore the local cursor response using the existing damped block springs.
     if (pointer.strength > 0.002) sources.push([pointer.x, pointer.y, pointer.strength, reach2]);
     pokes = pokes.filter((k) => now - k.t < 700);
     pokes.forEach((k) => {
@@ -332,7 +377,7 @@ export function mount(api) {
     }
     if (pulseAt >= 0) {
       const t = (now - pulseAt) / 1500;
-      if (t >= 1) pulseAt = -1;
+      if (t >= 1) { pulseAt = -1; if(pulse) {pulse.setAttribute("aria-pressed","false");pulse.classList.remove("is-pulsing");} }
       else {
         const [ox, oy, span] = pulseOrigin;
         const front = t * 1.35;
@@ -340,7 +385,7 @@ export function mount(api) {
           const dx = screen[i * 2] - ox, dy = screen[i * 2 + 1] - oy;
           const dist = Math.sqrt(dx * dx + dy * dy) || 1;
           const rho = dist / span;
-          const wave = Math.exp(-Math.pow((rho - front) / 0.16, 2)) * (1 - t) * 1.1;
+          const wave = Math.exp(-Math.pow((rho - front) / 0.16, 2)) * (1 - t) * .32;
           if (wave < 0.003) continue;
           push(i, dx / dist, dy / dist, wave);
         }
@@ -359,7 +404,7 @@ export function mount(api) {
   }
 
   function springs(dt) {
-    const k = 110, c = 2 * Math.sqrt(k) * 0.72;
+    const k = 100, c = 2 * Math.sqrt(k) * .95;
     let moving = 0;
     for (let j = 0; j < COUNT * 3; j++) {
       const a = k * (tgt[j] - off[j]) - c * vel[j];
@@ -380,8 +425,10 @@ export function mount(api) {
     last = now;
 
     const motion = !api.reduced();
-    const target = api.kinetic() ? progress : 0;
-    const hover = pointer.on && motion;
+    displayedProgress = motion ? lerp(displayedProgress, progress, 1 - Math.exp(-dt * 7)) : progress;
+    if (Math.abs(displayedProgress-progress)<.00005)displayedProgress=progress;
+    const target = displayedProgress;
+    const hover = pointer.on && motion && !compact();
     pointer.strength += ((hover ? 1 : 0) - pointer.strength) * Math.min(1, dt * 7);
 
     // Pose once for the screen positions, react, then pose with the result.
@@ -400,7 +447,7 @@ export function mount(api) {
       art.classList.add("is-live");
       if (pulse) pulse.hidden = !motion;
     }
-    const busy = moving || pulseAt >= 0 || pokes.length || pointer.strength > 0.002;
+    const busy = moving || pulseAt >= 0 || pokes.length || Math.abs(pointer.strength-(hover?1:0))>.002 || Math.abs(displayedProgress-progress)>.00005;
     if (busy) raf = requestAnimationFrame(frame);
     else last = 0;
   }
@@ -412,7 +459,7 @@ export function mount(api) {
   /* ---------- the first frame arrives settling, not appearing ---------- */
   if (!api.reduced() && api.progress() < 0.05) {
     for (let i = 0; i < COUNT; i++) {
-      const o = i * 3, s = 0.12 + 0.3 * hash01(i + 3);
+      const o = i * 3, s = .025 + .035 * hash01(i + 3);
       off[o] = S.posA[o] * s; off[o + 1] = S.posA[o + 1] * s + 0.12; off[o + 2] = S.posA[o + 2] * s;
       rot[o + 1] = (hash01(i + 11) - 0.5) * 0.5;
     }
@@ -424,18 +471,14 @@ export function mount(api) {
     return [e.clientX - r.left, e.clientY - r.top];
   }
   function onMove(e) {
-    if (e.pointerType === "touch") return;
+    if (e.pointerType === "touch" || compact() || e.target.closest("a,button")) return;
     [pointer.x, pointer.y] = local(e);
     pointer.on = true;
     wake();
   }
   function onLeave() { pointer.on = false; wake(); }
   function onDown(e) {
-    if (e.pointerType !== "touch" || api.reduced()) return;
-    if (e.target.closest("a, button")) return;
-    const [x, y] = local(e);
-    pokes.push({ x, y, t: performance.now() });
-    wake();
+    // Touch leaves the model still; Pulse is the explicit motion control.
   }
   function onPulse() {
     if (api.reduced()) return;
@@ -448,6 +491,7 @@ export function mount(api) {
     for (let i = 0; i < COUNT; i++) far = Math.max(far, Math.hypot(screen[i * 2] - sx, screen[i * 2 + 1] - sy));
     pulseOrigin = [sx, sy, far || Math.min(r.width, r.height) / 3];
     pulseAt = performance.now();
+    pulse.setAttribute("aria-pressed", "true");
     pulse.classList.remove("is-pulsing");
     void pulse.offsetWidth;
     pulse.classList.add("is-pulsing");
@@ -457,7 +501,15 @@ export function mount(api) {
     progress = p;
     if (p !== shownProgress) wake();
   });
-  api.onMode(() => { requestAnimationFrame(layout); });
+  api.onMode(() => {
+    if (api.reduced()) {
+      pointer.on=false; pointer.strength=0; pulseAt=-1; pokes=[];
+      off.fill(0); vel.fill(0); rot.fill(0); rvel.fill(0);
+      if(pulse){pulse.setAttribute("aria-pressed","false");pulse.classList.remove("is-pulsing");}
+    }
+    if(pulse)pulse.hidden=api.reduced()||!live;
+    requestAnimationFrame(layout);
+  });
 
   view.addEventListener("pointermove", onMove, { passive: true });
   view.addEventListener("pointerleave", onLeave, { passive: true });
@@ -508,7 +560,7 @@ export function mount(api) {
     document.removeEventListener("visibilitychange", onVisibility);
     canvas.removeEventListener("webglcontextlost", onLost);
     canvas.removeEventListener("webglcontextrestored", onRestored);
-    geometry.dispose(); material.dispose(); mesh.dispose(); renderer.dispose();
+    geometry.dispose(); material.dispose(); mesh.dispose(); environment.dispose(); renderer.dispose();
   }
   window.addEventListener("pagehide", (e) => { if (!e.persisted) destroy(); });
   window.addEventListener("pageshow", (e) => { if (e.persisted) { shownProgress = -1; layout(); } });

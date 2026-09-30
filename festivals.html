@@ -24,14 +24,14 @@
 <meta name="twitter:title" content="CIRS Festivals">
 <meta name="twitter:description" content="Seven festivals kept through the school year at Chinmaya International Residential School, from Raksha Bandhan to Holi, in the school's own photographs.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preload" href="assets/js/navigation.js?b=115-festivals-year-1-core-3" as="script" fetchpriority="high">
+<link rel="preload" href="assets/js/navigation.js?b=115-festivals-hero-1-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=115-festivals-year-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=115-festivals-year-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=115-festivals-year-1-lightbox-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=115-festivals-hero-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=115-festivals-hero-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=115-festivals-hero-1-lightbox-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -40,26 +40,17 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/festivals.css?b=115-festivals-year-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=115-festivals-year-1">
-<link rel="stylesheet" href="assets/css/filmintro.css?b=115-festivals-year-1">
-<noscript><style>.film{height:100svh}body.art-attack .film{height:100svh}.film[data-film-pending] .film__title{opacity:1}.film__video{display:none}body.festivals .film__still{visibility:visible}</style></noscript>
-<link rel="stylesheet" href="assets/css/footer.css?b=115-festivals-year-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=115-festivals-year-1-nav-5">
+<link rel="stylesheet" href="assets/css/festivals.css?b=115-festivals-hero-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=115-festivals-hero-1">
+<link rel="preload" as="image" href="assets/img/festivals-opening-final.jpg" fetchpriority="high">
+<noscript><style>body.festivals .header{position:absolute}</style></noscript>
+<link rel="stylesheet" href="assets/css/footer.css?b=115-festivals-hero-1-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=115-festivals-hero-1-nav-5">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
-<body class="festivals film festivals">
+<body class="festivals">
 <a class="skip-link" href="#main">Skip to main content</a>
-
-<!-- Opening sequence. Removed from the DOM once it has played. -->
-<div class="curtain" id="curtain" aria-hidden="true">
-  <img src="assets/img/logo.png" alt="" width="72" height="70">
-  <p class="curtain__deva" lang="sa">&#2332;&#2381;&#2334;&#2366;&#2344;&#2306; &#2360;&#2375;&#2357;&#2366; &#2330; &#2325;&#2380;&#2358;&#2354;&#2350;&#2381;</p>
-  <p class="curtain__iast" lang="sa-Latn">J&ntilde;&#257;na&#7747; Sev&#257; ca Kau&#347;alam</p>
-  <p class="curtain__en">Knowledge &middot; Service &middot; Efficiency</p>
-  <span class="curtain__bar"><i></i></span>
-</div>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
      destroyed on close: nothing is requested from YouTube until someone asks
@@ -85,7 +76,7 @@
 </button>
 <!-- The original controls stay fixed while the shared controller changes
      only the bar's surface and ink at the opening/content boundary. -->
-<header class="header nv-header" id="header" data-header-mode="hero" data-header-start="hero" data-header-tone="dark" data-header-surface="light">
+<header class="header nv-header" id="header" data-header-mode="hero" data-header-start="hero" data-header-hero="#festivals-opening" data-header-tone="dark" data-header-surface="light">
   <div class="nv-header__bar">
     <div class="nv-header__side nv-header__side--left">
       <!-- Enquire opens the contact sheet below rather than going anywhere.
@@ -278,38 +269,7 @@
   </div>
 </div>
 <main id="main">
-<section class="film" id="festivals-opening" data-film data-film-pending>
-  <div class="film__stage">
-    <img class="film__still" src="assets/img/festivals-opening-final.jpg" alt="" aria-hidden="true" width="1280" height="720" fetchpriority="high">
-    <video class="film__video" data-film-video
-           width="1280" height="720"
-           poster="assets/img/festivals-opening-poster.jpg"
-           preload="auto" muted playsinline disablepictureinpicture
-           aria-hidden="true" tabindex="-1">
-      <!-- H.264 first, which is the other way round from the rest of this
-           site. These files are not played but seeked, several times a
-           second, and H.264 is the one codec every browser that has it
-           decodes in hardware — so it is the path that scrubs without
-           stuttering wherever it exists. The VP9 is for the browsers built
-           without the proprietary decoder, which would otherwise have no
-           opening at all. Both are the same length at 24fps, so the mapping
-           in filmintro.js holds whichever one is picked.
-
-           Pages with a mobile cut use it on phones in either orientation;
-           Festivals currently uses its approved full-resolution MP4 there.
-           The large-screen file is listed first,
-           behind the query phones fail, so a browser that ignores media on
-           a video's sources keeps the file it always had. -->
-      <source src="assets/video/festivals-opening.mp4" type="video/mp4"
-              media="(min-width: 768px) and (min-height: 501px)">
-      <source src="assets/video/festivals-opening.mp4" type="video/mp4">
-      <source src="assets/video/festivals-opening.webm" type="video/webm">
-    </video>
-    <h1 class="film__title" data-film-title><span class="film__line">CIRS Festivals</span></h1>
-  </div>
-</section>
-<div class="film__seam" data-header-theme="dark" aria-hidden="true"></div>
-<script src="assets/js/navigation.js?b=115-festivals-year-1-core-3"></script>
+<script src="assets/js/navigation.js?b=115-festivals-hero-1-core-3"></script>
 <nav class="jump" aria-label="On this page">
   <details class="jump__details">
     <summary class="jump__toggle" title="On this page">
@@ -342,6 +302,25 @@
 
      The double-braced tokens below are filled by festivals.expand() in
      tools/festivals.py, which documents each of them. -->
+
+<section class="fx-hero" id="festivals-opening" data-fx-hero data-header-theme="dark" aria-labelledby="festivalsHeroTitle">
+  <div class="fx-hero__media" aria-hidden="true">
+    <img class="fx-hero__poster" src="assets/img/festivals-opening-final.jpg" alt="" width="1280" height="720" fetchpriority="high" decoding="async">
+    <video class="fx-hero__video" data-fx-hero-video autoplay muted playsinline preload="metadata" poster="assets/img/festivals-opening-poster.jpg" width="1280" height="720" tabindex="-1">
+      <source src="assets/video/festivals-opening.mp4" type="video/mp4">
+      <source src="assets/video/festivals-opening.webm" type="video/webm">
+    </video>
+  </div>
+  <div class="fx-hero__shade" aria-hidden="true"></div>
+  <script>(function(hero){if(matchMedia("(prefers-reduced-motion: reduce)").matches){var video=hero.querySelector("video");video.removeAttribute("autoplay");video.pause()}else{hero.classList.add("fx-hero--enter");setTimeout(function(){hero.classList.remove("fx-hero--enter")},1500)}})(document.currentScript.parentNode)</script>
+  <div class="fx-hero__copy">
+    <p class="fx-hero__eyebrow">Festivals at CIRS</p>
+    <h1 class="fx-hero__title" id="festivalsHeroTitle"><span class="fx-hero__mask"><span class="fx-hero__line">Celebrations</span></span>
+      <span class="fx-hero__mask"><span class="fx-hero__line">We Share</span></span></h1>
+    <p class="fx-hero__lead">Rangolis, morning prayers and evenings together. Our celebrations bring the school&rsquo;s many traditions into shared campus life.</p>
+    <a class="fx-hero__scroll" href="#year-begins">Explore our celebrations <span aria-hidden="true">↓</span></a>
+  </div>
+</section>
 
 <section class="fx-open" id="year-begins" data-jump-label="The year begins" data-fx-open>
   <div class="fx-open__sky" aria-hidden="true"></div>
@@ -1221,13 +1200,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=115-festivals-year-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=115-festivals-year-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=115-festivals-year-1" defer></script>
-<script src="assets/js/cirs.js?b=115-festivals-year-1-header-5" defer></script>
-<script src="assets/js/pages.js?b=115-festivals-year-1" defer></script>
-<script src="assets/js/footer.js?b=115-festivals-year-1-footer-1" defer></script>
-<script src="assets/js/festivals.js?b=115-festivals-year-1" defer></script>
-<script src="assets/js/filmintro.js?b=115-festivals-year-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=115-festivals-hero-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=115-festivals-hero-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=115-festivals-hero-1" defer></script>
+<script src="assets/js/cirs.js?b=115-festivals-hero-1-header-5" defer></script>
+<script src="assets/js/pages.js?b=115-festivals-hero-1" defer></script>
+<script src="assets/js/footer.js?b=115-festivals-hero-1-footer-1" defer></script>
+<script src="assets/js/festivals.js?b=115-festivals-hero-1" defer></script>
 </body>
 </html>

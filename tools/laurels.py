@@ -1488,6 +1488,28 @@ def names_html():
     return "\n".join(out), len(order)
 
 
+def chapters_html():
+    """Selected introductions only; every source record remains in the full archive."""
+    photos = {"academics":"ib-lab", "sport":"football", "arts":"ensemble",
+              "speech":"mun", "innovation":"expo", "leadership":"elections",
+              "international":"isa", "school":"vision"}
+    links, chapters = [], []
+    for n, (key, name) in enumerate(CATEGORIES, 1):
+        links.append(f'<a href="#achievement-{key}"><span>{n:02d}</span> {name}</a>')
+        records = [l for l in LAURELS if key in l["cats"]][:3]
+        stories = []
+        for l in records:
+            names = ''.join(f'<li><strong>{person}</strong> — {result}</li>' for person,result in l["names"])
+            names = f'<ul>{names}</ul>' if names else ''
+            stories.append(f'<details><summary>{l["title"]}</summary><p class="rd-laurel__date">{l["when"]} · {l["event"]}</p><p><strong>{l["result"]}</strong></p><p>{l["text"]}</p>{names}{source_line(l)}<a href="#laurel-{l["id"]}">Read the archive entry</a></details>')
+        photo = photos[key]
+        note = '' if IMAGES[photo][5] else '<p class="rd-laurel__photo-note">A related CIRS photograph; it does not document the listed award events.</p>'
+        chapters.append(f'<section class="rd-laurel" id="achievement-{key}" aria-labelledby="achievement-title-{key}"><header><span id="cat-{key}" aria-hidden="true"></span><span id="cat-{key}-t" aria-hidden="true"></span><p>{n:02d} / 08</p><h2 id="achievement-title-{key}">{name}</h2></header><div class="rd-laurel__layout"><figure>{img_html(photo,"(max-width:999px) 86vw, 46vw")}<figcaption>{caption(photo)}{note}</figcaption></figure><div class="rd-laurel__stories">{"".join(stories)}<a class="rd-laurel__all" href="#archive">Explore the complete archive ↓</a></div></div></section>')
+    notes = ''.join(f'<li><h3>{name}</h3><p>{LEADS[key]["label"]}</p>{source_line(BY_ID[LEADS[key]["laurel"]])}</li>' for key,name in CATEGORIES)
+    context = '<details class="rd-laurels-context"><summary id="lr-forms-title">Excellence has many forms.</summary><ul>'+notes+'</ul></details>'
+    return '<div class="rd-laurels" id="achievement-chapters" data-rd-chapters><nav class="rd-laurels__index" aria-label="Achievement chapters">'+''.join(links)+'</nav>'+''.join(chapters)+context+'</div>'
+
+
 def expand(content):
     errors, warns = audit()
     if errors:
@@ -1497,7 +1519,8 @@ def expand(content):
     stats, ledger = counted_html()
     ms, rail = tunnel_html()
     units = 2.0 + 0.85 * len(CATEGORIES)
-    return (content.replace("{{LAURELS_HERO}}", hero_html())
+    return (content.replace("{{LAURELS_CHAPTERS}}", chapters_html())
+                   .replace("{{LAURELS_HERO}}", hero_html())
                    .replace("{{LAURELS_CATEGORIES}}", cats)
                    .replace("{{LAURELS_CAT_INDEX}}", cat_index)
                    .replace("{{LAURELS_CAT_UNITS}}", f"{units:.2f}")

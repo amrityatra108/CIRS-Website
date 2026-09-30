@@ -23,6 +23,38 @@
 
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* Direct native playback: keep the visitor's pause choice and the supplied poster. */
+  var videoHero = document.querySelector("[data-aa-video-hero]");
+  var openingVideo = videoHero && videoHero.querySelector("[data-aa-opening-video]");
+  if (openingVideo) {
+    openingVideo.addEventListener("error", function () {
+      var fallback = openingVideo.dataset.errorPoster;
+      if (!fallback) return;
+      openingVideo.poster = fallback;
+      videoHero.querySelector(".aa-video-hero__poster").src = fallback;
+    });
+    var filmMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    var resumeVisible = false, filmVisible = true;
+    function filmVisibility() {
+      if (!filmVisible || document.hidden) {
+        if (!openingVideo.paused) { resumeVisible = true; openingVideo.pause(); }
+      } else if (resumeVisible && !filmMotion.matches && !openingVideo.ended) {
+        resumeVisible = false;
+        var playing = openingVideo.play();
+        if (playing && playing.catch) playing.catch(function () {});
+      }
+    }
+    if (filmMotion.matches) { openingVideo.removeAttribute("autoplay"); openingVideo.pause(); }
+    filmMotion.addEventListener("change", function () {
+      if (filmMotion.matches) { resumeVisible = false; openingVideo.pause(); }
+    });
+    document.addEventListener("visibilitychange", filmVisibility);
+    new IntersectionObserver(function (entries) {
+      filmVisible = entries[entries.length - 1].isIntersecting;
+      filmVisibility();
+    }).observe(videoHero);
+  }
+
   /* ---------------- Opening ---------------- */
   var open = document.querySelector("[data-aa-open]");
   if (open) {
@@ -309,5 +341,39 @@
   stage.addEventListener("click", function (e) {
     if (e.timeStamp - swipedAt < 500) return;
     if (e.target === stage || e.target === frame) box.close();
+  });
+})();
+
+/* Background marks share the existing GSAP/ScrollTrigger clock. Static by default. */
+(function () {
+  "use strict";
+  if (!document.body.classList.contains("artattack") || !window.gsap || !window.ScrollTrigger) return;
+  var media = gsap.matchMedia();
+  media.add("(prefers-reduced-motion: no-preference)", function () {
+    document.querySelectorAll(".aa-sec > .aa-decor--brush").forEach(function (mark) {
+      gsap.fromTo(mark, { clipPath:"inset(0 100% 0 0)" }, {
+        clipPath:"inset(0 0% 0 0)", duration:0.65, ease:"power2.out",
+        scrollTrigger:{ trigger:mark.parentNode, start:"top 85%", once:true }
+      });
+    });
+    document.querySelectorAll(".aa-sketch-stroke").forEach(function (stroke) {
+      gsap.fromTo(stroke, { strokeDasharray:1, strokeDashoffset:1 }, {
+        strokeDashoffset:0, duration:0.85, ease:"power1.inOut",
+        scrollTrigger:{ trigger:stroke.closest("section"), start:"top 80%", once:true }
+      });
+    });
+    var film = document.querySelector("#art-attack-opening[data-film]");
+    if (!film) return;
+    var phases = (film.getAttribute("data-film-phases") || "").trim().split(/\s+/).map(Number);
+    var hold = phases[1] || 0.77, settled = phases[2] || 0.90;
+    // Clear the decorative ground while the existing film is being scrubbed.
+    gsap.timeline({ scrollTrigger:{ trigger:film, start:"top top", end:"bottom bottom", scrub:0.15 } })
+      .to(".aa-decor--hero", { opacity:0, duration:0.025, ease:"none" })
+      .to(".aa-decor--hero", { opacity:0, duration:hold - 0.025, ease:"none" })
+      .to(".aa-decor--hero", { opacity:1, duration:settled - hold, ease:"power1.inOut" })
+      .to(".aa-decor--hero", { opacity:1, duration:1 - settled, ease:"none" });
+    gsap.to(".aa-decor-drift", { y:6, x:4, ease:"none",
+      scrollTrigger:{ trigger:"#art-attack-opening", start:"top top", end:"bottom bottom", scrub:0.6 }
+    });
   });
 })();
