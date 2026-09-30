@@ -1124,7 +1124,7 @@ def audit(root="."):
 # Rendering
 # ---------------------------------------------------------------------------
 
-ARROW = "&#8599;"
+ARROW = '<svg class="lr-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 14 14 4M4 4h10v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
 
 def plain(text):
@@ -1286,11 +1286,12 @@ def counted_html():
     lis, ledger = [], []
     for i, c in enumerate(COUNTED):
         l = BY_ID[c["laurel"]]
+        meta = l["event"] if l["when"].casefold() in l["event"].casefold() else f'{l["event"]} &middot; {l["when"]}'
         lis.append(
             f'      <li class="lr-stat" data-i="{i}" style="--len:{fit_var(c["stat"])}">\n'
             f'        <p class="lr-stat__fig">{c["stat"]}</p>\n'
             f'        <p class="lr-stat__label">{c["label"]}</p>\n'
-            f'        <p class="lr-stat__meta">{l["event"]} &middot; {l["when"]}</p>\n'
+            f'        <p class="lr-stat__meta">{meta}</p>\n'
             f'        <p class="lr-stat__note">{c["note"]}</p>\n'
             f'        <p class="lr-stat__src">{source_link(l)}</p>\n'
             f'      </li>')
@@ -1504,7 +1505,7 @@ def chapters_html():
             stories.append(f'<details><summary>{l["title"]}</summary><p class="rd-laurel__date">{l["when"]} · {l["event"]}</p><p><strong>{l["result"]}</strong></p><p>{l["text"]}</p>{names}{source_line(l)}<a href="#laurel-{l["id"]}">Read the archive entry</a></details>')
         photo = photos[key]
         note = '' if IMAGES[photo][5] else '<p class="rd-laurel__photo-note">A related CIRS photograph; it does not document the listed award events.</p>'
-        chapters.append(f'<section class="rd-laurel" id="achievement-{key}" aria-labelledby="achievement-title-{key}"><header><span id="cat-{key}" aria-hidden="true"></span><span id="cat-{key}-t" aria-hidden="true"></span><p>{n:02d} / 08</p><h2 id="achievement-title-{key}">{name}</h2></header><div class="rd-laurel__layout"><figure>{img_html(photo,"(max-width:999px) 86vw, 46vw")}<figcaption>{caption(photo)}{note}</figcaption></figure><div class="rd-laurel__stories">{"".join(stories)}<a class="rd-laurel__all" href="#archive">Explore the complete archive ↓</a></div></div></section>')
+        chapters.append(f'<section class="rd-laurel" id="achievement-{key}" aria-labelledby="achievement-title-{key}"><header><span id="cat-{key}" aria-hidden="true"></span><span id="cat-{key}-t" aria-hidden="true"></span><p>{n:02d} / 08</p><h2 id="achievement-title-{key}">{name}</h2></header><div class="rd-laurel__layout"><figure>{img_html(photo,"(max-width:999px) 86vw, 46vw")}<figcaption>{caption(photo)}{note}</figcaption></figure><div class="rd-laurel__stories">{"".join(stories)}<a class="rd-laurel__all" href="#archive">Explore the complete archive <svg class="lr-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 3v12m-5-5 5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div></section>')
     notes = ''.join(f'<li><h3>{name}</h3><p>{LEADS[key]["label"]}</p>{source_line(BY_ID[LEADS[key]["laurel"]])}</li>' for key,name in CATEGORIES)
     context = '<details class="rd-laurels-context"><summary id="lr-forms-title">Excellence has many forms.</summary><ul>'+notes+'</ul></details>'
     return '<div class="rd-laurels" id="achievement-chapters" data-rd-chapters><nav class="rd-laurels__index" aria-label="Achievement chapters">'+''.join(links)+'</nav>'+''.join(chapters)+context+'</div>'

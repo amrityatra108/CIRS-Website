@@ -24,36 +24,93 @@
   var $ = function (s, c) { return (c || doc).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
 
-  /* The native hero film plays once; its supplied rangoli still is always underneath. */
+  /* One native film, from first frame to its real end. The same video stays
+     in the hero; only the copy arrives in the last 1.2 seconds. */
   var hero = $("[data-fx-hero]"), heroVideo = $("[data-fx-hero-video]");
   var heroMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var introControl = $("[data-fx-intro-control]");
+  var heroStopped = false;
+  function showHeroCopy() {
+    window.clearTimeout(window.__fxIntroFallback);
+    root.classList.remove("fx-intro-pending");
+  }
+  function updateIntroControl() {
+    // The hero control yields before it can pass under the shared header.
+    introControl.hidden = heroMotion.matches || hero.getBoundingClientRect().bottom < 160;
+  }
+  function finishHero(usePoster) {
+    heroStopped = true;
+    heroVideo.pause();
+    showHeroCopy();
+    if (usePoster) hero.classList.remove("is-video-ready");
+    introControl.textContent = "Replay intro";
+    updateIntroControl();
+  }
   function heroPlayback() {
-    if (!hero || !heroVideo) return;
+    if (!hero || !heroVideo || heroStopped) return;
     var rect = hero.getBoundingClientRect();
     var active = !heroMotion.matches && !doc.hidden && rect.bottom > 0 && rect.top < window.innerHeight;
-    if (!active) {
-      heroVideo.pause();
-      if (heroMotion.matches) hero.classList.remove("is-video-ready");
-      return;
-    }
+    if (!active) { heroVideo.pause(); return; }
     if (heroVideo.ended) return;
     var playing = heroVideo.play();
-    if (playing && playing.catch) playing.catch(function () { /* The poster remains visible. */ });
+    if (playing && playing.catch) playing.catch(function (error) {
+      if (error && error.name === "AbortError") return;
+      // Aborted play while leaving the viewport is not a media failure.
+      var rect = hero.getBoundingClientRect();
+      if (!doc.hidden && rect.bottom > 0 && rect.top < window.innerHeight) finishHero(true);
+    });
   }
-  if (hero && heroVideo) {
+  if (hero && heroVideo && introControl) {
     heroVideo.muted = true;
+    updateIntroControl();
     function revealHeroFrame() {
-      if (!heroMotion.matches && heroVideo.readyState >= 2) hero.classList.add("is-video-ready");
+      if (!heroStopped && !heroMotion.matches && heroVideo.readyState >= 2) {
+        hero.classList.add("is-video-ready");
+        window.clearTimeout(window.__fxIntroFallback);
+      }
     }
     heroVideo.addEventListener("playing", function () {
       if (heroVideo.requestVideoFrameCallback) heroVideo.requestVideoFrameCallback(revealHeroFrame);
       else requestAnimationFrame(revealHeroFrame);
     });
-    heroVideo.addEventListener("error", function () { hero.classList.remove("is-video-ready"); });
-    if (!heroVideo.paused) revealHeroFrame();
-    if (heroMotion.addEventListener) heroMotion.addEventListener("change", heroPlayback);
+    heroVideo.addEventListener("timeupdate", function () {
+      if (isFinite(heroVideo.duration) && heroVideo.currentTime >= Math.max(0, heroVideo.duration - 1.2)) showHeroCopy();
+    });
+    heroVideo.addEventListener("ended", function () { finishHero(false); });
+    heroVideo.addEventListener("error", function () { finishHero(true); });
+    // Some browsers report failed candidate URLs on <source>, without a
+    // video error or rejected play promise. Release the hero after all fail.
+    var failedSources = 0;
+    var heroSources = $$("source", heroVideo);
+    heroSources.forEach(function (source) {
+      source.addEventListener("error", function () {
+        failedSources++;
+        if (failedSources >= heroSources.length) finishHero(true);
+      });
+    });
+    window.addEventListener("fx-intro-fallback", function () {
+      if (!hero.classList.contains("is-video-ready")) finishHero(true);
+    });
+    introControl.addEventListener("click", function () {
+      if (!heroStopped) { finishHero(true); return; }
+      if (heroMotion.matches) return;
+      heroStopped = false;
+      failedSources = 0;
+      if (heroVideo.error || heroVideo.networkState === 3) heroVideo.load();
+      heroVideo.currentTime = 0;
+      hero.classList.remove("is-video-ready");
+      root.classList.add("fx-intro-pending");
+      introControl.textContent = "Skip intro";
+      window.__fxIntroFallback = window.setTimeout(function () { finishHero(true); }, 8000);
+      heroPlayback();
+    });
+    heroMotion.addEventListener("change", function () {
+      if (heroMotion.matches) finishHero(true);
+      else updateIntroControl();
+    });
     doc.addEventListener("visibilitychange", heroPlayback);
-    heroPlayback();
+    if (heroMotion.matches) finishHero(true);
+    else heroPlayback();
   }
 
   /* ----------------------------------------------------------
@@ -115,6 +172,7 @@
       ticking = false;
       var vh = window.innerHeight;
       if (heroVideo) heroPlayback();
+      if (hero && introControl) updateIntroControl();
       if (open && !reduced) {
         var r = open.getBoundingClientRect();
         var p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height * .6)));
