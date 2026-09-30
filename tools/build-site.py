@@ -242,7 +242,7 @@ PAGES = {
         # nothing on the page is a placeholder.
         "banner": None,
         "sheet": "leadership",
-        "cache_suffix": "-leadership-1",
+        "cache_suffix": "-leadership-ivory-gold-2",
         "litehead": True,
         "jump": False,
         "uc": False,
