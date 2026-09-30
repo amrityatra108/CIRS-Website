@@ -1,40 +1,30 @@
 /* Curriculum: the Curriculum Atlas.
-   One gold route runs down the page. On the school's purple it is --gold;
+   One gold path runs down the page. On the school's purple it is --gold;
    on ivory it is --gold-ink, the same line in the colour paper can carry.
    Headings keep the display face and its italic; the information layer
    (labels, facts, tables, controls) is Mona Sans. Corners stay square and
    depth comes from rules and scale, never from shadows or glass.
 
-   Two layers, both scoped to body.curriculum:
-     the base          ordinary reading order: complete and static, and what
-                       reduced motion, a phone, print and a page without
-                       script all see;
-     html.cur-stage    large windows with motion (screen only): the grade
-                       journey's photographs share one sticky frame beside
-                       the reading column. Set by assets/js/curriculum.js
-                       while its media query holds, removed when it stops.
-   html.cur-motion only arms a few once-only entrances (the Grade X
-   division, the Diploma core's line, the school-life photographs); the
-   script adds it after its observers exist, and removes it with motion.
+   Three layers, all scoped to body.curriculum:
+     the base          ordinary reading order: complete, static, and what
+                       reduced motion and a page without script both see;
+     html.cur-live     large windows with motion: the pinned scenes, set by
+                       assets/js/curriculum.js only while its media query
+                       holds, and removed again when it stops holding;
+     html.cur-lite     smaller windows with motion: the same reading order,
+                       with the lines drawn and the photographs uncovered as
+                       they arrive.
    The shared header, footer and closing scene are never restyled. */
 
 body.curriculum{
   --atl-line:1.5px;
   --atl-gold-dim:rgba(var(--gold-rgb),.22);
-  --atl-ink-dim:rgba(143,110,47,.3);
-  /* The shared header's pill (58px tall, 10px inset) plus air: where the
-     journey's frame and the IB index hold. */
-  --atl-top:92px;
-  /* Where the route runs, from the content's left edge. */
-  --rail-x:11px;
-  /* The comparison's columns: themes, CBSE, IB. The Grade X division ends
-     its branches on the same lines. */
-  --cmp-a:22%;
-  --cmp-b:39%;
+  --atl-ink-dim:rgba(143,110,47,.28);
+  --atl-spine-x:50%;
   background:var(--paper-2);
 }
 body.curriculum :focus-visible{ outline:2px solid var(--focus); outline-offset:3px; }
-body.curriculum :is(.atl-open, .atl-core) :focus-visible{ outline-color:var(--gold-lit); }
+body.curriculum :is(.atl-open, .atl-approach, .atl-core) :focus-visible{ outline-color:var(--gold-lit); }
 body.curriculum [id]{ scroll-margin-top:96px; }
 body.curriculum figure{ margin:0; }
 body.curriculum .atl-open ol,
@@ -85,16 +75,34 @@ body.curriculum .atl-open ul{ list-style:none; }
 }
 .curriculum .atl-arrow:hover{ text-decoration:underline; text-underline-offset:5px; }
 .curriculum .atl-arrow:hover::after{ width:2.6em; }
+
+/* The spine: the one line, as a rule down the middle of a section. Its
+   <i> is the drawn part; scripts scale it, and without them it is whole. */
+.curriculum .atl-spine{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:var(--atl-spine-x);
+  width:var(--atl-line);
+  margin-left:calc(var(--atl-line) / -2);
+  background:var(--atl-gold-dim);
+  pointer-events:none;
+}
+.curriculum .atl-spine i{
+  position:absolute;
+  inset:0;
+  background:var(--gold);
+  transform-origin:50% 0;
+}
 .curriculum .atl-spread{
   position:relative;
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  column-gap:clamp(48px,8vw,144px);
+  column-gap:clamp(72px,10vw,176px);
   align-items:end;
 }
-.curriculum .atl-spread__r p + p{ margin-top:var(--space-4); }
 
-/* ---------- 1. Opening: the academic route --------------------------- */
+/* ---------- 1. Opening: the academic path ---------------------------- */
 .curriculum .atl-open{
   position:relative;
   display:flex;
@@ -115,24 +123,41 @@ body.curriculum .atl-open ul{ list-style:none; }
 .curriculum .atl-plate svg{ display:block; width:100%; height:auto; overflow:visible; }
 .curriculum .atl-plate :is(path, circle){
   fill:none;
-  stroke:rgba(250,249,243,.12);
+  stroke:rgba(250,249,243,.13);
   stroke-width:1;
   vector-effect:non-scaling-stroke;
 }
 .curriculum .atl-plate .atl-dash{ stroke-dasharray:3 5; }
-.curriculum .atl-plate .atl-dot{ fill:rgba(250,249,243,.22); stroke:none; }
+.curriculum .atl-plate .atl-dot{ fill:rgba(250,249,243,.24); stroke:none; }
+.curriculum .atl-plate .atl-mark{ stroke:rgba(var(--gold-rgb),.2); }
 .curriculum .atl-plate text{
-  fill:rgba(250,249,243,.2);
+  fill:rgba(250,249,243,.22);
   font-family:var(--font-quote);
   font-size:13px;
   font-style:italic;
 }
-.curriculum .atl-plate--lens{ left:74%; top:12%; width:clamp(160px,16vw,260px); }
-.curriculum .atl-plate--mol{ left:86%; top:64%; width:clamp(110px,10vw,170px); }
+.curriculum .atl-plate--geo{ left:4%; top:14%; width:clamp(150px,15vw,240px); }
+.curriculum .atl-plate--mol{ left:84%; top:62%; width:clamp(120px,12vw,200px); }
+.curriculum .atl-plate--grid{ left:36%; top:6%; width:clamp(150px,14vw,230px); }
+.curriculum .atl-plate--lens{ left:78%; top:9%; width:clamp(160px,17vw,280px); }
+.curriculum .atl-plate--wave{ left:45%; top:42%; width:clamp(150px,14vw,240px); }
+.curriculum .atl-plate--page{ left:88%; top:30%; width:clamp(110px,10vw,170px); }
+.curriculum .atl-letters{
+  position:absolute;
+  left:54%;
+  top:18%;
+  display:flex;
+  gap:clamp(18px,3vw,44px);
+  color:rgba(250,249,243,.12);
+  font-family:var(--font-display);
+  font-size:clamp(1.6rem,2.6vw,2.6rem);
+  line-height:1;
+}
+.curriculum .atl-letters span:nth-child(even){ translate:0 1.1em; }
+.curriculum .atl-letters :lang(hi),
+.curriculum .atl-letters :lang(sa){ font-size:1.1em; line-height:1; }
 
-/* The route holds the right of the opening; the heading and its facts
-   hold the left, and nothing of the one runs through the other. */
-.curriculum .atl-open__visual{ position:absolute; inset:76px 0 0 50%; pointer-events:none; }
+.curriculum .atl-open__visual{ position:absolute; inset:0; pointer-events:none; }
 .curriculum .atl-open__route{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
 .curriculum .atl-open__route--narrow{ display:none; }
 .curriculum .atl-route-ghost,
@@ -143,10 +168,10 @@ body.curriculum .atl-open ul{ list-style:none; }
    (data-fit), which is what lets a dash measured in path lengths draw them.
    Unfitted, they are simply whole lines. */
 .curriculum svg.is-fit path{ vector-effect:none; }
-.curriculum svg.is-fit .atl-route-line{ stroke-dasharray:1 1; }
+.curriculum svg.is-fit :is(.atl-route-line, .atl-fork path, .atl-stream__fan path){ stroke-dasharray:1 1; }
 .curriculum .atl-open__grades{ position:absolute; inset:0; }
 
-/* The grades stand along the route in perspective: V near and large, X far
+/* The grades stand along the path in perspective: V near and large, X far
    and small, each on its own dot. */
 .curriculum .atl-open__grades li{
   position:absolute;
@@ -156,7 +181,7 @@ body.curriculum .atl-open ul{ list-style:none; }
   padding-left:calc(14px + 18px * var(--s));
   color:rgba(250,249,243,calc(.42 + .5 * var(--s)));
   font-family:var(--font-display);
-  font-size:calc(var(--s) * clamp(2.2rem,4.4vw,4.4rem));
+  font-size:calc(var(--s) * clamp(2.2rem,4.6vw,4.6rem));
   line-height:1;
   letter-spacing:.02em;
 }
@@ -186,7 +211,7 @@ body.curriculum .atl-open ul{ list-style:none; }
 .curriculum .atl-open__inner{
   position:relative;
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,6fr) minmax(0,6fr);
   align-content:end;
 }
 .curriculum .atl-open__inner > *{ grid-column:1; }
@@ -197,7 +222,7 @@ body.curriculum .atl-open ul{ list-style:none; }
 .curriculum .atl-open__title{
   margin-top:var(--space-5);
   color:var(--on-dark);
-  font-size:clamp(2.8rem,4.9vw,5rem);
+  font-size:clamp(2.8rem,4.7vw,4.8rem);
   font-weight:500;
   line-height:.98;
   letter-spacing:-.028em;
@@ -237,10 +262,11 @@ body.curriculum .atl-open ul{ list-style:none; }
   display:grid;
   grid-template-columns:repeat(4,minmax(0,auto));
   justify-content:start;
-  margin-top:clamp(28px,5vh,52px);
+  gap:0;
+  margin-top:clamp(28px,5vh,56px);
   border-top:1px solid var(--rule-dark);
 }
-.curriculum .atl-facts > div{ padding:var(--space-4) var(--space-5) 0 0; }
+.curriculum .atl-facts > div{ padding:var(--space-4) var(--space-6) 0 0; }
 .curriculum .atl-facts > div + div{ padding-left:var(--space-5); border-left:1px solid var(--rule-dark); }
 .curriculum .atl-facts dt{
   white-space:nowrap;
@@ -257,22 +283,9 @@ body.curriculum .atl-open ul{ list-style:none; }
   font-size:clamp(1.05rem,1.3vw,1.3rem);
   white-space:nowrap;
 }
-/* The section index: set apart from the facts by air and its own label. */
-.curriculum .atl-index{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:0 var(--space-5);
-  margin-top:clamp(24px,4vh,40px);
-}
-.curriculum .atl-index__label{
-  color:var(--on-dark-mute);
-  font-size:var(--fs-xs);
-  font-weight:var(--weight-label);
-  letter-spacing:.1em;
-  text-transform:uppercase;
-}
-.curriculum .atl-index ol{ display:flex; flex-wrap:wrap; gap:0 var(--space-5); }
+.curriculum .atl-index{ margin-top:var(--space-5); }
+.curriculum .atl-index ol{ display:flex; flex-wrap:wrap; gap:0 var(--space-5); counter-reset:atl-index; }
+.curriculum .atl-index li{ counter-increment:atl-index; }
 .curriculum .atl-index a{
   display:inline-flex;
   align-items:center;
@@ -281,316 +294,387 @@ body.curriculum .atl-open ul{ list-style:none; }
   color:var(--on-dark-soft);
   font-size:var(--fs-sm);
 }
+.curriculum .atl-index a::before{
+  content:counter(atl-index, decimal-leading-zero);
+  color:var(--gold);
+  font-size:var(--fs-xs);
+  font-variant-numeric:tabular-nums;
+}
 .curriculum .atl-index a:hover{ color:var(--on-dark); text-decoration:underline; text-underline-offset:5px; }
 
-/* The opening's one entrance, played once because it is the first thing
-   on screen: the heading rises, the route draws, the grades and the rest
-   settle in. Everything is in place and usable within a second. */
+/* The opening's one entrance, which plays because it is the first thing on
+   screen: the path draws up from the foot of the window, the grades take
+   their places along it, and the second line of the heading follows the
+   first. Script adds only the pointer depth. */
 @media (prefers-reduced-motion:no-preference){
-  .curriculum .is-fit .atl-route-line{ animation:atl-draw .9s cubic-bezier(.45,.05,.2,1) .2s both; }
-  .cur-js .curriculum .atl-open__route:not(.is-fit) .atl-route-line{ animation:atl-fade .5s var(--e) 1.2s both; }
-  .curriculum .atl-open__grades li{ animation:atl-fade .45s var(--e) calc(.45s + var(--i) * .06s) both; }
-  .curriculum .atl-plate{ animation:atl-fade 1s var(--e) .3s both; }
-  .curriculum .atl-open__l1 > span{ animation:atl-rise .7s var(--e2) .05s both; }
-  .curriculum .atl-open__l2 > span{ animation:atl-rise .75s var(--e2) .2s both; }
+  .curriculum .is-fit .atl-route-line{ animation:atl-draw 2.4s cubic-bezier(.45,.05,.2,1) .1s both; }
+  .cur-js .curriculum .atl-open__route:not(.is-fit) .atl-route-line{ animation:atl-fade .8s var(--e) 2.5s both; }
+  .curriculum .atl-open__grades li{ animation:atl-fade .9s var(--e2) calc(.55s + var(--i) * .26s) both; }
+  .curriculum .atl-plate,
+  .curriculum .atl-letters{ animation:atl-fade 2.4s var(--e) .4s both; }
+  .curriculum .atl-open__l1 > span{ animation:atl-rise 1.25s var(--e2) .2s both; }
+  .curriculum .atl-open__l2 > span{ animation:atl-rise 1.35s var(--e2) 1.45s both; }
   .curriculum :is(.atl-open__lead, .atl-open__actions, .atl-facts, .atl-index){
-    animation:atl-lift .45s var(--e) .4s both;
+    animation:atl-fade 1s var(--e) 2s both;
   }
 }
 @keyframes atl-draw{ from{ stroke-dashoffset:1; } to{ stroke-dashoffset:0; } }
 @keyframes atl-fade{ from{ opacity:0; } to{ opacity:1; } }
 @keyframes atl-rise{ from{ transform:translateY(105%); } to{ transform:none; } }
-@keyframes atl-lift{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
 
-/* ---------- 2. The approach ------------------------------------------ */
+/* ---------- 2. The approach, noted along the path -------------------- */
 .curriculum .atl-approach{
-  padding-block:clamp(88px,10vw,144px) clamp(72px,8vw,120px);
-  background:var(--paper);
+  position:relative;
+  padding-block:clamp(96px,13vw,180px) clamp(96px,11vw,160px);
+  color:var(--on-dark);
+  background:var(--dark-deep);
 }
+.curriculum .atl-approach .atl-eyebrow{ color:var(--gold); }
+.curriculum .atl-approach .atl-h2{ color:var(--on-dark); }
+.curriculum .atl-approach .atl-h2 em{ color:var(--gold-pale); }
 .curriculum .atl-approach__lead{
-  color:var(--dark-deep);
+  color:var(--on-dark);
   font-family:var(--font-editorial);
   font-size:clamp(1.2rem,1.6vw,1.45rem);
   line-height:1.5;
 }
-.curriculum .atl-approach .atl-spread__r p:not(.atl-approach__lead){ max-width:48ch; color:var(--ink-soft); }
+.curriculum .atl-spread__r p + p{ margin-top:var(--space-4); }
+.curriculum .atl-approach .atl-spread__r p:not(.atl-approach__lead){ color:var(--on-dark-soft); max-width:48ch; }
+
 .curriculum .atl-notes{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  column-gap:clamp(32px,4vw,64px);
-  margin-top:clamp(56px,7vw,96px);
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  column-gap:clamp(72px,10vw,176px);
+  row-gap:clamp(40px,5vw,72px);
+  margin-top:clamp(72px,9vw,128px);
   list-style:none;
 }
-.curriculum .atl-note{ position:relative; padding-top:var(--space-4); border-top:1px solid var(--rule); }
-.curriculum .atl-note::before{ content:""; position:absolute; left:0; top:-1px; width:40px; height:2px; background:var(--gold-ink); }
-.curriculum .atl-note__title{
-  margin-top:var(--space-1);
-  color:var(--dark-deep);
-  font-size:clamp(1.45rem,2vw,1.85rem);
-  line-height:1.15;
-}
-.curriculum .atl-note p{ max-width:36ch; margin-top:var(--space-3); color:var(--ink-soft); }
-
-/* ---------- 3. The grade journey ------------------------------------- */
-.curriculum .atl-journey{ position:relative; padding-top:clamp(88px,10vw,144px); background:var(--paper-2); }
-.curriculum .atl-journey__head{ padding-bottom:clamp(48px,6vw,88px); }
-.curriculum .atl-journey__head .atl-intro{ padding-bottom:.4em; }
-
-/* In reading order: the route down the left, and each stage's text then
-   its photograph beside it. */
-.curriculum .atl-jr{
-  position:relative;
-  display:grid;
-  grid-template-columns:150px minmax(0,4fr) minmax(0,6fr);
-  column-gap:clamp(32px,4vw,56px);
-  row-gap:var(--space-8);
-  align-items:center;
-}
-.curriculum .atl-jr__route{ grid-column:1; grid-row:1 / span 2; align-self:stretch; }
-.curriculum .atl-jr__route ol{ position:relative; height:100%; list-style:none; padding-left:32px; }
-.curriculum .atl-jr__route ol::before,
-.curriculum .atl-jr__route ol::after{
+.curriculum .atl-note{ position:relative; max-width:36ch; }
+.curriculum .atl-note:nth-child(odd){ grid-column:1; justify-self:end; text-align:right; }
+.curriculum .atl-note:nth-child(even){ grid-column:2; }
+.curriculum .atl-note::before{
   content:"";
   position:absolute;
-  left:var(--rail-x);
+  top:.9em;
+  width:calc(clamp(72px,10vw,176px) / 2 - 8px);
+  height:1px;
+  background:rgba(var(--gold-rgb),.6);
+}
+.curriculum .atl-note::after{
+  content:"";
+  position:absolute;
+  top:calc(.9em - 4px);
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--gold);
+}
+.curriculum .atl-note:nth-child(odd)::before{ left:calc(100% + 8px); }
+.curriculum .atl-note:nth-child(odd)::after{ left:calc(100% + clamp(72px,10vw,176px) / 2 - 4.5px); }
+.curriculum .atl-note:nth-child(even)::before{ right:calc(100% + 8px); }
+.curriculum .atl-note:nth-child(even)::after{ right:calc(100% + clamp(72px,10vw,176px) / 2 - 4.5px); }
+.curriculum .atl-note__num{
+  color:var(--gold);
+  font-size:var(--fs-xs);
+  font-weight:var(--weight-label);
+  letter-spacing:.12em;
+}
+.curriculum .atl-note__title{
+  margin-top:var(--space-2);
+  color:var(--on-dark);
+  font-size:clamp(1.5rem,2.1vw,1.95rem);
+  line-height:1.15;
+}
+.curriculum .atl-note p{ margin-top:var(--space-3); color:var(--on-dark-soft); }
+
+/* ---------- 3. The grade journey ------------------------------------- */
+.curriculum .atl-journey{ position:relative; background:var(--paper-2); }
+.curriculum .atl-journey__intro{
+  position:relative;
+  padding:clamp(180px,34vh,340px) 0 clamp(64px,8vw,112px);
+  background:linear-gradient(to bottom, var(--dark-deep) 0, var(--paper-2) clamp(150px,28vh,290px));
+}
+.curriculum .atl-spine--dawn{ background:linear-gradient(to bottom, var(--atl-gold-dim), var(--atl-ink-dim) 30vh); }
+.curriculum .atl-spine--dawn i{ background:linear-gradient(to bottom, var(--gold), var(--gold-ink) clamp(150px,28vh,290px)); }
+.curriculum .atl-journey__intro .atl-intro{ padding-bottom:.4em; }
+
+/* The route in reading order: a rule down the middle, a phase on either
+   side of it. */
+.curriculum .atl-stage{ position:relative; padding-bottom:clamp(64px,8vw,112px); }
+.curriculum .atl-route{ display:none; pointer-events:none; }
+.curriculum .atl-route__rail{
+  position:absolute;
   top:0;
-  bottom:0;
+  left:var(--atl-spine-x);
   width:var(--atl-line);
   margin-left:calc(var(--atl-line) / -2);
   background:var(--atl-ink-dim);
 }
-.curriculum .atl-jr__route ol::after{ background:var(--gold-ink); transform-origin:50% 0; }
-.curriculum .atl-jr__route li + li{ margin-top:var(--space-6); }
-.curriculum .atl-jr__route a{
+.curriculum .atl-route__rail i{ position:absolute; inset:0; background:var(--gold-ink); transform-origin:50% 0; }
+.curriculum .atl-route__marks{ display:none; list-style:none; }
+
+.curriculum .atl-phases{ position:relative; list-style:none; }
+.curriculum .atl-phase{
   position:relative;
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-  min-height:44px;
-  padding-block:var(--space-1);
-  color:var(--ink-soft);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  column-gap:clamp(72px,10vw,176px);
+  align-items:center;
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding:clamp(48px,6vw,96px) var(--gut);
 }
-.curriculum .atl-jr__route a::before{
+.curriculum .atl-phase::before{
   content:"";
   position:absolute;
-  left:calc(var(--rail-x) - 32px - 7px);
-  top:.62em;
-  width:14px;
-  height:14px;
+  top:0;
+  bottom:0;
+  left:var(--atl-spine-x);
+  width:var(--atl-line);
+  margin-left:calc(var(--atl-line) / -2);
+  background:var(--gold-ink);
+}
+.curriculum .atl-phase--fork::before{ content:none; }
+.curriculum .atl-phase__text{ position:relative; max-width:40ch; justify-self:end; }
+.curriculum .atl-phase__text::after{
+  content:"";
+  position:absolute;
+  top:.7em;
+  right:calc(-1 * clamp(72px,10vw,176px) / 2 - 6px);
+  width:12px;
+  height:12px;
   border-radius:50%;
   background:var(--paper-2);
   box-shadow:inset 0 0 0 1.5px var(--gold-ink);
-  transition:background .35s var(--e), transform .35s var(--e2);
 }
-.curriculum .atl-jr__route b{ color:var(--dark); font-family:var(--font-display); font-size:1.5rem; font-weight:400; line-height:1.1; }
-.curriculum .atl-jr__route span{ font-size:var(--fs-xs); font-weight:var(--weight-label); letter-spacing:.08em; line-height:1.35; text-transform:uppercase; }
-.curriculum .atl-jr__route a:hover b{ text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.16em; }
-/* The stage being read: a filled marker, a darker numeral, a labelled
-   state for assistive technology (aria-current), not colour alone. */
-.curriculum .atl-jr__route a[aria-current]{ color:var(--dark-deep); }
-.curriculum .atl-jr__route a[aria-current] b{ color:var(--dark-deep); }
-.curriculum .atl-jr__route a[aria-current]::before{ background:var(--gold-ink); transform:scale(1.15); }
-
-.curriculum .atl-step{ grid-column:2; max-width:40ch; }
-.curriculum .atl-step[data-step="0"]{ grid-row:1; }
-.curriculum .atl-step[data-step="1"]{ grid-row:2; }
-.curriculum .atl-step__years{
-  display:flex;
-  align-items:center;
-  gap:var(--space-3);
+.curriculum .atl-phase__years{
   color:var(--label);
   font-size:var(--fs-sm);
   font-weight:var(--weight-label);
   letter-spacing:.12em;
   text-transform:uppercase;
 }
-.curriculum .atl-step__name{
+.curriculum .atl-phase__name{
   margin-top:var(--space-3);
   color:var(--dark-deep);
-  font-size:clamp(2.1rem,3.4vw,3.3rem);
+  font-size:clamp(2.1rem,3.6vw,3.4rem);
   line-height:1.02;
   letter-spacing:-.02em;
 }
-.curriculum .atl-step__body{ margin-top:var(--space-5); color:var(--ink-soft); font-size:1.08rem; line-height:1.62; }
-
-.curriculum .atl-shot{ position:relative; grid-column:3; overflow:hidden; background:var(--dark-deep); }
-.curriculum .atl-shot[data-step="0"]{ grid-row:1; }
-.curriculum .atl-shot[data-step="1"]{ grid-row:2; }
-.curriculum .atl-shot__img{ display:block; aspect-ratio:4 / 5; max-height:min(78vh,760px); width:100%; }
-.curriculum .atl-shot__img img{ display:block; width:100%; height:100%; object-fit:cover; }
-.curriculum .atl-shot[data-step="0"] img{ object-position:48% 58%; }
-.curriculum .atl-shot[data-step="1"] img{ object-position:50% 55%; }
-/* The slate: the stage's grades lettered into the foot of the frame over
-   a dark fall-off. The same words are in the text. */
-.curriculum .atl-shot__slate{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  display:flex;
-  align-items:baseline;
-  justify-content:flex-start;
-  gap:var(--space-4);
-  padding:clamp(56px,10vh,120px) clamp(20px,2.4vw,36px) clamp(18px,2.4vw,32px);
-  background:linear-gradient(to top, rgba(30,22,38,.78), rgba(30,22,38,0));
-  pointer-events:none;
+.curriculum .atl-phase__body{
+  margin-top:var(--space-5);
+  color:var(--ink-soft);
+  font-size:1.08rem;
+  line-height:1.62;
 }
-.curriculum .atl-shot__slate b{ color:var(--paper); font-family:var(--font-display); font-size:clamp(2.2rem,4vw,3.8rem); font-weight:400; line-height:.9; letter-spacing:.01em; }
-.curriculum .atl-shot__edge{
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  z-index:1;
-  height:2px;
-  background:var(--gold);
-  opacity:0;
-  pointer-events:none;
-}
+.curriculum .atl-phase__plate{ position:relative; max-width:460px; }
+.curriculum .atl-phase__figure{ position:relative; aspect-ratio:4 / 5; overflow:hidden; background:var(--paper-3); }
+.curriculum .atl-phase__figure img{ width:100%; height:100%; object-fit:cover; }
+.curriculum .atl-breadth{ display:none; list-style:none; }
+.curriculum .atl-ruled{ display:none; }
 
-/* Grade X, and the division. The route comes down on its own line, meets
-   the node, and divides: the branches end on the comparison's two column
-   lines. The script refits the branches to the real positions; without it
-   the drawing below is already close. */
-.curriculum .atl-div{ position:relative; padding-top:clamp(64px,7vw,104px); padding-bottom:clamp(56px,6vw,88px); }
-.curriculum .atl-div__map{ position:relative; height:clamp(200px,20vw,280px); }
-.curriculum .atl-div__fork{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
-.curriculum .atl-div__fork path{
+/* Grade X, and the division. */
+.curriculum .atl-phase--fork{ padding-bottom:0; }
+.curriculum .atl-phase--fork .atl-phase__text{ text-align:right; }
+.curriculum .atl-phase--fork .atl-phase__text::after{ display:none; }
+/* The rule runs on from the phase above, past this heading, into the node. */
+.curriculum .atl-phase--fork .atl-phase__text::before{
+  content:"";
+  position:absolute;
+  top:calc(-1 * clamp(48px,6vw,96px));
+  bottom:calc(-1 * clamp(64px,7vw,96px));
+  right:calc(-1 * clamp(72px,10vw,176px) / 2);
+  width:var(--atl-line);
+  margin-right:calc(var(--atl-line) / -2);
+  background:var(--gold-ink);
+}
+.curriculum .atl-junction{ position:relative; grid-column:1 / -1; height:clamp(220px,24vw,320px); margin-top:clamp(64px,7vw,96px); }
+.curriculum .atl-branches{ grid-column:1 / -1; }
+.curriculum .atl-fork{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.curriculum .atl-fork path{
   fill:none;
   stroke:var(--gold-ink);
   stroke-width:var(--atl-line);
   vector-effect:non-scaling-stroke;
 }
-.curriculum .atl-div__fork.is-fit path{ vector-effect:none; stroke-dasharray:1 1; }
-.curriculum .atl-div__node{
-  --nw:clamp(76px,7vw,104px);
+.curriculum .atl-fork .is-narrow{ display:none; }
+.curriculum .atl-node{
   position:absolute;
-  left:var(--rail-x);
-  top:30%;
-  z-index:1;
-  display:grid;
-  place-items:center;
+  left:50%;
+  top:0;
+  --nw:clamp(92px,9vw,128px);
   width:var(--nw);
   aspect-ratio:1;
   margin:calc(var(--nw) / -2) 0 0 calc(var(--nw) / -2);
-  border-radius:50%;
+  z-index:1;
+}
+.curriculum .atl-node__ring,
+.curriculum .atl-node__pulse{ position:absolute; inset:0; border-radius:50%; }
+.curriculum .atl-node__ring{ background:var(--dark); box-shadow:0 0 0 6px var(--paper-2), 0 0 0 7.5px var(--gold-ink); }
+.curriculum .atl-node__pulse{ box-shadow:inset 0 0 0 1.5px var(--gold-ink); opacity:0; }
+.curriculum .atl-node__x{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
   color:var(--on-dark);
-  background:var(--dark);
-  box-shadow:0 0 0 6px var(--paper-2), 0 0 0 7.5px var(--gold-ink);
   font-family:var(--font-display);
-  font-size:clamp(2rem,3vw,2.8rem);
+  font-size:clamp(2.2rem,3.4vw,3.2rem);
   line-height:1;
 }
-.curriculum .atl-div__text{
-  position:absolute;
-  left:calc(var(--rail-x) + clamp(76px,7vw,104px) / 2 + 36px);
-  top:30%;
-  translate:0 -50%;
-}
-.curriculum .atl-div__ends{
+.curriculum .atl-branches{
   display:grid;
-  grid-template-columns:var(--cmp-a) var(--cmp-b) minmax(0,1fr);
+  grid-template-columns:repeat(2,minmax(0,1fr));
   list-style:none;
 }
-.curriculum .atl-div__end--cbse{ grid-column:2; }
-.curriculum .atl-div__end--ib{ grid-column:3; }
-.curriculum .atl-div__end a{
+.curriculum .atl-branch{ display:flex; justify-content:center; }
+.curriculum .atl-branch a{
   display:flex;
   flex-direction:column;
+  align-items:center;
   gap:var(--space-2);
-  height:100%;
-  padding:var(--space-2) var(--space-6) var(--space-3);
-  border-left:var(--atl-line) solid var(--gold-ink);
+  max-width:30ch;
+  padding:var(--space-4) var(--space-3);
+  text-align:center;
 }
-.curriculum .atl-div__tag{
+.curriculum .atl-branch__tag{
   color:var(--dark-deep);
   font-family:var(--font-display);
-  font-size:clamp(2rem,3.2vw,3rem);
+  font-size:clamp(2rem,3.4vw,3.2rem);
   line-height:1;
   letter-spacing:-.01em;
 }
-.curriculum .atl-div__tag::after{ content:" \2193"; font-family:var(--font-ui); font-size:.45em; vertical-align:.4em; color:var(--gold-ink); }
-.curriculum .atl-div__name{ color:var(--ink); font-weight:600; }
-.curriculum .atl-div__note{ max-width:34ch; color:var(--ink-soft); font-size:var(--fs-sm); line-height:1.45; }
-.curriculum .atl-div__end a:hover .atl-div__tag{ color:var(--label); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.14em; }
+.curriculum .atl-branch__name{ color:var(--ink); font-weight:600; }
+.curriculum .atl-branch__note{ color:var(--ink-soft); font-size:var(--fs-sm); line-height:1.45; }
+.curriculum .atl-branch a:hover .atl-branch__tag{ color:var(--label); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.14em; }
 
-/* ---------- 4. The two pathways, one table ---------------------------- */
-.curriculum .atl-paths{ position:relative; padding-bottom:clamp(88px,10vw,144px); background:var(--paper-2); }
-.curriculum .atl-paths__head{ padding:clamp(40px,5vw,72px) 0 clamp(40px,5vw,64px); }
+/* ---------- 4. The two pathways, side by side ------------------------ */
+.curriculum .atl-paths{ position:relative; background:var(--paper-2); }
+.curriculum .atl-twin{ position:absolute; inset:0; pointer-events:none; }
+.curriculum .atl-twin i{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:var(--atl-line);
+  margin-left:calc(var(--atl-line) / -2);
+  background:var(--gold-ink);
+  transform-origin:50% 0;
+}
+.curriculum .atl-twin i:first-child{ left:25%; }
+.curriculum .atl-twin i:last-child{ left:75%; }
+.curriculum .atl-paths__head{ position:relative; padding:clamp(40px,5vw,72px) 0 clamp(56px,7vw,96px); text-align:center; }
+.curriculum .atl-paths__head .wrap{ display:flex; flex-direction:column; align-items:center; max-width:min(46%,640px); }
 .curriculum .atl-paths__head .atl-h2{ max-width:none; }
 .curriculum .atl-paths__head .atl-intro{ margin-top:var(--space-5); }
 
-.curriculum .atl-cmp{ width:100%; border-collapse:collapse; table-layout:fixed; }
-.curriculum .atl-cmp thead td{ width:var(--cmp-a); padding:0; border:0; }
-.curriculum .atl-cmp__prog{
+.curriculum .atl-cmp{
   position:relative;
-  width:var(--cmp-b);
-  padding:0 var(--space-6) var(--space-5);
-  border-left:var(--atl-line) solid var(--gold-ink);
-  text-align:left;
-  vertical-align:bottom;
-  font-weight:400;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding:0 var(--gut) clamp(40px,5vw,72px);
 }
-.curriculum .atl-cmp thead th + th{ width:auto; }
-.curriculum .atl-cmp__prog::before{
-  content:"";
-  position:absolute;
-  left:-7.5px;
-  top:0;
+.curriculum .atl-cmp__heads{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--space-6);
+  padding-bottom:var(--space-6);
+  border-bottom:1px solid var(--rule);
+}
+.curriculum .atl-cmp__prog{ position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.curriculum .atl-cmp__node{
   width:13px;
   height:13px;
+  margin-bottom:var(--space-4);
   border-radius:50%;
   background:var(--gold-ink);
-  box-shadow:0 0 0 5px var(--paper-2);
+  box-shadow:0 0 0 5px var(--paper-2), 0 0 0 6.5px var(--atl-ink-dim);
 }
-.curriculum .atl-cmp__prog > span{ display:block; }
 .curriculum .atl-cmp__tag{
-  padding-top:var(--space-5);
   color:var(--label);
   font-size:var(--fs-xs);
   font-weight:var(--weight-label);
   letter-spacing:.1em;
-  line-height:1.4;
   text-transform:uppercase;
 }
 .curriculum .atl-cmp__title{
   margin-top:var(--space-2);
   color:var(--dark-deep);
   font-family:var(--font-display);
-  font-size:clamp(1.9rem,2.8vw,2.7rem);
-  line-height:1.04;
+  font-size:clamp(2rem,3.4vw,3.2rem);
+  line-height:1.02;
   letter-spacing:-.015em;
 }
 .curriculum .atl-cmp__grades{ margin-top:var(--space-2); color:var(--ink-soft); font-size:var(--fs-sm); }
-.curriculum .atl-cmp tbody th{
-  padding:var(--space-6) var(--space-5) var(--space-6) 0;
-  border-top:1px solid var(--rule);
-  color:var(--dark-deep);
-  font-family:var(--font-display);
-  font-size:clamp(1.35rem,1.9vw,1.75rem);
-  font-weight:400;
-  line-height:1.15;
-  text-align:left;
-  vertical-align:top;
+.curriculum .atl-cmp__photo{ display:none; }
+.curriculum .atl-cmp__dial{ display:none; }
+
+.curriculum .atl-themes{ list-style:none; }
+.curriculum .atl-theme{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--space-4) var(--space-6);
+  padding-block:var(--space-7);
+  border-bottom:1px solid var(--rule);
 }
-.curriculum .atl-cmp td{
-  padding:var(--space-6);
-  border-top:1px solid var(--rule);
-  border-left:var(--atl-line) solid var(--gold-ink);
+.curriculum .atl-theme__name{
+  grid-column:1 / -1;
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:var(--space-3);
+  color:var(--dark-deep);
+  font-size:clamp(1.6rem,2.4vw,2.2rem);
+  line-height:1.1;
+}
+.curriculum .atl-theme__num{ color:var(--gold-ink); font-family:var(--font-ui); font-size:var(--fs-xs); font-weight:var(--weight-label); letter-spacing:.12em; }
+.curriculum .atl-theme__side{ max-width:44ch; justify-self:center; }
+.curriculum .atl-theme__prog{
+  color:var(--label);
+  font-size:var(--fs-xs);
+  font-weight:var(--weight-label);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.curriculum .atl-theme__stat{
+  margin-top:var(--space-2);
   color:var(--ink-soft);
-  line-height:1.6;
-  vertical-align:top;
-}
-.curriculum .atl-cmp__stat{
-  margin-bottom:var(--space-2);
-  color:var(--dark-deep);
   font-family:var(--font-display);
-  font-size:clamp(1.2rem,1.5vw,1.4rem);
-  line-height:1.2;
+  font-size:clamp(1.1rem,1.4vw,1.3rem);
+  line-height:1.1;
 }
-.curriculum .atl-cmp__guides :is(th, td){ border-top-color:var(--dark); }
-.curriculum .atl-cmp tbody .atl-cmp__guides th{ font-family:var(--font-ui); font-size:var(--fs-xs); font-weight:var(--weight-label); letter-spacing:.12em; text-transform:uppercase; color:var(--label); padding-top:calc(var(--space-6) + .5em); }
-.curriculum .atl-end{ display:inline-flex; flex-direction:column; gap:var(--space-2); min-height:44px; }
+.curriculum .atl-theme__stat b{
+  display:block;
+  color:var(--dark-deep);
+  font-size:clamp(3.2rem,6vw,5.6rem);
+  font-weight:500;
+  line-height:1;
+  letter-spacing:-.03em;
+}
+.curriculum .atl-theme__text{ margin-top:var(--space-4); color:var(--ink-soft); line-height:1.6; }
+
+.curriculum .atl-paths__ends{ position:relative; padding:clamp(56px,7vw,104px) 0 clamp(72px,9vw,128px); }
+.curriculum .atl-twin--end i{ bottom:auto; height:clamp(56px,7vw,104px); }
+.curriculum .atl-ends{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+.curriculum .atl-end{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-self:center;
+  gap:var(--space-2);
+  max-width:min(100%,24rem);
+  padding:var(--space-4) var(--space-3);
+  text-align:center;
+}
+.curriculum .atl-end::before{
+  content:"";
+  width:13px;
+  height:13px;
+  margin:calc(-1 * var(--space-4) - 6px) 0 var(--space-3);
+  border-radius:50%;
+  background:var(--gold-ink);
+}
 .curriculum .atl-end__tag{
   color:var(--label);
   font-size:var(--fs-xs);
@@ -601,9 +685,9 @@ body.curriculum .atl-open ul{ list-style:none; }
 .curriculum .atl-end__title{
   color:var(--dark-deep);
   font-family:var(--font-display);
-  font-size:clamp(1.4rem,2.1vw,2rem);
-  line-height:1.1;
-  letter-spacing:-.01em;
+  font-size:clamp(1.7rem,2.8vw,2.6rem);
+  line-height:1.08;
+  letter-spacing:-.015em;
   text-decoration:underline;
   text-decoration-color:var(--atl-ink-dim);
   text-decoration-thickness:1px;
@@ -615,7 +699,7 @@ body.curriculum .atl-open ul{ list-style:none; }
 
 /* ---------- 5. Subjects: the three CBSE streams ---------------------- */
 .curriculum .atl-subjects{ position:relative; background:var(--paper); }
-.curriculum .atl-subjects__head{ padding-block:clamp(88px,10vw,144px) clamp(40px,5vw,72px); }
+.curriculum .atl-subjects__head{ padding-block:clamp(88px,10vw,150px) clamp(40px,5vw,72px); }
 .curriculum .atl-subjects__head .atl-intro{ margin-top:var(--space-5); }
 .curriculum .atl-prog-head{
   display:grid;
@@ -641,61 +725,47 @@ body.curriculum .atl-open ul{ list-style:none; }
 }
 .curriculum .atl-prog-head__note{ grid-column:2; grid-row:1 / span 2; max-width:48ch; color:var(--ink-soft); }
 .curriculum .atl-prog-head__ask{ margin-top:var(--space-6); color:var(--ink-soft); }
-/* The year the list was published, set where the eye lands first. */
-.curriculum .atl-year{
-  display:table;
-  margin-bottom:var(--space-3);
-  padding:var(--space-1) var(--space-3);
-  border:1px solid var(--gold-ink);
-  color:var(--label);
-  font-size:var(--fs-xs);
-  font-weight:var(--weight-label);
-  letter-spacing:.1em;
-  text-transform:uppercase;
-}
 
-.curriculum .atl-streams{ padding-bottom:clamp(88px,10vw,144px); }
-.curriculum .atl-stream-list{ margin-top:clamp(32px,4vw,56px); list-style:none; }
+.curriculum .atl-streams{ padding-bottom:clamp(88px,10vw,150px); }
+.curriculum .atl-stream-list{ margin-top:clamp(40px,5vw,72px); list-style:none; }
 .curriculum .atl-stream{
+  position:relative;
   display:grid;
-  grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  grid-template-columns:minmax(0,auto) minmax(0,1fr);
   gap:var(--space-3) clamp(24px,4vw,64px);
   align-items:center;
-  padding-block:clamp(20px,2.4vw,36px);
+  padding-block:var(--space-5);
   border-top:1px solid var(--rule);
 }
 .curriculum .atl-stream:last-child{ border-bottom:1px solid var(--rule); }
 .curriculum .atl-stream__name{
   color:var(--dark-deep);
-  font-size:clamp(2.8rem,6vw,6rem);
+  font-size:clamp(3rem,7.6vw,7.6rem);
   font-weight:400;
   line-height:.96;
   letter-spacing:-.035em;
 }
+.curriculum .atl-stream__name button{
+  all:unset;
+  position:relative;
+  display:inline-block;
+  box-sizing:border-box;
+  min-height:44px;
+  cursor:pointer;
+}
+.curriculum .atl-stream__name button:focus-visible{ outline:2px solid var(--focus); outline-offset:6px; }
+.curriculum .atl-stream__fan{ display:none; }
 .curriculum .atl-stream__list{
   display:flex;
   flex-wrap:wrap;
-  gap:var(--space-2) 0;
+  gap:var(--space-2) var(--space-5);
   list-style:none;
 }
-.curriculum .atl-stream__list li{
-  display:flex;
-  align-items:center;
-  color:var(--ink);
-  font-family:var(--font-display);
-  font-size:clamp(1.2rem,1.6vw,1.5rem);
-  line-height:1.3;
-}
-.curriculum .atl-stream__list li + li::before{
-  content:"";
-  width:clamp(20px,2.4vw,36px);
-  height:1px;
-  margin-inline:var(--space-3);
-  background:var(--gold-ink);
-}
+.curriculum .atl-stream__list li{ display:flex; align-items:center; gap:var(--space-2); color:var(--ink); font-size:1.08rem; }
+.curriculum .atl-stream__list li::before{ content:"\2192"; color:var(--gold-ink); }
 
 /* ---------- 6. The IB subject groups --------------------------------- */
-.curriculum .atl-ib{ padding-bottom:clamp(88px,10vw,144px); }
+.curriculum .atl-ib{ padding-bottom:clamp(88px,10vw,150px); }
 .curriculum .atl-rules{
   display:grid;
   grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
@@ -717,48 +787,53 @@ body.curriculum .atl-open ul{ list-style:none; }
 .curriculum .atl-rules b{ color:var(--dark); font-weight:700; }
 .curriculum .atl-rules p{ margin-top:var(--space-3); }
 
-.curriculum .atl-ib__body{
+.curriculum .atl-ib__stage{ max-width:var(--maxw); margin-inline:auto; padding:0 var(--gut); }
+.curriculum .atl-ib__rail{ margin-top:clamp(40px,5vw,64px); }
+.curriculum .atl-ib__rail ol{
   display:grid;
-  grid-template-columns:minmax(180px,220px) minmax(0,1fr);
-  gap:clamp(32px,5vw,80px);
-  align-items:start;
-  margin-top:clamp(48px,6vw,80px);
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  list-style:none;
+  border-top:1px solid var(--rule);
 }
-.curriculum .atl-ib__rail{ position:sticky; top:var(--atl-top); }
-.curriculum .atl-ib__rail ol{ list-style:none; border-left:1px solid var(--rule); }
 .curriculum .atl-ib__rail a{
   position:relative;
   display:flex;
   align-items:baseline;
-  gap:var(--space-3);
-  min-height:44px;
-  padding:var(--space-2) 0 var(--space-2) var(--space-4);
+  gap:var(--space-2);
+  min-height:52px;
+  padding:var(--space-3) var(--space-3) var(--space-3) 0;
   color:var(--ink-soft);
-  font-size:var(--fs-sm);
+  font-size:var(--fs-xs);
   line-height:1.3;
 }
 .curriculum .atl-ib__rail a b{ color:var(--gold-ink); font-family:var(--font-display); font-size:1.3rem; font-weight:500; }
 .curriculum .atl-ib__rail a::before{
   content:"";
   position:absolute;
-  left:-1px;
-  top:var(--space-2);
-  bottom:var(--space-2);
-  width:2px;
+  left:0;
+  right:var(--space-3);
+  top:-1px;
+  height:2px;
   background:var(--dark);
-  transform:scaleY(0);
-  transition:transform .35s var(--e2);
+  transform:scaleX(0);
+  transform-origin:0 50%;
+  transition:transform .45s var(--e2);
 }
 .curriculum .atl-ib__rail a:hover{ color:var(--ink); }
-.curriculum .atl-ib__rail a[aria-current="true"]{ color:var(--dark-deep); font-weight:600; }
+.curriculum .atl-ib__rail a[aria-current="true"]{ color:var(--ink); }
 .curriculum .atl-ib__rail a[aria-current="true"]::before{ transform:none; }
 
-.curriculum .atl-groups{ display:grid; gap:clamp(40px,5vw,64px); max-width:820px; }
-.curriculum .atl-group{ display:grid; grid-template-columns:clamp(64px,7vw,104px) minmax(0,1fr); gap:0 var(--space-5); align-items:start; }
+.curriculum .atl-groups{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(40px,5vw,72px) clamp(40px,6vw,96px);
+  margin-top:clamp(40px,5vw,64px);
+}
+.curriculum .atl-group{ position:relative; display:grid; grid-template-columns:auto minmax(0,1fr); gap:0 var(--space-5); align-items:start; }
 .curriculum .atl-group__num{
   color:transparent;
   font-family:var(--font-display);
-  font-size:clamp(5rem,8vw,8rem);
+  font-size:clamp(5.5rem,9vw,9rem);
   line-height:.8;
   -webkit-text-stroke:1.25px var(--gold-ink);
 }
@@ -791,7 +866,7 @@ body.curriculum .atl-open ul{ list-style:none; }
   text-align:left;
   text-transform:uppercase;
 }
-.curriculum .atl-group thead th + th{ width:56px; text-align:center; }
+.curriculum .atl-group thead th + th{ width:52px; text-align:center; }
 .curriculum .atl-group abbr{ text-decoration:none; }
 .curriculum .atl-group tbody th{
   padding:var(--space-3) var(--space-3) var(--space-3) 0;
@@ -810,261 +885,590 @@ body.curriculum .atl-open ul{ list-style:none; }
 .curriculum .atl-group td{
   padding:var(--space-2) 0;
   border-bottom:1px solid var(--rule);
-  color:var(--ink-mute);
+  color:var(--decoration-mute);
   font-size:var(--fs-xs);
   text-align:center;
 }
-/* A level on offer is a filled mark lettered with its level; one not
-   offered is an empty mark with a dash (and "Not offered" to a reader). */
-.curriculum .atl-group td.is-on{ color:var(--on-dark); font-weight:600; letter-spacing:.06em; background:linear-gradient(var(--dark),var(--dark)) center / 38px 26px no-repeat; }
+/* A level on offer is a filled mark; one not offered is an empty one. */
+.curriculum .atl-group td.is-on{ color:var(--on-dark); font-weight:600; letter-spacing:.06em; }
+.curriculum .atl-group td.is-on::before{ content:none; }
+.curriculum .atl-group td{ position:relative; }
+.curriculum .atl-group td.is-on{ background:linear-gradient(var(--dark),var(--dark)) center / 38px 26px no-repeat; }
 .curriculum .atl-group td:not(.is-on){ background:linear-gradient(var(--rule),var(--rule)) center / 38px 26px no-repeat; }
+.curriculum .atl-group td:not(.is-on) span[aria-hidden]{ color:var(--ink-mute); }
 
 /* ---------- 7. The Diploma core -------------------------------------- */
-.curriculum .atl-core{
-  position:relative;
-  padding-block:clamp(88px,10vw,144px);
+.curriculum .atl-core{ position:relative; color:var(--on-dark); background:var(--dark-deep); }
+.curriculum .atl-core__stage{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(40px,6vw,96px);
+  align-items:center;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding:clamp(88px,10vw,150px) var(--gut);
+}
+.curriculum .atl-core__orbits{ position:relative; width:min(100%,560px); aspect-ratio:1; justify-self:center; }
+.curriculum .atl-core__orbits svg{ display:block; width:100%; height:100%; overflow:visible; }
+.curriculum .atl-orbits{ transform-origin:300px 300px; }
+.curriculum .atl-orbit{ transform-origin:300px 300px; }
+.curriculum .atl-orbit__ring{ fill:none; stroke:rgba(var(--gold-rgb),.62); stroke-width:1.25; transition:stroke .5s var(--e), stroke-width .5s var(--e); }
+.curriculum .atl-orbit__ticks{ fill:none; stroke:rgba(var(--gold-rgb),.45); stroke-width:1; }
+.curriculum .atl-orbit__bead{ fill:var(--gold); }
+.curriculum .atl-orbit text{
+  fill:var(--on-dark-soft);
+  font-family:var(--font-ui);
+  font-size:14px;
+  font-weight:var(--weight-label);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  transition:fill .5s var(--e);
+}
+.curriculum .atl-core__centre{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   color:var(--on-dark);
-  background:var(--dark-deep);
+  font-family:var(--font-display);
+  font-size:clamp(1.5rem,2.4vw,2.2rem);
+  line-height:1.05;
+  text-align:center;
+  pointer-events:none;
+}
+.curriculum .atl-core__centre span{
+  color:var(--gold);
+  font-family:var(--font-ui);
+  font-size:var(--fs-xs);
+  font-weight:var(--weight-label);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.curriculum .atl-core__tag{
+  color:var(--gold);
+  font-size:var(--fs-sm);
+  font-weight:var(--weight-label);
+  letter-spacing:.12em;
+  text-transform:uppercase;
 }
 .curriculum .atl-core__title{
+  margin-top:var(--space-3);
   color:var(--on-dark);
-  font-size:clamp(2.3rem,4.4vw,4rem);
+  font-size:clamp(2.3rem,4vw,3.6rem);
   line-height:1.03;
 }
-/* Three positions on one gold line. */
-.curriculum .atl-core__list{
+.curriculum .atl-core__list{ margin-top:var(--space-7); list-style:none; }
+.curriculum .atl-core__list li{
   position:relative;
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(32px,4vw,64px);
-  margin-top:clamp(48px,6vw,88px);
-  list-style:none;
+  padding:var(--space-5) 0 var(--space-5) var(--space-6);
+  border-top:1px solid var(--rule-dark);
+  transition:color .5s var(--e);
 }
-.curriculum .atl-core__list::before{
-  content:"";
-  position:absolute;
-  left:7px;
-  right:0;
-  top:7px;
-  height:var(--atl-line);
-  background:var(--gold);
-  transform-origin:0 50%;
-  transition:transform .9s var(--e2);
-}
-.curriculum .atl-core__list li{ position:relative; padding-top:var(--space-7); }
 .curriculum .atl-core__list li::before{
   content:"";
   position:absolute;
   left:0;
-  top:0;
-  width:15px;
-  height:15px;
-  border-radius:50%;
-  background:var(--dark-deep);
-  box-shadow:inset 0 0 0 2px var(--gold);
+  top:var(--space-5);
+  bottom:var(--space-5);
+  width:var(--atl-line);
+  background:var(--gold);
+  transform-origin:50% 0;
+  transition:transform .6s var(--e2);
 }
-.curriculum .atl-core__list li:first-child::before{ background:var(--gold); }
-.curriculum .atl-core__list h4{ color:var(--gold-pale); font-size:clamp(1.5rem,2.2vw,2rem); line-height:1.12; }
-.curriculum .atl-core__list p{ max-width:36ch; margin-top:var(--space-3); color:var(--on-dark-soft); line-height:1.6; }
+.curriculum .atl-core__list h4{ color:var(--gold-pale); font-size:clamp(1.4rem,1.9vw,1.75rem); line-height:1.15; transition:color .5s var(--e); }
+.curriculum .atl-core__list p{ max-width:44ch; margin-top:var(--space-2); color:var(--on-dark-soft); transition:color .5s var(--e); }
 
 /* ---------- 8. School life ------------------------------------------- */
-.curriculum .atl-beyond{ position:relative; background:var(--paper-2); }
-.curriculum .atl-beyond__inner{
+/* Keep the original overshooting decorative rule inside its section. */
+.curriculum .atl-beyond{ position:relative; background:var(--paper-2); overflow-x:clip; }
+.curriculum .atl-beyond__stage{
   display:grid;
   grid-template-columns:minmax(0,4.4fr) minmax(0,7.6fr);
   gap:clamp(40px,6vw,96px);
   align-items:center;
-  padding-block:clamp(96px,11vw,160px);
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding:clamp(96px,11vw,160px) var(--gut);
 }
 .curriculum .atl-beyond__text p{ max-width:46ch; margin-top:var(--space-5); color:var(--ink-soft); line-height:1.62; }
 .curriculum .atl-beyond__text p.atl-eyebrow{ margin-top:0; color:var(--label); }
 .curriculum .atl-beyond__more{ margin-top:var(--space-6) !important; }
 .curriculum .atl-beyond__plates{
+  position:relative;
   display:grid;
-  grid-template-columns:minmax(0,7fr) minmax(0,5fr);
-  gap:clamp(20px,2.4vw,32px);
-  align-items:start;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-template-rows:auto auto;
+  gap:clamp(24px,3vw,40px) clamp(16px,2vw,28px);
 }
-.curriculum .atl-life__img{ display:block; overflow:hidden; background:var(--paper-3); }
+.curriculum .atl-life{ position:relative; }
+.curriculum .atl-life__img{ position:relative; display:block; overflow:hidden; background:var(--paper-3); }
 .curriculum .atl-life__img img{ display:block; width:100%; height:100%; object-fit:cover; }
 .curriculum .atl-life figcaption{ margin-top:var(--space-3); color:var(--ink-mute); font-size:var(--fs-sm); }
-.curriculum .atl-life--main{ grid-column:1 / -1; }
-.curriculum .atl-life--main .atl-life__img{ aspect-ratio:16 / 9; }
-.curriculum .atl-life--main img{ object-position:50% 70%; }
-.curriculum .atl-life--a .atl-life__img{ aspect-ratio:4 / 3; }
-.curriculum .atl-life--b{ margin-top:clamp(32px,5vw,72px); }
-.curriculum .atl-life--b .atl-life__img{ aspect-ratio:4 / 3; }
+.curriculum .atl-life--line{ grid-column:1 / -1; }
+.curriculum .atl-life--line .atl-life__img{ aspect-ratio:16 / 9; }
+.curriculum .atl-life--line .atl-life__img img{ object-position:50% 70%; }
+.curriculum .atl-life__rule{
+  position:absolute;
+  top:-1px;
+  left:-6%;
+  right:-6%;
+  z-index:1;
+  height:var(--atl-line);
+  background:var(--gold-ink);
+  transform-origin:0 50%;
+}
+.curriculum .atl-life--circle{ grid-column:1 / span 5; align-self:start; }
+.curriculum .atl-life--circle .atl-life__img{ aspect-ratio:1; border-radius:50%; clip-path:circle(50% at 50% 50%); }
+.curriculum .atl-life__compass{
+  position:absolute;
+  inset:-6%;
+  width:112%;
+  height:auto;
+  overflow:visible;
+  pointer-events:none;
+}
+.curriculum .atl-life__compass :is(circle, path){ fill:none; stroke:var(--gold-ink); stroke-width:.5; vector-effect:non-scaling-stroke; }
+.curriculum .atl-life__compass circle:first-child{ stroke-dasharray:2 3; stroke:var(--atl-ink-dim); }
+.curriculum .atl-life__compass .atl-life__pin{ fill:var(--gold-ink); stroke:none; }
+.curriculum .atl-life--frame{ grid-column:6 / -1; align-self:end; }
+.curriculum .atl-life--frame .atl-life__img{ aspect-ratio:4 / 3; }
+.curriculum .atl-life__dims{ position:absolute; inset:0; pointer-events:none; }
+.curriculum .atl-life__dims i{ position:absolute; background:var(--atl-ink-dim); }
+.curriculum .atl-life__dims i:first-child{ left:0; right:0; top:-14px; height:1px; }
+.curriculum .atl-life__dims i:last-child{ top:0; bottom:44px; right:-14px; width:1px; }
+.curriculum .atl-life__dims i::before,
+.curriculum .atl-life__dims i::after{ content:""; position:absolute; background:var(--atl-ink-dim); }
+.curriculum .atl-life__dims i:first-child::before,
+.curriculum .atl-life__dims i:first-child::after{ top:-4px; width:1px; height:9px; }
+.curriculum .atl-life__dims i:first-child::before{ left:0; }
+.curriculum .atl-life__dims i:first-child::after{ right:0; }
+.curriculum .atl-life__dims i:last-child::before,
+.curriculum .atl-life__dims i:last-child::after{ left:-4px; width:9px; height:1px; }
+.curriculum .atl-life__dims i:last-child::before{ top:0; }
+.curriculum .atl-life__dims i:last-child::after{ bottom:0; }
 
-/* ---------- Once-only entrances (html.cur-motion) --------------------
-   Armed by the script only after it is watching for them, so content is
-   never left hidden if it fails. */
-.cur-motion .curriculum .atl-div:not(.is-in) .atl-div__fork.is-fit path{ stroke-dashoffset:1; }
-.cur-motion .curriculum .atl-div__fork.is-fit path{ transition:stroke-dashoffset .8s cubic-bezier(.45,.05,.2,1); }
-.cur-motion .curriculum .atl-div__fork.is-fit :is(.atl-div__b1, .atl-div__b2){ transition-delay:.3s; }
-.cur-motion .curriculum .atl-div:not(.is-in) .atl-div__node{ transform:scale(.6); opacity:0; }
-.cur-motion .curriculum .atl-div__node{ transition:transform .5s var(--e2) .15s, opacity .4s var(--e) .15s; }
-.cur-motion .curriculum .atl-div:not(.is-in) :is(.atl-div__text, .atl-div__end){ opacity:0; transform:translateY(16px); }
-.cur-motion .curriculum :is(.atl-div__text, .atl-div__end){ transition:opacity .45s var(--e), transform .45s var(--e); }
-.cur-motion .curriculum .atl-div__text{ transition-delay:.3s; }
-.cur-motion .curriculum .atl-div__end--cbse{ transition-delay:.75s; }
-.cur-motion .curriculum .atl-div__end--ib{ transition-delay:.9s; }
-.cur-motion .curriculum .atl-core:not(.is-in) .atl-core__list::before{ transform:scaleX(0); }
-.cur-motion .curriculum .atl-life:not(.is-in) .atl-life__img{ clip-path:inset(0 0 100% 0); }
-.cur-motion .curriculum .atl-life .atl-life__img{ transition:clip-path .65s cubic-bezier(.65,0,.35,1); }
 
 /* =====================================================================
-   html.cur-stage — the sticky grade journey, on screens only.
-   The three photographs share one grid area in the third column and each
-   sticks to the same place, so they lie one over another in a stationary
-   frame; the script raises the stage being read and uncovers it. Being
-   sticky inside .atl-jr, the frame lets go a little after the journey's
-   text ends (its trailing row), before the Grade X division. Nothing is pinned by script.
+   html.cur-live — large windows with motion. The track sections are made
+   tall and their stage sticks to the window, so the page's own scroll
+   walks each scene: no pinning spacers, nothing added to or taken from
+   the document by script. assets/js/curriculum.js scrubs the scenes.
    ===================================================================== */
-@media screen{
-  .cur-stage .curriculum{ --atl-stage-h:min(calc(100vh - var(--atl-top) - 24px), 860px); }
-  .cur-stage .curriculum .atl-jr{ align-items:start; row-gap:0; grid-template-rows:auto auto 22vh; }
-  .cur-stage .curriculum .atl-jr__route{ grid-row:1 / span 3; position:sticky; top:var(--atl-top); align-self:start; height:var(--atl-stage-h); padding-top:calc(var(--atl-stage-h) / 2 - 150px); }
-  .cur-stage .curriculum .atl-jr__route ol{ height:auto; }
-  .cur-stage .curriculum .atl-jr__route ol::after{ transform:scaleY(var(--atl-progress,0)); transition:transform .6s var(--e2); }
-  .cur-stage .curriculum .atl-step{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    min-height:var(--atl-stage-h);
-  }
-  /* The stage being read carries a short gold rule before its grades;
-     the others keep full reading contrast. */
-  .cur-stage .curriculum .atl-step__years::before{
-    content:"";
-    width:28px;
-    height:var(--atl-line);
-    background:var(--gold-ink);
-    transform:scaleX(0);
-    transform-origin:0 50%;
-    transition:transform .45s var(--e2);
-  }
-  .cur-stage .curriculum .atl-step.is-active .atl-step__years::before{ transform:none; }
-  .cur-stage .curriculum .atl-shot{
-    position:sticky;
-    top:var(--atl-top);
-    grid-row:1 / span 3;
-    align-self:start;
-    height:var(--atl-stage-h);
-    /* To the window's right edge: the frame is the scene. */
-    margin-right:calc(-1 * (var(--gut) + max(0px, (100vw - var(--maxw)) / 2)));
-  }
-  .cur-stage .curriculum .atl-shot__img{ height:100%; max-height:none; aspect-ratio:auto; }
+.cur-live .curriculum .atl-journey__track{ height:560vh; }
+.cur-live .curriculum .atl-paths__track{ height:440vh; }
+.cur-live .curriculum .atl-ib__track{ height:520vh; }
+.cur-live .curriculum .atl-core__track{ height:340vh; }
+.cur-live .curriculum .atl-beyond__track{ height:300vh; }
+.cur-live .curriculum :is(.atl-stage, .atl-cmp, .atl-ib__stage, .atl-core__stage, .atl-beyond__stage){
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:clip;
 }
 
+/* The journey stage. The route is a rule down the middle with the grades
+   marked on it; the text of each phase holds the left, its plate the
+   right, and Grade X waits at the foot of the rule. */
+.cur-live .curriculum .atl-stage{
+  --node-y:74vh;
+  max-width:none;
+  padding:0;
+  background:var(--paper-2);
+}
+.cur-live .curriculum .atl-route{ display:block; position:absolute; inset:0; }
+.cur-live .curriculum .atl-phase::before,
+.cur-live .curriculum .atl-phase--fork .atl-phase__text::before{ content:none; }
+.cur-live .curriculum .atl-route__rail{ top:0; bottom:auto; height:var(--node-y); }
+.cur-live .curriculum .atl-route__marks{ display:block; }
+.cur-live .curriculum .atl-route__marks li{
+  position:absolute;
+  left:50%;
+  top:calc(var(--at) * 1vh);
+  translate:0 -50%;
+  padding-left:22px;
+  color:var(--ink-mute);
+  font-family:var(--font-display);
+  font-size:1.15rem;
+  line-height:1;
+  transition:color .4s var(--e);
+}
+.cur-live .curriculum .atl-route__marks li::before{
+  content:"";
+  position:absolute;
+  left:-5px;
+  top:50%;
+  width:10px;
+  height:10px;
+  margin-top:-5px;
+  border-radius:50%;
+  background:var(--paper-2);
+  box-shadow:inset 0 0 0 1.5px var(--atl-ink-dim);
+  transition:background .4s var(--e), box-shadow .4s var(--e);
+}
+.cur-live .curriculum .atl-route__marks li.is-past{ color:var(--dark-deep); }
+.cur-live .curriculum .atl-route__marks li.is-past::before{ background:var(--gold-ink); box-shadow:inset 0 0 0 1.5px var(--gold-ink); }
+.cur-live .curriculum .atl-phases{ position:absolute; inset:0; }
+.cur-live .curriculum .atl-phase{
+  position:absolute;
+  inset:0;
+  display:block;
+  max-width:none;
+  padding:0;
+  pointer-events:none;
+}
+.cur-live .curriculum .atl-phase > *{ pointer-events:auto; }
+/* Centred by auto margins rather than a translate: script moves these, and
+   a transform the stylesheet also relies on would not survive the handover. */
+.cur-live .curriculum .atl-phase__text{
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:calc(50% + clamp(56px,7vw,120px));
+  width:min(38ch,34vw);
+  height:fit-content;
+  margin-block:auto;
+}
+.cur-live .curriculum .atl-phase__text::after{ display:none; }
+.cur-live .curriculum .atl-phase__plate{
+  position:absolute;
+  left:calc(50% + clamp(56px,7vw,120px));
+  width:min(42vw,640px);
+  height:min(64vh,620px);
+  max-width:none;
+  top:0;
+  bottom:0;
+  margin-block:auto;
+}
+.cur-live .curriculum .atl-phase__figure{
+  position:absolute;
+  right:0;
+  top:0;
+  bottom:0;
+  height:min(50vh,480px);
+  margin-block:auto;
+}
+.cur-live .curriculum .atl-breadth{ display:block; position:absolute; inset:0; }
+.cur-live .curriculum .atl-breadth li{
+  position:absolute;
+  left:calc(var(--bx) * 1%);
+  top:calc(var(--by) * 1%);
+  z-index:1;
+  padding:var(--space-1) var(--space-2);
+  color:var(--dark);
+  font-family:var(--font-display);
+  font-size:clamp(.95rem,1.15vw,1.1rem);
+  white-space:nowrap;
+  background:var(--paper-2);
+  margin-top:-.8em;
+}
+.cur-live .curriculum .atl-ruled{ display:block; position:absolute; inset:0 calc(min(50vh,480px) * .8 + 20px) 0 0; }
+.cur-live .curriculum .atl-ruled i{ position:absolute; left:0; right:0; height:1px; background:var(--atl-ink-dim); transform-origin:0 50%; }
+.cur-live .curriculum .atl-ruled i:nth-child(1){ top:12%; }
+.cur-live .curriculum .atl-ruled i:nth-child(2){ top:23%; }
+.cur-live .curriculum .atl-ruled i:nth-child(3){ top:34%; }
+.cur-live .curriculum .atl-ruled i:nth-child(4){ top:45%; }
+.cur-live .curriculum .atl-ruled i:nth-child(5){ top:56%; }
+.cur-live .curriculum .atl-ruled i:nth-child(6){ top:67%; }
+.cur-live .curriculum .atl-ruled i:nth-child(7){ top:78%; }
+.cur-live .curriculum .atl-ruled i:nth-child(8){ top:89%; }
+/* The Board years' plate is the foundation's, reordered: its own copy of
+   the photograph frame sits on the same spot and is uncovered over it. */
+.cur-live .curriculum .atl-phase--board .atl-phase__plate{ z-index:1; }
+
+/* Beside the node once it has risen to 36vh: the heading's foot a little
+   below the node's centre, so the two read as one line. */
+.cur-live .curriculum .atl-phase--fork .atl-phase__text{
+  top:auto;
+  bottom:calc(100vh - 36vh - 2.2em);
+  margin-block:0;
+  right:calc(50% + clamp(90px,8vw,130px));
+  text-align:right;
+}
+.cur-live .curriculum .atl-junction{
+  position:absolute;
+  left:0;
+  right:0;
+  top:var(--node-y);
+  height:66vh;
+  margin:0;
+  pointer-events:none;
+}
+.cur-live .curriculum .atl-node{ --nw:clamp(112px,10vw,148px); }
+.cur-live .curriculum .atl-branches{
+  position:absolute;
+  left:0;
+  right:0;
+  top:72vh;
+  display:block;
+}
+.cur-live .curriculum .atl-branch{ position:absolute; top:0; display:block; }
+.cur-live .curriculum .atl-branch--cbse{ right:calc(75% + 28px); }
+.cur-live .curriculum .atl-branch--ib{ left:calc(75% + 28px); }
+.cur-live .curriculum .atl-branch a{ align-items:flex-start; width:min(22vw,300px); max-width:none; padding:var(--space-2) 0; text-align:left; }
+.cur-live .curriculum .atl-branch__tag{ white-space:nowrap; }
+.cur-live .curriculum .atl-branch--cbse a{ align-items:flex-end; text-align:right; }
+
+/* The comparison stage. The two lines arrive at the two programmes; the
+   theme of the moment is set between them and every other theme waits,
+   out of sight, in the same place. */
+.cur-live .curriculum .atl-paths__head{ padding-bottom:clamp(40px,5vw,72px); }
+.cur-live .curriculum .atl-cmp{
+  max-width:none;
+  padding:0;
+  background:var(--paper-2);
+}
+.cur-live .curriculum .atl-cmp::before,
+.cur-live .curriculum .atl-cmp::after{
+  content:"";
+  position:absolute;
+  top:0;
+  height:13vh;
+  width:var(--atl-line);
+  margin-left:calc(var(--atl-line) / -2);
+  background:var(--gold-ink);
+}
+.cur-live .curriculum .atl-cmp::before{ left:25%; }
+.cur-live .curriculum .atl-cmp::after{ left:75%; }
+.cur-live .curriculum .atl-cmp__heads{
+  position:absolute;
+  inset:13vh 0 auto;
+  display:block;
+  padding:0;
+  border:0;
+}
+.cur-live .curriculum .atl-cmp__prog{ position:absolute; top:0; width:30vw; translate:-50% 0; }
+.cur-live .curriculum .atl-cmp__prog--cbse{ left:25%; }
+.cur-live .curriculum .atl-cmp__prog--ib{ left:75%; }
+.cur-live .curriculum .atl-cmp__node{ margin-top:-6.5px; }
+.cur-live .curriculum .atl-cmp__title{ font-size:clamp(2rem,3vw,3rem); }
+.cur-live .curriculum .atl-cmp__photo{
+  position:absolute;
+  top:40vh;
+  display:block;
+  width:6.5vw;
+  height:44vh;
+  overflow:hidden;
+  background:var(--paper-3);
+}
+.cur-live .curriculum .atl-cmp__photo img{ width:100%; height:100%; object-fit:cover; object-position:var(--pan,50%) 50%; scale:1.12; }
+.cur-live .curriculum .atl-cmp__photo--cbse{ left:2.4vw; }
+.cur-live .curriculum .atl-cmp__photo--ib{ right:2.4vw; }
+.cur-live .curriculum .atl-themes{ position:absolute; inset:0; }
+.cur-live .curriculum .atl-theme{ position:absolute; inset:0; display:block; padding:0; border:0; pointer-events:none; }
+.cur-live .curriculum .atl-theme__name{
+  position:absolute;
+  left:50%;
+  top:42vh;
+  width:20vw;
+  margin-left:-10vw;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--space-2);
+  font-size:clamp(1.7rem,2.5vw,2.5rem);
+  text-align:center;
+}
+.cur-live .curriculum .atl-theme__side{ position:absolute; top:40vh; width:min(30vw,440px); max-width:none; margin-left:calc(min(30vw,440px) / -2); }
+.cur-live .curriculum .atl-theme__side--cbse{ left:25%; }
+.cur-live .curriculum .atl-theme__side--ib{ left:75%; }
+.cur-live .curriculum .atl-theme__stat{ overflow:clip; padding-bottom:.08em; }
+.cur-live .curriculum .atl-theme__stat b{ font-size:clamp(4rem,7vw,7rem); }
+.cur-live .curriculum .atl-cmp__dial{
+  position:absolute;
+  left:50%;
+  bottom:8vh;
+  display:flex;
+  gap:10px;
+  translate:-50% 0;
+}
+.cur-live .curriculum .atl-cmp__dial i{ width:22px; height:2px; background:var(--atl-ink-dim); transition:background .4s var(--e), width .4s var(--e2); }
+.cur-live .curriculum .atl-cmp__dial i.is-on{ width:44px; background:var(--dark); }
+
+/* The CBSE streams. Each word is a control that opens its four subjects
+   beside it, on a fan of lines drawn from the end of the word. */
+.cur-live .curriculum .atl-stream{ grid-template-columns:minmax(0,auto) minmax(0,1fr); min-height:clamp(120px,13vw,190px); }
+.cur-live .curriculum .atl-stream__name{ color:var(--ink-mute); transition:color .45s var(--e); }
+.cur-live .curriculum .atl-stream.is-open .atl-stream__name{ color:var(--dark-deep); }
+.cur-live .curriculum .atl-stream__name button::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:.02em;
+  height:2px;
+  background:var(--gold-ink);
+  transform:scaleX(0);
+  transform-origin:0 50%;
+  transition:transform .6s var(--e2);
+}
+.cur-live .curriculum .atl-stream.is-open .atl-stream__name button::after{ transform:none; }
+.cur-live .curriculum .atl-stream__subjects{
+  position:relative;
+  align-self:stretch;
+  display:grid;
+  grid-template-columns:minmax(48px,1fr) minmax(200px,19vw);
+  visibility:hidden;
+  transition:visibility 0s .5s;
+}
+.cur-live .curriculum .atl-stream.is-open .atl-stream__subjects{ visibility:visible; transition:none; }
+.cur-live .curriculum .atl-stream__fan{
+  display:block;
+  position:absolute;
+  left:0;
+  top:50%;
+  width:calc(100% - max(200px,19vw));
+  height:208px;
+  translate:0 -50%;
+  overflow:visible;
+}
+.cur-live .curriculum .atl-stream__fan path{
+  fill:none;
+  stroke:var(--gold-ink);
+  stroke-width:1;
+  stroke-dashoffset:1;
+  vector-effect:non-scaling-stroke;
+  transition:stroke-dashoffset .7s var(--e2);
+}
+.cur-live .curriculum .atl-stream__fan path:nth-child(2){ transition-delay:.05s; }
+.cur-live .curriculum .atl-stream__fan path:nth-child(3){ transition-delay:.1s; }
+.cur-live .curriculum .atl-stream__fan path:nth-child(4){ transition-delay:.15s; }
+.cur-live .curriculum .atl-stream.is-open .atl-stream__fan path{ stroke-dashoffset:0; }
+.cur-live .curriculum .atl-stream__list{
+  position:absolute;
+  right:0;
+  top:50%;
+  display:grid;
+  grid-template-rows:repeat(4,52px);
+  width:max(200px,19vw);
+  gap:0;
+  translate:0 -50%;
+  z-index:1;
+}
+.cur-live .curriculum .atl-stream__list li{
+  padding-left:var(--space-3);
+  font-family:var(--font-display);
+  font-size:clamp(1.2rem,1.6vw,1.5rem);
+  opacity:0;
+  translate:-14px 0;
+  transition:opacity .35s var(--e), translate .5s var(--e2);
+}
+.cur-live .curriculum .atl-stream__list li::before{ content:none; }
+.cur-live .curriculum .atl-stream.is-open .atl-stream__list li{ opacity:1; translate:0 0; }
+.cur-live .curriculum .atl-stream.is-open .atl-stream__list li:nth-child(1){ transition-delay:.18s; }
+.cur-live .curriculum .atl-stream.is-open .atl-stream__list li:nth-child(2){ transition-delay:.24s; }
+.cur-live .curriculum .atl-stream.is-open .atl-stream__list li:nth-child(3){ transition-delay:.3s; }
+.cur-live .curriculum .atl-stream.is-open .atl-stream__list li:nth-child(4){ transition-delay:.36s; }
+
+/* The IB groups. The scroll carries the six groups across the stage; the
+   one in the middle is the one being read, its neighbours stand back. */
+.cur-live .curriculum .atl-ib__stage{
+  display:flex;
+  flex-direction:column;
+  max-width:none;
+  padding:0;
+  background:var(--paper);
+}
+.cur-live .curriculum .atl-ib__rail{
+  width:100%;
+  max-width:var(--maxw);
+  margin:calc(76px + 3vh) auto 0;
+  padding-inline:var(--gut);
+}
+.cur-live .curriculum .atl-ib__view{ position:relative; flex:1; }
+.cur-live .curriculum .atl-groups{ position:absolute; inset:0; display:block; margin:0; }
+.cur-live .curriculum .atl-group{
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:min(54vw,780px);
+  height:fit-content;
+  margin:auto 0 auto calc(min(54vw,780px) / -2);
+  grid-template-columns:auto minmax(0,1fr);
+  gap:0 clamp(24px,3vw,48px);
+  will-change:transform, opacity;
+}
+.cur-live .curriculum .atl-group__num{ font-size:clamp(9rem,17vw,16rem); }
+.cur-live .curriculum .atl-group caption{ font-size:clamp(1.6rem,2.4vw,2.3rem); padding-bottom:var(--space-5); }
+.cur-live .curriculum .atl-group tbody th{ padding-block:var(--space-4); font-size:1.12rem; }
+.cur-live .curriculum .atl-group td{ font-size:var(--fs-sm); }
+
+/* The core. Three rings round the centre; the one being read is drawn
+   bright, the other two stand back, and every explanation stays legible. */
+.cur-live .curriculum .atl-core__stage{ max-width:none; padding:0 max(var(--gut),calc((100vw - var(--maxw)) / 2 + var(--gut))); }
+.cur-live .curriculum .atl-core__orbits{ width:min(78vh,44vw,640px); }
+.cur-live .curriculum .atl-orbit .atl-orbit__ring{ stroke:rgba(var(--gold-rgb),.26); }
+.cur-live .curriculum .atl-orbit text{ fill:var(--on-dark-mute); }
+.cur-live .curriculum .atl-orbit.is-on .atl-orbit__ring{ stroke:var(--gold); stroke-width:1.8; }
+.cur-live .curriculum .atl-orbit.is-on text{ fill:var(--gold-lit); }
+.cur-live .curriculum .atl-core__list li::before{ transform:scaleY(0); }
+.cur-live .curriculum .atl-core__list li h4{ color:var(--on-dark-mute); }
+.cur-live .curriculum .atl-core__list li p{ color:var(--on-dark-mute); }
+.cur-live .curriculum .atl-core__list li.is-on::before{ transform:none; }
+.cur-live .curriculum .atl-core__list li.is-on h4{ color:var(--gold-lit); }
+.cur-live .curriculum .atl-core__list li.is-on p{ color:var(--on-dark); }
+
+/* School life. The drawing's marks are drawn first, then give way. */
+.cur-live .curriculum .atl-beyond__stage{ max-width:none; padding:calc(76px + 4vh) max(var(--gut),calc((100vw - var(--maxw)) / 2 + var(--gut))) 5vh; }
+.cur-live .curriculum .atl-beyond__plates{ height:min(82vh,760px); grid-template-rows:minmax(0,1.05fr) minmax(0,1fr); }
+.cur-live .curriculum .atl-life{ min-height:0; display:flex; flex-direction:column; }
+.cur-live .curriculum .atl-life__img{ flex:1; min-height:0; aspect-ratio:auto; }
+.cur-live .curriculum .atl-life--circle .atl-life__img{ flex:none; height:calc(100% - 2.2em); aspect-ratio:1; width:auto; }
+.cur-live .curriculum .atl-life--circle{ align-self:stretch; align-items:flex-start; }
+.cur-live .curriculum .atl-life--circle .atl-life__compass{ inset:-6% auto auto -6%; width:auto; height:calc((100% - 2.2em) * 1.12); aspect-ratio:1; }
+.cur-live .curriculum .atl-life--frame{ align-self:stretch; }
+
+
 /* =====================================================================
-   Smaller windows: the reading order, laid out for the width.
+   Smaller windows (and every window without cur-live): the reading
+   order, laid out for the width.
    ===================================================================== */
 @media (max-width:1023px){
-  .curriculum .atl-facts{ grid-template-columns:repeat(2,max-content); row-gap:var(--space-4); }
-  .curriculum .atl-facts > div:nth-child(odd){ padding-left:0; border-left:0; }
-  .curriculum .atl-spread{ grid-template-columns:minmax(0,1fr); row-gap:var(--space-5); }
+  body.curriculum{ --atl-spine-x:22px; }
+  .curriculum .atl-spread,
+  .curriculum .atl-notes{ grid-template-columns:minmax(0,1fr); padding-left:36px; }
+  .curriculum .atl-spread{ row-gap:var(--space-5); }
   .curriculum .atl-spread__r{ max-width:52ch; }
-  .curriculum .atl-notes{ grid-template-columns:minmax(0,1fr); row-gap:var(--space-6); }
-
-  /* The journey: a rail down the left, a marker at each stage, and each
-     stage's photograph after its text. */
-  /* The text clears the rail by the same distance at every gutter. */
-  .curriculum .atl-jr{ --jr-in:calc(var(--gut) + 28px); grid-template-columns:minmax(0,1fr); row-gap:0; padding-left:var(--jr-in); }
-  .curriculum .atl-jr::before{
-    content:"";
-    position:absolute;
-    left:calc(var(--gut) + var(--rail-x));
-    top:0;
-    bottom:0;
-    width:var(--atl-line);
-    margin-left:calc(var(--atl-line) / -2);
-    background:var(--gold-ink);
-  }
-  .curriculum .atl-jr__route{ display:none; }
-  .curriculum .atl-step,
-  .curriculum .atl-shot{ grid-column:1; }
-  .curriculum .atl-step[data-step="0"]{ grid-row:1; }
-  .curriculum .atl-shot[data-step="0"]{ grid-row:2; }
-  .curriculum .atl-step[data-step="1"]{ grid-row:3; }
-  .curriculum .atl-shot[data-step="1"]{ grid-row:4; }
-  .curriculum .atl-step{ position:relative; }
-  .curriculum .atl-step::before{
-    content:"";
-    position:absolute;
-    left:calc(var(--gut) + var(--rail-x) - var(--jr-in) - 7px);
-    top:.15em;
-    width:14px;
-    height:14px;
-    border-radius:50%;
-    background:var(--gold-ink);
-    box-shadow:0 0 0 5px var(--paper-2);
-  }
-  .curriculum .atl-shot{ margin:var(--space-6) 0 var(--space-8); max-width:560px; }
-  .curriculum .atl-shot__img{ max-height:72svh; }
-
-  /* The division: the node on the rail, the heading beside it, and two
-     branches stepping out to two separate labels. */
-  .curriculum .atl-div{ padding-top:0; }
-  .curriculum .atl-div::before{
-    content:"";
-    position:absolute;
-    left:calc(var(--gut) + var(--rail-x));
-    top:0;
-    height:var(--space-7);
-    width:var(--atl-line);
-    margin-left:calc(var(--atl-line) / -2);
-    background:var(--gold-ink);
-  }
-  .curriculum .atl-div__map{ display:flex; align-items:center; gap:var(--space-5); height:auto; padding-top:var(--space-7); }
-  .curriculum .atl-div__fork{ display:none; }
-  .curriculum .atl-div__node{ --nw:64px; position:relative; left:auto; top:auto; flex:none; margin:0 0 0 calc(var(--rail-x) - var(--nw) / 2); font-size:1.8rem; }
-  .curriculum .atl-div__text{ position:static; translate:none; }
-  .curriculum .atl-div__ends{ display:block; margin:var(--space-3) 0 0 var(--rail-x); }
-  .curriculum .atl-div__end{ position:relative; padding:var(--space-3) 0 0 36px; }
-  .curriculum .atl-div__end::before{
-    content:"";
-    position:absolute;
-    left:calc(var(--atl-line) / -2);
-    top:0;
-    width:28px;
-    height:calc(var(--space-3) + 1.1em);
-    border-left:var(--atl-line) solid var(--gold-ink);
-    border-bottom:var(--atl-line) solid var(--gold-ink);
-    border-bottom-left-radius:16px;
-  }
-  .curriculum .atl-div__end:not(:last-child)::after{
-    content:"";
-    position:absolute;
-    left:calc(var(--atl-line) / -2);
-    top:0;
-    bottom:0;
-    border-left:var(--atl-line) solid var(--gold-ink);
-  }
-  .curriculum .atl-div__end a{ padding:0 0 var(--space-4); border-left:0; }
-  .curriculum .atl-div__tag{ font-size:2.2rem; }
-
+  .curriculum .atl-note,
+  .curriculum .atl-note:nth-child(odd),
+  .curriculum .atl-note:nth-child(even){ grid-column:1; justify-self:start; text-align:left; }
+  .curriculum .atl-note:nth-child(n)::before{ left:auto; right:calc(100% + 8px); width:calc(36px + var(--gut) - 22px - 12px); }
+  .curriculum .atl-note:nth-child(n)::after{ left:auto; right:calc(100% + 36px + var(--gut) - 22px - 4.5px); }
+  .curriculum .atl-phase{ grid-template-columns:minmax(0,1fr); row-gap:var(--space-6); padding-left:calc(var(--gut) + 36px); }
+  .curriculum .atl-phase__text{ justify-self:start; }
+  .curriculum .atl-phase__text::after{ right:auto; left:calc(-36px - var(--gut) + 22px - 6px); }
+  .curriculum .atl-phase__plate{ width:min(100%,460px); }
+  .curriculum .atl-phase::before{ left:var(--atl-spine-x); }
+  .curriculum .atl-phase--fork{ padding-left:var(--gut); padding-right:var(--gut); }
+  .curriculum .atl-phase--fork .atl-phase__text{ justify-self:start; padding-left:36px; text-align:left; }
+  .curriculum .atl-phase--fork .atl-phase__text::before{ right:auto; left:calc(var(--atl-spine-x) - var(--gut)); margin:0 0 0 calc(var(--atl-line) / -2); bottom:0; }
+  .curriculum .atl-junction{ height:clamp(240px,58vw,340px); margin:var(--space-5) calc(-1 * var(--gut)) 0; }
+  .curriculum .atl-fork .is-wide{ display:none; }
+  .curriculum .atl-fork .is-narrow{ display:inline; }
+  .curriculum .atl-node{ top:38%; --nw:clamp(84px,20vw,112px); }
+  .curriculum .atl-branch a{ padding-inline:0; }
+  .curriculum .atl-paths__head .wrap{ max-width:none; }
+  .curriculum .atl-paths__head .atl-twin{ display:none; }
+  .curriculum .atl-cmp__heads{ gap:var(--space-4); }
   .curriculum .atl-prog-head{ grid-template-columns:minmax(0,1fr); }
   .curriculum .atl-prog-head__note{ grid-column:1; grid-row:auto; }
+  .curriculum .atl-groups{ grid-template-columns:minmax(0,1fr); }
+  .curriculum .atl-ib__rail ol{ grid-template-columns:repeat(3,minmax(0,1fr)); }
   .curriculum .atl-rules{ grid-template-columns:minmax(0,1fr); }
-  .curriculum .atl-ib__body{ grid-template-columns:minmax(0,1fr); }
-  .curriculum .atl-ib__rail{ position:static; }
-  .curriculum .atl-ib__rail ol{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-left:0; border-top:1px solid var(--rule); }
-  .curriculum .atl-ib__rail a{ padding-left:0; }
-  .curriculum .atl-ib__rail a::before{ left:0; right:var(--space-3); top:-1px; bottom:auto; width:auto; height:2px; transform:scaleX(0); transform-origin:0 50%; }
-  .curriculum .atl-ib__rail a[aria-current="true"]::before{ transform:none; }
-  .curriculum .atl-beyond__inner{ grid-template-columns:minmax(0,1fr); }
+  .curriculum .atl-core__stage{ grid-template-columns:minmax(0,1fr); }
+  .curriculum .atl-core__orbits{ width:min(100%,440px); }
+  .curriculum .atl-beyond__stage{ grid-template-columns:minmax(0,1fr); }
 }
 
 @media (max-width:759px){
-  /* The node stays inside the gutter: smaller, with a narrower ring. */
-  .curriculum .atl-div__node{ --nw:44px; font-size:1.35rem; box-shadow:0 0 0 4px var(--paper-2), 0 0 0 5.5px var(--gold-ink); }
   .curriculum .atl-open{ display:grid; justify-content:stretch; align-content:start; padding-inline:var(--gut); }
   .curriculum .atl-open__inner{ display:contents; }
   .curriculum .atl-open .cur-trail{ order:1; }
   .curriculum .atl-open__title{ order:2; font-size:clamp(2.6rem,11.4vw,3.6rem); }
   .curriculum .atl-open__lead{ order:3; margin-top:var(--space-5); }
   .curriculum .atl-open__actions{ order:4; margin-top:var(--space-5); }
-  .curriculum .atl-open__visual{ position:relative; inset:auto; order:5; height:clamp(240px,40svh,360px); margin:var(--space-5) calc(-1 * var(--gut)) 0; }
+  .curriculum .atl-open__visual{ position:relative; inset:auto; order:5; height:clamp(260px,42svh,380px); margin:var(--space-5) calc(-1 * var(--gut)) 0; }
   .curriculum .atl-open__route--wide{ display:none; }
   .curriculum .atl-open__route--narrow{ display:block; }
   .curriculum .atl-open__grades li{ left:calc(var(--mx) * 1%); top:calc(var(--my) * 1%); font-size:calc(var(--s) * 3rem); }
@@ -1072,71 +1476,45 @@ body.curriculum .atl-open ul{ list-style:none; }
   .curriculum .atl-facts > div,
   .curriculum .atl-facts > div + div{ padding:var(--space-3) var(--space-3) var(--space-3) 0; border-left:0; border-top:1px solid var(--rule-dark); }
   .curriculum .atl-facts dd{ white-space:normal; }
-  .curriculum .atl-index{ order:7; display:block; margin:var(--space-5) 0 0; padding-top:var(--space-4); border-top:1px solid var(--rule-dark); }
+  .curriculum .atl-index{ order:7; margin:0 0 0 2px; padding:var(--space-3) 0 0 calc(20px - 2px); border-left:var(--atl-line) solid var(--gold); }
   .curriculum .atl-index ol{ gap:0 var(--space-4); }
-  .curriculum .atl-plate--lens{ left:auto; right:-10%; top:10%; }
-  .curriculum .atl-plate--mol{ display:none; }
+  .curriculum .atl-plate--lens,
+  .curriculum .atl-plate--page,
+  .curriculum .atl-plate--wave{ display:none; }
+  .curriculum .atl-plate--geo{ left:auto; right:-8%; top:12%; }
+  .curriculum .atl-plate--mol{ left:62%; top:54%; }
+  .curriculum .atl-plate--grid{ left:60%; top:30%; }
+  .curriculum .atl-letters{ left:auto; right:6%; top:6%; }
 
-  /* The comparison: each theme is a heading, with the two programmes'
-     cells under it, each named. The same table, re-set. */
-  .curriculum .atl-cmp,
-  .curriculum .atl-cmp tbody,
-  .curriculum .atl-cmp tr,
-  .curriculum .atl-cmp th,
-  .curriculum .atl-cmp td{ display:block; width:auto; }
-  .curriculum .atl-cmp thead{ display:none; }
-  .curriculum .atl-cmp tbody tr{ padding-block:var(--space-6); border-top:1px solid var(--rule); }
-  .curriculum .atl-cmp tbody th{ padding:0 0 var(--space-4); border:0; font-size:1.6rem; }
-  .curriculum .atl-cmp td{ padding:0 0 0 var(--space-5); border-top:0; }
-  .curriculum .atl-cmp td + td{ margin-top:var(--space-5); }
-  .curriculum .atl-cmp td::before{
-    content:attr(data-prog);
-    display:block;
-    margin-bottom:var(--space-1);
-    color:var(--label);
-    font-size:var(--fs-xs);
-    font-weight:var(--weight-label);
-    letter-spacing:.12em;
-    text-transform:uppercase;
-  }
-  .curriculum .atl-cmp__guides td::before{ content:none; }
-  .curriculum .atl-cmp tbody .atl-cmp__guides th{ padding-top:0; }
-
+  .curriculum .atl-cmp__heads{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .curriculum .atl-cmp__title{ font-size:1.7rem; }
+  .curriculum .atl-theme{ grid-template-columns:minmax(0,1fr); gap:var(--space-5); padding-block:var(--space-6); }
+  .curriculum .atl-theme__name{ justify-content:flex-start; }
+  .curriculum .atl-theme__side{ justify-self:stretch; max-width:none; padding-left:var(--space-5); border-left:var(--atl-line) solid var(--gold-ink); }
+  .curriculum .atl-theme__side--ib{ border-left-style:double; border-left-width:4px; }
+  .curriculum .atl-theme__stat b{ font-size:3.4rem; }
+  .curriculum .atl-ends{ grid-template-columns:minmax(0,1fr); row-gap:var(--space-6); }
+  .curriculum .atl-twin--end{ display:none; }
+  .curriculum .atl-end{ justify-self:start; align-items:flex-start; text-align:left; }
+  .curriculum .atl-end::before{ margin:0 0 var(--space-2); }
   .curriculum .atl-stream{ grid-template-columns:minmax(0,1fr); }
-  .curriculum .atl-stream__name{ font-size:clamp(2.6rem,13vw,4.2rem); }
+  .curriculum .atl-stream__name{ font-size:clamp(2.8rem,14vw,4.4rem); }
   .curriculum .atl-ib__rail ol{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   .curriculum .atl-group{ grid-template-columns:minmax(0,1fr); }
-  .curriculum .atl-group__num{ font-size:4.5rem; }
-
-  /* The core: three stacked entries on one vertical line. */
-  .curriculum .atl-core__list{ grid-template-columns:minmax(0,1fr); gap:var(--space-7); }
-  .curriculum .atl-core__list::before{ left:7px; right:auto; top:7px; bottom:7px; width:var(--atl-line); height:auto; transform-origin:50% 0; margin-left:calc(var(--atl-line) / -2); }
-  .cur-motion .curriculum .atl-core:not(.is-in) .atl-core__list::before{ transform:scaleY(0); }
-  .curriculum .atl-core__list li{ padding:0 0 0 var(--space-7); }
-
-  .curriculum .atl-beyond__plates{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--space-5) var(--space-4); }
-  .curriculum .atl-life--b{ margin-top:var(--space-6); }
+  .curriculum .atl-group__num{ font-size:5rem; }
+  .curriculum .atl-core__list li{ padding-left:var(--space-5); }
+  .curriculum .atl-beyond__plates{ gap:var(--space-6) var(--space-4); }
+  .curriculum .atl-life--circle{ grid-column:1 / span 7; }
+  .curriculum .atl-life--frame{ grid-column:1 / -1; }
+  .curriculum .atl-life__dims i:last-child{ right:-10px; }
 }
 
-/* =====================================================================
-   Print: every piece of information, nothing sticky, no drawing.
-   ===================================================================== */
-@media print{
-  body.curriculum{ background:#fff; }
-  .curriculum .atl-open{ min-height:0; padding:0 0 24px; color:#000; background:none; }
-  .curriculum .atl-open :is(.atl-open__title, .atl-open__title em, .atl-open__lead, .cur-trail, .atl-facts dt, .atl-facts dd){ color:#000; }
-  .curriculum :is(.atl-open__field, .atl-open__visual, .atl-index, .atl-open__actions, .atl-jr__route, .atl-div__map svg, .atl-shot__slate, .atl-shot__edge){ display:none !important; }
-  .curriculum .atl-jr{ display:block; }
-  .curriculum .atl-shot{ max-width:60%; margin:16px 0 32px; break-inside:avoid; }
-  .curriculum .atl-div__map{ height:auto; }
-  .curriculum .atl-div__node,
-  .curriculum .atl-div__text{ position:static; translate:none; margin:0; }
-  .curriculum .atl-div__ends{ display:block; }
-  .curriculum .atl-ib__rail{ position:static; }
-  .curriculum .atl-ib__body{ display:block; }
-  .curriculum .atl-group,
-  .curriculum .atl-cmp tr{ break-inside:avoid; }
-  .curriculum .atl-core{ color:#000; background:none; }
-  .curriculum .atl-core :is(.atl-core__title, h4, p){ color:#000; }
-  .curriculum .atl-life__img{ clip-path:none !important; }
-}
+/* html.cur-lite: the stream and the part of the core in the middle of the
+   window are the ones lit; nothing is hidden. */
+.cur-lite .curriculum .atl-stream__name{ color:var(--ink-soft); transition:color .45s var(--e); }
+.cur-lite .curriculum .atl-stream.is-open .atl-stream__name{ color:var(--dark-deep); }
+.cur-lite .curriculum .atl-core__list li::before{ transform:scaleY(0); }
+.cur-lite .curriculum .atl-core__list li.is-on::before{ transform:none; }
+.cur-lite .curriculum .atl-core__list li.is-on h4{ color:var(--gold-lit); }
+.cur-lite .curriculum .atl-orbit.is-on .atl-orbit__ring{ stroke:var(--gold); stroke-width:1.8; }
+.cur-lite .curriculum .atl-orbit.is-on text{ fill:var(--gold-lit); }
