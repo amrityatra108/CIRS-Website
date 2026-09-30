@@ -5,16 +5,9 @@
    campus, the departure, the field of destinations, the alumni,
    the pathways, the index, the return.
 
-   THE PALETTE. Warm ivory on deep charcoal with the site's gold:
-   this page is a night sky for most of its length. The navy and
-   rose it once carried were decoration from outside the palette
-   and have gone; the pathway grounds below are all site roles.
-
-   Gold has the problem palette.css documents at length — it is
-   unreadable on pale grounds. So there are two tokens, not one:
-   --aj-gold for dark grounds (7.1:1 on the charcoal) and
-   --aj-gold-ink for the two pale chapters (6.5:1 on the ivory).
-   Nothing on this page sets gold on a light ground by hand.
+   THE PALETTE. The photographic opening retains its approved treatment.
+   Editorial chapters below use white, ivory and gold, with dark body text.
+   The final scoped block owns that treatment and the directory surface.
 
    THE TYPE. The display face (--font-display) against the
    quotation face (--font-quote), which does the work of a second
@@ -493,51 +486,6 @@ html.js-motion .ajc__origin{ opacity:0; }
 html.js-motion .ajc__pt{ opacity:0; }
 
 /* ---- the panel ---- */
-.ajc__panel{
-  position:fixed; z-index:420; inset:auto 0 0 0;
-  background:var(--aj-ink-3);
-  border-top:1px solid var(--aj-gold);
-  box-shadow:0 -30px 80px -30px rgba(0,0,0,.9);
-}
-.ajc__panel[hidden]{ display:none; }
-.ajc__panelInner{
-  width:100%; max-width:var(--maxw); margin-inline:auto;
-  padding:clamp(22px,3vw,34px) var(--gut);
-  display:grid; gap:6px;
-  grid-template-areas:"region close" "name close" "country close" "note note";
-  grid-template-columns:1fr auto;
-  align-items:start;
-}
-.ajc__panelRegion{
-  grid-area:region; margin:0;
-  font-size:.66rem; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--aj-gold); font-weight:600;
-}
-.ajc__panelName{
-  grid-area:name; margin:0;
-  font-size:clamp(1.4rem,3vw,2.2rem); line-height:1.1;
-  color:var(--aj-on-dark); letter-spacing:-.01em;
-}
-.ajc__panelCountry{
-  grid-area:country; margin:0;
-  color:var(--aj-on-dark-soft); font-size:var(--fs-sm);
-}
-.ajc__panelNote{
-  grid-area:note; margin:14px 0 0;
-  padding-top:14px; border-top:1px solid var(--aj-hair-soft);
-  color:var(--aj-on-dark-mute); font-size:var(--fs-xs); max-width:62ch;
-}
-.ajc__panelNote em{ color:var(--aj-on-dark-soft); }
-.ajc__panelClose{
-  grid-area:close; appearance:none; cursor:pointer;
-  background:transparent; border:1px solid var(--aj-hair);
-  color:var(--aj-on-dark); font:inherit; font-size:var(--fs-xs);
-  letter-spacing:.1em; text-transform:uppercase;
-  padding:9px 16px;
-  transition:border-color .3s var(--e), color .3s var(--e);
-}
-.ajc__panelClose:hover{ border-color:var(--aj-gold); color:var(--aj-gold-lit); }
-
 /* ============================================================
    CHAPTER 4a — The voices
    ============================================================ */
@@ -549,17 +497,7 @@ html.js-motion .ajc__pt{ opacity:0; }
 .aj-voices__head .h2 em{ color:var(--aj-gold-lit); }
 .aj-voices__head .lead{ color:var(--aj-on-dark-soft); }
 
-/* Each quotation is a pull-quote with a hanging mark, not a centred stack.
-   The mark hangs in its own column, the words run at a proper measure
-   beside it, and the attribution sits under the words where an attribution
-   belongs.
-
-   THE MEASURE. The width has to be set on the element that carries the
-   quotation's own font. It was on the <blockquote>, which inherits the
-   16px body face, so 22ch resolved to 180px while the words inside were
-   set at 49px — about three characters to the line, and "CIRS is an
-   emotion." came out as three ragged lines in a column. ch is only a
-   measure of the font it is declared on. */
+/* Base quotation typography; the responsive card composition is below. */
 .ajv{
   position:relative; margin:0;
   width:100%; max-width:var(--maxw); margin-inline:auto;
@@ -1084,13 +1022,6 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   .ajc__item.is-out{ display:none; }
   .ajc__status{ margin-left:0; width:100%; }
 
-  .ajc__panel{ max-height:72svh; overflow-y:auto; }
-  .ajc__panelInner{
-    grid-template-areas:"region" "name" "country" "note" "close";
-    grid-template-columns:1fr; justify-items:start;
-  }
-  .ajc__panelClose{ margin-top:16px; }
-
   /* --- alumni chapters stack --- */
   .ajp,
   .ajp[data-side="right"]{ grid-template-columns:1fr; }
@@ -1155,3 +1086,165 @@ body.alumni .aj-return__acts .btn--ghost:hover{
   .aj-cursor{ display:none; }
   .ajw__n, .ajw__label{ transition:none; }
 }
+
+/* Alumni's white-and-gold edition. Keep the photographic opening's own
+   dark scrim; these roles apply only to the editorial chapters below it. */
+body.alumni{ --aj-gold-ink:var(--ink); background:var(--white); }
+body.alumni main{ background:var(--white); }
+body.alumni :focus-visible{ outline:3px solid #76581f; outline-offset:4px; }
+body.alumni :is(.aj-portal,.aj-const,.aj-voices,.aj-paths,.aj-return){
+  --aj-gold:#b2944e; --aj-ink:var(--white); --aj-ink-2:var(--paper); --aj-ink-3:var(--white);
+  --aj-on-dark:var(--ink); --aj-on-dark-soft:var(--ink-soft);
+  --aj-on-dark-mute:var(--ink-soft); --aj-gold-lit:var(--ink);
+  --aj-hair:rgba(118,88,31,.35); --aj-hair-soft:rgba(118,88,31,.2);
+  color:var(--ink);
+}
+body.alumni .aj-label{ color:var(--ink-soft); }
+body.alumni .aj-portal__depth{ background:none; }
+body.alumni .aj-portal__cap{ background:var(--white); color:var(--ink); padding:14px; }
+body.alumni .aj-portal__cap .sc{ color:var(--ink); }
+body.alumni .aj-people, body.alumni .aj-index{ background:var(--white); }
+
+/* The map uses geographic polygons, never rectangular hit areas. The routes
+   and labels cannot intercept a country click. Country controls remain the
+   comfortable option for small islands and small touch screens. */
+body.alumni [data-directory-controls][hidden]{ display:none; }
+body.alumni .ajc__field{ background:var(--paper); border:1px solid var(--rule); }
+body.alumni .ajc__field::before, body.alumni .ajc__field::after{ display:none; }
+body.alumni .ajc__map{ z-index:1; }
+body.alumni .ajc__land{
+  fill:#e8e1d1; stroke:#887654; stroke-width:.45;
+  cursor:pointer; transition:fill .18s ease;
+}
+body.alumni .ajc__land.is-lit, body.alumni .ajc__land:focus{ fill:var(--aj-gold); stroke:#493719; stroke-width:1.5; }
+body.alumni .ajc__lines{ pointer-events:none; }
+body.alumni .ajc__line{ stroke:#8d743f; opacity:.4; }
+body.alumni .ajc__line.is-lit{ stroke:#493719; opacity:1; }
+body.alumni .ajc__flight{ fill:#76581f; }
+body.alumni .ajc__dot{ background:#493719; box-shadow:0 0 0 2px var(--white); }
+body.alumni .ajc__pt .ajc__dot::before, body.alumni .ajc__pt .ajc__dot::after{ display:none; }
+body.alumni .ajc__pt:hover .ajc__dot, body.alumni .ajc__pt:focus-visible .ajc__dot{ background:#76581f; box-shadow:0 0 0 3px var(--aj-gold); }
+body.alumni .ajc__label{ text-shadow:none; background:rgba(255,255,255,.92); padding:2px 4px; }
+body.alumni :is(.ajc__name,.ajc__country,.ajc__originName,.ajc__originName small){ color:var(--ink); text-shadow:none; }
+body.alumni .ajc__originDot{ background:var(--aj-gold); box-shadow:0 0 0 3px #493719; }
+body.alumni .ajc__originName{ background:var(--white); padding:3px; }
+body.alumni .ajc__fcount{ color:var(--ink-soft); }
+body.alumni .ajc__filter{ min-height:44px; color:var(--ink); letter-spacing:.08em; }
+body.alumni .ajc__countryControls{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin:24px 0 12px; }
+body.alumni .ajc__countryControls label{ width:100%; font-size:.85rem; }
+body.alumni :is(.ajc__countryControls select,.ajc__countryControls button,.ajc__directory button){
+  font:inherit; color:var(--ink); background:var(--white); border:1px solid #887654;
+  padding:10px 14px; min-height:44px; max-width:100%; border-radius:2px;
+}
+body.alumni :is(.ajc__countryControls button,.ajc__directory button){ cursor:pointer; touch-action:manipulation; }
+body.alumni .ajc__countryControls a, body.alumni .ajc__source a{ color:var(--ink); text-decoration:underline; text-underline-offset:3px; }
+body.alumni .ajc__hint{ min-height:1.6em; font-size:.95rem; color:var(--ink); }
+body.alumni .ajc__source{ max-width:90ch; margin:20px 0 0; font-size:.8rem; line-height:1.6; color:var(--ink-soft); }
+
+/* Native modal supplies background inertness and a browser top layer. Scroll
+   remains inside the directory while the shared Lenis engine is paused. */
+body.alumni .ajc__directory{
+  width:min(780px,calc(100% - 48px)); max-width:none;
+  max-height:calc(100dvh - 64px); margin:auto; padding:28px;
+  color:var(--ink); background:var(--white); border:1px solid var(--aj-gold);
+  overflow:auto; overscroll-behavior:contain;
+}
+body.alumni .ajc__directory::backdrop{ background:rgba(29,26,21,.5); }
+body.alumni .ajc__dialogHead{ display:grid; grid-template-columns:1fr auto; gap:16px; }
+body.alumni .ajc__dialogHead .aj-label{ margin:0; align-self:center; }
+body.alumni .ajc__dialogHead h3{ grid-column:1/-1; margin:0; font-size:clamp(1.8rem,4vw,2.7rem); line-height:1.15; }
+body.alumni #ajc-panel-note{ grid-column:1/-1; margin:0; font-size:.88rem; line-height:1.6; color:var(--ink-soft); }
+body.alumni .ajc__dialogTools{ display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
+body.alumni .ajc__dialogTools label{ width:100%; }
+body.alumni #ajc-search{ font:inherit; font-size:16px; min-width:0; flex:1 1 260px; min-height:44px; border:1px solid #887654; padding:10px; background:var(--white); color:var(--ink); }
+body.alumni [data-panel-count]{ font-size:.85rem; color:var(--ink-soft); }
+body.alumni .ajc__results{ list-style:none; padding:0; margin:0; }
+body.alumni .ajc__results .ajd__row{ padding-block:14px; }
+body.alumni .ajc__locationNote{ font-size:.8rem; color:var(--ink-soft); line-height:1.5; }
+body.alumni [data-panel-empty]{ padding:20px; background:var(--paper); line-height:1.6; }
+body.alumni [data-panel-empty][hidden]{ display:none; }
+
+/* All three voices are complete and visible together, with a quiet rule and
+   ample reading space. The existing once-only reveal respects reduced motion. */
+body.alumni .ajv-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+body.alumni .ajv{
+  display:flex; flex-direction:column; gap:24px; align-items:flex-start;
+  padding:32px 26px; margin:0; min-width:0; max-width:none;
+  background:var(--paper); border:1px solid var(--rule); border-top:3px solid var(--aj-gold);
+}
+body.alumni .ajv__mark{ font-size:4rem; opacity:1; transform:none; }
+body.alumni .ajv__quote p{ font-size:clamp(1.35rem,1.8vw,1.8rem); line-height:1.45; max-width:none; }
+body.alumni .ajv__by{ margin-top:auto; padding-top:24px; }
+body.alumni .ajv__name{ font-size:.7rem; letter-spacing:.12em; }
+
+/* One state set by the existing pathway controller colours the entire
+   section, including the pin spacer. Static scenes keep individual grounds. */
+body.alumni .aj-paths{ background:#faf9f3; transition:background-color .5s ease; }
+body.alumni .aj-paths[data-active-scene="ink"]{ background:#faf9f3; }
+body.alumni .aj-paths[data-active-scene="navy"]{ background:#f1e6cc; }
+body.alumni .aj-paths[data-active-scene="gold"]{ background:#e3d2a3; }
+body.alumni .aj-paths[data-active-scene="slate"]{ background:#f5efdf; }
+body.alumni .aj-paths[data-active-scene="maroon"]{ background:#ddd0b7; }
+body.alumni .ajw[data-scene="ink"]{ --aj-scene:#faf9f3; --aj-accent:var(--ink); }
+body.alumni .ajw[data-scene="navy"]{ --aj-scene:#f1e6cc; --aj-accent:var(--ink); }
+body.alumni .ajw[data-scene="gold"]{ --aj-scene:#e3d2a3; --aj-accent:var(--ink); }
+body.alumni .ajw[data-scene="slate"]{ --aj-scene:#f5efdf; --aj-accent:var(--ink); }
+body.alumni .ajw[data-scene="maroon"]{ --aj-scene:#ddd0b7; --aj-accent:var(--ink); }
+body.alumni .ajw-rail{ background:transparent; border:0; }
+body.alumni .ajw-track.is-live .ajw{ background:rgba(255,255,255,.6); border-top:2px solid var(--aj-gold); }
+body.alumni .ajw-track:not(.is-live){ min-height:0; padding-top:0; }
+body.alumni .ajw-track:not(.is-live) .ajw-rail{ height:auto; width:100%; max-width:none; padding:0; }
+body.alumni .ajw-track:not(.is-live) .ajw{ max-width:none; padding:48px max(var(--gut),calc((100% - 860px)/2)); background:var(--aj-scene); }
+body.alumni .ajw-track:not(.is-live) .ajw-nav{ display:none; }
+body.alumni .ajw__dot{ min-width:44px; min-height:44px; }
+body.alumni .ajw__dot.is-on span{ color:var(--ink); border-color:#76581f; }
+body.alumni .ajw__n span{ opacity:1; }
+
+/* A white contact surface, a contour motif in the open right-hand margin,
+   and the original valley photograph as a visible supporting plate. */
+body.alumni .aj-return{ background:var(--white); min-height:auto; }
+body.alumni .aj-return__media{ inset:auto 0 0 auto; width:38%; height:42%; z-index:0; }
+body.alumni .aj-return__media img{ object-fit:cover; }
+body.alumni .aj-return__wash{ display:none; }
+body.alumni .aj-return::before{
+  content:""; position:absolute; right:-200px; top:24px; width:460px; height:320px;
+  border:1px solid rgba(118,88,31,.22); border-radius:48%; transform:rotate(-24deg);
+  box-shadow:0 0 0 28px var(--white),0 0 0 29px rgba(118,88,31,.18),0 0 0 62px var(--white),0 0 0 63px rgba(118,88,31,.14);
+  pointer-events:none;
+}
+body.alumni .aj-return__inner{ padding-right:calc(var(--gut) + 25%); }
+body.alumni .aj-return__acts .btn--primary{ color:var(--ink); }
+body.alumni .aj-return__acts .btn--primary:hover{ background:var(--paper-3); color:var(--ink); }
+body.alumni .aj-return__rows dt{ color:var(--ink-soft); }
+body.alumni .aj-return__rows a:hover{ color:var(--ink); }
+@media (max-width:899px){
+  body.alumni .ajc__field{ aspect-ratio:200 / 97.9341; padding:0; }
+  body.alumni .ajc__map{ display:block; }
+  body.alumni .ajc__points, body.alumni .ajc__origin, body.alumni .ajc__lines{ display:none; }
+  body.alumni .ajv-grid{ grid-template-columns:1fr; }
+  body.alumni .ajv{ padding:28px; }
+  body.alumni .aj-return__inner{ padding-right:var(--gut); }
+  body.alumni .aj-return__media{ position:relative; inset:auto; width:100%; height:auto; order:2; margin-top:40px; }
+  body.alumni .aj-return__media img{ height:auto; }
+  body.alumni .aj-return::before{ display:none; }
+}
+@media (max-width:600px){
+  body.alumni .ajc__directory{ width:100%; height:100dvh; max-height:100dvh; padding:20px max(20px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left)); border:0; }
+  body.alumni .ajc__countryControls select{ width:100%; }
+}
+@media (prefers-reduced-motion:reduce){
+  body.alumni .aj-paths, body.alumni .ajc__land{ transition:none; }
+}
+html:not(.alumni-interactive) body.alumni .ajc__hint{ display:none; }
+/* Keep the retained valley photograph clear of the contact column as its
+   existing scroll zoom plays inside the frame. */
+body.alumni .aj-return__media{ overflow:hidden; }
+body.alumni .aj-return__inner{ padding-right:calc(var(--gut) + 34%); }
+body.alumni .aj-portal__plate{ box-shadow:none; }
+body.alumni .aj-return__acts .btn{ box-shadow:none; }
+body.alumni .ajc__pt:hover .ajc__name,
+body.alumni .ajc__pt:focus-visible .ajc__name{ color:var(--ink); }
+@media(max-width:899px){ body.alumni .aj-return__inner{ padding-right:var(--gut); } }
+body.alumni .ajc__dialogBar{ position:sticky; top:-28px; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:16px; margin:-28px -28px 20px; padding:16px 28px; background:var(--white); border-bottom:1px solid var(--rule); }
+body.alumni .ajc__dialogBar .aj-label{ margin:0; }
+@media(max-width:600px){ body.alumni .ajc__dialogBar{ top:-20px; margin:-20px -20px 20px; padding:12px 20px; } }

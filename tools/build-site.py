@@ -710,7 +710,7 @@ PAGES = {
         # Page styles and search behavior live in alumni.css and alumni-journey.js.
         "banner": None,
         "sheet": "alumni",
-        "cache_suffix": "-alumni-7",
+        "cache_suffix": "-alumni-8",
         "uc": False,
     },
     # What a visitor sees at an address that is no page of this site. Both

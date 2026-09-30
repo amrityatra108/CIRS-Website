@@ -45,146 +45,156 @@
     var field = $("[data-constellation]");
     var panel = $("#ajc-panel");
     var points = $$(".ajc__pt");
-    var items = $$(".ajc__item");
     var lines = $$(".ajc__line");
-    var status = $("[data-constellation-status]");
-    var openPoint = null;
-
-    /* ---- the panel ---------------------------------------- */
-    function panelParts() {
+    var countries = $$(".ajc__land[data-country]");
+    var hint = $("[data-map-hint]");
+    var records = $$(".ajd__row").map(function (row) {
       return {
-        region:  $("[data-panel-region]", panel),
-        name:    $("[data-panel-name]", panel),
-        country: $("[data-panel-country]", panel),
-        close:   $("[data-panel-close]", panel)
+        node: row, name: $(".ajd__name", row).textContent,
+        country: $(".ajd__country", row).textContent,
+        region: row.dataset.region, mapped: row.dataset.mapped === "true"
       };
+    });
+    var opener = null, scope = {}, savedOverflow = "", savedY = 0;
+    var search = $("#ajc-search");
+    var results = $("[data-panel-results]");
+    var panelEmpty = $("[data-panel-empty]");
+    var panelCount = $("[data-panel-count]");
+    document.documentElement.classList.add("alumni-interactive");
+    $$("[data-directory-controls]").forEach(function (el) { el.hidden = false; });
+
+    function renderDirectory() {
+      var q = search.value.trim().toLocaleLowerCase();
+      var eligible = records.filter(function (r) {
+        return (!scope.country || r.country === scope.country) &&
+          (!scope.region || r.region === scope.region) && (!scope.name || r.name === scope.name);
+      });
+      var matches = eligible.filter(function (r) {
+        return (r.name + " " + r.country).toLocaleLowerCase().includes(q);
+      });
+      results.replaceChildren();
+      matches.forEach(function (r) {
+        // Clone the existing generated row: any published links stay intact.
+        var row = r.node.cloneNode(true);
+        row.hidden = false;
+        row.removeAttribute("data-search");
+        var note = document.createElement("span");
+        note.className = "ajc__locationNote";
+        note.textContent = r.mapped ? "Reviewed location shown on map" : "Campus coordinates unresolved · directory only";
+        row.appendChild(note);
+        results.appendChild(row);
+      });
+      panelCount.textContent = matches.length + " of " + eligible.length + " institutions" + (q ? " match your search." : ".");
+      panelEmpty.hidden = matches.length !== 0;
+      panelEmpty.textContent = eligible.length === 0
+        ? "No institutions are listed for " + (scope.country || "this region") + " in the current directory. This does not imply that no alumni have studied here."
+        : "No institutions match your search. Try another name or country, or browse all institutions.";
     }
 
-    function regionLabel(key) {
-      var b = document.querySelector('.ajc__filter[data-filter="' + key + '"]');
-      if (!b) return "";
-      // The button carries its count in a child; the label is the rest.
-      return b.textContent.replace(/\s*\d+\s*$/, "").trim();
-    }
-
-    function openPanel(btn) {
-      if (!panel) return;
-      var p = panelParts();
-      var label = $(".ajc__label", btn);
-      // The full institution name lives in the screen-reader line, which
-      // reads "Destination n of m. <name>, <country>. Open details."
-      var sr = $(".sr-only", btn);
-      var name = "";
-      if (sr) {
-        var m = sr.textContent.match(/\.\s*(.+?),\s*([^,]+)\.\s*Open details\./);
-        if (m) name = m[1];
+    function openDirectory(source, selection, title) {
+      if (!panel.open) {
+        opener = source;
+        savedY = window.scrollY;
+        savedOverflow = document.documentElement.style.overflow;
+        panel.showModal();
+        document.documentElement.style.overflow = "hidden";
+        window.dispatchEvent(new CustomEvent("cirs-portal-scroll-lock", { detail: { locked: true } }));
       }
-      if (!name && label) name = $(".ajc__name", label).textContent;
-
-      p.name.textContent = name;
-      p.country.textContent = $(".ajc__country", btn).textContent;
-      p.region.textContent = regionLabel(btn.dataset.region);
-      panel.hidden = false;
-
-      points.forEach(function (o) {
-        o.classList.toggle("is-active", o === btn);
-        o.setAttribute("aria-expanded", o === btn ? "true" : "false");
-      });
-      lines.forEach(function (l) {
-        l.classList.toggle("is-lit", l.dataset.line === btn.dataset.point);
-        l.classList.toggle("is-dim", l.dataset.line !== btn.dataset.point);
-      });
-
-      openPoint = btn;
-      p.close.focus();
+      scope = selection;
+      $("#ajc-panel-name").textContent = title;
+      search.value = "";
+      renderDirectory();
+      panel.scrollTop = 0;
+      $("[data-panel-close]").focus({ preventScroll: true });
+      if (opener) opener.setAttribute("aria-expanded", "true");
     }
+    function closeDirectory() { panel.close(); }
+    panel.addEventListener("close", function () {
+      document.documentElement.style.overflow = savedOverflow;
+      window.scrollTo({ top: savedY, behavior: "instant" });
+      if (opener) {
+        opener.setAttribute("aria-expanded", "false");
+        opener.focus({ preventScroll: true });
+      }
+      window.dispatchEvent(new CustomEvent("cirs-portal-scroll-lock", { detail: { locked: false } }));
+      opener = null;
+    });
+    // Native dialog supplies Escape and background inertness. Explicit wrapping
+    // keeps Tab inside the sheet even when the last result is a link.
+    panel.addEventListener("keydown", function (event) {
+      if (event.key !== "Tab") return;
+      var stops = $$("button, input, a[href], select", panel).filter(function (el) { return !el.disabled && el.getClientRects().length; });
+      var first = stops[0], last = stops[stops.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
+    $("[data-panel-close]").addEventListener("click", closeDirectory);
+    $("[data-panel-all]").addEventListener("click", function () {
+      scope = {}; search.value = "";
+      $("#ajc-panel-name").textContent = "All institutions";
+      renderDirectory(); search.focus();
+    });
+    search.addEventListener("input", renderDirectory);
 
-    function closePanel(restore) {
-      if (!panel || panel.hidden) return;
-      panel.hidden = true;
-      points.forEach(function (o) {
-        o.classList.remove("is-active");
-        o.setAttribute("aria-expanded", "false");
-      });
-      lines.forEach(function (l) { l.classList.remove("is-lit", "is-dim"); });
-      if (restore !== false && openPoint) openPoint.focus();
-      openPoint = null;
+    function lightCountry(name) {
+      countries.forEach(function (shape) { shape.classList.toggle("is-lit", shape.dataset.country === name); });
+      var total = records.filter(function (r) { return r.country === name; }).length;
+      hint.textContent = name ? name + " · " + total + " institution" + (total === 1 ? "" : "s") : "Select a country to explore its institutions.";
     }
-
-    if (panel) {
-      points.forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          if (openPoint === btn) { closePanel(); return; }
-          openPanel(btn);
-        });
-        // Hovering and focusing light the route without opening anything.
-        ["pointerenter", "focus"].forEach(function (type) {
-          btn.addEventListener(type, function () {
-            if (openPoint) return;
-            lines.forEach(function (l) {
-              l.classList.toggle("is-lit", l.dataset.line === btn.dataset.point);
-            });
-          });
-        });
-        ["pointerleave", "blur"].forEach(function (type) {
-          btn.addEventListener(type, function () {
-            if (openPoint) return;
-            lines.forEach(function (l) { l.classList.remove("is-lit"); });
-          });
+    countries.forEach(function (shape, index) {
+      shape.setAttribute("role", "button");
+      shape.setAttribute("aria-label", shape.getAttribute("aria-label") + " Open directory. Use arrow keys to move between countries.");
+      shape.setAttribute("aria-haspopup", "dialog");
+      shape.setAttribute("tabindex", index === 0 ? "0" : "-1");
+      shape.addEventListener("pointerenter", function (event) { if (event.pointerType !== "touch") lightCountry(shape.dataset.country); });
+      shape.addEventListener("pointerleave", function () { if (!shape.matches(":focus")) lightCountry(""); });
+      shape.addEventListener("focus", function () {
+        countries.forEach(function (other) { other.tabIndex = other === shape ? 0 : -1; });
+        lightCountry(shape.dataset.country);
+      });
+      shape.addEventListener("blur", function () { lightCountry(""); });
+      function openCountry() { openDirectory(shape, { country: shape.dataset.country }, shape.dataset.country); }
+      shape.addEventListener("click", openCountry);
+      shape.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openCountry(); return; }
+        var next = index;
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") next = (index + 1) % countries.length;
+        else if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = (index + countries.length - 1) % countries.length;
+        else if (event.key === "Home") next = 0;
+        else if (event.key === "End") next = countries.length - 1;
+        else return;
+        event.preventDefault(); countries[next].focus({ preventScroll: true });
+      });
+    });
+    var countrySelect = $("#ajc-country");
+    countrySelect.addEventListener("change", function () { lightCountry(countrySelect.value); });
+    $("[data-country-open]").addEventListener("click", function () {
+      var name = countrySelect.value;
+      openDirectory(this, name ? { country: name } : {}, name || "All institutions");
+    });
+    $$(".ajc__filter").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var region = button.dataset.filter;
+        openDirectory(button, region === "all" ? {} : { region: region },
+          region === "all" ? "All institutions" : button.textContent.replace(/\s*\d+\s*$/, "").trim());
+      });
+    });
+    points.forEach(function (button) {
+      button.disabled = false;
+      var country = $(".ajc__country", button).textContent;
+      button.addEventListener("click", function () {
+        openDirectory(button, { country: country }, country);
+      });
+      ["pointerenter", "focus"].forEach(function (event) {
+        button.addEventListener(event, function () {
+          lightCountry(country);
+          lines.forEach(function (line) { line.classList.toggle("is-lit", line.dataset.line === button.dataset.point); });
         });
       });
-
-      $("[data-panel-close]", panel).addEventListener("click", function () { closePanel(); });
-
-      // Escape closes it, and Tab is held inside it while it is open —
-      // there is one focusable thing in there, so the trap is a short loop.
-      document.addEventListener("keydown", function (e) {
-        if (panel.hidden) return;
-        if (e.key === "Escape") { e.preventDefault(); closePanel(); return; }
-        if (e.key !== "Tab") return;
-        var focusable = $$("button, a[href], input, [tabindex]:not([tabindex='-1'])", panel)
-          .filter(function (el) { return !el.disabled && el.offsetParent !== null; });
-        if (!focusable.length) return;
-        var first = focusable[0], last = focusable[focusable.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-      });
-
-      // A click anywhere outside it closes it, without stealing focus back.
-      document.addEventListener("pointerdown", function (e) {
-        if (panel.hidden) return;
-        if (panel.contains(e.target)) return;
-        if (e.target.closest && e.target.closest(".ajc__pt")) return;
-        closePanel(false);
-      });
-    }
-
-    /* ---- the region filters ------------------------------- */
-    var filters = $$(".ajc__filter");
-    filters.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var want = btn.dataset.filter;
-        filters.forEach(function (o) {
-          var on = o === btn;
-          o.classList.toggle("is-on", on);
-          o.setAttribute("aria-pressed", on ? "true" : "false");
+      ["pointerleave", "blur"].forEach(function (event) {
+        button.addEventListener(event, function () {
+          lightCountry(""); lines.forEach(function (line) { line.classList.remove("is-lit"); });
         });
-        var shown = 0;
-        items.forEach(function (li) {
-          var out = want !== "all" && li.dataset.region !== want;
-          li.classList.toggle("is-out", out);
-          if (!out) shown++;
-        });
-        lines.forEach(function (l) {
-          l.classList.toggle("is-dim", want !== "all" && l.dataset.region !== want);
-        });
-        closePanel(false);
-        if (status) {
-          status.textContent = want === "all"
-            ? "Showing all " + shown + " mapped destinations."
-            : "Showing " + shown + " mapped destination" + (shown === 1 ? "" : "s") +
-              " — " + regionLabel(want) + ".";
-        }
       });
     });
 
@@ -196,7 +206,7 @@
       var count = $("[data-destinations-count]");
       var empty = $("[data-destinations-empty]");
       var total = rows.length;
-      var countries = new Set(rows.map(function (r) {
+      var directoryCountryCount = new Set(rows.map(function (r) {
         return r.querySelector(".ajd__country").textContent;
       })).size;
 
@@ -215,7 +225,7 @@
         if (count) {
           count.textContent = q
             ? shown + " of " + total + " institutions match “" + input.value.trim() + "”."
-            : total + " institutions in " + countries + " countries.";
+            : total + " institutions in " + directoryCountryCount + " countries.";
         }
       });
     }
@@ -243,7 +253,7 @@
        which is worse than no label at all. */
     var zones = [
       [".ajc__pt", "Open"],
-      [".ajc__panelClose", "Close"],
+      ["[data-panel-close]", "Close"],
       [".ajw__evName[href]", "Read"]
     ];
 
@@ -539,7 +549,7 @@
        this, and it reverts everything its callback set on the way out. */
     var mm = gsap.matchMedia();
 
-    mm.add("(min-width: 900px)", function () {
+    mm.add("(min-width: 900px) and (min-height: 760px)", function () {
       /* chapter 2: the campus recedes into one plate in a dark field */
       var portal = $("[data-portal]");
       if (portal) {
@@ -575,6 +585,7 @@
       function show(i) {
         if (i === current) return;
         current = i;
+        track.closest(".aj-paths").dataset.activeScene = scenes[i].dataset.scene;
         scenes.forEach(function (scene, n) {
           var active = n === i;
           if (!active && scene.contains(document.activeElement)) {
@@ -625,6 +636,7 @@
       return function () {
         // Leaving the desktop query: return every scene to reading order.
         track.classList.remove("is-live");
+        delete track.closest(".aj-paths").dataset.activeScene;
         scenes.forEach(function (s) {
           s.classList.add("is-on");
           s.inert = false;
@@ -639,7 +651,7 @@
       };
     });
 
-    mm.add("(max-width: 899px)", function () {
+    mm.add("(max-width: 899px), (max-height: 759px)", function () {
       /* Narrow: no pins anywhere. The plate and the copy still arrive, and
          every pathway scene is simply on. */
       var portal = $("[data-portal]");
