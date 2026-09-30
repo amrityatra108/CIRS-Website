@@ -64,8 +64,8 @@ EXHIBITS = {
     # Drive: "award.JPG", file dated 15 November 2017.
     "brainfeed-2017": ("drive", "1Y26E4qz_3Jqq2IDeSUIWVuWphNM6SLfF"),
     # The first page of the Annual Report of 15 October 2019. Published on
-    # School Information as annual-report-2019.pdf.
-    "report-2019": ("pdf", "assets/documents/school-info/annual-report-2019.pdf", 0),
+    # School Information as annual-report.pdf.
+    "report-2019": ("pdf", "assets/documents/school-info/annual-report.pdf", 0),
 }
 
 

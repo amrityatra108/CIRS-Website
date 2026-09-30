@@ -203,14 +203,14 @@ PAGES = {
         "description": "The CIRS archive: Pujya Gurudev's idea, the land bought one rupee at a "
                        "time, the inauguration on 6 June 1996 and the milestones since, each "
                        "with its source.",
-        # A photographic opening, typographic expansion, finite archival
-        # camera path and complete record. HTML provides the normal-flow
-        # mobile, reduced-motion and graphics-failure experience.
-        # Every record is written from tools/history.py,
+        # No banner and no hero. The page opens on its own dark composition —
+        # the school's records set back at shallow depths behind the title —
+        # then tells six chapters in one bounded sticky sequence and ends on
+        # the complete archive. Every record is written from tools/history.py,
         # which names each one's source; tools/make-history.py cuts the images.
         "banner": None,
         "sheet": "history",
-        "cache_suffix": "-history-cinematic-4",
+        "cache_suffix": "-history-restored-1",
         # The chapters carry their own visible index and "View all
         # milestones", so the floating "On this page" control would repeat it.
         "jump": False,
@@ -2444,7 +2444,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                           .replace("{{THEATRE_VIEWER_DATA}}", theatre.viewer_data()))
     content = re.sub(r"\{\{DOC_STATUS:([a-z0-9-]+)\}\}",
                      lambda m: doc_sheet_status(m.group(1)), content)
-    if slug in ("school-history", "curriculum", "math-challenge", "crossroads", "our-laurels", "anakin-skywalker", "death-of-rationalism", "voyages-in-the-yuva-kendra"):
+    if slug in ("curriculum", "math-challenge", "crossroads", "our-laurels", "anakin-skywalker", "death-of-rationalism", "voyages-in-the-yuva-kendra"):
         parts = [part.replace('<body class="', '<body class="cirs-redesign ', 1) if '<body class="' in part else part for part in parts]
         parts.append(f'<script src="assets/js/coordinated.js?{CACHE_BUST}-1" defer></script>')
 
@@ -2472,13 +2472,6 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         if slug == "admissions":
             footer = footer.replace('href="admissions.html#examination">Important Dates',
                                     'href="admissions.html#dates">Important Dates')
-        if slug == "school-history":
-            # The arrival already uses campus-band. Give the archive's close
-            # the courtyard photograph on every viewport, in one picture.
-            footer = footer.replace('src="assets/img/campus-band.jpg"',
-                                    'src="assets/img/campus-lawn.jpg"', 1)
-            footer = footer.replace('width="1920" height="1080"',
-                                    'width="1600" height="900"', 1)
         if page.get("closing"):
             footer = closing_html(footer, page["closing"])
         parts.append(footer)
@@ -2545,11 +2538,9 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "curriculum":
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-2" defer></script>')
     if slug == "school-history":
-        parts[0] = parts[0].replace('</head>', f'<link rel="stylesheet" href="assets/css/history-cinematic.css?{CACHE_BUST}-4">\n</head>')
-        parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}-cinematic-4" defer></script>')
-        # The journey's controller imports Three.js only
-        # on a window wide enough for the 3D path, so a phone never fetches it.
-        parts.append(f'<script type="module" src="assets/js/history-cinematic-journey.js?{CACHE_BUST}-4"></script>')
+        parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}-restored-1" defer></script>')
+    if slug == "why-cirs":
+        parts.append(f'<script src="assets/js/why-cirs.js?{CACHE_BUST}-sections-1" defer></script>')
     if slug == "our-laurels":
         parts.append(f'<script src="assets/js/laurels.js?{CACHE_BUST}" defer></script>')
     if page.get("opening") and not page["opening"].get("direct"):
@@ -2570,7 +2561,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
 
     # The index goes in after rewrite_links: its anchors name sections on this
     # page, and must not be sent to the page an old single-page anchor meant.
-    if slug in ("school-history", "curriculum", "math-challenge", "crossroads", "our-laurels", "anakin-skywalker", "death-of-rationalism", "voyages-in-the-yuva-kendra"):
+    if slug in ("curriculum", "math-challenge", "crossroads", "our-laurels", "anakin-skywalker", "death-of-rationalism", "voyages-in-the-yuva-kendra"):
         parts[0] = parts[0].replace('</head>', f'<link rel="stylesheet" href="assets/css/coordinated.css?{CACHE_BUST}-1">\n</head>')
     html = to_depth(rewrite_links("\n".join(parts), slug).replace(JUMP_MARK, jump), slug)
     if page.get("notfound"):
