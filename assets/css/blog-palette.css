@@ -1,0 +1,32 @@
+/* Restore only the Blog palette from the preserved page-palettes task.
+   This sheet is generated only into Blog and student Blog articles, never
+   school News reports or other pages. Layout and shared tokens stay intact. */
+body.blognews {
+  --ij-paper:#F2F1ED; --ij-ink:#161616; --ij-text:#161616;
+  --ij-muted:#161616; --ij-rule:#710014; --ij-accent:#710014;
+  --ij-gold:#710014; --ij-on-dark:#F2F1ED;
+}
+body.blognews main :is(a,button,input,select):focus-visible { outline-color:var(--ij-accent); }
+body.blognews :is(.ij-kicker,.ij-meta,.ij-read) { color:var(--ij-accent); }
+body.blognews .ij-read { border-bottom-color:var(--ij-accent); }
+body.blognews .ij-module--image-feature .ij-kicker { border-left-color:var(--ij-accent); }
+body.blognews .ij-opinion>h3 { border-top-color:var(--ij-accent); }
+body.blognews .ij-connection__kicker,body.blognews .ij-connection>a { color:var(--ij-on-dark); }
+body.blognews .ij-connection a:focus-visible { outline-color:var(--ij-on-dark); }
+body.blog {
+  --art-paper:#F2F1ED; --art-ink:#161616; --art-soft:#161616;
+  --art-muted:#161616; --art-rule:#710014; --art-accent:#710014;
+  --art-gold:#710014;
+}
+body.blog main { --rd-deep:var(--art-paper); --rd-ivory:var(--art-ink); --rd-gold:var(--art-accent); --rd-purple:var(--art-accent); }
+body.blog :is(.art__breadcrumb a,.art__edition,.art__credits,.art__rail a,.art__related a span) { color:var(--art-accent); }
+body.blog :is(.art__breadcrumb a,.art__rail a,.art__foot a,.art__related a):focus-visible { outline-color:var(--art-accent); }
+body.blog .art__rail { border-top-color:var(--art-accent); }
+body.blog .art__hero img { background:var(--art-paper); }
+body.blog .rd-essay .art__hero img { background:transparent; }
+body.blog .rd-essay :is(.art__breadcrumb,.art__edition,.art__credits,.art__credits span) { color:var(--art-accent); }
+body.blog .rd-essay .art__subtitle { color:var(--art-ink); }
+body.blog .rd-essay .art__credits { border-color:var(--art-rule); }
+body.blog .rd-essay .art__hero figcaption { color:var(--art-muted); }
+body.blog .rd-essay__intro { color:var(--art-ink); }
+body.blog .rd-essay__chapters a { border-bottom-color:var(--art-rule); }
