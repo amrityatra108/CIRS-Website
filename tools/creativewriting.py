@@ -172,9 +172,18 @@ def archive_html(c):
     return '<ol class="cw-archive-list">'+'\n'.join(rows)+'</ol>'
 
 def main_html(c):
+    if c == 'all':
+        import creativewriting_horizontal as horizontal
+        return (TEMPLATE_PATH.read_text(encoding='utf-8')
+                .replace('{{CW_ROWS}}', horizontal.rows_html())
+                .replace('{{CW_CHAPTERS}}', horizontal.chapters_html())
+                .replace('{{CW_HERO_EXCERPT}}', horizontal.hero_excerpt_html())
+                .replace('{{CW_COUNT}}', str(count()))
+                .replace('{{CW_WRITERS}}', str(writer_count()))
+                .replace('{{CW_THEMES}}', str(len(editions()))))
     intro=('Read an edition from beginning to end, or follow a line that catches your eye. Each poem stays with its author’s words and line breaks.' if c=='all' else 'These links select poems with verified grades. The full editions remain available through All Writing.')
     values=dict(CW_HERO=hero_html(c),CW_INTRO=intro,CW_STATS=stats_line(c),CW_FILTER=filter_html(c),CW_ARCHIVE=archive_html(c))
-    out=TEMPLATE_PATH.read_text(encoding='utf-8')
+    out=(HERE / 'pages/creative-writing-reader.html').read_text(encoding='utf-8')
     for key,value in values.items(): out=out.replace('{{'+key+'}}',value)
     return out
 
@@ -221,7 +230,7 @@ def edition_html(e):
 <nav class="cw-more cw-wrap" aria-label="More editions"><p class="cw-meta">Continue reading</p>{links}<a href="creative-writing.html#archive">Explore the collection <span aria-hidden="true">↗</span></a></nav></div>'''
 
 def page_entries():
-    base=dict(sheet='cwriting',banner=None,jump=False,uc=False,cache_suffix='-literary-2')
+    base=dict(sheet='cwriting-reader',banner=None,jump=False,uc=False,cache_suffix='-literary-reader-20260930')
     out={}
     for key in SCHOOLS:
         name=data()['schools'][key]['name']

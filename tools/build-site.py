@@ -525,14 +525,14 @@ PAGES = {
         "title": "Creative Writing | Written at CIRS",
         "description": "Poems by students of Chinmaya International Residential School. "
                        "Explore the collection and read each edition.",
-        # Student literary collection: plum introduction, paper excerpt,
-        # published editorial archive and warm-paper poem readers.
+        # Horizontal anthology with the complete supplied collection,
+        # plus the established standalone edition and school readers.
         # Every edition, poem and presentation is data in
         # tools/creative-writing-content.json, rendered by tools/creativewriting.py,
         # which also adds the Junior, Senior and edition pages below.
         "banner": None,
         "sheet": "cwriting",
-        "cache_suffix": "-literary-2",
+        "cache_suffix": "-horizontal-20260930",
         "jump": False,
         "uc": False,
         # The opening is deep purple, so the header letters in light over it.
@@ -2270,7 +2270,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     # A page opening on a scrubbed film is marked twice: "film" for the
     # mechanics every such page shares, and its own slug for the handful of
     # decisions its footage makes for it.
-    classes = [c for c in ["wall" if wall else page.get("sheet"),
+    classes = [c for c in ["wall" if wall else ("cwriting" if page.get("cw") else page.get("sheet")),
                            "film" if page.get("opening") and not page["opening"].get("direct") else None,
                            slug if page.get("opening") else None,
                            "crossroads-intro-active" if slug == "crossroads" else None,
@@ -2525,7 +2525,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         # graphics load cannot take the filters or the links with it.
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
     if page.get("cw"):
-        parts.append(f'<script src="assets/js/cwriting.js?{CACHE_BUST}" defer></script>')
+        writing_script = 'cwriting' if slug == 'creative-writing' else 'cwriting-reader'
+        parts.append(f'<script src="assets/js/{writing_script}.js?{CACHE_BUST}" defer></script>')
     if slug == "houses":
         parts.append(f'<script src="assets/js/houses-journey.js?{CACHE_BUST}-houses-3" defer></script>')
     if slug == "blog":

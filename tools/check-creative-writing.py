@@ -26,7 +26,8 @@ class Document(HTMLParser):
         if tag=='a' and a.get('href'): self.links.append(a['href'])
         if tag=='article' and 'data-cw-poem' in a:
             self.poem=a['id']; self.poems[self.poem]=[]
-        if tag=='p' and 'cw-stanza' in a.get('class','').split(): self.stanza=''
+        if tag=='p' and {'cw-stanza','cw-poem__stanza'} & set(a.get('class','').split()): self.stanza=''
+        if tag=='br' and self.stanza is not None: self.stanza+='\n'
     def handle_data(self,value):
         if self.stanza is not None: self.stanza+=value
     def handle_endtag(self,tag):
@@ -64,6 +65,8 @@ def main():
         assert len(rendered)==len(e['poems'])
         for p in e['poems']:
             assert rendered['poem-'+p['id']]==p['stanzas'],p['id']
+            expected_landing=['\n'.join(s.splitlines()) for s in p['stanzas']]
+            assert docs['creative-writing'].poems['poem-'+p['id']]==expected_landing,p['id']
             if source:
                 start,end=p['source']['bodyLines']
                 expected=re.split(r'\n(?:[ \t]*\n)+','\n'.join(source[start-1:end]))

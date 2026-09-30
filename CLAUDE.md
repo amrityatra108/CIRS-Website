@@ -93,23 +93,18 @@ numbers by `tools/make-math-sculpture.py` — keep its constants in step with th
 archive is `tools/mathchallenge.py`: the PDFs are the school's winners' bulletins, not problem
 papers, and a month lists only the bulletins that exist.
 
-Creative Writing is a literary collection written from `tools/creative-writing-content.json` by
-`tools/creativewriting.py` (shell `tools/pages/creative-writing.html`, sheet `assets/css/cwriting.css`, script
-`assets/js/cwriting.js`). The same generator writes Junior/Senior views and anthology readers. Retired empty
-monthly pages are deleted; `vercel.json` redirects their old URLs to the visible school indexes. Only published
-editions appear in archives. School level and verified grade belong to each
-poem, so mixed or unclassified work is never classified from another author's grade. Unknown dates stay unknown;
-month-only labels do not receive a year. Counts come from the dataset; author identities merge exact names only,
-with unresolved spelling variants documented there. Student identifiers are never published.
-
-The plum opening features a paper sheet with a source-verified excerpt. "Another line" changes text, attribution
-and destination together, with one short live announcement and no automatic cycling. Poems remain complete,
-selectable text on warm paper; their characters, whitespace and stanza boundaries are checked against source
-digests. The shared controller uses native scrolling for `body.cwriting`; full page-path fragment links preserve
-history. The page script aligns direct anchors after fonts/load and provides mobile Contents and a sticky desktop
-rail. There is no pinned scene, text splitting, second scroll instance or visible custom cursor. A download renders
-only from an actual validated entry in an edition's `downloads` list. `python tools/check-creative-writing.py`
-checks text and anchors; optional `--source-text` reads a private Drive snapshot, which must stay out of Git.
+Creative Writing restores the horizontal anthology at `creative-writing.html`: one
+moving row per theme, all supplied poems below, pause/resume and quiet reading.
+`tools/creativewriting_horizontal.py` renders this design from the current reconciled
+data through `tools/creativewriting.py`; never duplicate or invent poem data.
+The landing shell, sheet and controller are `tools/pages/creative-writing.html`,
+`assets/css/cwriting.css` and `assets/js/cwriting.js`. Established school indexes
+and edition readers keep their own `cwriting-reader.css` and `cwriting-reader.js`.
+Poem text, titles, attributions, individual school/grade and unknown fields remain
+in `tools/creative-writing-content.json`. Retired empty monthly pages remain
+redirects. Counts derive from the dataset and unnamed authors are never guessed.
+The rows stop for reduced motion, keyboard focus, hover or the Pause control;
+their repeated decorative cards are hidden from assistive technology.
 
 Leadership's people, portrait crops and five messages are data in `tools/leadership.py`;
 `tools/make-leadership.py` cuts the portraits. The messages are the school's published text word
