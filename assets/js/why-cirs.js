@@ -44,6 +44,7 @@
     var dir = Math.sign(event.deltaY);
     if (now < busyUntil || (gap < 180 && direction === dir && sum === Infinity)) {
       event.preventDefault();
+      event.stopImmediatePropagation();
       return;
     }
     if (gap >= 180 || direction !== dir) sum = 0;
@@ -51,6 +52,9 @@
     var top = destination(dir);
     if (top === null) { sum = 0; return; }
     event.preventDefault();
+    // Lenis does not use defaultPrevented; consume only handled wheel events
+    // before its document listener can also apply their delta.
+    event.stopImmediatePropagation();
     sum += Math.abs(event.deltaY) * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1);
     if (sum >= 24) { sum = Infinity; move(top); }
   }, { passive: false, capture: true });
