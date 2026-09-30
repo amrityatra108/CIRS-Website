@@ -1,0 +1,14 @@
+{
+  "sourceFilename": "Pulsating Humming Sound Effect.mp3",
+  "asset": "assets/logo-gallium-hum.mp3",
+  "sha256": "1e4ae632c518c8514778d0ee0cf753bfba5b25d489b00096a75785fb3d02c83b",
+  "sourceBytes": 611402,
+  "estimatedDurationSeconds": 25.443265,
+  "sampleRate": 44100,
+  "channels": 2,
+  "loopStartSeconds": 0.4,
+  "loopEndSeconds": 24.7,
+  "crossfadeSeconds": 0.6,
+  "preparedLoopDurationSeconds": 23.7,
+  "method": "The supplied MP3 is decoded after Sound on. One natural-pitch AudioBufferSource loops a tail/head equal-power crossfade; its gain follows cursor speed only over the logo."
+}

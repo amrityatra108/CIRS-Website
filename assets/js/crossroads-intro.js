@@ -430,14 +430,14 @@
     syncVideo();
   }
 
-  // Step through the introduction, archive hero, magazine and statement; keep tall sections readable.
+  // Step through the introduction, archive hero and statement; keep tall sections readable.
   // A small trackpad nudge must add up before it turns a whole page.
   var sectionMoving = false, nativeSectionScroll = false, sectionTimer = null, wheelIntent = 0, wheelTime = 0;
   var WHEEL_STEP = 40, WHEEL_WINDOW = 220;
   var touchStartX = 0, touchStartY = 0;
   function sectionDestination(direction) {
     if (scrollLocked || !target) return null;
-    var sections = [intro, target, document.getElementById("inside-the-issue"), document.getElementById("statement")].filter(Boolean);
+    var sections = [intro, target, document.getElementById("statement")].filter(Boolean);
     var positions = sections.map(function (section) {
       var margin = parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
       return Math.max(0, section.getBoundingClientRect().top + window.scrollY - margin);

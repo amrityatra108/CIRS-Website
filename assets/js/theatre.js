@@ -492,87 +492,14 @@
     var all = $$("[data-reel]");
     if (!all.length) return;
     var wide = media("(min-width: 761px)");
-
-    all.forEach(function (root) {
-      var viewport = $("[data-reel-track]", root);
-      var slides = $$(".th-reel__slide", root);
-      var now = $("[data-reel-now]", root);
-      var ctl = $("[data-reel-ctl]", root);
-      var set = $(".th-reel__set", root);
-      var prev = $("[data-reel-step='-1']", root), next = $("[data-reel-step='1']", root);
-      if (!viewport || !slides.length) return;
-      var pending = false, visible = false;
-
-      function centre(s) { return s.offsetLeft + s.offsetWidth / 2; }
-      function at() { return viewport.scrollLeft + viewport.clientWidth / 2; }
-      function nearest() {
-        var c = at(), best = 0, gap = Infinity;
-        slides.forEach(function (s, i) { var d = Math.abs(centre(s) - c); if (d < gap) { gap = d; best = i; } });
-        return best;
-      }
-      function pad(n) { return n < 10 ? "0" + n : String(n); }
-
-      function update() {
-        pending = false;
-        if (!wide.matches) return;
-        var c = at(), best = 0, gap = Infinity;
-        slides.forEach(function (s, i) {
-          var d = (centre(s) - c) / (s.offsetWidth * 1.05);
-          var a = Math.abs(d);
-          if (a < gap) { gap = a; best = i; }
-          if (reduced) return;
-          if (a > 2.2) { s.style.removeProperty("--near"); s.style.removeProperty("--dx"); return; }
-          s.style.setProperty("--near", num(clamp(1 - a)));
-          s.style.setProperty("--dx", num(Math.max(-1.2, Math.min(1.2, d))));
-        });
-        var link = $("a[data-th-open]", slides[best]);
-        var index = link ? parseInt(link.getAttribute("data-th-open").split(":")[1], 10) : best + 1;
-        if (now) now.textContent = pad(index + 1);
-        if (prev) prev.disabled = best === 0;
-        if (next) next.disabled = best === slides.length - 1;
-      }
-      function ask() { if (!pending) { pending = true; requestAnimationFrame(update); } }
-
-      function go(i) {
-        i = Math.max(0, Math.min(slides.length - 1, i));
-        viewport.scrollTo({ left: centre(slides[i]) - viewport.clientWidth / 2, behavior: reduced ? "auto" : "smooth" });
-      }
-      function step(d) { go(nearest() + d); }
-
-      viewport.addEventListener("scroll", ask, { passive: true });
-      viewport.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
-        else if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
-      });
-      $$("[data-reel-step]", root).forEach(function (b) {
-        b.addEventListener("click", function () { step(parseInt(b.getAttribute("data-reel-step"), 10)); });
-      });
-
-      // Room either side of the first and last photograph, so each can sit
-      // at the middle like the rest.
-      function room() {
-        var track = viewport.firstElementChild;
-        if (!track || !wide.matches) return;
-        var w = viewport.clientWidth;
-        track.style.setProperty("--pad-s", Math.max(0, (w - slides[0].offsetWidth) / 2) + "px");
-        track.style.setProperty("--pad-e", Math.max(0, (w - slides[slides.length - 1].offsetWidth) / 2) + "px");
-      }
-      function mode() {
-        if (ctl) ctl.hidden = !wide.matches;
-        // Wide: the reel is open and scrolls. Narrow: a column, folded away
-        // until it is asked for.
+    function mode() {
+      all.forEach(function (root) {
+        var set = $(".th-reel__set", root);
         if (set) set.open = wide.matches;
-        if (wide.matches) { room(); viewport.scrollLeft = 0; update(); }
-        else slides.forEach(function (s) { s.style.removeProperty("--near"); s.style.removeProperty("--dx"); });
-      }
-      mode();
-      onChange(wide, mode);
-      window.addEventListener("resize", function () { room(); ask(); });
-      // A reel nowhere near the window has nothing to keep up to date.
-      if ("IntersectionObserver" in window) {
-        new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) ask(); }, { rootMargin: "50% 0px" }).observe(root);
-      }
-    });
+      });
+    }
+    mode();
+    onChange(wide, mode);
   }
 
   /* 8. ---------------------------------------------------------------- classes */

@@ -10,7 +10,8 @@
 
    One state, three controls that show it:
      html[data-ld-msg]      which message is shown
-     the tab list           from 900px: a vertical index
+     the tab list           from 900px: a vertical index;
+                            from 1100px: a portrait row
      the select             below 900px: a labelled picker
    The URL follows too: a choice made in the index replaces the
    history entry (#msg-…), so the address can be shared without
@@ -31,6 +32,7 @@
   if (!reader) return;
 
   var tabs = Array.prototype.slice.call(reader.querySelectorAll('[role="tab"]'));
+  var tablist = reader.querySelector('[role="tablist"]');
   var select = reader.querySelector(".ld-idx__select");
   var now = reader.querySelector(".ld-idx__now");
   var sheet = reader.querySelector(".ld-sheet");
@@ -38,6 +40,12 @@
   if (!ids.length) return;
 
   var still = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var portraitRow = window.matchMedia("(min-width:1100px)");
+  function orientTabs() {
+    if (tablist) tablist.setAttribute("aria-orientation", portraitRow.matches ? "horizontal" : "vertical");
+  }
+  orientTabs();
+  portraitRow.addEventListener("change", orientTabs);
 
   function panel(id) { return document.getElementById("msg-" + id); }
   function current() {

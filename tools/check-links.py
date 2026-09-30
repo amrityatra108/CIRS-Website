@@ -68,6 +68,20 @@ def resolve(name, ref):
 
 def main():
     docs = {name: open(os.path.join(ROOT, name), encoding="utf-8").read() for name in pages()}
+    # Same-origin standalone scenes are runtime HTML assets with their own
+    # relative media and script references, not additional generated pages.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("buildsite", os.path.join(ROOT, "tools/build-site.py"))
+    builder = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(builder)
+    for page in builder.PAGES.values():
+        bundle = page.get("asset_bundle")
+        if bundle:
+            for folder, _, files in os.walk(os.path.join(ROOT, bundle)):
+                for file in files:
+                    if file.endswith(".html"):
+                        name = os.path.relpath(os.path.join(folder, file), ROOT).replace(os.sep, "/")
+                        docs[name] = open(os.path.join(ROOT, name), encoding="utf-8").read()
     ids = {name: set(re.findall(r'\bid="([^"]+)"', html)) for name, html in docs.items()}
     problems, referenced, checked = [], set(), 0
 
@@ -113,6 +127,12 @@ def main():
                 referenced.add(path)
                 if not os.path.exists(os.path.join(ROOT, path)):
                     problems.append(f"{name}: {path} — referenced but not in the repository")
+
+            elif name.startswith("assets/"):
+                path = resolve(name, ref.split("?", 1)[0])
+                referenced.add(path)
+                if not path.startswith("assets/") or not os.path.isfile(os.path.join(ROOT, path)):
+                    problems.append(f"{name}: {ref} - runtime reference does not resolve inside assets/")
 
             elif re.match(r"^[\w./-]+$", ref) and "." in ref:
                 problems.append(f"{name}: {ref} — relative reference outside assets/")

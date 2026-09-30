@@ -15,8 +15,8 @@
      .ld-board    the three further Directors, compact. One has
                   no approved photograph and is set as text.
      .ld-words    warm ivory, holding an ivory reading sheet: an
-                  index of authors at the left, then portrait,
-                  name and role beside the full message.
+                  index of authors above the letter, then the full
+                  message flowing beside and below its portrait.
      .ld-staff    the staff and faculty photograph at its own
                   proportions, then a compact pair of links.
 
@@ -323,7 +323,7 @@ body.leadership [id="directors"]{ scroll-margin-top:var(--ld-head); }
   overflow:clip;
   background:var(--ld-dark);
   color:var(--ld-on-dark);
-  padding-block:clamp(72px, 9vw, 136px);
+  padding-block:clamp(56px, 6vw, 96px);
 }
 /* Fine concentric gold rules stay behind the reading order. */
 .ld-words::before{
@@ -341,7 +341,7 @@ body.leadership [id="directors"]{ scroll-margin-top:var(--ld-head); }
              0 0 0 54px var(--ld-dark), 0 0 0 55px var(--gold-ink);
   opacity:.14;
 }
-.ld-words__head{ max-width:860px; margin-bottom:clamp(32px, 4vw, 56px); }
+.ld-words__head{ max-width:860px; margin-bottom:clamp(24px, 3vw, 40px); }
 .ld-h2{
   margin:0;
   font-family:var(--font-display);
@@ -408,6 +408,7 @@ html:not(.ld-js) .ld-reader{ grid-template-columns:minmax(0,1fr); }
 .ld-idx__tab:hover{ background:var(--paper-2); border-left-color:var(--gold-ink); }
 .ld-idx__tab[aria-selected="true"]{ background:var(--paper-3); border-left-color:var(--gold-ink); }
 .ld-idx__tab[aria-selected="true"] .ld-idx__name{ font-weight:600; }
+.ld-idx__face{ display:none; }
 body.leadership .ld-idx :focus-visible{ outline:2px solid var(--focus); }
 body.leadership .ld-idx__tab:focus-visible{ outline-offset:-2px; }
 
@@ -459,7 +460,7 @@ body.leadership .ld-idx__select:focus-visible{ outline-offset:2px; }
 .ld-sheet{
   background:var(--ld-sheet);
   color:var(--ld-ink);
-  padding:clamp(28px, 4.4vw, 72px) clamp(20px, 4.4vw, 72px);
+  padding:clamp(28px, 3vw, 48px) clamp(20px, 3vw, 48px);
   min-width:0;
 }
 .ld-msg{
@@ -479,8 +480,39 @@ html.ld-js .ld-msg + .ld-msg{ margin-top:0; padding-top:0; border-top:0; }
 body.leadership .ld-msg:focus,
 body.leadership .ld-msg:focus-visible{ outline:none; }
 @media (min-width:1100px){
-  .ld-msg{ grid-template-columns:minmax(180px, 220px) minmax(0, 1fr); column-gap:clamp(36px, 4vw, 64px); }
-  .ld-msg__head{ position:sticky; top:calc(var(--ld-head) + 8px); }
+  .ld-reader{ grid-template-columns:minmax(0,1fr); }
+  .ld-idx{
+    z-index:4;
+    padding-block:var(--space-3);
+    background:var(--ld-dark);
+  }
+  .ld-idx__tabs{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px 12px; }
+  .ld-idx__group{ grid-row:1; padding:0; }
+  .ld-idx__group ~ .ld-idx__group{ grid-column:2 / -1; margin-top:0; }
+  .ld-idx__tab{
+    grid-row:2;
+    display:grid;
+    grid-template-columns:40px minmax(0,1fr);
+    align-content:start;
+    gap:8px 10px;
+    padding:12px;
+    background:var(--paper-2);
+  }
+  .ld-idx__face{ display:block; width:40px; aspect-ratio:4 / 5; overflow:hidden; }
+  .ld-idx__face img{ display:block; width:100%; height:100%; object-fit:cover; }
+  .ld-idx__name{ align-self:center; font-size:.96rem; }
+  .ld-idx__role{ grid-column:1 / -1; font-size:.76rem; }
+  html.ld-js .ld-msg{ scroll-margin-top:calc(var(--ld-head) + 180px); }
+  /* Let the author's words occupy the space below the portrait instead
+     of reserving an empty second sidebar for the whole letter. The
+     author index remains sticky above; the portrait belongs to the opening. */
+  .ld-msg{ display:flow-root; max-width:76ch; margin-inline:auto; font-size:1.125rem; }
+  .ld-msg__head{
+    float:left;
+    width:220px;
+    margin:0 clamp(28px, 3vw, 48px) var(--space-5) 0;
+  }
+  .ld-msg .ld-msg__text{ max-width:none; }
 }
 .ld-msg__head{ display:grid; gap:var(--space-4); align-content:start; }
 @media (max-width:1099px){

@@ -52,7 +52,7 @@
       return {
         node: row, name: $(".ajd__name", row).textContent,
         country: $(".ajd__country", row).textContent,
-        region: row.dataset.region, mapped: row.dataset.mapped === "true"
+        region: row.dataset.region, mapped: row.dataset.mapped === "true", campus: row.dataset.campus
       };
     });
     var opener = null, scope = {}, savedOverflow = "", savedY = 0;
@@ -80,7 +80,9 @@
         row.removeAttribute("data-search");
         var note = document.createElement("span");
         note.className = "ajc__locationNote";
-        note.textContent = r.mapped ? "Reviewed location shown on map" : "Campus coordinates unresolved · directory only";
+        note.textContent = r.mapped
+          ? "Campus reference shown on map" + (r.campus ? " · " + r.campus : "")
+          : "Campus coordinates unresolved · directory only";
         row.appendChild(note);
         results.appendChild(row);
       });

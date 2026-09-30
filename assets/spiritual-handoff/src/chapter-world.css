@@ -1,0 +1,194 @@
+/* The chapter is a new landscape beneath the travelling physical panel. */
+.chapter-dialog {
+  --chapter-ink: #332e2b;
+  --chapter-wine: #772e34;
+  --chapter-muted: #674d45;
+  background: transparent !important;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(119, 46, 52, .42) transparent;
+}
+.chapter-dialog::before { display: none !important; }
+.chapter-dialog::backdrop,
+.chapter-dialog.is-open::backdrop,
+.chapter-dialog.is-closing::backdrop { background: transparent !important; backdrop-filter: none !important; }
+.portal-wash {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  display: block;
+  width: 100vw;
+  height: 100dvh;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .11s linear;
+}
+.chapter-dialog.has-wash .portal-wash { opacity: 1; }
+.chapter-dialog .dialog-inner,
+.chapter-dialog.is-entering .dialog-inner,
+.chapter-dialog.is-open .dialog-inner,
+.chapter-dialog.is-closing .dialog-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  min-height: 100dvh;
+  padding: clamp(112px, 17vh, 170px) 9vw 100px;
+  isolation: isolate;
+  background: none;
+  opacity: 0;
+  transform: none;
+  animation: none;
+  transition: opacity .22s ease-out;
+  pointer-events: none;
+}
+.chapter-dialog .dialog-inner::before {
+  content: '';
+  position: fixed;
+  z-index: -2;
+  inset: 0;
+  pointer-events: none;
+  background: url('../assets/sun-spiral.webp') center center / cover no-repeat;
+}
+.chapter-dialog .dialog-inner::after {
+  content: '';
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 249, 239, .95) 0%, rgba(255, 249, 238, .89) 38%, rgba(255, 248, 231, .58) 66%, rgba(255, 247, 226, .2) 100%), radial-gradient(circle at var(--chapter-light-x, 72%) 74%, rgba(255, 194, 119, .27), transparent 35%), linear-gradient(0deg, rgba(246, 224, 186, .28), transparent 53%);
+}
+.chapter-dialog.is-world-visible .dialog-inner,
+.chapter-dialog.is-open.is-world-visible .dialog-inner {
+  opacity: 1;
+  pointer-events: auto;
+}
+.chapter-dialog.is-returning .dialog-inner { opacity: 0; transition: none; }
+.chapter-dialog.is-returning .portal-wash { display: none; }
+.chapter-world-topbar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: min(52vw, 720px);
+  height: 91px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 249, 239, .96), rgba(255, 249, 239, .73) 67%, transparent);
+  mask-image: linear-gradient(0deg, transparent, black 35%);
+}
+.chapter-dialog .dialog-close {
+  z-index: 3;
+  top: 31px;
+  left: 8.7vw;
+  padding: 12px 0 9px;
+  color: var(--chapter-wine);
+  border-color: rgba(119, 46, 52, .44);
+  font-size: 11px;
+  letter-spacing: .12em;
+  background: transparent;
+}
+.chapter-dialog .dialog-close:hover { color: #b8433c; border-color: #b8433c; }
+.chapter-dialog .dialog-content {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 790px);
+  max-width: 790px;
+  padding-bottom: 10vh;
+}
+.chapter-dialog .dialog-content::before {
+  content: '';
+  display: block;
+  width: 58px;
+  height: 2px;
+  margin-bottom: 24px;
+  background: linear-gradient(90deg, #c35d49, #ddb06c);
+}
+.chapter-dialog .dialog-content .eyebrow {
+  margin: 0;
+  color: #a8453d;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: .3em;
+}
+.chapter-dialog .dialog-count {
+  margin: 18px 0 0;
+  color: #81574a;
+  font: 460 16px/1.3 var(--serif);
+  letter-spacing: .04em;
+}
+.chapter-dialog .dialog-content h2 {
+  max-width: 830px;
+  margin: 28px 0 22px;
+  color: var(--chapter-wine);
+  font: 440 clamp(58px, 6.8vw, 108px)/.91 var(--serif);
+  letter-spacing: -.052em;
+  text-wrap: balance;
+  text-shadow: 0 2px 15px rgba(255, 249, 229, .65);
+}
+.chapter-dialog .dialog-rule {
+  width: 112px;
+  height: 1px;
+  margin: 26px 0 27px;
+  background: linear-gradient(90deg, #a53c39, #d89357, transparent);
+}
+.chapter-dialog .dialog-content .dialog-lede {
+  max-width: 670px;
+  margin: 0 0 25px;
+  color: #763b39 !important;
+  font: italic 460 clamp(20px, 2.1vw, 27px)/1.37 var(--serif) !important;
+}
+.chapter-dialog .dialog-content > p:not(.eyebrow):not(.dialog-count):not(.dialog-lede) {
+  max-width: 690px;
+  margin: 0;
+  color: var(--chapter-ink);
+  font: 17px/1.83 var(--sans);
+  text-wrap: pretty;
+}
+.chapter-dialog .dialog-content .dialog-next {
+  margin-top: 40px;
+  color: var(--chapter-wine);
+  border-color: rgba(119, 46, 52, .45);
+  font-size: 12px;
+}
+.chapter-dialog .dialog-content .dialog-next span { color: #ac6a39; }
+.chapter-world-number {
+  position: fixed;
+  z-index: 0;
+  right: 6.5vw;
+  bottom: -5vh;
+  color: rgba(144, 73, 44, .18);
+  font: 300 clamp(190px, 27vw, 460px)/.8 var(--serif);
+  letter-spacing: -.1em;
+  pointer-events: none;
+  user-select: none;
+  mix-blend-mode: multiply;
+}
+html.portal-moving .site-header,
+html.portal-moving .category-inscription,
+html.portal-moving .axis-caption,
+html.portal-moving .chapter-rail,
+html.portal-moving .hover-inscription,
+html.portal-moving .stage-footer,
+html.portal-moving .progress-line {
+  opacity: 0 !important;
+  transition: opacity .28s ease;
+  pointer-events: none;
+}
+@media (max-width: 700px) {
+  .chapter-dialog .dialog-inner,
+  .chapter-dialog.is-open .dialog-inner {
+    padding: 126px 26px 75px;
+  }
+  .chapter-dialog .dialog-inner::before { background-position: 68% center; }
+  .chapter-dialog .dialog-inner::after { background: linear-gradient(90deg, rgba(255, 249, 238, .96), rgba(255, 247, 234, .8)); }
+  .chapter-dialog .dialog-close { left: 26px; top: 22px; }
+  .chapter-world-topbar { width: 100vw; height: 90px; background: linear-gradient(90deg, rgba(255, 249, 239, .98), rgba(255, 249, 239, .70)); }
+  .chapter-dialog .dialog-content h2 { font-size: clamp(54px, 12vw, 76px); }
+  .chapter-dialog .dialog-content > p:not(.eyebrow):not(.dialog-count):not(.dialog-lede) { font-size: 15px; line-height: 1.78; }
+  .chapter-world-number { font-size: 58vw; bottom: 3vh; opacity: .45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapter-dialog .dialog-inner,
+  .portal-wash,
+  html.portal-moving .stage-footer { transition: none !important; }
+  .portal-wash { display: none; }
+}

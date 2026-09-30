@@ -242,7 +242,7 @@ PAGES = {
         # nothing on the page is a placeholder.
         "banner": None,
         "sheet": "leadership",
-        "cache_suffix": "-leadership-ivory-gold-2",
+        "cache_suffix": "-leadership-composition-3",
         "litehead": True,
         "jump": False,
         "uc": False,
@@ -366,6 +366,8 @@ PAGES = {
     "spiritual-life": {
         "nav": "Spiritual Life",
         "title": "Spiritual Life at CIRS",
+        "standalone": True,
+        "asset_bundle": "assets/spiritual-handoff",
         "description": "Swadhyaya, sadhana and seva at Chinmaya International Residential "
                        "School: the daily practices, sacred occasions and student-led service "
                        "rooted in the vision of Pujya Gurudev Swami Chinmayananda.",
@@ -392,7 +394,7 @@ PAGES = {
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
         "sheet": "sports",
-        "cache_suffix": "-sports-5",
+        "cache_suffix": "-sports-6",
         # The Sports Secretaries' pledge (tools/sakshi.py).
         "council": True,
         # No banner from the shared builder. Like CIRS Captures, this page
@@ -403,7 +405,7 @@ PAGES = {
         "banner": None,
         "opening": {
             "video": "sports-field",
-            "poster": "sports-field-poster.jpg",
+            "poster": "sports-field-start.jpg",
             "title": "CIRS Sports",
             # With no scripting nothing seeks, so what stays up is the first
             # frame — a macro of a wet ball, not the field. The line's usual
@@ -592,7 +594,7 @@ PAGES = {
         # the native video hero, without a separate title screen. The real
         # h1 remains accessible, and the existing artwork content follows.
         "sheet": "artattack",
-        "cache_suffix": "-art-video-first-1",
+        "cache_suffix": "-art-video-first-2",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Painting, drawing, craft and the things made for the stage by the students "
@@ -709,7 +711,7 @@ PAGES = {
         # Page styles and search behavior live in alumni.css and alumni-journey.js.
         "banner": None,
         "sheet": "alumni",
-        "cache_suffix": "-alumni-8",
+        "cache_suffix": "-alumni-9",
         "uc": False,
     },
     # What a visitor sees at an address that is no page of this site. Both
@@ -1490,43 +1492,6 @@ def crossroads_stories_covers():
     return '<div class="crossroads-stories__media"><div class="crossroads-stories__stack">' + ''.join(cards) + '</div></div>'
 
 
-def crossroads_magazine():
-    """The latest issue opened out, written from its own record."""
-    issue = next((i for i in crossroads.issues() if i["latest"] and i["pdf"]), None)
-    if not issue:
-        return ""
-    n, pdf, ed = issue["number"], issue["pdf"], issue["edition"]
-    label = f"Issue {n:02d}"
-    when = " · ".join(x for x in (ed.get("date"), ed.get("occasion")) if x)
-    papers = []
-    if issue["cover"]:
-        papers.append(f'<figure class="rd-magazine__cover"><a href="{pdf}"><img src="{issue["cover"]}" '
-                      f'alt="The genuine cover of The Crossroads, {label}" width="300" height="420" '
-                      f'loading="lazy"></a><figcaption>01 · Cover</figcaption></figure>')
-    if issue["inside"]:
-        papers.append(f'<figure class="rd-magazine__inside"><a href="{pdf}"><img src="{issue["inside"]}" '
-                      f'alt="{label} contents page, with its original photograph and list of features" '
-                      f'width="702" height="998" loading="lazy"></a>'
-                      f'<figcaption>{len(papers) + 1:02d} · Contents · PDF page 2</figcaption></figure>')
-    pages = f'{ed["pages"]} pages. ' if ed.get("pages") else ""
-    lines = [
-        '<section class="rd-magazine" id="inside-the-issue" aria-labelledby="rd-magazine-title">',
-        ' <div class="rd-magazine__stage">',
-        f'  <header><p>Inside The Crossroads · {label}</p><h2 id="rd-magazine-title">Open the magazine.</h2>'
-        + (f'<p>{when}</p>' if when else "")
-        + f'<a href="{pdf}">Read {label} (PDF) ↗</a><a href="#archive">Choose another edition ↓</a></header>',
-    ]
-    if papers:
-        lines += ['  <div class="rd-magazine__papers">'] + ['   ' + p for p in papers] + ['  </div>']
-    lines += [
-        f'  <p class="rd-magazine__details">{len(papers) + 1:02d} · Edition details<br>'
-        f'{pages}The original magazine, complete and available to download.</p>',
-        ' </div>',
-        '</section>',
-    ]
-    return "\n".join(lines)
-
-
 def crossroads_latest(feature=False):
     issue = next((i for i in crossroads.issues() if i["latest"] and i["pdf"]), None)
     if not issue:
@@ -2011,6 +1976,27 @@ UC = '''<section class="uc">
 
 
 def build(slug, page):
+    if slug == "spiritual-life" and page.get("standalone"):
+        # Preserve the already imported handoff's renderer and scroll owner.
+        # Only the site's navigation controller is needed for the classic chrome.
+        header = (read("tools/partials/header.html")
+                  .replace("{{BRAND_HREF}}", "index.html")
+                  .replace("{{HOME_TAB}}", HOME_TAB)
+                  .replace("{{HEADER_MODE}}", "hero")
+                  .replace("{{HEADER_TONE}}", "light")
+                  .replace("{{HEADER_TABS}}", ""))
+        header = header.replace('data-header-start="hero"',
+                                'data-header-start="hero" data-header-main="body" '
+                                'data-header-footer=".cirs-classic-footer .footer"')
+        drawer = (read("tools/partials/drawer.html")
+                  .replace("{{NAV}}", nav_html(slug))
+                  .replace("{{ACTIVE_GROUP}}", str(menu_group_index(slug)))
+                  .replace("{{BRAND_HREF}}", "index.html"))
+        return (read(f"tools/pages/{slug}.html")
+                .replace("{{COUNCIL_CULTURAL}}", sakshi.pledge_html("cultural"))
+                .replace("{{SITE_HEADER}}", header)
+                .replace("{{SITE_DRAWER}}", drawer)
+                .replace("{{SITE_FOOTER}}", read("tools/partials/footer.html")))
     head = read("tools/partials/head.html")
     head = (head.replace("{{TITLE}}", page["title"])
                 .replace("{{DESCRIPTION}}", page["description"])
@@ -2120,8 +2106,8 @@ def build(slug, page):
             'body.crossroads-intro-active .crossroads-intro{background:#000 url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}'
             '</style>'
             '<link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">\n'
-            f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-13" as="script" fetchpriority="high">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-12">\n'
+            f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-14" as="script" fetchpriority="high">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-13">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}-title-2">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-5">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
@@ -2151,7 +2137,8 @@ def build(slug, page):
         head = head.replace("</head>", creativewriting.head_html(page["cw"]) + "</head>")
     if slug == "sports":
         head = head.replace("</head>",
-            f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n</head>')
+            f'<link rel="stylesheet" href="assets/css/sports-journey.css?{CACHE_BUST}-sports-journey-5">\n'
+            '<link rel="preload" href="assets/img/sports-field-poster.jpg" as="image" media="(prefers-reduced-motion:reduce)">\n</head>')
     # A page that opens on a scrubbed film carries the shared sheet, and with
     # it the two tuning blocks that sort out which page is which. Without
     # scripting nothing scrubs, so four screens of scroll would move a still
@@ -2412,7 +2399,6 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                        .replace("{{DOCPORTAL}}", docportal_html())
                        .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
-                       .replace("{{CROSSROADS_MAGAZINE}}", crossroads_magazine())
                        .replace("{{CROSSROADS_COUNT}}", str(crossroads.COUNT))
                        .replace("{{CROSSROADS_LATEST_LINK}}", crossroads_latest())
                        .replace("{{CROSSROADS_LATEST_FEATURE}}", crossroads_latest(feature=True))
@@ -2506,7 +2492,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         # This page-specific controller only owns the introduction. Load it
         # before shared animation dependencies so Skip and its bounded lock
         # are ready as soon as the critical styles have arrived.
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-13" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-14" defer></script>')
     # Only video pages need media ownership; unrelated pages keep their scripts.
     if not page.get("cw") and (slug == "index" or page.get("hero_media") or page.get("opening")):
         parts.append(f'<script src="assets/js/media-lifecycle.js?{CACHE_BUST}" defer></script>')
@@ -2559,7 +2545,6 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if slug == "art-attack":
         parts.append(f'<script src="assets/js/artattack.js?{CACHE_BUST}" defer></script>')
-        parts.append(f'<script src="assets/js/art-film.js?{CACHE_BUST}" defer></script>')
     if slug == "leadership":
         parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":

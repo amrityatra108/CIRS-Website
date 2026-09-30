@@ -1,0 +1,66 @@
+{
+  "approvedPalette": {
+    "background": "#000000",
+    "overPhoto": "#FFFFFF",
+    "wordmark": "#F2E6D2"
+  },
+  "designSize": [
+    1600,
+    900
+  ],
+  "exitMap": {
+    "channel": "R, normalized 0..1",
+    "file": "exit-map.png",
+    "geometry": "three broad slanted cut bands per C/I/R/S glyph with letter-specific order",
+    "rule": "retain pixel while departure progress is below R; 0 retains all, 1 removes all"
+  },
+  "photo": {
+    "file": "gurudev-seated-original.png",
+    "pixelEdits": false,
+    "source": "byte-for-byte copy of the user\u2019s latest 1672\u00d7941 seated Swami Chinmayananda photograph",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "desktopObjectPosition": "50% 0%",
+    "mobileObjectPosition": "46.5% 0%"
+  },
+  "revealOrder": {
+    "channel": "R, normalized 0..1",
+    "file": "reveal-order.png",
+    "motion": "monotonic left-to-right with two small authored vertical waves"
+  },
+  "sha256": {
+    "cirs-wordmark.svg": "d54bbf1f26c1324c063a7aaf228c75a306838c159c569fbd874306d6402d5ca2",
+    "exit-map.png": "28b8bc480553da84b0d20f0e55c90cfce5f19d9bc7588bea5264a5558bd3564d",
+    "hospital-original.png": "e6d31710b1d8bcd1598341a49851290646ba63f14651c1f7ca165e2ad647a905",
+    "reveal-order.png": "de446ecb3b43e84f7ca4d4ac599ad800d156be405eeee75d5f88524586a52023",
+    "static-fallback.svg": "0a7628c742dde82e7b60cd1264ce176e8778d7c769d4a81f070ced74ee6390e4",
+    "wordmark-data.png": "806f84a23895c38bdf8fe315e1bbf09b5aaca072887a551f422f13752e2d8694",
+    "wordmark-mask.png": "41e60f89588bf55eff350addb54d2e7f56631e878ee2a12404fd19a6b7822ad0",
+    "wordmark-mask.svg": "96a0c96efe0a7509e4fc3849bfedeb6a915362c9de4768821fc0155718aef9e5",
+    "gurudev-seated-original.png": "6d6cba0d9fd6a5ba600e1fbd2426b359c9966fbfba9983f32e49cb3f27f682da"
+  },
+  "sourceSnapshots": {
+    "cirs-wordmark.svg": "d54bbf1f26c1324c063a7aaf228c75a306838c159c569fbd874306d6402d5ca2",
+    "hospital-original.png": "e6d31710b1d8bcd1598341a49851290646ba63f14651c1f7ca165e2ad647a905",
+    "wordmark-mask.png": "41e60f89588bf55eff350addb54d2e7f56631e878ee2a12404fd19a6b7822ad0",
+    "wordmark-mask.svg": "96a0c96efe0a7509e4fc3849bfedeb6a915362c9de4768821fc0155718aef9e5",
+    "gurudev-seated-original.png": "6d6cba0d9fd6a5ba600e1fbd2426b359c9966fbfba9983f32e49cb3f27f682da"
+  },
+  "wordmarkData": {
+    "channels": {
+      "A": "255",
+      "B": "exact approved source alpha/255",
+      "RG": "linear packed uint16 signed distance"
+    },
+    "decodeGLSL": "dot(texel.rg, vec2(65280.0, 255.0)) / 65535.0 * 512.0 - 256.0",
+    "file": "wordmark-data.png",
+    "insideNegative": true,
+    "rangePixels": [
+      -256,
+      256
+    ],
+    "sampleAs": "linear data, no sRGB conversion, no mipmaps"
+  }
+}

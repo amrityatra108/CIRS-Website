@@ -1,0 +1,22 @@
+{
+  "source": "Latest supplied Gurudev landing reference; sampled emblem only",
+  "crop": [
+    556,
+    81,
+    819,
+    509
+  ],
+  "resolution": [
+    263,
+    428
+  ],
+  "sampleSHA256": "8e8209c1b54e038f632f269ffcc75e42926347b001164ae3d72c358b51eb9df9",
+  "dataSHA256": "f381c67effb1af595f712c14c17fa576fcff8720dec35451b0f041850cb15bfb",
+  "channels": {
+    "R": "deep blue pigment coverage",
+    "G": "same branches feathered 0.72 px",
+    "B": "local mineral-cloud coverage"
+  },
+  "colourSpace": "NoColorSpace (data)",
+  "uv": "Authoritative outline bounds, no per-frame uploads"
+}

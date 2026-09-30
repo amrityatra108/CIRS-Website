@@ -253,11 +253,15 @@
 
     // The camera.
     var lw = lean.v * (1 - focus.v), iw = idle.v;
-    var e = exit * exit * (3 - 2 * exit);
+    // Go into the field first; release it to the journal only afterwards.
+    // Both phases follow the scroll, so reversing retraces the same camera.
+    var inward = clamp(exit / .75, 0, 1);
+    var e = inward * inward * (3 - 2 * inward);
+    var leave = clamp((exit - .75) / .25, 0, 1);
+    leave = leave * leave * (3 - 2 * leave);
     var camX = pointer.x * .026 * W * lw;
     var camY = pointer.y * .018 * H * lw + cam.y * H + iw * .0035 * H * Math.sin(time * .57);
-    // A restrained forward dolly; no lateral explosion of the photographs.
-    var camZ = cam.z * P + e * .12 * P;
+    var camZ = cam.z * P + e * (narrow ? .38 : .52) * P;
     var turnY = drag.rY + pointer.x * 2.2 * lw;
     var turnX = drag.rX - pointer.y * 1.3 * lw;
     var world = "translate3d(" + fixed(-camX) + "px," + fixed(-camY) + "px," + fixed(camZ) + "px) rotateX(" +
@@ -267,7 +271,7 @@
     }
 
     // Each card.
-    var spread = 1 - e * .16;
+    var spread = 1;
     var any = hovered && !drag.on && !focus.card;
     for (var i = 0; i < visible.length; i++) {
       var c = visible[i], L = c.L;
@@ -298,9 +302,9 @@
       var t = "translate3d(" + fixed(X) + "px," + fixed(Y) + "px," + fixed(Z) + "px) rotateX(" + fixed(rx) +
               "deg) rotateY(" + fixed(ry) + "deg) rotateZ(" + fixed(rz) + "deg) scale(" + s.toFixed(4) + ")";
       if (t !== c.last) { c.el.style.transform = t; c.last = t; }
-      var o = c.o.toFixed(3);
+      var o = (c.o * (1 - leave * .25)).toFixed(3);
       if (o !== c.lastO) { c.el.style.opacity = o; c.lastO = o; }
-      var f = c.fog.toFixed(3);
+      var f = (c.fog * (1 - e * .85)).toFixed(3);
       if (f !== c.lastF) { c.fogEl.style.opacity = f; c.lastF = f; }
       var m = (isFocus ? 0 : c.h).toFixed(3);
       if (m !== c.lastM) {
@@ -311,15 +315,16 @@
     }
 
     // The title quietens while a photograph is open, and fades on the way out.
-    var ho = ((1 - .45 * focus.v) * (1 - .92 * e)).toFixed(3);
+    var ho = ((1 - .45 * focus.v) * (1 - leave)).toFixed(3);
     if (ho !== head.__o) {
       head.style.opacity = ho;
-      head.style.transform = e ? "scale(" + (1 + e * .08).toFixed(3) + ")" : "";
       head.__o = ho;
     }
+    var ht = e ? "scale(" + (1 + e * .35).toFixed(3) + ")" : "";
+    if (ht !== head.__t) { head.style.transform = ht; head.__t = ht; }
     var fo = ((1 - .7 * focus.v) * (1 - Math.min(1, e * 2.2))).toFixed(3);
     if (fo !== footBox.__o) { footBox.style.opacity = fo; footBox.__o = fo; }
-    var so = (e * .22).toFixed(3);
+    var so = (leave * .12).toFixed(3);
     if (so !== shade.__o) { shade.style.opacity = so; shade.__o = so; }
   }
 

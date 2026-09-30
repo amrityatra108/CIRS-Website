@@ -1,7 +1,7 @@
 // Run against `python3 -m http.server 8000` with Playwright installed outside
-// the repo: CIRS_BROWSER_DIR=/path/to/node_modules node tools/check-alumni-browser.cjs
+// the repo: CIRS_BROWSER_DIR=/path/to/install node tools/check-alumni-browser.cjs
 const path = require('node:path');
-const {chromium}=require(process.env.CIRS_BROWSER_DIR ? path.join(process.env.CIRS_BROWSER_DIR, 'playwright') : 'playwright');
+const {chromium}=require(process.env.CIRS_BROWSER_DIR ? path.join(process.env.CIRS_BROWSER_DIR, 'node_modules/playwright-core') : 'playwright-core');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const out = process.env.CIRS_ALUMNI_REVIEW_DIR || '/tmp/cirs-alumni-review';
@@ -14,7 +14,7 @@ const url = process.env.CIRS_ALUMNI_URL || 'http://localhost:8000/alumni.html';
  page.on('pageerror',e=>errors.push(e.message));
  await page.goto(url); await page.waitForTimeout(1600);
  assert.equal(await page.locator('.ajc__land').count(),240);
- assert.equal(await page.locator('.ajc__pt').count(),19);
+ assert.equal(await page.locator('.ajc__pt').count(),37);
  const browse=page.locator('[data-filter="all"]');
  for(let i=0;i<3;i++){
   await browse.click();
@@ -28,7 +28,7 @@ const url = process.env.CIRS_ALUMNI_URL || 'http://localhost:8000/alumni.html';
   await page.locator('#ajc-search').fill('singapore');
   assert.equal(await page.locator('[data-panel-results] li').count(),7);
   await page.locator('[data-panel-close]').focus(); await page.keyboard.press('Shift+Tab');
-  assert.equal(await page.evaluate(()=>document.activeElement.hasAttribute('data-panel-all')),true);
+  assert.equal(await page.evaluate(()=>document.activeElement.matches('[data-panel-results] a')),true);
   await page.keyboard.press('Tab');
   assert.equal(await page.evaluate(()=>document.activeElement.hasAttribute('data-panel-close')),true);
   await page.keyboard.press('Escape');

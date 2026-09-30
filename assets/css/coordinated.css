@@ -79,21 +79,7 @@ body.curriculum .atl-index{margin-top:36px}
 .rd-math-live [data-step="0"] .rd-math__diagram svg{opacity:.3}
 .rd-math-live [data-step="0"] .rd-math__result,.rd-math-live [data-step="1"] .rd-math__result,.rd-math-live [data-step="2"] .rd-math__result{visibility:hidden}
 @media(max-width:999px),(max-height:679px){.rd-math__layout{grid-template-columns:1fr;gap:48px}.rd-math-workspace{position:static}.rd-math{padding:60px 7%}.rd-math__solution li{min-height:0}.rd-math__solution math{font-size:18px}}
-/* Magazine paper mechanics use original issue pages; essays enter still reading. */
-.rd-magazine{background:var(--rd-paper);color:var(--rd-purple);padding:80px 7%}
-.rd-magazine__stage{display:grid;grid-template-columns:1fr 1.4fr;gap:32px 5vw;align-items:center;min-height:720px}
-.rd-magazine header{max-width:none}
-.rd-magazine h2{font:400 clamp(42px,5vw,72px)/1.08 var(--font-display);margin:26px 0}
-.rd-magazine header p{font-size:16px;line-height:1.65}
-.rd-magazine a{color:inherit}
-.rd-magazine header a{display:flex;align-items:center;min-height:48px;text-decoration:underline;text-underline-offset:6px}
-.rd-magazine__papers{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-.rd-magazine figure{margin:0}
-.rd-magazine img{width:100%;height:auto;display:block;object-fit:contain;box-shadow:0 14px 35px #1e162620}
-.rd-magazine figcaption{font-size:13px;padding-top:16px;color:var(--rd-purple)}
-.rd-magazine__details{grid-column:1/-1;line-height:1.7;font-size:14px;border-top:1px solid #2b203733;padding-top:20px}
-.rd-magazine-on .rd-magazine{height:150svh;padding-block:0}
-.rd-magazine-on .rd-magazine__stage{position:sticky;top:90px;min-height:calc(100svh - 100px)}
+/* Essays enter still reading. */
 .rd-essay .art__head{display:grid;grid-template-columns:1.15fr 1fr;gap:6vw;padding:145px 7% 60px;background:var(--rd-deep);color:var(--rd-ivory);align-items:center;min-height:88svh}
 .rd-essay .art__head .art__shell{width:auto;padding:0;max-width:none;margin:0}
 .rd-essay .art__breadcrumb,.rd-essay .art__edition,.rd-essay .art__credits{color:#d6cec0}
@@ -119,7 +105,7 @@ body.curriculum .atl-index{margin-top:36px}
 .rd-essay__chapters a[aria-current]{border-color:var(--rd-purple);font-weight:650;color:var(--rd-purple)}
 #essay-reading{scroll-margin-top:95px}
 @media(max-width:999px){
- .rd-magazine{padding:60px 7%}.rd-magazine__stage{grid-template-columns:1fr;min-height:0}.rd-magazine__papers{max-width:650px}.rd-magazine h2{font-size:48px}
+
  .rd-essay .art__head{grid-template-columns:1fr;padding:125px 7% 60px;gap:40px;min-height:0}
  .rd-essay .art__hero img{height:auto;max-height:560px}
  .rd-essay .art__layout{display:block;padding:55px 7%}
@@ -127,7 +113,7 @@ body.curriculum .atl-index{margin-top:36px}
  .rd-essay__chapters{flex-direction:row;flex-wrap:wrap;gap:8px 20px}
  .rd-essay__chapters a{max-width:40ch;font-size:13px}
 }
-@media(max-width:600px){.rd-magazine__papers{grid-template-columns:1fr;gap:38px}.rd-magazine img{max-width:330px}.rd-essay .art__title{font-size:44px}.rd-essay .art__body{font-size:18px;line-height:1.85}}
+@media(max-width:600px){.rd-essay .art__title{font-size:44px}.rd-essay .art__body{font-size:18px;line-height:1.85}}
 /* Numbered achievement chapters. Original records and the complete archive remain below. */
 .rd-laurels-opening{background:var(--rd-deep);color:var(--rd-ivory);padding:150px 7% 75px;display:grid;grid-template-columns:1fr 1.2fr;gap:6vw;align-items:center;min-height:85svh}
 .rd-laurels-opening h1{font:400 clamp(60px,7.2vw,110px)/1.02 var(--font-display);margin:35px 0}

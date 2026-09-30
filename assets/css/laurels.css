@@ -816,13 +816,15 @@ body.laurels, body.laurels main { background: var(--lr-ivory); }
 .lr-end__dust { position: absolute; inset: 0; pointer-events: none; }
 .lr-icon { width: 18px; height: 18px; flex: 0 0 auto; vertical-align: middle; }
 .lr-inspect__btn .lr-icon { width: 16px; height: 16px; }
-.lr :is(a,button,summary):focus-visible { outline: 2px solid var(--lr-gold-ink); outline-offset: 4px; }
+body.laurels :is(.rd-laurels,.lr-count,.lr-reel,.lr-names,.lr-season,.lr-archive,.lr-end) :is(a,button,summary):focus-visible { outline: 2px solid var(--lr-gold-ink); outline-offset: 4px; }
+/* Keyboard focus appears immediately, including on the chapter summaries. */
+body.laurels .rd-laurel summary { transition-property: color, background-color, border-color; }
 @media (max-width: 899px) { .lr-ms__year { color: var(--lr-gold-ink); } }
 /* The first featured composition is hosted in the reel on wide screens;
    its text still sits over a dark photograph. */
 .lr-reel__final { --on-dark: #faf9f3; --on-dark-soft: #e4dfd5; --on-dark-mute: #d4cec6; --lr-gold-soft: var(--gold-pale); --lr-gold-ink: var(--gold); }
 .lr-icon { display: inline-block; }
-.lr-features :is(a,button):focus-visible, .lr-reel__final :is(a,button):focus-visible { outline-color: var(--lr-gold); }
+body.laurels .lr-features :is(a,button):focus-visible, body.laurels .lr-reel__final :is(a,button):focus-visible { outline-color: var(--lr-gold); }
 .lr-end__range { display: flex; align-items: center; gap: .35em; }
 .lr-end__range i { display: inline-flex; }
 .lr-cine .lr-rail ol, .lr-cine .lr-rail button::before { background: var(--rule); }
