@@ -197,6 +197,7 @@
     // window. Let it reach its real final frame and existing logo handoff.
     // Keep a bounded fallback in case playback stalls after this point.
     if (opening && !opening.paused && !opening.ended && opening.readyState >= 2 && opening.currentTime > 0 && Number.isFinite(opening.duration)) {
+      openingState = "released";
       lockScroll(false);
       removeLockListeners();
       openingTimer = setTimeout(function () { finishOpening(false, true); },

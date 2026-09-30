@@ -37,6 +37,24 @@ const delay=ms=>new Promise(r=>setTimeout(r,ms));
   assert.equal(await page.evaluate(()=>document.documentElement.classList.contains('crossroads-intro-scroll-locked')),false);
   results.push({test:name+' history return',passed:true});await context.close();
  }
+ // Real streamed HTML: the head reaches the browser, then the body is held
+ // until after the fallback deadline. The external controller is unavailable.
+ {
+  const http=require('node:http');
+  const html=fs.readFileSync(path.join(__dirname,'../crossroads.html'),'utf8').replace('<head>','<head><base href="'+base+'/">');
+  const cut=html.indexOf('</head>')+7;
+  const server=http.createServer((req,res)=>{res.writeHead(200,{'Content-Type':'text/html'});res.write(html.slice(0,cut));setTimeout(()=>res.end(html.slice(cut)),6600)});
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  const context=await browser.newContext();const page=await context.newPage();
+  await page.route('**/crossroads-intro.js*',r=>r.abort());
+  await page.goto('http://127.0.0.1:'+server.address().port+'/',{waitUntil:'commit'});
+  await page.locator('.crossroads-intro__content').waitFor({state:'visible',timeout:10000});
+  assert.equal(await page.evaluate(()=>window.__crossroadsStartupExpired),true);
+  assert.equal(await page.locator('[data-crossroads-intro]').evaluate(i=>i.hasAttribute('data-crossroads-intro-pending')),false);
+  assert.equal(await page.evaluate(()=>document.documentElement.classList.contains('crossroads-intro-scroll-locked')),false);
+  results.push({test:'streamed body after six-second deadline with blocked controller',passed:true});
+  await context.close();await new Promise(resolve=>server.close(resolve));
+ }
  for(const mode of ['script-failure','late-script','media-failure','no-js','reduced-motion']){
   const context=await browser.newContext({javaScriptEnabled:mode!=='no-js',reducedMotion:mode==='reduced-motion'?'reduce':'no-preference'});const page=await context.newPage();
   if(mode==='script-failure')await page.route('**/crossroads-intro.js*',r=>r.abort());

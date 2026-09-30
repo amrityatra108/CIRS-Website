@@ -16,16 +16,31 @@ body.crossroads-intro-active{background:#16031c}
 // observes the same navigation deadline and cannot restart the film.
 setTimeout(function () {
   if (window.__crossroadsIntroReady) return;
-  var intro = document.querySelector("[data-crossroads-intro]");
-  if (!intro) return;
   window.__crossroadsStartupExpired = true;
-  intro.querySelectorAll("video").forEach(function (video) { video.pause(); });
-  ["pending", "film", "opening-playing", "locked"].forEach(function (state) {
-    intro.removeAttribute("data-crossroads-intro-" + state);
-  });
-  intro.setAttribute("data-crossroads-intro-settled", "");
-  document.documentElement.classList.remove("crossroads-intro-scroll-locked");
-  document.body.classList.remove("crossroads-intro-active");
-  if (window.__crossroadsStartupUnlock) window.__crossroadsStartupUnlock();
+  var waiting;
+  function recover() {
+    if (window.__crossroadsIntroReady) { if (waiting) waiting.disconnect(); return; }
+    var intro = document.querySelector("[data-crossroads-intro]");
+    if (!intro) return false;
+    if (waiting) waiting.disconnect();
+    intro.querySelectorAll("video").forEach(function (video) { video.pause(); });
+    ["pending", "film", "opening-playing", "locked"].forEach(function (state) {
+      intro.removeAttribute("data-crossroads-intro-" + state);
+    });
+    intro.setAttribute("data-crossroads-intro-settled", "");
+    document.documentElement.classList.remove("crossroads-intro-scroll-locked");
+    document.body.classList.remove("crossroads-intro-active");
+    if (window.__crossroadsStartupUnlock) window.__crossroadsStartupUnlock();
+    return true;
+  }
+  if (!recover() && document.readyState === "loading") {
+    // A streamed response can still be parsing its head at the deadline.
+    // Recover in the microtask when the intro arrives, before it can paint.
+    waiting = new MutationObserver(recover);
+    waiting.observe(document.documentElement, {childList:true, subtree:true});
+    document.addEventListener("DOMContentLoaded", function () {
+      recover(); waiting.disconnect();
+    }, {once:true});
+  }
 }, Math.max(0, 6000 - performance.now()));
 </script>

@@ -50,22 +50,37 @@ body.crossroads-intro-active{background:#16031c}
 // observes the same navigation deadline and cannot restart the film.
 setTimeout(function () {
   if (window.__crossroadsIntroReady) return;
-  var intro = document.querySelector("[data-crossroads-intro]");
-  if (!intro) return;
   window.__crossroadsStartupExpired = true;
-  intro.querySelectorAll("video").forEach(function (video) { video.pause(); });
-  ["pending", "film", "opening-playing", "locked"].forEach(function (state) {
-    intro.removeAttribute("data-crossroads-intro-" + state);
-  });
-  intro.setAttribute("data-crossroads-intro-settled", "");
-  document.documentElement.classList.remove("crossroads-intro-scroll-locked");
-  document.body.classList.remove("crossroads-intro-active");
-  if (window.__crossroadsStartupUnlock) window.__crossroadsStartupUnlock();
+  var waiting;
+  function recover() {
+    if (window.__crossroadsIntroReady) { if (waiting) waiting.disconnect(); return; }
+    var intro = document.querySelector("[data-crossroads-intro]");
+    if (!intro) return false;
+    if (waiting) waiting.disconnect();
+    intro.querySelectorAll("video").forEach(function (video) { video.pause(); });
+    ["pending", "film", "opening-playing", "locked"].forEach(function (state) {
+      intro.removeAttribute("data-crossroads-intro-" + state);
+    });
+    intro.setAttribute("data-crossroads-intro-settled", "");
+    document.documentElement.classList.remove("crossroads-intro-scroll-locked");
+    document.body.classList.remove("crossroads-intro-active");
+    if (window.__crossroadsStartupUnlock) window.__crossroadsStartupUnlock();
+    return true;
+  }
+  if (!recover() && document.readyState === "loading") {
+    // A streamed response can still be parsing its head at the deadline.
+    // Recover in the microtask when the intro arrives, before it can paint.
+    waiting = new MutationObserver(recover);
+    waiting.observe(document.documentElement, {childList:true, subtree:true});
+    document.addEventListener("DOMContentLoaded", function () {
+      recover(); waiting.disconnect();
+    }, {once:true});
+  }
 }, Math.max(0, 6000 - performance.now()));
 </script>
 <style>body.crossroads-intro-active :is(.progress,.ring,.totop,.jump,.footer-wrap){visibility:hidden!important}body.crossroads-intro-active .crossroads-intro{background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}</style><link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">
-<link rel="preload" href="assets/js/crossroads-intro.js?b=115-intro-10" as="script" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/crossroads-intro.css?b=115-intro-10">
+<link rel="preload" href="assets/js/crossroads-intro.js?b=115-intro-11" as="script" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/crossroads-intro.css?b=115-intro-11">
 <link rel="stylesheet" href="assets/css/crossroads-archive.css?b=115">
 <link rel="stylesheet" href="assets/css/crossroads-stories.css?b=115-hover-4">
 <link rel="stylesheet" href="assets/css/crossroads-manuscript.css?b=115">
@@ -1194,7 +1209,7 @@ setTimeout(function () {
   </div>
 </footer>
 </div>
-<script src="assets/js/crossroads-intro.js?b=115-intro-10" defer></script>
+<script src="assets/js/crossroads-intro.js?b=115-intro-11" defer></script>
 <!-- The motion layer, served from this site rather than from a CDN. See
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
