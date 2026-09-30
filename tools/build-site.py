@@ -392,7 +392,7 @@ PAGES = {
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
         "sheet": "sports",
-        "cache_suffix": "-sports-4",
+        "cache_suffix": "-sports-5",
         # The Sports Secretaries' pledge (tools/sakshi.py).
         "council": True,
         # No banner from the shared builder. Like CIRS Captures, this page
