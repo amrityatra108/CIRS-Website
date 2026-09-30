@@ -254,8 +254,10 @@
 html.crossroads-intro-scroll-locked,html.crossroads-intro-scroll-locked body { overflow:hidden!important; overscroll-behavior:none; }
 .crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) { background:var(--cr-purple-deep) url("../img/crossroads/opening-poster.jpg") center/cover no-repeat; }
 .crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) .crossroads-intro__base,.crossroads-intro[data-crossroads-intro-pending]:not([data-crossroads-intro-opening-playing]) .crossroads-intro__reveal { visibility:hidden; }
-.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content { visibility:visible; opacity:1; }
+.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content { visibility:hidden; opacity:0; }
 @media (prefers-reduced-motion:reduce) {
+  .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening { display:none; }
+  .crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__content { visibility:visible; opacity:1; }
   .crossroads-intro[data-crossroads-intro-film]::after,.crossroads-intro[data-crossroads-intro-film] .crossroads-intro__content { transition:none; }
   .crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__opening,
   .crossroads-intro[data-crossroads-intro-finishing] .crossroads-intro__content { transition:none; }
