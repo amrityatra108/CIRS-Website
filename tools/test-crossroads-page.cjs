@@ -30,22 +30,23 @@ const base=process.env.CIRS_PREVIEW_URL||'http://127.0.0.1:8878',out=process.env
   for(const url of pdfs){const response=await p.request.get(url);assert.equal(response.status(),200,url);const data=await response.body();assert.equal(data.subarray(0,4).toString(),'%PDF',url)}
   // Crawl every content section and the footer, letting lazy images and
   // entrance animations settle at their real scroll positions.
-  for(const selector of ['#top','#inside-the-issue','#statement','#about','#archive','.footer-wrap']){
+  assert.equal(await p.locator('#inside-the-issue,.rd-magazine').count(),0);
+  for(const selector of ['#top','#statement','#about','#archive','.footer-wrap']){
    await p.locator(selector).scrollIntoViewIfNeeded();await p.waitForTimeout(700);
    assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,selector+' horizontal overflow');
    await p.screenshot({path:path.join(out,name+'-'+selector.replace(/[^a-z-]/g,'')+'.png')});
   }
-  // Reach the magazine via actual wheel navigation, forward and reverse.
+  // Reach the stories via actual wheel navigation, forward and reverse.
   for(const direction of [1,-1]){
-   const magazine=await p.locator('#inside-the-issue').evaluate(e=>({top:e.offsetTop,height:e.offsetHeight}));
+   const magazine=await p.locator('#statement').evaluate(e=>({top:e.offsetTop,height:e.offsetHeight}));
    await p.evaluate(y=>scrollTo({top:y,behavior:'instant'}),direction>0?magazine.top-viewport.height:magazine.top+magazine.height+100);
    await p.waitForTimeout(1300);
    for(let attempt=0;attempt<10;attempt++){
-    const visible=await p.locator('#rd-magazine-title').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=70&&r.bottom<innerHeight});
+    const visible=await p.locator('.crossroads-stories__number').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=70&&r.top<innerHeight});
     if(visible)break;
     await p.mouse.wheel(0,direction*250);await p.waitForTimeout(1200);
    }
-   assert.equal(await p.locator('#rd-magazine-title').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=70&&r.bottom<innerHeight}),true,'Magazine title visible while scrolling '+direction);
+   assert.equal(await p.locator('.crossroads-stories__number').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=70&&r.top<innerHeight}),true,'Stories visible while scrolling '+direction);
   }
   const broken=await p.locator('img').evaluateAll(es=>es.filter(e=>e.complete&&e.naturalWidth===0).map(e=>e.src));assert.deepEqual(broken,[]);
   assert.deepEqual(errors,[]);

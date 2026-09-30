@@ -1,0 +1,362 @@
+{
+  "format": "crossroads-stones-v1",
+  "source": "Crossroads_Stones_Detail_Source.zip",
+  "units": "source arbitrary units",
+  "textureColorSpace": "sRGB",
+  "textureFlipY": false,
+  "normalScale": 0.55,
+  "material": {
+    "metalness": 0.0,
+    "roughness": 0.96
+  },
+  "stones": [
+    {
+      "id": 1,
+      "description": "thick irregular boulder with squared upper face",
+      "mesh": "stone-01.bin",
+      "fields": {
+        "position": {
+          "offset": 0,
+          "count": 6515,
+          "itemSize": 3,
+          "type": "float32"
+        },
+        "normal": {
+          "offset": 78180,
+          "count": 6515,
+          "itemSize": 3,
+          "type": "float32"
+        },
+        "uv": {
+          "offset": 156360,
+          "count": 6515,
+          "itemSize": 2,
+          "type": "float32"
+        },
+        "index": {
+          "offset": 208480,
+          "count": 36960,
+          "itemSize": 1,
+          "type": "uint32"
+        }
+      },
+      "groups": [
+        {
+          "start": 0,
+          "count": 21504,
+          "materialIndex": 0
+        },
+        {
+          "start": 21504,
+          "count": 12096,
+          "materialIndex": 1
+        },
+        {
+          "start": 33600,
+          "count": 3360,
+          "materialIndex": 0
+        }
+      ],
+      "bounds": {
+        "min": [
+          -1.0028890371322632,
+          -0.48500001430511475,
+          -0.925728976726532
+        ],
+        "max": [
+          0.9903510212898254,
+          0.51009202003479,
+          0.9557639956474304
+        ]
+      },
+      "vertices": 6515,
+      "triangles": 12320,
+      "textures": {
+        "topColor": "stone-01-topColor.webp",
+        "sideColor": "stone-01-sideColor.webp",
+        "topNormal": "stone-01-topNormal.webp",
+        "sideNormal": "stone-01-sideNormal.webp"
+      },
+      "textureSizes": {
+        "topColor": [
+          1024,
+          1024
+        ],
+        "sideColor": [
+          1536,
+          576
+        ],
+        "topNormal": [
+          1024,
+          1024
+        ],
+        "sideNormal": [
+          1536,
+          576
+        ]
+      },
+      "bytes": 1065422
+    },
+    {
+      "id": 2,
+      "description": "low rounded slab with pale branching veins",
+      "mesh": "stone-02.bin",
+      "fields": {
+        "position": {
+          "offset": 0,
+          "count": 6515,
+          "itemSize": 3,
+          "type": "float32"
+        },
+        "normal": {
+          "offset": 78180,
+          "count": 6515,
+          "itemSize": 3,
+          "type": "float32"
+        },
+        "uv": {
+          "offset": 156360,
+          "count": 6515,
+          "itemSize": 2,
+          "type": "float32"
+        },
+        "index": {
+          "offset": 208480,
+          "count": 36960,
+          "itemSize": 1,
+          "type": "uint32"
+        }
+      },
+      "groups": [
+        {
+          "start": 0,
+          "count": 21504,
+          "materialIndex": 0
+        },
+        {
+          "start": 21504,
+          "count": 12096,
+          "materialIndex": 1
+        },
+        {
+          "start": 33600,
+          "count": 3360,
+          "materialIndex": 0
+        }
+      ],
+      "bounds": {
+        "min": [
+          -1.036607027053833,
+          -0.20000000298023224,
+          -0.9856629967689514
+        ],
+        "max": [
+          1.0344079732894897,
+          0.23089200258255005,
+          0.9975079894065857
+        ]
+      },
+      "vertices": 6515,
+      "triangles": 12320,
+      "textures": {
+        "topColor": "stone-02-topColor.webp",
+        "sideColor": "stone-02-sideColor.webp",
+        "topNormal": "stone-02-topNormal.webp",
+        "sideNormal": "stone-02-sideNormal.webp"
+      },
+      "textureSizes": {
+        "topColor": [
+          1024,
+          1024
+        ],
+        "sideColor": [
+          1536,
+          576
+        ],
+        "topNormal": [
+          1024,
+          1024
+        ],
+        "sideNormal": [
+          1536,
+          576
+        ]
+      },
+      "bytes": 1135964
+    },
+    {
+      "id": 3,
+      "description": "thin elongated slab with broad cracked top",
+      "mesh": "stone-03.bin",
+      "fields": {
+        "position": {
+          "offset": 0,
+          "count": 6515,
+          "itemSize": 3,
+          "type": "float32"
+        },
+        "normal": {
+          "offset": 78180,
+          "count": 6515,
+          "itemSize": 3,
+          "type": "float32"
+        },
+        "uv": {
+          "offset": 156360,
+          "count": 6515,
+          "itemSize": 2,
+          "type": "float32"
+        },
+        "index": {
+          "offset": 208480,
+          "count": 36960,
+          "itemSize": 1,
+          "type": "uint32"
+        }
+      },
+      "groups": [
+        {
+          "start": 0,
+          "count": 21504,
+          "materialIndex": 0
+        },
+        {
+          "start": 21504,
+          "count": 12096,
+          "materialIndex": 1
+        },
+        {
+          "start": 33600,
+          "count": 3360,
+          "materialIndex": 0
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.7438639998435974,
+          -0.1550000011920929,
+          -0.9920549988746643
+        ],
+        "max": [
+          0.7351109981536865,
+          0.1838490068912506,
+          1.0099610090255737
+        ]
+      },
+      "vertices": 6515,
+      "triangles": 12320,
+      "textures": {
+        "topColor": "stone-03-topColor.webp",
+        "sideColor": "stone-03-sideColor.webp",
+        "topNormal": "stone-03-topNormal.webp",
+        "sideNormal": "stone-03-sideNormal.webp"
+      },
+      "textureSizes": {
+        "topColor": [
+          1024,
+          1024
+        ],
+        "sideColor": [
+          1536,
+          576
+        ],
+        "topNormal": [
+          1024,
+          1024
+        ],
+        "sideNormal": [
+          1536,
+          576
+        ]
+      },
+      "bytes": 1019112
+    },
+    {
+      "id": 4,
+      "description": "thick rounded stone with layered side ledges",
+      "mesh": "stone-04.bin",
+      "fields": {
+        "position": {
+          "offset": 0,
+          "count": 6515,
+          "itemSize": 3,
+          "type": "float32"
+        },
+        "normal": {
+          "offset": 78180,
+          "count": 6515,
+          "itemSize": 3,
+          "type": "float32"
+        },
+        "uv": {
+          "offset": 156360,
+          "count": 6515,
+          "itemSize": 2,
+          "type": "float32"
+        },
+        "index": {
+          "offset": 208480,
+          "count": 36960,
+          "itemSize": 1,
+          "type": "uint32"
+        }
+      },
+      "groups": [
+        {
+          "start": 0,
+          "count": 21504,
+          "materialIndex": 0
+        },
+        {
+          "start": 21504,
+          "count": 12096,
+          "materialIndex": 1
+        },
+        {
+          "start": 33600,
+          "count": 3360,
+          "materialIndex": 0
+        }
+      ],
+      "bounds": {
+        "min": [
+          -1.0199580192565918,
+          -0.38499999046325684,
+          -0.9707440137863159
+        ],
+        "max": [
+          1.0355099439620972,
+          0.41820698976516724,
+          0.9735469818115234
+        ]
+      },
+      "vertices": 6515,
+      "triangles": 12320,
+      "textures": {
+        "topColor": "stone-04-topColor.webp",
+        "sideColor": "stone-04-sideColor.webp",
+        "topNormal": "stone-04-topNormal.webp",
+        "sideNormal": "stone-04-sideNormal.webp"
+      },
+      "textureSizes": {
+        "topColor": [
+          1024,
+          1024
+        ],
+        "sideColor": [
+          1536,
+          576
+        ],
+        "topNormal": [
+          1024,
+          1024
+        ],
+        "sideNormal": [
+          1536,
+          576
+        ]
+      },
+      "bytes": 1146504
+    }
+  ]
+}

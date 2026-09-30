@@ -1,0 +1,33 @@
+{
+  "sourceFilename": "Chinmaya_Logo_Polished_Chrome.glb",
+  "sourceSHA256": "3c56813738cfb6f77139e995f9411bd810e8bb591f7091f68da2b58493ad2ed4",
+  "geometryBinarySHA256": "31b076f75de7ee218e90d95447b7964735c96f27a06cf88d7a32715c35e33a55",
+  "materials": [
+    {
+      "name": "Polished Chrome Face",
+      "baseColorFactor": [
+        0.96,
+        0.975,
+        1.0,
+        1.0
+      ],
+      "metallicFactor": 1.0,
+      "roughnessFactor": 0.025,
+      "clearcoatFactor": 1.0,
+      "clearcoatRoughnessFactor": 0.012
+    },
+    {
+      "name": "Polished Dark Chrome Edge",
+      "baseColorFactor": [
+        0.42,
+        0.45,
+        0.5,
+        1.0
+      ],
+      "metallicFactor": 1.0,
+      "roughnessFactor": 0.045,
+      "clearcoatFactor": 0.95,
+      "clearcoatRoughnessFactor": 0.018
+    }
+  ]
+}

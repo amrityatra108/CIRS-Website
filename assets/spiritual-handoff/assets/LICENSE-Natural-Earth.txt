@@ -1,0 +1,20 @@
+India entrance geometry: Natural Earth 1:50m Admin 0 Countries.
+Feature: ADM0_A3=IND, retained from the supplied dataset without manual boundary changes.
+
+Source:
+https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson
+
+License: public domain.
+Natural Earth permits personal, educational, and commercial use and modification.
+Terms: https://www.naturalearthdata.com/about/terms-of-use/
+Project: https://www.naturalearthdata.com/
+
+Retrieved 2026-09-27. Exact source feature is bundled in
+tools/data/india-natural-earth.geojson, with checksums in assets/india-metadata.json.
+
+Representation: this is an artistic silhouette using Natural Earth's boundary
+representation; it is not an official national boundary map.
+
+Preparation: longitude scaled by cos(22 degrees), centered and normalized to
+height 3.7 scene units; all 14 supplied polygon components retained.
+72,000 interior particles and 18,000 outer-ring particles, deterministic seed.

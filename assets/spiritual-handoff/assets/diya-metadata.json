@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "binary": "diya-mesh.bin",
+  "byteLength": 2934576,
+  "endianness": "little",
+  "upAxis": "Y",
+  "source": {
+    "filename": "diya model_P.fbx",
+    "fbxVersion": 7500,
+    "sha256": "04dc691e83cb4ff1cf8935bd8bfb77097bf77401d80434ec16785633322ee534",
+    "materialsPresent": false,
+    "texturesPresent": false,
+    "volumetricFlameExported": false
+  },
+  "normalization": {
+    "width": 3.4,
+    "baseY": 0,
+    "scale": 0.013505606011830049,
+    "sourceCenter": [
+      1.7719532396299371,
+      -45.82581501597913,
+      0.6837655248639223
+    ],
+    "description": "Common local diya frame: source child transforms retained, parent scene position and yaw removed; spout points +X."
+  },
+  "parts": [
+    {
+      "name": "oil",
+      "sourceName": "Oil",
+      "sourceVertices": 2756,
+      "sourceTriangles": 5508,
+      "vertices": 2756,
+      "triangles": 5508,
+      "bounds": {
+        "min": [
+          -1.4211271579299305,
+          0.10717964848724468,
+          -1.0303891807613699
+        ],
+        "max": [
+          1.0135538419701975,
+          0.573418925270502,
+          1.0579549002337119
+        ]
+      },
+      "attributes": {
+        "position": {
+          "byteOffset": 0,
+          "count": 2756,
+          "components": 3,
+          "type": "float32"
+        },
+        "normal": {
+          "byteOffset": 33072,
+          "count": 2756,
+          "components": 3,
+          "type": "float32"
+        },
+        "index": {
+          "byteOffset": 66144,
+          "count": 16524,
+          "components": 1,
+          "type": "uint32"
+        }
+      },
+      "sampledSourceToOptimizedVertexP95": 0.0
+    },
+    {
+      "name": "wick",
+      "sourceName": "flame",
+      "sourceVertices": 14909,
+      "sourceTriangles": 27817,
+      "vertices": 8759,
+      "triangles": 15999,
+      "bounds": {
+        "min": [
+          -0.11642560931151613,
+          0.1729517046844092,
+          -0.13093858557231752
+        ],
+        "max": [
+          1.6888799751427859,
+          0.8782986230398582,
+          0.0698826401078901
+        ]
+      },
+      "attributes": {
+        "position": {
+          "byteOffset": 132240,
+          "count": 8759,
+          "components": 3,
+          "type": "float32"
+        },
+        "normal": {
+          "byteOffset": 237348,
+          "count": 8759,
+          "components": 3,
+          "type": "float32"
+        },
+        "index": {
+          "byteOffset": 342456,
+          "count": 47997,
+          "components": 1,
+          "type": "uint32"
+        }
+      },
+      "sampledSourceToOptimizedVertexP95": 0.011439617541683636
+    },
+    {
+      "name": "body",
+      "sourceName": "diya_2",
+      "sourceVertices": 640616,
+      "sourceTriangles": 1281219,
+      "vertices": 50006,
+      "triangles": 99999,
+      "bounds": {
+        "min": [
+          -1.7000095052385324,
+          -7.201566275508887e-05,
+          -1.3195572439707584
+        ],
+        "max": [
+          1.7002017056941223,
+          0.7839632319172496,
+          1.3193926768695112
+        ]
+      },
+      "attributes": {
+        "position": {
+          "byteOffset": 534444,
+          "count": 50006,
+          "components": 3,
+          "type": "float32"
+        },
+        "normal": {
+          "byteOffset": 1134516,
+          "count": 50006,
+          "components": 3,
+          "type": "float32"
+        },
+        "index": {
+          "byteOffset": 1734588,
+          "count": 299997,
+          "components": 1,
+          "type": "uint32"
+        }
+      },
+      "sampledSourceToOptimizedVertexP95": 0.018498897237649872
+    }
+  ],
+  "flame": {
+    "anchor": [
+      1.6884832244560575,
+      0.849602114725067,
+      -0.01612882632817542
+    ],
+    "suggestedHeight": 0.72,
+    "suggestedWidth": 0.24,
+    "note": "Source object named flame is the cotton wick. TurbulenceFD fire was not exported; animate a separate flame at this anchor."
+  },
+  "binarySha256": "2c99d616ef9ac6fb80c52bea047f12860ec9ed886cdda8577ebb9dadfa9651df",
+  "optimization": {
+    "method": "Quadric error edge collapses, preserve border, interpolate authored normals",
+    "library": "fast-simplification 0.2.0",
+    "excluded": [
+      "external ground Plane",
+      "hidden Capsule simulation emitter",
+      "Camera",
+      "OctaneLight",
+      "empty TurbulenceFD_Container"
+    ],
+    "uv": "No UV buffer needed: source includes UV sets but no images or material assignments."
+  }
+}

@@ -1,0 +1,91 @@
+/* The existing orb hands the stage to this short, original CIRS editorial reveal. */
+.cirs-intro[hidden]{display:none!important}
+.cirs-intro{position:absolute;inset:0;z-index:9;overflow:hidden;pointer-events:none;background:#1c1a17;color:#f4e8d2;isolation:isolate}
+.cirs-intro__stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 48% 45%,#41362b 0%,#24211c 55%,#171613 100%);perspective:1200px}
+.cirs-intro__stage::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(19,18,16,.33),transparent 52%),linear-gradient(0deg,rgba(20,19,17,.35),transparent 55%)}
+.cirs-intro__lines{position:absolute;inset:-5%;width:110%;height:110%;z-index:2;fill:none;stroke:#f3e5ca;stroke-width:2.2;stroke-linecap:round;opacity:.86;pointer-events:none}
+.cirs-intro__lines path{stroke-dasharray:1900;stroke-dashoffset:1900}
+.cirs-intro.is-playing .cirs-intro__lines{animation:cirs-lines-vanish 1.15s ease 1.35s both}
+.cirs-intro.is-playing .cirs-intro__lines path{animation:cirs-line-draw 1.48s cubic-bezier(.18,.4,.22,1) both}
+.cirs-intro.is-playing .cirs-intro__lines path:nth-child(2){animation-delay:.13s}
+.cirs-intro.is-playing .cirs-intro__lines path:nth-child(3){animation-delay:.22s}
+.cirs-intro.is-playing .cirs-intro__lines path:nth-child(4){animation-delay:.31s}
+.cirs-intro__word{position:absolute;left:50%;top:50%;z-index:4;white-space:nowrap;font:800 clamp(100px,17.7vw,290px)/.82 Newsreader,Georgia,serif;letter-spacing:-.105em;padding-right:.13em;color:#f4e8d2;text-shadow:0 5px 30px #0003;transform:translate(-50%,-50%);transform-origin:center}
+.cirs-intro__word::before{content:"CIRS";position:absolute;inset:0;color:transparent;-webkit-text-stroke:1.5px #f4e8d2;clip-path:inset(0 100% 0 0);pointer-events:none}
+.cirs-intro__word span{display:block;clip-path:inset(0 100% 0 0)}
+.cirs-intro.is-playing .cirs-intro__word{animation:cirs-word-move 6.8s cubic-bezier(.18,.66,.2,1) both,cirs-word-white 6.8s linear both}
+.cirs-intro.is-playing .cirs-intro__word::before{animation:cirs-outline-trace .98s cubic-bezier(.2,.7,.2,1) .29s both}
+.cirs-intro.is-playing .cirs-intro__word span{animation:cirs-word-reveal .54s cubic-bezier(.22,.7,.2,1) .88s both}
+.cirs-intro__photo-wrap{position:absolute;z-index:2;width:min(52vw,760px);aspect-ratio:1600/1006;left:67%;top:51%;overflow:hidden;border:1px solid rgba(255,255,255,.4);box-shadow:0 32px 100px #0008;transform-origin:center;backface-visibility:hidden;opacity:0}
+.cirs-intro__photo-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,18,16,.36),transparent 33%);pointer-events:none}
+.cirs-intro__photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center;backface-visibility:hidden}
+.cirs-intro.is-playing .cirs-intro__photo-wrap{animation:cirs-photo-entry 6.8s cubic-bezier(.22,.72,.18,1) both}
+.cirs-intro.is-playing .cirs-intro__photo{animation:cirs-photo-invert 2.1s ease-out both}
+.cirs-intro__values{position:absolute;z-index:4;left:8.5%;right:48%;top:47%;display:flex;flex-direction:column;gap:.045em;font:700 clamp(38px,5.4vw,89px)/.99 Newsreader,Georgia,serif;letter-spacing:-.075em;color:#f6ead5;text-shadow:0 4px 22px #0007}
+.cirs-intro__values span{display:block;overflow:hidden;padding-bottom:.12em}
+.cirs-intro__values b{display:block;font:inherit;opacity:0;transform:translate3d(0,115%,0)}
+.cirs-intro.is-playing .cirs-intro__values span:nth-child(1) b{animation:cirs-value-rise .72s cubic-bezier(.2,.72,.18,1) 2.50s both}
+.cirs-intro.is-playing .cirs-intro__values span:nth-child(2) b{animation:cirs-value-rise .72s cubic-bezier(.2,.72,.18,1) 2.96s both}
+.cirs-intro.is-playing .cirs-intro__values span:nth-child(3) b{animation:cirs-value-rise .72s cubic-bezier(.2,.72,.18,1) 3.42s both}
+.cirs-intro.is-playing{animation:cirs-intro-out 6.8s linear both}
+@keyframes cirs-line-draw{to{stroke-dashoffset:0}}
+@keyframes cirs-lines-vanish{from{opacity:.86}to{opacity:0;transform:scale(1.04)}}
+@keyframes cirs-outline-trace{0%{clip-path:inset(0 100% 0 0);opacity:1}75%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 0 0);opacity:0}}
+@keyframes cirs-word-reveal{to{clip-path:inset(0 0 0 0)}}
+@keyframes cirs-word-move{0%,29%{transform:translate(-50%,-50%) scale(1)}45%,100%{transform:translate(calc(-50% - 31vw),calc(-50% - 31vh)) scale(.55)}}
+@keyframes cirs-word-white{0%,28%{color:#f4e8d2;text-shadow:0 5px 30px #0003}42%,100%{color:#fff;font-weight:800;text-shadow:0 3px 26px #0007}}
+@keyframes cirs-photo-entry{
+  0%,24%{opacity:0;transform:translate3d(-35%,-50%,0) rotateY(-83deg) scale(.73)}
+  36%{opacity:1;transform:translate3d(-50%,-50%,0) rotateY(0) scale(.93)}
+  49%{opacity:1;transform:translate3d(-47%,-51%,0) rotateY(0) scale(.99)}
+  62%{opacity:1;transform:translate3d(-45%,-54%,0) rotateY(0) scale(1.02)}
+  75%,100%{opacity:1;transform:translate3d(-42%,-56%,0) rotateY(0) scale(1.04)}
+}
+@keyframes cirs-photo-invert{0%,69%{filter:invert(1) grayscale(1)}100%{filter:invert(0) grayscale(1)}}
+@keyframes cirs-value-rise{to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes cirs-intro-out{0%,85%{opacity:1}100%{opacity:0}}
+/* This sentence is also real DOM text for assistive technology. Its visible
+   rendering is a flat curved decal on the actual first floor terrace. */
+#spiritual:not(.is-fallback) .invocation{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media(max-width:700px){
+  .cirs-intro__word{font-size:clamp(90px,26vw,150px)}
+  .cirs-intro__stage::after{background:linear-gradient(0deg,#1b1918d9 3%,#1b191800 76%)}
+  .cirs-intro__photo-wrap{width:92vw;left:50%;top:49%;aspect-ratio:1600/1006}
+  .cirs-intro__photo{object-position:center}
+  .cirs-intro__values{left:7%;right:5%;top:auto;bottom:10%;font-size:clamp(34px,9.5vw,58px)}
+  @keyframes cirs-word-move{0%,29%{transform:translate(-50%,-50%) scale(1)}45%,100%{transform:translate(calc(-50% - 16vw),calc(-50% - 33vh)) scale(.68)}}
+  @keyframes cirs-photo-entry{
+    0%,24%{opacity:0;transform:translate3d(-25%,-50%,0) rotateY(-83deg) scale(.73)}
+    36%{opacity:.88;transform:translate3d(-50%,-50%,0) rotateY(0) scale(.94)}
+    49%{opacity:.88;transform:translate3d(-48%,-51%,0) rotateY(0) scale(.98)}
+    62%{opacity:.88;transform:translate3d(-52%,-55%,0) rotateY(0) scale(1.01)}
+    75%,100%{opacity:.88;transform:translate3d(-50%,-58%,0) rotateY(0) scale(1.02)}
+  }
+}
+@media(min-width:701px){
+  /* The photograph grows from a turning card into the entire editorial stage. */
+  .cirs-intro__photo-wrap{width:100vw;height:100%;aspect-ratio:auto;left:50%;top:50%;border:0;box-shadow:none}
+  .cirs-intro__photo-wrap::after{background:linear-gradient(90deg,rgba(10,9,8,.76) 0%,rgba(10,9,8,.5) 43%,rgba(10,9,8,.24) 100%)}
+  .cirs-intro__photo{object-position:48% 50%}
+  .cirs-intro.is-playing .cirs-intro__photo-wrap{animation:cirs-photo-entry-desktop 6.8s cubic-bezier(.22,.72,.18,1) both}
+  .cirs-intro.is-playing .cirs-intro__photo{animation:cirs-photo-invert-desktop 2.1s ease-out both,cirs-photo-pan-desktop 6.8s cubic-bezier(.18,.4,.25,1) both}
+  .cirs-intro__values{left:6%;right:5%;top:42%;gap:0;font:800 clamp(55px,8vw,134px)/.89 Newsreader,Georgia,serif;letter-spacing:-.078em;color:#fff;text-shadow:0 4px 25px #000b,0 1px 3px #000a}
+  .cirs-intro__values span{white-space:nowrap;padding-bottom:.13em}
+  @keyframes cirs-photo-entry-desktop{
+    0%,24%{opacity:0;transform:translate3d(-50%,-50%,0) rotateY(-84deg) scale(.42)}
+    36%{opacity:1;transform:translate3d(-50%,-50%,0) rotateY(0) scale(.7)}
+    53%{opacity:1;transform:translate3d(-50%,-50%,0) rotateY(0) scale(.96)}
+    75%{opacity:1;transform:translate3d(-50%,-50%,0) rotateY(0) scale(1.04)}
+    100%{opacity:1;transform:translate3d(-50%,-50%,0) rotateY(0) scale(1.12)}
+  }
+  @keyframes cirs-photo-invert-desktop{
+    0%,69%{filter:invert(1) grayscale(1) brightness(.72) contrast(1.12)}
+    100%{filter:invert(0) grayscale(1) brightness(.72) contrast(1.12)}
+  }
+  @keyframes cirs-photo-pan-desktop{
+    0%,24%{transform:scale(1.02) translate3d(0,0,0)}
+    53%{transform:scale(1.06) translate3d(-1%,0,0)}
+    100%{transform:scale(1.11) translate3d(-4%,-1.5%,0)}
+  }
+}
+@media(prefers-reduced-motion:reduce){.cirs-intro{display:none!important}}

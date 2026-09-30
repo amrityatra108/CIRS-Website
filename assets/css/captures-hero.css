@@ -20,7 +20,7 @@
 
 .toe{
   --toe-ground:var(--captures-ground);
-  --toe-exit:90vh;
+  --toe-exit:180vh;
   --W:100vw;
   --H:100vh;
   --P:calc(max(100vw, 100vh) * .95);
@@ -349,7 +349,7 @@ body.captures.toe-on #totop{
    ------------------------------------------------------------ */
 
 @media (max-width:720px){
-  .toe{ --toe-exit:70vh; }
+  .toe{ --toe-exit:140vh; }
   .toe__card--wide{ display:none; }
   .toe__card{
     --x:var(--nsx);

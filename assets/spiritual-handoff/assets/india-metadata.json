@@ -1,0 +1,132 @@
+{
+  "formatVersion": 1,
+  "count": 90000,
+  "stride": 3,
+  "strideBytes": 12,
+  "componentType": "float32",
+  "endianness": "little",
+  "layout": [
+    "x",
+    "y",
+    "z"
+  ],
+  "sourceURL": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson",
+  "sourceName": "Natural Earth 1:50m Admin 0 Countries",
+  "sourceFeature": "ADM0_A3=IND",
+  "sourceRetrieved": "2026-09-27",
+  "sourceSnapshot": "../tools/data/india-natural-earth.geojson",
+  "sourceSHA256": "3a61ad4cd519a91010e5a374d5cc8ff7ce58617b74815a96d461395463b40749",
+  "particleSHA256": "e21c795c79da6bc83c001bb842fe12c82630088f2cc0eadc08c173851697b9cc",
+  "license": "Public domain",
+  "licenseURL": "https://www.naturalearthdata.com/about/terms-of-use/",
+  "representation": "Artistic silhouette using Natural Earth's supplied boundary representation, without manual changes. It is not an official national boundary map.",
+  "sampling": {
+    "seed": 27092026,
+    "generator": "numpy.random.PCG64",
+    "numpyVersion": "2.3.5",
+    "interiorCount": 72000,
+    "outlineCount": 18000,
+    "componentCount": 14,
+    "components": [
+      {
+        "polygon": 0,
+        "interior": 71338,
+        "outline": 16530
+      },
+      {
+        "polygon": 1,
+        "interior": 60,
+        "outline": 157
+      },
+      {
+        "polygon": 2,
+        "interior": 43,
+        "outline": 69
+      },
+      {
+        "polygon": 3,
+        "interior": 42,
+        "outline": 65
+      },
+      {
+        "polygon": 4,
+        "interior": 43,
+        "outline": 72
+      },
+      {
+        "polygon": 5,
+        "interior": 43,
+        "outline": 79
+      },
+      {
+        "polygon": 6,
+        "interior": 42,
+        "outline": 60
+      },
+      {
+        "polygon": 7,
+        "interior": 54,
+        "outline": 130
+      },
+      {
+        "polygon": 8,
+        "interior": 42,
+        "outline": 68
+      },
+      {
+        "polygon": 9,
+        "interior": 130,
+        "outline": 553
+      },
+      {
+        "polygon": 10,
+        "interior": 42,
+        "outline": 65
+      },
+      {
+        "polygon": 11,
+        "interior": 41,
+        "outline": 65
+      },
+      {
+        "polygon": 12,
+        "interior": 40,
+        "outline": 40
+      },
+      {
+        "polygon": 13,
+        "interior": 40,
+        "outline": 47
+      }
+    ],
+    "interiorMethod": "Planar area-uniform rejection per polygon, with minimum 40 samples per component",
+    "outlineMethod": "Stratified arc-length per outer ring, with minimum 24 samples per component"
+  },
+  "bounds": {
+    "min": [
+      -1.7409543991088867,
+      -1.84978449344635,
+      -0.06400000303983688
+    ],
+    "max": [
+      1.7409435510635376,
+      1.849899172782898,
+      0.06400000303983688
+    ]
+  },
+  "normalizedOutlineBounds": {
+    "min": [
+      -1.7410249580524457,
+      -1.8500000000000003
+    ],
+    "max": [
+      1.741024958052444,
+      1.8499999999999996
+    ]
+  },
+  "projection": {
+    "type": "equirectangular",
+    "standardParallelDegrees": 22
+  },
+  "diagnostic": "../tests/india-particles-diagnostic.png"
+}

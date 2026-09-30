@@ -28,20 +28,23 @@ fs.mkdirSync(output,{recursive:true});
   await a.fill('1.5');await b.press('Enter');assert.equal(await a.evaluate(el=>el.validity.stepMismatch),true);assert.match(await p.locator('[data-lab-progress]').textContent(),/0 of 2/);
   await p.close();
  });
- await run('Art '+name+': native default, seek/end, optional scroll forward/back, rewind and mode switch',async()=>{
+ await run('Art '+name+': native controls, play/pause, seek/end and lifecycle pause',async()=>{
   const p=await page({viewport});await p.goto(base+'/art-attack.html');await p.waitForFunction(()=>document.querySelector('[data-aa-opening-video]').readyState>=2);
   assert.equal(await p.locator('video').first().evaluate(v=>v.controls),true);
   await p.locator('[data-aa-opening-video]').evaluate(v=>{v.pause();v.currentTime=Math.max(0,v.duration-.3);v.play();});
   await p.waitForFunction(()=>document.querySelector('[data-aa-opening-video]').ended);
-  await p.locator('[data-art-rewind]').click();await p.waitForFunction(()=>document.querySelector('[data-aa-opening-video]').currentTime<.1);
-  await p.locator('[data-art-mode]').click();assert.equal(await p.locator('[data-aa-opening-video]').evaluate(v=>v.controls),false);
-  for(const progress of [.7,.2,1]){
-   await p.evaluate(p=>{const h=document.querySelector('[data-aa-video-hero]');scrollTo({top:h.offsetTop+(h.offsetHeight-h.querySelector('.aa-video-hero__frame').offsetHeight)*p,behavior:'instant'});},progress);
-   await p.waitForFunction(p=>{const v=document.querySelector('[data-aa-opening-video]');return !v.seeking&&Math.abs(v.currentTime-Math.min(v.duration-.03,v.duration*p))<.2;},progress,{timeout:10000});
-  }
-  await p.screenshot({path:output+'/art-'+name+'-scroll-end.png'});
-  await p.locator('[data-art-rewind]').click();await p.waitForFunction(()=>document.querySelector('[data-aa-opening-video]').currentTime<.1);
-  await p.locator('[data-art-mode]').click();assert.equal(await p.locator('[data-aa-opening-video]').evaluate(v=>v.controls&&v.paused),true);
+  assert.equal(await p.locator('[data-art-mode],[data-art-rewind]').count(),0);
+  await p.locator('[data-aa-opening-video]').evaluate(v=>{v.pause();v.currentTime=0;});
+  await p.waitForFunction(()=>document.querySelector('[data-aa-opening-video]').currentTime<.1);
+  await p.locator('[data-aa-opening-video]').evaluate(v=>v.play());
+  await p.waitForFunction(()=>document.querySelector('[data-aa-opening-video]').currentTime>.2);
+  await p.locator('[data-aa-opening-video]').evaluate(v=>{v.pause();v.currentTime=2;});
+  await p.waitForFunction(()=>{const v=document.querySelector('[data-aa-opening-video]');return v.paused&&!v.seeking&&Math.abs(v.currentTime-2)<.1;});
+  await p.locator('[data-aa-opening-video]').evaluate(v=>v.play());
+  await p.waitForFunction(()=>!document.querySelector('[data-aa-opening-video]').paused);
+  await p.evaluate(()=>dispatchEvent(new PageTransitionEvent('pagehide')));
+  await p.waitForFunction(()=>document.querySelector('[data-aa-opening-video]').paused);
+  assert.equal(await p.locator('[data-aa-opening-video]').evaluate(v=>v.controls),true);
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await p.screenshot({path:output+'/art-'+name+'-native.png'});await p.close();
  });
@@ -50,7 +53,7 @@ fs.mkdirSync(output,{recursive:true});
   const p=await page({reducedMotion:'reduce'});await p.goto(base+'/math-challenge.html#cube-lab');
   for(const [a,b] of [['1','12'],['9','10']]){await p.getByLabel('First edge').fill(a);await p.getByLabel('Second edge').fill(b);await p.getByRole('button',{name:'Check pair'}).click();}
   assert.equal(await p.locator('.math-lab__model').evaluate(e=>getComputedStyle(e).animationName),'none');
-  await p.goto(base+'/art-attack.html');assert.equal(await p.locator('[data-art-mode]').isDisabled(),true);assert.equal(await p.locator('[data-aa-opening-video]').evaluate(v=>v.paused&&v.controls),true);await p.close();
+  await p.goto(base+'/art-attack.html');assert.equal(await p.locator('[data-art-mode]').count(),0);assert.equal(await p.locator('[data-aa-opening-video]').evaluate(v=>v.paused&&v.controls),true);await p.close();
  });
  await run('Shared decorative video: offscreen pause/resume respects manual pause',async()=>{
   const p=await page();await p.goto(base+'/admissions.html');await p.waitForFunction(()=>{const v=document.querySelector('.pagehero__video');return v&&!v.paused;});
@@ -72,18 +75,17 @@ fs.mkdirSync(output,{recursive:true});
   await p.waitForFunction(()=>document.querySelector('[data-film]').hasAttribute('data-film-still'),{},{timeout:6500});
   await p.waitForFunction(()=>{const s=document.querySelector('[data-film]');return !s.hasAttribute('data-film-still')&&s.querySelector('video').readyState>=2;},{},{timeout:15000});await p.close();
  });
- await run('Art delayed media: early rewind, rapid mode switch and changed motion preference',async()=>{
+ await run('Art delayed media: native playback, seeking and changed motion preference',async()=>{
   const p=await page();await p.route('**/assets/video/**',async r=>{await new Promise(resolve=>setTimeout(resolve,1800));await r.continue().catch(()=>{});});
-  await p.goto(base+'/art-attack.html',{waitUntil:'domcontentloaded'});await p.locator('[data-art-rewind]').click();
+  await p.goto(base+'/art-attack.html',{waitUntil:'domcontentloaded'});
+  assert.equal(await p.locator('[data-art-mode],[data-art-rewind]').count(),0);
   await p.waitForFunction(()=>document.querySelector('[data-aa-opening-video]').readyState>=2);
   await p.locator('[data-aa-opening-video]').evaluate(v=>v.play());
   await p.waitForFunction(()=>document.querySelector('[data-aa-opening-video]').currentTime>1);
-  await p.locator('[data-art-rewind]').click();await p.locator('[data-art-mode]').click();
-  await p.evaluate(()=>{const h=document.querySelector('[data-aa-video-hero]');scrollTo({top:h.offsetTop+(h.offsetHeight-h.querySelector('.aa-video-hero__frame').offsetHeight)*.5,behavior:'instant'});});
+  await p.locator('[data-aa-opening-video]').evaluate(v=>{v.pause();v.currentTime=v.duration*.5;});
   await p.waitForFunction(()=>{const v=document.querySelector('[data-aa-opening-video]');return !v.seeking&&Math.abs(v.currentTime-v.duration*.5)<.2;});
   await p.emulateMedia({reducedMotion:'reduce'});
-  await p.waitForFunction(()=>document.querySelector('[data-art-mode]').disabled);
-  assert.equal(await p.locator('[data-art-mode]').isDisabled(),true);
+  assert.equal(await p.locator('[data-art-mode]').count(),0);
   assert.equal(await p.locator('[data-aa-opening-video]').evaluate(v=>v.paused&&v.controls),true);await p.close();
  });
  assert.deepEqual(errors,[], 'No page JavaScript errors');

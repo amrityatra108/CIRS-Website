@@ -12,15 +12,6 @@
    if(!reduced.matches){document.documentElement.classList.add('rd-math-live');set(0);const update=()=>{frame=0;let i=0;reasons.forEach((r,k)=>{if(r.getBoundingClientRect().top<innerHeight*.55)i=k});set(i)};const queue=()=>{if(!frame)frame=requestAnimationFrame(update)};addEventListener('scroll',queue,{passive:true,signal});cleanups.push(()=>{removeEventListener('scroll',queue);cancelAnimationFrame(frame);});}else set(3);
    cleanups.push(()=>{math.removeEventListener('click',click);run?.cancel();scan.style.display='none';document.documentElement.classList.remove('rd-math-live');});
   }
-  const magazine=document.querySelector('.rd-magazine');
-  if(magazine&&!reduced.matches&&wide.matches&&window.gsap&&window.ScrollTrigger){
-   document.documentElement.classList.add('rd-magazine-on');
-   const context=gsap.context(()=>{
-    const timeline=gsap.timeline({scrollTrigger:{trigger:magazine,start:'top 90px',end:'bottom bottom',scrub:true}});
-    timeline.fromTo('.rd-magazine__cover',{rotation:-7,xPercent:35},{rotation:0,xPercent:0,ease:'none'},0)
-     .fromTo('.rd-magazine__inside',{rotation:7,xPercent:-30,clipPath:'inset(0 0 100% 0)'},{rotation:0,xPercent:0,clipPath:'inset(0 0 0% 0)',ease:'none'},0);
-   },magazine);cleanups.push(()=>{context.revert();document.documentElement.classList.remove('rd-magazine-on');});
-  }
   document.querySelectorAll('[data-rd-chapters]').forEach(section=>{
    const links=[...section.querySelectorAll('nav a[href^="#"]')],panels=links.map(a=>document.querySelector(a.getAttribute('href')));let frame=0;
    const update=()=>{frame=0;let active=0;panels.forEach((p,i)=>{if(p&&p.getBoundingClientRect().top<innerHeight*.5)active=i;});links.forEach((a,i)=>{if(i===active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});};

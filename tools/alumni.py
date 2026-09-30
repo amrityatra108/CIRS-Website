@@ -9,9 +9,10 @@ tools/pages/alumni.html except the chapters' own copy.
 
 Destination institutions come from the sanitized, institution-only
 alumni-destinations.json. The raw registration workbook and row-level review
-remain outside this repository. Map coordinates exist only for the previously
-published, school-approved points; other identified institutions stay in the
-searchable directory without guessed locations.
+remain outside this repository. Previously published map coordinates are kept.
+Additional campus reference points have public location sources recorded in
+the dataset; they do not identify the campus an alumnus attended. Institutions
+without reviewed locations stay in the directory without guessed coordinates.
 
 The page also includes source-linked biographies and four photographs
 supplied by CIRS. Batch years and unverified personal details are omitted.
@@ -49,7 +50,7 @@ from html import escape
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import robinson          # noqa: E402  the projection, shared with make-worldmap.py
 # Country boundaries are generated offline in the same projection as the markers.
-COUNTRIES = json.loads(Path(__file__).with_name("alumni-countries.json").read_text())["countries"]
+COUNTRIES = json.loads(Path(__file__).with_name("alumni-countries.json").read_text(encoding="utf-8"))["countries"]
 COUNTRY_NAMES = {"United States of America": "United States"}
 
 # ------------------------------------------------------------------
@@ -74,8 +75,8 @@ REGIONS = [
 # tools/robinson.py for why that projection and not a web one), with
 # CIRS on it where Coimbatore is and every destination where it is.
 # Distance on it means distance. Nothing is art-directed except which
-# side of a point its name sits on, and that only because five of the
-# nineteen are in Britain.
+# side of a point its name sits on, with small disclosed display offsets
+# where several institutions share a city.
 #
 # Positions come out of robinson.project() in viewBox units — the frame
 # is VB_W across and VB_H down — and go into the page as percentages of
@@ -93,7 +94,7 @@ def route(ax, ay, bx, by):
     """A flight path from (ax, ay) to (bx, by), as a cubic bezier.
 
     A straight line between two points on a flat map is not the way
-    anybody travels, and nineteen straight lines out of one point is a
+    anybody travels, and straight lines out of one point form a
     starburst. These bow — always toward the top of the frame, because
     that is the side a great circle leans on for every route on this
     map — by a share of their own length, capped so that Coimbatore to
@@ -117,9 +118,9 @@ def route(ax, ay, bx, by):
 # ------------------------------------------------------------------
 # The destinations: institutions CIRS students have gone on to.
 #
-# Previously published points retain their reviewed coordinates. Identified
-# alumni-reported institutions without reviewed campus locations are listed
-# in the directory only.
+# Previously published points retain their reviewed coordinates. Publicly
+# reviewed campus reference locations carry coordinate_review provenance.
+# Neither kind of point confirms an individual's campus or attendance.
 #
 #   key       stable id, used by the panel and the index
 #   name      as it should read in full
@@ -464,7 +465,7 @@ def country_controls():
 
 
 def constellation_html():
-    """The map: nineteen destinations, and the routes out to them.
+    """The mapped destinations and their illustrative routes from Siruvani.
 
     The named points are HTML buttons over the top of the SVG, because a
     button is the only thing reliably focusable, announceable and
@@ -475,16 +476,19 @@ def constellation_html():
     so a name keeps the clearance it was placed with at every width the
     map is drawn at. The field is the query container; see alumni.css.
 
-    On smaller screens the country map and text controls remain visible;
-    dense institution labels give way to the complete directory below.
+    At small map widths decorative dots and country controls remain visible.
+    Dense institution labels give way to the complete directory below.
     """
     ox, oy = ORIGIN
     total = len(MAPPED_DESTINATIONS)
     points = []
+    dots = []
     for i, (key, name, short, country, region,
             lat, lon, nudge, label) in enumerate(MAPPED_DESTINATIONS):
+        short = next(d for d in DESTINATION_RECORDS if d["key"] == key).get("map_short", short)
         x, y = place(lat, lon, nudge)
         lx, ly, side = label
+        dots.append('<circle cx="%.3f" cy="%.3f" r=".95"/>' % (x, y))
         points.append('''      <li class="ajc__item" data-region="%s">
         <button type="button" class="ajc__pt" disabled id="ajc-pt-%s"
                 style="--x:%.3f%%;--y:%.3f%%;--lx:%.3fcqw;--ly:%.3fcqw"
@@ -521,6 +525,8 @@ def constellation_html():
   <div class="ajc__field" data-constellation-field>
 %(map)s
 
+    <svg class="ajc__mapMarkers" viewBox="0 0 %(vw).4f %(vh).4f" aria-hidden="true" focusable="false">%(dots)s</svg>
+
     <svg class="ajc__lines" viewBox="0 0 %(vw).4f %(vh).4f"
          aria-hidden="true" focusable="false">
       <g class="ajc__routes">
@@ -539,7 +545,7 @@ def constellation_html():
     </ul>
   </div>
 
-  <p class="ajc__source"><a href="#aj-destinations">Read the full institution directory</a>. Illustrative boundaries: <a href="https://www.naturalearthdata.com/about/terms-of-use/">Natural Earth</a>, 1:50m, via world-atlas 2.0.2; Robinson projection. Counts describe institutions in this directory, not alumni totals. Countries with no entries remain available to explore.</p>
+  <p class="ajc__source"><a href="#aj-destinations">Read the full institution directory</a>. Points locate reviewed campus references, not confirmation of the campus attended; small display offsets separate nearby institutions. Routes are illustrative. Counts describe institutions in this directory, not alumni totals. Countries with no entries remain available to explore. Illustrative boundaries: <a href="https://www.naturalearthdata.com/about/terms-of-use/">Natural Earth</a>, 1:50m, via world-atlas 2.0.2; Robinson projection. Additional location data: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a> and the linked campus sources.</p>
   <dialog class="ajc__directory" id="ajc-panel" aria-labelledby="ajc-panel-name" aria-describedby="ajc-panel-note" data-lenis-prevent>
     <div class="ajc__dialogBar">
       <p class="aj-label">The institution directory</p>
@@ -547,7 +553,7 @@ def constellation_html():
     </div>
     <div class="ajc__dialogHead">
       <h3 class="serif" id="ajc-panel-name">All institutions</h3>
-      <p id="ajc-panel-note">Alumni-reported institutions are not confirmation of an individual’s attendance. Entries without reviewed campus coordinates are listed, not plotted.</p>
+      <p id="ajc-panel-note">Alumni-reported institutions are not confirmation of an individual’s attendance or campus. Points show reviewed campus references. Entries without reviewed coordinates are listed, not plotted.</p>
     </div>
     <div class="ajc__dialogTools">
       <label for="ajc-search">Search this directory</label>
@@ -562,7 +568,7 @@ def constellation_html():
               "map": map_svg(), "controls": country_controls(), "lines": routes_svg(),
               "vw": VB_W, "vh": VB_H,
               "ox": ox / VB_W * 100, "oy": oy / VB_H * 100,
-              "points": "\n".join(points)}
+              "points": "\n".join(points), "dots": "".join(dots)}
 
 
 # ==================================================================
@@ -582,11 +588,16 @@ def destinations_html():
             if r != region:
                 continue
             search = name.replace("&mdash;", "-").lower() + " " + country.lower()
-            rows.append('''          <li class="ajd__row" data-region="%s" data-search="%s" data-mapped="%s">
+            review = next(d for d in DESTINATION_RECORDS if d["key"] == key).get("coordinate_review")
+            campus = review["campus"] if review else ""
+            source = ('\n            <a class="ajd__locationSource" href="%s">Campus location source<span class="sr-only"> for %s</span></a>' %
+                      (escape(review["sources"][0], quote=True), escape(name))) if review else ""
+            campus_attr = ' data-campus="%s"' % escape(campus, quote=True) if campus else ""
+            rows.append('''          <li class="ajd__row" data-region="%s" data-search="%s" data-mapped="%s"%s>
             <span class="ajd__name">%s</span>
-            <span class="ajd__country">%s</span>
+            <span class="ajd__country">%s</span>%s
           </li>''' % (escape(region, quote=True), escape(search, quote=True),
-                     "true" if _lat is not None and _lon is not None else "false", escape(name), escape(country)))
+                     "true" if _lat is not None and _lon is not None else "false", campus_attr, escape(name), escape(country), source))
         groups.append('''      <section class="ajd__group" data-region="%s">
         <h3 class="ajd__region"><span class="sc">%s</span>
           <span class="ajd__n">%d<span class="sr-only"> destinations</span></span></h3>

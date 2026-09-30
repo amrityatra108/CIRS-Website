@@ -244,7 +244,7 @@ body.theatre .th-prologue__title{
 }
 body.theatre .th-prologue__title em{ color:var(--gold-ink); }
 body.theatre .th-prologue__fig .th-photo{ background:var(--paper-3); }
-body.theatre .th-prologue__fig .th-photo img{ aspect-ratio:4 / 5; }
+body.theatre .th-prologue__fig .th-photo img{ height:auto; aspect-ratio:auto; object-fit:contain; }
 body.theatre .th-prologue__fig .th-cap{ color:var(--ink-mute); }
 body.theatre .th-prologue__lede{
   font-family:var(--font-body); font-size:clamp(1.15rem, 1.7vw, 1.45rem); line-height:1.5;
@@ -321,15 +321,15 @@ body.theatre .th-prog__row .th-go{
 body.theatre .th-prog__preview{ display:none; }
 @media (min-width:1024px) and (hover:hover) and (pointer:fine){
   body.theatre .th-prog__body{ grid-template-columns:minmax(0,8fr) minmax(0,4fr); gap:clamp(40px, 5vw, 88px); align-items:stretch; }
-  body.theatre .th-prog__preview{ display:block; position:relative; }
+  body.theatre .th-prog__preview{ display:block; position:relative; align-self:start; aspect-ratio:3 / 2; }
   body.theatre .th-prog__stack{ position:absolute; inset:0; background:var(--paper-3); overflow:hidden; }
   body.theatre .th-prog__slide{
     position:absolute; inset:0; display:flex; flex-direction:column;
     background:var(--paper-3); visibility:hidden;
   }
   body.theatre .th-prog__slide.is-on{ visibility:visible; }
-  body.theatre .th-prog__slide img{
-    flex:1; min-height:0; width:100%; height:100%; object-fit:cover;
+body.theatre .th-prog__slide img{
+      flex:1; min-height:0; width:100%; height:100%; object-fit:contain;
     object-position:var(--fx, 50%) var(--fy, 50%);
   }
   /* A still from a recording is shown whole, with its own lettering, on the
@@ -488,15 +488,14 @@ body.theatre .th-au__row--court .th-fig{ display:grid; gap:var(--space-4) var(--
 @media (min-width:900px){
   body.theatre .th-au__row--court .th-fig{ grid-template-columns:minmax(0,8fr) minmax(0,4fr); }
 }
-body.theatre .th-au__row--court .th-photo img{ aspect-ratio:3 / 2; }
+body.theatre .th-au__row--court .th-photo img{ height:auto; aspect-ratio:auto; object-fit:contain; }
 
 body.theatre .th-bleed{ position:relative; }
-body.theatre .th-bleed .th-photo img{ aspect-ratio:21 / 9; }
+body.theatre .th-bleed .th-photo img{ height:auto; aspect-ratio:auto; object-fit:contain; }
 body.theatre .th-bleed > .th-cap{ padding-inline:var(--gut); max-width:calc(var(--maxw) + 2 * var(--gut)); margin-inline:auto; }
-@media (max-width:760px){ body.theatre .th-bleed .th-photo img{ aspect-ratio:3 / 2; } }
 
 body.theatre .th-au__row--mountain .th-fig{ display:grid; gap:var(--space-4) var(--space-6); align-items:end; }
-body.theatre .th-au__row--mountain .th-photo img{ aspect-ratio:3 / 2; }
+body.theatre .th-au__row--mountain .th-photo img{ height:auto; aspect-ratio:auto; object-fit:contain; }
 @media (min-width:900px){
   body.theatre .th-au__row--mountain .th-fig{ grid-template-columns:minmax(0,3fr) minmax(0,7fr); }
   body.theatre .th-au__row--mountain .th-photo{ grid-column:2; grid-row:1; }
@@ -668,9 +667,9 @@ body.theatre .th-bill__preview{ display:none; }
   body.theatre .th-bill__body{ grid-template-columns:minmax(0,8fr) minmax(0,4fr); gap:clamp(40px, 5vw, 88px); }
   body.theatre .th-bill__list.is-live .th-bill__row:not(.is-active){ opacity:.38; }
   body.theatre .th-bill__preview{ display:block; position:sticky; top:104px; align-self:start; margin:0; padding-top:var(--space-6); }
-  body.theatre .th-bill__stack{ position:relative; aspect-ratio:4 / 5; max-height:calc(100svh - 240px); background:#000; overflow:hidden; }
+  body.theatre .th-bill__stack{ position:relative; aspect-ratio:3 / 2; background:#000; overflow:hidden; }
   body.theatre .th-bill__img{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
     object-position:var(--fx) var(--fy); visibility:hidden;
   }
   body.theatre .th-bill__img.is-on{ visibility:visible; }
@@ -738,7 +737,7 @@ body.theatre .th-house[data-house="vishwamitra"]{ --hc:var(--th-vishwamitra); }
 body.theatre .th-house[data-house="vyasa"]{ --hc:var(--th-vyasa); }
 body.theatre .th-house + .th-house{ border-top:1px solid var(--th-line); padding-top:clamp(var(--space-8), 8vw, var(--space-10)); }
 body.theatre .th-house__lead{ position:relative; margin:0; background:#000; }
-body.theatre .th-house__lead .th-photo img{ aspect-ratio:16 / 9; max-height:90svh; }
+body.theatre .th-house__lead .th-photo img{ height:auto; aspect-ratio:auto; object-fit:contain; }
 body.theatre .th-house__label{
   position:absolute; left:0; right:0; bottom:0;
   display:flex; align-items:flex-end; gap:clamp(var(--space-4), 2.4vw, var(--space-7));
@@ -763,7 +762,6 @@ body.theatre .th-house__play:focus{ outline:none; }
 body.theatre .th-house__play:focus-visible{ outline:2px solid var(--th-gold); outline-offset:6px; }
 body.theatre .th-house__count{ font-size:var(--fs-sm); color:var(--th-mute); }
 @media (max-width:760px){
-  body.theatre .th-house__lead .th-photo img{ aspect-ratio:3 / 2; }
   body.theatre .th-house__label{ position:static; padding:var(--space-5) var(--gut) 0; background:none; }
 }
 
@@ -775,12 +773,8 @@ body.theatre .th-watch--dark{ width:100%; }
 body.theatre .th-house__note{ width:100%; margin:0; font-size:var(--fs-sm); font-style:italic; color:var(--th-mute); }
 body.theatre .th-house__bar .th-watch{ flex:1 1 auto; width:auto; }
 
-/* The reel: one finite row of a house's photographs, the current one large
-   and its neighbours at the edges. It scrolls sideways by itself with the
-   page left alone: a vertical wheel still moves the page, a trackpad swipe
-   or a finger moves the reel, the arrows and the arrow keys step it, and it
-   ends where the photographs end. On a phone it is a plain column, folded
-   away under one button. */
+/* Each house's photographs continue down the page in their original order.
+   On a phone the same column is folded under the existing gallery button. */
 body.theatre .th-reel{ padding-top:clamp(var(--space-6), 4vw, var(--space-8)); }
 body.theatre .th-reel__bar{
   display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
@@ -792,47 +786,18 @@ body.theatre .th-reel__id{
 }
 body.theatre .th-reel__house{ color:#fff; font-weight:600; }
 body.theatre .th-reel__count{ color:var(--th-mute); font-variant-numeric:tabular-nums; }
-body.theatre .th-reel__ctl{ display:flex; gap:10px; }
-body.theatre .th-reel__ctl[hidden]{ display:none; }
-body.theatre .th-reel__btn{
-  display:inline-grid; place-items:center; width:46px; height:46px; border-radius:50%;
-  border:1px solid var(--th-line); color:#fff;
-  transition:border-color .2s var(--e), opacity .2s var(--e);
-}
-body.theatre .th-reel__btn:hover{ border-color:var(--th-gold); }
-body.theatre .th-reel__btn:focus-visible{ outline:2px solid var(--th-gold); outline-offset:3px; }
-body.theatre .th-reel__btn:disabled{ opacity:.3; cursor:default; border-color:var(--th-line); }
 body.theatre .th-reel__sum{ display:none; }
+body.theatre .th-reel__track{
+  display:grid; gap:var(--space-8);
+  width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gut);
+}
+body.theatre .th-reel__slide{ min-width:0; }
+body.theatre .th-reel__slide .th-photo{ aspect-ratio:var(--ar); background:#000; }
+body.theatre .th-reel__slide .th-photo img{ height:auto; object-fit:contain; }
+body.theatre .th-reel__slide .th-cap{ margin-top:12px; }
 
 @media (min-width:761px){
-  body.theatre .th-reel{ --reel-h:clamp(300px, 64svh, 720px); --cap-h:56px; }
-  body.theatre .th-reel__viewport{
-    overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory;
-    overscroll-behavior-x:contain; scrollbar-width:none;
-  }
-  body.theatre .th-reel__viewport::-webkit-scrollbar{ display:none; }
-  body.theatre .th-reel__viewport:focus-visible{ outline:2px solid var(--th-gold); outline-offset:-2px; }
-  body.theatre .th-reel__track{
-    display:flex; align-items:flex-start; gap:clamp(14px, 2.2vw, 32px);
-    height:var(--reel-h); padding-inline:var(--pad-s, max(var(--gut), 16vw)) var(--pad-e, max(var(--gut), 16vw));
-    width:max-content; min-width:100%;
-  }
-  /* A slide is as wide as its photograph is at the reel's height (--arn is
-     the photograph's own proportion, written beside it from the manifest). */
-  body.theatre .th-reel__slide{
-    flex:none; height:100%; width:calc((var(--reel-h) - var(--cap-h)) * var(--arn));
-    scroll-snap-align:center; scroll-snap-stop:always;
-    transform:scale(calc(.925 + .075 * var(--near, 1))); transform-origin:50% 42%;
-    opacity:calc(.48 + .52 * var(--near, 1));
-  }
-  body.theatre .th-reel__slide .th-photo{ height:calc(var(--reel-h) - var(--cap-h)); background:#000; }
-  body.theatre .th-reel__slide .th-photo img{
-    transform:translateX(calc(var(--dx, 0) * 3.5%)) scale(1.07);
-  }
-  body.theatre .th-reel__slide .th-cap{
-    height:calc(var(--cap-h) - 12px); overflow:hidden; margin-top:12px;
-    opacity:var(--near, 1);
-  }
+  body.theatre .th-reel__viewport{ overflow:visible; }
 }
 @media (max-width:760px){
   body.theatre .th-reel__bar{ display:none; }

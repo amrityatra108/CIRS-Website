@@ -385,6 +385,7 @@ def reader_html():
             options.append(f'          <optgroup label="{GROUPS[group]}">')
         tabs.append(f'''        <button type="button" class="ld-idx__tab" role="tab" id="msg-tab-{m["id"]}"
                 aria-controls="msg-{m["id"]}" aria-selected="{"true" if on else "false"}"{"" if on else ' tabindex="-1"'}>
+          <span class="ld-idx__face" aria-hidden="true">{img(m["slug"], "", "40px")}</span>
           <span class="ld-idx__name">{m["short"]}</span>
           <span class="ld-idx__role">{m["role"]}</span>
         </button>''')
