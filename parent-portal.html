@@ -24,34 +24,20 @@
 <meta name="twitter:title" content="Parent Portal">
 <meta name="twitter:description" content="Use the school's separate fee-payment and parent-login services, with contact details for help from CIRS.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preload" href="assets/js/navigation.js?b=115-portal-photo-1-core-3" as="script" fetchpriority="high">
+<link rel="preload" href="assets/js/navigation.js?b=115-portal-photo-2-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=115-portal-photo-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=115-portal-photo-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=115-portal-photo-1-lightbox-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=115-portal-photo-2">
+<link rel="stylesheet" href="assets/css/cirs.css?b=115-portal-photo-2">
+<link rel="stylesheet" href="assets/css/pages.css?b=115-portal-photo-2-lightbox-2">
 
-<link rel="stylesheet" href="assets/css/connect.css?b=115-portal-photo-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=115-portal-photo-1">
-<script>
-(function(){
-  if (location.hash || window.scrollY > 8 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  document.documentElement.classList.add("portal-motion-pending");
-  window.__cirsPortalMotionFallback = window.setTimeout(function(){
-    document.documentElement.classList.remove("portal-motion-pending");
-  }, 8500);
-  document.addEventListener("DOMContentLoaded", function(){
-    window.setTimeout(function(){
-      if (!window.__cirsPortalMotionBooted) document.documentElement.classList.remove("portal-motion-pending");
-    }, 700);
-  }, {once:true});
-})();
-</script>
-<link rel="stylesheet" href="assets/css/parent-portal-intro.css?b=115-portal-photo-1">
-<link rel="stylesheet" href="assets/css/footer.css?b=115-portal-photo-1-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=115-portal-photo-1-nav-5">
+<link rel="stylesheet" href="assets/css/connect.css?b=115-portal-photo-2">
+<link rel="stylesheet" href="assets/css/typography.css?b=115-portal-photo-2">
+<link rel="stylesheet" href="assets/css/parent-portal-intro.css?b=115-portal-photo-2">
+<link rel="stylesheet" href="assets/css/footer.css?b=115-portal-photo-2-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=115-portal-photo-2-nav-5">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -82,7 +68,7 @@
 </button>
 <!-- The original controls stay fixed while the shared controller changes
      only the bar's surface and ink at the opening/content boundary. -->
-<header class="header nv-header" id="header" data-header-mode="content" data-header-start="content" data-header-tone="dark" data-header-surface="light">
+<header class="header nv-header" id="header" data-header-mode="hero" data-header-start="hero" data-header-tone="dark" data-header-surface="light">
   <div class="nv-header__bar">
     <div class="nv-header__side nv-header__side--left">
       <!-- Enquire opens the contact sheet below rather than going anywhere.
@@ -275,7 +261,7 @@
   </div>
 </div>
 <main id="main">
-<section class="portal-intro" id="portal-intro" aria-label="Parent Portal opening" data-ground="#11110F">
+<section class="portal-intro" id="top" aria-label="Parent Portal opening" data-ground="#11110F">
   <div class="portal-intro__inner">
     <p class="portal-intro__label">CIRS / Parents</p>
     <div class="portal-intro__stage">
@@ -283,67 +269,61 @@
         <picture class="portal-intro__picture">
           <source media="(max-width:700px)" type="image/webp"
                   srcset="assets/img/parent-portal/reading-mobile-560.webp 560w, assets/img/parent-portal/reading-mobile-960.webp 960w"
-                  sizes="calc(100vw - 40px)">
+                  sizes="100vw">
           <source media="(max-width:700px)" type="image/jpeg"
                   srcset="assets/img/parent-portal/reading-mobile-960.jpg 960w"
-                  sizes="calc(100vw - 40px)">
+                  sizes="100vw">
           <source media="(max-width:900px) and (max-aspect-ratio:1/1)" type="image/webp"
                   srcset="assets/img/parent-portal/reading-tablet-960.webp 960w, assets/img/parent-portal/reading-tablet-1600.webp 1600w"
-                  sizes="84vw">
+                  sizes="100vw">
           <source type="image/webp"
                   srcset="assets/img/parent-portal/reading-wide-1200.webp 1200w, assets/img/parent-portal/reading-wide-2000.webp 2000w, assets/img/parent-portal/reading-wide-2600.webp 2600w"
-                  sizes="(max-width:1500px) 84vw, 1320px">
+                  sizes="100vw">
           <img class="portal-intro__image" src="assets/img/parent-portal/reading-wide-2000.jpg"
                width="2000" height="930"
                alt="An adult helps a child read a booklet during CIRS new student and parent orientation"
                fetchpriority="high" decoding="async">
         </picture>
       </div>
-      <span class="portal-intro__line" aria-hidden="true"></span>
-      <p class="portal-intro__title"><span class="portal-intro__title-word"><span>Parent</span></span><span class="portal-intro__title-word"><span>Portal</span></span></p>
+      <h1 class="portal-intro__title"><span class="portal-intro__title-word"><span>Parent</span></span> <span class="portal-intro__title-word"><span>Portal</span></span></h1>
     </div>
     <div class="portal-intro__after">
-      <p class="portal-intro__note">Fee payment, parent login, and direct school contacts.</p>
+      <p class="portal-intro__note">Fee payment and parent login are available through the school&rsquo;s separate existing systems.</p>
       <a class="portal-intro__entry" href="#portal">
-        <svg class="portal-intro__entry-border" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect x="0.5" y="0.5" width="99" height="99" pathLength="1"/></svg>
-        <span>Enter the portal</span><span class="portal-intro__entry-arrow" aria-hidden="true">&#8599;</span>
+        <span>Enter the portal</span><svg class="portal-intro__entry-arrow" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
   </div>
 </section>
-<section class="pagehead on-dark" id="top" data-ground="#181815">
-  <div class="wrap pagehead__inner">
-    <p class="marker"><span class="sc">Parents</span></p>
-    <h1 class="serif" data-split>Parent <em>Portal.</em></h1>
-    <p class="lead">Fee payment and parent login are available through the school&rsquo;s separate existing systems.</p>
-  </div>
-</section>
-<script src="assets/js/navigation.js?b=115-portal-photo-1-core-3"></script>
-<section class="section ucpage" id="portal" data-ground="#181815">
+<script src="assets/js/navigation.js?b=115-portal-photo-2-core-3"></script>
+<section class="section ucpage" id="portal" data-ground="#FAF9F3">
+  <svg class="portal-book" viewBox="0 0 440 340" fill="none" aria-hidden="true" focusable="false">
+    <path d="M220 82C171 39 94 32 30 53v234c67-22 140-13 190 31 50-44 123-53 190-31V53c-64-21-141-14-190 29Zm0 0v236M48 70v199c63-16 120-7 154 22M392 70v199c-63-16-120-7-154 22M67 94c42-8 85-1 119 18M67 126c42-8 85-1 119 18M254 112c34-19 77-26 119-18M254 144c34-19 77-26 119-18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
   <div class="wrap ucpage__inner">
-    <p class="ucpage__badge rv">
+    <p class="ucpage__badge">
       <span class="ucpage__dot" aria-hidden="true"></span>
       Parent services
     </p>
 
-    <h2 class="serif ucpage__head rv" data-split>Two ways to <em>stay connected.</em></h2>
+    <h2 class="serif ucpage__head">Two ways to <em>stay connected.</em></h2>
 
-    <p class="lead rv">Use the school&rsquo;s existing systems for fee payment and parent login.
+    <p class="lead">Use the school&rsquo;s existing systems for fee payment and parent login.
       These are separate services, each with its own sign-in.</p>
 
-    <div class="ucpage__doors rv">
+    <div class="ucpage__doors">
       <a class="btn btn--primary btn--lg" href="https://easycollege.in/cirs/school/"
          target="_blank" rel="noopener">Fee payment</a>
       <a class="btn btn--ghost btn--lg" href="https://cirs.in/school/"
          target="_blank" rel="noopener">Parent login</a>
     </div>
 
-    <p class="ucpage__doornote rv">Both open the school&rsquo;s existing systems in a new tab
+    <p class="ucpage__doornote">Both open the school&rsquo;s existing systems in a new tab
       &mdash; fee payment at easycollege.in, the parent login at cirs.in.</p>
 
-    <div class="ucpage__rule rv" aria-hidden="true"></div>
+    <div class="ucpage__rule" aria-hidden="true"></div>
 
-    <div class="ucpage__reach rv">
+    <div class="ucpage__reach">
       <p class="sc ucpage__reachlabel">Need help? Reach the school directly</p>
       <div class="ucpage__rows">
         <a class="ucpage__row" href="tel:+914222613300">
@@ -367,7 +347,7 @@
       </div>
     </div>
 
-    <p class="ucpage__foot rv">Looking for something else? The <a href="index.html">home page</a>
+    <p class="ucpage__foot">Looking for something else? The <a href="index.html">home page</a>
       has the rest of the site, and <a href="admissions.html">Admissions</a> explains
       registration and the entrance examination.</p>
   </div>
@@ -476,12 +456,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=115-portal-photo-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=115-portal-photo-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=115-portal-photo-1" defer></script>
-<script src="assets/js/cirs.js?b=115-portal-photo-1-header-5" defer></script>
-<script src="assets/js/pages.js?b=115-portal-photo-1" defer></script>
-<script src="assets/js/footer.js?b=115-portal-photo-1-footer-1" defer></script>
-<script src="assets/js/parent-portal-motion.js?b=115-portal-photo-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=115-portal-photo-2" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=115-portal-photo-2" defer></script>
+<script src="assets/vendor/lenis.min.js?b=115-portal-photo-2" defer></script>
+<script src="assets/js/cirs.js?b=115-portal-photo-2-header-5" defer></script>
+<script src="assets/js/pages.js?b=115-portal-photo-2" defer></script>
+<script src="assets/js/footer.js?b=115-portal-photo-2-footer-1" defer></script>
 </body>
 </html>

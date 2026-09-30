@@ -693,12 +693,10 @@ PAGES = {
         "title": "Parent Portal",
         "description": "Use the school's separate fee-payment and parent-login services, "
                        "with contact details for help from CIRS.",
-        "banner": ("Parents", "Parent <em>Portal.</em>",
-                   "Fee payment and parent login are available through the school&rsquo;s "
-                   "separate existing systems."),
+        "banner": None,  # The visible photograph carries the page heading and introduction.
         # Shared with School Information — see assets/css/connect.css.
         "sheet": "connect",
-        "cache_suffix": "-portal-photo-1",
+        "cache_suffix": "-portal-photo-2",
         # This page supplies its own contact and navigation footer.
         "uc": False,
     },
@@ -2205,26 +2203,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         curtain_note = head.index("<!-- The opening curtain")
         curtain_note_end = head.index("</noscript>", curtain_note) + len("</noscript>")
         head = head[:curtain_note] + head[curtain_note_end:]
-        # Hide the photograph and copy only when this one-time entrance can
-        # run. Without scripting or with reduced motion, the page is ready.
-        portal_motion_gate = (
-            '<script>\n(function(){\n'
-            '  if (location.hash || window.scrollY > 8 || '
-            'window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;\n'
-            '  document.documentElement.classList.add("portal-motion-pending");\n'
-            '  window.__cirsPortalMotionFallback = window.setTimeout(function(){\n'
-            '    document.documentElement.classList.remove("portal-motion-pending");\n'
-            '  }, 8500);\n'
-            '  document.addEventListener("DOMContentLoaded", function(){\n'
-            '    window.setTimeout(function(){\n'
-            '      if (!window.__cirsPortalMotionBooted) '
-            'document.documentElement.classList.remove("portal-motion-pending");\n'
-            '    }, 700);\n'
-            '  }, {once:true});\n'
-            '})();\n</script>\n'
-        )
+        # The full-screen photograph and entry link are visible from first paint.
         head = head.replace("</head>",
-            portal_motion_gate +
             f'<link rel="stylesheet" href="assets/css/parent-portal-intro.css?{CACHE_BUST}">\n</head>')
     if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership",
                  "our-laurels")
@@ -2554,8 +2534,6 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/captures-featured.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/captures-gallery.js?{CACHE_BUST}" defer></script>')
         parts.append(f'<script src="assets/js/captures-hero.js?{CACHE_BUST}" defer></script>')
-    if slug == "parent-portal":
-        parts.append(f'<script src="assets/js/parent-portal-motion.js?{CACHE_BUST}" defer></script>')
     if wall:
         parts.append(f'<script src="assets/js/artswall.js?{CACHE_BUST}-focus-1" defer></script>')
     parts += ["</body>", "</html>", ""]
