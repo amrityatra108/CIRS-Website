@@ -1,6 +1,6 @@
 # Alumni white-and-gold review
 
-Alumni-only implementation. No production merge is authorized for this task.
+Alumni-only implementation. Initially prepared as a draft; integration and production verification were explicitly authorized by the user on 30 September 2026.
 
 - 240 Natural Earth country/territory polygons use the existing Robinson projection. The original 19 verified markers, origin, nudges and route generation are unchanged. All 166 institution records and 14 destination countries are preserved; unresolved coordinates remain unplotted.
 - Country hover/focus shows the name and institution count. Geographic clicks, keyboard arrows/Enter, country selection and region controls open a native directory dialog. Search, browse all, honest empty states, sticky Close, Escape, Tab containment, background scroll locking and opener/scroll restoration work without GSAP.
@@ -42,6 +42,10 @@ Natural Earth 1:50m admin-0 boundaries, public domain, distributed in `world-atl
 Source SHA-256: `04342cdc1e3016bcd7db1630de95684d67b79fe3c8c460321e87aef469502394`.
 
 Regenerate with `python3 tools/make-alumni-countries.py /path/to/world-atlas/countries-50m.json`. The tool verifies the source hash and uses the existing Robinson projection, latitude crop and antimeridian handling; output is committed so normal builds need no network. No island-area threshold is applied. Boundaries are illustrative, not a statement of political recognition; text controls make tiny territories accessible. Antarctica remains outside the original map crop.
+
+## Integration validation
+
+Rebased onto `cd05b21` before integration, preserving the current Curriculum and Creative Writing work. The diff remains Alumni-only, with the only shared-generator change being Alumni’s cache suffix. Site-wide HTML/link/freshness checks, all eight media-lifecycle tests, anthology integrity and the Alumni browser regression suite were rerun after rebase. Internal links: 120 pages, 17,961 references, all resolve.
 
 ## Remaining limits
 
