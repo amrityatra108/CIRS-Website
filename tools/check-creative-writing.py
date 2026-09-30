@@ -82,7 +82,23 @@ def main():
     for key in cw.SCHOOLS:
         for e in cw.in_collection(key):
             for p in cw.poems_for(e,key): assert p.get('school')==key and p.get('grade')
+    redirects={r['source']:r for r in json.loads((root/'vercel.json').read_text(encoding='utf-8'))['redirects']}
+    retired_aliases=0
+    for route in cw.data()['retiredRoutes']:
+        path=route['path']; target='creative-writing/'+route['collection']
+        assert path not in entries and not (root/(path+'.html')).exists(),f'Retired page still exists: {path}'
+        assert target in entries,'Retired address needs a published destination'
+        for suffix in ('','.html'):
+            redirect=redirects['/'+path+suffix]
+            assert redirect['destination']=='/'+target and redirect['permanent'] is True
+            if args.base_url:
+                with urlopen(args.base_url+'/'+path+suffix,timeout=15) as response:
+                    assert urlsplit(response.url).path.removesuffix('.html')=='/'+target
+                    payload=response.read().decode('utf-8').replace('\r\n','\n')
+                    assert response.status==200 and payload==(root/(target+'.html')).read_text(encoding='utf-8')
+                    retired_aliases+=1
     report={'routes':len(entries),'http_aliases_checked':aliases,'section_links_checked':checked_links,
+            'retired_pages_removed':len(cw.data()['retiredRoutes']),'retired_redirect_aliases_checked':retired_aliases,
             'all_counts':cw.counts(),'senior_counts':cw.counts('senior'),'junior_counts':cw.counts('junior'),
             'established_anchors_preserved':len(old_ids),'exact_source_comparison':source is not None}
     print(json.dumps(report,indent=2))
