@@ -1,0 +1,233 @@
+/* CIRS literary collection. All rules stay inside body.cwriting; shared
+   header/footer retain their own tokens and controller. */
+@font-face{font-family:"CW Hand";src:url("../creative-writing/caveat.woff2") format("woff2");font-display:swap;font-style:normal;font-weight:400}
+body.cwriting{background:#160F22}
+html:has(>body.cwriting){scroll-behavior:auto}
+body.cwriting :is(.cw-page,.cw-edition){
+  --cw-plum:#160F22;--cw-plum-secondary:#24182F;--cw-paper:#F2EADC;
+  --cw-ink:#2C2039;--cw-muted:#65586A;--cw-gold:#C2A465;
+  --cw-rule:rgba(44,32,57,.23);color:var(--cw-ink);background:var(--cw-paper);
+}
+body.cwriting .cw-wrap{width:min(1248px,calc(100% - 112px));margin-inline:auto}
+body.cwriting :is(.cw-page,.cw-edition) :is(a,button,summary):focus-visible{outline:2px solid currentColor;outline-offset:5px}
+body.cwriting :is(.cw-page,.cw-edition) :is(h1,h2,h3){font-weight:400;letter-spacing:-.035em;text-wrap:balance}
+body.cwriting .cw-meta{font-family:var(--font-ui);font-size:12px;line-height:1.5;letter-spacing:.035em;margin:0}
+body.cwriting .cw-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+body.cwriting .ring{display:none}
+body.cwriting .cw-hero{position:relative;background:var(--cw-plum);color:var(--cw-paper);isolation:isolate;overflow:hidden}
+body.cwriting .cw-hero::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.18;background-image:url("../creative-writing/paper-grain.svg");pointer-events:none}
+body.cwriting .cw-hero-grid{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:64px;min-height:min(870px,100svh);padding-block:170px 94px}
+body.cwriting .cw-hero-lead{position:relative;min-width:0}
+body.cwriting .cw-hero .cw-meta{color:var(--cw-gold);margin-bottom:32px}
+body.cwriting .cw-hero h1{font-size:clamp(72px,8.6vw,130px);line-height:.97;margin:0 0 30px;letter-spacing:-.055em;animation:cw-title-in .7s ease-out both}
+body.cwriting .cw-hero h1 span{display:block}
+body.cwriting .cw-hero h1 span+span{padding-left:42px}
+body.cwriting .cw-hero-intro{font-size:15px;line-height:1.7;max-width:340px;color:#D5C9D4;margin:0 0 26px}
+body.cwriting .cw-explore{display:inline-flex;align-items:center;gap:38px;min-height:44px;border-bottom:1px solid rgba(242,234,220,.42);font-family:var(--font-ui);font-size:13px}
+body.cwriting .cw-explore span{color:var(--cw-gold);font-size:21px;transition:transform .2s}
+body.cwriting .cw-explore:is(:hover,:focus-visible) span{transform:translateY(3px)}
+body.cwriting .cw-hand{position:absolute;right:-16px;bottom:26px;font-family:"CW Hand",cursive;font-size:32px;color:var(--cw-gold);transform:rotate(-12deg);white-space:nowrap}
+body.cwriting .cw-paper-stage{position:relative;min-width:0;padding:16px 9px 20px}
+body.cwriting .cw-paper-back{position:absolute;inset:13px 9px 23px;background:#C4AC93;transform:rotate(5deg);box-shadow:0 22px 52px #0004}
+body.cwriting .cw-paper{position:relative;padding:40px 42px 30px;background:var(--cw-paper);color:var(--cw-ink);transform:rotate(-3deg);box-shadow:0 12px 35px #0003}
+body.cwriting .cw-paper::before{content:"";position:absolute;inset:0;background-image:url("../creative-writing/paper-grain.svg");opacity:.36;pointer-events:none}
+body.cwriting .cw-paper-label{font-family:var(--font-ui);font-size:11px;letter-spacing:.035em;border-bottom:1px solid var(--cw-rule);padding-bottom:16px;margin:0 0 36px}
+body.cwriting .cw-feature{position:relative;min-height:220px;margin:0}
+body.cwriting .cw-feature blockquote{padding:0;margin:0 0 30px;border:0;background:none}
+body.cwriting .cw-feature blockquote p{font-family:var(--font-editorial);font-size:clamp(25px,2.35vw,36px);line-height:1.36;letter-spacing:-.035em;margin:0;min-height:3.1em}
+body.cwriting .cw-excerpt-line{display:block;overflow-wrap:anywhere;white-space:pre-wrap}
+body.cwriting .cw-feature figcaption{display:grid;gap:4px;font-family:var(--font-ui);line-height:1.5}
+body.cwriting .cw-feature-author{font-size:12px;font-weight:650;overflow-wrap:anywhere}
+body.cwriting .cw-feature-grade{font-size:11px;color:var(--cw-muted)}
+body.cwriting .cw-feature-grade:empty{display:none}
+body.cwriting .cw-feature-edition{font-size:12px;margin-top:14px}
+body.cwriting .cw-feature-date{font-size:11px;color:var(--cw-muted)}
+body.cwriting .cw-paper-actions{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;border-top:1px solid var(--cw-rule);padding-top:17px;margin-top:25px}
+body.cwriting .cw-read{display:inline-flex;gap:26px;align-items:center;min-height:44px;font-size:13px;font-family:var(--font-ui);font-weight:600}
+body.cwriting .cw-read span{font-size:20px;transition:transform .2s}
+body.cwriting .cw-read:is(:hover,:focus-visible) span{transform:translate(3px,-3px)}
+body.cwriting .cw-another{padding:8px 0;border:0;background:transparent;font-family:var(--font-ui);font-size:11px;min-height:44px;cursor:pointer;color:var(--cw-muted)}
+body.cwriting .cw-another span{font-size:16px;margin-left:6px}
+body.cwriting .cw-another:hover{text-decoration:underline;text-underline-offset:5px}
+body.cwriting .cw-another[hidden]{display:none}
+body.cwriting .cw-ink{display:block;width:115px;height:23px;margin:18px 0 0 auto;color:var(--cw-muted)}
+body.cwriting .cw-archive{padding-block:84px 110px;scroll-margin-top:115px}
+body.cwriting .cw-archive-intro{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding-bottom:40px}
+body.cwriting .cw-archive-intro h2{font-size:clamp(40px,4.5vw,66px);line-height:1.06;margin:0}
+body.cwriting .cw-archive-intro>p{font-family:var(--font-editorial);font-size:17px;line-height:1.7;margin:0;max-width:500px}
+body.cwriting .cw-archive-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 30px;padding-block:20px;border-block:1px solid var(--cw-rule)}
+body.cwriting .cw-filter{display:flex;gap:30px;font-family:var(--font-ui);font-size:13px}
+body.cwriting .cw-filter a{display:flex;align-items:center;min-height:44px;border-bottom:2px solid transparent}
+body.cwriting .cw-filter a[aria-current]{border-color:var(--cw-ink);font-weight:650}
+body.cwriting .cw-filter a:hover{border-color:var(--cw-muted)}
+body.cwriting .cw-stats{font-size:11px;font-family:var(--font-ui);color:var(--cw-muted);margin:0}
+body.cwriting .cw-archive-list{list-style:none;margin:0;padding:0}
+body.cwriting .cw-archive-row{display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px;border-bottom:1px solid var(--cw-rule);padding-block:34px 30px}
+body.cwriting .cw-row-date{font-family:var(--font-ui);font-size:11px;color:var(--cw-muted);line-height:1.7;padding-top:8px}
+body.cwriting .cw-row-main{min-width:0}
+body.cwriting .cw-row-main h3{font-size:clamp(29px,3.2vw,45px);line-height:1.12;margin:0}
+body.cwriting .cw-row-main h3 a{display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+body.cwriting .cw-row-arrow{font-family:var(--font-ui);font-size:26px;font-weight:300;transition:transform .25s;flex-shrink:0}
+body.cwriting .cw-row-main h3 a:is(:hover,:focus-visible){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:8px}
+body.cwriting .cw-row-main h3 a:is(:hover,:focus-visible) .cw-row-arrow{transform:translate(4px,-4px)}
+body.cwriting .cw-row-count{font-family:var(--font-ui);font-size:11px;color:var(--cw-muted);margin:12px 0}
+body.cwriting .cw-row-excerpt{font-family:var(--font-editorial);font-size:15px;line-height:1.6;max-width:640px;margin:0}
+body.cwriting .cw-row-excerpt>span{display:block;font-family:var(--font-ui);font-size:10px;color:var(--cw-muted);margin-top:7px}
+body.cwriting .cw-matching-poems{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;list-style:none;padding:0;margin:24px 0 0}
+body.cwriting .cw-matching-poems a{display:flex;flex-direction:column;padding:12px 0;border-top:1px solid var(--cw-rule);font-family:var(--font-ui);font-size:12px;gap:4px;min-height:44px}
+body.cwriting .cw-matching-poems span{font-size:10px;color:var(--cw-muted)}
+body.cwriting .cw-matching-poems a:hover{text-decoration:underline;text-underline-offset:4px}
+body.cwriting .cw-index-head{padding-block:145px 50px}
+body.cwriting .cw-index-head .cw-meta{margin-top:28px;color:var(--cw-muted)}
+body.cwriting .cw-index-head h1{font-size:clamp(54px,7vw,100px);line-height:1.05;margin-top:14px}
+body.cwriting .cw-index-head p:last-child{font-family:var(--font-editorial);font-size:18px;line-height:1.6;margin-bottom:0}
+body.cwriting .cw-index-head+.cw-archive{padding-top:35px}
+body.cwriting .cw-index-head+.cw-archive .cw-archive-intro{display:none}
+body.cwriting .cw-back{display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-ui);font-size:12px;text-decoration:underline;text-underline-offset:5px}
+body.cwriting .cw-empty{padding-block:48px 20px;max-width:650px}
+body.cwriting .cw-empty h3{font-size:32px;line-height:1.25;margin:0}
+body.cwriting .cw-empty>p{font-family:var(--font-editorial);font-size:18px;line-height:1.65}
+body.cwriting .cw-edition-head{padding-block:145px 38px}
+body.cwriting .cw-breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px 22px;padding:0;margin:0;font-family:var(--font-ui);font-size:11px;line-height:1.6}
+body.cwriting .cw-breadcrumb li+li::before{content:"/";margin-right:22px;color:var(--cw-muted)}
+body.cwriting .cw-breadcrumb a{text-decoration:underline;text-underline-offset:4px}
+body.cwriting .cw-edition-head h1{font-size:clamp(48px,5.8vw,84px);line-height:1.07;max-width:950px;margin-top:25px}
+body.cwriting .cw-edition-intro{font-family:var(--font-editorial);font-size:18px;line-height:1.6;max-width:660px;margin:20px 0}
+body.cwriting .cw-edition-facts{font-family:var(--font-ui);font-size:11px;color:var(--cw-muted);line-height:1.8;margin:0}
+body.cwriting #contents{scroll-margin-top:112px}
+body.cwriting .cw-mobile-contents{border-block:1px solid var(--cw-rule);padding:18px 0}
+body.cwriting .cw-mobile-contents summary{font-family:var(--font-ui);font-size:13px;cursor:pointer;min-height:44px;padding-block:12px}
+body.cwriting .cw-mobile-contents summary>span{float:right;font-size:11px;color:var(--cw-muted)}
+body.cwriting .cw-contents-list{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+body.cwriting .cw-contents-list a{display:grid;grid-template-columns:28px minmax(0,1fr);gap:14px;min-height:44px;padding:15px 0;border-top:1px solid var(--cw-rule)}
+body.cwriting .cw-number{font-family:var(--font-ui);font-size:11px;color:var(--cw-muted);padding-top:3px}
+body.cwriting .cw-contents-name{display:block;font-family:var(--font-editorial);font-size:17px;line-height:1.4;overflow-wrap:anywhere}
+body.cwriting .cw-contents-preview{display:block;font-size:11px;color:var(--cw-muted);line-height:1.6;margin-top:5px;overflow-wrap:anywhere}
+body.cwriting .cw-contents-grade{display:block;font-family:var(--font-ui);font-size:10px;color:var(--cw-muted);margin-top:5px}
+body.cwriting .cw-contents-list a:hover .cw-contents-name{text-decoration:underline;text-underline-offset:4px}
+body.cwriting .cw-reader{display:grid;grid-template-columns:240px minmax(0,680px);gap:90px;justify-content:center;padding-block:56px 70px}
+body.cwriting .cw-rail{position:sticky;top:110px;align-self:start;max-height:calc(100svh - 135px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:15px}
+body.cwriting .cw-rail-title{font-family:var(--font-editorial);font-size:19px;line-height:1.4;margin:12px 0 22px}
+body.cwriting .cw-contents-list--compact{display:block}
+body.cwriting .cw-contents-list--compact a{grid-template-columns:20px minmax(0,1fr);gap:8px;padding-block:11px}
+body.cwriting .cw-contents-list--compact .cw-contents-name{font-family:var(--font-ui);font-size:11px;line-height:1.5}
+body.cwriting .cw-contents-list--compact :is(.cw-contents-preview,.cw-contents-grade){display:none}
+body.cwriting .cw-contents-list--compact a[aria-current]{border-left:2px solid var(--cw-ink);padding-left:8px}
+body.cwriting .cw-poems{min-width:0}
+body.cwriting .cw-poem{scroll-margin-top:120px;padding-block:20px 52px;outline-offset:8px}
+body.cwriting .cw-poem:focus{outline:none}
+body.cwriting .cw-poem+.cw-poem{border-top:1px solid var(--cw-rule);padding-top:55px}
+body.cwriting .cw-poem-head{margin-bottom:32px}
+body.cwriting .cw-poem-head .cw-meta{color:var(--cw-muted);font-size:11px}
+body.cwriting .cw-poem-head h2{font-size:clamp(32px,3.5vw,48px);line-height:1.14;margin-top:14px;overflow-wrap:anywhere;text-wrap:pretty}
+body.cwriting .cw-poem-author{font-family:var(--font-ui);font-size:13px;margin:14px 0 0}
+body.cwriting .cw-poem-grade{font-family:var(--font-ui);font-size:12px;color:var(--cw-muted);margin:12px 0 0}
+body.cwriting .cw-permalink{font-family:var(--font-ui);font-size:11px;display:inline-flex;gap:14px;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:4px;margin-top:6px;color:var(--cw-muted)}
+body.cwriting .cw-verse{font-family:var(--font-editorial);font-size:21px;font-weight:400;line-height:1.8;letter-spacing:0}
+body.cwriting .cw-stanza{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;tab-size:2}
+body.cwriting .cw-stanza+.cw-stanza{margin-top:1.55em}
+body.cwriting .cw-poem-nav{display:grid;grid-template-columns:1fr auto 1fr;gap:14px 20px;border-top:1px solid var(--cw-rule);margin-top:42px;padding-top:16px;font-family:var(--font-ui);font-size:11px}
+body.cwriting .cw-poem-nav a{display:flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:5px}
+body.cwriting .cw-poem-nav a[rel=next]{justify-self:end;text-align:right}
+body.cwriting .cw-poem-nav .cw-poem-collection{grid-column:1/-1;justify-self:start}
+body.cwriting .cw-more{border-top:1px solid var(--cw-rule);padding-block:40px 70px;display:flex;flex-wrap:wrap;gap:22px 40px}
+body.cwriting .cw-more .cw-meta{flex-basis:100%;color:var(--cw-muted)}
+body.cwriting .cw-more>a{font-family:var(--font-editorial);font-size:20px;line-height:1.5;min-height:44px;text-decoration:underline;text-underline-offset:6px}
+body.cwriting .cw-empty-route{padding-block:150px 100px;min-height:70svh}
+body.cwriting .cw-empty-route h1{font-size:clamp(40px,6vw,78px);line-height:1.12;max-width:850px;margin:32px 0}
+body.cwriting .cw-empty-route p{font-family:var(--font-editorial);font-size:18px;line-height:1.7;max-width:650px}
+body.cwriting .cw-empty-actions{display:flex;flex-wrap:wrap;gap:15px 38px;align-items:center;margin-top:25px;font-family:var(--font-ui);font-size:13px}
+body.cwriting .cw-empty-actions>a:last-child{text-decoration:underline;text-underline-offset:5px;min-height:44px;display:flex;align-items:center}
+@keyframes cw-title-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:1100px){
+  body.cwriting .cw-wrap{width:calc(100% - 72px)}
+  body.cwriting .cw-hero-grid{gap:32px;padding-block:160px 70px;min-height:auto}
+  body.cwriting .cw-hero h1{font-size:clamp(64px,8.5vw,95px)}
+  body.cwriting .cw-paper{padding:28px}
+  body.cwriting .cw-hand{position:static;display:block;margin:30px 0 0 90px;width:max-content}
+  body.cwriting .cw-reader{grid-template-columns:200px minmax(0,640px);gap:45px}
+  body.cwriting .cw-archive-row{grid-template-columns:170px minmax(0,1fr)}
+}
+@media(max-width:850px){
+  body.cwriting .cw-hero-grid{grid-template-columns:1fr;max-width:600px;gap:32px;padding-block:145px 60px}
+  body.cwriting .cw-hero h1{font-size:clamp(72px,13vw,108px)}
+  body.cwriting .cw-hero-intro{max-width:400px}
+  body.cwriting .cw-hand{position:absolute;right:5px;bottom:32px;margin:0;font-size:29px}
+  body.cwriting .cw-paper-stage{margin:8px 15px 0;max-width:510px}
+  body.cwriting .cw-feature{min-height:220px}
+  body.cwriting .cw-feature blockquote p{font-size:32px}
+  body.cwriting .cw-archive-intro{gap:32px;grid-template-columns:1fr;max-width:610px}
+  body.cwriting .cw-reader{display:block;max-width:670px;padding-top:30px}
+  body.cwriting .cw-rail{display:none}
+  body.cwriting .cw-verse{font-size:20px}
+  body.cwriting .cw-contents-list{grid-template-columns:1fr}
+  body.cwriting .cw-archive-row{grid-template-columns:140px minmax(0,1fr)}
+}
+@media(max-width:540px){
+  body.cwriting .cw-wrap{width:calc(100% - 44px)}
+  body.cwriting .cw-hero-grid{padding-block:112px 50px;gap:25px}
+  body.cwriting .cw-hero .cw-meta{margin-bottom:23px;font-size:11px}
+  body.cwriting .cw-hero h1{font-size:clamp(61px,18vw,90px);margin-bottom:23px}
+  body.cwriting .cw-hero h1 span+span{padding-left:22px}
+  body.cwriting .cw-hero-intro{max-width:290px;font-size:13px;margin-bottom:14px}
+  body.cwriting .cw-hand{position:absolute;right:0;bottom:6px;margin:0;font-size:25px}
+  body.cwriting .cw-paper-stage{margin-inline:7px;padding:10px 4px}
+  body.cwriting .cw-paper{padding:22px 23px 18px;transform:rotate(-2deg)}
+  body.cwriting .cw-paper-back{inset:10px 4px 14px;transform:rotate(3deg)}
+  body.cwriting .cw-paper-label{margin-bottom:20px}
+  body.cwriting .cw-feature{min-height:226px}
+  body.cwriting .cw-feature blockquote p{font-size:24px;line-height:1.4;min-height:3.6em}
+  body.cwriting .cw-feature blockquote{margin-bottom:20px}
+  body.cwriting .cw-paper-actions{gap:5px;margin-top:15px}
+  body.cwriting .cw-read{font-size:12px;gap:15px}
+  body.cwriting .cw-another{font-size:10px}
+  body.cwriting .cw-archive{padding-block:50px 65px}
+  body.cwriting .cw-archive-intro{gap:20px;padding-bottom:25px}
+  body.cwriting .cw-archive-intro>p{font-size:16px}
+  body.cwriting .cw-archive-bar{padding-block:10px 17px}
+  body.cwriting .cw-filter{gap:25px;width:100%;font-size:12px}
+  body.cwriting .cw-archive-row{grid-template-columns:1fr;gap:13px;padding-block:26px}
+  body.cwriting .cw-row-date{padding:0;font-size:10px}
+  body.cwriting .cw-row-main h3{font-size:32px}
+  body.cwriting .cw-row-excerpt{font-size:14px}
+  body.cwriting .cw-matching-poems{grid-template-columns:1fr}
+  body.cwriting .cw-index-head{padding-block:135px 25px}
+  body.cwriting .cw-index-head h1{font-size:56px}
+  body.cwriting .cw-index-head p:last-child{font-size:16px}
+  body.cwriting .cw-edition-head{padding-block:132px 28px}
+  body.cwriting .cw-edition-head h1{font-size:47px;line-height:1.1}
+  body.cwriting .cw-edition-intro{font-size:16px}
+  body.cwriting .cw-edition-facts{font-size:10px}
+  body.cwriting .cw-breadcrumb ol{font-size:10px;gap:5px 12px}
+  body.cwriting .cw-breadcrumb li+li::before{margin-right:12px}
+  body.cwriting .cw-contents-list a{gap:7px;grid-template-columns:26px minmax(0,1fr)}
+  body.cwriting .cw-contents-name{font-size:17px}
+  body.cwriting .cw-reader{padding-block:24px 20px}
+  body.cwriting .cw-poem-head{margin-bottom:23px}
+  body.cwriting .cw-poem-head h2{font-size:34px}
+  body.cwriting .cw-verse{font-size:18px;line-height:1.8}
+  body.cwriting .cw-poem-nav{grid-template-columns:1fr 1fr;font-size:11px;gap:6px 20px}
+  body.cwriting .cw-poem-nav a[href$='#contents']{grid-column:1/-1;grid-row:2}
+  body.cwriting .cw-poem-nav a[rel=next]{grid-column:2;grid-row:1}
+  body.cwriting .cw-more{padding-block:30px 50px;gap:18px}
+  body.cwriting .cw-empty-route{padding-block:135px 65px}
+}
+@media(prefers-reduced-motion:reduce){
+  body.cwriting :is(.cw-page,.cw-edition) *,body.cwriting :is(.cw-page,.cw-edition) *::before,body.cwriting :is(.cw-page,.cw-edition) *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+@media print{
+  body.cwriting{background:white;color:black}
+  body.cwriting :is(.header,.drawer,.curtain,.footer-wrap,.closing-scene,.progress,.ring,.totop,.skip-link,.pop,.cw-rail,.cw-contents-section,.cw-poem-nav,.cw-permalink,.cw-more,.cw-breadcrumb,.cw-paper-actions,.cw-explore,.cw-filter){display:none!important}
+  body.cwriting :is(.cw-page,.cw-edition,.cw-hero,.cw-archive){background:white;color:black}
+  body.cwriting .cw-wrap{width:100%;max-width:none}
+  body.cwriting .cw-edition-head{padding:0 0 20pt}
+  body.cwriting .cw-edition-head h1{font-size:28pt}
+  body.cwriting .cw-reader{display:block;padding:0}
+  body.cwriting .cw-poem{padding:20pt 0;break-before:page}
+  body.cwriting .cw-poem:first-child{break-before:auto}
+  body.cwriting .cw-poem-head{break-after:avoid}
+  body.cwriting .cw-poem-head h2{font-size:22pt}
+  body.cwriting .cw-verse{font-size:12pt;line-height:1.65}
+  body.cwriting .cw-stanza{break-inside:avoid}
+  body.cwriting .cw-stanza+.cw-stanza{margin-top:14pt}
+}
