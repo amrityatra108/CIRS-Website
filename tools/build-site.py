@@ -513,12 +513,12 @@ PAGES = {
         # No banner from the shared builder. The page opens on its own
         # installation: a sculpture of 216 blocks that the stage's scroll
         # turns from cube to field to torus (assets/js/math-sculpture.js,
-        # loaded by assets/js/matharena.js), on charcoal with procedural
+        # loaded by assets/js/matharena.js), on white with procedural
         # gold studio lighting. Styles are scoped to body.matharena.
         "banner": None,
         "sheet": "matharena",
-        "litehead": False,
-        "cache_suffix": "-math-studio-1",
+        "litehead": True,
+        "cache_suffix": "-math-white-gold-2",
     },
     "creative-writing": {
         "nav": "Creative Writing",

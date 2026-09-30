@@ -161,6 +161,34 @@
     });
   }
 
+  // Native scroll controls a decorative stack; grade links and papers never hide.
+  function initGradeStack() {
+    var panels = $$(".mc-grade"), blocks = $$(".mc-stack__block");
+    var mode = window.matchMedia("(min-width:1000px) and (min-height:680px) and (prefers-reduced-motion:no-preference)");
+    var queued = false;
+    // Preserve native fragment history for these grade links. The shared site's
+    // older hash-link handler otherwise scrolls without updating the URL.
+    $$(".mc-grade-nav a").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.stopImmediatePropagation();
+      }, true);
+    });
+    function paint() {
+      queued = false;
+      panels.forEach(function (panel, i) {
+        var p = mode.matches ? clamp((window.innerHeight * .8 - panel.getBoundingClientRect().top) / (window.innerHeight * .4)) : 1;
+        blocks[i].style.opacity = p.toFixed(3);
+        blocks[i].style.transform = mode.matches ? "translateY(" + ((1-p)*-64).toFixed(2) + "px) rotateY(-9deg) scale(" + (.96+.04*p).toFixed(3) + ")" : "none";
+      });
+    }
+    function queue() { if (!queued) { queued = true; requestAnimationFrame(paint); } }
+    window.addEventListener("scroll", queue, {passive:true});
+    window.addEventListener("resize", queue, {passive:true});
+    window.addEventListener("pageshow", queue);
+    mode.addEventListener("change", queue);
+    paint();
+  }
+
   /* ==========================================================
      3. Headings that ride out of their masks, once
      ========================================================== */
@@ -350,6 +378,7 @@
 
   function boot() {
     initZones(initArchive());
+    initGradeStack();
     initReveals();
     initStage();
   }
