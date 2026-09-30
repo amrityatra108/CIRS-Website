@@ -220,12 +220,6 @@ def edition_html(e):
 <div class="cw-reader cw-wrap"><aside class="cw-rail"><nav aria-label="Poem contents"><a class="cw-back" href="creative-writing.html#archive">All Writing</a><p class="cw-rail-title">{esc(e['topic'])}</p>{contents_list(e,True)}</nav></aside><div class="cw-poems">{''.join(articles)}</div></div>
 <nav class="cw-more cw-wrap" aria-label="More editions"><p class="cw-meta">Continue reading</p>{links}<a href="creative-writing.html#archive">Explore the collection <span aria-hidden="true">↗</span></a></nav></div>'''
 
-def empty_route_html(route):
-    school=data()['schools'][route['collection']]['name']
-    return f'''<div class="cw-edition cw-empty-route" data-header-theme="light"><div class="cw-wrap"><nav class="cw-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="creative-writing.html#archive">Creative Writing</a></li><li>{esc(school)}</li></ol></nav>
-<h1>No published edition at this address.</h1><p>This monthly address has no published poems. Browse the available collection instead.</p>
-<div class="cw-empty-actions"><a class="cw-read" href="creative-writing.html#archive">Browse All Writing <span aria-hidden="true">↗</span></a><a href="creative-writing/{route['collection']}.html#archive">Visit {esc(school)}</a></div></div></div>'''
-
 def page_entries():
     base=dict(sheet='cwriting',banner=None,jump=False,uc=False,cache_suffix='-literary-2')
     out={}
@@ -234,13 +228,10 @@ def page_entries():
         out[f'creative-writing/{key}']=dict(base,nav=name+' Creative Writing',litehead=True,title=name+' Creative Writing | CIRS',description=f'Published poems by {name} students at CIRS.',cw=dict(kind='main',collection=key))
     for e in editions():
         out[e['path']]=dict(base,nav=e['topic'],litehead=True,title=esc(e['topic']+' | Creative Writing | CIRS'),description=esc(e['intro']),cw=dict(kind='edition',edition=e['id']))
-    for route in data()['legacyRoutes']:
-        out[route['path']]=dict(base,nav='Creative Writing archive',litehead=True,title='Creative Writing archive | CIRS',description='Find the published CIRS Creative Writing collection.',cw=dict(kind='empty',route=route))
     return out
 
 def render(spec):
     if spec['kind']=='main': return main_html(spec['collection'])
-    if spec['kind']=='empty': return empty_route_html(spec['route'])
     return edition_html(next(e for e in editions() if e['id']==spec['edition']))
 def head_html(spec): return '<meta name="color-scheme" content="light">\n'
 if __name__=='__main__':

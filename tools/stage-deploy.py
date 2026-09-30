@@ -137,8 +137,9 @@ def main():
     if "assets/js/history-cinematic-journey.js" in wanted:
         wanted.add("assets/js/history-cinematic-world.js")
 
-    # The Founder iframe is a self-contained bundle with relative JS imports
-    # and texture URLs. Ship its runtime files, not the directory as a file.
+    # The portrait runtime has relative JS imports and texture URLs, also
+    # reused by other scenes. Ship its runtime files; retired standalone
+    # demo HTML must not become an extra page through this asset bundle.
     founder_bundle = "assets/founder-opening"
     if any(w.rstrip("/") == founder_bundle or w.startswith(founder_bundle + "/")
            for w in wanted):
@@ -146,6 +147,8 @@ def main():
         wanted.discard(founder_bundle + "/")
         for directory, _, names in os.walk(os.path.join(ROOT, founder_bundle)):
             for name in names:
+                if name.lower().endswith('.html'):
+                    continue
                 if name == "gurudev-color.png":
                     continue  # Rejected generation, retained locally but not used.
                 wanted.add(os.path.relpath(os.path.join(directory, name), ROOT).replace(os.sep, "/"))

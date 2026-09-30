@@ -95,8 +95,9 @@ papers, and a month lists only the bulletins that exist.
 
 Creative Writing is a literary collection written from `tools/creative-writing-content.json` by
 `tools/creativewriting.py` (shell `tools/pages/creative-writing.html`, sheet `assets/css/cwriting.css`, script
-`assets/js/cwriting.js`). The same generator writes Junior/Senior views, anthology readers and legacy monthly
-archive pointers. Only published editions appear in archives. School level and verified grade belong to each
+`assets/js/cwriting.js`). The same generator writes Junior/Senior views and anthology readers. Retired empty
+monthly pages are deleted; `vercel.json` redirects their old URLs to the visible school indexes. Only published
+editions appear in archives. School level and verified grade belong to each
 poem, so mixed or unclassified work is never classified from another author's grade. Unknown dates stay unknown;
 month-only labels do not receive a year. Counts come from the dataset; author identities merge exact names only,
 with unresolved spelling variants documented there. Student identifiers are never published.
