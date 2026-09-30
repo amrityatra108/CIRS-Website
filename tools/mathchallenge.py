@@ -102,24 +102,32 @@ def published(grade):
 
 
 def zones_html():
-    """Four editorial rows. Each is a real link to the archive; the page
-    script also selects that division in the archive filter on the way."""
-    out = []
+    """One native-scroll section per division; never relabel results as problems."""
+    links = []
+    blocks = []
+    panels = []
     for i, (key, label, blurb) in enumerate(GRADES, 1):
-        n = published(key)
-        out.append(f'''      <li class="mc-zone">
-        <a class="mc-zone__link" href="#archive" data-grade="{key}" aria-describedby="mc-zone-{key}-note">
-          <span class="mc-zone__index" aria-hidden="true">{i:02d}</span>
-          <span class="mc-zone__grade">{label}</span>
-          <span class="mc-zone__go"><span>View published results</span><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 11h15M12.5 5.5 18 11l-5.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-        <div class="mc-zone__text">
-          <p class="mc-zone__copy">{blurb}</p>
-          <p class="mc-zone__note" id="mc-zone-{key}-note">{n} winners&rsquo; bulletins in the archive</p>
-        </div>
-        <svg class="mc-zone__motif" viewBox="0 0 120 120" aria-hidden="true" focusable="false">{motif(i)}</svg>
-      </li>''')
-    return "\n".join(out)
+        links.append(f'<a href="#grade-{key}">{label}</a>')
+        blocks.append(f'<div class="mc-stack__block"><span>0{i}</span><strong>{label}</strong></div>')
+        papers = "\n".join(
+            f'<li><a href="{DOCS}/{c["file"]}" target="_blank" rel="noopener">'
+            f'{c["month"]}<span>Winners’ bulletin · PDF · {size(c["file"])} ↗</span></a></li>'
+            for c in CHALLENGES if c["grade"] == key)
+        panels.append(f'''<section class="mc-grade" id="grade-{key}" aria-labelledby="grade-{key}-title" tabindex="-1">
+          <p class="mc-kicker">Division 0{i}</p>
+          <h3 id="grade-{key}-title">{label}</h3>
+          <p class="mc-grade__intro">{blurb}</p>
+          <p class="mc-grade__notice">Grade-specific problem sets have not been supplied. The published documents below announce winners.</p>
+          <a class="mc-grade__lab" href="#cube-lab">Explore the 1729 cube challenge →</a>
+          <h4>Published results</h4>
+          <ul class="mc-grade__papers">{papers}</ul>
+          <a class="mc-zone__link" href="#archive" data-grade="{key}">View this division in the results archive →</a>
+        </section>''')
+    return ('<nav class="mc-grade-nav" aria-label="Choose your grade division">' + "".join(links) + '</nav>'
+            '<div class="mc-division-story"><div class="mc-stack" aria-hidden="true">'
+            '<div class="mc-stack__layers">' + "".join(blocks) + '</div>'
+            '<p>One layer at a time.<br>Four ways to think.</p></div>'
+            '<div class="mc-grade-sections">' + "\n".join(panels) + '</div></div>')
 
 
 def motif(i):
@@ -174,8 +182,8 @@ def archive_html():
         rows = []
         for g in grades:
             rel = f"{key}/grades-{g}.pdf"
-            rows.append(f'''            <li class="mc-doc" data-grade="{g}">
-              <span class="mc-doc__grade">{LABEL[g]}</span>
+            rows.append(f'''            <article class="mc-doc" data-grade="{g}">
+              <h4 class="mc-doc__grade">{LABEL[g]}</h4>
               <span class="mc-doc__type">Winners&rsquo; bulletin</span>
               <span class="mc-doc__month">{esc(label)}</span>
               <a class="mc-doc__open" href="{DOCS}/{rel}" target="_blank" rel="noopener"
@@ -184,7 +192,7 @@ def archive_html():
                 <span class="mc-doc__size">{size(rel)}</span>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11 11 5M6.5 5H11v4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
-            </li>''')
+            </article>''')
         n = len(grades)
         months.append(f'''        <div class="mc-month" id="archive-{key}" data-month="{key}"
              data-find="{esc(label.lower())} {short} {key}">
@@ -192,9 +200,9 @@ def archive_html():
             <h3 class="mc-month__name">{esc(label)}</h3>
             <p class="mc-month__meta"><span class="mc-month__n">{n}</span> {"bulletin" if n == 1 else "bulletins"}</p>
           </div>
-          <ul class="mc-docs" aria-label="{esc(label)} winners&rsquo; bulletins">
+          <div class="mc-docs">
 {chr(10).join(rows)}
-          </ul>
+          </div>
         </div>''')
 
     return (f'''      <div class="mc-months" id="mcMonths">
