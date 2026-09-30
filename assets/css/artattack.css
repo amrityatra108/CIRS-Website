@@ -679,11 +679,11 @@ body.artattack .aa-decor--finale svg{width:100%;height:100%;object-fit:cover}
   body.artattack .aa-sketch-stroke{stroke-dashoffset:0!important}
 }
 /* Optional scrubbing leaves the native player as the initial mode. */
-.aa-film-controls{position:absolute;z-index:2;top:12px;right:16px;max-width:min(440px,calc(100% - 32px));padding:10px 14px;background:var(--aa-paper);color:var(--aa-ink);border:1px solid var(--aa-rule-2);border-radius:12px;font:13px/1.5 var(--font-ui)}
+.aa-film-controls{position:absolute;z-index:2;top:12px;right:16px;max-width:min(440px,calc(100% - 32px));padding:10px 14px;background:#21132fee;color:#F5EBDD;border:1px solid #d8b76a70;border-radius:12px;font:13px/1.5 var(--font-ui)}
 .aa-film-controls[hidden]{display:none}
 .aa-film-controls>div{display:flex;gap:8px;flex-wrap:wrap}
-.aa-film-controls button{min-height:44px;padding:8px 12px;border:1px solid var(--gold);background:transparent;color:inherit;border-radius:6px;cursor:pointer}
-.aa-film-controls button[aria-pressed=true]{background:var(--gold);color:var(--ink)}
+.aa-film-controls button{min-height:44px;padding:8px 12px;border:1px solid #d8b76a;background:transparent;color:inherit;border-radius:6px;cursor:pointer}
+.aa-film-controls button[aria-pressed=true]{background:#d8b76a;color:#21132F}
 .aa-film-controls button:disabled{opacity:.6;cursor:default}
 .aa-film-controls p{margin:6px 0 0;max-width:40ch}
 body.artattack .aa-video-hero.is-scroll-film{height:320svh;min-height:1200px;padding-top:0}
