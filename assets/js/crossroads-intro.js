@@ -162,8 +162,10 @@
      wordmark's centre and width. Inked bounds of the two SVGs are fractions
      of their own boxes. A skip, a scroll or a click still ends the film at
      once, as before; this is only the film's own ending. */
-  var FILM_FEATHER = { cx:.563, cy:.428, h:.376 };
-  var FILM_WORDMARK = { cx:.519, cy:.7246, w:.4786 };
+  // Bounds from the actual last frame (168 of 169), not an earlier frame
+  // while the artwork is still moving into place.
+  var FILM_FEATHER = { cx:.548, cy:.3745, w:.211, h:.487 };
+  var FILM_WORDMARK = { cx:.5175, cy:.7037, w:.435, h:.219 };
   var PEN_INK = { x0:.0357, y0:.0563, x1:.9452, y1:.9768, aspect:210 / 302 };
   var TITLE_INK = { x0:.0127, y0:.0819, x1:.9775, y1:.9094 };
   var HOLD = 350, CROSSFADE = 900, GLIDE = 1000;
@@ -191,16 +193,16 @@
       return { x0:r.left + r.width * TITLE_INK.x0, x1:r.left + r.width * TITLE_INK.x1,
                y0:r.top + r.height * TITLE_INK.y0, y1:r.top + r.height * TITLE_INK.y1 };
     }
-    function lay(el, ink, scale, tx, ty) {
+    function lay(el, ink, width, height, tx, ty) {
       var r = el.getBoundingClientRect(), cx = (ink.x0 + ink.x1) / 2, cy = (ink.y0 + ink.y1) / 2;
       el.style.transition = "none";
       el.style.transformOrigin = (cx - r.left) + "px " + (cy - r.top) + "px";
-      el.style.transform = "translate(" + (tx - cx) + "px," + (ty - cy) + "px) scale(" + scale + ")";
+      el.style.transform = "translate(" + (tx - cx) + "px," + (ty - cy) + "px) scale(" + (width / (ink.x1 - ink.x0)) + "," + (height / (ink.y1 - ink.y0)) + ")";
       el.style.opacity = "0";
     }
     var penInk = inkOfPen(), titleInk = inkOfTitle();
-    lay(pen, penInk, FILM_FEATHER.h * dh / (penInk.y1 - penInk.y0), ox + FILM_FEATHER.cx * dw, oy + FILM_FEATHER.cy * dh);
-    lay(title, titleInk, FILM_WORDMARK.w * dw / (titleInk.x1 - titleInk.x0), ox + FILM_WORDMARK.cx * dw, oy + FILM_WORDMARK.cy * dh);
+    lay(pen, penInk, FILM_FEATHER.w * dw, FILM_FEATHER.h * dh, ox + FILM_FEATHER.cx * dw, oy + FILM_FEATHER.cy * dh);
+    lay(title, titleInk, FILM_WORDMARK.w * dw, FILM_WORDMARK.h * dh, ox + FILM_WORDMARK.cx * dw, oy + FILM_WORDMARK.cy * dh);
     others.forEach(function (el) { el.style.transition = "none"; el.style.opacity = "0"; });
     var parts = [pen, title];
 
@@ -238,8 +240,17 @@
   }
   function releaseOpening() {
     if (openingState === "released" || openingState === "complete") return;
-    // A timed release must also complete the handoff. Leaving the film in a
-    // paused "released" state can strand the shared header behind it.
+    // The scroll lock is bounded, but the healthy film is longer than that
+    // window. Let it reach its real final frame and existing logo handoff.
+    // Keep a bounded fallback in case playback stalls after this point.
+    if (opening && !opening.paused && !opening.ended && opening.readyState >= 2 && opening.currentTime > 0 && Number.isFinite(opening.duration)) {
+      lockScroll(false);
+      removeLockListeners();
+      openingTimer = setTimeout(function () { finishOpening(false, true); },
+        Math.min(4000, Math.max(1000, (opening.duration - opening.currentTime) * 1000 + 1000)));
+      return;
+    }
+    // A stalled or unavailable film must not strand the shared header.
     finishOpening(false, true);
   }
   function onOpeningEscape(event) {
