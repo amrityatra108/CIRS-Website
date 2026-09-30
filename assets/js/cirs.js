@@ -706,6 +706,9 @@
     $$(".crcard").forEach(function (card, i) {
       gsap.from(card, {
         opacity: 0, y: 26, duration: .85, ease: "power3.out", delay: (i % 3) * .09,
+        // Hand the resting offset back to the sheet, whose middle-column
+        // lift changes with the width; a frozen inline one goes ragged.
+        clearProps: "transform",
         scrollTrigger: { trigger: card, start: "top 92%", once: true }
       });
     });

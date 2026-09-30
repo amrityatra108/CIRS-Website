@@ -32,6 +32,13 @@ COVER_DIR = "assets/img/crossroads"
 # issue number -> any of {"pdf", "cover", "title"} to override the convention.
 OVERRIDES = {}
 
+# What an issue's own pages say about it, for the "Open the magazine" spread.
+# Only the latest issue is shown there; an issue without an entry shows its
+# number and PDF and nothing else, rather than another issue's details.
+EDITIONS = {
+    32: {"date": "August 2026", "occasion": "Independence Day Issue", "pages": 24},
+}
+
 # Four cover compositions, cycled so the wall has rhythm without becoming a
 # scrapbook: where the number sits, and which rule it hangs from. The fifth
 # is the standing "latest" treatment, given to the highest-numbered issue.
@@ -63,6 +70,8 @@ def issues():
             "status": "available" if pdf else "coming-soon",
             "variant": (n - 1) % VARIANTS + 1,
             "latest": n == COUNT,
+            "inside": _resolve(n, "inside", f"{COVER_DIR}/issue-{n:02d}-inside.webp"),
+            "edition": EDITIONS.get(n, {}),
         })
     return out
 

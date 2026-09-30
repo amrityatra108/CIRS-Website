@@ -429,12 +429,15 @@
     syncVideo();
   }
 
-  // Step through the first three sections; leave the remaining page scrolling normally.
+  // Step through the opening sections; leave the remaining page scrolling normally.
+  // A small trackpad nudge must add up before it turns a whole page.
   var sectionMoving = false, nativeSectionScroll = false, sectionTimer = null, wheelIntent = 0, wheelTime = 0;
+  var WHEEL_STEP = 40, WHEEL_WINDOW = 220;
   var touchStartX = 0, touchStartY = 0;
   function sectionDestination(direction) {
     if (scrollLocked || !target) return null;
-    var sections = [intro, target, document.getElementById("statement")].filter(Boolean);
+    var sections = [intro, target, document.getElementById("inside-the-issue"),
+      document.getElementById("statement")].filter(Boolean);
     var positions = sections.map(function (section) {
       var margin = parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
       return Math.max(0, section.getBoundingClientRect().top + window.scrollY - margin);
@@ -451,7 +454,12 @@
     if (direction > 0) {
       for (var i = 0; i < sections.length; i++) if (positions[i] > y + 4) return sections[i];
     } else if (direction < 0) {
-      for (var j = sections.length - 1; j >= 0; j--) if (positions[j] < y - 4) return sections[j];
+      for (var j = sections.length - 1; j >= 0; j--) if (positions[j] < y - 4) {
+        // Coming back up into a tall section reads it from its end, natively.
+        var previous = sections[j] === target ? target.parentElement : sections[j];
+        if (previous.getBoundingClientRect().height > window.innerHeight + 4) return null;
+        return sections[j];
+      }
     }
     return null;
   }
@@ -482,10 +490,13 @@
         event.target.closest("dialog, #drawer, input, textarea, select, [contenteditable=true]")) return;
     if (sectionMoving) { event.preventDefault(); event.stopImmediatePropagation(); return; }
     var destination = sectionDestination(event.deltaY);
-    if (!sectionMoving && !destination) return;
+    if (!destination) { wheelIntent = 0; return; }
     event.preventDefault(); event.stopImmediatePropagation();
-    if (sectionMoving) return;
-    if (event.deltaY !== 0) moveSection(destination);
+    var delta = event.deltaMode === 1 ? event.deltaY * 16 : event.deltaMode === 2 ? event.deltaY * window.innerHeight : event.deltaY;
+    if (event.timeStamp - wheelTime > WHEEL_WINDOW || (delta > 0) !== (wheelIntent > 0)) wheelIntent = 0;
+    wheelTime = event.timeStamp;
+    wheelIntent += delta;
+    if (Math.abs(wheelIntent) >= WHEEL_STEP) moveSection(destination);
   }, {passive:false, capture:true});
   window.addEventListener("touchstart", function (event) {
     if (event.touches.length !== 1) return;

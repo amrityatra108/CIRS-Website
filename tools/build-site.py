@@ -388,7 +388,7 @@ PAGES = {
                      ("Our Founder", "founder.html", "closing-scene__contact")]),
     },
     "sports": {
-        "nav": "Our Sports",
+        "nav": "Sports",
         "title": "Sports & Laurels — Built in the Arena | CIRS",
         "description": "Built in the Arena — Athletics, house competition, physical discipline and sporting laurels at Chinmaya International Residential School, Coimbatore.",
         "sheet": "sports",
@@ -417,7 +417,7 @@ PAGES = {
     },
     "houses": {
         "barehead": True,
-        "nav": "Our Houses",
+        "nav": "Houses",
         "title": "Our Houses | CIRS",
         "description": "The four houses of Chinmaya International Residential School — "
                        "Vasishta, Valmiki, Vishwamitra and Vyasa — their colours, identities "
@@ -441,6 +441,7 @@ PAGES = {
         # No flat band and no video hero: an archive opens on its own
         # masthead, built in tools/pages/crossroads.html.
         "banner": None,
+        "cache_suffix": "-crossroads-fixes-20260930",
     },
     "blog": {
         "nav": "CIRS Blog",
@@ -478,7 +479,7 @@ PAGES = {
     # live on it, rather than a blank route. "soon" is what the body is built
     # from; see soon_html below.
     "our-results": {
-        "nav": "Our Results",
+        "nav": "Results",
         "title": "Our Results",
         "description": "Board results, university placements and the record behind them at "
                        "Chinmaya International Residential School.",
@@ -490,7 +491,7 @@ PAGES = {
         "jump": False,
     },
     "our-laurels": {
-        "nav": "Our Laurels",
+        "nav": "Laurels",
         "title": "Our Laurels",
         "description": "Competitions won, representative honours and the CIRS students who "
                        "carried them: the school's achievement archive, from 2007 to today.",
@@ -1489,6 +1490,43 @@ def crossroads_stories_covers():
     return '<div class="crossroads-stories__media"><div class="crossroads-stories__stack">' + ''.join(cards) + '</div></div>'
 
 
+def crossroads_magazine():
+    """The latest issue opened out, written from its own record."""
+    issue = next((i for i in crossroads.issues() if i["latest"] and i["pdf"]), None)
+    if not issue:
+        return ""
+    n, pdf, ed = issue["number"], issue["pdf"], issue["edition"]
+    label = f"Issue {n:02d}"
+    when = " · ".join(x for x in (ed.get("date"), ed.get("occasion")) if x)
+    papers = []
+    if issue["cover"]:
+        papers.append(f'<figure class="rd-magazine__cover"><a href="{pdf}"><img src="{issue["cover"]}" '
+                      f'alt="The genuine cover of The Crossroads, {label}" width="300" height="420" '
+                      f'loading="lazy"></a><figcaption>01 · Cover</figcaption></figure>')
+    if issue["inside"]:
+        papers.append(f'<figure class="rd-magazine__inside"><a href="{pdf}"><img src="{issue["inside"]}" '
+                      f'alt="{label} contents page, with its original photograph and list of features" '
+                      f'width="702" height="998" loading="lazy"></a>'
+                      f'<figcaption>{len(papers) + 1:02d} · Contents · PDF page 2</figcaption></figure>')
+    pages = f'{ed["pages"]} pages. ' if ed.get("pages") else ""
+    lines = [
+        '<section class="rd-magazine" id="inside-the-issue" aria-labelledby="rd-magazine-title">',
+        ' <div class="rd-magazine__stage">',
+        f'  <header><p>Inside The Crossroads · {label}</p><h2 id="rd-magazine-title">Open the magazine.</h2>'
+        + (f'<p>{when}</p>' if when else "")
+        + f'<a href="{pdf}">Read {label} (PDF) ↗</a><a href="#archive">Choose another edition ↓</a></header>',
+    ]
+    if papers:
+        lines += ['  <div class="rd-magazine__papers">'] + ['   ' + p for p in papers] + ['  </div>']
+    lines += [
+        f'  <p class="rd-magazine__details">{len(papers) + 1:02d} · Edition details<br>'
+        f'{pages}The original magazine, complete and available to download.</p>',
+        ' </div>',
+        '</section>',
+    ]
+    return "\n".join(lines)
+
+
 def crossroads_latest(feature=False):
     issue = next((i for i in crossroads.issues() if i["latest"] and i["pdf"]), None)
     if not issue:
@@ -2075,10 +2113,10 @@ def build(slug, page):
             'body.crossroads-intro-active .crossroads-intro{background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}'
             '</style>'
             '<link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">\n'
-            f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-10" as="script" fetchpriority="high">\n'
+            f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-11" as="script" fetchpriority="high">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-10">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-4">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-5">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
             '<noscript><style>body.crossroads-intro-active :is(.header,.drawer,.progress,.ring,.totop,.jump,.skip-link,.footer-wrap){visibility:visible!important}'
             '.crossroads-intro[data-crossroads-intro-pending] .crossroads-intro__opening{display:none}'
@@ -2367,6 +2405,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                        .replace("{{DOCPORTAL}}", docportal_html())
                        .replace("{{CROSSROADS_WALL}}", crosswall_html())
                        .replace("{{CROSSROADS}}", crossroads_html())
+                       .replace("{{CROSSROADS_MAGAZINE}}", crossroads_magazine())
                        .replace("{{CROSSROADS_COUNT}}", str(crossroads.COUNT))
                        .replace("{{CROSSROADS_LATEST_LINK}}", crossroads_latest())
                        .replace("{{CROSSROADS_LATEST_FEATURE}}", crossroads_latest(feature=True))
@@ -2460,7 +2499,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         # This page-specific controller only owns the introduction. Load it
         # before shared animation dependencies so Skip and its bounded lock
         # are ready as soon as the critical styles have arrived.
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-10" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-11" defer></script>')
     # Only video pages need media ownership; unrelated pages keep their scripts.
     if not page.get("cw") and (slug == "index" or page.get("hero_media") or page.get("opening")):
         parts.append(f'<script src="assets/js/media-lifecycle.js?{CACHE_BUST}" defer></script>')

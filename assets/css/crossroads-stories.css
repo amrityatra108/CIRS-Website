@@ -27,7 +27,7 @@
  .crossroads-stories__front:hover { z-index:12; transform:translateY(-3%) scale(1.06); border-color:#c9a961; box-shadow:0 26px 42px #1f1f1b55; }
  .crossroads-stories__stack a:hover img { filter:brightness(1.07) saturate(1.05); }
 }
-.crossroads-stories__year { width:min(100%,320px); margin:10px auto 0; display:flex; align-items:center; justify-content:center; gap:14px; color:var(--label); font-family:var(--font-ui); font-size:clamp(18px,1.7vw,24px); font-weight:500; letter-spacing:.16em; line-height:1; font-variant-numeric:lining-nums tabular-nums; }
+.crossroads-stories__year { width:min(100%,380px); white-space:nowrap; margin:10px auto 0; display:flex; align-items:center; justify-content:center; gap:14px; color:var(--label); font-family:var(--font-ui); font-size:clamp(18px,1.7vw,24px); font-weight:500; letter-spacing:.16em; line-height:1; font-variant-numeric:lining-nums tabular-nums; }
 .crossroads-stories__year::before,.crossroads-stories__year::after { content:""; flex:1; height:1px; background:#d9c99f; }
 .crossroads-stories__footer { display:flex; align-items:center; justify-content:space-between; gap:32px; border-top:1px solid #e3dccb; padding-top:24px; margin-top:36px; }
 .crossroads-stories__footer p { margin:0; max-width:52ch; color:var(--label); font-family:var(--font-body); font-size:18px; line-height:1.45; }
