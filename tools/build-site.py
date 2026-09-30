@@ -2518,6 +2518,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":
         parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-1" defer></script>')
+    if slug == "blog" or page.get("post"):
+        parts[0] = parts[0].replace('</head>', f'<link rel="stylesheet" href="assets/css/blog-palette.css?{CACHE_BUST}-1">\n</head>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}-restored-1" defer></script>')
     if slug == "why-cirs":
