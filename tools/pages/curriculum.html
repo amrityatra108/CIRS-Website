@@ -1,19 +1,15 @@
-<!-- Curriculum: the Curriculum Atlas. One gold route runs through the page:
-     it rises through the opening, runs down the grade journey beside the
-     photographs, divides at Grade X into CBSE and the IB Diploma, and those
-     two lines become the two columns of the comparison. The close is the
-     shared closing scene, given this page's own words in tools/build-site.py.
-
-     The grade journey is the one scroll-linked scene. On a large window with
-     motion (html.cur-stage) its photographs hold in one sticky frame while the
-     reading column passes beside them; everything after it is ordinary
-     reading. assets/js/curriculum.js adds that stage and a few once-only
-     entrances. Without it, or with reduced motion, the same markup is the
-     page, complete and static: each stage's photograph sits with its text.
-
-     Content sources, and what is still open, are recorded in
-     docs/curriculum-content.md. Nothing here should state more than that
-     file can support. -->
+<svg class="curriculum-route" aria-hidden="true" focusable="false">
+  <g class="journey-trunk"><path class="route-base"/><path class="route-progress"/></g>
+  <g data-route="cbse"><path class="route-base"/><path class="route-progress"/><path class="route-hover"/></g>
+  <g data-route="ib"><path class="route-base"/><path class="route-progress"/><path class="route-hover"/></g>
+  <g class="journey-nodes"></g>
+</svg>
+<!-- Curriculum: a continuous gold route connects the preserved illustrated
+     opening, Junior School, Senior School, the curriculum fork and both
+     programmes. Every original content block stays in its reading order.
+     The SVG is measured against the live layout by assets/js/curriculum.js;
+     reduced motion shows a static route, and no script keeps ordinary
+     document reading and working anchors. -->
 
 <!-- Marks the page as scripted before it paints, so the opening's route can
      wait for assets/js/curriculum.js to fit it rather than show whole and
@@ -52,7 +48,10 @@
 
   <div class="wrap atl-open__inner">
     <p class="cur-trail"><a href="the-cirs-experience.html">Student Life</a><span aria-hidden="true">/</span>Curriculum</p>
-    <h1 class="atl-open__title">Academic pathways.</h1>
+    <h1 class="atl-open__title">
+      <span class="atl-open__l1"><span>One foundation.</span></span>
+      <em class="atl-open__l2"><span>Then a direction of&nbsp;one&rsquo;s&nbsp;own.</span></em>
+    </h1>
     <p class="atl-open__lead">From Grade V, students follow the CBSE curriculum, in English, on
       one campus. In Grades XI and XII they continue with CBSE or choose the IB Diploma
       Programme, and all of it is studied inside the life of a residential school.</p>
@@ -79,26 +78,6 @@
     </nav>
   </div>
 </header>
-<section class="rd-academic" id="academic-journey" aria-labelledby="academic-journey-h" data-rd-chapters>
- <div class="rd-academic__left"><h2 id="academic-journey-h">Your academic journey.</h2><nav aria-label="Academic chapters"><a href="#academic-junior"><span>01</span><span>Junior School</span></a><a href="#academic-senior"><span>02</span><span>Senior School</span></a><a href="#academic-cbse"><span>03</span><span>CBSE</span></a><a href="#academic-ib"><span>04</span><span>IB Diploma</span></a></nav><a href="#pathways">Compare the two pathways</a></div>
- <div class="rd-academic__right"><article class="rd-academic__panel" id="academic-junior" aria-labelledby="academic-junior-h">
- <figure><img src="assets/img/curriculum/foundation.jpg" width="1000" height="1250" loading="lazy" decoding="async" alt="Junior School students working with coloured cards at a classroom bench"><figcaption>A classroom view from the CIRS photograph collection. Programme and occasion not recorded.</figcaption></figure>
- <div class="rd-academic__text"><p>01 / Grades V–VIII</p><h3 id="academic-junior-h">Junior School</h3><p>Science, Mathematics, English, two additional languages and artificial intelligence. Published Class X results list Hindi, Sanskrit, Tamil and French as language subjects; ask which options run in each grade.</p><a href="curriculum.html#journey-foundation">The foundation</a></div>
-</article>
-<article class="rd-academic__panel" id="academic-senior" aria-labelledby="academic-senior-h">
- <figure><img src="assets/img/curriculum/board.jpg" width="1000" height="1250" loading="lazy" decoding="async" alt="Students writing at rows of classroom desks"><figcaption>A classroom view from the CIRS photograph collection. Programme and occasion not recorded.</figcaption></figure>
- <div class="rd-academic__text"><p>02 / Grades IX–XII</p><h3 id="academic-senior-h">Senior School</h3><p>The same broad course continues to the CBSE Board examination at the end of Grade X. In Grades XI and XII students continue with CBSE or choose the IB Diploma Programme.</p><a href="curriculum.html#journey-board">The first Board year</a></div>
-</article>
-<article class="rd-academic__panel" id="academic-cbse" aria-labelledby="academic-cbse-h">
- <figure><img src="assets/img/results-cbse-lab.webp" width="1800" height="1200" loading="lazy" decoding="async" alt="A teacher demonstrates apparatus to students gathered round a laboratory bench"><figcaption>A classroom view from the CIRS photograph collection. Programme and occasion not recorded.</figcaption></figure>
- <div class="rd-academic__text"><p>03 / A foundation, then a stream</p><h3 id="academic-cbse-h">CBSE</h3><p>CBSE runs from Grade V to XII at CIRS. In Grades XI and XII the published combinations offer Engineering, Medicine or Management streams. The subject combinations below are the school’s 2018–19 list; ask about current options.</p><a href="curriculum/cbse.html">Explore CBSE</a></div>
-</article>
-<article class="rd-academic__panel" id="academic-ib" aria-labelledby="academic-ib-h">
- <figure><img src="assets/img/results-ib-lab.webp" width="1800" height="1200" loading="lazy" decoding="async" alt="Students working at microscopes in a biology laboratory"><figcaption>A classroom view from the CIRS photograph collection. Programme and occasion not recorded.</figcaption></figure>
- <div class="rd-academic__text"><p>04 / Grades XI–XII</p><h3 id="academic-ib-h">IB Diploma</h3><p>Six subjects and the Diploma core: Theory of Knowledge, the Extended Essay, and Creativity, Activity, Service. The school’s supplied subject list appears below; combinations depend on student choices and the timetable.</p><a href="curriculum/ib-diploma.html">Explore the IB Diploma</a></div>
-</article></div>
-</section>
-
 
 <!-- The approach: a short spread and three notes on thin rules. -->
 <section class="atl-approach" id="approach" aria-labelledby="approach-title">
@@ -143,6 +122,7 @@
      photographs one over another in a single sticky frame, and the stage
      being read is the one shown. The frame is sticky only within this grid,
      so it lets go before the Grade X division below it. -->
+<span class="journey-anchor" id="academic-journey" aria-hidden="true"></span>
 <section class="atl-journey" id="journey" aria-labelledby="journey-title">
   <div class="wrap atl-journey__head atl-spread">
     <div class="atl-spread__l">
@@ -165,7 +145,9 @@
       </ol>
     </nav>
 
-    <div class="atl-step" id="journey-foundation" data-step="0">
+    <span class="journey-anchor" id="academic-junior" aria-hidden="true"></span>
+<div class="atl-step" id="journey-foundation" data-step="0">
+      <p class="journey-waypoint"><svg viewBox="0 0 28 28" aria-hidden="true" class="journey-icon"><path d="M4 6c4-2 7-2 10 0v17c-3-2-6-2-10 0V6Zm10 0c3-2 6-2 10 0v17c-4-2-7-2-10 0M14 6v17M7 10h4M17 10h4M7 14h4M17 14h4"/></svg><span>Junior School</span></p>
       <p class="atl-step__years">Grades V&ndash;VIII</p>
       <h3 class="atl-step__name">The foundation</h3>
       <p class="atl-step__body">Science, Mathematics, English, two additional languages and
@@ -180,11 +162,14 @@
       <span class="atl-shot__slate" aria-hidden="true"><b>V&ndash;VIII</b></span>
     </figure>
 
-    <div class="atl-step" id="journey-board" data-step="1">
+    <span class="journey-anchor" id="academic-senior" aria-hidden="true"></span>
+<div class="atl-step" id="journey-board" data-step="1">
+      <p class="journey-waypoint"><svg viewBox="0 0 28 28" aria-hidden="true" class="journey-icon"><circle cx="14" cy="14" r="10"/><path d="m18 10-2 6-6 2 2-6 6-2ZM14 1v3M14 24v3M1 14h3M24 14h3"/></svg><span>Senior School</span></p>
       <p class="atl-step__years">Grades IX&ndash;X</p>
       <h3 class="atl-step__name">The first Board year</h3>
       <p class="atl-step__body">The same broad course, carried to the CBSE Board examination
         at the end of Grade X: the first external examination a CIRS student sits.</p>
+      <p class="atl-step__body">The same broad course continues to the CBSE Board examination at the end of Grade X. In Grades XI and XII students continue with CBSE or choose the IB Diploma Programme.</p>
     </div>
     <figure class="atl-shot" data-step="1">
       <span class="atl-shot__img"><img src="assets/img/curriculum/board.jpg"
@@ -207,20 +192,25 @@
       </svg>
       <span class="atl-div__node" aria-hidden="true"><span>X</span></span>
       <div class="atl-div__text">
+        <h2 class="journey-choice-title">Choose Your Path</h2>
         <p class="atl-step__years">After Grade X &middot; Grades XI&#8288;&ndash;&#8288;XII</p>
         <h3 class="atl-step__name">A choice of pathway</h3>
       </div>
     </div>
     <ul class="atl-div__ends">
       <li class="atl-div__end atl-div__end--cbse">
-        <a href="#cbse">
+        <a href="#cbse" data-route-choice="cbse">
+          <svg viewBox="0 0 28 28" aria-hidden="true" class="journey-icon"><path d="M4 5h20v19H4zM4 11h20M11 11v13M17 11v13M4 17h20M8 2v6M20 2v6"/></svg>
+          <span class="journey-choice-label">Explore CBSE Curriculum</span>
           <span class="atl-div__tag">CBSE</span>
           <span class="atl-div__name">Engineering, Medicine or Management</span>
           <span class="atl-div__note">A senior stream, closed by the Class XII Board examination</span>
         </a>
       </li>
       <li class="atl-div__end atl-div__end--ib">
-        <a href="#ib">
+        <a href="#ib" data-route-choice="ib">
+          <svg viewBox="0 0 28 28" aria-hidden="true" class="journey-icon"><circle cx="14" cy="14" r="11"/><ellipse cx="14" cy="14" rx="5" ry="11"/><path d="M3 14h22M5 8h18M5 20h18"/></svg>
+          <span class="journey-choice-label">Explore IB Programme</span>
           <span class="atl-div__tag">IB Diploma</span>
           <span class="atl-div__name">Six subjects and the Diploma core</span>
           <span class="atl-div__note">Examinations and coursework, graded out of 45</span>
@@ -322,7 +312,8 @@
 
   <!-- CBSE: three ruled rows, the stream on one side and its published core
        subjects on the other. Every list is always there. -->
-  <article class="atl-streams" id="cbse" aria-labelledby="cbse-title">
+  <span class="journey-anchor" id="academic-cbse" aria-hidden="true"></span>
+<article class="atl-streams" id="cbse" aria-labelledby="cbse-title">
     <div class="wrap">
       <div class="atl-prog-head">
         <p class="atl-prog-head__tag">CBSE</p>
@@ -331,6 +322,7 @@
           Core subjects by stream, as the school last published them, for 2018&ndash;19. English is
           studied in all three.</p>
       </div>
+      <div class="journey-programme-context"><p>CBSE runs from Grade V to XII at CIRS. In Grades XI and XII the published combinations offer Engineering, Medicine or Management streams. The subject combinations below are the school’s 2018–19 list; ask about current options.</p><figure class="journey-programme-photo"><img src="assets/img/results-cbse-lab.webp" width="1800" height="1200" loading="lazy" decoding="async" alt="A teacher demonstrates apparatus to students gathered round a laboratory bench"><figcaption>A classroom view from the CIRS photograph collection. Programme and occasion not recorded.</figcaption></figure></div>
       <ul class="atl-stream-list">
         <li class="atl-stream">
           <h4 class="atl-stream__name" id="stream-engineering">Engineering</h4>
@@ -353,7 +345,8 @@
   <!-- IB: six tables in reading order. On a wide window the group index
        beside them stays in view; it is navigation, and the tables scroll as
        ordinary text. -->
-  <article class="atl-ib" id="ib" aria-labelledby="ib-title">
+  <span class="journey-anchor" id="academic-ib" aria-hidden="true"></span>
+<article class="atl-ib" id="ib" aria-labelledby="ib-title">
     <div class="wrap">
       <div class="atl-prog-head">
         <p class="atl-prog-head__tag">IB Diploma Programme</p>
@@ -361,6 +354,7 @@
         <p class="atl-prog-head__note">The subjects and levels offered at CIRS. A combination runs when
           enough students choose it, so not every permitted combination is timetabled.</p>
       </div>
+      <div class="journey-programme-context"><p>Six subjects and the Diploma core: Theory of Knowledge, the Extended Essay, and Creativity, Activity, Service. The school’s supplied subject list appears below; combinations depend on student choices and the timetable.</p><figure class="journey-programme-photo"><img src="assets/img/results-ib-lab.webp" width="1800" height="1200" loading="lazy" decoding="async" alt="Students working at microscopes in a biology laboratory"><figcaption>A classroom view from the CIRS photograph collection. Programme and occasion not recorded.</figcaption></figure></div>
 
       <div class="atl-rules">
         <div class="atl-rules__block">
@@ -515,7 +509,7 @@
     </div>
   </article>
 
-  <!-- The Diploma core: the page's one later purple scene. Three positions
+  <!-- The Diploma core: the page's later dark scene. Three positions
        on one gold line, each with its full name and explanation. -->
   <article class="atl-core" id="core" aria-labelledby="core-title">
     <div class="wrap">
@@ -577,3 +571,10 @@
     </div>
   </div>
 </section>
+
+<div class="journey-end" aria-hidden="true"><span></span></div>
+<nav class="journey-controls" aria-label="Curriculum route navigation">
+  <a href="#journey-division" class="journey-return">Return to the fork</a>
+  <a href="#cbse" data-route-choice="cbse">Explore CBSE Curriculum</a>
+  <a href="#ib" data-route-choice="ib">Explore IB Programme</a>
+</nav>

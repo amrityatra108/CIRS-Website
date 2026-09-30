@@ -287,14 +287,15 @@ PAGES = {
                        "CBSE from Grade V, a choice of CBSE or IB Diploma from Grade XI, "
                        "and the Chinmaya Vision Programme across school life.",
         "sheet": "curriculum",
-        "cache_suffix": "-curriculum-atlas-2",
+        "cache_suffix": "-curriculum-gold-journey-3",
         # No banner. The page opens on its own full-window scene, built in
         # tools/pages/curriculum.html: the gold path of the grades rising
-        # through the school's purple, the heading, the page's facts and its
+        # through a bright-gold opening, the heading, the page's facts and its
         # own section index. That index is visible and labelled, so the
         # floating "On this page" control would be a second copy of it; hence
-        # jump False. The opening is dark and full-screen, so the header
-        # starts clear over it in light lettering, as over any hero.
+        # jump False. Dark header text on its light surface keeps navigation
+        # readable over the bright opening and the ordinary reading sections.
+        "litehead": True,
         "banner": None,
         "jump": False,
         "uc": False,
@@ -2537,7 +2538,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "leadership":
         parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":
-        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-atlas-2" defer></script>')
+        parts[0] = parts[0].replace('</head>', f'<link rel="stylesheet" href="assets/css/curriculum-journey.css?{CACHE_BUST}">\n</head>')
+        parts.append(f'<script src="assets/js/curriculum.js?{CACHE_BUST}-journey-2" defer></script>')
     if slug == "school-history":
         parts.append(f'<script src="assets/js/history.js?{CACHE_BUST}-restored-1" defer></script>')
     if slug == "why-cirs":
