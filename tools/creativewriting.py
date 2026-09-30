@@ -176,6 +176,7 @@ def main_html(c):
         import creativewriting_horizontal as horizontal
         return (TEMPLATE_PATH.read_text(encoding='utf-8')
                 .replace('{{CW_ROWS}}', horizontal.rows_html())
+                .replace('{{CW_READER}}', horizontal.reader_html())
                 .replace('{{CW_CHAPTERS}}', horizontal.chapters_html())
                 .replace('{{CW_HERO_EXCERPT}}', horizontal.hero_excerpt_html())
                 .replace('{{CW_COUNT}}', str(count()))
@@ -242,7 +243,14 @@ def page_entries():
 def render(spec):
     if spec['kind']=='main': return main_html(spec['collection'])
     return edition_html(next(e for e in editions() if e['id']==spec['edition']))
-def head_html(spec): return '<meta name="color-scheme" content="light">\n'
+def head_html(spec):
+    meta='<meta name="color-scheme" content="light">\n'
+    if spec.get('kind')!='main' or spec.get('collection')!='all': return meta
+    # A shared poem address opens straight into the reader. Until the deferred
+    # script runs, hold the page back rather than paint the anthology first;
+    # the class drops after a moment if the script never arrives.
+    return meta+('<script>if(/^#poem-[a-z0-9-]+$/.test(location.hash)){var d=document.documentElement;'
+                 'd.classList.add("cw-boot-reader");setTimeout(function(){d.classList.remove("cw-boot-reader")},4000)}</script>\n')
 if __name__=='__main__':
     for e in editions(): print(f'{e["path"]}: {plural(len(e["poems"]),"poem")}')
     print(stats_line('all'))

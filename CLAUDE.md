@@ -94,7 +94,15 @@ archive is `tools/mathchallenge.py`: the PDFs are the school's winners' bulletin
 papers, and a month lists only the bulletins that exist.
 
 Creative Writing restores the horizontal anthology at `creative-writing.html`: one
-moving row per theme, all supplied poems below, pause/resume and quiet reading.
+moving row per theme, then each chapter with the list of its poems, and pause/resume.
+Poems are read one at a time: `#poem-…` opens the focused reader (`reader_html()`), and
+`assets/js/cwriting.js` moves that one article out of its chapter into the reader and back,
+so no poem is copied and never two are shown. Previous and Next stay inside the chapter.
+Show Chapter Design draws each chapter's identity (`CHAPTER_DESIGNS`, styled by
+`[data-cw-design]`) from the site's colour roles and paper grain, as no chapter artwork
+exists; Quiet Reading, the dark mode, takes priority over it. Without the script the page
+is the whole anthology, and `check-creative-writing.py` relies on every poem staying in
+the generated HTML.
 `tools/creativewriting_horizontal.py` renders this design from the current reconciled
 data through `tools/creativewriting.py`; never duplicate or invent poem data.
 The landing shell, sheet and controller are `tools/pages/creative-writing.html`,

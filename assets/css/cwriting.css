@@ -745,28 +745,6 @@ body.cwriting .cw-poem__nav a {
 body.cwriting .cw-poem__nav a:hover,
 body.cwriting .cw-poem__nav a:focus-visible { text-decoration-color: currentColor; }
 
-body.cwriting .cw-reader-toggle {
-  margin-top: 25px;
-  margin-left: 22px;
-  padding: 8px 13px;
-  border: 1px solid var(--cw-rule);
-  border-radius: 100px;
-  color: var(--cw-ink-soft);
-  background: rgba(255, 255, 255, .72);
-  font-size: .88rem;
-  font-weight: 500;
-  line-height: 1.2;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-}
-
-body.cwriting .cw-reader-toggle:hover,
-body.cwriting .cw-reader-toggle[aria-pressed="true"] {
-  border-color: var(--cw-charcoal);
-  color: var(--cw-charcoal);
-  background: #fff;
-}
-
 /* A few credited lines mark the turn of a chapter. */
 body.cwriting .cw-interlude {
   display: grid;
@@ -886,28 +864,723 @@ body.cwriting .cw-future a {
   color: #e8d9b5;
 }
 
-/* The reader mode simplifies the surrounding treatment but keeps navigation. */
-body.cwriting.cw-quiet .cw-chapter,
-body.cwriting.cw-quiet .cw-chapter--2,
-body.cwriting.cw-quiet .cw-chapter--4 {
-  background: #faf9f3;
+/* Each chapter lists its poems; choosing one opens it in the reader. */
+body.cwriting .cw-chapter__contents {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  column-gap: clamp(24px, 4vw, 48px);
+  width: calc(100% - 2 * var(--gut));
+  max-width: 1030px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--cw-rule);
 }
 
-body.cwriting.cw-quiet .cw-chapter__poems {
-  border-color: transparent;
-  background: #fff;
+html:not(.cw-js) body.cwriting .cw-chapter__contents { margin-bottom: clamp(48px, 6vw, 84px); }
+
+body.cwriting .cw-chapter__contents li { border-bottom: 1px solid var(--cw-rule); }
+
+body.cwriting .cw-contents__link {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 18px;
+  height: 100%;
+  padding: 22px 4px 24px;
+  color: var(--cw-ink);
+}
+
+body.cwriting .cw-contents__number {
+  grid-row: span 2;
+  padding-top: .5em;
+  color: var(--cw-gold-ink);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  font-variant-numeric: tabular-nums;
+}
+
+body.cwriting .cw-contents__title {
+  color: var(--cw-charcoal);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1.75vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -.022em;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  transition: text-decoration-color .2s ease;
+}
+
+body.cwriting .cw-contents__author {
+  color: var(--cw-ink-soft);
+  font-size: .92rem;
+  line-height: 1.45;
+}
+
+body.cwriting .cw-contents__link:hover .cw-contents__title,
+body.cwriting .cw-contents__link:focus-visible .cw-contents__title {
+  text-decoration-color: var(--cw-gold-ink);
+}
+
+body.cwriting .cw-contents__link.is-last-read .cw-contents__author::after {
+  content: "Last read";
+  display: inline-block;
+  margin-left: 10px;
+  padding: 1px 8px;
+  border: 1px solid var(--cw-gold-ink);
+  border-radius: 100px;
+  color: var(--cw-gold-ink);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  vertical-align: 1px;
+}
+
+/* With the script, a chapter is its list: the poems open one at a time. */
+html.cw-js body.cwriting .cw-chapter__poems { display: none; }
+
+/* ==========================================================
+   The reader: one poem, its chapter, and the way on.
+   ========================================================== */
+html.cw-reading body.cwriting #main > :not(.cw-reader) { display: none; }
+html.cw-boot-reader body.cwriting #main { visibility: hidden; }
+
+body.cwriting .cw-reader {
+  /* Normal reading: the Creative Writing ivory and ink. */
+  --r-bg: var(--cw-ivory);
+  --r-ink: var(--cw-ink);
+  --r-title: var(--cw-charcoal);
+  --r-soft: var(--cw-ink-soft);
+  --r-accent: var(--cw-gold-ink);
+  --r-control: var(--cw-ink);
+  --r-control-bg: rgba(255, 255, 255, .62);
+  --r-rule: var(--cw-rule);
+  --r-sheet: rgba(255, 255, 255, 0);
+  --r-sheet-edge: rgba(255, 255, 255, 0);
+  --r-motif-color: transparent;
+  --r-motif-opacity: 1;
+  --r-glow: rgba(143, 110, 47, .09);
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  padding: clamp(112px, 12vw, 150px) var(--gut) clamp(72px, 9vw, 120px);
+  color: var(--r-ink);
+  background: var(--r-bg);
+  transition: background-color .7s ease, color .7s ease;
+}
+
+body.cwriting .cw-reader[hidden] { display: none; }
+
+html.cw-reading body.cwriting,
+html.cw-reading body.cwriting #main { transition: background-color .7s ease; }
+html.cw-reading-quiet body.cwriting,
+html.cw-reading-quiet body.cwriting #main { background: #121015; }
+
+/* The scene sits behind the reading column; every layer fades on its own. */
+body.cwriting .cw-reader__scene {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+}
+
+body.cwriting .cw-reader__ground,
+body.cwriting .cw-reader__motif,
+body.cwriting .cw-reader__light,
+body.cwriting .cw-reader__quiet {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .7s ease, background-color .7s ease;
+}
+
+body.cwriting .cw-reader__ground { background: var(--r-ground, none); }
+
+body.cwriting .cw-reader__motif {
+  background-color: var(--r-motif-color);
+  -webkit-mask-image: var(--r-mask, none);
+  mask-image: var(--r-mask, none);
+  -webkit-mask-size: var(--r-mask-size, auto);
+  mask-size: var(--r-mask-size, auto);
+  -webkit-mask-position: var(--r-mask-position, 0 0);
+  mask-position: var(--r-mask-position, 0 0);
+}
+
+/* Light and atmosphere stay with the window while a long poem scrolls. */
+body.cwriting .cw-reader__light,
+body.cwriting .cw-reader__quiet {
+  position: sticky;
+  top: 0;
+  bottom: auto;
+  height: 100svh;
+  margin-bottom: -100svh;
+}
+
+body.cwriting .cw-reader__light span,
+body.cwriting .cw-reader__quiet span {
+  position: absolute;
+  inset: 0;
+}
+
+body.cwriting .cw-reader__light span:first-child { background: var(--r-light-1, none); }
+body.cwriting .cw-reader__light span:last-child {
+  background: var(--r-light-2, none);
+  -webkit-mask-image: var(--r-light-2-mask, none);
+  mask-image: var(--r-light-2-mask, none);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+body.cwriting .cw-reader__inner {
+  width: 100%;
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+body.cwriting .cw-reader__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+}
+
+body.cwriting .cw-reader__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: var(--r-control);
+  font-family: var(--font-ui);
+  font-size: .95rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 5px;
+  transition: color .3s ease, text-decoration-color .2s ease;
+}
+
+body.cwriting .cw-reader__back:hover,
+body.cwriting .cw-reader__back:focus-visible { text-decoration-color: currentColor; }
+
+body.cwriting .cw-reader__back span { transition: transform .2s ease; }
+body.cwriting .cw-reader__back:hover span { transform: translateX(-3px); }
+
+body.cwriting .cw-reader__settings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* A switch: the knob's position, not only its colour, says on or off. */
+body.cwriting .cw-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 6px 15px 6px 9px;
+  border: 1px solid var(--r-rule);
+  border-radius: 100px;
+  color: var(--r-control);
+  background: var(--r-control-bg);
+  font-family: var(--font-ui);
+  font-size: .86rem;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color .3s ease, background-color .3s ease, border-color .3s ease;
+}
+
+body.cwriting .cw-switch:hover { border-color: currentColor; }
+
+body.cwriting .cw-switch__track {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 20px;
+  border: 1.5px solid currentColor;
+  border-radius: 100px;
+  transition: background-color .25s ease;
+}
+
+body.cwriting .cw-switch__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: transform .25s cubic-bezier(.3,.7,.3,1), background-color .25s ease;
+}
+
+body.cwriting .cw-switch[aria-pressed="true"] { border-color: currentColor; }
+body.cwriting .cw-switch[aria-pressed="true"] .cw-switch__track { background: currentColor; }
+body.cwriting .cw-switch[aria-pressed="true"] .cw-switch__knob {
+  transform: translateX(12px);
+  background: var(--r-bg);
+}
+
+body.cwriting .cw-reader__chapter {
+  margin-top: clamp(40px, 6vw, 72px);
+  text-align: center;
+}
+
+body.cwriting .cw-reader__eyebrow {
+  color: var(--r-accent);
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  transition: color .7s ease;
+}
+
+body.cwriting .cw-reader__chapter-title {
+  margin-top: 8px;
+  color: var(--r-title);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+  transition: color .7s ease;
+}
+
+/* The page the poem is set on. In normal reading it is the page itself;
+   with a chapter's design behind it, it becomes a sheet laid over it. */
+body.cwriting .cw-reader__stage {
+  margin-top: clamp(28px, 4vw, 44px);
+  padding: clamp(36px, 5vw, 64px) clamp(20px, 5vw, 72px);
+  border: 1px solid var(--r-sheet-edge);
+  border-radius: 6px;
+  background: var(--r-sheet);
+  transition: background-color .7s ease, border-color .7s ease, box-shadow .7s ease;
+}
+
+/* Changing poem: a brief fade out, and the next settles up into place.
+   Only the poem moves; the sheet beneath it stays put. */
+body.cwriting .cw-reader__stage > .cw-poem {
+  transition: opacity .26s cubic-bezier(.2,.7,.3,1), transform .26s cubic-bezier(.2,.7,.3,1);
+}
+
+body.cwriting .cw-reader__stage.is-leaving > .cw-poem {
+  opacity: 0;
+  transition-duration: .15s;
+}
+
+body.cwriting .cw-reader__stage.is-arriving > .cw-poem {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: none;
+}
+
+body.cwriting .cw-reader .cw-poem {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  scroll-margin-top: 0;
+}
+
+body.cwriting .cw-reader .cw-poem__topline {
+  justify-content: center;
+  gap: 6px 14px;
+  margin-bottom: 18px;
+  color: var(--r-accent);
+  font-size: .76rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: color .7s ease;
+}
+
+body.cwriting .cw-reader .cw-poem__topline span + span::before {
+  content: "·";
+  margin-right: 14px;
+}
+
+body.cwriting .cw-reader .cw-poem__title {
+  max-width: 18ch;
+  margin-inline: auto;
+  color: var(--r-title);
+  font-size: clamp(2.3rem, 4.8vw, 4.2rem);
+  line-height: 1.06;
+  text-align: center;
+  text-wrap: balance;
+  transition: color .7s ease;
+}
+
+body.cwriting .cw-reader .cw-poem__title:focus { outline: none; }
+body.cwriting .cw-reader .cw-poem__title:focus-visible {
+  outline: 3px solid var(--r-accent);
+  outline-offset: 8px;
+}
+
+body.cwriting .cw-reader .cw-poem__byline {
+  margin-top: 18px;
+  color: var(--r-soft);
+  font-size: 1.02rem;
+  text-align: center;
+  transition: color .7s ease;
+}
+
+body.cwriting .cw-reader .cw-poem__byline span {
+  color: var(--r-title);
+  font-weight: 600;
+  transition: color .7s ease;
+}
+
+/* A rule under the title and a rule under the poem frame the reading. */
+body.cwriting .cw-reader .cw-poem__byline::after,
+body.cwriting .cw-reader .cw-poem__body::after {
+  content: "";
+  display: block;
+  width: min(260px, 60%);
+  height: 1px;
+  margin: clamp(34px, 4.5vw, 52px) auto 0;
+  background: var(--r-rule);
+  transition: background-color .7s ease;
+}
+
+/* The poem: a literary measure, its lines left-aligned, the column centred. */
+body.cwriting .cw-reader .cw-poem__body {
+  width: fit-content;
+  max-width: min(100%, 34em);
+  margin: clamp(34px, 4.5vw, 52px) auto 0;
+  color: var(--r-ink);
+  font-family: var(--font-editorial);
+  font-size: clamp(1.2rem, 1.02rem + .72vw, 1.52rem);
+  font-weight: 500;
+  line-height: 1.78;
+  letter-spacing: .002em;
+  transition: color .7s ease;
+}
+
+body.cwriting .cw-reader .cw-poem__stanza + .cw-poem__stanza { margin-top: 1.45em; }
+
+/* A line too long for the measure hangs its continuation, so a wrap is
+   never mistaken for one of the poet's own line breaks. */
+@supports (text-indent: 1em each-line) {
+  body.cwriting .cw-reader .cw-poem__stanza {
+    padding-left: 1.1em;
+    text-indent: -1.1em each-line;
+  }
+}
+
+/* The poem's own links serve the page without the reader; here the reader's
+   controls replace them. */
+body.cwriting .cw-reader .cw-poem__nav { display: none; }
+
+body.cwriting .cw-reader__nav {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: clamp(36px, 5vw, 56px);
+}
+
+body.cwriting .cw-reader__position {
+  color: var(--r-soft);
+  font-family: var(--font-ui);
+  font-size: .82rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  transition: color .7s ease;
+}
+
+body.cwriting .cw-reader__step {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  min-height: 60px;
+  padding: 12px 18px;
+  border: 1px solid var(--r-rule);
+  border-radius: 14px;
+  color: var(--r-control);
+  background: var(--r-control-bg);
+  font-family: var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+  transition: color .3s ease, background-color .3s ease, border-color .3s ease, opacity .3s ease;
+}
+
+body.cwriting .cw-reader__step--prev { justify-self: start; }
+body.cwriting .cw-reader__step--next { justify-self: end; align-items: flex-end; text-align: right; }
+
+body.cwriting .cw-reader__step-dir {
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+body.cwriting .cw-reader__step-title {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 28ch;
+  color: var(--r-soft);
+  font-size: .84rem;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  transition: color .3s ease;
+}
+
+body.cwriting .cw-reader__step:not([aria-disabled="true"]):hover { border-color: currentColor; }
+
+/* Unavailable: faded, not clickable, and said in words beneath it. */
+body.cwriting .cw-reader__step[aria-disabled="true"] {
+  border-style: dashed;
+  opacity: .55;
+  background: transparent;
+  cursor: not-allowed;
+}
+
+body.cwriting #main .cw-reader a:focus-visible,
+body.cwriting #main .cw-reader button:focus-visible {
+  outline: 3px solid var(--r-accent);
+  outline-offset: 4px;
+}
+
+/* ---- Chapter design --------------------------------------------------
+   Each chapter's identity, from the site's colour roles and paper grain.
+   Whatever lies behind, the poem sits on a near-opaque sheet of paper. */
+body.cwriting .cw-reader[data-cw-design="lights"] {
+  --r-design-bg: #FBF4E2;
+  --r-design-ground: radial-gradient(ellipse at 82% 6%, rgba(255, 215, 92, .34), transparent 46%), radial-gradient(ellipse at 8% 92%, rgba(255, 231, 166, .45), transparent 50%), linear-gradient(180deg, #FFF6DD, #F7F0E2 58%, #F4F0E6);
+  --r-design-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='1.6'/%3E%3C/filter%3E%3Cg filter='url(%23b)'%3E%3Ccircle cx='34' cy='46' r='6'/%3E%3Ccircle cx='168' cy='28' r='3.5' opacity='.7'/%3E%3Ccircle cx='108' cy='128' r='9' opacity='.55'/%3E%3Ccircle cx='224' cy='168' r='4.5' opacity='.8'/%3E%3Ccircle cx='46' cy='206' r='3.5' opacity='.65'/%3E%3Ccircle cx='150' cy='228' r='5.5' opacity='.6'/%3E%3Ccircle cx='232' cy='82' r='2.5'/%3E%3C/g%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='1.6'/%3E%3C/filter%3E%3Cg filter='url(%23b)'%3E%3Ccircle cx='34' cy='46' r='6'/%3E%3Ccircle cx='168' cy='28' r='3.5' opacity='.7'/%3E%3Ccircle cx='108' cy='128' r='9' opacity='.55'/%3E%3Ccircle cx='224' cy='168' r='4.5' opacity='.8'/%3E%3Ccircle cx='46' cy='206' r='3.5' opacity='.65'/%3E%3Ccircle cx='150' cy='228' r='5.5' opacity='.6'/%3E%3Ccircle cx='232' cy='82' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
+  --r-design-mask-size: 340px 340px, 523px 523px;
+  --r-design-mask-position: 0 0, 170px 260px;
+  --r-design-motif: rgba(255, 195, 8, .3);
+  --r-design-light-1: radial-gradient(circle at 88% 12%, rgba(255, 215, 92, .3), transparent 30%);
+  --r-glow: rgba(255, 195, 8, .085);
+}
+
+body.cwriting .cw-reader[data-cw-design="dusk"] {
+  --r-design-bg: #EFE8F1;
+  --r-design-ground: radial-gradient(ellipse at 10% 100%, rgba(255, 215, 92, .22), transparent 48%), linear-gradient(180deg, #E9E0EF, #F3EDF6 45%, #F6EFE6);
+  --r-design-mask: linear-gradient(transparent, transparent);
+  --r-design-mask-size: 100% 100%;
+  --r-design-motif: transparent;
+  --r-design-light-1: radial-gradient(circle at 92% 8%, rgba(57, 42, 72, .09), transparent 34%);
+  --r-design-light-2: repeating-radial-gradient(circle at 92% 8%, transparent 0 46px, rgba(57, 42, 72, .2) 46px 47.5px);
+  --r-design-light-2-mask: radial-gradient(circle at 92% 8%, #000 0 18%, rgba(0, 0, 0, .45) 38%, transparent 64%);
+  --r-glow: rgba(128, 96, 160, .14);
+}
+
+body.cwriting .cw-reader[data-cw-design="paper"] {
+  --r-design-bg: #F8F3E7;
+  --r-design-ground: linear-gradient(90deg, transparent calc(9% - 1px), rgba(122, 15, 30, .3) calc(9% - 1px), rgba(122, 15, 30, .3) calc(9% + 1px), transparent calc(9% + 1px)), url("../creative-writing/paper-grain.svg"), linear-gradient(180deg, #FAF6EC, #F4EEDF);
+  --r-design-mask: repeating-linear-gradient(180deg, transparent 0 35px, #000 35px 36px);
+  --r-design-mask-size: 100% 100%;
+  --r-design-motif: rgba(57, 42, 72, .13);
+  --r-glow: rgba(210, 180, 130, .075);
+}
+
+body.cwriting .cw-reader[data-cw-design="night"] {
+  --r-design-bg: #1E1626;
+  --r-design-ground: radial-gradient(ellipse at 50% -12%, rgba(57, 42, 72, .95), transparent 62%), linear-gradient(180deg, #1E1626, #2B2037);
+  --r-design-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Ccircle cx='12' cy='20' r='1.1'/%3E%3Ccircle cx='70' cy='8' r='.8'/%3E%3Ccircle cx='132' cy='34' r='1.4'/%3E%3Ccircle cx='40' cy='88' r='.9'/%3E%3Ccircle cx='104' cy='76' r='1'/%3E%3Ccircle cx='164' cy='112' r='.8'/%3E%3Ccircle cx='22' cy='150' r='1.3'/%3E%3Ccircle cx='88' cy='138' r='.7'/%3E%3Ccircle cx='140' cy='166' r='1'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Ccircle cx='12' cy='20' r='1.1'/%3E%3Ccircle cx='70' cy='8' r='.8'/%3E%3Ccircle cx='132' cy='34' r='1.4'/%3E%3Ccircle cx='40' cy='88' r='.9'/%3E%3Ccircle cx='104' cy='76' r='1'/%3E%3Ccircle cx='164' cy='112' r='.8'/%3E%3Ccircle cx='22' cy='150' r='1.3'/%3E%3Ccircle cx='88' cy='138' r='.7'/%3E%3Ccircle cx='140' cy='166' r='1'/%3E%3C/svg%3E");
+  --r-design-mask-size: 180px 180px, 277px 277px;
+  --r-design-mask-position: 0 0, 97px 61px;
+  --r-design-motif: rgba(255, 231, 166, .5);
+  --r-design-light-1: radial-gradient(circle at 84% 12%, rgba(255, 231, 166, .16), transparent 24%);
+  --r-glow: rgba(96, 72, 140, .2);
+}
+
+body.cwriting .cw-reader[data-cw-design="meadow"] {
+  --r-design-bg: #E9F0E2;
+  --r-design-ground: linear-gradient(180deg, #F0F5EA, #E2EBD9 55%, #D3E1CB);
+  --r-design-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='240'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.2'%3E%3Cpath d='M0 60C120 30 240 90 360 60S600 30 720 60'/%3E%3Cpath d='M0 140C140 110 260 170 380 138S610 112 720 140'/%3E%3Cpath d='M0 212C110 196 250 236 370 214S600 188 720 212'/%3E%3C/g%3E%3C/svg%3E");
+  --r-design-mask-size: 720px 240px;
+  --r-design-motif: rgba(46, 93, 58, .17);
+  --r-design-light-2: linear-gradient(180deg, rgba(167, 184, 150, .55), rgba(46, 93, 58, .28));
+  --r-design-light-2-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' preserveAspectRatio='none'%3E%3Cpath d='M0 760C220 690 420 720 640 748S1100 690 1440 730V900H0Z'/%3E%3Cpath d='M0 830C300 790 560 842 860 812S1260 800 1440 822V900H0Z' opacity='.8'/%3E%3C/svg%3E");
+  --r-glow: rgba(46, 93, 58, .16);
+}
+
+body.cwriting .cw-reader[data-cw-design="sunrise"] {
+  --r-design-bg: #FBF1DF;
+  --r-design-ground: linear-gradient(180deg, #FDF3DA, #FAF1E4 50%, #F7EADF);
+  --r-design-mask: linear-gradient(transparent, transparent);
+  --r-design-mask-size: 100% 100%;
+  --r-design-motif: transparent;
+  --r-design-light-1: radial-gradient(circle at 50% 108%, rgba(255, 195, 8, .36), rgba(255, 215, 92, .16) 24%, transparent 52%);
+  --r-design-light-2: repeating-conic-gradient(from -90deg at 50% 108%, rgba(255, 195, 8, .12) 0deg 2.5deg, transparent 2.5deg 11deg);
+  --r-design-light-2-mask: radial-gradient(circle at 50% 108%, #000 0 12%, rgba(0, 0, 0, .6) 32%, transparent 62%);
+  --r-glow: rgba(255, 170, 70, .1);
+}
+
+body.cwriting .cw-reader.cw-reader--design {
+  --r-bg: var(--r-design-bg);
+  --r-ground: var(--r-design-ground);
+  --r-mask: var(--r-design-mask);
+  --r-mask-size: var(--r-design-mask-size);
+  --r-mask-position: var(--r-design-mask-position, 0 0);
+  --r-motif-color: var(--r-design-motif);
+  --r-light-1: var(--r-design-light-1);
+  --r-light-2: var(--r-design-light-2);
+  --r-light-2-mask: var(--r-design-light-2-mask);
+  --r-sheet: rgba(255, 253, 248, .9);
+  --r-sheet-edge: rgba(255, 255, 255, .9);
+  --r-control-bg: rgba(255, 253, 248, .72);
+}
+
+body.cwriting .cw-reader--design .cw-reader__ground,
+body.cwriting .cw-reader--design .cw-reader__motif,
+body.cwriting .cw-reader--design .cw-reader__light { opacity: 1; }
+
+body.cwriting .cw-reader--design .cw-reader__stage {
+  box-shadow: 0 30px 80px rgba(30, 22, 38, .1);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* Night is the one dark chapter: the chrome around the sheet turns light,
+   while the poem keeps its ink on paper. */
+body.cwriting .cw-reader--design:not(.cw-reader--quiet)[data-cw-design="night"] {
+  --r-control: #F4F0E6;
+  --r-control-bg: rgba(255, 255, 255, .07);
+  --r-rule: rgba(244, 240, 230, .28);
+  --r-accent: var(--gold-pale);
+  --r-sheet: rgba(250, 249, 243, .96);
+}
+
+body.cwriting .cw-reader--design:not(.cw-reader--quiet)[data-cw-design="night"] .cw-reader__chapter-title { color: #FAF9F3; }
+body.cwriting .cw-reader--design:not(.cw-reader--quiet)[data-cw-design="night"] .cw-reader__position { color: #D9D1DE; }
+body.cwriting .cw-reader--design:not(.cw-reader--quiet)[data-cw-design="night"] .cw-reader__step-title { color: #D9D1DE; }
+body.cwriting .cw-reader--design:not(.cw-reader--quiet)[data-cw-design="night"] .cw-reader__stage {
+  --r-accent: var(--cw-gold-ink);
+  --r-rule: var(--cw-rule);
+}
+
+body.cwriting .cw-reader--design:not(.cw-reader--quiet)[data-cw-design="meadow"] { --r-accent: var(--campus); }
+
+/* ---- Quiet Reading ---------------------------------------------------
+   Late at night with a book: near-black, soft ivory type, the controls
+   withdrawn until they are wanted. It overrides any chapter design. */
+body.cwriting .cw-reader.cw-reader--quiet {
+  --r-bg: #121015;
+  --r-ink: #E6E0D3;        /* 14.6:1 on the ground */
+  --r-title: #F1ECE1;
+  --r-soft: #A7A0AE;       /* 7.4:1 */
+  --r-accent: #C9B48A;     /* 9.3:1 */
+  --r-control: #948D9C;    /* 5.9:1, brightening on hover and focus */
+  --r-control-bg: transparent;
+  --r-rule: rgba(230, 224, 211, .14);
+  --r-sheet: transparent;
+  --r-sheet-edge: transparent;
+  --r-motif-color: rgba(230, 224, 211, .05);
+}
+
+body.cwriting .cw-reader--quiet .cw-reader__ground,
+body.cwriting .cw-reader--quiet .cw-reader__light { opacity: 0; }
+body.cwriting .cw-reader--quiet .cw-reader__motif { opacity: 0; }
+body.cwriting .cw-reader--quiet.cw-reader--design .cw-reader__motif { opacity: 1; }
+body.cwriting .cw-reader--quiet .cw-reader__quiet { opacity: 1; }
+
+body.cwriting .cw-reader--quiet .cw-reader__stage {
   box-shadow: none;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
 
-body.cwriting.cw-quiet .cw-interlude {
-  color: var(--cw-ink);
-  background: #faf9f3;
+/* The atmosphere: two slow pools of light and a whisper of grain. With a
+   chapter's design on, the light takes that chapter's colour. */
+body.cwriting .cw-reader__quiet {
+  background:
+    radial-gradient(ellipse at 50% -20%, rgba(57, 42, 72, .42), transparent 60%),
+    radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, .55), transparent 60%);
 }
 
-body.cwriting.cw-quiet .cw-interlude__line { color: var(--cw-ink); }
-body.cwriting.cw-quiet .cw-interlude__credit { color: var(--cw-gold-ink); }
+body.cwriting .cw-reader__quiet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .05;
+  background-image: url("../creative-writing/paper-grain.svg");
+}
+
+body.cwriting .cw-reader__quiet span:first-child {
+  inset: -30% 30% 30% -30%;
+  background: radial-gradient(circle, rgba(143, 110, 47, .1), transparent 62%);
+}
+
+body.cwriting .cw-reader__quiet span:last-child {
+  inset: 25% -30% -35% 30%;
+  background: radial-gradient(circle, rgba(88, 66, 120, .16), transparent 62%);
+}
+
+body.cwriting .cw-reader--quiet.cw-reader--design .cw-reader__quiet span:first-child,
+body.cwriting .cw-reader--quiet.cw-reader--design .cw-reader__quiet span:last-child {
+  background: radial-gradient(circle, var(--r-glow), transparent 62%);
+}
+
+body.cwriting .cw-reader--quiet .cw-reader__quiet span:first-child { animation: cw-quiet-drift-a 95s ease-in-out infinite alternate; }
+body.cwriting .cw-reader--quiet .cw-reader__quiet span:last-child { animation: cw-quiet-drift-b 125s ease-in-out infinite alternate; }
+
+@keyframes cw-quiet-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(8vw, 6vh, 0) scale(1.08); }
+}
+
+@keyframes cw-quiet-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.05); }
+  to { transform: translate3d(-7vw, -5vh, 0) scale(.96); }
+}
+
+body.cwriting .cw-reader--quiet .cw-reader__eyebrow { letter-spacing: .2em; }
+
+body.cwriting .cw-reader--quiet .cw-poem__body {
+  font-weight: 430;
+  line-height: 1.86;
+  letter-spacing: .008em;
+}
+
+body.cwriting .cw-reader--quiet .cw-poem__byline span { font-weight: 500; }
+
+body.cwriting .cw-reader--quiet .cw-switch,
+body.cwriting .cw-reader--quiet .cw-reader__step {
+  border-color: transparent;
+}
+
+body.cwriting .cw-reader--quiet .cw-switch:hover,
+body.cwriting .cw-reader--quiet .cw-switch:focus-visible,
+body.cwriting .cw-reader--quiet .cw-reader__back:hover,
+body.cwriting .cw-reader--quiet .cw-reader__back:focus-visible,
+body.cwriting .cw-reader--quiet .cw-reader__step:not([aria-disabled="true"]):hover,
+body.cwriting .cw-reader--quiet .cw-reader__step:not([aria-disabled="true"]):focus-visible {
+  border-color: rgba(230, 224, 211, .28);
+  color: var(--r-ink);
+}
+
+body.cwriting .cw-reader--quiet .cw-reader__step[aria-disabled="true"] { border-color: rgba(230, 224, 211, .12); }
+
+@media (max-width: 700px) {
+  body.cwriting .cw-reader { padding-top: 104px; }
+  body.cwriting .cw-reader__bar { flex-direction: column; align-items: flex-start; }
+  body.cwriting .cw-reader__settings { width: 100%; }
+  body.cwriting .cw-reader__settings { flex-wrap: nowrap; }
+  body.cwriting .cw-switch { flex: 1 1 0; min-width: 0; justify-content: flex-start; padding-right: 12px; font-size: .82rem; text-align: left; }
+  body.cwriting .cw-reader__stage { padding: 30px 18px; }
+  body.cwriting .cw-reader .cw-poem__body { width: auto; }
+  body.cwriting .cw-reader__nav { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  body.cwriting .cw-reader__position { grid-column: 1 / -1; grid-row: 1; text-align: center; }
+  body.cwriting .cw-reader__step { width: 100%; padding: 12px 14px; }
+  body.cwriting .cw-reader__step-dir { font-size: .9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.cwriting .cw-reader__quiet span { animation: none !important; }
+  body.cwriting .cw-reader__back:hover span { transform: none; }
+}
 
 @media (max-width: 950px) {
   body.cwriting .cw-hero { padding-block: 140px 62px; }

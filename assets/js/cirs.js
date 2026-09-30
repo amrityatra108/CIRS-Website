@@ -1861,7 +1861,9 @@
 
     var main = $("#main");
     var barBottom = 0, zones = [], scrolled = null, queued = false;
-    var contentFirst = header.dataset.headerStart === "content";
+    // Read live: a page can open a view with no full-screen picture above an
+    // opening that has one (the Creative Writing reader), and ask for the pill.
+    function contentFirst() { return header.dataset.headerStart === "content"; }
     var heroBoundary = header.dataset.headerHero ? $(header.dataset.headerHero) : null;
     var heroEnd = null;
 
@@ -1919,7 +1921,7 @@
       var y = window.scrollY || window.pageYOffset || 0;
       var pillIn = heroEnd === null ? PILL_IN : Math.max(PILL_IN, heroEnd - barBottom);
       var pillOut = heroEnd === null ? PILL_OUT : Math.max(PILL_OUT, pillIn - 24);
-      var next = contentFirst || (scrolled ? y > pillOut : y > pillIn);
+      var next = contentFirst() || (scrolled ? y > pillOut : y > pillIn);
       var at = y + barBottom;
       var dark = false;
       zones.forEach(function (zone) { if (at >= zone.top && at < zone.bottom) dark = zone.dark; });
@@ -1960,6 +1962,10 @@
     window.addEventListener("scroll", queue, { passive: true });
     window.addEventListener("resize", remeasure, { passive: true });
     window.addEventListener("pageshow", remeasure);
+    // A page that changes its view in place (the Creative Writing reader)
+    // asks for a fresh reading here. A synthetic resize would do it too, but
+    // would also make ScrollTrigger refresh and put back a stale position.
+    window.addEventListener("cirs-header-refresh", remeasure);
     // A trigger rather than ScrollTrigger.addEventListener("refresh"). With
     // only the listener, a page reloaded halfway down came back near the top:
     // on pages that create no trigger of their own at boot, the browser's

@@ -532,7 +532,7 @@ PAGES = {
         # which also adds the Junior, Senior and edition pages below.
         "banner": None,
         "sheet": "cwriting",
-        "cache_suffix": "-horizontal-20260930",
+        "cache_suffix": "-poem-reader-20260930",
         "jump": False,
         "uc": False,
         # The opening is deep purple, so the header letters in light over it.
