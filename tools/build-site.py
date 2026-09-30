@@ -2079,12 +2079,12 @@ def build(slug, page):
             "</head>",
             read("tools/partials/crossroads-startup.html") +
             '<style>body.crossroads-intro-active :is(.progress,.ring,.totop,.jump,.footer-wrap){visibility:hidden!important}'
-            'body.crossroads-intro-active .crossroads-intro{background:#16031c url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}'
+            'body.crossroads-intro-active .crossroads-intro{background:#000 url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}'
             '</style>'
             '<link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">\n'
-            f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-10" as="script" fetchpriority="high">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-10">\n'
-            f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}">\n'
+            f'<link rel="preload" href="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-12" as="script" fetchpriority="high">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-intro.css?{CACHE_BUST}-intro-12">\n'
+            f'<link rel="stylesheet" href="assets/css/crossroads-archive.css?{CACHE_BUST}-title-2">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-stories.css?{CACHE_BUST}-hover-4">\n'
             f'<link rel="stylesheet" href="assets/css/crossroads-manuscript.css?{CACHE_BUST}">\n'
             '<noscript><style>body.crossroads-intro-active :is(.header,.drawer,.progress,.ring,.totop,.jump,.skip-link,.footer-wrap){visibility:visible!important}'
@@ -2467,7 +2467,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         # This page-specific controller only owns the introduction. Load it
         # before shared animation dependencies so Skip and its bounded lock
         # are ready as soon as the critical styles have arrived.
-        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-10" defer></script>')
+        parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-12" defer></script>')
     # Only video pages need media ownership; unrelated pages keep their scripts.
     if not page.get("cw") and (slug == "index" or page.get("hero_media") or page.get("opening")):
         parts.append(f'<script src="assets/js/media-lifecycle.js?{CACHE_BUST}" defer></script>')

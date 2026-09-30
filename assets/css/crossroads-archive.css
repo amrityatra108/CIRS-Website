@@ -54,3 +54,5 @@ body .crossroads-archive-hero__title { margin:0; font-family:var(--font-display)
  .crossroads-archive-hero__description { margin-top:14px; }
  .crossroads-archive-hero__footer { margin-top:24px; padding-top:18px; }
 }
+
+.crossroads-archive-hero__title > span{display:block}

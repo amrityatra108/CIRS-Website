@@ -60,6 +60,20 @@ fs.mkdirSync(output,{recursive:true});
     results.push({test:`${name}: natural end, no contour overlap, uniform scaling, no overflow`,ended,settled,sampledFrames:frames.length,overlapFrames:0});
     await p.close();
   }
+  {
+    const p=await browser.newPage();await p.goto(base);
+    await p.waitForFunction(()=>document.querySelector('[data-crossroads-intro-opening]').currentTime>0);
+    await p.locator('[data-crossroads-intro-opening]').evaluate(v=>{v.playbackRate=.8;});
+    await p.waitForFunction(()=>!document.documentElement.classList.contains('crossroads-intro-scroll-locked'));
+    const released=await state(p);assert.ok(released.time>0&&released.time<released.duration&&!released.paused);
+    await p.evaluate(()=>scrollTo({top:innerHeight*2,behavior:'instant'}));
+    await p.waitForFunction(()=>document.querySelector('[data-crossroads-intro]').hasAttribute('data-crossroads-intro-settled'));
+    const offscreen=await state(p);assert.equal(offscreen.paused,true);assert.equal(offscreen.handoff,false);
+    await p.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await p.waitForTimeout(500);
+    const returned=await state(p);assert.equal(returned.paused,true);assert.equal(returned.time,offscreen.time);
+    assert.equal(await p.locator('[data-crossroads-intro]').evaluate(i=>i.hasAttribute('data-crossroads-intro-film')),false);
+    results.push({test:'healthy unlock then offscreen/return never resumes the opening',released,offscreen,returned});await p.close();
+  }
   for(const keyboard of [false,true]) {
     const p=await browser.newPage(); await p.goto(base);
     const skip=p.locator('[data-crossroads-intro-skip]');
