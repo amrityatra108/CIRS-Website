@@ -518,7 +518,7 @@ PAGES = {
         "banner": None,
         "sheet": "matharena",
         "litehead": True,
-        "cache_suffix": "-math-white-gold-2",
+        "cache_suffix": "-math-white-gold-3",
     },
     "creative-writing": {
         "nav": "Creative Writing",
@@ -542,7 +542,7 @@ PAGES = {
     "captures": {
         "nav": "CIRS Captures",
         "title": "CIRS Captures",
-        "cache_suffix": "-captures-green-inward-3",
+        "cache_suffix": "-captures-green-inward-4",
         # Not "as its students see it", which this page said while it was a
         # placeholder: none of these files records who took it, so the page
         # makes no claim about who did.

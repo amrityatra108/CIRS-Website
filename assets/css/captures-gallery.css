@@ -399,4 +399,4 @@ body.captures :is(.cg,.cg-end){
  --rule:rgba(250,249,243,.22);--label:var(--gold);
  background:var(--captures-ground);color:var(--ink);
 }
-body.captures .cg-end__onward a{color:var(--on-dark)}
+body.captures .cg-end__onward .btn--outline{color:var(--on-dark)}
