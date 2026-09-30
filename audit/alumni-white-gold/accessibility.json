@@ -1,0 +1,201 @@
+[
+  {
+    "context": "#constellation",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              "button[data-filter=\"all\"] > .ajc__fcount"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined due to a pseudo element"
+          },
+          {
+            "target": [
+              "button[data-filter=\"india\"] > .ajc__fcount"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined due to a pseudo element"
+          },
+          {
+            "target": [
+              "button[data-filter=\"uk\"] > .ajc__fcount"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined due to a pseudo element"
+          },
+          {
+            "target": [
+              "button[data-filter=\"us\"] > .ajc__fcount"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined due to a pseudo element"
+          },
+          {
+            "target": [
+              "button[data-filter=\"canada\"] > .ajc__fcount"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined due to a pseudo element"
+          },
+          {
+            "target": [
+              "button[data-filter=\"apac\"] > .ajc__fcount"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined due to a pseudo element"
+          },
+          {
+            "target": [
+              "button[data-filter=\"europe\"] > .ajc__fcount"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined due to a pseudo element"
+          },
+          {
+            "target": [
+              "button[data-filter=\"middle-east\"] > .ajc__fcount"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined due to a pseudo element"
+          },
+          {
+            "target": [
+              ".ajc__originName"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it is overlapped by another element"
+          },
+          {
+            "target": [
+              "#ajc-pt-hkust > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-cvv > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "target": [
+              "#ajc-pt-iitm > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-nid > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-srcc > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-ntu > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-nus > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-durham > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-imperial > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-lse > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-manchester > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-warwick > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-boston > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-nyu > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-northwestern > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-purdue > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-parsons > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-chicago > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              "#ajc-pt-virginia > .ajc__label > .ajc__name"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "context": "#aj-voices",
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "context": "#pathways",
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "context": "#aj-return",
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "context": "#ajc-panel",
+    "violations": [],
+    "incomplete": []
+  }
+]

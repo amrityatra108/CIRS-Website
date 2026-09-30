@@ -48,7 +48,9 @@ from html import escape
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import robinson          # noqa: E402  the projection, shared with make-worldmap.py
-import worldland         # noqa: E402  the coastline it has already projected
+# Country boundaries are generated offline in the same projection as the markers.
+COUNTRIES = json.loads(Path(__file__).with_name("alumni-countries.json").read_text())["countries"]
+COUNTRY_NAMES = {"United States of America": "United States"}
 
 # ------------------------------------------------------------------
 # The regions, in the order the map and the index use. The key is what
@@ -423,18 +425,42 @@ def routes_svg():
     return "\n".join(out)
 
 
-def map_svg():
-    """The world under the routes: coastline only, no borders, no grid.
+def country_name(country):
+    return COUNTRY_NAMES.get(country["name"], country["name"])
 
-    Borders would date the map and say nothing about where anybody
-    studied; a graticule would make it an instrument. What is wanted is
-    the shape of the land, far enough down in the dark that the nineteen
-    points are the brightest things in the frame.
+
+def country_total(name):
+    return sum(d[3] == name for d in DESTINATIONS)
+
+
+def map_svg():
+    """Natural Earth country hit areas, aligned with the existing Robinson points.
+
+    One roving keyboard stop; arrows traverse shapes. The country selector and
+    region buttons offer the same directory without requiring map navigation.
     """
-    return ('    <svg class="ajc__map" viewBox="0 0 %.4f %.4f" '
-            'aria-hidden="true" focusable="false">\n'
-            '      <path class="ajc__land" d="%s"/>\n'
-            '    </svg>' % (VB_W, VB_H, worldland.LAND))
+    shapes = []
+    for i, country in enumerate(COUNTRIES):
+        name = country_name(country)
+        label = "%s: %d institutions." % (name, country_total(name))
+        shapes.append('<path class="ajc__land" d="%s" fill-rule="evenodd" '
+                      'data-country="%s" data-count="%d" aria-label="%s"/>' %
+                      (country["path"], escape(name, quote=True), country_total(name),
+                       escape(label, quote=True)))
+    return ('<svg class="ajc__map" viewBox="0 0 %.4f %.4f" '
+            'role="group" aria-label="World institution destinations">%s</svg>' %
+            (VB_W, VB_H, "\n".join(shapes)))
+
+
+def country_controls():
+    names = sorted({country_name(c) for c in COUNTRIES} | {d[3] for d in DESTINATIONS})
+    options = ''.join('<option value="%s">%s (%d)</option>' %
+                      (escape(n, quote=True), escape(n), country_total(n)) for n in names)
+    return ('<div class="ajc__countryControls" data-directory-controls hidden>'
+            '<label for="ajc-country">Browse a country or territory</label>'
+            '<select id="ajc-country"><option value="">Choose a country or territory</option>%s</select>'
+            '<button type="button" data-country-open>Open directory</button>'
+            '<a href="#aj-destinations">Full text directory</a></div>' % options)
 
 
 def constellation_html():
@@ -449,9 +475,8 @@ def constellation_html():
     so a name keeps the clearance it was placed with at every width the
     map is drawn at. The field is the query container; see alumni.css.
 
-    Below 900px the same buttons become a plain list and the map is not
-    drawn: nineteen names over a world 360 pixels wide is a puzzle, not
-    a map. There is one DOM, and no second markup path that can rot.
+    On smaller screens the country map and text controls remain visible;
+    dense institution labels give way to the complete directory below.
     """
     ox, oy = ORIGIN
     total = len(MAPPED_DESTINATIONS)
@@ -461,7 +486,7 @@ def constellation_html():
         x, y = place(lat, lon, nudge)
         lx, ly, side = label
         points.append('''      <li class="ajc__item" data-region="%s">
-        <button type="button" class="ajc__pt" id="ajc-pt-%s"
+        <button type="button" class="ajc__pt" disabled id="ajc-pt-%s"
                 style="--x:%.3f%%;--y:%.3f%%;--lx:%.3fcqw;--ly:%.3fcqw"
                 data-point="%s" data-region="%s" data-side="%s"
                 aria-expanded="false" aria-controls="ajc-panel">
@@ -475,22 +500,24 @@ def constellation_html():
                   key, region, side, short, country,
                   i + 1, total, name, country))
 
-    filters = ['      <button type="button" class="ajc__filter is-on" data-filter="all" '
-               'aria-pressed="true">All <span class="ajc__fcount">%d</span></button>' % total]
+    filters = ['      <button type="button" class="ajc__filter" data-filter="all" '
+               'aria-haspopup="dialog">Browse all <span class="ajc__fcount">%d</span></button>' % len(DESTINATIONS)]
     for key, label in REGIONS:
         filters.append(
             '      <button type="button" class="ajc__filter" data-filter="%s" '
-            'aria-pressed="false">%s <span class="ajc__fcount">%d</span></button>'
-            % (key, label, mapped_region_count(key)))
+            'aria-haspopup="dialog">%s <span class="ajc__fcount">%d</span></button>'
+            % (key, label, region_count(key)))
 
     return '''<div class="ajc" data-constellation>
   <div class="ajc__bar">
-    <div class="ajc__filters" role="group" aria-label="Filter the destinations by region">
+    <div class="ajc__filters" role="group" aria-label="Browse institutions by region" data-directory-controls hidden>
 %(filters)s
     </div>
     <p class="ajc__status" data-constellation-status role="status">Showing %(total)d mapped destinations. The directory below lists all %(all)d institutions.</p>
   </div>
 
+  %(controls)s
+  <p class="ajc__hint" data-map-hint role="status">Select a country to explore its institutions.</p>
   <div class="ajc__field" data-constellation-field>
 %(map)s
 
@@ -512,23 +539,27 @@ def constellation_html():
     </ul>
   </div>
 
-  <div class="ajc__panel" id="ajc-panel" role="dialog" aria-modal="true"
-       aria-labelledby="ajc-panel-name" hidden>
-    <div class="ajc__panelInner">
-      <p class="ajc__panelRegion sc" data-panel-region></p>
-      <!-- Seeded rather than empty: the panel is hidden until a point is
-           opened, but an empty heading is invalid markup either way, and
-           aria-labelledby points at this element. -->
-      <h3 class="serif ajc__panelName" id="ajc-panel-name" data-panel-name>Destination</h3>
-      <p class="ajc__panelCountry" data-panel-country></p>
-      <p class="ajc__panelNote">An institution in CIRS’s published destination list.</p>
-      <button type="button" class="ajc__panelClose" data-panel-close>
-        Close<span class="sr-only"> this destination</span>
-      </button>
+  <p class="ajc__source"><a href="#aj-destinations">Read the full institution directory</a>. Illustrative boundaries: <a href="https://www.naturalearthdata.com/about/terms-of-use/">Natural Earth</a>, 1:50m, via world-atlas 2.0.2; Robinson projection. Counts describe institutions in this directory, not alumni totals. Countries with no entries remain available to explore.</p>
+  <dialog class="ajc__directory" id="ajc-panel" aria-labelledby="ajc-panel-name" aria-describedby="ajc-panel-note" data-lenis-prevent>
+    <div class="ajc__dialogBar">
+      <p class="aj-label">The institution directory</p>
+      <button type="button" data-panel-close autofocus>Close<span class="sr-only"> directory</span></button>
     </div>
-  </div>
+    <div class="ajc__dialogHead">
+      <h3 class="serif" id="ajc-panel-name">All institutions</h3>
+      <p id="ajc-panel-note">Alumni-reported institutions are not confirmation of an individual’s attendance. Entries without reviewed campus coordinates are listed, not plotted.</p>
+    </div>
+    <div class="ajc__dialogTools">
+      <label for="ajc-search">Search this directory</label>
+      <input id="ajc-search" type="search" placeholder="Institution or country" autocomplete="off">
+      <button type="button" data-panel-all>Browse all institutions</button>
+    </div>
+    <p data-panel-count role="status"></p>
+    <ul class="ajc__results" data-panel-results></ul>
+    <p data-panel-empty hidden>No institutions are listed for this country in the current directory.</p>
+  </dialog>
 </div>''' % {"filters": "\n".join(filters), "total": total, "all": len(DESTINATIONS),
-              "map": map_svg(), "lines": routes_svg(),
+              "map": map_svg(), "controls": country_controls(), "lines": routes_svg(),
               "vw": VB_W, "vh": VB_H,
               "ox": ox / VB_W * 100, "oy": oy / VB_H * 100,
               "points": "\n".join(points)}
@@ -551,11 +582,11 @@ def destinations_html():
             if r != region:
                 continue
             search = name.replace("&mdash;", "-").lower() + " " + country.lower()
-            rows.append('''          <li class="ajd__row" data-region="%s" data-search="%s">
+            rows.append('''          <li class="ajd__row" data-region="%s" data-search="%s" data-mapped="%s">
             <span class="ajd__name">%s</span>
             <span class="ajd__country">%s</span>
           </li>''' % (escape(region, quote=True), escape(search, quote=True),
-                     escape(name), escape(country)))
+                     "true" if _lat is not None and _lon is not None else "false", escape(name), escape(country)))
         groups.append('''      <section class="ajd__group" data-region="%s">
         <h3 class="ajd__region"><span class="sc">%s</span>
           <span class="ajd__n">%d<span class="sr-only"> destinations</span></span></h3>
@@ -669,16 +700,11 @@ def people_html():
 
 
 def voices_html():
-    """The three quotations, each given a scene of its own.
-
-    These are the only alumni words on the site, so they are not set as
-    cards three abreast. Each one holds the screen by itself, at the size
-    the sentence deserves.
-    """
+    """Complete published quotations and exact attribution, in a card grid."""
     scenes = []
     for voice in VOICES:
         batch = voice["batch"]
-        scenes.append('''  <figure class="ajv" data-voice="%s">
+        scenes.append('''  <figure class="ajv rv" data-voice="%s">
     <p class="ajv__mark" aria-hidden="true">&ldquo;</p>
     <blockquote class="ajv__quote">
       <p class="serif" data-split>%s</p>
@@ -689,7 +715,7 @@ def voices_html():
     </figcaption>
   </figure>''' % (voice["key"], voice["quote"], voice["name"],
                  '<span class="ajv__batch">%s</span>' % escape(batch) if batch else ""))
-    return "\n".join(scenes)
+    return '<div class="wrap ajv-grid">' + "\n".join(scenes) + "</div>"
 
 
 # ==================================================================

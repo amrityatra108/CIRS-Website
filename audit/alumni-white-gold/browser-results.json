@@ -1,0 +1,18 @@
+{
+  "report": [
+    "Repeated open/search/empty/reset/Escape; Tab loop; focus and scroll restoration: passed",
+    "Geographic pointer hit, keyboard country traversal, country/region counts and honest empty country: passed",
+    "Five distinct pathway grounds, forward/direct/reverse selection, active nav, resize teardown/rebuild, short desktop stack: passed",
+    "390px touch modal/search/close, full-height sheet; 320px and tablet no horizontal overflow: passed",
+    "Reduced motion and JavaScript disabled: all quotes, pathways, 166 directory entries and #pathways anchor remain available",
+    "No browser runtime errors"
+  ],
+  "colors": [
+    "rgb(250, 249, 243)",
+    "rgb(241, 230, 204)",
+    "rgb(227, 210, 163)",
+    "rgb(245, 239, 223)",
+    "rgb(221, 208, 183)"
+  ],
+  "errors": []
+}
