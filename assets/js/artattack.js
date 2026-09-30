@@ -33,26 +33,7 @@
       openingVideo.poster = fallback;
       videoHero.querySelector(".aa-video-hero__poster").src = fallback;
     });
-    var filmMotion = matchMedia("(prefers-reduced-motion: reduce)");
-    var resumeVisible = false, filmVisible = true;
-    function filmVisibility() {
-      if (!filmVisible || document.hidden) {
-        if (!openingVideo.paused) { resumeVisible = true; openingVideo.pause(); }
-      } else if (resumeVisible && !filmMotion.matches && !openingVideo.ended) {
-        resumeVisible = false;
-        var playing = openingVideo.play();
-        if (playing && playing.catch) playing.catch(function () {});
-      }
-    }
-    if (filmMotion.matches) { openingVideo.removeAttribute("autoplay"); openingVideo.pause(); }
-    filmMotion.addEventListener("change", function () {
-      if (filmMotion.matches) { resumeVisible = false; openingVideo.pause(); }
-    });
-    document.addEventListener("visibilitychange", filmVisibility);
-    new IntersectionObserver(function (entries) {
-      filmVisible = entries[entries.length - 1].isIntersecting;
-      filmVisibility();
-    }).observe(videoHero);
+    if (window.CIRSMedia) window.CIRSMedia.manage(openingVideo);
   }
 
   /* ---------------- Opening ---------------- */

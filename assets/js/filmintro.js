@@ -90,6 +90,8 @@
   // markup rather than guessed at from playback.
   var step = 1 / (Number(section.getAttribute("data-film-fps")) || 24);
   var asked = -1;      // the last time the decoder was sent to
+  var seeker = window.CIRSMedia && window.CIRSMedia.createSeeker(film);
+  var nativeScrub = false;
   var trigger = null;
   var furnished = null; // whether the site's furniture is currently put away
   var written = {};    // the last value of every style this file writes
@@ -128,6 +130,8 @@
   function seek(time) {
     if (!duration) return;
     var t = time < 0 ? 0 : time > last ? last : time;
+    if (seeker) { seeker.seek(t); return; }
+    if (film.seeking) return;
     // Anything finer than half a frame cannot be seen, and asking for it
     // only queues work the decoder will throw away.
     if (asked >= 0 && Math.abs(t - asked) < step * 0.5) return;
@@ -182,6 +186,7 @@
 
   function teardown() {
     if (trigger) { trigger.kill(); trigger = null; }
+    if (nativeScrub) { window.removeEventListener("scroll", update); nativeScrub = false; }
     furnished = null;
     document.body.classList.remove("film-on");
   }
@@ -219,8 +224,14 @@
   }
 
   function scrub() {
-    if (trigger || !hasST || reduced.matches) return;
+    if (trigger || nativeScrub || reduced.matches) return;
     section.removeAttribute("data-film-still");
+    if (!hasST) {
+      nativeScrub = true;
+      window.addEventListener("scroll", update, { passive: true });
+      update();
+      return;
+    }
     /* ScrollTrigger is kept only as the signal that the page has moved: it is
        what Lenis, the site's smooth scrolling, reports to. With no trigger
        element it spans the whole page, so it has no measured range to go
@@ -237,7 +248,7 @@
      joins in when its metadata arrives. */
   function start() {
     if (unavailable) return;
-    if (reduced.matches || !hasST || artAttackConstrained) { still(); return; }
+    if (reduced.matches || artAttackConstrained) { still(); return; }
     if (film.error) { fallback(); return; }
     /* The film begins loading while the page is still being parsed, before
        this deferred script runs, so if every source has already failed, the
@@ -260,9 +271,14 @@
   }
 
   film.addEventListener("loadedmetadata", function () {
+    unavailable = false;
     asked = -1;
     start();
   });
+  film.addEventListener("loadeddata", function () {
+    if (!film.error) { unavailable = false; start(); }
+  });
+  film.addEventListener("seeked", function () { if (!seeker && !unavailable) update(); });
   if (film.readyState >= 1) frames();
 
   /* Without the film there is no opening to scrub, so the still takes its
@@ -302,7 +318,7 @@
   /* A resize can change the scroll position and swap the photograph's cut,
      so repaint straight away rather than waiting for ScrollTrigger. */
   window.addEventListener("resize", function () {
-    if (trigger) update();
+    if (trigger || nativeScrub) update();
   }, { passive: true });
 
   /* iOS will not paint a frame of a video that has never been told to play,
@@ -319,7 +335,7 @@
       playing.then(function () {
         film.pause();
         asked = -1;
-        if (trigger) update();
+        if (trigger || nativeScrub) update();
       }).catch(function () { /* No decoder; the poster is the fallback. */ });
     }
   }

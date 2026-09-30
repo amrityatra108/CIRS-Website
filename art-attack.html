@@ -269,6 +269,10 @@
       <source src="assets/video/art-attack-opening.webm" type="video/webm">
       <a href="assets/video/art-attack-opening.mp4">Open the Art Attack film</a>
     </video>
+    <div class="aa-film-controls" data-art-controls hidden>
+      <div><button type="button" data-art-mode aria-pressed="false">Scroll playback</button><button type="button" data-art-rewind>Rewind</button></div>
+      <p data-art-status role="status">Native controls: play, pause or seek at your own pace.</p>
+    </div>
     <script>(function(hero){hero.classList.add("is-controlled");if(matchMedia("(prefers-reduced-motion: reduce)").matches){var video=hero.querySelector("video");video.removeAttribute("autoplay");video.pause()}})(document.currentScript.closest("[data-aa-video-hero]"))</script>
   </div>
 </section>
@@ -985,6 +989,7 @@
   </div>
 </footer>
 </div>
+<script src="assets/js/media-lifecycle.js?b=115-art-video-first-1" defer></script>
 <!-- The motion layer, served from this site rather than from a CDN. See
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
@@ -996,5 +1001,6 @@
 <script src="assets/js/pages.js?b=115-art-video-first-1" defer></script>
 <script src="assets/js/footer.js?b=115-art-video-first-1-footer-1" defer></script>
 <script src="assets/js/artattack.js?b=115-art-video-first-1" defer></script>
+<script src="assets/js/art-film.js?b=115-art-video-first-1" defer></script>
 </body>
 </html>

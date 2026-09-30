@@ -920,3 +920,35 @@ html.mc-kinetic .mc-open{width:calc(46% - var(--mc-edge));padding-top:var(--nv-h
  .matharena .mc-stage__view.is-field .mc-art__fallback{width:min(82vw,340px);margin-top:16px}
  .matharena .mc-stage__view.is-field .mc-say{display:none}
 }
+/* Modular cube lab: inherit the Maths palette, including future light themes. */
+.matharena .math-lab{padding:80px 0;background:var(--mc-ivory);color:var(--mc-ink);scroll-margin-top:90px;border-block:1px solid var(--mc-rule)}
+.math-lab header{max-width:700px;margin-bottom:36px}
+.math-lab h2{font:400 clamp(38px,5vw,64px)/1.1 var(--mc-display);margin:16px 0 24px}
+.math-lab h2 em{color:var(--mc-gold-ink)}
+.math-lab p{line-height:1.65}
+.math-lab__layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,72px);align-items:center}
+.math-lab__layout[hidden]{display:none}
+.math-lab__model{padding:24px;border:1px solid var(--mc-rule);background:var(--mc-ivory-2);text-align:center;border-radius:16px}
+.math-lab__model svg{width:100%;display:block;overflow:visible}
+.math-lab__front{fill:var(--mc-gold);stroke:var(--mc-ivory);stroke-width:.5}
+.math-lab__top{fill:var(--mc-gold-lit)}
+.math-lab__side{fill:var(--mc-gold);filter:brightness(.72)}
+.math-lab__grid{fill:none;stroke:var(--mc-ivory);stroke-opacity:.4;stroke-width:.6}
+.math-lab [data-lab-total]{font:400 clamp(22px,3vw,36px)/1.4 var(--mc-display);margin:8px 0}
+.math-lab__found{font-size:14px;color:var(--mc-ink-soft);min-height:3em}
+.math-lab fieldset{margin:0;padding:0;border:0;min-width:0}
+.math-lab legend{margin-bottom:20px;font:500 19px var(--mc-ui)}
+.math-lab__inputs{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.math-lab label{display:grid;gap:10px;font:14px var(--mc-ui)}
+.math-lab input{min-width:0;width:100%;min-height:54px;border:1px solid var(--mc-gold);border-radius:8px;background:var(--mc-ivory-2);color:var(--mc-ink);font:24px var(--mc-ui);padding:10px 14px}
+.math-lab__actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.math-lab button{min-height:46px;padding:10px 16px;border:1px solid var(--mc-gold);border-radius:8px;background:transparent;color:var(--mc-ink);font:14px var(--mc-ui);cursor:pointer}
+.math-lab button[type=submit]{background:var(--mc-gold);color:#211c12}
+.math-lab button:disabled{opacity:.55;cursor:default}
+.math-lab__feedback{min-height:6em;margin:20px 0 0}
+.math-lab__source{margin-top:32px;font-size:14px;color:var(--mc-ink-soft)}
+.math-lab a{color:var(--mc-gold-ink);text-decoration:underline;text-underline-offset:4px}
+.math-lab.is-solved .math-lab__model{border-color:var(--mc-gold);animation:math-lab-found .6s ease-out}
+@keyframes math-lab-found{50%{transform:translateY(-6px)}}
+@media(max-width:760px){.math-lab__layout{grid-template-columns:1fr}.matharena .math-lab{padding:50px 0}.math-lab__model{padding:16px}.math-lab__feedback{min-height:4em}}
+@media(prefers-reduced-motion:reduce){.math-lab.is-solved .math-lab__model{animation:none}}
