@@ -46,6 +46,7 @@
     coveredSections.forEach(function (item) { item.node.inert = locked || item.wasInert; });
     window.dispatchEvent(new CustomEvent("crossroads-intro-scroll-lock", { detail: { locked: locked } }));
   }
+  window.__crossroadsStartupUnlock = function () { lockScroll(false); };
   function removeLockListeners() {
     window.removeEventListener("wheel", onOpeningWheel, true);
     window.removeEventListener("touchstart", onOpeningTouchStart, true);
@@ -252,7 +253,7 @@
   function onMotionChange() { if (reduced.matches) finishOpening(true); }
   function onOpeningVisibility() { if (document.hidden) finishOpening(true); }
   function onOpeningPageHide() { finishOpening(true); }
-  if (!document.hidden && !historyReturn && performance.now() < lockDeadlineAt && !reduced.matches && !slowConnection() && (!location.hash || location.hash === "#crossroads-intro")) {
+  if (!window.__crossroadsStartupExpired && !document.hidden && !historyReturn && performance.now() < lockDeadlineAt && !reduced.matches && !slowConnection() && (!location.hash || location.hash === "#crossroads-intro")) {
     lockScroll(true);
     window.addEventListener("wheel", onOpeningWheel, {passive:false, capture:true});
     window.addEventListener("touchstart", onOpeningTouchStart, {passive:true, capture:true});
