@@ -56,12 +56,11 @@
     window.dispatchEvent(new CustomEvent("cirs-portal-scroll-lock", { detail: { locked: locked } }));
   }
 
-  /* Once-only entrance for things that are simply met as the page goes by. */
+  /* Restore entrances when returning from above; keep completed content below. */
   var seenIO = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      e.target.classList.add("is-seen");
-      seenIO.unobserve(e.target);
+      if (e.isIntersecting || reducedMQ.matches) e.target.classList.add("is-seen");
+      else if (e.boundingClientRect.top > 0) e.target.classList.remove("is-seen");
     });
   }, { threshold: 0.16, rootMargin: "0px 0px -6% 0px" }) : null;
   function onSeen(el) {
@@ -358,7 +357,7 @@
     }
   })();
 
-  $$(".lr-event, .lr-end").forEach(onSeen);
+  $$(".lr-event").forEach(onSeen);
 
   /* ==========================================================
      Looking closely: a document comes forward and the page dims
@@ -441,7 +440,7 @@
       var big = $("img", stage), b = openers[cur];
       var done = function () {
         dlg.close(); lockScroll(false);
-        gsap && gsap.set([dlg, $(".lr-inspect__bar", dlg), $(".lr-inspect__foot", dlg)], { clearProps: "all" });
+        hasGSAP && gsap.set([dlg, $(".lr-inspect__bar", dlg), $(".lr-inspect__foot", dlg)], { clearProps: "all" });
         if (clone) { clone.remove(); clone = null; }
         busy = false;
         if (b) b.focus({ preventScroll: true });
@@ -485,6 +484,98 @@
     return;
   }
 
+  // A local dissolve OUT: sample the preceding text once into a bounded
+  // particle field. GSAP supplies the clock; there is no extra render loop.
+  function ending(cleanups) {
+    var sec = $('[data-lr-end]'), title = $('.lr-end__title', sec);
+    if (!sec || !title || reducedMQ.matches || !window.IntersectionObserver) return;
+    var previous = $('.lr-end__previous', title), words = $$('.lr-end__words > span', title);
+    var canvas = document.createElement('canvas');
+    canvas.className = 'lr-end__dust'; canvas.setAttribute('aria-hidden', 'true');
+    title.appendChild(canvas); sec.classList.add('is-motion');
+    var context = canvas.getContext('2d'), particles = [], phase = { value: 0 }, active = false, disposed = false;
+    if (!context) { canvas.remove(); sec.classList.remove('is-motion'); return; }
+    function sample() {
+      var rect = title.getBoundingClientRect(), css = getComputedStyle(previous);
+      var width = Math.ceil(rect.width), height = Math.ceil(rect.height);
+      canvas.width = width; canvas.height = height;
+      context.clearRect(0, 0, width, height);
+      context.font = css.font; context.fillStyle = css.color; context.textBaseline = 'top';
+      var lines = previous.innerHTML.split(/<br\s*\/?\s*>/i), lineHeight = parseFloat(css.lineHeight);
+      lines.forEach(function (line, i) { context.fillText(line, 0, i * lineHeight); });
+      var pixels = context.getImageData(0, 0, width, height).data;
+      var step = Math.max(4, Math.ceil(Math.sqrt(width * height / 1400)));
+      particles = [];
+      for (var y = 0; y < height; y += step) for (var x = 0; x < width; x += step) {
+        if (pixels[(y * width + x) * 4 + 3] > 60 && particles.length < 550) {
+          var seed = ((x * 13 + y * 17) % 101) / 100;
+          particles.push({ x: x, y: y, dx: (seed - .35) * 110, dy: -18 - seed * 80, size: 2 + seed * 2 });
+        }
+      }
+      draw();
+    }
+    function draw() {
+      var t = phase.value;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      if (t <= 0 || t >= 1) return;
+      context.fillStyle = getComputedStyle(previous).color;
+      context.globalAlpha = Math.min(t * 5, 1) * (1 - t);
+      particles.forEach(function (p) { context.fillRect(p.x + p.dx * t, p.y + p.dy * t, p.size, p.size); });
+      context.globalAlpha = 1;
+    }
+    gsap.set(words, { opacity: 0 });
+    var tl = gsap.timeline({ paused: true, onUpdate: draw });
+    tl.to(previous, { opacity: 0, duration: .55, ease: 'power2.out' }, 0)
+      .to(phase, { value: 1, duration: .65, ease: 'none' }, 0);
+    words.forEach(function (word, i) { tl.to(word, { opacity: 1, duration: .3, ease: 'power2.out' }, .7 + i * .55); });
+    sample();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        active = entry.isIntersecting;
+        bind(active);
+        if (active) { if (!particles.length) sample(); tl.play(); }
+        else {
+          tl.pause(entry.boundingClientRect.top > 0 ? 0 : tl.duration());
+          particles = []; canvas.width = canvas.height = 0;
+        }
+      });
+    }, { threshold: 0, rootMargin: '-18% 0px -22% 0px' });
+    io.observe(sec);
+    var lastY = window.scrollY;
+    function onScroll() {
+      var delta = window.scrollY - lastY;
+      if (Math.abs(delta) < 8) return;
+      lastY = window.scrollY;
+      if (active && !document.hidden) { if (delta < 0) tl.reverse(); else tl.play(); }
+    }
+    // Crossing the reveal boundary in reverse restores the earlier text;
+    // re-entry always begins with that text before the words are revealed.
+    var sizeTimer;
+    function onResize() {
+      clearTimeout(sizeTimer);
+      sizeTimer = setTimeout(function () { if (!disposed && active) sample(); }, 100);
+    }
+    function onVisibility() {
+      if (document.hidden) tl.pause(); else if (active) tl.play();
+    }
+    var bound = false;
+    function bind(enabled) {
+      if (bound === enabled) return;
+      bound = enabled; lastY = window.scrollY;
+      var method = enabled ? 'addEventListener' : 'removeEventListener';
+      window[method]('scroll', onScroll, { passive: true });
+      window[method]('resize', onResize, { passive: true });
+      document[method]('visibilitychange', onVisibility);
+      if (!enabled) clearTimeout(sizeTimer);
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!disposed && active) sample(); });
+    cleanups.push(function () {
+      disposed = true; bind(false); clearTimeout(sizeTimer); io.disconnect(); tl.kill();
+      particles = []; canvas.width = canvas.height = 0; canvas.remove(); sec.classList.remove('is-motion');
+      gsap.set([previous].concat(words), { clearProps: 'opacity' });
+    });
+  }
+
   var mm = gsap.matchMedia();
   var features = $$(".lr-feature");
   var featuresSec = $(".lr-features");
@@ -499,6 +590,7 @@
     var listen = function (t, ev, fn, o) { t.addEventListener(ev, fn, o); cleanups.push(function () { t.removeEventListener(ev, fn, o); }); };
 
     features.forEach(onSeen);
+    ending(cleanups);
 
     if (c.reduce) { unpre(); $$(".lr-cat, .lr-stat, .lr-ms").forEach(function (e) { e.classList.add("is-seen"); }); return; }
 
@@ -640,7 +732,7 @@
       var title = $("[data-lr-count-title]", sec), stats = $$(".lr-stat", sec), ledger = $$("[data-lr-ledger] li", sec);
       var STEP = 0.95, F0 = 1.35;
       var F = stats.map(function (_, i) { return F0 + STEP * i; });
-      var W = vw(), H = vh();
+      gsap.set(ledger, { opacity: 0 });
       gsap.set(title, { "--z": "0px", "--o": 1 });
       stats.forEach(function (s) { gsap.set(s, { "--z": "-1800px", "--o": 0, "--fo": 0, "--fx": "0px", "--fy": "0px", "--fs": 1 }); });
       var tl = gsap.timeline({ defaults: { ease: "none" } });
@@ -718,7 +810,7 @@
           var d = q.i - P, ad = Math.abs(d), e = smooth(Math.min(ad, 1.25) / 1.25);
           var z = -d * SP, x = q.s * A * e * (d < 0 ? 1.6 : 1), y = (q.i % 3 - 1) * 14 * Math.min(ad, 1);
           var ry = -q.s * 9 * smooth(clamp(d, 0, 1.3) / 1.3);
-          var o = d <= 0 ? clamp(1 + d / 0.34, 0, 1) : clamp(1.1 - d * 0.7, 0, 1);
+          var o = d <= 0 ? clamp(1 + d / 0.34, 0, 1) : clamp(1 - d / 0.85, 0, 1);
           if (q.i === n - 1) o *= fade;
           var el = q.el, st = el.style;
           st.setProperty("--x", x.toFixed(1) + "px"); st.setProperty("--y", y.toFixed(1) + "px");
@@ -758,7 +850,7 @@
         onUpdate: function (self) { place(self.progress * S); }
       });
       // Set the first frame before anything can be seen of it.
-      measure(); place(0);
+      measure(); place(st.progress * S);
 
       function goTo(i) { scrollToY(st.start + ((LEAD + i) / S) * (st.end - st.start)); }
       railBtns.forEach(function (b) { listen(b, "click", function () { goTo(+b.getAttribute("data-go")); }); });
