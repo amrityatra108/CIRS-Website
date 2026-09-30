@@ -21,25 +21,21 @@ body.festivals{
      festivals.js measures the header and replaces this. */
   --fx-top:84px;
 
-  /* The seasons. Each is a ground and an accent that reads on it.
-     The grounds are the site palette's own ivories, cream, pale gold,
-     pale purple and pale green; the Onam marigold and the Holi
-     magenta are kept as inks because they are those festivals'
-     colours, not decoration (6.22:1 and 7.42:1 on ivory). */
-  --fx-night:var(--dark-ink);
-  --fx-dusk:var(--dark-deep);
-  --fx-rakhi:var(--purple-pale);   /* a monsoon morning */
-  --fx-rakhi-ink:var(--label);
-  --fx-morning:var(--paper-2);     /* Janmashtami's morning pooja */
-  --fx-onam:var(--paper);         /* marigold on ivory: the ink carries it */
-  --fx-onam-ink:#8A4F00;
-  --fx-ganesh:var(--nature-pale); /* cloud on the hills */
-  --fx-ganesh-ink:var(--campus);
-  --fx-dussehra:var(--dark-mid);  /* torchlight */
-  --fx-pongal:var(--gold-pale);   /* the harvest sun */
-  --fx-pongal-ink:var(--label);
-  --fx-holi:var(--paper);
-  --fx-holi-ink:#A0104F;
+  /* White and warm gold grounds, kept on this page only. */
+  --fx-night:#fffaf0;
+  --fx-dusk:#fffdf8;
+  --fx-rakhi:#fffdf8;
+  --fx-rakhi-ink:#785718;
+  --fx-morning:#fff;
+  --fx-onam:#fffaf0;
+  --fx-onam-ink:#785718;
+  --fx-ganesh:#fffdf8;
+  --fx-ganesh-ink:#785718;
+  --fx-dussehra:#fffaf0;
+  --fx-pongal:#fffdf8;
+  --fx-pongal-ink:#785718;
+  --fx-holi:#fff;
+  --fx-holi-ink:#785718;
 
   --fx-seam:clamp(140px, 16vw, 260px);
   --fx-pad:clamp(88px, 10vw, 150px);
@@ -50,7 +46,7 @@ body.festivals{
    down; the chapters' own top padding holds the index clear of that. */
 body.festivals :is(.fx-ch, .fx-cal__season){ scroll-margin-top:88px; }
 
-/* Captions: one line of what, then the festival and the verified date. */
+/* Photograph provenance: festival and verified date, without visual narration. */
 .fx-cap{
   margin-top:12px;
   font-size:var(--fs-sm);
@@ -444,7 +440,7 @@ body.festivals .fx-ch__title{
   pointer-events:none;
 }
 .fx-night[data-phase="night"]{ --night-bg:var(--fx-night); }
-.fx-night[data-phase="break"]{ --night-bg:#1C1210; }
+.fx-night[data-phase="break"]{ --night-bg:#fff7e5; }
 .fx-night__intro{
   position:relative;
   display:grid;
@@ -1237,65 +1233,70 @@ html.fx-viewing{ overflow:hidden; }
   }
 }
 
-/* The supplied diya-to-rangoli scene, with a readable editorial opening. */
+/* The film itself is the full-screen hero: it never exits onto another
+   page layer. Copy appears over its final frames and the last frame holds. */
 body.festivals .fx-hero{
   position:relative;isolation:isolate;min-height:100svh;
   display:flex;align-items:flex-end;overflow:hidden;
   padding:130px 6vw clamp(64px,8svh,88px);
-  background:#190E15;color:#FFF3DC;
+  background:#190e15;color:#fff3dc;
 }
 .fx-hero__media,.fx-hero__shade{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .fx-hero__poster,.fx-hero__video{display:block;width:100%;height:100%;object-fit:cover;object-position:0% 50%}
-.fx-hero__video{position:absolute;inset:0;opacity:0;transition:opacity .22s ease}
-.fx-hero.is-video-ready .fx-hero__video{opacity:1}
+.fx-hero__video{position:absolute;inset:0;opacity:0}
+/* Keep the shared navigation legible even over the bright opening flame. */
+.fx-hero__media::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(20,9,14,.90),rgba(20,9,14,.72) 8%,transparent 24%)}
+/* The opening poster covers the final still before decoding the first frame. */
+html.fx-intro-pending .fx-hero .fx-hero__video,.fx-hero.is-video-ready .fx-hero__video{opacity:1}
 .fx-hero__shade{
-  background:linear-gradient(to right,rgba(22,10,15,.20),rgba(22,10,15,.46) 48%,transparent 63%),
-    linear-gradient(35deg,rgba(22,10,15,.96) 0%,rgba(22,10,15,.79) 25%,rgba(22,10,15,.22) 54%,transparent 73%),
-    linear-gradient(to bottom,rgba(20,9,14,.90),rgba(20,9,14,.72) 8%,transparent 24%,transparent 74%,#21152B 100%);
+  background:linear-gradient(35deg,rgba(22,10,15,.96),rgba(22,10,15,.79) 25%,rgba(22,10,15,.22) 54%,transparent 73%),
+    linear-gradient(to bottom,transparent 74%,rgba(20,9,14,.65));
+  transition:opacity .6s cubic-bezier(.22,1,.36,1);
 }
-.fx-hero__copy{position:relative;width:min(48vw,700px)}
-.fx-hero__eyebrow{margin:0 0 20px;font-size:12px;font-weight:500;letter-spacing:.10em;line-height:1.3;color:#FFF3DC}
-body.festivals .fx-hero__title{
-  margin:0;font-family:var(--font-display);font-size:clamp(72px,7.5vw,132px);
-  font-weight:500;line-height:.98;letter-spacing:0;color:#FFF3DC;
-}
+html.fx-intro-pending .fx-hero .fx-hero__shade{opacity:.35}
+.fx-hero__copy{position:relative;width:min(48vw,700px);opacity:1;transform:none;transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),visibility 0s}
+html.fx-intro-pending .fx-hero .fx-hero__copy{opacity:0;visibility:hidden;transform:translateY(16px);pointer-events:none}
+.fx-hero__eyebrow{margin:0 0 20px;font-size:12px;font-weight:500;letter-spacing:.1em;line-height:1.3;color:#fff3dc}
+body.festivals .fx-hero__title{margin:0;font-family:var(--font-display);font-size:clamp(72px,7.5vw,132px);font-weight:500;line-height:.98;letter-spacing:0;color:#fff3dc}
 .fx-hero__mask{display:block;overflow:hidden;padding-block:.035em;margin-block:-.035em}
-.fx-hero__line{display:block;white-space:nowrap;transform:none}
-.fx-hero__lead{margin:24px 0 0;max-width:42ch;font-size:clamp(17px,1.35vw,20px);line-height:1.55;color:#FFF3DC;text-wrap:pretty}
-.fx-hero__scroll{display:inline-flex;align-items:center;gap:12px;min-height:44px;margin-top:16px;padding-block:8px;font-size:14px;line-height:1.4;font-weight:500;color:#FFF3DC;border-bottom:1px solid rgba(255,243,220,.42)}
-.fx-hero__scroll span{transition:transform .25s ease}
-.fx-hero__scroll:hover{border-color:#FFF3DC}
-.fx-hero__scroll:hover span{transform:translateY(3px)}
-.fx-hero__scroll:focus-visible{outline:2px solid #FFF3DC;outline-offset:6px}
-.fx-hero--enter .fx-hero__eyebrow{animation:fx-hero-fade .38s .05s both}
-.fx-hero--enter .fx-hero__mask:first-child .fx-hero__line{animation:fx-hero-rise .72s .18s cubic-bezier(.22,1,.36,1) both}
-.fx-hero--enter .fx-hero__mask:last-child .fx-hero__line{animation:fx-hero-rise .72s .29s cubic-bezier(.22,1,.36,1) both}
-.fx-hero--enter .fx-hero__lead{animation:fx-hero-fade .4s .7s both}
-.fx-hero--enter .fx-hero__scroll{animation:fx-hero-fade .43s .88s both}
-@keyframes fx-hero-fade{from{opacity:0}to{opacity:1}}
-@keyframes fx-hero-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fx-hero__line{display:block;white-space:nowrap}
+.fx-hero__lead{margin:24px 0 0;max-width:42ch;font-size:clamp(17px,1.35vw,20px);line-height:1.55;color:#fff3dc;text-wrap:pretty}
+.fx-hero__scroll{display:inline-flex;align-items:center;gap:12px;min-height:44px;margin-top:16px;padding-block:8px;font-size:14px;line-height:1.4;font-weight:500;color:#fff3dc;border-bottom:1px solid rgba(255,243,220,.42)}
+.fx-hero__scroll:hover{border-color:#fff3dc}
+.fx-hero__control{position:absolute;right:6vw;bottom:24px;min-height:44px;padding:10px 18px;border:1px solid #e2c47e;border-radius:0;background:#211910;color:#fff3dc;font:inherit;font-size:.85rem;cursor:pointer}
+.fx-hero__control[hidden]{display:none}
+.fx-hero__control:hover{background:#fff3dc;color:#211910}
+.fx-hero :focus-visible{outline:2px solid #fff3dc;outline-offset:5px}
 body.festivals .fx-open{min-height:0;padding-top:clamp(72px,7vw,104px);scroll-margin-top:88px}
-body.festivals .fx-open__sky{background:linear-gradient(to bottom,#21152B,#151216)}
-body.festivals:not(.menu-open) .nv-header[data-header-mode="hero"]:not(:has(.nv-enq.is-open)){
-  --nav-name:#FFF3DC;--nav-sub:#FFF3DC;--nav-text:#FFF3DC;--nav-icon:#FFF3DC;
-}
+
+/* Page content only: these aliases never reach the shared header or footer. */
+body.festivals main{--label:#785718;--gold-ink:#785718;--paper:#fff;--paper-2:#fffaf0;--gold:#c9a961;--gold-lit:#e2c47e;--gold-pale:#f6ecd7;--on-gold:#211910}
+body.festivals :is(.fx-open,.fx-night,.fx-dark,.fx-ask){--on-dark:#26231e;--on-dark-soft:#514a3f;--on-dark-mute:#6c6251;--gold-lit:#785718;--rule-dark:#dfd1b5;color:var(--on-dark)}
+body.festivals .fx-open__sky{background:#fffaf0}
+body.festivals .fx-open__sky::after{background:radial-gradient(ellipse at 15% 0,rgba(201,169,97,.14),transparent 55%);opacity:1}
+/* A restrained rangoli of gold rings, confined to the introduction margin. */
+body.festivals .fx-open::after{content:"";position:absolute;z-index:-1;pointer-events:none;width:480px;height:480px;right:-270px;top:-240px;border:1px solid #c9a961;border-radius:50%;box-shadow:0 0 0 24px #fffaf0,0 0 0 25px #c9a961,0 0 0 48px #fffaf0,0 0 0 49px #c9a961;opacity:.3}
+body.festivals .fx-strip__label{border-color:#dfd1b5}
+body.festivals .fx-open__aside{border-color:#aa915e}
+body.festivals .fx-night__skip a{text-decoration-color:#aa915e}
+body.festivals .fx-cal__jump{border-color:#d7c49b}
+body.festivals .fx-ask{background:#fffaf0}
+body.festivals .fx-hero{--gold:#c9a961;--gold-lit:#e2c47e}
 @media(max-width:820px){
-  body.festivals .fx-hero{padding:110px 24px 56px;min-height:100svh}
-  .fx-hero__media{top:76px;bottom:auto;height:52svh;max-height:540px}
-  .fx-hero__poster,.fx-hero__video{object-fit:contain;object-position:50% 50%;mask-image:linear-gradient(to bottom,transparent calc(50% - 28.125vw),#000 calc(50% - 24vw),#000 calc(50% + 24vw),transparent calc(50% + 28.125vw))}
-  .fx-hero__shade{background:linear-gradient(to bottom,rgba(25,14,21,.32),transparent 16%,transparent 43%,rgba(25,14,21,.70) 60%,#190E15 72%,#21152B 100%)}
+  body.festivals .fx-hero{padding:110px 24px 74px;min-height:100svh}
+  .fx-hero__media{top:0;height:100%;max-height:none}
+  .fx-hero__poster,.fx-hero__video{object-fit:contain;object-position:50% 40%}
+  .fx-hero__shade{background:linear-gradient(to bottom,rgba(25,14,21,.32),transparent 16%,transparent 36%,rgba(25,14,21,.80) 55%,#190e15 72%)}
   .fx-hero__copy{width:100%}
   body.festivals .fx-hero__title{font-size:clamp(48px,12vw,68px);line-height:1}
   .fx-hero__eyebrow{margin-bottom:16px;font-size:11px;letter-spacing:.09em}
   .fx-hero__lead{margin-top:20px;font-size:17px;line-height:1.5}
   .fx-hero__scroll{margin-top:14px;font-size:13px}
+  .fx-hero__control{right:24px;bottom:18px}
 }
-@media(max-width:820px) and (max-height:700px){
-  body.festivals .fx-hero{min-height:720px}
-  .fx-hero__media{height:300px;top:64px}
-}
+@media(max-width:820px) and (max-height:700px){body.festivals .fx-hero{min-height:720px}}
 @media(prefers-reduced-motion:reduce){
-  .fx-hero .fx-hero__video{opacity:0!important;transition:none}
-  .fx-hero--enter :is(.fx-hero__eyebrow,.fx-hero__line,.fx-hero__lead,.fx-hero__scroll){animation:none!important;opacity:1!important;transform:none!important}
-  .fx-hero__scroll span{transition:none}
+  .fx-hero .fx-hero__video{opacity:0!important}
+  .fx-hero__copy,.fx-hero__shade{transition:none}
+  html.fx-intro-pending .fx-hero .fx-hero__copy{opacity:1;visibility:visible;transform:none;pointer-events:auto}
 }
