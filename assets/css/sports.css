@@ -1501,7 +1501,7 @@ body.sports .sports-leaders .cp {
 }
 /* Keep one desktop photo stack. The removed full-screen wipe is represented
    by its unique photographs below, without repeating its scroll choreography. */
-@media(min-width:900px) and (min-height:760px) and (prefers-reduced-motion:no-preference) {
+@media(min-width:1100px) and (min-height:760px) and (prefers-reduced-motion:no-preference) {
   body.sports .sports-gallery__track {display:flex;gap:0;max-width:none;padding:0;}
   body.sports .sport-chapter {
     position:sticky;top:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
