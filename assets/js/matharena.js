@@ -194,6 +194,8 @@
     var pulse = $("#mcPulse");
     var open = $(".mc-open", stage);
     var progress = 0, queued = false, failed = false, sculpture = null;
+    var selectedProgress = null, lastScrollProgress = 0;
+    var shapes = $$("[data-mc-shape]", stage), states = $(".mc-states", stage);
     var listeners = [];
     var lastState = -1, lastDark = null, lastPast = null;
 
@@ -201,7 +203,7 @@
     // tall enough to compose the pinned stage in. The head script made the
     // same decision before first paint; this keeps it as the window changes.
     function wantKinetic() {
-      return !failed && !reducedQuery.matches && "WebGLRenderingContext" in window && window.innerHeight >= 500;
+      return !failed && !reducedQuery.matches && "WebGLRenderingContext" in window && window.innerHeight >= 500 && window.innerWidth > 760 && !window.matchMedia("(max-aspect-ratio:4/5)").matches;
     }
     function kinetic() { return root.classList.contains("mc-kinetic"); }
 
@@ -214,8 +216,14 @@
 
     function paint() {
       queued = false;
-      progress = read();
-      var p = progress;
+      var p = read();
+      if (Math.abs(p - lastScrollProgress) > .005) selectedProgress = null;
+      lastScrollProgress = p;
+      progress = selectedProgress === null ? p : selectedProgress;
+      // The wide field has its own clear stage. Cube and torus retain the opening.
+      view.classList.toggle("is-field", progress >= .18 && progress < .62);
+      open.inert = progress >= .18 && progress < .62;
+      shapes.forEach(function (b, i) { b.setAttribute("aria-pressed", String(i === (progress < .33 ? 0 : progress < .62 ? 1 : 2))); });
       var s = view.style;
       if (kinetic()) {
         // The same windows the sculpture uses (math-sculpture.js): the cube
@@ -245,13 +253,19 @@
         lastState = -1; lastDark = null; lastPast = null;
       }
       stage.classList.toggle("is-kinetic", kinetic());
-      for (var i = 0; i < listeners.length; i++) listeners[i](p);
+      for (var i = 0; i < listeners.length; i++) listeners[i](progress);
     }
     function queue() {
       if (queued) return;
       queued = true;
       window.requestAnimationFrame(paint);
     }
+    shapes.forEach(function (button, index) {
+      button.addEventListener("click", function () {
+        selectedProgress = [0, .48, .76][index];
+        queue();
+      });
+    });
 
     // On a portrait screen the sculpture takes the space the lettering
     // leaves between the title and the line below it, however the title
@@ -309,6 +323,7 @@
       failed = true;
       art.classList.remove("is-live");
       if (pulse) pulse.hidden = true;
+      if (states) states.hidden = true;
       setMode();
     }
     var api = {
@@ -326,6 +341,7 @@
     import(url).then(function (mod) {
       sculpture = mod.mount(api);
       if (!sculpture) fail();
+      else if (states) states.hidden = false;
     }).catch(function (err) {
       if (window.console) console.warn("Math Challenge: the sculpture could not start.", err);
       fail();

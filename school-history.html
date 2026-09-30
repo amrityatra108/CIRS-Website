@@ -39,9 +39,10 @@
 <link rel="stylesheet" href="assets/css/drawer.css?b=115-history-cinematic-4-nav-5">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 <link rel="stylesheet" href="assets/css/history-cinematic.css?b=115-history-cinematic-4-4">
+<link rel="stylesheet" href="assets/css/coordinated.css?b=115-history-cinematic-4-1">
 </head>
 
-<body class="history">
+<body class="cirs-redesign history">
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Film lightbox, shared by every page. The iframe is built on open and
@@ -262,6 +263,7 @@
 </div>
 <main id="main">
 <script src="assets/js/navigation.js?b=115-history-cinematic-4-core-3"></script>
+<script src="assets/js/coordinated.js?b=115-history-cinematic-4-1" defer></script>
 <!-- School History: the CIRS archive.
      Everything dated on this page is written from tools/history.py, which
      records where each event comes from. Edit the history there, not here.
@@ -272,15 +274,30 @@
      scripting at all read the same moments as an editorial column. -->
 
 <header class="hj-hero" id="top" data-header-theme="dark">
-  <img class="hj-hero__image" src="assets/img/forest-air.jpg" width="1600" height="900"
-       alt="The CIRS campus surrounded by forest below the Western Ghats" fetchpriority="high" decoding="async">
+  <figure class="rd-coin">
+    <svg viewBox="0 0 640 640" role="img" aria-label="Illustrative one-rupee coin, a symbol of the CIRS fundraising story">
+      <defs>
+        <radialGradient id="coin-face" cx="35%" cy="28%"><stop stop-color="#f4e3b2"/><stop offset=".48" stop-color="#c5a365"/><stop offset=".8" stop-color="#987444"/><stop offset="1" stop-color="#e1c88c"/></radialGradient>
+        <linearGradient id="coin-edge" x2="1" y2="1"><stop stop-color="#fff0ba"/><stop offset=".4" stop-color="#98734a"/><stop offset=".7" stop-color="#e0c68a"/><stop offset="1" stop-color="#6c4c28"/></linearGradient>
+        <pattern id="coin-ridge" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 0L12 12" stroke="#674623" stroke-width="3"/></pattern>
+      </defs>
+      <circle cx="329" cy="329" r="279" fill="#644529"/>
+      <circle cx="320" cy="320" r="279" fill="url(#coin-edge)"/>
+      <circle cx="320" cy="320" r="269" fill="none" stroke="url(#coin-ridge)" stroke-width="15"/>
+      <circle cx="320" cy="320" r="251" fill="url(#coin-face)" stroke="#fff1c0" stroke-width="3"/>
+      <circle cx="320" cy="320" r="233" fill="none" stroke="#725333" stroke-width="2"/>
+      <g fill="#69492c" font-family="serif" text-anchor="middle"><text x="320" y="180" font-size="40" letter-spacing="8">CIRS</text><text x="320" y="408" font-size="220">₹1</text><text x="320" y="495" font-size="25">One rupee at a time</text></g>
+      <path d="M145 300Q90 405 190 470M155 317l-26-10m29 42-33-4m47 37-33 6m54 24-24 12M495 300Q550 405 450 470M485 317l26-10m-29 42 33-4m-47 37 33 6m-54 24 24 12" fill="none" stroke="#725333" stroke-width="4"/>
+    </svg>
+    <figcaption>An illustrative coin. A real story of generosity.</figcaption>
+  </figure>
   <div class="hj-hero__text">
-    <p class="hj-label">The making of CIRS</p>
-    <h1><span class="hj-line"><span>A vision.</span></span><span class="hj-line"><span>A school.</span></span><span class="hj-line"><span>A living legacy.</span></span></h1>
-    <p class="hj-hero__intro">Imagined by Pujya Gurudev Swami Chinmayananda. Built through the generosity of many. Opened on 6 June 1996.</p>
+    <p class="hj-label">School History</p>
+    <h1>The making of CIRS.</h1>
+    <p class="hj-hero__intro">Imagined by Pujya Gurudev Swami Chinmayananda. In 1984, Swami Sahayanandaji gathered one rupee from each individual towards the land. CIRS opened on 6 June 1996.</p>
     <div class="hj-hero__links"><a href="#chapters" data-hj-go="chapter-idea">Explore the history</a><a href="#timeline">View all records</a></div>
   </div>
-  <p class="hj-hero__caption">The campus today. The story begins in the 1970s.</p>
+  <p class="hj-hero__caption">From the school’s published history. The story begins in the 1970s.</p>
   <span class="hj-hero__scroll" aria-hidden="true">Scroll to explore <span>&darr;</span></span>
 </header>
 
@@ -319,7 +336,7 @@
   <div class="hj-present__text" tabindex="-1">
     <p class="hj-label">CIRS today</p>
     <h2 id="chapter-now-h">The story continues.</h2>
-    <p>From the first 96 students to the generations who followed. A school, and a history still being written.</p>
+    <p>CIRS opened in 1996 with 96 students and 11 academic staff. In its 29th year, 2025, it reported 596 students, from 16 Indian states and 16 countries. <a href="#record-report-2025">Read the annual report record</a>.</p>
     <div class="hj-hero__links"><a href="the-cirs-experience.html">The CIRS Experience</a><a href="admissions.html">Admissions</a></div>
   </div>
 </section>

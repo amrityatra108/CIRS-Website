@@ -24,6 +24,38 @@
   var $ = function (s, c) { return (c || doc).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
 
+  /* The native hero film plays once; its supplied rangoli still is always underneath. */
+  var hero = $("[data-fx-hero]"), heroVideo = $("[data-fx-hero-video]");
+  var heroMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function heroPlayback() {
+    if (!hero || !heroVideo) return;
+    var rect = hero.getBoundingClientRect();
+    var active = !heroMotion.matches && !doc.hidden && rect.bottom > 0 && rect.top < window.innerHeight;
+    if (!active) {
+      heroVideo.pause();
+      if (heroMotion.matches) hero.classList.remove("is-video-ready");
+      return;
+    }
+    if (heroVideo.ended) return;
+    var playing = heroVideo.play();
+    if (playing && playing.catch) playing.catch(function () { /* The poster remains visible. */ });
+  }
+  if (hero && heroVideo) {
+    heroVideo.muted = true;
+    function revealHeroFrame() {
+      if (!heroMotion.matches && heroVideo.readyState >= 2) hero.classList.add("is-video-ready");
+    }
+    heroVideo.addEventListener("playing", function () {
+      if (heroVideo.requestVideoFrameCallback) heroVideo.requestVideoFrameCallback(revealHeroFrame);
+      else requestAnimationFrame(revealHeroFrame);
+    });
+    heroVideo.addEventListener("error", function () { hero.classList.remove("is-video-ready"); });
+    if (!heroVideo.paused) revealHeroFrame();
+    if (heroMotion.addEventListener) heroMotion.addEventListener("change", heroPlayback);
+    doc.addEventListener("visibilitychange", heroPlayback);
+    heroPlayback();
+  }
+
   /* ----------------------------------------------------------
      Where the floating header ends, so the index sits under it.
      ---------------------------------------------------------- */
@@ -82,6 +114,7 @@
     window.requestAnimationFrame(function () {
       ticking = false;
       var vh = window.innerHeight;
+      if (heroVideo) heroPlayback();
       if (open && !reduced) {
         var r = open.getBoundingClientRect();
         var p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height * .6)));

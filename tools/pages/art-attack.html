@@ -17,6 +17,7 @@
        if the page script never arrives the still composition comes back. -->
   <script>(function(s){if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;s.classList.add("is-live");setTimeout(function(){if(!window.aaOpenReady)s.classList.remove("is-live")},6000)})(document.currentScript.parentNode)</script>
   <div class="aa-open__stick">
+    {{AA_DECOR:opening}}
     <div class="aa-open__text">
       <p class="aa-open__kicker">From the art room <span aria-hidden="true">/</span> to the wall</p>
       <h2 class="aa-open__title" id="aaTitle">Made by <em>Hand.</em></h2>
@@ -37,6 +38,8 @@
 </section>
 
 <section class="aa-sec aa-wallsec" id="wall" aria-labelledby="wallTitle">
+  {{AA_DECOR:brush}}
+  {{AA_DECOR:margin}}
   <div class="aa-wrap">
     <header class="aa-head">
       <p class="aa-marker"><span class="sc">The artwork wall</span></p>
@@ -69,6 +72,8 @@
 {{AA_RIBBON:warm}}
 
 <section class="aa-sec aa-studio" id="studio" aria-labelledby="studioTitle">
+  {{AA_DECOR:edge}}
+  {{AA_DECOR:curve}}
   <div class="aa-wrap">
     <header class="aa-head aa-head--split">
       <div>
@@ -129,6 +134,7 @@
 
 <!-- The Wall Magazines copy is the school's approved text (PR #77); keep it word for word. -->
 <section class="aa-sec aa-houses" id="wall-magazines" aria-labelledby="magTitle">
+  {{AA_DECOR:brush}}
   <div class="aa-wrap aa-houses__grid">
     <header class="aa-houses__head">
       <p class="aa-marker"><span class="sc">A house activity</span></p>
@@ -145,6 +151,7 @@
 </section>
 
 <section class="aa-sec aa-stage" id="stage" aria-labelledby="stageTitle">
+  {{AA_DECOR:curve}}
   <div class="aa-wrap aa-stage__grid">
     {{AA_PHOTO:masks|aa-stage__shot|(max-width: 700px) 100vw, 55vw}}
     <div class="aa-stage__text">
@@ -160,6 +167,8 @@
 </section>
 
 <section class="aa-sec aa-display" id="display" aria-labelledby="displayTitle">
+  {{AA_DECOR:brush}}
+  {{AA_DECOR:margin}}
   <div class="aa-wrap">
     <header class="aa-head aa-head--split">
       <div>
@@ -182,6 +191,7 @@
 {{AA_RIBBON:cool}}
 
 <section class="aa-sec aa-close" id="more" aria-labelledby="moreTitle">
+  {{AA_DECOR:finale}}
   <div class="aa-wrap">
     <p class="aa-marker"><span class="sc">Art, Culture &amp; Music</span></p>
     <h2 class="aa-h2" id="moreTitle">More student <em>creativity.</em></h2>
