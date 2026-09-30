@@ -9,7 +9,7 @@
 <div class="lr" id="laurels">
 
 <section class="rd-laurels-opening" aria-labelledby="lr-title">
- <div><p>Achievement at CIRS · 1996 to today</p><h1 id="lr-title">Our Laurels</h1><p>The people, performances and published results behind the honours.</p><a href="#achievement-chapters">Explore the chapters ↓</a><a href="#archive">Search the complete archive ↗</a></div>
+ <div><p>Achievement at CIRS · 1996 to today</p><h1 id="lr-title">Our Laurels</h1><p>The people, performances and published results behind the honours.</p><a href="#achievement-chapters">Explore the chapters <svg class="lr-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 3v12m-5-5 5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="#archive">Search the complete archive <svg class="lr-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 14 14 4M4 4h10v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
  <figure><img src="assets/img/news/competitions-1200.webp" alt="The school’s published collage of 2025 competitions" width="1200" height="620" fetchpriority="high"><figcaption>From the school’s own report of the 2025 competitions.</figcaption></figure>
 </section>
 
@@ -17,7 +17,7 @@
 
 <section class="lr-count" aria-labelledby="lr-count-title" data-lr-count>
   <div class="lr-count__stage">
-    <h2 class="lr-count__title" id="lr-count-title" data-lr-count-title>Counted,<br>not claimed.</h2>
+    <h2 class="lr-count__title" id="lr-count-title" data-lr-count-title>Achievement,<br>in the records.</h2>
     <ol class="lr-count__list" data-lr-stats>
 {{LAURELS_STATS}}
     </ol>
@@ -50,7 +50,7 @@
       <p class="lr-kicker lr-kicker--dark">The roll</p>
       <h2 class="lr-names__title" id="lr-names-title">Behind every laurel is a name.</h2>
       <p class="lr-names__lead">{{LAURELS_NAME_COUNT}} students, teams and houses named in the
-        school&rsquo;s records. Choose a name to see what it was for.</p>
+        school&rsquo;s records. Choose a name to explore the recorded achievement.</p>
     </header>
     <ul class="lr-names__field" data-lr-namefield>
 {{LAURELS_NAMES}}
@@ -64,7 +64,7 @@
     <header class="lr-season__head">
       <p class="lr-kicker">The season in photographs</p>
       <h2 class="lr-season__title" id="lr-season-title">Where the next laurel begins.</h2>
-      <p class="lr-season__lead">Three competitions, from the school&rsquo;s own photograph archive.
+      <p class="lr-season__lead">Three competitions from the school&rsquo;s photograph archive.
         Their placings are not yet published here; each will be added, with its source, when the
         school supplies it.</p>
     </header>
@@ -79,8 +79,8 @@
     <header class="lr-archive__head">
       <p class="lr-kicker">The complete archive</p>
       <h2 class="lr-archive__title" id="lr-archive-title">{{LAURELS_COUNT}} records.</h2>
-      <p class="lr-archive__lead">Each is copied from a record the school has published, and links
-        back to it. Choose one to read it in full.</p>
+      <p class="lr-archive__lead">Each entry draws on a published school record and links to its source.
+        Choose an entry to read the details.</p>
     </header>
 {{LAURELS_FILTERS}}
     <div class="lr-search" data-lr-search hidden>
@@ -101,8 +101,11 @@
 
 <section class="lr-end" aria-labelledby="lr-end-title" data-lr-end>
   <div class="wrap lr-end__inner">
-    <p class="lr-end__range" aria-hidden="true">{{LAURELS_FIRST}} <i>&rarr;</i> {{LAURELS_LAST}}</p>
-    <h2 class="lr-end__title" id="lr-end-title"><span class="lr-line"><span>And still</span></span> <span class="lr-line"><span>counting.</span></span></h2>
+    <p class="lr-end__range" aria-hidden="true">{{LAURELS_FIRST}} <i><svg class="lr-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i> {{LAURELS_LAST}}</p>
+    <h2 class="lr-end__title" id="lr-end-title" aria-label="And, still, counting.">
+      <span class="lr-end__previous" aria-hidden="true">{{LAURELS_COUNT}} laurels<br>on record.</span>
+      <span class="lr-end__words" aria-hidden="true"><span>And,</span> <span>still,</span> <span>counting.</span></span>
+    </h2>
     <p class="lr-end__note">{{LAURELS_COUNT}} laurels on record. The school opened on
       <a href="{{LAURELS_OPENED_HREF}}">{{LAURELS_OPENED}}</a>; the earliest laurel in this
       archive is from {{LAURELS_FIRST}}.</p>
@@ -112,10 +115,10 @@
 <dialog class="lr-inspect" id="lr-inspect" aria-labelledby="lr-inspect-cap">
   <div class="lr-inspect__bar">
     <p class="lr-inspect__count" data-lr-inspect-count aria-hidden="true"></p>
-    <button type="button" class="lr-inspect__btn" data-lr-inspect-prev aria-label="Previous exhibit">&larr;</button>
-    <button type="button" class="lr-inspect__btn" data-lr-inspect-next aria-label="Next exhibit">&rarr;</button>
+    <button type="button" class="lr-inspect__btn" data-lr-inspect-prev aria-label="Previous exhibit"><svg class="lr-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3m5-5-5 5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="lr-inspect__btn" data-lr-inspect-next aria-label="Next exhibit"><svg class="lr-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button type="button" class="lr-inspect__btn lr-inspect__close" data-lr-inspect-close aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <svg class="lr-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 4l10 10M14 4 4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
   </div>
   <div class="lr-inspect__stage" data-lr-inspect-stage></div>
