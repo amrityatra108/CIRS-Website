@@ -24,20 +24,21 @@
 <meta name="twitter:title" content="Creative Writing | Written at CIRS">
 <meta name="twitter:description" content="Poems by students of Chinmaya International Residential School. Explore the collection and read each edition.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preload" href="assets/js/navigation.js?b=115-horizontal-20260930-core-3" as="script" fetchpriority="high">
+<link rel="preload" href="assets/js/navigation.js?b=115-poem-reader-20260930-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=115-horizontal-20260930">
-<link rel="stylesheet" href="assets/css/cirs.css?b=115-horizontal-20260930">
-<link rel="stylesheet" href="assets/css/pages.css?b=115-horizontal-20260930-lightbox-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=115-poem-reader-20260930">
+<link rel="stylesheet" href="assets/css/cirs.css?b=115-poem-reader-20260930">
+<link rel="stylesheet" href="assets/css/pages.css?b=115-poem-reader-20260930-lightbox-2">
 
-<link rel="stylesheet" href="assets/css/cwriting.css?b=115-horizontal-20260930">
-<link rel="stylesheet" href="assets/css/typography.css?b=115-horizontal-20260930">
+<link rel="stylesheet" href="assets/css/cwriting.css?b=115-poem-reader-20260930">
+<link rel="stylesheet" href="assets/css/typography.css?b=115-poem-reader-20260930">
 <meta name="color-scheme" content="light">
-<link rel="stylesheet" href="assets/css/footer.css?b=115-horizontal-20260930-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=115-horizontal-20260930-nav-5">
+<script>if(/^#poem-[a-z0-9-]+$/.test(location.hash)){var d=document.documentElement;d.classList.add("cw-boot-reader");setTimeout(function(){d.classList.remove("cw-boot-reader")},4000)}</script>
+<link rel="stylesheet" href="assets/css/footer.css?b=115-poem-reader-20260930-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=115-poem-reader-20260930-nav-5">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -261,7 +262,7 @@
   </div>
 </div>
 <main id="main">
-<script src="assets/js/navigation.js?b=115-horizontal-20260930-core-3"></script>
+<script src="assets/js/navigation.js?b=115-poem-reader-20260930-core-3"></script>
 <section class="cw-hero" id="top" aria-labelledby="cw-title">
   <div class="wrap cw-hero__layout">
     <div class="cw-hero__topline">
@@ -498,7 +499,36 @@
   </div>
 </section>
 
-<section class="cw-chapter cw-chapter--1" id="chapter-joy-of-little-things" aria-labelledby="chapter-joy-of-little-things-title">
+<section class="cw-reader" id="reader" aria-labelledby="cw-reader-chapter" data-cw-reader hidden>
+  <div class="cw-reader__scene" aria-hidden="true">
+    <div class="cw-reader__ground"></div>
+    <div class="cw-reader__motif"></div>
+    <div class="cw-reader__light"><span></span><span></span></div>
+    <div class="cw-reader__quiet"><span></span><span></span></div>
+  </div>
+  <div class="cw-reader__inner">
+    <div class="cw-reader__bar">
+      <a class="cw-reader__back" href="#chapters" data-cw-back><span aria-hidden="true">←</span> Back to Chapter</a>
+      <div class="cw-reader__settings" role="group" aria-label="Reading settings">
+        <button class="cw-switch" type="button" aria-pressed="false" data-cw-mode="design"><span class="cw-switch__track" aria-hidden="true"><span class="cw-switch__knob"></span></span><span class="cw-switch__label">Show Chapter Design</span></button>
+        <button class="cw-switch" type="button" aria-pressed="false" data-cw-mode="quiet"><span class="cw-switch__track" aria-hidden="true"><span class="cw-switch__knob"></span></span><span class="cw-switch__label">Quiet Reading</span></button>
+      </div>
+    </div>
+    <header class="cw-reader__chapter">
+      <p class="cw-reader__eyebrow" data-cw-reader-eyebrow></p>
+      <h2 class="cw-reader__chapter-title" id="cw-reader-chapter" data-cw-reader-chapter>Poem reader</h2>
+    </header>
+    <div class="cw-reader__stage" data-cw-reader-stage></div>
+    <nav class="cw-reader__nav" aria-label="Poems in this chapter">
+      <button class="cw-reader__step cw-reader__step--prev" type="button" data-cw-step="-1"><span class="cw-reader__step-dir"><span aria-hidden="true">←</span> Previous Poem</span><span class="cw-reader__step-title" data-cw-step-title></span></button>
+      <p class="cw-reader__position" data-cw-position></p>
+      <button class="cw-reader__step cw-reader__step--next" type="button" data-cw-step="1"><span class="cw-reader__step-dir">Next Poem <span aria-hidden="true">→</span></span><span class="cw-reader__step-title" data-cw-step-title></span></button>
+    </nav>
+  </div>
+  <p class="cw-sr" role="status" aria-live="polite" aria-atomic="true" data-cw-reader-status></p>
+</section>
+
+<section class="cw-chapter cw-chapter--1" id="chapter-joy-of-little-things" aria-labelledby="chapter-joy-of-little-things-title" data-cw-chapter data-cw-chapter-number="01" data-cw-design="lights">
   <div class="cw-chapter__inner">
     <header class="cw-chapter__head" data-cw-reveal>
       <p class="cw-chapter__eyebrow">Chapter 01 <span class="cw-chapter__month">January 2026</span></p>
@@ -508,6 +538,7 @@
         <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
       </div>
     </header>
+    <ol class="cw-chapter__contents" aria-label="Poems in Joy of Little Things"><li><a class="cw-contents__link" href="#poem-joy-ved-tulsyan"><span class="cw-contents__number" aria-hidden="true">01</span><span class="cw-contents__title">The joy of little things,</span><span class="cw-contents__author">By Ved Tulsyan <span aria-hidden="true">·</span> Grade 11 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-joy-shresth-kedia"><span class="cw-contents__number" aria-hidden="true">02</span><span class="cw-contents__title">I have cherished these things</span><span class="cw-contents__author">By Shresth Kedia <span aria-hidden="true">·</span> Grade 11 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-joy-utkarsh-shah"><span class="cw-contents__number" aria-hidden="true">03</span><span class="cw-contents__title">There are a number of things,</span><span class="cw-contents__author">By Utkarsh Shah <span aria-hidden="true">·</span> Grade 11 · Science</span></a></li><li><a class="cw-contents__link" href="#poem-joy-arnav-saraf"><span class="cw-contents__number" aria-hidden="true">04</span><span class="cw-contents__title">One late noon, it was cloud’s day,</span><span class="cw-contents__author">By Arnav Saraf <span aria-hidden="true">·</span> Grade 11 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-joy-jishnu-yogesh"><span class="cw-contents__number" aria-hidden="true">05</span><span class="cw-contents__title">As I take a stroll down the streets,</span><span class="cw-contents__author">By Jishnu Teja Yogesh <span aria-hidden="true">·</span> IB year 1</span></a></li><li><a class="cw-contents__link" href="#poem-joy-kavya-ranjeeth"><span class="cw-contents__number" aria-hidden="true">06</span><span class="cw-contents__title">Waking up hours after the alarm rang,</span><span class="cw-contents__author">By Kavya Ranjeeth <span aria-hidden="true">·</span> Grade 9</span></a></li><li><a class="cw-contents__link" href="#poem-joy-manasvi-mandhana"><span class="cw-contents__number" aria-hidden="true">07</span><span class="cw-contents__title">From the brightly shining star,</span><span class="cw-contents__author">By Manasvi Mandhana <span aria-hidden="true">·</span> Grade 9</span></a></li><li><a class="cw-contents__link" href="#poem-joy-saranya-d"><span class="cw-contents__number" aria-hidden="true">08</span><span class="cw-contents__title">In drops of sunlight, joy waits.</span><span class="cw-contents__author">By Saranya D <span aria-hidden="true">·</span> Grade 9</span></a></li><li><a class="cw-contents__link" href="#poem-joy-tarushi-agarwal"><span class="cw-contents__number" aria-hidden="true">09</span><span class="cw-contents__title">It all lies in the joy of little things,</span><span class="cw-contents__author">By Tarushi Agarwal <span aria-hidden="true">·</span> Grade 11 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-joy-rakshana"><span class="cw-contents__number" aria-hidden="true">10</span><span class="cw-contents__title">Joy lives in little moments,</span><span class="cw-contents__author">By S.Rakshana <span aria-hidden="true">·</span> Grade 9B</span></a></li><li><a class="cw-contents__link" href="#poem-joy-aryan-ig"><span class="cw-contents__number" aria-hidden="true">11</span><span class="cw-contents__title">One time I was 7,</span><span class="cw-contents__author">By Aryan IG <span aria-hidden="true">·</span> Grade 11 · Science</span></a></li><li><a class="cw-contents__link" href="#poem-joy-avika-mundra"><span class="cw-contents__number" aria-hidden="true">12</span><span class="cw-contents__title">There’s beauty in the sky</span><span class="cw-contents__author">By Avika Mundra <span aria-hidden="true">·</span> IB year 1</span></a></li><li><a class="cw-contents__link" href="#poem-joy-aryaa-shah"><span class="cw-contents__number" aria-hidden="true">13</span><span class="cw-contents__title">Rain drumming on the dorm roof at night,</span><span class="cw-contents__author">By Aryaa Rushab Shah <span aria-hidden="true">·</span> Grade 11 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-joy-anushya-uk"><span class="cw-contents__number" aria-hidden="true">14</span><span class="cw-contents__title">The joy of little things</span><span class="cw-contents__author">By Anushya UK <span aria-hidden="true">·</span> IB year 1</span></a></li><li><a class="cw-contents__link" href="#poem-joy-saket-kalyani"><span class="cw-contents__number" aria-hidden="true">15</span><span class="cw-contents__title">Daily I hope something big to happen</span><span class="cw-contents__author">By Saket Kalyani <span aria-hidden="true">·</span> Grade 11 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-joy-sivayani-a"><span class="cw-contents__number" aria-hidden="true">16</span><span class="cw-contents__title">Drenched wet and dancing in the rain,</span><span class="cw-contents__author">By Sivayani A <span aria-hidden="true">·</span> Grade 9</span></a></li></ol>
     <div class="cw-chapter__poems">
     <article class="cw-poem" id="poem-joy-ved-tulsyan" aria-labelledby="poem-joy-ved-tulsyan-title" data-cw-poem>
       <div class="cw-poem__topline"><span>Poem 01 of 16</span><span>Opening line</span></div>
@@ -725,14 +756,14 @@
 <p class="cw-poem__stanza">Joy of little things I’ll never forget,<br>None of these moments I regret.</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Drenched wet and dancing in the rain, by Sivayani A">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-joy-saket-kalyani"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-joy-of-little-things">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-echoes-shresth-kedia">Next poem <span aria-hidden="true">→</span></a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-joy-saket-kalyani"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-joy-of-little-things">Back to chapter</a>
       </nav>
     </article>
     </div>
   </div>
 </section>
 <blockquote class="cw-interlude" data-cw-reveal><p class="cw-interlude__line">Little lights proving everything&#x27;s alright</p><cite class="cw-interlude__credit">— Aryaa Rushab Shah</cite></blockquote>
-<section class="cw-chapter cw-chapter--2" id="chapter-echoes-of-yesterday" aria-labelledby="chapter-echoes-of-yesterday-title">
+<section class="cw-chapter cw-chapter--2" id="chapter-echoes-of-yesterday" aria-labelledby="chapter-echoes-of-yesterday-title" data-cw-chapter data-cw-chapter-number="02" data-cw-design="dusk">
   <div class="cw-chapter__inner">
     <header class="cw-chapter__head" data-cw-reveal>
       <p class="cw-chapter__eyebrow">Chapter 02 <span class="cw-chapter__month">Date not recorded</span></p>
@@ -742,6 +773,7 @@
         <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
       </div>
     </header>
+    <ol class="cw-chapter__contents" aria-label="Poems in Echoes of Yesterday"><li><a class="cw-contents__link" href="#poem-echoes-shresth-kedia"><span class="cw-contents__number" aria-hidden="true">01</span><span class="cw-contents__title">It feels like everything was yesterday</span><span class="cw-contents__author">By Shresth Kedia <span aria-hidden="true">·</span> Grade 11 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-echoes-disha-bhimani"><span class="cw-contents__number" aria-hidden="true">02</span><span class="cw-contents__title">A bunch of thoughts, encircling my mind</span><span class="cw-contents__author">By Disha Priyen Bhimani</span></a></li><li><a class="cw-contents__link" href="#poem-echoes-kavya-ranjeet"><span class="cw-contents__number" aria-hidden="true">03</span><span class="cw-contents__title">The echoes of yesterday softly call,</span><span class="cw-contents__author">By Kavya Ranjeet <span aria-hidden="true">·</span> Grade 9</span></a></li><li><a class="cw-contents__link" href="#poem-echoes-aayush-bhashyam"><span class="cw-contents__number" aria-hidden="true">04</span><span class="cw-contents__title">The wind still hums your half-sung tune,</span><span class="cw-contents__author">By Aayush Sreenath Bhashyam <span aria-hidden="true">·</span> IB year 1</span></a></li><li><a class="cw-contents__link" href="#poem-echoes-saket-kalyani"><span class="cw-contents__number" aria-hidden="true">05</span><span class="cw-contents__title">The echoes of yesterday remind me</span><span class="cw-contents__author">By Saket Kalyani <span aria-hidden="true">·</span> Grade 11 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-echoes-jishnu-yogesh"><span class="cw-contents__number" aria-hidden="true">06</span><span class="cw-contents__title">When he closed his eyes, darkness spread,</span><span class="cw-contents__author">By Jishnu Teja Yogesh <span aria-hidden="true">·</span> IB year 1</span></a></li><li><a class="cw-contents__link" href="#poem-echoes-utkarsh-shah"><span class="cw-contents__number" aria-hidden="true">07</span><span class="cw-contents__title">Was it yesterday,</span><span class="cw-contents__author">By Utkarsh Shah <span aria-hidden="true">·</span> Grade 11 · Science</span></a></li><li><a class="cw-contents__link" href="#poem-echoes-adwaith-pn"><span class="cw-contents__number" aria-hidden="true">08</span><span class="cw-contents__title">Sometimes I remember things</span><span class="cw-contents__author">By Adwaith PN</span></a></li></ol>
     <div class="cw-chapter__poems">
     <article class="cw-poem" id="poem-echoes-shresth-kedia" aria-labelledby="poem-echoes-shresth-kedia-title" data-cw-poem>
       <div class="cw-poem__topline"><span>Poem 01 of 08</span><span>Opening line</span></div>
@@ -753,7 +785,7 @@
 <p class="cw-poem__stanza">Those memories still cherished,<br>Deep in my heart as always.<br>Some echoes haunt others’ play,<br>Hope that they always stay</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning It feels like everything was yesterday by Shresth Kedia">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-joy-sivayani-a"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-echoes-of-yesterday">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-echoes-disha-bhimani">Next poem <span aria-hidden="true">→</span></a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-echoes-of-yesterday">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-echoes-disha-bhimani">Next poem <span aria-hidden="true">→</span></a>
       </nav>
     </article>
     <article class="cw-poem" id="poem-echoes-disha-bhimani" aria-labelledby="poem-echoes-disha-bhimani-title" data-cw-poem>
@@ -851,13 +883,13 @@
 <p class="cw-poem__stanza">As I look towards what&#x27;s ahead,<br>I keep those moments close and true.<br>The past may be gone, but never forgotten,<br>And the echoes of yesterday still ring in my ear.</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Sometimes I remember things by Adwaith PN">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-echoes-utkarsh-shah"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-echoes-of-yesterday">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-turning-tanmay-khakharia">Next poem <span aria-hidden="true">→</span></a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-echoes-utkarsh-shah"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-echoes-of-yesterday">Back to chapter</a>
       </nav>
     </article>
     </div>
   </div>
 </section>
-<section class="cw-chapter cw-chapter--3" id="chapter-turning-a-new-page" aria-labelledby="chapter-turning-a-new-page-title">
+<section class="cw-chapter cw-chapter--3" id="chapter-turning-a-new-page" aria-labelledby="chapter-turning-a-new-page-title" data-cw-chapter data-cw-chapter-number="03" data-cw-design="paper">
   <div class="cw-chapter__inner">
     <header class="cw-chapter__head" data-cw-reveal>
       <p class="cw-chapter__eyebrow">Chapter 03 <span class="cw-chapter__month">Date not recorded</span></p>
@@ -867,6 +899,7 @@
         <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
       </div>
     </header>
+    <ol class="cw-chapter__contents" aria-label="Poems in Turning a New Page"><li><a class="cw-contents__link" href="#poem-turning-tanmay-khakharia"><span class="cw-contents__number" aria-hidden="true">01</span><span class="cw-contents__title">As the lonely boy lies curled against the wall,</span><span class="cw-contents__author">By Tanmay Mehul Khakharia <span aria-hidden="true">·</span> IB year 2</span></a></li><li><a class="cw-contents__link" href="#poem-turning-nishanth-reddy"><span class="cw-contents__number" aria-hidden="true">02</span><span class="cw-contents__title">There comes a time in a child</span><span class="cw-contents__author">By Nishanth Reddy <span aria-hidden="true">·</span> IB year 2</span></a></li><li><a class="cw-contents__link" href="#poem-turning-ananda-priyan"><span class="cw-contents__number" aria-hidden="true">03</span><span class="cw-contents__title">I turned a page today</span><span class="cw-contents__author">By Ananda Priyan <span aria-hidden="true">·</span> Grade 12 · Science</span></a></li><li><a class="cw-contents__link" href="#poem-turning-jishnu-yogesh"><span class="cw-contents__number" aria-hidden="true">04</span><span class="cw-contents__title">Life, a tapestry of stories intertwined.</span><span class="cw-contents__author">By Jishnu Teja Yogesh <span aria-hidden="true">·</span> IB year 1</span></a></li><li><a class="cw-contents__link" href="#poem-turning-aayush-bhashyam"><span class="cw-contents__number" aria-hidden="true">05</span><span class="cw-contents__title">Between the last word and the first,</span><span class="cw-contents__author">By Aayush Sreenath Bhashyam <span aria-hidden="true">·</span> IB year 2</span></a></li><li><a class="cw-contents__link" href="#poem-turning-shresth-kedia"><span class="cw-contents__number" aria-hidden="true">06</span><span class="cw-contents__title">It’s that time of the year again,</span><span class="cw-contents__author">By Shresth Kedia <span aria-hidden="true">·</span> Grade 11 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-turning-sivayini-a"><span class="cw-contents__number" aria-hidden="true">07</span><span class="cw-contents__title">Wounds, cuts, betrayal washed,</span><span class="cw-contents__author">By Sivayini A <span aria-hidden="true">·</span> Grade 10</span></a></li><li><a class="cw-contents__link" href="#poem-turning-kavya-ranjeeth"><span class="cw-contents__number" aria-hidden="true">08</span><span class="cw-contents__title">Words that deliver so much to feel,</span><span class="cw-contents__author">By Kavya Ranjeeth <span aria-hidden="true">·</span> Grade 10</span></a></li><li><a class="cw-contents__link" href="#poem-turning-anushya-uk"><span class="cw-contents__number" aria-hidden="true">09</span><span class="cw-contents__title">It feels like just yesterday</span><span class="cw-contents__author">By Anushya UK <span aria-hidden="true">·</span> IB year 2</span></a></li></ol>
     <div class="cw-chapter__poems">
     <article class="cw-poem" id="poem-turning-tanmay-khakharia" aria-labelledby="poem-turning-tanmay-khakharia-title" data-cw-poem>
       <div class="cw-poem__topline"><span>Poem 01 of 09</span><span>Opening line</span></div>
@@ -878,7 +911,7 @@
 <p class="cw-poem__stanza">As the woman crosses the war-ravaged fields, <br>Reaching for the safety beyond the booming weapons of hell,<br>The thought that pushes her broken, bloodied legs:<br>The hope of turning a new page.</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning As the lonely boy lies curled against the wall, by Tanmay Mehul Khakharia">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-echoes-adwaith-pn"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-turning-a-new-page">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-turning-nishanth-reddy">Next poem <span aria-hidden="true">→</span></a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-turning-a-new-page">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-turning-nishanth-reddy">Next poem <span aria-hidden="true">→</span></a>
       </nav>
     </article>
     <article class="cw-poem" id="poem-turning-nishanth-reddy" aria-labelledby="poem-turning-nishanth-reddy-title" data-cw-poem>
@@ -976,14 +1009,14 @@
 <p class="cw-poem__stanza">They’re not shut completely,<br>but they’re not wide open either.<br>They sit quietly in a corner,<br>just out of reach,<br>as I step into something new.</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning It feels like just yesterday by Anushya UK">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-turning-kavya-ranjeeth"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-turning-a-new-page">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-refuge-kavya-prasad">Next poem <span aria-hidden="true">→</span></a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-turning-kavya-ranjeeth"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-turning-a-new-page">Back to chapter</a>
       </nav>
     </article>
     </div>
   </div>
 </section>
 <blockquote class="cw-interlude" data-cw-reveal><p class="cw-interlude__line">Here I don&#x27;t have to explain a thing,<br>I just draw until my thoughts take wing.</p><cite class="cw-interlude__credit">— Tarushi agarwal</cite></blockquote>
-<section class="cw-chapter cw-chapter--4" id="chapter-refuge-from-reality" aria-labelledby="chapter-refuge-from-reality-title">
+<section class="cw-chapter cw-chapter--4" id="chapter-refuge-from-reality" aria-labelledby="chapter-refuge-from-reality-title" data-cw-chapter data-cw-chapter-number="04" data-cw-design="night">
   <div class="cw-chapter__inner">
     <header class="cw-chapter__head" data-cw-reveal>
       <p class="cw-chapter__eyebrow">Chapter 04 <span class="cw-chapter__month">April · year not recorded</span></p>
@@ -993,6 +1026,7 @@
         <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
       </div>
     </header>
+    <ol class="cw-chapter__contents" aria-label="Poems in Refuge from Reality"><li><a class="cw-contents__link" href="#poem-refuge-kavya-prasad"><span class="cw-contents__number" aria-hidden="true">01</span><span class="cw-contents__title">Where I reside right now,</span><span class="cw-contents__author">By Kavya Arun Prasad <span aria-hidden="true">·</span> Grade 9C</span></a></li><li><a class="cw-contents__link" href="#poem-refuge-nakshatra-gavaskar"><span class="cw-contents__number" aria-hidden="true">02</span><span class="cw-contents__title">My brother, my refuge</span><span class="cw-contents__author">By Nakshatra Gavaskar <span aria-hidden="true">·</span> Grade 9B</span></a></li><li><a class="cw-contents__link" href="#poem-refuge-jishnu-yogesh"><span class="cw-contents__number" aria-hidden="true">03</span><span class="cw-contents__title">It was all right, just as I’d planned.</span><span class="cw-contents__author">By Jishnu Teja Yogesh <span aria-hidden="true">·</span> IB year 2</span></a></li><li><a class="cw-contents__link" href="#poem-refuge-adira-chellam"><span class="cw-contents__number" aria-hidden="true">04</span><span class="cw-contents__title">Reality is not something easy</span><span class="cw-contents__author">By Adira Chellam P <span aria-hidden="true">·</span> Grade 9B</span></a></li><li><a class="cw-contents__link" href="#poem-refuge-tarushi-agarwal"><span class="cw-contents__number" aria-hidden="true">05</span><span class="cw-contents__title">When the whole world gets way too loud,</span><span class="cw-contents__author">By Tarushi agarwal <span aria-hidden="true">·</span> Grade 12 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-refuge-anushya-uk"><span class="cw-contents__number" aria-hidden="true">06</span><span class="cw-contents__title">When academic stress get way too tense,</span><span class="cw-contents__author">By Anushya UK <span aria-hidden="true">·</span> IB year 2</span></a></li><li><a class="cw-contents__link" href="#poem-refuge-hardik-saralia"><span class="cw-contents__number" aria-hidden="true">07</span><span class="cw-contents__title">Whenever life feels way too heavy,</span><span class="cw-contents__author">By Hardik Saralia <span aria-hidden="true">·</span> Grade 12 · Management</span></a></li><li><a class="cw-contents__link" href="#poem-refuge-sumedha-sarangi"><span class="cw-contents__number" aria-hidden="true">08</span><span class="cw-contents__title">Whenever people misunderstand me,</span><span class="cw-contents__author">By Sumedha Sarangi <span aria-hidden="true">·</span> Grade 12 · Science</span></a></li></ol>
     <div class="cw-chapter__poems">
     <article class="cw-poem" id="poem-refuge-kavya-prasad" aria-labelledby="poem-refuge-kavya-prasad-title" data-cw-poem>
       <div class="cw-poem__topline"><span>Poem 01 of 08</span><span>Opening line</span></div>
@@ -1005,7 +1039,7 @@
 <p class="cw-poem__stanza">So I go running back,<br>Blind, without clarity.<br>To my family, a warmth I’ll forever seek,<br>The one’s who I call, my refuge from reality.</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Where I reside right now, by Kavya Arun Prasad">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-turning-anushya-uk"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-refuge-from-reality">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-refuge-nakshatra-gavaskar">Next poem <span aria-hidden="true">→</span></a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-refuge-from-reality">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-refuge-nakshatra-gavaskar">Next poem <span aria-hidden="true">→</span></a>
       </nav>
     </article>
     <article class="cw-poem" id="poem-refuge-nakshatra-gavaskar" aria-labelledby="poem-refuge-nakshatra-gavaskar-title" data-cw-poem>
@@ -1091,13 +1125,13 @@
 <p class="cw-poem__stanza">Whenever people misunderstand me,<br>And reality feels like a penalty,<br>I don&#x27;t scream or fight out loud,<br>I just walk away from the crowd.<br>I pull out my old rough diary page,<br>Where I spill my truth at every stage.<br>I write down words I can never say,<br>Just to make it through another day.<br>My ink writes what my heart really feels,<br>It&#x27;s the only thing that actually heals.<br>This small book hidden under my bed,<br>Clears out all the chaos inside my head.</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Whenever people misunderstand me, by Sumedha Sarangi">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-refuge-hardik-saralia"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-refuge-from-reality">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-lift-jishnu-yogesh">Next poem <span aria-hidden="true">→</span></a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-refuge-hardik-saralia"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-refuge-from-reality">Back to chapter</a>
       </nav>
     </article>
     </div>
   </div>
 </section>
-<section class="cw-chapter cw-chapter--5" id="chapter-lift-yourself-by-yourself" aria-labelledby="chapter-lift-yourself-by-yourself-title">
+<section class="cw-chapter cw-chapter--5" id="chapter-lift-yourself-by-yourself" aria-labelledby="chapter-lift-yourself-by-yourself-title" data-cw-chapter data-cw-chapter-number="05" data-cw-design="meadow">
   <div class="cw-chapter__inner">
     <header class="cw-chapter__head" data-cw-reveal>
       <p class="cw-chapter__eyebrow">Chapter 05 <span class="cw-chapter__month">May · year not recorded</span></p>
@@ -1107,6 +1141,7 @@
         <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
       </div>
     </header>
+    <ol class="cw-chapter__contents" aria-label="Poems in Lift Yourself by Yourself"><li><a class="cw-contents__link" href="#poem-lift-jishnu-yogesh"><span class="cw-contents__number" aria-hidden="true">01</span><span class="cw-contents__title">Bound in chains, held up tight</span><span class="cw-contents__author">By Jishnu Teja Yogesh <span aria-hidden="true">·</span> IB year 2</span></a></li><li><a class="cw-contents__link" href="#poem-lift-aadhya-tulsyan"><span class="cw-contents__number" aria-hidden="true">02</span><span class="cw-contents__title">When the winds chase you to the edge,</span><span class="cw-contents__author">By Aadhya Tulsyan <span aria-hidden="true">·</span> Grade 11</span></a></li><li><a class="cw-contents__link" href="#poem-lift-ashmi-agarwal"><span class="cw-contents__number" aria-hidden="true">03</span><span class="cw-contents__title">Caring, sharing and supporting your friends;</span><span class="cw-contents__author">By Ashmi Agarwal <span aria-hidden="true">·</span> Grade 9B</span></a></li><li><a class="cw-contents__link" href="#poem-lift-vrittee-fogla"><span class="cw-contents__number" aria-hidden="true">04</span><span class="cw-contents__title">We all live in a world so full, </span><span class="cw-contents__author">By Vrittee Fogla <span aria-hidden="true">·</span> Grade 9B</span></a></li><li><a class="cw-contents__link" href="#poem-lift-janaki"><span class="cw-contents__number" aria-hidden="true">05</span><span class="cw-contents__title">There are people to push you low,</span><span class="cw-contents__author">By Janaki <span aria-hidden="true">·</span> Grade 9B</span></a></li><li><a class="cw-contents__link" href="#poem-lift-m-k-nedra"><span class="cw-contents__number" aria-hidden="true">06</span><span class="cw-contents__title">When you feel low,</span><span class="cw-contents__author">By M K Nedra <span aria-hidden="true">·</span> Grade 9D</span></a></li><li><a class="cw-contents__link" href="#poem-lift-aarush-chhaparia"><span class="cw-contents__number" aria-hidden="true">07</span><span class="cw-contents__title">Lift yourself by yourself,</span><span class="cw-contents__author">By Aarush Chhaparia <span aria-hidden="true">·</span> Grade 9D</span></a></li></ol>
     <div class="cw-chapter__poems">
     <article class="cw-poem" id="poem-lift-jishnu-yogesh" aria-labelledby="poem-lift-jishnu-yogesh-title" data-cw-poem>
       <div class="cw-poem__topline"><span>Poem 01 of 07</span><span>Opening line</span></div>
@@ -1119,7 +1154,7 @@
 <p class="cw-poem__stanza">No force remained to keep me bound<br>No weight remained to drag me around<br>The world that ruled, now understands<br>Its my time and its I who commands…</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Bound in chains, held up tight by Jishnu Teja Yogesh">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-refuge-sumedha-sarangi"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-lift-yourself-by-yourself">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-lift-aadhya-tulsyan">Next poem <span aria-hidden="true">→</span></a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-lift-yourself-by-yourself">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-lift-aadhya-tulsyan">Next poem <span aria-hidden="true">→</span></a>
       </nav>
     </article>
     <article class="cw-poem" id="poem-lift-aadhya-tulsyan" aria-labelledby="poem-lift-aadhya-tulsyan-title" data-cw-poem>
@@ -1198,13 +1233,13 @@
 <p class="cw-poem__stanza">To taste success in life today,<br>Lifting yourself<br>o is the only way,<br>So lift yourself by yourself today.</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning Lift yourself by yourself, by Aarush Chhaparia">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-lift-m-k-nedra"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-lift-yourself-by-yourself">Back to chapter</a><a class="cw-poem__nav-link cw-poem__nav-link--next" href="#poem-dawn-orchestra">Next poem <span aria-hidden="true">→</span></a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-lift-m-k-nedra"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-lift-yourself-by-yourself">Back to chapter</a>
       </nav>
     </article>
     </div>
   </div>
 </section>
-<section class="cw-chapter cw-chapter--6" id="chapter-the-dawn-of-a-new-era" aria-labelledby="chapter-the-dawn-of-a-new-era-title">
+<section class="cw-chapter cw-chapter--6" id="chapter-the-dawn-of-a-new-era" aria-labelledby="chapter-the-dawn-of-a-new-era-title" data-cw-chapter data-cw-chapter-number="06" data-cw-design="sunrise">
   <div class="cw-chapter__inner">
     <header class="cw-chapter__head" data-cw-reveal>
       <p class="cw-chapter__eyebrow">Chapter 06 <span class="cw-chapter__month">July · year not recorded</span></p>
@@ -1214,6 +1249,7 @@
         <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
       </div>
     </header>
+    <ol class="cw-chapter__contents" aria-label="Poems in The Dawn of a New Era"><li><a class="cw-contents__link" href="#poem-dawn-orchestra"><span class="cw-contents__number" aria-hidden="true">01</span><span class="cw-contents__title">The time has come for a new beginning.</span><span class="cw-contents__author">By Author not recorded</span></a></li></ol>
     <div class="cw-chapter__poems">
     <article class="cw-poem" id="poem-dawn-orchestra" aria-labelledby="poem-dawn-orchestra-title" data-cw-poem>
       <div class="cw-poem__topline"><span>Poem 01 of 01</span><span>Opening line</span></div>
@@ -1227,7 +1263,7 @@
 <p class="cw-poem__stanza">An orchestra of peace,<br>Togetherness across the seas</p>
       </div>
       <nav class="cw-poem__nav" aria-label="Navigate from poem beginning The time has come for a new beginning. by Author not recorded">
-        <a class="cw-poem__nav-link cw-poem__nav-link--prev" href="#poem-lift-aarush-chhaparia"><span aria-hidden="true">←</span> Previous poem</a><a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-the-dawn-of-a-new-era">Back to chapter</a>
+        <a class="cw-poem__nav-link cw-poem__nav-link--theme" href="#chapter-the-dawn-of-a-new-era">Back to chapter</a>
       </nav>
     </article>
     </div>
@@ -1366,12 +1402,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=115-horizontal-20260930" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=115-horizontal-20260930" defer></script>
-<script src="assets/vendor/lenis.min.js?b=115-horizontal-20260930" defer></script>
-<script src="assets/js/cirs.js?b=115-horizontal-20260930-header-5" defer></script>
-<script src="assets/js/pages.js?b=115-horizontal-20260930" defer></script>
-<script src="assets/js/footer.js?b=115-horizontal-20260930-footer-1" defer></script>
-<script src="assets/js/cwriting.js?b=115-horizontal-20260930" defer></script>
+<script src="assets/vendor/gsap.min.js?b=115-poem-reader-20260930" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=115-poem-reader-20260930" defer></script>
+<script src="assets/vendor/lenis.min.js?b=115-poem-reader-20260930" defer></script>
+<script src="assets/js/cirs.js?b=115-poem-reader-20260930-header-5" defer></script>
+<script src="assets/js/pages.js?b=115-poem-reader-20260930" defer></script>
+<script src="assets/js/footer.js?b=115-poem-reader-20260930-footer-1" defer></script>
+<script src="assets/js/cwriting.js?b=115-poem-reader-20260930" defer></script>
 </body>
 </html>

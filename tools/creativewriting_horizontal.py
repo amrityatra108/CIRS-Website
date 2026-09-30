@@ -122,16 +122,37 @@ def rows_html() -> str:
     return "\n".join(rows)
 
 
+# Each chapter's visual identity in the poem reader (assets/css/cwriting.css,
+# `[data-cw-design]`). No chapter artwork was ever supplied, so these are drawn
+# from the site's own colour roles and paper grain, after the moods the
+# collection once recorded for its chapters (dawn, dusk, paper, night, meadow)
+# and, for the one chapter that had none, its own title.
+CHAPTER_DESIGNS = {
+    "joy-of-little-things": "lights",
+    "echoes-of-yesterday": "dusk",
+    "turning-a-new-page": "paper",
+    "refuge-from-reality": "night",
+    "lift-yourself-by-yourself": "meadow",
+    "the-dawn-of-a-new-era": "sunrise",
+}
+
+
+def _title(poem: dict) -> str:
+    return poem.get("title") or _opening(poem)
+
+
 def _poem_html(poem: dict, chapter: dict, n: int, total_in_chapter: int,
                previous: dict | None, following: dict | None) -> str:
     poem_id = esc(poem["id"])
-    title = esc(poem.get("title") or _opening(poem))
+    title = esc(_title(poem))
     stanzas = "\n".join(
         '<p class="cw-poem__stanza">'
         + "<br>".join(esc(line) for line in stanza.splitlines())
         + "</p>"
         for stanza in poem["stanzas"]
     )
+    # Previous and next stay inside the chapter: its first poem has no
+    # previous and its last no next, rather than stepping into another theme.
     links = []
     if previous:
         links.append(
@@ -175,23 +196,75 @@ def _interlude_html(poem_id: str, lines: list[str]) -> str:
     )
 
 
+def _contents_html(chapter: dict) -> str:
+    """The chapter's poems as a list to choose from, each opening the reader."""
+    items = []
+    for n, poem in enumerate(chapter["poems"], 1):
+        grade = f' <span aria-hidden="true">·</span> {esc(poem["grade"])}' if poem.get("grade") else ""
+        items.append(
+            f'<li><a class="cw-contents__link" href="#poem-{esc(poem["id"])}">'
+            f'<span class="cw-contents__number" aria-hidden="true">{n:02d}</span>'
+            f'<span class="cw-contents__title">{esc(_title(poem))}</span>'
+            f'<span class="cw-contents__author">By {esc(poem["author"])}{grade}</span>'
+            '</a></li>'
+        )
+    return (f'<ol class="cw-chapter__contents" aria-label="Poems in {esc(chapter["title"])}">'
+            + "".join(items) + "</ol>")
+
+
+def reader_html() -> str:
+    """The focused reader: one shell, filled by cwriting.js with a single poem.
+
+    The poems themselves are never copied into it. The script moves the one
+    article being read in from its chapter and returns it when the reader
+    moves on, so without the script the page is simply the whole anthology.
+    """
+    return '''<section class="cw-reader" id="reader" aria-labelledby="cw-reader-chapter" data-cw-reader hidden>
+  <div class="cw-reader__scene" aria-hidden="true">
+    <div class="cw-reader__ground"></div>
+    <div class="cw-reader__motif"></div>
+    <div class="cw-reader__light"><span></span><span></span></div>
+    <div class="cw-reader__quiet"><span></span><span></span></div>
+  </div>
+  <div class="cw-reader__inner">
+    <div class="cw-reader__bar">
+      <a class="cw-reader__back" href="#chapters" data-cw-back><span aria-hidden="true">←</span> Back to Chapter</a>
+      <div class="cw-reader__settings" role="group" aria-label="Reading settings">
+        <button class="cw-switch" type="button" aria-pressed="false" data-cw-mode="design"><span class="cw-switch__track" aria-hidden="true"><span class="cw-switch__knob"></span></span><span class="cw-switch__label">Show Chapter Design</span></button>
+        <button class="cw-switch" type="button" aria-pressed="false" data-cw-mode="quiet"><span class="cw-switch__track" aria-hidden="true"><span class="cw-switch__knob"></span></span><span class="cw-switch__label">Quiet Reading</span></button>
+      </div>
+    </div>
+    <header class="cw-reader__chapter">
+      <p class="cw-reader__eyebrow" data-cw-reader-eyebrow></p>
+      <h2 class="cw-reader__chapter-title" id="cw-reader-chapter" data-cw-reader-chapter>Poem reader</h2>
+    </header>
+    <div class="cw-reader__stage" data-cw-reader-stage></div>
+    <nav class="cw-reader__nav" aria-label="Poems in this chapter">
+      <button class="cw-reader__step cw-reader__step--prev" type="button" data-cw-step="-1"><span class="cw-reader__step-dir"><span aria-hidden="true">←</span> Previous Poem</span><span class="cw-reader__step-title" data-cw-step-title></span></button>
+      <p class="cw-reader__position" data-cw-position></p>
+      <button class="cw-reader__step cw-reader__step--next" type="button" data-cw-step="1"><span class="cw-reader__step-dir">Next Poem <span aria-hidden="true">→</span></span><span class="cw-reader__step-title" data-cw-step-title></span></button>
+    </nav>
+  </div>
+  <p class="cw-sr" role="status" aria-live="polite" aria-atomic="true" data-cw-reader-status></p>
+</section>'''
+
+
 def chapters_html() -> str:
     chapters = collection()["chapters"]
-    all_poems = [poem for chapter in chapters for poem in chapter["poems"]]
-    positions = {poem["id"]: i for i, poem in enumerate(all_poems)}
     out = []
     for chapter_n, chapter in enumerate(chapters, 1):
         chapter_id = esc(chapter["id"])
         month = f'<span class="cw-chapter__month">{esc(chapter["month"])}</span>' if chapter.get("month") else ""
+        chapter_poems = chapter["poems"]
         poems = []
-        for poem_n, poem in enumerate(chapter["poems"], 1):
-            i = positions[poem["id"]]
+        for poem_n, poem in enumerate(chapter_poems, 1):
             poems.append(_poem_html(
-                poem, chapter, poem_n, len(chapter["poems"]),
-                all_poems[i - 1] if i else None,
-                all_poems[i + 1] if i + 1 < len(all_poems) else None,
+                poem, chapter, poem_n, len(chapter_poems),
+                chapter_poems[poem_n - 2] if poem_n > 1 else None,
+                chapter_poems[poem_n] if poem_n < len(chapter_poems) else None,
             ))
-        out.append(f'''<section class="cw-chapter cw-chapter--{chapter_n}" id="chapter-{chapter_id}" aria-labelledby="chapter-{chapter_id}-title">
+        design = CHAPTER_DESIGNS.get(chapter["id"], "paper")
+        out.append(f'''<section class="cw-chapter cw-chapter--{chapter_n}" id="chapter-{chapter_id}" aria-labelledby="chapter-{chapter_id}-title" data-cw-chapter data-cw-chapter-number="{chapter_n:02d}" data-cw-design="{design}">
   <div class="cw-chapter__inner">
     <header class="cw-chapter__head" data-cw-reveal>
       <p class="cw-chapter__eyebrow">Chapter {chapter_n:02d} {month}</p>
@@ -201,6 +274,7 @@ def chapters_html() -> str:
         <a class="cw-chapter__back" href="#chapters">Back to index <span aria-hidden="true">↗</span></a>
       </div>
     </header>
+    {_contents_html(chapter)}
     <div class="cw-chapter__poems">
 {chr(10).join(poems)}
     </div>
