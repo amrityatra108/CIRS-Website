@@ -19,7 +19,7 @@
    the exit, all on the shared GSAP ticker. */
 
 .toe{
-  --toe-ground:#110C16;
+  --toe-ground:var(--captures-ground);
   --toe-exit:90vh;
   --W:100vw;
   --H:100vh;
@@ -33,17 +33,16 @@
   .toe{ --H:100svh; --P:calc(max(100vw, 100svh) * .95); }
 }
 
-/* Between the featured photographs, whose ground is a green-black, and this
-   one's purple-black: both are nearly black, so a short ramp is enough. */
+/* Keep the original featured-photo green through the field and journal. */
 .toe-seam{
   height:clamp(80px, 12vh, 160px);
-  background:linear-gradient(to bottom, #141A15 0%, #121217 55%, var(--toe-ground, #110C16) 100%);
+  background:var(--captures-ground);
 }
 body.captures .film__seam.toe-seam--out{
   /* The foot of the stage at the end of its exit, when the shade is over it. */
-  --film-seam-top:#0B080E;
-  --film-seam-fold:#0E0B12;
-  --film-seam-rise:#6C6672;
+  --film-seam-top:var(--captures-ground);
+  --film-seam-fold:var(--captures-ground);
+  --film-seam-rise:var(--captures-ground);
 }
 
 .toe__stage{
@@ -53,9 +52,7 @@ body.captures .film__seam.toe-seam--out{
   overflow:hidden;
   perspective:var(--P);
   perspective-origin:50% 50%;
-  background:
-    radial-gradient(120% 90% at 50% 46%, #1E1626 0%, #150F1B 52%, #0C0910 100%)
-    var(--toe-ground);
+  background:var(--toe-ground);
 }
 
 /* Grain: fixed, faint, never animated. */
@@ -385,3 +382,6 @@ body.captures.toe-on #totop{
   .toe__meta,
   .toe__meta-in{ transition:none; }
 }
+
+body.captures .toe-seam--out{background:var(--captures-ground)}
+body.captures .toe__fog,body.captures .toe__shade{background:var(--captures-ground)}
