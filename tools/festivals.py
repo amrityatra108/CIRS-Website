@@ -399,7 +399,7 @@ def img(name, sizes, cls="", eager=False, alt=None, pos=None):
 
 def caption(name):
     fest, _year, when, cap, *_ = PHOTOS[name]
-    return f'{cap} <span class="fx-when">{NAMES[fest]}, {when}</span>'
+    return f'<span class="fx-when">{NAMES[fest]}, {when}</span>'
 
 
 def expand(html):
@@ -498,10 +498,10 @@ def archive_html():
         pic = img(name, SIZES_TILE, "fx-tile__img")
         tiles.append(f'''    <li class="fx-tile fx-tile--{shape}" data-festival="{fest}" data-year="{year}">
       <a class="fx-tile__link" href="{src(name)}" data-fx-open="{i}"
-         data-caption="{_esc(cap)}" data-when="{_esc(NAMES[fest] + ', ' + when)}">
+         data-when="{_esc(NAMES[fest] + ', ' + when)}">
         {pic}
       </a>
-      <p class="fx-tile__cap">{cap}<span class="fx-when">{NAMES[fest]}, {when}</span></p>
+      <p class="fx-tile__cap"><span class="fx-when">{NAMES[fest]}, {when}</span></p>
     </li>''')
     return f'''<div class="fx-filters" role="group" aria-label="Filter the archive">
   <div class="fx-filters__row" aria-label="By festival" role="group">

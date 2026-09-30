@@ -15,14 +15,15 @@
 
 <section class="fx-hero" id="festivals-opening" data-fx-hero data-header-theme="dark" aria-labelledby="festivalsHeroTitle">
   <div class="fx-hero__media" aria-hidden="true">
-    <img class="fx-hero__poster" src="assets/img/festivals-opening-final.jpg" alt="" width="1280" height="720" fetchpriority="high" decoding="async">
-    <video class="fx-hero__video" data-fx-hero-video autoplay muted playsinline preload="metadata" poster="assets/img/festivals-opening-poster.jpg" width="1280" height="720" tabindex="-1">
+    <img class="fx-hero__poster" src="assets/img/festivals-opening-final.jpg" alt="" width="1280" height="720" decoding="async">
+    <video class="fx-hero__video" data-fx-hero-video muted playsinline preload="metadata" poster="assets/img/festivals-opening-poster.jpg" width="1280" height="720" tabindex="-1">
       <source src="assets/video/festivals-opening.mp4" type="video/mp4">
       <source src="assets/video/festivals-opening.webm" type="video/webm">
     </video>
   </div>
   <div class="fx-hero__shade" aria-hidden="true"></div>
-  <script>(function(hero){if(matchMedia("(prefers-reduced-motion: reduce)").matches){var video=hero.querySelector("video");video.removeAttribute("autoplay");video.pause()}else{hero.classList.add("fx-hero--enter");setTimeout(function(){hero.classList.remove("fx-hero--enter")},1500)}})(document.currentScript.parentNode)</script>
+
+  <button class="fx-hero__control" type="button" data-fx-intro-control hidden>Skip intro</button>
   <div class="fx-hero__copy">
     <p class="fx-hero__eyebrow">Festivals at CIRS</p>
     <h1 class="fx-hero__title" id="festivalsHeroTitle"><span class="fx-hero__mask"><span class="fx-hero__line">Celebrations</span></span>
@@ -127,7 +128,7 @@
       </div>
     </div>
 
-    <div class="fx-night" data-fx-night data-header-theme="dark">
+    <div class="fx-night" data-fx-night>
       <div class="wrap fx-night__intro">
         <p class="fx-night__eyebrow">One night, in eight photographs</p>
         <h4 class="fx-night__title">From the pooja <em>to the matki</em></h4>
@@ -143,57 +144,57 @@
           <li class="fx-frame fx-frame--1" data-fx-frame data-time="08:30" data-date="4 September" data-phase="morning">
             <figure class="fx-frame__fig">
               {{FX_IMG jan-pooja | (max-width: 520px) 85vw, (max-width: 820px) 87vw, (max-width: 1100px) 48vw, 490px | fx-frame__img}}
-              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T08:30+05:30">08:30</time><span>The morning pooja before the Krishna murti.</span></figcaption>
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T08:30+05:30">08:30</time></figcaption>
             </figure>
           </li>
           <li class="fx-frame fx-frame--2" data-fx-frame data-time="23:10" data-date="4 September" data-phase="night">
             <figure class="fx-frame__fig">
               {{FX_IMG jan-singer | (max-width: 520px) 85vw, (max-width: 820px) 87vw, (max-width: 1100px) 52vw, 540px | fx-frame__img}}
-              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T23:10+05:30">23:10</time><span>A bhajan at the microphone.</span></figcaption>
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T23:10+05:30">23:10</time></figcaption>
             </figure>
           </li>
           <li class="fx-frame fx-frame--3" data-fx-frame data-time="23:24" data-date="4 September" data-phase="night">
             <figure class="fx-frame__fig">
               {{FX_IMG jan-dance | (max-width: 520px) 85vw, (max-width: 820px) 87vw, (max-width: 1100px) 58vw, 650px | fx-frame__img}}
-              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T23:24+05:30">23:24</time><span>A dance in red and gold, close to the front row.</span></figcaption>
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T23:24+05:30">23:24</time></figcaption>
             </figure>
           </li>
           <li class="fx-frame fx-frame--4" data-fx-frame data-time="23:57" data-date="4 September" data-phase="night">
             <figure class="fx-frame__fig">
               {{FX_IMG jan-lamps | (max-width: 520px) 85vw, (max-width: 820px) 87vw, (max-width: 1100px) 66vw, 830px | fx-frame__img}}
-              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T23:57+05:30">23:57</time><span>Just before midnight, the hall dark but for the lamps.</span></figcaption>
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-04T23:57+05:30">23:57</time></figcaption>
             </figure>
           </li>
           <li class="fx-frame fx-frame--5" data-fx-frame data-time="00:54" data-date="5 September" data-phase="night">
             <figure class="fx-frame__fig">
               {{FX_IMG jan-reach | (max-width: 520px) 66vw, (max-width: 820px) 68vw, (max-width: 1100px) 37vw, 370px | fx-frame__img}}
-              <figcaption class="fx-frame__cap"><time datetime="2026-09-05T00:54+05:30">00:54</time><span>Outside, under the tree, a hand reaches for the matki.</span></figcaption>
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-05T00:54+05:30">00:54</time></figcaption>
             </figure>
           </li>
           <li class="fx-frame fx-frame--6" data-fx-frame data-time="00:57" data-date="5 September" data-phase="night">
             <figure class="fx-frame__fig">
               {{FX_IMG jan-pyramid | (max-width: 520px) 85vw, (max-width: 820px) 87vw, (max-width: 1100px) 66vw, 770px | fx-frame__img}}
-              <figcaption class="fx-frame__cap"><time datetime="2026-09-05T00:57+05:30">00:57</time><span>The pyramid rises, the pot still out of reach.</span></figcaption>
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-05T00:57+05:30">00:57</time></figcaption>
             </figure>
           </li>
           <li class="fx-frame fx-frame--7" data-fx-frame data-time="01:01" data-date="5 September" data-phase="break">
             <figure class="fx-frame__fig">
               {{FX_IMG jan-break | (max-width: 520px) 76vw, (max-width: 820px) 78vw, (max-width: 1100px) 63vw, 450px | fx-frame__img}}
-              <figcaption class="fx-frame__cap"><time datetime="2026-09-05T01:01+05:30">01:01</time><span>The matki breaks.</span></figcaption>
+              <figcaption class="fx-frame__cap"><time datetime="2026-09-05T01:01+05:30">01:01</time></figcaption>
             </figure>
           </li>
         </ol>
       </div>
       <figure class="fx-night__coda" data-fx-frame data-time="01:04" data-date="5 September" data-phase="night">
         <div class="fx-night__coda-frame">{{FX_IMG jan-lawn | 100vw | fx-frame__img}}</div>
-        <figcaption class="wrap fx-frame__cap"><time datetime="2026-09-05T01:04+05:30">01:04</time><span>Afterwards, the lawn full of students under the trees.</span></figcaption>
+        <figcaption class="wrap fx-frame__cap"><time datetime="2026-09-05T01:04+05:30">01:04</time></figcaption>
       </figure>
     </div>
   </article>
 
   <!-- 03 Onam: flowers underfoot, then the long rows of the sadhya. -->
   <article class="fx-ch fx-ch--onam" id="onam" data-fx-chapter aria-labelledby="onam-h">
-    <div class="fx-ch__seam" data-header-theme="dark" aria-hidden="true"></div>
+    <div class="fx-ch__seam" aria-hidden="true"></div>
     <div class="wrap fx-onam">
       <header class="fx-ch__head rv">
         <p class="fx-ch__kicker"><span class="fx-ch__n">03</span><span>August&ndash;September</span><span class="fx-ch__light">Flowers, then the feast</span></p>
@@ -297,7 +298,7 @@
   <!-- 06 Pongal: the harvest sun. A quieter chapter led by its words: the
        moment it is known for, the cooking, has no photograph here yet. -->
   <article class="fx-ch fx-ch--pongal" id="pongal" data-fx-chapter aria-labelledby="pongal-h">
-    <div class="fx-ch__seam" data-header-theme="dark" aria-hidden="true"></div>
+    <div class="fx-ch__seam" aria-hidden="true"></div>
     <div class="wrap fx-pongal">
       <header class="fx-ch__head rv">
         <p class="fx-ch__kicker"><span class="fx-ch__n">06</span><span>January</span><span class="fx-ch__light">The harvest sun</span></p>
@@ -386,6 +387,14 @@
     {{FX_ARCHIVE}}
     <p class="fx-archive__gaps">Not yet in the archive: {{FX_GAPS}}. Where a caption gives only a
       year, the camera&rsquo;s clock was wrong and the year comes from the event&rsquo;s folder.</p>
+    <aside class="fx-ask rv" aria-labelledby="fx-ask-h">
+      <h2 class="fx-ask__label" id="fx-ask-h">Help complete this page</h2>
+      <p class="fx-ask__text">We are still looking for photographs of {{FX_GAPS}}; and for the
+        exact dates of the 2023 Onam, 2025 Dussehra, 2025 Holi and 2026 Pongal photographs whose
+        cameras&rsquo; clocks were wrong. If you have them, please write to
+        <a href="mailto:info@cirschool.org?subject=CIRS%20Festivals%20page%3A%20photographs%20and%20dates">info@cirschool.org</a>
+        and name the festival and the year.</p>
+    </aside>
   </div>
 </section>
 
@@ -407,38 +416,6 @@
   </div>
 </dialog>
 
-<section class="section on-dark fx-together" id="together" data-jump-label="Everyone takes part">
-  <div class="wrap">
-    <div class="fx-together__grid">
-      <div class="fx-together__head rv">
-        <p class="marker"><span class="sc">Everyone takes part</span></p>
-        <h2 class="serif h2" data-split>From Grade V <em>to Grade XII.</em></h2>
-        <p class="lead">Students from Grade V to Grade XII take part in the celebrations. They
-          perform, cook together for Pongal and are supported by faculty through every last-minute
-          arrangement.</p>
-      </div>
-      <dl class="fx-together__stats">
-        <div class="rv"><dt>Seven</dt><dd>festivals kept through the year</dd></div>
-        <div class="rv"><dt>600</dt><dd>students cooking pongal in small teams</dd></div>
-        <div class="rv"><dt>Every grade</dt><dd>on stage for Ganesh Chaturthi</dd></div>
-        <div class="rv"><dt>Our own lake</dt><dd>for the Ganesha immersion</dd></div>
-      </dl>
-    </div>
-    <div class="fx-together__close rv">
-      <p class="fx-together__line">The essence lies in the diversity of festivals across the
-        country: one may be a huge festival in one state and unknown in another, yet everyone
-        unites to celebrate it together.</p>
-    </div>
-    <aside class="fx-ask rv" aria-labelledby="fx-ask-h">
-      <h2 class="fx-ask__label" id="fx-ask-h">Help complete this page</h2>
-      <p class="fx-ask__text">We are still looking for photographs of {{FX_GAPS}}; and for the
-        exact dates of the 2023 Onam, 2025 Dussehra, 2025 Holi and 2026 Pongal photographs whose
-        cameras&rsquo; clocks were wrong. If you have them, please write to
-        <a href="mailto:info@cirschool.org?subject=CIRS%20Festivals%20page%3A%20photographs%20and%20dates">info@cirschool.org</a>
-        and name the festival and the year.</p>
-    </aside>
-  </div>
-</section>
 
 <section class="section fx-more" id="more-culture" data-jump-label="More from the arts">
   <div class="wrap">

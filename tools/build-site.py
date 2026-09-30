@@ -606,7 +606,7 @@ PAGES = {
         # The supplied film now plays once in the page-specific hero.
         # The documented festival chapters and photographs remain below.
         "sheet": "festivals",
-        "cache_suffix": "-festivals-hero-1",
+        "cache_suffix": "-festivals-white-gold-2",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
         "description": "Seven festivals kept through the school year at Chinmaya International "
@@ -2051,8 +2051,15 @@ def build(slug, page):
                 + '<noscript><style>.footer-wrap{position:relative}</style></noscript>'
                 + head[curtain_note_end:])
     if slug == "festivals":
+        # Set the intro before first paint: the opening poster covers the
+        # final still until video decoding starts. A missing page script
+        # releases the readable static hero without an opaque page overlay.
         head = head.replace("</head>",
-            '<link rel="preload" as="image" href="assets/img/festivals-opening-final.jpg" fetchpriority="high">\n'
+            '<link rel="preload" as="image" href="assets/img/festivals-opening-poster.jpg" fetchpriority="high">\n'
+            '<script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;'
+            'document.documentElement.classList.add("fx-intro-pending");'
+            'window.__fxIntroFallback=setTimeout(function(){document.documentElement.classList.remove("fx-intro-pending");window.dispatchEvent(new Event("fx-intro-fallback"))},8000)'
+            '})()</script>\n'
             '<noscript><style>body.festivals .header{position:absolute}</style></noscript>\n</head>')
     if slug == "art-attack":
         head = head.replace("</head>", '<link rel="preload" as="image" href="assets/img/art-attack-opening-poster.jpg" fetchpriority="high">\n</head>')
