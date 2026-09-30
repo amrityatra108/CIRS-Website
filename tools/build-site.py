@@ -2487,6 +2487,9 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         # before shared animation dependencies so Skip and its bounded lock
         # are ready as soon as the critical styles have arrived.
         parts.append(f'<script src="assets/js/crossroads-intro.js?{CACHE_BUST}-intro-9" defer></script>')
+    # Only video pages need media ownership; unrelated pages keep their scripts.
+    if not page.get("cw") and (slug == "index" or page.get("hero_media") or page.get("opening")):
+        parts.append(f'<script src="assets/js/media-lifecycle.js?{CACHE_BUST}" defer></script>')
     shared_scripts = read("tools/partials/scripts.html").replace("{{CACHE_BUST}}", CACHE_BUST)
     if slug == "houses":
         shared_scripts = "\n".join(line for line in shared_scripts.splitlines() if 'src="assets/vendor/lenis.min.js' not in line)
@@ -2524,6 +2527,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         # the optional sculpture (math-sculpture.js) itself, so a failed
         # graphics load cannot take the filters or the links with it.
         parts.append(f'<script src="assets/js/matharena.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/math-lab.js?{CACHE_BUST}" defer></script>')
     if page.get("cw"):
         writing_script = 'cwriting' if slug == 'creative-writing' else 'cwriting-reader'
         parts.append(f'<script src="assets/js/{writing_script}.js?{CACHE_BUST}" defer></script>')
@@ -2535,6 +2539,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if slug == "art-attack":
         parts.append(f'<script src="assets/js/artattack.js?{CACHE_BUST}" defer></script>')
+        parts.append(f'<script src="assets/js/art-film.js?{CACHE_BUST}" defer></script>')
     if slug == "leadership":
         parts.append(f'<script src="assets/js/leadership.js?{CACHE_BUST}" defer></script>')
     if slug == "curriculum":

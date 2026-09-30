@@ -275,6 +275,7 @@
     <div class="jump__panel" id="jumpPanel">
       <p aria-hidden="true">On this page</p>
       <a href="#top">Opening</a>
+      <a href="#cube-lab">Cube puzzle</a>
       <a href="#demonstration">One number. Two ways to see it.</a>
       <a href="#zones">Divisions</a>
       <a href="#archive">Results archive</a>
@@ -305,6 +306,7 @@
       <p class="mc-open__actions">
         <a class="mc-btn mc-btn--solid" href="#zones">Explore your division<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 3v11.5M4 10l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="mc-btn" href="#archive">View results archive</a>
+        <a class="mc-btn" href="#cube-lab">Try the cube puzzle</a>
       </p>
     </div>
 
@@ -328,6 +330,21 @@
     </div>
   </div>
   <span class="mc-stage__dark" data-header-theme="dark" aria-hidden="true"></span>
+</section>
+<section class="math-lab" id="cube-lab" data-math-lab aria-labelledby="cube-lab-title" data-jump-label="Cube puzzle">
+  <div class="wrap">
+    <header><p class="mc-kicker">Try it yourself · No timer</p><h2 id="cube-lab-title">Build your way to <em>1729.</em></h2><p>Find two different pairs of positive whole numbers whose cubes each add up to 1729. Change an edge and watch its volume grow.</p></header>
+    <div class="math-lab__layout" data-lab-controls hidden>
+      <div class="math-lab__model"><svg viewBox="0 0 430 210" aria-hidden="true"></svg><p data-lab-total>2³ + 3³ = 35</p><p data-lab-progress>0 of 2 pairs found</p><p class="math-lab__found" data-lab-found>Your discoveries will appear here.</p></div>
+      <form class="math-lab__form">
+        <fieldset><legend>Choose your cube edges</legend><div class="math-lab__inputs"><label>First edge<input id="cube-edge-a" name="edge-a" type="number" min="1" max="12" step="1" value="2" required inputmode="numeric"></label><label>Second edge<input id="cube-edge-b" name="edge-b" type="number" min="1" max="12" step="1" value="3" required inputmode="numeric"></label></div></fieldset>
+        <div class="math-lab__actions"><button type="submit">Check pair</button><button type="button" data-lab-hint>Give me a hint</button><button type="button" data-lab-reset>Play again</button></div>
+        <p class="math-lab__feedback" data-lab-feedback role="status">Start with any two edges from 1 to 12. Each cube shows one unit per square on its front face.</p>
+      </form>
+    </div>
+    <p class="math-lab__source">Based on the December 2016 newsletter example. <a href="#math-solution">Read the full worked solution</a>.</p>
+    <noscript><p>The interactive puzzle needs JavaScript. The complete worked solution is available below.</p></noscript>
+  </div>
 </section>
 <section class="rd-math" id="demonstration" aria-labelledby="rd-math-h">
  <header><p>From the CIRS mathematics newsletter</p><h2 id="rd-math-h">One number.<br>Two ways to see it.</h2><p>Explore the two cube decompositions of 1729 shown in the school’s December 2016 newsletter, printed page 1.</p><a href="#math-solution">Show full solution</a></header>
@@ -954,5 +971,6 @@
 <script src="assets/js/pages.js?b=115-math-studio-1" defer></script>
 <script src="assets/js/footer.js?b=115-math-studio-1-footer-1" defer></script>
 <script src="assets/js/matharena.js?b=115-math-studio-1" defer></script>
+<script src="assets/js/math-lab.js?b=115-math-studio-1" defer></script>
 </body>
 </html>
