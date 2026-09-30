@@ -390,6 +390,21 @@ def photo_html(pid, cls, sizes="(max-width: 700px) 100vw, 60vw", eager=False, ca
     return f'<figure class="{cls}">{img}{cap}</figure>'
 
 
+def decoration(kind):
+    """Original, purely decorative studio marks; never part of an artwork."""
+    allowed = {"hero", "opening", "brush", "curve", "margin", "edge", "finale"}
+    if kind not in allowed:
+        raise ValueError(f"Unknown art decoration: {kind}")
+    base = os.path.join(HERE, "art-decor")
+    def svg(name):
+        with open(os.path.join(base, name + ".svg"), encoding="utf-8") as source:
+            return source.read().strip().replace('<svg ', '<svg aria-hidden="true" focusable="false" ', 1)
+    graphic = svg(kind)
+    if kind in {"hero", "finale"}:
+        graphic = '<span class="aa-decor-wide">' + graphic + '</span><span class="aa-decor-narrow">' + svg(kind + "-narrow") + '</span>'
+    return f'<span class="aa-decor aa-decor--{kind}" aria-hidden="true">{graphic}</span>'
+
+
 def expand(content):
     """Fill the page body's placeholders."""
     m = load()
@@ -416,4 +431,5 @@ def expand(content):
         sizes = bits[2] if len(bits) > 2 and bits[2] else "(max-width: 700px) 100vw, 60vw"
         flags = bits[3:]
         return photo_html(pid, cls, sizes, eager="eager" in flags, caption="nocaption" not in flags)
+    content = re.sub(r"\{\{AA_DECOR:([^}]+)\}\}", lambda mo: decoration(mo.group(1)), content)
     return re.sub(r"\{\{AA_PHOTO:([^}]+)\}\}", photo, content)

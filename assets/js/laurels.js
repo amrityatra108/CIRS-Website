@@ -274,6 +274,16 @@
     setFilter({ cat: a.getAttribute("data-lr-filter"), level: "all", year: "all", q: "" });
     if (qInput) qInput.value = "";
   });
+  // Numbered chapter links reveal their archive record before the shared scroll handler runs.
+  var chapters = $(".rd-laurels");
+  if (chapters) chapters.addEventListener("click", function (e) {
+    var link = e.target.closest('a[href^="#laurel-"]');
+    if (!link || !archive) return;
+    var row = document.getElementById(link.getAttribute("href").slice(1));
+    if (!row) return;
+    if (row.hidden) { if (qInput) qInput.value = ""; setFilter({ cat: "all", level: "all", year: "all", q: "" }); }
+    openRow(row, true);
+  });
   // A link to one record opens it.
   function openFromHash() {
     var m = /^#laurel-(.+)$/.exec(location.hash);
@@ -515,7 +525,9 @@
 
     /* --- the world: the count, the fields ------------------------------------- */
     (function world() {
-      var w = $("[data-lr-world]"), stage = $(".lr-world__stage", w), scene = $("[data-lr-scene]", w);
+      var w = $("[data-lr-world]");
+      if (!w) { unpre(); return; }
+      var stage = $(".lr-world__stage", w), scene = $("[data-lr-scene]", w);
       var hero = $("[data-lr-hero]", w), num = $("[data-lr-num]", w), word = $("[data-lr-word]", w), range = $("[data-lr-range]", w);
       var frags = $$(".lr-frag", hero), mast = $("[data-lr-mast]", w), mastB = $("b", mast);
       var index = $("[data-lr-catindex]", w), cue = $("[data-lr-cue]", w);

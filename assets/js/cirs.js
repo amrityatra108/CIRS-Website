@@ -1862,6 +1862,8 @@
     var main = $("#main");
     var barBottom = 0, zones = [], scrolled = null, queued = false;
     var contentFirst = header.dataset.headerStart === "content";
+    var heroBoundary = header.dataset.headerHero ? $(header.dataset.headerHero) : null;
+    var heroEnd = null;
 
     function darkGround(node) {
       var declared = node.getAttribute("data-header-theme");
@@ -1884,6 +1886,10 @@
     function measure() {
       var bar = header.querySelector(".nv-header__bar") || header;
       barBottom = bar.getBoundingClientRect().bottom;
+      if (heroBoundary) {
+        var heroBox = heroBoundary.getBoundingClientRect();
+        heroEnd = heroBox.bottom + (window.scrollY || window.pageYOffset || 0);
+      }
       var nodes = main ? Array.prototype.slice.call(main.querySelectorAll(":scope > section, :scope > article, :scope > header, [data-ground], [data-header-theme]")) : [];
       var footer = $(".footer");
       if (footer) nodes.push(footer);
@@ -1911,7 +1917,9 @@
     function apply() {
       queued = false;
       var y = window.scrollY || window.pageYOffset || 0;
-      var next = contentFirst || (scrolled ? y > PILL_OUT : y > PILL_IN);
+      var pillIn = heroEnd === null ? PILL_IN : Math.max(PILL_IN, heroEnd - barBottom);
+      var pillOut = heroEnd === null ? PILL_OUT : Math.max(PILL_OUT, pillIn - 24);
+      var next = contentFirst || (scrolled ? y > pillOut : y > pillIn);
       var at = y + barBottom;
       var dark = false;
       zones.forEach(function (zone) { if (at >= zone.top && at < zone.bottom) dark = zone.dark; });

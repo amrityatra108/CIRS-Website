@@ -494,13 +494,13 @@ PAGES = {
         "title": "Our Laurels",
         "description": "Competitions won, representative honours and the CIRS students who "
                        "carried them: the school's achievement archive, from 2007 to today.",
-        # A hall of achievement: it opens on the count, travels through the
-        # fields, the figures and the years, and ends in the complete archive.
+        # Numbered category chapters introduce the preserved figures,
+        # milestone media, names and complete source archive.
         # Every record is written from tools/laurels.py, which names its source
         # and audits every figure set large against it.
         "banner": None,
         "sheet": "laurels",
-        "cache_suffix": "-laurels-4",
+        "cache_suffix": "-laurels-numbered-1",
         "uc": False,
         "jump": False,
     },
@@ -513,12 +513,12 @@ PAGES = {
         # No banner from the shared builder. The page opens on its own
         # installation: a sculpture of 216 blocks that the stage's scroll
         # turns from cube to field to torus (assets/js/math-sculpture.js,
-        # loaded by assets/js/matharena.js), on ivory, so the header opens
-        # in ink. Styles in assets/css/matharena.css, scoped to body.matharena.
+        # loaded by assets/js/matharena.js), on charcoal with procedural
+        # gold studio lighting. Styles are scoped to body.matharena.
         "banner": None,
         "sheet": "matharena",
-        "litehead": True,
-        "cache_suffix": "-kinetic-1",
+        "litehead": False,
+        "cache_suffix": "-math-studio-1",
     },
     "creative-writing": {
         "nav": "Creative Writing",
@@ -587,13 +587,11 @@ PAGES = {
     "art-attack": {
         # The page body is tools/pages/art-attack.html; its works, credits and
         # photographs are tools/art-attack.json, read by tools/artattack.py and
-        # cut by tools/make-art-attack.py. It opens on the supplied film (see
-        # assets/css/filmintro.css for its frame), which gives way to a
-        # photograph of students at work and then, on scroll, the first
-        # finished work (assets/js/artattack.js). The film carries the h1,
-        # which is visible from its first frame.
+        # cut by tools/make-art-attack.py. The supplied film plays directly in
+        # the native video hero, without a separate title screen. The real
+        # h1 remains accessible, and the existing artwork content follows.
         "sheet": "artattack",
-        "cache_suffix": "-art-attack-6",
+        "cache_suffix": "-art-video-first-1",
         "nav": "CIRS Art Attack",
         "title": "CIRS Art Attack",
         "description": "Painting, drawing, craft and the things made for the stage by the students "
@@ -602,36 +600,19 @@ PAGES = {
         # The note that replaced the under-construction banner is specific:
         # what is missing, and where to send it. It is the page's own.
         "uc": False,
-        "opening": {
-            "video": "art-attack-opening",
-            "poster": "art-attack-opening-poster.jpg",
-            "still": "art-attack-opening-final.jpg",
-            "still_element": True,
-            "title": "CIRS Art Attack",
-            "title_markup": '<span class="film__art-prefix">CIRS </span><span class="film__art-name">Art Attack</span>',
-            "pending": True,
-        },
+        "opening": {"direct": True}, # The supplied film starts the page.
     },
     "festivals": {
-        # Restore the approved diya-to-rangoli film before the current
-        # photograph-led year. Keep the documented festival chapters below.
+        # The supplied film now plays once in the page-specific hero.
+        # The documented festival chapters and photographs remain below.
         "sheet": "festivals",
-        "cache_suffix": "-festivals-year-1",
+        "cache_suffix": "-festivals-hero-1",
         "nav": "CIRS Festivals",
         "title": "CIRS Festivals",
         "description": "Seven festivals kept through the school year at Chinmaya International "
                        "Residential School, from Raksha Bandhan to Holi, in the school's own "
                        "photographs.",
         "banner": None,
-        "opening": {
-            "video": "festivals-opening",
-            "mobile_video": None,
-            "poster": "festivals-opening-poster.jpg",
-            "still": "festivals-opening-final.jpg",
-            "still_element": True,
-            "title": "CIRS Festivals",
-            "pending": True,
-        },
         "uc": False,
     },
     "theatre": {
@@ -967,6 +948,8 @@ def film_html(slug, page):
     entry (see the photo dissolve in filmintro.js).
     """
     film = page["opening"]
+    if film.get("direct"):
+        return read("tools/partials/art-video-hero.html").rstrip("\n")
     phases = film.get("phases")
     attrs = f' data-film-phases="{" ".join(f"{v:g}" for v in phases)}"' if phases else ""
     if film.get("fps", 24) != 24:
@@ -1220,7 +1203,23 @@ def article_html(page):
 
 '''
     body = blog.body_html(post)
-    return f'''<article class="art" id="top">
+    selected = post["slug"] in ("anakin-skywalker", "death-of-rationalism", "voyages-in-the-yuva-kendra")
+    chapters = ""
+    if selected:
+        subheads = blog.PRINT_SUBHEADS.get(post["slug"], {})
+        links = []
+        for n, title in enumerate(subheads.values(), 1):
+            body = body.replace(f'<h2>{esc(title)}</h2>', f'<h2 id="essay-chapter-{n}">{esc(title)}</h2>', 1)
+            links.append(f'<a href="#essay-chapter-{n}">{n:02d} · {esc(title)}</a>')
+        if links:
+            chapters = '<nav class="rd-essay__chapters" aria-label="Essay chapters"><a href="#essay-reading">Beginning</a>' + "".join(links) + '</nav>\n'
+    hero_image = image if selected else ""
+    reading_image = "" if selected else image
+    intro = f'<p class="rd-essay__intro">{esc(post.get("excerpt", ""))}</p>' if selected else ""
+    klass = "art rd-essay" if selected else "art"
+    chapter_attr = " data-rd-chapters" if chapters else ""
+    reading_id = ' id="essay-reading"' if selected else ""
+    return f'''<article class="{klass}" id="top"{chapter_attr}>
   <header class="art__head">
     <div class="art__shell">
       <nav class="art__breadcrumb" aria-label="Breadcrumb">
@@ -1232,17 +1231,17 @@ def article_html(page):
         <span>{by}</span>
 {when}        <span>{blog.reading_time(post)} min read</span>
       </div>
-    </div>
-  </header>
-  <div class="art__layout">
+{intro}    </div>
+{hero_image}  </header>
+  <div class="art__layout"{reading_id}>
     <aside class="art__rail" aria-label="Original publication">
-      <p>First published in</p>
+{chapters}      <p>First published in</p>
       <strong>The Crossroads<br>Issue {issue}</strong>
       <a href="{pdf}">Read the issue (PDF) <span aria-hidden="true">↗</span></a>
       <a href="crossroads.html">All issues of The Crossroads</a>
     </aside>
     <div class="art__content">
-{image}      <div class="art__body">
+{reading_image}      <div class="art__body">
 {body}
       </div>
     </div>
@@ -2035,7 +2034,7 @@ def build(slug, page):
             '<script>(function(){var d=document.documentElement;'
             'if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;'
             'd.classList.add("mc-motion");'
-            'if("WebGLRenderingContext" in window&&innerHeight>=500)d.classList.add("mc-kinetic");'
+            'if("WebGLRenderingContext" in window&&innerHeight>=500&&innerWidth>760&&!matchMedia("(max-aspect-ratio:4/5)").matches)d.classList.add("mc-kinetic");'
             'setTimeout(function(){if(!window.__mcBooted)d.classList.remove("mc-motion","mc-kinetic")},6000)'
             '})()</script>\n</head>')
 
@@ -2053,9 +2052,13 @@ def build(slug, page):
         head = (head[:curtain_note]
                 + '<noscript><style>.footer-wrap{position:relative}</style></noscript>'
                 + head[curtain_note_end:])
+    if slug == "festivals":
+        head = head.replace("</head>",
+            '<link rel="preload" as="image" href="assets/img/festivals-opening-final.jpg" fetchpriority="high">\n'
+            '<noscript><style>body.festivals .header{position:absolute}</style></noscript>\n</head>')
     if slug == "art-attack":
-        # The title has a safe system-font fallback; let the still and CSS
-        # establish the opening before optional webfont files compete.
+        head = head.replace("</head>", '<link rel="preload" as="image" href="assets/img/art-attack-opening-poster.jpg" fetchpriority="high">\n</head>')
+        # Let the supplied film poster establish the opening before fonts compete.
         head = head.replace(
             '<link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>\n', "")
         head = head.replace(
@@ -2115,7 +2118,7 @@ def build(slug, page):
     # moment is the movement out of the lens, and without the movement there
     # is nothing for it to arrive from. The path is relative to the page,
     # where the stylesheet's is to itself.
-    if page.get("opening"):
+    if page.get("opening") and not page["opening"].get("direct"):
         opening = page["opening"]
         nudge = opening.get("noscript_title_top")
         nudge = (f"body.{slug} .film__title{{--film-title-top:{nudge}}}" if nudge else "")
@@ -2268,7 +2271,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     # mechanics every such page shares, and its own slug for the handful of
     # decisions its footage makes for it.
     classes = [c for c in ["wall" if wall else ("cwriting" if page.get("cw") else page.get("sheet")),
-                           "film" if page.get("opening") else None,
+                           "film" if page.get("opening") and not page["opening"].get("direct") else None,
                            slug if page.get("opening") else None,
                            "crossroads-intro-active" if slug == "crossroads" else None,
                            "parent-portal" if slug == "parent-portal" else None,
@@ -2291,7 +2294,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         end = chrome.index("<!-- Film lightbox", start)
         chrome = chrome[:start] + chrome[end:]
     if (slug in ("admissions", "school-info", "news", "curriculum", "school-history", "leadership",
-                 "our-laurels")
+                 "our-laurels", "festivals")
             or page.get("notfound")):
         # Admissions, School Information, News, Curriculum, School History and
         # Leadership each have their own visible opening. The shared curtain would delay it behind a
@@ -2321,6 +2324,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "news":
         header = header.replace('class="nv-tab nv-tab--news" href="news.html"',
                                 'class="nv-tab nv-tab--news" href="news.html" aria-current="page"')
+    if slug == "festivals":
+        header = header.replace('data-header-start="hero"', 'data-header-start="hero" data-header-hero="#festivals-opening"')
     parts += [header.rstrip("\n"), drawer.rstrip("\n")]
     parts.append('<main id="main">')
     if slug == "parent-portal":
@@ -2439,6 +2444,10 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
                           .replace("{{THEATRE_VIEWER_DATA}}", theatre.viewer_data()))
     content = re.sub(r"\{\{DOC_STATUS:([a-z0-9-]+)\}\}",
                      lambda m: doc_sheet_status(m.group(1)), content)
+    if slug in ("school-history", "curriculum", "math-challenge", "crossroads", "our-laurels", "anakin-skywalker", "death-of-rationalism", "voyages-in-the-yuva-kendra"):
+        parts = [part.replace('<body class="', '<body class="cirs-redesign ', 1) if '<body class="' in part else part for part in parts]
+        parts.append(f'<script src="assets/js/coordinated.js?{CACHE_BUST}-1" defer></script>')
+
     parts.append(content)
     # Every page carries the index; jump_html leaves it out where there is
     # nothing to jump to. "jump": False opts a page out. It is placed after
@@ -2538,7 +2547,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
         parts.append(f'<script type="module" src="assets/js/history-cinematic-journey.js?{CACHE_BUST}-4"></script>')
     if slug == "our-laurels":
         parts.append(f'<script src="assets/js/laurels.js?{CACHE_BUST}" defer></script>')
-    if page.get("opening"):
+    if page.get("opening") and not page["opening"].get("direct"):
         parts.append(f'<script src="assets/js/filmintro.js?{CACHE_BUST}" defer></script>')
     if slug == "sports":
         parts.append(f'<script src="assets/js/sports-journey.js?{CACHE_BUST}" defer></script>')
@@ -2556,6 +2565,8 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
 
     # The index goes in after rewrite_links: its anchors name sections on this
     # page, and must not be sent to the page an old single-page anchor meant.
+    if slug in ("school-history", "curriculum", "math-challenge", "crossroads", "our-laurels", "anakin-skywalker", "death-of-rationalism", "voyages-in-the-yuva-kendra"):
+        parts[0] = parts[0].replace('</head>', f'<link rel="stylesheet" href="assets/css/coordinated.css?{CACHE_BUST}-1">\n</head>')
     html = to_depth(rewrite_links("\n".join(parts), slug).replace(JUMP_MARK, jump), slug)
     if page.get("notfound"):
         html = to_root(html)

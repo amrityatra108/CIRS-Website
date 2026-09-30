@@ -1,0 +1,178 @@
+/* Coordinated CIRS treatments. Existing self-hosted fonts and one cirs.js scroll owner. */
+body.cirs-redesign{--rd-purple:#2b2037;--rd-deep:#1e1626;--rd-paper:#f4f0e6;--rd-gold:#d8b76a;--rd-ivory:#faf9f3}
+body.cirs-redesign :is(a,button,summary):focus-visible{outline:2px solid var(--rd-gold);outline-offset:5px}
+body.cirs-redesign :is(section,article,[id]){scroll-margin-top:96px}
+body.cirs-redesign .header:not(.is-scrolled):not(.scrolled){background:transparent;box-shadow:none;backdrop-filter:none}
+body.cirs-redesign .header:not(.is-scrolled):not(.scrolled) :is(.header__inner,.header__actions){background:transparent;box-shadow:none}
+body.history .hj-hero{background:var(--rd-purple);min-height:740px;perspective:1200px}
+body.history .hj-hero::after{display:none}
+body.history .hj-hero__text{width:48%;z-index:2}
+body.history .hj-hero h1{font-size:clamp(60px,6.5vw,102px);max-width:8ch}
+body.history .hj-hero__intro{max-width:36ch}
+.rd-coin{position:absolute;width:44%;right:5%;top:14%;margin:0;transform:rotate(-14deg);transform-style:preserve-3d}
+.rd-coin svg{width:100%;height:auto;filter:drop-shadow(28px 40px 16px #140e2080)}
+.rd-coin figcaption{transform:rotate(14deg);text-align:center;color:var(--rd-ivory);font-size:13px;margin:30px 0 0}
+body.history .hj-hero__caption{max-width:50ch}
+@media(max-width:760px){
+ body.history .hj-hero{height:auto;min-height:950px;display:flex;flex-direction:column;padding:120px 7% 80px}
+ body.history .hj-hero__text{position:static;transform:none;width:100%}
+ body.history .hj-hero h1{font-size:58px;max-width:9ch}
+ .rd-coin{position:relative;width:75%;right:auto;top:auto;align-self:center;margin:22px 0 25px}
+ .rd-coin figcaption{margin:12px 0 0}
+ body.history .hj-hero__caption{display:none}
+}
+/* OpenHome-inspired split. Left remains stable; right has four complete chapters. */
+body.curriculum .atl-open{min-height:0;height:auto;padding-block:140px 65px;background:var(--rd-purple);color:var(--rd-ivory)}
+body.curriculum .atl-open__inner{padding-block:0}
+body.curriculum :is(.atl-open__field,.atl-open__visual){display:none}
+body.curriculum .atl-open__title{font-size:clamp(46px,5vw,76px);max-width:12ch;line-height:1.08}
+body.curriculum .atl-open__lead{max-width:62ch}
+body.curriculum .atl-index{margin-top:36px}
+.rd-academic{display:grid;grid-template-columns:1fr 1fr;gap:7vw;padding:85px 7%;background:var(--rd-purple);color:var(--rd-ivory);align-items:start}
+.rd-academic__left{position:sticky;top:140px}
+.rd-academic__left h2{font:400 clamp(50px,5.2vw,84px)/1.08 var(--font-display);margin:0 0 60px;max-width:10ch}
+.rd-academic__left nav{display:flex;flex-direction:column;gap:4px;margin-bottom:30px}
+.rd-academic__left nav a{display:flex;gap:25px;align-items:center;min-height:46px;color:var(--rd-ivory);opacity:.65;font-size:17px}
+.rd-academic__left nav a[aria-current]{opacity:1;color:var(--rd-gold)}
+.rd-academic__left nav a span:first-child{font-size:28px;font-variant-numeric:tabular-nums}
+.rd-academic__left>a{color:var(--rd-ivory);text-decoration:underline;text-underline-offset:6px;min-height:44px;display:inline-flex;align-items:center}
+.rd-academic__panel{padding-bottom:85px;min-height:88svh;scroll-margin-top:120px}
+.rd-academic__panel figure{margin:0}
+.rd-academic__panel img{width:100%;height:420px;object-fit:contain;background:#22192c;display:block}
+.rd-academic__panel figcaption{font-size:12px;line-height:1.5;margin:12px 0 28px;color:#d6cec0}
+.rd-academic__text h3{font:400 42px/1.1 var(--font-display);margin:16px 0}
+.rd-academic__text p{font-size:17px;line-height:1.7;max-width:44ch;margin:15px 0}
+.rd-academic__text a{color:var(--rd-gold);display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:5px}
+@media(max-width:999px),(max-height:679px){
+ .rd-academic{grid-template-columns:1fr;padding:55px 7%;gap:48px}
+ .rd-academic__left{position:static}
+ .rd-academic__left h2{font-size:52px;margin-bottom:28px;max-width:12ch}
+ .rd-academic__left nav{display:grid;grid-template-columns:1fr 1fr}
+ .rd-academic__panel{min-height:0;padding-bottom:65px}
+ .rd-academic__panel img{height:auto;max-height:460px}
+ body.curriculum .atl-open{padding-top:130px}
+}
+/* Math retains the existing sculpture; the short demonstration is separate normal flow. */
+.rd-math{background:#0D0E12;color:var(--rd-ivory);padding:80px 7%}
+.rd-math>header{max-width:650px;margin-bottom:60px}
+.rd-math h2{font:400 clamp(44px,5vw,72px)/1.12 var(--font-display);margin:24px 0}
+.rd-math header p{line-height:1.7;max-width:50ch}
+.rd-math a{display:inline-flex;align-items:center;min-height:44px;color:var(--rd-gold);text-decoration:underline;text-underline-offset:6px}
+.rd-math__layout{display:grid;grid-template-columns:1.2fr 1fr;gap:7vw;align-items:start}
+.rd-math-workspace{position:sticky;top:115px;border:1px solid #d8b76a80;padding:24px;background:linear-gradient(#d8b76a09 1px,transparent 1px),linear-gradient(90deg,#d8b76a09 1px,transparent 1px);background-size:24px 24px}
+.rd-math-workspace nav{display:flex;flex-wrap:wrap;gap:6px}
+.rd-math-workspace button{background:transparent;color:var(--rd-ivory);border:1px solid #d8b76a70;padding:8px 10px;min-height:44px;font-size:13px;cursor:pointer}
+.rd-math-workspace button[aria-pressed="true"]{background:var(--rd-gold);color:#211c12}
+.rd-math__question{font:400 23px/1.5 var(--font-editorial);margin:32px 0}
+.rd-math__diagram{position:relative;overflow:hidden}
+.rd-math__diagram svg{display:block;width:100%;height:auto}
+.rd-math__scan{position:absolute;left:0;right:0;top:0;height:2px;background:var(--rd-gold);box-shadow:0 0 16px #d8b76a;display:none}
+.rd-math__calculation{font-size:17px;line-height:1.6;min-height:3.2em;margin:20px 0}
+.rd-math__result{font:400 clamp(20px,2vw,30px)/1.5 var(--font-quote);border-top:1px solid #d8b76a70;padding-top:18px}
+.rd-math__result strong{color:var(--rd-gold);font-size:1.5em}
+.rd-math__solution h3{font:400 34px/1.2 var(--font-display);margin:0 0 25px}
+.rd-math__solution ol{list-style:none;margin:0;padding:0}
+.rd-math__solution li{min-height:180px;border-top:1px solid #d8b76a40;padding:22px 0}
+.rd-math__solution h4{font-size:18px;margin:0 0 18px;color:var(--rd-gold)}
+.rd-math__solution p{line-height:1.75;max-width:46ch;font-size:17px}
+.rd-math__solution math{font-size:21px;max-width:100%;overflow-wrap:anywhere}
+.rd-math-live [data-step="0"] .rd-math__diagram svg{opacity:.3}
+.rd-math-live [data-step="0"] .rd-math__result,.rd-math-live [data-step="1"] .rd-math__result,.rd-math-live [data-step="2"] .rd-math__result{visibility:hidden}
+@media(max-width:999px),(max-height:679px){.rd-math__layout{grid-template-columns:1fr;gap:48px}.rd-math-workspace{position:static}.rd-math{padding:60px 7%}.rd-math__solution li{min-height:0}.rd-math__solution math{font-size:18px}}
+/* Magazine paper mechanics use original issue pages; essays enter still reading. */
+.rd-magazine{background:var(--rd-paper);color:var(--rd-purple);padding:80px 7%}
+.rd-magazine__stage{display:grid;grid-template-columns:1fr 1.4fr;gap:32px 5vw;align-items:center;min-height:720px}
+.rd-magazine header{max-width:none}
+.rd-magazine h2{font:400 clamp(42px,5vw,72px)/1.08 var(--font-display);margin:26px 0}
+.rd-magazine header p{font-size:16px;line-height:1.65}
+.rd-magazine a{color:inherit}
+.rd-magazine header a{display:flex;align-items:center;min-height:48px;text-decoration:underline;text-underline-offset:6px}
+.rd-magazine__papers{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.rd-magazine figure{margin:0}
+.rd-magazine img{width:100%;height:auto;display:block;object-fit:contain;box-shadow:0 14px 35px #1e162620}
+.rd-magazine figcaption{font-size:13px;padding-top:16px;color:var(--rd-purple)}
+.rd-magazine__details{grid-column:1/-1;line-height:1.7;font-size:14px;border-top:1px solid #2b203733;padding-top:20px}
+.rd-magazine-on .rd-magazine{height:150svh;padding-block:0}
+.rd-magazine-on .rd-magazine__stage{position:sticky;top:90px;min-height:calc(100svh - 100px)}
+.rd-essay .art__head{display:grid;grid-template-columns:1.15fr 1fr;gap:6vw;padding:145px 7% 60px;background:var(--rd-deep);color:var(--rd-ivory);align-items:center;min-height:88svh}
+.rd-essay .art__head .art__shell{width:auto;padding:0;max-width:none;margin:0}
+.rd-essay .art__breadcrumb,.rd-essay .art__edition,.rd-essay .art__credits{color:#d6cec0}
+.rd-essay .art__credits span,.rd-essay .art__subtitle{color:#e1d9cb}
+.rd-essay .art__credits{border-color:#decaa140}
+.rd-essay .art__breadcrumb a{color:var(--rd-ivory)}
+.rd-essay .art__title{font:400 clamp(44px,4.5vw,72px)/1.08 var(--font-display);letter-spacing:-.02em;margin:30px 0}
+.rd-essay .art__hero{margin:0;max-width:100%;width:100%}
+.rd-essay .art__hero img{width:100%;height:540px;object-fit:contain;display:block;background:transparent}
+.rd-essay .art__hero figcaption{color:#d6cec0;font-size:12px;margin-top:15px;line-height:1.6}
+.rd-essay__intro{font:400 20px/1.65 var(--font-editorial);max-width:44ch;margin:28px 0 0;color:#e1d9cb}
+.rd-essay .art__layout{max-width:1280px;grid-template-columns:260px minmax(0,1fr);gap:7vw;margin:0 auto;padding:90px 6%}
+.rd-essay .art__rail{position:sticky;top:105px;align-self:start;font-size:13px}
+.rd-essay .art__rail{border-top:2px solid var(--rd-gold)}
+.rd-essay .art__content{max-width:69ch}
+.rd-essay .art__body{font:400 20px/1.85 var(--font-editorial)}
+.rd-essay .art__body p{margin:0 0 1.5em;opacity:1;transform:none}
+.rd-essay .art__body p{font-size:inherit;line-height:inherit}
+.rd-essay .art__body p:first-child{font-size:inherit;line-height:inherit}
+.rd-essay .art__body h2{font:400 34px/1.25 var(--font-display);margin:65px 0 26px;scroll-margin-top:120px}
+.rd-essay__chapters{display:flex;flex-direction:column;gap:8px;margin:0 0 35px}
+.rd-essay__chapters a{display:block;min-height:44px;padding:12px 0;border-bottom:1px solid #2b203722;text-decoration:none!important;line-height:1.6}
+.rd-essay__chapters a[aria-current]{border-color:var(--rd-purple);font-weight:650;color:var(--rd-purple)}
+#essay-reading{scroll-margin-top:95px}
+@media(max-width:999px){
+ .rd-magazine{padding:60px 7%}.rd-magazine__stage{grid-template-columns:1fr;min-height:0}.rd-magazine__papers{max-width:650px}.rd-magazine h2{font-size:48px}
+ .rd-essay .art__head{grid-template-columns:1fr;padding:125px 7% 60px;gap:40px;min-height:0}
+ .rd-essay .art__hero img{height:auto;max-height:560px}
+ .rd-essay .art__layout{display:block;padding:55px 7%}
+ .rd-essay .art__rail{position:static;margin-bottom:45px}
+ .rd-essay__chapters{flex-direction:row;flex-wrap:wrap;gap:8px 20px}
+ .rd-essay__chapters a{max-width:40ch;font-size:13px}
+}
+@media(max-width:600px){.rd-magazine__papers{grid-template-columns:1fr;gap:38px}.rd-magazine img{max-width:330px}.rd-essay .art__title{font-size:44px}.rd-essay .art__body{font-size:18px;line-height:1.85}}
+/* Numbered achievement chapters. Original records and the complete archive remain below. */
+.rd-laurels-opening{background:var(--rd-deep);color:var(--rd-ivory);padding:150px 7% 75px;display:grid;grid-template-columns:1fr 1.2fr;gap:6vw;align-items:center;min-height:85svh}
+.rd-laurels-opening h1{font:400 clamp(60px,7.2vw,110px)/1.02 var(--font-display);margin:35px 0}
+.rd-laurels-opening p{font-size:17px;line-height:1.6;max-width:35ch}
+.rd-laurels-opening a{display:flex;align-items:center;min-height:48px;color:var(--rd-gold);text-decoration:underline;text-underline-offset:6px}
+.rd-laurels-opening figure{margin:0}
+.lr .rd-laurels-opening img{display:block;width:100%;height:auto;object-fit:contain}
+.lr .rd-laurels-opening figcaption{font-size:12px;color:#d6cec0;margin-top:15px;line-height:1.6}
+.rd-laurels{background:var(--rd-paper);color:var(--rd-purple);padding:0 7%}
+.rd-laurels__index{position:sticky;top:85px;display:flex;flex-wrap:wrap;gap:0 20px;background:var(--rd-paper);border-block:1px solid #2b203733;padding:10px 0;z-index:4}
+.rd-laurels__index a{display:flex;align-items:center;min-height:44px;font-size:13px;color:inherit;text-decoration:none;gap:8px;border-bottom:1px solid transparent}
+.rd-laurels__index a[aria-current]{border-color:var(--rd-purple);font-weight:650}
+.rd-laurels__index span{font-variant-numeric:tabular-nums;color:#715520}
+.rd-laurel{padding:55px 0 80px;scroll-margin-top:160px;min-height:80svh;border-bottom:1px solid #2b203733}
+.rd-laurel>header{display:flex;gap:35px;align-items:baseline;margin-bottom:35px}
+.rd-laurel>header p{font:400 20px/1.2 var(--font-ui);min-width:80px;color:#715520}
+.lr .rd-laurel h2{font:400 clamp(44px,5vw,72px)/1.1 var(--font-display);margin:0}
+.rd-laurel__layout{display:grid;grid-template-columns:1.1fr 1fr;gap:6vw;align-items:start}
+.rd-laurel figure{margin:0}
+.lr .rd-laurel img{display:block;width:100%;height:440px;object-fit:contain;object-position:center top;background:#ece7dc}
+.lr .rd-laurel figcaption{font-size:13px;color:var(--rd-purple);margin-top:14px;line-height:1.6}
+.rd-laurel__photo-note{font-size:12px;line-height:1.6;max-width:60ch;color:#625769}
+.rd-laurel details{border-top:1px solid #2b203733;padding:12px 0}
+.rd-laurel summary{font:400 26px/1.3 var(--font-display);cursor:pointer;padding:12px 18px 12px 0;min-height:48px}
+.rd-laurel details p,.rd-laurel details li{font-size:16px;line-height:1.75}
+.rd-laurel details ul{padding-left:20px}
+.rd-laurel .lr-source{font-size:13px;color:inherit}
+.rd-laurel a{color:var(--rd-purple);text-decoration:underline;text-underline-offset:5px}
+.rd-laurel__date{font-size:14px!important;color:#625769}
+.rd-laurel__all{display:inline-flex;align-items:center;min-height:48px;margin-top:24px;font-size:14px}
+.rd-laurels-context{padding:40px 0 70px;font-size:17px;line-height:1.7}
+.rd-laurels-context summary{font:400 30px/1.4 var(--font-display);min-height:48px;cursor:pointer}
+.rd-laurels-context ul{padding-left:20px}
+.rd-laurels-context h3{font:400 26px/1.3 var(--font-display);margin:25px 0 12px}
+.rd-anchor{position:absolute;top:0;left:0}
+.lr-close{background:var(--rd-deep)}
+@media(max-width:999px){
+ .rd-laurels-opening{grid-template-columns:1fr;min-height:0;padding:130px 7% 65px;gap:45px}
+ .rd-laurels-opening h1{font-size:clamp(56px,10vw,90px)}
+ .rd-laurels__index{position:static;gap:0 16px}
+ .rd-laurel{min-height:0;padding:45px 0 60px;scroll-margin-top:95px}
+ .rd-laurel__layout{grid-template-columns:1fr;gap:28px}
+ .rd-laurel>header{gap:20px}
+ .rd-laurel>header p{min-width:58px;font-size:16px}
+ .lr .rd-laurel h2{font-size:44px}
+ .lr .rd-laurel img{height:auto;max-height:500px}
+}
+@media(prefers-reduced-motion:reduce){body.cirs-redesign *{scroll-behavior:auto!important}.rd-coin{transform:none}.rd-coin figcaption{transform:none}.rd-academic__left,.rd-math-workspace{position:static}}
