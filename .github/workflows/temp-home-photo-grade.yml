@@ -119,7 +119,7 @@ jobs:
               sat=np.divide(mx-mn, np.maximum(mx,1e-6))
               vib=1 + 0.12*(1-sat)
               grey=arr.mean(axis=2,keepdims=True)
-              arr=np.clip(grey+(arr-grey)*vib,0,1)
+              arr=np.clip(grey+(arr-grey)*vib[:,:,None],0,1)
               arr=np.clip(grey+(arr-grey)*1.02,0,1)
               out=Image.fromarray((arr*255).astype(np.uint8),"RGB")
 
