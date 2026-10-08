@@ -49,6 +49,7 @@ from html import escape
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import robinson          # noqa: E402  the projection, shared with make-worldmap.py
+import alumniregister    # noqa: E402  who registered where; see make-alumni-register.py
 # Country boundaries are generated offline in the same projection as the markers.
 COUNTRIES = json.loads(Path(__file__).with_name("alumni-countries.json").read_text(encoding="utf-8"))["countries"]
 COUNTRY_NAMES = {"United States of America": "United States"}
@@ -553,22 +554,57 @@ def constellation_html():
     </div>
     <div class="ajc__dialogHead">
       <h3 class="serif" id="ajc-panel-name">All institutions</h3>
-      <p id="ajc-panel-note">Alumni-reported institutions are not confirmation of an individual’s attendance or campus. Points show reviewed campus references. Entries without reviewed coordinates are listed, not plotted.</p>
+      <p id="ajc-panel-note">Alumni-reported institutions are not confirmation of an individual’s attendance or campus. Points show reviewed campus references. Entries without reviewed coordinates are listed, not plotted. Alumni named under an institution registered it themselves through the Alumni Registration Form, and are shown by name, years at CIRS and course only.</p>
     </div>
     <div class="ajc__dialogTools">
       <label for="ajc-search">Search this directory</label>
-      <input id="ajc-search" type="search" placeholder="Institution or country" autocomplete="off">
+      <input id="ajc-search" type="search" placeholder="Institution, country or alumnus" autocomplete="off">
       <button type="button" data-panel-all>Browse all institutions</button>
     </div>
     <p data-panel-count role="status"></p>
     <ul class="ajc__results" data-panel-results></ul>
     <p data-panel-empty hidden>No institutions are listed for this country in the current directory.</p>
   </dialog>
+%(alumni)s
 </div>''' % {"filters": "\n".join(filters), "total": total, "all": len(DESTINATIONS),
               "map": map_svg(), "controls": country_controls(), "lines": routes_svg(),
               "vw": VB_W, "vh": VB_H,
               "ox": ox / VB_W * 100, "oy": oy / VB_H * 100,
-              "points": "\n".join(points), "dots": "".join(dots)}
+              "points": "\n".join(points), "dots": "".join(dots),
+              "alumni": alumni_templates()}
+
+
+def alumni_at(key):
+    """Who registered at an institution, as (name, years, course), by name."""
+    return [(n, y, c) for k, n, y, c in alumniregister.REGISTER if k == key]
+
+
+def alumni_templates():
+    """Each institution's registered alumni, as an inert <template>.
+
+    The directory dialog clones one in under its institution's row when it
+    lists that institution; nothing else on the page reads them, so the
+    index below stays a list of institutions. Every name and course is
+    escaped here: they were typed into a form by the public.
+    """
+    out = []
+    for key, *_rest in DESTINATIONS:
+        people = alumni_at(key)
+        if not people:
+            continue
+        rows = []
+        for name, years, course in people:
+            meta = " \u00b7 ".join(p for p in ("CIRS " + years, course) if p.strip())
+            rows.append('      <li><span class="ajc__alumnusName">%s</span>'
+                        '<span class="ajc__alumnusMeta">%s</span></li>'
+                        % (escape(name), escape(meta)))
+        out.append('  <template id="ajd-alumni-%s">\n'
+                   '    <p class="ajc__alumniHead">%d registered alumn%s</p>\n'
+                   '    <ul class="ajc__alumni">\n%s\n    </ul>\n'
+                   '  </template>'
+                   % (escape(key, quote=True), len(people),
+                      "us" if len(people) == 1 else "i", "\n".join(rows)))
+    return "\n".join(out)
 
 
 # ==================================================================
@@ -593,10 +629,10 @@ def destinations_html():
             source = ('\n            <a class="ajd__locationSource" href="%s">Campus location source<span class="sr-only"> for %s</span></a>' %
                       (escape(review["sources"][0], quote=True), escape(name))) if review else ""
             campus_attr = ' data-campus="%s"' % escape(campus, quote=True) if campus else ""
-            rows.append('''          <li class="ajd__row" data-region="%s" data-search="%s" data-mapped="%s"%s>
+            rows.append('''          <li class="ajd__row" data-key="%s" data-region="%s" data-search="%s" data-mapped="%s"%s>
             <span class="ajd__name">%s</span>
             <span class="ajd__country">%s</span>%s
-          </li>''' % (escape(region, quote=True), escape(search, quote=True),
+          </li>''' % (escape(key, quote=True), escape(region, quote=True), escape(search, quote=True),
                      "true" if _lat is not None and _lon is not None else "false", campus_attr, escape(name), escape(country), source))
         groups.append('''      <section class="ajd__group" data-region="%s">
         <h3 class="ajd__region"><span class="sc">%s</span>

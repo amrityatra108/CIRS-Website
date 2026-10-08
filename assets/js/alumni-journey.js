@@ -49,10 +49,14 @@
     var countries = $$(".ajc__land[data-country]");
     var hint = $("[data-map-hint]");
     var records = $$(".ajd__row").map(function (row) {
+      // The alumni who registered this institution, if any, from the inert
+      // <template> the build wrote for it. Their names join the search.
+      var alumni = document.getElementById("ajd-alumni-" + row.dataset.key);
       return {
-        node: row, name: $(".ajd__name", row).textContent,
+        node: row, key: row.dataset.key, name: $(".ajd__name", row).textContent,
         country: $(".ajd__country", row).textContent,
-        region: row.dataset.region, mapped: row.dataset.mapped === "true", campus: row.dataset.campus
+        region: row.dataset.region, mapped: row.dataset.mapped === "true", campus: row.dataset.campus,
+        alumni: alumni, people: alumni ? alumni.content.textContent : ""
       };
     });
     var opener = null, scope = {}, savedOverflow = "", savedY = 0;
@@ -67,10 +71,11 @@
       var q = search.value.trim().toLocaleLowerCase();
       var eligible = records.filter(function (r) {
         return (!scope.country || r.country === scope.country) &&
-          (!scope.region || r.region === scope.region) && (!scope.name || r.name === scope.name);
+          (!scope.region || r.region === scope.region) && (!scope.name || r.name === scope.name) &&
+          (!scope.key || r.key === scope.key);
       });
       var matches = eligible.filter(function (r) {
-        return (r.name + " " + r.country).toLocaleLowerCase().includes(q);
+        return (r.name + " " + r.country + " " + r.people).toLocaleLowerCase().includes(q);
       });
       results.replaceChildren();
       matches.forEach(function (r) {
@@ -84,6 +89,7 @@
           ? "Campus reference shown on map" + (r.campus ? " · " + r.campus : "")
           : "Campus coordinates unresolved · directory only";
         row.appendChild(note);
+        if (r.alumni) row.appendChild(r.alumni.content.cloneNode(true));
         results.appendChild(row);
       });
       panelCount.textContent = matches.length + " of " + eligible.length + " institutions" + (q ? " match your search." : ".");
@@ -184,8 +190,12 @@
     points.forEach(function (button) {
       button.disabled = false;
       var country = $(".ajc__country", button).textContent;
+      // A point is one institution, so it opens that institution and the
+      // alumni who registered it; "Browse all institutions" widens it again.
+      var own = records.filter(function (r) { return r.key === button.dataset.point; })[0];
       button.addEventListener("click", function () {
-        openDirectory(button, { country: country }, country);
+        if (own) openDirectory(button, { key: own.key }, own.name);
+        else openDirectory(button, { country: country }, country);
       });
       ["pointerenter", "focus"].forEach(function (event) {
         button.addEventListener(event, function () {
