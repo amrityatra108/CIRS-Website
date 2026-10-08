@@ -213,8 +213,8 @@ ALUMNI = [
      "role": "Goalkeeper in India youth squads",
      "field": "Sport",
      "batch": "", "place": "", "institution": "",
-     "portrait": "assets/img/alumni/divyaj-dt.webp", "portrait_size": (387, 516),
-     "portrait_alt": "Divyaj DT, on the right in a red football kit, standing with another person.",
+     "portrait": "assets/img/alumni/Divyaj-dt.jpg", "portrait_size": (387, 516),
+     "portrait_alt": "Divyaj DT in a red NorthEast United football kit.",
      "then_portrait": "",
      "biography": (
          "Divyaj is an alumnus of Alchemy International Football Academy & Baroda "
