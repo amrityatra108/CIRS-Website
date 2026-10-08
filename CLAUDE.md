@@ -11,8 +11,12 @@ For every change, in this order:
 2. **Run the checks** — see below. Do not offer work that has not passed them.
 3. **Ask before merging to `main`.** The owner confirms each merge; do not merge unprompted.
 4. **After merging, deploy and hand back a Vercel link** they can share for review.
+5. **Then offer to publish it to cirschool.org**, the school's live site, with the
+   `deploy-cirschool` skill (`.claude/skills/deploy-cirschool/SKILL.md`): a dry run shown to
+   the owner, their yes, then `python tools/deploy-cirschool.py --go`. Vercel updates itself;
+   cirschool.org only ever changes this way, never by hand in FileZilla.
 
-Steps 3 and 4 are the parts most easily forgotten. A change that is committed but not merged,
+Steps 3 to 5 are the parts most easily forgotten. A change that is committed but not merged,
 or merged but not deployed, is not finished from the owner's point of view.
 
 There is no standing branch to work on, and there should not be one. There was, and it went

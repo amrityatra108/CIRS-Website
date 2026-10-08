@@ -226,6 +226,59 @@ matters, because doing it the other way round leaves the school with no site at 
 Leaving a stale Netlify deploy running is the failure mode worth avoiding: two live URLs for
 one school, one of them quietly out of date.
 
+### cirschool.org — the school's live site
+
+cirschool.org is on a shared host (domain2space) reached only by FTP. It does not deploy
+itself. Publish to it with one command, after a change is merged to `main`:
+
+```sh
+python tools/deploy-cirschool.py --dry-run   # what would change
+python tools/deploy-cirschool.py             # the same list, then asks, then publishes
+```
+
+or double-click `tools/deploy-cirschool.bat`. Claude Code follows
+`.claude/skills/deploy-cirschool/SKILL.md` for the same steps.
+
+**The live site is not a copy of this repository.** On 5 October 2026 it was published from
+a separate production build whose source is not here: bundled, minified stylesheets under
+`assets/css/delivery/`, resized photographs under `assets/img/responsive/`, a loading screen,
+a pointer ring, the `hall/` and `snake/` pages, and its own `.htaccess`,
+`publication-manifest.json` and `asset-delivery.json`. The owner chose to keep it and publish
+only what changes here from then on. So the tool compares this commit's `_site/` with the
+build of the commit it last published, recorded on the server in `.deploy-manifest.json`, and
+uploads only the difference. A page it publishes replaces that page's 5 October version, and
+the dry run says so. Files the 5 October pages also load (`assets/js/cirs.js`, the vendor
+scripts, fonts) are listed separately, because changing them changes those pages too.
+
+**Why a tool, not FileZilla.** The host keeps compressed copies beside every page, stylesheet
+and script (`admissions.html.br`, `admissions.html.gz`) and serves those to every browser.
+Uploading `admissions.html` by hand and leaving them in place kept the old page live for
+everyone, while the new file sat on the server unread. The tool writes fresh `.br` and `.gz`
+copies with every text file it uploads, then fetches each one back from https://cirschool.org
+as Brotli, gzip and uncompressed and fails if any of them is not the new file.
+
+It never deletes anything on the server, never publishes `robots.txt` or `_headers` (the
+live site keeps its own robots.txt, which allows indexing), and refuses to publish anything
+but a clean `main`.
+
+**Setting up a computer, once:**
+
+```sh
+python -m pip install brotli keyring
+python tools/deploy-cirschool.py --setup --from-filezilla
+```
+
+That copies the host, user and password of the site saved in FileZilla's Site Manager into
+`.env` (git-ignored) and the password into the Windows Credential Manager, then tests the
+connection. Without `--from-filezilla` it asks for them. Nothing about the login goes into the
+repository. The host's certificate is issued to its shared server, `mis.domain2space.in`, so
+that is the name the connection checks (`CIRS_FTP_TLS_HOSTNAME` in `.env`).
+
+**The first publish ever**, and only that one, needs a starting point:
+`python tools/deploy-cirschool.py --baseline` records the current commit as what the live site
+already shows and uploads nothing else. It was set at the commit that followed the Admissions
+and Sample papers upload of 8 October 2026. On a server that already has one, it refuses.
+
 ### Anywhere else
 
 The site is plain static files, so any host works. Serve the **contents of `_site/`** from the

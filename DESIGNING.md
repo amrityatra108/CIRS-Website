@@ -18,6 +18,10 @@ between you and a prospective parent reading the Admissions page.
 
 The site: **https://cirs-website.vercel.app**
 
+That is the review copy. The school's live site, **cirschool.org**, does not change when you
+push: the owner publishes to it separately (HOSTING.md, "cirschool.org"), so a design change
+reaches it only once the owner has approved and published it.
+
 Two consequences, and neither is optional:
 
 - **Run the checks in §7 before every push, without exception.** They are the
