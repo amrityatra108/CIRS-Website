@@ -685,6 +685,20 @@ PAGES = {
         "popup": False,
         "uc": False,
     },
+    # The entrance papers' downloads, reached only by the Sample papers tab on
+    # Admissions and so not in MENU. The PDFs are the school's own, in
+    # assets/documents/admissions/ (see its README).
+    "sample-papers": {
+        "nav": "Sample papers",
+        "title": "Sample papers | Admissions | CIRS",
+        "description": "The entrance-examination syllabus outlines for each entry class at Chinmaya "
+                       "International Residential School, to view or download.",
+        "banner": ("Admissions", "Sample <em>papers.</em>",
+                   "The school&rsquo;s entrance-examination outline for each entry class: what every "
+                   "paper covers, with its weighting, time and marks."),
+        "jump": False,
+        "uc": False,
+    },
     "parent-portal": {
         "nav": "Parent Portal",
         # In the menu proper now, beside Alumni — both are doors for people

@@ -1,7 +1,8 @@
 # Entrance syllabus outlines
 
-The school's entrance-examination syllabus outlines, one per entry class, linked from the
-Admissions page (`tools/pages/admissions.html`, `#examination`). They are the school's own
+The school's entrance-examination syllabus outlines, one per entry class, offered to view or
+download on the Sample papers page (`tools/pages/sample-papers.html`), which the Sample
+papers tab on Admissions leads to. They are the school's own
 PDFs, unedited, renamed only:
 
 | File | Source file | Made |
@@ -19,4 +20,4 @@ Word versions from the school's 2006 FrontPage site, some of them empty; those a
 than the PDFs and are not used.
 
 When the school issues new outlines, replace the files here under the same names and update
-the sizes and the date shown on the Admissions page.
+the sizes and the date shown on the Sample papers page.
