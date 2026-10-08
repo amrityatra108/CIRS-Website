@@ -1,0 +1,99 @@
+/* The first viewport is the original CIRS sequence. Motion comes from one
+   deterministic controller in cirs-sequence.js, never from independent CSS
+   keyframes. These are its layout and legible static states. */
+#cirs-hero[hidden],#cirs-hero [hidden]{display:none!important}
+.cirs-hero{
+  --cirs-cream:#f2e6d2;
+  position:relative;
+  width:100%;height:100svh;min-height:0;
+  overflow:hidden;isolation:isolate;
+  background:#000;color:var(--cirs-cream);
+}
+.cirs-canvas-slot{position:absolute;inset:0;z-index:1;overflow:hidden}
+.cirs-canvas-slot #scene{width:100%;height:100%;display:block}
+.cirs-hero-photo-frame{
+  position:absolute;inset:0;z-index:2;overflow:hidden;
+  opacity:0;transform-origin:50% 50%;backface-visibility:hidden;
+  pointer-events:none;
+}
+.cirs-hero-photo{
+  width:100%;height:100%;display:block;object-fit:cover;
+  object-position:50% 0%;backface-visibility:hidden;
+}
+.cirs-hero-header{
+  position:absolute;left:clamp(24px,3vw,48px);right:clamp(24px,3vw,48px);top:clamp(22px,3vw,42px);
+  z-index:7;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  font:400 clamp(13px,1.6vw,24px)/1 Newsreader,Georgia,serif;
+  letter-spacing:.12em;text-shadow:0 2px 16px #0009;pointer-events:none;
+}
+.cirs-hero-header span:last-child{font-size:.62em;letter-spacing:.20em}
+.cirs-headings{
+  position:absolute;z-index:5;inset:0;
+  margin:0;color:#fff;font:900 clamp(55px,5.75vw,100px)/.95 "Arial Black",Arial,Helvetica,sans-serif;
+  letter-spacing:-.045em;text-shadow:0 2px 12px #0009;pointer-events:none;
+  opacity:0;
+}
+.cirs-line{position:absolute;display:block;overflow:hidden;padding:.08em .04em .09em 0;white-space:nowrap}
+.cirs-line:nth-child(1){left:3.875%;top:61.9%}
+.cirs-line:nth-child(2){left:3.875%;top:73%}
+.cirs-line:nth-child(3){left:3.875%;top:85.1%}
+.cirs-line>span{display:inline-block;transform:translate3d(-110%,110%,0);will-change:transform}
+.cirs-hero-status{
+  position:absolute;left:clamp(26px,4vw,60px);bottom:clamp(80px,10vh,130px);z-index:8;
+  margin:0;font:400 13px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.10em;
+  text-transform:uppercase;color:var(--cirs-cream);
+}
+.cirs-hero-actions{
+  position:absolute;z-index:9;left:clamp(24px,3vw,48px);right:clamp(24px,3vw,48px);bottom:clamp(18px,3vw,40px);
+  display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:clamp(12px,2.8vw,36px);
+  color:#fff;font:400 13px/1.2 Newsreader,Georgia,serif;
+}
+.cirs-hero-actions button,.cirs-hero-actions a{
+  appearance:none;border:0;border-bottom:1px solid currentColor;border-radius:0;
+  background:none;color:inherit;text-decoration:none;cursor:pointer;
+  min-height:36px;padding:8px 1px;font:inherit;white-space:nowrap;
+  text-shadow:0 2px 10px #0009;
+}
+.cirs-hero-actions button::after{display:none}
+.cirs-hero-actions button:hover,.cirs-hero-actions a:hover{color:var(--cirs-cream)}
+.cirs-hero-actions button:focus-visible,.cirs-hero-actions a:focus-visible{outline:2px solid var(--cirs-cream);outline-offset:5px}
+#cirs-replay,#cirs-enter,.cirs-hero-actions>a:last-child{display:none}
+.cirs-hero[data-intro-state="complete"] .cirs-hero-photo-frame,
+.cirs-hero.is-fallback .cirs-hero-photo-frame{opacity:1}
+.cirs-hero[data-intro-state="complete"] .cirs-headings,
+.cirs-hero.is-fallback .cirs-headings{opacity:1}
+.cirs-hero[data-intro-state="complete"] .cirs-line>span,
+.cirs-hero.is-fallback .cirs-line>span{transform:translate3d(0,0,0)}
+.cirs-hero[data-intro-state="complete"] #cirs-skip,
+.cirs-hero.is-fallback #cirs-skip{display:none}
+.cirs-hero[data-intro-state="complete"] #cirs-replay,
+.cirs-hero[data-intro-state="complete"] #cirs-enter,
+.cirs-hero[data-intro-state="complete"] .cirs-hero-actions>a:last-child,
+.cirs-hero.is-fallback #cirs-enter,
+.cirs-hero.is-fallback .cirs-hero-actions>a:last-child{display:inline-flex;align-items:center;gap:6px}
+.cirs-hero[data-intro-state="complete"] .cirs-hero-status{display:none}
+.cirs-hero.is-fallback .cirs-hero-status{bottom:auto;top:85px}
+@media(max-width:700px){
+  .cirs-hero{min-height:0}
+  .cirs-hero-photo{object-position:46.5% 0%}
+  .cirs-hero-header{top:24px}
+  .cirs-headings{font-size:clamp(36px,10.25vw,50px);line-height:.95;letter-spacing:-.048em}
+  .cirs-line:nth-child(1){left:4.8718%;top:73.46%}
+  .cirs-line:nth-child(2){left:4.8718%;top:81.75%}
+  .cirs-line:nth-child(3){left:4.8718%;top:90.05%}
+  .cirs-hero-actions{left:auto;right:18px;bottom:14px;max-width:64%;justify-content:flex-end;gap:5px 15px;font-size:12px}
+  .cirs-hero-status{left:6%;bottom:100px;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  .cirs-hero-photo-frame,.cirs-headings{opacity:1}
+  .cirs-line>span{transform:none}
+  .cirs-hero #cirs-skip{display:none}
+  .cirs-hero #cirs-enter,.cirs-hero .cirs-hero-actions>a:last-child{display:inline-flex}
+}
+
+.cirs-hero.cirs-missing-photo .cirs-headings{display:none}
+.cirs-hero.cirs-missing-photo #cirs-status{display:block;color:var(--cirs-cream)}
+#cirs-hero #cirs-skip{color:#f2e6d2;opacity:1}
+@media (max-height:550px){.cirs-headings{font-size:min(5.75vw,9vh)}.cirs-line:nth-child(1){top:55%}.cirs-line:nth-child(2){top:68%}.cirs-line:nth-child(3){top:81%}}
+
+.cirs-hero.is-fallback #cirs-replay{display:none!important}

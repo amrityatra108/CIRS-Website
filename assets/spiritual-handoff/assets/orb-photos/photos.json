@@ -1,0 +1,95 @@
+{
+  "description": "Six photographs supplied for the four-second Spiritual energy orb. Encoding and resolution optimization only; originals retained in work/orb-photo-originals.",
+  "photos": [
+    {
+      "file": "gurudev-01.webp",
+      "title": "Contemplation",
+      "source": "Screenshot 2026-09-25 at 10.09.14\u202fPM.png",
+      "sourceSha256": "1f9d86edfc621cafd213a6f263a279bcc7f753c94e5d224e48d0b5cb3d3c9630",
+      "originalSize": [
+        1172,
+        1430
+      ],
+      "size": [
+        1147,
+        1400
+      ],
+      "bytes": 114328
+    },
+    {
+      "file": "gurudev-02.webp",
+      "title": "Prayer",
+      "source": "Screenshot 2026-09-25 at 10.08.57\u202fPM.png",
+      "sourceSha256": "4aeef044a4a286ae6df370425cac92609c957f7532d030c06528593afcf2fdf3",
+      "originalSize": [
+        1018,
+        1426
+      ],
+      "size": [
+        999,
+        1400
+      ],
+      "bytes": 485458
+    },
+    {
+      "file": "gurudev-03.webp",
+      "title": "Teaching",
+      "source": "Screenshot 2026-09-25 at 10.08.41\u202fPM.png",
+      "sourceSha256": "7afb3a3f2b5704948ed16910ee6549fd7e81dbade9fabf03c1f26e0ca0c3e7d7",
+      "originalSize": [
+        944,
+        1436
+      ],
+      "size": [
+        920,
+        1400
+      ],
+      "bytes": 161178
+    },
+    {
+      "file": "gurudev-04.webp",
+      "title": "Stillness",
+      "source": "Screenshot 2026-09-25 at 10.06.34\u202fPM.png",
+      "sourceSha256": "b3a0f0f40013774854e0363d85c36572df49d93f79da981aa8ba001c2d556eb3",
+      "originalSize": [
+        950,
+        1432
+      ],
+      "size": [
+        929,
+        1400
+      ],
+      "bytes": 298332
+    },
+    {
+      "file": "gurudev-05.webp",
+      "title": "Wisdom",
+      "source": "Screenshot 2026-09-25 at 10.06.11\u202fPM.png",
+      "sourceSha256": "45b3b8ddece0d6df7042c436036abf022010dbe5aea05bc5ad219dfa6ee6d8c3",
+      "originalSize": [
+        1964,
+        1274
+      ],
+      "size": [
+        1400,
+        908
+      ],
+      "bytes": 293182
+    },
+    {
+      "file": "gurudev-06.webp",
+      "title": "Study",
+      "source": "Image 25-9-26 at 9.21\u202fPM.png",
+      "sourceSha256": "c2946b2bcd19619c7a1cf5b8e1567fdc6141bbda2290a6a37c4400c055f382cd",
+      "originalSize": [
+        1062,
+        1404
+      ],
+      "size": [
+        1059,
+        1400
+      ],
+      "bytes": 324384
+    }
+  ]
+}

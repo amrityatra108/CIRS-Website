@@ -1,0 +1,237 @@
+{
+  "formatVersion": 1,
+  "sourceFilename": "Chinmaya_Logo_Polished_Chrome.glb",
+  "originalSHA256": "3c56813738cfb6f77139e995f9411bd810e8bb591f7091f68da2b58493ad2ed4",
+  "sourceByteLength": 15615372,
+  "particleSHA256": "1bd7a6bdaae29978155be15ea4524f8137776ca105033eaba2fec1f9dcd560d4",
+  "particleFile": "logo-particles.bin",
+  "particleCount": 90000,
+  "count": 90000,
+  "stride": 6,
+  "strideBytes": 24,
+  "componentType": "float32",
+  "endianness": "little",
+  "layout": [
+    "x",
+    "y",
+    "z",
+    "nx",
+    "ny",
+    "nz"
+  ],
+  "sampling": {
+    "method": "world-space triangle surface area, uniform barycentric",
+    "seed": 27092026,
+    "generator": "numpy.random.PCG64",
+    "numpyVersion": "2.4.4",
+    "includesBackAndSides": true
+  },
+  "sourceBounds": {
+    "min": [
+      33.64640808105469,
+      7.541015625,
+      0.0
+    ],
+    "max": [
+      388.6740417480469,
+      583.55859375,
+      44.0
+    ],
+    "size": [
+      355.0276336669922,
+      576.017578125,
+      44.0
+    ],
+    "center": [
+      211.16022491455078,
+      295.5498046875,
+      22.0
+    ]
+  },
+  "normalization": {
+    "translation": [
+      -211.16022491455078,
+      -295.5498046875,
+      -22.0
+    ],
+    "uniformScale": 0.006249809270957307,
+    "height": 3.6,
+    "axis": "Y",
+    "rotationApplied": false,
+    "order": "world node transforms, center translation, uniform scale"
+  },
+  "normalizedBounds": {
+    "min": [
+      -1.109427498169001,
+      -1.8,
+      -0.13749580396106076
+    ],
+    "max": [
+      1.109427498169001,
+      1.8,
+      0.13749580396106076
+    ],
+    "size": [
+      2.218854996338002,
+      3.6,
+      0.2749916079221215
+    ],
+    "center": [
+      0,
+      0,
+      0
+    ]
+  },
+  "sampledBounds": {
+    "min": [
+      -1.109427498169001,
+      -1.8,
+      -0.13749580396106076
+    ],
+    "max": [
+      1.1094274981690015,
+      1.8000000000000007,
+      0.13749580396106081
+    ]
+  },
+  "orientation": {
+    "upAxis": "+Y (authored glTF axis preserved)",
+    "thinAxis": "Z",
+    "recommendedInitialView": "Camera toward origin from +Z, preserve authored +Y up",
+    "surfaceDescription": "Shallow extruded calligraphic logo; broad parallel faces in XY, thickness along Z",
+    "orientationNote": "No display rotation baked into particles. A full spin becomes nearly edge-on at \u00b190 degrees around Y; use a small resting yaw for legibility."
+  },
+  "scene": {
+    "index": 0,
+    "rootNodes": [
+      0
+    ],
+    "transforms": [
+      {
+        "node": 0,
+        "name": "Orange signature logo",
+        "localMatrixColumnMajor": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "worldMatrixColumnMajor": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      }
+    ],
+    "primitives": [
+      {
+        "node": 0,
+        "mesh": 0,
+        "meshName": "Orange logo \u00b7 420 \u00d7 594 \u00d7 44",
+        "primitive": 0,
+        "material": 0,
+        "mode": 4,
+        "sourceTriangleCount": 609744,
+        "validTriangleCount": 609744,
+        "degenerateTriangleCount": 0,
+        "worldSurfaceArea": 102592.29776658118
+      },
+      {
+        "node": 0,
+        "mesh": 0,
+        "meshName": "Orange logo \u00b7 420 \u00d7 594 \u00d7 44",
+        "primitive": 1,
+        "material": 1,
+        "mode": 4,
+        "sourceTriangleCount": 15940,
+        "validTriangleCount": 15940,
+        "degenerateTriangleCount": 0,
+        "worldSurfaceArea": 203427.2183227539
+      }
+    ],
+    "skipped": []
+  },
+  "materials": [
+    {
+      "index": 0,
+      "name": "Polished Chrome Face",
+      "baseColorLinearRGBA": [
+        0.96,
+        0.975,
+        1.0,
+        1.0
+      ],
+      "baseColorSRGBHex": "#F5F9FF",
+      "metallic": 1.0,
+      "roughness": 0.025,
+      "doubleSided": false,
+      "worldSurfaceArea": 102592.29776658118,
+      "sampledParticleCount": 30267,
+      "clearcoat": 1.0,
+      "clearcoatRoughness": 0.012
+    },
+    {
+      "index": 1,
+      "name": "Polished Dark Chrome Edge",
+      "baseColorLinearRGBA": [
+        0.42,
+        0.45,
+        0.5,
+        1.0
+      ],
+      "baseColorSRGBHex": "#6B737F",
+      "metallic": 1.0,
+      "roughness": 0.045,
+      "doubleSided": false,
+      "worldSurfaceArea": 203427.2183227539,
+      "sampledParticleCount": 59733,
+      "clearcoat": 0.95,
+      "clearcoatRoughness": 0.018
+    }
+  ],
+  "fallback": {
+    "file": "logo-fallback.svg",
+    "method": "Boundary loops from actual +Z front-face triangles",
+    "sourceBoundaryVertexCount": 7970,
+    "simplifiedVertexCount": 4471,
+    "pathCount": 5,
+    "maximumSimplificationErrorSourceUnits": 0.06,
+    "orientation": "Authored +Y up; matches unchanged particle axes"
+  },
+  "geometrySummary": {
+    "validTriangleCount": 625684,
+    "worldSurfaceArea": 306019.5160893351,
+    "normalizedSurfaceArea": 11.953157773255034,
+    "groundOrPlatformIncluded": false,
+    "groundAssessment": "One logo mesh only; projected silhouette has no separate ground geometry"
+  },
+  "normalLengthRange": [
+    1.0,
+    1.0
+  ]
+}

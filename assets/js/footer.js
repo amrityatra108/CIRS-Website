@@ -60,7 +60,7 @@
     var BAND = 24;
     var header = document.querySelector("#header");
     var bar = (header && header.querySelector(".wrap")) || header;
-    var line = 0, near = false, active = null, queued = false;
+    var line = 0, active = null, queued = false;
     var measure = function () {
       // Offsets rather than the bar's box: a header collapsed past the
       // opening has slid up out of the window, and its box with it.
@@ -85,13 +85,13 @@
       queued = true;
       window.requestAnimationFrame(update);
     };
-    // The edge on screen, or anywhere above it, is when the geometry is worth
-    // reading; below the window the answer is simply "not yet".
+    // A restored position or direct jump can skip the scene entirely between
+    // two observer samples. Read the same boundary on every scroll frame so
+    // the footer state still settles correctly beyond the scene.
     new IntersectionObserver(function (entries) {
-      near = entries[entries.length - 1].isIntersecting;
       queue();
     }).observe(edgeEl);
-    window.addEventListener("scroll", function () { if (near) queue(); }, { passive: true });
+    window.addEventListener("scroll", queue, { passive: true });
     window.addEventListener("resize", function () { measure(); queue(); }, { passive: true });
     measure();
     update();

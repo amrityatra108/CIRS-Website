@@ -239,7 +239,7 @@
      the next, so the scroll never forces a layout mid-write.
      ------------------------------------------------------------ */
   const stackCards = Array.prototype.slice.call(document.querySelectorAll('.sports-gallery__track .sport-chapter'));
-  const stackQuery = window.matchMedia('(min-width: 1100px) and (min-height: 760px)');
+  const stackQuery = window.matchMedia('(min-width: 900px) and (min-height: 640px)');
   if (stackCards.length > 1 && !prefersReducedMotion) {
     let queued = false;
     const paint = () => {

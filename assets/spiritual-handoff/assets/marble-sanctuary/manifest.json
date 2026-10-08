@@ -1,0 +1,11 @@
+{
+  "sha256": {
+    "altar-desktop.png": "2e8987c5b5d19bea9600666a39143f9d18ff01426f854e09abfb8a8a098cc94b",
+    "altar-desktop.webp": "0d8fa8165fe6d76d24d2ae3ec479189a1ced7cf7250252e09febbe6b25e905a5",
+    "altar-mobile.png": "2c29b1384cde1a334d1591193437c5f7ba9e8188f0cc1ebeb5bd0a95818c6f49",
+    "altar-mobile.webp": "3db3a3ac8729a5dd4f3ccb47bfe415e0e15c95400ddc4d086fe2de67f2517b8b",
+    "emblem-static.svg": "ce5c994de1aeb38483718b7174fcdbed5a5e52e57fdc5820e7eed530e9ddd960"
+  },
+  "webpQuality": 92,
+  "plateType": "generated clean environment plate; live emblem and plaque remain separate"
+}

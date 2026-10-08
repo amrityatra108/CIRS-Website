@@ -562,13 +562,16 @@ html.sports-journey-ready .sports-chapters__markers span{ top:88px; }
   }
 }
 
-body.sports .sports-ground {background:#fffefa;}
-body.sports .sports-leaders {background:#fffefa;color:#272720;}
-body.sports .sports-leaders :is(.sc,.cp__eyebrow) {color:#806019;}
-body.sports .sports-leaders .marker::before {border-color:#806019;}
-body.sports .sports-leaders .lead {color:#55554a;}
-body.sports .sports-leaders .cp {
-  --cp-ink:#272720;--cp-soft:#55554a;--cp-label:#806019;
-  --cp-mark:#806019;--cp-rule:#dfd3b5;
-  background:#fff;border-color:#dfd3b5;box-shadow:0 8px 28px rgba(98,74,20,.055);
-}
+/* Unique photos retained from the removed duplicate wipe, on the original
+   Sports ground. They stay in ordinary flow rather than repeat that wipe. */
+body.sports .sports-moments {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:0;padding-block:64px;background:#11110f;position:relative;z-index:1;color:var(--on-dark);}
+body.sports .sports-moment {margin:0;min-width:0;}
+body.sports .sports-moment__image img {display:block;width:100%;height:auto;aspect-ratio:8/5;object-fit:cover;border-radius:4px;}
+body.sports .sports-moment__caption {padding-block:14px 20px;border-bottom:1px solid rgba(255,255,255,.18);}
+body.sports .sports-moment__caption span {font-size:var(--fs-xs);color:var(--gold-lit);letter-spacing:.08em;}
+body.sports .sports-moment__caption p {margin:8px 0 0;font-family:var(--font-display);font-size:1.5rem;line-height:1.2;}
+body.sports .archive-entry__source {margin:0;font-size:var(--fs-sm);color:var(--gold-lit);}
+body.sports .archive-entry__source a {text-decoration:underline;text-underline-offset:.22em;}
+body.sports .film[data-film-still] .film__stage {background:#000 url(../img/sports-field-poster.jpg) center/cover no-repeat;}
+body.sports .film[data-film-still] .film__video {display:none;}
+@media(max-width:720px){body.sports .sports-moments {grid-template-columns:minmax(0,1fr);}body.sports .archive-entry__specs {grid-template-columns:minmax(0,1fr);}}

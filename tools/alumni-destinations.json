@@ -5,18 +5,28 @@
     "short": "Curtin University",
     "country": "Australia",
     "region": "apac",
-    "lat": null,
-    "lon": null,
+    "lat": -32.00389,
+    "lon": 115.89478,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -3,
+      1.4,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Perth (Bentley) campus",
+      "sources": [
+        "https://www.curtin.edu.au/about/campus-locations/perth/",
+        "https://gnss.curtin.edu.au/international-gnss-experiments/igs-multi-gnss-experiment/"
+      ],
+      "note": "Campus GNSS antenna: -32 00 14.0, +115 53 41.2; rounded to 5 decimals.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "Curtin"
   },
   {
     "key": "sp-jain-school-of-global-management",
@@ -43,18 +53,28 @@
     "short": "University Of New South Wales",
     "country": "Australia",
     "region": "apac",
-    "lat": null,
-    "lon": null,
+    "lat": -33.91751,
+    "lon": 151.23103,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      3,
+      -1,
+      "r"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Kensington campus",
+      "sources": [
+        "https://www.unsw.edu.au/about-us/our-story/contact-us",
+        "https://mapcarta.com/W173530296"
+      ],
+      "note": "OSM way 173530296 reference point, matched to the official Kensington campus address.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "UNSW"
   },
   {
     "key": "university-of-sydney",
@@ -100,18 +120,28 @@
     "short": "University of Melbourne",
     "country": "Australia",
     "region": "apac",
-    "lat": null,
-    "lon": null,
+    "lat": -37.7986,
+    "lon": 144.9602,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -3,
+      4,
+      "l"
     ],
-    "basis": "alumni-reported; Where our Alumni Are, 2026"
+    "basis": "alumni-reported; Where our Alumni Are, 2026",
+    "coordinate_review": {
+      "campus": "Parkville campus",
+      "sources": [
+        "https://www.unimelb.edu.au/contact",
+        "https://maps.unimelb.edu.au/point?identifier=PAR%3B105%3B1%3B125"
+      ],
+      "note": "University map publishes latitude/longitude at its Parkville reference point.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "Melbourne"
   },
   {
     "key": "george-brown-college",
@@ -138,18 +168,28 @@
     "short": "University of British Columbia",
     "country": "Canada",
     "region": "canada",
-    "lat": null,
-    "lon": null,
+    "lat": 49.26641,
+    "lon": -123.25012,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -3,
+      -2,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Vancouver (Point Grey) campus",
+      "sources": [
+        "https://www.ubc.ca/our-campuses/vancouver/",
+        "https://mapcarta.com/University_of_British_Columbia_R1424987"
+      ],
+      "note": "OSM relation 1424987 reference point, matched to the official Vancouver campus location.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "UBC"
   },
   {
     "key": "university-of-victoria",
@@ -157,18 +197,28 @@
     "short": "University of Victoria",
     "country": "Canada",
     "region": "canada",
-    "lat": null,
-    "lon": null,
+    "lat": 48.463,
+    "lon": -123.312,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -3,
+      3,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Ring Road campus",
+      "sources": [
+        "https://www.uvic.ca/search/maps/index.php",
+        "https://hcmc.uvic.ca/people/greg/maps/vertexer/"
+      ],
+      "note": "University publishes 48.463, -123.312 as the centre of its Ring Road campus.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "Victoria"
   },
   {
     "key": "university-of-waterloo",
@@ -176,18 +226,28 @@
     "short": "University of Waterloo",
     "country": "Canada",
     "region": "canada",
-    "lat": null,
-    "lon": null,
+    "lat": 43.46917,
+    "lon": -80.53985,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -3,
+      -8,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Waterloo main campus",
+      "sources": [
+        "https://uwaterloo.ca/about/maps-and-directions",
+        "https://mapcarta.com/N1863224307"
+      ],
+      "note": "OSM node 1863224307 campus reference point, matched to the official main campus location.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "Waterloo"
   },
   {
     "key": "york-university",
@@ -214,18 +274,29 @@
     "short": "American Graduate School in Paris",
     "country": "France",
     "region": "europe",
-    "lat": null,
-    "lon": null,
+    "lat": 48.84191,
+    "lon": 2.3317,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -7,
+      7,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Reid Hall, Paris",
+      "sources": [
+        "https://www.ags.edu/contact-us",
+        "https://globalcenters.columbia.edu/paris/directions",
+        "https://goo.gl/maps/Y9zWMwbPjH5qi6jj9"
+      ],
+      "note": "Current AGS address is Reid Hall; Columbia directions resolve to Google Maps place coordinates 48.8419098, 2.3317. This is not a historical attendance claim.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "AGS Paris"
   },
   {
     "key": "karlsruhe-institute-of-technology",
@@ -233,18 +304,28 @@
     "short": "Karlsruhe Institute of Technology",
     "country": "Germany",
     "region": "europe",
-    "lat": null,
-    "lon": null,
+    "lat": 49.0109,
+    "lon": 8.4108,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      6,
+      1,
+      "r"
     ],
-    "basis": "alumni-reported; Where our Alumni Are, 2026"
+    "basis": "alumni-reported; Where our Alumni Are, 2026",
+    "coordinate_review": {
+      "campus": "Campus South",
+      "sources": [
+        "https://www.kit.edu/kit/english/947.php",
+        "https://www.gik.kit.edu/english/anfahrt.php"
+      ],
+      "note": "Campus South Geodetic Institute publishes N49.01090 E008.41080.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "KIT"
   },
   {
     "key": "leuphana-university-luneburg",
@@ -252,18 +333,28 @@
     "short": "Leuphana University Lüneburg",
     "country": "Germany",
     "region": "europe",
-    "lat": null,
-    "lon": null,
+    "lat": 53.22866,
+    "lon": 10.40545,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      3,
+      -7,
+      "r"
     ],
-    "basis": "alumni-reported; Where our Alumni Are, 2026"
+    "basis": "alumni-reported; Where our Alumni Are, 2026",
+    "coordinate_review": {
+      "campus": "Universitätsallee campus",
+      "sources": [
+        "https://www.leuphana.de/en/university/maps/campus.html",
+        "https://commons.wikimedia.org/wiki/File:Leuphana1.jpg"
+      ],
+      "note": "Campus central-building photograph geolocation: 53 13 43.18 N, 10 24 19.63 E; matched to the official Universitätsallee campus.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "Leuphana"
   },
   {
     "key": "hkust",
@@ -290,18 +381,28 @@
     "short": "The University of Hong Kong",
     "country": "Hong Kong",
     "region": "apac",
-    "lat": null,
-    "lon": null,
+    "lat": 22.28152,
+    "lon": 114.13907,
     "nudge": [
-      0,
-      0
+      -1.2,
+      1.2
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -3,
+      3,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Main campus",
+      "sources": [
+        "https://www.estates.hku.hk/campus-planning/campuses",
+        "https://mapcarta.com/15985134"
+      ],
+      "note": "Mapped main campus reference point, matched to the official Bonham Road / Pokfulam campus description.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "HKU"
   },
   {
     "key": "alliance-university",
@@ -2152,18 +2253,27 @@
     "short": "University College Dublin",
     "country": "Ireland",
     "region": "europe",
-    "lat": null,
-    "lon": null,
+    "lat": 53.30897,
+    "lon": -6.21836,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -7,
+      3,
+      "l"
     ],
-    "basis": "alumni-reported; Where our Alumni Are, 2026"
+    "basis": "alumni-reported; Where our Alumni Are, 2026",
+    "coordinate_review": {
+      "campus": "Belfield main entrance",
+      "sources": [
+        "https://maths.ucd.ie/sms/research/conferences/gps.html"
+      ],
+      "note": "University publishes main entrance N53 18 32.3, W6 13 06.1; converted to decimal degrees.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "UCD"
   },
   {
     "key": "university-of-canterbury",
@@ -2171,18 +2281,28 @@
     "short": "University of Canterbury",
     "country": "New Zealand",
     "region": "apac",
-    "lat": null,
-    "lon": null,
+    "lat": -43.52318,
+    "lon": 172.58043,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -3,
+      3,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Ilam campus, Christchurch",
+      "sources": [
+        "https://www.canterbury.ac.nz/about-uc/our-campus-and-environment",
+        "https://mapcarta.com/N14172989723"
+      ],
+      "note": "OSM node 14172989723 campus locality reference point, matched to the official Ilam campus description.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "Canterbury"
   },
   {
     "key": "james-cook-university-singapore",
@@ -2190,18 +2310,28 @@
     "short": "James Cook University Singapore",
     "country": "Singapore",
     "region": "apac",
-    "lat": null,
-    "lon": null,
+    "lat": 1.31536,
+    "lon": 103.87603,
     "nudge": [
-      0,
-      0
+      2,
+      -1
     ],
     "label": [
-      0,
-      0,
-      "c"
+      4,
+      -2,
+      "r"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "149 Sims Drive",
+      "sources": [
+        "https://www.jcu.edu.sg/current-students/campus-maps-And-information",
+        "https://mapcarta.com/W304614638"
+      ],
+      "note": "OSM way 304614638 reference point, matched to the official 149 Sims Drive address.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "JCU Singapore"
   },
   {
     "key": "kaplan-higher-education-academy",
@@ -2323,18 +2453,29 @@
     "short": "HTMi Hotel and Tourism Management Institute Switzerland",
     "country": "Switzerland",
     "region": "europe",
-    "lat": null,
-    "lon": null,
+    "lat": 46.82351,
+    "lon": 8.0329,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      3,
+      8,
+      "r"
     ],
-    "basis": "alumni-reported; institution checked"
+    "basis": "alumni-reported; institution checked",
+    "coordinate_review": {
+      "campus": "Marientalweg 3, Sörenberg",
+      "sources": [
+        "https://htmi.ch/contact-information/",
+        "https://search.ch/map/S%C3%B6renberg%2CMarientalweg-3%40645346%2C185990?b=high",
+        "https://www.swisstopo.admin.ch/dam/en/sd-web/KLRCX9XIdXDu/ch1903wgs84-EN.pdf"
+      ],
+      "note": "Official campus address matched to search.ch Swiss Grid E645346/N185990, converted using swisstopo CH1903-to-WGS84 approximation; rounded to 5 decimals.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "HTMi"
   },
   {
     "key": "bukovinian-state-medical-university",
@@ -2342,18 +2483,28 @@
     "short": "Bukovinian State Medical University",
     "country": "Ukraine",
     "region": "europe",
-    "lat": null,
-    "lon": null,
+    "lat": 48.29145,
+    "lon": 25.9323,
     "nudge": [
       0,
       0
     ],
     "label": [
-      0,
-      0,
-      "c"
+      4,
+      -3,
+      "r"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Teatralna Square 2, Chernivtsi",
+      "sources": [
+        "https://www.bsmu.edu.ua/zagalni-vidomosti/kontakti-ta-rekviziti/",
+        "https://mapcarta.com/W95329208"
+      ],
+      "note": "OSM way 95329208 reference point, matched to the university’s official Teatralna Square 2 address.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "BSMU"
   },
   {
     "key": "bits-pilani-dubai-campus",
@@ -2361,18 +2512,28 @@
     "short": "BITS Pilani Dubai Campus",
     "country": "United Arab Emirates",
     "region": "middle-east",
-    "lat": null,
-    "lon": null,
+    "lat": 25.13163,
+    "lon": 55.41967,
     "nudge": [
-      0,
-      0
+      -1.2,
+      -1.2
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -4,
+      -4,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Dubai International Academic City",
+      "sources": [
+        "https://www.bits-pilani.ac.in/dubai/about-us/",
+        "https://www.bits-dubai.ac.ae/downloads/Website/Buzz%40bitsdubai_September_October_2024.pdf"
+      ],
+      "note": "University bulletin campus photograph geotag: 25.131631, 55.419667; rounded to 5 decimals.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "BITS Dubai"
   },
   {
     "key": "institute-of-management-technology",
@@ -2380,18 +2541,27 @@
     "short": "Institute of management technology",
     "country": "United Arab Emirates",
     "region": "middle-east",
-    "lat": null,
-    "lon": null,
+    "lat": 25.12367,
+    "lon": 55.41533,
     "nudge": [
-      0,
-      0
+      1.2,
+      -0.2
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -4,
+      1,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Dubai International Academic City",
+      "sources": [
+        "https://www.imt.ac.ae/contact-us"
+      ],
+      "note": "Official contact page directions map publishes place coordinates 25.1236683, 55.4153303; rounded to 5 decimals.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "IMT Dubai"
   },
   {
     "key": "university-of-wollongong-in-dubai",
@@ -2399,18 +2569,28 @@
     "short": "University of Wollongong in Dubai",
     "country": "United Arab Emirates",
     "region": "middle-east",
-    "lat": null,
-    "lon": null,
+    "lat": 25.10143,
+    "lon": 55.16267,
     "nudge": [
-      0,
-      0
+      -0.2,
+      1.2
     ],
     "label": [
-      0,
-      0,
-      "c"
+      -4,
+      5,
+      "l"
     ],
-    "basis": "alumni-reported"
+    "basis": "alumni-reported",
+    "coordinate_review": {
+      "campus": "Dubai Knowledge Park campus",
+      "sources": [
+        "https://www.uowdubai.ac.ae/contact-us",
+        "https://mapcarta.com/W892875451"
+      ],
+      "note": "OSM way 892875451 reference point, matched to the current official UOWD Building / Dubai Knowledge Park address, not the retired Block 14/15 locations.",
+      "reviewed": "2026-09-30"
+    },
+    "map_short": "UOW Dubai"
   },
   {
     "key": "cardiff-university",

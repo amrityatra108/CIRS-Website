@@ -1,0 +1,389 @@
+/* Existing CIRS chrome roles stay within its own components.
+   The Spiritual handoff keeps its own typography, colours and scroll owner. */
+:where(#header,#drawer,.cirs-classic-footer){
+  color-scheme: light;
+
+  /* ----------------------------------------------------------
+     Colour. One system, in roles rather than hues: the owner's
+     ivory, gold, natural green and restored deep purple.
+     Page sheets read these roles; they do not define their own
+     paper, ink or gold. Ratios are WCAG, measured on the solid
+     pairs named; a surface that is not one of these is measured
+     where it is used.
+     ---------------------------------------------------------- */
+
+  /* Grounds. */
+  --paper:    #FAF9F3;   /* signature ivory */
+  --paper-2:  #F4F0E6;   /* alternate ivory */
+  --paper-3:  #EDE7D8;   /* cream */
+  --white:    #FFFFFF;
+
+  /* The school's recovered purple gives shared dark scenes their ground.
+     Film-specific black frames remain owned by each film page. */
+  --dark:       #392A48;
+  --dark-mid:   #2B2037;
+  --dark-deep:  #1E1626;
+  --dark-ink:   #1E1626;
+
+  /* Earlier school gold is bright on purple (8.17:1), and too light for
+     text on ivory. --gold-ink remains the readable paper text role. */
+  --gold:      #FFC308;
+  --gold-lit:  #FFD75C;
+  --gold-pale: #FFE7A6;
+  --gold-ink:  #8F6E2F;
+  --gold-rgb:  255,195,8;
+  --on-gold:   #1E1626;
+
+  /* Brand and gold from the stylesheet before b04ab898; current ivory and
+     typography remain in place. */
+  --brand:        #392A48;
+  --brand-mid:    #2B2037;
+  --brand-deep:   #1E1626;
+  --maroon:       #7A0F1E;
+  --label:        var(--brand);
+  --purple-pale:  #F3EDF6;
+
+  /* Green belongs to campus and nature, not to every button. */
+  --campus:       #2E5D3A;   /* 7.26:1 on ivory */
+  --campus-dark:  #173B27;
+  --sage:         #A7B896;
+  --nature-pale:  #DCE6D6;
+
+  /* Status: meaning only, never decoration. */
+  --ok:    #287A45;
+  --warn:  #D99A24;
+  --error: #B84A4A;
+  --info:  #4A8BA8;
+
+  /* Lettering on paper. The reference grey #706F68 is 4.78:1 on
+     ivory but 4.43:1 on the alternate ivory, 4.09:1 on cream and
+     3.61:1 on pale gold, and secondary copy sits on all of those.
+     --ink-mute is the nearest step that holds 4.5:1 on every light
+     ground in this palette: 6.17:1 on ivory, 5.27:1 on cream,
+     4.65:1 on pale gold, 5.06:1 on pale green. */
+  --ink:       #1F1F1B;   /* 15.68:1 on ivory */
+  --ink-soft:  #54534D;   /*  7.32:1 */
+  --ink-mute:  #5F5E58;
+
+  /* Lettering on the dark sections. Solid, not translucent, so a
+     photograph under a scrim cannot thin it. */
+  --on-dark:      #FAF9F3;
+  --on-dark-soft: #D6D3CA;   /* 9.73:1 on --dark */
+  --on-dark-mute: #B3B0A7;   /* 6.71:1 on --dark */
+
+  /* Separation. Decorative: a required control outline uses
+     --ink-mute, which is 6.17:1 against ivory. */
+  --rule:       #E3DCCB;
+  --rule-soft:  #EEE9DE;
+  --rule-dark:  rgba(250,249,243,.20);
+  --decoration-mute: #A8A69D;   /* disabled and decorative only */
+
+  /* Keyboard focus on paper; dark surfaces use bright gold below. */
+  --focus: #8F6E2F;
+
+  --font-body: "Mona Sans", Arial, sans-serif;
+  --font-ui: "Mona Sans", Arial, sans-serif;
+  --font-display: "Bodoni Moda", Georgia, serif;
+  --font-editorial: "Literata", Georgia, serif;
+  --font-quote: "EB Garamond", Georgia, serif;
+  --deva: "Tiro Devanagari Hindi", serif;
+
+  /* The home hero's headline, and nothing else. Pulled back from 10.5vw so
+     the campus behind it is a photograph rather than a backdrop. */
+  --fs-mega:  clamp(2.6rem, 7.2vw, 6rem);
+  --fs-hero:  clamp(2.5rem, 5.6vw, 4.8rem);
+  --fs-h2:    clamp(2rem, 3.9vw, 3.4rem);
+  --fs-h3:    clamp(1.25rem, 1.7vw, 1.6rem);
+  --fs-lead:  clamp(1.08rem, 1.35vw, 1.32rem);
+  --fs-body:  1rem;
+  --fs-sm:    0.905rem;
+  --fs-xs:    0.78rem;
+
+  /* Spacing scale — every new component below is built on these steps,
+     not on one-off pixel values. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 144px;
+
+  --gut:  clamp(20px, 4vw, 64px);
+  --maxw: 1320px;
+  --measure: 62ch;
+
+  --e:  cubic-bezier(.22,.61,.36,1);
+  --e2: cubic-bezier(.16,1,.3,1);
+
+  /* A shared depth language: quiet enough to support the photography rather
+     than becoming a second visual subject. */
+  --shadow-image: 0 22px 52px rgba(31,31,27,.14);
+  --shadow-control: 0 8px 22px rgba(31,31,27,.12);
+}
+@scope (.cirs-classic-footer){
+/* Shared campus closing scene and practical footer. */
+.closing-scene{
+  position:relative;
+  z-index:1;
+  display:flex;
+  min-height:100vh;
+  min-height:100svh;
+  overflow:hidden;
+  isolation:isolate;
+  color:var(--on-dark);
+  background:var(--dark-ink);
+}
+.closing-scene__picture{
+  position:absolute;
+  z-index:-2;
+  inset:-1.5%;
+  overflow:hidden;
+}
+.closing-scene__image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 55%;
+  filter:brightness(.82) saturate(.78) sepia(.08);
+  transform:translate3d(var(--scene-shift-x, 0px),var(--scene-shift-y, 0px),0) scale(1.055);
+  transition:transform .75s var(--e);
+}
+.closing-scene__grade{
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(17,17,15,.67) 0%,rgba(17,17,15,.38) 48%,rgba(17,17,15,.16) 100%),
+    linear-gradient(180deg,rgba(24,24,21,.30) 0%,rgba(24,24,21,.12) 32%,rgba(17,17,15,.22) 60%,var(--dark-ink) 100%),
+    linear-gradient(0deg,rgba(143,110,47,.25),transparent 58%);
+}
+.closing-scene__inner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  width:100%;
+  min-height:inherit;
+  padding-block:clamp(128px,17vh,190px) clamp(100px,13vh,144px);
+}
+.closing-scene__content{ width:min(100%,900px); }
+.closing-scene__title{
+  max-width:100%;
+  color:var(--on-dark);
+  font-family:var(--font-display);
+  font-size:clamp(3rem,6.4vw,6rem);
+  font-weight:400;
+  letter-spacing:-.025em;
+  line-height:.98;
+  text-wrap:balance;
+  text-shadow:0 2px 24px rgba(17,17,15,.2);
+}
+.closing-scene__title span{ display:block; }
+.closing-scene__title span + span{ color:inherit; }
+.closing-scene__links{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px 28px;
+  margin-top:clamp(28px,4vh,42px);
+}
+.closing-scene__admissions{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:56px;
+  padding:14px 24px;
+  border:1px solid var(--gold-pale);
+  background:var(--gold-pale);
+  color:var(--on-gold);
+  font-size:1rem;
+  font-weight:600;
+  line-height:1.25;
+  transition:background .2s var(--e),border-color .2s var(--e),color .2s var(--e),transform .2s var(--e);
+}
+.closing-scene__admissions:hover{
+  transform:translateY(-2px);
+  border-color:var(--gold-pale);
+  background:var(--gold-pale);
+}
+.closing-scene__contact{
+  display:inline-flex;
+  align-items:center;
+  min-height:48px;
+  color:var(--on-dark);
+  font-size:1rem;
+  text-decoration:underline;
+  text-decoration-color:rgba(var(--gold-rgb),.75);
+  text-decoration-thickness:1px;
+  text-underline-offset:5px;
+  transition:color .2s var(--e),text-decoration-color .2s var(--e);
+}
+.closing-scene__contact:hover{ color:var(--gold-lit); text-decoration-color:currentColor; }
+.closing-scene :focus-visible,
+.footer :focus-visible{
+  outline:2px solid var(--gold-lit);
+  outline-offset:4px;
+}
+
+/* Motion is enabled only after the shared script loads; without scripting the
+   closing links stay visible and available. */
+html.has-footer-scene-motion .closing-scene__content{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .8s var(--e2),transform .8s var(--e2);
+}
+html.has-footer-scene-motion .closing-scene.is-visible .closing-scene__content{
+  opacity:1;
+  transform:none;
+}
+
+.footer{ background:var(--dark-ink); color:var(--on-dark-soft); }
+.footer__main{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:34px 26px;
+  padding-block:48px 42px;
+}
+.footer__identity{ grid-column:1/-1; }
+.footer__brand{ display:flex; align-items:center; gap:18px; margin-bottom:20px; }
+.footer__brand img{ width:clamp(58px,6vw,74px); height:auto; flex:none; }
+.footer__brand span{
+  color:var(--on-dark);
+  font-family:var(--font-display);
+  font-size:clamp(1.25rem,1.7vw,1.55rem);
+  line-height:1.2;
+}
+.footer__address{
+  display:grid;
+  gap:8px;
+  font-size:var(--fs-sm);
+  font-style:normal;
+  line-height:1.7;
+}
+.footer__address a{ color:var(--on-dark-soft); text-decoration:underline; text-decoration-color:rgba(255,255,255,.32); text-underline-offset:3px; }
+.footer__address a:hover{ color:var(--on-dark); text-decoration-color:var(--gold-lit); }
+.footer__heading{
+  margin:0 0 12px;
+  color:var(--gold-lit);
+  font-family:var(--font-ui);
+  font-size:1rem;
+  font-weight:500;
+  line-height:1.35;
+}
+.footer__group ul{ display:grid; gap:4px; }
+.footer__group li a{
+  display:inline-block;
+  padding-block:2px;
+  color:var(--on-dark-soft);
+  font-size:var(--fs-sm);
+  line-height:1.45;
+  text-decoration:underline;
+  text-decoration-color:transparent;
+  text-underline-offset:3px;
+  transition:color .2s var(--e),text-decoration-color .2s var(--e);
+}
+.footer__group li a:hover{ color:var(--on-dark); text-decoration-color:var(--gold-lit); }
+.footer__bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 24px;
+  justify-content:space-between;
+  padding-block:16px 20px;
+  border-top:1px solid var(--rule-dark);
+  color:var(--on-dark-mute);
+  font-size:var(--fs-xs);
+  line-height:1.5;
+}
+
+/* Keep the page index and back-to-top control clear of the final two sections. */
+html.footer-zone-active .jump,
+html.footer-zone-active .totop{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+@media (min-width:740px){
+  .footer__main{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:38px 30px; }
+  .footer__identity{ grid-column:1/-1; }
+}
+@media (min-width:1280px){
+  .footer__main{
+    grid-template-columns:minmax(290px,1.75fr) repeat(5,minmax(0,1fr));
+    gap:24px;
+    padding-block:62px 48px;
+  }
+  .footer__identity{ grid-column:auto; }
+}
+@media (max-width:739px){
+  .closing-scene{ min-height:88svh; }
+  .closing-scene__picture{ inset:-1%; }
+  .closing-scene__image{
+    object-position:53% 48%;
+    filter:brightness(.74) saturate(.76) sepia(.10);
+    transform:scale(1.025);
+    transition:none;
+  }
+  .closing-scene__grade{
+    background:
+      linear-gradient(90deg,rgba(17,17,15,.42),rgba(17,17,15,.14)),
+      linear-gradient(180deg,rgba(24,24,21,.22),rgba(17,17,15,.28) 40%,var(--dark-ink) 100%),
+      linear-gradient(0deg,rgba(143,110,47,.20),transparent 58%);
+  }
+  .closing-scene__inner{
+    align-items:flex-end;
+    padding-block:120px 86px;
+  }
+  .closing-scene__content{ max-width:560px; }
+  .closing-scene__title{ font-size:clamp(2.65rem,11vw,4.1rem); max-width:11ch; }
+  .closing-scene__links{ gap:8px 20px; margin-top:28px; }
+  .closing-scene__admissions{ min-height:52px; padding-inline:19px; }
+  .footer__bar{ flex-direction:column; gap:5px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .closing-scene__image,
+  html.has-footer-scene-motion .closing-scene__content,
+  .closing-scene__admissions,
+  .closing-scene__contact,
+  .footer__group li a,
+  .footer__address a{
+    transition:none;
+    transform:none;
+  }
+  html.has-footer-scene-motion .closing-scene__content{ opacity:1; }
+}
+
+}
+#header,#drawer,.cirs-classic-footer{font-family:var(--font-ui);font-size:16px;line-height:1.5;font-weight:350}
+#header *,#drawer *,.cirs-classic-footer *{box-sizing:border-box}
+/* The standalone artwork has generic button/span and link rules.
+   The shared chrome uses the main site's reset within its own components. */
+:where(#header,#drawer) a{text-decoration:none}
+:where(#header,#drawer) button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:where(#header,#drawer) button span{margin:0}
+:where(#header,#drawer) :is(h1,h2,h3,p,ul,ol){margin:0}
+:where(#header,#drawer) :is(ul,ol){padding:0;list-style:none}
+:where(#header,#drawer) .nv-tab{font-weight:450}
+.cirs-classic-footer .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.cirs-classic-footer .footer-wrap{position:sticky;bottom:0;z-index:0}
+.cirs-classic-footer .footer-wrap.is-tall{position:relative}
+.cirs-classic-footer .footer{position:static;inset:auto;pointer-events:auto}
+.cirs-classic-footer img{display:block;max-width:100%}
+.cirs-classic-footer ul{padding:0;list-style:none}
+.cirs-classic-footer h2,.cirs-classic-footer p{margin:0}
+.cirs-classic-footer :focus-visible{outline:2px solid var(--gold-lit);outline-offset:5px}
+/* Legacy hooks remain for the supplied animation, without duplicate navigation. */
+body.spiritual-handoff :is(.cirs-hero-header,.masthead){display:none!important}
+body.spiritual-handoff.is-locked{overflow:hidden}
+/* The cinematic viewport remains full-height behind the floating navbar. */
+body.spiritual-handoff #crossroads-helix iframe{top:0;height:100%}
+/* Document state is outside the footer's CSS scope. Keep the shared reveal
+   conditions outside it as well, restricted to this page's closing scene. */
+html.has-footer-scene-motion body.spiritual-handoff .cirs-classic-footer .closing-scene__content{opacity:0;transform:translateY(18px);transition:opacity .8s var(--e2),transform .8s var(--e2)}
+html.has-footer-scene-motion body.spiritual-handoff .cirs-classic-footer .closing-scene.is-visible .closing-scene__content{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.has-footer-scene-motion body.spiritual-handoff .cirs-classic-footer .closing-scene__content{opacity:1;transform:none;transition:none}}

@@ -1,0 +1,57 @@
+@font-face{font-family:Newsreader;src:url('../assets/Newsreader.woff2') format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+:root{--paper:#F6F0E2;--sand:#E9DFCD;--ink:#342F27;--muted:#756A5B;--copper:#A66A3F;color-scheme:light;font-family:Newsreader,Georgia,serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink)}button{font:inherit;color:inherit}
+#spiritual{width:100%;height:100svh;min-height:560px;position:relative;overflow:hidden;isolation:isolate}
+.atmosphere{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 52% 32%,#fffaf0 0%,#f6f0e2 36%,#e9dfcd 76%,#d4c5ae 120%)}
+#scene{position:absolute;inset:0;width:100%;height:100%;display:block;outline:none;touch-action:pan-y}
+.masthead{position:absolute;top:30px;left:38px;right:38px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;z-index:3}
+.wordmark{font-size:27px;letter-spacing:.10em;font-weight:400}.masthead h1{font-size:17px;font-weight:400;letter-spacing:.02em;margin:0;display:flex;align-items:center;gap:11px}.masthead h1 span{width:5px;height:5px;border-radius:50%;background:var(--copper)}
+.footer{position:absolute;z-index:4;bottom:22px;left:38px;right:38px;pointer-events:none}
+.invocation{font-size:clamp(24px,2.75vw,38px);line-height:1.3;letter-spacing:-.024em;text-align:center;font-weight:380;margin:0 0 33px;color:var(--ink);text-wrap:balance;opacity:0;transform:translateY(9px);transition:opacity 1.2s ease,transform 1.2s ease;text-shadow:0 1px 18px #f6f0e2}
+[data-entrance=complete] .invocation,.is-fallback .invocation{opacity:1;transform:translateY(0)}
+.footer-row{display:flex;justify-content:space-between;align-items:center;gap:18px}.hint{font-size:13px;margin:0;color:var(--muted);transition:opacity .8s}.explored .hint{opacity:0}.actions{display:flex;gap:26px;align-items:center;pointer-events:auto}
+button{border:0;background:transparent;padding:8px 0;min-height:40px;font-size:13px;cursor:pointer;position:relative}button::after{content:'';position:absolute;left:0;right:0;bottom:5px;height:1px;background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}button:hover::after,button:focus-visible::after{transform:scaleX(1)}button:focus-visible{outline:2px solid var(--copper);outline-offset:5px;border-radius:2px}button span{display:inline-block;margin:0 3px}button:disabled{opacity:.35;cursor:default}
+.loading{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);font-size:20px;letter-spacing:.015em;color:var(--muted);pointer-events:none}.loading span{animation:breath 1.5s ease-in-out infinite}.ready .loading{opacity:0;visibility:hidden}
+.fallback{position:absolute;inset:13% 12% 25%;place-items:center}.fallback img{width:min(100%,560px);height:100%;object-fit:contain}.fallback[hidden]{display:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes breath{50%{opacity:.25}}
+@media(max-width:600px){#spiritual{min-height:600px}.masthead{top:24px;left:24px;right:24px}.wordmark{font-size:22px}.masthead h1{font-size:15px}.footer{left:24px;right:24px;bottom:20px}.invocation{font-size:25px;margin:0 auto 24px;max-width:300px}.footer-row{flex-direction:column;gap:6px}.actions{gap:26px}button,.hint{font-size:12px}.hint{opacity:.8}.fallback{inset:20% 8% 34%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+[data-chapter=convergence] .masthead{opacity:0;pointer-events:none}.masthead{transition:opacity .7s ease}
+[data-entrance=playing] .footer-row{opacity:0;pointer-events:none}[data-entrance=playing] .actions{pointer-events:none}.footer-row{transition:opacity .65s ease}
+@media(max-width:600px){.actions{gap:18px;flex-wrap:wrap;justify-content:center}#sound{font-size:12px}}
+
+/* The six phrases retain their original pace. The final 180svh holds the summit
+   and gives the next scene room to emerge before the mountain releases. */
+#tapovan-journey{position:relative;height:880svh;background:var(--paper);color:#fff;isolation:isolate}
+#tapovan-journey.is-static{height:100svh}
+.tapovan-sticky{position:sticky;top:0;width:100%;height:100svh;overflow:hidden;background:#403327 url('../assets/tapovan-poster.webp') 58% 50%/cover no-repeat;isolation:isolate}
+.tapovan-video{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;object-fit:cover;object-position:58% 50%}
+.tapovan-copy{position:absolute;z-index:4;top:22%;left:6%;right:6%;height:120px;display:grid;place-items:center;text-align:center;pointer-events:none;text-shadow:0 2px 5px rgba(19,17,19,.8),0 8px 24px rgba(19,17,19,.66)}
+.tapovan-beat{grid-area:1/1;margin:0;display:flex;align-items:baseline;justify-content:center;gap:.30em;white-space:nowrap;font-family:Arial,Helvetica,sans-serif;font-size:clamp(31px,4.55vw,72px);line-height:1.05;font-weight:650;letter-spacing:-.047em;opacity:0;transform:translate3d(0,14px,0)}
+.tapovan-beat.is-active{opacity:1;transform:translate3d(0,0,0)}
+.tapovan-beat em{font-family:Newsreader,Georgia,serif;font-size:1.05em;font-weight:650;font-style:italic;letter-spacing:-.048em}
+.tapovan-details{position:absolute;z-index:5;bottom:35px;left:42px;right:42px;display:flex;align-items:end;justify-content:space-between;gap:20px;pointer-events:none;font-family:Arial,Helvetica,sans-serif}
+.tapovan-place{position:relative;margin:0;padding-left:17px;max-width:min(720px,63vw);font-size:14px;font-weight:400;letter-spacing:.02em;line-height:1.35;text-shadow:0 1px 12px #171a1c}.tapovan-place::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:#e9cfac;box-shadow:0 0 12px #fff7}.tapovan-place p{margin:0}.tapovan-place p+p{margin-top:5px;font-size:11px;letter-spacing:.025em;color:#fff7e9}
+.tapovan-progress{margin:0;font-size:13px;letter-spacing:.12em;display:flex;align-items:center;gap:11px;opacity:0}.tapovan-progress-rule{display:block;width:55px;height:1px;background:#fffd}
+.tapovan-scroll-hint{position:absolute;z-index:5;bottom:86px;left:50%;transform:translateX(-50%);margin:0;font:11px Arial,Helvetica,sans-serif;text-transform:uppercase;letter-spacing:.18em;white-space:nowrap;opacity:.65}.tapovan-scroll-hint span{margin-left:7px;font-size:15px}
+.tapovan-reduced-list{position:absolute;z-index:5;left:6%;right:6%;top:23%;text-align:center;font-family:Newsreader,Georgia,serif}.tapovan-reduced-list p{margin:.6em 0;font-size:clamp(24px,3vw,40px)}
+.tapovan-sticky.is-reduced .tapovan-copy,.tapovan-sticky.is-reduced .tapovan-scroll-hint{display:none}
+.tapovan-sticky.is-reduced .tapovan-reduced-list{display:block}
+@media(max-width:700px){#tapovan-journey{height:880svh}.tapovan-video{object-position:62% 50%}.tapovan-copy{top:21%;height:110px;left:4%;right:4%}.tapovan-beat{font-size:clamp(22px,5.4vw,39px);gap:.24em;letter-spacing:-.055em}.tapovan-details{left:22px;right:22px;bottom:25px}.tapovan-place{max-width:calc(100% - 72px);font-size:10.5px;padding-left:13px}.tapovan-place::before{top:5px;width:5px;height:5px}.tapovan-place p+p{font-size:9.5px;line-height:1.4}.tapovan-progress{font-size:11px}.tapovan-scroll-hint{bottom:124px;font-size:9px}.tapovan-progress-rule{width:25px}}
+@media(max-width:390px){.tapovan-beat{font-size:5.2vw}.tapovan-details{left:17px;right:17px}}
+@media(prefers-reduced-motion:reduce){#tapovan-journey{height:100svh}.tapovan-copy,.tapovan-scroll-hint{display:none}}
+
+/* The shared journey-layout map and journey-bridge.css own the mountain overlap. */
+#crossroads-helix{position:relative;z-index:2;width:100%;height:2580svh;background:transparent}
+#crossroads-helix iframe{display:block;width:100%;border:0}
+
+/* Quiet, readable summit dedication in the upper-right sky. */
+.tapovan-details{top:34px;right:42px;bottom:auto;left:auto;width:min(430px,42vw);display:block;text-align:right}
+.tapovan-place{max-width:none;padding:0 17px 0 0;font-size:14px;line-height:1.5;text-shadow:0 1px 2px rgba(10,18,26,.95),0 2px 14px rgba(10,18,26,.9)}
+.tapovan-place::before{left:auto;right:0;top:8px;box-shadow:none}
+.tapovan-place p+p{margin-top:7px;font-size:11px;line-height:1.5}
+.tapovan-progress{position:absolute;right:0;top:calc(100svh - 80px)}
+.tapovan-sticky::after{content:'';position:absolute;z-index:3;pointer-events:none;top:0;right:0;width:min(700px,65vw);height:210px;background:radial-gradient(ellipse at top right,rgba(9,18,27,.34),transparent 73%)}
+@media(max-width:700px){.tapovan-details{top:26px;right:22px;left:auto;bottom:auto;width:min(305px,79vw)}.tapovan-place{font-size:11px;padding-right:13px}.tapovan-place::before{top:6px}.tapovan-place p+p{font-size:10px;line-height:1.5}.tapovan-progress{top:calc(100svh - 74px)}.tapovan-sticky::after{width:100%;height:185px}}

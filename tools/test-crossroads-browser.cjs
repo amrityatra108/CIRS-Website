@@ -25,7 +25,7 @@ fs.mkdirSync(output,{recursive:true});
           function sample() {
             const intro=document.querySelector('[data-crossroads-intro]');
             const f=getComputedStyle(film),pen=getComputedStyle(document.querySelector('.crossroads-intro__pen'));
-            const title=getComputedStyle(document.querySelector('.crossroads-intro-title-art'));
+            const title=getComputedStyle(document.querySelector('.crossroads-intro__title'));
             const mark=getComputedStyle(document.querySelector('.crossroads-intro__mark'));
             const matrix=new DOMMatrix(pen.transform);
             window.handoffFrames.push({film:f.display!=='none'&&f.visibility!=='hidden'?Number(f.opacity):0,pen:Number(pen.opacity)*Number(mark.opacity),title:Number(title.opacity)*Number(mark.opacity),scaleX:matrix.a,scaleY:matrix.d});
@@ -55,7 +55,7 @@ fs.mkdirSync(output,{recursive:true});
     await p.screenshot({path:`${output}/crossroads-${name}-settled.png`});
     const frames=await p.evaluate(()=>window.handoffFrames);
     assert.ok(frames.length>20,'Sampled the handoff on rendered frames');
-    assert.equal(frames.filter(f=>f.film>0&&(f.pen>0||f.title>0)).length,0,'Film and SVG contours never overlap');
+    assert.equal(frames.filter(f=>f.film>0&&(f.pen>0||f.title>0)).length,0,'Film and the live title never overlap');
     assert.ok(frames.every(f=>Math.abs(f.scaleX-f.scaleY)<.0001),'Approved artwork keeps its proportions');
     results.push({test:`${name}: natural end, no contour overlap, uniform scaling, no overflow`,ended,settled,sampledFrames:frames.length,overlapFrames:0});
     await p.close();

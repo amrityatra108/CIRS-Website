@@ -79,8 +79,8 @@ setTimeout(function () {
 }, Math.max(0, 6000 - performance.now()));
 </script>
 <style>body.crossroads-intro-active :is(.progress,.ring,.totop,.jump,.footer-wrap){visibility:hidden!important}body.crossroads-intro-active .crossroads-intro{background:#000 url("assets/img/crossroads/opening-poster.jpg") center/cover no-repeat}</style><link rel="preload" as="image" href="assets/img/crossroads/opening-poster.jpg" fetchpriority="high">
-<link rel="preload" href="assets/js/crossroads-intro.js?b=115-crossroads-fixes-20260930-intro-13" as="script" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/crossroads-intro.css?b=115-crossroads-fixes-20260930-intro-12">
+<link rel="preload" href="assets/js/crossroads-intro.js?b=115-crossroads-fixes-20260930-intro-14" as="script" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/crossroads-intro.css?b=115-crossroads-fixes-20260930-intro-13">
 <link rel="stylesheet" href="assets/css/crossroads-archive.css?b=115-crossroads-fixes-20260930-title-2">
 <link rel="stylesheet" href="assets/css/crossroads-stories.css?b=115-crossroads-fixes-20260930-hover-5">
 <link rel="stylesheet" href="assets/css/crossroads-manuscript.css?b=115-crossroads-fixes-20260930">
@@ -321,7 +321,6 @@ setTimeout(function () {
     <div class="jump__panel" id="jumpPanel">
       <p aria-hidden="true">On this page</p>
       <a href="#top">The Crossroads</a>
-      <a href="#inside-the-issue">Open the magazine.</a>
       <a href="#statement">32 editions. Countless stories.</a>
       <a href="#about">A magazine the students run.</a>
       <a href="#archive">The archive</a>
@@ -345,12 +344,11 @@ setTimeout(function () {
     <div class="crossroads-intro__mark">
       <img class="crossroads-intro__pen" src="assets/img/crossroads/pen-logo.svg" alt="" aria-hidden="true" width="210" height="302">
       <div class="crossroads-intro__wordmark">
+        <p class="crossroads-intro__eyebrow">CIRS monthly magazine</p>
         <h1 class="crossroads-intro__title">
-          <span class="sr-only">The Crossroads</span>
-          <span class="crossroads-intro-title-line crossroads-intro-title-line--the" aria-hidden="true"><img class="crossroads-intro-title-art" src="assets/img/crossroads/title-restored.svg" alt="" width="4096" height="1368" decoding="async" fetchpriority="high"></span>
-          <span class="crossroads-intro-title-line crossroads-intro-title-line--crossroads" aria-hidden="true"><img class="crossroads-intro-title-art" src="assets/img/crossroads/title-restored.svg" alt="" width="4096" height="1368" decoding="async"></span>
+          <span>The</span> <span>Crossroads</span>
         </h1>
-        <p class="crossroads-intro__eyebrow">CIRS · The Student Magazine</p>
+        <p class="crossroads-intro__statement">Stories, ideas and moments from the CIRS community.</p>
       </div>
     </div>
     <div class="crossroads-intro__footer">
@@ -406,17 +404,6 @@ setTimeout(function () {
     </div>
     <a class="crossroads-archive-hero__feature" href="assets/documents/crossroads/crossroads-issue-32.pdf" aria-label="Read the latest issue: Issue 32 (PDF)"><img src="assets/img/crossroads/issue-32.jpg?b=115-crossroads-fixes-20260930" alt="" width="300" height="420" loading="lazy" decoding="async" fetchpriority="low"><span>Latest issue · Issue 32</span></a>
   </div>
-</section>
-
-<section class="rd-magazine" id="inside-the-issue" aria-labelledby="rd-magazine-title">
- <div class="rd-magazine__stage">
-  <header><p>Inside The Crossroads · Issue 32</p><h2 id="rd-magazine-title">Open the magazine.</h2><p>August 2026 · Independence Day Issue</p><a href="assets/documents/crossroads/crossroads-issue-32.pdf">Read Issue 32 (PDF) ↗</a><a href="#archive">Choose another edition ↓</a></header>
-  <div class="rd-magazine__papers">
-   <figure class="rd-magazine__cover"><a href="assets/documents/crossroads/crossroads-issue-32.pdf"><img src="assets/img/crossroads/issue-32.jpg" alt="The genuine cover of The Crossroads, Issue 32" width="300" height="420" loading="lazy"></a><figcaption>01 · Cover</figcaption></figure>
-   <figure class="rd-magazine__inside"><a href="assets/documents/crossroads/crossroads-issue-32.pdf"><img src="assets/img/crossroads/issue-32-inside.webp" alt="Issue 32 contents page, with its original photograph and list of features" width="702" height="998" loading="lazy"></a><figcaption>02 · Contents · PDF page 2</figcaption></figure>
-  </div>
-  <p class="rd-magazine__details">03 · Edition details<br>24 pages. The original magazine, complete and available to download.</p>
- </div>
 </section>
 
 <section class="crossroads-stories" id="statement" aria-labelledby="crossroads-stories-heading" data-crossroads-stories>
@@ -1082,7 +1069,38 @@ setTimeout(function () {
           </a>
         </div>
       </article>
+    </div>    <div class="cr-coconut" data-crossroads-coconut data-state="idle" data-clicks="0">
+      <div class="cr-coconut__scene" aria-hidden="true">
+        <span class="cr-coconut__ground"></span>
+        <div class="cr-coconut__tree">
+          <svg viewBox="0 0 72 96" shape-rendering="crispEdges" focusable="false">
+            <path fill="#62402d" d="M11 91h12V73h3V55h3V37h3V22h-9v24h-3v24h-3v18h-6z"/>
+            <path fill="#b7834c" d="M14 88h6V73h3V55h3V37h3V25h-3v21h-3v24h-3v18z"/>
+            <path fill="#e0ac66" d="M23 40h6v3h-6zm-3 15h6v3h-6zm-3 18h6v3h-6zm-3 12h6v3h-6z"/>
+            <g class="cr-coconut__crown">
+              <path fill="#294b32" d="M30 24h-9v-3h-9v3H6v6H3v9h6v-6h6v-6h15zm3 0H21v-6H12v-6H6V9h15v3h9v6h6zm3 0h6v-6h9v-3h15v6H54v3H45v6h-9zm0 0h15v3h9v6h6v12h-6v-9h-9v-3h-9v-3h-6zm-6 0h9V12h3V3h-9v6h-6v9h3zm0 3h-9v6h-6v9h-3v9h6v-6h3v-6h6v-6h6z"/>
+              <path fill="#548548" d="M9 27h6v-3h9v-3h6v3H21v3h-6v3H9zm3-15h9v3h9v6h-3v-3h-9v-3h-6zm24 6h3V6h-3v6h-3v9h3zm6 3h9v-3h12v3H51v3h-9zm0 6h9v3h9v6h-3v-3h-9v-3h-6zm-18 6h6v-6h3v6h-6v6h-3v6h-3v-9h3z"/>
+              <path fill="#8caf5d" d="M12 24h9v-3h9v3H15v3h-3zm24-15h3V6h-3zm12 9h12v3H48z"/>
+              <path fill="#62402d" d="M24 27h6v3h3v6h-3v3h-6v-3h-3v-6h3zm12 0h6v3h3v6h-3v3h-6v-3h-3v-6h3z"/>
+              <path fill="#bb8651" d="M24 30h6v3h-3v3h-3zm12 0h6v3h-3v3h-3z"/>
+            </g>
+            <path fill="#7c9251" d="M6 91h6v-3h3v3h9v-3h3v3h3v3H6z"/>
+          </svg>
+        </div>
+        <div class="cr-coconut__rain"></div>
+      </div>
+      <button class="cr-coconut__button" type="button" aria-label="A little coconut. Tap to investigate." aria-disabled="false">
+        <svg class="cr-coconut__seed" viewBox="0 0 24 20" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
+          <path fill="#563a2b" d="M6 2h10v2h4v4h2v8h-4v2H6v-2H2V8h2V4h2z"/>
+          <path fill="#93623d" d="M6 4h10v2h4v8h-4v2H6v-2H4V8h2z"/>
+          <path fill="#c0925f" d="M8 4h6v2H8zM6 6h2v6H6zM8 12h2v2H8z"/>
+          <path fill="#563a2b" d="M14 7h2v2h-2zm4 3h2v2h-2zm-5 3h2v2h-2z"/>
+        </svg>
+      </button>
+      <span class="sr-only" role="status" aria-live="polite" aria-atomic="true"></span>
     </div>
+
+
   </div>
 </section>
 
@@ -1098,6 +1116,9 @@ setTimeout(function () {
     </p>
   </div>
 </section>
+
+<link rel="stylesheet" href="assets/css/crossroads-coconut.css?v=1">
+<script src="assets/js/crossroads-coconut.js?v=1" defer></script>
 <section class="uc">
   <div class="wrap uc__inner">
     <span class="uc__mark" aria-hidden="true">
@@ -1211,7 +1232,7 @@ setTimeout(function () {
   </div>
 </footer>
 </div>
-<script src="assets/js/crossroads-intro.js?b=115-crossroads-fixes-20260930-intro-13" defer></script>
+<script src="assets/js/crossroads-intro.js?b=115-crossroads-fixes-20260930-intro-14" defer></script>
 <!-- The motion layer, served from this site rather than from a CDN. See
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before

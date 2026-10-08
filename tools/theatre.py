@@ -794,9 +794,8 @@ def intermission_html():
 
 # -------------------------------------------------------------- Act II
 
-# The pictures that carry the cinematic gallery: one track a house, finite,
-# in the order the viewer steps through. The lead is not in the track: it is
-# the chapter's opening frame, above it.
+# Each house's photographs continue vertically in their original order.
+# The lead is the chapter's opening frame, above the remaining photographs.
 
 def _reel(h):
     photos = house_photos(h)[1:]
@@ -805,26 +804,20 @@ def _reel(h):
     for k, p in enumerate(photos):
         w, hh = dims(p)
         slides.append(
-            f'            <li class="th-reel__slide" style="--ar:{w}/{hh};--arn:{w / hh:.4f}">\n'
+            f'            <li class="th-reel__slide" style="--ar:{w}/{hh}">\n'
             f'              <figure class="th-fig">\n'
             f'                <a class="th-photo" href="{file(p, widths(p)[-1])}" data-th-open="{h["id"]}:{k + 1}">'
-            f'{img(p, "(min-width: 761px) 100vh, 100vw")}</a>\n'
+            f'{img(p, "(min-width: 1440px) 1320px, 100vw")}</a>\n'
             f'                <figcaption class="th-cap">{esc(p["caption"])}</figcaption>\n'
             f'              </figure>\n'
             f'            </li>')
-    arrow_l = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M11 3.5L5.5 9l5.5 5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-    arrow_r = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M7 3.5L12.5 9 7 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     return f'''      <div class="th-reel" data-reel data-total="{total}">
         <div class="wrap th-reel__bar">
-          <p class="th-reel__id"><span class="th-reel__house">{h["name"]}</span><span class="th-reel__count"><span data-reel-now>02</span> / {total}</span></p>
-          <div class="th-reel__ctl" data-reel-ctl hidden>
-            <button type="button" class="th-reel__btn" data-reel-step="-1" aria-label="Previous photograph, {h["name"]} House">{arrow_l}</button>
-            <button type="button" class="th-reel__btn" data-reel-step="1" aria-label="Next photograph, {h["name"]} House">{arrow_r}</button>
-          </div>
+          <p class="th-reel__id"><span class="th-reel__house">{h["name"]}</span><span class="th-reel__count">{total} photographs</span></p>
         </div>
         <details class="th-reel__set" open>
           <summary class="th-reel__sum">View photographs <span class="th-reel__sumn">{len(photos)}</span></summary>
-          <section class="th-reel__viewport" aria-label="{h["name"]} House photographs" tabindex="0" data-reel-track>
+          <section class="th-reel__viewport" aria-label="{h["name"]} House photographs" data-reel-track>
             <ul class="th-reel__track">
 {chr(10).join(slides)}
             </ul>

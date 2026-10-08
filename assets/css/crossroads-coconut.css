@@ -1,0 +1,49 @@
+/* An archive-margin Easter egg. All artwork stays inside its own patch. */
+.crossroads-archive-list > .wrap { position:relative; }
+.cr-coconut {
+  position:relative; left:calc(8px - var(--gut)); width:216px; height:324px; margin:40px 0 0;
+  isolation:isolate; contain:layout paint; pointer-events:none;
+}
+.cr-coconut__scene { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.cr-coconut__tree { position:absolute; left:0; bottom:30px; width:216px; height:288px; visibility:hidden; }
+.cr-coconut__tree svg { display:block; width:100%; height:100%; }
+.cr-coconut__ground { position:absolute; bottom:22px; left:12px; width:72px; height:6px; background:#c7b796; opacity:.45; }
+.cr-coconut__button {
+  position:absolute; bottom:20px; left:24px; display:grid; place-items:center;
+  width:48px; height:48px; padding:0; border:0; border-radius:0;
+  background:transparent; cursor:pointer; pointer-events:auto; touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.cr-coconut__seed { display:block; width:36px; height:30px; overflow:visible; }
+.cr-coconut__button:hover .cr-coconut__seed { transform:translateY(-3px); }
+.cr-coconut__button:focus-visible { outline:2px dashed #584367; outline-offset:4px; }
+.cr-coconut__button[aria-disabled="true"] { cursor:default; }
+.cr-coconut__button[aria-disabled="true"] .cr-coconut__seed { visibility:hidden; }
+.cr-coconut[data-state="growing"] .cr-coconut__tree,
+.cr-coconut[data-state="raining"] .cr-coconut__tree { visibility:visible; }
+.cr-coconut[data-state="growing"] .cr-coconut__tree { animation:cr-coconut-grow 1200ms steps(12,end) both; }
+.cr-coconut[data-state="growing"] .cr-coconut__crown { transform-origin:36px 27px; animation:cr-coconut-unfurl 450ms 750ms steps(4,end) both; }
+.cr-coconut__drop {
+  position:absolute; top:48px; width:27px; height:24px; opacity:0;
+  animation:cr-coconut-fall 1400ms var(--delay) steps(18,end) both;
+}
+.cr-coconut__drop svg { display:block; width:100%; height:100%; }
+.cr-coconut[data-reduced] .cr-coconut__tree,
+.cr-coconut[data-reduced] .cr-coconut__crown { animation:none; }
+.cr-coconut[data-reduced] .cr-coconut__drop { top:auto; bottom:25px; opacity:1; animation:none; }
+@keyframes cr-coconut-grow { from { clip-path:inset(100% 0 0); } to { clip-path:inset(0); } }
+@keyframes cr-coconut-unfurl { from { transform:scale(.2); } to { transform:scale(1); } }
+@keyframes cr-coconut-fall {
+  0% { opacity:0; transform:translate(0,-30px) rotate(0deg); }
+  8% { opacity:1; }
+  78% { opacity:1; transform:translate(var(--drift),235px) rotate(var(--turn)); }
+  88% { opacity:1; transform:translate(var(--drift),215px) rotate(var(--turn)); }
+  100% { opacity:0; transform:translate(var(--drift),240px) rotate(var(--turn)); }
+}
+@media(min-width:1024px) {
+  .cr-coconut { left:calc((100vw - 100%) / -2 + 8px); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .cr-coconut__tree,.cr-coconut__crown,.cr-coconut__drop { animation:none !important; }
+  .cr-coconut__button:hover .cr-coconut__seed { transform:none; }
+}

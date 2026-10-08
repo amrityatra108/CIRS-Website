@@ -153,6 +153,14 @@ def main():
                     continue  # Rejected generation, retained locally but not used.
                 wanted.add(os.path.relpath(os.path.join(directory, name), ROOT).replace(os.sep, "/"))
 
+    # Keep standalone runtime modules, textures and licensing together.
+    for page in mod.PAGES.values():
+        bundle = page.get("asset_bundle")
+        if bundle:
+            for directory, _, names in os.walk(os.path.join(ROOT, bundle)):
+                wanted.update(os.path.relpath(os.path.join(directory, name), ROOT).replace(os.sep, "/")
+                              for name in names)
+
     # Distribute the font licenses and provenance alongside the self-hosted files.
     for directory, _, names in os.walk(os.path.join(ROOT, "assets/fonts/licenses")):
         wanted.update(os.path.relpath(os.path.join(directory, name), ROOT).replace(os.sep, "/")

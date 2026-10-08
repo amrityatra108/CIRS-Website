@@ -1,0 +1,33 @@
+/* A single crop/layout anchors the altar, live plaque and live emblem. */
+.cirs-handoff-placeholder{height:100svh;width:100%;pointer-events:none}
+.cirs-hero.is-auto-dissolving{position:fixed;inset:0;z-index:1000;pointer-events:none;will-change:opacity}
+#spiritual:focus{outline:none}
+.sanctuary-plate,.sanctuary-plate img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sanctuary-plate{z-index:-1;pointer-events:none}
+.sanctuary-plate img{object-fit:cover;object-position:center}
+#spiritual .atmosphere{display:none}
+.emblem-contact-shadow{position:absolute;pointer-events:none;left:var(--shadow-x,50%);top:var(--shadow-y,64%);width:var(--shadow-width,16%);height:var(--shadow-height,1.6%);transform:translate(-50%,-50%);opacity:.18;background:radial-gradient(ellipse,#514737 0%,#70604a66 35%,transparent 72%);border-radius:50%}
+#spiritual .invocation{position:absolute;z-index:4;left:var(--plaque-x,50%);top:var(--plaque-y,74.8%);width:var(--plaque-width,28.6%);height:var(--plaque-height,6.7%);margin:0;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.1;font-size:clamp(14px,1.75vw,32px);font-weight:400;letter-spacing:-.035em;color:#725323;text-shadow:0 1px 0 #fff8;transform:translate(-50%,-50%);opacity:1;transition:none;pointer-events:none}
+#spiritual .footer{bottom:16px}
+#spiritual .footer-row{justify-content:flex-end}
+#spiritual .hint{position:absolute;left:0;bottom:13px;color:#574b3c}
+#spiritual .actions{gap:22px}
+#spiritual .masthead{top:28px}
+#spiritual .wordmark{font-weight:400}
+#spiritual .fallback{left:var(--emblem-x,50%);top:var(--emblem-y,36.1%);width:calc(var(--emblem-height,51.5vh) * .61635);height:var(--emblem-height,51.5vh);position:absolute;right:auto;bottom:auto;transform:translate(-50%,-50%)}
+#spiritual .fallback img{width:100%;height:100%}
+#spiritual.plate-unavailable{background:radial-gradient(ellipse at 50% 40%,#fffaf0,#dfcfb6)}
+@media(max-aspect-ratio:4/5){
+  #spiritual{min-height:620px}
+  #spiritual .masthead{top:24px;left:22px;right:22px}
+  #spiritual .wordmark{font-size:24px}
+  #spiritual .invocation{font-size:clamp(13px,3.35vw,23px);letter-spacing:-.025em;text-wrap:balance;padding:0 3px}
+  #spiritual .footer{left:16px;right:16px;bottom:24px}
+  #spiritual .footer-row{flex-direction:column;gap:6px}
+  #spiritual .hint{position:static;font-size:12px;text-align:center}
+  #spiritual .actions{gap:12px;flex-wrap:wrap;justify-content:center}
+  #spiritual .actions button{font-size:12px;min-height:44px}
+}
+@media(max-height:600px) and (min-aspect-ratio:4/5){#spiritual{min-height:440px}#spiritual .hint{display:none}#spiritual .footer{bottom:5px}#spiritual .masthead{top:18px}#spiritual .invocation{font-size:2vw}}
+
+.sanctuary-review{position:fixed;right:12px;top:75px;z-index:10001;background:#282119ee;color:#fff;padding:10px;display:flex;gap:14px;align-items:center;font:12px Arial,sans-serif;max-width:95vw;flex-wrap:wrap}.sanctuary-review button{color:#fff;font:12px Arial,sans-serif}.sanctuary-review output{max-width:260px}
