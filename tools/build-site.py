@@ -1162,12 +1162,13 @@ def news_article_html(page):
                 f'    </aside>\n')
     elif art.get("festival"):
         # The report of Anand Utsav 2026 (tools/anandutsav.py): the school's
-        # own text, with the photographs published beside Chinmaya Mission's
-        # report of the festival.
+        # own text and cover photograph, with the other photographs published
+        # beside Chinmaya Mission's report of the festival.
         edition = "Anand Utsav 2026"
         rail = (f'    <aside class="art__rail" aria-label="About this report">\n'
-                f'      <p>Photographs published with</p>\n'
-                f'      <strong>Chinmaya Mission&rsquo;s<br>report of the festival</strong>\n'
+                f'      <p>Photographs</p>\n'
+                f'      <strong>The cover is the school&rsquo;s own;<br>the rest were published with<br>'
+                f'Chinmaya Mission&rsquo;s report</strong>\n'
                 f'      <a href="{esc(anandutsav.SOURCE_URL, attr=True)}" target="_blank" rel="noopener">'
                 f'Read that report <span aria-hidden="true">&#8599;</span></a>\n'
                 f'      <a href="anand-utsav-2026-schedule.html">The schedule, from the bulletin</a>\n'
