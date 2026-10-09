@@ -42,6 +42,7 @@ import blogposts
 import newsarticles
 import cvpnews
 import sakshi
+import anandutsav
 import crossroads
 import mathchallenge
 import creativewriting
@@ -1157,6 +1158,19 @@ def news_article_html(page):
                 f'      <strong>{esc(sakshi.ISSUE)},<br>{esc(sakshi.ISSUE_LINE)}</strong>\n'
                 + (f'      <p>{esc(art["who"])}</p>\n' if art.get("who") else "") +
                 f'      <a href="news.html#sakshi">More from the bulletin</a>\n'
+                f'      <a href="news.html">All CIRS news</a>\n'
+                f'    </aside>\n')
+    elif art.get("festival"):
+        # The report of Anand Utsav 2026 (tools/anandutsav.py): the school's
+        # own text, with the photographs published beside Chinmaya Mission's
+        # report of the festival.
+        edition = "Anand Utsav 2026"
+        rail = (f'    <aside class="art__rail" aria-label="About this report">\n'
+                f'      <p>Photographs published with</p>\n'
+                f'      <strong>Chinmaya Mission&rsquo;s<br>report of the festival</strong>\n'
+                f'      <a href="{esc(anandutsav.SOURCE_URL, attr=True)}" target="_blank" rel="noopener">'
+                f'Read that report <span aria-hidden="true">&#8599;</span></a>\n'
+                f'      <a href="anand-utsav-2026-schedule.html">The schedule, from the bulletin</a>\n'
                 f'      <a href="news.html">All CIRS news</a>\n'
                 f'    </aside>\n')
     else:
@@ -2606,7 +2620,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
 # not in MENU — the Blog is how a reader reaches them.
 # The school's own news reports, one page each. They are not in MENU — the
 # News page is how a reader reaches them, exactly as the Blog is for articles.
-for _art in newsarticles.ARTICLES + cvpnews.ARTICLES + sakshi.ARTICLES:
+for _art in newsarticles.ARTICLES + cvpnews.ARTICLES + sakshi.ARTICLES + anandutsav.ARTICLES:
     PAGES[_art["slug"]] = {
         "nav": esc(_art["title"]),
         "title": esc(_art["title"], attr=True) + " | CIRS News",
