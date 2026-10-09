@@ -66,6 +66,16 @@ mirror, and never suggest replacing the whole live site with this repository's b
 - **Certificate error**: the host's certificate is issued to its shared server name
   (`mis.domain2space.in`), not to ftp.cirschool.org. If the host changes it, the owner
   checks the new name in FileZilla and sets `CIRS_FTP_TLS_HOSTNAME` in `.env`.
+- **"the host closed the connection ... logging in again"** while uploading: expected, not
+  a fault. The host drops a session after about sixty uploads; the tool logs in again and
+  sends the file it cut off from the start, then carries on, and says how many times it
+  did at the end. Only if it stops with **"could not send ..."** (five tries on one file)
+  has something else gone wrong: run the same command again, which is safe because the
+  manifest of what is published is written last. Do not upload anything by hand.
+- **One run at a time.** Every run, `--dry-run` included, rebuilds and re-stages the shared
+  `_site/` folder, so two runs (two sessions, say) pull files out from under each other:
+  an upload then stops with "No such file or directory" under `_site/`. Before starting,
+  check nothing else is running the tool, and wait for it if so.
 - **"the live site does not match"** after a publish: run the same command again. A file
   that failed mid-upload is published again. If it still fails, report which files and
   encodings are wrong. Do not upload anything by hand.

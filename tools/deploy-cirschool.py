@@ -41,7 +41,11 @@ What a run does:
    those changes those pages too. Then asks, unless --go or --dry-run.
 5. Uploads assets before pages, so no new page goes live pointing at a file
    that is not there yet. Each text file goes up with fresh .br and .gz copies
-   wherever the server's convention calls for them.
+   wherever the server's convention calls for them. The host closes a session
+   after about sixty uploads; when it does, the script logs in again and sends
+   the file it cut off from the start (see Uploader), so a large publish gets
+   through, and a run that gives up leaves the old manifest in place so that
+   running it again is safe.
 6. Writes the manifest, then fetches every published page, stylesheet and
    script back from https://cirschool.org as Brotli, as gzip and uncompressed,
    and fails loudly if any of the three is not the file just published.
@@ -247,26 +251,46 @@ class FTPS(ftplib.FTP_TLS):
         return conn, size
 
 
-def connect(settings, password):
-    context = ssl.create_default_context(cafile=settings.get("CIRS_FTP_CAFILE") or None)
-    ftp = FTPS(context=context, timeout=90)
-    ftp.tls_hostname = settings["CIRS_FTP_TLS_HOSTNAME"]
-    ftp.encoding = "utf-8"
-    try:
-        ftp.connect(settings["CIRS_FTP_HOST"], int(settings["CIRS_FTP_PORT"]))
-        ftp.login(settings["CIRS_FTP_USER"], password)
-        ftp.prot_p()
-    except ssl.SSLCertVerificationError as error:
-        fail(f"the server's security certificate did not check out ({error.verify_message}).\n"
-             f"It is checked against the name {ftp.tls_hostname!r} (CIRS_FTP_TLS_HOSTNAME in .env).\n"
-             "If the host has changed its certificate, open the site in FileZilla, note the\n"
-             "'Common name' it shows, and put that in .env.")
-    except ftplib.error_perm as error:
-        fail(f"the server refused the login: {error}")
-    except (OSError, EOFError) as error:
-        fail(f"could not reach {settings['CIRS_FTP_HOST']}: {error}")
-    ftp.set_pasv(True)
-    return ftp
+# Errors that mean "this connection is gone or went wrong", as opposed to "the
+# server understood and said no". The host closes a session after about sixty
+# uploads, which surfaces as EOFError (ftplib's word for the server hanging up
+# on a command), or as a reset or timeout (OSError), or as a 4xx reply.
+DROPPED = (EOFError, OSError, ftplib.error_temp, ftplib.error_reply, ftplib.error_proto)
+# How many times one file is sent before the run stops, and how many times a
+# login is tried after a drop. Each retry waits a little longer than the last.
+SEND_ATTEMPTS = 5
+LOGIN_ATTEMPTS = 5
+
+
+def connect(settings, password, patient=False):
+    """Open the FTPS connection. `patient` is for logging in again after the
+    host has dropped one: a refusal then may only mean the old session has not
+    finished closing, so the login is tried a few times before giving up."""
+    attempts = LOGIN_ATTEMPTS if patient else 1
+    for attempt in range(attempts):
+        context = ssl.create_default_context(cafile=settings.get("CIRS_FTP_CAFILE") or None)
+        ftp = FTPS(context=context, timeout=90)
+        ftp.tls_hostname = settings["CIRS_FTP_TLS_HOSTNAME"]
+        ftp.encoding = "utf-8"
+        try:
+            ftp.connect(settings["CIRS_FTP_HOST"], int(settings["CIRS_FTP_PORT"]))
+            ftp.login(settings["CIRS_FTP_USER"], password)
+            ftp.prot_p()
+        except ssl.SSLCertVerificationError as error:
+            fail(f"the server's security certificate did not check out ({error.verify_message}).\n"
+                 f"It is checked against the name {ftp.tls_hostname!r} (CIRS_FTP_TLS_HOSTNAME in .env).\n"
+                 "If the host has changed its certificate, open the site in FileZilla, note the\n"
+                 "'Common name' it shows, and put that in .env.")
+        except ftplib.error_perm as error:
+            fail(f"the server refused the login: {error}")
+        except DROPPED as error:
+            ftp.close()
+            if attempt == attempts - 1:
+                fail(f"could not reach {settings['CIRS_FTP_HOST']}: {error}")
+            time.sleep(3 * (attempt + 1))
+        else:
+            ftp.set_pasv(True)
+            return ftp
 
 
 def remote_path(settings, rel):
@@ -311,8 +335,46 @@ def read_remote(ftp, settings, rel):
 
 
 class Uploader:
-    def __init__(self, ftp, settings):
+    """Sends files over one FTPS connection, and carries on when the host drops it.
+
+    cirschool.org's host closes a session after roughly sixty uploads (the next
+    command meets a closed socket and ftplib raises EOFError), and a publish of
+    a few hundred files meets that several times. So a file that fails because
+    the connection went is not a failed publish: the connection is replaced by
+    a fresh login (`reconnect`) and that same file is sent again from the start.
+    A file is stored whole or not at all as far as this script is concerned:
+    the manifest that says what is published is written last, so a run that
+    does give up leaves the old manifest in place, and running again sends
+    everything that is still to send.
+    """
+
+    def __init__(self, ftp, settings, reconnect=None):
         self.ftp, self.settings, self.made = ftp, settings, set()
+        self.reconnect = reconnect
+        self.reconnects = 0
+
+    def replace_connection(self, rel, error):
+        """Throw the dropped connection away and log in again."""
+        self.reconnects += 1
+        say(f"  the host closed the connection at {rel} ({type(error).__name__}); "
+            f"logging in again (#{self.reconnects})")
+        try:
+            self.ftp.close()
+        except (OSError, AttributeError):
+            pass
+        self.ftp = self.reconnect()
+
+    def close(self):
+        """End the session politely, if there is still one to end."""
+        if getattr(self.ftp, "sock", None) is None:
+            return
+        try:
+            self.ftp.quit()
+        except DROPPED + (AttributeError,):
+            try:
+                self.ftp.close()
+            except (OSError, AttributeError):
+                pass
 
     def ensure_dir(self, rel_dir):
         parts = [p for p in rel_dir.split("/") if p]
@@ -327,16 +389,23 @@ class Uploader:
             self.made.add(sub)
 
     def put(self, rel, data):
-        self.ensure_dir(posixpath.dirname(rel))
         target = remote_path(self.settings, rel)
-        for attempt in range(3):
+        for attempt in range(SEND_ATTEMPTS):
             try:
+                self.ensure_dir(posixpath.dirname(rel))
                 self.ftp.storbinary("STOR " + target, io.BytesIO(data), blocksize=65536)
                 return
-            except (ftplib.error_temp, OSError):
-                if attempt == 2:
-                    raise
+            except ftplib.error_perm as error:
+                # The server understood and said no (no space, no permission):
+                # sending it again will not change the answer.
+                fail(f"the server refused {rel}: {error}")
+            except DROPPED as error:
+                if attempt == SEND_ATTEMPTS - 1 or self.reconnect is None:
+                    fail(f"could not send {rel} after {attempt + 1} attempt(s): {error}\n"
+                         "Nothing is recorded as published (the manifest is written last), so\n"
+                         "running the same command again is safe and sends what is still to send.")
                 time.sleep(2 + attempt * 3)
+                self.replace_connection(rel, error)
 
 
 # ------------------------------------------------------------------ HTTP ----
@@ -647,7 +716,9 @@ def deploy(args):
             return
 
     say("\n4/5  Uploading")
-    up = Uploader(ftp, settings)
+    # The host drops a session after about sixty uploads; see Uploader.
+    up = Uploader(ftp, settings,
+                  reconnect=lambda: connect(settings, password_for(settings, interactive), patient=True))
     for i, rel in enumerate(order, 1):
         data = open(os.path.join(SITE, *rel.split("/")), "rb").read()
         up.put(rel, data)
@@ -666,7 +737,9 @@ def deploy(args):
                   for r, i in local.items()},
     })
     up.put(MANIFEST, json.dumps(record, indent=1, sort_keys=True).encode("utf-8"))
-    ftp.quit()
+    up.close()
+    if up.reconnects:
+        say(f"\n(The host dropped the connection {up.reconnects} time(s); each file it cut off was sent again.)")
 
     say(f"\n5/5  Checking {settings['CIRS_SITE_URL']}")
     web = Web(settings["CIRS_SITE_URL"])
