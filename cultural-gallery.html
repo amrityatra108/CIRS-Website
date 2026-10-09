@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arts, Music & Theatre</title>
-<meta name="description" content="Music, theatre and the visual arts at Chinmaya International Residential School, as a wall of the school's photographs.">
+<meta name="description" content="Music, theatre, the visual arts, festivals and students' own work at Chinmaya International Residential School, as a wall of the school's photographs.">
 <meta name="theme-color" content="#11110F">
 <link rel="canonical" href="https://www.cirschool.org/cultural-gallery.html">
 <!-- The crest, with its own transparent ground — cut by tools/make-favicon.py
@@ -17,21 +17,21 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Arts, Music & Theatre">
-<meta property="og:description" content="Music, theatre and the visual arts at Chinmaya International Residential School, as a wall of the school's photographs.">
+<meta property="og:description" content="Music, theatre, the visual arts, festivals and students' own work at Chinmaya International Residential School, as a wall of the school's photographs.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Arts, Music & Theatre">
-<meta name="twitter:description" content="Music, theatre and the visual arts at Chinmaya International Residential School, as a wall of the school's photographs.">
+<meta name="twitter:description" content="Music, theatre, the visual arts, festivals and students' own work at Chinmaya International Residential School, as a wall of the school's photographs.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preload" href="assets/js/navigation.js?b=115-core-3" as="script" fetchpriority="high">
+<link rel="preload" href="assets/js/navigation.js?b=115-gallery-1-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=115">
-<link rel="stylesheet" href="assets/css/cirs.css?b=115">
-<link rel="stylesheet" href="assets/css/pages.css?b=115-lightbox-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=115-gallery-1">
+<link rel="stylesheet" href="assets/css/cirs.css?b=115-gallery-1">
+<link rel="stylesheet" href="assets/css/pages.css?b=115-gallery-1-lightbox-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -40,9 +40,9 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/artswall.css?b=115">
-<link rel="stylesheet" href="assets/css/typography.css?b=115">
-<link rel="stylesheet" href="assets/css/drawer.css?b=115-nav-5">
+<link rel="stylesheet" href="assets/css/artswall.css?b=115-gallery-1">
+<link rel="stylesheet" href="assets/css/typography.css?b=115-gallery-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=115-gallery-1-nav-5">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -275,7 +275,7 @@
   </div>
 </div>
 <main id="main">
-<script src="assets/js/navigation.js?b=115-core-3"></script>
+<script src="assets/js/navigation.js?b=115-gallery-1-core-3"></script>
 <div id="grain-overlay"></div>
 <canvas id="global-canvas" aria-hidden="true"></canvas>
 
@@ -292,7 +292,7 @@
   </div>
 </div>
 
-<section id="p1-wrap" tabindex="-1" aria-label="Arts, music and theatre at CIRS, as an infinite cylindrical field of photographs. Drag, swipe, scroll or use the arrow keys to explore; select a photograph to open it.">
+<section id="p1-wrap" tabindex="-1" aria-label="The CIRS Cultural Gallery: the school's arts, music, theatre, festivals and students' own work, as an infinite cylindrical field of photographs. Drag, swipe, scroll or use the arrow keys to explore; select a photograph to open it.">
   <div class="p1-hud hud-br" id="p1-hint">Drag // Explore the cylinder</div>
   <div id="p1-viewport"><div id="p1-stage"></div></div>
   <div class="p1-hero">
@@ -305,81 +305,921 @@
 </section>
 
 <template id="wall-plates">
-    <a href="assets/img/arts/guitars.jpg"><img src="assets/img/arts/thumbs/guitars.jpg" alt="Guitars, in the music room" data-cat="Music"></a>
-    <a href="assets/img/arts/tabla.jpg"><img src="assets/img/arts/thumbs/tabla.jpg" alt="Tabla and percussion" data-cat="Music"></a>
-    <a href="assets/img/arts/band.jpg"><img src="assets/img/arts/thumbs/band.jpg" alt="The band, outside the block" data-cat="Music"></a>
-    <a href="assets/img/arts/bharatanatyam.jpg"><img src="assets/img/arts/thumbs/bharatanatyam.jpg" alt="Bharatanatyam, under the lights" data-cat="Dance"></a>
-    <a href="assets/img/arts/ensemble.jpg"><img src="assets/img/arts/thumbs/ensemble.jpg" alt="The ensemble, mid-phrase" data-cat="Dance"></a>
-    <a href="assets/img/arts/juniors.jpg"><img src="assets/img/arts/thumbs/juniors.jpg" alt="The junior school on stage" data-cat="Dance"></a>
-    <a href="assets/img/arts/dance.jpg"><img src="assets/img/arts/thumbs/dance.jpg" alt="Bharatanatyam, New Year" data-cat="Dance"></a>
-    <a href="assets/img/arts/stage.jpg"><img src="assets/img/arts/thumbs/stage.jpg" alt="Annual day, on stage" data-cat="Dance"></a>
-    <a href="assets/img/arts/mime.jpg"><img src="assets/img/arts/thumbs/mime.jpg" alt="Mime, in white masks" data-cat="Theatre"></a>
-    <a href="assets/img/arts/tableau.jpg"><img src="assets/img/arts/thumbs/tableau.jpg" alt="In costume, a tableau" data-cat="Theatre"></a>
-    <a href="assets/img/arts/masks.jpg"><img src="assets/img/arts/thumbs/masks.jpg" alt="Masks, made for the stage" data-cat="Theatre"></a>
-    <a href="assets/img/arts/banner.jpg"><img src="assets/img/arts/thumbs/banner.jpg" alt="Painting the banner" data-cat="Visual Art"></a>
-    <a href="assets/img/arts/exhibition.jpg"><img src="assets/img/arts/thumbs/exhibition.jpg" alt="The exhibition, being read" data-cat="Visual Art"></a>
-    <a href="assets/img/arts/handwork.jpg"><img src="assets/img/arts/thumbs/handwork.jpg" alt="Handwork, on display" data-cat="Visual Art"></a>
-    <a href="assets/img/arts/floorwork.jpg"><img src="assets/img/arts/thumbs/floorwork.jpg" alt="Working on the floor" data-cat="Visual Art"></a>
-    <a href="assets/img/arts/paint1.jpg"><img src="assets/img/arts/thumbs/paint1.jpg" alt="Rain, Grade IV" data-cat="Student Work"></a>
-    <a href="assets/img/arts/paint2.jpg"><img src="assets/img/arts/thumbs/paint2.jpg" alt="Blossom and lamplight" data-cat="Student Work"></a>
-    <a href="assets/img/arts/paint3.jpg"><img src="assets/img/arts/thumbs/paint3.jpg" alt="Sun and butterfly, Grade IV" data-cat="Student Work"></a>
-    <a href="assets/img/arts/paint4.jpg"><img src="assets/img/arts/thumbs/paint4.jpg" alt="At the window, Grade VIII" data-cat="Student Work"></a>
-    <a href="assets/img/arts/paint5.jpg"><img src="assets/img/arts/thumbs/paint5.jpg" alt="Figure with birds, Grade XII" data-cat="Student Work"></a>
-    <a href="assets/img/arts/amphitheatre.jpg"><img src="assets/img/arts/thumbs/amphitheatre.jpg" alt="The amphitheatre, after dark" data-cat="The Stage"></a>
-    <a href="assets/img/arts/festival.jpg"><img src="assets/img/arts/thumbs/festival.jpg" alt="The festival stage, set" data-cat="The Stage"></a>
-    <a href="assets/img/arts/spic-sarod.jpg"><img src="assets/img/arts/thumbs/spic-sarod.jpg" alt="A visiting recital, strings and tabla" data-cat="SPIC MACAY"></a>
-    <a href="assets/img/arts/spic-kathakali.jpg"><img src="assets/img/arts/thumbs/spic-kathakali.jpg" alt="Visiting artists, in full costume" data-cat="SPIC MACAY"></a>
-    <a href="assets/img/arts/spic-dancers.jpg"><img src="assets/img/arts/thumbs/spic-dancers.jpg" alt="Visiting dancers, held mid-figure" data-cat="SPIC MACAY"></a>
-    <a href="assets/img/arts/spic-dancer.jpg"><img src="assets/img/arts/thumbs/spic-dancer.jpg" alt="A visiting dancer, alone on stage" data-cat="SPIC MACAY"></a>
-    <a href="assets/img/arts/spic-concert.jpg"><img src="assets/img/arts/thumbs/spic-concert.jpg" alt="A SPIC MACAY concert, on stage" data-cat="SPIC MACAY"></a>
-    <a href="assets/img/arts/spic-tabla.jpg"><img src="assets/img/arts/thumbs/spic-tabla.jpg" alt="A visiting tabla player" data-cat="SPIC MACAY"></a>
-    <a href="https://drive.google.com/thumbnail?id=1ovsB76NFcBwwwZaMEAT1YkaZoUiO4w1e&sz=w1600"><img src="assets/img/arts/thumbs/drive-01.jpg" alt="CIRS cultural gallery photograph 01" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1D5yQyB1q4xdDp-Q5iy0u4CfGIY8K-w6w&sz=w1600"><img src="assets/img/arts/thumbs/drive-02.jpg" alt="CIRS cultural gallery photograph 02" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=118WJtsLm84IcTTZni9GJOdH_dvKBztCZ&sz=w1600"><img src="assets/img/arts/thumbs/drive-03.jpg" alt="CIRS cultural gallery photograph 03" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1yTL186-mADqlAYUTir6o-LzqVamXZLdU&sz=w1600"><img src="assets/img/arts/thumbs/drive-04.jpg" alt="CIRS cultural gallery photograph 04" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1AewZ5oFZCiQwKAkWWIo7LeyRbunUmVgs&sz=w1600"><img src="assets/img/arts/thumbs/drive-05.jpg" alt="CIRS cultural gallery photograph 05" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1y_EZLJ4CPVfkbouBxVv5Lg9JAVAE19FQ&sz=w1600"><img src="assets/img/arts/thumbs/drive-06.jpg" alt="CIRS cultural gallery photograph 06" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=10AKDkdvn6KK2MFEmJ_mBr695hEPxNtoB&sz=w1600"><img src="assets/img/arts/thumbs/drive-07.jpg" alt="CIRS cultural gallery photograph 07" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1pvyRi5EivAfIpdNOYSyeUJDw_UFO7wus&sz=w1600"><img src="assets/img/arts/thumbs/drive-08.jpg" alt="CIRS cultural gallery photograph 08" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=19WgS_f8eAm509uJhe4nkzRda-7I5zgvm&sz=w1600"><img src="assets/img/arts/thumbs/drive-09.jpg" alt="CIRS cultural gallery photograph 09" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=19yQdujoNtjZ1Ii1Z9P0Qq1UPTOGAQU_j&sz=w1600"><img src="assets/img/arts/thumbs/drive-10.jpg" alt="CIRS cultural gallery photograph 10" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1spjnMA2o99YYegEqVDQOxxDl_7fX-LyW&sz=w1600"><img src="assets/img/arts/thumbs/drive-11.jpg" alt="CIRS cultural gallery photograph 11" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=113544sqwvhCloNJmHS5KFl-vefABYs1h&sz=w1600"><img src="assets/img/arts/thumbs/drive-12.jpg" alt="CIRS cultural gallery photograph 12" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1y7zb7gQVwpuths0JGEn_mW96QSy8UHL6&sz=w1600"><img src="assets/img/arts/thumbs/drive-13.jpg" alt="CIRS cultural gallery photograph 13" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=17flEEdk_wSrBK2CDrYlTc1q_8DAlQulp&sz=w1600"><img src="assets/img/arts/thumbs/drive-14.jpg" alt="CIRS cultural gallery photograph 14" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1g6In1aiVsjbuec9joinSkUU-aTqz533O&sz=w1600"><img src="assets/img/arts/thumbs/drive-15.jpg" alt="CIRS cultural gallery photograph 15" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1x_8CwzIHFlw1AGfoNC9QWnDJEIXXyaAk&sz=w1600"><img src="assets/img/arts/thumbs/drive-16.jpg" alt="Unfold — The Voice of Transformation" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=143Sr9ktPiQnsmulLmR_qqnMRoIA6xqWs&sz=w1600"><img src="assets/img/arts/thumbs/drive-17.jpg" alt="Unfold 2 — artwork 4" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1L-p_QsE1qqUIBlbE4rT65Wxm62aatqpL&sz=w1600"><img src="assets/img/arts/thumbs/drive-18.jpg" alt="Unfold 2 — artwork 3" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1u1yHQFdpk4L83NJJPvlhTyPj_g3Svz9x&sz=w1600"><img src="assets/img/arts/thumbs/drive-19.jpg" alt="Unfold 2 — artwork 1" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1O0tv8_QfosDCUJcSbr4yTK92L6EUTecO&sz=w1600"><img src="assets/img/arts/thumbs/drive-20.jpg" alt="Gurudev Aradhana" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1Lbrxj6zPQyeMS2gPz1Q4rhiVK-jLdq3r&sz=w1600"><img src="assets/img/arts/thumbs/drive-21.jpg" alt="Story 2 — artwork 2" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1jaSXyFPJJ-Sfe3Tx0yCucWWuk4Q25l-O&sz=w1600"><img src="assets/img/arts/thumbs/drive-22.jpg" alt="Story 2 — artwork 1" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1DCMAATJMNIoWxTyUuYLZ1xLm3Zl9ft3s&sz=w1600"><img src="assets/img/arts/thumbs/drive-23.jpg" alt="Story 2" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1s_pKN_BHj9D50Q8u830jTf7S6V1LzWUL&sz=w1600"><img src="assets/img/arts/thumbs/drive-24.jpg" alt="AU Program — artwork 2" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=10eyNddMkouQFUmE4G4z0Iuw63an0W9o6&sz=w1600"><img src="assets/img/arts/thumbs/drive-25.jpg" alt="AU Program — artwork 1" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1YekJ8Vwi_B6BjVoigDN7jpfcvnz_RW88&sz=w1600"><img src="assets/img/arts/thumbs/drive-26.jpg" alt="AU Program" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1h5-H43f4Bo1ZnRyAj90wDpDtdDc_W-nh&sz=w1600"><img src="assets/img/arts/thumbs/drive-27.jpg" alt="Crossroads 20" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1SjhGvyDNHybNi3OhNeD1vZjo-l0vfm1Q&sz=w1600"><img src="assets/img/arts/thumbs/drive-28.jpg" alt="CIRS cultural gallery photograph 28" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1r4bn0szqYB_i-mSuldxitsI-N-tkau2S&sz=w1600"><img src="assets/img/arts/thumbs/drive-29.jpg" alt="CIRS cultural gallery photograph 29" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=11HA5xoqGAxewgVzeh3TM3PppvYev3ydI&sz=w1600"><img src="assets/img/arts/thumbs/drive-30.jpg" alt="CIRS cultural gallery photograph 30" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1WXXFAVYlxKh2oIDuo8KbtnAaMHyHQlqs&sz=w1600"><img src="assets/img/arts/thumbs/drive-32.jpg" alt="CIRS cultural gallery photograph 32" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=15XLVfpC-ku-xLNxBPm6n8y70CPvQwBlq&sz=w1600"><img src="assets/img/arts/thumbs/drive-33.jpg" alt="CIRS cultural gallery photograph 33" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=17eSe_RrLEvuErwJy0Qu2Ew2SPyLZFi1i&sz=w1600"><img src="assets/img/arts/thumbs/drive-34.jpg" alt="CIRS cultural gallery photograph 34" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1V2qJbbaLi7w7ibC2O4-Y5kMCD49OvILm&sz=w1600"><img src="assets/img/arts/thumbs/drive-35.jpg" alt="CIRS cultural gallery photograph 35" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1U3a6rktdmKDfB4hQk8ORO_PR6Wau6CLG&sz=w1600"><img src="assets/img/arts/thumbs/drive-36.jpg" alt="CIRS cultural gallery photograph 36" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1BYcosqP2CUqrB9BcRp3gVdf1yhKO8dBI&sz=w1600"><img src="assets/img/arts/thumbs/drive-37.jpg" alt="CIRS cultural gallery photograph 37" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1td2J-DBmdQglv7R9ipomguSIF6imqodO&sz=w1600"><img src="assets/img/arts/thumbs/drive-38.jpg" alt="CIRS cultural gallery photograph 38" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1cccSDakP850BhLJtQ65eacHvXG8iNk_S&sz=w1600"><img src="assets/img/arts/thumbs/drive-39.jpg" alt="CIRS cultural gallery photograph 39" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1TWlbjArXKJxBrNd2CJpqqyvsvtlWD_rz&sz=w1600"><img src="assets/img/arts/thumbs/drive-40.jpg" alt="CIRS cultural gallery photograph 40" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1sE29U_XritU9e_1Azx03FHhvK4DtUwxG&sz=w1600"><img src="assets/img/arts/thumbs/drive-41.jpg" alt="CIRS cultural gallery photograph 41" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1sFKdi5AkEcb8KvcU3TU04I3YnO_CfzHi&sz=w1600"><img src="assets/img/arts/thumbs/drive-42.jpg" alt="CIRS cultural gallery photograph 42" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1LCavK2TYVWLcsmVNr8Dh9yn7mh8YWDFi&sz=w1600"><img src="assets/img/arts/thumbs/drive-43.jpg" alt="CIRS cultural gallery photograph 43" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1mtke6DV1TzpBfnahtg8SaaDYTck7u_kw&sz=w1600"><img src="assets/img/arts/thumbs/drive-44.jpg" alt="CIRS cultural gallery photograph 44" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=11ng9M1eVUq1y5ULXu5tLhrHz-LGAz0_g&sz=w1600"><img src="assets/img/arts/thumbs/drive-45.jpg" alt="CIRS cultural gallery photograph 45" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1qh4LqV0spT3lyQpqYUlCtTF0clJAF_pi&sz=w1600"><img src="assets/img/arts/thumbs/drive-46.jpg" alt="CIRS cultural gallery photograph 46" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1SApLBkb9H3EiG-SDo9Os_KVrUPheHfiK&sz=w1600"><img src="assets/img/arts/thumbs/drive-47.jpg" alt="CIRS cultural gallery photograph 47" data-cat="CIRS Cultural Gallery"></a>
-    <a href="https://drive.google.com/thumbnail?id=1xCuNw9X22rcjeN65qUHBk0UNgL7FvAH9&sz=w1600"><img src="assets/img/arts/thumbs/drive-48.jpg" alt="CIRS cultural gallery photograph 48" data-cat="CIRS Cultural Gallery"></a>
+    <a href="assets/img/arts/guitars.webp"><img src="assets/img/arts/thumbs/guitars.webp" alt="Guitars, in the music room" data-cat="Music"></a>
+    <a href="assets/img/arts/tabla.webp"><img src="assets/img/arts/thumbs/tabla.webp" alt="Tabla and percussion" data-cat="Music"></a>
+    <a href="assets/img/arts/band.webp"><img src="assets/img/arts/thumbs/band.webp" alt="The band, outside the block" data-cat="Music"></a>
+    <a href="assets/img/arts/bharatanatyam.webp"><img src="assets/img/arts/thumbs/bharatanatyam.webp" alt="Bharatanatyam, under the lights" data-cat="Dance"></a>
+    <a href="assets/img/arts/ensemble.webp"><img src="assets/img/arts/thumbs/ensemble.webp" alt="The ensemble, mid-phrase" data-cat="Dance"></a>
+    <a href="assets/img/arts/juniors.webp"><img src="assets/img/arts/thumbs/juniors.webp" alt="The junior school on stage" data-cat="Dance"></a>
+    <a href="assets/img/arts/dance.webp"><img src="assets/img/arts/thumbs/dance.webp" alt="Bharatanatyam, New Year" data-cat="Dance"></a>
+    <a href="assets/img/arts/stage.webp"><img src="assets/img/arts/thumbs/stage.webp" alt="Annual day, on stage" data-cat="Dance"></a>
+    <a href="assets/img/arts/mime.webp"><img src="assets/img/arts/thumbs/mime.webp" alt="Mime, in white masks" data-cat="Theatre"></a>
+    <a href="assets/img/arts/tableau.webp"><img src="assets/img/arts/thumbs/tableau.webp" alt="In costume, a tableau" data-cat="Theatre"></a>
+    <a href="assets/img/arts/masks.webp"><img src="assets/img/arts/thumbs/masks.webp" alt="Masks, made for the stage" data-cat="Theatre"></a>
+    <a href="assets/img/arts/banner.webp"><img src="assets/img/arts/thumbs/banner.webp" alt="Painting the banner" data-cat="Visual Art"></a>
+    <a href="assets/img/arts/exhibition.webp"><img src="assets/img/arts/thumbs/exhibition.webp" alt="The exhibition, being read" data-cat="Visual Art"></a>
+    <a href="assets/img/arts/handwork.webp"><img src="assets/img/arts/thumbs/handwork.webp" alt="Handwork, on display" data-cat="Visual Art"></a>
+    <a href="assets/img/arts/floorwork.webp"><img src="assets/img/arts/thumbs/floorwork.webp" alt="Working on the floor" data-cat="Visual Art"></a>
+    <a href="assets/img/arts/paint1.webp"><img src="assets/img/arts/thumbs/paint1.webp" alt="Rain, Grade IV" data-cat="Student Work"></a>
+    <a href="assets/img/arts/paint2.webp"><img src="assets/img/arts/thumbs/paint2.webp" alt="Blossom and lamplight" data-cat="Student Work"></a>
+    <a href="assets/img/arts/paint3.webp"><img src="assets/img/arts/thumbs/paint3.webp" alt="Sun and butterfly, Grade IV" data-cat="Student Work"></a>
+    <a href="assets/img/arts/paint4.webp"><img src="assets/img/arts/thumbs/paint4.webp" alt="At the window, Grade VIII" data-cat="Student Work"></a>
+    <a href="assets/img/arts/paint5.webp"><img src="assets/img/arts/thumbs/paint5.webp" alt="Figure with birds, Grade XII" data-cat="Student Work"></a>
+    <a href="assets/img/arts/amphitheatre.webp"><img src="assets/img/arts/thumbs/amphitheatre.webp" alt="The amphitheatre, after dark" data-cat="The Stage"></a>
+    <a href="assets/img/arts/festival.webp"><img src="assets/img/arts/thumbs/festival.webp" alt="The festival stage, set" data-cat="The Stage"></a>
+    <a href="assets/img/arts/spic-sarod.webp"><img src="assets/img/arts/thumbs/spic-sarod.webp" alt="A visiting recital, strings and tabla" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-kathakali.webp"><img src="assets/img/arts/thumbs/spic-kathakali.webp" alt="Visiting artists, in full costume" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-dancers.webp"><img src="assets/img/arts/thumbs/spic-dancers.webp" alt="Visiting dancers, held mid-figure" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-dancer.webp"><img src="assets/img/arts/thumbs/spic-dancer.webp" alt="A visiting dancer, alone on stage" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-concert.webp"><img src="assets/img/arts/thumbs/spic-concert.webp" alt="A SPIC MACAY concert, on stage" data-cat="SPIC MACAY"></a>
+    <a href="assets/img/arts/spic-tabla.webp"><img src="assets/img/arts/thumbs/spic-tabla.webp" alt="A visiting tabla player" data-cat="SPIC MACAY"></a>
+    <a href="https://drive.google.com/thumbnail?id=1ovsB76NFcBwwwZaMEAT1YkaZoUiO4w1e&sz=w1600"><img src="assets/img/arts/thumbs/drive-01.webp" alt="CIRS cultural gallery photograph 01" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1D5yQyB1q4xdDp-Q5iy0u4CfGIY8K-w6w&sz=w1600"><img src="assets/img/arts/thumbs/drive-02.webp" alt="CIRS cultural gallery photograph 02" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=118WJtsLm84IcTTZni9GJOdH_dvKBztCZ&sz=w1600"><img src="assets/img/arts/thumbs/drive-03.webp" alt="CIRS cultural gallery photograph 03" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1yTL186-mADqlAYUTir6o-LzqVamXZLdU&sz=w1600"><img src="assets/img/arts/thumbs/drive-04.webp" alt="CIRS cultural gallery photograph 04" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1AewZ5oFZCiQwKAkWWIo7LeyRbunUmVgs&sz=w1600"><img src="assets/img/arts/thumbs/drive-05.webp" alt="CIRS cultural gallery photograph 05" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1y_EZLJ4CPVfkbouBxVv5Lg9JAVAE19FQ&sz=w1600"><img src="assets/img/arts/thumbs/drive-06.webp" alt="CIRS cultural gallery photograph 06" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=10AKDkdvn6KK2MFEmJ_mBr695hEPxNtoB&sz=w1600"><img src="assets/img/arts/thumbs/drive-07.webp" alt="CIRS cultural gallery photograph 07" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1pvyRi5EivAfIpdNOYSyeUJDw_UFO7wus&sz=w1600"><img src="assets/img/arts/thumbs/drive-08.webp" alt="CIRS cultural gallery photograph 08" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=19WgS_f8eAm509uJhe4nkzRda-7I5zgvm&sz=w1600"><img src="assets/img/arts/thumbs/drive-09.webp" alt="CIRS cultural gallery photograph 09" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=19yQdujoNtjZ1Ii1Z9P0Qq1UPTOGAQU_j&sz=w1600"><img src="assets/img/arts/thumbs/drive-10.webp" alt="CIRS cultural gallery photograph 10" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1spjnMA2o99YYegEqVDQOxxDl_7fX-LyW&sz=w1600"><img src="assets/img/arts/thumbs/drive-11.webp" alt="CIRS cultural gallery photograph 11" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=113544sqwvhCloNJmHS5KFl-vefABYs1h&sz=w1600"><img src="assets/img/arts/thumbs/drive-12.webp" alt="CIRS cultural gallery photograph 12" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1y7zb7gQVwpuths0JGEn_mW96QSy8UHL6&sz=w1600"><img src="assets/img/arts/thumbs/drive-13.webp" alt="CIRS cultural gallery photograph 13" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=17flEEdk_wSrBK2CDrYlTc1q_8DAlQulp&sz=w1600"><img src="assets/img/arts/thumbs/drive-14.webp" alt="CIRS cultural gallery photograph 14" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1g6In1aiVsjbuec9joinSkUU-aTqz533O&sz=w1600"><img src="assets/img/arts/thumbs/drive-15.webp" alt="CIRS cultural gallery photograph 15" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1x_8CwzIHFlw1AGfoNC9QWnDJEIXXyaAk&sz=w1600"><img src="assets/img/arts/thumbs/drive-16.webp" alt="Unfold — The Voice of Transformation" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=143Sr9ktPiQnsmulLmR_qqnMRoIA6xqWs&sz=w1600"><img src="assets/img/arts/thumbs/drive-17.webp" alt="Unfold 2 — artwork 4" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1L-p_QsE1qqUIBlbE4rT65Wxm62aatqpL&sz=w1600"><img src="assets/img/arts/thumbs/drive-18.webp" alt="Unfold 2 — artwork 3" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1u1yHQFdpk4L83NJJPvlhTyPj_g3Svz9x&sz=w1600"><img src="assets/img/arts/thumbs/drive-19.webp" alt="Unfold 2 — artwork 1" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1O0tv8_QfosDCUJcSbr4yTK92L6EUTecO&sz=w1600"><img src="assets/img/arts/thumbs/drive-20.webp" alt="Gurudev Aradhana" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1Lbrxj6zPQyeMS2gPz1Q4rhiVK-jLdq3r&sz=w1600"><img src="assets/img/arts/thumbs/drive-21.webp" alt="Story 2 — artwork 2" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1jaSXyFPJJ-Sfe3Tx0yCucWWuk4Q25l-O&sz=w1600"><img src="assets/img/arts/thumbs/drive-22.webp" alt="Story 2 — artwork 1" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1DCMAATJMNIoWxTyUuYLZ1xLm3Zl9ft3s&sz=w1600"><img src="assets/img/arts/thumbs/drive-23.webp" alt="Story 2" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1s_pKN_BHj9D50Q8u830jTf7S6V1LzWUL&sz=w1600"><img src="assets/img/arts/thumbs/drive-24.webp" alt="AU Program — artwork 2" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=10eyNddMkouQFUmE4G4z0Iuw63an0W9o6&sz=w1600"><img src="assets/img/arts/thumbs/drive-25.webp" alt="AU Program — artwork 1" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1YekJ8Vwi_B6BjVoigDN7jpfcvnz_RW88&sz=w1600"><img src="assets/img/arts/thumbs/drive-26.webp" alt="AU Program" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1h5-H43f4Bo1ZnRyAj90wDpDtdDc_W-nh&sz=w1600"><img src="assets/img/arts/thumbs/drive-27.webp" alt="Crossroads 20" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1SjhGvyDNHybNi3OhNeD1vZjo-l0vfm1Q&sz=w1600"><img src="assets/img/arts/thumbs/drive-28.webp" alt="CIRS cultural gallery photograph 28" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1r4bn0szqYB_i-mSuldxitsI-N-tkau2S&sz=w1600"><img src="assets/img/arts/thumbs/drive-29.webp" alt="CIRS cultural gallery photograph 29" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=11HA5xoqGAxewgVzeh3TM3PppvYev3ydI&sz=w1600"><img src="assets/img/arts/thumbs/drive-30.webp" alt="CIRS cultural gallery photograph 30" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1WXXFAVYlxKh2oIDuo8KbtnAaMHyHQlqs&sz=w1600"><img src="assets/img/arts/thumbs/drive-32.webp" alt="CIRS cultural gallery photograph 32" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=15XLVfpC-ku-xLNxBPm6n8y70CPvQwBlq&sz=w1600"><img src="assets/img/arts/thumbs/drive-33.webp" alt="CIRS cultural gallery photograph 33" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=17eSe_RrLEvuErwJy0Qu2Ew2SPyLZFi1i&sz=w1600"><img src="assets/img/arts/thumbs/drive-34.webp" alt="CIRS cultural gallery photograph 34" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1V2qJbbaLi7w7ibC2O4-Y5kMCD49OvILm&sz=w1600"><img src="assets/img/arts/thumbs/drive-35.webp" alt="CIRS cultural gallery photograph 35" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1U3a6rktdmKDfB4hQk8ORO_PR6Wau6CLG&sz=w1600"><img src="assets/img/arts/thumbs/drive-36.webp" alt="CIRS cultural gallery photograph 36" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1BYcosqP2CUqrB9BcRp3gVdf1yhKO8dBI&sz=w1600"><img src="assets/img/arts/thumbs/drive-37.webp" alt="CIRS cultural gallery photograph 37" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1td2J-DBmdQglv7R9ipomguSIF6imqodO&sz=w1600"><img src="assets/img/arts/thumbs/drive-38.webp" alt="CIRS cultural gallery photograph 38" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1cccSDakP850BhLJtQ65eacHvXG8iNk_S&sz=w1600"><img src="assets/img/arts/thumbs/drive-39.webp" alt="CIRS cultural gallery photograph 39" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1TWlbjArXKJxBrNd2CJpqqyvsvtlWD_rz&sz=w1600"><img src="assets/img/arts/thumbs/drive-40.webp" alt="CIRS cultural gallery photograph 40" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1sE29U_XritU9e_1Azx03FHhvK4DtUwxG&sz=w1600"><img src="assets/img/arts/thumbs/drive-41.webp" alt="CIRS cultural gallery photograph 41" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1sFKdi5AkEcb8KvcU3TU04I3YnO_CfzHi&sz=w1600"><img src="assets/img/arts/thumbs/drive-42.webp" alt="CIRS cultural gallery photograph 42" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1LCavK2TYVWLcsmVNr8Dh9yn7mh8YWDFi&sz=w1600"><img src="assets/img/arts/thumbs/drive-43.webp" alt="CIRS cultural gallery photograph 43" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1mtke6DV1TzpBfnahtg8SaaDYTck7u_kw&sz=w1600"><img src="assets/img/arts/thumbs/drive-44.webp" alt="CIRS cultural gallery photograph 44" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=11ng9M1eVUq1y5ULXu5tLhrHz-LGAz0_g&sz=w1600"><img src="assets/img/arts/thumbs/drive-45.webp" alt="CIRS cultural gallery photograph 45" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1qh4LqV0spT3lyQpqYUlCtTF0clJAF_pi&sz=w1600"><img src="assets/img/arts/thumbs/drive-46.webp" alt="CIRS cultural gallery photograph 46" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1SApLBkb9H3EiG-SDo9Os_KVrUPheHfiK&sz=w1600"><img src="assets/img/arts/thumbs/drive-47.webp" alt="CIRS cultural gallery photograph 47" data-cat="CIRS Cultural Gallery"></a>
+    <a href="https://drive.google.com/thumbnail?id=1xCuNw9X22rcjeN65qUHBk0UNgL7FvAH9&sz=w1600"><img src="assets/img/arts/thumbs/drive-48.webp" alt="CIRS cultural gallery photograph 48" data-cat="CIRS Cultural Gallery"></a>
+    <a href="assets/img/arts/th-au25-alone.webp"><img src="assets/img/arts/thumbs/th-au25-alone.webp" alt="A student in a yellow dhoti alone in a pool of light on a dark stage, both arms raised" data-cat="Theatre · Anand Utsav 2025" data-title="One figure, one light"></a>
+    <a href="assets/img/arts/th-au25-palace.webp"><img src="assets/img/arts/thumbs/th-au25-palace.webp" alt="A palace hall filling the stage: a king on a carved throne, courtiers in bright costume and guards in black around him" data-cat="Theatre · Anand Utsav 2025" data-title="The palace, across the whole stage"></a>
+    <a href="assets/img/arts/th-au25-court.webp"><img src="assets/img/arts/thumbs/th-au25-court.webp" alt="Two crowned figures on gilded thrones before a painted palace wall, a young actor before them" data-cat="Theatre · Anand Utsav 2025" data-title="A court, on gilded thrones"></a>
+    <a href="assets/img/arts/th-au25-sunset.webp"><img src="assets/img/arts/thumbs/th-au25-sunset.webp" alt="An ensemble in bright dhotis dancing before a sunset backdrop" data-cat="Theatre · Anand Utsav 2025" data-title="An ensemble at sunset"></a>
+    <a href="assets/img/arts/th-au25-mountain.webp"><img src="assets/img/arts/thumbs/th-au25-mountain.webp" alt="Two students in green dhotis grappling before a painted blue mountain" data-cat="Theatre · Anand Utsav 2025" data-title="A struggle before the mountain"></a>
+    <a href="assets/img/arts/th-au25-tableau.webp"><img src="assets/img/arts/thumbs/th-au25-tableau.webp" alt="A dancer in red and gold at the centre of a many-armed tableau" data-cat="Theatre · Anand Utsav 2025" data-title="A many-armed tableau"></a>
+    <a href="assets/img/arts/th-au25-curtain-call.webp"><img src="assets/img/arts/thumbs/th-au25-curtain-call.webp" alt="The cast crowded together on the stage at the close, petals on the floor" data-cat="Theatre · Anand Utsav 2025" data-title="Everyone on the stage at the close"></a>
+    <a href="assets/img/arts/th-mq25-skull-paint.webp"><img src="assets/img/arts/thumbs/th-mq25-skull-paint.webp" alt="An actor in white skull face paint under orange light, hands open" data-cat="Theatre · Masquerade 2025" data-title="Vishwamitra House, El Diablo, 2025"></a>
+    <a href="assets/img/arts/th-valmiki25-dance.webp"><img src="assets/img/arts/thumbs/th-valmiki25-dance.webp" alt="The company dancing across the stage before a candy-land backdrop, a lead in a red coat and top hat among them" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="The company, dancing across the candy land"></a>
+    <a href="assets/img/arts/th-valmiki25-red-coat.webp"><img src="assets/img/arts/thumbs/th-valmiki25-red-coat.webp" alt="An actor in a red coat and top hat before shelves of jars" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="Red coat and top hat"></a>
+    <a href="assets/img/arts/th-valmiki25-candy.webp"><img src="assets/img/arts/thumbs/th-valmiki25-candy.webp" alt="An actor in a red coat and top hat, arm out, before a pink candy-land backdrop" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="In the candy land"></a>
+    <a href="assets/img/arts/th-valmiki25-neon.webp"><img src="assets/img/arts/thumbs/th-valmiki25-neon.webp" alt="An actor in a grey suit speaking into a microphone beside a neon sign" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="Beside the neon sign"></a>
+    <a href="assets/img/arts/th-valmiki25-painted.webp"><img src="assets/img/arts/thumbs/th-valmiki25-painted.webp" alt="An actor in red swirling body paint, arms spread, against a dark backdrop" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="Red body paint"></a>
+    <a href="assets/img/arts/th-valmiki25-storm.webp"><img src="assets/img/arts/thumbs/th-valmiki25-storm.webp" alt="An actor in body paint standing before a projected lightning storm and a broken hut" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="Before the storm"></a>
+    <a href="assets/img/arts/th-valmiki25-silhouette.webp"><img src="assets/img/arts/thumbs/th-valmiki25-silhouette.webp" alt="A figure crawling in silhouette before a projected desert and a ruined hut" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="In silhouette"></a>
+    <a href="assets/img/arts/th-valmiki25-sofa.webp"><img src="assets/img/arts/thumbs/th-valmiki25-sofa.webp" alt="Two actors on a sofa before a white-and-peach backdrop, one in a red coat holding a cane" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="On the sofa"></a>
+    <a href="assets/img/arts/th-valmiki25-bed.webp"><img src="assets/img/arts/thumbs/th-valmiki25-bed.webp" alt="Two actors on a bed in a room set with yellow shelves and soft toys" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="A room with yellow shelves"></a>
+    <a href="assets/img/arts/th-valmiki25-factory.webp"><img src="assets/img/arts/thumbs/th-valmiki25-factory.webp" alt="Actors in a factory set, one in a red coat seated with a cane" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="In the factory"></a>
+    <a href="assets/img/arts/th-valmiki25-tunnel.webp"><img src="assets/img/arts/thumbs/th-valmiki25-tunnel.webp" alt="Actors before a swirling pink tunnel projected behind them" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="The pink tunnel"></a>
+    <a href="assets/img/arts/th-valmiki25-amazing-violet.webp"><img src="assets/img/arts/thumbs/th-valmiki25-amazing-violet.webp" alt="Dancers before a neon sign reading The Amazing Violet" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="The Amazing Violet"></a>
+    <a href="assets/img/arts/th-valmiki25-chocolate.webp"><img src="assets/img/arts/thumbs/th-valmiki25-chocolate.webp" alt="A lone actor in a striped shirt beside a projected landscape of chocolate and candy canes" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="The chocolate landscape"></a>
+    <a href="assets/img/arts/th-valmiki25-after.webp"><img src="assets/img/arts/thumbs/th-valmiki25-after.webp" alt="Two actors after the show, one in swirling body paint, one in a red coat and top hat" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="After the show"></a>
+    <a href="assets/img/arts/th-valmiki25-poster.webp"><img src="assets/img/arts/thumbs/th-valmiki25-poster.webp" alt="A figure in a red coat and top hat before a painted poster reading Melora" data-cat="Theatre · Masquerade 2025, Valmiki House" data-title="The Melora poster"></a>
+    <a href="assets/img/arts/th-vasistha25-violet.webp"><img src="assets/img/arts/thumbs/th-vasistha25-violet.webp" alt="A performer in purple with glowing patterns, arms held out under violet light" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="Under violet light"></a>
+    <a href="assets/img/arts/th-vasistha25-tiger.webp"><img src="assets/img/arts/thumbs/th-vasistha25-tiger.webp" alt="An actor in tiger body paint under blue light" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="The tiger"></a>
+    <a href="assets/img/arts/th-vasistha25-cradle.webp"><img src="assets/img/arts/thumbs/th-vasistha25-cradle.webp" alt="A figure in dark body paint cradling a bundle in red cloth before a blue forest" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="In the blue forest"></a>
+    <a href="assets/img/arts/th-vasistha25-wolves.webp"><img src="assets/img/arts/thumbs/th-vasistha25-wolves.webp" alt="Three actors made up as wolves, crouching in green light" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="The wolves"></a>
+    <a href="assets/img/arts/th-vasistha25-roar.webp"><img src="assets/img/arts/thumbs/th-vasistha25-roar.webp" alt="An actor in tiger body paint roaring, head thrown back" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="The roar"></a>
+    <a href="assets/img/arts/th-vasistha25-bear.webp"><img src="assets/img/arts/thumbs/th-vasistha25-bear.webp" alt="An actor in a bear costume, arms raised, among painted jungle children before a ruined temple set" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="The bear, and the jungle around him"></a>
+    <a href="assets/img/arts/th-vasistha25-sunbeams.webp"><img src="assets/img/arts/thumbs/th-vasistha25-sunbeams.webp" alt="A boy and the actor in the bear costume talking in shafts of light through a forest" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="In the sunbeams"></a>
+    <a href="assets/img/arts/th-vasistha25-torch.webp"><img src="assets/img/arts/thumbs/th-vasistha25-torch.webp" alt="A performer in black holding up a flaming torch prop before the temple set" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="The torch"></a>
+    <a href="assets/img/arts/th-vasistha25-gathered.webp"><img src="assets/img/arts/thumbs/th-vasistha25-gathered.webp" alt="The cast gathered around a boy lying on the stage" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="Gathered around him"></a>
+    <a href="assets/img/arts/th-vasistha25-silhouettes.webp"><img src="assets/img/arts/thumbs/th-vasistha25-silhouettes.webp" alt="Three figures in silhouette holding hands before bare trees" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="In silhouette"></a>
+    <a href="assets/img/arts/th-vasistha25-banner.webp"><img src="assets/img/arts/thumbs/th-vasistha25-banner.webp" alt="A painted banner of jungle leaves reading Vantara along the front of the stage" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="The banner"></a>
+    <a href="assets/img/arts/th-vasistha25-clearing.webp"><img src="assets/img/arts/thumbs/th-vasistha25-clearing.webp" alt="The actor in the bear costume and a boy in a forest clearing lit by shafts of light" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="The clearing"></a>
+    <a href="assets/img/arts/th-vasistha25-tree.webp"><img src="assets/img/arts/thumbs/th-vasistha25-tree.webp" alt="Actors in costume and body paint beside a glowing green tree" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="The glowing tree"></a>
+    <a href="assets/img/arts/th-vasistha25-company.webp"><img src="assets/img/arts/thumbs/th-vasistha25-company.webp" alt="The company after the show, still in face paint and costume" data-cat="Theatre · Masquerade 2025, Vasistha House" data-title="The company"></a>
+    <a href="assets/img/arts/th-vishwamitra25-skull.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-skull.webp" alt="An actor in skull face paint with red-painted hands, arms spread, before a wooden wall hung with shields" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="Skull paint, arms spread"></a>
+    <a href="assets/img/arts/th-vishwamitra25-green.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-green.webp" alt="A performer lit green beside a painted skeleton figure" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="Green light and a painted figure"></a>
+    <a href="assets/img/arts/th-vishwamitra25-flowers.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-flowers.webp" alt="Two performers side by side, one with flowers in her hair" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="Flowers in her hair"></a>
+    <a href="assets/img/arts/th-vishwamitra25-stick.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-stick.webp" alt="An actor made up with grey hair, leaning on a stick in the dark" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="Grey hair and a walking stick"></a>
+    <a href="assets/img/arts/th-vishwamitra25-dance.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-dance.webp" alt="A performer in a satin dress dancing, one arm raised" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="Mid-dance"></a>
+    <a href="assets/img/arts/th-vishwamitra25-cobwebs.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-cobwebs.webp" alt="An actor in skull face paint in a green set strung with cobwebs" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="The cobweb set"></a>
+    <a href="assets/img/arts/th-vishwamitra25-courtyard.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-courtyard.webp" alt="The company across a blue courtyard set" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="The company in the courtyard"></a>
+    <a href="assets/img/arts/th-vishwamitra25-leaves.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-leaves.webp" alt="Two performers among giant painted leaves, one with flowers in her hair" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="Among the leaves"></a>
+    <a href="assets/img/arts/th-vishwamitra25-guitar.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-guitar.webp" alt="A boy playing a guitar at a stall beneath a hand-painted sign" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="A guitar at the stall"></a>
+    <a href="assets/img/arts/th-vishwamitra25-plates.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-plates.webp" alt="One actor climbing onto another's back beside a wall of hanging plates" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="The wall of plates"></a>
+    <a href="assets/img/arts/th-vishwamitra25-held.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-held.webp" alt="An actor holding another, in skull face paint, from behind" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="Held from behind"></a>
+    <a href="assets/img/arts/th-vishwamitra25-rope.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-rope.webp" alt="An actor tied with pink rope before a blue cavern backdrop" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="Tied in the cavern"></a>
+    <a href="assets/img/arts/th-vishwamitra25-orange.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-orange.webp" alt="A performer in an orange satin dress, one hand on her hip" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="In orange"></a>
+    <a href="assets/img/arts/th-vishwamitra25-waistcoat.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-waistcoat.webp" alt="An actor in a purple waistcoat with arms spread" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="The purple waistcoat"></a>
+    <a href="assets/img/arts/th-vishwamitra25-face-to-face.webp"><img src="assets/img/arts/thumbs/th-vishwamitra25-face-to-face.webp" alt="Two performers facing each other in warm light" data-cat="Theatre · Masquerade 2025, Vishwamitra House" data-title="Face to face"></a>
+    <a href="assets/img/arts/th-vyasa25-circus.webp"><img src="assets/img/arts/thumbs/th-vyasa25-circus.webp" alt="The company in a line before red-and-white striped curtains, beneath a sign reading Circus" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="Under the circus sign"></a>
+    <a href="assets/img/arts/th-vyasa25-staff.webp"><img src="assets/img/arts/thumbs/th-vyasa25-staff.webp" alt="A figure in a shaggy cloak holding a skull-topped staff, lit green and gold" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="The skull-topped staff"></a>
+    <a href="assets/img/arts/th-vyasa25-make-up.webp"><img src="assets/img/arts/thumbs/th-vyasa25-make-up.webp" alt="Backstage: a student painting cracks onto a cast member's face" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="Backstage, in make-up"></a>
+    <a href="assets/img/arts/th-vyasa25-violin.webp"><img src="assets/img/arts/thumbs/th-vyasa25-violin.webp" alt="An actor playing a violin before a giant playing card" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="A violin and a playing card"></a>
+    <a href="assets/img/arts/th-vyasa25-bunting.webp"><img src="assets/img/arts/thumbs/th-vyasa25-bunting.webp" alt="An actor in a waistcoat with a fist raised beside a younger actor in a bow tie, bunting above" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="Beneath the bunting"></a>
+    <a href="assets/img/arts/th-vyasa25-fence.webp"><img src="assets/img/arts/thumbs/th-vyasa25-fence.webp" alt="Two boys talking on a lawn before a wooden fence" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="By the fence"></a>
+    <a href="assets/img/arts/th-vyasa25-wanted.webp"><img src="assets/img/arts/thumbs/th-vyasa25-wanted.webp" alt="An actor in a fringed waistcoat seated before a board reading Wanted" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="The Wanted board"></a>
+    <a href="assets/img/arts/th-vyasa25-bass.webp"><img src="assets/img/arts/thumbs/th-vyasa25-bass.webp" alt="An actor with a bass guitar between two others before striped curtains" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="The bass guitar"></a>
+    <a href="assets/img/arts/th-vyasa25-porch.webp"><img src="assets/img/arts/thumbs/th-vyasa25-porch.webp" alt="An actor holding a violin and a boy on a porch set at night" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="On the porch"></a>
+    <a href="assets/img/arts/th-vyasa25-lifted.webp"><img src="assets/img/arts/thumbs/th-vyasa25-lifted.webp" alt="A performer in clown face paint lifted high by others" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="Lifted high"></a>
+    <a href="assets/img/arts/th-vyasa25-blue.webp"><img src="assets/img/arts/thumbs/th-vyasa25-blue.webp" alt="Two actors clasped together under blue light before striped curtains" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="Under blue light"></a>
+    <a href="assets/img/arts/th-vyasa25-fallen.webp"><img src="assets/img/arts/thumbs/th-vyasa25-fallen.webp" alt="An actor kneeling over another who lies on the floor, before striped curtains" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="Kneeling over him"></a>
+    <a href="assets/img/arts/th-vyasa25-red-coat.webp"><img src="assets/img/arts/thumbs/th-vyasa25-red-coat.webp" alt="An actor in a red coat, arm raised, among dancers under purple light" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="The red coat"></a>
+    <a href="assets/img/arts/th-vyasa25-ensemble.webp"><img src="assets/img/arts/thumbs/th-vyasa25-ensemble.webp" alt="The ensemble dancing under blue light around an actor raising a staff" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="The ensemble"></a>
+    <a href="assets/img/arts/th-vyasa25-leather.webp"><img src="assets/img/arts/thumbs/th-vyasa25-leather.webp" alt="A performer in a leather jacket, arms spread, before striped curtains" data-cat="Theatre · Masquerade 2025, Vyasa House" data-title="Arms spread before the curtains"></a>
+    <a href="assets/img/arts/fest-rakhi-knot.webp"><img src="assets/img/arts/thumbs/fest-rakhi-knot.webp" alt="A student's hands knotting a thread rakhi on a classmate's wrist" data-cat="Festivals · Raksha Bandhan, 30 August 2023" data-title="A rakhi knotted at the wrist"></a>
+    <a href="assets/img/arts/fest-rakhi-thali.webp"><img src="assets/img/arts/thumbs/fest-rakhi-thali.webp" alt="A leaf plate holding thread rakhis, red roli, yellow rice and chocolates" data-cat="Festivals · Raksha Bandhan, 30 August 2023" data-title="The thali before the tying: rakhis, roli, rice and chocolate"></a>
+    <a href="assets/img/arts/fest-rakhi-sweets.webp"><img src="assets/img/arts/thumbs/fest-rakhi-sweets.webp" alt="Hands reaching for chocolates from a plate held out by a student" data-cat="Festivals · Raksha Bandhan, 30 August 2023" data-title="Chocolate, offered from the plate"></a>
+    <a href="assets/img/arts/fest-rakhi-courtyard.webp"><img src="assets/img/arts/thumbs/fest-rakhi-courtyard.webp" alt="Students in festive clothes tying rakhis on one another in a courtyard" data-cat="Festivals · Raksha Bandhan, 30 August 2023" data-title="Rakhis tied across the courtyard"></a>
+    <a href="assets/img/arts/fest-rakhi-pairs.webp"><img src="assets/img/arts/thumbs/fest-rakhi-pairs.webp" alt="Students standing in pairs, some tying rakhis and some smiling at the camera" data-cat="Festivals · Raksha Bandhan, 30 August 2023" data-title="Pairs of students across the courtyard"></a>
+    <a href="assets/img/arts/fest-rakhi-teacher.webp"><img src="assets/img/arts/thumbs/fest-rakhi-teacher.webp" alt="A student tying a rakhi on a teacher's wrist in the courtyard" data-cat="Festivals · Raksha Bandhan, 30 August 2023" data-title="A rakhi for a teacher"></a>
+    <a href="assets/img/arts/fest-rakhi-friends.webp"><img src="assets/img/arts/thumbs/fest-rakhi-friends.webp" alt="Two girls with tilak on their foreheads smiling at the camera" data-cat="Festivals · Raksha Bandhan, 30 August 2023" data-title="Tilak on the forehead, and a smile"></a>
+    <a href="assets/img/arts/fest-jan-pooja.webp"><img src="assets/img/arts/thumbs/fest-jan-pooja.webp" alt="Teachers seated on either side of a flower-decked altar with a white Krishna murti" data-cat="Festivals · Janmashtami, 4 September 2026" data-title="The morning pooja before the Krishna murti"></a>
+    <a href="assets/img/arts/fest-jan-aarti.webp"><img src="assets/img/arts/thumbs/fest-jan-aarti.webp" alt="A teacher waving an aarti lamp before a garlanded murti" data-cat="Festivals · Janmashtami, 4 September 2026" data-title="Aarti at the garlanded murti"></a>
+    <a href="assets/img/arts/fest-jan-singer.webp"><img src="assets/img/arts/thumbs/fest-jan-singer.webp" alt="A student singing at a microphone before a red and gold projected mandala" data-cat="Festivals · Janmashtami, 4 September 2026" data-title="A bhajan at the microphone"></a>
+    <a href="assets/img/arts/fest-jan-cajon.webp"><img src="assets/img/arts/thumbs/fest-jan-cajon.webp" alt="A student playing a cajon on stage under violet light" data-cat="Festivals · Janmashtami, 4 September 2026" data-title="The cajon keeps the bhajan's time"></a>
+    <a href="assets/img/arts/fest-jan-dancers.webp"><img src="assets/img/arts/thumbs/fest-jan-dancers.webp" alt="Girls in mirrored skirts dancing in the hall under warm light" data-cat="Festivals · Janmashtami, 4 September 2026" data-title="Dancers in the hall before midnight"></a>
+    <a href="assets/img/arts/fest-jan-dance.webp"><img src="assets/img/arts/thumbs/fest-jan-dance.webp" alt="Students in red and gold costume and headbands dancing close to the audience" data-cat="Festivals · Janmashtami, 4 September 2026" data-title="A dance in red and gold"></a>
+    <a href="assets/img/arts/fest-jan-bhajan.webp"><img src="assets/img/arts/thumbs/fest-jan-bhajan.webp" alt="A group of students seated on stage singing before a blue projected mandala" data-cat="Festivals · Janmashtami, 4 September 2026" data-title="Bhajan singers on stage"></a>
+    <a href="assets/img/arts/fest-jan-lamps.webp"><img src="assets/img/arts/thumbs/fest-jan-lamps.webp" alt="A dark hall with a portrait on stage lit only by lamps before it" data-cat="Festivals · Janmashtami, 4 September 2026" data-title="Just before midnight, the hall dark but for the lamps"></a>
+    <a href="assets/img/arts/fest-jan-reach.webp"><img src="assets/img/arts/thumbs/fest-jan-reach.webp" alt="A student on the shoulders of others reaching up for a clay pot hung from a rope, after dark" data-cat="Festivals · Janmashtami, 5 September 2026" data-title="A hand reaches for the matki"></a>
+    <a href="assets/img/arts/fest-jan-pyramid.webp"><img src="assets/img/arts/thumbs/fest-jan-pyramid.webp" alt="Students building a human pyramid under a tree at night, a pot hanging above them" data-cat="Festivals · Janmashtami, 5 September 2026" data-title="The pyramid rises under the tree"></a>
+    <a href="assets/img/arts/fest-jan-crowd.webp"><img src="assets/img/arts/thumbs/fest-jan-crowd.webp" alt="A crowd of students under a tree at night, looking up at a pot on a rope" data-cat="Festivals · Janmashtami, 5 September 2026" data-title="The school gathers under the rope"></a>
+    <a href="assets/img/arts/fest-jan-break.webp"><img src="assets/img/arts/thumbs/fest-jan-break.webp" alt="A student at the top of a human pyramid strikes the pot, and its contents burst out in the floodlight" data-cat="Festivals · Janmashtami, 5 September 2026" data-title="The matki breaks"></a>
+    <a href="assets/img/arts/fest-jan-tower.webp"><img src="assets/img/arts/thumbs/fest-jan-tower.webp" alt="A human pyramid climbing towards a pot hung high in the dark" data-cat="Festivals · Janmashtami, 5 September 2026" data-title="Another grade, another tower"></a>
+    <a href="assets/img/arts/fest-jan-lawn.webp"><img src="assets/img/arts/thumbs/fest-jan-lawn.webp" alt="Students crowded on a lawn at night under the trees and lamps" data-cat="Festivals · Janmashtami, 5 September 2026" data-title="After the matki, the lawn full of students"></a>
+    <a href="assets/img/arts/fest-onam-petals.webp"><img src="assets/img/arts/thumbs/fest-onam-petals.webp" alt="Hands sorting marigold and rose petals on the floor beside a half-laid pookalam" data-cat="Festivals · Onam, 2023" data-title="Petals sorted for the pookalam"></a>
+    <a href="assets/img/arts/fest-onam-pookalam.webp"><img src="assets/img/arts/thumbs/fest-onam-pookalam.webp" alt="A circular flower pookalam in yellow, orange and purple laid on a courtyard floor" data-cat="Festivals · Onam, 2023" data-title="A finished pookalam in the courtyard"></a>
+    <a href="assets/img/arts/fest-onam-lamps.webp"><img src="assets/img/arts/thumbs/fest-onam-lamps.webp" alt="A large flower pookalam on the dining-hall floor between two lit brass lamps" data-cat="Festivals · Onam, 2023" data-title="The pookalam and its two lamps"></a>
+    <a href="assets/img/arts/fest-onam-sadhya.webp"><img src="assets/img/arts/thumbs/fest-onam-sadhya.webp" alt="A long row of students seated on the floor eating the sadhya from banana leaves" data-cat="Festivals · Onam, 2023" data-title="The sadhya, served on banana leaves"></a>
+    <a href="assets/img/arts/fest-onam-sadhya-row.webp"><img src="assets/img/arts/thumbs/fest-onam-sadhya-row.webp" alt="Girls seated in a row on the floor with banana leaves before them, the row running into the distance" data-cat="Festivals · Onam, 2023" data-title="The rows run the length of the hall"></a>
+    <a href="assets/img/arts/fest-onam-leaf.webp"><img src="assets/img/arts/thumbs/fest-onam-leaf.webp" alt="A student in a white mundu eating rice from a banana leaf" data-cat="Festivals · Onam, 2023" data-title="Rice, and every curry after it"></a>
+    <a href="assets/img/arts/fest-onam-song.webp"><img src="assets/img/arts/thumbs/fest-onam-song.webp" alt="Teachers in cream and gold kasavu singing together on stage" data-cat="Festivals · Onam, 15 September 2024" data-title="Teachers sing in kasavu on Thiruvonam evening"></a>
+    <a href="assets/img/arts/fest-onam-dance.webp"><img src="assets/img/arts/thumbs/fest-onam-dance.webp" alt="Students in white mundu and dark tops dancing on a stage hung with painted suns" data-cat="Festivals · Onam, 15 September 2024" data-title="A dance in white mundu"></a>
+    <a href="assets/img/arts/fest-ganesh-lake.webp"><img src="assets/img/arts/thumbs/fest-ganesh-lake.webp" alt="A raft carrying the Ganesh murti crossing a lake below cloud-covered hills" data-cat="Festivals · Ganesh Chaturthi, 28 September 2023" data-title="The murti crosses the school's lake"></a>
+    <a href="assets/img/arts/fest-ganesh-far.webp"><img src="assets/img/arts/thumbs/fest-ganesh-far.webp" alt="A small raft far out on a still lake, forested hills and cloud behind it" data-cat="Festivals · Ganesh Chaturthi, 28 September 2023" data-title="Far out on the lake, under the hills"></a>
+    <a href="assets/img/arts/fest-ganesh-reflection.webp"><img src="assets/img/arts/thumbs/fest-ganesh-reflection.webp" alt="A raft with the murti and a group aboard, reflected in green water" data-cat="Festivals · Ganesh Chaturthi, 28 September 2023" data-title="The raft and its reflection"></a>
+    <a href="assets/img/arts/fest-ganesh-raft.webp"><img src="assets/img/arts/thumbs/fest-ganesh-raft.webp" alt="The Ganesh murti on a raft decorated with banana stems, teachers standing around it" data-cat="Festivals · Ganesh Chaturthi, 28 September 2023" data-title="The murti on the raft, banana stems at its corners"></a>
+    <a href="assets/img/arts/fest-ganesh-immersion.webp"><img src="assets/img/arts/thumbs/fest-ganesh-immersion.webp" alt="The murti being lowered from the raft into the lake" data-cat="Festivals · Ganesh Chaturthi, 28 September 2023" data-title="The immersion"></a>
+    <a href="assets/img/arts/fest-ganesh-bank.webp"><img src="assets/img/arts/thumbs/fest-ganesh-bank.webp" alt="Girls in saffron kurtas seated close together on the bank, cheering" data-cat="Festivals · Ganesh Chaturthi, 28 September 2023" data-title="On the bank, in saffron"></a>
+    <a href="assets/img/arts/fest-ganesh-cheer.webp"><img src="assets/img/arts/thumbs/fest-ganesh-cheer.webp" alt="A group of girls in saffron laughing together by the water" data-cat="Festivals · Ganesh Chaturthi, 28 September 2023" data-title="Voices in unison on the shore"></a>
+    <a href="assets/img/arts/fest-ganesh-boys.webp"><img src="assets/img/arts/thumbs/fest-ganesh-boys.webp" alt="Boys in saffron kurtas gathered together, smiling at the camera" data-cat="Festivals · Ganesh Chaturthi, 28 September 2023" data-title="The procession gathers"></a>
+    <a href="assets/img/arts/fest-dussehra-procession.webp"><img src="assets/img/arts/thumbs/fest-dussehra-procession.webp" alt="Students in costume as Rama, Lakshmana and Hanuman leaving a building by torchlight" data-cat="Festivals · Dussehra, 2 October 2025" data-title="The procession sets out"></a>
+    <a href="assets/img/arts/fest-dussehra-torches.webp"><img src="assets/img/arts/thumbs/fest-dussehra-torches.webp" alt="Students in costume walking in procession by the light of flaming torches" data-cat="Festivals · Dussehra, 2 October 2025" data-title="By torchlight, towards the field"></a>
+    <a href="assets/img/arts/fest-dussehra-rama.webp"><img src="assets/img/arts/thumbs/fest-dussehra-rama.webp" alt="A student in costume as Rama holding a bow beside a burning torch" data-cat="Festivals · Dussehra, 2 October 2025" data-title="Rama, with bow and torch"></a>
+    <a href="assets/img/arts/fest-dussehra-fire.webp"><img src="assets/img/arts/thumbs/fest-dussehra-fire.webp" alt="The ten-headed Ravan effigy burning against the night sky" data-cat="Festivals · Dussehra, 2 October 2025" data-title="Ravan Dahan"></a>
+    <a href="assets/img/arts/fest-dussehra-dance.webp"><img src="assets/img/arts/thumbs/fest-dussehra-dance.webp" alt="Students in saffron dancing on the field at night under floodlights" data-cat="Festivals · Dussehra, 2 October 2025" data-title="Dance on the field under floodlights"></a>
+    <a href="assets/img/arts/fest-dussehra-effigy.webp"><img src="assets/img/arts/thumbs/fest-dussehra-effigy.webp" alt="The ten-headed Ravan effigy standing on the dark field before it is lit" data-cat="Festivals · Dussehra, 2025" data-title="The effigy waits on the field"></a>
+    <a href="assets/img/arts/fest-dussehra-embers.webp"><img src="assets/img/arts/thumbs/fest-dussehra-embers.webp" alt="The Ravan effigy burning in the distance against a black sky" data-cat="Festivals · Dussehra, 2025" data-title="The last of the fire"></a>
+    <a href="assets/img/arts/fest-pongal-altar.webp"><img src="assets/img/arts/thumbs/fest-pongal-altar.webp" alt="A girl placing an offering on an altar hung with sugarcane, marigold garlands, fruit and a brass lamp" data-cat="Festivals · Pongal, 15 January 2026" data-title="An offering at the Pongal altar"></a>
+    <a href="assets/img/arts/fest-pongal-pooja.webp"><img src="assets/img/arts/thumbs/fest-pongal-pooja.webp" alt="A teacher lighting lamps at an altar hung with sugarcane and marigolds in a sunlit courtyard" data-cat="Festivals · Pongal, 15 January 2026" data-title="The Pongal pooja in the courtyard"></a>
+    <a href="assets/img/arts/fest-pongal-veshti.webp"><img src="assets/img/arts/thumbs/fest-pongal-veshti.webp" alt="A group of boys in white shirts and veshti posing together in the sun" data-cat="Festivals · Pongal, 15 January 2026" data-title="In white veshti for the harvest"></a>
+    <a href="assets/img/arts/fest-pongal-pot.webp"><img src="assets/img/arts/thumbs/fest-pongal-pot.webp" alt="A painted clay pot tied with turmeric leaves on a wooden board" data-cat="Festivals · Pongal, 2026" data-title="A pongal pot, painted and tied with turmeric"></a>
+    <a href="assets/img/arts/fest-holi-hills.webp"><img src="assets/img/arts/thumbs/fest-holi-hills.webp" alt="Students playing with colour on a dry field, rocky hills behind them" data-cat="Festivals · Holi, 4 March 2026" data-title="Colour on the field, the hills behind"></a>
+    <a href="assets/img/arts/fest-holi-crowd.webp"><img src="assets/img/arts/thumbs/fest-holi-crowd.webp" alt="A crowd of students in colour-streaked clothes on the field under trees" data-cat="Festivals · Holi, 4 March 2026" data-title="The whole field at once"></a>
+    <a href="assets/img/arts/fest-holi-field.webp"><img src="assets/img/arts/thumbs/fest-holi-field.webp" alt="Students with colour on their faces and clothes crossing the playing field" data-cat="Festivals · Holi, 4 March 2026" data-title="Holi on the field"></a>
+    <a href="assets/img/arts/fest-holi-boy.webp"><img src="assets/img/arts/thumbs/fest-holi-boy.webp" alt="A boy in an orange CIRS shirt covered in colour, grinning, a friend behind him" data-cat="Festivals · Holi, 4 March 2026" data-title="Colour finds its owner"></a>
+    <a href="assets/img/arts/fest-holi-friends.webp"><img src="assets/img/arts/thumbs/fest-holi-friends.webp" alt="Two students standing together, faces streaked with pink and yellow colour" data-cat="Festivals · Holi, 2025" data-title="Two friends, two colours"></a>
+    <a href="assets/img/arts/fest-holi-face.webp"><img src="assets/img/arts/thumbs/fest-holi-face.webp" alt="A student's face covered in blue, pink and yellow colour, smiling in low sunlight" data-cat="Festivals · Holi, 2025" data-title="Every colour at once"></a>
+    <a href="assets/img/arts/fest-holi-colour.webp"><img src="assets/img/arts/thumbs/fest-holi-colour.webp" alt="A hand pressing colour onto a student's cheek, both faces already bright with it" data-cat="Festivals · Holi, 2025" data-title="Colour, pressed to a cheek"></a>
+    <a href="assets/img/arts/fest-holi-portrait.webp"><img src="assets/img/arts/thumbs/fest-holi-portrait.webp" alt="A student looking into the camera, face coated in green and pink colour" data-cat="Festivals · Holi, 2025" data-title="Green and pink to the hairline"></a>
+    <a href="assets/img/arts/aa-pot-blue.webp"><img src="assets/img/arts/thumbs/aa-pot-blue.webp" alt="Four students bent over a pale blue clay pot, painting a band of pink and orange with fine brushes" data-cat="Art Attack" data-title="Painting pots for Pongal, January 2025"></a>
+    <a href="assets/img/arts/aa-paper-table.webp"><img src="assets/img/arts/thumbs/aa-paper-table.webp" alt="Close view of a table covered with folded and cut paper pieces" data-cat="Art Attack" data-title="Paper craft on the tables, Fine Arts Week 2026"></a>
+    <a href="assets/img/arts/aa-paper-board.webp"><img src="assets/img/arts/thumbs/aa-paper-board.webp" alt="Folded paper stars, birds and boxes pinned on a white cloth above a table of paper forms" data-cat="Art Attack" data-title="Folded paper, pinned up for Fine Arts Week 2026"></a>
+    <a href="assets/img/arts/aa-pot-red-1.webp"><img src="assets/img/arts/thumbs/aa-pot-red-1.webp" alt="Four students seated on newspaper around a red clay pot painted with green leaves and white dots, one holding a small pink pot and a brush" data-cat="Art Attack" data-title="Painting pots for Pongal, January 2025"></a>
+    <a href="assets/img/arts/aa-pot-red-2.webp"><img src="assets/img/arts/thumbs/aa-pot-red-2.webp" alt="The same red pot a moment later, a student leaning in to paint along its rim" data-cat="Art Attack" data-title="The same pot, a few moments on"></a>
+    <a href="assets/img/arts/aa-display-talk.webp"><img src="assets/img/arts/thumbs/aa-display-talk.webp" alt="A student gestures towards framed photographs on a display wall as younger students listen" data-cat="Art Attack" data-title="A student talks younger visitors through the work"></a>
+    <a href="assets/img/arts/aa-ib-wall.webp"><img src="assets/img/arts/thumbs/aa-ib-wall.webp" alt="A display wall of drawings and paintings, with an easel holding a drawing on book pages, a relief torso and a boxed model on plinths" data-cat="Art Attack" data-title="IB Visual Arts exhibition, April 2024"></a>
+    <a href="assets/img/arts/aa-ib-model.webp"><img src="assets/img/arts/thumbs/aa-ib-model.webp" alt="A model room seen through wooden bars, its walls covered in small pictures" data-cat="Art Attack" data-title="IB Visual Arts exhibition, April 2024"></a>
+    <a href="assets/img/arts/aa-clay-table.webp"><img src="assets/img/arts/thumbs/aa-clay-table.webp" alt="Students gathered around a long table of small clay figures, one pointing" data-cat="Art Attack" data-title="Students at a table of clay figures"></a>
+    <a href="assets/img/arts/work-cc01-12-01.webp"><img src="assets/img/arts/thumbs/work-cc01-12-01.webp" alt="A cartoon figure with a flame of hair, boxing gloves slung over one shoulder
+The Crossroads, Issue 01 · August 2022" data-cat="Art Attack · Painting or drawing" data-title="Gourav Agrawal" data-w="1"></a>
+    <a href="assets/img/arts/work-cc01-12-02.webp"><img src="assets/img/arts/thumbs/work-cc01-12-02.webp" alt="A kingfisher rising out of splashing water, wings spread
+The Crossroads, Issue 01 · August 2022" data-cat="Art Attack · Painting or drawing" data-title="J Thanvi" data-w="1"></a>
+    <a href="assets/img/arts/work-cc01-12-03.webp"><img src="assets/img/arts/thumbs/work-cc01-12-03.webp" alt="A page filled edge to edge with fine, overlapping flower patterns in black and white
+The Crossroads, Issue 01 · August 2022" data-cat="Art Attack · Painting or drawing" data-title="Dhriti Savani" data-w="1"></a>
+    <a href="assets/img/arts/work-cc02-12-02.webp"><img src="assets/img/arts/thumbs/work-cc02-12-02.webp" alt="A face in bold black outline, half hidden behind a winged mask
+The Crossroads, Issue 02 · September edition" data-cat="Art Attack · Painting or drawing" data-title="J Thanvi" data-w="1"></a>
+    <a href="assets/img/arts/work-cc02-12-03.webp"><img src="assets/img/arts/thumbs/work-cc02-12-03.webp" alt="A comic strip of vegetables solving a mystery in a kitchen, in speech bubbles and coloured panels
+The Crossroads, Issue 02 · September edition" data-cat="Art Attack · Painting or drawing" data-title="Dhriti Savani" data-w="1"></a>
+    <a href="assets/img/arts/work-cc02-12-04.webp"><img src="assets/img/arts/thumbs/work-cc02-12-04.webp" alt="A face in deep blue, eyes shut and mouth open, with water streaming over it
+The Crossroads, Issue 02 · September edition" data-cat="Art Attack · Painting or drawing" data-title="Charuvi Agarwal" data-w="1"></a>
+    <a href="assets/img/arts/work-cc02-12-05.webp"><img src="assets/img/arts/thumbs/work-cc02-12-05.webp" alt="Half a face beside a flute and peacock feather, worked in dense black patterns
+The Crossroads, Issue 02 · September edition" data-cat="Art Attack · Painting or drawing" data-title="P.Larah Anand" data-w="1"></a>
+    <a href="assets/img/arts/work-cc02-12-06.webp"><img src="assets/img/arts/thumbs/work-cc02-12-06.webp" alt="A Kathakali face in green and red, blurred with colour around it
+The Crossroads, Issue 02 · September edition" data-cat="Art Attack · Painting or drawing" data-title="Vanshika.M" data-w="1"></a>
+    <a href="assets/img/arts/work-cc02-12-07.webp"><img src="assets/img/arts/thumbs/work-cc02-12-07.webp" alt="Four small squares: moonlit branches and silhouettes in pink, blue, red and green
+The Crossroads, Issue 02 · September edition" data-cat="Art Attack · Painting or drawing" data-title="Vishwas" data-w="1"></a>
+    <a href="assets/img/arts/work-cc03-12-01.webp"><img src="assets/img/arts/thumbs/work-cc03-12-01.webp" alt="A crowded doodle of buildings, a globe, a trophy and cartoon shapes in bright colours
+The Crossroads, Issue 03 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Rayan Sindol" data-w="1"></a>
+    <a href="assets/img/arts/work-cc03-12-02.webp"><img src="assets/img/arts/thumbs/work-cc03-12-02.webp" alt="Spider-Man's masked face beside a spider, with streaks of colour behind
+The Crossroads, Issue 03 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="T Muhil" data-w="1"></a>
+    <a href="assets/img/arts/work-cc03-12-05.webp"><img src="assets/img/arts/thumbs/work-cc03-12-05.webp" alt="A collage of manga panels, with a masked face at the bottom
+The Crossroads, Issue 03 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Utkarsh Chauhan" data-w="1"></a>
+    <a href="assets/img/arts/work-cc03-12-07.webp"><img src="assets/img/arts/thumbs/work-cc03-12-07.webp" alt="A chess king and pawn, shaded in grey
+The Crossroads, Issue 03 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Siddh Challani" data-w="1"></a>
+    <a href="assets/img/arts/work-cc04-12-02.webp"><img src="assets/img/arts/thumbs/work-cc04-12-02.webp" alt="A large red X filled with tiny drawings of buildings, gears and faces
+The Crossroads, Issue 04 · November–December 2022" data-cat="Art Attack · Painting or drawing" data-title="Priyal Saraf" data-w="1"></a>
+    <a href="assets/img/arts/work-cc04-12-03.webp"><img src="assets/img/arts/thumbs/work-cc04-12-03.webp" alt="A dark winged creature diving through a wash of pale blue, a red tail beneath
+The Crossroads, Issue 04 · November–December 2022" data-cat="Art Attack · Painting or drawing" data-title="Mridul Motwani" data-w="1"></a>
+    <a href="assets/img/arts/work-cc04-12-04.webp"><img src="assets/img/arts/thumbs/work-cc04-12-04.webp" alt="Mickey Mouse standing among a dense yellow doodle of faces and objects
+The Crossroads, Issue 04 · November–December 2022" data-cat="Art Attack · Painting or drawing" data-title="Aman Amruth" data-w="1"></a>
+    <a href="assets/img/arts/work-cc04-12-05.webp"><img src="assets/img/arts/thumbs/work-cc04-12-05.webp" alt="A grinning face with a patched eye and spiky hair, shaded in grey
+The Crossroads, Issue 04 · November–December 2022" data-cat="Art Attack · Painting or drawing" data-title="Pranjal Ranjan" data-w="1"></a>
+    <a href="assets/img/arts/work-cc04-12-06.webp"><img src="assets/img/arts/thumbs/work-cc04-12-06.webp" alt="The Buddha's face with closed eyes, beside pink lotuses on a glowing orange ground
+The Crossroads, Issue 04 · November–December 2022" data-cat="Art Attack · Painting or drawing" data-title="Vanshika Mundada" data-w="1"></a>
+    <a href="assets/img/arts/work-cc04-12-07.webp"><img src="assets/img/arts/thumbs/work-cc04-12-07.webp" alt="A caped, armoured figure in grey tones
+The Crossroads, Issue 04 · November–December 2022" data-cat="Art Attack · Painting or drawing" data-title="Naitik Agarwala" data-w="1"></a>
+    <a href="assets/img/arts/work-cc04-12-08.webp"><img src="assets/img/arts/thumbs/work-cc04-12-08.webp" alt="Two dancers in a Bharatanatyam pose, one in blue, beside a drum
+The Crossroads, Issue 04 · November–December 2022" data-cat="Art Attack · Painting or drawing" data-title="Charuvi Agarwal" data-w="1"></a>
+    <a href="assets/img/arts/work-cc04-12-09.webp"><img src="assets/img/arts/thumbs/work-cc04-12-09.webp" alt="A glass house overgrown with vines, a tree and a yellow sun beside it
+The Crossroads, Issue 04 · November–December 2022" data-cat="Art Attack · Painting or drawing" data-title="Diya Patel" data-w="1"></a>
+    <a href="assets/img/arts/work-cc05-22-01.webp"><img src="assets/img/arts/thumbs/work-cc05-22-01.webp" alt="A dragon's eye, drawn in swirling grey strokes
+The Crossroads, Issue 05 · January–February 2023" data-cat="Art Attack · Painting or drawing" data-title="T. Muhil, Grade 7-C" data-w="1"></a>
+    <a href="assets/img/arts/work-cc05-22-02.webp"><img src="assets/img/arts/thumbs/work-cc05-22-02.webp" alt="Portrait of a bearded footballer in grey tones
+The Crossroads, Issue 05 · January–February 2023" data-cat="Art Attack · Painting or drawing" data-title="Naitik A., Grade 8-A" data-w="1"></a>
+    <a href="assets/img/arts/work-cc05-22-03.webp"><img src="assets/img/arts/thumbs/work-cc05-22-03.webp" alt="A pug's face in warm browns, tongue out
+The Crossroads, Issue 05 · January–February 2023" data-cat="Art Attack · Painting or drawing" data-title="J. Thanvi, Grade 9-A" data-w="1"></a>
+    <a href="assets/img/arts/work-cc05-22-04.webp"><img src="assets/img/arts/thumbs/work-cc05-22-04.webp" alt="An arched bridge over a pink stream, framed by blue and green foliage
+The Crossroads, Issue 05 · January–February 2023" data-cat="Art Attack · Painting or drawing" data-title="Ananya A., Grade 10-C" data-w="1"></a>
+    <a href="assets/img/arts/work-cc05-22-05.webp"><img src="assets/img/arts/thumbs/work-cc05-22-05.webp" alt="A boy seen from behind, reaching up to pull a branch
+The Crossroads, Issue 05 · January–February 2023" data-cat="Art Attack · Painting or drawing" data-title="Prahaladan P., Grade 8-A" data-w="1"></a>
+    <a href="assets/img/arts/work-cc05-22-06.webp"><img src="assets/img/arts/thumbs/work-cc05-22-06.webp" alt="A smiling lion cub
+The Crossroads, Issue 05 · January–February 2023" data-cat="Art Attack · Painting or drawing" data-title="Lokk Vishwaveda, Grade 8-A" data-w="1"></a>
+    <a href="assets/img/arts/work-cc05-23-02.webp"><img src="assets/img/arts/thumbs/work-cc05-23-02.webp" alt="Butterflies over pink and blue washes, with an orange fruit below
+The Crossroads, Issue 05 · January–February 2023" data-cat="Art Attack · Painting or drawing" data-title="Aryaman Bansal, Grade 7-C" data-w="1"></a>
+    <a href="assets/img/arts/work-cc06-22-01.webp"><img src="assets/img/arts/thumbs/work-cc06-22-01.webp" alt="Spider-Man's mask under a hooded jacket, in black and white
+The Crossroads, Issue 06 · February–March 2023" data-cat="Art Attack · Painting or drawing" data-title="T. Muhil, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc06-22-03.webp"><img src="assets/img/arts/thumbs/work-cc06-22-03.webp" alt="Pale orange flowers opening among dark green leaves
+The Crossroads, Issue 06 · February–March 2023" data-cat="Art Attack · Painting or drawing" data-title="Aryaman Bansal, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc06-22-04.webp"><img src="assets/img/arts/thumbs/work-cc06-22-04.webp" alt="The word &quot;believe&quot; in looping letters with patterned feathers
+The Crossroads, Issue 06 · February–March 2023" data-cat="Art Attack · Painting or drawing" data-title="Aditi and Kiara, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc06-23-01.webp"><img src="assets/img/arts/thumbs/work-cc06-23-01.webp" alt="A range of pointed mountain peaks in grey
+The Crossroads, Issue 06 · February–March 2023" data-cat="Art Attack · Painting or drawing" data-title="K. Hitesh, Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc06-23-03.webp"><img src="assets/img/arts/thumbs/work-cc06-23-03.webp" alt="A patterned owl in rainbow colours on a branch among green leaves
+The Crossroads, Issue 06 · February–March 2023" data-cat="Art Attack · Painting or drawing" data-title="Aran and Aarush S." data-w="1"></a>
+    <a href="assets/img/arts/work-cc07-22-01.webp"><img src="assets/img/arts/thumbs/work-cc07-22-01.webp" alt="The earth held above a broken city, with the words &quot;1 Earth 1 Family 1 Future&quot; and &quot;Vasudhaiva Kutumbakam&quot;" data-cat="Art Attack · Painting or drawing" data-title="The Crossroads, Issue 07 · April 2023" data-w="1"></a>
+    <a href="assets/img/arts/work-cc07-22-02.webp"><img src="assets/img/arts/thumbs/work-cc07-22-02.webp" alt="A patterned mandala around the globe, with &quot;Vasudhaiva Kutumbakam&quot; in Devanagari" data-cat="Art Attack · Painting or drawing" data-title="The Crossroads, Issue 07 · April 2023" data-w="1"></a>
+    <a href="assets/img/arts/work-cc07-22-03.webp"><img src="assets/img/arts/thumbs/work-cc07-22-03.webp" alt="A large eye over the globe among lotuses and symbols, titled &quot;Vasudhaiva Kutumbakam&quot;" data-cat="Art Attack · Painting or drawing" data-title="The Crossroads, Issue 07 · April 2023" data-w="1"></a>
+    <a href="assets/img/arts/work-cc07-22-04.webp"><img src="assets/img/arts/thumbs/work-cc07-22-04.webp" alt="A face painted half in one tradition and half in another, with a feathered headdress" data-cat="Art Attack · Painting or drawing" data-title="The Crossroads, Issue 07 · April 2023" data-w="1"></a>
+    <a href="assets/img/arts/work-cc07-23-02.webp"><img src="assets/img/arts/thumbs/work-cc07-23-02.webp" alt="An eagle's head in grey, feathers finely shaded
+The Crossroads, Issue 07 · April 2023" data-cat="Art Attack · Painting or drawing" data-title="Arth Agarwal, Grade 6" data-w="1"></a>
+    <a href="assets/img/arts/work-cc08-25-01.webp"><img src="assets/img/arts/thumbs/work-cc08-25-01.webp" alt="Lord Shiva in profile, with a crescent moon and matted hair, in greys
+The Crossroads, Issue 08 · May 2023" data-cat="Art Attack · Painting or drawing" data-title="Aditya S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc08-25-02.webp"><img src="assets/img/arts/thumbs/work-cc08-25-02.webp" alt="A single orange pumpkin on a green ground
+The Crossroads, Issue 08 · May 2023" data-cat="Art Attack · Painting or drawing" data-title="Arya, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc08-25-03.webp"><img src="assets/img/arts/thumbs/work-cc08-25-03.webp" alt="Two views of a harbour town in flat bright colours, side by side
+The Crossroads, Issue 08 · May 2023" data-cat="Art Attack · Painting or drawing" data-title="Naitik A., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc08-25-04.webp"><img src="assets/img/arts/thumbs/work-cc08-25-04.webp" alt="Three dragons' heads, drawn on pale blue-green paper
+The Crossroads, Issue 08 · May 2023" data-cat="Art Attack · Painting or drawing" data-title="Aaghashwar G. A., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc08-26-01.webp"><img src="assets/img/arts/thumbs/work-cc08-26-01.webp" alt="Hanuman kneeling with his mace, in orange and gold
+The Crossroads, Issue 08 · May 2023" data-cat="Art Attack · Painting or drawing" data-title="Harinarayan, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc08-26-02.webp"><img src="assets/img/arts/thumbs/work-cc08-26-02.webp" alt="A guitar made of patterns and colour blocks, with musical notes around it
+The Crossroads, Issue 08 · May 2023" data-cat="Art Attack · Painting or drawing" data-title="Ishan P. B., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc08-26-03.webp"><img src="assets/img/arts/thumbs/work-cc08-26-03.webp" alt="The word &quot;ART&quot; formed from a mass of tiny faces and shapes in black ink
+The Crossroads, Issue 08 · May 2023" data-cat="Art Attack · Painting or drawing" data-title="Rushikeshwar R., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc08-26-04.webp"><img src="assets/img/arts/thumbs/work-cc08-26-04.webp" alt="A woman with long red braids and gold earrings, in strong colour
+The Crossroads, Issue 08 · May 2023" data-cat="Art Attack · Painting or drawing" data-title="Rayan S., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc09-22-01.webp"><img src="assets/img/arts/thumbs/work-cc09-22-01.webp" alt="A woman's face resting on one hand, shaded in grey
+The Crossroads, Issue 09 · July 2023" data-cat="Art Attack · Painting or drawing" data-title="M K Prateethi, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc09-22-02.webp"><img src="assets/img/arts/thumbs/work-cc09-22-02.webp" alt="A teacup and saucer with a spoon, in soft pinks, yellows and blues
+The Crossroads, Issue 09 · July 2023" data-cat="Art Attack · Painting or drawing" data-title="Ishana K, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc09-22-04.webp"><img src="assets/img/arts/thumbs/work-cc09-22-04.webp" alt="A woman's face with eyes closed and water running over it, in sepia greys
+The Crossroads, Issue 09 · July 2023" data-cat="Art Attack · Painting or drawing" data-title="V. Manassa, IB Year 1" data-w="1"></a>
+    <a href="assets/img/arts/work-cc09-23-01.webp"><img src="assets/img/arts/thumbs/work-cc09-23-01.webp" alt="A small blue bird on a branch among red berries and yellow leaves
+The Crossroads, Issue 09 · July 2023" data-cat="Art Attack · Painting or drawing" data-title="Imaya S, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc09-23-03.webp"><img src="assets/img/arts/thumbs/work-cc09-23-03.webp" alt="A long-necked creature folded from white paper
+The Crossroads, Issue 09 · July 2023" data-cat="Art Attack · Craft" data-title="Mridul B M, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc09-23-04.webp"><img src="assets/img/arts/thumbs/work-cc09-23-04.webp" alt="A wide-eyed cartoon scientist in bright pinks, blues and greens
+The Crossroads, Issue 09 · July 2023" data-cat="Art Attack · Painting or drawing" data-title="Hiya Dave, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-22-01.webp"><img src="assets/img/arts/thumbs/work-cc10-22-01.webp" alt="A figure playing a stringed instrument, made of wound brown cord, on black
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Craft" data-title="Samarth and Divyam, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-22-02.webp"><img src="assets/img/arts/thumbs/work-cc10-22-02.webp" alt="Lord Shiva's face split down the middle, half drawn in patterns, with a trident and drum
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Harshita, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-22-03.webp"><img src="assets/img/arts/thumbs/work-cc10-22-03.webp" alt="A brown vase with raised gold swirls
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Craft" data-title="Tanmay Mantri, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-22-04.webp"><img src="assets/img/arts/thumbs/work-cc10-22-04.webp" alt="Autumn trees in orange and gold beneath pale blue mountains
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Imaya, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-22-05.webp"><img src="assets/img/arts/thumbs/work-cc10-22-05.webp" alt="A face with a single earring, drawn in bold grey outlines
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Siddhant, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-22-06.webp"><img src="assets/img/arts/thumbs/work-cc10-22-06.webp" alt="A small figure with raised arms on a hill beneath a rainbow
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Kartik Jain, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-22-07.webp"><img src="assets/img/arts/thumbs/work-cc10-22-07.webp" alt="Black-and-white waves above red and green paisley shapes
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Rishi K.B., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-22-08.webp"><img src="assets/img/arts/thumbs/work-cc10-22-08.webp" alt="A coconut palm leaning over water, with a boat in the distance, in grey
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Sadhana, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-01.webp"><img src="assets/img/arts/thumbs/work-cc10-23-01.webp" alt="An old man with glasses and a long beard, hands folded, beside the word &quot;Ommm&quot;
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Garvit S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-02.webp"><img src="assets/img/arts/thumbs/work-cc10-23-02.webp" alt="Dark peaks and bare trees reflected in water under an orange and pink sky
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Yug Didwania, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-03.webp"><img src="assets/img/arts/thumbs/work-cc10-23-03.webp" alt="A hooded archer with a bow, in grey
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="S.P. Abhey V., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-04.webp"><img src="assets/img/arts/thumbs/work-cc10-23-04.webp" alt="The Buddha's face above a lotus, with the words &quot;Lord Buddha&quot;
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Kriti, Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-05.webp"><img src="assets/img/arts/thumbs/work-cc10-23-05.webp" alt="A dark tree silhouetted against a gradient from turquoise to orange, under a white moon
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Arth Agarwal, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-06.webp"><img src="assets/img/arts/thumbs/work-cc10-23-06.webp" alt="Portrait of Swami Vivekananda in his turban, in grey
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Ayush Gupta, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-07.webp"><img src="assets/img/arts/thumbs/work-cc10-23-07.webp" alt="Palm trees and a heron silhouetted against a sunset
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Vyan Goyal, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-08.webp"><img src="assets/img/arts/thumbs/work-cc10-23-08.webp" alt="A butterfly filled with coloured dots
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="K. Sanashri, Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-09.webp"><img src="assets/img/arts/thumbs/work-cc10-23-09.webp" alt="A bright flower on a ground of purple and pink shapes
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Vivaan R., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-10.webp"><img src="assets/img/arts/thumbs/work-cc10-23-10.webp" alt="A seated sage with raised hand, small paper stars, and a figure writing below
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Valmiki" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-11.webp"><img src="assets/img/arts/thumbs/work-cc10-23-11.webp" alt="A dark figure standing on the globe amid falling red petals
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Vasishta" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-12.webp"><img src="assets/img/arts/thumbs/work-cc10-23-12.webp" alt="A jigsaw of a saffron-robed teacher and a boy, pieces coming loose towards a man in a suit
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Vishwamitra" data-w="1"></a>
+    <a href="assets/img/arts/work-cc10-23-13.webp"><img src="assets/img/arts/thumbs/work-cc10-23-13.webp" alt="A crowned figure hugging the globe, above the words &quot;Love All. Serve All.&quot;
+The Crossroads, Issue 10 · August 2023" data-cat="Art Attack · Painting or drawing" data-title="Vyasa" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-01.webp"><img src="assets/img/arts/thumbs/work-cc11-23-01.webp" alt="The Joker, his face half a skull, holding a clown mask
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Painting or drawing" data-title="Shreyash J., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-02.webp"><img src="assets/img/arts/thumbs/work-cc11-23-02.webp" alt="Krishna's profile in a few lines, with a peacock feather and flute, on blue
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Painting or drawing" data-title="Nishitha P., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-03.webp"><img src="assets/img/arts/thumbs/work-cc11-23-03.webp" alt="A stag's head in red thread strung between pins on a dark board
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Craft" data-title="Anshika B., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-04.webp"><img src="assets/img/arts/thumbs/work-cc11-23-04.webp" alt="A deep blue butterfly beside a cluster of blue roses
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Painting or drawing" data-title="Sia Rajiv, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-05.webp"><img src="assets/img/arts/thumbs/work-cc11-23-05.webp" alt="A figure in a mask and cloak, in angular greys and blacks
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Painting or drawing" data-title="Laksh Pradhwani, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-06.webp"><img src="assets/img/arts/thumbs/work-cc11-23-06.webp" alt="A woman's face behind a large butterfly, in streaks of blue, pink and yellow
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Painting or drawing" data-title="Prisha Bhartia, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-07.webp"><img src="assets/img/arts/thumbs/work-cc11-23-07.webp" alt="A seated figure picked out in coloured thread on black, with a halo of pink rays
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Craft" data-title="Radha G., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-08.webp"><img src="assets/img/arts/thumbs/work-cc11-23-08.webp" alt="A Kathakali face in green, red and yellow
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Painting or drawing" data-title="Ridhima Jain, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-09.webp"><img src="assets/img/arts/thumbs/work-cc11-23-09.webp" alt="A head in silhouette crowned with a patterned arc, planets inside it
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Painting or drawing" data-title="Anushya U.K., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc11-23-10.webp"><img src="assets/img/arts/thumbs/work-cc11-23-10.webp" alt="Hanuman in profile, his hair in flowing orange strokes, on yellow
+The Crossroads, Issue 11 · September 2023" data-cat="Art Attack · Painting or drawing" data-title="Aran S.C., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-22-01.webp"><img src="assets/img/arts/thumbs/work-cc12-22-01.webp" alt="A young man with a fringe of hair, in grey
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Reshmi, IB Year 1" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-22-02.webp"><img src="assets/img/arts/thumbs/work-cc12-22-02.webp" alt="A butterfly of blue geometric facets on a blue and cream ground
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Aarush S., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-22-03.webp"><img src="assets/img/arts/thumbs/work-cc12-22-03.webp" alt="An anime boy with red eyes and bared teeth, in reds and black
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Yashas M." data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-22-04.webp"><img src="assets/img/arts/thumbs/work-cc12-22-04.webp" alt="A many-armed blue deity above flames
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Harinarayan, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-22-06.webp"><img src="assets/img/arts/thumbs/work-cc12-22-06.webp" alt="A rocket lifting off against the colours of the Indian flag
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Garvit S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-22-07.webp"><img src="assets/img/arts/thumbs/work-cc12-22-07.webp" alt="A figure with a sword, in loose black lines
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="V. Amrita, Grade XI Sci." data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-22-08.webp"><img src="assets/img/arts/thumbs/work-cc12-22-08.webp" alt="A figure whose head is a hollow of swirling blue rings
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Rayan S., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-22-09.webp"><img src="assets/img/arts/thumbs/work-cc12-22-09.webp" alt="Half a mandala in fine black pattern
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Dhriti S., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-22-10.webp"><img src="assets/img/arts/thumbs/work-cc12-22-10.webp" alt="A woman in heavy jewellery carrying a rock above her head
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Aashi K., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-01.webp"><img src="assets/img/arts/thumbs/work-cc12-23-01.webp" alt="A dragon's head of black spines and scales
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Naitik A., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-02.webp"><img src="assets/img/arts/thumbs/work-cc12-23-02.webp" alt="A close study of a brown eye
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="V. Manassa, IB Year 1" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-03.webp"><img src="assets/img/arts/thumbs/work-cc12-23-03.webp" alt="A single white rose on black
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Sanvi S., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-05.webp"><img src="assets/img/arts/thumbs/work-cc12-23-05.webp" alt="Lord Ganesha drawn in dense black patterns, with red accents
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Kripa R., Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-06.webp"><img src="assets/img/arts/thumbs/work-cc12-23-06.webp" alt="An old man with swept-back hair, laughing, in fine grey lines
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Charuvi A., IB Year 2" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-07.webp"><img src="assets/img/arts/thumbs/work-cc12-23-07.webp" alt="A tiger's face in grey
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Dhyom D., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-08.webp"><img src="assets/img/arts/thumbs/work-cc12-23-08.webp" alt="A winged dragon in outline
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Tanay L., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-10.webp"><img src="assets/img/arts/thumbs/work-cc12-23-10.webp" alt="A masked ninja with a headband, in grey
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Rohith C. B., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-11.webp"><img src="assets/img/arts/thumbs/work-cc12-23-11.webp" alt="A light sketch of bicycles beneath windows, with a girl sitting beside them
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Ritika D., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc12-23-12.webp"><img src="assets/img/arts/thumbs/work-cc12-23-12.webp" alt="A figure with a rainbow umbrella in a rain of thick, broken colour
+The Crossroads, Issue 12 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Vanshika M., Grade XII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc13-22-01.webp"><img src="assets/img/arts/thumbs/work-cc13-22-01.webp" alt="A caricature of a man in a suit, in bold black line
+The Crossroads, Issue 13 · November–December issue" data-cat="Art Attack · Painting or drawing" data-title="Saeesha Santosh, IB Year 1" data-w="1"></a>
+    <a href="assets/img/arts/work-cc13-22-02.webp"><img src="assets/img/arts/thumbs/work-cc13-22-02.webp" alt="A young man with long pale hair, in charcoal greys
+The Crossroads, Issue 13 · November–December issue" data-cat="Art Attack · Painting or drawing" data-title="M. K. Prateethi, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc13-22-03.webp"><img src="assets/img/arts/thumbs/work-cc13-22-03.webp" alt="A single eye shedding long drips of tears
+The Crossroads, Issue 13 · November–December issue" data-cat="Art Attack · Painting or drawing" data-title="Kanisha, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc13-23-02.webp"><img src="assets/img/arts/thumbs/work-cc13-23-02.webp" alt="Two dreamcatchers of fine pattern hung with green leaves
+The Crossroads, Issue 13 · November–December issue" data-cat="Art Attack · Painting or drawing" data-title="Geetikaa Agarwal, Grade XI Sci." data-w="1"></a>
+    <a href="assets/img/arts/work-cc13-23-03.webp"><img src="assets/img/arts/thumbs/work-cc13-23-03.webp" alt="Lord Ganesha on a lotus, with the words &quot;Oh my friend Ganesha&quot;
+The Crossroads, Issue 13 · November–December issue" data-cat="Art Attack · Painting or drawing" data-title="Ritesh, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc13-23-04.webp"><img src="assets/img/arts/thumbs/work-cc13-23-04.webp" alt="A sunset in red and orange over dark blue water
+The Crossroads, Issue 13 · November–December issue" data-cat="Art Attack · Painting or drawing" data-title="Ananya Agrawal, Grade XI Sci." data-w="1"></a>
+    <a href="assets/img/arts/work-cc13-23-05.webp"><img src="assets/img/arts/thumbs/work-cc13-23-05.webp" alt="A doorway overgrown with climbing leaves, in black ink
+The Crossroads, Issue 13 · November–December issue" data-cat="Art Attack · Painting or drawing" data-title="V. Manassa, IB Year 1" data-w="1"></a>
+    <a href="assets/img/arts/work-cc14-22-01.webp"><img src="assets/img/arts/thumbs/work-cc14-22-01.webp" alt="A racing driver in helmet and sponsor-covered suit
+The Crossroads, Issue 14 · January–February 2024" data-cat="Art Attack · Painting or drawing" data-title="Naitik A., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc14-22-02.webp"><img src="assets/img/arts/thumbs/work-cc14-22-02.webp" alt="A woman in a patterned veil, in grey
+The Crossroads, Issue 14 · January–February 2024" data-cat="Art Attack · Painting or drawing" data-title="Kanisha, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc14-22-03.webp"><img src="assets/img/arts/thumbs/work-cc14-22-03.webp" alt="A tiger lying on rocks among green trees
+The Crossroads, Issue 14 · January–February 2024" data-cat="Art Attack · Painting or drawing" data-title="Sanvi S., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc14-22-04.webp"><img src="assets/img/arts/thumbs/work-cc14-22-04.webp" alt="Photograph of a white clay stegosaurus on a ledge
+The Crossroads, Issue 14 · January–February 2024" data-cat="Art Attack · Craft" data-title="Mridul M., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc14-22-05.webp"><img src="assets/img/arts/thumbs/work-cc14-22-05.webp" alt="A tall temple with many tiers and a flag on its spire
+The Crossroads, Issue 14 · January–February 2024" data-cat="Art Attack · Painting or drawing" data-title="V. Manassa, IB Year 1" data-w="1"></a>
+    <a href="assets/img/arts/work-cc14-23-01.webp"><img src="assets/img/arts/thumbs/work-cc14-23-01.webp" alt="A cottage by a golden lake beneath trees and a glowing sky
+The Crossroads, Issue 14 · January–February 2024" data-cat="Art Attack · Painting or drawing" data-title="M. Siddarth and Abhinav R., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc14-23-02.webp"><img src="assets/img/arts/thumbs/work-cc14-23-02.webp" alt="SpongeBob with pink muscled arms, striding in trainers
+The Crossroads, Issue 14 · January–February 2024" data-cat="Art Attack · Painting or drawing" data-title="Seyon, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc14-23-04.webp"><img src="assets/img/arts/thumbs/work-cc14-23-04.webp" alt="A man and a woman walking through a blue, sunlit forest, a deer behind them
+The Crossroads, Issue 14 · January–February 2024" data-cat="Art Attack · Painting or drawing" data-title="Dhruthi, Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-22-01.webp"><img src="assets/img/arts/thumbs/work-cc15-22-01.webp" alt="Orange flowers on dark stems with green leaves
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Painting or drawing" data-title="Kanushree A., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-22-02.webp"><img src="assets/img/arts/thumbs/work-cc15-22-02.webp" alt="Koi swimming among lily pads, with Chinese characters beside them
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Painting or drawing" data-title="Seyon and Siddarth, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-22-03.webp"><img src="assets/img/arts/thumbs/work-cc15-22-03.webp" alt="A face split between a grey-haired and a yellow-haired anime character
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Painting or drawing" data-title="Arav J., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-22-04.webp"><img src="assets/img/arts/thumbs/work-cc15-22-04.webp" alt="Photograph of a painted round disc with folk figures, laid on stone
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Craft" data-title="Radha Goyal, Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-22-05.webp"><img src="assets/img/arts/thumbs/work-cc15-22-05.webp" alt="A globe on its stand, half filled with fine pattern and feathers
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Painting or drawing" data-title="Geetikaa A., Grade XI Sci" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-23-01.webp"><img src="assets/img/arts/thumbs/work-cc15-23-01.webp" alt="Pine trees against a starry night sky with shooting stars
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Painting or drawing" data-title="Gauraang A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-23-02.webp"><img src="assets/img/arts/thumbs/work-cc15-23-02.webp" alt="A woman's face framed by red and blue flowers, on yellow
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Painting or drawing" data-title="Gnanada M., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-23-03.webp"><img src="assets/img/arts/thumbs/work-cc15-23-03.webp" alt="A tiger's green eye among black stripes
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Painting or drawing" data-title="Lokk V., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-23-04.webp"><img src="assets/img/arts/thumbs/work-cc15-23-04.webp" alt="A red cherry splashing into water, in white on black
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Painting or drawing" data-title="Saket K., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc15-23-07.webp"><img src="assets/img/arts/thumbs/work-cc15-23-07.webp" alt="A Kathakali face in green beneath a tall ornamented crown
+The Crossroads, Issue 15 · March 2024" data-cat="Art Attack · Painting or drawing" data-title="P. V. Satvika, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc16-23-01.webp"><img src="assets/img/arts/thumbs/work-cc16-23-01.webp" alt="An anime figure wrapped in branches, in black line
+The Crossroads, Issue 16 · April–May 2024" data-cat="Art Attack · Painting or drawing" data-title="Siddhant Jain, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc16-23-02.webp"><img src="assets/img/arts/thumbs/work-cc16-23-02.webp" alt="Lord Rama in blue holding a squirrel on his palm
+The Crossroads, Issue 16 · April–May 2024" data-cat="Art Attack · Painting or drawing" data-title="Pirai Soodan, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc16-23-03.webp"><img src="assets/img/arts/thumbs/work-cc16-23-03.webp" alt="An anime boy with red spiky hair and hanging earrings
+The Crossroads, Issue 16 · April–May 2024" data-cat="Art Attack · Painting or drawing" data-title="Arya, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc16-23-05.webp"><img src="assets/img/arts/thumbs/work-cc16-23-05.webp" alt="A winged dragon in light outline on cream paper
+The Crossroads, Issue 16 · April–May 2024" data-cat="Art Attack · Painting or drawing" data-title="Devesh Kumaar, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-22-03.webp"><img src="assets/img/arts/thumbs/work-cc17-22-03.webp" alt="An anime pirate leaping, above the words &quot;One Piece&quot;
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="Aryavardhan A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-22-04.webp"><img src="assets/img/arts/thumbs/work-cc17-22-04.webp" alt="An orange dragon with blue wings
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="Vedant A., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-22-05.webp"><img src="assets/img/arts/thumbs/work-cc17-22-05.webp" alt="An anime face in black outline with red and blue offset lines
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="Vishnu J., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-22-06.webp"><img src="assets/img/arts/thumbs/work-cc17-22-06.webp" alt="A green zombie head with a gap-toothed grin
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="Kartik J., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-22-07.webp"><img src="assets/img/arts/thumbs/work-cc17-22-07.webp" alt="A figure in a wide straw hat and open coat, in grey
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="K. Hitesh, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-23-02.webp"><img src="assets/img/arts/thumbs/work-cc17-23-02.webp" alt="A woman with long auburn hair and green eyes, on yellow
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="Aashi K., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-23-03.webp"><img src="assets/img/arts/thumbs/work-cc17-23-03.webp" alt="A woman in a white dress and sun hat among blue flowers in long grass
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="Sia R., Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-23-04.webp"><img src="assets/img/arts/thumbs/work-cc17-23-04.webp" alt="A figure on a broom racing a huge dragon, in light grey line
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="Lokk V., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-23-05.webp"><img src="assets/img/arts/thumbs/work-cc17-23-05.webp" alt="A large round mandala in fine black pattern
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="Dhriti S., IB Year 1" data-w="1"></a>
+    <a href="assets/img/arts/work-cc17-23-07.webp"><img src="assets/img/arts/thumbs/work-cc17-23-07.webp" alt="A blue dragon with folded wings
+The Crossroads, Issue 17 · July 2024" data-cat="Art Attack · Painting or drawing" data-title="Pirai S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc18-22-01.webp"><img src="assets/img/arts/thumbs/work-cc18-22-01.webp" alt="A woman's face broken into shards, in grey
+The Crossroads, Issue 18 · August 2024" data-cat="Art Attack · Painting or drawing" data-title="M. K. Prateethi, Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc18-22-04.webp"><img src="assets/img/arts/thumbs/work-cc18-22-04.webp" alt="A dog's face in soft orange washes
+The Crossroads, Issue 18 · August 2024" data-cat="Art Attack · Painting or drawing" data-title="Eklavya A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc18-22-05.webp"><img src="assets/img/arts/thumbs/work-cc18-22-05.webp" alt="A wristwatch drawn on squared paper
+The Crossroads, Issue 18 · August 2024" data-cat="Art Attack · Painting or drawing" data-title="Rudransh T., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc18-23-01.webp"><img src="assets/img/arts/thumbs/work-cc18-23-01.webp" alt="Thatched shelters beneath a mountain ridge, in light grey line
+The Crossroads, Issue 18 · August 2024" data-cat="Art Attack · Painting or drawing" data-title="Ritesh E., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc18-23-03.webp"><img src="assets/img/arts/thumbs/work-cc18-23-03.webp" alt="Portrait of a smiling bearded man, in charcoal greys
+The Crossroads, Issue 18 · August 2024" data-cat="Art Attack · Painting or drawing" data-title="Arth A., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc18-23-04.webp"><img src="assets/img/arts/thumbs/work-cc18-23-04.webp" alt="A pink lotus and a ladybird on a leaf beneath a swirling blue moon
+The Crossroads, Issue 18 · August 2024" data-cat="Art Attack · Painting or drawing" data-title="Pirai S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc18-23-05.webp"><img src="assets/img/arts/thumbs/work-cc18-23-05.webp" alt="An anime swordsman in orange among blue lightning
+The Crossroads, Issue 18 · August 2024" data-cat="Art Attack · Painting or drawing" data-title="S. Rithesh, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-22-01.webp"><img src="assets/img/arts/thumbs/work-cc19-22-01.webp" alt="A freckled young woman's face, finely shaded in grey
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="V. Manassa, IB Year 2" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-22-03.webp"><img src="assets/img/arts/thumbs/work-cc19-22-03.webp" alt="Two figures in a boat silhouetted against a full moon over blue water
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Ronav A., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-22-04.webp"><img src="assets/img/arts/thumbs/work-cc19-22-04.webp" alt="SpongeBob built from a crowd of small doodles
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Naitik A., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-22-05.webp"><img src="assets/img/arts/thumbs/work-cc19-22-05.webp" alt="Kakashi with his mask and spiky hair, signed &quot;Kakashi&quot;
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="J. Nidharshan, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-22-06.webp"><img src="assets/img/arts/thumbs/work-cc19-22-06.webp" alt="Two hands reaching up beside a note reading &quot;We should appreciate everyone &amp; everything&quot;
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Shaurya C., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-02.webp"><img src="assets/img/arts/thumbs/work-cc19-23-02.webp" alt="A crowned pink creature above the words &quot;So long, nerds&quot;
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Anandini N., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-03.webp"><img src="assets/img/arts/thumbs/work-cc19-23-03.webp" alt="A tiled house among palm trees, in fine black line
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Tarushi A., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-04.webp"><img src="assets/img/arts/thumbs/work-cc19-23-04.webp" alt="An anime swordsman in patterned robes slicing through blue waves
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="S. Rithesh, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-05.webp"><img src="assets/img/arts/thumbs/work-cc19-23-05.webp" alt="Black branches against an orange and yellow sky
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Naman T., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-06.webp"><img src="assets/img/arts/thumbs/work-cc19-23-06.webp" alt="A woman in a red sari holding a golden Ganesha among lotuses
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Eklavya A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-07.webp"><img src="assets/img/arts/thumbs/work-cc19-23-07.webp" alt="Hanuman with five heads and many arms, holding weapons
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Hari Narayan S., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-09.webp"><img src="assets/img/arts/thumbs/work-cc19-23-09.webp" alt="A green bottle, a blue plate and a clay pot
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Arth A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-10.webp"><img src="assets/img/arts/thumbs/work-cc19-23-10.webp" alt="A pink monster with a jagged open mouth
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Kishan V., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-11.webp"><img src="assets/img/arts/thumbs/work-cc19-23-11.webp" alt="A woman in goggles and a headdress of branches, in black and white
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="M. K. Prateethi, Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc19-23-12.webp"><img src="assets/img/arts/thumbs/work-cc19-23-12.webp" alt="Pikachu and Squirtle in sunglasses
+The Crossroads, Issue 19 · September–October 2024" data-cat="Art Attack · Painting or drawing" data-title="Vedant A., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc20-23-01.webp"><img src="assets/img/arts/thumbs/work-cc20-23-01.webp" alt="A round mandala in fine black pattern
+The Crossroads, Issue 20 · November–December 2024" data-cat="Art Attack · Painting or drawing" data-title="Dhriti S., IB Year 1" data-w="1"></a>
+    <a href="assets/img/arts/work-cc20-23-04.webp"><img src="assets/img/arts/thumbs/work-cc20-23-04.webp" alt="Rama and Sita embracing, against orange and green hills
+The Crossroads, Issue 20 · November–December 2024" data-cat="Art Attack · Painting or drawing" data-title="Pirai S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc20-23-05.webp"><img src="assets/img/arts/thumbs/work-cc20-23-05.webp" alt="A many-armed blue deity standing on the globe
+The Crossroads, Issue 20 · November–December 2024" data-cat="Art Attack · Painting or drawing" data-title="Shwet G., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc21-22-01.webp"><img src="assets/img/arts/thumbs/work-cc21-22-01.webp" alt="Pink roses in a striped pink and blue vase on a yellow ground
+The Crossroads, Issue 21 · January 2025" data-cat="Art Attack · Painting or drawing" data-title="Ayush G., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc21-22-02.webp"><img src="assets/img/arts/thumbs/work-cc21-22-02.webp" alt="A close net of green squares outlined in black
+The Crossroads, Issue 21 · January 2025" data-cat="Art Attack · Painting or drawing" data-title="Mithra A., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc21-22-06.webp"><img src="assets/img/arts/thumbs/work-cc21-22-06.webp" alt="A girl in a cap and choker, in light grey line
+The Crossroads, Issue 21 · January 2025" data-cat="Art Attack · Painting or drawing" data-title="Aadhya A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc21-23-01.webp"><img src="assets/img/arts/thumbs/work-cc21-23-01.webp" alt="A slice of strawberry cake dripping with pink icing
+The Crossroads, Issue 21 · January 2025" data-cat="Art Attack · Painting or drawing" data-title="Devansh S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc21-23-02.webp"><img src="assets/img/arts/thumbs/work-cc21-23-02.webp" alt="An anime swordsman with long black hair against blue shards of glass
+The Crossroads, Issue 21 · January 2025" data-cat="Art Attack · Painting or drawing" data-title="Ritesh S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc21-23-04.webp"><img src="assets/img/arts/thumbs/work-cc21-23-04.webp" alt="A stag silhouetted on a cliff against a pink sky and white moon
+The Crossroads, Issue 21 · January 2025" data-cat="Art Attack · Painting or drawing" data-title="Yuvraj T., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc21-23-05.webp"><img src="assets/img/arts/thumbs/work-cc21-23-05.webp" alt="A cheerful child Hanuman sitting cross-legged
+The Crossroads, Issue 21 · January 2025" data-cat="Art Attack · Painting or drawing" data-title="Ronav A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc21-23-06.webp"><img src="assets/img/arts/thumbs/work-cc21-23-06.webp" alt="A grinning camel on pink dunes beneath a black sun
+The Crossroads, Issue 21 · January 2025" data-cat="Art Attack · Painting or drawing" data-title="Pranitha, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-22-01.webp"><img src="assets/img/arts/thumbs/work-cc22-22-01.webp" alt="A heron silhouetted against an orange sun on a red sky
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Aarush K., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-22-02.webp"><img src="assets/img/arts/thumbs/work-cc22-22-02.webp" alt="An anime face split between fiery orange and icy blue hair
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Vivaan R., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-22-03.webp"><img src="assets/img/arts/thumbs/work-cc22-22-03.webp" alt="A boy in round glasses, in splashes of blue
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Arav, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-22-04.webp"><img src="assets/img/arts/thumbs/work-cc22-22-04.webp" alt="A lotus mandala in black line
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Lavanya K., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-22-05.webp"><img src="assets/img/arts/thumbs/work-cc22-22-05.webp" alt="A patterned pot with a flute and peacock feather laid across it
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Srinika, Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-22-06.webp"><img src="assets/img/arts/thumbs/work-cc22-22-06.webp" alt="A single dark red rose on a warm brown wash
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Shakthi C., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-22-07.webp"><img src="assets/img/arts/thumbs/work-cc22-22-07.webp" alt="Half a butterfly, its wing orange and black
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Trisha, Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-22-08.webp"><img src="assets/img/arts/thumbs/work-cc22-22-08.webp" alt="A steam engine thundering through an autumn landscape
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Devansh S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-22-09.webp"><img src="assets/img/arts/thumbs/work-cc22-22-09.webp" alt="A small girl and a giant cat, in faint outline
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Nakshatra G., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-01.webp"><img src="assets/img/arts/thumbs/work-cc22-23-01.webp" alt="A star of many coloured striped points around a white centre
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Kushagra A., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-02.webp"><img src="assets/img/arts/thumbs/work-cc22-23-02.webp" alt="An anime face half scarred, in grey
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Siddhant J., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-03.webp"><img src="assets/img/arts/thumbs/work-cc22-23-03.webp" alt="A green snake coiled on a brown wash
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Tanay L., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-04.webp"><img src="assets/img/arts/thumbs/work-cc22-23-04.webp" alt="A hand catching a drop from a tap above the earth, over a village
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Ayush G., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-05.webp"><img src="assets/img/arts/thumbs/work-cc22-23-05.webp" alt="Warli-style figures dancing in a ring among trees, birds and a hut
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Stuti R., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-06.webp"><img src="assets/img/arts/thumbs/work-cc22-23-06.webp" alt="Half a flower mandala beside a flute and peacock feather
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Stuti B., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-07.webp"><img src="assets/img/arts/thumbs/work-cc22-23-07.webp" alt="A sunflower framing a music player screen
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Naman T., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-08.webp"><img src="assets/img/arts/thumbs/work-cc22-23-08.webp" alt="An anime figure with long dark hair and a red blade, in purples and reds
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Aarush S., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-09.webp"><img src="assets/img/arts/thumbs/work-cc22-23-09.webp" alt="A tall stack of doodled objects: a clock, a pumpkin, a gift, popcorn and a television
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Vedant A., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-10.webp"><img src="assets/img/arts/thumbs/work-cc22-23-10.webp" alt="Two cranes silhouetted before a sun setting into an orange lake
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Vyan G., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-11.webp"><img src="assets/img/arts/thumbs/work-cc22-23-11.webp" alt="A fried egg on toast with chillies and herbs
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="Arth A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc22-23-12.webp"><img src="assets/img/arts/thumbs/work-cc22-23-12.webp" alt="An anime boy with blue eyes in a checked robe
+The Crossroads, Issue 22 · February 2025" data-cat="Art Attack · Painting or drawing" data-title="V. Pirai Soodan, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-22-01.webp"><img src="assets/img/arts/thumbs/work-cc23-22-01.webp" alt="Deadpool with two swords, under the words &quot;Maximum Effort&quot;
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="T. Muhil, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-22-02.webp"><img src="assets/img/arts/thumbs/work-cc23-22-02.webp" alt="An anime fighter with spiky golden hair
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Jaival P., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-22-03.webp"><img src="assets/img/arts/thumbs/work-cc23-22-03.webp" alt="Hanuman carrying a mountain on his shoulder
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Vedant A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-22-04.webp"><img src="assets/img/arts/thumbs/work-cc23-22-04.webp" alt="An anime swordsman crouching, in an orange and yellow robe
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="J. Nidharshan, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-22-05.webp"><img src="assets/img/arts/thumbs/work-cc23-22-05.webp" alt="A bottle, a wine glass and grapes on a basket, in grey
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Devitt A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-22-06.webp"><img src="assets/img/arts/thumbs/work-cc23-22-06.webp" alt="A blue bird on a flowering branch
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Arth A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-22-07.webp"><img src="assets/img/arts/thumbs/work-cc23-22-07.webp" alt="Pikachu crackling with blue electricity, beside the word &quot;Electro Ball&quot;
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Sahishn R., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-22-08.webp"><img src="assets/img/arts/thumbs/work-cc23-22-08.webp" alt="A grinning cartoon skull in black outline
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Kartik J., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-23-01.webp"><img src="assets/img/arts/thumbs/work-cc23-23-01.webp" alt="A turtle swimming, seen from above, in grey
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Mithra A., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-23-02.webp"><img src="assets/img/arts/thumbs/work-cc23-23-02.webp" alt="A foot in anklets and a red high-heeled sandal, in ink and red
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Harshita B., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-23-03.webp"><img src="assets/img/arts/thumbs/work-cc23-23-03.webp" alt="A tall Shiva lingam and trident in dense black pattern
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Manvi T., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-23-04.webp"><img src="assets/img/arts/thumbs/work-cc23-23-04.webp" alt="A young woman with a fringe, surrounded by handwritten song lyrics
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Ritika D., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc23-23-05.webp"><img src="assets/img/arts/thumbs/work-cc23-23-05.webp" alt="A hummingbird's head in grey
+The Crossroads, Issue 23 · April 2025" data-cat="Art Attack · Painting or drawing" data-title="Adhvika, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc24-22-01.webp"><img src="assets/img/arts/thumbs/work-cc24-22-01.webp" alt="Lord Rama in blue drawing his bow
+The Crossroads, Issue 24 · May 2025" data-cat="Art Attack · Painting or drawing" data-title="Govardhan, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc24-22-02.webp"><img src="assets/img/arts/thumbs/work-cc24-22-02.webp" alt="A stream through green fields and trees under a violet sky
+The Crossroads, Issue 24 · May 2025" data-cat="Art Attack · Painting or drawing" data-title="Ekaklavya A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc24-22-04.webp"><img src="assets/img/arts/thumbs/work-cc24-22-04.webp" alt="An anime figure with orange hair in a dark cloak, framed by geometric colour
+The Crossroads, Issue 24 · May 2025" data-cat="Art Attack · Painting or drawing" data-title="Aaryaman S., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc24-23-04.webp"><img src="assets/img/arts/thumbs/work-cc24-23-04.webp" alt="A cottage beneath misty hills and trees, in grey
+The Crossroads, Issue 24 · May 2025" data-cat="Art Attack · Painting or drawing" data-title="Yuvika A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc24-23-05.webp"><img src="assets/img/arts/thumbs/work-cc24-23-05.webp" alt="A flower of patterned black-and-white petals
+The Crossroads, Issue 24 · May 2025" data-cat="Art Attack · Painting or drawing" data-title="Aradhya E. S., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc24-23-07.webp"><img src="assets/img/arts/thumbs/work-cc24-23-07.webp" alt="Lotuses above a patterned leaf, in black ink
+The Crossroads, Issue 24 · May 2025" data-cat="Art Attack · Painting or drawing" data-title="Raam Bodhidharaman, Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-22-01.webp"><img src="assets/img/arts/thumbs/work-cc25-22-01.webp" alt="A stag silhouetted on a hilltop against orange mountains at sunset
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Yuvraj T., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-22-02.webp"><img src="assets/img/arts/thumbs/work-cc25-22-02.webp" alt="A croissant filled with strawberries and cream
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Anokhi K., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-22-03.webp"><img src="assets/img/arts/thumbs/work-cc25-22-03.webp" alt="A cricketer in a blue cap and visor holding a golden trophy
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Kartik J., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-22-04.webp"><img src="assets/img/arts/thumbs/work-cc25-22-04.webp" alt="A canal with a small bridge and boat between red and green buildings
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Tarushi A., Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-22-05.webp"><img src="assets/img/arts/thumbs/work-cc25-22-05.webp" alt="A white domed building reflected in a still blue lake, in watercolour
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Vaidehi M., IB Year 2" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-22-06.webp"><img src="assets/img/arts/thumbs/work-cc25-22-06.webp" alt="A young man in a cap, in grey
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Vihaan S., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-22-07.webp"><img src="assets/img/arts/thumbs/work-cc25-22-07.webp" alt="A masked fighter crouching, wrapped in chains
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Nirvikalp, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-22-08.webp"><img src="assets/img/arts/thumbs/work-cc25-22-08.webp" alt="Portrait of Netaji Subhas Chandra Bose in his cap and glasses
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Jassvn K. G., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-22-09.webp"><img src="assets/img/arts/thumbs/work-cc25-22-09.webp" alt="A man climbing a coconut palm, passing coconuts down
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Eklavya A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-23-01.webp"><img src="assets/img/arts/thumbs/work-cc25-23-01.webp" alt="A tiger emerging from spilt ink, drawn in black dots and stripes
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Chaitanya G., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-23-02.webp"><img src="assets/img/arts/thumbs/work-cc25-23-02.webp" alt="A seated figure in an orange robe holding a lotus, eyes closed
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Aryavardhan A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-23-03.webp"><img src="assets/img/arts/thumbs/work-cc25-23-03.webp" alt="A cottage in a snowy wood, in grey
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Yuvika A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-23-04.webp"><img src="assets/img/arts/thumbs/work-cc25-23-04.webp" alt="A student at a desk dreaming of the things around him in thought bubbles
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Tanay L., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-23-05.webp"><img src="assets/img/arts/thumbs/work-cc25-23-05.webp" alt="A large rose with leaves, in pencil
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Vedant A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc25-23-06.webp"><img src="assets/img/arts/thumbs/work-cc25-23-06.webp" alt="Krishna with his flute in black line over splashes of blue and purple
+The Crossroads, Issue 25 · July 2025" data-cat="Art Attack · Painting or drawing" data-title="Kanushree A., Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-26-01.webp"><img src="assets/img/arts/thumbs/work-cc26-26-01.webp" alt="An anime swordsman in a yellow robe, wrapped in blue ribbons
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Govardhan PM, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-26-04.webp"><img src="assets/img/arts/thumbs/work-cc26-26-04.webp" alt="Cartoon children and creatures inside a large jar, in pencil
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Shruthi M., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-26-05.webp"><img src="assets/img/arts/thumbs/work-cc26-26-05.webp" alt="A large sunflower-like bloom, in pencil
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Harshita B., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-26-06.webp"><img src="assets/img/arts/thumbs/work-cc26-26-06.webp" alt="A girl with long dark hair, a finger to her lips, in grey
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Hasti A., Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-27-01.webp"><img src="assets/img/arts/thumbs/work-cc26-27-01.webp" alt="A hand holding a brush, painting a spot of black, in ink
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Prachi S., Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-27-02.webp"><img src="assets/img/arts/thumbs/work-cc26-27-02.webp" alt="Two cupped hands in rainbow colours on black
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Tarushi A., Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-27-03.webp"><img src="assets/img/arts/thumbs/work-cc26-27-03.webp" alt="Radha and Krishna, faces close, in rich colours
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Lokk Vishwaveda, Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-27-04.webp"><img src="assets/img/arts/thumbs/work-cc26-27-04.webp" alt="A cricketer with his bat raised, beneath the words &quot;Virat Kohli&quot;
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Aarush Kejriwal, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-27-05.webp"><img src="assets/img/arts/thumbs/work-cc26-27-05.webp" alt="A hexagonal nut, shaded in grey
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Chaitanya, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc26-27-06.webp"><img src="assets/img/arts/thumbs/work-cc26-27-06.webp" alt="A masked figure with a red-eyed snake, in stained-glass panels
+The Crossroads, Issue 26 · Anand Utsav issue" data-cat="Art Attack · Painting or drawing" data-title="Arth A., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-22-03.webp"><img src="assets/img/arts/thumbs/work-cc27-22-03.webp" alt="Two cartoon children among sports gear and posters, in pencil
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Lokhithj, Grade X" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-22-04.webp"><img src="assets/img/arts/thumbs/work-cc27-22-04.webp" alt="An anime face with white hair, a hand at the cheek, in fine black line
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="S. Rithesh, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-22-05.webp"><img src="assets/img/arts/thumbs/work-cc27-22-05.webp" alt="A hummingbird in flight, in grey
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Shaurya B., Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-22-06.webp"><img src="assets/img/arts/thumbs/work-cc27-22-06.webp" alt="A shopfront with an awning, crowded with potted plants
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Ashmi A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-23-01.webp"><img src="assets/img/arts/thumbs/work-cc27-23-01.webp" alt="An anime fighter in green and black lunging forward
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Piraisoodan, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-23-03.webp"><img src="assets/img/arts/thumbs/work-cc27-23-03.webp" alt="Lord Ganesha seated, in orange, pink and yellow
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Aarush K., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-23-04.webp"><img src="assets/img/arts/thumbs/work-cc27-23-04.webp" alt="An anime swordsman in yellow striking among orange triangles
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Garvit, Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-23-05.webp"><img src="assets/img/arts/thumbs/work-cc27-23-05.webp" alt="A footballer volleying a ball, in black line with blue
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Hardik, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-23-06.webp"><img src="assets/img/arts/thumbs/work-cc27-23-06.webp" alt="An anime girl with pink and green hair before a pink heart and Japanese characters
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Govardhan PM, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-23-07.webp"><img src="assets/img/arts/thumbs/work-cc27-23-07.webp" alt="A round mandala in black and white
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Kanushree A., Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-23-08.webp"><img src="assets/img/arts/thumbs/work-cc27-23-08.webp" alt="A teapot turned into a pink house with windows and a ladder
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Aaradhya Goyal, Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc27-23-09.webp"><img src="assets/img/arts/thumbs/work-cc27-23-09.webp" alt="A monkey with large eyes, in grey
+The Crossroads, Issue 27 · November–December 2025" data-cat="Art Attack · Painting or drawing" data-title="Sahashra, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-22-01.webp"><img src="assets/img/arts/thumbs/work-cc28-22-01.webp" alt="An anime boy with earrings, laughing, in grey
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Painting or drawing" data-title="Yuvika A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-22-02.webp"><img src="assets/img/arts/thumbs/work-cc28-22-02.webp" alt="Photograph of a motorcycle made of rolled newspaper, on a red floor
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Craft" data-title="Aarush A., Vihaan S., Arjun B., Madhav RD, Shiv A. and Siddham S., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-22-03.webp"><img src="assets/img/arts/thumbs/work-cc28-22-03.webp" alt="Birds and flowers in bright folk patterns inside an arch
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Painting or drawing" data-title="P. Adira Chellam, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-22-04.webp"><img src="assets/img/arts/thumbs/work-cc28-22-04.webp" alt="A blue rosebud on a long stem
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Painting or drawing" data-title="Kriti F., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-22-05.webp"><img src="assets/img/arts/thumbs/work-cc28-22-05.webp" alt="An anime swordsman with green hair and a scar, in green and orange
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Painting or drawing" data-title="Nirvikalp N., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-22-06.webp"><img src="assets/img/arts/thumbs/work-cc28-22-06.webp" alt="A diamond of dense black-and-white patterns
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Painting or drawing" data-title="Aradhya E. S., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-23-01.webp"><img src="assets/img/arts/thumbs/work-cc28-23-01.webp" alt="A mushroom house beneath a tree and tall pink flowers
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Painting or drawing" data-title="Videhi S., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-23-03.webp"><img src="assets/img/arts/thumbs/work-cc28-23-03.webp" alt="A grinning anime boy in a straw hat and red jacket
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Painting or drawing" data-title="Naitik M., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-23-05.webp"><img src="assets/img/arts/thumbs/work-cc28-23-05.webp" alt="Leaves and a patterned flower over blocks of pastel colour
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Painting or drawing" data-title="Aarush K., Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc28-23-06.webp"><img src="assets/img/arts/thumbs/work-cc28-23-06.webp" alt="A winged dragon in grey line
+The Crossroads, Issue 28 · Pongal issue" data-cat="Art Attack · Painting or drawing" data-title="Raam B., Grade V" data-w="1"></a>
+    <a href="assets/img/arts/work-cc29-23-01.webp"><img src="assets/img/arts/thumbs/work-cc29-23-01.webp" alt="A white cat's face close up, one eye green and one blue, in watercolour
+The Crossroads, Issue 29 · Khel Mela 2026" data-cat="Art Attack · Painting or drawing" data-title="Hasti Aghera, Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc30-23-01.webp"><img src="assets/img/arts/thumbs/work-cc30-23-01.webp" alt="The Joker in sketchy black line on cream paper
+The Crossroads, Issue 30 · April 2026" data-cat="Art Attack · Painting or drawing" data-title="T Muhil, Grade XI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc30-23-02.webp"><img src="assets/img/arts/thumbs/work-cc30-23-02.webp" alt="Three green fruits on a skewer on a purple ground
+The Crossroads, Issue 30 · April 2026" data-cat="Art Attack · Painting or drawing" data-title="Ekalavya, Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc30-23-03.webp"><img src="assets/img/arts/thumbs/work-cc30-23-03.webp" alt="The child Krishna with a peacock feather, in pencil on pink paper
+The Crossroads, Issue 30 · April 2026" data-cat="Art Attack · Painting or drawing" data-title="Tarushi Agarwal, Grade XII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc30-23-04.webp"><img src="assets/img/arts/thumbs/work-cc30-23-04.webp" alt="A patterned bowl with the sun rising from it in yellow petals, on a pink wash
+The Crossroads, Issue 30 · April 2026" data-cat="Art Attack · Painting or drawing" data-title="Devanshi Navin, Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc30-23-05.webp"><img src="assets/img/arts/thumbs/work-cc30-23-05.webp" alt="A cartoon boy with curly hair and a pencil behind each ear, in a white shirt
+The Crossroads, Issue 30 · April 2026" data-cat="Art Attack · Painting or drawing" data-title="Anushka Modi, Grade XII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc31-24-01.webp"><img src="assets/img/arts/thumbs/work-cc31-24-01.webp" alt="Lord Rama in blue with his bow, against blue shapes
+The Crossroads, Issue 31 · May 2026" data-cat="Art Attack · Painting or drawing" data-title="Pirai Soodan, Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc31-24-02.webp"><img src="assets/img/arts/thumbs/work-cc31-24-02.webp" alt="An anime swordsman in a patchwork robe, leaping
+The Crossroads, Issue 31 · May 2026" data-cat="Art Attack · Painting or drawing" data-title="J. Nidharshan, Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc31-24-03.webp"><img src="assets/img/arts/thumbs/work-cc31-24-03.webp" alt="A lighthouse with a spiral stair, in fine black ink
+The Crossroads, Issue 31 · May 2026" data-cat="Art Attack · Painting or drawing" data-title="Pranitha K., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc31-24-04.webp"><img src="assets/img/arts/thumbs/work-cc31-24-04.webp" alt="A trident with the Om symbol, in black pattern
+The Crossroads, Issue 31 · May 2026" data-cat="Art Attack · Painting or drawing" data-title="Adira Chellam, Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc31-24-05.webp"><img src="assets/img/arts/thumbs/work-cc31-24-05.webp" alt="A round mandala in blues, purples and pinks
+The Crossroads, Issue 31 · May 2026" data-cat="Art Attack · Painting or drawing" data-title="Aradhya E. S., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc31-24-06.webp"><img src="assets/img/arts/thumbs/work-cc31-24-06.webp" alt="Rama and Sita in profile beneath a crescent moon, in orange and brown
+The Crossroads, Issue 31 · May 2026" data-cat="Art Attack · Painting or drawing" data-title="Ashmi A., Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/work-cc32-23-01.webp"><img src="assets/img/arts/thumbs/work-cc32-23-01.webp" alt="A road running to the horizon beside the sea, in coloured pencil
+The Crossroads, Issue 32 · August 2026" data-cat="Art Attack · Painting or drawing" data-title="Trisha V., Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc32-23-02.webp"><img src="assets/img/arts/thumbs/work-cc32-23-02.webp" alt="Krishna's face with a flute, in charcoal
+The Crossroads, Issue 32 · August 2026" data-cat="Art Attack · Painting or drawing" data-title="Kabir Kedia, Grade VII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc32-23-03.webp"><img src="assets/img/arts/thumbs/work-cc32-23-03.webp" alt="A dog's face surrounded by flowers, in bright felt-tip strokes
+The Crossroads, Issue 32 · August 2026" data-cat="Art Attack · Painting or drawing" data-title="Tarushi Agarwal, Grade XII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc32-23-04.webp"><img src="assets/img/arts/thumbs/work-cc32-23-04.webp" alt="A shape filled with zentangle patterns in black and white
+The Crossroads, Issue 32 · August 2026" data-cat="Art Attack · Painting or drawing" data-title="Anaira Bhageria, Grade VI" data-w="1"></a>
+    <a href="assets/img/arts/work-cc32-23-05.webp"><img src="assets/img/arts/thumbs/work-cc32-23-05.webp" alt="A forest of slender trunks in red and orange light
+The Crossroads, Issue 32 · August 2026" data-cat="Art Attack · Painting or drawing" data-title="Vedant A., Grade VIII" data-w="1"></a>
+    <a href="assets/img/arts/work-cc32-23-06.webp"><img src="assets/img/arts/thumbs/work-cc32-23-06.webp" alt="A telephone box before a clock tower and buildings, in pencil
+The Crossroads, Issue 32 · August 2026" data-cat="Art Attack · Painting or drawing" data-title="Radhya Kedia, Grade IX" data-w="1"></a>
+    <a href="assets/img/arts/cap-lizard-tree-trunk.webp"><img src="assets/img/arts/thumbs/cap-lizard-tree-trunk.webp" alt="A golden lizard climbing a tree trunk" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bee-yellow-flower.webp"><img src="assets/img/arts/thumbs/cap-bee-yellow-flower.webp" alt="A bee on a vivid yellow flower" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-butterfly-flowers.webp"><img src="assets/img/arts/thumbs/cap-butterfly-flowers.webp" alt="A black and yellow butterfly on pale purple flowers" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-green-insect.webp"><img src="assets/img/arts/thumbs/cap-green-insect.webp" alt="An iridescent green insect on a leafy branch" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-red-flower-sky.webp"><img src="assets/img/arts/thumbs/cap-red-flower-sky.webp" alt="A red flower silhouetted against the sky" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-butterfly-white-flowers.webp"><img src="assets/img/arts/thumbs/cap-butterfly-white-flowers.webp" alt="A butterfly on slender white flowers" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-yellow-butterfly-orange-flower.webp"><img src="assets/img/arts/thumbs/cap-yellow-butterfly-orange-flower.webp" alt="A yellow butterfly on an orange flower" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-butterfly-red-flowers.webp"><img src="assets/img/arts/thumbs/cap-butterfly-red-flowers.webp" alt="A butterfly approaching red flowers" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-grasshopper-stem.webp"><img src="assets/img/arts/thumbs/cap-grasshopper-stem.webp" alt="A grasshopper resting along a slender stem" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-insect-on-stem.webp"><img src="assets/img/arts/thumbs/cap-insect-on-stem.webp" alt="A small insect clinging to a stem against green" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-grasshopper-leaf.webp"><img src="assets/img/arts/thumbs/cap-grasshopper-leaf.webp" alt="A grasshopper on a broad green leaf" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-green-lizard.webp"><img src="assets/img/arts/thumbs/cap-green-lizard.webp" alt="A green lizard partly hidden beneath leaves" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-red-dragonfly.webp"><img src="assets/img/arts/thumbs/cap-red-dragonfly.webp" alt="A red dragonfly resting on a thin stem" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-green-lizard-grass.webp"><img src="assets/img/arts/thumbs/cap-green-lizard-grass.webp" alt="A green lizard in the grass" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-insects-in-flight.webp"><img src="assets/img/arts/thumbs/cap-insects-in-flight.webp" alt="Two insects hovering together in warm light" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-squirrel-hollow.webp"><img src="assets/img/arts/thumbs/cap-squirrel-hollow.webp" alt="A squirrel peeking out from a tree hollow" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-in-nest.webp"><img src="assets/img/arts/thumbs/cap-bird-in-nest.webp" alt="A dark bird in a nest among bright leaves" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-butterflies-leaves.webp"><img src="assets/img/arts/thumbs/cap-butterflies-leaves.webp" alt="Several butterflies gathering on a leafy stem" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-blue-butterfly-flowers.webp"><img src="assets/img/arts/thumbs/cap-blue-butterfly-flowers.webp" alt="A blue and black butterfly on small flowers" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-blue-bird-flowers.webp"><img src="assets/img/arts/thumbs/cap-blue-bird-flowers.webp" alt="A blue bird beside pale flowers" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-yellow-eyed-bird.webp"><img src="assets/img/arts/thumbs/cap-yellow-eyed-bird.webp" alt="A yellow-eyed bird among branches" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-kitten-shelter.webp"><img src="assets/img/arts/thumbs/cap-kitten-shelter.webp" alt="A kitten looking out from a sheltered ledge" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-pink-blossoms.webp"><img src="assets/img/arts/thumbs/cap-bird-pink-blossoms.webp" alt="A small dark bird amid pink blossoms" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-orange-berries.webp"><img src="assets/img/arts/thumbs/cap-bird-orange-berries.webp" alt="A small bird perched among orange berries" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-hoopoe-branches.webp"><img src="assets/img/arts/thumbs/cap-hoopoe-branches.webp" alt="A hoopoe perched among branches" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-brown-bird-branch.webp"><img src="assets/img/arts/thumbs/cap-brown-bird-branch.webp" alt="A brown bird on a bare branch against the sky" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-yellow-bird-branches.webp"><img src="assets/img/arts/thumbs/cap-yellow-bird-branches.webp" alt="A yellow-bellied bird perched among branches" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-black-white-bird-branch.webp"><img src="assets/img/arts/thumbs/cap-black-white-bird-branch.webp" alt="A black and white bird on a bare branch" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-in-large-tree.webp"><img src="assets/img/arts/thumbs/cap-bird-in-large-tree.webp" alt="A bird perched in the limbs of a broad tree" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-dense-leaves.webp"><img src="assets/img/arts/thumbs/cap-bird-dense-leaves.webp" alt="A small bird partly hidden in dense foliage" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-among-leaves.webp"><img src="assets/img/arts/thumbs/cap-bird-among-leaves.webp" alt="A red-crested bird among broad green leaves" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-white-blossoms.webp"><img src="assets/img/arts/thumbs/cap-bird-white-blossoms.webp" alt="A small bird reaching into white blossoms" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-on-post.webp"><img src="assets/img/arts/thumbs/cap-bird-on-post.webp" alt="A small bird perched on a post against green" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-green-bird-wire.webp"><img src="assets/img/arts/thumbs/cap-green-bird-wire.webp" alt="A small green bird perched on a wire" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-squirrel-branch.webp"><img src="assets/img/arts/thumbs/cap-squirrel-branch.webp" alt="A squirrel perched on a branch against blue sky" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-squirrel-dark-tree.webp"><img src="assets/img/arts/thumbs/cap-squirrel-dark-tree.webp" alt="A squirrel clinging to a tree in shade" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-kingfisher-post.webp"><img src="assets/img/arts/thumbs/cap-kingfisher-post.webp" alt="A kingfisher perched on a post with trees behind" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-kingfisher-trunk.webp"><img src="assets/img/arts/thumbs/cap-kingfisher-trunk.webp" alt="A kingfisher against the dark bark of a tree" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-pale-bird-wire.webp"><img src="assets/img/arts/thumbs/cap-pale-bird-wire.webp" alt="A small pale bird perched on a wire at dusk" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-brown-bird-wire.webp"><img src="assets/img/arts/thumbs/cap-brown-bird-wire.webp" alt="A small brown bird on a wire among bare branches" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-dove-branches.webp"><img src="assets/img/arts/thumbs/cap-dove-branches.webp" alt="A dove perched among yellow flowers and branches" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-dark.webp"><img src="assets/img/arts/thumbs/cap-bird-dark.webp" alt="A small pale-headed bird against a dark background" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-green-bird-branches.webp"><img src="assets/img/arts/thumbs/cap-green-bird-branches.webp" alt="A small green bird among branches" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-in-shade.webp"><img src="assets/img/arts/thumbs/cap-bird-in-shade.webp" alt="A bird on a branch in deep shade" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-bare-branches.webp"><img src="assets/img/arts/thumbs/cap-bird-bare-branches.webp" alt="A small red-crowned bird among bare branches" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-sunset-water.webp"><img src="assets/img/arts/thumbs/cap-sunset-water.webp" alt="The sun setting over water and distant birds" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-waterbird-reeds.webp"><img src="assets/img/arts/thumbs/cap-waterbird-reeds.webp" alt="A colorful waterbird among tall reeds" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-waterbird-reeds-flight.webp"><img src="assets/img/arts/thumbs/cap-waterbird-reeds-flight.webp" alt="A colorful waterbird lifting from the reeds" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-heron-water.webp"><img src="assets/img/arts/thumbs/cap-heron-water.webp" alt="A long-necked bird perched above green water" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-kingfisher-water.webp"><img src="assets/img/arts/thumbs/cap-kingfisher-water.webp" alt="A kingfisher by the water, framed by tree trunks" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-birds-on-water.webp"><img src="assets/img/arts/thumbs/cap-birds-on-water.webp" alt="A flock of birds moving across the water" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-raptor-stump.webp"><img src="assets/img/arts/thumbs/cap-raptor-stump.webp" alt="A bird of prey perched on a weathered stump" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-peacock-fan.webp"><img src="assets/img/arts/thumbs/cap-peacock-fan.webp" alt="A peacock displaying its tail in a grassy clearing" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-pale-bird-perch.webp"><img src="assets/img/arts/thumbs/cap-pale-bird-perch.webp" alt="A pale bird on a thin bare branch" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-colorful-bird.webp"><img src="assets/img/arts/thumbs/cap-colorful-bird.webp" alt="A colorful bird perched among sunlit leaves" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-full-moon.webp"><img src="assets/img/arts/thumbs/cap-full-moon.webp" alt="A bright full moon against a black sky" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-grey-bird.webp"><img src="assets/img/arts/thumbs/cap-grey-bird.webp" alt="A small grey bird seen through soft green foliage" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-on-roof.webp"><img src="assets/img/arts/thumbs/cap-bird-on-roof.webp" alt="A small bird perched on roof tiles" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-trees-at-dusk.webp"><img src="assets/img/arts/thumbs/cap-trees-at-dusk.webp" alt="Trees framing an open field in evening light" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-peacock-shade.webp"><img src="assets/img/arts/thumbs/cap-peacock-shade.webp" alt="A peacock among dark leaves" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-brown-bird-branches.webp"><img src="assets/img/arts/thumbs/cap-brown-bird-branches.webp" alt="A brown bird perched among crossing branches" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-black-white-bird.webp"><img src="assets/img/arts/thumbs/cap-black-white-bird.webp" alt="A black and white bird with a long tail in green foliage" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-birds-on-wire.webp"><img src="assets/img/arts/thumbs/cap-birds-on-wire.webp" alt="Two birds perched on a wire against blue sky" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-green-birds-branches.webp"><img src="assets/img/arts/thumbs/cap-green-birds-branches.webp" alt="Two green birds on a bare branch against the sky" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-grey-blue-bird.webp"><img src="assets/img/arts/thumbs/cap-grey-blue-bird.webp" alt="A grey-blue bird perched on a branch" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-yellow-bird-sky.webp"><img src="assets/img/arts/thumbs/cap-yellow-bird-sky.webp" alt="A small yellow bird against blue sky" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-bird-silhouette.webp"><img src="assets/img/arts/thumbs/cap-bird-silhouette.webp" alt="A bird silhouetted against a pale sky" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-people-seated-together.webp"><img src="assets/img/arts/thumbs/cap-people-seated-together.webp" alt="People seated together on the floor" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-decorated-stage.webp"><img src="assets/img/arts/thumbs/cap-decorated-stage.webp" alt="Flowers and artwork on a decorated stage" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-performer-blue-light.webp"><img src="assets/img/arts/thumbs/cap-performer-blue-light.webp" alt="A performer under blue stage lights" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-two-dancers.webp"><img src="assets/img/arts/thumbs/cap-two-dancers.webp" alt="Two performers dancing in colorful dress" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-man-seated.webp"><img src="assets/img/arts/thumbs/cap-man-seated.webp" alt="A man seated alone in a light corridor" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-children-window.webp"><img src="assets/img/arts/thumbs/cap-children-window.webp" alt="Children looking out of a window" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-seated-performer.webp"><img src="assets/img/arts/thumbs/cap-seated-performer.webp" alt="A performer seated on stage" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-singer-spotlight.webp"><img src="assets/img/arts/thumbs/cap-singer-spotlight.webp" alt="A singer holding a microphone on a dark stage" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-group-outdoors.webp"><img src="assets/img/arts/thumbs/cap-group-outdoors.webp" alt="A group gathered outdoors with flower garlands" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-featured-companion.webp"><img src="assets/img/arts/thumbs/cap-featured-companion.webp" alt="Silhouetted stems against a vivid orange sunset" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-featured-portrait.webp"><img src="assets/img/arts/thumbs/cap-featured-portrait.webp" alt="A quiet path beneath tall trees" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-featured-wide.webp"><img src="assets/img/arts/thumbs/cap-featured-wide.webp" alt="An overhead view of buildings surrounded by trees" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-end.webp"><img src="assets/img/arts/thumbs/cap-end.webp" alt="A long-necked bird on a branch against misty hills" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/cap-lead.webp"><img src="assets/img/arts/thumbs/cap-lead.webp" alt="A black and white butterfly resting in sunlit grass" data-cat="Captures" data-w="1"></a>
+    <a href="assets/img/arts/au26-01.webp"><img src="assets/img/arts/thumbs/au26-01.webp" alt="A row of performers in orange and period costumes on a stage, in front of a screen showing the Indian flag held up by a raised arm, with a woman in an orange sari seated on white steps at the front and members of the audience in the foreground" data-cat="Festivals · Anand Utsav 2026, 5–7 October 2026" data-title="Anand Utsav 2026"></a>
+    <a href="assets/img/arts/au26-04.webp"><img src="assets/img/arts/thumbs/au26-04.webp" alt="Dancers in blue and purple costumes on a stage lit in violet, with a glowing symbol at the back" data-cat="Festivals · Anand Utsav 2026, 5–7 October 2026" data-title="Anand Utsav 2026"></a>
+    <a href="assets/img/arts/au26-05.webp"><img src="assets/img/arts/thumbs/au26-05.webp" alt="Students in blue skirts and kurtas of many colours on a dark stage, in front of a screen showing a robed figure in saffron" data-cat="Festivals · Anand Utsav 2026, 5–7 October 2026" data-title="Anand Utsav 2026"></a>
+    <a href="assets/img/arts/au26-06.webp"><img src="assets/img/arts/thumbs/au26-06.webp" alt="Dancers in red and gold costumes on stage, some of them stacked in a human pyramid, in front of a screen showing a street of garlanded doorways" data-cat="Festivals · Anand Utsav 2026, 5–7 October 2026" data-title="Anand Utsav 2026"></a>
+    <a href="assets/img/arts/au26-07.webp"><img src="assets/img/arts/thumbs/au26-07.webp" alt="A large group of dancers in red, green and teal costumes posed together on stage, in front of a screen showing a village below green hills" data-cat="Festivals · Anand Utsav 2026, 5–7 October 2026" data-title="Anand Utsav 2026"></a>
+    <a href="assets/img/arts/au26-08.webp"><img src="assets/img/arts/thumbs/au26-08.webp" alt="A large group of students in white and coloured clothes on stage, in front of a screen showing a glowing outline map of India" data-cat="Festivals · Anand Utsav 2026, 5–7 October 2026" data-title="Anand Utsav 2026"></a>
+    <a href="assets/img/arts/au26-09.webp"><img src="assets/img/arts/thumbs/au26-09.webp" alt="Dancers in red, cream and green costumes on stage, in front of a screen showing a carved stone gateway hung with marigold garlands" data-cat="Festivals · Anand Utsav 2026, 5–7 October 2026" data-title="Anand Utsav 2026"></a>
+    <a href="assets/img/arts/au26-10.webp"><img src="assets/img/arts/thumbs/au26-10.webp" alt="Performers in red and orange costumes on stage, in front of a screen showing a spiral galaxy, with a many-armed figure at the centre" data-cat="Festivals · Anand Utsav 2026, 5–7 October 2026" data-title="Anand Utsav 2026"></a>
+    <a href="assets/img/arts/au26-18.webp"><img src="assets/img/arts/thumbs/au26-18.webp" alt="A tiered display of carved fruit and flowers lit at night, with two peacocks at its sides, swans, and the words Chinmaya Amrit Mahotsav and 75 Years" data-cat="Festivals · Anand Utsav 2026, 5–7 October 2026" data-title="Anand Utsav 2026"></a>
+    <a href="assets/img/arts/news-diwali-2025-1.webp"><img src="assets/img/arts/thumbs/news-diwali-2025-1.webp" alt="Students lighting sparklers on Diwali night" data-cat="Festivals · 20 October 2025" data-title="Diwali and Bhai Dooj on campus"></a>
+    <a href="assets/img/arts/news-diwali-2025-2.webp"><img src="assets/img/arts/thumbs/news-diwali-2025-2.webp" alt="Students holding lit diyas on Diwali evening" data-cat="Festivals · 20 October 2025" data-title="Diwali and Bhai Dooj on campus"></a>
+    <a href="assets/img/arts/news-diwali-2025-3.webp"><img src="assets/img/arts/thumbs/news-diwali-2025-3.webp" alt="Students seated before the altar at the Krishna Pooja on Diwali morning" data-cat="Festivals · 20 October 2025" data-title="Diwali and Bhai Dooj on campus"></a>
+    <a href="assets/img/arts/news-diwali-2025-4.webp"><img src="assets/img/arts/thumbs/news-diwali-2025-4.webp" alt="Students on campus during the Diwali celebrations" data-cat="Festivals · 20 October 2025" data-title="Diwali and Bhai Dooj on campus"></a>
+    <a href="assets/img/arts/news-childrens-day-2025-1.webp"><img src="assets/img/arts/thumbs/news-childrens-day-2025-1.webp" alt="CIRS teachers in costume performing a skit before a jungle backdrop on Children's Day" data-cat="Festivals · 14 November 2025" data-title="Children's Day: the teachers take the stage"></a>
+    <a href="assets/img/arts/news-childrens-day-2025-2.webp"><img src="assets/img/arts/thumbs/news-childrens-day-2025-2.webp" alt="Teachers singing on stage during the Children's Day programme" data-cat="Festivals · 14 November 2025" data-title="Children's Day: the teachers take the stage"></a>
+    <a href="assets/img/arts/news-childrens-day-2025-3.webp"><img src="assets/img/arts/thumbs/news-childrens-day-2025-3.webp" alt="Teachers gathered on stage at the end of the Children's Day programme" data-cat="Festivals · 14 November 2025" data-title="Children's Day: the teachers take the stage"></a>
+    <a href="assets/img/arts/news-pongal-2026-1.webp"><img src="assets/img/arts/thumbs/news-pongal-2026-1.webp" alt="Students in traditional attire preparing Pongal on campus" data-cat="Festivals · 15 January 2026" data-title="Pongal and Mattu Pongal"></a>
+    <a href="assets/img/arts/news-pongal-2026-2.webp"><img src="assets/img/arts/thumbs/news-pongal-2026-2.webp" alt="Students performing a dance on stage at the Pongal cultural programme" data-cat="Festivals · 15 January 2026" data-title="Pongal and Mattu Pongal"></a>
+    <a href="assets/img/arts/news-vasant-panchami-2026-1.webp"><img src="assets/img/arts/thumbs/news-vasant-panchami-2026-1.webp" alt="Students accompanying on tabla at the Vasant Panchami music workshop" data-cat="Festivals · 23 January 2026" data-title="Vasant Panchami and the music of the Bhakti poets"></a>
+    <a href="assets/img/arts/news-vasant-panchami-2026-2.webp"><img src="assets/img/arts/thumbs/news-vasant-panchami-2026-2.webp" alt="The Saraswati pooja on Vasant Panchami" data-cat="Festivals · 23 January 2026" data-title="Vasant Panchami and the music of the Bhakti poets"></a>
+    <a href="assets/img/arts/news-masquerade-2025-2.webp"><img src="assets/img/arts/thumbs/news-masquerade-2025-2.webp" alt="A Masquerade cast on stage in costume" data-cat="Theatre · 23–26 November 2025" data-title="Masquerade: four houses, four plays"></a>
+    <a href="assets/img/arts/news-masquerade-2025-3.webp"><img src="assets/img/arts/thumbs/news-masquerade-2025-3.webp" alt="A performer with a staff under yellow stage light during Masquerade" data-cat="Theatre · 23–26 November 2025" data-title="Masquerade: four houses, four plays"></a>
+    <a href="assets/img/arts/news-fine-arts-week-2026-1.webp"><img src="assets/img/arts/thumbs/news-fine-arts-week-2026-1.webp" alt="Two students playing tabla at the Swaranjali Sangeet Sabha" data-cat="Arts · 6–7 March 2026" data-title="Fine Arts Week: ragas, Bharatanatyam and dry leaves"></a>
+    <a href="assets/img/arts/news-fine-arts-week-2026-2.webp"><img src="assets/img/arts/thumbs/news-fine-arts-week-2026-2.webp" alt="Singers performing at the Swaranjali Sangeet Sabha" data-cat="Arts · 6–7 March 2026" data-title="Fine Arts Week: ragas, Bharatanatyam and dry leaves"></a>
+    <a href="assets/img/arts/news-fine-arts-week-2026-3.webp"><img src="assets/img/arts/thumbs/news-fine-arts-week-2026-3.webp" alt="Students arranging dry leaves into compositions in the Art Room" data-cat="Arts · 6–7 March 2026" data-title="Fine Arts Week: ragas, Bharatanatyam and dry leaves"></a>
+    <a href="assets/img/arts/news-fine-arts-week-2026-4.webp"><img src="assets/img/arts/thumbs/news-fine-arts-week-2026-4.webp" alt="Finished artworks made from dry leaves at the Dry Leaves Composition Competition" data-cat="Arts · 6–7 March 2026" data-title="Fine Arts Week: ragas, Bharatanatyam and dry leaves"></a>
+    <a href="assets/img/arts/news-inter-house-arts-2026-1.webp"><img src="assets/img/arts/thumbs/news-inter-house-arts-2026-1.webp" alt="Junior school students in costume performing a group dance on stage in the MPH" data-cat="Arts · January – February 2026" data-title="Inter-house stages: instruments, film songs and dance"></a>
+    <a href="assets/img/arts/news-inter-house-arts-2026-2.webp"><img src="assets/img/arts/thumbs/news-inter-house-arts-2026-2.webp" alt="A junior house dance team mid-performance at the Inter-House Group Dance Competition" data-cat="Arts · January – February 2026" data-title="Inter-house stages: instruments, film songs and dance"></a>
+    <a href="assets/img/arts/news-inter-house-arts-2026-3.webp"><img src="assets/img/arts/thumbs/news-inter-house-arts-2026-3.webp" alt="A student playing guitar at the Inter-House Solo Instrumental Competition" data-cat="Arts · January – February 2026" data-title="Inter-house stages: instruments, film songs and dance"></a>
+    <a href="assets/img/arts/news-inter-house-arts-2026-4.webp"><img src="assets/img/arts/thumbs/news-inter-house-arts-2026-4.webp" alt="A student playing tabla at the Inter-House Solo Instrumental Competition" data-cat="Arts · January – February 2026" data-title="Inter-house stages: instruments, film songs and dance"></a>
+    <a href="assets/img/arts/news-french-and-talent-2025-1.webp"><img src="assets/img/arts/thumbs/news-french-and-talent-2025-1.webp" alt="Naitik Nemish Mehta with his award from the Eftapei Talent Fest" data-cat="Arts · 25 October – 15 November 2025" data-title="A French Overall Championship, and a talent award"></a>
+    <a href="assets/img/arts/news-language-week-2025-1.webp"><img src="assets/img/arts/thumbs/news-language-week-2025-1.webp" alt="Students singing at the Multilingual Musical Programme during Language Week" data-cat="Arts · 13–18 October 2025" data-title="Language Week: Sanskrit, Hindi, Tamil and French"></a>
+    <a href="assets/img/arts/news-holi-2026-1.webp"><img src="assets/img/arts/thumbs/news-holi-2026-1.webp" alt="A man in an orange kurta smearing colour on a smiling student among others with coloured faces at Holi" data-cat="Festivals · 3–4 March 2026" data-title="Holi on Dronacharya Field"></a>
+    <a href="assets/img/arts/news-ram-navami-2026-1.webp"><img src="assets/img/arts/thumbs/news-ram-navami-2026-1.webp" alt="A garlanded child dressed as Bal Ram seated at a decorated altar as women make offerings" data-cat="Festivals · 27 March 2026" data-title="Ram Navami: dance, song and a skit"></a>
+    <a href="assets/img/arts/news-ram-navami-2026-2.webp"><img src="assets/img/arts/thumbs/news-ram-navami-2026-2.webp" alt="A student in a golden crown and a student in a red sari on a dark stage" data-cat="Festivals · 27 March 2026" data-title="Ram Navami: dance, song and a skit"></a>
+    <a href="assets/img/arts/news-ram-navami-2026-3.webp"><img src="assets/img/arts/thumbs/news-ram-navami-2026-3.webp" alt="Students in costume in a scene from the Ram Navami skit" data-cat="Festivals · 27 March 2026" data-title="Ram Navami: dance, song and a skit"></a>
+    <a href="assets/img/arts/news-hanuman-jayanti-2026-1.webp"><img src="assets/img/arts/thumbs/news-hanuman-jayanti-2026-1.webp" alt="A student in a yellow kurta seated before a garlanded murti, lamps and offerings" data-cat="Festivals · 2 April 2026" data-title="Hanuman Jayanti: the Chalisa, 54 times"></a>
+    <a href="assets/img/arts/news-hanuman-jayanti-2026-2.webp"><img src="assets/img/arts/thumbs/news-hanuman-jayanti-2026-2.webp" alt="Students in costume on a blue-lit stage during a skit" data-cat="Festivals · 2 April 2026" data-title="Hanuman Jayanti: the Chalisa, 54 times"></a>
+    <a href="assets/img/arts/news-tamil-new-year-and-vishu-2026-1.webp"><img src="assets/img/arts/thumbs/news-tamil-new-year-and-vishu-2026-1.webp" alt="A student speaking at a microphone beneath a sign that reads Mother Tamil" data-cat="Festivals · 14 April 2026" data-title="Tamil New Year and Vishu"></a>
+    <a href="assets/img/arts/news-tamil-new-year-and-vishu-2026-2.webp"><img src="assets/img/arts/thumbs/news-tamil-new-year-and-vishu-2026-2.webp" alt="Performers in white and gold saris dancing on a stage" data-cat="Festivals · 14 April 2026" data-title="Tamil New Year and Vishu"></a>
+    <a href="assets/img/arts/news-gurudev-jayanti-2026-1.webp"><img src="assets/img/arts/thumbs/news-gurudev-jayanti-2026-1.webp" alt="Students wearing coloured headbands seated on the amphitheatre steps, with a person in saffron in the foreground" data-cat="Festivals · 8 May 2026" data-title="Gurudev Jayanti"></a>
+    <a href="assets/img/arts/news-gurudev-jayanti-2026-2.webp"><img src="assets/img/arts/thumbs/news-gurudev-jayanti-2026-2.webp" alt="Students standing in a row in a courtyard wearing coloured bands, with a person in saffron beside them" data-cat="Festivals · 8 May 2026" data-title="Gurudev Jayanti"></a>
+    <a href="assets/img/arts/news-gurudev-jayanti-2026-3.webp"><img src="assets/img/arts/thumbs/news-gurudev-jayanti-2026-3.webp" alt="A teacher speaking into a microphone beside a decorated board as students in house shirts look on" data-cat="Festivals · 8 May 2026" data-title="Gurudev Jayanti"></a>
+    <a href="assets/img/arts/news-guru-poornima-2026-1.webp"><img src="assets/img/arts/thumbs/news-guru-poornima-2026-1.webp" alt="A woman seated on a chair as a student in pink bends to touch her feet, with rows of students seated behind" data-cat="Festivals · 29 July 2026" data-title="Guru Poornima"></a>
+    <a href="assets/img/arts/news-guru-poornima-2026-2.webp"><img src="assets/img/arts/thumbs/news-guru-poornima-2026-2.webp" alt="A student in glasses with her head bowed and her hand at her forehead" data-cat="Festivals · 29 July 2026" data-title="Guru Poornima"></a>
+    <a href="assets/img/arts/news-guru-poornima-2026-3.webp"><img src="assets/img/arts/thumbs/news-guru-poornima-2026-3.webp" alt="A woman in a yellow sari touching another person’s forehead before a blue backdrop" data-cat="Festivals · 29 July 2026" data-title="Guru Poornima"></a>
+    <a href="assets/img/arts/news-gurudev-aaradhana-2026-2.webp"><img src="assets/img/arts/thumbs/news-gurudev-aaradhana-2026-2.webp" alt="Three students wearing green sashes on a stage before a Vyasa banner" data-cat="Festivals · 3 August 2026" data-title="Gurudev Aaradhana and the Investiture Ceremony"></a>
+    <a href="assets/img/arts/news-gurudev-aaradhana-2026-3.webp"><img src="assets/img/arts/thumbs/news-gurudev-aaradhana-2026-3.webp" alt="Students seated in a hall, listening" data-cat="Festivals · 3 August 2026" data-title="Gurudev Aaradhana and the Investiture Ceremony"></a>
+    <a href="assets/img/arts/news-gurudev-aaradhana-2026-4.webp"><img src="assets/img/arts/thumbs/news-gurudev-aaradhana-2026-4.webp" alt="A student in a yellow kurta with palms joined" data-cat="Festivals · 3 August 2026" data-title="Gurudev Aaradhana and the Investiture Ceremony"></a>
+    <a href="assets/img/arts/news-onam-2026-1.webp"><img src="assets/img/arts/thumbs/news-onam-2026-1.webp" alt="Students on a stage in a skit, one standing beneath a colourful ceremonial umbrella" data-cat="Festivals · 26 August 2026" data-title="Onam: pookalams, a sadhya and a skit"></a>
+    <a href="assets/img/arts/news-onam-2026-2.webp"><img src="assets/img/arts/thumbs/news-onam-2026-2.webp" alt="Girls in bright traditional skirts dancing in a row on a stage" data-cat="Festivals · 26 August 2026" data-title="Onam: pookalams, a sadhya and a skit"></a>
+    <a href="assets/img/arts/news-raksha-bandhan-2026-1.webp"><img src="assets/img/arts/thumbs/news-raksha-bandhan-2026-1.webp" alt="Students in festive clothes kneeling on the grass holding plates, with a group standing behind them" data-cat="Festivals · 28 August 2026" data-title="Raksha Bandhan in the CIRS quadrangle"></a>
+    <a href="assets/img/arts/news-raksha-bandhan-2026-2.webp"><img src="assets/img/arts/thumbs/news-raksha-bandhan-2026-2.webp" alt="A girl speaking into a microphone beside a boy in a kurta" data-cat="Festivals · 28 August 2026" data-title="Raksha Bandhan in the CIRS quadrangle"></a>
+    <a href="assets/img/arts/news-krishna-janmashtami-2026-2.webp"><img src="assets/img/arts/thumbs/news-krishna-janmashtami-2026-2.webp" alt="Students singing into microphones on a stage lit in blue" data-cat="Festivals · 4 September 2026" data-title="Krishna Janmashtami: the midnight Aarti and Handi Phod"></a>
+    <a href="assets/img/arts/news-krishna-janmashtami-2026-3.webp"><img src="assets/img/arts/thumbs/news-krishna-janmashtami-2026-3.webp" alt="Students forming a human pyramid at night beneath a hanging pot" data-cat="Festivals · 4 September 2026" data-title="Krishna Janmashtami: the midnight Aarti and Handi Phod"></a>
+    <a href="assets/img/arts/news-ganesh-chaturthi-2026-1.webp"><img src="assets/img/arts/thumbs/news-ganesh-chaturthi-2026-1.webp" alt="A decorated Ganesh murti carried through a crowd of students and staff" data-cat="Festivals · 14–25 September 2026" data-title="Ganesh Chaturthi: ten days with Ganapati Bappa"></a>
+    <a href="assets/img/arts/news-ganesh-chaturthi-2026-2.webp"><img src="assets/img/arts/thumbs/news-ganesh-chaturthi-2026-2.webp" alt="Two boys at a lectern before a decorated Ganesh backdrop" data-cat="Festivals · 14–25 September 2026" data-title="Ganesh Chaturthi: ten days with Ganapati Bappa"></a>
+    <a href="assets/img/arts/news-ganesh-chaturthi-2026-3.webp"><img src="assets/img/arts/thumbs/news-ganesh-chaturthi-2026-3.webp" alt="A girl in a red dress dancing with her arms raised in front of a festival backdrop" data-cat="Festivals · 14–25 September 2026" data-title="Ganesh Chaturthi: ten days with Ganapati Bappa"></a>
+    <a href="assets/img/arts/news-teachers-day-2026-1.webp"><img src="assets/img/arts/thumbs/news-teachers-day-2026-1.webp" alt="Students in blue and grey standing in formation on a lawn in front of the school buildings" data-cat="Festivals · 5 September 2026" data-title="Teachers’ Day: a rose for every teacher"></a>
+    <a href="assets/img/arts/news-interschool-competitions-2026-1.webp"><img src="assets/img/arts/thumbs/news-interschool-competitions-2026-1.webp" alt="Girls in purple and orange dance costumes holding a certificate on a stage" data-cat="Arts · Reported in the bulletin of October 2026" data-title="Interschool competitions"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-02.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-02.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-03.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-03.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-04.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-04.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-05.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-05.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-06.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-06.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-07.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-07.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-08.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-08.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-09.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-09.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-10.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-10.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-11.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-11.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-12.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-12.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-13.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-13.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
+    <a href="assets/img/arts/vishu-tamil-puthandu-14.webp"><img src="assets/img/arts/thumbs/vishu-tamil-puthandu-14.webp" alt="Vishu and Tamil Puthandu" data-cat="Festivals · April 2025"></a>
 </template>
 
 <noscript><div class="noscript">This page needs JavaScript to move the photographs. The menu above still
@@ -389,11 +1229,11 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=115" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=115" defer></script>
-<script src="assets/vendor/lenis.min.js?b=115" defer></script>
-<script src="assets/js/cirs.js?b=115-header-5" defer></script>
-<script src="assets/js/pages.js?b=115" defer></script>
-<script src="assets/js/artswall.js?b=115-focus-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=115-gallery-1" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=115-gallery-1" defer></script>
+<script src="assets/vendor/lenis.min.js?b=115-gallery-1" defer></script>
+<script src="assets/js/cirs.js?b=115-gallery-1-header-5" defer></script>
+<script src="assets/js/pages.js?b=115-gallery-1" defer></script>
+<script src="assets/js/artswall.js?b=115-gallery-1-focus-1" defer></script>
 </body>
 </html>

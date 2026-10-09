@@ -53,11 +53,25 @@ clear, with no bar, over full-screen openings and gathers them into a compact tr
 on the first scroll; pages without a full-screen opening start on the pill (`header_start` in
 `tools/build-site.py`). Page sheets should not restyle or hide the shared header.
 
-Arts, Music & Theatre is the one page that is not a document. It is a full-window field of
-photographs — `"wall": True` in that page list — so it wears the header but no footer, no
-banner and no scroll. Its photographs are listed in `tools/artswall.py` and cut by
-`tools/make-arts-wall.py`; its sheet and script are `assets/css/artswall.css` and
-`assets/js/artswall.js`, both scoped to `body.wall`.
+Arts, Music & Theatre (the CIRS Cultural Gallery, `cultural-gallery.html`) is the one page that
+is not a document. It is a full-window field of photographs — `"wall": True` in that page list —
+so it wears the header but no footer, no banner and no scroll. It holds every photograph the
+school's pages show of its arts, music, theatre, festivals and students' own making: the original
+seventy-five are listed by hand in `tools/artswall.py`, and the rest are named by
+`tools/culturegallery.py` from those pages' own records (`festivals.py`, `theatre.py`,
+`captures.py`, `art-attack.json`, the News reports). Adding a page's photographs to the wall is a
+decision made there, frame by frame, never a side effect; nothing on it is captioned beyond what
+the source page already says (frames whose subject is an infant stay out, as on Festivals).
+`tools/make-arts-wall.py` cuts, grades and writes them all as WebP into `assets/img/arts/` and
+records the new ones in `tools/culture-gallery.json`, which `artswall.py` reads. **Every
+photograph goes through the one grade in `tools/gallerygrade.py`** (decided photograph by
+photograph, paintings graded as paintings); change the grade there and re-run the cutter, never
+tune one file by hand. `tools/check-gallery-duplicates.py` (needs opencv) finds a frame cut for two
+pages; set the second aside in `DUPLICATES`. Tiles are weighted so the 279 scanned paintings do not
+crowd out the stage (`data-w`, see `plateFor` in the script), and the script warms its cache in
+idle time rather than decoding every tile up front. Its sheet and script are
+`assets/css/artswall.css` and `assets/js/artswall.js`, both scoped to `body.wall`. Our Laurels also
+shows three of its photographs (`band`, `tabla`, `ensemble`), so `tools/laurels.py` names them.
 
 CIRS Theatre is written as a performance: the scrubbed opening film, a handoff onto the ivory
 Prologue, the Programme, then Act I Anand Utsav, an intermission, Act II Masquerades (a four-house

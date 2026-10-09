@@ -1,4 +1,4 @@
-"""The photographs on the Arts, Music & Theatre wall, and their captions.
+"""The photographs on the CIRS Cultural Gallery wall, and their captions.
 
 One list, read by tools/build-site.py, which writes it into the page as an
 inert <template>. assets/js/artswall.js reads the wall's photographs back out
@@ -6,22 +6,36 @@ of that template, so there is no second copy to keep in step — and because the
 paths sit in href and src attributes, tools/check-links.py sees every file the
 wall uses and would catch one that went missing.
 
-The files themselves are cut by tools/make-arts-wall.py. Adding a photograph
-means adding it there and here.
+The list has two parts:
+
+  ORIGINAL    the wall's first seventy-five photographs, written out here with
+              the captions they have always had. Adding a photograph here means
+              adding it to tools/make-arts-wall.py too.
+  the rest    every other photograph the school's pages show of its arts, music,
+              theatre, festivals and students' own making, named in
+              tools/culturegallery.py, cut and graded by tools/make-arts-wall.py
+              and recorded in tools/culture-gallery.json, which is read here.
+
+All of them are cut by tools/make-arts-wall.py under one grade
+(tools/gallerygrade.py).
 
 Captions describe what is in the frame and nothing more. Where a photograph
 was already captioned for the archive, that caption is kept as it was. Dates,
 names, ensembles and productions are the school's to supply; none are invented
-here.
+here. A photograph carries a title (what a viewer is told it is) and, where its
+page also describes the frame, a description.
 
 The opened CIRS Cultural Gallery photographs remain in the school's shared
-Drive and use its 1600px image endpoint. Their 420px tile renditions are kept
+Drive and use its 1600px image endpoint. Their tile renditions are kept
 locally so the moving wall appears immediately without downloading the large
 camera originals.
 """
 
-# name (matching assets/img/arts/<name>.jpg), category, caption
-PHOTOGRAPHS = [
+import json
+import os
+
+# name (matching assets/img/arts/<name>.webp), category, caption
+ORIGINAL = [
     # Music
     ("guitars",        "Music",        "Guitars, in the music room"),
     ("tabla",          "Music",        "Tabla and percussion"),
@@ -178,21 +192,48 @@ def drive_image(name, width):
 def full(name):
     if name in DRIVE_IDS:
         return drive_image(name, 1600)
-    return f"{DIR}/{name}.jpg"
+    return f"{DIR}/{name}.webp"
 
 
 def thumb(name):
-    return f"{DIR}/thumbs/{name}.jpg"
+    return f"{DIR}/thumbs/{name}.webp"
+
+
+MANIFEST = os.path.join(os.path.dirname(os.path.abspath(__file__)), "culture-gallery.json")
+
+# How often the wall picks each kind of photograph for a tile; see
+# culturegallery.WEIGHT. The originals are the wall's own and weigh 2.
+ORIGINAL_WEIGHT = 2
+
+
+def plates():
+    """Every photograph on the wall, in order, as the page lists them.
+
+    Each is a dict: name, cat (the label under its title), title, desc (what
+    the page says about the frame; may be empty) and weight.
+    """
+    out = [{"name": n, "cat": c, "title": t, "desc": "", "weight": ORIGINAL_WEIGHT}
+           for n, c, t in ORIGINAL]
+    if os.path.exists(MANIFEST):
+        with open(MANIFEST, encoding="utf-8") as f:
+            out += [{k: p[k] for k in ("name", "cat", "title", "desc", "weight")}
+                    for p in json.load(f)["photographs"]]
+    return out
+
+
+# What was the whole list before the gallery gathered the school's other
+# photographs; kept so a reader of either name finds the same thing.
+PHOTOGRAPHS = [(p["name"], p["cat"], p["title"]) for p in plates()]
 
 
 def count():
-    return len(PHOTOGRAPHS)
+    return len(plates())
 
 
 def categories():
     """The categories, in the order they first appear above."""
     seen = []
-    for _, cat, _ in PHOTOGRAPHS:
-        if cat not in seen:
-            seen.append(cat)
+    for p in plates():
+        if p["cat"] not in seen:
+            seen.append(p["cat"])
     return seen
