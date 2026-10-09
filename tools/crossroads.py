@@ -1,4 +1,4 @@
-"""The Crossroads archive — thirty-two editions of the CIRS monthly magazine.
+"""The Crossroads archive — thirty-three editions of the CIRS monthly magazine.
 
 The archive is deliberately convention over manifest. An issue needs no entry
 here at all: drop
@@ -23,8 +23,8 @@ import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# The school has published thirty-two editions. Raise this as they publish.
-COUNT = 32
+# The school has published thirty-three editions. Raise this as they publish.
+COUNT = 33
 
 PDF_DIR = "assets/documents/crossroads"
 COVER_DIR = "assets/img/crossroads"
@@ -37,7 +37,14 @@ OVERRIDES = {}
 # number and PDF and nothing else, rather than another issue's details.
 EDITIONS = {
     32: {"date": "August 2026", "occasion": "Independence Day Issue", "pages": 24},
+    # The cover prints the occasion and no month; the PDF has 28 pages.
+    33: {"occasion": "Anand Utsav 2026", "pages": 28},
 }
+
+# Issues whose covers are left off the drifting wall behind the masthead (the
+# owner's choice, 9 October 2026). They are still in the archive and the card
+# list; only the wall omits them.
+WALL_LEAVES_OUT = {2, 4, 6, 9, 18, 22}
 
 # Four cover compositions, cycled so the wall has rhythm without becoming a
 # scrapbook: where the number sits, and which rule it hangs from. The fifth

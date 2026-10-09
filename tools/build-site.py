@@ -1612,7 +1612,8 @@ def crosswall_html():
     has nothing to contribute here, and the typographic placeholder that
     stands in for it on the card would read as a missing image at this size.
     """
-    covers = [i["cover"] for i in crossroads.issues() if i["cover"]]
+    covers = [i["cover"] for i in crossroads.issues()
+              if i["cover"] and i["number"] not in crossroads.WALL_LEAVES_OUT]
     if not covers:
         return ""
 
