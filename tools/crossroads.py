@@ -39,6 +39,11 @@ EDITIONS = {
     32: {"date": "August 2026", "occasion": "Independence Day Issue", "pages": 24},
 }
 
+# Issues whose covers are left off the drifting wall behind the masthead (the
+# owner's choice, 9 October 2026). They are still in the archive and the card
+# list; only the wall omits them.
+WALL_LEAVES_OUT = {2, 4, 6, 9, 18, 22}
+
 # Four cover compositions, cycled so the wall has rhythm without becoming a
 # scrapbook: where the number sits, and which rule it hangs from. The fifth
 # is the standing "latest" treatment, given to the highest-numbered issue.

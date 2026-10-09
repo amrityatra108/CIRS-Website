@@ -13,10 +13,17 @@ sized for the column they drift through rather than for looking at — the
 whole run has to arrive with the hero, and the archive copies would be
 3.6 MB of it.
 
+An issue named in crossroads.WALL_LEAVES_OUT has its card but no wall copy: the
+owner left it off the wall, and an unreferenced file would fail the link check.
+
 Run it after adding a scan; tools/build-site.py reads the output.
 """
+import sys
 from pathlib import Path
 from PIL import Image, ImageOps
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import crossroads
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "assets/source/crossroads"
@@ -40,14 +47,18 @@ def main():
         card = ImageOps.fit(im, SIZE, Image.LANCZOS, centering=(0.5, 0.32))
         card.save(OUT / path.name, "JPEG", quality=QUALITY, optimize=True,
                   progressive=True)
-        card.resize(WALL_SIZE, Image.LANCZOS).save(
-            WALL / path.name, "JPEG", quality=WALL_QUALITY, optimize=True,
-            progressive=True)
+        if int(path.stem.split("-")[1]) in crossroads.WALL_LEAVES_OUT:
+            (WALL / path.name).unlink(missing_ok=True)
+        else:
+            card.resize(WALL_SIZE, Image.LANCZOS).save(
+                WALL / path.name, "JPEG", quality=WALL_QUALITY, optimize=True,
+                progressive=True)
         made += 1
 
     for label, folder in (("cards", OUT), ("wall", WALL)):
         total = sum(p.stat().st_size for p in folder.glob("*.jpg"))
-        print(f"{made} {label:5s} -> {folder.relative_to(ROOT)}  ({total/1024:.0f} KB)")
+        count = len(list(folder.glob("*.jpg")))
+        print(f"{count} {label:5s} -> {folder.relative_to(ROOT)}  ({total/1024:.0f} KB)")
 
 
 if __name__ == "__main__":
