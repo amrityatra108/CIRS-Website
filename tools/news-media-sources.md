@@ -25,6 +25,10 @@ The three October 2025 WordPress stories and suggested descriptive alt text are:
 
 The 2026 IB and CBSE results have no verified event photograph; their News briefs are typography-led. The official “Solo Instrument” article has no event date and its body describes a dance competition, so it is presented without a photograph or invented event date. Its 10 October 2025 publication date is shown in the archive. The October 2025 WordPress publication dates are not used as event dates.
 
+## Anand Utsav 2026
+
+The seventeen photographs in `assets/img/news/anand-utsav/` are the ones published with [Chinmaya Mission's report of the festival](https://www.chinmayamission.com/global/news/anand-utsav-at-cirs-family-values-creativity), in the order that page gives them (the first is its header image). Each is on `https://images.chinmayamission.com/uploads/<id>.webp`; `tools/anandutsav.py` lists the ids and `tools/make-anand-utsav.py` fetches and cuts them. The report prints no captions, so none are written.
+
 ## Date and content sources
 
 The 2026 IB and CBSE figures and examination periods come from the [official CIRS News page](https://www.cirschool.org/news.html). That page gives no exact publication day for either result. The three added WordPress reports use the publication dates returned by the [official CIRS WordPress posts API](https://new.cirschool.org/wp-json/wp/v2/posts?per_page=100); their cards and archive rows explicitly say “Published.” Their event dates are either absent or more specific dates within the article, and are not inferred from upload paths. The existing English, Science, Mathematics, Elections and Seva reports use the event dates stated in their linked CIRS articles.
