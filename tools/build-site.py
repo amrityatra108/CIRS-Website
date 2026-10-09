@@ -54,7 +54,7 @@ import laurels
 import experience
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE_BUST = "b=116"
+CACHE_BUST = "b=115"
 
 # Where a film's large-screen encode is offered. Everything that fails it —
 # a phone held either way up — takes the phone encode (tools/make-films.py),
@@ -725,7 +725,7 @@ PAGES = {
         # Page styles and search behavior live in alumni.css and alumni-journey.js.
         "banner": None,
         "sheet": "alumni",
-        "cache_suffix": "-alumni-9",
+        "cache_suffix": "-alumni-10",
         "uc": False,
     },
     # What a visitor sees at an address that is no page of this site. Both
