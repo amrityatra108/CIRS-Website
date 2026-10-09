@@ -62,7 +62,9 @@ seventy-five are listed by hand in `tools/artswall.py`, and the rest are named b
 `captures.py`, `art-attack.json`, the News reports). Adding a page's photographs to the wall is a
 decision made there, frame by frame, never a side effect; nothing on it is captioned beyond what
 the source page already says (frames whose subject is an infant stay out, as on Festivals).
-`tools/make-arts-wall.py` cuts, grades and writes them all as WebP into `assets/img/arts/` and
+The 47 photographs that came from the school's Drive are kept in `assets/source/cultural-gallery/full/`
+(`make-arts-wall.py --fetch` re-downloads any that are missing; their ids are in `artswall.py`), and the
+wall serves its own graded copies of them, never Drive. `tools/make-arts-wall.py` cuts, grades and writes them all as WebP into `assets/img/arts/` and
 records the new ones in `tools/culture-gallery.json`, which `artswall.py` reads. **Every
 photograph goes through the one grade in `tools/gallerygrade.py`** (decided photograph by
 photograph, paintings graded as paintings); change the grade there and re-run the cutter, never
