@@ -1,59 +1,66 @@
 #!/usr/bin/env python3
-"""Cut the photographs for the Arts, Music & Theatre wall.
+"""Cut the photographs for the CIRS Cultural Gallery wall.
 
-    assets/img/arts/<name>.jpg          the photograph, opened from a tile
-    assets/img/arts/thumbs/<name>.jpg   the copy the moving tile carries
+    assets/img/arts/<name>.webp          the photograph, opened from a tile
+    assets/img/arts/thumbs/<name>.webp   the copy the moving tile carries
+    tools/culture-gallery.json           what was written, for tools/artswall.py
 
 The wall holds every photograph at once and moves them, so the tile copies
 have to be small: a hundred tiles at full size is a hundred megabytes moving
 under a finger. The full copy is only fetched when somebody opens a tile.
 
-The grade is lighter than tools/make-photos.py uses. Those sit flat on a page;
-these sit on the purple ground at a fifth of their opacity until the pointer
-finds them, and the thing worth keeping in a photograph of a lit stage is the
-light. So most of the colour survives and the wash is a whisper — just enough
-that twenty-eight photographs from twenty-eight evenings read as one wall.
+Every photograph goes through the one grade in tools/gallerygrade.py, so that
+a stage, a festival, a classroom and a child's painting from a dozen sources
+read as one wall. The grade is decided photograph by photograph (see that
+module), and the paintings and drawings get the correction without the tone.
 
-Two source families feed it:
+Three families feed it:
 
-  * assets/source/ — the camera originals, cropped and graded here.
-  * assets/source/archive/ — the photographs the designer had already chosen
-    and sized for the standalone archive, kept when that folder was folded into
-    this page. They arrived small and there is no larger copy of them in this
-    repository, so they are carried across as they are rather than upscaled
-    into softness.
+  * The wall's original photographs, listed here: camera originals in
+    assets/source/ (cropped and graded), the SPIC MACAY contact sheet (cut
+    back into its six), the photographs the designer chose for the archive
+    (assets/source/archive/), and the 48 CIRS Cultural Gallery tiles
+    (assets/source/cultural-gallery/), which are Drive renditions at most 520px
+    on a side. Those 48 have no larger copy in this repository: their opened
+    1600px photographs stay on the school's Drive, so only their tiles are cut.
+  * Everything else the school's pages show of its arts, music, theatre,
+    festivals and students' own making, listed in tools/culturegallery.py:
+    each page's own record of its photographs, taken as it stands. Those are
+    cut from the best copy in the repository.
+  * SPIC MACAY.jpg is a contact sheet of six photographs from the society's
+    visiting-artist concerts. They are visiting professional musicians and
+    dancers, not students, and the captions say so.
 
-The 48 CIRS Cultural Gallery tiles arrived as already-web-sized Drive
-renditions and live in assets/img/arts/thumbs/. The script preserves those
-bytes while rebuilding the generated directory. Their opened 1600px copies
-remain on the school's Drive.
-
-SPIC MACAY.jpg is a contact sheet of six photographs from the society's
-visiting-artist concerts, so it is cut back into the six. They are visiting
-professional musicians and dancers, not students, and the captions say so.
+Nothing is upscaled. A photograph that arrived small stays small.
 
     python3 tools/make-arts-wall.py
 """
 
+import concurrent.futures
+import json
 import os
 import shutil
 import sys
+import time
 
-from PIL import Image, ImageEnhance, ImageOps
+from PIL import Image, ImageOps
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+
+import culturegallery  # noqa: E402
+import gallerygrade  # noqa: E402
+
+ROOT = os.path.dirname(HERE)
 SRC = os.path.join(ROOT, "assets/source")
 ARCHIVE = os.path.join(ROOT, "assets/source/archive")
+CULTURAL = os.path.join(ROOT, "assets/source/cultural-gallery")
 OUT = os.path.join(ROOT, "assets/img/arts")
+MANIFEST = os.path.join(HERE, "culture-gallery.json")
 
-FULL = 1600           # long edge of the copy a tile opens
-THUMB = 520           # long edge of the copy a tile carries
-
-SHADOW = (36, 26, 56)
-HIGHLIGHT = (240, 229, 212)
-KEEP_COLOUR = 0.86    # more than make-photos keeps: the stage light is the photograph
-WASH = (32, 23, 44)
-WASH_ALPHA = 0.05
+FULL = 1440           # long edge of the copy a tile opens
+THUMB = 480           # long edge of the copy a tile carries
+Q_FULL, Q_THUMB = 72, 66
 
 # name, source in assets/source/, focal point across the frame (x, y) in 0..1
 CAMERA = [
@@ -85,37 +92,21 @@ SHEET_NAMES = [
     ["spic-dancer", "spic-concert",   "spic-tabla"],
 ]
 
-# Photographs the designer had already chosen for the archive. Copied across
-# at the size they arrived: these are the only copies in the repository.
+# Photographs the designer had already chosen for the archive, at the size
+# they arrived: these are the only copies in the repository. The paintings are
+# graded as paintings.
 CARRIED = [
-    ("stage",  "stage.jpg"),
-    ("dance",  "dancers.jpg"),
-    ("paint1", "paint1.jpg"),
-    ("paint2", "paint2.jpg"),
-    ("paint3", "paint3.jpg"),
-    ("paint4", "paint4.jpg"),
-    ("paint5", "paint5.jpg"),
+    ("stage",  "stage.jpg",   "photo"),
+    ("dance",  "dancers.jpg", "photo"),
+    ("paint1", "paint1.jpg",  "art"),
+    ("paint2", "paint2.jpg",  "art"),
+    ("paint3", "paint3.jpg",  "art"),
+    ("paint4", "paint4.jpg",  "art"),
+    ("paint5", "paint5.jpg",  "art"),
 ]
 
-CULTURAL_TILES = [f"drive-{index:02d}" for index in range(1, 49)]
-
-
-def grade(im):
-    grey = ImageEnhance.Contrast(im.convert("L")).enhance(1.05)
-    ramp = []
-    for ch in range(3):
-        lo, hi = SHADOW[ch], HIGHLIGHT[ch]
-        ramp += [int(lo + (hi - lo) * (i / 255)) for i in range(256)]
-    toned = Image.blend(grey.convert("RGB").point(ramp), im, KEEP_COLOUR)
-    return Image.blend(toned, Image.new("RGB", im.size, WASH), WASH_ALPHA)
-
-
-def fit(im, edge):
-    """Longest edge to `edge`, aspect kept. Never upscales."""
-    if max(im.size) <= edge:
-        return im.copy()
-    s = edge / max(im.size)
-    return im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
+# drive-31 was the amphitheatre photograph a second time; it has no tile.
+CULTURAL_TILES = [f"drive-{index:02d}" for index in range(1, 49) if index != 31]
 
 
 def trim(im, focal, ratio=1.34):
@@ -136,74 +127,97 @@ def trim(im, focal, ratio=1.34):
     return im
 
 
-def write(name, im, graded, tally):
-    full = fit(im, FULL)
-    if graded:
-        full = grade(full)
-    p = os.path.join(OUT, f"{name}.jpg")
-    full.save(p, "JPEG", quality=82, optimize=True, progressive=True)
-    t = os.path.join(OUT, "thumbs", f"{name}.jpg")
-    fit(full, THUMB).save(t, "JPEG", quality=74, optimize=True, progressive=True)
-    kb, tkb = os.path.getsize(p) // 1024, os.path.getsize(t) // 1024
-    tally.append((kb, tkb))
-    print(f"  {name:<16} {full.width}x{full.height:<5} {kb:>4} KB   tile {tkb:>3} KB")
+def jobs():
+    """Every photograph to cut, in wall order: the originals, then the rest."""
+    out = []
+    for name, source, focal in CAMERA:
+        out.append({"name": name, "src": os.path.join(SRC, source), "focal": focal})
+    for row, (top, bottom) in enumerate(SHEET_ROWS):
+        for col, (left, right) in enumerate(SHEET_COLS):
+            out.append({"name": SHEET_NAMES[row][col], "src": os.path.join(SRC, SHEET),
+                        "box": (left, top, right + 1, bottom + 1)})
+    for name, source, kind in CARRIED:
+        out.append({"name": name, "src": os.path.join(ARCHIVE, source), "kind": kind})
+    for name in CULTURAL_TILES:
+        out.append({"name": name, "src": os.path.join(CULTURAL, f"{name}.jpg"), "thumb_only": True})
+    for item in culturegallery.collect():
+        out.append({"name": item["name"], "src": os.path.join(ROOT, item["src"].replace("/", os.sep)),
+                    "kind": item["kind"], "new": item})
+    return out
+
+
+def cut(job):
+    """Cut one photograph. Runs in a worker process."""
+    im = Image.open(job["src"])
+    if "box" not in job:
+        # A camera original is 8192px; the decoder can hand back a half or a
+        # quarter of it for nothing, which is all the grade will see. (Not for
+        # the contact sheet, whose panels are measured in its own pixels.)
+        im.draft("RGB", (FULL * 2, FULL * 2))
+    im = ImageOps.exif_transpose(im).convert("RGB")
+    if "box" in job:
+        im = im.crop(job["box"])
+    if "focal" in job:
+        im = trim(im, job["focal"])
+    if job.get("thumb_only"):
+        # Drive's renditions carry a hairline of white on one or two edges.
+        im = im.crop((2, 2, im.width - 2, im.height - 2))
+    kind = job.get("kind", "photo")
+    name = job["name"]
+    graded = gallerygrade.grade(gallerygrade.fit(im, FULL), kind)
+
+    result = {"name": name}
+    if not job.get("thumb_only"):
+        full = gallerygrade.sharpen(graded, 0.5)
+        full.save(os.path.join(OUT, f"{name}.webp"), "WEBP", quality=Q_FULL, method=6)
+        result.update(w=full.width, h=full.height,
+                      kb=os.path.getsize(os.path.join(OUT, f"{name}.webp")) // 1024)
+    tile = gallerygrade.sharpen(gallerygrade.fit(graded, THUMB), 0.6)
+    tile.save(os.path.join(OUT, "thumbs", f"{name}.webp"), "WEBP", quality=Q_THUMB, method=6)
+    result["tile_kb"] = os.path.getsize(os.path.join(OUT, "thumbs", f"{name}.webp")) // 1024
+    return result
 
 
 def main():
-    missing = [s for _, s, _ in CAMERA if not os.path.exists(os.path.join(SRC, s))]
-    if not os.path.exists(os.path.join(SRC, SHEET)):
-        missing.append(SHEET)
-    missing += [s for _, s in CARRIED if not os.path.exists(os.path.join(ARCHIVE, s))]
-    cultural_paths = {name: os.path.join(OUT, "thumbs", f"{name}.jpg")
-                      for name in CULTURAL_TILES}
-    missing += [f"img/arts/thumbs/{name}.jpg" for name, path in cultural_paths.items()
-                if not os.path.exists(path)]
+    todo = jobs()
+    missing = [j["src"] for j in todo if not os.path.exists(j["src"])]
     if missing:
-        sys.exit("make-arts-wall: not found — " + ", ".join(missing))
-
-    # OUT is regenerated below. Keep the externally imported tile renditions
-    # in memory so that a routine rebuild cannot discard them.
-    cultural_tiles = {}
-    for name, path in cultural_paths.items():
-        with open(path, "rb") as source:
-            cultural_tiles[name] = source.read()
+        sys.exit("make-arts-wall: not found — " + ", ".join(os.path.relpath(m, ROOT) for m in missing))
 
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
     os.makedirs(os.path.join(OUT, "thumbs"))
 
-    tally = []
-    for name, source, focal in CAMERA:
-        im = ImageOps.exif_transpose(Image.open(os.path.join(SRC, source))).convert("RGB")
-        write(name, trim(im, focal), True, tally)
+    started = time.time()
+    results = {}
+    workers = max(1, min(8, (os.cpu_count() or 2) - 1))
+    with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as pool:
+        for n, r in enumerate(pool.map(cut, todo, chunksize=4), 1):
+            results[r["name"]] = r
+            if n % 40 == 0 or n == len(todo):
+                print(f"  {n}/{len(todo)}  {time.time() - started:.0f}s", flush=True)
 
-    sheet = ImageOps.exif_transpose(Image.open(os.path.join(SRC, SHEET))).convert("RGB")
-    for row, (top, bottom) in enumerate(SHEET_ROWS):
-        for col, (left, right) in enumerate(SHEET_COLS):
-            panel = sheet.crop((left, top, right + 1, bottom + 1))
-            write(SHEET_NAMES[row][col], panel, True, tally)
+    full_kb = sum(r.get("kb", 0) for r in results.values())
+    tile_kb = sum(r["tile_kb"] for r in results.values())
+    print(f"  {len(results)} photographs -> assets/img/arts/  "
+          f"{full_kb / 1024:.1f} MB full, {tile_kb / 1024:.1f} MB of tiles")
 
-    # Already cut and graded for the archive, and small. Grading a second time
-    # would compound the wash, and there is nothing to gain by resizing them.
-    for name, source in CARRIED:
-        im = ImageOps.exif_transpose(Image.open(os.path.join(ARCHIVE, source))).convert("RGB")
-        write(name, im, False, tally)
-
-    # These are already web-sized tile renditions. Their full copies stay on
-    # Drive and are only requested after a visitor opens one, so do not create
-    # unreferenced local "full" duplicates here.
-    cultural_tile_kb = 0
-    for name in CULTURAL_TILES:
-        target = os.path.join(OUT, "thumbs", f"{name}.jpg")
-        with open(target, "wb") as output:
-            output.write(cultural_tiles[name])
-        tile_kb = os.path.getsize(target) // 1024
-        cultural_tile_kb += tile_kb
-        print(f"  {name:<16} Drive full       tile {tile_kb:>3} KB")
-
-    print(f"  {len(tally) + len(CULTURAL_TILES)} photographs -> assets/img/arts/  "
-          f"{sum(k for k, _ in tally)/1024:.1f} MB full, "
-          f"{sum(t for _, t in tally) + cultural_tile_kb} KB of tiles")
+    # What tools/artswall.py reads: only the photographs this module adds. The
+    # original seventy-five are written out by hand in artswall.py, with the
+    # captions they have always had.
+    record = []
+    for j in todo:
+        item = j.get("new")
+        if not item:
+            continue
+        r = results[j["name"]]
+        record.append({"name": item["name"], "group": item["group"], "cat": item["cat"],
+                       "title": item["title"], "desc": item["desc"], "weight": item["weight"],
+                       "w": r["w"], "h": r["h"], "src": item["src"]})
+    with open(MANIFEST, "w", encoding="utf-8") as f:
+        json.dump({"photographs": record}, f, ensure_ascii=False, indent=1)
+        f.write("\n")
+    print(f"  {len(record)} recorded in tools/culture-gallery.json")
 
 
 if __name__ == "__main__":

@@ -27,19 +27,32 @@
 // photograph wrapped around an image of its tile copy. One list, kept in the
 // HTML, which is also what lets tools/check-links.py see every file the wall
 // uses. A <template> is inert, so naming them there costs no requests.
+//
+// A photograph is its link, its tile copy, a category and what the school says
+// about it: the alt text is what the frame shows, and where the page also gave
+// it a short title (data-title) the alt becomes the description beneath it.
+// data-w is how often the wall picks it for a tile (see plateFor), 2 by default.
 const plates = [...document.getElementById('wall-plates').content.querySelectorAll('a')]
-    .map(a => ({
-        src: a.getAttribute('href'),
-        thumb: a.firstElementChild.getAttribute('src'),
-        cat: a.firstElementChild.dataset.cat || 'Arts',
-        title: a.firstElementChild.getAttribute('alt') || ''
-    }));
+    .map(a => {
+        const img = a.firstElementChild, alt = img.getAttribute('alt') || '', named = img.dataset.title;
+        return {
+            src: a.getAttribute('href'),
+            thumb: img.getAttribute('src'),
+            cat: img.dataset.cat || 'Arts',
+            title: named || alt,
+            desc: named ? alt : '',
+            weight: Math.max(1, parseInt(img.dataset.w, 10) || 2)
+        };
+    });
+
+    const plateClasses = [[], [], [], [], []];
+    plates.forEach((p, i) => { for (let k = 0; k < p.weight; k++) plateClasses[i % 5].push(i); });
 
     const $ = id => document.getElementById(id);
     const wrap = $('p1-wrap'), stage = $('p1-stage'), ring = $('cursor-ring'), dot = $('cursor-dot');
     const titleSharp = $('p1-title'), titleSoft = $('p1-title-soft'), hintEl = $('p1-hint');
     const hero = document.querySelector('.p1-hero');
-    const modal = $('master-modal'), mediaCont = $('m-media-cont'), mTitle = $('m-title'), mMeta = $('m-meta'), closeBtn = $('m-close');
+    const modal = $('master-modal'), mediaCont = $('m-media-cont'), mTitle = $('m-title'), mMeta = $('m-meta'), mDesc = $('m-desc'), closeBtn = $('m-close');
 
     const PERSP = 1120;                       // must match #p1-viewport perspective
     const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -155,13 +168,16 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         unit(q, r, salt) { return (this.hash(q + salt * 131, r - salt * 71) % 10000) / 9999; },
 
         // (gx + 2gy) mod 5 differs across all eight neighbours, so no photograph
-        // ever sits beside itself.
+        // ever sits beside itself: each photograph belongs to one of five
+        // classes (its place in the list, mod 5), and a cell only ever draws
+        // from its own. Within a class a photograph is listed as many times
+        // as its weight, so the two hundred and eighty paintings scanned from
+        // the magazine do not crowd out the stage.
         plateFor(gx, gy) {
             const N = plates.length;
             if (N < 6) return this.hash(gx, gy) % N;
-            const cls = (((gx + 2 * gy) % 5) + 5) % 5;
-            const count = Math.floor((N - 1 - cls) / 5) + 1;
-            return cls + (this.hash(gx + 7919, gy + 104729) % count) * 5;
+            const cls = (((gx + 2 * gy) % 5) + 5) % 5, pool = plateClasses[cls];
+            return pool[this.hash(gx + 7919, gy + 104729) % pool.length];
         },
 
         // Sizes keep the original rings' range (180/140/100/80) and small bias;
@@ -453,7 +469,8 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         lastPlate = i;
         drag.active = false; p1.vx = p1.vy = 0; p1.wheelX = p1.wheelY = 0;
         mTitle.textContent = d.title;
-        mMeta.textContent = `${d.cat} \u00b7 Arts, Music & Theatre`;
+        mDesc.textContent = d.desc || 'CIRS · Siruvani, Coimbatore';
+        mMeta.textContent = d.cat;
         const full = d.src, thumb = d.thumb || d.src, token = ++modalToken;
         mediaCont.textContent = '';
         // Show the tile copy at once, swap in the photograph when it has loaded.
@@ -614,22 +631,34 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
     }, 500);
 
     // ------------------------------------------------------------------- BOOT
-    // Decode every tile image up front, and keep hold of them so the browser keeps
-    // them decoded -- recycling a tile then never stalls on a decode.
-    const warm = [];
-    function preload(list) {
-        warm.length = 0;
-        for (const p of list) {
-            const im = new Image(); im.decoding = 'async'; im.src = p.thumb || p.src;
-            if (im.decode) im.decode().catch(() => {});
-            warm.push(im);
+    // The tiles fetch their photographs as they are first drawn. This brings the
+    // rest into the browser's cache while it is idle, a few at a time and only
+    // after the first screen has settled, so that recycling a tile finds its
+    // photograph already there. Nothing is held in memory (several hundred
+    // decoded bitmaps would be), and nothing is fetched on Save-Data or a slow
+    // connection: the wall then loads only what it shows.
+    function warmCache(list) {
+        const c = navigator.connection;
+        if (c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || ''))) return;
+        const order = list.map((_, i) => i);
+        for (let i = order.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [order[i], order[j]] = [order[j], order[i]];
         }
+        let next = 0;
+        const step = () => {
+            for (let n = 0; n < 4 && next < order.length; n++) {
+                const im = new Image(); im.decoding = 'async'; im.src = list[order[next++]].thumb;
+            }
+            if (next < order.length) setTimeout(step, 220);
+        };
+        setTimeout(step, 2500);
     }
 
     plexus.init();
     p1.build();
     p1.panX = p1.prevPanX = W / 2; p1.panY = p1.prevPanY = H / 2;
-    preload(plates);
+    warmCache(plates);
     p1.recycle();
     requestAnimationFrame(t => { last = t; tick(t); });
 

@@ -79,7 +79,7 @@ body.wall #p1-stage{ position:absolute; inset:0; transform-style:preserve-3d; tr
    tile every frame) and no overflow clipping on a 3D layer (that forces a
    mask). The photograph rounds its own corners instead. */
 body.wall .p1-tile{ padding:0; font:inherit; appearance:none; position:absolute; left:0; top:0; width:100px; height:100px; box-sizing:border-box; background:rgba(42,41,37,.9); border-radius:12px; border:1px solid rgba(var(--gold-rgb),.24); -webkit-backface-visibility:hidden; backface-visibility:hidden; contain:layout style; transition:border-color .24s ease, box-shadow .24s ease; }
-body.wall .p1-tile img{ display:block; width:100%; height:100%; object-fit:cover; border-radius:11px; opacity:.56; filter:saturate(.78) brightness(.82); transition:opacity .32s ease, filter .32s ease, transform .32s ease; pointer-events:none; -webkit-user-drag:none; }
+body.wall .p1-tile img{ display:block; width:100%; height:100%; object-fit:cover; object-position:50% 38%; border-radius:11px; opacity:.56; filter:saturate(.78) brightness(.82); transition:opacity .32s ease, filter .32s ease, transform .32s ease; pointer-events:none; -webkit-user-drag:none; }
 body.wall .p1-tile.depth-back{ border-color:rgba(var(--gold-rgb),.12); box-shadow:0 8px 22px rgba(6,6,5,.18); }
 body.wall .p1-tile.depth-back img{ opacity:.27; filter:saturate(.55) brightness(.64); }
 body.wall .p1-tile.depth-main{ box-shadow:0 18px 42px rgba(6,6,5,.38); }
