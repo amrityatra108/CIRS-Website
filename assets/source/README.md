@@ -20,6 +20,10 @@ Three batches, and they differ:
   buimerccorp.com — each the photograph that organisation publishes under the
   person's own name, saved as published, with the owner's approval in
   September 2026. `tools/make-leadership.py` cuts them and records the pages.
+- `anand-utsav/header.png` — the school's "CIRS News Page Header" design from
+  its Canva (three photographs side by side), exported at 1920×1080 on
+  9 October 2026. It is the cover of the Anand Utsav 2026 report and its
+  picture in the News carousel; `tools/make-anand-utsav.py --cover` cuts both.
 - `festivals/` — 56 photographs of the seven festivals on CIRS Festivals, each
   from a named event folder in the school's Drive, resized to 2000px. Their
   own README says where each came from and how its date is known.
