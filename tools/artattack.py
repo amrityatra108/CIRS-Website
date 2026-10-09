@@ -37,7 +37,7 @@ MANIFEST = os.path.join(HERE, "art-attack.json")
 IMG = "assets/img/art-attack"
 
 # Each issue's date as its own cover prints it (and, for 20, 21, 22, 25, 27,
-# 30, 31 and 32, its contents page). An issue whose cover names an occasion
+# 30, 31, 32 and 33, its contents page). An issue whose cover names an occasion
 # and not a month is shown by that occasion; one whose cover gives no year
 # is shown without one. Nothing here is worked out from the issue numbers.
 ISSUES = {
@@ -52,6 +52,7 @@ ISSUES = {
     23: "April 2025", 24: "May 2025", 25: "July 2025", 26: "Anand Utsav issue",
     27: "November–December 2025", 28: "Pongal issue", 29: "Khel Mela 2026",
     30: "April 2026", 31: "May 2026", 32: "August 2026",
+    33: "October 2026",
 }
 
 def on_page(w):

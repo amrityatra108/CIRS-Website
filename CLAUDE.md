@@ -69,7 +69,7 @@ records the new ones in `tools/culture-gallery.json`, which `artswall.py` reads.
 photograph goes through the one grade in `tools/gallerygrade.py`** (decided photograph by
 photograph, paintings graded as paintings); change the grade there and re-run the cutter, never
 tune one file by hand. `tools/check-gallery-duplicates.py` (needs opencv) finds a frame cut for two
-pages; set the second aside in `DUPLICATES`. Tiles are weighted so the 279 scanned paintings do not
+pages; set the second aside in `DUPLICATES`. Tiles are weighted so the scanned paintings do not
 crowd out the stage (`data-w`, see `plateFor` in the script), and the script warms its cache in
 idle time rather than decoding every tile up front. Its sheet and script are
 `assets/css/artswall.css` and `assets/js/artswall.js`, both scoped to `body.wall`. Our Laurels also

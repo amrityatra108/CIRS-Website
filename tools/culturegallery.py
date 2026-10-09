@@ -115,8 +115,10 @@ NEWS = {
     },
 }
 # Anand Utsav 2026: the stage, the cake, the lamps. The speeches, the audience
-# and the award line-ups are on the report's own page.
-ANAND_UTSAV_2026 = [1, 4, 5, 6, 7, 8, 9, 10, 18]
+# and the award line-ups are on the report's own page. Photograph 1 is the
+# report's cover, which since 9 October 2026 is the News Page Header, a design
+# of three photographs side by side, and so is not a photograph for the wall.
+ANAND_UTSAV_2026 = [4, 5, 6, 7, 8, 9, 10, 18]
 # The two galleries the School published, of which only the festival is a
 # festival; the Gayathri Havan is a ceremony and stays on its own page.
 ARCHIVE_GALLERIES = ["vishu-tamil-puthandu"]
@@ -154,6 +156,18 @@ def festival_items():
     return out
 
 
+# Issues of The Crossroads whose Creative Corner photographs are on the wall as
+# well as its paintings. The Art Attack page is for work made by hand and does
+# not show a photograph; the wall is the gallery of both. Issue 33's three were
+# asked for (9 October 2026); the earlier issues' stay in the manifest.
+PHOTOGRAPHS_FROM_ISSUES = {33}
+
+
+def is_wall_photograph(w):
+    return (w["category"] == "photography"
+            and w["source"].get("crossroads") in PHOTOGRAPHS_FROM_ISSUES)
+
+
 def art_attack_items():
     m = artattack.load()
     out = []
@@ -161,15 +175,17 @@ def art_attack_items():
         src = p["files"][0]
         out.append(_item(f"aa-{p['id']}", "Art Attack", "Art Attack", p["caption"], p["alt"], src))
     for w in m["works"]:
-        if not artattack.on_page(w):
+        if not (artattack.on_page(w) or is_wall_photograph(w)):
             continue
         names, klass = artattack.credit(w)
         credit = ", ".join(x for x in (names, klass) if x)
         title = credit or artattack.source_line(w)
         desc = w["alt"] if not credit else f"{w['alt']}\n{artattack.source_line(w)}"
         label = artattack.CAT_LABEL.get(w["category"], "Work")
-        out.append(_item(f"work-{w['id']}", "Work", f"Art Attack · {label}", title, desc,
-                         w["files"][0], kind="art"))
+        photo = w["category"] == "photography"
+        out.append(_item(f"work-{w['id']}", "Work",
+                         f"The Crossroads · {label}" if photo else f"Art Attack · {label}",
+                         title, desc, w["files"][0], kind="photo" if photo else "art"))
     return out
 
 

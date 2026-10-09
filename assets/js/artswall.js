@@ -171,7 +171,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         // ever sits beside itself: each photograph belongs to one of five
         // classes (its place in the list, mod 5), and a cell only ever draws
         // from its own. Within a class a photograph is listed as many times
-        // as its weight, so the two hundred and eighty paintings scanned from
+        // as its weight, so the hundreds of paintings scanned from
         // the magazine do not crowd out the stage.
         plateFor(gx, gy) {
             const N = plates.length;
