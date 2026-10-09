@@ -4,8 +4,9 @@
 Every word below is the magazine's. Each article was lifted from the issue
 PDF in assets/source/crossroads-pdf/ and is reproduced whole — no summaries,
 no rewriting, and nothing added. Issues 2, 4, 17, 30, 31 and 32 carry a text
-layer and were extracted from it; issue 29 was exported as flat images and
-had to be transcribed by hand from the page.
+layer and were extracted from it; issues 29 and 33 were exported as flat images
+and had to be transcribed by hand from the pages (issue 33 with a read-through
+by OCR to check the words and figures against).
 
 The only changes made to any of it are plain corrections of spelling,
 punctuation and grammar, at the school's request — a misspelt name, a comma
@@ -16,12 +17,177 @@ and the sentence that mutual defection earns is five years in one paragraph
 and three in another. Its byline is not printed anywhere in the issue and
 was supplied by the school.
 
+Issue 33 (October 2026, the Anand Utsav issue) is published as its editorial,
+"The CIRS Effect", and the articles the school chose from its contents. Its
+corrections are the same kind and are all spelling or punctuation: "phohibit",
+"percieve", "constrast" and a doubled "with" are spelt as intended, a missing
+full stop and comma are supplied, and "undisputably" is "indisputably". The
+editorial prints no byline; Rhea Sontakke, its author and the magazine's editor,
+was supplied by the school. Bharat's Energy runs on in print as one long
+paragraph and one in each column; it is set here as five, broken at the end of
+a sentence and nowhere else. The verse in "When FOMO Becomes Expensive" is the
+Gita's, as printed.
+
 To publish another article: add its entry here with its paragraphs, and
 build-site.py gives it a page and the feed gives it a card. Nothing else has
 to change.
 """
 
+def verse(*lines):
+    """One stanza of a poem: its lines, one to a row. The reading page keeps the
+    line breaks (tools/blog.py body_html), where a plain paragraph would run
+    them together."""
+    return chr(10).join(lines)
+
+
 POSTS = [
+    {
+        "slug": "the-cirs-effect",
+        "title": "The CIRS Effect",
+        "issue": 33,
+        "date": "October 2026",
+        "author": "Rhea Sontakke | Editor, The Crossroads",
+        "credit_source": "school",
+        "section": "The Editorial",
+        "image": "the-cirs-effect.webp",
+        "image_alt": "A woman with glasses, seated with a microphone in her hands, in black and white against a red cut-out shape",
+        "image_width": 740,
+        "image_height": 845,
+        "image_caption": "From the editorial pages of The Crossroads, Issue 33.",
+        "excerpt": "The end of September in CIRS officially heralds the three months that treat academics as an optional activity. October brings Anand Utsav and the insane amount of preparation that goes into it, while November disappears in the flurry of Masquerades.",
+        "paragraphs": [
+            "The end of September in CIRS officially heralds the three months that treat academics as an optional activity. October brings Anand Utsav and the insane amount of preparation that goes into it, while November disappears in the flurry of Masquerades. Naturally, you would assume these are the three favorite months of every CIRS student, and I am no exception. Three years ago, however, it was a very different picture. The onset of October was my worst nightmare.",
+            "Eighth-grade me spent every hour of every day either studying or cracking jokes about everything under the sun, and I was expecting the usual routine: eat, sleep, have fun till 8th, study in the 9th and 10th, leave, study in some college, and find a job. I didn’t act, I didn’t sing, I didn’t dance, I didn’t have any innate skill to be proud of. All that led to my believing that I was destined to be a gray character in the crowd. In hindsight, who I used to be was a gray character not because of a lack of talent, but a lack of vision. I believed I would never be great, but neither did I want to be. I did not have dreams, aspirations, goals; I was simply drifting.",
+            "I walked into ninth grade not knowing I would walk out forever changed. The first challenge I faced came disguised as privilege: I joined Vanguard assuming we’d do a few activities in the name of learning and emerge the same. What I didn’t anticipate was all that would be expected of me. I was expected to actually put effort into improvement, to want to become better, and to be willing to work for it. It was only once this passivity had been eradicated that I began to look around me for things to learn, things to be passionate about.",
+            "My savior came in the form of The Crossroads, one of the major reasons I am able in any way to write this today. Finding my forte in writing propelled my confidence by leagues. I had finally found something that I loved, something I could excel at. It gave me the voice I had never had: though I was outspoken, I was never confident in what I was saying. My passion and flair for writing were a large part of the identity I was discovering: my writing gave me an avenue to focus my goals, improve my literary skills, and expand my knowledge of the world. And it led to opening doors that had earlier remained elusive. Another doorway to who I am now was becoming Cultural Secretary in Grade 9, which exposed me further to history through research for culture talks, initiation into the world of CIRS theater, to literature of various kinds, and conversations that enriched my life. It’s those experiences that made me who I am today.",
+            "Once you read this, you might believe that it was writing that changed me. It’s a misconception I had for a long time as well; but what really caused all this was the institution that allowed me to discover it. The place that made me take up things I’d never done before, that forced me to try my best at them. It is to every event, every word, and every person that I have known in CIRS that I owe this transformation to. They have given me what they give every student who is fortunate enough to step here. I was lucky CIRS gave me an extra nudge. When I look back now, I don’t see the exact point where the lights began to appear, I’m simply grateful that they did.",
+        ],
+    },
+    {
+        "slug": "the-dancing-parasite",
+        "title": "The Dancing Parasite",
+        "issue": 33,
+        "date": "October 2026",
+        "author": "Viraj Vijaykumar Lal | IB I Yr",
+        "section": "Poetry",
+        "image": "the-dancing-parasite.webp",
+        "image_alt": "A woman’s profile drawn in smoke, with vine leaves growing from her hair, on black, beneath the title The Dancing Parasite",
+        "image_width": 850,
+        "image_height": 1615,
+        "image_caption": "From the opening page of the poem in The Crossroads, Issue 33.",
+        "excerpt": "The Dancing Parasite is a haunting poem about the mental parasites that take over the mind, wrenching it from our grasp and leaving us as helpless spectators. This poem was a submission for the prestigious Foyle Young Poets Award as well.",
+        "paragraphs": [
+            "before the jasmine died.",
+            verse("foraging old ghosts,", "i do not recall where my mind ends and it begins."),
+            verse("i remember when stillness was a choice –", "before the jasmine died on the trellis, before the kitchen smelled of nothing."),
+            "it unclenched the crease behind my ear and drank.",
+            verse("then it burrowed:", "a colony in the cracks and crevices,", "an infestation in the folds of my hippocampus."),
+            verse("now i am two things: a stone at the bottom of a river,", "and the river itself."),
+            verse("now watch what i become: drunk without a pint.", "a shaitan who paces, who mutters, who claws at wallpaper.", "a bonfire eating its own legs."),
+            verse("the dance takes me to the house,", "no longer home,", "stripping the jasmine from the trellis –", "years of my mother’s hands, scattered.", "the parasite taught me this dance:"),
+            verse("thrash and call it freedom,", "burn and call it passion,", "collapse and call it rest."),
+            verse("and when my truth screams, it stops,", "not by shhh,", "but by eating the sound before it reaches the air."),
+        ],
+    },
+    {
+        "slug": "bharats-energy-beyond-the-straits",
+        "title": "Bharat’s Energy: Beyond the Straits",
+        "issue": 33,
+        "date": "October 2026",
+        "author": "Divyam Gupta | IB I Yr",
+        "section": "Economics",
+        "image": "bharats-energy-beyond-the-straits.webp",
+        "image_alt": "India picked out in red on a dark grey relief map",
+        "image_width": 850,
+        "image_height": 1070,
+        "image_caption": "From the opening page of the article in The Crossroads, Issue 33.",
+        "excerpt": "This piece highlights the role of green energy in global energy trade and Bharat’s future in the industry. It also analyzes the current national policies and their effects.",
+        "paragraphs": [
+            "Not limited to mere supply chains or owning a strait, the 21st century demands that every country either be a part of the Western cult to secure energy (if you cannot produce it), which is failing miserably, or do something on its own. While conflicts monopolize the headlines, the war is geoeconomic – like a current – calm on the surface, but rough and turbulent underneath. Sanctions appear more frequently than LaLiga games, while freight insurance caps and supply chain weaponization of critical rare earth minerals are a bigger display of power today than fighter jets.",
+            "A quarter of the planet’s primary energy flows through the Strait of Hormuz, the Bab el-Mandeb, and the Strait of Malacca; these narrow and crowded maritime arteries are tumors to global energy security. And disruptions, whether by state-sponsored militants or governments 11,000 km away, send shock waves through the global energy markets. In this era, sadly, the true geopolitical and geoeconomic power lies in the ability to decouple national survival from these volatile, external maritime corridors.",
+            "With 74% of chief economists of the World Economic Forum claiming that India has the strongest growth outlook, the detail is that 85% of Bharat’s crude is imported from rentier nations. The country’s appetite is increasing exponentially, yet the nation holds reserves for only about 78 days. This can lead to disasters worse than those seen in 1991. These issues can lead to severe political instability and a halt in economic growth. With the Forex reserves falling and rising, along with the cost of goods in the market, the nation will certainly not be in a great position.",
+            "To navigate through this byzantine situation, Bharat astutely aligned itself multilaterally. Rather than depending solely on the Middle East, as has been the trend, Bharat also effectively saves Forex by buying discounted Russian crude and constantly hunting for new trade corridors to keep consumer prices from instantly spiralling. Though well planned, walking the knife’s edge is only a temporary fix in this battle of snakes.",
+            "Ultimately, to protect its interests, India faces a stark choice: import enough oil even in times of no crisis, as China does (which has more oil than the 32 members of the International Energy Agency combined!), or diversify its energy sources by expanding into ethanol, methanol, nuclear energy, and green hydrogen. Ethanol and Methanol have emerged as the twin pillars of our government’s interest in the transition toward alternative energy; simultaneously, green hydrogen is the next aim of the entire world.",
+            "The cornerstone of Bharat’s transition into aatmanirbharta in energy is ethanol. It is indisputably the king of controversy in the automobile industry and a part of the supposed solution to make Bharat energy-secure. Ethanol is not just an environmental initiative; it is geoeconomic resilience. Billions of dollars that flow outward are retained by slashing crude imports and can alternatively be used for the import and usage of other merit goods. Since 2014, ethanol blending has saved the nation ₹1.9-₹1.98 lakh crore. Finishing the project of E20 has various positive effects on paper, but the hasty implementation meant that the automobiles were not ready for the new fuel, and NITI Aayog’s warning about the same was visible through massive public outrage. The ethanol industry pumps massive liquidity into the rural agrarian economy.",
+            "Converting excess or unfit agricultural outputs to this carbon-efficient fuel led to the reduction of the supply of important foodstuffs like maize to the market, as farmers opted to sell to the ethanol companies for better pay. Bharat, a usual exporter, had to net import 0.9 metric tonnes of maize to suffice the demand. Contrastingly, ethanol also protects the nation from disputes and conflicts at maritime chokepoints by reducing the demand.",
+            "While ethanol can be seen as the practical present, the future belongs to Green Hydrogen. The plan of decarbonizing steel refining and fertilizer production requires 5 MMT Green Hydrogen output annually by 2030. While converting solar and water into a fuel within the borders of the country represents the pinnacle of strategic independence, the cost of doing so is three times higher than the one involved in using gray hydrogen from fossil fuels. Producing electrolyzers is a move from being dependent on Middle Eastern oil to being dependent on minerals - particularly Chinese sourced.",
+            "Though ethanol and green hydrogen can be used for specific niche areas, like light passenger vehicles, Bharat is looking at methanol as a more dynamic substitute. Using NITI Aayog’s Methanol Economy, the fuel is used as a strong complement to ethanol.",
+            "The supremacy of this fuel lies in its sourcing: unsustainable and unproductive goods like high-ash coal, municipal waste, and agricultural biomass. Methanol’s applications can revolutionise heavy transport, inland marine transport, and coastal shipping by M15 blending. It also serves as a cleaner alternative to industrial generators. Having the capability to blend with LPG and burn without residue, it can be used for household cooking as well. By building this flex-fuel infrastructure with multiple alternative fuels, Bharat is passively diversifying to reduce crude requirements and eventually reach energy security.",
+            "At length, Bharat’s energy future is not about getting the right policy, which is impossible in a democracy. But Bharat can surely make calculated trade-offs and implement structural changes at a realistic pace to make a sustainable and self-improving transition smooth. As the reality of this transition proves, ethanol walks a razor’s edge with food security, while green hydrogen remains a costly geoeconomic gamble. Instead of wasting resources, Bharat has deployed a domestic matrix that contains ethanol for now, methanol for heavy transport, and hydrogen for tomorrow, forging an impenetrable internal shield.",
+        ],
+    },
+    {
+        "slug": "log-kya-kahenge",
+        "title": "Log Kya Kahenge?",
+        "subtitle": "Why is she always required to justify herself?",
+        "issue": 33,
+        "date": "October 2026",
+        "author": "Risha Mishra | IB I Yr",
+        "section": "Opinion",
+        "image": "log-kya-kahenge.webp",
+        "image_alt": "An illustration of two women in headscarves, one whispering into the other’s ear behind her hand",
+        "image_width": 630,
+        "image_height": 484,
+        "image_caption": "From the article’s page in The Crossroads, Issue 33.",
+        "excerpt": "A poignant insight into the life of a woman, about the limitations her environment imposes on her, and the importance she issues to the opinions of society. A woman’s individual aspirations are just as important.",
+        "paragraphs": [
+            "In this generation, I consider myself and all the other girls living in CIRS very privileged to belong to families that gave us exposure to so many skills and put us on the path towards becoming the independent women we have always dreamed of being one day. However, if you look outside the campus, you would find so many other girls who would give anything to study in a more nurturing environment but are stopped - why? Not always because of financial constraints, and not always because the personal beliefs of their parents prohibit it. They are stopped because of what society will think of them, because of the opinions of others, because society can spread words that may bring “disrespect” to the girl’s family. Why are so many of us taught to think about a so-called “reputation” that lies in the hands of a destructive society rather than in our own aspirations and goals, which are the actual roots of our reputation? Why do we have to guard an “honor” that isn’t even really ours?",
+            "In many of the harassment or assault cases that we encounter on the news today, a similar pattern can be spotted where the family of the victim rarely approaches authorities to file complaints or take action against the accused because they think that their family’s “reputation” will be spoiled.",
+            "Though society itself cannot be altered overnight, we can change our own mindsets first. The decisions we make about our lifestyles, careers, and aspirations shouldn’t depend on how society will perceive them. Society will always have negative or positive opinions about everything we do, we have to learn how to control our decisions based on our circumstances and not based on the perception of others. So how do we begin to take that power back? It’s simple: Why do we worship goddesses like Maa Durga or Maa Kali? Because they are fierce, unrestrained, and answer to no one. If society reveres them for exactly those qualities, it must learn to accept its own daughters being independent and unapologetic in the same way. We must stop raising girls to be adjusting and quiet in the face of questions and instead let them explore every opportunity to achieve their own goals and express their ideas confidently.",
+            "This change starts at home. Parents and siblings should ask for a girl’s opinion in even the smallest family decisions, so she learns early on that her voice carries weight. When a girl feels seen and respected within her own home, she builds the confidence to speak up in the world outside it, without constantly asking herself, “What will society think of me?” More importantly, she stops having to defend herself every time society questions her, because society’s opinion shouldn’t matter as long as she knows her path and her actions align with her own values.",
+            "Ultimately, we shouldn’t be required to guard an “honor” that was never ours to begin with. On the contrary, we must ensure that we are internally satisfied with our decisions and actions rather than pleasing a stifling society with them. The only “honor” we must guard is our own.",
+        ],
+    },
+    {
+        "slug": "the-western-canonization-of-satyajit-ray",
+        "title": "The Western Canonization of Satyajit Ray",
+        "issue": 33,
+        "date": "October 2026",
+        "author": "Aayush S. | IB II Yr",
+        "section": "Culture",
+        "image": "the-western-canonization-of-satyajit-ray.webp",
+        "image_alt": "A film director looking through the viewfinder of a large movie camera, in black and white on a paper-brown ground, beside the headline The Western Canonization of Ray",
+        "image_width": 1160,
+        "image_height": 800,
+        "image_caption": "From the article’s page in The Crossroads, Issue 33.",
+        "excerpt": "Any Western conversation about cinema inevitably brings in Satyajit Ray and stops there. Other indigenous filmmakers have never been accorded the fame that Satyajit Ray enjoys, but for what reason? Their art is definitely no less. This article delves into the Western system’s views of Indian cinema and all that it routinely ignores.",
+        "paragraphs": [
+            "There is a peculiar ritual that occurs whenever Indian cinema enters a Western conversation about “world cinema”: someone says Satyajit Ray’s name, and the conversation more or less ends there. He becomes the shorthand, acceptable, legible face of an entire nation’s cinema spanning dozens of languages, regions, themes, and ideological positions. Kurosawa gets to represent Japan while still leaving room for Ozu, Mizoguchi, and Naruse; Sweden has Bergman, yet Sjöström and Widerberg are still part of the picture. But Ray is regularly asked to represent India alone, as if Ritwik Ghatak, Mrinal Sen, and a dozen others aren’t relevant. This so-called “minor curatorial oversight” overshadows the astute pattern in canon formations that disguise themselves as accidents, but in actuality reveal what the canonizing culture is really looking for.",
+            "Ray’s international ascent began with the Apu Trilogy’s reception at Cannes and MoMA in the mid-1950s, and it’s worth asking what made his work so immediately exportable when the work of his counterparts was not. What I’ve come to realize is that the answer lies in a greater depth than mere quality. Ghatak’s Meghe Dhaka Tara and Sen’s Bhuvan Shome are by most serious critical measures every bit as accomplished, so it couldn’t be that… the true depth lies more in legibility. What I mean by this is Ray’s Humanism, his Renoir-inflected visual grammar, his interest in individual psychological interiority, all charted comfortably and conveniently onto categories Western critics already possessed. He could be discussed using the same vocabulary applied to Italian neorealism or the more humanist strands of European art cinema. His films offered Western audiences a version of poverty and rural life that was legible as universal, sorrowful, dignified, and perhaps apolitical enough to be received as “human” rather than as statements.",
+            "Ghatak’s work, by contrast, is openly disruptive in ways that resist most easy translation. His employment of sound, theatrical excess, and his denial of adopting psychological realism in favor of something closer to melodrama-as-political-rupture, were choices rooted specifically in the trauma of Partition and the Bengali refugee experience. They require a viewer fluent in that specific history and willing to acknowledge a film that doesn’t smooth its anger into something palatable. Ghatak’s brusque disinterest in legibility to audiences in Paris or New York is what cost him the canonization Ray received, showing that his films were no lesser than Ray’s; they just weren’t designed for export.",
+            "In hindsight, the argument worth making suggests the view that the Western art-cinema apparatus of the 1950s through 1970s (festival juries, distributors, the critical establishment writing for outlets) was not neutrally scanning the world for the “best” films. It was rather selecting a particular kind of Humanism, to be more specific, the one compatible with a post-war European sensibility that wanted to affirm universal human dignity while carefully avoiding films that indicated colonialism, caste, or the economic structures Western capital still benefited from. Ray’s humanism is no doubt real and considerable, but it is also, not coincidentally, the version of Indian suffering least likely to implicate the viewer.",
+            "Mrinal Sen, though, fully understood this very dynamic and pushed directly against it. His later work, particularly through the 1970s, is explicitly Marxist, and often hostile to the very idea of the sympathetic bourgeois gaze that made Ray so consumable. What made Sen a harder sell to a festival circuit was his belief in the use of the camera as a tool for accusation, something contradictory to those festivals whose funding and audiences were themselves implicated in the global structures being accused. So, Sen won prizes, but he never became the single word a casual Western cinephile could drop to demonstrate cultural literacy about India.",
+            "The deeper we delve, we notice that there’s a broader mechanism at work here that isn’t specific to India. The Western art-cinema canon has historically preferred to admit non-Western cinemas one auteur at a time, as singular geniuses who transcend their national context, rather than as members of a wholly plural film culture. This subtle gameplay is what allows the West to consume difference without doing the harder work of understanding a cinema’s internal debates, as in the arguments Ray, Ghatak, and Sen were actually having with one another about the form, politics and noticeably, the ethics of representing poverty. Reducing that ecosystem to a single representative name flattens a rich critical argument into a single answer, and conveniently, the West got to pick which answer.",
+            "This is the same logic that made Kurosawa “Japanese cinema” for a generation of American cinephiles despite his own frequently ambivalent relationship to Japanese critics, who at times considered him too Western in sensibility. The single-genius model is a way of managing non-Western cultural output so it can be absorbed without disrupting the West’s sense of its own centrality as the place where judgment happens.",
+        ],
+    },
+    {
+        "slug": "when-fomo-becomes-expensive",
+        "title": "When FOMO Becomes Expensive",
+        "issue": 33,
+        "date": "October 2026",
+        "author": "Shagun Parmanandka | IB I Yr",
+        "section": "Economics",
+        "image": "when-fomo-becomes-expensive.webp",
+        "image_alt": "The title When FOMO Becomes Expensive, with eyeballs for the letter O, hung on red threads",
+        "image_width": 1328,
+        "image_height": 380,
+        "image_caption": "From the opening page of the article in The Crossroads, Issue 33.",
+        "excerpt": "Imagine this: one of your favourite music bands is on a world tour, and they are fortunately coming to India as well. You want to attend it, but you know that you need to start saving up for that new laptop you desperately need.",
+        "paragraphs": [
+            "Imagine this: one of your favourite music bands is on a world tour, and they are fortunately coming to India as well. You want to attend it, but you know that you need to start saving up for that new laptop you desperately need. During the ticketing period, you just happened to scroll through your Instagram feed, and all you see is the number of people who have bought the tickets and used reels to express their happiness. You watch one video, and your mind cannot help but want to watch one more, being genuinely happy for all those who were able to procure tickets. This continues for 3 more days, with each day featuring new faces celebrating their booking confirmation. And on the morning of the fifth day, you somehow have the tickets to the concert in your hands!",
+            "You have no idea what made you take such a crazy decision, knowing the importance of the new laptop and the irrelevance of the tickets. This is where the ‘irrationality’ of the human race comes into the picture. What is the reason behind making such irrational decisions? Why do humans regret not buying something that everyone else has? Why does the fear of missing out mess with our minds?",
+            "We generally give into the existence of these frequent ‘nudges’ which indirectly lead us to make decisions that we weren’t planning to take. This is where the psychology of economics plays its mind games. In simple words, when you find yourself drawn to buying something you look at everyone else having or figuring that everyone else on social media owns it, it activates a few threads in your mind which are primarily the unholy trinity of Loss Aversion, Social Conformity and the Cascading of Information.",
+            "Loss aversion is the bias that the human brain forms to avoid possible losses. Basically, the brain tells us that since the commodity is only available currently, if not purchased immediately, we will lose the opportunity to buy it and would hurt more than actually losing some money and buying the product! Thus resulting in a sudden and urgent need to buy the product and leading to an irrational decision.",
+            "Similarly, the social conformity heuristic in humans intensifies impulsive purchases. Looking at everyone else generates a sense of ‘not being accepted’ if one does not possess the same object. In an experiment conducted by Solomon Asch, a social psychologist in the 1950s, he was successfully able to prove the fact that even if one believes in something else individually, they tend to give into what everyone else thinks. Behavioral economists say that this is because people want to be accepted by their community and thus tend to make decisions that fit into their society’s norms, behaviour, and traditions.",
+            "And finally, the last member of this unholy trinity is the Cascading of Information. Everything on the internet has been passed down with various comments and compliments. One product can be twisted into the most useless thing on the planet or exemplified as the one product that everyone needs “to make life easier”. This constant availability of online “bestsellers”, review ranks, and flash sales leads consumers to not rely on their own research and blindly trust the reviews they see on the internet, thus leading them to make misinformed and hasty decisions based on unreliable information.",
+            "Now that we know the psychology behind why we buy something we do not intend to, how can we stop ourselves from actually purchasing a product or reduce the craving of owning something just because we have a deeply induced fear of missing out?",
+            "In the second chapter of the Bhagavad Gita, Lord Krishna tackles this very problem - of getting lured into external objects because others possess them, getting attached to the idea of having them, and forming a restless craving to acquire them. Krishna ji tells us that the solution to the problem is not in trying to give up buying anything at all or refraining from purchasing.",
+            verse("रागद्वेषवियुक्तैस्तु विषयानिन्द्रियैश्चरन् ।", "आत्मवश्यैर्विधेयात्मा प्रसादमधिगच्छति ॥ 2.64 ॥"),
+            "Through this verse from the second chapter of the Bhagavad Gita he tells us that one should live life free of (Viyukth) Raga - attraction towards the belongings of others and Dvesa - dwelling in the fear of being left out or as we call it - the fear of loss aversion. He advises training the senses to obey the intellect rather than the emotional or physical self. In layman’s terms, He wants us to think twice before we feel like buying something we do not require. To overcome the desires on the physical level and genuinely consider the need to buy it. He tells us how FOMO hijacks our reasoning power and therefore controls our decision-making. By constantly checking ourselves to ensure that we are buying the right things, He promises ‘Prasada’ - a state of mental clarity and contentment.",
+            "The decision has always been in the hands of the individual: to succumb to the constant pulling of the threads or to resist these biases. If you want the latter, then keep in mind that this can only be achieved if you truly know what you are looking for and are not swayed by your desires, because in the end, FOMO is just another distraction that we cannot afford.",
+        ],
+    },
     {
         "slug": "death-of-rationalism",
         "title": "The Death of Rationalism",

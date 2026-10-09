@@ -98,7 +98,9 @@ def body_html(post):
     for index, paragraph in enumerate(reading_paragraphs(post)):
         if index in subheads:
             blocks.append(f'      <h2>{esc(subheads[index])}</h2>')
-        blocks.append(f'      <p>{esc(paragraph)}</p>')
+        # A poem's stanza keeps its line breaks (blogposts.verse); a paragraph
+        # of prose has none.
+        blocks.append(f'      <p>{esc(paragraph).replace(chr(10), "<br>")}</p>')
     return "\n".join(blocks)
 
 

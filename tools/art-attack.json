@@ -12351,6 +12351,474 @@
     "assets/img/art-attack/works/ar-paint4.webp",
     "assets/img/art-attack/works/ar-paint4-t.webp"
    ]
+  },
+  {
+   "id": "cc33-26-01",
+   "source": {
+    "crossroads": 33,
+    "page": 26,
+    "box": [
+     0.0279,
+     0.2975,
+     0.3389,
+     0.6067
+    ]
+   },
+   "title": null,
+   "printed": "Jayashree Bondia ~ VII",
+   "people": [
+    {
+     "name": "Jayashree Bondia",
+     "grade": "VII"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "A pelican’s head and shoulders in charcoal, its long beak and feathers hatched in dark strokes",
+   "size": [
+    412,
+    584
+   ],
+   "thumb": [
+    310,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-26-01.webp",
+    "assets/img/art-attack/works/cc33-26-01-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-26-02",
+   "source": {
+    "crossroads": 33,
+    "page": 26,
+    "box": [
+     0.3539,
+     0.2986,
+     0.6378,
+     0.6067
+    ]
+   },
+   "title": null,
+   "printed": "Deevam S ~ VII",
+   "people": [
+    {
+     "name": "Deevam S",
+     "grade": "VII"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "A silhouetted archer drawing a bow beneath a red and gold mandala, a fish in a dish at his feet",
+   "size": [
+    376,
+    581
+   ],
+   "thumb": [
+    285,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-26-02.webp",
+    "assets/img/art-attack/works/cc33-26-02-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-26-03",
+   "source": {
+    "crossroads": 33,
+    "page": 26,
+    "box": [
+     0.6529,
+     0.2965,
+     0.9593,
+     0.6072
+    ]
+   },
+   "title": null,
+   "printed": "Garvit Sukhani ~ X",
+   "people": [
+    {
+     "name": "Garvit Sukhani",
+     "grade": "X"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "A crowded page of colourful doodle characters, cars and logos around the word Doodler",
+   "size": [
+    407,
+    587
+   ],
+   "thumb": [
+    305,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-26-03.webp",
+    "assets/img/art-attack/works/cc33-26-03-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-26-04",
+   "source": {
+    "crossroads": 33,
+    "page": 26,
+    "box": [
+     0.0279,
+     0.64,
+     0.3208,
+     0.9465
+    ]
+   },
+   "title": null,
+   "printed": "Hitansh A Jain ~ IB I",
+   "people": [
+    {
+     "name": "Hitansh A Jain",
+     "grade": "IB I"
+    }
+   ],
+   "category": "photography",
+   "note": null,
+   "alt": "Photograph of a wooden jetty running out across a lily pond under a sky of small white clouds",
+   "size": [
+    389,
+    579
+   ],
+   "thumb": [
+    296,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-26-04.webp",
+    "assets/img/art-attack/works/cc33-26-04-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-26-05",
+   "source": {
+    "crossroads": 33,
+    "page": 26,
+    "box": [
+     0.3434,
+     0.64,
+     0.631,
+     0.9465
+    ]
+   },
+   "title": null,
+   "printed": "Harshita Bondia ~ XI",
+   "people": [
+    {
+     "name": "Harshita Bondia",
+     "grade": "XI"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "Mickey Mouse drawn in a tangle of fine pencil lines",
+   "size": [
+    381,
+    577
+   ],
+   "thumb": [
+    291,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-26-05.webp",
+    "assets/img/art-attack/works/cc33-26-05-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-26-06",
+   "source": {
+    "crossroads": 33,
+    "page": 26,
+    "box": [
+     0.6559,
+     0.6411,
+     0.9593,
+     0.9455
+    ]
+   },
+   "title": null,
+   "printed": "Pirai Soodan ~ IX",
+   "people": [
+    {
+     "name": "Pirai Soodan",
+     "grade": "IX"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "A woman’s profile drawn in white line on black paper",
+   "size": [
+    403,
+    575
+   ],
+   "thumb": [
+    308,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-26-06.webp",
+    "assets/img/art-attack/works/cc33-26-06-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-27-01",
+   "source": {
+    "crossroads": 33,
+    "page": 27,
+    "box": [
+     0.0392,
+     0.0429,
+     0.628,
+     0.3192
+    ]
+   },
+   "title": null,
+   "printed": "Neeharika Reddy ~ IB I",
+   "people": [
+    {
+     "name": "Neeharika Reddy",
+     "grade": "IB I"
+    }
+   ],
+   "category": "photography",
+   "note": null,
+   "alt": "Photograph of a misty waterfall behind rocks and bare trees under a pink evening sky",
+   "size": [
+    782,
+    522
+   ],
+   "thumb": [
+    659,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-27-01.webp",
+    "assets/img/art-attack/works/cc33-27-01-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-27-02",
+   "source": {
+    "crossroads": 33,
+    "page": 27,
+    "box": [
+     0.6468,
+     0.0445,
+     0.9646,
+     0.3182
+    ]
+   },
+   "title": null,
+   "printed": "Kabir Kedia ~ VII",
+   "people": [
+    {
+     "name": "Kabir Kedia",
+     "grade": "VII"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "A horse’s head drawn in charcoal",
+   "size": [
+    422,
+    517
+   ],
+   "thumb": [
+    359,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-27-02.webp",
+    "assets/img/art-attack/works/cc33-27-02-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-27-03",
+   "source": {
+    "crossroads": 33,
+    "page": 27,
+    "box": [
+     0.0203,
+     0.3563,
+     0.3133,
+     0.6829
+    ]
+   },
+   "title": null,
+   "printed": "Muhil ~ IB I",
+   "people": [
+    {
+     "name": "Muhil",
+     "grade": "IB I"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "An elephant walking out of shallow water before a stone temple, in pencil",
+   "size": [
+    389,
+    615
+   ],
+   "thumb": [
+    278,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-27-03.webp",
+    "assets/img/art-attack/works/cc33-27-03-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-27-04",
+   "source": {
+    "crossroads": 33,
+    "page": 27,
+    "box": [
+     0.3253,
+     0.3563,
+     0.6476,
+     0.6808
+    ]
+   },
+   "title": null,
+   "printed": "Ashmi ~ VIII",
+   "people": [
+    {
+     "name": "Ashmi",
+     "grade": "VIII"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "A cat in blue, pink and black shapes against purple, peach and white blots, painted",
+   "size": [
+    428,
+    613
+   ],
+   "thumb": [
+    307,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-27-04.webp",
+    "assets/img/art-attack/works/cc33-27-04-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-27-05",
+   "source": {
+    "crossroads": 33,
+    "page": 27,
+    "box": [
+     0.6589,
+     0.3563,
+     0.9774,
+     0.6781
+    ]
+   },
+   "title": null,
+   "printed": "Yuvika A ~ IX",
+   "people": [
+    {
+     "name": "Yuvika A",
+     "grade": "IX"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "A young man with spiky hair in a high-collared jacket, drawn in pencil",
+   "size": [
+    423,
+    608
+   ],
+   "thumb": [
+    306,
+    440
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-27-05.webp",
+    "assets/img/art-attack/works/cc33-27-05-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-27-06",
+   "source": {
+    "crossroads": 33,
+    "page": 27,
+    "box": [
+     0.0248,
+     0.7131,
+     0.5075,
+     0.9391
+    ]
+   },
+   "title": null,
+   "printed": "Shresth Kedia ~ XII",
+   "people": [
+    {
+     "name": "Shresth Kedia",
+     "grade": "XII"
+    }
+   ],
+   "category": "photography",
+   "note": null,
+   "alt": "Photograph of a dark beetle crossing a paving stone",
+   "size": [
+    640,
+    427
+   ],
+   "thumb": [
+    640,
+    427
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-27-06.webp",
+    "assets/img/art-attack/works/cc33-27-06-t.webp"
+   ]
+  },
+  {
+   "id": "cc33-27-07",
+   "source": {
+    "crossroads": 33,
+    "page": 27,
+    "box": [
+     0.5346,
+     0.7131,
+     0.9797,
+     0.9307
+    ]
+   },
+   "title": null,
+   "printed": "Adhav S ~ IX",
+   "people": [
+    {
+     "name": "Adhav S",
+     "grade": "IX"
+    }
+   ],
+   "category": "painting",
+   "note": null,
+   "alt": "A figure with spiky grey hair and a dark blindfold, smiling, drawn in marker",
+   "size": [
+    590,
+    411
+   ],
+   "thumb": [
+    590,
+    411
+   ],
+   "files": [
+    "assets/img/art-attack/works/cc33-27-07.webp",
+    "assets/img/art-attack/works/cc33-27-07-t.webp"
+   ]
   }
  ],
  "photos": [

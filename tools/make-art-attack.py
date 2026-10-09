@@ -13,7 +13,7 @@ reads, so the site build itself never needs an image library.
 
 WHERE THE WORKS COME FROM. Almost every work on the page was printed in the
 Creative Corner of The Crossroads, the school's monthly magazine, over its
-thirty-two issues. The originals of those issues are in
+thirty-three issues. The originals of those issues are in
 assets/source/crossroads-pdf (never deployed), and each work is cut from
 them in one of two ways, recorded in its "source":
 
@@ -21,7 +21,7 @@ them in one of two ways, recorded in its "source":
     read out whole, at the resolution the magazine was given, and turned the
     way the page turned it ("orient"). Nothing the layout laid over it comes
     with it.
-  * "box"   — fifteen issues are pictures of pages: the words and the works
+  * "box"   — sixteen issues are pictures of pages: the words and the works
     are one flat image. The work is cut from that image at "box", fractions
     of the page, which were read by hand and then snapped to the edge of the
     work. These are as sharp as the page is, and no sharper.
