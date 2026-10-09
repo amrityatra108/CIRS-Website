@@ -468,14 +468,16 @@ PAGES = {
     "cultural-gallery": {
         "nav": "CIRS Cultural Gallery",
         "title": "Arts, Music & Theatre",
-        "description": "Music, theatre and the visual arts at Chinmaya International Residential "
-                       "School, as a wall of the school's photographs.",
+        "description": "Music, theatre, the visual arts, festivals and students' own work at "
+                       "Chinmaya International Residential School, as a wall of the school's "
+                       "photographs.",
         # The one page on the site that is not a document. It is a field of
         # photographs filling the window, which takes the scroll and opens a
         # photograph where another page would follow a link — so it wears the
         # header but no footer, and no banner above the fold, because it is
         # all fold. See "wall" in build() below.
         "wall": True,
+        "cache_suffix": "-gallery-1",
     },
     # ---- pages in preparation -------------------------------------------
     # Each is a real page with a real banner and a plain account of what will
@@ -1914,13 +1916,26 @@ def artswall_html():
     A link to the photograph around an image of its tile copy. Both paths sit
     in attributes check-links.py reads, so a photograph that went missing from
     assets/img/arts/ fails the checks rather than the page. <template> content
-    is inert, so naming twenty-eight photographs here costs no requests — the
-    script clones what it needs.
+    is inert, so naming every photograph here costs no requests — the script
+    reads what it needs.
+
+    The alt text is what the frame shows. Where the school's own page gave the
+    photograph a short title as well (a festival's caption, a student's credit),
+    that rides in data-title and the alt becomes the description under it.
+    data-w is how often the wall picks the photograph for a tile, and is
+    left off at the usual 2.
     """
     rows = []
-    for name, cat, caption in artswall.PHOTOGRAPHS:
+    for p in artswall.plates():
+        name = p["name"]
+        if p["desc"]:
+            alt, title = p["desc"], f' data-title="{esc(p["title"], attr=True)}"'
+        else:
+            alt, title = p["title"], ""
+        weight = "" if p["weight"] == artswall.ORIGINAL_WEIGHT else f' data-w="{p["weight"]}"'
         rows.append(f'    <a href="{artswall.full(name)}">'
-                    f'<img src="{artswall.thumb(name)}" alt="{caption}" data-cat="{cat}">'
+                    f'<img src="{artswall.thumb(name)}" alt="{esc(alt, attr=True)}"'
+                    f' data-cat="{esc(p["cat"], attr=True)}"{title}{weight}>'
                     f'</a>')
     return ('<template id="wall-plates">\n' + "\n".join(rows) + "\n</template>")
 
