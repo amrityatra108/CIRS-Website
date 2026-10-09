@@ -24,14 +24,14 @@
 <meta name="twitter:title" content="Where CIRS Takes You | Alumni">
 <meta name="twitter:description" content="Reconnect with CIRS, browse published alumni cohort records, and explore university destinations and alumni stories.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preload" href="assets/js/navigation.js?b=115-alumni-9-core-3" as="script" fetchpriority="high">
+<link rel="preload" href="assets/js/navigation.js?b=116-alumni-9-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=115-alumni-9">
-<link rel="stylesheet" href="assets/css/cirs.css?b=115-alumni-9">
-<link rel="stylesheet" href="assets/css/pages.css?b=115-alumni-9-lightbox-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=116-alumni-9">
+<link rel="stylesheet" href="assets/css/cirs.css?b=116-alumni-9">
+<link rel="stylesheet" href="assets/css/pages.css?b=116-alumni-9-lightbox-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -40,10 +40,10 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/alumni.css?b=115-alumni-9">
-<link rel="stylesheet" href="assets/css/typography.css?b=115-alumni-9">
-<link rel="stylesheet" href="assets/css/footer.css?b=115-alumni-9-footer-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=115-alumni-9-nav-5">
+<link rel="stylesheet" href="assets/css/alumni.css?b=116-alumni-9">
+<link rel="stylesheet" href="assets/css/typography.css?b=116-alumni-9">
+<link rel="stylesheet" href="assets/css/footer.css?b=116-alumni-9-footer-1">
+<link rel="stylesheet" href="assets/css/drawer.css?b=116-alumni-9-nav-5">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -276,7 +276,7 @@
   </div>
 </div>
 <main id="main">
-<script src="assets/js/navigation.js?b=115-alumni-9-core-3"></script>
+<script src="assets/js/navigation.js?b=116-alumni-9-core-3"></script>
 <nav class="jump" aria-label="On this page">
   <details class="jump__details">
     <summary class="jump__toggle" title="On this page">
@@ -1098,17 +1098,898 @@
     </div>
     <div class="ajc__dialogHead">
       <h3 class="serif" id="ajc-panel-name">All institutions</h3>
-      <p id="ajc-panel-note">Alumni-reported institutions are not confirmation of an individual’s attendance or campus. Points show reviewed campus references. Entries without reviewed coordinates are listed, not plotted.</p>
+      <p id="ajc-panel-note">Alumni-reported institutions are not confirmation of an individual’s attendance or campus. Points show reviewed campus references. Entries without reviewed coordinates are listed, not plotted. Alumni named under an institution registered it themselves through the Alumni Registration Form, and are shown by name, years at CIRS and course only.</p>
     </div>
     <div class="ajc__dialogTools">
       <label for="ajc-search">Search this directory</label>
-      <input id="ajc-search" type="search" placeholder="Institution or country" autocomplete="off">
+      <input id="ajc-search" type="search" placeholder="Institution, country or alumnus" autocomplete="off">
       <button type="button" data-panel-all>Browse all institutions</button>
     </div>
     <p data-panel-count role="status"></p>
     <ul class="ajc__results" data-panel-results></ul>
     <p data-panel-empty hidden>No institutions are listed for this country in the current directory.</p>
   </dialog>
+  <template id="ajd-alumni-curtin-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">S Prashaanthi</span><span class="ajc__alumnusMeta">CIRS 1998–2004 · Bachelor of Commerce - Accounting &amp; Information Systems</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-sp-jain-school-of-global-management">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Sai Bharat</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · BBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-new-south-wales">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Harini Jaiswathi</span><span class="ajc__alumnusMeta">CIRS 2007–2015 · Bachelor of commerce</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-sydney">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Bharath Santhosh</span><span class="ajc__alumnusMeta">CIRS 2012–2018 · Bachelor in Engineering Honours (Mechatronics)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-wollongong">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Nikita Shan Kumar</span><span class="ajc__alumnusMeta">CIRS 2008–2010 · Bcom HR</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-george-brown-college">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Meghna Nambiar</span><span class="ajc__alumnusMeta">CIRS 2007–2012 · Sport and Event Marketing</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-british-columbia">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Akshay Krishna S</span><span class="ajc__alumnusMeta">CIRS 2009–2015 · Biological Sciences</span></li>
+      <li><span class="ajc__alumnusName">Pranav Menon</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-victoria">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Aakash Rao</span><span class="ajc__alumnusMeta">CIRS 2003–2010 · Mechanical Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-waterloo">
+    <p class="ajc__alumniHead">3 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Adarsh Hinduja</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Computer Science</span></li>
+      <li><span class="ajc__alumnusName">Pranav Shankar Subramani</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Bmath Combinatorial Optimization and Bachelors in Computer Science.</span></li>
+      <li><span class="ajc__alumnusName">Sanjay Krishna</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · B.Math Mathematical Physics</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-york-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shubha Kumar Kaushik</span><span class="ajc__alumnusMeta">CIRS 2010–2015 · Communication Studies</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-american-graduate-school-in-paris">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Prarthana Lohia</span><span class="ajc__alumnusMeta">CIRS 2008–2010 · BBA Hons/ Certificate in NGO Management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-hkust">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Pranesh Balekai</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · Electronics and computer engineering</span></li>
+      <li><span class="ajc__alumnusName">Varun Fatehpuria</span><span class="ajc__alumnusMeta">CIRS 2008–2013 · BBA(IS&amp;Finance)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-the-university-of-hong-kong">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Kushal Aggarwal</span><span class="ajc__alumnusMeta">CIRS 2008–2012 · Bachelors of economic and finance</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-alliance-university">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">K.P.Shrinidhi</span><span class="ajc__alumnusMeta">CIRS 2014–2016 · Bba</span></li>
+      <li><span class="ajc__alumnusName">Meghna Rajendran Nambiar</span><span class="ajc__alumnusMeta">CIRS 2007–2012 · BBM</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-amity-university">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shreeyal Khandelwal</span><span class="ajc__alumnusMeta">CIRS 2008–2014 · Psychology</span></li>
+      <li><span class="ajc__alumnusName">Veenaa Annamalai</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · Anthropology</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-amity-university-noida">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Ketan Manepalli</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · Integrated MBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-amrita-school-of-engineering">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Prasita</span><span class="ajc__alumnusMeta">CIRS 2006–2008 · B.Tech</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-amrita-vishwa-vidyapeetham">
+    <p class="ajc__alumniHead">3 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Ariharan.N</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · B-tech Aerospace</span></li>
+      <li><span class="ajc__alumnusName">Athira Sreekumar Nair</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · B.tech</span></li>
+      <li><span class="ajc__alumnusName">Pasunuri Sathyapriya</span><span class="ajc__alumnusMeta">CIRS 2006–2009 · B-tech</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-anna-university">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Nanthithashanmuhasundaram</span><span class="ajc__alumnusMeta">CIRS 2002–2010 · Bsc AFT</span></li>
+      <li><span class="ajc__alumnusName">Shruti Jayaraman</span><span class="ajc__alumnusMeta">CIRS 2010–2012 · Instrumentation and Control</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-bangalore-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Sharnya Raajeev</span><span class="ajc__alumnusMeta">CIRS 1996–1998 · BCA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-christ-university">
+    <p class="ajc__alumniHead">9 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Chirantan Saha</span><span class="ajc__alumnusMeta">CIRS 2008–2014 · BBA</span></li>
+      <li><span class="ajc__alumnusName">Gopal Jindal</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · BBA</span></li>
+      <li><span class="ajc__alumnusName">Kalansh Gla</span><span class="ajc__alumnusMeta">CIRS 2007–2011 · Theatre Studies</span></li>
+      <li><span class="ajc__alumnusName">Maahi Agarwal</span><span class="ajc__alumnusMeta">CIRS 2017–2018 · BBA IN FINANCE AND ACCOUNTS</span></li>
+      <li><span class="ajc__alumnusName">Mitun Gunasekar</span><span class="ajc__alumnusMeta">CIRS 2006–2014 · BBA(Hons)</span></li>
+      <li><span class="ajc__alumnusName">Mukund Sarda</span><span class="ajc__alumnusMeta">CIRS 2008–2012 · BBA</span></li>
+      <li><span class="ajc__alumnusName">Naman Agarwal</span><span class="ajc__alumnusMeta">CIRS 2011 · BBA</span></li>
+      <li><span class="ajc__alumnusName">Shivaa B</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · B.Com</span></li>
+      <li><span class="ajc__alumnusName">Srijan Seth</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Bcom Professional</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-college-of-architecture-trivandrum">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Bharat Mitra Nanda</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · Architecture</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-college-of-engineering-guindy-anna-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Ramakrishnan Nagarajan</span><span class="ajc__alumnusMeta">CIRS until 2008 · BE</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-dayanand-sagar-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Sakshi Shetty</span><span class="ajc__alumnusMeta">CIRS 2010–2015 · BA Journalism</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-delhi-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Sahjeet Menon</span><span class="ajc__alumnusMeta">CIRS 2007–2012 · BMS</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-doon-business-school-and-allied-sciences">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Rahul Tharun. A</span><span class="ajc__alumnusMeta">CIRS 2018–2020 · Bsc forestry</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-dy-patil-school-of-medicine">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Ashna Jagtiani</span><span class="ajc__alumnusMeta">CIRS 2007–2013 · MBBS</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-faculty-of-management-studies">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Vidisha Sarawagi</span><span class="ajc__alumnusMeta">CIRS 2007–2011 · MBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-fergusson-college">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Pooja Lakshmaan</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · BA English</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-flame-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Pranav Goenka</span><span class="ajc__alumnusMeta">CIRS 2009–2014 · BBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-gujarat-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Aditya</span><span class="ajc__alumnusMeta">CIRS 2002–2007 · Commerce</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-hr-college">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">V Susheeth Kumar</span><span class="ajc__alumnusMeta">CIRS 2006–2014 · Bcom</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-ibs">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Sumit Kumar Drolia</span><span class="ajc__alumnusMeta">CIRS from 1998 · Mba</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-icfai">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Prasanth Kumar</span><span class="ajc__alumnusMeta">CIRS 2002–2006 · MBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-iitm">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Rani Unnamalai K</span><span class="ajc__alumnusMeta">CIRS 2008–2015 · Integrated M.A</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-indian-school-of-design-and-innovation-parsons-mumbai">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Janamejay</span><span class="ajc__alumnusMeta">CIRS 2005–2012 · Communication Design</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-inifd">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Vedika Sharma</span><span class="ajc__alumnusMeta">CIRS 2005–2009 · INTERIOR DESIGN</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-institute-of-chartered-accountants-of-india">
+    <p class="ajc__alumniHead">6 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Adithya Ravesanker</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · Chartered Accountancy</span></li>
+      <li><span class="ajc__alumnusName">Ankit G Kataria</span><span class="ajc__alumnusMeta">CIRS 1996–2002 · CHARTERED ACCOUNTANT</span></li>
+      <li><span class="ajc__alumnusName">Chodavarpu Raviteja</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · CA</span></li>
+      <li><span class="ajc__alumnusName">Prannay Jain</span><span class="ajc__alumnusMeta">CIRS 2006–2010 · Chartered Accountant</span></li>
+      <li><span class="ajc__alumnusName">Sarthak Ranasaria</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · Chartered Accountancy</span></li>
+      <li><span class="ajc__alumnusName">Thanmayi AG</span><span class="ajc__alumnusMeta">CIRS 2006–2008 · Chartered Accountancy</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-institute-of-law-nirma-university-ahmedabad">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Meetali Agarwal</span><span class="ajc__alumnusMeta">CIRS 2008–2010 · B. Com LLB (Hons.)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-j-d-birla-institute">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Prarthana Lohia</span><span class="ajc__alumnusMeta">CIRS 2008–2010 · BBA Hons/ Certificate in NGO Management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-jadavpur-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Achyut Todi</span><span class="ajc__alumnusMeta">CIRS 2005–2013 · Bachelor of Business Administration</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-jai-hind-college">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Pavan Shah</span><span class="ajc__alumnusMeta">CIRS 2008–2013 · BAF (or) Bachelors of Commerce in Accounting &amp; Finance</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-jain-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Arjun Mundra</span><span class="ajc__alumnusMeta">CIRS 2008–2011 · BBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-karunya-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Siddharth Roy</span><span class="ajc__alumnusMeta">CIRS 2006–2010 · M.Tech</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-kiit-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Adarsh Agrawal</span><span class="ajc__alumnusMeta">CIRS 2004–2009 · B.Tech ( Civil Engineering )</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-kirori-mal-college">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Devanshu Agarwal</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · Bcom honors</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-kumaraguru-college-of-technology">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Aswni Sundara Rajan</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · Biotechnology</span></li>
+      <li><span class="ajc__alumnusName">Raveena Retnakumar</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-loyola-college">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shree Ram Kumar</span><span class="ajc__alumnusMeta">CIRS 2008–2012 · BBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-m-s-ramaiah-institute-of-technology">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Varun Agarwal</span><span class="ajc__alumnusMeta">CIRS 2006–2010 · B.E</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-m-o-p-vaishnav-college-for-women">
+    <p class="ajc__alumniHead">3 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Diksha Tandon</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · B.Sc Visual Communication</span></li>
+      <li><span class="ajc__alumnusName">Madhu Vandhani</span><span class="ajc__alumnusMeta">CIRS 2007–2009 · MBA</span></li>
+      <li><span class="ajc__alumnusName">Vaishnavi Srinath</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · BBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-maharashtra-institute-of-technology-school-of-management">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Abhiishek Krishnan</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · Bachelors in Business Management (International Business)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-manipal-institute-of-technology">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Haswanth</span><span class="ajc__alumnusMeta">CIRS 2011–2016 · Computer and communication engineering</span></li>
+      <li><span class="ajc__alumnusName">Varun Harnathka</span><span class="ajc__alumnusMeta">CIRS 2008–2011 · Chemical Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-manipal-university">
+    <p class="ajc__alumniHead">5 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Bharath Krishna</span><span class="ajc__alumnusMeta">CIRS 2006–2013 · Chemical engineering</span></li>
+      <li><span class="ajc__alumnusName">Praachi Singh</span><span class="ajc__alumnusMeta">CIRS 2006–2008 · MBBS</span></li>
+      <li><span class="ajc__alumnusName">Priya Singh</span><span class="ajc__alumnusMeta">CIRS 2007–2008 · MBBS</span></li>
+      <li><span class="ajc__alumnusName">Shriya Atmakuri</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · B.Tech Computer Science</span></li>
+      <li><span class="ajc__alumnusName">Vedang Gutgutia</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · BTech Computer Science Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-mc-gans-ooty-school-of-architecture">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Sarath Chandran</span><span class="ajc__alumnusMeta">CIRS 2010–2012 · B.Arch</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-mithibai-college">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shrishti Gadodia</span><span class="ajc__alumnusMeta">CIRS 2007–2015 · Bachelor of Management Studies</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-mount-carmel-college">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Sonal Agrawal</span><span class="ajc__alumnusMeta">CIRS 2008–2013 · Bba</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-national-institute-of-bank-management">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Lakkaraju Sai Anurag</span><span class="ajc__alumnusMeta">CIRS 2008–2010 · Post Graduate Diploma in Management (Banking and Financial Services)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-national-institute-of-technology-tiruchirappalli">
+    <p class="ajc__alumniHead">3 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Aashish Bohra</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · Bachelor of technology in Production Engineering</span></li>
+      <li><span class="ajc__alumnusName">Mukesh Raj</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · MECHANICAL ENGINEERING</span></li>
+      <li><span class="ajc__alumnusName">Shashank Sreekar B</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · B.Tech Civil Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-nlu-delhi">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Arpit Agrawal</span><span class="ajc__alumnusMeta">CIRS 2008–2012 · BALLB</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-nmims">
+    <p class="ajc__alumniHead">7 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Anuj Agrwal</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · BBA</span></li>
+      <li><span class="ajc__alumnusName">Ashutosh Bohra</span><span class="ajc__alumnusMeta">CIRS 2008–2015 · B. Sc Economics</span></li>
+      <li><span class="ajc__alumnusName">Deva Narayan</span><span class="ajc__alumnusMeta">CIRS 2005–2010 · MBA</span></li>
+      <li><span class="ajc__alumnusName">Nidhi Agarwal</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Btech extc</span></li>
+      <li><span class="ajc__alumnusName">Radhika Rawat</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · B. Sc. Applied Statistics and Analytics</span></li>
+      <li><span class="ajc__alumnusName">Varun Chitalia</span><span class="ajc__alumnusMeta">CIRS 2005–2007 · MBA</span></li>
+      <li><span class="ajc__alumnusName">Yukti Sarawgi</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · BBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-nmims-balwant-seth-school-of-architecture">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shikha Patel</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Bachelor of Architecture</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-o-p-jindal-global-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Krittika Bhawsar</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · B.A, LL.B (Hons.)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-pearl-academy">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Tulsi Jayesh Thakkar</span><span class="ajc__alumnusMeta">CIRS 2008–2015 · Luxury brand management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-ppg-institute-of-technology">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Saroj Saran</span><span class="ajc__alumnusMeta">CIRS 2009–2014 · Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-prin-l-n-welingkar-institute-of-management-development-research">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Neeraj Parmanandka</span><span class="ajc__alumnusMeta">CIRS 1996–2002 · PGDBM</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-psg-college-of-technology">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">K. Sanjith Gurubaran</span><span class="ajc__alumnusMeta">CIRS 2007–2015 · B. Tech textile technology</span></li>
+      <li><span class="ajc__alumnusName">Kiran Yashwanth</span><span class="ajc__alumnusMeta">CIRS 2010–2015 · BE automobile</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-psg-institute-of-technology">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">S Sithsabesan</span><span class="ajc__alumnusMeta">CIRS 2008–2015 · B.Tech IT</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-sardar-patel-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Athul Binesh</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · B.arch</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-savitribai-phule-pune-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Taruun Vaiddya</span><span class="ajc__alumnusMeta">CIRS 2006–2008 · BE Mechanical</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-school-of-allied-health-sciences-manipal-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Vijayapriya CV</span><span class="ajc__alumnusMeta">CIRS 2004–2010 · M.Phil. Clinical Psychology</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-school-of-inspired-leadership">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Chandan Sangal</span><span class="ajc__alumnusMeta">CIRS 2001–2003 · MBA - HR</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-school-of-planning-and-architecture">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Gayathri Venkatraman</span><span class="ajc__alumnusMeta">CIRS 2008–2015 · B.Arch</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-shiv-nadar-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Kashyap Jothish</span><span class="ajc__alumnusMeta">CIRS 2009–2014 · B.Tech Mechanical Engg.</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-shri-devraj-urs-medical-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Mowthi Karuna</span><span class="ajc__alumnusMeta">CIRS 2005–2011 · MBBS</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-srcc">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Vineet Lohariwal</span><span class="ajc__alumnusMeta">CIRS 2010–2012 · B.com honours</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-sri-sri-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Aravind Sreekumar Menon</span><span class="ajc__alumnusMeta">CIRS 2014–2015 · B.Com</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-sri-venkateswara-college">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Nishant Agarwal</span><span class="ajc__alumnusMeta">CIRS 2009–2015 · B.com(P)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-srishti-university-of-art-design-technology">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Amantrika Saraogi</span><span class="ajc__alumnusMeta">CIRS 2010 · Visual communication and strategic branding</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-srm-institute-of-science-and-technology">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">S.S.Arunadithys</span><span class="ajc__alumnusMeta">CIRS 2007–2012 · MECHANICAL ENGINEERING</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-st-joseph-s-college-of-law">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Tanmayee Naidu</span><span class="ajc__alumnusMeta">CIRS 2011 · BBA LLB</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-st-joseph-s-college-of-arts-and-science">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Niyati Harnathka</span><span class="ajc__alumnusMeta">CIRS 2007–2011 · M.A. English Literature</span></li>
+      <li><span class="ajc__alumnusName">Tanya Kini</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · B.A. History, Economics, Political Science</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-st-joseph-s-college-of-commerce-bengaluru">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Adarsh Bhaskar Kulkarni</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · B.com + ACCA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-st-xavier-s-college-kolkata">
+    <p class="ajc__alumniHead">4 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Akash Kedia</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · B.Com(Honors)</span></li>
+      <li><span class="ajc__alumnusName">Anish Sardana</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · B.COM(Honors)</span></li>
+      <li><span class="ajc__alumnusName">Ayush Mittal</span><span class="ajc__alumnusMeta">CIRS 2010–2015 · B.COM (H)</span></li>
+      <li><span class="ajc__alumnusName">Urvi Gupta</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · B.com. hons.</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-st-xavier-s-college-mumbai">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shubhankar Sarda</span><span class="ajc__alumnusMeta">CIRS 2010–2012 · B.Sc. Physics</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-st-xavier-s-college-ranchi">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Devesh Jain</span><span class="ajc__alumnusMeta">CIRS 2004–2009 · B.Com Accounts Honors</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-symbiosis-centre-for-management-studies">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Mannava Sarath Chandra</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · BBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-symbiosis-centre-for-media-and-communication">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Devika Menon</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · Mass Communication</span></li>
+      <li><span class="ajc__alumnusName">Shyam Mohan</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · BA Mass Communication</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-symbiosis-college-of-arts-and-commerce">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shrutika Rastogi</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Bcom+CA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-symbiosis-institute-of-media-and-communication">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Lakshmi Menon</span><span class="ajc__alumnusMeta">CIRS 2010–2012 · MBA in communication management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-symbiosis-international-university">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Govindshankar Krishnan</span><span class="ajc__alumnusMeta">CIRS 2008–2010 · BBA Llb</span></li>
+      <li><span class="ajc__alumnusName">Saurabh Bhandari</span><span class="ajc__alumnusMeta">CIRS 2007–2009 · Masters in Audio Visual Production</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-symbiosis-school-of-economics">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Paul Arun Kunnil</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · Bsc. Economics</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-t-a-pai-management-institute">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Anup Kataria</span><span class="ajc__alumnusMeta">CIRS 1996–2002 · MBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-madras">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Abhishek Prahalad Prakash</span><span class="ajc__alumnusMeta">CIRS 2010–2012 · Bcomm (G)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-mumbai">
+    <p class="ajc__alumniHead">5 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Anirudh Modi</span><span class="ajc__alumnusMeta">CIRS 2009–2012 · Bachelor in Accounting and Finance</span></li>
+      <li><span class="ajc__alumnusName">Dhruvi Dwivedi</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · Bachelor of architecture</span></li>
+      <li><span class="ajc__alumnusName">Nishit Ghelani</span><span class="ajc__alumnusMeta">CIRS 2003–2010 · Bachelor&#x27;s Of Management Studies</span></li>
+      <li><span class="ajc__alumnusName">Parth Sarda</span><span class="ajc__alumnusMeta">CIRS 1996–2001 · BCom</span></li>
+      <li><span class="ajc__alumnusName">Vedanti Rajendra Shinde</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Bachelor of Arts</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-petroleum-and-energy-studies">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Manish Chinmay</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · B.Tech in Mechatronics</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-utkal-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Vishakha Patnaik</span><span class="ajc__alumnusMeta">CIRS 2001–2004 · Bba</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-vellore-institute-of-technology">
+    <p class="ajc__alumniHead">3 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Jishnu Sudhir Nair</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · Mechancial Engineering</span></li>
+      <li><span class="ajc__alumnusName">Mudit Bhartia</span><span class="ajc__alumnusMeta">CIRS 2011–2016 · Computer Science Engineering</span></li>
+      <li><span class="ajc__alumnusName">Parimala.M.Nair</span><span class="ajc__alumnusMeta">CIRS 2009–2015 · Btech biotechnology</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-visvesvaraya-technological-university">
+    <p class="ajc__alumniHead">3 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Arpit Agarwal</span><span class="ajc__alumnusMeta">CIRS 2008–2011 · BE - Mechnical</span></li>
+      <li><span class="ajc__alumnusName">Harshkunj Prashant Chokhawala</span><span class="ajc__alumnusMeta">CIRS 2007–2009 · BE</span></li>
+      <li><span class="ajc__alumnusName">Vaibhav Purohit</span><span class="ajc__alumnusMeta">CIRS 2010–2010 · BE in Information Science</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-canterbury">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Vivek Thirani</span><span class="ajc__alumnusMeta">CIRS 2006–2009 · Master in Engineering Studies (Construction Management)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-james-cook-university-singapore">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Paul George</span><span class="ajc__alumnusMeta">CIRS 1999–2004 · MBA</span></li>
+      <li><span class="ajc__alumnusName">Shreya Karthikeyan</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Bachelor of Business</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-kaplan-higher-education-academy">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Archana Pradeep Kumar</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · Diploma in Cyber forensics</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-mdis">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Minati Hingorani</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · Bsc (hons) business and management studies</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-bradford-singapore">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Vandana Vaswani</span><span class="ajc__alumnusMeta">CIRS 2009–2013 · Accounting and Finance</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-london-singapore">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Harnita Ramamurthy</span><span class="ajc__alumnusMeta">CIRS 2004–2005 · B.Sc Economics and Management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-htmi-switzerland">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Sibhi Manoharan</span><span class="ajc__alumnusMeta">CIRS 2001–2006 · PGD in international hotel and tourism management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-bukovinian-state-medical-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Krishna Taneja</span><span class="ajc__alumnusMeta">CIRS 2006–2011 · Doctor of Medicine</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-bits-pilani-dubai-campus">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Aadit Tibrewal</span><span class="ajc__alumnusMeta">CIRS 2010–2014 · Engineering</span></li>
+      <li><span class="ajc__alumnusName">Krishna Rajesh Nair</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · Chemical Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-institute-of-management-technology">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shubha Goyal</span><span class="ajc__alumnusMeta">CIRS 1996–2001 · MBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-wollongong-in-dubai">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Honey Tolani</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · BBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-cardiff-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shruti Kedia</span><span class="ajc__alumnusMeta">CIRS 2007–2009 · MA International Journalism</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-glasgow-caledonian-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Yash Gogri</span><span class="ajc__alumnusMeta">CIRS 2002–2004 · MSc Finance</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-oxford-brookes-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Niketa Ranjan</span><span class="ajc__alumnusMeta">CIRS 2008–2014 · Architecture</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-royal-holloway-university-of-london">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Bhargav Nagesh Nannapaneni</span><span class="ajc__alumnusMeta">CIRS 2009–2013 · MSc International Management (Marketing)/ MBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-college-london">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Shreyans Bafna</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · Construction Economics and Management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-bristol">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Lakshan Ram Madhan Mohan</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Msci Physics</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-liverpool">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Arun Anantha Narayanan</span><span class="ajc__alumnusMeta">CIRS 2011–2015 · BA Accounting and Finance with a Year in Industry</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-nottingham">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Adithya Anandaraman</span><span class="ajc__alumnusMeta">CIRS 2006–2008 · Finance</span></li>
+      <li><span class="ajc__alumnusName">Ankit Mohata</span><span class="ajc__alumnusMeta">CIRS 2007–2009 · BA (hons) Finance, Accounting &amp; Management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-sheffield">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Harleen Gokaldas</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Genetics</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-the-arts-london">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Nibedita Satpathy</span><span class="ajc__alumnusMeta">CIRS 2006–2008 · BA (Hons) Fashion Management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-warwick">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Lakshmi Ajay</span><span class="ajc__alumnusMeta">CIRS 2013–2015 · Film and Literature</span></li>
+      <li><span class="ajc__alumnusName">Shreya Gupta</span><span class="ajc__alumnusMeta">CIRS 2005–2011 · Economics</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-westminster">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Bhargav Nagesh Nannapaneni</span><span class="ajc__alumnusMeta">CIRS 2009–2013 · MSc International Management (Marketing)/ MBA</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-carnegie-mellon-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Arun Sriram Chockalingam</span><span class="ajc__alumnusMeta">CIRS 2011–2015 · Materials Science and Engineering/Biomedical Engineering - Double Major</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-cornell-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Amrutha Anandaraman</span><span class="ajc__alumnusMeta">CIRS 2008–2010 · M.S Food Science</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-emory-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Hiren Suraiya</span><span class="ajc__alumnusMeta">CIRS 2011–3013 · Liberal Arts (Economics and Computer Science)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-fairleigh-dickinson-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Kushal Vaswani</span><span class="ajc__alumnusMeta">CIRS 2000–2004 · MBA (Finance)</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-florida-institute-of-technology">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Niket Ghelani</span><span class="ajc__alumnusMeta">CIRS 2003–2008 · BS Mechanical Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-georgia-institute-of-technology">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Ankit Tibrewal</span><span class="ajc__alumnusMeta">CIRS 2002–2009 · Industrial &amp; Systems Engineering</span></li>
+      <li><span class="ajc__alumnusName">Rachit Kejariwal</span><span class="ajc__alumnusMeta">CIRS 2005–2010 · Mechanical Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-hofstra-university">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Yash Udaybhai Tilva</span><span class="ajc__alumnusMeta">CIRS 2009–2011 · Supply Chain Management</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-nyu">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Sarvesh Mathiyazhagan</span><span class="ajc__alumnusMeta">CIRS 2010–2015 · BA. Economics and CS</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-purdue">
+    <p class="ajc__alumniHead">2 registered alumni</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Prit Chovatiya</span><span class="ajc__alumnusMeta">CIRS 2010–2015 · Aeronautical and Aerospace Engineering</span></li>
+      <li><span class="ajc__alumnusName">Taruna Jagtiani</span><span class="ajc__alumnusMeta">CIRS 2008–2015 · Medical laboratory science</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-rochester-institute-of-technology">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Raj Bhalala</span><span class="ajc__alumnusMeta">CIRS 2004–2006 · BS Mechanical Engineering Technology</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-california-irvine">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Suryanshi Rakesh Pandya</span><span class="ajc__alumnusMeta">CIRS 2007–2013 · Education Sciences</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-illinois-urbana-champaign">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Bharat Poddar</span><span class="ajc__alumnusMeta">CIRS 2000–2004 · Bachelor of Science - Electrical Engineering</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-scranton">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Bharath Ram Madhan Mohan</span><span class="ajc__alumnusMeta">CIRS 2010–2013 · Entrepreneurship/Marketing</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-southern-california">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Vidhi Todi</span><span class="ajc__alumnusMeta">CIRS 2011–2013 · Communication + Fine Arts</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-toledo">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Gayatri Subramanian</span><span class="ajc__alumnusMeta">CIRS 2006–2007 · PhD Biomedical Sciences</span></li>
+    </ul>
+  </template>
+  <template id="ajd-alumni-university-of-wisconsin-madison">
+    <p class="ajc__alumniHead">1 registered alumnus</p>
+    <ul class="ajc__alumni">
+      <li><span class="ajc__alumnusName">Ritvind Suketana</span><span class="ajc__alumnusMeta">CIRS 2012–2014 · Chemical Engineering</span></li>
+    </ul>
+  </template>
 </div>
 
 </section>
@@ -1350,391 +2231,391 @@
         <h3 class="ajd__region"><span class="sc">India</span>
           <span class="ajd__n">97<span class="sr-only"> destinations</span></span></h3>
         <ul class="ajd__rows">
-          <li class="ajd__row" data-region="india" data-search="alliance university india" data-mapped="false">
+          <li class="ajd__row" data-key="alliance-university" data-region="india" data-search="alliance university india" data-mapped="false">
             <span class="ajd__name">Alliance University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="amity university (campus unspecified) india" data-mapped="false">
+          <li class="ajd__row" data-key="amity-university" data-region="india" data-search="amity university (campus unspecified) india" data-mapped="false">
             <span class="ajd__name">Amity University (campus unspecified)</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="amity university noida india" data-mapped="false">
+          <li class="ajd__row" data-key="amity-university-noida" data-region="india" data-search="amity university noida india" data-mapped="false">
             <span class="ajd__name">Amity University Noida</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="amrita school of engineering india" data-mapped="false">
+          <li class="ajd__row" data-key="amrita-school-of-engineering" data-region="india" data-search="amrita school of engineering india" data-mapped="false">
             <span class="ajd__name">Amrita School of Engineering</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="amrita vishwa vidyapeetham india" data-mapped="false">
+          <li class="ajd__row" data-key="amrita-vishwa-vidyapeetham" data-region="india" data-search="amrita vishwa vidyapeetham india" data-mapped="false">
             <span class="ajd__name">Amrita Vishwa Vidyapeetham</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="anna university india" data-mapped="false">
+          <li class="ajd__row" data-key="anna-university" data-region="india" data-search="anna university india" data-mapped="false">
             <span class="ajd__name">Anna University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="bangalore university india" data-mapped="false">
+          <li class="ajd__row" data-key="bangalore-university" data-region="india" data-search="bangalore university india" data-mapped="false">
             <span class="ajd__name">Bangalore University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="chinmaya vishwa vidyapeeth india" data-mapped="true">
+          <li class="ajd__row" data-key="cvv" data-region="india" data-search="chinmaya vishwa vidyapeeth india" data-mapped="true">
             <span class="ajd__name">Chinmaya Vishwa Vidyapeeth</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="christ university india" data-mapped="false">
+          <li class="ajd__row" data-key="christ-university" data-region="india" data-search="christ university india" data-mapped="false">
             <span class="ajd__name">CHRIST University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="college of architecture trivandrum india" data-mapped="false">
+          <li class="ajd__row" data-key="college-of-architecture-trivandrum" data-region="india" data-search="college of architecture trivandrum india" data-mapped="false">
             <span class="ajd__name">College Of Architecture Trivandrum</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="college of engineering guindy, anna university india" data-mapped="false">
+          <li class="ajd__row" data-key="college-of-engineering-guindy-anna-university" data-region="india" data-search="college of engineering guindy, anna university india" data-mapped="false">
             <span class="ajd__name">College of Engineering Guindy, Anna University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="dayanand sagar university india" data-mapped="false">
+          <li class="ajd__row" data-key="dayanand-sagar-university" data-region="india" data-search="dayanand sagar university india" data-mapped="false">
             <span class="ajd__name">Dayanand Sagar University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="delhi university india" data-mapped="false">
+          <li class="ajd__row" data-key="delhi-university" data-region="india" data-search="delhi university india" data-mapped="false">
             <span class="ajd__name">Delhi University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="doon business school and allied sciences india" data-mapped="false">
+          <li class="ajd__row" data-key="doon-business-school-and-allied-sciences" data-region="india" data-search="doon business school and allied sciences india" data-mapped="false">
             <span class="ajd__name">Doon Business School and Allied Sciences</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="dy patil school of medicine india" data-mapped="false">
+          <li class="ajd__row" data-key="dy-patil-school-of-medicine" data-region="india" data-search="dy patil school of medicine india" data-mapped="false">
             <span class="ajd__name">DY Patil School Of Medicine</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="faculty of management studies india" data-mapped="false">
+          <li class="ajd__row" data-key="faculty-of-management-studies" data-region="india" data-search="faculty of management studies india" data-mapped="false">
             <span class="ajd__name">Faculty of Management Studies</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="fergusson college india" data-mapped="false">
+          <li class="ajd__row" data-key="fergusson-college" data-region="india" data-search="fergusson college india" data-mapped="false">
             <span class="ajd__name">Fergusson College</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="flame university india" data-mapped="false">
+          <li class="ajd__row" data-key="flame-university" data-region="india" data-search="flame university india" data-mapped="false">
             <span class="ajd__name">FLAME University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="gujarat university india" data-mapped="false">
+          <li class="ajd__row" data-key="gujarat-university" data-region="india" data-search="gujarat university india" data-mapped="false">
             <span class="ajd__name">Gujarat University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="hr college india" data-mapped="false">
+          <li class="ajd__row" data-key="hr-college" data-region="india" data-search="hr college india" data-mapped="false">
             <span class="ajd__name">Hr college</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="ibs india" data-mapped="false">
+          <li class="ajd__row" data-key="ibs" data-region="india" data-search="ibs india" data-mapped="false">
             <span class="ajd__name">Ibs</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="icfai india" data-mapped="false">
+          <li class="ajd__row" data-key="icfai" data-region="india" data-search="icfai india" data-mapped="false">
             <span class="ajd__name">ICFAI</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="iit madras india" data-mapped="true">
+          <li class="ajd__row" data-key="iitm" data-region="india" data-search="iit madras india" data-mapped="true">
             <span class="ajd__name">IIT Madras</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="indian school of design and innovation parsons mumbai india" data-mapped="false">
+          <li class="ajd__row" data-key="indian-school-of-design-and-innovation-parsons-mumbai" data-region="india" data-search="indian school of design and innovation parsons mumbai india" data-mapped="false">
             <span class="ajd__name">Indian School of Design and Innovation Parsons Mumbai</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="inifd india" data-mapped="false">
+          <li class="ajd__row" data-key="inifd" data-region="india" data-search="inifd india" data-mapped="false">
             <span class="ajd__name">INIFD</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="institute of chartered accountants of india india" data-mapped="false">
+          <li class="ajd__row" data-key="institute-of-chartered-accountants-of-india" data-region="india" data-search="institute of chartered accountants of india india" data-mapped="false">
             <span class="ajd__name">Institute of Chartered Accountants of India</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="institute of law, nirma university, ahmedabad india" data-mapped="false">
+          <li class="ajd__row" data-key="institute-of-law-nirma-university-ahmedabad" data-region="india" data-search="institute of law, nirma university, ahmedabad india" data-mapped="false">
             <span class="ajd__name">Institute of Law, Nirma University, Ahmedabad</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="j. d. birla institute india" data-mapped="false">
+          <li class="ajd__row" data-key="j-d-birla-institute" data-region="india" data-search="j. d. birla institute india" data-mapped="false">
             <span class="ajd__name">J. D. Birla Institute</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="jadavpur university india" data-mapped="false">
+          <li class="ajd__row" data-key="jadavpur-university" data-region="india" data-search="jadavpur university india" data-mapped="false">
             <span class="ajd__name">Jadavpur University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="jai hind college india" data-mapped="false">
+          <li class="ajd__row" data-key="jai-hind-college" data-region="india" data-search="jai hind college india" data-mapped="false">
             <span class="ajd__name">Jai Hind College</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="jain university india" data-mapped="false">
+          <li class="ajd__row" data-key="jain-university" data-region="india" data-search="jain university india" data-mapped="false">
             <span class="ajd__name">Jain university</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="karunya university india" data-mapped="false">
+          <li class="ajd__row" data-key="karunya-university" data-region="india" data-search="karunya university india" data-mapped="false">
             <span class="ajd__name">Karunya University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="kiit university india" data-mapped="false">
+          <li class="ajd__row" data-key="kiit-university" data-region="india" data-search="kiit university india" data-mapped="false">
             <span class="ajd__name">KIIT University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="kirori mal college india" data-mapped="false">
+          <li class="ajd__row" data-key="kirori-mal-college" data-region="india" data-search="kirori mal college india" data-mapped="false">
             <span class="ajd__name">Kirori Mal College</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="kumaraguru college of technology india" data-mapped="false">
+          <li class="ajd__row" data-key="kumaraguru-college-of-technology" data-region="india" data-search="kumaraguru college of technology india" data-mapped="false">
             <span class="ajd__name">Kumaraguru College of Technology</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="loyola college india" data-mapped="false">
+          <li class="ajd__row" data-key="loyola-college" data-region="india" data-search="loyola college india" data-mapped="false">
             <span class="ajd__name">Loyola College</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="m s ramaiah institute of technology india" data-mapped="false">
+          <li class="ajd__row" data-key="m-s-ramaiah-institute-of-technology" data-region="india" data-search="m s ramaiah institute of technology india" data-mapped="false">
             <span class="ajd__name">M S Ramaiah Institute of Technology</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="m.o.p. vaishnav college for women india" data-mapped="false">
+          <li class="ajd__row" data-key="m-o-p-vaishnav-college-for-women" data-region="india" data-search="m.o.p. vaishnav college for women india" data-mapped="false">
             <span class="ajd__name">M.O.P. Vaishnav College for Women</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="maharashtra institute of technology, school of management india" data-mapped="false">
+          <li class="ajd__row" data-key="maharashtra-institute-of-technology-school-of-management" data-region="india" data-search="maharashtra institute of technology, school of management india" data-mapped="false">
             <span class="ajd__name">Maharashtra Institute of Technology, School of Management</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="manipal institute of technology india" data-mapped="false">
+          <li class="ajd__row" data-key="manipal-institute-of-technology" data-region="india" data-search="manipal institute of technology india" data-mapped="false">
             <span class="ajd__name">Manipal Institute of Technology</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="manipal university india" data-mapped="false">
+          <li class="ajd__row" data-key="manipal-university" data-region="india" data-search="manipal university india" data-mapped="false">
             <span class="ajd__name">Manipal University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="mc&#x27;gans ooty school of architecture india" data-mapped="false">
+          <li class="ajd__row" data-key="mc-gans-ooty-school-of-architecture" data-region="india" data-search="mc&#x27;gans ooty school of architecture india" data-mapped="false">
             <span class="ajd__name">Mc&#x27;gans ooty school of architecture</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="mithibai college india" data-mapped="false">
+          <li class="ajd__row" data-key="mithibai-college" data-region="india" data-search="mithibai college india" data-mapped="false">
             <span class="ajd__name">Mithibai College</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="mount carmel college india" data-mapped="false">
+          <li class="ajd__row" data-key="mount-carmel-college" data-region="india" data-search="mount carmel college india" data-mapped="false">
             <span class="ajd__name">Mount Carmel college</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="national institute of bank management india" data-mapped="false">
+          <li class="ajd__row" data-key="national-institute-of-bank-management" data-region="india" data-search="national institute of bank management india" data-mapped="false">
             <span class="ajd__name">National Institute of Bank Management</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="national institute of design india" data-mapped="true">
+          <li class="ajd__row" data-key="nid" data-region="india" data-search="national institute of design india" data-mapped="true">
             <span class="ajd__name">National Institute of Design</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="national institute of technology tiruchirappalli india" data-mapped="false">
+          <li class="ajd__row" data-key="national-institute-of-technology-tiruchirappalli" data-region="india" data-search="national institute of technology tiruchirappalli india" data-mapped="false">
             <span class="ajd__name">National Institute of Technology Tiruchirappalli</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="nlu, delhi india" data-mapped="false">
+          <li class="ajd__row" data-key="nlu-delhi" data-region="india" data-search="nlu, delhi india" data-mapped="false">
             <span class="ajd__name">NLU, Delhi</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="nmims india" data-mapped="false">
+          <li class="ajd__row" data-key="nmims" data-region="india" data-search="nmims india" data-mapped="false">
             <span class="ajd__name">NMIMS</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="nmims-balwant seth school of architecture india" data-mapped="false">
+          <li class="ajd__row" data-key="nmims-balwant-seth-school-of-architecture" data-region="india" data-search="nmims-balwant seth school of architecture india" data-mapped="false">
             <span class="ajd__name">NMIMS-Balwant Seth School of Architecture</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="o.p. jindal global university india" data-mapped="false">
+          <li class="ajd__row" data-key="o-p-jindal-global-university" data-region="india" data-search="o.p. jindal global university india" data-mapped="false">
             <span class="ajd__name">O.P. Jindal Global University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="pearl academy india" data-mapped="false">
+          <li class="ajd__row" data-key="pearl-academy" data-region="india" data-search="pearl academy india" data-mapped="false">
             <span class="ajd__name">Pearl Academy</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="ppg institute of technology india" data-mapped="false">
+          <li class="ajd__row" data-key="ppg-institute-of-technology" data-region="india" data-search="ppg institute of technology india" data-mapped="false">
             <span class="ajd__name">Ppg Institute of technology</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="prin.l.n welingkar institute of management development &amp; research india" data-mapped="false">
+          <li class="ajd__row" data-key="prin-l-n-welingkar-institute-of-management-development-research" data-region="india" data-search="prin.l.n welingkar institute of management development &amp; research india" data-mapped="false">
             <span class="ajd__name">Prin.L.N Welingkar institute of management development &amp; research</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="psg college of technology india" data-mapped="false">
+          <li class="ajd__row" data-key="psg-college-of-technology" data-region="india" data-search="psg college of technology india" data-mapped="false">
             <span class="ajd__name">PSG College of Technology</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="psg institute of technology india" data-mapped="false">
+          <li class="ajd__row" data-key="psg-institute-of-technology" data-region="india" data-search="psg institute of technology india" data-mapped="false">
             <span class="ajd__name">PSG Institute of Technology</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="sardar patel university india" data-mapped="false">
+          <li class="ajd__row" data-key="sardar-patel-university" data-region="india" data-search="sardar patel university india" data-mapped="false">
             <span class="ajd__name">Sardar Patel university</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="savitribai phule pune university india" data-mapped="false">
+          <li class="ajd__row" data-key="savitribai-phule-pune-university" data-region="india" data-search="savitribai phule pune university india" data-mapped="false">
             <span class="ajd__name">Savitribai Phule Pune University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="school of allied health sciences, manipal university india" data-mapped="false">
+          <li class="ajd__row" data-key="school-of-allied-health-sciences-manipal-university" data-region="india" data-search="school of allied health sciences, manipal university india" data-mapped="false">
             <span class="ajd__name">School of Allied Health Sciences, Manipal University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="school of inspired leadership india" data-mapped="false">
+          <li class="ajd__row" data-key="school-of-inspired-leadership" data-region="india" data-search="school of inspired leadership india" data-mapped="false">
             <span class="ajd__name">School of Inspired Leadership</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="school of planning and architecture india" data-mapped="false">
+          <li class="ajd__row" data-key="school-of-planning-and-architecture" data-region="india" data-search="school of planning and architecture india" data-mapped="false">
             <span class="ajd__name">School of planning and architecture</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="shiv nadar university india" data-mapped="false">
+          <li class="ajd__row" data-key="shiv-nadar-university" data-region="india" data-search="shiv nadar university india" data-mapped="false">
             <span class="ajd__name">Shiv Nadar University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="shri devraj urs medical university india" data-mapped="false">
+          <li class="ajd__row" data-key="shri-devraj-urs-medical-university" data-region="india" data-search="shri devraj urs medical university india" data-mapped="false">
             <span class="ajd__name">Shri Devraj URS Medical University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="shri ram college of commerce india" data-mapped="true">
+          <li class="ajd__row" data-key="srcc" data-region="india" data-search="shri ram college of commerce india" data-mapped="true">
             <span class="ajd__name">Shri Ram College of Commerce</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="sri sri university india" data-mapped="false">
+          <li class="ajd__row" data-key="sri-sri-university" data-region="india" data-search="sri sri university india" data-mapped="false">
             <span class="ajd__name">Sri Sri University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="sri venkateswara college india" data-mapped="false">
+          <li class="ajd__row" data-key="sri-venkateswara-college" data-region="india" data-search="sri venkateswara college india" data-mapped="false">
             <span class="ajd__name">Sri Venkateswara College</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="srishti university of art, design technology india" data-mapped="false">
+          <li class="ajd__row" data-key="srishti-university-of-art-design-technology" data-region="india" data-search="srishti university of art, design technology india" data-mapped="false">
             <span class="ajd__name">Srishti University of Art, Design Technology</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="srm institute of science and technology india" data-mapped="false">
+          <li class="ajd__row" data-key="srm-institute-of-science-and-technology" data-region="india" data-search="srm institute of science and technology india" data-mapped="false">
             <span class="ajd__name">SRM Institute of Science and Technology</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="st joseph&#x27;s college of law india" data-mapped="false">
+          <li class="ajd__row" data-key="st-joseph-s-college-of-law" data-region="india" data-search="st joseph&#x27;s college of law india" data-mapped="false">
             <span class="ajd__name">St Joseph&#x27;s college of law</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="st. joseph&#x27;s college of arts and science india" data-mapped="false">
+          <li class="ajd__row" data-key="st-joseph-s-college-of-arts-and-science" data-region="india" data-search="st. joseph&#x27;s college of arts and science india" data-mapped="false">
             <span class="ajd__name">St. Joseph&#x27;s College of Arts and Science</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="st. joseph&#x27;s college of commerce, bengaluru india" data-mapped="false">
+          <li class="ajd__row" data-key="st-joseph-s-college-of-commerce-bengaluru" data-region="india" data-search="st. joseph&#x27;s college of commerce, bengaluru india" data-mapped="false">
             <span class="ajd__name">St. Joseph&#x27;s college of commerce, Bengaluru</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="st. xavier&#x27;s college, kolkata india" data-mapped="false">
+          <li class="ajd__row" data-key="st-xavier-s-college-kolkata" data-region="india" data-search="st. xavier&#x27;s college, kolkata india" data-mapped="false">
             <span class="ajd__name">St. Xavier&#x27;s College, Kolkata</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="st. xavier&#x27;s college, mumbai india" data-mapped="false">
+          <li class="ajd__row" data-key="st-xavier-s-college-mumbai" data-region="india" data-search="st. xavier&#x27;s college, mumbai india" data-mapped="false">
             <span class="ajd__name">St. Xavier&#x27;s College, Mumbai</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="st.xavier&#x27;s college, ranchi india" data-mapped="false">
+          <li class="ajd__row" data-key="st-xavier-s-college-ranchi" data-region="india" data-search="st.xavier&#x27;s college, ranchi india" data-mapped="false">
             <span class="ajd__name">St.Xavier&#x27;s College, Ranchi</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="symbiosis centre for management studies india" data-mapped="false">
+          <li class="ajd__row" data-key="symbiosis-centre-for-management-studies" data-region="india" data-search="symbiosis centre for management studies india" data-mapped="false">
             <span class="ajd__name">Symbiosis Centre for Management Studies</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="symbiosis centre for media and communication india" data-mapped="false">
+          <li class="ajd__row" data-key="symbiosis-centre-for-media-and-communication" data-region="india" data-search="symbiosis centre for media and communication india" data-mapped="false">
             <span class="ajd__name">Symbiosis Centre for Media and Communication</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="symbiosis college of arts and commerce india" data-mapped="false">
+          <li class="ajd__row" data-key="symbiosis-college-of-arts-and-commerce" data-region="india" data-search="symbiosis college of arts and commerce india" data-mapped="false">
             <span class="ajd__name">Symbiosis College of Arts and Commerce</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="symbiosis institute of media and communication india" data-mapped="false">
+          <li class="ajd__row" data-key="symbiosis-institute-of-media-and-communication" data-region="india" data-search="symbiosis institute of media and communication india" data-mapped="false">
             <span class="ajd__name">Symbiosis Institute of Media and Communication</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="symbiosis international university india" data-mapped="false">
+          <li class="ajd__row" data-key="symbiosis-international-university" data-region="india" data-search="symbiosis international university india" data-mapped="false">
             <span class="ajd__name">Symbiosis International University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="symbiosis school of economics india" data-mapped="false">
+          <li class="ajd__row" data-key="symbiosis-school-of-economics" data-region="india" data-search="symbiosis school of economics india" data-mapped="false">
             <span class="ajd__name">Symbiosis School of Economics</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="t a pai management institute india" data-mapped="false">
+          <li class="ajd__row" data-key="t-a-pai-management-institute" data-region="india" data-search="t a pai management institute india" data-mapped="false">
             <span class="ajd__name">T A Pai Management Institute</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="university of madras india" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-madras" data-region="india" data-search="university of madras india" data-mapped="false">
             <span class="ajd__name">University of Madras</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="university of mumbai india" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-mumbai" data-region="india" data-search="university of mumbai india" data-mapped="false">
             <span class="ajd__name">University of Mumbai</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="university of petroleum and energy studies india" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-petroleum-and-energy-studies" data-region="india" data-search="university of petroleum and energy studies india" data-mapped="false">
             <span class="ajd__name">University of Petroleum and Energy Studies</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="utkal university india" data-mapped="false">
+          <li class="ajd__row" data-key="utkal-university" data-region="india" data-search="utkal university india" data-mapped="false">
             <span class="ajd__name">Utkal University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="vellore institute of technology india" data-mapped="false">
+          <li class="ajd__row" data-key="vellore-institute-of-technology" data-region="india" data-search="vellore institute of technology india" data-mapped="false">
             <span class="ajd__name">Vellore Institute of Technology</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="visvesvaraya technological university india" data-mapped="false">
+          <li class="ajd__row" data-key="visvesvaraya-technological-university" data-region="india" data-search="visvesvaraya technological university india" data-mapped="false">
             <span class="ajd__name">Visvesvaraya Technological University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="ashoka university india" data-mapped="false">
+          <li class="ajd__row" data-key="ashoka-university" data-region="india" data-search="ashoka university india" data-mapped="false">
             <span class="ajd__name">Ashoka University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="bits pilani, k k birla goa campus india" data-mapped="false">
+          <li class="ajd__row" data-key="bits-pilani-k-k-birla-goa-campus" data-region="india" data-search="bits pilani, k k birla goa campus india" data-mapped="false">
             <span class="ajd__name">BITS Pilani, K K Birla Goa Campus</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="cept university india" data-mapped="false">
+          <li class="ajd__row" data-key="cept-university" data-region="india" data-search="cept university india" data-mapped="false">
             <span class="ajd__name">CEPT University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="istituto marangoni, mumbai india" data-mapped="false">
+          <li class="ajd__row" data-key="istituto-marangoni-mumbai" data-region="india" data-search="istituto marangoni, mumbai india" data-mapped="false">
             <span class="ajd__name">Istituto Marangoni, Mumbai</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="krea university india" data-mapped="false">
+          <li class="ajd__row" data-key="krea-university" data-region="india" data-search="krea university india" data-mapped="false">
             <span class="ajd__name">Krea University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="mahindra university india" data-mapped="false">
+          <li class="ajd__row" data-key="mahindra-university" data-region="india" data-search="mahindra university india" data-mapped="false">
             <span class="ajd__name">Mahindra University</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="masters&#x27; union india" data-mapped="false">
+          <li class="ajd__row" data-key="masters-union" data-region="india" data-search="masters&#x27; union india" data-mapped="false">
             <span class="ajd__name">Masters&#x27; Union</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="shiv nadar university, chennai india" data-mapped="false">
+          <li class="ajd__row" data-key="shiv-nadar-university-chennai" data-region="india" data-search="shiv nadar university, chennai india" data-mapped="false">
             <span class="ajd__name">Shiv Nadar University, Chennai</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="visvesvaraya national institute of technology, nagpur india" data-mapped="false">
+          <li class="ajd__row" data-key="visvesvaraya-national-institute-of-technology-nagpur" data-region="india" data-search="visvesvaraya national institute of technology, nagpur india" data-mapped="false">
             <span class="ajd__name">Visvesvaraya National Institute of Technology, Nagpur</span>
             <span class="ajd__country">India</span>
           </li>
-          <li class="ajd__row" data-region="india" data-search="whistling woods international india" data-mapped="false">
+          <li class="ajd__row" data-key="whistling-woods-international" data-region="india" data-search="whistling woods international india" data-mapped="false">
             <span class="ajd__name">Whistling Woods International</span>
             <span class="ajd__country">India</span>
           </li>
@@ -1744,71 +2625,71 @@
         <h3 class="ajd__region"><span class="sc">United Kingdom</span>
           <span class="ajd__n">17<span class="sr-only"> destinations</span></span></h3>
         <ul class="ajd__rows">
-          <li class="ajd__row" data-region="uk" data-search="cardiff university united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="cardiff-university" data-region="uk" data-search="cardiff university united kingdom" data-mapped="false">
             <span class="ajd__name">Cardiff University</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="durham university united kingdom" data-mapped="true">
+          <li class="ajd__row" data-key="durham" data-region="uk" data-search="durham university united kingdom" data-mapped="true">
             <span class="ajd__name">Durham University</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="glasgow caledonian university united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="glasgow-caledonian-university" data-region="uk" data-search="glasgow caledonian university united kingdom" data-mapped="false">
             <span class="ajd__name">Glasgow Caledonian University</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="imperial college london united kingdom" data-mapped="true">
+          <li class="ajd__row" data-key="imperial" data-region="uk" data-search="imperial college london united kingdom" data-mapped="true">
             <span class="ajd__name">Imperial College London</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="oxford brookes university united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="oxford-brookes-university" data-region="uk" data-search="oxford brookes university united kingdom" data-mapped="false">
             <span class="ajd__name">Oxford Brookes University</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="royal holloway, university of london united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="royal-holloway-university-of-london" data-region="uk" data-search="royal holloway, university of london united kingdom" data-mapped="false">
             <span class="ajd__name">Royal Holloway, University of London</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="the london school of economics and political science united kingdom" data-mapped="true">
+          <li class="ajd__row" data-key="lse" data-region="uk" data-search="the london school of economics and political science united kingdom" data-mapped="true">
             <span class="ajd__name">The London School of Economics and Political Science</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="the university of manchester united kingdom" data-mapped="true">
+          <li class="ajd__row" data-key="manchester" data-region="uk" data-search="the university of manchester united kingdom" data-mapped="true">
             <span class="ajd__name">The University of Manchester</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="university college london united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="university-college-london" data-region="uk" data-search="university college london united kingdom" data-mapped="false">
             <span class="ajd__name">University College London</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="university of bristol united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-bristol" data-region="uk" data-search="university of bristol united kingdom" data-mapped="false">
             <span class="ajd__name">University Of Bristol</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="university of liverpool united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-liverpool" data-region="uk" data-search="university of liverpool united kingdom" data-mapped="false">
             <span class="ajd__name">University of Liverpool</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="university of nottingham united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-nottingham" data-region="uk" data-search="university of nottingham united kingdom" data-mapped="false">
             <span class="ajd__name">University of Nottingham</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="university of sheffield united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-sheffield" data-region="uk" data-search="university of sheffield united kingdom" data-mapped="false">
             <span class="ajd__name">University of Sheffield</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="university of the arts london united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-the-arts-london" data-region="uk" data-search="university of the arts london united kingdom" data-mapped="false">
             <span class="ajd__name">University of the Arts London</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="university of warwick united kingdom" data-mapped="true">
+          <li class="ajd__row" data-key="warwick" data-region="uk" data-search="university of warwick united kingdom" data-mapped="true">
             <span class="ajd__name">University of Warwick</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="university of westminster united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-westminster" data-region="uk" data-search="university of westminster united kingdom" data-mapped="false">
             <span class="ajd__name">University of Westminster</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
-          <li class="ajd__row" data-region="uk" data-search="university of st andrews united kingdom" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-st-andrews" data-region="uk" data-search="university of st andrews united kingdom" data-mapped="false">
             <span class="ajd__name">University of St Andrews</span>
             <span class="ajd__country">United Kingdom</span>
           </li>
@@ -1818,91 +2699,91 @@
         <h3 class="ajd__region"><span class="sc">United States</span>
           <span class="ajd__n">22<span class="sr-only"> destinations</span></span></h3>
         <ul class="ajd__rows">
-          <li class="ajd__row" data-region="us" data-search="boston university united states" data-mapped="true">
+          <li class="ajd__row" data-key="boston" data-region="us" data-search="boston university united states" data-mapped="true">
             <span class="ajd__name">Boston University</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="carnegie mellon university united states" data-mapped="false">
+          <li class="ajd__row" data-key="carnegie-mellon-university" data-region="us" data-search="carnegie mellon university united states" data-mapped="false">
             <span class="ajd__name">Carnegie Mellon University</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="cornell university united states" data-mapped="false">
+          <li class="ajd__row" data-key="cornell-university" data-region="us" data-search="cornell university united states" data-mapped="false">
             <span class="ajd__name">Cornell University</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="emory university united states" data-mapped="false">
+          <li class="ajd__row" data-key="emory-university" data-region="us" data-search="emory university united states" data-mapped="false">
             <span class="ajd__name">Emory University</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="fairleigh dickinson university united states" data-mapped="false">
+          <li class="ajd__row" data-key="fairleigh-dickinson-university" data-region="us" data-search="fairleigh dickinson university united states" data-mapped="false">
             <span class="ajd__name">Fairleigh Dickinson University</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="florida institute of technology united states" data-mapped="false">
+          <li class="ajd__row" data-key="florida-institute-of-technology" data-region="us" data-search="florida institute of technology united states" data-mapped="false">
             <span class="ajd__name">Florida Institute of Technology</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="georgia institute of technology united states" data-mapped="false">
+          <li class="ajd__row" data-key="georgia-institute-of-technology" data-region="us" data-search="georgia institute of technology united states" data-mapped="false">
             <span class="ajd__name">Georgia Institute of Technology</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="hofstra university united states" data-mapped="false">
+          <li class="ajd__row" data-key="hofstra-university" data-region="us" data-search="hofstra university united states" data-mapped="false">
             <span class="ajd__name">Hofstra University</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="new york university united states" data-mapped="true">
+          <li class="ajd__row" data-key="nyu" data-region="us" data-search="new york university united states" data-mapped="true">
             <span class="ajd__name">New York University</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="northwestern university united states" data-mapped="true">
+          <li class="ajd__row" data-key="northwestern" data-region="us" data-search="northwestern university united states" data-mapped="true">
             <span class="ajd__name">Northwestern University</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="purdue university united states" data-mapped="true">
+          <li class="ajd__row" data-key="purdue" data-region="us" data-search="purdue university united states" data-mapped="true">
             <span class="ajd__name">Purdue University</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="rochester institute of technology united states" data-mapped="false">
+          <li class="ajd__row" data-key="rochester-institute-of-technology" data-region="us" data-search="rochester institute of technology united states" data-mapped="false">
             <span class="ajd__name">Rochester Institute of Technology</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="the new school — parsons united states" data-mapped="true">
+          <li class="ajd__row" data-key="parsons" data-region="us" data-search="the new school — parsons united states" data-mapped="true">
             <span class="ajd__name">The New School — Parsons</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="university of california, irvine united states" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-california-irvine" data-region="us" data-search="university of california, irvine united states" data-mapped="false">
             <span class="ajd__name">University of California, Irvine</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="university of chicago united states" data-mapped="true">
+          <li class="ajd__row" data-key="chicago" data-region="us" data-search="university of chicago united states" data-mapped="true">
             <span class="ajd__name">University of Chicago</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="university of illinois - urbana champaign united states" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-illinois-urbana-champaign" data-region="us" data-search="university of illinois - urbana champaign united states" data-mapped="false">
             <span class="ajd__name">University of Illinois - Urbana Champaign</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="university of scranton united states" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-scranton" data-region="us" data-search="university of scranton united states" data-mapped="false">
             <span class="ajd__name">University of Scranton</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="university of southern california united states" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-southern-california" data-region="us" data-search="university of southern california united states" data-mapped="false">
             <span class="ajd__name">University of Southern California</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="university of toledo united states" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-toledo" data-region="us" data-search="university of toledo united states" data-mapped="false">
             <span class="ajd__name">University of Toledo</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="university of virginia united states" data-mapped="true">
+          <li class="ajd__row" data-key="virginia" data-region="us" data-search="university of virginia united states" data-mapped="true">
             <span class="ajd__name">University of Virginia</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="university of wisconsin- madison united states" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-wisconsin-madison" data-region="us" data-search="university of wisconsin- madison united states" data-mapped="false">
             <span class="ajd__name">University of Wisconsin- Madison</span>
             <span class="ajd__country">United States</span>
           </li>
-          <li class="ajd__row" data-region="us" data-search="university of california, los angeles united states" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-california-los-angeles" data-region="us" data-search="university of california, los angeles united states" data-mapped="false">
             <span class="ajd__name">University of California, Los Angeles</span>
             <span class="ajd__country">United States</span>
           </li>
@@ -1912,26 +2793,26 @@
         <h3 class="ajd__region"><span class="sc">Canada</span>
           <span class="ajd__n">5<span class="sr-only"> destinations</span></span></h3>
         <ul class="ajd__rows">
-          <li class="ajd__row" data-region="canada" data-search="george brown college canada" data-mapped="false">
+          <li class="ajd__row" data-key="george-brown-college" data-region="canada" data-search="george brown college canada" data-mapped="false">
             <span class="ajd__name">George Brown College</span>
             <span class="ajd__country">Canada</span>
           </li>
-          <li class="ajd__row" data-region="canada" data-search="university of british columbia canada" data-mapped="true" data-campus="Vancouver (Point Grey) campus">
+          <li class="ajd__row" data-key="university-of-british-columbia" data-region="canada" data-search="university of british columbia canada" data-mapped="true" data-campus="Vancouver (Point Grey) campus">
             <span class="ajd__name">University of British Columbia</span>
             <span class="ajd__country">Canada</span>
             <a class="ajd__locationSource" href="https://www.ubc.ca/our-campuses/vancouver/">Campus location source<span class="sr-only"> for University of British Columbia</span></a>
           </li>
-          <li class="ajd__row" data-region="canada" data-search="university of victoria canada" data-mapped="true" data-campus="Ring Road campus">
+          <li class="ajd__row" data-key="university-of-victoria" data-region="canada" data-search="university of victoria canada" data-mapped="true" data-campus="Ring Road campus">
             <span class="ajd__name">University of Victoria</span>
             <span class="ajd__country">Canada</span>
             <a class="ajd__locationSource" href="https://www.uvic.ca/search/maps/index.php">Campus location source<span class="sr-only"> for University of Victoria</span></a>
           </li>
-          <li class="ajd__row" data-region="canada" data-search="university of waterloo canada" data-mapped="true" data-campus="Waterloo main campus">
+          <li class="ajd__row" data-key="university-of-waterloo" data-region="canada" data-search="university of waterloo canada" data-mapped="true" data-campus="Waterloo main campus">
             <span class="ajd__name">University of Waterloo</span>
             <span class="ajd__country">Canada</span>
             <a class="ajd__locationSource" href="https://uwaterloo.ca/about/maps-and-directions">Campus location source<span class="sr-only"> for University of Waterloo</span></a>
           </li>
-          <li class="ajd__row" data-region="canada" data-search="york university canada" data-mapped="false">
+          <li class="ajd__row" data-key="york-university" data-region="canada" data-search="york university canada" data-mapped="false">
             <span class="ajd__name">York University</span>
             <span class="ajd__country">Canada</span>
           </li>
@@ -1941,73 +2822,73 @@
         <h3 class="ajd__region"><span class="sc">Asia&ndash;Pacific</span>
           <span class="ajd__n">16<span class="sr-only"> destinations</span></span></h3>
         <ul class="ajd__rows">
-          <li class="ajd__row" data-region="apac" data-search="curtin university australia" data-mapped="true" data-campus="Perth (Bentley) campus">
+          <li class="ajd__row" data-key="curtin-university" data-region="apac" data-search="curtin university australia" data-mapped="true" data-campus="Perth (Bentley) campus">
             <span class="ajd__name">Curtin University</span>
             <span class="ajd__country">Australia</span>
             <a class="ajd__locationSource" href="https://www.curtin.edu.au/about/campus-locations/perth/">Campus location source<span class="sr-only"> for Curtin University</span></a>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="sp jain school of global management australia" data-mapped="false">
+          <li class="ajd__row" data-key="sp-jain-school-of-global-management" data-region="apac" data-search="sp jain school of global management australia" data-mapped="false">
             <span class="ajd__name">Sp Jain School Of Global Management</span>
             <span class="ajd__country">Australia</span>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="university of new south wales australia" data-mapped="true" data-campus="Kensington campus">
+          <li class="ajd__row" data-key="university-of-new-south-wales" data-region="apac" data-search="university of new south wales australia" data-mapped="true" data-campus="Kensington campus">
             <span class="ajd__name">University Of New South Wales</span>
             <span class="ajd__country">Australia</span>
             <a class="ajd__locationSource" href="https://www.unsw.edu.au/about-us/our-story/contact-us">Campus location source<span class="sr-only"> for University Of New South Wales</span></a>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="university of sydney australia" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-sydney" data-region="apac" data-search="university of sydney australia" data-mapped="false">
             <span class="ajd__name">University of Sydney</span>
             <span class="ajd__country">Australia</span>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="university of wollongong australia" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-wollongong" data-region="apac" data-search="university of wollongong australia" data-mapped="false">
             <span class="ajd__name">University of Wollongong</span>
             <span class="ajd__country">Australia</span>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="university of melbourne australia" data-mapped="true" data-campus="Parkville campus">
+          <li class="ajd__row" data-key="university-of-melbourne" data-region="apac" data-search="university of melbourne australia" data-mapped="true" data-campus="Parkville campus">
             <span class="ajd__name">University of Melbourne</span>
             <span class="ajd__country">Australia</span>
             <a class="ajd__locationSource" href="https://www.unimelb.edu.au/contact">Campus location source<span class="sr-only"> for University of Melbourne</span></a>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="the hong kong university of science and technology hong kong" data-mapped="true">
+          <li class="ajd__row" data-key="hkust" data-region="apac" data-search="the hong kong university of science and technology hong kong" data-mapped="true">
             <span class="ajd__name">The Hong Kong University of Science and Technology</span>
             <span class="ajd__country">Hong Kong</span>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="the university of hong kong hong kong" data-mapped="true" data-campus="Main campus">
+          <li class="ajd__row" data-key="the-university-of-hong-kong" data-region="apac" data-search="the university of hong kong hong kong" data-mapped="true" data-campus="Main campus">
             <span class="ajd__name">The University of Hong Kong</span>
             <span class="ajd__country">Hong Kong</span>
             <a class="ajd__locationSource" href="https://www.estates.hku.hk/campus-planning/campuses">Campus location source<span class="sr-only"> for The University of Hong Kong</span></a>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="university of canterbury new zealand" data-mapped="true" data-campus="Ilam campus, Christchurch">
+          <li class="ajd__row" data-key="university-of-canterbury" data-region="apac" data-search="university of canterbury new zealand" data-mapped="true" data-campus="Ilam campus, Christchurch">
             <span class="ajd__name">University of Canterbury</span>
             <span class="ajd__country">New Zealand</span>
             <a class="ajd__locationSource" href="https://www.canterbury.ac.nz/about-uc/our-campus-and-environment">Campus location source<span class="sr-only"> for University of Canterbury</span></a>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="james cook university singapore singapore" data-mapped="true" data-campus="149 Sims Drive">
+          <li class="ajd__row" data-key="james-cook-university-singapore" data-region="apac" data-search="james cook university singapore singapore" data-mapped="true" data-campus="149 Sims Drive">
             <span class="ajd__name">James Cook University Singapore</span>
             <span class="ajd__country">Singapore</span>
             <a class="ajd__locationSource" href="https://www.jcu.edu.sg/current-students/campus-maps-And-information">Campus location source<span class="sr-only"> for James Cook University Singapore</span></a>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="kaplan higher education academy singapore" data-mapped="false">
+          <li class="ajd__row" data-key="kaplan-higher-education-academy" data-region="apac" data-search="kaplan higher education academy singapore" data-mapped="false">
             <span class="ajd__name">Kaplan Higher Education Academy</span>
             <span class="ajd__country">Singapore</span>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="mdis singapore" data-mapped="false">
+          <li class="ajd__row" data-key="mdis" data-region="apac" data-search="mdis singapore" data-mapped="false">
             <span class="ajd__name">Mdis</span>
             <span class="ajd__country">Singapore</span>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="nanyang technological university singapore" data-mapped="true">
+          <li class="ajd__row" data-key="ntu" data-region="apac" data-search="nanyang technological university singapore" data-mapped="true">
             <span class="ajd__name">Nanyang Technological University</span>
             <span class="ajd__country">Singapore</span>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="national university of singapore singapore" data-mapped="true">
+          <li class="ajd__row" data-key="nus" data-region="apac" data-search="national university of singapore singapore" data-mapped="true">
             <span class="ajd__name">National University of Singapore</span>
             <span class="ajd__country">Singapore</span>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="university of bradford (singapore study centre) singapore" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-bradford-singapore" data-region="apac" data-search="university of bradford (singapore study centre) singapore" data-mapped="false">
             <span class="ajd__name">University of Bradford (Singapore study centre)</span>
             <span class="ajd__country">Singapore</span>
           </li>
-          <li class="ajd__row" data-region="apac" data-search="university of london (singapore study centre) singapore" data-mapped="false">
+          <li class="ajd__row" data-key="university-of-london-singapore" data-region="apac" data-search="university of london (singapore study centre) singapore" data-mapped="false">
             <span class="ajd__name">University of London (Singapore study centre)</span>
             <span class="ajd__country">Singapore</span>
           </li>
@@ -2017,32 +2898,32 @@
         <h3 class="ajd__region"><span class="sc">Europe</span>
           <span class="ajd__n">6<span class="sr-only"> destinations</span></span></h3>
         <ul class="ajd__rows">
-          <li class="ajd__row" data-region="europe" data-search="american graduate school in paris france" data-mapped="true" data-campus="Reid Hall, Paris">
+          <li class="ajd__row" data-key="american-graduate-school-in-paris" data-region="europe" data-search="american graduate school in paris france" data-mapped="true" data-campus="Reid Hall, Paris">
             <span class="ajd__name">American Graduate School in Paris</span>
             <span class="ajd__country">France</span>
             <a class="ajd__locationSource" href="https://www.ags.edu/contact-us">Campus location source<span class="sr-only"> for American Graduate School in Paris</span></a>
           </li>
-          <li class="ajd__row" data-region="europe" data-search="karlsruhe institute of technology germany" data-mapped="true" data-campus="Campus South">
+          <li class="ajd__row" data-key="karlsruhe-institute-of-technology" data-region="europe" data-search="karlsruhe institute of technology germany" data-mapped="true" data-campus="Campus South">
             <span class="ajd__name">Karlsruhe Institute of Technology</span>
             <span class="ajd__country">Germany</span>
             <a class="ajd__locationSource" href="https://www.kit.edu/kit/english/947.php">Campus location source<span class="sr-only"> for Karlsruhe Institute of Technology</span></a>
           </li>
-          <li class="ajd__row" data-region="europe" data-search="leuphana university lüneburg germany" data-mapped="true" data-campus="Universitätsallee campus">
+          <li class="ajd__row" data-key="leuphana-university-luneburg" data-region="europe" data-search="leuphana university lüneburg germany" data-mapped="true" data-campus="Universitätsallee campus">
             <span class="ajd__name">Leuphana University Lüneburg</span>
             <span class="ajd__country">Germany</span>
             <a class="ajd__locationSource" href="https://www.leuphana.de/en/university/maps/campus.html">Campus location source<span class="sr-only"> for Leuphana University Lüneburg</span></a>
           </li>
-          <li class="ajd__row" data-region="europe" data-search="university college dublin ireland" data-mapped="true" data-campus="Belfield main entrance">
+          <li class="ajd__row" data-key="university-college-dublin" data-region="europe" data-search="university college dublin ireland" data-mapped="true" data-campus="Belfield main entrance">
             <span class="ajd__name">University College Dublin</span>
             <span class="ajd__country">Ireland</span>
             <a class="ajd__locationSource" href="https://maths.ucd.ie/sms/research/conferences/gps.html">Campus location source<span class="sr-only"> for University College Dublin</span></a>
           </li>
-          <li class="ajd__row" data-region="europe" data-search="htmi hotel and tourism management institute switzerland switzerland" data-mapped="true" data-campus="Marientalweg 3, Sörenberg">
+          <li class="ajd__row" data-key="htmi-switzerland" data-region="europe" data-search="htmi hotel and tourism management institute switzerland switzerland" data-mapped="true" data-campus="Marientalweg 3, Sörenberg">
             <span class="ajd__name">HTMi Hotel and Tourism Management Institute Switzerland</span>
             <span class="ajd__country">Switzerland</span>
             <a class="ajd__locationSource" href="https://htmi.ch/contact-information/">Campus location source<span class="sr-only"> for HTMi Hotel and Tourism Management Institute Switzerland</span></a>
           </li>
-          <li class="ajd__row" data-region="europe" data-search="bukovinian state medical university ukraine" data-mapped="true" data-campus="Teatralna Square 2, Chernivtsi">
+          <li class="ajd__row" data-key="bukovinian-state-medical-university" data-region="europe" data-search="bukovinian state medical university ukraine" data-mapped="true" data-campus="Teatralna Square 2, Chernivtsi">
             <span class="ajd__name">Bukovinian State Medical University</span>
             <span class="ajd__country">Ukraine</span>
             <a class="ajd__locationSource" href="https://www.bsmu.edu.ua/zagalni-vidomosti/kontakti-ta-rekviziti/">Campus location source<span class="sr-only"> for Bukovinian State Medical University</span></a>
@@ -2053,17 +2934,17 @@
         <h3 class="ajd__region"><span class="sc">Middle East</span>
           <span class="ajd__n">3<span class="sr-only"> destinations</span></span></h3>
         <ul class="ajd__rows">
-          <li class="ajd__row" data-region="middle-east" data-search="bits pilani dubai campus united arab emirates" data-mapped="true" data-campus="Dubai International Academic City">
+          <li class="ajd__row" data-key="bits-pilani-dubai-campus" data-region="middle-east" data-search="bits pilani dubai campus united arab emirates" data-mapped="true" data-campus="Dubai International Academic City">
             <span class="ajd__name">BITS Pilani Dubai Campus</span>
             <span class="ajd__country">United Arab Emirates</span>
             <a class="ajd__locationSource" href="https://www.bits-pilani.ac.in/dubai/about-us/">Campus location source<span class="sr-only"> for BITS Pilani Dubai Campus</span></a>
           </li>
-          <li class="ajd__row" data-region="middle-east" data-search="institute of management technology united arab emirates" data-mapped="true" data-campus="Dubai International Academic City">
+          <li class="ajd__row" data-key="institute-of-management-technology" data-region="middle-east" data-search="institute of management technology united arab emirates" data-mapped="true" data-campus="Dubai International Academic City">
             <span class="ajd__name">Institute of management technology</span>
             <span class="ajd__country">United Arab Emirates</span>
             <a class="ajd__locationSource" href="https://www.imt.ac.ae/contact-us">Campus location source<span class="sr-only"> for Institute of management technology</span></a>
           </li>
-          <li class="ajd__row" data-region="middle-east" data-search="university of wollongong in dubai united arab emirates" data-mapped="true" data-campus="Dubai Knowledge Park campus">
+          <li class="ajd__row" data-key="university-of-wollongong-in-dubai" data-region="middle-east" data-search="university of wollongong in dubai united arab emirates" data-mapped="true" data-campus="Dubai Knowledge Park campus">
             <span class="ajd__name">University of Wollongong in Dubai</span>
             <span class="ajd__country">United Arab Emirates</span>
             <a class="ajd__locationSource" href="https://www.uowdubai.ac.ae/contact-us">Campus location source<span class="sr-only"> for University of Wollongong in Dubai</span></a>
@@ -2232,12 +3113,12 @@
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=115-alumni-9" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=115-alumni-9" defer></script>
-<script src="assets/vendor/lenis.min.js?b=115-alumni-9" defer></script>
-<script src="assets/js/cirs.js?b=115-alumni-9-header-5" defer></script>
-<script src="assets/js/pages.js?b=115-alumni-9" defer></script>
-<script src="assets/js/footer.js?b=115-alumni-9-footer-1" defer></script>
-<script src="assets/js/alumni-journey.js?b=115-alumni-9" defer></script>
+<script src="assets/vendor/gsap.min.js?b=116-alumni-9" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=116-alumni-9" defer></script>
+<script src="assets/vendor/lenis.min.js?b=116-alumni-9" defer></script>
+<script src="assets/js/cirs.js?b=116-alumni-9-header-5" defer></script>
+<script src="assets/js/pages.js?b=116-alumni-9" defer></script>
+<script src="assets/js/footer.js?b=116-alumni-9-footer-1" defer></script>
+<script src="assets/js/alumni-journey.js?b=116-alumni-9" defer></script>
 </body>
 </html>

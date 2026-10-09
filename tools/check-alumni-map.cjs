@@ -22,7 +22,7 @@ assert.equal(coverage.length,14);assert.equal(coverage.reduce((n,c)=>n+c.mapped,
    assert.equal(style.outline,'none');assert.equal(style.stroke,'2.5px');assert.equal(style.vector,'non-scaling-stroke');
    await field.screenshot({path:out+'/map-'+width+'-'+name.toLowerCase()+'-focus.png'});
    await page.keyboard.press('Enter');assert.equal(await page.locator('#ajc-panel-name').textContent(),name);
-   assert.equal(await page.locator('[data-panel-results] li').count(),name==='China'?0:6);
+   assert.equal(await page.locator('[data-panel-results] > li').count(),name==='China'?0:6);
    await page.keyboard.press('Escape');assert.equal(await page.evaluate(()=>document.activeElement.dataset.country),name);
   }
   assert.equal(await page.locator('.ajc__mapMarkers circle').count(),37);

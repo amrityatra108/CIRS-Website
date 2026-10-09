@@ -24,3 +24,7 @@ assets/fonts/licenses/[Bb]rier*
 # Netlify CLI local link state
 .netlify/
 __pycache__/
+
+# Alumni Registration Form exports hold phone numbers, emails and dates of
+# birth. tools/make-alumni-register.py reads one; only its output is committed.
+*.xlsx

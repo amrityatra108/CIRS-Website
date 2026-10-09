@@ -18,15 +18,15 @@ const url = process.env.CIRS_ALUMNI_URL || 'http://localhost:8000/alumni.html';
  const browse=page.locator('[data-filter="all"]');
  for(let i=0;i<3;i++){
   await browse.click();
-  assert.equal(await page.locator('[data-panel-results] li').count(),166);
+  assert.equal(await page.locator('[data-panel-results] > li').count(),166);
   const y=await page.evaluate(()=>scrollY);
   await page.mouse.wheel(0,700); await page.waitForTimeout(150);
   assert.equal(await page.evaluate(()=>scrollY),y);
   await page.locator('#ajc-search').fill('impossible institution xyz');
-  assert.equal(await page.locator('[data-panel-results] li').count(),0);
+  assert.equal(await page.locator('[data-panel-results] > li').count(),0);
   assert(await page.locator('[data-panel-empty]').isVisible());
   await page.locator('#ajc-search').fill('singapore');
-  assert.equal(await page.locator('[data-panel-results] li').count(),7);
+  assert.equal(await page.locator('[data-panel-results] > li').count(),7);
   await page.locator('[data-panel-close]').focus(); await page.keyboard.press('Shift+Tab');
   assert.equal(await page.evaluate(()=>document.activeElement.matches('[data-panel-results] a')),true);
   await page.keyboard.press('Tab');
@@ -38,15 +38,15 @@ const url = process.env.CIRS_ALUMNI_URL || 'http://localhost:8000/alumni.html';
  }
  report.push('Repeated open/search/empty/reset/Escape; Tab loop; focus and scroll restoration: passed');
  await page.locator('#ajc-country').selectOption('Brazil'); await page.locator('[data-country-open]').click();
- assert.equal(await page.locator('[data-panel-results] li').count(),0);
+ assert.equal(await page.locator('[data-panel-results] > li').count(),0);
  assert((await page.locator('[data-panel-empty]').textContent()).includes('does not imply'));
- await page.locator('[data-panel-all]').click(); assert.equal(await page.locator('[data-panel-results] li').count(),166);
+ await page.locator('[data-panel-all]').click(); assert.equal(await page.locator('[data-panel-results] > li').count(),166);
  await page.locator('[data-panel-close]').click();
- await page.locator('[data-filter="middle-east"]').click(); assert.equal(await page.locator('[data-panel-results] li').count(),3);
+ await page.locator('[data-filter="middle-east"]').click(); assert.equal(await page.locator('[data-panel-results] > li').count(),3);
  await page.keyboard.press('Escape');
  const uk=page.locator('.ajc__land[data-country="United Kingdom"]');
  await uk.focus(); assert((await page.locator('[data-map-hint]').textContent()).includes('17 institutions'));
- await page.keyboard.press('Enter'); assert.equal(await page.locator('[data-panel-results] li').count(),17);
+ await page.keyboard.press('Enter'); assert.equal(await page.locator('[data-panel-results] > li').count(),17);
  await page.keyboard.press('Escape'); assert.equal(await page.evaluate(()=>document.activeElement.dataset.country),'United Kingdom');
  await page.keyboard.press('ArrowRight'); assert.equal(await page.evaluate(()=>document.activeElement.dataset.country),'United States');
  // Click inside Brazil's actual polygon, using a projected inland location.
@@ -82,7 +82,7 @@ const url = process.env.CIRS_ALUMNI_URL || 'http://localhost:8000/alumni.html';
  // Mobile, including actual touch events in emulation.
  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});
  mobile.on('pageerror',e=>errors.push(e.message)); await mobile.goto(url); await mobile.waitForTimeout(1200);
- await mobile.locator('[data-filter="india"]').tap(); assert.equal(await mobile.locator('[data-panel-results] li').count(),97);
+ await mobile.locator('[data-filter="india"]').tap(); assert.equal(await mobile.locator('[data-panel-results] > li').count(),97);
  assert.equal(Math.round((await mobile.locator('#ajc-panel').boundingBox()).height),844);
  await mobile.locator('#ajc-search').fill('IIT'); await mobile.screenshot({path:out + '/mobile-sheet.png'});
  await mobile.locator('[data-panel-close]').tap(); assert.equal(await mobile.locator('#ajc-panel').evaluate(e=>e.open),false);
@@ -98,7 +98,7 @@ const url = process.env.CIRS_ALUMNI_URL || 'http://localhost:8000/alumni.html';
   for(const q of await p.locator('.ajv').all()) assert(await q.isVisible());
   assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await p.screenshot({path:out + '/'+mode+'.png'});
-  if(mode==='reduced'){await p.locator('[data-filter="all"]').click();assert.equal(await p.locator('[data-panel-results] li').count(),166);}
+  if(mode==='reduced'){await p.locator('[data-filter="all"]').click();assert.equal(await p.locator('[data-panel-results] > li').count(),166);}
   await p.close();
  }
  report.push('Reduced motion and JavaScript disabled: all quotes, pathways, 166 directory entries and #pathways anchor remain available');

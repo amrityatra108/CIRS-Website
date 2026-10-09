@@ -1170,6 +1170,22 @@ body.alumni [data-panel-count]{ font-size:.85rem; color:var(--ink-soft); }
 body.alumni .ajc__results{ list-style:none; padding:0; margin:0; }
 body.alumni .ajc__results .ajd__row{ padding-block:14px; }
 body.alumni .ajc__locationNote{ font-size:.8rem; color:var(--ink-soft); line-height:1.5; }
+/* The alumni who registered an institution, under its row in the directory:
+   a gold-ruled list, name over CIRS years and course, set quieter than the
+   institution so the row still reads as one institution. */
+body.alumni .ajc__alumniHead{
+  margin:10px 0 0; padding-top:10px; border-top:1px solid var(--rule-soft);
+  font-size:.62rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--aj-gold-ink); font-weight:600;
+}
+body.alumni .ajc__alumni{
+  list-style:none; margin:8px 0 0; padding:0 0 0 14px;
+  border-left:1px solid var(--aj-gold);
+  display:grid; gap:9px;
+}
+body.alumni .ajc__alumni li{ display:grid; gap:1px; margin:0; }
+body.alumni .ajc__alumnusName{ font-size:.95rem; line-height:1.35; color:var(--ink); }
+body.alumni .ajc__alumnusMeta{ font-size:.8rem; line-height:1.45; color:var(--ink-soft); }
 body.alumni [data-panel-empty]{ padding:20px; background:var(--paper); line-height:1.6; }
 body.alumni [data-panel-empty][hidden]{ display:none; }
 
