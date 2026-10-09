@@ -19,10 +19,11 @@ Three families feed it:
   * The wall's original photographs, listed here: camera originals in
     assets/source/ (cropped and graded), the SPIC MACAY contact sheet (cut
     back into its six), the photographs the designer chose for the archive
-    (assets/source/archive/), and the 48 CIRS Cultural Gallery tiles
-    (assets/source/cultural-gallery/), which are Drive renditions at most 520px
-    on a side. Those 48 have no larger copy in this repository: their opened
-    1600px photographs stay on the school's Drive, so only their tiles are cut.
+    (assets/source/archive/), and the 47 CIRS Cultural Gallery photographs
+    from the school's Drive (assets/source/cultural-gallery/full/), kept as
+    Drive's image endpoint serves them (1600px wide at most; some began as
+    smaller designs and stay small). `--fetch` downloads any that are missing,
+    from the ids in tools/artswall.py.
   * Everything else the school's pages show of its arts, music, theatre,
     festivals and students' own making, listed in tools/culturegallery.py:
     each page's own record of its photographs, taken as it stands. Those are
@@ -33,7 +34,8 @@ Three families feed it:
 
 Nothing is upscaled. A photograph that arrived small stays small.
 
-    python3 tools/make-arts-wall.py
+    python3 tools/make-arts-wall.py            cut everything
+    python3 tools/make-arts-wall.py --fetch    first download any Drive photograph that is missing
 """
 
 import concurrent.futures
@@ -48,13 +50,14 @@ from PIL import Image, ImageOps
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
+import artswall  # noqa: E402
 import culturegallery  # noqa: E402
 import gallerygrade  # noqa: E402
 
 ROOT = os.path.dirname(HERE)
 SRC = os.path.join(ROOT, "assets/source")
 ARCHIVE = os.path.join(ROOT, "assets/source/archive")
-CULTURAL = os.path.join(ROOT, "assets/source/cultural-gallery")
+CULTURAL = os.path.join(ROOT, "assets/source/cultural-gallery/full")
 OUT = os.path.join(ROOT, "assets/img/arts")
 MANIFEST = os.path.join(HERE, "culture-gallery.json")
 
@@ -139,7 +142,7 @@ def jobs():
     for name, source, kind in CARRIED:
         out.append({"name": name, "src": os.path.join(ARCHIVE, source), "kind": kind})
     for name in CULTURAL_TILES:
-        out.append({"name": name, "src": os.path.join(CULTURAL, f"{name}.jpg"), "thumb_only": True})
+        out.append({"name": name, "src": os.path.join(CULTURAL, f"{name}.jpg"), "hairline": True})
     for item in culturegallery.collect():
         out.append({"name": item["name"], "src": os.path.join(ROOT, item["src"].replace("/", os.sep)),
                     "kind": item["kind"], "new": item})
@@ -159,30 +162,71 @@ def cut(job):
         im = im.crop(job["box"])
     if "focal" in job:
         im = trim(im, job["focal"])
-    if job.get("thumb_only"):
+    if job.get("hairline"):
         # Drive's renditions carry a hairline of white on one or two edges.
         im = im.crop((2, 2, im.width - 2, im.height - 2))
     kind = job.get("kind", "photo")
     name = job["name"]
     graded = gallerygrade.grade(gallerygrade.fit(im, FULL), kind)
 
-    result = {"name": name}
-    if not job.get("thumb_only"):
-        full = gallerygrade.sharpen(graded, 0.5)
-        full.save(os.path.join(OUT, f"{name}.webp"), "WEBP", quality=Q_FULL, method=6)
-        result.update(w=full.width, h=full.height,
-                      kb=os.path.getsize(os.path.join(OUT, f"{name}.webp")) // 1024)
+    full = gallerygrade.sharpen(graded, 0.5)
+    full.save(os.path.join(OUT, f"{name}.webp"), "WEBP", quality=Q_FULL, method=6)
+    result = {"name": name, "w": full.width, "h": full.height,
+              "kb": os.path.getsize(os.path.join(OUT, f"{name}.webp")) // 1024}
     tile = gallerygrade.sharpen(gallerygrade.fit(graded, THUMB), 0.6)
     tile.save(os.path.join(OUT, "thumbs", f"{name}.webp"), "WEBP", quality=Q_THUMB, method=6)
     result["tile_kb"] = os.path.getsize(os.path.join(OUT, "thumbs", f"{name}.webp")) // 1024
     return result
 
 
+def fetch_missing():
+    """Download the Drive photographs not already in assets/source/cultural-gallery/full/.
+
+    From the same endpoint the gallery used to request them from, at the same
+    width (1600px). Drive answers a refused or rate-limited request with an
+    HTML page and a 200, so a download is kept only if it decodes as an image.
+    """
+    import io
+    import urllib.request
+
+    os.makedirs(CULTURAL, exist_ok=True)
+    missing = [n for n in CULTURAL_TILES if not os.path.exists(os.path.join(CULTURAL, f"{n}.jpg"))]
+    for name in missing:
+        url = artswall.drive_image(name, 1600)
+        for attempt in range(4):
+            try:
+                request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (CIRS site build)"})
+                with urllib.request.urlopen(request, timeout=60) as response:
+                    body, kind = response.read(), response.headers.get("Content-Type", "")
+                if not kind.startswith("image/"):
+                    raise ValueError(f"not an image ({kind})")
+                im = Image.open(io.BytesIO(body))
+                im.load()
+                if max(im.size) < 300:
+                    raise ValueError(f"too small {im.size}")
+                buf = io.BytesIO()
+                im.convert("RGB").save(buf, "JPEG", quality=92)
+                with open(os.path.join(CULTURAL, f"{name}.jpg"), "wb") as f:
+                    f.write(body if im.format == "JPEG" else buf.getvalue())
+                print(f"  fetched {name}: {im.width}x{im.height}", flush=True)
+                break
+            except Exception as error:  # noqa: BLE001
+                print(f"  {name}: attempt {attempt + 1} failed: {error}", flush=True)
+                time.sleep(3 + attempt * 5)
+        else:
+            sys.exit(f"make-arts-wall: could not fetch {name}")
+        time.sleep(0.8)
+
+
 def main():
+    if "--fetch" in sys.argv[1:]:
+        fetch_missing()
     todo = jobs()
     missing = [j["src"] for j in todo if not os.path.exists(j["src"])]
     if missing:
-        sys.exit("make-arts-wall: not found — " + ", ".join(os.path.relpath(m, ROOT) for m in missing))
+        hint = ("  (the Drive photographs are fetched with: python3 tools/make-arts-wall.py --fetch)"
+                if any("cultural-gallery" in m for m in missing) else "")
+        sys.exit("make-arts-wall: not found — " + ", ".join(os.path.relpath(m, ROOT) for m in missing) + hint)
 
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)

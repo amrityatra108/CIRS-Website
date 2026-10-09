@@ -25,10 +25,11 @@ names, ensembles and productions are the school's to supply; none are invented
 here. A photograph carries a title (what a viewer is told it is) and, where its
 page also describes the frame, a description.
 
-The opened CIRS Cultural Gallery photographs remain in the school's shared
-Drive and use its 1600px image endpoint. Their tile renditions are kept
-locally so the moving wall appears immediately without downloading the large
-camera originals.
+The 47 CIRS Cultural Gallery photographs came from the school's shared Drive.
+DRIVE_IDS records where, and `python3 tools/make-arts-wall.py --fetch`
+downloads any that are missing into assets/source/cultural-gallery/full/. The
+wall serves its own graded copies of them, like every other photograph, rather
+than asking Drive for each one when it is opened.
 """
 
 import json
@@ -133,6 +134,8 @@ ORIGINAL = [
 
 DIR = "assets/img/arts"
 
+# Where each CIRS Cultural Gallery photograph came from: its file in the school's
+# shared Drive. Used only to fetch the source copy; the wall serves local files.
 DRIVE_IDS = {
     "drive-01": "1ovsB76NFcBwwwZaMEAT1YkaZoUiO4w1e",
     "drive-02": "1D5yQyB1q4xdDp-Q5iy0u4CfGIY8K-w6w",
@@ -190,8 +193,6 @@ def drive_image(name, width):
 
 
 def full(name):
-    if name in DRIVE_IDS:
-        return drive_image(name, 1600)
     return f"{DIR}/{name}.webp"
 
 
