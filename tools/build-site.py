@@ -477,7 +477,7 @@ PAGES = {
         # header but no footer, and no banner above the fold, because it is
         # all fold. See "wall" in build() below.
         "wall": True,
-        "cache_suffix": "-gallery-1",
+        "cache_suffix": "-gallery-2",
     },
     # ---- pages in preparation -------------------------------------------
     # Each is a real page with a real banner and a plain account of what will

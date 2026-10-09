@@ -22,8 +22,9 @@ All of them are cut by tools/make-arts-wall.py under one grade
 Captions describe what is in the frame and nothing more. Where a photograph
 was already captioned for the archive, that caption is kept as it was. Dates,
 names, ensembles and productions are the school's to supply; none are invented
-here. A photograph carries a title (what a viewer is told it is) and, where its
-page also describes the frame, a description.
+here. A photograph carries a title and, where its page also describes the frame,
+a description. Neither is printed on an opened photograph (the wall shows only
+the photograph); they are the tile's and the dialog's accessible names.
 
 The 47 CIRS Cultural Gallery photographs came from the school's shared Drive.
 DRIVE_IDS records where, and `python3 tools/make-arts-wall.py --fetch`
