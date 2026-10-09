@@ -27,7 +27,7 @@ The 2026 IB and CBSE results have no verified event photograph; their News brief
 
 ## Anand Utsav 2026
 
-The seventeen photographs in `assets/img/news/anand-utsav/` are the ones published with [Chinmaya Mission's report of the festival](https://www.chinmayamission.com/global/news/anand-utsav-at-cirs-family-values-creativity), in the order that page gives them (the first is its header image). Each is on `https://images.chinmayamission.com/uploads/<id>.webp`; `tools/anandutsav.py` lists the ids and `tools/make-anand-utsav.py` fetches and cuts them. The report prints no captions, so none are written.
+The cover of the article is the school's own photograph, `0C9A1479.JPG`, from its Drive (`https://drive.google.com/file/d/1942Xtcq5qlhi8luVVA7RCHT3DZMYzw7Q/view`). The seventeen after it in `assets/img/news/anand-utsav/` are the ones published with [Chinmaya Mission's report of the festival](https://www.chinmayamission.com/global/news/anand-utsav-at-cirs-family-values-creativity), in the order that page gives them (the first is its header image). Each is on `https://images.chinmayamission.com/uploads/<id>.webp`; `tools/anandutsav.py` lists the ids and `tools/make-anand-utsav.py` fetches and cuts them. The report prints no captions, so none are written.
 
 ## Date and content sources
 
