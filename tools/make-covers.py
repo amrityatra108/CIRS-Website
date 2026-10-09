@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Derive the Crossroads cover thumbnails the archive page ships.
 
-The school's own cover scans live in assets/source/crossroads/ at print
+The school's own cover scans (JPEG, or PNG as some issues arrive) live in
+assets/source/crossroads/ at print
 resolution — 20 MB across the run, and never deployed. Two smaller copies
 are, both cropped to the 5:7 the page draws them in:
 
@@ -39,19 +40,21 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     WALL.mkdir(parents=True, exist_ok=True)
     made = 0
-    for path in sorted(SRC.glob("issue-*.jpg")):
+    scans = sorted(list(SRC.glob("issue-*.jpg")) + list(SRC.glob("issue-*.png")))
+    for path in scans:
+        name = path.stem + ".jpg"      # a PNG scan is served as a JPEG all the same
         im = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
         # Cover-fit from the top: a magazine cover's masthead is at the
         # head of the page, and that is the part worth keeping when the
         # scan is taller than 5:7.
         card = ImageOps.fit(im, SIZE, Image.LANCZOS, centering=(0.5, 0.32))
-        card.save(OUT / path.name, "JPEG", quality=QUALITY, optimize=True,
+        card.save(OUT / name, "JPEG", quality=QUALITY, optimize=True,
                   progressive=True)
         if int(path.stem.split("-")[1]) in crossroads.WALL_LEAVES_OUT:
-            (WALL / path.name).unlink(missing_ok=True)
+            (WALL / name).unlink(missing_ok=True)
         else:
             card.resize(WALL_SIZE, Image.LANCZOS).save(
-                WALL / path.name, "JPEG", quality=WALL_QUALITY, optimize=True,
+                WALL / name, "JPEG", quality=WALL_QUALITY, optimize=True,
                 progressive=True)
         made += 1
 
