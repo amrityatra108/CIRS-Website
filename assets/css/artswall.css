@@ -112,19 +112,19 @@ body.wall .p1-hero-text.soft{ filter:blur(40px); }
 body.wall .p1-hud{ position:fixed; z-index:80; font-size:var(--fs-xs); text-transform:none; letter-spacing:.06em; opacity:.5; color:var(--gold); font-family:var(--font-body); pointer-events:none; }
 body.wall .hud-br{ bottom:34px; right:34px; }
 
-/* --- THE OPENED PHOTOGRAPH --- */
-body.wall .wallmodal{ display:none; position:fixed; inset:0; background:rgba(17,17,15,.98); -webkit-backdrop-filter:blur(50px); backdrop-filter:blur(50px); z-index:5000000; opacity:0; transition:opacity .45s ease; flex-direction:row; touch-action:pan-y; -webkit-user-select:text; user-select:text; }
+/* --- THE OPENED PHOTOGRAPH ---
+   Only the photograph: it fills the window, and the one thing beside it is
+   the prompt in the corner that says how to leave. No title, no caption, no
+   panel. (The photograph still carries its alt text, and the dialog its
+   label, for anyone who cannot see it.) */
+body.wall .wallmodal{ display:none; position:fixed; inset:0; background:rgba(10,9,8,.97); -webkit-backdrop-filter:blur(50px); backdrop-filter:blur(50px); z-index:5000000; opacity:0; transition:opacity .35s ease; touch-action:pan-y; }
 body.wall .wallmodal.is-open{ opacity:1; }
-body.wall .m-left{ flex:1.8; min-width:0; min-height:0; height:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:40px; box-sizing:border-box; }
-body.wall .m-right{ flex:1.2; min-width:0; height:100%; background:var(--dark-deep); padding:100px 60px; display:flex; flex-direction:column; font-family:var(--font-body); overflow-y:auto; border-left:1px solid rgba(var(--gold-rgb),.2); box-sizing:border-box; }
-body.wall .m-right h3{ font-family:var(--font-display); font-size:clamp(1.7rem, 3vw, 2.4rem); font-weight:500; color:var(--gold-lit); margin:0 0 20px; line-height:1.12; overflow-wrap:anywhere; }
-body.wall .m-right p{ color:var(--on-dark-soft); line-height:1.8; font-size:var(--fs-sm); white-space:pre-line; margin:0; }
-body.wall .m-meta{ font-size:var(--fs-xs); color:rgba(var(--gold-rgb),.75); border-top:1px solid rgba(var(--gold-rgb),.25); padding-top:20px; margin-bottom:40px; letter-spacing:.06em; text-transform:none; }
-body.wall .m-close{ position:absolute; top:30px; right:30px; padding:10px; color:var(--gold); font-size:var(--fs-xs); letter-spacing:.06em; cursor:pointer; transition:opacity .3s; z-index:5000001; opacity:.65; font-family:var(--font-body); background:none; border:0; border-radius:6px; }
-body.wall .m-close:hover, body.wall .m-close:focus-visible{ opacity:1; }
-body.wall .m-close:focus-visible{ outline:1px solid var(--gold); outline-offset:2px; }
+body.wall .m-photo{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:clamp(14px, 3vmin, 36px); box-sizing:border-box; }
+body.wall .m-close{ position:absolute; top:22px; right:24px; padding:9px 16px; color:var(--gold-lit); font-size:var(--fs-xs); letter-spacing:.06em; cursor:pointer; transition:opacity .3s, background .3s; z-index:5000001; opacity:1; font-family:var(--font-body); background:rgba(10,9,8,.8); border:1px solid rgba(var(--gold-rgb),.35); border-radius:999px; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+body.wall .m-close:hover, body.wall .m-close:focus-visible{ background:rgba(10,9,8,.95); }
+body.wall .m-close:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 body.wall .m-close:focus:not(:focus-visible){ outline:none; }
-body.wall #m-media-cont img{ max-width:95%; max-height:90vh; width:auto; height:auto; object-fit:contain; border-radius:4px; box-shadow:0 20px 80px rgba(17,17,15,.6), 0 0 0 1px rgba(var(--gold-rgb),.25); }
+body.wall #m-media-cont img{ display:block; max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; border-radius:3px; box-shadow:0 24px 90px rgba(0,0,0,.65), 0 0 0 1px rgba(var(--gold-rgb),.18); -webkit-user-drag:none; }
 
 body.wall .noscript{ position:fixed; inset:0; display:grid; place-items:center; padding:24px; text-align:center; font-family:var(--font-body); color:var(--gold-lit); z-index:10; }
 
@@ -135,12 +135,9 @@ body.wall .noscript{ position:fixed; inset:0; display:grid; place-items:center; 
   body.wall .hud-br{ bottom:calc(20px + env(safe-area-inset-bottom)); right:18px; }
   body.wall .hud-br{ left:0; right:0; text-align:center; }
 
-  body.wall .wallmodal{ flex-direction:column; -webkit-backdrop-filter:none; backdrop-filter:none; background:var(--dark-ink); }
-  body.wall .m-left{ flex:0 0 auto; height:auto; padding:calc(64px + env(safe-area-inset-top)) 16px 12px; }
-  body.wall #m-media-cont img{ max-width:100%; max-height:56vh; }
-  body.wall .m-right{ flex:1 1 auto; height:auto; padding:22px 22px calc(32px + env(safe-area-inset-bottom)); border-left:0; border-top:1px solid rgba(var(--gold-rgb),.2); }
-  body.wall .m-meta{ margin-bottom:18px; padding-top:14px; }
-  body.wall .m-close{ top:calc(6px + env(safe-area-inset-top)); right:4px; min-height:48px; padding:14px; opacity:.85; }   /* >= 44px tap target */
+  body.wall .wallmodal{ -webkit-backdrop-filter:none; backdrop-filter:none; background:var(--dark-ink); }
+  body.wall .m-photo{ padding:calc(60px + env(safe-area-inset-top)) 10px calc(14px + env(safe-area-inset-bottom)); }
+  body.wall .m-close{ top:calc(8px + env(safe-area-inset-top)); right:10px; min-height:44px; padding:11px 16px; opacity:.9; }   /* >= 44px tap target */
   body.wall #p1-viewport::after{ background:linear-gradient(180deg, rgba(17,17,15,.8) 0, rgba(17,17,15,.5) 72px, rgba(17,17,15,0) 140px), linear-gradient(90deg, rgba(17,17,15,.42), transparent 22%, transparent 78%, rgba(17,17,15,.42)), radial-gradient(ellipse at 50% 48%, transparent 34%, rgba(17,17,15,.14) 72%, rgba(17,17,15,.34) 100%); }
   /* The title spans nearly the whole width of a phone, so its scrim does too. */
   body.wall .p1-hero{ --hero-scrim:78% 26%; }

@@ -52,7 +52,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
     const wrap = $('p1-wrap'), stage = $('p1-stage'), ring = $('cursor-ring'), dot = $('cursor-dot');
     const titleSharp = $('p1-title'), titleSoft = $('p1-title-soft'), hintEl = $('p1-hint');
     const hero = document.querySelector('.p1-hero');
-    const modal = $('master-modal'), mediaCont = $('m-media-cont'), mTitle = $('m-title'), mMeta = $('m-meta'), mDesc = $('m-desc'), closeBtn = $('m-close');
+    const modal = $('master-modal'), mediaCont = $('m-media-cont'), closeBtn = $('m-close');
 
     const PERSP = 1120;                       // must match #p1-viewport perspective
     const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -70,7 +70,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
         touchMode = on;
         document.body.classList.toggle('is-touch', on);
         hintEl.textContent = on ? 'Swipe around the cylinder // Tap to open' : 'Drag around the cylinder // Scroll // Click to open';
-        closeBtn.textContent = on ? '[ CLOSE ]' : '[ ESC // CLOSE ]';
+        closeBtn.textContent = on ? 'Tap to close' : 'Press Esc to exit';
     }
     setTouchMode(touchMode);
     // No custom cursor, tilt or focus until the mouse actually moves in. Before that the
@@ -462,21 +462,54 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
 
     // ------------------------------------------------------------------ MODAL
     let modalToken = 0;
+
+    // The photograph is the whole point of the opened view, so it is drawn as
+    // large as the window allows. A small original is only enlarged so far
+    // (PHOTO_UPSCALE) before it would turn soft; the tile copy shown first is
+    // stretched to the same box so the swap to the full photograph does not
+    // jump.
+    const PHOTO_UPSCALE = 1.35;
+    let photo = null;
+    function fitPhoto(nw, nh, cap) {
+        if (!photo || !nw || !nh) return;
+        const cs = getComputedStyle(mediaCont);
+        const aw = mediaCont.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+        const ah = mediaCont.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+        if (aw <= 0 || ah <= 0) return;
+        const k = Math.min(aw / nw, ah / nh, cap);
+        photo.img.style.width = Math.round(nw * k) + 'px';
+        photo.img.style.height = Math.round(nh * k) + 'px';
+    }
+
     function openModal(i, from) {
         const d = plates[i]; if (!d) return;
         modalActive = true; modalOpenedAt = performance.now();
         lastFocus = from || document.activeElement;
         lastPlate = i;
         drag.active = false; p1.vx = p1.vy = 0; p1.wheelX = p1.wheelY = 0;
-        mTitle.textContent = d.title;
-        mDesc.textContent = d.desc || 'CIRS · Siruvani, Coimbatore';
-        mMeta.textContent = d.cat;
+        // Nothing is written on the opened photograph. Its title stays as the
+        // dialog's label and the image's alt text, for people who cannot see it.
+        modal.setAttribute('aria-label', d.title);
         const full = d.src, thumb = d.thumb || d.src, token = ++modalToken;
         mediaCont.textContent = '';
         // Show the tile copy at once, swap in the photograph when it has loaded.
-        const img = document.createElement('img'); img.alt = d.title; img.src = thumb; mediaCont.appendChild(img);
+        // Either way it is drawn as large as the window allows (fitPhoto).
+        const img = document.createElement('img'); img.alt = d.title; img.draggable = false;
+        mediaCont.appendChild(img);
+        photo = { img, natural: null, single: full === thumb };
+        img.onload = () => { if (!photo.natural) fitPhoto(img.naturalWidth, img.naturalHeight, photo.single ? PHOTO_UPSCALE : Infinity); };
         img.onerror = () => { if (img.getAttribute('src') !== full) img.src = full; };
-        if (full !== thumb) { const hi = new Image(); hi.decoding = 'async'; hi.onload = () => { if (token === modalToken) img.src = full; }; hi.src = full; }
+        img.src = thumb;
+        if (full !== thumb) {
+            const hi = new Image(); hi.decoding = 'async';
+            hi.onload = () => {
+                if (token !== modalToken) return;
+                photo.natural = [hi.naturalWidth, hi.naturalHeight];
+                img.src = full;
+                fitPhoto(hi.naturalWidth, hi.naturalHeight, PHOTO_UPSCALE);
+            };
+            hi.src = full;
+        }
         modal.style.display = 'flex'; modal.setAttribute('aria-hidden', 'false');
         modal.removeAttribute('inert');
         void modal.offsetWidth; modal.classList.add('is-open');
@@ -535,7 +568,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
     }
 
     closeBtn.addEventListener('click', closeModal);
-    // Tap outside the photo to close -- ignoring the click that the opening tap itself produces.
+    // A click anywhere closes it, the photograph included -- ignoring the click that the opening tap itself produces.
     modal.addEventListener('click', e => {
         const justOpened = performance.now() - modalOpenedAt < 400;
         if (justOpened) {
@@ -548,7 +581,7 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
             });
             return;
         }
-        if (e.target === modal || e.target === mediaCont) closeModal();
+        closeModal();
     });
 
     window.addEventListener('keydown', e => {
@@ -617,6 +650,8 @@ const plates = [...document.getElementById('wall-plates').content.querySelectorA
             // Place the tiles now rather than waiting for the next animation frame, which
             // a frame that was hidden or zero-sized may not deliver straight away.
             if (!modalActive) { p1.frame(16.7, performance.now()); plexus.draw(16.7); }
+            else if (photo) fitPhoto(...(photo.natural || [photo.img.naturalWidth, photo.img.naturalHeight]),
+                                     photo.natural || photo.single ? PHOTO_UPSCALE : Infinity);
         }, 150);
     }
     window.addEventListener('resize', onResize);

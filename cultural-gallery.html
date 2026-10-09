@@ -24,14 +24,14 @@
 <meta name="twitter:title" content="Arts, Music & Theatre">
 <meta name="twitter:description" content="Music, theatre, the visual arts, festivals and students' own work at Chinmaya International Residential School, as a wall of the school's photographs.">
 <meta name="twitter:image" content="assets/img/og.jpg">
-<link rel="preload" href="assets/js/navigation.js?b=115-gallery-1-core-3" as="script" fetchpriority="high">
+<link rel="preload" href="assets/js/navigation.js?b=115-gallery-2-core-3" as="script" fetchpriority="high">
 <!-- Self-hosted with retained licence notices (assets/fonts/licenses/). Only the two
      faces every first screen sets are preloaded: Mona Sans and the display face. -->
 <link rel="preload" href="assets/fonts/monasans-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bodonimoda-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css?b=115-gallery-1">
-<link rel="stylesheet" href="assets/css/cirs.css?b=115-gallery-1">
-<link rel="stylesheet" href="assets/css/pages.css?b=115-gallery-1-lightbox-2">
+<link rel="stylesheet" href="assets/css/fonts.css?b=115-gallery-2">
+<link rel="stylesheet" href="assets/css/cirs.css?b=115-gallery-2">
+<link rel="stylesheet" href="assets/css/pages.css?b=115-gallery-2-lightbox-2">
 <!-- The opening curtain is a fixed, opaque, full-window panel that cirs.js
      removes once it has played. With scripting off nothing removes it, and
      it covers the page on every page of this site. One rule, applied only
@@ -40,9 +40,9 @@
      kind of fallback: cirs.js unpins a footer taller than the window, and
      without it a phone could never scroll up to the top of the footer. -->
 <noscript><style>.curtain{display:none}.footer-wrap{position:relative}</style></noscript>
-<link rel="stylesheet" href="assets/css/artswall.css?b=115-gallery-1">
-<link rel="stylesheet" href="assets/css/typography.css?b=115-gallery-1">
-<link rel="stylesheet" href="assets/css/drawer.css?b=115-gallery-1-nav-5">
+<link rel="stylesheet" href="assets/css/artswall.css?b=115-gallery-2">
+<link rel="stylesheet" href="assets/css/typography.css?b=115-gallery-2">
+<link rel="stylesheet" href="assets/css/drawer.css?b=115-gallery-2-nav-5">
 <noscript><style>.nv-header{opacity:1!important;visibility:visible!important;--nav-name:var(--ink);--nav-sub:var(--ink-mute);--nav-text:var(--ink);--nav-icon:var(--ink-soft);--nav-lift:none}.nv-header__bar{width:min(calc(100% - 2 * var(--nv-pill-inset)),var(--nv-pill-max))!important;height:var(--nv-pill-h)!important;margin-top:var(--nv-pill-inset)!important;border-radius:999px!important;background-color:var(--paper)!important;border-color:var(--rule)!important}</style></noscript>
 </head>
 
@@ -275,21 +275,16 @@
   </div>
 </div>
 <main id="main">
-<script src="assets/js/navigation.js?b=115-gallery-1-core-3"></script>
+<script src="assets/js/navigation.js?b=115-gallery-2-core-3"></script>
 <div id="grain-overlay"></div>
 <canvas id="global-canvas" aria-hidden="true"></canvas>
 
 <div id="cursor-ring" aria-hidden="true"></div>
 <div id="cursor-dot" aria-hidden="true"></div>
 
-<div id="master-modal" class="wallmodal" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-hidden="true" inert>
-  <button class="m-close" id="m-close" type="button">[ ESC // CLOSE ]</button>
-  <div class="m-left" id="m-media-cont"></div>
-  <div class="m-right" id="m-info-pane">
-    <h3 id="m-title">Title</h3>
-    <div class="m-meta" id="m-meta">Arts, Music &amp; Theatre</div>
-    <p id="m-desc">CIRS &middot; Siruvani, Coimbatore</p>
-  </div>
+<div id="master-modal" class="wallmodal" role="dialog" aria-modal="true" aria-label="Photograph" aria-hidden="true" inert>
+  <button class="m-close" id="m-close" type="button">Press Esc to exit</button>
+  <div class="m-photo" id="m-media-cont"></div>
 </div>
 
 <section id="p1-wrap" tabindex="-1" aria-label="The CIRS Cultural Gallery: the school's arts, music, theatre, festivals and students' own work, as an infinite cylindrical field of photographs. Drag, swipe, scroll or use the arrow keys to explore; select a photograph to open it.">
@@ -1229,11 +1224,11 @@ The Crossroads, Issue 32 · August 2026" data-cat="Art Attack · Painting or dra
      assets/vendor/README.md for the versions and where they came from.
      defer keeps them in document order, so GSAP is defined before
      ScrollTrigger looks for it. -->
-<script src="assets/vendor/gsap.min.js?b=115-gallery-1" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js?b=115-gallery-1" defer></script>
-<script src="assets/vendor/lenis.min.js?b=115-gallery-1" defer></script>
-<script src="assets/js/cirs.js?b=115-gallery-1-header-5" defer></script>
-<script src="assets/js/pages.js?b=115-gallery-1" defer></script>
-<script src="assets/js/artswall.js?b=115-gallery-1-focus-1" defer></script>
+<script src="assets/vendor/gsap.min.js?b=115-gallery-2" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js?b=115-gallery-2" defer></script>
+<script src="assets/vendor/lenis.min.js?b=115-gallery-2" defer></script>
+<script src="assets/js/cirs.js?b=115-gallery-2-header-5" defer></script>
+<script src="assets/js/pages.js?b=115-gallery-2" defer></script>
+<script src="assets/js/artswall.js?b=115-gallery-2-focus-1" defer></script>
 </body>
 </html>
