@@ -16,23 +16,28 @@ The names and the facts are the school's. Where this site already reports the
 same days (the schedule and the Vidya Vaibhav projects, from the October 2026
 bulletin) the two agree.
 
-The cover is the school's own photograph, a stage tableau from the festival
-that the school supplied from its Drive on 9 October 2026 (0C9A1479.JPG). The
-seventeen after it are the ones published with Chinmaya Mission's report of the
-festival, in the order that page gives them. The first of those is the report's
-own lead, a photograph of an Award Ceremony backdrop; it stands in the text
-beside the Chinmaya Gaurav Awards, because the frame itself says what it is, and
-the other sixteen close the article as a gallery.
+The cover is the school's own header design for the News page, "CIRS News Page
+Header": three photographs side by side, made in the school's Canva and supplied
+on 9 October 2026 (it replaces the stage photograph 0C9A1479.JPG, from the
+school's Drive, that the cover was before). The seventeen after it are the ones
+published with Chinmaya Mission's report of the festival, in the order that page
+gives them. The first of those is the report's own lead, a photograph of an
+Award Ceremony backdrop; it stands in the text beside the Chinmaya Gaurav
+Awards, because the frame itself says what it is, and the other sixteen close
+the article as a gallery.
 
-None of them is in the repository: tools/make-anand-utsav.py fetches them from
-the addresses below and cuts them into assets/img/news/anand-utsav/. Neither
-source gives captions, so none is written. Each alt text describes only what the
-frame shows. Nobody is named from a face, and a frame is not tied to a part of
-the programme that nothing in it says.
+The seventeen are not in the repository: tools/make-anand-utsav.py fetches them
+from the addresses below and cuts them into assets/img/news/anand-utsav/. The
+cover is a design, not a file at an address, so its export (a 1920x1080 PNG) is
+kept as the master at COVER_MASTER. Neither source gives captions, so none is
+written. Each alt text describes only what the frame shows. Nobody is named
+from a face, and a frame is not tied to a part of the programme that nothing in
+it says.
 
     PHOTOS    (where it is kept, id there, alt text); "mission" is a file on
-              Chinmaya Mission's image server and "drive" is a file in the
-              school's Google Drive, shared by link
+              Chinmaya Mission's image server, "drive" is a file in the
+              school's Google Drive, shared by link, and "canva" is a design in
+              the school's Canva, kept as COVER_MASTER
 """
 import os
 
@@ -44,6 +49,8 @@ IMG_DIR = "assets/img/news/anand-utsav"
 SOURCE_URL = "https://www.chinmayamission.com/global/news/anand-utsav-at-cirs-family-values-creativity"
 IMAGE_HOST = "https://images.chinmayamission.com/uploads/"
 DRIVE_DOWNLOAD = "https://drive.google.com/uc?export=download&id="
+CANVA_DESIGN = "https://www.canva.com/design/DAHXg_OsUHE/"
+COVER_MASTER = "assets/source/anand-utsav/header.png"
 
 SLUG = "anand-utsav-2026"
 TITLE = "Anand Utsav 2026: CIRS Celebrates Family, Values and Creativity"
@@ -51,10 +58,11 @@ DEK = ("The school’s annual celebration and CIRS Family Meet, held from 5 to 7
        "brought students, parents and teachers together.")
 
 PHOTOS = [
-    ("drive", "1942Xtcq5qlhi8luVVA7RCHT3DZMYzw7Q",
-     "A row of performers in orange and period costumes on a stage, in front of a screen showing the Indian flag held up "
-     "by a raised arm, with a woman in an orange sari seated on white steps at the front and members of the audience "
-     "in the foreground"),
+    ("canva", "DAHXg_OsUHE",
+     "Three photographs side by side: adults walking along a paved path under tall trees; children in bright "
+     "costumes on a stage around a person in saffron, in front of a large glowing image of a white-bearded figure "
+     "in robes with his arms crossed; and a boy in a pale shirt with his eyes closed and his palms together, with "
+     "people seated behind him"),
     ("mission", "dede5f7e-3a69-4293-ac2d-f9952a811884",
      "Ten people standing in a row on a stage under a blue backdrop that reads Award Ceremony, Anand Utsav 2026, "
      "a swami in saffron among them"),
@@ -183,8 +191,10 @@ def hero_path(width):
 
 
 def photo_url(n):
-    """Where photograph n is fetched from."""
+    """Where photograph n is fetched from (the cover is kept, at COVER_MASTER)."""
     source, ident, _alt = PHOTOS[n - 1]
+    if source == "canva":
+        return COVER_MASTER
     if source == "drive":
         return f"{DRIVE_DOWNLOAD}{ident}"
     return f"{IMAGE_HOST}{ident}.webp"

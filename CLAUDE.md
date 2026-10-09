@@ -145,8 +145,9 @@ does not say.
 
 News's report of Anand Utsav 2026 (`anand-utsav-2026.html`, the first story in the carousel and the
 archive) is written from `tools/anandutsav.py`: the school's own text, with the three small corrections
-listed in that file's docstring, the school's own cover photograph (from its Drive), and seventeen
-photographs published with Chinmaya Mission's report of the festival. The photographs are not in the
+listed in that file's docstring, the school's own cover (its "CIRS News Page Header" design from Canva,
+kept as the master `assets/source/anand-utsav/header.png`, which `make-anand-utsav.py --cover` cuts), and
+seventeen photographs published with Chinmaya Mission's report of the festival. Those are not in the
 repository; `tools/make-anand-utsav.py` fetches them from the addresses recorded there and cuts
 `assets/img/news/anand-utsav/`. Neither source has captions, so there are none: alt text describes the frame only, nobody is named from a face, and a frame is not tied
 to a part of the programme that nothing in it says.
