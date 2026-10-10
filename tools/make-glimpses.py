@@ -14,6 +14,9 @@ object-fit and a single source has to survive all of them.
 Anything whose subject is a logo, a banner or signage is left out.
 
     python3 tools/make-glimpses.py
+
+This clears the folder, so run tools/make-home-sizes.py after it: the page's
+srcset also names the 256px WebP cut of every tile.
 """
 
 import glob

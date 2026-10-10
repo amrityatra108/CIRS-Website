@@ -1313,20 +1313,27 @@ main{ position:relative; z-index:1; background:var(--paper); }
    opening zooms out to here and stops. */
 .hseq__mark--p1{ inset:4vh 6vw 10vh; }
 
+/* The plate is always the full stage. The script reveals it through a
+   clip-path and moves the photograph inside it with a transform, so the
+   sequence never changes the size of a box: it used to scrub the plate's
+   top, right, bottom and left, which re-laid-out the plate, resized the
+   decoding video and counted as layout shift on every scroll frame. */
 .hseq__plate{
   position:absolute; z-index:1;
   overflow:hidden;
-  will-change:transform, clip-path;
   border-radius:0;
-  /* Set by the script from the marks on the first frame. The inset
-     here is only what the plate wears before the script has measured
-     anything, and is P0 exactly, so an unstyled first paint is the
-     full-bleed opening rather than a collapsed box. */
   inset:0;
 }
+/* Before the script has measured anything the video covers the plate by
+   object-fit, which is P0 exactly. Once it has, the script gives the element
+   the rectangle that cover would have drawn (same ratio, so nothing is
+   cropped or stretched) and scales it from its own top-left. */
 .hseq__video{
   width:100%; height:100%;
+  max-width:none;
   object-fit:cover; object-position:center 42%;
+  transform-origin:0 0;
+  will-change:transform;
 }
 
 /* Lighter than a legible-at-any-cost wash: the campus is the point of
@@ -1335,6 +1342,8 @@ main{ position:relative; z-index:1; background:var(--paper); }
    the painted pixels by tools/check-contrast.py, not guessed. */
 .hseq__scrim{
   position:absolute; inset:0; z-index:2; pointer-events:none;
+  transform-origin:0 0;
+  will-change:transform, opacity;
   background:
     linear-gradient(to top, rgba(24,24,21,.95) 0%, rgba(24,24,21,.86) 18%,
                     rgba(24,24,21,.64) 38%, rgba(24,24,21,.20) 70%,
@@ -1373,4 +1382,4 @@ main{ position:relative; z-index:1; background:var(--paper); }
 }
 .hseq.is-static .hseq__track{ height:auto; }
 .hseq.is-static .hseq__stage{ position:relative; }
-.hseq.is-static .hseq__plate{ inset:0; border-radius:0; }
+.hseq.is-static .hseq__plate{ inset:0; border-radius:0; clip-path:none; }

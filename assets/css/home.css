@@ -193,7 +193,14 @@ body.home .glimpse .marker .sc{
   color:var(--ink-soft);
 }
 body.home .glimpse .marker::before{ border-color:var(--gold-ink); }
-body.home .glimpse .gt{ background:var(--paper-3); }
+/* The tone alternates between neighbours every few seconds. It is a filter on
+   the tile, so without a transition half the wall changed between colour and
+   grey in a single frame; with one the change is the same dissolve the frames
+   themselves make, at the pace the shared sheet gives a hovered tile. */
+body.home .glimpse .gt{
+  background:var(--paper-3);
+  transition:filter .55s var(--e);
+}
 body.home .glimpse .gt img{
   filter:none;
 }
