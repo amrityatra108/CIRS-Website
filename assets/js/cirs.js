@@ -551,6 +551,7 @@
 
     var stage = $(".hseq__stage", seq),
         plate = $(".hseq__plate", seq),
+        video = $(".hseq__video", seq),
         type  = $(".hseq__type", seq),
         scrim = $(".hseq__scrim", seq),
         marks = $$(".hseq__mark", seq);
@@ -563,20 +564,53 @@
 
     // Measured on refresh, never cached across one. A mark's box is
     // read relative to the stage, which is the plate's containing
-    // block, so these are exactly the values the plate's inset takes.
-    var P = [];
+    // block, so these are exactly the insets the plate's box takes.
+    //
+    // The plate itself never changes size. Scrubbing its top, right,
+    // bottom and left was a layout on every scroll frame (the plate, then
+    // the decoding video inside it), and the browser counted each one as
+    // layout shift. It is now always the whole stage, revealed through a
+    // clip-path, with the photograph and the scrim moved by transform to
+    // the place object-fit would have put them in the smaller box. The
+    // marks in the stylesheet are still the only authority on where the
+    // sequence starts and stops.
+    var P = [], W = 0, H = 0, cover = null;
+    function pct(v, fallback) {
+      var n = parseFloat(v);
+      return isFinite(n) ? n / 100 : fallback;
+    }
     function measure() {
       var base = stage.getBoundingClientRect();
+      W = base.width; H = base.height;
       P = marks.map(function (m) {
         var r = m.getBoundingClientRect();
         return {
           top:    r.top - base.top,
           right:  base.right - r.right,
           bottom: base.bottom - r.bottom,
-          left:   r.left - base.left,
-          w:      r.width
+          left:   r.left - base.left
         };
       });
+
+      cover = null;
+      if (!video || !W || !H) return;
+      // The rectangle object-fit: cover draws the film in at P0, from the
+      // film's own ratio and the sheet's object-position (which a media
+      // query changes on a portrait window).
+      var iw = parseFloat(video.getAttribute("width")) || 1280,
+          ih = parseFloat(video.getAttribute("height")) || 720;
+      var at = (window.getComputedStyle(video).objectPosition || "50% 50%").split(/\s+/);
+      var px = pct(at[0], .5), py = pct(at[1], .5);
+      var s0 = Math.max(W / iw, H / ih);
+      cover = {
+        iw: iw, ih: ih, px: px, py: py, s0: s0,
+        x0: (W - iw * s0) * px, y0: (H - ih * s0) * py
+      };
+      video.style.width  = (iw * s0).toFixed(2) + "px";
+      video.style.height = (ih * s0).toFixed(2) + "px";
+      video.style.left   = cover.x0.toFixed(2) + "px";
+      video.style.top    = cover.y0.toFixed(2) + "px";
+      video.style.position = "absolute";
     }
     measure();
 
@@ -592,11 +626,24 @@
       };
     }
 
-    function paint(p) {
-      plate.style.top    = p.top    + "px";
-      plate.style.right  = p.right  + "px";
-      plate.style.bottom = p.bottom + "px";
-      plate.style.left   = p.left   + "px";
+    function n2(v) { return (Math.round(v * 100) / 100); }
+
+    function paint(p, radius) {
+      var w = W - p.left - p.right, h = H - p.top - p.bottom;
+      plate.style.clipPath = "inset(" + n2(p.top) + "px " + n2(p.right) + "px " +
+        n2(p.bottom) + "px " + n2(p.left) + "px round " + n2(radius) + "px)";
+      if (cover) {
+        // object-fit: cover in a w by h box, positioned by object-position.
+        var s = Math.max(w / cover.iw, h / cover.ih);
+        var x = p.left + (w - cover.iw * s) * cover.px;
+        var y = p.top  + (h - cover.ih * s) * cover.py;
+        video.style.transform = "translate3d(" + n2(x - cover.x0) + "px," +
+          n2(y - cover.y0) + "px,0) scale(" + (Math.round(s / cover.s0 * 10000) / 10000) + ")";
+      }
+      if (scrim) {
+        scrim.style.transform = "translate3d(" + n2(p.left) + "px," + n2(p.top) + "px,0) scale(" +
+          (Math.round(w / W * 10000) / 10000) + "," + (Math.round(h / H * 10000) / 10000) + ")";
+      }
     }
 
     // One travel: P0, the full-bleed opening, to P1, the inset frame the
@@ -621,11 +668,10 @@
 
     function frame(t) {
       var u = ease(Math.min(t / ARRIVE, 1));
-      paint(at(P[0], P[1], u));
       // The corner arrives with the frame rather than being on from the
       // start, so the full-bleed opening has no rounded edge against
       // the window.
-      plate.style.borderRadius = (u * 14) + "px";
+      paint(at(P[0], P[1], u), u * 14);
       // The scrim exists so the headline can be read over the photograph,
       // and at P1 the headline still sits over the foot of the plate — so
       // the wash lifts only as far as the opening's own mid-point, where
@@ -1281,9 +1327,9 @@
       cue.innerHTML = "Scroll down <span>&darr;</span>";
       pin.appendChild(count);
       pin.appendChild(cue);
-      // The deck shows its next cards from the start, so their photographs
-      // cannot wait for the lazy loader's idea of the viewport.
-      cards.forEach(function (c) { var im = c.querySelector("img"); if (im) im.loading = "eager"; });
+      // The deck shows its next cards from the start, and they all sit in one
+      // place, so the lazy loader's idea of the viewport means nothing here:
+      // warmPhotographs() asks for them in order once the page has loaded.
 
       // One card per 55% of a screen, measured from the layout viewport at
       // setup and on a width change only: a phone's toolbar showing and
@@ -2157,41 +2203,115 @@
      and swings between them for ever. This only changes what
      the frames ARE — and only ever the layer that is currently
      invisible, so a photograph is never seen to be replaced.
+
+     Each row is one run of tiles written out twice, and the
+     track travels exactly one run (-50%) before it starts again,
+     so the seam is only invisible while the two copies are the
+     same photographs. A tile is therefore never changed on its
+     own: it is changed in every copy at once, to a photograph
+     that is already on the page. Nothing is fetched to do it, so
+     the swap cannot arrive late and cannot show a half-loaded
+     frame; it simply happens while the layer cannot be seen.
      ========================================================== */
+  function saveData() {
+    var c = navigator.connection;
+    return !!(c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || "")));
+  }
+
   function glimpses() {
     var sec = $("#glimpses");
-    if (!sec || reduced) return;
+    if (!sec) return;
+
+    var rows = $$(".glimpse__row", sec).map(function (row) {
+      var sets = $$(".glimpse__set", row);
+      return { sets: sets, n: sets.length ? sets[0].children.length : 0 };
+    }).filter(function (r) { return r.n > 0; });
+    if (!rows.length) return;
+
+    /* The first view of the wall is the heaviest thing on the page: three
+       bands of tiles, two frames each. The browser's own lazy loader starts
+       them about a screen and a half before the section arrives, which is
+       not enough on a phone connection. Once the section is two or three
+       screens away the frames that will be on show when it arrives are
+       asked for — the resting one first, the one that fades in after it
+       second — and everything further along the band stays lazy. */
+    function arrive() {
+      var w = window.innerWidth, first = [], second = [];
+      rows.forEach(function (r) {
+        r.sets.forEach(function (set) {
+          Array.prototype.forEach.call(set.children, function (t) {
+            var b = t.getBoundingClientRect();
+            if (b.right < -w * 0.25 || b.left > w * 1.25) return;
+            var a = $(".gt__a", t), c = $(".gt__b", t);
+            if (a) first.push(a);
+            if (c) second.push(c);
+          });
+        });
+      });
+      first.concat(second).forEach(function (im) { if (im.loading === "lazy") im.loading = "eager"; });
+    }
+    if (!saveData() && typeof window.IntersectionObserver !== "undefined") {
+      var near = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        near.disconnect();
+        arrive();
+      }, { rootMargin: "0px 0px 250% 0px" });
+      near.observe(sec);
+    }
+
+    if (reduced) return;
+
     var tiles = $$(".gt", sec);
     if (tiles.length < 2) return;
-
-    // The pool is whatever the markup already references, so it cannot drift
-    // out of step with what is on disk.
-    var pool = [];
-    $$("img", sec).forEach(function (im) {
-      var src = im.getAttribute("src");
-      if (src && pool.indexOf(src) === -1) pool.push(src);
-    });
-    if (pool.length < 3) return;
 
     var timer = null;
     var toneTimer = null;
     var inView = false;
 
+    function loaded(im) { return im.complete && im.naturalWidth > 0; }
+    function opacityOf(el) { return parseFloat(window.getComputedStyle(el).opacity); }
+
     function retire() {
-      var t = tiles[(Math.random() * tiles.length) | 0];
-      if (!t) return;
-      var a = $(".gt__a", t), b = $(".gt__b", t);
-      if (!a || !b) return;
+      var row = rows[(Math.random() * rows.length) | 0];
+      var i = (Math.random() * row.n) | 0;
+      var copies = row.sets.map(function (set) { return set.children[i]; }).filter(Boolean);
+      if (!copies.length) return;
 
-      // Whichever layer is fully out of sight can be changed for nothing.
-      var o = parseFloat(window.getComputedStyle(b).opacity);
-      var target = o < 0.04 ? b : (o > 0.96 ? a : null);
-      if (!target) return;
+      // The frames of every copy were started together and are in step, but a
+      // swap is only made when each of them agrees which layer is out of sight.
+      var layer = "";
+      for (var c = 0; c < copies.length; c++) {
+        var b = $(".gt__b", copies[c]);
+        if (!b) return;
+        var o = opacityOf(b);
+        var which = o < 0.04 ? "gt__b" : (o > 0.96 ? "gt__a" : "");
+        if (!which || (layer && which !== layer)) return;
+        layer = which;
+      }
+      var other = layer === "gt__b" ? "gt__a" : "gt__b";
+      var lead = copies[0];
 
-      var other = target === b ? a : b;
-      var next = pool[(Math.random() * pool.length) | 0];
-      if (next === target.getAttribute("src") || next === other.getAttribute("src")) return;
-      target.setAttribute("src", next);
+      // Not the photograph beside it, nor the one it is pairing with.
+      var avoid = [];
+      [lead, lead.previousElementSibling, lead.nextElementSibling].forEach(function (t) {
+        if (!t) return;
+        $$("img", t).forEach(function (im) { avoid.push(im.currentSrc || im.src); });
+      });
+      var donors = $$("img", sec).filter(function (im) {
+        return loaded(im) && avoid.indexOf(im.currentSrc || im.src) === -1;
+      });
+      if (!donors.length) return;
+      var next = donors[(Math.random() * donors.length) | 0].currentSrc;
+      if (!next) return;
+
+      copies.forEach(function (t) {
+        var im = $("." + layer, t);
+        if (!im || !$("." + other, t)) return;
+        // A srcset would choose its own file again; this one is already here.
+        im.removeAttribute("srcset");
+        im.removeAttribute("sizes");
+        im.src = next;
+      });
     }
 
     function run(on) {
@@ -2218,6 +2338,88 @@
     } else {
       run(true);
     }
+  }
+
+  /* ==========================================================
+     Photographs below the first screen
+     ----------------------------------------------------------
+     loading="lazy" waits until an image is about a screen and a
+     half away. That suits a column of text; it does not suit
+     "A day at CIRS", whose photographs are carried sideways by a
+     scroll that crosses their whole distance in a fraction of a
+     second, nor the film and the closing scene, which arrived as
+     empty frames under a quick scroll on a slow connection.
+
+     So the page asks for them itself, one at a time and at low
+     priority, in the order they will be met, and each only when
+     the reader has got far enough that it is likely to be needed:
+     the run's photographs once the page has loaded (they are the
+     very next thing after the opening), and the film's pair and
+     the closing scenes when the run comes into view. Nothing is
+     skipped or reordered, and a visitor who never scrolls spends
+     nothing. On a data saver or a 2G connection the lazy loader
+     is left exactly as it was.
+     ========================================================== */
+  function warmPhotographs() {
+    // The selectors below name sections that exist, with other content, on
+    // other pages; only the home page is walked through at speed like this.
+    if (!document.body.classList.contains("home") || saveData()) return;
+
+    var queue = [], busy = false;
+
+    function pump() {
+      if (busy) return;
+      var im = queue.shift();
+      if (!im) return;
+      if (im.loading !== "lazy" || (im.complete && im.naturalWidth > 0)) { pump(); return; }
+      busy = true;
+      var settled = false, guard = 0;
+      function done() {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(guard);
+        im.removeEventListener("load", done);
+        im.removeEventListener("error", done);
+        busy = false;
+        window.setTimeout(pump, 40);
+      }
+      im.addEventListener("load", done);
+      im.addEventListener("error", done);
+      // A photograph that never answers must not hold up the rest.
+      guard = window.setTimeout(done, 7000);
+      try { im.fetchPriority = "low"; } catch (err) { /* attribute not supported */ }
+      im.loading = "eager";
+      if (im.complete && im.naturalWidth > 0) done();
+    }
+
+    function enqueue(selectors) {
+      $$(selectors.join(",")).forEach(function (im) {
+        if (im.loading === "lazy" && queue.indexOf(im) === -1) queue.push(im);
+      });
+      pump();
+    }
+
+    // Once, when `target` is within a screen of the window.
+    function onApproach(target, selectors) {
+      var el = $(target);
+      if (!el) return;
+      if (typeof window.IntersectionObserver === "undefined") { enqueue(selectors); return; }
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        enqueue(selectors);
+      }, { rootMargin: "0px 0px 100% 0px" });
+      io.observe(el);
+    }
+
+    function begin() {
+      var go = function () { enqueue(["#run .hframe img"]); };
+      if (typeof window.requestIdleCallback === "function") window.requestIdleCallback(go, { timeout: 3000 });
+      else window.setTimeout(go, 800);
+      onApproach("#run", ["#film img", ".finalcta__media img", ".closing-scene img"]);
+    }
+    if (document.readyState === "complete") begin();
+    else window.addEventListener("load", begin, { once: true });
   }
 
 
@@ -2366,6 +2568,7 @@
     floatingControls();
     filmLightbox();
     glimpses();
+    warmPhotographs();
     historyTimeline();
     newsFlash();
     crossroadsProgress();
