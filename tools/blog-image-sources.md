@@ -16,3 +16,14 @@ The article artwork below was supplied in the shared [Blog Drive folder](https:/
 | The Social Glue | [ChatGPT Image Sep 22, 2026, 06_50_45 AM.png](https://drive.google.com/file/d/1-jhi7g-n92y4IuqFaS6ADSB3ZW5fk7dv/view) | `assets/img/blog/the-social-glue.webp` |
 
 The folder also contains an extra Indian flag image, a campus aerial illustration, a building video frame, and two activity photographs. Their article placement is unverified, and the user chose to use only the ten matched images.
+
+## Cut for the site
+
+Four articles had no lead image. `tools/make-blog-art.py` cuts one for each, chosen for what the article argues: three are the article's own artwork from its pages in the issue PDF, and one is a campus photograph the site already holds, which its caption says.
+
+| Article | Source | Checked-in file |
+| --- | --- | --- |
+| Sportswashing: The New Geopolitics | Issue 30, page 8: the World Cup stadium, crane and officials illustration | `assets/img/blog/sportswashing.webp` |
+| Is AI - Art Really Art? | Issue 31, page 5: the robot-at-an-easel panel of the opening collage | `assets/img/blog/is-ai-art-really-art.webp` |
+| Death of Detail | Issue 4, page 10: the chair that heads the article | `assets/img/blog/death-of-detail.webp` |
+| My Home | The site's campus photograph, `assets/img/hero.jpg` | `assets/img/blog/my-home.webp` |

@@ -76,8 +76,12 @@ body.blog{
 .art__rail a:hover,.art__foot a:hover{text-decoration:underline}
 .art__content{min-width:0}
 .art__hero{margin:0 0 clamp(34px, 5vw, 62px)}
+/* A picture whose shape the page gives (--ratio, set by build-site.py) is
+   narrowed until it is no taller than the window allows, so it and its
+   caption start at the same edge. Without one it keeps the column's width
+   and is fitted into the window's height inside it. */
 .art__hero img{
-  display:block;width:100%;height:auto;max-height:70vh;
+  display:block;width:min(100%, calc(70vh * var(--ratio, 100)));height:auto;max-height:70vh;
   object-fit:contain;object-position:center;
   background:#EEE9DE;
 }
@@ -142,7 +146,7 @@ body.blog{
   }
   .art__rail p,.art__rail strong,.art__rail a{margin:0}
   .art__rail strong{font-size:17px}
-  .art__hero img{max-height:62vh}
+  .art__hero img{width:min(100%, calc(62vh * var(--ratio, 100)));max-height:62vh}
 }
 @media(max-width:600px){
   .art__head{padding-bottom:42px}

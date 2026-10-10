@@ -459,7 +459,7 @@ PAGES = {
         # it is a news stand and they are reading pages, and they share no
         # markup. blognews.css is scoped to body.blognews for that reason.
         "sheet": "blognews",
-        "cache_suffix": "-blog-superpass-2",
+        "cache_suffix": "-blog-superpass-3",
         "jump": False,
         "uc": False,
         # Mona Sans carries the Blog interface and prose; its grid remains distinct.
@@ -1219,14 +1219,18 @@ def article_html(page):
     issue = post["issue"]
     pdf = f"assets/documents/crossroads/crossroads-issue-{issue:02d}.pdf"
     when = f'        <span>{esc(post["date"])}</span>\n' if post["date"] else ""
-    by = esc(blog.byline(post))
+    by = esc(blog.display_byline(post))
     subtitle = (f'      <p class="art__subtitle">{esc(post["subtitle"])}</p>\n'
                 if post.get("subtitle") else "")
     image = ""
     if post.get("image"):
+        sized = post.get("image_width") and post.get("image_height")
         dimensions = (f' width="{post["image_width"]}" height="{post["image_height"]}"'
-                      if post.get("image_width") and post.get("image_height") else "")
-        image = f'''    <figure class="art__hero">
+                      if sized else "")
+        # Its shape, so blog.css can narrow a tall picture to the window's
+        # height instead of boxing it in a column-wide frame.
+        ratio = f' style="--ratio:{post["image_width"] / post["image_height"]:.4f}"' if sized else ""
+        image = f'''    <figure class="art__hero"{ratio}>
       <img src="assets/img/blog/{esc(post["image"], attr=True)}"
            alt="{esc(post.get("image_alt", ""), attr=True)}"
           {dimensions} decoding="async">
@@ -2585,7 +2589,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "houses":
         parts.append(f'<script src="assets/js/houses-journey.js?{CACHE_BUST}-houses-3" defer></script>')
     if slug == "blog":
-        parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-editorial-1" defer></script>')
+        parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-shelf-1" defer></script>')
     if slug == "festivals":
         parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if slug == "art-attack":
@@ -2661,7 +2665,7 @@ for _post in blogposts.POSTS:
         "title": esc(_post["title"], attr=True) + " | CIRS Blog",
         "description": esc(_post["excerpt"][:180], attr=True),
         "sheet": "blog",
-        "cache_suffix": "-blog-editorial-1",
+        "cache_suffix": "-blog-editorial-2",
         "uc": False,
         "jump": False,
         # An article opens on paper, so the header cannot float over it in

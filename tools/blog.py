@@ -7,7 +7,6 @@ only presents that source material and derives counts and reading times from it.
 
 import os
 import re
-import bloglayout
 from collections import Counter
 from html import escape
 from math import ceil
@@ -61,19 +60,11 @@ def esc(value):
     return escape(str(value), quote=True)
 
 
-def byline(post):
-    if not post["author"]:
-        return "No byline in print"
-    source = post.get("credit_source")
-    if source == "site":
-        return f"{post['author']} · existing blog credit, no byline in print"
-    if source == "school":
-        return f"{post['author']} · school-supplied credit, no byline in print"
-    return post["author"]
-
-
 def display_byline(post):
-    """Public credit only; source provenance remains in byline()/POSTS."""
+    """The credit readers see, on the front page and the article page alike.
+    Where a credit came from (credit_source: the school, or the old blog,
+    because the issue prints none) stays in POSTS and tools/blog-inventory.csv;
+    it is a note for whoever maintains the page, not part of the byline."""
     return post["author"] or "No byline in print"
 
 
@@ -115,11 +106,24 @@ def reading_time(post):
 CARD_SIZES = {
     "story": "(max-width: 600px) 90vw, (max-width: 1000px) 60vw, (max-width: 1440px) 65vw, 1000px",
     "latest": "(max-width: 600px) 30vw, 140px",
-    "feature": "(max-width: 600px) 78vw, (max-width: 1000px) 52vw, (max-width: 1440px) 40vw, 560px",
+    "feature": "(max-width: 600px) 78vw, (max-width: 1000px) 46vw, (max-width: 1440px) 37vw, 540px",
     "narrow": "(max-width: 600px) 44vw, (max-width: 1440px) 28vw, 400px",
     "world": "(max-width: 600px) 90vw, (max-width: 1000px) 60vw, (max-width: 1440px) 61vw, 890px",
     "spread": "(max-width: 600px) 90vw, (max-width: 1000px) 60vw, 46vw",
+    "rail": "(max-width: 600px) 90vw, (max-width: 1000px) 30vw, 440px",
+    "card": "(max-width: 600px) 72vw, 280px",
 }
+
+# All stories shows every picture in one 4:3 box. These are cut away from its
+# centre to keep what the picture is of; a banner too wide for the box to crop
+# without losing its lettering is shown whole inside it.
+CARD_FOCUS = {
+    "the-cirs-effect": "50% 6%",
+    "the-dancing-parasite": "50% 0%",
+    "the-social-glue": "0% 50%",
+    "death-of-detail": "100% 50%",
+}
+CARD_WHOLE = {"when-fomo-becomes-expensive"}
 
 
 def image_html(post, loading="lazy", slot="story"):
@@ -161,14 +165,6 @@ def issue_count():
     return len(blogposts.issues())
 
 
-# Every image remains attached to its existing article. Each is shown only once
-# on the index; the complete searchable collection repeats links, not imagery.
-def front_image_slugs():
-    latest = max(blogposts.issues())
-    return {p['slug'] for p in blogposts.POSTS if p['issue'] == latest} | {
-        'notes-of-healing', 'rumors-at-cirs', 'geography-and-geopolitics'}
-
-
 def image_role(post):
     ratio = post.get('image_width', 1) / post.get('image_height', 1)
     return 'portrait' if ratio < .85 else 'cinematic' if ratio > 2.3 else 'square' if ratio < 1.15 else 'wide'
@@ -179,7 +175,8 @@ def editorial_photo(post, *, loading="lazy", slot="feature", caption=True):
         return ""
     credit = post.get("image_caption", "") if caption else ""
     caption_html = f"<figcaption>{esc(credit)}</figcaption>" if credit else ""
-    return f'''<figure class="ij-photo" data-image-role="{image_role(post)}" style="--native-width:{post['image_width']}px">
+    ratio = post['image_width'] / post['image_height']
+    return f'''<figure class="ij-photo" data-image-role="{image_role(post)}" style="--native-width:{post['image_width']}px;--ratio:{ratio:.4f}">
       <a href="{esc(post['slug'])}.html" aria-label="Read {esc(post['title'])}">{image_html(post, loading=loading, slot=slot)}</a>
       {caption_html}</figure>'''
 
@@ -189,9 +186,9 @@ def editorial_meta(post):
     return f"Issue {post['issue']}{date}"
 
 
-def article_module(post, variant, *, image=True, excerpt=True, heading="h3"):
-    photo = editorial_photo(post, slot={"image-feature": "spread", "world-feature": "world", "narrow": "narrow"}.get(variant, "latest"),
-                            caption=variant == "image-feature") if image else ""
+def article_module(post, variant, *, image=True, excerpt=True, heading="h3", slot=None):
+    slot = slot or {"image-feature": "spread", "world-feature": "world", "narrow": "narrow"}.get(variant, "latest")
+    photo = editorial_photo(post, slot=slot, caption=variant == "image-feature") if image else ""
     deck = f'<p class="ij-deck">{esc(post["excerpt"])}</p>' if excerpt else ""
     return f'''<article class="ij-module ij-module--{variant}">
       <p class="ij-kicker">{esc(post['section'])}</p>
@@ -207,22 +204,33 @@ def _latest():
     latest_issue = max(blogposts.issues())
     latest = [p for p in blogposts.by_issue() if p["issue"] == latest_issue]
     lead = latest[0]
-    supporting = "".join(article_module(p, "secondary") for p in latest[1:])
+    # Two stories stand beside the lead, about its height; the rest of the
+    # issue runs in a row beneath both, at most three across.
+    rail, more = latest[1:3], latest[3:]
+    supporting = (f'<div class="ij-secondary">{"".join(article_module(p, "secondary") for p in rail)}</div>'
+                  if rail else "")
+    beneath = (f'''
+        <div class="ij-front__more" data-cols="{min(3, len(more))}">{"".join(article_module(p, "secondary") for p in more)}</div>'''
+               if more else "")
+    role = image_role(lead) if lead.get("image") else "none"
+    # The issue's own pull quote for the lead, where it prints one (blogposts.py).
+    quote = (f'\n            <blockquote class="ij-lead__quote"><p>“{esc(lead["pull_quote"])}”</p></blockquote>'
+             if lead.get("pull_quote") else "")
     return f'''<section class="ij-front" id="latest" aria-labelledby="ij-edition-title">
       <div class="ij-edition"><h2 id="ij-edition-title">The latest edition</h2>
         <a href="{issue_pdf(lead)}">The Crossroads / {editorial_meta(lead)} <span aria-hidden="true">↗</span></a></div>
       <div class="ij-front__grid">
-        <article class="ij-lead" data-image-role="{image_role(lead)}">
+        <article class="ij-lead" data-image-role="{role}">
           <div class="ij-lead__copy"><p class="ij-kicker">{esc(lead['section'])} / The lead essay</p>
             <h3><a href="{esc(lead['slug'])}.html">{esc(lead['title'])}</a></h3>
             <p class="ij-deck">{esc(lead['excerpt'])}</p>
             <p class="ij-byline">{esc(display_byline(lead))}</p>
             <p class="ij-meta">{editorial_meta(lead)} <span>{reading_time(lead)} min read</span></p>
-            <a class="ij-read" href="{esc(lead['slug'])}.html">Read the essay <span aria-hidden="true">→</span></a>
+            <a class="ij-read" href="{esc(lead['slug'])}.html">Read the essay <span aria-hidden="true">→</span></a>{quote}
           </div>
           {editorial_photo(lead, loading='eager')}
         </article>
-        <div class="ij-secondary">{supporting}</div>
+        {supporting}{beneath}
       </div>
     </section>'''
 
@@ -252,53 +260,38 @@ def _editorial_spreads():
       <div class="ij-world">
         {article_module(posts['geography-and-geopolitics'], 'world-feature')}
         <div class="ij-world__rail">
-          {article_module(posts['sportswashing'], 'text-feature', image=False)}
-          {article_module(posts['the-journey-behind-excellence'], 'brief', image=False, excerpt=False)}
+          {article_module(posts['sportswashing'], 'text-feature', slot='rail')}
+          {article_module(posts['the-journey-behind-excellence'], 'brief', excerpt=False, slot='rail')}
         </div>
       </div>
     </section>'''
-
-
-def story_traits(post):
-    return dict(image=bool(post.get('image') and post['slug'] not in front_image_slugs()),
-                ratio=post.get('image_width', 1) / post.get('image_height', 1),
-                title_length=len(post['title']), excerpt_length=len(post['excerpt']),
-                minutes=reading_time(post), override=post.get('index_role', ''))
 
 
 def first_sentence(text):
     return re.split(r'(?<=[.!?])\s+', text, maxsplit=1)[0]
 
 
-def _story_row(post, index, layout):
-    traits = story_traits(post)
-    image = editorial_photo(post, slot="story", caption=False) if traits['image'] else ""
+def _card(post, index):
+    """One story on the All stories shelf: its picture in the shelf's one box,
+    then its section, title, credit and issue. The title's link covers the
+    whole card, so the card is a single way into the article."""
     searchable = " ".join([post['title'], post['section'], display_byline(post),
                            f"Issue {post['issue']}", post['excerpt']])
-    quote = first_sentence(reading_paragraphs(post)[0])
-    return f'''<article class="ij-story" data-story data-category="{esc(post['section'])}"
-      data-role="{layout['role']}" data-band-start="{str(layout['start']).lower()}" style="--span:{layout['span']}"
-      data-image="{str(traits['image']).lower()}" data-ratio="{traits['ratio']}"
-      data-minutes="{traits['minutes']}" data-excerpt-length="{traits['excerpt_length']}"
-      data-override="{esc(traits['override'])}" data-quote="{esc(quote)}"
+    focus = CARD_FOCUS.get(post['slug'])
+    art = ""
+    if post.get("image"):
+        style = f' style="--focus:{focus}"' if focus else ""
+        whole = ' data-fit="whole"' if post['slug'] in CARD_WHOLE else ""
+        art = f'<div class="ij-card__art"{style}{whole}>{image_html(post, slot="card")}</div>'
+    return f'''<li class="ij-card" data-story data-category="{esc(post['section'])}"
       data-issue="{post['issue']}" data-title="{esc(post['title'])}"
       data-order="{index}" data-search="{esc(searchable)}">
-      {image}
-      <div class="ij-story__copy"><p class="ij-kicker">{esc(post['section'])}</p>
-        <h3><a href="{esc(post['slug'])}.html">{esc(post['title'])}</a></h3>
-        <p class="ij-deck ij-deck--full">{esc(post['excerpt'])}</p>
-        <p class="ij-deck ij-deck--short">{esc(first_sentence(post['excerpt']))}</p>
-        <p class="ij-byline">{esc(display_byline(post))}</p>
-        <p class="ij-meta"><a href="{issue_pdf(post)}">{editorial_meta(post)}</a><span>{reading_time(post)} min read</span></p>
-      </div>
-    </article>'''
-
-
-def interruption(post, hidden=False):
-    return f'''<figure class="ij-interruption" data-interruption{' hidden' if hidden else ''}>
-      <blockquote><p data-quote-text>“{esc(first_sentence(reading_paragraphs(post)[0]))}”</p></blockquote>
-      <figcaption>From <a data-quote-link href="{esc(post['slug'])}.html">{esc(post['title'])}</a> / <span data-quote-issue>Issue {post['issue']}</span></figcaption>
-    </figure>'''
+      {art}
+      <p class="ij-kicker">{esc(post['section'])}</p>
+      <h3><a href="{esc(post['slug'])}.html">{esc(post['title'])}</a></h3>
+      <p class="ij-byline">{esc(display_byline(post))}</p>
+      <p class="ij-meta">{editorial_meta(post)} <span>{reading_time(post)} min read</span></p>
+    </li>'''
 
 
 def _topics():
@@ -317,10 +310,7 @@ def _topics():
 
 def _stories():
     posts = blogposts.by_issue()
-    roles, split = bloglayout.compose([story_traits(post) for post in posts])
-    entries = [_story_row(post, i, roles[i]) for i, post in enumerate(posts)]
-    entries.insert(split or len(entries), interruption(posts[0], hidden=not split))
-    rows = "\n".join(entries)
+    cards = "\n".join(_card(post, i) for i, post in enumerate(posts))
     return f"""<section class="ij-section ij-stories" id="stories" aria-labelledby="ij-stories-title" data-journal>
       <div class="ij-section__head">
         <h2 id="ij-stories-title">All stories</h2>
@@ -343,10 +333,17 @@ def _stories():
       <div class="ij-topics" role="group" aria-label="Filter stories by topic" data-topic-controls hidden>
         {_topics()}
       </div>
-      <p class="ij-results" role="status" aria-live="polite" data-results>{count()} stories</p>
-      <div class="ij-story-list" data-story-list>
-        {rows}
+      <div class="ij-shelf__bar">
+        <p class="ij-results" role="status" aria-live="polite" data-results>{count()} stories</p>
+        <div class="ij-shelf__nav" data-shelf-nav hidden>
+          <button type="button" data-shelf-step="-1" aria-controls="ij-shelf" aria-label="Scroll the stories back"><span aria-hidden="true">←</span></button>
+          <button type="button" data-shelf-step="1" aria-controls="ij-shelf" aria-label="Scroll the stories on"><span aria-hidden="true">→</span></button>
+        </div>
       </div>
+      <ul class="ij-shelf" id="ij-shelf" aria-label="All stories" data-story-list>
+        {cards}
+      </ul>
+      <div class="ij-shelf__track" aria-hidden="true" data-shelf-track hidden><span data-shelf-thumb></span></div>
       <div class="ij-empty" data-empty hidden>
         <h3>No stories found</h3>
         <p>Try another search or topic to see the full collection.</p>
