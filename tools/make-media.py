@@ -17,9 +17,10 @@ sharper — it only stops costing more than it shows.
         journey draws its own lighter vehicle; these stay outside the deploy.
 
     assets/img/alumni/<name>.webp
-        The four alumni portraits, at their own size — three of them are
+        Three of the alumni portraits, at their own size — two of them are
         small, and the school owes larger originals (see tools/alumni.py).
-        Masters: assets/source/alumni/.
+        Masters: assets/source/alumni/. Divyaj DT's is not cut here: the
+        school supplied assets/img/alumni/Divyaj-dt.jpg as it is served.
 
     assets/img/blog/<name>-400.webp, -800.webp, -1000.webp
         Card sizes of each article's lead image, for the Blog front page's
@@ -62,7 +63,6 @@ WEBP = [
      "assets/img/founder/amrit-vahini/wheel-complete.webp", (256, 256), 92),
     ("alumni/shashwath-santosh.png", "assets/img/alumni/shashwath-santosh.webp", None, 88),
     ("alumni/soham-desai.png", "assets/img/alumni/soham-desai.webp", None, 92),
-    ("alumni/divyaj-dt.png", "assets/img/alumni/divyaj-dt.webp", None, 92),
     ("alumni/hari-om-jani.png", "assets/img/alumni/hari-om-jani.webp", None, 92),
 ]
 
