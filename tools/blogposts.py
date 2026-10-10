@@ -23,12 +23,14 @@ corrections are the same kind and are all spelling or punctuation: "phohibit",
 "percieve", "constrast" and a doubled "with" are spelt as intended, a missing
 full stop and comma are supplied, and "undisputably" is "indisputably". The
 editorial prints no byline; Rhea Sontakke, its author and the magazine's editor,
-was supplied by the school. Bharat's Energy runs on in print as one long
-paragraph and one in each column; it is set here as five, broken at the end of
-a sentence and nowhere else. The verse in "When FOMO Becomes Expensive" is the
-Gita's, as printed. The editorial's page sets one of its sentences large as a
-pull quote; that is kept as its "pull_quote", as the page prints it, with a
-semicolon where the text has a comma, and the Blog front sets it large in turn.
+was supplied by the school, which also confirmed that the portrait on its page
+is of her (XI Sci), so the caption names her. Bharat's Energy runs on in print
+as one long paragraph and one in each column; it is set here as five, broken at
+the end of a sentence and nowhere else. The verse in "When FOMO Becomes
+Expensive" is the Gita's, as printed. The editorial's page sets one of its
+sentences large as a pull quote; that is kept as its "pull_quote", as the page
+prints it, with a semicolon where the text has a comma, and the Blog front sets
+it beneath the lead essay.
 
 Four articles had no lead image here: Sportswashing, Is AI - Art Really Art?,
 Death of Detail and My Home. tools/make-blog-art.py cuts one for each, chosen for
@@ -57,10 +59,10 @@ POSTS = [
         "credit_source": "school",
         "section": "The Editorial",
         "image": "the-cirs-effect.webp",
-        "image_alt": "A woman with glasses, seated with a microphone in her hands, in black and white against a red cut-out shape",
+        "image_alt": "Rhea Sontakke, the editor, seated with a microphone in her hands, in black and white against a red cut-out shape",
         "image_width": 740,
         "image_height": 845,
-        "image_caption": "From the editorial pages of The Crossroads, Issue 33.",
+        "image_caption": "Rhea Sontakke | XI Sci, Editor of The Crossroads. From the editorial pages of Issue 33.",
         "pull_quote": "When I look back now, I don’t see the exact point where the lights began to appear; I’m simply grateful that they did.",
         "excerpt": "The end of September in CIRS officially heralds the three months that treat academics as an optional activity. October brings Anand Utsav and the insane amount of preparation that goes into it, while November disappears in the flurry of Masquerades.",
         "paragraphs": [
