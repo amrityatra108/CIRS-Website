@@ -61,20 +61,19 @@ def esc(value):
     return escape(str(value), quote=True)
 
 
-def byline(post):
-    if not post["author"]:
-        return "No byline in print"
-    source = post.get("credit_source")
-    if source == "site":
-        return f"{post['author']} · existing blog credit, no byline in print"
-    if source == "school":
-        return f"{post['author']} · school-supplied credit, no byline in print"
-    return post["author"]
-
-
 def display_byline(post):
-    """Public credit only; source provenance remains in byline()/POSTS."""
+    """The credit readers see, on the front page and the article page alike.
+    Where a credit came from (credit_source: the school, or the old blog,
+    because the issue prints none) stays in POSTS and tools/blog-inventory.csv;
+    it is a note for whoever maintains the page, not part of the byline."""
     return post["author"] or "No byline in print"
+
+
+def pull_quote(post):
+    """The line the front page sets large: the issue's own pull quote where
+    it prints one for the article (blogposts.py), word for word, otherwise
+    the article's first sentence."""
+    return post.get("pull_quote") or first_sentence(reading_paragraphs(post)[0])
 
 
 def issue_pdf(post):
@@ -115,7 +114,7 @@ def reading_time(post):
 CARD_SIZES = {
     "story": "(max-width: 600px) 90vw, (max-width: 1000px) 60vw, (max-width: 1440px) 65vw, 1000px",
     "latest": "(max-width: 600px) 30vw, 140px",
-    "feature": "(max-width: 600px) 78vw, (max-width: 1000px) 52vw, (max-width: 1440px) 40vw, 560px",
+    "feature": "(max-width: 600px) 78vw, (max-width: 1000px) 46vw, (max-width: 1440px) 37vw, 540px",
     "narrow": "(max-width: 600px) 44vw, (max-width: 1440px) 28vw, 400px",
     "world": "(max-width: 600px) 90vw, (max-width: 1000px) 60vw, (max-width: 1440px) 61vw, 890px",
     "spread": "(max-width: 600px) 90vw, (max-width: 1000px) 60vw, 46vw",
@@ -179,7 +178,8 @@ def editorial_photo(post, *, loading="lazy", slot="feature", caption=True):
         return ""
     credit = post.get("image_caption", "") if caption else ""
     caption_html = f"<figcaption>{esc(credit)}</figcaption>" if credit else ""
-    return f'''<figure class="ij-photo" data-image-role="{image_role(post)}" style="--native-width:{post['image_width']}px">
+    ratio = post['image_width'] / post['image_height']
+    return f'''<figure class="ij-photo" data-image-role="{image_role(post)}" style="--native-width:{post['image_width']}px;--ratio:{ratio:.4f}">
       <a href="{esc(post['slug'])}.html" aria-label="Read {esc(post['title'])}">{image_html(post, loading=loading, slot=slot)}</a>
       {caption_html}</figure>'''
 
@@ -207,12 +207,20 @@ def _latest():
     latest_issue = max(blogposts.issues())
     latest = [p for p in blogposts.by_issue() if p["issue"] == latest_issue]
     lead = latest[0]
-    supporting = "".join(article_module(p, "secondary") for p in latest[1:])
+    # Two stories stand beside the lead, about its height; the rest of the
+    # issue runs in a row beneath both, at most three across.
+    rail, more = latest[1:3], latest[3:]
+    supporting = (f'<div class="ij-secondary">{"".join(article_module(p, "secondary") for p in rail)}</div>'
+                  if rail else "")
+    beneath = (f'''
+        <div class="ij-front__more" data-cols="{min(3, len(more))}">{"".join(article_module(p, "secondary") for p in more)}</div>'''
+               if more else "")
+    role = image_role(lead) if lead.get("image") else "none"
     return f'''<section class="ij-front" id="latest" aria-labelledby="ij-edition-title">
       <div class="ij-edition"><h2 id="ij-edition-title">The latest edition</h2>
         <a href="{issue_pdf(lead)}">The Crossroads / {editorial_meta(lead)} <span aria-hidden="true">↗</span></a></div>
       <div class="ij-front__grid">
-        <article class="ij-lead" data-image-role="{image_role(lead)}">
+        <article class="ij-lead" data-image-role="{role}">
           <div class="ij-lead__copy"><p class="ij-kicker">{esc(lead['section'])} / The lead essay</p>
             <h3><a href="{esc(lead['slug'])}.html">{esc(lead['title'])}</a></h3>
             <p class="ij-deck">{esc(lead['excerpt'])}</p>
@@ -222,7 +230,7 @@ def _latest():
           </div>
           {editorial_photo(lead, loading='eager')}
         </article>
-        <div class="ij-secondary">{supporting}</div>
+        {supporting}{beneath}
       </div>
     </section>'''
 
@@ -275,7 +283,7 @@ def _story_row(post, index, layout):
     image = editorial_photo(post, slot="story", caption=False) if traits['image'] else ""
     searchable = " ".join([post['title'], post['section'], display_byline(post),
                            f"Issue {post['issue']}", post['excerpt']])
-    quote = first_sentence(reading_paragraphs(post)[0])
+    quote = pull_quote(post)
     return f'''<article class="ij-story" data-story data-category="{esc(post['section'])}"
       data-role="{layout['role']}" data-band-start="{str(layout['start']).lower()}" style="--span:{layout['span']}"
       data-image="{str(traits['image']).lower()}" data-ratio="{traits['ratio']}"
@@ -296,7 +304,7 @@ def _story_row(post, index, layout):
 
 def interruption(post, hidden=False):
     return f'''<figure class="ij-interruption" data-interruption{' hidden' if hidden else ''}>
-      <blockquote><p data-quote-text>“{esc(first_sentence(reading_paragraphs(post)[0]))}”</p></blockquote>
+      <blockquote><p data-quote-text>“{esc(pull_quote(post))}”</p></blockquote>
       <figcaption>From <a data-quote-link href="{esc(post['slug'])}.html">{esc(post['title'])}</a> / <span data-quote-issue>Issue {post['issue']}</span></figcaption>
     </figure>'''
 

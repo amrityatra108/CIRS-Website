@@ -26,7 +26,9 @@ editorial prints no byline; Rhea Sontakke, its author and the magazine's editor,
 was supplied by the school. Bharat's Energy runs on in print as one long
 paragraph and one in each column; it is set here as five, broken at the end of
 a sentence and nowhere else. The verse in "When FOMO Becomes Expensive" is the
-Gita's, as printed.
+Gita's, as printed. The editorial's page sets one of its sentences large as a
+pull quote; that is kept as its "pull_quote", as the page prints it, with a
+semicolon where the text has a comma, and the Blog front sets it large in turn.
 
 To publish another article: add its entry here with its paragraphs, and
 build-site.py gives it a page and the feed gives it a card. Nothing else has
@@ -54,6 +56,7 @@ POSTS = [
         "image_width": 740,
         "image_height": 845,
         "image_caption": "From the editorial pages of The Crossroads, Issue 33.",
+        "pull_quote": "When I look back now, I don’t see the exact point where the lights began to appear; I’m simply grateful that they did.",
         "excerpt": "The end of September in CIRS officially heralds the three months that treat academics as an optional activity. October brings Anand Utsav and the insane amount of preparation that goes into it, while November disappears in the flurry of Masquerades.",
         "paragraphs": [
             "The end of September in CIRS officially heralds the three months that treat academics as an optional activity. October brings Anand Utsav and the insane amount of preparation that goes into it, while November disappears in the flurry of Masquerades. Naturally, you would assume these are the three favorite months of every CIRS student, and I am no exception. Three years ago, however, it was a very different picture. The onset of October was my worst nightmare.",

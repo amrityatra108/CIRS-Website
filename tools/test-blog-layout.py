@@ -31,4 +31,9 @@ class LayoutTests(unittest.TestCase):
    self.assertEqual(blog.display_byline(post),post['author'] or 'No byline in print')
   self.assertNotIn('existing blog credit',blog.front_html())
   self.assertNotIn('school-supplied credit',blog.front_html())
+ def test_pull_quotes(self):
+  letters=lambda text:''.join(c for c in text.lower() if c.isalpha())
+  for post in blogposts.POSTS:
+   if post.get('pull_quote'):self.assertIn(letters(post['pull_quote']),letters(' '.join(blog.reading_paragraphs(post))))
+  self.assertIn(blog.esc(blog.pull_quote(blogposts.by_issue()[0])),blog.front_html())
 if __name__=='__main__':unittest.main()
