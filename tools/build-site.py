@@ -2589,7 +2589,7 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     if slug == "houses":
         parts.append(f'<script src="assets/js/houses-journey.js?{CACHE_BUST}-houses-3" defer></script>')
     if slug == "blog":
-        parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-editorial-1" defer></script>')
+        parts.append(f'<script src="assets/js/blog-index.js?{CACHE_BUST}-shelf-1" defer></script>')
     if slug == "festivals":
         parts.append(f'<script src="assets/js/festivals.js?{CACHE_BUST}" defer></script>')
     if slug == "art-attack":

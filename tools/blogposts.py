@@ -30,6 +30,11 @@ Gita's, as printed. The editorial's page sets one of its sentences large as a
 pull quote; that is kept as its "pull_quote", as the page prints it, with a
 semicolon where the text has a comma, and the Blog front sets it large in turn.
 
+Four articles had no lead image here: Sportswashing, Is AI - Art Really Art?,
+Death of Detail and My Home. tools/make-blog-art.py cuts one for each, chosen for
+what it argues: the first three from the article's own pages in the issue, My
+Home from the school's campus photograph, as its caption says.
+
 To publish another article: add its entry here with its paragraphs, and
 build-site.py gives it a page and the feed gives it a card. Nothing else has
 to change.
@@ -282,6 +287,11 @@ POSTS = [
         "date": "May 2026",
         "author": "T.Muhil | IB 1 Year",
         "section": "Opinion",
+        "image": "is-ai-art-really-art.webp",
+        "image_alt": "A robot painting at an easel, one panel of a collage, beside a corner of The Starry Night",
+        "image_width": 892,
+        "image_height": 767,
+        "image_caption": "From the opening page of the article in The Crossroads, Issue 31.",
         "excerpt": "In today’s world, nearly everything we do has a trace of artificial intelligence in it, from our daily tasks to our school projects.",
         "paragraphs": [
             "In today’s world, nearly everything we do has a trace of artificial intelligence in it, from our daily tasks to our school projects. Even solving a simple math problem leads to verification from AI. We have become habituated to using AI in even the smallest things possible, so much so that it has become an inseparable part of our lives. Not to forget some countries have AI bots as their ministers! AI has recently also invaded the sphere of art in , stealing jobs of several digital artists and content creators. According to a survey conducted by the Society of Authors, about 26% of freelance artists lost their income because of AI.",
@@ -382,6 +392,11 @@ POSTS = [
         "date": "April 2026",
         "author": "Shaurya Bhartia | XII MGMT",
         "section": "Sport",
+        "image": "sportswashing.webp",
+        "image_alt": "An illustration of a World Cup stadium in desert sand beneath a construction crane, with a labourer at work, a footballer’s silhouette and three men in suits and Gulf headdress behind it",
+        "image_width": 1076,
+        "image_height": 717,
+        "image_caption": "From the article’s pages in The Crossroads, Issue 30.",
         "excerpt": "The summer of 2023 changed football forever. It wasn’t just the usual go-to of European transfers; it was something weird. Why?",
         "paragraphs": [
             "The summer of 2023 changed football forever. It wasn’t just the usual go-to of European transfers; it was something weird. Why? When Cristiano Ronaldo moved to Al-Nassr, many dismissed it as a career-ending move. But then came other big names: Neymar. Sadio Mané. Firmino. Maharez. Saint-Maximin. And then the Ballon d'Or favorite, Karim Benzema. These players were all at the peak of their careers. Suddenly, the Saudi Pro League wasn't just a retirement home, it was a glitch in the transfer market.",
@@ -439,6 +454,11 @@ POSTS = [
         "author": "Vishv Prem Nangia",
         "credit_source": "site",
         "section": "The Editorial",
+        "image": "my-home.webp",
+        "image_alt": "The school’s red-tiled buildings below forested hills under low cloud",
+        "image_width": 1280,
+        "image_height": 720,
+        "image_caption": "The CIRS campus: a photograph from the school, not from the issue.",
         "excerpt": "Like most other kids, I had an enjoyable childhood with my family, so naturally, making the tough decision to join a boarding school 2,359 long kilometres away from home was an emotional one.",
         "paragraphs": [
             "Like most other kids, I had an enjoyable childhood with my family, so naturally, making the tough decision to join a boarding school 2,359 long kilometres away from home was an emotional one. But by fate or by chance, I landed at CIRS in 2022 after almost a year of online classes due to the pandemic, and since then, I've had quite the experience of a lifetime.",
@@ -613,6 +633,11 @@ POSTS = [
         "date": None,
         "author": "Malhar Modi",
         "section": "Culture",
+        "image": "death-of-detail.webp",
+        "image_alt": "A plain wooden chair alone against a bare grey wall",
+        "image_width": 1715,
+        "image_height": 885,
+        "image_caption": "From the opening page of the article in The Crossroads, Issue 4.",
         "excerpt": "A long day at work, and you’re tired to the bone. You decide to visit the nearby park to finally take a break, and seat yourself on a bench.",
         "paragraphs": [
             "A long day at work, and you’re tired to the bone. You decide to visit the nearby park to finally take a break, and seat yourself on a bench.",
