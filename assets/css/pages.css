@@ -649,6 +649,10 @@
 .docportal__group{ margin-top:clamp(34px,3.6vw,56px); }
 .docportal__group:first-child{ margin-top:0; }
 .docportal__group .steps{ margin-top:var(--space-4); }
+.docportal__jump{ margin-bottom:var(--space-7); }
+.docportal__note{ margin-top:var(--space-8); }
+.docportal__jump a,.docportal__note a{ color:var(--dark); font-weight:600; text-decoration:underline; text-underline-offset:.22em; }
+.docportal__jump a{ white-space:nowrap; }
 
 /* Testimonials. Portraits are placeholders until the school supplies
    them, and the quotes are marked as placeholders too — a made-up
