@@ -674,7 +674,7 @@ PAGES = {
         # Admissions carries its own quiet, document-led layout beneath the
         # shared honeycomb hero. The sheet is scoped by body.admissions.
         "sheet": "admissions",
-        "cache_suffix": "-admissions-27",
+        "cache_suffix": "-admissions-28",
         "hero_split": False,
         "hero": ("Admissions", "Admissions <em>Guide.</em>",
                  "Explore the application portal and published fee schedule. Confirm current "
@@ -690,17 +690,32 @@ PAGES = {
         "popup": False,
         "uc": False,
     },
-    # The entrance papers' downloads, reached only by the Sample papers tab on
-    # Admissions and so not in MENU. The PDFs are the school's own, in
+    # The entrance syllabus outlines' downloads, reached only by the Syllabus tab
+    # on Admissions and so not in MENU. The PDFs are the school's own, in
+    # assets/documents/admissions/ (see its README).
+    "syllabus": {
+        "nav": "Syllabus",
+        "title": "Syllabus | Admissions | CIRS",
+        "description": "The entrance-examination syllabus outlines for each entry class at Chinmaya "
+                       "International Residential School, to view or download.",
+        "banner": ("Admissions", "Entrance <em>syllabus.</em>",
+                   "The school&rsquo;s entrance-examination outline for each entry class: what every "
+                   "paper covers, with its weighting, time and marks."),
+        "jump": False,
+        "uc": False,
+    },
+    # The entrance sample papers' downloads, reached only by the Sample papers tab
+    # on Admissions and so not in MENU. The PDFs are the school's own, in
     # assets/documents/admissions/ (see its README).
     "sample-papers": {
         "nav": "Sample papers",
         "title": "Sample papers | Admissions | CIRS",
-        "description": "The entrance-examination syllabus outlines for each entry class at Chinmaya "
+        "description": "Sample entrance-examination papers for each entry class at Chinmaya "
                        "International Residential School, to view or download.",
         "banner": ("Admissions", "Sample <em>papers.</em>",
-                   "The school&rsquo;s entrance-examination outline for each entry class: what every "
-                   "paper covers, with its weighting, time and marks."),
+                   "Sample papers for each entry class, by subject: the school&rsquo;s own "
+                   "papers, to view or download."),
+        "cache_suffix": "-sample-papers-1",
         "jump": False,
         "uc": False,
     },

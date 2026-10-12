@@ -126,6 +126,8 @@ body.admissions .btn--primary:hover{ border-color:var(--gold-lit); }
 .ad-exam dd{ margin:0; color:var(--ink-soft); }
 .ad-inline-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:var(--space-4); }
 .ad-inline-list li{ padding:8px 12px; background:var(--paper-2); border:1px solid var(--rule); color:var(--ink); }
+.ad-papers-tabs{ display:flex; flex-wrap:wrap; gap:14px; margin-top:var(--space-5); }
+.ad-papers-tabs .ad-papers-tab{ margin-top:0; }
 .ad-papers-tab{ display:inline-flex; align-items:center; gap:12px; margin-top:var(--space-5); padding:14px 22px; background:#fff; border:1px solid var(--rule); border-top:3px solid var(--gold-fill); color:var(--ink); font-weight:600; text-decoration:none; transition:transform .3s var(--e),box-shadow .3s var(--e); }
 .ad-papers-tab:hover,.ad-papers-tab:focus-visible{ transform:translateY(-3px); box-shadow:0 14px 34px rgba(31,31,27,.10); }
 .ad-papers-tab__arrow{ transition:transform .3s var(--e); }
