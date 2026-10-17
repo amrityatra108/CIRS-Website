@@ -275,3 +275,13 @@ body.admissions .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px r
   body.admissions .cirs-entry-section{ padding:28px 0; break-inside:avoid; }
   body.admissions .ad-checklist{ box-shadow:none; }
 }
+
+/* The portal-closed announcement, drawn in the shared .pop panel (pages.css).
+   The heading takes the close button's corner into account, and the card
+   scrolls inside itself if a short phone screen cannot hold it. */
+body.admissions .pop--notice .pop__card{ width:min(100%,520px); max-height:calc(100dvh - 2 * var(--space-5)); overflow-y:auto; overscroll-behavior:contain; }
+body.admissions .pop--notice h2{ padding-right:32px; text-wrap:balance; margin-bottom:var(--space-4); }
+body.admissions .pop--notice .pop__note{ font-size:var(--fs-body); color:var(--ink-soft); margin-bottom:var(--space-3); }
+body.admissions .pop--notice .pop__note:last-child{ margin-bottom:var(--space-5); }
+body.admissions .pop__cta{ width:100%; justify-content:center; text-align:center; }
+@media (min-width:560px){ body.admissions .pop__cta{ width:auto; } }

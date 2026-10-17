@@ -74,13 +74,13 @@
 })();
 
 /* ============================================================
-   Admissions contact panel
+   Admissions announcement panel
    ------------------------------------------------------------
-   Shown as the page opens, because the one thing a family most
-   often wants from an admissions page is a person to ask. Closed
-   once, it stays closed for the rest of the browsing session:
-   arriving is a good moment to offer it, returning from another
-   page is not.
+   Shown as the page opens: the school's notice that the
+   admissions portal is closed, with the login for registered
+   users. Closed once, it stays closed for the rest of the
+   browsing session: arriving is a good moment to show it,
+   returning from another page is not.
    ============================================================ */
 (function () {
   "use strict";
@@ -99,9 +99,16 @@
     try { sessionStorage.setItem(KEY, "1"); } catch (e) { /* private mode: just don't remember */ }
   }
 
+  // Hold and release the site's smooth scroll with the panel, as the other
+  // modal surfaces do (cirs.js), so the page cannot drift behind it.
+  function holdScroll(locked) {
+    window.dispatchEvent(new CustomEvent("cirs-portal-scroll-lock", { detail: { locked: locked } }));
+  }
+
   function close() {
     pop.classList.remove("is-open");
     document.body.classList.remove("is-locked");
+    holdScroll(false);
     remember();
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
@@ -110,6 +117,7 @@
     lastFocus = document.activeElement;
     pop.classList.add("is-open");
     document.body.classList.add("is-locked");
+    holdScroll(true);
     if (closeBtn) closeBtn.focus();
   }
 

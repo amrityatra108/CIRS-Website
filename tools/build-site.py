@@ -674,20 +674,21 @@ PAGES = {
         # Admissions carries its own quiet, document-led layout beneath the
         # shared honeycomb hero. The sheet is scoped by body.admissions.
         "sheet": "admissions",
-        "cache_suffix": "-admissions-28",
+        "cache_suffix": "-admissions-29",
         "hero_split": False,
         "hero": ("Admissions", "Admissions <em>Guide.</em>",
                  "Explore the application portal and published fee schedule. Confirm current "
                  "class availability, assessment arrangements and key dates with the Admissions Office."),
         "hero_media": ("admissions-honeycomb.jpg", "admissions-hero.webm",
                        "admissions-hero.mp4", 1920, 960),
-        "hero_cta": [("Open the application portal",
+        "hero_cta": [("Registered Portal Login",
                       "https://easycollege.in/cirs/school/application/index.aspx", "primary"),
                      ("Understand the process", "#apply", "ghost")],
         "hero_extra": HERO_DATES,
         "hero_placeholder": "Header animation &mdash; admissions<br>photograph or looping video<br>to be supplied",
         "jump": True,
-        "popup": False,
+        # The portal-closed announcement (POPUP), shown on arrival.
+        "popup": True,
         "uc": False,
     },
     # The entrance syllabus outlines' downloads, reached only by the Syllabus tab
@@ -1425,32 +1426,19 @@ def jump_html(body):
 </nav>'''
 
 
-POPUP = '''<div class="pop" id="admissionsPop" role="dialog" aria-modal="true"
+POPUP = '''<div class="pop pop--notice" id="admissionsPop" role="dialog" aria-modal="true"
      aria-labelledby="popTitle" aria-describedby="popNote">
   <div class="pop__card">
-    <button type="button" class="pop__close" id="popClose" aria-label="Close">
+    <button type="button" class="pop__close" id="popClose" aria-label="Close announcement">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </button>
-    <p class="pop__label" id="popTitle">Contact Admissions Office</p>
-    <h2 class="serif">We are here <em>to help.</em></h2>
-    <p class="pop__note" id="popNote">Ask the Admissions Office to confirm the current
-      application window, assessment arrangements or availability of a school visit.</p>
-
-    <div class="pop__row">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3.4 18.6l1.1-3.9a7.6 7.6 0 1 1 2.9 2.8l-4 1.1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.3 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5l.6 1.4c.1.2 0 .4-.1.6l-.4.4c-.1.2-.2.3-.1.5.3.6 1.1 1.5 1.9 1.9.2.1.4 0 .5-.1l.5-.5c.2-.2.3-.2.5-.1l1.4.7c.2.1.3.3.3.5v.5c0 .5-.4.9-.9 1-1.6.2-3.9-1.3-5.2-3.4-.7-1.1-1-2.3-.9-3.4Z" fill="currentColor"/></svg>
-      <span>
-        <a href="https://wa.me/919360461572">+91 93604 61572</a>
-        <small>WhatsApp</small>
-      </span>
+    <h2 class="serif" id="popTitle">CIRS Admissions Portal Closed for 2027&ndash;28</h2>
+    <div id="popNote">
+      <p class="pop__note">The CIRS Admissions Portal is currently closed for the academic year
+        2027&ndash;28. In case of any vacancies, the portal may reopen in the first week of January.</p>
+      <p class="pop__note">Registered users can log in using the link below for further details.</p>
     </div>
-
-    <div class="pop__row">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2.6" y="4.6" width="16.8" height="12.8" rx="1.6" stroke="currentColor" stroke-width="1.4"/><path d="m3.4 5.8 7.6 5.6 7.6-5.6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-      <span>
-        <a href="mailto:admissions@cirschool.org">admissions@cirschool.org</a>
-        <small>Email</small>
-      </span>
-    </div>
+    <a class="btn btn--primary pop__cta" href="https://easycollege.in/cirs/school/application/index.aspx">Registered Portal Login</a>
   </div>
 </div>'''
 
@@ -2532,11 +2520,13 @@ body.art-attack .film__art-name{display:block;font-family:var(--font-display,Geo
     jump = jump_html(content) if page.get("jump", True) and not wall else ""
     if jump:
         parts.insert(jump_at, JUMP_MARK)
-    if page.get("popup"):
-        parts.append(POPUP)
     if page.get("uc", True) and not wall:
         parts.append(UC)
     parts.append("</main>")
+    if page.get("popup"):
+        # Outside <main>, whose stacking context would keep the panel
+        # beneath the fixed header.
+        parts.append(POPUP)
     if not wall:
         footer = read("tools/partials/footer.html").rstrip("\n")
         if slug in ("captures", "leadership", "the-cirs-experience", "our-laurels") or page.get("notfound"):
