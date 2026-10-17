@@ -416,7 +416,7 @@
 .advert__claims p b{ color:#fff; font-weight:600; }
 
 /* ------------------------------------------------------------
-   Admissions contact — the panel shown on opening the page
+   Admissions announcement — the panel shown on opening the page
    ------------------------------------------------------------ */
 .pop{
   position:fixed; inset:0; z-index:300;
@@ -427,7 +427,9 @@
   opacity:0; visibility:hidden;
   transition:opacity .3s var(--e), visibility .3s;
 }
-.pop.is-open{ opacity:1; visibility:visible; }
+/* Visible at once on opening, so the close button can take focus straight
+   away; it is only on closing that visibility waits for the fade. */
+.pop.is-open{ opacity:1; visibility:visible; transition:opacity .3s var(--e), visibility 0s; }
 .pop__card{
   position:relative; width:min(100%,460px);
   /* Translucent rather than solid paper, so the photograph behind it stays
