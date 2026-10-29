@@ -111,7 +111,9 @@ division links and the stage's one progress value, and imports the sculpture its
 graphics load leaves a plain opening with the drawn cube. The drawings are made from the same
 numbers by `tools/make-math-sculpture.py` — keep its constants in step with the script's. The
 archive is `tools/mathchallenge.py`: the PDFs are the school's winners' bulletins, not problem
-papers, and a month lists only the bulletins that exist.
+papers, and a month lists only the bulletins that exist. Its months are read from the folders in
+`assets/documents/math-challenge/<yyyy-mm>/`, so a new month is only its PDFs; the
+`add-math-challenge` skill does the monthly routine.
 
 Creative Writing restores the horizontal anthology at `creative-writing.html`: one
 moving row per theme, then each chapter with the list of its poems, and pause/resume.

@@ -9,15 +9,20 @@ parent who opened one, and the mathematics department has not supplied the
 problems themselves.
 
 They are laid out month by month, the way the school's own Maths Challenge
-page lays them out, newest month first. Twenty-five papers across seven
-months. Two months are short a grade group; the page lists only the
-bulletins that exist and never fills a missing slot.
+page lays them out, newest month first. Some months are short a grade
+group; the page lists only the bulletins that exist and never fills a
+missing slot.
 
 To add a month: put the PDFs in assets/documents/math-challenge/<yyyy-mm>/
-as grades-5-6.pdf and so on, and add the month here. The division rows, the
-grade filters, the search and the counts all build from this list.
+as grades-5-6.pdf, grades-7-8.pdf, grades-9-10.pdf and grades-11-12.pdf
+(only those the school published) and rebuild. Nothing here needs editing:
+the months are read from those folders, so the division rows, the grade
+filters, the search and the counts follow the files. The
+add-math-challenge skill (.claude/skills/) does the whole monthly routine.
 """
+import calendar
 import os
+import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = "assets/documents/math-challenge"
@@ -55,20 +60,38 @@ JOURNEY = [
      "Ask what the problem was really about &mdash; that is the part that carries to the next one."),
 ]
 
-# Month by month, newest first. Each is (folder, how it should read, the
-# grade groups that month has published).
-MONTHS = [
-    ("2026-04", "April 2026",     ["5-6", "7-8", "9-10", "11-12"]),
-    ("2026-02", "February 2026",  ["5-6", "7-8"]),
-    ("2026-01", "January 2026",   ["5-6", "7-8", "9-10", "11-12"]),
-    ("2025-10", "October 2025",   ["5-6", "7-8", "9-10"]),
-    ("2025-09", "September 2025", ["5-6", "7-8", "9-10", "11-12"]),
-    ("2025-08", "August 2025",    ["5-6", "7-8", "9-10", "11-12"]),
-    ("2025-07", "July 2025",      ["5-6", "7-8", "9-10", "11-12"]),
-]
-
 LABEL = {key: label for key, label, _ in GRADES}
 PLAIN = {key: label.replace("&ndash;", "–") for key, label, _ in GRADES}
+
+
+def months():
+    """Month by month, newest first, read from the folders under DOCS. Each is
+    (folder, how it should read, the grade groups that month has published).
+
+    A misnamed PDF in a month's folder stops the build rather than being left
+    off the page without a word."""
+    base = os.path.join(ROOT, DOCS)
+    order = [key for key, _, _ in GRADES]
+    out = []
+    for key in sorted(os.listdir(base), reverse=True):
+        m = re.fullmatch(r"(\d{4})-(0[1-9]|1[0-2])", key)
+        if not m or not os.path.isdir(os.path.join(base, key)):
+            continue
+        found = set()
+        for name in os.listdir(os.path.join(base, key)):
+            g = re.fullmatch(r"grades-(\d+-\d+)\.pdf", name)
+            if not g or g.group(1) not in order:
+                raise SystemExit(
+                    f"mathchallenge: {DOCS}/{key}/{name} is not one of "
+                    + ", ".join(f"grades-{k}.pdf" for k in order))
+            found.add(g.group(1))
+        if found:
+            label = f"{calendar.month_name[int(m.group(2))]} {m.group(1)}"
+            out.append((key, label, [k for k in order if k in found]))
+    return out
+
+
+MONTHS = months()
 
 
 def challenges():
